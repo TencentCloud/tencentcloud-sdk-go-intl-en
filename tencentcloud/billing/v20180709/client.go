@@ -92,6 +92,7 @@ func (c *Client) CreateAllocationRuleWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateAllocationRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "CreateAllocationRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAllocationRule require credential")
@@ -145,6 +146,7 @@ func (c *Client) CreateAllocationTagWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreateAllocationTagRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "CreateAllocationTag")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAllocationTag require credential")
@@ -204,6 +206,7 @@ func (c *Client) CreateAllocationUnitWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateAllocationUnitRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "CreateAllocationUnit")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAllocationUnit require credential")
@@ -263,6 +266,7 @@ func (c *Client) CreateGatherRuleWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateGatherRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "CreateGatherRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateGatherRule require credential")
@@ -316,6 +320,7 @@ func (c *Client) DeleteAllocationRuleWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDeleteAllocationRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DeleteAllocationRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteAllocationRule require credential")
@@ -369,6 +374,7 @@ func (c *Client) DeleteAllocationTagWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDeleteAllocationTagRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DeleteAllocationTag")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteAllocationTag require credential")
@@ -424,6 +430,7 @@ func (c *Client) DeleteAllocationUnitWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDeleteAllocationUnitRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DeleteAllocationUnit")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteAllocationUnit require credential")
@@ -477,6 +484,7 @@ func (c *Client) DeleteGatherRuleWithContext(ctx context.Context, request *Delet
     if request == nil {
         request = NewDeleteGatherRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DeleteGatherRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteGatherRule require credential")
@@ -536,6 +544,7 @@ func (c *Client) DescribeAccountBalanceWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeAccountBalanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeAccountBalance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAccountBalance require credential")
@@ -591,6 +600,7 @@ func (c *Client) DescribeAllocationRuleDetailWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeAllocationRuleDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeAllocationRuleDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAllocationRuleDetail require credential")
@@ -646,6 +656,7 @@ func (c *Client) DescribeAllocationRuleSummaryWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeAllocationRuleSummaryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeAllocationRuleSummary")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAllocationRuleSummary require credential")
@@ -701,6 +712,7 @@ func (c *Client) DescribeAllocationTreeWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeAllocationTreeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeAllocationTree")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAllocationTree require credential")
@@ -754,6 +766,7 @@ func (c *Client) DescribeAllocationUnitDetailWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeAllocationUnitDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeAllocationUnitDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAllocationUnitDetail require credential")
@@ -805,6 +818,7 @@ func (c *Client) DescribeBillAdjustInfoWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeBillAdjustInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeBillAdjustInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillAdjustInfo require credential")
@@ -878,6 +892,7 @@ func (c *Client) DescribeBillDetailWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeBillDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeBillDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillDetail require credential")
@@ -943,6 +958,7 @@ func (c *Client) DescribeBillDetailForOrganizationWithContext(ctx context.Contex
     if request == nil {
         request = NewDescribeBillDetailForOrganizationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeBillDetailForOrganization")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillDetailForOrganization require credential")
@@ -996,6 +1012,7 @@ func (c *Client) DescribeBillDownloadUrlWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeBillDownloadUrlRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeBillDownloadUrl")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillDownloadUrl require credential")
@@ -1049,6 +1066,7 @@ func (c *Client) DescribeBillResourceSummaryWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeBillResourceSummaryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeBillResourceSummary")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillResourceSummary require credential")
@@ -1102,6 +1120,7 @@ func (c *Client) DescribeBillResourceSummaryForOrganizationWithContext(ctx conte
     if request == nil {
         request = NewDescribeBillResourceSummaryForOrganizationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeBillResourceSummaryForOrganization")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillResourceSummaryForOrganization require credential")
@@ -1159,6 +1178,7 @@ func (c *Client) DescribeBillSummaryWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeBillSummaryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeBillSummary")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillSummary require credential")
@@ -1216,6 +1236,7 @@ func (c *Client) DescribeBillSummaryByPayModeWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeBillSummaryByPayModeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeBillSummaryByPayMode")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillSummaryByPayMode require credential")
@@ -1275,6 +1296,7 @@ func (c *Client) DescribeBillSummaryByProductWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeBillSummaryByProductRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeBillSummaryByProduct")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillSummaryByProduct require credential")
@@ -1332,6 +1354,7 @@ func (c *Client) DescribeBillSummaryByProjectWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeBillSummaryByProjectRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeBillSummaryByProject")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillSummaryByProject require credential")
@@ -1389,6 +1412,7 @@ func (c *Client) DescribeBillSummaryByRegionWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeBillSummaryByRegionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeBillSummaryByRegion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillSummaryByRegion require credential")
@@ -1448,6 +1472,7 @@ func (c *Client) DescribeBillSummaryByTagWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeBillSummaryByTagRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeBillSummaryByTag")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillSummaryByTag require credential")
@@ -1505,6 +1530,7 @@ func (c *Client) DescribeBillSummaryForOrganizationWithContext(ctx context.Conte
     if request == nil {
         request = NewDescribeBillSummaryForOrganizationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeBillSummaryForOrganization")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillSummaryForOrganization require credential")
@@ -1556,6 +1582,7 @@ func (c *Client) DescribeCostDetailWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeCostDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeCostDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCostDetail require credential")
@@ -1607,6 +1634,7 @@ func (c *Client) DescribeCostExplorerSummaryWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeCostExplorerSummaryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeCostExplorerSummary")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCostExplorerSummary require credential")
@@ -1656,6 +1684,7 @@ func (c *Client) DescribeCostSummaryByProductWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeCostSummaryByProductRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeCostSummaryByProduct")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCostSummaryByProduct require credential")
@@ -1705,6 +1734,7 @@ func (c *Client) DescribeCostSummaryByProjectWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeCostSummaryByProjectRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeCostSummaryByProject")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCostSummaryByProject require credential")
@@ -1754,6 +1784,7 @@ func (c *Client) DescribeCostSummaryByRegionWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeCostSummaryByRegionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeCostSummaryByRegion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCostSummaryByRegion require credential")
@@ -1803,6 +1834,7 @@ func (c *Client) DescribeCostSummaryByResourceWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeCostSummaryByResourceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeCostSummaryByResource")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCostSummaryByResource require credential")
@@ -1852,6 +1884,7 @@ func (c *Client) DescribeDealsByCondWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeDealsByCondRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeDealsByCond")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDealsByCond require credential")
@@ -1901,6 +1934,7 @@ func (c *Client) DescribeDosageCosDetailByDateWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeDosageCosDetailByDateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeDosageCosDetailByDate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDosageCosDetailByDate require credential")
@@ -1956,6 +1990,7 @@ func (c *Client) DescribeGatherRuleDetailWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeGatherRuleDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeGatherRuleDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeGatherRuleDetail require credential")
@@ -2011,6 +2046,7 @@ func (c *Client) DescribeTagListWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeTagListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeTagList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTagList require credential")
@@ -2068,6 +2104,7 @@ func (c *Client) DescribeVoucherInfoWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeVoucherInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeVoucherInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeVoucherInfo require credential")
@@ -2125,6 +2162,7 @@ func (c *Client) DescribeVoucherUsageDetailsWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeVoucherUsageDetailsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeVoucherUsageDetails")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeVoucherUsageDetails require credential")
@@ -2184,6 +2222,7 @@ func (c *Client) ModifyAllocationRuleWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyAllocationRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "ModifyAllocationRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyAllocationRule require credential")
@@ -2239,6 +2278,7 @@ func (c *Client) ModifyAllocationUnitWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyAllocationUnitRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "ModifyAllocationUnit")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyAllocationUnit require credential")
@@ -2296,6 +2336,7 @@ func (c *Client) ModifyGatherRuleWithContext(ctx context.Context, request *Modif
     if request == nil {
         request = NewModifyGatherRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "ModifyGatherRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyGatherRule require credential")
@@ -2371,6 +2412,7 @@ func (c *Client) PayDealsWithContext(ctx context.Context, request *PayDealsReque
     if request == nil {
         request = NewPayDealsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "PayDeals")
     
     if c.GetCredential() == nil {
         return nil, errors.New("PayDeals require credential")

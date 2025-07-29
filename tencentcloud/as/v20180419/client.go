@@ -124,6 +124,7 @@ func (c *Client) AttachInstancesWithContext(ctx context.Context, request *Attach
     if request == nil {
         request = NewAttachInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "AttachInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AttachInstances require credential")
@@ -225,6 +226,7 @@ func (c *Client) AttachLoadBalancersWithContext(ctx context.Context, request *At
     if request == nil {
         request = NewAttachLoadBalancersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "AttachLoadBalancers")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AttachLoadBalancers require credential")
@@ -302,6 +304,7 @@ func (c *Client) CancelInstanceRefreshWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCancelInstanceRefreshRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "CancelInstanceRefresh")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CancelInstanceRefresh require credential")
@@ -353,6 +356,7 @@ func (c *Client) ClearLaunchConfigurationAttributesWithContext(ctx context.Conte
     if request == nil {
         request = NewClearLaunchConfigurationAttributesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "ClearLaunchConfigurationAttributes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ClearLaunchConfigurationAttributes require credential")
@@ -432,6 +436,7 @@ func (c *Client) CompleteLifecycleActionWithContext(ctx context.Context, request
     if request == nil {
         request = NewCompleteLifecycleActionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "CompleteLifecycleAction")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CompleteLifecycleAction require credential")
@@ -567,6 +572,7 @@ func (c *Client) CreateAutoScalingGroupWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateAutoScalingGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "CreateAutoScalingGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAutoScalingGroup require credential")
@@ -666,6 +672,7 @@ func (c *Client) CreateAutoScalingGroupFromInstanceWithContext(ctx context.Conte
     if request == nil {
         request = NewCreateAutoScalingGroupFromInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "CreateAutoScalingGroupFromInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAutoScalingGroupFromInstance require credential")
@@ -811,6 +818,7 @@ func (c *Client) CreateLaunchConfigurationWithContext(ctx context.Context, reque
     if request == nil {
         request = NewCreateLaunchConfigurationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "CreateLaunchConfiguration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateLaunchConfiguration require credential")
@@ -980,6 +988,7 @@ func (c *Client) CreateLifecycleHookWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreateLifecycleHookRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "CreateLifecycleHook")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateLifecycleHook require credential")
@@ -1165,6 +1174,7 @@ func (c *Client) CreateNotificationConfigurationWithContext(ctx context.Context,
     if request == nil {
         request = NewCreateNotificationConfigurationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "CreateNotificationConfiguration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateNotificationConfiguration require credential")
@@ -1242,6 +1252,7 @@ func (c *Client) CreateScalingPolicyWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreateScalingPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "CreateScalingPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateScalingPolicy require credential")
@@ -1325,6 +1336,7 @@ func (c *Client) CreateScheduledActionWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCreateScheduledActionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "CreateScheduledAction")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateScheduledAction require credential")
@@ -1394,6 +1406,7 @@ func (c *Client) DeleteAutoScalingGroupWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDeleteAutoScalingGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DeleteAutoScalingGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteAutoScalingGroup require credential")
@@ -1457,6 +1470,7 @@ func (c *Client) DeleteLaunchConfigurationWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDeleteLaunchConfigurationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DeleteLaunchConfiguration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteLaunchConfiguration require credential")
@@ -1516,6 +1530,7 @@ func (c *Client) DeleteLifecycleHookWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDeleteLifecycleHookRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DeleteLifecycleHook")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteLifecycleHook require credential")
@@ -1569,6 +1584,7 @@ func (c *Client) DeleteNotificationConfigurationWithContext(ctx context.Context,
     if request == nil {
         request = NewDeleteNotificationConfigurationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DeleteNotificationConfiguration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteNotificationConfiguration require credential")
@@ -1624,6 +1640,7 @@ func (c *Client) DeleteScalingPolicyWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDeleteScalingPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DeleteScalingPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteScalingPolicy require credential")
@@ -1677,6 +1694,7 @@ func (c *Client) DeleteScheduledActionWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDeleteScheduledActionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DeleteScheduledAction")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteScheduledAction require credential")
@@ -1728,6 +1746,7 @@ func (c *Client) DescribeAccountLimitsWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeAccountLimitsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DescribeAccountLimits")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAccountLimits require credential")
@@ -1793,6 +1812,7 @@ func (c *Client) DescribeAutoScalingActivitiesWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeAutoScalingActivitiesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DescribeAutoScalingActivities")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAutoScalingActivities require credential")
@@ -1846,6 +1866,7 @@ func (c *Client) DescribeAutoScalingAdvicesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeAutoScalingAdvicesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DescribeAutoScalingAdvices")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAutoScalingAdvices require credential")
@@ -1901,6 +1922,7 @@ func (c *Client) DescribeAutoScalingGroupLastActivitiesWithContext(ctx context.C
     if request == nil {
         request = NewDescribeAutoScalingGroupLastActivitiesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DescribeAutoScalingGroupLastActivities")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAutoScalingGroupLastActivities require credential")
@@ -1984,6 +2006,7 @@ func (c *Client) DescribeAutoScalingGroupsWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeAutoScalingGroupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DescribeAutoScalingGroups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAutoScalingGroups require credential")
@@ -2061,6 +2084,7 @@ func (c *Client) DescribeAutoScalingInstancesWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeAutoScalingInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DescribeAutoScalingInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAutoScalingInstances require credential")
@@ -2140,6 +2164,7 @@ func (c *Client) DescribeLaunchConfigurationsWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeLaunchConfigurationsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DescribeLaunchConfigurations")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLaunchConfigurations require credential")
@@ -2215,6 +2240,7 @@ func (c *Client) DescribeLifecycleHooksWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeLifecycleHooksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DescribeLifecycleHooks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLifecycleHooks require credential")
@@ -2284,6 +2310,7 @@ func (c *Client) DescribeNotificationConfigurationsWithContext(ctx context.Conte
     if request == nil {
         request = NewDescribeNotificationConfigurationsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DescribeNotificationConfigurations")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeNotificationConfigurations require credential")
@@ -2347,6 +2374,7 @@ func (c *Client) DescribeRefreshActivitiesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeRefreshActivitiesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DescribeRefreshActivities")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRefreshActivities require credential")
@@ -2410,6 +2438,7 @@ func (c *Client) DescribeScalingPoliciesWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeScalingPoliciesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DescribeScalingPolicies")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeScalingPolicies require credential")
@@ -2485,6 +2514,7 @@ func (c *Client) DescribeScheduledActionsWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeScheduledActionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DescribeScheduledActions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeScheduledActions require credential")
@@ -2570,6 +2600,7 @@ func (c *Client) DetachInstancesWithContext(ctx context.Context, request *Detach
     if request == nil {
         request = NewDetachInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DetachInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DetachInstances require credential")
@@ -2665,6 +2696,7 @@ func (c *Client) DetachLoadBalancersWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDetachLoadBalancersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DetachLoadBalancers")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DetachLoadBalancers require credential")
@@ -2772,6 +2804,7 @@ func (c *Client) DisableAutoScalingGroupWithContext(ctx context.Context, request
     if request == nil {
         request = NewDisableAutoScalingGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "DisableAutoScalingGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DisableAutoScalingGroup require credential")
@@ -2829,6 +2862,7 @@ func (c *Client) EnableAutoScalingGroupWithContext(ctx context.Context, request 
     if request == nil {
         request = NewEnableAutoScalingGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "EnableAutoScalingGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("EnableAutoScalingGroup require credential")
@@ -2914,6 +2948,7 @@ func (c *Client) EnterStandbyWithContext(ctx context.Context, request *EnterStan
     if request == nil {
         request = NewEnterStandbyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "EnterStandby")
     
     if c.GetCredential() == nil {
         return nil, errors.New("EnterStandby require credential")
@@ -2997,6 +3032,7 @@ func (c *Client) ExecuteScalingPolicyWithContext(ctx context.Context, request *E
     if request == nil {
         request = NewExecuteScalingPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "ExecuteScalingPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ExecuteScalingPolicy require credential")
@@ -3082,6 +3118,7 @@ func (c *Client) ExitStandbyWithContext(ctx context.Context, request *ExitStandb
     if request == nil {
         request = NewExitStandbyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "ExitStandby")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ExitStandby require credential")
@@ -3193,6 +3230,7 @@ func (c *Client) ModifyAutoScalingGroupWithContext(ctx context.Context, request 
     if request == nil {
         request = NewModifyAutoScalingGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "ModifyAutoScalingGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyAutoScalingGroup require credential")
@@ -3262,6 +3300,7 @@ func (c *Client) ModifyDesiredCapacityWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyDesiredCapacityRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "ModifyDesiredCapacity")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDesiredCapacity require credential")
@@ -3391,6 +3430,7 @@ func (c *Client) ModifyLaunchConfigurationAttributesWithContext(ctx context.Cont
     if request == nil {
         request = NewModifyLaunchConfigurationAttributesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "ModifyLaunchConfigurationAttributes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyLaunchConfigurationAttributes require credential")
@@ -3460,6 +3500,7 @@ func (c *Client) ModifyLifecycleHookWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyLifecycleHookRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "ModifyLifecycleHook")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyLifecycleHook require credential")
@@ -3559,6 +3600,7 @@ func (c *Client) ModifyLoadBalancerTargetAttributesWithContext(ctx context.Conte
     if request == nil {
         request = NewModifyLoadBalancerTargetAttributesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "ModifyLoadBalancerTargetAttributes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyLoadBalancerTargetAttributes require credential")
@@ -3670,6 +3712,7 @@ func (c *Client) ModifyLoadBalancersWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyLoadBalancersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "ModifyLoadBalancers")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyLoadBalancers require credential")
@@ -3741,6 +3784,7 @@ func (c *Client) ModifyNotificationConfigurationWithContext(ctx context.Context,
     if request == nil {
         request = NewModifyNotificationConfigurationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "ModifyNotificationConfiguration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyNotificationConfiguration require credential")
@@ -3808,6 +3852,7 @@ func (c *Client) ModifyScalingPolicyWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyScalingPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "ModifyScalingPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyScalingPolicy require credential")
@@ -3887,6 +3932,7 @@ func (c *Client) ModifyScheduledActionWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyScheduledActionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "ModifyScheduledAction")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyScheduledAction require credential")
@@ -3968,6 +4014,7 @@ func (c *Client) RemoveInstancesWithContext(ctx context.Context, request *Remove
     if request == nil {
         request = NewRemoveInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "RemoveInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RemoveInstances require credential")
@@ -4029,6 +4076,7 @@ func (c *Client) ResumeInstanceRefreshWithContext(ctx context.Context, request *
     if request == nil {
         request = NewResumeInstanceRefreshRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "ResumeInstanceRefresh")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ResumeInstanceRefresh require credential")
@@ -4120,6 +4168,7 @@ func (c *Client) RollbackInstanceRefreshWithContext(ctx context.Context, request
     if request == nil {
         request = NewRollbackInstanceRefreshRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "RollbackInstanceRefresh")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RollbackInstanceRefresh require credential")
@@ -4205,6 +4254,7 @@ func (c *Client) ScaleInInstancesWithContext(ctx context.Context, request *Scale
     if request == nil {
         request = NewScaleInInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "ScaleInInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ScaleInInstances require credential")
@@ -4286,6 +4336,7 @@ func (c *Client) ScaleOutInstancesWithContext(ctx context.Context, request *Scal
     if request == nil {
         request = NewScaleOutInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "ScaleOutInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ScaleOutInstances require credential")
@@ -4349,6 +4400,7 @@ func (c *Client) SetInstancesProtectionWithContext(ctx context.Context, request 
     if request == nil {
         request = NewSetInstancesProtectionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "SetInstancesProtection")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetInstancesProtection require credential")
@@ -4426,6 +4478,7 @@ func (c *Client) StartAutoScalingInstancesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewStartAutoScalingInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "StartAutoScalingInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartAutoScalingInstances require credential")
@@ -4513,6 +4566,7 @@ func (c *Client) StartInstanceRefreshWithContext(ctx context.Context, request *S
     if request == nil {
         request = NewStartInstanceRefreshRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "StartInstanceRefresh")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartInstanceRefresh require credential")
@@ -4606,6 +4660,7 @@ func (c *Client) StopAutoScalingInstancesWithContext(ctx context.Context, reques
     if request == nil {
         request = NewStopAutoScalingInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "StopAutoScalingInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopAutoScalingInstances require credential")
@@ -4671,6 +4726,7 @@ func (c *Client) StopInstanceRefreshWithContext(ctx context.Context, request *St
     if request == nil {
         request = NewStopInstanceRefreshRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "StopInstanceRefresh")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopInstanceRefresh require credential")
@@ -4788,6 +4844,7 @@ func (c *Client) UpgradeLaunchConfigurationWithContext(ctx context.Context, requ
     if request == nil {
         request = NewUpgradeLaunchConfigurationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "UpgradeLaunchConfiguration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpgradeLaunchConfiguration require credential")
@@ -4875,6 +4932,7 @@ func (c *Client) UpgradeLifecycleHookWithContext(ctx context.Context, request *U
     if request == nil {
         request = NewUpgradeLifecycleHookRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "as", APIVersion, "UpgradeLifecycleHook")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpgradeLifecycleHook require credential")

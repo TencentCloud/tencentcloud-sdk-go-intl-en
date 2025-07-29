@@ -124,6 +124,7 @@ func (c *Client) CreateIndexWithContext(ctx context.Context, request *CreateInde
     if request == nil {
         request = NewCreateIndexRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "CreateIndex")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateIndex require credential")
@@ -195,6 +196,7 @@ func (c *Client) CreateInstanceWithContext(ctx context.Context, request *CreateI
     if request == nil {
         request = NewCreateInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "CreateInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateInstance require credential")
@@ -282,6 +284,7 @@ func (c *Client) DeleteIndexWithContext(ctx context.Context, request *DeleteInde
     if request == nil {
         request = NewDeleteIndexRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "DeleteIndex")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteIndex require credential")
@@ -337,6 +340,7 @@ func (c *Client) DeleteInstanceWithContext(ctx context.Context, request *DeleteI
     if request == nil {
         request = NewDeleteInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "DeleteInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteInstance require credential")
@@ -412,6 +416,7 @@ func (c *Client) DescribeIndexListWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeIndexListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "DescribeIndexList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIndexList require credential")
@@ -487,6 +492,7 @@ func (c *Client) DescribeIndexMetaWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeIndexMetaRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "DescribeIndexMeta")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIndexMeta require credential")
@@ -562,6 +568,7 @@ func (c *Client) DescribeInstanceLogsWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeInstanceLogsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "DescribeInstanceLogs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceLogs require credential")
@@ -615,6 +622,7 @@ func (c *Client) DescribeInstanceOperationsWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeInstanceOperationsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "DescribeInstanceOperations")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceOperations require credential")
@@ -670,6 +678,7 @@ func (c *Client) DescribeInstancesWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "DescribeInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstances require credential")
@@ -723,6 +732,7 @@ func (c *Client) DescribeViewsWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeViewsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "DescribeViews")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeViews require credential")
@@ -776,6 +786,7 @@ func (c *Client) GetRequestTargetNodeTypesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewGetRequestTargetNodeTypesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "GetRequestTargetNodeTypes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetRequestTargetNodeTypes require credential")
@@ -831,6 +842,7 @@ func (c *Client) RestartInstanceWithContext(ctx context.Context, request *Restar
     if request == nil {
         request = NewRestartInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "RestartInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RestartInstance require credential")
@@ -884,6 +896,7 @@ func (c *Client) RestartKibanaWithContext(ctx context.Context, request *RestartK
     if request == nil {
         request = NewRestartKibanaRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "RestartKibana")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RestartKibana require credential")
@@ -941,6 +954,7 @@ func (c *Client) RestartNodesWithContext(ctx context.Context, request *RestartNo
     if request == nil {
         request = NewRestartNodesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "RestartNodes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RestartNodes require credential")
@@ -1002,6 +1016,7 @@ func (c *Client) UpdateDictionariesWithContext(ctx context.Context, request *Upd
     if request == nil {
         request = NewUpdateDictionariesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "UpdateDictionaries")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateDictionaries require credential")
@@ -1077,6 +1092,7 @@ func (c *Client) UpdateIndexWithContext(ctx context.Context, request *UpdateInde
     if request == nil {
         request = NewUpdateIndexRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "UpdateIndex")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateIndex require credential")
@@ -1182,6 +1198,7 @@ func (c *Client) UpdateInstanceWithContext(ctx context.Context, request *UpdateI
     if request == nil {
         request = NewUpdateInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "UpdateInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateInstance require credential")
@@ -1249,6 +1266,7 @@ func (c *Client) UpdatePluginsWithContext(ctx context.Context, request *UpdatePl
     if request == nil {
         request = NewUpdatePluginsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "UpdatePlugins")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdatePlugins require credential")
@@ -1308,6 +1326,7 @@ func (c *Client) UpdateRequestTargetNodeTypesWithContext(ctx context.Context, re
     if request == nil {
         request = NewUpdateRequestTargetNodeTypesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "UpdateRequestTargetNodeTypes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateRequestTargetNodeTypes require credential")
@@ -1375,6 +1394,7 @@ func (c *Client) UpgradeInstanceWithContext(ctx context.Context, request *Upgrad
     if request == nil {
         request = NewUpgradeInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "UpgradeInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpgradeInstance require credential")
@@ -1436,6 +1456,7 @@ func (c *Client) UpgradeLicenseWithContext(ctx context.Context, request *Upgrade
     if request == nil {
         request = NewUpgradeLicenseRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "es", APIVersion, "UpgradeLicense")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpgradeLicense require credential")

@@ -76,6 +76,7 @@ func (c *Client) AddNewBindRoleUserWithContext(ctx context.Context, request *Add
     if request == nil {
         request = NewAddNewBindRoleUserRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "AddNewBindRoleUser")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AddNewBindRoleUser require credential")
@@ -125,6 +126,7 @@ func (c *Client) CreateDomainAndIpWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateDomainAndIpRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "CreateDomainAndIp")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDomainAndIp require credential")
@@ -208,6 +210,7 @@ func (c *Client) CreateRiskCenterScanTaskWithContext(ctx context.Context, reques
     if request == nil {
         request = NewCreateRiskCenterScanTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "CreateRiskCenterScanTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateRiskCenterScanTask require credential")
@@ -291,6 +294,7 @@ func (c *Client) DeleteDomainAndIpWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteDomainAndIpRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DeleteDomainAndIp")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteDomainAndIp require credential")
@@ -374,6 +378,7 @@ func (c *Client) DeleteRiskScanTaskWithContext(ctx context.Context, request *Del
     if request == nil {
         request = NewDeleteRiskScanTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DeleteRiskScanTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteRiskScanTask require credential")
@@ -457,6 +462,7 @@ func (c *Client) DescribeCVMAssetInfoWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeCVMAssetInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeCVMAssetInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCVMAssetInfo require credential")
@@ -540,6 +546,7 @@ func (c *Client) DescribeCVMAssetsWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeCVMAssetsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeCVMAssets")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCVMAssets require credential")
@@ -623,6 +630,7 @@ func (c *Client) DescribeClusterPodAssetsWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeClusterPodAssetsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeClusterPodAssets")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeClusterPodAssets require credential")
@@ -706,6 +714,7 @@ func (c *Client) DescribeDbAssetInfoWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeDbAssetInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeDbAssetInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDbAssetInfo require credential")
@@ -789,6 +798,7 @@ func (c *Client) DescribeDbAssetsWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeDbAssetsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeDbAssets")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDbAssets require credential")
@@ -872,6 +882,7 @@ func (c *Client) DescribeDomainAssetsWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeDomainAssetsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeDomainAssets")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDomainAssets require credential")
@@ -955,6 +966,7 @@ func (c *Client) DescribeListenerListWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeListenerListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeListenerList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeListenerList require credential")
@@ -1038,6 +1050,7 @@ func (c *Client) DescribeOrganizationInfoWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeOrganizationInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeOrganizationInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOrganizationInfo require credential")
@@ -1121,6 +1134,7 @@ func (c *Client) DescribeOrganizationUserInfoWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeOrganizationUserInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeOrganizationUserInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOrganizationUserInfo require credential")
@@ -1204,6 +1218,7 @@ func (c *Client) DescribePublicIpAssetsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribePublicIpAssetsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribePublicIpAssets")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribePublicIpAssets require credential")
@@ -1287,6 +1302,7 @@ func (c *Client) DescribeRiskCenterAssetViewCFGRiskListWithContext(ctx context.C
     if request == nil {
         request = NewDescribeRiskCenterAssetViewCFGRiskListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeRiskCenterAssetViewCFGRiskList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRiskCenterAssetViewCFGRiskList require credential")
@@ -1380,6 +1396,7 @@ func (c *Client) DescribeRiskCenterAssetViewPortRiskListWithContext(ctx context.
     if request == nil {
         request = NewDescribeRiskCenterAssetViewPortRiskListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeRiskCenterAssetViewPortRiskList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRiskCenterAssetViewPortRiskList require credential")
@@ -1473,6 +1490,7 @@ func (c *Client) DescribeRiskCenterAssetViewVULRiskListWithContext(ctx context.C
     if request == nil {
         request = NewDescribeRiskCenterAssetViewVULRiskListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeRiskCenterAssetViewVULRiskList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRiskCenterAssetViewVULRiskList require credential")
@@ -1566,6 +1584,7 @@ func (c *Client) DescribeRiskCenterAssetViewWeakPasswordRiskListWithContext(ctx 
     if request == nil {
         request = NewDescribeRiskCenterAssetViewWeakPasswordRiskListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeRiskCenterAssetViewWeakPasswordRiskList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRiskCenterAssetViewWeakPasswordRiskList require credential")
@@ -1659,6 +1678,7 @@ func (c *Client) DescribeRiskCenterPortViewPortRiskListWithContext(ctx context.C
     if request == nil {
         request = NewDescribeRiskCenterPortViewPortRiskListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeRiskCenterPortViewPortRiskList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRiskCenterPortViewPortRiskList require credential")
@@ -1752,6 +1772,7 @@ func (c *Client) DescribeRiskCenterServerRiskListWithContext(ctx context.Context
     if request == nil {
         request = NewDescribeRiskCenterServerRiskListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeRiskCenterServerRiskList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRiskCenterServerRiskList require credential")
@@ -1835,6 +1856,7 @@ func (c *Client) DescribeRiskCenterVULViewVULRiskListWithContext(ctx context.Con
     if request == nil {
         request = NewDescribeRiskCenterVULViewVULRiskListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeRiskCenterVULViewVULRiskList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRiskCenterVULViewVULRiskList require credential")
@@ -1918,6 +1940,7 @@ func (c *Client) DescribeRiskCenterWebsiteRiskListWithContext(ctx context.Contex
     if request == nil {
         request = NewDescribeRiskCenterWebsiteRiskListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeRiskCenterWebsiteRiskList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRiskCenterWebsiteRiskList require credential")
@@ -2001,6 +2024,7 @@ func (c *Client) DescribeScanReportListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeScanReportListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeScanReportList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeScanReportList require credential")
@@ -2084,6 +2108,7 @@ func (c *Client) DescribeScanTaskListWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeScanTaskListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeScanTaskList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeScanTaskList require credential")
@@ -2167,6 +2192,7 @@ func (c *Client) DescribeSearchBugInfoWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeSearchBugInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeSearchBugInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSearchBugInfo require credential")
@@ -2250,6 +2276,7 @@ func (c *Client) DescribeSubUserInfoWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeSubUserInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeSubUserInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSubUserInfo require credential")
@@ -2333,6 +2360,7 @@ func (c *Client) DescribeSubnetAssetsWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeSubnetAssetsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeSubnetAssets")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSubnetAssets require credential")
@@ -2416,6 +2444,7 @@ func (c *Client) DescribeTaskLogListWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeTaskLogListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeTaskLogList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTaskLogList require credential")
@@ -2499,6 +2528,7 @@ func (c *Client) DescribeTaskLogURLWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeTaskLogURLRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeTaskLogURL")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTaskLogURL require credential")
@@ -2582,6 +2612,7 @@ func (c *Client) DescribeVULRiskAdvanceCFGListWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeVULRiskAdvanceCFGListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeVULRiskAdvanceCFGList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeVULRiskAdvanceCFGList require credential")
@@ -2665,6 +2696,7 @@ func (c *Client) DescribeVpcAssetsWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeVpcAssetsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeVpcAssets")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeVpcAssets require credential")
@@ -2748,6 +2780,7 @@ func (c *Client) ModifyRiskCenterRiskStatusWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyRiskCenterRiskStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "ModifyRiskCenterRiskStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyRiskCenterRiskStatus require credential")
@@ -2831,6 +2864,7 @@ func (c *Client) StopRiskCenterTaskWithContext(ctx context.Context, request *Sto
     if request == nil {
         request = NewStopRiskCenterTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "StopRiskCenterTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopRiskCenterTask require credential")

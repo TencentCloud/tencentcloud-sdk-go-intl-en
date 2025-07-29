@@ -116,6 +116,7 @@ func (c *Client) CopyFleetWithContext(ctx context.Context, request *CopyFleetReq
     if request == nil {
         request = NewCopyFleetRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "CopyFleet")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CopyFleet require credential")
@@ -183,6 +184,7 @@ func (c *Client) CreateGameServerSessionWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateGameServerSessionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "CreateGameServerSession")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateGameServerSession require credential")
@@ -244,6 +246,7 @@ func (c *Client) DeleteTimerScalingPolicyWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDeleteTimerScalingPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "DeleteTimerScalingPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteTimerScalingPolicy require credential")
@@ -307,6 +310,7 @@ func (c *Client) DescribeGameServerSessionDetailsWithContext(ctx context.Context
     if request == nil {
         request = NewDescribeGameServerSessionDetailsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "DescribeGameServerSessionDetails")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeGameServerSessionDetails require credential")
@@ -364,6 +368,7 @@ func (c *Client) DescribeGameServerSessionPlacementWithContext(ctx context.Conte
     if request == nil {
         request = NewDescribeGameServerSessionPlacementRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "DescribeGameServerSessionPlacement")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeGameServerSessionPlacement require credential")
@@ -427,6 +432,7 @@ func (c *Client) DescribeGameServerSessionsWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeGameServerSessionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "DescribeGameServerSessions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeGameServerSessions require credential")
@@ -484,6 +490,7 @@ func (c *Client) DescribeInstanceTypesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeInstanceTypesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "DescribeInstanceTypes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceTypes require credential")
@@ -545,6 +552,7 @@ func (c *Client) DescribePlayerSessionsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribePlayerSessionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "DescribePlayerSessions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribePlayerSessions require credential")
@@ -606,6 +614,7 @@ func (c *Client) DescribeTimerScalingPoliciesWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeTimerScalingPoliciesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "DescribeTimerScalingPolicies")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTimerScalingPolicies require credential")
@@ -661,6 +670,7 @@ func (c *Client) EndGameServerSessionAndProcessWithContext(ctx context.Context, 
     if request == nil {
         request = NewEndGameServerSessionAndProcessRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "EndGameServerSessionAndProcess")
     
     if c.GetCredential() == nil {
         return nil, errors.New("EndGameServerSessionAndProcess require credential")
@@ -722,6 +732,7 @@ func (c *Client) GetGameServerSessionLogUrlWithContext(ctx context.Context, requ
     if request == nil {
         request = NewGetGameServerSessionLogUrlRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "GetGameServerSessionLogUrl")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetGameServerSessionLogUrl require credential")
@@ -795,6 +806,7 @@ func (c *Client) GetInstanceAccessWithContext(ctx context.Context, request *GetI
     if request == nil {
         request = NewGetInstanceAccessRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "GetInstanceAccess")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetInstanceAccess require credential")
@@ -862,6 +874,7 @@ func (c *Client) JoinGameServerSessionWithContext(ctx context.Context, request *
     if request == nil {
         request = NewJoinGameServerSessionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "JoinGameServerSession")
     
     if c.GetCredential() == nil {
         return nil, errors.New("JoinGameServerSession require credential")
@@ -927,6 +940,7 @@ func (c *Client) JoinGameServerSessionBatchWithContext(ctx context.Context, requ
     if request == nil {
         request = NewJoinGameServerSessionBatchRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "JoinGameServerSessionBatch")
     
     if c.GetCredential() == nil {
         return nil, errors.New("JoinGameServerSessionBatch require credential")
@@ -998,6 +1012,7 @@ func (c *Client) PutTimerScalingPolicyWithContext(ctx context.Context, request *
     if request == nil {
         request = NewPutTimerScalingPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "PutTimerScalingPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("PutTimerScalingPolicy require credential")
@@ -1059,6 +1074,7 @@ func (c *Client) SearchGameServerSessionsWithContext(ctx context.Context, reques
     if request == nil {
         request = NewSearchGameServerSessionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "SearchGameServerSessions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SearchGameServerSessions require credential")
@@ -1130,6 +1146,7 @@ func (c *Client) SetServerReservedWithContext(ctx context.Context, request *SetS
     if request == nil {
         request = NewSetServerReservedRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "SetServerReserved")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetServerReserved require credential")
@@ -1191,6 +1208,7 @@ func (c *Client) StartGameServerSessionPlacementWithContext(ctx context.Context,
     if request == nil {
         request = NewStartGameServerSessionPlacementRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "StartGameServerSessionPlacement")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartGameServerSessionPlacement require credential")
@@ -1246,6 +1264,7 @@ func (c *Client) StopGameServerSessionPlacementWithContext(ctx context.Context, 
     if request == nil {
         request = NewStopGameServerSessionPlacementRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "StopGameServerSessionPlacement")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopGameServerSessionPlacement require credential")
@@ -1305,6 +1324,7 @@ func (c *Client) UpdateBucketAccelerateOptWithContext(ctx context.Context, reque
     if request == nil {
         request = NewUpdateBucketAccelerateOptRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "UpdateBucketAccelerateOpt")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateBucketAccelerateOpt require credential")
@@ -1366,6 +1386,7 @@ func (c *Client) UpdateBucketCORSOptWithContext(ctx context.Context, request *Up
     if request == nil {
         request = NewUpdateBucketCORSOptRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "UpdateBucketCORSOpt")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateBucketCORSOpt require credential")
@@ -1425,6 +1446,7 @@ func (c *Client) UpdateGameServerSessionWithContext(ctx context.Context, request
     if request == nil {
         request = NewUpdateGameServerSessionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gse", APIVersion, "UpdateGameServerSession")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateGameServerSession require credential")

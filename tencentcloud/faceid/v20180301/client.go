@@ -102,6 +102,7 @@ func (c *Client) ApplyCardVerificationWithContext(ctx context.Context, request *
     if request == nil {
         request = NewApplyCardVerificationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "ApplyCardVerification")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ApplyCardVerification require credential")
@@ -157,6 +158,7 @@ func (c *Client) ApplyLivenessTokenWithContext(ctx context.Context, request *App
     if request == nil {
         request = NewApplyLivenessTokenRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "ApplyLivenessToken")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ApplyLivenessToken require credential")
@@ -212,6 +214,7 @@ func (c *Client) ApplySdkVerificationTokenWithContext(ctx context.Context, reque
     if request == nil {
         request = NewApplySdkVerificationTokenRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "ApplySdkVerificationToken")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ApplySdkVerificationToken require credential")
@@ -273,6 +276,7 @@ func (c *Client) ApplyWebVerificationBizTokenIntlWithContext(ctx context.Context
     if request == nil {
         request = NewApplyWebVerificationBizTokenIntlRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "ApplyWebVerificationBizTokenIntl")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ApplyWebVerificationBizTokenIntl require credential")
@@ -334,6 +338,7 @@ func (c *Client) ApplyWebVerificationTokenWithContext(ctx context.Context, reque
     if request == nil {
         request = NewApplyWebVerificationTokenRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "ApplyWebVerificationToken")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ApplyWebVerificationToken require credential")
@@ -397,6 +402,7 @@ func (c *Client) CompareFaceLivenessWithContext(ctx context.Context, request *Co
     if request == nil {
         request = NewCompareFaceLivenessRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "CompareFaceLiveness")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CompareFaceLiveness require credential")
@@ -454,6 +460,7 @@ func (c *Client) CreateUploadUrlWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateUploadUrlRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "CreateUploadUrl")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateUploadUrl require credential")
@@ -527,6 +534,7 @@ func (c *Client) DetectAIFakeFacesWithContext(ctx context.Context, request *Dete
     if request == nil {
         request = NewDetectAIFakeFacesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "DetectAIFakeFaces")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DetectAIFakeFaces require credential")
@@ -628,6 +636,7 @@ func (c *Client) DetectReflectLivenessAndCompareWithContext(ctx context.Context,
     if request == nil {
         request = NewDetectReflectLivenessAndCompareRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "DetectReflectLivenessAndCompare")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DetectReflectLivenessAndCompare require credential")
@@ -683,6 +692,7 @@ func (c *Client) GenerateReflectSequenceWithContext(ctx context.Context, request
     if request == nil {
         request = NewGenerateReflectSequenceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "GenerateReflectSequence")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GenerateReflectSequence require credential")
@@ -740,6 +750,7 @@ func (c *Client) GetCardVerificationResultWithContext(ctx context.Context, reque
     if request == nil {
         request = NewGetCardVerificationResultRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "GetCardVerificationResult")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetCardVerificationResult require credential")
@@ -797,6 +808,7 @@ func (c *Client) GetFaceIdResultIntlWithContext(ctx context.Context, request *Ge
     if request == nil {
         request = NewGetFaceIdResultIntlRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "GetFaceIdResultIntl")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetFaceIdResultIntl require credential")
@@ -850,6 +862,7 @@ func (c *Client) GetFaceIdTokenIntlWithContext(ctx context.Context, request *Get
     if request == nil {
         request = NewGetFaceIdTokenIntlRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "GetFaceIdTokenIntl")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetFaceIdTokenIntl require credential")
@@ -907,6 +920,7 @@ func (c *Client) GetLivenessResultWithContext(ctx context.Context, request *GetL
     if request == nil {
         request = NewGetLivenessResultRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "GetLivenessResult")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetLivenessResult require credential")
@@ -964,6 +978,7 @@ func (c *Client) GetSdkVerificationResultWithContext(ctx context.Context, reques
     if request == nil {
         request = NewGetSdkVerificationResultRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "GetSdkVerificationResult")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetSdkVerificationResult require credential")
@@ -1021,6 +1036,7 @@ func (c *Client) GetWebVerificationResultWithContext(ctx context.Context, reques
     if request == nil {
         request = NewGetWebVerificationResultRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "GetWebVerificationResult")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetWebVerificationResult require credential")
@@ -1080,6 +1096,7 @@ func (c *Client) GetWebVerificationResultIntlWithContext(ctx context.Context, re
     if request == nil {
         request = NewGetWebVerificationResultIntlRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "GetWebVerificationResultIntl")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetWebVerificationResultIntl require credential")
@@ -1237,6 +1254,7 @@ func (c *Client) LivenessCompareWithContext(ctx context.Context, request *Livene
     if request == nil {
         request = NewLivenessCompareRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "LivenessCompare")
     
     if c.GetCredential() == nil {
         return nil, errors.New("LivenessCompare require credential")
@@ -1388,6 +1406,7 @@ func (c *Client) VideoLivenessCompareWithContext(ctx context.Context, request *V
     if request == nil {
         request = NewVideoLivenessCompareRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "VideoLivenessCompare")
     
     if c.GetCredential() == nil {
         return nil, errors.New("VideoLivenessCompare require credential")

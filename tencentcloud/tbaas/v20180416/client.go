@@ -86,6 +86,7 @@ func (c *Client) DescribeFabricBlockWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeFabricBlockRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tbaas", APIVersion, "DescribeFabricBlock")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeFabricBlock require credential")
@@ -139,6 +140,7 @@ func (c *Client) DescribeFabricTransactionWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeFabricTransactionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tbaas", APIVersion, "DescribeFabricTransaction")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeFabricTransaction require credential")
@@ -194,6 +196,7 @@ func (c *Client) InvokeFabricChaincodeWithContext(ctx context.Context, request *
     if request == nil {
         request = NewInvokeFabricChaincodeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tbaas", APIVersion, "InvokeFabricChaincode")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InvokeFabricChaincode require credential")
@@ -249,6 +252,7 @@ func (c *Client) QueryFabricChaincodeWithContext(ctx context.Context, request *Q
     if request == nil {
         request = NewQueryFabricChaincodeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tbaas", APIVersion, "QueryFabricChaincode")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryFabricChaincode require credential")

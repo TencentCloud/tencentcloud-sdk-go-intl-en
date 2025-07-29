@@ -84,6 +84,7 @@ func (c *Client) AbortAgentCruiseDialingCampaignWithContext(ctx context.Context,
     if request == nil {
         request = NewAbortAgentCruiseDialingCampaignRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "AbortAgentCruiseDialingCampaign")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AbortAgentCruiseDialingCampaign require credential")
@@ -135,6 +136,7 @@ func (c *Client) AbortPredictiveDialingCampaignWithContext(ctx context.Context, 
     if request == nil {
         request = NewAbortPredictiveDialingCampaignRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "AbortPredictiveDialingCampaign")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AbortPredictiveDialingCampaign require credential")
@@ -184,6 +186,7 @@ func (c *Client) BindNumberCallOutSkillGroupWithContext(ctx context.Context, req
     if request == nil {
         request = NewBindNumberCallOutSkillGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "BindNumberCallOutSkillGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BindNumberCallOutSkillGroup require credential")
@@ -239,6 +242,7 @@ func (c *Client) BindStaffSkillGroupListWithContext(ctx context.Context, request
     if request == nil {
         request = NewBindStaffSkillGroupListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "BindStaffSkillGroupList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BindStaffSkillGroupList require credential")
@@ -320,6 +324,7 @@ func (c *Client) CreateAIAgentCallWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateAIAgentCallRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "CreateAIAgentCall")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAIAgentCall require credential")
@@ -401,6 +406,7 @@ func (c *Client) CreateAICallWithContext(ctx context.Context, request *CreateAIC
     if request == nil {
         request = NewCreateAICallRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "CreateAICall")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAICall require credential")
@@ -474,6 +480,7 @@ func (c *Client) CreateAdminURLWithContext(ctx context.Context, request *CreateA
     if request == nil {
         request = NewCreateAdminURLRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "CreateAdminURL")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAdminURL require credential")
@@ -529,6 +536,7 @@ func (c *Client) CreateAgentCruiseDialingCampaignWithContext(ctx context.Context
     if request == nil {
         request = NewCreateAgentCruiseDialingCampaignRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "CreateAgentCruiseDialingCampaign")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAgentCruiseDialingCampaign require credential")
@@ -588,6 +596,7 @@ func (c *Client) CreateAutoCalloutTaskWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCreateAutoCalloutTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "CreateAutoCalloutTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAutoCalloutTask require credential")
@@ -643,6 +652,7 @@ func (c *Client) CreateCCCSkillGroupWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreateCCCSkillGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "CreateCCCSkillGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateCCCSkillGroup require credential")
@@ -728,6 +738,7 @@ func (c *Client) CreateCallOutSessionWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateCallOutSessionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "CreateCallOutSession")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateCallOutSession require credential")
@@ -779,6 +790,7 @@ func (c *Client) CreateExtensionWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateExtensionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "CreateExtension")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateExtension require credential")
@@ -856,6 +868,7 @@ func (c *Client) CreateIVRSessionWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateIVRSessionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "CreateIVRSession")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateIVRSession require credential")
@@ -923,6 +936,7 @@ func (c *Client) CreateOwnNumberApplyWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateOwnNumberApplyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "CreateOwnNumberApply")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateOwnNumberApply require credential")
@@ -978,6 +992,7 @@ func (c *Client) CreatePredictiveDialingCampaignWithContext(ctx context.Context,
     if request == nil {
         request = NewCreatePredictiveDialingCampaignRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "CreatePredictiveDialingCampaign")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreatePredictiveDialingCampaign require credential")
@@ -1037,6 +1052,7 @@ func (c *Client) CreateSDKLoginTokenWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreateSDKLoginTokenRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "CreateSDKLoginToken")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateSDKLoginToken require credential")
@@ -1098,6 +1114,7 @@ func (c *Client) CreateStaffWithContext(ctx context.Context, request *CreateStaf
     if request == nil {
         request = NewCreateStaffRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "CreateStaff")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateStaff require credential")
@@ -1153,6 +1170,7 @@ func (c *Client) DeleteCCCSkillGroupWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDeleteCCCSkillGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DeleteCCCSkillGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteCCCSkillGroup require credential")
@@ -1208,6 +1226,7 @@ func (c *Client) DeleteExtensionWithContext(ctx context.Context, request *Delete
     if request == nil {
         request = NewDeleteExtensionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DeleteExtension")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteExtension require credential")
@@ -1259,6 +1278,7 @@ func (c *Client) DeletePredictiveDialingCampaignWithContext(ctx context.Context,
     if request == nil {
         request = NewDeletePredictiveDialingCampaignRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DeletePredictiveDialingCampaign")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeletePredictiveDialingCampaign require credential")
@@ -1312,6 +1332,7 @@ func (c *Client) DeleteStaffWithContext(ctx context.Context, request *DeleteStaf
     if request == nil {
         request = NewDeleteStaffRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DeleteStaff")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteStaff require credential")
@@ -1365,6 +1386,7 @@ func (c *Client) DescribeAICallExtractResultWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeAICallExtractResultRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeAICallExtractResult")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAICallExtractResult require credential")
@@ -1418,6 +1440,7 @@ func (c *Client) DescribeAILatencyWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeAILatencyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeAILatency")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAILatency require credential")
@@ -1471,6 +1494,7 @@ func (c *Client) DescribeAgentCruiseDialingCampaignWithContext(ctx context.Conte
     if request == nil {
         request = NewDescribeAgentCruiseDialingCampaignRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeAgentCruiseDialingCampaign")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAgentCruiseDialingCampaign require credential")
@@ -1524,6 +1548,7 @@ func (c *Client) DescribeAutoCalloutTaskWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeAutoCalloutTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeAutoCalloutTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAutoCalloutTask require credential")
@@ -1577,6 +1602,7 @@ func (c *Client) DescribeAutoCalloutTasksWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeAutoCalloutTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeAutoCalloutTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAutoCalloutTasks require credential")
@@ -1634,6 +1660,7 @@ func (c *Client) DescribeCCCBuyInfoListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeCCCBuyInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeCCCBuyInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCCCBuyInfoList require credential")
@@ -1691,6 +1718,7 @@ func (c *Client) DescribeCallInMetricsWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeCallInMetricsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeCallInMetrics")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCallInMetrics require credential")
@@ -1740,6 +1768,7 @@ func (c *Client) DescribeExtensionWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeExtensionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeExtension")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeExtension require credential")
@@ -1791,6 +1820,7 @@ func (c *Client) DescribeExtensionsWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeExtensionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeExtensions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeExtensions require credential")
@@ -1844,6 +1874,7 @@ func (c *Client) DescribeIvrAudioListWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeIvrAudioListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeIvrAudioList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIvrAudioList require credential")
@@ -1897,6 +1928,7 @@ func (c *Client) DescribeNumbersWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeNumbersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeNumbers")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeNumbers require credential")
@@ -1950,6 +1982,7 @@ func (c *Client) DescribePSTNActiveSessionListWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribePSTNActiveSessionListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribePSTNActiveSessionList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribePSTNActiveSessionList require credential")
@@ -2001,6 +2034,7 @@ func (c *Client) DescribePredictiveDialingCampaignWithContext(ctx context.Contex
     if request == nil {
         request = NewDescribePredictiveDialingCampaignRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribePredictiveDialingCampaign")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribePredictiveDialingCampaign require credential")
@@ -2052,6 +2086,7 @@ func (c *Client) DescribePredictiveDialingCampaignsWithContext(ctx context.Conte
     if request == nil {
         request = NewDescribePredictiveDialingCampaignsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribePredictiveDialingCampaigns")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribePredictiveDialingCampaigns require credential")
@@ -2103,6 +2138,7 @@ func (c *Client) DescribePredictiveDialingSessionsWithContext(ctx context.Contex
     if request == nil {
         request = NewDescribePredictiveDialingSessionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribePredictiveDialingSessions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribePredictiveDialingSessions require credential")
@@ -2160,6 +2196,7 @@ func (c *Client) DescribeProtectedTelCdrWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeProtectedTelCdrRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeProtectedTelCdr")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeProtectedTelCdr require credential")
@@ -2217,6 +2254,7 @@ func (c *Client) DescribeSkillGroupInfoListWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeSkillGroupInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeSkillGroupInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSkillGroupInfoList require credential")
@@ -2272,6 +2310,7 @@ func (c *Client) DescribeStaffInfoListWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeStaffInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeStaffInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStaffInfoList require credential")
@@ -2329,6 +2368,7 @@ func (c *Client) DescribeStaffStatusMetricsWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeStaffStatusMetricsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeStaffStatusMetrics")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStaffStatusMetrics require credential")
@@ -2388,6 +2428,7 @@ func (c *Client) DescribeTelCallInfoWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeTelCallInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeTelCallInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTelCallInfo require credential")
@@ -2445,6 +2486,7 @@ func (c *Client) DescribeTelCdrWithContext(ctx context.Context, request *Describ
     if request == nil {
         request = NewDescribeTelCdrRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeTelCdr")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTelCdr require credential")
@@ -2502,6 +2544,7 @@ func (c *Client) DescribeTelRecordAsrWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeTelRecordAsrRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeTelRecordAsr")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTelRecordAsr require credential")
@@ -2555,6 +2598,7 @@ func (c *Client) DescribeTelSessionWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeTelSessionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeTelSession")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTelSession require credential")
@@ -2634,6 +2678,7 @@ func (c *Client) DisableCCCPhoneNumberWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDisableCCCPhoneNumberRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DisableCCCPhoneNumber")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DisableCCCPhoneNumber require credential")
@@ -2687,6 +2732,7 @@ func (c *Client) ForceMemberOfflineWithContext(ctx context.Context, request *For
     if request == nil {
         request = NewForceMemberOfflineRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "ForceMemberOffline")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ForceMemberOffline require credential")
@@ -2736,6 +2782,7 @@ func (c *Client) HangUpCallWithContext(ctx context.Context, request *HangUpCallR
     if request == nil {
         request = NewHangUpCallRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "HangUpCall")
     
     if c.GetCredential() == nil {
         return nil, errors.New("HangUpCall require credential")
@@ -2787,6 +2834,7 @@ func (c *Client) ModifyExtensionWithContext(ctx context.Context, request *Modify
     if request == nil {
         request = NewModifyExtensionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "ModifyExtension")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyExtension require credential")
@@ -2854,6 +2902,7 @@ func (c *Client) ModifyOwnNumberApplyWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyOwnNumberApplyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "ModifyOwnNumberApply")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyOwnNumberApply require credential")
@@ -2917,6 +2966,7 @@ func (c *Client) ModifyStaffWithContext(ctx context.Context, request *ModifyStaf
     if request == nil {
         request = NewModifyStaffRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "ModifyStaff")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyStaff require credential")
@@ -2968,6 +3018,7 @@ func (c *Client) ModifyStaffPasswordWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyStaffPasswordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "ModifyStaffPassword")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyStaffPassword require credential")
@@ -3019,6 +3070,7 @@ func (c *Client) PausePredictiveDialingCampaignWithContext(ctx context.Context, 
     if request == nil {
         request = NewPausePredictiveDialingCampaignRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "PausePredictiveDialingCampaign")
     
     if c.GetCredential() == nil {
         return nil, errors.New("PausePredictiveDialingCampaign require credential")
@@ -3070,6 +3122,7 @@ func (c *Client) ResetExtensionPasswordWithContext(ctx context.Context, request 
     if request == nil {
         request = NewResetExtensionPasswordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "ResetExtensionPassword")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ResetExtensionPassword require credential")
@@ -3123,6 +3176,7 @@ func (c *Client) RestoreMemberOnlineWithContext(ctx context.Context, request *Re
     if request == nil {
         request = NewRestoreMemberOnlineRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "RestoreMemberOnline")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RestoreMemberOnline require credential")
@@ -3174,6 +3228,7 @@ func (c *Client) ResumePredictiveDialingCampaignWithContext(ctx context.Context,
     if request == nil {
         request = NewResumePredictiveDialingCampaignRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "ResumePredictiveDialingCampaign")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ResumePredictiveDialingCampaign require credential")
@@ -3229,6 +3284,7 @@ func (c *Client) StopAutoCalloutTaskWithContext(ctx context.Context, request *St
     if request == nil {
         request = NewStopAutoCalloutTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "StopAutoCalloutTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopAutoCalloutTask require credential")
@@ -3288,6 +3344,7 @@ func (c *Client) TransferToManualWithContext(ctx context.Context, request *Trans
     if request == nil {
         request = NewTransferToManualRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "TransferToManual")
     
     if c.GetCredential() == nil {
         return nil, errors.New("TransferToManual require credential")
@@ -3347,6 +3404,7 @@ func (c *Client) UnbindNumberCallOutSkillGroupWithContext(ctx context.Context, r
     if request == nil {
         request = NewUnbindNumberCallOutSkillGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "UnbindNumberCallOutSkillGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UnbindNumberCallOutSkillGroup require credential")
@@ -3402,6 +3460,7 @@ func (c *Client) UnbindStaffSkillGroupListWithContext(ctx context.Context, reque
     if request == nil {
         request = NewUnbindStaffSkillGroupListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "UnbindStaffSkillGroupList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UnbindStaffSkillGroupList require credential")
@@ -3457,6 +3516,7 @@ func (c *Client) UpdateCCCSkillGroupWithContext(ctx context.Context, request *Up
     if request == nil {
         request = NewUpdateCCCSkillGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "UpdateCCCSkillGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateCCCSkillGroup require credential")
@@ -3512,6 +3572,7 @@ func (c *Client) UpdatePredictiveDialingCampaignWithContext(ctx context.Context,
     if request == nil {
         request = NewUpdatePredictiveDialingCampaignRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "UpdatePredictiveDialingCampaign")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdatePredictiveDialingCampaign require credential")
@@ -3565,6 +3626,7 @@ func (c *Client) UploadIvrAudioWithContext(ctx context.Context, request *UploadI
     if request == nil {
         request = NewUploadIvrAudioRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "UploadIvrAudio")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UploadIvrAudio require credential")

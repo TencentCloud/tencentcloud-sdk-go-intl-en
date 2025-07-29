@@ -108,6 +108,7 @@ func (c *Client) AddLabelWithContext(ctx context.Context, request *AddLabelReque
     if request == nil {
         request = NewAddLabelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "AddLabel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AddLabel require credential")
@@ -181,6 +182,7 @@ func (c *Client) CancelAuthorityIssuerWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCancelAuthorityIssuerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "CancelAuthorityIssuer")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CancelAuthorityIssuer require credential")
@@ -254,6 +256,7 @@ func (c *Client) CheckChainWithContext(ctx context.Context, request *CheckChainR
     if request == nil {
         request = NewCheckChainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "CheckChain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CheckChain require credential")
@@ -327,6 +330,7 @@ func (c *Client) CheckDidDeployWithContext(ctx context.Context, request *CheckDi
     if request == nil {
         request = NewCheckDidDeployRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "CheckDidDeploy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CheckDidDeploy require credential")
@@ -388,6 +392,7 @@ func (c *Client) CreateCredentialWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateCredentialRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "CreateCredential")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateCredential require credential")
@@ -461,6 +466,7 @@ func (c *Client) CreateDidServiceWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateDidServiceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "CreateDidService")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDidService require credential")
@@ -534,6 +540,7 @@ func (c *Client) CreateLabelWithContext(ctx context.Context, request *CreateLabe
     if request == nil {
         request = NewCreateLabelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "CreateLabel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateLabel require credential")
@@ -607,6 +614,7 @@ func (c *Client) CreateSelectiveCredentialWithContext(ctx context.Context, reque
     if request == nil {
         request = NewCreateSelectiveCredentialRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "CreateSelectiveCredential")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateSelectiveCredential require credential")
@@ -676,6 +684,7 @@ func (c *Client) CreateTDidWithContext(ctx context.Context, request *CreateTDidR
     if request == nil {
         request = NewCreateTDidRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "CreateTDid")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTDid require credential")
@@ -749,6 +758,7 @@ func (c *Client) CreateTDidByPrivateKeyWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateTDidByPrivateKeyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "CreateTDidByPrivateKey")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTDidByPrivateKey require credential")
@@ -822,6 +832,7 @@ func (c *Client) CreateTDidByPublicKeyWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCreateTDidByPublicKeyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "CreateTDidByPublicKey")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTDidByPublicKey require credential")
@@ -895,6 +906,7 @@ func (c *Client) DeployByNameWithContext(ctx context.Context, request *DeployByN
     if request == nil {
         request = NewDeployByNameRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "DeployByName")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeployByName require credential")
@@ -968,6 +980,7 @@ func (c *Client) DownCptWithContext(ctx context.Context, request *DownCptRequest
     if request == nil {
         request = NewDownCptRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "DownCpt")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DownCpt require credential")
@@ -1041,6 +1054,7 @@ func (c *Client) EnableHashWithContext(ctx context.Context, request *EnableHashR
     if request == nil {
         request = NewEnableHashRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "EnableHash")
     
     if c.GetCredential() == nil {
         return nil, errors.New("EnableHash require credential")
@@ -1122,6 +1136,7 @@ func (c *Client) GetAgencyTDidWithContext(ctx context.Context, request *GetAgenc
     if request == nil {
         request = NewGetAgencyTDidRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetAgencyTDid")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetAgencyTDid require credential")
@@ -1195,6 +1210,7 @@ func (c *Client) GetAuthoritiesListWithContext(ctx context.Context, request *Get
     if request == nil {
         request = NewGetAuthoritiesListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetAuthoritiesList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetAuthoritiesList require credential")
@@ -1268,6 +1284,7 @@ func (c *Client) GetAuthorityIssuerWithContext(ctx context.Context, request *Get
     if request == nil {
         request = NewGetAuthorityIssuerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetAuthorityIssuer")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetAuthorityIssuer require credential")
@@ -1341,6 +1358,7 @@ func (c *Client) GetConsortiumClusterListWithContext(ctx context.Context, reques
     if request == nil {
         request = NewGetConsortiumClusterListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetConsortiumClusterList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetConsortiumClusterList require credential")
@@ -1414,6 +1432,7 @@ func (c *Client) GetConsortiumListWithContext(ctx context.Context, request *GetC
     if request == nil {
         request = NewGetConsortiumListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetConsortiumList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetConsortiumList require credential")
@@ -1487,6 +1506,7 @@ func (c *Client) GetCptInfoWithContext(ctx context.Context, request *GetCptInfoR
     if request == nil {
         request = NewGetCptInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetCptInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetCptInfo require credential")
@@ -1560,6 +1580,7 @@ func (c *Client) GetCptListWithContext(ctx context.Context, request *GetCptListR
     if request == nil {
         request = NewGetCptListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetCptList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetCptList require credential")
@@ -1633,6 +1654,7 @@ func (c *Client) GetCredentialCptRankWithContext(ctx context.Context, request *G
     if request == nil {
         request = NewGetCredentialCptRankRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetCredentialCptRank")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetCredentialCptRank require credential")
@@ -1706,6 +1728,7 @@ func (c *Client) GetCredentialIssueRankWithContext(ctx context.Context, request 
     if request == nil {
         request = NewGetCredentialIssueRankRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetCredentialIssueRank")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetCredentialIssueRank require credential")
@@ -1779,6 +1802,7 @@ func (c *Client) GetCredentialIssueTrendWithContext(ctx context.Context, request
     if request == nil {
         request = NewGetCredentialIssueTrendRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetCredentialIssueTrend")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetCredentialIssueTrend require credential")
@@ -1852,6 +1876,7 @@ func (c *Client) GetCredentialStatusWithContext(ctx context.Context, request *Ge
     if request == nil {
         request = NewGetCredentialStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetCredentialStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetCredentialStatus require credential")
@@ -1925,6 +1950,7 @@ func (c *Client) GetDataPanelWithContext(ctx context.Context, request *GetDataPa
     if request == nil {
         request = NewGetDataPanelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetDataPanel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetDataPanel require credential")
@@ -1998,6 +2024,7 @@ func (c *Client) GetDeployInfoWithContext(ctx context.Context, request *GetDeplo
     if request == nil {
         request = NewGetDeployInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetDeployInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetDeployInfo require credential")
@@ -2071,6 +2098,7 @@ func (c *Client) GetDeployListWithContext(ctx context.Context, request *GetDeplo
     if request == nil {
         request = NewGetDeployListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetDeployList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetDeployList require credential")
@@ -2144,6 +2172,7 @@ func (c *Client) GetDidClusterDetailWithContext(ctx context.Context, request *Ge
     if request == nil {
         request = NewGetDidClusterDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetDidClusterDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetDidClusterDetail require credential")
@@ -2217,6 +2246,7 @@ func (c *Client) GetDidClusterListWithContext(ctx context.Context, request *GetD
     if request == nil {
         request = NewGetDidClusterListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetDidClusterList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetDidClusterList require credential")
@@ -2290,6 +2320,7 @@ func (c *Client) GetDidDetailWithContext(ctx context.Context, request *GetDidDet
     if request == nil {
         request = NewGetDidDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetDidDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetDidDetail require credential")
@@ -2363,6 +2394,7 @@ func (c *Client) GetDidDocumentWithContext(ctx context.Context, request *GetDidD
     if request == nil {
         request = NewGetDidDocumentRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetDidDocument")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetDidDocument require credential")
@@ -2436,6 +2468,7 @@ func (c *Client) GetDidListWithContext(ctx context.Context, request *GetDidListR
     if request == nil {
         request = NewGetDidListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetDidList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetDidList require credential")
@@ -2509,6 +2542,7 @@ func (c *Client) GetDidRegisterTrendWithContext(ctx context.Context, request *Ge
     if request == nil {
         request = NewGetDidRegisterTrendRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetDidRegisterTrend")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetDidRegisterTrend require credential")
@@ -2582,6 +2616,7 @@ func (c *Client) GetDidServiceDetailWithContext(ctx context.Context, request *Ge
     if request == nil {
         request = NewGetDidServiceDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetDidServiceDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetDidServiceDetail require credential")
@@ -2655,6 +2690,7 @@ func (c *Client) GetDidServiceListWithContext(ctx context.Context, request *GetD
     if request == nil {
         request = NewGetDidServiceListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetDidServiceList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetDidServiceList require credential")
@@ -2728,6 +2764,7 @@ func (c *Client) GetGroupListWithContext(ctx context.Context, request *GetGroupL
     if request == nil {
         request = NewGetGroupListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetGroupList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetGroupList require credential")
@@ -2785,6 +2822,7 @@ func (c *Client) GetLabelListWithContext(ctx context.Context, request *GetLabelL
     if request == nil {
         request = NewGetLabelListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetLabelList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetLabelList require credential")
@@ -2858,6 +2896,7 @@ func (c *Client) GetPolicyListWithContext(ctx context.Context, request *GetPolic
     if request == nil {
         request = NewGetPolicyListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetPolicyList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetPolicyList require credential")
@@ -2931,6 +2970,7 @@ func (c *Client) GetPublicKeyWithContext(ctx context.Context, request *GetPublic
     if request == nil {
         request = NewGetPublicKeyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "GetPublicKey")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetPublicKey require credential")
@@ -3004,6 +3044,7 @@ func (c *Client) QueryPolicyWithContext(ctx context.Context, request *QueryPolic
     if request == nil {
         request = NewQueryPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "QueryPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryPolicy require credential")
@@ -3077,6 +3118,7 @@ func (c *Client) RecognizeAuthorityIssuerWithContext(ctx context.Context, reques
     if request == nil {
         request = NewRecognizeAuthorityIssuerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "RecognizeAuthorityIssuer")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizeAuthorityIssuer require credential")
@@ -3150,6 +3192,7 @@ func (c *Client) RegisterClaimPolicyWithContext(ctx context.Context, request *Re
     if request == nil {
         request = NewRegisterClaimPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "RegisterClaimPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RegisterClaimPolicy require credential")
@@ -3223,6 +3266,7 @@ func (c *Client) RegisterCptWithContext(ctx context.Context, request *RegisterCp
     if request == nil {
         request = NewRegisterCptRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "RegisterCpt")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RegisterCpt require credential")
@@ -3296,6 +3340,7 @@ func (c *Client) RegisterIssuerWithContext(ctx context.Context, request *Registe
     if request == nil {
         request = NewRegisterIssuerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "RegisterIssuer")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RegisterIssuer require credential")
@@ -3369,6 +3414,7 @@ func (c *Client) RemoveHashWithContext(ctx context.Context, request *RemoveHashR
     if request == nil {
         request = NewRemoveHashRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "RemoveHash")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RemoveHash require credential")
@@ -3442,6 +3488,7 @@ func (c *Client) SetCredentialStatusWithContext(ctx context.Context, request *Se
     if request == nil {
         request = NewSetCredentialStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "SetCredentialStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetCredentialStatus require credential")
@@ -3515,6 +3562,7 @@ func (c *Client) VerifyCredentialWithContext(ctx context.Context, request *Verif
     if request == nil {
         request = NewVerifyCredentialRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tdid", APIVersion, "VerifyCredential")
     
     if c.GetCredential() == nil {
         return nil, errors.New("VerifyCredential require credential")

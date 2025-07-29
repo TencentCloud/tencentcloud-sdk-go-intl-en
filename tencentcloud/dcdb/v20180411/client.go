@@ -88,6 +88,7 @@ func (c *Client) ActiveHourDCDBInstanceWithContext(ctx context.Context, request 
     if request == nil {
         request = NewActiveHourDCDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "ActiveHourDCDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ActiveHourDCDBInstance require credential")
@@ -195,6 +196,7 @@ func (c *Client) AssociateSecurityGroupsWithContext(ctx context.Context, request
     if request == nil {
         request = NewAssociateSecurityGroupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "AssociateSecurityGroups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AssociateSecurityGroups require credential")
@@ -256,6 +258,7 @@ func (c *Client) CancelDcnJobWithContext(ctx context.Context, request *CancelDcn
     if request == nil {
         request = NewCancelDcnJobRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "CancelDcnJob")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CancelDcnJob require credential")
@@ -321,6 +324,7 @@ func (c *Client) CloneAccountWithContext(ctx context.Context, request *CloneAcco
     if request == nil {
         request = NewCloneAccountRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "CloneAccount")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CloneAccount require credential")
@@ -386,6 +390,7 @@ func (c *Client) CloseDBExtranetAccessWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCloseDBExtranetAccessRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "CloseDBExtranetAccess")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CloseDBExtranetAccess require credential")
@@ -457,6 +462,7 @@ func (c *Client) CopyAccountPrivilegesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCopyAccountPrivilegesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "CopyAccountPrivileges")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CopyAccountPrivileges require credential")
@@ -534,6 +540,7 @@ func (c *Client) CreateAccountWithContext(ctx context.Context, request *CreateAc
     if request == nil {
         request = NewCreateAccountRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "CreateAccount")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAccount require credential")
@@ -619,6 +626,7 @@ func (c *Client) CreateDCDBInstanceWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreateDCDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "CreateDCDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDCDBInstance require credential")
@@ -694,6 +702,7 @@ func (c *Client) CreateDedicatedClusterDCDBInstanceWithContext(ctx context.Conte
     if request == nil {
         request = NewCreateDedicatedClusterDCDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "CreateDedicatedClusterDCDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDedicatedClusterDCDBInstance require credential")
@@ -777,6 +786,7 @@ func (c *Client) CreateHourDCDBInstanceWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateHourDCDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "CreateHourDCDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateHourDCDBInstance require credential")
@@ -836,6 +846,7 @@ func (c *Client) CreateOnlineDDLJobWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreateOnlineDDLJobRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "CreateOnlineDDLJob")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateOnlineDDLJob require credential")
@@ -899,6 +910,7 @@ func (c *Client) DeleteAccountWithContext(ctx context.Context, request *DeleteAc
     if request == nil {
         request = NewDeleteAccountRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DeleteAccount")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteAccount require credential")
@@ -966,6 +978,7 @@ func (c *Client) DescribeAccountPrivilegesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeAccountPrivilegesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeAccountPrivileges")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAccountPrivileges require credential")
@@ -1027,6 +1040,7 @@ func (c *Client) DescribeAccountsWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeAccountsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeAccounts")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAccounts require credential")
@@ -1076,6 +1090,7 @@ func (c *Client) DescribeBackupFilesWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeBackupFilesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeBackupFiles")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBackupFiles require credential")
@@ -1139,6 +1154,7 @@ func (c *Client) DescribeDBEncryptAttributesWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeDBEncryptAttributesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeDBEncryptAttributes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBEncryptAttributes require credential")
@@ -1214,6 +1230,7 @@ func (c *Client) DescribeDBLogFilesWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeDBLogFilesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeDBLogFiles")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBLogFiles require credential")
@@ -1277,6 +1294,7 @@ func (c *Client) DescribeDBParametersWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeDBParametersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeDBParameters")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBParameters require credential")
@@ -1362,6 +1380,7 @@ func (c *Client) DescribeDBSecurityGroupsWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeDBSecurityGroupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeDBSecurityGroups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBSecurityGroups require credential")
@@ -1425,6 +1444,7 @@ func (c *Client) DescribeDBSlowLogsWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeDBSlowLogsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeDBSlowLogs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBSlowLogs require credential")
@@ -1490,6 +1510,7 @@ func (c *Client) DescribeDBSyncModeWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeDBSyncModeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeDBSyncMode")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBSyncMode require credential")
@@ -1541,6 +1562,7 @@ func (c *Client) DescribeDBTmpInstancesWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeDBTmpInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeDBTmpInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBTmpInstances require credential")
@@ -1600,6 +1622,7 @@ func (c *Client) DescribeDCDBInstanceDetailWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeDCDBInstanceDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeDCDBInstanceDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDCDBInstanceDetail require credential")
@@ -1655,6 +1678,7 @@ func (c *Client) DescribeDCDBInstanceNodeInfoWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeDCDBInstanceNodeInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeDCDBInstanceNodeInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDCDBInstanceNodeInfo require credential")
@@ -1726,6 +1750,7 @@ func (c *Client) DescribeDCDBInstancesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeDCDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeDCDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDCDBInstances require credential")
@@ -1785,6 +1810,7 @@ func (c *Client) DescribeDCDBPriceWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeDCDBPriceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeDCDBPrice")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDCDBPrice require credential")
@@ -1856,6 +1882,7 @@ func (c *Client) DescribeDCDBShardsWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeDCDBShardsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeDCDBShards")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDCDBShards require credential")
@@ -1917,6 +1944,7 @@ func (c *Client) DescribeDatabaseObjectsWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeDatabaseObjectsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeDatabaseObjects")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDatabaseObjects require credential")
@@ -1978,6 +2006,7 @@ func (c *Client) DescribeDatabaseTableWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeDatabaseTableRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeDatabaseTable")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDatabaseTable require credential")
@@ -2039,6 +2068,7 @@ func (c *Client) DescribeDatabasesWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeDatabasesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeDatabases")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDatabases require credential")
@@ -2098,6 +2128,7 @@ func (c *Client) DescribeDcnDetailWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeDcnDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeDcnDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDcnDetail require credential")
@@ -2155,6 +2186,7 @@ func (c *Client) DescribeFileDownloadUrlWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeFileDownloadUrlRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeFileDownloadUrl")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeFileDownloadUrl require credential")
@@ -2208,6 +2240,7 @@ func (c *Client) DescribeFlowWithContext(ctx context.Context, request *DescribeF
     if request == nil {
         request = NewDescribeFlowRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeFlow")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeFlow require credential")
@@ -2269,6 +2302,7 @@ func (c *Client) DescribeLogFileRetentionPeriodWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeLogFileRetentionPeriodRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeLogFileRetentionPeriod")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLogFileRetentionPeriod require credential")
@@ -2326,6 +2360,7 @@ func (c *Client) DescribeOrdersWithContext(ctx context.Context, request *Describ
     if request == nil {
         request = NewDescribeOrdersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeOrders")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOrders require credential")
@@ -2383,6 +2418,7 @@ func (c *Client) DescribeProjectSecurityGroupsWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeProjectSecurityGroupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DescribeProjectSecurityGroups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeProjectSecurityGroups require credential")
@@ -2444,6 +2480,7 @@ func (c *Client) DestroyDCDBInstanceWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDestroyDCDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DestroyDCDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DestroyDCDBInstance require credential")
@@ -2507,6 +2544,7 @@ func (c *Client) DestroyHourDCDBInstanceWithContext(ctx context.Context, request
     if request == nil {
         request = NewDestroyHourDCDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DestroyHourDCDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DestroyHourDCDBInstance require credential")
@@ -2590,6 +2628,7 @@ func (c *Client) DisassociateSecurityGroupsWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDisassociateSecurityGroupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "DisassociateSecurityGroups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DisassociateSecurityGroups require credential")
@@ -2667,6 +2706,7 @@ func (c *Client) GrantAccountPrivilegesWithContext(ctx context.Context, request 
     if request == nil {
         request = NewGrantAccountPrivilegesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "GrantAccountPrivileges")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GrantAccountPrivileges require credential")
@@ -2732,6 +2772,7 @@ func (c *Client) InitDCDBInstancesWithContext(ctx context.Context, request *Init
     if request == nil {
         request = NewInitDCDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "InitDCDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InitDCDBInstances require credential")
@@ -2797,6 +2838,7 @@ func (c *Client) IsolateDCDBInstanceWithContext(ctx context.Context, request *Is
     if request == nil {
         request = NewIsolateDCDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "IsolateDCDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("IsolateDCDBInstance require credential")
@@ -2860,6 +2902,7 @@ func (c *Client) IsolateDedicatedDBInstanceWithContext(ctx context.Context, requ
     if request == nil {
         request = NewIsolateDedicatedDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "IsolateDedicatedDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("IsolateDedicatedDBInstance require credential")
@@ -2915,6 +2958,7 @@ func (c *Client) IsolateHourDCDBInstanceWithContext(ctx context.Context, request
     if request == nil {
         request = NewIsolateHourDCDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "IsolateHourDCDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("IsolateHourDCDBInstance require credential")
@@ -2970,6 +3014,7 @@ func (c *Client) KillSessionWithContext(ctx context.Context, request *KillSessio
     if request == nil {
         request = NewKillSessionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "KillSession")
     
     if c.GetCredential() == nil {
         return nil, errors.New("KillSession require credential")
@@ -3027,6 +3072,7 @@ func (c *Client) ModifyAccountConfigWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyAccountConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "ModifyAccountConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyAccountConfig require credential")
@@ -3088,6 +3134,7 @@ func (c *Client) ModifyAccountDescriptionWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyAccountDescriptionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "ModifyAccountDescription")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyAccountDescription require credential")
@@ -3151,6 +3198,7 @@ func (c *Client) ModifyAccountPrivilegesWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyAccountPrivilegesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "ModifyAccountPrivileges")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyAccountPrivileges require credential")
@@ -3216,6 +3264,7 @@ func (c *Client) ModifyDBEncryptAttributesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewModifyDBEncryptAttributesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "ModifyDBEncryptAttributes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBEncryptAttributes require credential")
@@ -3273,6 +3322,7 @@ func (c *Client) ModifyDBInstanceNameWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyDBInstanceNameRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "ModifyDBInstanceName")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBInstanceName require credential")
@@ -3366,6 +3416,7 @@ func (c *Client) ModifyDBInstanceSecurityGroupsWithContext(ctx context.Context, 
     if request == nil {
         request = NewModifyDBInstanceSecurityGroupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "ModifyDBInstanceSecurityGroups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBInstanceSecurityGroups require credential")
@@ -3425,6 +3476,7 @@ func (c *Client) ModifyDBInstancesProjectWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyDBInstancesProjectRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "ModifyDBInstancesProject")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBInstancesProject require credential")
@@ -3488,6 +3540,7 @@ func (c *Client) ModifyDBParametersWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyDBParametersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "ModifyDBParameters")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBParameters require credential")
@@ -3561,6 +3614,7 @@ func (c *Client) ModifyDBSyncModeWithContext(ctx context.Context, request *Modif
     if request == nil {
         request = NewModifyDBSyncModeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "ModifyDBSyncMode")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBSyncMode require credential")
@@ -3636,6 +3690,7 @@ func (c *Client) ModifyInstanceNetworkWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyInstanceNetworkRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "ModifyInstanceNetwork")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyInstanceNetwork require credential")
@@ -3701,6 +3756,7 @@ func (c *Client) ModifyInstanceVipWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyInstanceVipRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "ModifyInstanceVip")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyInstanceVip require credential")
@@ -3770,6 +3826,7 @@ func (c *Client) ModifyInstanceVportWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyInstanceVportRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "ModifyInstanceVport")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyInstanceVport require credential")
@@ -3839,6 +3896,7 @@ func (c *Client) ResetAccountPasswordWithContext(ctx context.Context, request *R
     if request == nil {
         request = NewResetAccountPasswordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "ResetAccountPassword")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ResetAccountPassword require credential")
@@ -3904,6 +3962,7 @@ func (c *Client) SwitchDBInstanceHAWithContext(ctx context.Context, request *Swi
     if request == nil {
         request = NewSwitchDBInstanceHARequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "SwitchDBInstanceHA")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SwitchDBInstanceHA require credential")
@@ -3963,6 +4022,7 @@ func (c *Client) TerminateDedicatedDBInstanceWithContext(ctx context.Context, re
     if request == nil {
         request = NewTerminateDedicatedDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "TerminateDedicatedDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("TerminateDedicatedDBInstance require credential")
@@ -4026,6 +4086,7 @@ func (c *Client) UpgradeDedicatedDCDBInstanceWithContext(ctx context.Context, re
     if request == nil {
         request = NewUpgradeDedicatedDCDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "UpgradeDedicatedDCDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpgradeDedicatedDCDBInstance require credential")
@@ -4091,6 +4152,7 @@ func (c *Client) UpgradeHourDCDBInstanceWithContext(ctx context.Context, request
     if request == nil {
         request = NewUpgradeHourDCDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dcdb", APIVersion, "UpgradeHourDCDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpgradeHourDCDBInstance require credential")

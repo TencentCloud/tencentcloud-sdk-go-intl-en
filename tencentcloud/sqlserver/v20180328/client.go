@@ -124,6 +124,7 @@ func (c *Client) CloneDBWithContext(ctx context.Context, request *CloneDBRequest
     if request == nil {
         request = NewCloneDBRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "CloneDB")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CloneDB require credential")
@@ -181,6 +182,7 @@ func (c *Client) CloseInterCommunicationWithContext(ctx context.Context, request
     if request == nil {
         request = NewCloseInterCommunicationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "CloseInterCommunication")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CloseInterCommunication require credential")
@@ -254,6 +256,7 @@ func (c *Client) CreateAccountWithContext(ctx context.Context, request *CreateAc
     if request == nil {
         request = NewCreateAccountRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "CreateAccount")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAccount require credential")
@@ -335,6 +338,7 @@ func (c *Client) CreateBackupWithContext(ctx context.Context, request *CreateBac
     if request == nil {
         request = NewCreateBackupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "CreateBackup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateBackup require credential")
@@ -398,6 +402,7 @@ func (c *Client) CreateBackupMigrationWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCreateBackupMigrationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "CreateBackupMigration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateBackupMigration require credential")
@@ -473,6 +478,7 @@ func (c *Client) CreateBasicDBInstancesWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateBasicDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "CreateBasicDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateBasicDBInstances require credential")
@@ -550,6 +556,7 @@ func (c *Client) CreateBusinessDBInstancesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewCreateBusinessDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "CreateBusinessDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateBusinessDBInstances require credential")
@@ -607,6 +614,7 @@ func (c *Client) CreateBusinessIntelligenceFileWithContext(ctx context.Context, 
     if request == nil {
         request = NewCreateBusinessIntelligenceFileRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "CreateBusinessIntelligenceFile")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateBusinessIntelligenceFile require credential")
@@ -684,6 +692,7 @@ func (c *Client) CreateCloudDBInstancesWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateCloudDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "CreateCloudDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateCloudDBInstances require credential")
@@ -767,6 +776,7 @@ func (c *Client) CreateCloudReadOnlyDBInstancesWithContext(ctx context.Context, 
     if request == nil {
         request = NewCreateCloudReadOnlyDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "CreateCloudReadOnlyDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateCloudReadOnlyDBInstances require credential")
@@ -848,6 +858,7 @@ func (c *Client) CreateDBWithContext(ctx context.Context, request *CreateDBReque
     if request == nil {
         request = NewCreateDBRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "CreateDB")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDB require credential")
@@ -925,6 +936,7 @@ func (c *Client) CreateDBInstancesWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "CreateDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDBInstances require credential")
@@ -996,6 +1008,7 @@ func (c *Client) CreateIncrementalMigrationWithContext(ctx context.Context, requ
     if request == nil {
         request = NewCreateIncrementalMigrationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "CreateIncrementalMigration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateIncrementalMigration require credential")
@@ -1081,6 +1094,7 @@ func (c *Client) CreateMigrationWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateMigrationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "CreateMigration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateMigration require credential")
@@ -1160,6 +1174,7 @@ func (c *Client) CreateReadOnlyDBInstancesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewCreateReadOnlyDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "CreateReadOnlyDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateReadOnlyDBInstances require credential")
@@ -1225,6 +1240,7 @@ func (c *Client) DeleteAccountWithContext(ctx context.Context, request *DeleteAc
     if request == nil {
         request = NewDeleteAccountRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DeleteAccount")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteAccount require credential")
@@ -1284,6 +1300,7 @@ func (c *Client) DeleteBackupMigrationWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDeleteBackupMigrationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DeleteBackupMigration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteBackupMigration require credential")
@@ -1341,6 +1358,7 @@ func (c *Client) DeleteBusinessIntelligenceFileWithContext(ctx context.Context, 
     if request == nil {
         request = NewDeleteBusinessIntelligenceFileRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DeleteBusinessIntelligenceFile")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteBusinessIntelligenceFile require credential")
@@ -1406,6 +1424,7 @@ func (c *Client) DeleteDBWithContext(ctx context.Context, request *DeleteDBReque
     if request == nil {
         request = NewDeleteDBRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DeleteDB")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteDB require credential")
@@ -1465,6 +1484,7 @@ func (c *Client) DeleteIncrementalMigrationWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDeleteIncrementalMigrationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DeleteIncrementalMigration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteIncrementalMigration require credential")
@@ -1532,6 +1552,7 @@ func (c *Client) DeleteMigrationWithContext(ctx context.Context, request *Delete
     if request == nil {
         request = NewDeleteMigrationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DeleteMigration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteMigration require credential")
@@ -1593,6 +1614,7 @@ func (c *Client) DescribeAccountsWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeAccountsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeAccounts")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAccounts require credential")
@@ -1646,6 +1668,7 @@ func (c *Client) DescribeBackupCommandWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeBackupCommandRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeBackupCommand")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBackupCommand require credential")
@@ -1715,6 +1738,7 @@ func (c *Client) DescribeBackupFilesWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeBackupFilesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeBackupFiles")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBackupFiles require credential")
@@ -1770,6 +1794,7 @@ func (c *Client) DescribeBackupMigrationWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeBackupMigrationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeBackupMigration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBackupMigration require credential")
@@ -1831,6 +1856,7 @@ func (c *Client) DescribeBackupUploadSizeWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeBackupUploadSizeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeBackupUploadSize")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBackupUploadSize require credential")
@@ -1900,6 +1926,7 @@ func (c *Client) DescribeBackupsWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeBackupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeBackups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBackups require credential")
@@ -1957,6 +1984,7 @@ func (c *Client) DescribeBusinessIntelligenceFileWithContext(ctx context.Context
     if request == nil {
         request = NewDescribeBusinessIntelligenceFileRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeBusinessIntelligenceFile")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBusinessIntelligenceFile require credential")
@@ -2034,6 +2062,7 @@ func (c *Client) DescribeDBCharsetsWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeDBCharsetsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeDBCharsets")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBCharsets require credential")
@@ -2089,6 +2118,7 @@ func (c *Client) DescribeDBInstanceInterWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeDBInstanceInterRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeDBInstanceInter")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBInstanceInter require credential")
@@ -2158,6 +2188,7 @@ func (c *Client) DescribeDBInstancesWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBInstances require credential")
@@ -2217,6 +2248,7 @@ func (c *Client) DescribeDBInstancesAttributeWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeDBInstancesAttributeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeDBInstancesAttribute")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBInstancesAttribute require credential")
@@ -2278,6 +2310,7 @@ func (c *Client) DescribeDBsWithContext(ctx context.Context, request *DescribeDB
     if request == nil {
         request = NewDescribeDBsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeDBs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBs require credential")
@@ -2343,6 +2376,7 @@ func (c *Client) DescribeDBsNormalWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeDBsNormalRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeDBsNormal")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBsNormal require credential")
@@ -2404,6 +2438,7 @@ func (c *Client) DescribeFlowStatusWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeFlowStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeFlowStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeFlowStatus require credential")
@@ -2459,6 +2494,7 @@ func (c *Client) DescribeIncrementalMigrationWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeIncrementalMigrationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeIncrementalMigration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIncrementalMigration require credential")
@@ -2512,6 +2548,7 @@ func (c *Client) DescribeInstanceByOrdersWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeInstanceByOrdersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeInstanceByOrders")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceByOrders require credential")
@@ -2573,6 +2610,7 @@ func (c *Client) DescribeInstanceParamRecordsWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeInstanceParamRecordsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeInstanceParamRecords")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceParamRecords require credential")
@@ -2640,6 +2678,7 @@ func (c *Client) DescribeInstanceParamsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeInstanceParamsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeInstanceParams")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceParams require credential")
@@ -2701,6 +2740,7 @@ func (c *Client) DescribeMaintenanceSpanWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeMaintenanceSpanRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeMaintenanceSpan")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMaintenanceSpan require credential")
@@ -2766,6 +2806,7 @@ func (c *Client) DescribeMigrationDetailWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeMigrationDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeMigrationDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMigrationDetail require credential")
@@ -2829,6 +2870,7 @@ func (c *Client) DescribeMigrationsWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeMigrationsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeMigrations")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMigrations require credential")
@@ -2886,6 +2928,7 @@ func (c *Client) DescribeOrdersWithContext(ctx context.Context, request *Describ
     if request == nil {
         request = NewDescribeOrdersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeOrders")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOrders require credential")
@@ -2949,6 +2992,7 @@ func (c *Client) DescribeProductConfigWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeProductConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeProductConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeProductConfig require credential")
@@ -3010,6 +3054,7 @@ func (c *Client) DescribeRegionsWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeRegionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeRegions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRegions require credential")
@@ -3069,6 +3114,7 @@ func (c *Client) DescribeRestoreTimeRangeWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeRestoreTimeRangeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeRestoreTimeRange")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRestoreTimeRange require credential")
@@ -3130,6 +3176,7 @@ func (c *Client) DescribeRollbackTimeWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeRollbackTimeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeRollbackTime")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRollbackTime require credential")
@@ -3195,6 +3242,7 @@ func (c *Client) DescribeSlowlogsWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeSlowlogsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeSlowlogs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSlowlogs require credential")
@@ -3264,6 +3312,7 @@ func (c *Client) DescribeUploadBackupInfoWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeUploadBackupInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeUploadBackupInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUploadBackupInfo require credential")
@@ -3327,6 +3376,7 @@ func (c *Client) DescribeXEventsWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeXEventsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeXEvents")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeXEvents require credential")
@@ -3386,6 +3436,7 @@ func (c *Client) DescribeZonesWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeZonesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeZones")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeZones require credential")
@@ -3457,6 +3508,7 @@ func (c *Client) InquiryPriceCreateDBInstancesWithContext(ctx context.Context, r
     if request == nil {
         request = NewInquiryPriceCreateDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "InquiryPriceCreateDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InquiryPriceCreateDBInstances require credential")
@@ -3530,6 +3582,7 @@ func (c *Client) InquiryPriceUpgradeDBInstanceWithContext(ctx context.Context, r
     if request == nil {
         request = NewInquiryPriceUpgradeDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "InquiryPriceUpgradeDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InquiryPriceUpgradeDBInstance require credential")
@@ -3607,6 +3660,7 @@ func (c *Client) ModifyAccountPrivilegeWithContext(ctx context.Context, request 
     if request == nil {
         request = NewModifyAccountPrivilegeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyAccountPrivilege")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyAccountPrivilege require credential")
@@ -3672,6 +3726,7 @@ func (c *Client) ModifyAccountRemarkWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyAccountRemarkRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyAccountRemark")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyAccountRemark require credential")
@@ -3741,6 +3796,7 @@ func (c *Client) ModifyBackupMigrationWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyBackupMigrationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyBackupMigration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyBackupMigration require credential")
@@ -3802,6 +3858,7 @@ func (c *Client) ModifyBackupStrategyWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyBackupStrategyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyBackupStrategy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyBackupStrategy require credential")
@@ -3869,6 +3926,7 @@ func (c *Client) ModifyDBEncryptAttributesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewModifyDBEncryptAttributesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyDBEncryptAttributes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBEncryptAttributes require credential")
@@ -3930,6 +3988,7 @@ func (c *Client) ModifyDBInstanceNameWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyDBInstanceNameRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyDBInstanceName")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBInstanceName require credential")
@@ -4023,6 +4082,7 @@ func (c *Client) ModifyDBInstanceNetworkWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyDBInstanceNetworkRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyDBInstanceNetwork")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBInstanceNetwork require credential")
@@ -4084,6 +4144,7 @@ func (c *Client) ModifyDBInstanceProjectWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyDBInstanceProjectRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyDBInstanceProject")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBInstanceProject require credential")
@@ -4157,6 +4218,7 @@ func (c *Client) ModifyDBNameWithContext(ctx context.Context, request *ModifyDBN
     if request == nil {
         request = NewModifyDBNameRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyDBName")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBName require credential")
@@ -4224,6 +4286,7 @@ func (c *Client) ModifyDBRemarkWithContext(ctx context.Context, request *ModifyD
     if request == nil {
         request = NewModifyDBRemarkRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyDBRemark")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBRemark require credential")
@@ -4285,6 +4348,7 @@ func (c *Client) ModifyDReadableWithContext(ctx context.Context, request *Modify
     if request == nil {
         request = NewModifyDReadableRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyDReadable")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDReadable require credential")
@@ -4350,6 +4414,7 @@ func (c *Client) ModifyDatabaseCDCWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyDatabaseCDCRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyDatabaseCDC")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDatabaseCDC require credential")
@@ -4415,6 +4480,7 @@ func (c *Client) ModifyDatabaseCTWithContext(ctx context.Context, request *Modif
     if request == nil {
         request = NewModifyDatabaseCTRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyDatabaseCT")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDatabaseCT require credential")
@@ -4478,6 +4544,7 @@ func (c *Client) ModifyDatabaseMdfWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyDatabaseMdfRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyDatabaseMdf")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDatabaseMdf require credential")
@@ -4547,6 +4614,7 @@ func (c *Client) ModifyIncrementalMigrationWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyIncrementalMigrationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyIncrementalMigration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyIncrementalMigration require credential")
@@ -4602,6 +4670,7 @@ func (c *Client) ModifyInstanceEncryptAttributesWithContext(ctx context.Context,
     if request == nil {
         request = NewModifyInstanceEncryptAttributesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyInstanceEncryptAttributes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyInstanceEncryptAttributes require credential")
@@ -4671,6 +4740,7 @@ func (c *Client) ModifyInstanceParamWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyInstanceParamRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyInstanceParam")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyInstanceParam require credential")
@@ -4750,6 +4820,7 @@ func (c *Client) ModifyMigrationWithContext(ctx context.Context, request *Modify
     if request == nil {
         request = NewModifyMigrationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyMigration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyMigration require credential")
@@ -4807,6 +4878,7 @@ func (c *Client) OpenInterCommunicationWithContext(ctx context.Context, request 
     if request == nil {
         request = NewOpenInterCommunicationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "OpenInterCommunication")
     
     if c.GetCredential() == nil {
         return nil, errors.New("OpenInterCommunication require credential")
@@ -4866,6 +4938,7 @@ func (c *Client) RecycleDBInstanceWithContext(ctx context.Context, request *Recy
     if request == nil {
         request = NewRecycleDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "RecycleDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecycleDBInstance require credential")
@@ -4935,6 +5008,7 @@ func (c *Client) ResetAccountPasswordWithContext(ctx context.Context, request *R
     if request == nil {
         request = NewResetAccountPasswordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ResetAccountPassword")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ResetAccountPassword require credential")
@@ -4996,6 +5070,7 @@ func (c *Client) RestartDBInstanceWithContext(ctx context.Context, request *Rest
     if request == nil {
         request = NewRestartDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "RestartDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RestartDBInstance require credential")
@@ -5069,6 +5144,7 @@ func (c *Client) RestoreInstanceWithContext(ctx context.Context, request *Restor
     if request == nil {
         request = NewRestoreInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "RestoreInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RestoreInstance require credential")
@@ -5140,6 +5216,7 @@ func (c *Client) RollbackInstanceWithContext(ctx context.Context, request *Rollb
     if request == nil {
         request = NewRollbackInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "RollbackInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RollbackInstance require credential")
@@ -5207,6 +5284,7 @@ func (c *Client) RunMigrationWithContext(ctx context.Context, request *RunMigrat
     if request == nil {
         request = NewRunMigrationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "RunMigration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RunMigration require credential")
@@ -5278,6 +5356,7 @@ func (c *Client) StartBackupMigrationWithContext(ctx context.Context, request *S
     if request == nil {
         request = NewStartBackupMigrationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "StartBackupMigration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartBackupMigration require credential")
@@ -5349,6 +5428,7 @@ func (c *Client) StartIncrementalMigrationWithContext(ctx context.Context, reque
     if request == nil {
         request = NewStartIncrementalMigrationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "StartIncrementalMigration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartIncrementalMigration require credential")
@@ -5410,6 +5490,7 @@ func (c *Client) StartInstanceXEventWithContext(ctx context.Context, request *St
     if request == nil {
         request = NewStartInstanceXEventRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "StartInstanceXEvent")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartInstanceXEvent require credential")
@@ -5465,6 +5546,7 @@ func (c *Client) TerminateDBInstanceWithContext(ctx context.Context, request *Te
     if request == nil {
         request = NewTerminateDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "TerminateDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("TerminateDBInstance require credential")
@@ -5536,6 +5618,7 @@ func (c *Client) UpgradeDBInstanceWithContext(ctx context.Context, request *Upgr
     if request == nil {
         request = NewUpgradeDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "UpgradeDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpgradeDBInstance require credential")

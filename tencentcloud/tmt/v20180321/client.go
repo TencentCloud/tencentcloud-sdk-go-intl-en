@@ -134,6 +134,7 @@ func (c *Client) TextTranslateWithContext(ctx context.Context, request *TextTran
     if request == nil {
         request = NewTextTranslateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tmt", APIVersion, "TextTranslate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("TextTranslate require credential")

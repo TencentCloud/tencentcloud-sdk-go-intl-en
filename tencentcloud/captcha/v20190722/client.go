@@ -88,6 +88,7 @@ func (c *Client) DescribeCaptchaResultWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeCaptchaResultRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "captcha", APIVersion, "DescribeCaptchaResult")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCaptchaResult require credential")

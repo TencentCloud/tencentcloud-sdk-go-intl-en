@@ -114,6 +114,7 @@ func (c *Client) BankCardOCRWithContext(ctx context.Context, request *BankCardOC
     if request == nil {
         request = NewBankCardOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "BankCardOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BankCardOCR require credential")
@@ -197,6 +198,7 @@ func (c *Client) ExtractDocMultiWithContext(ctx context.Context, request *Extrac
     if request == nil {
         request = NewExtractDocMultiRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "ExtractDocMulti")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ExtractDocMulti require credential")
@@ -300,6 +302,7 @@ func (c *Client) GeneralAccurateOCRWithContext(ctx context.Context, request *Gen
     if request == nil {
         request = NewGeneralAccurateOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "GeneralAccurateOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GeneralAccurateOCR require credential")
@@ -395,6 +398,7 @@ func (c *Client) GeneralBasicOCRWithContext(ctx context.Context, request *Genera
     if request == nil {
         request = NewGeneralBasicOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "GeneralBasicOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GeneralBasicOCR require credential")
@@ -472,6 +476,7 @@ func (c *Client) HKIDCardOCRWithContext(ctx context.Context, request *HKIDCardOC
     if request == nil {
         request = NewHKIDCardOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "HKIDCardOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("HKIDCardOCR require credential")
@@ -549,6 +554,7 @@ func (c *Client) HmtResidentPermitOCRWithContext(ctx context.Context, request *H
     if request == nil {
         request = NewHmtResidentPermitOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "HmtResidentPermitOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("HmtResidentPermitOCR require credential")
@@ -822,6 +828,7 @@ func (c *Client) IDCardOCRWithContext(ctx context.Context, request *IDCardOCRReq
     if request == nil {
         request = NewIDCardOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "IDCardOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("IDCardOCR require credential")
@@ -897,6 +904,7 @@ func (c *Client) LicensePlateOCRWithContext(ctx context.Context, request *Licens
     if request == nil {
         request = NewLicensePlateOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "LicensePlateOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("LicensePlateOCR require credential")
@@ -976,6 +984,7 @@ func (c *Client) MLIDCardOCRWithContext(ctx context.Context, request *MLIDCardOC
     if request == nil {
         request = NewMLIDCardOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "MLIDCardOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("MLIDCardOCR require credential")
@@ -1055,6 +1064,7 @@ func (c *Client) MLIDPassportOCRWithContext(ctx context.Context, request *MLIDPa
     if request == nil {
         request = NewMLIDPassportOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "MLIDPassportOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("MLIDPassportOCR require credential")
@@ -1128,6 +1138,7 @@ func (c *Client) MainlandPermitOCRWithContext(ctx context.Context, request *Main
     if request == nil {
         request = NewMainlandPermitOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "MainlandPermitOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("MainlandPermitOCR require credential")
@@ -1201,6 +1212,7 @@ func (c *Client) PermitOCRWithContext(ctx context.Context, request *PermitOCRReq
     if request == nil {
         request = NewPermitOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "PermitOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("PermitOCR require credential")
@@ -1266,6 +1278,7 @@ func (c *Client) RecognizeBrazilDriverLicenseOCRWithContext(ctx context.Context,
     if request == nil {
         request = NewRecognizeBrazilDriverLicenseOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeBrazilDriverLicenseOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizeBrazilDriverLicenseOCR require credential")
@@ -1325,6 +1338,7 @@ func (c *Client) RecognizeBrazilIDCardOCRWithContext(ctx context.Context, reques
     if request == nil {
         request = NewRecognizeBrazilIDCardOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeBrazilIDCardOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizeBrazilIDCardOCR require credential")
@@ -1386,6 +1400,7 @@ func (c *Client) RecognizeBrazilRNEOCRWithContext(ctx context.Context, request *
     if request == nil {
         request = NewRecognizeBrazilRNEOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeBrazilRNEOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizeBrazilRNEOCR require credential")
@@ -1445,6 +1460,7 @@ func (c *Client) RecognizeBrazilRNMOCRWithContext(ctx context.Context, request *
     if request == nil {
         request = NewRecognizeBrazilRNMOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeBrazilRNMOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizeBrazilRNMOCR require credential")
@@ -2018,6 +2034,7 @@ func (c *Client) RecognizeGeneralInvoiceWithContext(ctx context.Context, request
     if request == nil {
         request = NewRecognizeGeneralInvoiceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeGeneralInvoice")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizeGeneralInvoice require credential")
@@ -2093,6 +2110,7 @@ func (c *Client) RecognizeIndonesiaIDCardOCRWithContext(ctx context.Context, req
     if request == nil {
         request = NewRecognizeIndonesiaIDCardOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeIndonesiaIDCardOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizeIndonesiaIDCardOCR require credential")
@@ -2158,6 +2176,7 @@ func (c *Client) RecognizeKoreanDrivingLicenseOCRWithContext(ctx context.Context
     if request == nil {
         request = NewRecognizeKoreanDrivingLicenseOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeKoreanDrivingLicenseOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizeKoreanDrivingLicenseOCR require credential")
@@ -2223,6 +2242,7 @@ func (c *Client) RecognizeKoreanIDCardOCRWithContext(ctx context.Context, reques
     if request == nil {
         request = NewRecognizeKoreanIDCardOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeKoreanIDCardOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizeKoreanIDCardOCR require credential")
@@ -2298,6 +2318,7 @@ func (c *Client) RecognizeMacaoIDCardOCRWithContext(ctx context.Context, request
     if request == nil {
         request = NewRecognizeMacaoIDCardOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeMacaoIDCardOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizeMacaoIDCardOCR require credential")
@@ -2389,6 +2410,7 @@ func (c *Client) RecognizeMainlandIDCardOCRWithContext(ctx context.Context, requ
     if request == nil {
         request = NewRecognizeMainlandIDCardOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeMainlandIDCardOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizeMainlandIDCardOCR require credential")
@@ -2448,6 +2470,7 @@ func (c *Client) RecognizeMexicoVTIDWithContext(ctx context.Context, request *Re
     if request == nil {
         request = NewRecognizeMexicoVTIDRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeMexicoVTID")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizeMexicoVTID require credential")
@@ -2513,6 +2536,7 @@ func (c *Client) RecognizePhilippinesDrivingLicenseOCRWithContext(ctx context.Co
     if request == nil {
         request = NewRecognizePhilippinesDrivingLicenseOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizePhilippinesDrivingLicenseOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizePhilippinesDrivingLicenseOCR require credential")
@@ -2578,6 +2602,7 @@ func (c *Client) RecognizePhilippinesSssIDOCRWithContext(ctx context.Context, re
     if request == nil {
         request = NewRecognizePhilippinesSssIDOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizePhilippinesSssIDOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizePhilippinesSssIDOCR require credential")
@@ -2643,6 +2668,7 @@ func (c *Client) RecognizePhilippinesTinIDOCRWithContext(ctx context.Context, re
     if request == nil {
         request = NewRecognizePhilippinesTinIDOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizePhilippinesTinIDOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizePhilippinesTinIDOCR require credential")
@@ -2708,6 +2734,7 @@ func (c *Client) RecognizePhilippinesUMIDOCRWithContext(ctx context.Context, req
     if request == nil {
         request = NewRecognizePhilippinesUMIDOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizePhilippinesUMIDOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizePhilippinesUMIDOCR require credential")
@@ -2781,6 +2808,7 @@ func (c *Client) RecognizePhilippinesVoteIDOCRWithContext(ctx context.Context, r
     if request == nil {
         request = NewRecognizePhilippinesVoteIDOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizePhilippinesVoteIDOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizePhilippinesVoteIDOCR require credential")
@@ -2850,6 +2878,7 @@ func (c *Client) RecognizeSingaporeIDCardOCRWithContext(ctx context.Context, req
     if request == nil {
         request = NewRecognizeSingaporeIDCardOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeSingaporeIDCardOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizeSingaporeIDCardOCR require credential")
@@ -2929,6 +2958,7 @@ func (c *Client) RecognizeTableAccurateOCRWithContext(ctx context.Context, reque
     if request == nil {
         request = NewRecognizeTableAccurateOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeTableAccurateOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizeTableAccurateOCR require credential")
@@ -3008,6 +3038,7 @@ func (c *Client) RecognizeThaiIDCardOCRWithContext(ctx context.Context, request 
     if request == nil {
         request = NewRecognizeThaiIDCardOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeThaiIDCardOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizeThaiIDCardOCR require credential")
@@ -3087,6 +3118,7 @@ func (c *Client) RecognizeThaiPinkCardWithContext(ctx context.Context, request *
     if request == nil {
         request = NewRecognizeThaiPinkCardRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeThaiPinkCard")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecognizeThaiPinkCard require credential")
@@ -3164,6 +3196,7 @@ func (c *Client) SealOCRWithContext(ctx context.Context, request *SealOCRRequest
     if request == nil {
         request = NewSealOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "SealOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SealOCR require credential")
@@ -3239,6 +3272,7 @@ func (c *Client) SmartStructuralOCRV2WithContext(ctx context.Context, request *S
     if request == nil {
         request = NewSmartStructuralOCRV2Request()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "SmartStructuralOCRV2")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SmartStructuralOCRV2 require credential")
@@ -3314,6 +3348,7 @@ func (c *Client) SmartStructuralProWithContext(ctx context.Context, request *Sma
     if request == nil {
         request = NewSmartStructuralProRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "SmartStructuralPro")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SmartStructuralPro require credential")
@@ -3395,6 +3430,7 @@ func (c *Client) TableOCRWithContext(ctx context.Context, request *TableOCRReque
     if request == nil {
         request = NewTableOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "TableOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("TableOCR require credential")
@@ -3464,6 +3500,7 @@ func (c *Client) VinOCRWithContext(ctx context.Context, request *VinOCRRequest) 
     if request == nil {
         request = NewVinOCRRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "VinOCR")
     
     if c.GetCredential() == nil {
         return nil, errors.New("VinOCR require credential")

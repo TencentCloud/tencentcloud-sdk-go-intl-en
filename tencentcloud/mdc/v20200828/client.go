@@ -92,6 +92,7 @@ func (c *Client) CreateStreamLinkFlowWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateStreamLinkFlowRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdc", APIVersion, "CreateStreamLinkFlow")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateStreamLinkFlow require credential")
@@ -151,6 +152,7 @@ func (c *Client) CreateStreamLinkInputWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCreateStreamLinkInputRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdc", APIVersion, "CreateStreamLinkInput")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateStreamLinkInput require credential")
@@ -212,6 +214,7 @@ func (c *Client) CreateStreamLinkOutputInfoWithContext(ctx context.Context, requ
     if request == nil {
         request = NewCreateStreamLinkOutputInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdc", APIVersion, "CreateStreamLinkOutputInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateStreamLinkOutputInfo require credential")
@@ -263,6 +266,7 @@ func (c *Client) DeleteStreamLinkFlowWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDeleteStreamLinkFlowRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdc", APIVersion, "DeleteStreamLinkFlow")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteStreamLinkFlow require credential")
@@ -318,6 +322,7 @@ func (c *Client) DeleteStreamLinkOutputWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDeleteStreamLinkOutputRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdc", APIVersion, "DeleteStreamLinkOutput")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteStreamLinkOutput require credential")
@@ -369,6 +374,7 @@ func (c *Client) DescribeStreamLinkFlowWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeStreamLinkFlowRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdc", APIVersion, "DescribeStreamLinkFlow")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamLinkFlow require credential")
@@ -436,6 +442,7 @@ func (c *Client) DescribeStreamLinkFlowLogsWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeStreamLinkFlowLogsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdc", APIVersion, "DescribeStreamLinkFlowLogs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamLinkFlowLogs require credential")
@@ -501,6 +508,7 @@ func (c *Client) DescribeStreamLinkFlowMediaStatisticsWithContext(ctx context.Co
     if request == nil {
         request = NewDescribeStreamLinkFlowMediaStatisticsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdc", APIVersion, "DescribeStreamLinkFlowMediaStatistics")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamLinkFlowMediaStatistics require credential")
@@ -554,6 +562,7 @@ func (c *Client) DescribeStreamLinkFlowRealtimeStatusWithContext(ctx context.Con
     if request == nil {
         request = NewDescribeStreamLinkFlowRealtimeStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdc", APIVersion, "DescribeStreamLinkFlowRealtimeStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamLinkFlowRealtimeStatus require credential")
@@ -619,6 +628,7 @@ func (c *Client) DescribeStreamLinkFlowSRTStatisticsWithContext(ctx context.Cont
     if request == nil {
         request = NewDescribeStreamLinkFlowSRTStatisticsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdc", APIVersion, "DescribeStreamLinkFlowSRTStatistics")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamLinkFlowSRTStatistics require credential")
@@ -684,6 +694,7 @@ func (c *Client) DescribeStreamLinkFlowStatisticsWithContext(ctx context.Context
     if request == nil {
         request = NewDescribeStreamLinkFlowStatisticsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdc", APIVersion, "DescribeStreamLinkFlowStatistics")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamLinkFlowStatistics require credential")
@@ -739,6 +750,7 @@ func (c *Client) DescribeStreamLinkFlowsWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeStreamLinkFlowsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdc", APIVersion, "DescribeStreamLinkFlows")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamLinkFlows require credential")
@@ -788,6 +800,7 @@ func (c *Client) DescribeStreamLinkRegionsWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeStreamLinkRegionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdc", APIVersion, "DescribeStreamLinkRegions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamLinkRegions require credential")
@@ -843,6 +856,7 @@ func (c *Client) ModifyStreamLinkFlowWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyStreamLinkFlowRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdc", APIVersion, "ModifyStreamLinkFlow")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyStreamLinkFlow require credential")
@@ -900,6 +914,7 @@ func (c *Client) ModifyStreamLinkInputWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyStreamLinkInputRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdc", APIVersion, "ModifyStreamLinkInput")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyStreamLinkInput require credential")
@@ -959,6 +974,7 @@ func (c *Client) ModifyStreamLinkOutputInfoWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyStreamLinkOutputInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdc", APIVersion, "ModifyStreamLinkOutputInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyStreamLinkOutputInfo require credential")
@@ -1014,6 +1030,7 @@ func (c *Client) StartStreamLinkFlowWithContext(ctx context.Context, request *St
     if request == nil {
         request = NewStartStreamLinkFlowRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdc", APIVersion, "StartStreamLinkFlow")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartStreamLinkFlow require credential")
@@ -1067,6 +1084,7 @@ func (c *Client) StopStreamLinkFlowWithContext(ctx context.Context, request *Sto
     if request == nil {
         request = NewStopStreamLinkFlowRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdc", APIVersion, "StopStreamLinkFlow")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopStreamLinkFlow require credential")

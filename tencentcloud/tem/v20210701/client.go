@@ -112,6 +112,7 @@ func (c *Client) CreateApplicationWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateApplicationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "CreateApplication")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateApplication require credential")
@@ -191,6 +192,7 @@ func (c *Client) CreateApplicationAutoscalerWithContext(ctx context.Context, req
     if request == nil {
         request = NewCreateApplicationAutoscalerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "CreateApplicationAutoscaler")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateApplicationAutoscaler require credential")
@@ -282,6 +284,7 @@ func (c *Client) CreateApplicationServiceWithContext(ctx context.Context, reques
     if request == nil {
         request = NewCreateApplicationServiceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "CreateApplicationService")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateApplicationService require credential")
@@ -341,6 +344,7 @@ func (c *Client) CreateConfigDataWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateConfigDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "CreateConfigData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateConfigData require credential")
@@ -396,6 +400,7 @@ func (c *Client) CreateCosTokenWithContext(ctx context.Context, request *CreateC
     if request == nil {
         request = NewCreateCosTokenRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "CreateCosToken")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateCosToken require credential")
@@ -467,6 +472,7 @@ func (c *Client) CreateEnvironmentWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateEnvironmentRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "CreateEnvironment")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateEnvironment require credential")
@@ -534,6 +540,7 @@ func (c *Client) CreateLogConfigWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateLogConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "CreateLogConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateLogConfig require credential")
@@ -601,6 +608,7 @@ func (c *Client) CreateResourceWithContext(ctx context.Context, request *CreateR
     if request == nil {
         request = NewCreateResourceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "CreateResource")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateResource require credential")
@@ -698,6 +706,7 @@ func (c *Client) DeleteApplicationWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteApplicationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DeleteApplication")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteApplication require credential")
@@ -755,6 +764,7 @@ func (c *Client) DeleteApplicationAutoscalerWithContext(ctx context.Context, req
     if request == nil {
         request = NewDeleteApplicationAutoscalerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DeleteApplicationAutoscaler")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteApplicationAutoscaler require credential")
@@ -818,6 +828,7 @@ func (c *Client) DeleteApplicationServiceWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDeleteApplicationServiceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DeleteApplicationService")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteApplicationService require credential")
@@ -873,6 +884,7 @@ func (c *Client) DeleteIngressWithContext(ctx context.Context, request *DeleteIn
     if request == nil {
         request = NewDeleteIngressRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DeleteIngress")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteIngress require credential")
@@ -1016,6 +1028,7 @@ func (c *Client) DeployApplicationWithContext(ctx context.Context, request *Depl
     if request == nil {
         request = NewDeployApplicationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DeployApplication")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeployApplication require credential")
@@ -1077,6 +1090,7 @@ func (c *Client) DescribeApplicationAutoscalerListWithContext(ctx context.Contex
     if request == nil {
         request = NewDescribeApplicationAutoscalerListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeApplicationAutoscalerList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationAutoscalerList require credential")
@@ -1158,6 +1172,7 @@ func (c *Client) DescribeApplicationInfoWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeApplicationInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeApplicationInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationInfo require credential")
@@ -1227,6 +1242,7 @@ func (c *Client) DescribeApplicationPodsWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeApplicationPodsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeApplicationPods")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationPods require credential")
@@ -1288,6 +1304,7 @@ func (c *Client) DescribeApplicationServiceListWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeApplicationServiceListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeApplicationServiceList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationServiceList require credential")
@@ -1343,6 +1360,7 @@ func (c *Client) DescribeApplicationsWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeApplicationsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeApplications")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplications require credential")
@@ -1404,6 +1422,7 @@ func (c *Client) DescribeApplicationsStatusWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeApplicationsStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeApplicationsStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationsStatus require credential")
@@ -1459,6 +1478,7 @@ func (c *Client) DescribeConfigDataWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeConfigDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeConfigData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeConfigData require credential")
@@ -1518,6 +1538,7 @@ func (c *Client) DescribeConfigDataListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeConfigDataListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeConfigDataList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeConfigDataList require credential")
@@ -1577,6 +1598,7 @@ func (c *Client) DescribeEnvironmentWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeEnvironmentRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeEnvironment")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeEnvironment require credential")
@@ -1634,6 +1656,7 @@ func (c *Client) DescribeEnvironmentStatusWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeEnvironmentStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeEnvironmentStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeEnvironmentStatus require credential")
@@ -1691,6 +1714,7 @@ func (c *Client) DescribeEnvironmentsWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeEnvironmentsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeEnvironments")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeEnvironments require credential")
@@ -1748,6 +1772,7 @@ func (c *Client) DescribeIngressWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeIngressRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeIngress")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIngress require credential")
@@ -1807,6 +1832,7 @@ func (c *Client) DescribeIngressesWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeIngressesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeIngresses")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIngresses require credential")
@@ -1866,6 +1892,7 @@ func (c *Client) DescribeLogConfigWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeLogConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeLogConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLogConfig require credential")
@@ -1927,6 +1954,7 @@ func (c *Client) DescribePagedLogConfigListWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribePagedLogConfigListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribePagedLogConfigList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribePagedLogConfigList require credential")
@@ -1986,6 +2014,7 @@ func (c *Client) DescribeRelatedIngressesWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeRelatedIngressesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeRelatedIngresses")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRelatedIngresses require credential")
@@ -2039,6 +2068,7 @@ func (c *Client) DestroyConfigDataWithContext(ctx context.Context, request *Dest
     if request == nil {
         request = NewDestroyConfigDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DestroyConfigData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DestroyConfigData require credential")
@@ -2094,6 +2124,7 @@ func (c *Client) DestroyEnvironmentWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDestroyEnvironmentRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DestroyEnvironment")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DestroyEnvironment require credential")
@@ -2151,6 +2182,7 @@ func (c *Client) DestroyLogConfigWithContext(ctx context.Context, request *Destr
     if request == nil {
         request = NewDestroyLogConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DestroyLogConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DestroyLogConfig require credential")
@@ -2202,6 +2234,7 @@ func (c *Client) DisableApplicationAutoscalerWithContext(ctx context.Context, re
     if request == nil {
         request = NewDisableApplicationAutoscalerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DisableApplicationAutoscaler")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DisableApplicationAutoscaler require credential")
@@ -2255,6 +2288,7 @@ func (c *Client) EnableApplicationAutoscalerWithContext(ctx context.Context, req
     if request == nil {
         request = NewEnableApplicationAutoscalerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "EnableApplicationAutoscaler")
     
     if c.GetCredential() == nil {
         return nil, errors.New("EnableApplicationAutoscaler require credential")
@@ -2304,6 +2338,7 @@ func (c *Client) GenerateApplicationPackageDownloadUrlWithContext(ctx context.Co
     if request == nil {
         request = NewGenerateApplicationPackageDownloadUrlRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "GenerateApplicationPackageDownloadUrl")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GenerateApplicationPackageDownloadUrl require credential")
@@ -2369,6 +2404,7 @@ func (c *Client) ModifyApplicationAutoscalerWithContext(ctx context.Context, req
     if request == nil {
         request = NewModifyApplicationAutoscalerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "ModifyApplicationAutoscaler")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyApplicationAutoscaler require credential")
@@ -2426,6 +2462,7 @@ func (c *Client) ModifyApplicationInfoWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyApplicationInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "ModifyApplicationInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyApplicationInfo require credential")
@@ -2499,6 +2536,7 @@ func (c *Client) ModifyApplicationServiceWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyApplicationServiceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "ModifyApplicationService")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyApplicationService require credential")
@@ -2552,6 +2590,7 @@ func (c *Client) ModifyConfigDataWithContext(ctx context.Context, request *Modif
     if request == nil {
         request = NewModifyConfigDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "ModifyConfigData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyConfigData require credential")
@@ -2613,6 +2652,7 @@ func (c *Client) ModifyEnvironmentWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyEnvironmentRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "ModifyEnvironment")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyEnvironment require credential")
@@ -2672,6 +2712,7 @@ func (c *Client) ModifyIngressWithContext(ctx context.Context, request *ModifyIn
     if request == nil {
         request = NewModifyIngressRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "ModifyIngress")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyIngress require credential")
@@ -2727,6 +2768,7 @@ func (c *Client) ModifyLogConfigWithContext(ctx context.Context, request *Modify
     if request == nil {
         request = NewModifyLogConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "ModifyLogConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyLogConfig require credential")
@@ -2790,6 +2832,7 @@ func (c *Client) RestartApplicationWithContext(ctx context.Context, request *Res
     if request == nil {
         request = NewRestartApplicationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "RestartApplication")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RestartApplication require credential")
@@ -2841,6 +2884,7 @@ func (c *Client) RestartApplicationPodWithContext(ctx context.Context, request *
     if request == nil {
         request = NewRestartApplicationPodRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "RestartApplicationPod")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RestartApplicationPod require credential")
@@ -2940,6 +2984,7 @@ func (c *Client) RollingUpdateApplicationByVersionWithContext(ctx context.Contex
     if request == nil {
         request = NewRollingUpdateApplicationByVersionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "RollingUpdateApplicationByVersion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RollingUpdateApplicationByVersion require credential")
@@ -2997,6 +3042,7 @@ func (c *Client) StopApplicationWithContext(ctx context.Context, request *StopAp
     if request == nil {
         request = NewStopApplicationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "StopApplication")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopApplication require credential")

@@ -108,6 +108,7 @@ func (c *Client) BatchSendEmailWithContext(ctx context.Context, request *BatchSe
     if request == nil {
         request = NewBatchSendEmailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "BatchSendEmail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchSendEmail require credential")
@@ -183,6 +184,7 @@ func (c *Client) CreateAddressUnsubscribeConfigWithContext(ctx context.Context, 
     if request == nil {
         request = NewCreateAddressUnsubscribeConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "CreateAddressUnsubscribeConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAddressUnsubscribeConfig require credential")
@@ -254,6 +256,7 @@ func (c *Client) CreateEmailAddressWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreateEmailAddressRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "CreateEmailAddress")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateEmailAddress require credential")
@@ -323,6 +326,7 @@ func (c *Client) CreateEmailIdentityWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreateEmailIdentityRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "CreateEmailIdentity")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateEmailIdentity require credential")
@@ -396,6 +400,7 @@ func (c *Client) CreateEmailTemplateWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreateEmailTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "CreateEmailTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateEmailTemplate require credential")
@@ -453,6 +458,7 @@ func (c *Client) CreateReceiverWithContext(ctx context.Context, request *CreateR
     if request == nil {
         request = NewCreateReceiverRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "CreateReceiver")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateReceiver require credential")
@@ -522,6 +528,7 @@ func (c *Client) CreateReceiverDetailWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateReceiverDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "CreateReceiverDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateReceiverDetail require credential")
@@ -591,6 +598,7 @@ func (c *Client) DeleteAddressUnsubscribeConfigWithContext(ctx context.Context, 
     if request == nil {
         request = NewDeleteAddressUnsubscribeConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "DeleteAddressUnsubscribeConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteAddressUnsubscribeConfig require credential")
@@ -646,6 +654,7 @@ func (c *Client) DeleteBlackListWithContext(ctx context.Context, request *Delete
     if request == nil {
         request = NewDeleteBlackListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "DeleteBlackList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteBlackList require credential")
@@ -709,6 +718,7 @@ func (c *Client) DeleteEmailAddressWithContext(ctx context.Context, request *Del
     if request == nil {
         request = NewDeleteEmailAddressRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "DeleteEmailAddress")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteEmailAddress require credential")
@@ -770,6 +780,7 @@ func (c *Client) DeleteEmailIdentityWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDeleteEmailIdentityRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "DeleteEmailIdentity")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteEmailIdentity require credential")
@@ -831,6 +842,7 @@ func (c *Client) DeleteEmailTemplateWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDeleteEmailTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "DeleteEmailTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteEmailTemplate require credential")
@@ -884,6 +896,7 @@ func (c *Client) DeleteReceiverWithContext(ctx context.Context, request *DeleteR
     if request == nil {
         request = NewDeleteReceiverRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "DeleteReceiver")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteReceiver require credential")
@@ -947,6 +960,7 @@ func (c *Client) GetEmailIdentityWithContext(ctx context.Context, request *GetEm
     if request == nil {
         request = NewGetEmailIdentityRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "GetEmailIdentity")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetEmailIdentity require credential")
@@ -1010,6 +1024,7 @@ func (c *Client) GetEmailTemplateWithContext(ctx context.Context, request *GetEm
     if request == nil {
         request = NewGetEmailTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "GetEmailTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetEmailTemplate require credential")
@@ -1125,6 +1140,7 @@ func (c *Client) GetSendEmailStatusWithContext(ctx context.Context, request *Get
     if request == nil {
         request = NewGetSendEmailStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "GetSendEmailStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetSendEmailStatus require credential")
@@ -1184,6 +1200,7 @@ func (c *Client) GetStatisticsReportWithContext(ctx context.Context, request *Ge
     if request == nil {
         request = NewGetStatisticsReportRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "GetStatisticsReport")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetStatisticsReport require credential")
@@ -1243,6 +1260,7 @@ func (c *Client) ListAddressUnsubscribeConfigWithContext(ctx context.Context, re
     if request == nil {
         request = NewListAddressUnsubscribeConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "ListAddressUnsubscribeConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListAddressUnsubscribeConfig require credential")
@@ -1302,6 +1320,7 @@ func (c *Client) ListBlackEmailAddressWithContext(ctx context.Context, request *
     if request == nil {
         request = NewListBlackEmailAddressRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "ListBlackEmailAddress")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListBlackEmailAddress require credential")
@@ -1363,6 +1382,7 @@ func (c *Client) ListEmailAddressWithContext(ctx context.Context, request *ListE
     if request == nil {
         request = NewListEmailAddressRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "ListEmailAddress")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListEmailAddress require credential")
@@ -1424,6 +1444,7 @@ func (c *Client) ListEmailIdentitiesWithContext(ctx context.Context, request *Li
     if request == nil {
         request = NewListEmailIdentitiesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "ListEmailIdentities")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListEmailIdentities require credential")
@@ -1485,6 +1506,7 @@ func (c *Client) ListEmailTemplatesWithContext(ctx context.Context, request *Lis
     if request == nil {
         request = NewListEmailTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "ListEmailTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListEmailTemplates require credential")
@@ -1536,6 +1558,7 @@ func (c *Client) ListReceiversWithContext(ctx context.Context, request *ListRece
     if request == nil {
         request = NewListReceiversRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "ListReceivers")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListReceivers require credential")
@@ -1585,6 +1608,7 @@ func (c *Client) ListSendTasksWithContext(ctx context.Context, request *ListSend
     if request == nil {
         request = NewListSendTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "ListSendTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListSendTasks require credential")
@@ -1714,6 +1738,7 @@ func (c *Client) SendEmailWithContext(ctx context.Context, request *SendEmailReq
     if request == nil {
         request = NewSendEmailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "SendEmail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SendEmail require credential")
@@ -1843,6 +1868,7 @@ func (c *Client) UpdateAddressUnsubscribeConfigWithContext(ctx context.Context, 
     if request == nil {
         request = NewUpdateAddressUnsubscribeConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "UpdateAddressUnsubscribeConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateAddressUnsubscribeConfig require credential")
@@ -1908,6 +1934,7 @@ func (c *Client) UpdateEmailIdentityWithContext(ctx context.Context, request *Up
     if request == nil {
         request = NewUpdateEmailIdentityRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "UpdateEmailIdentity")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateEmailIdentity require credential")
@@ -1963,6 +1990,7 @@ func (c *Client) UpdateEmailSmtpPassWordWithContext(ctx context.Context, request
     if request == nil {
         request = NewUpdateEmailSmtpPassWordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "UpdateEmailSmtpPassWord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateEmailSmtpPassWord require credential")
@@ -2032,6 +2060,7 @@ func (c *Client) UpdateEmailTemplateWithContext(ctx context.Context, request *Up
     if request == nil {
         request = NewUpdateEmailTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "UpdateEmailTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateEmailTemplate require credential")

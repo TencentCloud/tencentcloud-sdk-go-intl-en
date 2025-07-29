@@ -114,6 +114,7 @@ func (c *Client) DescribeImageAnimateJobWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeImageAnimateJobRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vclm", APIVersion, "DescribeImageAnimateJob")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeImageAnimateJob require credential")
@@ -205,6 +206,7 @@ func (c *Client) SubmitImageAnimateJobWithContext(ctx context.Context, request *
     if request == nil {
         request = NewSubmitImageAnimateJobRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vclm", APIVersion, "SubmitImageAnimateJob")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SubmitImageAnimateJob require credential")

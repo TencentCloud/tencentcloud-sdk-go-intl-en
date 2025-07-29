@@ -76,6 +76,7 @@ func (c *Client) CreateCosTokenV2WithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateCosTokenV2Request()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "CreateCosTokenV2")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateCosTokenV2 require credential")
@@ -119,6 +120,7 @@ func (c *Client) CreateNamespaceWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateNamespaceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "CreateNamespace")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateNamespace require credential")
@@ -162,6 +164,7 @@ func (c *Client) CreateResourceWithContext(ctx context.Context, request *CreateR
     if request == nil {
         request = NewCreateResourceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "CreateResource")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateResource require credential")
@@ -211,6 +214,7 @@ func (c *Client) CreateServiceV2WithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateServiceV2Request()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "CreateServiceV2")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateServiceV2 require credential")
@@ -260,6 +264,7 @@ func (c *Client) DeleteIngressWithContext(ctx context.Context, request *DeleteIn
     if request == nil {
         request = NewDeleteIngressRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DeleteIngress")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteIngress require credential")
@@ -309,6 +314,7 @@ func (c *Client) DeployServiceV2WithContext(ctx context.Context, request *Deploy
     if request == nil {
         request = NewDeployServiceV2Request()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DeployServiceV2")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeployServiceV2 require credential")
@@ -358,6 +364,7 @@ func (c *Client) DescribeIngressWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeIngressRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeIngress")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIngress require credential")
@@ -407,6 +414,7 @@ func (c *Client) DescribeIngressesWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeIngressesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeIngresses")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIngresses require credential")
@@ -456,6 +464,7 @@ func (c *Client) DescribeNamespacesWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeNamespacesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeNamespaces")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeNamespaces require credential")
@@ -505,6 +514,7 @@ func (c *Client) DescribeRelatedIngressesWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeRelatedIngressesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeRelatedIngresses")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRelatedIngresses require credential")
@@ -554,6 +564,7 @@ func (c *Client) DescribeServiceRunPodListV2WithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeServiceRunPodListV2Request()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "DescribeServiceRunPodListV2")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeServiceRunPodListV2 require credential")
@@ -603,6 +614,7 @@ func (c *Client) GenerateDownloadUrlWithContext(ctx context.Context, request *Ge
     if request == nil {
         request = NewGenerateDownloadUrlRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "GenerateDownloadUrl")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GenerateDownloadUrl require credential")
@@ -652,6 +664,7 @@ func (c *Client) ModifyIngressWithContext(ctx context.Context, request *ModifyIn
     if request == nil {
         request = NewModifyIngressRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "ModifyIngress")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyIngress require credential")
@@ -701,6 +714,7 @@ func (c *Client) ModifyNamespaceWithContext(ctx context.Context, request *Modify
     if request == nil {
         request = NewModifyNamespaceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "ModifyNamespace")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyNamespace require credential")
@@ -750,6 +764,7 @@ func (c *Client) ModifyServiceInfoWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyServiceInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "ModifyServiceInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyServiceInfo require credential")
@@ -799,6 +814,7 @@ func (c *Client) RestartServiceRunPodWithContext(ctx context.Context, request *R
     if request == nil {
         request = NewRestartServiceRunPodRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tem", APIVersion, "RestartServiceRunPod")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RestartServiceRunPod require credential")

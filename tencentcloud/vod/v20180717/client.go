@@ -100,6 +100,7 @@ func (c *Client) ApplyUploadWithContext(ctx context.Context, request *ApplyUploa
     if request == nil {
         request = NewApplyUploadRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ApplyUpload")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ApplyUpload require credential")
@@ -157,6 +158,7 @@ func (c *Client) AttachMediaSubtitlesWithContext(ctx context.Context, request *A
     if request == nil {
         request = NewAttachMediaSubtitlesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "AttachMediaSubtitles")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AttachMediaSubtitles require credential")
@@ -214,6 +216,7 @@ func (c *Client) CloneCDNDomainWithContext(ctx context.Context, request *CloneCD
     if request == nil {
         request = NewCloneCDNDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CloneCDNDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CloneCDNDomain require credential")
@@ -271,6 +274,7 @@ func (c *Client) CommitUploadWithContext(ctx context.Context, request *CommitUpl
     if request == nil {
         request = NewCommitUploadRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CommitUpload")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CommitUpload require credential")
@@ -384,6 +388,7 @@ func (c *Client) ComposeMediaWithContext(ctx context.Context, request *ComposeMe
     if request == nil {
         request = NewComposeMediaRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ComposeMedia")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ComposeMedia require credential")
@@ -449,6 +454,7 @@ func (c *Client) ConfirmEventsWithContext(ctx context.Context, request *ConfirmE
     if request == nil {
         request = NewConfirmEventsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ConfirmEvents")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ConfirmEvents require credential")
@@ -520,6 +526,7 @@ func (c *Client) CreateAIAnalysisTemplateWithContext(ctx context.Context, reques
     if request == nil {
         request = NewCreateAIAnalysisTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateAIAnalysisTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAIAnalysisTemplate require credential")
@@ -599,6 +606,7 @@ func (c *Client) CreateAIRecognitionTemplateWithContext(ctx context.Context, req
     if request == nil {
         request = NewCreateAIRecognitionTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateAIRecognitionTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAIRecognitionTemplate require credential")
@@ -686,6 +694,7 @@ func (c *Client) CreateAdaptiveDynamicStreamingTemplateWithContext(ctx context.C
     if request == nil {
         request = NewCreateAdaptiveDynamicStreamingTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateAdaptiveDynamicStreamingTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAdaptiveDynamicStreamingTemplate require credential")
@@ -759,6 +768,7 @@ func (c *Client) CreateAnimatedGraphicsTemplateWithContext(ctx context.Context, 
     if request == nil {
         request = NewCreateAnimatedGraphicsTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateAnimatedGraphicsTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAnimatedGraphicsTemplate require credential")
@@ -818,6 +828,7 @@ func (c *Client) CreateCDNDomainWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateCDNDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateCDNDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateCDNDomain require credential")
@@ -897,6 +908,7 @@ func (c *Client) CreateClassWithContext(ctx context.Context, request *CreateClas
     if request == nil {
         request = NewCreateClassRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateClass")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateClass require credential")
@@ -994,6 +1006,7 @@ func (c *Client) CreateComplexAdaptiveDynamicStreamingTaskWithContext(ctx contex
     if request == nil {
         request = NewCreateComplexAdaptiveDynamicStreamingTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateComplexAdaptiveDynamicStreamingTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateComplexAdaptiveDynamicStreamingTask require credential")
@@ -1073,6 +1086,7 @@ func (c *Client) CreateContentReviewTemplateWithContext(ctx context.Context, req
     if request == nil {
         request = NewCreateContentReviewTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateContentReviewTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateContentReviewTemplate require credential")
@@ -1126,6 +1140,7 @@ func (c *Client) CreateDomainVerifyRecordWithContext(ctx context.Context, reques
     if request == nil {
         request = NewCreateDomainVerifyRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateDomainVerifyRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDomainVerifyRecord require credential")
@@ -1179,6 +1194,7 @@ func (c *Client) CreateEnhanceMediaTemplateWithContext(ctx context.Context, requ
     if request == nil {
         request = NewCreateEnhanceMediaTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateEnhanceMediaTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateEnhanceMediaTemplate require credential")
@@ -1250,6 +1266,7 @@ func (c *Client) CreateHeadTailTemplateWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateHeadTailTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateHeadTailTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateHeadTailTemplate require credential")
@@ -1319,6 +1336,7 @@ func (c *Client) CreateImageProcessingTemplateWithContext(ctx context.Context, r
     if request == nil {
         request = NewCreateImageProcessingTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateImageProcessingTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateImageProcessingTemplate require credential")
@@ -1392,6 +1410,7 @@ func (c *Client) CreateImageSpriteTemplateWithContext(ctx context.Context, reque
     if request == nil {
         request = NewCreateImageSpriteTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateImageSpriteTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateImageSpriteTemplate require credential")
@@ -1453,6 +1472,7 @@ func (c *Client) CreateJustInTimeTranscodeTemplateWithContext(ctx context.Contex
     if request == nil {
         request = NewCreateJustInTimeTranscodeTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateJustInTimeTranscodeTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateJustInTimeTranscodeTemplate require credential")
@@ -1510,6 +1530,7 @@ func (c *Client) CreatePersonSampleWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreatePersonSampleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreatePersonSample")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreatePersonSample require credential")
@@ -1573,6 +1594,7 @@ func (c *Client) CreateProcedureTemplateWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateProcedureTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateProcedureTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateProcedureTemplate require credential")
@@ -1628,6 +1650,7 @@ func (c *Client) CreateQualityInspectTemplateWithContext(ctx context.Context, re
     if request == nil {
         request = NewCreateQualityInspectTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateQualityInspectTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateQualityInspectTemplate require credential")
@@ -1679,6 +1702,7 @@ func (c *Client) CreateRebuildMediaTemplateWithContext(ctx context.Context, requ
     if request == nil {
         request = NewCreateRebuildMediaTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateRebuildMediaTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateRebuildMediaTemplate require credential")
@@ -1752,6 +1776,7 @@ func (c *Client) CreateReviewTemplateWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateReviewTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateReviewTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateReviewTemplate require credential")
@@ -1825,6 +1850,7 @@ func (c *Client) CreateRoundPlayWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateRoundPlayRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateRoundPlay")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateRoundPlay require credential")
@@ -1896,6 +1922,7 @@ func (c *Client) CreateSampleSnapshotTemplateWithContext(ctx context.Context, re
     if request == nil {
         request = NewCreateSampleSnapshotTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateSampleSnapshotTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateSampleSnapshotTemplate require credential")
@@ -1965,6 +1992,7 @@ func (c *Client) CreateSnapshotByTimeOffsetTemplateWithContext(ctx context.Conte
     if request == nil {
         request = NewCreateSnapshotByTimeOffsetTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateSnapshotByTimeOffsetTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateSnapshotByTimeOffsetTemplate require credential")
@@ -2038,6 +2066,7 @@ func (c *Client) CreateStorageRegionWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreateStorageRegionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateStorageRegion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateStorageRegion require credential")
@@ -2097,6 +2126,7 @@ func (c *Client) CreateSubAppIdWithContext(ctx context.Context, request *CreateS
     if request == nil {
         request = NewCreateSubAppIdRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateSubAppId")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateSubAppId require credential")
@@ -2160,6 +2190,7 @@ func (c *Client) CreateSuperPlayerConfigWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateSuperPlayerConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateSuperPlayerConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateSuperPlayerConfig require credential")
@@ -2265,6 +2296,7 @@ func (c *Client) CreateTranscodeTemplateWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateTranscodeTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateTranscodeTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTranscodeTemplate require credential")
@@ -2330,6 +2362,7 @@ func (c *Client) CreateVodDomainWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateVodDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateVodDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateVodDomain require credential")
@@ -2423,6 +2456,7 @@ func (c *Client) CreateWatermarkTemplateWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateWatermarkTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateWatermarkTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateWatermarkTemplate require credential")
@@ -2476,6 +2510,7 @@ func (c *Client) CreateWordSamplesWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateWordSamplesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateWordSamples")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateWordSamples require credential")
@@ -2543,6 +2578,7 @@ func (c *Client) DeleteAIAnalysisTemplateWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDeleteAIAnalysisTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteAIAnalysisTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteAIAnalysisTemplate require credential")
@@ -2602,6 +2638,7 @@ func (c *Client) DeleteAIRecognitionTemplateWithContext(ctx context.Context, req
     if request == nil {
         request = NewDeleteAIRecognitionTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteAIRecognitionTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteAIRecognitionTemplate require credential")
@@ -2657,6 +2694,7 @@ func (c *Client) DeleteAdaptiveDynamicStreamingTemplateWithContext(ctx context.C
     if request == nil {
         request = NewDeleteAdaptiveDynamicStreamingTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteAdaptiveDynamicStreamingTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteAdaptiveDynamicStreamingTemplate require credential")
@@ -2712,6 +2750,7 @@ func (c *Client) DeleteAnimatedGraphicsTemplateWithContext(ctx context.Context, 
     if request == nil {
         request = NewDeleteAnimatedGraphicsTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteAnimatedGraphicsTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteAnimatedGraphicsTemplate require credential")
@@ -2765,6 +2804,7 @@ func (c *Client) DeleteCDNDomainWithContext(ctx context.Context, request *Delete
     if request == nil {
         request = NewDeleteCDNDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteCDNDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteCDNDomain require credential")
@@ -2826,6 +2866,7 @@ func (c *Client) DeleteClassWithContext(ctx context.Context, request *DeleteClas
     if request == nil {
         request = NewDeleteClassRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteClass")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteClass require credential")
@@ -2889,6 +2930,7 @@ func (c *Client) DeleteContentReviewTemplateWithContext(ctx context.Context, req
     if request == nil {
         request = NewDeleteContentReviewTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteContentReviewTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteContentReviewTemplate require credential")
@@ -2948,6 +2990,7 @@ func (c *Client) DeleteEnhanceMediaTemplateWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDeleteEnhanceMediaTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteEnhanceMediaTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteEnhanceMediaTemplate require credential")
@@ -3011,6 +3054,7 @@ func (c *Client) DeleteHeadTailTemplateWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDeleteHeadTailTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteHeadTailTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteHeadTailTemplate require credential")
@@ -3072,6 +3116,7 @@ func (c *Client) DeleteImageProcessingTemplateWithContext(ctx context.Context, r
     if request == nil {
         request = NewDeleteImageProcessingTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteImageProcessingTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteImageProcessingTemplate require credential")
@@ -3127,6 +3172,7 @@ func (c *Client) DeleteImageSpriteTemplateWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDeleteImageSpriteTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteImageSpriteTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteImageSpriteTemplate require credential")
@@ -3176,6 +3222,7 @@ func (c *Client) DeleteJustInTimeTranscodeTemplateWithContext(ctx context.Contex
     if request == nil {
         request = NewDeleteJustInTimeTranscodeTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteJustInTimeTranscodeTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteJustInTimeTranscodeTemplate require credential")
@@ -3241,6 +3288,7 @@ func (c *Client) DeleteMediaWithContext(ctx context.Context, request *DeleteMedi
     if request == nil {
         request = NewDeleteMediaRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteMedia")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteMedia require credential")
@@ -3294,6 +3342,7 @@ func (c *Client) DeletePersonSampleWithContext(ctx context.Context, request *Del
     if request == nil {
         request = NewDeletePersonSampleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeletePersonSample")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeletePersonSample require credential")
@@ -3353,6 +3402,7 @@ func (c *Client) DeleteProcedureTemplateWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeleteProcedureTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteProcedureTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteProcedureTemplate require credential")
@@ -3404,6 +3454,7 @@ func (c *Client) DeleteQualityInspectTemplateWithContext(ctx context.Context, re
     if request == nil {
         request = NewDeleteQualityInspectTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteQualityInspectTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteQualityInspectTemplate require credential")
@@ -3455,6 +3506,7 @@ func (c *Client) DeleteRebuildMediaTemplateWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDeleteRebuildMediaTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteRebuildMediaTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteRebuildMediaTemplate require credential")
@@ -3516,6 +3568,7 @@ func (c *Client) DeleteReviewTemplateWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDeleteReviewTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteReviewTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteReviewTemplate require credential")
@@ -3571,6 +3624,7 @@ func (c *Client) DeleteRoundPlayWithContext(ctx context.Context, request *Delete
     if request == nil {
         request = NewDeleteRoundPlayRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteRoundPlay")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteRoundPlay require credential")
@@ -3626,6 +3680,7 @@ func (c *Client) DeleteSampleSnapshotTemplateWithContext(ctx context.Context, re
     if request == nil {
         request = NewDeleteSampleSnapshotTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteSampleSnapshotTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteSampleSnapshotTemplate require credential")
@@ -3681,6 +3736,7 @@ func (c *Client) DeleteSnapshotByTimeOffsetTemplateWithContext(ctx context.Conte
     if request == nil {
         request = NewDeleteSnapshotByTimeOffsetTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteSnapshotByTimeOffsetTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteSnapshotByTimeOffsetTemplate require credential")
@@ -3746,6 +3802,7 @@ func (c *Client) DeleteSuperPlayerConfigWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeleteSuperPlayerConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteSuperPlayerConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteSuperPlayerConfig require credential")
@@ -3803,6 +3860,7 @@ func (c *Client) DeleteTranscodeTemplateWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeleteTranscodeTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteTranscodeTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteTranscodeTemplate require credential")
@@ -3860,6 +3918,7 @@ func (c *Client) DeleteVodDomainWithContext(ctx context.Context, request *Delete
     if request == nil {
         request = NewDeleteVodDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteVodDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteVodDomain require credential")
@@ -3919,6 +3978,7 @@ func (c *Client) DeleteWatermarkTemplateWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeleteWatermarkTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteWatermarkTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteWatermarkTemplate require credential")
@@ -3972,6 +4032,7 @@ func (c *Client) DeleteWordSamplesWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteWordSamplesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteWordSamples")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteWordSamples require credential")
@@ -4033,6 +4094,7 @@ func (c *Client) DescribeAIAnalysisTemplatesWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeAIAnalysisTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeAIAnalysisTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAIAnalysisTemplates require credential")
@@ -4098,6 +4160,7 @@ func (c *Client) DescribeAIRecognitionTemplatesWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeAIRecognitionTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeAIRecognitionTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAIRecognitionTemplates require credential")
@@ -4159,6 +4222,7 @@ func (c *Client) DescribeAdaptiveDynamicStreamingTemplatesWithContext(ctx contex
     if request == nil {
         request = NewDescribeAdaptiveDynamicStreamingTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeAdaptiveDynamicStreamingTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAdaptiveDynamicStreamingTemplates require credential")
@@ -4214,6 +4278,7 @@ func (c *Client) DescribeAllClassWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeAllClassRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeAllClass")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAllClass require credential")
@@ -4275,6 +4340,7 @@ func (c *Client) DescribeAnimatedGraphicsTemplatesWithContext(ctx context.Contex
     if request == nil {
         request = NewDescribeAnimatedGraphicsTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeAnimatedGraphicsTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAnimatedGraphicsTemplates require credential")
@@ -4330,6 +4396,7 @@ func (c *Client) DescribeCDNDomainsWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeCDNDomainsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeCDNDomains")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCDNDomains require credential")
@@ -4413,6 +4480,7 @@ func (c *Client) DescribeCDNStatDetailsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeCDNStatDetailsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeCDNStatDetails")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCDNStatDetails require credential")
@@ -4500,6 +4568,7 @@ func (c *Client) DescribeCDNUsageDataWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeCDNUsageDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeCDNUsageData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCDNUsageData require credential")
@@ -4573,6 +4642,7 @@ func (c *Client) DescribeCdnLogsWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeCdnLogsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeCdnLogs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCdnLogs require credential")
@@ -4640,6 +4710,7 @@ func (c *Client) DescribeClientUploadAccelerationUsageDataWithContext(ctx contex
     if request == nil {
         request = NewDescribeClientUploadAccelerationUsageDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeClientUploadAccelerationUsageData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeClientUploadAccelerationUsageData require credential")
@@ -4707,6 +4778,7 @@ func (c *Client) DescribeContentReviewTemplatesWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeContentReviewTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeContentReviewTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeContentReviewTemplates require credential")
@@ -4756,6 +4828,7 @@ func (c *Client) DescribeCurrentPlaylistWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeCurrentPlaylistRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeCurrentPlaylist")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCurrentPlaylist require credential")
@@ -4839,6 +4912,7 @@ func (c *Client) DescribeDailyPlayStatFileListWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeDailyPlayStatFileListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeDailyPlayStatFileList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDailyPlayStatFileList require credential")
@@ -4894,6 +4968,7 @@ func (c *Client) DescribeDrmKeyProviderInfoWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeDrmKeyProviderInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeDrmKeyProviderInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDrmKeyProviderInfo require credential")
@@ -4943,6 +5018,7 @@ func (c *Client) DescribeEnhanceMediaTemplatesWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeEnhanceMediaTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeEnhanceMediaTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeEnhanceMediaTemplates require credential")
@@ -5000,6 +5076,7 @@ func (c *Client) DescribeEventConfigWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeEventConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeEventConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeEventConfig require credential")
@@ -5081,6 +5158,7 @@ func (c *Client) DescribeFileAttributesWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeFileAttributesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeFileAttributes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeFileAttributes require credential")
@@ -5142,6 +5220,7 @@ func (c *Client) DescribeHeadTailTemplatesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeHeadTailTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeHeadTailTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeHeadTailTemplates require credential")
@@ -5205,6 +5284,7 @@ func (c *Client) DescribeImageProcessingTemplatesWithContext(ctx context.Context
     if request == nil {
         request = NewDescribeImageProcessingTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeImageProcessingTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeImageProcessingTemplates require credential")
@@ -5272,6 +5352,7 @@ func (c *Client) DescribeImageReviewUsageDataWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeImageReviewUsageDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeImageReviewUsageData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeImageReviewUsageData require credential")
@@ -5333,6 +5414,7 @@ func (c *Client) DescribeImageSpriteTemplatesWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeImageSpriteTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeImageSpriteTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeImageSpriteTemplates require credential")
@@ -5388,6 +5470,7 @@ func (c *Client) DescribeJustInTimeTranscodeTemplatesWithContext(ctx context.Con
     if request == nil {
         request = NewDescribeJustInTimeTranscodeTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeJustInTimeTranscodeTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeJustInTimeTranscodeTemplates require credential")
@@ -5455,6 +5538,7 @@ func (c *Client) DescribeLicenseUsageDataWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeLicenseUsageDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeLicenseUsageData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLicenseUsageData require credential")
@@ -5562,6 +5646,7 @@ func (c *Client) DescribeMediaInfosWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeMediaInfosRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeMediaInfos")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMediaInfos require credential")
@@ -5633,6 +5718,7 @@ func (c *Client) DescribeMediaPlayStatDetailsWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeMediaPlayStatDetailsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeMediaPlayStatDetails")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMediaPlayStatDetails require credential")
@@ -5696,6 +5782,7 @@ func (c *Client) DescribeMediaProcessUsageDataWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeMediaProcessUsageDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeMediaProcessUsageData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMediaProcessUsageData require credential")
@@ -5751,6 +5838,7 @@ func (c *Client) DescribePersonSamplesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribePersonSamplesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribePersonSamples")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribePersonSamples require credential")
@@ -5812,6 +5900,7 @@ func (c *Client) DescribeProcedureTemplatesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeProcedureTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeProcedureTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeProcedureTemplates require credential")
@@ -5865,6 +5954,7 @@ func (c *Client) DescribeQualityInspectTemplatesWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeQualityInspectTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeQualityInspectTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeQualityInspectTemplates require credential")
@@ -5918,6 +6008,7 @@ func (c *Client) DescribeRebuildMediaTemplatesWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeRebuildMediaTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeRebuildMediaTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRebuildMediaTemplates require credential")
@@ -5999,6 +6090,7 @@ func (c *Client) DescribeReviewDetailsWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeReviewDetailsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeReviewDetails")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeReviewDetails require credential")
@@ -6052,6 +6144,7 @@ func (c *Client) DescribeReviewTemplatesWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeReviewTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeReviewTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeReviewTemplates require credential")
@@ -6107,6 +6200,7 @@ func (c *Client) DescribeRoundPlaysWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeRoundPlaysRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeRoundPlays")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRoundPlays require credential")
@@ -6168,6 +6262,7 @@ func (c *Client) DescribeSampleSnapshotTemplatesWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeSampleSnapshotTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeSampleSnapshotTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSampleSnapshotTemplates require credential")
@@ -6229,6 +6324,7 @@ func (c *Client) DescribeSnapshotByTimeOffsetTemplatesWithContext(ctx context.Co
     if request == nil {
         request = NewDescribeSnapshotByTimeOffsetTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeSnapshotByTimeOffsetTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSnapshotByTimeOffsetTemplates require credential")
@@ -6286,6 +6382,7 @@ func (c *Client) DescribeStorageDataWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeStorageDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeStorageData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStorageData require credential")
@@ -6367,6 +6464,7 @@ func (c *Client) DescribeStorageDetailsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeStorageDetailsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeStorageDetails")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStorageDetails require credential")
@@ -6432,6 +6530,7 @@ func (c *Client) DescribeStorageRegionsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeStorageRegionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeStorageRegions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStorageRegions require credential")
@@ -6489,6 +6588,7 @@ func (c *Client) DescribeSubAppIdsWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeSubAppIdsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeSubAppIds")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSubAppIds require credential")
@@ -6550,6 +6650,7 @@ func (c *Client) DescribeSuperPlayerConfigsWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeSuperPlayerConfigsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeSuperPlayerConfigs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSuperPlayerConfigs require credential")
@@ -6613,6 +6714,7 @@ func (c *Client) DescribeTaskDetailWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeTaskDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeTaskDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTaskDetail require credential")
@@ -6680,6 +6782,7 @@ func (c *Client) DescribeTasksWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTasks require credential")
@@ -6747,6 +6850,7 @@ func (c *Client) DescribeTranscodeTemplatesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeTranscodeTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeTranscodeTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTranscodeTemplates require credential")
@@ -6808,6 +6912,7 @@ func (c *Client) DescribeVodDomainsWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeVodDomainsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeVodDomains")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeVodDomains require credential")
@@ -6871,6 +6976,7 @@ func (c *Client) DescribeWatermarkTemplatesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeWatermarkTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeWatermarkTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeWatermarkTemplates require credential")
@@ -6924,6 +7030,7 @@ func (c *Client) DescribeWordSamplesWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeWordSamplesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeWordSamples")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeWordSamples require credential")
@@ -7045,6 +7152,7 @@ func (c *Client) EditMediaWithContext(ctx context.Context, request *EditMediaReq
     if request == nil {
         request = NewEditMediaRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "EditMedia")
     
     if c.GetCredential() == nil {
         return nil, errors.New("EditMedia require credential")
@@ -7110,6 +7218,7 @@ func (c *Client) EnhanceMediaByTemplateWithContext(ctx context.Context, request 
     if request == nil {
         request = NewEnhanceMediaByTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "EnhanceMediaByTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("EnhanceMediaByTemplate require credential")
@@ -7169,6 +7278,7 @@ func (c *Client) EnhanceMediaQualityWithContext(ctx context.Context, request *En
     if request == nil {
         request = NewEnhanceMediaQualityRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "EnhanceMediaQuality")
     
     if c.GetCredential() == nil {
         return nil, errors.New("EnhanceMediaQuality require credential")
@@ -7230,6 +7340,7 @@ func (c *Client) ExecuteFunctionWithContext(ctx context.Context, request *Execut
     if request == nil {
         request = NewExecuteFunctionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ExecuteFunction")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ExecuteFunction require credential")
@@ -7291,6 +7402,7 @@ func (c *Client) ExtractCopyRightWatermarkWithContext(ctx context.Context, reque
     if request == nil {
         request = NewExtractCopyRightWatermarkRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ExtractCopyRightWatermark")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ExtractCopyRightWatermark require credential")
@@ -7352,6 +7464,7 @@ func (c *Client) ExtractTraceWatermarkWithContext(ctx context.Context, request *
     if request == nil {
         request = NewExtractTraceWatermarkRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ExtractTraceWatermark")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ExtractTraceWatermark require credential")
@@ -7405,6 +7518,7 @@ func (c *Client) FastEditMediaWithContext(ctx context.Context, request *FastEdit
     if request == nil {
         request = NewFastEditMediaRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "FastEditMedia")
     
     if c.GetCredential() == nil {
         return nil, errors.New("FastEditMedia require credential")
@@ -7472,6 +7586,7 @@ func (c *Client) ForbidMediaDistributionWithContext(ctx context.Context, request
     if request == nil {
         request = NewForbidMediaDistributionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ForbidMediaDistribution")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ForbidMediaDistribution require credential")
@@ -7533,6 +7648,7 @@ func (c *Client) HandleCurrentPlaylistWithContext(ctx context.Context, request *
     if request == nil {
         request = NewHandleCurrentPlaylistRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "HandleCurrentPlaylist")
     
     if c.GetCredential() == nil {
         return nil, errors.New("HandleCurrentPlaylist require credential")
@@ -7594,6 +7710,7 @@ func (c *Client) InspectMediaQualityWithContext(ctx context.Context, request *In
     if request == nil {
         request = NewInspectMediaQualityRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "InspectMediaQuality")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InspectMediaQuality require credential")
@@ -7761,6 +7878,7 @@ func (c *Client) LiveRealTimeClipWithContext(ctx context.Context, request *LiveR
     if request == nil {
         request = NewLiveRealTimeClipRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "LiveRealTimeClip")
     
     if c.GetCredential() == nil {
         return nil, errors.New("LiveRealTimeClip require credential")
@@ -7822,6 +7940,7 @@ func (c *Client) ManageTaskWithContext(ctx context.Context, request *ManageTaskR
     if request == nil {
         request = NewManageTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ManageTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ManageTask require credential")
@@ -7901,6 +8020,7 @@ func (c *Client) ModifyAIAnalysisTemplateWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyAIAnalysisTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyAIAnalysisTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyAIAnalysisTemplate require credential")
@@ -7980,6 +8100,7 @@ func (c *Client) ModifyAIRecognitionTemplateWithContext(ctx context.Context, req
     if request == nil {
         request = NewModifyAIRecognitionTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyAIRecognitionTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyAIRecognitionTemplate require credential")
@@ -8067,6 +8188,7 @@ func (c *Client) ModifyAdaptiveDynamicStreamingTemplateWithContext(ctx context.C
     if request == nil {
         request = NewModifyAdaptiveDynamicStreamingTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyAdaptiveDynamicStreamingTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyAdaptiveDynamicStreamingTemplate require credential")
@@ -8138,6 +8260,7 @@ func (c *Client) ModifyAnimatedGraphicsTemplateWithContext(ctx context.Context, 
     if request == nil {
         request = NewModifyAnimatedGraphicsTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyAnimatedGraphicsTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyAnimatedGraphicsTemplate require credential")
@@ -8193,6 +8316,7 @@ func (c *Client) ModifyCDNDomainConfigWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyCDNDomainConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyCDNDomainConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyCDNDomainConfig require credential")
@@ -8256,6 +8380,7 @@ func (c *Client) ModifyClassWithContext(ctx context.Context, request *ModifyClas
     if request == nil {
         request = NewModifyClassRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyClass")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyClass require credential")
@@ -8335,6 +8460,7 @@ func (c *Client) ModifyContentReviewTemplateWithContext(ctx context.Context, req
     if request == nil {
         request = NewModifyContentReviewTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyContentReviewTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyContentReviewTemplate require credential")
@@ -8396,6 +8522,7 @@ func (c *Client) ModifyDefaultStorageRegionWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyDefaultStorageRegionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyDefaultStorageRegion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDefaultStorageRegion require credential")
@@ -8457,6 +8584,7 @@ func (c *Client) ModifyEnhanceMediaTemplateWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyEnhanceMediaTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyEnhanceMediaTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyEnhanceMediaTemplate require credential")
@@ -8534,6 +8662,7 @@ func (c *Client) ModifyEventConfigWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyEventConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyEventConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyEventConfig require credential")
@@ -8599,6 +8728,7 @@ func (c *Client) ModifyHeadTailTemplateWithContext(ctx context.Context, request 
     if request == nil {
         request = NewModifyHeadTailTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyHeadTailTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyHeadTailTemplate require credential")
@@ -8668,6 +8798,7 @@ func (c *Client) ModifyImageSpriteTemplateWithContext(ctx context.Context, reque
     if request == nil {
         request = NewModifyImageSpriteTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyImageSpriteTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyImageSpriteTemplate require credential")
@@ -8719,6 +8850,7 @@ func (c *Client) ModifyJustInTimeTranscodeTemplateWithContext(ctx context.Contex
     if request == nil {
         request = NewModifyJustInTimeTranscodeTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyJustInTimeTranscodeTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyJustInTimeTranscodeTemplate require credential")
@@ -8804,6 +8936,7 @@ func (c *Client) ModifyMediaInfoWithContext(ctx context.Context, request *Modify
     if request == nil {
         request = NewModifyMediaInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyMediaInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyMediaInfo require credential")
@@ -8933,6 +9066,7 @@ func (c *Client) ModifyMediaStorageClassWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyMediaStorageClassRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyMediaStorageClass")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyMediaStorageClass require credential")
@@ -8994,6 +9128,7 @@ func (c *Client) ModifyPersonSampleWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyPersonSampleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyPersonSample")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyPersonSample require credential")
@@ -9047,6 +9182,7 @@ func (c *Client) ModifyQualityInspectTemplateWithContext(ctx context.Context, re
     if request == nil {
         request = NewModifyQualityInspectTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyQualityInspectTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyQualityInspectTemplate require credential")
@@ -9100,6 +9236,7 @@ func (c *Client) ModifyRebuildMediaTemplateWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyRebuildMediaTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyRebuildMediaTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyRebuildMediaTemplate require credential")
@@ -9167,6 +9304,7 @@ func (c *Client) ModifyReviewTemplateWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyReviewTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyReviewTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyReviewTemplate require credential")
@@ -9232,6 +9370,7 @@ func (c *Client) ModifyRoundPlayWithContext(ctx context.Context, request *Modify
     if request == nil {
         request = NewModifyRoundPlayRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyRoundPlay")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyRoundPlay require credential")
@@ -9299,6 +9438,7 @@ func (c *Client) ModifySampleSnapshotTemplateWithContext(ctx context.Context, re
     if request == nil {
         request = NewModifySampleSnapshotTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifySampleSnapshotTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifySampleSnapshotTemplate require credential")
@@ -9364,6 +9504,7 @@ func (c *Client) ModifySnapshotByTimeOffsetTemplateWithContext(ctx context.Conte
     if request == nil {
         request = NewModifySnapshotByTimeOffsetTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifySnapshotByTimeOffsetTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifySnapshotByTimeOffsetTemplate require credential")
@@ -9423,6 +9564,7 @@ func (c *Client) ModifySubAppIdInfoWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifySubAppIdInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifySubAppIdInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifySubAppIdInfo require credential")
@@ -9480,6 +9622,7 @@ func (c *Client) ModifySubAppIdStatusWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifySubAppIdStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifySubAppIdStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifySubAppIdStatus require credential")
@@ -9541,6 +9684,7 @@ func (c *Client) ModifySuperPlayerConfigWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifySuperPlayerConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifySuperPlayerConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifySuperPlayerConfig require credential")
@@ -9638,6 +9782,7 @@ func (c *Client) ModifyTranscodeTemplateWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyTranscodeTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyTranscodeTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyTranscodeTemplate require credential")
@@ -9695,6 +9840,7 @@ func (c *Client) ModifyVodDomainAccelerateConfigWithContext(ctx context.Context,
     if request == nil {
         request = NewModifyVodDomainAccelerateConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyVodDomainAccelerateConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyVodDomainAccelerateConfig require credential")
@@ -9752,6 +9898,7 @@ func (c *Client) ModifyVodDomainConfigWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyVodDomainConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyVodDomainConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyVodDomainConfig require credential")
@@ -9837,6 +9984,7 @@ func (c *Client) ModifyWatermarkTemplateWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyWatermarkTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyWatermarkTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyWatermarkTemplate require credential")
@@ -9892,6 +10040,7 @@ func (c *Client) ModifyWordSampleWithContext(ctx context.Context, request *Modif
     if request == nil {
         request = NewModifyWordSampleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyWordSample")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyWordSample require credential")
@@ -9949,6 +10098,7 @@ func (c *Client) ParseStreamingManifestWithContext(ctx context.Context, request 
     if request == nil {
         request = NewParseStreamingManifestRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ParseStreamingManifest")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ParseStreamingManifest require credential")
@@ -10076,6 +10226,7 @@ func (c *Client) ProcessMediaWithContext(ctx context.Context, request *ProcessMe
     if request == nil {
         request = NewProcessMediaRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ProcessMedia")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ProcessMedia require credential")
@@ -10169,6 +10320,7 @@ func (c *Client) ProcessMediaByProcedureWithContext(ctx context.Context, request
     if request == nil {
         request = NewProcessMediaByProcedureRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ProcessMediaByProcedure")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ProcessMediaByProcedure require credential")
@@ -10244,6 +10396,7 @@ func (c *Client) ProcessMediaByUrlWithContext(ctx context.Context, request *Proc
     if request == nil {
         request = NewProcessMediaByUrlRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ProcessMediaByUrl")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ProcessMediaByUrl require credential")
@@ -10323,6 +10476,7 @@ func (c *Client) PullEventsWithContext(ctx context.Context, request *PullEventsR
     if request == nil {
         request = NewPullEventsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "PullEvents")
     
     if c.GetCredential() == nil {
         return nil, errors.New("PullEvents require credential")
@@ -10406,6 +10560,7 @@ func (c *Client) PullUploadWithContext(ctx context.Context, request *PullUploadR
     if request == nil {
         request = NewPullUploadRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "PullUpload")
     
     if c.GetCredential() == nil {
         return nil, errors.New("PullUpload require credential")
@@ -10473,6 +10628,7 @@ func (c *Client) PushUrlCacheWithContext(ctx context.Context, request *PushUrlCa
     if request == nil {
         request = NewPushUrlCacheRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "PushUrlCache")
     
     if c.GetCredential() == nil {
         return nil, errors.New("PushUrlCache require credential")
@@ -10524,6 +10680,7 @@ func (c *Client) RebuildMediaWithContext(ctx context.Context, request *RebuildMe
     if request == nil {
         request = NewRebuildMediaRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "RebuildMedia")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RebuildMedia require credential")
@@ -10575,6 +10732,7 @@ func (c *Client) RebuildMediaByTemplateWithContext(ctx context.Context, request 
     if request == nil {
         request = NewRebuildMediaByTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "RebuildMediaByTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RebuildMediaByTemplate require credential")
@@ -10644,6 +10802,7 @@ func (c *Client) RefreshUrlCacheWithContext(ctx context.Context, request *Refres
     if request == nil {
         request = NewRefreshUrlCacheRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "RefreshUrlCache")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RefreshUrlCache require credential")
@@ -10715,6 +10874,7 @@ func (c *Client) RemoveWatermarkWithContext(ctx context.Context, request *Remove
     if request == nil {
         request = NewRemoveWatermarkRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "RemoveWatermark")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RemoveWatermark require credential")
@@ -10776,6 +10936,7 @@ func (c *Client) ResetProcedureTemplateWithContext(ctx context.Context, request 
     if request == nil {
         request = NewResetProcedureTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ResetProcedureTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ResetProcedureTemplate require credential")
@@ -10855,6 +11016,7 @@ func (c *Client) RestoreMediaWithContext(ctx context.Context, request *RestoreMe
     if request == nil {
         request = NewRestoreMediaRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "RestoreMedia")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RestoreMedia require credential")
@@ -10928,6 +11090,7 @@ func (c *Client) ReviewAudioVideoWithContext(ctx context.Context, request *Revie
     if request == nil {
         request = NewReviewAudioVideoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ReviewAudioVideo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ReviewAudioVideo require credential")
@@ -10991,6 +11154,7 @@ func (c *Client) ReviewImageWithContext(ctx context.Context, request *ReviewImag
     if request == nil {
         request = NewReviewImageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ReviewImage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ReviewImage require credential")
@@ -11246,6 +11410,7 @@ func (c *Client) SearchMediaWithContext(ctx context.Context, request *SearchMedi
     if request == nil {
         request = NewSearchMediaRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "SearchMedia")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SearchMedia require credential")
@@ -11303,6 +11468,7 @@ func (c *Client) SetDrmKeyProviderInfoWithContext(ctx context.Context, request *
     if request == nil {
         request = NewSetDrmKeyProviderInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "SetDrmKeyProviderInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetDrmKeyProviderInfo require credential")
@@ -11358,6 +11524,7 @@ func (c *Client) SetVodDomainCertificateWithContext(ctx context.Context, request
     if request == nil {
         request = NewSetVodDomainCertificateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "SetVodDomainCertificate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetVodDomainCertificate require credential")
@@ -11529,6 +11696,7 @@ func (c *Client) SimpleHlsClipWithContext(ctx context.Context, request *SimpleHl
     if request == nil {
         request = NewSimpleHlsClipRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "SimpleHlsClip")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SimpleHlsClip require credential")
@@ -11594,6 +11762,7 @@ func (c *Client) SplitMediaWithContext(ctx context.Context, request *SplitMediaR
     if request == nil {
         request = NewSplitMediaRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "SplitMedia")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SplitMedia require credential")
@@ -11645,6 +11814,7 @@ func (c *Client) StartCDNDomainWithContext(ctx context.Context, request *StartCD
     if request == nil {
         request = NewStartCDNDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "StartCDNDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartCDNDomain require credential")
@@ -11700,6 +11870,7 @@ func (c *Client) VerifyDomainRecordWithContext(ctx context.Context, request *Ver
     if request == nil {
         request = NewVerifyDomainRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "VerifyDomainRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("VerifyDomainRecord require credential")

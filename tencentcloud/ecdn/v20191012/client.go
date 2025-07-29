@@ -138,6 +138,7 @@ func (c *Client) AddEcdnDomainWithContext(ctx context.Context, request *AddEcdnD
     if request == nil {
         request = NewAddEcdnDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ecdn", APIVersion, "AddEcdnDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AddEcdnDomain require credential")
@@ -221,6 +222,7 @@ func (c *Client) DeleteEcdnDomainWithContext(ctx context.Context, request *Delet
     if request == nil {
         request = NewDeleteEcdnDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ecdn", APIVersion, "DeleteEcdnDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteEcdnDomain require credential")
@@ -294,6 +296,7 @@ func (c *Client) DescribeDomainsWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeDomainsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ecdn", APIVersion, "DescribeDomains")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDomains require credential")
@@ -373,6 +376,7 @@ func (c *Client) DescribeDomainsConfigWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeDomainsConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ecdn", APIVersion, "DescribeDomainsConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDomainsConfig require credential")
@@ -446,6 +450,7 @@ func (c *Client) DescribeEcdnDomainLogsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeEcdnDomainLogsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ecdn", APIVersion, "DescribeEcdnDomainLogs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeEcdnDomainLogs require credential")
@@ -547,6 +552,7 @@ func (c *Client) DescribeEcdnDomainStatisticsWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeEcdnDomainStatisticsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ecdn", APIVersion, "DescribeEcdnDomainStatistics")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeEcdnDomainStatistics require credential")
@@ -690,6 +696,7 @@ func (c *Client) DescribeEcdnStatisticsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeEcdnStatisticsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ecdn", APIVersion, "DescribeEcdnStatistics")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeEcdnStatistics require credential")
@@ -767,6 +774,7 @@ func (c *Client) DescribeIpStatusWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeIpStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ecdn", APIVersion, "DescribeIpStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIpStatus require credential")
@@ -840,6 +848,7 @@ func (c *Client) DescribePurgeQuotaWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribePurgeQuotaRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ecdn", APIVersion, "DescribePurgeQuota")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribePurgeQuota require credential")
@@ -911,6 +920,7 @@ func (c *Client) DescribePurgeTasksWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribePurgeTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ecdn", APIVersion, "DescribePurgeTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribePurgeTasks require credential")
@@ -998,6 +1008,7 @@ func (c *Client) PurgePathCacheWithContext(ctx context.Context, request *PurgePa
     if request == nil {
         request = NewPurgePathCacheRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ecdn", APIVersion, "PurgePathCache")
     
     if c.GetCredential() == nil {
         return nil, errors.New("PurgePathCache require credential")
@@ -1087,6 +1098,7 @@ func (c *Client) PurgeUrlsCacheWithContext(ctx context.Context, request *PurgeUr
     if request == nil {
         request = NewPurgeUrlsCacheRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ecdn", APIVersion, "PurgeUrlsCache")
     
     if c.GetCredential() == nil {
         return nil, errors.New("PurgeUrlsCache require credential")
@@ -1168,6 +1180,7 @@ func (c *Client) StartEcdnDomainWithContext(ctx context.Context, request *StartE
     if request == nil {
         request = NewStartEcdnDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ecdn", APIVersion, "StartEcdnDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartEcdnDomain require credential")
@@ -1249,6 +1262,7 @@ func (c *Client) StopEcdnDomainWithContext(ctx context.Context, request *StopEcd
     if request == nil {
         request = NewStopEcdnDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ecdn", APIVersion, "StopEcdnDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopEcdnDomain require credential")
@@ -1346,6 +1360,7 @@ func (c *Client) UpdateDomainConfigWithContext(ctx context.Context, request *Upd
     if request == nil {
         request = NewUpdateDomainConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ecdn", APIVersion, "UpdateDomainConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateDomainConfig require credential")

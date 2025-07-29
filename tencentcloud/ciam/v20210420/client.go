@@ -224,6 +224,7 @@ func (c *Client) ListUserGroupsWithContext(ctx context.Context, request *ListUse
     if request == nil {
         request = NewListUserGroupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ciam", APIVersion, "ListUserGroups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListUserGroups require credential")

@@ -114,6 +114,7 @@ func (c *Client) CreateDomainWithContext(ctx context.Context, request *CreateDom
     if request == nil {
         request = NewCreateDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "CreateDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDomain require credential")
@@ -203,6 +204,7 @@ func (c *Client) CreateDomainAliasWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateDomainAliasRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "CreateDomainAlias")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDomainAlias require credential")
@@ -286,6 +288,7 @@ func (c *Client) CreateDomainBatchWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateDomainBatchRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "CreateDomainBatch")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDomainBatch require credential")
@@ -353,6 +356,7 @@ func (c *Client) CreateDomainGroupWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateDomainGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "CreateDomainGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDomainGroup require credential")
@@ -502,6 +506,7 @@ func (c *Client) CreateRecordWithContext(ctx context.Context, request *CreateRec
     if request == nil {
         request = NewCreateRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "CreateRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateRecord require credential")
@@ -585,6 +590,7 @@ func (c *Client) CreateRecordBatchWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateRecordBatchRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "CreateRecordBatch")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateRecordBatch require credential")
@@ -646,6 +652,7 @@ func (c *Client) CreateRecordGroupWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateRecordGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "CreateRecordGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateRecordGroup require credential")
@@ -717,6 +724,7 @@ func (c *Client) DeleteDomainWithContext(ctx context.Context, request *DeleteDom
     if request == nil {
         request = NewDeleteDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DeleteDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteDomain require credential")
@@ -798,6 +806,7 @@ func (c *Client) DeleteDomainAliasWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteDomainAliasRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DeleteDomainAlias")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteDomainAlias require credential")
@@ -863,6 +872,7 @@ func (c *Client) DeleteDomainBatchWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteDomainBatchRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DeleteDomainBatch")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteDomainBatch require credential")
@@ -962,6 +972,7 @@ func (c *Client) DeleteRecordWithContext(ctx context.Context, request *DeleteRec
     if request == nil {
         request = NewDeleteRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DeleteRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteRecord require credential")
@@ -1023,6 +1034,7 @@ func (c *Client) DeleteRecordGroupWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteRecordGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DeleteRecordGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteRecordGroup require credential")
@@ -1090,6 +1102,7 @@ func (c *Client) DeleteShareDomainWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteShareDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DeleteShareDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteShareDomain require credential")
@@ -1153,6 +1166,7 @@ func (c *Client) DescribeDomainWithContext(ctx context.Context, request *Describ
     if request == nil {
         request = NewDescribeDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DescribeDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDomain require credential")
@@ -1228,6 +1242,7 @@ func (c *Client) DescribeDomainAliasListWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeDomainAliasListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DescribeDomainAliasList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDomainAliasList require credential")
@@ -1289,6 +1304,7 @@ func (c *Client) DescribeDomainGroupListWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeDomainGroupListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DescribeDomainGroupList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDomainGroupList require credential")
@@ -1366,6 +1382,7 @@ func (c *Client) DescribeDomainListWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeDomainListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DescribeDomainList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDomainList require credential")
@@ -1427,6 +1444,7 @@ func (c *Client) DescribeDomainLogListWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeDomainLogListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DescribeDomainLogList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDomainLogList require credential")
@@ -1514,6 +1532,7 @@ func (c *Client) DescribeDomainPurviewWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeDomainPurviewRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DescribeDomainPurview")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDomainPurview require credential")
@@ -1573,6 +1592,7 @@ func (c *Client) DescribeDomainShareInfoWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeDomainShareInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DescribeDomainShareInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDomainShareInfo require credential")
@@ -1666,6 +1686,7 @@ func (c *Client) DescribeRecordWithContext(ctx context.Context, request *Describ
     if request == nil {
         request = NewDescribeRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DescribeRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRecord require credential")
@@ -1727,6 +1748,7 @@ func (c *Client) DescribeRecordGroupListWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeRecordGroupListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DescribeRecordGroupList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRecordGroupList require credential")
@@ -1816,6 +1838,7 @@ func (c *Client) DescribeRecordLineListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeRecordLineListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DescribeRecordLineList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRecordLineList require credential")
@@ -1907,6 +1930,7 @@ func (c *Client) DescribeRecordListWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeRecordListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DescribeRecordList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRecordList require credential")
@@ -1992,6 +2016,7 @@ func (c *Client) DescribeRecordTypeWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeRecordTypeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DescribeRecordType")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRecordType require credential")
@@ -2057,6 +2082,7 @@ func (c *Client) DescribeSubdomainAnalyticsWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeSubdomainAnalyticsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DescribeSubdomainAnalytics")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSubdomainAnalytics require credential")
@@ -2152,6 +2178,7 @@ func (c *Client) ModifyDomainLockWithContext(ctx context.Context, request *Modif
     if request == nil {
         request = NewModifyDomainLockRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "ModifyDomainLock")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDomainLock require credential")
@@ -2235,6 +2262,7 @@ func (c *Client) ModifyDomainOwnerWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyDomainOwnerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "ModifyDomainOwner")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDomainOwner require credential")
@@ -2328,6 +2356,7 @@ func (c *Client) ModifyDomainRemarkWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyDomainRemarkRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "ModifyDomainRemark")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDomainRemark require credential")
@@ -2395,6 +2424,7 @@ func (c *Client) ModifyDomainStatusWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyDomainStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "ModifyDomainStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDomainStatus require credential")
@@ -2490,6 +2520,7 @@ func (c *Client) ModifyDomainUnlockWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyDomainUnlockRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "ModifyDomainUnlock")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDomainUnlock require credential")
@@ -2641,6 +2672,7 @@ func (c *Client) ModifyRecordWithContext(ctx context.Context, request *ModifyRec
     if request == nil {
         request = NewModifyRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "ModifyRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyRecord require credential")
@@ -2738,6 +2770,7 @@ func (c *Client) ModifyRecordBatchWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyRecordBatchRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "ModifyRecordBatch")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyRecordBatch require credential")
@@ -2799,6 +2832,7 @@ func (c *Client) ModifyRecordGroupWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyRecordGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "ModifyRecordGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyRecordGroup require credential")
@@ -2898,6 +2932,7 @@ func (c *Client) ModifyRecordRemarkWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyRecordRemarkRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "ModifyRecordRemark")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyRecordRemark require credential")
@@ -3033,6 +3068,7 @@ func (c *Client) ModifyRecordStatusWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyRecordStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "ModifyRecordStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyRecordStatus require credential")
@@ -3094,6 +3130,7 @@ func (c *Client) ModifyRecordToGroupWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyRecordToGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "ModifyRecordToGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyRecordToGroup require credential")

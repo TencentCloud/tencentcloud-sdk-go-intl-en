@@ -82,6 +82,7 @@ func (c *Client) ActionAlterUserWithContext(ctx context.Context, request *Action
     if request == nil {
         request = NewActionAlterUserRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "ActionAlterUser")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ActionAlterUser require credential")
@@ -131,6 +132,7 @@ func (c *Client) CancelBackupJobWithContext(ctx context.Context, request *Cancel
     if request == nil {
         request = NewCancelBackupJobRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "CancelBackupJob")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CancelBackupJob require credential")
@@ -180,6 +182,7 @@ func (c *Client) CheckCoolDownWorkingVariableConfigCorrectWithContext(ctx contex
     if request == nil {
         request = NewCheckCoolDownWorkingVariableConfigCorrectRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "CheckCoolDownWorkingVariableConfigCorrect")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CheckCoolDownWorkingVariableConfigCorrect require credential")
@@ -229,6 +232,7 @@ func (c *Client) CopyTableDatasWithContext(ctx context.Context, request *CopyTab
     if request == nil {
         request = NewCopyTableDatasRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "CopyTableDatas")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CopyTableDatas require credential")
@@ -278,6 +282,7 @@ func (c *Client) CreateBackUpScheduleWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateBackUpScheduleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "CreateBackUpSchedule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateBackUpSchedule require credential")
@@ -327,6 +332,7 @@ func (c *Client) CreateCoolDownPolicyWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateCoolDownPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "CreateCoolDownPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateCoolDownPolicy require credential")
@@ -376,6 +382,7 @@ func (c *Client) CreateDatabaseWithContext(ctx context.Context, request *CreateD
     if request == nil {
         request = NewCreateDatabaseRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "CreateDatabase")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDatabase require credential")
@@ -425,6 +432,7 @@ func (c *Client) CreateInstanceNewWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateInstanceNewRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "CreateInstanceNew")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateInstanceNew require credential")
@@ -474,6 +482,7 @@ func (c *Client) CreateTableWithContext(ctx context.Context, request *CreateTabl
     if request == nil {
         request = NewCreateTableRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "CreateTable")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTable require credential")
@@ -523,6 +532,7 @@ func (c *Client) CreateWorkloadGroupWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreateWorkloadGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "CreateWorkloadGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateWorkloadGroup require credential")
@@ -572,6 +582,7 @@ func (c *Client) DeleteBackUpDataWithContext(ctx context.Context, request *Delet
     if request == nil {
         request = NewDeleteBackUpDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DeleteBackUpData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteBackUpData require credential")
@@ -621,6 +632,7 @@ func (c *Client) DeleteTableWithContext(ctx context.Context, request *DeleteTabl
     if request == nil {
         request = NewDeleteTableRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DeleteTable")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteTable require credential")
@@ -670,6 +682,7 @@ func (c *Client) DeleteWorkloadGroupWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDeleteWorkloadGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DeleteWorkloadGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteWorkloadGroup require credential")
@@ -719,6 +732,7 @@ func (c *Client) DescribeAreaRegionWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeAreaRegionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeAreaRegion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAreaRegion require credential")
@@ -768,6 +782,7 @@ func (c *Client) DescribeBackUpJobWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeBackUpJobRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeBackUpJob")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBackUpJob require credential")
@@ -817,6 +832,7 @@ func (c *Client) DescribeBackUpJobDetailWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeBackUpJobDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeBackUpJobDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBackUpJobDetail require credential")
@@ -866,6 +882,7 @@ func (c *Client) DescribeBackUpSchedulesWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeBackUpSchedulesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeBackUpSchedules")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBackUpSchedules require credential")
@@ -915,6 +932,7 @@ func (c *Client) DescribeBackUpTablesWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeBackUpTablesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeBackUpTables")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBackUpTables require credential")
@@ -964,6 +982,7 @@ func (c *Client) DescribeBackUpTaskDetailWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeBackUpTaskDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeBackUpTaskDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBackUpTaskDetail require credential")
@@ -1013,6 +1032,7 @@ func (c *Client) DescribeClusterConfigsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeClusterConfigsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeClusterConfigs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeClusterConfigs require credential")
@@ -1062,6 +1082,7 @@ func (c *Client) DescribeClusterConfigsHistoryWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeClusterConfigsHistoryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeClusterConfigsHistory")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeClusterConfigsHistory require credential")
@@ -1111,6 +1132,7 @@ func (c *Client) DescribeCoolDownBackendsWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeCoolDownBackendsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeCoolDownBackends")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCoolDownBackends require credential")
@@ -1160,6 +1182,7 @@ func (c *Client) DescribeCoolDownPoliciesWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeCoolDownPoliciesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeCoolDownPolicies")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCoolDownPolicies require credential")
@@ -1209,6 +1232,7 @@ func (c *Client) DescribeCoolDownTableDataWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeCoolDownTableDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeCoolDownTableData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCoolDownTableData require credential")
@@ -1258,6 +1282,7 @@ func (c *Client) DescribeCreateTablesDDLWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeCreateTablesDDLRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeCreateTablesDDL")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCreateTablesDDL require credential")
@@ -1307,6 +1332,7 @@ func (c *Client) DescribeDatabaseWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeDatabaseRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeDatabase")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDatabase require credential")
@@ -1356,6 +1382,7 @@ func (c *Client) DescribeDatabaseAuditDownloadWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeDatabaseAuditDownloadRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeDatabaseAuditDownload")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDatabaseAuditDownload require credential")
@@ -1405,6 +1432,7 @@ func (c *Client) DescribeDatabaseAuditRecordsWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeDatabaseAuditRecordsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeDatabaseAuditRecords")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDatabaseAuditRecords require credential")
@@ -1454,6 +1482,7 @@ func (c *Client) DescribeInstanceWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstance require credential")
@@ -1503,6 +1532,7 @@ func (c *Client) DescribeInstanceNodesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeInstanceNodesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeInstanceNodes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceNodes require credential")
@@ -1552,6 +1582,7 @@ func (c *Client) DescribeInstanceNodesInfoWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeInstanceNodesInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeInstanceNodesInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceNodesInfo require credential")
@@ -1601,6 +1632,7 @@ func (c *Client) DescribeInstanceNodesRoleWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeInstanceNodesRoleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeInstanceNodesRole")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceNodesRole require credential")
@@ -1650,6 +1682,7 @@ func (c *Client) DescribeInstanceOperationHistoryWithContext(ctx context.Context
     if request == nil {
         request = NewDescribeInstanceOperationHistoryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeInstanceOperationHistory")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceOperationHistory require credential")
@@ -1699,6 +1732,7 @@ func (c *Client) DescribeInstanceOperationsWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeInstanceOperationsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeInstanceOperations")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceOperations require credential")
@@ -1748,6 +1782,7 @@ func (c *Client) DescribeInstanceStateWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeInstanceStateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeInstanceState")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceState require credential")
@@ -1797,6 +1832,7 @@ func (c *Client) DescribeInstanceUsedSubnetsWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeInstanceUsedSubnetsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeInstanceUsedSubnets")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceUsedSubnets require credential")
@@ -1846,6 +1882,7 @@ func (c *Client) DescribeInstancesWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstances require credential")
@@ -1895,6 +1932,7 @@ func (c *Client) DescribeInstancesHealthStateWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeInstancesHealthStateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeInstancesHealthState")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstancesHealthState require credential")
@@ -1944,6 +1982,7 @@ func (c *Client) DescribeQueryAnalyseWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeQueryAnalyseRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeQueryAnalyse")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeQueryAnalyse require credential")
@@ -1993,6 +2032,7 @@ func (c *Client) DescribeRestoreTaskDetailWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeRestoreTaskDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeRestoreTaskDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRestoreTaskDetail require credential")
@@ -2042,6 +2082,7 @@ func (c *Client) DescribeSlowQueryRecordsWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeSlowQueryRecordsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeSlowQueryRecords")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSlowQueryRecords require credential")
@@ -2091,6 +2132,7 @@ func (c *Client) DescribeSlowQueryRecordsDownloadWithContext(ctx context.Context
     if request == nil {
         request = NewDescribeSlowQueryRecordsDownloadRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeSlowQueryRecordsDownload")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSlowQueryRecordsDownload require credential")
@@ -2140,6 +2182,7 @@ func (c *Client) DescribeSpecWithContext(ctx context.Context, request *DescribeS
     if request == nil {
         request = NewDescribeSpecRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeSpec")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSpec require credential")
@@ -2189,6 +2232,7 @@ func (c *Client) DescribeSqlApisWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeSqlApisRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeSqlApis")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSqlApis require credential")
@@ -2238,6 +2282,7 @@ func (c *Client) DescribeTableWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeTableRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeTable")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTable require credential")
@@ -2287,6 +2332,7 @@ func (c *Client) DescribeTableListWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeTableListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeTableList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTableList require credential")
@@ -2336,6 +2382,7 @@ func (c *Client) DescribeUserBindWorkloadGroupWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeUserBindWorkloadGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeUserBindWorkloadGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUserBindWorkloadGroup require credential")
@@ -2385,6 +2432,7 @@ func (c *Client) DescribeUserPolicyWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeUserPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeUserPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUserPolicy require credential")
@@ -2434,6 +2482,7 @@ func (c *Client) DescribeWorkloadGroupWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeWorkloadGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DescribeWorkloadGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeWorkloadGroup require credential")
@@ -2483,6 +2532,7 @@ func (c *Client) DestroyInstanceWithContext(ctx context.Context, request *Destro
     if request == nil {
         request = NewDestroyInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "DestroyInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DestroyInstance require credential")
@@ -2532,6 +2582,7 @@ func (c *Client) ExecuteParametrizedQueryWithContext(ctx context.Context, reques
     if request == nil {
         request = NewExecuteParametrizedQueryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "ExecuteParametrizedQuery")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ExecuteParametrizedQuery require credential")
@@ -2581,6 +2632,7 @@ func (c *Client) ExecuteSelectQueryWithContext(ctx context.Context, request *Exe
     if request == nil {
         request = NewExecuteSelectQueryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "ExecuteSelectQuery")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ExecuteSelectQuery require credential")
@@ -2630,6 +2682,7 @@ func (c *Client) InsertDatasToTableWithContext(ctx context.Context, request *Ins
     if request == nil {
         request = NewInsertDatasToTableRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "InsertDatasToTable")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InsertDatasToTable require credential")
@@ -2679,6 +2732,7 @@ func (c *Client) ModifyClusterConfigsWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyClusterConfigsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "ModifyClusterConfigs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyClusterConfigs require credential")
@@ -2728,6 +2782,7 @@ func (c *Client) ModifyCoolDownPolicyWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyCoolDownPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "ModifyCoolDownPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyCoolDownPolicy require credential")
@@ -2777,6 +2832,7 @@ func (c *Client) ModifyDatabaseTableAccessWithContext(ctx context.Context, reque
     if request == nil {
         request = NewModifyDatabaseTableAccessRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "ModifyDatabaseTableAccess")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDatabaseTableAccess require credential")
@@ -2826,6 +2882,7 @@ func (c *Client) ModifyInstanceWithContext(ctx context.Context, request *ModifyI
     if request == nil {
         request = NewModifyInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "ModifyInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyInstance require credential")
@@ -2875,6 +2932,7 @@ func (c *Client) ModifyInstanceKeyValConfigsWithContext(ctx context.Context, req
     if request == nil {
         request = NewModifyInstanceKeyValConfigsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "ModifyInstanceKeyValConfigs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyInstanceKeyValConfigs require credential")
@@ -2924,6 +2982,7 @@ func (c *Client) ModifyNodeStatusWithContext(ctx context.Context, request *Modif
     if request == nil {
         request = NewModifyNodeStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "ModifyNodeStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyNodeStatus require credential")
@@ -2973,6 +3032,7 @@ func (c *Client) ModifySecurityGroupsWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifySecurityGroupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "ModifySecurityGroups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifySecurityGroups require credential")
@@ -3022,6 +3082,7 @@ func (c *Client) ModifyUserBindWorkloadGroupWithContext(ctx context.Context, req
     if request == nil {
         request = NewModifyUserBindWorkloadGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "ModifyUserBindWorkloadGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyUserBindWorkloadGroup require credential")
@@ -3071,6 +3132,7 @@ func (c *Client) ModifyUserPrivilegesV3WithContext(ctx context.Context, request 
     if request == nil {
         request = NewModifyUserPrivilegesV3Request()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "ModifyUserPrivilegesV3")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyUserPrivilegesV3 require credential")
@@ -3120,6 +3182,7 @@ func (c *Client) ModifyWorkloadGroupWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyWorkloadGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "ModifyWorkloadGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyWorkloadGroup require credential")
@@ -3169,6 +3232,7 @@ func (c *Client) ModifyWorkloadGroupStatusWithContext(ctx context.Context, reque
     if request == nil {
         request = NewModifyWorkloadGroupStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "ModifyWorkloadGroupStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyWorkloadGroupStatus require credential")
@@ -3218,6 +3282,7 @@ func (c *Client) OpenCoolDownWithContext(ctx context.Context, request *OpenCoolD
     if request == nil {
         request = NewOpenCoolDownRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "OpenCoolDown")
     
     if c.GetCredential() == nil {
         return nil, errors.New("OpenCoolDown require credential")
@@ -3267,6 +3332,7 @@ func (c *Client) OpenCoolDownPolicyWithContext(ctx context.Context, request *Ope
     if request == nil {
         request = NewOpenCoolDownPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "OpenCoolDownPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("OpenCoolDownPolicy require credential")
@@ -3316,6 +3382,7 @@ func (c *Client) QueryTableDataWithContext(ctx context.Context, request *QueryTa
     if request == nil {
         request = NewQueryTableDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "QueryTableData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryTableData require credential")
@@ -3365,6 +3432,7 @@ func (c *Client) RecoverBackUpJobWithContext(ctx context.Context, request *Recov
     if request == nil {
         request = NewRecoverBackUpJobRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "RecoverBackUpJob")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RecoverBackUpJob require credential")
@@ -3414,6 +3482,7 @@ func (c *Client) ReduceInstanceWithContext(ctx context.Context, request *ReduceI
     if request == nil {
         request = NewReduceInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "ReduceInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ReduceInstance require credential")
@@ -3463,6 +3532,7 @@ func (c *Client) ResizeDiskWithContext(ctx context.Context, request *ResizeDiskR
     if request == nil {
         request = NewResizeDiskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "ResizeDisk")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ResizeDisk require credential")
@@ -3512,6 +3582,7 @@ func (c *Client) RestartClusterForConfigsWithContext(ctx context.Context, reques
     if request == nil {
         request = NewRestartClusterForConfigsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "RestartClusterForConfigs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RestartClusterForConfigs require credential")
@@ -3561,6 +3632,7 @@ func (c *Client) RestartClusterForNodeWithContext(ctx context.Context, request *
     if request == nil {
         request = NewRestartClusterForNodeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "RestartClusterForNode")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RestartClusterForNode require credential")
@@ -3610,6 +3682,7 @@ func (c *Client) ScaleOutInstanceWithContext(ctx context.Context, request *Scale
     if request == nil {
         request = NewScaleOutInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "ScaleOutInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ScaleOutInstance require credential")
@@ -3659,6 +3732,7 @@ func (c *Client) ScaleUpInstanceWithContext(ctx context.Context, request *ScaleU
     if request == nil {
         request = NewScaleUpInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "ScaleUpInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ScaleUpInstance require credential")
@@ -3708,6 +3782,7 @@ func (c *Client) UpdateCoolDownWithContext(ctx context.Context, request *UpdateC
     if request == nil {
         request = NewUpdateCoolDownRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "UpdateCoolDown")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateCoolDown require credential")
@@ -3757,6 +3832,7 @@ func (c *Client) UpdateDatabaseWithContext(ctx context.Context, request *UpdateD
     if request == nil {
         request = NewUpdateDatabaseRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "UpdateDatabase")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateDatabase require credential")
@@ -3806,6 +3882,7 @@ func (c *Client) UpdateTableSchemaWithContext(ctx context.Context, request *Upda
     if request == nil {
         request = NewUpdateTableSchemaRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdwdoris", APIVersion, "UpdateTableSchema")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateTableSchema require credential")

@@ -126,6 +126,7 @@ func (c *Client) AddDBInstanceToReadOnlyGroupWithContext(ctx context.Context, re
     if request == nil {
         request = NewAddDBInstanceToReadOnlyGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "AddDBInstanceToReadOnlyGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AddDBInstanceToReadOnlyGroup require credential")
@@ -217,6 +218,7 @@ func (c *Client) CloneDBInstanceWithContext(ctx context.Context, request *CloneD
     if request == nil {
         request = NewCloneDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CloneDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CloneDBInstance require credential")
@@ -302,6 +304,7 @@ func (c *Client) CloseDBExtranetAccessWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCloseDBExtranetAccessRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CloseDBExtranetAccess")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CloseDBExtranetAccess require credential")
@@ -425,6 +428,7 @@ func (c *Client) CloseServerlessDBExtranetAccessWithContext(ctx context.Context,
     if request == nil {
         request = NewCloseServerlessDBExtranetAccessRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CloseServerlessDBExtranetAccess")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CloseServerlessDBExtranetAccess require credential")
@@ -484,6 +488,7 @@ func (c *Client) CreateBaseBackupWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateBaseBackupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CreateBaseBackup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateBaseBackup require credential")
@@ -575,6 +580,7 @@ func (c *Client) CreateDBInstanceNetworkAccessWithContext(ctx context.Context, r
     if request == nil {
         request = NewCreateDBInstanceNetworkAccessRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CreateDBInstanceNetworkAccess")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDBInstanceNetworkAccess require credential")
@@ -764,6 +770,7 @@ func (c *Client) CreateDBInstancesWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CreateDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDBInstances require credential")
@@ -971,6 +978,7 @@ func (c *Client) CreateInstancesWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CreateInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateInstances require credential")
@@ -1028,6 +1036,7 @@ func (c *Client) CreateParameterTemplateWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateParameterTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CreateParameterTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateParameterTemplate require credential")
@@ -1227,6 +1236,7 @@ func (c *Client) CreateReadOnlyDBInstanceWithContext(ctx context.Context, reques
     if request == nil {
         request = NewCreateReadOnlyDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CreateReadOnlyDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateReadOnlyDBInstance require credential")
@@ -1328,6 +1338,7 @@ func (c *Client) CreateReadOnlyGroupWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreateReadOnlyGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CreateReadOnlyGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateReadOnlyGroup require credential")
@@ -1409,6 +1420,7 @@ func (c *Client) CreateReadOnlyGroupNetworkAccessWithContext(ctx context.Context
     if request == nil {
         request = NewCreateReadOnlyGroupNetworkAccessRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CreateReadOnlyGroupNetworkAccess")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateReadOnlyGroupNetworkAccess require credential")
@@ -1532,6 +1544,7 @@ func (c *Client) CreateServerlessDBInstanceWithContext(ctx context.Context, requ
     if request == nil {
         request = NewCreateServerlessDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CreateServerlessDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateServerlessDBInstance require credential")
@@ -1589,6 +1602,7 @@ func (c *Client) DeleteBaseBackupWithContext(ctx context.Context, request *Delet
     if request == nil {
         request = NewDeleteBaseBackupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DeleteBaseBackup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteBaseBackup require credential")
@@ -1672,6 +1686,7 @@ func (c *Client) DeleteDBInstanceNetworkAccessWithContext(ctx context.Context, r
     if request == nil {
         request = NewDeleteDBInstanceNetworkAccessRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DeleteDBInstanceNetworkAccess")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteDBInstanceNetworkAccess require credential")
@@ -1727,6 +1742,7 @@ func (c *Client) DeleteLogBackupWithContext(ctx context.Context, request *Delete
     if request == nil {
         request = NewDeleteLogBackupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DeleteLogBackup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteLogBackup require credential")
@@ -1776,6 +1792,7 @@ func (c *Client) DeleteParameterTemplateWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeleteParameterTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DeleteParameterTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteParameterTemplate require credential")
@@ -1857,6 +1874,7 @@ func (c *Client) DeleteReadOnlyGroupWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDeleteReadOnlyGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DeleteReadOnlyGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteReadOnlyGroup require credential")
@@ -1932,6 +1950,7 @@ func (c *Client) DeleteReadOnlyGroupNetworkAccessWithContext(ctx context.Context
     if request == nil {
         request = NewDeleteReadOnlyGroupNetworkAccessRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DeleteReadOnlyGroupNetworkAccess")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteReadOnlyGroupNetworkAccess require credential")
@@ -2023,6 +2042,7 @@ func (c *Client) DeleteServerlessDBInstanceWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDeleteServerlessDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DeleteServerlessDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteServerlessDBInstance require credential")
@@ -2096,6 +2116,7 @@ func (c *Client) DescribeAccountsWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeAccountsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeAccounts")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAccounts require credential")
@@ -2159,6 +2180,7 @@ func (c *Client) DescribeAvailableRecoveryTimeWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeAvailableRecoveryTimeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeAvailableRecoveryTime")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAvailableRecoveryTime require credential")
@@ -2210,6 +2232,7 @@ func (c *Client) DescribeBackupDownloadRestrictionWithContext(ctx context.Contex
     if request == nil {
         request = NewDescribeBackupDownloadRestrictionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeBackupDownloadRestriction")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBackupDownloadRestriction require credential")
@@ -2273,6 +2296,7 @@ func (c *Client) DescribeBackupDownloadURLWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeBackupDownloadURLRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeBackupDownloadURL")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBackupDownloadURL require credential")
@@ -2328,6 +2352,7 @@ func (c *Client) DescribeBackupOverviewWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeBackupOverviewRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeBackupOverview")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBackupOverview require credential")
@@ -2395,6 +2420,7 @@ func (c *Client) DescribeBackupPlansWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeBackupPlansRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeBackupPlans")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBackupPlans require credential")
@@ -2454,6 +2480,7 @@ func (c *Client) DescribeBackupSummariesWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeBackupSummariesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeBackupSummaries")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBackupSummaries require credential")
@@ -2509,6 +2536,7 @@ func (c *Client) DescribeBaseBackupsWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeBaseBackupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeBaseBackups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBaseBackups require credential")
@@ -2572,6 +2600,7 @@ func (c *Client) DescribeClassesWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeClassesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeClasses")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeClasses require credential")
@@ -2637,6 +2666,7 @@ func (c *Client) DescribeCloneDBInstanceSpecWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeCloneDBInstanceSpecRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeCloneDBInstanceSpec")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCloneDBInstanceSpec require credential")
@@ -2726,6 +2756,7 @@ func (c *Client) DescribeDBBackupsWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeDBBackupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeDBBackups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBBackups require credential")
@@ -2809,6 +2840,7 @@ func (c *Client) DescribeDBErrlogsWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeDBErrlogsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeDBErrlogs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBErrlogs require credential")
@@ -2898,6 +2930,7 @@ func (c *Client) DescribeDBInstanceAttributeWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeDBInstanceAttributeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeDBInstanceAttribute")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBInstanceAttribute require credential")
@@ -2969,6 +3002,7 @@ func (c *Client) DescribeDBInstanceHAConfigWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeDBInstanceHAConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeDBInstanceHAConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBInstanceHAConfig require credential")
@@ -3034,6 +3068,7 @@ func (c *Client) DescribeDBInstanceParametersWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeDBInstanceParametersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeDBInstanceParameters")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBInstanceParameters require credential")
@@ -3097,6 +3132,7 @@ func (c *Client) DescribeDBInstanceSecurityGroupsWithContext(ctx context.Context
     if request == nil {
         request = NewDescribeDBInstanceSecurityGroupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeDBInstanceSecurityGroups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBInstanceSecurityGroups require credential")
@@ -3198,6 +3234,7 @@ func (c *Client) DescribeDBInstancesWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBInstances require credential")
@@ -3277,6 +3314,7 @@ func (c *Client) DescribeDBSlowlogsWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeDBSlowlogsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeDBSlowlogs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBSlowlogs require credential")
@@ -3334,6 +3372,7 @@ func (c *Client) DescribeDBVersionsWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeDBVersionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeDBVersions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBVersions require credential")
@@ -3423,6 +3462,7 @@ func (c *Client) DescribeDBXlogsWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeDBXlogsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeDBXlogs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBXlogs require credential")
@@ -3514,6 +3554,7 @@ func (c *Client) DescribeDatabasesWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeDatabasesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeDatabases")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDatabases require credential")
@@ -3569,6 +3610,7 @@ func (c *Client) DescribeDefaultParametersWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeDefaultParametersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeDefaultParameters")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDefaultParameters require credential")
@@ -3624,6 +3666,7 @@ func (c *Client) DescribeEncryptionKeysWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeEncryptionKeysRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeEncryptionKeys")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeEncryptionKeys require credential")
@@ -3679,6 +3722,7 @@ func (c *Client) DescribeLogBackupsWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeLogBackupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeLogBackups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLogBackups require credential")
@@ -3754,6 +3798,7 @@ func (c *Client) DescribeOrdersWithContext(ctx context.Context, request *Describ
     if request == nil {
         request = NewDescribeOrdersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeOrders")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOrders require credential")
@@ -3803,6 +3848,7 @@ func (c *Client) DescribeParameterTemplateAttributesWithContext(ctx context.Cont
     if request == nil {
         request = NewDescribeParameterTemplateAttributesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeParameterTemplateAttributes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeParameterTemplateAttributes require credential")
@@ -3856,6 +3902,7 @@ func (c *Client) DescribeParameterTemplatesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeParameterTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeParameterTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeParameterTemplates require credential")
@@ -3919,6 +3966,7 @@ func (c *Client) DescribeParamsEventWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeParamsEventRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeParamsEvent")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeParamsEvent require credential")
@@ -4000,6 +4048,7 @@ func (c *Client) DescribeProductConfigWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeProductConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeProductConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeProductConfig require credential")
@@ -4077,6 +4126,7 @@ func (c *Client) DescribeReadOnlyGroupsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeReadOnlyGroupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeReadOnlyGroups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeReadOnlyGroups require credential")
@@ -4160,6 +4210,7 @@ func (c *Client) DescribeRegionsWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeRegionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeRegions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRegions require credential")
@@ -4263,6 +4314,7 @@ func (c *Client) DescribeServerlessDBInstancesWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeServerlessDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeServerlessDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeServerlessDBInstances require credential")
@@ -4322,6 +4374,7 @@ func (c *Client) DescribeSlowQueryAnalysisWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeSlowQueryAnalysisRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeSlowQueryAnalysis")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSlowQueryAnalysis require credential")
@@ -4387,6 +4440,7 @@ func (c *Client) DescribeSlowQueryListWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeSlowQueryListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeSlowQueryList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSlowQueryList require credential")
@@ -4470,6 +4524,7 @@ func (c *Client) DescribeZonesWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeZonesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeZones")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeZones require credential")
@@ -4585,6 +4640,7 @@ func (c *Client) DestroyDBInstanceWithContext(ctx context.Context, request *Dest
     if request == nil {
         request = NewDestroyDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DestroyDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DestroyDBInstance require credential")
@@ -4700,6 +4756,7 @@ func (c *Client) DisIsolateDBInstancesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDisIsolateDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DisIsolateDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DisIsolateDBInstances require credential")
@@ -4801,6 +4858,7 @@ func (c *Client) InitDBInstancesWithContext(ctx context.Context, request *InitDB
     if request == nil {
         request = NewInitDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "InitDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InitDBInstances require credential")
@@ -4894,6 +4952,7 @@ func (c *Client) InquiryPriceCreateDBInstancesWithContext(ctx context.Context, r
     if request == nil {
         request = NewInquiryPriceCreateDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "InquiryPriceCreateDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InquiryPriceCreateDBInstances require credential")
@@ -4983,6 +5042,7 @@ func (c *Client) InquiryPriceRenewDBInstanceWithContext(ctx context.Context, req
     if request == nil {
         request = NewInquiryPriceRenewDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "InquiryPriceRenewDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InquiryPriceRenewDBInstance require credential")
@@ -5080,6 +5140,7 @@ func (c *Client) InquiryPriceUpgradeDBInstanceWithContext(ctx context.Context, r
     if request == nil {
         request = NewInquiryPriceUpgradeDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "InquiryPriceUpgradeDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InquiryPriceUpgradeDBInstance require credential")
@@ -5199,6 +5260,7 @@ func (c *Client) IsolateDBInstancesWithContext(ctx context.Context, request *Iso
     if request == nil {
         request = NewIsolateDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "IsolateDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("IsolateDBInstances require credential")
@@ -5274,6 +5336,7 @@ func (c *Client) ModifyAccountRemarkWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyAccountRemarkRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyAccountRemark")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyAccountRemark require credential")
@@ -5333,6 +5396,7 @@ func (c *Client) ModifyBackupDownloadRestrictionWithContext(ctx context.Context,
     if request == nil {
         request = NewModifyBackupDownloadRestrictionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyBackupDownloadRestriction")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyBackupDownloadRestriction require credential")
@@ -5398,6 +5462,7 @@ func (c *Client) ModifyBackupPlanWithContext(ctx context.Context, request *Modif
     if request == nil {
         request = NewModifyBackupPlanRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyBackupPlan")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyBackupPlan require credential")
@@ -5453,6 +5518,7 @@ func (c *Client) ModifyBaseBackupExpireTimeWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyBaseBackupExpireTimeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyBaseBackupExpireTime")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyBaseBackupExpireTime require credential")
@@ -5516,6 +5582,7 @@ func (c *Client) ModifyDBInstanceChargeTypeWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyDBInstanceChargeTypeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyDBInstanceChargeType")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBInstanceChargeType require credential")
@@ -5581,6 +5648,7 @@ func (c *Client) ModifyDBInstanceDeploymentWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyDBInstanceDeploymentRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyDBInstanceDeployment")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBInstanceDeployment require credential")
@@ -5654,6 +5722,7 @@ func (c *Client) ModifyDBInstanceHAConfigWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyDBInstanceHAConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyDBInstanceHAConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBInstanceHAConfig require credential")
@@ -5737,6 +5806,7 @@ func (c *Client) ModifyDBInstanceNameWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyDBInstanceNameRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyDBInstanceName")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBInstanceName require credential")
@@ -5802,6 +5872,7 @@ func (c *Client) ModifyDBInstanceParametersWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyDBInstanceParametersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyDBInstanceParameters")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBInstanceParameters require credential")
@@ -5889,6 +5960,7 @@ func (c *Client) ModifyDBInstanceReadOnlyGroupWithContext(ctx context.Context, r
     if request == nil {
         request = NewModifyDBInstanceReadOnlyGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyDBInstanceReadOnlyGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBInstanceReadOnlyGroup require credential")
@@ -5952,6 +6024,7 @@ func (c *Client) ModifyDBInstanceSecurityGroupsWithContext(ctx context.Context, 
     if request == nil {
         request = NewModifyDBInstanceSecurityGroupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyDBInstanceSecurityGroups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBInstanceSecurityGroups require credential")
@@ -6031,6 +6104,7 @@ func (c *Client) ModifyDBInstanceSpecWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyDBInstanceSpecRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyDBInstanceSpec")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBInstanceSpec require credential")
@@ -6112,6 +6186,7 @@ func (c *Client) ModifyDBInstancesProjectWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyDBInstancesProjectRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyDBInstancesProject")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBInstancesProject require credential")
@@ -6165,6 +6240,7 @@ func (c *Client) ModifyParameterTemplateWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyParameterTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyParameterTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyParameterTemplate require credential")
@@ -6256,6 +6332,7 @@ func (c *Client) ModifyReadOnlyGroupConfigWithContext(ctx context.Context, reque
     if request == nil {
         request = NewModifyReadOnlyGroupConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyReadOnlyGroupConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyReadOnlyGroupConfig require credential")
@@ -6331,6 +6408,7 @@ func (c *Client) ModifySwitchTimePeriodWithContext(ctx context.Context, request 
     if request == nil {
         request = NewModifySwitchTimePeriodRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifySwitchTimePeriod")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifySwitchTimePeriod require credential")
@@ -6416,6 +6494,7 @@ func (c *Client) OpenDBExtranetAccessWithContext(ctx context.Context, request *O
     if request == nil {
         request = NewOpenDBExtranetAccessRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "OpenDBExtranetAccess")
     
     if c.GetCredential() == nil {
         return nil, errors.New("OpenDBExtranetAccess require credential")
@@ -6537,6 +6616,7 @@ func (c *Client) OpenServerlessDBExtranetAccessWithContext(ctx context.Context, 
     if request == nil {
         request = NewOpenServerlessDBExtranetAccessRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "OpenServerlessDBExtranetAccess")
     
     if c.GetCredential() == nil {
         return nil, errors.New("OpenServerlessDBExtranetAccess require credential")
@@ -6618,6 +6698,7 @@ func (c *Client) RebalanceReadOnlyGroupWithContext(ctx context.Context, request 
     if request == nil {
         request = NewRebalanceReadOnlyGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "RebalanceReadOnlyGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RebalanceReadOnlyGroup require credential")
@@ -6705,6 +6786,7 @@ func (c *Client) RemoveDBInstanceFromReadOnlyGroupWithContext(ctx context.Contex
     if request == nil {
         request = NewRemoveDBInstanceFromReadOnlyGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "RemoveDBInstanceFromReadOnlyGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RemoveDBInstanceFromReadOnlyGroup require credential")
@@ -6814,6 +6896,7 @@ func (c *Client) RenewInstanceWithContext(ctx context.Context, request *RenewIns
     if request == nil {
         request = NewRenewInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "RenewInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RenewInstance require credential")
@@ -6901,6 +6984,7 @@ func (c *Client) ResetAccountPasswordWithContext(ctx context.Context, request *R
     if request == nil {
         request = NewResetAccountPasswordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ResetAccountPassword")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ResetAccountPassword require credential")
@@ -6984,6 +7068,7 @@ func (c *Client) RestartDBInstanceWithContext(ctx context.Context, request *Rest
     if request == nil {
         request = NewRestartDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "RestartDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RestartDBInstance require credential")
@@ -7047,6 +7132,7 @@ func (c *Client) RestoreDBInstanceObjectsWithContext(ctx context.Context, reques
     if request == nil {
         request = NewRestoreDBInstanceObjectsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "RestoreDBInstanceObjects")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RestoreDBInstanceObjects require credential")
@@ -7130,6 +7216,7 @@ func (c *Client) SetAutoRenewFlagWithContext(ctx context.Context, request *SetAu
     if request == nil {
         request = NewSetAutoRenewFlagRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "SetAutoRenewFlag")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetAutoRenewFlag require credential")
@@ -7209,6 +7296,7 @@ func (c *Client) SwitchDBInstancePrimaryWithContext(ctx context.Context, request
     if request == nil {
         request = NewSwitchDBInstancePrimaryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "SwitchDBInstancePrimary")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SwitchDBInstancePrimary require credential")
@@ -7312,6 +7400,7 @@ func (c *Client) UpgradeDBInstanceWithContext(ctx context.Context, request *Upgr
     if request == nil {
         request = NewUpgradeDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "UpgradeDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpgradeDBInstance require credential")
@@ -7379,6 +7468,7 @@ func (c *Client) UpgradeDBInstanceKernelVersionWithContext(ctx context.Context, 
     if request == nil {
         request = NewUpgradeDBInstanceKernelVersionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "UpgradeDBInstanceKernelVersion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpgradeDBInstanceKernelVersion require credential")
@@ -7434,6 +7524,7 @@ func (c *Client) UpgradeDBInstanceMajorVersionWithContext(ctx context.Context, r
     if request == nil {
         request = NewUpgradeDBInstanceMajorVersionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "UpgradeDBInstanceMajorVersion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpgradeDBInstanceMajorVersion require credential")

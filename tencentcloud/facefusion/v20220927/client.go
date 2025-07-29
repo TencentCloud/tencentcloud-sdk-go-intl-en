@@ -156,6 +156,7 @@ func (c *Client) FuseFaceWithContext(ctx context.Context, request *FuseFaceReque
     if request == nil {
         request = NewFuseFaceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "facefusion", APIVersion, "FuseFace")
     
     if c.GetCredential() == nil {
         return nil, errors.New("FuseFace require credential")
@@ -221,6 +222,7 @@ func (c *Client) QueryVideoFaceFusionJobWithContext(ctx context.Context, request
     if request == nil {
         request = NewQueryVideoFaceFusionJobRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "facefusion", APIVersion, "QueryVideoFaceFusionJob")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryVideoFaceFusionJob require credential")
@@ -330,6 +332,7 @@ func (c *Client) SubmitVideoFaceFusionJobWithContext(ctx context.Context, reques
     if request == nil {
         request = NewSubmitVideoFaceFusionJobRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "facefusion", APIVersion, "SubmitVideoFaceFusionJob")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SubmitVideoFaceFusionJob require credential")

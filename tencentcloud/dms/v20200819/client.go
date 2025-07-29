@@ -112,6 +112,7 @@ func (c *Client) SendEmailWithContext(ctx context.Context, request *SendEmailReq
     if request == nil {
         request = NewSendEmailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dms", APIVersion, "SendEmail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SendEmail require credential")
@@ -199,6 +200,7 @@ func (c *Client) SendTemplatedEmailWithContext(ctx context.Context, request *Sen
     if request == nil {
         request = NewSendTemplatedEmailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dms", APIVersion, "SendTemplatedEmail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SendTemplatedEmail require credential")

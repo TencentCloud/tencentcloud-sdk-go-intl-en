@@ -116,6 +116,7 @@ func (c *Client) AddRealServersWithContext(ctx context.Context, request *AddReal
     if request == nil {
         request = NewAddRealServersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "AddRealServers")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AddRealServers require credential")
@@ -207,6 +208,7 @@ func (c *Client) BindListenerRealServersWithContext(ctx context.Context, request
     if request == nil {
         request = NewBindListenerRealServersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "BindListenerRealServers")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BindListenerRealServers require credential")
@@ -298,6 +300,7 @@ func (c *Client) BindRuleRealServersWithContext(ctx context.Context, request *Bi
     if request == nil {
         request = NewBindRuleRealServersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "BindRuleRealServers")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BindRuleRealServers require credential")
@@ -373,6 +376,7 @@ func (c *Client) CheckProxyCreateWithContext(ctx context.Context, request *Check
     if request == nil {
         request = NewCheckProxyCreateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "CheckProxyCreate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CheckProxyCreate require credential")
@@ -454,6 +458,7 @@ func (c *Client) CloseProxiesWithContext(ctx context.Context, request *CloseProx
     if request == nil {
         request = NewCloseProxiesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "CloseProxies")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CloseProxies require credential")
@@ -531,6 +536,7 @@ func (c *Client) CloseProxyGroupWithContext(ctx context.Context, request *CloseP
     if request == nil {
         request = NewCloseProxyGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "CloseProxyGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CloseProxyGroup require credential")
@@ -610,6 +616,7 @@ func (c *Client) CloseSecurityPolicyWithContext(ctx context.Context, request *Cl
     if request == nil {
         request = NewCloseSecurityPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "CloseSecurityPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CloseSecurityPolicy require credential")
@@ -687,6 +694,7 @@ func (c *Client) CreateCertificateWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateCertificateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "CreateCertificate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateCertificate require credential")
@@ -768,6 +776,7 @@ func (c *Client) CreateCustomHeaderWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreateCustomHeaderRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "CreateCustomHeader")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateCustomHeader require credential")
@@ -861,6 +870,7 @@ func (c *Client) CreateDomainWithContext(ctx context.Context, request *CreateDom
     if request == nil {
         request = NewCreateDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "CreateDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDomain require credential")
@@ -938,6 +948,7 @@ func (c *Client) CreateDomainErrorPageInfoWithContext(ctx context.Context, reque
     if request == nil {
         request = NewCreateDomainErrorPageInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "CreateDomainErrorPageInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDomainErrorPageInfo require credential")
@@ -1029,6 +1040,7 @@ func (c *Client) CreateHTTPListenerWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreateHTTPListenerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "CreateHTTPListener")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateHTTPListener require credential")
@@ -1120,6 +1132,7 @@ func (c *Client) CreateHTTPSListenerWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreateHTTPSListenerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "CreateHTTPSListener")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateHTTPSListener require credential")
@@ -1225,6 +1238,7 @@ func (c *Client) CreateProxyWithContext(ctx context.Context, request *CreateProx
     if request == nil {
         request = NewCreateProxyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "CreateProxy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateProxy require credential")
@@ -1312,6 +1326,7 @@ func (c *Client) CreateProxyGroupWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateProxyGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "CreateProxyGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateProxyGroup require credential")
@@ -1387,6 +1402,7 @@ func (c *Client) CreateProxyGroupDomainWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateProxyGroupDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "CreateProxyGroupDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateProxyGroupDomain require credential")
@@ -1474,6 +1490,7 @@ func (c *Client) CreateRuleWithContext(ctx context.Context, request *CreateRuleR
     if request == nil {
         request = NewCreateRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "CreateRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateRule require credential")
@@ -1553,6 +1570,7 @@ func (c *Client) CreateSecurityPolicyWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateSecurityPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "CreateSecurityPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateSecurityPolicy require credential")
@@ -1636,6 +1654,7 @@ func (c *Client) CreateSecurityRulesWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreateSecurityRulesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "CreateSecurityRules")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateSecurityRules require credential")
@@ -1731,6 +1750,7 @@ func (c *Client) CreateTCPListenersWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreateTCPListenersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "CreateTCPListeners")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTCPListeners require credential")
@@ -1820,6 +1840,7 @@ func (c *Client) CreateUDPListenersWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreateUDPListenersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "CreateUDPListeners")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateUDPListeners require credential")
@@ -1895,6 +1916,7 @@ func (c *Client) DeleteCertificateWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteCertificateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DeleteCertificate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteCertificate require credential")
@@ -1978,6 +2000,7 @@ func (c *Client) DeleteDomainWithContext(ctx context.Context, request *DeleteDom
     if request == nil {
         request = NewDeleteDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DeleteDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteDomain require credential")
@@ -2053,6 +2076,7 @@ func (c *Client) DeleteDomainErrorPageInfoWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDeleteDomainErrorPageInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DeleteDomainErrorPageInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteDomainErrorPageInfo require credential")
@@ -2134,6 +2158,7 @@ func (c *Client) DeleteListenersWithContext(ctx context.Context, request *Delete
     if request == nil {
         request = NewDeleteListenersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DeleteListeners")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteListeners require credential")
@@ -2217,6 +2242,7 @@ func (c *Client) DeleteProxyGroupWithContext(ctx context.Context, request *Delet
     if request == nil {
         request = NewDeleteProxyGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DeleteProxyGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteProxyGroup require credential")
@@ -2300,6 +2326,7 @@ func (c *Client) DeleteRuleWithContext(ctx context.Context, request *DeleteRuleR
     if request == nil {
         request = NewDeleteRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DeleteRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteRule require credential")
@@ -2377,6 +2404,7 @@ func (c *Client) DeleteSecurityPolicyWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDeleteSecurityPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DeleteSecurityPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteSecurityPolicy require credential")
@@ -2454,6 +2482,7 @@ func (c *Client) DeleteSecurityRulesWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDeleteSecurityRulesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DeleteSecurityRules")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteSecurityRules require credential")
@@ -2527,6 +2556,7 @@ func (c *Client) DescribeAccessRegionsWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeAccessRegionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeAccessRegions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAccessRegions require credential")
@@ -2600,6 +2630,7 @@ func (c *Client) DescribeAccessRegionsByDestRegionWithContext(ctx context.Contex
     if request == nil {
         request = NewDescribeAccessRegionsByDestRegionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeAccessRegionsByDestRegion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAccessRegionsByDestRegion require credential")
@@ -2669,6 +2700,7 @@ func (c *Client) DescribeAuthSignatureWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeAuthSignatureRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeAuthSignature")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAuthSignature require credential")
@@ -2740,6 +2772,7 @@ func (c *Client) DescribeBlackHeaderWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeBlackHeaderRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeBlackHeader")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBlackHeader require credential")
@@ -2813,6 +2846,7 @@ func (c *Client) DescribeCertificateDetailWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeCertificateDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeCertificateDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCertificateDetail require credential")
@@ -2886,6 +2920,7 @@ func (c *Client) DescribeCertificatesWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeCertificatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeCertificates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCertificates require credential")
@@ -2961,6 +2996,7 @@ func (c *Client) DescribeCountryAreaMappingWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeCountryAreaMappingRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeCountryAreaMapping")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCountryAreaMapping require credential")
@@ -3032,6 +3068,7 @@ func (c *Client) DescribeCustomHeaderWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeCustomHeaderRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeCustomHeader")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCustomHeader require credential")
@@ -3103,6 +3140,7 @@ func (c *Client) DescribeDestRegionsWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeDestRegionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeDestRegions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDestRegions require credential")
@@ -3172,6 +3210,7 @@ func (c *Client) DescribeDomainErrorPageInfoWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeDomainErrorPageInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeDomainErrorPageInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDomainErrorPageInfo require credential")
@@ -3239,6 +3278,7 @@ func (c *Client) DescribeDomainErrorPageInfoByIdsWithContext(ctx context.Context
     if request == nil {
         request = NewDescribeDomainErrorPageInfoByIdsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeDomainErrorPageInfoByIds")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDomainErrorPageInfoByIds require credential")
@@ -3312,6 +3352,7 @@ func (c *Client) DescribeGroupAndStatisticsProxyWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeGroupAndStatisticsProxyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeGroupAndStatisticsProxy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeGroupAndStatisticsProxy require credential")
@@ -3389,6 +3430,7 @@ func (c *Client) DescribeGroupDomainConfigWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeGroupDomainConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeGroupDomainConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeGroupDomainConfig require credential")
@@ -3466,6 +3508,7 @@ func (c *Client) DescribeHTTPListenersWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeHTTPListenersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeHTTPListeners")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeHTTPListeners require credential")
@@ -3541,6 +3584,7 @@ func (c *Client) DescribeHTTPSListenersWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeHTTPSListenersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeHTTPSListeners")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeHTTPSListeners require credential")
@@ -3612,6 +3656,7 @@ func (c *Client) DescribeListenerRealServersWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeListenerRealServersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeListenerRealServers")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeListenerRealServers require credential")
@@ -3685,6 +3730,7 @@ func (c *Client) DescribeListenerStatisticsWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeListenerStatisticsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeListenerStatistics")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeListenerStatistics require credential")
@@ -3758,6 +3804,7 @@ func (c *Client) DescribeProxiesWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeProxiesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeProxies")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeProxies require credential")
@@ -3833,6 +3880,7 @@ func (c *Client) DescribeProxiesStatusWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeProxiesStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeProxiesStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeProxiesStatus require credential")
@@ -3902,6 +3950,7 @@ func (c *Client) DescribeProxyAndStatisticsListenersWithContext(ctx context.Cont
     if request == nil {
         request = NewDescribeProxyAndStatisticsListenersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeProxyAndStatisticsListeners")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeProxyAndStatisticsListeners require credential")
@@ -3981,6 +4030,7 @@ func (c *Client) DescribeProxyDetailWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeProxyDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeProxyDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeProxyDetail require credential")
@@ -4054,6 +4104,7 @@ func (c *Client) DescribeProxyGroupDetailsWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeProxyGroupDetailsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeProxyGroupDetails")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeProxyGroupDetails require credential")
@@ -4129,6 +4180,7 @@ func (c *Client) DescribeProxyGroupListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeProxyGroupListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeProxyGroupList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeProxyGroupList require credential")
@@ -4202,6 +4254,7 @@ func (c *Client) DescribeProxyGroupStatisticsWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeProxyGroupStatisticsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeProxyGroupStatistics")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeProxyGroupStatistics require credential")
@@ -4275,6 +4328,7 @@ func (c *Client) DescribeProxyStatisticsWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeProxyStatisticsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeProxyStatistics")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeProxyStatistics require credential")
@@ -4344,6 +4398,7 @@ func (c *Client) DescribeRealServerStatisticsWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeRealServerStatisticsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeRealServerStatistics")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRealServerStatistics require credential")
@@ -4415,6 +4470,7 @@ func (c *Client) DescribeRealServersWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeRealServersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeRealServers")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRealServers require credential")
@@ -4488,6 +4544,7 @@ func (c *Client) DescribeRealServersStatusWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeRealServersStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeRealServersStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRealServersStatus require credential")
@@ -4559,6 +4616,7 @@ func (c *Client) DescribeRegionAndPriceWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeRegionAndPriceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeRegionAndPrice")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRegionAndPrice require credential")
@@ -4630,6 +4688,7 @@ func (c *Client) DescribeResourcesByTagWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeResourcesByTagRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeResourcesByTag")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeResourcesByTag require credential")
@@ -4701,6 +4760,7 @@ func (c *Client) DescribeRuleRealServersWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeRuleRealServersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeRuleRealServers")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRuleRealServers require credential")
@@ -4772,6 +4832,7 @@ func (c *Client) DescribeRulesWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeRulesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeRules")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRules require credential")
@@ -4851,6 +4912,7 @@ func (c *Client) DescribeRulesByRuleIdsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeRulesByRuleIdsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeRulesByRuleIds")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRulesByRuleIds require credential")
@@ -4926,6 +4988,7 @@ func (c *Client) DescribeSecurityPolicyDetailWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeSecurityPolicyDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeSecurityPolicyDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSecurityPolicyDetail require credential")
@@ -5005,6 +5068,7 @@ func (c *Client) DescribeSecurityRulesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeSecurityRulesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeSecurityRules")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSecurityRules require credential")
@@ -5078,6 +5142,7 @@ func (c *Client) DescribeTCPListenersWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeTCPListenersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeTCPListeners")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTCPListeners require credential")
@@ -5149,6 +5214,7 @@ func (c *Client) DescribeUDPListenersWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeUDPListenersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DescribeUDPListeners")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUDPListeners require credential")
@@ -5240,6 +5306,7 @@ func (c *Client) DestroyProxiesWithContext(ctx context.Context, request *Destroy
     if request == nil {
         request = NewDestroyProxiesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "DestroyProxies")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DestroyProxies require credential")
@@ -5325,6 +5392,7 @@ func (c *Client) InquiryPriceCreateProxyWithContext(ctx context.Context, request
     if request == nil {
         request = NewInquiryPriceCreateProxyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "InquiryPriceCreateProxy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InquiryPriceCreateProxy require credential")
@@ -5410,6 +5478,7 @@ func (c *Client) ModifyCertificateWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyCertificateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "ModifyCertificate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyCertificate require credential")
@@ -5485,6 +5554,7 @@ func (c *Client) ModifyCertificateAttributesWithContext(ctx context.Context, req
     if request == nil {
         request = NewModifyCertificateAttributesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "ModifyCertificateAttributes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyCertificateAttributes require credential")
@@ -5574,6 +5644,7 @@ func (c *Client) ModifyDomainWithContext(ctx context.Context, request *ModifyDom
     if request == nil {
         request = NewModifyDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "ModifyDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDomain require credential")
@@ -5649,6 +5720,7 @@ func (c *Client) ModifyGroupDomainConfigWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyGroupDomainConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "ModifyGroupDomainConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyGroupDomainConfig require credential")
@@ -5730,6 +5802,7 @@ func (c *Client) ModifyHTTPListenerAttributeWithContext(ctx context.Context, req
     if request == nil {
         request = NewModifyHTTPListenerAttributeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "ModifyHTTPListenerAttribute")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyHTTPListenerAttribute require credential")
@@ -5813,6 +5886,7 @@ func (c *Client) ModifyHTTPSListenerAttributeWithContext(ctx context.Context, re
     if request == nil {
         request = NewModifyHTTPSListenerAttributeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "ModifyHTTPSListenerAttribute")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyHTTPSListenerAttribute require credential")
@@ -5896,6 +5970,7 @@ func (c *Client) ModifyProxiesAttributeWithContext(ctx context.Context, request 
     if request == nil {
         request = NewModifyProxiesAttributeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "ModifyProxiesAttribute")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyProxiesAttribute require credential")
@@ -5977,6 +6052,7 @@ func (c *Client) ModifyProxiesProjectWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyProxiesProjectRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "ModifyProxiesProject")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyProxiesProject require credential")
@@ -6064,6 +6140,7 @@ func (c *Client) ModifyProxyConfigurationWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyProxyConfigurationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "ModifyProxyConfiguration")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyProxyConfiguration require credential")
@@ -6139,6 +6216,7 @@ func (c *Client) ModifyProxyGroupAttributeWithContext(ctx context.Context, reque
     if request == nil {
         request = NewModifyProxyGroupAttributeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "ModifyProxyGroupAttribute")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyProxyGroupAttribute require credential")
@@ -6210,6 +6288,7 @@ func (c *Client) ModifyRealServerNameWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyRealServerNameRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "ModifyRealServerName")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyRealServerName require credential")
@@ -6289,6 +6368,7 @@ func (c *Client) ModifyRuleAttributeWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyRuleAttributeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "ModifyRuleAttribute")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyRuleAttribute require credential")
@@ -6372,6 +6452,7 @@ func (c *Client) ModifySecurityRuleWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifySecurityRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "ModifySecurityRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifySecurityRule require credential")
@@ -6453,6 +6534,7 @@ func (c *Client) ModifyTCPListenerAttributeWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyTCPListenerAttributeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "ModifyTCPListenerAttribute")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyTCPListenerAttribute require credential")
@@ -6534,6 +6616,7 @@ func (c *Client) ModifyUDPListenerAttributeWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyUDPListenerAttributeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "ModifyUDPListenerAttribute")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyUDPListenerAttribute require credential")
@@ -6615,6 +6698,7 @@ func (c *Client) OpenProxiesWithContext(ctx context.Context, request *OpenProxie
     if request == nil {
         request = NewOpenProxiesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "OpenProxies")
     
     if c.GetCredential() == nil {
         return nil, errors.New("OpenProxies require credential")
@@ -6690,6 +6774,7 @@ func (c *Client) OpenProxyGroupWithContext(ctx context.Context, request *OpenPro
     if request == nil {
         request = NewOpenProxyGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "OpenProxyGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("OpenProxyGroup require credential")
@@ -6769,6 +6854,7 @@ func (c *Client) OpenSecurityPolicyWithContext(ctx context.Context, request *Ope
     if request == nil {
         request = NewOpenSecurityPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "OpenSecurityPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("OpenSecurityPolicy require credential")
@@ -6846,6 +6932,7 @@ func (c *Client) RemoveRealServersWithContext(ctx context.Context, request *Remo
     if request == nil {
         request = NewRemoveRealServersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "RemoveRealServers")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RemoveRealServers require credential")
@@ -6933,6 +7020,7 @@ func (c *Client) SetAuthenticationWithContext(ctx context.Context, request *SetA
     if request == nil {
         request = NewSetAuthenticationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gaap", APIVersion, "SetAuthentication")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetAuthentication require credential")

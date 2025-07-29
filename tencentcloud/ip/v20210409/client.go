@@ -98,6 +98,7 @@ func (c *Client) AllocateCustomerCreditWithContext(ctx context.Context, request 
     if request == nil {
         request = NewAllocateCustomerCreditRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ip", APIVersion, "AllocateCustomerCredit")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AllocateCustomerCredit require credential")
@@ -201,6 +202,7 @@ func (c *Client) CreateAccountWithContext(ctx context.Context, request *CreateAc
     if request == nil {
         request = NewCreateAccountRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ip", APIVersion, "CreateAccount")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAccount require credential")
@@ -250,6 +252,7 @@ func (c *Client) GetCountryCodesWithContext(ctx context.Context, request *GetCou
     if request == nil {
         request = NewGetCountryCodesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ip", APIVersion, "GetCountryCodes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetCountryCodes require credential")
@@ -299,6 +302,7 @@ func (c *Client) QueryCreditAllocationHistoryWithContext(ctx context.Context, re
     if request == nil {
         request = NewQueryCreditAllocationHistoryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ip", APIVersion, "QueryCreditAllocationHistory")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryCreditAllocationHistory require credential")
@@ -348,6 +352,7 @@ func (c *Client) QueryCustomersCreditWithContext(ctx context.Context, request *Q
     if request == nil {
         request = NewQueryCustomersCreditRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ip", APIVersion, "QueryCustomersCredit")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryCustomersCredit require credential")
@@ -397,6 +402,7 @@ func (c *Client) QueryPartnerCreditWithContext(ctx context.Context, request *Que
     if request == nil {
         request = NewQueryPartnerCreditRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "ip", APIVersion, "QueryPartnerCredit")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryPartnerCredit require credential")

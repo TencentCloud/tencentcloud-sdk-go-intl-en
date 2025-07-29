@@ -152,6 +152,7 @@ func (c *Client) AddCLSTopicDomainsWithContext(ctx context.Context, request *Add
     if request == nil {
         request = NewAddCLSTopicDomainsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "AddCLSTopicDomains")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AddCLSTopicDomains require credential")
@@ -315,6 +316,7 @@ func (c *Client) AddCdnDomainWithContext(ctx context.Context, request *AddCdnDom
     if request == nil {
         request = NewAddCdnDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "AddCdnDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AddCdnDomain require credential")
@@ -432,6 +434,7 @@ func (c *Client) CreateClsLogTopicWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateClsLogTopicRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "CreateClsLogTopic")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateClsLogTopic require credential")
@@ -501,6 +504,7 @@ func (c *Client) CreateScdnFailedLogTaskWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateScdnFailedLogTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "CreateScdnFailedLogTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateScdnFailedLogTask require credential")
@@ -590,6 +594,7 @@ func (c *Client) DeleteCdnDomainWithContext(ctx context.Context, request *Delete
     if request == nil {
         request = NewDeleteCdnDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DeleteCdnDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteCdnDomain require credential")
@@ -693,6 +698,7 @@ func (c *Client) DeleteClsLogTopicWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteClsLogTopicRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DeleteClsLogTopic")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteClsLogTopic require credential")
@@ -796,6 +802,7 @@ func (c *Client) DescribeBillingDataWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeBillingDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DescribeBillingData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillingData require credential")
@@ -963,6 +970,7 @@ func (c *Client) DescribeCdnDataWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeCdnDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DescribeCdnData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCdnData require credential")
@@ -1056,6 +1064,7 @@ func (c *Client) DescribeCdnDomainLogsWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeCdnDomainLogsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DescribeCdnDomainLogs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCdnDomainLogs require credential")
@@ -1127,6 +1136,7 @@ func (c *Client) DescribeCdnIpWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeCdnIpRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DescribeCdnIp")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCdnIp require credential")
@@ -1196,6 +1206,7 @@ func (c *Client) DescribeCdnOriginIpWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeCdnOriginIpRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DescribeCdnOriginIp")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCdnOriginIp require credential")
@@ -1281,6 +1292,7 @@ func (c *Client) DescribeCertDomainsWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeCertDomainsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DescribeCertDomains")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCertDomains require credential")
@@ -1376,6 +1388,7 @@ func (c *Client) DescribeDomainsWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeDomainsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DescribeDomains")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDomains require credential")
@@ -1473,6 +1486,7 @@ func (c *Client) DescribeDomainsConfigWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeDomainsConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DescribeDomainsConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDomainsConfig require credential")
@@ -1558,6 +1572,7 @@ func (c *Client) DescribeIpStatusWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeIpStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DescribeIpStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIpStatus require credential")
@@ -1665,6 +1680,7 @@ func (c *Client) DescribeIpVisitWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeIpVisitRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DescribeIpVisit")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIpVisit require credential")
@@ -1740,6 +1756,7 @@ func (c *Client) DescribeMapInfoWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeMapInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DescribeMapInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMapInfo require credential")
@@ -1891,6 +1908,7 @@ func (c *Client) DescribeOriginDataWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeOriginDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DescribeOriginData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOriginData require credential")
@@ -1960,6 +1978,7 @@ func (c *Client) DescribePayTypeWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribePayTypeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DescribePayType")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribePayType require credential")
@@ -2019,6 +2038,7 @@ func (c *Client) DescribePurgeQuotaWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribePurgeQuotaRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DescribePurgeQuota")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribePurgeQuota require credential")
@@ -2092,6 +2112,7 @@ func (c *Client) DescribePurgeTasksWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribePurgeTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DescribePurgeTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribePurgeTasks require credential")
@@ -2153,6 +2174,7 @@ func (c *Client) DescribePushQuotaWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribePushQuotaRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DescribePushQuota")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribePushQuota require credential")
@@ -2248,6 +2270,7 @@ func (c *Client) DescribePushTasksWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribePushTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DescribePushTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribePushTasks require credential")
@@ -2315,6 +2338,7 @@ func (c *Client) DescribeReportDataWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeReportDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DescribeReportData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeReportData require credential")
@@ -2384,6 +2408,7 @@ func (c *Client) DescribeUrlViolationsWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeUrlViolationsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DescribeUrlViolations")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUrlViolations require credential")
@@ -2473,6 +2498,7 @@ func (c *Client) DisableCachesWithContext(ctx context.Context, request *DisableC
     if request == nil {
         request = NewDisableCachesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DisableCaches")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DisableCaches require credential")
@@ -2580,6 +2606,7 @@ func (c *Client) DisableClsLogTopicWithContext(ctx context.Context, request *Dis
     if request == nil {
         request = NewDisableClsLogTopicRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DisableClsLogTopic")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DisableClsLogTopic require credential")
@@ -2661,6 +2688,7 @@ func (c *Client) EnableCachesWithContext(ctx context.Context, request *EnableCac
     if request == nil {
         request = NewEnableCachesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "EnableCaches")
     
     if c.GetCredential() == nil {
         return nil, errors.New("EnableCaches require credential")
@@ -2768,6 +2796,7 @@ func (c *Client) EnableClsLogTopicWithContext(ctx context.Context, request *Enab
     if request == nil {
         request = NewEnableClsLogTopicRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "EnableClsLogTopic")
     
     if c.GetCredential() == nil {
         return nil, errors.New("EnableClsLogTopic require credential")
@@ -2849,6 +2878,7 @@ func (c *Client) GetDisableRecordsWithContext(ctx context.Context, request *GetD
     if request == nil {
         request = NewGetDisableRecordsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "GetDisableRecords")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetDisableRecords require credential")
@@ -2968,6 +2998,7 @@ func (c *Client) ListClsLogTopicsWithContext(ctx context.Context, request *ListC
     if request == nil {
         request = NewListClsLogTopicsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "ListClsLogTopics")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListClsLogTopics require credential")
@@ -3079,6 +3110,7 @@ func (c *Client) ListClsTopicDomainsWithContext(ctx context.Context, request *Li
     if request == nil {
         request = NewListClsTopicDomainsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "ListClsTopicDomains")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListClsTopicDomains require credential")
@@ -3218,6 +3250,7 @@ func (c *Client) ListTopDataWithContext(ctx context.Context, request *ListTopDat
     if request == nil {
         request = NewListTopDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "ListTopData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListTopData require credential")
@@ -3327,6 +3360,7 @@ func (c *Client) ManageClsTopicDomainsWithContext(ctx context.Context, request *
     if request == nil {
         request = NewManageClsTopicDomainsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "ManageClsTopicDomains")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ManageClsTopicDomains require credential")
@@ -3492,6 +3526,7 @@ func (c *Client) ModifyDomainConfigWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyDomainConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "ModifyDomainConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDomainConfig require credential")
@@ -3601,6 +3636,7 @@ func (c *Client) PurgePathCacheWithContext(ctx context.Context, request *PurgePa
     if request == nil {
         request = NewPurgePathCacheRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "PurgePathCache")
     
     if c.GetCredential() == nil {
         return nil, errors.New("PurgePathCache require credential")
@@ -3716,6 +3752,7 @@ func (c *Client) PurgeUrlsCacheWithContext(ctx context.Context, request *PurgeUr
     if request == nil {
         request = NewPurgeUrlsCacheRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "PurgeUrlsCache")
     
     if c.GetCredential() == nil {
         return nil, errors.New("PurgeUrlsCache require credential")
@@ -3833,6 +3870,7 @@ func (c *Client) PushUrlsCacheWithContext(ctx context.Context, request *PushUrls
     if request == nil {
         request = NewPushUrlsCacheRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "PushUrlsCache")
     
     if c.GetCredential() == nil {
         return nil, errors.New("PushUrlsCache require credential")
@@ -3946,6 +3984,7 @@ func (c *Client) SearchClsLogWithContext(ctx context.Context, request *SearchCls
     if request == nil {
         request = NewSearchClsLogRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "SearchClsLog")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SearchClsLog require credential")
@@ -4045,6 +4084,7 @@ func (c *Client) StartCdnDomainWithContext(ctx context.Context, request *StartCd
     if request == nil {
         request = NewStartCdnDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "StartCdnDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartCdnDomain require credential")
@@ -4140,6 +4180,7 @@ func (c *Client) StopCdnDomainWithContext(ctx context.Context, request *StopCdnD
     if request == nil {
         request = NewStopCdnDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "StopCdnDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopCdnDomain require credential")
@@ -4299,6 +4340,7 @@ func (c *Client) UpdateDomainConfigWithContext(ctx context.Context, request *Upd
     if request == nil {
         request = NewUpdateDomainConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "UpdateDomainConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateDomainConfig require credential")
@@ -4364,6 +4406,7 @@ func (c *Client) UpdatePayTypeWithContext(ctx context.Context, request *UpdatePa
     if request == nil {
         request = NewUpdatePayTypeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "UpdatePayType")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdatePayType require credential")
@@ -4455,6 +4498,7 @@ func (c *Client) UpdateScdnDomainWithContext(ctx context.Context, request *Updat
     if request == nil {
         request = NewUpdateScdnDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "UpdateScdnDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateScdnDomain require credential")

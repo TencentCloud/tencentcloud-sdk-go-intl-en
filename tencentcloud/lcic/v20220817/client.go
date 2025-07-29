@@ -118,6 +118,7 @@ func (c *Client) AddGroupMemberWithContext(ctx context.Context, request *AddGrou
     if request == nil {
         request = NewAddGroupMemberRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "AddGroupMember")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AddGroupMember require credential")
@@ -199,6 +200,7 @@ func (c *Client) BatchAddGroupMemberWithContext(ctx context.Context, request *Ba
     if request == nil {
         request = NewBatchAddGroupMemberRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "BatchAddGroupMember")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchAddGroupMember require credential")
@@ -290,6 +292,7 @@ func (c *Client) BatchCreateGroupWithMembersWithContext(ctx context.Context, req
     if request == nil {
         request = NewBatchCreateGroupWithMembersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "BatchCreateGroupWithMembers")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchCreateGroupWithMembers require credential")
@@ -403,6 +406,7 @@ func (c *Client) BatchCreateRoomWithContext(ctx context.Context, request *BatchC
     if request == nil {
         request = NewBatchCreateRoomRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "BatchCreateRoom")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchCreateRoom require credential")
@@ -486,6 +490,7 @@ func (c *Client) BatchDeleteGroupMemberWithContext(ctx context.Context, request 
     if request == nil {
         request = NewBatchDeleteGroupMemberRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "BatchDeleteGroupMember")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchDeleteGroupMember require credential")
@@ -553,6 +558,7 @@ func (c *Client) BatchDeleteRecordWithContext(ctx context.Context, request *Batc
     if request == nil {
         request = NewBatchDeleteRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "BatchDeleteRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchDeleteRecord require credential")
@@ -602,6 +608,7 @@ func (c *Client) BatchDescribeDocumentWithContext(ctx context.Context, request *
     if request == nil {
         request = NewBatchDescribeDocumentRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "BatchDescribeDocument")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchDescribeDocument require credential")
@@ -665,6 +672,7 @@ func (c *Client) BatchRegisterWithContext(ctx context.Context, request *BatchReg
     if request == nil {
         request = NewBatchRegisterRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "BatchRegister")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchRegister require credential")
@@ -724,6 +732,7 @@ func (c *Client) BindDocumentToRoomWithContext(ctx context.Context, request *Bin
     if request == nil {
         request = NewBindDocumentToRoomRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "BindDocumentToRoom")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BindDocumentToRoom require credential")
@@ -781,6 +790,7 @@ func (c *Client) CreateDocumentWithContext(ctx context.Context, request *CreateD
     if request == nil {
         request = NewCreateDocumentRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "CreateDocument")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDocument require credential")
@@ -864,6 +874,7 @@ func (c *Client) CreateGroupWithMembersWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateGroupWithMembersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "CreateGroupWithMembers")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateGroupWithMembers require credential")
@@ -953,6 +964,7 @@ func (c *Client) CreateGroupWithSubGroupWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateGroupWithSubGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "CreateGroupWithSubGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateGroupWithSubGroup require credential")
@@ -1034,6 +1046,7 @@ func (c *Client) CreateRoomWithContext(ctx context.Context, request *CreateRoomR
     if request == nil {
         request = NewCreateRoomRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "CreateRoom")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateRoom require credential")
@@ -1087,6 +1100,7 @@ func (c *Client) CreateSupervisorWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateSupervisorRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "CreateSupervisor")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateSupervisor require credential")
@@ -1140,6 +1154,7 @@ func (c *Client) DeleteAppCustomContentWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDeleteAppCustomContentRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DeleteAppCustomContent")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteAppCustomContent require credential")
@@ -1195,6 +1210,7 @@ func (c *Client) DeleteDocumentWithContext(ctx context.Context, request *DeleteD
     if request == nil {
         request = NewDeleteDocumentRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DeleteDocument")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteDocument require credential")
@@ -1268,6 +1284,7 @@ func (c *Client) DeleteGroupWithContext(ctx context.Context, request *DeleteGrou
     if request == nil {
         request = NewDeleteGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DeleteGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteGroup require credential")
@@ -1351,6 +1368,7 @@ func (c *Client) DeleteGroupMemberWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteGroupMemberRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DeleteGroupMember")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteGroupMember require credential")
@@ -1418,6 +1436,7 @@ func (c *Client) DeleteRecordWithContext(ctx context.Context, request *DeleteRec
     if request == nil {
         request = NewDeleteRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DeleteRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteRecord require credential")
@@ -1471,6 +1490,7 @@ func (c *Client) DeleteRoomWithContext(ctx context.Context, request *DeleteRoomR
     if request == nil {
         request = NewDeleteRoomRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DeleteRoom")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteRoom require credential")
@@ -1524,6 +1544,7 @@ func (c *Client) DeleteSupervisorWithContext(ctx context.Context, request *Delet
     if request == nil {
         request = NewDeleteSupervisorRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DeleteSupervisor")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteSupervisor require credential")
@@ -1587,6 +1608,7 @@ func (c *Client) DescribeAnswerListWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeAnswerListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DescribeAnswerList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAnswerList require credential")
@@ -1648,6 +1670,7 @@ func (c *Client) DescribeCurrentMemberListWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeCurrentMemberListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DescribeCurrentMemberList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCurrentMemberList require credential")
@@ -1709,6 +1732,7 @@ func (c *Client) DescribeDeveloperWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeDeveloperRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DescribeDeveloper")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDeveloper require credential")
@@ -1764,6 +1788,7 @@ func (c *Client) DescribeDocumentWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeDocumentRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DescribeDocument")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDocument require credential")
@@ -1821,6 +1846,7 @@ func (c *Client) DescribeDocumentsWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeDocumentsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DescribeDocuments")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDocuments require credential")
@@ -1938,6 +1964,7 @@ func (c *Client) DescribeDocumentsByRoomWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeDocumentsByRoomRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DescribeDocumentsByRoom")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDocumentsByRoom require credential")
@@ -2015,6 +2042,7 @@ func (c *Client) DescribeGroupWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DescribeGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeGroup require credential")
@@ -2094,6 +2122,7 @@ func (c *Client) DescribeGroupListWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeGroupListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DescribeGroupList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeGroupList require credential")
@@ -2177,6 +2206,7 @@ func (c *Client) DescribeGroupMemberListWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeGroupMemberListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DescribeGroupMemberList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeGroupMemberList require credential")
@@ -2240,6 +2270,7 @@ func (c *Client) DescribeQuestionListWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeQuestionListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DescribeQuestionList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeQuestionList require credential")
@@ -2297,6 +2328,7 @@ func (c *Client) DescribeRoomWithContext(ctx context.Context, request *DescribeR
     if request == nil {
         request = NewDescribeRoomRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DescribeRoom")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRoom require credential")
@@ -2358,6 +2390,7 @@ func (c *Client) DescribeRoomStatisticsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeRoomStatisticsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DescribeRoomStatistics")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRoomStatistics require credential")
@@ -2475,6 +2508,7 @@ func (c *Client) DescribeSdkAppIdUsersWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeSdkAppIdUsersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DescribeSdkAppIdUsers")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSdkAppIdUsers require credential")
@@ -2540,6 +2574,7 @@ func (c *Client) DescribeSupervisorsWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeSupervisorsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DescribeSupervisors")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSupervisors require credential")
@@ -2591,6 +2626,7 @@ func (c *Client) DescribeUserWithContext(ctx context.Context, request *DescribeU
     if request == nil {
         request = NewDescribeUserRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "DescribeUser")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUser require credential")
@@ -2666,6 +2702,7 @@ func (c *Client) EndRoomWithContext(ctx context.Context, request *EndRoomRequest
     if request == nil {
         request = NewEndRoomRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "EndRoom")
     
     if c.GetCredential() == nil {
         return nil, errors.New("EndRoom require credential")
@@ -2721,6 +2758,7 @@ func (c *Client) GetRoomEventWithContext(ctx context.Context, request *GetRoomEv
     if request == nil {
         request = NewGetRoomEventRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "GetRoomEvent")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetRoomEvent require credential")
@@ -2796,6 +2834,7 @@ func (c *Client) GetRoomMessageWithContext(ctx context.Context, request *GetRoom
     if request == nil {
         request = NewGetRoomMessageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "GetRoomMessage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetRoomMessage require credential")
@@ -2867,6 +2906,7 @@ func (c *Client) GetRoomsWithContext(ctx context.Context, request *GetRoomsReque
     if request == nil {
         request = NewGetRoomsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "GetRooms")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetRooms require credential")
@@ -2930,6 +2970,7 @@ func (c *Client) GetWatermarkWithContext(ctx context.Context, request *GetWaterm
     if request == nil {
         request = NewGetWatermarkRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "GetWatermark")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetWatermark require credential")
@@ -2981,6 +3022,7 @@ func (c *Client) KickUserFromRoomWithContext(ctx context.Context, request *KickU
     if request == nil {
         request = NewKickUserFromRoomRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "KickUserFromRoom")
     
     if c.GetCredential() == nil {
         return nil, errors.New("KickUserFromRoom require credential")
@@ -3034,6 +3076,7 @@ func (c *Client) LoginOriginIdWithContext(ctx context.Context, request *LoginOri
     if request == nil {
         request = NewLoginOriginIdRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "LoginOriginId")
     
     if c.GetCredential() == nil {
         return nil, errors.New("LoginOriginId require credential")
@@ -3085,6 +3128,7 @@ func (c *Client) LoginUserWithContext(ctx context.Context, request *LoginUserReq
     if request == nil {
         request = NewLoginUserRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "LoginUser")
     
     if c.GetCredential() == nil {
         return nil, errors.New("LoginUser require credential")
@@ -3140,6 +3184,7 @@ func (c *Client) ModifyAppWithContext(ctx context.Context, request *ModifyAppReq
     if request == nil {
         request = NewModifyAppRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "ModifyApp")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyApp require credential")
@@ -3239,6 +3284,7 @@ func (c *Client) ModifyGroupWithContext(ctx context.Context, request *ModifyGrou
     if request == nil {
         request = NewModifyGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "ModifyGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyGroup require credential")
@@ -3322,6 +3368,7 @@ func (c *Client) ModifyRoomWithContext(ctx context.Context, request *ModifyRoomR
     if request == nil {
         request = NewModifyRoomRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "ModifyRoom")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyRoom require credential")
@@ -3439,6 +3486,7 @@ func (c *Client) ModifyUserProfileWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyUserProfileRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "ModifyUserProfile")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyUserProfile require credential")
@@ -3494,6 +3542,7 @@ func (c *Client) RegisterUserWithContext(ctx context.Context, request *RegisterU
     if request == nil {
         request = NewRegisterUserRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "RegisterUser")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RegisterUser require credential")
@@ -3553,6 +3602,7 @@ func (c *Client) SetAppCustomContentWithContext(ctx context.Context, request *Se
     if request == nil {
         request = NewSetAppCustomContentRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "SetAppCustomContent")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetAppCustomContent require credential")
@@ -3618,6 +3668,7 @@ func (c *Client) SetWatermarkWithContext(ctx context.Context, request *SetWaterm
     if request == nil {
         request = NewSetWatermarkRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "SetWatermark")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetWatermark require credential")
@@ -3693,6 +3744,7 @@ func (c *Client) StartRoomWithContext(ctx context.Context, request *StartRoomReq
     if request == nil {
         request = NewStartRoomRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "StartRoom")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartRoom require credential")
@@ -3744,6 +3796,7 @@ func (c *Client) UnbindDocumentFromRoomWithContext(ctx context.Context, request 
     if request == nil {
         request = NewUnbindDocumentFromRoomRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lcic", APIVersion, "UnbindDocumentFromRoom")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UnbindDocumentFromRoom require credential")

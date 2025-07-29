@@ -76,6 +76,7 @@ func (c *Client) CreateTaskFromActionWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateTaskFromActionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cfg", APIVersion, "CreateTaskFromAction")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTaskFromAction require credential")
@@ -139,6 +140,7 @@ func (c *Client) CreateTaskFromTemplateWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateTaskFromTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cfg", APIVersion, "CreateTaskFromTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTaskFromTemplate require credential")
@@ -196,6 +198,7 @@ func (c *Client) DeleteTaskWithContext(ctx context.Context, request *DeleteTaskR
     if request == nil {
         request = NewDeleteTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cfg", APIVersion, "DeleteTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteTask require credential")
@@ -253,6 +256,7 @@ func (c *Client) DescribeActionFieldConfigListWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeActionFieldConfigListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cfg", APIVersion, "DescribeActionFieldConfigList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeActionFieldConfigList require credential")
@@ -310,6 +314,7 @@ func (c *Client) DescribeActionLibraryListWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeActionLibraryListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cfg", APIVersion, "DescribeActionLibraryList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeActionLibraryList require credential")
@@ -367,6 +372,7 @@ func (c *Client) DescribeObjectTypeListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeObjectTypeListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cfg", APIVersion, "DescribeObjectTypeList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeObjectTypeList require credential")
@@ -450,6 +456,7 @@ func (c *Client) DescribeTaskWithContext(ctx context.Context, request *DescribeT
     if request == nil {
         request = NewDescribeTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cfg", APIVersion, "DescribeTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTask require credential")
@@ -509,6 +516,7 @@ func (c *Client) DescribeTaskExecuteLogsWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeTaskExecuteLogsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cfg", APIVersion, "DescribeTaskExecuteLogs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTaskExecuteLogs require credential")
@@ -568,6 +576,7 @@ func (c *Client) DescribeTaskListWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeTaskListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cfg", APIVersion, "DescribeTaskList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTaskList require credential")
@@ -637,6 +646,7 @@ func (c *Client) DescribeTaskPolicyTriggerLogWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeTaskPolicyTriggerLogRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cfg", APIVersion, "DescribeTaskPolicyTriggerLog")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTaskPolicyTriggerLog require credential")
@@ -708,6 +718,7 @@ func (c *Client) DescribeTemplateWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cfg", APIVersion, "DescribeTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTemplate require credential")
@@ -767,6 +778,7 @@ func (c *Client) DescribeTemplateListWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeTemplateListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cfg", APIVersion, "DescribeTemplateList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTemplateList require credential")
@@ -824,6 +836,7 @@ func (c *Client) ExecuteTaskWithContext(ctx context.Context, request *ExecuteTas
     if request == nil {
         request = NewExecuteTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cfg", APIVersion, "ExecuteTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ExecuteTask require credential")
@@ -895,6 +908,7 @@ func (c *Client) ExecuteTaskInstanceWithContext(ctx context.Context, request *Ex
     if request == nil {
         request = NewExecuteTaskInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cfg", APIVersion, "ExecuteTaskInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ExecuteTaskInstance require credential")
@@ -960,6 +974,7 @@ func (c *Client) ModifyTaskRunStatusWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyTaskRunStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cfg", APIVersion, "ModifyTaskRunStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyTaskRunStatus require credential")
@@ -1023,6 +1038,7 @@ func (c *Client) TriggerPolicyWithContext(ctx context.Context, request *TriggerP
     if request == nil {
         request = NewTriggerPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cfg", APIVersion, "TriggerPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("TriggerPolicy require credential")

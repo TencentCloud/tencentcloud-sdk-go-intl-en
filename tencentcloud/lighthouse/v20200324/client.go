@@ -132,6 +132,7 @@ func (c *Client) ApplyInstanceSnapshotWithContext(ctx context.Context, request *
     if request == nil {
         request = NewApplyInstanceSnapshotRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "ApplyInstanceSnapshot")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ApplyInstanceSnapshot require credential")
@@ -247,6 +248,7 @@ func (c *Client) AssociateInstancesKeyPairsWithContext(ctx context.Context, requ
     if request == nil {
         request = NewAssociateInstancesKeyPairsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "AssociateInstancesKeyPairs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AssociateInstancesKeyPairs require credential")
@@ -308,6 +310,7 @@ func (c *Client) AttachCcnWithContext(ctx context.Context, request *AttachCcnReq
     if request == nil {
         request = NewAttachCcnRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "AttachCcn")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AttachCcn require credential")
@@ -391,6 +394,7 @@ func (c *Client) AttachDisksWithContext(ctx context.Context, request *AttachDisk
     if request == nil {
         request = NewAttachDisksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "AttachDisks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AttachDisks require credential")
@@ -464,6 +468,7 @@ func (c *Client) CreateBlueprintWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateBlueprintRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "CreateBlueprint")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateBlueprint require credential")
@@ -539,6 +544,7 @@ func (c *Client) CreateDisksWithContext(ctx context.Context, request *CreateDisk
     if request == nil {
         request = NewCreateDisksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "CreateDisks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDisks require credential")
@@ -658,6 +664,7 @@ func (c *Client) CreateFirewallRulesWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreateFirewallRulesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "CreateFirewallRules")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateFirewallRules require credential")
@@ -737,6 +744,7 @@ func (c *Client) CreateInstanceSnapshotWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateInstanceSnapshotRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "CreateInstanceSnapshot")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateInstanceSnapshot require credential")
@@ -852,6 +860,7 @@ func (c *Client) CreateInstancesWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "CreateInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateInstances require credential")
@@ -913,6 +922,7 @@ func (c *Client) CreateKeyPairWithContext(ctx context.Context, request *CreateKe
     if request == nil {
         request = NewCreateKeyPairRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "CreateKeyPair")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateKeyPair require credential")
@@ -990,6 +1000,7 @@ func (c *Client) DeleteBlueprintsWithContext(ctx context.Context, request *Delet
     if request == nil {
         request = NewDeleteBlueprintsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DeleteBlueprints")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteBlueprints require credential")
@@ -1099,6 +1110,7 @@ func (c *Client) DeleteFirewallRulesWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDeleteFirewallRulesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DeleteFirewallRules")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteFirewallRules require credential")
@@ -1160,6 +1172,7 @@ func (c *Client) DeleteKeyPairsWithContext(ctx context.Context, request *DeleteK
     if request == nil {
         request = NewDeleteKeyPairsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DeleteKeyPairs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteKeyPairs require credential")
@@ -1233,6 +1246,7 @@ func (c *Client) DeleteSnapshotsWithContext(ctx context.Context, request *Delete
     if request == nil {
         request = NewDeleteSnapshotsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DeleteSnapshots")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteSnapshots require credential")
@@ -1284,6 +1298,7 @@ func (c *Client) DescribeAllScenesWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeAllScenesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeAllScenes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAllScenes require credential")
@@ -1351,6 +1366,7 @@ func (c *Client) DescribeBlueprintInstancesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeBlueprintInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeBlueprintInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBlueprintInstances require credential")
@@ -1444,6 +1460,7 @@ func (c *Client) DescribeBlueprintsWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeBlueprintsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeBlueprints")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBlueprints require credential")
@@ -1509,6 +1526,7 @@ func (c *Client) DescribeBundleDiscountWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeBundleDiscountRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeBundleDiscount")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBundleDiscount require credential")
@@ -1604,6 +1622,7 @@ func (c *Client) DescribeBundlesWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeBundlesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeBundles")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBundles require credential")
@@ -1667,6 +1686,7 @@ func (c *Client) DescribeCcnAttachedInstancesWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeCcnAttachedInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeCcnAttachedInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCcnAttachedInstances require credential")
@@ -1726,6 +1746,7 @@ func (c *Client) DescribeDiskConfigsWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeDiskConfigsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeDiskConfigs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDiskConfigs require credential")
@@ -1787,6 +1808,7 @@ func (c *Client) DescribeDiskDiscountWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeDiskDiscountRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeDiskDiscount")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDiskDiscount require credential")
@@ -1878,6 +1900,7 @@ func (c *Client) DescribeDisksWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeDisksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeDisks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDisks require credential")
@@ -1937,6 +1960,7 @@ func (c *Client) DescribeDisksDeniedActionsWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeDisksDeniedActionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeDisksDeniedActions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDisksDeniedActions require credential")
@@ -1992,6 +2016,7 @@ func (c *Client) DescribeDisksReturnableWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeDisksReturnableRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeDisksReturnable")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDisksReturnable require credential")
@@ -2055,6 +2080,7 @@ func (c *Client) DescribeFirewallRulesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeFirewallRulesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeFirewallRules")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeFirewallRules require credential")
@@ -2106,6 +2132,7 @@ func (c *Client) DescribeFirewallRulesTemplateWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeFirewallRulesTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeFirewallRulesTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeFirewallRulesTemplate require credential")
@@ -2159,6 +2186,7 @@ func (c *Client) DescribeGeneralResourceQuotasWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeGeneralResourceQuotasRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeGeneralResourceQuotas")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeGeneralResourceQuotas require credential")
@@ -2212,6 +2240,7 @@ func (c *Client) DescribeInstanceLoginKeyPairAttributeWithContext(ctx context.Co
     if request == nil {
         request = NewDescribeInstanceLoginKeyPairAttributeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeInstanceLoginKeyPairAttribute")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceLoginKeyPairAttribute require credential")
@@ -2331,6 +2360,7 @@ func (c *Client) DescribeInstanceVncUrlWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeInstanceVncUrlRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeInstanceVncUrl")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceVncUrl require credential")
@@ -2444,6 +2474,7 @@ func (c *Client) DescribeInstancesWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstances require credential")
@@ -2511,6 +2542,7 @@ func (c *Client) DescribeInstancesDeniedActionsWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeInstancesDeniedActionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeInstancesDeniedActions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstancesDeniedActions require credential")
@@ -2568,6 +2600,7 @@ func (c *Client) DescribeInstancesDiskNumWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeInstancesDiskNumRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeInstancesDiskNum")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstancesDiskNum require credential")
@@ -2639,6 +2672,7 @@ func (c *Client) DescribeInstancesReturnableWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeInstancesReturnableRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeInstancesReturnable")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstancesReturnable require credential")
@@ -2704,6 +2738,7 @@ func (c *Client) DescribeInstancesTrafficPackagesWithContext(ctx context.Context
     if request == nil {
         request = NewDescribeInstancesTrafficPackagesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeInstancesTrafficPackages")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstancesTrafficPackages require credential")
@@ -2769,6 +2804,7 @@ func (c *Client) DescribeKeyPairsWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeKeyPairsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeKeyPairs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeKeyPairs require credential")
@@ -2876,6 +2912,7 @@ func (c *Client) DescribeModifyInstanceBundlesWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeModifyInstanceBundlesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeModifyInstanceBundles")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeModifyInstanceBundles require credential")
@@ -2925,6 +2962,7 @@ func (c *Client) DescribeRegionsWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeRegionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeRegions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRegions require credential")
@@ -3010,6 +3048,7 @@ func (c *Client) DescribeResetInstanceBlueprintsWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeResetInstanceBlueprintsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeResetInstanceBlueprints")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeResetInstanceBlueprints require credential")
@@ -3071,6 +3110,7 @@ func (c *Client) DescribeScenesWithContext(ctx context.Context, request *Describ
     if request == nil {
         request = NewDescribeScenesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeScenes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeScenes require credential")
@@ -3152,6 +3192,7 @@ func (c *Client) DescribeSnapshotsWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeSnapshotsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeSnapshots")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSnapshots require credential")
@@ -3213,6 +3254,7 @@ func (c *Client) DescribeSnapshotsDeniedActionsWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeSnapshotsDeniedActionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeSnapshotsDeniedActions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSnapshotsDeniedActions require credential")
@@ -3268,6 +3310,7 @@ func (c *Client) DescribeZonesWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeZonesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeZones")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeZones require credential")
@@ -3325,6 +3368,7 @@ func (c *Client) DetachCcnWithContext(ctx context.Context, request *DetachCcnReq
     if request == nil {
         request = NewDetachCcnRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DetachCcn")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DetachCcn require credential")
@@ -3390,6 +3434,7 @@ func (c *Client) DetachDisksWithContext(ctx context.Context, request *DetachDisk
     if request == nil {
         request = NewDetachDisksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DetachDisks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DetachDisks require credential")
@@ -3493,6 +3538,7 @@ func (c *Client) DisassociateInstancesKeyPairsWithContext(ctx context.Context, r
     if request == nil {
         request = NewDisassociateInstancesKeyPairsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DisassociateInstancesKeyPairs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DisassociateInstancesKeyPairs require credential")
@@ -3560,6 +3606,7 @@ func (c *Client) ImportKeyPairWithContext(ctx context.Context, request *ImportKe
     if request == nil {
         request = NewImportKeyPairRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "ImportKeyPair")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ImportKeyPair require credential")
@@ -3621,6 +3668,7 @@ func (c *Client) InquirePriceCreateBlueprintWithContext(ctx context.Context, req
     if request == nil {
         request = NewInquirePriceCreateBlueprintRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "InquirePriceCreateBlueprint")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InquirePriceCreateBlueprint require credential")
@@ -3682,6 +3730,7 @@ func (c *Client) InquirePriceCreateDisksWithContext(ctx context.Context, request
     if request == nil {
         request = NewInquirePriceCreateDisksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "InquirePriceCreateDisks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InquirePriceCreateDisks require credential")
@@ -3753,6 +3802,7 @@ func (c *Client) InquirePriceCreateInstancesWithContext(ctx context.Context, req
     if request == nil {
         request = NewInquirePriceCreateInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "InquirePriceCreateInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InquirePriceCreateInstances require credential")
@@ -3814,6 +3864,7 @@ func (c *Client) InquirePriceRenewDisksWithContext(ctx context.Context, request 
     if request == nil {
         request = NewInquirePriceRenewDisksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "InquirePriceRenewDisks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InquirePriceRenewDisks require credential")
@@ -3881,6 +3932,7 @@ func (c *Client) InquirePriceRenewInstancesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewInquirePriceRenewInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "InquirePriceRenewInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InquirePriceRenewInstances require credential")
@@ -3966,6 +4018,7 @@ func (c *Client) IsolateDisksWithContext(ctx context.Context, request *IsolateDi
     if request == nil {
         request = NewIsolateDisksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "IsolateDisks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("IsolateDisks require credential")
@@ -4061,6 +4114,7 @@ func (c *Client) IsolateInstancesWithContext(ctx context.Context, request *Isola
     if request == nil {
         request = NewIsolateInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "IsolateInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("IsolateInstances require credential")
@@ -4130,6 +4184,7 @@ func (c *Client) ModifyBlueprintAttributeWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyBlueprintAttributeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "ModifyBlueprintAttribute")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyBlueprintAttribute require credential")
@@ -4195,6 +4250,7 @@ func (c *Client) ModifyDisksAttributeWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyDisksAttributeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "ModifyDisksAttribute")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDisksAttribute require credential")
@@ -4256,6 +4312,7 @@ func (c *Client) ModifyDisksRenewFlagWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyDisksRenewFlagRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "ModifyDisksRenewFlag")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDisksRenewFlag require credential")
@@ -4355,6 +4412,7 @@ func (c *Client) ModifyFirewallRuleDescriptionWithContext(ctx context.Context, r
     if request == nil {
         request = NewModifyFirewallRuleDescriptionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "ModifyFirewallRuleDescription")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyFirewallRuleDescription require credential")
@@ -4474,6 +4532,7 @@ func (c *Client) ModifyFirewallRulesWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyFirewallRulesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "ModifyFirewallRules")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyFirewallRules require credential")
@@ -4567,6 +4626,7 @@ func (c *Client) ModifyInstancesAttributeWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyInstancesAttributeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "ModifyInstancesAttribute")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyInstancesAttribute require credential")
@@ -4660,6 +4720,7 @@ func (c *Client) ModifyInstancesBundleWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyInstancesBundleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "ModifyInstancesBundle")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyInstancesBundle require credential")
@@ -4733,6 +4794,7 @@ func (c *Client) ModifyInstancesLoginKeyPairAttributeWithContext(ctx context.Con
     if request == nil {
         request = NewModifyInstancesLoginKeyPairAttributeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "ModifyInstancesLoginKeyPairAttribute")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyInstancesLoginKeyPairAttribute require credential")
@@ -4818,6 +4880,7 @@ func (c *Client) ModifyInstancesRenewFlagWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyInstancesRenewFlagRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "ModifyInstancesRenewFlag")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyInstancesRenewFlag require credential")
@@ -4875,6 +4938,7 @@ func (c *Client) ModifySnapshotAttributeWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifySnapshotAttributeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "ModifySnapshotAttribute")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifySnapshotAttribute require credential")
@@ -4974,6 +5038,7 @@ func (c *Client) RebootInstancesWithContext(ctx context.Context, request *Reboot
     if request == nil {
         request = NewRebootInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "RebootInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RebootInstances require credential")
@@ -5057,6 +5122,7 @@ func (c *Client) RenewDisksWithContext(ctx context.Context, request *RenewDisksR
     if request == nil {
         request = NewRenewDisksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "RenewDisks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RenewDisks require credential")
@@ -5158,6 +5224,7 @@ func (c *Client) RenewInstancesWithContext(ctx context.Context, request *RenewIn
     if request == nil {
         request = NewRenewInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "RenewInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RenewInstances require credential")
@@ -5219,6 +5286,7 @@ func (c *Client) ResetAttachCcnWithContext(ctx context.Context, request *ResetAt
     if request == nil {
         request = NewResetAttachCcnRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "ResetAttachCcn")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ResetAttachCcn require credential")
@@ -5342,6 +5410,7 @@ func (c *Client) ResetInstanceWithContext(ctx context.Context, request *ResetIns
     if request == nil {
         request = NewResetInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "ResetInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ResetInstance require credential")
@@ -5449,6 +5518,7 @@ func (c *Client) ResetInstancesPasswordWithContext(ctx context.Context, request 
     if request == nil {
         request = NewResetInstancesPasswordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "ResetInstancesPassword")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ResetInstancesPassword require credential")
@@ -5544,6 +5614,7 @@ func (c *Client) StartInstancesWithContext(ctx context.Context, request *StartIn
     if request == nil {
         request = NewStartInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "StartInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartInstances require credential")
@@ -5637,6 +5708,7 @@ func (c *Client) StopInstancesWithContext(ctx context.Context, request *StopInst
     if request == nil {
         request = NewStopInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "StopInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopInstances require credential")
@@ -5698,6 +5770,7 @@ func (c *Client) TerminateDisksWithContext(ctx context.Context, request *Termina
     if request == nil {
         request = NewTerminateDisksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "TerminateDisks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("TerminateDisks require credential")
@@ -5787,6 +5860,7 @@ func (c *Client) TerminateInstancesWithContext(ctx context.Context, request *Ter
     if request == nil {
         request = NewTerminateInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "TerminateInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("TerminateInstances require credential")

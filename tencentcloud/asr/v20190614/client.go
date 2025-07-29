@@ -148,6 +148,7 @@ func (c *Client) CreateRecTaskWithContext(ctx context.Context, request *CreateRe
     if request == nil {
         request = NewCreateRecTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "asr", APIVersion, "CreateRecTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateRecTask require credential")
@@ -239,6 +240,7 @@ func (c *Client) DescribeTaskStatusWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeTaskStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "asr", APIVersion, "DescribeTaskStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTaskStatus require credential")

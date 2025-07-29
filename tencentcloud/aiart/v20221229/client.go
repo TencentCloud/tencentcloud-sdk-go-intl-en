@@ -140,6 +140,7 @@ func (c *Client) ImageToImageWithContext(ctx context.Context, request *ImageToIm
     if request == nil {
         request = NewImageToImageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "aiart", APIVersion, "ImageToImage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ImageToImage require credential")

@@ -84,6 +84,7 @@ func (c *Client) ControlAIConversationWithContext(ctx context.Context, request *
     if request == nil {
         request = NewControlAIConversationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "ControlAIConversation")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ControlAIConversation require credential")
@@ -227,6 +228,7 @@ func (c *Client) CreateCloudRecordingWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateCloudRecordingRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "CreateCloudRecording")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateCloudRecording require credential")
@@ -300,6 +302,7 @@ func (c *Client) DeleteCloudRecordingWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDeleteCloudRecordingRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DeleteCloudRecording")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteCloudRecording require credential")
@@ -351,6 +354,7 @@ func (c *Client) DescribeAIConversationWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeAIConversationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeAIConversation")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAIConversation require credential")
@@ -402,6 +406,7 @@ func (c *Client) DescribeAITranscriptionWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeAITranscriptionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeAITranscription")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAITranscription require credential")
@@ -509,6 +514,7 @@ func (c *Client) DescribeCallDetailInfoWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeCallDetailInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeCallDetailInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCallDetailInfo require credential")
@@ -588,6 +594,7 @@ func (c *Client) DescribeCloudRecordingWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeCloudRecordingRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeCloudRecording")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCloudRecording require credential")
@@ -659,6 +666,7 @@ func (c *Client) DescribeMixTranscodingUsageWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeMixTranscodingUsageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeMixTranscodingUsage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMixTranscodingUsage require credential")
@@ -730,6 +738,7 @@ func (c *Client) DescribeRecordingUsageWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeRecordingUsageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeRecordingUsage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRecordingUsage require credential")
@@ -801,6 +810,7 @@ func (c *Client) DescribeRelayUsageWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeRelayUsageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeRelayUsage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRelayUsage require credential")
@@ -906,6 +916,7 @@ func (c *Client) DescribeRoomInfoWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeRoomInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeRoomInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRoomInfo require credential")
@@ -981,6 +992,7 @@ func (c *Client) DescribeScaleInfoWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeScaleInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeScaleInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeScaleInfo require credential")
@@ -1038,6 +1050,7 @@ func (c *Client) DescribeStreamIngestWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeStreamIngestRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeStreamIngest")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamIngest require credential")
@@ -1127,6 +1140,7 @@ func (c *Client) DescribeTRTCMarketQualityDataWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeTRTCMarketQualityDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeTRTCMarketQualityData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTRTCMarketQualityData require credential")
@@ -1212,6 +1226,7 @@ func (c *Client) DescribeTRTCMarketScaleDataWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeTRTCMarketScaleDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeTRTCMarketScaleData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTRTCMarketScaleData require credential")
@@ -1289,6 +1304,7 @@ func (c *Client) DescribeTRTCRealTimeQualityDataWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeTRTCRealTimeQualityDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeTRTCRealTimeQualityData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTRTCRealTimeQualityData require credential")
@@ -1338,6 +1354,7 @@ func (c *Client) DescribeTRTCRealTimeScaleDataWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeTRTCRealTimeScaleDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeTRTCRealTimeScaleData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTRTCRealTimeScaleData require credential")
@@ -1403,6 +1420,7 @@ func (c *Client) DescribeTrtcRoomUsageWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeTrtcRoomUsageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeTrtcRoomUsage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTrtcRoomUsage require credential")
@@ -1474,6 +1492,7 @@ func (c *Client) DescribeTrtcUsageWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeTrtcUsageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeTrtcUsage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTrtcUsage require credential")
@@ -1573,6 +1592,7 @@ func (c *Client) DescribeUnusualEventWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeUnusualEventRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeUnusualEvent")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUnusualEvent require credential")
@@ -1672,6 +1692,7 @@ func (c *Client) DescribeUserEventWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeUserEventRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeUserEvent")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUserEvent require credential")
@@ -1777,6 +1798,7 @@ func (c *Client) DescribeUserInfoWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeUserInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeUserInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUserInfo require credential")
@@ -1828,6 +1850,7 @@ func (c *Client) DescribeWebRecordWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeWebRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeWebRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeWebRecord require credential")
@@ -1895,6 +1918,7 @@ func (c *Client) DismissRoomWithContext(ctx context.Context, request *DismissRoo
     if request == nil {
         request = NewDismissRoomRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DismissRoom")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DismissRoom require credential")
@@ -1960,6 +1984,7 @@ func (c *Client) DismissRoomByStrRoomIdWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDismissRoomByStrRoomIdRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DismissRoomByStrRoomId")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DismissRoomByStrRoomId require credential")
@@ -2033,6 +2058,7 @@ func (c *Client) ModifyCloudRecordingWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyCloudRecordingRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "ModifyCloudRecording")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyCloudRecording require credential")
@@ -2104,6 +2130,7 @@ func (c *Client) RemoveUserWithContext(ctx context.Context, request *RemoveUserR
     if request == nil {
         request = NewRemoveUserRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "RemoveUser")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RemoveUser require credential")
@@ -2173,6 +2200,7 @@ func (c *Client) RemoveUserByStrRoomIdWithContext(ctx context.Context, request *
     if request == nil {
         request = NewRemoveUserByStrRoomIdRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "RemoveUserByStrRoomId")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RemoveUserByStrRoomId require credential")
@@ -2246,6 +2274,7 @@ func (c *Client) SetUserBlockedWithContext(ctx context.Context, request *SetUser
     if request == nil {
         request = NewSetUserBlockedRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "SetUserBlocked")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetUserBlocked require credential")
@@ -2321,6 +2350,7 @@ func (c *Client) SetUserBlockedByStrRoomIdWithContext(ctx context.Context, reque
     if request == nil {
         request = NewSetUserBlockedByStrRoomIdRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "SetUserBlockedByStrRoomId")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetUserBlockedByStrRoomId require credential")
@@ -2378,6 +2408,7 @@ func (c *Client) StartAIConversationWithContext(ctx context.Context, request *St
     if request == nil {
         request = NewStartAIConversationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "StartAIConversation")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartAIConversation require credential")
@@ -2455,6 +2486,7 @@ func (c *Client) StartAITranscriptionWithContext(ctx context.Context, request *S
     if request == nil {
         request = NewStartAITranscriptionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "StartAITranscription")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartAITranscription require credential")
@@ -2742,6 +2774,7 @@ func (c *Client) StartPublishCdnStreamWithContext(ctx context.Context, request *
     if request == nil {
         request = NewStartPublishCdnStreamRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "StartPublishCdnStream")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartPublishCdnStream require credential")
@@ -2823,6 +2856,7 @@ func (c *Client) StartStreamIngestWithContext(ctx context.Context, request *Star
     if request == nil {
         request = NewStartStreamIngestRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "StartStreamIngest")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartStreamIngest require credential")
@@ -2880,6 +2914,7 @@ func (c *Client) StartWebRecordWithContext(ctx context.Context, request *StartWe
     if request == nil {
         request = NewStartWebRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "StartWebRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartWebRecord require credential")
@@ -2931,6 +2966,7 @@ func (c *Client) StopAIConversationWithContext(ctx context.Context, request *Sto
     if request == nil {
         request = NewStopAIConversationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "StopAIConversation")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopAIConversation require credential")
@@ -2982,6 +3018,7 @@ func (c *Client) StopAITranscriptionWithContext(ctx context.Context, request *St
     if request == nil {
         request = NewStopAITranscriptionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "StopAITranscription")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopAITranscription require credential")
@@ -3047,6 +3084,7 @@ func (c *Client) StopPublishCdnStreamWithContext(ctx context.Context, request *S
     if request == nil {
         request = NewStopPublishCdnStreamRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "StopPublishCdnStream")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopPublishCdnStream require credential")
@@ -3102,6 +3140,7 @@ func (c *Client) StopStreamIngestWithContext(ctx context.Context, request *StopS
     if request == nil {
         request = NewStopStreamIngestRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "StopStreamIngest")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopStreamIngest require credential")
@@ -3153,6 +3192,7 @@ func (c *Client) StopWebRecordWithContext(ctx context.Context, request *StopWebR
     if request == nil {
         request = NewStopWebRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "StopWebRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopWebRecord require credential")
@@ -3202,6 +3242,7 @@ func (c *Client) UpdateAIConversationWithContext(ctx context.Context, request *U
     if request == nil {
         request = NewUpdateAIConversationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "UpdateAIConversation")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateAIConversation require credential")
@@ -3273,6 +3314,7 @@ func (c *Client) UpdatePublishCdnStreamWithContext(ctx context.Context, request 
     if request == nil {
         request = NewUpdatePublishCdnStreamRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "UpdatePublishCdnStream")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdatePublishCdnStream require credential")
@@ -3332,6 +3374,7 @@ func (c *Client) UpdateStreamIngestWithContext(ctx context.Context, request *Upd
     if request == nil {
         request = NewUpdateStreamIngestRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "UpdateStreamIngest")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateStreamIngest require credential")

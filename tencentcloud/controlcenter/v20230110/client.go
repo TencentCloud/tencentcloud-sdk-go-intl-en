@@ -100,6 +100,7 @@ func (c *Client) BatchApplyAccountBaselinesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewBatchApplyAccountBaselinesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "controlcenter", APIVersion, "BatchApplyAccountBaselines")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchApplyAccountBaselines require credential")

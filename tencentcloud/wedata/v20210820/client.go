@@ -82,6 +82,7 @@ func (c *Client) AddProjectUserRoleWithContext(ctx context.Context, request *Add
     if request == nil {
         request = NewAddProjectUserRoleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "AddProjectUserRole")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AddProjectUserRole require credential")
@@ -131,6 +132,7 @@ func (c *Client) BatchCreateIntegrationTaskAlarmsWithContext(ctx context.Context
     if request == nil {
         request = NewBatchCreateIntegrationTaskAlarmsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "BatchCreateIntegrationTaskAlarms")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchCreateIntegrationTaskAlarms require credential")
@@ -188,6 +190,7 @@ func (c *Client) BatchCreateTaskVersionAsyncWithContext(ctx context.Context, req
     if request == nil {
         request = NewBatchCreateTaskVersionAsyncRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "BatchCreateTaskVersionAsync")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchCreateTaskVersionAsync require credential")
@@ -239,6 +242,7 @@ func (c *Client) BatchDeleteIntegrationTasksWithContext(ctx context.Context, req
     if request == nil {
         request = NewBatchDeleteIntegrationTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "BatchDeleteIntegrationTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchDeleteIntegrationTasks require credential")
@@ -288,6 +292,7 @@ func (c *Client) BatchDeleteOpsTasksWithContext(ctx context.Context, request *Ba
     if request == nil {
         request = NewBatchDeleteOpsTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "BatchDeleteOpsTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchDeleteOpsTasks require credential")
@@ -337,6 +342,7 @@ func (c *Client) BatchForceSuccessIntegrationTaskInstancesWithContext(ctx contex
     if request == nil {
         request = NewBatchForceSuccessIntegrationTaskInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "BatchForceSuccessIntegrationTaskInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchForceSuccessIntegrationTaskInstances require credential")
@@ -386,6 +392,7 @@ func (c *Client) BatchKillIntegrationTaskInstancesWithContext(ctx context.Contex
     if request == nil {
         request = NewBatchKillIntegrationTaskInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "BatchKillIntegrationTaskInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchKillIntegrationTaskInstances require credential")
@@ -435,6 +442,7 @@ func (c *Client) BatchMakeUpIntegrationTasksWithContext(ctx context.Context, req
     if request == nil {
         request = NewBatchMakeUpIntegrationTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "BatchMakeUpIntegrationTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchMakeUpIntegrationTasks require credential")
@@ -484,6 +492,7 @@ func (c *Client) BatchModifyOpsOwnersWithContext(ctx context.Context, request *B
     if request == nil {
         request = NewBatchModifyOpsOwnersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "BatchModifyOpsOwners")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchModifyOpsOwners require credential")
@@ -535,6 +544,7 @@ func (c *Client) BatchRerunIntegrationTaskInstancesWithContext(ctx context.Conte
     if request == nil {
         request = NewBatchRerunIntegrationTaskInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "BatchRerunIntegrationTaskInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchRerunIntegrationTaskInstances require credential")
@@ -586,6 +596,7 @@ func (c *Client) BatchResumeIntegrationTasksWithContext(ctx context.Context, req
     if request == nil {
         request = NewBatchResumeIntegrationTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "BatchResumeIntegrationTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchResumeIntegrationTasks require credential")
@@ -641,6 +652,7 @@ func (c *Client) BatchRunOpsTaskWithContext(ctx context.Context, request *BatchR
     if request == nil {
         request = NewBatchRunOpsTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "BatchRunOpsTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchRunOpsTask require credential")
@@ -690,6 +702,7 @@ func (c *Client) BatchStartIntegrationTasksWithContext(ctx context.Context, requ
     if request == nil {
         request = NewBatchStartIntegrationTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "BatchStartIntegrationTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchStartIntegrationTasks require credential")
@@ -741,6 +754,7 @@ func (c *Client) BatchStopIntegrationTasksWithContext(ctx context.Context, reque
     if request == nil {
         request = NewBatchStopIntegrationTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "BatchStopIntegrationTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchStopIntegrationTasks require credential")
@@ -790,6 +804,7 @@ func (c *Client) BatchStopOpsTasksWithContext(ctx context.Context, request *Batc
     if request == nil {
         request = NewBatchStopOpsTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "BatchStopOpsTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchStopOpsTasks require credential")
@@ -839,6 +854,7 @@ func (c *Client) BatchStopWorkflowsByIdsWithContext(ctx context.Context, request
     if request == nil {
         request = NewBatchStopWorkflowsByIdsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "BatchStopWorkflowsByIds")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchStopWorkflowsByIds require credential")
@@ -888,6 +904,7 @@ func (c *Client) BatchSuspendIntegrationTasksWithContext(ctx context.Context, re
     if request == nil {
         request = NewBatchSuspendIntegrationTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "BatchSuspendIntegrationTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchSuspendIntegrationTasks require credential")
@@ -939,6 +956,7 @@ func (c *Client) BatchUpdateIntegrationTasksWithContext(ctx context.Context, req
     if request == nil {
         request = NewBatchUpdateIntegrationTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "BatchUpdateIntegrationTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchUpdateIntegrationTasks require credential")
@@ -988,6 +1006,7 @@ func (c *Client) CheckAlarmRegularNameExistWithContext(ctx context.Context, requ
     if request == nil {
         request = NewCheckAlarmRegularNameExistRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CheckAlarmRegularNameExist")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CheckAlarmRegularNameExist require credential")
@@ -1037,6 +1056,7 @@ func (c *Client) CheckIntegrationNodeNameExistsWithContext(ctx context.Context, 
     if request == nil {
         request = NewCheckIntegrationNodeNameExistsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CheckIntegrationNodeNameExists")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CheckIntegrationNodeNameExists require credential")
@@ -1086,6 +1106,7 @@ func (c *Client) CheckIntegrationTaskNameExistsWithContext(ctx context.Context, 
     if request == nil {
         request = NewCheckIntegrationTaskNameExistsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CheckIntegrationTaskNameExists")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CheckIntegrationTaskNameExists require credential")
@@ -1135,6 +1156,7 @@ func (c *Client) CheckTaskNameExistWithContext(ctx context.Context, request *Che
     if request == nil {
         request = NewCheckTaskNameExistRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CheckTaskNameExist")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CheckTaskNameExist require credential")
@@ -1216,6 +1238,7 @@ func (c *Client) CommitIntegrationTaskWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCommitIntegrationTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CommitIntegrationTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CommitIntegrationTask require credential")
@@ -1265,6 +1288,7 @@ func (c *Client) CommitRuleGroupTaskWithContext(ctx context.Context, request *Co
     if request == nil {
         request = NewCommitRuleGroupTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CommitRuleGroupTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CommitRuleGroupTask require credential")
@@ -1314,6 +1338,7 @@ func (c *Client) CountOpsInstanceStateWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCountOpsInstanceStateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CountOpsInstanceState")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CountOpsInstanceState require credential")
@@ -1363,6 +1388,7 @@ func (c *Client) CreateCustomFunctionWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateCustomFunctionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateCustomFunction")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateCustomFunction require credential")
@@ -1412,6 +1438,7 @@ func (c *Client) CreateDataSourceWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateDataSourceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateDataSource")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDataSource require credential")
@@ -1461,6 +1488,7 @@ func (c *Client) CreateDsFolderWithContext(ctx context.Context, request *CreateD
     if request == nil {
         request = NewCreateDsFolderRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateDsFolder")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDsFolder require credential")
@@ -1510,6 +1538,7 @@ func (c *Client) CreateHiveTableWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateHiveTableRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateHiveTable")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateHiveTable require credential")
@@ -1563,6 +1592,7 @@ func (c *Client) CreateHiveTableByDDLWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateHiveTableByDDLRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateHiveTableByDDL")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateHiveTableByDDL require credential")
@@ -1632,6 +1662,7 @@ func (c *Client) CreateIntegrationNodeWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCreateIntegrationNodeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateIntegrationNode")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateIntegrationNode require credential")
@@ -1713,6 +1744,7 @@ func (c *Client) CreateIntegrationTaskWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCreateIntegrationTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateIntegrationTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateIntegrationTask require credential")
@@ -1762,6 +1794,7 @@ func (c *Client) CreateOfflineTaskWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateOfflineTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateOfflineTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateOfflineTask require credential")
@@ -1811,6 +1844,7 @@ func (c *Client) CreateOpsMakePlanWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateOpsMakePlanRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateOpsMakePlan")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateOpsMakePlan require credential")
@@ -1864,6 +1898,7 @@ func (c *Client) CreateRuleWithContext(ctx context.Context, request *CreateRuleR
     if request == nil {
         request = NewCreateRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateRule require credential")
@@ -1913,6 +1948,7 @@ func (c *Client) CreateRuleTemplateWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreateRuleTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateRuleTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateRuleTemplate require credential")
@@ -1962,6 +1998,7 @@ func (c *Client) CreateTaskWithContext(ctx context.Context, request *CreateTaskR
     if request == nil {
         request = NewCreateTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTask require credential")
@@ -2027,6 +2064,7 @@ func (c *Client) CreateTaskAlarmRegularWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateTaskAlarmRegularRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateTaskAlarmRegular")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTaskAlarmRegular require credential")
@@ -2076,6 +2114,7 @@ func (c *Client) CreateTaskFolderWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateTaskFolderRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateTaskFolder")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTaskFolder require credential")
@@ -2125,6 +2164,7 @@ func (c *Client) CreateTaskNewWithContext(ctx context.Context, request *CreateTa
     if request == nil {
         request = NewCreateTaskNewRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateTaskNew")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTaskNew require credential")
@@ -2184,6 +2224,7 @@ func (c *Client) CreateTaskVersionDsWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreateTaskVersionDsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateTaskVersionDs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTaskVersionDs require credential")
@@ -2233,6 +2274,7 @@ func (c *Client) CreateWorkflowDsWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateWorkflowDsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateWorkflowDs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateWorkflowDs require credential")
@@ -2282,6 +2324,7 @@ func (c *Client) DagInstancesWithContext(ctx context.Context, request *DagInstan
     if request == nil {
         request = NewDagInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DagInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DagInstances require credential")
@@ -2331,6 +2374,7 @@ func (c *Client) DeleteCustomFunctionWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDeleteCustomFunctionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteCustomFunction")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteCustomFunction require credential")
@@ -2380,6 +2424,7 @@ func (c *Client) DeleteDataSourcesWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteDataSourcesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteDataSources")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteDataSources require credential")
@@ -2429,6 +2474,7 @@ func (c *Client) DeleteDsFolderWithContext(ctx context.Context, request *DeleteD
     if request == nil {
         request = NewDeleteDsFolderRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteDsFolder")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteDsFolder require credential")
@@ -2488,6 +2534,7 @@ func (c *Client) DeleteFileWithContext(ctx context.Context, request *DeleteFileR
     if request == nil {
         request = NewDeleteFileRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteFile")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteFile require credential")
@@ -2537,6 +2584,7 @@ func (c *Client) DeleteFilePathWithContext(ctx context.Context, request *DeleteF
     if request == nil {
         request = NewDeleteFilePathRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteFilePath")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteFilePath require credential")
@@ -2618,6 +2666,7 @@ func (c *Client) DeleteIntegrationNodeWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDeleteIntegrationNodeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteIntegrationNode")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteIntegrationNode require credential")
@@ -2699,6 +2748,7 @@ func (c *Client) DeleteIntegrationTaskWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDeleteIntegrationTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteIntegrationTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteIntegrationTask require credential")
@@ -2748,6 +2798,7 @@ func (c *Client) DeleteOfflineTaskWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteOfflineTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteOfflineTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteOfflineTask require credential")
@@ -2801,6 +2852,7 @@ func (c *Client) DeleteProjectParamDsWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDeleteProjectParamDsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteProjectParamDs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteProjectParamDs require credential")
@@ -2854,6 +2906,7 @@ func (c *Client) DeleteProjectUsersWithContext(ctx context.Context, request *Del
     if request == nil {
         request = NewDeleteProjectUsersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteProjectUsers")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteProjectUsers require credential")
@@ -2903,6 +2956,7 @@ func (c *Client) DeleteResourceWithContext(ctx context.Context, request *DeleteR
     if request == nil {
         request = NewDeleteResourceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteResource")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteResource require credential")
@@ -2952,6 +3006,7 @@ func (c *Client) DeleteResourceFileWithContext(ctx context.Context, request *Del
     if request == nil {
         request = NewDeleteResourceFileRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteResourceFile")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteResourceFile require credential")
@@ -3001,6 +3056,7 @@ func (c *Client) DeleteResourceFilesWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDeleteResourceFilesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteResourceFiles")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteResourceFiles require credential")
@@ -3056,6 +3112,7 @@ func (c *Client) DeleteRuleWithContext(ctx context.Context, request *DeleteRuleR
     if request == nil {
         request = NewDeleteRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteRule require credential")
@@ -3111,6 +3168,7 @@ func (c *Client) DeleteRuleTemplateWithContext(ctx context.Context, request *Del
     if request == nil {
         request = NewDeleteRuleTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteRuleTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteRuleTemplate require credential")
@@ -3176,6 +3234,7 @@ func (c *Client) DeleteTaskAlarmRegularWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDeleteTaskAlarmRegularRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteTaskAlarmRegular")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteTaskAlarmRegular require credential")
@@ -3225,6 +3284,7 @@ func (c *Client) DeleteTaskDsWithContext(ctx context.Context, request *DeleteTas
     if request == nil {
         request = NewDeleteTaskDsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteTaskDs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteTaskDs require credential")
@@ -3274,6 +3334,7 @@ func (c *Client) DeleteWorkflowByIdWithContext(ctx context.Context, request *Del
     if request == nil {
         request = NewDeleteWorkflowByIdRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteWorkflowById")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteWorkflowById require credential")
@@ -3335,6 +3396,7 @@ func (c *Client) DescribeAlarmEventsWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeAlarmEventsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeAlarmEvents")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAlarmEvents require credential")
@@ -3394,6 +3456,7 @@ func (c *Client) DescribeAlarmReceiverWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeAlarmReceiverRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeAlarmReceiver")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAlarmReceiver require credential")
@@ -3443,6 +3506,7 @@ func (c *Client) DescribeAllByFolderNewWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeAllByFolderNewRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeAllByFolderNew")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAllByFolderNew require credential")
@@ -3494,6 +3558,7 @@ func (c *Client) DescribeApproveListWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeApproveListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeApproveList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApproveList require credential")
@@ -3543,6 +3608,7 @@ func (c *Client) DescribeApproveTypeListWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeApproveTypeListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeApproveTypeList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApproveTypeList require credential")
@@ -3594,6 +3660,7 @@ func (c *Client) DescribeBatchOperateTaskWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeBatchOperateTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeBatchOperateTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBatchOperateTask require credential")
@@ -3651,6 +3718,7 @@ func (c *Client) DescribeColumnLineageWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeColumnLineageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeColumnLineage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeColumnLineage require credential")
@@ -3710,6 +3778,7 @@ func (c *Client) DescribeColumnsMetaWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeColumnsMetaRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeColumnsMeta")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeColumnsMeta require credential")
@@ -3765,6 +3834,7 @@ func (c *Client) DescribeDataCheckStatWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeDataCheckStatRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeDataCheckStat")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDataCheckStat require credential")
@@ -3814,6 +3884,7 @@ func (c *Client) DescribeDataSourceInfoListWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeDataSourceInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeDataSourceInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDataSourceInfoList require credential")
@@ -3865,6 +3936,7 @@ func (c *Client) DescribeDataSourceListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeDataSourceListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeDataSourceList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDataSourceList require credential")
@@ -3914,6 +3986,7 @@ func (c *Client) DescribeDatabaseInfoListWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeDatabaseInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeDatabaseInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDatabaseInfoList require credential")
@@ -3971,6 +4044,7 @@ func (c *Client) DescribeDatabaseMetasWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeDatabaseMetasRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeDatabaseMetas")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDatabaseMetas require credential")
@@ -4020,6 +4094,7 @@ func (c *Client) DescribeDatasourceWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeDatasourceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeDatasource")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDatasource require credential")
@@ -4069,6 +4144,7 @@ func (c *Client) DescribeDependOpsTasksWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeDependOpsTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeDependOpsTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDependOpsTasks require credential")
@@ -4118,6 +4194,7 @@ func (c *Client) DescribeDependTaskListsWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeDependTaskListsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeDependTaskLists")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDependTaskLists require credential")
@@ -4183,6 +4260,7 @@ func (c *Client) DescribeDimensionScoreWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeDimensionScoreRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeDimensionScore")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDimensionScore require credential")
@@ -4248,6 +4326,7 @@ func (c *Client) DescribeDrInstancePageWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeDrInstancePageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeDrInstancePage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDrInstancePage require credential")
@@ -4297,6 +4376,7 @@ func (c *Client) DescribeDsFolderTreeWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeDsFolderTreeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeDsFolderTree")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDsFolderTree require credential")
@@ -4346,6 +4426,7 @@ func (c *Client) DescribeDsParentFolderTreeWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeDsParentFolderTreeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeDsParentFolderTree")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDsParentFolderTree require credential")
@@ -4395,6 +4476,7 @@ func (c *Client) DescribeEventWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeEventRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeEvent")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeEvent require credential")
@@ -4444,6 +4526,7 @@ func (c *Client) DescribeEventCasesWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeEventCasesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeEventCases")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeEventCases require credential")
@@ -4493,6 +4576,7 @@ func (c *Client) DescribeEventConsumeTasksWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeEventConsumeTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeEventConsumeTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeEventConsumeTasks require credential")
@@ -4548,6 +4632,7 @@ func (c *Client) DescribeExecStrategyWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeExecStrategyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeExecStrategy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeExecStrategy require credential")
@@ -4597,6 +4682,7 @@ func (c *Client) DescribeFieldBasicInfoWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeFieldBasicInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeFieldBasicInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeFieldBasicInfo require credential")
@@ -4646,6 +4732,7 @@ func (c *Client) DescribeFolderWorkflowListWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeFolderWorkflowListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeFolderWorkflowList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeFolderWorkflowList require credential")
@@ -4695,6 +4782,7 @@ func (c *Client) DescribeFunctionKindsWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeFunctionKindsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeFunctionKinds")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeFunctionKinds require credential")
@@ -4744,6 +4832,7 @@ func (c *Client) DescribeFunctionTypesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeFunctionTypesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeFunctionTypes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeFunctionTypes require credential")
@@ -4793,6 +4882,7 @@ func (c *Client) DescribeInstanceByCycleWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeInstanceByCycleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeInstanceByCycle")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceByCycle require credential")
@@ -4842,6 +4932,7 @@ func (c *Client) DescribeInstanceLastLogWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeInstanceLastLogRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeInstanceLastLog")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceLastLog require credential")
@@ -4891,6 +4982,7 @@ func (c *Client) DescribeInstanceListWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeInstanceListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeInstanceList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceList require credential")
@@ -4940,6 +5032,7 @@ func (c *Client) DescribeInstanceLogWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeInstanceLogRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeInstanceLog")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceLog require credential")
@@ -4989,6 +5082,7 @@ func (c *Client) DescribeInstanceLogDetailWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeInstanceLogDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeInstanceLogDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceLogDetail require credential")
@@ -5038,6 +5132,7 @@ func (c *Client) DescribeInstanceLogFileWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeInstanceLogFileRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeInstanceLogFile")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceLogFile require credential")
@@ -5087,6 +5182,7 @@ func (c *Client) DescribeInstanceLogListWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeInstanceLogListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeInstanceLogList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceLogList require credential")
@@ -5168,6 +5264,7 @@ func (c *Client) DescribeIntegrationNodeWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeIntegrationNodeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeIntegrationNode")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIntegrationNode require credential")
@@ -5219,6 +5316,7 @@ func (c *Client) DescribeIntegrationStatisticsWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeIntegrationStatisticsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeIntegrationStatistics")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIntegrationStatistics require credential")
@@ -5270,6 +5368,7 @@ func (c *Client) DescribeIntegrationStatisticsInstanceTrendWithContext(ctx conte
     if request == nil {
         request = NewDescribeIntegrationStatisticsInstanceTrendRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeIntegrationStatisticsInstanceTrend")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIntegrationStatisticsInstanceTrend require credential")
@@ -5321,6 +5420,7 @@ func (c *Client) DescribeIntegrationStatisticsRecordsTrendWithContext(ctx contex
     if request == nil {
         request = NewDescribeIntegrationStatisticsRecordsTrendRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeIntegrationStatisticsRecordsTrend")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIntegrationStatisticsRecordsTrend require credential")
@@ -5372,6 +5472,7 @@ func (c *Client) DescribeIntegrationStatisticsTaskStatusWithContext(ctx context.
     if request == nil {
         request = NewDescribeIntegrationStatisticsTaskStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeIntegrationStatisticsTaskStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIntegrationStatisticsTaskStatus require credential")
@@ -5423,6 +5524,7 @@ func (c *Client) DescribeIntegrationStatisticsTaskStatusTrendWithContext(ctx con
     if request == nil {
         request = NewDescribeIntegrationStatisticsTaskStatusTrendRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeIntegrationStatisticsTaskStatusTrend")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIntegrationStatisticsTaskStatusTrend require credential")
@@ -5504,6 +5606,7 @@ func (c *Client) DescribeIntegrationTaskWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeIntegrationTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeIntegrationTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIntegrationTask require credential")
@@ -5585,6 +5688,7 @@ func (c *Client) DescribeIntegrationTasksWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeIntegrationTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeIntegrationTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIntegrationTasks require credential")
@@ -5666,6 +5770,7 @@ func (c *Client) DescribeIntegrationVersionNodesInfoWithContext(ctx context.Cont
     if request == nil {
         request = NewDescribeIntegrationVersionNodesInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeIntegrationVersionNodesInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIntegrationVersionNodesInfo require credential")
@@ -5747,6 +5852,7 @@ func (c *Client) DescribeOfflineTaskTokenWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeOfflineTaskTokenRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeOfflineTaskToken")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOfflineTaskToken require credential")
@@ -5796,6 +5902,7 @@ func (c *Client) DescribeOperateOpsTasksWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeOperateOpsTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeOperateOpsTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOperateOpsTasks require credential")
@@ -5845,6 +5952,7 @@ func (c *Client) DescribeOpsInstanceLogListWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeOpsInstanceLogListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeOpsInstanceLogList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOpsInstanceLogList require credential")
@@ -5894,6 +6002,7 @@ func (c *Client) DescribeOpsMakePlanInstancesWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeOpsMakePlanInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeOpsMakePlanInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOpsMakePlanInstances require credential")
@@ -5943,6 +6052,7 @@ func (c *Client) DescribeOpsMakePlanTasksWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeOpsMakePlanTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeOpsMakePlanTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOpsMakePlanTasks require credential")
@@ -5992,6 +6102,7 @@ func (c *Client) DescribeOpsMakePlansWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeOpsMakePlansRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeOpsMakePlans")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOpsMakePlans require credential")
@@ -6041,6 +6152,7 @@ func (c *Client) DescribeOpsWorkflowsWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeOpsWorkflowsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeOpsWorkflows")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOpsWorkflows require credential")
@@ -6090,6 +6202,7 @@ func (c *Client) DescribeOrganizationalFunctionsWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeOrganizationalFunctionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeOrganizationalFunctions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOrganizationalFunctions require credential")
@@ -6141,6 +6254,7 @@ func (c *Client) DescribeProjectWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeProjectRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeProject")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeProject require credential")
@@ -6200,6 +6314,7 @@ func (c *Client) DescribeQualityScoreWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeQualityScoreRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeQualityScore")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeQualityScore require credential")
@@ -6261,6 +6376,7 @@ func (c *Client) DescribeQualityScoreTrendWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeQualityScoreTrendRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeQualityScoreTrend")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeQualityScoreTrend require credential")
@@ -6310,6 +6426,7 @@ func (c *Client) DescribeRealTimeTaskInstanceNodeInfoWithContext(ctx context.Con
     if request == nil {
         request = NewDescribeRealTimeTaskInstanceNodeInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRealTimeTaskInstanceNodeInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRealTimeTaskInstanceNodeInfo require credential")
@@ -6359,6 +6476,7 @@ func (c *Client) DescribeRealTimeTaskMetricOverviewWithContext(ctx context.Conte
     if request == nil {
         request = NewDescribeRealTimeTaskMetricOverviewRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRealTimeTaskMetricOverview")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRealTimeTaskMetricOverview require credential")
@@ -6408,6 +6526,7 @@ func (c *Client) DescribeRealTimeTaskSpeedWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeRealTimeTaskSpeedRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRealTimeTaskSpeed")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRealTimeTaskSpeed require credential")
@@ -6457,6 +6576,7 @@ func (c *Client) DescribeReportTaskDetailWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeReportTaskDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeReportTaskDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeReportTaskDetail require credential")
@@ -6506,6 +6626,7 @@ func (c *Client) DescribeReportTaskListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeReportTaskListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeReportTaskList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeReportTaskList require credential")
@@ -6555,6 +6676,7 @@ func (c *Client) DescribeResourceManagePathTreesWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeResourceManagePathTreesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeResourceManagePathTrees")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeResourceManagePathTrees require credential")
@@ -6606,6 +6728,7 @@ func (c *Client) DescribeRoleListWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeRoleListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRoleList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRoleList require credential")
@@ -6661,6 +6784,7 @@ func (c *Client) DescribeRuleWithContext(ctx context.Context, request *DescribeR
     if request == nil {
         request = NewDescribeRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRule require credential")
@@ -6712,6 +6836,7 @@ func (c *Client) DescribeRuleDimStatWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeRuleDimStatRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRuleDimStat")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRuleDimStat require credential")
@@ -6761,6 +6886,7 @@ func (c *Client) DescribeRuleExecDetailWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeRuleExecDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRuleExecDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRuleExecDetail require credential")
@@ -6812,6 +6938,7 @@ func (c *Client) DescribeRuleExecLogWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeRuleExecLogRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRuleExecLog")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRuleExecLog require credential")
@@ -6863,6 +6990,7 @@ func (c *Client) DescribeRuleExecResultsWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeRuleExecResultsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRuleExecResults")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRuleExecResults require credential")
@@ -6914,6 +7042,7 @@ func (c *Client) DescribeRuleExecStatWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeRuleExecStatRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRuleExecStat")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRuleExecStat require credential")
@@ -6967,6 +7096,7 @@ func (c *Client) DescribeRuleGroupWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeRuleGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRuleGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRuleGroup require credential")
@@ -7018,6 +7148,7 @@ func (c *Client) DescribeRuleGroupExecResultsByPageWithContext(ctx context.Conte
     if request == nil {
         request = NewDescribeRuleGroupExecResultsByPageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRuleGroupExecResultsByPage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRuleGroupExecResultsByPage require credential")
@@ -7067,6 +7198,7 @@ func (c *Client) DescribeRuleGroupSubscriptionWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeRuleGroupSubscriptionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRuleGroupSubscription")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRuleGroupSubscription require credential")
@@ -7116,6 +7248,7 @@ func (c *Client) DescribeRuleGroupTableWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeRuleGroupTableRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRuleGroupTable")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRuleGroupTable require credential")
@@ -7185,6 +7318,7 @@ func (c *Client) DescribeRuleGroupsByPageWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeRuleGroupsByPageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRuleGroupsByPage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRuleGroupsByPage require credential")
@@ -7236,6 +7370,7 @@ func (c *Client) DescribeRuleTemplateWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeRuleTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRuleTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRuleTemplate require credential")
@@ -7289,6 +7424,7 @@ func (c *Client) DescribeRuleTemplatesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeRuleTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRuleTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRuleTemplates require credential")
@@ -7342,6 +7478,7 @@ func (c *Client) DescribeRuleTemplatesByPageWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeRuleTemplatesByPageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRuleTemplatesByPage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRuleTemplatesByPage require credential")
@@ -7393,6 +7530,7 @@ func (c *Client) DescribeRulesWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeRulesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRules")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRules require credential")
@@ -7446,6 +7584,7 @@ func (c *Client) DescribeRulesByPageWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeRulesByPageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeRulesByPage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRulesByPage require credential")
@@ -7495,6 +7634,7 @@ func (c *Client) DescribeScheduleInstancesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeScheduleInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeScheduleInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeScheduleInstances require credential")
@@ -7544,6 +7684,7 @@ func (c *Client) DescribeSchedulerInstanceStatusWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeSchedulerInstanceStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeSchedulerInstanceStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSchedulerInstanceStatus require credential")
@@ -7595,6 +7736,7 @@ func (c *Client) DescribeSchedulerRunTimeInstanceCntByStatusWithContext(ctx cont
     if request == nil {
         request = NewDescribeSchedulerRunTimeInstanceCntByStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeSchedulerRunTimeInstanceCntByStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSchedulerRunTimeInstanceCntByStatus require credential")
@@ -7644,6 +7786,7 @@ func (c *Client) DescribeSchedulerTaskCntByStatusWithContext(ctx context.Context
     if request == nil {
         request = NewDescribeSchedulerTaskCntByStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeSchedulerTaskCntByStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSchedulerTaskCntByStatus require credential")
@@ -7693,6 +7836,7 @@ func (c *Client) DescribeSchedulerTaskTypeCntWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeSchedulerTaskTypeCntRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeSchedulerTaskTypeCnt")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSchedulerTaskTypeCnt require credential")
@@ -7742,6 +7886,7 @@ func (c *Client) DescribeStatisticInstanceStatusTrendOpsWithContext(ctx context.
     if request == nil {
         request = NewDescribeStatisticInstanceStatusTrendOpsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeStatisticInstanceStatusTrendOps")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStatisticInstanceStatusTrendOps require credential")
@@ -7813,6 +7958,7 @@ func (c *Client) DescribeStreamTaskLogListWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeStreamTaskLogListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeStreamTaskLogList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamTaskLogList require credential")
@@ -7884,6 +8030,7 @@ func (c *Client) DescribeSuccessorOpsTaskInfosWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeSuccessorOpsTaskInfosRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeSuccessorOpsTaskInfos")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSuccessorOpsTaskInfos require credential")
@@ -7933,6 +8080,7 @@ func (c *Client) DescribeTableBasicInfoWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeTableBasicInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeTableBasicInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTableBasicInfo require credential")
@@ -7982,6 +8130,7 @@ func (c *Client) DescribeTableInfoListWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeTableInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeTableInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTableInfoList require credential")
@@ -8039,6 +8188,7 @@ func (c *Client) DescribeTableLineageWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeTableLineageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeTableLineage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTableLineage require credential")
@@ -8096,6 +8246,7 @@ func (c *Client) DescribeTableLineageInfoWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeTableLineageInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeTableLineageInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTableLineageInfo require credential")
@@ -8157,6 +8308,7 @@ func (c *Client) DescribeTableMetaWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeTableMetaRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeTableMeta")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTableMeta require credential")
@@ -8206,6 +8358,7 @@ func (c *Client) DescribeTableMetasWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeTableMetasRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeTableMetas")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTableMetas require credential")
@@ -8269,6 +8422,7 @@ func (c *Client) DescribeTableQualityDetailsWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeTableQualityDetailsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeTableQualityDetails")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTableQualityDetails require credential")
@@ -8318,6 +8472,7 @@ func (c *Client) DescribeTableSchemaInfoWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeTableSchemaInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeTableSchemaInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTableSchemaInfo require credential")
@@ -8383,6 +8538,7 @@ func (c *Client) DescribeTableScoreTrendWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeTableScoreTrendRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeTableScoreTrend")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTableScoreTrend require credential")
@@ -8450,6 +8606,7 @@ func (c *Client) DescribeTaskAlarmRegulationsWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeTaskAlarmRegulationsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeTaskAlarmRegulations")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTaskAlarmRegulations require credential")
@@ -8499,6 +8656,7 @@ func (c *Client) DescribeTaskByCycleWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeTaskByCycleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeTaskByCycle")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTaskByCycle require credential")
@@ -8548,6 +8706,7 @@ func (c *Client) DescribeTaskByCycleReportWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeTaskByCycleReportRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeTaskByCycleReport")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTaskByCycleReport require credential")
@@ -8597,6 +8756,7 @@ func (c *Client) DescribeTaskByStatusReportWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeTaskByStatusReportRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeTaskByStatusReport")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTaskByStatusReport require credential")
@@ -8648,6 +8808,7 @@ func (c *Client) DescribeTaskLockStatusWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeTaskLockStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeTaskLockStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTaskLockStatus require credential")
@@ -8697,6 +8858,7 @@ func (c *Client) DescribeTaskRunHistoryWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeTaskRunHistoryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeTaskRunHistory")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTaskRunHistory require credential")
@@ -8746,6 +8908,7 @@ func (c *Client) DescribeTaskScriptWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeTaskScriptRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeTaskScript")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTaskScript require credential")
@@ -8797,6 +8960,7 @@ func (c *Client) DescribeTemplateDimCountWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeTemplateDimCountRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeTemplateDimCount")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTemplateDimCount require credential")
@@ -8846,6 +9010,7 @@ func (c *Client) DescribeThirdTaskRunLogWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeThirdTaskRunLogRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeThirdTaskRunLog")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeThirdTaskRunLog require credential")
@@ -8897,6 +9062,7 @@ func (c *Client) DescribeTopTableStatWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeTopTableStatRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeTopTableStat")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTopTableStat require credential")
@@ -8948,6 +9114,7 @@ func (c *Client) DescribeTrendStatWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeTrendStatRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeTrendStat")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTrendStat require credential")
@@ -8997,6 +9164,7 @@ func (c *Client) DescribeWorkflowCanvasInfoWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeWorkflowCanvasInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeWorkflowCanvasInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeWorkflowCanvasInfo require credential")
@@ -9046,6 +9214,7 @@ func (c *Client) DescribeWorkflowExecuteByIdWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeWorkflowExecuteByIdRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeWorkflowExecuteById")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeWorkflowExecuteById require credential")
@@ -9095,6 +9264,7 @@ func (c *Client) DescribeWorkflowInfoByIdWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeWorkflowInfoByIdRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeWorkflowInfoById")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeWorkflowInfoById require credential")
@@ -9144,6 +9314,7 @@ func (c *Client) DescribeWorkflowListByProjectIdWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeWorkflowListByProjectIdRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeWorkflowListByProjectId")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeWorkflowListByProjectId require credential")
@@ -9193,6 +9364,7 @@ func (c *Client) DescribeWorkflowTaskCountWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeWorkflowTaskCountRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeWorkflowTaskCount")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeWorkflowTaskCount require credential")
@@ -9242,6 +9414,7 @@ func (c *Client) DiagnoseProWithContext(ctx context.Context, request *DiagnosePr
     if request == nil {
         request = NewDiagnoseProRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DiagnosePro")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DiagnosePro require credential")
@@ -9323,6 +9496,7 @@ func (c *Client) DryRunDIOfflineTaskWithContext(ctx context.Context, request *Dr
     if request == nil {
         request = NewDryRunDIOfflineTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DryRunDIOfflineTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DryRunDIOfflineTask require credential")
@@ -9372,6 +9546,7 @@ func (c *Client) FindAllFolderWithContext(ctx context.Context, request *FindAllF
     if request == nil {
         request = NewFindAllFolderRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "FindAllFolder")
     
     if c.GetCredential() == nil {
         return nil, errors.New("FindAllFolder require credential")
@@ -9421,6 +9596,7 @@ func (c *Client) FreezeOpsTasksWithContext(ctx context.Context, request *FreezeO
     if request == nil {
         request = NewFreezeOpsTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "FreezeOpsTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("FreezeOpsTasks require credential")
@@ -9470,6 +9646,7 @@ func (c *Client) FreezeTasksByWorkflowIdsWithContext(ctx context.Context, reques
     if request == nil {
         request = NewFreezeTasksByWorkflowIdsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "FreezeTasksByWorkflowIds")
     
     if c.GetCredential() == nil {
         return nil, errors.New("FreezeTasksByWorkflowIds require credential")
@@ -9519,6 +9696,7 @@ func (c *Client) GenHiveTableDDLSqlWithContext(ctx context.Context, request *Gen
     if request == nil {
         request = NewGenHiveTableDDLSqlRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GenHiveTableDDLSql")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GenHiveTableDDLSql require credential")
@@ -9568,6 +9746,7 @@ func (c *Client) GetFileInfoWithContext(ctx context.Context, request *GetFileInf
     if request == nil {
         request = NewGetFileInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetFileInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetFileInfo require credential")
@@ -9617,6 +9796,7 @@ func (c *Client) GetInstanceLogWithContext(ctx context.Context, request *GetInst
     if request == nil {
         request = NewGetInstanceLogRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetInstanceLog")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetInstanceLog require credential")
@@ -9668,6 +9848,7 @@ func (c *Client) GetIntegrationNodeColumnSchemaWithContext(ctx context.Context, 
     if request == nil {
         request = NewGetIntegrationNodeColumnSchemaRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetIntegrationNodeColumnSchema")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetIntegrationNodeColumnSchema require credential")
@@ -9749,6 +9930,7 @@ func (c *Client) GetOfflineDIInstanceListWithContext(ctx context.Context, reques
     if request == nil {
         request = NewGetOfflineDIInstanceListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetOfflineDIInstanceList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetOfflineDIInstanceList require credential")
@@ -9830,6 +10012,7 @@ func (c *Client) GetOfflineInstanceListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewGetOfflineInstanceListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetOfflineInstanceList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetOfflineInstanceList require credential")
@@ -9879,6 +10062,7 @@ func (c *Client) GetTaskInstanceWithContext(ctx context.Context, request *GetTas
     if request == nil {
         request = NewGetTaskInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetTaskInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetTaskInstance require credential")
@@ -9928,6 +10112,7 @@ func (c *Client) KillOpsMakePlanInstancesWithContext(ctx context.Context, reques
     if request == nil {
         request = NewKillOpsMakePlanInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "KillOpsMakePlanInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("KillOpsMakePlanInstances require credential")
@@ -9977,6 +10162,7 @@ func (c *Client) KillScheduleInstancesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewKillScheduleInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "KillScheduleInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("KillScheduleInstances require credential")
@@ -10026,6 +10212,7 @@ func (c *Client) ListInstancesWithContext(ctx context.Context, request *ListInst
     if request == nil {
         request = NewListInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListInstances require credential")
@@ -10107,6 +10294,7 @@ func (c *Client) LockIntegrationTaskWithContext(ctx context.Context, request *Lo
     if request == nil {
         request = NewLockIntegrationTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "LockIntegrationTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("LockIntegrationTask require credential")
@@ -10156,6 +10344,7 @@ func (c *Client) ModifyApproveStatusWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyApproveStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ModifyApproveStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyApproveStatus require credential")
@@ -10205,6 +10394,7 @@ func (c *Client) ModifyDataSourceWithContext(ctx context.Context, request *Modif
     if request == nil {
         request = NewModifyDataSourceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ModifyDataSource")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDataSource require credential")
@@ -10262,6 +10452,7 @@ func (c *Client) ModifyDimensionWeightWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyDimensionWeightRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ModifyDimensionWeight")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDimensionWeight require credential")
@@ -10311,6 +10502,7 @@ func (c *Client) ModifyDsFolderWithContext(ctx context.Context, request *ModifyD
     if request == nil {
         request = NewModifyDsFolderRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ModifyDsFolder")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDsFolder require credential")
@@ -10364,6 +10556,7 @@ func (c *Client) ModifyExecStrategyWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyExecStrategyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ModifyExecStrategy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyExecStrategy require credential")
@@ -10447,6 +10640,7 @@ func (c *Client) ModifyIntegrationNodeWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyIntegrationNodeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ModifyIntegrationNode")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyIntegrationNode require credential")
@@ -10528,6 +10722,7 @@ func (c *Client) ModifyIntegrationTaskWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyIntegrationTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ModifyIntegrationTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyIntegrationTask require credential")
@@ -10581,6 +10776,7 @@ func (c *Client) ModifyMonitorStatusWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyMonitorStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ModifyMonitorStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyMonitorStatus require credential")
@@ -10632,6 +10828,7 @@ func (c *Client) ModifyRuleWithContext(ctx context.Context, request *ModifyRuleR
     if request == nil {
         request = NewModifyRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ModifyRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyRule require credential")
@@ -10683,6 +10880,7 @@ func (c *Client) ModifyRuleGroupSubscriptionWithContext(ctx context.Context, req
     if request == nil {
         request = NewModifyRuleGroupSubscriptionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ModifyRuleGroupSubscription")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyRuleGroupSubscription require credential")
@@ -10734,6 +10932,7 @@ func (c *Client) ModifyRuleTemplateWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyRuleTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ModifyRuleTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyRuleTemplate require credential")
@@ -10797,6 +10996,7 @@ func (c *Client) ModifyTaskAlarmRegularWithContext(ctx context.Context, request 
     if request == nil {
         request = NewModifyTaskAlarmRegularRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ModifyTaskAlarmRegular")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyTaskAlarmRegular require credential")
@@ -10850,6 +11050,7 @@ func (c *Client) ModifyTaskInfoWithContext(ctx context.Context, request *ModifyT
     if request == nil {
         request = NewModifyTaskInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ModifyTaskInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyTaskInfo require credential")
@@ -10903,6 +11104,7 @@ func (c *Client) ModifyTaskLinksWithContext(ctx context.Context, request *Modify
     if request == nil {
         request = NewModifyTaskLinksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ModifyTaskLinks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyTaskLinks require credential")
@@ -10954,6 +11156,7 @@ func (c *Client) ModifyTaskLinksDsWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyTaskLinksDsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ModifyTaskLinksDs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyTaskLinksDs require credential")
@@ -11003,6 +11206,7 @@ func (c *Client) ModifyTaskNameWithContext(ctx context.Context, request *ModifyT
     if request == nil {
         request = NewModifyTaskNameRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ModifyTaskName")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyTaskName require credential")
@@ -11056,6 +11260,7 @@ func (c *Client) ModifyTaskScriptWithContext(ctx context.Context, request *Modif
     if request == nil {
         request = NewModifyTaskScriptRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ModifyTaskScript")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyTaskScript require credential")
@@ -11105,6 +11310,7 @@ func (c *Client) ModifyWorkflowInfoWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyWorkflowInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ModifyWorkflowInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyWorkflowInfo require credential")
@@ -11154,6 +11360,7 @@ func (c *Client) ModifyWorkflowScheduleWithContext(ctx context.Context, request 
     if request == nil {
         request = NewModifyWorkflowScheduleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ModifyWorkflowSchedule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyWorkflowSchedule require credential")
@@ -11203,6 +11410,7 @@ func (c *Client) MoveTasksToFolderWithContext(ctx context.Context, request *Move
     if request == nil {
         request = NewMoveTasksToFolderRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "MoveTasksToFolder")
     
     if c.GetCredential() == nil {
         return nil, errors.New("MoveTasksToFolder require credential")
@@ -11252,6 +11460,7 @@ func (c *Client) RegisterDsEventWithContext(ctx context.Context, request *Regist
     if request == nil {
         request = NewRegisterDsEventRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "RegisterDsEvent")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RegisterDsEvent require credential")
@@ -11305,6 +11514,7 @@ func (c *Client) RegisterEventWithContext(ctx context.Context, request *Register
     if request == nil {
         request = NewRegisterEventRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "RegisterEvent")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RegisterEvent require credential")
@@ -11358,6 +11568,7 @@ func (c *Client) RegisterEventListenerWithContext(ctx context.Context, request *
     if request == nil {
         request = NewRegisterEventListenerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "RegisterEventListener")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RegisterEventListener require credential")
@@ -11407,6 +11618,7 @@ func (c *Client) RemoveWorkflowDsWithContext(ctx context.Context, request *Remov
     if request == nil {
         request = NewRemoveWorkflowDsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "RemoveWorkflowDs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RemoveWorkflowDs require credential")
@@ -11456,6 +11668,7 @@ func (c *Client) RenewWorkflowOwnerDsWithContext(ctx context.Context, request *R
     if request == nil {
         request = NewRenewWorkflowOwnerDsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "RenewWorkflowOwnerDs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RenewWorkflowOwnerDs require credential")
@@ -11505,6 +11718,7 @@ func (c *Client) RenewWorkflowSchedulerInfoDsWithContext(ctx context.Context, re
     if request == nil {
         request = NewRenewWorkflowSchedulerInfoDsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "RenewWorkflowSchedulerInfoDs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RenewWorkflowSchedulerInfoDs require credential")
@@ -11586,6 +11800,7 @@ func (c *Client) ResumeIntegrationTaskWithContext(ctx context.Context, request *
     if request == nil {
         request = NewResumeIntegrationTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ResumeIntegrationTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ResumeIntegrationTask require credential")
@@ -11637,6 +11852,7 @@ func (c *Client) RobAndLockIntegrationTaskWithContext(ctx context.Context, reque
     if request == nil {
         request = NewRobAndLockIntegrationTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "RobAndLockIntegrationTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RobAndLockIntegrationTask require credential")
@@ -11686,6 +11902,7 @@ func (c *Client) RunForceSucScheduleInstancesWithContext(ctx context.Context, re
     if request == nil {
         request = NewRunForceSucScheduleInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "RunForceSucScheduleInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RunForceSucScheduleInstances require credential")
@@ -11735,6 +11952,7 @@ func (c *Client) RunRerunScheduleInstancesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewRunRerunScheduleInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "RunRerunScheduleInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RunRerunScheduleInstances require credential")
@@ -11784,6 +12002,7 @@ func (c *Client) RunTasksByMultiWorkflowWithContext(ctx context.Context, request
     if request == nil {
         request = NewRunTasksByMultiWorkflowRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "RunTasksByMultiWorkflow")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RunTasksByMultiWorkflow require credential")
@@ -11833,6 +12052,7 @@ func (c *Client) SaveCustomFunctionWithContext(ctx context.Context, request *Sav
     if request == nil {
         request = NewSaveCustomFunctionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "SaveCustomFunction")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SaveCustomFunction require credential")
@@ -11886,6 +12106,7 @@ func (c *Client) SetTaskAlarmNewWithContext(ctx context.Context, request *SetTas
     if request == nil {
         request = NewSetTaskAlarmNewRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "SetTaskAlarmNew")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetTaskAlarmNew require credential")
@@ -11967,6 +12188,7 @@ func (c *Client) StartIntegrationTaskWithContext(ctx context.Context, request *S
     if request == nil {
         request = NewStartIntegrationTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "StartIntegrationTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartIntegrationTask require credential")
@@ -12048,6 +12270,7 @@ func (c *Client) StopIntegrationTaskWithContext(ctx context.Context, request *St
     if request == nil {
         request = NewStopIntegrationTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "StopIntegrationTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopIntegrationTask require credential")
@@ -12129,6 +12352,7 @@ func (c *Client) SubmitCustomFunctionWithContext(ctx context.Context, request *S
     if request == nil {
         request = NewSubmitCustomFunctionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "SubmitCustomFunction")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SubmitCustomFunction require credential")
@@ -12224,6 +12448,7 @@ func (c *Client) SubmitSqlTaskWithContext(ctx context.Context, request *SubmitSq
     if request == nil {
         request = NewSubmitSqlTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "SubmitSqlTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SubmitSqlTask require credential")
@@ -12323,6 +12548,7 @@ func (c *Client) SubmitTaskWithContext(ctx context.Context, request *SubmitTaskR
     if request == nil {
         request = NewSubmitTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "SubmitTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SubmitTask require credential")
@@ -12372,6 +12598,7 @@ func (c *Client) SubmitTaskTestRunWithContext(ctx context.Context, request *Subm
     if request == nil {
         request = NewSubmitTaskTestRunRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "SubmitTaskTestRun")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SubmitTaskTestRun require credential")
@@ -12421,6 +12648,7 @@ func (c *Client) SubmitWorkflowWithContext(ctx context.Context, request *SubmitW
     if request == nil {
         request = NewSubmitWorkflowRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "SubmitWorkflow")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SubmitWorkflow require credential")
@@ -12502,6 +12730,7 @@ func (c *Client) SuspendIntegrationTaskWithContext(ctx context.Context, request 
     if request == nil {
         request = NewSuspendIntegrationTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "SuspendIntegrationTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SuspendIntegrationTask require credential")
@@ -12557,6 +12786,7 @@ func (c *Client) TaskLogWithContext(ctx context.Context, request *TaskLogRequest
     if request == nil {
         request = NewTaskLogRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "TaskLog")
     
     if c.GetCredential() == nil {
         return nil, errors.New("TaskLog require credential")
@@ -12606,6 +12836,7 @@ func (c *Client) TriggerDsEventWithContext(ctx context.Context, request *Trigger
     if request == nil {
         request = NewTriggerDsEventRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "TriggerDsEvent")
     
     if c.GetCredential() == nil {
         return nil, errors.New("TriggerDsEvent require credential")
@@ -12659,6 +12890,7 @@ func (c *Client) TriggerEventWithContext(ctx context.Context, request *TriggerEv
     if request == nil {
         request = NewTriggerEventRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "TriggerEvent")
     
     if c.GetCredential() == nil {
         return nil, errors.New("TriggerEvent require credential")
@@ -12740,6 +12972,7 @@ func (c *Client) UnlockIntegrationTaskWithContext(ctx context.Context, request *
     if request == nil {
         request = NewUnlockIntegrationTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "UnlockIntegrationTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UnlockIntegrationTask require credential")
@@ -12789,6 +13022,7 @@ func (c *Client) UpdateProjectUserRoleWithContext(ctx context.Context, request *
     if request == nil {
         request = NewUpdateProjectUserRoleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "UpdateProjectUserRole")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateProjectUserRole require credential")
@@ -12842,6 +13076,7 @@ func (c *Client) UpdateWorkflowInfoWithContext(ctx context.Context, request *Upd
     if request == nil {
         request = NewUpdateWorkflowInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "UpdateWorkflowInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateWorkflowInfo require credential")
@@ -12893,6 +13128,7 @@ func (c *Client) UpdateWorkflowOwnerWithContext(ctx context.Context, request *Up
     if request == nil {
         request = NewUpdateWorkflowOwnerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "UpdateWorkflowOwner")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateWorkflowOwner require credential")
@@ -12954,6 +13190,7 @@ func (c *Client) UploadContentWithContext(ctx context.Context, request *UploadCo
     if request == nil {
         request = NewUploadContentRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "UploadContent")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UploadContent require credential")

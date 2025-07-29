@@ -102,6 +102,7 @@ func (c *Client) CreateAppWithContext(ctx context.Context, request *CreateAppReq
     if request == nil {
         request = NewCreateAppRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gme", APIVersion, "CreateApp")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateApp require credential")
@@ -159,6 +160,7 @@ func (c *Client) DeleteRoomMemberWithContext(ctx context.Context, request *Delet
     if request == nil {
         request = NewDeleteRoomMemberRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gme", APIVersion, "DeleteRoomMember")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteRoomMember require credential")
@@ -228,6 +230,7 @@ func (c *Client) DescribeAppStatisticsWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeAppStatisticsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gme", APIVersion, "DescribeAppStatistics")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAppStatistics require credential")
@@ -285,6 +288,7 @@ func (c *Client) DescribeApplicationDataWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeApplicationDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gme", APIVersion, "DescribeApplicationData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationData require credential")
@@ -348,6 +352,7 @@ func (c *Client) DescribeRecordInfoWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeRecordInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gme", APIVersion, "DescribeRecordInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRecordInfo require credential")
@@ -413,6 +418,7 @@ func (c *Client) DescribeTaskInfoWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeTaskInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gme", APIVersion, "DescribeTaskInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTaskInfo require credential")
@@ -480,6 +486,7 @@ func (c *Client) ModifyAppStatusWithContext(ctx context.Context, request *Modify
     if request == nil {
         request = NewModifyAppStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gme", APIVersion, "ModifyAppStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyAppStatus require credential")
@@ -551,6 +558,7 @@ func (c *Client) ModifyRecordInfoWithContext(ctx context.Context, request *Modif
     if request == nil {
         request = NewModifyRecordInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gme", APIVersion, "ModifyRecordInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyRecordInfo require credential")
@@ -626,6 +634,7 @@ func (c *Client) StartRecordWithContext(ctx context.Context, request *StartRecor
     if request == nil {
         request = NewStartRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gme", APIVersion, "StartRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartRecord require credential")
@@ -689,6 +698,7 @@ func (c *Client) StopRecordWithContext(ctx context.Context, request *StopRecordR
     if request == nil {
         request = NewStopRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gme", APIVersion, "StopRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopRecord require credential")

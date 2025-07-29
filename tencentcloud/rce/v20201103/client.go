@@ -168,6 +168,7 @@ func (c *Client) DescribeRiskAssessmentWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeRiskAssessmentRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "rce", APIVersion, "DescribeRiskAssessment")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRiskAssessment require credential")

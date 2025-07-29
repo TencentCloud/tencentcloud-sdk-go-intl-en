@@ -94,6 +94,7 @@ func (c *Client) CheckRuleWithContext(ctx context.Context, request *CheckRuleReq
     if request == nil {
         request = NewCheckRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "CheckRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CheckRule require credential")
@@ -155,6 +156,7 @@ func (c *Client) CheckTransformationWithContext(ctx context.Context, request *Ch
     if request == nil {
         request = NewCheckTransformationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "CheckTransformation")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CheckTransformation require credential")
@@ -250,6 +252,7 @@ func (c *Client) CreateConnectionWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateConnectionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "CreateConnection")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateConnection require credential")
@@ -337,6 +340,7 @@ func (c *Client) CreateEventBusWithContext(ctx context.Context, request *CreateE
     if request == nil {
         request = NewCreateEventBusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "CreateEventBus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateEventBus require credential")
@@ -408,6 +412,7 @@ func (c *Client) CreateRuleWithContext(ctx context.Context, request *CreateRuleR
     if request == nil {
         request = NewCreateRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "CreateRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateRule require credential")
@@ -543,6 +548,7 @@ func (c *Client) CreateTargetWithContext(ctx context.Context, request *CreateTar
     if request == nil {
         request = NewCreateTargetRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "CreateTarget")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTarget require credential")
@@ -596,6 +602,7 @@ func (c *Client) CreateTransformationWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateTransformationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "CreateTransformation")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTransformation require credential")
@@ -667,6 +674,7 @@ func (c *Client) DeleteConnectionWithContext(ctx context.Context, request *Delet
     if request == nil {
         request = NewDeleteConnectionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "DeleteConnection")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteConnection require credential")
@@ -730,6 +738,7 @@ func (c *Client) DeleteEventBusWithContext(ctx context.Context, request *DeleteE
     if request == nil {
         request = NewDeleteEventBusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "DeleteEventBus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteEventBus require credential")
@@ -795,6 +804,7 @@ func (c *Client) DeleteRuleWithContext(ctx context.Context, request *DeleteRuleR
     if request == nil {
         request = NewDeleteRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "DeleteRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteRule require credential")
@@ -876,6 +886,7 @@ func (c *Client) DeleteTargetWithContext(ctx context.Context, request *DeleteTar
     if request == nil {
         request = NewDeleteTargetRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "DeleteTarget")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteTarget require credential")
@@ -929,6 +940,7 @@ func (c *Client) DeleteTransformationWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDeleteTransformationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "DeleteTransformation")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteTransformation require credential")
@@ -982,6 +994,7 @@ func (c *Client) DescribeLogTagValueWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeLogTagValueRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "DescribeLogTagValue")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLogTagValue require credential")
@@ -1035,6 +1048,7 @@ func (c *Client) GetEventBusWithContext(ctx context.Context, request *GetEventBu
     if request == nil {
         request = NewGetEventBusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "GetEventBus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetEventBus require credential")
@@ -1094,6 +1108,7 @@ func (c *Client) GetRuleWithContext(ctx context.Context, request *GetRuleRequest
     if request == nil {
         request = NewGetRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "GetRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetRule require credential")
@@ -1151,6 +1166,7 @@ func (c *Client) GetTransformationWithContext(ctx context.Context, request *GetT
     if request == nil {
         request = NewGetTransformationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "GetTransformation")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetTransformation require credential")
@@ -1212,6 +1228,7 @@ func (c *Client) ListConnectionsWithContext(ctx context.Context, request *ListCo
     if request == nil {
         request = NewListConnectionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "ListConnections")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListConnections require credential")
@@ -1273,6 +1290,7 @@ func (c *Client) ListEventBusesWithContext(ctx context.Context, request *ListEve
     if request == nil {
         request = NewListEventBusesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "ListEventBuses")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListEventBuses require credential")
@@ -1334,6 +1352,7 @@ func (c *Client) ListRulesWithContext(ctx context.Context, request *ListRulesReq
     if request == nil {
         request = NewListRulesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "ListRules")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListRules require credential")
@@ -1401,6 +1420,7 @@ func (c *Client) ListTargetsWithContext(ctx context.Context, request *ListTarget
     if request == nil {
         request = NewListTargetsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "ListTargets")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListTargets require credential")
@@ -1454,6 +1474,7 @@ func (c *Client) SearchLogWithContext(ctx context.Context, request *SearchLogReq
     if request == nil {
         request = NewSearchLogRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "SearchLog")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SearchLog require credential")
@@ -1513,6 +1534,7 @@ func (c *Client) UpdateConnectionWithContext(ctx context.Context, request *Updat
     if request == nil {
         request = NewUpdateConnectionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "UpdateConnection")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateConnection require credential")
@@ -1578,6 +1600,7 @@ func (c *Client) UpdateEventBusWithContext(ctx context.Context, request *UpdateE
     if request == nil {
         request = NewUpdateEventBusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "UpdateEventBus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateEventBus require credential")
@@ -1649,6 +1672,7 @@ func (c *Client) UpdateRuleWithContext(ctx context.Context, request *UpdateRuleR
     if request == nil {
         request = NewUpdateRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "UpdateRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateRule require credential")
@@ -1728,6 +1752,7 @@ func (c *Client) UpdateTargetWithContext(ctx context.Context, request *UpdateTar
     if request == nil {
         request = NewUpdateTargetRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "UpdateTarget")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateTarget require credential")
@@ -1779,6 +1804,7 @@ func (c *Client) UpdateTransformationWithContext(ctx context.Context, request *U
     if request == nil {
         request = NewUpdateTransformationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "eb", APIVersion, "UpdateTransformation")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateTransformation require credential")

@@ -234,6 +234,7 @@ func (c *Client) AnalyzeFaceWithContext(ctx context.Context, request *AnalyzeFac
     if request == nil {
         request = NewAnalyzeFaceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "AnalyzeFace")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AnalyzeFace require credential")
@@ -451,6 +452,7 @@ func (c *Client) CompareFaceWithContext(ctx context.Context, request *CompareFac
     if request == nil {
         request = NewCompareFaceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "CompareFace")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CompareFace require credential")
@@ -642,6 +644,7 @@ func (c *Client) CopyPersonWithContext(ctx context.Context, request *CopyPersonR
     if request == nil {
         request = NewCopyPersonRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "CopyPerson")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CopyPerson require credential")
@@ -847,6 +850,7 @@ func (c *Client) CreateFaceWithContext(ctx context.Context, request *CreateFaceR
     if request == nil {
         request = NewCreateFaceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "CreateFace")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateFace require credential")
@@ -1052,6 +1056,7 @@ func (c *Client) CreateGroupWithContext(ctx context.Context, request *CreateGrou
     if request == nil {
         request = NewCreateGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "CreateGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateGroup require credential")
@@ -1259,6 +1264,7 @@ func (c *Client) CreatePersonWithContext(ctx context.Context, request *CreatePer
     if request == nil {
         request = NewCreatePersonRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "CreatePerson")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreatePerson require credential")
@@ -1440,6 +1446,7 @@ func (c *Client) DeleteFaceWithContext(ctx context.Context, request *DeleteFaceR
     if request == nil {
         request = NewDeleteFaceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "DeleteFace")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteFace require credential")
@@ -1619,6 +1626,7 @@ func (c *Client) DeleteGroupWithContext(ctx context.Context, request *DeleteGrou
     if request == nil {
         request = NewDeleteGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "DeleteGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteGroup require credential")
@@ -1800,6 +1808,7 @@ func (c *Client) DeletePersonWithContext(ctx context.Context, request *DeletePer
     if request == nil {
         request = NewDeletePersonRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "DeletePerson")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeletePerson require credential")
@@ -1981,6 +1990,7 @@ func (c *Client) DeletePersonFromGroupWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDeletePersonFromGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "DeletePersonFromGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeletePersonFromGroup require credential")
@@ -2228,6 +2238,7 @@ func (c *Client) DetectFaceWithContext(ctx context.Context, request *DetectFaceR
     if request == nil {
         request = NewDetectFaceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "DetectFace")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DetectFace require credential")
@@ -2413,6 +2424,7 @@ func (c *Client) DetectFaceAttributesWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDetectFaceAttributesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "DetectFaceAttributes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DetectFaceAttributes require credential")
@@ -2624,6 +2636,7 @@ func (c *Client) DetectFaceSimilarityWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDetectFaceSimilarityRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "DetectFaceSimilarity")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DetectFaceSimilarity require credential")
@@ -2861,6 +2874,7 @@ func (c *Client) DetectLiveFaceWithContext(ctx context.Context, request *DetectL
     if request == nil {
         request = NewDetectLiveFaceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "DetectLiveFace")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DetectLiveFace require credential")
@@ -3070,6 +3084,7 @@ func (c *Client) DetectLiveFaceAccurateWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDetectLiveFaceAccurateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "DetectLiveFaceAccurate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DetectLiveFaceAccurate require credential")
@@ -3137,6 +3152,7 @@ func (c *Client) GetGroupInfoWithContext(ctx context.Context, request *GetGroupI
     if request == nil {
         request = NewGetGroupInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "GetGroupInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetGroupInfo require credential")
@@ -3316,6 +3332,7 @@ func (c *Client) GetGroupListWithContext(ctx context.Context, request *GetGroupL
     if request == nil {
         request = NewGetGroupListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "GetGroupList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetGroupList require credential")
@@ -3495,6 +3512,7 @@ func (c *Client) GetPersonBaseInfoWithContext(ctx context.Context, request *GetP
     if request == nil {
         request = NewGetPersonBaseInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "GetPersonBaseInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetPersonBaseInfo require credential")
@@ -3674,6 +3692,7 @@ func (c *Client) GetPersonGroupInfoWithContext(ctx context.Context, request *Get
     if request == nil {
         request = NewGetPersonGroupInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "GetPersonGroupInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetPersonGroupInfo require credential")
@@ -3853,6 +3872,7 @@ func (c *Client) GetPersonListWithContext(ctx context.Context, request *GetPerso
     if request == nil {
         request = NewGetPersonListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "GetPersonList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetPersonList require credential")
@@ -4032,6 +4052,7 @@ func (c *Client) GetPersonListNumWithContext(ctx context.Context, request *GetPe
     if request == nil {
         request = NewGetPersonListNumRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "GetPersonListNum")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetPersonListNum require credential")
@@ -4209,6 +4230,7 @@ func (c *Client) ModifyGroupWithContext(ctx context.Context, request *ModifyGrou
     if request == nil {
         request = NewModifyGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "ModifyGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyGroup require credential")
@@ -4386,6 +4408,7 @@ func (c *Client) ModifyPersonGroupInfoWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyPersonGroupInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "ModifyPersonGroupInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyPersonGroupInfo require credential")
@@ -4639,6 +4662,7 @@ func (c *Client) SearchFacesWithContext(ctx context.Context, request *SearchFace
     if request == nil {
         request = NewSearchFacesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "SearchFaces")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SearchFaces require credential")
@@ -4888,6 +4912,7 @@ func (c *Client) SearchFacesReturnsByGroupWithContext(ctx context.Context, reque
     if request == nil {
         request = NewSearchFacesReturnsByGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "SearchFacesReturnsByGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SearchFacesReturnsByGroup require credential")
@@ -5055,6 +5080,7 @@ func (c *Client) SearchPersonsWithContext(ctx context.Context, request *SearchPe
     if request == nil {
         request = NewSearchPersonsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "SearchPersons")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SearchPersons require credential")
@@ -5216,6 +5242,7 @@ func (c *Client) SearchPersonsReturnsByGroupWithContext(ctx context.Context, req
     if request == nil {
         request = NewSearchPersonsReturnsByGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "SearchPersonsReturnsByGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SearchPersonsReturnsByGroup require credential")
@@ -5433,6 +5460,7 @@ func (c *Client) VerifyFaceWithContext(ctx context.Context, request *VerifyFaceR
     if request == nil {
         request = NewVerifyFaceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "VerifyFace")
     
     if c.GetCredential() == nil {
         return nil, errors.New("VerifyFace require credential")
@@ -5578,6 +5606,7 @@ func (c *Client) VerifyPersonWithContext(ctx context.Context, request *VerifyPer
     if request == nil {
         request = NewVerifyPersonRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "iai", APIVersion, "VerifyPerson")
     
     if c.GetCredential() == nil {
         return nil, errors.New("VerifyPerson require credential")

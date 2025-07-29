@@ -88,6 +88,7 @@ func (c *Client) ApplyTiwTrialWithContext(ctx context.Context, request *ApplyTiw
     if request == nil {
         request = NewApplyTiwTrialRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "ApplyTiwTrial")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ApplyTiwTrial require credential")
@@ -149,6 +150,7 @@ func (c *Client) CreateApplicationWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateApplicationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "CreateApplication")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateApplication require credential")
@@ -212,6 +214,7 @@ func (c *Client) CreateSnapshotTaskWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreateSnapshotTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "CreateSnapshotTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateSnapshotTask require credential")
@@ -281,6 +284,7 @@ func (c *Client) CreateTranscodeWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateTranscodeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "CreateTranscode")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTranscode require credential")
@@ -348,6 +352,7 @@ func (c *Client) CreateVideoGenerationTaskWithContext(ctx context.Context, reque
     if request == nil {
         request = NewCreateVideoGenerationTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "CreateVideoGenerationTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateVideoGenerationTask require credential")
@@ -409,6 +414,7 @@ func (c *Client) DescribeAPIServiceWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeAPIServiceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeAPIService")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAPIService require credential")
@@ -464,6 +470,7 @@ func (c *Client) DescribeApplicationInfosWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeApplicationInfosRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeApplicationInfos")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationInfos require credential")
@@ -521,6 +528,7 @@ func (c *Client) DescribeApplicationUsageWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeApplicationUsageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeApplicationUsage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationUsage require credential")
@@ -576,6 +584,7 @@ func (c *Client) DescribeBoardSDKLogWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeBoardSDKLogRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeBoardSDKLog")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBoardSDKLog require credential")
@@ -629,6 +638,7 @@ func (c *Client) DescribeIMApplicationsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeIMApplicationsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeIMApplications")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIMApplications require credential")
@@ -690,6 +700,7 @@ func (c *Client) DescribeOnlineRecordWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeOnlineRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeOnlineRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOnlineRecord require credential")
@@ -749,6 +760,7 @@ func (c *Client) DescribeOnlineRecordCallbackWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeOnlineRecordCallbackRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeOnlineRecordCallback")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOnlineRecordCallback require credential")
@@ -804,6 +816,7 @@ func (c *Client) DescribePostpaidUsageWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribePostpaidUsageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribePostpaidUsage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribePostpaidUsage require credential")
@@ -861,6 +874,7 @@ func (c *Client) DescribeQualityMetricsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeQualityMetricsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeQualityMetrics")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeQualityMetrics require credential")
@@ -922,6 +936,7 @@ func (c *Client) DescribeRecordSearchWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeRecordSearchRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeRecordSearch")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRecordSearch require credential")
@@ -977,6 +992,7 @@ func (c *Client) DescribeRoomListWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeRoomListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeRoomList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRoomList require credential")
@@ -1046,6 +1062,7 @@ func (c *Client) DescribeSnapshotTaskWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeSnapshotTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeSnapshotTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSnapshotTask require credential")
@@ -1117,6 +1134,7 @@ func (c *Client) DescribeTIWDailyUsageWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeTIWDailyUsageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeTIWDailyUsage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTIWDailyUsage require credential")
@@ -1188,6 +1206,7 @@ func (c *Client) DescribeTIWRoomDailyUsageWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeTIWRoomDailyUsageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeTIWRoomDailyUsage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTIWRoomDailyUsage require credential")
@@ -1267,6 +1286,7 @@ func (c *Client) DescribeTranscodeWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeTranscodeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeTranscode")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTranscode require credential")
@@ -1326,6 +1346,7 @@ func (c *Client) DescribeTranscodeCallbackWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeTranscodeCallbackRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeTranscodeCallback")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTranscodeCallback require credential")
@@ -1389,6 +1410,7 @@ func (c *Client) DescribeTranscodeSearchWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeTranscodeSearchRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeTranscodeSearch")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTranscodeSearch require credential")
@@ -1446,6 +1468,7 @@ func (c *Client) DescribeUsageSummaryWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeUsageSummaryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeUsageSummary")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUsageSummary require credential")
@@ -1501,6 +1524,7 @@ func (c *Client) DescribeUserListWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeUserListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeUserList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUserList require credential")
@@ -1554,6 +1578,7 @@ func (c *Client) DescribeUserResourcesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeUserResourcesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeUserResources")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUserResources require credential")
@@ -1609,6 +1634,7 @@ func (c *Client) DescribeUserStatusWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeUserStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeUserStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUserStatus require credential")
@@ -1670,6 +1696,7 @@ func (c *Client) DescribeVideoGenerationTaskWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeVideoGenerationTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeVideoGenerationTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeVideoGenerationTask require credential")
@@ -1729,6 +1756,7 @@ func (c *Client) DescribeVideoGenerationTaskCallbackWithContext(ctx context.Cont
     if request == nil {
         request = NewDescribeVideoGenerationTaskCallbackRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeVideoGenerationTaskCallback")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeVideoGenerationTaskCallback require credential")
@@ -1794,6 +1822,7 @@ func (c *Client) DescribeWhiteboardApplicationConfigWithContext(ctx context.Cont
     if request == nil {
         request = NewDescribeWhiteboardApplicationConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeWhiteboardApplicationConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeWhiteboardApplicationConfig require credential")
@@ -1857,6 +1886,7 @@ func (c *Client) DescribeWhiteboardBucketConfigWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeWhiteboardBucketConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeWhiteboardBucketConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeWhiteboardBucketConfig require credential")
@@ -1918,6 +1948,7 @@ func (c *Client) DescribeWhiteboardPushWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeWhiteboardPushRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeWhiteboardPush")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeWhiteboardPush require credential")
@@ -1977,6 +2008,7 @@ func (c *Client) DescribeWhiteboardPushCallbackWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeWhiteboardPushCallbackRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeWhiteboardPushCallback")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeWhiteboardPushCallback require credential")
@@ -2040,6 +2072,7 @@ func (c *Client) DescribeWhiteboardPushSearchWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeWhiteboardPushSearchRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "DescribeWhiteboardPushSearch")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeWhiteboardPushSearch require credential")
@@ -2095,6 +2128,7 @@ func (c *Client) ModifyApplicationWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyApplicationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "ModifyApplication")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyApplication require credential")
@@ -2148,6 +2182,7 @@ func (c *Client) ModifyAutoRenewFlagWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyAutoRenewFlagRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "ModifyAutoRenewFlag")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyAutoRenewFlag require credential")
@@ -2223,6 +2258,7 @@ func (c *Client) ModifyWhiteboardApplicationConfigWithContext(ctx context.Contex
     if request == nil {
         request = NewModifyWhiteboardApplicationConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "ModifyWhiteboardApplicationConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyWhiteboardApplicationConfig require credential")
@@ -2292,6 +2328,7 @@ func (c *Client) ModifyWhiteboardBucketConfigWithContext(ctx context.Context, re
     if request == nil {
         request = NewModifyWhiteboardBucketConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "ModifyWhiteboardBucketConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyWhiteboardBucketConfig require credential")
@@ -2355,6 +2392,7 @@ func (c *Client) PauseOnlineRecordWithContext(ctx context.Context, request *Paus
     if request == nil {
         request = NewPauseOnlineRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "PauseOnlineRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("PauseOnlineRecord require credential")
@@ -2418,6 +2456,7 @@ func (c *Client) ResumeOnlineRecordWithContext(ctx context.Context, request *Res
     if request == nil {
         request = NewResumeOnlineRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "ResumeOnlineRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ResumeOnlineRecord require credential")
@@ -2477,6 +2516,7 @@ func (c *Client) SetOnlineRecordCallbackWithContext(ctx context.Context, request
     if request == nil {
         request = NewSetOnlineRecordCallbackRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "SetOnlineRecordCallback")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetOnlineRecordCallback require credential")
@@ -2536,6 +2576,7 @@ func (c *Client) SetOnlineRecordCallbackKeyWithContext(ctx context.Context, requ
     if request == nil {
         request = NewSetOnlineRecordCallbackKeyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "SetOnlineRecordCallbackKey")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetOnlineRecordCallbackKey require credential")
@@ -2595,6 +2636,7 @@ func (c *Client) SetTranscodeCallbackWithContext(ctx context.Context, request *S
     if request == nil {
         request = NewSetTranscodeCallbackRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "SetTranscodeCallback")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetTranscodeCallback require credential")
@@ -2654,6 +2696,7 @@ func (c *Client) SetTranscodeCallbackKeyWithContext(ctx context.Context, request
     if request == nil {
         request = NewSetTranscodeCallbackKeyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "SetTranscodeCallbackKey")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetTranscodeCallbackKey require credential")
@@ -2713,6 +2756,7 @@ func (c *Client) SetVideoGenerationTaskCallbackWithContext(ctx context.Context, 
     if request == nil {
         request = NewSetVideoGenerationTaskCallbackRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "SetVideoGenerationTaskCallback")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetVideoGenerationTaskCallback require credential")
@@ -2772,6 +2816,7 @@ func (c *Client) SetVideoGenerationTaskCallbackKeyWithContext(ctx context.Contex
     if request == nil {
         request = NewSetVideoGenerationTaskCallbackKeyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "SetVideoGenerationTaskCallbackKey")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetVideoGenerationTaskCallbackKey require credential")
@@ -2831,6 +2876,7 @@ func (c *Client) SetWhiteboardPushCallbackWithContext(ctx context.Context, reque
     if request == nil {
         request = NewSetWhiteboardPushCallbackRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "SetWhiteboardPushCallback")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetWhiteboardPushCallback require credential")
@@ -2890,6 +2936,7 @@ func (c *Client) SetWhiteboardPushCallbackKeyWithContext(ctx context.Context, re
     if request == nil {
         request = NewSetWhiteboardPushCallbackKeyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "SetWhiteboardPushCallbackKey")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetWhiteboardPushCallbackKey require credential")
@@ -2957,6 +3004,7 @@ func (c *Client) StartOnlineRecordWithContext(ctx context.Context, request *Star
     if request == nil {
         request = NewStartOnlineRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "StartOnlineRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartOnlineRecord require credential")
@@ -3024,6 +3072,7 @@ func (c *Client) StartWhiteboardPushWithContext(ctx context.Context, request *St
     if request == nil {
         request = NewStartWhiteboardPushRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "StartWhiteboardPush")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartWhiteboardPush require credential")
@@ -3085,6 +3134,7 @@ func (c *Client) StopOnlineRecordWithContext(ctx context.Context, request *StopO
     if request == nil {
         request = NewStopOnlineRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "StopOnlineRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopOnlineRecord require credential")
@@ -3148,6 +3198,7 @@ func (c *Client) StopWhiteboardPushWithContext(ctx context.Context, request *Sto
     if request == nil {
         request = NewStopWhiteboardPushRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tiw", APIVersion, "StopWhiteboardPush")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopWhiteboardPush require credential")

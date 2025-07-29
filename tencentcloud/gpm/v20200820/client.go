@@ -116,6 +116,7 @@ func (c *Client) CancelMatchingWithContext(ctx context.Context, request *CancelM
     if request == nil {
         request = NewCancelMatchingRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gpm", APIVersion, "CancelMatching")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CancelMatching require credential")
@@ -223,6 +224,7 @@ func (c *Client) CreateMatchWithContext(ctx context.Context, request *CreateMatc
     if request == nil {
         request = NewCreateMatchRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gpm", APIVersion, "CreateMatch")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateMatch require credential")
@@ -326,6 +328,7 @@ func (c *Client) CreateRuleWithContext(ctx context.Context, request *CreateRuleR
     if request == nil {
         request = NewCreateRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gpm", APIVersion, "CreateRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateRule require credential")
@@ -427,6 +430,7 @@ func (c *Client) DeleteMatchWithContext(ctx context.Context, request *DeleteMatc
     if request == nil {
         request = NewDeleteMatchRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gpm", APIVersion, "DeleteMatch")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteMatch require credential")
@@ -526,6 +530,7 @@ func (c *Client) DeleteRuleWithContext(ctx context.Context, request *DeleteRuleR
     if request == nil {
         request = NewDeleteRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gpm", APIVersion, "DeleteRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteRule require credential")
@@ -625,6 +630,7 @@ func (c *Client) DescribeDataWithContext(ctx context.Context, request *DescribeD
     if request == nil {
         request = NewDescribeDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gpm", APIVersion, "DescribeData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeData require credential")
@@ -720,6 +726,7 @@ func (c *Client) DescribeMatchWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeMatchRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gpm", APIVersion, "DescribeMatch")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMatch require credential")
@@ -813,6 +820,7 @@ func (c *Client) DescribeMatchCodesWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeMatchCodesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gpm", APIVersion, "DescribeMatchCodes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMatchCodes require credential")
@@ -914,6 +922,7 @@ func (c *Client) DescribeMatchesWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeMatchesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gpm", APIVersion, "DescribeMatches")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMatches require credential")
@@ -995,6 +1004,7 @@ func (c *Client) DescribeMatchingProgressWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeMatchingProgressRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gpm", APIVersion, "DescribeMatchingProgress")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMatchingProgress require credential")
@@ -1088,6 +1098,7 @@ func (c *Client) DescribeRuleWithContext(ctx context.Context, request *DescribeR
     if request == nil {
         request = NewDescribeRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gpm", APIVersion, "DescribeRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRule require credential")
@@ -1185,6 +1196,7 @@ func (c *Client) DescribeRulesWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeRulesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gpm", APIVersion, "DescribeRules")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRules require credential")
@@ -1240,6 +1252,7 @@ func (c *Client) DescribeTokenWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeTokenRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gpm", APIVersion, "DescribeToken")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeToken require credential")
@@ -1345,6 +1358,7 @@ func (c *Client) ModifyMatchWithContext(ctx context.Context, request *ModifyMatc
     if request == nil {
         request = NewModifyMatchRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gpm", APIVersion, "ModifyMatch")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyMatch require credential")
@@ -1442,6 +1456,7 @@ func (c *Client) ModifyRuleWithContext(ctx context.Context, request *ModifyRuleR
     if request == nil {
         request = NewModifyRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gpm", APIVersion, "ModifyRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyRule require credential")
@@ -1497,6 +1512,7 @@ func (c *Client) ModifyTokenWithContext(ctx context.Context, request *ModifyToke
     if request == nil {
         request = NewModifyTokenRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gpm", APIVersion, "ModifyToken")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyToken require credential")
@@ -1598,6 +1614,7 @@ func (c *Client) StartMatchingWithContext(ctx context.Context, request *StartMat
     if request == nil {
         request = NewStartMatchingRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gpm", APIVersion, "StartMatching")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartMatching require credential")
@@ -1703,6 +1720,7 @@ func (c *Client) StartMatchingBackfillWithContext(ctx context.Context, request *
     if request == nil {
         request = NewStartMatchingBackfillRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "gpm", APIVersion, "StartMatchingBackfill")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartMatchingBackfill require credential")

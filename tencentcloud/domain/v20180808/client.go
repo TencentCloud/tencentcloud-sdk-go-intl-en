@@ -124,6 +124,7 @@ func (c *Client) BatchModifyIntlDomainDNSWithContext(ctx context.Context, reques
     if request == nil {
         request = NewBatchModifyIntlDomainDNSRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "BatchModifyIntlDomainDNS")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchModifyIntlDomainDNS require credential")
@@ -207,6 +208,7 @@ func (c *Client) BatchModifyIntlDomainInfoWithContext(ctx context.Context, reque
     if request == nil {
         request = NewBatchModifyIntlDomainInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "BatchModifyIntlDomainInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchModifyIntlDomainInfo require credential")
@@ -282,6 +284,7 @@ func (c *Client) CheckIntlDomainNewWithContext(ctx context.Context, request *Che
     if request == nil {
         request = NewCheckIntlDomainNewRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "CheckIntlDomainNew")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CheckIntlDomainNew require credential")
@@ -371,6 +374,7 @@ func (c *Client) CreateIntlDomainBatchWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCreateIntlDomainBatchRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "CreateIntlDomainBatch")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateIntlDomainBatch require credential")
@@ -440,6 +444,7 @@ func (c *Client) CreateIntlPhoneEmailWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateIntlPhoneEmailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "CreateIntlPhoneEmail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateIntlPhoneEmail require credential")
@@ -555,6 +560,7 @@ func (c *Client) CreateIntlTemplateWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreateIntlTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "CreateIntlTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateIntlTemplate require credential")
@@ -618,6 +624,7 @@ func (c *Client) DeleteIntlPhoneEmailWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDeleteIntlPhoneEmailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "DeleteIntlPhoneEmail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteIntlPhoneEmail require credential")
@@ -679,6 +686,7 @@ func (c *Client) DeleteIntlTemplateWithContext(ctx context.Context, request *Del
     if request == nil {
         request = NewDeleteIntlTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "DeleteIntlTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteIntlTemplate require credential")
@@ -742,6 +750,7 @@ func (c *Client) DescribeIntlBatchDetailStatusWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeIntlBatchDetailStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "DescribeIntlBatchDetailStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIntlBatchDetailStatus require credential")
@@ -807,6 +816,7 @@ func (c *Client) DescribeIntlBatchOperationLogsWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeIntlBatchOperationLogsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "DescribeIntlBatchOperationLogs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIntlBatchOperationLogs require credential")
@@ -866,6 +876,7 @@ func (c *Client) DescribeIntlDomainWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeIntlDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "DescribeIntlDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIntlDomain require credential")
@@ -921,6 +932,7 @@ func (c *Client) DescribeIntlDomainBatchDetailsWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeIntlDomainBatchDetailsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "DescribeIntlDomainBatchDetails")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIntlDomainBatchDetails require credential")
@@ -980,6 +992,7 @@ func (c *Client) DescribeIntlDomainListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeIntlDomainListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "DescribeIntlDomainList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIntlDomainList require credential")
@@ -1047,6 +1060,7 @@ func (c *Client) DescribeIntlDomainPriceNewListWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeIntlDomainPriceNewListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "DescribeIntlDomainPriceNewList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIntlDomainPriceNewList require credential")
@@ -1110,6 +1124,7 @@ func (c *Client) DescribeIntlPhoneEmailListWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeIntlPhoneEmailListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "DescribeIntlPhoneEmailList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIntlPhoneEmailList require credential")
@@ -1169,6 +1184,7 @@ func (c *Client) DescribeIntlTemplateWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeIntlTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "DescribeIntlTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIntlTemplate require credential")
@@ -1222,6 +1238,7 @@ func (c *Client) DescribeIntlTemplateListWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeIntlTemplateListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "DescribeIntlTemplateList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeIntlTemplateList require credential")
@@ -1291,6 +1308,7 @@ func (c *Client) ModifyOwnerIntlBatchWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyOwnerIntlBatchRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "ModifyOwnerIntlBatch")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyOwnerIntlBatch require credential")
@@ -1362,6 +1380,7 @@ func (c *Client) RenewIntlDomainBatchWithContext(ctx context.Context, request *R
     if request == nil {
         request = NewRenewIntlDomainBatchRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "RenewIntlDomainBatch")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RenewIntlDomainBatch require credential")
@@ -1425,6 +1444,7 @@ func (c *Client) SendIntlPhoneEmailCodeWithContext(ctx context.Context, request 
     if request == nil {
         request = NewSendIntlPhoneEmailCodeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "SendIntlPhoneEmailCode")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SendIntlPhoneEmailCode require credential")
@@ -1486,6 +1506,7 @@ func (c *Client) SetIntlDomainAutoRenewWithContext(ctx context.Context, request 
     if request == nil {
         request = NewSetIntlDomainAutoRenewRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "SetIntlDomainAutoRenew")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetIntlDomainAutoRenew require credential")
@@ -1557,6 +1578,7 @@ func (c *Client) TransferInIntlDomainBatchWithContext(ctx context.Context, reque
     if request == nil {
         request = NewTransferInIntlDomainBatchRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "TransferInIntlDomainBatch")
     
     if c.GetCredential() == nil {
         return nil, errors.New("TransferInIntlDomainBatch require credential")
@@ -1620,6 +1642,7 @@ func (c *Client) TransferProhibitionIntlBatchWithContext(ctx context.Context, re
     if request == nil {
         request = NewTransferProhibitionIntlBatchRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "TransferProhibitionIntlBatch")
     
     if c.GetCredential() == nil {
         return nil, errors.New("TransferProhibitionIntlBatch require credential")
@@ -1683,6 +1706,7 @@ func (c *Client) UpdateProhibitionIntlBatchWithContext(ctx context.Context, requ
     if request == nil {
         request = NewUpdateProhibitionIntlBatchRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "domain", APIVersion, "UpdateProhibitionIntlBatch")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateProhibitionIntlBatch require credential")

@@ -76,6 +76,7 @@ func (c *Client) CheckAttributeLabelExistWithContext(ctx context.Context, reques
     if request == nil {
         request = NewCheckAttributeLabelExistRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "CheckAttributeLabelExist")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CheckAttributeLabelExist require credential")
@@ -119,6 +120,7 @@ func (c *Client) CheckAttributeLabelReferWithContext(ctx context.Context, reques
     if request == nil {
         request = NewCheckAttributeLabelReferRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "CheckAttributeLabelRefer")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CheckAttributeLabelRefer require credential")
@@ -162,6 +164,7 @@ func (c *Client) CreateAppWithContext(ctx context.Context, request *CreateAppReq
     if request == nil {
         request = NewCreateAppRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "CreateApp")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateApp require credential")
@@ -211,6 +214,7 @@ func (c *Client) CreateAttributeLabelWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateAttributeLabelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "CreateAttributeLabel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAttributeLabel require credential")
@@ -260,6 +264,7 @@ func (c *Client) CreateCorpWithContext(ctx context.Context, request *CreateCorpR
     if request == nil {
         request = NewCreateCorpRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "CreateCorp")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateCorp require credential")
@@ -309,6 +314,7 @@ func (c *Client) CreateDocCateWithContext(ctx context.Context, request *CreateDo
     if request == nil {
         request = NewCreateDocCateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "CreateDocCate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDocCate require credential")
@@ -358,6 +364,7 @@ func (c *Client) CreateQAWithContext(ctx context.Context, request *CreateQAReque
     if request == nil {
         request = NewCreateQARequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "CreateQA")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateQA require credential")
@@ -407,6 +414,7 @@ func (c *Client) CreateQACateWithContext(ctx context.Context, request *CreateQAC
     if request == nil {
         request = NewCreateQACateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "CreateQACate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateQACate require credential")
@@ -484,6 +492,7 @@ func (c *Client) CreateReconstructDocumentFlowWithContext(ctx context.Context, r
     if request == nil {
         request = NewCreateReconstructDocumentFlowRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "CreateReconstructDocumentFlow")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateReconstructDocumentFlow require credential")
@@ -553,6 +562,7 @@ func (c *Client) CreateRejectedQuestionWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateRejectedQuestionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "CreateRejectedQuestion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateRejectedQuestion require credential")
@@ -602,6 +612,7 @@ func (c *Client) CreateReleaseWithContext(ctx context.Context, request *CreateRe
     if request == nil {
         request = NewCreateReleaseRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "CreateRelease")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateRelease require credential")
@@ -651,6 +662,7 @@ func (c *Client) DeleteAppWithContext(ctx context.Context, request *DeleteAppReq
     if request == nil {
         request = NewDeleteAppRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DeleteApp")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteApp require credential")
@@ -700,6 +712,7 @@ func (c *Client) DeleteAttributeLabelWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDeleteAttributeLabelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DeleteAttributeLabel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteAttributeLabel require credential")
@@ -749,6 +762,7 @@ func (c *Client) DeleteDocWithContext(ctx context.Context, request *DeleteDocReq
     if request == nil {
         request = NewDeleteDocRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DeleteDoc")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteDoc require credential")
@@ -798,6 +812,7 @@ func (c *Client) DeleteDocCateWithContext(ctx context.Context, request *DeleteDo
     if request == nil {
         request = NewDeleteDocCateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DeleteDocCate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteDocCate require credential")
@@ -847,6 +862,7 @@ func (c *Client) DeleteQAWithContext(ctx context.Context, request *DeleteQAReque
     if request == nil {
         request = NewDeleteQARequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DeleteQA")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteQA require credential")
@@ -896,6 +912,7 @@ func (c *Client) DeleteQACateWithContext(ctx context.Context, request *DeleteQAC
     if request == nil {
         request = NewDeleteQACateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DeleteQACate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteQACate require credential")
@@ -945,6 +962,7 @@ func (c *Client) DeleteRejectedQuestionWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDeleteRejectedQuestionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DeleteRejectedQuestion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteRejectedQuestion require credential")
@@ -994,6 +1012,7 @@ func (c *Client) DescribeAppWithContext(ctx context.Context, request *DescribeAp
     if request == nil {
         request = NewDescribeAppRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeApp")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApp require credential")
@@ -1043,6 +1062,7 @@ func (c *Client) DescribeAttributeLabelWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeAttributeLabelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeAttributeLabel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAttributeLabel require credential")
@@ -1092,6 +1112,7 @@ func (c *Client) DescribeCallStatsGraphWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeCallStatsGraphRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeCallStatsGraph")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCallStatsGraph require credential")
@@ -1141,6 +1162,7 @@ func (c *Client) DescribeConcurrencyUsageWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeConcurrencyUsageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeConcurrencyUsage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeConcurrencyUsage require credential")
@@ -1190,6 +1212,7 @@ func (c *Client) DescribeConcurrencyUsageGraphWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeConcurrencyUsageGraphRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeConcurrencyUsageGraph")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeConcurrencyUsageGraph require credential")
@@ -1239,6 +1262,7 @@ func (c *Client) DescribeCorpWithContext(ctx context.Context, request *DescribeC
     if request == nil {
         request = NewDescribeCorpRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeCorp")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCorp require credential")
@@ -1288,6 +1312,7 @@ func (c *Client) DescribeDocWithContext(ctx context.Context, request *DescribeDo
     if request == nil {
         request = NewDescribeDocRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeDoc")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDoc require credential")
@@ -1337,6 +1362,7 @@ func (c *Client) DescribeKnowledgeUsageWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeKnowledgeUsageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeKnowledgeUsage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeKnowledgeUsage require credential")
@@ -1386,6 +1412,7 @@ func (c *Client) DescribeKnowledgeUsagePieGraphWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeKnowledgeUsagePieGraphRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeKnowledgeUsagePieGraph")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeKnowledgeUsagePieGraph require credential")
@@ -1435,6 +1462,7 @@ func (c *Client) DescribeQAWithContext(ctx context.Context, request *DescribeQAR
     if request == nil {
         request = NewDescribeQARequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeQA")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeQA require credential")
@@ -1484,6 +1512,7 @@ func (c *Client) DescribeReferWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeReferRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeRefer")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRefer require credential")
@@ -1533,6 +1562,7 @@ func (c *Client) DescribeReleaseWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeReleaseRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeRelease")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRelease require credential")
@@ -1582,6 +1612,7 @@ func (c *Client) DescribeReleaseInfoWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeReleaseInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeReleaseInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeReleaseInfo require credential")
@@ -1631,6 +1662,7 @@ func (c *Client) DescribeRobotBizIDByAppKeyWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeRobotBizIDByAppKeyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeRobotBizIDByAppKey")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRobotBizIDByAppKey require credential")
@@ -1680,6 +1712,7 @@ func (c *Client) DescribeSearchStatsGraphWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeSearchStatsGraphRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeSearchStatsGraph")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSearchStatsGraph require credential")
@@ -1729,6 +1762,7 @@ func (c *Client) DescribeSegmentsWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeSegmentsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeSegments")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSegments require credential")
@@ -1778,6 +1812,7 @@ func (c *Client) DescribeStorageCredentialWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeStorageCredentialRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeStorageCredential")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStorageCredential require credential")
@@ -1827,6 +1862,7 @@ func (c *Client) DescribeTokenUsageWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeTokenUsageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeTokenUsage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTokenUsage require credential")
@@ -1876,6 +1912,7 @@ func (c *Client) DescribeTokenUsageGraphWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeTokenUsageGraphRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeTokenUsageGraph")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTokenUsageGraph require credential")
@@ -1927,6 +1964,7 @@ func (c *Client) DescribeUnsatisfiedReplyContextWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeUnsatisfiedReplyContextRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeUnsatisfiedReplyContext")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUnsatisfiedReplyContext require credential")
@@ -1978,6 +2016,7 @@ func (c *Client) ExportAttributeLabelWithContext(ctx context.Context, request *E
     if request == nil {
         request = NewExportAttributeLabelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ExportAttributeLabel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ExportAttributeLabel require credential")
@@ -2029,6 +2068,7 @@ func (c *Client) ExportQAListWithContext(ctx context.Context, request *ExportQAL
     if request == nil {
         request = NewExportQAListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ExportQAList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ExportQAList require credential")
@@ -2080,6 +2120,7 @@ func (c *Client) ExportUnsatisfiedReplyWithContext(ctx context.Context, request 
     if request == nil {
         request = NewExportUnsatisfiedReplyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ExportUnsatisfiedReply")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ExportUnsatisfiedReply require credential")
@@ -2129,6 +2170,7 @@ func (c *Client) GenerateQAWithContext(ctx context.Context, request *GenerateQAR
     if request == nil {
         request = NewGenerateQARequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "GenerateQA")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GenerateQA require credential")
@@ -2180,6 +2222,7 @@ func (c *Client) GetAnswerTypeDataCountWithContext(ctx context.Context, request 
     if request == nil {
         request = NewGetAnswerTypeDataCountRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "GetAnswerTypeDataCount")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetAnswerTypeDataCount require credential")
@@ -2229,6 +2272,7 @@ func (c *Client) GetAppKnowledgeCountWithContext(ctx context.Context, request *G
     if request == nil {
         request = NewGetAppKnowledgeCountRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "GetAppKnowledgeCount")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetAppKnowledgeCount require credential")
@@ -2278,6 +2322,7 @@ func (c *Client) GetAppSecretWithContext(ctx context.Context, request *GetAppSec
     if request == nil {
         request = NewGetAppSecretRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "GetAppSecret")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetAppSecret require credential")
@@ -2327,6 +2372,7 @@ func (c *Client) GetDocPreviewWithContext(ctx context.Context, request *GetDocPr
     if request == nil {
         request = NewGetDocPreviewRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "GetDocPreview")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetDocPreview require credential")
@@ -2378,6 +2424,7 @@ func (c *Client) GetLikeDataCountWithContext(ctx context.Context, request *GetLi
     if request == nil {
         request = NewGetLikeDataCountRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "GetLikeDataCount")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetLikeDataCount require credential")
@@ -2429,6 +2476,7 @@ func (c *Client) GetMsgRecordWithContext(ctx context.Context, request *GetMsgRec
     if request == nil {
         request = NewGetMsgRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "GetMsgRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetMsgRecord require credential")
@@ -2488,6 +2536,7 @@ func (c *Client) GetReconstructDocumentResultWithContext(ctx context.Context, re
     if request == nil {
         request = NewGetReconstructDocumentResultRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "GetReconstructDocumentResult")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetReconstructDocumentResult require credential")
@@ -2547,6 +2596,7 @@ func (c *Client) GetTaskStatusWithContext(ctx context.Context, request *GetTaskS
     if request == nil {
         request = NewGetTaskStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "GetTaskStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetTaskStatus require credential")
@@ -2596,6 +2646,7 @@ func (c *Client) GetWsTokenWithContext(ctx context.Context, request *GetWsTokenR
     if request == nil {
         request = NewGetWsTokenRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "GetWsToken")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetWsToken require credential")
@@ -2645,6 +2696,7 @@ func (c *Client) GroupDocWithContext(ctx context.Context, request *GroupDocReque
     if request == nil {
         request = NewGroupDocRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "GroupDoc")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GroupDoc require credential")
@@ -2694,6 +2746,7 @@ func (c *Client) GroupQAWithContext(ctx context.Context, request *GroupQARequest
     if request == nil {
         request = NewGroupQARequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "GroupQA")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GroupQA require credential")
@@ -2743,6 +2796,7 @@ func (c *Client) IgnoreUnsatisfiedReplyWithContext(ctx context.Context, request 
     if request == nil {
         request = NewIgnoreUnsatisfiedReplyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "IgnoreUnsatisfiedReply")
     
     if c.GetCredential() == nil {
         return nil, errors.New("IgnoreUnsatisfiedReply require credential")
@@ -2792,6 +2846,7 @@ func (c *Client) ListAppWithContext(ctx context.Context, request *ListAppRequest
     if request == nil {
         request = NewListAppRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ListApp")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListApp require credential")
@@ -2841,6 +2896,7 @@ func (c *Client) ListAppCategoryWithContext(ctx context.Context, request *ListAp
     if request == nil {
         request = NewListAppCategoryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ListAppCategory")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListAppCategory require credential")
@@ -2890,6 +2946,7 @@ func (c *Client) ListAppKnowledgeDetailWithContext(ctx context.Context, request 
     if request == nil {
         request = NewListAppKnowledgeDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ListAppKnowledgeDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListAppKnowledgeDetail require credential")
@@ -2939,6 +2996,7 @@ func (c *Client) ListAttributeLabelWithContext(ctx context.Context, request *Lis
     if request == nil {
         request = NewListAttributeLabelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ListAttributeLabel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListAttributeLabel require credential")
@@ -2988,6 +3046,7 @@ func (c *Client) ListDocWithContext(ctx context.Context, request *ListDocRequest
     if request == nil {
         request = NewListDocRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ListDoc")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListDoc require credential")
@@ -3037,6 +3096,7 @@ func (c *Client) ListDocCateWithContext(ctx context.Context, request *ListDocCat
     if request == nil {
         request = NewListDocCateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ListDocCate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListDocCate require credential")
@@ -3086,6 +3146,7 @@ func (c *Client) ListModelWithContext(ctx context.Context, request *ListModelReq
     if request == nil {
         request = NewListModelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ListModel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListModel require credential")
@@ -3135,6 +3196,7 @@ func (c *Client) ListQAWithContext(ctx context.Context, request *ListQARequest) 
     if request == nil {
         request = NewListQARequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ListQA")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListQA require credential")
@@ -3184,6 +3246,7 @@ func (c *Client) ListQACateWithContext(ctx context.Context, request *ListQACateR
     if request == nil {
         request = NewListQACateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ListQACate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListQACate require credential")
@@ -3233,6 +3296,7 @@ func (c *Client) ListRejectedQuestionWithContext(ctx context.Context, request *L
     if request == nil {
         request = NewListRejectedQuestionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ListRejectedQuestion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListRejectedQuestion require credential")
@@ -3282,6 +3346,7 @@ func (c *Client) ListRejectedQuestionPreviewWithContext(ctx context.Context, req
     if request == nil {
         request = NewListRejectedQuestionPreviewRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ListRejectedQuestionPreview")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListRejectedQuestionPreview require credential")
@@ -3331,6 +3396,7 @@ func (c *Client) ListReleaseWithContext(ctx context.Context, request *ListReleas
     if request == nil {
         request = NewListReleaseRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ListRelease")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListRelease require credential")
@@ -3380,6 +3446,7 @@ func (c *Client) ListReleaseConfigPreviewWithContext(ctx context.Context, reques
     if request == nil {
         request = NewListReleaseConfigPreviewRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ListReleaseConfigPreview")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListReleaseConfigPreview require credential")
@@ -3429,6 +3496,7 @@ func (c *Client) ListReleaseDocPreviewWithContext(ctx context.Context, request *
     if request == nil {
         request = NewListReleaseDocPreviewRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ListReleaseDocPreview")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListReleaseDocPreview require credential")
@@ -3478,6 +3546,7 @@ func (c *Client) ListReleaseQAPreviewWithContext(ctx context.Context, request *L
     if request == nil {
         request = NewListReleaseQAPreviewRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ListReleaseQAPreview")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListReleaseQAPreview require credential")
@@ -3527,6 +3596,7 @@ func (c *Client) ListSelectDocWithContext(ctx context.Context, request *ListSele
     if request == nil {
         request = NewListSelectDocRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ListSelectDoc")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListSelectDoc require credential")
@@ -3578,6 +3648,7 @@ func (c *Client) ListUnsatisfiedReplyWithContext(ctx context.Context, request *L
     if request == nil {
         request = NewListUnsatisfiedReplyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ListUnsatisfiedReply")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListUnsatisfiedReply require credential")
@@ -3629,6 +3700,7 @@ func (c *Client) ListUsageCallDetailWithContext(ctx context.Context, request *Li
     if request == nil {
         request = NewListUsageCallDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ListUsageCallDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListUsageCallDetail require credential")
@@ -3680,6 +3752,7 @@ func (c *Client) ModifyAppWithContext(ctx context.Context, request *ModifyAppReq
     if request == nil {
         request = NewModifyAppRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ModifyApp")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyApp require credential")
@@ -3731,6 +3804,7 @@ func (c *Client) ModifyAttributeLabelWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyAttributeLabelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ModifyAttributeLabel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyAttributeLabel require credential")
@@ -3782,6 +3856,7 @@ func (c *Client) ModifyDocWithContext(ctx context.Context, request *ModifyDocReq
     if request == nil {
         request = NewModifyDocRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ModifyDoc")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDoc require credential")
@@ -3831,6 +3906,7 @@ func (c *Client) ModifyDocAttrRangeWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyDocAttrRangeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ModifyDocAttrRange")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDocAttrRange require credential")
@@ -3880,6 +3956,7 @@ func (c *Client) ModifyDocCateWithContext(ctx context.Context, request *ModifyDo
     if request == nil {
         request = NewModifyDocCateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ModifyDocCate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDocCate require credential")
@@ -3929,6 +4006,7 @@ func (c *Client) ModifyQAWithContext(ctx context.Context, request *ModifyQAReque
     if request == nil {
         request = NewModifyQARequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ModifyQA")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyQA require credential")
@@ -3978,6 +4056,7 @@ func (c *Client) ModifyQAAttrRangeWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyQAAttrRangeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ModifyQAAttrRange")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyQAAttrRange require credential")
@@ -4027,6 +4106,7 @@ func (c *Client) ModifyQACateWithContext(ctx context.Context, request *ModifyQAC
     if request == nil {
         request = NewModifyQACateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ModifyQACate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyQACate require credential")
@@ -4076,6 +4156,7 @@ func (c *Client) ModifyRejectedQuestionWithContext(ctx context.Context, request 
     if request == nil {
         request = NewModifyRejectedQuestionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ModifyRejectedQuestion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyRejectedQuestion require credential")
@@ -4125,6 +4206,7 @@ func (c *Client) RateMsgRecordWithContext(ctx context.Context, request *RateMsgR
     if request == nil {
         request = NewRateMsgRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "RateMsgRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RateMsgRecord require credential")
@@ -4174,6 +4256,7 @@ func (c *Client) RenameDocWithContext(ctx context.Context, request *RenameDocReq
     if request == nil {
         request = NewRenameDocRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "RenameDoc")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RenameDoc require credential")
@@ -4223,6 +4306,7 @@ func (c *Client) RetryDocAuditWithContext(ctx context.Context, request *RetryDoc
     if request == nil {
         request = NewRetryDocAuditRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "RetryDocAudit")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RetryDocAudit require credential")
@@ -4272,6 +4356,7 @@ func (c *Client) RetryDocParseWithContext(ctx context.Context, request *RetryDoc
     if request == nil {
         request = NewRetryDocParseRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "RetryDocParse")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RetryDocParse require credential")
@@ -4321,6 +4406,7 @@ func (c *Client) RetryReleaseWithContext(ctx context.Context, request *RetryRele
     if request == nil {
         request = NewRetryReleaseRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "RetryRelease")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RetryRelease require credential")
@@ -4390,6 +4476,7 @@ func (c *Client) SaveDocWithContext(ctx context.Context, request *SaveDocRequest
     if request == nil {
         request = NewSaveDocRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "SaveDoc")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SaveDoc require credential")
@@ -4439,6 +4526,7 @@ func (c *Client) StopDocParseWithContext(ctx context.Context, request *StopDocPa
     if request == nil {
         request = NewStopDocParseRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "StopDocParse")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopDocParse require credential")
@@ -4488,6 +4576,7 @@ func (c *Client) UploadAttributeLabelWithContext(ctx context.Context, request *U
     if request == nil {
         request = NewUploadAttributeLabelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "UploadAttributeLabel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UploadAttributeLabel require credential")
@@ -4537,6 +4626,7 @@ func (c *Client) VerifyQAWithContext(ctx context.Context, request *VerifyQAReque
     if request == nil {
         request = NewVerifyQARequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "VerifyQA")
     
     if c.GetCredential() == nil {
         return nil, errors.New("VerifyQA require credential")

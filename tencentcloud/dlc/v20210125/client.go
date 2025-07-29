@@ -90,6 +90,7 @@ func (c *Client) AddUsersToWorkGroupWithContext(ctx context.Context, request *Ad
     if request == nil {
         request = NewAddUsersToWorkGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "AddUsersToWorkGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AddUsersToWorkGroup require credential")
@@ -145,6 +146,7 @@ func (c *Client) AlterDMSDatabaseWithContext(ctx context.Context, request *Alter
     if request == nil {
         request = NewAlterDMSDatabaseRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "AlterDMSDatabase")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AlterDMSDatabase require credential")
@@ -218,6 +220,7 @@ func (c *Client) AttachUserPolicyWithContext(ctx context.Context, request *Attac
     if request == nil {
         request = NewAttachUserPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "AttachUserPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AttachUserPolicy require credential")
@@ -285,6 +288,7 @@ func (c *Client) AttachWorkGroupPolicyWithContext(ctx context.Context, request *
     if request == nil {
         request = NewAttachWorkGroupPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "AttachWorkGroupPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AttachWorkGroupPolicy require credential")
@@ -344,6 +348,7 @@ func (c *Client) BindWorkGroupsToUserWithContext(ctx context.Context, request *B
     if request == nil {
         request = NewBindWorkGroupsToUserRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "BindWorkGroupsToUser")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BindWorkGroupsToUser require credential")
@@ -411,6 +416,7 @@ func (c *Client) CancelSparkSessionBatchSQLWithContext(ctx context.Context, requ
     if request == nil {
         request = NewCancelSparkSessionBatchSQLRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CancelSparkSessionBatchSQL")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CancelSparkSessionBatchSQL require credential")
@@ -480,6 +486,7 @@ func (c *Client) CancelTaskWithContext(ctx context.Context, request *CancelTaskR
     if request == nil {
         request = NewCancelTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CancelTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CancelTask require credential")
@@ -555,6 +562,7 @@ func (c *Client) CheckDataEngineConfigPairsValidityWithContext(ctx context.Conte
     if request == nil {
         request = NewCheckDataEngineConfigPairsValidityRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CheckDataEngineConfigPairsValidity")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CheckDataEngineConfigPairsValidity require credential")
@@ -634,6 +642,7 @@ func (c *Client) CheckDataEngineImageCanBeRollbackWithContext(ctx context.Contex
     if request == nil {
         request = NewCheckDataEngineImageCanBeRollbackRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CheckDataEngineImageCanBeRollback")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CheckDataEngineImageCanBeRollback require credential")
@@ -709,6 +718,7 @@ func (c *Client) CheckDataEngineImageCanBeUpgradeWithContext(ctx context.Context
     if request == nil {
         request = NewCheckDataEngineImageCanBeUpgradeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CheckDataEngineImageCanBeUpgrade")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CheckDataEngineImageCanBeUpgrade require credential")
@@ -762,6 +772,7 @@ func (c *Client) CheckGrantedPermissionWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCheckGrantedPermissionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CheckGrantedPermission")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CheckGrantedPermission require credential")
@@ -817,6 +828,7 @@ func (c *Client) CopyDLCTableWithContext(ctx context.Context, request *CopyDLCTa
     if request == nil {
         request = NewCopyDLCTableRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CopyDLCTable")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CopyDLCTable require credential")
@@ -872,6 +884,7 @@ func (c *Client) CreateCHDFSBindingProductWithContext(ctx context.Context, reque
     if request == nil {
         request = NewCreateCHDFSBindingProductRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CreateCHDFSBindingProduct")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateCHDFSBindingProduct require credential")
@@ -927,6 +940,7 @@ func (c *Client) CreateDLCTableWithContext(ctx context.Context, request *CreateD
     if request == nil {
         request = NewCreateDLCTableRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CreateDLCTable")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDLCTable require credential")
@@ -982,6 +996,7 @@ func (c *Client) CreateDMSDatabaseWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateDMSDatabaseRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CreateDMSDatabase")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDMSDatabase require credential")
@@ -1125,6 +1140,7 @@ func (c *Client) CreateDataEngineWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateDataEngineRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CreateDataEngine")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDataEngine require credential")
@@ -1184,6 +1200,7 @@ func (c *Client) CreateInternalTableWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreateInternalTableRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CreateInternalTable")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateInternalTable require credential")
@@ -1235,6 +1252,7 @@ func (c *Client) CreateResultDownloadWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateResultDownloadRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CreateResultDownload")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateResultDownload require credential")
@@ -1304,6 +1322,7 @@ func (c *Client) CreateSparkAppWithContext(ctx context.Context, request *CreateS
     if request == nil {
         request = NewCreateSparkAppRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CreateSparkApp")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateSparkApp require credential")
@@ -1423,6 +1442,7 @@ func (c *Client) CreateSparkAppTaskWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreateSparkAppTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CreateSparkAppTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateSparkAppTask require credential")
@@ -1548,6 +1568,7 @@ func (c *Client) CreateSparkSessionBatchSQLWithContext(ctx context.Context, requ
     if request == nil {
         request = NewCreateSparkSessionBatchSQLRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CreateSparkSessionBatchSQL")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateSparkSessionBatchSQL require credential")
@@ -1601,6 +1622,7 @@ func (c *Client) CreateStoreLocationWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreateStoreLocationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CreateStoreLocation")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateStoreLocation require credential")
@@ -1720,6 +1742,7 @@ func (c *Client) CreateTaskWithContext(ctx context.Context, request *CreateTaskR
     if request == nil {
         request = NewCreateTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CreateTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTask require credential")
@@ -1835,6 +1858,7 @@ func (c *Client) CreateTasksWithContext(ctx context.Context, request *CreateTask
     if request == nil {
         request = NewCreateTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CreateTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTasks require credential")
@@ -1912,6 +1936,7 @@ func (c *Client) CreateUserWithContext(ctx context.Context, request *CreateUserR
     if request == nil {
         request = NewCreateUserRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CreateUser")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateUser require credential")
@@ -1985,6 +2010,7 @@ func (c *Client) CreateWorkGroupWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateWorkGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CreateWorkGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateWorkGroup require credential")
@@ -2036,6 +2062,7 @@ func (c *Client) DeleteCHDFSBindingProductWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDeleteCHDFSBindingProductRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DeleteCHDFSBindingProduct")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteCHDFSBindingProduct require credential")
@@ -2133,6 +2160,7 @@ func (c *Client) DeleteDataEngineWithContext(ctx context.Context, request *Delet
     if request == nil {
         request = NewDeleteDataEngineRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DeleteDataEngine")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteDataEngine require credential")
@@ -2186,6 +2214,7 @@ func (c *Client) DeleteSparkAppWithContext(ctx context.Context, request *DeleteS
     if request == nil {
         request = NewDeleteSparkAppRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DeleteSparkApp")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteSparkApp require credential")
@@ -2239,6 +2268,7 @@ func (c *Client) DeleteThirdPartyAccessUserWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDeleteThirdPartyAccessUserRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DeleteThirdPartyAccessUser")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteThirdPartyAccessUser require credential")
@@ -2306,6 +2336,7 @@ func (c *Client) DeleteUserWithContext(ctx context.Context, request *DeleteUserR
     if request == nil {
         request = NewDeleteUserRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DeleteUser")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteUser require credential")
@@ -2361,6 +2392,7 @@ func (c *Client) DeleteUsersFromWorkGroupWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDeleteUsersFromWorkGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DeleteUsersFromWorkGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteUsersFromWorkGroup require credential")
@@ -2418,6 +2450,7 @@ func (c *Client) DeleteWorkGroupWithContext(ctx context.Context, request *Delete
     if request == nil {
         request = NewDeleteWorkGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DeleteWorkGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteWorkGroup require credential")
@@ -2475,6 +2508,7 @@ func (c *Client) DescribeAdvancedStoreLocationWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeAdvancedStoreLocationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeAdvancedStoreLocation")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAdvancedStoreLocation require credential")
@@ -2532,6 +2566,7 @@ func (c *Client) DescribeDLCCatalogAccessWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeDLCCatalogAccessRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeDLCCatalogAccess")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDLCCatalogAccess require credential")
@@ -2589,6 +2624,7 @@ func (c *Client) DescribeDLCTableWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeDLCTableRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeDLCTable")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDLCTable require credential")
@@ -2646,6 +2682,7 @@ func (c *Client) DescribeDLCTableListWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeDLCTableListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeDLCTableList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDLCTableList require credential")
@@ -2701,6 +2738,7 @@ func (c *Client) DescribeDMSDatabaseWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeDMSDatabaseRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeDMSDatabase")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDMSDatabase require credential")
@@ -2756,6 +2794,7 @@ func (c *Client) DescribeDMSDatabaseListWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeDMSDatabaseListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeDMSDatabaseList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDMSDatabaseList require credential")
@@ -2815,6 +2854,7 @@ func (c *Client) DescribeDataEngineWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeDataEngineRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeDataEngine")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDataEngine require credential")
@@ -2884,6 +2924,7 @@ func (c *Client) DescribeDataEngineImageVersionsWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeDataEngineImageVersionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeDataEngineImageVersions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDataEngineImageVersions require credential")
@@ -2947,6 +2988,7 @@ func (c *Client) DescribeDataEnginePythonSparkImagesWithContext(ctx context.Cont
     if request == nil {
         request = NewDescribeDataEnginePythonSparkImagesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeDataEnginePythonSparkImages")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDataEnginePythonSparkImages require credential")
@@ -2996,6 +3038,7 @@ func (c *Client) DescribeDataEnginesScaleDetailWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeDataEnginesScaleDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeDataEnginesScaleDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDataEnginesScaleDetail require credential")
@@ -3049,6 +3092,7 @@ func (c *Client) DescribeEngineUsageInfoWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeEngineUsageInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeEngineUsageInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeEngineUsageInfo require credential")
@@ -3106,6 +3150,7 @@ func (c *Client) DescribeForbiddenTableProWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeForbiddenTableProRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeForbiddenTablePro")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeForbiddenTablePro require credential")
@@ -3159,6 +3204,7 @@ func (c *Client) DescribeJobWithContext(ctx context.Context, request *DescribeJo
     if request == nil {
         request = NewDescribeJobRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeJob")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeJob require credential")
@@ -3212,6 +3258,7 @@ func (c *Client) DescribeJobsWithContext(ctx context.Context, request *DescribeJ
     if request == nil {
         request = NewDescribeJobsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeJobs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeJobs require credential")
@@ -3275,6 +3322,7 @@ func (c *Client) DescribeLakeFsDirSummaryWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeLakeFsDirSummaryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeLakeFsDirSummary")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLakeFsDirSummary require credential")
@@ -3340,6 +3388,7 @@ func (c *Client) DescribeLakeFsInfoWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeLakeFsInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeLakeFsInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLakeFsInfo require credential")
@@ -3391,6 +3440,7 @@ func (c *Client) DescribeOtherCHDFSBindingListWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeOtherCHDFSBindingListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeOtherCHDFSBindingList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOtherCHDFSBindingList require credential")
@@ -3444,6 +3494,7 @@ func (c *Client) DescribeQueryWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeQueryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeQuery")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeQuery require credential")
@@ -3493,6 +3544,7 @@ func (c *Client) DescribeResultDownloadWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeResultDownloadRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeResultDownload")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeResultDownload require credential")
@@ -3554,6 +3606,7 @@ func (c *Client) DescribeSparkAppJobWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeSparkAppJobRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeSparkAppJob")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSparkAppJob require credential")
@@ -3621,6 +3674,7 @@ func (c *Client) DescribeSparkAppJobsWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeSparkAppJobsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeSparkAppJobs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSparkAppJobs require credential")
@@ -3688,6 +3742,7 @@ func (c *Client) DescribeSparkAppTasksWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeSparkAppTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeSparkAppTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSparkAppTasks require credential")
@@ -3753,6 +3808,7 @@ func (c *Client) DescribeSparkSessionBatchSqlLogWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeSparkSessionBatchSqlLogRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeSparkSessionBatchSqlLog")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSparkSessionBatchSqlLog require credential")
@@ -3804,6 +3860,7 @@ func (c *Client) DescribeStoreLocationWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeStoreLocationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeStoreLocation")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStoreLocation require credential")
@@ -3857,6 +3914,7 @@ func (c *Client) DescribeSubUserAccessPolicyWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeSubUserAccessPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeSubUserAccessPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSubUserAccessPolicy require credential")
@@ -3912,6 +3970,7 @@ func (c *Client) DescribeTablesNameWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeTablesNameRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeTablesName")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTablesName require credential")
@@ -3975,6 +4034,7 @@ func (c *Client) DescribeTaskResultWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeTaskResultRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeTaskResult")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTaskResult require credential")
@@ -4028,6 +4088,7 @@ func (c *Client) DescribeTaskStatisticsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeTaskStatisticsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeTaskStatistics")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTaskStatistics require credential")
@@ -4105,6 +4166,7 @@ func (c *Client) DescribeTasksWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTasks require credential")
@@ -4160,6 +4222,7 @@ func (c *Client) DescribeThirdPartyAccessUserWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeThirdPartyAccessUserRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeThirdPartyAccessUser")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeThirdPartyAccessUser require credential")
@@ -4219,6 +4282,7 @@ func (c *Client) DescribeUpdatableDataEnginesWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeUpdatableDataEnginesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeUpdatableDataEngines")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUpdatableDataEngines require credential")
@@ -4276,6 +4340,7 @@ func (c *Client) DescribeUserDataEngineConfigWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeUserDataEngineConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeUserDataEngineConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUserDataEngineConfig require credential")
@@ -4349,6 +4414,7 @@ func (c *Client) DescribeUserInfoWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeUserInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeUserInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUserInfo require credential")
@@ -4398,6 +4464,7 @@ func (c *Client) DescribeUserRolesWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeUserRolesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeUserRoles")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUserRoles require credential")
@@ -4451,6 +4518,7 @@ func (c *Client) DescribeUserTypeWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeUserTypeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeUserType")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUserType require credential")
@@ -4514,6 +4582,7 @@ func (c *Client) DescribeUsersWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeUsersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeUsers")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUsers require credential")
@@ -4579,6 +4648,7 @@ func (c *Client) DescribeWorkGroupInfoWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeWorkGroupInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeWorkGroupInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeWorkGroupInfo require credential")
@@ -4646,6 +4716,7 @@ func (c *Client) DescribeWorkGroupsWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeWorkGroupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeWorkGroups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeWorkGroups require credential")
@@ -4721,6 +4792,7 @@ func (c *Client) DetachUserPolicyWithContext(ctx context.Context, request *Detac
     if request == nil {
         request = NewDetachUserPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DetachUserPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DetachUserPolicy require credential")
@@ -4786,6 +4858,7 @@ func (c *Client) DetachWorkGroupPolicyWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDetachWorkGroupPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DetachWorkGroupPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DetachWorkGroupPolicy require credential")
@@ -4841,6 +4914,7 @@ func (c *Client) DropDLCTableWithContext(ctx context.Context, request *DropDLCTa
     if request == nil {
         request = NewDropDLCTableRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DropDLCTable")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DropDLCTable require credential")
@@ -4896,6 +4970,7 @@ func (c *Client) DropDMSDatabaseWithContext(ctx context.Context, request *DropDM
     if request == nil {
         request = NewDropDMSDatabaseRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DropDMSDatabase")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DropDMSDatabase require credential")
@@ -4951,6 +5026,7 @@ func (c *Client) DropDMSTableWithContext(ctx context.Context, request *DropDMSTa
     if request == nil {
         request = NewDropDMSTableRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DropDMSTable")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DropDMSTable require credential")
@@ -5022,6 +5098,7 @@ func (c *Client) GenerateCreateMangedTableSqlWithContext(ctx context.Context, re
     if request == nil {
         request = NewGenerateCreateMangedTableSqlRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "GenerateCreateMangedTableSql")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GenerateCreateMangedTableSql require credential")
@@ -5071,6 +5148,7 @@ func (c *Client) GetOptimizerPolicyWithContext(ctx context.Context, request *Get
     if request == nil {
         request = NewGetOptimizerPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "GetOptimizerPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetOptimizerPolicy require credential")
@@ -5120,6 +5198,7 @@ func (c *Client) GrantDLCCatalogAccessWithContext(ctx context.Context, request *
     if request == nil {
         request = NewGrantDLCCatalogAccessRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "GrantDLCCatalogAccess")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GrantDLCCatalogAccess require credential")
@@ -5173,6 +5252,7 @@ func (c *Client) ModifyAdvancedStoreLocationWithContext(ctx context.Context, req
     if request == nil {
         request = NewModifyAdvancedStoreLocationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "ModifyAdvancedStoreLocation")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyAdvancedStoreLocation require credential")
@@ -5230,6 +5310,7 @@ func (c *Client) ModifyDataEngineDescriptionWithContext(ctx context.Context, req
     if request == nil {
         request = NewModifyDataEngineDescriptionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "ModifyDataEngineDescription")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDataEngineDescription require credential")
@@ -5297,6 +5378,7 @@ func (c *Client) ModifyGovernEventRuleWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyGovernEventRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "ModifyGovernEventRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyGovernEventRule require credential")
@@ -5370,6 +5452,7 @@ func (c *Client) ModifySparkAppWithContext(ctx context.Context, request *ModifyS
     if request == nil {
         request = NewModifySparkAppRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "ModifySparkApp")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifySparkApp require credential")
@@ -5439,6 +5522,7 @@ func (c *Client) ModifySparkAppBatchWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifySparkAppBatchRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "ModifySparkAppBatch")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifySparkAppBatch require credential")
@@ -5494,6 +5578,7 @@ func (c *Client) ModifyUserWithContext(ctx context.Context, request *ModifyUserR
     if request == nil {
         request = NewModifyUserRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "ModifyUser")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyUser require credential")
@@ -5567,6 +5652,7 @@ func (c *Client) ModifyUserTypeWithContext(ctx context.Context, request *ModifyU
     if request == nil {
         request = NewModifyUserTypeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "ModifyUserType")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyUserType require credential")
@@ -5620,6 +5706,7 @@ func (c *Client) ModifyWorkGroupWithContext(ctx context.Context, request *Modify
     if request == nil {
         request = NewModifyWorkGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "ModifyWorkGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyWorkGroup require credential")
@@ -5671,6 +5758,7 @@ func (c *Client) QueryResultWithContext(ctx context.Context, request *QueryResul
     if request == nil {
         request = NewQueryResultRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "QueryResult")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryResult require credential")
@@ -5748,6 +5836,7 @@ func (c *Client) QueryTaskCostDetailWithContext(ctx context.Context, request *Qu
     if request == nil {
         request = NewQueryTaskCostDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "QueryTaskCostDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryTaskCostDetail require credential")
@@ -5801,6 +5890,7 @@ func (c *Client) RegisterThirdPartyAccessUserWithContext(ctx context.Context, re
     if request == nil {
         request = NewRegisterThirdPartyAccessUserRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "RegisterThirdPartyAccessUser")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RegisterThirdPartyAccessUser require credential")
@@ -5854,6 +5944,7 @@ func (c *Client) RenewDataEngineWithContext(ctx context.Context, request *RenewD
     if request == nil {
         request = NewRenewDataEngineRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "RenewDataEngine")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RenewDataEngine require credential")
@@ -5915,6 +6006,7 @@ func (c *Client) RestartDataEngineWithContext(ctx context.Context, request *Rest
     if request == nil {
         request = NewRestartDataEngineRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "RestartDataEngine")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RestartDataEngine require credential")
@@ -5976,6 +6068,7 @@ func (c *Client) RevokeDLCCatalogAccessWithContext(ctx context.Context, request 
     if request == nil {
         request = NewRevokeDLCCatalogAccessRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "RevokeDLCCatalogAccess")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RevokeDLCCatalogAccess require credential")
@@ -6075,6 +6168,7 @@ func (c *Client) RollbackDataEngineImageWithContext(ctx context.Context, request
     if request == nil {
         request = NewRollbackDataEngineImageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "RollbackDataEngineImage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RollbackDataEngineImage require credential")
@@ -6134,6 +6228,7 @@ func (c *Client) SuspendResumeDataEngineWithContext(ctx context.Context, request
     if request == nil {
         request = NewSuspendResumeDataEngineRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "SuspendResumeDataEngine")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SuspendResumeDataEngine require credential")
@@ -6193,6 +6288,7 @@ func (c *Client) SwitchDataEngineWithContext(ctx context.Context, request *Switc
     if request == nil {
         request = NewSwitchDataEngineRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "SwitchDataEngine")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SwitchDataEngine require credential")
@@ -6286,6 +6382,7 @@ func (c *Client) SwitchDataEngineImageWithContext(ctx context.Context, request *
     if request == nil {
         request = NewSwitchDataEngineImageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "SwitchDataEngineImage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SwitchDataEngineImage require credential")
@@ -6343,6 +6440,7 @@ func (c *Client) UnbindWorkGroupsFromUserWithContext(ctx context.Context, reques
     if request == nil {
         request = NewUnbindWorkGroupsFromUserRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "UnbindWorkGroupsFromUser")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UnbindWorkGroupsFromUser require credential")
@@ -6448,6 +6546,7 @@ func (c *Client) UpdateDataEngineWithContext(ctx context.Context, request *Updat
     if request == nil {
         request = NewUpdateDataEngineRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "UpdateDataEngine")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateDataEngine require credential")
@@ -6519,6 +6618,7 @@ func (c *Client) UpdateDataEngineConfigWithContext(ctx context.Context, request 
     if request == nil {
         request = NewUpdateDataEngineConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "UpdateDataEngineConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateDataEngineConfig require credential")
@@ -6590,6 +6690,7 @@ func (c *Client) UpdateRowFilterWithContext(ctx context.Context, request *Update
     if request == nil {
         request = NewUpdateRowFilterRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "UpdateRowFilter")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateRowFilter require credential")
@@ -6679,6 +6780,7 @@ func (c *Client) UpdateUserDataEngineConfigWithContext(ctx context.Context, requ
     if request == nil {
         request = NewUpdateUserDataEngineConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "UpdateUserDataEngineConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateUserDataEngineConfig require credential")
@@ -6772,6 +6874,7 @@ func (c *Client) UpgradeDataEngineImageWithContext(ctx context.Context, request 
     if request == nil {
         request = NewUpgradeDataEngineImageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "UpgradeDataEngineImage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpgradeDataEngineImage require credential")

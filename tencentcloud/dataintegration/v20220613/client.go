@@ -76,6 +76,7 @@ func (c *Client) SendMessageWithContext(ctx context.Context, request *SendMessag
     if request == nil {
         request = NewSendMessageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "dataintegration", APIVersion, "SendMessage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SendMessage require credential")

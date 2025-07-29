@@ -90,6 +90,7 @@ func (c *Client) CreateApmInstanceWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateApmInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "CreateApmInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateApmInstance require credential")
@@ -157,6 +158,7 @@ func (c *Client) DescribeApmAgentWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeApmAgentRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "DescribeApmAgent")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApmAgent require credential")
@@ -214,6 +216,7 @@ func (c *Client) DescribeApmInstancesWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeApmInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "DescribeApmInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApmInstances require credential")
@@ -269,6 +272,7 @@ func (c *Client) DescribeGeneralApmApplicationConfigWithContext(ctx context.Cont
     if request == nil {
         request = NewDescribeGeneralApmApplicationConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "DescribeGeneralApmApplicationConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeGeneralApmApplicationConfig require credential")
@@ -352,6 +356,7 @@ func (c *Client) DescribeGeneralMetricDataWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeGeneralMetricDataRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "DescribeGeneralMetricData")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeGeneralMetricData require credential")
@@ -413,6 +418,7 @@ func (c *Client) DescribeGeneralOTSpanListWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeGeneralOTSpanListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "DescribeGeneralOTSpanList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeGeneralOTSpanList require credential")
@@ -474,6 +480,7 @@ func (c *Client) DescribeGeneralSpanListWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeGeneralSpanListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "DescribeGeneralSpanList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeGeneralSpanList require credential")
@@ -537,6 +544,7 @@ func (c *Client) DescribeMetricRecordsWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeMetricRecordsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "DescribeMetricRecords")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMetricRecords require credential")
@@ -602,6 +610,7 @@ func (c *Client) DescribeServiceOverviewWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeServiceOverviewRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "DescribeServiceOverview")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeServiceOverview require credential")
@@ -657,6 +666,7 @@ func (c *Client) DescribeTagValuesWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeTagValuesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "DescribeTagValues")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTagValues require credential")
@@ -732,6 +742,7 @@ func (c *Client) ModifyApmInstanceWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyApmInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "ModifyApmInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyApmInstance require credential")
@@ -797,6 +808,7 @@ func (c *Client) ModifyGeneralApmApplicationConfigWithContext(ctx context.Contex
     if request == nil {
         request = NewModifyGeneralApmApplicationConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "ModifyGeneralApmApplicationConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyGeneralApmApplicationConfig require credential")
@@ -862,6 +874,7 @@ func (c *Client) TerminateApmInstanceWithContext(ctx context.Context, request *T
     if request == nil {
         request = NewTerminateApmInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "TerminateApmInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("TerminateApmInstance require credential")

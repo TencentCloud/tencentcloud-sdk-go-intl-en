@@ -84,6 +84,7 @@ func (c *Client) DeregisterMigrationTaskWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeregisterMigrationTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "msp", APIVersion, "DeregisterMigrationTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeregisterMigrationTask require credential")
@@ -133,6 +134,7 @@ func (c *Client) DescribeMigrationTaskWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeMigrationTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "msp", APIVersion, "DescribeMigrationTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMigrationTask require credential")
@@ -182,6 +184,7 @@ func (c *Client) ListMigrationProjectWithContext(ctx context.Context, request *L
     if request == nil {
         request = NewListMigrationProjectRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "msp", APIVersion, "ListMigrationProject")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListMigrationProject require credential")
@@ -231,6 +234,7 @@ func (c *Client) ListMigrationTaskWithContext(ctx context.Context, request *List
     if request == nil {
         request = NewListMigrationTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "msp", APIVersion, "ListMigrationTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ListMigrationTask require credential")
@@ -282,6 +286,7 @@ func (c *Client) ModifyMigrationTaskBelongToProjectWithContext(ctx context.Conte
     if request == nil {
         request = NewModifyMigrationTaskBelongToProjectRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "msp", APIVersion, "ModifyMigrationTaskBelongToProject")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyMigrationTaskBelongToProject require credential")
@@ -331,6 +336,7 @@ func (c *Client) ModifyMigrationTaskStatusWithContext(ctx context.Context, reque
     if request == nil {
         request = NewModifyMigrationTaskStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "msp", APIVersion, "ModifyMigrationTaskStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyMigrationTaskStatus require credential")
@@ -382,6 +388,7 @@ func (c *Client) RegisterMigrationTaskWithContext(ctx context.Context, request *
     if request == nil {
         request = NewRegisterMigrationTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "msp", APIVersion, "RegisterMigrationTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RegisterMigrationTask require credential")

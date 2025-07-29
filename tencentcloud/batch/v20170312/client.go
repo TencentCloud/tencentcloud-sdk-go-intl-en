@@ -118,6 +118,7 @@ func (c *Client) AttachInstancesWithContext(ctx context.Context, request *Attach
     if request == nil {
         request = NewAttachInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "AttachInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AttachInstances require credential")
@@ -215,6 +216,7 @@ func (c *Client) CreateComputeEnvWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateComputeEnvRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "CreateComputeEnv")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateComputeEnv require credential")
@@ -302,6 +304,7 @@ func (c *Client) CreateTaskTemplateWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreateTaskTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "CreateTaskTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTaskTemplate require credential")
@@ -365,6 +368,7 @@ func (c *Client) DeleteComputeEnvWithContext(ctx context.Context, request *Delet
     if request == nil {
         request = NewDeleteComputeEnvRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "DeleteComputeEnv")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteComputeEnv require credential")
@@ -430,6 +434,7 @@ func (c *Client) DeleteJobWithContext(ctx context.Context, request *DeleteJobReq
     if request == nil {
         request = NewDeleteJobRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "DeleteJob")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteJob require credential")
@@ -483,6 +488,7 @@ func (c *Client) DeleteTaskTemplatesWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDeleteTaskTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "DeleteTaskTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteTaskTemplates require credential")
@@ -546,6 +552,7 @@ func (c *Client) DescribeAvailableCvmInstanceTypesWithContext(ctx context.Contex
     if request == nil {
         request = NewDescribeAvailableCvmInstanceTypesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "DescribeAvailableCvmInstanceTypes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAvailableCvmInstanceTypes require credential")
@@ -599,6 +606,7 @@ func (c *Client) DescribeComputeEnvWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeComputeEnvRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "DescribeComputeEnv")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeComputeEnv require credential")
@@ -656,6 +664,7 @@ func (c *Client) DescribeComputeEnvActivitiesWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeComputeEnvActivitiesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "DescribeComputeEnvActivities")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeComputeEnvActivities require credential")
@@ -707,6 +716,7 @@ func (c *Client) DescribeComputeEnvCreateInfoWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeComputeEnvCreateInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "DescribeComputeEnvCreateInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeComputeEnvCreateInfo require credential")
@@ -764,6 +774,7 @@ func (c *Client) DescribeComputeEnvCreateInfosWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeComputeEnvCreateInfosRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "DescribeComputeEnvCreateInfos")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeComputeEnvCreateInfos require credential")
@@ -829,6 +840,7 @@ func (c *Client) DescribeComputeEnvsWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeComputeEnvsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "DescribeComputeEnvs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeComputeEnvs require credential")
@@ -894,6 +906,7 @@ func (c *Client) DescribeCvmZoneInstanceConfigInfosWithContext(ctx context.Conte
     if request == nil {
         request = NewDescribeCvmZoneInstanceConfigInfosRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "DescribeCvmZoneInstanceConfigInfos")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCvmZoneInstanceConfigInfos require credential")
@@ -945,6 +958,7 @@ func (c *Client) DescribeInstanceCategoriesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeInstanceCategoriesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "DescribeInstanceCategories")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceCategories require credential")
@@ -998,6 +1012,7 @@ func (c *Client) DescribeJobWithContext(ctx context.Context, request *DescribeJo
     if request == nil {
         request = NewDescribeJobRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "DescribeJob")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeJob require credential")
@@ -1051,6 +1066,7 @@ func (c *Client) DescribeJobSubmitInfoWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeJobSubmitInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "DescribeJobSubmitInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeJobSubmitInfo require credential")
@@ -1116,6 +1132,7 @@ func (c *Client) DescribeJobsWithContext(ctx context.Context, request *DescribeJ
     if request == nil {
         request = NewDescribeJobsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "DescribeJobs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeJobs require credential")
@@ -1169,6 +1186,7 @@ func (c *Client) DescribeTaskWithContext(ctx context.Context, request *DescribeT
     if request == nil {
         request = NewDescribeTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "DescribeTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTask require credential")
@@ -1236,6 +1254,7 @@ func (c *Client) DescribeTaskLogsWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeTaskLogsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "DescribeTaskLogs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTaskLogs require credential")
@@ -1293,6 +1312,7 @@ func (c *Client) DescribeTaskTemplatesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeTaskTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "DescribeTaskTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTaskTemplates require credential")
@@ -1354,6 +1374,7 @@ func (c *Client) DetachInstancesWithContext(ctx context.Context, request *Detach
     if request == nil {
         request = NewDetachInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "DetachInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DetachInstances require credential")
@@ -1433,6 +1454,7 @@ func (c *Client) ModifyComputeEnvWithContext(ctx context.Context, request *Modif
     if request == nil {
         request = NewModifyComputeEnvRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "ModifyComputeEnv")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyComputeEnv require credential")
@@ -1518,6 +1540,7 @@ func (c *Client) ModifyTaskTemplateWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyTaskTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "ModifyTaskTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyTaskTemplate require credential")
@@ -1577,6 +1600,7 @@ func (c *Client) RetryJobsWithContext(ctx context.Context, request *RetryJobsReq
     if request == nil {
         request = NewRetryJobsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "RetryJobs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RetryJobs require credential")
@@ -1646,6 +1670,7 @@ func (c *Client) TerminateComputeNodeWithContext(ctx context.Context, request *T
     if request == nil {
         request = NewTerminateComputeNodeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "TerminateComputeNode")
     
     if c.GetCredential() == nil {
         return nil, errors.New("TerminateComputeNode require credential")
@@ -1709,6 +1734,7 @@ func (c *Client) TerminateComputeNodesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewTerminateComputeNodesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "TerminateComputeNodes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("TerminateComputeNodes require credential")
@@ -1776,6 +1802,7 @@ func (c *Client) TerminateJobWithContext(ctx context.Context, request *Terminate
     if request == nil {
         request = NewTerminateJobRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "TerminateJob")
     
     if c.GetCredential() == nil {
         return nil, errors.New("TerminateJob require credential")
@@ -1847,6 +1874,7 @@ func (c *Client) TerminateTaskInstanceWithContext(ctx context.Context, request *
     if request == nil {
         request = NewTerminateTaskInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "TerminateTaskInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("TerminateTaskInstance require credential")

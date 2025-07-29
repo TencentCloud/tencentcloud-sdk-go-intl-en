@@ -124,6 +124,7 @@ func (c *Client) CancelInvocationWithContext(ctx context.Context, request *Cance
     if request == nil {
         request = NewCancelInvocationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tat", APIVersion, "CancelInvocation")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CancelInvocation require credential")
@@ -227,6 +228,7 @@ func (c *Client) CreateCommandWithContext(ctx context.Context, request *CreateCo
     if request == nil {
         request = NewCreateCommandRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tat", APIVersion, "CreateCommand")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateCommand require credential")
@@ -300,6 +302,7 @@ func (c *Client) CreateInvokerWithContext(ctx context.Context, request *CreateIn
     if request == nil {
         request = NewCreateInvokerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tat", APIVersion, "CreateInvoker")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateInvoker require credential")
@@ -371,6 +374,7 @@ func (c *Client) DeleteCommandWithContext(ctx context.Context, request *DeleteCo
     if request == nil {
         request = NewDeleteCommandRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tat", APIVersion, "DeleteCommand")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteCommand require credential")
@@ -424,6 +428,7 @@ func (c *Client) DeleteInvokerWithContext(ctx context.Context, request *DeleteIn
     if request == nil {
         request = NewDeleteInvokerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tat", APIVersion, "DeleteInvoker")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteInvoker require credential")
@@ -495,6 +500,7 @@ func (c *Client) DescribeAutomationAgentStatusWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeAutomationAgentStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tat", APIVersion, "DescribeAutomationAgentStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAutomationAgentStatus require credential")
@@ -562,6 +568,7 @@ func (c *Client) DescribeCommandsWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeCommandsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tat", APIVersion, "DescribeCommands")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCommands require credential")
@@ -637,6 +644,7 @@ func (c *Client) DescribeInvocationTasksWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeInvocationTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tat", APIVersion, "DescribeInvocationTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInvocationTasks require credential")
@@ -708,6 +716,7 @@ func (c *Client) DescribeInvocationsWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeInvocationsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tat", APIVersion, "DescribeInvocations")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInvocations require credential")
@@ -763,6 +772,7 @@ func (c *Client) DescribeInvokerRecordsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeInvokerRecordsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tat", APIVersion, "DescribeInvokerRecords")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInvokerRecords require credential")
@@ -820,6 +830,7 @@ func (c *Client) DescribeInvokersWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeInvokersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tat", APIVersion, "DescribeInvokers")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInvokers require credential")
@@ -881,6 +892,7 @@ func (c *Client) DescribeRegionsWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeRegionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tat", APIVersion, "DescribeRegions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRegions require credential")
@@ -934,6 +946,7 @@ func (c *Client) DisableInvokerWithContext(ctx context.Context, request *Disable
     if request == nil {
         request = NewDisableInvokerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tat", APIVersion, "DisableInvoker")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DisableInvoker require credential")
@@ -987,6 +1000,7 @@ func (c *Client) EnableInvokerWithContext(ctx context.Context, request *EnableIn
     if request == nil {
         request = NewEnableInvokerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tat", APIVersion, "EnableInvoker")
     
     if c.GetCredential() == nil {
         return nil, errors.New("EnableInvoker require credential")
@@ -1128,6 +1142,7 @@ func (c *Client) InvokeCommandWithContext(ctx context.Context, request *InvokeCo
     if request == nil {
         request = NewInvokeCommandRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tat", APIVersion, "InvokeCommand")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InvokeCommand require credential")
@@ -1223,6 +1238,7 @@ func (c *Client) ModifyCommandWithContext(ctx context.Context, request *ModifyCo
     if request == nil {
         request = NewModifyCommandRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tat", APIVersion, "ModifyCommand")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyCommand require credential")
@@ -1290,6 +1306,7 @@ func (c *Client) ModifyInvokerWithContext(ctx context.Context, request *ModifyIn
     if request == nil {
         request = NewModifyInvokerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tat", APIVersion, "ModifyInvoker")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyInvoker require credential")
@@ -1379,6 +1396,7 @@ func (c *Client) PreviewReplacedCommandContentWithContext(ctx context.Context, r
     if request == nil {
         request = NewPreviewReplacedCommandContentRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tat", APIVersion, "PreviewReplacedCommandContent")
     
     if c.GetCredential() == nil {
         return nil, errors.New("PreviewReplacedCommandContent require credential")
@@ -1538,6 +1556,7 @@ func (c *Client) RunCommandWithContext(ctx context.Context, request *RunCommandR
     if request == nil {
         request = NewRunCommandRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tat", APIVersion, "RunCommand")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RunCommand require credential")

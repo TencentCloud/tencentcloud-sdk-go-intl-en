@@ -86,6 +86,7 @@ func (c *Client) BindLinearAssemblyCDNDomainWithChannelWithContext(ctx context.C
     if request == nil {
         request = NewBindLinearAssemblyCDNDomainWithChannelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "BindLinearAssemblyCDNDomainWithChannel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BindLinearAssemblyCDNDomainWithChannel require credential")
@@ -137,6 +138,7 @@ func (c *Client) BindNewLVBDomainWithChannelWithContext(ctx context.Context, req
     if request == nil {
         request = NewBindNewLVBDomainWithChannelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "BindNewLVBDomainWithChannel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BindNewLVBDomainWithChannel require credential")
@@ -194,6 +196,7 @@ func (c *Client) CreateStreamPackageChannelWithContext(ctx context.Context, requ
     if request == nil {
         request = NewCreateStreamPackageChannelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "CreateStreamPackageChannel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateStreamPackageChannel require credential")
@@ -255,6 +258,7 @@ func (c *Client) CreateStreamPackageChannelEndpointWithContext(ctx context.Conte
     if request == nil {
         request = NewCreateStreamPackageChannelEndpointRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "CreateStreamPackageChannelEndpoint")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateStreamPackageChannelEndpoint require credential")
@@ -314,6 +318,7 @@ func (c *Client) CreateStreamPackageHarvestJobWithContext(ctx context.Context, r
     if request == nil {
         request = NewCreateStreamPackageHarvestJobRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "CreateStreamPackageHarvestJob")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateStreamPackageHarvestJob require credential")
@@ -371,6 +376,7 @@ func (c *Client) CreateStreamPackageLinearAssemblyChannelWithContext(ctx context
     if request == nil {
         request = NewCreateStreamPackageLinearAssemblyChannelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "CreateStreamPackageLinearAssemblyChannel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateStreamPackageLinearAssemblyChannel require credential")
@@ -428,6 +434,7 @@ func (c *Client) CreateStreamPackageLinearAssemblyProgramWithContext(ctx context
     if request == nil {
         request = NewCreateStreamPackageLinearAssemblyProgramRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "CreateStreamPackageLinearAssemblyProgram")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateStreamPackageLinearAssemblyProgram require credential")
@@ -489,6 +496,7 @@ func (c *Client) CreateStreamPackageSSAIChannelWithContext(ctx context.Context, 
     if request == nil {
         request = NewCreateStreamPackageSSAIChannelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "CreateStreamPackageSSAIChannel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateStreamPackageSSAIChannel require credential")
@@ -546,6 +554,7 @@ func (c *Client) CreateStreamPackageSourceWithContext(ctx context.Context, reque
     if request == nil {
         request = NewCreateStreamPackageSourceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "CreateStreamPackageSource")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateStreamPackageSource require credential")
@@ -603,6 +612,7 @@ func (c *Client) CreateStreamPackageSourceLocationWithContext(ctx context.Contex
     if request == nil {
         request = NewCreateStreamPackageSourceLocationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "CreateStreamPackageSourceLocation")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateStreamPackageSourceLocation require credential")
@@ -658,6 +668,7 @@ func (c *Client) DeleteStreamPackageChannelEndpointsWithContext(ctx context.Cont
     if request == nil {
         request = NewDeleteStreamPackageChannelEndpointsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DeleteStreamPackageChannelEndpoints")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteStreamPackageChannelEndpoints require credential")
@@ -713,6 +724,7 @@ func (c *Client) DeleteStreamPackageChannelsWithContext(ctx context.Context, req
     if request == nil {
         request = NewDeleteStreamPackageChannelsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DeleteStreamPackageChannels")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteStreamPackageChannels require credential")
@@ -770,6 +782,7 @@ func (c *Client) DeleteStreamPackageHarvestJobWithContext(ctx context.Context, r
     if request == nil {
         request = NewDeleteStreamPackageHarvestJobRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DeleteStreamPackageHarvestJob")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteStreamPackageHarvestJob require credential")
@@ -827,6 +840,7 @@ func (c *Client) DeleteStreamPackageHarvestJobsWithContext(ctx context.Context, 
     if request == nil {
         request = NewDeleteStreamPackageHarvestJobsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DeleteStreamPackageHarvestJobs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteStreamPackageHarvestJobs require credential")
@@ -882,6 +896,7 @@ func (c *Client) DeleteStreamPackageLinearAssemblyChannelWithContext(ctx context
     if request == nil {
         request = NewDeleteStreamPackageLinearAssemblyChannelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DeleteStreamPackageLinearAssemblyChannel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteStreamPackageLinearAssemblyChannel require credential")
@@ -937,6 +952,7 @@ func (c *Client) DeleteStreamPackageLinearAssemblyChannelsWithContext(ctx contex
     if request == nil {
         request = NewDeleteStreamPackageLinearAssemblyChannelsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DeleteStreamPackageLinearAssemblyChannels")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteStreamPackageLinearAssemblyChannels require credential")
@@ -992,6 +1008,7 @@ func (c *Client) DeleteStreamPackageLinearAssemblyProgramWithContext(ctx context
     if request == nil {
         request = NewDeleteStreamPackageLinearAssemblyProgramRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DeleteStreamPackageLinearAssemblyProgram")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteStreamPackageLinearAssemblyProgram require credential")
@@ -1047,6 +1064,7 @@ func (c *Client) DeleteStreamPackageLinearAssemblyProgramsWithContext(ctx contex
     if request == nil {
         request = NewDeleteStreamPackageLinearAssemblyProgramsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DeleteStreamPackageLinearAssemblyPrograms")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteStreamPackageLinearAssemblyPrograms require credential")
@@ -1108,6 +1126,7 @@ func (c *Client) DeleteStreamPackageSSAIChannelWithContext(ctx context.Context, 
     if request == nil {
         request = NewDeleteStreamPackageSSAIChannelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DeleteStreamPackageSSAIChannel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteStreamPackageSSAIChannel require credential")
@@ -1163,6 +1182,7 @@ func (c *Client) DeleteStreamPackageSourceWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDeleteStreamPackageSourceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DeleteStreamPackageSource")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteStreamPackageSource require credential")
@@ -1218,6 +1238,7 @@ func (c *Client) DeleteStreamPackageSourceLocationWithContext(ctx context.Contex
     if request == nil {
         request = NewDeleteStreamPackageSourceLocationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DeleteStreamPackageSourceLocation")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteStreamPackageSourceLocation require credential")
@@ -1269,6 +1290,7 @@ func (c *Client) DescribeLinearAssemblyCDNDomainWithChannelWithContext(ctx conte
     if request == nil {
         request = NewDescribeLinearAssemblyCDNDomainWithChannelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeLinearAssemblyCDNDomainWithChannel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLinearAssemblyCDNDomainWithChannel require credential")
@@ -1318,6 +1340,7 @@ func (c *Client) DescribeLinearAssemblyCDNDomainWithChannelsWithContext(ctx cont
     if request == nil {
         request = NewDescribeLinearAssemblyCDNDomainWithChannelsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeLinearAssemblyCDNDomainWithChannels")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLinearAssemblyCDNDomainWithChannels require credential")
@@ -1371,6 +1394,7 @@ func (c *Client) DescribeStreamPackageChannelWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeStreamPackageChannelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageChannel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPackageChannel require credential")
@@ -1430,6 +1454,7 @@ func (c *Client) DescribeStreamPackageChannelsWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeStreamPackageChannelsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageChannels")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPackageChannels require credential")
@@ -1487,6 +1512,7 @@ func (c *Client) DescribeStreamPackageHarvestJobWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeStreamPackageHarvestJobRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageHarvestJob")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPackageHarvestJob require credential")
@@ -1544,6 +1570,7 @@ func (c *Client) DescribeStreamPackageHarvestJobsWithContext(ctx context.Context
     if request == nil {
         request = NewDescribeStreamPackageHarvestJobsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageHarvestJobs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPackageHarvestJobs require credential")
@@ -1597,6 +1624,7 @@ func (c *Client) DescribeStreamPackageLinearAssemblyChannelWithContext(ctx conte
     if request == nil {
         request = NewDescribeStreamPackageLinearAssemblyChannelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageLinearAssemblyChannel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPackageLinearAssemblyChannel require credential")
@@ -1652,6 +1680,7 @@ func (c *Client) DescribeStreamPackageLinearAssemblyChannelAlertsWithContext(ctx
     if request == nil {
         request = NewDescribeStreamPackageLinearAssemblyChannelAlertsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageLinearAssemblyChannelAlerts")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPackageLinearAssemblyChannelAlerts require credential")
@@ -1711,6 +1740,7 @@ func (c *Client) DescribeStreamPackageLinearAssemblyChannelsWithContext(ctx cont
     if request == nil {
         request = NewDescribeStreamPackageLinearAssemblyChannelsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageLinearAssemblyChannels")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPackageLinearAssemblyChannels require credential")
@@ -1764,6 +1794,7 @@ func (c *Client) DescribeStreamPackageLinearAssemblyProgramWithContext(ctx conte
     if request == nil {
         request = NewDescribeStreamPackageLinearAssemblyProgramRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageLinearAssemblyProgram")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPackageLinearAssemblyProgram require credential")
@@ -1823,6 +1854,7 @@ func (c *Client) DescribeStreamPackageLinearAssemblyProgramSchedulesWithContext(
     if request == nil {
         request = NewDescribeStreamPackageLinearAssemblyProgramSchedulesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageLinearAssemblyProgramSchedules")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPackageLinearAssemblyProgramSchedules require credential")
@@ -1882,6 +1914,7 @@ func (c *Client) DescribeStreamPackageLinearAssemblyProgramsWithContext(ctx cont
     if request == nil {
         request = NewDescribeStreamPackageLinearAssemblyProgramsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageLinearAssemblyPrograms")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPackageLinearAssemblyPrograms require credential")
@@ -1943,6 +1976,7 @@ func (c *Client) DescribeStreamPackageSSAIChannelWithContext(ctx context.Context
     if request == nil {
         request = NewDescribeStreamPackageSSAIChannelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageSSAIChannel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPackageSSAIChannel require credential")
@@ -2004,6 +2038,7 @@ func (c *Client) DescribeStreamPackageSSAIChannelsWithContext(ctx context.Contex
     if request == nil {
         request = NewDescribeStreamPackageSSAIChannelsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageSSAIChannels")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPackageSSAIChannels require credential")
@@ -2057,6 +2092,7 @@ func (c *Client) DescribeStreamPackageSourceWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeStreamPackageSourceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageSource")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPackageSource require credential")
@@ -2112,6 +2148,7 @@ func (c *Client) DescribeStreamPackageSourceAlertsWithContext(ctx context.Contex
     if request == nil {
         request = NewDescribeStreamPackageSourceAlertsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageSourceAlerts")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPackageSourceAlerts require credential")
@@ -2165,6 +2202,7 @@ func (c *Client) DescribeStreamPackageSourceLocationWithContext(ctx context.Cont
     if request == nil {
         request = NewDescribeStreamPackageSourceLocationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageSourceLocation")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPackageSourceLocation require credential")
@@ -2220,6 +2258,7 @@ func (c *Client) DescribeStreamPackageSourceLocationAlertsWithContext(ctx contex
     if request == nil {
         request = NewDescribeStreamPackageSourceLocationAlertsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageSourceLocationAlerts")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPackageSourceLocationAlerts require credential")
@@ -2279,6 +2318,7 @@ func (c *Client) DescribeStreamPackageSourceLocationsWithContext(ctx context.Con
     if request == nil {
         request = NewDescribeStreamPackageSourceLocationsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageSourceLocations")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPackageSourceLocations require credential")
@@ -2338,6 +2378,7 @@ func (c *Client) DescribeStreamPackageSourcesWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeStreamPackageSourcesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageSources")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPackageSources require credential")
@@ -2395,6 +2436,7 @@ func (c *Client) ModifyStreamPackageChannelWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyStreamPackageChannelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "ModifyStreamPackageChannel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyStreamPackageChannel require credential")
@@ -2456,6 +2498,7 @@ func (c *Client) ModifyStreamPackageChannelEndpointWithContext(ctx context.Conte
     if request == nil {
         request = NewModifyStreamPackageChannelEndpointRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "ModifyStreamPackageChannelEndpoint")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyStreamPackageChannelEndpoint require credential")
@@ -2511,6 +2554,7 @@ func (c *Client) ModifyStreamPackageChannelInputAuthInfoWithContext(ctx context.
     if request == nil {
         request = NewModifyStreamPackageChannelInputAuthInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "ModifyStreamPackageChannelInputAuthInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyStreamPackageChannelInputAuthInfo require credential")
@@ -2568,6 +2612,7 @@ func (c *Client) ModifyStreamPackageLinearAssemblyChannelWithContext(ctx context
     if request == nil {
         request = NewModifyStreamPackageLinearAssemblyChannelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "ModifyStreamPackageLinearAssemblyChannel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyStreamPackageLinearAssemblyChannel require credential")
@@ -2625,6 +2670,7 @@ func (c *Client) ModifyStreamPackageLinearAssemblyProgramWithContext(ctx context
     if request == nil {
         request = NewModifyStreamPackageLinearAssemblyProgramRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "ModifyStreamPackageLinearAssemblyProgram")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyStreamPackageLinearAssemblyProgram require credential")
@@ -2686,6 +2732,7 @@ func (c *Client) ModifyStreamPackageSSAIChannelWithContext(ctx context.Context, 
     if request == nil {
         request = NewModifyStreamPackageSSAIChannelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "ModifyStreamPackageSSAIChannel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyStreamPackageSSAIChannel require credential")
@@ -2743,6 +2790,7 @@ func (c *Client) ModifyStreamPackageSourceWithContext(ctx context.Context, reque
     if request == nil {
         request = NewModifyStreamPackageSourceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "ModifyStreamPackageSource")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyStreamPackageSource require credential")
@@ -2800,6 +2848,7 @@ func (c *Client) ModifyStreamPackageSourceLocationWithContext(ctx context.Contex
     if request == nil {
         request = NewModifyStreamPackageSourceLocationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "ModifyStreamPackageSourceLocation")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyStreamPackageSourceLocation require credential")
@@ -2857,6 +2906,7 @@ func (c *Client) StartStreamPackageLinearAssemblyChannelWithContext(ctx context.
     if request == nil {
         request = NewStartStreamPackageLinearAssemblyChannelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "StartStreamPackageLinearAssemblyChannel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartStreamPackageLinearAssemblyChannel require credential")
@@ -2914,6 +2964,7 @@ func (c *Client) StopStreamPackageLinearAssemblyChannelWithContext(ctx context.C
     if request == nil {
         request = NewStopStreamPackageLinearAssemblyChannelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "StopStreamPackageLinearAssemblyChannel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopStreamPackageLinearAssemblyChannel require credential")
@@ -2969,6 +3020,7 @@ func (c *Client) UnbindCdnDomainWithChannelWithContext(ctx context.Context, requ
     if request == nil {
         request = NewUnbindCdnDomainWithChannelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "UnbindCdnDomainWithChannel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UnbindCdnDomainWithChannel require credential")
@@ -3024,6 +3076,7 @@ func (c *Client) UnbindLinearAssemblyCDNDomainWithChannelWithContext(ctx context
     if request == nil {
         request = NewUnbindLinearAssemblyCDNDomainWithChannelRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "UnbindLinearAssemblyCDNDomainWithChannel")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UnbindLinearAssemblyCDNDomainWithChannel require credential")

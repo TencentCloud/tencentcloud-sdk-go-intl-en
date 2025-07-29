@@ -138,6 +138,7 @@ func (c *Client) AssociateSecurityGroupsWithContext(ctx context.Context, request
     if request == nil {
         request = NewAssociateSecurityGroupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "AssociateSecurityGroups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AssociateSecurityGroups require credential")
@@ -199,6 +200,7 @@ func (c *Client) CancelDcnJobWithContext(ctx context.Context, request *CancelDcn
     if request == nil {
         request = NewCancelDcnJobRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "CancelDcnJob")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CancelDcnJob require credential")
@@ -268,6 +270,7 @@ func (c *Client) CloneAccountWithContext(ctx context.Context, request *CloneAcco
     if request == nil {
         request = NewCloneAccountRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "CloneAccount")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CloneAccount require credential")
@@ -333,6 +336,7 @@ func (c *Client) CloseDBExtranetAccessWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCloseDBExtranetAccessRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "CloseDBExtranetAccess")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CloseDBExtranetAccess require credential")
@@ -404,6 +408,7 @@ func (c *Client) CopyAccountPrivilegesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCopyAccountPrivilegesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "CopyAccountPrivileges")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CopyAccountPrivileges require credential")
@@ -483,6 +488,7 @@ func (c *Client) CreateAccountWithContext(ctx context.Context, request *CreateAc
     if request == nil {
         request = NewCreateAccountRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "CreateAccount")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAccount require credential")
@@ -566,6 +572,7 @@ func (c *Client) CreateDBInstanceWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "CreateDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDBInstance require credential")
@@ -655,6 +662,7 @@ func (c *Client) CreateHourDBInstanceWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateHourDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "CreateHourDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateHourDBInstance require credential")
@@ -720,6 +728,7 @@ func (c *Client) DeleteAccountWithContext(ctx context.Context, request *DeleteAc
     if request == nil {
         request = NewDeleteAccountRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DeleteAccount")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteAccount require credential")
@@ -787,6 +796,7 @@ func (c *Client) DescribeAccountPrivilegesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeAccountPrivilegesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeAccountPrivileges")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAccountPrivileges require credential")
@@ -848,6 +858,7 @@ func (c *Client) DescribeAccountsWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeAccountsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeAccounts")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAccounts require credential")
@@ -899,6 +910,7 @@ func (c *Client) DescribeBackupFilesWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeBackupFilesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeBackupFiles")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBackupFiles require credential")
@@ -964,6 +976,7 @@ func (c *Client) DescribeDBEncryptAttributesWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeDBEncryptAttributesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeDBEncryptAttributes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBEncryptAttributes require credential")
@@ -1023,6 +1036,7 @@ func (c *Client) DescribeDBInstanceDetailWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeDBInstanceDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeDBInstanceDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBInstanceDetail require credential")
@@ -1092,6 +1106,7 @@ func (c *Client) DescribeDBInstancesWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBInstances require credential")
@@ -1165,6 +1180,7 @@ func (c *Client) DescribeDBLogFilesWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeDBLogFilesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeDBLogFiles")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBLogFiles require credential")
@@ -1228,6 +1244,7 @@ func (c *Client) DescribeDBParametersWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeDBParametersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeDBParameters")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBParameters require credential")
@@ -1313,6 +1330,7 @@ func (c *Client) DescribeDBSecurityGroupsWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeDBSecurityGroupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeDBSecurityGroups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBSecurityGroups require credential")
@@ -1380,6 +1398,7 @@ func (c *Client) DescribeDBSlowLogsWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeDBSlowLogsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeDBSlowLogs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBSlowLogs require credential")
@@ -1435,6 +1454,7 @@ func (c *Client) DescribeDBTmpInstancesWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeDBTmpInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeDBTmpInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBTmpInstances require credential")
@@ -1494,6 +1514,7 @@ func (c *Client) DescribeDatabaseObjectsWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeDatabaseObjectsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeDatabaseObjects")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDatabaseObjects require credential")
@@ -1555,6 +1576,7 @@ func (c *Client) DescribeDatabaseTableWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeDatabaseTableRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeDatabaseTable")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDatabaseTable require credential")
@@ -1612,6 +1634,7 @@ func (c *Client) DescribeDatabasesWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeDatabasesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeDatabases")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDatabases require credential")
@@ -1671,6 +1694,7 @@ func (c *Client) DescribeDcnDetailWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeDcnDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeDcnDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDcnDetail require credential")
@@ -1728,6 +1752,7 @@ func (c *Client) DescribeFileDownloadUrlWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeFileDownloadUrlRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeFileDownloadUrl")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeFileDownloadUrl require credential")
@@ -1781,6 +1806,7 @@ func (c *Client) DescribeInstanceNodeInfoWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeInstanceNodeInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeInstanceNodeInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceNodeInfo require credential")
@@ -1842,6 +1868,7 @@ func (c *Client) DescribeLogFileRetentionPeriodWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeLogFileRetentionPeriodRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeLogFileRetentionPeriod")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLogFileRetentionPeriod require credential")
@@ -1899,6 +1926,7 @@ func (c *Client) DescribeOrdersWithContext(ctx context.Context, request *Describ
     if request == nil {
         request = NewDescribeOrdersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeOrders")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOrders require credential")
@@ -1962,6 +1990,7 @@ func (c *Client) DescribePriceWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribePriceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribePrice")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribePrice require credential")
@@ -2017,6 +2046,7 @@ func (c *Client) DescribeProjectSecurityGroupsWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeProjectSecurityGroupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DescribeProjectSecurityGroups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeProjectSecurityGroups require credential")
@@ -2078,6 +2108,7 @@ func (c *Client) DestroyDBInstanceWithContext(ctx context.Context, request *Dest
     if request == nil {
         request = NewDestroyDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DestroyDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DestroyDBInstance require credential")
@@ -2141,6 +2172,7 @@ func (c *Client) DestroyHourDBInstanceWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDestroyHourDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DestroyHourDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DestroyHourDBInstance require credential")
@@ -2224,6 +2256,7 @@ func (c *Client) DisassociateSecurityGroupsWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDisassociateSecurityGroupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "DisassociateSecurityGroups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DisassociateSecurityGroups require credential")
@@ -2301,6 +2334,7 @@ func (c *Client) GrantAccountPrivilegesWithContext(ctx context.Context, request 
     if request == nil {
         request = NewGrantAccountPrivilegesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "GrantAccountPrivileges")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GrantAccountPrivileges require credential")
@@ -2366,6 +2400,7 @@ func (c *Client) IsolateDBInstanceWithContext(ctx context.Context, request *Isol
     if request == nil {
         request = NewIsolateDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "IsolateDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("IsolateDBInstance require credential")
@@ -2429,6 +2464,7 @@ func (c *Client) IsolateDedicatedDBInstanceWithContext(ctx context.Context, requ
     if request == nil {
         request = NewIsolateDedicatedDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "IsolateDedicatedDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("IsolateDedicatedDBInstance require credential")
@@ -2484,6 +2520,7 @@ func (c *Client) KillSessionWithContext(ctx context.Context, request *KillSessio
     if request == nil {
         request = NewKillSessionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "KillSession")
     
     if c.GetCredential() == nil {
         return nil, errors.New("KillSession require credential")
@@ -2545,6 +2582,7 @@ func (c *Client) ModifyAccountDescriptionWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyAccountDescriptionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "ModifyAccountDescription")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyAccountDescription require credential")
@@ -2608,6 +2646,7 @@ func (c *Client) ModifyAccountPrivilegesWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyAccountPrivilegesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "ModifyAccountPrivileges")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyAccountPrivileges require credential")
@@ -2675,6 +2714,7 @@ func (c *Client) ModifyDBEncryptAttributesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewModifyDBEncryptAttributesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "ModifyDBEncryptAttributes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBEncryptAttributes require credential")
@@ -2732,6 +2772,7 @@ func (c *Client) ModifyDBInstancesProjectWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyDBInstancesProjectRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "ModifyDBInstancesProject")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBInstancesProject require credential")
@@ -2795,6 +2836,7 @@ func (c *Client) ModifyDBParametersWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyDBParametersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "ModifyDBParameters")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBParameters require credential")
@@ -2864,6 +2906,7 @@ func (c *Client) ModifyDBSyncModeWithContext(ctx context.Context, request *Modif
     if request == nil {
         request = NewModifyDBSyncModeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "ModifyDBSyncMode")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBSyncMode require credential")
@@ -2937,6 +2980,7 @@ func (c *Client) ModifyInstanceNetworkWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyInstanceNetworkRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "ModifyInstanceNetwork")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyInstanceNetwork require credential")
@@ -3006,6 +3050,7 @@ func (c *Client) ModifyInstanceVipWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyInstanceVipRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "ModifyInstanceVip")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyInstanceVip require credential")
@@ -3075,6 +3120,7 @@ func (c *Client) ModifyInstanceVportWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyInstanceVportRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "ModifyInstanceVport")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyInstanceVport require credential")
@@ -3128,6 +3174,7 @@ func (c *Client) ModifySyncTaskAttributeWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifySyncTaskAttributeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "ModifySyncTaskAttribute")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifySyncTaskAttribute require credential")
@@ -3199,6 +3246,7 @@ func (c *Client) ResetAccountPasswordWithContext(ctx context.Context, request *R
     if request == nil {
         request = NewResetAccountPasswordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "ResetAccountPassword")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ResetAccountPassword require credential")
@@ -3260,6 +3308,7 @@ func (c *Client) TerminateDedicatedDBInstanceWithContext(ctx context.Context, re
     if request == nil {
         request = NewTerminateDedicatedDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "TerminateDedicatedDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("TerminateDedicatedDBInstance require credential")
@@ -3329,6 +3378,7 @@ func (c *Client) UpgradeDedicatedDBInstanceWithContext(ctx context.Context, requ
     if request == nil {
         request = NewUpgradeDedicatedDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mariadb", APIVersion, "UpgradeDedicatedDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpgradeDedicatedDBInstance require credential")

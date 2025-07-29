@@ -90,6 +90,7 @@ func (c *Client) AllocateCreditPoolWithContext(ctx context.Context, request *All
     if request == nil {
         request = NewAllocateCreditPoolRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "AllocateCreditPool")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AllocateCreditPool require credential")
@@ -171,6 +172,7 @@ func (c *Client) AllocateCustomerCreditWithContext(ctx context.Context, request 
     if request == nil {
         request = NewAllocateCustomerCreditRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "AllocateCustomerCredit")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AllocateCustomerCredit require credential")
@@ -254,6 +256,7 @@ func (c *Client) ApproveClientApplyWithContext(ctx context.Context, request *App
     if request == nil {
         request = NewApproveClientApplyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "ApproveClientApply")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ApproveClientApply require credential")
@@ -347,6 +350,7 @@ func (c *Client) ApproveSubAgentApplyWithContext(ctx context.Context, request *A
     if request == nil {
         request = NewApproveSubAgentApplyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "ApproveSubAgentApply")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ApproveSubAgentApply require credential")
@@ -466,6 +470,7 @@ func (c *Client) CreateAccountWithContext(ctx context.Context, request *CreateAc
     if request == nil {
         request = NewCreateAccountRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "CreateAccount")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAccount require credential")
@@ -543,6 +548,7 @@ func (c *Client) CreateAndSendClientInvitationMailWithContext(ctx context.Contex
     if request == nil {
         request = NewCreateAndSendClientInvitationMailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "CreateAndSendClientInvitationMail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateAndSendClientInvitationMail require credential")
@@ -600,6 +606,7 @@ func (c *Client) DescribeBillDetailWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeBillDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "DescribeBillDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillDetail require credential")
@@ -655,6 +662,7 @@ func (c *Client) DescribeBillDownloadUrlWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeBillDownloadUrlRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "DescribeBillDownloadUrl")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillDownloadUrl require credential")
@@ -718,6 +726,7 @@ func (c *Client) DescribeBillSummaryWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeBillSummaryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "DescribeBillSummary")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillSummary require credential")
@@ -775,6 +784,7 @@ func (c *Client) DescribeBillSummaryByPayModeWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeBillSummaryByPayModeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "DescribeBillSummaryByPayMode")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillSummaryByPayMode require credential")
@@ -832,6 +842,7 @@ func (c *Client) DescribeBillSummaryByProductWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeBillSummaryByProductRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "DescribeBillSummaryByProduct")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillSummaryByProduct require credential")
@@ -889,6 +900,7 @@ func (c *Client) DescribeBillSummaryByRegionWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeBillSummaryByRegionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "DescribeBillSummaryByRegion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillSummaryByRegion require credential")
@@ -948,6 +960,7 @@ func (c *Client) DescribeCustomerBillDetailWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeCustomerBillDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "DescribeCustomerBillDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCustomerBillDetail require credential")
@@ -1007,6 +1020,7 @@ func (c *Client) DescribeCustomerBillDetailByDayWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeCustomerBillDetailByDayRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "DescribeCustomerBillDetailByDay")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCustomerBillDetailByDay require credential")
@@ -1068,6 +1082,7 @@ func (c *Client) DescribeCustomerBillDownloadUrlWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeCustomerBillDownloadUrlRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "DescribeCustomerBillDownloadUrl")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCustomerBillDownloadUrl require credential")
@@ -1125,6 +1140,7 @@ func (c *Client) DescribeCustomerBillSummaryWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeCustomerBillSummaryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "DescribeCustomerBillSummary")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCustomerBillSummary require credential")
@@ -1180,6 +1196,7 @@ func (c *Client) DescribeCustomerInfoWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeCustomerInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "DescribeCustomerInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCustomerInfo require credential")
@@ -1233,6 +1250,7 @@ func (c *Client) DescribeCustomerUinWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeCustomerUinRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "DescribeCustomerUin")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCustomerUin require credential")
@@ -1288,6 +1306,7 @@ func (c *Client) DescribeRebateDownloadUrlWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeRebateDownloadUrlRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "DescribeRebateDownloadUrl")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRebateDownloadUrl require credential")
@@ -1347,6 +1366,7 @@ func (c *Client) ForceQNWithContext(ctx context.Context, request *ForceQNRequest
     if request == nil {
         request = NewForceQNRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "ForceQN")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ForceQN require credential")
@@ -1396,6 +1416,7 @@ func (c *Client) GetCountryCodesWithContext(ctx context.Context, request *GetCou
     if request == nil {
         request = NewGetCountryCodesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "GetCountryCodes")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetCountryCodes require credential")
@@ -1453,6 +1474,7 @@ func (c *Client) GetTradeConfigListWithContext(ctx context.Context, request *Get
     if request == nil {
         request = NewGetTradeConfigListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "GetTradeConfigList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetTradeConfigList require credential")
@@ -1516,6 +1538,7 @@ func (c *Client) ModifyClientRemarkWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyClientRemarkRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "ModifyClientRemark")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyClientRemark require credential")
@@ -1583,6 +1606,7 @@ func (c *Client) QueryAccountVerificationStatusWithContext(ctx context.Context, 
     if request == nil {
         request = NewQueryAccountVerificationStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "QueryAccountVerificationStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryAccountVerificationStatus require credential")
@@ -1636,6 +1660,7 @@ func (c *Client) QueryCreditAllocationHistoryWithContext(ctx context.Context, re
     if request == nil {
         request = NewQueryCreditAllocationHistoryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "QueryCreditAllocationHistory")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryCreditAllocationHistory require credential")
@@ -1703,6 +1728,7 @@ func (c *Client) QueryCreditByUinListWithContext(ctx context.Context, request *Q
     if request == nil {
         request = NewQueryCreditByUinListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "QueryCreditByUinList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryCreditByUinList require credential")
@@ -1760,6 +1786,7 @@ func (c *Client) QueryCustomerBillingQuotaWithContext(ctx context.Context, reque
     if request == nil {
         request = NewQueryCustomerBillingQuotaRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "QueryCustomerBillingQuota")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryCustomerBillingQuota require credential")
@@ -1823,6 +1850,7 @@ func (c *Client) QueryCustomersCreditWithContext(ctx context.Context, request *Q
     if request == nil {
         request = NewQueryCustomersCreditRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "QueryCustomersCredit")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryCustomersCredit require credential")
@@ -1884,6 +1912,7 @@ func (c *Client) QueryDirectCustomersCreditWithContext(ctx context.Context, requ
     if request == nil {
         request = NewQueryDirectCustomersCreditRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "QueryDirectCustomersCredit")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryDirectCustomersCredit require credential")
@@ -1937,6 +1966,7 @@ func (c *Client) QueryInvitationInfoWithContext(ctx context.Context, request *Qu
     if request == nil {
         request = NewQueryInvitationInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "QueryInvitationInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryInvitationInfo require credential")
@@ -1998,6 +2028,7 @@ func (c *Client) QueryPartnerCreditWithContext(ctx context.Context, request *Que
     if request == nil {
         request = NewQueryPartnerCreditRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "QueryPartnerCredit")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryPartnerCredit require credential")
@@ -2055,6 +2086,7 @@ func (c *Client) QueryPendingClientsV2WithContext(ctx context.Context, request *
     if request == nil {
         request = NewQueryPendingClientsV2Request()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "QueryPendingClientsV2")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryPendingClientsV2 require credential")
@@ -2110,6 +2142,7 @@ func (c *Client) QueryPendingSubAgentsV2WithContext(ctx context.Context, request
     if request == nil {
         request = NewQueryPendingSubAgentsV2Request()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "QueryPendingSubAgentsV2")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryPendingSubAgentsV2 require credential")
@@ -2165,6 +2198,7 @@ func (c *Client) QueryPolicyProductListByCodeWithContext(ctx context.Context, re
     if request == nil {
         request = NewQueryPolicyProductListByCodeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "QueryPolicyProductListByCode")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryPolicyProductListByCode require credential")
@@ -2220,6 +2254,7 @@ func (c *Client) QuerySubAgentsDetailV2WithContext(ctx context.Context, request 
     if request == nil {
         request = NewQuerySubAgentsDetailV2Request()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "QuerySubAgentsDetailV2")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QuerySubAgentsDetailV2 require credential")
@@ -2277,6 +2312,7 @@ func (c *Client) QueryT1IndirectCustomersDetailWithContext(ctx context.Context, 
     if request == nil {
         request = NewQueryT1IndirectCustomersDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "QueryT1IndirectCustomersDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryT1IndirectCustomersDetail require credential")
@@ -2334,6 +2370,7 @@ func (c *Client) QueryVoucherAmountByUinWithContext(ctx context.Context, request
     if request == nil {
         request = NewQueryVoucherAmountByUinRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "QueryVoucherAmountByUin")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryVoucherAmountByUin require credential")
@@ -2391,6 +2428,7 @@ func (c *Client) QueryVoucherListByUinWithContext(ctx context.Context, request *
     if request == nil {
         request = NewQueryVoucherListByUinRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "QueryVoucherListByUin")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryVoucherListByUin require credential")
@@ -2448,6 +2486,7 @@ func (c *Client) QueryVoucherPoolWithContext(ctx context.Context, request *Query
     if request == nil {
         request = NewQueryVoucherPoolRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "QueryVoucherPool")
     
     if c.GetCredential() == nil {
         return nil, errors.New("QueryVoucherPool require credential")
@@ -2513,6 +2552,7 @@ func (c *Client) SendVerifyCodeWithContext(ctx context.Context, request *SendVer
     if request == nil {
         request = NewSendVerifyCodeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "SendVerifyCode")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SendVerifyCode require credential")

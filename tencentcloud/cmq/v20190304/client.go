@@ -100,6 +100,7 @@ func (c *Client) ClearQueueWithContext(ctx context.Context, request *ClearQueueR
     if request == nil {
         request = NewClearQueueRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cmq", APIVersion, "ClearQueue")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ClearQueue require credential")
@@ -167,6 +168,7 @@ func (c *Client) ClearSubscriptionFilterTagsWithContext(ctx context.Context, req
     if request == nil {
         request = NewClearSubscriptionFilterTagsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cmq", APIVersion, "ClearSubscriptionFilterTags")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ClearSubscriptionFilterTags require credential")
@@ -226,6 +228,7 @@ func (c *Client) CreateQueueWithContext(ctx context.Context, request *CreateQueu
     if request == nil {
         request = NewCreateQueueRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cmq", APIVersion, "CreateQueue")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateQueue require credential")
@@ -293,6 +296,7 @@ func (c *Client) CreateSubscribeWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateSubscribeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cmq", APIVersion, "CreateSubscribe")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateSubscribe require credential")
@@ -358,6 +362,7 @@ func (c *Client) CreateTopicWithContext(ctx context.Context, request *CreateTopi
     if request == nil {
         request = NewCreateTopicRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cmq", APIVersion, "CreateTopic")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTopic require credential")
@@ -417,6 +422,7 @@ func (c *Client) DeleteQueueWithContext(ctx context.Context, request *DeleteQueu
     if request == nil {
         request = NewDeleteQueueRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cmq", APIVersion, "DeleteQueue")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteQueue require credential")
@@ -482,6 +488,7 @@ func (c *Client) DeleteSubscribeWithContext(ctx context.Context, request *Delete
     if request == nil {
         request = NewDeleteSubscribeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cmq", APIVersion, "DeleteSubscribe")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteSubscribe require credential")
@@ -547,6 +554,7 @@ func (c *Client) DeleteTopicWithContext(ctx context.Context, request *DeleteTopi
     if request == nil {
         request = NewDeleteTopicRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cmq", APIVersion, "DeleteTopic")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteTopic require credential")
@@ -612,6 +620,7 @@ func (c *Client) DescribeDeadLetterSourceQueuesWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeDeadLetterSourceQueuesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cmq", APIVersion, "DescribeDeadLetterSourceQueues")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDeadLetterSourceQueues require credential")
@@ -677,6 +686,7 @@ func (c *Client) DescribeQueueDetailWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeQueueDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cmq", APIVersion, "DescribeQueueDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeQueueDetail require credential")
@@ -744,6 +754,7 @@ func (c *Client) DescribeSubscriptionDetailWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeSubscriptionDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cmq", APIVersion, "DescribeSubscriptionDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSubscriptionDetail require credential")
@@ -811,6 +822,7 @@ func (c *Client) DescribeTopicDetailWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeTopicDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cmq", APIVersion, "DescribeTopicDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTopicDetail require credential")
@@ -878,6 +890,7 @@ func (c *Client) ModifyQueueAttributeWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyQueueAttributeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cmq", APIVersion, "ModifyQueueAttribute")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyQueueAttribute require credential")
@@ -945,6 +958,7 @@ func (c *Client) ModifySubscriptionAttributeWithContext(ctx context.Context, req
     if request == nil {
         request = NewModifySubscriptionAttributeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cmq", APIVersion, "ModifySubscriptionAttribute")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifySubscriptionAttribute require credential")
@@ -1010,6 +1024,7 @@ func (c *Client) ModifyTopicAttributeWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyTopicAttributeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cmq", APIVersion, "ModifyTopicAttribute")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyTopicAttribute require credential")
@@ -1075,6 +1090,7 @@ func (c *Client) RewindQueueWithContext(ctx context.Context, request *RewindQueu
     if request == nil {
         request = NewRewindQueueRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cmq", APIVersion, "RewindQueue")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RewindQueue require credential")
@@ -1142,6 +1158,7 @@ func (c *Client) UnbindDeadLetterWithContext(ctx context.Context, request *Unbin
     if request == nil {
         request = NewUnbindDeadLetterRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "cmq", APIVersion, "UnbindDeadLetter")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UnbindDeadLetter require credential")

@@ -98,6 +98,7 @@ func (c *Client) AddTeamMemberWithContext(ctx context.Context, request *AddTeamM
     if request == nil {
         request = NewAddTeamMemberRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "AddTeamMember")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AddTeamMember require credential")
@@ -179,6 +180,7 @@ func (c *Client) CheckGlobalDomainWithContext(ctx context.Context, request *Chec
     if request == nil {
         request = NewCheckGlobalDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CheckGlobalDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CheckGlobalDomain require credential")
@@ -242,6 +244,7 @@ func (c *Client) ConfigureMNPPreviewWithContext(ctx context.Context, request *Co
     if request == nil {
         request = NewConfigureMNPPreviewRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ConfigureMNPPreview")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ConfigureMNPPreview require credential")
@@ -311,6 +314,7 @@ func (c *Client) CreateApplicationWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateApplicationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CreateApplication")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateApplication require credential")
@@ -376,6 +380,7 @@ func (c *Client) CreateApplicationSensitiveAPIWithContext(ctx context.Context, r
     if request == nil {
         request = NewCreateApplicationSensitiveAPIRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CreateApplicationSensitiveAPI")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateApplicationSensitiveAPI require credential")
@@ -435,6 +440,7 @@ func (c *Client) CreateConsoleMNPVersionCompileTaskWithContext(ctx context.Conte
     if request == nil {
         request = NewCreateConsoleMNPVersionCompileTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CreateConsoleMNPVersionCompileTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateConsoleMNPVersionCompileTask require credential")
@@ -496,6 +502,7 @@ func (c *Client) CreateDomainWithContext(ctx context.Context, request *CreateDom
     if request == nil {
         request = NewCreateDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CreateDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDomain require credential")
@@ -581,6 +588,7 @@ func (c *Client) CreateGlobalDomainWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreateGlobalDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CreateGlobalDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateGlobalDomain require credential")
@@ -640,6 +648,7 @@ func (c *Client) CreateGlobalDomainACLWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCreateGlobalDomainACLRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CreateGlobalDomainACL")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateGlobalDomainACL require credential")
@@ -715,6 +724,7 @@ func (c *Client) CreateMNPWithContext(ctx context.Context, request *CreateMNPReq
     if request == nil {
         request = NewCreateMNPRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CreateMNP")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateMNP require credential")
@@ -788,6 +798,7 @@ func (c *Client) CreateMNPApprovalWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateMNPApprovalRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CreateMNPApproval")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateMNPApproval require credential")
@@ -849,6 +860,7 @@ func (c *Client) CreateMNPDomainACLWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreateMNPDomainACLRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CreateMNPDomainACL")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateMNPDomainACL require credential")
@@ -910,6 +922,7 @@ func (c *Client) CreateMNPSensitiveAPIPermissionApprovalWithContext(ctx context.
     if request == nil {
         request = NewCreateMNPSensitiveAPIPermissionApprovalRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CreateMNPSensitiveAPIPermissionApproval")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateMNPSensitiveAPIPermissionApproval require credential")
@@ -977,6 +990,7 @@ func (c *Client) CreateMNPVersionWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateMNPVersionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CreateMNPVersion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateMNPVersion require credential")
@@ -1036,6 +1050,7 @@ func (c *Client) CreateOnlineApplyWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateOnlineApplyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CreateOnlineApply")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateOnlineApply require credential")
@@ -1093,6 +1108,7 @@ func (c *Client) CreatePlatformAuditWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreatePlatformAuditRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CreatePlatformAudit")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreatePlatformAudit require credential")
@@ -1148,6 +1164,7 @@ func (c *Client) CreatePresetKeyWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreatePresetKeyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CreatePresetKey")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreatePresetKey require credential")
@@ -1219,6 +1236,7 @@ func (c *Client) CreateSensitiveAPIWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreateSensitiveAPIRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CreateSensitiveAPI")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateSensitiveAPI require credential")
@@ -1276,6 +1294,7 @@ func (c *Client) CreateSensitiveApiApplyWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateSensitiveApiApplyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CreateSensitiveApiApply")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateSensitiveApiApply require credential")
@@ -1337,6 +1356,7 @@ func (c *Client) CreateTeamWithContext(ctx context.Context, request *CreateTeamR
     if request == nil {
         request = NewCreateTeamRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CreateTeam")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTeam require credential")
@@ -1410,6 +1430,7 @@ func (c *Client) CreateTeamMemberWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateTeamMemberRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CreateTeamMember")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateTeamMember require credential")
@@ -1471,6 +1492,7 @@ func (c *Client) CreateUserWithContext(ctx context.Context, request *CreateUserR
     if request == nil {
         request = NewCreateUserRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "CreateUser")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateUser require credential")
@@ -1534,6 +1556,7 @@ func (c *Client) DeleteApplicationWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteApplicationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DeleteApplication")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteApplication require credential")
@@ -1597,6 +1620,7 @@ func (c *Client) DeleteApplicationSensitiveAPIWithContext(ctx context.Context, r
     if request == nil {
         request = NewDeleteApplicationSensitiveAPIRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DeleteApplicationSensitiveAPI")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteApplicationSensitiveAPI require credential")
@@ -1656,6 +1680,7 @@ func (c *Client) DeleteGlobalDomainWithContext(ctx context.Context, request *Del
     if request == nil {
         request = NewDeleteGlobalDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DeleteGlobalDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteGlobalDomain require credential")
@@ -1717,6 +1742,7 @@ func (c *Client) DeleteMNPWithContext(ctx context.Context, request *DeleteMNPReq
     if request == nil {
         request = NewDeleteMNPRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DeleteMNP")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteMNP require credential")
@@ -1780,6 +1806,7 @@ func (c *Client) DeleteSensitiveAPIWithContext(ctx context.Context, request *Del
     if request == nil {
         request = NewDeleteSensitiveAPIRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DeleteSensitiveAPI")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteSensitiveAPI require credential")
@@ -1839,6 +1866,7 @@ func (c *Client) DeleteTeamWithContext(ctx context.Context, request *DeleteTeamR
     if request == nil {
         request = NewDeleteTeamRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DeleteTeam")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteTeam require credential")
@@ -1900,6 +1928,7 @@ func (c *Client) DeleteTeamMemberWithContext(ctx context.Context, request *Delet
     if request == nil {
         request = NewDeleteTeamMemberRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DeleteTeamMember")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteTeamMember require credential")
@@ -1963,6 +1992,7 @@ func (c *Client) DeleteUserWithContext(ctx context.Context, request *DeleteUserR
     if request == nil {
         request = NewDeleteUserRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DeleteUser")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteUser require credential")
@@ -2022,6 +2052,7 @@ func (c *Client) DescribeApplicationWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeApplicationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeApplication")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplication require credential")
@@ -2091,6 +2122,7 @@ func (c *Client) DescribeApplicationConfigWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeApplicationConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeApplicationConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationConfig require credential")
@@ -2154,6 +2186,7 @@ func (c *Client) DescribeApplicationConfigFileWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeApplicationConfigFileRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeApplicationConfigFile")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationConfigFile require credential")
@@ -2213,6 +2246,7 @@ func (c *Client) DescribeApplicationListWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeApplicationListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeApplicationList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationList require credential")
@@ -2270,6 +2304,7 @@ func (c *Client) DescribeApplicationMNPVersionAuditListWithContext(ctx context.C
     if request == nil {
         request = NewDescribeApplicationMNPVersionAuditListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeApplicationMNPVersionAuditList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationMNPVersionAuditList require credential")
@@ -2333,6 +2368,7 @@ func (c *Client) DescribeApplicationSensitiveAPIListWithContext(ctx context.Cont
     if request == nil {
         request = NewDescribeApplicationSensitiveAPIListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeApplicationSensitiveAPIList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationSensitiveAPIList require credential")
@@ -2392,6 +2428,7 @@ func (c *Client) DescribeConsoleMNPVersionCompileTaskWithContext(ctx context.Con
     if request == nil {
         request = NewDescribeConsoleMNPVersionCompileTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeConsoleMNPVersionCompileTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeConsoleMNPVersionCompileTask require credential")
@@ -2451,6 +2488,7 @@ func (c *Client) DescribeDomainInfoWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeDomainInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeDomainInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDomainInfo require credential")
@@ -2540,6 +2578,7 @@ func (c *Client) DescribeDomainTeamListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeDomainTeamListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeDomainTeamList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDomainTeamList require credential")
@@ -2599,6 +2638,7 @@ func (c *Client) DescribeGlobalDomainACLWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeGlobalDomainACLRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeGlobalDomainACL")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeGlobalDomainACL require credential")
@@ -2684,6 +2724,7 @@ func (c *Client) DescribeGlobalDomainListWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeGlobalDomainListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeGlobalDomainList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeGlobalDomainList require credential")
@@ -2743,6 +2784,7 @@ func (c *Client) DescribeMNPWithContext(ctx context.Context, request *DescribeMN
     if request == nil {
         request = NewDescribeMNPRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNP")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNP require credential")
@@ -2804,6 +2846,7 @@ func (c *Client) DescribeMNPAllStageVersionsWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeMNPAllStageVersionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNPAllStageVersions")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNPAllStageVersions require credential")
@@ -2863,6 +2906,7 @@ func (c *Client) DescribeMNPApprovalListWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeMNPApprovalListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNPApprovalList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNPApprovalList require credential")
@@ -2918,6 +2962,7 @@ func (c *Client) DescribeMNPBoardWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeMNPBoardRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNPBoard")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNPBoard require credential")
@@ -2975,6 +3020,7 @@ func (c *Client) DescribeMNPCategoryWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeMNPCategoryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNPCategory")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNPCategory require credential")
@@ -3040,6 +3086,7 @@ func (c *Client) DescribeMNPDetailWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeMNPDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNPDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNPDetail require credential")
@@ -3099,6 +3146,7 @@ func (c *Client) DescribeMNPDomainACLWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeMNPDomainACLRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNPDomainACL")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNPDomainACL require credential")
@@ -3158,6 +3206,7 @@ func (c *Client) DescribeMNPListWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeMNPListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNPList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNPList require credential")
@@ -3221,6 +3270,7 @@ func (c *Client) DescribeMNPManagerDetailWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeMNPManagerDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNPManagerDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNPManagerDetail require credential")
@@ -3282,6 +3332,7 @@ func (c *Client) DescribeMNPManagerListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeMNPManagerListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNPManagerList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNPManagerList require credential")
@@ -3339,6 +3390,7 @@ func (c *Client) DescribeMNPOfflinePackageURLWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeMNPOfflinePackageURLRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNPOfflinePackageURL")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNPOfflinePackageURL require credential")
@@ -3400,6 +3452,7 @@ func (c *Client) DescribeMNPPreviewWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeMNPPreviewRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNPPreview")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNPPreview require credential")
@@ -3455,6 +3508,7 @@ func (c *Client) DescribeMNPPrivacyWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeMNPPrivacyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNPPrivacy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNPPrivacy require credential")
@@ -3514,6 +3568,7 @@ func (c *Client) DescribeMNPReleasedVersionHistoryWithContext(ctx context.Contex
     if request == nil {
         request = NewDescribeMNPReleasedVersionHistoryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNPReleasedVersionHistory")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNPReleasedVersionHistory require credential")
@@ -3575,6 +3630,7 @@ func (c *Client) DescribeMNPSensitiveAPIPermissionApprovalWithContext(ctx contex
     if request == nil {
         request = NewDescribeMNPSensitiveAPIPermissionApprovalRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNPSensitiveAPIPermissionApproval")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNPSensitiveAPIPermissionApproval require credential")
@@ -3634,6 +3690,7 @@ func (c *Client) DescribeMNPSensitiveAPIPermissionApprovalListWithContext(ctx co
     if request == nil {
         request = NewDescribeMNPSensitiveAPIPermissionApprovalListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNPSensitiveAPIPermissionApprovalList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNPSensitiveAPIPermissionApprovalList require credential")
@@ -3695,6 +3752,7 @@ func (c *Client) DescribeMNPSensitiveAPIPermissionListWithContext(ctx context.Co
     if request == nil {
         request = NewDescribeMNPSensitiveAPIPermissionListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNPSensitiveAPIPermissionList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNPSensitiveAPIPermissionList require credential")
@@ -3746,6 +3804,7 @@ func (c *Client) DescribeMNPTypeWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeMNPTypeRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNPType")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNPType require credential")
@@ -3805,6 +3864,7 @@ func (c *Client) DescribeMNPVersionWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeMNPVersionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNPVersion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNPVersion require credential")
@@ -3858,6 +3918,7 @@ func (c *Client) DescribeMNPVersionPreviewWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeMNPVersionPreviewRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeMNPVersionPreview")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeMNPVersionPreview require credential")
@@ -3925,6 +3986,7 @@ func (c *Client) DescribeOfflineMNPPackageWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeOfflineMNPPackageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeOfflineMNPPackage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOfflineMNPPackage require credential")
@@ -3982,6 +4044,7 @@ func (c *Client) DescribeOnlineVersionWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeOnlineVersionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeOnlineVersion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeOnlineVersion require credential")
@@ -4039,6 +4102,7 @@ func (c *Client) DescribeRoleDetailWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeRoleDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeRoleDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRoleDetail require credential")
@@ -4096,6 +4160,7 @@ func (c *Client) DescribeRoleListWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeRoleListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeRoleList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRoleList require credential")
@@ -4165,6 +4230,7 @@ func (c *Client) DescribeSensitiveAPIAuditListWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeSensitiveAPIAuditListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeSensitiveAPIAuditList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSensitiveAPIAuditList require credential")
@@ -4232,6 +4298,7 @@ func (c *Client) DescribeSensitiveAPIListWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeSensitiveAPIListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeSensitiveAPIList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSensitiveAPIList require credential")
@@ -4289,6 +4356,7 @@ func (c *Client) DescribeSensitiveApiApplyDetailWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeSensitiveApiApplyDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeSensitiveApiApplyDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSensitiveApiApplyDetail require credential")
@@ -4346,6 +4414,7 @@ func (c *Client) DescribeSensitiveApiAuthListWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeSensitiveApiAuthListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeSensitiveApiAuthList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSensitiveApiAuthList require credential")
@@ -4417,6 +4486,7 @@ func (c *Client) DescribeSimpleApplicationInfoListWithContext(ctx context.Contex
     if request == nil {
         request = NewDescribeSimpleApplicationInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeSimpleApplicationInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSimpleApplicationInfoList require credential")
@@ -4488,6 +4558,7 @@ func (c *Client) DescribeSimpleTeamListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeSimpleTeamListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeSimpleTeamList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSimpleTeamList require credential")
@@ -4545,6 +4616,7 @@ func (c *Client) DescribeTeamWithContext(ctx context.Context, request *DescribeT
     if request == nil {
         request = NewDescribeTeamRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeTeam")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTeam require credential")
@@ -4628,6 +4700,7 @@ func (c *Client) DescribeTeamDomainListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeTeamDomainListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeTeamDomainList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTeamDomainList require credential")
@@ -4685,6 +4758,7 @@ func (c *Client) DescribeTeamListWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeTeamListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeTeamList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTeamList require credential")
@@ -4742,6 +4816,7 @@ func (c *Client) DescribeTeamMemberListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeTeamMemberListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeTeamMemberList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTeamMemberList require credential")
@@ -4811,6 +4886,7 @@ func (c *Client) DescribeTeamMembersWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeTeamMembersRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeTeamMembers")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTeamMembers require credential")
@@ -4872,6 +4948,7 @@ func (c *Client) DescribeTempSecret4UploadFile2CosWithContext(ctx context.Contex
     if request == nil {
         request = NewDescribeTempSecret4UploadFile2CosRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeTempSecret4UploadFile2Cos")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTempSecret4UploadFile2Cos require credential")
@@ -4931,6 +5008,7 @@ func (c *Client) DescribeUserWithContext(ctx context.Context, request *DescribeU
     if request == nil {
         request = NewDescribeUserRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeUser")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUser require credential")
@@ -4988,6 +5066,7 @@ func (c *Client) DescribeUserDetailWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeUserDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeUserDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUserDetail require credential")
@@ -5049,6 +5128,7 @@ func (c *Client) DescribeUserListWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeUserListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DescribeUserList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUserList require credential")
@@ -5110,6 +5190,7 @@ func (c *Client) DisableApplicationSensitiveAPIWithContext(ctx context.Context, 
     if request == nil {
         request = NewDisableApplicationSensitiveAPIRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DisableApplicationSensitiveAPI")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DisableApplicationSensitiveAPI require credential")
@@ -5181,6 +5262,7 @@ func (c *Client) DisableTeamDomainWithContext(ctx context.Context, request *Disa
     if request == nil {
         request = NewDisableTeamDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "DisableTeamDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DisableTeamDomain require credential")
@@ -5244,6 +5326,7 @@ func (c *Client) EnableApplicationSensitiveAPIWithContext(ctx context.Context, r
     if request == nil {
         request = NewEnableApplicationSensitiveAPIRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "EnableApplicationSensitiveAPI")
     
     if c.GetCredential() == nil {
         return nil, errors.New("EnableApplicationSensitiveAPI require credential")
@@ -5311,6 +5394,7 @@ func (c *Client) ModifyApplicationWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyApplicationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ModifyApplication")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyApplication require credential")
@@ -5382,6 +5466,7 @@ func (c *Client) ModifyApplicationAppKeyWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyApplicationAppKeyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ModifyApplicationAppKey")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyApplicationAppKey require credential")
@@ -5455,6 +5540,7 @@ func (c *Client) ModifyApplicationAppUrlWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyApplicationAppUrlRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ModifyApplicationAppUrl")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyApplicationAppUrl require credential")
@@ -5512,6 +5598,7 @@ func (c *Client) ModifyDomainWithContext(ctx context.Context, request *ModifyDom
     if request == nil {
         request = NewModifyDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ModifyDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDomain require credential")
@@ -5573,6 +5660,7 @@ func (c *Client) ModifyGlobalDomainWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyGlobalDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ModifyGlobalDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyGlobalDomain require credential")
@@ -5642,6 +5730,7 @@ func (c *Client) ModifyMNPWithContext(ctx context.Context, request *ModifyMNPReq
     if request == nil {
         request = NewModifyMNPRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ModifyMNP")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyMNP require credential")
@@ -5703,6 +5792,7 @@ func (c *Client) ModifyMNPDomainWithContext(ctx context.Context, request *Modify
     if request == nil {
         request = NewModifyMNPDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ModifyMNPDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyMNPDomain require credential")
@@ -5798,6 +5888,7 @@ func (c *Client) ModifyMNPStatusOfflineWithContext(ctx context.Context, request 
     if request == nil {
         request = NewModifyMNPStatusOfflineRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ModifyMNPStatusOffline")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyMNPStatusOffline require credential")
@@ -5859,6 +5950,7 @@ func (c *Client) ModifyMNPVersionPreviewWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyMNPVersionPreviewRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ModifyMNPVersionPreview")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyMNPVersionPreview require credential")
@@ -5938,6 +6030,7 @@ func (c *Client) ModifyOnlineVersionWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyOnlineVersionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ModifyOnlineVersion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyOnlineVersion require credential")
@@ -5997,6 +6090,7 @@ func (c *Client) ModifyPlatformAuditStatusWithContext(ctx context.Context, reque
     if request == nil {
         request = NewModifyPlatformAuditStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ModifyPlatformAuditStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyPlatformAuditStatus require credential")
@@ -6068,6 +6162,7 @@ func (c *Client) ModifySensitiveAPIAuditStatusWithContext(ctx context.Context, r
     if request == nil {
         request = NewModifySensitiveAPIAuditStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ModifySensitiveAPIAuditStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifySensitiveAPIAuditStatus require credential")
@@ -6129,6 +6224,7 @@ func (c *Client) ModifyTeamWithContext(ctx context.Context, request *ModifyTeamR
     if request == nil {
         request = NewModifyTeamRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ModifyTeam")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyTeam require credential")
@@ -6188,6 +6284,7 @@ func (c *Client) ModifyTeamMemberWithContext(ctx context.Context, request *Modif
     if request == nil {
         request = NewModifyTeamMemberRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ModifyTeamMember")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyTeamMember require credential")
@@ -6251,6 +6348,7 @@ func (c *Client) ModifyUserWithContext(ctx context.Context, request *ModifyUserR
     if request == nil {
         request = NewModifyUserRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ModifyUser")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyUser require credential")
@@ -6308,6 +6406,7 @@ func (c *Client) ModifyUserPasswordWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyUserPasswordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ModifyUserPassword")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyUserPassword require credential")
@@ -6377,6 +6476,7 @@ func (c *Client) ProcessMNPApprovalWithContext(ctx context.Context, request *Pro
     if request == nil {
         request = NewProcessMNPApprovalRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ProcessMNPApproval")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ProcessMNPApproval require credential")
@@ -6438,6 +6538,7 @@ func (c *Client) ProcessMNPSensitiveAPIPermissionApprovalWithContext(ctx context
     if request == nil {
         request = NewProcessMNPSensitiveAPIPermissionApprovalRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ProcessMNPSensitiveAPIPermissionApproval")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ProcessMNPSensitiveAPIPermissionApproval require credential")
@@ -6509,6 +6610,7 @@ func (c *Client) ReleaseMNPVersionWithContext(ctx context.Context, request *Rele
     if request == nil {
         request = NewReleaseMNPVersionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "ReleaseMNPVersion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ReleaseMNPVersion require credential")
@@ -6572,6 +6674,7 @@ func (c *Client) RemoveMNPWithContext(ctx context.Context, request *RemoveMNPReq
     if request == nil {
         request = NewRemoveMNPRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "RemoveMNP")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RemoveMNP require credential")
@@ -6631,6 +6734,7 @@ func (c *Client) RollbackMNPVersionWithContext(ctx context.Context, request *Rol
     if request == nil {
         request = NewRollbackMNPVersionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "tcmpp", APIVersion, "RollbackMNPVersion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RollbackMNPVersion require credential")

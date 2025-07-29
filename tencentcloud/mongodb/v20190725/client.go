@@ -88,6 +88,7 @@ func (c *Client) AssignProjectWithContext(ctx context.Context, request *AssignPr
     if request == nil {
         request = NewAssignProjectRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "AssignProject")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AssignProject require credential")
@@ -149,6 +150,7 @@ func (c *Client) CreateBackupDBInstanceWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateBackupDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "CreateBackupDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateBackupDBInstance require credential")
@@ -206,6 +208,7 @@ func (c *Client) CreateBackupDownloadTaskWithContext(ctx context.Context, reques
     if request == nil {
         request = NewCreateBackupDownloadTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "CreateBackupDownloadTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateBackupDownloadTask require credential")
@@ -287,6 +290,7 @@ func (c *Client) CreateDBInstanceWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "CreateDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDBInstance require credential")
@@ -370,6 +374,7 @@ func (c *Client) CreateDBInstanceHourWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateDBInstanceHourRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "CreateDBInstanceHour")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDBInstanceHour require credential")
@@ -423,6 +428,7 @@ func (c *Client) DescribeAsyncRequestInfoWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeAsyncRequestInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeAsyncRequestInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAsyncRequestInfo require credential")
@@ -480,6 +486,7 @@ func (c *Client) DescribeBackupDownloadTaskWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeBackupDownloadTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeBackupDownloadTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBackupDownloadTask require credential")
@@ -537,6 +544,7 @@ func (c *Client) DescribeClientConnectionsWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeClientConnectionsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeClientConnections")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeClientConnections require credential")
@@ -590,6 +598,7 @@ func (c *Client) DescribeDBBackupsWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeDBBackupsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeDBBackups")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBBackups require credential")
@@ -643,6 +652,7 @@ func (c *Client) DescribeDBInstanceDealWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeDBInstanceDealRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeDBInstanceDeal")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBInstanceDeal require credential")
@@ -694,6 +704,7 @@ func (c *Client) DescribeDBInstanceNamespaceWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeDBInstanceNamespaceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeDBInstanceNamespace")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBInstanceNamespace require credential")
@@ -755,6 +766,7 @@ func (c *Client) DescribeDBInstancesWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDBInstances require credential")
@@ -814,6 +826,7 @@ func (c *Client) DescribeInstanceParamsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeInstanceParamsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeInstanceParams")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeInstanceParams require credential")
@@ -869,6 +882,7 @@ func (c *Client) DescribeSecurityGroupWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeSecurityGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeSecurityGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSecurityGroup require credential")
@@ -932,6 +946,7 @@ func (c *Client) DescribeSlowLogPatternsWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeSlowLogPatternsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeSlowLogPatterns")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSlowLogPatterns require credential")
@@ -995,6 +1010,7 @@ func (c *Client) DescribeSlowLogsWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeSlowLogsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeSlowLogs")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSlowLogs require credential")
@@ -1048,6 +1064,7 @@ func (c *Client) DescribeSpecInfoWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeSpecInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeSpecInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSpecInfo require credential")
@@ -1103,6 +1120,7 @@ func (c *Client) FlushInstanceRouterConfigWithContext(ctx context.Context, reque
     if request == nil {
         request = NewFlushInstanceRouterConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "FlushInstanceRouterConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("FlushInstanceRouterConfig require credential")
@@ -1168,6 +1186,7 @@ func (c *Client) InquirePriceCreateDBInstancesWithContext(ctx context.Context, r
     if request == nil {
         request = NewInquirePriceCreateDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "InquirePriceCreateDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InquirePriceCreateDBInstances require credential")
@@ -1221,6 +1240,7 @@ func (c *Client) InquirePriceModifyDBInstanceSpecWithContext(ctx context.Context
     if request == nil {
         request = NewInquirePriceModifyDBInstanceSpecRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "InquirePriceModifyDBInstanceSpec")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InquirePriceModifyDBInstanceSpec require credential")
@@ -1280,6 +1300,7 @@ func (c *Client) InquirePriceRenewDBInstancesWithContext(ctx context.Context, re
     if request == nil {
         request = NewInquirePriceRenewDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "InquirePriceRenewDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("InquirePriceRenewDBInstances require credential")
@@ -1343,6 +1364,7 @@ func (c *Client) IsolateDBInstanceWithContext(ctx context.Context, request *Isol
     if request == nil {
         request = NewIsolateDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "IsolateDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("IsolateDBInstance require credential")
@@ -1404,6 +1426,7 @@ func (c *Client) ModifyDBInstanceNetworkAddressWithContext(ctx context.Context, 
     if request == nil {
         request = NewModifyDBInstanceNetworkAddressRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "ModifyDBInstanceNetworkAddress")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBInstanceNetworkAddress require credential")
@@ -1465,6 +1488,7 @@ func (c *Client) ModifyDBInstanceSecurityGroupWithContext(ctx context.Context, r
     if request == nil {
         request = NewModifyDBInstanceSecurityGroupRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "ModifyDBInstanceSecurityGroup")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBInstanceSecurityGroup require credential")
@@ -1530,6 +1554,7 @@ func (c *Client) ModifyDBInstanceSpecWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyDBInstanceSpecRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "ModifyDBInstanceSpec")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDBInstanceSpec require credential")
@@ -1589,6 +1614,7 @@ func (c *Client) OfflineIsolatedDBInstanceWithContext(ctx context.Context, reque
     if request == nil {
         request = NewOfflineIsolatedDBInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "OfflineIsolatedDBInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("OfflineIsolatedDBInstance require credential")
@@ -1648,6 +1674,7 @@ func (c *Client) RenameInstanceWithContext(ctx context.Context, request *RenameI
     if request == nil {
         request = NewRenameInstanceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "RenameInstance")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RenameInstance require credential")
@@ -1701,6 +1728,7 @@ func (c *Client) RenewDBInstancesWithContext(ctx context.Context, request *Renew
     if request == nil {
         request = NewRenewDBInstancesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "RenewDBInstances")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RenewDBInstances require credential")
@@ -1766,6 +1794,7 @@ func (c *Client) ResetDBInstancePasswordWithContext(ctx context.Context, request
     if request == nil {
         request = NewResetDBInstancePasswordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "ResetDBInstancePassword")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ResetDBInstancePassword require credential")

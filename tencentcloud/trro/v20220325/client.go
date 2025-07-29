@@ -92,6 +92,7 @@ func (c *Client) BatchDeleteDevicesWithContext(ctx context.Context, request *Bat
     if request == nil {
         request = NewBatchDeleteDevicesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trro", APIVersion, "BatchDeleteDevices")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchDeleteDevices require credential")
@@ -151,6 +152,7 @@ func (c *Client) BatchDeletePolicyWithContext(ctx context.Context, request *Batc
     if request == nil {
         request = NewBatchDeletePolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trro", APIVersion, "BatchDeletePolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BatchDeletePolicy require credential")
@@ -210,6 +212,7 @@ func (c *Client) CreateDeviceWithContext(ctx context.Context, request *CreateDev
     if request == nil {
         request = NewCreateDeviceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trro", APIVersion, "CreateDevice")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateDevice require credential")
@@ -267,6 +270,7 @@ func (c *Client) CreateProjectWithContext(ctx context.Context, request *CreatePr
     if request == nil {
         request = NewCreateProjectRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trro", APIVersion, "CreateProject")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateProject require credential")
@@ -326,6 +330,7 @@ func (c *Client) DeleteProjectWithContext(ctx context.Context, request *DeletePr
     if request == nil {
         request = NewDeleteProjectRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trro", APIVersion, "DeleteProject")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteProject require credential")
@@ -385,6 +390,7 @@ func (c *Client) DescribeDeviceInfoWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeDeviceInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trro", APIVersion, "DescribeDeviceInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDeviceInfo require credential")
@@ -444,6 +450,7 @@ func (c *Client) DescribeDeviceSessionListWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeDeviceSessionListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trro", APIVersion, "DescribeDeviceSessionList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDeviceSessionList require credential")
@@ -503,6 +510,7 @@ func (c *Client) DescribeProjectInfoWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeProjectInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trro", APIVersion, "DescribeProjectInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeProjectInfo require credential")
@@ -562,6 +570,7 @@ func (c *Client) DescribeProjectListWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeProjectListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trro", APIVersion, "DescribeProjectList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeProjectList require credential")
@@ -621,6 +630,7 @@ func (c *Client) DescribeRecentSessionListWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeRecentSessionListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trro", APIVersion, "DescribeRecentSessionList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRecentSessionList require credential")
@@ -682,6 +692,7 @@ func (c *Client) DescribeSessionStatisticsWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeSessionStatisticsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trro", APIVersion, "DescribeSessionStatistics")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSessionStatistics require credential")
@@ -743,6 +754,7 @@ func (c *Client) DescribeSessionStatisticsByIntervalWithContext(ctx context.Cont
     if request == nil {
         request = NewDescribeSessionStatisticsByIntervalRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trro", APIVersion, "DescribeSessionStatisticsByInterval")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeSessionStatisticsByInterval require credential")
@@ -796,6 +808,7 @@ func (c *Client) GetDeviceLicenseWithContext(ctx context.Context, request *GetDe
     if request == nil {
         request = NewGetDeviceLicenseRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trro", APIVersion, "GetDeviceLicense")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetDeviceLicense require credential")
@@ -847,6 +860,7 @@ func (c *Client) GetDevicesWithContext(ctx context.Context, request *GetDevicesR
     if request == nil {
         request = NewGetDevicesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trro", APIVersion, "GetDevices")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetDevices require credential")
@@ -900,6 +914,7 @@ func (c *Client) GetLicenseStatWithContext(ctx context.Context, request *GetLice
     if request == nil {
         request = NewGetLicenseStatRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trro", APIVersion, "GetLicenseStat")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetLicenseStat require credential")
@@ -951,6 +966,7 @@ func (c *Client) GetLicensesWithContext(ctx context.Context, request *GetLicense
     if request == nil {
         request = NewGetLicensesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trro", APIVersion, "GetLicenses")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetLicenses require credential")
@@ -1010,6 +1026,7 @@ func (c *Client) ModifyDeviceWithContext(ctx context.Context, request *ModifyDev
     if request == nil {
         request = NewModifyDeviceRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trro", APIVersion, "ModifyDevice")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyDevice require credential")
@@ -1069,6 +1086,7 @@ func (c *Client) ModifyPolicyWithContext(ctx context.Context, request *ModifyPol
     if request == nil {
         request = NewModifyPolicyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trro", APIVersion, "ModifyPolicy")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyPolicy require credential")
@@ -1128,6 +1146,7 @@ func (c *Client) ModifyProjectWithContext(ctx context.Context, request *ModifyPr
     if request == nil {
         request = NewModifyProjectRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "trro", APIVersion, "ModifyProject")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyProject require credential")

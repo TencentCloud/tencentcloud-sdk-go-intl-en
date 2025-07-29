@@ -126,6 +126,7 @@ func (c *Client) AddDelayLiveStreamWithContext(ctx context.Context, request *Add
     if request == nil {
         request = NewAddDelayLiveStreamRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "AddDelayLiveStream")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AddDelayLiveStream require credential")
@@ -251,6 +252,7 @@ func (c *Client) AddLiveDomainWithContext(ctx context.Context, request *AddLiveD
     if request == nil {
         request = NewAddLiveDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "AddLiveDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AddLiveDomain require credential")
@@ -320,6 +322,7 @@ func (c *Client) AddLiveWatermarkWithContext(ctx context.Context, request *AddLi
     if request == nil {
         request = NewAddLiveWatermarkRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "AddLiveWatermark")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AddLiveWatermark require credential")
@@ -373,6 +376,7 @@ func (c *Client) AuthenticateDomainOwnerWithContext(ctx context.Context, request
     if request == nil {
         request = NewAuthenticateDomainOwnerRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "AuthenticateDomainOwner")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AuthenticateDomainOwner require credential")
@@ -444,6 +448,7 @@ func (c *Client) CancelCommonMixStreamWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCancelCommonMixStreamRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "CancelCommonMixStream")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CancelCommonMixStream require credential")
@@ -555,6 +560,7 @@ func (c *Client) CreateCommonMixStreamWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCreateCommonMixStreamRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "CreateCommonMixStream")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateCommonMixStream require credential")
@@ -630,6 +636,7 @@ func (c *Client) CreateLiveCallbackRuleWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateLiveCallbackRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "CreateLiveCallbackRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateLiveCallbackRule require credential")
@@ -733,6 +740,7 @@ func (c *Client) CreateLiveCallbackTemplateWithContext(ctx context.Context, requ
     if request == nil {
         request = NewCreateLiveCallbackTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "CreateLiveCallbackTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateLiveCallbackTemplate require credential")
@@ -816,6 +824,7 @@ func (c *Client) CreateLivePadRuleWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateLivePadRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "CreateLivePadRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateLivePadRule require credential")
@@ -895,6 +904,7 @@ func (c *Client) CreateLivePadTemplateWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCreateLivePadTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "CreateLivePadTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateLivePadTemplate require credential")
@@ -1010,6 +1020,7 @@ func (c *Client) CreateLivePullStreamTaskWithContext(ctx context.Context, reques
     if request == nil {
         request = NewCreateLivePullStreamTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "CreateLivePullStreamTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateLivePullStreamTask require credential")
@@ -1145,6 +1156,7 @@ func (c *Client) CreateLiveRecordWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateLiveRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "CreateLiveRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateLiveRecord require credential")
@@ -1232,6 +1244,7 @@ func (c *Client) CreateLiveRecordRuleWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateLiveRecordRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "CreateLiveRecordRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateLiveRecordRule require credential")
@@ -1323,6 +1336,7 @@ func (c *Client) CreateLiveRecordTemplateWithContext(ctx context.Context, reques
     if request == nil {
         request = NewCreateLiveRecordTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "CreateLiveRecordTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateLiveRecordTemplate require credential")
@@ -1416,6 +1430,7 @@ func (c *Client) CreateLiveSnapshotRuleWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateLiveSnapshotRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "CreateLiveSnapshotRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateLiveSnapshotRule require credential")
@@ -1513,6 +1528,7 @@ func (c *Client) CreateLiveSnapshotTemplateWithContext(ctx context.Context, requ
     if request == nil {
         request = NewCreateLiveSnapshotTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "CreateLiveSnapshotTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateLiveSnapshotTemplate require credential")
@@ -1598,6 +1614,7 @@ func (c *Client) CreateLiveTimeShiftRuleWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateLiveTimeShiftRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "CreateLiveTimeShiftRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateLiveTimeShiftRule require credential")
@@ -1677,6 +1694,7 @@ func (c *Client) CreateLiveTimeShiftTemplateWithContext(ctx context.Context, req
     if request == nil {
         request = NewCreateLiveTimeShiftTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "CreateLiveTimeShiftTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateLiveTimeShiftTemplate require credential")
@@ -1770,6 +1788,7 @@ func (c *Client) CreateLiveTranscodeRuleWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateLiveTranscodeRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "CreateLiveTranscodeRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateLiveTranscodeRule require credential")
@@ -1869,6 +1888,7 @@ func (c *Client) CreateLiveTranscodeTemplateWithContext(ctx context.Context, req
     if request == nil {
         request = NewCreateLiveTranscodeTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "CreateLiveTranscodeTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateLiveTranscodeTemplate require credential")
@@ -1956,6 +1976,7 @@ func (c *Client) CreateLiveWatermarkRuleWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateLiveWatermarkRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "CreateLiveWatermarkRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateLiveWatermarkRule require credential")
@@ -2061,6 +2082,7 @@ func (c *Client) CreateRecordTaskWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateRecordTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "CreateRecordTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateRecordTask require credential")
@@ -2152,6 +2174,7 @@ func (c *Client) CreateScreenshotTaskWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateScreenshotTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "CreateScreenshotTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateScreenshotTask require credential")
@@ -2219,6 +2242,7 @@ func (c *Client) DeleteLiveCallbackRuleWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDeleteLiveCallbackRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DeleteLiveCallbackRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteLiveCallbackRule require credential")
@@ -2306,6 +2330,7 @@ func (c *Client) DeleteLiveCallbackTemplateWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDeleteLiveCallbackTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DeleteLiveCallbackTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteLiveCallbackTemplate require credential")
@@ -2387,6 +2412,7 @@ func (c *Client) DeleteLiveDomainWithContext(ctx context.Context, request *Delet
     if request == nil {
         request = NewDeleteLiveDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DeleteLiveDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteLiveDomain require credential")
@@ -2466,6 +2492,7 @@ func (c *Client) DeleteLivePullStreamTaskWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDeleteLivePullStreamTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DeleteLivePullStreamTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteLivePullStreamTask require credential")
@@ -2539,6 +2566,7 @@ func (c *Client) DeleteLiveRecordWithContext(ctx context.Context, request *Delet
     if request == nil {
         request = NewDeleteLiveRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DeleteLiveRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteLiveRecord require credential")
@@ -2622,6 +2650,7 @@ func (c *Client) DeleteLiveRecordRuleWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDeleteLiveRecordRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DeleteLiveRecordRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteLiveRecordRule require credential")
@@ -2703,6 +2732,7 @@ func (c *Client) DeleteLiveRecordTemplateWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDeleteLiveRecordTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DeleteLiveRecordTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteLiveRecordTemplate require credential")
@@ -2786,6 +2816,7 @@ func (c *Client) DeleteLiveSnapshotRuleWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDeleteLiveSnapshotRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DeleteLiveSnapshotRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteLiveSnapshotRule require credential")
@@ -2867,6 +2898,7 @@ func (c *Client) DeleteLiveSnapshotTemplateWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDeleteLiveSnapshotTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DeleteLiveSnapshotTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteLiveSnapshotTemplate require credential")
@@ -2950,6 +2982,7 @@ func (c *Client) DeleteLiveTimeShiftRuleWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeleteLiveTimeShiftRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DeleteLiveTimeShiftRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteLiveTimeShiftRule require credential")
@@ -3035,6 +3068,7 @@ func (c *Client) DeleteLiveTimeShiftTemplateWithContext(ctx context.Context, req
     if request == nil {
         request = NewDeleteLiveTimeShiftTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DeleteLiveTimeShiftTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteLiveTimeShiftTemplate require credential")
@@ -3124,6 +3158,7 @@ func (c *Client) DeleteLiveTranscodeRuleWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeleteLiveTranscodeRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DeleteLiveTranscodeRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteLiveTranscodeRule require credential")
@@ -3209,6 +3244,7 @@ func (c *Client) DeleteLiveTranscodeTemplateWithContext(ctx context.Context, req
     if request == nil {
         request = NewDeleteLiveTranscodeTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DeleteLiveTranscodeTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteLiveTranscodeTemplate require credential")
@@ -3278,6 +3314,7 @@ func (c *Client) DeleteLiveWatermarkWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDeleteLiveWatermarkRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DeleteLiveWatermark")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteLiveWatermark require credential")
@@ -3361,6 +3398,7 @@ func (c *Client) DeleteLiveWatermarkRuleWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeleteLiveWatermarkRuleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DeleteLiveWatermarkRule")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteLiveWatermarkRule require credential")
@@ -3428,6 +3466,7 @@ func (c *Client) DeleteRecordTaskWithContext(ctx context.Context, request *Delet
     if request == nil {
         request = NewDeleteRecordTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DeleteRecordTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteRecordTask require credential")
@@ -3491,6 +3530,7 @@ func (c *Client) DescribeAllStreamPlayInfoListWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeAllStreamPlayInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeAllStreamPlayInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeAllStreamPlayInfoList require credential")
@@ -3552,6 +3592,7 @@ func (c *Client) DescribeBillBandwidthAndFluxListWithContext(ctx context.Context
     if request == nil {
         request = NewDescribeBillBandwidthAndFluxListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeBillBandwidthAndFluxList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeBillBandwidthAndFluxList require credential")
@@ -3615,6 +3656,7 @@ func (c *Client) DescribeConcurrentRecordStreamNumWithContext(ctx context.Contex
     if request == nil {
         request = NewDescribeConcurrentRecordStreamNumRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeConcurrentRecordStreamNum")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeConcurrentRecordStreamNum require credential")
@@ -3678,6 +3720,7 @@ func (c *Client) DescribeDeliverBandwidthListWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeDeliverBandwidthListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeDeliverBandwidthList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeDeliverBandwidthList require credential")
@@ -3741,6 +3784,7 @@ func (c *Client) DescribeGroupProIspPlayInfoListWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeGroupProIspPlayInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeGroupProIspPlayInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeGroupProIspPlayInfoList require credential")
@@ -3806,6 +3850,7 @@ func (c *Client) DescribeHttpStatusInfoListWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeHttpStatusInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeHttpStatusInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeHttpStatusInfoList require credential")
@@ -3871,6 +3916,7 @@ func (c *Client) DescribeLiveCallbackRulesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeLiveCallbackRulesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveCallbackRules")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveCallbackRules require credential")
@@ -3958,6 +4004,7 @@ func (c *Client) DescribeLiveCallbackTemplateWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeLiveCallbackTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveCallbackTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveCallbackTemplate require credential")
@@ -4047,6 +4094,7 @@ func (c *Client) DescribeLiveCallbackTemplatesWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeLiveCallbackTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveCallbackTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveCallbackTemplates require credential")
@@ -4114,6 +4162,7 @@ func (c *Client) DescribeLiveCertWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeLiveCertRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveCert")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveCert require credential")
@@ -4181,6 +4230,7 @@ func (c *Client) DescribeLiveCertsWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeLiveCertsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveCerts")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveCerts require credential")
@@ -4248,6 +4298,7 @@ func (c *Client) DescribeLiveDelayInfoListWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeLiveDelayInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveDelayInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveDelayInfoList require credential")
@@ -4319,6 +4370,7 @@ func (c *Client) DescribeLiveDomainWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeLiveDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveDomain require credential")
@@ -4386,6 +4438,7 @@ func (c *Client) DescribeLiveDomainCertWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeLiveDomainCertRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveDomainCert")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveDomainCert require credential")
@@ -4451,6 +4504,7 @@ func (c *Client) DescribeLiveDomainCertBindingsWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeLiveDomainCertBindingsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveDomainCertBindings")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveDomainCertBindings require credential")
@@ -4526,6 +4580,7 @@ func (c *Client) DescribeLiveDomainRefererWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeLiveDomainRefererRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveDomainReferer")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveDomainReferer require credential")
@@ -4595,6 +4650,7 @@ func (c *Client) DescribeLiveDomainsWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeLiveDomainsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveDomains")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveDomains require credential")
@@ -4670,6 +4726,7 @@ func (c *Client) DescribeLiveForbidStreamListWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeLiveForbidStreamListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveForbidStreamList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveForbidStreamList require credential")
@@ -4741,6 +4798,7 @@ func (c *Client) DescribeLivePlayAuthKeyWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeLivePlayAuthKeyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLivePlayAuthKey")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLivePlayAuthKey require credential")
@@ -4808,6 +4866,7 @@ func (c *Client) DescribeLivePullStreamTasksWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeLivePullStreamTasksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLivePullStreamTasks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLivePullStreamTasks require credential")
@@ -4879,6 +4938,7 @@ func (c *Client) DescribeLivePushAuthKeyWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeLivePushAuthKeyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLivePushAuthKey")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLivePushAuthKey require credential")
@@ -4958,6 +5018,7 @@ func (c *Client) DescribeLiveRecordRulesWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeLiveRecordRulesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveRecordRules")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveRecordRules require credential")
@@ -5039,6 +5100,7 @@ func (c *Client) DescribeLiveRecordTemplateWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeLiveRecordTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveRecordTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveRecordTemplate require credential")
@@ -5118,6 +5180,7 @@ func (c *Client) DescribeLiveRecordTemplatesWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeLiveRecordTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveRecordTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveRecordTemplates require credential")
@@ -5197,6 +5260,7 @@ func (c *Client) DescribeLiveSnapshotRulesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeLiveSnapshotRulesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveSnapshotRules")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveSnapshotRules require credential")
@@ -5284,6 +5348,7 @@ func (c *Client) DescribeLiveSnapshotTemplateWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeLiveSnapshotTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveSnapshotTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveSnapshotTemplate require credential")
@@ -5365,6 +5430,7 @@ func (c *Client) DescribeLiveSnapshotTemplatesWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeLiveSnapshotTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveSnapshotTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveSnapshotTemplates require credential")
@@ -5448,6 +5514,7 @@ func (c *Client) DescribeLiveStreamEventListWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeLiveStreamEventListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveStreamEventList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveStreamEventList require credential")
@@ -5547,6 +5614,7 @@ func (c *Client) DescribeLiveStreamOnlineListWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeLiveStreamOnlineListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveStreamOnlineList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveStreamOnlineList require credential")
@@ -5636,6 +5704,7 @@ func (c *Client) DescribeLiveStreamPublishedListWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeLiveStreamPublishedListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveStreamPublishedList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveStreamPublishedList require credential")
@@ -5707,6 +5776,7 @@ func (c *Client) DescribeLiveStreamPushInfoListWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeLiveStreamPushInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveStreamPushInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveStreamPushInfoList require credential")
@@ -5828,6 +5898,7 @@ func (c *Client) DescribeLiveStreamStateWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeLiveStreamStateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveStreamState")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveStreamState require credential")
@@ -5891,6 +5962,7 @@ func (c *Client) DescribeLiveTimeShiftBillInfoListWithContext(ctx context.Contex
     if request == nil {
         request = NewDescribeLiveTimeShiftBillInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveTimeShiftBillInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveTimeShiftBillInfoList require credential")
@@ -5956,6 +6028,7 @@ func (c *Client) DescribeLiveTimeShiftRulesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeLiveTimeShiftRulesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveTimeShiftRules")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveTimeShiftRules require credential")
@@ -6049,6 +6122,7 @@ func (c *Client) DescribeLiveTimeShiftTemplatesWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeLiveTimeShiftTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveTimeShiftTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveTimeShiftTemplates require credential")
@@ -6110,6 +6184,7 @@ func (c *Client) DescribeLiveTranscodeDetailInfoWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeLiveTranscodeDetailInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveTranscodeDetailInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveTranscodeDetailInfo require credential")
@@ -6189,6 +6264,7 @@ func (c *Client) DescribeLiveTranscodeRulesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeLiveTranscodeRulesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveTranscodeRules")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveTranscodeRules require credential")
@@ -6272,6 +6348,7 @@ func (c *Client) DescribeLiveTranscodeTemplateWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeLiveTranscodeTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveTranscodeTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveTranscodeTemplate require credential")
@@ -6353,6 +6430,7 @@ func (c *Client) DescribeLiveTranscodeTemplatesWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeLiveTranscodeTemplatesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveTranscodeTemplates")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveTranscodeTemplates require credential")
@@ -6428,6 +6506,7 @@ func (c *Client) DescribeLiveTranscodeTotalInfoWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeLiveTranscodeTotalInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveTranscodeTotalInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveTranscodeTotalInfo require credential")
@@ -6509,6 +6588,7 @@ func (c *Client) DescribeLiveWatermarkWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeLiveWatermarkRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveWatermark")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveWatermark require credential")
@@ -6588,6 +6668,7 @@ func (c *Client) DescribeLiveWatermarkRulesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeLiveWatermarkRulesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveWatermarkRules")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveWatermarkRules require credential")
@@ -6643,6 +6724,7 @@ func (c *Client) DescribeLiveWatermarksWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeLiveWatermarksRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveWatermarks")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeLiveWatermarks require credential")
@@ -6704,6 +6786,7 @@ func (c *Client) DescribePlayErrorCodeDetailInfoListWithContext(ctx context.Cont
     if request == nil {
         request = NewDescribePlayErrorCodeDetailInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribePlayErrorCodeDetailInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribePlayErrorCodeDetailInfoList require credential")
@@ -6765,6 +6848,7 @@ func (c *Client) DescribePlayErrorCodeSumInfoListWithContext(ctx context.Context
     if request == nil {
         request = NewDescribePlayErrorCodeSumInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribePlayErrorCodeSumInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribePlayErrorCodeSumInfoList require credential")
@@ -6836,6 +6920,7 @@ func (c *Client) DescribeProvinceIspPlayInfoListWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeProvinceIspPlayInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeProvinceIspPlayInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeProvinceIspPlayInfoList require credential")
@@ -6913,6 +6998,7 @@ func (c *Client) DescribeRecordTaskWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeRecordTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeRecordTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeRecordTask require credential")
@@ -6978,6 +7064,7 @@ func (c *Client) DescribeScreenShotSheetNumListWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeScreenShotSheetNumListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeScreenShotSheetNumList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeScreenShotSheetNumList require credential")
@@ -7041,6 +7128,7 @@ func (c *Client) DescribeStreamDayPlayInfoListWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeStreamDayPlayInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeStreamDayPlayInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamDayPlayInfoList require credential")
@@ -7110,6 +7198,7 @@ func (c *Client) DescribeStreamPlayInfoListWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeStreamPlayInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeStreamPlayInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPlayInfoList require credential")
@@ -7171,6 +7260,7 @@ func (c *Client) DescribeStreamPushInfoListWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeStreamPushInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeStreamPushInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeStreamPushInfoList require credential")
@@ -7236,6 +7326,7 @@ func (c *Client) DescribeTimeShiftRecordDetailWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeTimeShiftRecordDetailRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeTimeShiftRecordDetail")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTimeShiftRecordDetail require credential")
@@ -7301,6 +7392,7 @@ func (c *Client) DescribeTimeShiftStreamListWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeTimeShiftStreamListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeTimeShiftStreamList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTimeShiftStreamList require credential")
@@ -7362,6 +7454,7 @@ func (c *Client) DescribeTopClientIpSumInfoListWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeTopClientIpSumInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeTopClientIpSumInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTopClientIpSumInfoList require credential")
@@ -7417,6 +7510,7 @@ func (c *Client) DescribeTranscodeTaskNumWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeTranscodeTaskNumRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeTranscodeTaskNum")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeTranscodeTaskNum require credential")
@@ -7478,6 +7572,7 @@ func (c *Client) DescribeUploadStreamNumsWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeUploadStreamNumsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeUploadStreamNums")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeUploadStreamNums require credential")
@@ -7541,6 +7636,7 @@ func (c *Client) DescribeVisitTopSumInfoListWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeVisitTopSumInfoListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeVisitTopSumInfoList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeVisitTopSumInfoList require credential")
@@ -7630,6 +7726,7 @@ func (c *Client) DropLiveStreamWithContext(ctx context.Context, request *DropLiv
     if request == nil {
         request = NewDropLiveStreamRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DropLiveStream")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DropLiveStream require credential")
@@ -7705,6 +7802,7 @@ func (c *Client) EnableLiveDomainWithContext(ctx context.Context, request *Enabl
     if request == nil {
         request = NewEnableLiveDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "EnableLiveDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("EnableLiveDomain require credential")
@@ -7768,6 +7866,7 @@ func (c *Client) ForbidLiveDomainWithContext(ctx context.Context, request *Forbi
     if request == nil {
         request = NewForbidLiveDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "ForbidLiveDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ForbidLiveDomain require credential")
@@ -7869,6 +7968,7 @@ func (c *Client) ForbidLiveStreamWithContext(ctx context.Context, request *Forbi
     if request == nil {
         request = NewForbidLiveStreamRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "ForbidLiveStream")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ForbidLiveStream require credential")
@@ -7962,6 +8062,7 @@ func (c *Client) ModifyLiveCallbackTemplateWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyLiveCallbackTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "ModifyLiveCallbackTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyLiveCallbackTemplate require credential")
@@ -8097,6 +8198,7 @@ func (c *Client) ModifyLiveDomainCertBindingsWithContext(ctx context.Context, re
     if request == nil {
         request = NewModifyLiveDomainCertBindingsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "ModifyLiveDomainCertBindings")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyLiveDomainCertBindings require credential")
@@ -8172,6 +8274,7 @@ func (c *Client) ModifyLiveDomainRefererWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyLiveDomainRefererRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "ModifyLiveDomainReferer")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyLiveDomainReferer require credential")
@@ -8241,6 +8344,7 @@ func (c *Client) ModifyLivePlayAuthKeyWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyLivePlayAuthKeyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "ModifyLivePlayAuthKey")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyLivePlayAuthKey require credential")
@@ -8316,6 +8420,7 @@ func (c *Client) ModifyLivePlayDomainWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyLivePlayDomainRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "ModifyLivePlayDomain")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyLivePlayDomain require credential")
@@ -8405,6 +8510,7 @@ func (c *Client) ModifyLivePullStreamTaskWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyLivePullStreamTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "ModifyLivePullStreamTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyLivePullStreamTask require credential")
@@ -8476,6 +8582,7 @@ func (c *Client) ModifyLivePushAuthKeyWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyLivePushAuthKeyRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "ModifyLivePushAuthKey")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyLivePushAuthKey require credential")
@@ -8559,6 +8666,7 @@ func (c *Client) ModifyLiveRecordTemplateWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyLiveRecordTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "ModifyLiveRecordTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyLiveRecordTemplate require credential")
@@ -8652,6 +8760,7 @@ func (c *Client) ModifyLiveSnapshotTemplateWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyLiveSnapshotTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "ModifyLiveSnapshotTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyLiveSnapshotTemplate require credential")
@@ -8731,6 +8840,7 @@ func (c *Client) ModifyLiveTimeShiftTemplateWithContext(ctx context.Context, req
     if request == nil {
         request = NewModifyLiveTimeShiftTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "ModifyLiveTimeShiftTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyLiveTimeShiftTemplate require credential")
@@ -8822,6 +8932,7 @@ func (c *Client) ModifyLiveTranscodeTemplateWithContext(ctx context.Context, req
     if request == nil {
         request = NewModifyLiveTranscodeTemplateRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "ModifyLiveTranscodeTemplate")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyLiveTranscodeTemplate require credential")
@@ -8885,6 +8996,7 @@ func (c *Client) RestartLivePullStreamTaskWithContext(ctx context.Context, reque
     if request == nil {
         request = NewRestartLivePullStreamTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "RestartLivePullStreamTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("RestartLivePullStreamTask require credential")
@@ -8988,6 +9100,7 @@ func (c *Client) ResumeDelayLiveStreamWithContext(ctx context.Context, request *
     if request == nil {
         request = NewResumeDelayLiveStreamRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "ResumeDelayLiveStream")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ResumeDelayLiveStream require credential")
@@ -9073,6 +9186,7 @@ func (c *Client) ResumeLiveStreamWithContext(ctx context.Context, request *Resum
     if request == nil {
         request = NewResumeLiveStreamRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "ResumeLiveStream")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ResumeLiveStream require credential")
@@ -9158,6 +9272,7 @@ func (c *Client) StartLivePadStreamWithContext(ctx context.Context, request *Sta
     if request == nil {
         request = NewStartLivePadStreamRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "StartLivePadStream")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartLivePadStream require credential")
@@ -9243,6 +9358,7 @@ func (c *Client) StopLivePadStreamWithContext(ctx context.Context, request *Stop
     if request == nil {
         request = NewStopLivePadStreamRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "StopLivePadStream")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopLivePadStream require credential")
@@ -9314,6 +9430,7 @@ func (c *Client) StopLiveRecordWithContext(ctx context.Context, request *StopLiv
     if request == nil {
         request = NewStopLiveRecordRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "StopLiveRecord")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopLiveRecord require credential")
@@ -9383,6 +9500,7 @@ func (c *Client) StopRecordTaskWithContext(ctx context.Context, request *StopRec
     if request == nil {
         request = NewStopRecordTaskRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "StopRecordTask")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopRecordTask require credential")
@@ -9446,6 +9564,7 @@ func (c *Client) UnBindLiveDomainCertWithContext(ctx context.Context, request *U
     if request == nil {
         request = NewUnBindLiveDomainCertRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "UnBindLiveDomainCert")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UnBindLiveDomainCert require credential")
@@ -9513,6 +9632,7 @@ func (c *Client) UpdateLiveWatermarkWithContext(ctx context.Context, request *Up
     if request == nil {
         request = NewUpdateLiveWatermarkRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "UpdateLiveWatermark")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UpdateLiveWatermark require credential")

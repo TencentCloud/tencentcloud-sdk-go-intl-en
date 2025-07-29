@@ -126,6 +126,7 @@ func (c *Client) AssumeRoleWithContext(ctx context.Context, request *AssumeRoleR
     if request == nil {
         request = NewAssumeRoleRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sts", APIVersion, "AssumeRole")
     
     if c.GetCredential() == nil {
         return nil, errors.New("AssumeRole require credential")
@@ -215,6 +216,7 @@ func (c *Client) AssumeRoleWithSAMLWithContext(ctx context.Context, request *Ass
     if request == nil {
         request = NewAssumeRoleWithSAMLRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sts", APIVersion, "AssumeRoleWithSAML")
     
     request.SetContext(ctx)
     
@@ -270,6 +272,7 @@ func (c *Client) AssumeRoleWithWebIdentityWithContext(ctx context.Context, reque
     if request == nil {
         request = NewAssumeRoleWithWebIdentityRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sts", APIVersion, "AssumeRoleWithWebIdentity")
     
     request.SetContext(ctx)
     
@@ -323,6 +326,7 @@ func (c *Client) GetCallerIdentityWithContext(ctx context.Context, request *GetC
     if request == nil {
         request = NewGetCallerIdentityRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sts", APIVersion, "GetCallerIdentity")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetCallerIdentity require credential")
@@ -404,6 +408,7 @@ func (c *Client) GetFederationTokenWithContext(ctx context.Context, request *Get
     if request == nil {
         request = NewGetFederationTokenRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "sts", APIVersion, "GetFederationToken")
     
     if c.GetCredential() == nil {
         return nil, errors.New("GetFederationToken require credential")

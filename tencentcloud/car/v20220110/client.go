@@ -96,6 +96,7 @@ func (c *Client) ApplyConcurrentWithContext(ctx context.Context, request *ApplyC
     if request == nil {
         request = NewApplyConcurrentRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "ApplyConcurrent")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ApplyConcurrent require credential")
@@ -159,6 +160,7 @@ func (c *Client) BindConcurrentPackagesToProjectWithContext(ctx context.Context,
     if request == nil {
         request = NewBindConcurrentPackagesToProjectRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "BindConcurrentPackagesToProject")
     
     if c.GetCredential() == nil {
         return nil, errors.New("BindConcurrentPackagesToProject require credential")
@@ -218,6 +220,7 @@ func (c *Client) CreateApplicationWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateApplicationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "CreateApplication")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateApplication require credential")
@@ -267,6 +270,7 @@ func (c *Client) CreateApplicationProjectWithContext(ctx context.Context, reques
     if request == nil {
         request = NewCreateApplicationProjectRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "CreateApplicationProject")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateApplicationProject require credential")
@@ -330,6 +334,7 @@ func (c *Client) CreateApplicationSnapshotWithContext(ctx context.Context, reque
     if request == nil {
         request = NewCreateApplicationSnapshotRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "CreateApplicationSnapshot")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateApplicationSnapshot require credential")
@@ -393,6 +398,7 @@ func (c *Client) CreateApplicationVersionWithContext(ctx context.Context, reques
     if request == nil {
         request = NewCreateApplicationVersionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "CreateApplicationVersion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateApplicationVersion require credential")
@@ -468,6 +474,7 @@ func (c *Client) CreateSessionWithContext(ctx context.Context, request *CreateSe
     if request == nil {
         request = NewCreateSessionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "CreateSession")
     
     if c.GetCredential() == nil {
         return nil, errors.New("CreateSession require credential")
@@ -529,6 +536,7 @@ func (c *Client) DeleteApplicationWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteApplicationRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "DeleteApplication")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteApplication require credential")
@@ -590,6 +598,7 @@ func (c *Client) DeleteApplicationProjectsWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDeleteApplicationProjectsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "DeleteApplicationProjects")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteApplicationProjects require credential")
@@ -653,6 +662,7 @@ func (c *Client) DeleteApplicationVersionWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDeleteApplicationVersionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "DeleteApplicationVersion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DeleteApplicationVersion require credential")
@@ -704,6 +714,7 @@ func (c *Client) DescribeApplicationFileInfoWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeApplicationFileInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "DescribeApplicationFileInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationFileInfo require credential")
@@ -757,6 +768,7 @@ func (c *Client) DescribeApplicationListWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeApplicationListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "DescribeApplicationList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationList require credential")
@@ -808,6 +820,7 @@ func (c *Client) DescribeApplicationPathListWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeApplicationPathListRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "DescribeApplicationPathList")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationPathList require credential")
@@ -857,6 +870,7 @@ func (c *Client) DescribeApplicationProjectAdvancedConfigWithContext(ctx context
     if request == nil {
         request = NewDescribeApplicationProjectAdvancedConfigRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "DescribeApplicationProjectAdvancedConfig")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationProjectAdvancedConfig require credential")
@@ -906,6 +920,7 @@ func (c *Client) DescribeApplicationProjectsWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeApplicationProjectsRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "DescribeApplicationProjects")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationProjects require credential")
@@ -959,6 +974,7 @@ func (c *Client) DescribeApplicationStatusWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeApplicationStatusRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "DescribeApplicationStatus")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationStatus require credential")
@@ -1016,6 +1032,7 @@ func (c *Client) DescribeApplicationVersionWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeApplicationVersionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "DescribeApplicationVersion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeApplicationVersion require credential")
@@ -1073,6 +1090,7 @@ func (c *Client) DescribeConcurrentCountWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeConcurrentCountRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "DescribeConcurrentCount")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeConcurrentCount require credential")
@@ -1122,6 +1140,7 @@ func (c *Client) DescribeConcurrentPackagesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeConcurrentPackagesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "DescribeConcurrentPackages")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeConcurrentPackages require credential")
@@ -1171,6 +1190,7 @@ func (c *Client) DescribeConcurrentSummaryWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeConcurrentSummaryRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "DescribeConcurrentSummary")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeConcurrentSummary require credential")
@@ -1234,6 +1254,7 @@ func (c *Client) DescribeCosCredentialWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeCosCredentialRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "DescribeCosCredential")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DescribeCosCredential require credential")
@@ -1291,6 +1312,7 @@ func (c *Client) DestroySessionWithContext(ctx context.Context, request *Destroy
     if request == nil {
         request = NewDestroySessionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "DestroySession")
     
     if c.GetCredential() == nil {
         return nil, errors.New("DestroySession require credential")
@@ -1348,6 +1370,7 @@ func (c *Client) ModifyApplicationBaseInfoWithContext(ctx context.Context, reque
     if request == nil {
         request = NewModifyApplicationBaseInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "ModifyApplicationBaseInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyApplicationBaseInfo require credential")
@@ -1397,6 +1420,7 @@ func (c *Client) ModifyApplicationProjectWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyApplicationProjectRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "ModifyApplicationProject")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyApplicationProject require credential")
@@ -1456,6 +1480,7 @@ func (c *Client) ModifyApplicationVersionWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyApplicationVersionRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "ModifyApplicationVersion")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyApplicationVersion require credential")
@@ -1515,6 +1540,7 @@ func (c *Client) ModifyConcurrentPackageWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyConcurrentPackageRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "ModifyConcurrentPackage")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyConcurrentPackage require credential")
@@ -1574,6 +1600,7 @@ func (c *Client) ModifyMobileApplicationInfoWithContext(ctx context.Context, req
     if request == nil {
         request = NewModifyMobileApplicationInfoRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "ModifyMobileApplicationInfo")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ModifyMobileApplicationInfo require credential")
@@ -1623,6 +1650,7 @@ func (c *Client) ResetConcurrentPackagesWithContext(ctx context.Context, request
     if request == nil {
         request = NewResetConcurrentPackagesRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "ResetConcurrentPackages")
     
     if c.GetCredential() == nil {
         return nil, errors.New("ResetConcurrentPackages require credential")
@@ -1684,6 +1712,7 @@ func (c *Client) SetApplicationVersionOnlineWithContext(ctx context.Context, req
     if request == nil {
         request = NewSetApplicationVersionOnlineRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "SetApplicationVersionOnline")
     
     if c.GetCredential() == nil {
         return nil, errors.New("SetApplicationVersionOnline require credential")
@@ -1743,6 +1772,7 @@ func (c *Client) StartPublishStreamWithContext(ctx context.Context, request *Sta
     if request == nil {
         request = NewStartPublishStreamRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "StartPublishStream")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartPublishStream require credential")
@@ -1802,6 +1832,7 @@ func (c *Client) StartPublishStreamWithURLWithContext(ctx context.Context, reque
     if request == nil {
         request = NewStartPublishStreamWithURLRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "StartPublishStreamWithURL")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StartPublishStreamWithURL require credential")
@@ -1861,6 +1892,7 @@ func (c *Client) StopPublishStreamWithContext(ctx context.Context, request *Stop
     if request == nil {
         request = NewStopPublishStreamRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "StopPublishStream")
     
     if c.GetCredential() == nil {
         return nil, errors.New("StopPublishStream require credential")
@@ -1910,6 +1942,7 @@ func (c *Client) UnbindConcurrentPackagesFromProjectWithContext(ctx context.Cont
     if request == nil {
         request = NewUnbindConcurrentPackagesFromProjectRequest()
     }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "UnbindConcurrentPackagesFromProject")
     
     if c.GetCredential() == nil {
         return nil, errors.New("UnbindConcurrentPackagesFromProject require credential")
