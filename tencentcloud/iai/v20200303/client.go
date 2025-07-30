@@ -487,9 +487,7 @@ func NewCopyPersonResponse() (response *CopyPersonResponse) {
 // CopyPerson
 // This API is used to copy a person in a group to another group (without copying the description). One person can exist in up to 100 groups at the same time.
 //
-// >     
-//
-// - Note: in the case that the version of the algorithm model was 2.0 when the person was created, the copy operation will fail if the target group is not of algorithm model 2.0.
+// >- Note: in the case that the version of the algorithm model was 2.0 when the person was created, the copy operation will fail if the target group is not of algorithm model 2.0.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ACROSSVERSIONSERROR = "FailedOperation.AcrossVersionsError"
@@ -567,9 +565,7 @@ func (c *Client) CopyPerson(request *CopyPersonRequest) (response *CopyPersonRes
 // CopyPerson
 // This API is used to copy a person in a group to another group (without copying the description). One person can exist in up to 100 groups at the same time.
 //
-// >     
-//
-// - Note: in the case that the version of the algorithm model was 2.0 when the person was created, the copy operation will fail if the target group is not of algorithm model 2.0.
+// >- Note: in the case that the version of the algorithm model was 2.0 when the person was created, the copy operation will fail if the target group is not of algorithm model 2.0.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ACROSSVERSIONSERROR = "FailedOperation.AcrossVersionsError"

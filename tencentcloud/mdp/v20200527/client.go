@@ -2051,6 +2051,64 @@ func (c *Client) DescribeStreamPackageSSAIChannelsWithContext(ctx context.Contex
     return
 }
 
+func NewDescribeStreamPackageSSAIUsageRequest() (request *DescribeStreamPackageSSAIUsageRequest) {
+    request = &DescribeStreamPackageSSAIUsageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageSSAIUsage")
+    
+    
+    return
+}
+
+func NewDescribeStreamPackageSSAIUsageResponse() (response *DescribeStreamPackageSSAIUsageResponse) {
+    response = &DescribeStreamPackageSSAIUsageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamPackageSSAIUsage
+// This API is used to query SSAI ad replacement usage.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETSSAICHANNELSFAILED = "InternalError.GetSSAIChannelsFailed"
+//  INTERNALERROR_GETSSAIUSAGEPARTIALFAILED = "InternalError.GetSSAIUsagePartialFailed"
+//  INVALIDPARAMETER_INVALIDPARAMETERCHANNELID = "InvalidParameter.InvalidParameterChannelId"
+//  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
+func (c *Client) DescribeStreamPackageSSAIUsage(request *DescribeStreamPackageSSAIUsageRequest) (response *DescribeStreamPackageSSAIUsageResponse, err error) {
+    return c.DescribeStreamPackageSSAIUsageWithContext(context.Background(), request)
+}
+
+// DescribeStreamPackageSSAIUsage
+// This API is used to query SSAI ad replacement usage.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETSSAICHANNELSFAILED = "InternalError.GetSSAIChannelsFailed"
+//  INTERNALERROR_GETSSAIUSAGEPARTIALFAILED = "InternalError.GetSSAIUsagePartialFailed"
+//  INVALIDPARAMETER_INVALIDPARAMETERCHANNELID = "InvalidParameter.InvalidParameterChannelId"
+//  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
+func (c *Client) DescribeStreamPackageSSAIUsageWithContext(ctx context.Context, request *DescribeStreamPackageSSAIUsageRequest) (response *DescribeStreamPackageSSAIUsageResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageSSAIUsageRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageSSAIUsage")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageSSAIUsage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageSSAIUsageResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeStreamPackageSourceRequest() (request *DescribeStreamPackageSourceRequest) {
     request = &DescribeStreamPackageSourceRequest{
         BaseRequest: &tchttp.BaseRequest{},

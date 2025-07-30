@@ -20,6 +20,12 @@ const (
 	// Internal error.
 	INTERNALERROR = "InternalError"
 
+	// Failed to obtain SSAI ad configuration.
+	INTERNALERROR_GETSSAICHANNELSFAILED = "InternalError.GetSSAIChannelsFailed"
+
+	// Failed to obtain SSAI ad configuration usage.
+	INTERNALERROR_GETSSAIUSAGEPARTIALFAILED = "InternalError.GetSSAIUsagePartialFailed"
+
 	// Invalid `ActionType`.
 	INVALIDPARAMETER_ACTIONTYPE = "InvalidParameter.ActionType"
 
@@ -40,6 +46,9 @@ const (
 
 	// Invalid `Id`.
 	INVALIDPARAMETER_ID = "InvalidParameter.Id"
+
+	// SSAI channel id is invalid.
+	INVALIDPARAMETER_INVALIDPARAMETERCHANNELID = "InvalidParameter.InvalidParameterChannelId"
 
 	// Invalid `LvbDomain`.
 	INVALIDPARAMETER_LVBDOMAIN = "InvalidParameter.LvbDomain"
@@ -67,6 +76,9 @@ const (
 
 	// Invalid ad insertion configuration parameters.
 	INVALIDPARAMETER_SSAIINFO = "InvalidParameter.SSAIInfo"
+
+	// SSAI ad type error.
+	INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
 
 	// Invalid `Url`.
 	INVALIDPARAMETER_URL = "InvalidParameter.Url"

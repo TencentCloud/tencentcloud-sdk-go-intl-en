@@ -288,6 +288,9 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	// Specifies the subtitle parameter.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	SubtitleTemplate *SubtitleTemplate `json:"SubtitleTemplate,omitnil,omitempty" name:"SubtitleTemplate"`
+
+	// Extension field for transcoding.
+	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 }
 
 type AdaptiveDynamicStreamingTemplate struct {

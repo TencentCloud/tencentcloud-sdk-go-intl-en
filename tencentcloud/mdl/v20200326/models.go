@@ -251,7 +251,7 @@ type AudioTemplateInfo struct {
 	// Valid values: 6000, 7000, 8000, 10000, 12000, 14000, 16000, 20000, 24000, 28000, 32000, 40000, 48000, 56000, 64000, 80000, 96000, 112000, 128000, 160000, 192000, 224000, 256000, 288000, 320000, 384000, 448000, 512000, 576000, 640000, 768000, 896000, 1024000
 	AudioBitrate *uint64 `json:"AudioBitrate,omitnil,omitempty" name:"AudioBitrate"`
 
-	// Audio language code, whose length is always 3 characters.
+	// Audio language code, which length is between 2 and 20.
 	LanguageCode *string `json:"LanguageCode,omitnil,omitempty" name:"LanguageCode"`
 
 	// Audio transcoding special configuration information.
@@ -262,6 +262,9 @@ type AudioTemplateInfo struct {
 
 	// Audio encoding parameters.
 	AudioCodecDetails *AudioCodecDetail `json:"AudioCodecDetails,omitnil,omitempty" name:"AudioCodecDetails"`
+
+	// Audio language description, which maximum length is 100.
+	LanguageDescription *string `json:"LanguageDescription,omitnil,omitempty" name:"LanguageDescription"`
 }
 
 type AudioTrackInfo struct {
