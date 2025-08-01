@@ -198,6 +198,12 @@ type AdjustCdbProxyAddressRequestParams struct {
 
 	// Assignment of read/write weights If `system` is passed in for `WeightMode`, only the default weight assigned by the system will take effect.
 	ProxyAllocation []*ProxyAllocation `json:"ProxyAllocation,omitnil,omitempty" name:"ProxyAllocation"`
+
+
+	AutoLoadBalance *bool `json:"AutoLoadBalance,omitnil,omitempty" name:"AutoLoadBalance"`
+
+
+	AccessMode *string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
 }
 
 type AdjustCdbProxyAddressRequest struct {
@@ -238,6 +244,10 @@ type AdjustCdbProxyAddressRequest struct {
 
 	// Assignment of read/write weights If `system` is passed in for `WeightMode`, only the default weight assigned by the system will take effect.
 	ProxyAllocation []*ProxyAllocation `json:"ProxyAllocation,omitnil,omitempty" name:"ProxyAllocation"`
+
+	AutoLoadBalance *bool `json:"AutoLoadBalance,omitnil,omitempty" name:"AutoLoadBalance"`
+
+	AccessMode *string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
 }
 
 func (r *AdjustCdbProxyAddressRequest) ToJsonString() string {
@@ -264,6 +274,8 @@ func (r *AdjustCdbProxyAddressRequest) FromJsonString(s string) error {
 	delete(f, "TransSplit")
 	delete(f, "ConnectionPool")
 	delete(f, "ProxyAllocation")
+	delete(f, "AutoLoadBalance")
+	delete(f, "AccessMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AdjustCdbProxyAddressRequest has unknown keys!", "")
 	}
@@ -1738,6 +1750,12 @@ type CreateCdbProxyAddressRequestParams struct {
 
 	// Connection pool type, which will take effect only when `ConnectionPool` is `true`. Valid values:  `transaction` (transaction-level), `connection` (session-level).
 	ConnectionPoolType *string `json:"ConnectionPoolType,omitnil,omitempty" name:"ConnectionPoolType"`
+
+
+	AutoLoadBalance *bool `json:"AutoLoadBalance,omitnil,omitempty" name:"AutoLoadBalance"`
+
+
+	AccessMode *string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
 }
 
 type CreateCdbProxyAddressRequest struct {
@@ -1796,6 +1814,10 @@ type CreateCdbProxyAddressRequest struct {
 
 	// Connection pool type, which will take effect only when `ConnectionPool` is `true`. Valid values:  `transaction` (transaction-level), `connection` (session-level).
 	ConnectionPoolType *string `json:"ConnectionPoolType,omitnil,omitempty" name:"ConnectionPoolType"`
+
+	AutoLoadBalance *bool `json:"AutoLoadBalance,omitnil,omitempty" name:"AutoLoadBalance"`
+
+	AccessMode *string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
 }
 
 func (r *CreateCdbProxyAddressRequest) ToJsonString() string {
@@ -1828,6 +1850,8 @@ func (r *CreateCdbProxyAddressRequest) FromJsonString(s string) error {
 	delete(f, "VPort")
 	delete(f, "SecurityGroup")
 	delete(f, "ConnectionPoolType")
+	delete(f, "AutoLoadBalance")
+	delete(f, "AccessMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCdbProxyAddressRequest has unknown keys!", "")
 	}
@@ -5756,7 +5780,7 @@ type DescribeDBPriceRequestParams struct {
 	// Instance validity period in months. Value range: 1-36. This field is invalid when querying the prices of pay-as-you-go instances.
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// AZ information in the format of "ap-guangzhou-2". You can use the <a href="https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1">DescribeDBZoneConfig</a> API to query the configurable values. This parameter is required when `InstanceId` is empty.
+	// AZ information in the format of "ap-guangzhou-3". You can use the <a href="https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1">DescribeDBZoneConfig</a> API to query the configurable values. This parameter is required when `InstanceId` is empty.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Number of instances. Value range: 1-100. Default value: 1. This parameter is required when `InstanceId` is empty.
@@ -5791,6 +5815,9 @@ type DescribeDBPriceRequestParams struct {
 
 	// Tiered pay-as-you-go pricing, which is valid only when `PayType` is set to `HOUR_PAID`. Valid values: `1`, `2`, `3`. For more information on tiered duration, visit https://intl.cloud.tencent.com/document/product/236/18335.?from_cn_redirect=1
 	Ladder *uint64 `json:"Ladder,omitnil,omitempty" name:"Ladder"`
+
+
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 }
 
 type DescribeDBPriceRequest struct {
@@ -5799,7 +5826,7 @@ type DescribeDBPriceRequest struct {
 	// Instance validity period in months. Value range: 1-36. This field is invalid when querying the prices of pay-as-you-go instances.
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// AZ information in the format of "ap-guangzhou-2". You can use the <a href="https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1">DescribeDBZoneConfig</a> API to query the configurable values. This parameter is required when `InstanceId` is empty.
+	// AZ information in the format of "ap-guangzhou-3". You can use the <a href="https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1">DescribeDBZoneConfig</a> API to query the configurable values. This parameter is required when `InstanceId` is empty.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Number of instances. Value range: 1-100. Default value: 1. This parameter is required when `InstanceId` is empty.
@@ -5834,6 +5861,8 @@ type DescribeDBPriceRequest struct {
 
 	// Tiered pay-as-you-go pricing, which is valid only when `PayType` is set to `HOUR_PAID`. Valid values: `1`, `2`, `3`. For more information on tiered duration, visit https://intl.cloud.tencent.com/document/product/236/18335.?from_cn_redirect=1
 	Ladder *uint64 `json:"Ladder,omitnil,omitempty" name:"Ladder"`
+
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 }
 
 func (r *DescribeDBPriceRequest) ToJsonString() string {
@@ -5861,6 +5890,7 @@ func (r *DescribeDBPriceRequest) FromJsonString(s string) error {
 	delete(f, "Cpu")
 	delete(f, "InstanceId")
 	delete(f, "Ladder")
+	delete(f, "DiskType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBPriceRequest has unknown keys!", "")
 	}

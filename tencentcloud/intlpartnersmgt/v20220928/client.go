@@ -1209,6 +1209,60 @@ func (c *Client) DescribeCustomerInfoWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDescribeCustomerOwnVoucherListRequest() (request *DescribeCustomerOwnVoucherListRequest) {
+    request = &DescribeCustomerOwnVoucherListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "DescribeCustomerOwnVoucherList")
+    
+    
+    return
+}
+
+func NewDescribeCustomerOwnVoucherListResponse() (response *DescribeCustomerOwnVoucherListResponse) {
+    response = &DescribeCustomerOwnVoucherListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCustomerOwnVoucherList
+// This API is used to query the voucher list by Customer. 
+//
+// Callable roles: Customer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeCustomerOwnVoucherList(request *DescribeCustomerOwnVoucherListRequest) (response *DescribeCustomerOwnVoucherListResponse, err error) {
+    return c.DescribeCustomerOwnVoucherListWithContext(context.Background(), request)
+}
+
+// DescribeCustomerOwnVoucherList
+// This API is used to query the voucher list by Customer. 
+//
+// Callable roles: Customer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeCustomerOwnVoucherListWithContext(ctx context.Context, request *DescribeCustomerOwnVoucherListRequest) (response *DescribeCustomerOwnVoucherListResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomerOwnVoucherListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "DescribeCustomerOwnVoucherList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCustomerOwnVoucherList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCustomerOwnVoucherListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCustomerUinRequest() (request *DescribeCustomerUinRequest) {
     request = &DescribeCustomerUinRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1259,6 +1313,60 @@ func (c *Client) DescribeCustomerUinWithContext(ctx context.Context, request *De
     request.SetContext(ctx)
     
     response = NewDescribeCustomerUinResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCustomerVoucherListRequest() (request *DescribeCustomerVoucherListRequest) {
+    request = &DescribeCustomerVoucherListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "DescribeCustomerVoucherList")
+    
+    
+    return
+}
+
+func NewDescribeCustomerVoucherListResponse() (response *DescribeCustomerVoucherListResponse) {
+    response = &DescribeCustomerVoucherListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCustomerVoucherList
+// This API is used to query the customer voucher list by Reseller, Second-level Reseller or Distributor.
+//
+// Callable roles: Reseller, Second-level Reseller or Distributor.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeCustomerVoucherList(request *DescribeCustomerVoucherListRequest) (response *DescribeCustomerVoucherListResponse, err error) {
+    return c.DescribeCustomerVoucherListWithContext(context.Background(), request)
+}
+
+// DescribeCustomerVoucherList
+// This API is used to query the customer voucher list by Reseller, Second-level Reseller or Distributor.
+//
+// Callable roles: Reseller, Second-level Reseller or Distributor.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeCustomerVoucherListWithContext(ctx context.Context, request *DescribeCustomerVoucherListRequest) (response *DescribeCustomerVoucherListResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomerVoucherListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "DescribeCustomerVoucherList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCustomerVoucherList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCustomerVoucherListResponse()
     err = c.Send(request, response)
     return
 }

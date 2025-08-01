@@ -187,6 +187,7 @@ func NewAdjustCdbProxyAddressResponse() (response *AdjustCdbProxyAddressResponse
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_PROXYUPGRADETASKSTATUSERROR = "OperationDenied.ProxyUpgradeTaskStatusError"
 //  OPERATIONDENIED_UNSUPPORTCREATEADDRESSERROR = "OperationDenied.UnsupportCreateAddressError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 //  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
 func (c *Client) AdjustCdbProxyAddress(request *AdjustCdbProxyAddressRequest) (response *AdjustCdbProxyAddressResponse, err error) {
     return c.AdjustCdbProxyAddressWithContext(context.Background(), request)
@@ -203,6 +204,7 @@ func (c *Client) AdjustCdbProxyAddress(request *AdjustCdbProxyAddressRequest) (r
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_PROXYUPGRADETASKSTATUSERROR = "OperationDenied.ProxyUpgradeTaskStatusError"
 //  OPERATIONDENIED_UNSUPPORTCREATEADDRESSERROR = "OperationDenied.UnsupportCreateAddressError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 //  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
 func (c *Client) AdjustCdbProxyAddressWithContext(ctx context.Context, request *AdjustCdbProxyAddressRequest) (response *AdjustCdbProxyAddressResponse, err error) {
     if request == nil {

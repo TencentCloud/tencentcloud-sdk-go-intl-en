@@ -7239,20 +7239,20 @@ func (r *DescribeSupportProxyVersionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeZonesRequestParams struct {
-	// Whether the virtual zone is included.–
+	// Whether the virtual zone is included.
 	IncludeVirtualZones *bool `json:"IncludeVirtualZones,omitnil,omitempty" name:"IncludeVirtualZones"`
 
-	// Whether to display all AZs in a region and the user’s permissions in each AZ.
+	// Whether to display all AZs in a region and the user's permissions in each AZ.
 	ShowPermission *bool `json:"ShowPermission,omitnil,omitempty" name:"ShowPermission"`
 }
 
 type DescribeZonesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Whether the virtual zone is included.–
+	// Whether the virtual zone is included.
 	IncludeVirtualZones *bool `json:"IncludeVirtualZones,omitnil,omitempty" name:"IncludeVirtualZones"`
 
-	// Whether to display all AZs in a region and the user’s permissions in each AZ.
+	// Whether to display all AZs in a region and the user's permissions in each AZ.
 	ShowPermission *bool `json:"ShowPermission,omitnil,omitempty" name:"ShowPermission"`
 }
 
@@ -9539,6 +9539,9 @@ type ModifyClusterSlaveZoneRequestParams struct {
 
 	// Specifies the binlog synchronization mode. the default value is async. valid values are sync, semisync, and async.
 	BinlogSyncWay *string `json:"BinlogSyncWay,omitnil,omitempty" name:"BinlogSyncWay"`
+
+
+	SemiSyncTimeout *int64 `json:"SemiSyncTimeout,omitnil,omitempty" name:"SemiSyncTimeout"`
 }
 
 type ModifyClusterSlaveZoneRequest struct {
@@ -9555,6 +9558,8 @@ type ModifyClusterSlaveZoneRequest struct {
 
 	// Specifies the binlog synchronization mode. the default value is async. valid values are sync, semisync, and async.
 	BinlogSyncWay *string `json:"BinlogSyncWay,omitnil,omitempty" name:"BinlogSyncWay"`
+
+	SemiSyncTimeout *int64 `json:"SemiSyncTimeout,omitnil,omitempty" name:"SemiSyncTimeout"`
 }
 
 func (r *ModifyClusterSlaveZoneRequest) ToJsonString() string {
@@ -9573,6 +9578,7 @@ func (r *ModifyClusterSlaveZoneRequest) FromJsonString(s string) error {
 	delete(f, "OldSlaveZone")
 	delete(f, "NewSlaveZone")
 	delete(f, "BinlogSyncWay")
+	delete(f, "SemiSyncTimeout")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterSlaveZoneRequest has unknown keys!", "")
 	}

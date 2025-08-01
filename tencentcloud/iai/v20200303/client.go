@@ -69,9 +69,7 @@ func NewAnalyzeFaceResponse() (response *AnalyzeFaceResponse) {
 //
 // 
 //
-// >     
-//
-// - Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
+// >- Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
 //
 // error code that may be returned:
 //  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
@@ -154,9 +152,7 @@ func (c *Client) AnalyzeFace(request *AnalyzeFaceRequest) (response *AnalyzeFace
 //
 // 
 //
-// >     
-//
-// - Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
+// >- Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
 //
 // error code that may be returned:
 //  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
