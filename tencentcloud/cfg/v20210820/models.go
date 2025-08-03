@@ -764,6 +764,12 @@ type DescribeTaskListRequestParams struct {
 
 	// Task status for filtering, supporting multiple states (1001: not started; 1002: in progress; 1003: paused; 1004: ended)
 	TaskStatusList []*uint64 `json:"TaskStatusList,omitnil,omitempty" name:"TaskStatusList"`
+
+
+	ArchId *string `json:"ArchId,omitnil,omitempty" name:"ArchId"`
+
+
+	ArchName *string `json:"ArchName,omitnil,omitempty" name:"ArchName"`
 }
 
 type DescribeTaskListRequest struct {
@@ -810,6 +816,10 @@ type DescribeTaskListRequest struct {
 
 	// Task status for filtering, supporting multiple states (1001: not started; 1002: in progress; 1003: paused; 1004: ended)
 	TaskStatusList []*uint64 `json:"TaskStatusList,omitnil,omitempty" name:"TaskStatusList"`
+
+	ArchId *string `json:"ArchId,omitnil,omitempty" name:"ArchId"`
+
+	ArchName *string `json:"ArchName,omitnil,omitempty" name:"ArchName"`
 }
 
 func (r *DescribeTaskListRequest) ToJsonString() string {
@@ -838,6 +848,8 @@ func (r *DescribeTaskListRequest) FromJsonString(s string) error {
 	delete(f, "ApplicationId")
 	delete(f, "ApplicationName")
 	delete(f, "TaskStatusList")
+	delete(f, "ArchId")
+	delete(f, "ArchName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTaskListRequest has unknown keys!", "")
 	}
