@@ -132,21 +132,104 @@ For more examples, please see the [examples](https://github.com/TencentCloud/ten
 
 # Relevant Configuration
 
+**Use default configurations unless necessary.**
+
+Modify `profile.ClientProfile` fields before client creation for customization.
+
+```go
+// Optional
+cpf := profile.NewClientProfile()
+```
+
+Configuration options:
+
+## Request Method
+
+SDK uses POST by default. Switch to GET only if necessary (**not for large requests**).
+
+```go
+cpf.HttpProfile.ReqMethod = "POST"
+```
+
+## Timeout
+
+Default timeout (seconds). Check latest defaults in code.
+
+```go
+cpf.HttpProfile.ReqTimeout = 30
+```
+
+## Custom Endpoint
+
+Auto-set by SDK. Required for financial zone services.
+
+```go
+cpf.HttpProfile.Endpoint = "cvm.tencentcloudapi.com"
+```
+
+## Signature Method
+
+Default: `TC3-HMAC-SHA256` (secure but slightly slower).
+
+```go
+cpf.SignMethod = "HmacSHA1"
+```
+
+## Debug Mode
+
+Enable for detailed logs during troubleshooting.
+
+```go
+cpf.Debug = true
+```
+
+## Disable Keep-Alive
+
+Each client uses keep-alive by default. For short-lived connections:
+
+```go
+...
+    client, _ := cvm.NewClient(credential, regions.Guangzhou, cpf)
+    tp := &http.Transport{
+        DisableKeepAlives: true,
+    }
+    client.WithHttpTransport(tp)
+...
+```
+
+## Region Failover
+
+Tencent Cloud GO SDK supports region failover:
+
+When:
+1. Failures >= 5
+2. Failure rate >= 75%
+
+SDK automatically switches to backup region.
+
+Configuration:
+```golang
+    // Enable
+    cpf.DisableRegionBreaker = false
+    // Set backup endpoint (service prefix auto-added)
+    cpf.BackupEndpoint = "ap-guangzhou.tencentcloudapi.com"
+```
+
+Note: Only supports synchronous requests per client.
+
 ## Proxy
 
-If there is a proxy in your environment, you need to set the system environment variable `https_proxy`; otherwise, it may not be called normally, and a connection timeout exception will be thrown.
+Set `https_proxy` environment variable or customize Transport with `client.WithHttpTransport()`.
 
-## Enabling DNS cache
+## Enable DNS Cache
 
-Currently, the SDK for Go always requests the DNS server without using the cache of nscd. You can export the environment variable `GODEBUG=netdns=cgo` or specify the `-tags 'netcgo'` parameter when compiling `go build` so as to get the nscd cache.
+Export `GODEBUG=netdns=cgo` or build with `-tags 'netcgo'` to use nscd cache.
 
-## Ignoring server certificate verification
+## Skip Server Certificate Verification
 
-When the SDK is used to call a public cloud service, the server certificate must be verified to identify forged servers and ensure request security.
-However, in some extreme cases such as testing, you may need to ignore self-signed server certificates.
-Here is one of the possible methods:
+Although mandatory for security, you might need to skip verification during testing:
 
-```
+```golang
 import "crypto/tls"
 ...
     client, _ := cvm.NewClient(credential, regions.Guangzhou, cpf)
@@ -157,4 +240,185 @@ import "crypto/tls"
 ...
 ```
 
-Again, unless you know what you are doing and understand the risks involved, do not try to disable server certificate verification.
+**Warning: Understand risks before disabling certificate verification.**
+
+# Features
+
+## Credential Management
+
+1. Environment Variables
+   ```go
+   provider := common.DefaultEnvProvider()
+   credential, err := provider.GetCredential()
+   ```
+
+2. Config File
+   Path priority:
+    1. `TENCENTCLOUD_CREDENTIALS_FILE`
+    2. Linux/Mac: `~/.tencentcloud/credentials`
+    3. Windows: `c:\Users\NAME\.tencentcloud\credentials`
+
+   Format:
+   ```ini
+   [default]
+   secret_id = xxxxx
+   secret_key = xxxxx
+   ```
+
+   ```go
+   provider := common.DefaultProfileProvider()
+   credential, err := provider.GetCredential()
+   ```
+
+3. Role Assumption
+   ```go
+   provider := common.DefaultRoleArnProvider(secretId, secretKey, roleArn)
+   credential, err := provider.GetCredential()
+   ```
+
+4. Instance Role
+   ```go
+   provider := common.DefaultCvmRoleProvider()
+   credential, err := provider.GetCredential()
+   ```
+
+5. TKE OIDC Credentials
+   Example: [examples/ssm/v20190923/get_secret_value.go](examples/ssm/v20190923/get_secret_value.go)
+   ```go
+   provider, err := common.DefaultTkeOIDCRoleArnProvider()
+   credential, err := provider.GetCredential()
+   ```
+
+6. Credential Provider Chain
+   Default chain: `Env -> Config File -> Instance Role`
+   ```go
+   provider := common.DefaultProviderChain()
+   credential, err := provider.GetCredential()
+   ```
+
+   Custom chain:
+   ```go
+   provider1 := common.DefaultCvmRoleProvider()
+   provider2 := common.DefaultEnvProvider()
+   customProviderChain := []common.Provider{provider1, provider2}
+   provider := common.NewProviderChain(customProviderChain)
+   credential, err := provider.GetCredential()
+   ```
+
+   Full example: [provider_chain_test.go](https://github.com/TencentCloud/tencentcloud-sdk-go/blob/master/testing/integration/provider_chain_test.go)
+
+## Error Handling
+
+Error codes are defined as constants (IDE-friendly):
+
+```go
+response, err := client.DescribeInstances(request)
+if terr, ok := err.(*errors.TencentCloudSDKError); ok {
+    code := terr.GetCode()
+    if code == cvm.FAILEDOPERATION_ILLEGALTAGKEY{
+        fmt.Printf("Handling error: FailedOperation.IllegalTagKey,%s", err)
+    }else if code == cvm.UNAUTHORIZEDOPERATION{
+        fmt.Printf("Handling error: UnauthorizedOperation,%s", err)
+    }else{
+        fmt.Printf("An API error has returned: %s", err)
+    }
+    return
+}
+```
+
+API comments list possible error codes:
+```go
+// error code that may be returned:
+//  FAILEDOPERATION_ILLEGALTAGKEY = "FailedOperation.IllegalTagKey"
+//  FAILEDOPERATION_ILLEGALTAGVALUE = "FailedOperation.IllegalTagValue"
+//  FAILEDOPERATION_TAGKEYRESERVED = "FailedOperation.TagKeyReserved"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDFILTER = "InvalidFilter"
+// ...
+func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response *DescribeInstancesResponse, err error){
+    ...
+}
+```
+
+## Common Client
+
+Generic API calls are supported via `common` package.
+
+**Note: You must know exact request parameters.**
+
+Only POST with v3 signature is supported.
+
+Example: [common_client.go](https://github.com/TencentCloud/tencentcloud-sdk-go/blob/master/examples/common/common_client.go)
+
+## Custom Headers
+
+[RunInstancesRequest Example](examples/cvm/v20170312/run_instances.go)
+```go
+    request.SetHeader(map[string]string{
+        "X-TC-TraceId": "ffe0c072-8a5d-4e17-8887-a8a60252abca",
+    })
+```
+
+[CommonRequest Example](examples/common/common_client.go)
+```go
+    request.SetHeader(map[string]string{
+        "X-TC-TraceId": "ffe0c072-8a5d-4e17-8887-a8a60252abca",
+    })
+```
+
+## HTTP Proxy
+[DescribeInstances Example](examples/cvm/v20170312/describe_instances.go)
+```go
+    // Authenticated
+    clientProfile.HttpProfile.Proxy = "http://username:password@127.0.0.1:1080"
+    // Unauthenticated
+    clientProfile.HttpProfile.Proxy = "http://127.0.0.1:1080"
+```
+
+## Request Retry
+
+### Network Error Retry
+
+Configure via `ClientProfile` for automatic retries on temporary failures (disabled by default).
+
+> Only idempotent requests (with `ClientToken` field) are retried.
+
+```golang
+prof := profile.NewClientProfile()
+prof.NetworkFailureMaxRetries = 3
+prof.NetworkFailureRetryDuration = profile.ExponentialBackoff
+```
+
+More: [netretry_test.go](https://github.com/TencentCloud/tencentcloud-sdk-go/tree/master/tencentcloud/common/netretry_test.go)
+
+### Rate Limit Retry
+
+Configure for automatic retries on rate limits (disabled by default).
+
+```golang
+prof := profile.NewClientProfile()
+prof.RateLimitExceededMaxRetries = 3
+prof.RateLimitExceededRetryDuration = profile.ExponentialBackoff
+```
+
+### Idempotency Token
+
+When retries are enabled, `ClientToken` is auto-injected if empty (skipped if manually set).
+
+> Injected tokens guarantee uniqueness below 100,000 concurrent requests.
+
+## Empty Arrays and omitempty
+
+`omitempty` tag prevented serialization of both nil and empty arrays.
+
+`omitnil` tag allows empty arrays (nil arrays are ignored).
+
+Toggle via `json.OmitBehaviour = json.OmitEmpty` to disable this feature.  
+Example: [omitempty.go](https://github.com/TencentCloud/tencentcloud-sdk-go-intl-en/blob/master/examples/common/omitempty.go)
+
+## EOF Errors
+
+If encountering `Code=ClientError.NetworkError, Message=Fail to get response because Post "https://xxx.tencentcloudapi.com/": EOF`, it may relate to keep-alive. Solutions:
+
+- Switch to GET if request payloads are small;
+- Enable `ClientProfile.UnsafeRetryOnConnectionFailure` (ensure idempotency);
