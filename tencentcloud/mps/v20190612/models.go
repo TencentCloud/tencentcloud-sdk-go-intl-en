@@ -103,20 +103,21 @@ type AIRecognitionTemplateItem struct {
 }
 
 type Activity struct {
-	// Atomic task type.
-	// <li>input: starting node.</li>.
-	// <li>`output`: termination node</li>.
-	// <li>action-trans: transcoding.</li>.
-	// <li>action-samplesnapshot: specifies sampled screenshot taking.</li>.
-	// <li>action-AIAnalysis: analysis.</li>.
-	// <li>action-AIRecognition: specifies recognition.</li>.
-	// <li>action-aiReview: specifies the review action.</li>.
-	// <li>action-animated-graphics: specifies the animated image.</li>.
-	// <li>action-image-sprite: specifies the sprite sheet.</li>.
-	// <li>action-snapshotByTimeOffset: specifies time point screenshot taking.</li>.
-	// <li>action-adaptive-substream: specifies the adaptive bitrate stream.</li>.
-	// <li>action-AIQualityControl: media quality inspection.</li>.
-	// <li>action-SmartSubtitles: specifies smart subtitling.</li>.
+	// Atomic task type:
+	// <li>input: start node</li>
+	// <li>output: end node</li>
+	// <li>action-trans: transcoding</li>
+	// <li>action-samplesnapshot: sampled screenshot</li>
+	// <li>action-AIAnalysis: analysis</li>
+	// <li>action-AIRecognition: recognition</li>
+	// <li>action-aiReview: review</li>
+	// <li>action-animated-graphics: conversion to GIF</li>
+	// <li>action-image-sprite: image sprite</li>
+	// <li>action-snapshotByTimeOffset: time point screenshot</li>
+	// <li>action-adaptive-substream: adaptive bitrate stream</li>
+	// <li>action-AIQualityControl: media quality inspection</li>
+	// <li>action-SmartSubtitles: smart subtitle</li>
+	// <li>action-exec-rules: judgment rule</li>
 	// 
 	// 
 	ActivityType *string `json:"ActivityType,omitnil,omitempty" name:"ActivityType"`
@@ -160,6 +161,10 @@ type ActivityPara struct {
 	// Media quality inspection task.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	QualityControlTask *AiQualityControlTaskInput `json:"QualityControlTask,omitnil,omitempty" name:"QualityControlTask"`
+
+	// Conditional judgment of the task.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ExecRulesTask *ExecRulesTask `json:"ExecRulesTask,omitnil,omitempty" name:"ExecRulesTask"`
 
 	// Smart subtitle task.
 	// Note: This field may return null, indicating that no valid value can be obtained.
@@ -206,6 +211,10 @@ type ActivityResItem struct {
 	// Media quality inspection task output.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	QualityControlTask *ScheduleQualityControlTaskResult `json:"QualityControlTask,omitnil,omitempty" name:"QualityControlTask"`
+
+	// Conditional judgment task output.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ExecRuleTask *ScheduleExecRuleTaskResult `json:"ExecRuleTask,omitnil,omitempty" name:"ExecRuleTask"`
 
 	// Smart subtitle task output.
 	// Note: This field may return null, indicating that no valid value can be obtained.
@@ -289,7 +298,7 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	SubtitleTemplate *SubtitleTemplate `json:"SubtitleTemplate,omitnil,omitempty" name:"SubtitleTemplate"`
 
-	// Extension field for transcoding.
+	// Transcoding parameter extension field.
 	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 }
 
@@ -519,6 +528,10 @@ type AiAnalysisTaskDelLogoOutput struct {
 
 	// Path of a subtitle translation file extracted from a video.
 	TranslateSubtitlePath *string `json:"TranslateSubtitlePath,omitnil,omitempty" name:"TranslateSubtitlePath"`
+
+	// Position of the erased subtitle. Note: This field is only valid for subtitle extraction when the option to return subtitle positions is enabled.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SubtitlePos *SubtitlePosition `json:"SubtitlePos,omitnil,omitempty" name:"SubtitlePos"`
 }
 
 type AiAnalysisTaskDelLogoResult struct {
@@ -4100,6 +4113,9 @@ type CreateQualityControlTemplateRequestParams struct {
 	// Recording file format. Valid values:
 	// <li>PNG: PNG image.</li>
 	RecordFormat *string `json:"RecordFormat,omitnil,omitempty" name:"RecordFormat"`
+
+	// Spot check policy for media quality inspection.
+	Strategy *QualityControlStrategy `json:"Strategy,omitnil,omitempty" name:"Strategy"`
 }
 
 type CreateQualityControlTemplateRequest struct {
@@ -4117,6 +4133,9 @@ type CreateQualityControlTemplateRequest struct {
 	// Recording file format. Valid values:
 	// <li>PNG: PNG image.</li>
 	RecordFormat *string `json:"RecordFormat,omitnil,omitempty" name:"RecordFormat"`
+
+	// Spot check policy for media quality inspection.
+	Strategy *QualityControlStrategy `json:"Strategy,omitnil,omitempty" name:"Strategy"`
 }
 
 func (r *CreateQualityControlTemplateRequest) ToJsonString() string {
@@ -4135,6 +4154,7 @@ func (r *CreateQualityControlTemplateRequest) FromJsonString(s string) error {
 	delete(f, "QualityControlItemSet")
 	delete(f, "Comment")
 	delete(f, "RecordFormat")
+	delete(f, "Strategy")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateQualityControlTemplateRequest has unknown keys!", "")
 	}
@@ -7501,8 +7521,7 @@ type DescribeQualityControlTemplatesResponseParams struct {
 	// Total number of records that meet filter conditions.
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Media quality inspection template details list.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// List of media quality inspection templates.
 	QualityControlTemplateSet []*QualityControlTemplate `json:"QualityControlTemplateSet,omitnil,omitempty" name:"QualityControlTemplateSet"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -8075,6 +8094,12 @@ type DescribeTasksRequestParams struct {
 
 	// Scrolling identifier which is used for pulling in batches. If a single request cannot pull all the data entries, the API will return `ScrollToken`, and if the next request carries it, the next pull will start from the next entry.
 	ScrollToken *string `json:"ScrollToken,omitnil,omitempty" name:"ScrollToken"`
+
+	// Query task start time.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Query task end time.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 type DescribeTasksRequest struct {
@@ -8088,6 +8113,12 @@ type DescribeTasksRequest struct {
 
 	// Scrolling identifier which is used for pulling in batches. If a single request cannot pull all the data entries, the API will return `ScrollToken`, and if the next request carries it, the next pull will start from the next entry.
 	ScrollToken *string `json:"ScrollToken,omitnil,omitempty" name:"ScrollToken"`
+
+	// Query task start time.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Query task end time.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 func (r *DescribeTasksRequest) ToJsonString() string {
@@ -8105,6 +8136,8 @@ func (r *DescribeTasksRequest) FromJsonString(s string) error {
 	delete(f, "Status")
 	delete(f, "Limit")
 	delete(f, "ScrollToken")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTasksRequest has unknown keys!", "")
 	}
@@ -9117,6 +9150,17 @@ type EnhanceConfig struct {
 	AudioEnhance *AudioEnhanceConfig `json:"AudioEnhance,omitnil,omitempty" name:"AudioEnhance"`
 }
 
+type ExecRuleTaskData struct {
+	// Indexes of nodes that needs to be executed based on the conditional judgment for quality inspection.
+	RearDriveIndex []*int64 `json:"RearDriveIndex,omitnil,omitempty" name:"RearDriveIndex"`
+}
+
+type ExecRulesTask struct {
+	// Conditional judgment information.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Rules []*Rules `json:"Rules,omitnil,omitempty" name:"Rules"`
+}
+
 // Predefined struct for user
 type ExecuteFunctionRequestParams struct {
 	// Name of called backend API.
@@ -9335,12 +9379,10 @@ type HighlightSegmentItem struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SegmentTags []*string `json:"SegmentTags,omitnil,omitempty" name:"SegmentTags"`
 
-	// The live streaming segment corresponds to the live start time point, in the ISO date format.	
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Start time of the live streaming segment in ISO date and time format.	
 	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
-	// The live streaming segment corresponds to the live streaming end time, in the ISO date format.	
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// End time of the live streaming segment in ISO date and time format.	
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
@@ -9654,9 +9696,8 @@ type LiveActivityResItem struct {
 
 type LiveActivityResult struct {
 	// Atomic task type.
-	// <li>LiveRecord: live recording.</li>
-	// <li>AiQualityControl: media quality inspection.</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <li>LiveRecord: live recording</li>
+	// <li>AiQualityControl: media quality inspection</li>
 	ActivityType *string `json:"ActivityType,omitnil,omitempty" name:"ActivityType"`
 
 	// The task output.
@@ -9771,26 +9812,21 @@ type LiveScheduleLiveRecordTaskResult struct {
 }
 
 type LiveScheduleTask struct {
-	// The ID of a live scheme subtask.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Live orchestration task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// The task status. Valid values:
-	// <li>`PROCESSING`</li>
-	// <li>`FINISH` </li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Task stream status. Valid values:
+	// <li>PROCESSING: processing</li>
+	// <li>FINISH: completed</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// If the value returned is not `0`, there was a source error. If `0` is returned, refer to the error codes of the corresponding task type.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// An error code other than 0 is returned in case of a source exception. Use the error code of the specific task when a value of 0 is returned.
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-	// If there was a source error, this parameter is the error message. For other errors, refer to the error messages of the corresponding task type.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The corresponding exception message is returned in case of a source exception. If no source exception occurs, use the message of each specific task.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// The URL of the live stream.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Live stream URL.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// The task output.
@@ -10435,6 +10471,9 @@ type MediaAiAnalysisTagItem struct {
 
 	// Confidence of tag between 0 and 100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
+
+	// Varies based on different types.
+	SpecialInfo *string `json:"SpecialInfo,omitnil,omitempty" name:"SpecialInfo"`
 }
 
 type MediaAnimatedGraphicsItem struct {
@@ -10769,7 +10808,8 @@ type MediaProcessTaskImageSpriteResult struct {
 	// Input for an image sprite generating task.
 	Input *ImageSpriteTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Specifies the output of an image sprite task for a video.
+	// Output of the image sprite task for videos.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	Output *MediaImageSpriteItem `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
@@ -10852,7 +10892,8 @@ type MediaProcessTaskSampleSnapshotResult struct {
 	// Input for a sampled screenshot task.
 	Input *SampleSnapshotTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Specifies the output of a sampling screenshot task for a video.
+	// Output of the sampled screenshot task for videos.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	Output *MediaSampleSnapshotItem `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
@@ -10878,7 +10919,8 @@ type MediaProcessTaskSnapshotByTimeOffsetResult struct {
 	// Input for a time point screenshot task.
 	Input *SnapshotByTimeOffsetTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Specifies the output of a screenshot task at specified time points for a video.
+	// Output of the time point screenshot task for videos.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	Output *MediaSnapshotByTimeOffsetItem `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
@@ -12105,6 +12147,9 @@ type ModifyQualityControlTemplateRequestParams struct {
 	// Recording file format. Valid values:
 	// <li>PNG: PNG image.</li>
 	RecordFormat *string `json:"RecordFormat,omitnil,omitempty" name:"RecordFormat"`
+
+	// Spot check policy for media quality inspection.
+	Strategy *QualityControlStrategy `json:"Strategy,omitnil,omitempty" name:"Strategy"`
 }
 
 type ModifyQualityControlTemplateRequest struct {
@@ -12125,6 +12170,9 @@ type ModifyQualityControlTemplateRequest struct {
 	// Recording file format. Valid values:
 	// <li>PNG: PNG image.</li>
 	RecordFormat *string `json:"RecordFormat,omitnil,omitempty" name:"RecordFormat"`
+
+	// Spot check policy for media quality inspection.
+	Strategy *QualityControlStrategy `json:"Strategy,omitnil,omitempty" name:"Strategy"`
 }
 
 func (r *ModifyQualityControlTemplateRequest) ToJsonString() string {
@@ -12144,6 +12192,7 @@ func (r *ModifyQualityControlTemplateRequest) FromJsonString(s string) error {
 	delete(f, "Comment")
 	delete(f, "QualityControlItemSet")
 	delete(f, "RecordFormat")
+	delete(f, "Strategy")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyQualityControlTemplateRequest has unknown keys!", "")
 	}
@@ -14130,28 +14179,22 @@ type ProhibitedOcrReviewTemplateInfoForUpdate struct {
 }
 
 type QualityControlData struct {
-	// Whether there is an audio track. `true` indicates that there isn't.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// When this field is set to true, it indicates that the video has no audio track.
 	NoAudio *bool `json:"NoAudio,omitnil,omitempty" name:"NoAudio"`
 
-	// Whether there is a video track. `true` indicates that there isn't.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// When this field is set to true, it indicates that the video has no video track.
 	NoVideo *bool `json:"NoVideo,omitnil,omitempty" name:"NoVideo"`
 
 	// No-reference quality score of the video (100 points in total).
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	QualityEvaluationScore *int64 `json:"QualityEvaluationScore,omitnil,omitempty" name:"QualityEvaluationScore"`
 
 	// No-reference quality score of the video (MOS).
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	QualityEvaluationMeanOpinionScore *float64 `json:"QualityEvaluationMeanOpinionScore,omitnil,omitempty" name:"QualityEvaluationMeanOpinionScore"`
 
-	// Exception items detected in content quality inspection.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Exception items identified in content quality inspection.
 	QualityControlResultSet []*QualityControlResult `json:"QualityControlResultSet,omitnil,omitempty" name:"QualityControlResultSet"`
 
-	// Exception items detected in format diagnosis.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Exception items identified in format diagnosis.
 	ContainerDiagnoseResultSet []*ContainerDiagnoseResultItem `json:"ContainerDiagnoseResultSet,omitnil,omitempty" name:"ContainerDiagnoseResultSet"`
 }
 
@@ -14288,6 +14331,15 @@ type QualityControlResult struct {
 	QualityControlItems []*QualityControlItem `json:"QualityControlItems,omitnil,omitempty" name:"QualityControlItems"`
 }
 
+type QualityControlStrategy struct {
+	// Policy type. Valid values:
+	// - TimeSpotCheck
+	StrategyType *string `json:"StrategyType,omitnil,omitempty" name:"StrategyType"`
+
+	// Spot check policy based on time.
+	TimeSpotCheck *TimeSpotCheck `json:"TimeSpotCheck,omitnil,omitempty" name:"TimeSpotCheck"`
+}
+
 type QualityControlTemplate struct {
 	// Unique identifier of a media quality inspection template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
@@ -14322,6 +14374,9 @@ type QualityControlTemplate struct {
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Spot check policy for media quality inspection.
+	Strategy *QualityControlStrategy `json:"Strategy,omitnil,omitempty" name:"Strategy"`
 }
 
 type RawImageWatermarkInput struct {
@@ -14611,6 +14666,34 @@ func (r *ResetWorkflowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type RuleConditionItem struct {
+	// Key of the quality inspection item condition.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Value corresponding to the condition.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type Rules struct {
+	// Judgment condition ID.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Judgment condition configuration.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Conditions []*RuleConditionItem `json:"Conditions,omitnil,omitempty" name:"Conditions"`
+
+	// Logical operator for the list of conditions. Valid values:
+	// 
+	//  - &&: logical AND
+	//  - ||: logical OR
+	Linker *string `json:"Linker,omitnil,omitempty" name:"Linker"`
+
+	// Indexes of the nodes to execute if the judgment conditions are met.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	RearDriveIndexs []*int64 `json:"RearDriveIndexs,omitnil,omitempty" name:"RearDriveIndexs"`
+}
+
 type S3InputInfo struct {
 	// The AWS S3 bucket.
 	S3Bucket *string `json:"S3Bucket,omitnil,omitempty" name:"S3Bucket"`
@@ -14745,9 +14828,32 @@ type ScheduleAnalysisTaskResult struct {
 	// The input of the content analysis task.
 	Input *AiAnalysisTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// The output of the content analysis task.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Analysis task output.
 	Output []*AiAnalysisResult `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// Task execution start time in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
+
+	// Task execution completion time in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
+}
+
+type ScheduleExecRuleTaskResult struct {
+	// Task status, which can be PROCESSING, SUCCESS, or FAIL.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. An empty string indicates success, while other values indicate failure. For specific values, see the list of MPS error codes at https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81.
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Input of the conditional judgment task.
+	Input *ExecRulesTask `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Output of the conditional judgment task.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Output *ExecRuleTaskData `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
 type ScheduleQualityControlTaskResult struct {
@@ -15285,8 +15391,8 @@ type SmartSubtitleTemplateItem struct {
 
 type SmartSubtitlesResult struct {
 	// Task type. Valid values:
-	// <Li>AsrFullTextRecognition: full speech recognition</li>
-	// <Li>TransTextRecognition: speech translation</li>
+	// <li>AsrFullTextRecognition: full speech recognition</li>
+	// <li>TransTextRecognition: speech translation</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Full speech recognition result. When Type is
@@ -15311,6 +15417,24 @@ type SmartSubtitlesTaskInput struct {
 	// Custom smart subtitle parameter. It takes effect when Definition is set to 0. This parameter is used in high customization scenarios. It is recommended that you preferentially use Definition to specify smart subtitle parameters.	
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	RawParameter *RawSmartSubtitleParameter `json:"RawParameter,omitnil,omitempty" name:"RawParameter"`
+
+	// Bucket that stores the output file. If it is left unspecified, the storage location in InputInfo will be inherited.
+	// **Note**: This parameter is required when InputInfo.Type is set to URL.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
+
+	// Output path of the generated subtitle file, which can be a relative or absolute path.
+	// To define the output path, end the path with .{format}. For variable names, see the description of file name variables at https://www.tencentcloud.comom/document/product/862/37039.?from_cn_redirect=1
+	// 
+	// Relative path example:
+	//  - File name_{variable name}.{format}.
+	//  - File name.{format}.
+	// 
+	// Absolute path example:
+	//  -/Custom path/File name_{variable name}.{format}.
+	// 
+	// If this field is left unspecified, the default value is the relative path in the following format: {inputName}_smartsubtitle_{definition}.{format}.
+	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
 }
 
 type SnapshotByTimeOffsetTaskInput struct {
@@ -15426,6 +15550,11 @@ type SpekeDrm struct {
 	// preset 0: use the same key to encrypt all substreams
 	// preset1: use different keys for each substream
 	EncryptionPreset *string `json:"EncryptionPreset,omitnil,omitempty" name:"EncryptionPreset"`
+}
+
+type SubtitlePosition struct {
+	// Y-coordinate value when the subtitle is centered.
+	CenterY *int64 `json:"CenterY,omitnil,omitempty" name:"CenterY"`
 }
 
 type SubtitleTemplate struct {
@@ -15840,6 +15969,23 @@ type TextWatermarkTemplateInputForUpdate struct {
 
 	// Text content, up to 100 characters.
 	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
+}
+
+type TimeSpotCheck struct {
+	// Duration of each loop detection in the spot check policy, in seconds. Valid values:
+	// 
+	//  - Minimum value: 10.
+	//  - Maximum value: 86400.
+	CheckDuration *uint64 `json:"CheckDuration,omitnil,omitempty" name:"CheckDuration"`
+
+	// Detection interval of the spot check policy, which indicates how long to wait before conducting the next detection after one detection is completed.
+	CheckInterval *uint64 `json:"CheckInterval,omitnil,omitempty" name:"CheckInterval"`
+
+	// Duration for which the opening clip is skipped.
+	SkipDuration *uint64 `json:"SkipDuration,omitnil,omitempty" name:"SkipDuration"`
+
+	// Number of loops. When this field is empty or set to 0, the default behavior is to loop until the video ends.
+	CirclesNumber *uint64 `json:"CirclesNumber,omitnil,omitempty" name:"CirclesNumber"`
 }
 
 type TrackInfo struct {

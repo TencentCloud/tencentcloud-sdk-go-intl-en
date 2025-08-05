@@ -1030,8 +1030,11 @@ type CompareResult struct {
 	// The liveness algorithm package generated during this SDK-based liveness detection.
 	LiveData *FileInfo `json:"LiveData,omitnil,omitempty" name:"LiveData"`
 
-	// The download URL of the video used for verification, which is valid for 10 minutes.
+	// The download URL of the video used for verification, which contains specific color reflection effects, is valid for 10 minutes.
 	LiveVideo *FileInfo `json:"LiveVideo,omitnil,omitempty" name:"LiveVideo"`
+
+	// Records the specific action performed by the user, used for AI Face Shield analysis.
+	ActionVideo *FileInfo `json:"ActionVideo,omitnil,omitempty" name:"ActionVideo"`
 
 	// The liveness detection result code.
 	// 0: Success.
@@ -1664,8 +1667,11 @@ type GetFaceIdResultIntlResponseParams struct {
 	// The best frame screenshot (in Base64) obtained during the verification.
 	BestFrame *string `json:"BestFrame,omitnil,omitempty" name:"BestFrame"`
 
-	// The video file (Base64) for verification.
+	// The video file (Base64) for verification.Used for verification, contains specific color reflection effects.
 	Video *string `json:"Video,omitnil,omitempty" name:"Video"`
+
+	// Records the specific action performed by the user, used for AI Face Shield analysis.
+	ActionVideo *string `json:"ActionVideo,omitnil,omitempty" name:"ActionVideo"`
 
 	// The similarity, with a value range of 0-100. A greater value indicates higher similarity. This parameter is returned only in the `compare` (selfie verification) mode.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.

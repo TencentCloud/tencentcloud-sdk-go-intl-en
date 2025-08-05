@@ -2224,7 +2224,7 @@ type DBInstance struct {
 	// Instance renewal flag
 	RenewFlag *int64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 
-	// High-availability instance type. Valid values: 1 (dual-server high-availability), 2 (standalone), 3 (multi-AZ), 4 (multi-AZ cluster), 5 (cluster), 9 (private consumption)
+	// Instance disaster recovery type. 1: dual-server high availability; 2: single-node; 3: cross-AZ; 4: cross-AZ cluster; 5: cluster; 6: multi-node cluster; 7: multi-node cross-AZ cluster.
 	Model *int64 `json:"Model,omitnil,omitempty" name:"Model"`
 
 	// Instance region name, such as ap-guangzhou
@@ -2260,25 +2260,25 @@ type DBInstance struct {
 	// Unique string-type ID of instance subnet in the format of `subnet-xxx`, which is an empty string if the basic network is used
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance isolation operation.
 	IsolateOperator *string `json:"IsolateOperator,omitnil,omitempty" name:"IsolateOperator"`
 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Publishing/Subscription flag. SUB: subscription instance; PUB: publishing instance. If this parameter is left blank, the instance is an ordinary instance that does not involve publishing or subscription.
 	SubFlag *string `json:"SubFlag,omitnil,omitempty" name:"SubFlag"`
 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Read-only flag. RO: read-only instance; MASTER: primary instance bound to a read-only instance. If this parameter is left blank, the instance is not a read-only instance and is not in any read-only group.
 	ROFlag *string `json:"ROFlag,omitnil,omitempty" name:"ROFlag"`
 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Disaster recovery type. MIRROR: image; ALWAYSON: Always On; SINGLE: single instance.
 	HAFlag *string `json:"HAFlag,omitnil,omitempty" name:"HAFlag"`
 
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Backup mode. master_pkg: backup on the primary node (default value); master_no_pkg: no backup on the primary node; slave_pkg: backup on secondary nodes (valid for Always On clusters); slave_no_pkg: no backup on secondary nodes (valid for Always On clusters). This parameter is invalid for read-only instances.
 	BackupModel *string `json:"BackupModel,omitnil,omitempty" name:"BackupModel"`
 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance backup information.
 	InstanceNote *string `json:"InstanceNote,omitnil,omitempty" name:"InstanceNote"`
 
 	// Backup cycle
@@ -2290,7 +2290,7 @@ type DBInstance struct {
 	// Data (log) backup retention period
 	BackupSaveDays *int64 `json:"BackupSaveDays,omitnil,omitempty" name:"BackupSaveDays"`
 
-	// Instance type. Valid values: `HA` (high-availability), `RO` (read-only), `SI` (basic edition), `BI` (business intelligence service).
+	// Instance type. HA: high-availability instance; RO: read-only instance; SI: basic edition instance; BI: business intelligence service instance; cvmHA: high-availability instance with cloud disk; cvmRO: read-only instance with cloud disk; MultiHA: multi-node instance; cvmMultiHA: multi-node instance with cloud disk.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
 	// The target region of cross-region backup. If this parameter left empty, it indicates that cross-region backup is disabled.
@@ -2317,14 +2317,17 @@ type DBInstance struct {
 	// Whether the instance is deployed across AZs
 	IsDrZone *bool `json:"IsDrZone,omitnil,omitempty" name:"IsDrZone"`
 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Secondary AZ information on the two-node instance.
 	SlaveZones *SlaveZones `json:"SlaveZones,omitnil,omitempty" name:"SlaveZones"`
 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Architecture flag. SINGLE: single-node; DOUBLE: two-node.
 	Architecture *string `json:"Architecture,omitnil,omitempty" name:"Architecture"`
 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Type flag. EXCLUSIVE: exclusive; SHARED: shared.
 	Style *string `json:"Style,omitnil,omitempty" name:"Style"`
+
+
+	MultiSlaveZones []*SlaveZones `json:"MultiSlaveZones,omitnil,omitempty" name:"MultiSlaveZones"`
 }
 
 type DBPrivilege struct {
@@ -3853,7 +3856,7 @@ type DescribeDBInstancesRequestParams struct {
 	// The list of instance version numbers, such as 2008R2, 2012SP3
 	VersionSet []*string `json:"VersionSet,omitnil,omitempty" name:"VersionSet"`
 
-	// Instance availability zone, such as ap-guangzhou-2
+	// Instance availability zone, such as ap-guangzhou-3
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// The list of instance tags
@@ -3865,10 +3868,10 @@ type DescribeDBInstancesRequestParams struct {
 	// Unique Uid of an instance
 	UidSet []*string `json:"UidSet,omitnil,omitempty" name:"UidSet"`
 
-	// Instance type. Valid values: `HA` (high-availability), `RO` (read-only), `SI` (basic edition), `BI` (business intelligence service).
+	// Instance type. HA: high-availability instance; RO: read-only instance; SI: basic edition instance; BI: business intelligence service instance; cvmHA: dual-server high-availability instance with cloud disk; cvmRO: read-only instance with cloud disk; MultiHA: multi-node instance; cvmMultiHA: multi-node instance with cloud disk.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-
+	// Pagination query method. offset - pagination query by offset; pageNumber - pagination query by number of pages. The default value is pageNumber.
 	PaginationType *string `json:"PaginationType,omitnil,omitempty" name:"PaginationType"`
 }
 
@@ -3920,7 +3923,7 @@ type DescribeDBInstancesRequest struct {
 	// The list of instance version numbers, such as 2008R2, 2012SP3
 	VersionSet []*string `json:"VersionSet,omitnil,omitempty" name:"VersionSet"`
 
-	// Instance availability zone, such as ap-guangzhou-2
+	// Instance availability zone, such as ap-guangzhou-3
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// The list of instance tags
@@ -3932,9 +3935,10 @@ type DescribeDBInstancesRequest struct {
 	// Unique Uid of an instance
 	UidSet []*string `json:"UidSet,omitnil,omitempty" name:"UidSet"`
 
-	// Instance type. Valid values: `HA` (high-availability), `RO` (read-only), `SI` (basic edition), `BI` (business intelligence service).
+	// Instance type. HA: high-availability instance; RO: read-only instance; SI: basic edition instance; BI: business intelligence service instance; cvmHA: dual-server high-availability instance with cloud disk; cvmRO: read-only instance with cloud disk; MultiHA: multi-node instance; cvmMultiHA: multi-node instance with cloud disk.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
+	// Pagination query method. offset - pagination query by offset; pageNumber - pagination query by number of pages. The default value is pageNumber.
 	PaginationType *string `json:"PaginationType,omitnil,omitempty" name:"PaginationType"`
 }
 
@@ -5396,10 +5400,10 @@ func (r *DescribeZonesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeZonesResponseParams struct {
-	// Number of AZs returned
+	// Number of AZs returned.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Array of AZs
+	// Array of AZs.
 	ZoneSet []*ZoneInfo `json:"ZoneSet,omitnil,omitempty" name:"ZoneSet"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.

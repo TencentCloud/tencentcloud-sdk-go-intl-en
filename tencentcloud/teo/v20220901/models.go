@@ -20,6 +20,37 @@ import (
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
+type APIResource struct {
+	// Specifies the resource ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Specifies the resource name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Specifies the API service ID list associated with the API resource.
+	APIServiceIds []*string `json:"APIServiceIds,omitnil,omitempty" name:"APIServiceIds"`
+
+	// Specifies the resource path.
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+
+	// Request method list. valid values: GET, POST, PUT, HEAD, PATCH, OPTIONS, DELETE.
+	Methods []*string `json:"Methods,omitnil,omitempty" name:"Methods"`
+
+	// Specifies the specific content of the request content match rule, which must comply with the expression grammar. please refer to the product document for detailed requirements.
+	RequestConstraint *string `json:"RequestConstraint,omitnil,omitempty" name:"RequestConstraint"`
+}
+
+type APIService struct {
+	// API service ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Specifies the API service name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Specifies the base path.
+	BasePath *string `json:"BasePath,omitnil,omitempty" name:"BasePath"`
+}
+
 type AccelerateMainland struct {
 	// Whether to enable Cross-MLC-border acceleration. Valid values: 
 	// <li>`on`: Enable;</li>
@@ -207,8 +238,7 @@ type AclConfig struct {
 	// The custom rule.
 	AclUserRules []*AclUserRule `json:"AclUserRules,omitnil,omitempty" name:"AclUserRules"`
 
-	// Custom managed rules
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Managed custom rules.
 	Customizes []*AclUserRule `json:"Customizes,omitnil,omitempty" name:"Customizes"`
 }
 
@@ -410,8 +440,7 @@ type AlgDetectRule struct {
 	// Condition specified for the rule.
 	AlgConditions []*AclCondition `json:"AlgConditions,omitnil,omitempty" name:"AlgConditions"`
 
-	// Validate Cookie when the condition is satisfied.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Checksum of the Cookie and behavior analysis of the session.
 	AlgDetectSession *AlgDetectSession `json:"AlgDetectSession,omitnil,omitempty" name:"AlgDetectSession"`
 
 	// Validate client behavior when the condition is satisfied.
@@ -611,8 +640,7 @@ type ApplicationProxyRule struct {
 	// <li>false: Disable.</li>Default value: false.
 	SessionPersist *bool `json:"SessionPersist,omitnil,omitempty" name:"SessionPersist"`
 
-	// Duration for session persistence. The value takes effect only when SessionPersist is true.
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// Duration for session persistence. the value takes effect only when SessionPersist is true.
 	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil,omitempty" name:"SessionPersistTime"`
 
 	// Origin server port. Supported formats:
@@ -620,8 +648,7 @@ type ApplicationProxyRule struct {
 	// <li>A port range, such as 81-82, indicating two ports 81 and 82.</li>
 	OriginPort *string `json:"OriginPort,omitnil,omitempty" name:"OriginPort"`
 
-	// Rule tag.
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// Tag of the rule.
 	RuleTag *string `json:"RuleTag,omitnil,omitempty" name:"RuleTag"`
 }
 
@@ -634,6 +661,15 @@ type AscriptionInfo struct {
 
 	// The record value.
 	RecordValue *string `json:"RecordValue,omitnil,omitempty" name:"RecordValue"`
+}
+
+type AudioTemplateInfo struct {
+	// Encoding format for audio streams. optional values:.
+	// <li>libfdk_aac.</li>
+	Codec *string `json:"Codec,omitnil,omitempty" name:"Codec"`
+
+	// Audio channel quantity. valid values: <li>2: dual-channel.</li> default value: 2.
+	AudioChannel *uint64 `json:"AudioChannel,omitnil,omitempty" name:"AudioChannel"`
 }
 
 type AuthenticationParameters struct {
@@ -678,23 +714,22 @@ type BandwidthAbuseDefense struct {
 }
 
 type BillingData struct {
-	// Data timestamp.
+	// Specifies the data timestamp.
 	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
 	// Value.
 	Value *uint64 `json:"Value,omitnil,omitempty" name:"Value"`
 
-	// Zone ID (or content identifier if enabled).
+	// Site ID of the associated data point. if the content identifier feature is enabled, this item is the content identifier.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Domain name.
+	// Specifies the domain name of the data point.
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
-	// Layer-4 proxy instance ID.
+	// Specifies the layer-4 proxy instance ID the data point belongs to.
 	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
-	// Billing region (based on EdgeOne node location). Values: 
-	// <li>CH: Mainland China</li> <li>AF: Africa</li> <li>AS1: Asia Pacific Region 1</li> <li>AS2: Asia Pacific Region 2</li> <li>AS3: Asia Pacific Region 3</li> <li>EU: Europe</li> <li>MidEast: Middle East</li> <li>NA: North America</li> <li>SA: South America</li>
+	// Specifies the billing region ID the data point belongs to. the billing region is determined by the EdgeOne node region where the actual service user client is located. valid values: <li>CH: chinese mainland</li><li>AF: africa</li><li>AS1: asia pacific zone 1</li><li>AS2: asia pacific zone 2</li><li>AS3: asia pacific zone 3</li><li>EU: europe</li><li>MidEast: middle east</li><li>NA: north america</li><li>SA: south america</li>.
 	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 }
 
@@ -728,22 +763,20 @@ type BindSecurityTemplateToEntityRequestParams struct {
 	// List of domain names to bind to/unbind from a policy template
 	Entities []*string `json:"Entities,omitnil,omitempty" name:"Entities"`
 
-	// Action options. Values include:
-	// <li>`bind`: Bind the domain names to the specified policy template </li>
-	// <li>`unbind-keep-policy`: Unbind a domain name from a policy template and keep the current policy when unbinding</li>
-	// <li>`unbind-use-default`: Unbind domain names from policy templates and use default blank policy.</li> Note: Only one domain name can be unbound at one time. When `Operate` is `unbind-keep-policy` or `unbind-use-default`, there can only be one domain name specified in `Entities`.
+	// Bind or unbind operation option. valid values:.
+	// <Li>`Bind`: bind the domain name to the policy template.</li>.
+	// <li>unbind-keep-policy: unbind a domain name from the policy template while retaining the current policy.</li>.
+	// <li>unbind-use-default: unbind a domain name from the policy template and use the default blank policy.</li> note: the unbinding operation currently only supports unbinding a single domain name. that is, when the Operate parameter value is unbind-keep-policy or unbind-use-default, the Entities parameter list only supports filling in one domain name.
 	Operate *string `json:"Operate,omitnil,omitempty" name:"Operate"`
 
-	// Specifies the ID of the policy template or the site's global policy to be bound or unbound.
-	// - To bind to a policy template, or unbind from it, specify the policy template ID.
-	// - To bind to the site's global policy, or unbind from it, use the @ZoneLevel@domain parameter value.
+	// Specifies the ID of the policy template or the site global policy to be bound or unbound.
+	// <li>To bind to a policy template, or unbind from it, specify the policy template ID.</li>.
+	// <li>To bind to the site's global policy, or unbind from it, use the @ZoneLevel@domain parameter value.</li>.
 	// 
 	// Note: After unbinding, the domain name will use an independent policy and rule quota will be calculated separately. Please make sure there is sufficient rule quota before unbinding.
 	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
-	// Whether to replace the existing policy template bound with the domain name. Values: 
-	// <li>`true`: Replace the template bound to the domain. </li>
-	// <li>`false`: Do not replace the template.</li> Note: In this case, the API returns an error if there is already a policy template bound to the specified domain name.
+	// If the imported domain name has already been bound to a policy template (including a site-level security policy), this parameter indicates whether to replace the template by setting it. the default value is true. values: <li>`true`: replace the template currently bound to the domain.</li> <li>`false`: do not replace the template currently bound to the domain.</li> note: when set to false, if the imported domain name has already been bound to a policy template, the API will return an error; a site-level security policy is also a type of policy template.
 	OverWrite *bool `json:"OverWrite,omitnil,omitempty" name:"OverWrite"`
 }
 
@@ -756,22 +789,20 @@ type BindSecurityTemplateToEntityRequest struct {
 	// List of domain names to bind to/unbind from a policy template
 	Entities []*string `json:"Entities,omitnil,omitempty" name:"Entities"`
 
-	// Action options. Values include:
-	// <li>`bind`: Bind the domain names to the specified policy template </li>
-	// <li>`unbind-keep-policy`: Unbind a domain name from a policy template and keep the current policy when unbinding</li>
-	// <li>`unbind-use-default`: Unbind domain names from policy templates and use default blank policy.</li> Note: Only one domain name can be unbound at one time. When `Operate` is `unbind-keep-policy` or `unbind-use-default`, there can only be one domain name specified in `Entities`.
+	// Bind or unbind operation option. valid values:.
+	// <Li>`Bind`: bind the domain name to the policy template.</li>.
+	// <li>unbind-keep-policy: unbind a domain name from the policy template while retaining the current policy.</li>.
+	// <li>unbind-use-default: unbind a domain name from the policy template and use the default blank policy.</li> note: the unbinding operation currently only supports unbinding a single domain name. that is, when the Operate parameter value is unbind-keep-policy or unbind-use-default, the Entities parameter list only supports filling in one domain name.
 	Operate *string `json:"Operate,omitnil,omitempty" name:"Operate"`
 
-	// Specifies the ID of the policy template or the site's global policy to be bound or unbound.
-	// - To bind to a policy template, or unbind from it, specify the policy template ID.
-	// - To bind to the site's global policy, or unbind from it, use the @ZoneLevel@domain parameter value.
+	// Specifies the ID of the policy template or the site global policy to be bound or unbound.
+	// <li>To bind to a policy template, or unbind from it, specify the policy template ID.</li>.
+	// <li>To bind to the site's global policy, or unbind from it, use the @ZoneLevel@domain parameter value.</li>.
 	// 
 	// Note: After unbinding, the domain name will use an independent policy and rule quota will be calculated separately. Please make sure there is sufficient rule quota before unbinding.
 	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
-	// Whether to replace the existing policy template bound with the domain name. Values: 
-	// <li>`true`: Replace the template bound to the domain. </li>
-	// <li>`false`: Do not replace the template.</li> Note: In this case, the API returns an error if there is already a policy template bound to the specified domain name.
+	// If the imported domain name has already been bound to a policy template (including a site-level security policy), this parameter indicates whether to replace the template by setting it. the default value is true. values: <li>`true`: replace the template currently bound to the domain.</li> <li>`false`: do not replace the template currently bound to the domain.</li> note: when set to false, if the imported domain name has already been bound to a policy template, the API will return an error; a site-level security policy is also a type of policy template.
 	OverWrite *bool `json:"OverWrite,omitnil,omitempty" name:"OverWrite"`
 }
 
@@ -978,8 +1009,7 @@ type BotConfig struct {
 	// The settings of the client reputation rule. If it is null, the settings that were last configured will be used.
 	BotPortraitRule *BotPortraitRule `json:"BotPortraitRule,omitnil,omitempty" name:"BotPortraitRule"`
 
-	// The bot intelligence settings. If it is null, the settings that were last configured will be used.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Bot intelligent analysis. if null, use the last set configuration by default.
 	IntelligenceRule *IntelligenceRule `json:"IntelligenceRule,omitnil,omitempty" name:"IntelligenceRule"`
 
 	// Settings of the custom bot rule. If it is null, the settings that were last configured will be used.
@@ -988,8 +1018,7 @@ type BotConfig struct {
 	// Active bot detection rule.
 	AlgDetectRule []*AlgDetectRule `json:"AlgDetectRule,omitnil,omitempty" name:"AlgDetectRule"`
 
-	// Settings of the bot managed rule. It is only used for output.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Bot managed custom policy. optional input. output usage only.
 	Customizes []*BotUserRule `json:"Customizes,omitnil,omitempty" name:"Customizes"`
 }
 
@@ -1004,8 +1033,7 @@ type BotExtendAction struct {
 	// <li>`longdelay`: Add long latency.</li>
 	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
-	// The probability for triggering the action. Value range: 0-100.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// The probability for triggering the action. value range: 0-100.
 	Percent *uint64 `json:"Percent,omitnil,omitempty" name:"Percent"`
 }
 
@@ -1020,24 +1048,19 @@ type BotManagedRule struct {
 	// The rule ID, which is only used as an output parameter.
 	RuleID *int64 `json:"RuleID,omitnil,omitempty" name:"RuleID"`
 
-	// The ID of the rule that applies the "Allow" action.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Rule ID to allow. defaults to no rules configured for allowance.
 	TransManagedIds []*int64 `json:"TransManagedIds,omitnil,omitempty" name:"TransManagedIds"`
 
-	// The ID of the rule that applies the "JavaScript challenge" action.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Rule ID of the JS challenge. default is all rules without configuring the JS challenge.
 	AlgManagedIds []*int64 `json:"AlgManagedIds,omitnil,omitempty" name:"AlgManagedIds"`
 
-	// The ID of the rule that applies the "Managed challenge" action.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The rule ID for digit verification code. by default, all rules do not configure digit verification code.
 	CapManagedIds []*int64 `json:"CapManagedIds,omitnil,omitempty" name:"CapManagedIds"`
 
-	// The ID of the rule that applies the "Observe" action.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Rule ID for observation. by default, observation is not configured for all rules.
 	MonManagedIds []*int64 `json:"MonManagedIds,omitnil,omitempty" name:"MonManagedIds"`
 
-	// The ID of the rule that applies the "Block" action.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Rule ID for interception. by default, all rules have no configuration interception.
 	DropManagedIds []*int64 `json:"DropManagedIds,omitnil,omitempty" name:"DropManagedIds"`
 }
 
@@ -1055,20 +1078,16 @@ type BotPortraitRule struct {
 	// The rule ID, which is only used as an output parameter.
 	RuleID *int64 `json:"RuleID,omitnil,omitempty" name:"RuleID"`
 
-	// The ID of the rule that applies the "JavaScript challenge" action.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The rule ID of JS challenge. default all rules without configuring JS challenge.
 	AlgManagedIds []*int64 `json:"AlgManagedIds,omitnil,omitempty" name:"AlgManagedIds"`
 
-	// The ID of the rule that applies the "Managed challenge" action.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Rule ID for digit captcha-intl. default is all rules without configuring digit captcha-intl.
 	CapManagedIds []*int64 `json:"CapManagedIds,omitnil,omitempty" name:"CapManagedIds"`
 
-	// The ID of the rule that applies the "Observe" action.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Rule ID for observation. by default, observation is not configured for all rules.
 	MonManagedIds []*int64 `json:"MonManagedIds,omitnil,omitempty" name:"MonManagedIds"`
 
-	// The ID of the rule that applies the "Block" action.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Rule ID for interception. default to all rules with no configuration interception.
 	DropManagedIds []*int64 `json:"DropManagedIds,omitnil,omitempty" name:"DropManagedIds"`
 }
 
@@ -1161,9 +1180,8 @@ type Cache struct {
 	// <li>`off`: Disable</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Cache expiration time setting.
-	// Unit: second. The maximum value is 365 days.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the cache expiration time settings.
+	// Unit: seconds. the maximum settable value is 365 days.
 	CacheTime *int64 `json:"CacheTime,omitnil,omitempty" name:"CacheTime"`
 
 	// Whether to enable force cache. Values:
@@ -1215,16 +1233,14 @@ type CacheConfigParameters struct {
 }
 
 type CacheKey struct {
-	// Whether to enable full-path cache. Values:
-	// <li>`on`: Enable full-path cache (i.e., disable Ignore Query String).</li>
-	// <li>`off`: Disable full-path cache (i.e., enable Ignore Query String).</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to enable full path cache. valid values:.
+	// <li>`on`: enable full-path cache (i.e., disable ignore query string).</li>.
+	// <li>`off`: disable full-path cache (i.e., enable parameter ignore).</li>.
 	FullUrlCache *string `json:"FullUrlCache,omitnil,omitempty" name:"FullUrlCache"`
 
-	// Whether to ignore case in the cache key. Values:
-	// <li>`on`: Ignore</li>
-	// <li>`off`: Not ignore</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies whether to use case-insensitive cache. valid values:.
+	// <li>`on`: ignore</li>.
+	// <li>`off`: not ignore</li>.
 	IgnoreCase *string `json:"IgnoreCase,omitnil,omitempty" name:"IgnoreCase"`
 
 	// Request parameter contained in `CacheKey`. 
@@ -1344,8 +1360,7 @@ type CachePrefresh struct {
 	// <li>`off`: Disable</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// The cache prefresh percentage. Values: 1-99
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Cache pre-refresh percentage. value range: 1-99.
 	Percent *int64 `json:"Percent,omitnil,omitempty" name:"Percent"`
 }
 
@@ -1516,6 +1531,38 @@ type ClientAttestationRules struct {
 	Rules []*ClientAttestationRule `json:"Rules,omitnil,omitempty" name:"Rules"`
 }
 
+type ClientAttester struct {
+	// Authentication option ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Specifies the authentication option name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Authentication rule type. only returned in the response. valid values:.
+	// <li>PRESET: system PRESET rule. only AttesterDuration can be modified.</li>.
+	// <Li>CUSTOM: user-defined rules.</li>.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Authentication method. valid values:.
+	// <Li>TC-RCE: uses the full-stack risk control engine for authentication.</li>.
+	// <Li>TC-CAPTCHA-Intl: specifies authentication using captcha-intl.</li>.
+	AttesterSource *string `json:"AttesterSource,omitnil,omitempty" name:"AttesterSource"`
+
+	// Validity time of the authentication. defaults to 60s. supported measurement units:.
+	// <Li>S: specifies seconds. value range: 60–43200.</li>.
+	// <Li>M: specifies minutes. value range: 1–720.</li>.
+	// <Li>H. specifies the hour. value range: 1–12.</li>.
+	AttesterDuration *string `json:"AttesterDuration,omitnil,omitempty" name:"AttesterDuration"`
+
+	// TC-RCE authentication configuration message.
+	// <li>Specifies the required field when the AttesterSource parameter value is TC-RCE.</li>.
+	TCRCEOption *TCRCEOption `json:"TCRCEOption,omitnil,omitempty" name:"TCRCEOption"`
+
+	// Specifies the configuration message for TC-CAPTCHA certification.
+	// <li>Specifies the required field when the AttesterSource parameter value is TC-CAPTCHA.</li>.
+	TCCaptchaOption *TCCaptchaOption `json:"TCCaptchaOption,omitnil,omitempty" name:"TCCaptchaOption"`
+}
+
 type ClientFiltering struct {
 	// Whether intelligent client filtering is enabled. valid values: <li>on: enable;</li> <li>off: disable.</li>.
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
@@ -1563,8 +1610,7 @@ type ClientIpHeader struct {
 	// <li>`off`: Disable</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Name of the request header containing the client IP address for origin-pull. When Switch is on, this parameter is required. X-Forwarded-For is not allowed for this parameter.
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// Specifies the request header name containing the client IP For origin-pull. this parameter is required when Switch is on. X-Forwarded-For is not allowed For this parameter.
 	HeaderName *string `json:"HeaderName,omitnil,omitempty" name:"HeaderName"`
 }
 
@@ -1576,10 +1622,9 @@ type CnameStatus struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Cname *string `json:"Cname,omitnil,omitempty" name:"Cname"`
 
-	// The CNAME status. Values:
-	// <li>`active`: Activated</li>
-	// <li>`moved`: Not activated </li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// CNAME status. valid values:.
+	// <li>`active`: activated</li>.
+	// <li>`moved`: not effective;</li>.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
@@ -1597,10 +1642,9 @@ type Compression struct {
 	// <li>`off`: Disable</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Compression algorithm. Values:
-	// <li>`brotli`: Brotli algorithm</li>
-	// <li>`gzip`: Gzip algorithm</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Supported compression algorithm list. valid values:.
+	// <Li>Brotli: specifies the brotli algorithm.</li>.
+	// <Li>Gzip: specifies the gzip algorithm.</li>.
 	Algorithms []*string `json:"Algorithms,omitnil,omitempty" name:"Algorithms"`
 }
 
@@ -2792,6 +2836,117 @@ func (r *CreateFunctionRuleResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateJustInTimeTranscodeTemplateRequestParams struct {
+	// Specifies the site ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Name of the just in time transcoding template, length limited to 64 characters.
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
+
+	// Template description, with a length limit of 256 characters. empty by default.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Enable video stream. valid values:.
+	// <li>`on`: Enable;</li>
+	// 
+	// <li>off: disabled.</li>default value: on.
+	VideoStreamSwitch *string `json:"VideoStreamSwitch,omitnil,omitempty" name:"VideoStreamSwitch"`
+
+	// Enable audio stream switch. valid values:.
+	// <li>`on`: Enable;</li>
+	// 
+	// <li>off: disabled.</li>default value: on.
+	AudioStreamSwitch *string `json:"AudioStreamSwitch,omitnil,omitempty" name:"AudioStreamSwitch"`
+
+	// Video stream configuration parameters. this field is required when VideoStreamSwitch is on.
+	VideoTemplate *VideoTemplateInfo `json:"VideoTemplate,omitnil,omitempty" name:"VideoTemplate"`
+
+	// Audio stream configuration parameters. this field is required when AudioStreamSwitch is on.
+	AudioTemplate *AudioTemplateInfo `json:"AudioTemplate,omitnil,omitempty" name:"AudioTemplate"`
+}
+
+type CreateJustInTimeTranscodeTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the site ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Name of the just in time transcoding template, length limited to 64 characters.
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
+
+	// Template description, with a length limit of 256 characters. empty by default.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Enable video stream. valid values:.
+	// <li>`on`: Enable;</li>
+	// 
+	// <li>off: disabled.</li>default value: on.
+	VideoStreamSwitch *string `json:"VideoStreamSwitch,omitnil,omitempty" name:"VideoStreamSwitch"`
+
+	// Enable audio stream switch. valid values:.
+	// <li>`on`: Enable;</li>
+	// 
+	// <li>off: disabled.</li>default value: on.
+	AudioStreamSwitch *string `json:"AudioStreamSwitch,omitnil,omitempty" name:"AudioStreamSwitch"`
+
+	// Video stream configuration parameters. this field is required when VideoStreamSwitch is on.
+	VideoTemplate *VideoTemplateInfo `json:"VideoTemplate,omitnil,omitempty" name:"VideoTemplate"`
+
+	// Audio stream configuration parameters. this field is required when AudioStreamSwitch is on.
+	AudioTemplate *AudioTemplateInfo `json:"AudioTemplate,omitnil,omitempty" name:"AudioTemplate"`
+}
+
+func (r *CreateJustInTimeTranscodeTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateJustInTimeTranscodeTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "TemplateName")
+	delete(f, "Comment")
+	delete(f, "VideoStreamSwitch")
+	delete(f, "AudioStreamSwitch")
+	delete(f, "VideoTemplate")
+	delete(f, "AudioTemplate")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateJustInTimeTranscodeTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateJustInTimeTranscodeTemplateResponseParams struct {
+	// Unique identifier of the instant transcoding template for jit transcoding URL concatenation.
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateJustInTimeTranscodeTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateJustInTimeTranscodeTemplateResponseParams `json:"Response"`
+}
+
+func (r *CreateJustInTimeTranscodeTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateJustInTimeTranscodeTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateL4ProxyRequestParams struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -3157,6 +3312,265 @@ func (r *CreateLoadBalancerResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateMultiPathGatewayLineRequestParams struct {
+	// Specifies the site ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Multi-Channel security gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Line type. valid values:
+	// <li>direct: direct connection line, cannot be modified or deleted.</li>
+	//  <li>proxy: EdgeOne layer-4 proxy line, supports modifying instance ID and rule ID, but cannot be deleted.</li> <li>custom: custom line, supports modifying and deleting instance ID and rule ID.</li>
+	LineType *string `json:"LineType,omitnil,omitempty" name:"LineType"`
+
+	// Line address format: ip:port.
+	LineAddress *string `json:"LineAddress,omitnil,omitempty" name:"LineAddress"`
+
+	// The layer-4 proxy instance ID is required when the LineType value is proxy (EdgeOne layer-4 proxy) and can be obtained via the api [DescribeL4proxy](https://intl.cloud.tencent.com/document/api/1552/103413?from_cn_redirect=1).
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
+
+	// Forwarding rule ID, this field is required when the line type LineType value is proxy (EdgeOne layer-4 proxy). you can obtain it from the api [DescribeL4ProxyRules](https://intl.cloud.tencent.com/document/api/1552/103412?from_cn_redirect=1).
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+}
+
+type CreateMultiPathGatewayLineRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the site ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Multi-Channel security gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Line type. valid values:
+	// <li>direct: direct connection line, cannot be modified or deleted.</li>
+	//  <li>proxy: EdgeOne layer-4 proxy line, supports modifying instance ID and rule ID, but cannot be deleted.</li> <li>custom: custom line, supports modifying and deleting instance ID and rule ID.</li>
+	LineType *string `json:"LineType,omitnil,omitempty" name:"LineType"`
+
+	// Line address format: ip:port.
+	LineAddress *string `json:"LineAddress,omitnil,omitempty" name:"LineAddress"`
+
+	// The layer-4 proxy instance ID is required when the LineType value is proxy (EdgeOne layer-4 proxy) and can be obtained via the api [DescribeL4proxy](https://intl.cloud.tencent.com/document/api/1552/103413?from_cn_redirect=1).
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
+
+	// Forwarding rule ID, this field is required when the line type LineType value is proxy (EdgeOne layer-4 proxy). you can obtain it from the api [DescribeL4ProxyRules](https://intl.cloud.tencent.com/document/api/1552/103412?from_cn_redirect=1).
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+}
+
+func (r *CreateMultiPathGatewayLineRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateMultiPathGatewayLineRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "GatewayId")
+	delete(f, "LineType")
+	delete(f, "LineAddress")
+	delete(f, "ProxyId")
+	delete(f, "RuleId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMultiPathGatewayLineRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateMultiPathGatewayLineResponseParams struct {
+	// Line ID. valid values:
+	// <li>line-1: EdgeOne layer-4 proxy line, supports modifying instances and rules, but cannot be deleted.</li>
+	// <li> line-2 and above: EdgeOne layer-4 proxy or custom lines, supports modifying, deleting instances and rules.</li>
+	LineId *string `json:"LineId,omitnil,omitempty" name:"LineId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateMultiPathGatewayLineResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateMultiPathGatewayLineResponseParams `json:"Response"`
+}
+
+func (r *CreateMultiPathGatewayLineResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateMultiPathGatewayLineResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateMultiPathGatewayRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Gateway type. valid values:
+	// <Li> Cloud: cloud gateway, a gateway created and managed by Tencent cloud;</li>
+	// <Li>Private: private gateway, a user-deployed private gateway.</li>
+	GatewayType *string `json:"GatewayType,omitnil,omitempty" name:"GatewayType"`
+
+	// Gateway name: up to 16 characters, allowed characters (a-z, A-Z, 0-9, -, _).
+	GatewayName *string `json:"GatewayName,omitnil,omitempty" name:"GatewayName"`
+
+	// Gateway port: value range: 1-65535 (excluding 8888).
+	GatewayPort *int64 `json:"GatewayPort,omitnil,omitempty" name:"GatewayPort"`
+
+	// Gateway region: GatewayType value is cloud (cloud gateway). required. RegionId list can be obtained from the DescribeMultiPathGatewayRegions API.
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+
+	// Gateway address (required when GatewayType=private):
+	// Before using this address, ensure it has been registered in the Tencent Cloud Multi-Path Security Acceleration Gateway system. 
+	// If not registered, submit a support ticket or contact your architect to pre-register the gateway IP address in the system before API invocation.
+	GatewayIP *string `json:"GatewayIP,omitnil,omitempty" name:"GatewayIP"`
+}
+
+type CreateMultiPathGatewayRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Gateway type. valid values:
+	// <Li> Cloud: cloud gateway, a gateway created and managed by Tencent cloud;</li>
+	// <Li>Private: private gateway, a user-deployed private gateway.</li>
+	GatewayType *string `json:"GatewayType,omitnil,omitempty" name:"GatewayType"`
+
+	// Gateway name: up to 16 characters, allowed characters (a-z, A-Z, 0-9, -, _).
+	GatewayName *string `json:"GatewayName,omitnil,omitempty" name:"GatewayName"`
+
+	// Gateway port: value range: 1-65535 (excluding 8888).
+	GatewayPort *int64 `json:"GatewayPort,omitnil,omitempty" name:"GatewayPort"`
+
+	// Gateway region: GatewayType value is cloud (cloud gateway). required. RegionId list can be obtained from the DescribeMultiPathGatewayRegions API.
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+
+	// Gateway address (required when GatewayType=private):
+	// Before using this address, ensure it has been registered in the Tencent Cloud Multi-Path Security Acceleration Gateway system. 
+	// If not registered, submit a support ticket or contact your architect to pre-register the gateway IP address in the system before API invocation.
+	GatewayIP *string `json:"GatewayIP,omitnil,omitempty" name:"GatewayIP"`
+}
+
+func (r *CreateMultiPathGatewayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateMultiPathGatewayRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "GatewayType")
+	delete(f, "GatewayName")
+	delete(f, "GatewayPort")
+	delete(f, "RegionId")
+	delete(f, "GatewayIP")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMultiPathGatewayRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateMultiPathGatewayResponseParams struct {
+	// Specifies the gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateMultiPathGatewayResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateMultiPathGatewayResponseParams `json:"Response"`
+}
+
+func (r *CreateMultiPathGatewayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateMultiPathGatewayResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateMultiPathGatewaySecretKeyRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Multi-Channel security acceleration gateway access key, base64 string, value range:length of the unencoded string: 32-48 characters, optional, automatically generated by the system if left blank, can be queried through the API DescribeMultiPathGatewaySecretKey.
+	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
+}
+
+type CreateMultiPathGatewaySecretKeyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Multi-Channel security acceleration gateway access key, base64 string, value range:length of the unencoded string: 32-48 characters, optional, automatically generated by the system if left blank, can be queried through the API DescribeMultiPathGatewaySecretKey.
+	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
+}
+
+func (r *CreateMultiPathGatewaySecretKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateMultiPathGatewaySecretKeyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "SecretKey")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMultiPathGatewaySecretKeyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateMultiPathGatewaySecretKeyResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateMultiPathGatewaySecretKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateMultiPathGatewaySecretKeyResponseParams `json:"Response"`
+}
+
+func (r *CreateMultiPathGatewaySecretKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateMultiPathGatewaySecretKeyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateOriginGroupRequestParams struct {
 	// Site ID
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -3420,7 +3834,9 @@ func (r *CreatePlanResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreatePrefetchTaskRequestParams struct {
-	// ID of the site.
+	// Zone ID.
+	// 
+	// If you wish to quickly submit Targets urls under different sites, you can fill in * as the value. but the premise is that the account calling this API must have the permission to all site resources under the root account.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// List of resources to be preheated. Each element format is similar to the following:
@@ -3435,12 +3851,27 @@ type CreatePrefetchTaskRequestParams struct {
 
 	// HTTP header information
 	Headers []*Header `json:"Headers,omitnil,omitempty" name:"Headers"`
+
+	// Media fragment preheating control. valid values:.
+	// <Li>On: enables shard preheating, preheats the description file, and performs recursive resolution of the description file shards for preheating.</li>.
+	// <Li>Off: only preheat the submitted description file.</li>default value: off if left empty.
+	// 
+	// Notes:.
+	// 1. the supported description file is M3U8, and the corresponding shard is TS.
+	// Describes the requirement that the description file can process normal requests and specify the sharding path as per industry standards.
+	// Recursive resolution depth is no more than 3.
+	// Parsed shards normally accumulate daily pre-warming amount. when usage exceeds the quota limit, silent processing is triggered and preheating is no longer executed.
+	// 
+	// This parameter specifies the allowlist feature. if necessary, contact tencent cloud engineers.
+	PrefetchMediaSegments *string `json:"PrefetchMediaSegments,omitnil,omitempty" name:"PrefetchMediaSegments"`
 }
 
 type CreatePrefetchTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the site.
+	// Zone ID.
+	// 
+	// If you wish to quickly submit Targets urls under different sites, you can fill in * as the value. but the premise is that the account calling this API must have the permission to all site resources under the root account.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// List of resources to be preheated. Each element format is similar to the following:
@@ -3453,6 +3884,19 @@ type CreatePrefetchTaskRequest struct {
 
 	// HTTP header information
 	Headers []*Header `json:"Headers,omitnil,omitempty" name:"Headers"`
+
+	// Media fragment preheating control. valid values:.
+	// <Li>On: enables shard preheating, preheats the description file, and performs recursive resolution of the description file shards for preheating.</li>.
+	// <Li>Off: only preheat the submitted description file.</li>default value: off if left empty.
+	// 
+	// Notes:.
+	// 1. the supported description file is M3U8, and the corresponding shard is TS.
+	// Describes the requirement that the description file can process normal requests and specify the sharding path as per industry standards.
+	// Recursive resolution depth is no more than 3.
+	// Parsed shards normally accumulate daily pre-warming amount. when usage exceeds the quota limit, silent processing is triggered and preheating is no longer executed.
+	// 
+	// This parameter specifies the allowlist feature. if necessary, contact tencent cloud engineers.
+	PrefetchMediaSegments *string `json:"PrefetchMediaSegments,omitnil,omitempty" name:"PrefetchMediaSegments"`
 }
 
 func (r *CreatePrefetchTaskRequest) ToJsonString() string {
@@ -3471,6 +3915,7 @@ func (r *CreatePrefetchTaskRequest) FromJsonString(s string) error {
 	delete(f, "Targets")
 	delete(f, "EncodeUrl")
 	delete(f, "Headers")
+	delete(f, "PrefetchMediaSegments")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreatePrefetchTaskRequest has unknown keys!", "")
 	}
@@ -3521,10 +3966,10 @@ type CreatePurgeTaskRequestParams struct {
 	// <li>`purge_cache_tag`: Purge by the cache-tag </li>For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/product/1552/70759?from_cn_redirect=1).
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Node cache purge method, valid for directory, hostname, and all cache refreshes. Valid values: <li>invalidate: Refreshes only resources that were updated under the directory; </li><li>delete: Refreshes all node resources, regardless of whether they were updated. </li>Default value: invalidate.
+	// Node cache clearing method is valid for directory refresh, Hostname refresh, and refresh all cache types. valid values: <li> invalidate: refresh only resources that have been updated under the directory;</li> <li> delete: refresh node resources regardless of whether resources under the directory are updated.</li> default value: invalidate.
 	Method *string `json:"Method,omitnil,omitempty" name:"Method"`
 
-	// List of resources for which cache is to be purged. Each element format depends on the cache purge type and you can refer to the API examples for details. <li>The number of tasks that can be submitted at a time is limited by the quota of a billing package. For details, see [Billing Overview] (https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1).</li>
+	// The list of resources to purge cache, such as https://www.example.com/example.jpg, must carry protocol information. the format for multi-elements depends on the type of cache purging. refer to the following API call example.  <li>the number of tasks that can be submitted at a time is limited by the billing package quota. check [EO billing package](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1).</li>.
 	Targets []*string `json:"Targets,omitnil,omitempty" name:"Targets"`
 
 	// Specifies whether to transcode non-ASCII URLs according to RFC3986.
@@ -3553,10 +3998,10 @@ type CreatePurgeTaskRequest struct {
 	// <li>`purge_cache_tag`: Purge by the cache-tag </li>For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/product/1552/70759?from_cn_redirect=1).
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Node cache purge method, valid for directory, hostname, and all cache refreshes. Valid values: <li>invalidate: Refreshes only resources that were updated under the directory; </li><li>delete: Refreshes all node resources, regardless of whether they were updated. </li>Default value: invalidate.
+	// Node cache clearing method is valid for directory refresh, Hostname refresh, and refresh all cache types. valid values: <li> invalidate: refresh only resources that have been updated under the directory;</li> <li> delete: refresh node resources regardless of whether resources under the directory are updated.</li> default value: invalidate.
 	Method *string `json:"Method,omitnil,omitempty" name:"Method"`
 
-	// List of resources for which cache is to be purged. Each element format depends on the cache purge type and you can refer to the API examples for details. <li>The number of tasks that can be submitted at a time is limited by the quota of a billing package. For details, see [Billing Overview] (https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1).</li>
+	// The list of resources to purge cache, such as https://www.example.com/example.jpg, must carry protocol information. the format for multi-elements depends on the type of cache purging. refer to the following API call example.  <li>the number of tasks that can be submitted at a time is limited by the billing package quota. check [EO billing package](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1).</li>.
 	Targets []*string `json:"Targets,omitnil,omitempty" name:"Targets"`
 
 	// Specifies whether to transcode non-ASCII URLs according to RFC3986.
@@ -3630,19 +4075,21 @@ type CreateRealtimeLogDeliveryTaskRequestParams struct {
 
 	// Type of a real-time log delivery task. Valid values:
 	// <li>cls: push to Tencent Cloud CLS;</li>
-	// <li>custom_endpoint: push to a custom HTTP(S) address;</li>
-	// <li>s3: push to an AWS S3-compatible bucket address.</li>
+	// <li>custom_endpoint: push to a custom HTTP(S) endpoint;</li>
+	// <li>s3: push to an AWS S3-compatible bucket.</li>
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-	// List of entities (L7 domain names or L4 proxy instances) corresponding to a real-time log delivery task. Valid value examples:
-	// <li>L7 domain name: domain.example.com;</li>
-	// <li>L4 proxy instance: sid-2s69eb5wcms7.</li>
+	// List of entities associated with the real-time log delivery task. Valid value examples:
+	// <li>L7 domain name: domain.example.com</li>
+	// <li>L4 proxy instance: sid-2s69eb5wcms7</li>
+	// <li>Edge Function instance: test-zone-2mxigizoh9l9-1257626257</li>
 	EntityList []*string `json:"EntityList,omitnil,omitempty" name:"EntityList"`
 
 	// Dataset type. Valid values:
 	// <li>domain: site acceleration logs;</li>
 	// <li>application: L4 proxy logs;</li>
-	// <li>web-rateLiming: rate limit and CC attack defense logs;</li>
+	// <li>function: Edge Function execution log;</li>
+	// <li>web-rateLiming: rate limiting and CC attack protection logs;</li>
 	// <li>web-attack: managed rule logs;</li>
 	// <li>web-rule: custom rule logs;</li>
 	// <li>web-bot: Bot management logs.</li>
@@ -3653,30 +4100,33 @@ type CreateRealtimeLogDeliveryTaskRequestParams struct {
 	// <li>overseas: global (excluding the Chinese mainland).</li>
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
-	// List of predefined fields for delivery.
+	// Pre-defined log fields to be delivered. Refer to:
+	// <li>[Site acceleration log (L7 access log)](https://www.tencentcloud.com/document/product/1145/61300)</li>
+	// <li>[L4 proxy log](https://www.tencentcloud.com/document/product/1145/61301)</li>
+	// <li>[Edge Function execution log](https://www.tencentcloud.com/document/product/1145/67840)</li>
 	Fields []*string `json:"Fields,omitnil,omitempty" name:"Fields"`
 
-	// The list of custom fields for log delivery, which supports extracting specified content from HTTP request headers, response headers, cookies, and request bodies. Custom field names must be unique. The number of custom fields cannot exceed a maximum of 200. A single real-time log delivery task can configure up to 5 custom fields of the request body type. Currently, only site acceleration logs (LogType=domain) support custom fields.
+	// The list of custom fields for log delivery, which supports extracting specified content from HTTP request headers, response headers, cookies, and request bodies. Custom field names must be unique. The number of custom fields cannot exceed a maximum of 200. A single real-time log delivery task can configure up to 5 custom fields of the request body type. Currently, only site acceleration logs (`LogType`=`domain`) support custom fields.
 	CustomFields []*CustomField `json:"CustomFields,omitnil,omitempty" name:"CustomFields"`
 
-	// Filter criteria of log delivery. If this parameter is not specified, all logs will be shipped.
+	// Filter criteria of log delivery. If this parameter is not specified, all logs will be delivered.
 	DeliveryConditions []*DeliveryCondition `json:"DeliveryConditions,omitnil,omitempty" name:"DeliveryConditions"`
 
 	// Sampling ratio in permille. Value range: 1-1000. For example, 605 indicates a sampling ratio of 60.5%. If this parameter is not specified, the sampling ratio is 100%.
 	Sample *uint64 `json:"Sample,omitnil,omitempty" name:"Sample"`
 
 	// Output format for log delivery. If this field is not specified, the default format is used, which works as follows:
-	// <li>When TaskType is 'custom_endpoint', the default format is an array of JSON objects, with each JSON object representing a log entry;</li>
-	// <li>When TaskType is 's3', the default format is JSON Lines;</li>Specifically, when TaskType is 'cls', the only allowed value for LogFormat.FormatType is 'json', and other parameters in LogFormat will be ignored. It is recommended not to transfer LogFormat.
+	// <li>When `TaskType` is `custom_endpoint`, the default format is an array of JSON objects, with each JSON object representing a log entry;</li>
+	// <li>When `TaskType` is `s3`, the default format is JSON Lines;</li>Specifically, when `TaskType` is `cls`, the only allowed value for `LogFormat.FormatType` is `json`, and other parameters in `LogFormat` will be ignored. It is recommended not to input `LogFormat`.
 	LogFormat *LogFormat `json:"LogFormat,omitnil,omitempty" name:"LogFormat"`
 
-	// Configuration information of CLS. This parameter is required when TaskType is cls.
+	// Configuration information of CLS. This parameter is required when `TaskType` is `cls`.
 	CLS *CLSTopic `json:"CLS,omitnil,omitempty" name:"CLS"`
 
-	// Configuration information of the custom HTTP service. This parameter is required when TaskType is custom_endpoint.
+	// Configuration information of the custom HTTP endpoint. This parameter is required when `TaskType` is `custom_endpoint`.
 	CustomEndpoint *CustomEndpoint `json:"CustomEndpoint,omitnil,omitempty" name:"CustomEndpoint"`
 
-	// Configuration information of the AWS S3-compatible bucket. This parameter is required when TaskType is s3.
+	// Configuration information of the AWS S3-compatible bucket. This parameter is required when `TaskType` is `s3`.
 	S3 *S3 `json:"S3,omitnil,omitempty" name:"S3"`
 }
 
@@ -3691,19 +4141,21 @@ type CreateRealtimeLogDeliveryTaskRequest struct {
 
 	// Type of a real-time log delivery task. Valid values:
 	// <li>cls: push to Tencent Cloud CLS;</li>
-	// <li>custom_endpoint: push to a custom HTTP(S) address;</li>
-	// <li>s3: push to an AWS S3-compatible bucket address.</li>
+	// <li>custom_endpoint: push to a custom HTTP(S) endpoint;</li>
+	// <li>s3: push to an AWS S3-compatible bucket.</li>
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-	// List of entities (L7 domain names or L4 proxy instances) corresponding to a real-time log delivery task. Valid value examples:
-	// <li>L7 domain name: domain.example.com;</li>
-	// <li>L4 proxy instance: sid-2s69eb5wcms7.</li>
+	// List of entities associated with the real-time log delivery task. Valid value examples:
+	// <li>L7 domain name: domain.example.com</li>
+	// <li>L4 proxy instance: sid-2s69eb5wcms7</li>
+	// <li>Edge Function instance: test-zone-2mxigizoh9l9-1257626257</li>
 	EntityList []*string `json:"EntityList,omitnil,omitempty" name:"EntityList"`
 
 	// Dataset type. Valid values:
 	// <li>domain: site acceleration logs;</li>
 	// <li>application: L4 proxy logs;</li>
-	// <li>web-rateLiming: rate limit and CC attack defense logs;</li>
+	// <li>function: Edge Function execution log;</li>
+	// <li>web-rateLiming: rate limiting and CC attack protection logs;</li>
 	// <li>web-attack: managed rule logs;</li>
 	// <li>web-rule: custom rule logs;</li>
 	// <li>web-bot: Bot management logs.</li>
@@ -3714,30 +4166,33 @@ type CreateRealtimeLogDeliveryTaskRequest struct {
 	// <li>overseas: global (excluding the Chinese mainland).</li>
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
-	// List of predefined fields for delivery.
+	// Pre-defined log fields to be delivered. Refer to:
+	// <li>[Site acceleration log (L7 access log)](https://www.tencentcloud.com/document/product/1145/61300)</li>
+	// <li>[L4 proxy log](https://www.tencentcloud.com/document/product/1145/61301)</li>
+	// <li>[Edge Function execution log](https://www.tencentcloud.com/document/product/1145/67840)</li>
 	Fields []*string `json:"Fields,omitnil,omitempty" name:"Fields"`
 
-	// The list of custom fields for log delivery, which supports extracting specified content from HTTP request headers, response headers, cookies, and request bodies. Custom field names must be unique. The number of custom fields cannot exceed a maximum of 200. A single real-time log delivery task can configure up to 5 custom fields of the request body type. Currently, only site acceleration logs (LogType=domain) support custom fields.
+	// The list of custom fields for log delivery, which supports extracting specified content from HTTP request headers, response headers, cookies, and request bodies. Custom field names must be unique. The number of custom fields cannot exceed a maximum of 200. A single real-time log delivery task can configure up to 5 custom fields of the request body type. Currently, only site acceleration logs (`LogType`=`domain`) support custom fields.
 	CustomFields []*CustomField `json:"CustomFields,omitnil,omitempty" name:"CustomFields"`
 
-	// Filter criteria of log delivery. If this parameter is not specified, all logs will be shipped.
+	// Filter criteria of log delivery. If this parameter is not specified, all logs will be delivered.
 	DeliveryConditions []*DeliveryCondition `json:"DeliveryConditions,omitnil,omitempty" name:"DeliveryConditions"`
 
 	// Sampling ratio in permille. Value range: 1-1000. For example, 605 indicates a sampling ratio of 60.5%. If this parameter is not specified, the sampling ratio is 100%.
 	Sample *uint64 `json:"Sample,omitnil,omitempty" name:"Sample"`
 
 	// Output format for log delivery. If this field is not specified, the default format is used, which works as follows:
-	// <li>When TaskType is 'custom_endpoint', the default format is an array of JSON objects, with each JSON object representing a log entry;</li>
-	// <li>When TaskType is 's3', the default format is JSON Lines;</li>Specifically, when TaskType is 'cls', the only allowed value for LogFormat.FormatType is 'json', and other parameters in LogFormat will be ignored. It is recommended not to transfer LogFormat.
+	// <li>When `TaskType` is `custom_endpoint`, the default format is an array of JSON objects, with each JSON object representing a log entry;</li>
+	// <li>When `TaskType` is `s3`, the default format is JSON Lines;</li>Specifically, when `TaskType` is `cls`, the only allowed value for `LogFormat.FormatType` is `json`, and other parameters in `LogFormat` will be ignored. It is recommended not to input `LogFormat`.
 	LogFormat *LogFormat `json:"LogFormat,omitnil,omitempty" name:"LogFormat"`
 
-	// Configuration information of CLS. This parameter is required when TaskType is cls.
+	// Configuration information of CLS. This parameter is required when `TaskType` is `cls`.
 	CLS *CLSTopic `json:"CLS,omitnil,omitempty" name:"CLS"`
 
-	// Configuration information of the custom HTTP service. This parameter is required when TaskType is custom_endpoint.
+	// Configuration information of the custom HTTP endpoint. This parameter is required when `TaskType` is `custom_endpoint`.
 	CustomEndpoint *CustomEndpoint `json:"CustomEndpoint,omitnil,omitempty" name:"CustomEndpoint"`
 
-	// Configuration information of the AWS S3-compatible bucket. This parameter is required when TaskType is s3.
+	// Configuration information of the AWS S3-compatible bucket. This parameter is required when `TaskType` is `s3`.
 	S3 *S3 `json:"S3,omitnil,omitempty" name:"S3"`
 }
 
@@ -3888,6 +4343,198 @@ func (r *CreateRuleResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateSecurityAPIResourceRequestParams struct {
+	// Zone ID.		
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// API resource list.
+	APIResources []*APIResource `json:"APIResources,omitnil,omitempty" name:"APIResources"`
+}
+
+type CreateSecurityAPIResourceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.		
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// API resource list.
+	APIResources []*APIResource `json:"APIResources,omitnil,omitempty" name:"APIResources"`
+}
+
+func (r *CreateSecurityAPIResourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSecurityAPIResourceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "APIResources")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSecurityAPIResourceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSecurityAPIResourceResponseParams struct {
+	// Specifies the API resource ID list.
+	APIResourceIds []*string `json:"APIResourceIds,omitnil,omitempty" name:"APIResourceIds"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateSecurityAPIResourceResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateSecurityAPIResourceResponseParams `json:"Response"`
+}
+
+func (r *CreateSecurityAPIResourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSecurityAPIResourceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSecurityAPIServiceRequestParams struct {
+	// Zone ID.		
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// API service list.
+	APIServices []*APIService `json:"APIServices,omitnil,omitempty" name:"APIServices"`
+}
+
+type CreateSecurityAPIServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.		
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// API service list.
+	APIServices []*APIService `json:"APIServices,omitnil,omitempty" name:"APIServices"`
+}
+
+func (r *CreateSecurityAPIServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSecurityAPIServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "APIServices")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSecurityAPIServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSecurityAPIServiceResponseParams struct {
+	// API service ID list.
+	APIServiceIds []*string `json:"APIServiceIds,omitnil,omitempty" name:"APIServiceIds"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateSecurityAPIServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateSecurityAPIServiceResponseParams `json:"Response"`
+}
+
+func (r *CreateSecurityAPIServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSecurityAPIServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSecurityClientAttesterRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Specifies the authentication option list.
+	ClientAttesters []*ClientAttester `json:"ClientAttesters,omitnil,omitempty" name:"ClientAttesters"`
+}
+
+type CreateSecurityClientAttesterRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Specifies the authentication option list.
+	ClientAttesters []*ClientAttester `json:"ClientAttesters,omitnil,omitempty" name:"ClientAttesters"`
+}
+
+func (r *CreateSecurityClientAttesterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSecurityClientAttesterRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "ClientAttesters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSecurityClientAttesterRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSecurityClientAttesterResponseParams struct {
+	// Specifies the authentication option ID list.
+	ClientAttesterIds []*string `json:"ClientAttesterIds,omitnil,omitempty" name:"ClientAttesterIds"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateSecurityClientAttesterResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateSecurityClientAttesterResponseParams `json:"Response"`
+}
+
+func (r *CreateSecurityClientAttesterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSecurityClientAttesterResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateSecurityIPGroupRequestParams struct {
 	// Site ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -3948,6 +4595,70 @@ func (r *CreateSecurityIPGroupResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateSecurityIPGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSecurityJSInjectionRuleRequestParams struct {
+	// Zone ID.		
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// JavaScript injection rule list.
+	JSInjectionRules []*JSInjectionRule `json:"JSInjectionRules,omitnil,omitempty" name:"JSInjectionRules"`
+}
+
+type CreateSecurityJSInjectionRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.		
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// JavaScript injection rule list.
+	JSInjectionRules []*JSInjectionRule `json:"JSInjectionRules,omitnil,omitempty" name:"JSInjectionRules"`
+}
+
+func (r *CreateSecurityJSInjectionRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSecurityJSInjectionRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "JSInjectionRules")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSecurityJSInjectionRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSecurityJSInjectionRuleResponseParams struct {
+	// JavaScript injection rule ID list.
+	JSInjectionRuleIds []*string `json:"JSInjectionRuleIds,omitnil,omitempty" name:"JSInjectionRuleIds"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateSecurityJSInjectionRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateSecurityJSInjectionRuleResponseParams `json:"Response"`
+}
+
+func (r *CreateSecurityJSInjectionRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSecurityJSInjectionRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4119,10 +4830,12 @@ type CreateZoneRequestParams struct {
 	// <li>`overseas`: (Default) AZs outside the Chinese mainland </li>
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
-	// ID of the plan to which you want to bind the site. If you don't have an EdgeOne plan, purchase one in the EdgeOne console.
+	// Target package ID to bind. when a package already exists under your account, you can fill in this parameter to directly bind the site to the package. if there are currently no bindable packages, you can purchase a package via [CreatePlan](https://intl.cloud.tencent.com/document/product/1552/105771?from_cn_redirect=1).
+	// Note: if this parameter is not specified, a site in "init" status will be created. the site is inactive and will not be displayed in the console. you can bind a package and activate the site through [BindZoneToPlan](https://intl.cloud.tencent.com/document/product/1552/83042?from_cn_redirect=1). after activation, the site can provide service properly.
+	// 
 	PlanId *string `json:"PlanId,omitnil,omitempty" name:"PlanId"`
 
-	// The site alias. It allows up to 20 characters, including [0-9], [a-z], [A-Z] and [-_]. For details, see [Glossary](https://intl.cloud.tencent.com/document/product/1552/70202?from_cn_redirect=1). If you don't want to use it, just leave it blank.
+	// Identical site identifier. limits input to numbers, english letters, ".", "-", and "_", with a character limit of 200 characters. for details, see identical site identifier (https://intl.cloud.tencent.com/document/product/1552/70202?from_cn_redirect=1). leave this field blank if this usage scenario does not apply.
 	AliasZoneName *string `json:"AliasZoneName,omitnil,omitempty" name:"AliasZoneName"`
 
 	// Tags of the site. To create tags, go to the [Tag Console](https://console.cloud.tencent.com/tag/taglist).
@@ -4160,10 +4873,12 @@ type CreateZoneRequest struct {
 	// <li>`overseas`: (Default) AZs outside the Chinese mainland </li>
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
-	// ID of the plan to which you want to bind the site. If you don't have an EdgeOne plan, purchase one in the EdgeOne console.
+	// Target package ID to bind. when a package already exists under your account, you can fill in this parameter to directly bind the site to the package. if there are currently no bindable packages, you can purchase a package via [CreatePlan](https://intl.cloud.tencent.com/document/product/1552/105771?from_cn_redirect=1).
+	// Note: if this parameter is not specified, a site in "init" status will be created. the site is inactive and will not be displayed in the console. you can bind a package and activate the site through [BindZoneToPlan](https://intl.cloud.tencent.com/document/product/1552/83042?from_cn_redirect=1). after activation, the site can provide service properly.
+	// 
 	PlanId *string `json:"PlanId,omitnil,omitempty" name:"PlanId"`
 
-	// The site alias. It allows up to 20 characters, including [0-9], [a-z], [A-Z] and [-_]. For details, see [Glossary](https://intl.cloud.tencent.com/document/product/1552/70202?from_cn_redirect=1). If you don't want to use it, just leave it blank.
+	// Identical site identifier. limits input to numbers, english letters, ".", "-", and "_", with a character limit of 200 characters. for details, see identical site identifier (https://intl.cloud.tencent.com/document/product/1552/70202?from_cn_redirect=1). leave this field blank if this usage scenario does not apply.
 	AliasZoneName *string `json:"AliasZoneName,omitnil,omitempty" name:"AliasZoneName"`
 
 	// Tags of the site. To create tags, go to the [Tag Console](https://console.cloud.tencent.com/tag/taglist).
@@ -4305,22 +5020,19 @@ type CustomErrorPage struct {
 }
 
 type CustomField struct {
-	// Type of the custom log filed, which indicates extracting data from a specified position in HTTP requests and responses. Valid values:
-	// <li>ReqHeader: Extract the value of a specified field from an HTTP request header;</li>
-	// <li>RspHeader: Extract the value of a specified field from an HTTP response header;</li>
-	// <li>Cookie: Extract the value of a specified field from a cookie;</li>
-	// <li>ReqBody: Extract specified content from an HTTP request body using a Google RE2 regular expression.</li>
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// Type of the custom log field, which indicates extracting data from specified positions in HTTP requests and responses. valid values:.
+	// <li>ReqHeader: extract the value of a specified field from an HTTP request header;</li>.
+	// <li>RspHeader: extracts the value of a specified field from an HTTP response header.</li>.
+	// <Li>Cookie: extract the specified field value from a cookie;</li>.
+	// <li>ReqBody: extract specified content from an HTTP request body using a Google RE2 regular expression.</li>.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Enter the definition of the field value based on the field type (Name). This parameter is case-sensitive.
-	// <li>When the field type is ReqHeader, RspHeader, or Cookie, enter the name of the parameter for which you need to extract the value, such as Accept-Language. You can enter 1-100 characters. The name should start with a letter, contain letters, digits, and hyphens (-) in the middle, and end with a letter or digit.</li>
-	// <li>When the field type is ReqBody, enter the Google RE2 regular expression. The maximum length of the regular expression is 4 KB.</li>
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// Enter the field value definition based on the field type (Name). this parameter is case-sensitive.
+	// <li>When the field type is ReqHeader, RspHeader, or Cookie, enter the parameter name for value extraction, such as Accept-Language. you can enter 1-100 characters. the name must start with a letter, contain letters, digits, or hyphens (-) in the middle, and end with a letter or digit.</li>.
+	// <li>When the field type is ReqBody, enter the Google RE2 regular expression. the maximum length of the regular expression is 4 KB.</li>.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 
-	// Indicates whether to deliver this field. If not filled in, this field will not be delivered.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to deliver this field. leave blank to skip delivery.
 	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 }
 
@@ -4370,12 +5082,10 @@ type CustomTime struct {
 }
 
 type CustomizedHeader struct {
-	// Custom header key.
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// Specifies the custom header Key.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-	// Custom header value.
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// Set custom headers Value.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
@@ -4438,6 +5148,21 @@ type DDoSBlockData struct {
 	BlockArea *string `json:"BlockArea,omitnil,omitempty" name:"BlockArea"`
 }
 
+type DDoSProtection struct {
+	// Specifies the protection scope of standalone DDoS. valid values:.
+	// <li>protect_all_domains: specifies exclusive Anti-DDoS protection for all domain names in the site. newly added domain names automatically enable exclusive Anti-DDoS protection. when this parameter is specified, DomainDDoSProtections will not be processed.</li>.
+	// <li>protect_specified_domains: only applicable to specified domains. specific scope can be set via DomainDDoSProtection parameter.</li>.
+	ProtectionOption *string `json:"ProtectionOption,omitnil,omitempty" name:"ProtectionOption"`
+
+	// Anti-DDoS configuration of the domain. specifies the exclusive ddos protection settings for the domain in request parameters.
+	// <li>When ProtectionOption remains protect_specified_domains, the domain names not filled in keep their exclusive Anti-DDoS protection configuration unchanged, while explicitly specified domain names are updated according to the input parameters.</li>.
+	// <li>When ProtectionOption switches from protect_all_domains to protect_specified_domains: if DomainDDoSProtections is empty, disable exclusive DDoS protection for all domains under the site; if DomainDDoSProtections is not empty, disable or maintain exclusive DDoS protection for the domain names specified in the parameter, and disable exclusive DDoS protection for other unlisted domain names.</li>.
+	DomainDDoSProtections []*DomainDDoSProtection `json:"DomainDDoSProtections,omitnil,omitempty" name:"DomainDDoSProtections"`
+
+	// Specifies the exclusive DDoS protection configuration of a shared CNAME. used as an output parameter.
+	SharedCNAMEDDoSProtections []*DomainDDoSProtection `json:"SharedCNAMEDDoSProtections,omitnil,omitempty" name:"SharedCNAMEDDoSProtections"`
+}
+
 type DDosProtectionConfig struct {
 	// Dedicated anti-DDoS specifications in the Chinese mainland. For details, refer to [Dedicated Anti-DDoS Related Fees](https://intl.cloud.tencent.com/document/product/1552/94162?from_cn_redirect=1).
 	// <li>PLATFORM: uses the default protection. Dedicated anti-DDoS is not enabled;</li>
@@ -4456,50 +5181,42 @@ type DDosProtectionConfig struct {
 }
 
 type DefaultServerCertInfo struct {
-	// ID of the server certificate.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the server certificate ID.
 	CertId *string `json:"CertId,omitnil,omitempty" name:"CertId"`
 
-	// Alias of the certificate.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Certificate remark name.
 	Alias *string `json:"Alias,omitnil,omitempty" name:"Alias"`
 
-	// Type of the certificate. Values:
+	// Certificate type. valid values:.
 	// <li>`default`: Default certificate;</li>
-	// <li>`upload`: Custom certificate;</li>
-	// <li>`managed`: Tencent Cloud-managed certificate.</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// 
+	// <li>`upload`: External certificate;</li>
+	// 
+	// <li>`managed`: Tencent Cloud managed certificate.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Time when the certificate expires.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Certificate expiration time.
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Time when the certificate takes effect.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Certificate Validation Time.
 	EffectiveTime *string `json:"EffectiveTime,omitnil,omitempty" name:"EffectiveTime"`
 
-	// Common name of the certificate.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Common name of the cert.
 	CommonName *string `json:"CommonName,omitnil,omitempty" name:"CommonName"`
 
-	// Domain names added to the SAN certificate.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the SAN domain of the certificate.
 	SubjectAltName []*string `json:"SubjectAltName,omitnil,omitempty" name:"SubjectAltName"`
 
-	// Deployment status. Values:
-	// <li>`processing`: Deployment in progress</li>
-	// <li>`deployed`: Deployed</li>
-	// <li>`failed`: Deployment failed</li>
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Deployment state. valid values:.
+	// <li>processing: deployment in progress;</li>.
+	// <Li>Deployed: deployed</li>.
+	// <Li>`Failed`: deployment failed</li>.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Failure description
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Indicates the failure reason when the Status is failed.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
 	// Certificate algorithm.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	SignAlgo *string `json:"SignAlgo,omitnil,omitempty" name:"SignAlgo"`
 }
 
@@ -5064,6 +5781,67 @@ func (r *DeleteFunctionRulesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteJustInTimeTranscodeTemplatesRequestParams struct {
+	// Specifies the site ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Specifies the array of transcoding template unique identifiers to be deleted, with a length limit of 100.
+	TemplateIds []*string `json:"TemplateIds,omitnil,omitempty" name:"TemplateIds"`
+}
+
+type DeleteJustInTimeTranscodeTemplatesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the site ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Specifies the array of transcoding template unique identifiers to be deleted, with a length limit of 100.
+	TemplateIds []*string `json:"TemplateIds,omitnil,omitempty" name:"TemplateIds"`
+}
+
+func (r *DeleteJustInTimeTranscodeTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteJustInTimeTranscodeTemplatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "TemplateIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteJustInTimeTranscodeTemplatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteJustInTimeTranscodeTemplatesResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteJustInTimeTranscodeTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteJustInTimeTranscodeTemplatesResponseParams `json:"Response"`
+}
+
+func (r *DeleteJustInTimeTranscodeTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteJustInTimeTranscodeTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteL4ProxyRequestParams struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -5315,6 +6093,135 @@ func (r *DeleteLoadBalancerResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteMultiPathGatewayLineRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Specifies the gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Line ID.
+	LineId *string `json:"LineId,omitnil,omitempty" name:"LineId"`
+}
+
+type DeleteMultiPathGatewayLineRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Specifies the gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Line ID.
+	LineId *string `json:"LineId,omitnil,omitempty" name:"LineId"`
+}
+
+func (r *DeleteMultiPathGatewayLineRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteMultiPathGatewayLineRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "GatewayId")
+	delete(f, "LineId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMultiPathGatewayLineRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteMultiPathGatewayLineResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteMultiPathGatewayLineResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteMultiPathGatewayLineResponseParams `json:"Response"`
+}
+
+func (r *DeleteMultiPathGatewayLineResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteMultiPathGatewayLineResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteMultiPathGatewayRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+}
+
+type DeleteMultiPathGatewayRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+}
+
+func (r *DeleteMultiPathGatewayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteMultiPathGatewayRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "GatewayId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMultiPathGatewayRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteMultiPathGatewayResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteMultiPathGatewayResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteMultiPathGatewayResponseParams `json:"Response"`
+}
+
+func (r *DeleteMultiPathGatewayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteMultiPathGatewayResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteOriginGroupRequestParams struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -5498,6 +6405,189 @@ func (r *DeleteRulesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteSecurityAPIResourceRequestParams struct {
+	// Zone ID.		
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Specifies the ID list of API resources to be deleted.
+	APIResourceIds []*string `json:"APIResourceIds,omitnil,omitempty" name:"APIResourceIds"`
+}
+
+type DeleteSecurityAPIResourceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.		
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Specifies the ID list of API resources to be deleted.
+	APIResourceIds []*string `json:"APIResourceIds,omitnil,omitempty" name:"APIResourceIds"`
+}
+
+func (r *DeleteSecurityAPIResourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSecurityAPIResourceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "APIResourceIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSecurityAPIResourceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSecurityAPIResourceResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteSecurityAPIResourceResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteSecurityAPIResourceResponseParams `json:"Response"`
+}
+
+func (r *DeleteSecurityAPIResourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSecurityAPIResourceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSecurityAPIServiceRequestParams struct {
+	// Zone ID.		
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// API service ID list.
+	APIServiceIds []*string `json:"APIServiceIds,omitnil,omitempty" name:"APIServiceIds"`
+}
+
+type DeleteSecurityAPIServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.		
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// API service ID list.
+	APIServiceIds []*string `json:"APIServiceIds,omitnil,omitempty" name:"APIServiceIds"`
+}
+
+func (r *DeleteSecurityAPIServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSecurityAPIServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "APIServiceIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSecurityAPIServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSecurityAPIServiceResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteSecurityAPIServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteSecurityAPIServiceResponseParams `json:"Response"`
+}
+
+func (r *DeleteSecurityAPIServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSecurityAPIServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSecurityClientAttesterRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Client authentication option ID.
+	ClientAttesterIds []*string `json:"ClientAttesterIds,omitnil,omitempty" name:"ClientAttesterIds"`
+}
+
+type DeleteSecurityClientAttesterRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Client authentication option ID.
+	ClientAttesterIds []*string `json:"ClientAttesterIds,omitnil,omitempty" name:"ClientAttesterIds"`
+}
+
+func (r *DeleteSecurityClientAttesterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSecurityClientAttesterRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "ClientAttesterIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSecurityClientAttesterRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSecurityClientAttesterResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteSecurityClientAttesterResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteSecurityClientAttesterResponseParams `json:"Response"`
+}
+
+func (r *DeleteSecurityClientAttesterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSecurityClientAttesterResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteSecurityIPGroupRequestParams struct {
 	// Site ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -5555,6 +6645,67 @@ func (r *DeleteSecurityIPGroupResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteSecurityIPGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSecurityJSInjectionRuleRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// JavaScript injection rule ID list.
+	JSInjectionRuleIds []*string `json:"JSInjectionRuleIds,omitnil,omitempty" name:"JSInjectionRuleIds"`
+}
+
+type DeleteSecurityJSInjectionRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// JavaScript injection rule ID list.
+	JSInjectionRuleIds []*string `json:"JSInjectionRuleIds,omitnil,omitempty" name:"JSInjectionRuleIds"`
+}
+
+func (r *DeleteSecurityJSInjectionRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSecurityJSInjectionRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "JSInjectionRuleIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSecurityJSInjectionRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSecurityJSInjectionRuleResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteSecurityJSInjectionRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteSecurityJSInjectionRuleResponseParams `json:"Response"`
+}
+
+func (r *DeleteSecurityJSInjectionRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSecurityJSInjectionRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5875,8 +7026,7 @@ type DeployRecord struct {
 	// Release result information.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Release record ID. 
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Release record ID.
 	RecordId *string `json:"RecordId,omitnil,omitempty" name:"RecordId"`
 
 	// Change description.
@@ -6235,50 +7385,15 @@ type DescribeBillingDataRequestParams struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time. The query time range (EndTime - StartTime) must be less than or equal to 31 days.
+	// End time. the query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
+	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. querying account-level data requires permissions for all site resources in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-	// Metric name. Valid values:
-	// **Layer 4/7 Acceleration Traffic (Unit: Byte):**
-	// <li>acc_flux: content acceleration traffic, in bytes;</li>
-	// <li>smt_flux: smart acceleration traffic, in bytes;</li>
-	// <li>l4_flux: layer 4 acceleration traffic, in bytes;</li>
-	// <li>sec_flux: exclusive protection traffic, in bytes;</li>
-	// <li>zxctg_flux: network optimization traffic in the chinese mainland, in bytes;</li>
-	// 
-	// **Layer 4/7 Acceleration Bandwidth (Unit: bps):**
-	// <Li>acc_bandwidth: content acceleration bandwidth, in bps.</li>
-	// <li>smt_bandwidth: smart acceleration bandwidth, in bps;</li>
-	// <Li>l4_bandwidth: layer 4 acceleration bandwidth, in bps.</li>
-	// <li>sec_bandwidth: exclusive protection bandwidth, in bps.</li>
-	// <li>zxctg_bandwidth: network optimization bandwidth in the chinese mainland, in bps;</li>
-	// 
-	// **HTTP/HTTPS Security Requests (Unit: counts):**
-	// <li>sec_request_clean: number of HTTP/HTTPS requests;</li>
-	// 
-	// **Value-added Service Usage:**
-	// <li>smt_request_clean: number of smart acceleration requests, in counts;</li>
-	// <li>quic_request: number of quic requests;</li>
-	// <Li>bot_request_clean: number of bot requests;</li>
-	// <li>cls_count: number of real-time log entries pushed;</li>
-	// <li>ddos_bandwidth: elastic ddos protection bandwidth, in bps.</li>
-	// 
-	// **Edge Computing Usage:**
-	// <li>edgefunction_request: number of edge function executions, in counts</li>
-	// <li>edgefunction_cpu_time: edge function CPU processing time, in milliseconds</li>
-	// 
-	// **Media Processing Usage (Unit: seconds):**
-	// <li>total_transcode: duration of jit transcoding and transmuxing for all specifications of audio and video, in seconds;</li>
-	// <li>remux: transmuxing duration, in seconds;</li>
-	// <li>transcode_audio: audio transcoding duration, in seconds;</li>
-	// <li>transcode_H264_SD: specifies the duration of standard-definition videos encoded in H.264 (short side <= 480 px), in seconds;</li>
-	// <li>transcode_H264_HD: specifies the duration of high-definition video (short side <= 720 px) encoded in H.264, in seconds;</li>
-	// <li>transcode_H264_FHD: specifies the duration of a full hd video (short side <= 1080 px) encoded in H.264, in seconds;</li>
-	// <li>transcode_H264_2K: specifies the duration of a 2K video (short side <= 1440 px) encoded in H.264, expressed in seconds.</li>
-	// 
+	// Metric list. values as follows:.
+	// <b>l4/l7 acceleration traffic:</b><li>acc_flux: specifies content acceleration traffic in bytes.</li><li>smt_flux: specifies smart acceleration traffic in bytes.</li><li>l4_flux: specifies layer 4 acceleration traffic in bytes.</li><li>sec_flux: specifies independent protection traffic in bytes.</li><li>zxctg_flux: specifies network optimization traffic in the chinese mainland in bytes.</li><br><b>l4/l7 acceleration bandwidth:</b><li>acc_bandwidth: specifies content acceleration bandwidth in bps.</li><li>smt_bandwidth: specifies intelligent acceleration bandwidth in bps.</li><li>l4_bandwidth: specifies layer 4 acceleration bandwidth in bps.</li><li>sec_bandwidth: specifies exclusive protection bandwidth in bps.</li><li>zxctg_bandwidth: specifies network optimization bandwidth in the chinese mainland in bps.</li><br><b>HTTP/HTTPS security requests:</b><li>sec_request_clean: specifies HTTP/HTTPS requests by count.</li><br><b>vas usage:</b><li>smt_request_clean: specifies intelligent acceleration requests by count.</li><li>quic_request: specifies quic requests by count.</li><li>bot_request_clean: specifies bot requests by count.</li><li>cls_count: specifies the number of real-time log pushes by count.</li><li>ddos_bandwidth: specifies elastic ddos protection bandwidth in bps.</li><br><b>edge computing usage:</b><li>edgefunction_request: specifies the number of edge function requests by count.</li><li>edgefunction_cpu_time: specifies edge function cpu processing time in milliseconds.</li>.
+	// <b>Media processing usage:</b> <li>total_transcode: all specification audio, video jit transcoding, repackaging duration, in seconds;</li> <li>remux: repackaging duration, in seconds;</li> <li>transcode_audio: audio transcoding duration, in seconds;</li> <li>transcode_H264_SD: H.264 encoded standard-definition video (short side ≤ 480 px) duration, in seconds;</li> <li>transcode_H264_HD: H.264 encoded high-definition video (short side ≤ 720 px) duration, in seconds;</li> <li>transcode_H264_FHD: H.264 encoded full HD video (short side ≤ 1080 px) duration, in seconds;</li> <li>transcode_H264_2K: H.264 encoded 2K video (short side ≤ 1440 px) duration, in seconds.</li>.
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
 	// Time granularity of the query. Valid values:
@@ -6287,34 +7402,15 @@ type DescribeBillingDataRequestParams struct {
 	// <li>day: 1 day.</li>
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Filter criteria. The detailed values of filter criteria are as follows:
-	// <ul>
-	//   <li>host: Filter by domain name, such as test.example.com.</li>
-	//   <li>proxy-id: Filter by L4 proxy instance ID, such as sid-2rugn89bkla9.</li>
-	//   <li>region-id: Filter by billing region. Options:
-	//     <ul>
-	//       <li>CH: Chinese mainland</li>
-	//       <li>AF: Africa</li>
-	//       <li>AS1: Asia-Pacific Region 1</li>
-	//       <li>AS2: Asia-Pacific Region 2</li>
-	//       <li>AS3: Asia-Pacific Region 3</li>
-	//       <li>EU: Europe</li>
-	//       <li>MidEast: Middle East</li>
-	//       <li>NA: North America</li>
-	//       <li>SA: South America</li>
-	//     </ul>
-	//   </li>
-	// </ul>
-	// <p>Note: Filters of the same `Type` use OR logic, while filters of different `Type` use AND logic.</p>
+	// Filter criteria. the detailed values of filter criteria are as follows:.
+	// <li>host: specifies the domain name to filter by. example value: test.example.com.<br></li>.
+	// <li>proxy-id: specifies the l4 proxy instance id for filtering. example value: sid-2rugn89bkla9.</li>.
+	// <li>region-id: Filter by billing region. Options:<br>  CH: Chinese mainland<br>  AF: Africa<br>  AS1: Asia-Pacific Region 1<br>  AS2: Asia-Pacific Region 2<br>  AS3: Asia-Pacific Region 3<br>  EU: Europe<br>  MidEast: Middle East<br>  NA: North America<br>  SA: South America</li>
+	// 
+	// Specifies that `BillingDataFilter` with the same `Type` have an "or" relationship with each other, while those with different `Type` have an "and" relationship between them.
 	Filters []*BillingDataFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// <p>Grouping aggregation dimensions. A maximum of two dimensions can be used for grouping simultaneously. The values are as follows:</p>
-	//   <ul>
-	//     <li>zone-id: Group by zone ID. If content identifiers are used, grouping by content identifier takes priority.</li>
-	//     <li>host: Group by domain name.</li>
-	//     <li>proxy-id: Group by layer-4 proxy instance ID.</li>
-	//     <li>region-id: Group by billing region.</li>
-	//   </ul>
+	// Grouping aggregate dimension. a maximum of two dimensions can be grouped simultaneously. values are as follows: <li>zone-id: group by site id. if the content identifier functionality is used, priority is given to grouping by content identifier;<br></li> <li>host: group by domain name;<br></li> <li>proxy-id: group by layer 4 proxy instance id;<br></li> <li>region-id: group by billing region.</li>.
 	GroupBy []*string `json:"GroupBy,omitnil,omitempty" name:"GroupBy"`
 }
 
@@ -6324,50 +7420,15 @@ type DescribeBillingDataRequest struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time. The query time range (EndTime - StartTime) must be less than or equal to 31 days.
+	// End time. the query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
+	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. querying account-level data requires permissions for all site resources in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-	// Metric name. Valid values:
-	// **Layer 4/7 Acceleration Traffic (Unit: Byte):**
-	// <li>acc_flux: content acceleration traffic, in bytes;</li>
-	// <li>smt_flux: smart acceleration traffic, in bytes;</li>
-	// <li>l4_flux: layer 4 acceleration traffic, in bytes;</li>
-	// <li>sec_flux: exclusive protection traffic, in bytes;</li>
-	// <li>zxctg_flux: network optimization traffic in the chinese mainland, in bytes;</li>
-	// 
-	// **Layer 4/7 Acceleration Bandwidth (Unit: bps):**
-	// <Li>acc_bandwidth: content acceleration bandwidth, in bps.</li>
-	// <li>smt_bandwidth: smart acceleration bandwidth, in bps;</li>
-	// <Li>l4_bandwidth: layer 4 acceleration bandwidth, in bps.</li>
-	// <li>sec_bandwidth: exclusive protection bandwidth, in bps.</li>
-	// <li>zxctg_bandwidth: network optimization bandwidth in the chinese mainland, in bps;</li>
-	// 
-	// **HTTP/HTTPS Security Requests (Unit: counts):**
-	// <li>sec_request_clean: number of HTTP/HTTPS requests;</li>
-	// 
-	// **Value-added Service Usage:**
-	// <li>smt_request_clean: number of smart acceleration requests, in counts;</li>
-	// <li>quic_request: number of quic requests;</li>
-	// <Li>bot_request_clean: number of bot requests;</li>
-	// <li>cls_count: number of real-time log entries pushed;</li>
-	// <li>ddos_bandwidth: elastic ddos protection bandwidth, in bps.</li>
-	// 
-	// **Edge Computing Usage:**
-	// <li>edgefunction_request: number of edge function executions, in counts</li>
-	// <li>edgefunction_cpu_time: edge function CPU processing time, in milliseconds</li>
-	// 
-	// **Media Processing Usage (Unit: seconds):**
-	// <li>total_transcode: duration of jit transcoding and transmuxing for all specifications of audio and video, in seconds;</li>
-	// <li>remux: transmuxing duration, in seconds;</li>
-	// <li>transcode_audio: audio transcoding duration, in seconds;</li>
-	// <li>transcode_H264_SD: specifies the duration of standard-definition videos encoded in H.264 (short side <= 480 px), in seconds;</li>
-	// <li>transcode_H264_HD: specifies the duration of high-definition video (short side <= 720 px) encoded in H.264, in seconds;</li>
-	// <li>transcode_H264_FHD: specifies the duration of a full hd video (short side <= 1080 px) encoded in H.264, in seconds;</li>
-	// <li>transcode_H264_2K: specifies the duration of a 2K video (short side <= 1440 px) encoded in H.264, expressed in seconds.</li>
-	// 
+	// Metric list. values as follows:.
+	// <b>l4/l7 acceleration traffic:</b><li>acc_flux: specifies content acceleration traffic in bytes.</li><li>smt_flux: specifies smart acceleration traffic in bytes.</li><li>l4_flux: specifies layer 4 acceleration traffic in bytes.</li><li>sec_flux: specifies independent protection traffic in bytes.</li><li>zxctg_flux: specifies network optimization traffic in the chinese mainland in bytes.</li><br><b>l4/l7 acceleration bandwidth:</b><li>acc_bandwidth: specifies content acceleration bandwidth in bps.</li><li>smt_bandwidth: specifies intelligent acceleration bandwidth in bps.</li><li>l4_bandwidth: specifies layer 4 acceleration bandwidth in bps.</li><li>sec_bandwidth: specifies exclusive protection bandwidth in bps.</li><li>zxctg_bandwidth: specifies network optimization bandwidth in the chinese mainland in bps.</li><br><b>HTTP/HTTPS security requests:</b><li>sec_request_clean: specifies HTTP/HTTPS requests by count.</li><br><b>vas usage:</b><li>smt_request_clean: specifies intelligent acceleration requests by count.</li><li>quic_request: specifies quic requests by count.</li><li>bot_request_clean: specifies bot requests by count.</li><li>cls_count: specifies the number of real-time log pushes by count.</li><li>ddos_bandwidth: specifies elastic ddos protection bandwidth in bps.</li><br><b>edge computing usage:</b><li>edgefunction_request: specifies the number of edge function requests by count.</li><li>edgefunction_cpu_time: specifies edge function cpu processing time in milliseconds.</li>.
+	// <b>Media processing usage:</b> <li>total_transcode: all specification audio, video jit transcoding, repackaging duration, in seconds;</li> <li>remux: repackaging duration, in seconds;</li> <li>transcode_audio: audio transcoding duration, in seconds;</li> <li>transcode_H264_SD: H.264 encoded standard-definition video (short side ≤ 480 px) duration, in seconds;</li> <li>transcode_H264_HD: H.264 encoded high-definition video (short side ≤ 720 px) duration, in seconds;</li> <li>transcode_H264_FHD: H.264 encoded full HD video (short side ≤ 1080 px) duration, in seconds;</li> <li>transcode_H264_2K: H.264 encoded 2K video (short side ≤ 1440 px) duration, in seconds.</li>.
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
 	// Time granularity of the query. Valid values:
@@ -6376,34 +7437,15 @@ type DescribeBillingDataRequest struct {
 	// <li>day: 1 day.</li>
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Filter criteria. The detailed values of filter criteria are as follows:
-	// <ul>
-	//   <li>host: Filter by domain name, such as test.example.com.</li>
-	//   <li>proxy-id: Filter by L4 proxy instance ID, such as sid-2rugn89bkla9.</li>
-	//   <li>region-id: Filter by billing region. Options:
-	//     <ul>
-	//       <li>CH: Chinese mainland</li>
-	//       <li>AF: Africa</li>
-	//       <li>AS1: Asia-Pacific Region 1</li>
-	//       <li>AS2: Asia-Pacific Region 2</li>
-	//       <li>AS3: Asia-Pacific Region 3</li>
-	//       <li>EU: Europe</li>
-	//       <li>MidEast: Middle East</li>
-	//       <li>NA: North America</li>
-	//       <li>SA: South America</li>
-	//     </ul>
-	//   </li>
-	// </ul>
-	// <p>Note: Filters of the same `Type` use OR logic, while filters of different `Type` use AND logic.</p>
+	// Filter criteria. the detailed values of filter criteria are as follows:.
+	// <li>host: specifies the domain name to filter by. example value: test.example.com.<br></li>.
+	// <li>proxy-id: specifies the l4 proxy instance id for filtering. example value: sid-2rugn89bkla9.</li>.
+	// <li>region-id: Filter by billing region. Options:<br>  CH: Chinese mainland<br>  AF: Africa<br>  AS1: Asia-Pacific Region 1<br>  AS2: Asia-Pacific Region 2<br>  AS3: Asia-Pacific Region 3<br>  EU: Europe<br>  MidEast: Middle East<br>  NA: North America<br>  SA: South America</li>
+	// 
+	// Specifies that `BillingDataFilter` with the same `Type` have an "or" relationship with each other, while those with different `Type` have an "and" relationship between them.
 	Filters []*BillingDataFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// <p>Grouping aggregation dimensions. A maximum of two dimensions can be used for grouping simultaneously. The values are as follows:</p>
-	//   <ul>
-	//     <li>zone-id: Group by zone ID. If content identifiers are used, grouping by content identifier takes priority.</li>
-	//     <li>host: Group by domain name.</li>
-	//     <li>proxy-id: Group by layer-4 proxy instance ID.</li>
-	//     <li>region-id: Group by billing region.</li>
-	//   </ul>
+	// Grouping aggregate dimension. a maximum of two dimensions can be grouped simultaneously. values are as follows: <li>zone-id: group by site id. if the content identifier functionality is used, priority is given to grouping by content identifier;<br></li> <li>host: group by domain name;<br></li> <li>proxy-id: group by layer 4 proxy instance id;<br></li> <li>region-id: group by billing region.</li>.
 	GroupBy []*string `json:"GroupBy,omitnil,omitempty" name:"GroupBy"`
 }
 
@@ -6845,7 +7887,7 @@ type DescribeDDoSAttackDataRequestParams struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
+	// End time. the query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Statistical metrics.
@@ -6855,7 +7897,7 @@ type DescribeDDoSAttackDataRequestParams struct {
 	// <li>`ddos_attackPackageRate`: Time-series data of attack packet rate.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
+	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// IDs of DDoS policies to be queried. All policies will be selected if this field is not specified.
@@ -6881,7 +7923,7 @@ type DescribeDDoSAttackDataRequest struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
+	// End time. the query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Statistical metrics.
@@ -6891,7 +7933,7 @@ type DescribeDDoSAttackDataRequest struct {
 	// <li>`ddos_attackPackageRate`: Time-series data of attack packet rate.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
+	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// IDs of DDoS policies to be queried. All policies will be selected if this field is not specified.
@@ -6970,13 +8012,13 @@ type DescribeDDoSAttackEventRequestParams struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
+	// End time. the query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// List of DDoS policy IDs. All policies are selected if this field is not specified.
 	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
-	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
+	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
@@ -7011,13 +8053,13 @@ type DescribeDDoSAttackEventRequest struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
+	// End time. the query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// List of DDoS policy IDs. All policies are selected if this field is not specified.
 	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
-	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
+	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
@@ -7108,7 +8150,7 @@ type DescribeDDoSAttackTopDataRequestParams struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
+	// End time. the query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The statistical metric. Values:
@@ -7120,7 +8162,7 @@ type DescribeDDoSAttackTopDataRequestParams struct {
 	// <li>`ddos_attackFlux_sregion`: Rank attacker regions by the number of attacks.</li>
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
-	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
+	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// The list of DDoS policy IDs to be specified. All policies will be selected if this field is not specified.
@@ -7156,7 +8198,7 @@ type DescribeDDoSAttackTopDataRequest struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
+	// End time. the query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The statistical metric. Values:
@@ -7168,7 +8210,7 @@ type DescribeDDoSAttackTopDataRequest struct {
 	// <li>`ddos_attackFlux_sregion`: Rank attacker regions by the number of attacks.</li>
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
-	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
+	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// The list of DDoS policy IDs to be specified. All policies will be selected if this field is not specified.
@@ -7252,6 +8294,63 @@ func (r *DescribeDDoSAttackTopDataResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDDoSAttackTopDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDDoSProtectionRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+}
+
+type DescribeDDoSProtectionRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+}
+
+func (r *DescribeDDoSProtectionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDDoSProtectionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDDoSProtectionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDDoSProtectionResponseParams struct {
+	// Exclusive DDoS protection configuration. used to control the effective scope of exclusive DDoS protection.
+	DDoSProtection *DDoSProtection `json:"DDoSProtection,omitnil,omitempty" name:"DDoSProtection"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDDoSProtectionResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDDoSProtectionResponseParams `json:"Response"`
+}
+
+func (r *DescribeDDoSProtectionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDDoSProtectionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -8015,6 +9114,101 @@ func (r *DescribeIdentificationsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeJustInTimeTranscodeTemplatesRequestParams struct {
+	// Specifies the site ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// The maximum number of Filters is 20. the upper limit for Filters.Values is 20. if this parameter is left empty, it returns the authorized just-in-time transcoding templates in the current ZoneId by default. detailed filter criteria: <li>template-name: filter by template name in batch. example: mytemplate;</li> <li>template-type: filter by template type in batch. example: preset or custom.</li> <li>template-id: filter by template id in batch. example: C1LZ7982VgTpYhJ7M.</li> empty by default.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Sorting field. valid values: <li>createTime: template creation time.</li> default value: createTime.
+	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
+
+	// Sorting method. valid values: <li>`asc`: ascending order;</li><li>`desc`: descending order.</li> default value: `desc`.
+	SortOrder *string `json:"SortOrder,omitnil,omitempty" name:"SortOrder"`
+
+	// Paging offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned entries. default value: 20. maximum value: 1000.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeJustInTimeTranscodeTemplatesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the site ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// The maximum number of Filters is 20. the upper limit for Filters.Values is 20. if this parameter is left empty, it returns the authorized just-in-time transcoding templates in the current ZoneId by default. detailed filter criteria: <li>template-name: filter by template name in batch. example: mytemplate;</li> <li>template-type: filter by template type in batch. example: preset or custom.</li> <li>template-id: filter by template id in batch. example: C1LZ7982VgTpYhJ7M.</li> empty by default.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Sorting field. valid values: <li>createTime: template creation time.</li> default value: createTime.
+	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
+
+	// Sorting method. valid values: <li>`asc`: ascending order;</li><li>`desc`: descending order.</li> default value: `desc`.
+	SortOrder *string `json:"SortOrder,omitnil,omitempty" name:"SortOrder"`
+
+	// Paging offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned entries. default value: 20. maximum value: 1000.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeJustInTimeTranscodeTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeJustInTimeTranscodeTemplatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Filters")
+	delete(f, "SortBy")
+	delete(f, "SortOrder")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeJustInTimeTranscodeTemplatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeJustInTimeTranscodeTemplatesResponseParams struct {
+	// Total number of records that meet filter conditions.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Template details list.
+	TemplateSet []*JustInTimeTranscodeTemplate `json:"TemplateSet,omitnil,omitempty" name:"TemplateSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeJustInTimeTranscodeTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeJustInTimeTranscodeTemplatesResponseParams `json:"Response"`
+}
+
+func (r *DescribeJustInTimeTranscodeTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeJustInTimeTranscodeTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeL4ProxyRequestParams struct {
 	// ID of the zone where the Layer 4 proxy instance belongs.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -8413,6 +9607,340 @@ func (r *DescribeLoadBalancerListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeMultiPathGatewayLineRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Line ID.
+	LineId *string `json:"LineId,omitnil,omitempty" name:"LineId"`
+}
+
+type DescribeMultiPathGatewayLineRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Line ID.
+	LineId *string `json:"LineId,omitnil,omitempty" name:"LineId"`
+}
+
+func (r *DescribeMultiPathGatewayLineRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMultiPathGatewayLineRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "GatewayId")
+	delete(f, "LineId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMultiPathGatewayLineRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMultiPathGatewayLineResponseParams struct {
+	// Line information.
+	Line *MultiPathGatewayLine `json:"Line,omitnil,omitempty" name:"Line"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeMultiPathGatewayLineResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMultiPathGatewayLineResponseParams `json:"Response"`
+}
+
+func (r *DescribeMultiPathGatewayLineResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMultiPathGatewayLineResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMultiPathGatewayRegionsRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+}
+
+type DescribeMultiPathGatewayRegionsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+}
+
+func (r *DescribeMultiPathGatewayRegionsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMultiPathGatewayRegionsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMultiPathGatewayRegionsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMultiPathGatewayRegionsResponseParams struct {
+	// Lists available regions for the gateway.
+	GatewayRegions []*GatewayRegion `json:"GatewayRegions,omitnil,omitempty" name:"GatewayRegions"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeMultiPathGatewayRegionsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMultiPathGatewayRegionsResponseParams `json:"Response"`
+}
+
+func (r *DescribeMultiPathGatewayRegionsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMultiPathGatewayRegionsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMultiPathGatewayRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+}
+
+type DescribeMultiPathGatewayRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+}
+
+func (r *DescribeMultiPathGatewayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMultiPathGatewayRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "GatewayId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMultiPathGatewayRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMultiPathGatewayResponseParams struct {
+	// Gateway detail.
+	GatewayDetail *MultiPathGateway `json:"GatewayDetail,omitnil,omitempty" name:"GatewayDetail"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeMultiPathGatewayResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMultiPathGatewayResponseParams `json:"Response"`
+}
+
+func (r *DescribeMultiPathGatewayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMultiPathGatewayResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMultiPathGatewaySecretKeyRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+}
+
+type DescribeMultiPathGatewaySecretKeyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+}
+
+func (r *DescribeMultiPathGatewaySecretKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMultiPathGatewaySecretKeyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMultiPathGatewaySecretKeyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMultiPathGatewaySecretKeyResponseParams struct {
+	// Access key.
+	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeMultiPathGatewaySecretKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMultiPathGatewaySecretKeyResponseParams `json:"Response"`
+}
+
+func (r *DescribeMultiPathGatewaySecretKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMultiPathGatewaySecretKeyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMultiPathGatewaysRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Pagination offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Pagination limit. Default value: 20, maximum value: 1000.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filter fields for gateway list. If this parameter is left empty, return the current appid's all gateway information. detailed filter criteria:.
+	// <Li>Gateway-Type: filter by gateway type. valid values: cloud and private, representing cloud gateway and private gateway respectively.</li>
+	// <Li>Keyword: filter by keyword in the gateway name.</li>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeMultiPathGatewaysRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Pagination offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Pagination limit. Default value: 20, maximum value: 1000.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filter fields for gateway list. If this parameter is left empty, return the current appid's all gateway information. detailed filter criteria:.
+	// <Li>Gateway-Type: filter by gateway type. valid values: cloud and private, representing cloud gateway and private gateway respectively.</li>
+	// <Li>Keyword: filter by keyword in the gateway name.</li>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeMultiPathGatewaysRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMultiPathGatewaysRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMultiPathGatewaysRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMultiPathGatewaysResponseParams struct {
+	// Gateway detail.
+	Gateways []*MultiPathGateway `json:"Gateways,omitnil,omitempty" name:"Gateways"`
+
+	// Total number of entries.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeMultiPathGatewaysResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMultiPathGatewaysResponseParams `json:"Response"`
+}
+
+func (r *DescribeMultiPathGatewaysResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMultiPathGatewaysResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeOriginACLRequestParams struct {
 	// Specifies the site ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -8551,8 +10079,9 @@ type DescribeOriginGroupRequestParams struct {
 	// Limit on paginated queries. Value range: 1-1000. Default value: 20.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filters. Each filter can have up to 20 entries. See below for details:
-	// <li>`origin-group-id`<br>Filter by the <strong>origin group ID</strong>. Format: `origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a`<br>Fuzzy query is not supported</li><li>`origin-group-name`<br>Filter by the <strong>origin group name</strong><br>Fuzzy query is supported. When fuzzy query is used, only one origin groupsource site group name is supported</li>
+	// Filter criteria. The maximum value of Filters.Values is 20. The detailed filter criteria are as follows:
+	// 
+	// <li>`origin-group-id`: filter by origin group id. fuzzy queries are not supported. format: `origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a`;</li><li>`origin-group-name`: filter by origin group name. when fuzzy search is used, only one origin server group name is supported.</li>.
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -8568,8 +10097,9 @@ type DescribeOriginGroupRequest struct {
 	// Limit on paginated queries. Value range: 1-1000. Default value: 20.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filters. Each filter can have up to 20 entries. See below for details:
-	// <li>`origin-group-id`<br>Filter by the <strong>origin group ID</strong>. Format: `origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a`<br>Fuzzy query is not supported</li><li>`origin-group-name`<br>Filter by the <strong>origin group name</strong><br>Fuzzy query is supported. When fuzzy query is used, only one origin groupsource site group name is supported</li>
+	// Filter criteria. The maximum value of Filters.Values is 20. The detailed filter criteria are as follows:
+	// 
+	// <li>`origin-group-id`: filter by origin group id. fuzzy queries are not supported. format: `origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a`;</li><li>`origin-group-name`: filter by origin group name. when fuzzy search is used, only one origin server group name is supported.</li>.
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -8866,6 +10396,102 @@ func (r *DescribeOverviewL7DataResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeOverviewL7DataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePlansRequestParams struct {
+	// Filter criteria: the maximum number of Filters.Values is 20. detailed filter criteria are as follows: <li>plan-type<br>  filter by <strong>package type</strong>.<br>  available types:<br>  plan-trial: trial package;<br>  plan-personal: personal plan;<br>  plan-basic: basic plan;<br>  plan-standard: standard edition plan;<br>  plan-enterprise: enterprise plan.</li> <li>plan-id<br>  filter by <strong>package id</strong>. the package id format is: edgeone-268z103ob0sx.</li> <li>area<br>  filter by <strong>acceleration region</strong>.</li> service area. available types:<br>  mainland: chinese mainland;<br>  overseas: worldwide (excluding chinese mainland);<br>  global: global (including chinese mainland). <li>status<br>  filter by <strong>status</strong>.<br>  available states:<br>  normal: normal status;<br>  expiring-soon: expiring soon;<br>  expired: expired;<br>  isolated: isolated.</li>.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Specifies the sorting field. valid values:.
+	// <li>enable-time: effective time;</li>.
+	// <Li> expire-time: expiration time.</li>use default value enable-time if not specified.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sorting order. valid values:.
+	// <Li>`Asc`: sort in ascending order</li>.
+	// <Li>`Desc`: from the largest to smallest.</li>default value: `desc`.
+	Direction *string `json:"Direction,omitnil,omitempty" name:"Direction"`
+
+	// Number limit of paginated query. Default value: 20. Maximum value: 200.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// The offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+type DescribePlansRequest struct {
+	*tchttp.BaseRequest
+	
+	// Filter criteria: the maximum number of Filters.Values is 20. detailed filter criteria are as follows: <li>plan-type<br>  filter by <strong>package type</strong>.<br>  available types:<br>  plan-trial: trial package;<br>  plan-personal: personal plan;<br>  plan-basic: basic plan;<br>  plan-standard: standard edition plan;<br>  plan-enterprise: enterprise plan.</li> <li>plan-id<br>  filter by <strong>package id</strong>. the package id format is: edgeone-268z103ob0sx.</li> <li>area<br>  filter by <strong>acceleration region</strong>.</li> service area. available types:<br>  mainland: chinese mainland;<br>  overseas: worldwide (excluding chinese mainland);<br>  global: global (including chinese mainland). <li>status<br>  filter by <strong>status</strong>.<br>  available states:<br>  normal: normal status;<br>  expiring-soon: expiring soon;<br>  expired: expired;<br>  isolated: isolated.</li>.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Specifies the sorting field. valid values:.
+	// <li>enable-time: effective time;</li>.
+	// <Li> expire-time: expiration time.</li>use default value enable-time if not specified.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sorting order. valid values:.
+	// <Li>`Asc`: sort in ascending order</li>.
+	// <Li>`Desc`: from the largest to smallest.</li>default value: `desc`.
+	Direction *string `json:"Direction,omitnil,omitempty" name:"Direction"`
+
+	// Number limit of paginated query. Default value: 20. Maximum value: 200.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// The offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+func (r *DescribePlansRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePlansRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Order")
+	delete(f, "Direction")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePlansRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePlansResponseParams struct {
+	// Number of eligible packages.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Package information list.
+	Plans []*Plan `json:"Plans,omitnil,omitempty" name:"Plans"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribePlansResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribePlansResponseParams `json:"Response"`
+}
+
+func (r *DescribePlansResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePlansResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9284,6 +10910,309 @@ func (r *DescribeRulesSettingResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeSecurityAPIResourceRequestParams struct {
+	// Zone ID.		
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Paginated query limit. default value: 20, maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// The offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+type DescribeSecurityAPIResourceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.		
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Paginated query limit. default value: 20, maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// The offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+func (r *DescribeSecurityAPIResourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecurityAPIResourceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSecurityAPIResourceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSecurityAPIResourceResponseParams struct {
+	// Total number of API resources.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// API resource list.	
+	APIResources []*APIResource `json:"APIResources,omitnil,omitempty" name:"APIResources"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSecurityAPIResourceResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSecurityAPIResourceResponseParams `json:"Response"`
+}
+
+func (r *DescribeSecurityAPIResourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecurityAPIResourceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSecurityAPIServiceRequestParams struct {
+	// Zone ID.		
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Paginated query limit. default value: 20, maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// The offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+type DescribeSecurityAPIServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.		
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Paginated query limit. default value: 20, maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// The offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+func (r *DescribeSecurityAPIServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecurityAPIServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSecurityAPIServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSecurityAPIServiceResponseParams struct {
+	// Total number of API services.	
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// API service list.	
+	APIServices []*APIService `json:"APIServices,omitnil,omitempty" name:"APIServices"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSecurityAPIServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSecurityAPIServiceResponseParams `json:"Response"`
+}
+
+func (r *DescribeSecurityAPIServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecurityAPIServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSecurityClientAttesterRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Paginated query limit. default value: 20, maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// The offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+type DescribeSecurityClientAttesterRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Paginated query limit. default value: 20, maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// The offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+func (r *DescribeSecurityClientAttesterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecurityClientAttesterRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSecurityClientAttesterRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSecurityClientAttesterResponseParams struct {
+	// Total number of authentication options.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Specifies the authentication option list.
+	ClientAttesters []*ClientAttester `json:"ClientAttesters,omitnil,omitempty" name:"ClientAttesters"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSecurityClientAttesterResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSecurityClientAttesterResponseParams `json:"Response"`
+}
+
+func (r *DescribeSecurityClientAttesterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecurityClientAttesterResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSecurityIPGroupContentRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Specifies the IP group ID.
+	GroupId *int64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Paginated query limit. default value: 2000, maximum value: 100000.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// The offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+type DescribeSecurityIPGroupContentRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Specifies the IP group ID.
+	GroupId *int64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Paginated query limit. default value: 2000, maximum value: 100000.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// The offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+func (r *DescribeSecurityIPGroupContentRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecurityIPGroupContentRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "GroupId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSecurityIPGroupContentRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSecurityIPGroupContentResponseParams struct {
+	// Specifies the number of effective ips or IP ranges in the IP group.
+	IPTotalCount *int64 `json:"IPTotalCount,omitnil,omitempty" name:"IPTotalCount"`
+
+	// List of ips or ranges that meet the query conditions. limited by the Offset and Limit parameters.
+	IPList []*string `json:"IPList,omitnil,omitempty" name:"IPList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSecurityIPGroupContentResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSecurityIPGroupContentResponseParams `json:"Response"`
+}
+
+func (r *DescribeSecurityIPGroupContentResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecurityIPGroupContentResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeSecurityIPGroupInfoRequestParams struct {
 	// Site ID, used to specify the query scope.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -9398,7 +11327,7 @@ func (r *DescribeSecurityIPGroupRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSecurityIPGroupResponseParams struct {
-	// Detailed configuration information of security IP groups, including the ID, name, and IP/IP range list information of each security IP group.
+	// Detailed configuration information of security IP groups, including the ID, name, total number of IP/IP ranges, IP/IP range list information, and expiration time of each security IP group.
 	IPGroups []*IPGroup `json:"IPGroups,omitnil,omitempty" name:"IPGroups"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -9418,6 +11347,80 @@ func (r *DescribeSecurityIPGroupResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeSecurityIPGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSecurityJSInjectionRuleRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Paginated query limit. default value: 20, maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// The offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+type DescribeSecurityJSInjectionRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Paginated query limit. default value: 20, maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// The offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+func (r *DescribeSecurityJSInjectionRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecurityJSInjectionRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSecurityJSInjectionRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSecurityJSInjectionRuleResponseParams struct {
+	// Specifies the total rule count for JavaScript injection.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// JavaScript injection rule list.
+	JSInjectionRules []*JSInjectionRule `json:"JSInjectionRules,omitnil,omitempty" name:"JSInjectionRules"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSecurityJSInjectionRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSecurityJSInjectionRuleResponseParams `json:"Response"`
+}
+
+func (r *DescribeSecurityJSInjectionRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecurityJSInjectionRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9575,7 +11578,7 @@ type DescribeTimingL4DataRequestParams struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
+	// End time. the query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Metric list. Valid values:
@@ -9587,7 +11590,7 @@ type DescribeTimingL4DataRequestParams struct {
 	// <Li>l4Flow_outBandwidth: outbound peak bandwidth.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
+	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of L4 proxy IDs. All L4 proxies will be selected if this field is not specified.
@@ -9615,7 +11618,7 @@ type DescribeTimingL4DataRequest struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
+	// End time. the query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Metric list. Valid values:
@@ -9627,7 +11630,7 @@ type DescribeTimingL4DataRequest struct {
 	// <Li>l4Flow_outBandwidth: outbound peak bandwidth.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
+	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of L4 proxy IDs. All L4 proxies will be selected if this field is not specified.
@@ -9709,7 +11712,7 @@ type DescribeTimingL7AnalysisDataRequestParams struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
+	// End time. the query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Metric list. Valid values:.
@@ -9724,7 +11727,7 @@ type DescribeTimingL7AnalysisDataRequestParams struct {
 	// <Li>l7Flow_avgFirstByteResponseTime: Average L7 edge first byte response time. Unit: ms.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
+	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Query period granularity. Valid values:
@@ -9765,7 +11768,7 @@ type DescribeTimingL7AnalysisDataRequest struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
+	// End time. the query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Metric list. Valid values:.
@@ -9780,7 +11783,7 @@ type DescribeTimingL7AnalysisDataRequest struct {
 	// <Li>l7Flow_avgFirstByteResponseTime: Average L7 edge first byte response time. Unit: ms.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
+	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Query period granularity. Valid values:
@@ -10011,7 +12014,7 @@ type DescribeTopL7AnalysisDataRequestParams struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
+	// End time. the query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Queried metric. Valid values:
@@ -10041,7 +12044,7 @@ type DescribeTopL7AnalysisDataRequestParams struct {
 	// <li> l7Flow_request_ua: L7 request count aggregated by the User-Agent dimension.</li>
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
-	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
+	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Indicates the top N data to be queried. The maximum value is 1000. If this parameter is not input, the default value is 10, indicating querying the top 10 data.
@@ -10085,7 +12088,7 @@ type DescribeTopL7AnalysisDataRequest struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
+	// End time. the query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Queried metric. Valid values:
@@ -10115,7 +12118,7 @@ type DescribeTopL7AnalysisDataRequest struct {
 	// <li> l7Flow_request_ua: L7 request count aggregated by the User-Agent dimension.</li>
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
-	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
+	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Indicates the top N data to be queried. The maximum value is 1000. If this parameter is not input, the default value is 10, indicating querying the top 10 data.
@@ -10620,8 +12623,8 @@ type DescribeZonesRequestParams struct {
 	// Limit on paginated queries. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter conditions. Up to 20 values for each filter. If this parameter is not filled in, the information of all sites under the current account is returned. Detailed filtering conditions are as follows:
-	// <li>`zone-name`: Site name </li><li>`zone-id`: Site ID, such as zone-2noz78a8ev6k</li><li>`status`: Site status </li><li>`tag-key`: Tag key </li><li>`tag-value`: Tag value </li>Only `zone-name` supports fuzzy query.
+	// Filter criteria. the maximum value of Filters.Values is 20. if this parameter is left empty, all site information authorized under the current appid will be returned. detailed filter criteria are as follows:.
+	// <li>zone-name: filter by site name;</li> <li>zone-id: filter by site id. the site id is in the format of zone-2noz78a8ev6k;</li> <li>status: filter by site status;</li> <li>tag-key: filter by tag key;</li> <li>tag-value: filter by tag value;</li> <li>alias-zone-name: filter by identical site identifier.</li> when performing a fuzzy query, the fields that support filtering are named zone-name or alias-zone-name.
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Sort the returned results according to this field. Values include:
@@ -10648,8 +12651,8 @@ type DescribeZonesRequest struct {
 	// Limit on paginated queries. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter conditions. Up to 20 values for each filter. If this parameter is not filled in, the information of all sites under the current account is returned. Detailed filtering conditions are as follows:
-	// <li>`zone-name`: Site name </li><li>`zone-id`: Site ID, such as zone-2noz78a8ev6k</li><li>`status`: Site status </li><li>`tag-key`: Tag key </li><li>`tag-value`: Tag value </li>Only `zone-name` supports fuzzy query.
+	// Filter criteria. the maximum value of Filters.Values is 20. if this parameter is left empty, all site information authorized under the current appid will be returned. detailed filter criteria are as follows:.
+	// <li>zone-name: filter by site name;</li> <li>zone-id: filter by site id. the site id is in the format of zone-2noz78a8ev6k;</li> <li>status: filter by site status;</li> <li>tag-key: filter by tag key;</li> <li>tag-value: filter by tag value;</li> <li>alias-zone-name: filter by identical site identifier.</li> when performing a fuzzy query, the fields that support filtering are named zone-name or alias-zone-name.
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Sort the returned results according to this field. Values include:
@@ -10867,11 +12870,11 @@ type DetectLengthLimitCondition struct {
 	// <li>`body_depth`: detection depth of the request body packet part.</li>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Parameter value of the matched condition, used in pairs with the `Name` parameter.
-	// When the `Name` value is body_depth, `Values` only support passing in a single value. Values:
-	// <li>`8KB`;</li>
-	// <li>`64KB`;</li>
-	// <li>`128KB`.</li>
+	// The parameter value of the match condition. the value is used in pairs with Name.
+	// When the Name value is body_depth, Values only support passing in a single value. valid Values:.
+	// <li>10KB;</li>
+	// <li>64KB;</li>
+	// <li>128KB.</li>
 	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 }
 
@@ -11039,6 +13042,16 @@ type DnsVerification struct {
 
 	// The record value.
 	RecordValue *string `json:"RecordValue,omitnil,omitempty" name:"RecordValue"`
+}
+
+type DomainDDoSProtection struct {
+	// Domain name.
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// Standalone DDoS switch of the domain. valid values:.
+	// <li>on: enabled;</li>.
+	// <li>off: closed.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
 // Predefined struct for user
@@ -11237,12 +13250,10 @@ type DropPageConfig struct {
 	// <li>`off`: Disable</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// The settings of the block page that applies managed rules. If it is null, the settings that were last configured will be used.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Intercept page configuration for Waf(managed rules) module. if null, historical configuration is used by default.
 	WafDropPageDetail *DropPageDetail `json:"WafDropPageDetail,omitnil,omitempty" name:"WafDropPageDetail"`
 
-	// The settings of the block page that applies custom rules. If it is null, the settings that were last configured will be used.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Interception page configuration for custom pages. if null, use the last set configuration by default.
 	AclDropPageDetail *DropPageDetail `json:"AclDropPageDetail,omitnil,omitempty" name:"AclDropPageDetail"`
 }
 
@@ -11267,50 +13278,46 @@ type DropPageDetail struct {
 
 // Predefined struct for user
 type EnableOriginACLRequestParams struct {
-	// Specifies the site ID.
+	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// The mode of configurating origin ACLs for L7 acceleration domains.
-	// - all: configurate origin ACLs for all L7 acceleration domains under the site.
-	// - specific: configurate origin ACLs for designated L7 acceleration domains under the site.
-	// When the parameter is empty, it defaults to specific.
+	// L7 acceleration domain name activation in origin protection mode.
+	// <li>`all`: enable layer-7 acceleration domain names for the site.</li>.
+	// <Li>Specific: enable for the site's designated layer-7 acceleration domain name.</li>when no parameter is defined, the default is specific.
 	L7EnableMode *string `json:"L7EnableMode,omitnil,omitempty" name:"L7EnableMode"`
 
-	// The list of L7 acceleration domains that require enabling the origin ACLs. This list must be empty when the request parameter L7EnableMode is set to 'all'. A maximum of 200 domains are supported at a time.
+	// Enable the list of layer-7 acceleration domain names with origin protection. this parameter is valid only when L7EnableMode is set to specific. when L7EnableMode is set to all, retain this parameter as empty. only supports up to 200 layer-7 acceleration domain names in a single operation.
 	L7Hosts []*string `json:"L7Hosts,omitnil,omitempty" name:"L7Hosts"`
 
-	// The mode of configurating origin ACLs for L4 proxy Instances.
-	// - all: configurate origin ACLs for all L4 proxy Instances under the site.
-	// - specific: configurate origin ACLs for designated  L4 proxy Instances under the site.
-	// When the parameter is empty, it defaults to specific.
+	// Specifies the origin protection mode of the l4 proxy instance.
+	// <Li>ALL: enable for all l4 proxy instances under the site.</li>.
+	// <Li>Specific: enable for the designated layer 4 proxy instance of the site.</li>when no parameter is defined, the default is specific.
 	L4EnableMode *string `json:"L4EnableMode,omitnil,omitempty" name:"L4EnableMode"`
 
-	// The list of L4 proxy Instances that require enabling origin ACLs. This list must be empty when the request parameter L4EnableMode is set to 'all'. A maximum of 100 instances are supported at a time.
+	// The list of L4 proxy instances with origin protection enabled. this parameter is valid only when L4EnableMode is set to specific. retain this parameter empty when L4EnableMode is set to all. only supports up to 100 layer-4 proxy instances per operation.
 	L4ProxyIds []*string `json:"L4ProxyIds,omitnil,omitempty" name:"L4ProxyIds"`
 }
 
 type EnableOriginACLRequest struct {
 	*tchttp.BaseRequest
 	
-	// Specifies the site ID.
+	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// The mode of configurating origin ACLs for L7 acceleration domains.
-	// - all: configurate origin ACLs for all L7 acceleration domains under the site.
-	// - specific: configurate origin ACLs for designated L7 acceleration domains under the site.
-	// When the parameter is empty, it defaults to specific.
+	// L7 acceleration domain name activation in origin protection mode.
+	// <li>`all`: enable layer-7 acceleration domain names for the site.</li>.
+	// <Li>Specific: enable for the site's designated layer-7 acceleration domain name.</li>when no parameter is defined, the default is specific.
 	L7EnableMode *string `json:"L7EnableMode,omitnil,omitempty" name:"L7EnableMode"`
 
-	// The list of L7 acceleration domains that require enabling the origin ACLs. This list must be empty when the request parameter L7EnableMode is set to 'all'. A maximum of 200 domains are supported at a time.
+	// Enable the list of layer-7 acceleration domain names with origin protection. this parameter is valid only when L7EnableMode is set to specific. when L7EnableMode is set to all, retain this parameter as empty. only supports up to 200 layer-7 acceleration domain names in a single operation.
 	L7Hosts []*string `json:"L7Hosts,omitnil,omitempty" name:"L7Hosts"`
 
-	// The mode of configurating origin ACLs for L4 proxy Instances.
-	// - all: configurate origin ACLs for all L4 proxy Instances under the site.
-	// - specific: configurate origin ACLs for designated  L4 proxy Instances under the site.
-	// When the parameter is empty, it defaults to specific.
+	// Specifies the origin protection mode of the l4 proxy instance.
+	// <Li>ALL: enable for all l4 proxy instances under the site.</li>.
+	// <Li>Specific: enable for the designated layer 4 proxy instance of the site.</li>when no parameter is defined, the default is specific.
 	L4EnableMode *string `json:"L4EnableMode,omitnil,omitempty" name:"L4EnableMode"`
 
-	// The list of L4 proxy Instances that require enabling origin ACLs. This list must be empty when the request parameter L4EnableMode is set to 'all'. A maximum of 100 instances are supported at a time.
+	// The list of L4 proxy instances with origin protection enabled. this parameter is valid only when L4EnableMode is set to specific. retain this parameter empty when L4EnableMode is set to all. only supports up to 100 layer-4 proxy instances per operation.
 	L4ProxyIds []*string `json:"L4ProxyIds,omitnil,omitempty" name:"L4ProxyIds"`
 }
 
@@ -11427,8 +13434,7 @@ type ExceptConfig struct {
 	// <li>`off`: Disable</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// The settings of the exception rule. If it is null, the settings that were last configured will be used.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The settings of the exception rule. if it is null, the settings that were last configured will be used.
 	ExceptUserRules []*ExceptUserRule `json:"ExceptUserRules,omitnil,omitempty" name:"ExceptUserRules"`
 }
 
@@ -11447,16 +13453,13 @@ type ExceptUserRule struct {
 	// The rule ID, which is automatically created and only used as an output parameter.
 	RuleID *int64 `json:"RuleID,omitnil,omitempty" name:"RuleID"`
 
-	// The update time. If it is null, the current date and time is recorded.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Last update time. if null, the underlying layer generates it using the current system time by default.
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// The matching condition.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExceptUserRuleConditions []*ExceptUserRuleCondition `json:"ExceptUserRuleConditions,omitnil,omitempty" name:"ExceptUserRuleConditions"`
 
-	// The scope to which the exception rule applies.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Scope where the rule takes effect.
 	ExceptUserRuleScope *ExceptUserRuleScope `json:"ExceptUserRuleScope,omitnil,omitempty" name:"ExceptUserRuleScope"`
 
 	// The rule priority. Value range: 0-100. If it is null, it defaults to 0.
@@ -11510,21 +13513,18 @@ type ExceptUserRuleScope struct {
 	// <li>`partial`: Skip the exception rule for partial requests.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// The module to be activated. Values:
-	// <li>`waf`: Tencent Cloud-managed rules</li>
-	// <li>`rate`: Rate limiting rules</li>
-	// <li>`acl`: Custom rule</li>
-	// <li>`cc`: CC attack defense</li>
-	// <li>`bot`: Bot protection</li>
-	// Note: this field may return `null`, indicating that no valid value is obtained.
+	// Effective module. the field value can be:.
+	// <li>`waf`: tencent cloud-managed rules</li>.
+	// <Li>`Rate`: rate limit</li>.
+	// <li>`acl`: custom rule</li>.
+	// <Li>`Cc`: cc attack defense</li>.
+	// <Li>`Bot`: bot protection</li>.
 	Modules []*string `json:"Modules,omitnil,omitempty" name:"Modules"`
 
-	// Module settings of the exception rule. If it is null, the settings that were last configured will be used.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Skip exception rule details for some rule ids. if null, use the last set configuration by default.
 	PartialModules []*PartialModule `json:"PartialModules,omitnil,omitempty" name:"PartialModules"`
 
-	// Condition settings of the exception rule. If it is null, the settings that were last configured will be used.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Details of the exception rule for skipping specific fields. if null, use the last set configuration by default.
 	SkipConditions []*SkipCondition `json:"SkipConditions,omitnil,omitempty" name:"SkipConditions"`
 }
 
@@ -11664,14 +13664,13 @@ type Filter struct {
 }
 
 type FirstPartConfig struct {
-	// Switch. Values:
-	// <li>`on`: Enable</li>
-	// <li>`off`: Disable</li>
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Switch. valid values:.
+	// <li>`on`: Enable;</li>
+	// 
+	// <li>off: Disable.</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// The transfer period threshold of the first 8 KB. If the threshold is reached, it’s considered a slow attack. Default: `5`.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// The statistical period of the first segment packet is in seconds. expect the duration to be 5 seconds by default.
 	StatTime *uint64 `json:"StatTime,omitnil,omitempty" name:"StatTime"`
 }
 
@@ -11701,10 +13700,9 @@ type ForceRedirect struct {
 	// <li>`off`: Disable</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Redirect status code. Values:
-	// <li>`301`: 301 redirect</li>
-	// <li>`302`: 302 redirect</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Redirection status code. valid values:.
+	// <Li>`301`: 301 redirect</li>.
+	// <Li>`302`: 302 redirect</li>.
 	RedirectStatusCode *int64 `json:"RedirectStatusCode,omitnil,omitempty" name:"RedirectStatusCode"`
 }
 
@@ -11789,6 +13787,17 @@ type FunctionRule struct {
 type FunctionRuleCondition struct {
 	// Condition of a trigger rule for an edge function. This condition is considered met if all items in the list are met.
 	RuleConditions []*RuleCondition `json:"RuleConditions,omitnil,omitempty" name:"RuleConditions"`
+}
+
+type GatewayRegion struct {
+	// Region ID.
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+
+	// Chinese region name.
+	CNName *string `json:"CNName,omitnil,omitempty" name:"CNName"`
+
+	// English name of the region.
+	ENName *string `json:"ENName,omitnil,omitempty" name:"ENName"`
 }
 
 type Grpc struct {
@@ -12029,20 +14038,19 @@ type Hsts struct {
 	// <li>`off`: Disable</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// MaxAge (in seconds). The maximum value is 1 day. 
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// MaxAge value. expressed in seconds, maximum value is 1 day.
 	MaxAge *int64 `json:"MaxAge,omitnil,omitempty" name:"MaxAge"`
 
-	// Whether to contain subdomain names. Values:
-	// <li>`on`: Enable</li>
-	// <li>`off`: Disable</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies whether the subdomain is included. valid values:.
+	// <li>`on`: Enable;</li>
+	// 
+	// <li>off: Disable.</li>
 	IncludeSubDomains *string `json:"IncludeSubDomains,omitnil,omitempty" name:"IncludeSubDomains"`
 
-	// Whether to enable preloading. Values:
-	// <li>`on`: Enable</li>
-	// <li>`off`: Disable</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to enable preloading. valid values:.
+	// <li>`on`: Enable;</li>
+	// 
+	// <li>off: Disable.</li>
 	Preload *string `json:"Preload,omitnil,omitempty" name:"Preload"`
 }
 
@@ -12061,24 +14069,23 @@ type HttpDDoSProtection struct {
 }
 
 type Https struct {
-	// Whether to enable HTTP2. Values:
-	// <li>`on`: Enable</li>
-	// <li>`off`: Disable</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// http2 configuration switch. valid values:.
+	// <li>`on`: Enable;</li>
+	// 
+	// <li>off: Disable.</li>
 	Http2 *string `json:"Http2,omitnil,omitempty" name:"Http2"`
 
-	// Whether to enable OCSP. Values:
-	// <li>`on`: Enable</li>
-	// <li>`off`: Disable</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// OCSP configuration switch. valid values:.
+	// <li>`on`: Enable;</li>
+	// 
+	// <li>off: Disable.</li>
 	OcspStapling *string `json:"OcspStapling,omitnil,omitempty" name:"OcspStapling"`
 
-	// TLS version. Valid values: 
-	// <li>`TLSv1`: TLSv1 version;</li>
-	// <li>`TLSV1.1`: TLSv1.1 version;</li>
-	// <li>`TLSV1.2`: TLSv1.2 version;</li>
-	// <li>`TLSv1.3`: TLSv1.3 version.</li>Only consecutive versions can be enabled at the same time. 
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Tls version settings, valid values:.
+	// <Li>`TLSv1`: tlsv1 version;</li>.
+	// <li>`TLSV1.1`: TLSV1.1 version;</li>.
+	// <li>TLSV1.2: specifies the TLSV1.2 version.</li>.
+	// <Li>TLSv1.3: specifies the tlsv1.3 version. consecutive versions must be enabled when modifying.</li>.
 	TlsVersion []*string `json:"TlsVersion,omitnil,omitempty" name:"TlsVersion"`
 
 	// HSTS Configuration
@@ -12089,18 +14096,24 @@ type Https struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CertInfo []*ServerCertInfo `json:"CertInfo,omitnil,omitempty" name:"CertInfo"`
 
-	// Whether the certificate is managed by EdgeOne. Values:
-	// <li>`apply`: Managed by EdgeOne.</li>
-	// <li>`none`: Not managed by EdgeOne.</li>If it is left empty, the default value `none` is used.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Application type. valid values:.
+	// <li>`apply`: managed by EdgeOne.</li>.
+	// <li>`none`: not managed by EdgeOne.</li>if it is left empty, the default value `none` is used.
 	ApplyType *string `json:"ApplyType,omitnil,omitempty" name:"ApplyType"`
 
-	// The cipher suite, with values:
-	// <li>loose-v2023: Provides high compatibility with general security, and supports TLS 1.0-1.3 cipher suites;</li>
-	// <li>general-v2023: Provides relatively high compatibility with moderate security, and supports TLS 1.2-1.3 cipher suites;</li>
-	// <li>strict-v2023: Provides high security, disables all cipher suites with security risks, and supports TLS 1.2-1.3 cipher suites.</li>
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// The cipher suite, with valid values:.
+	// <li>loose-v2023: provides high compatibility with general security, and supports TLS 1.0-1.3 cipher suites;</li>.
+	// <li>general-v2023: provides relatively high compatibility with moderate security, and supports TLS 1.2-1.3 cipher suites.</li>.
+	// <li>strict-v2023: provides high security, disables all cipher suites with security risks, and supports TLS 1.2-1.3 cipher suites.</li>.
 	CipherSuite *string `json:"CipherSuite,omitnil,omitempty" name:"CipherSuite"`
+}
+
+type IPExpireInfo struct {
+	// Scheduled expiration time, following the ISO 8601 standard date and time format, such as "2022-01-01T00:00:00+08:00".
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// IP list. supports ip and ip range.
+	IPList []*string `json:"IPList,omitnil,omitempty" name:"IPList"`
 }
 
 type IPGroup struct {
@@ -12110,8 +14123,18 @@ type IPGroup struct {
 	// Group name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// IP group content. Only supports IP and IP mask.
+	// IP group content, supports ip and ip range.
 	Content []*string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Number of ips or ranges in effect in the IP group. valid as an output parameter, no need to specify this field as an input parameter.
+	IPTotalCount *int64 `json:"IPTotalCount,omitnil,omitempty" name:"IPTotalCount"`
+
+	// Specifies the scheduled expiration information of the IP.
+	// Specifies the IP address or IP range configuration with scheduled expiration time as an input parameter.
+	// As an output parameter, contains the following two categories of information.
+	// <Li>Currently not expired scheduled expiration information: expiration configuration not triggered.</li>.
+	// <Li>Scheduled expiration information expired within a week: cache expiration configuration has been triggered.</li>.
+	IPExpireInfo []*IPExpireInfo `json:"IPExpireInfo,omitnil,omitempty" name:"IPExpireInfo"`
 }
 
 type IPRegionInfo struct {
@@ -12143,8 +14166,7 @@ type Identification struct {
 	// The site name.
 	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
-	// The subdomain name to be verified. To verify the ownership of a site, leave it blank.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// The subdomain name to be verified. to verify the ownership of a site, leave it blank.
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
 	// The verification status. Values:
@@ -12155,8 +14177,7 @@ type Identification struct {
 	// Details of the DNS record.
 	Ascription *AscriptionInfo `json:"Ascription,omitnil,omitempty" name:"Ascription"`
 
-	// The NS record of the domain name.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the current NS record of the domain name.
 	OriginalNameServers []*string `json:"OriginalNameServers,omitnil,omitempty" name:"OriginalNameServers"`
 
 	// Details of the verification file.
@@ -12373,14 +14394,13 @@ func (r *IncreasePlanQuotaResponse) FromJsonString(s string) error {
 }
 
 type IntelligenceRule struct {
-	// Switch. Values:
-	// <li>`on`: Enable</li>
-	// <li>`off`: Disable</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Switch. valid values:.
+	// <li>`on`: Enable;</li>
+	// 
+	// <li>off: Disable.</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Items in a bot intelligence rule
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the rule detail.
 	IntelligenceRuleItems []*IntelligenceRuleItem `json:"IntelligenceRuleItems,omitnil,omitempty" name:"IntelligenceRuleItems"`
 }
 
@@ -12402,14 +14422,13 @@ type IntelligenceRuleItem struct {
 }
 
 type IpTableConfig struct {
-	// Switch. Values:
-	// <li>`on`: Enable</li>
-	// <li>`off`: Disable</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Switch. valid values:.
+	// <li>`on`: Enable;</li>
+	// 
+	// <li>off: disabled;</li>.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// The settings of the basic access control rule. If it is null, the settings that were last configured will be used.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Basic control rules. if null, historical configuration is used by default.
 	IpTableRules []*IpTableRule `json:"IpTableRules,omitnil,omitempty" name:"IpTableRules"`
 }
 
@@ -12448,8 +14467,7 @@ type IpTableRule struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// The rule name.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the rule name.
 	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
 	// Matching content. It’s not required when `Operator` is `is_emty` or `not_exists`. 
@@ -12468,6 +14486,57 @@ type JITVideoProcess struct {
 	// <li>on: Enable.</li>
 	// <li>off: Disable.</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+}
+
+type JSInjectionRule struct {
+	// Rule ID.
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
+	// Rule name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Rule priority. a smaller value indicates higher priority execution. value range: 0-100. default value is 0.
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
+
+	// Specifies the match condition content, which must comply with the expression grammar. please refer to the product document for detailed requirements.
+	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
+
+	// JavaScript injection option. default value: run-attestations. valid values:.
+	// <li>no-injection: specifies not to inject JavaScript.</li>.
+	// <li>inject-sdk-only: injects sdks for all currently supported authentication methods. currently supported: TC-RCE and TC-CAPTCHA. note: to execute authentication detection, configure challenge rules.</li>.
+	InjectJS *string `json:"InjectJS,omitnil,omitempty" name:"InjectJS"`
+}
+
+type JustInTimeTranscodeTemplate struct {
+	// Unique identifier of the instant transcoding template.
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
+
+	// Specifies the transcoding template name.
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
+
+	// Template description information.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Template type. valid values: <li>preset: system-preset template;</li> <li>custom: user-defined template.</li>.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Enable video stream. valid values: <li>on: turn on;</li> <li>off: turn off.</li>.
+	VideoStreamSwitch *string `json:"VideoStreamSwitch,omitnil,omitempty" name:"VideoStreamSwitch"`
+
+	// Enable audio stream. valid values: <li>on: enable;</li> <li>off: disable.</li>.
+	AudioStreamSwitch *string `json:"AudioStreamSwitch,omitnil,omitempty" name:"AudioStreamSwitch"`
+
+	// Video stream configuration parameters. this field is valid only when VideoStreamSwitch is on.
+	VideoTemplate *VideoTemplateInfo `json:"VideoTemplate,omitnil,omitempty" name:"VideoTemplate"`
+
+	// Audio stream configuration parameters. specifies this field is valid only when AudioStreamSwitch is on.
+	AudioTemplate *AudioTemplateInfo `json:"AudioTemplate,omitnil,omitempty" name:"AudioTemplate"`
+
+	// Template creation time. uses [ISO date format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Template last modified time. uses [ISO date format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
 type L4OfflineLog struct {
@@ -12696,7 +14765,7 @@ type LoadBalancer struct {
 	// <li>Running: effective.</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// List of Layer-4 proxy instances bound to a LoadBalancer.
+	// Specifies the list of l4 proxy instances bound to the load balancing instance.
 	L4UsedList []*string `json:"L4UsedList,omitnil,omitempty" name:"L4UsedList"`
 
 	// List of Layer-7 domain names bound to a LoadBalancer.
@@ -13770,6 +15839,67 @@ func (r *ModifyCustomErrorPageResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyDDoSProtectionRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Specifies the exclusive Anti-DDoS configuration.
+	DDoSProtection *DDoSProtection `json:"DDoSProtection,omitnil,omitempty" name:"DDoSProtection"`
+}
+
+type ModifyDDoSProtectionRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Specifies the exclusive Anti-DDoS configuration.
+	DDoSProtection *DDoSProtection `json:"DDoSProtection,omitnil,omitempty" name:"DDoSProtection"`
+}
+
+func (r *ModifyDDoSProtectionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDDoSProtectionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "DDoSProtection")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDDoSProtectionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDDoSProtectionResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyDDoSProtectionResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDDoSProtectionResponseParams `json:"Response"`
+}
+
+func (r *ModifyDDoSProtectionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDDoSProtectionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyDnsRecordsRequestParams struct {
 	// Zone id.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -14805,6 +16935,253 @@ func (r *ModifyLoadBalancerResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyMultiPathGatewayLineRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Multi-Channel security acceleration gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Line ID. valid values:
+	// <Li>Line-1: EdgeOne layer-4 proxy line. Supports modifying instances and rules, but does not support deletion.  </li>
+	// <li<li>line-2 and above: EdgeOne layer-4 proxy lines or custom lines, supports modifying, deleting instances and rules.</li> 
+	LineId *string `json:"LineId,omitnil,omitempty" name:"LineId"`
+
+	// Line type. valid values:.
+	// <li>proxy: EdgeOne layer-4 proxy line, supports modifying instances and rules, but deletion is not supported.</li>.
+	// <Li>custom: Custom line.Supports editing, deleting instances and rules. 
+	LineType *string `json:"LineType,omitnil,omitempty" name:"LineType"`
+
+	// Line address, formatted as host:port. Direct lines (LineType value is direct) cannot be modified, while other types support modifications.
+	LineAddress *string `json:"LineAddress,omitnil,omitempty" name:"LineAddress"`
+
+	// Layer-4 proxy instance ID. when the line type value is proxy (EdgeOne layer-4 proxy),  it allows modifications to the instance.
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
+
+	// Forwarding rule ID. when the line type  value is proxy (EdgeOne layer-4 proxy), it allows input to modify.
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+}
+
+type ModifyMultiPathGatewayLineRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Multi-Channel security acceleration gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Line ID. valid values:
+	// <Li>Line-1: EdgeOne layer-4 proxy line. Supports modifying instances and rules, but does not support deletion.  </li>
+	// <li<li>line-2 and above: EdgeOne layer-4 proxy lines or custom lines, supports modifying, deleting instances and rules.</li> 
+	LineId *string `json:"LineId,omitnil,omitempty" name:"LineId"`
+
+	// Line type. valid values:.
+	// <li>proxy: EdgeOne layer-4 proxy line, supports modifying instances and rules, but deletion is not supported.</li>.
+	// <Li>custom: Custom line.Supports editing, deleting instances and rules. 
+	LineType *string `json:"LineType,omitnil,omitempty" name:"LineType"`
+
+	// Line address, formatted as host:port. Direct lines (LineType value is direct) cannot be modified, while other types support modifications.
+	LineAddress *string `json:"LineAddress,omitnil,omitempty" name:"LineAddress"`
+
+	// Layer-4 proxy instance ID. when the line type value is proxy (EdgeOne layer-4 proxy),  it allows modifications to the instance.
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
+
+	// Forwarding rule ID. when the line type  value is proxy (EdgeOne layer-4 proxy), it allows input to modify.
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+}
+
+func (r *ModifyMultiPathGatewayLineRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMultiPathGatewayLineRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "GatewayId")
+	delete(f, "LineId")
+	delete(f, "LineType")
+	delete(f, "LineAddress")
+	delete(f, "ProxyId")
+	delete(f, "RuleId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMultiPathGatewayLineRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyMultiPathGatewayLineResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyMultiPathGatewayLineResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyMultiPathGatewayLineResponseParams `json:"Response"`
+}
+
+func (r *ModifyMultiPathGatewayLineResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMultiPathGatewayLineResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyMultiPathGatewayRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Specifies the gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Gateway name, up to 16 characters, allowed characters (a-z, A-Z, 0-9, -, _).
+	GatewayName *string `json:"GatewayName,omitnil,omitempty" name:"GatewayName"`
+
+	// Gateway address, if GatewayType value is private (private gateway), you can fill in and modify it. When using this address, please ensure it has been entered into the Tencent cloud multi-channel security acceleration gateway system. if not entered, you need to submit a ticket or contact the architect to enter the gateway IP address into the Tencent cloud multi-channel security acceleration gateway system in advance before making API calls.
+	GatewayIP *string `json:"GatewayIP,omitnil,omitempty" name:"GatewayIP"`
+
+	// Gateway port, range 1-65535 (excluding 8888), supports modifying GatewayType with a value of private gateway.
+	GatewayPort *int64 `json:"GatewayPort,omitnil,omitempty" name:"GatewayPort"`
+}
+
+type ModifyMultiPathGatewayRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Specifies the gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Gateway name, up to 16 characters, allowed characters (a-z, A-Z, 0-9, -, _).
+	GatewayName *string `json:"GatewayName,omitnil,omitempty" name:"GatewayName"`
+
+	// Gateway address, if GatewayType value is private (private gateway), you can fill in and modify it. When using this address, please ensure it has been entered into the Tencent cloud multi-channel security acceleration gateway system. if not entered, you need to submit a ticket or contact the architect to enter the gateway IP address into the Tencent cloud multi-channel security acceleration gateway system in advance before making API calls.
+	GatewayIP *string `json:"GatewayIP,omitnil,omitempty" name:"GatewayIP"`
+
+	// Gateway port, range 1-65535 (excluding 8888), supports modifying GatewayType with a value of private gateway.
+	GatewayPort *int64 `json:"GatewayPort,omitnil,omitempty" name:"GatewayPort"`
+}
+
+func (r *ModifyMultiPathGatewayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMultiPathGatewayRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "GatewayId")
+	delete(f, "GatewayName")
+	delete(f, "GatewayIP")
+	delete(f, "GatewayPort")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMultiPathGatewayRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyMultiPathGatewayResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyMultiPathGatewayResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyMultiPathGatewayResponseParams `json:"Response"`
+}
+
+func (r *ModifyMultiPathGatewayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMultiPathGatewayResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyMultiPathGatewaySecretKeyRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Multi-Channel security acceleration gateway integration key, base64-encoded string with an unencoded length of 32-48 characters.
+	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
+}
+
+type ModifyMultiPathGatewaySecretKeyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Multi-Channel security acceleration gateway integration key, base64-encoded string with an unencoded length of 32-48 characters.
+	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
+}
+
+func (r *ModifyMultiPathGatewaySecretKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMultiPathGatewaySecretKeyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "SecretKey")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMultiPathGatewaySecretKeyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyMultiPathGatewaySecretKeyResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyMultiPathGatewaySecretKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyMultiPathGatewaySecretKeyResponseParams `json:"Response"`
+}
+
+func (r *ModifyMultiPathGatewaySecretKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMultiPathGatewaySecretKeyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyOriginACLRequestParams struct {
 	// Specifies the site ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -14981,15 +17358,15 @@ type ModifyOriginParameters struct {
 	// <Li>Follow: follow the protocol.</li>.
 	OriginProtocol *string `json:"OriginProtocol,omitnil,omitempty" name:"OriginProtocol"`
 
-	// Ports for http origin-pull requests. value range: 1-65535. this parameter takes effect only when the origin-pull protocol originprotocol is http or follow.
+	// The HTTP origin port, value ranges from 1 to 65535. this parameter is required when the origin-pull protocol OriginProtocol is HTTP or follow.
 	HTTPOriginPort *int64 `json:"HTTPOriginPort,omitnil,omitempty" name:"HTTPOriginPort"`
 
-	// Ports for https origin-pull requests. value range: 1-65535. this parameter takes effect only when the origin-pull protocol originprotocol is https or follow.
+	// The HTTPS origin port, value ranges from 1 to 65535. this parameter is required when the origin-pull protocol OriginProtocol is HTTPS or follow.
 	HTTPSOriginPort *int64 `json:"HTTPSOriginPort,omitnil,omitempty" name:"HTTPSOriginPort"`
 
-	// Whether access to the private object storage origin server is allowed. this parameter is valid only when the origin server type origintype is COS or awss3. valid values:.
+	// Specifies whether access to the private object storage origin server is allowed. this parameter is required when the origin server type OriginType is COS or AWSS3. valid values:.
 	// <Li>On: enable private authentication;</li>.
-	// <Li>Off: disable private authentication.</li> if not specified, the default value is off.
+	// <li>off: disable private authentication.</li>.
 	PrivateAccess *string `json:"PrivateAccess,omitnil,omitempty" name:"PrivateAccess"`
 
 	// Private authentication parameter. this parameter is valid only when origintype = awss3 and privateaccess = on.
@@ -15306,6 +17683,189 @@ func (r *ModifyRuleResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifySecurityAPIResourceRequestParams struct {
+	// Zone ID.		
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// API resource list.
+	APIResources []*APIResource `json:"APIResources,omitnil,omitempty" name:"APIResources"`
+}
+
+type ModifySecurityAPIResourceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.		
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// API resource list.
+	APIResources []*APIResource `json:"APIResources,omitnil,omitempty" name:"APIResources"`
+}
+
+func (r *ModifySecurityAPIResourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySecurityAPIResourceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "APIResources")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySecurityAPIResourceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySecurityAPIResourceResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifySecurityAPIResourceResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifySecurityAPIResourceResponseParams `json:"Response"`
+}
+
+func (r *ModifySecurityAPIResourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySecurityAPIResourceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySecurityAPIServiceRequestParams struct {
+	// Zone ID.		
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// API service list.
+	APIServices []*APIService `json:"APIServices,omitnil,omitempty" name:"APIServices"`
+}
+
+type ModifySecurityAPIServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.		
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// API service list.
+	APIServices []*APIService `json:"APIServices,omitnil,omitempty" name:"APIServices"`
+}
+
+func (r *ModifySecurityAPIServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySecurityAPIServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "APIServices")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySecurityAPIServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySecurityAPIServiceResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifySecurityAPIServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifySecurityAPIServiceResponseParams `json:"Response"`
+}
+
+func (r *ModifySecurityAPIServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySecurityAPIServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySecurityClientAttesterRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Specifies the authentication option list.
+	ClientAttesters []*ClientAttester `json:"ClientAttesters,omitnil,omitempty" name:"ClientAttesters"`
+}
+
+type ModifySecurityClientAttesterRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Specifies the authentication option list.
+	ClientAttesters []*ClientAttester `json:"ClientAttesters,omitnil,omitempty" name:"ClientAttesters"`
+}
+
+func (r *ModifySecurityClientAttesterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySecurityClientAttesterRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "ClientAttesters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySecurityClientAttesterRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySecurityClientAttesterResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifySecurityClientAttesterResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifySecurityClientAttesterResponseParams `json:"Response"`
+}
+
+func (r *ModifySecurityClientAttesterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySecurityClientAttesterResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifySecurityIPGroupRequestParams struct {
 	// Site ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -15313,10 +17873,7 @@ type ModifySecurityIPGroupRequestParams struct {
 	// IP group configuration.
 	IPGroup *IPGroup `json:"IPGroup,omitnil,omitempty" name:"IPGroup"`
 
-	// Operation type. Valid values: 
-	// <li>`append`: Add information of `Content` to `IPGroup`;</li>
-	// <li>`remove`: Delete information of `Content` from `IPGroup`;</li>
-	// <li>`update`: Replace all information of `IPGroup` and modify the IPGroup name.</li>
+	// Operation type. valid values: <li>`append`: add new IP addresses or set scheduled expiration time to `IPGroup`;</li> <li>`remove`: delete specified IP addresses or their scheduled expiration time from `IPGroup`;</li> <li>`update`: replace all Content of `Content` or `ExpireInfo` in `IPGroup` and modify the IPGroup name.</li>  notes for `append` operation: <li>when adding a scheduled expiration time for an IP or range, it must be later than the current time. if the IP or range does not exist in the group, it must be added to the `Content` parameter simultaneously. if the IP or range already has an expiration time, the new time will overwrite the original one.</li>  notes for `remove` operation: <li>when deleting an IP or range, related unexpired scheduled expiration times will also be deleted;</li> <li>when deleting a scheduled expiration time, only currently unexpired times can be removed.</li>  notes for `update` operation: <li>when replacing `Content`, unexpired times of ips or ranges not in `Content` will be deleted;</li> <li>when replacing `IPExpireInfo`, the ips or ranges in `IPExpireInfo` must exist in `Content` or the IP group.</li>.
 	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 }
 
@@ -15329,10 +17886,7 @@ type ModifySecurityIPGroupRequest struct {
 	// IP group configuration.
 	IPGroup *IPGroup `json:"IPGroup,omitnil,omitempty" name:"IPGroup"`
 
-	// Operation type. Valid values: 
-	// <li>`append`: Add information of `Content` to `IPGroup`;</li>
-	// <li>`remove`: Delete information of `Content` from `IPGroup`;</li>
-	// <li>`update`: Replace all information of `IPGroup` and modify the IPGroup name.</li>
+	// Operation type. valid values: <li>`append`: add new IP addresses or set scheduled expiration time to `IPGroup`;</li> <li>`remove`: delete specified IP addresses or their scheduled expiration time from `IPGroup`;</li> <li>`update`: replace all Content of `Content` or `ExpireInfo` in `IPGroup` and modify the IPGroup name.</li>  notes for `append` operation: <li>when adding a scheduled expiration time for an IP or range, it must be later than the current time. if the IP or range does not exist in the group, it must be added to the `Content` parameter simultaneously. if the IP or range already has an expiration time, the new time will overwrite the original one.</li>  notes for `remove` operation: <li>when deleting an IP or range, related unexpired scheduled expiration times will also be deleted;</li> <li>when deleting a scheduled expiration time, only currently unexpired times can be removed.</li>  notes for `update` operation: <li>when replacing `Content`, unexpired times of ips or ranges not in `Content` will be deleted;</li> <li>when replacing `IPExpireInfo`, the ips or ranges in `IPExpireInfo` must exist in `Content` or the IP group.</li>.
 	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 }
 
@@ -15380,14 +17934,75 @@ func (r *ModifySecurityIPGroupResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifySecurityJSInjectionRuleRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// JavaScript injection rule list.
+	JSInjectionRules []*JSInjectionRule `json:"JSInjectionRules,omitnil,omitempty" name:"JSInjectionRules"`
+}
+
+type ModifySecurityJSInjectionRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// JavaScript injection rule list.
+	JSInjectionRules []*JSInjectionRule `json:"JSInjectionRules,omitnil,omitempty" name:"JSInjectionRules"`
+}
+
+func (r *ModifySecurityJSInjectionRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySecurityJSInjectionRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "JSInjectionRules")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySecurityJSInjectionRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySecurityJSInjectionRuleResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifySecurityJSInjectionRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifySecurityJSInjectionRuleResponseParams `json:"Response"`
+}
+
+func (r *ModifySecurityJSInjectionRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySecurityJSInjectionRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifySecurityPolicyRequestParams struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Security policy configuration. <li>When the `CustomRule` in the `SecurityPolicy` parameter is set, the `AclConfg` and `IpTableConfg` in the `SecurityConfig` parameter will be ignored;</li> <li>when the `ManagedRule` in the `SecurityPolicy` parameter is set, the `WafConfig` in the `SecurityConfig` parameter will be ignored.</li> <li>For custom rules and managed rule policy configuration, using `SecurityPolicy` parameter to configure settings is recommended.</li>
+	// Security policy configuration. <li>when ExceptionRules in the SecurityPolicy parameter is set, ExceptConfig in the SecurityConfig parameter will be ignored;</li> <li>when CustomRules in the SecurityPolicy parameter is set, AclConfig and IpTableConfig in the SecurityConfig parameter will be ignored;</li> <li>when HttpDDoSProtection and RateLimitingRules in the SecurityPolicy parameter are set, RateLimitConfig in the SecurityConfig parameter will be ignored;</li> <li>when ManagedRule in the SecurityPolicy parameter is set, WafConfig in the SecurityConfig parameter will be ignored;</li> <li>for exception rules, custom rules, rate limits, and managed rule policy, it is recommended to use the SecurityPolicy parameter for configuration.</li>.
 	SecurityConfig *SecurityConfig `json:"SecurityConfig,omitnil,omitempty" name:"SecurityConfig"`
 
-	// Security policy configuration. The parameter is recommended to use for custom policies and managed rule configurations of web protection, it supports configuring security policies with expression grammar.	
+	// Security policy configuration. recommend using for Web exception rules, protection custom policies, rate rules, and managed rules. supports configuring security policies with expression grammar.
 	SecurityPolicy *SecurityPolicy `json:"SecurityPolicy,omitnil,omitempty" name:"SecurityPolicy"`
 
 	// `SecurityPolicy` type, the following parameter values can be used for query: <li>`ZoneDefaultPolicy`: used to specify a query for site-level policies;</li> <li>`Template`: used to specify a query for policy templates. the `TemplateId` parameter needs to be specified simultaneously;</li> <li>`Host`: used to specify a query for domain-level policies (note: when using `Host` to specify a domain name service policy, only domain name services or policy templates that have been applied domain-level policies are supported).</li>	
@@ -15406,10 +18021,10 @@ type ModifySecurityPolicyRequest struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Security policy configuration. <li>When the `CustomRule` in the `SecurityPolicy` parameter is set, the `AclConfg` and `IpTableConfg` in the `SecurityConfig` parameter will be ignored;</li> <li>when the `ManagedRule` in the `SecurityPolicy` parameter is set, the `WafConfig` in the `SecurityConfig` parameter will be ignored.</li> <li>For custom rules and managed rule policy configuration, using `SecurityPolicy` parameter to configure settings is recommended.</li>
+	// Security policy configuration. <li>when ExceptionRules in the SecurityPolicy parameter is set, ExceptConfig in the SecurityConfig parameter will be ignored;</li> <li>when CustomRules in the SecurityPolicy parameter is set, AclConfig and IpTableConfig in the SecurityConfig parameter will be ignored;</li> <li>when HttpDDoSProtection and RateLimitingRules in the SecurityPolicy parameter are set, RateLimitConfig in the SecurityConfig parameter will be ignored;</li> <li>when ManagedRule in the SecurityPolicy parameter is set, WafConfig in the SecurityConfig parameter will be ignored;</li> <li>for exception rules, custom rules, rate limits, and managed rule policy, it is recommended to use the SecurityPolicy parameter for configuration.</li>.
 	SecurityConfig *SecurityConfig `json:"SecurityConfig,omitnil,omitempty" name:"SecurityConfig"`
 
-	// Security policy configuration. The parameter is recommended to use for custom policies and managed rule configurations of web protection, it supports configuring security policies with expression grammar.	
+	// Security policy configuration. recommend using for Web exception rules, protection custom policies, rate rules, and managed rules. supports configuring security policies with expression grammar.
 	SecurityPolicy *SecurityPolicy `json:"SecurityPolicy,omitnil,omitempty" name:"SecurityPolicy"`
 
 	// `SecurityPolicy` type, the following parameter values can be used for query: <li>`ZoneDefaultPolicy`: used to specify a query for site-level policies;</li> <li>`Template`: used to specify a query for policy templates. the `TemplateId` parameter needs to be specified simultaneously;</li> <li>`Host`: used to specify a query for domain-level policies (note: when using `Host` to specify a domain name service policy, only domain name services or policy templates that have been applied domain-level policies are supported).</li>	
@@ -15559,7 +18174,7 @@ type ModifyZoneRequestParams struct {
 	// The custom name servers. The original configuration applies if this field is not specified. It is not allowed to pass this field when a site is connected without using a domain name.
 	VanityNameServers *VanityNameServers `json:"VanityNameServers,omitnil,omitempty" name:"VanityNameServers"`
 
-	// The site alias. It can be up to 20 characters consisting of digits, letters, hyphens (-) and underscores (_).
+	// Identical site identifier. limits input to numbers, english letters, ".", "-", and "_", with a character limit of 200 characters.
 	AliasZoneName *string `json:"AliasZoneName,omitnil,omitempty" name:"AliasZoneName"`
 
 	// The region where the site requests access. Values:
@@ -15587,7 +18202,7 @@ type ModifyZoneRequest struct {
 	// The custom name servers. The original configuration applies if this field is not specified. It is not allowed to pass this field when a site is connected without using a domain name.
 	VanityNameServers *VanityNameServers `json:"VanityNameServers,omitnil,omitempty" name:"VanityNameServers"`
 
-	// The site alias. It can be up to 20 characters consisting of digits, letters, hyphens (-) and underscores (_).
+	// Identical site identifier. limits input to numbers, english letters, ".", "-", and "_", with a character limit of 200 characters.
 	AliasZoneName *string `json:"AliasZoneName,omitnil,omitempty" name:"AliasZoneName"`
 
 	// The region where the site requests access. Values:
@@ -15950,6 +18565,61 @@ func (r *ModifyZoneStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type MultiPathGateway struct {
+	// Specifies the gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Gateway name.
+	GatewayName *string `json:"GatewayName,omitnil,omitempty" name:"GatewayName"`
+
+	// Gateway type. valid values:
+	// <Li>Cloud: cloud gateway,  created and managed by Tencent cloud.</li>
+	// <Li>Private: private gateway, deployed by cutomer.</li>
+	GatewayType *string `json:"GatewayType,omitnil,omitempty" name:"GatewayType"`
+
+	// Gateway port. value range: 1-65535 (excluding 8888).
+	GatewayPort *int64 `json:"GatewayPort,omitnil,omitempty" name:"GatewayPort"`
+
+	// Gateway status. valid values:
+	// <Li>creating: The gateway is being created. </li>
+	// <Li>online: The gateway is online and operational.</li>
+	// <Li>offline: The gateway is offline and unavailable.</li>
+	// <Li>disabled: The gateway has been disabled.</li>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Gateway IP, in IPv4 format.
+	GatewayIP *string `json:"GatewayIP,omitnil,omitempty" name:"GatewayIP"`
+
+	// Gateway region Id. which can be obtained from the DescribeMultiPathGatewayRegions API.
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+
+	// Line information. The line information will be returned when querying gateway information with DescribeMultiPathGateway ande not returned when querying the gateway list with DescribeMultiPathGateways.
+	Lines []*MultiPathGatewayLine `json:"Lines,omitnil,omitempty" name:"Lines"`
+}
+
+type MultiPathGatewayLine struct {
+	// line ID. where line-0 and line-1 are system-reserved IDs. valid values:
+	// <Li>line-0: direct connection line. Adding, editing, and deletion are not supported.</li>
+	// <Li>line-1: EdgeOne layer-4 proxy line. Supports modifying instances and rules, but deletion is not supported.</li>
+	// <li>line-2 and above: EdgeOne layer-4 proxy lines or custom lines, supports modifying, deleting instances and rules.</li>
+	LineId *string `json:"LineId,omitnil,omitempty" name:"LineId"`
+
+	// Line type. valid values:
+	// <Li>direct: Direct connection line. Editing and deletion are not supported. .</li>
+	// <li>proxy: EdgeOne layer-4 proxy line, supports editing and modifying instances and rules, but deletion is not supported;</li>
+	// <Li>custom: Custom line, supports editing and deletion.</li>
+	LineType *string `json:"LineType,omitnil,omitempty" name:"LineType"`
+
+	// Line address in the format host:port.
+	LineAddress *string `json:"LineAddress,omitnil,omitempty" name:"LineAddress"`
+
+	// Layer-4 proxy instance ID,returned only when the LineType value is proxy (EdgeOne layer-4 proxy).
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
+
+	// Forwarding rule ID. returned only when the LineType value is proxy (EdgeOne layer-4 proxy).
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+}
+
 type MutualTLS struct {
 
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
@@ -16023,25 +18693,21 @@ type OfflineCacheParameters struct {
 }
 
 type Origin struct {
-	// Primary origin server list
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Origin server list.
 	Origins []*string `json:"Origins,omitnil,omitempty" name:"Origins"`
 
-	// The list of backup origin servers.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Backup origin list.
 	BackupOrigins []*string `json:"BackupOrigins,omitnil,omitempty" name:"BackupOrigins"`
 
-	// Origin-pull protocol configuration. Values:
-	// <li>`http`: Force HTTP for origin-pull.</li>
-	// <li>`follow`: Follow protocol.</li>
-	// <li>`https`: Force HTTPS for origin-pull.</li>
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Origin server protocol configuration. valid values:.
+	// <Li>Http: forced http back to source;</li>.
+	// <Li>`Follow`: follow protocol.</li>.
+	// <Li>Https: enforce https origin-pull.</li>.
 	OriginPullProtocol *string `json:"OriginPullProtocol,omitnil,omitempty" name:"OriginPullProtocol"`
 
-	// Whether to allow private access to buckets when `OriginType=cos`. Valid values: 
-	// <li>`on`: Private access;</li>
-	// <li>`off`: Public access.</li>
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// When the origin is tencent cloud COS, whether it is a private access bucket. valid values:.
+	// <li>`on`: private network access;</li>.
+	// <li>`off`: public access.</li>.
 	CosPrivateAccess *string `json:"CosPrivateAccess,omitnil,omitempty" name:"CosPrivateAccess"`
 }
 
@@ -16122,7 +18788,7 @@ type OriginDetail struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PrivateParameters []*PrivateParameter `json:"PrivateParameters,omitnil,omitempty" name:"PrivateParameters"`
 
-	// current configured origin HOST header.
+	// Specifies the current configuration of the origin-pull HOST header.
 	HostHeader *string `json:"HostHeader,omitnil,omitempty" name:"HostHeader"`
 
 	// MO sub-application ID
@@ -16172,8 +18838,7 @@ type OriginGroup struct {
 	// The update time of the origin group.
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-	// Origin-pull host header
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Specifies the origin-pull Host Header.
 	HostHeader *string `json:"HostHeader,omitnil,omitempty" name:"HostHeader"`
 }
 
@@ -16402,13 +19067,97 @@ type OwnershipVerification struct {
 }
 
 type PartialModule struct {
-	// The module. Values:
-	// <li>`waf`: Managed rules</li>
+	// Module name. value is.
+	// <li>managed-rule: managed rule Id;</li>.
+	// <Li>Managed-Group: managed rule group;</li>.
+	// <li>`waf`: to be deprecated, managed rule.</li>.
 	Module *string `json:"Module,omitnil,omitempty" name:"Module"`
 
-	// List of managed rule IDs to be skipped.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Specifies the list of rule ids that require exceptions under the module.
 	Include []*int64 `json:"Include,omitnil,omitempty" name:"Include"`
+}
+
+type Plan struct {
+	// Package type. valid values:.
+	// <Li>`Plan-Trial`: trial plan</li>.
+	// <Li>`Plan-Personal`: personal plan</li>.
+	// <Li>`Plan-Basic`: basic plan</li>.
+	// <Li>`Plan-Standard`: standard edition plan</li>.
+	// <li>plan-enterprise-v2: enterprise plan;</li>.
+	// <li>plan-enterprise-model-a: enterprise edition model a package.</li>.
+	// <Li>Plan-Enterprise: legacy enterprise plan.</li>.
+	PlanType *string `json:"PlanType,omitnil,omitempty" name:"PlanType"`
+
+	// Package ID. such as edgeone-2y041pblwaxe.
+	PlanId *string `json:"PlanId,omitnil,omitempty" name:"PlanId"`
+
+	// Service area. valid values:.
+	// <Li>`Mainland`: chinese mainland</li>.
+	// <li>`overseas`: global (chinese mainland not included)</li>.
+	// <Li>`Global`: global (chinese mainland included)</li>.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Auto-Renew switch. valid values:.
+	// <li>true: automatic renewal is enabled.</li>.
+	// <li>false: automatic renewal is not enabled.</li>.
+	AutoRenewal *bool `json:"AutoRenewal,omitnil,omitempty" name:"AutoRenewal"`
+
+	// Package status. valid values:.
+	// <Li>Normal: indicates the normal status.</li>.
+	// <li>`expiring-soon`: will expire soon;</li>.
+	// <li>`expired`: expiration status;</li>.
+	// <Li>`Isolated`: isolated state</li>.
+	// <li>`overdue-isolated`: arrears isolated state.</li>.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Payment type. valid values:.
+	// <Li>0: postpaid;</li>.
+	// <Li>1: prepaid.</li>.
+	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Describes the site information bound to the package, including the site id, site name, and site status.
+	ZonesInfo []*ZoneInfo `json:"ZonesInfo,omitnil,omitempty" name:"ZonesInfo"`
+
+	// Smart acceleration request quantity in the package, unit: times.
+	SmartRequestCapacity *int64 `json:"SmartRequestCapacity,omitnil,omitempty" name:"SmartRequestCapacity"`
+
+	// Specifies the VAU specification in the package. measurement unit: unit.
+	VAUCapacity *int64 `json:"VAUCapacity,omitnil,omitempty" name:"VAUCapacity"`
+
+	// Specifies the content acceleration traffic specification in the package, measurement unit: byte.
+	AccTrafficCapacity *int64 `json:"AccTrafficCapacity,omitnil,omitempty" name:"AccTrafficCapacity"`
+
+	// Specifies the smart acceleration traffic specification in the package. measurement unit: byte.
+	SmartTrafficCapacity *int64 `json:"SmartTrafficCapacity,omitnil,omitempty" name:"SmartTrafficCapacity"`
+
+	// Specifies the DDoS protection traffic specification in the package, measurement unit: byte.
+	DDoSTrafficCapacity *int64 `json:"DDoSTrafficCapacity,omitnil,omitempty" name:"DDoSTrafficCapacity"`
+
+	// Security traffic specification in the package. measurement unit: byte.
+	SecTrafficCapacity *int64 `json:"SecTrafficCapacity,omitnil,omitempty" name:"SecTrafficCapacity"`
+
+	// Security requests in the package, unit: times.
+	SecRequestCapacity *int64 `json:"SecRequestCapacity,omitnil,omitempty" name:"SecRequestCapacity"`
+
+	// Specifies the layer 4 acceleration traffic specification in the package, measurement unit: byte.
+	L4TrafficCapacity *int64 `json:"L4TrafficCapacity,omitnil,omitempty" name:"L4TrafficCapacity"`
+
+	// Specifies the network optimization traffic specification in the package for the chinese mainland, measurement unit: byte.
+	CrossMLCTrafficCapacity *int64 `json:"CrossMLCTrafficCapacity,omitnil,omitempty" name:"CrossMLCTrafficCapacity"`
+
+	// Specifies whether the package allows binding to new sites. valid values:.
+	// <li>true: allows binding a new site.</li>.
+	// <li>`false`: cannot bind new sites.</li>.
+	Bindable *string `json:"Bindable,omitnil,omitempty" name:"Bindable"`
+
+	// Package activation time.
+	EnabledTime *string `json:"EnabledTime,omitnil,omitempty" name:"EnabledTime"`
+
+	// Plan expiration time.
+	ExpiredTime *string `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
+
+	// Supported features of the package include: <li>ContentAcceleration: content acceleration feature;</li> <li>SmartAcceleration: intelligent acceleration feature;</li> <li>L4: L4 acceleration feature;</li> <li>Waf: advanced Web protection;</li> <li>QUIC: QUIC feature;</li> <li>CrossMLC: network optimization in the chinese mainland;</li> <li>ProcessMedia: media processing feature;</li> <li>L4DDoS: L4 DDoS protection feature;</li> L7DDoS feature will only appear in one of the following specifications: <li>L7DDoS.CM30G; layer-7 DDoS protection feature - 30G guaranteed minimum bandwidth specification in the chinese mainland;</li> <li>L7DDoS.CM60G; layer-7 DDoS protection feature - 60G guaranteed minimum bandwidth specification in the chinese mainland;</li> <li>L7DDoS.CM100G; layer-7 DDoS protection feature - 100G guaranteed minimum bandwidth specification in the chinese mainland;</li> <li>L7DDoS.Anycast300G; layer-7 DDoS protection feature - 300G guaranteed minimum bandwidth specification outside the chinese mainland with Anycast;</li> <li>L7DDoS.AnycastUnlimited; layer-7 DDoS protection feature - unlimited Anycast full protection outside the chinese mainland;</li> <li>L7DDoS.CM30G_Anycast300G; layer-7 DDoS protection feature - 30G guaranteed minimum bandwidth specification in the chinese mainland and 300G guaranteed minimum bandwidth specification outside the chinese mainland with Anycast;</li> <li>L7DDoS.CM60G_Anycast300G; layer-7 DDoS protection feature - 60G guaranteed minimum bandwidth specification in the chinese mainland and 300G guaranteed minimum bandwidth specification outside the chinese mainland with Anycast;</li> <li>L7DDoS.CM100G_Anycast300G; layer-7 DDoS protection feature - 100G guaranteed minimum bandwidth specification in the chinese mainland and 300G guaranteed minimum bandwidth specification outside the chinese mainland with Anycast;</li> <li>L7DDoS.CM30G_AnycastUnlimited; layer-7 DDoS protection feature - 30G guaranteed minimum bandwidth specification in the chinese mainland and unlimited Anycast full protection outside the chinese mainland;</li> <li>L7DDoS.CM60G_AnycastUnlimited; layer-7 DDoS protection feature - 60G guaranteed minimum bandwidth specification in the chinese mainland and unlimited Anycast full protection outside the chinese mainland;</li> <li>L7DDoS.CM100G_AnycastUnlimited; layer-7 DDoS protection feature - 100G guaranteed minimum bandwidth specification in the chinese mainland and unlimited Anycast full protection outside the chinese mainland;</li>.
+	Features []*string `json:"Features,omitnil,omitempty" name:"Features"`
 }
 
 type PlanInfo struct {
@@ -16465,8 +19214,7 @@ type PostMaxSize struct {
 	// <li>`off`: Disable.</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Maximum size. Value range: 1-500 MB.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Maximum limit. value range between 1MB and 500MB. byte.
 	MaxSize *int64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
 }
 
@@ -16536,14 +19284,12 @@ type QueryString struct {
 	// <li>`off`: No</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Specifies how to use query strings in the cache key. Values:
-	// <li>`includeCustom`: `Include partial query strings.</li>
-	// <li>`excludeCustom`: Exclude partial query strings.</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// CacheKey usage via QueryString, valid values:.
+	// <li>includeCustom: use partial url parameter;</li>.
+	// <li>excludeCustom: exclude partial url parameters.</li>.
 	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
-	// Array of query strings used/excluded
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the url parameter array for usage/exclusion.
 	Value []*string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
@@ -16590,16 +19336,13 @@ type RateLimitConfig struct {
 	// The settings of the custom rate limiting rule. If it is null, the settings that were last configured will be used.
 	RateLimitUserRules []*RateLimitUserRule `json:"RateLimitUserRules,omitnil,omitempty" name:"RateLimitUserRules"`
 
-	// The settings of the rate limiting template. If it is null, the settings that were last configured will be used.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The rate limit template feature. if null, use the last set configuration by default.
 	RateLimitTemplate *RateLimitTemplate `json:"RateLimitTemplate,omitnil,omitempty" name:"RateLimitTemplate"`
 
-	// The client filtering settings. If it is null, the settings that were last configured will be used.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Intelligent client filtering. if null, use the last set configuration by default.
 	RateLimitIntelligence *RateLimitIntelligence `json:"RateLimitIntelligence,omitnil,omitempty" name:"RateLimitIntelligence"`
 
-	// The custom rate limiting rules. If it is `null`, the previous settings is used.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// The custom rate limiting rules. if it is `null`, the previous settings is used.
 	RateLimitCustomizes []*RateLimitUserRule `json:"RateLimitCustomizes,omitnil,omitempty" name:"RateLimitCustomizes"`
 }
 
@@ -16638,27 +19381,24 @@ type RateLimitTemplate struct {
 }
 
 type RateLimitTemplateDetail struct {
-	// Template level name. Valid values:
-	// <li>sup_loose: super loose;</li>
-	// <li>loose: loose;</li>
-	// <li>emergency: emergency;</li>
-	// <li>normal: normal;</li>
-	// <li>strict: strict;</li>
-	// <li>close: disabled, effective only for precise rate limiting.</li>
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// Template level name. valid values:.
+	// <Li>Sup_loose: specifies super loose.</li>.
+	// <Li>`Loose`: loose</li>.
+	// <Li>`Emergency`: emergency</li>.
+	// <li>`normal`: moderate</li>.
+	// <li>strict</li>.
+	// <li>`close`: off, precise rate limiting effective.</li>.
 	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
 	// Unique ID.
 	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
-	// Template action. Valid values:
-	// <li>alg: JavaScript challenge;</li>
-	// <li>monitor: observation.</li>
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// Template action. valid values:.
+	// <li>alg: JavaScript challenge;</li>.
+	// <li>`monitor`: observe</li>.
 	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
-	// Penalty duration, in seconds. Value range: 0-2 days.
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// Penalty time, value range 0-2 days, unit second.
 	PunishTime *int64 `json:"PunishTime,omitnil,omitempty" name:"PunishTime"`
 
 	// Statistical threshold, in times. Value range: 0-4294967294.
@@ -16830,6 +19570,63 @@ type RealtimeLogDeliveryTask struct {
 type RedirectActionParameters struct {
 	// Redirect URL.
 	URL *string `json:"URL,omitnil,omitempty" name:"URL"`
+}
+
+// Predefined struct for user
+type RefreshMultiPathGatewaySecretKeyRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+}
+
+type RefreshMultiPathGatewaySecretKeyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+}
+
+func (r *RefreshMultiPathGatewaySecretKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RefreshMultiPathGatewaySecretKeyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RefreshMultiPathGatewaySecretKeyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RefreshMultiPathGatewaySecretKeyResponseParams struct {
+	// Specifies the access key for the multi-channel security acceleration gateway.
+	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type RefreshMultiPathGatewaySecretKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *RefreshMultiPathGatewaySecretKeyResponseParams `json:"Response"`
+}
+
+func (r *RefreshMultiPathGatewaySecretKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RefreshMultiPathGatewaySecretKeyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type RenewFlag struct {
@@ -17007,10 +19804,14 @@ type ResponseSpeedLimitParameters struct {
 	// <Li>LimitAfterSpecificSecondsDownloaded: start speed limit after downloading at full speed for a specific duration.</li>.
 	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
-	// Rate-Limiting value, in kb/s. enter a numerical value to specify the rate limit.
+	// The speed limit value specifies the size of the speed limit. fill in a value or variable with a unit. the currently supported unit is: KB/s.
 	MaxSpeed *string `json:"MaxSpeed,omitnil,omitempty" name:"MaxSpeed"`
 
-	// Rate-Limiting start value, which can be the download size or specified duration, in kb or s. this parameter is required when mode is set to limitafterspecificbytesdownloaded or limitafterspecificsecondsdownloaded. enter a numerical value to specify the download size or duration.
+	// The speed limit start value can be download size or specified duration. fill in a value with unit or variable to specify download size or specified duration.
+	// 
+	// -When the Mode value is LimitAfterSpecificBytesDownloaded, the valid values of the unit are: KB.
+	// 
+	// -When the Mode value is LimitAfterSpecificSecondsDownloaded, the valid value of the unit is: s.
 	StartAt *string `json:"StartAt,omitnil,omitempty" name:"StartAt"`
 }
 
@@ -17048,10 +19849,10 @@ type RuleAndConditions struct {
 }
 
 type RuleBranch struct {
-	// [Match condition](https://www.tencentcloud.com/document/product/1145/54759).
+	// Match condition (https://intl.cloud.tencent.com/document/product/1552/90438?from_cn_redirect=1#33f65828-c6c6-4b66-a011-25a20b548d5d).
 	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 
-	// [Operations](Https://Cloud.Tencent.Com/Document/Product/1552/90438#C7bd7e02-9247-4a72-B0e4-11c27cadb198).<Br>Note: actions and subrules cannot both be empty.
+	// [Operations]( https://www.tencentcloud.com/document/product/1145/54759#c7bd7e02-9247-4a72-b0e4-11c27cadb198).<Br>Note: actions and subrules cannot both be empty.
 	// Note: this field may return null, which indicates a failure to obtain a valid value.
 	Actions []*RuleEngineAction `json:"Actions,omitnil,omitempty" name:"Actions"`
 
@@ -17147,7 +19948,43 @@ type RuleCondition struct {
 }
 
 type RuleEngineAction struct {
-
+	// Operation Name. the Name must correspond to the parameter structure, for example, if Name=Cache, CacheParameters is required.
+	// <li>Cache: specifies the node Cache TTL.</li>.
+	// <Li>CacheKey: specifies the custom cache key.</li>.
+	// <Li>CachePrefresh: cache pre-refresh;</li>.
+	// <Li>AccessURLRedirect: url redirection;</li>.
+	// <Li>UpstreamURLRewrite: specifies the origin-pull url rewrite.</li>.
+	// <li>QUIC:QUIC;</li>
+	// <li>WebSocket:WebSocket;</li>
+	// <li>Authentication: Token Authentication;</li>.
+	// <li>MaxAge: browser caching TTL;</li>.
+	// <li>StatusCodeCache: specifies the status code cache TTL.</li>.
+	// <Li>OfflineCache: offline caching;</li>.
+	// <Li>SmartRouting: smart acceleration;</li>.
+	// <Li>RangeOriginPull: range-based origin pull;</li>.
+	// <Li>UpstreamHTTP2: http/2 origin pull;</li>.
+	// <Li>HostHeader: host header rewrite;</li>.
+	// <Li>`ForceRedirectHTTPS`: force https redirect configuration for access protocol.</li>.
+	// <li>OriginPullProtocol: HTTPS origin pull;</li>.
+	// <Li>Compression: intelligent compression configuration;</li>.
+	// <li>HSTS:HSTS;</li>
+	// <Li>ClientIPHeader: configuration for storing client request ip in header information;</li>.
+	// <Li>OCSPStapling: ocsp stapling;</li>.
+	// <Li>HTTP2: http/2 integration;</li>.
+	// <li>PostMaxSize: maximum size of the file uploaded for streaming via a POST request;</li>.
+	// <Li>ClientIPCountry: region of the client ip during origin-pull;</li>.
+	// <Li>UpstreamFollowRedirect: specifies the parameter configuration for redirection during origin pull.</li>.
+	// <Li>UpstreamRequest: origin pull request parameter;</li>.
+	// <li>TLSConfig: specifies SSL/TLS security.</li>.
+	// <Li>ModifyOrigin: modify origin server;</li>.
+	// <Li>HTTPUpstreamTimeout: specifies the layer 7 origin pull timeout configuration.</li>.
+	// <li>HttpResponse: HTTP response;</li>.
+	// <Li>ErrorPage: specifies the custom error page.</li>.
+	// <li>ModifyResponseHeader: modifies the HTTP node response header.</li>.
+	// <li>ModifyRequestHeader: modifies the HTTP node request header.</li>.
+	// <Li>ResponseSpeedLimit: download speed limit for a single connection;</li>.
+	// <Li>SetContentIdentifier: sets the content identifier;</li>.
+	// <Li>Vary: vary feature configuration.</li>.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Node cache ttl configuration parameter. when name is cache, this parameter is required.
@@ -17282,10 +20119,13 @@ type RuleEngineAction struct {
 	// Note: this field may return null, which indicates a failure to obtain a valid value.
 	ResponseSpeedLimitParameters *ResponseSpeedLimitParameters `json:"ResponseSpeedLimitParameters,omitnil,omitempty" name:"ResponseSpeedLimitParameters"`
 
-	// Content identification configuration parameter. this parameter is required when name is httpresponse.
+	// Specifies the content identification configuration parameter. this parameter is required when the Name value is SetContentIdentifier.
 	// 
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
 	SetContentIdentifierParameters *SetContentIdentifierParameters `json:"SetContentIdentifierParameters,omitnil,omitempty" name:"SetContentIdentifierParameters"`
+
+	// Vary feature configuration parameter. when Name value is Vary, this parameter is required.
+	VaryParameters *VaryParameters `json:"VaryParameters,omitnil,omitempty" name:"VaryParameters"`
 }
 
 type RuleEngineItem struct {
@@ -17530,44 +20370,37 @@ type SecurityAction struct {
 }
 
 type SecurityConfig struct {
-	// Managed rule. If the parameter is null or not filled, the configuration last set will be used by default.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Managed rule. if the parameter is null or not filled, use the last set configuration by default.
 	WafConfig *WafConfig `json:"WafConfig,omitnil,omitempty" name:"WafConfig"`
 
-	// Rate limiting. If the parameter is null or not filled, the configuration last set will be used by default.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Rate limiting. if the parameter is null or not filled, the configuration last set will be used by default.
 	RateLimitConfig *RateLimitConfig `json:"RateLimitConfig,omitnil,omitempty" name:"RateLimitConfig"`
 
-	// Custom rule. If the parameter is null or not filled, the configuration last set will be used by default.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Custom rule. specifies if the parameter is null or not filled, use the last set configuration by default.
 	AclConfig *AclConfig `json:"AclConfig,omitnil,omitempty" name:"AclConfig"`
 
-	// Bot configuration. If the parameter is null or not filled, the configuration last set will be used by default.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Bot configuration. if the parameter is null or not filled, use the last set configuration by default.
 	BotConfig *BotConfig `json:"BotConfig,omitnil,omitempty" name:"BotConfig"`
 
-	// Switch setting of the 7-layer protection. If the parameter is null or not filled, the configuration last set will be used by default.Note: This field may return null, indicating that no valid value can be obtained.
+	// Switch setting of the 7-layer protection. if the parameter is null or not filled, use the last set configuration by default.
 	SwitchConfig *SwitchConfig `json:"SwitchConfig,omitnil,omitempty" name:"SwitchConfig"`
 
-	// Basic access control. If the parameter is null or not filled, the configuration last set will be used by default.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Basic access control. if the parameter is null or not filled, use the last set configuration by default.
 	IpTableConfig *IpTableConfig `json:"IpTableConfig,omitnil,omitempty" name:"IpTableConfig"`
 
-	// Exception rule configuration. If the parameter is null or not filled, the configuration last set will be used by default.Note: This field may return null, indicating that no valid value can be obtained.
+	// Exception rule configuration. if the parameter is null or not filled, use the last set configuration by default.
 	ExceptConfig *ExceptConfig `json:"ExceptConfig,omitnil,omitempty" name:"ExceptConfig"`
 
-	// Custom block page settings. If the parameter is null or not filled, the configuration last set will be used by default.Note: This field may return null, indicating that no valid value can be obtained.
+	// Custom block page settings. if the parameter is null or not filled, use the last set configuration by default.
 	DropPageConfig *DropPageConfig `json:"DropPageConfig,omitnil,omitempty" name:"DropPageConfig"`
 
-	// Security template settings
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Template configuration. specifies parameter usage for output only.
 	TemplateConfig *TemplateConfig `json:"TemplateConfig,omitnil,omitempty" name:"TemplateConfig"`
 
-	// Settings for slow attack defense. If the parameter is null or not filled, the configuration last set will be used by default.Note: This field may return null, indicating that no valid value can be obtained.
+	// Slow attack configuration. if the parameter is null or not filled, use the last set configuration by default.
 	SlowPostConfig *SlowPostConfig `json:"SlowPostConfig,omitnil,omitempty" name:"SlowPostConfig"`
 
-	// Detect the length limit configuration, output parameter only.
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// Detect length limit configuration. for output usage only.
 	DetectLengthLimitConfig *DetectLengthLimitConfig `json:"DetectLengthLimitConfig,omitnil,omitempty" name:"DetectLengthLimitConfig"`
 }
 
@@ -17623,36 +20456,28 @@ type SecurityType struct {
 }
 
 type ServerCertInfo struct {
-	// Server certificate ID, which originates from the SSL side. You can check the CertId from the [SSL Certificate List](https://console.cloud.tencent.com/ssl).
-	// 
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// Specifies the server certificate ID, which originates from the SSL side. you can check the CertId from the [SSL certificate list](https://console.cloud.tencent.com/SSL).
 	CertId *string `json:"CertId,omitnil,omitempty" name:"CertId"`
 
-	// Alias of the certificate.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Certificate remark name.
 	Alias *string `json:"Alias,omitnil,omitempty" name:"Alias"`
 
-	// Type of the certificate. Values:
-	// u200c<li>`default`: Default certificate</li>
-	// u200c<li>`upload`: Custom certificate</li>
-	// u200c<li>`managed`: Tencent Cloud-managed certificate</li>
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Certificate type. valid values:.
+	// <Li>Specifies the default certificate.</li>.
+	// <Li>Upload: user upload;</li>.
+	// <li>managed: tencent cloud hosted.</li>.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Time when the certificate expires.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Certificate expiration time.
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Time when the certificate is deployed.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the cert deployment time.
 	DeployTime *string `json:"DeployTime,omitnil,omitempty" name:"DeployTime"`
 
 	// Signature algorithm.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	SignAlgo *string `json:"SignAlgo,omitnil,omitempty" name:"SignAlgo"`
 
 	// Domain name of the certificate.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	CommonName *string `json:"CommonName,omitnil,omitempty" name:"CommonName"`
 }
 
@@ -17686,8 +20511,7 @@ type SkipCondition struct {
 	// <li>`wildcard`: Wildcard match (only asterisks)</li>
 	MatchFromType *string `json:"MatchFromType,omitnil,omitempty" name:"MatchFromType"`
 
-	// The value that matches the key.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Match the Key value.
 	MatchFrom []*string `json:"MatchFrom,omitnil,omitempty" name:"MatchFrom"`
 
 	// The match method used to match the content.
@@ -17695,8 +20519,7 @@ type SkipCondition struct {
 	// <li>`wildcard`: Wildcard match (only asterisks)</li>
 	MatchContentType *string `json:"MatchContentType,omitnil,omitempty" name:"MatchContentType"`
 
-	// The value that matches the content.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Match the Value.
 	MatchContent []*string `json:"MatchContent,omitnil,omitempty" name:"MatchContent"`
 }
 
@@ -17720,22 +20543,18 @@ type SlowPostConfig struct {
 	// <li>`off`: Disable</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Detect slow attacks by the transfer period of the first 8 KB of requests
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// First packet configuration.
 	FirstPartConfig *FirstPartConfig `json:"FirstPartConfig,omitnil,omitempty" name:"FirstPartConfig"`
 
-	// Detect slow attacks by the data rate of the main body (excluding the first 8 KB) of requests
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Specifies the basic configuration.
 	SlowRateConfig *SlowRateConfig `json:"SlowRateConfig,omitnil,omitempty" name:"SlowRateConfig"`
 
-	// The action to taken when a slow attack is detected. Values:
-	// <li>`monitor`: Observe</li>
-	// <li>`drop`: Block the request</li>
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Handling action for slow attack. valid values:.
+	// <li>`monitor`: observe</li>.
+	// <li>`drop`: block the request.</li>.
 	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
-	// ID of the rule
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Specifies the Id of this rule.
 	RuleId *uint64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 }
 
@@ -17745,12 +20564,10 @@ type SlowRateConfig struct {
 	// <li>`off`: Disable</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// The sampling interval in seconds. In this way, the first 8 KB of the request is ignored. The rest of data is separated in to multiple parts according to this interval for slow attack measurement.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// The statistics interval in seconds. after the first packet transfer, the data transmission axis is split by this parameter for separate computing of slow attacks on each shard.
 	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// The transfer rate threshold in bps. When the transfer rate of a sample is lower than the threshold, it’s considered a slow attack and handled according to the specified `Action`.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Specifies the rate threshold applied during statistics in bps. if the transmission rate in this shard does not reach the parameter value, it is identified as a slow attack and the slow attack handling method is applied.
 	Threshold *uint64 `json:"Threshold,omitnil,omitempty" name:"Threshold"`
 }
 
@@ -17859,6 +20676,19 @@ type SwitchConfig struct {
 	WebSwitch *string `json:"WebSwitch,omitnil,omitempty" name:"WebSwitch"`
 }
 
+type TCCaptchaOption struct {
+	// CaptchaAppId information.
+	CaptchaAppId *string `json:"CaptchaAppId,omitnil,omitempty" name:"CaptchaAppId"`
+
+	// AppSecretKey information.
+	AppSecretKey *string `json:"AppSecretKey,omitnil,omitempty" name:"AppSecretKey"`
+}
+
+type TCRCEOption struct {
+	// Channel information.
+	Channel *string `json:"Channel,omitnil,omitempty" name:"Channel"`
+}
+
 type TLSConfigParameters struct {
 	// TLS version. at least one must be specified. if multiple versions are specified, they must be consecutive, e.g., enable tls1, 1.1, 1.2, and 1.3. it is not allowed to enable only 1 and 1.2 while disabling 1.1. valid values: <li>`tlsv1`: tlsv1 version;</li><li>`tlsv1.1`: tlsv1.1 version;</li><li>`tlsv1.2`: tlsv1.2 version;</li><li>`tlsv1.3`: tlsv1.3 version.</li>.
 	Version []*string `json:"Version,omitnil,omitempty" name:"Version"`
@@ -17887,17 +20717,17 @@ type Task struct {
 	// Type of the task.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Node cache purge method, with values:
-	// <li>invalidate: Marks as expired. A back-to-origin validation is triggered upon user request, sending an HTTP conditional request with If-None-Match and If-Modified-Since headers. If the origin server responds with 200, the node will fetch new resources from the origin and update the cache; if the origin server responds with 304, the cache will not be updated;</li>
-	// <li>delete: Directly deletes the node's cache, triggering a resource fetch from the origin upon user request.</li>
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// Node cache purge method. valid values:.
+	// <li>invalidate: marks as expired. a back-to-origin validation is triggered upon user request, sending an HTTP conditional request with If-None-Match and If-Modified-Since headers. If the origin server responds with 200, the node will fetch new resources from the origin and update the cache; If the origin server responds with 304, the cache will not be updated;</li>.
+	// <Li>Delete: directly deletes the node's cache, triggering a resource fetch from the origin upon user request.</li>.
 	Method *string `json:"Method,omitnil,omitempty" name:"Method"`
 
-	// Status. Valid values:
-	// <li>processing: Processing;</li>
-	// <li>success: Succeeded;</li>
-	// <li>failed: Failed;</li>
-	// <li>timeout: Timed out. </li>
+	// Status. valid values:.
+	// <li>processing: indicates the operation is in progress.</li>.
+	// <Li>Success: specifies the success status.</li>.
+	// <li>failed: indicates a failure.</li>.
+	// <Li>Timeout: specifies the timeout period.</li>.
+	// <Li>Canceled: canceled.</li>.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Creation time of the task.
@@ -17905,6 +20735,17 @@ type Task struct {
 
 	// Completion time of the task.
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Refresh and preheat failure type. valid values:.
+	// <li>taskFailed: specifies the task failure.</li>.
+	// <li>quotaExceeded: specifies the quota exceeded status.</li>.
+	// <li>downloadManifestFailed: specifies the file failed to download.</li>.
+	// <li>accessDenied: specifies access denied.</li>.
+	// <li>originPullFailed: specifies the origin-pull failure.</li>.
+	FailType *string `json:"FailType,omitnil,omitempty" name:"FailType"`
+
+	// Failure description for refresh and preheating.
+	FailMessage *string `json:"FailMessage,omitnil,omitempty" name:"FailMessage"`
 }
 
 type TemplateConfig struct {
@@ -18155,17 +20996,25 @@ type UpstreamRequestQueryString struct {
 }
 
 type UpstreamURLRewriteParameters struct {
-	// Origin-Pull url rewriting type, only path is supported.
+	// Origin-Pull URL rewrite type. valid values: Path.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Origin-Pull url rewrite action. valid values are:.
-	// <Li>`Replace`: replace the path prefix.</li>.
-	// <Li>`AddPrefix`: add the path prefix.</li>.
-	// <Li>`RmvPrefix`: remove the path prefix.</li>.
+	// Origin-Pull URL rewrite action. valid values:.
+	// <li><b>replace</b>: replace the full Path. used to replace the complete request URL Path with the specified Path.
+	// </li>
+	// <li><b>addPrefix</b>: add Path prefix. used to add specified Path prefix to request URL Path.</li>.
+	// </li>
+	// <li><b>rmvPrefix</b>: specifies the removal of Path prefix. used to remove the specified Path prefix from the request URL Path.
+	// </li>
+	// <li><b>regexReplace</b>: refers to regular expression replacement of the full path. used for matching and replacing the full path via Google RE2 regular expressions.
+	// </li>
 	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
-	// Origin-Pull url rewrite value, maximum length 1024, must start with /.<br>note: when action is addprefix, it cannot end with /; when action is rmvprefix, * cannot be present.
+	// Origin-Pull URL rewrite value. should meet URL Path standard and ensure the rewritten Path starts with / to prevent the Host of the origin-pull URL from being modified, with a length range of 1–1024. when Action is addPrefix, it cannot end with /. when Action is rmvPrefix, * cannot exist. when Action is regexReplace, $NUM can be used to refer to regular expression capture groups, where NUM represents the group number, such as $1, and supports up to $9.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+
+	// Origin-Pull URL rewrite used for regex replacement to match the full path regular expression. should meet Google RE2 standard with length range 1–1024. this field is required when Action is regexReplace, otherwise not required.
+	Regex *string `json:"Regex,omitnil,omitempty" name:"Regex"`
 }
 
 type VanityNameServers struct {
@@ -18186,16 +21035,24 @@ type VanityNameServersIps struct {
 	IPv4 *string `json:"IPv4,omitnil,omitempty" name:"IPv4"`
 }
 
+type VaryParameters struct {
+	// Vary feature configuration switch. valid values:.
+	// <li>`on`: Enable;</li>
+	// 
+	// <li>off: Disable.</li>
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+}
+
 // Predefined struct for user
 type VerifyOwnershipRequestParams struct {
-	// Site or acceleration domain name
+	// Specifies the site domain name or acceleration domain name under the site.
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 }
 
 type VerifyOwnershipRequest struct {
 	*tchttp.BaseRequest
 	
-	// Site or acceleration domain name
+	// Specifies the site domain name or acceleration domain name under the site.
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 }
 
@@ -18246,6 +21103,33 @@ func (r *VerifyOwnershipResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *VerifyOwnershipResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type VideoTemplateInfo struct {
+	// Encoding format for video streams. valid values: <li>H.264: use H.264 encoding;</li><li>H.265: use H.265 encoding.</li>.
+	Codec *string `json:"Codec,omitnil,omitempty" name:"Codec"`
+
+	// Video frame rate. value ranges from 0 to 30. measurement unit: Hz.
+	// If the value is 0, the frame rate will be the same as that of the source video, with a maximum not exceeding 30.
+	// Default value: 0.
+	Fps *float64 `json:"Fps,omitnil,omitempty" name:"Fps"`
+
+	// Specifies the bitrate of video stream. valid values: 0 and [128, 10000]. measurement unit: kbps.
+	// Value is 0, means automatically select video bitrate based on video image and quality.
+	// Default value: 0.
+	Bitrate *uint64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
+
+	// Resolution adaptation. available values: <li>open: enable. at this point, Width represents the long side of the video and Height represents the short side.</li><li>close: disable. at this point, Width represents the Width of the video and Height represents the Height.</li>default value: open.
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitnil,omitempty" name:"ResolutionAdaptive"`
+
+	// The maximum value of the video stream Width (or long side). valid values: 0 and [128, 1920]. unit: px. <li>when Width and Height are both 0, the resolution is from the same source;</li> <li>when Width is 0 and Height is non-0, Width is scaled proportionally;</li> <li>when Width is non-0 and Height is 0, Height is scaled proportionally;</li> <li>when both Width and Height are non-0, the resolution is specified by the user.</li> default value: 0.
+	Width *uint64 `json:"Width,omitnil,omitempty" name:"Width"`
+
+	// The maximum value of the video stream Height (or short side). valid values: 0 and [128, 1080]. unit: px. <li>when Width and Height are both 0, the resolution is from the same source;</li> <li>when Width is 0 and Height is non-0, Width is scaled proportionally;</li> <li>when Width is non-0 and Height is 0, the Height is scaled proportionally;</li> <li>when both Width and Height are non-0, the resolution is specified by the user.</li> default value: 0.
+	Height *uint64 `json:"Height,omitnil,omitempty" name:"Height"`
+
+	// Filling method. specifies the processing method for transcoding when video stream configuration width and height parameters are inconsistent with the aspect ratio of the original video. valid values: <li>stretch: stretch each frame to fill the entire screen, possibly causing the transcoded video to be squashed or stretched.</li><li>black: maintain video aspect ratio with edges filled with black.</li><li>white: maintain video aspect ratio with edges filled with white.</li><li>gauss: maintain video aspect ratio with gaussian blur filling for the rest of the edges.</li> default value: black.
+	FillType *string `json:"FillType,omitnil,omitempty" name:"FillType"`
 }
 
 type Waf struct {
@@ -18389,8 +21273,7 @@ type Zone struct {
 	// <li>`paused`: Disabled</li>
 	ActiveStatus *string `json:"ActiveStatus,omitnil,omitempty" name:"ActiveStatus"`
 
-	// The site alias. It can be up to 20 characters consisting of digits, letters, hyphens (-) and underscores (_).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Site alias. a composite of digits, numbers, english letters, -, and _, limited to 20 characters.
 	AliasZoneName *string `json:"AliasZoneName,omitnil,omitempty" name:"AliasZoneName"`
 
 	// Whether it’s a fake site. Valid values: 
@@ -18508,6 +21391,18 @@ type ZoneConfigParameters struct {
 	// Site configuration information.
 	// Note: this field may return null, which indicates a failure to obtain a valid value.
 	ZoneConfig *ZoneConfig `json:"ZoneConfig,omitnil,omitempty" name:"ZoneConfig"`
+}
+
+type ZoneInfo struct {
+	// Site id.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Site name.
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
+
+	// Whether to disable the site. valid values: <li>false: not disabled;</li>.
+	// <li>true: disabled.</li>.
+	Paused *bool `json:"Paused,omitnil,omitempty" name:"Paused"`
 }
 
 type ZoneSetting struct {
