@@ -16791,7 +16791,7 @@ type InternetPriceDetail struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	ChargeUnit *string `json:"ChargeUnit,omitnil,omitempty" name:"ChargeUnit"`
 
-	// Original price. Unit: CNY. Returned only for prepaid price inquiry.
+	// Original price. Unit: USD. Returned only for prepaid price inquiry.
 	OriginalPrice *float64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 }
 

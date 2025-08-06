@@ -241,6 +241,118 @@ func (c *Client) CreateCloudRecordingWithContext(ctx context.Context, request *C
     return
 }
 
+func NewCreateCloudSliceTaskRequest() (request *CreateCloudSliceTaskRequest) {
+    request = &CreateCloudSliceTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "CreateCloudSliceTask")
+    
+    
+    return
+}
+
+func NewCreateCloudSliceTaskResponse() (response *CreateCloudSliceTaskResponse) {
+    response = &CreateCloudSliceTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateCloudSliceTask
+// API description:
+//
+// This API is used to enable the cloud slicing feature, completing audio and video slicing tasks in the room, and uploading them to the specified cloud storage.
+//
+// This API is used to achieve the following goals:
+//
+// * This API is used to specify the slicing parameter (SliceParams) to define the blocklist or allowlist of the anchors that require slicing.
+//
+// * This API is used to specify the storage parameter (SliceStorageParams) to specify the cloud storage you want to upload to. Currently, Tencent Cloud Object Storage (COS) and third-party AWS are supported.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
+//  FAILEDOPERATION_RESTRICTEDCONCURRENCY = "FailedOperation.RestrictedConcurrency"
+//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER_ACCESSKEY = "MissingParameter.AccessKey"
+//  MISSINGPARAMETER_BUCKET = "MissingParameter.Bucket"
+//  MISSINGPARAMETER_REGION = "MissingParameter.Region"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_SECRETKEY = "MissingParameter.SecretKey"
+//  MISSINGPARAMETER_SLICEPARAMS = "MissingParameter.SliceParams"
+//  MISSINGPARAMETER_SLICESTORAGEPARAMS = "MissingParameter.SliceStorageParams"
+//  MISSINGPARAMETER_SLICETYPE = "MissingParameter.SliceType"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  MISSINGPARAMETER_USERSIG = "MissingParameter.UserSig"
+//  MISSINGPARAMETER_VENDOR = "MissingParameter.Vendor"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateCloudSliceTask(request *CreateCloudSliceTaskRequest) (response *CreateCloudSliceTaskResponse, err error) {
+    return c.CreateCloudSliceTaskWithContext(context.Background(), request)
+}
+
+// CreateCloudSliceTask
+// API description:
+//
+// This API is used to enable the cloud slicing feature, completing audio and video slicing tasks in the room, and uploading them to the specified cloud storage.
+//
+// This API is used to achieve the following goals:
+//
+// * This API is used to specify the slicing parameter (SliceParams) to define the blocklist or allowlist of the anchors that require slicing.
+//
+// * This API is used to specify the storage parameter (SliceStorageParams) to specify the cloud storage you want to upload to. Currently, Tencent Cloud Object Storage (COS) and third-party AWS are supported.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
+//  FAILEDOPERATION_RESTRICTEDCONCURRENCY = "FailedOperation.RestrictedConcurrency"
+//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER_ACCESSKEY = "MissingParameter.AccessKey"
+//  MISSINGPARAMETER_BUCKET = "MissingParameter.Bucket"
+//  MISSINGPARAMETER_REGION = "MissingParameter.Region"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_SECRETKEY = "MissingParameter.SecretKey"
+//  MISSINGPARAMETER_SLICEPARAMS = "MissingParameter.SliceParams"
+//  MISSINGPARAMETER_SLICESTORAGEPARAMS = "MissingParameter.SliceStorageParams"
+//  MISSINGPARAMETER_SLICETYPE = "MissingParameter.SliceType"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  MISSINGPARAMETER_USERSIG = "MissingParameter.UserSig"
+//  MISSINGPARAMETER_VENDOR = "MissingParameter.Vendor"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateCloudSliceTaskWithContext(ctx context.Context, request *CreateCloudSliceTaskRequest) (response *CreateCloudSliceTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateCloudSliceTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "CreateCloudSliceTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCloudSliceTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCloudSliceTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteCloudRecordingRequest() (request *DeleteCloudRecordingRequest) {
     request = &DeleteCloudRecordingRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -311,6 +423,80 @@ func (c *Client) DeleteCloudRecordingWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDeleteCloudRecordingResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteCloudSliceTaskRequest() (request *DeleteCloudSliceTaskRequest) {
+    request = &DeleteCloudSliceTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DeleteCloudSliceTask")
+    
+    
+    return
+}
+
+func NewDeleteCloudSliceTaskResponse() (response *DeleteCloudSliceTaskResponse) {
+    response = &DeleteCloudSliceTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteCloudSliceTask
+// This API is used to stop the slicing task after it is started. Successfully stopping the slicing does not mean that all files are fully transmitted; if the transmission is not completed, the backend will continue to upload files. After the upload is successful, a notification is sent to the customer, prompting that all files have been transmitted, through the event callback.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
+//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteCloudSliceTask(request *DeleteCloudSliceTaskRequest) (response *DeleteCloudSliceTaskResponse, err error) {
+    return c.DeleteCloudSliceTaskWithContext(context.Background(), request)
+}
+
+// DeleteCloudSliceTask
+// This API is used to stop the slicing task after it is started. Successfully stopping the slicing does not mean that all files are fully transmitted; if the transmission is not completed, the backend will continue to upload files. After the upload is successful, a notification is sent to the customer, prompting that all files have been transmitted, through the event callback.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
+//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteCloudSliceTaskWithContext(ctx context.Context, request *DeleteCloudSliceTaskRequest) (response *DeleteCloudSliceTaskResponse, err error) {
+    if request == nil {
+        request = NewDeleteCloudSliceTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DeleteCloudSliceTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCloudSliceTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCloudSliceTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -603,6 +789,82 @@ func (c *Client) DescribeCloudRecordingWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDescribeCloudRecordingResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCloudSliceTaskRequest() (request *DescribeCloudSliceTaskRequest) {
+    request = &DescribeCloudSliceTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeCloudSliceTask")
+    
+    
+    return
+}
+
+func NewDescribeCloudSliceTaskResponse() (response *DescribeCloudSliceTaskResponse) {
+    response = &DescribeCloudSliceTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCloudSliceTask
+// This API is used to query the status of the slicing task after it is started, which is valid only when the task is in progress. An error will be returned if the task is exited.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
+//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeCloudSliceTask(request *DescribeCloudSliceTaskRequest) (response *DescribeCloudSliceTaskResponse, err error) {
+    return c.DescribeCloudSliceTaskWithContext(context.Background(), request)
+}
+
+// DescribeCloudSliceTask
+// This API is used to query the status of the slicing task after it is started, which is valid only when the task is in progress. An error will be returned if the task is exited.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
+//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeCloudSliceTaskWithContext(ctx context.Context, request *DescribeCloudSliceTaskRequest) (response *DescribeCloudSliceTaskResponse, err error) {
+    if request == nil {
+        request = NewDescribeCloudSliceTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeCloudSliceTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCloudSliceTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCloudSliceTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -2067,6 +2329,80 @@ func (c *Client) ModifyCloudRecordingWithContext(ctx context.Context, request *M
     request.SetContext(ctx)
     
     response = NewModifyCloudRecordingResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyCloudSliceTaskRequest() (request *ModifyCloudSliceTaskRequest) {
+    request = &ModifyCloudSliceTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "ModifyCloudSliceTask")
+    
+    
+    return
+}
+
+func NewModifyCloudSliceTaskResponse() (response *ModifyCloudSliceTaskResponse) {
+    response = &ModifyCloudSliceTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyCloudSliceTask
+// This API is used to update the slicing task after it is started. It can be used to update the allowlist or blocklist for the specified subscription stream.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
+//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyCloudSliceTask(request *ModifyCloudSliceTaskRequest) (response *ModifyCloudSliceTaskResponse, err error) {
+    return c.ModifyCloudSliceTaskWithContext(context.Background(), request)
+}
+
+// ModifyCloudSliceTask
+// This API is used to update the slicing task after it is started. It can be used to update the allowlist or blocklist for the specified subscription stream.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
+//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyCloudSliceTaskWithContext(ctx context.Context, request *ModifyCloudSliceTaskRequest) (response *ModifyCloudSliceTaskResponse, err error) {
+    if request == nil {
+        request = NewModifyCloudSliceTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "ModifyCloudSliceTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyCloudSliceTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyCloudSliceTaskResponse()
     err = c.Send(request, response)
     return
 }

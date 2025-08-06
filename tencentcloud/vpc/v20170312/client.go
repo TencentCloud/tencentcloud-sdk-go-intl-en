@@ -14034,9 +14034,13 @@ func NewInquiryPriceAllocateAddressesResponse() (response *InquiryPriceAllocateA
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDREGION = "FailedOperation.InvalidRegion"
 //  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDPARAMETERCONFLICT = "InvalidParameterConflict"
 //  INVALIDPARAMETERVALUE_BANDWIDTHOUTOFRANGE = "InvalidParameterValue.BandwidthOutOfRange"
 //  INVALIDPARAMETERVALUE_COMBINATION = "InvalidParameterValue.Combination"
+//  INVALIDPARAMETERVALUE_INVALIDEGRESS = "InvalidParameterValue.InvalidEgress"
 //  INVALIDPARAMETERVALUE_UNAVAILABLEZONE = "InvalidParameterValue.UnavailableZone"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDEGRESS = "InvalidParameterValue.UnsupportedEgress"
+//  MISSINGPARAMETER = "MissingParameter"
 //  UNSUPPORTEDOPERATION_ACTIONNOTFOUND = "UnsupportedOperation.ActionNotFound"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDREGION = "UnsupportedOperation.UnsupportedRegion"
 func (c *Client) InquiryPriceAllocateAddresses(request *InquiryPriceAllocateAddressesRequest) (response *InquiryPriceAllocateAddressesResponse, err error) {
@@ -14049,9 +14053,13 @@ func (c *Client) InquiryPriceAllocateAddresses(request *InquiryPriceAllocateAddr
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDREGION = "FailedOperation.InvalidRegion"
 //  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDPARAMETERCONFLICT = "InvalidParameterConflict"
 //  INVALIDPARAMETERVALUE_BANDWIDTHOUTOFRANGE = "InvalidParameterValue.BandwidthOutOfRange"
 //  INVALIDPARAMETERVALUE_COMBINATION = "InvalidParameterValue.Combination"
+//  INVALIDPARAMETERVALUE_INVALIDEGRESS = "InvalidParameterValue.InvalidEgress"
 //  INVALIDPARAMETERVALUE_UNAVAILABLEZONE = "InvalidParameterValue.UnavailableZone"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDEGRESS = "InvalidParameterValue.UnsupportedEgress"
+//  MISSINGPARAMETER = "MissingParameter"
 //  UNSUPPORTEDOPERATION_ACTIONNOTFOUND = "UnsupportedOperation.ActionNotFound"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDREGION = "UnsupportedOperation.UnsupportedRegion"
 func (c *Client) InquiryPriceAllocateAddressesWithContext(ctx context.Context, request *InquiryPriceAllocateAddressesRequest) (response *InquiryPriceAllocateAddressesResponse, err error) {

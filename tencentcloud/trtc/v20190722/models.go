@@ -121,6 +121,37 @@ type AudioParams struct {
 	BitRate *uint64 `json:"BitRate,omitnil,omitempty" name:"BitRate"`
 }
 
+type CloudSliceStorage struct {
+	// Information about Tencent COS and third-party cloud storage accounts.
+	// 0: Tencent COS.
+	// 1: AWS S3.
+	// 2: Alibaba Cloud OSS.
+	// Example value: 0.
+	Vendor *uint64 `json:"Vendor,omitnil,omitempty" name:"Vendor"`
+
+	// [Region information](https://www.tencentcloud.comom/document/product/436/6224?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F) of Tencent COS.
+	// Example value: cn-shanghai-1.
+	// [Region information](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-regions) of AWS S3.
+	// Example value: ap-southeast-3.	
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Cloud bucket name.
+	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
+
+	// access_key account information of the cloud storage.
+	// To store files to Tencent COS, visit https://console.cloud.tencent.com/cam/capi to view or create the SecretId value corresponding to the key fields in the link.
+	// Example value: test-accesskey.
+	AccessKey *string `json:"AccessKey,omitnil,omitempty" name:"AccessKey"`
+
+	// secret_key account information of the cloud storage.
+	// To store files to Tencent COS, visit https://console.cloud.tencent.com/cam/capi to view or create the SecretKey value corresponding to the key fields in the link.
+	// Example value: test-secretkey.
+	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
+
+	// Specified location of the cloud bucket, which consists of an array of strings. Value range for the strings is lowercase letters (a–z), uppercase letters (A–Z), digits (0–9), and special characters (_-). For example, under the feature of ["prefix1", "prefix2"], the audio slicing file (xxx.mp3) is stored as prefix1/prefix2/{taskId}/{userId}/audios/{sdkappid}_{roomId}_{userid}_{UTC time}.ogg, while the video frame is stored as prefix1/prefix2/{taskId}/{userId}/images/{sdkappid}_{roomId}_{userid}_{UTC time}.png.
+	FileNamePrefix []*string `json:"FileNamePrefix,omitnil,omitempty" name:"FileNamePrefix"`
+}
+
 type CloudStorage struct {
 	// The cloud storage provider.
 	// `0`: Tencent Cloud COS; `1`: AWS storage. Other vendors are not supported currently.
@@ -349,6 +380,119 @@ func (r *CreateCloudRecordingResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateCloudSliceTaskRequestParams struct {
+	// [SdkAppId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#sdkappid) of TRTC, which is the same as the SdkAppId corresponding to the TRTC room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// [RoomId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#roomid) of TRTC, which is the RoomId corresponding to the TRTC room.
+	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
+
+	// Chatbot's UserId, which is used to enter the room and initiate a slicing task. [*note] This UserId should not be duplicated with the UserIds of the current anchors or audience members in the room. If multiple slicing tasks are initiated in one room, the chatbot's UserId should also be unique; otherwise, the previous slicing task is interrupted. It is recommended to include the room ID as part of the UserId, ensuring that the chatbot's UserId is unique in the room.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// Signature verification corresponding to the chatbot's UserId, namely, the UserId and UserSig serve as the login password for the chatbot to enter the room. For specific calculation methods, see TRTC solution for calculating UserSig.
+	UserSig *string `json:"UserSig,omitnil,omitempty" name:"UserSig"`
+
+	// Control parameters for cloud slicing.
+	SliceParams *SliceParams `json:"SliceParams,omitnil,omitempty" name:"SliceParams"`
+
+	// Parameters for uploading cloud slicing files to the cloud storage.
+	SliceStorageParams *SliceStorageParams `json:"SliceStorageParams,omitnil,omitempty" name:"SliceStorageParams"`
+
+	// Type of the TRTC room number. [*Note] It should be the same as the type of the RoomId corresponding to the recording room. 0: string type; 1: 32-bit integer type (default value). Example value: 1.
+	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
+
+	// Validity period for calling the API, which starts upon successful initiation of recording and obtaining the task ID. After the timeout, APIs such as querying, updating, or stopping cannot be called, but the recording task is not stopped. The unit of the parameter is hours, with a default value of 72 hours (3 days). The maximum value is 720 hours (30 days), while the minimum value is 6 hours. For example, if this parameter is not specified, the validity period for calling the querying, updating, and stopping recording APIs is 72 hours upon the successful start of recording. Example value: 24.
+	ResourceExpiredHour *uint64 `json:"ResourceExpiredHour,omitnil,omitempty" name:"ResourceExpiredHour"`
+
+	// TRTC room permission encryption string, which is required only when advanced permission control is enabled in the TRTC console. After enabling, the TRTC backend service system verifies a "permission ticket" called [PrivateMapKey], which contains an encrypted RoomId and an encrypted "permission bit list". Since the PrivateMapKey includes the RoomId, the specified room cannot be entered if only UserSig is provided and PrivateMapKey is not provided. Example value: eJw1jcEKgkAURX9FZlvY****fL9rfNX4_.
+	PrivateMapKey *string `json:"PrivateMapKey,omitnil,omitempty" name:"PrivateMapKey"`
+}
+
+type CreateCloudSliceTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// [SdkAppId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#sdkappid) of TRTC, which is the same as the SdkAppId corresponding to the TRTC room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// [RoomId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#roomid) of TRTC, which is the RoomId corresponding to the TRTC room.
+	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
+
+	// Chatbot's UserId, which is used to enter the room and initiate a slicing task. [*note] This UserId should not be duplicated with the UserIds of the current anchors or audience members in the room. If multiple slicing tasks are initiated in one room, the chatbot's UserId should also be unique; otherwise, the previous slicing task is interrupted. It is recommended to include the room ID as part of the UserId, ensuring that the chatbot's UserId is unique in the room.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// Signature verification corresponding to the chatbot's UserId, namely, the UserId and UserSig serve as the login password for the chatbot to enter the room. For specific calculation methods, see TRTC solution for calculating UserSig.
+	UserSig *string `json:"UserSig,omitnil,omitempty" name:"UserSig"`
+
+	// Control parameters for cloud slicing.
+	SliceParams *SliceParams `json:"SliceParams,omitnil,omitempty" name:"SliceParams"`
+
+	// Parameters for uploading cloud slicing files to the cloud storage.
+	SliceStorageParams *SliceStorageParams `json:"SliceStorageParams,omitnil,omitempty" name:"SliceStorageParams"`
+
+	// Type of the TRTC room number. [*Note] It should be the same as the type of the RoomId corresponding to the recording room. 0: string type; 1: 32-bit integer type (default value). Example value: 1.
+	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
+
+	// Validity period for calling the API, which starts upon successful initiation of recording and obtaining the task ID. After the timeout, APIs such as querying, updating, or stopping cannot be called, but the recording task is not stopped. The unit of the parameter is hours, with a default value of 72 hours (3 days). The maximum value is 720 hours (30 days), while the minimum value is 6 hours. For example, if this parameter is not specified, the validity period for calling the querying, updating, and stopping recording APIs is 72 hours upon the successful start of recording. Example value: 24.
+	ResourceExpiredHour *uint64 `json:"ResourceExpiredHour,omitnil,omitempty" name:"ResourceExpiredHour"`
+
+	// TRTC room permission encryption string, which is required only when advanced permission control is enabled in the TRTC console. After enabling, the TRTC backend service system verifies a "permission ticket" called [PrivateMapKey], which contains an encrypted RoomId and an encrypted "permission bit list". Since the PrivateMapKey includes the RoomId, the specified room cannot be entered if only UserSig is provided and PrivateMapKey is not provided. Example value: eJw1jcEKgkAURX9FZlvY****fL9rfNX4_.
+	PrivateMapKey *string `json:"PrivateMapKey,omitnil,omitempty" name:"PrivateMapKey"`
+}
+
+func (r *CreateCloudSliceTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudSliceTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "RoomId")
+	delete(f, "UserId")
+	delete(f, "UserSig")
+	delete(f, "SliceParams")
+	delete(f, "SliceStorageParams")
+	delete(f, "RoomIdType")
+	delete(f, "ResourceExpiredHour")
+	delete(f, "PrivateMapKey")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloudSliceTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudSliceTaskResponseParams struct {
+	// Task ID assigned by the cloud slicing service. It is a unique identifier for the lifecycle of a slicing task, which loses its significance after the task is completed. The task ID needs to be retained by the business system as a parameter for future operations related to this task.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateCloudSliceTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCloudSliceTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateCloudSliceTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudSliceTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteCloudRecordingRequestParams struct {
 	// The `SDKAppID` of the room whose streams are recorded.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
@@ -409,6 +553,70 @@ func (r *DeleteCloudRecordingResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteCloudRecordingResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudSliceTaskRequestParams struct {
+	// SDKAppId of TRTC, which is the same as the SDKAppId corresponding to the TRTC room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the slicing task, which is returned after the task is started.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+type DeleteCloudSliceTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// SDKAppId of TRTC, which is the same as the SDKAppId corresponding to the TRTC room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the slicing task, which is returned after the task is started.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+func (r *DeleteCloudSliceTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudSliceTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCloudSliceTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudSliceTaskResponseParams struct {
+	// Unique ID of the slicing task, which is returned after the task is started.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteCloudSliceTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteCloudSliceTaskResponseParams `json:"Response"`
+}
+
+func (r *DeleteCloudSliceTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudSliceTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -795,6 +1003,73 @@ func (r *DescribeCloudRecordingResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeCloudRecordingResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudSliceTaskRequestParams struct {
+	// SDKAppId of TRTC, which is the same as the SDKAppId corresponding to the recording room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the slicing task, which is returned after the task is started.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+type DescribeCloudSliceTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// SDKAppId of TRTC, which is the same as the SDKAppId corresponding to the recording room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the slicing task, which is returned after the task is started.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+func (r *DescribeCloudSliceTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudSliceTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudSliceTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudSliceTaskResponseParams struct {
+	// Unique ID of the slicing task, which is returned after the task is started.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Information about the status of the cloud slicing task. Idle: indicates the current task is idle; InProgress: indicates the current task is in progress; Exited: indicates the current task is being exited.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudSliceTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudSliceTaskResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudSliceTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudSliceTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2822,6 +3097,77 @@ func (r *ModifyCloudRecordingResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCloudSliceTaskRequestParams struct {
+	// SDKAppId of TRTC, which is the same as the SDKAppId corresponding to the TRTC room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the slicing task, which is returned after the task is started.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Specifies the allowlist or blocklist for the subscription stream.
+	SubscribeStreamUserIds *SubscribeStreamUserIds `json:"SubscribeStreamUserIds,omitnil,omitempty" name:"SubscribeStreamUserIds"`
+}
+
+type ModifyCloudSliceTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// SDKAppId of TRTC, which is the same as the SDKAppId corresponding to the TRTC room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the slicing task, which is returned after the task is started.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Specifies the allowlist or blocklist for the subscription stream.
+	SubscribeStreamUserIds *SubscribeStreamUserIds `json:"SubscribeStreamUserIds,omitnil,omitempty" name:"SubscribeStreamUserIds"`
+}
+
+func (r *ModifyCloudSliceTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudSliceTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	delete(f, "SubscribeStreamUserIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCloudSliceTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCloudSliceTaskResponseParams struct {
+	// Unique ID of the slicing task, which is returned after the task is started.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyCloudSliceTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyCloudSliceTaskResponseParams `json:"Response"`
+}
+
+func (r *ModifyCloudSliceTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudSliceTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type QualityData struct {
 	// The quality data.
 	Content []*TimeValue `json:"Content,omitnil,omitempty" name:"Content"`
@@ -3300,6 +3646,36 @@ func (r *SetUserBlockedResponse) FromJsonString(s string) error {
 type SingleSubscribeParams struct {
 	// The stream information.
 	UserMediaStream *UserMediaStream `json:"UserMediaStream,omitnil,omitempty" name:"UserMediaStream"`
+}
+
+type SliceParams struct {
+	// Slicing task type.
+	// 1: audio slicing;
+	// 2: video frame extraction;
+	// 3: audio/video slicing + video frame extraction.
+	// Example value: 1.
+	SliceType *uint64 `json:"SliceType,omitnil,omitempty" name:"SliceType"`
+
+	// Recording is stopped automatically when there is no anchor in the room for more than MaxIdleTime. Unit: seconds. Default value: 30 seconds. This value needs to be greater than or equal to 5 seconds and less than or equal to 86,400 seconds (24 hours).
+	// Example value: 30.
+	MaxIdleTime *uint64 `json:"MaxIdleTime,omitnil,omitempty" name:"MaxIdleTime"`
+
+	// Audio slicing duration. Default value: 15s. Example value: 15.
+	SliceAudio *uint64 `json:"SliceAudio,omitnil,omitempty" name:"SliceAudio"`
+
+	// Interval for video frame extraction. Default value: 5s. Example value: 5.
+	SliceVideo *uint64 `json:"SliceVideo,omitnil,omitempty" name:"SliceVideo"`
+
+	// Specifies the allowlist or blocklist for the subscription stream.
+	SubscribeStreamUserIds *SubscribeStreamUserIds `json:"SubscribeStreamUserIds,omitnil,omitempty" name:"SubscribeStreamUserIds"`
+
+	// Depreciated. The callback URL is configured in the console.
+	SliceCallbackUrl *string `json:"SliceCallbackUrl,omitnil,omitempty" name:"SliceCallbackUrl"`
+}
+
+type SliceStorageParams struct {
+	// Information about Tencent COS and third-party cloud storage accounts.
+	CloudSliceStorage *CloudSliceStorage `json:"CloudSliceStorage,omitnil,omitempty" name:"CloudSliceStorage"`
 }
 
 // Predefined struct for user
