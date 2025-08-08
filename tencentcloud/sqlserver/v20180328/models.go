@@ -1253,13 +1253,13 @@ type CreateCloudReadOnlyDBInstancesRequestParams struct {
 	// Read-only group types. Valid values: `1` (each read-only replica is placed in one auto-created read-only group), `2` (all read-only replicas are placed in one auto-created read-only group), `3` (all read-only replicas are placed in one existing read-only group).
 	ReadOnlyGroupType *int64 `json:"ReadOnlyGroupType,omitnil,omitempty" name:"ReadOnlyGroupType"`
 
-	// Instance memory size in GB
+	// Instance memory size in GB.
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance disk size in GB
+	// Instance disk size in GB.
 	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
-	// Number of instance cores
+	// Number of instance cores.
 	Cpu *uint64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
 	// The host type of purchased instance. Valid values: `CLOUD_HSSD` (virtual machine with enhanced SSD), `CLOUD_TSSD` (virtual machine with ulTra SSD), `CLOUD_BSSD` (virtual machine with balanced SSD).
@@ -1304,17 +1304,20 @@ type CreateCloudReadOnlyDBInstancesRequestParams struct {
 	// Whether to automatically use voucher. Valid values: `0` (no, default), `1` (yes).
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-	// Array of voucher IDs (currently, only one voucher can be used per order)
+	// Array of voucher IDs (currently, only one voucher can be used per order).
 	VoucherIds []*string `json:"VoucherIds,omitnil,omitempty" name:"VoucherIds"`
 
-	// Tags associated with the instances to be created
+	// Tags associated with the instances to be created.
 	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
-	// Collation of system character sets. Default value:  Chinese_PRC_CI_AS
+	// Collation of system character sets. Default value:  Chinese_PRC_CI_AS.
 	Collation *string `json:"Collation,omitnil,omitempty" name:"Collation"`
 
-	// System time zone. Default value:  `China Standard Time`
+	// System time zone. Default value:  `China Standard Time`.
 	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// Disk encryption identification, 0 - no encryption, 1 - encryption.
+	DiskEncryptFlag *int64 `json:"DiskEncryptFlag,omitnil,omitempty" name:"DiskEncryptFlag"`
 }
 
 type CreateCloudReadOnlyDBInstancesRequest struct {
@@ -1329,13 +1332,13 @@ type CreateCloudReadOnlyDBInstancesRequest struct {
 	// Read-only group types. Valid values: `1` (each read-only replica is placed in one auto-created read-only group), `2` (all read-only replicas are placed in one auto-created read-only group), `3` (all read-only replicas are placed in one existing read-only group).
 	ReadOnlyGroupType *int64 `json:"ReadOnlyGroupType,omitnil,omitempty" name:"ReadOnlyGroupType"`
 
-	// Instance memory size in GB
+	// Instance memory size in GB.
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance disk size in GB
+	// Instance disk size in GB.
 	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
-	// Number of instance cores
+	// Number of instance cores.
 	Cpu *uint64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
 	// The host type of purchased instance. Valid values: `CLOUD_HSSD` (virtual machine with enhanced SSD), `CLOUD_TSSD` (virtual machine with ulTra SSD), `CLOUD_BSSD` (virtual machine with balanced SSD).
@@ -1380,17 +1383,20 @@ type CreateCloudReadOnlyDBInstancesRequest struct {
 	// Whether to automatically use voucher. Valid values: `0` (no, default), `1` (yes).
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-	// Array of voucher IDs (currently, only one voucher can be used per order)
+	// Array of voucher IDs (currently, only one voucher can be used per order).
 	VoucherIds []*string `json:"VoucherIds,omitnil,omitempty" name:"VoucherIds"`
 
-	// Tags associated with the instances to be created
+	// Tags associated with the instances to be created.
 	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
-	// Collation of system character sets. Default value:  Chinese_PRC_CI_AS
+	// Collation of system character sets. Default value:  Chinese_PRC_CI_AS.
 	Collation *string `json:"Collation,omitnil,omitempty" name:"Collation"`
 
-	// System time zone. Default value:  `China Standard Time`
+	// System time zone. Default value:  `China Standard Time`.
 	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// Disk encryption identification, 0 - no encryption, 1 - encryption.
+	DiskEncryptFlag *int64 `json:"DiskEncryptFlag,omitnil,omitempty" name:"DiskEncryptFlag"`
 }
 
 func (r *CreateCloudReadOnlyDBInstancesRequest) ToJsonString() string {
@@ -1429,6 +1435,7 @@ func (r *CreateCloudReadOnlyDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "ResourceTags")
 	delete(f, "Collation")
 	delete(f, "TimeZone")
+	delete(f, "DiskEncryptFlag")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloudReadOnlyDBInstancesRequest has unknown keys!", "")
 	}
@@ -1437,7 +1444,7 @@ func (r *CreateCloudReadOnlyDBInstancesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateCloudReadOnlyDBInstancesResponseParams struct {
-	// Order name in array
+	// Order name in array.
 	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1924,118 +1931,140 @@ func (r *CreateMigrationResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateReadOnlyDBInstancesRequestParams struct {
-
+	// Instance ID in the format of  `mssql-3l3fgqn7`.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-
+	// Instance AZ, such as `ap-guangzhou-1` (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the`DescribeZones` API.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-
+	// Read-only group types. Valid values: `1` (each read-only replica is placed in one auto-created read-only group), `2` (all read-only replicas are placed in one auto-created read-only group), `3` (all read-only replicas are placed in one existing read-only group).
 	ReadOnlyGroupType *int64 `json:"ReadOnlyGroupType,omitnil,omitempty" name:"ReadOnlyGroupType"`
 
-
+	// Instance memory size in GB.
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-
+	// Instance disk size in GB.
 	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
-
+	// Valid values: `0` (not upgrade the primary instance by default), `1` (upgrade the primary instance to complete the RO deployment).  You need to pass in `1` for this parameter and upgrade the primary instance to cluster edition.
 	ReadOnlyGroupForcedUpgrade *int64 `json:"ReadOnlyGroupForcedUpgrade,omitnil,omitempty" name:"ReadOnlyGroupForcedUpgrade"`
 
-
+	// Existing read-only group ID, which is required when `ReadOnlyGroupType` is `3`.
 	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitnil,omitempty" name:"ReadOnlyGroupId"`
 
-
+	// New read-only group ID, which is required when `ReadOnlyGroupType` is `2`.
 	ReadOnlyGroupName *string `json:"ReadOnlyGroupName,omitnil,omitempty" name:"ReadOnlyGroupName"`
 
-
+	// Whether delayed read-only instance removal is enabled in a new read-only group, which is required when `ReadOnlyGroupType` is `2`. Valid values: `1` (enabled), `0` (disabled).  The read-only replica will be automatically removed when the delay between it and the primary instance exceeds the threshold.
 	ReadOnlyGroupIsOfflineDelay *int64 `json:"ReadOnlyGroupIsOfflineDelay,omitnil,omitempty" name:"ReadOnlyGroupIsOfflineDelay"`
 
-
+	// The delay threshold for a new read-only group, which is required when `ReadOnlyGroupType` is `2` and `ReadOnlyGroupIsOfflineDelay` is `1`.
 	ReadOnlyGroupMaxDelayTime *int64 `json:"ReadOnlyGroupMaxDelayTime,omitnil,omitempty" name:"ReadOnlyGroupMaxDelayTime"`
 
-
+	// Minimum number of reserved read-only replicas when the delayed removal is enabled for the new read-only group, which is required when `ReadOnlyGroupType` is `2` and `ReadOnlyGroupIsOfflineDelay` is `1`.
 	ReadOnlyGroupMinInGroup *int64 `json:"ReadOnlyGroupMinInGroup,omitnil,omitempty" name:"ReadOnlyGroupMinInGroup"`
 
-
+	// Billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID` (pay-as-you-go).
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
-
+	// Number of read-only instances to be purchased this time. Default value: `2`.
 	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-
+	// VPC subnet ID in the format of `subnet-bdoe83fa`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-
+	// VPC ID in the format of `vpc-dsp338hz`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-
+	// The purchase period of an instance. Default value: `1` (one month).  Maximum value: `48`.
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-
+	// Security group list, which contains security group IDs in the format of `sg-xxx`.
 	SecurityGroupList []*string `json:"SecurityGroupList,omitnil,omitempty" name:"SecurityGroupList"`
 
-
+	// Whether to automatically use voucher. Valid values: `0` (no, default), `1` (yes).
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-
+	// Array of voucher IDs (currently, only one voucher can be used per order).
 	VoucherIds []*string `json:"VoucherIds,omitnil,omitempty" name:"VoucherIds"`
 
-
+	// Tags associated with the instances to be created.
 	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
-
+	// Collation of system character sets. Default value:  Chinese_PRC_CI_AS.
 	Collation *string `json:"Collation,omitnil,omitempty" name:"Collation"`
 
-
+	// System time zone. Default value:  `China Standard Time`.
 	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
 }
 
 type CreateReadOnlyDBInstancesRequest struct {
 	*tchttp.BaseRequest
 	
+	// Instance ID in the format of  `mssql-3l3fgqn7`.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
+	// Instance AZ, such as `ap-guangzhou-1` (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the`DescribeZones` API.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
+	// Read-only group types. Valid values: `1` (each read-only replica is placed in one auto-created read-only group), `2` (all read-only replicas are placed in one auto-created read-only group), `3` (all read-only replicas are placed in one existing read-only group).
 	ReadOnlyGroupType *int64 `json:"ReadOnlyGroupType,omitnil,omitempty" name:"ReadOnlyGroupType"`
 
+	// Instance memory size in GB.
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
+	// Instance disk size in GB.
 	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
+	// Valid values: `0` (not upgrade the primary instance by default), `1` (upgrade the primary instance to complete the RO deployment).  You need to pass in `1` for this parameter and upgrade the primary instance to cluster edition.
 	ReadOnlyGroupForcedUpgrade *int64 `json:"ReadOnlyGroupForcedUpgrade,omitnil,omitempty" name:"ReadOnlyGroupForcedUpgrade"`
 
+	// Existing read-only group ID, which is required when `ReadOnlyGroupType` is `3`.
 	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitnil,omitempty" name:"ReadOnlyGroupId"`
 
+	// New read-only group ID, which is required when `ReadOnlyGroupType` is `2`.
 	ReadOnlyGroupName *string `json:"ReadOnlyGroupName,omitnil,omitempty" name:"ReadOnlyGroupName"`
 
+	// Whether delayed read-only instance removal is enabled in a new read-only group, which is required when `ReadOnlyGroupType` is `2`. Valid values: `1` (enabled), `0` (disabled).  The read-only replica will be automatically removed when the delay between it and the primary instance exceeds the threshold.
 	ReadOnlyGroupIsOfflineDelay *int64 `json:"ReadOnlyGroupIsOfflineDelay,omitnil,omitempty" name:"ReadOnlyGroupIsOfflineDelay"`
 
+	// The delay threshold for a new read-only group, which is required when `ReadOnlyGroupType` is `2` and `ReadOnlyGroupIsOfflineDelay` is `1`.
 	ReadOnlyGroupMaxDelayTime *int64 `json:"ReadOnlyGroupMaxDelayTime,omitnil,omitempty" name:"ReadOnlyGroupMaxDelayTime"`
 
+	// Minimum number of reserved read-only replicas when the delayed removal is enabled for the new read-only group, which is required when `ReadOnlyGroupType` is `2` and `ReadOnlyGroupIsOfflineDelay` is `1`.
 	ReadOnlyGroupMinInGroup *int64 `json:"ReadOnlyGroupMinInGroup,omitnil,omitempty" name:"ReadOnlyGroupMinInGroup"`
 
+	// Billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID` (pay-as-you-go).
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
+	// Number of read-only instances to be purchased this time. Default value: `2`.
 	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
+	// VPC subnet ID in the format of `subnet-bdoe83fa`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
+	// VPC ID in the format of `vpc-dsp338hz`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
+	// The purchase period of an instance. Default value: `1` (one month).  Maximum value: `48`.
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
+	// Security group list, which contains security group IDs in the format of `sg-xxx`.
 	SecurityGroupList []*string `json:"SecurityGroupList,omitnil,omitempty" name:"SecurityGroupList"`
 
+	// Whether to automatically use voucher. Valid values: `0` (no, default), `1` (yes).
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
+	// Array of voucher IDs (currently, only one voucher can be used per order).
 	VoucherIds []*string `json:"VoucherIds,omitnil,omitempty" name:"VoucherIds"`
 
+	// Tags associated with the instances to be created.
 	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
+	// Collation of system character sets. Default value:  Chinese_PRC_CI_AS.
 	Collation *string `json:"Collation,omitnil,omitempty" name:"Collation"`
 
+	// System time zone. Default value:  `China Standard Time`.
 	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
 }
 
@@ -2081,7 +2110,7 @@ func (r *CreateReadOnlyDBInstancesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateReadOnlyDBInstancesResponseParams struct {
-
+	// Order name in array.
 	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3629,16 +3658,16 @@ type DescribeDBInstanceInterRequestParams struct {
 	// The maximum number of results returned per page. Value range: 1-100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter by instance ID
+	// Filter by instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Filter by status. Valid values: `1` (Enabling interworking IP), `2` (Enabled interworking IP), `3` (Adding to interworking group), `4` (Added to interworking group), `5` (Reclaiming interworking IP), `6` (Reclaimed interworking IP), `7` (Removing from interworking group), `8` (Removed from interworking group).
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// The list of instance version numbers
+	// The list of instance version numbers.
 	VersionSet []*string `json:"VersionSet,omitnil,omitempty" name:"VersionSet"`
 
-	// Instance AZ ID in the format of ap-guangzhou-2
+	// Instance AZ ID in the format of ap-guangzhou-3.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Page number. Default value: `0`.
@@ -3651,16 +3680,16 @@ type DescribeDBInstanceInterRequest struct {
 	// The maximum number of results returned per page. Value range: 1-100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter by instance ID
+	// Filter by instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Filter by status. Valid values: `1` (Enabling interworking IP), `2` (Enabled interworking IP), `3` (Adding to interworking group), `4` (Added to interworking group), `5` (Reclaiming interworking IP), `6` (Reclaimed interworking IP), `7` (Removing from interworking group), `8` (Removed from interworking group).
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// The list of instance version numbers
+	// The list of instance version numbers.
 	VersionSet []*string `json:"VersionSet,omitnil,omitempty" name:"VersionSet"`
 
-	// Instance AZ ID in the format of ap-guangzhou-2
+	// Instance AZ ID in the format of ap-guangzhou-3.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Page number. Default value: `0`.
@@ -3693,10 +3722,10 @@ func (r *DescribeDBInstanceInterRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDBInstanceInterResponseParams struct {
-	// Number of records returned
+	// Number of records returned.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Details of instance in the interworking group
+	// Details of instance in the interworking group.
 	InterInstanceSet []*InterInstance `json:"InterInstanceSet,omitnil,omitempty" name:"InterInstanceSet"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4840,20 +4869,20 @@ func (r *DescribeOrdersResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeProductConfigRequestParams struct {
-	// AZ ID in the format of ap-guangzhou-1
+	// AZ ID in the format of ap-guangzhou-1.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Type of purchased instance. Valid values: HA - local disk high availability (including dual-machine high availability, AlwaysOn Cluster), RO - local disk read-only replica, SI - cloud disk edition single node, BI - business intelligence service, cvmHA - cloud disk edition high availability, cvmRO - cloud disk edition read-only replica
+	// Type of purchased instance. Valid values: HA - local disk high availability (including dual-machine high availability, AlwaysOn Cluster), RO - local disk read-only replica, SI - cloud disk edition single node, BI - business intelligence service, cvmHA - cloud disk edition high availability, cvmRO - cloud disk edition read-only replica.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 }
 
 type DescribeProductConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// AZ ID in the format of ap-guangzhou-1
+	// AZ ID in the format of ap-guangzhou-1.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Type of purchased instance. Valid values: HA - local disk high availability (including dual-machine high availability, AlwaysOn Cluster), RO - local disk read-only replica, SI - cloud disk edition single node, BI - business intelligence service, cvmHA - cloud disk edition high availability, cvmRO - cloud disk edition read-only replica
+	// Type of purchased instance. Valid values: HA - local disk high availability (including dual-machine high availability, AlwaysOn Cluster), RO - local disk read-only replica, SI - cloud disk edition single node, BI - business intelligence service, cvmHA - cloud disk edition high availability, cvmRO - cloud disk edition read-only replica.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 }
 
@@ -4879,10 +4908,10 @@ func (r *DescribeProductConfigRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeProductConfigResponseParams struct {
-	// Specification information array
+	// Specification information array.
 	SpecInfoList []*SpecInfo `json:"SpecInfoList,omitnil,omitempty" name:"SpecInfoList"`
 
-	// Number of date entries returned
+	// Number of date entries returned.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.

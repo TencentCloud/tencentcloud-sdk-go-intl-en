@@ -369,6 +369,58 @@ func (c *Client) CreateDomainGroupWithContext(ctx context.Context, request *Crea
     return
 }
 
+func NewCreatePackageOrderRequest() (request *CreatePackageOrderRequest) {
+    request = &CreatePackageOrderRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dnspod", APIVersion, "CreatePackageOrder")
+    
+    
+    return
+}
+
+func NewCreatePackageOrderResponse() (response *CreatePackageOrderResponse) {
+    response = &CreatePackageOrderResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreatePackageOrder
+// This API is used to enable a paid plan on the international website.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTBINDCREDITCARD = "FailedOperation.NotBindCreditCard"
+//  FAILEDOPERATION_POSTPAYPAYMENTNOTOPEN = "FailedOperation.PostPayPaymentNotOpen"
+func (c *Client) CreatePackageOrder(request *CreatePackageOrderRequest) (response *CreatePackageOrderResponse, err error) {
+    return c.CreatePackageOrderWithContext(context.Background(), request)
+}
+
+// CreatePackageOrder
+// This API is used to enable a paid plan on the international website.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTBINDCREDITCARD = "FailedOperation.NotBindCreditCard"
+//  FAILEDOPERATION_POSTPAYPAYMENTNOTOPEN = "FailedOperation.PostPayPaymentNotOpen"
+func (c *Client) CreatePackageOrderWithContext(ctx context.Context, request *CreatePackageOrderRequest) (response *CreatePackageOrderResponse, err error) {
+    if request == nil {
+        request = NewCreatePackageOrderRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "CreatePackageOrder")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePackageOrder require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreatePackageOrderResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateRecordRequest() (request *CreateRecordRequest) {
     request = &CreateRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
