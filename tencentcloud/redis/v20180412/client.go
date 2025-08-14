@@ -1797,7 +1797,7 @@ func NewDescribeGlobalReplicationAreaResponse() (response *DescribeGlobalReplica
 }
 
 // DescribeGlobalReplicationArea
-// This API is used to query the supported regions for global replication.
+// This API is used to query the information on regions supported for global replication.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -1809,7 +1809,7 @@ func (c *Client) DescribeGlobalReplicationArea(request *DescribeGlobalReplicatio
 }
 
 // DescribeGlobalReplicationArea
-// This API is used to query the supported regions for global replication.
+// This API is used to query the information on regions supported for global replication.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -2397,7 +2397,7 @@ func NewDescribeInstanceMonitorSIPResponse() (response *DescribeInstanceMonitorS
 }
 
 // DescribeInstanceMonitorSIP
-// This API is used to query the access source information of an instance.
+// This API is no longer used. Please use the TencentDB for DBbrain API [DescribeProxyProcessStatistics](https://intl.cloud.tencent.com/document/product/1130/84544?from_cn_redirect=1) to obtain the instance access source.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_REDOFLOWFAILED = "FailedOperation.RedoFlowFailed"
@@ -2406,7 +2406,7 @@ func (c *Client) DescribeInstanceMonitorSIP(request *DescribeInstanceMonitorSIPR
 }
 
 // DescribeInstanceMonitorSIP
-// This API is used to query the access source information of an instance.
+// This API is no longer used. Please use the TencentDB for DBbrain API [DescribeProxyProcessStatistics](https://intl.cloud.tencent.com/document/product/1130/84544?from_cn_redirect=1) to obtain the instance access source.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_REDOFLOWFAILED = "FailedOperation.RedoFlowFailed"
@@ -2497,7 +2497,7 @@ func NewDescribeInstanceMonitorTopNCmdResponse() (response *DescribeInstanceMoni
 }
 
 // DescribeInstanceMonitorTopNCmd
-// This API is used to query an instance access command.
+// This API is used to query instance access commands.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_REDOFLOWFAILED = "FailedOperation.RedoFlowFailed"
@@ -2506,7 +2506,7 @@ func (c *Client) DescribeInstanceMonitorTopNCmd(request *DescribeInstanceMonitor
 }
 
 // DescribeInstanceMonitorTopNCmd
-// This API is used to query an instance access command.
+// This API is used to query instance access commands.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_REDOFLOWFAILED = "FailedOperation.RedoFlowFailed"
@@ -2655,7 +2655,7 @@ func NewDescribeInstanceParamRecordsResponse() (response *DescribeInstanceParamR
 }
 
 // DescribeInstanceParamRecords
-// This API is used to query the list of parameter modifications.
+// This API is used to query the parameter modification record list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -2672,7 +2672,7 @@ func (c *Client) DescribeInstanceParamRecords(request *DescribeInstanceParamReco
 }
 
 // DescribeInstanceParamRecords
-// This API is used to query the list of parameter modifications.
+// This API is used to query the parameter modification record list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -3275,7 +3275,7 @@ func NewDescribeParamTemplatesResponse() (response *DescribeParamTemplatesRespon
 }
 
 // DescribeParamTemplates
-// This API is used to query the list of parameter templates.
+// This API is used to query the parameter template list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -3288,7 +3288,7 @@ func (c *Client) DescribeParamTemplates(request *DescribeParamTemplatesRequest) 
 }
 
 // DescribeParamTemplates
-// This API is used to query the list of parameter templates.
+// This API is used to query the parameter template list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -3849,6 +3849,64 @@ func (c *Client) DescribeSSLStatusWithContext(ctx context.Context, request *Desc
     request.SetContext(ctx)
     
     response = NewDescribeSSLStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSecondLevelBackupInfoRequest() (request *DescribeSecondLevelBackupInfoRequest) {
+    request = &DescribeSecondLevelBackupInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("redis", APIVersion, "DescribeSecondLevelBackupInfo")
+    
+    
+    return
+}
+
+func NewDescribeSecondLevelBackupInfoResponse() (response *DescribeSecondLevelBackupInfoResponse) {
+    response = &DescribeSecondLevelBackupInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSecondLevelBackupInfo
+// This API is used to query the second-level backup information on an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INVALIDPARAMETER_NOTSUPPORTED = "InvalidParameter.NotSupported"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+func (c *Client) DescribeSecondLevelBackupInfo(request *DescribeSecondLevelBackupInfoRequest) (response *DescribeSecondLevelBackupInfoResponse, err error) {
+    return c.DescribeSecondLevelBackupInfoWithContext(context.Background(), request)
+}
+
+// DescribeSecondLevelBackupInfo
+// This API is used to query the second-level backup information on an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INVALIDPARAMETER_NOTSUPPORTED = "InvalidParameter.NotSupported"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+func (c *Client) DescribeSecondLevelBackupInfoWithContext(ctx context.Context, request *DescribeSecondLevelBackupInfoRequest) (response *DescribeSecondLevelBackupInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeSecondLevelBackupInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "redis", APIVersion, "DescribeSecondLevelBackupInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSecondLevelBackupInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSecondLevelBackupInfoResponse()
     err = c.Send(request, response)
     return
 }
@@ -5203,6 +5261,64 @@ func (c *Client) ModifyInstanceAvailabilityZonesWithContext(ctx context.Context,
     return
 }
 
+func NewModifyInstanceBackupModeRequest() (request *ModifyInstanceBackupModeRequest) {
+    request = &ModifyInstanceBackupModeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("redis", APIVersion, "ModifyInstanceBackupMode")
+    
+    
+    return
+}
+
+func NewModifyInstanceBackupModeResponse() (response *ModifyInstanceBackupModeResponse) {
+    response = &ModifyInstanceBackupModeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyInstanceBackupMode
+// This API is used to modify the instance backup mode.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INVALIDPARAMETER_NOTSUPPORTED = "InvalidParameter.NotSupported"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+func (c *Client) ModifyInstanceBackupMode(request *ModifyInstanceBackupModeRequest) (response *ModifyInstanceBackupModeResponse, err error) {
+    return c.ModifyInstanceBackupModeWithContext(context.Background(), request)
+}
+
+// ModifyInstanceBackupMode
+// This API is used to modify the instance backup mode.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INVALIDPARAMETER_NOTSUPPORTED = "InvalidParameter.NotSupported"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+func (c *Client) ModifyInstanceBackupModeWithContext(ctx context.Context, request *ModifyInstanceBackupModeRequest) (response *ModifyInstanceBackupModeResponse, err error) {
+    if request == nil {
+        request = NewModifyInstanceBackupModeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "redis", APIVersion, "ModifyInstanceBackupMode")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyInstanceBackupMode require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyInstanceBackupModeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyInstanceEventRequest() (request *ModifyInstanceEventRequest) {
     request = &ModifyInstanceEventRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5899,6 +6015,72 @@ func (c *Client) ReleaseWanAddressWithContext(ctx context.Context, request *Rele
     return
 }
 
+func NewRemoveReplicationGroupRequest() (request *RemoveReplicationGroupRequest) {
+    request = &RemoveReplicationGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("redis", APIVersion, "RemoveReplicationGroup")
+    
+    
+    return
+}
+
+func NewRemoveReplicationGroupResponse() (response *RemoveReplicationGroupResponse) {
+    response = &RemoveReplicationGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RemoveReplicationGroup
+// This API is used to delete a replication group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CAMAUTHOSSRESPONSERETURNCODEERROR = "InternalError.CamAuthOssResponseReturnCodeError"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INTERNALERROR_NETWORKERR = "InternalError.NetWorkErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_REPLICATIONGROUPNOTEXISTS = "InvalidParameterValue.ReplicationGroupNotExists"
+//  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
+func (c *Client) RemoveReplicationGroup(request *RemoveReplicationGroupRequest) (response *RemoveReplicationGroupResponse, err error) {
+    return c.RemoveReplicationGroupWithContext(context.Background(), request)
+}
+
+// RemoveReplicationGroup
+// This API is used to delete a replication group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CAMAUTHOSSRESPONSERETURNCODEERROR = "InternalError.CamAuthOssResponseReturnCodeError"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INTERNALERROR_NETWORKERR = "InternalError.NetWorkErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_REPLICATIONGROUPNOTEXISTS = "InvalidParameterValue.ReplicationGroupNotExists"
+//  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
+func (c *Client) RemoveReplicationGroupWithContext(ctx context.Context, request *RemoveReplicationGroupRequest) (response *RemoveReplicationGroupResponse, err error) {
+    if request == nil {
+        request = NewRemoveReplicationGroupRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "redis", APIVersion, "RemoveReplicationGroup")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RemoveReplicationGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRemoveReplicationGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRemoveReplicationInstanceRequest() (request *RemoveReplicationInstanceRequest) {
     request = &RemoveReplicationInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6121,7 +6303,7 @@ func NewRestoreInstanceResponse() (response *RestoreInstanceResponse) {
 }
 
 // RestoreInstance
-// This API is used to restore a Redis instance.
+// This API is used to restore an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -6143,7 +6325,7 @@ func (c *Client) RestoreInstance(request *RestoreInstanceRequest) (response *Res
 }
 
 // RestoreInstance
-// This API is used to restore a Redis instance.
+// This API is used to restore an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"

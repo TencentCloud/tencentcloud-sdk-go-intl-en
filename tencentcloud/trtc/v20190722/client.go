@@ -97,6 +97,122 @@ func (c *Client) ControlAIConversationWithContext(ctx context.Context, request *
     return
 }
 
+func NewCreateCloudModerationRequest() (request *CreateCloudModerationRequest) {
+    request = &CreateCloudModerationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "CreateCloudModeration")
+    
+    
+    return
+}
+
+func NewCreateCloudModerationResponse() (response *CreateCloudModerationResponse) {
+    response = &CreateCloudModerationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateCloudModeration
+// API description:
+//
+// This API is used to enable the cloud moderation feature to complete audio and video slicing, video frame extraction, and audio stream recording in the room, and submit them to the specified moderation supplier for completing the moderation.
+//
+// 
+//
+// This API is used to achieve the following goals:
+//
+// * This API is used to specify the moderation parameters (ModerationParams) to specify the detailed parameters required for moderation.
+//
+// * This API is used to specify the storage parameter (SliceStorageParams) to specify the cloud storage you want to upload the file complying with the moderation policy to. Currently, Tencent Cloud Object Storage (COS) and third-party AWS are supported.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
+//  FAILEDOPERATION_RESTRICTEDCONCURRENCY = "FailedOperation.RestrictedConcurrency"
+//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER_ACCESSKEY = "MissingParameter.AccessKey"
+//  MISSINGPARAMETER_BUCKET = "MissingParameter.Bucket"
+//  MISSINGPARAMETER_REGION = "MissingParameter.Region"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_SECRETKEY = "MissingParameter.SecretKey"
+//  MISSINGPARAMETER_SLICEPARAMS = "MissingParameter.SliceParams"
+//  MISSINGPARAMETER_SLICESTORAGEPARAMS = "MissingParameter.SliceStorageParams"
+//  MISSINGPARAMETER_SLICETYPE = "MissingParameter.SliceType"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  MISSINGPARAMETER_USERSIG = "MissingParameter.UserSig"
+//  MISSINGPARAMETER_VENDOR = "MissingParameter.Vendor"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateCloudModeration(request *CreateCloudModerationRequest) (response *CreateCloudModerationResponse, err error) {
+    return c.CreateCloudModerationWithContext(context.Background(), request)
+}
+
+// CreateCloudModeration
+// API description:
+//
+// This API is used to enable the cloud moderation feature to complete audio and video slicing, video frame extraction, and audio stream recording in the room, and submit them to the specified moderation supplier for completing the moderation.
+//
+// 
+//
+// This API is used to achieve the following goals:
+//
+// * This API is used to specify the moderation parameters (ModerationParams) to specify the detailed parameters required for moderation.
+//
+// * This API is used to specify the storage parameter (SliceStorageParams) to specify the cloud storage you want to upload the file complying with the moderation policy to. Currently, Tencent Cloud Object Storage (COS) and third-party AWS are supported.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
+//  FAILEDOPERATION_RESTRICTEDCONCURRENCY = "FailedOperation.RestrictedConcurrency"
+//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER_ACCESSKEY = "MissingParameter.AccessKey"
+//  MISSINGPARAMETER_BUCKET = "MissingParameter.Bucket"
+//  MISSINGPARAMETER_REGION = "MissingParameter.Region"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_SECRETKEY = "MissingParameter.SecretKey"
+//  MISSINGPARAMETER_SLICEPARAMS = "MissingParameter.SliceParams"
+//  MISSINGPARAMETER_SLICESTORAGEPARAMS = "MissingParameter.SliceStorageParams"
+//  MISSINGPARAMETER_SLICETYPE = "MissingParameter.SliceType"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  MISSINGPARAMETER_USERSIG = "MissingParameter.UserSig"
+//  MISSINGPARAMETER_VENDOR = "MissingParameter.Vendor"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateCloudModerationWithContext(ctx context.Context, request *CreateCloudModerationRequest) (response *CreateCloudModerationResponse, err error) {
+    if request == nil {
+        request = NewCreateCloudModerationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "CreateCloudModeration")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCloudModeration require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCloudModerationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateCloudRecordingRequest() (request *CreateCloudRecordingRequest) {
     request = &CreateCloudRecordingRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -349,6 +465,80 @@ func (c *Client) CreateCloudSliceTaskWithContext(ctx context.Context, request *C
     request.SetContext(ctx)
     
     response = NewCreateCloudSliceTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteCloudModerationRequest() (request *DeleteCloudModerationRequest) {
+    request = &DeleteCloudModerationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DeleteCloudModeration")
+    
+    
+    return
+}
+
+func NewDeleteCloudModerationResponse() (response *DeleteCloudModerationResponse) {
+    response = &DeleteCloudModerationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteCloudModeration
+// This API is used to stop submission for moderation after the cloud moderation task is successfully started.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
+//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteCloudModeration(request *DeleteCloudModerationRequest) (response *DeleteCloudModerationResponse, err error) {
+    return c.DeleteCloudModerationWithContext(context.Background(), request)
+}
+
+// DeleteCloudModeration
+// This API is used to stop submission for moderation after the cloud moderation task is successfully started.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
+//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteCloudModerationWithContext(ctx context.Context, request *DeleteCloudModerationRequest) (response *DeleteCloudModerationResponse, err error) {
+    if request == nil {
+        request = NewDeleteCloudModerationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DeleteCloudModeration")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCloudModeration require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCloudModerationResponse()
     err = c.Send(request, response)
     return
 }
@@ -709,6 +899,82 @@ func (c *Client) DescribeCallDetailInfoWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDescribeCallDetailInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCloudModerationRequest() (request *DescribeCloudModerationRequest) {
+    request = &DescribeCloudModerationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeCloudModeration")
+    
+    
+    return
+}
+
+func NewDescribeCloudModerationResponse() (response *DescribeCloudModerationResponse) {
+    response = &DescribeCloudModerationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCloudModeration
+// This API is used to query the status of the moderation task and information about the subscription blocklist and allowlist after the task is started, which is valid only when the task is in progress. An error will be returned if the task is exited.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
+//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeCloudModeration(request *DescribeCloudModerationRequest) (response *DescribeCloudModerationResponse, err error) {
+    return c.DescribeCloudModerationWithContext(context.Background(), request)
+}
+
+// DescribeCloudModeration
+// This API is used to query the status of the moderation task and information about the subscription blocklist and allowlist after the task is started, which is valid only when the task is in progress. An error will be returned if the task is exited.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
+//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeCloudModerationWithContext(ctx context.Context, request *DescribeCloudModerationRequest) (response *DescribeCloudModerationResponse, err error) {
+    if request == nil {
+        request = NewDescribeCloudModerationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeCloudModeration")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCloudModeration require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCloudModerationResponse()
     err = c.Send(request, response)
     return
 }
@@ -2255,6 +2521,80 @@ func (c *Client) DismissRoomByStrRoomIdWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDismissRoomByStrRoomIdResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyCloudModerationRequest() (request *ModifyCloudModerationRequest) {
+    request = &ModifyCloudModerationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "ModifyCloudModeration")
+    
+    
+    return
+}
+
+func NewModifyCloudModerationResponse() (response *ModifyCloudModerationResponse) {
+    response = &ModifyCloudModerationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyCloudModeration
+// This API is used to update the subscription blocklist and allowlist after the cloud moderation task is successfully started.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
+//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyCloudModeration(request *ModifyCloudModerationRequest) (response *ModifyCloudModerationResponse, err error) {
+    return c.ModifyCloudModerationWithContext(context.Background(), request)
+}
+
+// ModifyCloudModeration
+// This API is used to update the subscription blocklist and allowlist after the cloud moderation task is successfully started.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
+//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyCloudModerationWithContext(ctx context.Context, request *ModifyCloudModerationRequest) (response *ModifyCloudModerationResponse, err error) {
+    if request == nil {
+        request = NewModifyCloudModerationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "ModifyCloudModeration")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyCloudModeration require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyCloudModerationResponse()
     err = c.Send(request, response)
     return
 }

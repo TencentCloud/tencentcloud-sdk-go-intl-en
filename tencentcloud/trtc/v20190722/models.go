@@ -121,6 +121,38 @@ type AudioParams struct {
 	BitRate *uint64 `json:"BitRate,omitnil,omitempty" name:"BitRate"`
 }
 
+type CloudModerationStorage struct {
+	// Information about Tencent COS and third-party cloud storage accounts.
+	// 0: Tencent COS.
+	// 1: AWS S3.
+	// 2: Alibaba Cloud OSS.
+	// Example value: 0.
+	Vendor *uint64 `json:"Vendor,omitnil,omitempty" name:"Vendor"`
+
+	// [Region information](https://www.tencentcloud.comom/document/product/436/6224?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F) of Tencent COS.
+	// Example value: cn-shanghai-1.
+	// 
+	// [Region information](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-regions) of AWS S3.
+	// Example value: ap-southeast-3.	
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Cloud bucket name.
+	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
+
+	// access_key account information of the cloud storage.
+	// To store files to Tencent COS, visit https://console.cloud.tencent.com/cam/capi to view or create the SecretId value corresponding to the key fields in the link.
+	// Example value: test-accesskey.
+	AccessKey *string `json:"AccessKey,omitnil,omitempty" name:"AccessKey"`
+
+	// secret_key account information of cloud storage.
+	// To store files to Tencent COS, visit https://console.cloud.tencent.com/cam/capi to view or create the SecretKey value corresponding to the key fields in the link.
+	// Example value: test-secretkey.
+	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
+
+	// Specified location of the cloud bucket, which consists of arrays of strings. Value range for the strings is lowercase letters (a–z), uppercase letters (A–Z), digits (0–9), and special characters (_-). For example, under the feature of ["prefix1", "prefix2"], the audio slicing file (xxx.mp3) is stored as prefix1/prefix2/{taskId}/{userId}/audios/{sdkappid}_{roomId}_{userid}_{UTC time}.ogg, while the video frame is stored as prefix1/prefix2/{taskId}/{userId}/images/{sdkappid}_{roomId}_{userid}_{UTC time}.png.
+	FileNamePrefix []*string `json:"FileNamePrefix,omitnil,omitempty" name:"FileNamePrefix"`
+}
+
 type CloudSliceStorage struct {
 	// Information about Tencent COS and third-party cloud storage accounts.
 	// 0: Tencent COS.
@@ -245,6 +277,112 @@ func (r *ControlAIConversationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ControlAIConversationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudModerationRequestParams struct {
+	// [SdkAppId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#sdkappid) of TRTC, which is the same as the SdkAppId corresponding to the TRTC room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// [RoomId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#roomid) of TRTC, which is the RoomId corresponding to the TRTC room.
+	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
+
+	// Chatbot's UserId, which is used to enter the room and initiate a moderation task. [*Note] This UserId should not be duplicated with the UserIds of the current anchors or audience members in the room. If multiple moderation tasks are initiated in one room, the chatbot's UserId should also be unique; otherwise, the previous moderation task is interrupted. It is recommended to include the room ID as part of the UserId, ensuring that the chatbot's UserId is unique in the room.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// Signature verification corresponding to the chatbot's UserId, namely, the UserId and UserSig serve as the login password for the chatbot to enter the room. For specific calculation methods, see TRTC solution for calculating UserSig.
+	UserSig *string `json:"UserSig,omitnil,omitempty" name:"UserSig"`
+
+	// Control parameters for cloud moderation.
+	ModerationParams *ModerationParams `json:"ModerationParams,omitnil,omitempty" name:"ModerationParams"`
+
+	// Parameters for uploading cloud moderation files to the cloud storage.
+	ModerationStorageParams *ModerationStorageParams `json:"ModerationStorageParams,omitnil,omitempty" name:"ModerationStorageParams"`
+
+	// Type of the TRTC room number. [*Note] It should be the same as the type of the RoomId corresponding to the recording room. 0: string type; 1: 32-bit integer type (default value). Example value: 1.
+	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
+
+	// Validity period for calling the task ID, which starts upon successful initiation of the task and obtaining the task ID. After the timeout, APIs such as querying, updating, or stopping cannot be called, but the moderation task is not stopped. The unit of the parameter is hours, with a default value of 24 hours (1 day). The maximum value is 72 hours (3 days), while the minimum value is 6 hours. For example, if this parameter is not specified, the validity period for calling the querying, updating, and stopping slicing APIs is 24 hours upon the successful start of slicing.
+	ResourceExpiredHour *uint64 `json:"ResourceExpiredHour,omitnil,omitempty" name:"ResourceExpiredHour"`
+}
+
+type CreateCloudModerationRequest struct {
+	*tchttp.BaseRequest
+	
+	// [SdkAppId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#sdkappid) of TRTC, which is the same as the SdkAppId corresponding to the TRTC room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// [RoomId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#roomid) of TRTC, which is the RoomId corresponding to the TRTC room.
+	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
+
+	// Chatbot's UserId, which is used to enter the room and initiate a moderation task. [*Note] This UserId should not be duplicated with the UserIds of the current anchors or audience members in the room. If multiple moderation tasks are initiated in one room, the chatbot's UserId should also be unique; otherwise, the previous moderation task is interrupted. It is recommended to include the room ID as part of the UserId, ensuring that the chatbot's UserId is unique in the room.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// Signature verification corresponding to the chatbot's UserId, namely, the UserId and UserSig serve as the login password for the chatbot to enter the room. For specific calculation methods, see TRTC solution for calculating UserSig.
+	UserSig *string `json:"UserSig,omitnil,omitempty" name:"UserSig"`
+
+	// Control parameters for cloud moderation.
+	ModerationParams *ModerationParams `json:"ModerationParams,omitnil,omitempty" name:"ModerationParams"`
+
+	// Parameters for uploading cloud moderation files to the cloud storage.
+	ModerationStorageParams *ModerationStorageParams `json:"ModerationStorageParams,omitnil,omitempty" name:"ModerationStorageParams"`
+
+	// Type of the TRTC room number. [*Note] It should be the same as the type of the RoomId corresponding to the recording room. 0: string type; 1: 32-bit integer type (default value). Example value: 1.
+	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
+
+	// Validity period for calling the task ID, which starts upon successful initiation of the task and obtaining the task ID. After the timeout, APIs such as querying, updating, or stopping cannot be called, but the moderation task is not stopped. The unit of the parameter is hours, with a default value of 24 hours (1 day). The maximum value is 72 hours (3 days), while the minimum value is 6 hours. For example, if this parameter is not specified, the validity period for calling the querying, updating, and stopping slicing APIs is 24 hours upon the successful start of slicing.
+	ResourceExpiredHour *uint64 `json:"ResourceExpiredHour,omitnil,omitempty" name:"ResourceExpiredHour"`
+}
+
+func (r *CreateCloudModerationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudModerationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "RoomId")
+	delete(f, "UserId")
+	delete(f, "UserSig")
+	delete(f, "ModerationParams")
+	delete(f, "ModerationStorageParams")
+	delete(f, "RoomIdType")
+	delete(f, "ResourceExpiredHour")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloudModerationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudModerationResponseParams struct {
+	// Task ID assigned by the cloud moderation service. It is a unique identifier for the lifecycle of a moderation task, which loses its significance after the task is completed. The task ID needs to be retained by the business system as a parameter for future operations related to this task.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateCloudModerationResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCloudModerationResponseParams `json:"Response"`
+}
+
+func (r *CreateCloudModerationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudModerationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -489,6 +627,70 @@ func (r *CreateCloudSliceTaskResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateCloudSliceTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudModerationRequestParams struct {
+	// SDKAppId of TRTC, which is the same as the SDKAppId corresponding to the TRTC room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the moderation task, which is returned after the task is started.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+type DeleteCloudModerationRequest struct {
+	*tchttp.BaseRequest
+	
+	// SDKAppId of TRTC, which is the same as the SDKAppId corresponding to the TRTC room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the moderation task, which is returned after the task is started.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+func (r *DeleteCloudModerationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudModerationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCloudModerationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudModerationResponseParams struct {
+	// Unique ID of the moderation task, which is returned after the task is started.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteCloudModerationResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteCloudModerationResponseParams `json:"Response"`
+}
+
+func (r *DeleteCloudModerationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudModerationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -929,6 +1131,76 @@ func (r *DescribeCallDetailInfoResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeCallDetailInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudModerationRequestParams struct {
+	// SDKAppId of TRTC, which is the same as the SDKAppId corresponding to the recording room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the cloud moderation task, which is returned after the task is started.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+type DescribeCloudModerationRequest struct {
+	*tchttp.BaseRequest
+	
+	// SDKAppId of TRTC, which is the same as the SDKAppId corresponding to the recording room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the cloud moderation task, which is returned after the task is started.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+func (r *DescribeCloudModerationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudModerationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudModerationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudModerationResponseParams struct {
+	// Unique ID of the moderation task, which is returned after the task is started.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Information about the status of the cloud moderation task. Idle: indicates the current task is idle; InProgress: indicates the current task is in progress; Exited: indicates the current task is being exited.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Subscription blocklist and allowlist.
+	SubscribeStreamUserIds *SubscribeModerationUserIds `json:"SubscribeStreamUserIds,omitnil,omitempty" name:"SubscribeStreamUserIds"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudModerationResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudModerationResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudModerationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudModerationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3019,6 +3291,134 @@ type MixUserInfo struct {
 	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
 }
 
+type ModerationParams struct {
+	// Moderation task type. 1: audio slicing moderation; 2: video frame extraction moderation; 3: audio slicing moderation + video frame extraction moderation; 4: audio stream moderation; 5: audio stream moderation + video frame extraction moderation. The default value is 1. (Support from suppliers is required for stream moderation to take effect.)
+	ModerationType *uint64 `json:"ModerationType,omitnil,omitempty" name:"ModerationType"`
+
+	// Slicing is stopped automatically when there is no user (anchor) performing upstream push in the room for more than MaxIdleTime. Unit: seconds. Default value: 30 seconds. This value needs to be greater than or equal to 5 seconds and less than or equal to 1800 seconds (0.5 hours). Example value: 30.
+	MaxIdleTime *uint64 `json:"MaxIdleTime,omitnil,omitempty" name:"MaxIdleTime"`
+
+	// Audio slicing duration. Default value: 15s. Example value: 15.
+	SliceAudio *uint64 `json:"SliceAudio,omitnil,omitempty" name:"SliceAudio"`
+
+	// Interval for video frame extraction. Default value: 5s.
+	SliceVideo *uint64 `json:"SliceVideo,omitnil,omitempty" name:"SliceVideo"`
+
+	// Enumeration values for suppliers.
+	// tianyu: Tencent Tianyu content security. (Valid values: 1: audio slicing moderation; 2: video frame extraction moderation; 3: audio-visual slicing moderation + video frame extraction moderation.)
+	// ace: ACE content security. (Valid values: 1: audio slicing moderation; 2: video frame extraction moderation; 3: audio-visual slicing moderation + video frame extraction moderation.)
+	// shumei: shumei moderation. (Valid values: 1: audio slicing moderation; 2: video frame extraction moderation; 3: audio-visual slicing moderation + video frame extraction moderation.)
+	// Yidun: NetEase Yidun moderation. (Valid values: 1: audio slicing moderation; 2: video frame extraction moderation; 3: audio-visual slicing moderation + video frame extraction moderation.)
+	ModerationSupplier *string `json:"ModerationSupplier,omitnil,omitempty" name:"ModerationSupplier"`
+
+	// Configuration information required for submitting content to the third-party moderation supplier.
+	ModerationSupplierParam *ModerationSupplierParam `json:"ModerationSupplierParam,omitnil,omitempty" name:"ModerationSupplierParam"`
+
+	// Whether to save the hit file. 0: not save by default; 1: save.
+	SaveModerationFile *uint64 `json:"SaveModerationFile,omitnil,omitempty" name:"SaveModerationFile"`
+
+	// Whether to call back all moderation results: 
+	// 0: call back all results by default; 
+	// 1: only call back hit results.
+	CallbackAllResults *uint64 `json:"CallbackAllResults,omitnil,omitempty" name:"CallbackAllResults"`
+
+	// Specifies the allowlist or blocklist for the subscription stream.
+	SubscribeStreamUserIds *SubscribeModerationUserIds `json:"SubscribeStreamUserIds,omitnil,omitempty" name:"SubscribeStreamUserIds"`
+}
+
+type ModerationStorageParams struct {
+	// Information about Tencent COS and third-party cloud storage accounts.
+	CloudModerationStorage *CloudModerationStorage `json:"CloudModerationStorage,omitnil,omitempty" name:"CloudModerationStorage"`
+}
+
+type ModerationSupplierParam struct {
+	// Moderation supplier account ID. For Tencent Tianyu, the value is not null; for NETEASE Yidun, the value is null.
+	AppID *string `json:"AppID,omitnil,omitempty" name:"AppID"`
+
+	// Moderation supplier key ID.
+	SecretId *string `json:"SecretId,omitnil,omitempty" name:"SecretId"`
+
+	// Moderation supplier key.
+	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
+
+	// Audio scenario. Policy ID or businessId.
+	AudioBizType *string `json:"AudioBizType,omitnil,omitempty" name:"AudioBizType"`
+
+	// Image scenario. Policy ID or businessId.
+	ImageBizType *string `json:"ImageBizType,omitnil,omitempty" name:"ImageBizType"`
+}
+
+// Predefined struct for user
+type ModifyCloudModerationRequestParams struct {
+	// SDKAppId of TRTC, which is the same as the SDKAppId corresponding to the TRTC room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the moderation task, which is returned after the task is started.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Specifies the allowlist or blocklist for the subscription stream.
+	SubscribeStreamUserIds *SubscribeStreamUserIds `json:"SubscribeStreamUserIds,omitnil,omitempty" name:"SubscribeStreamUserIds"`
+}
+
+type ModifyCloudModerationRequest struct {
+	*tchttp.BaseRequest
+	
+	// SDKAppId of TRTC, which is the same as the SDKAppId corresponding to the TRTC room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the moderation task, which is returned after the task is started.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Specifies the allowlist or blocklist for the subscription stream.
+	SubscribeStreamUserIds *SubscribeStreamUserIds `json:"SubscribeStreamUserIds,omitnil,omitempty" name:"SubscribeStreamUserIds"`
+}
+
+func (r *ModifyCloudModerationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudModerationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	delete(f, "SubscribeStreamUserIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCloudModerationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCloudModerationResponseParams struct {
+	// Unique ID of the moderation task, which is returned after the task is started.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyCloudModerationResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyCloudModerationResponseParams `json:"Response"`
+}
+
+func (r *ModifyCloudModerationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudModerationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 // Predefined struct for user
 type ModifyCloudRecordingRequestParams struct {
 	// The `SDKAppID` of the room whose streams are recorded.
@@ -4603,6 +5003,24 @@ type StorageParams struct {
 
 	// The account information for VOD storage.
 	CloudVod *CloudVod `json:"CloudVod,omitnil,omitempty" name:"CloudVod"`
+}
+
+type SubscribeModerationUserIds struct {
+	// Subscription audio stream allowlist. It specifies which UserIds' audio streams to subscribe to, for example, ["1", "2", "3"] indicates subscriptions to the audio streams of UserId 1, 2, and 3; ["1.*$"] indicates subscription to audio streams with UserId prefixes starting with 1. If this parameter is left unspecified, all audio streams in the room are subscribed to by default. The number of users in the subscription list should not exceed 32.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubscribeAudioUserIds []*string `json:"SubscribeAudioUserIds,omitnil,omitempty" name:"SubscribeAudioUserIds"`
+
+	// Subscription audio stream blocklist. It specifies which UserIds' audio streams not to subscribe to, for example, ["1", "2", "3"] indicates that the audio streams of UserId 1, 2, and 3 are not subscribed to; ["1.*$"] indicates that audio streams with UserId prefixes starting with 1 are not subscribed to. If this parameter is left unspecified, all audio streams in the room are subscribed to by default. The number of users in the subscription list should not exceed 32.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UnSubscribeAudioUserIds []*string `json:"UnSubscribeAudioUserIds,omitnil,omitempty" name:"UnSubscribeAudioUserIds"`
+
+	// Subscription video stream allowlist. It specifies which UserIds' video streams to subscribe to, for example, ["1", "2", "3"] indicates subscriptions to the video streams of UserId 1, 2, and 3; ["1.*$"] indicates subscription to video streams with UserId prefixes starting with 1. If this parameter is left unspecified, all video streams in the room are subscribed to by default. The number of users in the subscription list should not exceed 32.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubscribeVideoUserIds []*string `json:"SubscribeVideoUserIds,omitnil,omitempty" name:"SubscribeVideoUserIds"`
+
+	// Subscription video stream blocklist. It specifies which UserIds' video streams not to subscribe to, for example, ["1", "2", "3"] indicates that the video streams of UserId 1, 2, and 3 are not subscribed to; ["1.*$"] indicates that video streams with UserId prefixes starting with 1 are not subscribed to. If this parameter is left unspecified, all video streams in the room are subscribed to by default. The number of users in the subscription list should not exceed 32.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UnSubscribeVideoUserIds []*string `json:"UnSubscribeVideoUserIds,omitnil,omitempty" name:"UnSubscribeVideoUserIds"`
 }
 
 type SubscribeStreamUserIds struct {

@@ -22,38 +22,33 @@ import (
 
 type Account struct {
 	// Instance ID.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Account name.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
 
 	// Account description.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
-	// Read/write permission policy.
+	// Read/Write permission policy.
 	// - r: read-only.
-	// - w: write-only.
+	// 
+	//  - w: write-only.
 	// - rw: read/write.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	Privilege *string `json:"Privilege,omitnil,omitempty" name:"Privilege"`
 
 	// Read-only routing policy.
-	// - master: primary node.
-	// - replication: secondary node.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	//  - master: primary node.
+	//  - replication: replica node.
 	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil,omitempty" name:"ReadonlyPolicy"`
 
 	// Sub-account status.
-	// - 1: changing.
-	// - 2: valid.
-	// - 4: deleted.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	//  - 1: account under modification.
+	//  - 2: valid account.
+	//  - 4: account deleted.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Creation time.Note: This field may return null, indicating that no valid values can be obtained.
+	// Creation time
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 }
 
@@ -322,12 +317,9 @@ func (r *AssociateSecurityGroupsResponse) FromJsonString(s string) error {
 
 type AvailableRegion struct {
 	// Region
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// AZ information.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// AZ information
 	AvailableZones []*string `json:"AvailableZones,omitnil,omitempty" name:"AvailableZones"`
 }
 
@@ -1148,7 +1140,8 @@ func (r *CreateInstanceAccountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateInstancesRequestParams struct {
 	// Instance type.
-	// <ul><li>2: Redis 2.8 Memory Edition (standard architecture);</li> <li>3: CKV 3.2 Memory Edition (standard architecture);</li> <li>4: CKV 3.2 Memory Edition (cluster architecture);</li> <li>6: Redis 4.0 Memory Edition (standard architecture);</li> <li>7: Redis 4.0 Memory Edition (cluster architecture);</li> <li>8: Redis 5.0 Memory Edition (standard architecture);</li> <li>9: Redis 5.0 Memory Edition (cluster architecture);</li> <li>15: Redis 6.2 Memory Edition (standard architecture);</li> <li>16: Redis 6.2 Memory Edition (cluster architecture);</li> <li>17: Redis 7.0 Memory Edition (standard architecture);</li> <li>18: Redis 7.0 Memory Edition (cluster architecture). </li>Note: The CKV version is currently used by existing users and is temporarily retained.</ul>
+	// 
+	// <ul><li>2: Redis 2.8 memory edition (standard architecture).</li><li>3: CKV 3.2 memory edition (standard architecture).</li><li>4: CKV 3.2 memory edition (cluster architecture).</li><li>6: Redis 4.0 memory edition (standard architecture).</li><li>7: Redis 4.0 memory edition (cluster architecture).</li><li>8: Redis 5.0 memory edition (standard architecture).</li><li>9: Redis 5.0 memory edition (cluster architecture).</li><li>15: Redis 6.2 memory edition (standard architecture).</li><li>16: Redis 6.2 memory edition (cluster architecture).</li><li>17: Redis 7.0 memory edition (standard architecture).</li><li>18: Redis 7.0 memory edition (cluster architecture).</li><li>200: Memcached 1.6 memory edition (cluster architecture).</li>Note: CKV editions are currently used by some users and are temporarily retained.</ul>
 	TypeId *uint64 `json:"TypeId,omitnil,omitempty" name:"TypeId"`
 
 	// Memory capacity in MB, which must be an integer multiple of 1024. For specific specifications, query the sales specifications in all regions through the [DescribeProductInfo](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1) API.
@@ -1170,10 +1163,10 @@ type CreateInstancesRequestParams struct {
 	// ID of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
 	ZoneId *uint64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Password for accessing instances.
-	// - When the input parameter **NoAuth** is set to **true**, password-free access is set for instances and Password does not need to be configured. Otherwise, Password is required.
-	// - When the instance type parameter **TypeId** is set to Redis 2.8 Memory Edition (standard architecture) or Redis 4.0, 5.0, or 6.0 Memory Edition (standard architecture or cluster architecture), the password cannot start with a forward slash (/) and should contain 8 to 64 characters, including at least two of the following types: lowercase letters, uppercase letters, digits, and special characters (such as ()`~!@#$%^&*-+=_|{}[]:;<>,.?/).
-	// - When the instance type parameter **TypeId** is set to CKV 3.2 Memory Edition (standard architecture or cluster architecture), the password should contain 8 to 30 characters, including only letters and digits.
+	// Instance access password.
+	//  - If the input parameter **NoAuth** is set to **true**, indicating that instance access requires no password, Password does not need to be specified. Otherwise, Password is required.
+	//  - If the instance type (**TypeId**) is Redis 2.8 memory edition standard architecture or Redis 4.0/5.0/6.2/7.0 memory edition standard architecture or cluster architecture, the password complexity requirements are as follows: It should contain 8 to 64 characters but cannot start with a forward slash (/). It should contain at least two types of the following characters: lowercase letters, uppercase letters, digits, and special characters: ()`~!@#$%^&*-+=_|{}[]:;<>,.?/
+	//  - When the instance type parameter **TypeId** is set to CKV 3.2 memory edition (standard architecture or cluster architecture), the password should contain 8 to 30 characters, including only letters and digits.
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// VPC ID. If this parameter is not passed in, the classic network will be selected by default. You can query the specific VPC ID in the [VPC console](https://console.cloud.tencent.com/vpc).
@@ -1243,10 +1236,10 @@ type CreateInstancesRequestParams struct {
 	// - `true`: Send a check request and create no instance.
 	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
 
-	// The product edition of the instance
-	// - `local`: Local Disk Edition.
-	// - `cloud`: Cloud Disk Edition.
-	// - `cdc`: Dedicated Cluster Edition. Default value: `local`.
+	// Specifies the instance deployment mode.
+	//  - local: traditional architecture. It is the default value.
+	//  - cdc: dedicated cluster.
+	//  - cloud: cloud native. Currently, this mode is unavailable.
 	ProductVersion *string `json:"ProductVersion,omitnil,omitempty" name:"ProductVersion"`
 
 	// Exclusive cluster ID. When `ProductVersion` is set to `cdc`, this parameter is required.
@@ -1260,7 +1253,8 @@ type CreateInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance type.
-	// <ul><li>2: Redis 2.8 Memory Edition (standard architecture);</li> <li>3: CKV 3.2 Memory Edition (standard architecture);</li> <li>4: CKV 3.2 Memory Edition (cluster architecture);</li> <li>6: Redis 4.0 Memory Edition (standard architecture);</li> <li>7: Redis 4.0 Memory Edition (cluster architecture);</li> <li>8: Redis 5.0 Memory Edition (standard architecture);</li> <li>9: Redis 5.0 Memory Edition (cluster architecture);</li> <li>15: Redis 6.2 Memory Edition (standard architecture);</li> <li>16: Redis 6.2 Memory Edition (cluster architecture);</li> <li>17: Redis 7.0 Memory Edition (standard architecture);</li> <li>18: Redis 7.0 Memory Edition (cluster architecture). </li>Note: The CKV version is currently used by existing users and is temporarily retained.</ul>
+	// 
+	// <ul><li>2: Redis 2.8 memory edition (standard architecture).</li><li>3: CKV 3.2 memory edition (standard architecture).</li><li>4: CKV 3.2 memory edition (cluster architecture).</li><li>6: Redis 4.0 memory edition (standard architecture).</li><li>7: Redis 4.0 memory edition (cluster architecture).</li><li>8: Redis 5.0 memory edition (standard architecture).</li><li>9: Redis 5.0 memory edition (cluster architecture).</li><li>15: Redis 6.2 memory edition (standard architecture).</li><li>16: Redis 6.2 memory edition (cluster architecture).</li><li>17: Redis 7.0 memory edition (standard architecture).</li><li>18: Redis 7.0 memory edition (cluster architecture).</li><li>200: Memcached 1.6 memory edition (cluster architecture).</li>Note: CKV editions are currently used by some users and are temporarily retained.</ul>
 	TypeId *uint64 `json:"TypeId,omitnil,omitempty" name:"TypeId"`
 
 	// Memory capacity in MB, which must be an integer multiple of 1024. For specific specifications, query the sales specifications in all regions through the [DescribeProductInfo](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1) API.
@@ -1282,10 +1276,10 @@ type CreateInstancesRequest struct {
 	// ID of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
 	ZoneId *uint64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Password for accessing instances.
-	// - When the input parameter **NoAuth** is set to **true**, password-free access is set for instances and Password does not need to be configured. Otherwise, Password is required.
-	// - When the instance type parameter **TypeId** is set to Redis 2.8 Memory Edition (standard architecture) or Redis 4.0, 5.0, or 6.0 Memory Edition (standard architecture or cluster architecture), the password cannot start with a forward slash (/) and should contain 8 to 64 characters, including at least two of the following types: lowercase letters, uppercase letters, digits, and special characters (such as ()`~!@#$%^&*-+=_|{}[]:;<>,.?/).
-	// - When the instance type parameter **TypeId** is set to CKV 3.2 Memory Edition (standard architecture or cluster architecture), the password should contain 8 to 30 characters, including only letters and digits.
+	// Instance access password.
+	//  - If the input parameter **NoAuth** is set to **true**, indicating that instance access requires no password, Password does not need to be specified. Otherwise, Password is required.
+	//  - If the instance type (**TypeId**) is Redis 2.8 memory edition standard architecture or Redis 4.0/5.0/6.2/7.0 memory edition standard architecture or cluster architecture, the password complexity requirements are as follows: It should contain 8 to 64 characters but cannot start with a forward slash (/). It should contain at least two types of the following characters: lowercase letters, uppercase letters, digits, and special characters: ()`~!@#$%^&*-+=_|{}[]:;<>,.?/
+	//  - When the instance type parameter **TypeId** is set to CKV 3.2 memory edition (standard architecture or cluster architecture), the password should contain 8 to 30 characters, including only letters and digits.
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// VPC ID. If this parameter is not passed in, the classic network will be selected by default. You can query the specific VPC ID in the [VPC console](https://console.cloud.tencent.com/vpc).
@@ -1355,10 +1349,10 @@ type CreateInstancesRequest struct {
 	// - `true`: Send a check request and create no instance.
 	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
 
-	// The product edition of the instance
-	// - `local`: Local Disk Edition.
-	// - `cloud`: Cloud Disk Edition.
-	// - `cdc`: Dedicated Cluster Edition. Default value: `local`.
+	// Specifies the instance deployment mode.
+	//  - local: traditional architecture. It is the default value.
+	//  - cdc: dedicated cluster.
+	//  - cloud: cloud native. Currently, this mode is unavailable.
 	ProductVersion *string `json:"ProductVersion,omitnil,omitempty" name:"ProductVersion"`
 
 	// Exclusive cluster ID. When `ProductVersion` is set to `cdc`, this parameter is required.
@@ -2174,8 +2168,7 @@ type DescribeBackupUrlResponseParams struct {
 	// Deprecated: Filenames is deprecated.
 	Filenames []*string `json:"Filenames,omitnil,omitempty" name:"Filenames"`
 
-	// List of backup file information.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Backup file information list.
 	BackupInfos []*BackupDownloadInfo `json:"BackupInfos,omitnil,omitempty" name:"BackupInfos"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2580,12 +2573,10 @@ func (r *DescribeInstanceAccountRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceAccountResponseParams struct {
-	// Account details 
-	// Note:  This field may return null, indicating that no valid values can be obtained.
+	// Account details.
 	Accounts []*Account `json:"Accounts,omitnil,omitempty" name:"Accounts"`
 
-	// Number of accounts 
-	// Note:  This field may return null, indicating that no valid values can be obtained.
+	// Number of accounts.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2756,36 +2747,28 @@ func (r *DescribeInstanceDTSInfoRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceDTSInfoResponseParams struct {
-	// DTS task ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// DTS task ID.
 	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
 
-	// DTS task name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// DTS task name.
 	JobName *string `json:"JobName,omitnil,omitempty" name:"JobName"`
 
-	// Task status. Valid values: 1 (Creating), 3 (Checking), 4 (CheckPass), 5 (CheckNotPass), 7 (Running), 8 (ReadyComplete), 9 (Success), 10 (Failed), 11 (Stopping), 12 (Completing)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Task status. 1: creating (Creating); 3: checking (Checking); 4: check successful (CheckPass); 5: check failed (CheckNotPass); 7: task running (Running); 8: preparation completed (ReadyComplete); 9: task successful (Success); 10: task failed (Failed); 11: stopping (Stopping); 12: completing (Completing).
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Status description
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Status description.
 	StatusDesc *string `json:"StatusDesc,omitnil,omitempty" name:"StatusDesc"`
 
-	// Sync latency in bytes
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Synchronization delay. Unit: bytes.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Disconnection time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Disconnection time.
 	CutDownTime *string `json:"CutDownTime,omitnil,omitempty" name:"CutDownTime"`
 
-	// Source instance information
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Source instance information.
 	SrcInfo *DescribeInstanceDTSInstanceInfo `json:"SrcInfo,omitnil,omitempty" name:"SrcInfo"`
 
-	// Target instance information
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Destination instance information.
 	DstInfo *DescribeInstanceDTSInstanceInfo `json:"DstInfo,omitnil,omitempty" name:"DstInfo"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2810,35 +2793,27 @@ func (r *DescribeInstanceDTSInfoResponse) FromJsonString(s string) error {
 
 type DescribeInstanceDTSInstanceInfo struct {
 	// Region ID.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	RegionId *int64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Instance ID.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Warehouse ID.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Repository ID.
 	SetId *int64 `json:"SetId,omitnil,omitempty" name:"SetId"`
 
 	// AZ ID.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Instance type.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Instance name.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Instance access address.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
 	// Status.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
@@ -3474,7 +3449,7 @@ func (r *DescribeInstanceMonitorTookDistResponse) FromJsonString(s string) error
 
 // Predefined struct for user
 type DescribeInstanceMonitorTopNCmdRequestParams struct {
-	// Instance ID.
+	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Time range.
@@ -3488,7 +3463,7 @@ type DescribeInstanceMonitorTopNCmdRequestParams struct {
 type DescribeInstanceMonitorTopNCmdRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Time range.
@@ -3667,22 +3642,19 @@ type DescribeInstanceNodeInfoResponseParams struct {
 	// The number of proxy nodes
 	ProxyCount *int64 `json:"ProxyCount,omitnil,omitempty" name:"ProxyCount"`
 
-	// Proxy node information 
-	// Note:  This field may return null, indicating that no valid values can be obtained.
+	// Proxy node information.
 	Proxy []*ProxyNodes `json:"Proxy,omitnil,omitempty" name:"Proxy"`
 
 	// The number of Redis nodes
 	RedisCount *int64 `json:"RedisCount,omitnil,omitempty" name:"RedisCount"`
 
-	// Redis node information 
-	// Note:  This field may return null, indicating that no valid values can be obtained.
+	// TencentDB for Redis® node information.
 	Redis []*RedisNodes `json:"Redis,omitnil,omitempty" name:"Redis"`
 
 	// This parameter has been disused.
 	TendisCount *int64 `json:"TendisCount,omitnil,omitempty" name:"TendisCount"`
 
-	// This parameter has been disused. 
-	// Note:  This field may return null, indicating that no valid values can be obtained.
+	// This parameter is no longer used. Please ignore it.
 	Tendis []*TendisNodes `json:"Tendis,omitnil,omitempty" name:"Tendis"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4224,18 +4196,20 @@ type DescribeInstancesRequestParams struct {
 	BillingMode *string `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
 
 	// Instance type.
-	// - 2: Redis 2.8 Memory Edition (standard architecture).
-	// - 3: CKV 3.2 Memory Edition (standard architecture).
-	// - 4: CKV 3.2 Memory Edition (cluster architecture).
-	// - 5: Redis 2.8 Memory Edition (stand-alone).
-	// - 6: Redis 4.0 Memory Edition (standard architecture).
-	// - 7: Redis 4.0 Memory Edition (cluster architecture).
-	// - 8: Redis 5.0 Memory Edition (standard architecture).
-	// - 9: Redis 5.0 Memory Edition (cluster architecture).
-	// - 15: Redis 6.2 Memory Edition (standard architecture).
-	// - 16: Redis 6.2 Memory Edition (cluster architecture).
-	// - 17: Redis 7.0 Memory Edition (standard architecture).
-	// - 18: Redis 7.0 Memory Edition (cluster architecture).
+	// 
+	// - 2: Redis 2.8 memory edition (standard architecture).
+	// - 3: CKV 3.2 memory edition (standard architecture).
+	// - 4: CKV 3.2 memory edition (cluster architecture).
+	// - 5: Redis 2.8 memory edition (standalone).
+	// - 6: Redis 4.0 memory edition (standard architecture).
+	// - 7: Redis 4.0 memory edition (cluster architecture).
+	// - 8: Redis 5.0 memory edition (standard architecture).
+	// - 9: Redis 5.0 memory edition (cluster architecture).
+	// - 15: Redis 6.2 memory edition (standard architecture).
+	// - 16: Redis 6.2 memory edition (cluster architecture).
+	// - 17: Redis 7.0 memory edition (standard architecture).
+	// - 18: Redis 7.0 memory edition (cluster architecture).
+	// - 200: Memcached 1.6 memory edition (cluster architecture).
 	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// This parameter is of array type and supports the configuration of instance names, instance IDs, and IP addresses. Among these, the instance name is fuzzy matching while the instance ID and IP address are precise matching.
@@ -4338,18 +4312,20 @@ type DescribeInstancesRequest struct {
 	BillingMode *string `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
 
 	// Instance type.
-	// - 2: Redis 2.8 Memory Edition (standard architecture).
-	// - 3: CKV 3.2 Memory Edition (standard architecture).
-	// - 4: CKV 3.2 Memory Edition (cluster architecture).
-	// - 5: Redis 2.8 Memory Edition (stand-alone).
-	// - 6: Redis 4.0 Memory Edition (standard architecture).
-	// - 7: Redis 4.0 Memory Edition (cluster architecture).
-	// - 8: Redis 5.0 Memory Edition (standard architecture).
-	// - 9: Redis 5.0 Memory Edition (cluster architecture).
-	// - 15: Redis 6.2 Memory Edition (standard architecture).
-	// - 16: Redis 6.2 Memory Edition (cluster architecture).
-	// - 17: Redis 7.0 Memory Edition (standard architecture).
-	// - 18: Redis 7.0 Memory Edition (cluster architecture).
+	// 
+	// - 2: Redis 2.8 memory edition (standard architecture).
+	// - 3: CKV 3.2 memory edition (standard architecture).
+	// - 4: CKV 3.2 memory edition (cluster architecture).
+	// - 5: Redis 2.8 memory edition (standalone).
+	// - 6: Redis 4.0 memory edition (standard architecture).
+	// - 7: Redis 4.0 memory edition (cluster architecture).
+	// - 8: Redis 5.0 memory edition (standard architecture).
+	// - 9: Redis 5.0 memory edition (cluster architecture).
+	// - 15: Redis 6.2 memory edition (standard architecture).
+	// - 16: Redis 6.2 memory edition (cluster architecture).
+	// - 17: Redis 7.0 memory edition (standard architecture).
+	// - 18: Redis 7.0 memory edition (cluster architecture).
+	// - 200: Memcached 1.6 memory edition (cluster architecture).
 	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// This parameter is of array type and supports the configuration of instance names, instance IDs, and IP addresses. Among these, the instance name is fuzzy matching while the instance ID and IP address are precise matching.
@@ -4727,7 +4703,7 @@ func (r *DescribeProductInfoRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeProductInfoResponseParams struct {
-	// Sale information of a region.
+	// Selling information on the region. The selling information on all regions is returned even if a region is specified.
 	RegionSet []*RegionConf `json:"RegionSet,omitnil,omitempty" name:"RegionSet"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4980,7 +4956,7 @@ type DescribeProxySlowLogResponseParams struct {
 	// Total number of slow queries
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Slow query details
+	// Slow query details. Note: If the value of TotalCount is greater than 10,000, indicating that the number of slow logs exceeds 10,000, log details cannot be returned. Instead, the returned data is empty. It is recommended to reduce the interval between BeginTime and EndTime and perform multiple queries.
 	InstanceProxySlowLogDetail []*InstanceProxySlowlogDetail `json:"InstanceProxySlowLogDetail,omitnil,omitempty" name:"InstanceProxySlowLogDetail"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5425,6 +5401,80 @@ func (r *DescribeSSLStatusResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeSecondLevelBackupInfoRequestParams struct {
+	// Specifies the instance ID. For example, crs-xjhsdj****. Log in to the TencentDB for Redis® console and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Second-level backup timestamp. The corresponding time should be within the last 7 days.
+	BackupTimestamp *int64 `json:"BackupTimestamp,omitnil,omitempty" name:"BackupTimestamp"`
+}
+
+type DescribeSecondLevelBackupInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the instance ID. For example, crs-xjhsdj****. Log in to the TencentDB for Redis® console and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Second-level backup timestamp. The corresponding time should be within the last 7 days.
+	BackupTimestamp *int64 `json:"BackupTimestamp,omitnil,omitempty" name:"BackupTimestamp"`
+}
+
+func (r *DescribeSecondLevelBackupInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecondLevelBackupInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "BackupTimestamp")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSecondLevelBackupInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSecondLevelBackupInfoResponseParams struct {
+	// Backup record ID.
+	BackupId *string `json:"BackupId,omitnil,omitempty" name:"BackupId"`
+
+	// Backup timestamp.
+	BackupTimestamp *int64 `json:"BackupTimestamp,omitnil,omitempty" name:"BackupTimestamp"`
+
+	// Timestamp range within which backup is missing.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	MissingTimestamps []*SecondLevelBackupMissingTimestamps `json:"MissingTimestamps,omitnil,omitempty" name:"MissingTimestamps"`
+
+	// Timestamp when second-level backup is enabled for the instance.
+	StartTimestamp *int64 `json:"StartTimestamp,omitnil,omitempty" name:"StartTimestamp"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSecondLevelBackupInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSecondLevelBackupInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeSecondLevelBackupInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecondLevelBackupInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeSlowLogRequestParams struct {
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -5510,7 +5560,7 @@ type DescribeSlowLogResponseParams struct {
 	// Deprecated: InstanceSlowlogDetail is deprecated.
 	InstanceSlowlogDetail []*InstanceSlowlogDetail `json:"InstanceSlowlogDetail,omitnil,omitempty" name:"InstanceSlowlogDetail"`
 
-	// Details of slow queries.
+	// Slow query details. Note: If the value of TotalCount is greater than 10,000, indicating that the number of slow logs exceeds 10,000, log details cannot be returned. Instead, the returned data is empty. It is recommended to reduce the interval between BeginTime and EndTime and perform multiple queries.
 	InstanceSlowLogDetail []*InstanceSlowlogDetail `json:"InstanceSlowLogDetail,omitnil,omitempty" name:"InstanceSlowLogDetail"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5621,68 +5671,71 @@ type DescribeTaskListRequestParams struct {
 	// Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Project ID Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), go to the account information menu in the top-right corner, and select **Project Management** to query the project ID.
+	// Project ID. This field has been deprecated. Please ignore it.
+	//
+	// Deprecated: ProjectIds is deprecated.
 	ProjectIds []*int64 `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
 
 	// Task type.
 	// 
 	// 
 	// 
-	// - FLOW_CREATE: "001" - Create an instance.
-	// - FLOW_RESIZE: "002" - Change the configuration.
-	// - FLOW_CLOSE: "003" - Close an instance.
-	// - FLOW_CLEAN: "004" - Clear an instance.
-	// - FLOW_STARTUP: "005" - Enable an instance.
-	// - FLOW_DELETE: "006" - Delete an instance.
-	// - FLOW_SETPWD: "007" - Reset the password.
-	// - FLOW_EXPORTBACKUP: "009" - Export the backup file.
-	// - FLOW_RESTOREBACKUP: "010" - Restore the backup.
-	// - FLOW_BACKUPINSTANCE: "012" - Back up an instance.
-	// - FLOW_MIGRATEINSTANCE: "013" - Migrate an instance.
-	// - FLOW_DELBACKUP: "014" - Delete the backup.
-	// - FLOW_EXCHANGEINSTANCE: "016" - Switch an instance.
-	// - FLOW_AUTOBACKUP: "017" - Automatically backup an instance.
-	// - FLOW_MIGRATECHECK: "022" - Verify migration parameters.
-	// - FLOW_MIGRATETASK: "023" - Migrate data in progress.
-	// - FLOW_CLEANDB: "025" - Clear a database.
-	// - FLOW_CLONEBACKUP: "026" - Clone the backup.
-	// - FLOW_CHANGEVIP: "027" - Change the VIP.
-	// - FLOW_EXPORSHR: "028" - Perform scaling.
-	// - FLOW_ADDNODES: "029" - Add or remove a node.
-	// - FLOW_CHANGENET: "031" - Change the network type.
-	// - FLOW_MODIFYINSTACEREADONLY: "033" - Modify the read-only policy.
-	// - FLOW_MODIFYINSTANCEPARAMS: "034" - Modify instance parameters.
-	// - FLOW_MODIFYINSTANCEPASSWORDFREE: "035" - Set password-free access.
-	// - FLOW_SWITCHINSTANCEVIP: "036" - Switch the instance VIP.
-	// - FLOW_MODIFYINSTANCEACCOUNT: "037" - Modify the instance account.
-	// - FLOW_MODIFYINSTANCEBANDWIDTH: "038" - Modify the instance bandwidth.
-	// - FLOW_ENABLEINSTANCE_REPLICATE: "039" - Enable read-only replica.
-	// - FLOW_DISABLEINSTANCE_REPLICATE: "040" - Disable read-only replica.
-	// - FLOW_UpgradeArch: "041" - Upgrade the instance architecture from primary-secondary to cluster.
-	// - FLOW_DowngradeArch: "042" - Downgrade the instance architecture from cluster to primary-secondary.
-	// - FLOW_UpgradeVersion: "043" - Upgrade the version.
-	// - FLOW_MODIFYCONNECTIONCONFIG: "044" - Modify the number of bandwidth connections.
-	// - FLOW_CLEARNETWORK: "045" - Change the network.
-	// - FLOW_REMOVE_BACKUP_FILE: "046" - Delete the backup.
-	// - FLOW_UPGRADE_SUPPORT_MULTI_AZ: "047" - Upgrade an instance to support multiple AZs.
-	// - FLOW_SHUTDOWN_MASTER: "048" - Simulate a fault.
-	// - FLOW_CHANGE_REPLICA_TO_MASTER: "049" - Manually promote the replica node to the primary node.
-	// - FLOW_CODE_ADD_REPLICATION_INSTANCE: "050" - Add a replication group.
-	// - FLOW_OPEN_WAN: "052" - Enable the public network.
-	// - FLOW_CLOSE_WAN: "053" - Disable the public network. - FLOW_UPDATE_WAN: "054" - Update the public network.
-	// - FLOW_CODE_DELETE_REPLICATION_INSTANCE: "055" - Unbind the replication group.
-	// - FLOW_CODE_CHANGE_MASTER_INSTANCE: "056" - Switch to the primary instance in the replication group.
-	// - FLOW_CODE_CHANGE_INSTANCE_ROLE: "057" - Change the roles of instances in the replication group.
-	// - FLOW_MIGRATE_NODE: "058" - Migrate a node.
-	// - FLOW_SWITCH_NODE: "059" - Switch a node.
-	// - FLOW_UPGRADE_SMALL_VERSION: "060" - Upgrade the Redis version.
-	// - FLOW_UPGRADE_PROXY_VERSION: "061" - Upgrade the Proxy version.
-	// - FLOW_MODIFY_INSTANCE_NETWORK: "062" - Modify the instance network.
-	// - FLOW_MIGRATE_PROXY_NODE: "063" - Migrate the Proxy node.
-	// - FLOW_MIGRATION_INSTANCE_ZONE: "066" - Migrate the instance AZ in progress.
-	// - FLOW_UPGRADE_INSTANCE_CACHE_AND_PROXY: "067" - Upgrade the instance version in progress.
-	// - FLOW_MODIFY_PROXY_NUM: "069" - Add or remove a Proxy node.
-	// - FLOW_MODIFYBACKUPMOD: "070" - Change the instance backup mode.
+	// - FLOW_CREATE: "001", indicating instance creation.
+	// - FLOW_RESIZE: "002", indicating configuration modification.
+	// - FLOW_CLOSE: "003", indicating instance disabling.
+	// - FLOW_CLEAN: "004", indicating instance cleanup.
+	// - FLOW_STARTUP: "005", indicating instance enabling.
+	// - FLOW_DELETE: "006", indicating instance deletion.
+	// - FLOW_SETPWD: "007", indicating password reset.
+	// - FLOW_EXPORTBACKUP: "009", indicating backup file export.
+	// - FLOW_RESTOREBACKUP: "010", indicating backup restoration.
+	// - FLOW_BACKUPINSTANCE: "012", indicating instance backup.
+	// - FLOW_MIGRATEINSTANCE: "013", indicating instance migration.
+	// - FLOW_DELBACKUP: "014", indicating backup deletion.
+	// - FLOW_EXCHANGEINSTANCE: "016", indicating instance switch.
+	// - FLOW_AUTOBACKUP: "017", indicating automatic instance backup.
+	// - FLOW_MIGRATECHECK: "022", indicating migration parameter verification.
+	// - FLOW_MIGRATETASK: "023", indicating that data migration is in progress.
+	// - FLOW_CLEANDB: "025", indicating database cleanup.
+	// - FLOW_CLONEBACKUP: "026": indicating backup cloning.
+	// - FLOW_CHANGEVIP: "027", indicating VIP address modification.
+	// - FLOW_EXPORSHR: "028", indicating scaling.
+	// - FLOW_ADDNODES: "029", indicating node addition (removal).
+	// - FLOW_CHANGENET: "031", indicating network type modification.
+	// - FLOW_MODIFYINSTACEREADONLY: "033": indicating read-only policy modification.
+	// - FLOW_MODIFYINSTANCEPARAMS: "034", indicating instance parameter modification.
+	// - FLOW_MODIFYINSTANCEPASSWORDFREE: "035", indicating password-free access settings.
+	// - FLOW_SWITCHINSTANCEVIP: "036", indicating instance VIP address switch.
+	// - FLOW_MODIFYINSTANCEACCOUNT: "037", indicating instance account modification.
+	// - FLOW_MODIFYINSTANCEBANDWIDTH: "038", indicating instance bandwidth modification.
+	// - FLOW_ENABLEINSTANCE_REPLICATE: "039", indicating enabling of read-only replica.
+	// - FLOW_DISABLEINSTANCE_REPLICATE: "040", indicating disabling of read-only replica.
+	// - FLOW_UpgradeArch: "041", indicating instance architecture upgrade from the standard architecture to the cluster architecture.
+	// - FLOW_DowngradeArch: "042", indicating instance architecture downgrade from the cluster architecture to the standard architecture.
+	// - FLOW_UpgradeVersion: "043", indicating version upgrade.
+	// - FLOW_MODIFYCONNECTIONCONFIG: "044", indicating adjustment of the bandwidth and the number of connections.
+	// - FLOW_CLEARNETWORK: "045", indicating network change.
+	// - FLOW_REMOVE_BACKUP_FILE: "046", indicating backup deletion.
+	// - FLOW_UPGRADE_SUPPORT_MULTI_AZ: "047", indicating instance upgrade to multi-AZ deployment.
+	// - FLOW_SHUTDOWN_MASTER: "048", indicating fault simulation.
+	// - FLOW_CHANGE_REPLICA_TO_MASTER: "049", indicating manual promotion to the primary node.
+	// - FLOW_CODE_ADD_REPLICATION_INSTANCE: "050", indicating replication group addition.
+	// - FLOW_OPEN_WAN: "052", indicating enabling of public network access.
+	// - FLOW_CLOSE_WAN: "053", indicating disabling of public network access.
+	//  - FLOW_UPDATE_WAN: "054", indicating update of the public network access configuration.
+	// - FLOW_CODE_DELETE_REPLICATION_INSTANCE: "055", indicating replication group unbinding.
+	// - FLOW_CODE_CHANGE_MASTER_INSTANCE: "056", indicating switching a replication group instance to the primary instance.
+	// - FLOW_CODE_CHANGE_INSTANCE_ROLE: "057", indicating modification of the replication group instance role.
+	// - FLOW_MIGRATE_NODE: "058", indicating node migration.
+	// - FLOW_SWITCH_NODE: "059", indicating node switch.
+	// - FLOW_UPGRADE_SMALL_VERSION: "060", indicating Redis version upgrade.
+	// - FLOW_UPGRADE_PROXY_VERSION: "061", indicating proxy version upgrade.
+	// - FLOW_MODIFY_INSTANCE_NETWORK: "062", indicating instance network modification.
+	// - FLOW_MIGRATE_PROXY_NODE: "063", indicating proxy node migration.
+	// - FLOW_MIGRATION_INSTANCE_ZONE: "066", indicating that instance migration to another AZ is in progress.
+	// - FLOW_UPGRADE_INSTANCE_CACHE_AND_PROXY: "067", indicating that instance version upgrade is in progress.
+	// - FLOW_MODIFY_PROXY_NUM: "069", indicating proxy node addition (removal).
+	// - FLOW_MODIFYBACKUPMOD: "070", indicating instance backup mode modification.
 	TaskTypes []*string `json:"TaskTypes,omitnil,omitempty" name:"TaskTypes"`
 
 	// Start time of the task, for example, in the format of 2021-12-30 00:00:00. Data in the last 30 days can be queried.
@@ -5721,68 +5774,69 @@ type DescribeTaskListRequest struct {
 	// Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Project ID Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), go to the account information menu in the top-right corner, and select **Project Management** to query the project ID.
+	// Project ID. This field has been deprecated. Please ignore it.
 	ProjectIds []*int64 `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
 
 	// Task type.
 	// 
 	// 
 	// 
-	// - FLOW_CREATE: "001" - Create an instance.
-	// - FLOW_RESIZE: "002" - Change the configuration.
-	// - FLOW_CLOSE: "003" - Close an instance.
-	// - FLOW_CLEAN: "004" - Clear an instance.
-	// - FLOW_STARTUP: "005" - Enable an instance.
-	// - FLOW_DELETE: "006" - Delete an instance.
-	// - FLOW_SETPWD: "007" - Reset the password.
-	// - FLOW_EXPORTBACKUP: "009" - Export the backup file.
-	// - FLOW_RESTOREBACKUP: "010" - Restore the backup.
-	// - FLOW_BACKUPINSTANCE: "012" - Back up an instance.
-	// - FLOW_MIGRATEINSTANCE: "013" - Migrate an instance.
-	// - FLOW_DELBACKUP: "014" - Delete the backup.
-	// - FLOW_EXCHANGEINSTANCE: "016" - Switch an instance.
-	// - FLOW_AUTOBACKUP: "017" - Automatically backup an instance.
-	// - FLOW_MIGRATECHECK: "022" - Verify migration parameters.
-	// - FLOW_MIGRATETASK: "023" - Migrate data in progress.
-	// - FLOW_CLEANDB: "025" - Clear a database.
-	// - FLOW_CLONEBACKUP: "026" - Clone the backup.
-	// - FLOW_CHANGEVIP: "027" - Change the VIP.
-	// - FLOW_EXPORSHR: "028" - Perform scaling.
-	// - FLOW_ADDNODES: "029" - Add or remove a node.
-	// - FLOW_CHANGENET: "031" - Change the network type.
-	// - FLOW_MODIFYINSTACEREADONLY: "033" - Modify the read-only policy.
-	// - FLOW_MODIFYINSTANCEPARAMS: "034" - Modify instance parameters.
-	// - FLOW_MODIFYINSTANCEPASSWORDFREE: "035" - Set password-free access.
-	// - FLOW_SWITCHINSTANCEVIP: "036" - Switch the instance VIP.
-	// - FLOW_MODIFYINSTANCEACCOUNT: "037" - Modify the instance account.
-	// - FLOW_MODIFYINSTANCEBANDWIDTH: "038" - Modify the instance bandwidth.
-	// - FLOW_ENABLEINSTANCE_REPLICATE: "039" - Enable read-only replica.
-	// - FLOW_DISABLEINSTANCE_REPLICATE: "040" - Disable read-only replica.
-	// - FLOW_UpgradeArch: "041" - Upgrade the instance architecture from primary-secondary to cluster.
-	// - FLOW_DowngradeArch: "042" - Downgrade the instance architecture from cluster to primary-secondary.
-	// - FLOW_UpgradeVersion: "043" - Upgrade the version.
-	// - FLOW_MODIFYCONNECTIONCONFIG: "044" - Modify the number of bandwidth connections.
-	// - FLOW_CLEARNETWORK: "045" - Change the network.
-	// - FLOW_REMOVE_BACKUP_FILE: "046" - Delete the backup.
-	// - FLOW_UPGRADE_SUPPORT_MULTI_AZ: "047" - Upgrade an instance to support multiple AZs.
-	// - FLOW_SHUTDOWN_MASTER: "048" - Simulate a fault.
-	// - FLOW_CHANGE_REPLICA_TO_MASTER: "049" - Manually promote the replica node to the primary node.
-	// - FLOW_CODE_ADD_REPLICATION_INSTANCE: "050" - Add a replication group.
-	// - FLOW_OPEN_WAN: "052" - Enable the public network.
-	// - FLOW_CLOSE_WAN: "053" - Disable the public network. - FLOW_UPDATE_WAN: "054" - Update the public network.
-	// - FLOW_CODE_DELETE_REPLICATION_INSTANCE: "055" - Unbind the replication group.
-	// - FLOW_CODE_CHANGE_MASTER_INSTANCE: "056" - Switch to the primary instance in the replication group.
-	// - FLOW_CODE_CHANGE_INSTANCE_ROLE: "057" - Change the roles of instances in the replication group.
-	// - FLOW_MIGRATE_NODE: "058" - Migrate a node.
-	// - FLOW_SWITCH_NODE: "059" - Switch a node.
-	// - FLOW_UPGRADE_SMALL_VERSION: "060" - Upgrade the Redis version.
-	// - FLOW_UPGRADE_PROXY_VERSION: "061" - Upgrade the Proxy version.
-	// - FLOW_MODIFY_INSTANCE_NETWORK: "062" - Modify the instance network.
-	// - FLOW_MIGRATE_PROXY_NODE: "063" - Migrate the Proxy node.
-	// - FLOW_MIGRATION_INSTANCE_ZONE: "066" - Migrate the instance AZ in progress.
-	// - FLOW_UPGRADE_INSTANCE_CACHE_AND_PROXY: "067" - Upgrade the instance version in progress.
-	// - FLOW_MODIFY_PROXY_NUM: "069" - Add or remove a Proxy node.
-	// - FLOW_MODIFYBACKUPMOD: "070" - Change the instance backup mode.
+	// - FLOW_CREATE: "001", indicating instance creation.
+	// - FLOW_RESIZE: "002", indicating configuration modification.
+	// - FLOW_CLOSE: "003", indicating instance disabling.
+	// - FLOW_CLEAN: "004", indicating instance cleanup.
+	// - FLOW_STARTUP: "005", indicating instance enabling.
+	// - FLOW_DELETE: "006", indicating instance deletion.
+	// - FLOW_SETPWD: "007", indicating password reset.
+	// - FLOW_EXPORTBACKUP: "009", indicating backup file export.
+	// - FLOW_RESTOREBACKUP: "010", indicating backup restoration.
+	// - FLOW_BACKUPINSTANCE: "012", indicating instance backup.
+	// - FLOW_MIGRATEINSTANCE: "013", indicating instance migration.
+	// - FLOW_DELBACKUP: "014", indicating backup deletion.
+	// - FLOW_EXCHANGEINSTANCE: "016", indicating instance switch.
+	// - FLOW_AUTOBACKUP: "017", indicating automatic instance backup.
+	// - FLOW_MIGRATECHECK: "022", indicating migration parameter verification.
+	// - FLOW_MIGRATETASK: "023", indicating that data migration is in progress.
+	// - FLOW_CLEANDB: "025", indicating database cleanup.
+	// - FLOW_CLONEBACKUP: "026": indicating backup cloning.
+	// - FLOW_CHANGEVIP: "027", indicating VIP address modification.
+	// - FLOW_EXPORSHR: "028", indicating scaling.
+	// - FLOW_ADDNODES: "029", indicating node addition (removal).
+	// - FLOW_CHANGENET: "031", indicating network type modification.
+	// - FLOW_MODIFYINSTACEREADONLY: "033": indicating read-only policy modification.
+	// - FLOW_MODIFYINSTANCEPARAMS: "034", indicating instance parameter modification.
+	// - FLOW_MODIFYINSTANCEPASSWORDFREE: "035", indicating password-free access settings.
+	// - FLOW_SWITCHINSTANCEVIP: "036", indicating instance VIP address switch.
+	// - FLOW_MODIFYINSTANCEACCOUNT: "037", indicating instance account modification.
+	// - FLOW_MODIFYINSTANCEBANDWIDTH: "038", indicating instance bandwidth modification.
+	// - FLOW_ENABLEINSTANCE_REPLICATE: "039", indicating enabling of read-only replica.
+	// - FLOW_DISABLEINSTANCE_REPLICATE: "040", indicating disabling of read-only replica.
+	// - FLOW_UpgradeArch: "041", indicating instance architecture upgrade from the standard architecture to the cluster architecture.
+	// - FLOW_DowngradeArch: "042", indicating instance architecture downgrade from the cluster architecture to the standard architecture.
+	// - FLOW_UpgradeVersion: "043", indicating version upgrade.
+	// - FLOW_MODIFYCONNECTIONCONFIG: "044", indicating adjustment of the bandwidth and the number of connections.
+	// - FLOW_CLEARNETWORK: "045", indicating network change.
+	// - FLOW_REMOVE_BACKUP_FILE: "046", indicating backup deletion.
+	// - FLOW_UPGRADE_SUPPORT_MULTI_AZ: "047", indicating instance upgrade to multi-AZ deployment.
+	// - FLOW_SHUTDOWN_MASTER: "048", indicating fault simulation.
+	// - FLOW_CHANGE_REPLICA_TO_MASTER: "049", indicating manual promotion to the primary node.
+	// - FLOW_CODE_ADD_REPLICATION_INSTANCE: "050", indicating replication group addition.
+	// - FLOW_OPEN_WAN: "052", indicating enabling of public network access.
+	// - FLOW_CLOSE_WAN: "053", indicating disabling of public network access.
+	//  - FLOW_UPDATE_WAN: "054", indicating update of the public network access configuration.
+	// - FLOW_CODE_DELETE_REPLICATION_INSTANCE: "055", indicating replication group unbinding.
+	// - FLOW_CODE_CHANGE_MASTER_INSTANCE: "056", indicating switching a replication group instance to the primary instance.
+	// - FLOW_CODE_CHANGE_INSTANCE_ROLE: "057", indicating modification of the replication group instance role.
+	// - FLOW_MIGRATE_NODE: "058", indicating node migration.
+	// - FLOW_SWITCH_NODE: "059", indicating node switch.
+	// - FLOW_UPGRADE_SMALL_VERSION: "060", indicating Redis version upgrade.
+	// - FLOW_UPGRADE_PROXY_VERSION: "061", indicating proxy version upgrade.
+	// - FLOW_MODIFY_INSTANCE_NETWORK: "062", indicating instance network modification.
+	// - FLOW_MIGRATE_PROXY_NODE: "063", indicating proxy node migration.
+	// - FLOW_MIGRATION_INSTANCE_ZONE: "066", indicating that instance migration to another AZ is in progress.
+	// - FLOW_UPGRADE_INSTANCE_CACHE_AND_PROXY: "067", indicating that instance version upgrade is in progress.
+	// - FLOW_MODIFY_PROXY_NUM: "069", indicating proxy node addition (removal).
+	// - FLOW_MODIFYBACKUPMOD: "070", indicating instance backup mode modification.
 	TaskTypes []*string `json:"TaskTypes,omitnil,omitempty" name:"TaskTypes"`
 
 	// Start time of the task, for example, in the format of 2021-12-30 00:00:00. Data in the last 30 days can be queried.
@@ -5934,7 +5988,7 @@ type DescribeTendisSlowLogResponseParams struct {
 	// Total number of slow queries
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Slow query details
+	// Slow query details. Note: If the value of TotalCount is greater than 10,000, indicating that the number of slow logs exceeds 10,000, log details cannot be returned. Instead, the returned data is empty. It is recommended to reduce the interval between BeginTime and EndTime and perform multiple queries.
 	TendisSlowLogDetail []*TendisSlowLogDetail `json:"TendisSlowLogDetail,omitnil,omitempty" name:"TendisSlowLogDetail"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -6105,8 +6159,7 @@ func (r *DisableReplicaReadonlyRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DisableReplicaReadonlyResponseParams struct {
-	// Task ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Task ID.
 	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -6244,14 +6297,12 @@ func (r *EnableReplicaReadonlyRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type EnableReplicaReadonlyResponseParams struct {
-	// Valid values: `ERROR`, `OK`. This field has been disused.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// ERROR: incorrect; OK: correct (discarded).
 	//
 	// Deprecated: Status is deprecated.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Task ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Task ID.
 	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -6279,29 +6330,27 @@ type Groups struct {
 	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
 	// Region ID.
-	// - 1: Guangzhou.
-	// - 4: Shanghai.
-	// - 5: Hong Kong (China).
-	// - 7: Shanghai Finance.
-	// - 8: Beijing.
-	// - 9: Singapore.
-	// - 11: Shenzhen Finance.
-	// - 15: Western United States (Silicon Valley).
-	// - 16: Chengdu.
-	// - 17: Germany.
-	// - 18: South Korea.
-	// - 19: Chongqing.
-	// - 21: India.
-	// - 22: Eastern United States (Virginia).
-	// - 23: Thailand.
+	//  - 1: Guangzhou.
+	//  - 4: Shanghai.
+	//  - 5: Hong Kong (China).
+	//  - 7: Shanghai Finance.
+	//  - 8: Beijing.
+	//  - 9: Singapore.
+	//  - 11: Shenzhen Finance.
+	//  - 15: Western US (Silicon Valley).
+	//  - 16: Chengdu.
+	//  - 17: Germany.
+	//  - 18: South Korea.
+	//  - 19: Chongqing.
+	//  - 22: Eastern US (Virginia).
+	//  - 23: Thailand.
 	// - 25: Japan.
 	RegionId *int64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Replication group ID in the format of "crs-rpl-deind****"
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
-	// Replication group name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Replication group name.
 	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 
 	// Status of replication group
@@ -6315,12 +6364,10 @@ type Groups struct {
 	// Number of replication groups
 	InstanceCount *int64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
 
-	// Instance information in replication groups
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance information on the replication group.
 	Instances []*Instances `json:"Instances,omitnil,omitempty" name:"Instances"`
 
-	// Remarks
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Remark information.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 }
 
@@ -6364,15 +6411,17 @@ type Inbound struct {
 // Predefined struct for user
 type InquiryPriceCreateInstanceRequestParams struct {
 	// Instance type.
-	// - 2: Redis 2.8 Memory Edition (standard architecture).
-	// - 6: Redis 4.0 Memory Edition (standard architecture).
-	// - 7: Redis 4.0 Memory Edition (cluster architecture).
-	// - 8: Redis 5.0 Memory Edition (standard architecture).
-	// - 9: Redis 5.0 Memory Edition (cluster architecture).
-	// - 15: Redis 6.2 Memory Edition (standard architecture).
-	// - 16: Redis 6.2 Memory Edition (cluster architecture).
-	// - 17: Redis 7.0 Memory Edition (standard architecture).
-	// - 18: Redis 7.0 Memory Edition (cluster architecture).
+	// 
+	// - 2: Redis 2.8 memory edition (standard architecture).
+	// - 6: Redis 4.0 memory edition (standard architecture).
+	// - 7: Redis 4.0 memory edition (cluster architecture).
+	// - 8: Redis 5.0 memory edition (standard architecture).
+	// - 9: Redis 5.0 memory edition (cluster architecture).
+	// - 15: Redis 6.2 memory edition (standard architecture).
+	// - 16: Redis 6.2 memory edition (cluster architecture).
+	// - 17: Redis 7.0 memory edition (standard architecture).
+	// - 18: Redis 7.0 memory edition (cluster architecture).
+	// - 200: Memcached 1.6 memory edition (cluster architecture).
 	TypeId *uint64 `json:"TypeId,omitnil,omitempty" name:"TypeId"`
 
 	// Memory capacity in MB, which must be a multiple of 1,024. It is subject to the purchasable specifications returned by the [DescribeProductInfo API](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1).
@@ -6418,15 +6467,17 @@ type InquiryPriceCreateInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance type.
-	// - 2: Redis 2.8 Memory Edition (standard architecture).
-	// - 6: Redis 4.0 Memory Edition (standard architecture).
-	// - 7: Redis 4.0 Memory Edition (cluster architecture).
-	// - 8: Redis 5.0 Memory Edition (standard architecture).
-	// - 9: Redis 5.0 Memory Edition (cluster architecture).
-	// - 15: Redis 6.2 Memory Edition (standard architecture).
-	// - 16: Redis 6.2 Memory Edition (cluster architecture).
-	// - 17: Redis 7.0 Memory Edition (standard architecture).
-	// - 18: Redis 7.0 Memory Edition (cluster architecture).
+	// 
+	// - 2: Redis 2.8 memory edition (standard architecture).
+	// - 6: Redis 4.0 memory edition (standard architecture).
+	// - 7: Redis 4.0 memory edition (cluster architecture).
+	// - 8: Redis 5.0 memory edition (standard architecture).
+	// - 9: Redis 5.0 memory edition (cluster architecture).
+	// - 15: Redis 6.2 memory edition (standard architecture).
+	// - 16: Redis 6.2 memory edition (cluster architecture).
+	// - 17: Redis 7.0 memory edition (standard architecture).
+	// - 18: Redis 7.0 memory edition (cluster architecture).
+	// - 200: Memcached 1.6 memory edition (cluster architecture).
 	TypeId *uint64 `json:"TypeId,omitnil,omitempty" name:"TypeId"`
 
 	// Memory capacity in MB, which must be a multiple of 1,024. It is subject to the purchasable specifications returned by the [DescribeProductInfo API](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1).
@@ -6499,9 +6550,20 @@ func (r *InquiryPriceCreateInstanceRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type InquiryPriceCreateInstanceResponseParams struct {
-	// Price. Unit: USD (accurate down to the cent)
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Price.
 	Price *float64 `json:"Price,omitnil,omitempty" name:"Price"`
+
+	// High precision price. 
+	HighPrecisionPrice *float64 `json:"HighPrecisionPrice,omitnil,omitempty" name:"HighPrecisionPrice"`
+
+	// Currency.
+	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
+
+	// Price unit.
+	// 
+	//  - pent: cent.
+	//  - microPent: microcent.
+	AmountUnit *string `json:"AmountUnit,omitnil,omitempty" name:"AmountUnit"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -6578,9 +6640,20 @@ func (r *InquiryPriceUpgradeInstanceRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type InquiryPriceUpgradeInstanceResponseParams struct {
-	// Price. Unit: USD
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Price.
 	Price *float64 `json:"Price,omitnil,omitempty" name:"Price"`
+
+	// High precision price.
+	HighPrecisionPrice *float64 `json:"HighPrecisionPrice,omitnil,omitempty" name:"HighPrecisionPrice"`
+
+	// Currency.
+	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
+
+	// Price unit.
+	// 
+	//  - pent: cent.
+	//  - microPent: microcent.
+	AmountUnit *string `json:"AmountUnit,omitnil,omitempty" name:"AmountUnit"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -6734,8 +6807,7 @@ type InstanceIntegerParam struct {
 	// Parameter status. 1: modifying; 2: modified
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Parameter unit
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Parameter unit.
 	Unit *string `json:"Unit,omitnil,omitempty" name:"Unit"`
 }
 
@@ -6839,7 +6911,7 @@ type InstanceSet struct {
 	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Region ID. <ul><li>1: Guangzhou;</li> <li>4: Shanghai;</li> <li>5: Hong Kong (China);</li> <li>7: Shanghai Finance;</li> <li>8: Beijing;</li> <li>9: Singapore;</li> <li>11: Shenzhen Finance;</li> <li>15: Western United States (Silicon Valley);</li> <li>16: Chengdu;</li> <li>17: Frankfurt;</li> <li>18: Seoul;</li> <li>19: Chongqing;</li> <li>21: Mumbai;</li> <li>22: Eastern United States (Virginia);</li> <li>23: Bangkok;</li> <li>25: Tokyo.</li></ul>
+	// Region ID.<ul><li>1: Guangzhou.</li><li>4: Shanghai.</li><li>5: Hong Kong (China).</li><li>7: Shanghai Finance.</li><li>8: Beijing.</li><li>9: Singapore.</li><li>11: Shenzhen Finance.</li><li>15: Western US (Silicon Valley).</li><li>16: Chengdu.</li><li>17: Frankfurt.</li><li>18: Seoul.</li><li>19: Chongqing.</li><li>22: Eastern US (Virginia).</li><li>23: Bangkok.</li><li>25: Tokyo.</li></ul>
 	RegionId *int64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Zone ID.
@@ -6872,18 +6944,20 @@ type InstanceSet struct {
 	SizeUsed *float64 `json:"SizeUsed,omitnil,omitempty" name:"SizeUsed"`
 
 	// Instance type.
-	// - 2: Redis 2.8 Memory Edition (standard architecture).
-	// - 3: CKV 3.2 Memory Edition (standard architecture).
-	// - 4: CKV 3.2 Memory Edition (cluster architecture).
-	// - 5: Redis 2.8 Memory Edition (stand-alone).
-	// - 6: Redis 4.0 Memory Edition (standard architecture).
-	// - 7: Redis 4.0 Memory Edition (cluster architecture).
-	// - 8: Redis 5.0 Memory Edition (standard architecture).
-	// - 9: Redis 5.0 Memory Edition (cluster architecture).
-	// - 15: Redis 6.2 Memory Edition (standard architecture).
-	// - 16: Redis 6.2 Memory Edition (cluster architecture).
-	// - 17: Redis 7.0 Memory Edition (standard architecture).
-	// - 18: Redis 7.0 Memory Edition (cluster architecture).
+	// 
+	// - 2: Redis 2.8 memory edition (standard architecture).
+	// - 3: CKV 3.2 memory edition (standard architecture).
+	// - 4: CKV 3.2 memory edition (cluster architecture).
+	// - 5: Redis 2.8 memory edition (standalone).
+	// - 6: Redis 4.0 memory edition (standard architecture).
+	// - 7: Redis 4.0 memory edition (cluster architecture).
+	// - 8: Redis 5.0 memory edition (standard architecture).
+	// - 9: Redis 5.0 memory edition (cluster architecture).
+	// - 15: Redis 6.2 memory edition (standard architecture).
+	// - 16: Redis 6.2 memory edition (cluster architecture).
+	// - 17: Redis 7.0 memory edition (standard architecture).
+	// - 18: Redis 7.0 memory edition (cluster architecture).
+	// - 200: Memcached 1.6 memory edition (cluster architecture).
 	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Whether the automatic renewal flag is set for an instance. <ul><li>1: set;</li> <li>0: not set.</li></ul>
@@ -6913,7 +6987,9 @@ type InstanceSet struct {
 	// Default termination time of isolated instances, for example, in the format of 2020-02-15 10:20:00. By default, a pay-as-you-go instance will be terminated after 2 hours of isolation, and a monthly subscription instance will be terminated after 7 days.
 	OfflineTime *string `json:"OfflineTime,omitnil,omitempty" name:"OfflineTime"`
 
-	// Sub-status returned for an instance in process.
+	// Sub-status returned for the instance in the process.
+	//  - 0: disk read-write status.
+	//  - 1: disk read-only status because the upper limit is exceeded.
 	SubStatus *int64 `json:"SubStatus,omitnil,omitempty" name:"SubStatus"`
 
 	// Anti-affinity tag.
@@ -6940,113 +7016,87 @@ type InstanceSet struct {
 	// Read weight of a secondary node.
 	SlaveReadWeight *int64 `json:"SlaveReadWeight,omitnil,omitempty" name:"SlaveReadWeight"`
 
-	// Tag information associated with an instance.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Information on tags associated with the instance.
 	InstanceTags []*InstanceTagInfo `json:"InstanceTags,omitnil,omitempty" name:"InstanceTags"`
 
 	// Project name
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
 
-	// Whether an instance is a password-free instance. <ul><li>true: yes;</li> <li>false: no.</li></ul>
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Whether the instance is password-free.<ul><li>true: password-free instance.</li><li>false: password required by the instance.</li></ul>
 	NoAuth *bool `json:"NoAuth,omitnil,omitempty" name:"NoAuth"`
 
 	// Number of client connections.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	ClientLimit *int64 `json:"ClientLimit,omitnil,omitempty" name:"ClientLimit"`
 
-	// DTS status (internal parameter, which can be ignored).
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// DTS status. (Internal parameter, which can be ignored.)
 	DtsStatus *int64 `json:"DtsStatus,omitnil,omitempty" name:"DtsStatus"`
 
-	// Upper limit of the shard bandwidth. Unit: MB.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Shard bandwidth limit. Unit: MB.
 	NetLimit *int64 `json:"NetLimit,omitnil,omitempty" name:"NetLimit"`
 
-	// Password-free instance flag (internal parameter, which can be ignored).
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Password-free instance flag. (Internal parameter, which can be ignored.)
 	PasswordFree *int64 `json:"PasswordFree,omitnil,omitempty" name:"PasswordFree"`
 
-	// Internal parameter, which can be ignored. This parameter is not properly named. It is recommended to use the IPv6 parameter to replace it.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// This parameter encounters a naming issue. It is recommended to use the parameter IPv6 instead. It is an internal parameter and can be ignored.
 	Vip6 *string `json:"Vip6,omitnil,omitempty" name:"Vip6"`
 
 	// Internal parameter, which can be ignored.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	IPv6 *string `json:"IPv6,omitnil,omitempty" name:"IPv6"`
 
-	// Instance read-only flag (internal parameter, which can be ignored).
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Instance read-only flag. (Internal parameter, which can be ignored.)
 	ReadOnly *int64 `json:"ReadOnly,omitnil,omitempty" name:"ReadOnly"`
 
 	// Internal parameter, which can be ignored.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	RemainBandwidthDuration *string `json:"RemainBandwidthDuration,omitnil,omitempty" name:"RemainBandwidthDuration"`
 
-	// For Redis instances, ignore this parameter.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// For TencentDB for Redis® instances, ignore this parameter.
 	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// Monitoring version. <ul><li>1m: 1-minute granularity monitoring. This monitoring granularity has been deprecated. For details, see [1-Minute Granularity Will Be Disused](https://www.tencentcloud.com/document/product/239/50440).</li> <li>5s: 5-second granularity monitoring.</li></ul>
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Monitoring version.<ul><li>1m: monitoring with the 1-minute granularity. Currently, this monitoring granularity is unavailable. For details, see [1-Minute Granularity Will Be Disused](https://intl.cloud.tencent.com/document/product/239/80653?from_cn_redirect=1).</li><li>5s: monitoring with the 5-second granularity.</li></ul>
 	MonitorVersion *string `json:"MonitorVersion,omitnil,omitempty" name:"MonitorVersion"`
 
 	// Minimum value that can be set for the maximum number of client connections.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	ClientLimitMin *int64 `json:"ClientLimitMin,omitnil,omitempty" name:"ClientLimitMin"`
 
 	// Maximum value that can be set for the maximum number of client connections.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	ClientLimitMax *int64 `json:"ClientLimitMax,omitnil,omitempty" name:"ClientLimitMax"`
 
-	// Detailed node information of an instance.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Node details of the instance.
+	// 
+	// It is returned only for multi-AZ instances.
 	NodeSet []*RedisNodeInfo `json:"NodeSet,omitnil,omitempty" name:"NodeSet"`
 
-	// Region information of an instance, for example, ap-guangzhou.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Region information on the instance. For example, ap-guangzhou.
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// Public network address.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	WanAddress *string `json:"WanAddress,omitnil,omitempty" name:"WanAddress"`
 
-	// Polaris service address, which is for internal use.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Polaris service address for internal use.
 	PolarisServer *string `json:"PolarisServer,omitnil,omitempty" name:"PolarisServer"`
 
-	// CDC Redis cluster ID.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// CDC cluster ID of TencentDB for Redis®.
 	RedisClusterId *string `json:"RedisClusterId,omitnil,omitempty" name:"RedisClusterId"`
 
 	// CDC cluster ID.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	DedicatedClusterId *string `json:"DedicatedClusterId,omitnil,omitempty" name:"DedicatedClusterId"`
 
-	// Product edition. <ul><li>local: local disk;</li> <li>cloud: cloud disk;</li> <li>cdc: CDC cluster.</li></ul>
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Product edition.<ul><li>local: local disk.</li><li>cloud: cloud disk edition.</li><li>cdc: CDC cluster edition.</li></ul>
 	ProductVersion *string `json:"ProductVersion,omitnil,omitempty" name:"ProductVersion"`
 
-	// Current Proxy version of an instance.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Current proxy version of the instance.
 	CurrentProxyVersion *string `json:"CurrentProxyVersion,omitnil,omitempty" name:"CurrentProxyVersion"`
 
-	// Current Cache minor version of an instance. If the instance joins a global replication group, the kernel version of the global replication group will be displayed.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Current cache minor version of the instance. If the instance is added to a global replication group, the global replication kernel version is displayed.
 	CurrentRedisVersion *string `json:"CurrentRedisVersion,omitnil,omitempty" name:"CurrentRedisVersion"`
 
-	// Upgradable Proxy version of an instance.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Upgradable proxy version for the instance.
 	UpgradeProxyVersion *string `json:"UpgradeProxyVersion,omitnil,omitempty" name:"UpgradeProxyVersion"`
 
-	// Upgradable Cache minor version of an instance.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Upgradable cache minor version for the instance.
 	UpgradeRedisVersion *string `json:"UpgradeRedisVersion,omitnil,omitempty" name:"UpgradeRedisVersion"`
 
-	// Backup mode. SecondLevelBackup: second-level backup; NormalLevelBackup: normal backup.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Backup mode. - SecondLevelBackup: second-level backup. - NormalLevelBackup: ordinary backup.
 	BackupMode *string `json:"BackupMode,omitnil,omitempty" name:"BackupMode"`
 }
 
@@ -7129,8 +7179,7 @@ type Instances struct {
 	// Shard memory size.
 	RedisShardSize *int64 `json:"RedisShardSize,omitnil,omitempty" name:"RedisShardSize"`
 
-	// Instance disk size
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance disk size.
 	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
 	// Engine: Redis Community Edition, Tencent Cloud CKV.
@@ -7142,12 +7191,10 @@ type Instances struct {
 	// Instance VIP
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
-	// Due to the naming irregularity of this parameter, it is recommended to use the parameter IPv6 instead. Internal parameters, which can be ignored by users.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// This parameter encounters a naming issue. It is recommended to use the parameter IPv6 instead. It is an internal parameter and can be ignored.
 	Vip6 *string `json:"Vip6,omitnil,omitempty" name:"Vip6"`
 
-	// Internal parameters, which can be ignored by users.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Internal parameter, which can be ignored.
 	IPv6 *string `json:"IPv6,omitnil,omitempty" name:"IPv6"`
 
 	// VPC ID, such as `75101`.
@@ -7256,21 +7303,16 @@ func (r *KillMasterGroupResponse) FromJsonString(s string) error {
 }
 
 type LogDeliveryInfo struct {
-	// Whether log shipping is enabled. true: enabled; false: disabled.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Enabling status of log shipping. true: enabled; false: disabled.
 	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// Logset ID.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Log set ID.
 	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 
 	// Log topic ID.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Logset region
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	LogRegion *string `json:"LogRegion,omitnil,omitempty" name:"LogRegion"`
 }
 
@@ -7353,10 +7395,10 @@ type ModfiyInstancePasswordRequestParams struct {
 	// Old password of an instance
 	OldPassword *string `json:"OldPassword,omitnil,omitempty" name:"OldPassword"`
 
-	// New instance password, which has the following requirements:
-	// - It must contain 8-30 characters, preferably 12 or more.
-	// - It cannot start with a slash (/)
-	// - It must contain two of the following three types: lowercase letters, uppercase letters, and symbols (()~!@#$%^&*-+=_|{}[]:;<>,.?/)
+	// New instance password. The password complexity requirements are as follows:
+	//  - It should contain 8 to 64 characters. 12 or more characters are recommended.
+	//  - It cannot start with a forward slash (/).
+	//  - It should contain at least two of the following types: lowercase letters (a–z), uppercase letters (A–Z), digits (0–9), and special characters (such as ()~!@#$%^&*-+=_|{}[]:;<>,.?/).
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 }
 
@@ -7369,10 +7411,10 @@ type ModfiyInstancePasswordRequest struct {
 	// Old password of an instance
 	OldPassword *string `json:"OldPassword,omitnil,omitempty" name:"OldPassword"`
 
-	// New instance password, which has the following requirements:
-	// - It must contain 8-30 characters, preferably 12 or more.
-	// - It cannot start with a slash (/)
-	// - It must contain two of the following three types: lowercase letters, uppercase letters, and symbols (()~!@#$%^&*-+=_|{}[]:;<>,.?/)
+	// New instance password. The password complexity requirements are as follows:
+	//  - It should contain 8 to 64 characters. 12 or more characters are recommended.
+	//  - It cannot start with a forward slash (/).
+	//  - It should contain at least two of the following types: lowercase letters (a–z), uppercase letters (A–Z), digits (0–9), and special characters (such as ()~!@#$%^&*-+=_|{}[]:;<>,.?/).
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 }
 
@@ -7692,9 +7734,11 @@ type ModifyDBInstanceSecurityGroupsRequestParams struct {
 	// Database engine name, which is `redis` for this API.
 	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
-	// Security group ID list. Replace it with a new one, which is an array of one or more security group IDs.
-	// - To configure a security group for an instance for the first time, bind the security group through the API [AssociateSecurityGroups](https://intl.cloud.tencent.com/document/product/239/41260?from_cn_redirect=1) first.
+	// Replaces with the new security group ID list, which is an array of one or more security group IDs.
+	// - To configure a security group for an instance for the first time, call the API [AssociateSecurityGroups](https://www.tencentcloud.comom/document/product/239/41260?from_cn_redirect=1) to bind a security group first.
 	// - To replace the security group, obtain the security group ID on the [security group](https://console.tencentcloud.com/vpc/security-group) page of the console.
+	// 
+	// **Note:** This input parameter performs a full replacement on all existing collections but not an incremental update. To modify it, import the expected full collections.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
 	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
@@ -7707,9 +7751,11 @@ type ModifyDBInstanceSecurityGroupsRequest struct {
 	// Database engine name, which is `redis` for this API.
 	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
-	// Security group ID list. Replace it with a new one, which is an array of one or more security group IDs.
-	// - To configure a security group for an instance for the first time, bind the security group through the API [AssociateSecurityGroups](https://intl.cloud.tencent.com/document/product/239/41260?from_cn_redirect=1) first.
+	// Replaces with the new security group ID list, which is an array of one or more security group IDs.
+	// - To configure a security group for an instance for the first time, call the API [AssociateSecurityGroups](https://www.tencentcloud.comom/document/product/239/41260?from_cn_redirect=1) to bind a security group first.
 	// - To replace the security group, obtain the security group ID on the [security group](https://console.tencentcloud.com/vpc/security-group) page of the console.
+	// 
+	// **Note:** This input parameter performs a full replacement on all existing collections but not an incremental update. To modify it, import the expected full collections.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
 	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
@@ -7952,6 +7998,74 @@ func (r *ModifyInstanceAvailabilityZonesResponse) FromJsonString(s string) error
 }
 
 // Predefined struct for user
+type ModifyInstanceBackupModeRequestParams struct {
+	// Instance ID, which can contain 12 to 36 characters.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Backup mode:
+	//  - SecondLevelBackup: second-level backup.
+	//  - NormalLevelBackup: ordinary backup.
+	BackupMode *string `json:"BackupMode,omitnil,omitempty" name:"BackupMode"`
+}
+
+type ModifyInstanceBackupModeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID, which can contain 12 to 36 characters.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Backup mode:
+	//  - SecondLevelBackup: second-level backup.
+	//  - NormalLevelBackup: ordinary backup.
+	BackupMode *string `json:"BackupMode,omitnil,omitempty" name:"BackupMode"`
+}
+
+func (r *ModifyInstanceBackupModeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyInstanceBackupModeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "BackupMode")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyInstanceBackupModeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyInstanceBackupModeResponseParams struct {
+	// Task ID.
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyInstanceBackupModeResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyInstanceBackupModeResponseParams `json:"Response"`
+}
+
+func (r *ModifyInstanceBackupModeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyInstanceBackupModeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyInstanceEventRequestParams struct {
 	// Specifies the instance ID. Example: crs-xjhsdj****. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis#/) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -8056,16 +8170,16 @@ type ModifyInstanceLogDeliveryRequestParams struct {
 	// - false: disabled.
 	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// ID of the shipped logset, which can be obtained through the sub-parameter **LogsetId** of the response parameter **SlowLog** of the API [DescribeInstanceLogDelivery](https://intl.cloud.tencent.com/document/product/239/110878?from_cn_redirect=1).
+	// ID of the shipped logset. It can be obtained through the API [DescribeLogsets](https://intl.cloud.tencent.com/document/api/614/58624?from_cn_redirect=1).
 	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 
-	// ID of the shipped log topic, which can be obtained through the sub-parameter **TopicId** of the response parameter **SlowLog** of the API [DescribeInstanceLogDelivery](https://intl.cloud.tencent.com/document/product/239/110878?from_cn_redirect=1).
+	// ID of the shipped log topic. It can be obtained through the API [DescribeTopics](https://intl.cloud.tencent.com/document/api/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Logset name. If **LogsetId** is not specified, this parameter needs to be configured and the system will automatically create a logset with the specified name.
+	// Logset name. It is required when **LogsetId** is left blank. The system will create a logset with the value of LogsetName and ship logs.
 	LogsetName *string `json:"LogsetName,omitnil,omitempty" name:"LogsetName"`
 
-	// Log topic name. This parameter is required when TopicId is empty, and the system will automatically create a log topic.
+	// Log topic name. It is required when **TopicId** is left blank. The system will create a log topic with the value of TopicName and ship logs.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
 	// Region where the logset is located. If it is not provided, the region where the instance is located will be used by default.
@@ -8092,16 +8206,16 @@ type ModifyInstanceLogDeliveryRequest struct {
 	// - false: disabled.
 	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// ID of the shipped logset, which can be obtained through the sub-parameter **LogsetId** of the response parameter **SlowLog** of the API [DescribeInstanceLogDelivery](https://intl.cloud.tencent.com/document/product/239/110878?from_cn_redirect=1).
+	// ID of the shipped logset. It can be obtained through the API [DescribeLogsets](https://intl.cloud.tencent.com/document/api/614/58624?from_cn_redirect=1).
 	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 
-	// ID of the shipped log topic, which can be obtained through the sub-parameter **TopicId** of the response parameter **SlowLog** of the API [DescribeInstanceLogDelivery](https://intl.cloud.tencent.com/document/product/239/110878?from_cn_redirect=1).
+	// ID of the shipped log topic. It can be obtained through the API [DescribeTopics](https://intl.cloud.tencent.com/document/api/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Logset name. If **LogsetId** is not specified, this parameter needs to be configured and the system will automatically create a logset with the specified name.
+	// Logset name. It is required when **LogsetId** is left blank. The system will create a logset with the value of LogsetName and ship logs.
 	LogsetName *string `json:"LogsetName,omitnil,omitempty" name:"LogsetName"`
 
-	// Log topic name. This parameter is required when TopicId is empty, and the system will automatically create a log topic.
+	// Log topic name. It is required when **TopicId** is left blank. The system will create a log topic with the value of TopicName and ship logs.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
 	// Region where the logset is located. If it is not provided, the region where the instance is located will be used by default.
@@ -8974,16 +9088,13 @@ type ParameterDetail struct {
 	// - `1`: Restart required.
 	NeedReboot *int64 `json:"NeedReboot,omitnil,omitempty" name:"NeedReboot"`
 
-	// Maximum value of the parameter
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Maximum parameter value allowed.
 	Max *string `json:"Max,omitnil,omitempty" name:"Max"`
 
-	// Minimum value of the parameter
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Minimum parameter value allowed.
 	Min *string `json:"Min,omitnil,omitempty" name:"Min"`
 
-	// Enumerated values of the parameter. It is null if the parameter is non-enumerated
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Optional enumeration values of a parameter. For non-enumeration parameters, it is empty.
 	EnumValue []*string `json:"EnumValue,omitnil,omitempty" name:"EnumValue"`
 }
 
@@ -9045,20 +9156,17 @@ type ProductConf struct {
 	// Deprecated: EnableRepicaReadOnly is deprecated.
 	EnableRepicaReadOnly *bool `json:"EnableRepicaReadOnly,omitnil,omitempty" name:"EnableRepicaReadOnly"`
 
-	// Whether the Read-Only Replica is supported.
-	// - true: Supported.
-	// - false: Not supported.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Whether read-only replica is supported.
+	//  - true: read-only replica supported.
+	//  - false: not supported.
 	EnableReplicaReadOnly *bool `json:"EnableReplicaReadOnly,omitnil,omitempty" name:"EnableReplicaReadOnly"`
 }
 
 type ProxyNodes struct {
-	// Node ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Node ID.
 	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
 
-	// AZ ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// AZ ID.
 	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
@@ -9082,15 +9190,12 @@ type RedisBackupSet struct {
 	Locked *int64 `json:"Locked,omitnil,omitempty" name:"Locked"`
 
 	// Internal field, which can be ignored.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	BackupSize *int64 `json:"BackupSize,omitnil,omitempty" name:"BackupSize"`
 
 	// Internal field, which can be ignored.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	FullBackup *int64 `json:"FullBackup,omitnil,omitempty" name:"FullBackup"`
 
 	// Internal field, which can be ignored.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
 	// Instance ID
@@ -9167,48 +9272,50 @@ type RedisCommonInstanceList struct {
 
 type RedisInstanceEvent struct {
 	// Event ID.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
-	// Instance ID.Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance name.Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance name.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Event type. Currently, the type can only be related to instance migration, resource movement, and IDC deletion. This parameter can be only set to **InstanceMigration**.Note: This field may return null, indicating that no valid values can be obtained.
+	// Event type. Currently, the type can only be related to instance migration, resource movement, and IDC deletion. This parameter can be set only to **InstanceMigration**.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Event levels are divided into Critical, High, Medium, and Low events according to the severity and urgency.- Critical
-	// - High
-	// - Middle
-	// - Low
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Event level. The levels are divided into critical, important, medium, and general based on severity and urgency.
+	//  - Critical: critical.
+	//  - High: important.
+	//  - Middle: medium.
+	//  - Low.
 	Grade *string `json:"Grade,omitnil,omitempty" name:"Grade"`
 
-	// Scheduled event execution date.Note: This field may return null, indicating that no valid values can be obtained.
+	// Scheduled event execution date.
 	ExecutionDate *string `json:"ExecutionDate,omitnil,omitempty" name:"ExecutionDate"`
 
-	// Scheduled start time of event execution.Note: This field may return null, indicating that no valid values can be obtained.
+	// Start date of scheduled event execution.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Scheduled end time of event execution.Note: This field may return null, indicating that no valid values can be obtained.
+	// End date of scheduled event execution.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// The latest execution date of the operations event. Event execution must be completed before this date. Otherwise, the business may be affected.Note: This field may return null, indicating that no valid values can be obtained.
+	// Latest execution date of the Ops event. The event should be completed before this date. Otherwise, the business may be affected.
 	LatestExecutionDate *string `json:"LatestExecutionDate,omitnil,omitempty" name:"LatestExecutionDate"`
 
-	// Current event status.- Waiting: The event is waiting for execution on the execution date or during the operations period.- Running: The event is being executed during the operations period.- Finished: Execution of the event operations is completed.- Canceled: Execution of the event is canceled.Note: This field may return null, indicating that no valid values can be obtained.
+	// Current event status.
+	//  - Waiting: event not reached the execution date or not within the maintenance window.
+	//  - Running: event within the maintenance window and under maintenance execution.
+	//  - Finished: event with maintenance completed.
+	// - Canceled: Execution of the event is canceled.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Completion time of the event execution task.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	TaskEndTime *string `json:"TaskEndTime,omitnil,omitempty" name:"TaskEndTime"`
 
-	// Impact of the event.Note: This field may return null, indicating that no valid values can be obtained.
+	// Event impact information.
 	EffectInfo *string `json:"EffectInfo,omitnil,omitempty" name:"EffectInfo"`
 
-	// Initial scheduled execution date of the event.Note: This field may return null, indicating that no valid values can be obtained.
+	// Initial scheduled event execution date.
 	InitialExecutionDate *string `json:"InitialExecutionDate,omitnil,omitempty" name:"InitialExecutionDate"`
 }
 
@@ -9331,6 +9438,60 @@ func (r *ReleaseWanAddressResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ReleaseWanAddressResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RemoveReplicationGroupRequestParams struct {
+	// Replication group ID.
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+}
+
+type RemoveReplicationGroupRequest struct {
+	*tchttp.BaseRequest
+	
+	// Replication group ID.
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+}
+
+func (r *RemoveReplicationGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RemoveReplicationGroupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GroupId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RemoveReplicationGroupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RemoveReplicationGroupResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type RemoveReplicationGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *RemoveReplicationGroupResponseParams `json:"Response"`
+}
+
+func (r *RemoveReplicationGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RemoveReplicationGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9662,6 +9823,14 @@ func (r *RestoreInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type SecondLevelBackupMissingTimestamps struct {
+	// Start timestamp.
+	StartTimeStamp *int64 `json:"StartTimeStamp,omitnil,omitempty" name:"StartTimeStamp"`
+
+	// End timestamp.
+	EndTimeStamp *int64 `json:"EndTimeStamp,omitnil,omitempty" name:"EndTimeStamp"`
+}
+
 type SecurityGroup struct {
 	// Creation time in the format of yyyy-mm-dd hh:mm:ss.
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
@@ -9956,6 +10125,9 @@ type SwitchProxyRequestParams struct {
 
 	// Proxy ID of an instance, which can be obtained through NodeId of the response parameter **Proxy** of the API [DescribeInstanceNodeInfo](https://intl.cloud.tencent.com/document/product/239/48603?from_cn_redirect=1).
 	ProxyID *string `json:"ProxyID,omitnil,omitempty" name:"ProxyID"`
+
+	// Instance proxy ID list. Call the API [DescribeInstanceNodeInfo](https://www.tencentcloud.comom/document/product/239/48603?from_cn_redirect=1) to obtain IDs from **NodeId** in the **Proxy** response parameter.
+	ProxyIDList []*string `json:"ProxyIDList,omitnil,omitempty" name:"ProxyIDList"`
 }
 
 type SwitchProxyRequest struct {
@@ -9966,6 +10138,9 @@ type SwitchProxyRequest struct {
 
 	// Proxy ID of an instance, which can be obtained through NodeId of the response parameter **Proxy** of the API [DescribeInstanceNodeInfo](https://intl.cloud.tencent.com/document/product/239/48603?from_cn_redirect=1).
 	ProxyID *string `json:"ProxyID,omitnil,omitempty" name:"ProxyID"`
+
+	// Instance proxy ID list. Call the API [DescribeInstanceNodeInfo](https://www.tencentcloud.comom/document/product/239/48603?from_cn_redirect=1) to obtain IDs from **NodeId** in the **Proxy** response parameter.
+	ProxyIDList []*string `json:"ProxyIDList,omitnil,omitempty" name:"ProxyIDList"`
 }
 
 func (r *SwitchProxyRequest) ToJsonString() string {
@@ -9982,6 +10157,7 @@ func (r *SwitchProxyRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceId")
 	delete(f, "ProxyID")
+	delete(f, "ProxyIDList")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SwitchProxyRequest has unknown keys!", "")
 	}
@@ -9990,6 +10166,9 @@ func (r *SwitchProxyRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SwitchProxyResponseParams struct {
+	// Task ID.
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -10011,96 +10190,94 @@ func (r *SwitchProxyResponse) FromJsonString(s string) error {
 }
 
 type TaskInfoDetail struct {
-	// Task ID 
-	// Note:  This field may return null, indicating that no valid values can be obtained.
+	// Task ID.
 	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Task start time 
-	// Note:  This field may return null, indicating that no valid values can be obtained.
+	// Task start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Task type.
 	// 
-	// - FLOW_CREATE: "001" - Create an instance.
-	// - FLOW_RESIZE: "002" - Change the configuration.
-	// - FLOW_CLOSE: "003" - Close an instance.
-	// - FLOW_CLEAN: "004" - Clear an instance.
-	// - FLOW_STARTUP: "005" - Enable an instance.
-	// - FLOW_DELETE: "006" - Delete an instance.
-	// - FLOW_SETPWD: "007" - Reset the password.
-	// - FLOW_EXPORTBACKUP: "009" - Export the backup file.
-	// - FLOW_RESTOREBACKUP: "010" - Restore the backup.
-	// - FLOW_BACKUPINSTANCE: "012" - Back up an instance.
-	// - FLOW_MIGRATEINSTANCE: "013" - Migrate an instance.
-	// - FLOW_DELBACKUP: "014" - Delete the backup.
-	// - FLOW_EXCHANGEINSTANCE: "016" - Switch an instance.
-	// - FLOW_AUTOBACKUP: "017" - Automatically backup an instance.
-	// - FLOW_MIGRATECHECK: "022" - Verify migration parameters.
-	// - FLOW_MIGRATETASK: "023" - Migrating data is in progress.
-	// - FLOW_CLEANDB: "025" - Clear a database.
-	// - FLOW_CLONEBACKUP: "026" - Clone the backup.
-	// - FLOW_CHANGEVIP: "027" - Change the VIP.
-	// - FLOW_EXPORSHR: "028" - Perform scaling.
-	// - FLOW_ADDNODES: "029" - Add or remove a node.
-	// - FLOW_CHANGENET: "031" - Change the network type.
-	// - FLOW_MODIFYINSTACEREADONLY: "033" - Modify the read-only policy.
-	// - FLOW_MODIFYINSTANCEPARAMS: "034" - Modify instance parameters.
-	// - FLOW_MODIFYINSTANCEPASSWORDFREE: "035" - Set password-free access.
-	// - FLOW_SWITCHINSTANCEVIP: "036" - Switch the instance VIP.
-	// - FLOW_MODIFYINSTANCEACCOUNT: "037" - Modify the instance account.
-	// - FLOW_MODIFYINSTANCEBANDWIDTH: "038" - Modify the instance bandwidth.
-	// - FLOW_ENABLEINSTANCE_REPLICATE: "039" - Enable read-only replica.
-	// - FLOW_DISABLEINSTANCE_REPLICATE: "040" - Disable read-only replica.
-	// - FLOW_UpgradeArch: "041" - Upgrade the instance architecture from primary-secondary to cluster.
-	// - FLOW_DowngradeArch: "042" - Downgrade the instance architecture from cluster to primary-secondary.
-	// - FLOW_UpgradeVersion: "043" - Upgrade the version.
-	// - FLOW_MODIFYCONNECTIONCONFIG: "044" - Modify the number of bandwidth connections.
-	// - FLOW_CLEARNETWORK: "045" - Change the network.
-	// - FLOW_REMOVE_BACKUP_FILE: "046" - Delete the backup.
-	// - FLOW_UPGRADE_SUPPORT_MULTI_AZ: "047" - Upgrade an instance to support multiple AZs.
-	// - FLOW_SHUTDOWN_MASTER: "048" - Simulate a fault.
-	// - FLOW_CHANGE_REPLICA_TO_MASTER: "049" - Manually promote the replica node to the primary node.
-	// - FLOW_CODE_ADD_REPLICATION_INSTANCE: "050" - Add a replication group.
-	// - FLOW_OPEN_WAN: "052" - Enable the public network.
-	// - FLOW_CLOSE_WAN: "053" - Disable the public network. - FLOW_UPDATE_WAN: "054" - Update the public network.
-	// - FLOW_CODE_DELETE_REPLICATION_INSTANCE: "055" - Unbind the replication group.
-	// - FLOW_CODE_CHANGE_MASTER_INSTANCE: "056" - Switch to the primary instance in the replication group.
-	// - FLOW_CODE_CHANGE_INSTANCE_ROLE: "057" - Change the roles of instances in the replication group.
-	// - FLOW_MIGRATE_NODE: "058" - Migrate a node.
-	// - FLOW_SWITCH_NODE: "059" - Switch a node.
-	// - FLOW_UPGRADE_SMALL_VERSION: "060" - Upgrade the Redis version.
-	// - FLOW_UPGRADE_PROXY_VERSION: "061" - Upgrade the Proxy version.
-	// - FLOW_MODIFY_INSTANCE_NETWORK: "062" - Modify the instance network.
-	// - FLOW_MIGRATE_PROXY_NODE: "063" - Migrate the Proxy node.
-	// - FLOW_MIGRATION_INSTANCE_ZONE: "066" - Migrate the instance AZ in progress.
-	// - FLOW_UPGRADE_INSTANCE_CACHE_AND_PROXY: "067" - Upgrading the instance version is in progress.
-	// - FLOW_MODIFY_PROXY_NUM: "069" - Add or remove a Proxy node.
-	// - FLOW_MODIFYBACKUPMOD: "070" - Change the instance backup mode.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// - FLOW_CREATE: "001", indicating instance creation.
+	// - FLOW_RESIZE: "002", indicating configuration modification.
+	// - FLOW_CLOSE: "003", indicating instance disabling.
+	// - FLOW_CLEAN: "004", indicating instance cleanup.
+	// - FLOW_STARTUP: "005", indicating instance enabling.
+	// - FLOW_DELETE: "006", indicating instance deletion.
+	// - FLOW_SETPWD: "007", indicating password reset.
+	// - FLOW_EXPORTBACKUP: "009", indicating backup file export.
+	// - FLOW_RESTOREBACKUP: "010", indicating backup restoration.
+	// - FLOW_BACKUPINSTANCE: "012", indicating instance backup.
+	// - FLOW_MIGRATEINSTANCE: "013", indicating instance migration.
+	// - FLOW_DELBACKUP: "014", indicating backup deletion.
+	// - FLOW_EXCHANGEINSTANCE: "016", indicating instance switch.
+	// - FLOW_AUTOBACKUP: "017", indicating automatic instance backup.
+	// - FLOW_MIGRATECHECK: "022", indicating migration parameter verification.
+	// - FLOW_MIGRATETASK: "023", indicating that data migration is in progress.
+	// - FLOW_CLEANDB: "025", indicating database cleanup.
+	// - FLOW_CLONEBACKUP: "026": indicating backup cloning.
+	// - FLOW_CHANGEVIP: "027", indicating VIP address modification.
+	// - FLOW_EXPORSHR: "028", indicating scaling.
+	// - FLOW_ADDNODES: "029", indicating node addition (removal).
+	// - FLOW_CHANGENET: "031", indicating network type modification.
+	// - FLOW_MODIFYINSTACEREADONLY: "033": indicating read-only policy modification.
+	// - FLOW_MODIFYINSTANCEPARAMS: "034", indicating instance parameter modification.
+	// - FLOW_MODIFYINSTANCEPASSWORDFREE: "035", indicating password-free access settings.
+	// - FLOW_SWITCHINSTANCEVIP: "036", indicating instance VIP address switch.
+	// - FLOW_MODIFYINSTANCEACCOUNT: "037", indicating instance account modification.
+	// - FLOW_MODIFYINSTANCEBANDWIDTH: "038", indicating instance bandwidth modification.
+	// - FLOW_ENABLEINSTANCE_REPLICATE: "039", indicating enabling of read-only replica.
+	// - FLOW_DISABLEINSTANCE_REPLICATE: "040", indicating disabling of read-only replica.
+	// - FLOW_UpgradeArch: "041", indicating instance architecture upgrade from the standard architecture to the cluster architecture.
+	// - FLOW_DowngradeArch: "042", indicating instance architecture downgrade from the cluster architecture to the standard architecture.
+	// - FLOW_UpgradeVersion: "043", indicating version upgrade.
+	// - FLOW_MODIFYCONNECTIONCONFIG: "044", indicating adjustment of the bandwidth and the number of connections.
+	// - FLOW_CLEARNETWORK: "045", indicating network change.
+	// - FLOW_REMOVE_BACKUP_FILE: "046", indicating backup deletion.
+	// - FLOW_UPGRADE_SUPPORT_MULTI_AZ: "047", indicating instance upgrade to multi-AZ deployment.
+	// - FLOW_SHUTDOWN_MASTER: "048", indicating fault simulation.
+	// - FLOW_CHANGE_REPLICA_TO_MASTER: "049", indicating manual promotion to the primary node.
+	// - FLOW_CODE_ADD_REPLICATION_INSTANCE: "050", indicating replication group addition.
+	// - FLOW_OPEN_WAN: "052", indicating enabling of public network access.
+	// - FLOW_CLOSE_WAN: "053", indicating disabling of public network access.
+	// - FLOW_CODE_DELETE_REPLICATION_INSTANCE: "055", indicating replication group unbinding.
+	// - FLOW_CODE_CHANGE_MASTER_INSTANCE: "056", indicating switching a replication group instance to the primary instance.
+	// - FLOW_CODE_CHANGE_INSTANCE_ROLE: "057", indicating modification of the replication group instance role.
+	// - FLOW_MIGRATE_NODE: "058", indicating node migration.
+	// - FLOW_SWITCH_NODE: "059", indicating node switch.
+	// - FLOW_UPGRADE_SMALL_VERSION: "060", indicating Redis version upgrade.
+	// - FLOW_UPGRADE_PROXY_VERSION: "061", indicating proxy version upgrade.
+	// - FLOW_MODIFY_INSTANCE_NETWORK: "062", indicating instance network modification.
+	// - FLOW_MIGRATE_PROXY_NODE: "063", indicating proxy node migration.
+	// - FLOW_MIGRATION_INSTANCE_ZONE: "066", indicating that instance migration to another AZ is in progress.
+	// - FLOW_UPGRADE_INSTANCE_CACHE_AND_PROXY: "067", indicating that instance version upgrade is in progress.
+	// - FLOW_MODIFY_PROXY_NUM: "069", indicating proxy node addition (removal).
+	// - FLOW_MODIFYBACKUPMOD: "070", indicating instance backup mode modification.
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-	// Instance name 
-	// Note:  This field may return null, indicating that no valid values can be obtained.
+	// Instance name.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Instance ID 
-	// Note:  This field may return null, indicating that no valid values can be obtained.
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Project ID 
-	// Note:  This field may return null, indicating that no valid values can be obtained.
+	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Task progress 
-	// Note:  This field may return null, indicating that no valid values can be obtained.
+	// Task progress.
 	Progress *float64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
-	// Task end time 
-	// Note:  This field may return null, indicating that no valid values can be obtained.
+	// Task execution end time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Task execution status. Valid values: - `0` (initilized) - `1` (executing) - `2` (completed) - `4` (failed) 
-	// Note:  This field may return null, indicating that no valid values can be obtained.
+	// Task execution status.
+	// 
+	// 
+	// 
+	// 0: initializing the task.
+	// 1: executing.
+	// 2. completed.
+	// 4: failed.
 	Result *int64 `json:"Result,omitnil,omitempty" name:"Result"`
 }
 
@@ -10172,7 +10349,7 @@ type TradeDealDetail struct {
 
 // Predefined struct for user
 type UpgradeInstanceRequestParams struct {
-	// The ID of instance to be modified.
+	// ID of the instance whose configuration is to be modified. Log in to the [TencentDB for Redis® console](https://console.cloud.tencent.com/Redis/instance/list) and copy the instance ID from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// New memory size of an instance shard. <ul><li>Unit: MB. </li><li>You can only modify one of the three parameters at a time: `MemSize`, `RedisShardNum`, and `RedisReplicasNum`. To modify one of them, you need to enter the other two, which are consistent with the original configuration specifications of the instance. </li><li>In case of capacity reduction, the new specification must be at least 1.3 times the used capacity; otherwise, the operation will fail.</li></ul>
@@ -10186,12 +10363,17 @@ type UpgradeInstanceRequestParams struct {
 
 	// Node information set when you add a replica for multi-AZ instances, including the ID and AZ information of the replica. This parameter is not required for non-multi-AZ instances.
 	NodeSet []*RedisNodeInfo `json:"NodeSet,omitnil,omitempty" name:"NodeSet"`
+
+	// Switch time.
+	//  - 1: Perform the operation within the maintenance window: Specification upgrade is executed within the set maintenance window. Use the API [DescribeMaintenanceWindow](https://intl.cloud.tencent.com/document/product/239/46336?from_cn_redirect=1) to query the time period of the set maintenance window. Replica addition/removal, shard addition/removal, and memory capacity expansion/shrinkage are supported within the maintenance window. Specification upgrade within the maintenance window is being gradually tested and published by region. It is already supported in some regions. For urgent integration in regions that do not support it, [submit a ticket](https://console.cloud.tencent.com/workorder/category) to apply for an allowlist.
+	//  -2: Perform the operation immediately: The operation will be performed immediately, without the need to wait for the maintenance window. Operations will be performed immediately by default for the system.
+	SwitchOption *uint64 `json:"SwitchOption,omitnil,omitempty" name:"SwitchOption"`
 }
 
 type UpgradeInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// The ID of instance to be modified.
+	// ID of the instance whose configuration is to be modified. Log in to the [TencentDB for Redis® console](https://console.cloud.tencent.com/Redis/instance/list) and copy the instance ID from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// New memory size of an instance shard. <ul><li>Unit: MB. </li><li>You can only modify one of the three parameters at a time: `MemSize`, `RedisShardNum`, and `RedisReplicasNum`. To modify one of them, you need to enter the other two, which are consistent with the original configuration specifications of the instance. </li><li>In case of capacity reduction, the new specification must be at least 1.3 times the used capacity; otherwise, the operation will fail.</li></ul>
@@ -10205,6 +10387,11 @@ type UpgradeInstanceRequest struct {
 
 	// Node information set when you add a replica for multi-AZ instances, including the ID and AZ information of the replica. This parameter is not required for non-multi-AZ instances.
 	NodeSet []*RedisNodeInfo `json:"NodeSet,omitnil,omitempty" name:"NodeSet"`
+
+	// Switch time.
+	//  - 1: Perform the operation within the maintenance window: Specification upgrade is executed within the set maintenance window. Use the API [DescribeMaintenanceWindow](https://intl.cloud.tencent.com/document/product/239/46336?from_cn_redirect=1) to query the time period of the set maintenance window. Replica addition/removal, shard addition/removal, and memory capacity expansion/shrinkage are supported within the maintenance window. Specification upgrade within the maintenance window is being gradually tested and published by region. It is already supported in some regions. For urgent integration in regions that do not support it, [submit a ticket](https://console.cloud.tencent.com/workorder/category) to apply for an allowlist.
+	//  -2: Perform the operation immediately: The operation will be performed immediately, without the need to wait for the maintenance window. Operations will be performed immediately by default for the system.
+	SwitchOption *uint64 `json:"SwitchOption,omitnil,omitempty" name:"SwitchOption"`
 }
 
 func (r *UpgradeInstanceRequest) ToJsonString() string {
@@ -10224,6 +10411,7 @@ func (r *UpgradeInstanceRequest) FromJsonString(s string) error {
 	delete(f, "RedisShardNum")
 	delete(f, "RedisReplicasNum")
 	delete(f, "NodeSet")
+	delete(f, "SwitchOption")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeInstanceRequest has unknown keys!", "")
 	}

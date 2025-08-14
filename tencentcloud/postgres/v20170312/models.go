@@ -1077,6 +1077,9 @@ type CreateInstancesRequestParams struct {
 	// For more information on `KMSRegion`, see [Enabling TDE](https://intl.cloud.tencent.com/document/product/409/71749?from_cn_redirect=1).
 	KMSRegion *string `json:"KMSRegion,omitnil,omitempty" name:"KMSRegion"`
 
+
+	KMSClusterId *string `json:"KMSClusterId,omitnil,omitempty" name:"KMSClusterId"`
+
 	// Database engine, which supports:
 	// <li>`postgresql`: TencentDB for PostgreSQL</li>
 	// <li>`mssql_compatible`: MSSQL compatible - TencentDB for PostgreSQL</li>
@@ -1220,6 +1223,8 @@ type CreateInstancesRequest struct {
 	// For more information on `KMSRegion`, see [Enabling TDE](https://intl.cloud.tencent.com/document/product/409/71749?from_cn_redirect=1).
 	KMSRegion *string `json:"KMSRegion,omitnil,omitempty" name:"KMSRegion"`
 
+	KMSClusterId *string `json:"KMSClusterId,omitnil,omitempty" name:"KMSClusterId"`
+
 	// Database engine, which supports:
 	// <li>`postgresql`: TencentDB for PostgreSQL</li>
 	// <li>`mssql_compatible`: MSSQL compatible - TencentDB for PostgreSQL</li>
@@ -1288,6 +1293,7 @@ func (r *CreateInstancesRequest) FromJsonString(s string) error {
 	delete(f, "NeedSupportTDE")
 	delete(f, "KMSKeyId")
 	delete(f, "KMSRegion")
+	delete(f, "KMSClusterId")
 	delete(f, "DBEngine")
 	delete(f, "DBEngineConfig")
 	delete(f, "SyncMode")
@@ -1481,8 +1487,13 @@ type CreateReadOnlyDBInstanceRequestParams struct {
 	// Instance name (which will be supported in the future)
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// (Disused) You don’t need to specify a version, as the kernel version is as the same as that of the instance.
+	// (Disused) You don't need to specify a version, as the kernel version is as the same as that of the instance.
+	//
+	// Deprecated: DBVersion is deprecated.
 	DBVersion *string `json:"DBVersion,omitnil,omitempty" name:"DBVersion"`
+
+
+	DedicatedClusterId *string `json:"DedicatedClusterId,omitnil,omitempty" name:"DedicatedClusterId"`
 }
 
 type CreateReadOnlyDBInstanceRequest struct {
@@ -1560,8 +1571,10 @@ type CreateReadOnlyDBInstanceRequest struct {
 	// Instance name (which will be supported in the future)
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// (Disused) You don’t need to specify a version, as the kernel version is as the same as that of the instance.
+	// (Disused) You don't need to specify a version, as the kernel version is as the same as that of the instance.
 	DBVersion *string `json:"DBVersion,omitnil,omitempty" name:"DBVersion"`
+
+	DedicatedClusterId *string `json:"DedicatedClusterId,omitnil,omitempty" name:"DedicatedClusterId"`
 }
 
 func (r *CreateReadOnlyDBInstanceRequest) ToJsonString() string {
@@ -1596,6 +1609,7 @@ func (r *CreateReadOnlyDBInstanceRequest) FromJsonString(s string) error {
 	delete(f, "NeedSupportIpv6")
 	delete(f, "Name")
 	delete(f, "DBVersion")
+	delete(f, "DedicatedClusterId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateReadOnlyDBInstanceRequest has unknown keys!", "")
 	}
@@ -2030,14 +2044,14 @@ type DBInstance struct {
 	DBInstanceClass *string `json:"DBInstanceClass,omitnil,omitempty" name:"DBInstanceClass"`
 
 	// The major PostgreSQL version number, which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API. Valid values: `10`, `11`, `12`, `13`, `14`, `15`.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DBMajorVersion *string `json:"DBMajorVersion,omitnil,omitempty" name:"DBMajorVersion"`
 
 	// Number of the major PostgreSQL community version and minor version, such as 12.4, which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API.
 	DBVersion *string `json:"DBVersion,omitnil,omitempty" name:"DBVersion"`
 
 	// PostgreSQL kernel version number (like v12.7_r1.8), which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DBKernelVersion *string `json:"DBKernelVersion,omitnil,omitempty" name:"DBKernelVersion"`
 
 	// Instance type, which includes:
@@ -2094,27 +2108,27 @@ type DBInstance struct {
 	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// The information of tags associated with instances
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TagList []*Tag `json:"TagList,omitnil,omitempty" name:"TagList"`
 
 	// Primary instance information, which is returned only when the instance is read-only.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MasterDBInstanceId *string `json:"MasterDBInstanceId,omitnil,omitempty" name:"MasterDBInstanceId"`
 
 	// Number of read-only instances
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReadOnlyInstanceNum *int64 `json:"ReadOnlyInstanceNum,omitnil,omitempty" name:"ReadOnlyInstanceNum"`
 
 	// The status of a read-only instance in a read-only group
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	StatusInReadonlyGroup *string `json:"StatusInReadonlyGroup,omitnil,omitempty" name:"StatusInReadonlyGroup"`
 
 	// Offline time
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	OfflineTime *string `json:"OfflineTime,omitnil,omitempty" name:"OfflineTime"`
 
 	// Instance node information
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DBNodeSet []*DBNode `json:"DBNodeSet,omitnil,omitempty" name:"DBNodeSet"`
 
 	// Whether the instance supports TDE data encryption:
@@ -3908,13 +3922,13 @@ type DescribeDBInstancesRequestParams struct {
 	// db-public-address: filter by instance public network address (in string format)
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// The maximum number of results returned per page. Value range: 1-100. Default: `10`
+	// The maximum number of results returned per page. Value range: 1-100. Default: `10`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Data offset, which starts from 0.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Sorting metric, such as instance name or creation time. Valid values: DBInstanceId, CreateTime, Name, EndTime
+	// Sorting metric, such as instance name or creation time. Valid values: DBInstanceId, CreateTime, Name, EndTime.
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
 	// Sorting order. Valid values: `asc` (ascending), `desc` (descending)
@@ -3934,13 +3948,13 @@ type DescribeDBInstancesRequest struct {
 	// db-public-address: filter by instance public network address (in string format)
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// The maximum number of results returned per page. Value range: 1-100. Default: `10`
+	// The maximum number of results returned per page. Value range: 1-100. Default: `10`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Data offset, which starts from 0.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Sorting metric, such as instance name or creation time. Valid values: DBInstanceId, CreateTime, Name, EndTime
+	// Sorting metric, such as instance name or creation time. Valid values: DBInstanceId, CreateTime, Name, EndTime.
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
 	// Sorting order. Valid values: `asc` (ascending), `desc` (descending)
