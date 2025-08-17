@@ -506,9 +506,6 @@ type CreateAccountRequestParams struct {
 	// Use the [SendVerifyCode API](https://www.tencentcloud.com/document/product/1085/65907) to obtain the verifycode.The SendVerifyCode API sends a 6-digit verifycode to your specified mobile number via SMS. After receiving it, you need to pass it along with other parameters.
 	VerifyCode *string `json:"VerifyCode,omitnil,omitempty" name:"VerifyCode"`
 
-	// Extension field, which is left empty by default.
-	Extended *string `json:"Extended,omitnil,omitempty" name:"Extended"`
-
 	// Layer-1 industry id. This is a required item and can be obtained via the [ GetTradeConfigList  API](https://www.tencentcloud.com/zh/document/product/1085/68181),
 	// such as "kghy_01".
 	TradeOne *string `json:"TradeOne,omitnil,omitempty" name:"TradeOne"`
@@ -516,6 +513,9 @@ type CreateAccountRequestParams struct {
 	// Layer-2 industry id. This is a required item and can be obtained via the [ GetTradeConfigList API](https://www.tencentcloud.com/zh/document/product/1085/68181),
 	// such as "kghy_0101"
 	TradeTwo *string `json:"TradeTwo,omitnil,omitempty" name:"TradeTwo"`
+
+	// Extension field, which is left empty by default.
+	Extended *string `json:"Extended,omitnil,omitempty" name:"Extended"`
 }
 
 type CreateAccountRequest struct {
@@ -553,9 +553,6 @@ type CreateAccountRequest struct {
 	// Use the [SendVerifyCode API](https://www.tencentcloud.com/document/product/1085/65907) to obtain the verifycode.The SendVerifyCode API sends a 6-digit verifycode to your specified mobile number via SMS. After receiving it, you need to pass it along with other parameters.
 	VerifyCode *string `json:"VerifyCode,omitnil,omitempty" name:"VerifyCode"`
 
-	// Extension field, which is left empty by default.
-	Extended *string `json:"Extended,omitnil,omitempty" name:"Extended"`
-
 	// Layer-1 industry id. This is a required item and can be obtained via the [ GetTradeConfigList  API](https://www.tencentcloud.com/zh/document/product/1085/68181),
 	// such as "kghy_01".
 	TradeOne *string `json:"TradeOne,omitnil,omitempty" name:"TradeOne"`
@@ -563,6 +560,9 @@ type CreateAccountRequest struct {
 	// Layer-2 industry id. This is a required item and can be obtained via the [ GetTradeConfigList API](https://www.tencentcloud.com/zh/document/product/1085/68181),
 	// such as "kghy_0101"
 	TradeTwo *string `json:"TradeTwo,omitnil,omitempty" name:"TradeTwo"`
+
+	// Extension field, which is left empty by default.
+	Extended *string `json:"Extended,omitnil,omitempty" name:"Extended"`
 }
 
 func (r *CreateAccountRequest) ToJsonString() string {
@@ -585,9 +585,9 @@ func (r *CreateAccountRequest) FromJsonString(s string) error {
 	delete(f, "CountryCode")
 	delete(f, "Area")
 	delete(f, "VerifyCode")
-	delete(f, "Extended")
 	delete(f, "TradeOne")
 	delete(f, "TradeTwo")
+	delete(f, "Extended")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAccountRequest has unknown keys!", "")
 	}
