@@ -283,6 +283,16 @@ type ChargePrepaid struct {
 
 type ChcDeployExtraConfig struct {
 
+	MiniOsType *string `json:"MiniOsType,omitnil,omitempty" name:"MiniOsType"`
+
+
+	BootType *string `json:"BootType,omitnil,omitempty" name:"BootType"`
+
+
+	BootFile *string `json:"BootFile,omitnil,omitempty" name:"BootFile"`
+
+
+	NextServerAddress *string `json:"NextServerAddress,omitnil,omitempty" name:"NextServerAddress"`
 }
 
 type ChcHost struct {
@@ -1026,6 +1036,9 @@ type CreateLaunchTemplateRequestParams struct {
 	// Instance destruction protection flag: indicates whether an instance is allowed to be deleted through an api. value ranges from: - **TRUE**: indicates that instance protection is enabled, deletion through apis is not allowed. - **FALSE**: indicates that instance protection is disabled, deletion through apis is allowed.  default value: FALSE.
 	DisableApiTermination *bool `json:"DisableApiTermination,omitnil,omitempty" name:"DisableApiTermination"`
 
+
+	EnableJumboFrame *bool `json:"EnableJumboFrame,omitnil,omitempty" name:"EnableJumboFrame"`
+
 	// Description list of tags. by specifying this parameter, tags can be bound to the instance launch template.
 	LaunchTemplateTagSpecification []*TagSpecification `json:"LaunchTemplateTagSpecification,omitnil,omitempty" name:"LaunchTemplateTagSpecification"`
 
@@ -1131,6 +1144,8 @@ type CreateLaunchTemplateRequest struct {
 	// Instance destruction protection flag: indicates whether an instance is allowed to be deleted through an api. value ranges from: - **TRUE**: indicates that instance protection is enabled, deletion through apis is not allowed. - **FALSE**: indicates that instance protection is disabled, deletion through apis is allowed.  default value: FALSE.
 	DisableApiTermination *bool `json:"DisableApiTermination,omitnil,omitempty" name:"DisableApiTermination"`
 
+	EnableJumboFrame *bool `json:"EnableJumboFrame,omitnil,omitempty" name:"EnableJumboFrame"`
+
 	// Description list of tags. by specifying this parameter, tags can be bound to the instance launch template.
 	LaunchTemplateTagSpecification []*TagSpecification `json:"LaunchTemplateTagSpecification,omitnil,omitempty" name:"LaunchTemplateTagSpecification"`
 
@@ -1185,6 +1200,7 @@ func (r *CreateLaunchTemplateRequest) FromJsonString(s string) error {
 	delete(f, "InstanceChargeType")
 	delete(f, "InstanceChargePrepaid")
 	delete(f, "DisableApiTermination")
+	delete(f, "EnableJumboFrame")
 	delete(f, "LaunchTemplateTagSpecification")
 	delete(f, "Metadata")
 	delete(f, "TemplateDataModifyAction")
@@ -1896,7 +1912,7 @@ type DescribeChcHostsRequestParams struct {
 	ChcIds []*string `json:"ChcIds,omitnil,omitempty" name:"ChcIds"`
 
 	// <li><strong>zone</strong></li>
-	// <p style="padding-left: 30px;">Filter by the <strong>availability zone</strong>, such as `ap-guangzhou-1`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p><p style="padding-left: 30px;">Valid values: See <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Regions and Availability Zones</a></p>
+	// <p style="padding-left: 30px;">Filter by the <strong>availability zone</strong>, such as `ap-guangzhou-6`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p><p style="padding-left: 30px;">Valid values: See <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Regions and Availability Zones</a></p>
 	// <li><strong>instance-name</strong></li>
 	// <p style="padding-left: 30px;">Filter by the <strong>instance name</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
 	// <li><strong>instance-state</strong></li>
@@ -1923,7 +1939,7 @@ type DescribeChcHostsRequest struct {
 	ChcIds []*string `json:"ChcIds,omitnil,omitempty" name:"ChcIds"`
 
 	// <li><strong>zone</strong></li>
-	// <p style="padding-left: 30px;">Filter by the <strong>availability zone</strong>, such as `ap-guangzhou-1`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p><p style="padding-left: 30px;">Valid values: See <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Regions and Availability Zones</a></p>
+	// <p style="padding-left: 30px;">Filter by the <strong>availability zone</strong>, such as `ap-guangzhou-6`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p><p style="padding-left: 30px;">Valid values: See <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Regions and Availability Zones</a></p>
 	// <li><strong>instance-name</strong></li>
 	// <p style="padding-left: 30px;">Filter by the <strong>instance name</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
 	// <li><strong>instance-state</strong></li>
@@ -2156,7 +2172,7 @@ func (r *DescribeDisasterRecoverGroupsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeHostsRequestParams struct {
 	// <li><strong>zone</strong></li>
-	// <p style="padding-left: 30px;">Filter by the availability zone, such as `ap-guangzhou-1`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p><p style="padding-left: 30px;">Valid values: See <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Regions and Availability Zones</a></p>
+	// <p style="padding-left: 30px;">Filter by the availability zone, such as `ap-guangzhou-6`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p><p style="padding-left: 30px;">Valid values: See <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Regions and Availability Zones</a></p>
 	// <li><strong>project-id</strong></li>
 	// <p style="padding-left: 30px;">Filter by the project ID. You can query the list of created projects by calling `DescribeProject` or logging in to the [CVM console](https://console.cloud.tencent.com/cvm/index). You can also call `AddProject` to create projects. The project ID is like 1002189. </p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Optional</p>
 	// <li><strong>host-id</strong></li>
@@ -2179,7 +2195,7 @@ type DescribeHostsRequest struct {
 	*tchttp.BaseRequest
 	
 	// <li><strong>zone</strong></li>
-	// <p style="padding-left: 30px;">Filter by the availability zone, such as `ap-guangzhou-1`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p><p style="padding-left: 30px;">Valid values: See <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Regions and Availability Zones</a></p>
+	// <p style="padding-left: 30px;">Filter by the availability zone, such as `ap-guangzhou-6`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p><p style="padding-left: 30px;">Valid values: See <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Regions and Availability Zones</a></p>
 	// <li><strong>project-id</strong></li>
 	// <p style="padding-left: 30px;">Filter by the project ID. You can query the list of created projects by calling `DescribeProject` or logging in to the [CVM console](https://console.cloud.tencent.com/cvm/index). You can also call `AddProject` to create projects. The project ID is like 1002189. </p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Optional</p>
 	// <li><strong>host-id</strong></li>
@@ -5485,89 +5501,70 @@ type InternetChargeTypeConfig struct {
 }
 
 type ItemPrice struct {
-	// The original unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to that the unit price for unlimited usage.
-	// Note: this field may return null, indicating that no valid value is obtained.
+	// Original price of subsequent total costs, postpaid billing mode usage, unit: usd. <li>if other time interval items are returned, such as UnitPriceSecondStep, this item represents the time interval (0, 96) hr. if no other time interval items are returned, this item represents the full period (0, ∞) hr.
 	UnitPrice *float64 `json:"UnitPrice,omitnil,omitempty" name:"UnitPrice"`
 
-	// Billing unit for pay-as-you-go mode. Valid values: <br><li>HOUR: billed on an hourly basis. It's used for hourly postpaid instances (`POSTPAID_BY_HOUR`). <br><li>GB: bill by traffic in GB. It's used for postpaid products that are billed by the hourly traffic (`TRAFFIC_POSTPAID_BY_HOUR`).
-	// Note: this field may return null, indicating that no valid value is obtained.
+	// Billing unit for pay-as-you-go mode. valid values: <br><li>HOUR: billed on an hourly basis. it's used for hourly POSTPAID instances (`POSTPAID_BY_HOUR`). <br><li>GB: bill BY TRAFFIC in GB. it's used for POSTPAID products that are billed BY the hourly TRAFFIC (`TRAFFIC_POSTPAID_BY_HOUR`).
 	ChargeUnit *string `json:"ChargeUnit,omitnil,omitempty" name:"ChargeUnit"`
 
-	// The original price of a pay-in-advance instance, in USD.
-	// Note: this field may return null, indicating that no valid value is obtained.
+	// Original price of total prepaid costs. measurement unit: usd.
 	OriginalPrice *float64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 
-	// Discount price of a prepaid instance, in USD.
-	// Note: this field may return null, indicating that no valid value is obtained.
+	// Discount price of total prepaid costs. unit: usd.
 	DiscountPrice *float64 `json:"DiscountPrice,omitnil,omitempty" name:"DiscountPrice"`
 
-	// Percentage of the original price. For example, if you enter "20.0", the discounted price will be 20% of the original price.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Discount, such as 20.0 representing 80% off.
 	Discount *float64 `json:"Discount,omitnil,omitempty" name:"Discount"`
 
-	// The discounted unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to that the unit price for unlimited usage.
-	// Note: this field may return null, indicating that no valid value is obtained.
+	// Discounted price of subsequent total cost, postpaid billing mode usage, unit: usd <li>if other time interval items are returned, such as UnitPriceDiscountSecondStep, this item represents the time interval (0, 96) hr; if no other time interval items are returned, this item represents the full period (0, ∞) hr.
 	UnitPriceDiscount *float64 `json:"UnitPriceDiscount,omitnil,omitempty" name:"UnitPriceDiscount"`
 
-	// Original unit price for the usage between 96 to 360 hours in USD. It's applicable to pay-as-you-go mode.
-	// Note: this field may return null, indicating that no valid value is obtained.
+	// Original price of subsequent total costs for usage time range (96, 360) hr in postpaid billing mode. unit: usd.
 	UnitPriceSecondStep *float64 `json:"UnitPriceSecondStep,omitnil,omitempty" name:"UnitPriceSecondStep"`
 
-	// Discounted unit price for the usage between 96 to 360 hours in USD. It's applicable to pay-as-you-go mode.
-	// Note: this field may return null, indicating that no valid value is obtained.
+	// Discounted price of subsequent total cost for usage time interval (96, 360) hr in postpaid billing mode. unit: usd.
 	UnitPriceDiscountSecondStep *float64 `json:"UnitPriceDiscountSecondStep,omitnil,omitempty" name:"UnitPriceDiscountSecondStep"`
 
-	// Original unit price for the usage after 360 hours in USD. It's applicable to pay-as-you-go mode.
-	// Note: this field may return null, indicating that no valid value is obtained.
+	// Specifies the original price of subsequent total costs with a usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.
 	UnitPriceThirdStep *float64 `json:"UnitPriceThirdStep,omitnil,omitempty" name:"UnitPriceThirdStep"`
 
-	// Discounted unit price for the usage after 360 hours in USD. It's applicable to pay-as-you-go mode.
-	// Note: this field may return null, indicating that no valid value is obtained.
+	// Discounted price of subsequent total cost for usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.
 	UnitPriceDiscountThirdStep *float64 `json:"UnitPriceDiscountThirdStep,omitnil,omitempty" name:"UnitPriceDiscountThirdStep"`
 
-	// Original 3-year payment, in USD. This parameter is only available to upfront payment mode.
-	// Note: this field may return `null`, indicating that no valid value was found.
-	// Note: this field may return `null`, indicating that no valid value was found.
+	// Specifies the original price of total 3-year prepaid costs in prepaid billing mode. measurement unit: usd.
+	// Note: This field may return null, indicating that no valid value is found.
 	OriginalPriceThreeYear *float64 `json:"OriginalPriceThreeYear,omitnil,omitempty" name:"OriginalPriceThreeYear"`
 
-	// Discounted 3-year upfront payment, in USD. This parameter is only available to upfront payment mode.
-	// Note: this field may return `null`, indicating that no valid value was found.
-	// Note: this field may return `null`, indicating that no valid value was found.
+	// Specifies the discount price for an advance payment of the total fee for three years, prepaid mode usage, measurement unit: usd.
+	// Note: This field may return null, indicating that no valid value is found.
 	DiscountPriceThreeYear *float64 `json:"DiscountPriceThreeYear,omitnil,omitempty" name:"DiscountPriceThreeYear"`
 
-	// Discount for 3-year upfront payment. For example, 20.0 indicates 80% off.
-	// Note: this field may return `null`, indicating that no valid value was found.
-	// Note: this field may return `null`, indicating that no valid value was found.
+	// Specifies the discount for a 3-year advance payment, for example 20.0 represents 80% off.
+	// Note: This field may return null, indicating that no valid value is found.
 	DiscountThreeYear *float64 `json:"DiscountThreeYear,omitnil,omitempty" name:"DiscountThreeYear"`
 
-	// Original 5-year payment, in USD. This parameter is only available to upfront payment mode.
-	// Note: this field may return `null`, indicating that no valid value was found.
-	// Note: this field may return `null`, indicating that no valid value was found.
+	// Specifies the original price of the 5-year total cost with advance payment, using prepaid billing mode. measurement unit: usd.
+	// Note: This field may return null, indicating that no valid value is found.
 	OriginalPriceFiveYear *float64 `json:"OriginalPriceFiveYear,omitnil,omitempty" name:"OriginalPriceFiveYear"`
 
-	// Discounted 5-year upfront payment, in USD. This parameter is only available to upfront payment mode.
-	// Note: this field may return `null`, indicating that no valid value was found.
-	// Note: this field may return `null`, indicating that no valid value was found.
+	// Prepaid 5-year total cost discount price, prepaid billing mode usage. unit: usd.
+	// Note: This field may return null, indicating that no valid value is found.
 	DiscountPriceFiveYear *float64 `json:"DiscountPriceFiveYear,omitnil,omitempty" name:"DiscountPriceFiveYear"`
 
-	// Discount for 5-year upfront payment. For example, 20.0 indicates 80% off.
-	// Note: this field may return `null`, indicating that no valid value was found.
-	// Note: this field may return `null`, indicating that no valid value was found.
+	// Specifies the discount for 5-year advance payment, such as 20.0 for 80% off.
+	// Note: This field may return null, indicating that no valid value is found.
 	DiscountFiveYear *float64 `json:"DiscountFiveYear,omitnil,omitempty" name:"DiscountFiveYear"`
 
-	// Original 1-year payment, in USD. This parameter is only available to upfront payment mode.
-	// Note: this field may return `null`, indicating that no valid value was found.
-	// Note: this field may return `null`, indicating that no valid value was found.
+	// Original price of one-year advance payment total cost. prepaid mode usage. unit: usd.
+	// Note: This field may return null, indicating that no valid value is found.
 	OriginalPriceOneYear *float64 `json:"OriginalPriceOneYear,omitnil,omitempty" name:"OriginalPriceOneYear"`
 
-	// Discounted 1-year payment, in USD. This parameter is only available to upfront payment mode.
-	// Note: this field may return `null`, indicating that no valid value was found.
-	// Note: this field may return `null`, indicating that no valid value was found.
+	// Discount price for total advance payment for one year. specifies prepaid mode usage. measurement unit: usd.
+	// Note: This field may return null, indicating that no valid value is found.
 	DiscountPriceOneYear *float64 `json:"DiscountPriceOneYear,omitnil,omitempty" name:"DiscountPriceOneYear"`
 
-	// Discount for 1-year upfront payment. For example, 20.0 indicates 80% off.
-	// Note: this field may return `null`, indicating that no valid value was found.
-	// Note: this field may return `null`, indicating that no valid value was found.
+	// Specifies the discount for a one-year advance payment, such as 20.0 for 80% off.
+	// Note: This field may return null, indicating that no valid value is found.
 	DiscountOneYear *float64 `json:"DiscountOneYear,omitnil,omitempty" name:"DiscountOneYear"`
 }
 
