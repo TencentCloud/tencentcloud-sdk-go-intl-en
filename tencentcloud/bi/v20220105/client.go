@@ -204,3 +204,1411 @@ func (c *Client) CreateDatasourceWithContext(ctx context.Context, request *Creat
     err = c.Send(request, response)
     return
 }
+
+func NewCreateDatasourceCloudRequest() (request *CreateDatasourceCloudRequest) {
+    request = &CreateDatasourceCloudRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "CreateDatasourceCloud")
+    
+    
+    return
+}
+
+func NewCreateDatasourceCloudResponse() (response *CreateDatasourceCloudResponse) {
+    response = &CreateDatasourceCloudResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDatasourceCloud
+// This API is used to create a cloud database.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) CreateDatasourceCloud(request *CreateDatasourceCloudRequest) (response *CreateDatasourceCloudResponse, err error) {
+    return c.CreateDatasourceCloudWithContext(context.Background(), request)
+}
+
+// CreateDatasourceCloud
+// This API is used to create a cloud database.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) CreateDatasourceCloudWithContext(ctx context.Context, request *CreateDatasourceCloudRequest) (response *CreateDatasourceCloudResponse, err error) {
+    if request == nil {
+        request = NewCreateDatasourceCloudRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "CreateDatasourceCloud")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDatasourceCloud require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDatasourceCloudResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateEmbedTokenRequest() (request *CreateEmbedTokenRequest) {
+    request = &CreateEmbedTokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "CreateEmbedToken")
+    
+    
+    return
+}
+
+func NewCreateEmbedTokenResponse() (response *CreateEmbedTokenResponse) {
+    response = &CreateEmbedTokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateEmbedToken
+// This API is used to create an embedded report with strong authentication.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_EMBED = "InvalidParameter.Embed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) CreateEmbedToken(request *CreateEmbedTokenRequest) (response *CreateEmbedTokenResponse, err error) {
+    return c.CreateEmbedTokenWithContext(context.Background(), request)
+}
+
+// CreateEmbedToken
+// This API is used to create an embedded report with strong authentication.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_EMBED = "InvalidParameter.Embed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) CreateEmbedTokenWithContext(ctx context.Context, request *CreateEmbedTokenRequest) (response *CreateEmbedTokenResponse, err error) {
+    if request == nil {
+        request = NewCreateEmbedTokenRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "CreateEmbedToken")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateEmbedToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateEmbedTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateProjectRequest() (request *CreateProjectRequest) {
+    request = &CreateProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "CreateProject")
+    
+    
+    return
+}
+
+func NewCreateProjectResponse() (response *CreateProjectResponse) {
+    response = &CreateProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateProject
+// This API is used to create a project.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateProject(request *CreateProjectRequest) (response *CreateProjectResponse, err error) {
+    return c.CreateProjectWithContext(context.Background(), request)
+}
+
+// CreateProject
+// This API is used to create a project.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateProjectWithContext(ctx context.Context, request *CreateProjectRequest) (response *CreateProjectResponse, err error) {
+    if request == nil {
+        request = NewCreateProjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "CreateProject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateUserRoleRequest() (request *CreateUserRoleRequest) {
+    request = &CreateUserRoleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "CreateUserRole")
+    
+    
+    return
+}
+
+func NewCreateUserRoleResponse() (response *CreateUserRoleResponse) {
+    response = &CreateUserRoleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateUserRole
+// This API is used to create a user role.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+func (c *Client) CreateUserRole(request *CreateUserRoleRequest) (response *CreateUserRoleResponse, err error) {
+    return c.CreateUserRoleWithContext(context.Background(), request)
+}
+
+// CreateUserRole
+// This API is used to create a user role.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+func (c *Client) CreateUserRoleWithContext(ctx context.Context, request *CreateUserRoleRequest) (response *CreateUserRoleResponse, err error) {
+    if request == nil {
+        request = NewCreateUserRoleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "CreateUserRole")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateUserRole require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateUserRoleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateUserRoleProjectRequest() (request *CreateUserRoleProjectRequest) {
+    request = &CreateUserRoleProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "CreateUserRoleProject")
+    
+    
+    return
+}
+
+func NewCreateUserRoleProjectResponse() (response *CreateUserRoleProjectResponse) {
+    response = &CreateUserRoleProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateUserRoleProject
+// This API is used to create a user role in the project.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_INACTIVE = "UnauthorizedOperation.Inactive"
+func (c *Client) CreateUserRoleProject(request *CreateUserRoleProjectRequest) (response *CreateUserRoleProjectResponse, err error) {
+    return c.CreateUserRoleProjectWithContext(context.Background(), request)
+}
+
+// CreateUserRoleProject
+// This API is used to create a user role in the project.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_INACTIVE = "UnauthorizedOperation.Inactive"
+func (c *Client) CreateUserRoleProjectWithContext(ctx context.Context, request *CreateUserRoleProjectRequest) (response *CreateUserRoleProjectResponse, err error) {
+    if request == nil {
+        request = NewCreateUserRoleProjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "CreateUserRoleProject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateUserRoleProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateUserRoleProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteDatasourceRequest() (request *DeleteDatasourceRequest) {
+    request = &DeleteDatasourceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "DeleteDatasource")
+    
+    
+    return
+}
+
+func NewDeleteDatasourceResponse() (response *DeleteDatasourceResponse) {
+    response = &DeleteDatasourceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteDatasource
+// This API is used to delete a data source.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) DeleteDatasource(request *DeleteDatasourceRequest) (response *DeleteDatasourceResponse, err error) {
+    return c.DeleteDatasourceWithContext(context.Background(), request)
+}
+
+// DeleteDatasource
+// This API is used to delete a data source.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) DeleteDatasourceWithContext(ctx context.Context, request *DeleteDatasourceRequest) (response *DeleteDatasourceResponse, err error) {
+    if request == nil {
+        request = NewDeleteDatasourceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "DeleteDatasource")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDatasource require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteDatasourceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteProjectRequest() (request *DeleteProjectRequest) {
+    request = &DeleteProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "DeleteProject")
+    
+    
+    return
+}
+
+func NewDeleteProjectResponse() (response *DeleteProjectResponse) {
+    response = &DeleteProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteProject
+// This API is used to delete a project.
+//
+// error code that may be returned:
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+func (c *Client) DeleteProject(request *DeleteProjectRequest) (response *DeleteProjectResponse, err error) {
+    return c.DeleteProjectWithContext(context.Background(), request)
+}
+
+// DeleteProject
+// This API is used to delete a project.
+//
+// error code that may be returned:
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+func (c *Client) DeleteProjectWithContext(ctx context.Context, request *DeleteProjectRequest) (response *DeleteProjectResponse, err error) {
+    if request == nil {
+        request = NewDeleteProjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "DeleteProject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteUserRoleRequest() (request *DeleteUserRoleRequest) {
+    request = &DeleteUserRoleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "DeleteUserRole")
+    
+    
+    return
+}
+
+func NewDeleteUserRoleResponse() (response *DeleteUserRoleResponse) {
+    response = &DeleteUserRoleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteUserRole
+// This API is used to remove a user role, which will result in user deletion.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_INACTIVE = "UnauthorizedOperation.Inactive"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+func (c *Client) DeleteUserRole(request *DeleteUserRoleRequest) (response *DeleteUserRoleResponse, err error) {
+    return c.DeleteUserRoleWithContext(context.Background(), request)
+}
+
+// DeleteUserRole
+// This API is used to remove a user role, which will result in user deletion.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_INACTIVE = "UnauthorizedOperation.Inactive"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+func (c *Client) DeleteUserRoleWithContext(ctx context.Context, request *DeleteUserRoleRequest) (response *DeleteUserRoleResponse, err error) {
+    if request == nil {
+        request = NewDeleteUserRoleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "DeleteUserRole")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteUserRole require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteUserRoleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteUserRoleProjectRequest() (request *DeleteUserRoleProjectRequest) {
+    request = &DeleteUserRoleProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "DeleteUserRoleProject")
+    
+    
+    return
+}
+
+func NewDeleteUserRoleProjectResponse() (response *DeleteUserRoleProjectResponse) {
+    response = &DeleteUserRoleProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteUserRoleProject
+// This API is used to delete a user role in the project.
+//
+// error code that may be returned:
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+func (c *Client) DeleteUserRoleProject(request *DeleteUserRoleProjectRequest) (response *DeleteUserRoleProjectResponse, err error) {
+    return c.DeleteUserRoleProjectWithContext(context.Background(), request)
+}
+
+// DeleteUserRoleProject
+// This API is used to delete a user role in the project.
+//
+// error code that may be returned:
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+func (c *Client) DeleteUserRoleProjectWithContext(ctx context.Context, request *DeleteUserRoleProjectRequest) (response *DeleteUserRoleProjectResponse, err error) {
+    if request == nil {
+        request = NewDeleteUserRoleProjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "DeleteUserRoleProject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteUserRoleProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteUserRoleProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDatasourceListRequest() (request *DescribeDatasourceListRequest) {
+    request = &DescribeDatasourceListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "DescribeDatasourceList")
+    
+    
+    return
+}
+
+func NewDescribeDatasourceListResponse() (response *DescribeDatasourceListResponse) {
+    response = &DescribeDatasourceListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDatasourceList
+// This API is used to query a data source list.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_INACTIVE = "UnauthorizedOperation.Inactive"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) DescribeDatasourceList(request *DescribeDatasourceListRequest) (response *DescribeDatasourceListResponse, err error) {
+    return c.DescribeDatasourceListWithContext(context.Background(), request)
+}
+
+// DescribeDatasourceList
+// This API is used to query a data source list.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_INACTIVE = "UnauthorizedOperation.Inactive"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) DescribeDatasourceListWithContext(ctx context.Context, request *DescribeDatasourceListRequest) (response *DescribeDatasourceListResponse, err error) {
+    if request == nil {
+        request = NewDescribeDatasourceListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "DescribeDatasourceList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDatasourceList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDatasourceListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePageWidgetListRequest() (request *DescribePageWidgetListRequest) {
+    request = &DescribePageWidgetListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "DescribePageWidgetList")
+    
+    
+    return
+}
+
+func NewDescribePageWidgetListResponse() (response *DescribePageWidgetListResponse) {
+    response = &DescribePageWidgetListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribePageWidgetList
+// This API is used to query component information on the page.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) DescribePageWidgetList(request *DescribePageWidgetListRequest) (response *DescribePageWidgetListResponse, err error) {
+    return c.DescribePageWidgetListWithContext(context.Background(), request)
+}
+
+// DescribePageWidgetList
+// This API is used to query component information on the page.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) DescribePageWidgetListWithContext(ctx context.Context, request *DescribePageWidgetListRequest) (response *DescribePageWidgetListResponse, err error) {
+    if request == nil {
+        request = NewDescribePageWidgetListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "DescribePageWidgetList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePageWidgetList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePageWidgetListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeProjectInfoRequest() (request *DescribeProjectInfoRequest) {
+    request = &DescribeProjectInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "DescribeProjectInfo")
+    
+    
+    return
+}
+
+func NewDescribeProjectInfoResponse() (response *DescribeProjectInfoResponse) {
+    response = &DescribeProjectInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeProjectInfo
+// This API is used to obtain project details.
+//
+// error code that may be returned:
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) DescribeProjectInfo(request *DescribeProjectInfoRequest) (response *DescribeProjectInfoResponse, err error) {
+    return c.DescribeProjectInfoWithContext(context.Background(), request)
+}
+
+// DescribeProjectInfo
+// This API is used to obtain project details.
+//
+// error code that may be returned:
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) DescribeProjectInfoWithContext(ctx context.Context, request *DescribeProjectInfoRequest) (response *DescribeProjectInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeProjectInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "DescribeProjectInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProjectInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeProjectInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeProjectListRequest() (request *DescribeProjectListRequest) {
+    request = &DescribeProjectListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "DescribeProjectList")
+    
+    
+    return
+}
+
+func NewDescribeProjectListResponse() (response *DescribeProjectListResponse) {
+    response = &DescribeProjectListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeProjectList
+// This API is used to obtain project information.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_INACTIVE = "UnauthorizedOperation.Inactive"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+func (c *Client) DescribeProjectList(request *DescribeProjectListRequest) (response *DescribeProjectListResponse, err error) {
+    return c.DescribeProjectListWithContext(context.Background(), request)
+}
+
+// DescribeProjectList
+// This API is used to obtain project information.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_INACTIVE = "UnauthorizedOperation.Inactive"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+func (c *Client) DescribeProjectListWithContext(ctx context.Context, request *DescribeProjectListRequest) (response *DescribeProjectListResponse, err error) {
+    if request == nil {
+        request = NewDescribeProjectListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "DescribeProjectList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProjectList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeProjectListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUserProjectListRequest() (request *DescribeUserProjectListRequest) {
+    request = &DescribeUserProjectListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "DescribeUserProjectList")
+    
+    
+    return
+}
+
+func NewDescribeUserProjectListResponse() (response *DescribeUserProjectListResponse) {
+    response = &DescribeUserProjectListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeUserProjectList
+// This API is used to obtain the user interface in the project.
+//
+// error code that may be returned:
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) DescribeUserProjectList(request *DescribeUserProjectListRequest) (response *DescribeUserProjectListResponse, err error) {
+    return c.DescribeUserProjectListWithContext(context.Background(), request)
+}
+
+// DescribeUserProjectList
+// This API is used to obtain the user interface in the project.
+//
+// error code that may be returned:
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) DescribeUserProjectListWithContext(ctx context.Context, request *DescribeUserProjectListRequest) (response *DescribeUserProjectListResponse, err error) {
+    if request == nil {
+        request = NewDescribeUserProjectListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "DescribeUserProjectList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUserProjectList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUserProjectListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUserRoleListRequest() (request *DescribeUserRoleListRequest) {
+    request = &DescribeUserRoleListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "DescribeUserRoleList")
+    
+    
+    return
+}
+
+func NewDescribeUserRoleListResponse() (response *DescribeUserRoleListResponse) {
+    response = &DescribeUserRoleListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeUserRoleList
+// This API is used to obtain the user role list.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_INACTIVE = "UnauthorizedOperation.Inactive"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) DescribeUserRoleList(request *DescribeUserRoleListRequest) (response *DescribeUserRoleListResponse, err error) {
+    return c.DescribeUserRoleListWithContext(context.Background(), request)
+}
+
+// DescribeUserRoleList
+// This API is used to obtain the user role list.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_INACTIVE = "UnauthorizedOperation.Inactive"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) DescribeUserRoleListWithContext(ctx context.Context, request *DescribeUserRoleListRequest) (response *DescribeUserRoleListResponse, err error) {
+    if request == nil {
+        request = NewDescribeUserRoleListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "DescribeUserRoleList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUserRoleList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUserRoleListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUserRoleProjectListRequest() (request *DescribeUserRoleProjectListRequest) {
+    request = &DescribeUserRoleProjectListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "DescribeUserRoleProjectList")
+    
+    
+    return
+}
+
+func NewDescribeUserRoleProjectListResponse() (response *DescribeUserRoleProjectListResponse) {
+    response = &DescribeUserRoleProjectListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeUserRoleProjectList
+// This API is used to obtain the user role list in the project.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_INACTIVE = "UnauthorizedOperation.Inactive"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) DescribeUserRoleProjectList(request *DescribeUserRoleProjectListRequest) (response *DescribeUserRoleProjectListResponse, err error) {
+    return c.DescribeUserRoleProjectListWithContext(context.Background(), request)
+}
+
+// DescribeUserRoleProjectList
+// This API is used to obtain the user role list in the project.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_INACTIVE = "UnauthorizedOperation.Inactive"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) DescribeUserRoleProjectListWithContext(ctx context.Context, request *DescribeUserRoleProjectListRequest) (response *DescribeUserRoleProjectListResponse, err error) {
+    if request == nil {
+        request = NewDescribeUserRoleProjectListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "DescribeUserRoleProjectList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUserRoleProjectList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUserRoleProjectListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewExportScreenPageRequest() (request *ExportScreenPageRequest) {
+    request = &ExportScreenPageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "ExportScreenPage")
+    
+    
+    return
+}
+
+func NewExportScreenPageResponse() (response *ExportScreenPageResponse) {
+    response = &ExportScreenPageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ExportScreenPage
+// This API is used to export a screenshot.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) ExportScreenPage(request *ExportScreenPageRequest) (response *ExportScreenPageResponse, err error) {
+    return c.ExportScreenPageWithContext(context.Background(), request)
+}
+
+// ExportScreenPage
+// This API is used to export a screenshot.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) ExportScreenPageWithContext(ctx context.Context, request *ExportScreenPageRequest) (response *ExportScreenPageResponse, err error) {
+    if request == nil {
+        request = NewExportScreenPageRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "ExportScreenPage")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExportScreenPage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExportScreenPageResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDatasourceRequest() (request *ModifyDatasourceRequest) {
+    request = &ModifyDatasourceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "ModifyDatasource")
+    
+    
+    return
+}
+
+func NewModifyDatasourceResponse() (response *ModifyDatasourceResponse) {
+    response = &ModifyDatasourceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDatasource
+// This API is used to update a data source.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) ModifyDatasource(request *ModifyDatasourceRequest) (response *ModifyDatasourceResponse, err error) {
+    return c.ModifyDatasourceWithContext(context.Background(), request)
+}
+
+// ModifyDatasource
+// This API is used to update a data source.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) ModifyDatasourceWithContext(ctx context.Context, request *ModifyDatasourceRequest) (response *ModifyDatasourceResponse, err error) {
+    if request == nil {
+        request = NewModifyDatasourceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "ModifyDatasource")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDatasource require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDatasourceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDatasourceCloudRequest() (request *ModifyDatasourceCloudRequest) {
+    request = &ModifyDatasourceCloudRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "ModifyDatasourceCloud")
+    
+    
+    return
+}
+
+func NewModifyDatasourceCloudResponse() (response *ModifyDatasourceCloudResponse) {
+    response = &ModifyDatasourceCloudResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDatasourceCloud
+// This API is used to update a cloud database.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) ModifyDatasourceCloud(request *ModifyDatasourceCloudRequest) (response *ModifyDatasourceCloudResponse, err error) {
+    return c.ModifyDatasourceCloudWithContext(context.Background(), request)
+}
+
+// ModifyDatasourceCloud
+// This API is used to update a cloud database.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) ModifyDatasourceCloudWithContext(ctx context.Context, request *ModifyDatasourceCloudRequest) (response *ModifyDatasourceCloudResponse, err error) {
+    if request == nil {
+        request = NewModifyDatasourceCloudRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "ModifyDatasourceCloud")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDatasourceCloud require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDatasourceCloudResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyProjectRequest() (request *ModifyProjectRequest) {
+    request = &ModifyProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "ModifyProject")
+    
+    
+    return
+}
+
+func NewModifyProjectResponse() (response *ModifyProjectResponse) {
+    response = &ModifyProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyProject
+// This API is used to modify project information.
+//
+// error code that may be returned:
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+func (c *Client) ModifyProject(request *ModifyProjectRequest) (response *ModifyProjectResponse, err error) {
+    return c.ModifyProjectWithContext(context.Background(), request)
+}
+
+// ModifyProject
+// This API is used to modify project information.
+//
+// error code that may be returned:
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+func (c *Client) ModifyProjectWithContext(ctx context.Context, request *ModifyProjectRequest) (response *ModifyProjectResponse, err error) {
+    if request == nil {
+        request = NewModifyProjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "ModifyProject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyUserRoleRequest() (request *ModifyUserRoleRequest) {
+    request = &ModifyUserRoleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "ModifyUserRole")
+    
+    
+    return
+}
+
+func NewModifyUserRoleResponse() (response *ModifyUserRoleResponse) {
+    response = &ModifyUserRoleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyUserRole
+// This API is used to modify user role info.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+func (c *Client) ModifyUserRole(request *ModifyUserRoleRequest) (response *ModifyUserRoleResponse, err error) {
+    return c.ModifyUserRoleWithContext(context.Background(), request)
+}
+
+// ModifyUserRole
+// This API is used to modify user role info.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+func (c *Client) ModifyUserRoleWithContext(ctx context.Context, request *ModifyUserRoleRequest) (response *ModifyUserRoleResponse, err error) {
+    if request == nil {
+        request = NewModifyUserRoleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "ModifyUserRole")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyUserRole require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyUserRoleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyUserRoleProjectRequest() (request *ModifyUserRoleProjectRequest) {
+    request = &ModifyUserRoleProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "ModifyUserRoleProject")
+    
+    
+    return
+}
+
+func NewModifyUserRoleProjectResponse() (response *ModifyUserRoleProjectResponse) {
+    response = &ModifyUserRoleProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyUserRoleProject
+// This API is used to modify the user role info in the project.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+func (c *Client) ModifyUserRoleProject(request *ModifyUserRoleProjectRequest) (response *ModifyUserRoleProjectResponse, err error) {
+    return c.ModifyUserRoleProjectWithContext(context.Background(), request)
+}
+
+// ModifyUserRoleProject
+// This API is used to modify the user role info in the project.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+func (c *Client) ModifyUserRoleProjectWithContext(ctx context.Context, request *ModifyUserRoleProjectRequest) (response *ModifyUserRoleProjectResponse, err error) {
+    if request == nil {
+        request = NewModifyUserRoleProjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "ModifyUserRoleProject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyUserRoleProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyUserRoleProjectResponse()
+    err = c.Send(request, response)
+    return
+}

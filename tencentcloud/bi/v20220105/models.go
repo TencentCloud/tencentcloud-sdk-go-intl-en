@@ -135,6 +135,279 @@ type ApplyEmbedTokenInfo struct {
 	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
 }
 
+type BaseStateAction struct {
+	// Whether the edit button is visible.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ShowEdit *bool `json:"ShowEdit,omitnil,omitempty" name:"ShowEdit"`
+
+	// Whether the edit button is clickable.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsEdit *bool `json:"IsEdit,omitnil,omitempty" name:"IsEdit"`
+
+	// Edit button text.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EditText *string `json:"EditText,omitnil,omitempty" name:"EditText"`
+
+	// Edit-disabled hint.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EditTips *string `json:"EditTips,omitnil,omitempty" name:"EditTips"`
+
+	// Whether the deletion button is visible.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ShowDel *bool `json:"ShowDel,omitnil,omitempty" name:"ShowDel"`
+
+	// Whether the deletion button is clickable.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsDel *bool `json:"IsDel,omitnil,omitempty" name:"IsDel"`
+
+	// Delete button text.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DelText *string `json:"DelText,omitnil,omitempty" name:"DelText"`
+
+	// Delete-disabled hint.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DelTips *string `json:"DelTips,omitnil,omitempty" name:"DelTips"`
+
+	// Whether the copy button is visible.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ShowCopy *bool `json:"ShowCopy,omitnil,omitempty" name:"ShowCopy"`
+
+	// Whether it is visible.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ShowView *bool `json:"ShowView,omitnil,omitempty" name:"ShowView"`
+
+	// Whether renaming is allowed.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ShowRename *bool `json:"ShowRename,omitnil,omitempty" name:"ShowRename"`
+}
+
+type CorpUserListData struct {
+	// List.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	List []*UserIdAndUserName `json:"List,omitnil,omitempty" name:"List"`
+
+	// Total number.
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Number of pages.
+	TotalPages *int64 `json:"TotalPages,omitnil,omitempty" name:"TotalPages"`
+}
+
+// Predefined struct for user
+type CreateDatasourceCloudRequestParams struct {
+	// The backend provides dictionaries: domain type. 1. Tencent Cloud, 2. local.
+	ServiceType *string `json:"ServiceType,omitnil,omitempty" name:"ServiceType"`
+
+	// Drive.
+	DbType *string `json:"DbType,omitnil,omitempty" name:"DbType"`
+
+	// Database encoding.
+	Charset *string `json:"Charset,omitnil,omitempty" name:"Charset"`
+
+	// Username.
+	DbUser *string `json:"DbUser,omitnil,omitempty" name:"DbUser"`
+
+	// Password.
+	DbPwd *string `json:"DbPwd,omitnil,omitempty" name:"DbPwd"`
+
+	// Database name.
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
+
+	// Database alias.
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// Project ID.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Private network IP address of the public cloud.
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// Private network port of the public cloud.
+	Vport *string `json:"Vport,omitnil,omitempty" name:"Vport"`
+
+	// VPC identifier.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Unified VPC identifier.
+	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
+
+	// Region identifier (gz, bj).
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+
+	// Extension parameter.
+	ExtraParam *string `json:"ExtraParam,omitnil,omitempty" name:"ExtraParam"`
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Product name of the data source.
+	ProdDbName *string `json:"ProdDbName,omitnil,omitempty" name:"ProdDbName"`
+
+	// Third-party data source identifier.
+	DataOrigin *string `json:"DataOrigin,omitnil,omitempty" name:"DataOrigin"`
+
+	// Third-party project ID.
+	DataOriginProjectId *string `json:"DataOriginProjectId,omitnil,omitempty" name:"DataOriginProjectId"`
+
+	// Third-party data source ID.
+	DataOriginDatasourceId *string `json:"DataOriginDatasourceId,omitnil,omitempty" name:"DataOriginDatasourceId"`
+
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+
+	Schema *string `json:"Schema,omitnil,omitempty" name:"Schema"`
+
+
+	DbVersion *string `json:"DbVersion,omitnil,omitempty" name:"DbVersion"`
+}
+
+type CreateDatasourceCloudRequest struct {
+	*tchttp.BaseRequest
+	
+	// The backend provides dictionaries: domain type. 1. Tencent Cloud, 2. local.
+	ServiceType *string `json:"ServiceType,omitnil,omitempty" name:"ServiceType"`
+
+	// Drive.
+	DbType *string `json:"DbType,omitnil,omitempty" name:"DbType"`
+
+	// Database encoding.
+	Charset *string `json:"Charset,omitnil,omitempty" name:"Charset"`
+
+	// Username.
+	DbUser *string `json:"DbUser,omitnil,omitempty" name:"DbUser"`
+
+	// Password.
+	DbPwd *string `json:"DbPwd,omitnil,omitempty" name:"DbPwd"`
+
+	// Database name.
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
+
+	// Database alias.
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// Project ID.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Private network IP address of the public cloud.
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// Private network port of the public cloud.
+	Vport *string `json:"Vport,omitnil,omitempty" name:"Vport"`
+
+	// VPC identifier.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Unified VPC identifier.
+	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
+
+	// Region identifier (gz, bj).
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+
+	// Extension parameter.
+	ExtraParam *string `json:"ExtraParam,omitnil,omitempty" name:"ExtraParam"`
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Product name of the data source.
+	ProdDbName *string `json:"ProdDbName,omitnil,omitempty" name:"ProdDbName"`
+
+	// Third-party data source identifier.
+	DataOrigin *string `json:"DataOrigin,omitnil,omitempty" name:"DataOrigin"`
+
+	// Third-party project ID.
+	DataOriginProjectId *string `json:"DataOriginProjectId,omitnil,omitempty" name:"DataOriginProjectId"`
+
+	// Third-party data source ID.
+	DataOriginDatasourceId *string `json:"DataOriginDatasourceId,omitnil,omitempty" name:"DataOriginDatasourceId"`
+
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	Schema *string `json:"Schema,omitnil,omitempty" name:"Schema"`
+
+	DbVersion *string `json:"DbVersion,omitnil,omitempty" name:"DbVersion"`
+}
+
+func (r *CreateDatasourceCloudRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDatasourceCloudRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ServiceType")
+	delete(f, "DbType")
+	delete(f, "Charset")
+	delete(f, "DbUser")
+	delete(f, "DbPwd")
+	delete(f, "DbName")
+	delete(f, "SourceName")
+	delete(f, "ProjectId")
+	delete(f, "Vip")
+	delete(f, "Vport")
+	delete(f, "VpcId")
+	delete(f, "UniqVpcId")
+	delete(f, "RegionId")
+	delete(f, "ExtraParam")
+	delete(f, "InstanceId")
+	delete(f, "ProdDbName")
+	delete(f, "DataOrigin")
+	delete(f, "DataOriginProjectId")
+	delete(f, "DataOriginDatasourceId")
+	delete(f, "ClusterId")
+	delete(f, "Schema")
+	delete(f, "DbVersion")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDatasourceCloudRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDatasourceCloudResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// Success No.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *IdDTO `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Additional information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Prompt.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateDatasourceCloudResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateDatasourceCloudResponseParams `json:"Response"`
+}
+
+func (r *CreateDatasourceCloudResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDatasourceCloudResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 // Predefined struct for user
 type CreateDatasourceRequestParams struct {
 	// HOST
@@ -352,6 +625,1814 @@ func (r *CreateDatasourceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateEmbedTokenRequestParams struct {
+	// Shares the project ID.
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Shares the page ID. This field is empty (0) for embedding a dashboard and is not passed for embedding ChatBI.
+	PageId *uint64 `json:"PageId,omitnil,omitempty" name:"PageId"`
+
+	// "embed" indicates page dashboard embedding, and "chatBIEmbed" indicates ChatBI embedding.
+	Intention *string `json:"Intention,omitnil,omitempty" name:"Intention"`
+
+	// "page" indicates embedding a page, "panel" indicates embedding the entire dashboard, and "project" is used for ChatBI embedding.
+	Scope *string `json:"Scope,omitnil,omitempty" name:"Scope"`
+
+	// Expiration time. Unit: minutes. Maximum value: 240 (namely, 4 hours). Default value: 240.
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// Alternate field.
+	ExtraParam *string `json:"ExtraParam,omitnil,omitempty" name:"ExtraParam"`
+
+	// User enterprise ID (only used for multi-user).
+	UserCorpId *string `json:"UserCorpId,omitnil,omitempty" name:"UserCorpId"`
+
+	// User ID (only used for multi-user).
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// Access count limit (range: 1-99999). Leave empty to disable access restrictions.
+	TicketNum *int64 `json:"TicketNum,omitnil,omitempty" name:"TicketNum"`
+
+	// Global filter parameters: Applies to all report filter criteria. Should be formatted as a JSON string.
+	// ** Currently, only character-type page parameters can be bound to global parameters.
+	// **
+	// [
+	//     {
+	// "ParamKey": "name", page parameter name.
+	// "JoinType": "AND", // connection method. Currently, only AND is supported.
+	//         "WhereList": [
+	//             {
+	// "Operator": "-neq", // operator. Refer to the following instructions.
+	// "Value": [ action value. For a single-value array, only one value is passed.
+	//                     "zZWJMD",
+	//                     "ZzVGHX",
+	// "Hunan province".
+	// "Hebei province".
+	//                 ]
+	//             }
+	//         ]
+	//     },
+	//     {
+	//         "ParamKey": "genderParam",
+	//         "JoinType": "AND",
+	//         "WhereList": [
+	//             {
+	//                 "Operator": "-neq",
+	//                 "Value": [
+	// "Male".
+	//                 ]
+	//             }
+	//         ]
+	//     }
+	// ]
+	// 
+	// 
+	// 
+	// Currently supported operators.
+	//  -neq not equal to != operator.
+	//  -eq equal to = operator.
+	//  -is in operator.
+	GlobalParam *string `json:"GlobalParam,omitnil,omitempty" name:"GlobalParam"`
+
+	// 100: no user bound. Create 1 token at a time. UserCorpId and UserId are optional. ChatBI embedding is not supported.
+	// 200: single token per user. Create 1 token at a time. UserCorpId and UserId required.
+	// 300: multiple tokens per user. Create multiple tokens at a time. UserCorpId and UserId required.
+	TokenType *int64 `json:"TokenType,omitnil,omitempty" name:"TokenType"`
+
+	// The number of tokens created at one time.
+	TokenNum *int64 `json:"TokenNum,omitnil,omitempty" name:"TokenNum"`
+
+	// Embedded display configurations: Currently for ChatBI embedding scenarios; TableFilter represents data table list filtering, SqlView represents SQL view feature.
+	ConfigParam *string `json:"ConfigParam,omitnil,omitempty" name:"ConfigParam"`
+}
+
+type CreateEmbedTokenRequest struct {
+	*tchttp.BaseRequest
+	
+	// Shares the project ID.
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Shares the page ID. This field is empty (0) for embedding a dashboard and is not passed for embedding ChatBI.
+	PageId *uint64 `json:"PageId,omitnil,omitempty" name:"PageId"`
+
+	// "embed" indicates page dashboard embedding, and "chatBIEmbed" indicates ChatBI embedding.
+	Intention *string `json:"Intention,omitnil,omitempty" name:"Intention"`
+
+	// "page" indicates embedding a page, "panel" indicates embedding the entire dashboard, and "project" is used for ChatBI embedding.
+	Scope *string `json:"Scope,omitnil,omitempty" name:"Scope"`
+
+	// Expiration time. Unit: minutes. Maximum value: 240 (namely, 4 hours). Default value: 240.
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// Alternate field.
+	ExtraParam *string `json:"ExtraParam,omitnil,omitempty" name:"ExtraParam"`
+
+	// User enterprise ID (only used for multi-user).
+	UserCorpId *string `json:"UserCorpId,omitnil,omitempty" name:"UserCorpId"`
+
+	// User ID (only used for multi-user).
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// Access count limit (range: 1-99999). Leave empty to disable access restrictions.
+	TicketNum *int64 `json:"TicketNum,omitnil,omitempty" name:"TicketNum"`
+
+	// Global filter parameters: Applies to all report filter criteria. Should be formatted as a JSON string.
+	// ** Currently, only character-type page parameters can be bound to global parameters.
+	// **
+	// [
+	//     {
+	// "ParamKey": "name", page parameter name.
+	// "JoinType": "AND", // connection method. Currently, only AND is supported.
+	//         "WhereList": [
+	//             {
+	// "Operator": "-neq", // operator. Refer to the following instructions.
+	// "Value": [ action value. For a single-value array, only one value is passed.
+	//                     "zZWJMD",
+	//                     "ZzVGHX",
+	// "Hunan province".
+	// "Hebei province".
+	//                 ]
+	//             }
+	//         ]
+	//     },
+	//     {
+	//         "ParamKey": "genderParam",
+	//         "JoinType": "AND",
+	//         "WhereList": [
+	//             {
+	//                 "Operator": "-neq",
+	//                 "Value": [
+	// "Male".
+	//                 ]
+	//             }
+	//         ]
+	//     }
+	// ]
+	// 
+	// 
+	// 
+	// Currently supported operators.
+	//  -neq not equal to != operator.
+	//  -eq equal to = operator.
+	//  -is in operator.
+	GlobalParam *string `json:"GlobalParam,omitnil,omitempty" name:"GlobalParam"`
+
+	// 100: no user bound. Create 1 token at a time. UserCorpId and UserId are optional. ChatBI embedding is not supported.
+	// 200: single token per user. Create 1 token at a time. UserCorpId and UserId required.
+	// 300: multiple tokens per user. Create multiple tokens at a time. UserCorpId and UserId required.
+	TokenType *int64 `json:"TokenType,omitnil,omitempty" name:"TokenType"`
+
+	// The number of tokens created at one time.
+	TokenNum *int64 `json:"TokenNum,omitnil,omitempty" name:"TokenNum"`
+
+	// Embedded display configurations: Currently for ChatBI embedding scenarios; TableFilter represents data table list filtering, SqlView represents SQL view feature.
+	ConfigParam *string `json:"ConfigParam,omitnil,omitempty" name:"ConfigParam"`
+}
+
+func (r *CreateEmbedTokenRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateEmbedTokenRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProjectId")
+	delete(f, "PageId")
+	delete(f, "Intention")
+	delete(f, "Scope")
+	delete(f, "ExpireTime")
+	delete(f, "ExtraParam")
+	delete(f, "UserCorpId")
+	delete(f, "UserId")
+	delete(f, "TicketNum")
+	delete(f, "GlobalParam")
+	delete(f, "TokenType")
+	delete(f, "TokenNum")
+	delete(f, "ConfigParam")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateEmbedTokenRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateEmbedTokenResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// Additional information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *EmbedTokenInfo `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Result description.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateEmbedTokenResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateEmbedTokenResponseParams `json:"Response"`
+}
+
+func (r *CreateEmbedTokenResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateEmbedTokenResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateProjectRequestParams struct {
+	// Project name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Background color of the logo.
+	ColorCode *string `json:"ColorCode,omitnil,omitempty" name:"ColorCode"`
+
+	// Project logo.
+	Logo *string `json:"Logo,omitnil,omitempty" name:"Logo"`
+
+	// Remarks.
+	Mark *string `json:"Mark,omitnil,omitempty" name:"Mark"`
+
+	// Whether to allow user requests.
+	IsApply *bool `json:"IsApply,omitnil,omitempty" name:"IsApply"`
+
+	// Default dashboard.
+	DefaultPanelType *int64 `json:"DefaultPanelType,omitnil,omitempty" name:"DefaultPanelType"`
+
+	// Management platform.
+	ManagePlatform *string `json:"ManagePlatform,omitnil,omitempty" name:"ManagePlatform"`
+}
+
+type CreateProjectRequest struct {
+	*tchttp.BaseRequest
+	
+	// Project name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Background color of the logo.
+	ColorCode *string `json:"ColorCode,omitnil,omitempty" name:"ColorCode"`
+
+	// Project logo.
+	Logo *string `json:"Logo,omitnil,omitempty" name:"Logo"`
+
+	// Remarks.
+	Mark *string `json:"Mark,omitnil,omitempty" name:"Mark"`
+
+	// Whether to allow user requests.
+	IsApply *bool `json:"IsApply,omitnil,omitempty" name:"IsApply"`
+
+	// Default dashboard.
+	DefaultPanelType *int64 `json:"DefaultPanelType,omitnil,omitempty" name:"DefaultPanelType"`
+
+	// Management platform.
+	ManagePlatform *string `json:"ManagePlatform,omitnil,omitempty" name:"ManagePlatform"`
+}
+
+func (r *CreateProjectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateProjectRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "ColorCode")
+	delete(f, "Logo")
+	delete(f, "Mark")
+	delete(f, "IsApply")
+	delete(f, "DefaultPanelType")
+	delete(f, "ManagePlatform")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateProjectRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateProjectResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// Extra data.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Data.
+	Data *Data `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Returned information.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateProjectResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateProjectResponseParams `json:"Response"`
+}
+
+func (r *CreateProjectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateProjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateUserRoleProjectRequestParams struct {
+	// Project ID.
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Role ID list.
+	RoleIdList []*int64 `json:"RoleIdList,omitnil,omitempty" name:"RoleIdList"`
+
+	// User list (deprecated).
+	//
+	// Deprecated: UserList is deprecated.
+	UserList []*UserIdAndUserName `json:"UserList,omitnil,omitempty" name:"UserList"`
+
+	// User list (new).
+	UserInfoList []*UserInfo `json:"UserInfoList,omitnil,omitempty" name:"UserInfoList"`
+}
+
+type CreateUserRoleProjectRequest struct {
+	*tchttp.BaseRequest
+	
+	// Project ID.
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Role ID list.
+	RoleIdList []*int64 `json:"RoleIdList,omitnil,omitempty" name:"RoleIdList"`
+
+	// User list (deprecated).
+	UserList []*UserIdAndUserName `json:"UserList,omitnil,omitempty" name:"UserList"`
+
+	// User list (new).
+	UserInfoList []*UserInfo `json:"UserInfoList,omitnil,omitempty" name:"UserInfoList"`
+}
+
+func (r *CreateUserRoleProjectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateUserRoleProjectRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProjectId")
+	delete(f, "RoleIdList")
+	delete(f, "UserList")
+	delete(f, "UserInfoList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateUserRoleProjectRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateUserRoleProjectResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// Expansion.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *DataId `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Message.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateUserRoleProjectResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateUserRoleProjectResponseParams `json:"Response"`
+}
+
+func (r *CreateUserRoleProjectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateUserRoleProjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateUserRoleRequestParams struct {
+	// Role ID list.
+	RoleIdList []*int64 `json:"RoleIdList,omitnil,omitempty" name:"RoleIdList"`
+
+	// User list (deprecated).
+	//
+	// Deprecated: UserList is deprecated.
+	UserList []*UserIdAndUserName `json:"UserList,omitnil,omitempty" name:"UserList"`
+
+	// User list (new).
+	UserInfoList []*UserInfo `json:"UserInfoList,omitnil,omitempty" name:"UserInfoList"`
+
+	// User group ID list.
+	UserGroups []*uint64 `json:"UserGroups,omitnil,omitempty" name:"UserGroups"`
+}
+
+type CreateUserRoleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Role ID list.
+	RoleIdList []*int64 `json:"RoleIdList,omitnil,omitempty" name:"RoleIdList"`
+
+	// User list (deprecated).
+	UserList []*UserIdAndUserName `json:"UserList,omitnil,omitempty" name:"UserList"`
+
+	// User list (new).
+	UserInfoList []*UserInfo `json:"UserInfoList,omitnil,omitempty" name:"UserInfoList"`
+
+	// User group ID list.
+	UserGroups []*uint64 `json:"UserGroups,omitnil,omitempty" name:"UserGroups"`
+}
+
+func (r *CreateUserRoleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateUserRoleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RoleIdList")
+	delete(f, "UserList")
+	delete(f, "UserInfoList")
+	delete(f, "UserGroups")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateUserRoleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateUserRoleResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// Expansion.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *DataId `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Message.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateUserRoleResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateUserRoleResponseParams `json:"Response"`
+}
+
+func (r *CreateUserRoleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateUserRoleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type Data struct {
+	// Project ID.
+	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// url
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EditUrl *string `json:"EditUrl,omitnil,omitempty" name:"EditUrl"`
+}
+
+type DataId struct {
+	// Data ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+type DatasourceInfo struct {
+	// Database ID.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Database name.
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
+
+	// Domain type. Valid values: 1: Tencent Cloud; 2: local.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ServiceType *string `json:"ServiceType,omitnil,omitempty" name:"ServiceType"`
+
+	// Database alias.
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// Database driver.
+	DbType *string `json:"DbType,omitnil,omitempty" name:"DbType"`
+
+	// HOST
+	DbHost *string `json:"DbHost,omitnil,omitempty" name:"DbHost"`
+
+	// Port.
+	DbPort *uint64 `json:"DbPort,omitnil,omitempty" name:"DbPort"`
+
+	// Username.
+	DbUser *string `json:"DbUser,omitnil,omitempty" name:"DbUser"`
+
+	// Database encoding.
+	Charset *string `json:"Charset,omitnil,omitempty" name:"Charset"`
+
+	// Creation time.
+	CreatedAt *string `json:"CreatedAt,omitnil,omitempty" name:"CreatedAt"`
+
+	// Modification time.
+	UpdatedAt *string `json:"UpdatedAt,omitnil,omitempty" name:"UpdatedAt"`
+
+	// Creator.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreatedUser *string `json:"CreatedUser,omitnil,omitempty" name:"CreatedUser"`
+
+	// Catalog value.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Catalog *string `json:"Catalog,omitnil,omitempty" name:"Catalog"`
+
+	// Connection type.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ConnectType *string `json:"ConnectType,omitnil,omitempty" name:"ConnectType"`
+
+	// Project ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Data source description.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
+
+	// Data source status.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Source platform.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SourcePlat *string `json:"SourcePlat,omitnil,omitempty" name:"SourcePlat"`
+
+	// Extension parameter.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExtraParam *string `json:"ExtraParam,omitnil,omitempty" name:"ExtraParam"`
+
+	// Additional information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AddInfo *string `json:"AddInfo,omitnil,omitempty" name:"AddInfo"`
+
+	// Project name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
+
+	// Engine type.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EngineType *string `json:"EngineType,omitnil,omitempty" name:"EngineType"`
+
+	// Data source owner.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Manager *string `json:"Manager,omitnil,omitempty" name:"Manager"`
+
+	// Operation personnel allowlist.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OperatorWhitelist *string `json:"OperatorWhitelist,omitnil,omitempty" name:"OperatorWhitelist"`
+
+	// VPC information of the data source.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// uniqVpc information of the data source.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
+
+	// Data source region information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+
+	// Operation attributes.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StateAction *BaseStateAction `json:"StateAction,omitnil,omitempty" name:"StateAction"`
+
+	// Updater.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdatedUser *string `json:"UpdatedUser,omitnil,omitempty" name:"UpdatedUser"`
+
+	// Permission list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PermissionList []*PermissionGroup `json:"PermissionList,omitnil,omitempty" name:"PermissionList"`
+
+	// Permission value list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AuthList []*string `json:"AuthList,omitnil,omitempty" name:"AuthList"`
+
+	// Third-party data source identifier.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DataOrigin *string `json:"DataOrigin,omitnil,omitempty" name:"DataOrigin"`
+
+	// Third-party project ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DataOriginProjectId *string `json:"DataOriginProjectId,omitnil,omitempty" name:"DataOriginProjectId"`
+
+	// Third-party data source ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DataOriginDatasourceId *string `json:"DataOriginDatasourceId,omitnil,omitempty" name:"DataOriginDatasourceId"`
+
+	// Cluster ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Data source name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DbTypeName *string `json:"DbTypeName,omitnil,omitempty" name:"DbTypeName"`
+
+	// Enable VPC.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UseVPC *bool `json:"UseVPC,omitnil,omitempty" name:"UseVPC"`
+
+	// Associated person ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Owner *string `json:"Owner,omitnil,omitempty" name:"Owner"`
+
+	// Associated person name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OwnerName *string `json:"OwnerName,omitnil,omitempty" name:"OwnerName"`
+}
+
+type DatasourceInfoData struct {
+	// Data source details list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	List []*DatasourceInfo `json:"List,omitnil,omitempty" name:"List"`
+
+	// Total number.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Total number of pages.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalPages *int64 `json:"TotalPages,omitnil,omitempty" name:"TotalPages"`
+}
+
+// Predefined struct for user
+type DeleteDatasourceRequestParams struct {
+	// Data source ID.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Project ID.
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+}
+
+type DeleteDatasourceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data source ID.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Project ID.
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+}
+
+func (r *DeleteDatasourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDatasourceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "ProjectId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteDatasourceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteDatasourceResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// Data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Expansion.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Information.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteDatasourceResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteDatasourceResponseParams `json:"Response"`
+}
+
+func (r *DeleteDatasourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDatasourceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteProjectRequestParams struct {
+	// Project ID.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Random number.
+	Seed *string `json:"Seed,omitnil,omitempty" name:"Seed"`
+
+	// Default dashboard.
+	DefaultPanelType *int64 `json:"DefaultPanelType,omitnil,omitempty" name:"DefaultPanelType"`
+}
+
+type DeleteProjectRequest struct {
+	*tchttp.BaseRequest
+	
+	// Project ID.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Random number.
+	Seed *string `json:"Seed,omitnil,omitempty" name:"Seed"`
+
+	// Default dashboard.
+	DefaultPanelType *int64 `json:"DefaultPanelType,omitnil,omitempty" name:"DefaultPanelType"`
+}
+
+func (r *DeleteProjectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteProjectRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "Seed")
+	delete(f, "DefaultPanelType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteProjectRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteProjectResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// "".
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// ""
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// ""
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteProjectResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteProjectResponseParams `json:"Response"`
+}
+
+func (r *DeleteProjectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteProjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteUserRoleProjectRequestParams struct {
+	// Project ID.
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// User ID.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+}
+
+type DeleteUserRoleProjectRequest struct {
+	*tchttp.BaseRequest
+	
+	// Project ID.
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// User ID.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+}
+
+func (r *DeleteUserRoleProjectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteUserRoleProjectRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProjectId")
+	delete(f, "UserId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteUserRoleProjectRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteUserRoleProjectResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// Expansion.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Message.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteUserRoleProjectResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteUserRoleProjectResponseParams `json:"Response"`
+}
+
+func (r *DeleteUserRoleProjectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteUserRoleProjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteUserRoleRequestParams struct {
+	// User ID.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+}
+
+type DeleteUserRoleRequest struct {
+	*tchttp.BaseRequest
+	
+	// User ID.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+}
+
+func (r *DeleteUserRoleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteUserRoleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "UserId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteUserRoleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteUserRoleResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// Expansion.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Message.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteUserRoleResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteUserRoleResponseParams `json:"Response"`
+}
+
+func (r *DeleteUserRoleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteUserRoleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDatasourceListRequestParams struct {
+	// None.
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Returns all pages and defaults to false.
+	AllPage *bool `json:"AllPage,omitnil,omitempty" name:"AllPage"`
+
+	// Database name search.
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
+
+	// None.
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
+
+	// None.
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Search keywords.
+	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
+
+	// Permission filter (0: all permissions, 1: access permission, 2: edit permission).
+	PermissionType *int64 `json:"PermissionType,omitnil,omitempty" name:"PermissionType"`
+}
+
+type DescribeDatasourceListRequest struct {
+	*tchttp.BaseRequest
+	
+	// None.
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Returns all pages and defaults to false.
+	AllPage *bool `json:"AllPage,omitnil,omitempty" name:"AllPage"`
+
+	// Database name search.
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
+
+	// None.
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
+
+	// None.
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Search keywords.
+	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
+
+	// Permission filter (0: all permissions, 1: access permission, 2: edit permission).
+	PermissionType *int64 `json:"PermissionType,omitnil,omitempty" name:"PermissionType"`
+}
+
+func (r *DescribeDatasourceListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDatasourceListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProjectId")
+	delete(f, "AllPage")
+	delete(f, "DbName")
+	delete(f, "PageNo")
+	delete(f, "PageSize")
+	delete(f, "Keyword")
+	delete(f, "PermissionType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDatasourceListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDatasourceListResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// List details.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *DatasourceInfoData `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Information.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Information.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDatasourceListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDatasourceListResponseParams `json:"Response"`
+}
+
+func (r *DescribeDatasourceListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDatasourceListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePageWidgetListRequestParams struct {
+	// Project ID.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Page ID.
+	PageId *string `json:"PageId,omitnil,omitempty" name:"PageId"`
+}
+
+type DescribePageWidgetListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Project ID.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Page ID.
+	PageId *string `json:"PageId,omitnil,omitempty" name:"PageId"`
+}
+
+func (r *DescribePageWidgetListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePageWidgetListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProjectId")
+	delete(f, "PageId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePageWidgetListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePageWidgetListResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// Extension parameter.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Returned data results.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *WidgetListVO `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Response message.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribePageWidgetListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribePageWidgetListResponseParams `json:"Response"`
+}
+
+func (r *DescribePageWidgetListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePageWidgetListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeProjectInfoRequestParams struct {
+	// Project ID.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Default dashboard.
+	DefaultPanelType *int64 `json:"DefaultPanelType,omitnil,omitempty" name:"DefaultPanelType"`
+}
+
+type DescribeProjectInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// Project ID.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Default dashboard.
+	DefaultPanelType *int64 `json:"DefaultPanelType,omitnil,omitempty" name:"DefaultPanelType"`
+}
+
+func (r *DescribeProjectInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProjectInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "DefaultPanelType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProjectInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeProjectInfoResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// ""
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// ""
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// Project details.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *Project `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeProjectInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeProjectInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeProjectInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProjectInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeProjectListRequestParams struct {
+	// Page capacity. The initial version defaults to 20 and may change dynamically based on screen width in the future.
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Page marker.
+	PageNo *uint64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
+
+	// Fuzzy search field.
+	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
+
+	// Whether to display all. If true, ignore pagination.
+	AllPage *bool `json:"AllPage,omitnil,omitempty" name:"AllPage"`
+
+	// Role information.
+	ModuleCollection *string `json:"ModuleCollection,omitnil,omitempty" name:"ModuleCollection"`
+
+	// moduleId set.
+	ModuleIdList []*string `json:"ModuleIdList,omitnil,omitempty" name:"ModuleIdList"`
+}
+
+type DescribeProjectListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Page capacity. The initial version defaults to 20 and may change dynamically based on screen width in the future.
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Page marker.
+	PageNo *uint64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
+
+	// Fuzzy search field.
+	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
+
+	// Whether to display all. If true, ignore pagination.
+	AllPage *bool `json:"AllPage,omitnil,omitempty" name:"AllPage"`
+
+	// Role information.
+	ModuleCollection *string `json:"ModuleCollection,omitnil,omitempty" name:"ModuleCollection"`
+
+	// moduleId set.
+	ModuleIdList []*string `json:"ModuleIdList,omitnil,omitempty" name:"ModuleIdList"`
+}
+
+func (r *DescribeProjectListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProjectListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PageSize")
+	delete(f, "PageNo")
+	delete(f, "Keyword")
+	delete(f, "AllPage")
+	delete(f, "ModuleCollection")
+	delete(f, "ModuleIdList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProjectListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeProjectListResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// Additional information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// API information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// Data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *ProjectListData `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeProjectListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeProjectListResponseParams `json:"Response"`
+}
+
+func (r *DescribeProjectListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProjectListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUserProjectListRequestParams struct {
+	// Project ID.
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// None.
+	AllPage *bool `json:"AllPage,omitnil,omitempty" name:"AllPage"`
+
+	// None.
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
+
+	// None.
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Whether to filter out enterprise administrators.
+	IsFilterPerAuthUser *bool `json:"IsFilterPerAuthUser,omitnil,omitempty" name:"IsFilterPerAuthUser"`
+
+	// Whether to filter out the current user.
+	IsFilterCurrentUser *bool `json:"IsFilterCurrentUser,omitnil,omitempty" name:"IsFilterCurrentUser"`
+
+	// Keyword.
+	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
+}
+
+type DescribeUserProjectListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Project ID.
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// None.
+	AllPage *bool `json:"AllPage,omitnil,omitempty" name:"AllPage"`
+
+	// None.
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
+
+	// None.
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Whether to filter out enterprise administrators.
+	IsFilterPerAuthUser *bool `json:"IsFilterPerAuthUser,omitnil,omitempty" name:"IsFilterPerAuthUser"`
+
+	// Whether to filter out the current user.
+	IsFilterCurrentUser *bool `json:"IsFilterCurrentUser,omitnil,omitempty" name:"IsFilterCurrentUser"`
+
+	// Keyword.
+	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
+}
+
+func (r *DescribeUserProjectListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserProjectListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProjectId")
+	delete(f, "AllPage")
+	delete(f, "PageNo")
+	delete(f, "PageSize")
+	delete(f, "IsFilterPerAuthUser")
+	delete(f, "IsFilterCurrentUser")
+	delete(f, "Keyword")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUserProjectListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUserProjectListResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// Data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *CorpUserListData `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Expansion.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Message.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeUserProjectListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeUserProjectListResponseParams `json:"Response"`
+}
+
+func (r *DescribeUserProjectListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserProjectListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUserRoleListRequestParams struct {
+	// Page number.
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
+
+	// Number of pages.
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// All page numbers.
+	AllPage *bool `json:"AllPage,omitnil,omitempty" name:"AllPage"`
+
+	// 0: enterprise user. 1: visitor. If left blank, it indicates all users.
+	UserType *string `json:"UserType,omitnil,omitempty" name:"UserType"`
+
+	// Keyword for fuzzy search.
+	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
+
+	// Project ID.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Whether to only obtain users bound to the WeCom app.
+	IsOnlyBindAppUser *bool `json:"IsOnlyBindAppUser,omitnil,omitempty" name:"IsOnlyBindAppUser"`
+}
+
+type DescribeUserRoleListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Page number.
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
+
+	// Number of pages.
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// All page numbers.
+	AllPage *bool `json:"AllPage,omitnil,omitempty" name:"AllPage"`
+
+	// 0: enterprise user. 1: visitor. If left blank, it indicates all users.
+	UserType *string `json:"UserType,omitnil,omitempty" name:"UserType"`
+
+	// Keyword for fuzzy search.
+	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
+
+	// Project ID.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Whether to only obtain users bound to the WeCom app.
+	IsOnlyBindAppUser *bool `json:"IsOnlyBindAppUser,omitnil,omitempty" name:"IsOnlyBindAppUser"`
+}
+
+func (r *DescribeUserRoleListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserRoleListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PageNo")
+	delete(f, "PageSize")
+	delete(f, "AllPage")
+	delete(f, "UserType")
+	delete(f, "Keyword")
+	delete(f, "ProjectId")
+	delete(f, "IsOnlyBindAppUser")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUserRoleListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUserRoleListResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// Extension description information (providing more exception messages for auxiliary judgment).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *UserRoleListData `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Message.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeUserRoleListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeUserRoleListResponseParams `json:"Response"`
+}
+
+func (r *DescribeUserRoleListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserRoleListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUserRoleProjectListRequestParams struct {
+	// Page number.
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
+
+	// Number of pages.
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Project ID.
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Whether to only obtain users bound to the WeCom app.
+	IsOnlyBindAppUser *bool `json:"IsOnlyBindAppUser,omitnil,omitempty" name:"IsOnlyBindAppUser"`
+
+	// Whether to obtain all the data.
+	AllPage *bool `json:"AllPage,omitnil,omitempty" name:"AllPage"`
+
+	// Role code.
+	RoleCode *string `json:"RoleCode,omitnil,omitempty" name:"RoleCode"`
+
+	// User ID list.
+	UserIdList []*string `json:"UserIdList,omitnil,omitempty" name:"UserIdList"`
+
+	// Search keywords.
+	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
+}
+
+type DescribeUserRoleProjectListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Page number.
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
+
+	// Number of pages.
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Project ID.
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Whether to only obtain users bound to the WeCom app.
+	IsOnlyBindAppUser *bool `json:"IsOnlyBindAppUser,omitnil,omitempty" name:"IsOnlyBindAppUser"`
+
+	// Whether to obtain all the data.
+	AllPage *bool `json:"AllPage,omitnil,omitempty" name:"AllPage"`
+
+	// Role code.
+	RoleCode *string `json:"RoleCode,omitnil,omitempty" name:"RoleCode"`
+
+	// User ID list.
+	UserIdList []*string `json:"UserIdList,omitnil,omitempty" name:"UserIdList"`
+
+	// Search keywords.
+	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
+}
+
+func (r *DescribeUserRoleProjectListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserRoleProjectListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PageNo")
+	delete(f, "PageSize")
+	delete(f, "ProjectId")
+	delete(f, "IsOnlyBindAppUser")
+	delete(f, "AllPage")
+	delete(f, "RoleCode")
+	delete(f, "UserIdList")
+	delete(f, "Keyword")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUserRoleProjectListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUserRoleProjectListResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// Expansion.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *UserRoleListData `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Message.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeUserRoleProjectListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeUserRoleProjectListResponseParams `json:"Response"`
+}
+
+func (r *DescribeUserRoleProjectListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserRoleProjectListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type EmbedTokenInfo struct {
+	// Information identifier.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Token.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BIToken *string `json:"BIToken,omitnil,omitempty" name:"BIToken"`
+
+	// Project ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Creator.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreatedUser *string `json:"CreatedUser,omitnil,omitempty" name:"CreatedUser"`
+
+	// Creation time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreatedAt *string `json:"CreatedAt,omitnil,omitempty" name:"CreatedAt"`
+
+	// Updater.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdatedUser *string `json:"UpdatedUser,omitnil,omitempty" name:"UpdatedUser"`
+
+	// Update time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdatedAt *string `json:"UpdatedAt,omitnil,omitempty" name:"UpdatedAt"`
+
+	// Page ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PageId *string `json:"PageId,omitnil,omitempty" name:"PageId"`
+
+	// Backup.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExtraParam *string `json:"ExtraParam,omitnil,omitempty" name:"ExtraParam"`
+
+	// Embedding type.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Scope *string `json:"Scope,omitnil,omitempty" name:"Scope"`
+
+	// Expiration time (in minutes), with a maximum value of 240.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExpireTime *uint64 `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// User enterprise ID (only used for multi-user).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UserCorpId *string `json:"UserCorpId,omitnil,omitempty" name:"UserCorpId"`
+
+	// User ID (only used for multi-user).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// Access count limit (range: 1–99999). Leave empty to disable access restrictions.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TicketNum *int64 `json:"TicketNum,omitnil,omitempty" name:"TicketNum"`
+
+	// Global parameter.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GlobalParam *string `json:"GlobalParam,omitnil,omitempty" name:"GlobalParam"`
+
+	// "embed" indicates page dashboard embedding, and "chatBIEmbed" indicates ChatBI embedding.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Intention *string `json:"Intention,omitnil,omitempty" name:"Intention"`
+
+	// 100: no bound user.
+	// 200: single token per user.
+	// 300: multiple tokens per user.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TokenType *int64 `json:"TokenType,omitnil,omitempty" name:"TokenType"`
+
+	// Number of tokens.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TokenNum *int64 `json:"TokenNum,omitnil,omitempty" name:"TokenNum"`
+
+	// Whether it is multiple tokens per user.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SingleUserMultiToken *bool `json:"SingleUserMultiToken,omitnil,omitempty" name:"SingleUserMultiToken"`
+
+	// Embedded display configurations: Currently for ChatBI embedding scenarios; TableFilter represents data table list filtering, SqlView represents SQL view feature.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigParam *string `json:"ConfigParam,omitnil,omitempty" name:"ConfigParam"`
+}
+
 type ErrorInfo struct {
 	// Error description field.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -381,6 +2462,118 @@ type ErrorInfo struct {
 	ReservedField *string `json:"ReservedField,omitnil,omitempty" name:"ReservedField"`
 }
 
+// Predefined struct for user
+type ExportScreenPageRequestParams struct {
+	// Project ID.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Page ID.
+	PageId *string `json:"PageId,omitnil,omitempty" name:"PageId"`
+
+	// Canvas type. Grid canvas: GRID; Free canvas: FREE.
+	CanvasType *string `json:"CanvasType,omitnil,omitempty" name:"CanvasType"`
+
+	// Image export type. Valid values: Base64, and URL (valid period: 1 day).
+	PicType *string `json:"PicType,omitnil,omitempty" name:"PicType"`
+
+	// Component IDs. When empty, export the entire page.
+	WidgetIds []*string `json:"WidgetIds,omitnil,omitempty" name:"WidgetIds"`
+
+	// Whether it is an async request.
+	AsyncRequest *bool `json:"AsyncRequest,omitnil,omitempty" name:"AsyncRequest"`
+
+	// Transaction ID.
+	TranId *string `json:"TranId,omitnil,omitempty" name:"TranId"`
+}
+
+type ExportScreenPageRequest struct {
+	*tchttp.BaseRequest
+	
+	// Project ID.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Page ID.
+	PageId *string `json:"PageId,omitnil,omitempty" name:"PageId"`
+
+	// Canvas type. Grid canvas: GRID; Free canvas: FREE.
+	CanvasType *string `json:"CanvasType,omitnil,omitempty" name:"CanvasType"`
+
+	// Image export type. Valid values: Base64, and URL (valid period: 1 day).
+	PicType *string `json:"PicType,omitnil,omitempty" name:"PicType"`
+
+	// Component IDs. When empty, export the entire page.
+	WidgetIds []*string `json:"WidgetIds,omitnil,omitempty" name:"WidgetIds"`
+
+	// Whether it is an async request.
+	AsyncRequest *bool `json:"AsyncRequest,omitnil,omitempty" name:"AsyncRequest"`
+
+	// Transaction ID.
+	TranId *string `json:"TranId,omitnil,omitempty" name:"TranId"`
+}
+
+func (r *ExportScreenPageRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ExportScreenPageRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProjectId")
+	delete(f, "PageId")
+	delete(f, "CanvasType")
+	delete(f, "PicType")
+	delete(f, "WidgetIds")
+	delete(f, "AsyncRequest")
+	delete(f, "TranId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ExportScreenPageRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ExportScreenPageResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// Extension parameter.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Returned data results.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *PageScreenListVO `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Response message.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ExportScreenPageResponse struct {
+	*tchttp.BaseResponse
+	Response *ExportScreenPageResponseParams `json:"Response"`
+}
+
+func (r *ExportScreenPageResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ExportScreenPageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type IdDTO struct {
 	// Request ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -401,4 +2594,1336 @@ type IdDTO struct {
 	// Transaction status.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TranStatus *int64 `json:"TranStatus,omitnil,omitempty" name:"TranStatus"`
+}
+
+// Predefined struct for user
+type ModifyDatasourceCloudRequestParams struct {
+	// The backend provides dictionaries: domain type. 1: Tencent Cloud; 2: local.
+	ServiceType *string `json:"ServiceType,omitnil,omitempty" name:"ServiceType"`
+
+	// Drive.
+	DbType *string `json:"DbType,omitnil,omitempty" name:"DbType"`
+
+	// Database encoding.
+	Charset *string `json:"Charset,omitnil,omitempty" name:"Charset"`
+
+	// Username.
+	DbUser *string `json:"DbUser,omitnil,omitempty" name:"DbUser"`
+
+	// Password.
+	DbPwd *string `json:"DbPwd,omitnil,omitempty" name:"DbPwd"`
+
+	// Database name.
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
+
+	// Database alias.
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// Project ID.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Primary key.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Private network IP address of the public cloud.
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// Private network port of the public cloud.
+	Vport *string `json:"Vport,omitnil,omitempty" name:"Vport"`
+
+	// VPC identifier.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Unified VPC identifier.
+	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
+
+	// Region identifier (gz, bj).
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+
+	// Extension parameter.
+	ExtraParam *string `json:"ExtraParam,omitnil,omitempty" name:"ExtraParam"`
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Product name of the data source.
+	ProdDbName *string `json:"ProdDbName,omitnil,omitempty" name:"ProdDbName"`
+
+	// Third-party data source identifier.
+	DataOrigin *string `json:"DataOrigin,omitnil,omitempty" name:"DataOrigin"`
+
+	// Third-party project ID.
+	DataOriginProjectId *string `json:"DataOriginProjectId,omitnil,omitempty" name:"DataOriginProjectId"`
+
+	// Third-party data source ID.
+	DataOriginDatasourceId *string `json:"DataOriginDatasourceId,omitnil,omitempty" name:"DataOriginDatasourceId"`
+
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+}
+
+type ModifyDatasourceCloudRequest struct {
+	*tchttp.BaseRequest
+	
+	// The backend provides dictionaries: domain type. 1: Tencent Cloud; 2: local.
+	ServiceType *string `json:"ServiceType,omitnil,omitempty" name:"ServiceType"`
+
+	// Drive.
+	DbType *string `json:"DbType,omitnil,omitempty" name:"DbType"`
+
+	// Database encoding.
+	Charset *string `json:"Charset,omitnil,omitempty" name:"Charset"`
+
+	// Username.
+	DbUser *string `json:"DbUser,omitnil,omitempty" name:"DbUser"`
+
+	// Password.
+	DbPwd *string `json:"DbPwd,omitnil,omitempty" name:"DbPwd"`
+
+	// Database name.
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
+
+	// Database alias.
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// Project ID.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Primary key.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Private network IP address of the public cloud.
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// Private network port of the public cloud.
+	Vport *string `json:"Vport,omitnil,omitempty" name:"Vport"`
+
+	// VPC identifier.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Unified VPC identifier.
+	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
+
+	// Region identifier (gz, bj).
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+
+	// Extension parameter.
+	ExtraParam *string `json:"ExtraParam,omitnil,omitempty" name:"ExtraParam"`
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Product name of the data source.
+	ProdDbName *string `json:"ProdDbName,omitnil,omitempty" name:"ProdDbName"`
+
+	// Third-party data source identifier.
+	DataOrigin *string `json:"DataOrigin,omitnil,omitempty" name:"DataOrigin"`
+
+	// Third-party project ID.
+	DataOriginProjectId *string `json:"DataOriginProjectId,omitnil,omitempty" name:"DataOriginProjectId"`
+
+	// Third-party data source ID.
+	DataOriginDatasourceId *string `json:"DataOriginDatasourceId,omitnil,omitempty" name:"DataOriginDatasourceId"`
+
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+}
+
+func (r *ModifyDatasourceCloudRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDatasourceCloudRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ServiceType")
+	delete(f, "DbType")
+	delete(f, "Charset")
+	delete(f, "DbUser")
+	delete(f, "DbPwd")
+	delete(f, "DbName")
+	delete(f, "SourceName")
+	delete(f, "ProjectId")
+	delete(f, "Id")
+	delete(f, "Vip")
+	delete(f, "Vport")
+	delete(f, "VpcId")
+	delete(f, "UniqVpcId")
+	delete(f, "RegionId")
+	delete(f, "ExtraParam")
+	delete(f, "InstanceId")
+	delete(f, "ProdDbName")
+	delete(f, "DataOrigin")
+	delete(f, "DataOriginProjectId")
+	delete(f, "DataOriginDatasourceId")
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDatasourceCloudRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDatasourceCloudResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// Success No.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Additional information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Prompt.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyDatasourceCloudResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDatasourceCloudResponseParams `json:"Response"`
+}
+
+func (r *ModifyDatasourceCloudResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDatasourceCloudResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDatasourceRequestParams struct {
+	// HOST
+	DbHost *string `json:"DbHost,omitnil,omitempty" name:"DbHost"`
+
+	// Port.
+	DbPort *uint64 `json:"DbPort,omitnil,omitempty" name:"DbPort"`
+
+	// The backend provides dictionaries: domain type. 1: Tencent Cloud; 2: local.
+	ServiceType *string `json:"ServiceType,omitnil,omitempty" name:"ServiceType"`
+
+	// Drive.
+	DbType *string `json:"DbType,omitnil,omitempty" name:"DbType"`
+
+	// Database encoding.
+	Charset *string `json:"Charset,omitnil,omitempty" name:"Charset"`
+
+	// Username.
+	DbUser *string `json:"DbUser,omitnil,omitempty" name:"DbUser"`
+
+	// Password.
+	DbPwd *string `json:"DbPwd,omitnil,omitempty" name:"DbPwd"`
+
+	// Database name.
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
+
+	// Database alias.
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// Data source ID.
+	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Project ID.
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Catalog value.
+	Catalog *string `json:"Catalog,omitnil,omitempty" name:"Catalog"`
+
+	// Third-party data source identifier.
+	DataOrigin *string `json:"DataOrigin,omitnil,omitempty" name:"DataOrigin"`
+
+	// Third-party project ID.
+	DataOriginProjectId *string `json:"DataOriginProjectId,omitnil,omitempty" name:"DataOriginProjectId"`
+
+	// Third-party data source ID.
+	DataOriginDatasourceId *string `json:"DataOriginDatasourceId,omitnil,omitempty" name:"DataOriginDatasourceId"`
+
+	// Extension parameter.
+	ExtraParam *string `json:"ExtraParam,omitnil,omitempty" name:"ExtraParam"`
+
+	// Unified identifier of the Tencent Cloud VPC.
+	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
+
+	// VPC IP address.
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// VPC port.
+	Vport *string `json:"Vport,omitnil,omitempty" name:"Vport"`
+
+	// Tencent Cloud VPC identifier.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Enable VPC.  
+	UseVPC *bool `json:"UseVPC,omitnil,omitempty" name:"UseVPC"`
+
+	// Region.
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+}
+
+type ModifyDatasourceRequest struct {
+	*tchttp.BaseRequest
+	
+	// HOST
+	DbHost *string `json:"DbHost,omitnil,omitempty" name:"DbHost"`
+
+	// Port.
+	DbPort *uint64 `json:"DbPort,omitnil,omitempty" name:"DbPort"`
+
+	// The backend provides dictionaries: domain type. 1: Tencent Cloud; 2: local.
+	ServiceType *string `json:"ServiceType,omitnil,omitempty" name:"ServiceType"`
+
+	// Drive.
+	DbType *string `json:"DbType,omitnil,omitempty" name:"DbType"`
+
+	// Database encoding.
+	Charset *string `json:"Charset,omitnil,omitempty" name:"Charset"`
+
+	// Username.
+	DbUser *string `json:"DbUser,omitnil,omitempty" name:"DbUser"`
+
+	// Password.
+	DbPwd *string `json:"DbPwd,omitnil,omitempty" name:"DbPwd"`
+
+	// Database name.
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
+
+	// Database alias.
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// Data source ID.
+	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Project ID.
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Catalog value.
+	Catalog *string `json:"Catalog,omitnil,omitempty" name:"Catalog"`
+
+	// Third-party data source identifier.
+	DataOrigin *string `json:"DataOrigin,omitnil,omitempty" name:"DataOrigin"`
+
+	// Third-party project ID.
+	DataOriginProjectId *string `json:"DataOriginProjectId,omitnil,omitempty" name:"DataOriginProjectId"`
+
+	// Third-party data source ID.
+	DataOriginDatasourceId *string `json:"DataOriginDatasourceId,omitnil,omitempty" name:"DataOriginDatasourceId"`
+
+	// Extension parameter.
+	ExtraParam *string `json:"ExtraParam,omitnil,omitempty" name:"ExtraParam"`
+
+	// Unified identifier of the Tencent Cloud VPC.
+	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
+
+	// VPC IP address.
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// VPC port.
+	Vport *string `json:"Vport,omitnil,omitempty" name:"Vport"`
+
+	// Tencent Cloud VPC identifier.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Enable VPC.  
+	UseVPC *bool `json:"UseVPC,omitnil,omitempty" name:"UseVPC"`
+
+	// Region.
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+}
+
+func (r *ModifyDatasourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDatasourceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DbHost")
+	delete(f, "DbPort")
+	delete(f, "ServiceType")
+	delete(f, "DbType")
+	delete(f, "Charset")
+	delete(f, "DbUser")
+	delete(f, "DbPwd")
+	delete(f, "DbName")
+	delete(f, "SourceName")
+	delete(f, "Id")
+	delete(f, "ProjectId")
+	delete(f, "Catalog")
+	delete(f, "DataOrigin")
+	delete(f, "DataOriginProjectId")
+	delete(f, "DataOriginDatasourceId")
+	delete(f, "ExtraParam")
+	delete(f, "UniqVpcId")
+	delete(f, "Vip")
+	delete(f, "Vport")
+	delete(f, "VpcId")
+	delete(f, "UseVPC")
+	delete(f, "RegionId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDatasourceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDatasourceResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// None.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Additional information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Prompt.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyDatasourceResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDatasourceResponseParams `json:"Response"`
+}
+
+func (r *ModifyDatasourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDatasourceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyProjectRequestParams struct {
+	// Project ID.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Color value.
+	ColorCode *string `json:"ColorCode,omitnil,omitempty" name:"ColorCode"`
+
+	// Icon.
+	Logo *string `json:"Logo,omitnil,omitempty" name:"Logo"`
+
+	// Remarks.
+	Mark *string `json:"Mark,omitnil,omitempty" name:"Mark"`
+
+	// Available upon request.
+	IsApply *bool `json:"IsApply,omitnil,omitempty" name:"IsApply"`
+
+	// Seed.
+	Seed *string `json:"Seed,omitnil,omitempty" name:"Seed"`
+
+	// Default dashboard.
+	DefaultPanelType *int64 `json:"DefaultPanelType,omitnil,omitempty" name:"DefaultPanelType"`
+
+	// 2
+	PanelScope *string `json:"PanelScope,omitnil,omitempty" name:"PanelScope"`
+
+	// Project management platform.
+	ManagePlatform *string `json:"ManagePlatform,omitnil,omitempty" name:"ManagePlatform"`
+}
+
+type ModifyProjectRequest struct {
+	*tchttp.BaseRequest
+	
+	// Project ID.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Color value.
+	ColorCode *string `json:"ColorCode,omitnil,omitempty" name:"ColorCode"`
+
+	// Icon.
+	Logo *string `json:"Logo,omitnil,omitempty" name:"Logo"`
+
+	// Remarks.
+	Mark *string `json:"Mark,omitnil,omitempty" name:"Mark"`
+
+	// Available upon request.
+	IsApply *bool `json:"IsApply,omitnil,omitempty" name:"IsApply"`
+
+	// Seed.
+	Seed *string `json:"Seed,omitnil,omitempty" name:"Seed"`
+
+	// Default dashboard.
+	DefaultPanelType *int64 `json:"DefaultPanelType,omitnil,omitempty" name:"DefaultPanelType"`
+
+	// 2
+	PanelScope *string `json:"PanelScope,omitnil,omitempty" name:"PanelScope"`
+
+	// Project management platform.
+	ManagePlatform *string `json:"ManagePlatform,omitnil,omitempty" name:"ManagePlatform"`
+}
+
+func (r *ModifyProjectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyProjectRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "Name")
+	delete(f, "ColorCode")
+	delete(f, "Logo")
+	delete(f, "Mark")
+	delete(f, "IsApply")
+	delete(f, "Seed")
+	delete(f, "DefaultPanelType")
+	delete(f, "PanelScope")
+	delete(f, "ManagePlatform")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyProjectRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyProjectResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// Additional information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Returned data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Result.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyProjectResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyProjectResponseParams `json:"Response"`
+}
+
+func (r *ModifyProjectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyProjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyUserRoleProjectRequestParams struct {
+	// Project ID.
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// User ID.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// Role ID list.
+	RoleIdList []*int64 `json:"RoleIdList,omitnil,omitempty" name:"RoleIdList"`
+
+	// Mailbox.
+	Email *string `json:"Email,omitnil,omitempty" name:"Email"`
+
+	// Username.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// WeCom app user ID.
+	AppUserId *string `json:"AppUserId,omitnil,omitempty" name:"AppUserId"`
+}
+
+type ModifyUserRoleProjectRequest struct {
+	*tchttp.BaseRequest
+	
+	// Project ID.
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// User ID.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// Role ID list.
+	RoleIdList []*int64 `json:"RoleIdList,omitnil,omitempty" name:"RoleIdList"`
+
+	// Mailbox.
+	Email *string `json:"Email,omitnil,omitempty" name:"Email"`
+
+	// Username.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// WeCom app user ID.
+	AppUserId *string `json:"AppUserId,omitnil,omitempty" name:"AppUserId"`
+}
+
+func (r *ModifyUserRoleProjectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyUserRoleProjectRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProjectId")
+	delete(f, "UserId")
+	delete(f, "RoleIdList")
+	delete(f, "Email")
+	delete(f, "UserName")
+	delete(f, "AppUserId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyUserRoleProjectRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyUserRoleProjectResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// Expansion.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Message.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// Data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyUserRoleProjectResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyUserRoleProjectResponseParams `json:"Response"`
+}
+
+func (r *ModifyUserRoleProjectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyUserRoleProjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyUserRoleRequestParams struct {
+	// User ID.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// Role ID list.
+	RoleIdList []*int64 `json:"RoleIdList,omitnil,omitempty" name:"RoleIdList"`
+
+	// Mailbox.
+	Email *string `json:"Email,omitnil,omitempty" name:"Email"`
+
+	// Username.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Mobile number.
+	PhoneNumber *string `json:"PhoneNumber,omitnil,omitempty" name:"PhoneNumber"`
+
+	// Telephone country code.
+	AreaCode *string `json:"AreaCode,omitnil,omitempty" name:"AreaCode"`
+
+	// WeCom user ID.
+	AppUserId *string `json:"AppUserId,omitnil,omitempty" name:"AppUserId"`
+
+	// Whether to enable mobile phone verification code login (0: disabled, 1: enabled).
+	LoginSecurityStatus *int64 `json:"LoginSecurityStatus,omitnil,omitempty" name:"LoginSecurityStatus"`
+
+	// Whether to enable password expiration reminder (0: disabled, 1: enabled).
+	ResetPassWordTip *int64 `json:"ResetPassWordTip,omitnil,omitempty" name:"ResetPassWordTip"`
+
+	// Force password reset (0: disabled, 1: enabled).
+	ForceResetPassWord *int64 `json:"ForceResetPassWord,omitnil,omitempty" name:"ForceResetPassWord"`
+
+	// Password expiration reminder period: 30, 60, 90 (default), or 180 days.
+	PasswordExpired *int64 `json:"PasswordExpired,omitnil,omitempty" name:"PasswordExpired"`
+}
+
+type ModifyUserRoleRequest struct {
+	*tchttp.BaseRequest
+	
+	// User ID.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// Role ID list.
+	RoleIdList []*int64 `json:"RoleIdList,omitnil,omitempty" name:"RoleIdList"`
+
+	// Mailbox.
+	Email *string `json:"Email,omitnil,omitempty" name:"Email"`
+
+	// Username.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Mobile number.
+	PhoneNumber *string `json:"PhoneNumber,omitnil,omitempty" name:"PhoneNumber"`
+
+	// Telephone country code.
+	AreaCode *string `json:"AreaCode,omitnil,omitempty" name:"AreaCode"`
+
+	// WeCom user ID.
+	AppUserId *string `json:"AppUserId,omitnil,omitempty" name:"AppUserId"`
+
+	// Whether to enable mobile phone verification code login (0: disabled, 1: enabled).
+	LoginSecurityStatus *int64 `json:"LoginSecurityStatus,omitnil,omitempty" name:"LoginSecurityStatus"`
+
+	// Whether to enable password expiration reminder (0: disabled, 1: enabled).
+	ResetPassWordTip *int64 `json:"ResetPassWordTip,omitnil,omitempty" name:"ResetPassWordTip"`
+
+	// Force password reset (0: disabled, 1: enabled).
+	ForceResetPassWord *int64 `json:"ForceResetPassWord,omitnil,omitempty" name:"ForceResetPassWord"`
+
+	// Password expiration reminder period: 30, 60, 90 (default), or 180 days.
+	PasswordExpired *int64 `json:"PasswordExpired,omitnil,omitempty" name:"PasswordExpired"`
+}
+
+func (r *ModifyUserRoleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyUserRoleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "UserId")
+	delete(f, "RoleIdList")
+	delete(f, "Email")
+	delete(f, "UserName")
+	delete(f, "PhoneNumber")
+	delete(f, "AreaCode")
+	delete(f, "AppUserId")
+	delete(f, "LoginSecurityStatus")
+	delete(f, "ResetPassWordTip")
+	delete(f, "ForceResetPassWord")
+	delete(f, "PasswordExpired")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyUserRoleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyUserRoleResponseParams struct {
+	// Custom error information object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorInfo *ErrorInfo `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
+
+	// Expansion.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Message.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// Data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyUserRoleResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyUserRoleResponseParams `json:"Response"`
+}
+
+func (r *ModifyUserRoleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyUserRoleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type PageScreenListVO struct {
+	// Image export type. Valid values: Base64, and URL.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PicType *string `json:"PicType,omitnil,omitempty" name:"PicType"`
+
+	// Image list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	List []*PageScreenVO `json:"List,omitnil,omitempty" name:"List"`
+
+	// Async transaction ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TranId *string `json:"TranId,omitnil,omitempty" name:"TranId"`
+
+	// Transaction status.
+	// 1: processing; 2: processing successful; 3: processing failed (error content in outer Msg).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TranStatus *int64 `json:"TranStatus,omitnil,omitempty" name:"TranStatus"`
+}
+
+type PageScreenVO struct {
+	// Screenshot Base64 or URL.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Component ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WidgetId *string `json:"WidgetId,omitnil,omitempty" name:"WidgetId"`
+}
+
+type PermissionComponent struct {
+	// Permission value.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ModuleId *string `json:"ModuleId,omitnil,omitempty" name:"ModuleId"`
+
+	// Visible/Available.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IncludeType *string `json:"IncludeType,omitnil,omitempty" name:"IncludeType"`
+
+	// Target upgrade version.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpgradeVersionType *string `json:"UpgradeVersionType,omitnil,omitempty" name:"UpgradeVersionType"`
+
+	// Supplemental information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tips *string `json:"Tips,omitnil,omitempty" name:"Tips"`
+
+	// Key for supplementary information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TipsKey *string `json:"TipsKey,omitnil,omitempty" name:"TipsKey"`
+}
+
+type PermissionGroup struct {
+	// Group name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ModuleGroup *string `json:"ModuleGroup,omitnil,omitempty" name:"ModuleGroup"`
+
+	// Permission list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Components []*PermissionComponent `json:"Components,omitnil,omitempty" name:"Components"`
+}
+
+type Project struct {
+	// Project ID.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Project logo.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Logo *string `json:"Logo,omitnil,omitempty" name:"Logo"`
+
+	// Project name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Background color of the logo.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ColorCode *string `json:"ColorCode,omitnil,omitempty" name:"ColorCode"`
+
+	// Creator.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreatedUser *string `json:"CreatedUser,omitnil,omitempty" name:"CreatedUser"`
+
+	// Creation time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreatedAt *string `json:"CreatedAt,omitnil,omitempty" name:"CreatedAt"`
+
+	// Number of members.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MemberCount *int64 `json:"MemberCount,omitnil,omitempty" name:"MemberCount"`
+
+	// Number of pages.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PageCount *int64 `json:"PageCount,omitnil,omitempty" name:"PageCount"`
+
+	// Last modified report and dashboard names.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LastModifyName *string `json:"LastModifyName,omitnil,omitempty" name:"LastModifyName"`
+
+	// ""
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// ""
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Apply *bool `json:"Apply,omitnil,omitempty" name:"Apply"`
+
+	// ""
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdatedUser *string `json:"UpdatedUser,omitnil,omitempty" name:"UpdatedUser"`
+
+	// ""
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdatedAt *string `json:"UpdatedAt,omitnil,omitempty" name:"UpdatedAt"`
+
+	// ""
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CorpId *string `json:"CorpId,omitnil,omitempty" name:"CorpId"`
+
+	// ""
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Mark *string `json:"Mark,omitnil,omitempty" name:"Mark"`
+
+	// ""
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Seed *string `json:"Seed,omitnil,omitempty" name:"Seed"`
+
+	// Permission list in the project.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AuthList []*string `json:"AuthList,omitnil,omitempty" name:"AuthList"`
+
+	// Default dashboard.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PanelScope *string `json:"PanelScope,omitnil,omitempty" name:"PanelScope"`
+
+	// Whether it is managed.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsExternalManage *bool `json:"IsExternalManage,omitnil,omitempty" name:"IsExternalManage"`
+
+	// Management platform name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ManagePlatform *string `json:"ManagePlatform,omitnil,omitempty" name:"ManagePlatform"`
+
+	// Customization parameter.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigList []*ProjectConfigList `json:"ConfigList,omitnil,omitempty" name:"ConfigList"`
+
+	// Creator.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreatedUserName *string `json:"CreatedUserName,omitnil,omitempty" name:"CreatedUserName"`
+
+	// Associated person ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Owner *string `json:"Owner,omitnil,omitempty" name:"Owner"`
+
+	// Associated person.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OwnerName *string `json:"OwnerName,omitnil,omitempty" name:"OwnerName"`
+
+	// Number of dashboard pages.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NormalCount *int64 `json:"NormalCount,omitnil,omitempty" name:"NormalCount"`
+
+	// Number of free canvas pages.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FreeCount *int64 `json:"FreeCount,omitnil,omitempty" name:"FreeCount"`
+
+	// Number of ad-hoc analysis pages.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AdhocCount *int64 `json:"AdhocCount,omitnil,omitempty" name:"AdhocCount"`
+
+	// Number of pages in the briefing
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BriefingCount *int64 `json:"BriefingCount,omitnil,omitempty" name:"BriefingCount"`
+}
+
+type ProjectConfigList struct {
+	// Module group.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ModuleGroup *string `json:"ModuleGroup,omitnil,omitempty" name:"ModuleGroup"`
+
+	// Content.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Components []*ProjectConfigResult `json:"Components,omitnil,omitempty" name:"Components"`
+}
+
+type ProjectConfigResult struct {
+	// Configuration name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ModuleId *string `json:"ModuleId,omitnil,omitempty" name:"ModuleId"`
+
+	// Configuration mode.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IncludeType *string `json:"IncludeType,omitnil,omitempty" name:"IncludeType"`
+
+	// Additional parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Params *string `json:"Params,omitnil,omitempty" name:"Params"`
+}
+
+type ProjectListData struct {
+	// Array.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	List []*Project `json:"List,omitnil,omitempty" name:"List"`
+
+	// Total number.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// 1
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalPages *uint64 `json:"TotalPages,omitnil,omitempty" name:"TotalPages"`
+}
+
+type UserGroupDTO struct {
+	// id
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// User group name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
+
+	// Parent node ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ParentId *int64 `json:"ParentId,omitnil,omitempty" name:"ParentId"`
+
+	// Whether it is default.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsDefault *int64 `json:"IsDefault,omitnil,omitempty" name:"IsDefault"`
+
+	// Administrator user ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AdminUserId *string `json:"AdminUserId,omitnil,omitempty" name:"AdminUserId"`
+
+	// Description.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Location.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Location *int64 `json:"Location,omitnil,omitempty" name:"Location"`
+}
+
+type UserIdAndUserName struct {
+	// User ID.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// Username.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Enterprise ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CorpId *string `json:"CorpId,omitnil,omitempty" name:"CorpId"`
+
+	// Email.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Email *string `json:"Email,omitnil,omitempty" name:"Email"`
+
+	// Last login time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LastLogin *string `json:"LastLogin,omitnil,omitempty" name:"LastLogin"`
+
+	// Enabled/Disabled status.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Whether to change the password during the first-time login.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FirstModify *int64 `json:"FirstModify,omitnil,omitempty" name:"FirstModify"`
+
+	// Mobile number.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PhoneNumber *string `json:"PhoneNumber,omitnil,omitempty" name:"PhoneNumber"`
+
+	// Telephone country code.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AreaCode *string `json:"AreaCode,omitnil,omitempty" name:"AreaCode"`
+
+	// Creator.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreatedUser *string `json:"CreatedUser,omitnil,omitempty" name:"CreatedUser"`
+
+	// Creation time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreatedAt *string `json:"CreatedAt,omitnil,omitempty" name:"CreatedAt"`
+
+	// Modifier.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdatedUser *string `json:"UpdatedUser,omitnil,omitempty" name:"UpdatedUser"`
+
+	// Change time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdatedAt *string `json:"UpdatedAt,omitnil,omitempty" name:"UpdatedAt"`
+
+	// Global role.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GlobalUserName *string `json:"GlobalUserName,omitnil,omitempty" name:"GlobalUserName"`
+
+	// Global role code.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GlobalUserCode *string `json:"GlobalUserCode,omitnil,omitempty" name:"GlobalUserCode"`
+
+	// Mobile number.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Mobile *string `json:"Mobile,omitnil,omitempty" name:"Mobile"`
+
+	// 1
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// 1
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AppUserId *string `json:"AppUserId,omitnil,omitempty" name:"AppUserId"`
+
+	// 1
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AppUserAliasName *string `json:"AppUserAliasName,omitnil,omitempty" name:"AppUserAliasName"`
+
+	// 1
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AppUserName *string `json:"AppUserName,omitnil,omitempty" name:"AppUserName"`
+
+	// 1
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InValidateAppRange *bool `json:"InValidateAppRange,omitnil,omitempty" name:"InValidateAppRange"`
+
+	//  -1: No activation required. 0: Inactivated. 1: Activated. Null value represents pending binding.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EmailActivationStatus *int64 `json:"EmailActivationStatus,omitnil,omitempty" name:"EmailActivationStatus"`
+
+	// 1
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+type UserInfo struct {
+	// User ID.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// Username.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Email.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Email *string `json:"Email,omitnil,omitempty" name:"Email"`
+
+	// Mobile number.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PhoneNumber *string `json:"PhoneNumber,omitnil,omitempty" name:"PhoneNumber"`
+
+	// Telephone country code.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AreaCode *string `json:"AreaCode,omitnil,omitempty" name:"AreaCode"`
+
+	// WeCom account ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AppUserId *string `json:"AppUserId,omitnil,omitempty" name:"AppUserId"`
+
+	// WeCom account name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AppUserName *string `json:"AppUserName,omitnil,omitempty" name:"AppUserName"`
+}
+
+type UserRoleListData struct {
+	// Total number.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Total number of pages.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalPages *int64 `json:"TotalPages,omitnil,omitempty" name:"TotalPages"`
+
+	// List.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	List []*UserRoleListDataUserRoleInfo `json:"List,omitnil,omitempty" name:"List"`
+}
+
+type UserRoleListDataRoleInfo struct {
+	// Role Name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RoleName *string `json:"RoleName,omitnil,omitempty" name:"RoleName"`
+
+	// Role ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RoleId *int64 `json:"RoleId,omitnil,omitempty" name:"RoleId"`
+
+	// Project ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Project name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
+
+	// Whether it is a global role (0: no; 1: yes).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ScopeType *int64 `json:"ScopeType,omitnil,omitempty" name:"ScopeType"`
+
+	// Role key.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ModuleCollection *string `json:"ModuleCollection,omitnil,omitempty" name:"ModuleCollection"`
+}
+
+type UserRoleListDataUserRoleInfo struct {
+	// Business ID.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// This API is used to obtain the role list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RoleList []*UserRoleListDataRoleInfo `json:"RoleList,omitnil,omitempty" name:"RoleList"`
+
+	// Role ID list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RoleIdList []*uint64 `json:"RoleIdList,omitnil,omitempty" name:"RoleIdList"`
+
+	// User ID.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// Username.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Enterprise ID.
+	CorpId *string `json:"CorpId,omitnil,omitempty" name:"CorpId"`
+
+	// Email.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Email *string `json:"Email,omitnil,omitempty" name:"Email"`
+
+	// Creator.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreatedUser *string `json:"CreatedUser,omitnil,omitempty" name:"CreatedUser"`
+
+	// Creation time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreatedAt *string `json:"CreatedAt,omitnil,omitempty" name:"CreatedAt"`
+
+	// Updater.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdatedUser *string `json:"UpdatedUser,omitnil,omitempty" name:"UpdatedUser"`
+
+	// Update time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdatedAt *string `json:"UpdatedAt,omitnil,omitempty" name:"UpdatedAt"`
+
+	// Last login time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LastLogin *string `json:"LastLogin,omitnil,omitempty" name:"LastLogin"`
+
+	// Account status.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Mobile number.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PhoneNumber *string `json:"PhoneNumber,omitnil,omitempty" name:"PhoneNumber"`
+
+	// Telephone country code.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AreaCode *string `json:"AreaCode,omitnil,omitempty" name:"AreaCode"`
+
+	// Whether it is the root account.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RootAccount *bool `json:"RootAccount,omitnil,omitempty" name:"RootAccount"`
+
+	// Whether it is an enterprise administrator.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CorpAdmin *bool `json:"CorpAdmin,omitnil,omitempty" name:"CorpAdmin"`
+
+	// WeCom user ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AppUserId *string `json:"AppUserId,omitnil,omitempty" name:"AppUserId"`
+
+	// Nickname.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AppUserAliasName *string `json:"AppUserAliasName,omitnil,omitempty" name:"AppUserAliasName"`
+
+	// Application username.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AppUserName *string `json:"AppUserName,omitnil,omitempty" name:"AppUserName"`
+
+	// Whether it is within the visible range.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InValidateAppRange *bool `json:"InValidateAppRange,omitnil,omitempty" name:"InValidateAppRange"`
+
+	// User openID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AppOpenUserId *string `json:"AppOpenUserId,omitnil,omitempty" name:"AppOpenUserId"`
+
+	// Activation status of email.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EmailActivationStatus *int64 `json:"EmailActivationStatus,omitnil,omitempty" name:"EmailActivationStatus"`
+
+	// User group information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UserGroupList []*UserGroupDTO `json:"UserGroupList,omitnil,omitempty" name:"UserGroupList"`
+}
+
+type WidgetListVO struct {
+	// uin
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CorpId *string `json:"CorpId,omitnil,omitempty" name:"CorpId"`
+
+	// Project ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Page ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PageId *string `json:"PageId,omitnil,omitempty" name:"PageId"`
+
+	// Component array.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WidgetList []*WidgetVO `json:"WidgetList,omitnil,omitempty" name:"WidgetList"`
+}
+
+type WidgetVO struct {
+	// Component ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WidgetId *string `json:"WidgetId,omitnil,omitempty" name:"WidgetId"`
+
+	// Component name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WidgetName *string `json:"WidgetName,omitnil,omitempty" name:"WidgetName"`
 }
