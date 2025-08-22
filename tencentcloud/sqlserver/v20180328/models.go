@@ -613,119 +613,147 @@ func (r *CreateBackupResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateBasicDBInstancesRequestParams struct {
-
+	// Instance AZ, such as ap-guangzhou-1 (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the `DescribeZones` API.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-
+	// Number of CPU cores.
 	Cpu *uint64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-
+	// Instance memory size in GB.
 	Memory *uint64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-
+	// Instance storage capacity in GB.
 	Storage *uint64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
-
+	// VPC subnet ID in the format of subnet-bdoe83fa.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-
+	// VPC ID in the format of vpc-dsp338hz.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-
+	// Host type of purchased instances. CLOUD_PREMIUM: Premium Disk for virtual machines; CLOUD_SSD: Cloud SSD for virtual machines; CLOUD_HSSD: Enhanced SSD for virtual machines; CLOUD_BSSD: Balanced SSD for virtual machines.
 	MachineType *string `json:"MachineType,omitnil,omitempty" name:"MachineType"`
 
-
+	// Billing mode. Valid value: POSTPAID (pay-as-you-go).
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
-
+	// Project ID.
 	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-
+	// Number of instances purchased this time. Default value: 1. Maximum value: 10.
 	GoodsNum *uint64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-
+	// SQL Server version. Valid values: `2008R2` (SQL Server 2008 R2 Enterprise), `2012SP3` (SQL Server 2012 Enterprise), `201202` (SQL Server 2012 Standard), `2014SP2` (SQL Server 2014 Enterprise), 201402 (SQL Server 2014 Standard), `2016SP1` (SQL Server 2016 Enterprise), `201602` (SQL Server 2016 Standard), `2017` (SQL Server 2017 Enterprise), `201702` (SQL Server 2017 Standard), `2019` (SQL Server 2019 Enterprise), `201902` (SQL Server 2019 Standard). Default value: `2008R2`. The available version varies by region, and you can pull the version information by calling the `DescribeProductConfig` API.
 	DBVersion *string `json:"DBVersion,omitnil,omitempty" name:"DBVersion"`
 
-
+	// Length of purchase of instance. The default value is 1, indicating one month. The value cannot exceed 48.
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-
+	// Security group list, which contains security group IDs in the format of sg-xxx.
 	SecurityGroupList []*string `json:"SecurityGroupList,omitnil,omitempty" name:"SecurityGroupList"`
 
-
+	// Auto-renewal flag. 0: normal renewal, 1: auto-renewal. Default value: 1.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
-
+	// Whether to automatically use voucher. 0: no, 1: yes. Default value: no.
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-
+	// Array of voucher IDs (currently, only one voucher can be used per order).
 	VoucherIds []*string `json:"VoucherIds,omitnil,omitempty" name:"VoucherIds"`
 
-
+	// Configuration of the maintenance window, which specifies the day of the week when maintenance can be performed. Valid values: 1 (Monday), 2 (Tuesday), 3 (Wednesday), 4 (Thursday), 5 (Friday), 6 (Saturday), 7 (Sunday).
 	Weekly []*int64 `json:"Weekly,omitnil,omitempty" name:"Weekly"`
 
-
+	// Configuration of the maintenance window, which specifies the start time of daily maintenance.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-
+	// Configuration of the maintenance window, which specifies the maintenance duration in hours.
 	Span *int64 `json:"Span,omitnil,omitempty" name:"Span"`
 
-
+	// Tags associated with the instances to be created.
 	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
-
+	// Collation of system character sets. Default value: `Chinese_PRC_CI_AS`.
 	Collation *string `json:"Collation,omitnil,omitempty" name:"Collation"`
 
-
+	// System time zone. Default value: `China Standard Time`.
 	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// Disk encryption identifier, 0-unencrypted, 1-encrypted.
+	DiskEncryptFlag *int64 `json:"DiskEncryptFlag,omitnil,omitempty" name:"DiskEncryptFlag"`
 }
 
 type CreateBasicDBInstancesRequest struct {
 	*tchttp.BaseRequest
 	
+	// Instance AZ, such as ap-guangzhou-1 (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the `DescribeZones` API.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
+	// Number of CPU cores.
 	Cpu *uint64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
+	// Instance memory size in GB.
 	Memory *uint64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
+	// Instance storage capacity in GB.
 	Storage *uint64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
+	// VPC subnet ID in the format of subnet-bdoe83fa.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
+	// VPC ID in the format of vpc-dsp338hz.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
+	// Host type of purchased instances. CLOUD_PREMIUM: Premium Disk for virtual machines; CLOUD_SSD: Cloud SSD for virtual machines; CLOUD_HSSD: Enhanced SSD for virtual machines; CLOUD_BSSD: Balanced SSD for virtual machines.
 	MachineType *string `json:"MachineType,omitnil,omitempty" name:"MachineType"`
 
+	// Billing mode. Valid value: POSTPAID (pay-as-you-go).
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
+	// Project ID.
 	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
+	// Number of instances purchased this time. Default value: 1. Maximum value: 10.
 	GoodsNum *uint64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
+	// SQL Server version. Valid values: `2008R2` (SQL Server 2008 R2 Enterprise), `2012SP3` (SQL Server 2012 Enterprise), `201202` (SQL Server 2012 Standard), `2014SP2` (SQL Server 2014 Enterprise), 201402 (SQL Server 2014 Standard), `2016SP1` (SQL Server 2016 Enterprise), `201602` (SQL Server 2016 Standard), `2017` (SQL Server 2017 Enterprise), `201702` (SQL Server 2017 Standard), `2019` (SQL Server 2019 Enterprise), `201902` (SQL Server 2019 Standard). Default value: `2008R2`. The available version varies by region, and you can pull the version information by calling the `DescribeProductConfig` API.
 	DBVersion *string `json:"DBVersion,omitnil,omitempty" name:"DBVersion"`
 
+	// Length of purchase of instance. The default value is 1, indicating one month. The value cannot exceed 48.
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
+	// Security group list, which contains security group IDs in the format of sg-xxx.
 	SecurityGroupList []*string `json:"SecurityGroupList,omitnil,omitempty" name:"SecurityGroupList"`
 
+	// Auto-renewal flag. 0: normal renewal, 1: auto-renewal. Default value: 1.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
+	// Whether to automatically use voucher. 0: no, 1: yes. Default value: no.
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
+	// Array of voucher IDs (currently, only one voucher can be used per order).
 	VoucherIds []*string `json:"VoucherIds,omitnil,omitempty" name:"VoucherIds"`
 
+	// Configuration of the maintenance window, which specifies the day of the week when maintenance can be performed. Valid values: 1 (Monday), 2 (Tuesday), 3 (Wednesday), 4 (Thursday), 5 (Friday), 6 (Saturday), 7 (Sunday).
 	Weekly []*int64 `json:"Weekly,omitnil,omitempty" name:"Weekly"`
 
+	// Configuration of the maintenance window, which specifies the start time of daily maintenance.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
+	// Configuration of the maintenance window, which specifies the maintenance duration in hours.
 	Span *int64 `json:"Span,omitnil,omitempty" name:"Span"`
 
+	// Tags associated with the instances to be created.
 	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
+	// Collation of system character sets. Default value: `Chinese_PRC_CI_AS`.
 	Collation *string `json:"Collation,omitnil,omitempty" name:"Collation"`
 
+	// System time zone. Default value: `China Standard Time`.
 	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// Disk encryption identifier, 0-unencrypted, 1-encrypted.
+	DiskEncryptFlag *int64 `json:"DiskEncryptFlag,omitnil,omitempty" name:"DiskEncryptFlag"`
 }
 
 func (r *CreateBasicDBInstancesRequest) ToJsonString() string {
@@ -762,6 +790,7 @@ func (r *CreateBasicDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "ResourceTags")
 	delete(f, "Collation")
 	delete(f, "TimeZone")
+	delete(f, "DiskEncryptFlag")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateBasicDBInstancesRequest has unknown keys!", "")
 	}
@@ -770,7 +799,7 @@ func (r *CreateBasicDBInstancesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateBasicDBInstancesResponseParams struct {
-
+	// Order name.
 	DealName *string `json:"DealName,omitnil,omitempty" name:"DealName"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3597,6 +3626,75 @@ func (r *DescribeBusinessIntelligenceFileResponse) FromJsonString(s string) erro
 }
 
 // Predefined struct for user
+type DescribeCollationTimeZoneRequestParams struct {
+	// Host type of the purchased instance. PM: physical server; CLOUD_PREMIUM: CVM with Premium Cloud Disk;
+	// CLOUD_SSD: CVM with Cloud SSD; CLOUD_HSSD: CVM with Enhanced SSD; CLOUD_TSSD: CVM with Tremendous SSD; CLOUD_BSSD: CVM with Balanced SSD; CLOUD_BASIC: CVM with cloud disk. PM is set as the default value.
+	MachineType *string `json:"MachineType,omitnil,omitempty" name:"MachineType"`
+
+	// Version number of the purchased instance.
+	DBVersion *string `json:"DBVersion,omitnil,omitempty" name:"DBVersion"`
+}
+
+type DescribeCollationTimeZoneRequest struct {
+	*tchttp.BaseRequest
+	
+	// Host type of the purchased instance. PM: physical server; CLOUD_PREMIUM: CVM with Premium Cloud Disk;
+	// CLOUD_SSD: CVM with Cloud SSD; CLOUD_HSSD: CVM with Enhanced SSD; CLOUD_TSSD: CVM with Tremendous SSD; CLOUD_BSSD: CVM with Balanced SSD; CLOUD_BASIC: CVM with cloud disk. PM is set as the default value.
+	MachineType *string `json:"MachineType,omitnil,omitempty" name:"MachineType"`
+
+	// Version number of the purchased instance.
+	DBVersion *string `json:"DBVersion,omitnil,omitempty" name:"DBVersion"`
+}
+
+func (r *DescribeCollationTimeZoneRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCollationTimeZoneRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MachineType")
+	delete(f, "DBVersion")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCollationTimeZoneRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCollationTimeZoneResponseParams struct {
+	// System character set collation list.
+	Collation []*string `json:"Collation,omitnil,omitempty" name:"Collation"`
+
+	// System time zone list.
+	TimeZone []*string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCollationTimeZoneResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCollationTimeZoneResponseParams `json:"Response"`
+}
+
+func (r *DescribeCollationTimeZoneResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCollationTimeZoneResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDBCharsetsRequestParams struct {
 	// Instance ID in the format of mssql-j8kv137v
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -4396,7 +4494,7 @@ func (r *DescribeInstanceByOrdersRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceByOrdersResponseParams struct {
-
+	// Resource ID set.
 	DealInstance []*DealInstance `json:"DealInstance,omitnil,omitempty" name:"DealInstance"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5214,6 +5312,98 @@ func (r *DescribeSlowlogsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeSpecSellStatusRequestParams struct {
+	// AZ ID. For example, ap-guangzhou-3.
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// Instance specification ID, which can be obtained by calling the DescribeProductConfig API.
+	SpecIdSet []*uint64 `json:"SpecIdSet,omitnil,omitempty" name:"SpecIdSet"`
+
+	// Database version, which can be obtained by calling the DescribeProductConfig API.
+	DBVersion *string `json:"DBVersion,omitnil,omitempty" name:"DBVersion"`
+
+	// Product ID, which can be obtained by calling the DescribeProductConfig API.
+	Pid *uint64 `json:"Pid,omitnil,omitempty" name:"Pid"`
+
+	// Payment mode. POST: pay-as-you-go; PRE: monthly subscription.
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Currency. CNY; USD.
+	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
+}
+
+type DescribeSpecSellStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// AZ ID. For example, ap-guangzhou-3.
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// Instance specification ID, which can be obtained by calling the DescribeProductConfig API.
+	SpecIdSet []*uint64 `json:"SpecIdSet,omitnil,omitempty" name:"SpecIdSet"`
+
+	// Database version, which can be obtained by calling the DescribeProductConfig API.
+	DBVersion *string `json:"DBVersion,omitnil,omitempty" name:"DBVersion"`
+
+	// Product ID, which can be obtained by calling the DescribeProductConfig API.
+	Pid *uint64 `json:"Pid,omitnil,omitempty" name:"Pid"`
+
+	// Payment mode. POST: pay-as-you-go; PRE: monthly subscription.
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Currency. CNY; USD.
+	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
+}
+
+func (r *DescribeSpecSellStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSpecSellStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Zone")
+	delete(f, "SpecIdSet")
+	delete(f, "DBVersion")
+	delete(f, "Pid")
+	delete(f, "PayMode")
+	delete(f, "Currency")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSpecSellStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSpecSellStatusResponseParams struct {
+	// Status set of specifications in different regions.
+	DescribeSpecSellStatusSet []*SpecSellStatus `json:"DescribeSpecSellStatusSet,omitnil,omitempty" name:"DescribeSpecSellStatusSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSpecSellStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSpecSellStatusResponseParams `json:"Response"`
+}
+
+func (r *DescribeSpecSellStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSpecSellStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeUploadBackupInfoRequestParams struct {
 	// ID of imported target instance
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -5481,6 +5671,14 @@ type DrReadableInfo struct {
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 }
 
+type DrZoneInfo struct {
+	// Resource ID of the secondary node.
+	DrInstanceId *string `json:"DrInstanceId,omitnil,omitempty" name:"DrInstanceId"`
+
+	// AZ of the secondary node.
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+}
+
 type EventConfig struct {
 	// Event type. Valid values: `slow` (set threshold for slow SQL ), `blocked` (set threshold for the blocking and deadlock).
 	EventType *string `json:"EventType,omitnil,omitempty" name:"EventType"`
@@ -5653,13 +5851,13 @@ func (r *InquiryPriceCreateDBInstancesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type InquiryPriceUpgradeDBInstanceRequestParams struct {
-	// Instance ID in the format of mssql-njj2mtpl
+	// Instance ID in the format of mssql-njj2mtpl.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Memory size after instance upgrade in GB, which cannot be smaller than the current instance memory size
+	// Memory size after instance upgrade in GB, which cannot be smaller than the current instance memory size.
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Storage capacity after instance upgrade in GB, which cannot be smaller than the current instance storage capacity
+	// Storage capacity after instance upgrade in GB, which cannot be smaller than the current instance storage capacity.
 	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// The number of CUP cores after the instance is upgraded, which cannot be smaller than that of the current cores.
@@ -5669,13 +5867,13 @@ type InquiryPriceUpgradeDBInstanceRequestParams struct {
 type InquiryPriceUpgradeDBInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of mssql-njj2mtpl
+	// Instance ID in the format of mssql-njj2mtpl.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Memory size after instance upgrade in GB, which cannot be smaller than the current instance memory size
+	// Memory size after instance upgrade in GB, which cannot be smaller than the current instance memory size.
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Storage capacity after instance upgrade in GB, which cannot be smaller than the current instance storage capacity
+	// Storage capacity after instance upgrade in GB, which cannot be smaller than the current instance storage capacity.
 	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// The number of CUP cores after the instance is upgraded, which cannot be smaller than that of the current cores.
@@ -5706,10 +5904,10 @@ func (r *InquiryPriceUpgradeDBInstanceRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type InquiryPriceUpgradeDBInstanceResponseParams struct {
-	// Price before discount. This value divided by 100 indicates the price; for example, 10094 means 100.94 USD
+	// Price before discount. This value divided by 100 indicates the price; for example, 10094 means 100.94 USD.
 	OriginalPrice *int64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 
-	// The actual price to be paid. This value divided by 100 indicates the price; for example, 10094 means 100.94 USD
+	// The actual price to be paid. This value divided by 100 indicates the price; for example, 10094 means 100.94 USD.
 	Price *int64 `json:"Price,omitnil,omitempty" name:"Price"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -6466,44 +6664,51 @@ func (r *ModifyDBInstanceNameResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDBInstanceNetworkRequestParams struct {
-	// Instance ID
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// ID of the new VPC
+	// ID of the new VPC.
 	NewVpcId *string `json:"NewVpcId,omitnil,omitempty" name:"NewVpcId"`
 
-	// ID of the new subnet
+	// ID of the new subnet.
 	NewSubnetId *string `json:"NewSubnetId,omitnil,omitempty" name:"NewSubnetId"`
 
 	// Retention period (in hours) of the original VIP. Value range: `0-168`. Default value: `0`, indicating the original VIP is released immediately.
 	OldIpRetainTime *int64 `json:"OldIpRetainTime,omitnil,omitempty" name:"OldIpRetainTime"`
 
-	// New VIP
+	// New VIP.
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
-
+	// Target node. 0 - modify the primary node network; 1 - modify the secondary node network. The default value is 0.
 	DRNetwork *uint64 `json:"DRNetwork,omitnil,omitempty" name:"DRNetwork"`
+
+	// Secondary server resource ID. It is required when DRNetwork = 1.
+	DrInstanceId *string `json:"DrInstanceId,omitnil,omitempty" name:"DrInstanceId"`
 }
 
 type ModifyDBInstanceNetworkRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// ID of the new VPC
+	// ID of the new VPC.
 	NewVpcId *string `json:"NewVpcId,omitnil,omitempty" name:"NewVpcId"`
 
-	// ID of the new subnet
+	// ID of the new subnet.
 	NewSubnetId *string `json:"NewSubnetId,omitnil,omitempty" name:"NewSubnetId"`
 
 	// Retention period (in hours) of the original VIP. Value range: `0-168`. Default value: `0`, indicating the original VIP is released immediately.
 	OldIpRetainTime *int64 `json:"OldIpRetainTime,omitnil,omitempty" name:"OldIpRetainTime"`
 
-	// New VIP
+	// New VIP.
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
+	// Target node. 0 - modify the primary node network; 1 - modify the secondary node network. The default value is 0.
 	DRNetwork *uint64 `json:"DRNetwork,omitnil,omitempty" name:"DRNetwork"`
+
+	// Secondary server resource ID. It is required when DRNetwork = 1.
+	DrInstanceId *string `json:"DrInstanceId,omitnil,omitempty" name:"DrInstanceId"`
 }
 
 func (r *ModifyDBInstanceNetworkRequest) ToJsonString() string {
@@ -6524,6 +6729,7 @@ func (r *ModifyDBInstanceNetworkRequest) FromJsonString(s string) error {
 	delete(f, "OldIpRetainTime")
 	delete(f, "Vip")
 	delete(f, "DRNetwork")
+	delete(f, "DrInstanceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceNetworkRequest has unknown keys!", "")
 	}
@@ -7501,6 +7707,20 @@ type ParameterDetail struct {
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
+type Price struct {
+
+	PrepaidPrice *uint64 `json:"PrepaidPrice,omitnil,omitempty" name:"PrepaidPrice"`
+
+
+	PrepaidPriceUnit *string `json:"PrepaidPriceUnit,omitnil,omitempty" name:"PrepaidPriceUnit"`
+
+
+	PostpaidPrice *uint64 `json:"PostpaidPrice,omitnil,omitempty" name:"PostpaidPrice"`
+
+
+	PostpaidPriceUnit *string `json:"PostpaidPriceUnit,omitnil,omitempty" name:"PostpaidPriceUnit"`
+}
+
 // Predefined struct for user
 type RecycleDBInstanceRequestParams struct {
 	// Instance ID
@@ -8082,6 +8302,41 @@ type SpecInfo struct {
 	MultiZonesStatus *string `json:"MultiZonesStatus,omitnil,omitempty" name:"MultiZonesStatus"`
 }
 
+type SpecSellStatus struct {
+
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+
+	SpecId *uint64 `json:"SpecId,omitnil,omitempty" name:"SpecId"`
+
+
+	PayModeStatus *string `json:"PayModeStatus,omitnil,omitempty" name:"PayModeStatus"`
+
+
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+
+	MultiZonesStatus *string `json:"MultiZonesStatus,omitnil,omitempty" name:"MultiZonesStatus"`
+
+
+	Architecture *string `json:"Architecture,omitnil,omitempty" name:"Architecture"`
+
+
+	Style *string `json:"Style,omitnil,omitempty" name:"Style"`
+
+
+	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
+
+
+	ZoneStatusSet []*ZoneStatus `json:"ZoneStatusSet,omitnil,omitempty" name:"ZoneStatusSet"`
+
+
+	Price *Price `json:"Price,omitnil,omitempty" name:"Price"`
+
+
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
 // Predefined struct for user
 type StartBackupMigrationRequestParams struct {
 	// ID of imported target instance
@@ -8374,6 +8629,9 @@ type UpgradeDBInstanceRequestParams struct {
 
 	// The time when configuration adjustment task is performed. Valid values: `0` (execute immediately), `1` (execute during maintenance time). Default value: `1`.
 	WaitSwitch *int64 `json:"WaitSwitch,omitnil,omitempty" name:"WaitSwitch"`
+
+	// Secondary node AZ of the multi-node architecture instance. The default value is null. It should be specified when modifying the AZ of the specified secondary node needs to be performed during configuration adjustment. When MultiZones = MultiZones, the AZs of the primary nodes and secondary nodes cannot all be the same. The collection of AZs of the secondary node can include 2-5 AZs.
+	DrZones []*DrZoneInfo `json:"DrZones,omitnil,omitempty" name:"DrZones"`
 }
 
 type UpgradeDBInstanceRequest struct {
@@ -8408,6 +8666,9 @@ type UpgradeDBInstanceRequest struct {
 
 	// The time when configuration adjustment task is performed. Valid values: `0` (execute immediately), `1` (execute during maintenance time). Default value: `1`.
 	WaitSwitch *int64 `json:"WaitSwitch,omitnil,omitempty" name:"WaitSwitch"`
+
+	// Secondary node AZ of the multi-node architecture instance. The default value is null. It should be specified when modifying the AZ of the specified secondary node needs to be performed during configuration adjustment. When MultiZones = MultiZones, the AZs of the primary nodes and secondary nodes cannot all be the same. The collection of AZs of the secondary node can include 2-5 AZs.
+	DrZones []*DrZoneInfo `json:"DrZones,omitnil,omitempty" name:"DrZones"`
 }
 
 func (r *UpgradeDBInstanceRequest) ToJsonString() string {
@@ -8432,6 +8693,7 @@ func (r *UpgradeDBInstanceRequest) FromJsonString(s string) error {
 	delete(f, "HAType")
 	delete(f, "MultiZones")
 	delete(f, "WaitSwitch")
+	delete(f, "DrZones")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeDBInstanceRequest has unknown keys!", "")
 	}
@@ -8440,7 +8702,7 @@ func (r *UpgradeDBInstanceRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpgradeDBInstanceResponseParams struct {
-	// Order name
+	// Order name.
 	DealName *string `json:"DealName,omitnil,omitempty" name:"DealName"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -8478,4 +8740,15 @@ type ZoneInfo struct {
 
 	// Information of database versions purchasable under the current AZ and specification. Valid values: 2008R2 (SQL Server 2008 Enterprise), 2012SP3 (SQL Server 2012 Enterprise), 2016SP1 (SQL Server 2016 Enterprise), 201602 (SQL Server 2016 Standard), 2017 (SQL Server 2017 Enterprise)
 	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
+}
+
+type ZoneStatus struct {
+
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 }

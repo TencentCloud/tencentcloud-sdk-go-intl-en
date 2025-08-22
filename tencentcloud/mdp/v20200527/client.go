@@ -625,6 +625,66 @@ func (c *Client) CreateStreamPackageSourceLocationWithContext(ctx context.Contex
     return
 }
 
+func NewCreateStreamPackageVodRemuxTaskRequest() (request *CreateStreamPackageVodRemuxTaskRequest) {
+    request = &CreateStreamPackageVodRemuxTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "CreateStreamPackageVodRemuxTask")
+    
+    
+    return
+}
+
+func NewCreateStreamPackageVodRemuxTaskResponse() (response *CreateStreamPackageVodRemuxTaskResponse) {
+    response = &CreateStreamPackageVodRemuxTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateStreamPackageVodRemuxTask
+// Create VodRemuxTask
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_INPUTFILEINFO = "InvalidParameter.InputFileInfo"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_OUTPUTSTORAGE = "InvalidParameter.OutputStorage"
+//  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
+func (c *Client) CreateStreamPackageVodRemuxTask(request *CreateStreamPackageVodRemuxTaskRequest) (response *CreateStreamPackageVodRemuxTaskResponse, err error) {
+    return c.CreateStreamPackageVodRemuxTaskWithContext(context.Background(), request)
+}
+
+// CreateStreamPackageVodRemuxTask
+// Create VodRemuxTask
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_INPUTFILEINFO = "InvalidParameter.InputFileInfo"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_OUTPUTSTORAGE = "InvalidParameter.OutputStorage"
+//  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
+func (c *Client) CreateStreamPackageVodRemuxTaskWithContext(ctx context.Context, request *CreateStreamPackageVodRemuxTaskRequest) (response *CreateStreamPackageVodRemuxTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateStreamPackageVodRemuxTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "CreateStreamPackageVodRemuxTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateStreamPackageVodRemuxTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateStreamPackageVodRemuxTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteStreamPackageChannelEndpointsRequest() (request *DeleteStreamPackageChannelEndpointsRequest) {
     request = &DeleteStreamPackageChannelEndpointsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1247,6 +1307,118 @@ func (c *Client) DeleteStreamPackageSourceLocationWithContext(ctx context.Contex
     request.SetContext(ctx)
     
     response = NewDeleteStreamPackageSourceLocationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteStreamPackageVodRemuxTaskRequest() (request *DeleteStreamPackageVodRemuxTaskRequest) {
+    request = &DeleteStreamPackageVodRemuxTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DeleteStreamPackageVodRemuxTask")
+    
+    
+    return
+}
+
+func NewDeleteStreamPackageVodRemuxTaskResponse() (response *DeleteStreamPackageVodRemuxTaskResponse) {
+    response = &DeleteStreamPackageVodRemuxTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteStreamPackageVodRemuxTask
+// Delete Vod remux task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
+func (c *Client) DeleteStreamPackageVodRemuxTask(request *DeleteStreamPackageVodRemuxTaskRequest) (response *DeleteStreamPackageVodRemuxTaskResponse, err error) {
+    return c.DeleteStreamPackageVodRemuxTaskWithContext(context.Background(), request)
+}
+
+// DeleteStreamPackageVodRemuxTask
+// Delete Vod remux task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
+func (c *Client) DeleteStreamPackageVodRemuxTaskWithContext(ctx context.Context, request *DeleteStreamPackageVodRemuxTaskRequest) (response *DeleteStreamPackageVodRemuxTaskResponse, err error) {
+    if request == nil {
+        request = NewDeleteStreamPackageVodRemuxTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DeleteStreamPackageVodRemuxTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamPackageVodRemuxTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteStreamPackageVodRemuxTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteStreamPackageVodRemuxTasksRequest() (request *DeleteStreamPackageVodRemuxTasksRequest) {
+    request = &DeleteStreamPackageVodRemuxTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DeleteStreamPackageVodRemuxTasks")
+    
+    
+    return
+}
+
+func NewDeleteStreamPackageVodRemuxTasksResponse() (response *DeleteStreamPackageVodRemuxTasksResponse) {
+    response = &DeleteStreamPackageVodRemuxTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteStreamPackageVodRemuxTasks
+// Delete VOD remux tasks in batches.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
+func (c *Client) DeleteStreamPackageVodRemuxTasks(request *DeleteStreamPackageVodRemuxTasksRequest) (response *DeleteStreamPackageVodRemuxTasksResponse, err error) {
+    return c.DeleteStreamPackageVodRemuxTasksWithContext(context.Background(), request)
+}
+
+// DeleteStreamPackageVodRemuxTasks
+// Delete VOD remux tasks in batches.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
+func (c *Client) DeleteStreamPackageVodRemuxTasksWithContext(ctx context.Context, request *DeleteStreamPackageVodRemuxTasksRequest) (response *DeleteStreamPackageVodRemuxTasksResponse, err error) {
+    if request == nil {
+        request = NewDeleteStreamPackageVodRemuxTasksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DeleteStreamPackageVodRemuxTasks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamPackageVodRemuxTasks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteStreamPackageVodRemuxTasksResponse()
     err = c.Send(request, response)
     return
 }
@@ -2449,6 +2621,118 @@ func (c *Client) DescribeStreamPackageSourcesWithContext(ctx context.Context, re
     return
 }
 
+func NewDescribeStreamPackageVodRemuxTaskRequest() (request *DescribeStreamPackageVodRemuxTaskRequest) {
+    request = &DescribeStreamPackageVodRemuxTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageVodRemuxTask")
+    
+    
+    return
+}
+
+func NewDescribeStreamPackageVodRemuxTaskResponse() (response *DescribeStreamPackageVodRemuxTaskResponse) {
+    response = &DescribeStreamPackageVodRemuxTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamPackageVodRemuxTask
+// Query VOD remux task information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamPackageVodRemuxTask(request *DescribeStreamPackageVodRemuxTaskRequest) (response *DescribeStreamPackageVodRemuxTaskResponse, err error) {
+    return c.DescribeStreamPackageVodRemuxTaskWithContext(context.Background(), request)
+}
+
+// DescribeStreamPackageVodRemuxTask
+// Query VOD remux task information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamPackageVodRemuxTaskWithContext(ctx context.Context, request *DescribeStreamPackageVodRemuxTaskRequest) (response *DescribeStreamPackageVodRemuxTaskResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageVodRemuxTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageVodRemuxTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageVodRemuxTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageVodRemuxTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamPackageVodRemuxTasksRequest() (request *DescribeStreamPackageVodRemuxTasksRequest) {
+    request = &DescribeStreamPackageVodRemuxTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageVodRemuxTasks")
+    
+    
+    return
+}
+
+func NewDescribeStreamPackageVodRemuxTasksResponse() (response *DescribeStreamPackageVodRemuxTasksResponse) {
+    response = &DescribeStreamPackageVodRemuxTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamPackageVodRemuxTasks
+// Query VOD remux tasks informations.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+func (c *Client) DescribeStreamPackageVodRemuxTasks(request *DescribeStreamPackageVodRemuxTasksRequest) (response *DescribeStreamPackageVodRemuxTasksResponse, err error) {
+    return c.DescribeStreamPackageVodRemuxTasksWithContext(context.Background(), request)
+}
+
+// DescribeStreamPackageVodRemuxTasks
+// Query VOD remux tasks informations.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+func (c *Client) DescribeStreamPackageVodRemuxTasksWithContext(ctx context.Context, request *DescribeStreamPackageVodRemuxTasksRequest) (response *DescribeStreamPackageVodRemuxTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageVodRemuxTasksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "DescribeStreamPackageVodRemuxTasks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageVodRemuxTasks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageVodRemuxTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyStreamPackageChannelRequest() (request *ModifyStreamPackageChannelRequest) {
     request = &ModifyStreamPackageChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2973,6 +3257,64 @@ func (c *Client) StartStreamPackageLinearAssemblyChannelWithContext(ctx context.
     request.SetContext(ctx)
     
     response = NewStartStreamPackageLinearAssemblyChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStartStreamPackageVodRemuxTaskRequest() (request *StartStreamPackageVodRemuxTaskRequest) {
+    request = &StartStreamPackageVodRemuxTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "StartStreamPackageVodRemuxTask")
+    
+    
+    return
+}
+
+func NewStartStreamPackageVodRemuxTaskResponse() (response *StartStreamPackageVodRemuxTaskResponse) {
+    response = &StartStreamPackageVodRemuxTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StartStreamPackageVodRemuxTask
+// Start VOD remux task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
+func (c *Client) StartStreamPackageVodRemuxTask(request *StartStreamPackageVodRemuxTaskRequest) (response *StartStreamPackageVodRemuxTaskResponse, err error) {
+    return c.StartStreamPackageVodRemuxTaskWithContext(context.Background(), request)
+}
+
+// StartStreamPackageVodRemuxTask
+// Start VOD remux task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
+func (c *Client) StartStreamPackageVodRemuxTaskWithContext(ctx context.Context, request *StartStreamPackageVodRemuxTaskRequest) (response *StartStreamPackageVodRemuxTaskResponse, err error) {
+    if request == nil {
+        request = NewStartStreamPackageVodRemuxTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "StartStreamPackageVodRemuxTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartStreamPackageVodRemuxTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStartStreamPackageVodRemuxTaskResponse()
     err = c.Send(request, response)
     return
 }

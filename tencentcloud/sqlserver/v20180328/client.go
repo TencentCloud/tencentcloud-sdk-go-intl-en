@@ -1997,6 +1997,60 @@ func (c *Client) DescribeBusinessIntelligenceFileWithContext(ctx context.Context
     return
 }
 
+func NewDescribeCollationTimeZoneRequest() (request *DescribeCollationTimeZoneRequest) {
+    request = &DescribeCollationTimeZoneRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeCollationTimeZone")
+    
+    
+    return
+}
+
+func NewDescribeCollationTimeZoneResponse() (response *DescribeCollationTimeZoneResponse) {
+    response = &DescribeCollationTimeZoneResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCollationTimeZone
+// This API is used to query the character set and time zone supported by the instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeCollationTimeZone(request *DescribeCollationTimeZoneRequest) (response *DescribeCollationTimeZoneResponse, err error) {
+    return c.DescribeCollationTimeZoneWithContext(context.Background(), request)
+}
+
+// DescribeCollationTimeZone
+// This API is used to query the character set and time zone supported by the instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeCollationTimeZoneWithContext(ctx context.Context, request *DescribeCollationTimeZoneRequest) (response *DescribeCollationTimeZoneResponse, err error) {
+    if request == nil {
+        request = NewDescribeCollationTimeZoneRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeCollationTimeZone")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCollationTimeZone require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCollationTimeZoneResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBCharsetsRequest() (request *DescribeDBCharsetsRequest) {
     request = &DescribeDBCharsetsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3255,6 +3309,62 @@ func (c *Client) DescribeSlowlogsWithContext(ctx context.Context, request *Descr
     return
 }
 
+func NewDescribeSpecSellStatusRequest() (request *DescribeSpecSellStatusRequest) {
+    request = &DescribeSpecSellStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeSpecSellStatus")
+    
+    
+    return
+}
+
+func NewDescribeSpecSellStatusResponse() (response *DescribeSpecSellStatusResponse) {
+    response = &DescribeSpecSellStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSpecSellStatus
+// This API is used to query the status information on specifications, including the sales status and reference price. (The actual price is subject to the result returned by price querying APIs.)
+//
+// error code that may be returned:
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
+//  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeSpecSellStatus(request *DescribeSpecSellStatusRequest) (response *DescribeSpecSellStatusResponse, err error) {
+    return c.DescribeSpecSellStatusWithContext(context.Background(), request)
+}
+
+// DescribeSpecSellStatus
+// This API is used to query the status information on specifications, including the sales status and reference price. (The actual price is subject to the result returned by price querying APIs.)
+//
+// error code that may be returned:
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
+//  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeSpecSellStatusWithContext(ctx context.Context, request *DescribeSpecSellStatusRequest) (response *DescribeSpecSellStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeSpecSellStatusRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeSpecSellStatus")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSpecSellStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSpecSellStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeUploadBackupInfoRequest() (request *DescribeUploadBackupInfoRequest) {
     request = &DescribeUploadBackupInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3541,7 +3651,7 @@ func NewInquiryPriceUpgradeDBInstanceResponse() (response *InquiryPriceUpgradeDB
 }
 
 // InquiryPriceUpgradeDBInstance
-// This API is used to query the upgrade prices of a monthly subscribed instance
+// This API is used to query the upgrade prices of a monthly subscribed instance.
 //
 // .
 //
@@ -3562,7 +3672,7 @@ func (c *Client) InquiryPriceUpgradeDBInstance(request *InquiryPriceUpgradeDBIns
 }
 
 // InquiryPriceUpgradeDBInstance
-// This API is used to query the upgrade prices of a monthly subscribed instance
+// This API is used to query the upgrade prices of a monthly subscribed instance.
 //
 // .
 //
