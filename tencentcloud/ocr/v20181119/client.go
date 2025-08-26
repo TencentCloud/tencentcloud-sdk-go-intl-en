@@ -1225,6 +1225,76 @@ func (c *Client) PermitOCRWithContext(ctx context.Context, request *PermitOCRReq
     return
 }
 
+func NewRecognizeBrazilCommonOCRRequest() (request *RecognizeBrazilCommonOCRRequest) {
+    request = &RecognizeBrazilCommonOCRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "RecognizeBrazilCommonOCR")
+    
+    
+    return
+}
+
+func NewRecognizeBrazilCommonOCRResponse() (response *RecognizeBrazilCommonOCRResponse) {
+    response = &RecognizeBrazilCommonOCRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RecognizeBrazilCommonOCR
+// This API is used to identify Brazil RNE documents.
+//
+// 
+//
+// This API is used to set the default request rate limit to 5 requests/second.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+func (c *Client) RecognizeBrazilCommonOCR(request *RecognizeBrazilCommonOCRRequest) (response *RecognizeBrazilCommonOCRResponse, err error) {
+    return c.RecognizeBrazilCommonOCRWithContext(context.Background(), request)
+}
+
+// RecognizeBrazilCommonOCR
+// This API is used to identify Brazil RNE documents.
+//
+// 
+//
+// This API is used to set the default request rate limit to 5 requests/second.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+func (c *Client) RecognizeBrazilCommonOCRWithContext(ctx context.Context, request *RecognizeBrazilCommonOCRRequest) (response *RecognizeBrazilCommonOCRResponse, err error) {
+    if request == nil {
+        request = NewRecognizeBrazilCommonOCRRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeBrazilCommonOCR")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RecognizeBrazilCommonOCR require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRecognizeBrazilCommonOCRResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRecognizeBrazilDriverLicenseOCRRequest() (request *RecognizeBrazilDriverLicenseOCRRequest) {
     request = &RecognizeBrazilDriverLicenseOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},

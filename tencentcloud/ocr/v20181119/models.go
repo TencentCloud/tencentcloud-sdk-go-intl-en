@@ -244,6 +244,212 @@ func (r *BankCardOCRResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type BrazilCardInfo struct {
+	// RNE document.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RNE *BrazilRNEInfo `json:"RNE,omitnil,omitempty" name:"RNE"`
+
+	// Specifies the document.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RNM *BrazilRNMInfo `json:"RNM,omitnil,omitempty" name:"RNM"`
+
+	// Driver license document.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DriverLicense *BrazilDriverLicenseInfo `json:"DriverLicense,omitnil,omitempty" name:"DriverLicense"`
+
+	// ID card document.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IDCard *BrazilIDCardInfo `json:"IDCard,omitnil,omitempty" name:"IDCard"`
+}
+
+type BrazilDriverLicenseInfo struct {
+	// Name.
+	NOME *string `json:"NOME,omitnil,omitempty" name:"NOME"`
+
+	// Specifies the driver's license type.
+	CatHab *string `json:"CatHab,omitnil,omitempty" name:"CatHab"`
+
+	// Driver’s license id.
+	CNHNumber *string `json:"CNHNumber,omitnil,omitempty" name:"CNHNumber"`
+
+	// Expiration date.
+	VALIDADE *string `json:"VALIDADE,omitnil,omitempty" name:"VALIDADE"`
+
+	// Indicates the qualification.
+	QUALIFICATION *string `json:"QUALIFICATION,omitnil,omitempty" name:"QUALIFICATION"`
+
+	// Identity card number.
+	IDENTIDADE *string `json:"IDENTIDADE,omitnil,omitempty" name:"IDENTIDADE"`
+
+	// Tax number of the person.
+	CPF *string `json:"CPF,omitnil,omitempty" name:"CPF"`
+
+	// Date of birth.
+	NASCIMENTO *string `json:"NASCIMENTO,omitnil,omitempty" name:"NASCIMENTO"`
+
+	// Membership status.
+	MEMBERSHIP *string `json:"MEMBERSHIP,omitnil,omitempty" name:"MEMBERSHIP"`
+
+	// Registration number.
+	REGISTRO *string `json:"REGISTRO,omitnil,omitempty" name:"REGISTRO"`
+
+	// Remarks.
+	OBSERVATIONS *string `json:"OBSERVATIONS,omitnil,omitempty" name:"OBSERVATIONS"`
+
+	// Issue date.
+	IssueDate *string `json:"IssueDate,omitnil,omitempty" name:"IssueDate"`
+
+	// Issuing location.
+	LOCAL *string `json:"LOCAL,omitnil,omitempty" name:"LOCAL"`
+
+	// Record number.
+	BackNumber *string `json:"BackNumber,omitnil,omitempty" name:"BackNumber"`
+
+	// Specifies the avatar in base64 format.
+	PortraitImage *string `json:"PortraitImage,omitnil,omitempty" name:"PortraitImage"`
+}
+
+type BrazilIDCardInfo struct {
+	// Name.
+	Nome *string `json:"Nome,omitnil,omitempty" name:"Nome"`
+
+	// Parent information.
+	MemberShip *string `json:"MemberShip,omitnil,omitempty" name:"MemberShip"`
+
+	// Date of birth.
+	DataNascimento *string `json:"DataNascimento,omitnil,omitempty" name:"DataNascimento"`
+
+	// Issuing organization.
+	IssuingAgency *string `json:"IssuingAgency,omitnil,omitempty" name:"IssuingAgency"`
+
+	// Specifies the blood type.
+	Fatorrh *string `json:"Fatorrh,omitnil,omitempty" name:"Fatorrh"`
+
+	// Birthplace.
+	NaturalIDade *string `json:"NaturalIDade,omitnil,omitempty" name:"NaturalIDade"`
+
+	// Remarks.
+	Observations *string `json:"Observations,omitnil,omitempty" name:"Observations"`
+
+	// CPF Type
+	CPF *string `json:"CPF,omitnil,omitempty" name:"CPF"`
+
+	// DNI Type
+	DNI *string `json:"DNI,omitnil,omitempty" name:"DNI"`
+
+	// Common registration.
+	RegistroGeral *string `json:"RegistroGeral,omitnil,omitempty" name:"RegistroGeral"`
+
+	// Issue date. valid values: dd/mm/yyyy.
+	DispatchDate *string `json:"DispatchDate,omitnil,omitempty" name:"DispatchDate"`
+
+	// Address.
+	Registro *string `json:"Registro,omitnil,omitempty" name:"Registro"`
+
+	// Specifies the avatar in Base64 format of the id card.
+	PortraitImage *string `json:"PortraitImage,omitnil,omitempty" name:"PortraitImage"`
+
+	// Original identity information.
+	DocOrigem *string `json:"DocOrigem,omitnil,omitempty" name:"DocOrigem"`
+}
+
+type BrazilRNEInfo struct {
+	// RNE
+	RNE *string `json:"RNE,omitnil,omitempty" name:"RNE"`
+
+	// CLASSIFICAÇÃO(CLASSIFICATION)
+	CLASSIFICATION *string `json:"CLASSIFICATION,omitnil,omitempty" name:"CLASSIFICATION"`
+
+	// VALIDADE
+	VALIDADE *string `json:"VALIDADE,omitnil,omitempty" name:"VALIDADE"`
+
+	// NOME
+	NOME *string `json:"NOME,omitnil,omitempty" name:"NOME"`
+
+	// FILIAÇÃO(MEMBERSHIP)
+	Membership *string `json:"Membership,omitnil,omitempty" name:"Membership"`
+
+	// NACIONALIDADE
+	NACIONALIDADE *string `json:"NACIONALIDADE,omitnil,omitempty" name:"NACIONALIDADE"`
+
+	// NATURALIDADE(PAÍS)
+	NATURALIDADE *string `json:"NATURALIDADE,omitnil,omitempty" name:"NATURALIDADE"`
+
+	// ORGÃO EXPEDIDOR(IssuingAgency)
+	IssuingAgency *string `json:"IssuingAgency,omitnil,omitempty" name:"IssuingAgency"`
+
+	// DATA DE NASCIMENTO(DateOfBirth)
+	DateOfBirth *string `json:"DateOfBirth,omitnil,omitempty" name:"DateOfBirth"`
+
+	// SEXO
+	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
+
+	// DATA DE ENTRADA(EntryDate)
+	EntryDate *string `json:"EntryDate,omitnil,omitempty" name:"EntryDate"`
+
+	// VIA
+	VIA *string `json:"VIA,omitnil,omitempty" name:"VIA"`
+
+	// DATA DE EXPEDIÇÃO(DispatchDate)
+	DispatchDate *string `json:"DispatchDate,omitnil,omitempty" name:"DispatchDate"`
+
+	// MRZ
+	MRZ *string `json:"MRZ,omitnil,omitempty" name:"MRZ"`
+
+	// PortraitImage
+	PortraitImage *string `json:"PortraitImage,omitnil,omitempty" name:"PortraitImage"`
+}
+
+type BrazilRNMInfo struct {
+	// SOBRENOME Type
+	SOBRENOME *string `json:"SOBRENOME,omitnil,omitempty" name:"SOBRENOME"`
+
+	// NOME Type
+	NOME *string `json:"NOME,omitnil,omitempty" name:"NOME"`
+
+	// DATA DE NASCIMENTO
+	DATADENASCIMENTO *string `json:"DATADENASCIMENTO,omitnil,omitempty" name:"DATADENASCIMENTO"`
+
+	// SEXO F
+	SEXO *string `json:"SEXO,omitnil,omitempty" name:"SEXO"`
+
+	// FILIAÇÃO(MEMBERSHIP)
+	MEMBERSHIP *string `json:"MEMBERSHIP,omitnil,omitempty" name:"MEMBERSHIP"`
+
+	// NACIONALIDADE Type
+	NACIONALIDADE *string `json:"NACIONALIDADE,omitnil,omitempty" name:"NACIONALIDADE"`
+
+	// VALIDADE Type
+	VALIDADE *string `json:"VALIDADE,omitnil,omitempty" name:"VALIDADE"`
+
+	// RNM Type
+	RNM *string `json:"RNM,omitnil,omitempty" name:"RNM"`
+
+	// CPF Type
+	CPF *string `json:"CPF,omitnil,omitempty" name:"CPF"`
+
+	// CLASSIFICAÇÃO(CLASSIFICATION)
+	CLASSIFICATION *string `json:"CLASSIFICATION,omitnil,omitempty" name:"CLASSIFICATION"`
+
+	// PRAZO DE RESIDENCIA
+	PRAZODERESIDENCIA *string `json:"PRAZODERESIDENCIA,omitnil,omitempty" name:"PRAZODERESIDENCIA"`
+
+	// EMISSÃO(ISSUANCE)
+	ISSUANCE *string `json:"ISSUANCE,omitnil,omitempty" name:"ISSUANCE"`
+
+	// AMPARO LEGAL(LegalHelp)
+	AMPAROLEGAL *string `json:"AMPAROLEGAL,omitnil,omitempty" name:"AMPAROLEGAL"`
+
+	// MRZCode
+	MRZ *string `json:"MRZ,omitnil,omitempty" name:"MRZ"`
+
+	// Portrait Image
+	PortraitImage *string `json:"PortraitImage,omitnil,omitempty" name:"PortraitImage"`
+
+	// PortraitImage(Back)
+	PortraitImageBack *string `json:"PortraitImageBack,omitnil,omitempty" name:"PortraitImageBack"`
+}
+
 type BusInvoice struct {
 	// Invoice title
 	Title *string `json:"Title,omitnil,omitempty" name:"Title"`
@@ -2469,6 +2675,94 @@ type QuotaInvoice struct {
 
 	// Whether there is a company seal (0: No, 1: Yes)
 	CompanySealMark *int64 `json:"CompanySealMark,omitnil,omitempty" name:"CompanySealMark"`
+}
+
+// Predefined struct for user
+type RecognizeBrazilCommonOCRRequestParams struct {
+	// The Base64 value of the image. supported image formats: PNG, JPG, JPEG. GIF format is not currently supported. supported image size: no more than 7M after encoding. image download time: no more than 3 seconds.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// The Url of the image. supported image formats: PNG, JPG, JPEG. GIF format is not currently supported. supported image size: no more than 7M after Base64 encoding. image download time is no more than 3 seconds. urls stored in tencent cloud guarantee higher download speed and stability. it is advisable to store images in tencent cloud. urls not stored in tencent cloud may possibly be impacted in speed and stability.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// The Base64 value of the back side of the card. supported image formats: PNG, JPG, JPEG. GIF format is not currently supported. supported image size: no more than 7M after encoding. image download time: not more than 3 seconds. either ImageUrl or ImageBase64 must be provided. if both are provided, only use ImageUrl.
+	BackImageBase64 *string `json:"BackImageBase64,omitnil,omitempty" name:"BackImageBase64"`
+
+	// The Url address of the back side of the card. supported image formats: PNG, JPG, JPEG. GIF format is not currently supported. supported image size: no more than 7M after Base64 encoding. image download time is no more than 3 seconds. urls stored in tencent cloud guarantee higher download speed and stability. it is recommended to store images in tencent cloud. speed and stability of non-tencent cloud storage urls may be impacted.
+	BackImageUrl *string `json:"BackImageUrl,omitnil,omitempty" name:"BackImageUrl"`
+
+	// Specifies whether to return the portrait photo.
+	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
+}
+
+type RecognizeBrazilCommonOCRRequest struct {
+	*tchttp.BaseRequest
+	
+	// The Base64 value of the image. supported image formats: PNG, JPG, JPEG. GIF format is not currently supported. supported image size: no more than 7M after encoding. image download time: no more than 3 seconds.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// The Url of the image. supported image formats: PNG, JPG, JPEG. GIF format is not currently supported. supported image size: no more than 7M after Base64 encoding. image download time is no more than 3 seconds. urls stored in tencent cloud guarantee higher download speed and stability. it is advisable to store images in tencent cloud. urls not stored in tencent cloud may possibly be impacted in speed and stability.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// The Base64 value of the back side of the card. supported image formats: PNG, JPG, JPEG. GIF format is not currently supported. supported image size: no more than 7M after encoding. image download time: not more than 3 seconds. either ImageUrl or ImageBase64 must be provided. if both are provided, only use ImageUrl.
+	BackImageBase64 *string `json:"BackImageBase64,omitnil,omitempty" name:"BackImageBase64"`
+
+	// The Url address of the back side of the card. supported image formats: PNG, JPG, JPEG. GIF format is not currently supported. supported image size: no more than 7M after Base64 encoding. image download time is no more than 3 seconds. urls stored in tencent cloud guarantee higher download speed and stability. it is recommended to store images in tencent cloud. speed and stability of non-tencent cloud storage urls may be impacted.
+	BackImageUrl *string `json:"BackImageUrl,omitnil,omitempty" name:"BackImageUrl"`
+
+	// Specifies whether to return the portrait photo.
+	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
+}
+
+func (r *RecognizeBrazilCommonOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeBrazilCommonOCRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	delete(f, "BackImageBase64")
+	delete(f, "BackImageUrl")
+	delete(f, "ReturnHeadImage")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RecognizeBrazilCommonOCRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RecognizeBrazilCommonOCRResponseParams struct {
+	// Specifies the type of document in brazil. valid values: 1. RNE 2. RNM 3. IDCard 4. DrivingLicense.
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Identifies the content of a brazil document.
+	Result *BrazilCardInfo `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type RecognizeBrazilCommonOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *RecognizeBrazilCommonOCRResponseParams `json:"Response"`
+}
+
+func (r *RecognizeBrazilCommonOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeBrazilCommonOCRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user

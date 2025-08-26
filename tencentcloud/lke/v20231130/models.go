@@ -3452,7 +3452,7 @@ type DescribeTokenUsageGraphRequestParams struct {
 	// Root account of Tencent Cloud.
 	UinAccount []*string `json:"UinAccount,omitnil,omitempty" name:"UinAccount"`
 
-	// Sub-business types of Tencent Cloud Agent Development Platform/TCADP: fileparse (document parsing), Embedding, Rewrite (multi-round rewriting), Concurrency, KnowledgeSummary (knowledge summary), KnowledgeQA (knowledge Q&A), KnowledgeCapacity (knowledge base capacity), SearchEngine (search engine).
+	// Sub-business types of Tencent Cloud Agent Development Platform/ADP: fileparse (document parsing), Embedding, Rewrite (multi-round rewriting), Concurrency, KnowledgeSummary (knowledge summary), KnowledgeQA (knowledge Q&A), KnowledgeCapacity (knowledge base capacity), SearchEngine (search engine).
 	SubBizType *string `json:"SubBizType,omitnil,omitempty" name:"SubBizType"`
 
 	// Model identifier.
@@ -3466,6 +3466,12 @@ type DescribeTokenUsageGraphRequestParams struct {
 
 	// Application ID list.
 	AppBizIds []*string `json:"AppBizIds,omitnil,omitempty" name:"AppBizIds"`
+
+
+	AppType *string `json:"AppType,omitnil,omitempty" name:"AppType"`
+
+
+	SubScenes []*string `json:"SubScenes,omitnil,omitempty" name:"SubScenes"`
 }
 
 type DescribeTokenUsageGraphRequest struct {
@@ -3474,7 +3480,7 @@ type DescribeTokenUsageGraphRequest struct {
 	// Root account of Tencent Cloud.
 	UinAccount []*string `json:"UinAccount,omitnil,omitempty" name:"UinAccount"`
 
-	// Sub-business types of Tencent Cloud Agent Development Platform/TCADP: fileparse (document parsing), Embedding, Rewrite (multi-round rewriting), Concurrency, KnowledgeSummary (knowledge summary), KnowledgeQA (knowledge Q&A), KnowledgeCapacity (knowledge base capacity), SearchEngine (search engine).
+	// Sub-business types of Tencent Cloud Agent Development Platform/ADP: fileparse (document parsing), Embedding, Rewrite (multi-round rewriting), Concurrency, KnowledgeSummary (knowledge summary), KnowledgeQA (knowledge Q&A), KnowledgeCapacity (knowledge base capacity), SearchEngine (search engine).
 	SubBizType *string `json:"SubBizType,omitnil,omitempty" name:"SubBizType"`
 
 	// Model identifier.
@@ -3488,6 +3494,10 @@ type DescribeTokenUsageGraphRequest struct {
 
 	// Application ID list.
 	AppBizIds []*string `json:"AppBizIds,omitnil,omitempty" name:"AppBizIds"`
+
+	AppType *string `json:"AppType,omitnil,omitempty" name:"AppType"`
+
+	SubScenes []*string `json:"SubScenes,omitnil,omitempty" name:"SubScenes"`
 }
 
 func (r *DescribeTokenUsageGraphRequest) ToJsonString() string {
@@ -3508,6 +3518,8 @@ func (r *DescribeTokenUsageGraphRequest) FromJsonString(s string) error {
 	delete(f, "StartTime")
 	delete(f, "EndTime")
 	delete(f, "AppBizIds")
+	delete(f, "AppType")
+	delete(f, "SubScenes")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTokenUsageGraphRequest has unknown keys!", "")
 	}
@@ -3556,7 +3568,7 @@ type DescribeTokenUsageRequestParams struct {
 	// Login to user's sub-account (required in integrator mode).
 	LoginSubAccountUin *string `json:"LoginSubAccountUin,omitnil,omitempty" name:"LoginSubAccountUin"`
 
-	// Sub-business types of Tencent Cloud Agent Development Platform/TCADP: FileParse (document parsing), embedding, Rewrite (multi-round rewriting), Concurrency, KnowledgeSummary (knowledge summary), KnowledgeQA (knowledge Q&A), KnowledgeCapacity (knowledge base capacity), SearchEngine (search engine).
+	// Sub-business types of Tencent Cloud Agent Development Platform/ADP: FileParse (document parsing), embedding, Rewrite (multi-round rewriting), Concurrency, KnowledgeSummary (knowledge summary), KnowledgeQA (knowledge Q&A), KnowledgeCapacity (knowledge base capacity), SearchEngine (search engine).
 	SubBizType *string `json:"SubBizType,omitnil,omitempty" name:"SubBizType"`
 
 	// Model identifier.
@@ -3573,6 +3585,12 @@ type DescribeTokenUsageRequestParams struct {
 
 	// Filter sub-scenario (used in document parsing scenario).
 	SubScenes []*string `json:"SubScenes,omitnil,omitempty" name:"SubScenes"`
+
+
+	AppType *string `json:"AppType,omitnil,omitempty" name:"AppType"`
+
+
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
 }
 
 type DescribeTokenUsageRequest struct {
@@ -3587,7 +3605,7 @@ type DescribeTokenUsageRequest struct {
 	// Login to user's sub-account (required in integrator mode).
 	LoginSubAccountUin *string `json:"LoginSubAccountUin,omitnil,omitempty" name:"LoginSubAccountUin"`
 
-	// Sub-business types of Tencent Cloud Agent Development Platform/TCADP: FileParse (document parsing), embedding, Rewrite (multi-round rewriting), Concurrency, KnowledgeSummary (knowledge summary), KnowledgeQA (knowledge Q&A), KnowledgeCapacity (knowledge base capacity), SearchEngine (search engine).
+	// Sub-business types of Tencent Cloud Agent Development Platform/ADP: FileParse (document parsing), embedding, Rewrite (multi-round rewriting), Concurrency, KnowledgeSummary (knowledge summary), KnowledgeQA (knowledge Q&A), KnowledgeCapacity (knowledge base capacity), SearchEngine (search engine).
 	SubBizType *string `json:"SubBizType,omitnil,omitempty" name:"SubBizType"`
 
 	// Model identifier.
@@ -3604,6 +3622,10 @@ type DescribeTokenUsageRequest struct {
 
 	// Filter sub-scenario (used in document parsing scenario).
 	SubScenes []*string `json:"SubScenes,omitnil,omitempty" name:"SubScenes"`
+
+	AppType *string `json:"AppType,omitnil,omitempty" name:"AppType"`
+
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
 }
 
 func (r *DescribeTokenUsageRequest) ToJsonString() string {
@@ -3627,6 +3649,8 @@ func (r *DescribeTokenUsageRequest) FromJsonString(s string) error {
 	delete(f, "EndTime")
 	delete(f, "AppBizIds")
 	delete(f, "SubScenes")
+	delete(f, "AppType")
+	delete(f, "SpaceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTokenUsageRequest has unknown keys!", "")
 	}
@@ -3661,6 +3685,12 @@ type DescribeTokenUsageResponseParams struct {
 
 	// Number of online searches.
 	InternetSearchUsage *float64 `json:"InternetSearchUsage,omitnil,omitempty" name:"InternetSearchUsage"`
+
+
+	DosageTypeLimit *float64 `json:"DosageTypeLimit,omitnil,omitempty" name:"DosageTypeLimit"`
+
+
+	DosageTypeCurr *float64 `json:"DosageTypeCurr,omitnil,omitempty" name:"DosageTypeCurr"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -3809,6 +3839,14 @@ type DocSegment struct {
 
 	// Document URL.
 	DocUrl *string `json:"DocUrl,omitnil,omitempty" name:"DocUrl"`
+}
+
+type DuplicateFileHandle struct {
+
+	CheckType *uint64 `json:"CheckType,omitnil,omitempty" name:"CheckType"`
+
+
+	HandleType *uint64 `json:"HandleType,omitnil,omitempty" name:"HandleType"`
 }
 
 // Predefined struct for user
@@ -9088,11 +9126,23 @@ type SaveDocRequestParams struct {
 	// Whether to reference a link.
 	IsRefer *bool `json:"IsRefer,omitnil,omitempty" name:"IsRefer"`
 
-	// Document operation type: 1: batch import (import Q&A pairs in batches); 2: document import (normally import a single document). The default value is 1.<br>Please note that when opt = 1, please download the Excel template from the Tencent Cloud Agent Development Platform/TCADP page.
+	// Document operation type: 1: batch import (import Q&A pairs in batches); 2: document import (normally import a single document). The default value is 1.<br>Please note that when opt = 1, please download the Excel template from the Tencent Cloud Agent Development Platform/ADP page.
 	Opt *uint64 `json:"Opt,omitnil,omitempty" name:"Opt"`
 
 	// Category ID.
 	CateBizId *string `json:"CateBizId,omitnil,omitempty" name:"CateBizId"`
+
+
+	IsDownload *bool `json:"IsDownload,omitnil,omitempty" name:"IsDownload"`
+
+
+	DuplicateFileHandles []*DuplicateFileHandle `json:"DuplicateFileHandles,omitnil,omitempty" name:"DuplicateFileHandles"`
+
+
+	SplitRule *string `json:"SplitRule,omitnil,omitempty" name:"SplitRule"`
+
+
+	UpdatePeriodInfo *UpdatePeriodInfo `json:"UpdatePeriodInfo,omitnil,omitempty" name:"UpdatePeriodInfo"`
 }
 
 type SaveDocRequest struct {
@@ -9144,11 +9194,19 @@ type SaveDocRequest struct {
 	// Whether to reference a link.
 	IsRefer *bool `json:"IsRefer,omitnil,omitempty" name:"IsRefer"`
 
-	// Document operation type: 1: batch import (import Q&A pairs in batches); 2: document import (normally import a single document). The default value is 1.<br>Please note that when opt = 1, please download the Excel template from the Tencent Cloud Agent Development Platform/TCADP page.
+	// Document operation type: 1: batch import (import Q&A pairs in batches); 2: document import (normally import a single document). The default value is 1.<br>Please note that when opt = 1, please download the Excel template from the Tencent Cloud Agent Development Platform/ADP page.
 	Opt *uint64 `json:"Opt,omitnil,omitempty" name:"Opt"`
 
 	// Category ID.
 	CateBizId *string `json:"CateBizId,omitnil,omitempty" name:"CateBizId"`
+
+	IsDownload *bool `json:"IsDownload,omitnil,omitempty" name:"IsDownload"`
+
+	DuplicateFileHandles []*DuplicateFileHandle `json:"DuplicateFileHandles,omitnil,omitempty" name:"DuplicateFileHandles"`
+
+	SplitRule *string `json:"SplitRule,omitnil,omitempty" name:"SplitRule"`
+
+	UpdatePeriodInfo *UpdatePeriodInfo `json:"UpdatePeriodInfo,omitnil,omitempty" name:"UpdatePeriodInfo"`
 }
 
 func (r *SaveDocRequest) ToJsonString() string {
@@ -9180,6 +9238,10 @@ func (r *SaveDocRequest) FromJsonString(s string) error {
 	delete(f, "IsRefer")
 	delete(f, "Opt")
 	delete(f, "CateBizId")
+	delete(f, "IsDownload")
+	delete(f, "DuplicateFileHandles")
+	delete(f, "SplitRule")
+	delete(f, "UpdatePeriodInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SaveDocRequest has unknown keys!", "")
 	}
@@ -9199,6 +9261,9 @@ type SaveDocResponseParams struct {
 
 	// Error link text.
 	ErrorLinkText *string `json:"ErrorLinkText,omitnil,omitempty" name:"ErrorLinkText"`
+
+
+	DuplicateFileCheckType *uint64 `json:"DuplicateFileCheckType,omitnil,omitempty" name:"DuplicateFileCheckType"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -9470,6 +9535,11 @@ type UnsatisfiedReply struct {
 
 	// Error type.
 	Reasons []*string `json:"Reasons,omitnil,omitempty" name:"Reasons"`
+}
+
+type UpdatePeriodInfo struct {
+
+	UpdatePeriodH *uint64 `json:"UpdatePeriodH,omitnil,omitempty" name:"UpdatePeriodH"`
 }
 
 // Predefined struct for user

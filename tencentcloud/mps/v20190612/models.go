@@ -3934,6 +3934,9 @@ type CreateLiveRecordTemplateRequestParams struct {
 
 	// Template description, with a length limit of 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Recording type. Valid values: video: audio and video recording; audio: audio recording; auto: automatic detection. If it is left blank, the default value video is used.
+	RecordType *string `json:"RecordType,omitnil,omitempty" name:"RecordType"`
 }
 
 type CreateLiveRecordTemplateRequest struct {
@@ -3950,6 +3953,9 @@ type CreateLiveRecordTemplateRequest struct {
 
 	// Template description, with a length limit of 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Recording type. Valid values: video: audio and video recording; audio: audio recording; auto: automatic detection. If it is left blank, the default value video is used.
+	RecordType *string `json:"RecordType,omitnil,omitempty" name:"RecordType"`
 }
 
 func (r *CreateLiveRecordTemplateRequest) ToJsonString() string {
@@ -3968,6 +3974,7 @@ func (r *CreateLiveRecordTemplateRequest) FromJsonString(s string) error {
 	delete(f, "MP4Configure")
 	delete(f, "Name")
 	delete(f, "Comment")
+	delete(f, "RecordType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLiveRecordTemplateRequest has unknown keys!", "")
 	}
@@ -9384,6 +9391,12 @@ type HighlightSegmentItem struct {
 
 	// End time of the live streaming segment in ISO date and time format.	
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Highlight title.
+	Title *string `json:"Title,omitnil,omitempty" name:"Title"`
+
+	// Highlight overview.
+	Summary *string `json:"Summary,omitnil,omitempty" name:"Summary"`
 }
 
 type ImageAreaBoxInfo struct {
@@ -9776,6 +9789,9 @@ type LiveRecordTemplate struct {
 
 	// Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Recording type. Valid values: video: audio and video recording; audio: audio recording; auto: automatic detection.
+	RecordType *string `json:"RecordType,omitnil,omitempty" name:"RecordType"`
 }
 
 type LiveScheduleLiveRecordTaskResult struct {
@@ -9840,11 +9856,17 @@ type LiveStreamAiAnalysisResultInfo struct {
 }
 
 type LiveStreamAiAnalysisResultItem struct {
-
+	// Result type. Valid values:
+	// <li>SegmentRecognition: video splitting.</li>
+	// <li>Highlight: highlight.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 
 	SegmentResultSet []*SegmentRecognitionItem `json:"SegmentResultSet,omitnil,omitempty" name:"SegmentResultSet"`
+
+	// Highlight result. This field is valid when Type is set to Highlight.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HighlightResultSet []*MediaAiAnalysisHighlightItem `json:"HighlightResultSet,omitnil,omitempty" name:"HighlightResultSet"`
 }
 
 type LiveStreamAiQualityControlResultInfo struct {
@@ -10240,27 +10262,26 @@ type LiveStreamTagRecognitionResult struct {
 }
 
 type LiveStreamTaskNotifyConfig struct {
-	// Notification type:
+	// Notification Type:
+	// TDMQ-CMQ: TDMQ for CMQ.
+	// "URL": When a URL is specified, HTTP callbacks are pushed to the address specified by NotifyUrl. The callback protocol is HTTP+JSON. The content of the packet body is the same as the output parameters of [ParseLiveStreamProcessNotification](https://www.tencentcloud.comom/document/product/862/39229?from_cn_redirect=1).
 	// 
-	// "CMQ": Callback messages are written to the CMQ queue; 
-	// "URL": When a URL is specified, the HTTP callback is pushed to the address specified by NotifyUrl. The callback protocol is http+json. The content of the packet body is the same as the output parameters of the [ParseLiveStreamProcessNotification API](https://intl.cloud.tencent.com/document/product/862/39229?from_cn_redirect=1).
-	// 
-	// <font color="red">Note: If left blank, it is CMQ by default. To use the other type, you need to fill in the corresponding type value.</font>
+	// <font color="red">Note: If it is left blank, TDMQ-CMQ is used by default. To use other types, fill in the corresponding type value.</font>
 	NotifyType *string `json:"NotifyType,omitnil,omitempty" name:"NotifyType"`
 
 	// HTTP callback URL, required if `NotifyType` is set to `URL`
 	NotifyUrl *string `json:"NotifyUrl,omitnil,omitempty" name:"NotifyUrl"`
 
-	// CMQ model. There are two types: `Queue` and `Topic`. Currently, only `Queue` is supported.
+	// Queue and Topic models are provided.
 	CmqModel *string `json:"CmqModel,omitnil,omitempty" name:"CmqModel"`
 
-	// CMQ region, such as `sh` and `bj`.
+	// Region when NotifyType is set to TDMQ-CMQ. For example, sh or bj.
 	CmqRegion *string `json:"CmqRegion,omitnil,omitempty" name:"CmqRegion"`
 
-	// This parameter is valid when the model is `Queue`, indicating the name of the CMQ queue for receiving event notifications.
+	// This field is valid when the model is Queue. It indicates the name of the TDMQ for CMQ queue for receiving event notifications.
 	QueueName *string `json:"QueueName,omitnil,omitempty" name:"QueueName"`
 
-	// This parameter is valid when the model is `Topic`, indicating the name of the CMQ topic for receiving event notifications.
+	// This field is valid when the model is Topic. It indicates the name of the TDMQ for CMQ topic for receiving event notifications.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
 	// Key used to generate a callback signature.
@@ -10463,6 +10484,14 @@ type MediaAiAnalysisHighlightItem struct {
 
 	// A list of the highlight segments.
 	SegmentSet []*HighlightSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
+
+	// Intelligent highlight address.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HighlightUrl *string `json:"HighlightUrl,omitnil,omitempty" name:"HighlightUrl"`
+
+	// Intelligent highlight cover address.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CovImgUrl *string `json:"CovImgUrl,omitnil,omitempty" name:"CovImgUrl"`
 }
 
 type MediaAiAnalysisTagItem struct {
@@ -11963,6 +11992,9 @@ type ModifyLiveRecordTemplateRequestParams struct {
 
 	// Template description, with a length limit of 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Recording type. Valid values: video: audio and video recording; audio: audio recording; auto: automatic detection.
+	RecordType *string `json:"RecordType,omitnil,omitempty" name:"RecordType"`
 }
 
 type ModifyLiveRecordTemplateRequest struct {
@@ -11982,6 +12014,9 @@ type ModifyLiveRecordTemplateRequest struct {
 
 	// Template description, with a length limit of 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Recording type. Valid values: video: audio and video recording; audio: audio recording; auto: automatic detection.
+	RecordType *string `json:"RecordType,omitnil,omitempty" name:"RecordType"`
 }
 
 func (r *ModifyLiveRecordTemplateRequest) ToJsonString() string {
@@ -12001,6 +12036,7 @@ func (r *ModifyLiveRecordTemplateRequest) FromJsonString(s string) error {
 	delete(f, "MP4Configure")
 	delete(f, "Name")
 	delete(f, "Comment")
+	delete(f, "RecordType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLiveRecordTemplateRequest has unknown keys!", "")
 	}
@@ -14508,6 +14544,10 @@ type RawTranscodeParameter struct {
 	// Audio/Video enhancement configuration.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
+
+	// Subtitle parameter.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubtitleTemplate *SubtitleTemplate `json:"SubtitleTemplate,omitnil,omitempty" name:"SubtitleTemplate"`
 }
 
 type RawWatermarkParameter struct {
@@ -15570,6 +15610,10 @@ type SubtitleTemplate struct {
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	StreamIndex *int64 `json:"StreamIndex,omitnil,omitempty" name:"StreamIndex"`
 
+	// Input information on the subtitle file to be embedded into the video. Currently, only subtitle files stored in COS are supported.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubtitleFileInput *MediaInputInfo `json:"SubtitleFileInput,omitnil,omitempty" name:"SubtitleFileInput"`
+
 	// Font type. valid values:.
 	// <li>hei.ttf: simhei.</li>.
 	// <li>song.ttf: simsun.</li>.
@@ -15654,6 +15698,38 @@ type SubtitleTemplate struct {
 	// Default value: 0.8.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	BoardAlpha *float64 `json:"BoardAlpha,omitnil,omitempty" name:"BoardAlpha"`
+
+	// Stroke width.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OutlineWidth *float64 `json:"OutlineWidth,omitnil,omitempty" name:"OutlineWidth"`
+
+	// Stroke color. The value should be a 6-digit hexadecimal RGB value.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OutlineColor *string `json:"OutlineColor,omitnil,omitempty" name:"OutlineColor"`
+
+	// Stroke transparency. The value should be a positive floating-point number in the range of (0, 1].
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OutlineAlpha *float64 `json:"OutlineAlpha,omitnil,omitempty" name:"OutlineAlpha"`
+
+	// Shadow width. The value should be a floating-point number in the range of [0, 1000].
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ShadowWidth *float64 `json:"ShadowWidth,omitnil,omitempty" name:"ShadowWidth"`
+
+	// Shadow color. The value should be a 6-digit hexadecimal RGB value.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ShadowColor *string `json:"ShadowColor,omitnil,omitempty" name:"ShadowColor"`
+
+	// Shadow transparency. The value should be a positive floating-point number in the range of (0, 1].
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ShadowAlpha *float64 `json:"ShadowAlpha,omitnil,omitempty" name:"ShadowAlpha"`
+
+	// Line spacing. The value should be a positive integer in the range of [0, 1000].
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LineSpacing *int64 `json:"LineSpacing,omitnil,omitempty" name:"LineSpacing"`
+
+	// Alignment mode. Valid values: top alignment. The top position of subtitles is fixed, while the bottom position changes according to the number of lines. bottom: bottom alignment. The bottom position of subtitles is fixed, while the top position changes according to the number of lines.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Alignment *string `json:"Alignment,omitnil,omitempty" name:"Alignment"`
 }
 
 type SuperResolutionConfig struct {
@@ -15972,19 +16048,27 @@ type TextWatermarkTemplateInputForUpdate struct {
 }
 
 type TimeSpotCheck struct {
-	// Duration of each loop detection in the spot check policy, in seconds. Valid values:
+	// Duration of each loop detection, in seconds. Value range:
 	// 
 	//  - Minimum value: 10.
 	//  - Maximum value: 86400.
 	CheckDuration *uint64 `json:"CheckDuration,omitnil,omitempty" name:"CheckDuration"`
 
-	// Detection interval of the spot check policy, which indicates how long to wait before conducting the next detection after one detection is completed.
+	// Detection interval, in seconds. It indicates the duration after a detection is completed and before the next detection is conducted. Value range:
+	//  - Minimum value: 10.
+	//  - Maximum value: 3600.
 	CheckInterval *uint64 `json:"CheckInterval,omitnil,omitempty" name:"CheckInterval"`
 
-	// Duration for which the opening clip is skipped.
+	// Skipped opening duration, in seconds. Value range:
+	//  - Minimum value: 1.
+	//  - Maximum value: 1800.
 	SkipDuration *uint64 `json:"SkipDuration,omitnil,omitempty" name:"SkipDuration"`
 
-	// Number of loops. When this field is empty or set to 0, the default behavior is to loop until the video ends.
+	// Number of loops. Value range:
+	//  - Minimum value: 0.
+	//  - Maximum value: 1000.
+	// 
+	// If the value is 0 or not specified, it indicates that loops are executed until the video ends.
 	CirclesNumber *uint64 `json:"CirclesNumber,omitnil,omitempty" name:"CirclesNumber"`
 }
 
