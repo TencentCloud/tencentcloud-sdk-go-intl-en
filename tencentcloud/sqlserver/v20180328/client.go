@@ -195,6 +195,64 @@ func (c *Client) CloseInterCommunicationWithContext(ctx context.Context, request
     return
 }
 
+func NewCompleteExpansionRequest() (request *CompleteExpansionRequest) {
+    request = &CompleteExpansionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "CompleteExpansion")
+    
+    
+    return
+}
+
+func NewCompleteExpansionResponse() (response *CompleteExpansionResponse) {
+    response = &CompleteExpansionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CompleteExpansion
+// This API is used to complete the instance upgrade and switch immediately without waiting for the maintenance window when the instance status is "upgrade pending switch" after scale-out is initiated. This API needs to be called during off-peak hours of the instance. Some databases cannot be accessed before the switch is completed.
+//
+// error code that may be returned:
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSINVALID = "ResourceUnavailable.InstanceStatusInvalid"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CompleteExpansion(request *CompleteExpansionRequest) (response *CompleteExpansionResponse, err error) {
+    return c.CompleteExpansionWithContext(context.Background(), request)
+}
+
+// CompleteExpansion
+// This API is used to complete the instance upgrade and switch immediately without waiting for the maintenance window when the instance status is "upgrade pending switch" after scale-out is initiated. This API needs to be called during off-peak hours of the instance. Some databases cannot be accessed before the switch is completed.
+//
+// error code that may be returned:
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSINVALID = "ResourceUnavailable.InstanceStatusInvalid"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CompleteExpansionWithContext(ctx context.Context, request *CompleteExpansionRequest) (response *CompleteExpansionResponse, err error) {
+    if request == nil {
+        request = NewCompleteExpansionRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "CompleteExpansion")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CompleteExpansion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCompleteExpansionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAccountRequest() (request *CreateAccountRequest) {
     request = &CreateAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1187,6 +1245,66 @@ func (c *Client) CreateReadOnlyDBInstancesWithContext(ctx context.Context, reque
     return
 }
 
+func NewCutXEventsRequest() (request *CutXEventsRequest) {
+    request = &CutXEventsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "CutXEvents")
+    
+    
+    return
+}
+
+func NewCutXEventsResponse() (response *CutXEventsResponse) {
+    response = &CutXEventsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CutXEvents
+// This API is used to manually cut block logs and deadlock logs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
+//  FAILEDOPERATION_NOTSUPPORT = "FailedOperation.NotSupport"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  RESOURCENOTFOUND_VPCNOTEXIST = "ResourceNotFound.VpcNotExist"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CutXEvents(request *CutXEventsRequest) (response *CutXEventsResponse, err error) {
+    return c.CutXEventsWithContext(context.Background(), request)
+}
+
+// CutXEvents
+// This API is used to manually cut block logs and deadlock logs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
+//  FAILEDOPERATION_NOTSUPPORT = "FailedOperation.NotSupport"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  RESOURCENOTFOUND_VPCNOTEXIST = "ResourceNotFound.VpcNotExist"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CutXEventsWithContext(ctx context.Context, request *CutXEventsRequest) (response *CutXEventsResponse, err error) {
+    if request == nil {
+        request = NewCutXEventsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "CutXEvents")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CutXEvents require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCutXEventsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteAccountRequest() (request *DeleteAccountRequest) {
     request = &DeleteAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2051,6 +2169,62 @@ func (c *Client) DescribeCollationTimeZoneWithContext(ctx context.Context, reque
     return
 }
 
+func NewDescribeCrossRegionZoneRequest() (request *DescribeCrossRegionZoneRequest) {
+    request = &DescribeCrossRegionZoneRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeCrossRegionZone")
+    
+    
+    return
+}
+
+func NewDescribeCrossRegionZoneResponse() (response *DescribeCrossRegionZoneResponse) {
+    response = &DescribeCrossRegionZoneResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCrossRegionZone
+// This API is used to query the disaster recovery region and AZ of the secondary node based on the primary instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_GCSERROR = "InternalError.GcsError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeCrossRegionZone(request *DescribeCrossRegionZoneRequest) (response *DescribeCrossRegionZoneResponse, err error) {
+    return c.DescribeCrossRegionZoneWithContext(context.Background(), request)
+}
+
+// DescribeCrossRegionZone
+// This API is used to query the disaster recovery region and AZ of the secondary node based on the primary instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_GCSERROR = "InternalError.GcsError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeCrossRegionZoneWithContext(ctx context.Context, request *DescribeCrossRegionZoneRequest) (response *DescribeCrossRegionZoneResponse, err error) {
+    if request == nil {
+        request = NewDescribeCrossRegionZoneRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeCrossRegionZone")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCrossRegionZone require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCrossRegionZoneResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBCharsetsRequest() (request *DescribeDBCharsetsRequest) {
     request = &DescribeDBCharsetsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2443,6 +2617,68 @@ func (c *Client) DescribeDBsNormalWithContext(ctx context.Context, request *Desc
     return
 }
 
+func NewDescribeDatabasesRequest() (request *DescribeDatabasesRequest) {
+    request = &DescribeDatabasesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeDatabases")
+    
+    
+    return
+}
+
+func NewDescribeDatabasesResponse() (response *DescribeDatabasesResponse) {
+    response = &DescribeDatabasesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDatabases
+// This API is used to query the database list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeDatabases(request *DescribeDatabasesRequest) (response *DescribeDatabasesResponse, err error) {
+    return c.DescribeDatabasesWithContext(context.Background(), request)
+}
+
+// DescribeDatabases
+// This API is used to query the database list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeDatabasesWithContext(ctx context.Context, request *DescribeDatabasesRequest) (response *DescribeDatabasesResponse, err error) {
+    if request == nil {
+        request = NewDescribeDatabasesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeDatabases")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDatabases require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDatabasesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeFlowStatusRequest() (request *DescribeFlowStatusRequest) {
     request = &DescribeFlowStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2741,6 +2977,142 @@ func (c *Client) DescribeInstanceParamsWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDescribeInstanceParamsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInstanceTasksRequest() (request *DescribeInstanceTasksRequest) {
+    request = &DescribeInstanceTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeInstanceTasks")
+    
+    
+    return
+}
+
+func NewDescribeInstanceTasksResponse() (response *DescribeInstanceTasksResponse) {
+    response = &DescribeInstanceTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeInstanceTasks
+// This API is used to query the list of asynchronous tasks related to an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeInstanceTasks(request *DescribeInstanceTasksRequest) (response *DescribeInstanceTasksResponse, err error) {
+    return c.DescribeInstanceTasksWithContext(context.Background(), request)
+}
+
+// DescribeInstanceTasks
+// This API is used to query the list of asynchronous tasks related to an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeInstanceTasksWithContext(ctx context.Context, request *DescribeInstanceTasksRequest) (response *DescribeInstanceTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceTasksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeInstanceTasks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstanceTasks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstanceTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInstanceTradeParameterRequest() (request *DescribeInstanceTradeParameterRequest) {
+    request = &DescribeInstanceTradeParameterRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeInstanceTradeParameter")
+    
+    
+    return
+}
+
+func NewDescribeInstanceTradeParameterResponse() (response *DescribeInstanceTradeParameterResponse) {
+    response = &DescribeInstanceTradeParameterResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeInstanceTradeParameter
+// This API is used to query the instance billing parameters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  FAILEDOPERATION_GETVPCFAILED = "FailedOperation.GetVpcFailed"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  INVALIDPARAMETER_PAYORDERFAILED = "InvalidParameter.PayOrderFailed"
+//  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
+//  INVALIDPARAMETERVALUE_ILLEGALSPEC = "InvalidParameterValue.IllegalSpec"
+//  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
+//  INVALIDPARAMETERVALUE_SECURITYGROUPIDISILLEGAL = "InvalidParameterValue.SecurityGroupIdIsIllegal"
+//  RESOURCENOTFOUND_VPCNOTEXIST = "ResourceNotFound.VpcNotExist"
+//  RESOURCEUNAVAILABLE_VPCNOTEXIST = "ResourceUnavailable.VpcNotExist"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeInstanceTradeParameter(request *DescribeInstanceTradeParameterRequest) (response *DescribeInstanceTradeParameterResponse, err error) {
+    return c.DescribeInstanceTradeParameterWithContext(context.Background(), request)
+}
+
+// DescribeInstanceTradeParameter
+// This API is used to query the instance billing parameters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  FAILEDOPERATION_GETVPCFAILED = "FailedOperation.GetVpcFailed"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  INVALIDPARAMETER_PAYORDERFAILED = "InvalidParameter.PayOrderFailed"
+//  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
+//  INVALIDPARAMETERVALUE_ILLEGALSPEC = "InvalidParameterValue.IllegalSpec"
+//  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
+//  INVALIDPARAMETERVALUE_SECURITYGROUPIDISILLEGAL = "InvalidParameterValue.SecurityGroupIdIsIllegal"
+//  RESOURCENOTFOUND_VPCNOTEXIST = "ResourceNotFound.VpcNotExist"
+//  RESOURCEUNAVAILABLE_VPCNOTEXIST = "ResourceUnavailable.VpcNotExist"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeInstanceTradeParameterWithContext(ctx context.Context, request *DescribeInstanceTradeParameterRequest) (response *DescribeInstanceTradeParameterResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceTradeParameterRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeInstanceTradeParameter")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstanceTradeParameter require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstanceTradeParameterResponse()
     err = c.Send(request, response)
     return
 }
@@ -3361,6 +3733,76 @@ func (c *Client) DescribeSpecSellStatusWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDescribeSpecSellStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUpgradeInstanceCheckRequest() (request *DescribeUpgradeInstanceCheckRequest) {
+    request = &DescribeUpgradeInstanceCheckRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeUpgradeInstanceCheck")
+    
+    
+    return
+}
+
+func NewDescribeUpgradeInstanceCheckResponse() (response *DescribeUpgradeInstanceCheckResponse) {
+    response = &DescribeUpgradeInstanceCheckResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeUpgradeInstanceCheck
+// This API is used to pre-check the impact of the instance configuration adjustment before the adjustment.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYPRICEFAILED = "FailedOperation.QueryPriceFailed"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_NOTSUPPORTPUBSUBINSTANCE = "InvalidParameter.NotSupportPubSubInstance"
+//  INVALIDPARAMETER_NOTSUPPORTREADONLYMASTERINSTANCE = "InvalidParameter.NotSupportReadOnlyMasterInstance"
+//  INVALIDPARAMETER_NOTSUPPORTSINGLEINSTANCE = "InvalidParameter.NotSupportSingleInstance"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  INVALIDPARAMETERVALUE_ILLEGALSPEC = "InvalidParameterValue.IllegalSpec"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeUpgradeInstanceCheck(request *DescribeUpgradeInstanceCheckRequest) (response *DescribeUpgradeInstanceCheckResponse, err error) {
+    return c.DescribeUpgradeInstanceCheckWithContext(context.Background(), request)
+}
+
+// DescribeUpgradeInstanceCheck
+// This API is used to pre-check the impact of the instance configuration adjustment before the adjustment.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYPRICEFAILED = "FailedOperation.QueryPriceFailed"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_NOTSUPPORTPUBSUBINSTANCE = "InvalidParameter.NotSupportPubSubInstance"
+//  INVALIDPARAMETER_NOTSUPPORTREADONLYMASTERINSTANCE = "InvalidParameter.NotSupportReadOnlyMasterInstance"
+//  INVALIDPARAMETER_NOTSUPPORTSINGLEINSTANCE = "InvalidParameter.NotSupportSingleInstance"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  INVALIDPARAMETERVALUE_ILLEGALSPEC = "InvalidParameterValue.IllegalSpec"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeUpgradeInstanceCheckWithContext(ctx context.Context, request *DescribeUpgradeInstanceCheckRequest) (response *DescribeUpgradeInstanceCheckResponse, err error) {
+    if request == nil {
+        request = NewDescribeUpgradeInstanceCheckRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeUpgradeInstanceCheck")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUpgradeInstanceCheck require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUpgradeInstanceCheckResponse()
     err = c.Send(request, response)
     return
 }
@@ -4201,6 +4643,66 @@ func (c *Client) ModifyDBInstanceNetworkWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewModifyDBInstanceNetworkResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDBInstanceNoteRequest() (request *ModifyDBInstanceNoteRequest) {
+    request = &ModifyDBInstanceNoteRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyDBInstanceNote")
+    
+    
+    return
+}
+
+func NewModifyDBInstanceNoteResponse() (response *ModifyDBInstanceNoteResponse) {
+    response = &ModifyDBInstanceNoteResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDBInstanceNote
+// This API is used to modify the instance remarks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  INVALIDPARAMETERVALUE_INSTANCENAMEISILLEGAL = "InvalidParameterValue.InstanceNameIsIllegal"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ModifyDBInstanceNote(request *ModifyDBInstanceNoteRequest) (response *ModifyDBInstanceNoteResponse, err error) {
+    return c.ModifyDBInstanceNoteWithContext(context.Background(), request)
+}
+
+// ModifyDBInstanceNote
+// This API is used to modify the instance remarks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  INVALIDPARAMETERVALUE_INSTANCENAMEISILLEGAL = "InvalidParameterValue.InstanceNameIsIllegal"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ModifyDBInstanceNoteWithContext(ctx context.Context, request *ModifyDBInstanceNoteRequest) (response *ModifyDBInstanceNoteResponse, err error) {
+    if request == nil {
+        request = NewModifyDBInstanceNoteRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyDBInstanceNote")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDBInstanceNote require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDBInstanceNoteResponse()
     err = c.Send(request, response)
     return
 }

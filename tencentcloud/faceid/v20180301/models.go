@@ -274,28 +274,20 @@ type ApplySdkVerificationTokenRequestParams struct {
 	// Default value: 4
 	SecurityLevel *int64 `json:"SecurityLevel,omitnil,omitempty" name:"SecurityLevel"`
 
-	// The identity document type. Valid values: 
-	// 1. HK (default): Identity card of Hong Kong (China)
-	// 2. ML: Malaysian identity card
-	// 3. IndonesiaIDCard: Indonesian identity card
-	// 4. PhilippinesVoteID: Philippine voters ID card
-	// 5. PhilippinesDrivingLicense: Philippine driver's license
-	// 6. PhilippinesTinID: Philippine TIN ID card
-	// 7. PhilippinesSSSID: Philippine SSS ID card
-	// 8. PhilippinesUMID: Philippine UMID card
-	// 9. MLIDPassport: Passport issued in Hong Kong/Macao/Taiwan (China) or other countries/regions
-	// 10..MacaoIDCard: Macao ID Card
-	// 11.ThailandIDCard: Thailand ID Card
-	// 12.MainlandIDCard: Mainland ID Card
-	// 13.SingaporeIDCard: Singapore ID Card
-	// 14.JapanIDCard: Japan ID Card
-	// 15.MLDrivingLicense: Malaysian Driving License
-	// 16.IndonesiaDrivingLicense: Indonesia Driving License
-	// 17.ThailandDrivingLicense: Thailand Driving License
-	// 18.SingaporeDrivingLicense: Singapore Driving License
-	// 19.JapanDrivingLicense: Japan Driving License
-	// 20.TaiWanIDCard:Taiwan ID Card
-	// 21.HMTPermit: exit/entry permit (card) for traveling to and from Hong Kong, Macao, or Taiwan
+	// Card Types Supported for Authentication: Currently supported types are as follows:
+	// 1.HK (Default): Hong Kong (China) Identity Card
+	// 2.ML: Malaysia Identity Card
+	// 3.IndonesiaIDCard: Indonesia Identity Card
+	// 4.PhilippinesVoteID: Philippines Voter ID
+	// 5.PhilippinesDrivingLicense: Philippines Driving License
+	// 6.PhilippinesTinID: Philippines Tin ID
+	// 7.PhilippinesSSSID: Philippines SSS ID
+	// 8.PhilippinesUMID: Philippines UMID
+	// 9.MLIDPassport: Passports of Hong Kong, Macao, Taiwan Regions (China) and Foreign Countries
+	// 10.ThailandIDCard: Thailand Identity Card
+	// 11.MainlandIDCard: Mainland China Identity Card
+	// 12.SingaporeIDCard: Singapore Identity Card
+	// 13.HMTPermit: Exit-Entry Permit for Travel to and from Hong Kong, Macao and Taiwan (China)
 	IdCardType *string `json:"IdCardType,omitnil,omitempty" name:"IdCardType"`
 
 	// The Base64-encoded value of the photo to compare, which is required only when `CheckMode` is set to `2`.
@@ -315,6 +307,9 @@ type ApplySdkVerificationTokenRequestParams struct {
 
 	// A passthrough field, which is returned together with the verification result and can contain up to 1,024 bits.
 	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// ENHANCED: Enhanced Version, BASIC: Basic Version (Default)
+	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
 
 	// This interface is used to control th action sequences.
 	// Action types are as follows:
@@ -347,28 +342,20 @@ type ApplySdkVerificationTokenRequest struct {
 	// Default value: 4
 	SecurityLevel *int64 `json:"SecurityLevel,omitnil,omitempty" name:"SecurityLevel"`
 
-	// The identity document type. Valid values: 
-	// 1. HK (default): Identity card of Hong Kong (China)
-	// 2. ML: Malaysian identity card
-	// 3. IndonesiaIDCard: Indonesian identity card
-	// 4. PhilippinesVoteID: Philippine voters ID card
-	// 5. PhilippinesDrivingLicense: Philippine driver's license
-	// 6. PhilippinesTinID: Philippine TIN ID card
-	// 7. PhilippinesSSSID: Philippine SSS ID card
-	// 8. PhilippinesUMID: Philippine UMID card
-	// 9. MLIDPassport: Passport issued in Hong Kong/Macao/Taiwan (China) or other countries/regions
-	// 10..MacaoIDCard: Macao ID Card
-	// 11.ThailandIDCard: Thailand ID Card
-	// 12.MainlandIDCard: Mainland ID Card
-	// 13.SingaporeIDCard: Singapore ID Card
-	// 14.JapanIDCard: Japan ID Card
-	// 15.MLDrivingLicense: Malaysian Driving License
-	// 16.IndonesiaDrivingLicense: Indonesia Driving License
-	// 17.ThailandDrivingLicense: Thailand Driving License
-	// 18.SingaporeDrivingLicense: Singapore Driving License
-	// 19.JapanDrivingLicense: Japan Driving License
-	// 20.TaiWanIDCard:Taiwan ID Card
-	// 21.HMTPermit: exit/entry permit (card) for traveling to and from Hong Kong, Macao, or Taiwan
+	// Card Types Supported for Authentication: Currently supported types are as follows:
+	// 1.HK (Default): Hong Kong (China) Identity Card
+	// 2.ML: Malaysia Identity Card
+	// 3.IndonesiaIDCard: Indonesia Identity Card
+	// 4.PhilippinesVoteID: Philippines Voter ID
+	// 5.PhilippinesDrivingLicense: Philippines Driving License
+	// 6.PhilippinesTinID: Philippines Tin ID
+	// 7.PhilippinesSSSID: Philippines SSS ID
+	// 8.PhilippinesUMID: Philippines UMID
+	// 9.MLIDPassport: Passports of Hong Kong, Macao, Taiwan Regions (China) and Foreign Countries
+	// 10.ThailandIDCard: Thailand Identity Card
+	// 11.MainlandIDCard: Mainland China Identity Card
+	// 12.SingaporeIDCard: Singapore Identity Card
+	// 13.HMTPermit: Exit-Entry Permit for Travel to and from Hong Kong, Macao and Taiwan (China)
 	IdCardType *string `json:"IdCardType,omitnil,omitempty" name:"IdCardType"`
 
 	// The Base64-encoded value of the photo to compare, which is required only when `CheckMode` is set to `2`.
@@ -386,6 +373,9 @@ type ApplySdkVerificationTokenRequest struct {
 
 	// A passthrough field, which is returned together with the verification result and can contain up to 1,024 bits.
 	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// ENHANCED: Enhanced Version, BASIC: Basic Version (Default)
+	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
 
 	// This interface is used to control th action sequences.
 	// Action types are as follows:
@@ -420,6 +410,7 @@ func (r *ApplySdkVerificationTokenRequest) FromJsonString(s string) error {
 	delete(f, "DisableChangeOcrResult")
 	delete(f, "DisableCheckOcrWarnings")
 	delete(f, "Extra")
+	delete(f, "SdkVersion")
 	delete(f, "ActionList")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplySdkVerificationTokenRequest has unknown keys!", "")
@@ -1681,6 +1672,15 @@ type GetFaceIdResultIntlResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 
+	// Describe the risk level of the device where the current request is located, with a total of 4 levels. The details are as follows:
+	// 1 - Secure
+	// 2 - Low Risk
+	// 3 - Medium Risk
+	// 4 - High Risk
+	// Empty - Risk level not obtained.
+	// Only returned for the ENHANCED version, with the default value being empty.
+	DeviceInfoLevel *string `json:"DeviceInfoLevel,omitnil,omitempty" name:"DeviceInfoLevel"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -1705,7 +1705,7 @@ func (r *GetFaceIdResultIntlResponse) FromJsonString(s string) error {
 type GetFaceIdTokenIntlRequestParams struct {
 	// The detection mode. Valid values:
 	// `liveness`: Liveness detection only.
-	// `compare`: Selfie verification.
+	// `compare`: Selfie Verification(liveness detection and face comparison).
 	// Default value: `liveness`.
 	CheckMode *string `json:"CheckMode,omitnil,omitempty" name:"CheckMode"`
 
@@ -1734,6 +1734,9 @@ type GetFaceIdTokenIntlRequestParams struct {
 	// Multiple action example: "blink,mouth"
 	// The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2 or 4; otherwise, the interface reports an error.
 	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
+
+	// ENHANCED: Enhanced Version, BASIC: Basic Version (Default)
+	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
 }
 
 type GetFaceIdTokenIntlRequest struct {
@@ -1741,7 +1744,7 @@ type GetFaceIdTokenIntlRequest struct {
 	
 	// The detection mode. Valid values:
 	// `liveness`: Liveness detection only.
-	// `compare`: Selfie verification.
+	// `compare`: Selfie Verification(liveness detection and face comparison).
 	// Default value: `liveness`.
 	CheckMode *string `json:"CheckMode,omitnil,omitempty" name:"CheckMode"`
 
@@ -1770,6 +1773,9 @@ type GetFaceIdTokenIntlRequest struct {
 	// Multiple action example: "blink,mouth"
 	// The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2 or 4; otherwise, the interface reports an error.
 	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
+
+	// ENHANCED: Enhanced Version, BASIC: Basic Version (Default)
+	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
 }
 
 func (r *GetFaceIdTokenIntlRequest) ToJsonString() string {
@@ -1789,6 +1795,7 @@ func (r *GetFaceIdTokenIntlRequest) FromJsonString(s string) error {
 	delete(f, "Image")
 	delete(f, "Extra")
 	delete(f, "ActionList")
+	delete(f, "SdkVersion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetFaceIdTokenIntlRequest has unknown keys!", "")
 	}
@@ -1937,6 +1944,15 @@ type GetSdkVerificationResultResponseParams struct {
 
 	// Data passed through in the process of getting the token.
 	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// Describe the risk level of the device where the current request is located, with a total of 4 levels. The details are as follows:
+	// 1 - Secure
+	// 2 - Low Risk
+	// 3 - Medium Risk
+	// 4 - High Risk
+	// Empty - Risk level not obtained.
+	// Only returned for the ENHANCED version, with the default value being empty.
+	DeviceInfoLevel *string `json:"DeviceInfoLevel,omitnil,omitempty" name:"DeviceInfoLevel"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`

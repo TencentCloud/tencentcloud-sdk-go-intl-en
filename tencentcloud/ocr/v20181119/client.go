@@ -1245,7 +1245,7 @@ func NewRecognizeBrazilCommonOCRResponse() (response *RecognizeBrazilCommonOCRRe
 }
 
 // RecognizeBrazilCommonOCR
-// This API is used to identify Brazil RNE documents.
+// This API is used to identify Brazil common documents.
 //
 // 
 //
@@ -1264,7 +1264,7 @@ func (c *Client) RecognizeBrazilCommonOCR(request *RecognizeBrazilCommonOCRReque
 }
 
 // RecognizeBrazilCommonOCR
-// This API is used to identify Brazil RNE documents.
+// This API is used to identify Brazil common documents.
 //
 // 
 //
