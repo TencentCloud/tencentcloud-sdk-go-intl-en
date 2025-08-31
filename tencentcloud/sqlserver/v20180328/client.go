@@ -371,6 +371,82 @@ func (c *Client) CompleteExpansionWithContext(ctx context.Context, request *Comp
     return
 }
 
+func NewCompleteMigrationRequest() (request *CompleteMigrationRequest) {
+    request = &CompleteMigrationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "CompleteMigration")
+    
+    
+    return
+}
+
+func NewCompleteMigrationResponse() (response *CompleteMigrationResponse) {
+    response = &CompleteMigrationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CompleteMigration
+// This API is used to complete a migration task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CREATEFLOWFAILED = "InternalError.CreateFlowFailed"
+//  INTERNALERROR_DBCONNECTERROR = "InternalError.DBConnectError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_GCSERROR = "InternalError.GcsError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  RESOURCENOTFOUND_DBNOTEXIT = "ResourceNotFound.DBNotExit"
+//  RESOURCEUNAVAILABLE_DBINVALIDSTATUS = "ResourceUnavailable.DBInvalidStatus"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CompleteMigration(request *CompleteMigrationRequest) (response *CompleteMigrationResponse, err error) {
+    return c.CompleteMigrationWithContext(context.Background(), request)
+}
+
+// CompleteMigration
+// This API is used to complete a migration task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CREATEFLOWFAILED = "InternalError.CreateFlowFailed"
+//  INTERNALERROR_DBCONNECTERROR = "InternalError.DBConnectError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_GCSERROR = "InternalError.GcsError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  RESOURCENOTFOUND_DBNOTEXIT = "ResourceNotFound.DBNotExit"
+//  RESOURCEUNAVAILABLE_DBINVALIDSTATUS = "ResourceUnavailable.DBInvalidStatus"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CompleteMigrationWithContext(ctx context.Context, request *CompleteMigrationRequest) (response *CompleteMigrationResponse, err error) {
+    if request == nil {
+        request = NewCompleteMigrationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "CompleteMigration")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CompleteMigration require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCompleteMigrationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAccountRequest() (request *CreateAccountRequest) {
     request = &CreateAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4245,6 +4321,78 @@ func (c *Client) DescribeMaintenanceSpanWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDescribeMaintenanceSpanResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMigrationDatabasesRequest() (request *DescribeMigrationDatabasesRequest) {
+    request = &DescribeMigrationDatabasesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeMigrationDatabases")
+    
+    
+    return
+}
+
+func NewDescribeMigrationDatabasesResponse() (response *DescribeMigrationDatabasesResponse) {
+    response = &DescribeMigrationDatabasesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMigrationDatabases
+// This API is used to query the list of databases to be migrated.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBCONNECTERROR = "InternalError.DBConnectError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_GCSERROR = "InternalError.GcsError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  INVALIDPARAMETERVALUE_PASSWORDISILLEGAL = "InvalidParameterValue.PasswordIsIllegal"
+//  RESOURCENOTFOUND_ACCOUNTNOTEXIST = "ResourceNotFound.AccountNotExist"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeMigrationDatabases(request *DescribeMigrationDatabasesRequest) (response *DescribeMigrationDatabasesResponse, err error) {
+    return c.DescribeMigrationDatabasesWithContext(context.Background(), request)
+}
+
+// DescribeMigrationDatabases
+// This API is used to query the list of databases to be migrated.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBCONNECTERROR = "InternalError.DBConnectError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_GCSERROR = "InternalError.GcsError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  INVALIDPARAMETERVALUE_PASSWORDISILLEGAL = "InvalidParameterValue.PasswordIsIllegal"
+//  RESOURCENOTFOUND_ACCOUNTNOTEXIST = "ResourceNotFound.AccountNotExist"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeMigrationDatabasesWithContext(ctx context.Context, request *DescribeMigrationDatabasesRequest) (response *DescribeMigrationDatabasesResponse, err error) {
+    if request == nil {
+        request = NewDescribeMigrationDatabasesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeMigrationDatabases")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMigrationDatabases require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMigrationDatabasesResponse()
     err = c.Send(request, response)
     return
 }
