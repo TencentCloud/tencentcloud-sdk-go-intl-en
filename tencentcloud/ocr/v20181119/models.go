@@ -581,6 +581,10 @@ type ExtractDocMultiRequestParams struct {
 	// -- MultiRealEstateCertificate
 	// -- MultiRealEstateMaterial
 	// -- HongKongUtilityBill
+	// -- OverseasCheques
+	// -- RegistrationCertificate
+	// -- GridPhoto
+	// -- SignaturePage
 	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
 
 	// Whether the full-text field coordinate value recognition is enabled.
@@ -638,6 +642,10 @@ type ExtractDocMultiRequest struct {
 	// -- MultiRealEstateCertificate
 	// -- MultiRealEstateMaterial
 	// -- HongKongUtilityBill
+	// -- OverseasCheques
+	// -- RegistrationCertificate
+	// -- GridPhoto
+	// -- SignaturePage
 	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
 
 	// Whether the full-text field coordinate value recognition is enabled.
