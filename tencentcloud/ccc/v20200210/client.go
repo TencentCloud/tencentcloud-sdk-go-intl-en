@@ -149,6 +149,56 @@ func (c *Client) AbortPredictiveDialingCampaignWithContext(ctx context.Context, 
     return
 }
 
+func NewBindNumberCallInInterfaceRequest() (request *BindNumberCallInInterfaceRequest) {
+    request = &BindNumberCallInInterfaceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "BindNumberCallInInterface")
+    
+    
+    return
+}
+
+func NewBindNumberCallInInterfaceResponse() (response *BindNumberCallInInterfaceResponse) {
+    response = &BindNumberCallInInterfaceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// BindNumberCallInInterface
+// This API is used to bind a number to a callback API for incoming calls.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+func (c *Client) BindNumberCallInInterface(request *BindNumberCallInInterfaceRequest) (response *BindNumberCallInInterfaceResponse, err error) {
+    return c.BindNumberCallInInterfaceWithContext(context.Background(), request)
+}
+
+// BindNumberCallInInterface
+// This API is used to bind a number to a callback API for incoming calls.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+func (c *Client) BindNumberCallInInterfaceWithContext(ctx context.Context, request *BindNumberCallInInterfaceRequest) (response *BindNumberCallInInterfaceResponse, err error) {
+    if request == nil {
+        request = NewBindNumberCallInInterfaceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "BindNumberCallInInterface")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BindNumberCallInInterface require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBindNumberCallInInterfaceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewBindNumberCallOutSkillGroupRequest() (request *BindNumberCallOutSkillGroupRequest) {
     request = &BindNumberCallOutSkillGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -251,6 +301,62 @@ func (c *Client) BindStaffSkillGroupListWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewBindStaffSkillGroupListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewControlAIConversationRequest() (request *ControlAIConversationRequest) {
+    request = &ControlAIConversationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "ControlAIConversation")
+    
+    
+    return
+}
+
+func NewControlAIConversationResponse() (response *ControlAIConversationResponse) {
+    response = &ControlAIConversationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ControlAIConversation
+// This API is used to provide server-side robot control feature.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CONTROLAICONVERSATION = "FailedOperation.ControlAIConversation"
+//  FAILEDOPERATION_SESSIONNOTEXISTS = "FailedOperation.SessionNotExists"
+//  FAILEDOPERATION_SESSIONNOTINCONTROLSTATE = "FailedOperation.SessionNotInControlState"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+func (c *Client) ControlAIConversation(request *ControlAIConversationRequest) (response *ControlAIConversationResponse, err error) {
+    return c.ControlAIConversationWithContext(context.Background(), request)
+}
+
+// ControlAIConversation
+// This API is used to provide server-side robot control feature.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CONTROLAICONVERSATION = "FailedOperation.ControlAIConversation"
+//  FAILEDOPERATION_SESSIONNOTEXISTS = "FailedOperation.SessionNotExists"
+//  FAILEDOPERATION_SESSIONNOTINCONTROLSTATE = "FailedOperation.SessionNotInControlState"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+func (c *Client) ControlAIConversationWithContext(ctx context.Context, request *ControlAIConversationRequest) (response *ControlAIConversationResponse, err error) {
+    if request == nil {
+        request = NewControlAIConversationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "ControlAIConversation")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ControlAIConversation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewControlAIConversationResponse()
     err = c.Send(request, response)
     return
 }
@@ -1123,6 +1229,62 @@ func (c *Client) CreateStaffWithContext(ctx context.Context, request *CreateStaf
     request.SetContext(ctx)
     
     response = NewCreateStaffResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateUserSigRequest() (request *CreateUserSigRequest) {
+    request = &CreateUserSigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "CreateUserSig")
+    
+    
+    return
+}
+
+func NewCreateUserSigResponse() (response *CreateUserSigResponse) {
+    response = &CreateUserSigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateUserSig
+// This API is used to create a user data signature.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+func (c *Client) CreateUserSig(request *CreateUserSigRequest) (response *CreateUserSigResponse, err error) {
+    return c.CreateUserSigWithContext(context.Background(), request)
+}
+
+// CreateUserSig
+// This API is used to create a user data signature.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+func (c *Client) CreateUserSigWithContext(ctx context.Context, request *CreateUserSigRequest) (response *CreateUserSigResponse, err error) {
+    if request == nil {
+        request = NewCreateUserSigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "CreateUserSig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateUserSig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateUserSigResponse()
     err = c.Send(request, response)
     return
 }
@@ -2209,6 +2371,62 @@ func (c *Client) DescribeProtectedTelCdrWithContext(ctx context.Context, request
     return
 }
 
+func NewDescribeSessionDetailRequest() (request *DescribeSessionDetailRequest) {
+    request = &DescribeSessionDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "DescribeSessionDetail")
+    
+    
+    return
+}
+
+func NewDescribeSessionDetailResponse() (response *DescribeSessionDetailResponse) {
+    response = &DescribeSessionDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSessionDetail
+// This API is used to query call detail.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SESSIONNOTEXISTS = "FailedOperation.SessionNotExists"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeSessionDetail(request *DescribeSessionDetailRequest) (response *DescribeSessionDetailResponse, err error) {
+    return c.DescribeSessionDetailWithContext(context.Background(), request)
+}
+
+// DescribeSessionDetail
+// This API is used to query call detail.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SESSIONNOTEXISTS = "FailedOperation.SessionNotExists"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeSessionDetailWithContext(ctx context.Context, request *DescribeSessionDetailRequest) (response *DescribeSessionDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeSessionDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeSessionDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSessionDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSessionDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSkillGroupInfoListRequest() (request *DescribeSkillGroupInfoListRequest) {
     request = &DescribeSkillGroupInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2319,6 +2537,58 @@ func (c *Client) DescribeStaffInfoListWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDescribeStaffInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStaffStatusHistoryRequest() (request *DescribeStaffStatusHistoryRequest) {
+    request = &DescribeStaffStatusHistoryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "DescribeStaffStatusHistory")
+    
+    
+    return
+}
+
+func NewDescribeStaffStatusHistoryResponse() (response *DescribeStaffStatusHistoryResponse) {
+    response = &DescribeStaffStatusHistoryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStaffStatusHistory
+// This API is used to query agent status history.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeStaffStatusHistory(request *DescribeStaffStatusHistoryRequest) (response *DescribeStaffStatusHistoryResponse, err error) {
+    return c.DescribeStaffStatusHistoryWithContext(context.Background(), request)
+}
+
+// DescribeStaffStatusHistory
+// This API is used to query agent status history.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeStaffStatusHistoryWithContext(ctx context.Context, request *DescribeStaffStatusHistoryRequest) (response *DescribeStaffStatusHistoryResponse, err error) {
+    if request == nil {
+        request = NewDescribeStaffStatusHistoryRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeStaffStatusHistory")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStaffStatusHistory require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStaffStatusHistoryResponse()
     err = c.Send(request, response)
     return
 }

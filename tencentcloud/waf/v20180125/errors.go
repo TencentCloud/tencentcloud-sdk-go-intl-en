@@ -65,6 +65,9 @@ const (
 	// DBErr
 	INTERNALERROR_DBERR = "InternalError.DBErr"
 
+	// InternalError.Unknown
+	INTERNALERROR_UNKNOWN = "InternalError.Unknown"
+
 	// An internal error exists. Please contact us.
 	INTERNALERROR_UNKNOWNERR = "InternalError.UnknownErr"
 
@@ -122,6 +125,9 @@ const (
 	// Invalid parameter value.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
 
+	// InvalidRequest
+	INVALIDPARAMETERVALUE_INVALIDREQUEST = "InvalidParameterValue.InvalidRequest"
+
 	// The quota limit is exceeded.
 	LIMITEXCEEDED = "LimitExceeded"
 
@@ -148,6 +154,9 @@ const (
 
 	// Resources do not exist.
 	RESOURCENOTFOUND = "ResourceNotFound"
+
+	// ResourceNotFound.NotFound
+	RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 
 	// Resources are unavailable.
 	RESOURCEUNAVAILABLE = "ResourceUnavailable"

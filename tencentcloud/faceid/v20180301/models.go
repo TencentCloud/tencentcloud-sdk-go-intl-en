@@ -3587,4 +3587,10 @@ type WebVerificationConfigIntl struct {
 
 	// Control liveness retry number.The value range is 1-99.
 	LivenessRetryLimit *int64 `json:"LivenessRetryLimit,omitnil,omitempty" name:"LivenessRetryLimit"`
+
+	// Specifies the liveness detection timeout period in seconds. value range: (0,600].
+	LivenessTimeout *uint64 `json:"LivenessTimeout,omitnil,omitempty" name:"LivenessTimeout"`
+
+	// Selects OCR alarms requiring attention. When an OCR Alarm occurs, the identity verification process will be interrupted. Default value is empty, indicating all alarms are monitored. This feature requires the parameter DisableCheckOcrWarnings=false. If the Alarm is disabled, this parameter will not be effective.
+	SelectedWarningCodes *string `json:"SelectedWarningCodes,omitnil,omitempty" name:"SelectedWarningCodes"`
 }
