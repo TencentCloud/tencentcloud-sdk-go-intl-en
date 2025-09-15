@@ -7991,6 +7991,76 @@ func (c *Client) OpenInterCommunicationWithContext(ctx context.Context, request 
     return
 }
 
+func NewQueryMigrationCheckProcessRequest() (request *QueryMigrationCheckProcessRequest) {
+    request = &QueryMigrationCheckProcessRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "QueryMigrationCheckProcess")
+    
+    
+    return
+}
+
+func NewQueryMigrationCheckProcessResponse() (response *QueryMigrationCheckProcessResponse) {
+    response = &QueryMigrationCheckProcessResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// QueryMigrationCheckProcess
+// This API is used to query the progress of the migration verification task, inquiry of migration check task progress, applicable to the migration method where the migration source type is TencentDB for SQL Server.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBCONNECTERROR = "InternalError.DBConnectError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_GCSERROR = "InternalError.GcsError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  RESOURCENOTFOUND_DBNOTFOUND = "ResourceNotFound.DBNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) QueryMigrationCheckProcess(request *QueryMigrationCheckProcessRequest) (response *QueryMigrationCheckProcessResponse, err error) {
+    return c.QueryMigrationCheckProcessWithContext(context.Background(), request)
+}
+
+// QueryMigrationCheckProcess
+// This API is used to query the progress of the migration verification task, inquiry of migration check task progress, applicable to the migration method where the migration source type is TencentDB for SQL Server.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBCONNECTERROR = "InternalError.DBConnectError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_GCSERROR = "InternalError.GcsError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  RESOURCENOTFOUND_DBNOTFOUND = "ResourceNotFound.DBNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) QueryMigrationCheckProcessWithContext(ctx context.Context, request *QueryMigrationCheckProcessRequest) (response *QueryMigrationCheckProcessResponse, err error) {
+    if request == nil {
+        request = NewQueryMigrationCheckProcessRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "QueryMigrationCheckProcess")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryMigrationCheckProcess require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryMigrationCheckProcessResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRecycleDBInstanceRequest() (request *RecycleDBInstanceRequest) {
     request = &RecycleDBInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},

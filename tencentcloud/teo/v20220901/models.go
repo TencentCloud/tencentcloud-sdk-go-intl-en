@@ -16179,6 +16179,9 @@ type ModifyHostsCertificateRequestParams struct {
 
 	// In the mutual authentication scenario, this field represents the client's CA certificate, which is deployed inside the EO node and used for the client to authenticate the EO node. By default, it is disabled. If it is left blank, it indicates retaining the original configuration.
 	ClientCertInfo *MutualTLS `json:"ClientCertInfo,omitnil,omitempty" name:"ClientCertInfo"`
+
+	// Configures the certificate presented by the EO node during origin-pull for mutual TLS authentication. Disabled by default; leaving the field blank will retain the current configuration. This feature is currently in beta testing. please [contact us](https://cloud.tencent.com/online-service) to request access.
+	UpstreamCertInfo *UpstreamCertInfo `json:"UpstreamCertInfo,omitnil,omitempty" name:"UpstreamCertInfo"`
 }
 
 type ModifyHostsCertificateRequest struct {
@@ -16207,6 +16210,9 @@ type ModifyHostsCertificateRequest struct {
 
 	// In the mutual authentication scenario, this field represents the client's CA certificate, which is deployed inside the EO node and used for the client to authenticate the EO node. By default, it is disabled. If it is left blank, it indicates retaining the original configuration.
 	ClientCertInfo *MutualTLS `json:"ClientCertInfo,omitnil,omitempty" name:"ClientCertInfo"`
+
+	// Configures the certificate presented by the EO node during origin-pull for mutual TLS authentication. Disabled by default; leaving the field blank will retain the current configuration. This feature is currently in beta testing. please [contact us](https://cloud.tencent.com/online-service) to request access.
+	UpstreamCertInfo *UpstreamCertInfo `json:"UpstreamCertInfo,omitnil,omitempty" name:"UpstreamCertInfo"`
 }
 
 func (r *ModifyHostsCertificateRequest) ToJsonString() string {
@@ -16227,6 +16233,7 @@ func (r *ModifyHostsCertificateRequest) FromJsonString(s string) error {
 	delete(f, "ServerCertInfo")
 	delete(f, "ApplyType")
 	delete(f, "ClientCertInfo")
+	delete(f, "UpstreamCertInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyHostsCertificateRequest has unknown keys!", "")
 	}
@@ -18527,7 +18534,7 @@ type MultiPathGatewayLine struct {
 }
 
 type MutualTLS struct {
-
+	// Mutual authentication configuration switch, the values are:<li>on: enable; </li> <li>off: disable. </li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// Mutual authentication certificate list.
