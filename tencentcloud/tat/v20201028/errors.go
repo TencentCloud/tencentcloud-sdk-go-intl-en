@@ -167,7 +167,7 @@ const (
 	// The role does not exist.
 	RESOURCENOTFOUND_ROLENOTFOUND = "ResourceNotFound.RoleNotFound"
 
-	// 
+	// Resource unavailable.
 	RESOURCEUNAVAILABLE = "ResourceUnavailable"
 
 	// TAT Agent is not installed.
@@ -188,10 +188,10 @@ const (
 	// Lighthouse is not supported in the region.
 	RESOURCEUNAVAILABLE_LIGHTHOUSEUNSUPPORTEDREGION = "ResourceUnavailable.LighthouseUnsupportedRegion"
 
-	// 
+	// User quota exhausted.
 	RESOURCEUNAVAILABLE_USERHASNOQUOTACODE = "ResourceUnavailable.UserHasNoQuotaCode"
 
-	// 
+	// Role assumption unauthorized.
 	UNAUTHORIZEDOPERATION_ASSUMEROLEUNAUTHORIZED = "UnauthorizedOperation.AssumeRoleUnauthorized"
 
 	// CAM authentication failed.
@@ -209,6 +209,6 @@ const (
 	// Unknown parameter error.
 	UNKNOWNPARAMETER = "UnknownParameter"
 
-	// 
+	// Operation not supported.
 	UNSUPPORTEDOPERATION = "UnsupportedOperation"
 )

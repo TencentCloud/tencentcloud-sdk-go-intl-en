@@ -188,7 +188,7 @@ const (
 	// Video decoding abnormality
 	FAILEDOPERATION_VIDEODECODEFAILED = "FailedOperation.VideoDecodeFailed"
 
-	// 
+	// The video duration is too long. The maximum video duration supported by the current interface is 20s.
 	FAILEDOPERATION_VIDEODURATIONEXCEEDED = "FailedOperation.VideoDurationExceeded"
 
 	// Internal error.

@@ -65,7 +65,7 @@ const (
 	// Unauthorized operation.
 	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 
-	// Operation not authorized/Invalid package/Account overdue
+	// Not authorized / No valid package / Account is in arrears.
 	UNAUTHORIZEDOPERATION_UNAUTHORIZED = "UnauthorizedOperation.Unauthorized"
 
 	// Unknown parameter error.

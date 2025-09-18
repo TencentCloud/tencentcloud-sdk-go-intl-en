@@ -29,7 +29,7 @@ const (
 	// This operation is prohibited.
 	FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
 
-	// 
+	// Proxy error.
 	FAILEDOPERATION_PROXYERROR = "FailedOperation.ProxyError"
 
 	// Failed to start the task.
@@ -38,7 +38,7 @@ const (
 	// This operation cannot be performed due to a status conflict.
 	FAILEDOPERATION_STATUSINCONFLICT = "FailedOperation.StatusInConflict"
 
-	// 
+	// The current state does not allow the operation.
 	FAILEDOPERATION_STATUSINCONFLICTERROR = "FailedOperation.StatusInConflictError"
 
 	// An internal error occurred.
@@ -92,13 +92,13 @@ const (
 	// The instance does not exist.
 	INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 
-	// 
+	// ip address error.
 	INVALIDPARAMETER_INVALIDIPADDRESS = "InvalidParameter.InvalidIpAddress"
 
 	// The parameter is invalid.
 	INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
 
-	// 
+	// Invalid business parameters.
 	INVALIDPARAMETERVALUE_BIZINVALIDPARAMETERVALUEERROR = "InvalidParameterValue.BizInvalidParameterValueError"
 
 	// A data conversion error occurred.

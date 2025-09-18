@@ -344,13 +344,13 @@ const (
 	// Invalid `OperationType`.
 	INVALIDPARAMETERVALUE_INVALIDOPERATIONTYPE = "InvalidParameterValue.InvalidOperationType"
 
-	// 
+	// Invalid parameter value: incorrect hard-coded parameter.
 	INVALIDPARAMETERVALUE_ISPERSISTENCE = "InvalidParameterValue.IsPersistence"
 
 	// Invalid `Isps`.
 	INVALIDPARAMETERVALUE_ISPS = "InvalidParameterValue.Isps"
 
-	// 
+	// ItemId error.
 	INVALIDPARAMETERVALUE_ITEMID = "InvalidParameterValue.ItemId"
 
 	// Incorrect parameter value: the timestamp content is too long.
@@ -410,7 +410,7 @@ const (
 	// Parameter error: Current storage class error.
 	INVALIDPARAMETERVALUE_ORIGINALSTORAGECLASS = "InvalidParameterValue.OriginalStorageClass"
 
-	// 
+	// Invalid parameter value: incorrect output media file type.
 	INVALIDPARAMETERVALUE_OUTPUTMEDIATYPE = "InvalidParameterValue.OutputMediaType"
 
 	// Incorrect parameter value: invalid `ParentId`
@@ -419,10 +419,10 @@ const (
 	// Incorrect parameter value: the face image format is incorrect.
 	INVALIDPARAMETERVALUE_PICFORMATERROR = "InvalidParameterValue.PicFormatError"
 
-	// 
+	// Invalid parameter value: incorrect precision parameter.
 	INVALIDPARAMETERVALUE_PRECISION = "InvalidParameterValue.Precision"
 
-	// 
+	// Invalid parameter value: incorrect Procedure.
 	INVALIDPARAMETERVALUE_PROCEDURE = "InvalidParameterValue.Procedure"
 
 	// The task flow template name is invalid.
@@ -689,7 +689,7 @@ const (
 	// Unauthorized operation.
 	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 
-	// 
+	// Domain name resolution verification failed.
 	UNAUTHORIZEDOPERATION_DOMAINRECORDNOTVERIFIED = "UnauthorizedOperation.DomainRecordNotVerified"
 
 	// Unknown parameter error.

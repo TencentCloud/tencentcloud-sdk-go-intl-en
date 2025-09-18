@@ -203,7 +203,7 @@ const (
 	// The CosBucket parameter is invalid.
 	INVALIDPARAMETER_INVALIDCOSBUCKET = "InvalidParameter.InvalidCosBucket"
 
-	// Invalid CosFileUri parameter value.
+	// The CosFileUri parameter value is invalid.
 	INVALIDPARAMETER_INVALIDCOSFILEURI = "InvalidParameter.InvalidCosFileURI"
 
 	// The count must be greater than 0.

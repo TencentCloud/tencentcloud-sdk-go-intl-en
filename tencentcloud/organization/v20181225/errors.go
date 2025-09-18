@@ -17,7 +17,7 @@ package v20181225
 const (
 	// error codes for specific actions
 
-	// 
+	// Operation failed.
 	FAILEDOPERATION = "FailedOperation"
 
 	// Members cannot be deleted from the root unit.

@@ -937,6 +937,60 @@ func (c *Client) DeleteDomainBatchWithContext(ctx context.Context, request *Dele
     return
 }
 
+func NewDeletePackageOrderRequest() (request *DeletePackageOrderRequest) {
+    request = &DeletePackageOrderRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dnspod", APIVersion, "DeletePackageOrder")
+    
+    
+    return
+}
+
+func NewDeletePackageOrderResponse() (response *DeletePackageOrderResponse) {
+    response = &DeletePackageOrderResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeletePackageOrder
+// This API is used to disable the paid plan on the international website.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CANNOTCLOSEFREEDOMAIN = "FailedOperation.CanNotCloseFreeDomain"
+//  INVALIDPARAMETERVALUE_DOMAINNOTEXISTS = "InvalidParameterValue.DomainNotExists"
+//  OPERATIONDENIED_DOMAINOWNERALLOWEDONLY = "OperationDenied.DomainOwnerAllowedOnly"
+func (c *Client) DeletePackageOrder(request *DeletePackageOrderRequest) (response *DeletePackageOrderResponse, err error) {
+    return c.DeletePackageOrderWithContext(context.Background(), request)
+}
+
+// DeletePackageOrder
+// This API is used to disable the paid plan on the international website.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CANNOTCLOSEFREEDOMAIN = "FailedOperation.CanNotCloseFreeDomain"
+//  INVALIDPARAMETERVALUE_DOMAINNOTEXISTS = "InvalidParameterValue.DomainNotExists"
+//  OPERATIONDENIED_DOMAINOWNERALLOWEDONLY = "OperationDenied.DomainOwnerAllowedOnly"
+func (c *Client) DeletePackageOrderWithContext(ctx context.Context, request *DeletePackageOrderRequest) (response *DeletePackageOrderResponse, err error) {
+    if request == nil {
+        request = NewDeletePackageOrderRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DeletePackageOrder")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeletePackageOrder require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeletePackageOrderResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteRecordRequest() (request *DeleteRecordRequest) {
     request = &DeleteRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1809,6 +1863,68 @@ func (c *Client) DescribeRecordGroupListWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDescribeRecordGroupListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRecordLineCategoryListRequest() (request *DescribeRecordLineCategoryListRequest) {
+    request = &DescribeRecordLineCategoryListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dnspod", APIVersion, "DescribeRecordLineCategoryList")
+    
+    
+    return
+}
+
+func NewDescribeRecordLineCategoryListResponse() (response *DescribeRecordLineCategoryListResponse) {
+    response = &DescribeRecordLineCategoryListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRecordLineCategoryList
+// This API is used to return a line list by category.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnknowError"
+//  INVALIDPARAMETER_DOMAINIDINVALID = "InvalidParameter.DomainIdInvalid"
+//  INVALIDPARAMETER_DOMAININVALID = "InvalidParameter.DomainInvalid"
+//  INVALIDPARAMETER_DOMAINISALIASER = "InvalidParameter.DomainIsAliaser"
+//  INVALIDPARAMETERVALUE_DOMAINNOTEXISTS = "InvalidParameterValue.DomainNotExists"
+//  OPERATIONDENIED_NOPERMISSIONTOOPERATEDOMAIN = "OperationDenied.NoPermissionToOperateDomain"
+func (c *Client) DescribeRecordLineCategoryList(request *DescribeRecordLineCategoryListRequest) (response *DescribeRecordLineCategoryListResponse, err error) {
+    return c.DescribeRecordLineCategoryListWithContext(context.Background(), request)
+}
+
+// DescribeRecordLineCategoryList
+// This API is used to return a line list by category.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnknowError"
+//  INVALIDPARAMETER_DOMAINIDINVALID = "InvalidParameter.DomainIdInvalid"
+//  INVALIDPARAMETER_DOMAININVALID = "InvalidParameter.DomainInvalid"
+//  INVALIDPARAMETER_DOMAINISALIASER = "InvalidParameter.DomainIsAliaser"
+//  INVALIDPARAMETERVALUE_DOMAINNOTEXISTS = "InvalidParameterValue.DomainNotExists"
+//  OPERATIONDENIED_NOPERMISSIONTOOPERATEDOMAIN = "OperationDenied.NoPermissionToOperateDomain"
+func (c *Client) DescribeRecordLineCategoryListWithContext(ctx context.Context, request *DescribeRecordLineCategoryListRequest) (response *DescribeRecordLineCategoryListResponse, err error) {
+    if request == nil {
+        request = NewDescribeRecordLineCategoryListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "dnspod", APIVersion, "DescribeRecordLineCategoryList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRecordLineCategoryList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRecordLineCategoryListResponse()
     err = c.Send(request, response)
     return
 }

@@ -152,7 +152,7 @@ const (
 	// The operation is unauthorized.
 	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 
-	// 
+	// Unauthorized Operation
 	UNAUTHORIZEDOPERATION_ERRORTCRUNAUTHORIZED = "UnauthorizedOperation.ErrorTcrUnauthorized"
 
 	// Unknown parameter error. Please check and try again.

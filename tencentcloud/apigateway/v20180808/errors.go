@@ -41,10 +41,10 @@ const (
 	// The API is being manipulated. Please try again later.
 	FAILEDOPERATION_APIINOPERATION = "FailedOperation.ApiInOperation"
 
-	// 
+	// Domain name error returned
 	FAILEDOPERATION_BACKENDDOMAINERROR = "FailedOperation.BackendDomainError"
 
-	// 
+	// CAM error
 	FAILEDOPERATION_CAMEXCEPTION = "FailedOperation.CamException"
 
 	// An error occurred while binding a certificate.
@@ -128,7 +128,7 @@ const (
 	// The instance does not exist or is invalid.
 	FAILEDOPERATION_INSTANCENOTEXIST = "FailedOperation.InstanceNotExist"
 
-	// 
+	// Invalid input json
 	FAILEDOPERATION_INVALIDINPUTJSON = "FailedOperation.InvalidInputJSON"
 
 	// The Apis custom path conflicts with the default path.
@@ -164,7 +164,7 @@ const (
 	// The tag was not bound to the specified service.
 	FAILEDOPERATION_TAGBINDSERVICEERROR = "FailedOperation.TagBindServiceError"
 
-	// 
+	// Migration task duplicated
 	FAILEDOPERATION_TASKALREADYEXIST = "FailedOperation.TaskAlreadyExist"
 
 	// The protocol type is incorrect.
@@ -176,7 +176,7 @@ const (
 	// API Gateway internal request error. Please try again later. If the problem persists, please contact the smart customer service or submit a ticket.
 	INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
 
-	// 
+	// CAM internal request error. Please try again later. If the issue persists, contact customer service or submit a ticket.
 	INTERNALERROR_CAMEXCEPTION = "InternalError.CamException"
 
 	// CAuth internal request error. Please try again later. If the problem persists, please submit a ticket.
@@ -185,13 +185,13 @@ const (
 	// CLB internal request error. Please try again. If the problem persists, please submit a ticket.
 	INTERNALERROR_CLBEXCEPTION = "InternalError.ClbException"
 
-	// 
+	// Database operation failed. Please try again later. If the issue persists, contact our smart customer service or submit a ticket.
 	INTERNALERROR_DBEXCEPTION = "InternalError.DbException"
 
 	// OSS internal request error. Please try again. If the problem persists, please contact the smart customer service or submit a ticket.
 	INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 
-	// 
+	// Tag callback failed.
 	INTERNALERROR_RETURNABLEEXCEPTION = "InternalError.ReturnableException"
 
 	// SCF internal request error. Please try again. If the problem persists, please contact the smart customer service or submit a ticket.
@@ -344,7 +344,7 @@ const (
 	// The parameter value is incorrect, as it is not within the valid value range.
 	INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
 
-	// 
+	// Invalid parameter value
 	INVALIDPARAMETERVALUE_TRAFFICCONTROL = "InvalidParameterValue.TrafficControl"
 
 	// Invalid parameter value.
@@ -467,7 +467,7 @@ const (
 	// The key has already been bound to a usage plan.
 	UNSUPPORTEDOPERATION_ALREADYBINDUSAGEPLAN = "UnsupportedOperation.AlreadyBindUsagePlan"
 
-	// 
+	// API list is not empty.
 	UNSUPPORTEDOPERATION_APILISTNOTEMPTY = "UnsupportedOperation.ApiListNotEmpty"
 
 	// The current plugin cannot be bound.
@@ -476,13 +476,13 @@ const (
 	// You are using the basic edition and only one API can be created.
 	UNSUPPORTEDOPERATION_BASICSERVICENOMOREAPI = "UnsupportedOperation.BasicServiceNoMoreApi"
 
-	// 
+	// The basic service does not allow plugin connections.
 	UNSUPPORTEDOPERATION_BASICSERVICENOTALLOWATTACHPLUGIN = "UnsupportedOperation.BasicServiceNotAllowAttachPlugin"
 
 	// Invalid log query period
 	UNSUPPORTEDOPERATION_CLSSEARCHTIME = "UnsupportedOperation.ClsSearchTime"
 
-	// 
+	// A production environment exists.
 	UNSUPPORTEDOPERATION_EXISTINGONLINEENVIRONMENT = "UnsupportedOperation.ExistingOnlineEnvironment"
 
 	// Cannot force HTTPS when the protocol is HTTP.
@@ -515,7 +515,7 @@ const (
 	// Network types cannot be reduced.
 	UNSUPPORTEDOPERATION_REDUCENETTYPES = "UnsupportedOperation.ReduceNetTypes"
 
-	// 
+	// Post request failed.
 	UNSUPPORTEDOPERATION_REQUESTPOSTERROR = "UnsupportedOperation.RequestPostError"
 
 	// The resource has been associated. Please disassociate it first.
@@ -527,16 +527,16 @@ const (
 	// The resource is not associated.
 	UNSUPPORTEDOPERATION_RESOURCEUNASSOCIATED = "UnsupportedOperation.ResourceUnassociated"
 
-	// 
+	// Service does not exist.
 	UNSUPPORTEDOPERATION_SERVICEEXIST = "UnsupportedOperation.ServiceExist"
 
-	// 
+	// Tag is not empty.
 	UNSUPPORTEDOPERATION_TAGSNOTEMPTY = "UnsupportedOperation.TagsNotEmpty"
 
 	// The current `Uin` is not in the manual key allowlist.
 	UNSUPPORTEDOPERATION_UINNOTINWHITELIST = "UnsupportedOperation.UinNotInWhiteList"
 
-	// 
+	// Unpack function error
 	UNSUPPORTEDOPERATION_UNPACKERROR = "UnsupportedOperation.UnpackError"
 
 	// The key has already been bound to a usage plan.
