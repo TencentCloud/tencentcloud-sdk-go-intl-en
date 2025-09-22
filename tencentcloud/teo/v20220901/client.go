@@ -515,7 +515,7 @@ func NewCreateAliasDomainResponse() (response *CreateAliasDomainResponse) {
 // CreateAliasDomain
 // This API is used to create an alias domain name.
 //
-// The feature is only supported by the enterprise plan and is currently in closed beta testing. If you need to use it, please [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service?from=connect-us).
+// The feature is only supported by the enterprise plan and is currently in closed beta testing. If you need to use it, please [contact us](https://www.tencentcloud.com/contact-us).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -552,7 +552,7 @@ func (c *Client) CreateAliasDomain(request *CreateAliasDomainRequest) (response 
 // CreateAliasDomain
 // This API is used to create an alias domain name.
 //
-// The feature is only supported by the enterprise plan and is currently in closed beta testing. If you need to use it, please [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service?from=connect-us).
+// The feature is only supported by the enterprise plan and is currently in closed beta testing. If you need to use it, please [contact us](https://www.tencentcloud.com/contact-us).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1761,7 +1761,7 @@ func NewCreateLoadBalancerResponse() (response *CreateLoadBalancerResponse) {
 }
 
 // CreateLoadBalancer
-// This API is used to create a LoadBalancer. For details, see [Quickly Create Load Balancers](https://intl.cloud.tencent.com/document/product/1552/104223?from_cn_redirect=1). The load balancing feature is in beta test. If you need to use it, [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service).
+// This API is used to create a LoadBalancer. For details, see [Quickly Create Load Balancers](https://intl.cloud.tencent.com/document/product/1552/104223?from_cn_redirect=1). The load balancing feature is in beta test. If you need to use it, [contact us](https://www.tencentcloud.com/contact-us).
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_LOADBALANCERBINDORIGINGROUPINVALID = "InvalidParameter.LoadBalancerBindOriginGroupInvalid"
@@ -1774,7 +1774,7 @@ func (c *Client) CreateLoadBalancer(request *CreateLoadBalancerRequest) (respons
 }
 
 // CreateLoadBalancer
-// This API is used to create a LoadBalancer. For details, see [Quickly Create Load Balancers](https://intl.cloud.tencent.com/document/product/1552/104223?from_cn_redirect=1). The load balancing feature is in beta test. If you need to use it, [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service).
+// This API is used to create a LoadBalancer. For details, see [Quickly Create Load Balancers](https://intl.cloud.tencent.com/document/product/1552/104223?from_cn_redirect=1). The load balancing feature is in beta test. If you need to use it, [contact us](https://www.tencentcloud.com/contact-us).
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_LOADBALANCERBINDORIGINGROUPINVALID = "InvalidParameter.LoadBalancerBindOriginGroupInvalid"
@@ -10139,7 +10139,7 @@ func NewModifyAliasDomainStatusResponse() (response *ModifyAliasDomainStatusResp
 // ModifyAliasDomainStatus
 // This API is used to modify the status of an alias domain name.
 //
-// The feature is only supported in the enterprise plan and is currently in closed beta testing. If you need to use it, [Contact Us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service?from=connect-us).
+// The feature is only supported in the enterprise plan and is currently in closed beta testing. If you need to use it, [Contact Us](https://www.tencentcloud.com/contact-us).
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -10152,7 +10152,7 @@ func (c *Client) ModifyAliasDomainStatus(request *ModifyAliasDomainStatusRequest
 // ModifyAliasDomainStatus
 // This API is used to modify the status of an alias domain name.
 //
-// The feature is only supported in the enterprise plan and is currently in closed beta testing. If you need to use it, [Contact Us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service?from=connect-us).
+// The feature is only supported in the enterprise plan and is currently in closed beta testing. If you need to use it, [Contact Us](https://www.tencentcloud.com/contact-us).
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

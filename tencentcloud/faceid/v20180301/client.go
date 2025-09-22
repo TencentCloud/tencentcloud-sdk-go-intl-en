@@ -247,7 +247,7 @@ func NewApplyWebVerificationBizTokenIntlResponse() (response *ApplyWebVerificati
 }
 
 // ApplyWebVerificationBizTokenIntl
-// This API is used to apply for a BizToken before calling the web-based verification service each time. This token is required for initiating a verification process and getting the result after the verification is completed.
+// This API is used to obtain a BizToken before each call to the Web verification service. Save the BizToken to initiate the verification process and retrieve the result upon completion. The BizToken is valid for 10 minutes.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -262,7 +262,7 @@ func (c *Client) ApplyWebVerificationBizTokenIntl(request *ApplyWebVerificationB
 }
 
 // ApplyWebVerificationBizTokenIntl
-// This API is used to apply for a BizToken before calling the web-based verification service each time. This token is required for initiating a verification process and getting the result after the verification is completed.
+// This API is used to obtain a BizToken before each call to the Web verification service. Save the BizToken to initiate the verification process and retrieve the result upon completion. The BizToken is valid for 10 minutes.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -783,7 +783,7 @@ func NewGetFaceIdResultIntlResponse() (response *GetFaceIdResultIntlResponse) {
 }
 
 // GetFaceIdResultIntl
-// This API is used to get the verification result with the corresponding SDK token after the identity verification process is completed. The SDK token is valid for two hours (2*3,600s) after generation and can be called multiple times.
+// This API is used to get the verification result with the corresponding SDK token after the identity verification process is completed. The SDK token is valid for 72 hours (72*3600s) after generation and can be called multiple times.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -796,7 +796,7 @@ func (c *Client) GetFaceIdResultIntl(request *GetFaceIdResultIntlRequest) (respo
 }
 
 // GetFaceIdResultIntl
-// This API is used to get the verification result with the corresponding SDK token after the identity verification process is completed. The SDK token is valid for two hours (2*3,600s) after generation and can be called multiple times.
+// This API is used to get the verification result with the corresponding SDK token after the identity verification process is completed. The SDK token is valid for 72 hours (72*3600s) after generation and can be called multiple times.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

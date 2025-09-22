@@ -519,8 +519,7 @@ type ApplyWebVerificationBizTokenIntlResponseParams struct {
 	// Deprecated: VerificationUrl is deprecated.
 	VerificationUrl *string `json:"VerificationUrl,omitnil,omitempty" name:"VerificationUrl"`
 
-	// The token for the web-based verification, which is generated using the ApplyWebVerificationBizTokenIntl API.
-	// Example: 81EEF678-28EE-4759-A82E-6CBBBE6BC442
+	// A token that identifies a Web verification process, with a validity time of 10 minutes. after the process is complete, the token can be used to obtain the verification result.
 	BizToken *string `json:"BizToken,omitnil,omitempty" name:"BizToken"`
 
 	// The verification URL to be opened with a browser to start the verification process.

@@ -103,21 +103,22 @@ type AIRecognitionTemplateItem struct {
 }
 
 type Activity struct {
-	// Atomic task type:
-	// <li>input: start node</li>
-	// <li>output: end node</li>
-	// <li>action-trans: transcoding</li>
-	// <li>action-samplesnapshot: sampled screenshot</li>
-	// <li>action-AIAnalysis: analysis</li>
-	// <li>action-AIRecognition: recognition</li>
-	// <li>action-aiReview: review</li>
-	// <li>action-animated-graphics: conversion to GIF</li>
-	// <li>action-image-sprite: image sprite</li>
-	// <li>action-snapshotByTimeOffset: time point screenshot</li>
-	// <li>action-adaptive-substream: adaptive bitrate stream</li>
-	// <li>action-AIQualityControl: media quality inspection</li>
-	// <li>action-SmartSubtitles: smart subtitle</li>
-	// <li>action-exec-rules: judgment rule</li>
+	// Atomic task type.
+	// <li>input: starting node.</li>.
+	// <li>output: termination node.</li>.
+	// <li>action-trans: specifies transcoding.</li>.
+	// <li>action-samplesnapshot: specifies sampled screenshot taking.</li>.
+	// <li>action-AIAnalysis: analysis.</li>.
+	// <li>action-AIRecognition: recognition.</li>.
+	// <li>action-aiReview: specifies the review action.</li>.
+	// <li>action-animated-graphics: specifies the animated image.</li>.
+	// <li>action-image-sprite: specifies the sprite sheet.</li>.
+	// <li>action-snapshotByTimeOffset: specifies time point screenshot taking.</li>.
+	// <li>action-adaptive-substream: specifies the adaptive bitrate stream.</li>.
+	// <li>action-AIQualityControl: media quality inspection.</li>.
+	// <li>action-SmartSubtitles: smart subtitling.</li>.
+	// <li>action-exec-rules: judgment rule.</li>.
+	// <li>action-SmartErase: smart erasure.</li>.
 	// 
 	// 
 	ActivityType *string `json:"ActivityType,omitnil,omitempty" name:"ActivityType"`
@@ -169,6 +170,10 @@ type ActivityPara struct {
 	// Smart subtitle task.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	SmartSubtitlesTask *SmartSubtitlesTaskInput `json:"SmartSubtitlesTask,omitnil,omitempty" name:"SmartSubtitlesTask"`
+
+	// Smart erasure task.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SmartEraseTask *SmartEraseTaskInput `json:"SmartEraseTask,omitnil,omitempty" name:"SmartEraseTask"`
 }
 
 type ActivityResItem struct {
@@ -219,22 +224,28 @@ type ActivityResItem struct {
 	// Smart subtitle task output.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	SmartSubtitlesTask *ScheduleSmartSubtitleTaskResult `json:"SmartSubtitlesTask,omitnil,omitempty" name:"SmartSubtitlesTask"`
+
+	// Smart erase task output.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SmartEraseTask *SmartEraseTaskResult `json:"SmartEraseTask,omitnil,omitempty" name:"SmartEraseTask"`
 }
 
 type ActivityResult struct {
 	// Atomic task type.
-	// <Li>Transcode: transcoding</li>
-	// <Li>SampleSnapshot: sampled screenshot</li>
-	// <Li>AnimatedGraphics: conversion to GIF</li>
-	// <Li>SnapshotByTimeOffset: time point screenshot</li>
-	// <Li>ImageSprites: image sprite</li>
-	// <Li>AdaptiveDynamicStreaming: adaptive bitrate stream</li>
-	// <Li>AiContentReview: content review</li>
-	// <Li>AIRecognition: intelligent recognition</li>
-	// <Li>AIAnalysis: intelligent analysis</li>
-	// <li>AiQualityControl: media quality inspection.</li>
+	// <Li>Transcode: transcoding.</li>.
+	// <Li>SampleSnapshot: specifies sampled screenshot taking.</li>.
+	// <Li>AnimatedGraphics: specifies the animated image.</li>.
+	// <Li>SnapshotByTimeOffset: specifies time point screenshot taking.</li>.
+	// <Li>ImageSprites: specifies the sprite sheet.</li>.
+	// <Li>AdaptiveDynamicStreaming: adaptive bitrate streaming.</li>.
+	// <Li>AiContentReview: specifies content moderation.</li>.
+	// <Li>AIRecognition: intelligent identification.</li>.
+	// <Li>AIAnalysis: specifies ai analysis.</li>.
+	// <li>AiQualityControl: media quality inspection</li>
 	// 
 	// <Li>SmartSubtitles: smart subtitle</li>
+	// 
+	// <Li>SmartErase: smart erasure.</li>.
 	ActivityType *string `json:"ActivityType,omitnil,omitempty" name:"ActivityType"`
 
 	// The execution results of the subtasks of the scheme.
@@ -282,11 +293,12 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	// After adaptive dynamic streaming (for HLS only), the output path of segment files can only be a relative path. If not filled in, it is a relative path by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`.
 	SegmentObjectName *string `json:"SegmentObjectName,omitnil,omitempty" name:"SegmentObjectName"`
 
-	// Subtitle file to be inserted.
+	// External subtitle feature specifies the subtitle file to be inserted.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	AddOnSubtitles []*AddOnSubtitle `json:"AddOnSubtitles,omitnil,omitempty" name:"AddOnSubtitles"`
 
-	// Drm information.
+	// Specifies the Drm information.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	DrmInfo *DrmInfo `json:"DrmInfo,omitnil,omitempty" name:"DrmInfo"`
 
 	// Adaptive transcoding template type.
@@ -294,7 +306,7 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	// PureAudio: audio-only.
 	DefinitionType *string `json:"DefinitionType,omitnil,omitempty" name:"DefinitionType"`
 
-	// Specifies the subtitle parameter.
+	// Hard subtitle (suppression subtitle) feature, specify subtitles source, font size, position and other subtitle parameters.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	SubtitleTemplate *SubtitleTemplate `json:"SubtitleTemplate,omitnil,omitempty" name:"SubtitleTemplate"`
 
@@ -400,15 +412,16 @@ type AddOnSubtitle struct {
 }
 
 type AiAnalysisResult struct {
-	// Task type. Valid values:
-	// <li>Classification: intelligent classification.</li>
-	// <li>Cover: intelligent thumbnail generating.</li>
-	// <li>Tag: intelligent tagging.</li>
-	// <li>FrameTag: intelligent frame-by-frame tagging.</li>
-	// <li>Highlight: intelligent highlights generating.</li>
-	// 
-	// <li>DeLogo: intelligent removal.</li>
+	// Task type. valid values:.
+	// <Li>Classification: intelligent classification.</li>.
+	// <Li>Cover: specifies the intelligent cover.</li>.
+	// <Li>Tag: intelligent tag.</li>.
+	// <Li>FrameTag: specifies intelligent frame-by-frame tagging.</li>.
+	// <Li>Highlight: intelligent highlights</li>.
+	// <Li>DeLogo: intelligent removal.</li>.
 	// <li>Description: large model summarization.</li>
+	// 
+	// <Li>Dubbing: intelligent dubbing.</li>.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Query result of intelligent categorization task in video content analysis, which is valid if task type is `Classification`.
@@ -446,6 +459,10 @@ type AiAnalysisResult struct {
 	// The query result of a landscape-to-portrait task for video analysis, which is valid when the task type is HorizontalToVertical.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HorizontalToVerticalTask *AiAnalysisTaskHorizontalToVerticalResult `json:"HorizontalToVerticalTask,omitnil,omitempty" name:"HorizontalToVerticalTask"`
+
+	// The query result of a Dubbing task for video content analysis, which is valid when the task type is Dubbing.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	DubbingTask *AiAnalysisTaskDubbingResult `json:"DubbingTask,omitnil,omitempty" name:"DubbingTask"`
 }
 
 type AiAnalysisTaskClassificationInput struct {
@@ -532,6 +549,14 @@ type AiAnalysisTaskDelLogoOutput struct {
 	// Position of the erased subtitle. Note: This field is only valid for subtitle extraction when the option to return subtitle positions is enabled.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	SubtitlePos *SubtitlePosition `json:"SubtitlePos,omitnil,omitempty" name:"SubtitlePos"`
+
+	// Specifies the file url of the video after voice cloning.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	VoiceClonedVideo *string `json:"VoiceClonedVideo,omitnil,omitempty" name:"VoiceClonedVideo"`
+
+	// Specifies the file address of the voice type clone annotation.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	VoiceClonedMarkFile *string `json:"VoiceClonedMarkFile,omitnil,omitempty" name:"VoiceClonedMarkFile"`
 }
 
 type AiAnalysisTaskDelLogoResult struct {
@@ -577,6 +602,40 @@ type AiAnalysisTaskDescriptionResult struct {
 	// Intelligent description task output.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Output *AiAnalysisTaskDescriptionOutput `json:"Output,omitnil,omitempty" name:"Output"`
+}
+
+type AiAnalysisTaskDubbingInput struct {
+	// Video translation template ID.
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+type AiAnalysisTaskDubbingOutput struct {
+	// Specifies the video path for translation.
+	VideoPath *string `json:"VideoPath,omitnil,omitempty" name:"VideoPath"`
+
+	// Specifies the file path of the tag.
+	SpeakerPath *string `json:"SpeakerPath,omitnil,omitempty" name:"SpeakerPath"`
+
+	// Specifies the storage location of the transcoded video.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
+}
+
+type AiAnalysisTaskDubbingResult struct {
+	// Task status, including PROCESSING, SUCCESS, and FAIL.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. `0`: Task successful. Other values: Task failed.
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Describes the task input for intelligent translation.
+	Input *AiAnalysisTaskDubbingInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Describes the task output of intelligent translation.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Output *AiAnalysisTaskDubbingOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
 type AiAnalysisTaskFrameTagInput struct {
@@ -4437,42 +4496,46 @@ type CreateSmartSubtitleTemplateRequestParams struct {
 	// Length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Source language of the video with smart subtitles.
-	// Supported languages:
-	// zh: Simplified Chinese
-	// en: English
-	// ja: Japanese
-	// ko: Korean
-	// zh-PY: Chinese-English-Cantonese
-	// zh-medical: Medical Chinese
-	// yue: Cantonese
-	// vi: Vietnamese
-	// ms: Malay
-	// id: Indonesian
-	// fil: Filipino
-	// th: Thai
-	// pt: Portuguese
-	// tr: Turkish
-	// ar: Arabic
-	// es: Spanish
+	// Video source language for intelligent caption.
+	// Valid values: 
+	// zh: Simplified Chinese.
+	// en: Eenglish.
+	// Ja: Japanese.
+	// Ko: Korean.
+	// zh-PY: Simplified Chinese, English and Cantonese.
+	// zh-medical: Medical Chinese.
+	// yue: Cantonese.
+	// Vi: Vietnamese.
+	// ms: Malay.
+	// id: Indonesian.
+	// fil: Filipino.
+	// th: Thai.
+	// pt: Portuguese.
+	// tr: Turkish.
+	// ar: Arabic.
+	// es: Spanish.
 	// hi: Hindi
-	// fr: French
-	// de: German
+	// Fr: French.
+	// de: German.
 	// zh-dialect: Chinese dialect
+	// zh_en: Simplified Chinese and English
+	// prime_zh: Simplified Chinese, Chinese Dialect and English.
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
 	// Smart subtitle language type.
-	// 0: source language1: target language
+	// 0: source language
+	// 1: target language
 	// 2: source language + target language
-	// The value can only be 0 when TranslateSwitch is set to OFF.The value can only be 1 or 2 when TranslateSwitch is set to ON.
+	// The value can only be 0 when TranslateSwitch is set to OFF. The value can only be 1 or 2 when TranslateSwitch is set to ON.
 	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
 
 	// Smart subtitle template description.
 	// Length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Smart subtitle file format.
-	// vtt: WebVTT format
+	// Intelligent subtitle file format.
+	// vtt: WebVTT format.
+	// srt: SRT format.
 	// If this field is left blank, no subtitle file will be generated.
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
@@ -4514,42 +4577,46 @@ type CreateSmartSubtitleTemplateRequest struct {
 	// Length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Source language of the video with smart subtitles.
-	// Supported languages:
-	// zh: Simplified Chinese
-	// en: English
-	// ja: Japanese
-	// ko: Korean
-	// zh-PY: Chinese-English-Cantonese
-	// zh-medical: Medical Chinese
-	// yue: Cantonese
-	// vi: Vietnamese
-	// ms: Malay
-	// id: Indonesian
-	// fil: Filipino
-	// th: Thai
-	// pt: Portuguese
-	// tr: Turkish
-	// ar: Arabic
-	// es: Spanish
+	// Video source language for intelligent caption.
+	// Valid values: 
+	// zh: Simplified Chinese.
+	// en: Eenglish.
+	// Ja: Japanese.
+	// Ko: Korean.
+	// zh-PY: Simplified Chinese, English and Cantonese.
+	// zh-medical: Medical Chinese.
+	// yue: Cantonese.
+	// Vi: Vietnamese.
+	// ms: Malay.
+	// id: Indonesian.
+	// fil: Filipino.
+	// th: Thai.
+	// pt: Portuguese.
+	// tr: Turkish.
+	// ar: Arabic.
+	// es: Spanish.
 	// hi: Hindi
-	// fr: French
-	// de: German
+	// Fr: French.
+	// de: German.
 	// zh-dialect: Chinese dialect
+	// zh_en: Simplified Chinese and English
+	// prime_zh: Simplified Chinese, Chinese Dialect and English.
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
 	// Smart subtitle language type.
-	// 0: source language1: target language
+	// 0: source language
+	// 1: target language
 	// 2: source language + target language
-	// The value can only be 0 when TranslateSwitch is set to OFF.The value can only be 1 or 2 when TranslateSwitch is set to ON.
+	// The value can only be 0 when TranslateSwitch is set to OFF. The value can only be 1 or 2 when TranslateSwitch is set to ON.
 	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
 
 	// Smart subtitle template description.
 	// Length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Smart subtitle file format.
-	// vtt: WebVTT format
+	// Intelligent subtitle file format.
+	// vtt: WebVTT format.
+	// srt: SRT format.
 	// If this field is left blank, no subtitle file will be generated.
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
@@ -8047,6 +8114,9 @@ type DescribeTaskDetailResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	LiveStreamProcessTask *LiveStreamProcessTask `json:"LiveStreamProcessTask,omitnil,omitempty" name:"LiveStreamProcessTask"`
 
+	// Extracts digital watermark task information. this field has a value only when TaskType is ExtractBlindWatermark.
+	ExtractBlindWatermarkTask *ExtractBlindWatermarkTask `json:"ExtractBlindWatermarkTask,omitnil,omitempty" name:"ExtractBlindWatermarkTask"`
+
 	// Event notification information of a task.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
@@ -8068,7 +8138,7 @@ type DescribeTaskDetailResponseParams struct {
 	ScheduleTask *ScheduleTask `json:"ScheduleTask,omitnil,omitempty" name:"ScheduleTask"`
 
 	// The information of a live scheme. This parameter is valid only if `TaskType` is `LiveScheduleTask`.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	LiveScheduleTask *LiveScheduleTask `json:"LiveScheduleTask,omitnil,omitempty" name:"LiveScheduleTask"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -9157,6 +9227,40 @@ type EnhanceConfig struct {
 	AudioEnhance *AudioEnhanceConfig `json:"AudioEnhance,omitnil,omitempty" name:"AudioEnhance"`
 }
 
+type EraseArea struct {
+	// X-Axis coordinate of the upper left corner.
+	// When Unit is set to 1 (percentage Unit), 0.05 indicates the horizontal distance from the upper left corner of the region to the top-left corner of the entire frame is 5% of the frame width.
+	LeftTopX *float64 `json:"LeftTopX,omitnil,omitempty" name:"LeftTopX"`
+
+	// Y-Axis coordinate of the upper left corner.
+	// When Unit is set to 1 (using percentage Unit), 0.1 indicates the vertical distance from the top-left corner of the area to the top-left corner of the entire frame is 10% of the screen height.
+	LeftTopY *float64 `json:"LeftTopY,omitnil,omitempty" name:"LeftTopY"`
+
+	// X-Axis coordinate of the bottom-right corner.
+	// When Unit is set to 1 (percentage Unit), 0.75 indicates the horizontal distance from the bottom-right corner of the region to the top-left corner of the entire frame is 75% of the frame width.
+	RightBottomX *float64 `json:"RightBottomX,omitnil,omitempty" name:"RightBottomX"`
+
+	// Y-Axis coordinate of the bottom-right corner.
+	// When Unit is set to 1 (using percentage Unit), 0.9 indicates the vertical distance from the bottom-right corner of the area to the top-left corner of the entire frame is 90% of the screen height.
+	RightBottomY *float64 `json:"RightBottomY,omitnil,omitempty" name:"RightBottomY"`
+
+	// Specifies the coordinate unit.
+	// -Percentage.
+	// -2 pixel values.
+	Unit *uint64 `json:"Unit,omitnil,omitempty" name:"Unit"`
+}
+
+type EraseTimeArea struct {
+	// Start time, in ms.
+	BeginMs *uint64 `json:"BeginMs,omitnil,omitempty" name:"BeginMs"`
+
+	// End time, unit: ms.
+	EndMs *uint64 `json:"EndMs,omitnil,omitempty" name:"EndMs"`
+
+	// Erases the domain list within the period.
+	Areas []*EraseArea `json:"Areas,omitnil,omitempty" name:"Areas"`
+}
+
 type ExecRuleTaskData struct {
 	// Indexes of nodes that needs to be executed based on the conditional judgment for quality inspection.
 	RearDriveIndex []*int64 `json:"RearDriveIndex,omitnil,omitempty" name:"RearDriveIndex"`
@@ -9230,6 +9334,45 @@ func (r *ExecuteFunctionResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ExecuteFunctionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type ExtractBlindWatermarkTask struct {
+	// Media processing task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Task flow status. valid values:.
+	// <Li>WAITING: waiting.</li>.
+	// <Li>PROCESSING: processing.</li>.
+	// <li>FINISH: completed</li>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. `0` indicates success. other values indicate failure.
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Target file information for media processing.
+	InputInfo *MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
+
+	// Specifies the digital watermark type. valid values: <li>blind-basic: basic version copyright digital watermark;</li> <li>blind-ab: ab copyright digital watermark.</li>.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Indicates whether a watermark is detected. if this parameter is true, the Result field will return the watermark extraction Result. if this parameter is false, the Result field will not return.
+	IsDetected *bool `json:"IsDetected,omitnil,omitempty" name:"IsDetected"`
+
+	// Fetched watermark content. this field will not be returned when no detection.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// Extracts the digital watermark configuration.
+	ExtractBlindWatermarkConfig *ExtractBlindWatermarkTaskConfig `json:"ExtractBlindWatermarkConfig,omitnil,omitempty" name:"ExtractBlindWatermarkConfig"`
+}
+
+type ExtractBlindWatermarkTaskConfig struct {
+	// Valid when the watermark type is blind-abseq. specifies the segment duration of the input video. unit: ms.
+	// Segment duration is 5 seconds by default if left empty.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SegmentDuration *int64 `json:"SegmentDuration,omitnil,omitempty" name:"SegmentDuration"`
 }
 
 type FaceConfigureInfo struct {
@@ -10715,10 +10858,11 @@ type MediaImageSpriteItem struct {
 }
 
 type MediaInputInfo struct {
-	// The input type. Valid values:
-	// <li>`COS`: A COS bucket address.</li>
-	// <li> `URL`: A URL.</li>
-	// <li> `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.</li>
+	// Type of input source object. valid values:.
+	// <Li>COS: specifies the cos origin.</li>
+	// <Li>URL: the url source.</li>
+	// <Li>AWS-S3: aws source. currently only supports transcoding tasks.</li>
+	// <Li>VOD: video-on-demand pro edition (VOD Pro). </li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
@@ -10731,6 +10875,10 @@ type MediaInputInfo struct {
 	// The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	S3InputInfo *S3InputInfo `json:"S3InputInfo,omitnil,omitempty" name:"S3InputInfo"`
+
+	// The information of the VOD Pro object processed. This parameter is required if `Type` is `VOD`.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	VODInputInfo *VODInputInfo `json:"VODInputInfo,omitnil,omitempty" name:"VODInputInfo"`
 }
 
 type MediaMetaData struct {
@@ -12523,39 +12671,43 @@ type ModifySmartSubtitleTemplateRequestParams struct {
 	// Length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Source language of the video with smart subtitles.
-	// Supported languages:
-	// zh: Simplified Chinese
-	// en: English
-	// ja: Japanese
-	// ko: Korean
-	// zh-PY: Chinese-English-Cantonese
-	// zh-medical: Medical Chinese
-	// yue: Cantonese
-	// vi: Vietnamese
-	// ms: Malay
-	// id: Indonesian
-	// fil: Filipino
-	// th: Thai
-	// pt: Portuguese
-	// tr: Turkish
-	// ar: Arabic
-	// es: Spanish
+	// Video source language for intelligent caption.
+	// Valid values: 
+	// zh: Simplified Chinese.
+	// en: Eenglish.
+	// Ja: Japanese.
+	// Ko: Korean.
+	// zh-PY: Simplified Chinese, English and Cantonese.
+	// zh-medical: Medical Chinese.
+	// yue: Cantonese.
+	// Vi: Vietnamese.
+	// ms: Malay.
+	// id: Indonesian.
+	// fil: Filipino.
+	// th: Thai.
+	// pt: Portuguese.
+	// tr: Turkish.
+	// ar: Arabic.
+	// es: Spanish.
 	// hi: Hindi
-	// fr: French
-	// de: German
+	// Fr: French.
+	// de: German.
 	// zh-dialect: Chinese dialect
+	// zh_en: Simplified Chinese and English
+	// prime_zh: Simplified Chinese, Chinese Dialect and English.
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
-	// Smart subtitle file format.
-	// vtt: WebVTT format
+	// Intelligent subtitle file format.
+	// vtt: WebVTT format.
+	// srt: SRT format.
 	// If this field is left blank, no subtitle file will be generated.
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
 	// Smart subtitle language type.
-	// 0: source language1: target language
+	// 0: source language
+	// 1: target language
 	// 2: source language + target language
-	// The value can only be 0 when TranslateSwitch is set to OFF.The value can only be 1 or 2 when TranslateSwitch is set to ON.
+	// The value can only be 0 when TranslateSwitch is set to OFF. The value can only be 1 or 2 when TranslateSwitch is set to ON.
 	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
 
 	// ASR hotword lexicon parameter.
@@ -12603,39 +12755,43 @@ type ModifySmartSubtitleTemplateRequest struct {
 	// Length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Source language of the video with smart subtitles.
-	// Supported languages:
-	// zh: Simplified Chinese
-	// en: English
-	// ja: Japanese
-	// ko: Korean
-	// zh-PY: Chinese-English-Cantonese
-	// zh-medical: Medical Chinese
-	// yue: Cantonese
-	// vi: Vietnamese
-	// ms: Malay
-	// id: Indonesian
-	// fil: Filipino
-	// th: Thai
-	// pt: Portuguese
-	// tr: Turkish
-	// ar: Arabic
-	// es: Spanish
+	// Video source language for intelligent caption.
+	// Valid values: 
+	// zh: Simplified Chinese.
+	// en: Eenglish.
+	// Ja: Japanese.
+	// Ko: Korean.
+	// zh-PY: Simplified Chinese, English and Cantonese.
+	// zh-medical: Medical Chinese.
+	// yue: Cantonese.
+	// Vi: Vietnamese.
+	// ms: Malay.
+	// id: Indonesian.
+	// fil: Filipino.
+	// th: Thai.
+	// pt: Portuguese.
+	// tr: Turkish.
+	// ar: Arabic.
+	// es: Spanish.
 	// hi: Hindi
-	// fr: French
-	// de: German
+	// Fr: French.
+	// de: German.
 	// zh-dialect: Chinese dialect
+	// zh_en: Simplified Chinese and English
+	// prime_zh: Simplified Chinese, Chinese Dialect and English.
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
-	// Smart subtitle file format.
-	// vtt: WebVTT format
+	// Intelligent subtitle file format.
+	// vtt: WebVTT format.
+	// srt: SRT format.
 	// If this field is left blank, no subtitle file will be generated.
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
 	// Smart subtitle language type.
-	// 0: source language1: target language
+	// 0: source language
+	// 1: target language
 	// 2: source language + target language
-	// The value can only be 0 when TranslateSwitch is set to OFF.The value can only be 1 or 2 when TranslateSwitch is set to ON.
+	// The value can only be 0 when TranslateSwitch is set to OFF. The value can only be 1 or 2 when TranslateSwitch is set to ON.
 	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
 
 	// ASR hotword lexicon parameter.
@@ -13986,6 +14142,12 @@ type ProcessMediaRequestParams struct {
 	// Media quality inspection type task parameters.
 	AiQualityControlTask *AiQualityControlTaskInput `json:"AiQualityControlTask,omitnil,omitempty" name:"AiQualityControlTask"`
 
+	// Smart subtitle task.
+	SmartSubtitlesTask *SmartSubtitlesTaskInput `json:"SmartSubtitlesTask,omitnil,omitempty" name:"SmartSubtitlesTask"`
+
+	// Smart erase task parameter.
+	SmartEraseTask *SmartEraseTaskInput `json:"SmartEraseTask,omitnil,omitempty" name:"SmartEraseTask"`
+
 	// Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
 	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
 
@@ -14005,9 +14167,6 @@ type ProcessMediaRequestParams struct {
 
 	// Resource ID. Ensure the corresponding resource is in the enabled state. The default value is an account's primary resource ID.
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
-
-	// Smart subtitle task.
-	SmartSubtitlesTask *SmartSubtitlesTaskInput `json:"SmartSubtitlesTask,omitnil,omitempty" name:"SmartSubtitlesTask"`
 
 	// Whether to skip metadata acquisition. Valid values:
 	// 0: do not skip
@@ -14056,6 +14215,12 @@ type ProcessMediaRequest struct {
 	// Media quality inspection type task parameters.
 	AiQualityControlTask *AiQualityControlTaskInput `json:"AiQualityControlTask,omitnil,omitempty" name:"AiQualityControlTask"`
 
+	// Smart subtitle task.
+	SmartSubtitlesTask *SmartSubtitlesTaskInput `json:"SmartSubtitlesTask,omitnil,omitempty" name:"SmartSubtitlesTask"`
+
+	// Smart erase task parameter.
+	SmartEraseTask *SmartEraseTaskInput `json:"SmartEraseTask,omitnil,omitempty" name:"SmartEraseTask"`
+
 	// Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
 	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
 
@@ -14075,9 +14240,6 @@ type ProcessMediaRequest struct {
 
 	// Resource ID. Ensure the corresponding resource is in the enabled state. The default value is an account's primary resource ID.
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
-
-	// Smart subtitle task.
-	SmartSubtitlesTask *SmartSubtitlesTaskInput `json:"SmartSubtitlesTask,omitnil,omitempty" name:"SmartSubtitlesTask"`
 
 	// Whether to skip metadata acquisition. Valid values:
 	// 0: do not skip
@@ -14107,13 +14269,14 @@ func (r *ProcessMediaRequest) FromJsonString(s string) error {
 	delete(f, "AiAnalysisTask")
 	delete(f, "AiRecognitionTask")
 	delete(f, "AiQualityControlTask")
+	delete(f, "SmartSubtitlesTask")
+	delete(f, "SmartEraseTask")
 	delete(f, "TaskNotifyConfig")
 	delete(f, "TasksPriority")
 	delete(f, "SessionId")
 	delete(f, "SessionContext")
 	delete(f, "TaskType")
 	delete(f, "ResourceId")
-	delete(f, "SmartSubtitlesTask")
 	delete(f, "SkipMateData")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessMediaRequest has unknown keys!", "")
@@ -14251,68 +14414,70 @@ type QualityControlItem struct {
 }
 
 type QualityControlItemConfig struct {
-	// Quality control item name. The quality control item values are as follows:
-	// <li>LowEvaluation: No reference score.</li>
-	// <li>Mosaic: Mosaic detection.</li>
-	// <li>CrashScreen: Screen crash detection.</li>
-	// <li>Blur: Blur detection.</li>
-	// <li>BlackWhiteEdge: Black and white edge detection.</li>
-	// <li>SolidColorScreen: Solid color screen detection.</li>
-	// <li>LowLighting: Low lighting.</li>
-	// <li>HighLighting: Overexposure.</li>
-	// <li>NoVoice: Silence detection.</li>
-	// <li>LowVoice: Low voice detection.</li>
-	// <li>HighVoice: High voice detection.</li>
-	// <li>Jitter: Jitter detection.</li>
-	// <li>Noise: Noise detection.</li>
-	// <li>QRCode: QR code detection.</li>
-	// <li>BarCode: Barcode detection.</li>
-	// <li>AppletCode: Applet code detection.</li>
-	// <li>VideoResolutionChanged: The video resolution changed.</li>
-	// <li>AudioSampleRateChanged: The audio sampling rate changed.</li>
-	// <li>AudioChannelsChanged: The audio channel count changed.</li>
-	// <li>ParameterSetsChanged: The stream parameter set information changed.</li>
-	// <li>DarOrSarInvalid: Abnormal video aspect ratio.</li>
-	// <li>TimestampFallback: DTS timestamp fallback.</li>
-	// <li>DtsJitter: Excessive DTS jitter.</li>
-	// <li>PtsJitter: Excessive PTS jitter.</li>
-	// <li>AACDurationDeviation: Unreasonable AAC frame timestamp interval.</li>
-	// <li>AudioDroppingFrames: Audio frame loss.</li>
-	// <li>VideoDroppingFrames: Video frame loss.</li>
-	// <li>AVTimestampInterleave: Unreasonable audio and video interleaving.</li>
-	// <li>PtsLessThanDts: The PTS of media streams is less than DTS.</li>
-	// <li>ReceiveFpsJitter: Excessive jitter of the frame rate received by the network.</li>
-	// <li>ReceiveFpsTooSmall: Too low video frame rate received by the network.</li>
-	// <li>FpsJitter: Excessive stream frame rate jitter calculated through PTS.</li>
-	// <li>StreamOpenFailed: Stream opening failed.</li>
-	// <li>StreamEnd: The stream ended.</li>
-	// <li>StreamParseFailed: Stream parsing failed.</li>
-	// <li>VideoFirstFrameNotIdr: The first frame is not an IDR frame.</li>
-	// <li>StreamNALUError: NALU start code error.</li>
-	// <li>TsStreamNoAud: The H26x stream of MPEGTS lacks AUD NALU.</li>
-	// <li>AudioStreamLack: No audio stream.</li>
-	// <li>VideoStreamLack: No video stream.</li>
-	// <li>LackAudioRecover: Lack of audio stream recovery.</li>
-	// <li>LackVideoRecover: Lack of video stream recovery.</li>
-	// <li>VideoBitrateOutofRange: Out-of-range video stream bitrate (kbps).</li>
-	// <li>AudioBitrateOutofRange: Out-of-range audio stream bitrate (kbps).</li>
-	// <li>VideoDecodeFailed: Video decoding error.</li>
-	// <li>AudioDecodeFailed: Audio decoding error.</li>
-	// <li>AudioOutOfPhase: Opposite phase in Dual-channel audio.</li>
-	// <li>VideoDuplicatedFrame: Duplicate frames in the video stream.</li>
-	// <li>AudioDuplicatedFrame: Duplicate frames in the audio stream.</li>
-	// <li>VideoRotation: Video image rotation.</li>
-	// <li>TsMultiPrograms: The MPEG2-TS stream has multiple programs.</li>
-	// <li>Mp4InvalidCodecFourcc: The codec fourcc in MP4 does not meet Apple HLS requirements.</li>
-	// <li>HLSBadM3u8Format: Invalid m3u8 file.</li>
-	// <li>HLSInvalidMasterM3u8: Invalid main m3u8 file.</li>
-	// <li>HLSInvalidMediaM3u8: Invalid media m3u8 file.</li>
-	// <li>HLSMasterM3u8Recommended: The main m3u8 file lacks parameters recommended by the standard.</li>
-	// <li>HLSMediaM3u8Recommended: The media m3u8 file lacks parameters recommended by the standard.</li>
-	// <li>HLSMediaM3u8DiscontinuityExist: EXT-X-DISCONTINUITY exists in the media m3u8 file.</li>
-	// <li>HLSMediaSegmentsStreamNumChange: The number of streams in the segment has changed.</li>
-	// <li>HLSMediaSegmentsPTSJitterDeviation: PTS jitter between segments without EXT-X-DISCONTINUITY.</li>
-	// <li>HLSMediaSegmentsDTSJitterDeviation: DTS jitter between segments without EXT-X-DISCONTINUITY.</li>
+	// Quality inspection item name. valid values:.
+	// <li>LowEvaluation: specifies the no-reference MOS score of the video.</li>.
+	// <li>AudioEvaluation: specifies the no-reference MOS score of the audio.</li>.
+	// <Li>Mosaic: mosaic detection.</li>.
+	// <Li>CrashScreen: specifies screen glitch detection.</li>.
+	// <Li>Blur: specifies blur detection.</li>.
+	// <Li>Jitter: jitter detection.</li>.
+	// <Li>Noise: noise detection.</li>.
+	// <Li>QRCode: qr code detection.</li>.
+	// <Li>BarCode: specifies barcode detection.</li>.
+	// <Li>AppletCode: specifies mini program code detection.</li>.
+	// <Li>BlackWhiteEdge: specifies black and white edge detection.</li>.
+	// <Li>SolidColorScreen: specifies solid color screen detection.</li>.
+	// <Li>LowLighting: specifies low light.</li>.
+	// <Li>HighLighting: overexposure.</li>.
+	// <Li>NoVoice: specifies silence detection.</li>.
+	// <Li>LowVoice: specifies bass detection.</li>.
+	// <Li>HighVoice: explosion noise detection.</li>.
+	// <Li>AudioNoise: specifies audio noise detection.</li>.
+	// <Li>VideoResolutionChanged: specifies the video resolution change.</li>.
+	// <Li>AudioSampleRateChanged: specifies the audio sample rate change.</li>.
+	// <Li>AudioChannelsChanged: indicates the audio channel quantity change.</li>.
+	// <Li>ParameterSetsChanged: indicates the stream parameter set information has changed.</li>.
+	// <Li>DarOrSarInvalid: indicates an abnormal video aspect ratio.</li>.
+	// <li>TimestampFallback: specifies DTS timestamp rollback.</li>.
+	// <li>DtsJitter: specifies excessive DTS jitter.</li>.
+	// <li>PtsJitter: indicates excessive PTS jitter.</li>.
+	// <Li>AACDurationDeviation: specifies an improper aac frame timestamp interval.</li>.
+	// <Li>AudioDroppingFrames: indicates audio frame dropping.</li>.
+	// <Li>VideoDroppingFrames: specifies video frame dropping.</li>.
+	// <Li>AVTimestampInterleave: improper audio-video interleaving.</li>.
+	// <Li>PtsLessThanDts: specifies that the pts of the media stream is less than the dts.</li>.
+	// <Li>ReceiveFpsJitter: specifies excessive jitter in the network received frame rate.</li>.
+	// <Li>ReceiveFpsTooSmall: indicates the network received video frame rate is too low.</li>.
+	// <li>FpsJitter: specifies excessive jitter in the stream frame rate calculated via PTS.</li>.
+	// <Li>StreamOpenFailed: indicates the stream open failure.</li>.
+	// <Li>StreamEnd: specifies the stream end.</li>.
+	// <Li>StreamParseFailed: specifies the stream parsing failure.</li>.
+	// <li>VideoFirstFrameNotIdr: first frame not an IDR frame.</li>.
+	// <Li>StreamNALUError: indicates an nalu start code error.</li>.
+	// <li>TsStreamNoAud: specifies whether the mpegts H26x stream misses AUD NALU.</li>.
+	// <Li>AudioStreamLack: no audio stream.</li>.
+	// <Li>VideoStreamLack: no video stream.</li>.
+	// <Li>LackAudioRecover: specifies missing audio stream recovery.</li>.
+	// <Li>LackVideoRecover: missing video stream recovery.</li>.
+	// <Li>VideoBitrateOutofRange: video stream bitrate (kbps) out of range.</li>.
+	// <Li>AudioBitrateOutofRange: audio stream bitrate (kbps) out of range.</li>.
+	// <Li>VideoDecodeFailed: indicates a video decoding error.</li>.
+	// <Li>AudioDecodeFailed: audio decoding error.</li>.
+	// <Li>AudioOutOfPhase: specifies opposite phase in dual-channel audio.</li>.
+	// <Li>VideoDuplicatedFrame: indicates duplicate frames in video streams.</li>.
+	// <Li>AudioDuplicatedFrame: indicates duplicate frames in audio streams.</li>.
+	// <Li>VideoRotation: specifies video rotation.</li>.
+	// <li>TsMultiPrograms: specifies multiple programs in MPEG2-TS streams.</li>.
+	// <li>Mp4InvalidCodecFourcc: specifies the codec fourcc in Mp4 does not meet Apple HLS requirements.</li>.
+	// <Li>HLSBadM3u8Format: invalid m3u8 file.</li>.
+	// <Li>HLSInvalidMasterM3u8: invalid main m3u8 file.</li>.
+	// <Li>HLSInvalidMediaM3u8: invalid media m3u8 file.</li>.
+	// <Li>HLSMasterM3u8Recommended: parameters recommended by standards missing in main m3u8.</li>.
+	// <Li>HLSMediaM3u8Recommended: parameters recommended by standards missing in media m3u8.</li>.
+	// <li>HLSMediaM3u8DiscontinuityExist: indicates the existence of EXT-X-DISCONTINUITY in media m3u8.</li>.
+	// <Li>HLSMediaSegmentsStreamNumChange: indicates the number of streams in segments changes.</li>.
+	// <li>HLSMediaSegmentsPTSJitterDeviation: indicates PTS jumps between segments without EXT-X-DISCONTINUITY.</li>.
+	// <li>HLSMediaSegmentsDTSJitterDeviation: indicates DTS jumps between segments without EXT-X-DISCONTINUITY.</li>.
 	// <li>TimecodeTrackExist: TMCD track in MP4.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
@@ -14438,6 +14603,29 @@ type RawImageWatermarkInput struct {
 	RepeatType *string `json:"RepeatType,omitnil,omitempty" name:"RepeatType"`
 }
 
+type RawSmartEraseParameter struct {
+	// Specifies the removal type.
+	// -subtitle removal.
+	// -Remove watermark.
+	// -privacy protection.
+	EraseType *string `json:"EraseType,omitnil,omitempty" name:"EraseType"`
+
+	// Subtitle erasure configuration.
+	// When EraseType is subtitle, this field is required.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	EraseSubtitleConfig *SmartEraseSubtitleConfig `json:"EraseSubtitleConfig,omitnil,omitempty" name:"EraseSubtitleConfig"`
+
+	// Specifies the watermark removal configuration.
+	// When EraseType is watermark, this field is required.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	EraseWatermarkConfig *SmartEraseWatermarkConfig `json:"EraseWatermarkConfig,omitnil,omitempty" name:"EraseWatermarkConfig"`
+
+	// Privacy protection configuration.
+	// When EraseType is privacy, this field is required.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ErasePrivacyConfig *SmartErasePrivacyConfig `json:"ErasePrivacyConfig,omitnil,omitempty" name:"ErasePrivacyConfig"`
+}
+
 type RawSmartSubtitleParameter struct {
 	// Smart subtitle language type.
 	// 0: source language
@@ -14446,34 +14634,36 @@ type RawSmartSubtitleParameter struct {
 	// The value can only be 0 when TranslateSwitch is set to OFF. The value can only be 1 or 2 when TranslateSwitch is set to ON.
 	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
 
-	// Source language of the video with smart subtitles.
-	// Supported languages:
-	// zh: Simplified Chinese
-	// en: English
-	// ja: Japanese
-	// ko: Korean
-	// zh-PY: Chinese-English-Cantonese
-	// zh-medical: Medical Chinese
-	// yue: Cantonese
-	// vi: Vietnamese
-	// ms: Malay
-	// id: Indonesian
-	// fil: Filipino
-	// th: Thai
-	// pt: Portuguese
-	// tr: Turkish
-	// ar: Arabic
-	// es: Spanish
+	// Video source language for intelligent caption.
+	// Valid values: 
+	// zh: Simplified Chinese.
+	// en: Eenglish.
+	// Ja: Japanese.
+	// Ko: Korean.
+	// zh-PY: Simplified Chinese, English and Cantonese.
+	// zh-medical: Medical Chinese.
+	// yue: Cantonese.
+	// Vi: Vietnamese.
+	// ms: Malay.
+	// id: Indonesian.
+	// fil: Filipino.
+	// th: Thai.
+	// pt: Portuguese.
+	// tr: Turkish.
+	// ar: Arabic.
+	// es: Spanish.
 	// hi: Hindi
-	// fr: French
-	// de: German
+	// Fr: French.
+	// de: German.
 	// zh-dialect: Chinese dialect
+	// zh_en: Simplified Chinese and English
+	// prime_zh: Simplified Chinese, Chinese Dialect and English.
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
-	// Smart subtitle file format.
-	// vtt: WebVTT format
+	// Intelligent subtitle file format.
+	// vtt: WebVTT format.
+	// srt: SRT format.
 	// If this field is left blank, no subtitle file will be generated.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
 	// Subtitle translation switch.
@@ -15184,6 +15374,173 @@ type SimpleAesDrm struct {
 	Vector *string `json:"Vector,omitnil,omitempty" name:"Vector"`
 }
 
+type SmartErasePrivacyConfig struct {
+	// Specifies the privacy protection removal method.
+	// -Blur: specifies the blur detection.
+	// -Specifies the mosaic.
+	PrivacyModel *string `json:"PrivacyModel,omitnil,omitempty" name:"PrivacyModel"`
+
+	// Privacy protection objective. no need to import an array when in use on API Explorer. just add the corresponding item and fill in the value.
+	// -Human face.
+	// -License plate.
+	PrivacyTargets []*string `json:"PrivacyTargets,omitnil,omitempty" name:"PrivacyTargets"`
+}
+
+type SmartEraseSubtitleConfig struct {
+	// Specifies the subtitle erasure method.
+	// **Automatic erasing:** automatically identifies subtitle text content in videos through AI models and performs seamless erasure to generate new videos. frame interference and unique subtitle styles may cause certain missed or incorrect erasures, which can be handled through specified area erasure.
+	// When using automatic erasure, if AutoAreas is not specified, the default region (lower middle of the frame) will be erased automatically. if AutoAreas is specified, it will change to erase the designated area.
+	// **Specified area erasing:** if your subtitle position is fixed, directly specify the erasure area to decrease the chance of removal omission to the maximum extent.
+	// When your choice is specified area erasure, please import at least one designated region in CustomAreas.
+	// -Automated removal.
+	// - specifies the custom specified area erasure.
+	SubtitleEraseMethod *string `json:"SubtitleEraseMethod,omitnil,omitempty" name:"SubtitleEraseMethod"`
+
+	// Subtitle erasure model.
+	// **Standard version (recommend):** if your subtitle style is standard, normally recommend choose this version for better effectiveness with seamless detail.
+	// **Regional version:** if your subtitles have special styles such as italics, shadows, or motion effects, we recommend choosing the regional version for larger removal area, though the detail effect is not as good as the standard version.
+	// -Specifies the standard model.
+	// -area. specifies the regional model.
+	SubtitleModel *string `json:"SubtitleModel,omitnil,omitempty" name:"SubtitleModel"`
+
+	// Whether OCR subtitle extraction is enabled. default value: OFF.
+	// Supports enabling OCR subtitle extraction only when SubtitleEraseMethod is set to auto. when enabled, it identifies the longest and most stable text area within the region as the subtitle area, then performs text extraction and removal.
+	// -ON: enable.
+	// -OFF. specifies the disabled state.
+	OcrSwitch *string `json:"OcrSwitch,omitnil,omitempty" name:"OcrSwitch"`
+
+	// Subtitle language, for OCR guidance, default value zh_en. this parameter is valid only when OcrSwitch is ON.
+	// -Chinese and english.
+	// -multi other.
+	// Other supported languages:.
+	// Chinese, english, japanese, korean, spanish, french, german, portuguese, vietnamese, malay, russian, italian, dutch, swedish, finnish, danish, norwegian, hungarian, thai, hindi, arabic, indian-bengali, indian-gujarati, indian-kannada, indian-malayalam, indian-tamil, indian-telugu, slovenian, polish, catalan, bosnian, czech, estonian, croatian, punjabi, marathi, azerbaijani, indonesian, luxembourgish, lithuanian, latvian, maltese, slovak, turkish, kazakh, greek, irish, belarusian, khmer, tagalog, pashto, persian, tajik.
+	// 
+	SubtitleLang *string `json:"SubtitleLang,omitnil,omitempty" name:"SubtitleLang"`
+
+	// Specifies the subtitle file format. default value: vtt. this parameter is valid only when OcrSwitch is set to ON.
+	// -srt format.
+	// -vtt: WebVTT format.
+	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
+
+	// Specifies whether to enable subtitle translation. default value: OFF. this parameter is valid only when OcrSwitch is set to ON.
+	// -ON: enable.
+	// -OFF. specifies the disabled state.
+	TransSwitch *string `json:"TransSwitch,omitnil,omitempty" name:"TransSwitch"`
+
+	// Subtitle target language. default value: en. this parameter is valid only when TransSwitch is set to ON.
+	// Supported languages:.
+	// Simplified chinese.
+	// Specifies the language. valid values: en (english).
+	// Ja: japanese.
+	// Ko: korean.
+	// Fr: french.
+	// es: spanish.
+	// It: italian.
+	// de: german.
+	// tr: turkish.
+	// Ru: russian.
+	// pt: portuguese.
+	// Vi: vietnamese.
+	// id: indonesian.
+	// ms: malay.
+	// Th: thai.
+	// Ar: arabic.
+	// hi: Hindi
+	TransDstLang *string `json:"TransDstLang,omitnil,omitempty" name:"TransDstLang"`
+
+	// Specifies automatic removal of a custom region.
+	// Specifies the use of an AI model to automatically detect and erase existing targets in the specified region.
+	// Note that this parameter will not take effect when the removal method is custom. for template modification, input [] to clean up the region. the template region information remains unchanged if not imported.
+	AutoAreas []*EraseArea `json:"AutoAreas,omitnil,omitempty" name:"AutoAreas"`
+
+	// Specifies erasure of a custom region.
+	// Detects and directly performs removal within a specified time range for the selected region.
+	// Note: when modifying the template, pass [] to clear the region. the template region information remains unchanged if not passed.
+	CustomAreas []*EraseTimeArea `json:"CustomAreas,omitnil,omitempty" name:"CustomAreas"`
+}
+
+type SmartEraseTaskInput struct {
+	// Smart erasure template id.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Intelligent erasure custom parameter. valid when Definition is 0. this parameter is used for highly custom scenarios. we recommend you prioritize using Definition to specify intelligent erasure parameters.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	RawParameter *RawSmartEraseParameter `json:"RawParameter,omitnil,omitempty" name:"RawParameter"`
+
+	// Specifies the target storage for files. if left blank, it inherits the upper-level OutputStorage value.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
+
+	// Output path of the file, which can be a relative or absolute path.
+	// Specifies the output path must end with `.{format}`. variable names, please refer to [filename variable explanation](https://www.tencentcloud.com/document/product/1041/33495?has_map=1).
+	// **Relative path example**:
+	// <Li>Filename_{Variable name}.{format}</li>
+	// <li>Filename.{format}</li>
+	// 
+	// **Absolute path example**:
+	// <Li>/Custom path/filename_{variable name}.{format}</li>
+	// 
+	// **Note**: currently does not support the `BatchProcessMedia` api.
+	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
+}
+
+type SmartEraseTaskResult struct {
+	// Task status, including PROCESSING, SUCCESS, and FAIL.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Input of the smart erasure task.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Input *SmartEraseTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Output of the smart erasure task.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Output *AiAnalysisTaskDelLogoOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// Task progress.		
+	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// Task execution start time in ISO datetime format.
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
+
+	// Task execution completion time in ISO datetime format.
+	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
+}
+
+type SmartEraseWatermarkConfig struct {
+	// Specifies the watermark removal method.
+	// **Auto-Removal:** automatically identifies watermarks in the video using model a and generates a new video after removal. suitable for dynamic watermarks.
+	// When using automated removal, if you do not specify AutoAreas, the full-screen video will be erased automatically. if AutoAreas is specified, it will change to erase the designated areas.
+	// **Specified area erasure:** for static watermarks with fixed locations, we recommend you directly specify the erasure area.
+	// When you choose specified area erasure, import at least one specified region.
+	// 
+	// -Automated removal.
+	// -Specifies the custom specified area erasure.
+	WatermarkEraseMethod *string `json:"WatermarkEraseMethod,omitnil,omitempty" name:"WatermarkEraseMethod"`
+
+	// Specifies the watermark removal model.
+	// Basic version: average effect, cost-effective, suitable for videos with clean backgrounds or animations.
+	// Advanced edition: better effectiveness, suitable for mini-drama and reality style video.
+	// **Supported values**:
+	// - basic
+	// - advanced
+	WatermarkModel *string `json:"WatermarkModel,omitnil,omitempty" name:"WatermarkModel"`
+
+	// Specifies automatic removal of a custom region.
+	// Specifies the use of an AI model to automatically detect and erase existing targets in the specified region.
+	// Note that this parameter will not take effect when the removal method is custom.
+	AutoAreas []*EraseArea `json:"AutoAreas,omitnil,omitempty" name:"AutoAreas"`
+
+	// Specifies erasure of a custom region.
+	// Detects and directly performs removal within a specified time range for the selected region.
+	CustomAreas []*EraseTimeArea `json:"CustomAreas,omitnil,omitempty" name:"CustomAreas"`
+}
+
 type SmartSubtitleTaskAsrFullTextResult struct {
 	// Task status, including PROCESSING, SUCCESS, and FAIL.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
@@ -15217,6 +15574,9 @@ type SmartSubtitleTaskAsrFullTextResultOutput struct {
 
 	// Subtitle file path.
 	SubtitlePath *string `json:"SubtitlePath,omitnil,omitempty" name:"SubtitlePath"`
+
+	// Subtitle file storage location.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 }
 
 type SmartSubtitleTaskAsrFullTextSegmentItem struct {
@@ -15303,6 +15663,9 @@ type SmartSubtitleTaskTransTextResultOutput struct {
 
 	// Subtitle file path.
 	SubtitlePath *string `json:"SubtitlePath,omitnil,omitempty" name:"SubtitlePath"`
+
+	// Subtitle file storage location.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 }
 
 type SmartSubtitleTaskTransTextSegmentItem struct {
@@ -15877,9 +16240,10 @@ type TaskNotifyConfig struct {
 }
 
 type TaskOutputStorage struct {
-	// The storage type for a media processing output file. Valid values:
-	// <li>`COS`: Tencent Cloud COS</li>
-	// <li>`AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.</li>
+	// Specifies the type of storage location for the media processing service output object. valid values:.
+	// <Li>COS: cos storage.</li>.
+	// <Li>AWS-S3: aws storage, suitable for aws tasks only and requires the same region.</li>.
+	// <Li>VOD: video-on-demand (vod) pro edition</li>.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// The location to save the output object in COS. This parameter is valid and required when `Type` is COS.
@@ -15889,6 +16253,10 @@ type TaskOutputStorage struct {
 	// The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	S3OutputStorage *S3OutputStorage `json:"S3OutputStorage,omitnil,omitempty" name:"S3OutputStorage"`
+
+	// The VOD Pro application and bucket to save the output file. This parameter is required if `Type` is `VOD`.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	VODOutputStorage *VODOutputStorage `json:"VODOutputStorage,omitnil,omitempty" name:"VODOutputStorage"`
 }
 
 type TaskSimpleInfo struct {
@@ -16361,6 +16729,31 @@ type UserDefineOcrTextReviewTemplateInfoForUpdate struct {
 
 	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitnil,omitempty" name:"ReviewConfidence"`
+}
+
+type VODInputInfo struct {
+	// Specifies the Bucket ID where the input file resides.
+	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
+
+	// Specifies the region where the input file's Bucket resides.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Path of the input file.
+	Object *string `json:"Object,omitnil,omitempty" name:"Object"`
+
+	// VOD Pro application Id.
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+}
+
+type VODOutputStorage struct {
+	// Specifies the destination Bucket ID for the generated output file of MPS.
+	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
+
+	// Specifies the region of the target Bucket for the output.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// VOD Pro application Id.
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
 type VideoDenoiseConfig struct {
@@ -17057,6 +17450,10 @@ type WorkflowTask struct {
 	// Execution result of the smart subtitle task.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	SmartSubtitlesTaskResult []*SmartSubtitlesResult `json:"SmartSubtitlesTaskResult,omitnil,omitempty" name:"SmartSubtitlesTaskResult"`
+
+	// Execution result of the smart erasure task.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SmartEraseTaskResult *SmartEraseTaskResult `json:"SmartEraseTaskResult,omitnil,omitempty" name:"SmartEraseTaskResult"`
 }
 
 type WorkflowTrigger struct {
