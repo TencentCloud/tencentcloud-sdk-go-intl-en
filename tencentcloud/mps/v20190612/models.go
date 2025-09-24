@@ -13890,6 +13890,18 @@ type ProcessImageRequestParams struct {
 	// Output file path for image processing. If left blank, it is the directory of the file in InputInfo. If it is a directory, such as `/image/201907/`, it means inheriting the original filename and outputting to this directory.
 	OutputDir *string `json:"OutputDir,omitnil,omitempty" name:"OutputDir"`
 
+	// Output path, which can be a relative or an absolute path.
+	// The path must end with `.{format}`. For details, please refer to the [Filename Variable](https://www.tencentcloud.comom/document/product/862/37039?from_cn_redirect=1).
+	// **Relative path example:**
+	// <Li>`Filename_{Variablename}.{format}`.</li>
+	// <Li>`Filename.{format}`.</li>
+	// 
+	// **Absolute path example:**
+	// <Li>`/Path/Filename_{Variablename}.{format}`.</li>
+	// 
+	// If not filled in, default relative path: `{inputName}.{format}`.
+	OutputPath *string `json:"OutputPath,omitnil,omitempty" name:"OutputPath"`
+
 	// Image processing parameter.
 	ImageTask *ImageTaskInput `json:"ImageTask,omitnil,omitempty" name:"ImageTask"`
 }
@@ -13905,6 +13917,18 @@ type ProcessImageRequest struct {
 
 	// Output file path for image processing. If left blank, it is the directory of the file in InputInfo. If it is a directory, such as `/image/201907/`, it means inheriting the original filename and outputting to this directory.
 	OutputDir *string `json:"OutputDir,omitnil,omitempty" name:"OutputDir"`
+
+	// Output path, which can be a relative or an absolute path.
+	// The path must end with `.{format}`. For details, please refer to the [Filename Variable](https://www.tencentcloud.comom/document/product/862/37039?from_cn_redirect=1).
+	// **Relative path example:**
+	// <Li>`Filename_{Variablename}.{format}`.</li>
+	// <Li>`Filename.{format}`.</li>
+	// 
+	// **Absolute path example:**
+	// <Li>`/Path/Filename_{Variablename}.{format}`.</li>
+	// 
+	// If not filled in, default relative path: `{inputName}.{format}`.
+	OutputPath *string `json:"OutputPath,omitnil,omitempty" name:"OutputPath"`
 
 	// Image processing parameter.
 	ImageTask *ImageTaskInput `json:"ImageTask,omitnil,omitempty" name:"ImageTask"`
@@ -13925,6 +13949,7 @@ func (r *ProcessImageRequest) FromJsonString(s string) error {
 	delete(f, "InputInfo")
 	delete(f, "OutputStorage")
 	delete(f, "OutputDir")
+	delete(f, "OutputPath")
 	delete(f, "ImageTask")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessImageRequest has unknown keys!", "")

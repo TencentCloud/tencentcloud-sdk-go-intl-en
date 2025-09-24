@@ -210,72 +210,62 @@ type ClusterInfo struct {
 	// TcaplusDB SDK connection parameter: access port
 	ApiAccessPort *int64 `json:"ApiAccessPort,omitnil,omitempty" name:"ApiAccessPort"`
 
-	// If `PasswordStatus` is `unmodifiable`, the old password has not expired, and this field will display its expiration time; otherwise, this field will be empty
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// If the value of PasswordStatus is unmodifiable, it indicates that the old password has not expired. This field will display the expiration time of the old password; otherwise, the value is null.
 	OldPasswordExpireTime *string `json:"OldPasswordExpireTime,omitnil,omitempty" name:"OldPasswordExpireTime"`
 
-	// TcaplusDB SDK connection parameter for accessing IPv6 addresses
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// TencentDB for TcaplusDB (TcaplusDB) SDK connection parameters, which are used to access the IPv6 address.
 	ApiAccessIpv6 *string `json:"ApiAccessIpv6,omitnil,omitempty" name:"ApiAccessIpv6"`
 
-	// Cluster type. Valid values: `0` and `1` (shared cluster), `2` (dedicated cluster).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Cluster type. 0,1: shared cluster; 2: independent cluster.
 	ClusterType *int64 `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
 
-	// Cluster status. Valid values: `0` (Running), `1` (Isolated. This status is caused by overdue payments), `2` (To be repossessed. This status is caused when the cluster is actively deleted.),·`3` (To be released. The resources occupied by the table can be released in this status.), `4` (Modifying).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Cluster status. 0: indicates normal operation; 1: indicates frozen isolation (usually due to arrears); 2: indicates to be recycled (usually when the user proactively triggers deletion); 3: pending release (indicating that resources occupied by this table can be released); 4: changing.
 	ClusterStatus *int64 `json:"ClusterStatus,omitnil,omitempty" name:"ClusterStatus"`
 
-	// Read CU
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Read CU.
 	ReadCapacityUnit *int64 `json:"ReadCapacityUnit,omitnil,omitempty" name:"ReadCapacityUnit"`
 
-	// Write CU
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Write CU.
 	WriteCapacityUnit *int64 `json:"WriteCapacityUnit,omitnil,omitempty" name:"WriteCapacityUnit"`
 
-	// Disk capacity
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Disk capacity.
 	DiskVolume *int64 `json:"DiskVolume,omitnil,omitempty" name:"DiskVolume"`
 
-	// Information of the machine at the storage layer (tcapsvr) in a dedicated cluster
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Information about the dedicated server.
 	ServerList []*ServerDetailInfo `json:"ServerList,omitnil,omitempty" name:"ServerList"`
 
-	// Information of the machine at the access layer (tcaproxy) in a dedicated cluster
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Information about the dedicated proxy server.
 	ProxyList []*ProxyDetailInfo `json:"ProxyList,omitnil,omitempty" name:"ProxyList"`
 
 	// Whether the cluster operation approval feature is enabled. Valid values: `0` (disabled), `1` (enabled)
 	Censorship *int64 `json:"Censorship,omitnil,omitempty" name:"Censorship"`
 
-	// Approver UIN list
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Approver UIN list.
 	DbaUins []*string `json:"DbaUins,omitnil,omitempty" name:"DbaUins"`
 
-	// Whether data subscription is enabled
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Whether data subscription is enabled.
 	DataFlowStatus *int64 `json:"DataFlowStatus,omitnil,omitempty" name:"DataFlowStatus"`
 
-	// CKafka information when data subscription is enabled
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Kafka information for data subscription.
 	KafkaInfo *KafkaInfo `json:"KafkaInfo,omitnil,omitempty" name:"KafkaInfo"`
 
-	// The number of days after which the cluster Txh backup file will expire and be deleted.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Retention period for the Txh backup file of the cluster before expiration and deletion.
 	TxhBackupExpireDay *uint64 `json:"TxhBackupExpireDay,omitnil,omitempty" name:"TxhBackupExpireDay"`
 
-	// The number of days after which the cluster Ulog backup file will expire and be deleted.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Retention period for the Ulog backup file of the cluster before expiration and deletion.
 	UlogBackupExpireDay *uint64 `json:"UlogBackupExpireDay,omitnil,omitempty" name:"UlogBackupExpireDay"`
 
-	// Whether the expiration policy of cluster Ulog backup file is read-only. `0`: Yes; `1`: No.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Whether the expiration policy for the Ulog backup file of the cluster is read-only. 0: UlogBackupExpire is read-only and cannot be modified; 1: UlogBackupExpire can be modified.
 	IsReadOnlyUlogBackupExpireDay *uint64 `json:"IsReadOnlyUlogBackupExpireDay,omitnil,omitempty" name:"IsReadOnlyUlogBackupExpireDay"`
 
-	// restproxy Status
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// restproxy status.
 	RestProxyStatus *int64 `json:"RestProxyStatus,omitnil,omitempty" name:"RestProxyStatus"`
+
+	// Total number of shards in the cluster.
+	ShardTotalNum *int64 `json:"ShardTotalNum,omitnil,omitempty" name:"ShardTotalNum"`
+
+	// Total number of used shards.
+	ShardUsedNum *int64 `json:"ShardUsedNum,omitnil,omitempty" name:"ShardUsedNum"`
 }
 
 // Predefined struct for user
@@ -2717,10 +2707,10 @@ func (r *ImportSnapshotsResponse) FromJsonString(s string) error {
 }
 
 type KafkaInfo struct {
-	// CKafka address
+	// Kafka address
 	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
 
-	// CKafka topic
+	// Kafka topic
 	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
 
 	// CKafka username
@@ -3826,8 +3816,7 @@ type ProxyDetailInfo struct {
 	// The speed of processing delayed request packets
 	SlowProcessSpeed *int64 `json:"SlowProcessSpeed,omitnil,omitempty" name:"SlowProcessSpeed"`
 
-	// Version
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Version.
 	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
 }
 
@@ -4093,8 +4082,7 @@ type ServerDetailInfo struct {
 	// The number of writes
 	WriteNum *int64 `json:"WriteNum,omitnil,omitempty" name:"WriteNum"`
 
-	// Version
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Version.
 	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
 }
 

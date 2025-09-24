@@ -274,20 +274,21 @@ type ApplySdkVerificationTokenRequestParams struct {
 	// Default value: 4
 	SecurityLevel *int64 `json:"SecurityLevel,omitnil,omitempty" name:"SecurityLevel"`
 
-	// Card Types Supported for Authentication: Currently supported types are as follows:
-	// 1.HK (Default): Hong Kong (China) Identity Card
-	// 2.ML: Malaysia Identity Card
-	// 3.IndonesiaIDCard: Indonesia Identity Card
-	// 4.PhilippinesVoteID: Philippines Voter ID
-	// 5.PhilippinesDrivingLicense: Philippines Driving License
-	// 6.PhilippinesTinID: Philippines Tin ID
-	// 7.PhilippinesSSSID: Philippines SSS ID
-	// 8.PhilippinesUMID: Philippines UMID
-	// 9.MLIDPassport: Passports of Hong Kong, Macao, Taiwan Regions (China) and Foreign Countries
-	// 10.ThailandIDCard: Thailand Identity Card
-	// 11.MainlandIDCard: Mainland China Identity Card
-	// 12.SingaporeIDCard: Singapore Identity Card
-	// 13.HMTPermit: Exit-Entry Permit for Travel to and from Hong Kong, Macao and Taiwan (China)
+	// Specifies the identity document type used for authentication. valid values:.  
+	// 
+	// HK (default): hong kong (china) identity card.
+	// 2. ML: malaysian identity card.
+	// Indonesian identity card.
+	// 4. PhilippinesVoteID: specifies the voter card in the philippines.
+	// 5. PhilippinesDrivingLicense: specifies the driving license in philippines.
+	// 6. PhilippinesTinID: specifies the philippines tin id.
+	// 7. PhilippinesSSSID: specifies the SSSID in the philippines.
+	// 8. philippines UMID: specifies the philippines UMID.
+	// 9. MLIDPassport: specifies the passport for hong kong (china), macao (china), and taiwan (china) as well as overseas passports.
+	// ThailandIDCard: specifies the thai identity card.
+	// Mainland id card.
+	// 12. SingaporeIDCard: specifies the Singapore id card.
+	// 13. HMTPermit: specifies the hong kong, macau and taiwan travel permit.
 	IdCardType *string `json:"IdCardType,omitnil,omitempty" name:"IdCardType"`
 
 	// The Base64-encoded value of the photo to compare, which is required only when `CheckMode` is set to `2`.
@@ -305,10 +306,15 @@ type ApplySdkVerificationTokenRequestParams struct {
 	// This feature applies only to Hong Kong (China) identity cards, Malaysian identity cards, and passports.
 	DisableCheckOcrWarnings *bool `json:"DisableCheckOcrWarnings,omitnil,omitempty" name:"DisableCheckOcrWarnings"`
 
+	// Customize which alarm codes to block. If left blank, all alarm codes will be blocked by default.
+	// Optional alarm codes are: -9101 (occlusion or incomplete border), -9102 (photocopying), -9103 (screen capture by camera), -9104 (image editing/PS modification), -9107 (glare/reflection), -9108 (blurriness), -9901 (other alarms).
+	SelectedWarningCodes []*int64 `json:"SelectedWarningCodes,omitnil,omitempty" name:"SelectedWarningCodes"`
+
 	// A passthrough field, which is returned together with the verification result and can contain up to 1,024 bits.
 	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 
-	// ENHANCED: Enhanced Version, BASIC: Basic Version (Default)
+	// ENHANCED: enhanced.
+	// BASIC: basic version (default).
 	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
 
 	// This interface is used to control th action sequences.
@@ -342,20 +348,21 @@ type ApplySdkVerificationTokenRequest struct {
 	// Default value: 4
 	SecurityLevel *int64 `json:"SecurityLevel,omitnil,omitempty" name:"SecurityLevel"`
 
-	// Card Types Supported for Authentication: Currently supported types are as follows:
-	// 1.HK (Default): Hong Kong (China) Identity Card
-	// 2.ML: Malaysia Identity Card
-	// 3.IndonesiaIDCard: Indonesia Identity Card
-	// 4.PhilippinesVoteID: Philippines Voter ID
-	// 5.PhilippinesDrivingLicense: Philippines Driving License
-	// 6.PhilippinesTinID: Philippines Tin ID
-	// 7.PhilippinesSSSID: Philippines SSS ID
-	// 8.PhilippinesUMID: Philippines UMID
-	// 9.MLIDPassport: Passports of Hong Kong, Macao, Taiwan Regions (China) and Foreign Countries
-	// 10.ThailandIDCard: Thailand Identity Card
-	// 11.MainlandIDCard: Mainland China Identity Card
-	// 12.SingaporeIDCard: Singapore Identity Card
-	// 13.HMTPermit: Exit-Entry Permit for Travel to and from Hong Kong, Macao and Taiwan (China)
+	// Specifies the identity document type used for authentication. valid values:.  
+	// 
+	// HK (default): hong kong (china) identity card.
+	// 2. ML: malaysian identity card.
+	// Indonesian identity card.
+	// 4. PhilippinesVoteID: specifies the voter card in the philippines.
+	// 5. PhilippinesDrivingLicense: specifies the driving license in philippines.
+	// 6. PhilippinesTinID: specifies the philippines tin id.
+	// 7. PhilippinesSSSID: specifies the SSSID in the philippines.
+	// 8. philippines UMID: specifies the philippines UMID.
+	// 9. MLIDPassport: specifies the passport for hong kong (china), macao (china), and taiwan (china) as well as overseas passports.
+	// ThailandIDCard: specifies the thai identity card.
+	// Mainland id card.
+	// 12. SingaporeIDCard: specifies the Singapore id card.
+	// 13. HMTPermit: specifies the hong kong, macau and taiwan travel permit.
 	IdCardType *string `json:"IdCardType,omitnil,omitempty" name:"IdCardType"`
 
 	// The Base64-encoded value of the photo to compare, which is required only when `CheckMode` is set to `2`.
@@ -371,10 +378,15 @@ type ApplySdkVerificationTokenRequest struct {
 	// This feature applies only to Hong Kong (China) identity cards, Malaysian identity cards, and passports.
 	DisableCheckOcrWarnings *bool `json:"DisableCheckOcrWarnings,omitnil,omitempty" name:"DisableCheckOcrWarnings"`
 
+	// Customize which alarm codes to block. If left blank, all alarm codes will be blocked by default.
+	// Optional alarm codes are: -9101 (occlusion or incomplete border), -9102 (photocopying), -9103 (screen capture by camera), -9104 (image editing/PS modification), -9107 (glare/reflection), -9108 (blurriness), -9901 (other alarms).
+	SelectedWarningCodes []*int64 `json:"SelectedWarningCodes,omitnil,omitempty" name:"SelectedWarningCodes"`
+
 	// A passthrough field, which is returned together with the verification result and can contain up to 1,024 bits.
 	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 
-	// ENHANCED: Enhanced Version, BASIC: Basic Version (Default)
+	// ENHANCED: enhanced.
+	// BASIC: basic version (default).
 	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
 
 	// This interface is used to control th action sequences.
@@ -409,6 +421,7 @@ func (r *ApplySdkVerificationTokenRequest) FromJsonString(s string) error {
 	delete(f, "NeedVerifyIdCard")
 	delete(f, "DisableChangeOcrResult")
 	delete(f, "DisableCheckOcrWarnings")
+	delete(f, "SelectedWarningCodes")
 	delete(f, "Extra")
 	delete(f, "SdkVersion")
 	delete(f, "ActionList")
@@ -420,7 +433,7 @@ func (r *ApplySdkVerificationTokenRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ApplySdkVerificationTokenResponseParams struct {
-	// The token used to identify an SDK-based verification process. It is valid for 7,200s and can be used to get the verification result after the process is completed.
+	// A token that identifies an SDK verification process. the validity time is 10 minutes. after the process is complete, the token can be used to retrieve the verification result.
 	SdkToken *string `json:"SdkToken,omitnil,omitempty" name:"SdkToken"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
