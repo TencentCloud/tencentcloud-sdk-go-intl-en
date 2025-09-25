@@ -4205,6 +4205,9 @@ type StartAITranscriptionRequestParams struct {
 
 	// Speech recognition configuration.
 	RecognizeConfig *RecognizeConfig `json:"RecognizeConfig,omitnil,omitempty" name:"RecognizeConfig"`
+
+	// Translation config.
+	TranslationConfig *TranslationConfig `json:"TranslationConfig,omitnil,omitempty" name:"TranslationConfig"`
 }
 
 type StartAITranscriptionRequest struct {
@@ -4229,6 +4232,9 @@ type StartAITranscriptionRequest struct {
 
 	// Speech recognition configuration.
 	RecognizeConfig *RecognizeConfig `json:"RecognizeConfig,omitnil,omitempty" name:"RecognizeConfig"`
+
+	// Translation config.
+	TranslationConfig *TranslationConfig `json:"TranslationConfig,omitnil,omitempty" name:"TranslationConfig"`
 }
 
 func (r *StartAITranscriptionRequest) ToJsonString() string {
@@ -4249,6 +4255,7 @@ func (r *StartAITranscriptionRequest) FromJsonString(s string) error {
 	delete(f, "SessionId")
 	delete(f, "RoomIdType")
 	delete(f, "RecognizeConfig")
+	delete(f, "TranslationConfig")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartAITranscriptionRequest has unknown keys!", "")
 	}
@@ -5048,6 +5055,11 @@ type TRTCDataResult struct {
 	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
 }
 
+type TTSConfig struct {
+
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+}
+
 type TencentVod struct {
 	// The operation to perform on the media uploaded. The value of this parameter is the name of a task flow template. You can create a custom task flow template in Tencent Cloud VOD.
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
@@ -5078,6 +5090,14 @@ type TencentVod struct {
 	UserDefineRecordId *string `json:"UserDefineRecordId,omitnil,omitempty" name:"UserDefineRecordId"`
 }
 
+type Terminology struct {
+	// Source terminology
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// Target terminology
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
+}
+
 type TimeValue struct {
 	// The UNIX timestamp (seconds), such as `1590065877`.
 	Time *uint64 `json:"Time,omitnil,omitempty" name:"Time"`
@@ -5101,6 +5121,20 @@ type TranscriptionParams struct {
 
 	// Required when TranscriptionMode is 1. The robot will only pull the stream of the userid and ignore other users in the room.
 	TargetUserId *string `json:"TargetUserId,omitnil,omitempty" name:"TargetUserId"`
+}
+
+type TranslationConfig struct {
+	// Target language, target language list (ISO 639-1).
+	TargetLanguages []*string `json:"TargetLanguages,omitnil,omitempty" name:"TargetLanguages"`
+
+	// 1: Only text translation, 2: Voice simultaneous interpretation.
+	Mode *uint64 `json:"Mode,omitnil,omitempty" name:"Mode"`
+
+	// Voice simultaneous interpretation configuration: When enabling simultaneous interpretation, this parameter needs to be passed.
+	TTSConfig *TTSConfig `json:"TTSConfig,omitnil,omitempty" name:"TTSConfig"`
+
+	// Translation terminology.
+	Terminology []*Terminology `json:"Terminology,omitnil,omitempty" name:"Terminology"`
 }
 
 type TrtcUsage struct {

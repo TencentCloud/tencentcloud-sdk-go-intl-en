@@ -3557,6 +3557,64 @@ func (c *Client) DescribeResultDownloadWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeSessionImageVersionRequest() (request *DescribeSessionImageVersionRequest) {
+    request = &DescribeSessionImageVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DescribeSessionImageVersion")
+    
+    
+    return
+}
+
+func NewDescribeSessionImageVersionResponse() (response *DescribeSessionImageVersionResponse) {
+    response = &DescribeSessionImageVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSessionImageVersion
+// This API is used to retrieve all built-in images of all minor versions under a specified major version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+//  INVALIDPARAMETER_INVALIDCONFIGVALUEREGEXPNOTMATCH = "InvalidParameter.InvalidConfigValueRegexpNotMatch"
+//  INVALIDPARAMETER_PARAMETERNOTFOUNDORBENONE = "InvalidParameter.ParameterNotFoundOrBeNone"
+func (c *Client) DescribeSessionImageVersion(request *DescribeSessionImageVersionRequest) (response *DescribeSessionImageVersionResponse, err error) {
+    return c.DescribeSessionImageVersionWithContext(context.Background(), request)
+}
+
+// DescribeSessionImageVersion
+// This API is used to retrieve all built-in images of all minor versions under a specified major version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+//  INVALIDPARAMETER_INVALIDCONFIGVALUEREGEXPNOTMATCH = "InvalidParameter.InvalidConfigValueRegexpNotMatch"
+//  INVALIDPARAMETER_PARAMETERNOTFOUNDORBENONE = "InvalidParameter.ParameterNotFoundOrBeNone"
+func (c *Client) DescribeSessionImageVersionWithContext(ctx context.Context, request *DescribeSessionImageVersionRequest) (response *DescribeSessionImageVersionResponse, err error) {
+    if request == nil {
+        request = NewDescribeSessionImageVersionRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeSessionImageVersion")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSessionImageVersion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSessionImageVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSparkAppJobRequest() (request *DescribeSparkAppJobRequest) {
     request = &DescribeSparkAppJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
