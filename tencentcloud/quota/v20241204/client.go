@@ -104,3 +104,223 @@ func (c *Client) CreateAlarmWithContext(ctx context.Context, request *CreateAlar
     err = c.Send(request, response)
     return
 }
+
+func NewDeleteAlarmRequest() (request *DeleteAlarmRequest) {
+    request = &DeleteAlarmRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("quota", APIVersion, "DeleteAlarm")
+    
+    
+    return
+}
+
+func NewDeleteAlarmResponse() (response *DeleteAlarmResponse) {
+    response = &DeleteAlarmResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteAlarm
+// Deletes alarm rules
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_ALARMNOTEXIST = "ResourceNotFound.AlarmNotExist"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+func (c *Client) DeleteAlarm(request *DeleteAlarmRequest) (response *DeleteAlarmResponse, err error) {
+    return c.DeleteAlarmWithContext(context.Background(), request)
+}
+
+// DeleteAlarm
+// Deletes alarm rules
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_ALARMNOTEXIST = "ResourceNotFound.AlarmNotExist"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+func (c *Client) DeleteAlarmWithContext(ctx context.Context, request *DeleteAlarmRequest) (response *DeleteAlarmResponse, err error) {
+    if request == nil {
+        request = NewDeleteAlarmRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "quota", APIVersion, "DeleteAlarm")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAlarm require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteAlarmResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAlarmsRequest() (request *DescribeAlarmsRequest) {
+    request = &DescribeAlarmsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("quota", APIVersion, "DescribeAlarms")
+    
+    
+    return
+}
+
+func NewDescribeAlarmsResponse() (response *DescribeAlarmsResponse) {
+    response = &DescribeAlarmsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAlarms
+// This API is used to query the alarm rule list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeAlarms(request *DescribeAlarmsRequest) (response *DescribeAlarmsResponse, err error) {
+    return c.DescribeAlarmsWithContext(context.Background(), request)
+}
+
+// DescribeAlarms
+// This API is used to query the alarm rule list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeAlarmsWithContext(ctx context.Context, request *DescribeAlarmsRequest) (response *DescribeAlarmsResponse, err error) {
+    if request == nil {
+        request = NewDescribeAlarmsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "quota", APIVersion, "DescribeAlarms")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAlarms require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAlarmsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEnableAlarmRequest() (request *EnableAlarmRequest) {
+    request = &EnableAlarmRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("quota", APIVersion, "EnableAlarm")
+    
+    
+    return
+}
+
+func NewEnableAlarmResponse() (response *EnableAlarmResponse) {
+    response = &EnableAlarmResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// EnableAlarm
+// This API is used to enable alarm rules.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_ALARMNOTEXIST = "ResourceNotFound.AlarmNotExist"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+func (c *Client) EnableAlarm(request *EnableAlarmRequest) (response *EnableAlarmResponse, err error) {
+    return c.EnableAlarmWithContext(context.Background(), request)
+}
+
+// EnableAlarm
+// This API is used to enable alarm rules.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_ALARMNOTEXIST = "ResourceNotFound.AlarmNotExist"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+func (c *Client) EnableAlarmWithContext(ctx context.Context, request *EnableAlarmRequest) (response *EnableAlarmResponse, err error) {
+    if request == nil {
+        request = NewEnableAlarmRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "quota", APIVersion, "EnableAlarm")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EnableAlarm require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEnableAlarmResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateAlarmRequest() (request *UpdateAlarmRequest) {
+    request = &UpdateAlarmRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("quota", APIVersion, "UpdateAlarm")
+    
+    
+    return
+}
+
+func NewUpdateAlarmResponse() (response *UpdateAlarmResponse) {
+    response = &UpdateAlarmResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateAlarm
+// Modifies alarm rules
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_ALARMNOTEXIST = "ResourceNotFound.AlarmNotExist"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
+//  RESOURCENOTFOUND_USERQUOTANOTEXIST = "ResourceNotFound.UserQuotaNotExist"
+//  UNSUPPORTEDOPERATION_ALARMISEXIST = "UnsupportedOperation.AlarmIsExist"
+func (c *Client) UpdateAlarm(request *UpdateAlarmRequest) (response *UpdateAlarmResponse, err error) {
+    return c.UpdateAlarmWithContext(context.Background(), request)
+}
+
+// UpdateAlarm
+// Modifies alarm rules
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_ALARMNOTEXIST = "ResourceNotFound.AlarmNotExist"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
+//  RESOURCENOTFOUND_USERQUOTANOTEXIST = "ResourceNotFound.UserQuotaNotExist"
+//  UNSUPPORTEDOPERATION_ALARMISEXIST = "UnsupportedOperation.AlarmIsExist"
+func (c *Client) UpdateAlarmWithContext(ctx context.Context, request *UpdateAlarmRequest) (response *UpdateAlarmResponse, err error) {
+    if request == nil {
+        request = NewUpdateAlarmRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "quota", APIVersion, "UpdateAlarm")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateAlarm require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateAlarmResponse()
+    err = c.Send(request, response)
+    return
+}

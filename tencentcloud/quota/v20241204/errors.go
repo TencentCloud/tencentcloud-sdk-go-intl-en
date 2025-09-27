@@ -17,6 +17,12 @@ package v20241204
 const (
 	// error codes for specific actions
 
+	// Internal error.
+	INTERNALERROR = "InternalError"
+
+	// Parameter value error.
+	INVALIDPARAMETERVALUE = "InvalidParameterValue"
+
 	// Alarm rule does not exist.
 	RESOURCENOTFOUND_ALARMNOTEXIST = "ResourceNotFound.AlarmNotExist"
 
