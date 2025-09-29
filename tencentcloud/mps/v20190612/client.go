@@ -995,6 +995,88 @@ func (c *Client) CreateScheduleWithContext(ctx context.Context, request *CreateS
     return
 }
 
+func NewCreateSmartEraseTemplateRequest() (request *CreateSmartEraseTemplateRequest) {
+    request = &CreateSmartEraseTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "CreateSmartEraseTemplate")
+    
+    
+    return
+}
+
+func NewCreateSmartEraseTemplateResponse() (response *CreateSmartEraseTemplateResponse) {
+    response = &CreateSmartEraseTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateSmartEraseTemplate
+// This API is used to create a custom smart erasing template.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_AUTOAREAS = "InvalidParameterValue.AutoAreas"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_CUSTOMAREAS = "InvalidParameterValue.CustomAreas"
+//  INVALIDPARAMETERVALUE_ERASEPRIVACYCONFIG = "InvalidParameterValue.ErasePrivacyConfig"
+//  INVALIDPARAMETERVALUE_ERASESUBTITLECONFIG = "InvalidParameterValue.EraseSubtitleConfig"
+//  INVALIDPARAMETERVALUE_ERASETYPE = "InvalidParameterValue.EraseType"
+//  INVALIDPARAMETERVALUE_ERASEWATERMARKCONFIG = "InvalidParameterValue.EraseWatermarkConfig"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_PRIVACYMODEL = "InvalidParameterValue.PrivacyModel"
+//  INVALIDPARAMETERVALUE_PRIVACYTARGETS = "InvalidParameterValue.PrivacyTargets"
+//  INVALIDPARAMETERVALUE_SUBTITLEERASEMETHOD = "InvalidParameterValue.SubtitleEraseMethod"
+//  INVALIDPARAMETERVALUE_SUBTITLELANG = "InvalidParameterValue.SubtitleLang"
+//  INVALIDPARAMETERVALUE_SUBTITLEMODEL = "InvalidParameterValue.SubtitleModel"
+//  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
+//  INVALIDPARAMETERVALUE_TRANSDSTLANG = "InvalidParameterValue.TransDstLang"
+//  INVALIDPARAMETERVALUE_WATERMARKERASEMETHOD = "InvalidParameterValue.WatermarkEraseMethod"
+//  INVALIDPARAMETERVALUE_WATERMARKMODEL = "InvalidParameterValue.WatermarkModel"
+func (c *Client) CreateSmartEraseTemplate(request *CreateSmartEraseTemplateRequest) (response *CreateSmartEraseTemplateResponse, err error) {
+    return c.CreateSmartEraseTemplateWithContext(context.Background(), request)
+}
+
+// CreateSmartEraseTemplate
+// This API is used to create a custom smart erasing template.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_AUTOAREAS = "InvalidParameterValue.AutoAreas"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_CUSTOMAREAS = "InvalidParameterValue.CustomAreas"
+//  INVALIDPARAMETERVALUE_ERASEPRIVACYCONFIG = "InvalidParameterValue.ErasePrivacyConfig"
+//  INVALIDPARAMETERVALUE_ERASESUBTITLECONFIG = "InvalidParameterValue.EraseSubtitleConfig"
+//  INVALIDPARAMETERVALUE_ERASETYPE = "InvalidParameterValue.EraseType"
+//  INVALIDPARAMETERVALUE_ERASEWATERMARKCONFIG = "InvalidParameterValue.EraseWatermarkConfig"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_PRIVACYMODEL = "InvalidParameterValue.PrivacyModel"
+//  INVALIDPARAMETERVALUE_PRIVACYTARGETS = "InvalidParameterValue.PrivacyTargets"
+//  INVALIDPARAMETERVALUE_SUBTITLEERASEMETHOD = "InvalidParameterValue.SubtitleEraseMethod"
+//  INVALIDPARAMETERVALUE_SUBTITLELANG = "InvalidParameterValue.SubtitleLang"
+//  INVALIDPARAMETERVALUE_SUBTITLEMODEL = "InvalidParameterValue.SubtitleModel"
+//  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
+//  INVALIDPARAMETERVALUE_TRANSDSTLANG = "InvalidParameterValue.TransDstLang"
+//  INVALIDPARAMETERVALUE_WATERMARKERASEMETHOD = "InvalidParameterValue.WatermarkEraseMethod"
+//  INVALIDPARAMETERVALUE_WATERMARKMODEL = "InvalidParameterValue.WatermarkModel"
+func (c *Client) CreateSmartEraseTemplateWithContext(ctx context.Context, request *CreateSmartEraseTemplateRequest) (response *CreateSmartEraseTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateSmartEraseTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "CreateSmartEraseTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSmartEraseTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateSmartEraseTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateSmartSubtitleTemplateRequest() (request *CreateSmartSubtitleTemplateRequest) {
     request = &CreateSmartSubtitleTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2135,6 +2217,64 @@ func (c *Client) DeleteScheduleWithContext(ctx context.Context, request *DeleteS
     request.SetContext(ctx)
     
     response = NewDeleteScheduleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteSmartEraseTemplateRequest() (request *DeleteSmartEraseTemplateRequest) {
+    request = &DeleteSmartEraseTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DeleteSmartEraseTemplate")
+    
+    
+    return
+}
+
+func NewDeleteSmartEraseTemplateResponse() (response *DeleteSmartEraseTemplateResponse) {
+    response = &DeleteSmartEraseTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteSmartEraseTemplate
+// This API is used to delete a user-defined smart erasing template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteSmartEraseTemplate(request *DeleteSmartEraseTemplateRequest) (response *DeleteSmartEraseTemplateResponse, err error) {
+    return c.DeleteSmartEraseTemplateWithContext(context.Background(), request)
+}
+
+// DeleteSmartEraseTemplate
+// This API is used to delete a user-defined smart erasing template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteSmartEraseTemplateWithContext(ctx context.Context, request *DeleteSmartEraseTemplateRequest) (response *DeleteSmartEraseTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteSmartEraseTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DeleteSmartEraseTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteSmartEraseTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteSmartEraseTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -3383,6 +3523,66 @@ func (c *Client) DescribeSchedulesWithContext(ctx context.Context, request *Desc
     request.SetContext(ctx)
     
     response = NewDescribeSchedulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSmartEraseTemplatesRequest() (request *DescribeSmartEraseTemplatesRequest) {
+    request = &DescribeSmartEraseTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeSmartEraseTemplates")
+    
+    
+    return
+}
+
+func NewDescribeSmartEraseTemplatesResponse() (response *DescribeSmartEraseTemplatesResponse) {
+    response = &DescribeSmartEraseTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSmartEraseTemplates
+// This API is used to obtain the list of smart erasing template details based on the unique identifier of the template. The returned result includes all matching user-defined smart erasing templates and system preset smart erasing templates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeSmartEraseTemplates(request *DescribeSmartEraseTemplatesRequest) (response *DescribeSmartEraseTemplatesResponse, err error) {
+    return c.DescribeSmartEraseTemplatesWithContext(context.Background(), request)
+}
+
+// DescribeSmartEraseTemplates
+// This API is used to obtain the list of smart erasing template details based on the unique identifier of the template. The returned result includes all matching user-defined smart erasing templates and system preset smart erasing templates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeSmartEraseTemplatesWithContext(ctx context.Context, request *DescribeSmartEraseTemplatesRequest) (response *DescribeSmartEraseTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeSmartEraseTemplatesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DescribeSmartEraseTemplates")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSmartEraseTemplates require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSmartEraseTemplatesResponse()
     err = c.Send(request, response)
     return
 }
@@ -5243,6 +5443,100 @@ func (c *Client) ModifyScheduleWithContext(ctx context.Context, request *ModifyS
     request.SetContext(ctx)
     
     response = NewModifyScheduleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifySmartEraseTemplateRequest() (request *ModifySmartEraseTemplateRequest) {
+    request = &ModifySmartEraseTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "ModifySmartEraseTemplate")
+    
+    
+    return
+}
+
+func NewModifySmartEraseTemplateResponse() (response *ModifySmartEraseTemplateResponse) {
+    response = &ModifySmartEraseTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifySmartEraseTemplate
+// This API is used to modify a user-defined smart erasing template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_AUTOAREAS = "InvalidParameterValue.AutoAreas"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_CUSTOMAREAS = "InvalidParameterValue.CustomAreas"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  INVALIDPARAMETERVALUE_ERASEPRIVACYCONFIG = "InvalidParameterValue.ErasePrivacyConfig"
+//  INVALIDPARAMETERVALUE_ERASESUBTITLECONFIG = "InvalidParameterValue.EraseSubtitleConfig"
+//  INVALIDPARAMETERVALUE_ERASETYPE = "InvalidParameterValue.EraseType"
+//  INVALIDPARAMETERVALUE_ERASEWATERMARKCONFIG = "InvalidParameterValue.EraseWatermarkConfig"
+//  INVALIDPARAMETERVALUE_MODIFYDEFAULTTEMPLATE = "InvalidParameterValue.ModifyDefaultTemplate"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_PRIVACYMODEL = "InvalidParameterValue.PrivacyModel"
+//  INVALIDPARAMETERVALUE_PRIVACYTARGETS = "InvalidParameterValue.PrivacyTargets"
+//  INVALIDPARAMETERVALUE_SUBTITLEERASEMETHOD = "InvalidParameterValue.SubtitleEraseMethod"
+//  INVALIDPARAMETERVALUE_SUBTITLEFORMAT = "InvalidParameterValue.SubtitleFormat"
+//  INVALIDPARAMETERVALUE_SUBTITLELANG = "InvalidParameterValue.SubtitleLang"
+//  INVALIDPARAMETERVALUE_SUBTITLEMODEL = "InvalidParameterValue.SubtitleModel"
+//  INVALIDPARAMETERVALUE_TRANSDSTLANG = "InvalidParameterValue.TransDstLang"
+//  INVALIDPARAMETERVALUE_WATERMARKERASEMETHOD = "InvalidParameterValue.WatermarkEraseMethod"
+//  INVALIDPARAMETERVALUE_WATERMARKMODEL = "InvalidParameterValue.WatermarkModel"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifySmartEraseTemplate(request *ModifySmartEraseTemplateRequest) (response *ModifySmartEraseTemplateResponse, err error) {
+    return c.ModifySmartEraseTemplateWithContext(context.Background(), request)
+}
+
+// ModifySmartEraseTemplate
+// This API is used to modify a user-defined smart erasing template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_AUTOAREAS = "InvalidParameterValue.AutoAreas"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_CUSTOMAREAS = "InvalidParameterValue.CustomAreas"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  INVALIDPARAMETERVALUE_ERASEPRIVACYCONFIG = "InvalidParameterValue.ErasePrivacyConfig"
+//  INVALIDPARAMETERVALUE_ERASESUBTITLECONFIG = "InvalidParameterValue.EraseSubtitleConfig"
+//  INVALIDPARAMETERVALUE_ERASETYPE = "InvalidParameterValue.EraseType"
+//  INVALIDPARAMETERVALUE_ERASEWATERMARKCONFIG = "InvalidParameterValue.EraseWatermarkConfig"
+//  INVALIDPARAMETERVALUE_MODIFYDEFAULTTEMPLATE = "InvalidParameterValue.ModifyDefaultTemplate"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_PRIVACYMODEL = "InvalidParameterValue.PrivacyModel"
+//  INVALIDPARAMETERVALUE_PRIVACYTARGETS = "InvalidParameterValue.PrivacyTargets"
+//  INVALIDPARAMETERVALUE_SUBTITLEERASEMETHOD = "InvalidParameterValue.SubtitleEraseMethod"
+//  INVALIDPARAMETERVALUE_SUBTITLEFORMAT = "InvalidParameterValue.SubtitleFormat"
+//  INVALIDPARAMETERVALUE_SUBTITLELANG = "InvalidParameterValue.SubtitleLang"
+//  INVALIDPARAMETERVALUE_SUBTITLEMODEL = "InvalidParameterValue.SubtitleModel"
+//  INVALIDPARAMETERVALUE_TRANSDSTLANG = "InvalidParameterValue.TransDstLang"
+//  INVALIDPARAMETERVALUE_WATERMARKERASEMETHOD = "InvalidParameterValue.WatermarkEraseMethod"
+//  INVALIDPARAMETERVALUE_WATERMARKMODEL = "InvalidParameterValue.WatermarkModel"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifySmartEraseTemplateWithContext(ctx context.Context, request *ModifySmartEraseTemplateRequest) (response *ModifySmartEraseTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifySmartEraseTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "ModifySmartEraseTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySmartEraseTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifySmartEraseTemplateResponse()
     err = c.Send(request, response)
     return
 }
