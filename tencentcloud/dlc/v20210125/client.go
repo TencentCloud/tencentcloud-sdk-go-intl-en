@@ -159,6 +159,74 @@ func (c *Client) AlterDMSDatabaseWithContext(ctx context.Context, request *Alter
     return
 }
 
+func NewAttachDataMaskPolicyRequest() (request *AttachDataMaskPolicyRequest) {
+    request = &AttachDataMaskPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "AttachDataMaskPolicy")
+    
+    
+    return
+}
+
+func NewAttachDataMaskPolicyResponse() (response *AttachDataMaskPolicyResponse) {
+    response = &AttachDataMaskPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AttachDataMaskPolicy
+// This API is used to bind a DMask policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETPOLICYFAILED = "FailedOperation.GetPolicyFailed"
+//  FAILEDOPERATION_GETUSERINFOFAILED = "FailedOperation.GetUserInfoFailed"
+//  FAILEDOPERATION_GETWORKGROUPINFOFAILED = "FailedOperation.GetWorkGroupInfoFailed"
+//  FAILEDOPERATION_GRANTPOLICYFAILED = "FailedOperation.GrantPolicyFailed"
+//  FAILEDOPERATION_REVOKEPOLICYFAILED = "FailedOperation.RevokePolicyFailed"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDACCESSPOLICY = "InvalidParameter.InvalidAccessPolicy"
+//  INVALIDPARAMETER_INVALIDGROUPID = "InvalidParameter.InvalidGroupId"
+//  UNAUTHORIZEDOPERATION_GRANTPOLICY = "UnauthorizedOperation.GrantPolicy"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+func (c *Client) AttachDataMaskPolicy(request *AttachDataMaskPolicyRequest) (response *AttachDataMaskPolicyResponse, err error) {
+    return c.AttachDataMaskPolicyWithContext(context.Background(), request)
+}
+
+// AttachDataMaskPolicy
+// This API is used to bind a DMask policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETPOLICYFAILED = "FailedOperation.GetPolicyFailed"
+//  FAILEDOPERATION_GETUSERINFOFAILED = "FailedOperation.GetUserInfoFailed"
+//  FAILEDOPERATION_GETWORKGROUPINFOFAILED = "FailedOperation.GetWorkGroupInfoFailed"
+//  FAILEDOPERATION_GRANTPOLICYFAILED = "FailedOperation.GrantPolicyFailed"
+//  FAILEDOPERATION_REVOKEPOLICYFAILED = "FailedOperation.RevokePolicyFailed"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDACCESSPOLICY = "InvalidParameter.InvalidAccessPolicy"
+//  INVALIDPARAMETER_INVALIDGROUPID = "InvalidParameter.InvalidGroupId"
+//  UNAUTHORIZEDOPERATION_GRANTPOLICY = "UnauthorizedOperation.GrantPolicy"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+func (c *Client) AttachDataMaskPolicyWithContext(ctx context.Context, request *AttachDataMaskPolicyRequest) (response *AttachDataMaskPolicyResponse, err error) {
+    if request == nil {
+        request = NewAttachDataMaskPolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "AttachDataMaskPolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AttachDataMaskPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAttachDataMaskPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAttachUserPolicyRequest() (request *AttachUserPolicyRequest) {
     request = &AttachUserPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1149,6 +1217,58 @@ func (c *Client) CreateDataEngineWithContext(ctx context.Context, request *Creat
     request.SetContext(ctx)
     
     response = NewCreateDataEngineResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateDataMaskStrategyRequest() (request *CreateDataMaskStrategyRequest) {
+    request = &CreateDataMaskStrategyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "CreateDataMaskStrategy")
+    
+    
+    return
+}
+
+func NewCreateDataMaskStrategyResponse() (response *CreateDataMaskStrategyResponse) {
+    response = &CreateDataMaskStrategyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDataMaskStrategy
+// This API is used to create a DMask policy.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+func (c *Client) CreateDataMaskStrategy(request *CreateDataMaskStrategyRequest) (response *CreateDataMaskStrategyResponse, err error) {
+    return c.CreateDataMaskStrategyWithContext(context.Background(), request)
+}
+
+// CreateDataMaskStrategy
+// This API is used to create a DMask policy.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+func (c *Client) CreateDataMaskStrategyWithContext(ctx context.Context, request *CreateDataMaskStrategyRequest) (response *CreateDataMaskStrategyResponse, err error) {
+    if request == nil {
+        request = NewCreateDataMaskStrategyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CreateDataMaskStrategy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDataMaskStrategy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDataMaskStrategyResponse()
     err = c.Send(request, response)
     return
 }

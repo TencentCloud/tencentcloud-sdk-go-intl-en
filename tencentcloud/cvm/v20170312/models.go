@@ -1521,7 +1521,7 @@ type DataDisk struct {
 	// Data disk size, unit: GiB. the minimum adjustment step size is 10 GiB. the value ranges of different data disk types vary. for specific limitations, see the storage overview (https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). the default value is 0, which means no data disk purchase. for more restrictions, see the product document.
 	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// Data disk type. For the detailed restrictions on the data disk type, refer to [Storage Overview](https://cloud.tencent.com/document/product/213/4952). Valid values: <br /><li>LOCAL_BASIC: Local Disk <br /><li>LOCAL_SSD: Local SSD <br /><li>LOCAL_NVME: Local NVMe Disk, which is strongly related with InstanceType and can not be specified <br /><li>LOCAL_PRO: Local HDD, which is strongly related with InstanceType and can not be specified <br /><li>CLOUD_BASIC: Basic Cloud Disk <br /><li>CLOUD_PREMIUM: Premium Disk <br /><li>CLOUD_SSD: Cloud SSD <br /><li>CLOUD_HSSD: Enhanced SSD <br /><li>CLOUD_TSSD: Tremendous SSD <br /><li>CLOUD_BSSD: Balanced SSD <br /><br />Default value: LOCAL_BASIC. <br /><br />This parameter is invalid for the `ResizeInstanceDisk` API.</li></li></li> </li> </li></li></li></li></li></li>
+	// Specifies the data disk type. for restrictions on data disk types, refer to [storage overview](https://www.tencentcloud.comom/document/product/213/4952?from_cn_redirect=1). valid values: <br /><li>LOCAL_BASIC: LOCAL disk</li> <li>LOCAL_SSD: LOCAL SSD</li><li>LOCAL_NVME: LOCAL NVME disk, which is closely related to InstanceType and cannot be specified</li><li>LOCAL_PRO: LOCAL HDD, which is closely related to InstanceType and cannot be specified</li><li>cloud_BASIC: BASIC cloud disk</li><li>cloud_PREMIUM: high-performance cloud block storage</li><li>cloud_SSD: SSD cloud disk</li><li>cloud_HSSD: enhanced SSD cloud disk</li> <li>cloud_TSSD: ultra-fast SSD cbs</li><li>cloud_BSSD: universal SSD cloud disk</li><br />default: LOCAL_BASIC.<br/><br />this parameter is invalid for the `ResizeInstanceDisk` api.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
 	// Specifies the data disk ID.
@@ -1537,21 +1537,24 @@ type DataDisk struct {
 	// Specifies whether the data disk is encrypted. value range: <li>true: encrypted</li> <li>false: unencrypted</li><br/> default value: false<br/> this parameter is currently only used for the `RunInstances` api.
 	Encrypt *bool `json:"Encrypt,omitnil,omitempty" name:"Encrypt"`
 
-	// Custom CMK's corresponding ID, with a value of UUID or something similar to kms - abcd1234. used for encrypting cloud disks.
+	// Custom CMK ID, value is UUID or similar to kms-abcd1234. used for encrypted cloud disk.
 	// 
 	// This parameter is currently only used for the `RunInstances` api.
+	// Note: This field may return null, indicating that no valid value is found.
 	KmsKeyId *string `json:"KmsKeyId,omitnil,omitempty" name:"KmsKeyId"`
 
-	// Specifies the cloud disk performance (unit: MiB/s). using this parameter allows you to purchase additional performance for the cloud disk.
-	// Currently only supports ultra-fast CLOUD disk (CLOUD_TSSD) and enhanced SSD CLOUD disk (CLOUD_HSSD).
+	// Cloud disk performance (unit: MiB/s). specifies additional performance for cloud disks.
+	// Currently only supports extreme cbs (CLOUD_TSSD) and enhanced SSD CLOUD disk (CLOUD_HSSD).
+	// Note: This field may return null, indicating that no valid value is found.
 	ThroughputPerformance *int64 `json:"ThroughputPerformance,omitnil,omitempty" name:"ThroughputPerformance"`
 
-	// Specifies the exclusive cluster ID it belongs to.
+	// Specifies the dedicated cluster ID belonging to.
+	// Note: This field may return null, indicating that no valid value is found.
 	CdcId *string `json:"CdcId,omitnil,omitempty" name:"CdcId"`
 
-	// Burst performance.
+	// Burstable performance.
 	// 
-	// <B>Note: this feature is in beta test.</b>.
+	// <B>Note: this field is in beta test.</b>.
 	BurstPerformance *bool `json:"BurstPerformance,omitnil,omitempty" name:"BurstPerformance"`
 
 	// Disk name, with a length not exceeding 128 characters.
@@ -4228,16 +4231,13 @@ type Filter struct {
 }
 
 type GPUInfo struct {
-	// Number of GPUs. 
-	// Note: this field may return `null`, indicating that no valid value can be found.
+	// Specifies the GPU count of the instance. a value less than 1 indicates VGPU type, and a value larger than 1 indicates GPU passthrough type.
 	GPUCount *float64 `json:"GPUCount,omitnil,omitempty" name:"GPUCount"`
 
-	// GPU address
-	// Note: this field may return `null`, indicating that no valid value can be found.
+	// Specifies the GPU address of the instance.
 	GPUId []*string `json:"GPUId,omitnil,omitempty" name:"GPUId"`
 
-	// GPU type of the instance.
-	// Note: this field may return `null`, indicating that no valid value can be found.
+	// Specifies the GPU type of the instance.
 	GPUType *string `json:"GPUType,omitnil,omitempty" name:"GPUType"`
 }
 
@@ -5366,10 +5366,10 @@ type Instance struct {
 	// Number of CPU cores of the instance; unit: core
 	CPU *int64 `json:"CPU,omitnil,omitempty" name:"CPU"`
 
-	// Memory capacity; unit: `GB`.
+	// Instance memory capacity. unit: GiB.
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance status. Valid values: <br><li>NORMAL: instance is normal. <br><li>EXPIRED: instance expired. <br><li>PROTECTIVELY_ISOLATED: instance is protectively isolated.
+	// Instance business status. valid values:<br><li>NORMAL: indicates an instance in the NORMAL state</li><li>EXPIRED: indicates an EXPIRED instance</li><li>PROTECTIVELY_ISOLATED: PROTECTIVELY ISOLATED instance</li>.
 	RestrictState *string `json:"RestrictState,omitnil,omitempty" name:"RestrictState"`
 
 	// Instance name
@@ -5400,8 +5400,8 @@ type Instance struct {
 	// `ID` of the image used to create the instance.
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
-	// Auto renewal flag. Valid values: <br><li>`NOTIFY_AND_MANUAL_RENEW`: notify upon expiration, but do not renew automatically <br><li>`NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically <br><li>`DISABLE_NOTIFY_AND_MANUAL_RENEW`: do not notify upon expiration and do not renew automatically.
-	// <br><li>Note: this parameter is `null` for postpaid instances.
+	// AUTO-Renewal flag. valid values:<br><li>`NOTIFY_AND_MANUAL_RENEW`: indicates that a notification of impending expiration is made but AUTO-renewal is not performed</li><li>`NOTIFY_AND_AUTO_RENEW`: indicates that a notification of impending expiration is made AND AUTO-renewal is performed</li><li>`DISABLE_NOTIFY_AND_MANUAL_RENEW`: indicates that notification that it is about to expire is not made AND AUTO-renewal is not performed.
+	// Note: this field is null in postpaid mode.
 	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 
 	// Creation time following the `ISO8601` standard and using `UTC` time in the format of `YYYY-MM-DDThh:mm:ssZ`.
@@ -5419,14 +5419,15 @@ type Instance struct {
 	// Login settings of the instance. Currently only the key associated with the instance is returned.
 	LoginSettings *LoginSettings `json:"LoginSettings,omitnil,omitempty" name:"LoginSettings"`
 
-	// Instance state. Valid values: <br><li>PENDING: creating <br></li><li>LAUNCH_FAILED: creation failed <br></li><li>RUNNING: running <br></li><li>STOPPED: shut down <br></li><li>STARTING: starting <br></li><li>STOPPING: shutting down <br></li><li>REBOOTING: rebooting <br></li><li>SHUTDOWN: shut down and to be terminated <br></li><li>TERMINATING: terminating. <br></li>
+	// Instance status. for specific status types, see the instance status table (https://www.tencentcloud.comom/document/api/213/15753?from_cn_redirect=1#InstanceStatus).
 	InstanceState *string `json:"InstanceState,omitnil,omitempty" name:"InstanceState"`
 
 	// List of tags associated with the instance.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Instance billing method after shutdown.
-	// Valid values: <br><li>KEEP_CHARGING: billing continues after shutdown <br><li>STOP_CHARGING: billing stops after shutdown <li>NOT_APPLICABLE: the instance is not shut down or stopping billing after shutdown is not applicable to the instance. <br>
+	// Shutdown billing mode of an instance.
+	// 
+	// Valid values: <br><li>KEEP_CHARGING: billing continues after shutdown</li><li>STOP_CHARGING: billing stops after shutdown</li><li>NOT_APPLICABLE: the instance is NOT shut down or stopping billing after shutdown is NOT APPLICABLE to the instance</li>.
 	StopChargingMode *string `json:"StopChargingMode,omitnil,omitempty" name:"StopChargingMode"`
 
 	// Globally unique ID of the instance.
@@ -5435,14 +5436,14 @@ type Instance struct {
 	// Last operation of the instance, such as StopInstances or ResetInstance.
 	LatestOperation *string `json:"LatestOperation,omitnil,omitempty" name:"LatestOperation"`
 
-	// The latest operation status of the instance. Valid values:<br><li>SUCCESS: operation succeeded<br><li>OPERATING: operation in progress<br><li>FAILED: operation failed
+	// The latest operation status of the instance. valid values:<br><li>SUCCESS: indicates that the operation succeeded</li><li>OPERATING: indicates that the operation is in progress</li><li>FAILED: indicates that the operation FAILED</li>.
+	// Note: This field may return null, indicating that no valid value is found.
 	LatestOperationState *string `json:"LatestOperationState,omitnil,omitempty" name:"LatestOperationState"`
 
 	// Unique request ID for the last operation of the instance.
 	LatestOperationRequestId *string `json:"LatestOperationRequestId,omitnil,omitempty" name:"LatestOperationRequestId"`
 
-	// ID of a spread placement group.
-	// Note: this field may return null, indicating that no valid value is obtained.
+	// Spread placement group ID.
 	DisasterRecoverGroupId *string `json:"DisasterRecoverGroupId,omitnil,omitempty" name:"DisasterRecoverGroupId"`
 
 	// IPv6 address of the instance.
@@ -5453,29 +5454,26 @@ type Instance struct {
 	// Note: this field may return null, indicating that no valid value is obtained.
 	CamRoleName *string `json:"CamRoleName,omitnil,omitempty" name:"CamRoleName"`
 
-	// HPC cluster ID.
-	// Note: this field may return null, indicating that no valid value was found.
+	// High-performance computing cluster ID.
 	HpcClusterId *string `json:"HpcClusterId,omitnil,omitempty" name:"HpcClusterId"`
 
 	// IP list of HPC cluster.
 	// Note: this field may return null, indicating that no valid value was found.
 	RdmaIpAddresses []*string `json:"RdmaIpAddresses,omitnil,omitempty" name:"RdmaIpAddresses"`
 
-
+	// Dedicated cluster ID where the instance is located.
 	DedicatedClusterId *string `json:"DedicatedClusterId,omitnil,omitempty" name:"DedicatedClusterId"`
 
-	// The isolation status of the instance. Valid values:<br><li>`ARREAR`: isolated due to overdue payment;<br></li><li>`EXPIRE`: isolated upon expiration;<br></li><li>`MANMADE`: isolated after manual returning;<br></li><li>`NOTISOLATED`: not isolated<br></li>
-	// Note: this field may return null, indicating that no valid value was found.
+	// Instance isolation type. valid values:<br><li>ARREAR: indicates arrears isolation<br></li><li>EXPIRE: indicates isolation upon expiration<br></li><li>MANMADE: indicates voluntarily refunded isolation<br></li><li>NOTISOLATED: indicates unisolated<br></li>.
 	IsolatedSource *string `json:"IsolatedSource,omitnil,omitempty" name:"IsolatedSource"`
 
-	// GPU information. This field is only returned for GPU instances.
-	// Note: this field may return null, indicating that no valid value was found.
+	// GPU information. if it is a gpu type instance, this value will be returned. for other type instances, it does not return.
 	GPUInfo *GPUInfo `json:"GPUInfo,omitnil,omitempty" name:"GPUInfo"`
 
 	// Instance OS license type. Default value: `TencentCloud`
 	LicenseType *string `json:"LicenseType,omitnil,omitempty" name:"LicenseType"`
 
-	// Whether the termination protection is enabled. Values: <br><li>`TRUE`: Enable instance protection, which means that this instance can not be deleted by an API action.<br><li>`FALSE`: Do not enable the instance protection.<br><br>Default value: `FALSE`.
+	// Instance destruction protection flag indicates whether an instance is allowed to be deleted through an api. value ranges from:<br><li>true: indicates that instance protection is enabled, deletion through apis is not allowed</li><li>false: indicates that instance protection is disabled, allow passage</li><br>default value: false.
 	DisableApiTermination *bool `json:"DisableApiTermination,omitnil,omitempty" name:"DisableApiTermination"`
 
 	// Default login user
@@ -5488,8 +5486,10 @@ type Instance struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	LatestOperationErrorMsg *string `json:"LatestOperationErrorMsg,omitnil,omitempty" name:"LatestOperationErrorMsg"`
 
-	// Public IPv6 address of the instance.
-	// Note: this field may return null, indicating that no valid value was found.
+	// Custom metadata. this parameter corresponds to the metadata information specified when creating a CVM. **note: in beta test**.
+	Metadata *Metadata `json:"Metadata,omitnil,omitempty" name:"Metadata"`
+
+	// Specifies the public IPv6 address bound to the instance.
 	PublicIPv6Addresses []*string `json:"PublicIPv6Addresses,omitnil,omitempty" name:"PublicIPv6Addresses"`
 }
 
@@ -5627,32 +5627,35 @@ type InternetAccessible struct {
 	// Bandwidth package ID. it can be obtained through the `BandwidthPackageId` in the return value from the DescribeBandwidthPackages api. this parameter is used as an input parameter only in the RunInstances api.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitnil,omitempty" name:"BandwidthPackageId"`
 
-	// Describes the line type. for details, refer to [EIP IP address types](https://www.tencentcloud.com/zh/document/product/213/5733). default value: `BGP`.
-	//  <li>BGP Default: BGP</li>
-	// For a user who has activated the static single-line IP allowlist, possible values are:
-	//  <li>CMCC: China Mobile</li> <li>CTCC: China Telecom</li> <li>CUCC: China Unicom</li>
-	// Note: Only certain regions support static single-line IP addresses.
+	// Line type. for details on various types of lines and supported regions, refer to [EIP IP address types](https://www.tencentcloud.comom/document/product/1199/41646?from_cn_redirect=1). default value: BGP.
+	// <Li>BGP: specifies the general bgp line.</li>.
+	// For a user with static single-line IP allowlist enabled, valid values include:.
+	// <Li>CMCC: china mobile.</li>.
+	// <Li>CTCC: china telecom</li>.
+	// <Li>CUCC: china unicom</li>.
+	// Note: The static single-line IP is only supported in some regions.
+	// 
 	InternetServiceProvider *string `json:"InternetServiceProvider,omitnil,omitempty" name:"InternetServiceProvider"`
 
-	// Type of public IP address.
+	// Specifies the public IP type.
 	// 
-	// <li> WanIP: Ordinary public IP address. </li> <li> HighQualityEIP: High Quality EIP is supported only in Singapore and Hong Kong. </li> <li> AntiDDoSEIP: Anti-DDoS IP is supported only in specific regions. For details, see [EIP Product Overview](https://www.tencentcloud.com/zh/document/product/213/5733). </li> 
-	// Specify the type of public IPv4 address to assign a public IPv4 address to the resource. HighQualityEIP and AntiDDoSEIP features are gradually released in select regions.
-	// This feature is currently in gradually released phase. To access it, please [contact us](https://console.tencentcloud.com/workorder).
+	// <Li>WanIP: specifies the public ip address.</li>.
+	// <Li>HighQualityEIP: specifies a high quality ip. high quality ip is only supported in Singapore and hong kong (china).</li>.
+	// <li> AntiDDoSEIP: specifies the anti-ddos eip. only partial regions support anti-ddos eip. details visible in the [elastic IP product overview](https://www.tencentcloud.comom/document/product/1199/41646?from_cn_redirect=1).</li>.
+	// If needed, assign a public IPv4 address to the resource by specifying the IPv4 address type.
+	// 
+	// This feature is in beta test in selected regions. submit a ticket for consultation (https://console.cloud.tencent.com/workorder/category) if needed.
 	IPv4AddressType *string `json:"IPv4AddressType,omitnil,omitempty" name:"IPv4AddressType"`
 
-	// Indicates the type of EIPv6. Valid values:
+	// Indicates the type of elastic public IPv6.
+	// <Li>EIPv6: elastic ip version 6.</li>.
+	// <Li>HighQualityEIPv6: specifies the high quality ipv6. highqualityeipv6 is only supported in hong kong (china).</li>.
+	// If needed, assign an elastic IPv6 address for resource allocation.
 	// 
-	// <li>EIPv6: common IPv6</li>
-	// <li>HighQualityEIPv6: High Quality EIPv6</li>
-	// Note: Contact the product team to enable the dedicated IPv6 allowlist. The dedicated IPv6 is only supported in some regions. 
-	// 
-	// Default: `EIPv6`
-	// 
-	// This feature is currently in gradually released phase. To access it, please [contact us](https://console.tencentcloud.com/workorder).
+	// This feature is in beta test in selected regions. submit a ticket for consultation (https://console.cloud.tencent.com/workorder/category) if needed.
 	IPv6AddressType *string `json:"IPv6AddressType,omitnil,omitempty" name:"IPv6AddressType"`
 
-	// Anti-DDoS service package ID. This is required when you want to request an Anti-DDoS IP.
+	// DDoS protection package unique ID. this field is required when applying for a ddos protection IP.
 	AntiDDoSPackageId *string `json:"AntiDDoSPackageId,omitnil,omitempty" name:"AntiDDoSPackageId"`
 }
 
@@ -5963,10 +5966,10 @@ type Metadata struct {
 }
 
 type MetadataItem struct {
-	// Custom metadata key. it must comply with the regular expression ^[a-zA-Z0-9_-]+$. the length is less than or equal to 128 bytes (case-sensitive).
+	// Custom metadata key, consisting of uppercase letters (A-Z), lowercase letters (A-Z), digits (0-9), underscores (_), or hyphens (-), with a size limit of 128 bytes.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-	// Specifies a custom metadata value. it supports any data . The size is &le; 256 KB. it is case-sensitive.
+	// Custom metadata value. The upper limit of message size is 256 KB.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
@@ -6971,10 +6974,10 @@ type Placement struct {
 	// ID of the availability zone where the instance resides. You can call the [DescribeZones](https://intl.cloud.tencent.com/document/product/213/35071) API and obtain the ID in the returned `Zone` field.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// ID of the project to which the instance belongs. This parameter can be obtained from the `projectId` returned by [DescribeProject](https://intl.cloud.tencent.com/document/api/651/78725?from_cn_redirect=1). If this is left empty, the default project is used.
+	// Instance'S project ID. obtain this parameter by calling the `ProjectId` field in the return value of [DescribeProject](https://www.tencentcloud.comom/document/api/651/78725?from_cn_redirect=1). default value 0 means default project.
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// ID list of CDHs from which the instance can be created. If you have purchased CDHs and specify this parameter, the instances you purchase will be randomly deployed on the CDHs.
+	// Specifies the dedicated host ID list for instance ownership, only used for input parameters. if you purchase a dedicated host and specify this parameter, instances you purchase will be randomly deployed on these dedicated hosts. obtain this parameter by calling the `HostId` field in the return value of [DescribeHosts](https://www.tencentcloud.comom/document/api/213/16474?from_cn_redirect=1).
 	HostIds []*string `json:"HostIds,omitnil,omitempty" name:"HostIds"`
 
 	// The ID of the CDH to which the instance belongs, only used as an output parameter.
@@ -8556,14 +8559,15 @@ type SystemDisk struct {
 	// Default value: Current disk types with inventory available.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Specifies the system disk ID.
-	// This parameter currently only serves as a response parameter for query apis such as `DescribeInstances`, and cannot be used as an input parameter for write apis such as `RunInstances`.
+	// System disk ID.
+	// Currently, this parameter is only used for response parameters in query apis such as [DescribeInstances](https://www.tencentcloud.comom/document/product/213/15728?from_cn_redirect=1) and is not applicable to request parameters in write apis such as [RunInstances](https://www.tencentcloud.comom/document/product/213/15730?from_cn_redirect=1).
 	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 
 	// System disk size; unit: GiB; default value: 50 GiB.
 	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// Specifies the exclusive cluster ID it belongs to.
+	// Specifies the dedicated cluster ID belonging to.
+	// Note: This field may return null, indicating that no valid value is found.
 	CdcId *string `json:"CdcId,omitnil,omitempty" name:"CdcId"`
 
 	// Disk name, which specifies a length not exceeding 128 characters.
@@ -8671,7 +8675,7 @@ func (r *TerminateInstancesResponse) FromJsonString(s string) error {
 }
 
 type VirtualPrivateCloud struct {
-	// VPC ID in the format of `vpc-xxx`. To obtain valid VPC IDs, you can log in to the [console](https://console.cloud.tencent.com/vpc/vpc?rid=1) or call the [DescribeVpcs](https://www.tencentcloud.com/document/product/215/15778) API and look for the `unVpcId` fields in the response. If you specify `DEFAULT` for both `VpcId` and `SubnetId` when creating an instance, the default VPC will be used.
+	// vpc ID, such as `vpc-xxx`. valid vpc ids can be queried by logging in to the console (https://console.cloud.tencent.com/vpc/vpc?rid=1) or by calling the API [DescribeVpcs](https://www.tencentcloud.comom/document/product/215/15778?from_cn_redirect=1) and obtaining the `VpcId` field from the API response. if both VpcId and SubnetId are input as `DEFAULT` when creating an instance, the DEFAULT vpc network will be forcibly used.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// vpc subnet ID, in the form of `subnet-xxx`. valid vpc subnet ids can be queried by logging in to the console (https://console.cloud.tencent.com/vpc/subnet?rid=1); or they can be obtained from the `SubnetId` field in the API response by calling the DescribeSubnets API (https://intl.cloud.tencent.com/document/product/215/15784?from_cn_redirect=1). if SubnetId and VpcId are both input as `DEFAULT` when creating an instance, the DEFAULT vpc network will be forcibly used.

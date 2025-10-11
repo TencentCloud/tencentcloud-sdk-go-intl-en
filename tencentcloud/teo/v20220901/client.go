@@ -5587,7 +5587,7 @@ func NewDescribeAliasDomainsResponse() (response *DescribeAliasDomainsResponse) 
 // DescribeAliasDomains
 // This API is used to query the alias domain name information list.
 //
-// The feature is only supported in the enterprise plan and is currently in closed beta testing. If you need to use it, [Contact Us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service?from=connect-us).
+// The feature is only supported in the enterprise plan and is currently in closed beta testing. If you need to use it, [Contact Us](https://www.tencentcloud.com/contact-us).
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -5602,7 +5602,7 @@ func (c *Client) DescribeAliasDomains(request *DescribeAliasDomainsRequest) (res
 // DescribeAliasDomains
 // This API is used to query the alias domain name information list.
 //
-// The feature is only supported in the enterprise plan and is currently in closed beta testing. If you need to use it, [Contact Us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service?from=connect-us).
+// The feature is only supported in the enterprise plan and is currently in closed beta testing. If you need to use it, [Contact Us](https://www.tencentcloud.com/contact-us).
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -9277,7 +9277,7 @@ func NewDestroyPlanResponse() (response *DestroyPlanResponse) {
 //
 // 
 //
-// > The site status can be queried through the [Query Site List](https://intl.cloud.tencent.com/document/product/1552/80713?from_cn_redirect=1) interface.
+// > The site status can be queried through the [Query Site List](https://www.tencentcloud.com/zh/document/product/1145/50481) interface.
 //
 // A site can be deactivated by switching the site to a closed status through the [Switch Site Status](https://intl.cloud.tencent.com/document/product/1552/80707?from_cn_redirect=1) interface.
 //
@@ -9301,7 +9301,7 @@ func (c *Client) DestroyPlan(request *DestroyPlanRequest) (response *DestroyPlan
 //
 // 
 //
-// > The site status can be queried through the [Query Site List](https://intl.cloud.tencent.com/document/product/1552/80713?from_cn_redirect=1) interface.
+// > The site status can be queried through the [Query Site List](https://www.tencentcloud.com/zh/document/product/1145/50481) interface.
 //
 // A site can be deactivated by switching the site to a closed status through the [Switch Site Status](https://intl.cloud.tencent.com/document/product/1552/80707?from_cn_redirect=1) interface.
 //
@@ -11783,7 +11783,7 @@ func NewModifyLoadBalancerResponse() (response *ModifyLoadBalancerResponse) {
 }
 
 // ModifyLoadBalancer
-// This API is used to modify LoadBalancer configuration. The load balancing feature is in beta test. If you need to use it, [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service).
+// This API is used to modify LoadBalancer configuration. The load balancing feature is in beta test. If you need to use it, [contact us](https://www.tencentcloud.com/contact-us).
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_LOADBALANCERBINDL4NOTINSTABLESTATUS = "InvalidParameter.LoadBalancerBindL4NotInStableStatus"
@@ -11793,7 +11793,7 @@ func (c *Client) ModifyLoadBalancer(request *ModifyLoadBalancerRequest) (respons
 }
 
 // ModifyLoadBalancer
-// This API is used to modify LoadBalancer configuration. The load balancing feature is in beta test. If you need to use it, [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service).
+// This API is used to modify LoadBalancer configuration. The load balancing feature is in beta test. If you need to use it, [contact us](https://www.tencentcloud.com/contact-us).
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_LOADBALANCERBINDL4NOTINSTABLESTATUS = "InvalidParameter.LoadBalancerBindL4NotInStableStatus"

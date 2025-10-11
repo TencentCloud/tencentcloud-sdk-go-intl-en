@@ -235,6 +235,8 @@ type ClipRangeInfo struct {
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Offset, valid when Type is SpecifyTimeRange.
+	//
+	// Deprecated: Offset is deprecated.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
@@ -386,7 +388,7 @@ type CreateStreamPackageChannelRequestParams struct {
 	// Channel name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Channel protocol. Valid values: HLS, DASH, CMAF.
+	// Channel protocol. Valid values: HLS/DASH.
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
 	// Cache configuration.
@@ -399,7 +401,7 @@ type CreateStreamPackageChannelRequest struct {
 	// Channel name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Channel protocol. Valid values: HLS, DASH, CMAF.
+	// Channel protocol. Valid values: HLS/DASH.
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
 	// Cache configuration.
@@ -929,6 +931,9 @@ type CreateStreamPackageSourceRequestParams struct {
 
 	// source specific configuration.
 	PackageConfs []*SourcePackageConf `json:"PackageConfs,omitnil,omitempty" name:"PackageConfs"`
+
+	// The sourcetag allows ADS to deliver more precise ads based on the Source Tag information
+	SourceTags []*SourceTag `json:"SourceTags,omitnil,omitempty" name:"SourceTags"`
 }
 
 type CreateStreamPackageSourceRequest struct {
@@ -945,6 +950,9 @@ type CreateStreamPackageSourceRequest struct {
 
 	// source specific configuration.
 	PackageConfs []*SourcePackageConf `json:"PackageConfs,omitnil,omitempty" name:"PackageConfs"`
+
+	// The sourcetag allows ADS to deliver more precise ads based on the Source Tag information
+	SourceTags []*SourceTag `json:"SourceTags,omitnil,omitempty" name:"SourceTags"`
 }
 
 func (r *CreateStreamPackageSourceRequest) ToJsonString() string {
@@ -963,6 +971,7 @@ func (r *CreateStreamPackageSourceRequest) FromJsonString(s string) error {
 	delete(f, "Name")
 	delete(f, "Type")
 	delete(f, "PackageConfs")
+	delete(f, "SourceTags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamPackageSourceRequest has unknown keys!", "")
 	}
@@ -4335,6 +4344,9 @@ type ModifyStreamPackageSourceRequestParams struct {
 
 	// source configuration.
 	PackageConfs []*SourcePackageConf `json:"PackageConfs,omitnil,omitempty" name:"PackageConfs"`
+
+	// ADS can return more precise advertisements based on Source Tag information.
+	SourceTags []*SourceTag `json:"SourceTags,omitnil,omitempty" name:"SourceTags"`
 }
 
 type ModifyStreamPackageSourceRequest struct {
@@ -4352,6 +4364,9 @@ type ModifyStreamPackageSourceRequest struct {
 
 	// source configuration.
 	PackageConfs []*SourcePackageConf `json:"PackageConfs,omitnil,omitempty" name:"PackageConfs"`
+
+	// ADS can return more precise advertisements based on Source Tag information.
+	SourceTags []*SourceTag `json:"SourceTags,omitnil,omitempty" name:"SourceTags"`
 }
 
 func (r *ModifyStreamPackageSourceRequest) ToJsonString() string {
@@ -4370,6 +4385,7 @@ func (r *ModifyStreamPackageSourceRequest) FromJsonString(s string) error {
 	delete(f, "Name")
 	delete(f, "Type")
 	delete(f, "PackageConfs")
+	delete(f, "SourceTags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamPackageSourceRequest has unknown keys!", "")
 	}
@@ -4781,6 +4797,14 @@ type SourcePackageConf struct {
 
 	// access path.
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+}
+
+type SourceTag struct {
+
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type SpliceInsertInfo struct {
