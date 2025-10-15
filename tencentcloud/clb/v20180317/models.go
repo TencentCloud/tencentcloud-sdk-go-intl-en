@@ -1951,15 +1951,31 @@ func (r *DeleteLoadBalancerListenersResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteLoadBalancerRequestParams struct {
-	// Array of IDs of the CLB instances to be deleted. Array length limit: 20.
+	// CLB instance ID array to be deleted, which can be obtained by calling the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API. The array can include up to 20 elements.
 	LoadBalancerIds []*string `json:"LoadBalancerIds,omitnil,omitempty" name:"LoadBalancerIds"`
+
+	// Whether to forcibly delete the CLB instance. True indicates forced deletion; False indicates non-forced deletion, and blocking verification is required.
+	// The default value is False.
+	// The deletion operation is blocked by default in the following cases. If you confirm forced deletion, the value of the forced verification parameter ForceDelete should be set to True.
+	// 1. The instance with 20 or more RS bound to the backend is deleted.
+	// 2. The instance with RS bound to the backend and the maximum peak inbound/outbound bandwidth exceeding 10 Mbps within 5 minutes is deleted.
+	// 3. Thirty or more instances are deleted within 5 minutes in a single region.
+	ForceDelete *bool `json:"ForceDelete,omitnil,omitempty" name:"ForceDelete"`
 }
 
 type DeleteLoadBalancerRequest struct {
 	*tchttp.BaseRequest
 	
-	// Array of IDs of the CLB instances to be deleted. Array length limit: 20.
+	// CLB instance ID array to be deleted, which can be obtained by calling the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API. The array can include up to 20 elements.
 	LoadBalancerIds []*string `json:"LoadBalancerIds,omitnil,omitempty" name:"LoadBalancerIds"`
+
+	// Whether to forcibly delete the CLB instance. True indicates forced deletion; False indicates non-forced deletion, and blocking verification is required.
+	// The default value is False.
+	// The deletion operation is blocked by default in the following cases. If you confirm forced deletion, the value of the forced verification parameter ForceDelete should be set to True.
+	// 1. The instance with 20 or more RS bound to the backend is deleted.
+	// 2. The instance with RS bound to the backend and the maximum peak inbound/outbound bandwidth exceeding 10 Mbps within 5 minutes is deleted.
+	// 3. Thirty or more instances are deleted within 5 minutes in a single region.
+	ForceDelete *bool `json:"ForceDelete,omitnil,omitempty" name:"ForceDelete"`
 }
 
 func (r *DeleteLoadBalancerRequest) ToJsonString() string {
@@ -1975,6 +1991,7 @@ func (r *DeleteLoadBalancerRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "LoadBalancerIds")
+	delete(f, "ForceDelete")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteLoadBalancerRequest has unknown keys!", "")
 	}

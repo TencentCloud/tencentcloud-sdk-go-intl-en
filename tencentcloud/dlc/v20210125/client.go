@@ -2293,6 +2293,58 @@ func (c *Client) DeleteDataEngineWithContext(ctx context.Context, request *Delet
     return
 }
 
+func NewDeleteDataMaskStrategyRequest() (request *DeleteDataMaskStrategyRequest) {
+    request = &DeleteDataMaskStrategyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DeleteDataMaskStrategy")
+    
+    
+    return
+}
+
+func NewDeleteDataMaskStrategyResponse() (response *DeleteDataMaskStrategyResponse) {
+    response = &DeleteDataMaskStrategyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteDataMaskStrategy
+// This API is used to delete a data masking policy.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+func (c *Client) DeleteDataMaskStrategy(request *DeleteDataMaskStrategyRequest) (response *DeleteDataMaskStrategyResponse, err error) {
+    return c.DeleteDataMaskStrategyWithContext(context.Background(), request)
+}
+
+// DeleteDataMaskStrategy
+// This API is used to delete a data masking policy.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+func (c *Client) DeleteDataMaskStrategyWithContext(ctx context.Context, request *DeleteDataMaskStrategyRequest) (response *DeleteDataMaskStrategyResponse, err error) {
+    if request == nil {
+        request = NewDeleteDataMaskStrategyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DeleteDataMaskStrategy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDataMaskStrategy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteDataMaskStrategyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteSparkAppRequest() (request *DeleteSparkAppRequest) {
     request = &DeleteSparkAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3167,6 +3219,58 @@ func (c *Client) DescribeDataEnginesScaleDetailWithContext(ctx context.Context, 
     request.SetContext(ctx)
     
     response = NewDescribeDataEnginesScaleDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDataMaskStrategiesRequest() (request *DescribeDataMaskStrategiesRequest) {
+    request = &DescribeDataMaskStrategiesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DescribeDataMaskStrategies")
+    
+    
+    return
+}
+
+func NewDescribeDataMaskStrategiesResponse() (response *DescribeDataMaskStrategiesResponse) {
+    response = &DescribeDataMaskStrategiesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDataMaskStrategies
+// This API is used to query the DMask list.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+func (c *Client) DescribeDataMaskStrategies(request *DescribeDataMaskStrategiesRequest) (response *DescribeDataMaskStrategiesResponse, err error) {
+    return c.DescribeDataMaskStrategiesWithContext(context.Background(), request)
+}
+
+// DescribeDataMaskStrategies
+// This API is used to query the DMask list.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+func (c *Client) DescribeDataMaskStrategiesWithContext(ctx context.Context, request *DescribeDataMaskStrategiesRequest) (response *DescribeDataMaskStrategiesResponse, err error) {
+    if request == nil {
+        request = NewDescribeDataMaskStrategiesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "DescribeDataMaskStrategies")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDataMaskStrategies require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDataMaskStrategiesResponse()
     err = c.Send(request, response)
     return
 }
@@ -6809,6 +6913,58 @@ func (c *Client) UpdateDataEngineConfigWithContext(ctx context.Context, request 
     return
 }
 
+func NewUpdateDataMaskStrategyRequest() (request *UpdateDataMaskStrategyRequest) {
+    request = &UpdateDataMaskStrategyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "UpdateDataMaskStrategy")
+    
+    
+    return
+}
+
+func NewUpdateDataMaskStrategyResponse() (response *UpdateDataMaskStrategyResponse) {
+    response = &UpdateDataMaskStrategyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateDataMaskStrategy
+// This API is used to update the DMask policy.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+func (c *Client) UpdateDataMaskStrategy(request *UpdateDataMaskStrategyRequest) (response *UpdateDataMaskStrategyResponse, err error) {
+    return c.UpdateDataMaskStrategyWithContext(context.Background(), request)
+}
+
+// UpdateDataMaskStrategy
+// This API is used to update the DMask policy.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+func (c *Client) UpdateDataMaskStrategyWithContext(ctx context.Context, request *UpdateDataMaskStrategyRequest) (response *UpdateDataMaskStrategyResponse, err error) {
+    if request == nil {
+        request = NewUpdateDataMaskStrategyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "UpdateDataMaskStrategy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateDataMaskStrategy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateDataMaskStrategyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateRowFilterRequest() (request *UpdateRowFilterRequest) {
     request = &UpdateRowFilterRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6832,18 +6988,8 @@ func NewUpdateRowFilterResponse() (response *UpdateRowFilterResponse) {
 // This API is used to update row filters. Please note that it updates filters only but not catalogs, databases, or tables.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_NOPERMISSIONTOUSETHEDATAENGINE = "FailedOperation.NoPermissionToUseTheDataEngine"
-//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
-//  INVALIDPARAMETER_DATAENGINEEXECTYPENOTMATCH = "InvalidParameter.DataEngineExecTypeNotMatch"
-//  INVALIDPARAMETER_DATAENGINEPAYMODETYPENOTMATCH = "InvalidParameter.DataEnginePayModeTypeNotMatch"
-//  INVALIDPARAMETER_PARAMETERNOTFOUNDORBENONE = "InvalidParameter.ParameterNotFoundOrBeNone"
-//  RESOURCENOTFOUND_DATAENGINECONFIGINSTANCENOTFOUND = "ResourceNotFound.DataEngineConfigInstanceNotFound"
-//  RESOURCENOTFOUND_DATAENGINECONFIGINSTANCENOTUNIQUE = "ResourceNotFound.DataEngineConfigInstanceNotUnique"
-//  RESOURCENOTFOUND_DATAENGINENOTACTIVITY = "ResourceNotFound.DataEngineNotActivity"
-//  RESOURCENOTFOUND_DATAENGINENOTFOUND = "ResourceNotFound.DataEngineNotFound"
-//  RESOURCENOTFOUND_DATAENGINENOTMULTIVERSION = "ResourceNotFound.DataEngineNotMultiVersion"
 func (c *Client) UpdateRowFilter(request *UpdateRowFilterRequest) (response *UpdateRowFilterResponse, err error) {
     return c.UpdateRowFilterWithContext(context.Background(), request)
 }
@@ -6852,18 +6998,8 @@ func (c *Client) UpdateRowFilter(request *UpdateRowFilterRequest) (response *Upd
 // This API is used to update row filters. Please note that it updates filters only but not catalogs, databases, or tables.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_NOPERMISSIONTOUSETHEDATAENGINE = "FailedOperation.NoPermissionToUseTheDataEngine"
-//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
-//  INVALIDPARAMETER_DATAENGINEEXECTYPENOTMATCH = "InvalidParameter.DataEngineExecTypeNotMatch"
-//  INVALIDPARAMETER_DATAENGINEPAYMODETYPENOTMATCH = "InvalidParameter.DataEnginePayModeTypeNotMatch"
-//  INVALIDPARAMETER_PARAMETERNOTFOUNDORBENONE = "InvalidParameter.ParameterNotFoundOrBeNone"
-//  RESOURCENOTFOUND_DATAENGINECONFIGINSTANCENOTFOUND = "ResourceNotFound.DataEngineConfigInstanceNotFound"
-//  RESOURCENOTFOUND_DATAENGINECONFIGINSTANCENOTUNIQUE = "ResourceNotFound.DataEngineConfigInstanceNotUnique"
-//  RESOURCENOTFOUND_DATAENGINENOTACTIVITY = "ResourceNotFound.DataEngineNotActivity"
-//  RESOURCENOTFOUND_DATAENGINENOTFOUND = "ResourceNotFound.DataEngineNotFound"
-//  RESOURCENOTFOUND_DATAENGINENOTMULTIVERSION = "ResourceNotFound.DataEngineNotMultiVersion"
 func (c *Client) UpdateRowFilterWithContext(ctx context.Context, request *UpdateRowFilterRequest) (response *UpdateRowFilterResponse, err error) {
     if request == nil {
         request = NewUpdateRowFilterRequest()

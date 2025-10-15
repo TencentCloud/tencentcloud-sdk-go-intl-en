@@ -409,19 +409,28 @@ type AddOnSubtitle struct {
 	// Note: supports Chinese characters, letters, digits, spaces, underscores (_), hyphens (-), periods (.), and parentheses. Max 64 characters.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	SubtitleName *string `json:"SubtitleName,omitnil,omitempty" name:"SubtitleName"`
+
+	// Output format of the subtitle. valid values: "WebVTT", "TTML".
+	// Default value: "WebVTT".
+	OutputFormat *string `json:"OutputFormat,omitnil,omitempty" name:"OutputFormat"`
+
+	// Default subtitle track. specifies the current subtitle as the default track when true. a maximum of 1 default subtitle track can be specified.
+	// Default value: `false`.
+	DefaultTrack *bool `json:"DefaultTrack,omitnil,omitempty" name:"DefaultTrack"`
 }
 
 type AiAnalysisResult struct {
 	// Task type. valid values:.
 	// <Li>Classification: intelligent classification.</li>.
 	// <Li>Cover: specifies the intelligent cover.</li>.
-	// <Li>Tag: intelligent tag.</li>.
-	// <Li>FrameTag: specifies intelligent frame-by-frame tagging.</li>.
+	// <Li>Tag: intelligent tagging.</li>.
+	// <Li>FrameTag: intelligent frame-by-frame tagging.</li>.
 	// <Li>Highlight: intelligent highlights</li>.
 	// <Li>DeLogo: intelligent removal.</li>.
 	// <li>Description: large model summarization.</li>
 	// 
 	// <Li>Dubbing: intelligent dubbing.</li>.
+	// <Li>VideoRemake: specifies video deduplication.</li>.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Query result of intelligent categorization task in video content analysis, which is valid if task type is `Classification`.
@@ -463,6 +472,10 @@ type AiAnalysisResult struct {
 	// The query result of a Dubbing task for video content analysis, which is valid when the task type is Dubbing.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	DubbingTask *AiAnalysisTaskDubbingResult `json:"DubbingTask,omitnil,omitempty" name:"DubbingTask"`
+
+	// The query result of a video content deduplication task, which is valid when the task type is VideoRemake.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	VideoRemakeTask *AiAnalysisTaskVideoRemakeResult `json:"VideoRemakeTask,omitnil,omitempty" name:"VideoRemakeTask"`
 }
 
 type AiAnalysisTaskClassificationInput struct {
@@ -850,6 +863,37 @@ type AiAnalysisTaskTagResult struct {
 
 	// Output of intelligent tagging task.
 	Output *AiAnalysisTaskTagOutput `json:"Output,omitnil,omitempty" name:"Output"`
+}
+
+type AiAnalysisTaskVideoRemakeInput struct {
+	// Intelligent deduplication template ID.
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+type AiAnalysisTaskVideoRemakeOutput struct {
+	// Specifies the file path for intelligent video deduplication.
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+
+	// Specifies the storage location for intelligent video deduplication.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
+}
+
+type AiAnalysisTaskVideoRemakeResult struct {
+	// Specifies the task status. valid values: `PROCESSING`, `SUCCESS`, and `FAIL`.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. 0: success. other values: failure.
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Deduplication task input.
+	Input *AiAnalysisTaskVideoRemakeInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Task output.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Output *AiAnalysisTaskVideoRemakeOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
 type AiContentReviewResult struct {
@@ -3994,7 +4038,13 @@ type CreateLiveRecordTemplateRequestParams struct {
 	// Template description, with a length limit of 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Recording type. Valid values: video: audio and video recording; audio: audio recording; auto: automatic detection. If it is left blank, the default value video is used.
+	// Recording type. Valid values: 
+	// 
+	// - video: audio and video recording; 
+	// - audio: audio recording; 
+	// - auto: automatic detection;
+	// 
+	// If it is left blank, "video" will be used as the default value.
 	RecordType *string `json:"RecordType,omitnil,omitempty" name:"RecordType"`
 }
 
@@ -4013,7 +4063,13 @@ type CreateLiveRecordTemplateRequest struct {
 	// Template description, with a length limit of 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Recording type. Valid values: video: audio and video recording; audio: audio recording; auto: automatic detection. If it is left blank, the default value video is used.
+	// Recording type. Valid values: 
+	// 
+	// - video: audio and video recording; 
+	// - audio: audio recording; 
+	// - auto: automatic detection;
+	// 
+	// If it is left blank, "video" will be used as the default value.
 	RecordType *string `json:"RecordType,omitnil,omitempty" name:"RecordType"`
 }
 
@@ -8407,8 +8463,14 @@ func (r *DescribeTaskDetailResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTasksRequestParams struct {
-	// Filter: Task status. Valid values: WAITING (waiting), PROCESSING (processing), FINISH (completed).
+	// Filters task status. available values:.
+	// -WAITING.
+	// -PROCESSING (processing).
+	// -FINISH (completed).
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Indicates whether there is a subtask failure when the task is complete.
+	SubTaskHasFailed *bool `json:"SubTaskHasFailed,omitnil,omitempty" name:"SubTaskHasFailed"`
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
@@ -8426,8 +8488,14 @@ type DescribeTasksRequestParams struct {
 type DescribeTasksRequest struct {
 	*tchttp.BaseRequest
 	
-	// Filter: Task status. Valid values: WAITING (waiting), PROCESSING (processing), FINISH (completed).
+	// Filters task status. available values:.
+	// -WAITING.
+	// -PROCESSING (processing).
+	// -FINISH (completed).
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Indicates whether there is a subtask failure when the task is complete.
+	SubTaskHasFailed *bool `json:"SubTaskHasFailed,omitnil,omitempty" name:"SubTaskHasFailed"`
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
@@ -8455,6 +8523,7 @@ func (r *DescribeTasksRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Status")
+	delete(f, "SubTaskHasFailed")
 	delete(f, "Limit")
 	delete(f, "ScrollToken")
 	delete(f, "StartTime")
@@ -13966,6 +14035,10 @@ type ParseNotificationResponseParams struct {
 	// Event notification security signature. Sign = MD5 (Timestamp + NotifyKey). Note: Media Processing Service concatenates Timestamp and NotifyKey from TaskNotifyConfig as a string and calculates the Sign value through MD5. This value is included in the notification message. Your backend server can verify whether the Sign is correct using the same algorithm, to confirm whether the message is indeed from the Media Processing Service backend.
 	Sign *string `json:"Sign,omitnil,omitempty" name:"Sign"`
 
+	// Batch processing task information. this field has a value only when EventType is BatchTask.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	BatchTaskEvent *BatchSubTaskResult `json:"BatchTaskEvent,omitnil,omitempty" name:"BatchTaskEvent"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -14880,23 +14953,25 @@ type QualityControlItemConfig struct {
 }
 
 type QualityControlResult struct {
-	// The issue type. Valid values:
-	// `Jitter`
-	// `Blur`
-	// `LowLighting`
-	// `HighLighting` (overexposure)
-	// `CrashScreen` (video corruption)
-	// `BlackWhiteEdge`
-	// `SolidColorScreen` (blank screen)
-	// `Noise`
-	// `Mosaic` (pixelation)
-	// `QRCode`
-	// `AppletCode` (Weixin Mini Program code)
-	// `BarCode`
-	// `LowVoice`
-	// `HighVoice`
-	// `NoVoice`
-	// `LowEvaluation` (low no-reference video quality score)
+	// Exception type. valid values:.
+	// Jitter: jitter.
+	// Blur: specifies the blur effect.
+	// LowLighting: specifies low light.
+	// HighLighting: overexposure.
+	// CrashScreen: specifies screen glitch.
+	// BlackWhiteEdge: specifies the black and white edges.
+	// SolidColorScreen: specifies the solid color screen.
+	// Noise: specifies the noise.
+	// Mosaic: mosaic.
+	// QRCode: specifies the qr code.
+	// AppletCode: specifies the mini program code.
+	// BarCode: specifies the barcode.
+	// LowVoice: specifies the bass.
+	// HighVoice: specifies high voice detection.
+	// NoVoice: specifies mute.
+	// LowEvaluation: specifies the video no-reference score (MOS) is below the threshold.
+	// AudioEvaluation: specifies the audio no-reference scoring (MOS) is below the threshold.
+	// AudioNoise: specifies the audio noise.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// The information of a checked segment in quality control.
@@ -15736,12 +15811,12 @@ type SimpleAesDrm struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Uri *string `json:"Uri,omitnil,omitempty" name:"Uri"`
 
-	// The encryption key (a 32-byte string).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Encryption key (32-byte hexadecimal string).
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-	// The initialization vector for encryption (a 32-byte string).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Initialization vector for encryption (32-byte hexadecimal string).
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	Vector *string `json:"Vector,omitnil,omitempty" name:"Vector"`
 }
 
@@ -15945,13 +16020,14 @@ type SmartEraseWatermarkConfig struct {
 	// - advanced
 	WatermarkModel *string `json:"WatermarkModel,omitnil,omitempty" name:"WatermarkModel"`
 
-	// Specifies automatic removal of a custom region.
-	// Specifies the use of an AI model to automatically detect and erase existing targets in the specified region.
-	// Note that this parameter will not take effect when the removal method is custom.
+	// Automatically erase the custom region.
+	// Automatically detects and erases the targeted removal in the specified region using the AI model.
+	// Note that this parameter will not take effect when the removal method is custom. to modify the template, input [] for the clean-up region. if not provided, the template region information remains unchanged.
 	AutoAreas []*EraseArea `json:"AutoAreas,omitnil,omitempty" name:"AutoAreas"`
 
-	// Specifies erasure of a custom region.
-	// Detects and directly performs removal within a specified time range for the selected region.
+	// Specifies the removal of a custom region.
+	// Specifies to directly perform removal without detection and recognition within a selected time range for the specified region.
+	// Note: when modifying the template, pass [] to clear the region. the template region information remains unchanged if not passed.
 	CustomAreas []*EraseTimeArea `json:"CustomAreas,omitnil,omitempty" name:"CustomAreas"`
 }
 
@@ -16354,7 +16430,7 @@ type SpekeDrm struct {
 	// Note: different DRM manufacturers have different limitations on the number of substreams. for example, PallyCon limits the number of substreams to no more than 5, and DRMtoday only supports encryption of up to 9 substreams.
 	KeyServerUrl *string `json:"KeyServerUrl,omitnil,omitempty" name:"KeyServerUrl"`
 
-	// Encryption initialization vector (32-byte string). the field content is user-customized.
+	// Initialization vector for encryption (32-byte hexadecimal string). the field content is user-customized.
 	Vector *string `json:"Vector,omitnil,omitempty" name:"Vector"`
 
 	// Encryption method. cbcs: default method of FairPlay; cenc: default method of PlayReady and Widevine.

@@ -2368,6 +2368,9 @@ type EventSettingsReq struct {
 
 	// Static image deactivate setting.
 	StaticImageDeactivateSetting *StaticImageDeactivateSetting `json:"StaticImageDeactivateSetting,omitnil,omitempty" name:"StaticImageDeactivateSetting"`
+
+	// Dynamic graphic overlay activate configuration
+	MotionGraphicsActivateSetting *MotionGraphicsActivateSetting `json:"MotionGraphicsActivateSetting,omitnil,omitempty" name:"MotionGraphicsActivateSetting"`
 }
 
 type EventSettingsResp struct {
@@ -2403,6 +2406,9 @@ type EventSettingsResp struct {
 
 	// Static image deactivate setting.
 	StaticImageDeactivateSetting *StaticImageDeactivateSetting `json:"StaticImageDeactivateSetting,omitnil,omitempty" name:"StaticImageDeactivateSetting"`
+
+	// Dynamic graphic overlay activate configuration.
+	MotionGraphicsActivateSetting *MotionGraphicsActivateSetting `json:"MotionGraphicsActivateSetting,omitnil,omitempty" name:"MotionGraphicsActivateSetting"`
 }
 
 type FailOverSettings struct {
@@ -2443,6 +2449,12 @@ type FrameCaptureTemplate struct {
 type GeneralSetting struct {
 	// Static graphic overlay configuration.
 	StaticImageSettings *StaticImageSettings `json:"StaticImageSettings,omitnil,omitempty" name:"StaticImageSettings"`
+
+	// Dynamic graphic overlay configuration.
+	MotionGraphicsSettings *MotionGraphicsSetting `json:"MotionGraphicsSettings,omitnil,omitempty" name:"MotionGraphicsSettings"`
+
+	// Thumbnail Configuration.
+	ThumbnailSettings *ThumbnailSettings `json:"ThumbnailSettings,omitnil,omitempty" name:"ThumbnailSettings"`
 }
 
 // Predefined struct for user
@@ -3138,6 +3150,19 @@ func (r *ModifyStreamLiveWatermarkResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ModifyStreamLiveWatermarkResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type MotionGraphicsActivateSetting struct {
+	// Duration in ms, valid when MOTION_Graphics_ACTIVATE, required; An integer in the range of 0-86400000, where 0 represents the duration until the end of the live stream.
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+
+	// The address of HTML5 needs to comply with the format specification of http/https.
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+}
+
+type MotionGraphicsSetting struct {
+	// Whether to enable dynamic graphic overlay, '0' not enabled, '1' enabled; Default 0.
+	MotionGraphicsOverlayEnabled *int64 `json:"MotionGraphicsOverlayEnabled,omitnil,omitempty" name:"MotionGraphicsOverlayEnabled"`
 }
 
 type OutputInfo struct {
@@ -3843,6 +3868,11 @@ type Tag struct {
 
 	// Tag type, optional; for documentation please refer to: https://www.tencentcloud.com/document/product/651/33023#tag.
 	Category *string `json:"Category,omitnil,omitempty" name:"Category"`
+}
+
+type ThumbnailSettings struct {
+	// Generate thumbnail ,0: Disabled ,1: Enabled , Default: 0
+	ThumbnailEnabled *int64 `json:"ThumbnailEnabled,omitnil,omitempty" name:"ThumbnailEnabled"`
 }
 
 type TimeShiftSettingsInfo struct {

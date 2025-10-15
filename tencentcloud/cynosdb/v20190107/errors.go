@@ -311,6 +311,9 @@ const (
 	// Availability zone does not exist.
 	OPERATIONDENIED_PROXYSALEZONECHECKERROR = "OperationDenied.ProxySaleZoneCheckError"
 
+	// 
+	OPERATIONDENIED_PROXYSTOCKCHECKERROR = "OperationDenied.ProxyStockCheckError"
+
 	// Proxy version check_failed.
 	OPERATIONDENIED_PROXYVERSIONCHECKERROR = "OperationDenied.ProxyVersionCheckError"
 

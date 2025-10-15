@@ -1821,6 +1821,297 @@ func (r *CreateClustersResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateIntegrateClusterRequestParams struct {
+	// Availability zone
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// Specifies the ID of the VPC network it belongs to.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Subnet ID.
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// Database version. valid values:. 
+	// <li>Specifies the available values for MYSQL: 5.7, 8.0.</li>.
+	DbVersion *string `json:"DbVersion,omitnil,omitempty" name:"DbVersion"`
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Cluster name, length less than 64 characters. each character value ranges from uppercase/lowercase letters, digits, special symbols ('-','_','.').
+	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+	// Account password (8-64 characters, a combination of uppercase and lowercase letters, digits and symbols ~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/ with any three types).
+	AdminPassword *string `json:"AdminPassword,omitnil,omitempty" name:"AdminPassword"`
+
+	// Port, default 3306, in the range of [0, 65535).
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// Billing mode. 0: pay-as-you-go; 1: monthly subscription. default is pay-as-you-go.
+	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Number of clusters to purchase. value range: [1,3]. default is 1.
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
+
+	// Maximum storage limit of a regular instance, in GB.
+	// When DbType is MYSQL and the storage billing mode is prepaid, this parameter should not exceed the maximum storage specification corresponding to cpu and memory.
+	StorageLimit *int64 `json:"StorageLimit,omitnil,omitempty" name:"StorageLimit"`
+
+	// Specifies the annual and monthly subscription duration.
+	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
+
+	// Specifies the measurement unit for annual and monthly subscription duration. valid values: 's', 'd', 'm', 'y'.
+	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
+
+	// Whether annual/monthly subscription is auto-renewed. default value is 0.
+	// 0 identifies the default renewal method, 1 means auto-renew, 2 indicates no auto-renewal.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
+
+	// Whether to automatically select a voucher. 1: yes; 0: no. default value: 0.
+	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
+
+	// Specifies the tag array information that needs to be bound during cluster creation.
+	ResourceTags []*Tag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
+
+	// Specifies the cluster storage billing mode. 0: pay-as-you-go; 1: monthly subscription. default is pay-as-you-go.
+	// When DbType is MYSQL and the cluster billing mode for computing is postpaid (including DbMode as SERVERLESS), the storage billing mode can only be pay-as-you-go.
+	// Rollback and clone do not support monthly subscription storage.
+	StoragePayMode *int64 `json:"StoragePayMode,omitnil,omitempty" name:"StoragePayMode"`
+
+	// Security group id array.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
+
+	// Specifies the Alarm policy Id array.
+	AlarmPolicyIds []*string `json:"AlarmPolicyIds,omitnil,omitempty" name:"AlarmPolicyIds"`
+
+	// Parameter array, temporarily supports character_set_server (utf8|latin1|gbk|utf8mb4), lower_case_table_names. valid values: 1 (case-insensitive), 0 (case-sensitive).
+	ClusterParams []*ParamItem `json:"ClusterParams,omitnil,omitempty" name:"ClusterParams"`
+
+	// Transaction mode. valid values: 0 (place order and pay), 1 (place order).
+	DealMode *int64 `json:"DealMode,omitnil,omitempty" name:"DealMode"`
+
+	// Parameter template ID. can be obtained through querying parameter template information DescribeParamTemplates.
+	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
+
+	// Multi-AZ address.
+	SlaveZone *string `json:"SlaveZone,omitnil,omitempty" name:"SlaveZone"`
+
+	// Initializes configuration information, mainly used to purchase clusters with different specification instances.
+	InstanceInitInfos []*IntegrateInstanceInfo `json:"InstanceInitInfos,omitnil,omitempty" name:"InstanceInitInfos"`
+
+	// Global database unique identifier.
+	GdnId *string `json:"GdnId,omitnil,omitempty" name:"GdnId"`
+
+	// Database proxy configuration.
+	ProxyConfig *ProxyConfigInfo `json:"ProxyConfig,omitnil,omitempty" name:"ProxyConfig"`
+
+	// Specifies whether to automatically archive.
+	AutoArchive *string `json:"AutoArchive,omitnil,omitempty" name:"AutoArchive"`
+
+	// Processing time after pausing.
+	AutoArchiveDelayHours *int64 `json:"AutoArchiveDelayHours,omitnil,omitempty" name:"AutoArchiveDelayHours"`
+
+	// Encryption method (consists of encryption algorithm and key pair version).
+	EncryptMethod *string `json:"EncryptMethod,omitnil,omitempty" name:"EncryptMethod"`
+
+	// Describes the cluster configuration information.
+	IntegrateCreateClusterConfig *IntegrateCreateClusterConfig `json:"IntegrateCreateClusterConfig,omitnil,omitempty" name:"IntegrateCreateClusterConfig"`
+
+	// Storage architecture type. valid values: 1.0/2.0. default value: 1.0.
+	StorageVersion *string `json:"StorageVersion,omitnil,omitempty" name:"StorageVersion"`
+}
+
+type CreateIntegrateClusterRequest struct {
+	*tchttp.BaseRequest
+	
+	// Availability zone
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// Specifies the ID of the VPC network it belongs to.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Subnet ID.
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// Database version. valid values:. 
+	// <li>Specifies the available values for MYSQL: 5.7, 8.0.</li>.
+	DbVersion *string `json:"DbVersion,omitnil,omitempty" name:"DbVersion"`
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Cluster name, length less than 64 characters. each character value ranges from uppercase/lowercase letters, digits, special symbols ('-','_','.').
+	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+	// Account password (8-64 characters, a combination of uppercase and lowercase letters, digits and symbols ~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/ with any three types).
+	AdminPassword *string `json:"AdminPassword,omitnil,omitempty" name:"AdminPassword"`
+
+	// Port, default 3306, in the range of [0, 65535).
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// Billing mode. 0: pay-as-you-go; 1: monthly subscription. default is pay-as-you-go.
+	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Number of clusters to purchase. value range: [1,3]. default is 1.
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
+
+	// Maximum storage limit of a regular instance, in GB.
+	// When DbType is MYSQL and the storage billing mode is prepaid, this parameter should not exceed the maximum storage specification corresponding to cpu and memory.
+	StorageLimit *int64 `json:"StorageLimit,omitnil,omitempty" name:"StorageLimit"`
+
+	// Specifies the annual and monthly subscription duration.
+	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
+
+	// Specifies the measurement unit for annual and monthly subscription duration. valid values: 's', 'd', 'm', 'y'.
+	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
+
+	// Whether annual/monthly subscription is auto-renewed. default value is 0.
+	// 0 identifies the default renewal method, 1 means auto-renew, 2 indicates no auto-renewal.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
+
+	// Whether to automatically select a voucher. 1: yes; 0: no. default value: 0.
+	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
+
+	// Specifies the tag array information that needs to be bound during cluster creation.
+	ResourceTags []*Tag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
+
+	// Specifies the cluster storage billing mode. 0: pay-as-you-go; 1: monthly subscription. default is pay-as-you-go.
+	// When DbType is MYSQL and the cluster billing mode for computing is postpaid (including DbMode as SERVERLESS), the storage billing mode can only be pay-as-you-go.
+	// Rollback and clone do not support monthly subscription storage.
+	StoragePayMode *int64 `json:"StoragePayMode,omitnil,omitempty" name:"StoragePayMode"`
+
+	// Security group id array.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
+
+	// Specifies the Alarm policy Id array.
+	AlarmPolicyIds []*string `json:"AlarmPolicyIds,omitnil,omitempty" name:"AlarmPolicyIds"`
+
+	// Parameter array, temporarily supports character_set_server (utf8|latin1|gbk|utf8mb4), lower_case_table_names. valid values: 1 (case-insensitive), 0 (case-sensitive).
+	ClusterParams []*ParamItem `json:"ClusterParams,omitnil,omitempty" name:"ClusterParams"`
+
+	// Transaction mode. valid values: 0 (place order and pay), 1 (place order).
+	DealMode *int64 `json:"DealMode,omitnil,omitempty" name:"DealMode"`
+
+	// Parameter template ID. can be obtained through querying parameter template information DescribeParamTemplates.
+	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
+
+	// Multi-AZ address.
+	SlaveZone *string `json:"SlaveZone,omitnil,omitempty" name:"SlaveZone"`
+
+	// Initializes configuration information, mainly used to purchase clusters with different specification instances.
+	InstanceInitInfos []*IntegrateInstanceInfo `json:"InstanceInitInfos,omitnil,omitempty" name:"InstanceInitInfos"`
+
+	// Global database unique identifier.
+	GdnId *string `json:"GdnId,omitnil,omitempty" name:"GdnId"`
+
+	// Database proxy configuration.
+	ProxyConfig *ProxyConfigInfo `json:"ProxyConfig,omitnil,omitempty" name:"ProxyConfig"`
+
+	// Specifies whether to automatically archive.
+	AutoArchive *string `json:"AutoArchive,omitnil,omitempty" name:"AutoArchive"`
+
+	// Processing time after pausing.
+	AutoArchiveDelayHours *int64 `json:"AutoArchiveDelayHours,omitnil,omitempty" name:"AutoArchiveDelayHours"`
+
+	// Encryption method (consists of encryption algorithm and key pair version).
+	EncryptMethod *string `json:"EncryptMethod,omitnil,omitempty" name:"EncryptMethod"`
+
+	// Describes the cluster configuration information.
+	IntegrateCreateClusterConfig *IntegrateCreateClusterConfig `json:"IntegrateCreateClusterConfig,omitnil,omitempty" name:"IntegrateCreateClusterConfig"`
+
+	// Storage architecture type. valid values: 1.0/2.0. default value: 1.0.
+	StorageVersion *string `json:"StorageVersion,omitnil,omitempty" name:"StorageVersion"`
+}
+
+func (r *CreateIntegrateClusterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateIntegrateClusterRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Zone")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "DbVersion")
+	delete(f, "ProjectId")
+	delete(f, "ClusterName")
+	delete(f, "AdminPassword")
+	delete(f, "Port")
+	delete(f, "PayMode")
+	delete(f, "Count")
+	delete(f, "StorageLimit")
+	delete(f, "TimeSpan")
+	delete(f, "TimeUnit")
+	delete(f, "AutoRenewFlag")
+	delete(f, "AutoVoucher")
+	delete(f, "ResourceTags")
+	delete(f, "StoragePayMode")
+	delete(f, "SecurityGroupIds")
+	delete(f, "AlarmPolicyIds")
+	delete(f, "ClusterParams")
+	delete(f, "DealMode")
+	delete(f, "ParamTemplateId")
+	delete(f, "SlaveZone")
+	delete(f, "InstanceInitInfos")
+	delete(f, "GdnId")
+	delete(f, "ProxyConfig")
+	delete(f, "AutoArchive")
+	delete(f, "AutoArchiveDelayHours")
+	delete(f, "EncryptMethod")
+	delete(f, "IntegrateCreateClusterConfig")
+	delete(f, "StorageVersion")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateIntegrateClusterRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateIntegrateClusterResponseParams struct {
+	// Frozen transaction ID.
+	TranId *string `json:"TranId,omitnil,omitempty" name:"TranId"`
+
+	// Order ID
+	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
+
+	// Resource ID list (this field is no longer maintained. please use the dealNames field and the query API DescribeResourcesByDealName to obtain resource ids).
+	ResourceIds []*string `json:"ResourceIds,omitnil,omitempty" name:"ResourceIds"`
+
+	// Cluster ID list (this field is no longer maintained. please use the dealNames field to get cluster ids via the DescribeResourcesByDealName api.).
+	ClusterIds []*string `json:"ClusterIds,omitnil,omitempty" name:"ClusterIds"`
+
+	// Large order number.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BigDealIds []*string `json:"BigDealIds,omitnil,omitempty" name:"BigDealIds"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateIntegrateClusterResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateIntegrateClusterResponseParams `json:"Response"`
+}
+
+func (r *CreateIntegrateClusterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateIntegrateClusterResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateParamTemplateRequestParams struct {
 	// Template name
 	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
@@ -5826,6 +6117,76 @@ func (r *DescribeInstancesWithinSameClusterResponse) FromJsonString(s string) er
 }
 
 // Predefined struct for user
+type DescribeIntegrateTaskRequestParams struct {
+	// Large order id. must choose between large order id and sub-order id.
+	BigDealId *string `json:"BigDealId,omitnil,omitempty" name:"BigDealId"`
+
+	// Order list
+	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
+}
+
+type DescribeIntegrateTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Large order id. must choose between large order id and sub-order id.
+	BigDealId *string `json:"BigDealId,omitnil,omitempty" name:"BigDealId"`
+
+	// Order list
+	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
+}
+
+func (r *DescribeIntegrateTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeIntegrateTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "BigDealId")
+	delete(f, "DealNames")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeIntegrateTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeIntegrateTaskResponseParams struct {
+	// Current step.
+	CurrentStep *string `json:"CurrentStep,omitnil,omitempty" name:"CurrentStep"`
+
+	// Current progress.
+	CurrentProgress *string `json:"CurrentProgress,omitnil,omitempty" name:"CurrentProgress"`
+
+	// Indicates the task status.
+	TaskStatus *string `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeIntegrateTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeIntegrateTaskResponseParams `json:"Response"`
+}
+
+func (r *DescribeIntegrateTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeIntegrateTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeIsolatedInstancesRequestParams struct {
 	// Number of returned results. the default value is 20. the maximum value is 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
@@ -8048,6 +8409,14 @@ type InstanceInitInfo struct {
 	MaxRoCpu *float64 `json:"MaxRoCpu,omitnil,omitempty" name:"MaxRoCpu"`
 }
 
+type InstanceNameWeight struct {
+	// Instance name. specifies the name defined by InstanceInitInfo.InstanceName in cluster creation.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// Weight
+	Weight *int64 `json:"Weight,omitnil,omitempty" name:"Weight"`
+}
+
 type InstanceNetInfo struct {
 	// Network type.
 	InstanceGroupType *string `json:"InstanceGroupType,omitnil,omitempty" name:"InstanceGroupType"`
@@ -8121,6 +8490,37 @@ type InstanceSpec struct {
 
 	// Inventory quantity.
 	StockCount *int64 `json:"StockCount,omitnil,omitempty" name:"StockCount"`
+}
+
+type IntegrateCreateClusterConfig struct {
+	// Retention days of binlog. value range: 7-1830.
+	BinlogSaveDays *int64 `json:"BinlogSaveDays,omitnil,omitempty" name:"BinlogSaveDays"`
+
+	// Specifies the backup retention days. value range: 7-1830.
+	BackupSaveDays *int64 `json:"BackupSaveDays,omitnil,omitempty" name:"BackupSaveDays"`
+
+	// Specifies the semi-sync timeout period. value range: [1000,4294967295].
+	SemiSyncTimeout *int64 `json:"SemiSyncTimeout,omitnil,omitempty" name:"SemiSyncTimeout"`
+
+	// proxy connection address configuration message.
+	ProxyEndPointConfigs []*ProxyEndPointConfigInfo `json:"ProxyEndPointConfigs,omitnil,omitempty" name:"ProxyEndPointConfigs"`
+}
+
+type IntegrateInstanceInfo struct {
+	// Specifies the cpu of the instance.
+	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
+
+	// Specifies the instance memory.
+	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
+
+	// Instance type (rw/ro).
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Number of instances. value range: [1,15].
+	InstanceCount *int64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
+
+	// Instance machine type. valid values: universal type (common), exclusive type.
+	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 }
 
 // Predefined struct for user
@@ -11688,6 +12088,23 @@ type PolicyRule struct {
 	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 }
 
+type ProxyConfigInfo struct {
+	// Number of database proxy group nodes. this parameter is no longer recommended. recommend using ProxyZones.
+	ProxyCount *int64 `json:"ProxyCount,omitnil,omitempty" name:"ProxyCount"`
+
+	// Number of CPU cores
+	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
+
+	// Specifies the memory.
+	Mem *int64 `json:"Mem,omitnil,omitempty" name:"Mem"`
+
+	// Description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Database node information (this parameter is used in combination with ProxyCount, either one must be manually input).
+	ProxyZones []*ProxyZone `json:"ProxyZones,omitnil,omitempty" name:"ProxyZones"`
+}
+
 type ProxyConnectionPoolInfo struct {
 	// Specifies the persistence threshold of the connection pool. the unit is seconds.
 	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitnil,omitempty" name:"ConnectionPoolTimeOut"`
@@ -11697,6 +12114,29 @@ type ProxyConnectionPoolInfo struct {
 
 	// Specifies the connection pool type. valid values: SessionConnectionPool (session-level connection pool).
 	ConnectionPoolType *string `json:"ConnectionPoolType,omitnil,omitempty" name:"ConnectionPoolType"`
+}
+
+type ProxyEndPointConfigInfo struct {
+	// Specifies the ID of the VPC network it belongs to.
+	UniqueVpcId *string `json:"UniqueVpcId,omitnil,omitempty" name:"UniqueVpcId"`
+
+	// Subnet ID.
+	UniqueSubnetId *string `json:"UniqueSubnetId,omitnil,omitempty" name:"UniqueSubnetId"`
+
+	// Security group id array.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
+
+	// Weight mode: system-system allocation, custom-custom.
+	WeightMode *string `json:"WeightMode,omitnil,omitempty" name:"WeightMode"`
+
+	// Specifies whether to automatically add a read-only instance. valid values: yes, no.
+	AutoAddRo *string `json:"AutoAddRo,omitnil,omitempty" name:"AutoAddRo"`
+
+	// Read-Write attribute. valid values: READWRITE, READONLY.
+	RwType *string `json:"RwType,omitnil,omitempty" name:"RwType"`
+
+	// Weight information.
+	InstanceNameWeights []*InstanceNameWeight `json:"InstanceNameWeights,omitnil,omitempty" name:"InstanceNameWeights"`
 }
 
 type ProxyGroup struct {
