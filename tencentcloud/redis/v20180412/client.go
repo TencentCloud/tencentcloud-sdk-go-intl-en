@@ -1853,7 +1853,7 @@ func NewDescribeInstanceAccountResponse() (response *DescribeInstanceAccountResp
 }
 
 // DescribeInstanceAccount
-// This API is used to query the information of an instance sub-account.
+// This API is used to view instance account information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -1866,7 +1866,7 @@ func (c *Client) DescribeInstanceAccount(request *DescribeInstanceAccountRequest
 }
 
 // DescribeInstanceAccount
-// This API is used to query the information of an instance sub-account.
+// This API is used to view instance account information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -3873,7 +3873,7 @@ func NewDescribeSecondLevelBackupInfoResponse() (response *DescribeSecondLevelBa
 }
 
 // DescribeSecondLevelBackupInfo
-// This API is used to query the second-level backup information on an instance.
+// This API is used to query second-level backup information for the instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -3886,7 +3886,7 @@ func (c *Client) DescribeSecondLevelBackupInfo(request *DescribeSecondLevelBacku
 }
 
 // DescribeSecondLevelBackupInfo
-// This API is used to query the second-level backup information on an instance.
+// This API is used to query second-level backup information for the instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -5143,7 +5143,7 @@ func NewModifyInstanceAccountResponse() (response *ModifyInstanceAccountResponse
 }
 
 // ModifyInstanceAccount
-// This API is used to modify the instance sub-account.
+// This API is used to modify an instance account.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -5159,7 +5159,7 @@ func (c *Client) ModifyInstanceAccount(request *ModifyInstanceAccountRequest) (r
 }
 
 // ModifyInstanceAccount
-// This API is used to modify the instance sub-account.
+// This API is used to modify an instance account.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -5281,7 +5281,7 @@ func NewModifyInstanceBackupModeResponse() (response *ModifyInstanceBackupModeRe
 }
 
 // ModifyInstanceBackupMode
-// This API is used to modify the instance backup mode.
+// This API is used to modify the backup mode of an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -5294,7 +5294,7 @@ func (c *Client) ModifyInstanceBackupMode(request *ModifyInstanceBackupModeReque
 }
 
 // ModifyInstanceBackupMode
-// This API is used to modify the instance backup mode.
+// This API is used to modify the backup mode of an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"

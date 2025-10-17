@@ -841,6 +841,90 @@ func (c *Client) CreatePrometheusAgentWithContext(ctx context.Context, request *
     return
 }
 
+func NewCreatePrometheusAlertGroupRequest() (request *CreatePrometheusAlertGroupRequest) {
+    request = &CreatePrometheusAlertGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "CreatePrometheusAlertGroup")
+    
+    
+    return
+}
+
+func NewCreatePrometheusAlertGroupResponse() (response *CreatePrometheusAlertGroupResponse) {
+    response = &CreatePrometheusAlertGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreatePrometheusAlertGroup
+// This API is used to create a Prometheus alert rule groups.
+//
+// 
+//
+// This API is used to group alert rules, which can include multiple alert rules. Alert messages within the group are sent via the alert group's notification template.
+//
+// This API is used to enable individually creating enabled/disabled alert rules under an alert group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreatePrometheusAlertGroup(request *CreatePrometheusAlertGroupRequest) (response *CreatePrometheusAlertGroupResponse, err error) {
+    return c.CreatePrometheusAlertGroupWithContext(context.Background(), request)
+}
+
+// CreatePrometheusAlertGroup
+// This API is used to create a Prometheus alert rule groups.
+//
+// 
+//
+// This API is used to group alert rules, which can include multiple alert rules. Alert messages within the group are sent via the alert group's notification template.
+//
+// This API is used to enable individually creating enabled/disabled alert rules under an alert group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreatePrometheusAlertGroupWithContext(ctx context.Context, request *CreatePrometheusAlertGroupRequest) (response *CreatePrometheusAlertGroupResponse, err error) {
+    if request == nil {
+        request = NewCreatePrometheusAlertGroupRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "monitor", APIVersion, "CreatePrometheusAlertGroup")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePrometheusAlertGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreatePrometheusAlertGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreatePrometheusAlertPolicyRequest() (request *CreatePrometheusAlertPolicyRequest) {
     request = &CreatePrometheusAlertPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2147,6 +2231,78 @@ func (c *Client) DeletePolicyGroupWithContext(ctx context.Context, request *Dele
     request.SetContext(ctx)
     
     response = NewDeletePolicyGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeletePrometheusAlertGroupsRequest() (request *DeletePrometheusAlertGroupsRequest) {
+    request = &DeletePrometheusAlertGroupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DeletePrometheusAlertGroups")
+    
+    
+    return
+}
+
+func NewDeletePrometheusAlertGroupsResponse() (response *DeletePrometheusAlertGroupsResponse) {
+    response = &DeletePrometheusAlertGroupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeletePrometheusAlertGroups
+// This API is used to delete Prometheus alert rule groups.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeletePrometheusAlertGroups(request *DeletePrometheusAlertGroupsRequest) (response *DeletePrometheusAlertGroupsResponse, err error) {
+    return c.DeletePrometheusAlertGroupsWithContext(context.Background(), request)
+}
+
+// DeletePrometheusAlertGroups
+// This API is used to delete Prometheus alert rule groups.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeletePrometheusAlertGroupsWithContext(ctx context.Context, request *DeletePrometheusAlertGroupsRequest) (response *DeletePrometheusAlertGroupsResponse, err error) {
+    if request == nil {
+        request = NewDeletePrometheusAlertGroupsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "monitor", APIVersion, "DeletePrometheusAlertGroups")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeletePrometheusAlertGroups require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeletePrometheusAlertGroupsResponse()
     err = c.Send(request, response)
     return
 }
@@ -4961,6 +5117,78 @@ func (c *Client) DescribePrometheusAgentsWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewDescribePrometheusAgentsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePrometheusAlertGroupsRequest() (request *DescribePrometheusAlertGroupsRequest) {
+    request = &DescribePrometheusAlertGroupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusAlertGroups")
+    
+    
+    return
+}
+
+func NewDescribePrometheusAlertGroupsResponse() (response *DescribePrometheusAlertGroupsResponse) {
+    response = &DescribePrometheusAlertGroupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribePrometheusAlertGroups
+// This API is used to query alarm groups under a given prometheus.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribePrometheusAlertGroups(request *DescribePrometheusAlertGroupsRequest) (response *DescribePrometheusAlertGroupsResponse, err error) {
+    return c.DescribePrometheusAlertGroupsWithContext(context.Background(), request)
+}
+
+// DescribePrometheusAlertGroups
+// This API is used to query alarm groups under a given prometheus.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribePrometheusAlertGroupsWithContext(ctx context.Context, request *DescribePrometheusAlertGroupsRequest) (response *DescribePrometheusAlertGroupsResponse, err error) {
+    if request == nil {
+        request = NewDescribePrometheusAlertGroupsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "monitor", APIVersion, "DescribePrometheusAlertGroups")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrometheusAlertGroups require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrometheusAlertGroupsResponse()
     err = c.Send(request, response)
     return
 }
@@ -9271,6 +9499,150 @@ func (c *Client) UpdatePrometheusAgentStatusWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewUpdatePrometheusAgentStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdatePrometheusAlertGroupRequest() (request *UpdatePrometheusAlertGroupRequest) {
+    request = &UpdatePrometheusAlertGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "UpdatePrometheusAlertGroup")
+    
+    
+    return
+}
+
+func NewUpdatePrometheusAlertGroupResponse() (response *UpdatePrometheusAlertGroupResponse) {
+    response = &UpdatePrometheusAlertGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdatePrometheusAlertGroup
+// This API is used to update Prometheus alert rule groups.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) UpdatePrometheusAlertGroup(request *UpdatePrometheusAlertGroupRequest) (response *UpdatePrometheusAlertGroupResponse, err error) {
+    return c.UpdatePrometheusAlertGroupWithContext(context.Background(), request)
+}
+
+// UpdatePrometheusAlertGroup
+// This API is used to update Prometheus alert rule groups.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) UpdatePrometheusAlertGroupWithContext(ctx context.Context, request *UpdatePrometheusAlertGroupRequest) (response *UpdatePrometheusAlertGroupResponse, err error) {
+    if request == nil {
+        request = NewUpdatePrometheusAlertGroupRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "monitor", APIVersion, "UpdatePrometheusAlertGroup")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdatePrometheusAlertGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdatePrometheusAlertGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdatePrometheusAlertGroupStateRequest() (request *UpdatePrometheusAlertGroupStateRequest) {
+    request = &UpdatePrometheusAlertGroupStateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "UpdatePrometheusAlertGroupState")
+    
+    
+    return
+}
+
+func NewUpdatePrometheusAlertGroupStateResponse() (response *UpdatePrometheusAlertGroupStateResponse) {
+    response = &UpdatePrometheusAlertGroupStateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdatePrometheusAlertGroupState
+// This API is used to batch update the status of alarm groups and set all rules grouped in them to the target status.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) UpdatePrometheusAlertGroupState(request *UpdatePrometheusAlertGroupStateRequest) (response *UpdatePrometheusAlertGroupStateResponse, err error) {
+    return c.UpdatePrometheusAlertGroupStateWithContext(context.Background(), request)
+}
+
+// UpdatePrometheusAlertGroupState
+// This API is used to batch update the status of alarm groups and set all rules grouped in them to the target status.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) UpdatePrometheusAlertGroupStateWithContext(ctx context.Context, request *UpdatePrometheusAlertGroupStateRequest) (response *UpdatePrometheusAlertGroupStateResponse, err error) {
+    if request == nil {
+        request = NewUpdatePrometheusAlertGroupStateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "monitor", APIVersion, "UpdatePrometheusAlertGroupState")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdatePrometheusAlertGroupState require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdatePrometheusAlertGroupStateResponse()
     err = c.Send(request, response)
     return
 }

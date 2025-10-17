@@ -57,7 +57,10 @@ type AddReplicationInstanceRequestParams struct {
 	// Replication group ID. Log in to the [global replication](https://console.tencentcloud.com/redis/replication) page of the Redis console and obtain it.
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
-	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
+	// Instance ID.
+	// - There are region and AZ limitations for adding a replication group instance. For detailed information, see [Use Limits](https://www.tencentcloud.comom/document/product/239/71934?from_cn_redirect=1).
+	// - Currently, only Redis 4.0 and 5.0 cluster architecture instances support being added to the replication groups.
+	// - Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy the ID of the instance that needs to be added to the replication group in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Assigns roles to instances added to the replication group. <ul><li>rw: read-write;</li> <li>r: read-only.</li></ul>
@@ -70,7 +73,10 @@ type AddReplicationInstanceRequest struct {
 	// Replication group ID. Log in to the [global replication](https://console.tencentcloud.com/redis/replication) page of the Redis console and obtain it.
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
-	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
+	// Instance ID.
+	// - There are region and AZ limitations for adding a replication group instance. For detailed information, see [Use Limits](https://www.tencentcloud.comom/document/product/239/71934?from_cn_redirect=1).
+	// - Currently, only Redis 4.0 and 5.0 cluster architecture instances support being added to the replication groups.
+	// - Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy the ID of the instance that needs to be added to the replication group in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Assigns roles to instances added to the replication group. <ul><li>rw: read-write;</li> <li>r: read-only.</li></ul>
@@ -188,7 +194,9 @@ type ApplyParamsTemplateRequestParams struct {
 	// Instance ID list. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy the instance ID in the instance list.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// ID of the applied parameter template, which can be obtained through the response parameter **TemplateId** of the API [DescribeParamTemplateInfo](https://intl.cloud.tencent.com/document/product/239/58748?from_cn_redirect=1).
+	// ID of the applied parameter template.
+	// - The parameter template ID can be obtained through the response parameter **TemplateId** of the API [DescribeParamTemplateInfo](https://www.tencentcloud.comom/document/product/239/58748?from_cn_redirect=1).
+	// - The operation can only be successfully performed when the parameter template version matches the architecture version of the target instance. A version mismatch will trigger an execution error.
 	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
@@ -198,7 +206,9 @@ type ApplyParamsTemplateRequest struct {
 	// Instance ID list. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy the instance ID in the instance list.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// ID of the applied parameter template, which can be obtained through the response parameter **TemplateId** of the API [DescribeParamTemplateInfo](https://intl.cloud.tencent.com/document/product/239/58748?from_cn_redirect=1).
+	// ID of the applied parameter template.
+	// - The parameter template ID can be obtained through the response parameter **TemplateId** of the API [DescribeParamTemplateInfo](https://www.tencentcloud.comom/document/product/239/58748?from_cn_redirect=1).
+	// - The operation can only be successfully performed when the parameter template version matches the architecture version of the target instance. A version mismatch will trigger an execution error.
 	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
@@ -638,14 +648,14 @@ func (r *ChangeReplicaToMasterResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CleanUpInstanceRequestParams struct {
-	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
+	// Instance ID. Log in to the [Redis console recycle bin](https://console.cloud.tencent.com/redis/recycle), and copy it from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type CleanUpInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
+	// Instance ID. Log in to the [Redis console recycle bin](https://console.cloud.tencent.com/redis/recycle), and copy it from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -702,6 +712,9 @@ type ClearInstanceRequestParams struct {
 	// - Password-free access: No configuration is required.
 	// - Password authentication: The password is required. It cannot start with a forward slash (/) and should contain 8 to 64 characters, including at least two of the following types: lowercase letters, uppercase letters, digits, and special characters (such as ()`~!@#$%^&*-+=_|{}[]:;<>,.?/).
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// Whether to encrypt the password.
+	EncryptPassword *bool `json:"EncryptPassword,omitnil,omitempty" name:"EncryptPassword"`
 }
 
 type ClearInstanceRequest struct {
@@ -714,6 +727,9 @@ type ClearInstanceRequest struct {
 	// - Password-free access: No configuration is required.
 	// - Password authentication: The password is required. It cannot start with a forward slash (/) and should contain 8 to 64 characters, including at least two of the following types: lowercase letters, uppercase letters, digits, and special characters (such as ()`~!@#$%^&*-+=_|{}[]:;<>,.?/).
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// Whether to encrypt the password.
+	EncryptPassword *bool `json:"EncryptPassword,omitnil,omitempty" name:"EncryptPassword"`
 }
 
 func (r *ClearInstanceRequest) ToJsonString() string {
@@ -730,6 +746,7 @@ func (r *ClearInstanceRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceId")
 	delete(f, "Password")
+	delete(f, "EncryptPassword")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ClearInstanceRequest has unknown keys!", "")
 	}
@@ -780,7 +797,7 @@ type CloneInstancesRequestParams struct {
 	// Purchase duration of an instance. <ul><li>Unit: Month</li><li>Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60` (for monthly subscription mode).</li><li> Valid value: `1` (for pay-as-you-go mode).</li></ul>
 	Period *uint64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Security group ID, which can be obtained on the <b>Security Group</b> page in the console.
+	// Security group ID. Call the [DescribeInstanceSecurityGroup](https://www.tencentcloud.comom/document/product/239/34447?from_cn_redirect=1) API to obtain the security group ID for the instance.
 	SecurityGroupIdList []*string `json:"SecurityGroupIdList,omitnil,omitempty" name:"SecurityGroupIdList"`
 
 	// Backup ID of the clone instance, which can be obtained through the [DescribeInstanceBackups](https://intl.cloud.tencent.com/document/product/239/20011?from_cn_redirect=1) API.
@@ -827,6 +844,9 @@ type CloneInstancesRequestParams struct {
 	// Time to restore data for cloning.
 	// Only instances with second-level backup enabled are supported.
 	CloneTime *string `json:"CloneTime,omitnil,omitempty" name:"CloneTime"`
+
+	// Whether to encrypt the password.
+	EncryptPassword *bool `json:"EncryptPassword,omitnil,omitempty" name:"EncryptPassword"`
 }
 
 type CloneInstancesRequest struct {
@@ -849,7 +869,7 @@ type CloneInstancesRequest struct {
 	// Purchase duration of an instance. <ul><li>Unit: Month</li><li>Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60` (for monthly subscription mode).</li><li> Valid value: `1` (for pay-as-you-go mode).</li></ul>
 	Period *uint64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Security group ID, which can be obtained on the <b>Security Group</b> page in the console.
+	// Security group ID. Call the [DescribeInstanceSecurityGroup](https://www.tencentcloud.comom/document/product/239/34447?from_cn_redirect=1) API to obtain the security group ID for the instance.
 	SecurityGroupIdList []*string `json:"SecurityGroupIdList,omitnil,omitempty" name:"SecurityGroupIdList"`
 
 	// Backup ID of the clone instance, which can be obtained through the [DescribeInstanceBackups](https://intl.cloud.tencent.com/document/product/239/20011?from_cn_redirect=1) API.
@@ -896,6 +916,9 @@ type CloneInstancesRequest struct {
 	// Time to restore data for cloning.
 	// Only instances with second-level backup enabled are supported.
 	CloneTime *string `json:"CloneTime,omitnil,omitempty" name:"CloneTime"`
+
+	// Whether to encrypt the password.
+	EncryptPassword *bool `json:"EncryptPassword,omitnil,omitempty" name:"EncryptPassword"`
 }
 
 func (r *CloneInstancesRequest) ToJsonString() string {
@@ -930,6 +953,7 @@ func (r *CloneInstancesRequest) FromJsonString(s string) error {
 	delete(f, "TemplateId")
 	delete(f, "AlarmPolicyList")
 	delete(f, "CloneTime")
+	delete(f, "EncryptPassword")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloneInstancesRequest has unknown keys!", "")
 	}
@@ -1049,13 +1073,16 @@ type CreateInstanceAccountRequestParams struct {
 	// - master: Master node.- replication: Replica node.
 	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil,omitempty" name:"ReadonlyPolicy"`
 
-	// The read/write permission of the account supports the selection of read-only and read/write permissions.
-	// - r: read-only
-	// - rw: Read/Write permission.
+	// Read-write permissions of the account. It supports the selection of read-only and read-write permissions.
+	// - r: read-only.
+	// - rw: read-write.
 	Privilege *string `json:"Privilege,omitnil,omitempty" name:"Privilege"`
 
-	// Sub-account description information, with a length of [0, 64] bytes, supports Chinese characters.
+	// Description information about account remarks, with a length of [0, 64] bytes.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Whether to encrypt the password.
+	EncryptPassword *bool `json:"EncryptPassword,omitnil,omitempty" name:"EncryptPassword"`
 }
 
 type CreateInstanceAccountRequest struct {
@@ -1079,13 +1106,16 @@ type CreateInstanceAccountRequest struct {
 	// - master: Master node.- replication: Replica node.
 	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil,omitempty" name:"ReadonlyPolicy"`
 
-	// The read/write permission of the account supports the selection of read-only and read/write permissions.
-	// - r: read-only
-	// - rw: Read/Write permission.
+	// Read-write permissions of the account. It supports the selection of read-only and read-write permissions.
+	// - r: read-only.
+	// - rw: read-write.
 	Privilege *string `json:"Privilege,omitnil,omitempty" name:"Privilege"`
 
-	// Sub-account description information, with a length of [0, 64] bytes, supports Chinese characters.
+	// Description information about account remarks, with a length of [0, 64] bytes.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Whether to encrypt the password.
+	EncryptPassword *bool `json:"EncryptPassword,omitnil,omitempty" name:"EncryptPassword"`
 }
 
 func (r *CreateInstanceAccountRequest) ToJsonString() string {
@@ -1106,6 +1136,7 @@ func (r *CreateInstanceAccountRequest) FromJsonString(s string) error {
 	delete(f, "ReadonlyPolicy")
 	delete(f, "Privilege")
 	delete(f, "Remark")
+	delete(f, "EncryptPassword")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstanceAccountRequest has unknown keys!", "")
 	}
@@ -1114,7 +1145,7 @@ func (r *CreateInstanceAccountRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateInstanceAccountResponseParams struct {
-	// Task ID
+	// Task ID.
 	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1247,6 +1278,9 @@ type CreateInstancesRequestParams struct {
 
 	// Alarm policy ID array.- Please log in to [Tencent Cloud Observability Platform - Alarm Management - Policy Management](https://console.cloud.tencent.com/monitor/alarm/policy) to access the alarm policy ID.- If this parameter is not configured, the default alarm policy will be bound. For the specific information about the default alarm policy, please log in to [Tencent Cloud Observability Platform - Alarm Management - Policy Management](https://console.cloud.tencent.com/monitor/alarm/policy) to view.
 	AlarmPolicyList []*string `json:"AlarmPolicyList,omitnil,omitempty" name:"AlarmPolicyList"`
+
+	// Whether to encrypt the password.
+	EncryptPassword *bool `json:"EncryptPassword,omitnil,omitempty" name:"EncryptPassword"`
 }
 
 type CreateInstancesRequest struct {
@@ -1360,6 +1394,9 @@ type CreateInstancesRequest struct {
 
 	// Alarm policy ID array.- Please log in to [Tencent Cloud Observability Platform - Alarm Management - Policy Management](https://console.cloud.tencent.com/monitor/alarm/policy) to access the alarm policy ID.- If this parameter is not configured, the default alarm policy will be bound. For the specific information about the default alarm policy, please log in to [Tencent Cloud Observability Platform - Alarm Management - Policy Management](https://console.cloud.tencent.com/monitor/alarm/policy) to view.
 	AlarmPolicyList []*string `json:"AlarmPolicyList,omitnil,omitempty" name:"AlarmPolicyList"`
+
+	// Whether to encrypt the password.
+	EncryptPassword *bool `json:"EncryptPassword,omitnil,omitempty" name:"EncryptPassword"`
 }
 
 func (r *CreateInstancesRequest) ToJsonString() string {
@@ -1400,6 +1437,7 @@ func (r *CreateInstancesRequest) FromJsonString(s string) error {
 	delete(f, "ProductVersion")
 	delete(f, "RedisClusterId")
 	delete(f, "AlarmPolicyList")
+	delete(f, "EncryptPassword")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstancesRequest has unknown keys!", "")
 	}
@@ -1436,14 +1474,13 @@ func (r *CreateInstancesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateParamTemplateRequestParams struct {
-	// Parameter template name.
+	// Parameter template name, which can contain [2, 64] characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Parameter template description.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Product type.
-	// - 2: Redis 2.8 Memory Edition (standard architecture).
 	// - 6: Redis 4.0 Memory Edition (standard architecture).
 	// - 7: Redis 4.0 Memory Edition (cluster architecture).
 	// - 8: Redis 5.0 Memory Edition (standard architecture).
@@ -1464,14 +1501,13 @@ type CreateParamTemplateRequestParams struct {
 type CreateParamTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// Parameter template name.
+	// Parameter template name, which can contain [2, 64] characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Parameter template description.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Product type.
-	// - 2: Redis 2.8 Memory Edition (standard architecture).
 	// - 6: Redis 4.0 Memory Edition (standard architecture).
 	// - 7: Redis 4.0 Memory Edition (cluster architecture).
 	// - 8: Redis 5.0 Memory Edition (standard architecture).
@@ -1588,6 +1624,9 @@ type CreateReplicationGroupResponseParams struct {
 	// Asynchronous process ID.
 	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
+	// Replication group ID of the string type.
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -1685,14 +1724,14 @@ func (r *DeleteInstanceAccountResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteParamTemplateRequestParams struct {
-	// Parameter template ID.
+	// Parameter template ID. Log in to the [Redis console and go to the parameter template page](https://console.cloud.tencent.com/redis/templates) to obtain the template ID.
 	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type DeleteParamTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// Parameter template ID.
+	// Parameter template ID. Log in to the [Redis console and go to the parameter template page](https://console.cloud.tencent.com/redis/templates) to obtain the template ID.
 	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
@@ -2530,7 +2569,7 @@ type DescribeInstanceAccountRequestParams struct {
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Number of entries per page
+	// Pagination size. The default value is 20, the minimum value is 1, and the maximum value is 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset,  which is an integral multiple of `Limit`.  Calculation formula:  `offset` = `limit` * (page number - 1).
@@ -2543,7 +2582,7 @@ type DescribeInstanceAccountRequest struct {
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Number of entries per page
+	// Pagination size. The default value is 20, the minimum value is 1, and the maximum value is 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset,  which is an integral multiple of `Limit`.  Calculation formula:  `offset` = `limit` * (page number - 1).
@@ -2885,10 +2924,14 @@ type DescribeInstanceEventsRequestParams struct {
 	// Specifies the instance ID. Example: crs-xjhsdj****. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Number of events displayed per page. Default value: 10. Maximum value: 100.
+	// Outputs the number of events displayed per page.
+	// - Default value: 10.
+	// - Value range: [1, 100].
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
-	// Configures the page number for querying events. You can query events on a certain page by specifying PageNo and PageSize. Default value: 1.
+	// Configures the output page number for querying events. You can query events on a certain page by specifying PageNo (page number) and PageSize (number of output results per page).
+	// - Default value: 1.
+	// - Value range: positive integers greater than 0.
 	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Current status of the event.- Waiting: The event is waiting for execution on the execution date or during the operations period.- Running: The event is being executed during the operations period.- Finished: Execution of the event is completed.- Canceled: Execution of the event is canceled.
@@ -2913,10 +2956,14 @@ type DescribeInstanceEventsRequest struct {
 	// Specifies the instance ID. Example: crs-xjhsdj****. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Number of events displayed per page. Default value: 10. Maximum value: 100.
+	// Outputs the number of events displayed per page.
+	// - Default value: 10.
+	// - Value range: [1, 100].
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
-	// Configures the page number for querying events. You can query events on a certain page by specifying PageNo and PageSize. Default value: 1.
+	// Configures the output page number for querying events. You can query events on a certain page by specifying PageNo (page number) and PageSize (number of output results per page).
+	// - Default value: 1.
+	// - Value range: positive integers greater than 0.
 	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Current status of the event.- Waiting: The event is waiting for execution on the execution date or during the operations period.- Running: The event is being executed during the operations period.- Finished: Execution of the event is completed.- Canceled: Execution of the event is canceled.
@@ -2985,14 +3032,14 @@ func (r *DescribeInstanceEventsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceLogDeliveryRequestParams struct {
-	// Instance ID.
+	// Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance), and copy it from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeInstanceLogDeliveryRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance), and copy it from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -3679,26 +3726,26 @@ func (r *DescribeInstanceNodeInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceParamRecordsRequestParams struct {
-	// Instance ID
+	// Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy it from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Maximum number of results returned per page
+	// Pagination size. The default value is 100, and the maximum value is 200.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Offset, which is an integral multiple of `Limit`.
+	// Offset, which is an integer multiple of Limit. Calculation formula: Offset = Limit x (Page number – 1). The default value is 0.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeInstanceParamRecordsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy it from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Maximum number of results returned per page
+	// Pagination size. The default value is 100, and the maximum value is 200.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Offset, which is an integral multiple of `Limit`.
+	// Offset, which is an integer multiple of Limit. Calculation formula: Offset = Limit x (Page number – 1). The default value is 0.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
@@ -3822,14 +3869,14 @@ func (r *DescribeInstanceParamsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceSecurityGroupRequestParams struct {
-	// Instance ID list, with the array length ranging from 0 to 100, for example, ["crs-f2ho5rsz\n"].
+	// Instance ID list. The array length limit is [0, 100]. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy the instance ID from the instance list.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type DescribeInstanceSecurityGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID list, with the array length ranging from 0 to 100, for example, ["crs-f2ho5rsz\n"].
+	// Instance ID list. The array length limit is [0, 100]. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy the instance ID from the instance list.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
@@ -3882,7 +3929,9 @@ type DescribeInstanceShardsRequestParams struct {
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Whether to filter out the replica node information. Valid values: `true` (yes),  `false` (no).
+	// Specifies whether to filter out secondary node information.
+	// - true: filter out secondary nodes.
+	// - false: filtering not required. The default value is false.
 	FilterSlave *bool `json:"FilterSlave,omitnil,omitempty" name:"FilterSlave"`
 }
 
@@ -3892,7 +3941,9 @@ type DescribeInstanceShardsRequest struct {
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Whether to filter out the replica node information. Valid values: `true` (yes),  `false` (no).
+	// Specifies whether to filter out secondary node information.
+	// - true: filter out secondary nodes.
+	// - false: filtering not required. The default value is false.
 	FilterSlave *bool `json:"FilterSlave,omitnil,omitempty" name:"FilterSlave"`
 }
 
@@ -3997,26 +4048,26 @@ func (r *DescribeInstanceSpecBandwidthResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceSupportFeatureRequestParams struct {
-	// Specify the instance ID.
-	//  For example: crs-xjhsdj****. Please log in to the [Redis Console] (https://console.cloud.tencent.com/redis#/) and copy the instance ID from the instance list.
-	// Sample value: crs-asdasdas.
+	// Specifies the instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), and copy it from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Feature names.
-	// - Read-local-node-only: Proximity access feature.- multi-account: Multiple accounts feature.
+	// The features that support queries are as follows.
+	// - read-local-node-only: nearby access.
+	// - multi-account: multi-account management.
+	// - auto-failback: fault recovery scenario, such as whether automatic failback is enabled for the primary node.
 	FeatureName *string `json:"FeatureName,omitnil,omitempty" name:"FeatureName"`
 }
 
 type DescribeInstanceSupportFeatureRequest struct {
 	*tchttp.BaseRequest
 	
-	// Specify the instance ID.
-	//  For example: crs-xjhsdj****. Please log in to the [Redis Console] (https://console.cloud.tencent.com/redis#/) and copy the instance ID from the instance list.
-	// Sample value: crs-asdasdas.
+	// Specifies the instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), and copy it from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Feature names.
-	// - Read-local-node-only: Proximity access feature.- multi-account: Multiple accounts feature.
+	// The features that support queries are as follows.
+	// - read-local-node-only: nearby access.
+	// - multi-account: multi-account management.
+	// - auto-failback: fault recovery scenario, such as whether automatic failback is enabled for the primary node.
 	FeatureName *string `json:"FeatureName,omitnil,omitempty" name:"FeatureName"`
 }
 
@@ -4895,13 +4946,13 @@ type DescribeProxySlowLogRequestParams struct {
 	// End time of a slow query, with a maximum query span of 30 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Slow query threshold  in milliseconds
+	// Slow query threshold, in milliseconds. The value is a positive integer greater than 0.
 	MinQueryTime *int64 `json:"MinQueryTime,omitnil,omitempty" name:"MinQueryTime"`
 
-	// Number of tasks output on each page. Default value: 20. Maximum value: 100.
+	// Size of the output task list per page. The default value is 20, the minimum value is 1, and the maximum value is 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Pagination offset, which is an integer multiple of Limit. Calculation formula: Offset = Limit x (Page number - 1).
+	// Pagination offset, which is an integer multiple of Limit. Calculation formula: Offset = Limit x (Page number – 1). The default value is 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
@@ -4917,13 +4968,13 @@ type DescribeProxySlowLogRequest struct {
 	// End time of a slow query, with a maximum query span of 30 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Slow query threshold  in milliseconds
+	// Slow query threshold, in milliseconds. The value is a positive integer greater than 0.
 	MinQueryTime *int64 `json:"MinQueryTime,omitnil,omitempty" name:"MinQueryTime"`
 
-	// Number of tasks output on each page. Default value: 20. Maximum value: 100.
+	// Size of the output task list per page. The default value is 20, the minimum value is 1, and the maximum value is 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Pagination offset, which is an integer multiple of Limit. Calculation formula: Offset = Limit x (Page number - 1).
+	// Pagination offset, which is an integer multiple of Limit. Calculation formula: Offset = Limit x (Page number – 1). The default value is 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
@@ -5246,7 +5297,7 @@ func (r *DescribeReplicationGroupInstanceResponse) FromJsonString(s string) erro
 
 // Predefined struct for user
 type DescribeReplicationGroupRequestParams struct {
-	// Number of instances returned per page. Default value: `20`.
+	// Size of the output instance list per page. The value is a positive integer greater than 0, and the default value is 20.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset, which is an integral multiple of `Limit`. `offset` = `limit` * (page number - 1).
@@ -5262,7 +5313,7 @@ type DescribeReplicationGroupRequestParams struct {
 type DescribeReplicationGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// Number of instances returned per page. Default value: `20`.
+	// Size of the output instance list per page. The value is a positive integer greater than 0, and the default value is 20.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset, which is an integral multiple of `Limit`. `offset` = `limit` * (page number - 1).
@@ -5327,14 +5378,14 @@ func (r *DescribeReplicationGroupResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSSLStatusRequestParams struct {
-	// Instance ID
+	// Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy it from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeSSLStatusRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy it from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -5402,20 +5453,24 @@ func (r *DescribeSSLStatusResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSecondLevelBackupInfoRequestParams struct {
-	// Specifies the instance ID. For example, crs-xjhsdj****. Log in to the TencentDB for Redis® console and copy the instance ID from the instance list.
+	// Specifies the instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy it from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Second-level backup timestamp. The corresponding time should be within the last 7 days.
+	// Second-level backup timestamp.
+	// - Setting range: support any second-level time point within 7 days.
+	// - Timestamp format: UNIX timestamp.
 	BackupTimestamp *int64 `json:"BackupTimestamp,omitnil,omitempty" name:"BackupTimestamp"`
 }
 
 type DescribeSecondLevelBackupInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// Specifies the instance ID. For example, crs-xjhsdj****. Log in to the TencentDB for Redis® console and copy the instance ID from the instance list.
+	// Specifies the instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy it from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Second-level backup timestamp. The corresponding time should be within the last 7 days.
+	// Second-level backup timestamp.
+	// - Setting range: support any second-level time point within 7 days.
+	// - Timestamp format: UNIX timestamp.
 	BackupTimestamp *int64 `json:"BackupTimestamp,omitnil,omitempty" name:"BackupTimestamp"`
 }
 
@@ -5448,7 +5503,7 @@ type DescribeSecondLevelBackupInfoResponseParams struct {
 	BackupTimestamp *int64 `json:"BackupTimestamp,omitnil,omitempty" name:"BackupTimestamp"`
 
 	// Timestamp range within which backup is missing.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MissingTimestamps []*SecondLevelBackupMissingTimestamps `json:"MissingTimestamps,omitnil,omitempty" name:"MissingTimestamps"`
 
 	// Timestamp when second-level backup is enabled for the instance.
@@ -5485,13 +5540,13 @@ type DescribeSlowLogRequestParams struct {
 	// End time for pre-querying slow query logs, with a maximum query span of 30 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// The average execution time threshold of slow query  in microseconds
+	// Average execution time threshold for slow queries, in milliseconds. The value is a positive integer greater than 0
 	MinQueryTime *int64 `json:"MinQueryTime,omitnil,omitempty" name:"MinQueryTime"`
 
-	// Number of slow query logs displayed per page. Default value: 20. Maximum value: 100.
+	// Number of slow query results displayed per page. The default value is 20, the minimum value is 1, and the maximum value is 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Slow query offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
+	// Offset of the number of slow queries. The value is an integer multiple of Limit. Calculation formula: Offset = Limit x (Page number – 1). The default value is 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Node role.
@@ -5511,13 +5566,13 @@ type DescribeSlowLogRequest struct {
 	// End time for pre-querying slow query logs, with a maximum query span of 30 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// The average execution time threshold of slow query  in microseconds
+	// Average execution time threshold for slow queries, in milliseconds. The value is a positive integer greater than 0
 	MinQueryTime *int64 `json:"MinQueryTime,omitnil,omitempty" name:"MinQueryTime"`
 
-	// Number of slow query logs displayed per page. Default value: 20. Maximum value: 100.
+	// Number of slow query results displayed per page. The default value is 20, the minimum value is 1, and the maximum value is 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Slow query offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
+	// Offset of the number of slow queries. The value is an integer multiple of Limit. Calculation formula: Offset = Limit x (Page number – 1). The default value is 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Node role.
@@ -5662,13 +5717,13 @@ type DescribeTaskListRequestParams struct {
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance name
+	// Instance name. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy it from the instance list.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Number of taskss returned per page.  Default value: `20`. Maximum value: `100`.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
+	// Pagination offset, which is an integer multiple of Limit. Offset = Limit x (Page number – 1). The default value is 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Project ID. This field has been deprecated. Please ignore it.
@@ -5765,13 +5820,13 @@ type DescribeTaskListRequest struct {
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance name
+	// Instance name. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy it from the instance list.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Number of taskss returned per page.  Default value: `20`. Maximum value: `100`.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
+	// Pagination offset, which is an integer multiple of Limit. Offset = Limit x (Page number – 1). The default value is 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Project ID. This field has been deprecated. Please ignore it.
@@ -5927,13 +5982,13 @@ type DescribeTendisSlowLogRequestParams struct {
 	// End time for a query, for example, 2019-09-09 12:12:41, with a maximum query span of 30 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Slow query threshold in ms
+	// Slow query threshold, in milliseconds. The value is a positive integer greater than 0.
 	MinQueryTime *int64 `json:"MinQueryTime,omitnil,omitempty" name:"MinQueryTime"`
 
-	// Page size. Default value 20. Maximum value 100.
+	// Page size. The default value is 20, the minimum value is 1, and the maximum value is 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Pagination offset, which is an integer multiple of Limit. Calculation formula: Offset = Limit x (Page number - 1).
+	// Pagination offset, which is an integer multiple of Limit. Calculation formula: Offset = Limit x (Page number – 1). The default value is 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
@@ -5949,13 +6004,13 @@ type DescribeTendisSlowLogRequest struct {
 	// End time for a query, for example, 2019-09-09 12:12:41, with a maximum query span of 30 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Slow query threshold in ms
+	// Slow query threshold, in milliseconds. The value is a positive integer greater than 0.
 	MinQueryTime *int64 `json:"MinQueryTime,omitnil,omitempty" name:"MinQueryTime"`
 
-	// Page size. Default value 20. Maximum value 100.
+	// Page size. The default value is 20, the minimum value is 1, and the maximum value is 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Pagination offset, which is an integer multiple of Limit. Calculation formula: Offset = Limit x (Page number - 1).
+	// Pagination offset, which is an integer multiple of Limit. Calculation formula: Offset = Limit x (Page number – 1). The default value is 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
@@ -6013,14 +6068,14 @@ func (r *DescribeTendisSlowLogResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DestroyPostpaidInstanceRequestParams struct {
-	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
+	// Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy the pay-as-you-go instance ID from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DestroyPostpaidInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
+	// Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy the pay-as-you-go instance ID from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -6257,8 +6312,7 @@ type EnableReplicaReadonlyRequestParams struct {
 
 	// Read-only routing policy.
 	// - master: read-only routing to the primary node.
-	// - replication: read-only routing to the secondary node.
-	// - Default policy: writing to the primary node and reading from the secondary node.
+	// - replication: read-only routing to the secondary node. The default value is replication.
 	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil,omitempty" name:"ReadonlyPolicy"`
 }
 
@@ -6270,8 +6324,7 @@ type EnableReplicaReadonlyRequest struct {
 
 	// Read-only routing policy.
 	// - master: read-only routing to the primary node.
-	// - replication: read-only routing to the secondary node.
-	// - Default policy: writing to the primary node and reading from the secondary node.
+	// - replication: read-only routing to the secondary node. The default value is replication.
 	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil,omitempty" name:"ReadonlyPolicy"`
 }
 
@@ -6439,13 +6492,16 @@ type InquiryPriceCreateInstanceRequestParams struct {
 	// - 1: monthly subscription.
 	BillingMode *int64 `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
 
-	// ID of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
+	// ID of the AZ to which the instance belongs. See [Regions and AZs](https://www.tencentcloud.comom/document/product/239/4106?from_cn_redirect=1).
+	// **Note**: Specify at least one parameter from **ZoneId** and **ZoneName**.
 	ZoneId *uint64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Number of instance shards. For the standard architecture of 2.8, the number of shards does not need to be configured. For the standard architecture of other versions, the number of shards should be set to 1. For the cluster architecture, the number of shards to be purchased needs to be specified.
+	// Number of instance shards.
+	// - The number of shards is required to be set to 1 for the standard architecture.
+	// - The number of shards can be set to 1, 3, 5, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96, or 128 for the cluster architecture.
 	RedisShardNum *int64 `json:"RedisShardNum,omitnil,omitempty" name:"RedisShardNum"`
 
-	// Number of instance replicas. For the standard architecture of 2.8, the number of replicas does not need to be configured.
+	// Number of instance replicas. Valid values: 1, 2, 3, 4, and 5.
 	RedisReplicasNum *int64 `json:"RedisReplicasNum,omitnil,omitempty" name:"RedisReplicasNum"`
 
 	// Whether replica read-only is supported. For the standard architecture of Redis 2.8 and CKV, this parameter does not need to be configured.
@@ -6453,7 +6509,8 @@ type InquiryPriceCreateInstanceRequestParams struct {
 	// - false: Replica read-only is required.
 	ReplicasReadonly *bool `json:"ReplicasReadonly,omitnil,omitempty" name:"ReplicasReadonly"`
 
-	// Name of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
+	// Name of the AZ to which the instance belongs. See [Regions and AZs](https://www.tencentcloud.comom/document/product/239/4106?from_cn_redirect=1).
+	// **Note**: Specify at least one parameter from **ZoneId** and **ZoneName**.
 	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
 	// Deployment mode.
@@ -6495,13 +6552,16 @@ type InquiryPriceCreateInstanceRequest struct {
 	// - 1: monthly subscription.
 	BillingMode *int64 `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
 
-	// ID of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
+	// ID of the AZ to which the instance belongs. See [Regions and AZs](https://www.tencentcloud.comom/document/product/239/4106?from_cn_redirect=1).
+	// **Note**: Specify at least one parameter from **ZoneId** and **ZoneName**.
 	ZoneId *uint64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Number of instance shards. For the standard architecture of 2.8, the number of shards does not need to be configured. For the standard architecture of other versions, the number of shards should be set to 1. For the cluster architecture, the number of shards to be purchased needs to be specified.
+	// Number of instance shards.
+	// - The number of shards is required to be set to 1 for the standard architecture.
+	// - The number of shards can be set to 1, 3, 5, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96, or 128 for the cluster architecture.
 	RedisShardNum *int64 `json:"RedisShardNum,omitnil,omitempty" name:"RedisShardNum"`
 
-	// Number of instance replicas. For the standard architecture of 2.8, the number of replicas does not need to be configured.
+	// Number of instance replicas. Valid values: 1, 2, 3, 4, and 5.
 	RedisReplicasNum *int64 `json:"RedisReplicasNum,omitnil,omitempty" name:"RedisReplicasNum"`
 
 	// Whether replica read-only is supported. For the standard architecture of Redis 2.8 and CKV, this parameter does not need to be configured.
@@ -6509,7 +6569,8 @@ type InquiryPriceCreateInstanceRequest struct {
 	// - false: Replica read-only is required.
 	ReplicasReadonly *bool `json:"ReplicasReadonly,omitnil,omitempty" name:"ReplicasReadonly"`
 
-	// Name of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
+	// Name of the AZ to which the instance belongs. See [Regions and AZs](https://www.tencentcloud.comom/document/product/239/4106?from_cn_redirect=1).
+	// **Note**: Specify at least one parameter from **ZoneId** and **ZoneName**.
 	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
 	// Deployment mode.
@@ -6593,7 +6654,9 @@ type InquiryPriceUpgradeInstanceRequestParams struct {
 	// Shard size. Unit: MB.
 	MemSize *uint64 `json:"MemSize,omitnil,omitempty" name:"MemSize"`
 
-	// Number of shards. This parameter is not required for Redis 2.8 Primary-Secondary Edition, CKV Primary-Secondary Edition, and Redis 2.8 Single-node Edition.
+	// Number of shards.
+	// - The instance adopts the standard architecture. The default value of RedisShardNum is 1.
+	// - This parameter is not required for Redis 2.8 Primary-Secondary Edition, CKV Primary-Secondary Edition, and Redis 2.8 Stand-Alone Edition.
 	RedisShardNum *uint64 `json:"RedisShardNum,omitnil,omitempty" name:"RedisShardNum"`
 
 	// Number of replicas. This parameter is not required for Redis 2.8 Primary-Secondary Edition, CKV Primary-Secondary Edition, and Redis 2.8 Single-node Edition.
@@ -6609,7 +6672,9 @@ type InquiryPriceUpgradeInstanceRequest struct {
 	// Shard size. Unit: MB.
 	MemSize *uint64 `json:"MemSize,omitnil,omitempty" name:"MemSize"`
 
-	// Number of shards. This parameter is not required for Redis 2.8 Primary-Secondary Edition, CKV Primary-Secondary Edition, and Redis 2.8 Single-node Edition.
+	// Number of shards.
+	// - The instance adopts the standard architecture. The default value of RedisShardNum is 1.
+	// - This parameter is not required for Redis 2.8 Primary-Secondary Edition, CKV Primary-Secondary Edition, and Redis 2.8 Stand-Alone Edition.
 	RedisShardNum *uint64 `json:"RedisShardNum,omitnil,omitempty" name:"RedisShardNum"`
 
 	// Number of replicas. This parameter is not required for Redis 2.8 Primary-Secondary Edition, CKV Primary-Secondary Edition, and Redis 2.8 Single-node Edition.
@@ -6888,6 +6953,12 @@ type InstanceProxySlowlogDetail struct {
 
 	// Execution time
 	ExecuteTime *string `json:"ExecuteTime,omitnil,omitempty" name:"ExecuteTime"`
+
+	// Duration of receiving client requests (ms).
+	RecvClientEnd *int64 `json:"RecvClientEnd,omitnil,omitempty" name:"RecvClientEnd"`
+
+	// Duration of sending client requests (ms).
+	SendClientEnd *int64 `json:"SendClientEnd,omitnil,omitempty" name:"SendClientEnd"`
 }
 
 type InstanceSecurityGroupDetail struct {
@@ -6905,7 +6976,7 @@ type InstanceSet struct {
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// App ID of a user, which is an application ID that uniquely corresponds to the account ID. Some Tencent Cloud products use this app ID.
+	// App ID of a user, which is an application ID that uniquely corresponds to the account ID. Certain Tencent Cloud products use this app ID.
 	Appid *int64 `json:"Appid,omitnil,omitempty" name:"Appid"`
 
 	// Project ID.
@@ -7014,6 +7085,8 @@ type InstanceSet struct {
 	CloseTime *string `json:"CloseTime,omitnil,omitempty" name:"CloseTime"`
 
 	// Read weight of a secondary node.
+	// - 0: disable read-only replicas.
+	// - 100: enable read-only replicas.
 	SlaveReadWeight *int64 `json:"SlaveReadWeight,omitnil,omitempty" name:"SlaveReadWeight"`
 
 	// Information on tags associated with the instance.
@@ -7098,6 +7171,9 @@ type InstanceSet struct {
 
 	// Backup mode. - SecondLevelBackup: second-level backup. - NormalLevelBackup: ordinary backup.
 	BackupMode *string `json:"BackupMode,omitnil,omitempty" name:"BackupMode"`
+
+	// Deletion protection switch. 0: disabled; 1: enabled.
+	DeleteProtectionSwitch *int64 `json:"DeleteProtectionSwitch,omitnil,omitempty" name:"DeleteProtectionSwitch"`
 }
 
 type InstanceSlowlogDetail struct {
@@ -7400,6 +7476,9 @@ type ModfiyInstancePasswordRequestParams struct {
 	//  - It cannot start with a forward slash (/).
 	//  - It should contain at least two of the following types: lowercase letters (a–z), uppercase letters (A–Z), digits (0–9), and special characters (such as ()~!@#$%^&*-+=_|{}[]:;<>,.?/).
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// Whether to encrypt the password.
+	EncryptPassword *bool `json:"EncryptPassword,omitnil,omitempty" name:"EncryptPassword"`
 }
 
 type ModfiyInstancePasswordRequest struct {
@@ -7416,6 +7495,9 @@ type ModfiyInstancePasswordRequest struct {
 	//  - It cannot start with a forward slash (/).
 	//  - It should contain at least two of the following types: lowercase letters (a–z), uppercase letters (A–Z), digits (0–9), and special characters (such as ()~!@#$%^&*-+=_|{}[]:;<>,.?/).
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// Whether to encrypt the password.
+	EncryptPassword *bool `json:"EncryptPassword,omitnil,omitempty" name:"EncryptPassword"`
 }
 
 func (r *ModfiyInstancePasswordRequest) ToJsonString() string {
@@ -7433,6 +7515,7 @@ func (r *ModfiyInstancePasswordRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "OldPassword")
 	delete(f, "Password")
+	delete(f, "EncryptPassword")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModfiyInstancePasswordRequest has unknown keys!", "")
 	}
@@ -7659,12 +7742,14 @@ type ModifyConnectionConfigRequestParams struct {
 	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Additional bandwidth in MB, which should be greater than 0.
+	// Additional bandwidth, in MB, which should be greater than 0.
+	// **Note**: The Bandwidth and ClientLimit parameters cannot be empty simultaneously. You should select at least one of them for configuration.
 	Bandwidth *int64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
 	// Total number of connections per shard.
 	// - When read-only replicas are not enabled, the lower limit is 10,000 and the upper limit is 40,000.
 	// - When read-only replicas are enabled, the lower limit is 10,000, and the upper limit is calculated as follows: 10,000 x (Number of read-only replicas + 3).
+	// **Note**: The Bandwidth and ClientLimit parameters cannot be empty simultaneously. You should select at least one of them for configuration.
 	ClientLimit *int64 `json:"ClientLimit,omitnil,omitempty" name:"ClientLimit"`
 }
 
@@ -7674,12 +7759,14 @@ type ModifyConnectionConfigRequest struct {
 	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Additional bandwidth in MB, which should be greater than 0.
+	// Additional bandwidth, in MB, which should be greater than 0.
+	// **Note**: The Bandwidth and ClientLimit parameters cannot be empty simultaneously. You should select at least one of them for configuration.
 	Bandwidth *int64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
 	// Total number of connections per shard.
 	// - When read-only replicas are not enabled, the lower limit is 10,000 and the upper limit is 40,000.
 	// - When read-only replicas are enabled, the lower limit is 10,000, and the upper limit is calculated as follows: 10,000 x (Number of read-only replicas + 3).
+	// **Note**: The Bandwidth and ClientLimit parameters cannot be empty simultaneously. You should select at least one of them for configuration.
 	ClientLimit *int64 `json:"ClientLimit,omitnil,omitempty" name:"ClientLimit"`
 }
 
@@ -7810,30 +7897,35 @@ type ModifyInstanceAccountRequestParams struct {
 	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Sub-account name. If you want to change it to the root account, fill in root.
+	// Specifies the account that needs modification.
+	// - root: refers to the automatically generated account when a TencentDB for Redis® instance is created. Users cannot modify read-write permissions for the account, but can only modify its request routing policies.
+	// - Custom account: an account manually created by users after successful instance creation. Users can modify read-write permissions and request routing policies for the account at any time.
 	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
 
-	// Sub-account password.
+	// Specifies the access password for the account to be modified.
 	AccountPassword *string `json:"AccountPassword,omitnil,omitempty" name:"AccountPassword"`
 
-	// Sub-account description information
+	// Account description information.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
-	// Account read/write routing policy.
-	// - master: primary node.
-	// - replication: secondary node.
+	// Specifies the read-write request routing policies for the account to be modified.
+	// - master: read-write request routing to the primary node.
+	// - replication: read-write request routing to the secondary node.
 	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil,omitempty" name:"ReadonlyPolicy"`
 
-	// Sub-account read/write policy.
+	// Specifies the read-write permissions for the account to be modified.
 	// - r: read-only.
 	// - w: write-only.
-	// - rw: read/write.
+	// - rw: read-write.
 	Privilege *string `json:"Privilege,omitnil,omitempty" name:"Privilege"`
 
-	// Whether to switch the root account to a password-free account. This applies only to the root account. Sub-accounts do not support password-free access.
-	// - true: Switch the root account to a password-free account.
-	// - false: Do not switch it.
+	// Specifies whether to set the default account (root) to a password-free account. Custom accounts do not support password-free access.
+	// - true: set the default account (root) to a password-free account.
+	// - false: not set the default account (root) to a password-free account.
 	NoAuth *bool `json:"NoAuth,omitnil,omitempty" name:"NoAuth"`
+
+	// Specifies whether to encrypt the password for the account to be modified.
+	EncryptPassword *bool `json:"EncryptPassword,omitnil,omitempty" name:"EncryptPassword"`
 }
 
 type ModifyInstanceAccountRequest struct {
@@ -7842,30 +7934,35 @@ type ModifyInstanceAccountRequest struct {
 	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Sub-account name. If you want to change it to the root account, fill in root.
+	// Specifies the account that needs modification.
+	// - root: refers to the automatically generated account when a TencentDB for Redis® instance is created. Users cannot modify read-write permissions for the account, but can only modify its request routing policies.
+	// - Custom account: an account manually created by users after successful instance creation. Users can modify read-write permissions and request routing policies for the account at any time.
 	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
 
-	// Sub-account password.
+	// Specifies the access password for the account to be modified.
 	AccountPassword *string `json:"AccountPassword,omitnil,omitempty" name:"AccountPassword"`
 
-	// Sub-account description information
+	// Account description information.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
-	// Account read/write routing policy.
-	// - master: primary node.
-	// - replication: secondary node.
+	// Specifies the read-write request routing policies for the account to be modified.
+	// - master: read-write request routing to the primary node.
+	// - replication: read-write request routing to the secondary node.
 	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil,omitempty" name:"ReadonlyPolicy"`
 
-	// Sub-account read/write policy.
+	// Specifies the read-write permissions for the account to be modified.
 	// - r: read-only.
 	// - w: write-only.
-	// - rw: read/write.
+	// - rw: read-write.
 	Privilege *string `json:"Privilege,omitnil,omitempty" name:"Privilege"`
 
-	// Whether to switch the root account to a password-free account. This applies only to the root account. Sub-accounts do not support password-free access.
-	// - true: Switch the root account to a password-free account.
-	// - false: Do not switch it.
+	// Specifies whether to set the default account (root) to a password-free account. Custom accounts do not support password-free access.
+	// - true: set the default account (root) to a password-free account.
+	// - false: not set the default account (root) to a password-free account.
 	NoAuth *bool `json:"NoAuth,omitnil,omitempty" name:"NoAuth"`
+
+	// Specifies whether to encrypt the password for the account to be modified.
+	EncryptPassword *bool `json:"EncryptPassword,omitnil,omitempty" name:"EncryptPassword"`
 }
 
 func (r *ModifyInstanceAccountRequest) ToJsonString() string {
@@ -7887,6 +7984,7 @@ func (r *ModifyInstanceAccountRequest) FromJsonString(s string) error {
 	delete(f, "ReadonlyPolicy")
 	delete(f, "Privilege")
 	delete(f, "NoAuth")
+	delete(f, "EncryptPassword")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyInstanceAccountRequest has unknown keys!", "")
 	}
@@ -7895,7 +7993,7 @@ func (r *ModifyInstanceAccountRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyInstanceAccountResponseParams struct {
-	// Task ID
+	// Task ID.
 	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -7999,24 +8097,24 @@ func (r *ModifyInstanceAvailabilityZonesResponse) FromJsonString(s string) error
 
 // Predefined struct for user
 type ModifyInstanceBackupModeRequestParams struct {
-	// Instance ID, which can contain 12 to 36 characters.
+	// Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy it from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Backup mode:
-	//  - SecondLevelBackup: second-level backup.
-	//  - NormalLevelBackup: ordinary backup.
+	// - SecondLevelBackup: second-level backup.
+	// - NormalLevelBackup: ordinary backup.
 	BackupMode *string `json:"BackupMode,omitnil,omitempty" name:"BackupMode"`
 }
 
 type ModifyInstanceBackupModeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID, which can contain 12 to 36 characters.
+	// Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy it from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Backup mode:
-	//  - SecondLevelBackup: second-level backup.
-	//  - NormalLevelBackup: ordinary backup.
+	// - SecondLevelBackup: second-level backup.
+	// - NormalLevelBackup: ordinary backup.
 	BackupMode *string `json:"BackupMode,omitnil,omitempty" name:"BackupMode"`
 }
 
@@ -8070,7 +8168,7 @@ type ModifyInstanceEventRequestParams struct {
 	// Specifies the instance ID. Example: crs-xjhsdj****. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis#/) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Event ID. Obtain the ID of the event to be modified using DescribeInstanceEvents.
+	// Event ID. Call the [DescribeInstanceEvents](https://www.tencentcloud.comom/document/product/239/104779?from_cn_redirect=1) API to obtain the ID of the event to be modified.
 	EventId *int64 `json:"EventId,omitnil,omitempty" name:"EventId"`
 
 	// Modifies the scheduled start time of event execution.
@@ -8092,7 +8190,7 @@ type ModifyInstanceEventRequest struct {
 	// Specifies the instance ID. Example: crs-xjhsdj****. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis#/) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Event ID. Obtain the ID of the event to be modified using DescribeInstanceEvents.
+	// Event ID. Call the [DescribeInstanceEvents](https://www.tencentcloud.comom/document/product/239/104779?from_cn_redirect=1) API to obtain the ID of the event to be modified.
 	EventId *int64 `json:"EventId,omitnil,omitempty" name:"EventId"`
 
 	// Modifies the scheduled start time of event execution.
@@ -8493,15 +8591,16 @@ func (r *ModifyInstanceReadOnlyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceRequestParams struct {
 	// Instance modification operation. Valid values:
-	// - rename: Rename the instance.
-	// - modifyProject: Modify the project to which the instance belongs.
-	// - modifyAutoRenew: Modify the instance renewal flag.
+	// - rename: rename an instance.
+	// - modifyProject: modify the project to which the instance belongs.
+	// - modifyAutoRenew: modify the instance renewal flag.
+	// - modifyDeleteProtectionSwitch: modify the instance deletion protection switch status.
 	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 
 	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list. The maximum number of instances per request is 10.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// New name of the instance.
+	// New name of the instance. Only Chinese characters, letters, digits, underscores (_), and delimiters (-) are supported. The length can be up to 60 characters.
 	InstanceNames []*string `json:"InstanceNames,omitnil,omitempty" name:"InstanceNames"`
 
 	// Project ID. Log in to the [Project Management](https://console.tencentcloud.com/project) page of the Redis console and copy the project ID in **Project Name**.
@@ -8513,6 +8612,9 @@ type ModifyInstanceRequestParams struct {
 	// - 1: automatic renewal.
 	// - 2: no automatic renewal.
 	AutoRenews []*int64 `json:"AutoRenews,omitnil,omitempty" name:"AutoRenews"`
+
+	// Deletion protection switch. - 0: disabled by default; - 1: enabled.
+	DeleteProtectionSwitches []*int64 `json:"DeleteProtectionSwitches,omitnil,omitempty" name:"DeleteProtectionSwitches"`
 
 	// This parameter is currently being deprecated and can still be used by existing users. It is recommended that new users use InstanceIds.
 	//
@@ -8534,15 +8636,16 @@ type ModifyInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance modification operation. Valid values:
-	// - rename: Rename the instance.
-	// - modifyProject: Modify the project to which the instance belongs.
-	// - modifyAutoRenew: Modify the instance renewal flag.
+	// - rename: rename an instance.
+	// - modifyProject: modify the project to which the instance belongs.
+	// - modifyAutoRenew: modify the instance renewal flag.
+	// - modifyDeleteProtectionSwitch: modify the instance deletion protection switch status.
 	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 
 	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list. The maximum number of instances per request is 10.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// New name of the instance.
+	// New name of the instance. Only Chinese characters, letters, digits, underscores (_), and delimiters (-) are supported. The length can be up to 60 characters.
 	InstanceNames []*string `json:"InstanceNames,omitnil,omitempty" name:"InstanceNames"`
 
 	// Project ID. Log in to the [Project Management](https://console.tencentcloud.com/project) page of the Redis console and copy the project ID in **Project Name**.
@@ -8554,6 +8657,9 @@ type ModifyInstanceRequest struct {
 	// - 1: automatic renewal.
 	// - 2: no automatic renewal.
 	AutoRenews []*int64 `json:"AutoRenews,omitnil,omitempty" name:"AutoRenews"`
+
+	// Deletion protection switch. - 0: disabled by default; - 1: enabled.
+	DeleteProtectionSwitches []*int64 `json:"DeleteProtectionSwitches,omitnil,omitempty" name:"DeleteProtectionSwitches"`
 
 	// This parameter is currently being deprecated and can still be used by existing users. It is recommended that new users use InstanceIds.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -8582,6 +8688,7 @@ func (r *ModifyInstanceRequest) FromJsonString(s string) error {
 	delete(f, "InstanceNames")
 	delete(f, "ProjectId")
 	delete(f, "AutoRenews")
+	delete(f, "DeleteProtectionSwitches")
 	delete(f, "InstanceId")
 	delete(f, "InstanceName")
 	delete(f, "AutoRenew")
@@ -8622,6 +8729,7 @@ type ModifyMaintenanceWindowRequestParams struct {
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time of the maintenance window, for example, 19:00.
+	// **Note:** Maintenance window duration. Valid values: 30 minutes, 1 hour, 1.5 hours, 2 hours, and 3 hours.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
@@ -8635,6 +8743,7 @@ type ModifyMaintenanceWindowRequest struct {
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time of the maintenance window, for example, 19:00.
+	// **Note:** Maintenance window duration. Valid values: 30 minutes, 1 hour, 1.5 hours, 2 hours, and 3 hours.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
@@ -9443,14 +9552,14 @@ func (r *ReleaseWanAddressResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type RemoveReplicationGroupRequestParams struct {
-	// Replication group ID.
+	// Replication group ID. Log in to the [Redis console and go to the global replication](https://console.cloud.tencent.com/redis/replication) page to obtain the ID.
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 }
 
 type RemoveReplicationGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// Replication group ID.
+	// Replication group ID. Log in to the [Redis console and go to the global replication](https://console.cloud.tencent.com/redis/replication) page to obtain the ID.
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 }
 
@@ -9663,13 +9772,21 @@ type ResetPasswordRequestParams struct {
 	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Reset password. This parameter can be left blank when a password-free instance is used. It is required in other cases.
+	// Reset password. This parameter can be left unspecified when a password-free instance is used.
+	// - It should contain 8 to 32 characters. 12 or more characters are recommended.
+	// - It cannot start with a forward slash (/).
+	// - It should contain at least two of the following types: lowercase letters, uppercase letters, digits, and special characters (such as ()~!@#$%^&*-+=_|{}[]:;<>,.?/).
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// Whether to switch to a password-free instance.
-	// - false: Switch to a non-password-free instance.
-	// - true: Switch to a password-free instance. Default value: false.
+	// - false: switch to an instance that requires a password. The default value is false.
+	// - true: switch to a password-free instance.
 	NoAuth *bool `json:"NoAuth,omitnil,omitempty" name:"NoAuth"`
+
+	// Whether to encrypt the password.
+	// - false: non-encrypted password. The default value is false.
+	// - true: encrypted password.
+	EncryptPassword *bool `json:"EncryptPassword,omitnil,omitempty" name:"EncryptPassword"`
 }
 
 type ResetPasswordRequest struct {
@@ -9678,13 +9795,21 @@ type ResetPasswordRequest struct {
 	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Reset password. This parameter can be left blank when a password-free instance is used. It is required in other cases.
+	// Reset password. This parameter can be left unspecified when a password-free instance is used.
+	// - It should contain 8 to 32 characters. 12 or more characters are recommended.
+	// - It cannot start with a forward slash (/).
+	// - It should contain at least two of the following types: lowercase letters, uppercase letters, digits, and special characters (such as ()~!@#$%^&*-+=_|{}[]:;<>,.?/).
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// Whether to switch to a password-free instance.
-	// - false: Switch to a non-password-free instance.
-	// - true: Switch to a password-free instance. Default value: false.
+	// - false: switch to an instance that requires a password. The default value is false.
+	// - true: switch to a password-free instance.
 	NoAuth *bool `json:"NoAuth,omitnil,omitempty" name:"NoAuth"`
+
+	// Whether to encrypt the password.
+	// - false: non-encrypted password. The default value is false.
+	// - true: encrypted password.
+	EncryptPassword *bool `json:"EncryptPassword,omitnil,omitempty" name:"EncryptPassword"`
 }
 
 func (r *ResetPasswordRequest) ToJsonString() string {
@@ -9702,6 +9827,7 @@ func (r *ResetPasswordRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "Password")
 	delete(f, "NoAuth")
+	delete(f, "EncryptPassword")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResetPasswordRequest has unknown keys!", "")
 	}
@@ -9754,10 +9880,10 @@ type ResourceTag struct {
 
 // Predefined struct for user
 type RestoreInstanceRequestParams struct {
-	// ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the `DescribeInstances` API.
+	// ID of the instance to be operated, which can be obtained through the response parameter InstanceId of the [DescribeInstances](https://www.tencentcloud.comom/document/product/239/20018?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Backup ID, which can be obtained through the `backupId` field in the return value of the `GetRedisBackupList` API.
+	// Backup ID, which can be obtained through the response parameter RedisBackupSet of the [DescribeInstanceBackups](https://www.tencentcloud.comom/document/product/239/20011?from_cn_redirect=1) API.
 	BackupId *string `json:"BackupId,omitnil,omitempty" name:"BackupId"`
 
 	// Instance password, which needs to be validated during instance restoration (this parameter is not required for password-free instances)
@@ -9767,10 +9893,10 @@ type RestoreInstanceRequestParams struct {
 type RestoreInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the `DescribeInstances` API.
+	// ID of the instance to be operated, which can be obtained through the response parameter InstanceId of the [DescribeInstances](https://www.tencentcloud.comom/document/product/239/20018?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Backup ID, which can be obtained through the `backupId` field in the return value of the `GetRedisBackupList` API.
+	// Backup ID, which can be obtained through the response parameter RedisBackupSet of the [DescribeInstanceBackups](https://www.tencentcloud.comom/document/product/239/20011?from_cn_redirect=1) API.
 	BackupId *string `json:"BackupId,omitnil,omitempty" name:"BackupId"`
 
 	// Instance password, which needs to be validated during instance restoration (this parameter is not required for password-free instances)
@@ -9914,14 +10040,14 @@ type SourceInfo struct {
 
 // Predefined struct for user
 type StartupInstanceRequestParams struct {
-	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
+	// Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy the ID of the instance to be deisolated from the recycle bin.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type StartupInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
+	// Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy the ID of the instance to be deisolated from the recycle bin.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -10531,10 +10657,10 @@ type UpgradeProxyVersionRequestParams struct {
 	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Current Proxy version.
+	// Current proxy version. Call the [DescribeInstances](https://www.tencentcloud.comom/document/product/239/20018?from_cn_redirect=1) API to obtain the current proxy version for the instance.
 	CurrentProxyVersion *string `json:"CurrentProxyVersion,omitnil,omitempty" name:"CurrentProxyVersion"`
 
-	// Upgradable Redis version.
+	// Upgradable Redis version. Call the [DescribeInstances](https://www.tencentcloud.comom/document/product/239/20018?from_cn_redirect=1) API to obtain the upgradable Redis version for the instance.
 	UpgradeProxyVersion *string `json:"UpgradeProxyVersion,omitnil,omitempty" name:"UpgradeProxyVersion"`
 
 	// Specifies whether to upgrade immediately.
@@ -10549,10 +10675,10 @@ type UpgradeProxyVersionRequest struct {
 	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Current Proxy version.
+	// Current proxy version. Call the [DescribeInstances](https://www.tencentcloud.comom/document/product/239/20018?from_cn_redirect=1) API to obtain the current proxy version for the instance.
 	CurrentProxyVersion *string `json:"CurrentProxyVersion,omitnil,omitempty" name:"CurrentProxyVersion"`
 
-	// Upgradable Redis version.
+	// Upgradable Redis version. Call the [DescribeInstances](https://www.tencentcloud.comom/document/product/239/20018?from_cn_redirect=1) API to obtain the upgradable Redis version for the instance.
 	UpgradeProxyVersion *string `json:"UpgradeProxyVersion,omitnil,omitempty" name:"UpgradeProxyVersion"`
 
 	// Specifies whether to upgrade immediately.
@@ -10692,22 +10818,24 @@ func (r *UpgradeSmallVersionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpgradeVersionToMultiAvailabilityZonesRequestParams struct {
-	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
+	// Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy it from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Whether to support “Reading Local Nodes Only” feature after upgrading to multi-AZ deployment.
-	// ul><li>`true`: The “Read Local Nodes Only” feature is supported. During the upgrade, you need to upgrade the proxy version and Redis kernel minor version simultaneously, which will involve data migration and may take hours to complete. </li><li>`false`: The “Read Local Nodes Only” feature is not supported. Upgrading to multi-AZ deployment will involve metadata migration only without affecting the service, which generally take less than three minutes to complete.</li></ul>
+	// Specifies whether the nearby access feature is supported after an upgrade to multi-AZ.
+	// - true: support the nearby access feature. The upgrade process requires simultaneous upgrades of the proxy version and Redis kernel minor version, which involves data migration and may take several hours.
+	// - false: no need to support the nearby access feature. Upgrade to multi-AZ only involves metadata migration management, with no impact on the service. The upgrade process is usually completed within 3 minutes, and the default value is false.
 	UpgradeProxyAndRedisServer *bool `json:"UpgradeProxyAndRedisServer,omitnil,omitempty" name:"UpgradeProxyAndRedisServer"`
 }
 
 type UpgradeVersionToMultiAvailabilityZonesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
+	// Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy it from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Whether to support “Reading Local Nodes Only” feature after upgrading to multi-AZ deployment.
-	// ul><li>`true`: The “Read Local Nodes Only” feature is supported. During the upgrade, you need to upgrade the proxy version and Redis kernel minor version simultaneously, which will involve data migration and may take hours to complete. </li><li>`false`: The “Read Local Nodes Only” feature is not supported. Upgrading to multi-AZ deployment will involve metadata migration only without affecting the service, which generally take less than three minutes to complete.</li></ul>
+	// Specifies whether the nearby access feature is supported after an upgrade to multi-AZ.
+	// - true: support the nearby access feature. The upgrade process requires simultaneous upgrades of the proxy version and Redis kernel minor version, which involves data migration and may take several hours.
+	// - false: no need to support the nearby access feature. Upgrade to multi-AZ only involves metadata migration management, with no impact on the service. The upgrade process is usually completed within 3 minutes, and the default value is false.
 	UpgradeProxyAndRedisServer *bool `json:"UpgradeProxyAndRedisServer,omitnil,omitempty" name:"UpgradeProxyAndRedisServer"`
 }
 

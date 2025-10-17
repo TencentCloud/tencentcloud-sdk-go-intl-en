@@ -1155,7 +1155,7 @@ func NewDeleteLoadBalancerResponse() (response *DeleteLoadBalancerResponse) {
 // DeleteLoadBalancer
 // This API is used to delete one or more specified CLB instances. After successful deletion, the listeners and forwarding rules under the CLB instance will be deleted together, and the backend service will be unbound.
 //
-// This API is asynchronous. After it returns the result successfully, you can call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestId as an input parameter to query whether the task is successful.
+// This API is asynchronous. After it returns the result successfully, you can call the [DescribeTaskStatus](https://www.tencentcloud.com/document/product/214/30683?from_cn_redirect=1) API with the returned RequestId as an input parameter to query whether the task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1178,7 +1178,7 @@ func (c *Client) DeleteLoadBalancer(request *DeleteLoadBalancerRequest) (respons
 // DeleteLoadBalancer
 // This API is used to delete one or more specified CLB instances. After successful deletion, the listeners and forwarding rules under the CLB instance will be deleted together, and the backend service will be unbound.
 //
-// This API is asynchronous. After it returns the result successfully, you can call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestId as an input parameter to query whether the task is successful.
+// This API is asynchronous. After it returns the result successfully, you can call the [DescribeTaskStatus](https://www.tencentcloud.com/document/product/214/30683?from_cn_redirect=1) API with the returned RequestId as an input parameter to query whether the task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

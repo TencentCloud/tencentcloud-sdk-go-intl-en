@@ -72,7 +72,6 @@ func NewCreateAlarmResponse() (response *CreateAlarmResponse) {
 //  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 //  RESOURCENOTFOUND_USERQUOTANOTEXIST = "ResourceNotFound.UserQuotaNotExist"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_ALARMISEXIST = "UnsupportedOperation.AlarmIsExist"
 func (c *Client) CreateAlarm(request *CreateAlarmRequest) (response *CreateAlarmResponse, err error) {
     return c.CreateAlarmWithContext(context.Background(), request)
@@ -86,7 +85,6 @@ func (c *Client) CreateAlarm(request *CreateAlarmRequest) (response *CreateAlarm
 //  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 //  RESOURCENOTFOUND_USERQUOTANOTEXIST = "ResourceNotFound.UserQuotaNotExist"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_ALARMISEXIST = "UnsupportedOperation.AlarmIsExist"
 func (c *Client) CreateAlarmWithContext(ctx context.Context, request *CreateAlarmRequest) (response *CreateAlarmResponse, err error) {
     if request == nil {
@@ -130,6 +128,7 @@ func NewDeleteAlarmResponse() (response *DeleteAlarmResponse) {
 // error code that may be returned:
 //  RESOURCENOTFOUND_ALARMNOTEXIST = "ResourceNotFound.AlarmNotExist"
 //  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteAlarm(request *DeleteAlarmRequest) (response *DeleteAlarmResponse, err error) {
     return c.DeleteAlarmWithContext(context.Background(), request)
 }
@@ -140,6 +139,7 @@ func (c *Client) DeleteAlarm(request *DeleteAlarmRequest) (response *DeleteAlarm
 // error code that may be returned:
 //  RESOURCENOTFOUND_ALARMNOTEXIST = "ResourceNotFound.AlarmNotExist"
 //  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteAlarmWithContext(ctx context.Context, request *DeleteAlarmRequest) (response *DeleteAlarmResponse, err error) {
     if request == nil {
         request = NewDeleteAlarmRequest()
@@ -182,7 +182,6 @@ func NewDescribeAlarmsResponse() (response *DescribeAlarmsResponse) {
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeAlarms(request *DescribeAlarmsRequest) (response *DescribeAlarmsResponse, err error) {
     return c.DescribeAlarmsWithContext(context.Background(), request)
 }
@@ -193,7 +192,6 @@ func (c *Client) DescribeAlarms(request *DescribeAlarmsRequest) (response *Descr
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeAlarmsWithContext(ctx context.Context, request *DescribeAlarmsRequest) (response *DescribeAlarmsResponse, err error) {
     if request == nil {
         request = NewDescribeAlarmsRequest()
@@ -236,6 +234,7 @@ func NewEnableAlarmResponse() (response *EnableAlarmResponse) {
 // error code that may be returned:
 //  RESOURCENOTFOUND_ALARMNOTEXIST = "ResourceNotFound.AlarmNotExist"
 //  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) EnableAlarm(request *EnableAlarmRequest) (response *EnableAlarmResponse, err error) {
     return c.EnableAlarmWithContext(context.Background(), request)
 }
@@ -246,6 +245,7 @@ func (c *Client) EnableAlarm(request *EnableAlarmRequest) (response *EnableAlarm
 // error code that may be returned:
 //  RESOURCENOTFOUND_ALARMNOTEXIST = "ResourceNotFound.AlarmNotExist"
 //  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) EnableAlarmWithContext(ctx context.Context, request *EnableAlarmRequest) (response *EnableAlarmResponse, err error) {
     if request == nil {
         request = NewEnableAlarmRequest()
@@ -292,6 +292,7 @@ func NewUpdateAlarmResponse() (response *UpdateAlarmResponse) {
 //  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 //  RESOURCENOTFOUND_USERQUOTANOTEXIST = "ResourceNotFound.UserQuotaNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_ALARMISEXIST = "UnsupportedOperation.AlarmIsExist"
 func (c *Client) UpdateAlarm(request *UpdateAlarmRequest) (response *UpdateAlarmResponse, err error) {
     return c.UpdateAlarmWithContext(context.Background(), request)
@@ -307,6 +308,7 @@ func (c *Client) UpdateAlarm(request *UpdateAlarmRequest) (response *UpdateAlarm
 //  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 //  RESOURCENOTFOUND_USERQUOTANOTEXIST = "ResourceNotFound.UserQuotaNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_ALARMISEXIST = "UnsupportedOperation.AlarmIsExist"
 func (c *Client) UpdateAlarmWithContext(ctx context.Context, request *UpdateAlarmRequest) (response *UpdateAlarmResponse, err error) {
     if request == nil {

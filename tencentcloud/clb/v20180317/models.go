@@ -1951,7 +1951,7 @@ func (r *DeleteLoadBalancerListenersResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteLoadBalancerRequestParams struct {
-	// CLB instance ID array to be deleted, which can be obtained by calling the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API. The array can include up to 20 elements.
+	// CLB instance ID array to be deleted, which can be obtained by calling the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/214/30685?from_cn_redirect=1) API. The array can include up to 20 elements.
 	LoadBalancerIds []*string `json:"LoadBalancerIds,omitnil,omitempty" name:"LoadBalancerIds"`
 
 	// Whether to forcibly delete the CLB instance. True indicates forced deletion; False indicates non-forced deletion, and blocking verification is required.
@@ -1966,7 +1966,7 @@ type DeleteLoadBalancerRequestParams struct {
 type DeleteLoadBalancerRequest struct {
 	*tchttp.BaseRequest
 	
-	// CLB instance ID array to be deleted, which can be obtained by calling the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API. The array can include up to 20 elements.
+	// CLB instance ID array to be deleted, which can be obtained by calling the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/214/30685?from_cn_redirect=1) API. The array can include up to 20 elements.
 	LoadBalancerIds []*string `json:"LoadBalancerIds,omitnil,omitempty" name:"LoadBalancerIds"`
 
 	// Whether to forcibly delete the CLB instance. True indicates forced deletion; False indicates non-forced deletion, and blocking verification is required.
