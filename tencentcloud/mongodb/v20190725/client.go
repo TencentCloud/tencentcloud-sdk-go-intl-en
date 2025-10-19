@@ -124,6 +124,7 @@ func NewCreateBackupDBInstanceResponse() (response *CreateBackupDBInstanceRespon
 // This API is used to back up an instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TRANSPARENTDATAENCRYPTIONALREADYOPEN = "FailedOperation.TransparentDataEncryptionAlreadyOpen"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
@@ -139,6 +140,7 @@ func (c *Client) CreateBackupDBInstance(request *CreateBackupDBInstanceRequest) 
 // This API is used to back up an instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TRANSPARENTDATAENCRYPTIONALREADYOPEN = "FailedOperation.TransparentDataEncryptionAlreadyOpen"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
@@ -241,7 +243,7 @@ func NewCreateDBInstanceResponse() (response *CreateDBInstanceResponse) {
 }
 
 // CreateDBInstance
-// This API is used to create a monthly subscription TencentDB for MongoDB instance. The purchasable specifications supported by this API can be obtained through the `DescribeSpecInfo` API.
+// This API is used to create a yearly/monthly subscription TencentDB for MongoDB instance. The [DescribeSpecInfo](https://www.tencentcloud.comom/document/product/240/35767?from_cn_redirect=1) API can be called to query and obtain the supported sales specifications.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -266,7 +268,7 @@ func (c *Client) CreateDBInstance(request *CreateDBInstanceRequest) (response *C
 }
 
 // CreateDBInstance
-// This API is used to create a monthly subscription TencentDB for MongoDB instance. The purchasable specifications supported by this API can be obtained through the `DescribeSpecInfo` API.
+// This API is used to create a yearly/monthly subscription TencentDB for MongoDB instance. The [DescribeSpecInfo](https://www.tencentcloud.comom/document/product/240/35767?from_cn_redirect=1) API can be called to query and obtain the supported sales specifications.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -461,7 +463,7 @@ func NewDescribeBackupDownloadTaskResponse() (response *DescribeBackupDownloadTa
 }
 
 // DescribeBackupDownloadTask
-// This API is used to query backup download task information.
+// This API is used to query information about the backup download task.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -474,7 +476,7 @@ func (c *Client) DescribeBackupDownloadTask(request *DescribeBackupDownloadTaskR
 }
 
 // DescribeBackupDownloadTask
-// This API is used to query backup download task information.
+// This API is used to query information about the backup download task.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -779,6 +781,70 @@ func (c *Client) DescribeDBInstancesWithContext(ctx context.Context, request *De
     return
 }
 
+func NewDescribeDetailedSlowLogsRequest() (request *DescribeDetailedSlowLogsRequest) {
+    request = &DescribeDetailedSlowLogsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeDetailedSlowLogs")
+    
+    
+    return
+}
+
+func NewDescribeDetailedSlowLogsResponse() (response *DescribeDetailedSlowLogsResponse) {
+    response = &DescribeDetailedSlowLogsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDetailedSlowLogs
+// This API is used to query slow log details of the instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_LIMITPARAOUTOFRANGE = "InvalidParameterValue.LimitParaOutOfRange"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  INVALIDPARAMETERVALUE_OFFSETPARAOUTOFRANGE = "InvalidParameterValue.OffsetParaOutOfRange"
+//  INVALIDPARAMETERVALUE_QUERYTIMERANGEBEYONDLIMIT = "InvalidParameterValue.QueryTimeRangeBeyondLimit"
+//  INVALIDPARAMETERVALUE_SLOWMSBELOWLIMIT = "InvalidParameterValue.SlowMSBelowLimit"
+//  INVALIDPARAMETERVALUE_STARTTIMENOTBEFORETHANENDTIME = "InvalidParameterValue.StartTimeNotBeforeThanEndTime"
+//  INVALIDPARAMETERVALUE_TIMEFORMATERR = "InvalidParameterValue.TimeFormatErr"
+func (c *Client) DescribeDetailedSlowLogs(request *DescribeDetailedSlowLogsRequest) (response *DescribeDetailedSlowLogsResponse, err error) {
+    return c.DescribeDetailedSlowLogsWithContext(context.Background(), request)
+}
+
+// DescribeDetailedSlowLogs
+// This API is used to query slow log details of the instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_LIMITPARAOUTOFRANGE = "InvalidParameterValue.LimitParaOutOfRange"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  INVALIDPARAMETERVALUE_OFFSETPARAOUTOFRANGE = "InvalidParameterValue.OffsetParaOutOfRange"
+//  INVALIDPARAMETERVALUE_QUERYTIMERANGEBEYONDLIMIT = "InvalidParameterValue.QueryTimeRangeBeyondLimit"
+//  INVALIDPARAMETERVALUE_SLOWMSBELOWLIMIT = "InvalidParameterValue.SlowMSBelowLimit"
+//  INVALIDPARAMETERVALUE_STARTTIMENOTBEFORETHANENDTIME = "InvalidParameterValue.StartTimeNotBeforeThanEndTime"
+//  INVALIDPARAMETERVALUE_TIMEFORMATERR = "InvalidParameterValue.TimeFormatErr"
+func (c *Client) DescribeDetailedSlowLogsWithContext(ctx context.Context, request *DescribeDetailedSlowLogsRequest) (response *DescribeDetailedSlowLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDetailedSlowLogsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeDetailedSlowLogs")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDetailedSlowLogs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDetailedSlowLogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstanceParamsRequest() (request *DescribeInstanceParamsRequest) {
     request = &DescribeInstanceParamsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1043,7 +1109,7 @@ func NewDescribeSpecInfoResponse() (response *DescribeSpecInfoResponse) {
 }
 
 // DescribeSpecInfo
-// This API is used to query the purchasable instance specifications.
+// This API is used to query the sales specification of an instance.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
@@ -1054,7 +1120,7 @@ func (c *Client) DescribeSpecInfo(request *DescribeSpecInfoRequest) (response *D
 }
 
 // DescribeSpecInfo
-// This API is used to query the purchasable instance specifications.
+// This API is used to query the sales specification of an instance.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
@@ -1333,9 +1399,10 @@ func NewIsolateDBInstanceResponse() (response *IsolateDBInstanceResponse) {
 }
 
 // IsolateDBInstance
-// This API is used to isolate a pay-as-you-go TencentDB for MongoDB instance. An isolated instance is retained in the recycle bin and data can no longer be written to it. After it is isolated for a certain period of time, it will be completely deleted. For the retention period in the recycle bin, please see the terms of service for pay-as-you-go billing. Isolated pay-as-you-go instances cannot be recovered, so please proceed with caution.
+// This API is used to isolate a pay-as-you-go TencentDB for MongoDB instance. After isolation, the instance is retained in the recycle bin, and data cannot be written into it. After a certain period of isolation, the instance is deleted permanently. For the retention time in the recycle bin, see the pay-as-you-go service terms. The deleted pay-as-you-go instance cannot be recovered. Proceed with caution.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DELETIONPROTECTIONENABLED = "FailedOperation.DeletionProtectionEnabled"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
@@ -1349,9 +1416,10 @@ func (c *Client) IsolateDBInstance(request *IsolateDBInstanceRequest) (response 
 }
 
 // IsolateDBInstance
-// This API is used to isolate a pay-as-you-go TencentDB for MongoDB instance. An isolated instance is retained in the recycle bin and data can no longer be written to it. After it is isolated for a certain period of time, it will be completely deleted. For the retention period in the recycle bin, please see the terms of service for pay-as-you-go billing. Isolated pay-as-you-go instances cannot be recovered, so please proceed with caution.
+// This API is used to isolate a pay-as-you-go TencentDB for MongoDB instance. After isolation, the instance is retained in the recycle bin, and data cannot be written into it. After a certain period of isolation, the instance is deleted permanently. For the retention time in the recycle bin, see the pay-as-you-go service terms. The deleted pay-as-you-go instance cannot be recovered. Proceed with caution.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DELETIONPROTECTIONENABLED = "FailedOperation.DeletionProtectionEnabled"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
@@ -1521,7 +1589,7 @@ func NewModifyDBInstanceSpecResponse() (response *ModifyDBInstanceSpecResponse) 
 }
 
 // ModifyDBInstanceSpec
-// This API is used to adjust the configuration of a TencentDB for MongoDB instance. Saleable specifications supported for this API can be obtained from the DescribeSpecInfo API for querying saleable TencentDB for MongoDB specifications.
+// This API is used to adjust the TencentDB for MongoDB instance configuration. The [DescribeSpecInfo](https://www.tencentcloud.comom/document/product/240/38567?from_cn_redirect=1) API can be called to query and obtain the supported sales specifications.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
@@ -1538,7 +1606,7 @@ func (c *Client) ModifyDBInstanceSpec(request *ModifyDBInstanceSpecRequest) (res
 }
 
 // ModifyDBInstanceSpec
-// This API is used to adjust the configuration of a TencentDB for MongoDB instance. Saleable specifications supported for this API can be obtained from the DescribeSpecInfo API for querying saleable TencentDB for MongoDB specifications.
+// This API is used to adjust the TencentDB for MongoDB instance configuration. The [DescribeSpecInfo](https://www.tencentcloud.comom/document/product/240/38567?from_cn_redirect=1) API can be called to query and obtain the supported sales specifications.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
@@ -1761,7 +1829,7 @@ func NewResetDBInstancePasswordResponse() (response *ResetDBInstancePasswordResp
 }
 
 // ResetDBInstancePassword
-// This API is used to modify instance password.
+// This API is used to reset the instance access password.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1778,7 +1846,7 @@ func (c *Client) ResetDBInstancePassword(request *ResetDBInstancePasswordRequest
 }
 
 // ResetDBInstancePassword
-// This API is used to modify instance password.
+// This API is used to reset the instance access password.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1803,6 +1871,132 @@ func (c *Client) ResetDBInstancePasswordWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewResetDBInstancePasswordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSetDBInstanceDeletionProtectionRequest() (request *SetDBInstanceDeletionProtectionRequest) {
+    request = &SetDBInstanceDeletionProtectionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "SetDBInstanceDeletionProtection")
+    
+    
+    return
+}
+
+func NewSetDBInstanceDeletionProtectionResponse() (response *SetDBInstanceDeletionProtectionResponse) {
+    response = &SetDBInstanceDeletionProtectionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SetDBInstanceDeletionProtection
+// This API is used to set instance termination protection.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_INSTANCEHASBEENDELETED = "InvalidParameterValue.InstanceHasBeenDeleted"
+//  INVALIDPARAMETERVALUE_INSTANCEHASBEENISOLATED = "InvalidParameterValue.InstanceHasBeenIsolated"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) SetDBInstanceDeletionProtection(request *SetDBInstanceDeletionProtectionRequest) (response *SetDBInstanceDeletionProtectionResponse, err error) {
+    return c.SetDBInstanceDeletionProtectionWithContext(context.Background(), request)
+}
+
+// SetDBInstanceDeletionProtection
+// This API is used to set instance termination protection.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_INSTANCEHASBEENDELETED = "InvalidParameterValue.InstanceHasBeenDeleted"
+//  INVALIDPARAMETERVALUE_INSTANCEHASBEENISOLATED = "InvalidParameterValue.InstanceHasBeenIsolated"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) SetDBInstanceDeletionProtectionWithContext(ctx context.Context, request *SetDBInstanceDeletionProtectionRequest) (response *SetDBInstanceDeletionProtectionResponse, err error) {
+    if request == nil {
+        request = NewSetDBInstanceDeletionProtectionRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "SetDBInstanceDeletionProtection")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetDBInstanceDeletionProtection require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSetDBInstanceDeletionProtectionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewTerminateDBInstancesRequest() (request *TerminateDBInstancesRequest) {
+    request = &TerminateDBInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "TerminateDBInstances")
+    
+    
+    return
+}
+
+func NewTerminateDBInstancesResponse() (response *TerminateDBInstancesResponse) {
+    response = &TerminateDBInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// TerminateDBInstances
+// This API is used to terminate monthly subscription billing instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DELETIONPROTECTIONENABLED = "FailedOperation.DeletionProtectionEnabled"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_CHECKAPPIDFAILED = "InvalidParameterValue.CheckAppIdFailed"
+//  INVALIDPARAMETERVALUE_ILLEGALINSTANCENAME = "InvalidParameterValue.IllegalInstanceName"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  INVALIDPARAMETERVALUE_STATUSABNORMAL = "InvalidParameterValue.StatusAbnormal"
+func (c *Client) TerminateDBInstances(request *TerminateDBInstancesRequest) (response *TerminateDBInstancesResponse, err error) {
+    return c.TerminateDBInstancesWithContext(context.Background(), request)
+}
+
+// TerminateDBInstances
+// This API is used to terminate monthly subscription billing instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DELETIONPROTECTIONENABLED = "FailedOperation.DeletionProtectionEnabled"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_CHECKAPPIDFAILED = "InvalidParameterValue.CheckAppIdFailed"
+//  INVALIDPARAMETERVALUE_ILLEGALINSTANCENAME = "InvalidParameterValue.IllegalInstanceName"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  INVALIDPARAMETERVALUE_STATUSABNORMAL = "InvalidParameterValue.StatusAbnormal"
+func (c *Client) TerminateDBInstancesWithContext(ctx context.Context, request *TerminateDBInstancesRequest) (response *TerminateDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewTerminateDBInstancesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "TerminateDBInstances")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("TerminateDBInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewTerminateDBInstancesResponse()
     err = c.Send(request, response)
     return
 }
