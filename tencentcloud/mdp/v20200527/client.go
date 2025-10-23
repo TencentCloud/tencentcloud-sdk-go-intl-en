@@ -151,6 +151,60 @@ func (c *Client) BindNewLVBDomainWithChannelWithContext(ctx context.Context, req
     return
 }
 
+func NewBindSSAICDNDomainWithChannelRequest() (request *BindSSAICDNDomainWithChannelRequest) {
+    request = &BindSSAICDNDomainWithChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "BindSSAICDNDomainWithChannel")
+    
+    
+    return
+}
+
+func NewBindSSAICDNDomainWithChannelResponse() (response *BindSSAICDNDomainWithChannelResponse) {
+    response = &BindSSAICDNDomainWithChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// BindSSAICDNDomainWithChannel
+// BindSSAICDNDomainWithChannel
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CDNDOMAIN = "InvalidParameter.CdnDomain"
+//  INVALIDPARAMETER_CHANNELID = "InvalidParameter.ChannelId"
+func (c *Client) BindSSAICDNDomainWithChannel(request *BindSSAICDNDomainWithChannelRequest) (response *BindSSAICDNDomainWithChannelResponse, err error) {
+    return c.BindSSAICDNDomainWithChannelWithContext(context.Background(), request)
+}
+
+// BindSSAICDNDomainWithChannel
+// BindSSAICDNDomainWithChannel
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CDNDOMAIN = "InvalidParameter.CdnDomain"
+//  INVALIDPARAMETER_CHANNELID = "InvalidParameter.ChannelId"
+func (c *Client) BindSSAICDNDomainWithChannelWithContext(ctx context.Context, request *BindSSAICDNDomainWithChannelRequest) (response *BindSSAICDNDomainWithChannelResponse, err error) {
+    if request == nil {
+        request = NewBindSSAICDNDomainWithChannelRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "BindSSAICDNDomainWithChannel")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BindSSAICDNDomainWithChannel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBindSSAICDNDomainWithChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateStreamPackageChannelRequest() (request *CreateStreamPackageChannelRequest) {
     request = &CreateStreamPackageChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3485,6 +3539,62 @@ func (c *Client) UnbindLinearAssemblyCDNDomainWithChannelWithContext(ctx context
     request.SetContext(ctx)
     
     response = NewUnbindLinearAssemblyCDNDomainWithChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUnbindSSAICDNDomainWithChannelRequest() (request *UnbindSSAICDNDomainWithChannelRequest) {
+    request = &UnbindSSAICDNDomainWithChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "UnbindSSAICDNDomainWithChannel")
+    
+    
+    return
+}
+
+func NewUnbindSSAICDNDomainWithChannelResponse() (response *UnbindSSAICDNDomainWithChannelResponse) {
+    response = &UnbindSSAICDNDomainWithChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UnbindSSAICDNDomainWithChannel
+// UnbindSSAICDNDomainWithChannel
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CDNDOMAIN = "InvalidParameter.CdnDomain"
+//  INVALIDPARAMETER_CHANNELID = "InvalidParameter.ChannelId"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) UnbindSSAICDNDomainWithChannel(request *UnbindSSAICDNDomainWithChannelRequest) (response *UnbindSSAICDNDomainWithChannelResponse, err error) {
+    return c.UnbindSSAICDNDomainWithChannelWithContext(context.Background(), request)
+}
+
+// UnbindSSAICDNDomainWithChannel
+// UnbindSSAICDNDomainWithChannel
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CDNDOMAIN = "InvalidParameter.CdnDomain"
+//  INVALIDPARAMETER_CHANNELID = "InvalidParameter.ChannelId"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) UnbindSSAICDNDomainWithChannelWithContext(ctx context.Context, request *UnbindSSAICDNDomainWithChannelRequest) (response *UnbindSSAICDNDomainWithChannelResponse, err error) {
+    if request == nil {
+        request = NewUnbindSSAICDNDomainWithChannelRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mdp", APIVersion, "UnbindSSAICDNDomainWithChannel")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UnbindSSAICDNDomainWithChannel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUnbindSSAICDNDomainWithChannelResponse()
     err = c.Send(request, response)
     return
 }
