@@ -7899,7 +7899,7 @@ type DescribeDDoSAttackDataRequestParams struct {
 	// <li>`ddos_attackPackageRate`: Time-series data of attack packet rate.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+	// Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). A maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// IDs of DDoS policies to be queried. All policies will be selected if this field is not specified.
@@ -7935,7 +7935,7 @@ type DescribeDDoSAttackDataRequest struct {
 	// <li>`ddos_attackPackageRate`: Time-series data of attack packet rate.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+	// Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). A maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// IDs of DDoS policies to be queried. All policies will be selected if this field is not specified.
@@ -8020,7 +8020,7 @@ type DescribeDDoSAttackEventRequestParams struct {
 	// List of DDoS policy IDs. All policies are selected if this field is not specified.
 	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
-	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+	// Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). A maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
@@ -8061,7 +8061,7 @@ type DescribeDDoSAttackEventRequest struct {
 	// List of DDoS policy IDs. All policies are selected if this field is not specified.
 	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
-	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+	// Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). A maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
@@ -8164,7 +8164,7 @@ type DescribeDDoSAttackTopDataRequestParams struct {
 	// <li>`ddos_attackFlux_sregion`: Rank attacker regions by the number of attacks.</li>
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
-	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+	// Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). A maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// The list of DDoS policy IDs to be specified. All policies will be selected if this field is not specified.
@@ -8212,7 +8212,7 @@ type DescribeDDoSAttackTopDataRequest struct {
 	// <li>`ddos_attackFlux_sregion`: Rank attacker regions by the number of attacks.</li>
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
-	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+	// Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). A maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// The list of DDoS policy IDs to be specified. All policies will be selected if this field is not specified.
@@ -10499,7 +10499,7 @@ func (r *DescribePlansResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePrefetchTasksRequestParams struct {
-	// Site ID. This parameter is required.
+	// Site ID.The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980)
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Start time of the query. Either time or job-id is required.
@@ -10514,14 +10514,14 @@ type DescribePrefetchTasksRequestParams struct {
 	// Number limit of paginated query. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter criteria. The maximum number of Filters.Values is 20. The detailed filter criteria are as follows: <li>job-id: Filter by task ID in the format like 1379afjk91u32h. Multiple values and fuzzy queries are not supported.</li><li>target: Filter by target resource information in the format like http://www.qq.com/1.txt. Multiple values and fuzzy queries are not supported.</li><li>domains: Filter by domain name in the format like www.qq.com. Fuzzy queries are not supported.</li><li>statuses: Filter by task status. Fuzzy queries are not supported. Options:<br>??processing: processing<br>??success: successful<br>??failed: failed<br>??timeout: timed out<br>??invalid: invalid, that is, the response status code of the origin server is not 2xx. Please check the origin server service.</li>
+	// Filter criteria. The maximum number of Filters.Values is 20. The detailed filter criteria are as follows: <li>job-id: Filter by task ID in the format like 1379afjk91u32h. Multiple values and fuzzy queries are not supported.</li><li>target: Filter by target resource information in the format like http://www.qq.com/1.txt. Multiple values and fuzzy queries are not supported.</li><li>domains: Filter by domain name in the format like www.qq.com. Fuzzy queries are not supported.</li><li>statuses: Filter by task status. Fuzzy queries are not supported. Options:<br>processing: processing<br>success: successful<br>failed: failed<br>timeout: timed out<br>invalid: invalid, that is, the response status code of the origin server is not 2xx. Please check the origin server service.<br>canceled: Canceled
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribePrefetchTasksRequest struct {
 	*tchttp.BaseRequest
 	
-	// Site ID. This parameter is required.
+	// Site ID.The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980)
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Start time of the query. Either time or job-id is required.
@@ -10536,7 +10536,7 @@ type DescribePrefetchTasksRequest struct {
 	// Number limit of paginated query. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter criteria. The maximum number of Filters.Values is 20. The detailed filter criteria are as follows: <li>job-id: Filter by task ID in the format like 1379afjk91u32h. Multiple values and fuzzy queries are not supported.</li><li>target: Filter by target resource information in the format like http://www.qq.com/1.txt. Multiple values and fuzzy queries are not supported.</li><li>domains: Filter by domain name in the format like www.qq.com. Fuzzy queries are not supported.</li><li>statuses: Filter by task status. Fuzzy queries are not supported. Options:<br>??processing: processing<br>??success: successful<br>??failed: failed<br>??timeout: timed out<br>??invalid: invalid, that is, the response status code of the origin server is not 2xx. Please check the origin server service.</li>
+	// Filter criteria. The maximum number of Filters.Values is 20. The detailed filter criteria are as follows: <li>job-id: Filter by task ID in the format like 1379afjk91u32h. Multiple values and fuzzy queries are not supported.</li><li>target: Filter by target resource information in the format like http://www.qq.com/1.txt. Multiple values and fuzzy queries are not supported.</li><li>domains: Filter by domain name in the format like www.qq.com. Fuzzy queries are not supported.</li><li>statuses: Filter by task status. Fuzzy queries are not supported. Options:<br>processing: processing<br>success: successful<br>failed: failed<br>timeout: timed out<br>invalid: invalid, that is, the response status code of the origin server is not 2xx. Please check the origin server service.<br>canceled: Canceled
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -10594,7 +10594,7 @@ func (r *DescribePrefetchTasksResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePurgeTasksRequestParams struct {
-	// Site ID. This parameter is required.
+	// Site ID. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980)
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Start time of the query. Either time or job-id is required.
@@ -10613,15 +10613,15 @@ type DescribePurgeTasksRequestParams struct {
 	// <li>job-id: Filter by task ID in the format like 1379afjk91u32h. Multiple values and fuzzy queries are not supported.</li>
 	// <li>target: Filter by target resource information in the format like http://www.qq.com/1.txt or tag1. Multiple values are not supported yet. Fuzzy queries are supported.</li>
 	// <li>domains: Filter by domain name in the format like www.qq.com. Fuzzy queries are not supported.</li>
-	// <li>statuses: Filter by task status. Fuzzy queries are not supported. Options:<br>?? processing: processing<br>?? success: successful<br>?? failed: failed<br>?? timeout: timed out</li>
-	// <li>type: Filter by cache clearance type. Multiple values and fuzzy queries are not supported yet. Options: <br>?? purge_url: URL<br>?? purge_prefix: prefix<br>?? purge_all: all cached content<br>?? purge_host: Hostname<br>?? purge_cache_tag: CacheTag</li>
+	// <li>statuses: Filter by task status. Fuzzy queries are not supported. Options:<br>processing: processing<br>success: successful<br>failed: failed<br>timeout: timed out<br>canceled: Canceled</li>
+	// <li>type: Filter by cache clearance type. Multiple values and fuzzy queries are not supported yet. Options: <br>purge_url: URL<br>purge_prefix: prefix<br>purge_all: all cached content<br>purge_host: Hostname<br>purge_cache_tag: CacheTag</li>
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribePurgeTasksRequest struct {
 	*tchttp.BaseRequest
 	
-	// Site ID. This parameter is required.
+	// Site ID. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980)
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Start time of the query. Either time or job-id is required.
@@ -10640,8 +10640,8 @@ type DescribePurgeTasksRequest struct {
 	// <li>job-id: Filter by task ID in the format like 1379afjk91u32h. Multiple values and fuzzy queries are not supported.</li>
 	// <li>target: Filter by target resource information in the format like http://www.qq.com/1.txt or tag1. Multiple values are not supported yet. Fuzzy queries are supported.</li>
 	// <li>domains: Filter by domain name in the format like www.qq.com. Fuzzy queries are not supported.</li>
-	// <li>statuses: Filter by task status. Fuzzy queries are not supported. Options:<br>?? processing: processing<br>?? success: successful<br>?? failed: failed<br>?? timeout: timed out</li>
-	// <li>type: Filter by cache clearance type. Multiple values and fuzzy queries are not supported yet. Options: <br>?? purge_url: URL<br>?? purge_prefix: prefix<br>?? purge_all: all cached content<br>?? purge_host: Hostname<br>?? purge_cache_tag: CacheTag</li>
+	// <li>statuses: Filter by task status. Fuzzy queries are not supported. Options:<br>processing: processing<br>success: successful<br>failed: failed<br>timeout: timed out<br>canceled: Canceled</li>
+	// <li>type: Filter by cache clearance type. Multiple values and fuzzy queries are not supported yet. Options: <br>purge_url: URL<br>purge_prefix: prefix<br>purge_all: all cached content<br>purge_host: Hostname<br>purge_cache_tag: CacheTag</li>
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -11592,7 +11592,7 @@ type DescribeTimingL4DataRequestParams struct {
 	// <Li>l4Flow_outBandwidth: outbound peak bandwidth.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+	// Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of L4 proxy IDs. All L4 proxies will be selected if this field is not specified.
@@ -11632,7 +11632,7 @@ type DescribeTimingL4DataRequest struct {
 	// <Li>l4Flow_outBandwidth: outbound peak bandwidth.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+	// Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of L4 proxy IDs. All L4 proxies will be selected if this field is not specified.
@@ -11721,7 +11721,7 @@ type DescribeTimingL7AnalysisDataRequestParams struct {
 	// <Li>l7Flow_outFlux: L7 EdgeOne response traffic. Unit: byte;</li><Li>l7Flow_inFlux: L7 client request traffic. Unit: byte;</li><Li>l7Flow_flux: L7 total traffic (including EdgeOne response traffic and client request traffic). Unit: byte;</li><Li>l7Flow_outBandwidth: L7 EdgeOne response bandwidth. Unit: bps;</li><Li>l7Flow_inBandwidth: L7 client request bandwidth. Unit: bps;</li><Li>l7Flow_bandwidth: L7 total bandwidth (including EdgeOne response bandwidth and client request bandwidth). Unit: bps;</li><Li>l7Flow_request: L7 request count. Unit: times;</li><Li>l7Flow_avgResponseTime: Average L7 edge response time. Unit: ms (milliseconds);</li><Li>l7Flow_avgFirstByteResponseTime: Average L7 edge first byte response time. Unit: ms.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Site ID list. This parameter is required. A maximum of 100 site IDs can be imported. Use `*` to query data for all sites under the Tencent Cloud root account. To query account-level data, you must have resource permissions for all sites in this API.
+	// Site ID list. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). A maximum of 100 site IDs can be imported. Use `*` to query data for all sites under the Tencent Cloud root account. To query account-level data, you must have resource permissions for all sites in this API.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Query period granularity. Valid values:
@@ -11731,11 +11731,11 @@ type DescribeTimingL7AnalysisDataRequestParams struct {
 	// <li>day: 1 day.</li>If this parameter is not filled in, the granularity will be automatically calculated based on the interval between the start time and end time. Specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is no more than 2 hours, no more than 2 days, no more than 7 days, and over 7 days.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Filtering conditions used when querying data. Refer to the [Filtering Conditions for Analytics](https://www.tencentcloud.com/document/product/1145/56985) document for the available filters applicable to L7 client traffic, bandwidth and requests.  
-	// To restrict results by zone or content identifier, input the corresponding values via the `ZoneIds.N` parameter.
+	// Filter criteria used when filtering data. valid values refer to the available filter options for L7 access traffic, bandwidth, and request count in the [metric analysis filtering condition description](https://www.tencentcloud.comom/document/product/1552/98219?from_cn_redirect=1#1aaf1150-55a4-4b4d-b103-3a8317ac7945).
+	// If needed, limit the site or content identifier by importing the corresponding value in the `ZoneIds.N` parameter.
 	Filters []*QueryCondition `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Data region. This parameter is deprecated. Please filter data by client region in `Filters.country`.
+	// Data ownership region. this parameter is deprecated. please filter data by client region in `Filters.country`.
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 }
 
@@ -11752,7 +11752,7 @@ type DescribeTimingL7AnalysisDataRequest struct {
 	// <Li>l7Flow_outFlux: L7 EdgeOne response traffic. Unit: byte;</li><Li>l7Flow_inFlux: L7 client request traffic. Unit: byte;</li><Li>l7Flow_flux: L7 total traffic (including EdgeOne response traffic and client request traffic). Unit: byte;</li><Li>l7Flow_outBandwidth: L7 EdgeOne response bandwidth. Unit: bps;</li><Li>l7Flow_inBandwidth: L7 client request bandwidth. Unit: bps;</li><Li>l7Flow_bandwidth: L7 total bandwidth (including EdgeOne response bandwidth and client request bandwidth). Unit: bps;</li><Li>l7Flow_request: L7 request count. Unit: times;</li><Li>l7Flow_avgResponseTime: Average L7 edge response time. Unit: ms (milliseconds);</li><Li>l7Flow_avgFirstByteResponseTime: Average L7 edge first byte response time. Unit: ms.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Site ID list. This parameter is required. A maximum of 100 site IDs can be imported. Use `*` to query data for all sites under the Tencent Cloud root account. To query account-level data, you must have resource permissions for all sites in this API.
+	// Site ID list. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). A maximum of 100 site IDs can be imported. Use `*` to query data for all sites under the Tencent Cloud root account. To query account-level data, you must have resource permissions for all sites in this API.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Query period granularity. Valid values:
@@ -11762,11 +11762,11 @@ type DescribeTimingL7AnalysisDataRequest struct {
 	// <li>day: 1 day.</li>If this parameter is not filled in, the granularity will be automatically calculated based on the interval between the start time and end time. Specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is no more than 2 hours, no more than 2 days, no more than 7 days, and over 7 days.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Filtering conditions used when querying data. Refer to the [Filtering Conditions for Analytics](https://www.tencentcloud.com/document/product/1145/56985) document for the available filters applicable to L7 client traffic, bandwidth and requests.  
-	// To restrict results by zone or content identifier, input the corresponding values via the `ZoneIds.N` parameter.
+	// Filter criteria used when filtering data. valid values refer to the available filter options for L7 access traffic, bandwidth, and request count in the [metric analysis filtering condition description](https://www.tencentcloud.comom/document/product/1552/98219?from_cn_redirect=1#1aaf1150-55a4-4b4d-b103-3a8317ac7945).
+	// If needed, limit the site or content identifier by importing the corresponding value in the `ZoneIds.N` parameter.
 	Filters []*QueryCondition `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Data region. This parameter is deprecated. Please filter data by client region in `Filters.country`.
+	// Data ownership region. this parameter is deprecated. please filter data by client region in `Filters.country`.
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 }
 
@@ -11969,46 +11969,47 @@ type DescribeTopL7AnalysisDataRequestParams struct {
 	// End time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Queried metric. Valid values:
-	// <li> l7Flow_outFlux_country: L7 EdgeOne response traffic aggregated by the country/region dimension;</li>
-	// <li> l7Flow_outFlux_province: L7 EdgeOne response traffic aggregated by the dimension of provinces in chinese mainland;</li>
-	// <li> l7Flow_outFlux_statusCode: L7 EdgeOne response traffic aggregated by the status code dimension;</li>
-	// <li> l7Flow_outFlux_domain: L7 EdgeOne response traffic aggregated by the domain name dimension;</li>
-	// <li>l7Flow_outFlux_url: L7 EdgeOne response traffic aggregated by url path dimension.</li>
-	// <li> l7Flow_outFlux_resourceType: L7 EdgeOne response traffic aggregated by the resource type dimension;</li>
-	// <li> l7Flow_outFlux_sip: L7 EdgeOne response traffic aggregated by the client IP dimension;</li>
-	// <li>l7Flow_outFlux_referers: L7 EdgeOne response traffic aggregated by referer dimension.</li>
-	// <li> l7Flow_outFlux_ua_device: L7 EdgeOne response traffic aggregated by the device type dimension;</li>
-	// <li> l7Flow_outFlux_ua_browser: L7 EdgeOne response traffic aggregated by the browser type dimension;</li>
-	// <li> l7Flow_outFlux_ua_os: L7 EdgeOne response traffic aggregated by the operating system type dimension;</li>
-	// <li> l7Flow_outFlux_ua: L7 EdgeOne response traffic aggregated by the User-Agent dimension;</li>
-	// <li> l7Flow_request_country: L7 request count aggregated by the country/region dimension;</li>
-	// <li> l7Flow_request_province: L7 request count aggregated by the dimension of provinces in the chinese mainland;</li>
-	// <li> l7Flow_request_statusCode: L7 request count aggregated by the status code dimension;</li>
-	// <li> l7Flow_request_domain: L7 request count aggregated by the domain name dimension;</li>
-	// <li>l7Flow_request_url: L7 request count aggregated by url Path dimension.</li>
-	// <li> l7Flow_request_resourceType: L7 request count aggregated by resource type dimension;</li>
-	// <li> l7Flow_request_sip: L7 request count aggregated by the client IP dimension;</li>
-	// <li>l7Flow_request_referer: L7 request count aggregated by referer dimension.</li>
-	// <li> l7Flow_request_ua_device: L7 request count aggregated by the device type dimension;</li>
-	// <li> l7Flow_request_ua_browser: L7 request count aggregated by the browser type dimension;</li>
-	// <li> l7Flow_request_ua_os: L7 request count aggregated by the operating system type dimension.</li>
-	// <li> l7Flow_request_ua: L7 request count aggregated by the User-Agent dimension.</li>
+	// Queried metric. valid values:.
+	// <li> l7Flow_outFlux_country: specifies the l7 EdgeOne response traffic metric counted by the country/region dimension.</li>.
+	// <li> l7Flow_outFlux_province: specifies the l7 EdgeOne response traffic metric counted by the dimension of provinces in chinese mainland.</li>.
+	// <li> l7Flow_outFlux_statusCode: specifies the l7 EdgeOne response traffic metric by status code dimension.</li>.
+	// <li> l7Flow_outFlux_domain: specifies the l7 EdgeOne response traffic metric counted by domain name dimension.</li>.
+	// <li>l7Flow_outFlux_url: specifies the l7 EdgeOne response traffic metric counted by url Path dimension.</li>.
+	// <li> l7Flow_outFlux_resourceType: specifies the l7 EdgeOne response traffic metric counted by resource type dimension.</li>.
+	// <li> l7Flow_outFlux_sip: specifies the l7 EdgeOne response traffic metric counted by the client IP dimension.</li>.
+	// <li>l7Flow_outFlux_referers: specifies the l7 EdgeOne response traffic statistics by Referer dimension.</li>.
+	// <li> l7Flow_outFlux_ua_device: specifies the l7 EdgeOne response traffic metric counted by device type dimension.</li>.
+	// <li> l7Flow_outFlux_ua_browser: specifies the l7 EdgeOne response traffic metric by browser type dimension.</li>.
+	// <li> l7Flow_outFlux_ua_os: specifies the l7 EdgeOne response traffic metric counted by the operating system type dimension.</li>.
+	// <li> l7Flow_outFlux_ua: specifies the l7 EdgeOne response traffic metric by User-Agent dimension statistics.</li>.
+	// <li> l7Flow_request_country: specifies the l7 access request count metric by country/region dimension.</li>.
+	// <li> l7Flow_request_province: specifies the l7 access request count metric by province in the chinese mainland.</li>.
+	// <li> l7Flow_request_statusCode: specifies the l7 access request count metric by status code dimension.</li>.
+	// <li> l7Flow_request_domain: specifies the l7 access request count metric counted by the domain name dimension.</li>.
+	// <li> l7Flow_request_url: specifies the l7 access request count metric counted by url Path dimension. </li>.
+	// <li> l7Flow_request_resourceType: specifies the l7 access request count metric counted by the resource type dimension.</li>.
+	// <li> l7Flow_request_sip: specifies the l7 access request count metric counted by the client IP dimension.</li>.
+	// <li>l7Flow_request_referer: specifies l7 access request count metrics by referer dimension.</li>.
+	// <li> l7Flow_request_ua_device: specifies the l7 access request count metric by device type dimension.</li>.
+	// <li> l7Flow_request_ua_browser: specifies the l7 access request count metric by browser type dimension.</li>.
+	// <li> l7Flow_request_ua_os: specifies the l7 access request count metric counted by the operating system type dimension.</li>.
+	// <li> l7Flow_request_ua: l7 access request count metric counted by the User-Agent dimension.</li>.
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
-	// Site ID list. This parameter is required. A maximum of 100 site IDs can be imported. Use `*` to query data for all sites under the Tencent Cloud root account. To query account-level data, you must have resource permissions for all sites in this API.
+	// Site ID list. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980).  A maximum of 100 site IDs can be imported. Use `*` to query data for all sites under the Tencent Cloud root account. To query account-level data, you must have resource permissions for all sites in this API.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Indicates the top N data to be queried. The maximum value is 1000. If this parameter is not input, the default value is 10, indicating querying the top 10 data.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filtering conditions used when querying data. Refer to the [Filtering Conditions for Analytics](https://www.tencentcloud.com/document/product/1145/56985) document for the available filters applicable to L7 client traffic, bandwidth and requests.  
+	// Filter criteria used when filtering data. valid values refer to the available filter options for L7 access traffic, bandwidth, and request count in the [metric analysis filtering condition description](https://www.tencentcloud.comom/document/product/1552/98219?from_cn_redirect=1#1aaf1150-55a4-4b4d-b103-3a8317ac7945).
+	// If needed, limit the site or content identifier by importing the corresponding value in the `ZoneIds.N` parameter.
 	Filters []*QueryCondition `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Query time granularity. This parameter is deprecated.
+	// Query time granularity. this parameter is invalid. to be deprecated.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Data region. This parameter is deprecated. Please filter data by client region in `Filters.country`.
+	// Data ownership region. this parameter is deprecated. please filter data by client region in `Filters.country`.
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 }
 
@@ -12021,46 +12022,47 @@ type DescribeTopL7AnalysisDataRequest struct {
 	// End time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Queried metric. Valid values:
-	// <li> l7Flow_outFlux_country: L7 EdgeOne response traffic aggregated by the country/region dimension;</li>
-	// <li> l7Flow_outFlux_province: L7 EdgeOne response traffic aggregated by the dimension of provinces in chinese mainland;</li>
-	// <li> l7Flow_outFlux_statusCode: L7 EdgeOne response traffic aggregated by the status code dimension;</li>
-	// <li> l7Flow_outFlux_domain: L7 EdgeOne response traffic aggregated by the domain name dimension;</li>
-	// <li>l7Flow_outFlux_url: L7 EdgeOne response traffic aggregated by url path dimension.</li>
-	// <li> l7Flow_outFlux_resourceType: L7 EdgeOne response traffic aggregated by the resource type dimension;</li>
-	// <li> l7Flow_outFlux_sip: L7 EdgeOne response traffic aggregated by the client IP dimension;</li>
-	// <li>l7Flow_outFlux_referers: L7 EdgeOne response traffic aggregated by referer dimension.</li>
-	// <li> l7Flow_outFlux_ua_device: L7 EdgeOne response traffic aggregated by the device type dimension;</li>
-	// <li> l7Flow_outFlux_ua_browser: L7 EdgeOne response traffic aggregated by the browser type dimension;</li>
-	// <li> l7Flow_outFlux_ua_os: L7 EdgeOne response traffic aggregated by the operating system type dimension;</li>
-	// <li> l7Flow_outFlux_ua: L7 EdgeOne response traffic aggregated by the User-Agent dimension;</li>
-	// <li> l7Flow_request_country: L7 request count aggregated by the country/region dimension;</li>
-	// <li> l7Flow_request_province: L7 request count aggregated by the dimension of provinces in the chinese mainland;</li>
-	// <li> l7Flow_request_statusCode: L7 request count aggregated by the status code dimension;</li>
-	// <li> l7Flow_request_domain: L7 request count aggregated by the domain name dimension;</li>
-	// <li>l7Flow_request_url: L7 request count aggregated by url Path dimension.</li>
-	// <li> l7Flow_request_resourceType: L7 request count aggregated by resource type dimension;</li>
-	// <li> l7Flow_request_sip: L7 request count aggregated by the client IP dimension;</li>
-	// <li>l7Flow_request_referer: L7 request count aggregated by referer dimension.</li>
-	// <li> l7Flow_request_ua_device: L7 request count aggregated by the device type dimension;</li>
-	// <li> l7Flow_request_ua_browser: L7 request count aggregated by the browser type dimension;</li>
-	// <li> l7Flow_request_ua_os: L7 request count aggregated by the operating system type dimension.</li>
-	// <li> l7Flow_request_ua: L7 request count aggregated by the User-Agent dimension.</li>
+	// Queried metric. valid values:.
+	// <li> l7Flow_outFlux_country: specifies the l7 EdgeOne response traffic metric counted by the country/region dimension.</li>.
+	// <li> l7Flow_outFlux_province: specifies the l7 EdgeOne response traffic metric counted by the dimension of provinces in chinese mainland.</li>.
+	// <li> l7Flow_outFlux_statusCode: specifies the l7 EdgeOne response traffic metric by status code dimension.</li>.
+	// <li> l7Flow_outFlux_domain: specifies the l7 EdgeOne response traffic metric counted by domain name dimension.</li>.
+	// <li>l7Flow_outFlux_url: specifies the l7 EdgeOne response traffic metric counted by url Path dimension.</li>.
+	// <li> l7Flow_outFlux_resourceType: specifies the l7 EdgeOne response traffic metric counted by resource type dimension.</li>.
+	// <li> l7Flow_outFlux_sip: specifies the l7 EdgeOne response traffic metric counted by the client IP dimension.</li>.
+	// <li>l7Flow_outFlux_referers: specifies the l7 EdgeOne response traffic statistics by Referer dimension.</li>.
+	// <li> l7Flow_outFlux_ua_device: specifies the l7 EdgeOne response traffic metric counted by device type dimension.</li>.
+	// <li> l7Flow_outFlux_ua_browser: specifies the l7 EdgeOne response traffic metric by browser type dimension.</li>.
+	// <li> l7Flow_outFlux_ua_os: specifies the l7 EdgeOne response traffic metric counted by the operating system type dimension.</li>.
+	// <li> l7Flow_outFlux_ua: specifies the l7 EdgeOne response traffic metric by User-Agent dimension statistics.</li>.
+	// <li> l7Flow_request_country: specifies the l7 access request count metric by country/region dimension.</li>.
+	// <li> l7Flow_request_province: specifies the l7 access request count metric by province in the chinese mainland.</li>.
+	// <li> l7Flow_request_statusCode: specifies the l7 access request count metric by status code dimension.</li>.
+	// <li> l7Flow_request_domain: specifies the l7 access request count metric counted by the domain name dimension.</li>.
+	// <li> l7Flow_request_url: specifies the l7 access request count metric counted by url Path dimension. </li>.
+	// <li> l7Flow_request_resourceType: specifies the l7 access request count metric counted by the resource type dimension.</li>.
+	// <li> l7Flow_request_sip: specifies the l7 access request count metric counted by the client IP dimension.</li>.
+	// <li>l7Flow_request_referer: specifies l7 access request count metrics by referer dimension.</li>.
+	// <li> l7Flow_request_ua_device: specifies the l7 access request count metric by device type dimension.</li>.
+	// <li> l7Flow_request_ua_browser: specifies the l7 access request count metric by browser type dimension.</li>.
+	// <li> l7Flow_request_ua_os: specifies the l7 access request count metric counted by the operating system type dimension.</li>.
+	// <li> l7Flow_request_ua: l7 access request count metric counted by the User-Agent dimension.</li>.
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
-	// Site ID list. This parameter is required. A maximum of 100 site IDs can be imported. Use `*` to query data for all sites under the Tencent Cloud root account. To query account-level data, you must have resource permissions for all sites in this API.
+	// Site ID list. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980).  A maximum of 100 site IDs can be imported. Use `*` to query data for all sites under the Tencent Cloud root account. To query account-level data, you must have resource permissions for all sites in this API.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Indicates the top N data to be queried. The maximum value is 1000. If this parameter is not input, the default value is 10, indicating querying the top 10 data.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filtering conditions used when querying data. Refer to the [Filtering Conditions for Analytics](https://www.tencentcloud.com/document/product/1145/56985) document for the available filters applicable to L7 client traffic, bandwidth and requests.  
+	// Filter criteria used when filtering data. valid values refer to the available filter options for L7 access traffic, bandwidth, and request count in the [metric analysis filtering condition description](https://www.tencentcloud.comom/document/product/1552/98219?from_cn_redirect=1#1aaf1150-55a4-4b4d-b103-3a8317ac7945).
+	// If needed, limit the site or content identifier by importing the corresponding value in the `ZoneIds.N` parameter.
 	Filters []*QueryCondition `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Query time granularity. This parameter is deprecated.
+	// Query time granularity. this parameter is invalid. to be deprecated.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Data region. This parameter is deprecated. Please filter data by client region in `Filters.country`.
+	// Data ownership region. this parameter is deprecated. please filter data by client region in `Filters.country`.
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 }
 
@@ -12970,7 +12972,7 @@ type DownloadL4LogsRequestParams struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// ZoneId set. This parameter is required.
+	// ZoneId set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980).
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of L4 proxy instance IDs.
@@ -12992,7 +12994,7 @@ type DownloadL4LogsRequest struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// ZoneId set. This parameter is required.
+	// ZoneId set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980).
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of L4 proxy instance IDs.
@@ -13065,7 +13067,7 @@ type DownloadL7LogsRequestParams struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// ZoneId set. This parameter is required.
+	// ZoneId set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980).
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
@@ -13087,7 +13089,7 @@ type DownloadL7LogsRequest struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// ZoneId set. This parameter is required.
+	// ZoneId set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980).
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
@@ -13991,9 +13993,9 @@ type Https struct {
 
 	// Tls version settings, valid values:.
 	// <Li>`TLSv1`: tlsv1 version;</li>.
-	// <li>`TLSV1.1`: TLSV1.1 version;</li>.
-	// <li>TLSV1.2: specifies the TLSV1.2 version.</li>.
-	// <Li>TLSv1.3: specifies the tlsv1.3 version. consecutive versions must be enabled when modifying.</li>.
+	// <li>`TLSv1.1`: TLSv1.1 version;</li>.
+	// <li>TLSv1.2: specifies the TLSv1.2 version.</li>.
+	// <Li>TLSv1.3: specifies the TLSv1.3 version. consecutive versions must be enabled when modifying.</li>.
 	TlsVersion []*string `json:"TlsVersion,omitnil,omitempty" name:"TlsVersion"`
 
 	// HSTS Configuration
@@ -14795,7 +14797,7 @@ type MaxAge struct {
 	// <li>`off`: Do not follow the origin server and apply the field MaxAgeTime.</li>
 	FollowOrigin *string `json:"FollowOrigin,omitnil,omitempty" name:"FollowOrigin"`
 
-	// Specifies the maximum amount of time (in seconds). The maximum value is 365 days.
+	// Specifies the maximum amount of time (in seconds). Value range: 0 to 315360000.
 	// Note: The value `0` means not to cache.
 	MaxAgeTime *int64 `json:"MaxAgeTime,omitnil,omitempty" name:"MaxAgeTime"`
 }
@@ -20659,7 +20661,7 @@ type Task struct {
 	// <li>originPullFailed: specifies the origin-pull failure.</li>.
 	FailType *string `json:"FailType,omitnil,omitempty" name:"FailType"`
 
-	// Failure description for refresh and preheating.
+	// Description of the reason for cache purge or warm cache failure.
 	FailMessage *string `json:"FailMessage,omitnil,omitempty" name:"FailMessage"`
 }
 

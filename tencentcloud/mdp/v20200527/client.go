@@ -171,7 +171,7 @@ func NewBindSSAICDNDomainWithChannelResponse() (response *BindSSAICDNDomainWithC
 }
 
 // BindSSAICDNDomainWithChannel
-// BindSSAICDNDomainWithChannel
+// This API is used to bind a CDN playback domain to a channel.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -182,7 +182,7 @@ func (c *Client) BindSSAICDNDomainWithChannel(request *BindSSAICDNDomainWithChan
 }
 
 // BindSSAICDNDomainWithChannel
-// BindSSAICDNDomainWithChannel
+// This API is used to bind a CDN playback domain to a channel.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -3563,7 +3563,7 @@ func NewUnbindSSAICDNDomainWithChannelResponse() (response *UnbindSSAICDNDomainW
 }
 
 // UnbindSSAICDNDomainWithChannel
-// UnbindSSAICDNDomainWithChannel
+// This API is used to cancel the correlation between a channel and a CDN playback domain.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -3575,7 +3575,7 @@ func (c *Client) UnbindSSAICDNDomainWithChannel(request *UnbindSSAICDNDomainWith
 }
 
 // UnbindSSAICDNDomainWithChannel
-// UnbindSSAICDNDomainWithChannel
+// This API is used to cancel the correlation between a channel and a CDN playback domain.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

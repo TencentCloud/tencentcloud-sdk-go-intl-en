@@ -3838,31 +3838,24 @@ func (r *DescribeRoleListResponse) FromJsonString(s string) error {
 
 type DescribeTeamDetailResp struct {
 	// Team name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	TeamName *string `json:"TeamName,omitnil,omitempty" name:"TeamName"`
 
-	// Team role type 1-Mini program team 2-Application team
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Team role type 1-mini program team 2-application team
 	TeamRoleType *int64 `json:"TeamRoleType,omitnil,omitempty" name:"TeamRoleType"`
 
-	// Admin account
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Administrator account
 	AdminUserAccount *string `json:"AdminUserAccount,omitnil,omitempty" name:"AdminUserAccount"`
 
 	// Creator
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	CreateUser *string `json:"CreateUser,omitnil,omitempty" name:"CreateUser"`
 
 	// Creation time
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Number of team members
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	MemberCount *int64 `json:"MemberCount,omitnil,omitempty" name:"MemberCount"`
 
 	// Number of bound mini program teams
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	BindMiniTeamCount *int64 `json:"BindMiniTeamCount,omitnil,omitempty" name:"BindMiniTeamCount"`
 
 	// Name of the bound team
@@ -3871,44 +3864,49 @@ type DescribeTeamDetailResp struct {
 	// Team registration link
 	RegisterLink *string `json:"RegisterLink,omitnil,omitempty" name:"RegisterLink"`
 
-	// Application name. It’s required when querying details of a mini program team.
+	// Application name. It Is required when querying details of a mini program team.
 	ApplicationName *string `json:"ApplicationName,omitnil,omitempty" name:"ApplicationName"`
+
+	// Team expiration time. 0 means never expire.
+	ExpireTime *int64 `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// Team status. valid values: 1: normal; 2: disabled; 3: expired.
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type DescribeTeamListInfoResp struct {
 	// Team ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
 
 	// Team name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	TeamName *string `json:"TeamName,omitnil,omitempty" name:"TeamName"`
 
-	// Admin ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Administrator user ID
 	AdminUserId *string `json:"AdminUserId,omitnil,omitempty" name:"AdminUserId"`
 
-	// Admin account
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Administrator account
 	AdminUserAccount *string `json:"AdminUserAccount,omitnil,omitempty" name:"AdminUserAccount"`
 
-	// Admin username
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Administrator username
 	AdminUserName *string `json:"AdminUserName,omitnil,omitempty" name:"AdminUserName"`
 
 	// Number of team members
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	MemberCount *int64 `json:"MemberCount,omitnil,omitempty" name:"MemberCount"`
 
 	// Team registration link
 	RegisterLink *string `json:"RegisterLink,omitnil,omitempty" name:"RegisterLink"`
 
 	// Team permission type
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	TeamRoleTypeList []*int64 `json:"TeamRoleTypeList,omitnil,omitempty" name:"TeamRoleTypeList"`
 
 	// Associated team ID
 	RelatedTeamId *int64 `json:"RelatedTeamId,omitnil,omitempty" name:"RelatedTeamId"`
+
+	// Team expiration time. 0 means never expire.
+	ExpireTime *int64 `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// Team status. valid values: 1: normal; 2: disabled; 3: expired.
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 // Predefined struct for user
@@ -3916,13 +3914,13 @@ type DescribeTeamListRequestParams struct {
 	// Pagination offset
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of results per page
+	// Page size
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Platform ID
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
 
-	// Name of the team to be queried
+	// Team name to be queried
 	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
 }
 
@@ -3932,13 +3930,13 @@ type DescribeTeamListRequest struct {
 	// Pagination offset
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of results per page
+	// Page size
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Platform ID
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
 
-	// Name of the team to be queried
+	// Team name to be queried
 	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
 }
 
@@ -4126,12 +4124,10 @@ func (r *DescribeTeamMemberListResponse) FromJsonString(s string) error {
 }
 
 type DescribeTeamPageResp struct {
-	// Total number of entries
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Total count
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List information
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	DataList []*DescribeTeamListInfoResp `json:"DataList,omitnil,omitempty" name:"DataList"`
 }
 

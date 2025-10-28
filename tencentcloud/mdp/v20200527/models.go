@@ -181,20 +181,20 @@ func (r *BindNewLVBDomainWithChannelResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type BindSSAICDNDomainWithChannelRequestParams struct {
-	// Channel Id
+	// Channel Id.
 	ChannelId *string `json:"ChannelId,omitnil,omitempty" name:"ChannelId"`
 
-	// The domain name for CDN playback.
+	// Specifies the playback domain of CDN.
 	CdnDomain *string `json:"CdnDomain,omitnil,omitempty" name:"CdnDomain"`
 }
 
 type BindSSAICDNDomainWithChannelRequest struct {
 	*tchttp.BaseRequest
 	
-	// Channel Id
+	// Channel Id.
 	ChannelId *string `json:"ChannelId,omitnil,omitempty" name:"ChannelId"`
 
-	// The domain name for CDN playback.
+	// Specifies the playback domain of CDN.
 	CdnDomain *string `json:"CdnDomain,omitnil,omitempty" name:"CdnDomain"`
 }
 
@@ -5199,20 +5199,20 @@ func (r *UnbindLinearAssemblyCDNDomainWithChannelResponse) FromJsonString(s stri
 
 // Predefined struct for user
 type UnbindSSAICDNDomainWithChannelRequestParams struct {
-	// Channel Id
+	// Channel Id.
 	ChannelId *string `json:"ChannelId,omitnil,omitempty" name:"ChannelId"`
 
-	// The domain name for CDN playback.
+	// Specifies the playback domain of CDN.
 	CdnDomain *string `json:"CdnDomain,omitnil,omitempty" name:"CdnDomain"`
 }
 
 type UnbindSSAICDNDomainWithChannelRequest struct {
 	*tchttp.BaseRequest
 	
-	// Channel Id
+	// Channel Id.
 	ChannelId *string `json:"ChannelId,omitnil,omitempty" name:"ChannelId"`
 
-	// The domain name for CDN playback.
+	// Specifies the playback domain of CDN.
 	CdnDomain *string `json:"CdnDomain,omitnil,omitempty" name:"CdnDomain"`
 }
 

@@ -5345,6 +5345,66 @@ func (c *Client) InquirePriceModifyWithContext(ctx context.Context, request *Inq
     return
 }
 
+func NewInquirePriceMultiSpecRequest() (request *InquirePriceMultiSpecRequest) {
+    request = &InquirePriceMultiSpecRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "InquirePriceMultiSpec")
+    
+    
+    return
+}
+
+func NewInquirePriceMultiSpecResponse() (response *InquirePriceMultiSpecResponse) {
+    response = &InquirePriceMultiSpecResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// InquirePriceMultiSpec
+// This API is used to inquire prices in batch.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_INVALIDZONEIDERROR = "InvalidParameterValue.InvalidZoneIdError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) InquirePriceMultiSpec(request *InquirePriceMultiSpecRequest) (response *InquirePriceMultiSpecResponse, err error) {
+    return c.InquirePriceMultiSpecWithContext(context.Background(), request)
+}
+
+// InquirePriceMultiSpec
+// This API is used to inquire prices in batch.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_INVALIDZONEIDERROR = "InvalidParameterValue.InvalidZoneIdError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) InquirePriceMultiSpecWithContext(ctx context.Context, request *InquirePriceMultiSpecRequest) (response *InquirePriceMultiSpecResponse, err error) {
+    if request == nil {
+        request = NewInquirePriceMultiSpecRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "InquirePriceMultiSpec")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InquirePriceMultiSpec require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewInquirePriceMultiSpecResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewInquirePriceRenewRequest() (request *InquirePriceRenewRequest) {
     request = &InquirePriceRenewRequest{
         BaseRequest: &tchttp.BaseRequest{},

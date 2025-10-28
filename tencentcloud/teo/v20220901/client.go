@@ -3831,7 +3831,7 @@ func NewDeleteAliasDomainResponse() (response *DeleteAliasDomainResponse) {
 // DeleteAliasDomain
 // This API is used to delete an alias domain name.
 //
-// The feature is only supported by the enterprise plan and is currently in closed beta testing. If you need to use it, [Contact Us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service?from=connect-us).
+// The feature is only supported by the enterprise plan and is currently in closed beta testing. If you need to use it, [Contact Us](https://www.tencentcloud.com/contact-us).
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -3845,7 +3845,7 @@ func (c *Client) DeleteAliasDomain(request *DeleteAliasDomainRequest) (response 
 // DeleteAliasDomain
 // This API is used to delete an alias domain name.
 //
-// The feature is only supported by the enterprise plan and is currently in closed beta testing. If you need to use it, [Contact Us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service?from=connect-us).
+// The feature is only supported by the enterprise plan and is currently in closed beta testing. If you need to use it, [Contact Us](https://www.tencentcloud.com/contact-us).
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -7177,7 +7177,7 @@ func NewDescribeLoadBalancerListResponse() (response *DescribeLoadBalancerListRe
 }
 
 // DescribeLoadBalancerList
-// This API is used to query the LoadBalancer list. The load balancing feature is in beta test. If you need to use it, [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service).
+// This API is used to query the LoadBalancer list. The load balancing feature is in beta test. If you need to use it, [contact us](https://www.tencentcloud.com/contact-us).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -7186,7 +7186,7 @@ func (c *Client) DescribeLoadBalancerList(request *DescribeLoadBalancerListReque
 }
 
 // DescribeLoadBalancerList
-// This API is used to query the LoadBalancer list. The load balancing feature is in beta test. If you need to use it, [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service).
+// This API is used to query the LoadBalancer list. The load balancing feature is in beta test. If you need to use it, [contact us](https://www.tencentcloud.com/contact-us).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -7629,7 +7629,7 @@ func NewDescribeOriginGroupHealthStatusResponse() (response *DescribeOriginGroup
 }
 
 // DescribeOriginGroupHealthStatus
-// This API is used to query the health status of origin server groups under a LoadBalancer. The load balancing feature is in beta test. If you need to use it, [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service).
+// This API is used to query the health status of origin server groups under a LoadBalancer. The load balancing feature is in beta test. If you need to use it, [contact us](https://www.tencentcloud.com/contact-us).
 //
 // error code that may be returned:
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
@@ -7640,7 +7640,7 @@ func (c *Client) DescribeOriginGroupHealthStatus(request *DescribeOriginGroupHea
 }
 
 // DescribeOriginGroupHealthStatus
-// This API is used to query the health status of origin server groups under a LoadBalancer. The load balancing feature is in beta test. If you need to use it, [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service).
+// This API is used to query the health status of origin server groups under a LoadBalancer. The load balancing feature is in beta test. If you need to use it, [contact us](https://www.tencentcloud.com/contact-us).
 //
 // error code that may be returned:
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
@@ -8703,13 +8703,13 @@ func NewDescribeTimingL7AnalysisDataResponse() (response *DescribeTimingL7Analys
 }
 
 // DescribeTimingL7AnalysisData
-// This API is used to query time-series data for L7 domain services.
+// This API is used to query time series data for L7 domain name business.
 //
-// Notes:
+// Create and bind policy Query instance Reset instance access password.
 //
-// 1. There is a delay of about 10 minutes for this API. It is recommended to query data from 10 minutes before the current time.
+// This API is used to query data with a delay of about 10 minutes. It is recommended to pull data from at least 10 minutes before the current time.
 //
-// 2. By default, the API returns traffic and request data after Web Security mitigation (that is, the clean traffic). Users can set `Filters.mitigatedByWebSecurity ` to query data that has been mitigated by Web Security.
+// This API is used to return post-protection traffic request data by default. Users can query defended data in `Filters.mitigatedByWebSecurity`.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -8727,13 +8727,13 @@ func (c *Client) DescribeTimingL7AnalysisData(request *DescribeTimingL7AnalysisD
 }
 
 // DescribeTimingL7AnalysisData
-// This API is used to query time-series data for L7 domain services.
+// This API is used to query time series data for L7 domain name business.
 //
-// Notes:
+// Create and bind policy Query instance Reset instance access password.
 //
-// 1. There is a delay of about 10 minutes for this API. It is recommended to query data from 10 minutes before the current time.
+// This API is used to query data with a delay of about 10 minutes. It is recommended to pull data from at least 10 minutes before the current time.
 //
-// 2. By default, the API returns traffic and request data after Web Security mitigation (that is, the clean traffic). Users can set `Filters.mitigatedByWebSecurity ` to query data that has been mitigated by Web Security.
+// This API is used to return post-protection traffic request data by default. Users can query defended data in `Filters.mitigatedByWebSecurity`.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -8839,13 +8839,13 @@ func NewDescribeTopL7AnalysisDataResponse() (response *DescribeTopL7AnalysisData
 }
 
 // DescribeTopL7AnalysisData
-// This API is used to query the top N data of the L7 domain services by a specified dimension.
+// This API is used to query the top N data of the L7 domain name business by specified dimension.
 //
-// Notes:
+// Create and bind policy Query instance Reset instance access password.
 //
-// 1. There is a delay of about 10 minutes for this API. It is recommended to query data from 10 minutes before the current time.
+// This API is used to query data with a delay of about 10 minutes. It is recommended to pull data from at least 10 minutes before the current time.
 //
-// 2. By default, the API returns traffic and request data after Web Security mitigation (that is, the clean traffic). Users can set `Filters.mitigatedByWebSecurity ` to query data that has been mitigated by Web Security.
+// This API is used to return post-protection traffic request data by default. Users can query defended data in `Filters.mitigatedByWebSecurity`.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -8864,13 +8864,13 @@ func (c *Client) DescribeTopL7AnalysisData(request *DescribeTopL7AnalysisDataReq
 }
 
 // DescribeTopL7AnalysisData
-// This API is used to query the top N data of the L7 domain services by a specified dimension.
+// This API is used to query the top N data of the L7 domain name business by specified dimension.
 //
-// Notes:
+// Create and bind policy Query instance Reset instance access password.
 //
-// 1. There is a delay of about 10 minutes for this API. It is recommended to query data from 10 minutes before the current time.
+// This API is used to query data with a delay of about 10 minutes. It is recommended to pull data from at least 10 minutes before the current time.
 //
-// 2. By default, the API returns traffic and request data after Web Security mitigation (that is, the clean traffic). Users can set `Filters.mitigatedByWebSecurity ` to query data that has been mitigated by Web Security.
+// This API is used to return post-protection traffic request data by default. Users can query defended data in `Filters.mitigatedByWebSecurity`.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -10079,7 +10079,7 @@ func NewModifyAliasDomainResponse() (response *ModifyAliasDomainResponse) {
 // ModifyAliasDomain
 // This API is used to modify an alias domain name.
 //
-// The feature is only supported in the enterprise plan and is currently in closed beta testing. If you need to use it, [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service?from=connect-us).
+// The feature is only supported in the enterprise plan and is currently in closed beta testing. If you need to use it, [contact us](https://www.tencentcloud.com/contact-us).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -10093,7 +10093,7 @@ func (c *Client) ModifyAliasDomain(request *ModifyAliasDomainRequest) (response 
 // ModifyAliasDomain
 // This API is used to modify an alias domain name.
 //
-// The feature is only supported in the enterprise plan and is currently in closed beta testing. If you need to use it, [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service?from=connect-us).
+// The feature is only supported in the enterprise plan and is currently in closed beta testing. If you need to use it, [contact us](https://www.tencentcloud.com/contact-us).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

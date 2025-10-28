@@ -8035,6 +8035,53 @@ func (r *ExportResourcePackageDeductDetailsResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type GoodsPrice struct {
+	// Specifies the instance price.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstancePrice *TradePrice `json:"InstancePrice,omitnil,omitempty" name:"InstancePrice"`
+
+	// Specifies the storage price.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StoragePrice *TradePrice `json:"StoragePrice,omitnil,omitempty" name:"StoragePrice"`
+
+	// Specifies the product specification.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GoodsSpec *GoodsSpec `json:"GoodsSpec,omitnil,omitempty" name:"GoodsSpec"`
+}
+
+type GoodsSpec struct {
+	// Number of products
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
+
+	// Number of CPU cores. required for PREPAID and POSTPAID instance types.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
+
+	// Memory size in gb. required for PREPAID and POSTPAID instance types.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
+
+	// Ccu size. required for serverless type.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Ccu *float64 `json:"Ccu,omitnil,omitempty" name:"Ccu"`
+
+	// Storage size. required for PREPAID storage type.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StorageLimit *int64 `json:"StorageLimit,omitnil,omitempty" name:"StorageLimit"`
+
+	// Purchase duration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
+
+	// Duration unit.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
+
+	// Machine type.
+	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
+}
+
 type InputAccount struct {
 	// Account
 	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
@@ -8272,6 +8319,84 @@ func (r *InquirePriceModifyResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *InquirePriceModifyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquirePriceMultiSpecRequestParams struct {
+	// Availability zone. specifies the best practice for region provision.
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// Instance purchase type. available values are: PREPAID, POSTPAID, SERVERLESS.
+	InstancePayMode *string `json:"InstancePayMode,omitnil,omitempty" name:"InstancePayMode"`
+
+	// Storage purchase type. available values are: PREPAID, POSTPAID.
+	StoragePayMode *string `json:"StoragePayMode,omitnil,omitempty" name:"StoragePayMode"`
+
+	// Specifies the product specification.
+	GoodsSpecs []*GoodsSpec `json:"GoodsSpecs,omitnil,omitempty" name:"GoodsSpecs"`
+}
+
+type InquirePriceMultiSpecRequest struct {
+	*tchttp.BaseRequest
+	
+	// Availability zone. specifies the best practice for region provision.
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// Instance purchase type. available values are: PREPAID, POSTPAID, SERVERLESS.
+	InstancePayMode *string `json:"InstancePayMode,omitnil,omitempty" name:"InstancePayMode"`
+
+	// Storage purchase type. available values are: PREPAID, POSTPAID.
+	StoragePayMode *string `json:"StoragePayMode,omitnil,omitempty" name:"StoragePayMode"`
+
+	// Specifies the product specification.
+	GoodsSpecs []*GoodsSpec `json:"GoodsSpecs,omitnil,omitempty" name:"GoodsSpecs"`
+}
+
+func (r *InquirePriceMultiSpecRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquirePriceMultiSpecRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Zone")
+	delete(f, "InstancePayMode")
+	delete(f, "StoragePayMode")
+	delete(f, "GoodsSpecs")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquirePriceMultiSpecRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquirePriceMultiSpecResponseParams struct {
+	// Specifies the product price.
+	GoodsPrice []*GoodsPrice `json:"GoodsPrice,omitnil,omitempty" name:"GoodsPrice"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type InquirePriceMultiSpecResponse struct {
+	*tchttp.BaseResponse
+	Response *InquirePriceMultiSpecResponseParams `json:"Response"`
+}
+
+func (r *InquirePriceMultiSpecResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquirePriceMultiSpecResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
