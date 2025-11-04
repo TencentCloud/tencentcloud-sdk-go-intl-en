@@ -1245,8 +1245,7 @@ type AssistantCidr struct {
 	// The secondary CIDR block type. 0: common secondary CIDR block. 1: container secondary CIDR block. Default: 0.
 	AssistantType *int64 `json:"AssistantType,omitnil,omitempty" name:"AssistantType"`
 
-	// Subnets divided by the secondary CIDR.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Subnet Split by Auxiliary CIDR
 	SubnetSet []*Subnet `json:"SubnetSet,omitnil,omitempty" name:"SubnetSet"`
 }
 
@@ -5694,6 +5693,9 @@ type CreateVpcRequestParams struct {
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}]
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+	EnableRouteVpcPublish *bool `json:"EnableRouteVpcPublish,omitnil,omitempty" name:"EnableRouteVpcPublish"`
 }
 
 type CreateVpcRequest struct {
@@ -5716,6 +5718,9 @@ type CreateVpcRequest struct {
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}]
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+	EnableRouteVpcPublish *bool `json:"EnableRouteVpcPublish,omitnil,omitempty" name:"EnableRouteVpcPublish"`
 }
 
 func (r *CreateVpcRequest) ToJsonString() string {
@@ -5736,6 +5741,7 @@ func (r *CreateVpcRequest) FromJsonString(s string) error {
 	delete(f, "DnsServers")
 	delete(f, "DomainName")
 	delete(f, "Tags")
+	delete(f, "EnableRouteVpcPublish")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVpcRequest has unknown keys!", "")
 	}
@@ -16789,6 +16795,17 @@ type IPSECOptionsSpecification struct {
 	IPSECSaLifetimeTraffic *uint64 `json:"IPSECSaLifetimeTraffic,omitnil,omitempty" name:"IPSECSaLifetimeTraffic"`
 }
 
+type ISPIPv6CidrBlock struct {
+	// IPv6 CIdr Block
+	IPv6CidrBlock *string `json:"IPv6CidrBlock,omitnil,omitempty" name:"IPv6CidrBlock"`
+
+	// Network operator type. valid values: 'BGP' (default), 'CMCC' (china mobile), 'CTCC' (china telecom), 'CUCC' (china unicom).
+	ISPType *string `json:"ISPType,omitnil,omitempty" name:"ISPType"`
+
+	// Specifies the type of IPv6 Cidr: `GUA` (global unicast address), `ULA` (unique local address).
+	AddressType *string `json:"AddressType,omitnil,omitempty" name:"AddressType"`
+}
+
 // Predefined struct for user
 type InquirePriceCreateDirectConnectGatewayRequestParams struct {
 
@@ -20406,7 +20423,7 @@ func (r *ModifyTemplateMemberResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyVpcAttributeRequestParams struct {
-	// Security group can be named freely, but cannot exceed 60 characters.
+	// VPC instance ID, in the format of vpc-f49l6u0z.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// VPC can be named freely, but the maximum length is 60 characters.
@@ -20420,6 +20437,9 @@ type ModifyVpcAttributeRequestParams struct {
 
 	// Domain name
 	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
+
+	// Vpc association with CCN route publish policy. true enables cidr route publishing. false enables subnet route publishing. the default is subnet route publishing when creating a vpc. to use cidr route publishing, submit a ticket to add to allowlist.
+	EnableRouteVpcPublish *bool `json:"EnableRouteVpcPublish,omitnil,omitempty" name:"EnableRouteVpcPublish"`
 
 	// Whether to publish the CDC subnet to CCN. `true`: Publish; `false`: Do not publish
 	EnableCdcPublish *bool `json:"EnableCdcPublish,omitnil,omitempty" name:"EnableCdcPublish"`
@@ -20428,7 +20448,7 @@ type ModifyVpcAttributeRequestParams struct {
 type ModifyVpcAttributeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Security group can be named freely, but cannot exceed 60 characters.
+	// VPC instance ID, in the format of vpc-f49l6u0z.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// VPC can be named freely, but the maximum length is 60 characters.
@@ -20442,6 +20462,9 @@ type ModifyVpcAttributeRequest struct {
 
 	// Domain name
 	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
+
+	// Vpc association with CCN route publish policy. true enables cidr route publishing. false enables subnet route publishing. the default is subnet route publishing when creating a vpc. to use cidr route publishing, submit a ticket to add to allowlist.
+	EnableRouteVpcPublish *bool `json:"EnableRouteVpcPublish,omitnil,omitempty" name:"EnableRouteVpcPublish"`
 
 	// Whether to publish the CDC subnet to CCN. `true`: Publish; `false`: Do not publish
 	EnableCdcPublish *bool `json:"EnableCdcPublish,omitnil,omitempty" name:"EnableCdcPublish"`
@@ -20464,6 +20487,7 @@ func (r *ModifyVpcAttributeRequest) FromJsonString(s string) error {
 	delete(f, "EnableMulticast")
 	delete(f, "DnsServers")
 	delete(f, "DomainName")
+	delete(f, "EnableRouteVpcPublish")
 	delete(f, "EnableCdcPublish")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVpcAttributeRequest has unknown keys!", "")
@@ -23880,12 +23904,10 @@ type Subnet struct {
 	// Tag key-value pairs
 	TagSet []*Tag `json:"TagSet,omitnil,omitempty" name:"TagSet"`
 
-	// CDC instance ID
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// CDC instance ID.
 	CdcId *string `json:"CdcId,omitnil,omitempty" name:"CdcId"`
 
-	// Whether it is a CDC subnet. Valid values: 0: no; 1: yes
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Whether the subnet is associated with CDC. valid values: 0 (no), 1 (yes).
 	IsCdcSubnet *int64 `json:"IsCdcSubnet,omitnil,omitempty" name:"IsCdcSubnet"`
 }
 
@@ -24293,9 +24315,14 @@ type Vpc struct {
 	// Tag key-value pair
 	TagSet []*Tag `json:"TagSet,omitnil,omitempty" name:"TagSet"`
 
-	// The secondary CIDR block.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Auxiliary CIDR
 	AssistantCidrSet []*AssistantCidr `json:"AssistantCidrSet,omitnil,omitempty" name:"AssistantCidrSet"`
+
+	// Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+	EnableRouteVpcPublish *bool `json:"EnableRouteVpcPublish,omitnil,omitempty" name:"EnableRouteVpcPublish"`
+
+	// Returns the multi-operator IPv6 Cidr Block.
+	Ipv6CidrBlockSet []*ISPIPv6CidrBlock `json:"Ipv6CidrBlockSet,omitnil,omitempty" name:"Ipv6CidrBlockSet"`
 }
 
 type VpcEndPointServiceUser struct {

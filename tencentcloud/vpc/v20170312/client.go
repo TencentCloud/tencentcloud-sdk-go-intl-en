@@ -17540,8 +17540,10 @@ func NewModifyVpcAttributeResponse() (response *ModifyVpcAttributeResponse) {
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_CDCPUBLISHNEEDCDCID = "UnsupportedOperation.CdcPublishNeedCdcId"
 //  UNSUPPORTEDOPERATION_ENABLEMULTICAST = "UnsupportedOperation.EnableMulticast"
 //  UNSUPPORTEDOPERATION_NOTSUPPORTEDUPDATECCNROUTEPUBLISH = "UnsupportedOperation.NotSupportedUpdateCcnRoutePublish"
+//  UNSUPPORTEDOPERATION_SUBNETMISMATCHVPCCDCID = "UnsupportedOperation.SubnetMismatchVpcCdcId"
 func (c *Client) ModifyVpcAttribute(request *ModifyVpcAttributeRequest) (response *ModifyVpcAttributeResponse, err error) {
     return c.ModifyVpcAttributeWithContext(context.Background(), request)
 }
@@ -17556,8 +17558,10 @@ func (c *Client) ModifyVpcAttribute(request *ModifyVpcAttributeRequest) (respons
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_CDCPUBLISHNEEDCDCID = "UnsupportedOperation.CdcPublishNeedCdcId"
 //  UNSUPPORTEDOPERATION_ENABLEMULTICAST = "UnsupportedOperation.EnableMulticast"
 //  UNSUPPORTEDOPERATION_NOTSUPPORTEDUPDATECCNROUTEPUBLISH = "UnsupportedOperation.NotSupportedUpdateCcnRoutePublish"
+//  UNSUPPORTEDOPERATION_SUBNETMISMATCHVPCCDCID = "UnsupportedOperation.SubnetMismatchVpcCdcId"
 func (c *Client) ModifyVpcAttributeWithContext(ctx context.Context, request *ModifyVpcAttributeRequest) (response *ModifyVpcAttributeResponse, err error) {
     if request == nil {
         request = NewModifyVpcAttributeRequest()

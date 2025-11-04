@@ -1021,9 +1021,9 @@ func NewCreateNotificationConfigurationResponse() (response *CreateNotificationC
 }
 
 // CreateNotificationConfiguration
-// This API is used to create a notification policy.
+// This API is used to create a notification.
 //
-// When the notification is sent to a CMQ topic or queue, the following contents are included:
+// This API is used to send notifications to a CMQ topic or queue with the following message content:.
 //
 // ```
 //
@@ -1031,33 +1031,33 @@ func NewCreateNotificationConfigurationResponse() (response *CreateNotificationC
 //
 //     "Service": "Tencent Cloud Auto Scaling",
 //
-//     "CreatedTime": "2021-10-11T10:15:11Z", // Activity creation time
+// "CreatedTime": "2021-10-11T10:15:11Z", // Activity creation time.
 //
 //     "AppId": "100000000",
 //
-//     "ActivityId": "asa-fznnvrja", // Scaling activity ID
+// "ActivityId": "asa-fznnvrja", // scaling activity ID.
 //
-//     "AutoScalingGroupId": "asg-pc2oqu2z", // Scaling group ID
+// This API is used to specify the scaling group ID.
 //
-//     "ActivityType": "SCALE_OUT",  // Scaling activity type
+// "ActivityType": "SCALE_OUT",  // scaling activity type.
 //
-//     "StatusCode": "SUCCESSFUL",   // Scaling activity result
+// "StatusCode": "SUCCESSFUL".
 //
 //     "Description": "Activity was launched in response to a difference between desired capacity and actual capacity,
 //
-//     scale out 1 instance(s).", // Scaling activity description
+// This API is used to scale out 1 instance.
 //
-//     "StartTime": "2021-10-11T10:15:11Z",  // Activity starting time
+// This API is used to set the activity start time.
 //
-//     "EndTime": "2021-10-11T10:15:32Z",    // Activity ending time
+// "EndTime": "2021-10-11T10:15:32Z",    // activity end time.
 //
-//     "DetailedStatusMessageSet": [ // A collection of failed attempts during the scaling process (Failed attempts are allowed in a successful scaling activity)
+// "DetailedStatusMessageSet": [ // Collection of activity internal errors (non-empty does not mean activity failure).
 //
 //         {
 //
 //             "Code": "InvalidInstanceType",
 //
-//             "Zone": "ap-guangzhou-2",
+//             "Zone": "ap-guangzhou-6",
 //
 //             "InstanceId": "",
 //
@@ -1065,9 +1065,9 @@ func NewCreateNotificationConfigurationResponse() (response *CreateNotificationC
 //
 //             "SubnetId": "subnet-4t5mgeuu",
 //
-//             "Message": "The specified instance type `S5.LARGE8` is invalid in `subnet-4t5mgeuu`, `ap-guangzhou-2`.",
+//             "Message": "The specified instance type `S5.LARGE8` is invalid in `subnet-4t5mgeuu`, `ap-guangzhou-6`.",
 //
-//             "InstanceType": "S5.LARGE8",
+//             "InstanceType": "S5.LARGE8"
 //
 //         }
 //
@@ -1098,9 +1098,9 @@ func (c *Client) CreateNotificationConfiguration(request *CreateNotificationConf
 }
 
 // CreateNotificationConfiguration
-// This API is used to create a notification policy.
+// This API is used to create a notification.
 //
-// When the notification is sent to a CMQ topic or queue, the following contents are included:
+// This API is used to send notifications to a CMQ topic or queue with the following message content:.
 //
 // ```
 //
@@ -1108,33 +1108,33 @@ func (c *Client) CreateNotificationConfiguration(request *CreateNotificationConf
 //
 //     "Service": "Tencent Cloud Auto Scaling",
 //
-//     "CreatedTime": "2021-10-11T10:15:11Z", // Activity creation time
+// "CreatedTime": "2021-10-11T10:15:11Z", // Activity creation time.
 //
 //     "AppId": "100000000",
 //
-//     "ActivityId": "asa-fznnvrja", // Scaling activity ID
+// "ActivityId": "asa-fznnvrja", // scaling activity ID.
 //
-//     "AutoScalingGroupId": "asg-pc2oqu2z", // Scaling group ID
+// This API is used to specify the scaling group ID.
 //
-//     "ActivityType": "SCALE_OUT",  // Scaling activity type
+// "ActivityType": "SCALE_OUT",  // scaling activity type.
 //
-//     "StatusCode": "SUCCESSFUL",   // Scaling activity result
+// "StatusCode": "SUCCESSFUL".
 //
 //     "Description": "Activity was launched in response to a difference between desired capacity and actual capacity,
 //
-//     scale out 1 instance(s).", // Scaling activity description
+// This API is used to scale out 1 instance.
 //
-//     "StartTime": "2021-10-11T10:15:11Z",  // Activity starting time
+// This API is used to set the activity start time.
 //
-//     "EndTime": "2021-10-11T10:15:32Z",    // Activity ending time
+// "EndTime": "2021-10-11T10:15:32Z",    // activity end time.
 //
-//     "DetailedStatusMessageSet": [ // A collection of failed attempts during the scaling process (Failed attempts are allowed in a successful scaling activity)
+// "DetailedStatusMessageSet": [ // Collection of activity internal errors (non-empty does not mean activity failure).
 //
 //         {
 //
 //             "Code": "InvalidInstanceType",
 //
-//             "Zone": "ap-guangzhou-2",
+//             "Zone": "ap-guangzhou-6",
 //
 //             "InstanceId": "",
 //
@@ -1142,9 +1142,9 @@ func (c *Client) CreateNotificationConfiguration(request *CreateNotificationConf
 //
 //             "SubnetId": "subnet-4t5mgeuu",
 //
-//             "Message": "The specified instance type `S5.LARGE8` is invalid in `subnet-4t5mgeuu`, `ap-guangzhou-2`.",
+//             "Message": "The specified instance type `S5.LARGE8` is invalid in `subnet-4t5mgeuu`, `ap-guangzhou-6`.",
 //
-//             "InstanceType": "S5.LARGE8",
+//             "InstanceType": "S5.LARGE8"
 //
 //         }
 //

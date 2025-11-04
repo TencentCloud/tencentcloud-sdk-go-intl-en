@@ -18941,6 +18941,11 @@ type OriginProtectionInfo struct {
 	DiffIPWhitelist *DiffIPWhitelist `json:"DiffIPWhitelist,omitnil,omitempty" name:"DiffIPWhitelist"`
 }
 
+type OriginPullProtocolParameters struct {
+
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
+}
+
 type OriginRecord struct {
 	// The origin record value, which can be an IPv4/IPv6 address or a domain name.
 	Record *string `json:"Record,omitnil,omitempty" name:"Record"`
@@ -19131,7 +19136,7 @@ type PostMaxSize struct {
 	// <li>`off`: Disable.</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Maximum limit. value range between 1MB and 500MB. byte.
+	// Maximum limit.Takes effect only when Switch is on. Range:1 MB - 800 MB (bytes).
 	MaxSize *int64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
 }
 
@@ -19139,7 +19144,7 @@ type PostMaxSizeParameters struct {
 	// Whether to enable post request file upload limit, in bytes (default limit: 32 * 2<sup>20</sup> bytes). valid values: <li>`on`: enable limit;</li><li>`off`: disable limit.</li>.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Maximum size of the file uploaded for streaming via a post request, in bytes. value range: 1 * 2<sup>20</sup> bytes to 500 * 2<sup>20</sup> bytes.
+	// Maximum size of the file uploaded for streaming via a post request. Takes effect only when Switch is on. Range: 1 MB - 800 MB (bytes).
 	MaxSize *int64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
 }
 
@@ -19967,6 +19972,9 @@ type RuleEngineAction struct {
 	// Force https redirect configuration parameter. this parameter is required when the name is set to forceredirecthttps.
 	// Note: this field may return null, which indicates a failure to obtain a valid value.
 	ForceRedirectHTTPSParameters *ForceRedirectHTTPSParameters `json:"ForceRedirectHTTPSParameters,omitnil,omitempty" name:"ForceRedirectHTTPSParameters"`
+
+
+	OriginPullProtocolParameters *OriginPullProtocolParameters `json:"OriginPullProtocolParameters,omitnil,omitempty" name:"OriginPullProtocolParameters"`
 
 	// Intelligent compression configuration. this parameter is required when name is set to compression.
 	// Note: this field may return null, which indicates a failure to obtain a valid value.
