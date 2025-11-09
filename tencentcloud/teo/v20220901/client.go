@@ -279,6 +279,64 @@ func (c *Client) CheckCnameStatusWithContext(ctx context.Context, request *Check
     return
 }
 
+func NewConfirmMultiPathGatewayOriginACLRequest() (request *ConfirmMultiPathGatewayOriginACLRequest) {
+    request = &ConfirmMultiPathGatewayOriginACLRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ConfirmMultiPathGatewayOriginACL")
+    
+    
+    return
+}
+
+func NewConfirmMultiPathGatewayOriginACLResponse() (response *ConfirmMultiPathGatewayOriginACLResponse) {
+    response = &ConfirmMultiPathGatewayOriginACLResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ConfirmMultiPathGatewayOriginACL
+// This API is used to confirm the latest origin IP range is updated to the origin server firewall when the multi-channel security acceleration gateway's origin IP range changes.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) ConfirmMultiPathGatewayOriginACL(request *ConfirmMultiPathGatewayOriginACLRequest) (response *ConfirmMultiPathGatewayOriginACLResponse, err error) {
+    return c.ConfirmMultiPathGatewayOriginACLWithContext(context.Background(), request)
+}
+
+// ConfirmMultiPathGatewayOriginACL
+// This API is used to confirm the latest origin IP range is updated to the origin server firewall when the multi-channel security acceleration gateway's origin IP range changes.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) ConfirmMultiPathGatewayOriginACLWithContext(ctx context.Context, request *ConfirmMultiPathGatewayOriginACLRequest) (response *ConfirmMultiPathGatewayOriginACLResponse, err error) {
+    if request == nil {
+        request = NewConfirmMultiPathGatewayOriginACLRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "ConfirmMultiPathGatewayOriginACL")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ConfirmMultiPathGatewayOriginACL require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewConfirmMultiPathGatewayOriginACLResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewConfirmOriginACLUpdateRequest() (request *ConfirmOriginACLUpdateRequest) {
     request = &ConfirmOriginACLUpdateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7323,6 +7381,64 @@ func (c *Client) DescribeMultiPathGatewayLineWithContext(ctx context.Context, re
     return
 }
 
+func NewDescribeMultiPathGatewayOriginACLRequest() (request *DescribeMultiPathGatewayOriginACLRequest) {
+    request = &DescribeMultiPathGatewayOriginACLRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeMultiPathGatewayOriginACL")
+    
+    
+    return
+}
+
+func NewDescribeMultiPathGatewayOriginACLResponse() (response *DescribeMultiPathGatewayOriginACLResponse) {
+    response = &DescribeMultiPathGatewayOriginACLResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMultiPathGatewayOriginACL
+// This API is used to query the binding relationship between a multi-channel security acceleration gateway instance and the origin server IP range, as well as the IP range details. If the MultiPathGatewayNextOriginACL field has a return value, the latest origin server IP range must be synchronized to the origin server firewall configuration.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) DescribeMultiPathGatewayOriginACL(request *DescribeMultiPathGatewayOriginACLRequest) (response *DescribeMultiPathGatewayOriginACLResponse, err error) {
+    return c.DescribeMultiPathGatewayOriginACLWithContext(context.Background(), request)
+}
+
+// DescribeMultiPathGatewayOriginACL
+// This API is used to query the binding relationship between a multi-channel security acceleration gateway instance and the origin server IP range, as well as the IP range details. If the MultiPathGatewayNextOriginACL field has a return value, the latest origin server IP range must be synchronized to the origin server firewall configuration.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) DescribeMultiPathGatewayOriginACLWithContext(ctx context.Context, request *DescribeMultiPathGatewayOriginACLRequest) (response *DescribeMultiPathGatewayOriginACLResponse, err error) {
+    if request == nil {
+        request = NewDescribeMultiPathGatewayOriginACLRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DescribeMultiPathGatewayOriginACL")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMultiPathGatewayOriginACL require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMultiPathGatewayOriginACLResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMultiPathGatewayRegionsRequest() (request *DescribeMultiPathGatewayRegionsRequest) {
     request = &DescribeMultiPathGatewayRegionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -11985,6 +12101,64 @@ func (c *Client) ModifyMultiPathGatewaySecretKeyWithContext(ctx context.Context,
     request.SetContext(ctx)
     
     response = NewModifyMultiPathGatewaySecretKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyMultiPathGatewayStatusRequest() (request *ModifyMultiPathGatewayStatusRequest) {
+    request = &ModifyMultiPathGatewayStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ModifyMultiPathGatewayStatus")
+    
+    
+    return
+}
+
+func NewModifyMultiPathGatewayStatusResponse() (response *ModifyMultiPathGatewayStatusResponse) {
+    response = &ModifyMultiPathGatewayStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyMultiPathGatewayStatus
+// This API is used to update the status of a multi-channel security gateway.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) ModifyMultiPathGatewayStatus(request *ModifyMultiPathGatewayStatusRequest) (response *ModifyMultiPathGatewayStatusResponse, err error) {
+    return c.ModifyMultiPathGatewayStatusWithContext(context.Background(), request)
+}
+
+// ModifyMultiPathGatewayStatus
+// This API is used to update the status of a multi-channel security gateway.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) ModifyMultiPathGatewayStatusWithContext(ctx context.Context, request *ModifyMultiPathGatewayStatusRequest) (response *ModifyMultiPathGatewayStatusResponse, err error) {
+    if request == nil {
+        request = NewModifyMultiPathGatewayStatusRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "ModifyMultiPathGatewayStatus")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyMultiPathGatewayStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyMultiPathGatewayStatusResponse()
     err = c.Send(request, response)
     return
 }

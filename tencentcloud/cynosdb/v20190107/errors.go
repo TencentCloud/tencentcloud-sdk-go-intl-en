@@ -104,6 +104,9 @@ const (
 	// Failed to query the database.
 	INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 
+	// Unauthorized client.
+	INTERNALERROR_GETROLEERROR = "InternalError.GetRoleError"
+
 	// Failed to get the security group information.
 	INTERNALERROR_GETSECURITYGROUPDETAILFAILED = "InternalError.GetSecurityGroupDetailFailed"
 
@@ -157,6 +160,9 @@ const (
 
 	// The current instance cannot be isolated.
 	INVALIDPARAMETER_ISOLATENOTALLOWED = "InvalidParameter.IsolateNotAllowed"
+
+	// The parameter value is invalid.
+	INVALIDPARAMETERVALUE = "InvalidParameterValue"
 
 	// The account already exists.
 	INVALIDPARAMETERVALUE_ACCOUNTALREADYEXISTERROR = "InvalidParameterValue.AccountAlreadyExistError"

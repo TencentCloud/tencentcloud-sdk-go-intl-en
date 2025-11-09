@@ -1025,6 +1025,60 @@ func (c *Client) CreateBackupWithContext(ctx context.Context, request *CreateBac
     return
 }
 
+func NewCreateCLSDeliveryRequest() (request *CreateCLSDeliveryRequest) {
+    request = &CreateCLSDeliveryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "CreateCLSDelivery")
+    
+    
+    return
+}
+
+func NewCreateCLSDeliveryResponse() (response *CreateCLSDeliveryResponse) {
+    response = &CreateCLSDeliveryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateCLSDelivery
+// This API is used to create log delivery.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  RESOURCENOTFOUND_RESOURCEERROR = "ResourceNotFound.ResourceError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CreateCLSDelivery(request *CreateCLSDeliveryRequest) (response *CreateCLSDeliveryResponse, err error) {
+    return c.CreateCLSDeliveryWithContext(context.Background(), request)
+}
+
+// CreateCLSDelivery
+// This API is used to create log delivery.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  RESOURCENOTFOUND_RESOURCEERROR = "ResourceNotFound.ResourceError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CreateCLSDeliveryWithContext(ctx context.Context, request *CreateCLSDeliveryRequest) (response *CreateCLSDeliveryResponse, err error) {
+    if request == nil {
+        request = NewCreateCLSDeliveryRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "CreateCLSDelivery")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCLSDelivery require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCLSDeliveryResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateClusterDatabaseRequest() (request *CreateClusterDatabaseRequest) {
     request = &CreateClusterDatabaseRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1719,6 +1773,56 @@ func (c *Client) DeleteBackupWithContext(ctx context.Context, request *DeleteBac
     return
 }
 
+func NewDeleteCLSDeliveryRequest() (request *DeleteCLSDeliveryRequest) {
+    request = &DeleteCLSDeliveryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "DeleteCLSDelivery")
+    
+    
+    return
+}
+
+func NewDeleteCLSDeliveryResponse() (response *DeleteCLSDeliveryResponse) {
+    response = &DeleteCLSDeliveryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteCLSDelivery
+// This API is used to delete log delivery.
+//
+// error code that may be returned:
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DeleteCLSDelivery(request *DeleteCLSDeliveryRequest) (response *DeleteCLSDeliveryResponse, err error) {
+    return c.DeleteCLSDeliveryWithContext(context.Background(), request)
+}
+
+// DeleteCLSDelivery
+// This API is used to delete log delivery.
+//
+// error code that may be returned:
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DeleteCLSDeliveryWithContext(ctx context.Context, request *DeleteCLSDeliveryRequest) (response *DeleteCLSDeliveryResponse, err error) {
+    if request == nil {
+        request = NewDeleteCLSDeliveryRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "DeleteCLSDelivery")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCLSDelivery require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCLSDeliveryResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteClusterDatabaseRequest() (request *DeleteClusterDatabaseRequest) {
     request = &DeleteClusterDatabaseRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2015,6 +2119,56 @@ func (c *Client) DescribeAccountsWithContext(ctx context.Context, request *Descr
     return
 }
 
+func NewDescribeAuditInstanceListRequest() (request *DescribeAuditInstanceListRequest) {
+    request = &DescribeAuditInstanceListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "DescribeAuditInstanceList")
+    
+    
+    return
+}
+
+func NewDescribeAuditInstanceListResponse() (response *DescribeAuditInstanceListResponse) {
+    response = &DescribeAuditInstanceListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAuditInstanceList
+// This API is used to obtain the instance list of database audit.
+//
+// error code that may be returned:
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
+func (c *Client) DescribeAuditInstanceList(request *DescribeAuditInstanceListRequest) (response *DescribeAuditInstanceListResponse, err error) {
+    return c.DescribeAuditInstanceListWithContext(context.Background(), request)
+}
+
+// DescribeAuditInstanceList
+// This API is used to obtain the instance list of database audit.
+//
+// error code that may be returned:
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
+func (c *Client) DescribeAuditInstanceListWithContext(ctx context.Context, request *DescribeAuditInstanceListRequest) (response *DescribeAuditInstanceListResponse, err error) {
+    if request == nil {
+        request = NewDescribeAuditInstanceListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "DescribeAuditInstanceList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAuditInstanceList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAuditInstanceListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAuditRuleTemplatesRequest() (request *DescribeAuditRuleTemplatesRequest) {
     request = &DescribeAuditRuleTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2038,15 +2192,7 @@ func NewDescribeAuditRuleTemplatesResponse() (response *DescribeAuditRuleTemplat
 // This API is used to query audit rule template information.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
-//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETERVALUE_INSTANCENOTFOUND = "InvalidParameterValue.InstanceNotFound"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  OPERATIONDENIED_SERVERLESSINSTANCESTATUSDENIED = "OperationDenied.ServerlessInstanceStatusDenied"
-//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
-//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 func (c *Client) DescribeAuditRuleTemplates(request *DescribeAuditRuleTemplatesRequest) (response *DescribeAuditRuleTemplatesResponse, err error) {
     return c.DescribeAuditRuleTemplatesWithContext(context.Background(), request)
 }
@@ -2055,15 +2201,7 @@ func (c *Client) DescribeAuditRuleTemplates(request *DescribeAuditRuleTemplatesR
 // This API is used to query audit rule template information.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
-//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETERVALUE_INSTANCENOTFOUND = "InvalidParameterValue.InstanceNotFound"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  OPERATIONDENIED_SERVERLESSINSTANCESTATUSDENIED = "OperationDenied.ServerlessInstanceStatusDenied"
-//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
-//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 func (c *Client) DescribeAuditRuleTemplatesWithContext(ctx context.Context, request *DescribeAuditRuleTemplatesRequest) (response *DescribeAuditRuleTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeAuditRuleTemplatesRequest()
@@ -2693,6 +2831,76 @@ func (c *Client) DescribeBinlogsWithContext(ctx context.Context, request *Descri
     return
 }
 
+func NewDescribeChangedParamsAfterUpgradeRequest() (request *DescribeChangedParamsAfterUpgradeRequest) {
+    request = &DescribeChangedParamsAfterUpgradeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "DescribeChangedParamsAfterUpgrade")
+    
+    
+    return
+}
+
+func NewDescribeChangedParamsAfterUpgradeResponse() (response *DescribeChangedParamsAfterUpgradeResponse) {
+    response = &DescribeChangedParamsAfterUpgradeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeChangedParamsAfterUpgrade
+// this interface is used for querying parameter comparison after specification adjustment.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETERVALUE_INSTANCENOTFOUND = "InvalidParameterValue.InstanceNotFound"
+//  OPERATIONDENIED_CLUSTEROPNOTALLOWEDERROR = "OperationDenied.ClusterOpNotAllowedError"
+//  OPERATIONDENIED_SERVERLESSCLUSTERSTATUSDENIED = "OperationDenied.ServerlessClusterStatusDenied"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeChangedParamsAfterUpgrade(request *DescribeChangedParamsAfterUpgradeRequest) (response *DescribeChangedParamsAfterUpgradeResponse, err error) {
+    return c.DescribeChangedParamsAfterUpgradeWithContext(context.Background(), request)
+}
+
+// DescribeChangedParamsAfterUpgrade
+// this interface is used for querying parameter comparison after specification adjustment.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETERVALUE_INSTANCENOTFOUND = "InvalidParameterValue.InstanceNotFound"
+//  OPERATIONDENIED_CLUSTEROPNOTALLOWEDERROR = "OperationDenied.ClusterOpNotAllowedError"
+//  OPERATIONDENIED_SERVERLESSCLUSTERSTATUSDENIED = "OperationDenied.ServerlessClusterStatusDenied"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeChangedParamsAfterUpgradeWithContext(ctx context.Context, request *DescribeChangedParamsAfterUpgradeRequest) (response *DescribeChangedParamsAfterUpgradeResponse, err error) {
+    if request == nil {
+        request = NewDescribeChangedParamsAfterUpgradeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "DescribeChangedParamsAfterUpgrade")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeChangedParamsAfterUpgrade require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeChangedParamsAfterUpgradeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeClusterDatabaseTablesRequest() (request *DescribeClusterDatabaseTablesRequest) {
     request = &DescribeClusterDatabaseTablesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2805,6 +3013,122 @@ func (c *Client) DescribeClusterDatabaseTablesWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewDescribeClusterDatabaseTablesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeClusterDatabasesRequest() (request *DescribeClusterDatabasesRequest) {
+    request = &DescribeClusterDatabasesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "DescribeClusterDatabases")
+    
+    
+    return
+}
+
+func NewDescribeClusterDatabasesResponse() (response *DescribeClusterDatabasesResponse) {
+    response = &DescribeClusterDatabasesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeClusterDatabases
+// This API is used to obtain cluster database list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_GETSECURITYGROUPDETAILFAILED = "InternalError.GetSecurityGroupDetailFailed"
+//  INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
+//  INTERNALERROR_GETVPCFAILED = "InternalError.GetVpcFailed"
+//  INTERNALERROR_LISTINSTANCEFAILED = "InternalError.ListInstanceFailed"
+//  INTERNALERROR_OPERATEWANFAIL = "InternalError.OperateWanFail"
+//  INTERNALERROR_OPERATIONNOTSUPPORT = "InternalError.OperationNotSupport"
+//  INTERNALERROR_QUERYDATABASEFAILED = "InternalError.QueryDatabaseFailed"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_ISOLATENOTALLOWED = "InvalidParameter.IsolateNotAllowed"
+//  INVALIDPARAMETERVALUE_ACCOUNTEXIST = "InvalidParameterValue.AccountExist"
+//  INVALIDPARAMETERVALUE_DBTYPENOTFOUND = "InvalidParameterValue.DBTypeNotFound"
+//  INVALIDPARAMETERVALUE_FLOWNOTFOUND = "InvalidParameterValue.FlowNotFound"
+//  INVALIDPARAMETERVALUE_ILLEGALINSTANCENAME = "InvalidParameterValue.IllegalInstanceName"
+//  INVALIDPARAMETERVALUE_ILLEGALORDERBY = "InvalidParameterValue.IllegalOrderBy"
+//  INVALIDPARAMETERVALUE_ILLEGALPASSWORD = "InvalidParameterValue.IllegalPassword"
+//  INVALIDPARAMETERVALUE_INSTANCENOTFOUND = "InvalidParameterValue.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_INTERNALACCOUNT = "InvalidParameterValue.InternalAccount"
+//  INVALIDPARAMETERVALUE_INVALIDDBVERSION = "InvalidParameterValue.InvalidDBVersion"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_INVALIDSPEC = "InvalidParameterValue.InvalidSpec"
+//  INVALIDPARAMETERVALUE_PARAMERROR = "InvalidParameterValue.ParamError"
+//  INVALIDPARAMETERVALUE_REGIONZONEUNAVAILABLE = "InvalidParameterValue.RegionZoneUnavailable"
+//  INVALIDPARAMETERVALUE_STORAGEPOOLNOTFOUND = "InvalidParameterValue.StoragePoolNotFound"
+//  INVALIDPARAMETERVALUE_SUBNETNOTFOUND = "InvalidParameterValue.SubnetNotFound"
+//  INVALIDPARAMETERVALUE_VPCNOTFOUND = "InvalidParameterValue.VpcNotFound"
+//  LIMITEXCEEDED_USERINSTANCELIMIT = "LimitExceeded.UserInstanceLimit"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  RESOURCEUNAVAILABLE_INSTANCELOCKFAIL = "ResourceUnavailable.InstanceLockFail"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeClusterDatabases(request *DescribeClusterDatabasesRequest) (response *DescribeClusterDatabasesResponse, err error) {
+    return c.DescribeClusterDatabasesWithContext(context.Background(), request)
+}
+
+// DescribeClusterDatabases
+// This API is used to obtain cluster database list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_GETSECURITYGROUPDETAILFAILED = "InternalError.GetSecurityGroupDetailFailed"
+//  INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
+//  INTERNALERROR_GETVPCFAILED = "InternalError.GetVpcFailed"
+//  INTERNALERROR_LISTINSTANCEFAILED = "InternalError.ListInstanceFailed"
+//  INTERNALERROR_OPERATEWANFAIL = "InternalError.OperateWanFail"
+//  INTERNALERROR_OPERATIONNOTSUPPORT = "InternalError.OperationNotSupport"
+//  INTERNALERROR_QUERYDATABASEFAILED = "InternalError.QueryDatabaseFailed"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_ISOLATENOTALLOWED = "InvalidParameter.IsolateNotAllowed"
+//  INVALIDPARAMETERVALUE_ACCOUNTEXIST = "InvalidParameterValue.AccountExist"
+//  INVALIDPARAMETERVALUE_DBTYPENOTFOUND = "InvalidParameterValue.DBTypeNotFound"
+//  INVALIDPARAMETERVALUE_FLOWNOTFOUND = "InvalidParameterValue.FlowNotFound"
+//  INVALIDPARAMETERVALUE_ILLEGALINSTANCENAME = "InvalidParameterValue.IllegalInstanceName"
+//  INVALIDPARAMETERVALUE_ILLEGALORDERBY = "InvalidParameterValue.IllegalOrderBy"
+//  INVALIDPARAMETERVALUE_ILLEGALPASSWORD = "InvalidParameterValue.IllegalPassword"
+//  INVALIDPARAMETERVALUE_INSTANCENOTFOUND = "InvalidParameterValue.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_INTERNALACCOUNT = "InvalidParameterValue.InternalAccount"
+//  INVALIDPARAMETERVALUE_INVALIDDBVERSION = "InvalidParameterValue.InvalidDBVersion"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_INVALIDSPEC = "InvalidParameterValue.InvalidSpec"
+//  INVALIDPARAMETERVALUE_PARAMERROR = "InvalidParameterValue.ParamError"
+//  INVALIDPARAMETERVALUE_REGIONZONEUNAVAILABLE = "InvalidParameterValue.RegionZoneUnavailable"
+//  INVALIDPARAMETERVALUE_STORAGEPOOLNOTFOUND = "InvalidParameterValue.StoragePoolNotFound"
+//  INVALIDPARAMETERVALUE_SUBNETNOTFOUND = "InvalidParameterValue.SubnetNotFound"
+//  INVALIDPARAMETERVALUE_VPCNOTFOUND = "InvalidParameterValue.VpcNotFound"
+//  LIMITEXCEEDED_USERINSTANCELIMIT = "LimitExceeded.UserInstanceLimit"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  RESOURCEUNAVAILABLE_INSTANCELOCKFAIL = "ResourceUnavailable.InstanceLockFail"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeClusterDatabasesWithContext(ctx context.Context, request *DescribeClusterDatabasesRequest) (response *DescribeClusterDatabasesResponse, err error) {
+    if request == nil {
+        request = NewDescribeClusterDatabasesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "DescribeClusterDatabases")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterDatabases require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeClusterDatabasesResponse()
     err = c.Send(request, response)
     return
 }
@@ -3473,6 +3797,64 @@ func (c *Client) DescribeFlowWithContext(ctx context.Context, request *DescribeF
     request.SetContext(ctx)
     
     response = NewDescribeFlowResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInstanceCLSLogDeliveryRequest() (request *DescribeInstanceCLSLogDeliveryRequest) {
+    request = &DescribeInstanceCLSLogDeliveryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "DescribeInstanceCLSLogDelivery")
+    
+    
+    return
+}
+
+func NewDescribeInstanceCLSLogDeliveryResponse() (response *DescribeInstanceCLSLogDeliveryResponse) {
+    response = &DescribeInstanceCLSLogDeliveryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeInstanceCLSLogDelivery
+// This API is used to query instance log delivery information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  INTERNALERROR_GETROLEERROR = "InternalError.GetRoleError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  OPERATIONDENIED_CLUSTERSTATUSDENIEDERROR = "OperationDenied.ClusterStatusDeniedError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeInstanceCLSLogDelivery(request *DescribeInstanceCLSLogDeliveryRequest) (response *DescribeInstanceCLSLogDeliveryResponse, err error) {
+    return c.DescribeInstanceCLSLogDeliveryWithContext(context.Background(), request)
+}
+
+// DescribeInstanceCLSLogDelivery
+// This API is used to query instance log delivery information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  INTERNALERROR_GETROLEERROR = "InternalError.GetRoleError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  OPERATIONDENIED_CLUSTERSTATUSDENIEDERROR = "OperationDenied.ClusterStatusDeniedError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeInstanceCLSLogDeliveryWithContext(ctx context.Context, request *DescribeInstanceCLSLogDeliveryRequest) (response *DescribeInstanceCLSLogDeliveryResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceCLSLogDeliveryRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "DescribeInstanceCLSLogDelivery")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstanceCLSLogDelivery require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstanceCLSLogDeliveryResponse()
     err = c.Send(request, response)
     return
 }
@@ -4997,6 +5379,64 @@ func (c *Client) DescribeSupportProxyVersionWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewDescribeSupportProxyVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTasksRequest() (request *DescribeTasksRequest) {
+    request = &DescribeTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "DescribeTasks")
+    
+    
+    return
+}
+
+func NewDescribeTasksResponse() (response *DescribeTasksResponse) {
+    response = &DescribeTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTasks
+// This API is used to query task lists.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeTasks(request *DescribeTasksRequest) (response *DescribeTasksResponse, err error) {
+    return c.DescribeTasksWithContext(context.Background(), request)
+}
+
+// DescribeTasks
+// This API is used to query task lists.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeTasksWithContext(ctx context.Context, request *DescribeTasksRequest) (response *DescribeTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeTasksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "DescribeTasks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTasks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTasksResponse()
     err = c.Send(request, response)
     return
 }
@@ -6985,6 +7425,60 @@ func (c *Client) ModifyInstanceParamWithContext(ctx context.Context, request *Mo
     return
 }
 
+func NewModifyInstanceUpgradeLimitDaysRequest() (request *ModifyInstanceUpgradeLimitDaysRequest) {
+    request = &ModifyInstanceUpgradeLimitDaysRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "ModifyInstanceUpgradeLimitDays")
+    
+    
+    return
+}
+
+func NewModifyInstanceUpgradeLimitDaysResponse() (response *ModifyInstanceUpgradeLimitDaysResponse) {
+    response = &ModifyInstanceUpgradeLimitDaysResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyInstanceUpgradeLimitDays
+// This API is used to modify the time limit for upgrading the kernel minor version of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) ModifyInstanceUpgradeLimitDays(request *ModifyInstanceUpgradeLimitDaysRequest) (response *ModifyInstanceUpgradeLimitDaysResponse, err error) {
+    return c.ModifyInstanceUpgradeLimitDaysWithContext(context.Background(), request)
+}
+
+// ModifyInstanceUpgradeLimitDays
+// This API is used to modify the time limit for upgrading the kernel minor version of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) ModifyInstanceUpgradeLimitDaysWithContext(ctx context.Context, request *ModifyInstanceUpgradeLimitDaysRequest) (response *ModifyInstanceUpgradeLimitDaysResponse, err error) {
+    if request == nil {
+        request = NewModifyInstanceUpgradeLimitDaysRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "ModifyInstanceUpgradeLimitDays")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyInstanceUpgradeLimitDays require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyInstanceUpgradeLimitDaysResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyMaintainPeriodConfigRequest() (request *ModifyMaintainPeriodConfigRequest) {
     request = &ModifyMaintainPeriodConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -8307,6 +8801,80 @@ func (c *Client) RemoveClusterSlaveZoneWithContext(ctx context.Context, request 
     return
 }
 
+func NewRenewClustersRequest() (request *RenewClustersRequest) {
+    request = &RenewClustersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "RenewClusters")
+    
+    
+    return
+}
+
+func NewRenewClustersResponse() (response *RenewClustersResponse) {
+    response = &RenewClustersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RenewClusters
+// This API is used to renew the cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_TRADECREATEORDERERROR = "FailedOperation.TradeCreateOrderError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETERVALUE_CLUSTERNOTFOUND = "InvalidParameterValue.ClusterNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_INVALIDREGIONIDERROR = "InvalidParameterValue.InvalidRegionIdError"
+//  OPERATIONDENIED_CLUSTEROPNOTALLOWEDERROR = "OperationDenied.ClusterOpNotAllowedError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  RESOURCEUNAVAILABLE_INSTANCELOCKFAIL = "ResourceUnavailable.InstanceLockFail"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) RenewClusters(request *RenewClustersRequest) (response *RenewClustersResponse, err error) {
+    return c.RenewClustersWithContext(context.Background(), request)
+}
+
+// RenewClusters
+// This API is used to renew the cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_TRADECREATEORDERERROR = "FailedOperation.TradeCreateOrderError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETERVALUE_CLUSTERNOTFOUND = "InvalidParameterValue.ClusterNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_INVALIDREGIONIDERROR = "InvalidParameterValue.InvalidRegionIdError"
+//  OPERATIONDENIED_CLUSTEROPNOTALLOWEDERROR = "OperationDenied.ClusterOpNotAllowedError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  RESOURCEUNAVAILABLE_INSTANCELOCKFAIL = "ResourceUnavailable.InstanceLockFail"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) RenewClustersWithContext(ctx context.Context, request *RenewClustersRequest) (response *RenewClustersResponse, err error) {
+    if request == nil {
+        request = NewRenewClustersRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "RenewClusters")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RenewClusters require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRenewClustersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewReplayInstanceAuditLogRequest() (request *ReplayInstanceAuditLogRequest) {
     request = &ReplayInstanceAuditLogRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -8641,6 +9209,170 @@ func (c *Client) ResumeServerlessWithContext(ctx context.Context, request *Resum
     return
 }
 
+func NewRollBackClusterRequest() (request *RollBackClusterRequest) {
+    request = &RollBackClusterRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "RollBackCluster")
+    
+    
+    return
+}
+
+func NewRollBackClusterResponse() (response *RollBackClusterResponse) {
+    response = &RollBackClusterResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RollBackCluster
+// This API is used to perform cluster rollback.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  RESOURCEUNAVAILABLE_INSTANCELOCKFAIL = "ResourceUnavailable.InstanceLockFail"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) RollBackCluster(request *RollBackClusterRequest) (response *RollBackClusterResponse, err error) {
+    return c.RollBackClusterWithContext(context.Background(), request)
+}
+
+// RollBackCluster
+// This API is used to perform cluster rollback.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  RESOURCEUNAVAILABLE_INSTANCELOCKFAIL = "ResourceUnavailable.InstanceLockFail"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) RollBackClusterWithContext(ctx context.Context, request *RollBackClusterRequest) (response *RollBackClusterResponse, err error) {
+    if request == nil {
+        request = NewRollBackClusterRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "RollBackCluster")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RollBackCluster require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRollBackClusterResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRollbackToNewClusterRequest() (request *RollbackToNewClusterRequest) {
+    request = &RollbackToNewClusterRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "RollbackToNewCluster")
+    
+    
+    return
+}
+
+func NewRollbackToNewClusterResponse() (response *RollbackToNewClusterResponse) {
+    response = &RollbackToNewClusterResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RollbackToNewCluster
+// This API is used to roll back to a new cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEORDER = "FailedOperation.CreateOrder"
+//  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  FAILEDOPERATION_QUERYSPECBYSPECCODEERROR = "FailedOperation.QuerySpecBySpecCodeError"
+//  FAILEDOPERATION_TRADECREATEORDERERROR = "FailedOperation.TradeCreateOrderError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
+//  INTERNALERROR_GETVPCFAILED = "InternalError.GetVpcFailed"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETERVALUE_DBTYPENOTFOUND = "InvalidParameterValue.DBTypeNotFound"
+//  INVALIDPARAMETERVALUE_ILLEGALPASSWORD = "InvalidParameterValue.IllegalPassword"
+//  INVALIDPARAMETERVALUE_INVALIDDBVERSION = "InvalidParameterValue.InvalidDBVersion"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_INVALIDSPEC = "InvalidParameterValue.InvalidSpec"
+//  INVALIDPARAMETERVALUE_INVALIDZONEIDERROR = "InvalidParameterValue.InvalidZoneIdError"
+//  INVALIDPARAMETERVALUE_PROJECTIDNOTFOUND = "InvalidParameterValue.ProjectIdNotFound"
+//  INVALIDPARAMETERVALUE_REGIONZONEUNAVAILABLE = "InvalidParameterValue.RegionZoneUnavailable"
+//  INVALIDPARAMETERVALUE_SUBNETNOTFOUND = "InvalidParameterValue.SubnetNotFound"
+//  INVALIDPARAMETERVALUE_VPCNOTFOUND = "InvalidParameterValue.VpcNotFound"
+//  LIMITEXCEEDED_USERINSTANCELIMIT = "LimitExceeded.UserInstanceLimit"
+//  OPERATIONDENIED_INSUFFICIENTBALANCEERROR = "OperationDenied.InsufficientBalanceError"
+//  OPERATIONDENIED_USERNOTAUTHENTICATEDERROR = "OperationDenied.UserNotAuthenticatedError"
+//  UNAUTHORIZEDOPERATION_NOTREALNAMEACCOUNT = "UnauthorizedOperation.NotRealNameAccount"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) RollbackToNewCluster(request *RollbackToNewClusterRequest) (response *RollbackToNewClusterResponse, err error) {
+    return c.RollbackToNewClusterWithContext(context.Background(), request)
+}
+
+// RollbackToNewCluster
+// This API is used to roll back to a new cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEORDER = "FailedOperation.CreateOrder"
+//  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  FAILEDOPERATION_QUERYSPECBYSPECCODEERROR = "FailedOperation.QuerySpecBySpecCodeError"
+//  FAILEDOPERATION_TRADECREATEORDERERROR = "FailedOperation.TradeCreateOrderError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
+//  INTERNALERROR_GETVPCFAILED = "InternalError.GetVpcFailed"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETERVALUE_DBTYPENOTFOUND = "InvalidParameterValue.DBTypeNotFound"
+//  INVALIDPARAMETERVALUE_ILLEGALPASSWORD = "InvalidParameterValue.IllegalPassword"
+//  INVALIDPARAMETERVALUE_INVALIDDBVERSION = "InvalidParameterValue.InvalidDBVersion"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_INVALIDSPEC = "InvalidParameterValue.InvalidSpec"
+//  INVALIDPARAMETERVALUE_INVALIDZONEIDERROR = "InvalidParameterValue.InvalidZoneIdError"
+//  INVALIDPARAMETERVALUE_PROJECTIDNOTFOUND = "InvalidParameterValue.ProjectIdNotFound"
+//  INVALIDPARAMETERVALUE_REGIONZONEUNAVAILABLE = "InvalidParameterValue.RegionZoneUnavailable"
+//  INVALIDPARAMETERVALUE_SUBNETNOTFOUND = "InvalidParameterValue.SubnetNotFound"
+//  INVALIDPARAMETERVALUE_VPCNOTFOUND = "InvalidParameterValue.VpcNotFound"
+//  LIMITEXCEEDED_USERINSTANCELIMIT = "LimitExceeded.UserInstanceLimit"
+//  OPERATIONDENIED_INSUFFICIENTBALANCEERROR = "OperationDenied.InsufficientBalanceError"
+//  OPERATIONDENIED_USERNOTAUTHENTICATEDERROR = "OperationDenied.UserNotAuthenticatedError"
+//  UNAUTHORIZEDOPERATION_NOTREALNAMEACCOUNT = "UnauthorizedOperation.NotRealNameAccount"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) RollbackToNewClusterWithContext(ctx context.Context, request *RollbackToNewClusterRequest) (response *RollbackToNewClusterResponse, err error) {
+    if request == nil {
+        request = NewRollbackToNewClusterRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "RollbackToNewCluster")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RollbackToNewCluster require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRollbackToNewClusterResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSearchClusterDatabasesRequest() (request *SearchClusterDatabasesRequest) {
     request = &SearchClusterDatabasesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -8829,6 +9561,108 @@ func (c *Client) SetRenewFlagWithContext(ctx context.Context, request *SetRenewF
     request.SetContext(ctx)
     
     response = NewSetRenewFlagResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStartCLSDeliveryRequest() (request *StartCLSDeliveryRequest) {
+    request = &StartCLSDeliveryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "StartCLSDelivery")
+    
+    
+    return
+}
+
+func NewStartCLSDeliveryResponse() (response *StartCLSDeliveryResponse) {
+    response = &StartCLSDeliveryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StartCLSDelivery
+// This interface (StartCLSDelivery) is used to enable log delivery functionality.
+//
+// error code that may be returned:
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) StartCLSDelivery(request *StartCLSDeliveryRequest) (response *StartCLSDeliveryResponse, err error) {
+    return c.StartCLSDeliveryWithContext(context.Background(), request)
+}
+
+// StartCLSDelivery
+// This interface (StartCLSDelivery) is used to enable log delivery functionality.
+//
+// error code that may be returned:
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) StartCLSDeliveryWithContext(ctx context.Context, request *StartCLSDeliveryRequest) (response *StartCLSDeliveryResponse, err error) {
+    if request == nil {
+        request = NewStartCLSDeliveryRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "StartCLSDelivery")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartCLSDelivery require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStartCLSDeliveryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStopCLSDeliveryRequest() (request *StopCLSDeliveryRequest) {
+    request = &StopCLSDeliveryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "StopCLSDelivery")
+    
+    
+    return
+}
+
+func NewStopCLSDeliveryResponse() (response *StopCLSDeliveryResponse) {
+    response = &StopCLSDeliveryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StopCLSDelivery
+// This API is used to stop the log delivery feature.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) StopCLSDelivery(request *StopCLSDeliveryRequest) (response *StopCLSDeliveryResponse, err error) {
+    return c.StopCLSDeliveryWithContext(context.Background(), request)
+}
+
+// StopCLSDelivery
+// This API is used to stop the log delivery feature.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) StopCLSDeliveryWithContext(ctx context.Context, request *StopCLSDeliveryRequest) (response *StopCLSDeliveryResponse, err error) {
+    if request == nil {
+        request = NewStopCLSDeliveryRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "StopCLSDelivery")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopCLSDelivery require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStopCLSDeliveryResponse()
     err = c.Send(request, response)
     return
 }
