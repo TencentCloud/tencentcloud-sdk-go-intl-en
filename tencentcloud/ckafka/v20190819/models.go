@@ -27,12 +27,10 @@ type Acl struct {
 	// Resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name
 	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
 
-	// User list. The default value is `User:*`, which means that any user can access. The current user can only be one included in the user list
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// List of users, defaults to User:*, means any User is accessible in the entire region. the current User can only be the User in the list of users.
 	Principal *string `json:"Principal,omitnil,omitempty" name:"Principal"`
 
-	// The default value is `*`, which means that any host can access. Currently, CKafka does not support the host as `*`, but the future product based on the open-source Kafka will directly support this
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Defaults to *, indicating any host is accessible in the entire region. currently, ckafka does not support * as the host, however, the following open-source kafka productization will directly support it.
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// ACL operation mode. 0: UNKNOWN, 1: ANY, 2: ALL, 3: READ, 4: WRITE, 5: CREATE, 6: DELETE, 7: ALTER, 8: DESCRIBE, 9: CLUSTER_ACTION, 10: DESCRIBE_CONFIGS, 11: ALTER_CONFIGS, 12: IDEMPOTEN_WRITE
@@ -46,62 +44,48 @@ type AclResponse struct {
 	// Number of eligible data entries
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// ACL list
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// ACL list.
 	AclList []*Acl `json:"AclList,omitnil,omitempty" name:"AclList"`
 }
 
 type AclRule struct {
 	// ACL rule name.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
-	// Instance ID.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Matching type. Currently, only prefix match is supported. Enumerated value list: PREFIXED
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// ACL rule-based matching type. currently only supports prefix match. valid values: PREFIXED.
 	PatternType *string `json:"PatternType,omitnil,omitempty" name:"PatternType"`
 
-	// Prefix value for prefix match.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Indicates the prefix value for prefix match.
 	Pattern *string `json:"Pattern,omitnil,omitempty" name:"Pattern"`
 
-	// ACL resource type. Only “Topic” is supported. Enumerated value list: Topic.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Acl resource type, currently only support Topic. valid values: Topic.
 	ResourceType *string `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
 
-	// ACL information contained in the rule.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Specifies the ACL information contained in the rule.
 	AclList *string `json:"AclList,omitnil,omitempty" name:"AclList"`
 
-	// Creation time of the rule.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Specifies the time when the rule was created.
 	CreateTimeStamp *string `json:"CreateTimeStamp,omitnil,omitempty" name:"CreateTimeStamp"`
 
-	// A parameter used to specify whether the preset ACL rule is applied to new topics.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Specifies whether to apply the preset ACL rule to newly-added topics.
 	IsApplied *int64 `json:"IsApplied,omitnil,omitempty" name:"IsApplied"`
 
 	// Rule update time.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	UpdateTimeStamp *string `json:"UpdateTimeStamp,omitnil,omitempty" name:"UpdateTimeStamp"`
 
-	// Remarks of the rule.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Specifies the remark of the rule.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// One of the corresponding topic names that is displayed.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// One of the displayed corresponding TopicName.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// The number of topics that apply this ACL rule.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Number of topics to which the ACL rule is applied.
 	TopicCount *int64 `json:"TopicCount,omitnil,omitempty" name:"TopicCount"`
 
-	// Name of rule type.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Specifies the pattern type.
 	PatternTypeTitle *string `json:"PatternTypeTitle,omitnil,omitempty" name:"PatternTypeTitle"`
 }
 
@@ -109,13 +93,13 @@ type AclRuleInfo struct {
 	// ACL operation types. Enumerated values: `All` (all operations), `Read` (read), `Write` (write).
 	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 
-	// Permission types: `Deny`, `Allow`.
+	// Permission type. Deny: Deny. Allow: permission.
 	PermissionType *string `json:"PermissionType,omitnil,omitempty" name:"PermissionType"`
 
-	// The default value is `*`, which means that any host can access the topic. CKafka currently does not support specifying a host value of * or an IP range.
+	// Indicates any host is accessible in the entire region.
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
-	// The list of users allowed to access the topic. Default value: `User:*`, which means all users. The current user must be in the user list. Add the prefix `User:` before the user name (`User:A`, for example).
+	// The User. User:* means any User is accessible in the entire region. the current User can only be the User in the list of users. the input format requires the [User:] prefix. for example, for User A, input User:A.
 	Principal *string `json:"Principal,omitnil,omitempty" name:"Principal"`
 }
 
@@ -123,8 +107,7 @@ type AclRuleResp struct {
 	// Total number of data entries
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// ACL rule list
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// AclRule list.
 	AclRuleList []*AclRule `json:"AclRuleList,omitnil,omitempty" name:"AclRuleList"`
 }
 
@@ -132,8 +115,7 @@ type AppIdResponse struct {
 	// Number of eligible `AppId`
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// List of eligible `AppId`
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Specifies the App Id list that meets the requirements.
 	AppIdList []*int64 `json:"AppIdList,omitnil,omitempty" name:"AppIdList"`
 }
 
@@ -141,8 +123,7 @@ type Assignment struct {
 	// Assignment version information
 	Version *int64 `json:"Version,omitnil,omitempty" name:"Version"`
 
-	// Topic information list
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// topic information list.
 	Topics []*GroupInfoTopics `json:"Topics,omitnil,omitempty" name:"Topics"`
 }
 
@@ -156,32 +137,32 @@ type BatchContent struct {
 
 // Predefined struct for user
 type BatchCreateAclRequestParams struct {
-	// Instance ID.
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// ACL resource type. Default value: `2` (topic).
 	ResourceType *int64 `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
 
-	// Resource list array.
+	// Resource list array, obtainable through the DescribeTopic API (https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1).
 	ResourceNames []*string `json:"ResourceNames,omitnil,omitempty" name:"ResourceNames"`
 
-	// ACL rule list.
+	// Specifies the set ACL rule list, which can be obtained through the DescribeAclRule API (https://www.tencentcloud.comom/document/product/597/89217?from_cn_redirect=1).
 	RuleList []*AclRuleInfo `json:"RuleList,omitnil,omitempty" name:"RuleList"`
 }
 
 type BatchCreateAclRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// ACL resource type. Default value: `2` (topic).
 	ResourceType *int64 `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
 
-	// Resource list array.
+	// Resource list array, obtainable through the DescribeTopic API (https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1).
 	ResourceNames []*string `json:"ResourceNames,omitnil,omitempty" name:"ResourceNames"`
 
-	// ACL rule list.
+	// Specifies the set ACL rule list, which can be obtained through the DescribeAclRule API (https://www.tencentcloud.comom/document/product/597/89217?from_cn_redirect=1).
 	RuleList []*AclRuleInfo `json:"RuleList,omitnil,omitempty" name:"RuleList"`
 }
 
@@ -209,10 +190,10 @@ func (r *BatchCreateAclRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type BatchCreateAclResponseParams struct {
-	// Status code.
+	// Status code: 0 - modification succeeded, otherwise modification failed.
 	Result *int64 `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -237,7 +218,7 @@ type BatchModifyGroupOffsetsRequestParams struct {
 	// Consumer group name.
 	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 
-	// Instance name.
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Partition information.
@@ -253,7 +234,7 @@ type BatchModifyGroupOffsetsRequest struct {
 	// Consumer group name.
 	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 
-	// Instance name.
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Partition information.
@@ -290,7 +271,7 @@ type BatchModifyGroupOffsetsResponseParams struct {
 	// Returned result.
 	Result *JgwOperateResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -312,20 +293,20 @@ func (r *BatchModifyGroupOffsetsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type BatchModifyTopicAttributesRequestParams struct {
-	// Instance ID.
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Topic attribute list
+	// Specifies the topic attribute list (a maximum of 10 per batch), which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
 	Topic []*BatchModifyTopicInfo `json:"Topic,omitnil,omitempty" name:"Topic"`
 }
 
 type BatchModifyTopicAttributesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Topic attribute list
+	// Specifies the topic attribute list (a maximum of 10 per batch), which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
 	Topic []*BatchModifyTopicInfo `json:"Topic,omitnil,omitempty" name:"Topic"`
 }
 
@@ -354,7 +335,7 @@ type BatchModifyTopicAttributesResponseParams struct {
 	// Returned result.
 	Result []*BatchModifyTopicResultDTO `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -375,7 +356,7 @@ func (r *BatchModifyTopicAttributesResponse) FromJsonString(s string) error {
 }
 
 type BatchModifyTopicInfo struct {
-	// Topic name.
+	// Topic name
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
 	// The number of partitions.
@@ -399,30 +380,30 @@ type BatchModifyTopicInfo struct {
 	// Message retention period in topic dimension in milliseconds. Value range: 1 minute to 90 days.
 	RetentionMs *int64 `json:"RetentionMs,omitnil,omitempty" name:"RetentionMs"`
 
-	// Message retention size in topic dimension. Value range: 1 MB - 1024 GB.
+	// Specifies the message retention size in the topic dimension in bytes. value range: 1 GB to 1024 GB.
 	RetentionBytes *int64 `json:"RetentionBytes,omitnil,omitempty" name:"RetentionBytes"`
 
-	// Segment rolling duration in milliseconds. Value range: 1-90 days.
+	// Duration of Segment shard scrolling in milliseconds. value range: 1 day to 90 days.
 	SegmentMs *int64 `json:"SegmentMs,omitnil,omitempty" name:"SegmentMs"`
 
 	// Message size per batch. Value range: 1 KB - 12 MB.
 	MaxMessageBytes *int64 `json:"MaxMessageBytes,omitnil,omitempty" name:"MaxMessageBytes"`
+
+	// Specifies the time type for message storage: CreateTime/LogAppendTime.
+	LogMsgTimestampType *string `json:"LogMsgTimestampType,omitnil,omitempty" name:"LogMsgTimestampType"`
 }
 
 type BatchModifyTopicResultDTO struct {
-	// Instance ID.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Topic name.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Topic name
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// Status code.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Operation return code.
 	ReturnCode *string `json:"ReturnCode,omitnil,omitempty" name:"ReturnCode"`
 
-	// Message status.
+	// Returned information.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 }
 
@@ -433,34 +414,27 @@ type ClusterInfo struct {
 	// Cluster name
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-	// The cluster’s maximum disk capacity in GB
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Maximum disk of the cluster (unit: GB).
 	MaxDiskSize *int64 `json:"MaxDiskSize,omitnil,omitempty" name:"MaxDiskSize"`
 
-	// The cluster’s maximum bandwidth in MB/s
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Maximum bandwidth of the cluster. unit: MB/s.
 	MaxBandWidth *int64 `json:"MaxBandWidth,omitnil,omitempty" name:"MaxBandWidth"`
 
-	// The cluster’s available disk capacity in GB
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Current availability of cluster disk (unit: GB).
 	AvailableDiskSize *int64 `json:"AvailableDiskSize,omitnil,omitempty" name:"AvailableDiskSize"`
 
-	// The cluster’s available bandwidth in MB/s
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Available bandwidth of the cluster. unit: MB/s.
 	AvailableBandWidth *int64 `json:"AvailableBandWidth,omitnil,omitempty" name:"AvailableBandWidth"`
 
-	// The AZ where the cluster resides
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Indicates the AZ to which the cluster belongs.
 	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// The AZ where the cluster nodes reside. If the cluster is a multi-AZ cluster, this field means multiple AZs where the cluster nodes reside.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// The AZ where the cluster nodes are located. If the cluster is a cross-AZ cluster, it includes multiple AZs where the cluster nodes are located.
 	ZoneIds []*int64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 }
 
 type Config struct {
-	// Message retention period
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Message retention period in milliseconds.
 	Retention *int64 `json:"Retention,omitnil,omitempty" name:"Retention"`
 
 	// Minimum number of sync replications
@@ -472,25 +446,29 @@ type Config struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CleanUpPolicy *string `json:"CleanUpPolicy,omitnil,omitempty" name:"CleanUpPolicy"`
 
-	// Segment rolling duration
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Duration of Segment shard scrolling in milliseconds.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SegmentMs *int64 `json:"SegmentMs,omitnil,omitempty" name:"SegmentMs"`
 
 	// 0: false, 1: true.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	UncleanLeaderElectionEnable *int64 `json:"UncleanLeaderElectionEnable,omitnil,omitempty" name:"UncleanLeaderElectionEnable"`
 
-	// Number of bytes for segment rolling
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Segment specifies the number of bytes for sharding scroll. unit: bytes.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SegmentBytes *int64 `json:"SegmentBytes,omitnil,omitempty" name:"SegmentBytes"`
 
-	// Maximum number of message bytes
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Maximum message byte size. unit: bytes.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MaxMessageBytes *int64 `json:"MaxMessageBytes,omitnil,omitempty" name:"MaxMessageBytes"`
 
-	// Message retention file size.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Specifies the message retention file size in Bytes.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	RetentionBytes *int64 `json:"RetentionBytes,omitnil,omitempty" name:"RetentionBytes"`
+
+	// The time type for message saving. CreateTime means the time when the producer created this message. LogAppendTime means the time when the broker received the message.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogMsgTimestampType *string `json:"LogMsgTimestampType,omitnil,omitempty" name:"LogMsgTimestampType"`
 }
 
 type ConsumerGroup struct {
@@ -505,32 +483,25 @@ type ConsumerGroupResponse struct {
 	// Number of eligible consumer groups
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Topic list
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Topic list.
 	TopicList []*ConsumerGroupTopic `json:"TopicList,omitnil,omitempty" name:"TopicList"`
 
-	// Consumer group list
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Specifies the consumption group List.
 	GroupList []*ConsumerGroup `json:"GroupList,omitnil,omitempty" name:"GroupList"`
 
-	// Total number of partitions
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Total number of partitions.
 	TotalPartition *int64 `json:"TotalPartition,omitnil,omitempty" name:"TotalPartition"`
 
-	// List of monitored partitions
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Monitored partition list.
 	PartitionListForMonitor []*Partition `json:"PartitionListForMonitor,omitnil,omitempty" name:"PartitionListForMonitor"`
 
-	// Total number of topics
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Total number of topics.
 	TotalTopic *int64 `json:"TotalTopic,omitnil,omitempty" name:"TotalTopic"`
 
-	// List of monitored topics
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Monitored topic list.
 	TopicListForMonitor []*ConsumerGroupTopic `json:"TopicListForMonitor,omitnil,omitempty" name:"TopicListForMonitor"`
 
-	// List of monitored groups
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Monitored group list.
 	GroupListForMonitor []*Group `json:"GroupListForMonitor,omitnil,omitempty" name:"GroupListForMonitor"`
 }
 
@@ -560,8 +531,7 @@ type ConsumerRecord struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 
-	// Message timestamp
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Message timestamp.
 	Timestamp *int64 `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
 
 	// Message headers
@@ -571,7 +541,7 @@ type ConsumerRecord struct {
 
 // Predefined struct for user
 type CreateAclRequestParams struct {
-	// Instance ID information
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// ACL resource type (`2`: TOPIC, `3`: GROUP, `4`: CLUSTER).
@@ -580,13 +550,13 @@ type CreateAclRequestParams struct {
 	// ACL operation type (`2`: ALL, `3`: READ, `4`: WRITE, `5`: CREATE, `6`: DELETE, `7`: ALTER, `8`: DESCRIBE, `9`: CLUSTER_ACTION, `10`: DESCRIBE_CONFIGS, `11`: ALTER_CONFIGS, `12`: IDEMPOTENT_WRITE).
 	Operation *int64 `json:"Operation,omitnil,omitempty" name:"Operation"`
 
-	// Permission type (`2`: DENY, `3`: ALLOW). CKafka currently supports `ALLOW`, which is equivalent to allowlist. `DENY` will be supported for ACLs compatible with open-source Kafka.
+	// Permission type (2:DENY, 3:ALLOW). currently ckafka supports ALLOW (equivalent to allowlist), others used when compatible with open-source kafka acl.
 	PermissionType *int64 `json:"PermissionType,omitnil,omitempty" name:"PermissionType"`
 
 	// Resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name; if `resourceType` is `CLUSTER`, this field can be left empty.
 	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
 
-	// The default value is `*`, which means that any host can access. Currently, CKafka does not support the host as `*`, but the future product based on the open-source Kafka will directly support this
+	// Defaults to *, indicating any host is accessible in the entire region. supports filling in ips or ranges, and uses ";" for separation.
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// The list of users allowed to access the topic. Default: User:*, meaning all users. The current user must be in the user list. Add `User:` before the user name (`User:A` for example).
@@ -599,7 +569,7 @@ type CreateAclRequestParams struct {
 type CreateAclRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID information
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// ACL resource type (`2`: TOPIC, `3`: GROUP, `4`: CLUSTER).
@@ -608,13 +578,13 @@ type CreateAclRequest struct {
 	// ACL operation type (`2`: ALL, `3`: READ, `4`: WRITE, `5`: CREATE, `6`: DELETE, `7`: ALTER, `8`: DESCRIBE, `9`: CLUSTER_ACTION, `10`: DESCRIBE_CONFIGS, `11`: ALTER_CONFIGS, `12`: IDEMPOTENT_WRITE).
 	Operation *int64 `json:"Operation,omitnil,omitempty" name:"Operation"`
 
-	// Permission type (`2`: DENY, `3`: ALLOW). CKafka currently supports `ALLOW`, which is equivalent to allowlist. `DENY` will be supported for ACLs compatible with open-source Kafka.
+	// Permission type (2:DENY, 3:ALLOW). currently ckafka supports ALLOW (equivalent to allowlist), others used when compatible with open-source kafka acl.
 	PermissionType *int64 `json:"PermissionType,omitnil,omitempty" name:"PermissionType"`
 
 	// Resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name; if `resourceType` is `CLUSTER`, this field can be left empty.
 	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
 
-	// The default value is `*`, which means that any host can access. Currently, CKafka does not support the host as `*`, but the future product based on the open-source Kafka will directly support this
+	// Defaults to *, indicating any host is accessible in the entire region. supports filling in ips or ranges, and uses ";" for separation.
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// The list of users allowed to access the topic. Default: User:*, meaning all users. The current user must be in the user list. Add `User:` before the user name (`User:A` for example).
@@ -655,7 +625,7 @@ type CreateAclResponseParams struct {
 	// Returned result
 	Result *JgwOperateResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -677,13 +647,13 @@ func (r *CreateAclResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAclRuleRequestParams struct {
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// ACL resource type. Currently, the only valid value is `Topic`.
 	ResourceType *string `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
 
-	// Matching type. Valid values: `PREFIXED`(match by prefix), `PRESET` (match by preset policy).
+	// ACL rule-based matching type. currently supports prefix match and PRESET policy. valid values: PREFIXED/PRESET.
 	PatternType *string `json:"PatternType,omitnil,omitempty" name:"PatternType"`
 
 	// Rule name
@@ -692,10 +662,10 @@ type CreateAclRuleRequestParams struct {
 	// ACL rule list
 	RuleList []*AclRuleInfo `json:"RuleList,omitnil,omitempty" name:"RuleList"`
 
-	// Prefix value for prefix match
+	// Indicates the prefix for prefix match. this parameter is required when PatternType value is PREFIXED.
 	Pattern *string `json:"Pattern,omitnil,omitempty" name:"Pattern"`
 
-	// A parameter used to specify whether the preset ACL rule is applied to new topics
+	// Specifies whether to apply the preset ACL rule to newly-added topics. defaults to 0, which means no. a value of 1 means yes.
 	IsApplied *int64 `json:"IsApplied,omitnil,omitempty" name:"IsApplied"`
 
 	// Remarks for ACL rules
@@ -705,13 +675,13 @@ type CreateAclRuleRequestParams struct {
 type CreateAclRuleRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// ACL resource type. Currently, the only valid value is `Topic`.
 	ResourceType *string `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
 
-	// Matching type. Valid values: `PREFIXED`(match by prefix), `PRESET` (match by preset policy).
+	// ACL rule-based matching type. currently supports prefix match and PRESET policy. valid values: PREFIXED/PRESET.
 	PatternType *string `json:"PatternType,omitnil,omitempty" name:"PatternType"`
 
 	// Rule name
@@ -720,10 +690,10 @@ type CreateAclRuleRequest struct {
 	// ACL rule list
 	RuleList []*AclRuleInfo `json:"RuleList,omitnil,omitempty" name:"RuleList"`
 
-	// Prefix value for prefix match
+	// Indicates the prefix for prefix match. this parameter is required when PatternType value is PREFIXED.
 	Pattern *string `json:"Pattern,omitnil,omitempty" name:"Pattern"`
 
-	// A parameter used to specify whether the preset ACL rule is applied to new topics
+	// Specifies whether to apply the preset ACL rule to newly-added topics. defaults to 0, which means no. a value of 1 means yes.
 	IsApplied *int64 `json:"IsApplied,omitnil,omitempty" name:"IsApplied"`
 
 	// Remarks for ACL rules
@@ -761,7 +731,7 @@ type CreateAclRuleResponseParams struct {
 	// Unique key of a rule
 	Result *int64 `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -783,32 +753,32 @@ func (r *CreateAclRuleResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateConsumerRequestParams struct {
-	// Instance ID.
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Group name.
+	// Consumer group name.
 	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 
-	// Topic name. You must specify the name of an existing topic for either `TopicName` or `TopicNameList`.
+	// Topic name. one of TopicName or TopicNameList must display a specified existing topic name.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// Topic name array.
+	// Topic name list.
 	TopicNameList []*string `json:"TopicNameList,omitnil,omitempty" name:"TopicNameList"`
 }
 
 type CreateConsumerRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Group name.
+	// Consumer group name.
 	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 
-	// Topic name. You must specify the name of an existing topic for either `TopicName` or `TopicNameList`.
+	// Topic name. one of TopicName or TopicNameList must display a specified existing topic name.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// Topic name array.
+	// Topic name list.
 	TopicNameList []*string `json:"TopicNameList,omitnil,omitempty" name:"TopicNameList"`
 }
 
@@ -836,10 +806,10 @@ func (r *CreateConsumerRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateConsumerResponseParams struct {
-	// Description of the created consumer group.
+	// Create consumer group returned results.
 	Result *JgwOperateResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -861,7 +831,7 @@ func (r *CreateConsumerResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateDatahubTopicRequestParams struct {
-	// Topic name, which is a string of up to 128 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+	// Name, a string of no more than 128 characters, must start with "AppId-" and can contain letters, digits, and hyphens (-).
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Number of partitions, which should be greater than 0.
@@ -880,7 +850,7 @@ type CreateDatahubTopicRequestParams struct {
 type CreateDatahubTopicRequest struct {
 	*tchttp.BaseRequest
 	
-	// Topic name, which is a string of up to 128 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+	// Name, a string of no more than 128 characters, must start with "AppId-" and can contain letters, digits, and hyphens (-).
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Number of partitions, which should be greater than 0.
@@ -924,7 +894,7 @@ type CreateDatahubTopicResponseParams struct {
 	// Returned creation result
 	Result *DatahubTopicResp `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -945,169 +915,17 @@ func (r *CreateDatahubTopicResponse) FromJsonString(s string) error {
 }
 
 type CreateInstancePostData struct {
-	// This parameter has a fixed value of 0 returned by `CreateInstancePre`. It is only used for backend data alignment  and cannot be used as the query condition for `CheckTaskStatus`. 
-	// Note:  This field may return null, indicating that no valid values can be obtained.
+	// CreateInstancePre returns fixed as 0. it cannot be used as a query condition for CheckTaskStatus. this is merely to ensure alignment with the backend data structure.
 	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
-	// List of order IDs Note: This field may return null, indicating that no valid values can be obtained.
+	// Order ID list
 	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
 
-	// Instance ID. When multiple instances are purchased, the ID of the first one is returned by default . Note: This field may return null, indicating that no valid values can be obtained.
+	// The ckafka cluster instance Id. by default, returns the Id of the first purchased instance when purchasing multiple instances.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Mapping between orders and the purchased instances.  Note: This field may return null, indicating that no valid values can be obtained.
+	// Order and purchase mapping list corresponding to the instance.
 	DealNameInstanceIdMapping []*DealInstanceDTO `json:"DealNameInstanceIdMapping,omitnil,omitempty" name:"DealNameInstanceIdMapping"`
-}
-
-// Predefined struct for user
-type CreateInstancePostRequestParams struct {
-	// Instance name, which is a string of up to 64 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
-	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
-
-	// Private network peak bandwidth of an instance  in MB/sec.  If you create a Standard Edition instance, pass in the corresponding peak bandwidth for the current instance specification.  If you create a Pro Edition instance, configure the peak bandwidth, partition count, and other parameters as required by Pro Edition.
-	BandWidth *int64 `json:"BandWidth,omitnil,omitempty" name:"BandWidth"`
-
-	// ID of the VPC where the default access point of the created instance resides.  This parameter is required as instances cannot be created in the classic network currently.
-	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
-
-	// ID of the subnet  where the default access point of the created instance resides. 
-	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
-
-	// Instance specification.  This parameter is required for a Standard Edition instance but not for a Pro Edition instance.  Valid values:  `1` (Small),  `2` (Standard),  `3` (Advanced),  `4` (Large),  `5` (Xlarge L1),  `6` (Xlarge L2),  `7` (Xlarge L3),  `8` (Xlarge L4),  
-	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
-
-	// The maximum instance log retention period in minutes by default.  If this parameter is left empty, the default retention period is 1,440 minutes (1 day) to 30 days.  If the message retention period of the topic is explicitly set, it will prevail.
-	MsgRetentionTime *int64 `json:"MsgRetentionTime,omitnil,omitempty" name:"MsgRetentionTime"`
-
-	// Cluster ID, which can be selected when you create an instance.  You don’t need to pass in this parameter if the cluster where the instance resides is not specified.
-	ClusterId *int64 `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
-
-	// Instance version.  Valid values: `0.10.2`, `1.1.1`, `2.4.2`, and `2.8.1`.
-	KafkaVersion *string `json:"KafkaVersion,omitnil,omitempty" name:"KafkaVersion"`
-
-	// Instance type. Valid values: `standard` (Standard Edition),  `profession`  (Pro Edition)
-	SpecificationsType *string `json:"SpecificationsType,omitnil,omitempty" name:"SpecificationsType"`
-
-	// Instance disk type. Valid values:  `CLOUD_BASIC` (Premium Cloud Storage),  `CLOUD_SSD` (SSD).  If this parameter is left empty, the default value `CLOUD_BASIC` will be used.
-	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
-
-	// Instance disk size, which must meet the requirement of the instance’s specification.
-	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
-
-	// The maximum number of partitions of the instance, which must meet the requirement of the instance’s specification.
-	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
-
-	// The maximum number of topics of the instance, which must meet the requirement of the instance’s specification.
-	TopicNum *int64 `json:"TopicNum,omitnil,omitempty" name:"TopicNum"`
-
-	// AZ of the instance.  When a multi-AZ instance is created, the value of this parameter is the AZ ID of the subnet where the instance’s default access point resides.
-	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
-
-	// Whether the current instance is a multi-AZ instance
-	MultiZoneFlag *bool `json:"MultiZoneFlag,omitnil,omitempty" name:"MultiZoneFlag"`
-
-	// This parameter indicates the list of AZ IDs when the instance is deployed in multiple AZs.  Note that `ZoneId` must be included in the array of this parameter.
-	ZoneIds []*int64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
-
-	// The number of purchased instances.  Default value: `1`. This parameter is optional.  If it is passed in, multiple instances will be created, with their names being `instanceName` plus different suffixes.
-	InstanceNum *int64 `json:"InstanceNum,omitnil,omitempty" name:"InstanceNum"`
-
-	// Public network bandwidth in Mbps.  The 3 Mbps of free bandwidth is not included here by default.  For example, if you need 3 Mbps of public network bandwidth, pass in `0`; if you need 6 Mbps, pass in `3`. The value must be an integer multiple of 3.
-	PublicNetworkMonthly *int64 `json:"PublicNetworkMonthly,omitnil,omitempty" name:"PublicNetworkMonthly"`
-}
-
-type CreateInstancePostRequest struct {
-	*tchttp.BaseRequest
-	
-	// Instance name, which is a string of up to 64 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
-	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
-
-	// Private network peak bandwidth of an instance  in MB/sec.  If you create a Standard Edition instance, pass in the corresponding peak bandwidth for the current instance specification.  If you create a Pro Edition instance, configure the peak bandwidth, partition count, and other parameters as required by Pro Edition.
-	BandWidth *int64 `json:"BandWidth,omitnil,omitempty" name:"BandWidth"`
-
-	// ID of the VPC where the default access point of the created instance resides.  This parameter is required as instances cannot be created in the classic network currently.
-	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
-
-	// ID of the subnet  where the default access point of the created instance resides. 
-	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
-
-	// Instance specification.  This parameter is required for a Standard Edition instance but not for a Pro Edition instance.  Valid values:  `1` (Small),  `2` (Standard),  `3` (Advanced),  `4` (Large),  `5` (Xlarge L1),  `6` (Xlarge L2),  `7` (Xlarge L3),  `8` (Xlarge L4),  
-	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
-
-	// The maximum instance log retention period in minutes by default.  If this parameter is left empty, the default retention period is 1,440 minutes (1 day) to 30 days.  If the message retention period of the topic is explicitly set, it will prevail.
-	MsgRetentionTime *int64 `json:"MsgRetentionTime,omitnil,omitempty" name:"MsgRetentionTime"`
-
-	// Cluster ID, which can be selected when you create an instance.  You don’t need to pass in this parameter if the cluster where the instance resides is not specified.
-	ClusterId *int64 `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
-
-	// Instance version.  Valid values: `0.10.2`, `1.1.1`, `2.4.2`, and `2.8.1`.
-	KafkaVersion *string `json:"KafkaVersion,omitnil,omitempty" name:"KafkaVersion"`
-
-	// Instance type. Valid values: `standard` (Standard Edition),  `profession`  (Pro Edition)
-	SpecificationsType *string `json:"SpecificationsType,omitnil,omitempty" name:"SpecificationsType"`
-
-	// Instance disk type. Valid values:  `CLOUD_BASIC` (Premium Cloud Storage),  `CLOUD_SSD` (SSD).  If this parameter is left empty, the default value `CLOUD_BASIC` will be used.
-	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
-
-	// Instance disk size, which must meet the requirement of the instance’s specification.
-	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
-
-	// The maximum number of partitions of the instance, which must meet the requirement of the instance’s specification.
-	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
-
-	// The maximum number of topics of the instance, which must meet the requirement of the instance’s specification.
-	TopicNum *int64 `json:"TopicNum,omitnil,omitempty" name:"TopicNum"`
-
-	// AZ of the instance.  When a multi-AZ instance is created, the value of this parameter is the AZ ID of the subnet where the instance’s default access point resides.
-	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
-
-	// Whether the current instance is a multi-AZ instance
-	MultiZoneFlag *bool `json:"MultiZoneFlag,omitnil,omitempty" name:"MultiZoneFlag"`
-
-	// This parameter indicates the list of AZ IDs when the instance is deployed in multiple AZs.  Note that `ZoneId` must be included in the array of this parameter.
-	ZoneIds []*int64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
-
-	// The number of purchased instances.  Default value: `1`. This parameter is optional.  If it is passed in, multiple instances will be created, with their names being `instanceName` plus different suffixes.
-	InstanceNum *int64 `json:"InstanceNum,omitnil,omitempty" name:"InstanceNum"`
-
-	// Public network bandwidth in Mbps.  The 3 Mbps of free bandwidth is not included here by default.  For example, if you need 3 Mbps of public network bandwidth, pass in `0`; if you need 6 Mbps, pass in `3`. The value must be an integer multiple of 3.
-	PublicNetworkMonthly *int64 `json:"PublicNetworkMonthly,omitnil,omitempty" name:"PublicNetworkMonthly"`
-}
-
-func (r *CreateInstancePostRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateInstancePostRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InstanceName")
-	delete(f, "BandWidth")
-	delete(f, "VpcId")
-	delete(f, "SubnetId")
-	delete(f, "InstanceType")
-	delete(f, "MsgRetentionTime")
-	delete(f, "ClusterId")
-	delete(f, "KafkaVersion")
-	delete(f, "SpecificationsType")
-	delete(f, "DiskType")
-	delete(f, "DiskSize")
-	delete(f, "Partition")
-	delete(f, "TopicNum")
-	delete(f, "ZoneId")
-	delete(f, "MultiZoneFlag")
-	delete(f, "ZoneIds")
-	delete(f, "InstanceNum")
-	delete(f, "PublicNetworkMonthly")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstancePostRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
 }
 
 type CreateInstancePostResp struct {
@@ -1117,49 +935,201 @@ type CreateInstancePostResp struct {
 	// Message returned by the API. An error message will be returned if the API reports an error. 
 	ReturnMessage *string `json:"ReturnMessage,omitnil,omitempty" name:"ReturnMessage"`
 
-	// Returned data.  Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the Data returned.
 	Data *CreateInstancePostData `json:"Data,omitnil,omitempty" name:"Data"`
 }
 
+type CreateInstancePreData struct {
+	// CreateInstancePre returns fixed as 0. it cannot be used as a query condition for CheckTaskStatus. this is merely to ensure alignment with the backend data structure.
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// Order ID list
+	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
+
+	// The ckafka cluster instance Id. by default, returns the Id of the first purchased instance when purchasing multiple instances.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Order and purchase mapping list corresponding to the instance.
+	DealNameInstanceIdMapping []*DealInstanceDTO `json:"DealNameInstanceIdMapping,omitnil,omitempty" name:"DealNameInstanceIdMapping"`
+}
+
 // Predefined struct for user
-type CreateInstancePostResponseParams struct {
-	// Returned result
-	Result *JgwOperateResponse `json:"Result,omitnil,omitempty" name:"Result"`
+type CreateInstancePreRequestParams struct {
+	// Specifies the ckafka cluster instance Name, an arbitrary string with length no more than 128 characters.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+	// Availability zone. when purchasing a multi-availability zone instance, this parameter specifies the primary az. [view availability zones](https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1).
+	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Prepaid purchase duration, such as "1m", exactly one month. value ranges from 1m to 36m.
+	Period *string `json:"Period,omitnil,omitempty" name:"Period"`
+
+	// Specifies the standard edition instance specification for the international site. currently only the international site standard edition uses the current field to distinguish specifications, while the domestic site standard edition distinguishes specifications by peak bandwidth. fill in 1 for all instances except the international site standard edition. for international site standard edition instances: [entry-level (general)] fill 1; [standard type (standard)] fill 2; [advanced] fill 3; [capacity type (capacity)] fill 4; [advanced type 1 (specialized-1)] fill 5; [advanced type 2 (specialized-2)] fill 6; [advanced type 3 (specialized-3)] fill 7; [advanced type 4 (specialized-4)] fill 8.
+	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// VPC Id.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// Optional. maximum retention time of instance logs, in minutes. default value: 1440 (1 day). value range: 1 minute to 90 days.
+	MsgRetentionTime *int64 `json:"MsgRetentionTime,omitnil,omitempty" name:"MsgRetentionTime"`
+
+	// Specifies the cluster Id when creating an instance.
+	ClusterId *int64 `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Auto-Renewal tag for prepaid services. valid values: 0 (default state, not set by the user, initial status), 1 (auto-renew), 2 (explicitly no auto-renew, set by the user).
+	RenewFlag *int64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
+
+	// Specifies the CKafka version number. valid values: 2.4.1, 2.4.2, 2.8.1, 3.2.3. default value 2.4.1. 2.4.1 and 2.4.2 belong to the same version. any can be passed.
+	KafkaVersion *string `json:"KafkaVersion,omitnil,omitempty" name:"KafkaVersion"`
+
+	// Specifies the instance type. valid values: standard (default), profession, premium.
+	SpecificationsType *string `json:"SpecificationsType,omitnil,omitempty" name:"SpecificationsType"`
+
+	// Disk size. if it does not match the console specification ratio, the creation cannot succeed. default value is 500. step length is set to 100. can be accessed through the following link: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1
+	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
+
+	// Instance bandwidth. default value: 40 MB/s. minimum value: 20 MB/s. maximum value for advanced edition: 360 MB/s. maximum value for pro edition: 100000 MB/s. standard version fixed bandwidth specifications: 40 MB/s, 100 MB/s, 150 MB/s. view billing specifications through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1
+	BandWidth *int64 `json:"BandWidth,omitnil,omitempty" name:"BandWidth"`
+
+	// Partition size. if it does not match the console specification ratio, creation will fail. default value is 800, step length is 100. billing specifications can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1
+	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
+
+	// Tag.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Specifies the disk type for a pro/advanced edition instance. you do not need to fill it in for a standard edition instance. valid values: "CLOUD_SSD" for SSD CLOUD disk; "CLOUD_BASIC" for high-performance CLOUD block storage. default value: "CLOUD_BASIC".
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
+
+	// Specifies whether to create a cross-az instance. when the current parameter is true, zoneIds is required.
+	MultiZoneFlag *bool `json:"MultiZoneFlag,omitnil,omitempty" name:"MultiZoneFlag"`
+
+	// Availability zone list. required item when purchasing a multi-availability zone instance.
+	ZoneIds []*int64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+
+	// Public network bandwidth size, in Mbps. the default is no free 3 Mbps bandwidth. for example, for a total of 3 Mbps public network bandwidth, pass 0 here; for a total of 6 Mbps public network bandwidth, pass 3 here. default value is 0. ensure the input parameter is a multiple of 3.
+	PublicNetworkMonthly *int64 `json:"PublicNetworkMonthly,omitnil,omitempty" name:"PublicNetworkMonthly"`
+
+	// Number of instances to purchase. optional. default value is 1. when you input this parameter, it enables the creation of multiple instances with case-sensitive suffixes added to instanceName.
+	InstanceNum *int64 `json:"InstanceNum,omitnil,omitempty" name:"InstanceNum"`
+
+	// Whether to automatically select a voucher. valid values: 1 (yes), 0 (no). default is 0.
+	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
+
+	// Elastic bandwidth switch. specifies whether to enable elastic bandwidth. valid values: 0 (not enabled, default), 1 (enabled).
+	ElasticBandwidthSwitch *int64 `json:"ElasticBandwidthSwitch,omitnil,omitempty" name:"ElasticBandwidthSwitch"`
 }
 
-type CreateInstancePostResponse struct {
-	*tchttp.BaseResponse
-	Response *CreateInstancePostResponseParams `json:"Response"`
+type CreateInstancePreRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the ckafka cluster instance Name, an arbitrary string with length no more than 128 characters.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// Availability zone. when purchasing a multi-availability zone instance, this parameter specifies the primary az. [view availability zones](https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1).
+	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Prepaid purchase duration, such as "1m", exactly one month. value ranges from 1m to 36m.
+	Period *string `json:"Period,omitnil,omitempty" name:"Period"`
+
+	// Specifies the standard edition instance specification for the international site. currently only the international site standard edition uses the current field to distinguish specifications, while the domestic site standard edition distinguishes specifications by peak bandwidth. fill in 1 for all instances except the international site standard edition. for international site standard edition instances: [entry-level (general)] fill 1; [standard type (standard)] fill 2; [advanced] fill 3; [capacity type (capacity)] fill 4; [advanced type 1 (specialized-1)] fill 5; [advanced type 2 (specialized-2)] fill 6; [advanced type 3 (specialized-3)] fill 7; [advanced type 4 (specialized-4)] fill 8.
+	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// VPC Id.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// Optional. maximum retention time of instance logs, in minutes. default value: 1440 (1 day). value range: 1 minute to 90 days.
+	MsgRetentionTime *int64 `json:"MsgRetentionTime,omitnil,omitempty" name:"MsgRetentionTime"`
+
+	// Specifies the cluster Id when creating an instance.
+	ClusterId *int64 `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Auto-Renewal tag for prepaid services. valid values: 0 (default state, not set by the user, initial status), 1 (auto-renew), 2 (explicitly no auto-renew, set by the user).
+	RenewFlag *int64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
+
+	// Specifies the CKafka version number. valid values: 2.4.1, 2.4.2, 2.8.1, 3.2.3. default value 2.4.1. 2.4.1 and 2.4.2 belong to the same version. any can be passed.
+	KafkaVersion *string `json:"KafkaVersion,omitnil,omitempty" name:"KafkaVersion"`
+
+	// Specifies the instance type. valid values: standard (default), profession, premium.
+	SpecificationsType *string `json:"SpecificationsType,omitnil,omitempty" name:"SpecificationsType"`
+
+	// Disk size. if it does not match the console specification ratio, the creation cannot succeed. default value is 500. step length is set to 100. can be accessed through the following link: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1
+	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
+
+	// Instance bandwidth. default value: 40 MB/s. minimum value: 20 MB/s. maximum value for advanced edition: 360 MB/s. maximum value for pro edition: 100000 MB/s. standard version fixed bandwidth specifications: 40 MB/s, 100 MB/s, 150 MB/s. view billing specifications through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1
+	BandWidth *int64 `json:"BandWidth,omitnil,omitempty" name:"BandWidth"`
+
+	// Partition size. if it does not match the console specification ratio, creation will fail. default value is 800, step length is 100. billing specifications can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1
+	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
+
+	// Tag.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Specifies the disk type for a pro/advanced edition instance. you do not need to fill it in for a standard edition instance. valid values: "CLOUD_SSD" for SSD CLOUD disk; "CLOUD_BASIC" for high-performance CLOUD block storage. default value: "CLOUD_BASIC".
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
+
+	// Specifies whether to create a cross-az instance. when the current parameter is true, zoneIds is required.
+	MultiZoneFlag *bool `json:"MultiZoneFlag,omitnil,omitempty" name:"MultiZoneFlag"`
+
+	// Availability zone list. required item when purchasing a multi-availability zone instance.
+	ZoneIds []*int64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+
+	// Public network bandwidth size, in Mbps. the default is no free 3 Mbps bandwidth. for example, for a total of 3 Mbps public network bandwidth, pass 0 here; for a total of 6 Mbps public network bandwidth, pass 3 here. default value is 0. ensure the input parameter is a multiple of 3.
+	PublicNetworkMonthly *int64 `json:"PublicNetworkMonthly,omitnil,omitempty" name:"PublicNetworkMonthly"`
+
+	// Number of instances to purchase. optional. default value is 1. when you input this parameter, it enables the creation of multiple instances with case-sensitive suffixes added to instanceName.
+	InstanceNum *int64 `json:"InstanceNum,omitnil,omitempty" name:"InstanceNum"`
+
+	// Whether to automatically select a voucher. valid values: 1 (yes), 0 (no). default is 0.
+	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
+
+	// Elastic bandwidth switch. specifies whether to enable elastic bandwidth. valid values: 0 (not enabled, default), 1 (enabled).
+	ElasticBandwidthSwitch *int64 `json:"ElasticBandwidthSwitch,omitnil,omitempty" name:"ElasticBandwidthSwitch"`
 }
 
-func (r *CreateInstancePostResponse) ToJsonString() string {
+func (r *CreateInstancePreRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *CreateInstancePostResponse) FromJsonString(s string) error {
+func (r *CreateInstancePreRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceName")
+	delete(f, "ZoneId")
+	delete(f, "Period")
+	delete(f, "InstanceType")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "MsgRetentionTime")
+	delete(f, "ClusterId")
+	delete(f, "RenewFlag")
+	delete(f, "KafkaVersion")
+	delete(f, "SpecificationsType")
+	delete(f, "DiskSize")
+	delete(f, "BandWidth")
+	delete(f, "Partition")
+	delete(f, "Tags")
+	delete(f, "DiskType")
+	delete(f, "MultiZoneFlag")
+	delete(f, "ZoneIds")
+	delete(f, "PublicNetworkMonthly")
+	delete(f, "InstanceNum")
+	delete(f, "AutoVoucher")
+	delete(f, "ElasticBandwidthSwitch")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstancePreRequest has unknown keys!", "")
+	}
 	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreateInstancePreData struct {
-	// The value returned by `CreateInstancePre` is 0, which is fixed and cannot be used as the query condition of `CheckTaskStatus`. It is only used to ensure the consistency with the backend data structure.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
-
-	// Order number list.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
-
-	// Instance ID. When multiple instances are purchased, the ID of the first one is returned by default . Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
-
-	// Mapping between orders and the purchased instances.  Note: This field may return null, indicating that no valid values can be obtained.
-	DealNameInstanceIdMapping []*DealInstanceDTO `json:"DealNameInstanceIdMapping,omitnil,omitempty" name:"DealNameInstanceIdMapping"`
 }
 
 type CreateInstancePreResp struct {
@@ -1169,8 +1139,7 @@ type CreateInstancePreResp struct {
 	// The message indicating whether the operation is successful.
 	ReturnMessage *string `json:"ReturnMessage,omitnil,omitempty" name:"ReturnMessage"`
 
-	// Data returned by the operation.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Specifies the Data returned by the operation.
 	Data *CreateInstancePreData `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Deletion time.  This parameter has been deprecated and will be deleted.  Note: This field may return null, indicating that no valid values can be obtained.
@@ -1180,27 +1149,52 @@ type CreateInstancePreResp struct {
 }
 
 // Predefined struct for user
+type CreateInstancePreResponseParams struct {
+	// Returned result.
+	Result *CreateInstancePreResp `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateInstancePreResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateInstancePreResponseParams `json:"Response"`
+}
+
+func (r *CreateInstancePreResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateInstancePreResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreatePartitionRequestParams struct {
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Topic name
+	// Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// Number of topic partitions
+	// Topic partition count. the input parameter is the number of partitions after modification rather than adding partitions. therefore, the input parameter must exceed the current topic partition count.
 	PartitionNum *int64 `json:"PartitionNum,omitnil,omitempty" name:"PartitionNum"`
 }
 
 type CreatePartitionRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Topic name
+	// Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// Number of topic partitions
+	// Topic partition count. the input parameter is the number of partitions after modification rather than adding partitions. therefore, the input parameter must exceed the current topic partition count.
 	PartitionNum *int64 `json:"PartitionNum,omitnil,omitempty" name:"PartitionNum"`
 }
 
@@ -1230,7 +1224,7 @@ type CreatePartitionResponseParams struct {
 	// Returned result set
 	Result *JgwOperateResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1252,16 +1246,16 @@ func (r *CreatePartitionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreatePostPaidInstanceRequestParams struct {
-	// Instance name, which is a string of up to 64 letters, digits, and hyphens (-). It must start with a letter.
-	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
-
-	// ID of the VPC where the default access point of the created instance resides.  This parameter is required as instances cannot be created in the classic network currently.
+	// VPC Id, obtain through the API [DescribeVpcs](https://www.tencentcloud.comom/document/product/215/15778?from_cn_redirect=1).
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// ID of the subnet  where the default access point of the created instance resides.
+	// Subnet Id. can be obtained through the [DescribeSubnets](https://www.tencentcloud.comom/document/product/215/15784?from_cn_redirect=1) api.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Instance specification.  This parameter is required for a Standard Edition instance but not for a Pro Edition instance.  Valid values:  `1` (Small),  `2` (Standard),  `3` (Advanced),  `4` (Large),  `5` (Xlarge L1),  `6` (Xlarge L2),  `7` (Xlarge L3),  `8` (Xlarge L4),  
+	// Specifies the cluster instance name of ckafka, an arbitrary character with length not exceeding 128.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// Specifies the standard edition instance specification for the international site. currently only the international site standard edition uses the current field to distinguish specifications, while the domestic site standard edition distinguishes specifications by peak bandwidth. fill in 1 for all instances except the international site standard edition. for international site standard edition instances: [entry-level (general)] fill 1; [standard type (standard)] fill 2; [advanced] fill 3; [capacity type (capacity)] fill 4; [advanced type 1 (specialized-1)] fill 5; [advanced type 2 (specialized-2)] fill 6; [advanced type 3 (specialized-3)] fill 7; [advanced type 4 (specialized-4)] fill 8.
 	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
 	// The maximum instance log retention period in minutes by default.  If this parameter is left empty, the default retention period is 1,440 minutes (1 day) to 30 days.  If the message retention period of the topic is explicitly set, it will prevail.
@@ -1270,34 +1264,34 @@ type CreatePostPaidInstanceRequestParams struct {
 	// Cluster ID, which can be selected when you create an instance.  You don’t need to pass in this parameter if the cluster where the instance resides is not specified.
 	ClusterId *int64 `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Instance version.  Valid values: `0.10.2`, `1.1.1`, `2.4.2`, and `2.8.1`.
+	// Instance version. currently supports "2.4.1", "2.4.2", "2.8.1", "3.2.3". default value "2.4.1". "2.4.1" and "2.4.2" belong to the same version. any one can be passed.
 	KafkaVersion *string `json:"KafkaVersion,omitnil,omitempty" name:"KafkaVersion"`
 
-	// Instance type. `standard` (Standard Edition),  `profession`  (Pro Edition)
+	// Instance type. "standard": standard version. "profession": pro edition. (standard version is only supported on the international site. currently, the chinese site supports pro edition.).
 	SpecificationsType *string `json:"SpecificationsType,omitnil,omitempty" name:"SpecificationsType"`
 
-	// Instance disk type.  `CLOUD_BASIC` (Premium Cloud Storage),  `CLOUD_SSD` (SSD).  If this parameter is left empty, the default value `CLOUD_BASIC` will be used.
+	// Specifies the disk type for a pro edition instance. you do not need to fill it in for a standard edition instance. valid values: "CLOUD_SSD" for SSD CLOUD disk; "CLOUD_BASIC" for high-performance CLOUD block storage. default value: "CLOUD_BASIC".
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Private network peak bandwidth of an instance  in MB/sec.  If you create a Standard Edition instance, pass in the corresponding peak bandwidth for the current instance specification.  If you create a Pro Edition instance, configure the peak bandwidth, partition count, and other parameters as required by Pro Edition.
+	// Specifies the peak bandwidth of the instance private network, with a default value of 40 MB/s. for standard version, input the peak bandwidth corresponding to the current instance specifications. note that if the instance created is a pro edition instance, parameter configuration such as peak bandwidth and number of partitions should meet the billing specification of the professional edition. view billing specifications through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1
 	BandWidth *int64 `json:"BandWidth,omitnil,omitempty" name:"BandWidth"`
 
-	// Instance disk size, which must meet the requirement of the instance’s specification.
+	// Instance disk size. default value is 500. step length is set to 100. should meet the billing specification of the current instance. can be accessed through the following link: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1
 	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// The maximum number of partitions of the instance, which must meet the requirement of the instance’s specification.
+	// Specifies the maximum number of partitions for the instance, which should meet the billing specification of the current instance. default value is 800 with a step length of 100. the billing specification can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1
 	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
 
-	// The maximum number of topics of the instance, which must meet the requirement of the instance’s specification.
+	// Maximum number of topics for the instance should meet the billing specification of the current instance. default value is 800, step length is set to 100.
 	TopicNum *int64 `json:"TopicNum,omitnil,omitempty" name:"TopicNum"`
 
-	// AZ of the instance.  When a multi-AZ instance is created, the value of this parameter is the AZ ID of the subnet where the instance’s default access point resides.
+	// Specifies the availability zone of the instance. when creating a multi-az instance, this parameter is the availability zone id of the subnet where the default access point is created. ZoneId and ZoneIds cannot be empty at the same time. obtain through the API [DescribeCkafkaZone](https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1).
 	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Whether the current instance is a multi-AZ instance
 	MultiZoneFlag *bool `json:"MultiZoneFlag,omitnil,omitempty" name:"MultiZoneFlag"`
 
-	// This parameter indicates the list of AZ IDs when the instance is deployed in multiple AZs.  Note that `ZoneId` must be included in the array of this parameter.
+	// Specifies the multi-az id list when the instance is a multi-az instance. note that the multi-az corresponding to parameter ZoneId must be included in this parameter array. ZoneId and ZoneIds cannot be empty at the same time. you can obtain this information through the [DescribeCkafkaZone](https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1) api.
 	ZoneIds []*int64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// The number of purchased instances.  Default value: `1`. This parameter is optional.  If it is passed in, multiple instances will be created, with their names being `instanceName` plus different suffixes.
@@ -1305,21 +1299,27 @@ type CreatePostPaidInstanceRequestParams struct {
 
 	// Public network bandwidth in Mbps.  The 3 Mbps of free bandwidth is not included here by default.  For example, if you need 3 Mbps of public network bandwidth, pass in `0`; if you need 6 Mbps, pass in `3`.  The value must be an integer multiple of 3.
 	PublicNetworkMonthly *int64 `json:"PublicNetworkMonthly,omitnil,omitempty" name:"PublicNetworkMonthly"`
+
+	// Tag.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Elastic bandwidth switch. valid values: 0 (disable, default), 1 (enable).
+	ElasticBandwidthSwitch *int64 `json:"ElasticBandwidthSwitch,omitnil,omitempty" name:"ElasticBandwidthSwitch"`
 }
 
 type CreatePostPaidInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance name, which is a string of up to 64 letters, digits, and hyphens (-). It must start with a letter.
-	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
-
-	// ID of the VPC where the default access point of the created instance resides.  This parameter is required as instances cannot be created in the classic network currently.
+	// VPC Id, obtain through the API [DescribeVpcs](https://www.tencentcloud.comom/document/product/215/15778?from_cn_redirect=1).
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// ID of the subnet  where the default access point of the created instance resides.
+	// Subnet Id. can be obtained through the [DescribeSubnets](https://www.tencentcloud.comom/document/product/215/15784?from_cn_redirect=1) api.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Instance specification.  This parameter is required for a Standard Edition instance but not for a Pro Edition instance.  Valid values:  `1` (Small),  `2` (Standard),  `3` (Advanced),  `4` (Large),  `5` (Xlarge L1),  `6` (Xlarge L2),  `7` (Xlarge L3),  `8` (Xlarge L4),  
+	// Specifies the cluster instance name of ckafka, an arbitrary character with length not exceeding 128.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// Specifies the standard edition instance specification for the international site. currently only the international site standard edition uses the current field to distinguish specifications, while the domestic site standard edition distinguishes specifications by peak bandwidth. fill in 1 for all instances except the international site standard edition. for international site standard edition instances: [entry-level (general)] fill 1; [standard type (standard)] fill 2; [advanced] fill 3; [capacity type (capacity)] fill 4; [advanced type 1 (specialized-1)] fill 5; [advanced type 2 (specialized-2)] fill 6; [advanced type 3 (specialized-3)] fill 7; [advanced type 4 (specialized-4)] fill 8.
 	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
 	// The maximum instance log retention period in minutes by default.  If this parameter is left empty, the default retention period is 1,440 minutes (1 day) to 30 days.  If the message retention period of the topic is explicitly set, it will prevail.
@@ -1328,34 +1328,34 @@ type CreatePostPaidInstanceRequest struct {
 	// Cluster ID, which can be selected when you create an instance.  You don’t need to pass in this parameter if the cluster where the instance resides is not specified.
 	ClusterId *int64 `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Instance version.  Valid values: `0.10.2`, `1.1.1`, `2.4.2`, and `2.8.1`.
+	// Instance version. currently supports "2.4.1", "2.4.2", "2.8.1", "3.2.3". default value "2.4.1". "2.4.1" and "2.4.2" belong to the same version. any one can be passed.
 	KafkaVersion *string `json:"KafkaVersion,omitnil,omitempty" name:"KafkaVersion"`
 
-	// Instance type. `standard` (Standard Edition),  `profession`  (Pro Edition)
+	// Instance type. "standard": standard version. "profession": pro edition. (standard version is only supported on the international site. currently, the chinese site supports pro edition.).
 	SpecificationsType *string `json:"SpecificationsType,omitnil,omitempty" name:"SpecificationsType"`
 
-	// Instance disk type.  `CLOUD_BASIC` (Premium Cloud Storage),  `CLOUD_SSD` (SSD).  If this parameter is left empty, the default value `CLOUD_BASIC` will be used.
+	// Specifies the disk type for a pro edition instance. you do not need to fill it in for a standard edition instance. valid values: "CLOUD_SSD" for SSD CLOUD disk; "CLOUD_BASIC" for high-performance CLOUD block storage. default value: "CLOUD_BASIC".
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Private network peak bandwidth of an instance  in MB/sec.  If you create a Standard Edition instance, pass in the corresponding peak bandwidth for the current instance specification.  If you create a Pro Edition instance, configure the peak bandwidth, partition count, and other parameters as required by Pro Edition.
+	// Specifies the peak bandwidth of the instance private network, with a default value of 40 MB/s. for standard version, input the peak bandwidth corresponding to the current instance specifications. note that if the instance created is a pro edition instance, parameter configuration such as peak bandwidth and number of partitions should meet the billing specification of the professional edition. view billing specifications through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1
 	BandWidth *int64 `json:"BandWidth,omitnil,omitempty" name:"BandWidth"`
 
-	// Instance disk size, which must meet the requirement of the instance’s specification.
+	// Instance disk size. default value is 500. step length is set to 100. should meet the billing specification of the current instance. can be accessed through the following link: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1
 	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// The maximum number of partitions of the instance, which must meet the requirement of the instance’s specification.
+	// Specifies the maximum number of partitions for the instance, which should meet the billing specification of the current instance. default value is 800 with a step length of 100. the billing specification can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1
 	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
 
-	// The maximum number of topics of the instance, which must meet the requirement of the instance’s specification.
+	// Maximum number of topics for the instance should meet the billing specification of the current instance. default value is 800, step length is set to 100.
 	TopicNum *int64 `json:"TopicNum,omitnil,omitempty" name:"TopicNum"`
 
-	// AZ of the instance.  When a multi-AZ instance is created, the value of this parameter is the AZ ID of the subnet where the instance’s default access point resides.
+	// Specifies the availability zone of the instance. when creating a multi-az instance, this parameter is the availability zone id of the subnet where the default access point is created. ZoneId and ZoneIds cannot be empty at the same time. obtain through the API [DescribeCkafkaZone](https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1).
 	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Whether the current instance is a multi-AZ instance
 	MultiZoneFlag *bool `json:"MultiZoneFlag,omitnil,omitempty" name:"MultiZoneFlag"`
 
-	// This parameter indicates the list of AZ IDs when the instance is deployed in multiple AZs.  Note that `ZoneId` must be included in the array of this parameter.
+	// Specifies the multi-az id list when the instance is a multi-az instance. note that the multi-az corresponding to parameter ZoneId must be included in this parameter array. ZoneId and ZoneIds cannot be empty at the same time. you can obtain this information through the [DescribeCkafkaZone](https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1) api.
 	ZoneIds []*int64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// The number of purchased instances.  Default value: `1`. This parameter is optional.  If it is passed in, multiple instances will be created, with their names being `instanceName` plus different suffixes.
@@ -1363,6 +1363,12 @@ type CreatePostPaidInstanceRequest struct {
 
 	// Public network bandwidth in Mbps.  The 3 Mbps of free bandwidth is not included here by default.  For example, if you need 3 Mbps of public network bandwidth, pass in `0`; if you need 6 Mbps, pass in `3`.  The value must be an integer multiple of 3.
 	PublicNetworkMonthly *int64 `json:"PublicNetworkMonthly,omitnil,omitempty" name:"PublicNetworkMonthly"`
+
+	// Tag.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Elastic bandwidth switch. valid values: 0 (disable, default), 1 (enable).
+	ElasticBandwidthSwitch *int64 `json:"ElasticBandwidthSwitch,omitnil,omitempty" name:"ElasticBandwidthSwitch"`
 }
 
 func (r *CreatePostPaidInstanceRequest) ToJsonString() string {
@@ -1377,9 +1383,9 @@ func (r *CreatePostPaidInstanceRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "InstanceName")
 	delete(f, "VpcId")
 	delete(f, "SubnetId")
+	delete(f, "InstanceName")
 	delete(f, "InstanceType")
 	delete(f, "MsgRetentionTime")
 	delete(f, "ClusterId")
@@ -1395,6 +1401,8 @@ func (r *CreatePostPaidInstanceRequest) FromJsonString(s string) error {
 	delete(f, "ZoneIds")
 	delete(f, "InstanceNum")
 	delete(f, "PublicNetworkMonthly")
+	delete(f, "Tags")
+	delete(f, "ElasticBandwidthSwitch")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreatePostPaidInstanceRequest has unknown keys!", "")
 	}
@@ -1406,7 +1414,7 @@ type CreatePostPaidInstanceResponseParams struct {
 	// Returned result
 	Result *CreateInstancePostResp `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1427,27 +1435,154 @@ func (r *CreatePostPaidInstanceResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type CreateTopicIpWhiteListRequestParams struct {
-	// Instance ID
+type CreateRouteRequestParams struct {
+	// <p>Specifies the ckafka cluster instance id. obtain through the API <a href="https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1">DescribeInstances</a>.</p>.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Topic name
+	// <P>Specifies the network type of the route (3: vpc routing; 7: internal support route; 1: public network route).</p>.
+	VipType *int64 `json:"VipType,omitnil,omitempty" name:"VipType"`
+
+	// <p>vpc network Id. required when vipType is 3.</p>.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// <p>Specifies the vpc subnet id. required when vipType is 3.</p>.
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// <p>Access type: 0-plaintext; 1-sasl_plaintext; 3-sasl_ssl; 4-sasl_scram_sha_256; 5-sasl_scram_sha_512. defaults to 0. when vipType=3, supports 0,1,3,4,5. when vipType=7, supports 0,1,3. when vipType=1, supports 1,3.</p>.
+	AccessType *int64 `json:"AccessType,omitnil,omitempty" name:"AccessType"`
+
+	// <P>Specifies whether access management is required. this field has been deprecated.</p>.
+	AuthFlag *int64 `json:"AuthFlag,omitnil,omitempty" name:"AuthFlag"`
+
+	// <p>Specifies the caller appId.</p>.
+	CallerAppid *int64 `json:"CallerAppid,omitnil,omitempty" name:"CallerAppid"`
+
+	// <P>Public network bandwidth. required for public network route. must be a multiple of 3. no default value.</p>.
+	PublicNetwork *int64 `json:"PublicNetwork,omitnil,omitempty" name:"PublicNetwork"`
+
+	// <p>vip address.</p>.
+	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
+
+	// <P>Specifies the remark information.</p>.
+	Note *string `json:"Note,omitnil,omitempty" name:"Note"`
+
+	// <P>Specifies the ordered list of security group associations.</p>.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
+}
+
+type CreateRouteRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Specifies the ckafka cluster instance id. obtain through the API <a href="https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1">DescribeInstances</a>.</p>.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <P>Specifies the network type of the route (3: vpc routing; 7: internal support route; 1: public network route).</p>.
+	VipType *int64 `json:"VipType,omitnil,omitempty" name:"VipType"`
+
+	// <p>vpc network Id. required when vipType is 3.</p>.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// <p>Specifies the vpc subnet id. required when vipType is 3.</p>.
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// <p>Access type: 0-plaintext; 1-sasl_plaintext; 3-sasl_ssl; 4-sasl_scram_sha_256; 5-sasl_scram_sha_512. defaults to 0. when vipType=3, supports 0,1,3,4,5. when vipType=7, supports 0,1,3. when vipType=1, supports 1,3.</p>.
+	AccessType *int64 `json:"AccessType,omitnil,omitempty" name:"AccessType"`
+
+	// <P>Specifies whether access management is required. this field has been deprecated.</p>.
+	AuthFlag *int64 `json:"AuthFlag,omitnil,omitempty" name:"AuthFlag"`
+
+	// <p>Specifies the caller appId.</p>.
+	CallerAppid *int64 `json:"CallerAppid,omitnil,omitempty" name:"CallerAppid"`
+
+	// <P>Public network bandwidth. required for public network route. must be a multiple of 3. no default value.</p>.
+	PublicNetwork *int64 `json:"PublicNetwork,omitnil,omitempty" name:"PublicNetwork"`
+
+	// <p>vip address.</p>.
+	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
+
+	// <P>Specifies the remark information.</p>.
+	Note *string `json:"Note,omitnil,omitempty" name:"Note"`
+
+	// <P>Specifies the ordered list of security group associations.</p>.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
+}
+
+func (r *CreateRouteRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRouteRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "VipType")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "AccessType")
+	delete(f, "AuthFlag")
+	delete(f, "CallerAppid")
+	delete(f, "PublicNetwork")
+	delete(f, "Ip")
+	delete(f, "Note")
+	delete(f, "SecurityGroupIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRouteRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRouteResponseParams struct {
+	// <P>Returned result.</p>.
+	Result *JgwOperateResponse `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateRouteResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateRouteResponseParams `json:"Response"`
+}
+
+func (r *CreateRouteResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRouteResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateTopicIpWhiteListRequestParams struct {
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// IP allowlist list
+	// Allowlist list. maximum value is 512. upper limit for incoming ips is 512.
 	IpWhiteList []*string `json:"IpWhiteList,omitnil,omitempty" name:"IpWhiteList"`
 }
 
 type CreateTopicIpWhiteListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Topic name
+	// Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// IP allowlist list
+	// Allowlist list. maximum value is 512. upper limit for incoming ips is 512.
 	IpWhiteList []*string `json:"IpWhiteList,omitnil,omitempty" name:"IpWhiteList"`
 }
 
@@ -1477,7 +1612,7 @@ type CreateTopicIpWhiteListResponseParams struct {
 	// Result of deleting topic IP allowlist
 	Result *JgwOperateResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1499,10 +1634,10 @@ func (r *CreateTopicIpWhiteListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateTopicRequestParams struct {
-	// Instance ID
+	// Instance Id. you can obtain it by calling the DescribeInstances api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Topic name, which is a string of up to 128 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+	// Can only contain letters, digits, underscores, "-", or ".".
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
 	// Number of partitions, which should be greater than 0
@@ -1520,22 +1655,22 @@ type CreateTopicRequestParams struct {
 	// Log cleanup policy, which is `delete` by default. `delete`: logs will be deleted by save time; `compact`: logs will be compressed by key; `compact, delete`: logs will be compressed by key and deleted by save time.
 	CleanUpPolicy *string `json:"CleanUpPolicy,omitnil,omitempty" name:"CleanUpPolicy"`
 
-	// Topic remarks string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`)
+	// Topic remark is a string of no more than 64 characters. the first character can be a letter or digit, and the remaining part can contain letters, digits, and hyphens (-).
 	Note *string `json:"Note,omitnil,omitempty" name:"Note"`
 
-	// Default value: 1
+	// Minimum number of synchronous replicas, defaults to 1.
 	MinInsyncReplicas *int64 `json:"MinInsyncReplicas,omitnil,omitempty" name:"MinInsyncReplicas"`
 
-	// Whether to allow an unsynced replica to be elected as leader. false: no, true: yes. Default value: false
+	// Whether to allow unsynchronized replicas to be elected as leader. valid values: 0 (not allowed), 1 (allowed). default: not allowed.
 	UncleanLeaderElectionEnable *int64 `json:"UncleanLeaderElectionEnable,omitnil,omitempty" name:"UncleanLeaderElectionEnable"`
 
-	// Message retention period in milliseconds, which is optional. Min value: 60,000 ms.
+	// Optional parameter. specifies the message retention period in milliseconds. current min value is 60000. default value is 7200000 ms (2 hours). maximum value is 7776000000 ms (90 days).
 	RetentionMs *int64 `json:"RetentionMs,omitnil,omitempty" name:"RetentionMs"`
 
-	// Segment rolling duration in ms. The current minimum value is 3,600,000 ms
+	// Duration of Segment shard scrolling in milliseconds. minimum value is 86400000 ms (1 day).
 	SegmentMs *int64 `json:"SegmentMs,omitnil,omitempty" name:"SegmentMs"`
 
-	// Max message size in bytes. Value range: 1,024 bytes (1 KB) to 8,388,608 bytes (8 MB).
+	// Maximum topic messages in Bytes. value range: 1024 (1 KB) to 12582912 (12 MB).
 	MaxMessageBytes *int64 `json:"MaxMessageBytes,omitnil,omitempty" name:"MaxMessageBytes"`
 
 	// Preset ACL rule. `1`: enable, `0`: disable. Default value: `0`.
@@ -1544,7 +1679,7 @@ type CreateTopicRequestParams struct {
 	// Name of the preset ACL rule.
 	AclRuleName *string `json:"AclRuleName,omitnil,omitempty" name:"AclRuleName"`
 
-	// Message retention file size in bytes, which is an optional parameter. Default value: -1. Currently, the min value that can be entered is 1,048,576 B.
+	// Optional. retain file size. defaults to -1, unit Byte. current min value is 1073741824.
 	RetentionBytes *int64 `json:"RetentionBytes,omitnil,omitempty" name:"RetentionBytes"`
 
 	// Tag list.
@@ -1554,10 +1689,10 @@ type CreateTopicRequestParams struct {
 type CreateTopicRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance Id. you can obtain it by calling the DescribeInstances api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Topic name, which is a string of up to 128 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+	// Can only contain letters, digits, underscores, "-", or ".".
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
 	// Number of partitions, which should be greater than 0
@@ -1575,22 +1710,22 @@ type CreateTopicRequest struct {
 	// Log cleanup policy, which is `delete` by default. `delete`: logs will be deleted by save time; `compact`: logs will be compressed by key; `compact, delete`: logs will be compressed by key and deleted by save time.
 	CleanUpPolicy *string `json:"CleanUpPolicy,omitnil,omitempty" name:"CleanUpPolicy"`
 
-	// Topic remarks string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`)
+	// Topic remark is a string of no more than 64 characters. the first character can be a letter or digit, and the remaining part can contain letters, digits, and hyphens (-).
 	Note *string `json:"Note,omitnil,omitempty" name:"Note"`
 
-	// Default value: 1
+	// Minimum number of synchronous replicas, defaults to 1.
 	MinInsyncReplicas *int64 `json:"MinInsyncReplicas,omitnil,omitempty" name:"MinInsyncReplicas"`
 
-	// Whether to allow an unsynced replica to be elected as leader. false: no, true: yes. Default value: false
+	// Whether to allow unsynchronized replicas to be elected as leader. valid values: 0 (not allowed), 1 (allowed). default: not allowed.
 	UncleanLeaderElectionEnable *int64 `json:"UncleanLeaderElectionEnable,omitnil,omitempty" name:"UncleanLeaderElectionEnable"`
 
-	// Message retention period in milliseconds, which is optional. Min value: 60,000 ms.
+	// Optional parameter. specifies the message retention period in milliseconds. current min value is 60000. default value is 7200000 ms (2 hours). maximum value is 7776000000 ms (90 days).
 	RetentionMs *int64 `json:"RetentionMs,omitnil,omitempty" name:"RetentionMs"`
 
-	// Segment rolling duration in ms. The current minimum value is 3,600,000 ms
+	// Duration of Segment shard scrolling in milliseconds. minimum value is 86400000 ms (1 day).
 	SegmentMs *int64 `json:"SegmentMs,omitnil,omitempty" name:"SegmentMs"`
 
-	// Max message size in bytes. Value range: 1,024 bytes (1 KB) to 8,388,608 bytes (8 MB).
+	// Maximum topic messages in Bytes. value range: 1024 (1 KB) to 12582912 (12 MB).
 	MaxMessageBytes *int64 `json:"MaxMessageBytes,omitnil,omitempty" name:"MaxMessageBytes"`
 
 	// Preset ACL rule. `1`: enable, `0`: disable. Default value: `0`.
@@ -1599,7 +1734,7 @@ type CreateTopicRequest struct {
 	// Name of the preset ACL rule.
 	AclRuleName *string `json:"AclRuleName,omitnil,omitempty" name:"AclRuleName"`
 
-	// Message retention file size in bytes, which is an optional parameter. Default value: -1. Currently, the min value that can be entered is 1,048,576 B.
+	// Optional. retain file size. defaults to -1, unit Byte. current min value is 1073741824.
 	RetentionBytes *int64 `json:"RetentionBytes,omitnil,omitempty" name:"RetentionBytes"`
 
 	// Tag list.
@@ -1651,7 +1786,7 @@ type CreateTopicResponseParams struct {
 	// Returned creation result
 	Result *CreateTopicResp `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1673,7 +1808,7 @@ func (r *CreateTopicResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateUserRequestParams struct {
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Username
@@ -1686,7 +1821,7 @@ type CreateUserRequestParams struct {
 type CreateUserRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Username
@@ -1719,10 +1854,10 @@ func (r *CreateUserRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateUserResponseParams struct {
-	// Returned result
+	// Returned result.
 	Result *JgwOperateResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1742,6 +1877,17 @@ func (r *CreateUserResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CvmAndIpInfo struct {
+	// The ckafka cluster instance Id.
+	CkafkaInstanceId *string `json:"CkafkaInstanceId,omitnil,omitempty" name:"CkafkaInstanceId"`
+
+	// CVM instance ID (ins-test) or POD IP (10.0.0.30).
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// IP address.
+	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
+}
+
 type DatahubTopicDTO struct {
 	// Name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -1755,7 +1901,7 @@ type DatahubTopicDTO struct {
 	// The number of partitions
 	PartitionNum *uint64 `json:"PartitionNum,omitnil,omitempty" name:"PartitionNum"`
 
-	// Expiration time
+	// Expiration time in milliseconds.
 	RetentionMs *uint64 `json:"RetentionMs,omitnil,omitempty" name:"RetentionMs"`
 
 	// Remarks
@@ -1769,22 +1915,21 @@ type DatahubTopicResp struct {
 	// Topic name
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// TopicId
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Topic Id.
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 }
 
 type DealInstanceDTO struct {
-	// Order list.  Note: This field may return null, indicating that no valid values can be obtained.
+	// Order transaction.
 	DealName *string `json:"DealName,omitnil,omitempty" name:"DealName"`
 
-	// ID list of the purchased CKafka instances corresponding to the order list.  Note: This field may return null, indicating that no valid values can be obtained.
+	// Order transaction corresponds to the list of purchased CKafka instance ids.
 	InstanceIdList []*string `json:"InstanceIdList,omitnil,omitempty" name:"InstanceIdList"`
 }
 
 // Predefined struct for user
 type DeleteAclRequestParams struct {
-	// Instance ID information
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// ACL resource type (`2`: TOPIC, `3`: GROUP, `4`: CLUSTER).
@@ -1796,20 +1941,20 @@ type DeleteAclRequestParams struct {
 	// ACL operation type (`2`: ALL, `3`: READ, `4`: WRITE, `5`: CREATE, `6`: DELETE, `7`: ALTER, `8`: DESCRIBE, `9`: CLUSTER_ACTION, `10`: DESCRIBE_CONFIGS, `11`: ALTER_CONFIGS, `12`: IDEMPOTENT_WRITE).
 	Operation *int64 `json:"Operation,omitnil,omitempty" name:"Operation"`
 
-	// Permission type (`2`: DENY, `3`: ALLOW). CKafka currently supports `ALLOW`, which is equivalent to allowlist. `DENY` will be supported for ACLs compatible with open-source Kafka.
+	// Permission type (2:DENY, 3:ALLOW). currently ckafka supports ALLOW (equivalent to allowlist), others used when compatible with open-source kafka acl.
 	PermissionType *int64 `json:"PermissionType,omitnil,omitempty" name:"PermissionType"`
 
 	// The default value is `*`, which means that any host can access. Currently, CKafka does not support the host as `*`, but the future product based on the open-source Kafka will directly support this
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
-	// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list
+	// List of users, defaults to User:*, means any User is accessible in the entire region. the current User can only be the User in the list of users.
 	Principal *string `json:"Principal,omitnil,omitempty" name:"Principal"`
 }
 
 type DeleteAclRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID information
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// ACL resource type (`2`: TOPIC, `3`: GROUP, `4`: CLUSTER).
@@ -1821,13 +1966,13 @@ type DeleteAclRequest struct {
 	// ACL operation type (`2`: ALL, `3`: READ, `4`: WRITE, `5`: CREATE, `6`: DELETE, `7`: ALTER, `8`: DESCRIBE, `9`: CLUSTER_ACTION, `10`: DESCRIBE_CONFIGS, `11`: ALTER_CONFIGS, `12`: IDEMPOTENT_WRITE).
 	Operation *int64 `json:"Operation,omitnil,omitempty" name:"Operation"`
 
-	// Permission type (`2`: DENY, `3`: ALLOW). CKafka currently supports `ALLOW`, which is equivalent to allowlist. `DENY` will be supported for ACLs compatible with open-source Kafka.
+	// Permission type (2:DENY, 3:ALLOW). currently ckafka supports ALLOW (equivalent to allowlist), others used when compatible with open-source kafka acl.
 	PermissionType *int64 `json:"PermissionType,omitnil,omitempty" name:"PermissionType"`
 
 	// The default value is `*`, which means that any host can access. Currently, CKafka does not support the host as `*`, but the future product based on the open-source Kafka will directly support this
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
-	// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list
+	// List of users, defaults to User:*, means any User is accessible in the entire region. the current User can only be the User in the list of users.
 	Principal *string `json:"Principal,omitnil,omitempty" name:"Principal"`
 }
 
@@ -1861,7 +2006,7 @@ type DeleteAclResponseParams struct {
 	// Returned result
 	Result *JgwOperateResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1882,15 +2027,72 @@ func (r *DeleteAclResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteInstancePostRequestParams struct {
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type DeleteInstancePostRequest struct {
+	*tchttp.BaseRequest
+	
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *DeleteInstancePostRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteInstancePostRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteInstancePostRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteInstancePostResponseParams struct {
+	// Returned result.
+	Result *InstanceDeleteResponse `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteInstancePostResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteInstancePostResponseParams `json:"Response"`
+}
+
+func (r *DeleteInstancePostResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteInstancePostResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteInstancePreRequestParams struct {
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DeleteInstancePreRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -1918,7 +2120,7 @@ type DeleteInstancePreResponseParams struct {
 	// Returned result
 	Result *CreateInstancePreResp `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1940,32 +2142,32 @@ func (r *DeleteInstancePreResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteRouteRequestParams struct {
-	// Unique instance ID.
+	// ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Route ID.
+	// Route id, obtain through the API [DescribeRoute](https://www.tencentcloud.comom/document/product/597/45484?from_cn_redirect=1).
 	RouteId *int64 `json:"RouteId,omitnil,omitempty" name:"RouteId"`
 
 	// AppId of the caller.
 	CallerAppid *int64 `json:"CallerAppid,omitnil,omitempty" name:"CallerAppid"`
 
-	// The time when a route was deleted.
+	// Sets the scheduled deletion time for routes. only public network routes support scheduled deletion. available for any time within the next 24 hours.
 	DeleteRouteTime *string `json:"DeleteRouteTime,omitnil,omitempty" name:"DeleteRouteTime"`
 }
 
 type DeleteRouteRequest struct {
 	*tchttp.BaseRequest
 	
-	// Unique instance ID.
+	// ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Route ID.
+	// Route id, obtain through the API [DescribeRoute](https://www.tencentcloud.comom/document/product/597/45484?from_cn_redirect=1).
 	RouteId *int64 `json:"RouteId,omitnil,omitempty" name:"RouteId"`
 
 	// AppId of the caller.
 	CallerAppid *int64 `json:"CallerAppid,omitnil,omitempty" name:"CallerAppid"`
 
-	// The time when a route was deleted.
+	// Sets the scheduled deletion time for routes. only public network routes support scheduled deletion. available for any time within the next 24 hours.
 	DeleteRouteTime *string `json:"DeleteRouteTime,omitnil,omitempty" name:"DeleteRouteTime"`
 }
 
@@ -1996,7 +2198,7 @@ type DeleteRouteResponseParams struct {
 	// Returned result.
 	Result *JgwOperateResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2018,14 +2220,20 @@ func (r *DeleteRouteResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteRouteTriggerTimeRequestParams struct {
-	// Modification time.
+	// ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Modifies the scheduled time for deleting routes.
 	DelayTime *string `json:"DelayTime,omitnil,omitempty" name:"DelayTime"`
 }
 
 type DeleteRouteTriggerTimeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Modification time.
+	// ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Modifies the scheduled time for deleting routes.
 	DelayTime *string `json:"DelayTime,omitnil,omitempty" name:"DelayTime"`
 }
 
@@ -2041,6 +2249,7 @@ func (r *DeleteRouteTriggerTimeRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "InstanceId")
 	delete(f, "DelayTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRouteTriggerTimeRequest has unknown keys!", "")
@@ -2050,7 +2259,7 @@ func (r *DeleteRouteTriggerTimeRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteRouteTriggerTimeResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2072,10 +2281,10 @@ func (r *DeleteRouteTriggerTimeResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteTopicIpWhiteListRequestParams struct {
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Topic name
+	// Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
 	// IP allowlist list
@@ -2085,10 +2294,10 @@ type DeleteTopicIpWhiteListRequestParams struct {
 type DeleteTopicIpWhiteListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Topic name
+	// Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
 	// IP allowlist list
@@ -2121,7 +2330,7 @@ type DeleteTopicIpWhiteListResponseParams struct {
 	// Result of deleting topic IP allowlist
 	Result *JgwOperateResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2185,7 +2394,7 @@ type DeleteTopicResponseParams struct {
 	// Returned result set
 	Result *JgwOperateResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2207,20 +2416,20 @@ func (r *DeleteTopicResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteUserRequestParams struct {
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Username
+	// Specifies the username, which can be obtained through the [DescribeUser](https://www.tencentcloud.comom/document/product/597/40855?from_cn_redirect=1) api.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type DeleteUserRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Username
+	// Specifies the username, which can be obtained through the [DescribeUser](https://www.tencentcloud.comom/document/product/597/40855?from_cn_redirect=1) api.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
@@ -2249,7 +2458,7 @@ type DeleteUserResponseParams struct {
 	// Returned result
 	Result *JgwOperateResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2271,7 +2480,7 @@ func (r *DeleteUserResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeACLRequestParams struct {
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// ACL resource type (`2`: TOPIC, `3`: GROUP, `4`: CLUSTER).
@@ -2283,7 +2492,7 @@ type DescribeACLRequestParams struct {
 	// Offset position
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Quantity limit
+	// Number limit. default value is 50. maximum value is 50.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Keyword match
@@ -2293,7 +2502,7 @@ type DescribeACLRequestParams struct {
 type DescribeACLRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// ACL resource type (`2`: TOPIC, `3`: GROUP, `4`: CLUSTER).
@@ -2305,7 +2514,7 @@ type DescribeACLRequest struct {
 	// Offset position
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Quantity limit
+	// Number limit. default value is 50. maximum value is 50.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Keyword match
@@ -2341,7 +2550,7 @@ type DescribeACLResponseParams struct {
 	// Returned ACL result set object
 	Result *AclResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2363,32 +2572,32 @@ func (r *DescribeACLResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAclRuleRequestParams struct {
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// ACL rule name
 	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
-	// ACL rule matching type
+	// ACL rule-based matching type (PREFIXED: prefix match, PRESET: PRESET policy).
 	PatternType *string `json:"PatternType,omitnil,omitempty" name:"PatternType"`
 
-	// Whether to read simplified ACL rules
+	// Specifies whether to read the simplified ACL rule. default value is false, which means not to read the simplified ACL rule.
 	IsSimplified *bool `json:"IsSimplified,omitnil,omitempty" name:"IsSimplified"`
 }
 
 type DescribeAclRuleRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// ACL rule name
 	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
-	// ACL rule matching type
+	// ACL rule-based matching type (PREFIXED: prefix match, PRESET: PRESET policy).
 	PatternType *string `json:"PatternType,omitnil,omitempty" name:"PatternType"`
 
-	// Whether to read simplified ACL rules
+	// Specifies whether to read the simplified ACL rule. default value is false, which means not to read the simplified ACL rule.
 	IsSimplified *bool `json:"IsSimplified,omitnil,omitempty" name:"IsSimplified"`
 }
 
@@ -2419,7 +2628,7 @@ type DescribeAclRuleResponseParams struct {
 	// The set of returned ACL rules
 	Result *AclRuleResp `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2483,7 +2692,7 @@ type DescribeAppInfoResponseParams struct {
 	// Returned list of eligible `AppId`
 	Result *AppIdResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2505,14 +2714,14 @@ func (r *DescribeAppInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCkafkaZoneRequestParams struct {
-	// Cloud Dedicated Cluster (CDC) business parameter.
+	// cdc cluster Id.
 	CdcId *string `json:"CdcId,omitnil,omitempty" name:"CdcId"`
 }
 
 type DescribeCkafkaZoneRequest struct {
 	*tchttp.BaseRequest
 	
-	// Cloud Dedicated Cluster (CDC) business parameter.
+	// cdc cluster Id.
 	CdcId *string `json:"CdcId,omitnil,omitempty" name:"CdcId"`
 }
 
@@ -2540,7 +2749,7 @@ type DescribeCkafkaZoneResponseParams struct {
 	// Returned results for the query
 	Result *ZoneResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2569,45 +2778,44 @@ type DescribeConnectInfoResultDTO struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
-	// Whether it is a supported version
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies whether supported versions are required or not.
 	IsUnSupportVersion *bool `json:"IsUnSupportVersion,omitnil,omitempty" name:"IsUnSupportVersion"`
 }
 
 // Predefined struct for user
 type DescribeConsumerGroupRequestParams struct {
-	// CKafka instance ID.
+	// ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Name of the group to be queried, which is optional.
+	// Specifies the group name you want to query.
 	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 
-	// Name of the corresponding topic in the group to be queried, which is optional. If this parameter is specified but `group` is not specified, this parameter will be ignored.
+	// Specifies the corresponding topic name in the group to be queried by the user. if this parameter is specified while the group is unspecified, ignore this parameter.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// Number of results to be returned in this request
+	// Returns the limit quantity of the consumption group. supports a maximum of 50.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Offset position
+	// Specifies the starting offset amount of the consumer group list.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeConsumerGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// CKafka instance ID.
+	// ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Name of the group to be queried, which is optional.
+	// Specifies the group name you want to query.
 	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 
-	// Name of the corresponding topic in the group to be queried, which is optional. If this parameter is specified but `group` is not specified, this parameter will be ignored.
+	// Specifies the corresponding topic name in the group to be queried by the user. if this parameter is specified while the group is unspecified, ignore this parameter.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// Number of results to be returned in this request
+	// Returns the limit quantity of the consumption group. supports a maximum of 50.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Offset position
+	// Specifies the starting offset amount of the consumer group list.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
@@ -2639,7 +2847,7 @@ type DescribeConsumerGroupResponseParams struct {
 	// Returned consumer group information
 	Result *ConsumerGroupResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2660,15 +2868,72 @@ func (r *DescribeConsumerGroupResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeCvmInfoRequestParams struct {
+	// ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type DescribeCvmInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeCvmInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCvmInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCvmInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCvmInfoResponseParams struct {
+	// Returned result.
+	Result *ListCvmAndIpInfoRsp `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCvmInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCvmInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeCvmInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCvmInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDatahubTopicRequestParams struct {
-	// Name
+	// Elastic topic name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type DescribeDatahubTopicRequest struct {
 	*tchttp.BaseRequest
 	
-	// Name
+	// Elastic topic name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
@@ -2704,11 +2969,10 @@ type DescribeDatahubTopicResp struct {
 	// The number of partitions
 	PartitionNum *uint64 `json:"PartitionNum,omitnil,omitempty" name:"PartitionNum"`
 
-	// Expiration time
+	// Expiration time in milliseconds.
 	RetentionMs *uint64 `json:"RetentionMs,omitnil,omitempty" name:"RetentionMs"`
 
-	// Remarks
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Remarks.
 	Note *string `json:"Note,omitnil,omitempty" name:"Note"`
 
 	// Username
@@ -2720,8 +2984,7 @@ type DescribeDatahubTopicResp struct {
 	// Status (`1`: In use; `2`: Deleting)
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Service routing address
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the service routing address.
 	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
 }
 
@@ -2730,7 +2993,7 @@ type DescribeDatahubTopicResponseParams struct {
 	// Returned result object
 	Result *DescribeDatahubTopicResp `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2752,7 +3015,7 @@ func (r *DescribeDatahubTopicResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDatahubTopicsRequestParams struct {
-	// Keyword for query
+	// Search term.
 	SearchWord *string `json:"SearchWord,omitnil,omitempty" name:"SearchWord"`
 
 	// Query offset, which defaults to `0`.
@@ -2760,12 +3023,21 @@ type DescribeDatahubTopicsRequestParams struct {
 
 	// Maximum number of results to be returned in this request. Default value: `50`. Maximum value: `50`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Specifies whether to query the topic list from the connection.
+	QueryFromConnectResource *bool `json:"QueryFromConnectResource,omitnil,omitempty" name:"QueryFromConnectResource"`
+
+	// Connection ID.
+	ConnectResourceId *string `json:"ConnectResourceId,omitnil,omitempty" name:"ConnectResourceId"`
+
+	// topic resource expression.
+	TopicRegularExpression *string `json:"TopicRegularExpression,omitnil,omitempty" name:"TopicRegularExpression"`
 }
 
 type DescribeDatahubTopicsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Keyword for query
+	// Search term.
 	SearchWord *string `json:"SearchWord,omitnil,omitempty" name:"SearchWord"`
 
 	// Query offset, which defaults to `0`.
@@ -2773,6 +3045,15 @@ type DescribeDatahubTopicsRequest struct {
 
 	// Maximum number of results to be returned in this request. Default value: `50`. Maximum value: `50`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Specifies whether to query the topic list from the connection.
+	QueryFromConnectResource *bool `json:"QueryFromConnectResource,omitnil,omitempty" name:"QueryFromConnectResource"`
+
+	// Connection ID.
+	ConnectResourceId *string `json:"ConnectResourceId,omitnil,omitempty" name:"ConnectResourceId"`
+
+	// topic resource expression.
+	TopicRegularExpression *string `json:"TopicRegularExpression,omitnil,omitempty" name:"TopicRegularExpression"`
 }
 
 func (r *DescribeDatahubTopicsRequest) ToJsonString() string {
@@ -2790,6 +3071,9 @@ func (r *DescribeDatahubTopicsRequest) FromJsonString(s string) error {
 	delete(f, "SearchWord")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "QueryFromConnectResource")
+	delete(f, "ConnectResourceId")
+	delete(f, "TopicRegularExpression")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDatahubTopicsRequest has unknown keys!", "")
 	}
@@ -2800,18 +3084,16 @@ type DescribeDatahubTopicsResp struct {
 	// Total count
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Topic list
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Topic list.
 	TopicList []*DatahubTopicDTO `json:"TopicList,omitnil,omitempty" name:"TopicList"`
 }
 
 // Predefined struct for user
 type DescribeDatahubTopicsResponseParams struct {
-	// Topic list
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Topic list.
 	Result *DescribeDatahubTopicsResp `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2832,7 +3114,7 @@ func (r *DescribeDatahubTopicsResponse) FromJsonString(s string) error {
 }
 
 type DescribeGroup struct {
-	// groupId
+	// Consumer group name.
 	Group *string `json:"Group,omitnil,omitempty" name:"Group"`
 
 	// Protocol used by the group.
@@ -2841,20 +3123,20 @@ type DescribeGroup struct {
 
 // Predefined struct for user
 type DescribeGroupInfoRequestParams struct {
-	// (Filter) filter by instance ID.
+	// ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Kafka consumer group (`Consumer-group`), which is an array in the format of `GroupList.0=xxx&GroupList.1=yyy`.
+	// Kafka group list. obtain through the API [DescribeConsumerGroup](https://www.tencentcloud.comom/document/product/597/40841?from_cn_redirect=1).
 	GroupList []*string `json:"GroupList,omitnil,omitempty" name:"GroupList"`
 }
 
 type DescribeGroupInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// (Filter) filter by instance ID.
+	// ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Kafka consumer group (`Consumer-group`), which is an array in the format of `GroupList.0=xxx&GroupList.1=yyy`.
+	// Kafka group list. obtain through the API [DescribeConsumerGroup](https://www.tencentcloud.comom/document/product/597/40841?from_cn_redirect=1).
 	GroupList []*string `json:"GroupList,omitnil,omitempty" name:"GroupList"`
 }
 
@@ -2880,11 +3162,10 @@ func (r *DescribeGroupInfoRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGroupInfoResponseParams struct {
-	// Returned result
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Returned result.
 	Result []*GroupInfoResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2906,7 +3187,7 @@ func (r *DescribeGroupInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGroupOffsetsRequestParams struct {
-	// (Filter) filter by instance ID
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Kafka consumer group
@@ -2928,7 +3209,7 @@ type DescribeGroupOffsetsRequestParams struct {
 type DescribeGroupOffsetsRequest struct {
 	*tchttp.BaseRequest
 	
-	// (Filter) filter by instance ID
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Kafka consumer group
@@ -2973,10 +3254,10 @@ func (r *DescribeGroupOffsetsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGroupOffsetsResponseParams struct {
-	// Returned result object
+	// Returned result.
 	Result *GroupOffsetResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2998,7 +3279,7 @@ func (r *DescribeGroupOffsetsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGroupRequestParams struct {
-	// Instance ID
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Search keyword
@@ -3009,12 +3290,15 @@ type DescribeGroupRequestParams struct {
 
 	// Maximum number of results to be returned
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Only supported for GroupState filter criteria. valid values: Empty, Stable. note: this parameter can only be accessed in versions 2.8/3.2.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribeGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Search keyword
@@ -3025,6 +3309,9 @@ type DescribeGroupRequest struct {
 
 	// Maximum number of results to be returned
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Only supported for GroupState filter criteria. valid values: Empty, Stable. note: this parameter can only be accessed in versions 2.8/3.2.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 func (r *DescribeGroupRequest) ToJsonString() string {
@@ -3043,6 +3330,7 @@ func (r *DescribeGroupRequest) FromJsonString(s string) error {
 	delete(f, "SearchWord")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "Filters")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeGroupRequest has unknown keys!", "")
 	}
@@ -3051,10 +3339,10 @@ func (r *DescribeGroupRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGroupResponseParams struct {
-	// List of returned results
+	// Returned result.
 	Result *GroupResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3076,14 +3364,14 @@ func (r *DescribeGroupResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceAttributesRequestParams struct {
-	// Instance ID
+	// ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeInstanceAttributesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -3111,7 +3399,7 @@ type DescribeInstanceAttributesResponseParams struct {
 	// Returned result object of instance attributes
 	Result *InstanceAttributesResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3155,6 +3443,8 @@ type DescribeInstancesDetailRequestParams struct {
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// This parameter has been deprecated and replaced with `InstanceIdList`.
+	//
+	// Deprecated: InstanceIds is deprecated.
 	InstanceIds *string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Filter by instance ID.
@@ -3231,7 +3521,7 @@ type DescribeInstancesDetailResponseParams struct {
 	// Returned result object of instance details
 	Result *InstanceDetailResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3253,13 +3543,13 @@ func (r *DescribeInstancesDetailResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstancesRequestParams struct {
-	// (Filter) filter by instance ID
+	// (Query condition) filter by the ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// (Filter) filter by instance name. Fuzzy search is supported
+	// Search term. example: (query condition) filter by instance name. fuzzy query is supported.
 	SearchWord *string `json:"SearchWord,omitnil,omitempty" name:"SearchWord"`
 
-	// (Filter) instance status. 0: creating, 1: running, 2: deleting. If this parameter is left empty, all instances will be returned by default
+	// Instance status (query condition). valid values: 0: creating, 1: running, 2: deleting, 5: isolated, 7: upgrading. default return: all.
 	Status []*int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Offset. If this parameter is left empty, 0 will be used by default
@@ -3269,22 +3559,24 @@ type DescribeInstancesRequestParams struct {
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Tag key value (this field has been deprecated).
+	//
+	// Deprecated: TagKey is deprecated.
 	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
 
-	// VPC ID.
+	// (Query condition) VPC Id.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 }
 
 type DescribeInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// (Filter) filter by instance ID
+	// (Query condition) filter by the ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// (Filter) filter by instance name. Fuzzy search is supported
+	// Search term. example: (query condition) filter by instance name. fuzzy query is supported.
 	SearchWord *string `json:"SearchWord,omitnil,omitempty" name:"SearchWord"`
 
-	// (Filter) instance status. 0: creating, 1: running, 2: deleting. If this parameter is left empty, all instances will be returned by default
+	// Instance status (query condition). valid values: 0: creating, 1: running, 2: deleting, 5: isolated, 7: upgrading. default return: all.
 	Status []*int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Offset. If this parameter is left empty, 0 will be used by default
@@ -3296,7 +3588,7 @@ type DescribeInstancesRequest struct {
 	// Tag key value (this field has been deprecated).
 	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
 
-	// VPC ID.
+	// (Query condition) VPC Id.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 }
 
@@ -3330,7 +3622,7 @@ type DescribeInstancesResponseParams struct {
 	// Returned result
 	Result *InstanceResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3405,11 +3697,10 @@ func (r *DescribeRegionRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeRegionResponseParams struct {
-	// List of the returned results of enumerated regions
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Returns the region enumeration result list.
 	Result []*Region `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3431,7 +3722,7 @@ func (r *DescribeRegionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeRouteRequestParams struct {
-	// Unique instance ID
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Route ID
@@ -3441,7 +3732,7 @@ type DescribeRouteRequestParams struct {
 type DescribeRouteRequest struct {
 	*tchttp.BaseRequest
 	
-	// Unique instance ID
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Route ID
@@ -3473,7 +3764,7 @@ type DescribeRouteResponseParams struct {
 	// Returned result set of route information
 	Result *RouteResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3494,15 +3785,100 @@ func (r *DescribeRouteResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeSecurityGroupRoutesRequestParams struct {
+	// Specifies the routing information.
+	InstanceRoute *InstanceRoute `json:"InstanceRoute,omitnil,omitempty" name:"InstanceRoute"`
+
+	// Filter.
+	Filters []*RouteFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Specifies the pagination Offset. default is 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Pagination Limit. default: 20.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Keyword. specifies fuzzy search by instance id, instance name, or vip.
+	SearchWord *string `json:"SearchWord,omitnil,omitempty" name:"SearchWord"`
+}
+
+type DescribeSecurityGroupRoutesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the routing information.
+	InstanceRoute *InstanceRoute `json:"InstanceRoute,omitnil,omitempty" name:"InstanceRoute"`
+
+	// Filter.
+	Filters []*RouteFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Specifies the pagination Offset. default is 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Pagination Limit. default: 20.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Keyword. specifies fuzzy search by instance id, instance name, or vip.
+	SearchWord *string `json:"SearchWord,omitnil,omitempty" name:"SearchWord"`
+}
+
+func (r *DescribeSecurityGroupRoutesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecurityGroupRoutesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceRoute")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "SearchWord")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSecurityGroupRoutesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSecurityGroupRoutesResponseParams struct {
+	// Returns the security group routing information result object.
+	Result *SecurityGroupRouteResp `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSecurityGroupRoutesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSecurityGroupRoutesResponseParams `json:"Response"`
+}
+
+func (r *DescribeSecurityGroupRoutesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecurityGroupRoutesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeTaskStatusRequestParams struct {
-	// Unique task ID
+	// Flow ID.
 	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 }
 
 type DescribeTaskStatusRequest struct {
 	*tchttp.BaseRequest
 	
-	// Unique task ID
+	// Flow ID.
 	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 }
 
@@ -3530,7 +3906,7 @@ type DescribeTaskStatusResponseParams struct {
 	// Returned result
 	Result *TaskStatusResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3552,20 +3928,20 @@ func (r *DescribeTaskStatusResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTopicAttributesRequestParams struct {
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Topic name
+	// Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 }
 
 type DescribeTopicAttributesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Topic name
+	// Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 }
 
@@ -3594,7 +3970,7 @@ type DescribeTopicAttributesResponseParams struct {
 	// Returned result object
 	Result *TopicAttributesResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3616,7 +3992,7 @@ func (r *DescribeTopicAttributesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTopicDetailRequestParams struct {
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// (Filter) filter by `topicName`. Fuzzy search is supported
@@ -3625,17 +4001,26 @@ type DescribeTopicDetailRequestParams struct {
 	// Offset. If this parameter is left empty, 0 will be used by default
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20. This value must be greater than 0
+	// Number of returned results. default: 20. value must be above 0.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Name of the preset ACL rule.
 	AclRuleName *string `json:"AclRuleName,omitnil,omitempty" name:"AclRuleName"`
+
+	// Sorts based on specific attributes (currently supports PartitionNum/CreateTime). default value: CreateTime.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// 0 - sequential, 1 - reverse order. default value: 0.
+	OrderType *int64 `json:"OrderType,omitnil,omitempty" name:"OrderType"`
+
+	// Currently supports ReplicaNum (number of replicas) filter criteria.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribeTopicDetailRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// (Filter) filter by `topicName`. Fuzzy search is supported
@@ -3644,11 +4029,20 @@ type DescribeTopicDetailRequest struct {
 	// Offset. If this parameter is left empty, 0 will be used by default
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20. This value must be greater than 0
+	// Number of returned results. default: 20. value must be above 0.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Name of the preset ACL rule.
 	AclRuleName *string `json:"AclRuleName,omitnil,omitempty" name:"AclRuleName"`
+
+	// Sorts based on specific attributes (currently supports PartitionNum/CreateTime). default value: CreateTime.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// 0 - sequential, 1 - reverse order. default value: 0.
+	OrderType *int64 `json:"OrderType,omitnil,omitempty" name:"OrderType"`
+
+	// Currently supports ReplicaNum (number of replicas) filter criteria.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 func (r *DescribeTopicDetailRequest) ToJsonString() string {
@@ -3668,6 +4062,9 @@ func (r *DescribeTopicDetailRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "AclRuleName")
+	delete(f, "OrderBy")
+	delete(f, "OrderType")
+	delete(f, "Filters")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTopicDetailRequest has unknown keys!", "")
 	}
@@ -3679,7 +4076,7 @@ type DescribeTopicDetailResponseParams struct {
 	// Returned entity of topic details
 	Result *TopicDetailResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3701,20 +4098,20 @@ func (r *DescribeTopicDetailResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTopicProduceConnectionRequestParams struct {
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Topic name
+	// Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 }
 
 type DescribeTopicProduceConnectionRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Topic name
+	// Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 }
 
@@ -3765,7 +4162,7 @@ func (r *DescribeTopicProduceConnectionResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DescribeTopicRequestParams struct {
-	// Instance ID
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Filter by `topicName`. Fuzzy search is supported
@@ -3784,7 +4181,7 @@ type DescribeTopicRequestParams struct {
 type DescribeTopicRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Filter by `topicName`. Fuzzy search is supported
@@ -3825,11 +4222,10 @@ func (r *DescribeTopicRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTopicResponseParams struct {
-	// Returned result
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Returned result.
 	Result *TopicResult `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3851,7 +4247,7 @@ func (r *DescribeTopicResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTopicSubscribeGroupRequestParams struct {
-	// Instance ID
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Topic name
@@ -3867,7 +4263,7 @@ type DescribeTopicSubscribeGroupRequestParams struct {
 type DescribeTopicSubscribeGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Topic name
@@ -3907,7 +4303,7 @@ type DescribeTopicSubscribeGroupResponseParams struct {
 	// Returned results
 	Result *TopicSubscribeGroup `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3938,7 +4334,7 @@ type DescribeTopicSyncReplicaRequestParams struct {
 	// Offset. If this parameter is left empty, 0 will be used by default.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+	// Number of returned results. default value: 20. must be greater than 0.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filters unsynced replicas only
@@ -3957,7 +4353,7 @@ type DescribeTopicSyncReplicaRequest struct {
 	// Offset. If this parameter is left empty, 0 will be used by default.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+	// Number of returned results. default value: 20. must be greater than 0.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filters unsynced replicas only
@@ -3992,7 +4388,7 @@ type DescribeTopicSyncReplicaResponseParams struct {
 	// Returns topic replica details
 	Result *TopicInSyncReplicaResult `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4013,33 +4409,125 @@ func (r *DescribeTopicSyncReplicaResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeTypeInstancesRequestParams struct {
+	// (Filter condition) filter by instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// (Filter condition) filter by instance name. fuzzy query is supported.
+	SearchWord *string `json:"SearchWord,omitnil,omitempty" name:"SearchWord"`
+
+	// Instance status (filter condition). valid values: 0: creating, 1: running, 2: deleting. default return: all.
+	Status []*int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Offset. default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned results. default: 10. maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Matches the Tag key.
+	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
+}
+
+type DescribeTypeInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// (Filter condition) filter by instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// (Filter condition) filter by instance name. fuzzy query is supported.
+	SearchWord *string `json:"SearchWord,omitnil,omitempty" name:"SearchWord"`
+
+	// Instance status (filter condition). valid values: 0: creating, 1: running, 2: deleting. default return: all.
+	Status []*int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Offset. default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned results. default: 10. maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Matches the Tag key.
+	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
+}
+
+func (r *DescribeTypeInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTypeInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "SearchWord")
+	delete(f, "Status")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "TagKey")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTypeInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTypeInstancesResponseParams struct {
+	// Returned result.
+	Result *InstanceResponse `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeTypeInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTypeInstancesResponseParams `json:"Response"`
+}
+
+func (r *DescribeTypeInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTypeInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeUserRequestParams struct {
-	// Instance ID
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Filter by name
 	SearchWord *string `json:"SearchWord,omitnil,omitempty" name:"SearchWord"`
 
-	// Offset
+	// Offset.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of results to be returned in this request
+	// The number of returns.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeUserRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Filter by name
 	SearchWord *string `json:"SearchWord,omitnil,omitempty" name:"SearchWord"`
 
-	// Offset
+	// Offset.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of results to be returned in this request
+	// The number of returns.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -4067,10 +4555,10 @@ func (r *DescribeUserRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeUserResponseParams struct {
-	// Returned result list
+	// Returned result.
 	Result *UserResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4128,32 +4616,32 @@ type DynamicRetentionTime struct {
 
 // Predefined struct for user
 type FetchMessageByOffsetRequestParams struct {
-	// Instance ID.
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Topic name
+	// Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
 	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
 
 	// Partition ID
 	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
 
-	// Offset information, which is required.
+	// Specifies the position information.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type FetchMessageByOffsetRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Topic name
+	// Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
 	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
 
 	// Partition ID
 	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
 
-	// Offset information, which is required.
+	// Specifies the position information.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
@@ -4184,7 +4672,7 @@ type FetchMessageByOffsetResponseParams struct {
 	// Returned results
 	Result *ConsumerRecord `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4206,7 +4694,7 @@ func (r *FetchMessageByOffsetResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type FetchMessageListByOffsetRequestParams struct {
-	// Instance ID
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Topic name
@@ -4225,7 +4713,7 @@ type FetchMessageListByOffsetRequestParams struct {
 type FetchMessageListByOffsetRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Topic name
@@ -4269,7 +4757,7 @@ type FetchMessageListByOffsetResponseParams struct {
 	// Returned result. Note: The returned list does not display the message content (key and value). To query the message content, call the `FetchMessageByOffset` API.
 	Result []*ConsumerRecord `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4289,6 +4777,91 @@ func (r *FetchMessageListByOffsetResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type FetchMessageListByTimestampRequestParams struct {
+	// The ckafka cluster instance Id.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Topic name
+	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
+
+	// Partition ID
+	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
+
+	// Query start time, a timestamp.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Maximum number of query results. default: 20. value range: 1-20.
+	SinglePartitionRecordNumber *int64 `json:"SinglePartitionRecordNumber,omitnil,omitempty" name:"SinglePartitionRecordNumber"`
+}
+
+type FetchMessageListByTimestampRequest struct {
+	*tchttp.BaseRequest
+	
+	// The ckafka cluster instance Id.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Topic name
+	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
+
+	// Partition ID
+	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
+
+	// Query start time, a timestamp.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Maximum number of query results. default: 20. value range: 1-20.
+	SinglePartitionRecordNumber *int64 `json:"SinglePartitionRecordNumber,omitnil,omitempty" name:"SinglePartitionRecordNumber"`
+}
+
+func (r *FetchMessageListByTimestampRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *FetchMessageListByTimestampRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Topic")
+	delete(f, "Partition")
+	delete(f, "StartTime")
+	delete(f, "SinglePartitionRecordNumber")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "FetchMessageListByTimestampRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type FetchMessageListByTimestampResponseParams struct {
+	// Returned results. note that the list does not return specific message content (key, value). if necessary, please use the FetchMessageByOffset API to query specific message content.
+	Result []*ConsumerRecord `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type FetchMessageListByTimestampResponse struct {
+	*tchttp.BaseResponse
+	Response *FetchMessageListByTimestampResponseParams `json:"Response"`
+}
+
+func (r *FetchMessageListByTimestampResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *FetchMessageListByTimestampResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Filter struct {
 	// Field to be filtered.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -4298,7 +4871,7 @@ type Filter struct {
 }
 
 type Group struct {
-	// Group name
+	// Consumer group name.
 	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 }
 
@@ -4337,7 +4910,7 @@ type GroupInfoResponse struct {
 	// This array contains information only if `state` is `Stable` and `protocol_type` is `consumer`
 	Members []*GroupInfoMember `json:"Members,omitnil,omitempty" name:"Members"`
 
-	// Kafka consumer group
+	// Consumer group name.
 	Group *string `json:"Group,omitnil,omitempty" name:"Group"`
 }
 
@@ -4345,8 +4918,7 @@ type GroupInfoTopics struct {
 	// Name of assigned topics
 	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
 
-	// Information of assigned partition
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Allocates partition info.
 	Partitions []*int64 `json:"Partitions,omitnil,omitempty" name:"Partitions"`
 }
 
@@ -4357,8 +4929,7 @@ type GroupOffsetPartition struct {
 	// Offset position submitted by consumer
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Metadata can be passed in for other purposes when the consumer submits messages. Currently, this parameter is usually an empty string
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Supports consumers to submit messages with imported metadata for other purposes, currently an empty string.
 	Metadata *string `json:"Metadata,omitnil,omitempty" name:"Metadata"`
 
 	// Error code
@@ -4375,8 +4946,7 @@ type GroupOffsetResponse struct {
 	// Total number of eligible results
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Array of partitions in the topic, where each element is a JSON object
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The topic partition array, where each element is a json object.
 	TopicList []*GroupOffsetTopic `json:"TopicList,omitnil,omitempty" name:"TopicList"`
 }
 
@@ -4384,28 +4954,24 @@ type GroupOffsetTopic struct {
 	// Topic name
 	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
 
-	// Array of partitions in the topic, where each element is a JSON object
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The topic partition array, where each element is a json object.
 	Partitions []*GroupOffsetPartition `json:"Partitions,omitnil,omitempty" name:"Partitions"`
 }
 
 type GroupResponse struct {
-	// Count
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Counting.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// GroupList
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	GroupList []*DescribeGroup `json:"GroupList,omitnil,omitempty" name:"GroupList"`
 
-	// Consumer group quota
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the consumer group quota.
 	GroupCountQuota *uint64 `json:"GroupCountQuota,omitnil,omitempty" name:"GroupCountQuota"`
 }
 
 // Predefined struct for user
 type InquireCkafkaPriceRequestParams struct {
-	// `standard`: Standard Edition; `profession`: Pro Edition
+	// Chinese site standard version fill in standards2 international site standard version fill in standard pro edition fill in profession advanced edition fill in premium.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
 	// Billing mode for instance purchase/renewal. If this parameter is left empty when you purchase an instance, the fees for one month under the monthly subscription mode will be displayed by default.
@@ -4414,10 +4980,10 @@ type InquireCkafkaPriceRequestParams struct {
 	// The number of instances to be purchased or renewed. If this parameter is left empty, the default value is `1`.
 	InstanceNum *int64 `json:"InstanceNum,omitnil,omitempty" name:"InstanceNum"`
 
-	// Private network bandwidth in MB/sec, which is required when you purchase an instance.
+	// Specifies the internal network bandwidth size of the instance, in MB/s (required when purchased; bandwidth information is required for pro edition/advanced edition inquiries).
 	Bandwidth *int64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
-	// Disk type and size, which is required when you purchase an instance.
+	// Specifies the purchase type and size of the hard disk of the instance. required when purchased. disk information is required for pro edition or advanced edition inquiries.
 	InquiryDiskParam *InquiryDiskParam `json:"InquiryDiskParam,omitnil,omitempty" name:"InquiryDiskParam"`
 
 	// Message retention period in hours, which is required when you purchase an instance.
@@ -4426,7 +4992,9 @@ type InquireCkafkaPriceRequestParams struct {
 	// The number of instance topics to be purchased, which is required when you purchase an instance.
 	Topic *int64 `json:"Topic,omitnil,omitempty" name:"Topic"`
 
-	// The number of instance partitions to be purchased, which is required when you purchase an instance.
+	// Number of partitions for instance purchase, unit: unit (required when purchased; bandwidth information required for pro edition/advanced edition inquiry).
+	// Partition upper limit. maximum value of 40000. step length of 100.
+	// Specifies the specifications and limits that can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1
 	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
 
 	// The region for instance purchase, which can be obtained via the `DescribeCkafkaZone` API.
@@ -4438,7 +5006,7 @@ type InquireCkafkaPriceRequestParams struct {
 	// This field is not required.
 	BillType *string `json:"BillType,omitnil,omitempty" name:"BillType"`
 
-	// Billing mode for public network bandwidth, which is required when you purchase public network bandwidth. Currently, public network bandwidth is only supported for Pro Edition.
+	// Public network bandwidth billing mode. currently only the pro edition supports public network bandwidth. required when purchasing public network bandwidth. value must be a multiple of 3.
 	PublicNetworkParam *InquiryPublicNetworkParam `json:"PublicNetworkParam,omitnil,omitempty" name:"PublicNetworkParam"`
 
 	// ID of the instance to be renewed, which is required when you renew an instance.
@@ -4448,7 +5016,7 @@ type InquireCkafkaPriceRequestParams struct {
 type InquireCkafkaPriceRequest struct {
 	*tchttp.BaseRequest
 	
-	// `standard`: Standard Edition; `profession`: Pro Edition
+	// Chinese site standard version fill in standards2 international site standard version fill in standard pro edition fill in profession advanced edition fill in premium.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
 	// Billing mode for instance purchase/renewal. If this parameter is left empty when you purchase an instance, the fees for one month under the monthly subscription mode will be displayed by default.
@@ -4457,10 +5025,10 @@ type InquireCkafkaPriceRequest struct {
 	// The number of instances to be purchased or renewed. If this parameter is left empty, the default value is `1`.
 	InstanceNum *int64 `json:"InstanceNum,omitnil,omitempty" name:"InstanceNum"`
 
-	// Private network bandwidth in MB/sec, which is required when you purchase an instance.
+	// Specifies the internal network bandwidth size of the instance, in MB/s (required when purchased; bandwidth information is required for pro edition/advanced edition inquiries).
 	Bandwidth *int64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
-	// Disk type and size, which is required when you purchase an instance.
+	// Specifies the purchase type and size of the hard disk of the instance. required when purchased. disk information is required for pro edition or advanced edition inquiries.
 	InquiryDiskParam *InquiryDiskParam `json:"InquiryDiskParam,omitnil,omitempty" name:"InquiryDiskParam"`
 
 	// Message retention period in hours, which is required when you purchase an instance.
@@ -4469,7 +5037,9 @@ type InquireCkafkaPriceRequest struct {
 	// The number of instance topics to be purchased, which is required when you purchase an instance.
 	Topic *int64 `json:"Topic,omitnil,omitempty" name:"Topic"`
 
-	// The number of instance partitions to be purchased, which is required when you purchase an instance.
+	// Number of partitions for instance purchase, unit: unit (required when purchased; bandwidth information required for pro edition/advanced edition inquiry).
+	// Partition upper limit. maximum value of 40000. step length of 100.
+	// Specifies the specifications and limits that can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1
 	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
 
 	// The region for instance purchase, which can be obtained via the `DescribeCkafkaZone` API.
@@ -4481,7 +5051,7 @@ type InquireCkafkaPriceRequest struct {
 	// This field is not required.
 	BillType *string `json:"BillType,omitnil,omitempty" name:"BillType"`
 
-	// Billing mode for public network bandwidth, which is required when you purchase public network bandwidth. Currently, public network bandwidth is only supported for Pro Edition.
+	// Public network bandwidth billing mode. currently only the pro edition supports public network bandwidth. required when purchasing public network bandwidth. value must be a multiple of 3.
 	PublicNetworkParam *InquiryPublicNetworkParam `json:"PublicNetworkParam,omitnil,omitempty" name:"PublicNetworkParam"`
 
 	// ID of the instance to be renewed, which is required when you renew an instance.
@@ -4520,8 +5090,7 @@ func (r *InquireCkafkaPriceRequest) FromJsonString(s string) error {
 }
 
 type InquireCkafkaPriceResp struct {
-	// Instance price
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the instance price.
 	InstancePrice *InquiryPrice `json:"InstancePrice,omitnil,omitempty" name:"InstancePrice"`
 
 	// Public network bandwidth price
@@ -4531,10 +5100,10 @@ type InquireCkafkaPriceResp struct {
 
 // Predefined struct for user
 type InquireCkafkaPriceResponseParams struct {
-	// Output parameters
+	// Returned result.
 	Result *InquireCkafkaPriceResp `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4555,24 +5124,19 @@ func (r *InquireCkafkaPriceResponse) FromJsonString(s string) error {
 }
 
 type InquiryBasePrice struct {
-	// Original unit price
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Original price unit.
 	UnitPrice *float64 `json:"UnitPrice,omitnil,omitempty" name:"UnitPrice"`
 
-	// Discounted unit price
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Discount unit price.
 	UnitPriceDiscount *float64 `json:"UnitPriceDiscount,omitnil,omitempty" name:"UnitPriceDiscount"`
 
-	// Original price in total
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Total original price.
 	OriginalPrice *float64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 
-	// Discounted price in total
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Total discount price.
 	DiscountPrice *float64 `json:"DiscountPrice,omitnil,omitempty" name:"DiscountPrice"`
 
-	// Discount (%)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Discount (unit: %).
 	Discount *float64 `json:"Discount,omitnil,omitempty" name:"Discount"`
 
 	// Number of purchased items
@@ -4595,8 +5159,7 @@ type InquiryBasePrice struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
 
-	// Purchase quantity
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Purchase quantity.
 	Value *int64 `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
@@ -4617,8 +5180,7 @@ type InquiryDetailPrice struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TopicPrice *InquiryBasePrice `json:"TopicPrice,omitnil,omitempty" name:"TopicPrice"`
 
-	// Instance package price
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance package price.
 	InstanceTypePrice *InquiryBasePrice `json:"InstanceTypePrice,omitnil,omitempty" name:"InstanceTypePrice"`
 }
 
@@ -4631,44 +5193,35 @@ type InquiryDiskParam struct {
 }
 
 type InquiryPrice struct {
-	// Original unit price
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Original price unit.
 	UnitPrice *float64 `json:"UnitPrice,omitnil,omitempty" name:"UnitPrice"`
 
-	// Discounted unit price
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Discount unit price.
 	UnitPriceDiscount *float64 `json:"UnitPriceDiscount,omitnil,omitempty" name:"UnitPriceDiscount"`
 
-	// Original price in total
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Total original price.
 	OriginalPrice *float64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 
-	// Discounted price in total
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Total discount price.
 	DiscountPrice *float64 `json:"DiscountPrice,omitnil,omitempty" name:"DiscountPrice"`
 
-	// Discount (%)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Discount (unit: %).
 	Discount *float64 `json:"Discount,omitnil,omitempty" name:"Discount"`
 
-	// Number of purchased items
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of products
 	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// Currency for payment
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the payment currency.
 	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
 
 	// Dedicated disk response parameter
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Validity period
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Purchase duration.
 	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
-	// Unit of the validity period (`m`: Month; `h`: Hour)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the purchase duration unit ("m" for monthly, "h" for hourly).
 	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
 
 	// Purchase quantity
@@ -4684,30 +5237,29 @@ type InquiryPublicNetworkParam struct {
 	// Public network bandwidth billing mode (`BANDWIDTH_PREPAID`: Monthly subscription; `BANDWIDTH_POSTPAID_BY_HOUR`: Bill-by-hour)
 	PublicNetworkChargeType *string `json:"PublicNetworkChargeType,omitnil,omitempty" name:"PublicNetworkChargeType"`
 
-	// Public network bandwidth in MB
+	// Public network bandwidth, in MB. value must be 0 or a multiple of 3.
 	PublicNetworkMonthly *int64 `json:"PublicNetworkMonthly,omitnil,omitempty" name:"PublicNetworkMonthly"`
 }
 
 type Instance struct {
-	// Instance ID
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance name
+	// Specifies the Name of the ckafka cluster instance.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Instance status. 0: creating, 1: running, 2: deleting, 5: isolated, -1: creation failed
+	// Instance status. 0: creating, 1: running, 2: deleting, 3: deleted, 5: isolated, 7: upgrading, -1: creation failed.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Whether it is an open-source instance. true: yes, false: no
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Specifies whether the instance is open-source. valid values: true (open-source), false (not open-source).
 	IfCommunity *bool `json:"IfCommunity,omitnil,omitempty" name:"IfCommunity"`
 }
 
 type InstanceAttributesResponse struct {
-	// Instance ID
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance name
+	// Specifies the Name of the ckafka cluster instance.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// VIP list information of access point
@@ -4719,7 +5271,7 @@ type InstanceAttributesResponse struct {
 	// Virtual port
 	Vport *string `json:"Vport,omitnil,omitempty" name:"Vport"`
 
-	// Instance status. 0: creating, 1: running, 2: deleting
+	// Instance status. 0: creating, 1: running, 2: deleting, 3: deleted, 5: isolated, 7: upgrading, -1: creation failed.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Instance bandwidth in Mbps
@@ -4765,64 +5317,95 @@ type InstanceAttributesResponse struct {
 	CreatedTopics *int64 `json:"CreatedTopics,omitnil,omitempty" name:"CreatedTopics"`
 
 	// Tag array
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Expiration time
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	ExpireTime *uint64 `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Cross-AZ
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Availability Zone List
 	ZoneIds []*int64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-	// Kafka version information
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Specifies the ckafka cluster instance version.
 	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
 
-	// Maximum number of groups
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Maximum number of groups.
 	MaxGroupNum *int64 `json:"MaxGroupNum,omitnil,omitempty" name:"MaxGroupNum"`
 
-	// Offering type. `0`: Standard Edition; `1`: Professional Edition
-	// Note: this field may return `null`, indicating that no valid value was found.
+	// Sale type. valid values: 0 (standard version), 1 (pro edition).
 	Cvm *int64 `json:"Cvm,omitnil,omitempty" name:"Cvm"`
 
-	// Type.
-	// Note: this field may return `null`, indicating that no valid value was found.
+	// Instance type. valid values:. 
+	// Specifies the pro edition.    
+	// Standard version.
+	// premium. specifies the advanced edition.
+	// Specifies the serverless version.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// Features supported by the instance. `FEATURE_SUBNET_ACL` indicates that the ACL policy supports setting subnets. 
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Indicates the characteristics supported by the instance. FEATURE_SUBNET_ACL means the policy support for configuring subnets.
 	Features []*string `json:"Features,omitnil,omitempty" name:"Features"`
 
-	// Dynamic message retention policy
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Dynamic message retention policy.
 	RetentionTimeConfig *DynamicRetentionTime `json:"RetentionTimeConfig,omitnil,omitempty" name:"RetentionTimeConfig"`
 
-	// Maximum number of connections
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Maximum number of connections.
 	MaxConnection *uint64 `json:"MaxConnection,omitnil,omitempty" name:"MaxConnection"`
 
 	// Public network bandwidth
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	PublicNetwork *int64 `json:"PublicNetwork,omitnil,omitempty" name:"PublicNetwork"`
 
-	// Time
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Specifies the deprecated field with no actual meaning.
 	DeleteRouteTimestamp *string `json:"DeleteRouteTimestamp,omitnil,omitempty" name:"DeleteRouteTimestamp"`
 
-	// Number of remaining creatable partitions
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Number of remaining creatable partitions.
 	RemainingPartitions *int64 `json:"RemainingPartitions,omitnil,omitempty" name:"RemainingPartitions"`
 
-	// Number of remaining creatable topics
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Number of remaining creatable topics.
 	RemainingTopics *int64 `json:"RemainingTopics,omitnil,omitempty" name:"RemainingTopics"`
 
-	// Dynamic disk expansion policy.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Scaling policy for dynamic disk.
 	DynamicDiskConfig *DynamicDiskConfig `json:"DynamicDiskConfig,omitnil,omitempty" name:"DynamicDiskConfig"`
+
+	// Specifies the instance billing type. POSTPAID_BY_HOUR: hourly billing; PREPAID: annual/monthly package.
+	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
+
+	// Whether to enable the elastic bandwidth allowlist.   
+	// Indicates the allowlist feature with elastic bandwidth enabled.
+	// 0: elastic bandwidth allowlist feature is disabled.
+	ElasticBandwidthSwitch *int64 `json:"ElasticBandwidthSwitch,omitnil,omitempty" name:"ElasticBandwidthSwitch"`
+
+	// Indicates the elastic bandwidth activation status.
+	// 1: indicates elastic bandwidth is disabled.
+	// Enable elastic bandwidth.
+	// Enable elastic bandwidth successfully.
+	// 33: disabling elastic bandwidth.
+	// Indicates that the elastic bandwidth is successfully disabled.
+	// Enable elastic bandwidth failed.
+	// Bandwidth failure.
+	ElasticBandwidthOpenStatus *int64 `json:"ElasticBandwidthOpenStatus,omitnil,omitempty" name:"ElasticBandwidthOpenStatus"`
+
+	// Cluster type.  
+	// CLOUD_IDC idc cluster.
+	// CLOUD_CVM_SHARE shared cluster.
+	// CLOUD_CVM_YUNTI yunti cvm cluster.
+	// CLOUD_CVM. specifies the cvm cluster.
+	// CLOUD_CDC cdc cluster.
+	// CLOUD_EKS_TSE eks cluster.
+	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
+
+	// Number of free partitions.
+	FreePartitionNumber *int64 `json:"FreePartitionNumber,omitnil,omitempty" name:"FreePartitionNumber"`
+
+	// Specifies the elastic bandwidth upper limit.
+	ElasticFloatBandwidth *int64 `json:"ElasticFloatBandwidth,omitnil,omitempty" name:"ElasticFloatBandwidth"`
+
+	// ssl custom certificate id. only returned for instance clusters with custom certificates.
+	CustomCertId *string `json:"CustomCertId,omitnil,omitempty" name:"CustomCertId"`
+
+	// Default unclean.leader.election.enable configuration for cluster topic: 1 enable 0 disable.
+	UncleanLeaderElectionEnable *int64 `json:"UncleanLeaderElectionEnable,omitnil,omitempty" name:"UncleanLeaderElectionEnable"`
+
+	// Instance deletion protection switch. 1: enabled; 0: disabled.
+	DeleteProtectionEnable *int64 `json:"DeleteProtectionEnable,omitnil,omitempty" name:"DeleteProtectionEnable"`
 }
 
 type InstanceChargeParam struct {
@@ -4844,11 +5427,16 @@ type InstanceConfigDO struct {
 	DefaultReplicationFactor *int64 `json:"DefaultReplicationFactor,omitnil,omitempty" name:"DefaultReplicationFactor"`
 }
 
+type InstanceDeleteResponse struct {
+	// Specifies the task Id returned after deleting an instance.
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+}
+
 type InstanceDetail struct {
-	// Instance ID
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance name
+	// CKafka cluster instance name.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Instance VIP information
@@ -4860,13 +5448,13 @@ type InstanceDetail struct {
 	// Virtual IP list
 	VipList []*VipEntity `json:"VipList,omitnil,omitempty" name:"VipList"`
 
-	// Instance status. 0: creating, 1: running, 2: deleting, 5: isolated, -1: creation failed
+	// Instance status. 0: creating, 1: running, 2: deleting, 3: deleted, 5: isolated, 7: upgrading, -1: creation failed.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Instance bandwidth in Mbps
 	Bandwidth *int64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
-	// Instance storage capacity in GB
+	// Specifies the ckafka cluster instance disk size in gb.
 	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
 	// AZ ID
@@ -4902,56 +5490,43 @@ type InstanceDetail struct {
 	// Tag
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Kafka version information
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// kafka version information.
 	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
 
-	// Cross-AZ
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Cross-Availability zone.
 	ZoneIds []*int64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-	// CKafka sale type
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// ckafka sales type.
 	Cvm *int64 `json:"Cvm,omitnil,omitempty" name:"Cvm"`
 
-	// CKafka instance type
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Specifies the cluster instance type of ckafka.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// Disk type
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Specifies the ckafka cluster instance disk type.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Maximum number of topics for the current instance
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Maximum number of topics for current specifications.
 	MaxTopicNumber *int64 `json:"MaxTopicNumber,omitnil,omitempty" name:"MaxTopicNumber"`
 
-	// Maximum number of partitions for the current instance
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Maximum number of partitions for current specifications.
 	MaxPartitionNumber *int64 `json:"MaxPartitionNumber,omitnil,omitempty" name:"MaxPartitionNumber"`
 
-	// Time of scheduled upgrade
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Scheduled configuration upgrade time.
 	RebalanceTime *string `json:"RebalanceTime,omitnil,omitempty" name:"RebalanceTime"`
 
-	// Number of partitions in the current instance.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Specifies the number of partitions in the current instance.
 	PartitionNumber *uint64 `json:"PartitionNumber,omitnil,omitempty" name:"PartitionNumber"`
 
-	// Public network bandwidth type.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Specifies the public network bandwidth type of the ckafka cluster instance.
 	PublicNetworkChargeType *string `json:"PublicNetworkChargeType,omitnil,omitempty" name:"PublicNetworkChargeType"`
 
-	// Public network bandwidth.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Public network bandwidth. minimum 3 Mbps. maximum 999 Mbps. only the pro edition supports filling in.
 	PublicNetwork *int64 `json:"PublicNetwork,omitnil,omitempty" name:"PublicNetwork"`
 
-	// Instance type.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the underlying cluster type of the ckafka cluster instance.
 	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
 
 	// Instance feature list.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Features []*string `json:"Features,omitnil,omitempty" name:"Features"`
 }
 
@@ -4974,13 +5549,19 @@ type InstanceQuotaConfigResp struct {
 }
 
 type InstanceResponse struct {
-	// List of eligible instances
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Specifies the list of instances meeting the conditions.
 	InstanceList []*Instance `json:"InstanceList,omitnil,omitempty" name:"InstanceList"`
 
-	// Total number of eligible results
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Total results that meet the conditions.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+}
+
+type InstanceRoute struct {
+	// The ckafka cluster instance Id.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Route ID
+	RouteId *int64 `json:"RouteId,omitnil,omitempty" name:"RouteId"`
 }
 
 type JgwOperateResponse struct {
@@ -4995,28 +5576,36 @@ type JgwOperateResponse struct {
 	Data *OperateResponseData `json:"Data,omitnil,omitempty" name:"Data"`
 }
 
+type ListCvmAndIpInfoRsp struct {
+	// cvm and IP list.
+	CvmList []*CvmAndIpInfo `json:"CvmList,omitnil,omitempty" name:"CvmList"`
+
+	// Specifies the instance data volume.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+}
+
 // Predefined struct for user
 type ModifyAclRuleRequestParams struct {
-	// Instance ID
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// ACL policy name
+	// ACL rule name.
 	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
-	// Whether to be applied to new topics
+	// Specifies whether to apply to newly-added topics when importing predefined rule modifications.
 	IsApplied *int64 `json:"IsApplied,omitnil,omitempty" name:"IsApplied"`
 }
 
 type ModifyAclRuleRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// ACL policy name
+	// ACL rule name.
 	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
-	// Whether to be applied to new topics
+	// Specifies whether to apply to newly-added topics when importing predefined rule modifications.
 	IsApplied *int64 `json:"IsApplied,omitnil,omitempty" name:"IsApplied"`
 }
 
@@ -5046,7 +5635,7 @@ type ModifyAclRuleResponseParams struct {
 	// Unique key of a rule
 	Result *int64 `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -5068,7 +5657,7 @@ func (r *ModifyAclRuleResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDatahubTopicRequestParams struct {
-	// Name
+	// Elastic topic name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Message retention period in ms. The current minimum value is 60,000 ms.
@@ -5084,7 +5673,7 @@ type ModifyDatahubTopicRequestParams struct {
 type ModifyDatahubTopicRequest struct {
 	*tchttp.BaseRequest
 	
-	// Name
+	// Elastic topic name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Message retention period in ms. The current minimum value is 60,000 ms.
@@ -5124,7 +5713,7 @@ type ModifyDatahubTopicResponseParams struct {
 	// Returned result set
 	Result *JgwOperateResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -5146,22 +5735,22 @@ func (r *ModifyDatahubTopicResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyGroupOffsetsRequestParams struct {
-	// Kafka instance ID
+	// ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Kafka consumer group
+	// Consumer group name. obtain through the API [DescribeConsumerGroup](https://www.tencentcloud.comom/document/product/597/40841?from_cn_redirect=1).
 	Group *string `json:"Group,omitnil,omitempty" name:"Group"`
 
-	// Offset resetting policy. Meanings of the input parameters: 0: equivalent to the `shift-by` parameter, which indicates to shift the offset forward or backward by the value of the `shift`. 1: equivalent to `by-duration`, `to-datetime`, `to-earliest`, or `to-latest`, which indicates to move the offset to the specified timestamp. 2: equivalent to `to-offset`, which indicates to move the offset to the specified offset position
+	// Reset offset strategy. parameter meaning: 0. align with the shift-by parameter, move the offset forward or backward by shift entries. 1. alignment reference (by-duration, to-datetime, to-earliest, to-latest), move the offset to the specified timestamp position. 2. alignment reference (to-offset), move the offset to the specified offset position.
 	Strategy *int64 `json:"Strategy,omitnil,omitempty" name:"Strategy"`
 
-	// Indicates the topics to be reset. If this parameter is left empty, all topics will be reset
+	// Specifies the topic name list that needs to reset.
 	Topics []*string `json:"Topics,omitnil,omitempty" name:"Topics"`
 
 	// When `strategy` is 0, this field is required. If it is above zero, the offset will be shifted backward by the value of the `shift`. If it is below zero, the offset will be shifted forward by the value of the `shift`. After a correct reset, the new offset should be (old_offset + shift). Note that if the new offset is smaller than the `earliest` parameter of the partition, it will be set to `earliest`, and if it is greater than the `latest` parameter of the partition, it will be set to `latest`
 	Shift *int64 `json:"Shift,omitnil,omitempty" name:"Shift"`
 
-	// Unit: ms. When `strategy` is 1, this field is required, where -2 indicates to reset the offset to the initial position, -1 indicates to reset to the latest position (equivalent to emptying), and other values represent the specified time, i.e., the offset of the topic at the specified time will be obtained and then reset. Note that if there is no message at the specified time, the last offset will be obtained
+	// In milliseconds. when strategy is 1, must include this field. among them, -2 means reset offset to the start position, -1 means reset to the latest position (equivalent to clearing), other values represent the specified time. obtain the offset at the specified time in the topic and reset. notably, if no message exists at the specified time, get the last offset.
 	ShiftTimestamp *int64 `json:"ShiftTimestamp,omitnil,omitempty" name:"ShiftTimestamp"`
 
 	// Position of the offset that needs to be reset. When `strategy` is 2, this field is required
@@ -5174,22 +5763,22 @@ type ModifyGroupOffsetsRequestParams struct {
 type ModifyGroupOffsetsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Kafka instance ID
+	// ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Kafka consumer group
+	// Consumer group name. obtain through the API [DescribeConsumerGroup](https://www.tencentcloud.comom/document/product/597/40841?from_cn_redirect=1).
 	Group *string `json:"Group,omitnil,omitempty" name:"Group"`
 
-	// Offset resetting policy. Meanings of the input parameters: 0: equivalent to the `shift-by` parameter, which indicates to shift the offset forward or backward by the value of the `shift`. 1: equivalent to `by-duration`, `to-datetime`, `to-earliest`, or `to-latest`, which indicates to move the offset to the specified timestamp. 2: equivalent to `to-offset`, which indicates to move the offset to the specified offset position
+	// Reset offset strategy. parameter meaning: 0. align with the shift-by parameter, move the offset forward or backward by shift entries. 1. alignment reference (by-duration, to-datetime, to-earliest, to-latest), move the offset to the specified timestamp position. 2. alignment reference (to-offset), move the offset to the specified offset position.
 	Strategy *int64 `json:"Strategy,omitnil,omitempty" name:"Strategy"`
 
-	// Indicates the topics to be reset. If this parameter is left empty, all topics will be reset
+	// Specifies the topic name list that needs to reset.
 	Topics []*string `json:"Topics,omitnil,omitempty" name:"Topics"`
 
 	// When `strategy` is 0, this field is required. If it is above zero, the offset will be shifted backward by the value of the `shift`. If it is below zero, the offset will be shifted forward by the value of the `shift`. After a correct reset, the new offset should be (old_offset + shift). Note that if the new offset is smaller than the `earliest` parameter of the partition, it will be set to `earliest`, and if it is greater than the `latest` parameter of the partition, it will be set to `latest`
 	Shift *int64 `json:"Shift,omitnil,omitempty" name:"Shift"`
 
-	// Unit: ms. When `strategy` is 1, this field is required, where -2 indicates to reset the offset to the initial position, -1 indicates to reset to the latest position (equivalent to emptying), and other values represent the specified time, i.e., the offset of the topic at the specified time will be obtained and then reset. Note that if there is no message at the specified time, the last offset will be obtained
+	// In milliseconds. when strategy is 1, must include this field. among them, -2 means reset offset to the start position, -1 means reset to the latest position (equivalent to clearing), other values represent the specified time. obtain the offset at the specified time in the topic and reset. notably, if no message exists at the specified time, get the last offset.
 	ShiftTimestamp *int64 `json:"ShiftTimestamp,omitnil,omitempty" name:"ShiftTimestamp"`
 
 	// Position of the offset that needs to be reset. When `strategy` is 2, this field is required
@@ -5230,7 +5819,7 @@ type ModifyGroupOffsetsResponseParams struct {
 	// Returned result
 	Result *JgwOperateResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -5254,22 +5843,22 @@ type ModifyInstanceAttributesConfig struct {
 	// Automatic creation. true: enabled, false: not enabled
 	AutoCreateTopicEnable *bool `json:"AutoCreateTopicEnable,omitnil,omitempty" name:"AutoCreateTopicEnable"`
 
-	// Optional. If `auto.create.topic.enable` is set to `true` and this value is not set, 3 will be used by default
+	// Default number of partitions for a newly created topic. if AutoCreateTopicEnable is set to true and no value is set, defaults to 3.
 	DefaultNumPartitions *int64 `json:"DefaultNumPartitions,omitnil,omitempty" name:"DefaultNumPartitions"`
 
-	// If `auto.create.topic.enable` is set to `true` but this value is not set, 2 will be used by default
+	// Default number of replicas for a newly created topic. if AutoCreateTopicEnable is set to true and not specified, defaults to 2.
 	DefaultReplicationFactor *int64 `json:"DefaultReplicationFactor,omitnil,omitempty" name:"DefaultReplicationFactor"`
 }
 
 // Predefined struct for user
 type ModifyInstanceAttributesRequestParams struct {
-	// Instance ID
+	// ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Maximum retention period in minutes for instance log, which can be up to 30 days. 0 indicates not to enable the log retention period policy
+	// Maximum retention time of instance logs, in minutes, with a value range of 1min to 90 days.
 	MsgRetentionTime *int64 `json:"MsgRetentionTime,omitnil,omitempty" name:"MsgRetentionTime"`
 
-	// Instance name string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`)
+	// Specifies the Name of the ckafka cluster instance.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Instance configuration
@@ -5278,29 +5867,37 @@ type ModifyInstanceAttributesRequestParams struct {
 	// Dynamic message retention policy configuration
 	DynamicRetentionConfig *DynamicRetentionTime `json:"DynamicRetentionConfig,omitnil,omitempty" name:"DynamicRetentionConfig"`
 
-	// Modification of the rebalancing time after upgrade
+	// Specifies the execution time of a scheduled task for edition upgrade or configuration upgrade in Unix timestamp, accurate to the second.
 	RebalanceTime *int64 `json:"RebalanceTime,omitnil,omitempty" name:"RebalanceTime"`
 
-	// Public network bandwidth
+	// Public network bandwidth. minimum 3 Mbps. maximum 999 Mbps. only the pro edition supports filling in.
 	PublicNetwork *int64 `json:"PublicNetwork,omitnil,omitempty" name:"PublicNetwork"`
 
 	// Dynamic disk expansion policy configuration.
+	//
+	// Deprecated: DynamicDiskConfig is deprecated.
 	DynamicDiskConfig *DynamicDiskConfig `json:"DynamicDiskConfig,omitnil,omitempty" name:"DynamicDiskConfig"`
 
-	// The size of a single message in bytes at the instance level.
+	// Single message size at the instance level (unit: byte). value range: 1024 (excluding) to 12582912 (excluding).
 	MaxMessageByte *uint64 `json:"MaxMessageByte,omitnil,omitempty" name:"MaxMessageByte"`
+
+	// Whether to allow unsynchronized replicas to be elected as leader. valid values: 1 (enable), 0 (disable).
+	UncleanLeaderElectionEnable *int64 `json:"UncleanLeaderElectionEnable,omitnil,omitempty" name:"UncleanLeaderElectionEnable"`
+
+	// Instance deletion protection switch. 1: enabled; 0: disabled.
+	DeleteProtectionEnable *int64 `json:"DeleteProtectionEnable,omitnil,omitempty" name:"DeleteProtectionEnable"`
 }
 
 type ModifyInstanceAttributesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Maximum retention period in minutes for instance log, which can be up to 30 days. 0 indicates not to enable the log retention period policy
+	// Maximum retention time of instance logs, in minutes, with a value range of 1min to 90 days.
 	MsgRetentionTime *int64 `json:"MsgRetentionTime,omitnil,omitempty" name:"MsgRetentionTime"`
 
-	// Instance name string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`)
+	// Specifies the Name of the ckafka cluster instance.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Instance configuration
@@ -5309,17 +5906,23 @@ type ModifyInstanceAttributesRequest struct {
 	// Dynamic message retention policy configuration
 	DynamicRetentionConfig *DynamicRetentionTime `json:"DynamicRetentionConfig,omitnil,omitempty" name:"DynamicRetentionConfig"`
 
-	// Modification of the rebalancing time after upgrade
+	// Specifies the execution time of a scheduled task for edition upgrade or configuration upgrade in Unix timestamp, accurate to the second.
 	RebalanceTime *int64 `json:"RebalanceTime,omitnil,omitempty" name:"RebalanceTime"`
 
-	// Public network bandwidth
+	// Public network bandwidth. minimum 3 Mbps. maximum 999 Mbps. only the pro edition supports filling in.
 	PublicNetwork *int64 `json:"PublicNetwork,omitnil,omitempty" name:"PublicNetwork"`
 
 	// Dynamic disk expansion policy configuration.
 	DynamicDiskConfig *DynamicDiskConfig `json:"DynamicDiskConfig,omitnil,omitempty" name:"DynamicDiskConfig"`
 
-	// The size of a single message in bytes at the instance level.
+	// Single message size at the instance level (unit: byte). value range: 1024 (excluding) to 12582912 (excluding).
 	MaxMessageByte *uint64 `json:"MaxMessageByte,omitnil,omitempty" name:"MaxMessageByte"`
+
+	// Whether to allow unsynchronized replicas to be elected as leader. valid values: 1 (enable), 0 (disable).
+	UncleanLeaderElectionEnable *int64 `json:"UncleanLeaderElectionEnable,omitnil,omitempty" name:"UncleanLeaderElectionEnable"`
+
+	// Instance deletion protection switch. 1: enabled; 0: disabled.
+	DeleteProtectionEnable *int64 `json:"DeleteProtectionEnable,omitnil,omitempty" name:"DeleteProtectionEnable"`
 }
 
 func (r *ModifyInstanceAttributesRequest) ToJsonString() string {
@@ -5343,6 +5946,8 @@ func (r *ModifyInstanceAttributesRequest) FromJsonString(s string) error {
 	delete(f, "PublicNetwork")
 	delete(f, "DynamicDiskConfig")
 	delete(f, "MaxMessageByte")
+	delete(f, "UncleanLeaderElectionEnable")
+	delete(f, "DeleteProtectionEnable")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyInstanceAttributesRequest has unknown keys!", "")
 	}
@@ -5354,7 +5959,7 @@ type ModifyInstanceAttributesResponseParams struct {
 	// Returned result
 	Result *JgwOperateResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -5376,32 +5981,38 @@ func (r *ModifyInstanceAttributesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyInstancePreRequestParams struct {
-	// Instance name.
+	// ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Estimated disk capacity, which can be increased by increment.
+	// Specifies the disk capacity in GB. value range: 100 to 500000 with a step length of 100.
+	// Specification limits can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1
 	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// Estimated bandwidth, which can be increased by increment.
+	// Peak bandwidth in MB/s.
+	// Specifies the specification limits and corresponding step length through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1
 	BandWidth *int64 `json:"BandWidth,omitnil,omitempty" name:"BandWidth"`
 
-	// Estimated partition count, which can be increased by increment.
+	// Partition upper bound. maximum value of 40000. step length of 100.
+	// Specifies the specifications and limits that can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1
 	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
 }
 
 type ModifyInstancePreRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance name.
+	// ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Estimated disk capacity, which can be increased by increment.
+	// Specifies the disk capacity in GB. value range: 100 to 500000 with a step length of 100.
+	// Specification limits can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1
 	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// Estimated bandwidth, which can be increased by increment.
+	// Peak bandwidth in MB/s.
+	// Specifies the specification limits and corresponding step length through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1
 	BandWidth *int64 `json:"BandWidth,omitnil,omitempty" name:"BandWidth"`
 
-	// Estimated partition count, which can be increased by increment.
+	// Partition upper bound. maximum value of 40000. step length of 100.
+	// Specifies the specifications and limits that can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1
 	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
 }
 
@@ -5432,7 +6043,7 @@ type ModifyInstancePreResponseParams struct {
 	// Response structure of modifying the configurations of a prepaid instance.
 	Result *CreateInstancePreResp `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -5454,10 +6065,10 @@ func (r *ModifyInstancePreResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyPasswordRequestParams struct {
-	// Instance ID
+	// Instance Id. you can obtain it by calling the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Username
+	// Specifies the username, which can be obtained through the [DescribeUser](https://www.tencentcloud.comom/document/product/597/40855?from_cn_redirect=1) api.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Current user password
@@ -5470,10 +6081,10 @@ type ModifyPasswordRequestParams struct {
 type ModifyPasswordRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance Id. you can obtain it by calling the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Username
+	// Specifies the username, which can be obtained through the [DescribeUser](https://www.tencentcloud.comom/document/product/597/40855?from_cn_redirect=1) api.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Current user password
@@ -5510,7 +6121,7 @@ type ModifyPasswordResponseParams struct {
 	// Returned result
 	Result *JgwOperateResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -5532,10 +6143,10 @@ func (r *ModifyPasswordResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyTopicAttributesRequestParams struct {
-	// Instance ID.
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Topic name.
+	// Topic name
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
 	// Topic remarks string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
@@ -5553,11 +6164,11 @@ type ModifyTopicAttributesRequestParams struct {
 	// Message retention period in ms. The current minimum value is 60,000 ms.
 	RetentionMs *int64 `json:"RetentionMs,omitnil,omitempty" name:"RetentionMs"`
 
-	// Segment rolling duration in ms. The current minimum value is 86,400,000 ms.
-	SegmentMs *int64 `json:"SegmentMs,omitnil,omitempty" name:"SegmentMs"`
-
 	// Max message size in bytes. Max value: 8,388,608 bytes (8 MB).
 	MaxMessageBytes *int64 `json:"MaxMessageBytes,omitnil,omitempty" name:"MaxMessageBytes"`
+
+	// Duration of Segment shard scrolling in milliseconds. current min value is 86400000 ms.
+	SegmentMs *int64 `json:"SegmentMs,omitnil,omitempty" name:"SegmentMs"`
 
 	// Message deletion policy. Valid values: delete, compact
 	CleanUpPolicy *string `json:"CleanUpPolicy,omitnil,omitempty" name:"CleanUpPolicy"`
@@ -5568,7 +6179,7 @@ type ModifyTopicAttributesRequestParams struct {
 	// Preset ACL rule. `1`: enable, `0`: disable. Default value: `0`.
 	EnableAclRule *int64 `json:"EnableAclRule,omitnil,omitempty" name:"EnableAclRule"`
 
-	// Name of the preset ACL rule.
+	// ACL rule name.
 	AclRuleName *string `json:"AclRuleName,omitnil,omitempty" name:"AclRuleName"`
 
 	// Message retention file size in bytes, which is an optional parameter. Default value: -1. Currently, the min value that can be entered is 1,048,576 B.
@@ -5577,23 +6188,23 @@ type ModifyTopicAttributesRequestParams struct {
 	// Tag list.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Production throttling in MB/sec.
+	// Production traffic throttling in MB/s. set to -1 to disable throttling.
 	QuotaProducerByteRate *int64 `json:"QuotaProducerByteRate,omitnil,omitempty" name:"QuotaProducerByteRate"`
 
-	// Consumption throttling in MB/sec.
+	// Consumption traffic throttling in MB/s. set to -1 for unlimited consumption.
 	QuotaConsumerByteRate *int64 `json:"QuotaConsumerByteRate,omitnil,omitempty" name:"QuotaConsumerByteRate"`
 
-	// The number of topic replicas.
+	// Number of topic replicas. valid values: 1, 3.
 	ReplicaNum *int64 `json:"ReplicaNum,omitnil,omitempty" name:"ReplicaNum"`
 }
 
 type ModifyTopicAttributesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// The ckafka cluster instance Id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Topic name.
+	// Topic name
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
 	// Topic remarks string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
@@ -5611,11 +6222,11 @@ type ModifyTopicAttributesRequest struct {
 	// Message retention period in ms. The current minimum value is 60,000 ms.
 	RetentionMs *int64 `json:"RetentionMs,omitnil,omitempty" name:"RetentionMs"`
 
-	// Segment rolling duration in ms. The current minimum value is 86,400,000 ms.
-	SegmentMs *int64 `json:"SegmentMs,omitnil,omitempty" name:"SegmentMs"`
-
 	// Max message size in bytes. Max value: 8,388,608 bytes (8 MB).
 	MaxMessageBytes *int64 `json:"MaxMessageBytes,omitnil,omitempty" name:"MaxMessageBytes"`
+
+	// Duration of Segment shard scrolling in milliseconds. current min value is 86400000 ms.
+	SegmentMs *int64 `json:"SegmentMs,omitnil,omitempty" name:"SegmentMs"`
 
 	// Message deletion policy. Valid values: delete, compact
 	CleanUpPolicy *string `json:"CleanUpPolicy,omitnil,omitempty" name:"CleanUpPolicy"`
@@ -5626,7 +6237,7 @@ type ModifyTopicAttributesRequest struct {
 	// Preset ACL rule. `1`: enable, `0`: disable. Default value: `0`.
 	EnableAclRule *int64 `json:"EnableAclRule,omitnil,omitempty" name:"EnableAclRule"`
 
-	// Name of the preset ACL rule.
+	// ACL rule name.
 	AclRuleName *string `json:"AclRuleName,omitnil,omitempty" name:"AclRuleName"`
 
 	// Message retention file size in bytes, which is an optional parameter. Default value: -1. Currently, the min value that can be entered is 1,048,576 B.
@@ -5635,13 +6246,13 @@ type ModifyTopicAttributesRequest struct {
 	// Tag list.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Production throttling in MB/sec.
+	// Production traffic throttling in MB/s. set to -1 to disable throttling.
 	QuotaProducerByteRate *int64 `json:"QuotaProducerByteRate,omitnil,omitempty" name:"QuotaProducerByteRate"`
 
-	// Consumption throttling in MB/sec.
+	// Consumption traffic throttling in MB/s. set to -1 for unlimited consumption.
 	QuotaConsumerByteRate *int64 `json:"QuotaConsumerByteRate,omitnil,omitempty" name:"QuotaConsumerByteRate"`
 
-	// The number of topic replicas.
+	// Number of topic replicas. valid values: 1, 3.
 	ReplicaNum *int64 `json:"ReplicaNum,omitnil,omitempty" name:"ReplicaNum"`
 }
 
@@ -5664,8 +6275,8 @@ func (r *ModifyTopicAttributesRequest) FromJsonString(s string) error {
 	delete(f, "MinInsyncReplicas")
 	delete(f, "UncleanLeaderElectionEnable")
 	delete(f, "RetentionMs")
-	delete(f, "SegmentMs")
 	delete(f, "MaxMessageBytes")
+	delete(f, "SegmentMs")
 	delete(f, "CleanUpPolicy")
 	delete(f, "IpWhiteList")
 	delete(f, "EnableAclRule")
@@ -5683,10 +6294,10 @@ func (r *ModifyTopicAttributesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyTopicAttributesResponseParams struct {
-	// Returned result set
+	// Returned result.
 	Result *JgwOperateResponse `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -5707,11 +6318,10 @@ func (r *ModifyTopicAttributesResponse) FromJsonString(s string) error {
 }
 
 type OperateResponseData struct {
-	// FlowId11
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Flow ID.
 	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
-	// RouteIdDto Note: This field may return null, indicating that no valid values can be obtained.
+	// RouteIdDto
 	RouteDTO *RouteDTO `json:"RouteDTO,omitnil,omitempty" name:"RouteDTO"`
 }
 
@@ -5721,12 +6331,10 @@ type Partition struct {
 }
 
 type PartitionOffset struct {
-	// Partition, such as "0" or "1"
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Partition
 	Partition *string `json:"Partition,omitnil,omitempty" name:"Partition"`
 
-	// Offset, such as 100
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Specifies the offset.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
@@ -5756,24 +6364,19 @@ type Region struct {
 	// Area name
 	AreaName *string `json:"AreaName,omitnil,omitempty" name:"AreaName"`
 
-	// Region code
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Region code.
 	RegionCode *string `json:"RegionCode,omitnil,omitempty" name:"RegionCode"`
 
-	// Region code (v3)
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Region code (V3 version).
 	RegionCodeV3 *string `json:"RegionCodeV3,omitnil,omitempty" name:"RegionCodeV3"`
 
-	// NONE: no special models are supported by default.\nCVM: the CVM type is supported.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Specifies the default value does not support any special type instance type.
 	Support *string `json:"Support,omitnil,omitempty" name:"Support"`
 
-	// Whether IPv6 is supported. `0` indicates no, and `1` indicates yes.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Whether ipv6 is supported. 0: indicates no support. 1: indicates support.
 	Ipv6 *int64 `json:"Ipv6,omitnil,omitempty" name:"Ipv6"`
 
-	// Whether cross-AZ clusters are supported.`0` indicates no, and `1` indicates yes.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Whether cross-az is supported. valid values: 0 (unsupported), 1 (supported).
 	MultiZone *int64 `json:"MultiZone,omitnil,omitempty" name:"MultiZone"`
 }
 
@@ -5788,7 +6391,7 @@ type Route struct {
 	// Route ID
 	RouteId *int64 `json:"RouteId,omitnil,omitempty" name:"RouteId"`
 
-	// VIP network type (1: Public network TGW; 2: Classic network; 3: VPC; 4: Supporting network (IDC environment); 5: SSL public network access; 6: BM VPC; 7: Supporting network (CVM environment)).
+	// Specifies the network type of the route (3: vpc routing; 7: internal support route; 1: public network route).
 	VipType *int64 `json:"VipType,omitnil,omitempty" name:"VipType"`
 
 	// Virtual IP list
@@ -5802,38 +6405,87 @@ type Route struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DomainPort *int64 `json:"DomainPort,omitnil,omitempty" name:"DomainPort"`
 
-	// Timestamp
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Timestamp.
 	DeleteTimestamp *string `json:"DeleteTimestamp,omitnil,omitempty" name:"DeleteTimestamp"`
+
+	// Specifies the subnet Id.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Subnet *string `json:"Subnet,omitnil,omitempty" name:"Subnet"`
+
+	// Virtual IP list (1:1 broker node).
+	BrokerVipList []*VipEntity `json:"BrokerVipList,omitnil,omitempty" name:"BrokerVipList"`
+
+	// VPC Id. specifies the Id of the vpc.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Remarks
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Note *string `json:"Note,omitnil,omitempty" name:"Note"`
+
+	// Route status. 1: creating, 2: creation succeeded, 3: creation failed, 4: deleting, 6: deletion failed.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type RouteDTO struct {
-	// RouteId11 Note: This field may return null, indicating that no valid values can be obtained.
+	// Route ID
 	RouteId *int64 `json:"RouteId,omitnil,omitempty" name:"RouteId"`
 }
 
+type RouteFilter struct {
+	// Filters by name. currently supports security-group-id. filters by security group association.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Filter value. when the filter name is security-group-id, only supports transmission of one value.
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+
+	// Filter relationship. supports IN and NOT_IN. default is IN.
+	Relation *string `json:"Relation,omitnil,omitempty" name:"Relation"`
+}
+
 type RouteResponse struct {
-	// Route information list
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Route Information List
 	Routers []*Route `json:"Routers,omitnil,omitempty" name:"Routers"`
 }
 
 type SaleInfo struct {
-	// Manually set flag.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// The manually configured flag. valid values: true (sold-out), false (available).
 	Flag *bool `json:"Flag,omitnil,omitempty" name:"Flag"`
 
-	// CKafka version (v1.1.1/2.4.2/0.10.2）
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Specifies the ckafka version number (1.1.1/2.4.2/0.10.2).
 	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
 
-	// Whether it is Pro Edition or Standard Edition.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Pro edition, standard version flag.
 	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
-	// Whether it has been sold out. `true`: sold out.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Specifies whether the item is sold-out. valid values: true (sold-out).
 	SoldOut *bool `json:"SoldOut,omitnil,omitempty" name:"SoldOut"`
+}
+
+type SecurityGroupRoute struct {
+	// Specifies the routing information.
+	InstanceRoute *InstanceRoute `json:"InstanceRoute,omitnil,omitempty" name:"InstanceRoute"`
+
+	// Specifies the security group list to associate.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
+
+	// CKafka cluster instance name.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// Specifies the route vpcId.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Route vip.
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+}
+
+type SecurityGroupRouteResp struct {
+	// Total number of eligible security group routes.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Eligible security group route information list.
+	SecurityGroupRoutes []*SecurityGroupRoute `json:"SecurityGroupRoutes,omitnil,omitempty" name:"SecurityGroupRoutes"`
 }
 
 // Predefined struct for user
@@ -5880,7 +6532,7 @@ type SendMessageResponseParams struct {
 	// Message ID list.
 	MessageId []*string `json:"MessageId,omitnil,omitempty" name:"MessageId"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -5904,16 +6556,13 @@ type SubscribedInfo struct {
 	// Subscribed topic name
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// Subscribed partition
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Specifies the subscription partition.
 	Partition []*int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
 
-	// Partition offset information
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Specifies the partition offset information.
 	PartitionOffset []*PartitionOffset `json:"PartitionOffset,omitnil,omitempty" name:"PartitionOffset"`
 
-	// ID of the subscribed topic. 
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Subscribed topic ID.
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 }
 
@@ -5929,7 +6578,7 @@ type TaskStatusResponse struct {
 	// Task status. `0` (Successful), `1` (Failed), `2` ( Running)
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Output information Note: This field may return null, indicating that no valid values can be obtained.
+	// Output information.
 	Output *string `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -5949,11 +6598,10 @@ type TopicAttributesResponse struct {
 	// Topic ID
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Creation time
+	// Specifies the unix second-level timestamp of the creation time.
 	CreateTime *int64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Topic remarks
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Describes the topic remark.
 	Note *string `json:"Note,omitnil,omitempty" name:"Note"`
 
 	// Number of partitions
@@ -5971,20 +6619,16 @@ type TopicAttributesResponse struct {
 	// Partition details
 	Partitions []*TopicPartitionDO `json:"Partitions,omitnil,omitempty" name:"Partitions"`
 
-	// Switch of the preset ACL rule. `1`: enable, `0`: disable.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// ACL preset policy switch. valid values: 1 (on); 0 (off).
 	EnableAclRule *int64 `json:"EnableAclRule,omitnil,omitempty" name:"EnableAclRule"`
 
-	// Preset ACL rule list.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Preset policy list.
 	AclRuleList []*AclRule `json:"AclRuleList,omitnil,omitempty" name:"AclRuleList"`
 
-	// Traffic throttling policy in topic dimension.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// topic throttling policy.
 	QuotaConfig *InstanceQuotaConfigResp `json:"QuotaConfig,omitnil,omitempty" name:"QuotaConfig"`
 
 	// Number of replicas
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReplicaNum *int64 `json:"ReplicaNum,omitnil,omitempty" name:"ReplicaNum"`
 }
 
@@ -5992,17 +6636,16 @@ type TopicDetail struct {
 	// Topic name
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// Topic ID
+	// Topic Id.
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Number of partitions
 	PartitionNum *int64 `json:"PartitionNum,omitnil,omitempty" name:"PartitionNum"`
 
-	// Number of replicas
+	// Number of topic replicas. valid values: 1, 3.
 	ReplicaNum *int64 `json:"ReplicaNum,omitnil,omitempty" name:"ReplicaNum"`
 
-	// Remarks
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Remarks.
 	Note *string `json:"Note,omitnil,omitempty" name:"Note"`
 
 	// Creation time
@@ -6014,8 +6657,7 @@ type TopicDetail struct {
 	// Number of IPs in IP allowlist
 	IpWhiteListCount *int64 `json:"IpWhiteListCount,omitnil,omitempty" name:"IpWhiteListCount"`
 
-	// COS bucket for data backup: address of the destination COS bucket
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Data backup cos bucket. specifies the bucket address for archiving to cos.
 	ForwardCosBucket *string `json:"ForwardCosBucket,omitnil,omitempty" name:"ForwardCosBucket"`
 
 	// Status of data backup to COS. 1: not enabled, 0: enabled
@@ -6024,16 +6666,13 @@ type TopicDetail struct {
 	// Frequency of data backup to COS
 	ForwardInterval *int64 `json:"ForwardInterval,omitnil,omitempty" name:"ForwardInterval"`
 
-	// Advanced configuration
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Advanced configuration.
 	Config *Config `json:"Config,omitnil,omitempty" name:"Config"`
 
-	// Message retention time configuration (for recording the latest retention time)
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Message retention period configuration (used for dynamic configuration change records).
 	RetentionTimeConfig *TopicRetentionTimeConfigRsp `json:"RetentionTimeConfig,omitnil,omitempty" name:"RetentionTimeConfig"`
 
-	// `0`: normal, `1`: deleted, `2`: deleting
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// 0: normal. 1: deleted. 2: deleting.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Tag list
@@ -6042,8 +6681,7 @@ type TopicDetail struct {
 }
 
 type TopicDetailResponse struct {
-	// List of returned topic details
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// List of returned topic details.
 	TopicList []*TopicDetail `json:"TopicList,omitnil,omitempty" name:"TopicList"`
 
 	// Number of all eligible topic details
@@ -6063,20 +6701,16 @@ type TopicInSyncReplicaInfo struct {
 	// ISR
 	InSyncReplica *string `json:"InSyncReplica,omitnil,omitempty" name:"InSyncReplica"`
 
-	// Starting offset
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Start Offset.
 	BeginOffset *uint64 `json:"BeginOffset,omitnil,omitempty" name:"BeginOffset"`
 
-	// Ending offset
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// End Offset.
 	EndOffset *uint64 `json:"EndOffset,omitnil,omitempty" name:"EndOffset"`
 
-	// Number of messages
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Message count.
 	MessageCount *uint64 `json:"MessageCount,omitnil,omitempty" name:"MessageCount"`
 
-	// Unsynced replica set
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Unsynced replica.
 	OutOfSyncReplica *string `json:"OutOfSyncReplica,omitnil,omitempty" name:"OutOfSyncReplica"`
 }
 
@@ -6089,10 +6723,10 @@ type TopicInSyncReplicaResult struct {
 }
 
 type TopicPartitionDO struct {
-	// Partition ID
+	// Partition ID. specifies the Partition ID.
 	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
 
-	// Leader running status
+	// Leader running status. 0 means running normally.
 	LeaderStatus *int64 `json:"LeaderStatus,omitnil,omitempty" name:"LeaderStatus"`
 
 	// ISR quantity
@@ -6103,26 +6737,21 @@ type TopicPartitionDO struct {
 }
 
 type TopicResult struct {
-	// List of returned topic information
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// List of returned topic information.
 	TopicList []*Topic `json:"TopicList,omitnil,omitempty" name:"TopicList"`
 
-	// Number of eligible topics
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Number of eligible topics.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 }
 
 type TopicRetentionTimeConfigRsp struct {
-	// Expected value, i.e., the topic message retention time (min) configured
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Expected value, the message retention period (in minutes) set by user configuration.
 	Expect *int64 `json:"Expect,omitnil,omitempty" name:"Expect"`
 
-	// Current value (min), i.e., the retention time currently in effect, which may be dynamically adjusted
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Current value, which is the current effective value (may contain dynamic adjustment in minutes).
 	Current *int64 `json:"Current,omitnil,omitempty" name:"Current"`
 
-	// Last modified time
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Last modified time.
 	ModTimeStamp *int64 `json:"ModTimeStamp,omitnil,omitempty" name:"ModTimeStamp"`
 }
 
@@ -6133,12 +6762,10 @@ type TopicSubscribeGroup struct {
 	// Number of consumer group status
 	StatusCountInfo *string `json:"StatusCountInfo,omitnil,omitempty" name:"StatusCountInfo"`
 
-	// Consumer group information
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Consumer group information.
 	GroupsInfo []*GroupInfoResponse `json:"GroupsInfo,omitnil,omitempty" name:"GroupsInfo"`
 
-	// Whether a request is asynchronous. If there are fewer consumer groups in the instances, the result will be returned directly, and status code is 1. When there are many consumer groups in the instances, cache will be updated asynchronously. When status code is 0, grouping information will not be returned until cache update is completed and status code becomes 1.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Indicates whether the request is asynchronous. instances with fewer groups will return results directly with Status as 1. when there are more groups, the cache will be updated asynchronously. no group information will be returned when Status is 0 until the update is complete and results are returned with Status as 1.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
@@ -6157,8 +6784,7 @@ type User struct {
 }
 
 type UserResponse struct {
-	// List of eligible users
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Specifies the eligible users list.
 	Users []*User `json:"Users,omitnil,omitempty" name:"Users"`
 
 	// Total number of eligible users
@@ -6174,33 +6800,37 @@ type VipEntity struct {
 }
 
 type ZoneInfo struct {
-	// Zone ID
+	// Availability zone
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Whether it is an internal application.
 	IsInternalApp *int64 `json:"IsInternalApp,omitnil,omitempty" name:"IsInternalApp"`
 
-	// Application ID
+	// Application identifier
 	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
-	// Flag
+	// Indicates whether the AZ is sold out. true indicates sold out. false indicates not sold out.
 	Flag *bool `json:"Flag,omitnil,omitempty" name:"Flag"`
 
-	// Zone name
+	// Availability zone name.
 	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
-	// Zone status
+	// Availability zone status. enumerates example: 3: enable, 4: disable. availability zone status is subject to SoldOut.
 	ZoneStatus *int64 `json:"ZoneStatus,omitnil,omitempty" name:"ZoneStatus"`
 
 	// Extra flag
+	//
+	// Deprecated: Exflag is deprecated.
 	Exflag *string `json:"Exflag,omitnil,omitempty" name:"Exflag"`
 
-	// JSON object. The key is the model. The value `true` means “sold out”, and `false` means “not sold out”.
+	// Specifies whether the item is sold-out. valid values: true (sold-out), false (not sold out).
 	SoldOut *string `json:"SoldOut,omitnil,omitempty" name:"SoldOut"`
 
-	// Information on whether Standard Edition has been sold out.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Specifies the sell-out information of the standard version.
 	SalesInfo []*SaleInfo `json:"SalesInfo,omitnil,omitempty" name:"SalesInfo"`
+
+	// Additional flag.
+	ExtraFlag *string `json:"ExtraFlag,omitnil,omitempty" name:"ExtraFlag"`
 }
 
 type ZoneResponse struct {
@@ -6219,31 +6849,36 @@ type ZoneResponse struct {
 	// Pay-as-you-go unit message price
 	MessagePrice *Price `json:"MessagePrice,omitnil,omitempty" name:"MessagePrice"`
 
-	// Cluster information dedicated to a user
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Specifies the user-exclusive cluster info.
 	ClusterInfo []*ClusterInfo `json:"ClusterInfo,omitnil,omitempty" name:"ClusterInfo"`
 
-	// Purchase of Standard Edition configurations
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Purchase the standard version configuration.
 	Standard *string `json:"Standard,omitnil,omitempty" name:"Standard"`
 
-	// Purchase of Standard S2 Edition configurations
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Purchase the standard version S2 configuration.
 	StandardS2 *string `json:"StandardS2,omitnil,omitempty" name:"StandardS2"`
 
-	// Purchase of Pro Edition configurations
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Specifies the configuration for purchasing the professional edition.
 	Profession *string `json:"Profession,omitnil,omitempty" name:"Profession"`
 
-	// Purchase of Physical Dedicated Edition configurations
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Purchase physical dedicated edition configuration.
 	Physical *string `json:"Physical,omitnil,omitempty" name:"Physical"`
 
-	// Public network bandwidth.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Public network bandwidth. minimum 3 Mbps. maximum 999 Mbps. only the pro edition supports filling in. abandoned, meaningless.
 	PublicNetwork *string `json:"PublicNetwork,omitnil,omitempty" name:"PublicNetwork"`
 
-	// Public network bandwidth configuration.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Configures the public network bandwidth.
 	PublicNetworkLimit *string `json:"PublicNetworkLimit,omitnil,omitempty" name:"PublicNetworkLimit"`
+
+	// Request ID.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+
+	// Pagination Offset
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Pagination Limit
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Mandatory. input tag.
+	ForceCheckTag *bool `json:"ForceCheckTag,omitnil,omitempty" name:"ForceCheckTag"`
 }

@@ -459,7 +459,7 @@ func NewCreateDatahubTopicResponse() (response *CreateDatahubTopicResponse) {
 }
 
 // CreateDatahubTopic
-// This API is used to create a DataHub topic.
+// This API is used to create a DIP topic.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -483,7 +483,7 @@ func (c *Client) CreateDatahubTopic(request *CreateDatahubTopicRequest) (respons
 }
 
 // CreateDatahubTopic
-// This API is used to create a DataHub topic.
+// This API is used to create a DIP topic.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -519,27 +519,27 @@ func (c *Client) CreateDatahubTopicWithContext(ctx context.Context, request *Cre
     return
 }
 
-func NewCreateInstancePostRequest() (request *CreateInstancePostRequest) {
-    request = &CreateInstancePostRequest{
+func NewCreateInstancePreRequest() (request *CreateInstancePreRequest) {
+    request = &CreateInstancePreRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
     
-    request.Init().WithApiInfo("ckafka", APIVersion, "CreateInstancePost")
+    request.Init().WithApiInfo("ckafka", APIVersion, "CreateInstancePre")
     
     
     return
 }
 
-func NewCreateInstancePostResponse() (response *CreateInstancePostResponse) {
-    response = &CreateInstancePostResponse{
+func NewCreateInstancePreResponse() (response *CreateInstancePreResponse) {
+    response = &CreateInstancePreResponse{
         BaseResponse: &tchttp.BaseResponse{},
     } 
     return
 
 }
 
-// CreateInstancePost
-// This API is used to create a pay-as-you-go instance.  It will be deprecated in future versions. We recommend that you use the `CreatePostPaidInstance` API instead.  You can call this API via SDK or the TencentCloud API console to create a pay-as-you-go CKafka instance,  which is an alternate option for making a purchase in the console.
+// CreateInstancePre
+// This API is used to create prepaid annual and monthly instances. It only supports creating Pro Edition instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -553,16 +553,16 @@ func NewCreateInstancePostResponse() (response *CreateInstancePostResponse) {
 //  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
 //  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
-func (c *Client) CreateInstancePost(request *CreateInstancePostRequest) (response *CreateInstancePostResponse, err error) {
-    return c.CreateInstancePostWithContext(context.Background(), request)
+func (c *Client) CreateInstancePre(request *CreateInstancePreRequest) (response *CreateInstancePreResponse, err error) {
+    return c.CreateInstancePreWithContext(context.Background(), request)
 }
 
-// CreateInstancePost
-// This API is used to create a pay-as-you-go instance.  It will be deprecated in future versions. We recommend that you use the `CreatePostPaidInstance` API instead.  You can call this API via SDK or the TencentCloud API console to create a pay-as-you-go CKafka instance,  which is an alternate option for making a purchase in the console.
+// CreateInstancePre
+// This API is used to create prepaid annual and monthly instances. It only supports creating Pro Edition instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -576,23 +576,23 @@ func (c *Client) CreateInstancePost(request *CreateInstancePostRequest) (respons
 //  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
 //  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
-func (c *Client) CreateInstancePostWithContext(ctx context.Context, request *CreateInstancePostRequest) (response *CreateInstancePostResponse, err error) {
+func (c *Client) CreateInstancePreWithContext(ctx context.Context, request *CreateInstancePreRequest) (response *CreateInstancePreResponse, err error) {
     if request == nil {
-        request = NewCreateInstancePostRequest()
+        request = NewCreateInstancePreRequest()
     }
-    c.InitBaseRequest(&request.BaseRequest, "ckafka", APIVersion, "CreateInstancePost")
+    c.InitBaseRequest(&request.BaseRequest, "ckafka", APIVersion, "CreateInstancePre")
     
     if c.GetCredential() == nil {
-        return nil, errors.New("CreateInstancePost require credential")
+        return nil, errors.New("CreateInstancePre require credential")
     }
 
     request.SetContext(ctx)
     
-    response = NewCreateInstancePostResponse()
+    response = NewCreateInstancePreResponse()
     err = c.Send(request, response)
     return
 }
@@ -753,6 +753,90 @@ func (c *Client) CreatePostPaidInstanceWithContext(ctx context.Context, request 
     return
 }
 
+func NewCreateRouteRequest() (request *CreateRouteRequest) {
+    request = &CreateRouteRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ckafka", APIVersion, "CreateRoute")
+    
+    
+    return
+}
+
+func NewCreateRouteResponse() (response *CreateRouteResponse) {
+    response = &CreateRouteResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateRoute
+// This API is used to add instance routes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
+//  INVALIDPARAMETERVALUE_SUBNETIDINVALID = "InvalidParameterValue.SubnetIdInvalid"
+//  INVALIDPARAMETERVALUE_SUBNETNOTBELONGTOZONE = "InvalidParameterValue.SubnetNotBelongToZone"
+//  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  LIMITEXCEEDED_ROUTEOVERLIMIT = "LimitExceeded.RouteOverLimit"
+//  LIMITEXCEEDED_ROUTESASLOVERLIMIT = "LimitExceeded.RouteSASLOverLimit"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
+//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
+func (c *Client) CreateRoute(request *CreateRouteRequest) (response *CreateRouteResponse, err error) {
+    return c.CreateRouteWithContext(context.Background(), request)
+}
+
+// CreateRoute
+// This API is used to add instance routes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
+//  INVALIDPARAMETERVALUE_SUBNETIDINVALID = "InvalidParameterValue.SubnetIdInvalid"
+//  INVALIDPARAMETERVALUE_SUBNETNOTBELONGTOZONE = "InvalidParameterValue.SubnetNotBelongToZone"
+//  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  LIMITEXCEEDED_ROUTEOVERLIMIT = "LimitExceeded.RouteOverLimit"
+//  LIMITEXCEEDED_ROUTESASLOVERLIMIT = "LimitExceeded.RouteSASLOverLimit"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
+//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
+func (c *Client) CreateRouteWithContext(ctx context.Context, request *CreateRouteRequest) (response *CreateRouteResponse, err error) {
+    if request == nil {
+        request = NewCreateRouteRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ckafka", APIVersion, "CreateRoute")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateRoute require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateRouteResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateTopicRequest() (request *CreateTopicRequest) {
     request = &CreateTopicRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -783,6 +867,7 @@ func NewCreateTopicResponse() (response *CreateTopicResponse) {
 //  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
 //  INVALIDPARAMETERVALUE_SUBNETIDINVALID = "InvalidParameterValue.SubnetIdInvalid"
 //  INVALIDPARAMETERVALUE_SUBNETNOTBELONGTOZONE = "InvalidParameterValue.SubnetNotBelongToZone"
+//  INVALIDPARAMETERVALUE_TOPICNAMEALREADYEXIST = "InvalidParameterValue.TopicNameAlreadyExist"
 //  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
 //  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
@@ -807,6 +892,7 @@ func (c *Client) CreateTopic(request *CreateTopicRequest) (response *CreateTopic
 //  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
 //  INVALIDPARAMETERVALUE_SUBNETIDINVALID = "InvalidParameterValue.SubnetIdInvalid"
 //  INVALIDPARAMETERVALUE_SUBNETNOTBELONGTOZONE = "InvalidParameterValue.SubnetNotBelongToZone"
+//  INVALIDPARAMETERVALUE_TOPICNAMEALREADYEXIST = "InvalidParameterValue.TopicNameAlreadyExist"
 //  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
 //  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
@@ -1061,6 +1147,82 @@ func (c *Client) DeleteAclWithContext(ctx context.Context, request *DeleteAclReq
     return
 }
 
+func NewDeleteInstancePostRequest() (request *DeleteInstancePostRequest) {
+    request = &DeleteInstancePostRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ckafka", APIVersion, "DeleteInstancePost")
+    
+    
+    return
+}
+
+func NewDeleteInstancePostResponse() (response *DeleteInstancePostResponse) {
+    response = &DeleteInstancePostResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteInstancePost
+// This API is used to delete post-payment instances. It directly performs instance termination by calling API deletion without associating connectors and tasks in pre-check.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
+//  INVALIDPARAMETERVALUE_SUBNETIDINVALID = "InvalidParameterValue.SubnetIdInvalid"
+//  INVALIDPARAMETERVALUE_SUBNETNOTBELONGTOZONE = "InvalidParameterValue.SubnetNotBelongToZone"
+//  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
+//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
+func (c *Client) DeleteInstancePost(request *DeleteInstancePostRequest) (response *DeleteInstancePostResponse, err error) {
+    return c.DeleteInstancePostWithContext(context.Background(), request)
+}
+
+// DeleteInstancePost
+// This API is used to delete post-payment instances. It directly performs instance termination by calling API deletion without associating connectors and tasks in pre-check.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
+//  INVALIDPARAMETERVALUE_SUBNETIDINVALID = "InvalidParameterValue.SubnetIdInvalid"
+//  INVALIDPARAMETERVALUE_SUBNETNOTBELONGTOZONE = "InvalidParameterValue.SubnetNotBelongToZone"
+//  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
+//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
+func (c *Client) DeleteInstancePostWithContext(ctx context.Context, request *DeleteInstancePostRequest) (response *DeleteInstancePostResponse, err error) {
+    if request == nil {
+        request = NewDeleteInstancePostRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ckafka", APIVersion, "DeleteInstancePost")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteInstancePost require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteInstancePostResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteInstancePreRequest() (request *DeleteInstancePreRequest) {
     request = &DeleteInstancePreRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1081,7 +1243,7 @@ func NewDeleteInstancePreResponse() (response *DeleteInstancePreResponse) {
 }
 
 // DeleteInstancePre
-// This API is used to delete a monthly subscribed (prepaid) instance.
+// This API is used to delete prepaid instances. It performs isolation and deletion actions on the instance. After successful execution, the instance will be directly deleted and terminated. By calling API deletion, it directly performs instance termination without associating connectors and tasks in pre-check.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1091,7 +1253,7 @@ func (c *Client) DeleteInstancePre(request *DeleteInstancePreRequest) (response 
 }
 
 // DeleteInstancePre
-// This API is used to delete a monthly subscribed (prepaid) instance.
+// This API is used to delete prepaid instances. It performs isolation and deletion actions on the instance. After successful execution, the instance will be directly deleted and terminated. By calling API deletion, it directly performs instance termination without associating connectors and tasks in pre-check.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1289,6 +1451,7 @@ func NewDeleteTopicResponse() (response *DeleteTopicResponse) {
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
+//  UNSUPPORTEDOPERATION_FREQUENCYTOPICDELETEOPERATE = "UnsupportedOperation.FrequencyTopicDeleteOperate"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DeleteTopic(request *DeleteTopicRequest) (response *DeleteTopicResponse, err error) {
     return c.DeleteTopicWithContext(context.Background(), request)
@@ -1313,6 +1476,7 @@ func (c *Client) DeleteTopic(request *DeleteTopicRequest) (response *DeleteTopic
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
+//  UNSUPPORTEDOPERATION_FREQUENCYTOPICDELETEOPERATE = "UnsupportedOperation.FrequencyTopicDeleteOperate"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DeleteTopicWithContext(ctx context.Context, request *DeleteTopicRequest) (response *DeleteTopicResponse, err error) {
     if request == nil {
@@ -1863,6 +2027,68 @@ func (c *Client) DescribeConsumerGroupWithContext(ctx context.Context, request *
     return
 }
 
+func NewDescribeCvmInfoRequest() (request *DescribeCvmInfoRequest) {
+    request = &DescribeCvmInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ckafka", APIVersion, "DescribeCvmInfo")
+    
+    
+    return
+}
+
+func NewDescribeCvmInfoResponse() (response *DescribeCvmInfoResponse) {
+    response = &DescribeCvmInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCvmInfo
+// This API is used to get instance information corresponding to backend CVM, including cvmId and ip. It is for Pro Edition, while Standard Edition returns empty data.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
+//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
+func (c *Client) DescribeCvmInfo(request *DescribeCvmInfoRequest) (response *DescribeCvmInfoResponse, err error) {
+    return c.DescribeCvmInfoWithContext(context.Background(), request)
+}
+
+// DescribeCvmInfo
+// This API is used to get instance information corresponding to backend CVM, including cvmId and ip. It is for Pro Edition, while Standard Edition returns empty data.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
+//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
+func (c *Client) DescribeCvmInfoWithContext(ctx context.Context, request *DescribeCvmInfoRequest) (response *DescribeCvmInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeCvmInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ckafka", APIVersion, "DescribeCvmInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCvmInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCvmInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDatahubTopicRequest() (request *DescribeDatahubTopicRequest) {
     request = &DescribeDatahubTopicRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1883,7 +2109,7 @@ func NewDescribeDatahubTopicResponse() (response *DescribeDatahubTopicResponse) 
 }
 
 // DescribeDatahubTopic
-// This API is used to get the DataHub topic attributes.
+// This API is used to retrieve DIP topic attributes.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1906,7 +2132,7 @@ func (c *Client) DescribeDatahubTopic(request *DescribeDatahubTopicRequest) (res
 }
 
 // DescribeDatahubTopic
-// This API is used to get the DataHub topic attributes.
+// This API is used to retrieve DIP topic attributes.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2267,7 +2493,7 @@ func NewDescribeInstanceAttributesResponse() (response *DescribeInstanceAttribut
 }
 
 // DescribeInstanceAttributes
-// This API is used to get instance attributes. 
+// This API is used to obtain instance attributes.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2280,6 +2506,7 @@ func NewDescribeInstanceAttributesResponse() (response *DescribeInstanceAttribut
 //  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
 //  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
@@ -2290,7 +2517,7 @@ func (c *Client) DescribeInstanceAttributes(request *DescribeInstanceAttributesR
 }
 
 // DescribeInstanceAttributes
-// This API is used to get instance attributes. 
+// This API is used to obtain instance attributes.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2303,6 +2530,7 @@ func (c *Client) DescribeInstanceAttributes(request *DescribeInstanceAttributesR
 //  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
 //  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
@@ -2345,7 +2573,7 @@ func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
 }
 
 // DescribeInstances
-// This API is used to get the list of CKafka instances under a user account.
+// This API is used to search for a list of TDMQ CKafka instances under a user account.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2364,7 +2592,7 @@ func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response 
 }
 
 // DescribeInstances
-// This API is used to get the list of CKafka instances under a user account.
+// This API is used to search for a list of TDMQ CKafka instances under a user account.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2582,6 +2810,7 @@ func NewDescribeRouteResponse() (response *DescribeRouteResponse) {
 //  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
 //  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
@@ -2605,6 +2834,7 @@ func (c *Client) DescribeRoute(request *DescribeRouteRequest) (response *Describ
 //  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
 //  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
@@ -2623,6 +2853,66 @@ func (c *Client) DescribeRouteWithContext(ctx context.Context, request *Describe
     request.SetContext(ctx)
     
     response = NewDescribeRouteResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSecurityGroupRoutesRequest() (request *DescribeSecurityGroupRoutesRequest) {
+    request = &DescribeSecurityGroupRoutesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ckafka", APIVersion, "DescribeSecurityGroupRoutes")
+    
+    
+    return
+}
+
+func NewDescribeSecurityGroupRoutesResponse() (response *DescribeSecurityGroupRoutesResponse) {
+    response = &DescribeSecurityGroupRoutesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSecurityGroupRoutes
+// This API is used to retrieve the security group route information list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDFILTER = "InvalidFilter"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeSecurityGroupRoutes(request *DescribeSecurityGroupRoutesRequest) (response *DescribeSecurityGroupRoutesResponse, err error) {
+    return c.DescribeSecurityGroupRoutesWithContext(context.Background(), request)
+}
+
+// DescribeSecurityGroupRoutes
+// This API is used to retrieve the security group route information list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDFILTER = "InvalidFilter"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeSecurityGroupRoutesWithContext(ctx context.Context, request *DescribeSecurityGroupRoutesRequest) (response *DescribeSecurityGroupRoutesResponse, err error) {
+    if request == nil {
+        request = NewDescribeSecurityGroupRoutesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ckafka", APIVersion, "DescribeSecurityGroupRoutes")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSecurityGroupRoutes require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSecurityGroupRoutesResponse()
     err = c.Send(request, response)
     return
 }
@@ -2805,7 +3095,7 @@ func NewDescribeTopicAttributesResponse() (response *DescribeTopicAttributesResp
 }
 
 // DescribeTopicAttributes
-// This API is used to get topic attributes.
+// This API is used to retrieve topic attributes.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2828,7 +3118,7 @@ func (c *Client) DescribeTopicAttributes(request *DescribeTopicAttributesRequest
 }
 
 // DescribeTopicAttributes
-// This API is used to get topic attributes.
+// This API is used to retrieve topic attributes.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3139,6 +3429,74 @@ func (c *Client) DescribeTopicSyncReplicaWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribeTypeInstancesRequest() (request *DescribeTypeInstancesRequest) {
+    request = &DescribeTypeInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ckafka", APIVersion, "DescribeTypeInstances")
+    
+    
+    return
+}
+
+func NewDescribeTypeInstancesResponse() (response *DescribeTypeInstancesResponse) {
+    response = &DescribeTypeInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTypeInstances
+// This API is used to search for a list of TDMQ CKafka instances of the specified type under a user account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
+//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
+func (c *Client) DescribeTypeInstances(request *DescribeTypeInstancesRequest) (response *DescribeTypeInstancesResponse, err error) {
+    return c.DescribeTypeInstancesWithContext(context.Background(), request)
+}
+
+// DescribeTypeInstances
+// This API is used to search for a list of TDMQ CKafka instances of the specified type under a user account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
+//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
+func (c *Client) DescribeTypeInstancesWithContext(ctx context.Context, request *DescribeTypeInstancesRequest) (response *DescribeTypeInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeTypeInstancesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ckafka", APIVersion, "DescribeTypeInstances")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTypeInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTypeInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeUserRequest() (request *DescribeUserRequest) {
     request = &DescribeUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3317,6 +3675,58 @@ func (c *Client) FetchMessageListByOffsetWithContext(ctx context.Context, reques
     return
 }
 
+func NewFetchMessageListByTimestampRequest() (request *FetchMessageListByTimestampRequest) {
+    request = &FetchMessageListByTimestampRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ckafka", APIVersion, "FetchMessageListByTimestamp")
+    
+    
+    return
+}
+
+func NewFetchMessageListByTimestampResponse() (response *FetchMessageListByTimestampResponse) {
+    response = &FetchMessageListByTimestampResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// FetchMessageListByTimestamp
+// This API is used to query a message list by timestamp.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+func (c *Client) FetchMessageListByTimestamp(request *FetchMessageListByTimestampRequest) (response *FetchMessageListByTimestampResponse, err error) {
+    return c.FetchMessageListByTimestampWithContext(context.Background(), request)
+}
+
+// FetchMessageListByTimestamp
+// This API is used to query a message list by timestamp.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+func (c *Client) FetchMessageListByTimestampWithContext(ctx context.Context, request *FetchMessageListByTimestampRequest) (response *FetchMessageListByTimestampResponse, err error) {
+    if request == nil {
+        request = NewFetchMessageListByTimestampRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ckafka", APIVersion, "FetchMessageListByTimestamp")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("FetchMessageListByTimestamp require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewFetchMessageListByTimestampResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewInquireCkafkaPriceRequest() (request *InquireCkafkaPriceRequest) {
     request = &InquireCkafkaPriceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3397,7 +3807,7 @@ func NewModifyAclRuleResponse() (response *ModifyAclRuleResponse) {
 }
 
 // ModifyAclRule
-// This API is used to modify an ACL policy, and currently only supports specifying whether to apply the preset rule to new topics.
+// This API is used to modify ACL policy, currently only support whether to apply preset rules to newly-added topics.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -3410,7 +3820,7 @@ func (c *Client) ModifyAclRule(request *ModifyAclRuleRequest) (response *ModifyA
 }
 
 // ModifyAclRule
-// This API is used to modify an ACL policy, and currently only supports specifying whether to apply the preset rule to new topics.
+// This API is used to modify ACL policy, currently only support whether to apply preset rules to newly-added topics.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -3455,7 +3865,7 @@ func NewModifyDatahubTopicResponse() (response *ModifyDatahubTopicResponse) {
 }
 
 // ModifyDatahubTopic
-// This API is used to modify the DataHub topic attributes.
+// This API is used to modify DIP topic attributes.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3477,7 +3887,7 @@ func (c *Client) ModifyDatahubTopic(request *ModifyDatahubTopicRequest) (respons
 }
 
 // ModifyDatahubTopic
-// This API is used to modify the DataHub topic attributes.
+// This API is used to modify DIP topic attributes.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3685,7 +4095,7 @@ func NewModifyInstancePreResponse() (response *ModifyInstancePreResponse) {
 }
 
 // ModifyInstancePre
-// This API is used to change the configurations of a prepaid instance, such as disk capacity and bandwidth.
+// This API is used to change the configuration of prepaid instances, adjust disks, modify bandwidth, and manage partitions.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3706,7 +4116,7 @@ func (c *Client) ModifyInstancePre(request *ModifyInstancePreRequest) (response 
 }
 
 // ModifyInstancePre
-// This API is used to change the configurations of a prepaid instance, such as disk capacity and bandwidth.
+// This API is used to change the configuration of prepaid instances, adjust disks, modify bandwidth, and manage partitions.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

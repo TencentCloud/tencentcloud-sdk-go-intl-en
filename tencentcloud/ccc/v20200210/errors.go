@@ -17,6 +17,9 @@ package v20200210
 const (
 	// error codes for specific actions
 
+	// Operation failed.
+	FAILEDOPERATION = "FailedOperation"
+
 	// No available AI concurrency licenses. please proceed to purchase on the console.
 	FAILEDOPERATION_AICONCURRENTNOPACKAGE = "FailedOperation.AIConcurrentNoPackage"
 

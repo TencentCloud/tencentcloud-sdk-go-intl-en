@@ -29,6 +29,9 @@ const (
 	// Internal error.
 	INTERNALERROR = "InternalError"
 
+	// Invalid Filter
+	INVALIDFILTER = "InvalidFilter"
+
 	// Invalid parameter.
 	INVALIDPARAMETER = "InvalidParameter"
 
@@ -53,6 +56,9 @@ const (
 	// The subnet is not in the zone.
 	INVALIDPARAMETERVALUE_SUBNETNOTBELONGTOZONE = "InvalidParameterValue.SubnetNotBelongToZone"
 
+	// Topic name already exists.
+	INVALIDPARAMETERVALUE_TOPICNAMEALREADYEXIST = "InvalidParameterValue.TopicNameAlreadyExist"
+
 	// Invalid VPC ID.
 	INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
 
@@ -64,6 +70,12 @@ const (
 
 	// The quota limit has been reached.
 	LIMITEXCEEDED = "LimitExceeded"
+
+	// The number of routes exceeds the limit.
+	LIMITEXCEEDED_ROUTEOVERLIMIT = "LimitExceeded.RouteOverLimit"
+
+	// SASL route exceeds the limit.
+	LIMITEXCEEDED_ROUTESASLOVERLIMIT = "LimitExceeded.RouteSASLOverLimit"
 
 	// Missing parameter
 	MISSINGPARAMETER = "MissingParameter"
@@ -79,6 +91,9 @@ const (
 
 	// The resource is occupied.
 	RESOURCEINUSE = "ResourceInUse"
+
+	// Insufficient resources.
+	RESOURCEINSUFFICIENT = "ResourceInsufficient"
 
 	// The resource does not exist.
 	RESOURCENOTFOUND = "ResourceNotFound"
@@ -100,6 +115,9 @@ const (
 
 	// The batch instance deletion limit is reached.
 	UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
+
+	// Create Topic upon success. the Topic can be deleted after 60s.
+	UNSUPPORTEDOPERATION_FREQUENCYTOPICDELETEOPERATE = "UnsupportedOperation.FrequencyTopicDeleteOperate"
 
 	// Oss rejected the operation.
 	UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"

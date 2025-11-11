@@ -1507,6 +1507,62 @@ func (c *Client) DeleteStaffWithContext(ctx context.Context, request *DeleteStaf
     return
 }
 
+func NewDescribeAIAgentInfoListRequest() (request *DescribeAIAgentInfoListRequest) {
+    request = &DescribeAIAgentInfoListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "DescribeAIAgentInfoList")
+    
+    
+    return
+}
+
+func NewDescribeAIAgentInfoListResponse() (response *DescribeAIAgentInfoListResponse) {
+    response = &DescribeAIAgentInfoListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAIAgentInfoList
+// This API is used to get the list of Intelligent Agents.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INSTANCENOTEXIST = "InvalidParameter.InstanceNotExist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+func (c *Client) DescribeAIAgentInfoList(request *DescribeAIAgentInfoListRequest) (response *DescribeAIAgentInfoListResponse, err error) {
+    return c.DescribeAIAgentInfoListWithContext(context.Background(), request)
+}
+
+// DescribeAIAgentInfoList
+// This API is used to get the list of Intelligent Agents.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INSTANCENOTEXIST = "InvalidParameter.InstanceNotExist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+func (c *Client) DescribeAIAgentInfoListWithContext(ctx context.Context, request *DescribeAIAgentInfoListRequest) (response *DescribeAIAgentInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeAIAgentInfoListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "DescribeAIAgentInfoList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAIAgentInfoList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAIAgentInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAIAnalysisResultRequest() (request *DescribeAIAnalysisResultRequest) {
     request = &DescribeAIAnalysisResultRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3561,6 +3617,62 @@ func (c *Client) ResumePredictiveDialingCampaignWithContext(ctx context.Context,
     request.SetContext(ctx)
     
     response = NewResumePredictiveDialingCampaignResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSetStaffStatusRequest() (request *SetStaffStatusRequest) {
+    request = &SetStaffStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "SetStaffStatus")
+    
+    
+    return
+}
+
+func NewSetStaffStatusResponse() (response *SetStaffStatusResponse) {
+    response = &SetStaffStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SetStaffStatus
+// This API is used to set staff status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) SetStaffStatus(request *SetStaffStatusRequest) (response *SetStaffStatusResponse, err error) {
+    return c.SetStaffStatusWithContext(context.Background(), request)
+}
+
+// SetStaffStatus
+// This API is used to set staff status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) SetStaffStatusWithContext(ctx context.Context, request *SetStaffStatusRequest) (response *SetStaffStatusResponse, err error) {
+    if request == nil {
+        request = NewSetStaffStatusRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "SetStaffStatus")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetStaffStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSetStaffStatusResponse()
     err = c.Send(request, response)
     return
 }

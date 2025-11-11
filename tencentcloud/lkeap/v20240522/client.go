@@ -373,6 +373,74 @@ func (c *Client) QueryRewriteWithContext(ctx context.Context, request *QueryRewr
     return
 }
 
+func NewReconstructDocumentSSERequest() (request *ReconstructDocumentSSERequest) {
+    request = &ReconstructDocumentSSERequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lkeap", APIVersion, "ReconstructDocumentSSE")
+    
+    
+    return
+}
+
+func NewReconstructDocumentSSEResponse() (response *ReconstructDocumentSSEResponse) {
+    response = &ReconstructDocumentSSEResponse{} 
+    return
+
+}
+
+// ReconstructDocumentSSE
+// This API is used for quasi-real-time document parsing, using HTTP SSE protocol for communication.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NONSUPPORTPARSE = "FailedOperation.NonsupportParse"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  FAILEDOPERATION_UPLOADRESULTFILEFAILED = "FailedOperation.UploadResultFileFailed"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_EXCEEDEDMAXPAGESERROR = "LimitExceeded.ExceededMaxPagesError"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) ReconstructDocumentSSE(request *ReconstructDocumentSSERequest) (response *ReconstructDocumentSSEResponse, err error) {
+    return c.ReconstructDocumentSSEWithContext(context.Background(), request)
+}
+
+// ReconstructDocumentSSE
+// This API is used for quasi-real-time document parsing, using HTTP SSE protocol for communication.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NONSUPPORTPARSE = "FailedOperation.NonsupportParse"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  FAILEDOPERATION_UPLOADRESULTFILEFAILED = "FailedOperation.UploadResultFileFailed"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_EXCEEDEDMAXPAGESERROR = "LimitExceeded.ExceededMaxPagesError"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) ReconstructDocumentSSEWithContext(ctx context.Context, request *ReconstructDocumentSSERequest) (response *ReconstructDocumentSSEResponse, err error) {
+    if request == nil {
+        request = NewReconstructDocumentSSERequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "lkeap", APIVersion, "ReconstructDocumentSSE")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ReconstructDocumentSSE require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewReconstructDocumentSSEResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRunRerankRequest() (request *RunRerankRequest) {
     request = &RunRerankRequest{
         BaseRequest: &tchttp.BaseRequest{},
