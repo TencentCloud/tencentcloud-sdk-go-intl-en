@@ -8819,7 +8819,7 @@ func NewDescribeBandwidthPackageResourcesResponse() (response *DescribeBandwidth
 }
 
 // DescribeBandwidthPackageResources
-// This API is used to query resources in a bandwidth package based on the unique package ID. You can filter the result by specifying conditions and paginate the query results.
+// This API is used to query the list of resources in a Bandwidth Package according to its unique ID, support conditional filtering of query results and paging query.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -8832,7 +8832,7 @@ func (c *Client) DescribeBandwidthPackageResources(request *DescribeBandwidthPac
 }
 
 // DescribeBandwidthPackageResources
-// This API is used to query resources in a bandwidth package based on the unique package ID. You can filter the result by specifying conditions and paginate the query results.
+// This API is used to query the list of resources in a Bandwidth Package according to its unique ID, support conditional filtering of query results and paging query.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"

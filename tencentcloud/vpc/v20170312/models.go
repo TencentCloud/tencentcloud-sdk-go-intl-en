@@ -2026,10 +2026,21 @@ type BandwidthPackage struct {
 	// The unique ID of the bandwidth package.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitnil,omitempty" name:"BandwidthPackageId"`
 
-	// Bandwidth package type. Values: `BGP`, `SINGLEISP`, `ANYCAST`, `SINGLEISP_CMCC`, `SINGLEISP_CTCC`, `SINGLEISP_CUCC`
+	// Bandwidth package type, includes:
+	// <li>BGP: General BGP bandwidth package</li>
+	// <li>HIGH_QUALITY_BGP: Dedicated BGP bandwidth package</li>
+	// <li>ANYCAST: AIA BGP bandwidth package</li>
+	// <li>SINGLEISP_CMCC: CMCC bandwidth package</li>
+	// <li>SINGLEISP_CTCC: CTCC bandwidth package</li>
+	// <li>SINGLEISP_CUCC: CUCC bandwidth package</li>
 	NetworkType *string `json:"NetworkType,omitnil,omitempty" name:"NetworkType"`
 
-	// The bandwidth package billing mode. Valid values: 'TOP5_POSTPAID_BY_MONTH' and 'PERCENT95_POSTPAID_BY_MONTH'
+	// Bandwidth package billing type, includes:
+	// <li>ENHANCED95_POSTPAID_BY_MONTH: Pay-as-you-go - Enhanced 95th percentile</li>
+	// <li>PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: Postpaid - Main Traffic Billing</li>
+	// <li>BANDWIDTH_POSTPAID_BY_DAY: General BGP, Pay-as-you-go - Bandwidth-based</li>
+	// <li>PEAK_BANDWIDTH_POSTPAID_BY_DAY: Static single-line, Pay-as-you-go - Daily billed</li>
+	// <li>TOP5_POSTPAID_BY_MONTH: Pay-as-you-go - Monthly top 5th, If you need to use this Bglling mode, please submit a ticket</li>
 	ChargeType *string `json:"ChargeType,omitnil,omitempty" name:"ChargeType"`
 
 	// The name of the bandwidth package.
@@ -2047,7 +2058,8 @@ type BandwidthPackage struct {
 	// The limit of the bandwidth package in Mbps. The value '-1' indicates there is no limit.
 	Bandwidth *int64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
-
+	// Network egress. It defaults to `center_egress1`. Valid values:
+	// center_egress1,center_egress2,center_egress3
 	Egress *string `json:"Egress,omitnil,omitempty" name:"Egress"`
 }
 
@@ -8785,10 +8797,10 @@ type DescribeAddressesRequestParams struct {
 	// <li> tag:tag-key - String - Optional - Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// The Offset. The default value is 0. For more information about `Offset`, see the relevant section in the API documentation.
+	// The Offset. The default value is 0. For more information on Offset, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API documentation.
+	// Number of returned results. Default value: 20. Maximum value: 100. For more information on Limit, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -8815,10 +8827,10 @@ type DescribeAddressesRequest struct {
 	// <li> tag:tag-key - String - Optional - Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// The Offset. The default value is 0. For more information about `Offset`, see the relevant section in the API documentation.
+	// The Offset. The default value is 0. For more information on Offset, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API documentation.
+	// Number of returned results. Default value: 20. Maximum value: 100. For more information on Limit, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -9072,15 +9084,15 @@ type DescribeBandwidthPackageResourcesRequestParams struct {
 	// Unique ID of the bandwidth package in the form of `bwp-11112222`.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitnil,omitempty" name:"BandwidthPackageId"`
 
-	// Each request can have up to 10 `Filters` and 5 `Filter.Values`. `AddressIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
-	// <li>resource-id - String - Required: no -  (Filter condition) Filters by the unique ID of resources in a bandwidth package, such as `eip-11112222`.</li>
+	// Each request can have up to 10 `Filters` and 5 `Filter.Values`. The specific filter conditions are as follows:
+	// <li>resource-id - String - Required: no - (Filter condition) Filters by the unique ID of resources in a bandwidth package, such as `eip-11112222`.</li>
 	// <li>resource-type - String - Required: no - (Filter condition) Filters by the type of resources in a bandwidth package. It now supports only EIP (`Address`) and load balancer (`LoadBalance`).</li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// The offset. Default value: 0. For more information on `Offset`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	// The offset. Default value: 0. For more information on `Offset`, see the relevant sections in API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// The number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	// The number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant sections in API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -9090,15 +9102,15 @@ type DescribeBandwidthPackageResourcesRequest struct {
 	// Unique ID of the bandwidth package in the form of `bwp-11112222`.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitnil,omitempty" name:"BandwidthPackageId"`
 
-	// Each request can have up to 10 `Filters` and 5 `Filter.Values`. `AddressIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
-	// <li>resource-id - String - Required: no -  (Filter condition) Filters by the unique ID of resources in a bandwidth package, such as `eip-11112222`.</li>
+	// Each request can have up to 10 `Filters` and 5 `Filter.Values`. The specific filter conditions are as follows:
+	// <li>resource-id - String - Required: no - (Filter condition) Filters by the unique ID of resources in a bandwidth package, such as `eip-11112222`.</li>
 	// <li>resource-type - String - Required: no - (Filter condition) Filters by the type of resources in a bandwidth package. It now supports only EIP (`Address`) and load balancer (`LoadBalance`).</li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// The offset. Default value: 0. For more information on `Offset`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	// The offset. Default value: 0. For more information on `Offset`, see the relevant sections in API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// The number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	// The number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant sections in API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -9157,23 +9169,24 @@ type DescribeBandwidthPackagesRequestParams struct {
 	// The unique ID list of bandwidth packages.
 	BandwidthPackageIds []*string `json:"BandwidthPackageIds,omitnil,omitempty" name:"BandwidthPackageIds"`
 
-	// Each request can have up to 10 `Filters`. `BandwidthPackageIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
-	// <li> bandwidth-package_id - String - Required: No - (Filter condition) Filter by the unique ID of the bandwidth package.</li>
-	// <li> bandwidth-package-name - String - Required: No - (Filter condition) Filter by the bandwidth package name. Fuzzy filtering is not supported.</li>
-	// <li> network-type - String - Required: No - (Filter condition) Filter by the bandwidth package type. Valid values: `HIGH_QUALITY_BGP`, `BGP`, `SINGLEISP`, and `ANYCAST`.</li>
-	// <li> charge-type - String - Required: No - (Filter condition) Filter by the bandwidth package billing mode. Valid values: `TOP5_POSTPAID_BY_MONTH` and `PERCENT95_POSTPAID_BY_MONTH`.</li>
-	// <li> resource.resource-type - String - Required: No - (Filter condition) Filter by the bandwidth package resource type. Valid values: `Address` and `LoadBalance`.</li>
-	// <li> resource.resource-id - String - Required: No - (Filter condition) Filter by the bandwidth package resource ID, such as `eip-xxxx` and `lb-xxxx`.</li>
-	// <li> resource.address-ip - String - Required: No - (Filter condition) Filter by the bandwidth package resource IP.</li>
-	// <li> tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
-	// <li> tag-value - String - Required: No - (Filter condition) Filter by tag value.</li>
-	// <li> tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
+	// Each request can have up to 10 `Filters`. parameters do not support specifying `BandwidthPackageIds` and `Filters` at the same time. detailed filter criteria are as follows:.
+	// <li>bandwidth-package-id - String - required: no - (filter condition) filter by the unique id of the bandwidth package.</li>.
+	// <li>bandwidth-package-name - String - required: no - (filter criteria) filter by bandwidth package name. fuzzy filtering is not supported.</li>.
+	// <li>network-type - String - required: no - (filter condition) filter by bandwidth package type. network type can be found in [BandwidthPackage](https://intl.cloud.tencent.com/document/api/215/15824?from_cn_redirect=1#BandwidthPackage).</li>.
+	// <li>- charge-type - String - required: no - (filter condition) filter by the billing type of the bandwidth package. the billing type can be found in BandwidthPackage (https://intl.cloud.tencent.com/document/api/215/15824?from_cn_redirect=1#BandwidthPackage).</li>.
+	// <li>resource.resource-type - String - required: no - (filter criteria) filter by bandwidth package resource type. resource types include 'Address' and 'LoadBalance'.</li>.
+	// <li>resource.resource-id - String - required: no - (filter criteria) filter by bandwidth package resource id. resource id is in the format of 'eip-xxxx','lb-xxxx'.</li>.
+	// <li>resource.address-ip - String - required: no - filter by bandwidth package resource ip.</li>.
+	// <li>tag-key - String - required: no - (filter condition) filter according to the tag key.</li>.
+	// <li>`tag-value` - String - Optional - Filter by the tag value.</li>
+	// 
+	// <li>tag:tag-key - String - required: no - (filter condition) filter by tag key-value pair. replace tag-key with a specific tag key.</li>.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Offset. This value defaults to 0. For more information, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	// Offset. This value defaults to 0. For more information on Offset, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of bandwidth packages returned. This value defaults to 20. The maximum is 100. For more information, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	// Number of bandwidth packages returned. This value defaults to 20. The maximum is 100. For more information on Limit, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -9183,23 +9196,24 @@ type DescribeBandwidthPackagesRequest struct {
 	// The unique ID list of bandwidth packages.
 	BandwidthPackageIds []*string `json:"BandwidthPackageIds,omitnil,omitempty" name:"BandwidthPackageIds"`
 
-	// Each request can have up to 10 `Filters`. `BandwidthPackageIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
-	// <li> bandwidth-package_id - String - Required: No - (Filter condition) Filter by the unique ID of the bandwidth package.</li>
-	// <li> bandwidth-package-name - String - Required: No - (Filter condition) Filter by the bandwidth package name. Fuzzy filtering is not supported.</li>
-	// <li> network-type - String - Required: No - (Filter condition) Filter by the bandwidth package type. Valid values: `HIGH_QUALITY_BGP`, `BGP`, `SINGLEISP`, and `ANYCAST`.</li>
-	// <li> charge-type - String - Required: No - (Filter condition) Filter by the bandwidth package billing mode. Valid values: `TOP5_POSTPAID_BY_MONTH` and `PERCENT95_POSTPAID_BY_MONTH`.</li>
-	// <li> resource.resource-type - String - Required: No - (Filter condition) Filter by the bandwidth package resource type. Valid values: `Address` and `LoadBalance`.</li>
-	// <li> resource.resource-id - String - Required: No - (Filter condition) Filter by the bandwidth package resource ID, such as `eip-xxxx` and `lb-xxxx`.</li>
-	// <li> resource.address-ip - String - Required: No - (Filter condition) Filter by the bandwidth package resource IP.</li>
-	// <li> tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
-	// <li> tag-value - String - Required: No - (Filter condition) Filter by tag value.</li>
-	// <li> tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
+	// Each request can have up to 10 `Filters`. parameters do not support specifying `BandwidthPackageIds` and `Filters` at the same time. detailed filter criteria are as follows:.
+	// <li>bandwidth-package-id - String - required: no - (filter condition) filter by the unique id of the bandwidth package.</li>.
+	// <li>bandwidth-package-name - String - required: no - (filter criteria) filter by bandwidth package name. fuzzy filtering is not supported.</li>.
+	// <li>network-type - String - required: no - (filter condition) filter by bandwidth package type. network type can be found in [BandwidthPackage](https://intl.cloud.tencent.com/document/api/215/15824?from_cn_redirect=1#BandwidthPackage).</li>.
+	// <li>- charge-type - String - required: no - (filter condition) filter by the billing type of the bandwidth package. the billing type can be found in BandwidthPackage (https://intl.cloud.tencent.com/document/api/215/15824?from_cn_redirect=1#BandwidthPackage).</li>.
+	// <li>resource.resource-type - String - required: no - (filter criteria) filter by bandwidth package resource type. resource types include 'Address' and 'LoadBalance'.</li>.
+	// <li>resource.resource-id - String - required: no - (filter criteria) filter by bandwidth package resource id. resource id is in the format of 'eip-xxxx','lb-xxxx'.</li>.
+	// <li>resource.address-ip - String - required: no - filter by bandwidth package resource ip.</li>.
+	// <li>tag-key - String - required: no - (filter condition) filter according to the tag key.</li>.
+	// <li>`tag-value` - String - Optional - Filter by the tag value.</li>
+	// 
+	// <li>tag:tag-key - String - required: no - (filter condition) filter by tag key-value pair. replace tag-key with a specific tag key.</li>.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Offset. This value defaults to 0. For more information, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	// Offset. This value defaults to 0. For more information on Offset, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of bandwidth packages returned. This value defaults to 20. The maximum is 100. For more information, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	// Number of bandwidth packages returned. This value defaults to 20. The maximum is 100. For more information on Limit, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -10750,10 +10764,10 @@ type DescribeIPv6AddressesRequestParams struct {
 	// Indicates whether to query the traditional IPv6 address information.
 	Traditional *bool `json:"Traditional,omitnil,omitempty" name:"Traditional"`
 
-	// Offset. Default: 0. For more information on Offset, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	// Offset. Default: 0. For more information on Offset, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of returned results. Default: 20. Maximum: 100. For more information on Limit, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	// Number of returned results. Default: 20. Maximum: 100. For more information on Limit, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -10789,10 +10803,10 @@ type DescribeIPv6AddressesRequest struct {
 	// Indicates whether to query the traditional IPv6 address information.
 	Traditional *bool `json:"Traditional,omitnil,omitempty" name:"Traditional"`
 
-	// Offset. Default: 0. For more information on Offset, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	// Offset. Default: 0. For more information on Offset, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of returned results. Default: 20. Maximum: 100. For more information on Limit, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	// Number of returned results. Default: 20. Maximum: 100. For more information on Limit, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -10914,10 +10928,10 @@ type DescribeIp6AddressesRequestParams struct {
 	// <li>network-interface-id - String - Required: No - (Filter condition) Filter by the unique ID of ENIs.</li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -10932,10 +10946,10 @@ type DescribeIp6AddressesRequest struct {
 	// <li>network-interface-id - String - Required: No - (Filter condition) Filter by the unique ID of ENIs.</li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 

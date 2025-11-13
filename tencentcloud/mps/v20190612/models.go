@@ -312,6 +312,10 @@ type AdaptiveDynamicStreamingTaskInput struct {
 
 	// Transcoding parameter extension field.
 	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
+
+	// Specifies the frame at the given pts time as a key frame and segments it. unit: milliseconds (relative deviation <=1ms is allowed). when gop and segment duration are specified simultaneously, they function together. note: enable RawPts, keep the frame rate as source, and ensure the passed-in pts time corresponds to a frame in the source.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	KeyPTSList []*int64 `json:"KeyPTSList,omitnil,omitempty" name:"KeyPTSList"`
 }
 
 type AdaptiveDynamicStreamingTemplate struct {
@@ -419,18 +423,52 @@ type AddOnSubtitle struct {
 	DefaultTrack *bool `json:"DefaultTrack,omitnil,omitempty" name:"DefaultTrack"`
 }
 
+type AdvancedSuperResolutionConfig struct {
+	// Capability configuration switch. Valid values:
+	// <li>ON: enabled.</li>
+	// <li>OFF: disabled.</li>
+	// Default value: ON.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Type. Valid values:
+	// <li>standard: standard super-resolution.</li>
+	// <li>super: advanced super-resolution.</li>
+	// Default value: standard.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Image output mode. The default value is percent.
+	// <li>aspect: obtain a larger rectangle with specified width and height through super-resolution.</li>
+	// <li>fixed: obtain images of fixed width and height through super-resolution, with forced scaling supported.</li>
+	// <li>percent: magnification factor of super-resolution, which can be a decimal.</li>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
+
+	// Magnification factor of super-resolution, which can be a decimal.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Percent *float64 `json:"Percent,omitnil,omitempty" name:"Percent"`
+
+	// Width of the target image. The value cannot exceed 4096.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
+
+	// Height of the target image. The value cannot exceed 4096.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
+}
+
 type AiAnalysisResult struct {
-	// Task type. valid values:.
-	// <Li>Classification: intelligent classification.</li>.
-	// <Li>Cover: specifies the intelligent cover.</li>.
-	// <Li>Tag: intelligent tagging.</li>.
-	// <Li>FrameTag: intelligent frame-by-frame tagging.</li>.
-	// <Li>Highlight: intelligent highlights</li>.
-	// <Li>DeLogo: intelligent removal.</li>.
-	// <li>Description: large model summarization.</li>
-	// 
-	// <Li>Dubbing: intelligent dubbing.</li>.
-	// <Li>VideoRemake: specifies video deduplication.</li>.
+	// Task type. Valid values:
+	// <li>Classification: smart classification.</li>
+	// <li>Cover: smart cover.</li>
+	// <li>Tag: smart tag.</li>
+	// <li>FrameTag: smart frame tag.</li>
+	// <li>Highlight: smart highlights.</li>
+	// <li>DeLogo: smart erasing.</li>
+	// <li>Description: LLM summary.</li>
+	// <li>Dubbing: smart dubbing.</li>
+	// <li>VideoRemake: video deduplication.</li>
+	// <li>VideoComprehension: video (audio) recognition.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Query result of intelligent categorization task in video content analysis, which is valid if task type is `Classification`.
@@ -476,6 +514,10 @@ type AiAnalysisResult struct {
 	// The query result of a video content deduplication task, which is valid when the task type is VideoRemake.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	VideoRemakeTask *AiAnalysisTaskVideoRemakeResult `json:"VideoRemakeTask,omitnil,omitempty" name:"VideoRemakeTask"`
+
+	// Query result of the video (audio) recognition task. This parameter is valid when the task type is VideoComprehension.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VideoComprehensionTask *AiAnalysisTaskVideoComprehensionResult `json:"VideoComprehensionTask,omitnil,omitempty" name:"VideoComprehensionTask"`
 }
 
 type AiAnalysisTaskClassificationInput struct {
@@ -863,6 +905,46 @@ type AiAnalysisTaskTagResult struct {
 
 	// Output of intelligent tagging task.
 	Output *AiAnalysisTaskTagOutput `json:"Output,omitnil,omitempty" name:"Output"`
+}
+
+type AiAnalysisTaskVideoComprehensionInput struct {
+	// Video (audio) recognition template ID.
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+type AiAnalysisTaskVideoComprehensionOutput struct {
+	// Details of the video (audio) recognition output content.
+	VideoComprehensionAnalysisResult *string `json:"VideoComprehensionAnalysisResult,omitnil,omitempty" name:"VideoComprehensionAnalysisResult"`
+}
+
+type AiAnalysisTaskVideoComprehensionResult struct {
+	// Task status. Valid values: `PROCESSING`, `SUCCESS`, and `FAIL`.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. 0: successful; other values: failed.
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Input file for video (audio) recognition.
+	Input *AiAnalysisTaskVideoComprehensionInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Output file for video (audio) recognition.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Output *AiAnalysisTaskVideoComprehensionOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of MPS error codes.
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
+
+	// Task progress
+	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// Starting time of task execution, in ISO date and time format.
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
+
+	// Completion time of task execution, in ISO date and time format.
+	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 }
 
 type AiAnalysisTaskVideoRemakeInput struct {
@@ -2291,7 +2373,8 @@ type AudioTemplateInfo struct {
 	// 
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
-	// Audio stream sampling rate. Different sampling rate options are provided for different encoding standards. For details, see [Audio/Video Transcoding Template](https://intl.cloud.tencent.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
+	// Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
+	// For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.comom/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
 	// Unit: Hz.
 	// Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
 	SampleRate *uint64 `json:"SampleRate,omitnil,omitempty" name:"SampleRate"`
@@ -2335,10 +2418,11 @@ type AudioTemplateInfoForUpdate struct {
 	// Audio stream bitrate in Kbps. Value range: 0 and [26, 256]. If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
-	// The sampling rate of the audio stream. the sampling rate options supported by different encoding standards are different. for details, see the audio sample rate support scope document (https://intl.cloud.tencent.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
+	// Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
+	// For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.comom/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
 	// Unit: Hz.
-	// Please ensure that the sampling rate of the source audio stream is within the scope of the above options. otherwise, transcoding failure may occur.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SampleRate *uint64 `json:"SampleRate,omitnil,omitempty" name:"SampleRate"`
 
 	// Audio channel mode. Valid values:
@@ -3177,7 +3261,19 @@ type CosFileUploadTrigger struct {
 	// Input path directory bound to a workflow, such as `/movie/201907/`. If this parameter is left empty, the `/` root directory will be used.
 	Dir *string `json:"Dir,omitnil,omitempty" name:"Dir"`
 
-	// Format list of files that can trigger a workflow, such as ["mp4", "flv", "mov"]. If this parameter is left empty, files in all formats can trigger the workflow.
+	// All supported formats are as follows:
+	// - Video file extension. The following 15 options are supported:
+	// `.mp4`, `.avi`, `.mov`, `.wmv`, `.flv`, `.mkv`, `.mpg`, `.mpeg`, `.rm`, `.rmvb`, `.asf`, `.3gp`, `.webm`, `.ts`, and `.m4v`.
+	// - Audio file extension. The following 7 options are supported:
+	// `.mp3`, `.wav`, `.aac`, `.flac`, `.ogg`, `.m4a`, and `.amr`.
+	// - Subtitle file extension. The following 2 options are supported:
+	// `.vtt` and `.srt`.
+	// - `*`: any file format is supported.
+	// - Unspecified or input an empty list: the system supports the following preset file formats: video (`.mp4`, `.ts`, `.flv`, `.wmv`, `.asf`, `.rm`, `.rmvb`, `.mpg`, `.mpeg`, `.3gp`, `.mov`, `.webm`, `.mkv`, `.avi`, and `.m4v`); audio (`.mp3`, `.m4a`, `.flac`, `.ogg`, `.wav`, `.amr`, and `.aac`); subtitle (`.vtt` and `.srt`).
+	// **Note**:
+	// 1. If the input format list includes `*`, it indicates that any file format is supported.
+	// 2. File extensions can be provided with or without `.`, such as `.mp4` or `mp4`, both are supported.
+	// 3. Custom file extensions should consist of digits, letters, and characters, and have a length between 1 and 64 characters.
 	Formats []*string `json:"Formats,omitnil,omitempty" name:"Formats"`
 }
 
@@ -3439,17 +3535,17 @@ type CreateAdaptiveDynamicStreamingTemplateRequestParams struct {
 	// 1. StreamInfos.N.RemoveVideo=1
 	// 2. StreamInfos.N.RemoveAudio=0
 	// 3. StreamInfos.N.Video.Codec=copy
+	// 
 	// When the value is 0.
 	// 1. StreamInfos.N.Video.Codec cannot be copy.
 	// 2. StreamInfos.N.Video.Fps cannot be null.
 	// 
 	// Note:
-	// 
 	// This value only distinguishes template types. The task uses the values of RemoveAudio and RemoveVideo.
 	PureAudio *uint64 `json:"PureAudio,omitnil,omitempty" name:"PureAudio"`
 
-	// HLS segment type. Valid values: <li>ts-segment: HLS+TS segment.</li> <li>ts-byterange: HLS+TS byte range.</li> <li>mp4-segment: HLS+MP4 segment.</li> <li>mp4-byterange: HLS+MP4 byte range.</li> <li>ts-packed-audio: TS+Packed audio.</li> <li>mp4-packed-audio: MP4+Packed audio.</li> Default value: ts-segment.
-	// Note: The HLS segment format for adaptive bitrate streaming is based on this field.
+	// Sharding type. available values: <li>ts-segment: HLS+ts segment</li> <li>ts-byterange: HLS+ts byte range</li> <li>mp4-segment: HLS+mp4 segment</li> <li>mp4-byterange: HLS+mp4 byte range</li> <li>ts-packed-audio: ts+packed audio</li> <li>mp4-packed-audio: mp4+packed audio</li> default value: ts-segment. 
+	// Note: the shard format of the adaptive bitrate stream is based on this field.
 	SegmentType *string `json:"SegmentType,omitnil,omitempty" name:"SegmentType"`
 }
 
@@ -3488,17 +3584,17 @@ type CreateAdaptiveDynamicStreamingTemplateRequest struct {
 	// 1. StreamInfos.N.RemoveVideo=1
 	// 2. StreamInfos.N.RemoveAudio=0
 	// 3. StreamInfos.N.Video.Codec=copy
+	// 
 	// When the value is 0.
 	// 1. StreamInfos.N.Video.Codec cannot be copy.
 	// 2. StreamInfos.N.Video.Fps cannot be null.
 	// 
 	// Note:
-	// 
 	// This value only distinguishes template types. The task uses the values of RemoveAudio and RemoveVideo.
 	PureAudio *uint64 `json:"PureAudio,omitnil,omitempty" name:"PureAudio"`
 
-	// HLS segment type. Valid values: <li>ts-segment: HLS+TS segment.</li> <li>ts-byterange: HLS+TS byte range.</li> <li>mp4-segment: HLS+MP4 segment.</li> <li>mp4-byterange: HLS+MP4 byte range.</li> <li>ts-packed-audio: TS+Packed audio.</li> <li>mp4-packed-audio: MP4+Packed audio.</li> Default value: ts-segment.
-	// Note: The HLS segment format for adaptive bitrate streaming is based on this field.
+	// Sharding type. available values: <li>ts-segment: HLS+ts segment</li> <li>ts-byterange: HLS+ts byte range</li> <li>mp4-segment: HLS+mp4 segment</li> <li>mp4-byterange: HLS+mp4 byte range</li> <li>ts-packed-audio: ts+packed audio</li> <li>mp4-packed-audio: mp4+packed audio</li> default value: ts-segment. 
+	// Note: the shard format of the adaptive bitrate stream is based on this field.
 	SegmentType *string `json:"SegmentType,omitnil,omitempty" name:"SegmentType"`
 }
 
@@ -4650,30 +4746,34 @@ type CreateSmartSubtitleTemplateRequestParams struct {
 	// Length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Video source language for intelligent caption.
-	// Valid values: 
-	// zh: Simplified Chinese.
-	// en: Eenglish.
-	// Ja: Japanese.
-	// Ko: Korean.
-	// zh-PY: Simplified Chinese, English and Cantonese.
-	// zh-medical: Medical Chinese.
-	// yue: Cantonese.
-	// Vi: Vietnamese.
-	// ms: Malay.
-	// id: Indonesian.
-	// fil: Filipino.
-	// th: Thai.
-	// pt: Portuguese.
-	// tr: Turkish.
-	// ar: Arabic.
-	// es: Spanish.
-	// hi: Hindi
-	// Fr: French.
-	// de: German.
-	// zh-dialect: Chinese dialect
-	// zh_en: Simplified Chinese and English
-	// prime_zh: Simplified Chinese, Chinese Dialect and English.
+	// Source language of the video with smart subtitles.
+	// Currently, the following languages are supported:
+	// `zh`: Simplified Chinese.
+	// `yue`: Cantonese.
+	// `zh-PY`: Chinese, English, and Cantonese.
+	// `zh_medical`: Chinese (medical scenario).
+	// `zh_dialect`: Chinese dialect.
+	// `prime_zh`: Chinese, English, and Chinese dialects.
+	// `zh_en`: Chinese and English.
+	// `en`: English.
+	// `ja`: Japanese.
+	// `ko`: Korean.
+	// `fr`: French.
+	// `es`: Spanish.
+	// `it`: Italian.
+	// `de`: German.
+	// `tr`: Turkish.
+	// `ru`: Russian.
+	// `pt`: Portuguese (Brazil).
+	// `pt-PT`: Portuguese (Portugal).
+	// `vi`: Vietnamese.
+	// `id`: Indonesian.
+	// `ms`: Malay.
+	// `th`: Thai.
+	// `ar`: Arabic.
+	// `hi`: Hindi.
+	// `fil`: Filipino.
+	// `auto`: automatic recognition (it is only supported in pure subtitle translation).
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
 	// Smart subtitle language type.
@@ -4687,41 +4787,59 @@ type CreateSmartSubtitleTemplateRequestParams struct {
 	// Length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Intelligent subtitle file format.
-	// vtt: WebVTT format.
-	// srt: SRT format.
-	// If this field is left blank, no subtitle file will be generated.
+	// Smart subtitle file format:
+	// - Under the ASR recognition and translation processing type:
+	//      - vtt: WebVTT format subtitle.
+	//      - srt: SRT format subtitle.
+	//      - If this field is unspecified or left blank, no subtitle file will be generated.
+	// - Under the pure subtitle translation processing type:
+	//     - original: consistent with the source file.
+	//     - vtt: WebVTT format subtitle.
+	//     - srt: SRT format subtitle.
+	// **Note**:
+	// - For ASR recognition mode, when 2 or more languages are involved in translation, this field cannot be unspecified or left blank.
+	// - For pure subtitle translation mode, this field cannot be unspecified or left blank.
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
 	// ASR hotword lexicon parameter.
 	AsrHotWordsConfigure *AsrHotWordsConfigure `json:"AsrHotWordsConfigure,omitnil,omitempty" name:"AsrHotWordsConfigure"`
 
 	// Subtitle translation switch.
-	// ON: enable translation
-	// OFF: disable translation
+	// `ON`: translation enabled.
+	// `OFF`: translation disabled.
+	// **Note**: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to `OFF`.
 	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
 
-	// Target language for subtitle translation.
-	// This field takes effect when TranslateSwitch is set to ON.
-	// Supported languages:
-	// zh: Simplified Chinese
-	// en: English
-	// ja: Japanese
-	// ko: Korean
-	// fr: French
-	// es: Spanish
-	// it: Italian
-	// de: German
-	// tr: Turkish
-	// ru: Russian
-	// pt: Portuguese
-	// vi: Vietnamese
-	// id: Indonesian
-	// ms: Malay
-	// th: Thai
-	// ar: Arabic
-	// hi: Hindi
+	// Subtitle translation target language. This field is valid when the value of TranslateSwitch is `ON`.
+	// Currently, the following languages are supported:
+	// `zh`: Simplified Chinese.
+	// `zh-TW`: Traditional Chinese.
+	// `en`: English.
+	// `ja`: Japanese.
+	// `ko`: Korean.
+	// `fr`: French.
+	// `es`: Spanish.
+	// `it`: Italian.
+	// `de`: German.
+	// `tr`: Turkish.
+	// `ru`: Russian.
+	// `pt`: Portuguese (Brazil).
+	// `pt-PT`: Portuguese (Portugal).
+	// `vi`: Vietnamese.
+	// `id`: Indonesian.
+	// `ms`: Malay.
+	// `th`: Thai.
+	// `ar`: Arabic.
+	// `hi`: Hindi.
+	// `fil`: Filipino.
+	// **Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
 	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
+
+	// Subtitle processing type:
+	// - 0: ASR recognition subtitle.
+	// - 1: pure subtitle translation.
+	// **Note**: The default processing type is ASR recognition subtitle if the field is unspecified.
+	ProcessType *uint64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 }
 
 type CreateSmartSubtitleTemplateRequest struct {
@@ -4731,30 +4849,34 @@ type CreateSmartSubtitleTemplateRequest struct {
 	// Length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Video source language for intelligent caption.
-	// Valid values: 
-	// zh: Simplified Chinese.
-	// en: Eenglish.
-	// Ja: Japanese.
-	// Ko: Korean.
-	// zh-PY: Simplified Chinese, English and Cantonese.
-	// zh-medical: Medical Chinese.
-	// yue: Cantonese.
-	// Vi: Vietnamese.
-	// ms: Malay.
-	// id: Indonesian.
-	// fil: Filipino.
-	// th: Thai.
-	// pt: Portuguese.
-	// tr: Turkish.
-	// ar: Arabic.
-	// es: Spanish.
-	// hi: Hindi
-	// Fr: French.
-	// de: German.
-	// zh-dialect: Chinese dialect
-	// zh_en: Simplified Chinese and English
-	// prime_zh: Simplified Chinese, Chinese Dialect and English.
+	// Source language of the video with smart subtitles.
+	// Currently, the following languages are supported:
+	// `zh`: Simplified Chinese.
+	// `yue`: Cantonese.
+	// `zh-PY`: Chinese, English, and Cantonese.
+	// `zh_medical`: Chinese (medical scenario).
+	// `zh_dialect`: Chinese dialect.
+	// `prime_zh`: Chinese, English, and Chinese dialects.
+	// `zh_en`: Chinese and English.
+	// `en`: English.
+	// `ja`: Japanese.
+	// `ko`: Korean.
+	// `fr`: French.
+	// `es`: Spanish.
+	// `it`: Italian.
+	// `de`: German.
+	// `tr`: Turkish.
+	// `ru`: Russian.
+	// `pt`: Portuguese (Brazil).
+	// `pt-PT`: Portuguese (Portugal).
+	// `vi`: Vietnamese.
+	// `id`: Indonesian.
+	// `ms`: Malay.
+	// `th`: Thai.
+	// `ar`: Arabic.
+	// `hi`: Hindi.
+	// `fil`: Filipino.
+	// `auto`: automatic recognition (it is only supported in pure subtitle translation).
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
 	// Smart subtitle language type.
@@ -4768,41 +4890,59 @@ type CreateSmartSubtitleTemplateRequest struct {
 	// Length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Intelligent subtitle file format.
-	// vtt: WebVTT format.
-	// srt: SRT format.
-	// If this field is left blank, no subtitle file will be generated.
+	// Smart subtitle file format:
+	// - Under the ASR recognition and translation processing type:
+	//      - vtt: WebVTT format subtitle.
+	//      - srt: SRT format subtitle.
+	//      - If this field is unspecified or left blank, no subtitle file will be generated.
+	// - Under the pure subtitle translation processing type:
+	//     - original: consistent with the source file.
+	//     - vtt: WebVTT format subtitle.
+	//     - srt: SRT format subtitle.
+	// **Note**:
+	// - For ASR recognition mode, when 2 or more languages are involved in translation, this field cannot be unspecified or left blank.
+	// - For pure subtitle translation mode, this field cannot be unspecified or left blank.
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
 	// ASR hotword lexicon parameter.
 	AsrHotWordsConfigure *AsrHotWordsConfigure `json:"AsrHotWordsConfigure,omitnil,omitempty" name:"AsrHotWordsConfigure"`
 
 	// Subtitle translation switch.
-	// ON: enable translation
-	// OFF: disable translation
+	// `ON`: translation enabled.
+	// `OFF`: translation disabled.
+	// **Note**: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to `OFF`.
 	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
 
-	// Target language for subtitle translation.
-	// This field takes effect when TranslateSwitch is set to ON.
-	// Supported languages:
-	// zh: Simplified Chinese
-	// en: English
-	// ja: Japanese
-	// ko: Korean
-	// fr: French
-	// es: Spanish
-	// it: Italian
-	// de: German
-	// tr: Turkish
-	// ru: Russian
-	// pt: Portuguese
-	// vi: Vietnamese
-	// id: Indonesian
-	// ms: Malay
-	// th: Thai
-	// ar: Arabic
-	// hi: Hindi
+	// Subtitle translation target language. This field is valid when the value of TranslateSwitch is `ON`.
+	// Currently, the following languages are supported:
+	// `zh`: Simplified Chinese.
+	// `zh-TW`: Traditional Chinese.
+	// `en`: English.
+	// `ja`: Japanese.
+	// `ko`: Korean.
+	// `fr`: French.
+	// `es`: Spanish.
+	// `it`: Italian.
+	// `de`: German.
+	// `tr`: Turkish.
+	// `ru`: Russian.
+	// `pt`: Portuguese (Brazil).
+	// `pt-PT`: Portuguese (Portugal).
+	// `vi`: Vietnamese.
+	// `id`: Indonesian.
+	// `ms`: Malay.
+	// `th`: Thai.
+	// `ar`: Arabic.
+	// `hi`: Hindi.
+	// `fil`: Filipino.
+	// **Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
 	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
+
+	// Subtitle processing type:
+	// - 0: ASR recognition subtitle.
+	// - 1: pure subtitle translation.
+	// **Note**: The default processing type is ASR recognition subtitle if the field is unspecified.
+	ProcessType *uint64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 }
 
 func (r *CreateSmartSubtitleTemplateRequest) ToJsonString() string {
@@ -4825,6 +4965,7 @@ func (r *CreateSmartSubtitleTemplateRequest) FromJsonString(s string) error {
 	delete(f, "AsrHotWordsConfigure")
 	delete(f, "TranslateSwitch")
 	delete(f, "TranslateDstLanguage")
+	delete(f, "ProcessType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSmartSubtitleTemplateRequest has unknown keys!", "")
 	}
@@ -7434,9 +7575,8 @@ func (r *DescribeImageTaskDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeImageTaskDetailResponseParams struct {
 	// Task type. Currently, the valid values include:
-	// <Li>WorkflowTask: workflow processing task.</li>
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <li>WorkflowTask: workflow processing task.</li>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
 	// Task status. Valid values:
@@ -7445,6 +7585,15 @@ type DescribeImageTaskDetailResponseParams struct {
 	// <li>FINISH: completed.</li>
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code when the task fails.
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	ErrMsg *string `json:"ErrMsg,omitnil,omitempty" name:"ErrMsg"`
+
+	// Task exception message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
 	// Execution status and results of the image processing task.
 	// Note: This field may return null, indicating that no valid value can be obtained.
@@ -8128,6 +8277,11 @@ type DescribeSmartSubtitleTemplatesRequestParams struct {
 
 	// Condition for filtering smart subtitle templates by ID. Length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Subtitle processing type.
+	// - 0: ASR recognition subtitle.
+	// - 1: pure subtitle translation.
+	ProcessType *uint64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 }
 
 type DescribeSmartSubtitleTemplatesRequest struct {
@@ -8149,6 +8303,11 @@ type DescribeSmartSubtitleTemplatesRequest struct {
 
 	// Condition for filtering smart subtitle templates by ID. Length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Subtitle processing type.
+	// - 0: ASR recognition subtitle.
+	// - 1: pure subtitle translation.
+	ProcessType *uint64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 }
 
 func (r *DescribeSmartSubtitleTemplatesRequest) ToJsonString() string {
@@ -8168,6 +8327,7 @@ func (r *DescribeSmartSubtitleTemplatesRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "Type")
 	delete(f, "Name")
+	delete(f, "ProcessType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSmartSubtitleTemplatesRequest has unknown keys!", "")
 	}
@@ -8469,7 +8629,9 @@ type DescribeTasksRequestParams struct {
 	// -FINISH (completed).
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Indicates whether there is a subtask failure when the task is complete.
+	// Whether there is a failed subtask when the task ends. If this parameter is left unspecified, ignore it.
+	// <li>false: filter the main tasks to identify those that have no failed subtasks.</li>
+	// <li>true: filter the main tasks to identify those that have failed subtasks.</li>
 	SubTaskHasFailed *bool `json:"SubTaskHasFailed,omitnil,omitempty" name:"SubTaskHasFailed"`
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
@@ -8494,7 +8656,9 @@ type DescribeTasksRequest struct {
 	// -FINISH (completed).
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Indicates whether there is a subtask failure when the task is complete.
+	// Whether there is a failed subtask when the task ends. If this parameter is left unspecified, ignore it.
+	// <li>false: filter the main tasks to identify those that have no failed subtasks.</li>
+	// <li>true: filter the main tasks to identify those that have failed subtasks.</li>
 	SubTaskHasFailed *bool `json:"SubTaskHasFailed,omitnil,omitempty" name:"SubTaskHasFailed"`
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
@@ -8618,6 +8782,29 @@ type DescribeTranscodeTemplatesRequestParams struct {
 	// low_compress: Image quality priority: Priority is given to ensuring image quality, and the size of compressed files may be relatively large. Only audio and video TSC transcoding fees are charged for this policy. 
 	// no_config: Not configured.
 	CompressType *string `json:"CompressType,omitnil,omitempty" name:"CompressType"`
+
+	// Enhancement scenario configuration. Valid values:
+	// <li>common: common enhancement parameters, which are basic optimization parameters suitable for various video types, enhancing overall image quality.</li>
+	// <li>AIGC: overall resolution enhancement. It uses AI technology to improve the overall video resolution and image clarity.</li>
+	// <li>short_play: enhance facial and subtitle details, emphasizing characters' facial expressions and subtitle clarity to improve the viewing experience.</li>
+	// <li>short_video: optimize complex and diverse image quality issues, tailoring quality enhancements for the complex scenarios such as short videos to address various visual issues.</li>
+	// <li>game: fix motion blur and enhance details, with a focus on enhancing the clarity of game details and restoring blurry areas during motions to make the image content during gaming clearer and richer.</li>
+	// <li>HD_movie_series: provide a smooth playback effect for UHD videos. Standard 4K HDR videos with an FPS of 60 are generated to meet the needs of broadcasting/OTT for UHD videos. Formats for broadcasting scenarios are supported.</li>
+	// <li>LQ_material: low-definition material/old video restoration. It enhances overall resolution, and solves issues of old videos, such as low resolution, blur, distortion, scratches, and color temperature due to their age.</li>
+	// <li>lecture: live shows, e-commerce, conferences, and lectures. It improves the face display effect and performs specific optimizations, including face region enhancement, noise reduction, and artifacts removal, for scenarios involving human explanation, such as live shows, e-commerce, conferences, and lectures.</li>
+	EnhanceSceneType *string `json:"EnhanceSceneType,omitnil,omitempty" name:"EnhanceSceneType"`
+
+	// Enhanced transcoding type. Valid values:
+	// <li>Common: standard transcoding.</li>
+	// <li>TEHD-100: top speed codec video transcoding.</li>
+	// <li>TEHD-200: top speed codec audio transcoding.</li>
+	EnhanceTranscodeType *string `json:"EnhanceTranscodeType,omitnil,omitempty" name:"EnhanceTranscodeType"`
+
+	// Enhancement type. Valid values:
+	// <li>VideoEnhance: video enhancement only.</li>
+	// <li>AudioEnhance (audio enhancement only).</li>
+	// <li>VideoAudioEnhance: video and audio enhancement included.</li>
+	EnhanceType *string `json:"EnhanceType,omitnil,omitempty" name:"EnhanceType"`
 }
 
 type DescribeTranscodeTemplatesRequest struct {
@@ -8674,6 +8861,29 @@ type DescribeTranscodeTemplatesRequest struct {
 	// low_compress: Image quality priority: Priority is given to ensuring image quality, and the size of compressed files may be relatively large. Only audio and video TSC transcoding fees are charged for this policy. 
 	// no_config: Not configured.
 	CompressType *string `json:"CompressType,omitnil,omitempty" name:"CompressType"`
+
+	// Enhancement scenario configuration. Valid values:
+	// <li>common: common enhancement parameters, which are basic optimization parameters suitable for various video types, enhancing overall image quality.</li>
+	// <li>AIGC: overall resolution enhancement. It uses AI technology to improve the overall video resolution and image clarity.</li>
+	// <li>short_play: enhance facial and subtitle details, emphasizing characters' facial expressions and subtitle clarity to improve the viewing experience.</li>
+	// <li>short_video: optimize complex and diverse image quality issues, tailoring quality enhancements for the complex scenarios such as short videos to address various visual issues.</li>
+	// <li>game: fix motion blur and enhance details, with a focus on enhancing the clarity of game details and restoring blurry areas during motions to make the image content during gaming clearer and richer.</li>
+	// <li>HD_movie_series: provide a smooth playback effect for UHD videos. Standard 4K HDR videos with an FPS of 60 are generated to meet the needs of broadcasting/OTT for UHD videos. Formats for broadcasting scenarios are supported.</li>
+	// <li>LQ_material: low-definition material/old video restoration. It enhances overall resolution, and solves issues of old videos, such as low resolution, blur, distortion, scratches, and color temperature due to their age.</li>
+	// <li>lecture: live shows, e-commerce, conferences, and lectures. It improves the face display effect and performs specific optimizations, including face region enhancement, noise reduction, and artifacts removal, for scenarios involving human explanation, such as live shows, e-commerce, conferences, and lectures.</li>
+	EnhanceSceneType *string `json:"EnhanceSceneType,omitnil,omitempty" name:"EnhanceSceneType"`
+
+	// Enhanced transcoding type. Valid values:
+	// <li>Common: standard transcoding.</li>
+	// <li>TEHD-100: top speed codec video transcoding.</li>
+	// <li>TEHD-200: top speed codec audio transcoding.</li>
+	EnhanceTranscodeType *string `json:"EnhanceTranscodeType,omitnil,omitempty" name:"EnhanceTranscodeType"`
+
+	// Enhancement type. Valid values:
+	// <li>VideoEnhance: video enhancement only.</li>
+	// <li>AudioEnhance (audio enhancement only).</li>
+	// <li>VideoAudioEnhance: video and audio enhancement included.</li>
+	EnhanceType *string `json:"EnhanceType,omitnil,omitempty" name:"EnhanceType"`
 }
 
 func (r *DescribeTranscodeTemplatesRequest) ToJsonString() string {
@@ -8698,6 +8908,9 @@ func (r *DescribeTranscodeTemplatesRequest) FromJsonString(s string) error {
 	delete(f, "Name")
 	delete(f, "SceneType")
 	delete(f, "CompressType")
+	delete(f, "EnhanceSceneType")
+	delete(f, "EnhanceTranscodeType")
+	delete(f, "EnhanceType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTranscodeTemplatesRequest has unknown keys!", "")
 	}
@@ -9096,6 +9309,22 @@ type DiagnoseResult struct {
 	SeverityLevel *string `json:"SeverityLevel,omitnil,omitempty" name:"SeverityLevel"`
 }
 
+type DiffusionEnhanceConfig struct {
+	// Capability configuration switch. Valid values:
+	// ON: enabled.
+	// OFF: disabled.
+	// Default value: OFF.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Strength type. Valid values:
+	// weak
+	// normal
+	// strong
+	// Default value: normal.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
 // Predefined struct for user
 type DisableScheduleRequestParams struct {
 	// The scheme ID.
@@ -9208,22 +9437,31 @@ type DrmInfo struct {
 	// Encryption type.
 	// 
 	// - simpleaes
-	// Can only be used for HLS. format support ts and mp4.
+	// Can only be used for HLS. format support: ts and mp4.
 	// Only can be used in slice mode. cannot be used in singlefile mode.
 	// 
 	// - fairplay:
-	// Can only be used for HLS. valid values: mp4.
-	// Available for use in slice mode or singlefile mode.
+	// Can only be used for HLS. the segment format can only be mp4.
+	// Supports slice mode or singlefile mode.
 	// 
 	// - widevine:
-	// Can be used for HLS and DASH. format can only be mp4.
-	// Output HLS: available for use in slice mode or singlefile mode.
-	// Output DASH: can only be in singlefile mode.
+	// Can be used for HLS and DASH. the slice format can only be mp4.
+	// Output HLS: specifies the slicing or singlefile mode can be used.
+	// OutputOutput DASH]: can only be in singlefile mode.
 	// 
 	// - playready:
-	// Can be used for HLS and DASH. format can only be mp4.
-	// Output HLS: available for use in slice mode or singlefile mode.
-	// Output DASH: can only be singlefile mode.
+	// Can be used for HLS and DASH. the slice format can only be mp4.
+	// Output HLS: specifies the slicing or singlefile mode can be used.
+	// Output DASH: can only be in singlefile mode.
+	// 
+	// - widevine+fairplay,playready+fairplay,widevine+playready+fairplay:
+	// Can only be used for HLS. valid values: mp4.
+	// Supports slice mode or single file mode.
+	// 
+	// - widevine+playready:
+	// Applicable to HLS and MPEG-DASH. the format can only be mp4.
+	// HLS format can use slice mode or single file mode.
+	// Specifies that only singlefile mode can be used for MPEG-DASH.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// The AES-128 encryption details.
@@ -9768,6 +10006,22 @@ type FrameRateConfig struct {
 	Fps *uint64 `json:"Fps,omitnil,omitempty" name:"Fps"`
 }
 
+type FrameRateWithDenConfig struct {
+	// Capability configuration switch. Valid values:
+	// <li>ON: enabled.</li>
+	// <li>OFF: disabled.</li>
+	// Default value: ON.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Frame rate numerator. Value range: non-negative number, which should be less than 120 when divided by the denominator, and in the unit of Hz. The default value is 0. Note: For transcoding, this parameter will overwrite the Fps in the VideoTemplate.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FpsNum *int64 `json:"FpsNum,omitnil,omitempty" name:"FpsNum"`
+
+	// Frame rate denominator.Value range: numbers equal to or greater than 1. The default value is 1. Note: For transcoding, this parameter will overwrite the FpsDenominator in the VideoTemplate.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FpsDen *int64 `json:"FpsDen,omitnil,omitempty" name:"FpsDen"`
+}
+
 type FrameTagConfigureInfo struct {
 	// Switch of intelligent frame-specific tagging task. Valid values:
 	// <li>ON: enables intelligent frame-specific tagging task;</li>
@@ -9811,8 +10065,8 @@ type HdrConfig struct {
 	// Type. Valid values:
 	// <li>HDR10</li>
 	// <li>HLG</li>
-	// Default Value: HDR10.
-	// Note: The video encoding method should be H.265.
+	// Default value: HDR10.
+	// Note: The video encoding method should be h264 or h265.
 	// Note: The video encoding bit depth is 10.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
@@ -9904,6 +10158,9 @@ type ImageEnhanceConfig struct {
 	// Super-resolution configuration.
 	SuperResolution *SuperResolutionConfig `json:"SuperResolution,omitnil,omitempty" name:"SuperResolution"`
 
+	// Advanced super-resolution configuration.
+	AdvancedSuperResolutionConfig *AdvancedSuperResolutionConfig `json:"AdvancedSuperResolutionConfig,omitnil,omitempty" name:"AdvancedSuperResolutionConfig"`
+
 	// Denoising configuration.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	Denoise *ImageDenoiseConfig `json:"Denoise,omitnil,omitempty" name:"Denoise"`
@@ -9961,6 +10218,9 @@ type ImageProcessTaskResult struct {
 	// Task status, including PROCESSING, SUCCESS, and FAIL.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	ErrMsg *string `json:"ErrMsg,omitnil,omitempty" name:"ErrMsg"`
 
 	// Error message.
 	// Note: This field may return null, indicating that no valid value can be obtained.
@@ -13074,8 +13334,9 @@ type ModifySmartSubtitleTemplateRequestParams struct {
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// Subtitle translation switch.
-	// ON: enable translation
-	// OFF: disable translation
+	// `ON`: translation enabled.
+	// `OFF`: translation disabled.
+	// **Note**: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to `OFF`.
 	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
 
 	// Smart subtitle template name.
@@ -13086,36 +13347,48 @@ type ModifySmartSubtitleTemplateRequestParams struct {
 	// Length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Video source language for intelligent caption.
-	// Valid values: 
-	// zh: Simplified Chinese.
-	// en: Eenglish.
-	// Ja: Japanese.
-	// Ko: Korean.
-	// zh-PY: Simplified Chinese, English and Cantonese.
-	// zh-medical: Medical Chinese.
-	// yue: Cantonese.
-	// Vi: Vietnamese.
-	// ms: Malay.
-	// id: Indonesian.
-	// fil: Filipino.
-	// th: Thai.
-	// pt: Portuguese.
-	// tr: Turkish.
-	// ar: Arabic.
-	// es: Spanish.
-	// hi: Hindi
-	// Fr: French.
-	// de: German.
-	// zh-dialect: Chinese dialect
-	// zh_en: Simplified Chinese and English
-	// prime_zh: Simplified Chinese, Chinese Dialect and English.
+	// Source language of the video with smart subtitles.
+	// Currently, the following languages are supported:
+	// `zh`: Simplified Chinese.
+	// `yue`: Cantonese.
+	// `zh-PY`: Chinese, English, and Cantonese.
+	// `zh_medical`: Chinese (medical scenario).
+	// `zh_dialect`: Chinese dialect.
+	// `prime_zh`: Chinese, English, and Chinese dialects.
+	// `zh_en`: Chinese and English.
+	// `en`: English.
+	// `ja`: Japanese.
+	// `ko`: Korean.
+	// `fr`: French.
+	// `es`: Spanish.
+	// `it`: Italian.
+	// `de`: German.
+	// `tr`: Turkish.
+	// `ru`: Russian.
+	// `pt`: Portuguese (Brazil).
+	// `pt-PT`: Portuguese (Portugal).
+	// `vi`: Vietnamese.
+	// `id`: Indonesian.
+	// `ms`: Malay.
+	// `th`: Thai.
+	// `ar`: Arabic.
+	// `hi`: Hindi.
+	// `fil`: Filipino.
+	// `auto`: automatic recognition (it is only supported in pure subtitle translation).
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
-	// Intelligent subtitle file format.
-	// vtt: WebVTT format.
-	// srt: SRT format.
-	// If this field is left blank, no subtitle file will be generated.
+	// Smart subtitle file format:
+	// - Under the ASR recognition and translation processing type:
+	//      - vtt: WebVTT format subtitle.
+	//      - srt: SRT format subtitle.
+	//      - Unspecified or left blank: no subtitle file generated.
+	// - Under the pure subtitle translation processing type:
+	//     - original: consistent with the source file.
+	//     - vtt: WebVTT format subtitle.
+	//     - srt: SRT format subtitle.
+	// **Note**:
+	// - For ASR recognition mode, when 2 or more languages are involved in translation, this field cannot be unspecified or left blank.
+	// - For pure subtitle translation mode, this field cannot be unspecified or left blank.
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
 	// Smart subtitle language type.
@@ -13129,26 +13402,36 @@ type ModifySmartSubtitleTemplateRequestParams struct {
 	AsrHotWordsConfigure *AsrHotWordsConfigure `json:"AsrHotWordsConfigure,omitnil,omitempty" name:"AsrHotWordsConfigure"`
 
 	// Target language for subtitle translation.
-	// This field takes effect when TranslateSwitch is set to ON.
-	// Supported languages:
-	// zh: Simplified Chinese
-	// en: English
-	// ja: Japanese
-	// ko: Korean
-	// fr: French
-	// es: Spanish
-	// it: Italian
-	// de: German
-	// tr: Turkish
-	// ru: Russian
-	// pt: Portuguese
-	// vi: Vietnamese
-	// id: Indonesian
-	// ms: Malay
-	// th: Thai
-	// ar: Arabic
-	// hi: Hindi
+	// This field is valid when the value of TranslateSwitch is ON.
+	// Currently, the following languages are supported:
+	// `zh`: Simplified Chinese.
+	// `zh-TW`: Traditional Chinese.
+	// `en`: English.
+	// `ja`: Japanese.
+	// `ko`: Korean.
+	// `fr`: French.
+	// `es`: Spanish.
+	// `it`: Italian.
+	// `de`: German.
+	// `tr`: Turkish.
+	// `ru`: Russian.
+	// `pt`: Portuguese (Brazil).
+	// `pt-PT`: Portuguese (Portugal).
+	// `vi`: Vietnamese.
+	// `id`: Indonesian.
+	// `ms`: Malay.
+	// `th`: Thai.
+	// `ar`: Arabic.
+	// `hi`: Hindi.
+	// `fil`: Filipino.
+	// **Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
 	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
+
+	// Subtitle processing type:
+	// - 0: ASR recognition subtitle.
+	// - 1: pure subtitle translation.
+	// **Note**: If the field is unspecified, ASR is used by default.
+	ProcessType *uint64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 }
 
 type ModifySmartSubtitleTemplateRequest struct {
@@ -13158,8 +13441,9 @@ type ModifySmartSubtitleTemplateRequest struct {
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// Subtitle translation switch.
-	// ON: enable translation
-	// OFF: disable translation
+	// `ON`: translation enabled.
+	// `OFF`: translation disabled.
+	// **Note**: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to `OFF`.
 	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
 
 	// Smart subtitle template name.
@@ -13170,36 +13454,48 @@ type ModifySmartSubtitleTemplateRequest struct {
 	// Length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Video source language for intelligent caption.
-	// Valid values: 
-	// zh: Simplified Chinese.
-	// en: Eenglish.
-	// Ja: Japanese.
-	// Ko: Korean.
-	// zh-PY: Simplified Chinese, English and Cantonese.
-	// zh-medical: Medical Chinese.
-	// yue: Cantonese.
-	// Vi: Vietnamese.
-	// ms: Malay.
-	// id: Indonesian.
-	// fil: Filipino.
-	// th: Thai.
-	// pt: Portuguese.
-	// tr: Turkish.
-	// ar: Arabic.
-	// es: Spanish.
-	// hi: Hindi
-	// Fr: French.
-	// de: German.
-	// zh-dialect: Chinese dialect
-	// zh_en: Simplified Chinese and English
-	// prime_zh: Simplified Chinese, Chinese Dialect and English.
+	// Source language of the video with smart subtitles.
+	// Currently, the following languages are supported:
+	// `zh`: Simplified Chinese.
+	// `yue`: Cantonese.
+	// `zh-PY`: Chinese, English, and Cantonese.
+	// `zh_medical`: Chinese (medical scenario).
+	// `zh_dialect`: Chinese dialect.
+	// `prime_zh`: Chinese, English, and Chinese dialects.
+	// `zh_en`: Chinese and English.
+	// `en`: English.
+	// `ja`: Japanese.
+	// `ko`: Korean.
+	// `fr`: French.
+	// `es`: Spanish.
+	// `it`: Italian.
+	// `de`: German.
+	// `tr`: Turkish.
+	// `ru`: Russian.
+	// `pt`: Portuguese (Brazil).
+	// `pt-PT`: Portuguese (Portugal).
+	// `vi`: Vietnamese.
+	// `id`: Indonesian.
+	// `ms`: Malay.
+	// `th`: Thai.
+	// `ar`: Arabic.
+	// `hi`: Hindi.
+	// `fil`: Filipino.
+	// `auto`: automatic recognition (it is only supported in pure subtitle translation).
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
-	// Intelligent subtitle file format.
-	// vtt: WebVTT format.
-	// srt: SRT format.
-	// If this field is left blank, no subtitle file will be generated.
+	// Smart subtitle file format:
+	// - Under the ASR recognition and translation processing type:
+	//      - vtt: WebVTT format subtitle.
+	//      - srt: SRT format subtitle.
+	//      - Unspecified or left blank: no subtitle file generated.
+	// - Under the pure subtitle translation processing type:
+	//     - original: consistent with the source file.
+	//     - vtt: WebVTT format subtitle.
+	//     - srt: SRT format subtitle.
+	// **Note**:
+	// - For ASR recognition mode, when 2 or more languages are involved in translation, this field cannot be unspecified or left blank.
+	// - For pure subtitle translation mode, this field cannot be unspecified or left blank.
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
 	// Smart subtitle language type.
@@ -13213,26 +13509,36 @@ type ModifySmartSubtitleTemplateRequest struct {
 	AsrHotWordsConfigure *AsrHotWordsConfigure `json:"AsrHotWordsConfigure,omitnil,omitempty" name:"AsrHotWordsConfigure"`
 
 	// Target language for subtitle translation.
-	// This field takes effect when TranslateSwitch is set to ON.
-	// Supported languages:
-	// zh: Simplified Chinese
-	// en: English
-	// ja: Japanese
-	// ko: Korean
-	// fr: French
-	// es: Spanish
-	// it: Italian
-	// de: German
-	// tr: Turkish
-	// ru: Russian
-	// pt: Portuguese
-	// vi: Vietnamese
-	// id: Indonesian
-	// ms: Malay
-	// th: Thai
-	// ar: Arabic
-	// hi: Hindi
+	// This field is valid when the value of TranslateSwitch is ON.
+	// Currently, the following languages are supported:
+	// `zh`: Simplified Chinese.
+	// `zh-TW`: Traditional Chinese.
+	// `en`: English.
+	// `ja`: Japanese.
+	// `ko`: Korean.
+	// `fr`: French.
+	// `es`: Spanish.
+	// `it`: Italian.
+	// `de`: German.
+	// `tr`: Turkish.
+	// `ru`: Russian.
+	// `pt`: Portuguese (Brazil).
+	// `pt-PT`: Portuguese (Portugal).
+	// `vi`: Vietnamese.
+	// `id`: Indonesian.
+	// `ms`: Malay.
+	// `th`: Thai.
+	// `ar`: Arabic.
+	// `hi`: Hindi.
+	// `fil`: Filipino.
+	// **Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
 	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
+
+	// Subtitle processing type:
+	// - 0: ASR recognition subtitle.
+	// - 1: pure subtitle translation.
+	// **Note**: If the field is unspecified, ASR is used by default.
+	ProcessType *uint64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 }
 
 func (r *ModifySmartSubtitleTemplateRequest) ToJsonString() string {
@@ -13256,6 +13562,7 @@ func (r *ModifySmartSubtitleTemplateRequest) FromJsonString(s string) error {
 	delete(f, "SubtitleType")
 	delete(f, "AsrHotWordsConfigure")
 	delete(f, "TranslateDstLanguage")
+	delete(f, "ProcessType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySmartSubtitleTemplateRequest has unknown keys!", "")
 	}
@@ -13832,6 +14139,26 @@ type OcrWordsConfigureInfoForUpdate struct {
 	// Keyword filter tag, which specifies the keyword tag that needs to be returned. If this parameter is left empty, all results will be returned.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
 	LabelSet []*string `json:"LabelSet,omitnil,omitempty" name:"LabelSet"`
+}
+
+type OverrideEraseParameter struct {
+	// Erasing type.
+	// -subtitle: subtitle removal.
+	// -watermark: watermark removal.
+	// -privacy: privacy protection.
+	EraseType *string `json:"EraseType,omitnil,omitempty" name:"EraseType"`
+
+	// Subtitle erasing configuration.
+	// This field is required when the value of EraseType is subtitle.
+	EraseSubtitleConfig *UpdateSmartEraseSubtitleConfig `json:"EraseSubtitleConfig,omitnil,omitempty" name:"EraseSubtitleConfig"`
+
+	// Watermark erasing configuration.
+	// This field is required when the value of EraseType is watermark.
+	EraseWatermarkConfig *UpdateSmartEraseWatermarkConfig `json:"EraseWatermarkConfig,omitnil,omitempty" name:"EraseWatermarkConfig"`
+
+	// Privacy protection configuration.
+	// This field is required when the value of EraseType is privacy.
+	ErasePrivacyConfig *UpdateSmartErasePrivacyConfig `json:"ErasePrivacyConfig,omitnil,omitempty" name:"ErasePrivacyConfig"`
 }
 
 type OverrideTranscodeParameter struct {
@@ -14821,6 +15148,42 @@ type ProhibitedOcrReviewTemplateInfoForUpdate struct {
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitnil,omitempty" name:"ReviewConfidence"`
 }
 
+type PureSubtitleTransResult struct {
+	// Task status (the three valid values are as follows):
+	// - PROCESSING
+	// - SUCCESS 
+	// - FAIL
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of Media Processing Service (MPS) error codes.
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Translation task input information.
+	Input *SmartSubtitleTaskResultInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Translation output result of pure subtitle files.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Output *PureSubtitleTransResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// Task progress.
+	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+}
+
+type PureSubtitleTransResultOutput struct {
+	// Storage location of the subtitle file.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
+
+	// Result set of multilingual translation.
+	SubtitleResults []*SubtitleTransResultItem `json:"SubtitleResults,omitnil,omitempty" name:"SubtitleResults"`
+}
+
 type QualityControlData struct {
 	// When this field is set to true, it indicates that the video has no audio track.
 	NoAudio *bool `json:"NoAudio,omitnil,omitempty" name:"NoAudio"`
@@ -15080,65 +15443,82 @@ type RawSmartSubtitleParameter struct {
 	// The value can only be 0 when TranslateSwitch is set to OFF. The value can only be 1 or 2 when TranslateSwitch is set to ON.
 	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
 
-	// Video source language for intelligent caption.
-	// Valid values: 
-	// zh: Simplified Chinese.
-	// en: Eenglish.
-	// Ja: Japanese.
-	// Ko: Korean.
-	// zh-PY: Simplified Chinese, English and Cantonese.
-	// zh-medical: Medical Chinese.
-	// yue: Cantonese.
-	// Vi: Vietnamese.
-	// ms: Malay.
-	// id: Indonesian.
-	// fil: Filipino.
-	// th: Thai.
-	// pt: Portuguese.
-	// tr: Turkish.
-	// ar: Arabic.
-	// es: Spanish.
-	// hi: Hindi
-	// Fr: French.
-	// de: German.
-	// zh-dialect: Chinese dialect
-	// zh_en: Simplified Chinese and English
-	// prime_zh: Simplified Chinese, Chinese Dialect and English.
+	// Source language of the video with smart subtitles.
+	// Currently, the following languages are supported:
+	// `zh`: Simplified Chinese.
+	// `yue`: Cantonese.
+	// `zh-PY`: Chinese, English, and Cantonese.
+	// `zh_medical`: Chinese (medical scenario).
+	// `zh_dialect`: Chinese dialect.
+	// `prime_zh`: Chinese, English, and Chinese dialects.
+	// `zh_en`: Chinese and English.
+	// `en`: English.
+	// `ja`: Japanese.
+	// `ko`: Korean.
+	// `fr`: French.
+	// `es`: Spanish.
+	// `it`: Italian.
+	// `de`: German.
+	// `tr`: Turkish.
+	// `ru`: Russian.
+	// `pt`: Portuguese (Brazil).
+	// `pt-PT`: Portuguese (Portugal).
+	// `vi`: Vietnamese.
+	// `id`: Indonesian.
+	// `ms`: Malay.
+	// `th`: Thai.
+	// `ar`: Arabic.
+	// `hi`: Hindi.
+	// `fil`: Filipino.
+	// `auto`: automatic recognition (it is only supported in pure subtitle translation).
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
-	// Intelligent subtitle file format.
-	// vtt: WebVTT format.
-	// srt: SRT format.
-	// If this field is left blank, no subtitle file will be generated.
+	// Smart subtitle file format:
+	// - Under the ASR recognition and translation processing type:
+	//      -vtt: WebVTT format subtitle.
+	//      -srt: SRT format subtitle.
+	//      - If this field is unspecified or left blank, no subtitle file will be generated.
+	// - Under the pure subtitle translation processing type:
+	//     - original: consistent with the source file.
+	//     - vtt: WebVTT format subtitle.
+	//     - srt: SRT format subtitle.
+	// **Note**:
+	// - For ASR recognition mode, when 2 or more languages are involved in translation, this field cannot be unspecified or left blank.
+	// - For pure subtitle translation mode, this field cannot be unspecified or left blank.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
 	// Subtitle translation switch.
-	// ON: enable translation
-	// OFF: disable translation
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// `ON`: translation enabled.
+	// `OFF`: translation disabled.
+	// **Note**: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to `OFF`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
 
 	// Target language for subtitle translation.
-	// This field takes effect when TranslateSwitch is set to ON.
-	// Supported languages:
-	// zh: Simplified Chinese
-	// en: English
-	// ja: Japanese
-	// ko: Korean
-	// fr: French
-	// es: Spanish
-	// it: Italian
-	// de: German
-	// tr: Turkish
-	// ru: Russian
-	// pt: Portuguese
-	// vi: Vietnamese
-	// id: Indonesian
-	// ms: Malay
-	// th: Thai
-	// ar: Arabic
-	// hi: Hindi
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// This field is valid when the value of TranslateSwitch is ON. List of translation languages:
+	// `zh`: Simplified Chinese.
+	// `zh-TW`: Traditional Chinese.
+	// `en`: English.
+	// `ja`: Japanese.
+	// `ko`: Korean.
+	// `fr`: French.
+	// `es`: Spanish.
+	// `it`: Italian.
+	// `de`: German.
+	// `tr`: Turkish.
+	// `ru`: Russian.
+	// `pt`: Portuguese (Brazil).
+	// `pt-PT`: Portuguese (Portugal).
+	// `vi`: Vietnamese.
+	// `id`: Indonesian.
+	// `ms`: Malay.
+	// `th`: Thai.
+	// `ar`: Arabic.
+	// `hi`: Hindi.
+	// `fil`: Filipino.
+	// **Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
 
 	// ASR hotword lexicon parameter.
@@ -15147,6 +15527,12 @@ type RawSmartSubtitleParameter struct {
 
 	// Custom parameter.
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
+
+	// Subtitle processing type.
+	// - 0: ASR recognition subtitle.
+	// - 1: pure subtitle translation.
+	// **Note**: The default processing type is ASR recognition subtitle if the field is unspecified.
+	ProcessType *uint64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 }
 
 type RawTranscodeParameter struct {
@@ -15913,6 +16299,9 @@ type SmartEraseTaskInput struct {
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	RawParameter *RawSmartEraseParameter `json:"RawParameter,omitnil,omitempty" name:"RawParameter"`
 
+	// Custom parameters for smart erasing. When the value of Definition is not 0, this parameter is valid. When certain erasing parameters in this structure are specified, the specified parameters will be used to overwrite those in the smart erasing template. This parameter is used in highly customized scenarios. It is recommended to use only Definition to specify smart erasing parameters.
+	OverrideParameter *OverrideEraseParameter `json:"OverrideParameter,omitnil,omitempty" name:"OverrideParameter"`
+
 	// Specifies the target storage for files. if left blank, it inherits the upper-level OutputStorage value.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
@@ -16063,6 +16452,9 @@ type SmartSubtitleTaskAsrFullTextResultOutput struct {
 	SegmentSet []*SmartSubtitleTaskAsrFullTextSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 
 	// Subtitle file path.
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+
+	// Subtitle file path.
 	SubtitlePath *string `json:"SubtitlePath,omitnil,omitempty" name:"SubtitlePath"`
 
 	// Subtitle file storage location.
@@ -16156,6 +16548,12 @@ type SmartSubtitleTaskTransTextResultOutput struct {
 
 	// Subtitle file storage location.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
+
+	// Subtitle file URL.
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+
+	// Returned translation result during multilingual translation.	
+	SubtitleResults []*SubtitleTransResultItem `json:"SubtitleResults,omitnil,omitempty" name:"SubtitleResults"`
 }
 
 type SmartSubtitleTaskTransTextSegmentItem struct {
@@ -16206,34 +16604,41 @@ type SmartSubtitleTemplateItem struct {
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	AsrHotWordsLibraryName *string `json:"AsrHotWordsLibraryName,omitnil,omitempty" name:"AsrHotWordsLibraryName"`
 
-	// Source language of the video with smart subtitles.
-	// Supported languages:
-	// zh: Simplified Chinese
-	// en: English
-	// ja: Japanese
-	// ko: Korean
-	// zh-PY: Chinese-English-Cantonese
-	// zh-medical: Medical Chinese
-	// yue: Cantonese
-	// vi: Vietnamese
-	// ms: Malay
-	// id: Indonesian
-	// fli: Filipino
-	// th: Thai
-	// pt: Portuguese
-	// tr: Turkish
-	// ar: Arabic
-	// es: Spanish
-	// hi: Hindi
-	// fr: French
-	// de: German
-	// zh-dialect: Chinese dialect
+	// List of source languages of the video with smart subtitles.
+	// `zh`: Simplified Chinese.
+	// `yue`: Cantonese.
+	// `zh-PY`: Chinese, English, and Cantonese.
+	// `zh_medical`: Chinese (medical scenario).
+	// `zh_dialect`: Chinese dialect.
+	// `prime_zh`: Chinese, English, and Chinese dialects.
+	// `zh_en`: Chinese and English.
+	// `en`: English.
+	// `ja`: Japanese.
+	// `ko`: Korean.
+	// `fr`: French.
+	// `es`: Spanish.
+	// `it`: Italian.
+	// `de`: German.
+	// `tr`: Turkish.
+	// `ru`: Russian.
+	// `pt`: Portuguese (Brazil).
+	// `pt-PT`: Portuguese (Portugal).
+	// `vi`: Vietnamese.
+	// `id`: Indonesian.
+	// `ms`: Malay.
+	// `th`: Thai.
+	// `ar`: Arabic.
+	// `hi`: Hindi.
+	// `fil`: Filipino.
+	// `auto`: automatic recognition (it is only supported in pure subtitle translation).
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
-	// Smart subtitle file format.
-	// vtt: WebVTT format
-	// If this field is left blank, no subtitle file will be generated.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Smart subtitle file format:
+	// - vtt: WebVTT format.
+	// - srt: SRT format.
+	// - original: consistent with the source subtitle file (it is used for the pure subtitle translation template).
+	// - If this field is unspecified or left blank, no subtitle file will be generated.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
 	// Smart subtitle language type.
@@ -16249,26 +16654,29 @@ type SmartSubtitleTemplateItem struct {
 	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
 
 	// Target language for subtitle translation.
-	// This field takes effect when TranslateSwitch is set to ON.
-	// Supported languages:
-	// zh: Simplified Chinese
-	// en: English
-	// ja: Japanese
-	// ko: Korean
-	// fr: French
-	// es: Spanish
-	// it: Italian
-	// de: German
-	// tr: Turkish
-	// ru: Russian
-	// pt: Portuguese
-	// vi: Vietnamese
-	// id: Indonesian
-	// ms: Malay
-	// th: Thai
-	// ar: Arabic
-	// hi: Hindi
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// This field is valid when the value of TranslateSwitch is ON.
+	// `zh`: Simplified Chinese.
+	// `zh-TW`: Traditional Chinese.
+	// `en`: English.
+	// `ja`: Japanese.
+	// `ko`: Korean.
+	// `fr`: French.
+	// `es`: Spanish.
+	// `it`: Italian.
+	// `de`: German.
+	// `tr`: Turkish.
+	// `ru`: Russian.
+	// `pt`: Portuguese (Brazil).
+	// `pt-PT`: Portuguese (Portugal).
+	// `vi`: Vietnamese.
+	// `id`: Indonesian.
+	// `ms`: Malay.
+	// `th`: Thai.
+	// `ar`: Arabic.
+	// `hi`: Hindi.
+	// `fil`: Filipino.
+	// **Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
 
 	// Template creation time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
@@ -16280,12 +16688,18 @@ type SmartSubtitleTemplateItem struct {
 	// Alias of the preset smart subtitle template.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	AliasName *string `json:"AliasName,omitnil,omitempty" name:"AliasName"`
+
+	// Subtitle processing type.
+	// - 0: ASR recognition subtitle.
+	// - 1: pure subtitle translation.
+	ProcessType *uint64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 }
 
 type SmartSubtitlesResult struct {
 	// Task type. Valid values:
-	// <li>AsrFullTextRecognition: full speech recognition</li>
-	// <li>TransTextRecognition: speech translation</li>
+	// - AsrFullTextRecognition: full speech recognition.
+	// - TransTextRecognition: speech translation.
+	// - PureSubtitleTrans: pure subtitle translation.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Full speech recognition result. When Type is
@@ -16298,6 +16712,10 @@ type SmartSubtitlesResult struct {
 	//  set to TransTextRecognition, this parameter takes effect.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	TransTextTask *SmartSubtitleTaskTransTextResult `json:"TransTextTask,omitnil,omitempty" name:"TransTextTask"`
+
+	// The translation result of the pure subtitle file is returned when the translation type is PureSubtitleTrans.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PureSubtitleTransTask *PureSubtitleTransResult `json:"PureSubtitleTransTask,omitnil,omitempty" name:"PureSubtitleTransTask"`
 }
 
 type SmartSubtitlesTaskInput struct {
@@ -16421,8 +16839,10 @@ type SnapshotByTimeOffsetTemplate struct {
 }
 
 type SpekeDrm struct {
-	// Resource tagging. the field content is user-customized.
+	// Resource ID. The field content is user-defined.
 	// It supports 1 to 128 characters consisting of digits, letters, underscores (_), and hyphens (-).
+	// This field corresponds to the cid field in the Speke request.
+	// Note: Different DRM vendors have different restrictions on this field (for example, SDMC Technology Co., Ltd. does not support this field containing underscores). For specific rules, check with the vendors.
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
 	// DRM manufacturer access address. the field content is obtained from the drm manufacturer.
@@ -16433,10 +16853,15 @@ type SpekeDrm struct {
 	// Initialization vector for encryption (32-byte hexadecimal string). the field content is user-customized.
 	Vector *string `json:"Vector,omitnil,omitempty" name:"Vector"`
 
-	// Encryption method. cbcs: default method of FairPlay; cenc: default method of PlayReady and Widevine.
+	// Encryption method. Options:  
+	// - **cbcs**: Supports PlayReady, Widevine, FairPlay, Widevine+FairPlay, Widevine+PlayReady, PlayReady+FairPlay, and Widevine+PlayReady+FairPlay.  
+	// - **cenc**: Supports PlayReady, Widevine, and Widevine+PlayReady.  
 	// 
-	// cbcs: supported by PlayReady, Widevine, and FairPlay
-	// cenc: supported by PlayReady and Widevine
+	// If not specified:  
+	// - FairPlay defaults to **cbcs**.  
+	// - PlayReady and Widevine default to **cenc**.  
+	// - Widevine+FairPlay, PlayReady+FairPlay, and Widevine+PlayReady+FairPlay default to **cbcs**.  
+	// - Widevine+PlayReady defaults to **cenc**.
 	EncryptionMethod *string `json:"EncryptionMethod,omitnil,omitempty" name:"EncryptionMethod"`
 
 	// Substream encryption rule. Default value: preset0.
@@ -16583,6 +17008,22 @@ type SubtitleTemplate struct {
 	// Alignment mode. Valid values: top alignment. The top position of subtitles is fixed, while the bottom position changes according to the number of lines. bottom: bottom alignment. The bottom position of subtitles is fixed, while the top position changes according to the number of lines.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Alignment *string `json:"Alignment,omitnil,omitempty" name:"Alignment"`
+}
+
+type SubtitleTransResultItem struct {
+	// Translation marker.
+	// - Success
+	// - Error
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Source language (such as "en").
+	TransSrc *string `json:"TransSrc,omitnil,omitempty" name:"TransSrc"`
+
+	// Target language (such as "zh").
+	TransDst *string `json:"TransDst,omitnil,omitempty" name:"TransDst"`
+
+	// Subtitle file URL.
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 }
 
 type SuperResolutionConfig struct {
@@ -17089,6 +17530,117 @@ type TranslateConfigureInfo struct {
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 }
 
+type UpdateSmartErasePrivacyConfig struct {
+	// Erasing method of privacy protection.
+	// - blur
+	// - mosaic
+	PrivacyModel *string `json:"PrivacyModel,omitnil,omitempty" name:"PrivacyModel"`
+
+	// Privacy protection target. (When API Explorer is used, it is not required to specify an array. Add the corresponding items and enter the corresponding values.)
+	// - face: human face.
+	// - plate: license plate.
+	PrivacyTargets []*string `json:"PrivacyTargets,omitnil,omitempty" name:"PrivacyTargets"`
+}
+
+type UpdateSmartEraseSubtitleConfig struct {
+	// Subtitle erasing method.
+	// **Automatic erasing:** Video subtitles are automatically recognized using an AI model and are erased without traces to generate a new video. However, missed or incorrect erasing may occur due to image interference and special subtitle styles. In this case, you can specify the erasing area.
+	// When automatic erasing is used, if AutoAreas is not specified, the default area (lower middle part of the image) will be erased automatically. If AutoAreas is specified, the specified area will be erased automatically.
+	// **Specified area erasing:** If the subtitle position is relatively fixed, you are recommended to specify the erasing area directly to minimize missed erasing.
+	// When you choose specified area erasing, specify at least one area for CustomAreas.
+	// - auto: automatic erasing.
+	// - custom: specified area erasing.
+	SubtitleEraseMethod *string `json:"SubtitleEraseMethod,omitnil,omitempty" name:"SubtitleEraseMethod"`
+
+	// Subtitle erasing model.
+	// **Standard edition (recommended):** For standard subtitle styles, you are recommended to select this edition to ensure better traceless effects in the details.
+	// **Area edition:** If the subtitles have special styles, such as calligraphy, shadow, or motion effects, you are recommended to select this edition to ensure a larger erasing area. However, the erasing effect in the details is not as good as the standard edition.
+	// - standard: standard edition.
+	// - area: area edition.
+	SubtitleModel *string `json:"SubtitleModel,omitnil,omitempty" name:"SubtitleModel"`
+
+	// Whether to enable OCR subtitle extraction. The default value is OFF.
+	// OCR subtitle extraction is supported if and only if SubtitleEraseMethod is set to auto. When OCR subtitle extraction is enabled, it identifies the text region that appears most persistently and stably within the automatic erasing area as the subtitle area. The text within the subtitle area is extracted and erased.
+	// - ON: enabled.
+	// -OFF: disabled.
+	OcrSwitch *string `json:"OcrSwitch,omitnil,omitempty" name:"OcrSwitch"`
+
+	// Subtitle language, which is used to guide OCR recognition. The default value is zh_en. This parameter is valid only when OcrSwitch is set to ON.
+	// - zh_en: Chinese and English.
+	// - multi: others.
+	// The following are other languages supported for recognition:
+	// Chinese, English, Japanese, Korean, Spanish, French, German, Portuguese, Vietnamese, Malay, Russian, Italian, Dutch, Swedish, Finnish, Danish, Norwegian, Hungarian, Thai, Hindi, Arabic, India-Bengali, India-Gujarati, India-Kannada, India-Malayalam, India-Tamil, India-Telugu, Slovenian, Polish, Catalan, Bosnian, Czech, Estonian, Croatian, Punjabi, Marathi, Azerbaijani, Indonesian, Luxembourgish, Lithuanian, Latvian, Maltese, Slovak, Turkish, Kazakh, Greek, Irish, Belarusian, Khmer, Tagalog, Pashto, Persian, and Tajik.
+	SubtitleLang *string `json:"SubtitleLang,omitnil,omitempty" name:"SubtitleLang"`
+
+	// Subtitle file format. The default value is vtt. This parameter is valid only when OcrSwitch is set to ON.
+	// - srt: SRT format.
+	// - vtt: WebVTT format.
+	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
+
+	// Whether to enable subtitle translation. The default value is OFF. This parameter is valid only when OcrSwitch is set to ON.
+	// - ON: enabled.
+	// - OFF: disabled.
+	TransSwitch *string `json:"TransSwitch,omitnil,omitempty" name:"TransSwitch"`
+
+	// Target language for Subtitle translation. The default value is en. This parameter is valid only when TransSwitch is set to ON.
+	// Currently, the following languages are supported:
+	// zh: Simplified Chinese.
+	// en: English.
+	// ja: Japanese.
+	// ko: Korean.
+	// fr: French.
+	// es: Spanish.
+	// it: Italian.
+	// de: German.
+	// tr: Turkish.
+	// ru: Russian.
+	// pt: Portuguese.
+	// vi: Vietnamese.
+	// id: Indonesian.
+	// ms: Malay.
+	// th: Thai.
+	// ar: Arabic.
+	// hi: Hindi.
+	TransDstLang *string `json:"TransDstLang,omitnil,omitempty" name:"TransDstLang"`
+
+	// Custom area for automatic erasing.
+	// For the specified area, AI models are used to automatically detect and erase the target objects.
+	// Note: When the erasing method is set to custom, this parameter is invalid. When a template is modified, input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
+	AutoAreas []*EraseArea `json:"AutoAreas,omitnil,omitempty" name:"AutoAreas"`
+
+	// Custom area for specified area erasing.
+	// For the specified area, erase the target objects directly without detection and recognition within a selected time period.
+	// Note: When a template is modified, input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
+	CustomAreas []*EraseTimeArea `json:"CustomAreas,omitnil,omitempty" name:"CustomAreas"`
+}
+
+type UpdateSmartEraseWatermarkConfig struct {
+	// Watermark erasing method.
+	// **Automatic erasing: ** Video watermarks are automatically recognized using an AI model and are erased to generate a new video. It applies to dynamic watermarks.
+	// When automatic erasing is used, if AutoAreas is not specified, the full-screen video image area will be erased automatically. If AutoAreas is specified, the specified area will be erased automatically.
+	//  **Specified area erasing: ** For static watermarks in fixed positions, you are recommended to specify the erasing area directly.When you choose specified area erasing, specify at least one area.
+	// - auto: automatic erasing.
+	// - custom: specified area erasing.
+	WatermarkEraseMethod *string `json:"WatermarkEraseMethod,omitnil,omitempty" name:"WatermarkEraseMethod"`
+
+	// Watermark erasing model.
+	// Basic Edition: provide average effects and high cost performance. It applies to animations or videos with clean backgrounds.
+	// Advanced Edition: provide better effects. It applies to reality-style videos, such as short dramas.
+	// - basic: Basic Edition.
+	// - advanced: Advanced Edition.
+	WatermarkModel *string `json:"WatermarkModel,omitnil,omitempty" name:"WatermarkModel"`
+
+	// Custom area for automatic erasing.
+	// For the specified area, AI models are used to automatically detect and erase the target objects.
+	// Note: When the erasing method is set to custom, this parameter is invalid. Input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
+	AutoAreas []*EraseArea `json:"AutoAreas,omitnil,omitempty" name:"AutoAreas"`
+
+	// Custom area for specified area erasing.
+	// For the specified area, erase the target objects directly without detection and recognition within a selected time period.
+	// Note: Input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
+	CustomAreas []*EraseTimeArea `json:"CustomAreas,omitnil,omitempty" name:"CustomAreas"`
+}
+
 type UrlInputInfo struct {
 	// URL of a video.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
@@ -17262,11 +17814,11 @@ type VideoDenoiseConfig struct {
 }
 
 type VideoEnhanceConfig struct {
-	// Frame interpolation configuration.
+	// Frame rate configuration (old) for the frame interpolation. New users are recommended to use FrameRateWithDen for configuring the frame rate of frame interpolation, which supports fractions and provides better results. Note that FrameRate and FrameRateWithDen are mutually exclusive; configuring both simultaneously may cause task failures. The configuration does not take effect if the source frame rate is greater than or equal to the target frame rate.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FrameRate *FrameRateConfig `json:"FrameRate,omitnil,omitempty" name:"FrameRate"`
 
-	// Super resolution configuration.
+	// Super-resolution configuration. The video is not processed when the source resolution is higher than the target resolution. Note that it cannot be enabled simultaneously with Large Model enhancement.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SuperResolution *SuperResolutionConfig `json:"SuperResolution,omitnil,omitempty" name:"SuperResolution"`
 
@@ -17274,25 +17826,17 @@ type VideoEnhanceConfig struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Hdr *HdrConfig `json:"Hdr,omitnil,omitempty" name:"Hdr"`
 
-	// Image noise removal configuration.
+	// Video noise reduction configuration. Note that it cannot be enabled simultaneously with LLM enhancement.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Denoise *VideoDenoiseConfig `json:"Denoise,omitnil,omitempty" name:"Denoise"`
 
-	// Overall enhancement configuration.
+	// Comprehensive enhancement configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ImageQualityEnhance *ImageQualityEnhanceConfig `json:"ImageQualityEnhance,omitnil,omitempty" name:"ImageQualityEnhance"`
 
 	// Color enhancement configuration.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ColorEnhance *ColorEnhanceConfig `json:"ColorEnhance,omitnil,omitempty" name:"ColorEnhance"`
-
-	// Detail enhancement configuration.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	SharpEnhance *SharpEnhanceConfig `json:"SharpEnhance,omitnil,omitempty" name:"SharpEnhance"`
-
-	// Face enhancement configuration.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	FaceEnhance *FaceEnhanceConfig `json:"FaceEnhance,omitnil,omitempty" name:"FaceEnhance"`
 
 	// Low-light enhancement configuration.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -17302,9 +17846,30 @@ type VideoEnhanceConfig struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ScratchRepair *ScratchRepairConfig `json:"ScratchRepair,omitnil,omitempty" name:"ScratchRepair"`
 
-	// Artifact removal (smoothing) configuration.
+	// Artifacts removal configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ArtifactRepair *ArtifactRepairConfig `json:"ArtifactRepair,omitnil,omitempty" name:"ArtifactRepair"`
+
+	// Enhancement scenario configuration. Valid values:
+	// <li>common: common enhancement parameters, which are basic optimization parameters suitable for various video types, enhancing overall image quality.</li>
+	// <li>AIGC: overall resolution enhancement. It uses AI technology to improve the overall video resolution and image clarity.</li>
+	// <li>short_play: enhance facial and subtitle details, emphasizing characters' facial expressions and subtitle clarity to improve the viewing experience.</li>
+	// <li>short_video: optimize complex and diverse image quality issues, tailoring quality enhancements for the complex scenarios such as short videos to address various visual issues.</li>
+	// <li>game: fix motion blur and enhance details, with a focus on enhancing the clarity of game details and restoring blurry areas during motions to make the image content during gaming clearer and richer.</li>
+	// <li>HD_movie_series: provide a smooth playback effect for UHD videos. Standard 4K HDR videos with an FPS of 60 are generated to meet the needs of broadcasting/OTT for UHD videos. Formats for broadcasting scenarios are supported.</li>
+	// <li>LQ_material: low-definition material/old video restoration. It enhances overall resolution, and solves issues of old videos, such as low resolution, blur, distortion, scratches, and color temperature due to their age.</li>
+	// <li>lecture: live shows, e-commerce, conferences, and lectures. It improves the face display effect and performs specific optimizations, including face region enhancement, noise reduction, and artifacts removal, for scenarios involving human explanation, such as live shows, e-commerce, conferences, and lectures.</li>
+	// <li>Input of a null string indicates that the enhancement scenario is not used.</li>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnhanceSceneType *string `json:"EnhanceSceneType,omitnil,omitempty" name:"EnhanceSceneType"`
+
+	// Large Model enhancement configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured. It cannot be enabled simultaneously with super-resolution and noise reduction.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiffusionEnhance *DiffusionEnhanceConfig `json:"DiffusionEnhance,omitnil,omitempty" name:"DiffusionEnhance"`
+
+	// New frame rate configuration for the frame interpolation, which supports fractions. Note that it is mutually exclusive with FrameRate. The configuration does not take effect if the source frame rate is greater than or equal to the target frame rate.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FrameRateWithDen *FrameRateWithDenConfig `json:"FrameRateWithDen,omitnil,omitempty" name:"FrameRateWithDen"`
 }
 
 type VideoTemplateInfo struct {
@@ -17388,10 +17953,9 @@ type VideoTemplateInfo struct {
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	Vcrf *uint64 `json:"Vcrf,omitnil,omitempty" name:"Vcrf"`
 
-	// Average segment duration. Value range: (0-10], unit: second.
-	// This parameter will be set to automatic if not specified. The segment duration will be automatically selected based on the GOP and other characteristics of the video.
-	// Note: It can be used only in the container format of hls.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Average shard duration. value range: (0-10], unit: second.
+	// Leaving it blank means auto, which automatically chooses the appropriate segment duration based on video features such as GOP.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	HlsTime *uint64 `json:"HlsTime,omitnil,omitempty" name:"HlsTime"`
 
 	// HLS segment type. Valid values:
@@ -17492,22 +18056,24 @@ type VideoTemplateInfo struct {
 	ScenarioBased *int64 `json:"ScenarioBased,omitnil,omitempty" name:"ScenarioBased"`
 
 	// Video scenario. Valid values: 
-	// normal: General transcoding scenario: General transcoding and compression scenario.
-	// pgc: PGC HD TV shows and movies: At the time of compression, focus is placed on the viewing experience of TV shows and movies and ROI encoding is performed according to their characteristics, while high-quality contents of videos and audio are retained. 
-	// materials_video: HD materials: Scenario involving material resources, where requirements for image quality are extremely high and there are many transparent images, with almost no visual loss during compression. 
-	// ugc: UGC content: It is suitable for a wide range of UGC/short video scenarios, with an optimized encoding bitrate for short video characteristics, improved image quality, and enhanced business QOS/QOE metrics. 
-	// e-commerce_video: Fashion show/e-commerce: At the time of compression, emphasis is placed on detail clarity and ROI enhancement, with a particular focus on maintaining the image quality of the face region. 
-	// educational_video: Education: At the time of compression, emphasis is placed on the clarity and readability of text and images to help students better understand the content, ensuring that the teaching content is clearly conveyed. 
+	// - normal: General transcoding scenario. General transcoding and compression scenario.
+	// - pgc: PGC HD TV shows and movies. At the time of compression, focus is placed on the viewing experience of TV shows and movies and ROI encoding is performed according to their characteristics, while high-quality contents of videos and audio are retained. 
+	// - materials_video: HD materials. Scenario involving material resources, where requirements for image quality are extremely high and there are many transparent images, with almost no visual loss during compression. 
+	// - ugc: UGC content. It is suitable for a wide range of UGC/short video scenarios, with an optimized encoding bitrate for short video characteristics, improved image quality, and enhanced business QOS/QOE metrics. 
+	// - e-commerce_video. Fashion show/e-commerce: At the time of compression, emphasis is placed on detail clarity and ROI enhancement, with a particular focus on maintaining the image quality of the face region. 
+	// - educational_video. Education. At the time of compression, emphasis is placed on the clarity and readability of text and images to help students better understand the content, ensuring that the teaching content is clearly conveyed. 
+	// 
 	// Default value: normal.
 	// Note: To use this value, the value of ScenarioBased must be 1; otherwise, this value will not take effect.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
 
 	// Transcoding policy. Valid values: 
-	// ultra_compress: Extreme compression: Compared to standard compression, this policy can maximize bitrate compression while ensuring a certain level of image quality, thus greatly saving bandwidth and storage costs. 
-	// standard_compress: Comprehensively optimal: Balances compression ratio and image quality, compressing files as much as possible without a noticeable reduction in subjective image quality. Only audio and video TSC transcoding fees are charged for this policy. 
-	// high_compress: Bitrate priority: Prioritizes reducing file size, which may result in certain image quality loss. Only audio and video TSC transcoding fees are charged for this policy. 
-	// low_compress: Image quality priority: Prioritizes ensuring image quality, and the size of compressed files may be relatively large. Only audio and video TSC transcoding fees are charged for this policy. 
+	// - ultra_compress: Extreme compression. Compared to standard compression, this policy can maximize bitrate compression while ensuring a certain level of image quality, thus greatly saving bandwidth and storage costs. 
+	// - standard_compress: Comprehensively optimal. Balances compression ratio and image quality, compressing files as much as possible without a noticeable reduction in subjective image quality. Only audio and video TSC transcoding fees are charged for this policy. 
+	// - high_compress: Bitrate priority. Prioritizes reducing file size, which may result in certain image quality loss. Only audio and video TSC transcoding fees are charged for this policy. 
+	// - low_compress: Image quality priority. Prioritizes ensuring image quality, and the size of compressed files may be relatively large. Only audio and video TSC transcoding fees are charged for this policy. 
+	// 
 	// Default value: standard_compress. 
 	// Note: If you need to watch videos on TV, it is recommended not to use the ultra_compress policy. The billing standard for the ultra_compress policy is TSC transcoding + audio and video enhancement - artifacts removal.
 	// Note: To use this value, the value of ScenarioBased must be 1; otherwise, this value will not take effect.
@@ -17516,25 +18082,23 @@ type VideoTemplateInfo struct {
 }
 
 type VideoTemplateInfoForUpdate struct {
-	// Encoding format for video streams. Optional values:
-	// <li>h264: H.264 encoding</li>
-	// <li>h265: H.265 encoding</li>
-	// <li>h266: H.266 encoding</li>
-	// <li>av1: AOMedia Video 1 encoding</li>
-	// <li>vp8: VP8 encoding</li>
-	// <li>vp9: VP9 encoding</li>
-	// <li>mpeg2: MPEG2 encoding</li>
-	// <li>dnxhd: DNxHD encoding</li>
-	// <li>mv-hevc: MV-HEVC encoding</li>
+	// Encoding format for video streams. valid values:.
+	// <Li>H264: h.264 encoding.</li>.
+	// <Li>H265: h.265 encoding.</li>.
+	// <Li>H266: h.266 encoding.</li>.
+	// <li>av1: AOMedia Video 1 encoding</li>.
+	// <li>vp8: vp8 encoding.</li>.
+	// <li>vp9: vp9 encoding.</li>.
+	// <li>mpeg2: mpeg2 encoding.</li>.
+	// <li>dnxhd: specifies dnxhd encoding.</li>.
+	// <li>mv-hevc: mv-hevc encoding.</li>.
 	// 
-	// Note: 
-	// AV1 encoding containers currently only support mp4, webm, and mkv.
-	// H.266 encoding containers currently only support mp4, hls, ts, and mov. 
-	// VP8 and VP9 encoding containers currently only support webm and mkv.
-	// MPEG2 and DNxHD encoding containers currently only support mxf.
-	// MV-HEVC encoding containers only support mp4, hls, and mov. Also, the hls format only supports mp4 segmentation format.
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Note: the av1 encoding container currently only supports mp4, webm, and mkv.
+	// Note: H.266 encoding containers currently only support mp4, hls, ts, and mov.
+	// Note: VP8 and VP9 encoding containers currently only support webm and mkv.
+	// Note: MPEG2 and dnxhd encoding containers currently only support mxf.
+	// Note: MV-HEVC encoding containers currently only support mp4, hls, and mov. among them, the hls format supports only mp4 segmentation format and requires the input source to be a panoramic video (with multi-perspective).
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Codec *string `json:"Codec,omitnil,omitempty" name:"Codec"`
 
 	// Video frame rate. Value range:
@@ -17711,21 +18275,24 @@ type VideoTemplateInfoForUpdate struct {
 	ScenarioBased *int64 `json:"ScenarioBased,omitnil,omitempty" name:"ScenarioBased"`
 
 	// Video scenario. Valid values: 
-	// normal: General transcoding scenario: General transcoding and compression scenario. pgc: PGC HD film and television: Emphasis is placed on the viewing experience of films and TV shows during compression, with ROI encoding based on the characteristics of films and TV shows, while maintaining high-quality video and audio content. 
-	// materials_video: HD materials: Scenario involving material resources, where requirements for image quality are extremely high and there are many transparent images, with almost no visual loss during compression. 
-	// ugc: UGC content: It is suitable for a wide range of UGC/short video scenarios, with an optimized encoding bitrate for short video characteristics, improved image quality, and enhanced business QOS/QOE metrics. 
-	// e-commerce_video: Fashion show/e-commerce: At the time of compression, emphasis is placed on detail clarity and ROI enhancement, with a particular focus on maintaining the image quality of the face region. 
-	// educational_video: Education: At the time of compression, emphasis is placed on the clarity and readability of text and images to help students better understand the content, ensuring that the teaching content is clearly conveyed.
+	// - normal: General transcoding scenario. General transcoding and compression scenario.
+	// - pgc: PGC HD TV shows and movies. At the time of compression, focus is placed on the viewing experience of TV shows and movies and ROI encoding is performed according to their characteristics, while high-quality contents of videos and audio are retained. 
+	// - materials_video: HD materials. Scenario involving material resources, where requirements for image quality are extremely high and there are many transparent images, with almost no visual loss during compression. 
+	// - ugc: UGC content. It is suitable for a wide range of UGC/short video scenarios, with an optimized encoding bitrate for short video characteristics, improved image quality, and enhanced business QOS/QOE metrics. 
+	// - e-commerce_video. Fashion show/e-commerce: At the time of compression, emphasis is placed on detail clarity and ROI enhancement, with a particular focus on maintaining the image quality of the face region. 
+	// - educational_video. Education. At the time of compression, emphasis is placed on the clarity and readability of text and images to help students better understand the content, ensuring that the teaching content is clearly conveyed. 
+	// 
 	// Default value: normal.
 	// Note: To use this value, the value of ScenarioBased must be 1; otherwise, this value will not take effect.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
 
 	// Transcoding policy. Valid values: 
-	// ultra_compress: Extreme compression: Compared to standard compression, this policy can maximize bitrate compression while ensuring a certain level of image quality, thus greatly saving bandwidth and storage costs. 
-	// standard_compress: Comprehensively optimal: Balances compression ratio and image quality, compressing files as much as possible without a noticeable reduction in subjective image quality. This policy only charges audio and video TSC transcoding fees. 
-	// high_compress: Bitrate priority: Prioritizes reducing file size, which may result in some image quality loss. This policy only charges audio and video TSC transcoding fees. 
-	// low_compress: Image quality priority: Prioritizes ensuring image quality, and the size of compressed files may be relatively large. This policy only charges audio and video TSC transcoding fees. 
+	// - ultra_compress: Extreme compression. Compared to standard compression, this policy can maximize bitrate compression while ensuring a certain level of image quality, thus greatly saving bandwidth and storage costs. 
+	// - standard_compress: Comprehensively optimal. Balances compression ratio and image quality, compressing files as much as possible without a noticeable reduction in subjective image quality. Only audio and video TSC transcoding fees are charged for this policy. 
+	// - high_compress: Bitrate priority. Prioritizes reducing file size, which may result in certain image quality loss. Only audio and video TSC transcoding fees are charged for this policy. 
+	// - low_compress: Image quality priority. Prioritizes ensuring image quality, and the size of compressed files may be relatively large. Only audio and video TSC transcoding fees are charged for this policy. 
+	// 
 	// Default value: standard_compress. 
 	// Note: If you need to watch videos on TV, it is recommended not to use the ultra_compress policy. The billing standard for the ultra_compress policy is TSC transcoding + audio and video enhancement - artifacts removal.
 	// Note: To use this value, the value of ScenarioBased must be 1; otherwise, this value will not take effect.

@@ -2342,6 +2342,9 @@ type EventSettingsReq struct {
 	// ID of the input to attach, which is required if `EventType` is `INPUT_SWITCH`
 	InputAttachment *string `json:"InputAttachment,omitnil,omitempty" name:"InputAttachment"`
 
+	// When the type is FIXED_PTS, it is mandatory and defaults to 0
+	PipelineId *int64 `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
+
 	// Name of the output group to attach. This parameter is required if `EventType` is `TIMED_RECORD`.
 	OutputGroupName *string `json:"OutputGroupName,omitnil,omitempty" name:"OutputGroupName"`
 
@@ -2379,6 +2382,9 @@ type EventSettingsResp struct {
 
 	// ID of the input attached, which is not empty if `EventType` is `INPUT_SWITCH`
 	InputAttachment *string `json:"InputAttachment,omitnil,omitempty" name:"InputAttachment"`
+
+	// When the type is FIXED_PTS, it is mandatory and defaults to 0
+	PipelineId *int64 `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
 
 	// Name of the output group attached. This parameter is not empty if `EventType` is `TIMED_RECORD`.
 	OutputGroupName *string `json:"OutputGroupName,omitnil,omitempty" name:"OutputGroupName"`
@@ -3906,7 +3912,7 @@ type TimedRecordSettings struct {
 }
 
 type TimingSettingsReq struct {
-	// Event trigger type. Valid values: `FIXED_TIME`, `IMMEDIATE`. This parameter is required if `EventType` is `INPUT_SWITCH`.
+	// Event trigger type. Valid values: `FIXED_TIME`, `IMMEDIATE`,`FIXED_PTS `. This parameter is required if `EventType` is `INPUT_SWITCH`.
 	StartType *string `json:"StartType,omitnil,omitempty" name:"StartType"`
 
 	// This parameter is required if `EventType` is `INPUT_SWITCH` and `StartType` is `FIXED_TIME`.
@@ -3920,6 +3926,9 @@ type TimingSettingsReq struct {
 	// This parameter is required if `EventType` is `TIMED_RECORD`.
 	// It specifies the recording end time in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the recording start time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Effective only when StartType is FIXED_PTS, with a range of 1-8589934592
+	PTS *uint64 `json:"PTS,omitnil,omitempty" name:"PTS"`
 }
 
 type TimingSettingsResp struct {
@@ -3937,6 +3946,9 @@ type TimingSettingsResp struct {
 	// This parameter cannot be empty if `EventType` is `TIMED_RECORD`.
 	// It indicates the end time for recording in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the start time for recording.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Effective only when StartType is FIXED_PTS, with a range of 1-8589934592
+	PTS *uint64 `json:"PTS,omitnil,omitempty" name:"PTS"`
 }
 
 type VideoCodecDetail struct {
