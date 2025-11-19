@@ -414,6 +414,9 @@ type ConfigureChcAssistVpcRequestParams struct {
 
 	// Deployment network security group list
 	DeploySecurityGroupIds []*string `json:"DeploySecurityGroupIds,omitnil,omitempty" name:"DeploySecurityGroupIds"`
+
+
+	ChcDeployExtraConfig *ChcDeployExtraConfig `json:"ChcDeployExtraConfig,omitnil,omitempty" name:"ChcDeployExtraConfig"`
 }
 
 type ConfigureChcAssistVpcRequest struct {
@@ -433,6 +436,8 @@ type ConfigureChcAssistVpcRequest struct {
 
 	// Deployment network security group list
 	DeploySecurityGroupIds []*string `json:"DeploySecurityGroupIds,omitnil,omitempty" name:"DeploySecurityGroupIds"`
+
+	ChcDeployExtraConfig *ChcDeployExtraConfig `json:"ChcDeployExtraConfig,omitnil,omitempty" name:"ChcDeployExtraConfig"`
 }
 
 func (r *ConfigureChcAssistVpcRequest) ToJsonString() string {
@@ -452,6 +457,7 @@ func (r *ConfigureChcAssistVpcRequest) FromJsonString(s string) error {
 	delete(f, "BmcSecurityGroupIds")
 	delete(f, "DeployVirtualPrivateCloud")
 	delete(f, "DeploySecurityGroupIds")
+	delete(f, "ChcDeployExtraConfig")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ConfigureChcAssistVpcRequest has unknown keys!", "")
 	}
@@ -490,6 +496,9 @@ type ConfigureChcDeployVpcRequestParams struct {
 
 	// Deployment network security group list
 	DeploySecurityGroupIds []*string `json:"DeploySecurityGroupIds,omitnil,omitempty" name:"DeploySecurityGroupIds"`
+
+
+	ChcDeployExtraConfig *ChcDeployExtraConfig `json:"ChcDeployExtraConfig,omitnil,omitempty" name:"ChcDeployExtraConfig"`
 }
 
 type ConfigureChcDeployVpcRequest struct {
@@ -503,6 +512,8 @@ type ConfigureChcDeployVpcRequest struct {
 
 	// Deployment network security group list
 	DeploySecurityGroupIds []*string `json:"DeploySecurityGroupIds,omitnil,omitempty" name:"DeploySecurityGroupIds"`
+
+	ChcDeployExtraConfig *ChcDeployExtraConfig `json:"ChcDeployExtraConfig,omitnil,omitempty" name:"ChcDeployExtraConfig"`
 }
 
 func (r *ConfigureChcDeployVpcRequest) ToJsonString() string {
@@ -520,6 +531,7 @@ func (r *ConfigureChcDeployVpcRequest) FromJsonString(s string) error {
 	delete(f, "ChcIds")
 	delete(f, "DeployVirtualPrivateCloud")
 	delete(f, "DeploySecurityGroupIds")
+	delete(f, "ChcDeployExtraConfig")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ConfigureChcDeployVpcRequest has unknown keys!", "")
 	}
@@ -1327,6 +1339,9 @@ type CreateLaunchTemplateVersionRequestParams struct {
 	// Instance termination protection flag, indicating whether an instance is allowed to be deleted through an API. Valid values:<br><li>TRUE: Instance protection is enabled, and the instance is not allowed to be deleted through the API.</li><br><li>FALSE: Instance protection is disabled, and the instance is allowed to be deleted through the API.</li><br><br>Default value: FALSE.
 	DisableApiTermination *bool `json:"DisableApiTermination,omitnil,omitempty" name:"DisableApiTermination"`
 
+
+	EnableJumboFrame *bool `json:"EnableJumboFrame,omitnil,omitempty" name:"EnableJumboFrame"`
+
 	// Custom metadata. specifies that custom metadata key-value pairs can be added when creating a CVM.
 	// Note: this field is in beta test.
 	Metadata *Metadata `json:"Metadata,omitnil,omitempty" name:"Metadata"`
@@ -1432,6 +1447,8 @@ type CreateLaunchTemplateVersionRequest struct {
 	// Instance termination protection flag, indicating whether an instance is allowed to be deleted through an API. Valid values:<br><li>TRUE: Instance protection is enabled, and the instance is not allowed to be deleted through the API.</li><br><li>FALSE: Instance protection is disabled, and the instance is allowed to be deleted through the API.</li><br><br>Default value: FALSE.
 	DisableApiTermination *bool `json:"DisableApiTermination,omitnil,omitempty" name:"DisableApiTermination"`
 
+	EnableJumboFrame *bool `json:"EnableJumboFrame,omitnil,omitempty" name:"EnableJumboFrame"`
+
 	// Custom metadata. specifies that custom metadata key-value pairs can be added when creating a CVM.
 	// Note: this field is in beta test.
 	Metadata *Metadata `json:"Metadata,omitnil,omitempty" name:"Metadata"`
@@ -1484,6 +1501,7 @@ func (r *CreateLaunchTemplateVersionRequest) FromJsonString(s string) error {
 	delete(f, "InstanceChargeType")
 	delete(f, "InstanceChargePrepaid")
 	delete(f, "DisableApiTermination")
+	delete(f, "EnableJumboFrame")
 	delete(f, "Metadata")
 	delete(f, "TemplateDataModifyAction")
 	if len(f) > 0 {
@@ -2053,10 +2071,15 @@ type DescribeDisasterRecoverGroupQuotaResponseParams struct {
 	CvmInHostGroupQuota *int64 `json:"CvmInHostGroupQuota,omitnil,omitempty" name:"CvmInHostGroupQuota"`
 
 	// Quota on instances in a switch-type disaster recovery group.
+	//
+	// Deprecated: CvmInSwGroupQuota is deprecated.
 	CvmInSwGroupQuota *int64 `json:"CvmInSwGroupQuota,omitnil,omitempty" name:"CvmInSwGroupQuota"`
 
 	// Quota on instances in a rack-type disaster recovery group.
 	CvmInRackGroupQuota *int64 `json:"CvmInRackGroupQuota,omitnil,omitempty" name:"CvmInRackGroupQuota"`
+
+
+	CvmInSwitchGroupQuota *int64 `json:"CvmInSwitchGroupQuota,omitnil,omitempty" name:"CvmInSwitchGroupQuota"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -3964,6 +3987,9 @@ type DisasterRecoverGroup struct {
 	// Creation time of a spread placement group.
 	// Note: This field may return null, indicating that no valid value is found.
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+
+	Affinity *int64 `json:"Affinity,omitnil,omitempty" name:"Affinity"`
 
 	// List of tags associated with the placement group.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`

@@ -185,6 +185,58 @@ func (c *Client) CreateSplitDocumentFlowWithContext(ctx context.Context, request
     return
 }
 
+func NewGetEmbeddingRequest() (request *GetEmbeddingRequest) {
+    request = &GetEmbeddingRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lkeap", APIVersion, "GetEmbedding")
+    
+    
+    return
+}
+
+func NewGetEmbeddingResponse() (response *GetEmbeddingResponse) {
+    response = &GetEmbeddingResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetEmbedding
+// This API is used to call the text representation model to convert text into a vector represented by numbers, which can be used in scenarios such as text retrieval, information recommendation, and knowledge mining. There is a single-account call limit control for this API. If you need to increase the concurrency limit, please contact us (https://cloud.tencent.com/act/event/Online_service).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+func (c *Client) GetEmbedding(request *GetEmbeddingRequest) (response *GetEmbeddingResponse, err error) {
+    return c.GetEmbeddingWithContext(context.Background(), request)
+}
+
+// GetEmbedding
+// This API is used to call the text representation model to convert text into a vector represented by numbers, which can be used in scenarios such as text retrieval, information recommendation, and knowledge mining. There is a single-account call limit control for this API. If you need to increase the concurrency limit, please contact us (https://cloud.tencent.com/act/event/Online_service).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+func (c *Client) GetEmbeddingWithContext(ctx context.Context, request *GetEmbeddingRequest) (response *GetEmbeddingResponse, err error) {
+    if request == nil {
+        request = NewGetEmbeddingRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "lkeap", APIVersion, "GetEmbedding")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetEmbedding require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetEmbeddingResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetReconstructDocumentResultRequest() (request *GetReconstructDocumentResultRequest) {
     request = &GetReconstructDocumentResultRequest{
         BaseRequest: &tchttp.BaseRequest{},

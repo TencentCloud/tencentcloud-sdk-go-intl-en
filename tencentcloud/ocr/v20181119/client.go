@@ -1543,6 +1543,74 @@ func (c *Client) RecognizeBrazilRNMOCRWithContext(ctx context.Context, request *
     return
 }
 
+func NewRecognizeDetectCardCoordsRequest() (request *RecognizeDetectCardCoordsRequest) {
+    request = &RecognizeDetectCardCoordsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "RecognizeDetectCardCoords")
+    
+    
+    return
+}
+
+func NewRecognizeDetectCardCoordsResponse() (response *RecognizeDetectCardCoordsResponse) {
+    response = &RecognizeDetectCardCoordsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RecognizeDetectCardCoords
+// This API is used to recognize the coordinates of four corners of cards.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) RecognizeDetectCardCoords(request *RecognizeDetectCardCoordsRequest) (response *RecognizeDetectCardCoordsResponse, err error) {
+    return c.RecognizeDetectCardCoordsWithContext(context.Background(), request)
+}
+
+// RecognizeDetectCardCoords
+// This API is used to recognize the coordinates of four corners of cards.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) RecognizeDetectCardCoordsWithContext(ctx context.Context, request *RecognizeDetectCardCoordsRequest) (response *RecognizeDetectCardCoordsResponse, err error) {
+    if request == nil {
+        request = NewRecognizeDetectCardCoordsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeDetectCardCoords")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RecognizeDetectCardCoords require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRecognizeDetectCardCoordsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRecognizeGeneralInvoiceRequest() (request *RecognizeGeneralInvoiceRequest) {
     request = &RecognizeGeneralInvoiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
