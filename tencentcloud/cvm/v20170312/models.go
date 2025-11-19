@@ -2478,7 +2478,7 @@ type DescribeImagesRequestParams struct {
 	// <li><strong>tag-value</strong></li>
 	// <p style="padding-left: 30px;">Filter by the <strong>tag value</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
 	// <li><strong>tag:tag-key</strong></li>
-	// <p style="padding-left: 30px;">Filter by the <strong>tag key-value pair</strong>. Replace “tag-key” with the actual value. </p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+	// <p style="padding-left: 30px;">Filter by the <strong>tag key-value pair</strong>. Replace "tag-key" with the actual value. </p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset; default value: 0. For more information on `Offset`, see [API Introduction](https://intl.cloud.tencent.com/document/api/213/568?from_cn_redirect=1#.E8.BE.93.E5.85.A5.E5.8F.82.E6.95.B0.E4.B8.8E.E8.BF.94.E5.9B.9E.E5.8F.82.E6.95.B0.E9.87.8A.E4.B9.89).
@@ -2487,7 +2487,7 @@ type DescribeImagesRequestParams struct {
 	// Number of results returned; default value: 20; maximum: 100. For more information on `Limit`, see [API Introduction](https://intl.cloud.tencent.com/document/api/213/568?from_cn_redirect=1#.E8.BE.93.E5.85.A5.E5.8F.82.E6.95.B0.E4.B8.8E.E8.BF.94.E5.9B.9E.E5.8F.82.E6.95.B0.E9.87.8A.E4.B9.89).
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Instance type, e.g. `S1.SMALL1`
+	// Instance type, e.g. `SA5.MEDIUM2`
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 }
 
@@ -2512,7 +2512,7 @@ type DescribeImagesRequest struct {
 	// <li><strong>tag-value</strong></li>
 	// <p style="padding-left: 30px;">Filter by the <strong>tag value</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
 	// <li><strong>tag:tag-key</strong></li>
-	// <p style="padding-left: 30px;">Filter by the <strong>tag key-value pair</strong>. Replace “tag-key” with the actual value. </p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+	// <p style="padding-left: 30px;">Filter by the <strong>tag key-value pair</strong>. Replace "tag-key" with the actual value. </p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset; default value: 0. For more information on `Offset`, see [API Introduction](https://intl.cloud.tencent.com/document/api/213/568?from_cn_redirect=1#.E8.BE.93.E5.85.A5.E5.8F.82.E6.95.B0.E4.B8.8E.E8.BF.94.E5.9B.9E.E5.8F.82.E6.95.B0.E9.87.8A.E4.B9.89).
@@ -2521,7 +2521,7 @@ type DescribeImagesRequest struct {
 	// Number of results returned; default value: 20; maximum: 100. For more information on `Limit`, see [API Introduction](https://intl.cloud.tencent.com/document/api/213/568?from_cn_redirect=1#.E8.BE.93.E5.85.A5.E5.8F.82.E6.95.B0.E4.B8.8E.E8.BF.94.E5.9B.9E.E5.8F.82.E6.95.B0.E9.87.8A.E4.B9.89).
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Instance type, e.g. `S1.SMALL1`
+	// Instance type, e.g. `SA5.MEDIUM2`
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 }
 
@@ -4652,7 +4652,7 @@ type InquirePricePurchaseReservedInstancesOfferingRequestParams struct {
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.<br>For more information, see Ensuring Idempotency.
 	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
 
-	// Reserved instance name.<br><li>The RI name defaults to “unnamed” if this parameter is left empty.</li><li>You can enter any name within 60 characters (including the pattern string).</li>
+	// Reserved instance name.<br><li>The RI name defaults to "unnamed" if this parameter is left empty.</li><li>You can enter any name within 60 characters (including the pattern string).</li>
 	ReservedInstanceName *string `json:"ReservedInstanceName,omitnil,omitempty" name:"ReservedInstanceName"`
 }
 
@@ -4671,7 +4671,7 @@ type InquirePricePurchaseReservedInstancesOfferingRequest struct {
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.<br>For more information, see Ensuring Idempotency.
 	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
 
-	// Reserved instance name.<br><li>The RI name defaults to “unnamed” if this parameter is left empty.</li><li>You can enter any name within 60 characters (including the pattern string).</li>
+	// Reserved instance name.<br><li>The RI name defaults to "unnamed" if this parameter is left empty.</li><li>You can enter any name within 60 characters (including the pattern string).</li>
 	ReservedInstanceName *string `json:"ReservedInstanceName,omitnil,omitempty" name:"ReservedInstanceName"`
 }
 
@@ -7057,7 +7057,7 @@ type PurchaseReservedInstancesOfferingRequestParams struct {
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.<br>For more information, see Ensuring Idempotency.
 	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
 
-	// Reserved instance name.<br><li>The RI name defaults to “unnamed” if this parameter is left empty.</li><li>You can enter any name within 60 characters (including the pattern string).</li>
+	// Reserved instance name.<br><li>The RI name defaults to "unnamed" if this parameter is left empty.</li><li>You can enter any name within 60 characters (including the pattern string).</li>
 	ReservedInstanceName *string `json:"ReservedInstanceName,omitnil,omitempty" name:"ReservedInstanceName"`
 }
 
@@ -7076,7 +7076,7 @@ type PurchaseReservedInstancesOfferingRequest struct {
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.<br>For more information, see Ensuring Idempotency.
 	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
 
-	// Reserved instance name.<br><li>The RI name defaults to “unnamed” if this parameter is left empty.</li><li>You can enter any name within 60 characters (including the pattern string).</li>
+	// Reserved instance name.<br><li>The RI name defaults to "unnamed" if this parameter is left empty.</li><li>You can enter any name within 60 characters (including the pattern string).</li>
 	ReservedInstanceName *string `json:"ReservedInstanceName,omitnil,omitempty" name:"ReservedInstanceName"`
 }
 
