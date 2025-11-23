@@ -20,6 +20,48 @@ import (
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
+type AddressInfo struct {
+	// Country.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Country *string `json:"Country,omitnil,omitempty" name:"Country"`
+
+	// Postal code.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PostalCode *string `json:"PostalCode,omitnil,omitempty" name:"PostalCode"`
+
+	// Specifies the sub-region.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Subdivision *string `json:"Subdivision,omitnil,omitempty" name:"Subdivision"`
+
+	// Specifies the city.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	City *string `json:"City,omitnil,omitempty" name:"City"`
+
+	// Complete address.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FormattedAddress *string `json:"FormattedAddress,omitnil,omitempty" name:"FormattedAddress"`
+
+	// First line of the address bar.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LineOne *string `json:"LineOne,omitnil,omitempty" name:"LineOne"`
+
+	// Second line of the address bar.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LineTwo *string `json:"LineTwo,omitnil,omitempty" name:"LineTwo"`
+
+	// Specifies the third line of the address bar.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LineThree *string `json:"LineThree,omitnil,omitempty" name:"LineThree"`
+
+	// Specifies the fourth line of the address bar.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LineFour *string `json:"LineFour,omitnil,omitempty" name:"LineFour"`
+
+	// Specifies the fifth line in the address bar.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LineFive *string `json:"LineFive,omitnil,omitempty" name:"LineFive"`
+}
+
 type AirTransport struct {
 	// Invoice title
 	Title *string `json:"Title,omitnil,omitempty" name:"Title"`
@@ -92,6 +134,178 @@ type AirTransport struct {
 
 	// Items
 	FlightItems []*FlightItem `json:"FlightItems,omitnil,omitempty" name:"FlightItems"`
+}
+
+// Predefined struct for user
+type ApplyCardVerificationExternalRequestParams struct {
+	// Specifies the country of the document.
+	// ARG:Argentina
+	// AUS:Australia
+	// KHM:Cambodia
+	// CAN:Canada
+	// SGP:Singapore
+	// CHL:Chile
+	// DEU:Germany
+	// MEX:Mexico
+	// MMR:Myanmar
+	// NZL:New Zealand
+	// BGD:Bangladesh
+	// NGA:Nigeria
+	// PAK:Pakistan
+	// RUS:Russia
+	// IDN:Indonesia
+	// HKG:Hong Kong, China
+	// THA:Thailand
+	// MYS:Malaysia
+	// JPN:Japan
+	// PHL:Philippines
+	// MAC:Macao, China
+	// CHN:ChinaPermit
+	// TWN:Taiwan, China
+	// BGD:Bangladesh
+	// NGA:Nigeria 
+	// PAK:Pakistan
+	// 
+	// AUTO: supports cards and documents from 200+ countries
+	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
+
+	// Document type.
+	// ID_CARD
+	// PASSPORT
+	// DRIVING_LICENSE
+	// RESIDENCE_PERMIT (Supported in certain countries/regions, including Australia, Canada, Germany, New Zealand, Nigeria, Singapore).
+	CardType *string `json:"CardType,omitnil,omitempty" name:"CardType"`
+
+	// The Base64 value of the document Front. supported image formats: PNG, JPG/JPEG. 
+	// Supported image size: the downloaded image after Base64 encoding must be no more than 2M. image download time must be no more than 5 seconds. 
+	// Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some documents, either ImageUrlBack or ImageBase64Back must be provided. If both are provided, only ImageUrlFront will be used.
+	ImageBase64Front *string `json:"ImageBase64Front,omitnil,omitempty" name:"ImageBase64Front"`
+
+	// The Base64 value of the reverse side of the document. Supported image formats: PNG, JPG/JPEG. 
+	// Supported image size: the downloaded image after Base64 encoding must be no more than 2M. image download time must be no more than 5 seconds. 
+	// Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some documents, either ImageUrlBack or ImageBase64Back must be provided. If both are provided, only ImageUrlBack is used.
+	ImageBase64Back *string `json:"ImageBase64Back,omitnil,omitempty" name:"ImageBase64Back"`
+
+	// Url of the document Front. supported image formats: PNG, JPG/JPEG. 
+	// Supported image size: the downloaded image after Base64 encoding must be no more than 2M. image download time must be no more than 5 seconds. 
+	// Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some documents, either ImageUrlBack or ImageBase64Back must be provided. If both are provided, only ImageUrlFront will be used.
+	ImageUrlFront *string `json:"ImageUrlFront,omitnil,omitempty" name:"ImageUrlFront"`
+
+	// Specifies the Url of the document Back. supported image formats: PNG, JPG/JPEG
+	// Supported image size: no more than 2M after Base64 encoding. image download time should not exceed 5 seconds. 
+	// Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some documents, either ImageUrlBack or ImageBase64Back must be provided. If both are provided, only use ImageUrlBack.
+	ImageUrlBack *string `json:"ImageUrlBack,omitnil,omitempty" name:"ImageUrlBack"`
+}
+
+type ApplyCardVerificationExternalRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the country of the document.
+	// ARG:Argentina
+	// AUS:Australia
+	// KHM:Cambodia
+	// CAN:Canada
+	// SGP:Singapore
+	// CHL:Chile
+	// DEU:Germany
+	// MEX:Mexico
+	// MMR:Myanmar
+	// NZL:New Zealand
+	// BGD:Bangladesh
+	// NGA:Nigeria
+	// PAK:Pakistan
+	// RUS:Russia
+	// IDN:Indonesia
+	// HKG:Hong Kong, China
+	// THA:Thailand
+	// MYS:Malaysia
+	// JPN:Japan
+	// PHL:Philippines
+	// MAC:Macao, China
+	// CHN:ChinaPermit
+	// TWN:Taiwan, China
+	// BGD:Bangladesh
+	// NGA:Nigeria 
+	// PAK:Pakistan
+	// 
+	// AUTO: supports cards and documents from 200+ countries
+	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
+
+	// Document type.
+	// ID_CARD
+	// PASSPORT
+	// DRIVING_LICENSE
+	// RESIDENCE_PERMIT (Supported in certain countries/regions, including Australia, Canada, Germany, New Zealand, Nigeria, Singapore).
+	CardType *string `json:"CardType,omitnil,omitempty" name:"CardType"`
+
+	// The Base64 value of the document Front. supported image formats: PNG, JPG/JPEG. 
+	// Supported image size: the downloaded image after Base64 encoding must be no more than 2M. image download time must be no more than 5 seconds. 
+	// Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some documents, either ImageUrlBack or ImageBase64Back must be provided. If both are provided, only ImageUrlFront will be used.
+	ImageBase64Front *string `json:"ImageBase64Front,omitnil,omitempty" name:"ImageBase64Front"`
+
+	// The Base64 value of the reverse side of the document. Supported image formats: PNG, JPG/JPEG. 
+	// Supported image size: the downloaded image after Base64 encoding must be no more than 2M. image download time must be no more than 5 seconds. 
+	// Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some documents, either ImageUrlBack or ImageBase64Back must be provided. If both are provided, only ImageUrlBack is used.
+	ImageBase64Back *string `json:"ImageBase64Back,omitnil,omitempty" name:"ImageBase64Back"`
+
+	// Url of the document Front. supported image formats: PNG, JPG/JPEG. 
+	// Supported image size: the downloaded image after Base64 encoding must be no more than 2M. image download time must be no more than 5 seconds. 
+	// Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some documents, either ImageUrlBack or ImageBase64Back must be provided. If both are provided, only ImageUrlFront will be used.
+	ImageUrlFront *string `json:"ImageUrlFront,omitnil,omitempty" name:"ImageUrlFront"`
+
+	// Specifies the Url of the document Back. supported image formats: PNG, JPG/JPEG
+	// Supported image size: no more than 2M after Base64 encoding. image download time should not exceed 5 seconds. 
+	// Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some documents, either ImageUrlBack or ImageBase64Back must be provided. If both are provided, only use ImageUrlBack.
+	ImageUrlBack *string `json:"ImageUrlBack,omitnil,omitempty" name:"ImageUrlBack"`
+}
+
+func (r *ApplyCardVerificationExternalRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ApplyCardVerificationExternalRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Nationality")
+	delete(f, "CardType")
+	delete(f, "ImageBase64Front")
+	delete(f, "ImageBase64Back")
+	delete(f, "ImageUrlFront")
+	delete(f, "ImageUrlBack")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplyCardVerificationExternalRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ApplyCardVerificationExternalResponseParams struct {
+	// Process token, which is used to obtain the result.
+	CardVerificationToken *string `json:"CardVerificationToken,omitnil,omitempty" name:"CardVerificationToken"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ApplyCardVerificationExternalResponse struct {
+	*tchttp.BaseResponse
+	Response *ApplyCardVerificationExternalResponseParams `json:"Response"`
+}
+
+func (r *ApplyCardVerificationExternalResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ApplyCardVerificationExternalResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -1035,6 +1249,99 @@ func (r *GeneralBasicOCRResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type GeneralCard struct {
+	// ID number.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LicenseNumber *string `json:"LicenseNumber,omitnil,omitempty" name:"LicenseNumber"`
+
+	// Personal number. returned when the identity document type is passport.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PersonalNumber *string `json:"PersonalNumber,omitnil,omitempty" name:"PersonalNumber"`
+
+	// Passport mrz line 1.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PassportCodeFirst *string `json:"PassportCodeFirst,omitnil,omitempty" name:"PassportCodeFirst"`
+
+	// Passport mrz line 2.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PassportCodeSecond *string `json:"PassportCodeSecond,omitnil,omitempty" name:"PassportCodeSecond"`
+
+	// Expiration date, in YYYY-MM-DD format.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExpirationDate *string `json:"ExpirationDate,omitnil,omitempty" name:"ExpirationDate"`
+
+	// Expiration date in YYYY-MM-DD format.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DueDate *string `json:"DueDate,omitnil,omitempty" name:"DueDate"`
+
+	// Issue date, in YYYY-MM-DD format.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IssuedDate *string `json:"IssuedDate,omitnil,omitempty" name:"IssuedDate"`
+
+	// Issuing authority.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IssuedAuthority *string `json:"IssuedAuthority,omitnil,omitempty" name:"IssuedAuthority"`
+
+	// Issuing country, following the ISO 3166 country coding specification.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IssuedCountry *string `json:"IssuedCountry,omitnil,omitempty" name:"IssuedCountry"`
+
+	// Specifies the name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FullName *string `json:"FullName,omitnil,omitempty" name:"FullName"`
+
+	// Name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FirstName *string `json:"FirstName,omitnil,omitempty" name:"FirstName"`
+
+	// Name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LastName *string `json:"LastName,omitnil,omitempty" name:"LastName"`
+
+	// Gender on the document.
+	// -M: man.
+	// -F: woman.
+	// -X: other gender identity.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
+
+	// Age. 0 means no valid info.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Age *string `json:"Age,omitnil,omitempty" name:"Age"`
+
+	// Date of birth.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
+
+	// Birth place.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BirthPlace *string `json:"BirthPlace,omitnil,omitempty" name:"BirthPlace"`
+
+	// Document nationality, following ISO 3166 country coding specification.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
+
+	// Registration number.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RegistrationNumber *string `json:"RegistrationNumber,omitnil,omitempty" name:"RegistrationNumber"`
+
+	// Specifies the address information of the document.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Address *AddressInfo `json:"Address,omitnil,omitempty" name:"Address"`
+
+	// Localized name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FullNameLocal *string `json:"FullNameLocal,omitnil,omitempty" name:"FullNameLocal"`
+
+	// Localization name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FirstNameLocal *string `json:"FirstNameLocal,omitnil,omitempty" name:"FirstNameLocal"`
+
+	// Localized surname.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LastNameLocal *string `json:"LastNameLocal,omitnil,omitempty" name:"LastNameLocal"`
+}
+
 type GeneralMachineItem struct {
 	// Item name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -1059,6 +1366,85 @@ type GeneralMachineItem struct {
 
 	// Tax amount
 	Tax *string `json:"Tax,omitnil,omitempty" name:"Tax"`
+}
+
+// Predefined struct for user
+type GetCardVerificationExternalResultRequestParams struct {
+	// Initiates the recognition interface and returns a unique token.
+	CardVerificationToken *string `json:"CardVerificationToken,omitnil,omitempty" name:"CardVerificationToken"`
+}
+
+type GetCardVerificationExternalResultRequest struct {
+	*tchttp.BaseRequest
+	
+	// Initiates the recognition interface and returns a unique token.
+	CardVerificationToken *string `json:"CardVerificationToken,omitnil,omitempty" name:"CardVerificationToken"`
+}
+
+func (r *GetCardVerificationExternalResultRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetCardVerificationExternalResultRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CardVerificationToken")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetCardVerificationExternalResultRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetCardVerificationExternalResultResponseParams struct {
+	// Indicates the status. valid values: 
+	// PASSED
+	// WARNING
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Indicates the anti-counterfeiting information.
+	// -ScreenshotSuspected: The image is a screenshot.
+	// -RetakeSuspected: The image is taken from another screen.
+	// -PaperCopy: The image is a black and white, or color photocopy.
+	// -FakeSuspected: The image of the card, or the information on the card has been edited or altered.
+	// -OtherWarning: Document's authenticity is not verified for various reasons.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WarnInfo []*string `json:"WarnInfo,omitnil,omitempty" name:"WarnInfo"`
+
+	// Country Code.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
+
+	// Recognition result of the text in the id photo.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CardInfo *GeneralCard `json:"CardInfo,omitnil,omitempty" name:"CardInfo"`
+
+	// Specifies the token in the request parameters.
+	CardVerificationToken *string `json:"CardVerificationToken,omitnil,omitempty" name:"CardVerificationToken"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type GetCardVerificationExternalResultResponse struct {
+	*tchttp.BaseResponse
+	Response *GetCardVerificationExternalResultResponseParams `json:"Response"`
+}
+
+func (r *GetCardVerificationExternalResultResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetCardVerificationExternalResultResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type GroupInfo struct {

@@ -5108,6 +5108,7 @@ func NewModifyImageAttributeResponse() (response *ModifyImageAttributeResponse) 
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEFAMILY = "InvalidParameterValue.InvalidImageFamily"
 //  INVALIDPARAMETERVALUE_TOOLARGE = "InvalidParameterValue.TooLarge"
 //  UNAUTHORIZEDOPERATION_INVALIDTOKEN = "UnauthorizedOperation.InvalidToken"
+//  UNSUPPORTEDOPERATION_SHAREDIMAGEMODIFYUNSUPPORTED = "UnsupportedOperation.SharedImageModifyUnsupported"
 func (c *Client) ModifyImageAttribute(request *ModifyImageAttributeRequest) (response *ModifyImageAttributeResponse, err error) {
     return c.ModifyImageAttributeWithContext(context.Background(), request)
 }
@@ -5128,6 +5129,7 @@ func (c *Client) ModifyImageAttribute(request *ModifyImageAttributeRequest) (res
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEFAMILY = "InvalidParameterValue.InvalidImageFamily"
 //  INVALIDPARAMETERVALUE_TOOLARGE = "InvalidParameterValue.TooLarge"
 //  UNAUTHORIZEDOPERATION_INVALIDTOKEN = "UnauthorizedOperation.InvalidToken"
+//  UNSUPPORTEDOPERATION_SHAREDIMAGEMODIFYUNSUPPORTED = "UnsupportedOperation.SharedImageModifyUnsupported"
 func (c *Client) ModifyImageAttributeWithContext(ctx context.Context, request *ModifyImageAttributeRequest) (response *ModifyImageAttributeResponse, err error) {
     if request == nil {
         request = NewModifyImageAttributeRequest()

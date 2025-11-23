@@ -1147,6 +1147,158 @@ func (c *Client) DeleteAclWithContext(ctx context.Context, request *DeleteAclReq
     return
 }
 
+func NewDeleteAclRuleRequest() (request *DeleteAclRuleRequest) {
+    request = &DeleteAclRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ckafka", APIVersion, "DeleteAclRule")
+    
+    
+    return
+}
+
+func NewDeleteAclRuleResponse() (response *DeleteAclRuleResponse) {
+    response = &DeleteAclRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteAclRule
+// This API is used to delete an ACL rule.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
+//  INVALIDPARAMETERVALUE_SUBNETIDINVALID = "InvalidParameterValue.SubnetIdInvalid"
+//  INVALIDPARAMETERVALUE_SUBNETNOTBELONGTOZONE = "InvalidParameterValue.SubnetNotBelongToZone"
+//  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
+//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
+func (c *Client) DeleteAclRule(request *DeleteAclRuleRequest) (response *DeleteAclRuleResponse, err error) {
+    return c.DeleteAclRuleWithContext(context.Background(), request)
+}
+
+// DeleteAclRule
+// This API is used to delete an ACL rule.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
+//  INVALIDPARAMETERVALUE_SUBNETIDINVALID = "InvalidParameterValue.SubnetIdInvalid"
+//  INVALIDPARAMETERVALUE_SUBNETNOTBELONGTOZONE = "InvalidParameterValue.SubnetNotBelongToZone"
+//  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
+//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
+func (c *Client) DeleteAclRuleWithContext(ctx context.Context, request *DeleteAclRuleRequest) (response *DeleteAclRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteAclRuleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ckafka", APIVersion, "DeleteAclRule")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAclRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteAclRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteGroupRequest() (request *DeleteGroupRequest) {
+    request = &DeleteGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ckafka", APIVersion, "DeleteGroup")
+    
+    
+    return
+}
+
+func NewDeleteGroupResponse() (response *DeleteGroupResponse) {
+    response = &DeleteGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteGroup
+// Delete consumer groups.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
+//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
+func (c *Client) DeleteGroup(request *DeleteGroupRequest) (response *DeleteGroupResponse, err error) {
+    return c.DeleteGroupWithContext(context.Background(), request)
+}
+
+// DeleteGroup
+// Delete consumer groups.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
+//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
+func (c *Client) DeleteGroupWithContext(ctx context.Context, request *DeleteGroupRequest) (response *DeleteGroupResponse, err error) {
+    if request == nil {
+        request = NewDeleteGroupRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ckafka", APIVersion, "DeleteGroup")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteInstancePostRequest() (request *DeleteInstancePostRequest) {
     request = &DeleteInstancePostRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1799,76 +1951,52 @@ func (c *Client) DescribeAclRuleWithContext(ctx context.Context, request *Descri
     return
 }
 
-func NewDescribeAppInfoRequest() (request *DescribeAppInfoRequest) {
-    request = &DescribeAppInfoRequest{
+func NewDescribeCkafkaVersionRequest() (request *DescribeCkafkaVersionRequest) {
+    request = &DescribeCkafkaVersionRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
     
-    request.Init().WithApiInfo("ckafka", APIVersion, "DescribeAppInfo")
+    request.Init().WithApiInfo("ckafka", APIVersion, "DescribeCkafkaVersion")
     
     
     return
 }
 
-func NewDescribeAppInfoResponse() (response *DescribeAppInfoResponse) {
-    response = &DescribeAppInfoResponse{
+func NewDescribeCkafkaVersionResponse() (response *DescribeCkafkaVersionResponse) {
+    response = &DescribeCkafkaVersionResponse{
         BaseResponse: &tchttp.BaseResponse{},
     } 
     return
 
 }
 
-// DescribeAppInfo
-// This API is used to query the user list.
+// DescribeCkafkaVersion
+// This API is used to query instance version information.
 //
 // error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
-//  INVALIDPARAMETERVALUE_SUBNETIDINVALID = "InvalidParameterValue.SubnetIdInvalid"
-//  INVALIDPARAMETERVALUE_SUBNETNOTBELONGTOZONE = "InvalidParameterValue.SubnetNotBelongToZone"
-//  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
-//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
-//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
-//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
-func (c *Client) DescribeAppInfo(request *DescribeAppInfoRequest) (response *DescribeAppInfoResponse, err error) {
-    return c.DescribeAppInfoWithContext(context.Background(), request)
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeCkafkaVersion(request *DescribeCkafkaVersionRequest) (response *DescribeCkafkaVersionResponse, err error) {
+    return c.DescribeCkafkaVersionWithContext(context.Background(), request)
 }
 
-// DescribeAppInfo
-// This API is used to query the user list.
+// DescribeCkafkaVersion
+// This API is used to query instance version information.
 //
 // error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
-//  INVALIDPARAMETERVALUE_SUBNETIDINVALID = "InvalidParameterValue.SubnetIdInvalid"
-//  INVALIDPARAMETERVALUE_SUBNETNOTBELONGTOZONE = "InvalidParameterValue.SubnetNotBelongToZone"
-//  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
-//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
-//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
-//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
-func (c *Client) DescribeAppInfoWithContext(ctx context.Context, request *DescribeAppInfoRequest) (response *DescribeAppInfoResponse, err error) {
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeCkafkaVersionWithContext(ctx context.Context, request *DescribeCkafkaVersionRequest) (response *DescribeCkafkaVersionResponse, err error) {
     if request == nil {
-        request = NewDescribeAppInfoRequest()
+        request = NewDescribeCkafkaVersionRequest()
     }
-    c.InitBaseRequest(&request.BaseRequest, "ckafka", APIVersion, "DescribeAppInfo")
+    c.InitBaseRequest(&request.BaseRequest, "ckafka", APIVersion, "DescribeCkafkaVersion")
     
     if c.GetCredential() == nil {
-        return nil, errors.New("DescribeAppInfo require credential")
+        return nil, errors.New("DescribeCkafkaVersion require credential")
     }
 
     request.SetContext(ctx)
     
-    response = NewDescribeAppInfoResponse()
+    response = NewDescribeCkafkaVersionResponse()
     err = c.Send(request, response)
     return
 }
@@ -3787,6 +3915,66 @@ func (c *Client) InquireCkafkaPriceWithContext(ctx context.Context, request *Inq
     return
 }
 
+func NewInstanceScalingDownRequest() (request *InstanceScalingDownRequest) {
+    request = &InstanceScalingDownRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ckafka", APIVersion, "InstanceScalingDown")
+    
+    
+    return
+}
+
+func NewInstanceScalingDownResponse() (response *InstanceScalingDownResponse) {
+    response = &InstanceScalingDownResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// InstanceScalingDown
+// This API is used to perform downsizing on a pay-as-you-go instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_NOTALLOWEDEMPTY = "InvalidParameterValue.NotAllowedEmpty"
+func (c *Client) InstanceScalingDown(request *InstanceScalingDownRequest) (response *InstanceScalingDownResponse, err error) {
+    return c.InstanceScalingDownWithContext(context.Background(), request)
+}
+
+// InstanceScalingDown
+// This API is used to perform downsizing on a pay-as-you-go instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_NOTALLOWEDEMPTY = "InvalidParameterValue.NotAllowedEmpty"
+func (c *Client) InstanceScalingDownWithContext(ctx context.Context, request *InstanceScalingDownRequest) (response *InstanceScalingDownResponse, err error) {
+    if request == nil {
+        request = NewInstanceScalingDownRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ckafka", APIVersion, "InstanceScalingDown")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InstanceScalingDown require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewInstanceScalingDownResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyAclRuleRequest() (request *ModifyAclRuleRequest) {
     request = &ModifyAclRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4225,6 +4413,82 @@ func (c *Client) ModifyPasswordWithContext(ctx context.Context, request *ModifyP
     return
 }
 
+func NewModifyRoutineMaintenanceTaskRequest() (request *ModifyRoutineMaintenanceTaskRequest) {
+    request = &ModifyRoutineMaintenanceTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ckafka", APIVersion, "ModifyRoutineMaintenanceTask")
+    
+    
+    return
+}
+
+func NewModifyRoutineMaintenanceTaskResponse() (response *ModifyRoutineMaintenanceTaskResponse) {
+    response = &ModifyRoutineMaintenanceTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyRoutineMaintenanceTask
+// This API is used to set automated ops attributes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
+//  INVALIDPARAMETERVALUE_SUBNETIDINVALID = "InvalidParameterValue.SubnetIdInvalid"
+//  INVALIDPARAMETERVALUE_SUBNETNOTBELONGTOZONE = "InvalidParameterValue.SubnetNotBelongToZone"
+//  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
+//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
+func (c *Client) ModifyRoutineMaintenanceTask(request *ModifyRoutineMaintenanceTaskRequest) (response *ModifyRoutineMaintenanceTaskResponse, err error) {
+    return c.ModifyRoutineMaintenanceTaskWithContext(context.Background(), request)
+}
+
+// ModifyRoutineMaintenanceTask
+// This API is used to set automated ops attributes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
+//  INVALIDPARAMETERVALUE_SUBNETIDINVALID = "InvalidParameterValue.SubnetIdInvalid"
+//  INVALIDPARAMETERVALUE_SUBNETNOTBELONGTOZONE = "InvalidParameterValue.SubnetNotBelongToZone"
+//  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
+//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
+func (c *Client) ModifyRoutineMaintenanceTaskWithContext(ctx context.Context, request *ModifyRoutineMaintenanceTaskRequest) (response *ModifyRoutineMaintenanceTaskResponse, err error) {
+    if request == nil {
+        request = NewModifyRoutineMaintenanceTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ckafka", APIVersion, "ModifyRoutineMaintenanceTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyRoutineMaintenanceTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyRoutineMaintenanceTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyTopicAttributesRequest() (request *ModifyTopicAttributesRequest) {
     request = &ModifyTopicAttributesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4365,6 +4629,60 @@ func (c *Client) SendMessageWithContext(ctx context.Context, request *SendMessag
     request.SetContext(ctx)
     
     response = NewSendMessageResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpgradeBrokerVersionRequest() (request *UpgradeBrokerVersionRequest) {
+    request = &UpgradeBrokerVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ckafka", APIVersion, "UpgradeBrokerVersion")
+    
+    
+    return
+}
+
+func NewUpgradeBrokerVersionResponse() (response *UpgradeBrokerVersionResponse) {
+    response = &UpgradeBrokerVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpgradeBrokerVersion
+// This API is used to upgrade the broker version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) UpgradeBrokerVersion(request *UpgradeBrokerVersionRequest) (response *UpgradeBrokerVersionResponse, err error) {
+    return c.UpgradeBrokerVersionWithContext(context.Background(), request)
+}
+
+// UpgradeBrokerVersion
+// This API is used to upgrade the broker version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) UpgradeBrokerVersionWithContext(ctx context.Context, request *UpgradeBrokerVersionRequest) (response *UpgradeBrokerVersionResponse, err error) {
+    if request == nil {
+        request = NewUpgradeBrokerVersionRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ckafka", APIVersion, "UpgradeBrokerVersion")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpgradeBrokerVersion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpgradeBrokerVersionResponse()
     err = c.Send(request, response)
     return
 }

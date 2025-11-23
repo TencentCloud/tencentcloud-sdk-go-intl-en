@@ -45,6 +45,1488 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewApplyCardVerificationExternalRequest() (request *ApplyCardVerificationExternalRequest) {
+    request = &ApplyCardVerificationExternalRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "ApplyCardVerificationExternal")
+    
+    
+    return
+}
+
+func NewApplyCardVerificationExternalResponse() (response *ApplyCardVerificationExternalResponse) {
+    response = &ApplyCardVerificationExternalResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ApplyCardVerificationExternal
+// This API is used for general recognition of overseas cards.
+//
+// 
+//
+// The following list details the countries or regions, document types supported by the overseas document recognition API and whether the back side of the document is required:
+//
+// 
+//
+// <table>
+//
+// <thead>
+//
+// <tr>
+//
+// <td style="width:200px">Nationality</td>
+//
+// <td style="width:200px">CardType</td>
+//
+// <td style="width:200px">Whether the Back Side is Required</td>
+//
+// </tr>
+//
+// </thead>
+//
+// <tbody>
+//
+// <tr>
+//
+// <td>Argentina</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Argentina</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Argentina</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Australia</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Australia</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Australia</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Australia</td>
+//
+// <td>Residence Permit</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Bangladesh</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Bangladesh</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Bangladesh</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Cambodia</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Cambodia</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Cambodia</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Canada</td>
+//
+// <td>Driver's License</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Canada</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Canada</td>
+//
+// <td>Passport</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Canada</td>
+//
+// <td>Residence Permit</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Chile</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Chile</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Chile</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Germany</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Germany</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Germany</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Germany</td>
+//
+// <td>Residence Permit</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Mexico</td>
+//
+// <td>Driver's License</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Mexico</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Mexico</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Myanmar</td>
+//
+// <td>Driver's License</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Myanmar</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Myanmar</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>New Zealand</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>New Zealand</td>
+//
+// <td>National ID Card</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>New Zealand</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>New Zealand</td>
+//
+// <td>Residence Permit</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Nigeria</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Nigeria</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Nigeria</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Nigeria</td>
+//
+// <td>Residence Permit</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Pakistan</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Pakistan</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Pakistan</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Russia</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Russia</td>
+//
+// <td>National ID Card</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Russia</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Singapore</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Singapore</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Singapore</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Singapore</td>
+//
+// <td>Residence Permit</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Indonesia</td>
+//
+// <td>National ID Card</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Indonesia</td>
+//
+// <td>Driver's License</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Hong Kong, China</td>
+//
+// <td>Identity Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Thailand</td>
+//
+// <td>National ID Card</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Thailand</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Malaysia</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Malaysia</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Singapore</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Singapore</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Philippines</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Philippines</td>
+//
+// <td>Driver's License</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Japan</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Japan</td>
+//
+// <td>Driver's License</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Macau, China</td>
+//
+// <td>Identity Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Taiwan, China</td>
+//
+// <td>Identity Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Bangladesh</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Nigeria</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Nigeria</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Pakistan</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Pakistan</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// </tbody>
+//
+// </table>
+//
+// error code that may be returned:
+//  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETER_ENGINEIMAGEDECODEFAILED = "InvalidParameter.EngineImageDecodeFailed"
+//  INVALIDPARAMETERVALUE_INVALIDFILECONTENTSIZE = "InvalidParameterValue.InvalidFileContentSize"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  RESOURCEUNAVAILABLE_IMAGEDOWNLOADERROR = "ResourceUnavailable.ImageDownloadError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+func (c *Client) ApplyCardVerificationExternal(request *ApplyCardVerificationExternalRequest) (response *ApplyCardVerificationExternalResponse, err error) {
+    return c.ApplyCardVerificationExternalWithContext(context.Background(), request)
+}
+
+// ApplyCardVerificationExternal
+// This API is used for general recognition of overseas cards.
+//
+// 
+//
+// The following list details the countries or regions, document types supported by the overseas document recognition API and whether the back side of the document is required:
+//
+// 
+//
+// <table>
+//
+// <thead>
+//
+// <tr>
+//
+// <td style="width:200px">Nationality</td>
+//
+// <td style="width:200px">CardType</td>
+//
+// <td style="width:200px">Whether the Back Side is Required</td>
+//
+// </tr>
+//
+// </thead>
+//
+// <tbody>
+//
+// <tr>
+//
+// <td>Argentina</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Argentina</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Argentina</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Australia</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Australia</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Australia</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Australia</td>
+//
+// <td>Residence Permit</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Bangladesh</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Bangladesh</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Bangladesh</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Cambodia</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Cambodia</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Cambodia</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Canada</td>
+//
+// <td>Driver's License</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Canada</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Canada</td>
+//
+// <td>Passport</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Canada</td>
+//
+// <td>Residence Permit</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Chile</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Chile</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Chile</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Germany</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Germany</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Germany</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Germany</td>
+//
+// <td>Residence Permit</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Mexico</td>
+//
+// <td>Driver's License</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Mexico</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Mexico</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Myanmar</td>
+//
+// <td>Driver's License</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Myanmar</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Myanmar</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>New Zealand</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>New Zealand</td>
+//
+// <td>National ID Card</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>New Zealand</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>New Zealand</td>
+//
+// <td>Residence Permit</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Nigeria</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Nigeria</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Nigeria</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Nigeria</td>
+//
+// <td>Residence Permit</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Pakistan</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Pakistan</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Pakistan</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Russia</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Russia</td>
+//
+// <td>National ID Card</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Russia</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Singapore</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Singapore</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Singapore</td>
+//
+// <td>Passport</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Singapore</td>
+//
+// <td>Residence Permit</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Indonesia</td>
+//
+// <td>National ID Card</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Indonesia</td>
+//
+// <td>Driver's License</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Hong Kong, China</td>
+//
+// <td>Identity Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Thailand</td>
+//
+// <td>National ID Card</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Thailand</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Malaysia</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Malaysia</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Singapore</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Singapore</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Philippines</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Philippines</td>
+//
+// <td>Driver's License</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Japan</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Japan</td>
+//
+// <td>Driver's License</td>
+//
+// <td>No</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Macau, China</td>
+//
+// <td>Identity Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Taiwan, China</td>
+//
+// <td>Identity Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Bangladesh</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Nigeria</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Nigeria</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Pakistan</td>
+//
+// <td>National ID Card</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// <tr>
+//
+// <td>Pakistan</td>
+//
+// <td>Driver's License</td>
+//
+// <td>Yes</td>
+//
+// </tr>
+//
+// </tbody>
+//
+// </table>
+//
+// error code that may be returned:
+//  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETER_ENGINEIMAGEDECODEFAILED = "InvalidParameter.EngineImageDecodeFailed"
+//  INVALIDPARAMETERVALUE_INVALIDFILECONTENTSIZE = "InvalidParameterValue.InvalidFileContentSize"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  RESOURCEUNAVAILABLE_IMAGEDOWNLOADERROR = "ResourceUnavailable.ImageDownloadError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+func (c *Client) ApplyCardVerificationExternalWithContext(ctx context.Context, request *ApplyCardVerificationExternalRequest) (response *ApplyCardVerificationExternalResponse, err error) {
+    if request == nil {
+        request = NewApplyCardVerificationExternalRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "ApplyCardVerificationExternal")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ApplyCardVerificationExternal require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewApplyCardVerificationExternalResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewBankCardOCRRequest() (request *BankCardOCRRequest) {
     request = &BankCardOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -407,6 +1889,66 @@ func (c *Client) GeneralBasicOCRWithContext(ctx context.Context, request *Genera
     request.SetContext(ctx)
     
     response = NewGeneralBasicOCRResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetCardVerificationExternalResultRequest() (request *GetCardVerificationExternalResultRequest) {
+    request = &GetCardVerificationExternalResultRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "GetCardVerificationExternalResult")
+    
+    
+    return
+}
+
+func NewGetCardVerificationExternalResultResponse() (response *GetCardVerificationExternalResultResponse) {
+    response = &GetCardVerificationExternalResultResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetCardVerificationExternalResult
+// This API is used to obtain document recognition results.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+func (c *Client) GetCardVerificationExternalResult(request *GetCardVerificationExternalResultRequest) (response *GetCardVerificationExternalResultResponse, err error) {
+    return c.GetCardVerificationExternalResultWithContext(context.Background(), request)
+}
+
+// GetCardVerificationExternalResult
+// This API is used to obtain document recognition results.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+func (c *Client) GetCardVerificationExternalResultWithContext(ctx context.Context, request *GetCardVerificationExternalResultRequest) (response *GetCardVerificationExternalResultResponse, err error) {
+    if request == nil {
+        request = NewGetCardVerificationExternalResultRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "GetCardVerificationExternalResult")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetCardVerificationExternalResult require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetCardVerificationExternalResultResponse()
     err = c.Send(request, response)
     return
 }
