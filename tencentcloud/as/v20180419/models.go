@@ -3934,13 +3934,26 @@ type InstanceMarketOptionsRequest struct {
 }
 
 type InstanceNameIndexSettings struct {
-	// Whether to enable instance creation sequencing, which is disabled by default. Valid values: <li>TRUE: Indicates that instance creation sequencing is enabled. <li>FALSE: Indicates that instance creation sequencing is disabled.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Whether to enable instance name index. Default value: false. Value range:.
+	// 
+	// **true**: indicates that instance name index is enabled.
+	// **false**: indicates that instance name index is disabled.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// Initial sequence number, with a value range of [0, 99,999,999]. When the sequence number exceeds this range after incrementing, scale-out activities will fail. <li>Upon the first enabling of instance name sequencing: The default value is 0. <li>Upon the enabling of instance name sequencing (not for the first time): If this parameter is not specified, the historical sequence number will be carried forward. Lowering the initial sequence number may result in duplicate instance name sequences within the scaling group.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Begin index number. Value range: [0, 99999999].
+	// 
+	// Indicates that the scale out activity will be failed when the index out of range. 
+	// If not specified, carries forward historical index number or 0.
+	// Lowering the index sequence number may lead to instance name duplication within the group.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	BeginIndex *int64 `json:"BeginIndex,omitnil,omitempty" name:"BeginIndex"`
+
+	// Instance name index number digits, defaults to 0, means no specified digit count. Value range: 0-8, maximum is integer 8. when using values 1-8, the system checks whether the index number exceeds the maximum digit for this digit count.
+	// 
+	// If set to 3, index number is in the format: 000, 001, 002 ... 010, 011 ... 100 ... 999. The maximum is 999. 
+	// Assuming set to 0, the index number is 0, 1, 2 ... 10, 11 ... 100 ... 1000 ...10000 ... 99999999. Max number is 99999999.
+	IndexLength *uint64 `json:"IndexLength,omitnil,omitempty" name:"IndexLength"`
 }
 
 type InstanceNameSettings struct {
@@ -6128,6 +6141,9 @@ type ServiceSettings struct {
 	// <Li>True: when modifying the maximum or minimum value, if a conflict exists with the current expected value, synchronously adjust the expected value. for example, if the input minimum value is 2 while the current expected value is 1, the expected value will be synchronously adjusted to 2.</li>.
 	// <Li>False: if a conflict exists between the current expected value when modifying the maximum or minimum value, an error message indicates it is not allowed to be modified.</li>.
 	DesiredCapacitySyncWithMaxMinSize *bool `json:"DesiredCapacitySyncWithMaxMinSize,omitnil,omitempty" name:"DesiredCapacitySyncWithMaxMinSize"`
+
+	// Scaling in unhealthy instances first. If enabled, preferentially selects unhealthy instances during scale in. Default value: False.
+	PriorityScaleInUnhealthy *bool `json:"PriorityScaleInUnhealthy,omitnil,omitempty" name:"PriorityScaleInUnhealthy"`
 }
 
 // Predefined struct for user

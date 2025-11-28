@@ -389,6 +389,110 @@ func (c *Client) CreateDBInstanceHourWithContext(ctx context.Context, request *C
     return
 }
 
+func NewCreateLogDownloadTaskRequest() (request *CreateLogDownloadTaskRequest) {
+    request = &CreateLogDownloadTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "CreateLogDownloadTask")
+    
+    
+    return
+}
+
+func NewCreateLogDownloadTaskResponse() (response *CreateLogDownloadTaskResponse) {
+    response = &CreateLogDownloadTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateLogDownloadTask
+// This API is used to create a log download task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) CreateLogDownloadTask(request *CreateLogDownloadTaskRequest) (response *CreateLogDownloadTaskResponse, err error) {
+    return c.CreateLogDownloadTaskWithContext(context.Background(), request)
+}
+
+// CreateLogDownloadTask
+// This API is used to create a log download task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) CreateLogDownloadTaskWithContext(ctx context.Context, request *CreateLogDownloadTaskRequest) (response *CreateLogDownloadTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateLogDownloadTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "CreateLogDownloadTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateLogDownloadTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateLogDownloadTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLogDownloadTaskRequest() (request *DeleteLogDownloadTaskRequest) {
+    request = &DeleteLogDownloadTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DeleteLogDownloadTask")
+    
+    
+    return
+}
+
+func NewDeleteLogDownloadTaskResponse() (response *DeleteLogDownloadTaskResponse) {
+    response = &DeleteLogDownloadTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteLogDownloadTask
+// This API is used to delete a log download task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DeleteLogDownloadTask(request *DeleteLogDownloadTaskRequest) (response *DeleteLogDownloadTaskResponse, err error) {
+    return c.DeleteLogDownloadTaskWithContext(context.Background(), request)
+}
+
+// DeleteLogDownloadTask
+// This API is used to delete a log download task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DeleteLogDownloadTaskWithContext(ctx context.Context, request *DeleteLogDownloadTaskRequest) (response *DeleteLogDownloadTaskResponse, err error) {
+    if request == nil {
+        request = NewDeleteLogDownloadTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DeleteLogDownloadTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteLogDownloadTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteLogDownloadTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAsyncRequestInfoRequest() (request *DescribeAsyncRequestInfoRequest) {
     request = &DescribeAsyncRequestInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -963,6 +1067,172 @@ func (c *Client) DescribeInstanceParamsWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeInstanceSSLRequest() (request *DescribeInstanceSSLRequest) {
+    request = &DescribeInstanceSSLRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeInstanceSSL")
+    
+    
+    return
+}
+
+func NewDescribeInstanceSSLResponse() (response *DescribeInstanceSSLResponse) {
+    response = &DescribeInstanceSSLResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeInstanceSSL
+// This API is used to view the enabling status of Secure Sockets Layer (SSL) for an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_KERNELVERSIONNOTSUPPORT = "UnsupportedOperation.KernelVersionNotSupport"
+//  UNSUPPORTEDOPERATION_SECONDARYVERSIONNOTSUPPORTAUDIT = "UnsupportedOperation.SecondaryVersionNotSupportAudit"
+//  UNSUPPORTEDOPERATION_VERSIONNOTSUPPORT = "UnsupportedOperation.VersionNotSupport"
+func (c *Client) DescribeInstanceSSL(request *DescribeInstanceSSLRequest) (response *DescribeInstanceSSLResponse, err error) {
+    return c.DescribeInstanceSSLWithContext(context.Background(), request)
+}
+
+// DescribeInstanceSSL
+// This API is used to view the enabling status of Secure Sockets Layer (SSL) for an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_KERNELVERSIONNOTSUPPORT = "UnsupportedOperation.KernelVersionNotSupport"
+//  UNSUPPORTEDOPERATION_SECONDARYVERSIONNOTSUPPORTAUDIT = "UnsupportedOperation.SecondaryVersionNotSupportAudit"
+//  UNSUPPORTEDOPERATION_VERSIONNOTSUPPORT = "UnsupportedOperation.VersionNotSupport"
+func (c *Client) DescribeInstanceSSLWithContext(ctx context.Context, request *DescribeInstanceSSLRequest) (response *DescribeInstanceSSLResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceSSLRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeInstanceSSL")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstanceSSL require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstanceSSLResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLogDownloadTasksRequest() (request *DescribeLogDownloadTasksRequest) {
+    request = &DescribeLogDownloadTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeLogDownloadTasks")
+    
+    
+    return
+}
+
+func NewDescribeLogDownloadTasksResponse() (response *DescribeLogDownloadTasksResponse) {
+    response = &DescribeLogDownloadTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeLogDownloadTasks
+// This API is used to query a log download task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DescribeLogDownloadTasks(request *DescribeLogDownloadTasksRequest) (response *DescribeLogDownloadTasksResponse, err error) {
+    return c.DescribeLogDownloadTasksWithContext(context.Background(), request)
+}
+
+// DescribeLogDownloadTasks
+// This API is used to query a log download task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DescribeLogDownloadTasksWithContext(ctx context.Context, request *DescribeLogDownloadTasksRequest) (response *DescribeLogDownloadTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeLogDownloadTasksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeLogDownloadTasks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLogDownloadTasks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLogDownloadTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMongodbLogsRequest() (request *DescribeMongodbLogsRequest) {
+    request = &DescribeMongodbLogsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeMongodbLogs")
+    
+    
+    return
+}
+
+func NewDescribeMongodbLogsResponse() (response *DescribeMongodbLogsResponse) {
+    response = &DescribeMongodbLogsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMongodbLogs
+// This API is used to query running logs.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  INVALIDPARAMETERVALUE_TIMEFORMATERR = "InvalidParameterValue.TimeFormatErr"
+func (c *Client) DescribeMongodbLogs(request *DescribeMongodbLogsRequest) (response *DescribeMongodbLogsResponse, err error) {
+    return c.DescribeMongodbLogsWithContext(context.Background(), request)
+}
+
+// DescribeMongodbLogs
+// This API is used to query running logs.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  INVALIDPARAMETERVALUE_TIMEFORMATERR = "InvalidParameterValue.TimeFormatErr"
+func (c *Client) DescribeMongodbLogsWithContext(ctx context.Context, request *DescribeMongodbLogsRequest) (response *DescribeMongodbLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeMongodbLogsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeMongodbLogs")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMongodbLogs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMongodbLogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSecurityGroupRequest() (request *DescribeSecurityGroupRequest) {
     request = &DescribeSecurityGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1433,6 +1703,66 @@ func (c *Client) InquirePriceRenewDBInstancesWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewInquirePriceRenewDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInstanceEnableSSLRequest() (request *InstanceEnableSSLRequest) {
+    request = &InstanceEnableSSLRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "InstanceEnableSSL")
+    
+    
+    return
+}
+
+func NewInstanceEnableSSLResponse() (response *InstanceEnableSSLResponse) {
+    response = &InstanceEnableSSLResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// InstanceEnableSSL
+// This API is used to set the SSL status for an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_LOCKFAILED = "InvalidParameterValue.LockFailed"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_KERNELVERSIONNOTSUPPORT = "UnsupportedOperation.KernelVersionNotSupport"
+//  UNSUPPORTEDOPERATION_SECONDARYVERSIONNOTSUPPORTAUDIT = "UnsupportedOperation.SecondaryVersionNotSupportAudit"
+//  UNSUPPORTEDOPERATION_VERSIONNOTSUPPORT = "UnsupportedOperation.VersionNotSupport"
+func (c *Client) InstanceEnableSSL(request *InstanceEnableSSLRequest) (response *InstanceEnableSSLResponse, err error) {
+    return c.InstanceEnableSSLWithContext(context.Background(), request)
+}
+
+// InstanceEnableSSL
+// This API is used to set the SSL status for an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_LOCKFAILED = "InvalidParameterValue.LockFailed"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_KERNELVERSIONNOTSUPPORT = "UnsupportedOperation.KernelVersionNotSupport"
+//  UNSUPPORTEDOPERATION_SECONDARYVERSIONNOTSUPPORTAUDIT = "UnsupportedOperation.SecondaryVersionNotSupportAudit"
+//  UNSUPPORTEDOPERATION_VERSIONNOTSUPPORT = "UnsupportedOperation.VersionNotSupport"
+func (c *Client) InstanceEnableSSLWithContext(ctx context.Context, request *InstanceEnableSSLRequest) (response *InstanceEnableSSLResponse, err error) {
+    if request == nil {
+        request = NewInstanceEnableSSLRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "InstanceEnableSSL")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InstanceEnableSSL require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewInstanceEnableSSLResponse()
     err = c.Send(request, response)
     return
 }
@@ -2055,6 +2385,116 @@ func (c *Client) TerminateDBInstancesWithContext(ctx context.Context, request *T
     request.SetContext(ctx)
     
     response = NewTerminateDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpgradeDBInstanceKernelVersionRequest() (request *UpgradeDBInstanceKernelVersionRequest) {
+    request = &UpgradeDBInstanceKernelVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "UpgradeDBInstanceKernelVersion")
+    
+    
+    return
+}
+
+func NewUpgradeDBInstanceKernelVersionResponse() (response *UpgradeDBInstanceKernelVersionResponse) {
+    response = &UpgradeDBInstanceKernelVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpgradeDBInstanceKernelVersion
+// This API is used to upgrade the kernel version of the database instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_ILLEGALINSTANCESTATUS = "InvalidParameterValue.IllegalInstanceStatus"
+//  INVALIDPARAMETERVALUE_LOCKFAILED = "InvalidParameterValue.LockFailed"
+//  INVALIDPARAMETERVALUE_STATUSABNORMAL = "InvalidParameterValue.StatusAbnormal"
+func (c *Client) UpgradeDBInstanceKernelVersion(request *UpgradeDBInstanceKernelVersionRequest) (response *UpgradeDBInstanceKernelVersionResponse, err error) {
+    return c.UpgradeDBInstanceKernelVersionWithContext(context.Background(), request)
+}
+
+// UpgradeDBInstanceKernelVersion
+// This API is used to upgrade the kernel version of the database instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_ILLEGALINSTANCESTATUS = "InvalidParameterValue.IllegalInstanceStatus"
+//  INVALIDPARAMETERVALUE_LOCKFAILED = "InvalidParameterValue.LockFailed"
+//  INVALIDPARAMETERVALUE_STATUSABNORMAL = "InvalidParameterValue.StatusAbnormal"
+func (c *Client) UpgradeDBInstanceKernelVersionWithContext(ctx context.Context, request *UpgradeDBInstanceKernelVersionRequest) (response *UpgradeDBInstanceKernelVersionResponse, err error) {
+    if request == nil {
+        request = NewUpgradeDBInstanceKernelVersionRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "UpgradeDBInstanceKernelVersion")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpgradeDBInstanceKernelVersion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpgradeDBInstanceKernelVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpgradeDbInstanceVersionRequest() (request *UpgradeDbInstanceVersionRequest) {
+    request = &UpgradeDbInstanceVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "UpgradeDbInstanceVersion")
+    
+    
+    return
+}
+
+func NewUpgradeDbInstanceVersionResponse() (response *UpgradeDbInstanceVersionResponse) {
+    response = &UpgradeDbInstanceVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpgradeDbInstanceVersion
+// This API is used to upgrade the database kernel across versions. Currently, it is only supported to upgrade from version 3.6 to 4.0, 4.0 to 4.2, 4.2 to 4.4, and 4.4 to 5.0.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBOPERATEERROR = "InternalError.DBOperateError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+func (c *Client) UpgradeDbInstanceVersion(request *UpgradeDbInstanceVersionRequest) (response *UpgradeDbInstanceVersionResponse, err error) {
+    return c.UpgradeDbInstanceVersionWithContext(context.Background(), request)
+}
+
+// UpgradeDbInstanceVersion
+// This API is used to upgrade the database kernel across versions. Currently, it is only supported to upgrade from version 3.6 to 4.0, 4.0 to 4.2, 4.2 to 4.4, and 4.4 to 5.0.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBOPERATEERROR = "InternalError.DBOperateError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+func (c *Client) UpgradeDbInstanceVersionWithContext(ctx context.Context, request *UpgradeDbInstanceVersionRequest) (response *UpgradeDbInstanceVersionResponse, err error) {
+    if request == nil {
+        request = NewUpgradeDbInstanceVersionRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "UpgradeDbInstanceVersion")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpgradeDbInstanceVersion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpgradeDbInstanceVersionResponse()
     err = c.Send(request, response)
     return
 }

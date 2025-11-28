@@ -38,6 +38,9 @@ const (
 	// `appId` verification failed.
 	INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
 
+	// An internal data storage exception occurs.
+	INTERNALERROR_DBOPERATEERROR = "InternalError.DBOperateError"
+
 	// Failed to query the instance.
 	INTERNALERROR_FINDINSTANCEFAILED = "InternalError.FindInstanceFailed"
 
@@ -190,6 +193,12 @@ const (
 
 	// Unsupported operation
 	UNSUPPORTEDOPERATION = "UnsupportedOperation"
+
+	// Not supported for kernel versions.
+	UNSUPPORTEDOPERATION_KERNELVERSIONNOTSUPPORT = "UnsupportedOperation.KernelVersionNotSupport"
+
+	// Not supported for minor versions.
+	UNSUPPORTEDOPERATION_SECONDARYVERSIONNOTSUPPORTAUDIT = "UnsupportedOperation.SecondaryVersionNotSupportAudit"
 
 	// The current version does not support the operation.
 	UNSUPPORTEDOPERATION_VERSIONNOTSUPPORT = "UnsupportedOperation.VersionNotSupport"

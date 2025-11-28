@@ -45,6 +45,130 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewAddCustomizedConfigRequest() (request *AddCustomizedConfigRequest) {
+    request = &AddCustomizedConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("clb", APIVersion, "AddCustomizedConfig")
+    
+    
+    return
+}
+
+func NewAddCustomizedConfigResponse() (response *AddCustomizedConfigResponse) {
+    response = &AddCustomizedConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AddCustomizedConfig
+// This API is used to add new personalized configurations and prepare for decommissioning. Please use SetCustomizedConfigForLoadBalancer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) AddCustomizedConfig(request *AddCustomizedConfigRequest) (response *AddCustomizedConfigResponse, err error) {
+    return c.AddCustomizedConfigWithContext(context.Background(), request)
+}
+
+// AddCustomizedConfig
+// This API is used to add new personalized configurations and prepare for decommissioning. Please use SetCustomizedConfigForLoadBalancer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) AddCustomizedConfigWithContext(ctx context.Context, request *AddCustomizedConfigRequest) (response *AddCustomizedConfigResponse, err error) {
+    if request == nil {
+        request = NewAddCustomizedConfigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "clb", APIVersion, "AddCustomizedConfig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddCustomizedConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAddCustomizedConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewAssociateCustomizedConfigRequest() (request *AssociateCustomizedConfigRequest) {
+    request = &AssociateCustomizedConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("clb", APIVersion, "AssociateCustomizedConfig")
+    
+    
+    return
+}
+
+func NewAssociateCustomizedConfigResponse() (response *AssociateCustomizedConfigResponse) {
+    response = &AssociateCustomizedConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AssociateCustomizedConfig
+// This API is used to associate configurations with a server or location based on the configuration type. It is preparing for decommissioning, please use SetCustomizedConfigForLoadBalancer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETER_LISTENERIDNOTFOUND = "InvalidParameter.ListenerIdNotFound"
+//  INVALIDPARAMETER_LOCATIONNOTFOUND = "InvalidParameter.LocationNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) AssociateCustomizedConfig(request *AssociateCustomizedConfigRequest) (response *AssociateCustomizedConfigResponse, err error) {
+    return c.AssociateCustomizedConfigWithContext(context.Background(), request)
+}
+
+// AssociateCustomizedConfig
+// This API is used to associate configurations with a server or location based on the configuration type. It is preparing for decommissioning, please use SetCustomizedConfigForLoadBalancer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETER_LISTENERIDNOTFOUND = "InvalidParameter.ListenerIdNotFound"
+//  INVALIDPARAMETER_LOCATIONNOTFOUND = "InvalidParameter.LocationNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) AssociateCustomizedConfigWithContext(ctx context.Context, request *AssociateCustomizedConfigRequest) (response *AssociateCustomizedConfigResponse, err error) {
+    if request == nil {
+        request = NewAssociateCustomizedConfigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "clb", APIVersion, "AssociateCustomizedConfig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AssociateCustomizedConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAssociateCustomizedConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAssociateTargetGroupsRequest() (request *AssociateTargetGroupsRequest) {
     request = &AssociateTargetGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -65,9 +189,17 @@ func NewAssociateTargetGroupsResponse() (response *AssociateTargetGroupsResponse
 }
 
 // AssociateTargetGroups
-// This API is used to bind target groups to CLB listeners (layer-4 protocol) or forwarding rules (layer-7 protocol).
+// This API is used to bind target groups to Cloud Load Balancer listeners (Layer-4 protocol) or forwarding rules (L7 protocol).
 //
-// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
+// This API is asynchronous. After it returns a successful result, you need to call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as input parameter to check whether this task is successful.
+//
+// This API is used to describe restrictions.
+//
+// -Binding a legacy version target group to a Layer-4 listener requires the listener to have backend target groups enabled.
+//
+// -Layer-7 bind target group. LocationId is a required item in the data structure TargetGroupAssociation.
+//
+// -The VPC of the Cloud Load Balancer must match the VPC of the target group.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -82,9 +214,17 @@ func (c *Client) AssociateTargetGroups(request *AssociateTargetGroupsRequest) (r
 }
 
 // AssociateTargetGroups
-// This API is used to bind target groups to CLB listeners (layer-4 protocol) or forwarding rules (layer-7 protocol).
+// This API is used to bind target groups to Cloud Load Balancer listeners (Layer-4 protocol) or forwarding rules (L7 protocol).
 //
-// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
+// This API is asynchronous. After it returns a successful result, you need to call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as input parameter to check whether this task is successful.
+//
+// This API is used to describe restrictions.
+//
+// -Binding a legacy version target group to a Layer-4 listener requires the listener to have backend target groups enabled.
+//
+// -Layer-7 bind target group. LocationId is a required item in the data structure TargetGroupAssociation.
+//
+// -The VPC of the Cloud Load Balancer must match the VPC of the target group.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -357,7 +497,7 @@ func NewBatchModifyTargetWeightResponse() (response *BatchModifyTargetWeightResp
 }
 
 // BatchModifyTargetWeight
-// This API is used to modify forwarding weights of real servers bound to CLB listeners in batches. Up to 500 servers can be unbound in a batch. As this API is async, you should check whether the task is successful by passing the RequestId returned to the API call `DescribeTaskStatus`.<br/> This API is supported by CLB layer-4 and layer-7 listeners, but not Classis CLB counterparts.
+// The BatchModifyTargetWeight API is used to batch modify the forwarding weight of backend machines bound to a CLB listener. The maximum resource quantity for batch modification is 500. This is an asynchronous API. After it returns a successful result, you need to call the DescribeTaskStatus API with the returned RequestID as input parameter to check whether this task is successful. This API supports both layer-4 and layer-7 CLB listeners but is unsupported for classic CLB.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -372,7 +512,7 @@ func (c *Client) BatchModifyTargetWeight(request *BatchModifyTargetWeightRequest
 }
 
 // BatchModifyTargetWeight
-// This API is used to modify forwarding weights of real servers bound to CLB listeners in batches. Up to 500 servers can be unbound in a batch. As this API is async, you should check whether the task is successful by passing the RequestId returned to the API call `DescribeTaskStatus`.<br/> This API is supported by CLB layer-4 and layer-7 listeners, but not Classis CLB counterparts.
+// The BatchModifyTargetWeight API is used to batch modify the forwarding weight of backend machines bound to a CLB listener. The maximum resource quantity for batch modification is 500. This is an asynchronous API. After it returns a successful result, you need to call the DescribeTaskStatus API with the returned RequestID as input parameter to check whether this task is successful. This API supports both layer-4 and layer-7 CLB listeners but is unsupported for classic CLB.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -499,7 +639,47 @@ func NewCloneLoadBalancerResponse() (response *CloneLoadBalancerResponse) {
 }
 
 // CloneLoadBalancer
-// This API is used to clone a CLB instance. CLB instance cloning indicates copying a specified CLB instance to create one with the same rules and binding relationships. The operation of this cloning API is asynchronous. The cloned data is based on the state when CloneLoadBalancer is called. If the cloned CLB instance changes after CloneLoadBalancer is called, the changed rules will not be cloned.Note: You can query the instance creation status by calling the [DescribeTaskStatus](https://intl.cloud.tencent.com/document/product/214/30683?from_cn_redirect=1) API with the returned requestId.RestrictionsInstance attribute restrictions:- Instances billed in pay-as-you-go and monthly subscription modes can be cloned. For a new instance cloned from a monthly subscription instance, its network billing mode will switch to billing by hourly bandwidth, but its bandwidth and specifications will remain the same as the settings of the original instance.- CLB instances not associated with any billable items cannot be cloned.- Classic CLB instances and CLB instances with Anti-DDoS Pro cannot be cloned.- Classic network-based instances cannot be cloned.- Anycast instances cannot be cloned.- IPv6 NAT64 instances cannot be cloned.- Blocked or frozen instances cannot be cloned.- Before cloning an instance, make sure that all certificates used on the instance have not expired; otherwise, the cloning will fail.Quota restrictions:- Instances with more than 50 listeners cannot be cloned.- Shared instances with the public network bandwidth cap exceeding 2 Gbps cannot be cloned.API calling restrictions:The bandwidth package ID must be input for BGP bandwidth packages.Corresponding parameters should be input for cloning of an exclusive cluster; otherwise, a shared instance will be created.The feature is in beta test. You can submit a [beta test application](https://intl.cloud.tencent.com/apply/p/1akuvsmyn0g?from_cn_redirect=1).
+// This API is used to clone a load balancing instance with identical rules and binding relationships based on the designated Cloud Load Balancer. The cloning process is an asynchronous operation. The cloned data is based on the status when calling CloneLoadBalancer. If the source CLB changes after calling CloneLoadBalancer, the change rules will not be cloned.
+//
+// 
+//
+// Note: The instance creation status can be queried based on the returned requestId by accessing the DescribeTaskStatus API (https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1).
+//
+// 
+//
+// This API is used to describe restriction descriptions.
+//
+// This API is used to set instance attribute restrictions.
+//
+// -The cloning feature supports both pay-as-you-go and monthly subscription instances. For cloned monthly subscription instances, the new instance's network billing mode switches to billing by hourly bandwidth, with its bandwidth and specifications remaining consistent with the settings of the original instance.
+//
+// -CLB instances not associated with billable items cannot be cloned (historic free activity creation).
+//
+// -Classic CLB instances and Anti-DDoS CLBs cannot be cloned.
+//
+// -Cloning of classic network-based instances is not supported.
+//
+// -Anycast instances cannot be cloned.
+//
+// -IPv6 NAT64 edition instances cannot be cloned.
+//
+// -Blocked or frozen instances cannot be cloned.
+//
+// -Before performing the cloning operation, make sure that all certificates used on the instance have not expired, otherwise cloning will fail.
+//
+// This API is used to set quota dimension restrictions.
+//
+// -Cloning is not supported when the number of instance listeners exceeds 50.
+//
+// -Cloning is not supported when the public network bandwidth cap of a shared instance exceeds 2G.
+//
+// 
+//
+// This API is used to call APIs.
+//
+// This API is used to specify the BGP bandwidth package ID.
+//
+// This API is used to perform exclusive cluster cloning with corresponding parameters, otherwise shared instance creation will be used.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -528,7 +708,47 @@ func (c *Client) CloneLoadBalancer(request *CloneLoadBalancerRequest) (response 
 }
 
 // CloneLoadBalancer
-// This API is used to clone a CLB instance. CLB instance cloning indicates copying a specified CLB instance to create one with the same rules and binding relationships. The operation of this cloning API is asynchronous. The cloned data is based on the state when CloneLoadBalancer is called. If the cloned CLB instance changes after CloneLoadBalancer is called, the changed rules will not be cloned.Note: You can query the instance creation status by calling the [DescribeTaskStatus](https://intl.cloud.tencent.com/document/product/214/30683?from_cn_redirect=1) API with the returned requestId.RestrictionsInstance attribute restrictions:- Instances billed in pay-as-you-go and monthly subscription modes can be cloned. For a new instance cloned from a monthly subscription instance, its network billing mode will switch to billing by hourly bandwidth, but its bandwidth and specifications will remain the same as the settings of the original instance.- CLB instances not associated with any billable items cannot be cloned.- Classic CLB instances and CLB instances with Anti-DDoS Pro cannot be cloned.- Classic network-based instances cannot be cloned.- Anycast instances cannot be cloned.- IPv6 NAT64 instances cannot be cloned.- Blocked or frozen instances cannot be cloned.- Before cloning an instance, make sure that all certificates used on the instance have not expired; otherwise, the cloning will fail.Quota restrictions:- Instances with more than 50 listeners cannot be cloned.- Shared instances with the public network bandwidth cap exceeding 2 Gbps cannot be cloned.API calling restrictions:The bandwidth package ID must be input for BGP bandwidth packages.Corresponding parameters should be input for cloning of an exclusive cluster; otherwise, a shared instance will be created.The feature is in beta test. You can submit a [beta test application](https://intl.cloud.tencent.com/apply/p/1akuvsmyn0g?from_cn_redirect=1).
+// This API is used to clone a load balancing instance with identical rules and binding relationships based on the designated Cloud Load Balancer. The cloning process is an asynchronous operation. The cloned data is based on the status when calling CloneLoadBalancer. If the source CLB changes after calling CloneLoadBalancer, the change rules will not be cloned.
+//
+// 
+//
+// Note: The instance creation status can be queried based on the returned requestId by accessing the DescribeTaskStatus API (https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1).
+//
+// 
+//
+// This API is used to describe restriction descriptions.
+//
+// This API is used to set instance attribute restrictions.
+//
+// -The cloning feature supports both pay-as-you-go and monthly subscription instances. For cloned monthly subscription instances, the new instance's network billing mode switches to billing by hourly bandwidth, with its bandwidth and specifications remaining consistent with the settings of the original instance.
+//
+// -CLB instances not associated with billable items cannot be cloned (historic free activity creation).
+//
+// -Classic CLB instances and Anti-DDoS CLBs cannot be cloned.
+//
+// -Cloning of classic network-based instances is not supported.
+//
+// -Anycast instances cannot be cloned.
+//
+// -IPv6 NAT64 edition instances cannot be cloned.
+//
+// -Blocked or frozen instances cannot be cloned.
+//
+// -Before performing the cloning operation, make sure that all certificates used on the instance have not expired, otherwise cloning will fail.
+//
+// This API is used to set quota dimension restrictions.
+//
+// -Cloning is not supported when the number of instance listeners exceeds 50.
+//
+// -Cloning is not supported when the public network bandwidth cap of a shared instance exceeds 2G.
+//
+// 
+//
+// This API is used to call APIs.
+//
+// This API is used to specify the BGP bandwidth package ID.
+//
+// This API is used to perform exclusive cluster cloning with corresponding parameters, otherwise shared instance creation will be used.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -813,9 +1033,9 @@ func NewCreateLoadBalancerSnatIpsResponse() (response *CreateLoadBalancerSnatIps
 }
 
 // CreateLoadBalancerSnatIps
-// This API is used to add an SNAT IP for an SnatPro CLB instance. If SnatPro is not enabled for CLB, it will be automatically enabled after the SNAT IP is added.
+// This API is used to add SnatIp for SnatPro Cloud Load Balancer. If SnatPro is not enabled, it will be auto on after adding SnatIp.
 //
-// This is an async API. After it is returned successfully, you can check the task result by calling `DescribeTaskStatus` with the returned `RequestID`.
+// This API is used to perform asynchronous operations. After returning a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -833,9 +1053,9 @@ func (c *Client) CreateLoadBalancerSnatIps(request *CreateLoadBalancerSnatIpsReq
 }
 
 // CreateLoadBalancerSnatIps
-// This API is used to add an SNAT IP for an SnatPro CLB instance. If SnatPro is not enabled for CLB, it will be automatically enabled after the SNAT IP is added.
+// This API is used to add SnatIp for SnatPro Cloud Load Balancer. If SnatPro is not enabled, it will be auto on after adding SnatIp.
 //
-// This is an async API. After it is returned successfully, you can check the task result by calling `DescribeTaskStatus` with the returned `RequestID`.
+// This API is used to perform asynchronous operations. After returning a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -885,9 +1105,9 @@ func NewCreateRuleResponse() (response *CreateRuleResponse) {
 }
 
 // CreateRule
-// This API (CreateRule) is used to create a forwarding rule under an existing layer-7 CLB listener, where real servers must be bound to the rule instead of the listener.
+// This API is used to create forwarding rules under an existing layer-7 CLB listener. In layer-7 CLB listeners, backend services must be bound to rules instead of the listener.
 //
-// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+// This is an asynchronous API. After it returns the result successfully, you can call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestId as an input parameter to query whether the task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -906,9 +1126,9 @@ func (c *Client) CreateRule(request *CreateRuleRequest) (response *CreateRuleRes
 }
 
 // CreateRule
-// This API (CreateRule) is used to create a forwarding rule under an existing layer-7 CLB listener, where real servers must be bound to the rule instead of the listener.
+// This API is used to create forwarding rules under an existing layer-7 CLB listener. In layer-7 CLB listeners, backend services must be bound to rules instead of the listener.
 //
-// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+// This is an asynchronous API. After it returns the result successfully, you can call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestId as an input parameter to query whether the task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1073,6 +1293,76 @@ func (c *Client) CreateTopicWithContext(ctx context.Context, request *CreateTopi
     return
 }
 
+func NewDeleteCustomizedConfigRequest() (request *DeleteCustomizedConfigRequest) {
+    request = &DeleteCustomizedConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("clb", APIVersion, "DeleteCustomizedConfig")
+    
+    
+    return
+}
+
+func NewDeleteCustomizedConfigResponse() (response *DeleteCustomizedConfigResponse) {
+    response = &DeleteCustomizedConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteCustomizedConfig
+// This API is used to delete personalized configurations and prepare for decommissioning. Please use SetCustomizedConfigForLoadBalancer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteCustomizedConfig(request *DeleteCustomizedConfigRequest) (response *DeleteCustomizedConfigResponse, err error) {
+    return c.DeleteCustomizedConfigWithContext(context.Background(), request)
+}
+
+// DeleteCustomizedConfig
+// This API is used to delete personalized configurations and prepare for decommissioning. Please use SetCustomizedConfigForLoadBalancer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteCustomizedConfigWithContext(ctx context.Context, request *DeleteCustomizedConfigRequest) (response *DeleteCustomizedConfigResponse, err error) {
+    if request == nil {
+        request = NewDeleteCustomizedConfigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "clb", APIVersion, "DeleteCustomizedConfig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCustomizedConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCustomizedConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteListenerRequest() (request *DeleteListenerRequest) {
     request = &DeleteListenerRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1093,9 +1383,9 @@ func NewDeleteListenerResponse() (response *DeleteListenerResponse) {
 }
 
 // DeleteListener
-// This API is used to delete a listener from a CLB instance (layer-4 or layer-7).
+// This API is used to delete listeners (layer-4 and layer-7) under a Cloud Load Balancer instance.
 //
-// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+// This API is used to perform asynchronous operations. After returning a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1110,9 +1400,9 @@ func (c *Client) DeleteListener(request *DeleteListenerRequest) (response *Delet
 }
 
 // DeleteListener
-// This API is used to delete a listener from a CLB instance (layer-4 or layer-7).
+// This API is used to delete listeners (layer-4 and layer-7) under a Cloud Load Balancer instance.
 //
-// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+// This API is used to perform asynchronous operations. After returning a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1237,9 +1527,9 @@ func NewDeleteLoadBalancerListenersResponse() (response *DeleteLoadBalancerListe
 }
 
 // DeleteLoadBalancerListeners
-// This API is used to delete multiple listeners of a CLB instance.
+// This API is used to delete multiple listeners of Cloud Load Balancer.
 //
-// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
+// This API is used to perform asynchronous operations. After it returns a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1256,9 +1546,9 @@ func (c *Client) DeleteLoadBalancerListeners(request *DeleteLoadBalancerListener
 }
 
 // DeleteLoadBalancerListeners
-// This API is used to delete multiple listeners of a CLB instance.
+// This API is used to delete multiple listeners of Cloud Load Balancer.
 //
-// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
+// This API is used to perform asynchronous operations. After it returns a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1307,9 +1597,9 @@ func NewDeleteLoadBalancerSnatIpsResponse() (response *DeleteLoadBalancerSnatIps
 }
 
 // DeleteLoadBalancerSnatIps
-// This API is used to delete the SNAT IP for an SnatPro CLB instance.
+// This API is used to delete the SnatIp of the SnatPro load balancing.
 //
-// This is an async API. After it is returned successfully, you can check the task result by calling `DescribeTaskStatus` with the returned `RequestID`.
+// This API is used to perform asynchronous operations. After returning a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1325,9 +1615,9 @@ func (c *Client) DeleteLoadBalancerSnatIps(request *DeleteLoadBalancerSnatIpsReq
 }
 
 // DeleteLoadBalancerSnatIps
-// This API is used to delete the SNAT IP for an SnatPro CLB instance.
+// This API is used to delete the SnatIp of the SnatPro load balancing.
 //
-// This is an async API. After it is returned successfully, you can check the task result by calling `DescribeTaskStatus` with the returned `RequestID`.
+// This API is used to perform asynchronous operations. After returning a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1447,9 +1737,9 @@ func NewDeleteRuleResponse() (response *DeleteRuleResponse) {
 }
 
 // DeleteRule
-// This API (DeleteRule) is used to delete a forwarding rule under a layer-7 CLB instance listener
+// This API is used to delete forwarding rules under a layer-7 listener of a load balancing instance.
 //
-// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+// This API is used to perform asynchronous operations. After it returns a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1465,9 +1755,9 @@ func (c *Client) DeleteRule(request *DeleteRuleRequest) (response *DeleteRuleRes
 }
 
 // DeleteRule
-// This API (DeleteRule) is used to delete a forwarding rule under a layer-7 CLB instance listener
+// This API is used to delete forwarding rules under a layer-7 listener of a load balancing instance.
 //
-// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+// This API is used to perform asynchronous operations. After it returns a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1515,7 +1805,7 @@ func NewDeleteTargetGroupsResponse() (response *DeleteTargetGroupsResponse) {
 }
 
 // DeleteTargetGroups
-// This API is used to delete a target group.
+// This API is used to delete target groups in batches, with a maximum of 20 target groups at a time.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1528,7 +1818,7 @@ func (c *Client) DeleteTargetGroups(request *DeleteTargetGroupsRequest) (respons
 }
 
 // DeleteTargetGroups
-// This API is used to delete a target group.
+// This API is used to delete target groups in batches, with a maximum of 20 target groups at a time.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1573,29 +1863,29 @@ func NewDeregisterFunctionTargetsResponse() (response *DeregisterFunctionTargets
 }
 
 // DeregisterFunctionTargets
-// This API is used to unbind a SCF function with a CLB forwarding rule. For L7 listeners, you need to specify the forwarding rule by using `LocationId` or `Domain+Url`. 
+// This API is used to unbind a cloud function from the forwarding rule of a Cloud Load Balancer. For a layer-7 (HTTP/HTTPS) listener, the forwarding rule must be specified by LocationId or Domain+Url.
 //
-// This is an async API. After it is returned successfully, you can call the [DescribeTaskStatus](https://intl.cloud.tencent.com/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID to check whether this task is successful.
+// This API is used to perform asynchronous operations. After it returns a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
 //
-// <br/>Limits: 
+// This API is used to describe restrictions.
 //
 // 
 //
-// - Binding with SCF is only available in Guangzhou, Shenzhen Finance, Shanghai, Shanghai Finance, Beijing, Chengdu, Hong Kong (China), Singapore, Mumbai, Tokyo, and Silicon Valley.
+// -SCF binding is supported only in Guangzhou, Shenzhen Finance, Shanghai, Shanghai Finance, Beijing, Chengdu, Hong Kong (China), Singapore, Tokyo, and Silicon Valley.
 //
-// - SCF functions can only be bound with CLB instances of bill-by-IP accounts but not with bill-by-CVM accounts. If you are using a bill-by-CVM account, we recommend upgrading it to a bill-by-IP account. 
+// -Only the standard account type supports binding SCF. The classic account type is unsupported. We recommend upgrading to the standard account type. For more information, see [account type upgrade instructions](https://www.tencentcloud.comom/document/product/1199/49090?from_cn_redirect=1).
 //
-// - SCF functions cannot be bound with classic CLB instances.
+// -Classic CLB does not support binding SCF.
 //
-// - SCF functions cannot be bound with classic network-based CLB instances.
+// -Basic Network Type does not support binding SCF.
 //
-// - SCF functions in the same region can be bound with CLB instances. SCF functions can only be bound across VPCs but not regions.
+// -CLB supports binding ALL SCFs in the same region by default, supports cross-VPC binding, but cross-region selection is not supported.
 //
-// - SCF functions can only be bound with IPv4 and IPv6 NAT64 CLB instances, but currently not with IPv6 CLB instances.
+// -Currently, only IPv4 and IPv6 NAT64 versions of Cloud Load Balancer support binding SCF. IPv6 version is not currently supported.
 //
-// - SCF functions can only be bound with layer-7 HTTP and HTTPS listeners, but not with layer-7 QUIC listeners or layer-4 (TCP, UDP, and TCP SSL) listeners.
+// -Only layer-7 (HTTP, HTTPS) listeners support binding SCF. Layer-4 (TCP, UDP, TCP SSL) listeners and layer-7 QUIC listeners are unsupported.
 //
-// - Only SCF event-triggered functions can be bound with CLB instances.
+// -CLB binding SCF only supports binding cloud functions of the "Event function" type.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1614,29 +1904,29 @@ func (c *Client) DeregisterFunctionTargets(request *DeregisterFunctionTargetsReq
 }
 
 // DeregisterFunctionTargets
-// This API is used to unbind a SCF function with a CLB forwarding rule. For L7 listeners, you need to specify the forwarding rule by using `LocationId` or `Domain+Url`. 
+// This API is used to unbind a cloud function from the forwarding rule of a Cloud Load Balancer. For a layer-7 (HTTP/HTTPS) listener, the forwarding rule must be specified by LocationId or Domain+Url.
 //
-// This is an async API. After it is returned successfully, you can call the [DescribeTaskStatus](https://intl.cloud.tencent.com/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID to check whether this task is successful.
+// This API is used to perform asynchronous operations. After it returns a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
 //
-// <br/>Limits: 
+// This API is used to describe restrictions.
 //
 // 
 //
-// - Binding with SCF is only available in Guangzhou, Shenzhen Finance, Shanghai, Shanghai Finance, Beijing, Chengdu, Hong Kong (China), Singapore, Mumbai, Tokyo, and Silicon Valley.
+// -SCF binding is supported only in Guangzhou, Shenzhen Finance, Shanghai, Shanghai Finance, Beijing, Chengdu, Hong Kong (China), Singapore, Tokyo, and Silicon Valley.
 //
-// - SCF functions can only be bound with CLB instances of bill-by-IP accounts but not with bill-by-CVM accounts. If you are using a bill-by-CVM account, we recommend upgrading it to a bill-by-IP account. 
+// -Only the standard account type supports binding SCF. The classic account type is unsupported. We recommend upgrading to the standard account type. For more information, see [account type upgrade instructions](https://www.tencentcloud.comom/document/product/1199/49090?from_cn_redirect=1).
 //
-// - SCF functions cannot be bound with classic CLB instances.
+// -Classic CLB does not support binding SCF.
 //
-// - SCF functions cannot be bound with classic network-based CLB instances.
+// -Basic Network Type does not support binding SCF.
 //
-// - SCF functions in the same region can be bound with CLB instances. SCF functions can only be bound across VPCs but not regions.
+// -CLB supports binding ALL SCFs in the same region by default, supports cross-VPC binding, but cross-region selection is not supported.
 //
-// - SCF functions can only be bound with IPv4 and IPv6 NAT64 CLB instances, but currently not with IPv6 CLB instances.
+// -Currently, only IPv4 and IPv6 NAT64 versions of Cloud Load Balancer support binding SCF. IPv6 version is not currently supported.
 //
-// - SCF functions can only be bound with layer-7 HTTP and HTTPS listeners, but not with layer-7 QUIC listeners or layer-4 (TCP, UDP, and TCP SSL) listeners.
+// -Only layer-7 (HTTP, HTTPS) listeners support binding SCF. Layer-4 (TCP, UDP, TCP SSL) listeners and layer-7 QUIC listeners are unsupported.
 //
-// - Only SCF event-triggered functions can be bound with CLB instances.
+// -CLB binding SCF only supports binding cloud functions of the "Event function" type.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1689,7 +1979,7 @@ func NewDeregisterTargetGroupInstancesResponse() (response *DeregisterTargetGrou
 // DeregisterTargetGroupInstances
 // This API is used to unbind a server from a target group.
 //
-// This is an async API. After it is returned successfully, you can call the API `DescribeTaskStatus` with the returned RequestId as an input parameter to check whether this task is successful.
+// This API is used to perform asynchronous operations. After it returns a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1705,7 +1995,7 @@ func (c *Client) DeregisterTargetGroupInstances(request *DeregisterTargetGroupIn
 // DeregisterTargetGroupInstances
 // This API is used to unbind a server from a target group.
 //
-// This is an async API. After it is returned successfully, you can call the API `DescribeTaskStatus` with the returned RequestId as an input parameter to check whether this task is successful.
+// This API is used to perform asynchronous operations. After it returns a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2665,6 +2955,74 @@ func (c *Client) DescribeLBListenersWithContext(ctx context.Context, request *De
     return
 }
 
+func NewDescribeLBOperateProtectRequest() (request *DescribeLBOperateProtectRequest) {
+    request = &DescribeLBOperateProtectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("clb", APIVersion, "DescribeLBOperateProtect")
+    
+    
+    return
+}
+
+func NewDescribeLBOperateProtectResponse() (response *DescribeLBOperateProtectResponse) {
+    response = &DescribeLBOperateProtectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeLBOperateProtect
+// This API is used to query the operation protection info of Cloud Load Balancer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETER_REGIONNOTFOUND = "InvalidParameter.RegionNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeLBOperateProtect(request *DescribeLBOperateProtectRequest) (response *DescribeLBOperateProtectResponse, err error) {
+    return c.DescribeLBOperateProtectWithContext(context.Background(), request)
+}
+
+// DescribeLBOperateProtect
+// This API is used to query the operation protection info of Cloud Load Balancer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETER_REGIONNOTFOUND = "InvalidParameter.RegionNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeLBOperateProtectWithContext(ctx context.Context, request *DescribeLBOperateProtectRequest) (response *DescribeLBOperateProtectResponse, err error) {
+    if request == nil {
+        request = NewDescribeLBOperateProtectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "clb", APIVersion, "DescribeLBOperateProtect")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLBOperateProtect require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLBOperateProtectResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeListenersRequest() (request *DescribeListenersRequest) {
     request = &DescribeListenersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3601,6 +3959,70 @@ func (c *Client) DescribeTaskStatusWithContext(ctx context.Context, request *Des
     return
 }
 
+func NewDisassociateCustomizedConfigRequest() (request *DisassociateCustomizedConfigRequest) {
+    request = &DisassociateCustomizedConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("clb", APIVersion, "DisassociateCustomizedConfig")
+    
+    
+    return
+}
+
+func NewDisassociateCustomizedConfigResponse() (response *DisassociateCustomizedConfigResponse) {
+    response = &DisassociateCustomizedConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DisassociateCustomizedConfig
+// This API is used to disassociate personalized configurations and prepare for decommissioning. Please use SetCustomizedConfigForLoadBalancer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETER_LISTENERIDNOTFOUND = "InvalidParameter.ListenerIdNotFound"
+//  INVALIDPARAMETER_LOCATIONNOTFOUND = "InvalidParameter.LocationNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DisassociateCustomizedConfig(request *DisassociateCustomizedConfigRequest) (response *DisassociateCustomizedConfigResponse, err error) {
+    return c.DisassociateCustomizedConfigWithContext(context.Background(), request)
+}
+
+// DisassociateCustomizedConfig
+// This API is used to disassociate personalized configurations and prepare for decommissioning. Please use SetCustomizedConfigForLoadBalancer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETER_LISTENERIDNOTFOUND = "InvalidParameter.ListenerIdNotFound"
+//  INVALIDPARAMETER_LOCATIONNOTFOUND = "InvalidParameter.LocationNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DisassociateCustomizedConfigWithContext(ctx context.Context, request *DisassociateCustomizedConfigRequest) (response *DisassociateCustomizedConfigResponse, err error) {
+    if request == nil {
+        request = NewDisassociateCustomizedConfigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "clb", APIVersion, "DisassociateCustomizedConfig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DisassociateCustomizedConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDisassociateCustomizedConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDisassociateTargetGroupsRequest() (request *DisassociateTargetGroupsRequest) {
     request = &DisassociateTargetGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3621,9 +4043,11 @@ func NewDisassociateTargetGroupsResponse() (response *DisassociateTargetGroupsRe
 }
 
 // DisassociateTargetGroups
-// This API is used to unbind target groups from a rule.
+// This API is used to disassociate a target group from a rule.
 //
-// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
+// This is an async API. After the API return succeeds, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+//
+// When unbinding a Layer 7 forwarding rule, LocationId is a required item.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3637,9 +4061,11 @@ func (c *Client) DisassociateTargetGroups(request *DisassociateTargetGroupsReque
 }
 
 // DisassociateTargetGroups
-// This API is used to unbind target groups from a rule.
+// This API is used to disassociate a target group from a rule.
 //
-// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
+// This is an async API. After the API return succeeds, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+//
+// When unbinding a Layer 7 forwarding rule, LocationId is a required item.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3801,7 +4227,7 @@ func NewInquiryPriceRefundLoadBalancerResponse() (response *InquiryPriceRefundLo
 }
 
 // InquiryPriceRefundLoadBalancer
-// This API is used to query the refund amount of returning a CLB instance. 
+// This API is used to query the refund price of Cloud Load Balancer and only supports prepaid load balancing instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3814,7 +4240,7 @@ func (c *Client) InquiryPriceRefundLoadBalancer(request *InquiryPriceRefundLoadB
 }
 
 // InquiryPriceRefundLoadBalancer
-// This API is used to query the refund amount of returning a CLB instance. 
+// This API is used to query the refund price of Cloud Load Balancer and only supports prepaid load balancing instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4111,6 +4537,66 @@ func (c *Client) ModifyBlockIPListWithContext(ctx context.Context, request *Modi
     return
 }
 
+func NewModifyCustomizedConfigRequest() (request *ModifyCustomizedConfigRequest) {
+    request = &ModifyCustomizedConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("clb", APIVersion, "ModifyCustomizedConfig")
+    
+    
+    return
+}
+
+func NewModifyCustomizedConfigResponse() (response *ModifyCustomizedConfigResponse) {
+    response = &ModifyCustomizedConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyCustomizedConfig
+// This API is used to modify personalized configuration. If the configuration is already bound to clb, server or location, update simultaneously. Prepare for decommissioning. Please use SetCustomizedConfigForLoadBalancer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyCustomizedConfig(request *ModifyCustomizedConfigRequest) (response *ModifyCustomizedConfigResponse, err error) {
+    return c.ModifyCustomizedConfigWithContext(context.Background(), request)
+}
+
+// ModifyCustomizedConfig
+// This API is used to modify personalized configuration. If the configuration is already bound to clb, server or location, update simultaneously. Prepare for decommissioning. Please use SetCustomizedConfigForLoadBalancer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyCustomizedConfigWithContext(ctx context.Context, request *ModifyCustomizedConfigRequest) (response *ModifyCustomizedConfigResponse, err error) {
+    if request == nil {
+        request = NewModifyCustomizedConfigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "clb", APIVersion, "ModifyCustomizedConfig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyCustomizedConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyCustomizedConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyDomainRequest() (request *ModifyDomainRequest) {
     request = &ModifyDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4131,9 +4617,9 @@ func NewModifyDomainResponse() (response *ModifyDomainResponse) {
 }
 
 // ModifyDomain
-// This API (ModifyDomain) is used to modify a domain name under a layer-7 CLB listener.
+// This API is used to modify the domain name under a layer-7 (HTTP/HTTPS) listener of Cloud Load Balancer.
 //
-// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+// This is an asynchronous API. After it returns the result successfully, you can call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestId as an input parameter to query whether the task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4149,9 +4635,9 @@ func (c *Client) ModifyDomain(request *ModifyDomainRequest) (response *ModifyDom
 }
 
 // ModifyDomain
-// This API (ModifyDomain) is used to modify a domain name under a layer-7 CLB listener.
+// This API is used to modify the domain name under a layer-7 (HTTP/HTTPS) listener of Cloud Load Balancer.
 //
-// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+// This is an asynchronous API. After it returns the result successfully, you can call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestId as an input parameter to query whether the task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4199,9 +4685,9 @@ func NewModifyDomainAttributesResponse() (response *ModifyDomainAttributesRespon
 }
 
 // ModifyDomainAttributes
-// This API is used to modify the domain name-level attributes of a layer-7 listener's forwarding rule, such as modifying the domain name, changing the DefaultServer, enabling/disabling HTTP/2, and modifying certificates.
+// This API is used to modify domain-level attributes of Cloud Load Balancer layer-7 listener forwarding rules, such as modifying domain name, changing DefaultServer, enabling/disabling Http/2, and modifying certificates.
 //
-// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestId as an input parameter to check whether this task is successful.
+// This is an async API. After it returns a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestId as an input parameter to check whether this task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4219,9 +4705,9 @@ func (c *Client) ModifyDomainAttributes(request *ModifyDomainAttributesRequest) 
 }
 
 // ModifyDomainAttributes
-// This API is used to modify the domain name-level attributes of a layer-7 listener's forwarding rule, such as modifying the domain name, changing the DefaultServer, enabling/disabling HTTP/2, and modifying certificates.
+// This API is used to modify domain-level attributes of Cloud Load Balancer layer-7 listener forwarding rules, such as modifying domain name, changing DefaultServer, enabling/disabling Http/2, and modifying certificates.
 //
-// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestId as an input parameter to check whether this task is successful.
+// This is an async API. After it returns a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestId as an input parameter to check whether this task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4271,7 +4757,11 @@ func NewModifyFunctionTargetsResponse() (response *ModifyFunctionTargetsResponse
 }
 
 // ModifyFunctionTargets
-// This API is used to modify the cloud functions associated with a load balancing forwarding rule.
+// This API is used to modify the SCF bound to a Cloud Load Balancer forwarding rule.
+//
+// This API is used to describe restrictions.
+//
+// -Only supports binding SCF of the "Event function" type.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4289,7 +4779,11 @@ func (c *Client) ModifyFunctionTargets(request *ModifyFunctionTargetsRequest) (r
 }
 
 // ModifyFunctionTargets
-// This API is used to modify the cloud functions associated with a load balancing forwarding rule.
+// This API is used to modify the SCF bound to a Cloud Load Balancer forwarding rule.
+//
+// This API is used to describe restrictions.
+//
+// -Only supports binding SCF of the "Event function" type.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4411,9 +4905,9 @@ func NewModifyLoadBalancerAttributesResponse() (response *ModifyLoadBalancerAttr
 // ModifyLoadBalancerAttributes
 // This API is used to modify the attributes of a CLB instance, such as name and cross-region attributes.
 //
-// 
+// Non-bandwidth-upshift users must add their CLB instance to a bandwidth package to configure cross-domain attributes. To modify the network billing mode, go to the console.
 //
-// Note: For CLB instances of bill-by-CVM users, cross-region attributes can be set only after a bandwidth package is purchased.This is an asynchronous API. After it returns a result successfully, the obtained RequestID should be used as an input parameter to call the DescribeTaskStatus API, for checking whether this task succeeds.
+// This API is used to perform asynchronous operations. After returning a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4437,9 +4931,9 @@ func (c *Client) ModifyLoadBalancerAttributes(request *ModifyLoadBalancerAttribu
 // ModifyLoadBalancerAttributes
 // This API is used to modify the attributes of a CLB instance, such as name and cross-region attributes.
 //
-// 
+// Non-bandwidth-upshift users must add their CLB instance to a bandwidth package to configure cross-domain attributes. To modify the network billing mode, go to the console.
 //
-// Note: For CLB instances of bill-by-CVM users, cross-region attributes can be set only after a bandwidth package is purchased.This is an asynchronous API. After it returns a result successfully, the obtained RequestID should be used as an input parameter to call the DescribeTaskStatus API, for checking whether this task succeeds.
+// This API is used to perform asynchronous operations. After returning a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4493,15 +4987,15 @@ func NewModifyLoadBalancerSlaResponse() (response *ModifyLoadBalancerSlaResponse
 }
 
 // ModifyLoadBalancerSla
-// This API is used to upgrade a pay-as-you-go shared CLB instance to an LCU-supported CLB instance. <br/>
+// This API is used to adjust the performance capacity specification of usage-based billing mode instances, for example upgrading from shared type to performance capacity type or modifying the specification of LCU-supported instances.
 //
-// Limits
+// This API is used to set use limits.
 //
-// - This API can only be used to upgrade pay-as-you-go shared instances. To upgrade monthly-subscribed shared instances, please go to the CLB console.
+// -This API only supports adjustments for pay-as-you-go CLB instances. For CLB instance upgrades with annual/monthly subscription, make adjustments through the console.
 //
-// - An LCU-supported instance cannot be changed back to a shared instance.
+// -After upgrading from a shared instance to a performance and capacity instance, reverting to a shared instance is not supported.
 //
-// - Classic CLB instances cannot be upgraded to LCU-supported instances.
+// -A classic CLB instance does not support upgrading to a performance and capacity instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4517,15 +5011,15 @@ func (c *Client) ModifyLoadBalancerSla(request *ModifyLoadBalancerSlaRequest) (r
 }
 
 // ModifyLoadBalancerSla
-// This API is used to upgrade a pay-as-you-go shared CLB instance to an LCU-supported CLB instance. <br/>
+// This API is used to adjust the performance capacity specification of usage-based billing mode instances, for example upgrading from shared type to performance capacity type or modifying the specification of LCU-supported instances.
 //
-// Limits
+// This API is used to set use limits.
 //
-// - This API can only be used to upgrade pay-as-you-go shared instances. To upgrade monthly-subscribed shared instances, please go to the CLB console.
+// -This API only supports adjustments for pay-as-you-go CLB instances. For CLB instance upgrades with annual/monthly subscription, make adjustments through the console.
 //
-// - An LCU-supported instance cannot be changed back to a shared instance.
+// -After upgrading from a shared instance to a performance and capacity instance, reverting to a shared instance is not supported.
 //
-// - Classic CLB instances cannot be upgraded to LCU-supported instances.
+// -A classic CLB instance does not support upgrading to a performance and capacity instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4639,9 +5133,9 @@ func NewModifyRuleResponse() (response *ModifyRuleResponse) {
 }
 
 // ModifyRule
-// This API (ModifyRule) is used to modify the attributes of a forwarding rule under a layer-7 CLB listener, such as forwarding path, health check attribute, and forwarding policy.
+// This API is used to modify the properties of forwarding rules under a layer-7 (HTTP/HTTPS) listener in Cloud Load Balancer, including forwarding path, health check attributes and forwarding policy.
 //
-// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+// This is an asynchronous API. After it returns the result successfully, you can call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestId as an input parameter to query whether the task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4658,9 +5152,9 @@ func (c *Client) ModifyRule(request *ModifyRuleRequest) (response *ModifyRuleRes
 }
 
 // ModifyRule
-// This API (ModifyRule) is used to modify the attributes of a forwarding rule under a layer-7 CLB listener, such as forwarding path, health check attribute, and forwarding policy.
+// This API is used to modify the properties of forwarding rules under a layer-7 (HTTP/HTTPS) listener in Cloud Load Balancer, including forwarding path, health check attributes and forwarding policy.
 //
-// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+// This is an asynchronous API. After it returns the result successfully, you can call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestId as an input parameter to query whether the task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4967,9 +5461,9 @@ func NewModifyTargetWeightResponse() (response *ModifyTargetWeightResponse) {
 }
 
 // ModifyTargetWeight
-// This API (ModifyTargetWeight) is used to modify the forwarding weight of a real server bound to a CLB instance.
+// This API is used to modify the forwarding weight of backend service bound to Cloud Load Balancer.
 //
-// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+// This is an asynchronous API. After it returns the result successfully, you can call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestId as an input parameter to query whether the task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4986,9 +5480,9 @@ func (c *Client) ModifyTargetWeight(request *ModifyTargetWeightRequest) (respons
 }
 
 // ModifyTargetWeight
-// This API (ModifyTargetWeight) is used to modify the forwarding weight of a real server bound to a CLB instance.
+// This API is used to modify the forwarding weight of backend service bound to Cloud Load Balancer.
 //
-// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+// This is an asynchronous API. After it returns the result successfully, you can call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestId as an input parameter to query whether the task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5037,27 +5531,29 @@ func NewRegisterFunctionTargetsResponse() (response *RegisterFunctionTargetsResp
 }
 
 // RegisterFunctionTargets
-// This API is used to bind an SCF function with the L7 forwarding rule of a CLB instance. Note that you need to create an L7 listener (HTTP, HTTPS) and forwarding rule first.
+// This API is used to bind a cloud function to the forwarding rule of a Cloud Load Balancer. Before that, you need to create a related HTTP or HTTPS listener and forwarding rule.
 //
-// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.<br/>
+// This API is used to perform asynchronous operations. After returning a successful result, call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
 //
-// **Limits:**
+// This API is used to describe restrictions.
 //
-// - Binding with SCF is only available in Guangzhou, Shenzhen Finance, Shanghai, Shanghai Finance, Beijing, Chengdu, Hong Kong (China), Singapore, Mumbai, Tokyo, and Silicon Valley.
+// -SCF binding is supported only in Guangzhou, Shenzhen Finance, Shanghai, Shanghai Finance, Beijing, Chengdu, Hong Kong (China), Singapore, Tokyo, and Silicon Valley.
 //
-// - SCF functions can only be bound with CLB instances of bill-by-IP accounts but not with bill-by-CVM accounts. If you are using a bill-by-CVM account, we recommend upgrading it to a bill-by-IP account. 
+// -Only the standard account type supports binding SCF. The classic account type is unsupported. We recommend upgrading to the standard account type. For more information, see [account type upgrade instructions](https://www.tencentcloud.comom/document/product/1199/49090?from_cn_redirect=1). 
 //
-// - SCF functions cannot be bound with classic CLB instances.
+// -Classic CLB does not support binding SCF.
 //
-// - SCF functions cannot be bound with classic network-based CLB instances.
+// -Basic Network Type does not support binding SCF.
 //
-// - SCF functions in the same region can be bound with CLB instances. SCF functions can only be bound across VPCs but not regions.
+// -CLB supports binding ALL SCFs in the same region by default, supports cross-VPC binding, but cross-region selection is not supported.
 //
-// - SCF functions can only be bound with IPv4 and IPv6 NAT64 CLB instances, but currently not with IPv6 CLB instances.
+// -Currently, only IPv4 and IPv6 NAT64 versions of Cloud Load Balancer support binding SCF. IPv6 version is not currently supported.
 //
-// - SCF functions can only be bound with layer-7 HTTP and HTTPS listeners, but not with layer-7 QUIC listeners or layer-4 (TCP, UDP, and TCP SSL) listeners.
+// -Only layer-7 (HTTP, HTTPS) listeners support binding SCF. Layer-4 (TCP, UDP, TCP SSL) listeners and layer-7 QUIC listeners are unsupported.
 //
-// - Only SCF event-triggered functions can be bound with CLB instances.
+// - CLB binding SCF only supports binding SCF of the "Event function" type.
+//
+// -A forwarding rule supports binding only one SCF.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5081,27 +5577,29 @@ func (c *Client) RegisterFunctionTargets(request *RegisterFunctionTargetsRequest
 }
 
 // RegisterFunctionTargets
-// This API is used to bind an SCF function with the L7 forwarding rule of a CLB instance. Note that you need to create an L7 listener (HTTP, HTTPS) and forwarding rule first.
+// This API is used to bind a cloud function to the forwarding rule of a Cloud Load Balancer. Before that, you need to create a related HTTP or HTTPS listener and forwarding rule.
 //
-// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.<br/>
+// This API is used to perform asynchronous operations. After returning a successful result, call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
 //
-// **Limits:**
+// This API is used to describe restrictions.
 //
-// - Binding with SCF is only available in Guangzhou, Shenzhen Finance, Shanghai, Shanghai Finance, Beijing, Chengdu, Hong Kong (China), Singapore, Mumbai, Tokyo, and Silicon Valley.
+// -SCF binding is supported only in Guangzhou, Shenzhen Finance, Shanghai, Shanghai Finance, Beijing, Chengdu, Hong Kong (China), Singapore, Tokyo, and Silicon Valley.
 //
-// - SCF functions can only be bound with CLB instances of bill-by-IP accounts but not with bill-by-CVM accounts. If you are using a bill-by-CVM account, we recommend upgrading it to a bill-by-IP account. 
+// -Only the standard account type supports binding SCF. The classic account type is unsupported. We recommend upgrading to the standard account type. For more information, see [account type upgrade instructions](https://www.tencentcloud.comom/document/product/1199/49090?from_cn_redirect=1). 
 //
-// - SCF functions cannot be bound with classic CLB instances.
+// -Classic CLB does not support binding SCF.
 //
-// - SCF functions cannot be bound with classic network-based CLB instances.
+// -Basic Network Type does not support binding SCF.
 //
-// - SCF functions in the same region can be bound with CLB instances. SCF functions can only be bound across VPCs but not regions.
+// -CLB supports binding ALL SCFs in the same region by default, supports cross-VPC binding, but cross-region selection is not supported.
 //
-// - SCF functions can only be bound with IPv4 and IPv6 NAT64 CLB instances, but currently not with IPv6 CLB instances.
+// -Currently, only IPv4 and IPv6 NAT64 versions of Cloud Load Balancer support binding SCF. IPv6 version is not currently supported.
 //
-// - SCF functions can only be bound with layer-7 HTTP and HTTPS listeners, but not with layer-7 QUIC listeners or layer-4 (TCP, UDP, and TCP SSL) listeners.
+// -Only layer-7 (HTTP, HTTPS) listeners support binding SCF. Layer-4 (TCP, UDP, TCP SSL) listeners and layer-7 QUIC listeners are unsupported.
 //
-// - Only SCF event-triggered functions can be bound with CLB instances.
+// - CLB binding SCF only supports binding SCF of the "Event function" type.
+//
+// -A forwarding rule supports binding only one SCF.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5223,9 +5721,9 @@ func NewRegisterTargetsResponse() (response *RegisterTargetsResponse) {
 }
 
 // RegisterTargets
-// This API (RegisterTargets) is used to bind one or more real servers to a CLB listener or layer-7 forwarding rule. Before using this API, you need to create relevant layer-4 listeners or layer-7 forwarding rules. For the former (TCP/UDP), only the listener ID needs to be specified, while for the latter (HTTP/HTTPS), the forwarding rule also needs to be specified through LocationId or Domain+Url.
+// This API is used to bind one or more backend services to a Cloud Load Balancer listener or layer-7 forwarding rule. Before that, you need to create a related CLB layer-4 listener or layer-7 forwarding rule. For Layer-4 listeners (TCP/UDP), only specify the listener ID. For layer-7 (HTTP/HTTPS) listeners, forwarding rules must be specified through LocationId or Domain+Url.
 //
-// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+// This API is used to perform asynchronous operations. After it returns a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5245,9 +5743,9 @@ func (c *Client) RegisterTargets(request *RegisterTargetsRequest) (response *Reg
 }
 
 // RegisterTargets
-// This API (RegisterTargets) is used to bind one or more real servers to a CLB listener or layer-7 forwarding rule. Before using this API, you need to create relevant layer-4 listeners or layer-7 forwarding rules. For the former (TCP/UDP), only the listener ID needs to be specified, while for the latter (HTTP/HTTPS), the forwarding rule also needs to be specified through LocationId or Domain+Url.
+// This API is used to bind one or more backend services to a Cloud Load Balancer listener or layer-7 forwarding rule. Before that, you need to create a related CLB layer-4 listener or layer-7 forwarding rule. For Layer-4 listeners (TCP/UDP), only specify the listener ID. For layer-7 (HTTP/HTTPS) listeners, forwarding rules must be specified through LocationId or Domain+Url.
 //
-// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+// This API is used to perform asynchronous operations. After it returns a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5575,7 +6073,11 @@ func NewSetLoadBalancerSecurityGroupsResponse() (response *SetLoadBalancerSecuri
 }
 
 // SetLoadBalancerSecurityGroups
-// This API is used to configure (bind and unbind) security groups for a public network CLB instance. You can use the DescribeLoadBalancers API to query the security groups currently bound to a CLB instance. This API follows the set semantics.For binding operations, the input parameters should specify all security groups that should be bound (have been bound and will be bound) to the CLB instance.For unbinding operations, the input parameters should specify all security groups bound to a CLB instance after unbinding. If you want to unbind all security groups, you can omit this parameter or input an empty array. Note: After a private network CLB is bound to an EIP, the security groups on the CLB do not take effect for the traffic from the EIP, but take effect for the traffic from the private network CLB.
+// This API is used to bind or unbind security groups for a public network load balancing instance. To query currently bound security groups of a load balancing instance, use the DescribeLoadBalancers API (https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1). This API follows set semantics.
+//
+// This API is used to pass in all security groups that should be bound to the Cloud Load Balancer instance during the binding operation (bound + new binding).
+//
+// For unbinding operations, the input parameters should specify all security groups bound to a CLB instance after unbinding. If you want to unbind all security groups, you can omit this parameter or input an empty array. Note: After a private network CLB is bound to an EIP, the security groups on the CLB do not take effect for the traffic from the EIP, but take effect for the traffic from the private network CLB.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5592,7 +6094,11 @@ func (c *Client) SetLoadBalancerSecurityGroups(request *SetLoadBalancerSecurityG
 }
 
 // SetLoadBalancerSecurityGroups
-// This API is used to configure (bind and unbind) security groups for a public network CLB instance. You can use the DescribeLoadBalancers API to query the security groups currently bound to a CLB instance. This API follows the set semantics.For binding operations, the input parameters should specify all security groups that should be bound (have been bound and will be bound) to the CLB instance.For unbinding operations, the input parameters should specify all security groups bound to a CLB instance after unbinding. If you want to unbind all security groups, you can omit this parameter or input an empty array. Note: After a private network CLB is bound to an EIP, the security groups on the CLB do not take effect for the traffic from the EIP, but take effect for the traffic from the private network CLB.
+// This API is used to bind or unbind security groups for a public network load balancing instance. To query currently bound security groups of a load balancing instance, use the DescribeLoadBalancers API (https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1). This API follows set semantics.
+//
+// This API is used to pass in all security groups that should be bound to the Cloud Load Balancer instance during the binding operation (bound + new binding).
+//
+// For unbinding operations, the input parameters should specify all security groups bound to a CLB instance after unbinding. If you want to unbind all security groups, you can omit this parameter or input an empty array. Note: After a private network CLB is bound to an EIP, the security groups on the CLB do not take effect for the traffic from the EIP, but take effect for the traffic from the private network CLB.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5641,7 +6147,11 @@ func NewSetLoadBalancerStartStatusResponse() (response *SetLoadBalancerStartStat
 }
 
 // SetLoadBalancerStartStatus
-// This API is used to enable or disable a CLB instance or listener.This is an asynchronous API. After it returns a result successfully, the obtained RequestID should be used as an input parameter to call the DescribeTaskStatus API, for checking whether this task succeeds.This feature is currently in beta test. To use it, submit a [ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20LB&step=1) for application.
+// This API is used to start or stop a load balancing instance or listener.
+//
+// This API is used to perform asynchronous operations. After returning a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
+//
+// This feature is currently in beta test. To use it, submit a [ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20LB&step=1) for application.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5659,7 +6169,11 @@ func (c *Client) SetLoadBalancerStartStatus(request *SetLoadBalancerStartStatusR
 }
 
 // SetLoadBalancerStartStatus
-// This API is used to enable or disable a CLB instance or listener.This is an asynchronous API. After it returns a result successfully, the obtained RequestID should be used as an input parameter to call the DescribeTaskStatus API, for checking whether this task succeeds.This feature is currently in beta test. To use it, submit a [ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20LB&step=1) for application.
+// This API is used to start or stop a load balancing instance or listener.
+//
+// This API is used to perform asynchronous operations. After returning a successful result, call the [DescribeTaskStatus](https://www.tencentcloud.comom/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID as an input parameter to check whether this task is successful.
+//
+// This feature is currently in beta test. To use it, submit a [ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20LB&step=1) for application.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5709,7 +6223,7 @@ func NewSetSecurityGroupForLoadbalancersResponse() (response *SetSecurityGroupFo
 }
 
 // SetSecurityGroupForLoadbalancers
-// This API is used to bind or unbind a security group for multiple public network CLB instances. Note: Private network CLB do not support binding security groups.
+// This API is used to bind or unbind a security group to or from multiple public network CLB instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5726,7 +6240,7 @@ func (c *Client) SetSecurityGroupForLoadbalancers(request *SetSecurityGroupForLo
 }
 
 // SetSecurityGroupForLoadbalancers
-// This API is used to bind or unbind a security group for multiple public network CLB instances. Note: Private network CLB do not support binding security groups.
+// This API is used to bind or unbind a security group to or from multiple public network CLB instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

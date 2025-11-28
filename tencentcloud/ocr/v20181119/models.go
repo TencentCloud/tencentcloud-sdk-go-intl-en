@@ -1404,6 +1404,7 @@ func (r *GetCardVerificationExternalResultRequest) FromJsonString(s string) erro
 type GetCardVerificationExternalResultResponseParams struct {
 	// Indicates the status. valid values: 
 	// PASSED
+	// PROCESSING
 	// WARNING
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 

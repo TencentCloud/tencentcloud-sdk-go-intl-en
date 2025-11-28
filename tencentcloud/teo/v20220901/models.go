@@ -14123,11 +14123,11 @@ type Https struct {
 	// <li>off: Disable.</li>
 	OcspStapling *string `json:"OcspStapling,omitnil,omitempty" name:"OcspStapling"`
 
-	// Tls version settings, valid values:.
-	// <Li>`TLSv1`: tlsv1 version;</li>.
-	// <li>`TLSv1.1`: TLSv1.1 version;</li>.
-	// <li>TLSv1.2: specifies the TLSv1.2 version.</li>.
-	// <Li>TLSv1.3: specifies the TLSv1.3 version. consecutive versions must be enabled when modifying.</li>.
+	// Tls version settings. valid values:.
+	// <Li>TLSv1: specifies the tlsv1 version.</li>.
+	// <Li>TLSv1.1: specifies the tlsv1.1 version.</li>.
+	// <Li>TLSv1.2: specifies the tlsv1.2 version.</li>.
+	// <Li>TLSv1.3: specifies the tlsv1.3 version. consecutive versions must be enabled when modifying.</li>.
 	TlsVersion []*string `json:"TlsVersion,omitnil,omitempty" name:"TlsVersion"`
 
 	// HSTS Configuration
@@ -14929,8 +14929,8 @@ type MaxAge struct {
 	// <li>`off`: Do not follow the origin server and apply the field MaxAgeTime.</li>
 	FollowOrigin *string `json:"FollowOrigin,omitnil,omitempty" name:"FollowOrigin"`
 
-	// Specifies the maximum amount of time (in seconds). Value range: 0 to 315360000.
-	// Note: The value `0` means not to cache.
+	// MaxAge specifies the time setting in seconds. value range: 0–315360000.
+	// Specifies the time when the cache is disabled if set to 0.
 	MaxAgeTime *int64 `json:"MaxAgeTime,omitnil,omitempty" name:"MaxAgeTime"`
 }
 
@@ -18455,6 +18455,9 @@ type ModifyZoneSettingRequestParams struct {
 	// The original configuration will apply if it is not specified.
 	Grpc *Grpc `json:"Grpc,omitnil,omitempty" name:"Grpc"`
 
+	// Network Error Logging configuration. The original configuration will apply if it is not specified.
+	NetworkErrorLogging *NetworkErrorLogging `json:"NetworkErrorLogging,omitnil,omitempty" name:"NetworkErrorLogging"`
+
 	// Image optimization. 
 	// It is disabled if this parameter is not specified.
 	ImageOptimize *ImageOptimize `json:"ImageOptimize,omitnil,omitempty" name:"ImageOptimize"`
@@ -18544,6 +18547,9 @@ type ModifyZoneSettingRequest struct {
 	// The original configuration will apply if it is not specified.
 	Grpc *Grpc `json:"Grpc,omitnil,omitempty" name:"Grpc"`
 
+	// Network Error Logging configuration. The original configuration will apply if it is not specified.
+	NetworkErrorLogging *NetworkErrorLogging `json:"NetworkErrorLogging,omitnil,omitempty" name:"NetworkErrorLogging"`
+
 	// Image optimization. 
 	// It is disabled if this parameter is not specified.
 	ImageOptimize *ImageOptimize `json:"ImageOptimize,omitnil,omitempty" name:"ImageOptimize"`
@@ -18586,6 +18592,7 @@ func (r *ModifyZoneSettingRequest) FromJsonString(s string) error {
 	delete(f, "Ipv6")
 	delete(f, "ClientIpCountry")
 	delete(f, "Grpc")
+	delete(f, "NetworkErrorLogging")
 	delete(f, "ImageOptimize")
 	delete(f, "StandardDebug")
 	delete(f, "JITVideoProcess")
@@ -18783,6 +18790,20 @@ type MutualTLS struct {
 	// Mutual authentication certificate list.
 	// Note: When using MutualTLS as an input parameter in ModifyHostsCertificate, you only need to provide the CertId of the corresponding certificate. You can check the CertId from the [SSL Certificate List](https://console.cloud.tencent.com/ssl).
 	CertInfos []*CertificateInfo `json:"CertInfos,omitnil,omitempty" name:"CertInfos"`
+}
+
+type NetworkErrorLogging struct {
+	// Specifies whether the Network Error Logging configuration is enabled. Valid values:.
+	// <li>`on`: Enable;</li>
+	// <li>`off`: Disable.</li>
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+}
+
+type NetworkErrorLoggingParameters struct {
+	// Specifies whether Network Error Logging configuration is enabled. Valid values:
+	// <li>`on`: Enable;</li>
+	// <li>`off`: Disable.</li>
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
 type NextOriginACL struct {
@@ -19375,7 +19396,7 @@ type PostMaxSize struct {
 	// <li>`off`: Disable.</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Maximum limit.Takes effect only when Switch is on. Range:1 MB - 800 MB (bytes).
+	// Specifies the maximum limit. this field is valid only when Switch is on. value range: 1MB to 800MB. unit: byte.
 	MaxSize *int64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
 }
 
@@ -19383,7 +19404,7 @@ type PostMaxSizeParameters struct {
 	// Whether to enable post request file upload limit, in bytes (default limit: 32 * 2<sup>20</sup> bytes). valid values: <li>`on`: enable limit;</li><li>`off`: disable limit.</li>.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Maximum size of the file uploaded for streaming via a post request. Takes effect only when Switch is on. Range: 1 MB - 800 MB (bytes).
+	// Specifies the maximum limit for file streaming transmission in POST request upload. this field is valid only when Switch is on. value range: 1MB to 800MB. unit: byte.
 	MaxSize *int64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
 }
 
@@ -21538,6 +21559,10 @@ type ZoneConfig struct {
 	// Note: this field may return null, which indicates a failure to obtain a valid value.
 	Grpc *GrpcParameters `json:"Grpc,omitnil,omitempty" name:"Grpc"`
 
+	// Network Error Logging configuration.
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	NetworkErrorLogging *NetworkErrorLoggingParameters `json:"NetworkErrorLogging,omitnil,omitempty" name:"NetworkErrorLogging"`
+
 	// Accelerate optimization and configuration in mainland china.
 	// Note: this field may return null, which indicates a failure to obtain a valid value.
 	AccelerateMainland *AccelerateMainlandParameters `json:"AccelerateMainland,omitnil,omitempty" name:"AccelerateMainland"`
@@ -21649,6 +21674,10 @@ type ZoneSetting struct {
 	// Configuration of gRPC support
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Grpc *Grpc `json:"Grpc,omitnil,omitempty" name:"Grpc"`
+
+	// Network Error Logging configuration.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	NetworkErrorLogging *NetworkErrorLogging `json:"NetworkErrorLogging,omitnil,omitempty" name:"NetworkErrorLogging"`
 
 	// Image optimization configuration. 
 	// Note: This field may return `null`, indicating that no valid value was found.

@@ -328,6 +328,11 @@ type ApplySdkVerificationTokenRequestParams struct {
 	// Multiple action example: "blink,mouth"
 	// The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2 or 4; otherwise, the interface reports an error.
 	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
+
+	// Whether expired identity documents are permitted to proceed to the liveness detection process. This parameter only takes effect when the document type is Hong Kong Identity Card (HKID).
+	// true (default value): Expired HKID is allowed to enter the liveness process.
+	// false : Expired HKID is rejected and cannot enter the liveness process.
+	AllowExpiredDocument *bool `json:"AllowExpiredDocument,omitnil,omitempty" name:"AllowExpiredDocument"`
 }
 
 type ApplySdkVerificationTokenRequest struct {
@@ -400,6 +405,11 @@ type ApplySdkVerificationTokenRequest struct {
 	// Multiple action example: "blink,mouth"
 	// The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2 or 4; otherwise, the interface reports an error.
 	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
+
+	// Whether expired identity documents are permitted to proceed to the liveness detection process. This parameter only takes effect when the document type is Hong Kong Identity Card (HKID).
+	// true (default value): Expired HKID is allowed to enter the liveness process.
+	// false : Expired HKID is rejected and cannot enter the liveness process.
+	AllowExpiredDocument *bool `json:"AllowExpiredDocument,omitnil,omitempty" name:"AllowExpiredDocument"`
 }
 
 func (r *ApplySdkVerificationTokenRequest) ToJsonString() string {
@@ -425,6 +435,7 @@ func (r *ApplySdkVerificationTokenRequest) FromJsonString(s string) error {
 	delete(f, "Extra")
 	delete(f, "SdkVersion")
 	delete(f, "ActionList")
+	delete(f, "AllowExpiredDocument")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplySdkVerificationTokenRequest has unknown keys!", "")
 	}
