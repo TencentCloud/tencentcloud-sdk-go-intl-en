@@ -101,6 +101,64 @@ func (c *Client) AssignProjectWithContext(ctx context.Context, request *AssignPr
     return
 }
 
+func NewCreateAccountUserRequest() (request *CreateAccountUserRequest) {
+    request = &CreateAccountUserRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "CreateAccountUser")
+    
+    
+    return
+}
+
+func NewCreateAccountUserResponse() (response *CreateAccountUserResponse) {
+    response = &CreateAccountUserResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAccountUser
+// This API is used to customize an account to access the instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INTERNALERROR_PASSWORDERROR = "InternalError.PasswordError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_CHECKAPPIDFAILED = "InvalidParameterValue.CheckAppIdFailed"
+func (c *Client) CreateAccountUser(request *CreateAccountUserRequest) (response *CreateAccountUserResponse, err error) {
+    return c.CreateAccountUserWithContext(context.Background(), request)
+}
+
+// CreateAccountUser
+// This API is used to customize an account to access the instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INTERNALERROR_PASSWORDERROR = "InternalError.PasswordError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_CHECKAPPIDFAILED = "InvalidParameterValue.CheckAppIdFailed"
+func (c *Client) CreateAccountUserWithContext(ctx context.Context, request *CreateAccountUserRequest) (response *CreateAccountUserResponse, err error) {
+    if request == nil {
+        request = NewCreateAccountUserRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "CreateAccountUser")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAccountUser require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAccountUserResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateBackupDBInstanceRequest() (request *CreateBackupDBInstanceRequest) {
     request = &CreateBackupDBInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -441,6 +499,58 @@ func (c *Client) CreateLogDownloadTaskWithContext(ctx context.Context, request *
     return
 }
 
+func NewDeleteAccountUserRequest() (request *DeleteAccountUserRequest) {
+    request = &DeleteAccountUserRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DeleteAccountUser")
+    
+    
+    return
+}
+
+func NewDeleteAccountUserResponse() (response *DeleteAccountUserResponse) {
+    response = &DeleteAccountUserResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteAccountUser
+// This API is used to delete a custom account of an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DeleteAccountUser(request *DeleteAccountUserRequest) (response *DeleteAccountUserResponse, err error) {
+    return c.DeleteAccountUserWithContext(context.Background(), request)
+}
+
+// DeleteAccountUser
+// This API is used to delete a custom account of an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DeleteAccountUserWithContext(ctx context.Context, request *DeleteAccountUserRequest) (response *DeleteAccountUserResponse, err error) {
+    if request == nil {
+        request = NewDeleteAccountUserRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DeleteAccountUser")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAccountUser require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteAccountUserResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteLogDownloadTaskRequest() (request *DeleteLogDownloadTaskRequest) {
     request = &DeleteLogDownloadTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -605,6 +715,58 @@ func (c *Client) DescribeBackupDownloadTaskWithContext(ctx context.Context, requ
     return
 }
 
+func NewDescribeBackupRulesRequest() (request *DescribeBackupRulesRequest) {
+    request = &DescribeBackupRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeBackupRules")
+    
+    
+    return
+}
+
+func NewDescribeBackupRulesResponse() (response *DescribeBackupRulesResponse) {
+    response = &DescribeBackupRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBackupRules
+// This API is used to obtain the automatic backup configuration information of an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+func (c *Client) DescribeBackupRules(request *DescribeBackupRulesRequest) (response *DescribeBackupRulesResponse, err error) {
+    return c.DescribeBackupRulesWithContext(context.Background(), request)
+}
+
+// DescribeBackupRules
+// This API is used to obtain the automatic backup configuration information of an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+func (c *Client) DescribeBackupRulesWithContext(ctx context.Context, request *DescribeBackupRulesRequest) (response *DescribeBackupRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupRulesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeBackupRules")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBackupRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBackupRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeClientConnectionsRequest() (request *DescribeClientConnectionsRequest) {
     request = &DescribeClientConnectionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -659,6 +821,64 @@ func (c *Client) DescribeClientConnectionsWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewDescribeClientConnectionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCurrentOpRequest() (request *DescribeCurrentOpRequest) {
+    request = &DescribeCurrentOpRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeCurrentOp")
+    
+    
+    return
+}
+
+func NewDescribeCurrentOpResponse() (response *DescribeCurrentOpResponse) {
+    response = &DescribeCurrentOpResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCurrentOp
+// This API is used to query the operation currently being performed on a TencentDB for MongoDB instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  INVALIDPARAMETERVALUE_QUERYOUTOFRANGE = "InvalidParameterValue.QueryOutOfRange"
+//  INVALIDPARAMETERVALUE_REGIONNOTSUPPORTOPERATION = "InvalidParameterValue.RegionNotSupportOperation"
+//  INVALIDPARAMETERVALUE_REPLICANOTFOUND = "InvalidParameterValue.ReplicaNotFound"
+func (c *Client) DescribeCurrentOp(request *DescribeCurrentOpRequest) (response *DescribeCurrentOpResponse, err error) {
+    return c.DescribeCurrentOpWithContext(context.Background(), request)
+}
+
+// DescribeCurrentOp
+// This API is used to query the operation currently being performed on a TencentDB for MongoDB instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  INVALIDPARAMETERVALUE_QUERYOUTOFRANGE = "InvalidParameterValue.QueryOutOfRange"
+//  INVALIDPARAMETERVALUE_REGIONNOTSUPPORTOPERATION = "InvalidParameterValue.RegionNotSupportOperation"
+//  INVALIDPARAMETERVALUE_REPLICANOTFOUND = "InvalidParameterValue.ReplicaNotFound"
+func (c *Client) DescribeCurrentOpWithContext(ctx context.Context, request *DescribeCurrentOpRequest) (response *DescribeCurrentOpResponse, err error) {
+    if request == nil {
+        request = NewDescribeCurrentOpRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeCurrentOp")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCurrentOp require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCurrentOpResponse()
     err = c.Send(request, response)
     return
 }
@@ -1471,6 +1691,60 @@ func (c *Client) DescribeSpecInfoWithContext(ctx context.Context, request *Descr
     return
 }
 
+func NewEnableTransparentDataEncryptionRequest() (request *EnableTransparentDataEncryptionRequest) {
+    request = &EnableTransparentDataEncryptionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "EnableTransparentDataEncryption")
+    
+    
+    return
+}
+
+func NewEnableTransparentDataEncryptionResponse() (response *EnableTransparentDataEncryptionResponse) {
+    response = &EnableTransparentDataEncryptionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// EnableTransparentDataEncryption
+// This API is used to enable the transparent data encryption (TDE) capability for TencentDB for MongoDB.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) EnableTransparentDataEncryption(request *EnableTransparentDataEncryptionRequest) (response *EnableTransparentDataEncryptionResponse, err error) {
+    return c.EnableTransparentDataEncryptionWithContext(context.Background(), request)
+}
+
+// EnableTransparentDataEncryption
+// This API is used to enable the transparent data encryption (TDE) capability for TencentDB for MongoDB.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) EnableTransparentDataEncryptionWithContext(ctx context.Context, request *EnableTransparentDataEncryptionRequest) (response *EnableTransparentDataEncryptionResponse, err error) {
+    if request == nil {
+        request = NewEnableTransparentDataEncryptionRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "EnableTransparentDataEncryption")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EnableTransparentDataEncryption require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEnableTransparentDataEncryptionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewFlushInstanceRouterConfigRequest() (request *FlushInstanceRouterConfigRequest) {
     request = &FlushInstanceRouterConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1833,6 +2107,58 @@ func (c *Client) IsolateDBInstanceWithContext(ctx context.Context, request *Isol
     return
 }
 
+func NewKillOpsRequest() (request *KillOpsRequest) {
+    request = &KillOpsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "KillOps")
+    
+    
+    return
+}
+
+func NewKillOpsResponse() (response *KillOpsResponse) {
+    response = &KillOpsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// KillOps
+// This API is used to terminate a specific operation performed on a TencentDB for MongoDB instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE_NODENOTFOUNDINREPLICA = "InvalidParameterValue.NodeNotFoundInReplica"
+func (c *Client) KillOps(request *KillOpsRequest) (response *KillOpsResponse, err error) {
+    return c.KillOpsWithContext(context.Background(), request)
+}
+
+// KillOps
+// This API is used to terminate a specific operation performed on a TencentDB for MongoDB instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE_NODENOTFOUNDINREPLICA = "InvalidParameterValue.NodeNotFoundInReplica"
+func (c *Client) KillOpsWithContext(ctx context.Context, request *KillOpsRequest) (response *KillOpsResponse, err error) {
+    if request == nil {
+        request = NewKillOpsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "KillOps")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("KillOps require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewKillOpsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyDBInstanceNetworkAddressRequest() (request *ModifyDBInstanceNetworkAddressRequest) {
     request = &ModifyDBInstanceNetworkAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2019,6 +2345,70 @@ func (c *Client) ModifyDBInstanceSpecWithContext(ctx context.Context, request *M
     request.SetContext(ctx)
     
     response = NewModifyDBInstanceSpecResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyInstanceParamsRequest() (request *ModifyInstanceParamsRequest) {
+    request = &ModifyInstanceParamsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "ModifyInstanceParams")
+    
+    
+    return
+}
+
+func NewModifyInstanceParamsResponse() (response *ModifyInstanceParamsResponse) {
+    response = &ModifyInstanceParamsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyInstanceParams
+// This API is used to modify the parameter configuration of a TencentDB for MongoDB instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_OPERATIONNOTALLOWEDININSTANCELOCKING = "FailedOperation.OperationNotAllowedInInstanceLocking"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_MODIFYMONGODBPARAMS = "InvalidParameter.ModifyMongodbParams"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_MODIFYMONGODBPARAMS = "InvalidParameterValue.ModifyMongodbParams"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyInstanceParams(request *ModifyInstanceParamsRequest) (response *ModifyInstanceParamsResponse, err error) {
+    return c.ModifyInstanceParamsWithContext(context.Background(), request)
+}
+
+// ModifyInstanceParams
+// This API is used to modify the parameter configuration of a TencentDB for MongoDB instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_OPERATIONNOTALLOWEDININSTANCELOCKING = "FailedOperation.OperationNotAllowedInInstanceLocking"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_MODIFYMONGODBPARAMS = "InvalidParameter.ModifyMongodbParams"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_MODIFYMONGODBPARAMS = "InvalidParameterValue.ModifyMongodbParams"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyInstanceParamsWithContext(ctx context.Context, request *ModifyInstanceParamsRequest) (response *ModifyInstanceParamsResponse, err error) {
+    if request == nil {
+        request = NewModifyInstanceParamsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "ModifyInstanceParams")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyInstanceParams require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyInstanceParamsResponse()
     err = c.Send(request, response)
     return
 }
@@ -2263,6 +2653,60 @@ func (c *Client) ResetDBInstancePasswordWithContext(ctx context.Context, request
     return
 }
 
+func NewSetAccountUserPrivilegeRequest() (request *SetAccountUserPrivilegeRequest) {
+    request = &SetAccountUserPrivilegeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "SetAccountUserPrivilege")
+    
+    
+    return
+}
+
+func NewSetAccountUserPrivilegeResponse() (response *SetAccountUserPrivilegeResponse) {
+    response = &SetAccountUserPrivilegeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SetAccountUserPrivilege
+// This API is used to set the account permissions of an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) SetAccountUserPrivilege(request *SetAccountUserPrivilegeRequest) (response *SetAccountUserPrivilegeResponse, err error) {
+    return c.SetAccountUserPrivilegeWithContext(context.Background(), request)
+}
+
+// SetAccountUserPrivilege
+// This API is used to set the account permissions of an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) SetAccountUserPrivilegeWithContext(ctx context.Context, request *SetAccountUserPrivilegeRequest) (response *SetAccountUserPrivilegeResponse, err error) {
+    if request == nil {
+        request = NewSetAccountUserPrivilegeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "SetAccountUserPrivilege")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetAccountUserPrivilege require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSetAccountUserPrivilegeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSetDBInstanceDeletionProtectionRequest() (request *SetDBInstanceDeletionProtectionRequest) {
     request = &SetDBInstanceDeletionProtectionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2319,6 +2763,60 @@ func (c *Client) SetDBInstanceDeletionProtectionWithContext(ctx context.Context,
     request.SetContext(ctx)
     
     response = NewSetDBInstanceDeletionProtectionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSetInstanceMaintenanceRequest() (request *SetInstanceMaintenanceRequest) {
+    request = &SetInstanceMaintenanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "SetInstanceMaintenance")
+    
+    
+    return
+}
+
+func NewSetInstanceMaintenanceResponse() (response *SetInstanceMaintenanceResponse) {
+    response = &SetInstanceMaintenanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SetInstanceMaintenance
+// This API is used to set the instance maintenance window.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) SetInstanceMaintenance(request *SetInstanceMaintenanceRequest) (response *SetInstanceMaintenanceResponse, err error) {
+    return c.SetInstanceMaintenanceWithContext(context.Background(), request)
+}
+
+// SetInstanceMaintenance
+// This API is used to set the instance maintenance window.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) SetInstanceMaintenanceWithContext(ctx context.Context, request *SetInstanceMaintenanceRequest) (response *SetInstanceMaintenanceResponse, err error) {
+    if request == nil {
+        request = NewSetInstanceMaintenanceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "SetInstanceMaintenance")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetInstanceMaintenance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSetInstanceMaintenanceResponse()
     err = c.Send(request, response)
     return
 }

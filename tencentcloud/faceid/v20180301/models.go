@@ -3616,4 +3616,9 @@ type WebVerificationConfigIntl struct {
 
 	// Selects OCR alarms requiring attention. When an OCR Alarm occurs, the identity verification process will be interrupted. Default value is empty, indicating all alarms are monitored. This feature requires the parameter DisableCheckOcrWarnings=false. If the Alarm is disabled, this parameter will not be effective.
 	SelectedWarningCodes *string `json:"SelectedWarningCodes,omitnil,omitempty" name:"SelectedWarningCodes"`
+
+	// Whether expired identity documents are permitted to proceed to the liveness detection process. This parameter only takes effect when the document type is Hong Kong Identity Card (HKID).
+	// true (default value): Expired HKID is allowed to enter the liveness process.
+	// false : Expired HKID is rejected and cannot enter the liveness process.
+	AllowExpiredDocument *bool `json:"AllowExpiredDocument,omitnil,omitempty" name:"AllowExpiredDocument"`
 }

@@ -479,6 +479,70 @@ func (c *Client) CreateAsrHotwordsWithContext(ctx context.Context, request *Crea
     return
 }
 
+func NewCreateBlindWatermarkTemplateRequest() (request *CreateBlindWatermarkTemplateRequest) {
+    request = &CreateBlindWatermarkTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "CreateBlindWatermarkTemplate")
+    
+    
+    return
+}
+
+func NewCreateBlindWatermarkTemplateResponse() (response *CreateBlindWatermarkTemplateResponse) {
+    response = &CreateBlindWatermarkTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateBlindWatermarkTemplate
+// This API is used to create a user-defined digital watermark template with an upper limit of 1000.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GENDEFINITION = "InternalError.GenDefinition"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_DUPLICATEDTEXTCONTENT = "InvalidParameterValue.DuplicatedTextContent"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateBlindWatermarkTemplate(request *CreateBlindWatermarkTemplateRequest) (response *CreateBlindWatermarkTemplateResponse, err error) {
+    return c.CreateBlindWatermarkTemplateWithContext(context.Background(), request)
+}
+
+// CreateBlindWatermarkTemplate
+// This API is used to create a user-defined digital watermark template with an upper limit of 1000.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GENDEFINITION = "InternalError.GenDefinition"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_DUPLICATEDTEXTCONTENT = "InvalidParameterValue.DuplicatedTextContent"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateBlindWatermarkTemplateWithContext(ctx context.Context, request *CreateBlindWatermarkTemplateRequest) (response *CreateBlindWatermarkTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateBlindWatermarkTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "CreateBlindWatermarkTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateBlindWatermarkTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateBlindWatermarkTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateContentReviewTemplateRequest() (request *CreateContentReviewTemplateRequest) {
     request = &CreateContentReviewTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -729,6 +793,62 @@ func (c *Client) CreatePersonSampleWithContext(ctx context.Context, request *Cre
     request.SetContext(ctx)
     
     response = NewCreatePersonSampleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateProcessImageTemplateRequest() (request *CreateProcessImageTemplateRequest) {
+    request = &CreateProcessImageTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "CreateProcessImageTemplate")
+    
+    
+    return
+}
+
+func NewCreateProcessImageTemplateResponse() (response *CreateProcessImageTemplateResponse) {
+    response = &CreateProcessImageTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateProcessImageTemplate
+// This API is used to create an image processing template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GENDEFINITION = "InternalError.GenDefinition"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) CreateProcessImageTemplate(request *CreateProcessImageTemplateRequest) (response *CreateProcessImageTemplateResponse, err error) {
+    return c.CreateProcessImageTemplateWithContext(context.Background(), request)
+}
+
+// CreateProcessImageTemplate
+// This API is used to create an image processing template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GENDEFINITION = "InternalError.GenDefinition"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) CreateProcessImageTemplateWithContext(ctx context.Context, request *CreateProcessImageTemplateRequest) (response *CreateProcessImageTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateProcessImageTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "CreateProcessImageTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateProcessImageTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateProcessImageTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -1841,6 +1961,62 @@ func (c *Client) DeleteAsrHotwordsWithContext(ctx context.Context, request *Dele
     return
 }
 
+func NewDeleteBlindWatermarkTemplateRequest() (request *DeleteBlindWatermarkTemplateRequest) {
+    request = &DeleteBlindWatermarkTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DeleteBlindWatermarkTemplate")
+    
+    
+    return
+}
+
+func NewDeleteBlindWatermarkTemplateResponse() (response *DeleteBlindWatermarkTemplateResponse) {
+    response = &DeleteBlindWatermarkTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteBlindWatermarkTemplate
+// This API is used to delete a user-defined digital watermark template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteBlindWatermarkTemplate(request *DeleteBlindWatermarkTemplateRequest) (response *DeleteBlindWatermarkTemplateResponse, err error) {
+    return c.DeleteBlindWatermarkTemplateWithContext(context.Background(), request)
+}
+
+// DeleteBlindWatermarkTemplate
+// This API is used to delete a user-defined digital watermark template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteBlindWatermarkTemplateWithContext(ctx context.Context, request *DeleteBlindWatermarkTemplateRequest) (response *DeleteBlindWatermarkTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteBlindWatermarkTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DeleteBlindWatermarkTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteBlindWatermarkTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteBlindWatermarkTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteContentReviewTemplateRequest() (request *DeleteContentReviewTemplateRequest) {
     request = &DeleteContentReviewTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2057,6 +2233,60 @@ func (c *Client) DeletePersonSampleWithContext(ctx context.Context, request *Del
     request.SetContext(ctx)
     
     response = NewDeletePersonSampleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteProcessImageTemplateRequest() (request *DeleteProcessImageTemplateRequest) {
+    request = &DeleteProcessImageTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DeleteProcessImageTemplate")
+    
+    
+    return
+}
+
+func NewDeleteProcessImageTemplateResponse() (response *DeleteProcessImageTemplateResponse) {
+    response = &DeleteProcessImageTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteProcessImageTemplate
+// This API is used to delete an image processing template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteProcessImageTemplate(request *DeleteProcessImageTemplateRequest) (response *DeleteProcessImageTemplateResponse, err error) {
+    return c.DeleteProcessImageTemplateWithContext(context.Background(), request)
+}
+
+// DeleteProcessImageTemplate
+// This API is used to delete an image processing template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteProcessImageTemplateWithContext(ctx context.Context, request *DeleteProcessImageTemplateRequest) (response *DeleteProcessImageTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteProcessImageTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DeleteProcessImageTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteProcessImageTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteProcessImageTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -3017,6 +3247,66 @@ func (c *Client) DescribeBatchTaskDetailWithContext(ctx context.Context, request
     return
 }
 
+func NewDescribeBlindWatermarkTemplatesRequest() (request *DescribeBlindWatermarkTemplatesRequest) {
+    request = &DescribeBlindWatermarkTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeBlindWatermarkTemplates")
+    
+    
+    return
+}
+
+func NewDescribeBlindWatermarkTemplatesResponse() (response *DescribeBlindWatermarkTemplatesResponse) {
+    response = &DescribeBlindWatermarkTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBlindWatermarkTemplates
+// This API is used to query a user-defined digital watermark template, and the pagination query is supported based on conditions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeBlindWatermarkTemplates(request *DescribeBlindWatermarkTemplatesRequest) (response *DescribeBlindWatermarkTemplatesResponse, err error) {
+    return c.DescribeBlindWatermarkTemplatesWithContext(context.Background(), request)
+}
+
+// DescribeBlindWatermarkTemplates
+// This API is used to query a user-defined digital watermark template, and the pagination query is supported based on conditions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeBlindWatermarkTemplatesWithContext(ctx context.Context, request *DescribeBlindWatermarkTemplatesRequest) (response *DescribeBlindWatermarkTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeBlindWatermarkTemplatesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DescribeBlindWatermarkTemplates")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBlindWatermarkTemplates require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBlindWatermarkTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeContentReviewTemplatesRequest() (request *DescribeContentReviewTemplatesRequest) {
     request = &DescribeContentReviewTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3357,6 +3647,64 @@ func (c *Client) DescribePersonSamplesWithContext(ctx context.Context, request *
     return
 }
 
+func NewDescribeProcessImageTemplatesRequest() (request *DescribeProcessImageTemplatesRequest) {
+    request = &DescribeProcessImageTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeProcessImageTemplates")
+    
+    
+    return
+}
+
+func NewDescribeProcessImageTemplatesResponse() (response *DescribeProcessImageTemplatesResponse) {
+    response = &DescribeProcessImageTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeProcessImageTemplates
+// This API is used to query the list of image processing templates.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeProcessImageTemplates(request *DescribeProcessImageTemplatesRequest) (response *DescribeProcessImageTemplatesResponse, err error) {
+    return c.DescribeProcessImageTemplatesWithContext(context.Background(), request)
+}
+
+// DescribeProcessImageTemplates
+// This API is used to query the list of image processing templates.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeProcessImageTemplatesWithContext(ctx context.Context, request *DescribeProcessImageTemplatesRequest) (response *DescribeProcessImageTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeProcessImageTemplatesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DescribeProcessImageTemplates")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProcessImageTemplates require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeProcessImageTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeQualityControlTemplatesRequest() (request *DescribeQualityControlTemplatesRequest) {
     request = &DescribeQualityControlTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3558,6 +3906,7 @@ func NewDescribeSmartEraseTemplatesResponse() (response *DescribeSmartEraseTempl
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_ERASETYPE = "InvalidParameterValue.EraseType"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 func (c *Client) DescribeSmartEraseTemplates(request *DescribeSmartEraseTemplatesRequest) (response *DescribeSmartEraseTemplatesResponse, err error) {
@@ -3572,6 +3921,7 @@ func (c *Client) DescribeSmartEraseTemplates(request *DescribeSmartEraseTemplate
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_ERASETYPE = "InvalidParameterValue.EraseType"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 func (c *Client) DescribeSmartEraseTemplatesWithContext(ctx context.Context, request *DescribeSmartEraseTemplatesRequest) (response *DescribeSmartEraseTemplatesResponse, err error) {
@@ -4563,6 +4913,62 @@ func (c *Client) ExecuteFunctionWithContext(ctx context.Context, request *Execut
     return
 }
 
+func NewExtractBlindWatermarkRequest() (request *ExtractBlindWatermarkRequest) {
+    request = &ExtractBlindWatermarkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "ExtractBlindWatermark")
+    
+    
+    return
+}
+
+func NewExtractBlindWatermarkResponse() (response *ExtractBlindWatermarkResponse) {
+    response = &ExtractBlindWatermarkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ExtractBlindWatermark
+// This API is used to initiate a digital watermark extraction task for a video. The extraction result can be queried through DescribeTaskDetail.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SRCFILE = "InvalidParameterValue.SrcFile"
+func (c *Client) ExtractBlindWatermark(request *ExtractBlindWatermarkRequest) (response *ExtractBlindWatermarkResponse, err error) {
+    return c.ExtractBlindWatermarkWithContext(context.Background(), request)
+}
+
+// ExtractBlindWatermark
+// This API is used to initiate a digital watermark extraction task for a video. The extraction result can be queried through DescribeTaskDetail.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SRCFILE = "InvalidParameterValue.SrcFile"
+func (c *Client) ExtractBlindWatermarkWithContext(ctx context.Context, request *ExtractBlindWatermarkRequest) (response *ExtractBlindWatermarkResponse, err error) {
+    if request == nil {
+        request = NewExtractBlindWatermarkRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "ExtractBlindWatermark")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExtractBlindWatermark require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExtractBlindWatermarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewManageTaskRequest() (request *ManageTaskRequest) {
     request = &ManageTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5003,6 +5409,66 @@ func (c *Client) ModifyAsrHotwordsWithContext(ctx context.Context, request *Modi
     return
 }
 
+func NewModifyBlindWatermarkTemplateRequest() (request *ModifyBlindWatermarkTemplateRequest) {
+    request = &ModifyBlindWatermarkTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "ModifyBlindWatermarkTemplate")
+    
+    
+    return
+}
+
+func NewModifyBlindWatermarkTemplateResponse() (response *ModifyBlindWatermarkTemplateResponse) {
+    response = &ModifyBlindWatermarkTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyBlindWatermarkTemplate
+// This API is used to modify a user-defined digital watermark template. The digital watermark type cannot be modified.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyBlindWatermarkTemplate(request *ModifyBlindWatermarkTemplateRequest) (response *ModifyBlindWatermarkTemplateResponse, err error) {
+    return c.ModifyBlindWatermarkTemplateWithContext(context.Background(), request)
+}
+
+// ModifyBlindWatermarkTemplate
+// This API is used to modify a user-defined digital watermark template. The digital watermark type cannot be modified.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyBlindWatermarkTemplateWithContext(ctx context.Context, request *ModifyBlindWatermarkTemplateRequest) (response *ModifyBlindWatermarkTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyBlindWatermarkTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "ModifyBlindWatermarkTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyBlindWatermarkTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyBlindWatermarkTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyContentReviewTemplateRequest() (request *ModifyContentReviewTemplateRequest) {
     request = &ModifyContentReviewTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5253,6 +5719,62 @@ func (c *Client) ModifyPersonSampleWithContext(ctx context.Context, request *Mod
     request.SetContext(ctx)
     
     response = NewModifyPersonSampleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyProcessImageTemplateRequest() (request *ModifyProcessImageTemplateRequest) {
+    request = &ModifyProcessImageTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "ModifyProcessImageTemplate")
+    
+    
+    return
+}
+
+func NewModifyProcessImageTemplateResponse() (response *ModifyProcessImageTemplateResponse) {
+    response = &ModifyProcessImageTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyProcessImageTemplate
+// This API is used to modify an image processing template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyProcessImageTemplate(request *ModifyProcessImageTemplateRequest) (response *ModifyProcessImageTemplateResponse, err error) {
+    return c.ModifyProcessImageTemplateWithContext(context.Background(), request)
+}
+
+// ModifyProcessImageTemplate
+// This API is used to modify an image processing template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyProcessImageTemplateWithContext(ctx context.Context, request *ModifyProcessImageTemplateRequest) (response *ModifyProcessImageTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyProcessImageTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "ModifyProcessImageTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyProcessImageTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyProcessImageTemplateResponse()
     err = c.Send(request, response)
     return
 }

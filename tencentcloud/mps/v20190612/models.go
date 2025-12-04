@@ -273,6 +273,10 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	// Watermark list. Multiple image or text watermarks up to a maximum of 10 are supported.
 	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitnil,omitempty" name:"WatermarkSet"`
 
+	// Digital watermark parameter.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BlindWatermark *BlindWatermarkInput `json:"BlindWatermark,omitnil,omitempty" name:"BlindWatermark"`
+
 	// Target storage for files after adaptive dynamic streaming. If left blank, it inherits the upper-level OutputStorage value.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
@@ -2654,6 +2658,34 @@ type BatchSubTaskResult struct {
 	SmartSubtitlesTaskResult *BatchSmartSubtitlesResult `json:"SmartSubtitlesTaskResult,omitnil,omitempty" name:"SmartSubtitlesTaskResult"`
 }
 
+type BlindWatermarkInput struct {
+	// Digital watermark template ID.
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+type BlindWatermarkTemplate struct {
+	// Unique identifier of the digital watermark template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-nagra: NAGRA forensics watermark.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Digital watermark template name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Text content of the digital watermark template. The length cannot exceed 64 characters.
+	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
+
+	// Description information of the digital watermark template.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Creation time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Last modification time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+}
+
 type ClassificationConfigureInfo struct {
 	// Switch of intelligent categorization task. Valid values:
 	// <li>ON: enables intelligent categorization task;</li>
@@ -3869,6 +3901,84 @@ func (r *CreateAsrHotwordsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateBlindWatermarkTemplateRequestParams struct {
+	// Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-nagra: NAGRA watermark.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Text content of the digital watermark. The length cannot exceed 64 characters. After NAGRA watermark templates are created, the text content cannot be modified.
+	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
+
+	// Digital watermark template name, which supports Chinese, English, digits, underscores (_), hyphens (-), and periods (.). The length cannot exceed 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Description information of the digital watermark template. The length cannot exceed 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+}
+
+type CreateBlindWatermarkTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-nagra: NAGRA watermark.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Text content of the digital watermark. The length cannot exceed 64 characters. After NAGRA watermark templates are created, the text content cannot be modified.
+	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
+
+	// Digital watermark template name, which supports Chinese, English, digits, underscores (_), hyphens (-), and periods (.). The length cannot exceed 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Description information of the digital watermark template. The length cannot exceed 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+}
+
+func (r *CreateBlindWatermarkTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateBlindWatermarkTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Type")
+	delete(f, "TextContent")
+	delete(f, "Name")
+	delete(f, "Comment")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateBlindWatermarkTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateBlindWatermarkTemplateResponseParams struct {
+	// Unique identifier of the digital watermark template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateBlindWatermarkTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateBlindWatermarkTemplateResponseParams `json:"Response"`
+}
+
+func (r *CreateBlindWatermarkTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateBlindWatermarkTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateContentReviewTemplateRequestParams struct {
 	// The name of the content moderation template. Length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -4314,6 +4424,77 @@ func (r *CreatePersonSampleResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreatePersonSampleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateProcessImageTemplateRequestParams struct {
+	// Image processing template.
+	ProcessImageTemplate *ImageTaskInput `json:"ProcessImageTemplate,omitnil,omitempty" name:"ProcessImageTemplate"`
+
+	// Image processing template name. The length cannot exceed 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Description information of the image processing template. The length cannot exceed 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+}
+
+type CreateProcessImageTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Image processing template.
+	ProcessImageTemplate *ImageTaskInput `json:"ProcessImageTemplate,omitnil,omitempty" name:"ProcessImageTemplate"`
+
+	// Image processing template name. The length cannot exceed 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Description information of the image processing template. The length cannot exceed 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+}
+
+func (r *CreateProcessImageTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateProcessImageTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProcessImageTemplate")
+	delete(f, "Name")
+	delete(f, "Comment")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateProcessImageTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateProcessImageTemplateResponseParams struct {
+	// Unique identifier of the image processing template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateProcessImageTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateProcessImageTemplateResponseParams `json:"Response"`
+}
+
+func (r *CreateProcessImageTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateProcessImageTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5858,6 +6039,60 @@ func (r *DeleteAsrHotwordsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteBlindWatermarkTemplateRequestParams struct {
+	// Unique identifier of the digital watermark template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+type DeleteBlindWatermarkTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique identifier of the digital watermark template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+func (r *DeleteBlindWatermarkTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteBlindWatermarkTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definition")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteBlindWatermarkTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteBlindWatermarkTemplateResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteBlindWatermarkTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteBlindWatermarkTemplateResponseParams `json:"Response"`
+}
+
+func (r *DeleteBlindWatermarkTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteBlindWatermarkTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteContentReviewTemplateRequestParams struct {
 	// The unique ID of the content moderation template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
@@ -6070,6 +6305,60 @@ func (r *DeletePersonSampleResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeletePersonSampleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteProcessImageTemplateRequestParams struct {
+	// Unique identifier of the image processing template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+type DeleteProcessImageTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique identifier of the image processing template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+func (r *DeleteProcessImageTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteProcessImageTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definition")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteProcessImageTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteProcessImageTemplateResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteProcessImageTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteProcessImageTemplateResponseParams `json:"Response"`
+}
+
+func (r *DeleteProcessImageTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteProcessImageTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7357,6 +7646,98 @@ func (r *DescribeBatchTaskDetailResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeBlindWatermarkTemplatesRequestParams struct {
+	// Filtering condition for the unique identifier of the digital watermark template. The array length cannot exceed 100.
+	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
+
+	// Filtering condition for the unique identifier of the digital watermark template. The length cannot exceed 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-nagra: NAGRA forensics watermark.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Pagination offset. The default value is 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned records.
+	// <li>Default value: 10.</li>
+	// <li>Maximum value: 100.</li>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeBlindWatermarkTemplatesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Filtering condition for the unique identifier of the digital watermark template. The array length cannot exceed 100.
+	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
+
+	// Filtering condition for the unique identifier of the digital watermark template. The length cannot exceed 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-nagra: NAGRA forensics watermark.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Pagination offset. The default value is 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned records.
+	// <li>Default value: 10.</li>
+	// <li>Maximum value: 100.</li>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeBlindWatermarkTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBlindWatermarkTemplatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definitions")
+	delete(f, "Name")
+	delete(f, "Type")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBlindWatermarkTemplatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBlindWatermarkTemplatesResponseParams struct {
+	// Total number of records that meet the filtering conditions.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// List of digital watermark template details.
+	BlindWatermarkTemplateSet []*BlindWatermarkTemplate `json:"BlindWatermarkTemplateSet,omitnil,omitempty" name:"BlindWatermarkTemplateSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeBlindWatermarkTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBlindWatermarkTemplatesResponseParams `json:"Response"`
+}
+
+func (r *DescribeBlindWatermarkTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBlindWatermarkTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeContentReviewTemplatesRequestParams struct {
 	// The IDs of the content moderation templates to query. Array length limit: 50.
 	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
@@ -7882,6 +8263,112 @@ func (r *DescribePersonSamplesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeProcessImageTemplatesRequestParams struct {
+	// Filtering condition for the unique identifier of the image processing template. The array length cannot exceed 100.
+	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
+
+	// Pagination offset. The default value is 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned entries. The default value is 10, and the maximum value is 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filtering condition for the identifier of the image processing template.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Sorting method. It is valid after OrderBy is set. Valid values: 0: ascending; 1: descending. The default value is 0.
+	OrderType *int64 `json:"OrderType,omitnil,omitempty" name:"OrderType"`
+
+	// Sorting field. Valid values:
+	// Definition: unique identifier of the template.
+	// Default value: creation time.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Filtering condition for the template type. Valid values: <li>Preset: system preset template;</li> <li>Custom: user-defined template.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
+type DescribeProcessImageTemplatesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Filtering condition for the unique identifier of the image processing template. The array length cannot exceed 100.
+	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
+
+	// Pagination offset. The default value is 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned entries. The default value is 10, and the maximum value is 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filtering condition for the identifier of the image processing template.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Sorting method. It is valid after OrderBy is set. Valid values: 0: ascending; 1: descending. The default value is 0.
+	OrderType *int64 `json:"OrderType,omitnil,omitempty" name:"OrderType"`
+
+	// Sorting field. Valid values:
+	// Definition: unique identifier of the template.
+	// Default value: creation time.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Filtering condition for the template type. Valid values: <li>Preset: system preset template;</li> <li>Custom: user-defined template.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
+func (r *DescribeProcessImageTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProcessImageTemplatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definitions")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Name")
+	delete(f, "OrderType")
+	delete(f, "OrderBy")
+	delete(f, "Type")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProcessImageTemplatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeProcessImageTemplatesResponseParams struct {
+	// Total number of records that meet the filtering conditions.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// List of image processing template details.
+	ProcessImageTemplateSet []*ProcessImageTemplate `json:"ProcessImageTemplateSet,omitnil,omitempty" name:"ProcessImageTemplateSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeProcessImageTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeProcessImageTemplatesResponseParams `json:"Response"`
+}
+
+func (r *DescribeProcessImageTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProcessImageTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeQualityControlTemplatesRequestParams struct {
 	// Filter condition for media quality inspection template unique identifiers, with an array length limit of 100.
 	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
@@ -8183,6 +8670,12 @@ type DescribeSmartEraseTemplatesRequestParams struct {
 	// * Custom: user-defined template.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
+	// Erasing type filtering conditions for the smart erasing template.
+	// - subtitle: subtitle removal.
+	// - watermark: watermark removal.
+	// - privacy: privacy protection.
+	EraseType *string `json:"EraseType,omitnil,omitempty" name:"EraseType"`
+
 	// Filtering condition for the smart erasing template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
@@ -8204,6 +8697,12 @@ type DescribeSmartEraseTemplatesRequest struct {
 	// * Custom: user-defined template.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
+	// Erasing type filtering conditions for the smart erasing template.
+	// - subtitle: subtitle removal.
+	// - watermark: watermark removal.
+	// - privacy: privacy protection.
+	EraseType *string `json:"EraseType,omitnil,omitempty" name:"EraseType"`
+
 	// Filtering condition for the smart erasing template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
@@ -8224,6 +8723,7 @@ func (r *DescribeSmartEraseTemplatesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Type")
+	delete(f, "EraseType")
 	delete(f, "Name")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSmartEraseTemplatesRequest has unknown keys!", "")
@@ -9887,6 +10387,91 @@ func (r *ExecuteFunctionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ExtractBlindWatermarkRequestParams struct {
+	// Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-abseq: ab sequence copyright digital watermark.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// File input information for the Media Processing Service (MPS) task.
+	InputInfo *MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
+
+	// Event notification information of the task. If it is left unspecified, it indicates that no event notification is obtained.
+	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
+
+	// Configuration of the digital watermark extraction task.
+	ExtractBlindWatermarkConfig *ExtractBlindWatermarkTaskConfig `json:"ExtractBlindWatermarkConfig,omitnil,omitempty" name:"ExtractBlindWatermarkConfig"`
+
+	// Resource ID. Ensure that the corresponding resource is enabled. The default value is the primary resource ID of the account.
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+}
+
+type ExtractBlindWatermarkRequest struct {
+	*tchttp.BaseRequest
+	
+	// Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-abseq: ab sequence copyright digital watermark.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// File input information for the Media Processing Service (MPS) task.
+	InputInfo *MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
+
+	// Event notification information of the task. If it is left unspecified, it indicates that no event notification is obtained.
+	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
+
+	// Configuration of the digital watermark extraction task.
+	ExtractBlindWatermarkConfig *ExtractBlindWatermarkTaskConfig `json:"ExtractBlindWatermarkConfig,omitnil,omitempty" name:"ExtractBlindWatermarkConfig"`
+
+	// Resource ID. Ensure that the corresponding resource is enabled. The default value is the primary resource ID of the account.
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+}
+
+func (r *ExtractBlindWatermarkRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ExtractBlindWatermarkRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Type")
+	delete(f, "InputInfo")
+	delete(f, "TaskNotifyConfig")
+	delete(f, "ExtractBlindWatermarkConfig")
+	delete(f, "ResourceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ExtractBlindWatermarkRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ExtractBlindWatermarkResponseParams struct {
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ExtractBlindWatermarkResponse struct {
+	*tchttp.BaseResponse
+	Response *ExtractBlindWatermarkResponseParams `json:"Response"`
+}
+
+func (r *ExtractBlindWatermarkResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ExtractBlindWatermarkResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ExtractBlindWatermarkTask struct {
 	// Media processing task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
@@ -10117,16 +10702,19 @@ type ImageAreaBoxInfo struct {
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Coordinates (pixel-level) of the box selection area in the image. Format: [x1, y1, x2, y2], which indicates the coordinates of the top left corner and the bottom right corner.
+	// Coordinates (pixel-level) of the box selection area in the image, in the format of [x1, y1, x2, y2]. It indicates the coordinates of the top left corner and the bottom right corner. Note: The maximum value of this field is 4096.
 	// For example, [101, 85, 111, 95].
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitnil,omitempty" name:"AreaCoordSet"`
 
-	// Coordinates of the box selection area in the image. Format: [x1, y1, x2, y2], which indicates the coordinates of the top left corner and the bottom right corner. This parameter takes effect when AreaCoordSet is not specified.
-	//  - [0.1, 0.1, 0.3, 0.3]: Indicates the ratio (values are less than 1).
-	//  -[50, 50, 350, 280]: Indicates the pixel (values are greater than or equal to 1).
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Coordinates of the box selection area in the image, in the format of [x1, y1, x2, y2]. It indicates the coordinates of the top left corner and the bottom right corner. This field takes effect when AreaCoordSet is not specified. When it indicates the pixel, the maximum value of this field is 4096.
+	// - [0.1, 0.1, 0.3, 0.3]: indicates the ratio (values are less than 1).
+	// - [50, 50, 350, 280]: indicates the pixel (values are greater than or equal to 1).
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	BoundingBox []*float64 `json:"BoundingBox,omitnil,omitempty" name:"BoundingBox"`
+
+	// BoundingBox field unit. When the value is set to 0, select the unit automatically according to the field rule. When it is set to 1, the unit is ratio. When it is set to 2, the unit is pixel.
+	BoundingBoxUnitType *uint64 `json:"BoundingBoxUnitType,omitnil,omitempty" name:"BoundingBoxUnitType"`
 }
 
 type ImageDenoiseConfig struct {
@@ -10434,6 +11022,35 @@ type LiveActivityResult struct {
 	LiveActivityResItem *LiveActivityResItem `json:"LiveActivityResItem,omitnil,omitempty" name:"LiveActivityResItem"`
 }
 
+type LiveAiAnalysisDescriptionItem struct {
+	// Segmentation result.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Paragraphs []*LiveAiParagraphInfo `json:"Paragraphs,omitnil,omitempty" name:"Paragraphs"`
+}
+
+type LiveAiParagraphInfo struct {
+	// Segment summary.
+	Summary *string `json:"Summary,omitnil,omitempty" name:"Summary"`
+
+	// Segment title.
+	Title *string `json:"Title,omitnil,omitempty" name:"Title"`
+
+	// Segment keyword.
+	Keywords []*string `json:"Keywords,omitnil,omitempty" name:"Keywords"`
+
+	// Starting time point of the segment, in seconds.
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
+
+	// End time point of the segment, in seconds.
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
+
+	// Starting time point of the live streaming segment in ISO date and time format.	
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
+
+	// End time point of the live streaming segment in ISO date and time format.	
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
 type LiveRecordFile struct {
 	// The URL of the recording file.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -10567,7 +11184,11 @@ type LiveScheduleTask struct {
 }
 
 type LiveStreamAiAnalysisResultInfo struct {
-
+	// Live streaming analysis subtask result. Valid values:
+	// <li>Live streaming video splitting.</li>
+	// <li>Live streaming highlight.</li>
+	// <li>Live streaming summary.</li>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ResultSet []*LiveStreamAiAnalysisResultItem `json:"ResultSet,omitnil,omitempty" name:"ResultSet"`
 }
 
@@ -10575,6 +11196,7 @@ type LiveStreamAiAnalysisResultItem struct {
 	// Result type. Valid values:
 	// <li>SegmentRecognition: video splitting.</li>
 	// <li>Highlight: highlight.</li>
+	// <li>Description: summary.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 
@@ -10583,6 +11205,9 @@ type LiveStreamAiAnalysisResultItem struct {
 	// Highlight result. This field is valid when Type is set to Highlight.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HighlightResultSet []*MediaAiAnalysisHighlightItem `json:"HighlightResultSet,omitnil,omitempty" name:"HighlightResultSet"`
+
+	// Summary result. It is valid when Type is Description.
+	DescriptionResult *LiveAiAnalysisDescriptionItem `json:"DescriptionResult,omitnil,omitempty" name:"DescriptionResult"`
 }
 
 type LiveStreamAiQualityControlResultInfo struct {
@@ -10980,7 +11605,7 @@ type LiveStreamTagRecognitionResult struct {
 type LiveStreamTaskNotifyConfig struct {
 	// Notification Type:
 	// TDMQ-CMQ: TDMQ for CMQ.
-	// "URL": When a URL is specified, HTTP callbacks are pushed to the address specified by NotifyUrl. The callback protocol is HTTP+JSON. The content of the packet body is the same as the output parameters of [ParseLiveStreamProcessNotification](https://www.tencentcloud.comom/document/product/862/39229?from_cn_redirect=1).
+	// "URL": When a URL is specified, HTTP callbacks are pushed to the address specified by NotifyUrl. The callback protocol is HTTP+JSON. The content of the packet body is the same as the output parameters of [ParseLiveStreamProcessNotification](https://www.tencentcloud.com/document/api/1041/33680).
 	// 
 	// <font color="red">Note: If it is left blank, TDMQ-CMQ is used by default. To use other types, fill in the corresponding type value.</font>
 	NotifyType *string `json:"NotifyType,omitnil,omitempty" name:"NotifyType"`
@@ -11546,7 +12171,7 @@ type MediaProcessTaskImageSpriteResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+	// The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://www.tencentcloud.com/document/api/1041/33691).
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
 	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
@@ -11562,10 +12187,10 @@ type MediaProcessTaskImageSpriteResult struct {
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	Output *MediaImageSpriteItem `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Task execution start time in ISO date and time format.
 	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
 
-	// Task execution completion time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Task execution completion time in ISO date and time format.
 	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 }
 
@@ -12438,6 +13063,81 @@ func (r *ModifyAsrHotwordsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyBlindWatermarkTemplateRequestParams struct {
+	// Unique identifier of the digital watermark template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Digital watermark template name, which supports Chinese, English, digits, underscores (_), hyphens (-), and periods (.). The length cannot exceed 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Description information of the digital watermark template. The length cannot exceed 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Text content of the digital watermark. The length cannot exceed 64 characters. The text content cannot be modified for NAGRA watermark templates.
+	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
+}
+
+type ModifyBlindWatermarkTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique identifier of the digital watermark template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Digital watermark template name, which supports Chinese, English, digits, underscores (_), hyphens (-), and periods (.). The length cannot exceed 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Description information of the digital watermark template. The length cannot exceed 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Text content of the digital watermark. The length cannot exceed 64 characters. The text content cannot be modified for NAGRA watermark templates.
+	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
+}
+
+func (r *ModifyBlindWatermarkTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyBlindWatermarkTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definition")
+	delete(f, "Name")
+	delete(f, "Comment")
+	delete(f, "TextContent")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBlindWatermarkTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyBlindWatermarkTemplateResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyBlindWatermarkTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyBlindWatermarkTemplateResponseParams `json:"Response"`
+}
+
+func (r *ModifyBlindWatermarkTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyBlindWatermarkTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyContentReviewTemplateRequestParams struct {
 	// The unique ID of the content moderation template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
@@ -12884,6 +13584,81 @@ func (r *ModifyPersonSampleResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyPersonSampleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyProcessImageTemplateRequestParams struct {
+	// Unique identifier of the image processing template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Image processing template name. The length cannot exceed 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Template description information. The length cannot exceed 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Image processing template parameter.
+	ProcessImageTemplate *ImageTaskInput `json:"ProcessImageTemplate,omitnil,omitempty" name:"ProcessImageTemplate"`
+}
+
+type ModifyProcessImageTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique identifier of the image processing template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Image processing template name. The length cannot exceed 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Template description information. The length cannot exceed 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Image processing template parameter.
+	ProcessImageTemplate *ImageTaskInput `json:"ProcessImageTemplate,omitnil,omitempty" name:"ProcessImageTemplate"`
+}
+
+func (r *ModifyProcessImageTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyProcessImageTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definition")
+	delete(f, "Name")
+	delete(f, "Comment")
+	delete(f, "ProcessImageTemplate")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyProcessImageTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyProcessImageTemplateResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyProcessImageTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyProcessImageTemplateResponseParams `json:"Response"`
+}
+
+func (r *ModifyProcessImageTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyProcessImageTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -14232,12 +15007,13 @@ func (r *ParseLiveStreamProcessNotificationRequest) FromJsonString(s string) err
 
 // Predefined struct for user
 type ParseLiveStreamProcessNotificationResponseParams struct {
-	// Live stream processing result type, including:
-	// <li>AiReviewResult: content auditing result.</li>
+	// Live stream processing result type. Valid values:
+	// <li>AiReviewResult: content review result.</li>
 	// <li>AiRecognitionResult: content recognition result.</li>
-	// <li>LiveRecordResult: live recording result.</li>
-	// <li>AiQualityControlResult: media quality inspection result.</li>
-	// <li>ProcessEof: live stream processing result.</li>
+	// <li>LiveRecordResult: live streaming recording result.</li>
+	// <li>AiQualityControlResult: media live quality control result.</li>
+	// <li>AiAnalysisResult: content analysis result.</li>
+	// <li>ProcessEof: end of live stream processing.</li>
 	NotificationType *string `json:"NotificationType,omitnil,omitempty" name:"NotificationType"`
 
 	// Video processing task ID.
@@ -14365,6 +15141,10 @@ type ParseNotificationResponseParams struct {
 	// Batch processing task information. this field has a value only when EventType is BatchTask.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	BatchTaskEvent *BatchSubTaskResult `json:"BatchTaskEvent,omitnil,omitempty" name:"BatchTaskEvent"`
+
+	// Information about the digital watermark extraction task. This field has a value only when EventType is ExtractBlindWatermark.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExtractBlindWatermarkTask *ExtractBlindWatermarkTask `json:"ExtractBlindWatermarkTask,omitnil,omitempty" name:"ExtractBlindWatermarkTask"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -14637,7 +15417,7 @@ type ProcessImageRequestParams struct {
 	OutputDir *string `json:"OutputDir,omitnil,omitempty" name:"OutputDir"`
 
 	// Output path, which can be a relative or an absolute path.
-	// The path must end with `.{format}`. For details, please refer to the [Filename Variable](https://www.tencentcloud.comom/document/product/862/37039?from_cn_redirect=1).
+	// The path must end with `.{format}`. For details, please refer to the [Filename Variable](https://www.tencentcloud.com/document/product/1041/33495).
 	// **Relative path example:**
 	// <Li>`Filename_{Variablename}.{format}`.</li>
 	// <Li>`Filename.{format}`.</li>
@@ -14647,6 +15427,12 @@ type ProcessImageRequestParams struct {
 	// 
 	// If not filled in, default relative path: `{inputName}.{format}`.
 	OutputPath *string `json:"OutputPath,omitnil,omitempty" name:"OutputPath"`
+
+	// Unique identifier of the image processing template.
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Resource ID. Ensure that the corresponding resource is enabled. The default value is the primary resource ID of the account.
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
 	// Image processing parameter.
 	ImageTask *ImageTaskInput `json:"ImageTask,omitnil,omitempty" name:"ImageTask"`
@@ -14665,7 +15451,7 @@ type ProcessImageRequest struct {
 	OutputDir *string `json:"OutputDir,omitnil,omitempty" name:"OutputDir"`
 
 	// Output path, which can be a relative or an absolute path.
-	// The path must end with `.{format}`. For details, please refer to the [Filename Variable](https://www.tencentcloud.comom/document/product/862/37039?from_cn_redirect=1).
+	// The path must end with `.{format}`. For details, please refer to the [Filename Variable](https://www.tencentcloud.com/document/product/1041/33495).
 	// **Relative path example:**
 	// <Li>`Filename_{Variablename}.{format}`.</li>
 	// <Li>`Filename.{format}`.</li>
@@ -14675,6 +15461,12 @@ type ProcessImageRequest struct {
 	// 
 	// If not filled in, default relative path: `{inputName}.{format}`.
 	OutputPath *string `json:"OutputPath,omitnil,omitempty" name:"OutputPath"`
+
+	// Unique identifier of the image processing template.
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Resource ID. Ensure that the corresponding resource is enabled. The default value is the primary resource ID of the account.
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
 	// Image processing parameter.
 	ImageTask *ImageTaskInput `json:"ImageTask,omitnil,omitempty" name:"ImageTask"`
@@ -14696,6 +15488,8 @@ func (r *ProcessImageRequest) FromJsonString(s string) error {
 	delete(f, "OutputStorage")
 	delete(f, "OutputDir")
 	delete(f, "OutputPath")
+	delete(f, "Definition")
+	delete(f, "ResourceId")
 	delete(f, "ImageTask")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessImageRequest has unknown keys!", "")
@@ -14726,6 +15520,29 @@ func (r *ProcessImageResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ProcessImageResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type ProcessImageTemplate struct {
+	// Unique identifier of the image processing template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Image processing template name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Description information of the image processing template.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Template type.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Image processing template configuration parameter.
+	ProcessImageConfig *ImageTaskInput `json:"ProcessImageConfig,omitnil,omitempty" name:"ProcessImageConfig"`
+
+	// Template creation time.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Last modification time of the template.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
 // Predefined struct for user
@@ -15893,10 +16710,10 @@ type ScheduleAnalysisTaskResult struct {
 	// Analysis task output.
 	Output []*AiAnalysisResult `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// Task execution start time in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+	// Task execution start time in ISO date and time format.
 	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
 
-	// Task execution completion time in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+	// Task execution completion time in ISO date and time format.
 	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 }
 
@@ -16853,15 +17670,14 @@ type SpekeDrm struct {
 	// Initialization vector for encryption (32-byte hexadecimal string). the field content is user-customized.
 	Vector *string `json:"Vector,omitnil,omitempty" name:"Vector"`
 
-	// Encryption method. Options:  
-	// - **cbcs**: Supports PlayReady, Widevine, FairPlay, Widevine+FairPlay, Widevine+PlayReady, PlayReady+FairPlay, and Widevine+PlayReady+FairPlay.  
-	// - **cenc**: Supports PlayReady, Widevine, and Widevine+PlayReady.  
-	// 
-	// If not specified:  
-	// - FairPlay defaults to **cbcs**.  
-	// - PlayReady and Widevine default to **cenc**.  
-	// - Widevine+FairPlay, PlayReady+FairPlay, and Widevine+PlayReady+FairPlay default to **cbcs**.  
-	// - Widevine+PlayReady defaults to **cenc**.
+	// Encryption method. Valid values:
+	// cbcs: supported by PlayReady, Widevine, FairPlay, Widevine+FairPlay, Widevine+PlayReady, PlayReady+FairPlay, and Widevine+PlayReady+FairPlay.
+	// cenc: supported by PlayReady, Widevine, and Widevine+PlayReady.
+	// If it is left unspecified:
+	// Use cbcs for FairPlay by default.
+	// Use cenc for PlayReady and Widevine by default.
+	// Use cbcs for Widevine+FairPlay, PlayReady+FairPlay, and Widevine+PlayReady+FairPlay by default.
+	// Use cenc for Widevine+PlayReady by default.
 	EncryptionMethod *string `json:"EncryptionMethod,omitnil,omitempty" name:"EncryptionMethod"`
 
 	// Substream encryption rule. Default value: preset0.
@@ -17409,6 +18225,10 @@ type TranscodeTaskInput struct {
 	// Watermark list. Multiple image or text watermarks up to a maximum of 10 are supported.
 	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitnil,omitempty" name:"WatermarkSet"`
 
+	// Digital watermark parameter.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BlindWatermark *BlindWatermarkInput `json:"BlindWatermark,omitnil,omitempty" name:"BlindWatermark"`
+
 	// List of blurs. Up to 10 ones can be supported.
 	MosaicSet []*MosaicInput `json:"MosaicSet,omitnil,omitempty" name:"MosaicSet"`
 
@@ -17873,22 +18693,21 @@ type VideoEnhanceConfig struct {
 }
 
 type VideoTemplateInfo struct {
-	// Encoding format for video streams. Optional values:
-	// <li>h264: H.264 encoding</li>
-	// <li>h265: H.265 encoding</li>
-	// <li>h266: H.266 encoding</li>
-	// <li>av1: AOMedia Video 1 encoding</li>
-	// <li>vp8: VP8 encoding</li>
-	// <li>vp9: VP9 encoding</li>
-	// <li>mpeg2: MPEG2 encoding</li>
-	// <li>dnxhd: DNxHD encoding</li>
-	// <li>mv-hevc: MV-HEVC encoding</li>
-	// 
-	// Note: AV1 encoding containers currently only support mp4, webm, and mkv.
-	// Note: H.266 encoding containers currently only support mp4, hls, ts, and mov.
-	// Note: VP8 and VP9 encoding containers currently only support webm and mkv.
-	// Note: MPEG2 and DNxHD encoding containers currently only support mxf.
-	// Note: MV-HEVC encoding containers only support mp4, hls, and mov. Among them, the hls format only supports mp4 segmentation format.
+	// Encoding format of video streams. Valid values:
+	// <li>h264: H.264 encoding.</li>
+	// <li>h265: H.265 encoding.</li>
+	// <li>h266: H.266 encoding.</li>
+	// <li>av1: AOMedia Video 1 encoding.</li>
+	// <li>vp8: VP8 encoding.</li>
+	// <li>vp9: VP9 encoding.</li>
+	// <li>mpeg2: MPEG2 encoding.</li>
+	// <li>dnxhd: DNxHD encoding.</li>
+	// <li>mv-hevc: MV-HEVC encoding.</li>
+	// Note: The av1 codec currently only supports mp4, webm, and mkv.
+	// Note: The H.266 codec currently only supports mp4, hls, ts, and mov.
+	// Note: The VP8 and VP9 codecs currently only support webm and mkv.
+	// Note: The MPEG2 and dnxhd codecs currently only support mxf.
+	// Note: The MV-HEVC codec currently only supports mp4, hls, and mov. Among them, the HLS format only supports the MP4 segmented format and requires the input source to be a panoramic video (with multiple views).
 	Codec *string `json:"Codec,omitnil,omitempty" name:"Codec"`
 
 	// Video frame rate. Value range:

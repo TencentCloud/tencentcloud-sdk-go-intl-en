@@ -2345,6 +2345,7 @@ func NewGenerateDataKeyResponse() (response *GenerateDataKeyResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ENCRYPTIONERROR = "FailedOperation.EncryptionError"
+//  FAILEDOPERATION_TAGGINGERROR = "FailedOperation.TaggingError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_DATAKEYNAMEALREADYEXISTS = "InvalidParameterValue.DataKeyNameAlreadyExists"
@@ -2353,6 +2354,8 @@ func NewGenerateDataKeyResponse() (response *GenerateDataKeyResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
 //  INVALIDPARAMETERVALUE_INVALIDKEYUSAGE = "InvalidParameterValue.InvalidKeyUsage"
 //  INVALIDPARAMETERVALUE_INVALIDTYPE = "InvalidParameterValue.InvalidType"
+//  INVALIDPARAMETERVALUE_TAGKEYSDUPLICATED = "InvalidParameterValue.TagKeysDuplicated"
+//  INVALIDPARAMETERVALUE_TAGSNOTEXISTED = "InvalidParameterValue.TagsNotExisted"
 //  LIMITEXCEEDED_CMKLIMITEXCEEDED = "LimitExceeded.CmkLimitExceeded"
 //  LIMITEXCEEDED_DATAKEYLIMITEXCEEDED = "LimitExceeded.DataKeyLimitExceeded"
 //  RESOURCEUNAVAILABLE_CMKDISABLED = "ResourceUnavailable.CmkDisabled"
@@ -2368,6 +2371,7 @@ func (c *Client) GenerateDataKey(request *GenerateDataKeyRequest) (response *Gen
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ENCRYPTIONERROR = "FailedOperation.EncryptionError"
+//  FAILEDOPERATION_TAGGINGERROR = "FailedOperation.TaggingError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_DATAKEYNAMEALREADYEXISTS = "InvalidParameterValue.DataKeyNameAlreadyExists"
@@ -2376,6 +2380,8 @@ func (c *Client) GenerateDataKey(request *GenerateDataKeyRequest) (response *Gen
 //  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
 //  INVALIDPARAMETERVALUE_INVALIDKEYUSAGE = "InvalidParameterValue.InvalidKeyUsage"
 //  INVALIDPARAMETERVALUE_INVALIDTYPE = "InvalidParameterValue.InvalidType"
+//  INVALIDPARAMETERVALUE_TAGKEYSDUPLICATED = "InvalidParameterValue.TagKeysDuplicated"
+//  INVALIDPARAMETERVALUE_TAGSNOTEXISTED = "InvalidParameterValue.TagsNotExisted"
 //  LIMITEXCEEDED_CMKLIMITEXCEEDED = "LimitExceeded.CmkLimitExceeded"
 //  LIMITEXCEEDED_DATAKEYLIMITEXCEEDED = "LimitExceeded.DataKeyLimitExceeded"
 //  RESOURCEUNAVAILABLE_CMKDISABLED = "ResourceUnavailable.CmkDisabled"
@@ -2889,6 +2895,7 @@ func NewImportDataKeyResponse() (response *ImportDataKeyResponse) {
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_TAGGINGERROR = "FailedOperation.TaggingError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDDATAKEYNAME = "InvalidParameterValue.InvalidDataKeyName"
@@ -2897,6 +2904,8 @@ func NewImportDataKeyResponse() (response *ImportDataKeyResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDKEYUSAGE = "InvalidParameterValue.InvalidKeyUsage"
 //  INVALIDPARAMETERVALUE_INVALIDPLAINTEXT = "InvalidParameterValue.InvalidPlaintext"
 //  INVALIDPARAMETERVALUE_INVALIDTYPE = "InvalidParameterValue.InvalidType"
+//  INVALIDPARAMETERVALUE_TAGKEYSDUPLICATED = "InvalidParameterValue.TagKeysDuplicated"
+//  INVALIDPARAMETERVALUE_TAGSNOTEXISTED = "InvalidParameterValue.TagsNotExisted"
 //  LIMITEXCEEDED_CMKLIMITEXCEEDED = "LimitExceeded.CmkLimitExceeded"
 //  LIMITEXCEEDED_DATAKEYLIMITEXCEEDED = "LimitExceeded.DataKeyLimitExceeded"
 //  RESOURCEUNAVAILABLE_CMKARCHIVED = "ResourceUnavailable.CmkArchived"
@@ -2914,6 +2923,7 @@ func (c *Client) ImportDataKey(request *ImportDataKeyRequest) (response *ImportD
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_TAGGINGERROR = "FailedOperation.TaggingError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDDATAKEYNAME = "InvalidParameterValue.InvalidDataKeyName"
@@ -2922,6 +2932,8 @@ func (c *Client) ImportDataKey(request *ImportDataKeyRequest) (response *ImportD
 //  INVALIDPARAMETERVALUE_INVALIDKEYUSAGE = "InvalidParameterValue.InvalidKeyUsage"
 //  INVALIDPARAMETERVALUE_INVALIDPLAINTEXT = "InvalidParameterValue.InvalidPlaintext"
 //  INVALIDPARAMETERVALUE_INVALIDTYPE = "InvalidParameterValue.InvalidType"
+//  INVALIDPARAMETERVALUE_TAGKEYSDUPLICATED = "InvalidParameterValue.TagKeysDuplicated"
+//  INVALIDPARAMETERVALUE_TAGSNOTEXISTED = "InvalidParameterValue.TagsNotExisted"
 //  LIMITEXCEEDED_CMKLIMITEXCEEDED = "LimitExceeded.CmkLimitExceeded"
 //  LIMITEXCEEDED_DATAKEYLIMITEXCEEDED = "LimitExceeded.DataKeyLimitExceeded"
 //  RESOURCEUNAVAILABLE_CMKARCHIVED = "ResourceUnavailable.CmkArchived"

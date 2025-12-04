@@ -97,6 +97,21 @@ func (r *AssignProjectResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Auth struct {
+	// Permission information of the current account.
+	// - 0: no permissions.
+	// - 1: read-only.
+	// - 3: read-write.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Mask *int64 `json:"Mask,omitnil,omitempty" name:"Mask"`
+
+	// Specifies the name of the database that has the current account permissions.
+	// - \*: indicates all databases.
+	// - db.name: indicates the database with a specific name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NameSpace *string `json:"NameSpace,omitnil,omitempty" name:"NameSpace"`
+}
+
 type BackupDownloadTask struct {
 	// Task creation time.
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
@@ -219,6 +234,106 @@ type ClientConnection struct {
 
 	// Whether it is an internal IP address.
 	InternalService *bool `json:"InternalService,omitnil,omitempty" name:"InternalService"`
+}
+
+// Predefined struct for user
+type CreateAccountUserRequestParams struct {
+	// Instance ID. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/MongoDB), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// New account name. The format requirements are as follows:
+	// - The value range for the character length is [1, 64].
+	// - Allowed characters include uppercase letters, lowercase letters, digits (1–9), underscores (\_), and hyphens (-).
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// New account password. The password complexity requirements are as follows:
+	// - The value range for the character length is [8, 32].
+	// - It should include at least two of the following: letters, digits, and special characters (the exclamation mark (!), at sign (@), number sign (#), percent sign (%), caret (^), asterisk (*), parentheses (), and underscore (_)).
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// Password corresponding to the mongouser account. mongouser is the default account of the system; it indicates the password set during instance creation.
+	MongoUserPassword *string `json:"MongoUserPassword,omitnil,omitempty" name:"MongoUserPassword"`
+
+	// Account remarks.
+	UserDesc *string `json:"UserDesc,omitnil,omitempty" name:"UserDesc"`
+
+	// Read/Write permission information of the account.
+	AuthRole []*Auth `json:"AuthRole,omitnil,omitempty" name:"AuthRole"`
+}
+
+type CreateAccountUserRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/MongoDB), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// New account name. The format requirements are as follows:
+	// - The value range for the character length is [1, 64].
+	// - Allowed characters include uppercase letters, lowercase letters, digits (1–9), underscores (\_), and hyphens (-).
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// New account password. The password complexity requirements are as follows:
+	// - The value range for the character length is [8, 32].
+	// - It should include at least two of the following: letters, digits, and special characters (the exclamation mark (!), at sign (@), number sign (#), percent sign (%), caret (^), asterisk (*), parentheses (), and underscore (_)).
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// Password corresponding to the mongouser account. mongouser is the default account of the system; it indicates the password set during instance creation.
+	MongoUserPassword *string `json:"MongoUserPassword,omitnil,omitempty" name:"MongoUserPassword"`
+
+	// Account remarks.
+	UserDesc *string `json:"UserDesc,omitnil,omitempty" name:"UserDesc"`
+
+	// Read/Write permission information of the account.
+	AuthRole []*Auth `json:"AuthRole,omitnil,omitempty" name:"AuthRole"`
+}
+
+func (r *CreateAccountUserRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAccountUserRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "UserName")
+	delete(f, "Password")
+	delete(f, "MongoUserPassword")
+	delete(f, "UserDesc")
+	delete(f, "AuthRole")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAccountUserRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAccountUserResponseParams struct {
+	// Creates a task ID.
+	FlowId *uint64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateAccountUserResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAccountUserResponseParams `json:"Response"`
+}
+
+func (r *CreateAccountUserResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAccountUserResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -1173,6 +1288,48 @@ func (r *CreateLogDownloadTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CurrentOp struct {
+	// Operation number.
+	OpId *int64 `json:"OpId,omitnil,omitempty" name:"OpId"`
+
+	// Namespace where the operation is located, in the format of db.collection.
+	Ns *string `json:"Ns,omitnil,omitempty" name:"Ns"`
+
+	// Execution statement of the operation.
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// Operation type.
+	// - none: special status; idle connections or internal tasks.
+	// - update: update data.
+	// - insert: insertion operation.
+	// - query: query operation.
+	// - command: command operation.
+	// - getmore: obtain more data.
+	// - remove: deletion operation.
+	// - killcursors: operation of releasing the query cursor.
+	Op *string `json:"Op,omitnil,omitempty" name:"Op"`
+
+	// Name of the shard where the operation is performed.
+	ReplicaSetName *string `json:"ReplicaSetName,omitnil,omitempty" name:"ReplicaSetName"`
+
+	// Name of the node where the operation is performed.
+	NodeName *string `json:"NodeName,omitnil,omitempty" name:"NodeName"`
+
+	// Detailed information about the operation.
+	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
+
+	// Node role.
+	// - primary: primary node.
+	// - secondary: secondary node.
+	State *string `json:"State,omitnil,omitempty" name:"State"`
+
+	// Execution time of the operation, in ms.
+	MicrosecsRunning *uint64 `json:"MicrosecsRunning,omitnil,omitempty" name:"MicrosecsRunning"`
+
+	// Information about the node where the current operation is performed.
+	ExecNode *string `json:"ExecNode,omitnil,omitempty" name:"ExecNode"`
+}
+
 type DBInstanceInfo struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -1190,6 +1347,77 @@ type DBInstancePrice struct {
 
 	// Discount price of the instance, in USD.
 	DiscountPrice *float64 `json:"DiscountPrice,omitnil,omitempty" name:"DiscountPrice"`
+}
+
+// Predefined struct for user
+type DeleteAccountUserRequestParams struct {
+	// Specifies the instance ID for the account to be deleted. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Configures the name of the account to be deleted.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Configures the password corresponding to the mongouser account. mongouser is the default account of the system. Enter the password corresponding to it.
+	MongoUserPassword *string `json:"MongoUserPassword,omitnil,omitempty" name:"MongoUserPassword"`
+}
+
+type DeleteAccountUserRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the instance ID for the account to be deleted. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Configures the name of the account to be deleted.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Configures the password corresponding to the mongouser account. mongouser is the default account of the system. Enter the password corresponding to it.
+	MongoUserPassword *string `json:"MongoUserPassword,omitnil,omitempty" name:"MongoUserPassword"`
+}
+
+func (r *DeleteAccountUserRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAccountUserRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "UserName")
+	delete(f, "MongoUserPassword")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAccountUserRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteAccountUserResponseParams struct {
+	// Account deletion task ID.
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteAccountUserResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteAccountUserResponseParams `json:"Response"`
+}
+
+func (r *DeleteAccountUserResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAccountUserResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -1454,6 +1682,71 @@ func (r *DescribeBackupDownloadTaskResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeBackupRulesRequestParams struct {
+	// Specifies the instance ID. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type DescribeBackupRulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the instance ID. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeBackupRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupRulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupRulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBackupRulesResponseParams struct {
+	// Retention period for backup data, in days.
+	BackupSaveTime *uint64 `json:"BackupSaveTime,omitnil,omitempty" name:"BackupSaveTime"`
+
+	// Automatic backup start time.
+	BackupTime *uint64 `json:"BackupTime,omitnil,omitempty" name:"BackupTime"`
+
+	// Backup method.
+	// - 0: logical backup.
+	// - 1: physical backup.
+	BackupMethod *uint64 `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeBackupRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBackupRulesResponseParams `json:"Response"`
+}
+
+func (r *DescribeBackupRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupRulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeClientConnectionsRequestParams struct {
 	// Specifies the ID of the instance to be queried. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/MongoDB) and copy the instance ID from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -1524,6 +1817,157 @@ func (r *DescribeClientConnectionsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeClientConnectionsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCurrentOpRequestParams struct {
+	// Specifies the instance ID to be queried. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Namespace where the operation belongs, in the format of db.collection.
+	Ns *string `json:"Ns,omitnil,omitempty" name:"Ns"`
+
+	// Sets the query and filtering condition to the execution time of the operation task.
+	// - The default value is 0, and the value range is [0, 3600000], in milliseconds.
+	// - The result will return the operation whose execution time exceeds the set time.
+	MillisecondRunning *uint64 `json:"MillisecondRunning,omitnil,omitempty" name:"MillisecondRunning"`
+
+	// Sets the query and filtering condition to the type of the operation task. Valid values:
+	// - none: special status; idle connections or internal tasks.
+	// - update: update data.
+	// - insert: insertion operation.
+	// - query: query operation.
+	// - command: command operation.
+	// - getmore: obtain more data.
+	// - remove: deletion operation.
+	// - killcursors: operation of releasing the query cursor.
+	Op *string `json:"Op,omitnil,omitempty" name:"Op"`
+
+	// Filtering condition, such as the shard name.
+	ReplicaSetName *string `json:"ReplicaSetName,omitnil,omitempty" name:"ReplicaSetName"`
+
+	// Sets the query and filtering condition to the node role.
+	// - primary: primary node.
+	// - secondary: secondary node.
+	State *string `json:"State,omitnil,omitempty" name:"State"`
+
+	// Number of entries returned per request. The default value is 100, and the value range is [0, 100].
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. The default value is 0, and the value range is [0, 10000].
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field of the returned result set. Currently, sorting by MicrosecsRunning (execution time of the operation task) is supported.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Sorting method of the returned result set.
+	// - ASC: ascending order. The default value is ASC, which indicates sorting in ascending order.
+	// - DESC: descending order.
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
+}
+
+type DescribeCurrentOpRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the instance ID to be queried. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Namespace where the operation belongs, in the format of db.collection.
+	Ns *string `json:"Ns,omitnil,omitempty" name:"Ns"`
+
+	// Sets the query and filtering condition to the execution time of the operation task.
+	// - The default value is 0, and the value range is [0, 3600000], in milliseconds.
+	// - The result will return the operation whose execution time exceeds the set time.
+	MillisecondRunning *uint64 `json:"MillisecondRunning,omitnil,omitempty" name:"MillisecondRunning"`
+
+	// Sets the query and filtering condition to the type of the operation task. Valid values:
+	// - none: special status; idle connections or internal tasks.
+	// - update: update data.
+	// - insert: insertion operation.
+	// - query: query operation.
+	// - command: command operation.
+	// - getmore: obtain more data.
+	// - remove: deletion operation.
+	// - killcursors: operation of releasing the query cursor.
+	Op *string `json:"Op,omitnil,omitempty" name:"Op"`
+
+	// Filtering condition, such as the shard name.
+	ReplicaSetName *string `json:"ReplicaSetName,omitnil,omitempty" name:"ReplicaSetName"`
+
+	// Sets the query and filtering condition to the node role.
+	// - primary: primary node.
+	// - secondary: secondary node.
+	State *string `json:"State,omitnil,omitempty" name:"State"`
+
+	// Number of entries returned per request. The default value is 100, and the value range is [0, 100].
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. The default value is 0, and the value range is [0, 10000].
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field of the returned result set. Currently, sorting by MicrosecsRunning (execution time of the operation task) is supported.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Sorting method of the returned result set.
+	// - ASC: ascending order. The default value is ASC, which indicates sorting in ascending order.
+	// - DESC: descending order.
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
+}
+
+func (r *DescribeCurrentOpRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCurrentOpRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Ns")
+	delete(f, "MillisecondRunning")
+	delete(f, "Op")
+	delete(f, "ReplicaSetName")
+	delete(f, "State")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "OrderBy")
+	delete(f, "OrderByType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCurrentOpRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCurrentOpResponseParams struct {
+	// Total number of operations meeting the query conditions.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// List of the current operations.
+	CurrentOps []*CurrentOp `json:"CurrentOps,omitnil,omitempty" name:"CurrentOps"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCurrentOpResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCurrentOpResponseParams `json:"Response"`
+}
+
+func (r *DescribeCurrentOpResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCurrentOpResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2927,6 +3371,77 @@ func (r *DescribeSpecInfoResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type EnableTransparentDataEncryptionRequestParams struct {
+	// Instance ID. For example, cmgo-p8vn****. Log in to the[TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb) to copy the instance ID from the instance list. Currently, the supported general versions include 4.4 and 5.0, and Cloud Disk Edition is not supported.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	//  Region where the [Key Management Service (KMS)](https://www.tencentcloud.comom/document/product/573/18809?from_cn_redirect=1) instance is located. For example, ap-shanghai.
+	KmsRegion *string `json:"KmsRegion,omitnil,omitempty" name:"KmsRegion"`
+
+	// Key ID. If the parameter is left unspecified, there is no specific key ID, Tencent Cloud will generate the key automatically.
+	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+}
+
+type EnableTransparentDataEncryptionRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. For example, cmgo-p8vn****. Log in to the[TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb) to copy the instance ID from the instance list. Currently, the supported general versions include 4.4 and 5.0, and Cloud Disk Edition is not supported.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	//  Region where the [Key Management Service (KMS)](https://www.tencentcloud.comom/document/product/573/18809?from_cn_redirect=1) instance is located. For example, ap-shanghai.
+	KmsRegion *string `json:"KmsRegion,omitnil,omitempty" name:"KmsRegion"`
+
+	// Key ID. If the parameter is left unspecified, there is no specific key ID, Tencent Cloud will generate the key automatically.
+	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+}
+
+func (r *EnableTransparentDataEncryptionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableTransparentDataEncryptionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "KmsRegion")
+	delete(f, "KeyId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableTransparentDataEncryptionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EnableTransparentDataEncryptionResponseParams struct {
+	// Asynchronous process ID for enabling TDE, which is used for querying the process status.
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type EnableTransparentDataEncryptionResponse struct {
+	*tchttp.BaseResponse
+	Response *EnableTransparentDataEncryptionResponseParams `json:"Response"`
+}
+
+func (r *EnableTransparentDataEncryptionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableTransparentDataEncryptionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type FlushInstanceRouterConfigRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -3788,6 +4303,67 @@ func (r *IsolateDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type KillOpsRequestParams struct {
+	// Instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Operation to be terminated.
+	Operations []*Operation `json:"Operations,omitnil,omitempty" name:"Operations"`
+}
+
+type KillOpsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Operation to be terminated.
+	Operations []*Operation `json:"Operations,omitnil,omitempty" name:"Operations"`
+}
+
+func (r *KillOpsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *KillOpsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Operations")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "KillOpsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type KillOpsResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type KillOpsResponse struct {
+	*tchttp.BaseResponse
+	Response *KillOpsResponseParams `json:"Response"`
+}
+
+func (r *KillOpsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *KillOpsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type LogInfo struct {
 	// Log category.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -4120,6 +4696,94 @@ func (r *ModifyDBInstanceSpecResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyInstanceParamsRequestParams struct {
+	// Specifies the instance ID. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Specifies the parameter name and value to be modified. For details about the currently supported parameter names and the corresponding valid values, see [DescribeInstanceParams](https://www.tencentcloud.comom/document/product/240/65903?from_cn_redirect=1).
+	InstanceParams []*ModifyMongoDBParamType `json:"InstanceParams,omitnil,omitempty" name:"InstanceParams"`
+
+	// Operation type. Valid values:
+	// - IMMEDIATELY: immediate adjustment.
+	// - DELAY: delayed adjustment. It is an optional field. The default value is immediate adjustment if this parameter is left unspecified.
+	ModifyType *string `json:"ModifyType,omitnil,omitempty" name:"ModifyType"`
+}
+
+type ModifyInstanceParamsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the instance ID. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Specifies the parameter name and value to be modified. For details about the currently supported parameter names and the corresponding valid values, see [DescribeInstanceParams](https://www.tencentcloud.comom/document/product/240/65903?from_cn_redirect=1).
+	InstanceParams []*ModifyMongoDBParamType `json:"InstanceParams,omitnil,omitempty" name:"InstanceParams"`
+
+	// Operation type. Valid values:
+	// - IMMEDIATELY: immediate adjustment.
+	// - DELAY: delayed adjustment. It is an optional field. The default value is immediate adjustment if this parameter is left unspecified.
+	ModifyType *string `json:"ModifyType,omitnil,omitempty" name:"ModifyType"`
+}
+
+func (r *ModifyInstanceParamsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyInstanceParamsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "InstanceParams")
+	delete(f, "ModifyType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyInstanceParamsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyInstanceParamsResponseParams struct {
+	// Whether the modification on the parameter configuration takes effect.
+	// - true: the modified parameter value has taken effect.
+	// - false: execution failed.
+	Changed *bool `json:"Changed,omitnil,omitempty" name:"Changed"`
+
+	// This parameter is temporarily meaningless (to be compatible with the earlier versions, reserve this parameter at the frontend).
+	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyInstanceParamsResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyInstanceParamsResponseParams `json:"Response"`
+}
+
+func (r *ModifyInstanceParamsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyInstanceParamsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyMongoDBParamType struct {
+	// Parameter name to be modified. Strictly refer to the parameter names supported by the current instance, which are obtained through DescribeInstanceParams.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Corresponding value of the parameter name to be modified. Strictly refer to the value ranges corresponding to the parameters obtained through DescribeInstanceParams.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
 type ModifyNetworkAddress struct {
 	// New IP
 	NewIPAddress *string `json:"NewIPAddress,omitnil,omitempty" name:"NewIPAddress"`
@@ -4246,6 +4910,17 @@ func (r *OfflineIsolatedDBInstanceResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *OfflineIsolatedDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type Operation struct {
+	// Name of the shard where the operation is performed. The [DescribeCurrentOp](https://www.tencentcloud.comom/document/product/240/48120?from_cn_redirect=1) API can be called to query the shard name.
+	ReplicaSetName *string `json:"ReplicaSetName,omitnil,omitempty" name:"ReplicaSetName"`
+
+	// Name of the node where the operation is performed. The [DescribeCurrentOp](https://www.tencentcloud.comom/document/product/240/48120?from_cn_redirect=1) API can be called to query the node name.
+	NodeName *string `json:"NodeName,omitnil,omitempty" name:"NodeName"`
+
+	// Operation number. The [DescribeCurrentOp](https://www.tencentcloud.comom/document/product/240/48120?from_cn_redirect=1) API can be called to query the operation number.
+	OpId *int64 `json:"OpId,omitnil,omitempty" name:"OpId"`
 }
 
 type RemoveNodeList struct {
@@ -4529,6 +5204,77 @@ type SecurityGroupBound struct {
 }
 
 // Predefined struct for user
+type SetAccountUserPrivilegeRequestParams struct {
+	// Specifies the instance ID for the account to be configured. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/MongoDB), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Sets the account name to access the instance. The setting requirements are as follows: The name should be started with a letter and its length should be 1–64 characters. Only uppercase letters, lowercase letters, digits (1–9), underscores (_), and hyphens (-) can be entered.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Sets the permission information.
+	AuthRole []*Auth `json:"AuthRole,omitnil,omitempty" name:"AuthRole"`
+}
+
+type SetAccountUserPrivilegeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the instance ID for the account to be configured. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/MongoDB), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Sets the account name to access the instance. The setting requirements are as follows: The name should be started with a letter and its length should be 1–64 characters. Only uppercase letters, lowercase letters, digits (1–9), underscores (_), and hyphens (-) can be entered.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Sets the permission information.
+	AuthRole []*Auth `json:"AuthRole,omitnil,omitempty" name:"AuthRole"`
+}
+
+func (r *SetAccountUserPrivilegeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetAccountUserPrivilegeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "UserName")
+	delete(f, "AuthRole")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SetAccountUserPrivilegeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SetAccountUserPrivilegeResponseParams struct {
+	// Task ID.
+	FlowId *uint64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type SetAccountUserPrivilegeResponse struct {
+	*tchttp.BaseResponse
+	Response *SetAccountUserPrivilegeResponseParams `json:"Response"`
+}
+
+func (r *SetAccountUserPrivilegeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetAccountUserPrivilegeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type SetDBInstanceDeletionProtectionRequestParams struct {
 	// Instance ID list, in the format of cmgo-p8vnipr5. It is the same as the format of the instance ID displayed on the TencentDB for MongoDB console page.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
@@ -4586,6 +5332,78 @@ func (r *SetDBInstanceDeletionProtectionResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *SetDBInstanceDeletionProtectionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SetInstanceMaintenanceRequestParams struct {
+	// Specifies the instance ID. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Start time of the maintenance window. The value range is any hour or half-hour between 00:00 and 23:00, such as 00:00 or 00:30.
+	MaintenanceStart *string `json:"MaintenanceStart,omitnil,omitempty" name:"MaintenanceStart"`
+
+	// End time of the maintenance window.
+	// - The value range is any hour or half-hour between 00:00 and 23:00. The minimum value of maintenance time is 30 minutes, and the maximum value is 3 hours.
+	// - The end time should be later than the start time.
+	MaintenanceEnd *string `json:"MaintenanceEnd,omitnil,omitempty" name:"MaintenanceEnd"`
+}
+
+type SetInstanceMaintenanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the instance ID. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Start time of the maintenance window. The value range is any hour or half-hour between 00:00 and 23:00, such as 00:00 or 00:30.
+	MaintenanceStart *string `json:"MaintenanceStart,omitnil,omitempty" name:"MaintenanceStart"`
+
+	// End time of the maintenance window.
+	// - The value range is any hour or half-hour between 00:00 and 23:00. The minimum value of maintenance time is 30 minutes, and the maximum value is 3 hours.
+	// - The end time should be later than the start time.
+	MaintenanceEnd *string `json:"MaintenanceEnd,omitnil,omitempty" name:"MaintenanceEnd"`
+}
+
+func (r *SetInstanceMaintenanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetInstanceMaintenanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "MaintenanceStart")
+	delete(f, "MaintenanceEnd")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SetInstanceMaintenanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SetInstanceMaintenanceResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type SetInstanceMaintenanceResponse struct {
+	*tchttp.BaseResponse
+	Response *SetInstanceMaintenanceResponseParams `json:"Response"`
+}
+
+func (r *SetInstanceMaintenanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetInstanceMaintenanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
