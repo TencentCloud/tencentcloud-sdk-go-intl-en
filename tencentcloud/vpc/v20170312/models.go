@@ -17412,16 +17412,16 @@ type Ipv6SubnetCidrBlock struct {
 }
 
 type ItemPrice struct {
-	// The pay-as-you-go billing method. Unit: CNY.
+	// The pay-as-you-go billing method. Unit: USD.
 	UnitPrice *float64 `json:"UnitPrice,omitnil,omitempty" name:"UnitPrice"`
 
 	// Pay-as-you-go billing method. Value Range: HOUR: Indicates billing by the hour. Scenarios using this hourly billing unit include: Instances postpaid on an hourly basis (POSTPAID_BY_HOUR), and bandwidth postpaid on an hourly basis (BANDWIDTH_POSTPAID_BY_HOUR). GB: Indicates billing on a per-GB basis. Scenarios using this billing unit include: Traffic postpaid on an hourly basis (TRAFFIC_POSTPAID_BY_HOUR).
 	ChargeUnit *string `json:"ChargeUnit,omitnil,omitempty" name:"ChargeUnit"`
 
-	// Original price of the prepaid product. Unit: CNY.
+	// Original price of the prepaid product. Unit: USD.
 	OriginalPrice *float64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 
-	// Discount price of the prepaid product. Unit: CNY.
+	// Discount price of the prepaid product. Unit: USD.
 	DiscountPrice *float64 `json:"DiscountPrice,omitnil,omitempty" name:"DiscountPrice"`
 }
 

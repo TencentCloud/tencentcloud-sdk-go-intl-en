@@ -69,6 +69,8 @@ func NewBatchApplyAccountBaselinesResponse() (response *BatchApplyAccountBaselin
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AFREQUIREDITEMNOTSELECT = "FailedOperation.AFRequiredItemNotSelect"
+//  FAILEDOPERATION_ACCOUNTFACTORYCONTACTEMAILNOTVERIFY = "FailedOperation.AccountFactoryContactEmailNotVerify"
+//  FAILEDOPERATION_ACCOUNTFACTORYCONTACTPHONENOTVERIFY = "FailedOperation.AccountFactoryContactPhoneNotVerify"
 //  FAILEDOPERATION_ACCOUNTFACTORYMEMBERUINNUMEXCEED = "FailedOperation.AccountFactoryMemberUinNumExceed"
 //  FAILEDOPERATION_ACCOUNTFACTORYTASKISDEPLOYING = "FailedOperation.AccountFactoryTaskIsDeploying"
 //  FAILEDOPERATION_CONTROLCENTERNOTOPEN = "FailedOperation.ControlCenterNotOpen"
@@ -87,6 +89,8 @@ func (c *Client) BatchApplyAccountBaselines(request *BatchApplyAccountBaselinesR
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AFREQUIREDITEMNOTSELECT = "FailedOperation.AFRequiredItemNotSelect"
+//  FAILEDOPERATION_ACCOUNTFACTORYCONTACTEMAILNOTVERIFY = "FailedOperation.AccountFactoryContactEmailNotVerify"
+//  FAILEDOPERATION_ACCOUNTFACTORYCONTACTPHONENOTVERIFY = "FailedOperation.AccountFactoryContactPhoneNotVerify"
 //  FAILEDOPERATION_ACCOUNTFACTORYMEMBERUINNUMEXCEED = "FailedOperation.AccountFactoryMemberUinNumExceed"
 //  FAILEDOPERATION_ACCOUNTFACTORYTASKISDEPLOYING = "FailedOperation.AccountFactoryTaskIsDeploying"
 //  FAILEDOPERATION_CONTROLCENTERNOTOPEN = "FailedOperation.ControlCenterNotOpen"
@@ -109,6 +113,226 @@ func (c *Client) BatchApplyAccountBaselinesWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewBatchApplyAccountBaselinesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetAccountFactoryBaselineRequest() (request *GetAccountFactoryBaselineRequest) {
+    request = &GetAccountFactoryBaselineRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("controlcenter", APIVersion, "GetAccountFactoryBaseline")
+    
+    
+    return
+}
+
+func NewGetAccountFactoryBaselineResponse() (response *GetAccountFactoryBaselineResponse) {
+    response = &GetAccountFactoryBaselineResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetAccountFactoryBaseline
+// This API is used to retrieve user baseline configuration data.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CONTROLCENTERNOTOPEN = "FailedOperation.ControlCenterNotOpen"
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  RESOURCENOTFOUND_ACCOUNTFACTORYBASELINENOTEXIST = "ResourceNotFound.AccountFactoryBaselineNotExist"
+func (c *Client) GetAccountFactoryBaseline(request *GetAccountFactoryBaselineRequest) (response *GetAccountFactoryBaselineResponse, err error) {
+    return c.GetAccountFactoryBaselineWithContext(context.Background(), request)
+}
+
+// GetAccountFactoryBaseline
+// This API is used to retrieve user baseline configuration data.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CONTROLCENTERNOTOPEN = "FailedOperation.ControlCenterNotOpen"
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  RESOURCENOTFOUND_ACCOUNTFACTORYBASELINENOTEXIST = "ResourceNotFound.AccountFactoryBaselineNotExist"
+func (c *Client) GetAccountFactoryBaselineWithContext(ctx context.Context, request *GetAccountFactoryBaselineRequest) (response *GetAccountFactoryBaselineResponse, err error) {
+    if request == nil {
+        request = NewGetAccountFactoryBaselineRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "controlcenter", APIVersion, "GetAccountFactoryBaseline")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetAccountFactoryBaseline require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetAccountFactoryBaselineResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListAccountFactoryBaselineItemsRequest() (request *ListAccountFactoryBaselineItemsRequest) {
+    request = &ListAccountFactoryBaselineItemsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("controlcenter", APIVersion, "ListAccountFactoryBaselineItems")
+    
+    
+    return
+}
+
+func NewListAccountFactoryBaselineItemsResponse() (response *ListAccountFactoryBaselineItemsResponse) {
+    response = &ListAccountFactoryBaselineItemsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListAccountFactoryBaselineItems
+// This API is used to obtain account factory system baseline items.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CONTROLCENTERNOTOPEN = "FailedOperation.ControlCenterNotOpen"
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+func (c *Client) ListAccountFactoryBaselineItems(request *ListAccountFactoryBaselineItemsRequest) (response *ListAccountFactoryBaselineItemsResponse, err error) {
+    return c.ListAccountFactoryBaselineItemsWithContext(context.Background(), request)
+}
+
+// ListAccountFactoryBaselineItems
+// This API is used to obtain account factory system baseline items.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CONTROLCENTERNOTOPEN = "FailedOperation.ControlCenterNotOpen"
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+func (c *Client) ListAccountFactoryBaselineItemsWithContext(ctx context.Context, request *ListAccountFactoryBaselineItemsRequest) (response *ListAccountFactoryBaselineItemsResponse, err error) {
+    if request == nil {
+        request = NewListAccountFactoryBaselineItemsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "controlcenter", APIVersion, "ListAccountFactoryBaselineItems")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListAccountFactoryBaselineItems require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListAccountFactoryBaselineItemsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListDeployStepTasksRequest() (request *ListDeployStepTasksRequest) {
+    request = &ListDeployStepTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("controlcenter", APIVersion, "ListDeployStepTasks")
+    
+    
+    return
+}
+
+func NewListDeployStepTasksResponse() (response *ListDeployStepTasksResponse) {
+    response = &ListDeployStepTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListDeployStepTasks
+// This API is used to retrieve the application history of a certain baseline item.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CONTROLCENTERNOTOPEN = "FailedOperation.ControlCenterNotOpen"
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  RESOURCENOTFOUND_ACCOUNTFACTORYITEMNOTEXIST = "ResourceNotFound.AccountFactoryItemNotExist"
+func (c *Client) ListDeployStepTasks(request *ListDeployStepTasksRequest) (response *ListDeployStepTasksResponse, err error) {
+    return c.ListDeployStepTasksWithContext(context.Background(), request)
+}
+
+// ListDeployStepTasks
+// This API is used to retrieve the application history of a certain baseline item.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CONTROLCENTERNOTOPEN = "FailedOperation.ControlCenterNotOpen"
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  RESOURCENOTFOUND_ACCOUNTFACTORYITEMNOTEXIST = "ResourceNotFound.AccountFactoryItemNotExist"
+func (c *Client) ListDeployStepTasksWithContext(ctx context.Context, request *ListDeployStepTasksRequest) (response *ListDeployStepTasksResponse, err error) {
+    if request == nil {
+        request = NewListDeployStepTasksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "controlcenter", APIVersion, "ListDeployStepTasks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListDeployStepTasks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListDeployStepTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateAccountFactoryBaselineRequest() (request *UpdateAccountFactoryBaselineRequest) {
+    request = &UpdateAccountFactoryBaselineRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("controlcenter", APIVersion, "UpdateAccountFactoryBaseline")
+    
+    
+    return
+}
+
+func NewUpdateAccountFactoryBaselineResponse() (response *UpdateAccountFactoryBaselineResponse) {
+    response = &UpdateAccountFactoryBaselineResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateAccountFactoryBaseline
+// This API is used to update the current baseline item configuration of a user. The baseline configuration will be overwritten with the current configuration. When adding new baseline items, the newly-added baseline configuration needs to be added to the existing configuration. When deleting baseline items, the deleted baseline configuration needs to be removed from the existing configuration, then save the latest baseline configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AFREQUIREDITEMNOTSELECT = "FailedOperation.AFRequiredItemNotSelect"
+//  FAILEDOPERATION_ACCOUNTFACTORYDEPENDONITEMNOTCONFIG = "FailedOperation.AccountFactoryDependOnItemNotConfig"
+//  FAILEDOPERATION_CONTROLCENTERNOTOPEN = "FailedOperation.ControlCenterNotOpen"
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  INVALIDPARAMETER_ACCOUNTFACTORYTAGEXCEEDMAXNUM = "InvalidParameter.AccountFactoryTagExceedMaxNum"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+func (c *Client) UpdateAccountFactoryBaseline(request *UpdateAccountFactoryBaselineRequest) (response *UpdateAccountFactoryBaselineResponse, err error) {
+    return c.UpdateAccountFactoryBaselineWithContext(context.Background(), request)
+}
+
+// UpdateAccountFactoryBaseline
+// This API is used to update the current baseline item configuration of a user. The baseline configuration will be overwritten with the current configuration. When adding new baseline items, the newly-added baseline configuration needs to be added to the existing configuration. When deleting baseline items, the deleted baseline configuration needs to be removed from the existing configuration, then save the latest baseline configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AFREQUIREDITEMNOTSELECT = "FailedOperation.AFRequiredItemNotSelect"
+//  FAILEDOPERATION_ACCOUNTFACTORYDEPENDONITEMNOTCONFIG = "FailedOperation.AccountFactoryDependOnItemNotConfig"
+//  FAILEDOPERATION_CONTROLCENTERNOTOPEN = "FailedOperation.ControlCenterNotOpen"
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  INVALIDPARAMETER_ACCOUNTFACTORYTAGEXCEEDMAXNUM = "InvalidParameter.AccountFactoryTagExceedMaxNum"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+func (c *Client) UpdateAccountFactoryBaselineWithContext(ctx context.Context, request *UpdateAccountFactoryBaselineRequest) (response *UpdateAccountFactoryBaselineResponse, err error) {
+    if request == nil {
+        request = NewUpdateAccountFactoryBaselineRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "controlcenter", APIVersion, "UpdateAccountFactoryBaseline")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateAccountFactoryBaseline require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateAccountFactoryBaselineResponse()
     err = c.Send(request, response)
     return
 }
