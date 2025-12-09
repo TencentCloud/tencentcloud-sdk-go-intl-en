@@ -195,6 +195,9 @@ type ApplyCardVerificationExternalRequestParams struct {
 	// Supported image size: no more than 2M after Base64 encoding. image download time should not exceed 5 seconds. 
 	// Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some documents, either ImageUrlBack or ImageBase64Back must be provided. If both are provided, only use ImageUrlBack.
 	ImageUrlBack *string `json:"ImageUrlBack,omitnil,omitempty" name:"ImageUrlBack"`
+
+	// Whether to extract the ID portrait. Default value: false.
+	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
 }
 
 type ApplyCardVerificationExternalRequest struct {
@@ -257,6 +260,9 @@ type ApplyCardVerificationExternalRequest struct {
 	// Supported image size: no more than 2M after Base64 encoding. image download time should not exceed 5 seconds. 
 	// Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some documents, either ImageUrlBack or ImageBase64Back must be provided. If both are provided, only use ImageUrlBack.
 	ImageUrlBack *string `json:"ImageUrlBack,omitnil,omitempty" name:"ImageUrlBack"`
+
+	// Whether to extract the ID portrait. Default value: false.
+	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
 }
 
 func (r *ApplyCardVerificationExternalRequest) ToJsonString() string {
@@ -277,6 +283,7 @@ func (r *ApplyCardVerificationExternalRequest) FromJsonString(s string) error {
 	delete(f, "ImageBase64Back")
 	delete(f, "ImageUrlFront")
 	delete(f, "ImageUrlBack")
+	delete(f, "ReturnHeadImage")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplyCardVerificationExternalRequest has unknown keys!", "")
 	}

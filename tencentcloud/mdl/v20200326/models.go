@@ -414,7 +414,7 @@ type CreateStreamLiveChannelRequestParams struct {
 	// Audio/Video transcoding templates. Quantity: [1, 10]
 	AVTemplates []*AVTemplate `json:"AVTemplates,omitnil,omitempty" name:"AVTemplates"`
 
-	// Subtitle template configuration, only AVTemplates are valid.
+	// Subtitle template configuration.
 	CaptionTemplates []*SubtitleConf `json:"CaptionTemplates,omitnil,omitempty" name:"CaptionTemplates"`
 
 	// Event settings
@@ -463,7 +463,7 @@ type CreateStreamLiveChannelRequest struct {
 	// Audio/Video transcoding templates. Quantity: [1, 10]
 	AVTemplates []*AVTemplate `json:"AVTemplates,omitnil,omitempty" name:"AVTemplates"`
 
-	// Subtitle template configuration, only AVTemplates are valid.
+	// Subtitle template configuration.
 	CaptionTemplates []*SubtitleConf `json:"CaptionTemplates,omitnil,omitempty" name:"CaptionTemplates"`
 
 	// Event settings
@@ -2781,7 +2781,7 @@ type ModifyStreamLiveChannelRequestParams struct {
 	// Audio/Video transcoding templates. Quantity: [1, 10]
 	AVTemplates []*AVTemplate `json:"AVTemplates,omitnil,omitempty" name:"AVTemplates"`
 
-	// Subtitle template configuration, only AVTemplates are valid.
+	// Subtitle template configuration.
 	CaptionTemplates []*SubtitleConf `json:"CaptionTemplates,omitnil,omitempty" name:"CaptionTemplates"`
 
 	// Event settings
@@ -2833,7 +2833,7 @@ type ModifyStreamLiveChannelRequest struct {
 	// Audio/Video transcoding templates. Quantity: [1, 10]
 	AVTemplates []*AVTemplate `json:"AVTemplates,omitnil,omitempty" name:"AVTemplates"`
 
-	// Subtitle template configuration, only AVTemplates are valid.
+	// Subtitle template configuration.
 	CaptionTemplates []*SubtitleConf `json:"CaptionTemplates,omitnil,omitempty" name:"CaptionTemplates"`
 
 	// Event settings
