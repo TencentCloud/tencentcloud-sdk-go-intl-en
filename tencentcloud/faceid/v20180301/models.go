@@ -313,8 +313,6 @@ type ApplySdkVerificationTokenRequestParams struct {
 	// A passthrough field, which is returned together with the verification result and can contain up to 1,024 bits.
 	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 
-	// PLUS: Plus Version.
-	// ENHANCED: Enhanced Version.
 	// BASIC: Basic Version (default).
 	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
 
@@ -391,8 +389,6 @@ type ApplySdkVerificationTokenRequest struct {
 	// A passthrough field, which is returned together with the verification result and can contain up to 1,024 bits.
 	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 
-	// PLUS: Plus Version.
-	// ENHANCED: Enhanced Version.
 	// BASIC: Basic Version (default).
 	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
 
@@ -1776,8 +1772,6 @@ type GetFaceIdTokenIntlRequestParams struct {
 	// The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2 or 4; otherwise, the interface reports an error.
 	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
 
-	// PLUS: Plus Version.
-	// ENHANCED: Enhanced Version.
 	// BASIC: Basic Version (Default).
 	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
 }
@@ -1817,8 +1811,6 @@ type GetFaceIdTokenIntlRequest struct {
 	// The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2 or 4; otherwise, the interface reports an error.
 	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
 
-	// PLUS: Plus Version.
-	// ENHANCED: Enhanced Version.
 	// BASIC: Basic Version (Default).
 	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
 }

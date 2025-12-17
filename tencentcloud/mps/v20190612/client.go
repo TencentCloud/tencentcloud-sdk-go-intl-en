@@ -499,7 +499,7 @@ func NewCreateBlindWatermarkTemplateResponse() (response *CreateBlindWatermarkTe
 }
 
 // CreateBlindWatermarkTemplate
-// This API is used to create a user-defined digital watermark template with an upper limit of 1000.
+// This API is used to create a user-defined digital watermark template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -515,7 +515,7 @@ func (c *Client) CreateBlindWatermarkTemplate(request *CreateBlindWatermarkTempl
 }
 
 // CreateBlindWatermarkTemplate
-// This API is used to create a user-defined digital watermark template with an upper limit of 1000.
+// This API is used to create a user-defined digital watermark template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -4303,6 +4303,72 @@ func (c *Client) DescribeTranscodeTemplatesWithContext(ctx context.Context, requ
     return
 }
 
+func NewDescribeUsageDataRequest() (request *DescribeUsageDataRequest) {
+    request = &DescribeUsageDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeUsageData")
+    
+    
+    return
+}
+
+func NewDescribeUsageDataResponse() (response *DescribeUsageDataResponse) {
+    response = &DescribeUsageDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeUsageData
+// This API is used to return the daily Media Processing Service (MPS) usage information within the specified query time range.
+//
+//    1. MPS statistical data from the last 365 days can be queried.
+//
+//    2. The query time span should not exceed 90 days.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetWorkError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SERVICE = "InvalidParameterValue.Service"
+func (c *Client) DescribeUsageData(request *DescribeUsageDataRequest) (response *DescribeUsageDataResponse, err error) {
+    return c.DescribeUsageDataWithContext(context.Background(), request)
+}
+
+// DescribeUsageData
+// This API is used to return the daily Media Processing Service (MPS) usage information within the specified query time range.
+//
+//    1. MPS statistical data from the last 365 days can be queried.
+//
+//    2. The query time span should not exceed 90 days.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetWorkError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SERVICE = "InvalidParameterValue.Service"
+func (c *Client) DescribeUsageDataWithContext(ctx context.Context, request *DescribeUsageDataRequest) (response *DescribeUsageDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeUsageDataRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DescribeUsageData")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUsageData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUsageDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeWatermarkTemplatesRequest() (request *DescribeWatermarkTemplatesRequest) {
     request = &DescribeWatermarkTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6743,33 +6809,31 @@ func NewProcessMediaResponse() (response *ProcessMediaResponse) {
 }
 
 // ProcessMedia
-// This API is used to initiate a processing task for URL video links or media files in COS. Features include:.
+// This API is used to initiate a processing task for video URLs or media files in Cloud Object Storage (COS). Features include:
 //
-// This API is used to perform video transcoding, including standard transcoding, TSC transcoding, and audio/video enhancement.
+// - Audio/Video transcoding (such as standard transcoding, top speed codec (TSC) transcoding, audio/video enhancement, visible watermark addition, and digital watermark addition).
 //
-// This API is used to generate animated images.
+// - Adaptive bitrate streaming conversion for audios/videos.
 //
-// This API is used to take screenshots at specified time points.
+// - Video-to-GIF conversion.
 //
-// This API is used to take sampled screenshots from videos.
+// - Time point screenshot of videos.
 //
-// This API is used to take sprite screenshots of videos.
+// - Sampled screenshot of videos.
 //
-// This API is used to transcode to adaptive bitrate streaming.
+// - Image sprite of video screenshots.
 //
-// This API is used to perform intelligent content moderation, such as pornography detection and sensitive information detection.
+// - Media quality inspection (such as media format diagnosis, audio/video content detection, and scoring without reference, where audio/video content detection mainly covers jitter, blur, low light, overexposure, screen glitches, noise, mosaic, QR code, and other issues).
 //
-// This API is used to perform intelligent content analysis such as tag, category, cover, frame tag, video splitting, highlight, opening and ending clips, and game tracking.
+// - Smart subtitle (such as subtitle generation and translation).
 //
-// This API is used to perform intelligent content recognition such as human face, full text, text keyword, full speech, speech keyword, speech translation, and object recognition.
+// - Smart erasing (such as watermark removal, subtitle removal, and privacy protection).
 //
-// This API is used to perform media quality inspection, such as media format diagnosis, audio and video content detection (jitter, blur, low light, overexposure, screen glitch, noise, mosaic, QR code, and other issues), and no-reference scoring.
+// - Smart content moderation (such as pornography detection and sensitive information detection).
 //
-// 11. Smart subtitle (such as ASR, hotword, and speech translation).
+// - Smart content analysis (such as tags, classifications, covers, frame tags, video splitting, highlights, opening and ending clips, and marking points for games).
 //
-// 
-//
-// This API is used to perform intelligent erasure (watermark removal, subtitle removal, privacy protection).
+// - Smart content recognition (such as human faces, full texts, text keywords, full speech, speech keywords, speech translation, and object recognition).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
@@ -6784,33 +6848,31 @@ func (c *Client) ProcessMedia(request *ProcessMediaRequest) (response *ProcessMe
 }
 
 // ProcessMedia
-// This API is used to initiate a processing task for URL video links or media files in COS. Features include:.
+// This API is used to initiate a processing task for video URLs or media files in Cloud Object Storage (COS). Features include:
 //
-// This API is used to perform video transcoding, including standard transcoding, TSC transcoding, and audio/video enhancement.
+// - Audio/Video transcoding (such as standard transcoding, top speed codec (TSC) transcoding, audio/video enhancement, visible watermark addition, and digital watermark addition).
 //
-// This API is used to generate animated images.
+// - Adaptive bitrate streaming conversion for audios/videos.
 //
-// This API is used to take screenshots at specified time points.
+// - Video-to-GIF conversion.
 //
-// This API is used to take sampled screenshots from videos.
+// - Time point screenshot of videos.
 //
-// This API is used to take sprite screenshots of videos.
+// - Sampled screenshot of videos.
 //
-// This API is used to transcode to adaptive bitrate streaming.
+// - Image sprite of video screenshots.
 //
-// This API is used to perform intelligent content moderation, such as pornography detection and sensitive information detection.
+// - Media quality inspection (such as media format diagnosis, audio/video content detection, and scoring without reference, where audio/video content detection mainly covers jitter, blur, low light, overexposure, screen glitches, noise, mosaic, QR code, and other issues).
 //
-// This API is used to perform intelligent content analysis such as tag, category, cover, frame tag, video splitting, highlight, opening and ending clips, and game tracking.
+// - Smart subtitle (such as subtitle generation and translation).
 //
-// This API is used to perform intelligent content recognition such as human face, full text, text keyword, full speech, speech keyword, speech translation, and object recognition.
+// - Smart erasing (such as watermark removal, subtitle removal, and privacy protection).
 //
-// This API is used to perform media quality inspection, such as media format diagnosis, audio and video content detection (jitter, blur, low light, overexposure, screen glitch, noise, mosaic, QR code, and other issues), and no-reference scoring.
+// - Smart content moderation (such as pornography detection and sensitive information detection).
 //
-// 11. Smart subtitle (such as ASR, hotword, and speech translation).
+// - Smart content analysis (such as tags, classifications, covers, frame tags, video splitting, highlights, opening and ending clips, and marking points for games).
 //
-// 
-//
-// This API is used to perform intelligent erasure (watermark removal, subtitle removal, privacy protection).
+// - Smart content recognition (such as human faces, full texts, text keywords, full speech, speech keywords, speech translation, and object recognition).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"

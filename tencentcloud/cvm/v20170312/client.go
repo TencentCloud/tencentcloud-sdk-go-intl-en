@@ -7413,7 +7413,7 @@ func NewRunInstancesResponse() (response *RunInstancesResponse) {
 //
 // 
 //
-// * After an instance is created successfully, it will start up automatically, and the [instance status](https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#instance_state) will become "Running".
+// * After an instance is created successfully, it will start up automatically, and the [instance status](https://www.tencentcloud.com/document/product/213/15753?has_map=1#instancestatus) will become "Running".
 //
 // * If you create a pay-as-you-go instance billed on an hourly basis, an amount equivalent to the hourly rate will be frozen. Make sure your account balance is sufficient before calling this API.
 //
@@ -7493,6 +7493,7 @@ func NewRunInstancesResponse() (response *RunInstancesResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEOSNAME = "InvalidParameterValue.InvalidImageOsName"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGESTATE = "InvalidParameterValue.InvalidImageState"
+//  INVALIDPARAMETERVALUE_INVALIDINSTANCETYPEPERIODICCONTRACT = "InvalidParameterValue.InvalidInstanceTypePeriodicContract"
 //  INVALIDPARAMETERVALUE_INVALIDIPFORMAT = "InvalidParameterValue.InvalidIpFormat"
 //  INVALIDPARAMETERVALUE_INVALIDNETWORKINTERFACEID = "InvalidParameterValue.InvalidNetworkInterfaceId"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERMINCOUNT = "InvalidParameterValue.InvalidParameterMinCount"
@@ -7597,7 +7598,7 @@ func (c *Client) RunInstances(request *RunInstancesRequest) (response *RunInstan
 //
 // 
 //
-// * After an instance is created successfully, it will start up automatically, and the [instance status](https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#instance_state) will become "Running".
+// * After an instance is created successfully, it will start up automatically, and the [instance status](https://www.tencentcloud.com/document/product/213/15753?has_map=1#instancestatus) will become "Running".
 //
 // * If you create a pay-as-you-go instance billed on an hourly basis, an amount equivalent to the hourly rate will be frozen. Make sure your account balance is sufficient before calling this API.
 //
@@ -7677,6 +7678,7 @@ func (c *Client) RunInstances(request *RunInstancesRequest) (response *RunInstan
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEOSNAME = "InvalidParameterValue.InvalidImageOsName"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGESTATE = "InvalidParameterValue.InvalidImageState"
+//  INVALIDPARAMETERVALUE_INVALIDINSTANCETYPEPERIODICCONTRACT = "InvalidParameterValue.InvalidInstanceTypePeriodicContract"
 //  INVALIDPARAMETERVALUE_INVALIDIPFORMAT = "InvalidParameterValue.InvalidIpFormat"
 //  INVALIDPARAMETERVALUE_INVALIDNETWORKINTERFACEID = "InvalidParameterValue.InvalidNetworkInterfaceId"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERMINCOUNT = "InvalidParameterValue.InvalidParameterMinCount"

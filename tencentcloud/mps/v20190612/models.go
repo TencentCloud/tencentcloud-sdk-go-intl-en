@@ -3576,8 +3576,9 @@ type CreateAdaptiveDynamicStreamingTemplateRequestParams struct {
 	// This value only distinguishes template types. The task uses the values of RemoveAudio and RemoveVideo.
 	PureAudio *uint64 `json:"PureAudio,omitnil,omitempty" name:"PureAudio"`
 
-	// Sharding type. available values: <li>ts-segment: HLS+ts segment</li> <li>ts-byterange: HLS+ts byte range</li> <li>mp4-segment: HLS+mp4 segment</li> <li>mp4-byterange: HLS+mp4 byte range</li> <li>ts-packed-audio: ts+packed audio</li> <li>mp4-packed-audio: mp4+packed audio</li> default value: ts-segment. 
-	// Note: the shard format of the adaptive bitrate stream is based on this field.
+	// Segment type. Valid values: <li>ts-segment: HLS+TS segment</li>; <li>ts-byterange: HLS+TS byte range</li>; <li>mp4-segment: HLS+MP4 segment</li>; <li>mp4-byterange: HLS/DASH+MP4 byte range</li>; <li>ts-packed-audio: TS+Packed Audio</li>; <li>mp4-packed-audio: MP4+Packed Audio</li>. The default value is ts-segment.
+	//  
+	// Note: The segment format for the adaptive bitrate streaming is based on this field. The value of SegmentType can only be mp4-byterange in DASH format.
 	SegmentType *string `json:"SegmentType,omitnil,omitempty" name:"SegmentType"`
 }
 
@@ -3625,8 +3626,9 @@ type CreateAdaptiveDynamicStreamingTemplateRequest struct {
 	// This value only distinguishes template types. The task uses the values of RemoveAudio and RemoveVideo.
 	PureAudio *uint64 `json:"PureAudio,omitnil,omitempty" name:"PureAudio"`
 
-	// Sharding type. available values: <li>ts-segment: HLS+ts segment</li> <li>ts-byterange: HLS+ts byte range</li> <li>mp4-segment: HLS+mp4 segment</li> <li>mp4-byterange: HLS+mp4 byte range</li> <li>ts-packed-audio: ts+packed audio</li> <li>mp4-packed-audio: mp4+packed audio</li> default value: ts-segment. 
-	// Note: the shard format of the adaptive bitrate stream is based on this field.
+	// Segment type. Valid values: <li>ts-segment: HLS+TS segment</li>; <li>ts-byterange: HLS+TS byte range</li>; <li>mp4-segment: HLS+MP4 segment</li>; <li>mp4-byterange: HLS/DASH+MP4 byte range</li>; <li>ts-packed-audio: TS+Packed Audio</li>; <li>mp4-packed-audio: MP4+Packed Audio</li>. The default value is ts-segment.
+	//  
+	// Note: The segment format for the adaptive bitrate streaming is based on this field. The value of SegmentType can only be mp4-byterange in DASH format.
 	SegmentType *string `json:"SegmentType,omitnil,omitempty" name:"SegmentType"`
 }
 
@@ -6904,7 +6906,7 @@ func (r *DeleteWorkflowResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAIAnalysisTemplatesRequestParams struct {
-	// Unique ID filter of video content analysis templates. Array length limit: 10.
+	// Filter condition for the unique identifier of the video content analysis template. The array can contain up to 100 unique identifiers.
 	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
 
 	// Pagination offset. Default value: 0.
@@ -6925,7 +6927,7 @@ type DescribeAIAnalysisTemplatesRequestParams struct {
 type DescribeAIAnalysisTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Unique ID filter of video content analysis templates. Array length limit: 10.
+	// Filter condition for the unique identifier of the video content analysis template. The array can contain up to 100 unique identifiers.
 	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
 
 	// Pagination offset. Default value: 0.
@@ -6996,7 +6998,7 @@ func (r *DescribeAIAnalysisTemplatesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAIRecognitionTemplatesRequestParams struct {
-	// Unique ID filter of video content recognition templates. Array length limit: 10.
+	// Filter condition for the unique identifier of the video content recognition template. The array can contain up to 100 unique identifiers.
 	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
 
 	// Paging offset. Default value: 0.
@@ -7017,7 +7019,7 @@ type DescribeAIRecognitionTemplatesRequestParams struct {
 type DescribeAIRecognitionTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Unique ID filter of video content recognition templates. Array length limit: 10.
+	// Filter condition for the unique identifier of the video content recognition template. The array can contain up to 100 unique identifiers.
 	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
 
 	// Paging offset. Default value: 0.
@@ -9446,6 +9448,142 @@ func (r *DescribeTranscodeTemplatesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeUsageDataRequestParams struct {
+	// Start date. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End date, which should be greater than or equal to the start date. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Queries the MPS task type. The transcoding task is queried by default.
+	// <li>Transcode: transcoding.</li>
+	// <li>Enhance: enhancement.</li>
+	// <li>AIAnalysis: intelligent analysis.</li>
+	// <li>AIRecognition: intelligent recognition.</li>
+	// <li>AIReview: content moderation.</li>
+	// <li>Snapshot: screenshot.</li>
+	// <li>AnimatedGraphics: conversion to GIF.</li>
+	// <li>AiQualityControl: media quality inspection.</li>
+	// <li>Evaluation: video assessment.</li>
+	// <li>ImageProcess: image processing.</li>
+	// <li>AddBlindWatermark: add a basic copyright digital watermark.</li>
+	// <li>AddNagraWatermark: add a NAGRA digital watermark.</li>
+	// <li>ExtractBlindWatermark: extract a basic copyright digital watermark.</li>
+	Types []*string `json:"Types,omitnil,omitempty" name:"Types"`
+
+	// MPS park. ap-guangzhou park is returned by default.
+	// <li>ap-guangzhou: Guangzhou.</li>
+	// <li>ap-hongkong: Hong Kong (China).</li>
+	// <li>ap-taipei: Taipei (China).</li>
+	// <li>ap-singapore: Singapore.</li>
+	// <li>ap-mumbai: India.</li>
+	// <li>ap-jakarta: Jakarta.</li>
+	// <li>ap-seoul: Seoul.</li>
+	// <li>ap-bangkok: Thailand.</li>
+	// <li>ap-tokyo: Japan.</li>
+	// <li>na-siliconvalley: Silicon Valley.</li>
+	// <li>na-ashburn: Virginia.</li>
+	// <li>na-toronto: Toronto.</li>
+	// <li>sa-saopaulo: São Paulo.</li>
+	// <li>eu-frankfurt: Frankfurt.</li>
+	// <li>eu-moscow: Russia.</li>
+	// <li>aws: AWS.</li>
+	ProcessRegions []*string `json:"ProcessRegions,omitnil,omitempty" name:"ProcessRegions"`
+}
+
+type DescribeUsageDataRequest struct {
+	*tchttp.BaseRequest
+	
+	// Start date. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End date, which should be greater than or equal to the start date. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Queries the MPS task type. The transcoding task is queried by default.
+	// <li>Transcode: transcoding.</li>
+	// <li>Enhance: enhancement.</li>
+	// <li>AIAnalysis: intelligent analysis.</li>
+	// <li>AIRecognition: intelligent recognition.</li>
+	// <li>AIReview: content moderation.</li>
+	// <li>Snapshot: screenshot.</li>
+	// <li>AnimatedGraphics: conversion to GIF.</li>
+	// <li>AiQualityControl: media quality inspection.</li>
+	// <li>Evaluation: video assessment.</li>
+	// <li>ImageProcess: image processing.</li>
+	// <li>AddBlindWatermark: add a basic copyright digital watermark.</li>
+	// <li>AddNagraWatermark: add a NAGRA digital watermark.</li>
+	// <li>ExtractBlindWatermark: extract a basic copyright digital watermark.</li>
+	Types []*string `json:"Types,omitnil,omitempty" name:"Types"`
+
+	// MPS park. ap-guangzhou park is returned by default.
+	// <li>ap-guangzhou: Guangzhou.</li>
+	// <li>ap-hongkong: Hong Kong (China).</li>
+	// <li>ap-taipei: Taipei (China).</li>
+	// <li>ap-singapore: Singapore.</li>
+	// <li>ap-mumbai: India.</li>
+	// <li>ap-jakarta: Jakarta.</li>
+	// <li>ap-seoul: Seoul.</li>
+	// <li>ap-bangkok: Thailand.</li>
+	// <li>ap-tokyo: Japan.</li>
+	// <li>na-siliconvalley: Silicon Valley.</li>
+	// <li>na-ashburn: Virginia.</li>
+	// <li>na-toronto: Toronto.</li>
+	// <li>sa-saopaulo: São Paulo.</li>
+	// <li>eu-frankfurt: Frankfurt.</li>
+	// <li>eu-moscow: Russia.</li>
+	// <li>aws: AWS.</li>
+	ProcessRegions []*string `json:"ProcessRegions,omitnil,omitempty" name:"ProcessRegions"`
+}
+
+func (r *DescribeUsageDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUsageDataRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Types")
+	delete(f, "ProcessRegions")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUsageDataRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUsageDataResponseParams struct {
+	// MPS statistical data overview, which displays an overview and detailed data of the queried task.
+	Data []*TaskStatData `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeUsageDataResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeUsageDataResponseParams `json:"Response"`
+}
+
+func (r *DescribeUsageDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUsageDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeWatermarkTemplatesRequestParams struct {
 	// Unique ID filter of watermarking templates. Array length limit: 100.
 	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
@@ -11786,6 +11924,15 @@ type MediaAiAnalysisDescriptionItem struct {
 	// Address of the mind map of a summary task.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	MindMapUrl *string `json:"MindMapUrl,omitnil,omitempty" name:"MindMapUrl"`
+
+	// Path of the mind map of a summary task.
+	MindMapPath *string `json:"MindMapPath,omitnil,omitempty" name:"MindMapPath"`
+
+	// Subtitle file path of the video.
+	SubtitlePath *string `json:"SubtitlePath,omitnil,omitempty" name:"SubtitlePath"`
+
+	// Storage location of the summary file.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 }
 
 type MediaAiAnalysisFrameTagItem struct {
@@ -12726,8 +12873,8 @@ type ModifyAdaptiveDynamicStreamingTemplateRequestParams struct {
 	// This value only distinguishes template types. The task uses the values of RemoveAudio and RemoveVideo.
 	PureAudio *uint64 `json:"PureAudio,omitnil,omitempty" name:"PureAudio"`
 
-	// HLS segment type. Valid values: <li>ts-segment: HLS+TS segment.</li> <li>ts-byterange: HLS+TS byte range.</li> <li>mp4-segment: HLS+MP4 segment.</li> <li>mp4-byterange: HLS+MP4 byte range.</li> <li>ts-packed-audio: TS+Packed audio.</li> <li>mp4-packed-audio: MP4+Packed audio.</li> Default value: ts-segment.
-	// Note: The HLS segment format for adaptive bitrate streaming is based on this field.
+	// Segment type. Valid values: <li>ts-segment: HLS+TS segment</li>; <li>ts-byterange: HLS+TS byte range</li>; <li>mp4-segment: HLS+MP4 segment</li>; <li>mp4-byterange: HLS/DASH+MP4 byte range</li>; <li>ts-packed-audio: TS+Packed Audio</li>; <li>mp4-packed-audio: MP4+Packed Audio</li>. The default value is ts-segment.
+	// Note: The HLS segment format for the adaptive bitrate streaming is based on this field. The value of SegmentType can only be mp4-byterange in DASH format.
 	SegmentType *string `json:"SegmentType,omitnil,omitempty" name:"SegmentType"`
 }
 
@@ -12780,8 +12927,8 @@ type ModifyAdaptiveDynamicStreamingTemplateRequest struct {
 	// This value only distinguishes template types. The task uses the values of RemoveAudio and RemoveVideo.
 	PureAudio *uint64 `json:"PureAudio,omitnil,omitempty" name:"PureAudio"`
 
-	// HLS segment type. Valid values: <li>ts-segment: HLS+TS segment.</li> <li>ts-byterange: HLS+TS byte range.</li> <li>mp4-segment: HLS+MP4 segment.</li> <li>mp4-byterange: HLS+MP4 byte range.</li> <li>ts-packed-audio: TS+Packed audio.</li> <li>mp4-packed-audio: MP4+Packed audio.</li> Default value: ts-segment.
-	// Note: The HLS segment format for adaptive bitrate streaming is based on this field.
+	// Segment type. Valid values: <li>ts-segment: HLS+TS segment</li>; <li>ts-byterange: HLS+TS byte range</li>; <li>mp4-segment: HLS+MP4 segment</li>; <li>mp4-byterange: HLS/DASH+MP4 byte range</li>; <li>ts-packed-audio: TS+Packed Audio</li>; <li>mp4-packed-audio: MP4+Packed Audio</li>. The default value is ts-segment.
+	// Note: The HLS segment format for the adaptive bitrate streaming is based on this field. The value of SegmentType can only be mp4-byterange in DASH format.
 	SegmentType *string `json:"SegmentType,omitnil,omitempty" name:"SegmentType"`
 }
 
@@ -15429,6 +15576,7 @@ type ProcessImageRequestParams struct {
 	OutputPath *string `json:"OutputPath,omitnil,omitempty" name:"OutputPath"`
 
 	// Unique identifier of the image processing template.
+	// The image template feature is in beta testing. If you want to use it, submit a ticket for application.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// Resource ID. Ensure that the corresponding resource is enabled. The default value is the primary resource ID of the account.
@@ -15463,6 +15611,7 @@ type ProcessImageRequest struct {
 	OutputPath *string `json:"OutputPath,omitnil,omitempty" name:"OutputPath"`
 
 	// Unique identifier of the image processing template.
+	// The image template feature is in beta testing. If you want to use it, submit a ticket for application.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// Resource ID. Ensure that the corresponding resource is enabled. The default value is the primary resource ID of the account.
@@ -17655,6 +17804,14 @@ type SnapshotByTimeOffsetTemplate struct {
 	FillType *string `json:"FillType,omitnil,omitempty" name:"FillType"`
 }
 
+type SpecificationDataItem struct {
+	// Task specification.
+	Specification *string `json:"Specification,omitnil,omitempty" name:"Specification"`
+
+	// Statistical data.
+	Data []*TaskStatDataItem `json:"Data,omitnil,omitempty" name:"Data"`
+}
+
 type SpekeDrm struct {
 	// Resource ID. The field content is user-defined.
 	// It supports 1 to 128 characters consisting of digits, letters, underscores (_), and hyphens (-).
@@ -18026,6 +18183,113 @@ type TaskSimpleInfo struct {
 
 	// The subtask type.
 	SubTaskTypes []*string `json:"SubTaskTypes,omitnil,omitempty" name:"SubTaskTypes"`
+}
+
+type TaskStatData struct {
+	// Task type.
+	// <li>Transcode: transcoding.</li>
+	// <li>Enhance: enhancement.</li>
+	// <li>AIAnalysis: intelligent analysis.</li>
+	// <li>AIRecognition: intelligent recognition.</li>
+	// <li>AIReview: content moderation.</li>
+	// <li>Snapshot: screenshot.</li>
+	// <li>AnimatedGraphics: conversion to GIF.</li>
+	// <li>ImageProcess: image processing.</li>
+	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
+
+	// Statistical data overview of the number of tasks.
+	// <li>Transcode: The unit of usage is seconds.</li>
+	// <li>Enhance: The unit of usage is seconds.</li>
+	// <li>AIAnalysis: The unit of usage is seconds.</li>
+	// <li>AIRecognition: The unit of usage is seconds.</li>
+	// <li>AIReview: The unit of usage is seconds.</li>
+	// <li>Snapshot: The unit of usage is images.</li>
+	// <li>AnimatedGraphics: The unit of usage is seconds.</li>
+	// <li>ImageProcess: The unit of usage is images.</li>.
+	Summary []*TaskStatDataItem `json:"Summary,omitnil,omitempty" name:"Summary"`
+
+	// Statistical data details for tasks of various specifications.
+	// 1. Transcoding specification:
+	// <li>Audio: audio-only.</li>
+	// <li>Remuxing: conversion to muxing.</li>
+	// <li>Other transcoding specifications: {TYPE}.{CODEC}.{SPECIFICATION}.</li> Specifically, valid values for TYPE:
+	//     Standard: standard transcoding.
+	//     TESHD-10: TSC transcoding for videos.
+	//     TESHD-20: TSC transcoding for audios.
+	//     TESHD-30: TSC transcoding for audios/videos.
+	//     TESHD-30-SDK: duration-based billing of TSC transcoding SDK for audios/videos.
+	//     TESHD-30-SDKCores: core number-based billing of TSC transcoding SDK for audios/videos.
+	//     Edit: video editing.
+	//   Specifically, valid values for CODEC:
+	//     H264: H. 264 encoding.
+	//     H265: H.265 encoding.
+	//     AV1: AV1 encoding.
+	//     MV-HEVC: MV-HEVC encoding.
+	//   Specifically, valid values for SPECIFICATION:
+	//     SD: standard definition.
+	//     HD: high definition.
+	//     FHD: full HD.
+	//     2K: 2K.
+	//     4K: 4K.
+	// For example, TESHD-10.H265.HD indicates TSC transcoding using the H.265 encoding method.
+	// 2. Enhancement specification: video enhancement format: {TYPE}.{CODEC}.{SPECIFICATION}.{FPS}, where valid values for CODEC and SPECIFICATION follow the transcoding descriptions mentioned above, and FPS is valid only when the atomic enhancement type is used; audio enhancement format: {TYPE}.
+	// Valid values for enhancement TYPE:
+	// <li>Enhance: common enhancement type, which might be any atomic enhancement type.</li>
+	// <li>Atomic enhancement type</li>. Valid values for video atomic enhancement type:
+	//     Sdr2hdr: SDR2HDR.
+	//     SuperResolution: super resolution.
+	//     InsertFrame: frame interpolation.
+	//     ComprehensiveEnhancement: comprehensive enhancement.
+	//     NoiseReduction: video noise reduction.
+	//     ColorEnhancement: color enhancement.
+	//     RemoveScratches: scratch removal.
+	//     Deburr:  artifacts removal.
+	//     DetailEnhancement: detail enhancement.
+	//     LightEnhancement: low-light enhancement.
+	//     FaceEnhancement: face enhancement.
+	//   Valid value for audio atomic enhancement type.
+	//     AudioNoiseReduction
+	//     VolumeBalance
+	//     AudioBeautify
+	//     AudioSeparation
+	// 
+	// 3. Screenshot specification:
+	// <li>ImageSprite: sprite.</li>
+	// <li>SampleSnapshot: sampled screenshot.</li>
+	// <li>SnapshotByTime: time point screenshot.</li>
+	// 4. Image processing specification: {TYPE}.{CODEC}.{SPECIFICATION}.
+	// <li> ImageCompression: image encoding.</li>
+	// <li> ImageSuperResolution: image super resolution.</li>
+	// <li>EnhanceImageColor: image color enhancement.</li>
+	// 5. Intelligent analysis specification:
+	// <li>AIAnalysis: major category for analysis.</li>
+	// <li>VideoTag: video tag.</li>
+	// <li>VideoClassification: video category.</li>
+	// <li>SmartCover: smart cover.</li>
+	// <li>FrameLabel: frame tag.</li>
+	// <li>VideoSplit: video splitting.</li>
+	// <li>Highlights: highlights.</li>
+	// <li>OpeningAndEnding: opening and ending clips.</li>
+	// 6. Intelligent recognition specification:
+	// <li>AIRecognition: major category for recognition without splitting.</li>
+	// <li>FaceRecognition: face recognition.</li>
+	// <li>TextRecognition: optical character recognition.</li>
+	// <li>ObjectRecognition: object recognition.</li>
+	// <li>VoiceRecognition: automatic speech recognition.</li>
+	// <li>VoiceTranslation: speech translation.</li>
+	// 7. There are no segmentation specifications for content moderation and conversion to GIF.
+	Details []*SpecificationDataItem `json:"Details,omitnil,omitempty" name:"Details"`
+}
+
+type TaskStatDataItem struct {
+	// Start time of the time interval where the data resides. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). For example, when the time granularity is day, 2018-12-01T00:00:00+08:00 indicates the interval from December 1, 2018 (inclusive) to December 2, 2018 (exclusive).
+	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
+
+	// Number of tasks.
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
+
+	// Task usage.
+	Usage *int64 `json:"Usage,omitnil,omitempty" name:"Usage"`
 }
 
 type TerrorismConfigureInfo struct {
