@@ -403,6 +403,32 @@ type AggregationCondition struct {
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
+type AnalysisNodeInfo struct {
+	// Node ID.
+	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
+
+	// Node status.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Data loading status.
+	DataStatus *string `json:"DataStatus,omitnil,omitempty" name:"DataStatus"`
+
+	// Number of CPU cores, in cores.
+	Cpu *uint64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
+
+	// Memory size, in MB.
+	Memory *uint64 `json:"Memory,omitnil,omitempty" name:"Memory"`
+
+	// Disk size, in GB.
+	Storage *uint64 `json:"Storage,omitnil,omitempty" name:"Storage"`
+
+	// Node AZ.
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// Data synchronization error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+}
+
 // Predefined struct for user
 type AnalyzeAuditLogsRequestParams struct {
 	// Instance ID
@@ -1390,6 +1416,17 @@ func (r *CloseWanServiceResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *CloseWanServiceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type ClusterInfo struct {
+	// Node ID.
+	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
+
+	// Node type: primary node and secondary node.
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
+
+	// Region.
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 }
 
 type ColumnPrivilege struct {
@@ -5500,13 +5537,13 @@ type DescribeDBInstancesRequestParams struct {
 	// Security group ID. When it is used as a filter, the `WithSecurityGroup` parameter should be set to 1.
 	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
-	// Billing method. Value range: 0 (monthly subscribed), 1 (hourly).
+	// Payment type. Valid values: 0 - yearly/monthly subscription; 1 - bill by hour.
 	PayTypes []*uint64 `json:"PayTypes,omitnil,omitempty" name:"PayTypes"`
 
 	// Instance name.
 	InstanceNames []*string `json:"InstanceNames,omitnil,omitempty" name:"InstanceNames"`
 
-	// Instance task status. Valid values: <br>0 - no task <br>1 - upgrading <br>2 - importing data <br>3 - enabling secondary instance access <br>4 - enabling public network access <br>5 - batch operation in progress <br>6 - rolling back <br>7 - disabling public network access <br>8 - modifying password <br>9 - renaming instance <br>10 - restarting <br>12 - migrating self-built database <br>13 - dropping tables <br>14 - Disaster recovery instance creating sync task <br>15 - waiting for switch <br>16 - switching <br>17 - upgrade and switch completed <br>19 - parameter settings to be executed
+	// Instance task status. Valid values:<br>0 - no task;<br>1 - upgrading;<br>2 - importing data;<br>3 - enabling secondary nodes;<br>4 - enabling public network access;<br>5 - executing batch operations;<br>6 - rolling back;<br>7 - disabling public network access;<br>8 - changing the password;<br>9 - renaming the instance;<br>10 - restarting;<br>12 - migrating self-built databases;<br>13 - deleting databases and tables;<br>14 - synchronizing the creation of disaster recovery instances;<br>15 - pending upgrade switch;<br>16 - under upgrade switch;<br>17 - upgrade switch completed;<br>19 - parameter settings pending execution;<br>34 - in-place upgrade pending execution.
 	TaskStatus []*uint64 `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
 	// Version of the instance database engine. Value range: 5.1, 5.5, 5.6, 5.7.
@@ -5524,13 +5561,14 @@ type DescribeDBInstancesRequestParams struct {
 	// Whether to lock disk write. Valid values: `0`(unlock), `1`(lock). Default value: 0.
 	CdbErrors []*int64 `json:"CdbErrors,omitnil,omitempty" name:"CdbErrors"`
 
-	// Sort by field of the returned result set. Currently, supported values include "InstanceId", "InstanceName", "CreateTime", and "DeadlineTime".
+	// Sorting field of the query results. Valid values: "instanceId", "instanceName", "createTime", and "deadlineTime".
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// Sorting method of the returned result set. Currently, "ASC" or "DESC" is supported.
+	// Sorting method of the returned result set. Valid values: "ASC" - ascending order; "DESC" - descending order. The default value is "DESC".
 	OrderDirection *string `json:"OrderDirection,omitnil,omitempty" name:"OrderDirection"`
 
-	// Whether security group ID is used as a filter
+	// Whether to use the security group ID as the filter condition.
+	// Note: 0 indicates no; 1 indicates yes.
 	WithSecurityGroup *int64 `json:"WithSecurityGroup,omitnil,omitempty" name:"WithSecurityGroup"`
 
 	// Whether dedicated cluster details are included. Value range: 0 (not included), 1 (included)
@@ -5572,7 +5610,8 @@ type DescribeDBInstancesRequestParams struct {
 	// VPC character subnetId
 	UniqSubnetIds []*string `json:"UniqSubnetIds,omitnil,omitempty" name:"UniqSubnetIds"`
 
-	// Tag key value
+	// Tag key value.
+	// Note that tags cannot be queried for instances being created.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Database proxy IP
@@ -5581,8 +5620,11 @@ type DescribeDBInstancesRequestParams struct {
 	// Database proxy ID
 	ProxyIds []*string `json:"ProxyIds,omitnil,omitempty" name:"ProxyIds"`
 
-	// Database engine type
+	// Database engine type. Valid values: InnoDB; RocksDB.
 	EngineTypes []*string `json:"EngineTypes,omitnil,omitempty" name:"EngineTypes"`
+
+	// Whether to obtain the Cluster Edition instance node information. Valid values: true or false. The default value is false.
+	QueryClusterInfo *bool `json:"QueryClusterInfo,omitnil,omitempty" name:"QueryClusterInfo"`
 }
 
 type DescribeDBInstancesRequest struct {
@@ -5609,13 +5651,13 @@ type DescribeDBInstancesRequest struct {
 	// Security group ID. When it is used as a filter, the `WithSecurityGroup` parameter should be set to 1.
 	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
-	// Billing method. Value range: 0 (monthly subscribed), 1 (hourly).
+	// Payment type. Valid values: 0 - yearly/monthly subscription; 1 - bill by hour.
 	PayTypes []*uint64 `json:"PayTypes,omitnil,omitempty" name:"PayTypes"`
 
 	// Instance name.
 	InstanceNames []*string `json:"InstanceNames,omitnil,omitempty" name:"InstanceNames"`
 
-	// Instance task status. Valid values: <br>0 - no task <br>1 - upgrading <br>2 - importing data <br>3 - enabling secondary instance access <br>4 - enabling public network access <br>5 - batch operation in progress <br>6 - rolling back <br>7 - disabling public network access <br>8 - modifying password <br>9 - renaming instance <br>10 - restarting <br>12 - migrating self-built database <br>13 - dropping tables <br>14 - Disaster recovery instance creating sync task <br>15 - waiting for switch <br>16 - switching <br>17 - upgrade and switch completed <br>19 - parameter settings to be executed
+	// Instance task status. Valid values:<br>0 - no task;<br>1 - upgrading;<br>2 - importing data;<br>3 - enabling secondary nodes;<br>4 - enabling public network access;<br>5 - executing batch operations;<br>6 - rolling back;<br>7 - disabling public network access;<br>8 - changing the password;<br>9 - renaming the instance;<br>10 - restarting;<br>12 - migrating self-built databases;<br>13 - deleting databases and tables;<br>14 - synchronizing the creation of disaster recovery instances;<br>15 - pending upgrade switch;<br>16 - under upgrade switch;<br>17 - upgrade switch completed;<br>19 - parameter settings pending execution;<br>34 - in-place upgrade pending execution.
 	TaskStatus []*uint64 `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
 	// Version of the instance database engine. Value range: 5.1, 5.5, 5.6, 5.7.
@@ -5633,13 +5675,14 @@ type DescribeDBInstancesRequest struct {
 	// Whether to lock disk write. Valid values: `0`(unlock), `1`(lock). Default value: 0.
 	CdbErrors []*int64 `json:"CdbErrors,omitnil,omitempty" name:"CdbErrors"`
 
-	// Sort by field of the returned result set. Currently, supported values include "InstanceId", "InstanceName", "CreateTime", and "DeadlineTime".
+	// Sorting field of the query results. Valid values: "instanceId", "instanceName", "createTime", and "deadlineTime".
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// Sorting method of the returned result set. Currently, "ASC" or "DESC" is supported.
+	// Sorting method of the returned result set. Valid values: "ASC" - ascending order; "DESC" - descending order. The default value is "DESC".
 	OrderDirection *string `json:"OrderDirection,omitnil,omitempty" name:"OrderDirection"`
 
-	// Whether security group ID is used as a filter
+	// Whether to use the security group ID as the filter condition.
+	// Note: 0 indicates no; 1 indicates yes.
 	WithSecurityGroup *int64 `json:"WithSecurityGroup,omitnil,omitempty" name:"WithSecurityGroup"`
 
 	// Whether dedicated cluster details are included. Value range: 0 (not included), 1 (included)
@@ -5681,7 +5724,8 @@ type DescribeDBInstancesRequest struct {
 	// VPC character subnetId
 	UniqSubnetIds []*string `json:"UniqSubnetIds,omitnil,omitempty" name:"UniqSubnetIds"`
 
-	// Tag key value
+	// Tag key value.
+	// Note that tags cannot be queried for instances being created.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Database proxy IP
@@ -5690,8 +5734,11 @@ type DescribeDBInstancesRequest struct {
 	// Database proxy ID
 	ProxyIds []*string `json:"ProxyIds,omitnil,omitempty" name:"ProxyIds"`
 
-	// Database engine type
+	// Database engine type. Valid values: InnoDB; RocksDB.
 	EngineTypes []*string `json:"EngineTypes,omitnil,omitempty" name:"EngineTypes"`
+
+	// Whether to obtain the Cluster Edition instance node information. Valid values: true or false. The default value is false.
+	QueryClusterInfo *bool `json:"QueryClusterInfo,omitnil,omitempty" name:"QueryClusterInfo"`
 }
 
 func (r *DescribeDBInstancesRequest) ToJsonString() string {
@@ -5741,6 +5788,7 @@ func (r *DescribeDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "ProxyVips")
 	delete(f, "ProxyIds")
 	delete(f, "EngineTypes")
+	delete(f, "QueryClusterInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstancesRequest has unknown keys!", "")
 	}
@@ -8427,8 +8475,7 @@ type InstanceInfo struct {
 	// Initialization flag. Value range: 0 (not initialized), 1 (initialized)
 	InitFlag *int64 `json:"InitFlag,omitnil,omitempty" name:"InitFlag"`
 
-	// VIP information of a read-only instance. This field is exclusive to read-only instances where read-only access is enabled separately
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Read-only VIP information. This field is available only for read-only instances with dedicated access enabled.
 	RoVipInfo *RoVipInfo `json:"RoVipInfo,omitnil,omitempty" name:"RoVipInfo"`
 
 	// Memory capacity in MB
@@ -8440,8 +8487,7 @@ type InstanceInfo struct {
 	// VPC ID, such as 51102
 	VpcId *int64 `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Information of a secondary server
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Secondary server information.
 	SlaveInfo *SlaveInfo `json:"SlaveInfo,omitnil,omitempty" name:"SlaveInfo"`
 
 	// Instance ID
@@ -8456,8 +8502,7 @@ type InstanceInfo struct {
 	// Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync)
 	ProtectMode *int64 `json:"ProtectMode,omitnil,omitempty" name:"ProtectMode"`
 
-	// Details of a read-only group
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Detailed information about the read-only group.
 	RoGroups []*RoGroup `json:"RoGroups,omitnil,omitempty" name:"RoGroups"`
 
 	// Subnet ID, such as 2333
@@ -8481,8 +8526,7 @@ type InstanceInfo struct {
 	// Instance task status. 0 - no task; 1 - upgrading; 2 - importing data; 3 - activating secondary; 4 - enabling public network access; 5 - batch operation in progress; 6 - rolling back; 7 - disabling public network access; 8 - changing password; 9 - renaming instance; 10 - restarting; 12 - migrating self-built instance; 13 - dropping table; 14 - creating and syncing disaster recovery instance; 15 - pending upgrade and switch; 16 - upgrade and switch in progress; 17 - upgrade and switch completed
 	TaskStatus *int64 `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
-	// Details of a primary instance
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Detailed information about the primary instance.
 	MasterInfo *MasterInfo `json:"MasterInfo,omitnil,omitempty" name:"MasterInfo"`
 
 	// Instance type
@@ -8494,8 +8538,7 @@ type InstanceInfo struct {
 	// Instance name
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Details of a disaster recovery instance
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Detailed information about the disaster recovery instance.
 	DrInfo []*DrInfo `json:"DrInfo,omitnil,omitempty" name:"DrInfo"`
 
 	// Public domain name
@@ -8537,35 +8580,48 @@ type InstanceInfo struct {
 	// AZ name
 	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
-	// Physical machine model
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Physical server model.
 	DeviceClass *string `json:"DeviceClass,omitnil,omitempty" name:"DeviceClass"`
 
-	// Placement group ID
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Placement group ID.
 	DeployGroupId *string `json:"DeployGroupId,omitnil,omitempty" name:"DeployGroupId"`
 
-	// AZ ID
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// AZ ID.
 	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Number of nodes
 	InstanceNodes *int64 `json:"InstanceNodes,omitnil,omitempty" name:"InstanceNodes"`
 
-	// List of tags
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Tag list.
 	TagList []*TagInfoItem `json:"TagList,omitnil,omitempty" name:"TagList"`
 
-	// Engine type
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Engine type.
 	EngineType *string `json:"EngineType,omitnil,omitempty" name:"EngineType"`
 
-	// Maximum delay threshold
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Maximum delay threshold.
 	MaxDelayTime *int64 `json:"MaxDelayTime,omitnil,omitempty" name:"MaxDelayTime"`
 
-	// Instance disk type, which is returned only for the instances of cloud disk edition. Valid values: `CLOUD_SSD` (SSD), `CLOUD_HSSD` (Enhanced SSD).
+	// Instance disk type. Valid values are returned only for Cluster Edition and single-node (cloud disk) instances.
+	// Note:
+	// 1. If "DiskType": "CLOUD_HSSD" is returned, it indicates that the instance disk type is Enhanced SSD.
+	// 2. If "DiskType": "CLOUD_SSD" is returned, it indicates that the instance disk type is Cloud SSD.
+	// 3. If "DiskType": "" is returned and the DeviceType parameter value is UNIVERSAL or EXCLUSIVE, it indicates that the instance uses a local SSD.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
+
+	// Current number of CPU cores for scale-out.
+	ExpandCpu *int64 `json:"ExpandCpu,omitnil,omitempty" name:"ExpandCpu"`
+
+	// Cluster Edition instance node information.
+	ClusterInfo []*ClusterInfo `json:"ClusterInfo,omitnil,omitempty" name:"ClusterInfo"`
+
+	// Analysis engine node list.
+	AnalysisNodeInfos []*AnalysisNodeInfo `json:"AnalysisNodeInfos,omitnil,omitempty" name:"AnalysisNodeInfos"`
+
+	// Device bandwidth, in GB. This parameter is valid when DeviceClass is specified. For example, 25 means the current device bandwidth is 25 GB; 10 means the current device bandwidth is 10 GB.
+	DeviceBandwidth *uint64 `json:"DeviceBandwidth,omitnil,omitempty" name:"DeviceBandwidth"`
+
+	// Instance termination protection status. on indicates enabled; otherwise, the protection is disabled.
+	DestroyProtect *string `json:"DestroyProtect,omitnil,omitempty" name:"DestroyProtect"`
 }
 
 type InstanceRebootTime struct {
@@ -11705,6 +11761,7 @@ type RoGroup struct {
 	RoGroupMode *string `json:"RoGroupMode,omitnil,omitempty" name:"RoGroupMode"`
 
 	// Read-only group ID.
+	// Note: If the data structure is used during instance purchase, this item is required only when the read-only group mode is set to join.
 	RoGroupId *string `json:"RoGroupId,omitnil,omitempty" name:"RoGroupId"`
 
 	// Read-only group name.
@@ -11713,7 +11770,7 @@ type RoGroup struct {
 	// Whether to enable the function of isolating an instance that exceeds the latency threshold. If it is enabled, when the latency between the read-only instance and the primary instance exceeds the latency threshold, the read-only instance will be isolated. Valid values: 1 (enabled), 0 (not enabled)
 	RoOfflineDelay *int64 `json:"RoOfflineDelay,omitnil,omitempty" name:"RoOfflineDelay"`
 
-	// Latency threshold
+	// Delay threshold, in seconds. Value range: 1–10000. The value is an integer.
 	RoMaxDelayTime *int64 `json:"RoMaxDelayTime,omitnil,omitempty" name:"RoMaxDelayTime"`
 
 	// Minimum number of instances to be retained. If the number of the purchased read-only instances is smaller than the set value, they will not be removed.
@@ -11734,24 +11791,19 @@ type RoGroup struct {
 	// Private network port number of read-only group.
 	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
 
-	// VPC ID.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Virtual Private Cloud (VPC) ID.
 	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
 	// Subnet ID.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
-	// Read-only group region.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Region of the read-only group.
 	RoGroupRegion *string `json:"RoGroupRegion,omitnil,omitempty" name:"RoGroupRegion"`
 
-	// Read-only group AZ.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// AZ of the read-only group.
 	RoGroupZone *string `json:"RoGroupZone,omitnil,omitempty" name:"RoGroupZone"`
 
-	// Replication delay.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Replication delay time, in seconds. Value range: 1–259200. The value is an integer.
 	DelayReplicationTime *int64 `json:"DelayReplicationTime,omitnil,omitempty" name:"DelayReplicationTime"`
 }
 
@@ -11806,7 +11858,7 @@ type RoInstanceInfo struct {
 	// RO instance name
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Pay-as-you-go billing status. Value range: 1 (normal), 2 (in arrears)
+	// Pay-as-you-go status. Valid values: 1 - normal; 2 - in arrears.
 	HourFeeStatus *int64 `json:"HourFeeStatus,omitnil,omitempty" name:"HourFeeStatus"`
 
 	// RO instance task status. Value range: <br>0 - no task <br>1 - upgrading <br>2 - importing data <br>3 - activating secondary <br>4 - public network access enabled <br>5 - batch operation in progress <br>6 - rolling back <br>7 - public network access not enabled <br>8 - modifying password <br>9 - renaming instance <br>10 - restarting <br>12 - migrating self-built instance <br>13 - dropping table <br>14 - creating and syncing disaster recovery instance
@@ -11842,8 +11894,11 @@ type RoInstanceInfo struct {
 	// RO instance expiration time in the format of yyyy-mm-dd hh:mm:ss. If it is a pay-as-you-go instance, the value of this field is 0000-00-00 00:00:00
 	DeadlineTime *string `json:"DeadlineTime,omitnil,omitempty" name:"DeadlineTime"`
 
-	// RO instance billing method. Value range: 0 (monthly subscribed), 1 (pay-as-you-go), 2 (monthly postpaid)
+	// Billing type of the RO instance. Valid values: 0 - yearly/monthly subscription; 1 - pay-as-you-go; 2-postpaid by month.
 	PayType *int64 `json:"PayType,omitnil,omitempty" name:"PayType"`
+
+	// RO replication delay status.
+	ReplicationStatus *string `json:"ReplicationStatus,omitnil,omitempty" name:"ReplicationStatus"`
 }
 
 type RoVipInfo struct {
@@ -12006,8 +12061,7 @@ type SlaveInfo struct {
 	// Information of secondary server 1
 	First *SlaveInstanceInfo `json:"First,omitnil,omitempty" name:"First"`
 
-	// Information of secondary server 2
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Second secondary server information.
 	Second *SlaveInstanceInfo `json:"Second,omitnil,omitempty" name:"Second"`
 }
 
@@ -12810,12 +12864,10 @@ type TagInfo struct {
 }
 
 type TagInfoItem struct {
-	// Tag key
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Tag key.
 	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
 
-	// Tag value
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Tag value.
 	TagValue *string `json:"TagValue,omitnil,omitempty" name:"TagValue"`
 }
 
