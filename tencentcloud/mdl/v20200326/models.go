@@ -135,45 +135,45 @@ type AVTemplate struct {
 }
 
 type AbWatermarkDetectionInfo struct {
-
+	// Task ID
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-
+	// Types of testing
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// State
 	State *string `json:"State,omitnil,omitempty" name:"State"`
 
-
+	// Result
 	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
-
+	// Error code
 	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
 
-
+	// Error message
 	ErrorMsg *string `json:"ErrorMsg,omitnil,omitempty" name:"ErrorMsg"`
 
-
+	// Input information
 	InputInfo *AbWatermarkInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
 
-
+	// Task notification configuration
 	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
 
-
+	// Create time
 	CreateTime *int64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-
+	// Update time
 	UpdateTime *int64 `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-
+	// Input file information
 	InputFileInfo *InputFileInfo `json:"InputFileInfo,omitnil,omitempty" name:"InputFileInfo"`
 }
 
 type AbWatermarkInputInfo struct {
-
+	// Input type, optional URL/COS, currently only supports URL
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// URL input information
 	UrlInputInfo *UrlInputInfo `json:"UrlInputInfo,omitnil,omitempty" name:"UrlInputInfo"`
 }
 
@@ -352,6 +352,12 @@ type ChannelAlertInfos struct {
 
 	// Alarm details of pipeline 1 under this channel.
 	Pipeline1 []*ChannelPipelineAlerts `json:"Pipeline1,omitnil,omitempty" name:"Pipeline1"`
+
+	// Pipeline 0 total active alarm count
+	PipelineAActiveAlerts *int64 `json:"PipelineAActiveAlerts,omitnil,omitempty" name:"PipelineAActiveAlerts"`
+
+	// Pipeline 1 total active alarm count
+	PipelineBActiveAlerts *int64 `json:"PipelineBActiveAlerts,omitnil,omitempty" name:"PipelineBActiveAlerts"`
 }
 
 type ChannelInputStatistics struct {
@@ -2870,7 +2876,7 @@ type InputAnalysisInfo struct {
 }
 
 type InputFileInfo struct {
-
+	// Segment duration, in milliseconds, ranging from 1000-10000, must be a multiple of 1000. The input video duration should be between SegmentDuration * 90 and SegmentDuration * 180
 	SegmentDuration *int64 `json:"SegmentDuration,omitnil,omitempty" name:"SegmentDuration"`
 }
 

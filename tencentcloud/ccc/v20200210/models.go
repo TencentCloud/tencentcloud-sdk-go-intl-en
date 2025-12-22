@@ -5016,6 +5016,15 @@ type DescribeTelCdrRequestParams struct {
 	// End timestamp, unix timestamp in seconds. the range between the end time and start time is less than 90 days.
 	EndTimeStamp *int64 `json:"EndTimeStamp,omitnil,omitempty" name:"EndTimeStamp"`
 
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Page size (required), up to 100.
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// <Page number (required), starting from 0.>.
+	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
 	// Instance id (deprecated).
 	//
 	// Deprecated: InstanceId is deprecated.
@@ -5026,15 +5035,6 @@ type DescribeTelCdrRequestParams struct {
 
 	// Offset (deprecated).
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
-
-	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
-	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
-
-	// Page size (required), up to 100.
-	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
-
-	// <Page number (required), starting from 0.>.
-	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
 	// Filter by phone number.
 	Phones []*string `json:"Phones,omitnil,omitempty" name:"Phones"`
@@ -5052,15 +5052,6 @@ type DescribeTelCdrRequest struct {
 	// End timestamp, unix timestamp in seconds. the range between the end time and start time is less than 90 days.
 	EndTimeStamp *int64 `json:"EndTimeStamp,omitnil,omitempty" name:"EndTimeStamp"`
 
-	// Instance id (deprecated).
-	InstanceId *int64 `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
-
-	// Maximum number of returned entries (deprecated).
-	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
-
-	// Offset (deprecated).
-	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
-
 	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
@@ -5069,6 +5060,15 @@ type DescribeTelCdrRequest struct {
 
 	// <Page number (required), starting from 0.>.
 	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
+	// Instance id (deprecated).
+	InstanceId *int64 `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Maximum number of returned entries (deprecated).
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset (deprecated).
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Filter by phone number.
 	Phones []*string `json:"Phones,omitnil,omitempty" name:"Phones"`
@@ -5091,12 +5091,12 @@ func (r *DescribeTelCdrRequest) FromJsonString(s string) error {
 	}
 	delete(f, "StartTimeStamp")
 	delete(f, "EndTimeStamp")
-	delete(f, "InstanceId")
-	delete(f, "Limit")
-	delete(f, "Offset")
 	delete(f, "SdkAppId")
 	delete(f, "PageSize")
 	delete(f, "PageNumber")
+	delete(f, "InstanceId")
+	delete(f, "Limit")
+	delete(f, "Offset")
 	delete(f, "Phones")
 	delete(f, "SessionIds")
 	if len(f) > 0 {
@@ -6953,9 +6953,9 @@ type TelCdrInfo struct {
 	// 
 	// Audio dial-in 503 VoIP user client error.
 	// 
-	// Chinese description (https://www.tencentcloud.com/zh/document/product/1229/71847).
+	// Chinese version please go domestic site (https://cloud.tencent.com/document/product/679/123938).
 	// 
-	// English description (https://www.tencentcloud.com/document/product/1229/71847?lang=en).
+	// English version please go international site (https://www.tencentcloud.com/document/product/1229/71847?lang=en).
 	EndStatus *int64 `json:"EndStatus,omitnil,omitempty" name:"EndStatus"`
 
 	// Skill group name.

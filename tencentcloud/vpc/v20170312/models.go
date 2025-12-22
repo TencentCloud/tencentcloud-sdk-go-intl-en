@@ -251,10 +251,10 @@ type Address struct {
 	// The creation time, which follows the `ISO8601` standard and uses `UTC` time in the format of `YYYY-MM-DDThh:mm:ssZ`.
 	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
 
-	// The ID of the bound ENI
+	// Specifies the bound elastic network interface ID. null means no elastic network interface is bound.
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitnil,omitempty" name:"NetworkInterfaceId"`
 
-	// The private IP of the bound resources
+	// Bound resource internal ip. null means no bound resource internal ip.
 	PrivateAddressIp *string `json:"PrivateAddressIp,omitnil,omitempty" name:"PrivateAddressIp"`
 
 	// The isolation status of the resource. `True` indicates the EIP is isolated. `False` indicates that the resource is not isolated.
@@ -275,10 +275,12 @@ type Address struct {
 	// Type of the protocol used in EIP ALG
 	EipAlgType *AlgType `json:"EipAlgType,omitnil,omitempty" name:"EipAlgType"`
 
-	// The ISP of an EIP/Elastic IP, with possible return values currently including "CMCC", "CTCC", "CUCC" and "BGP"
+	// EIP ISP information. currently may return values including "CMCC" (mobile), "CTCC" (telecom), "CUCC" (china unicom), "BGP" (standard BGP).
 	InternetServiceProvider *string `json:"InternetServiceProvider,omitnil,omitempty" name:"InternetServiceProvider"`
 
-	// Whether the EIP is in a local BGP.
+	// Specifies whether the EIP is a local bandwidth EIP. valid values:.
+	// <li>true: EIP with local bandwidth.</li>.
+	// <li>false: not a local bandwidth EIP.</li>.
 	LocalBgp *bool `json:"LocalBgp,omitnil,omitempty" name:"LocalBgp"`
 
 	// Bandwidth value of EIP. The EIP for the bill-by-CVM account will return `null`.
@@ -299,16 +301,24 @@ type Address struct {
 	// Note: this field may return `null`, indicating that no valid value was found.
 	InternetChargeType *string `json:"InternetChargeType,omitnil,omitempty" name:"InternetChargeType"`
 
-	// List of tags associated with the EIP
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Specifies the Tag list associated with the elastic IP.
 	TagSet []*Tag `json:"TagSet,omitnil,omitempty" name:"TagSet"`
 
-	// The expiration time.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Prepaid monthly subscription bandwidth IP expiration time.
+	// Specifies the time format in YYYY-MM-DDThh:MM:ssZ.
+	// Note: This field may return null, indicating that no valid value was found.
 	DeadlineDate *string `json:"DeadlineDate,omitnil,omitempty" name:"DeadlineDate"`
 
-	// The type of instance bound with the EIP
-	// Note: this field may return `null`, indicating that no valid value was found.
+	// Instance type to which the EIP is bound. valid values:.
+	// <Li>CVM: indicates cloud virtual machine.</li>.
+	// <li>Specifies the NAT gateway.</li>.
+	// <Li>HAVIP: high availability virtual ip.</li>.
+	// <Li>ENI: specifies the elastic network interface.</li>.
+	// <Li>CLB: specifies a private network clb.</li>.
+	// <Li>DHCPIP: elastic private ip address</li>.
+	// 
+	// 
+	// Note: This field may return null, indicating that no valid value was found.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
 	// Static single-line IP network egress
@@ -326,12 +336,10 @@ type Address struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitnil,omitempty" name:"BandwidthPackageId"`
 
-	// Indicates the unique ID of the VPC to which the traditional EIPv6 belongs.
-	// Note: This field may return null, indicating that no valid value was found.
+	// Specifies the unique ID of the vpc to which the traditional elastic IPv6 belongs.
 	UnVpcId *string `json:"UnVpcId,omitnil,omitempty" name:"UnVpcId"`
 
-	// Indicates the unique ID of the CDC.
-	// Note: This field may return 'null', indicating that no valid value was found.
+	// Specifies the unique ID of the CDC.
 	DedicatedClusterId *string `json:"DedicatedClusterId,omitnil,omitempty" name:"DedicatedClusterId"`
 }
 
@@ -473,10 +481,14 @@ func (r *AdjustPublicAddressResponse) FromJsonString(s string) error {
 }
 
 type AlgType struct {
-	// Whether FTP ALG is enabled
+	// Ftp protocol Alg functionality whether enabled, available values:.
+	// <li>true: enable Ftp protocol Alg functionality.</li>.
+	// <li>false: disable Ftp protocol Alg functionality.</li>.
 	Ftp *bool `json:"Ftp,omitnil,omitempty" name:"Ftp"`
 
-	// Whether SIP ALG is enabled
+	// Whether the Sip protocol Alg function is enabled. available values:.
+	// <li>true: enable Sip protocol Alg function.</li>.
+	// <li>false: disable Sip protocol Alg function.</li>.
 	Sip *bool `json:"Sip,omitnil,omitempty" name:"Sip"`
 }
 
@@ -8777,24 +8789,26 @@ func (r *DescribeAddressTemplatesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAddressesRequestParams struct {
-	// The list of unique IDs of EIPs in the format of `eip-11112222`. `AddressIds` and `Filters.address-id` cannot be specified at the same time.
+	// List of unique IDs for identifying Elastic IP (EIP). The EIP unique ID is in the format of `eip-11112222`. You can use the [DescribeAddresses](https://www.tencentcloud.com/document/product/215/16702) API to obtain the AddressId. The parameters `AddressIds` and `Filters.address-id` cannot be specified simultaneously.
 	AddressIds []*string `json:"AddressIds,omitnil,omitempty" name:"AddressIds"`
 
-	// Each request can have up to 10 `Filters` and 100 `Filter.Values`. Detailed filter conditions:
-	// <li> address-id - String - Optional - Filter by unique EIP ID, such as `eip-11112222`.</li>
-	// <li> address-name - String - Optional - Filter by EIP name. Fuzzy filtering is not supported.</li>
-	// <li> address-ip - String - Optional - Filter by EIP address.</li>
-	// <li> address-status - String - Optional - Filter by EIP status. Valid values: `CREATING`, `BINDING`, `BIND`, `UNBINDING`, `UNBIND`, `OFFLINING`, and `BIND_ENI`.</li>
-	// <li> instance-id - String - Optional - Filter by the ID of the instance bound to the EIP, such as `ins-11112222`.</li>
-	// <li> private-ip-address - String - Optional - Filter by the private IP address bound to the EIP.</li>
-	// <li> network-interface-id - String - Optional - Filter by ID of the ENI bound to the EIP, such as `eni-11112222`.</li>
-	// <li> is-arrears - String - Optional - Filter by the fact whether the EIP is overdue (TRUE: the EIP is overdue | FALSE: the billing status of the EIP is normal).</li>
-	// <li> address-type - String - Optional - Filter by IP type. Valid values: `WanIP`, `EIP`, `AnycastEIP`, and `HighQualityEIP`. Default value: `EIP`.</li>
-	// <li> address-isp - String - Optional - Filter by ISP type. Valid values: `BGP`, `CMCC`, `CUCC`, and `CTCC`.</li>
+	// The maximum number of `Filters` per request is 10, and the maximum number of `Filter.Values` per request is 100. The detailed filter conditions are as follows:
+	// <li> address-id - String - Optional - Filter by the unique id of the EIP. the unique id of EIP is in the format of `EIP-11112222`. you can obtain the address-id through the [DescribeAddresses](https://www.tencentcloud.com/document/product/215/16702) API.</li>
+	// <li> address-name - String - Optional - Filter by the EIP name. fuzzy filtering is not supported. available for use through the [DescribeAddresses](https://www.tencentcloud.com/document/product/215/16702) API to obtain the address-name. note: when specifying the address-name parameter, only the first passed in address-name parameter is supported for query execution.</li>
+	// <li> address-ip - String - Optional - Filter by the ip address of the EIP. you can obtain address-ip through the [DescribeAddresses](https://www.tencentcloud.com/document/product/215/16702) API.</li>
+	// <li> address-status - String - Optional - Filter by the EIP status. valid values: `CREATING`, `BINDING`, `BIND`, `UNBINDING`, `UNBIND`, `OFFLINING`, and `BIND_ENI`.</li>
+	// <li> instance-id - String - Optional - Filter by instance id bound to EIP. instance id is in the format of ins-11112222. you can obtain instance-id through the [DescribeAddresses](https://www.tencentcloud.com/document/product/215/16702) API.</li>
+	// <li> private-ip-address - String - Optional - Filter by the private ip bound to the EIP. you can obtain private-ip-address through the [DescribeAddresses](https://www.tencentcloud.com/document/product/215/16702) API. note: when specifying the private-ip-address parameter, only the first passed-in private-ip-address parameter is supported for query execution.</li>
+	// <li>network-interface-id - String - Optional - Filter by the id of the ENI bound to the EIP. the ENI id is in the format such as `eni-11112222`. you can obtain the network-interface-id through the [DescribeAddresses](https://www.tencentcloud.com/document/product/215/16702) API.</li>
+	// <li> is-arrears - String - Optional - Filters by whether the EIP is overdue. (TRUE: EIP is overdue | FALSE: EIP is in normal fee state).</li>
+	// <li>instance-type - String - Optional - Filters by the instance type bound to the EIP. valid values: `CVM`, `NAT`, `ENI`, `CLB`, `HAVIP`, `DHCPIP`, `EKS`, `VPCE`, and `WAF`.
+	// Note: when using only the instance-type filter condition, the system returns by default the list of bound resources for all EIP types (including EIP, AnycastEIP, HighQualityEIP, AntiDDoSEIP, and ResidentialEIP). to query bound resources for a specific EIP type or `WanIP`, specify both the instance-type and address-type parameters to configure.
+	// <li> address-type - String - Optional - Filter by IP type. valid values: `WanIP`, `EIP`, `AnycastEIP`, `HighQualityEIP`, `AntiDDoSEIP`, and `ResidentialEIP`. default value is `EIP`.</li>
+	// <li> address-isp - String - Optional - Filter by ISP type. valid values: `BGP`, `CMCC`, `CUCC`, and `CTCC`.</li>
 	// <li> dedicated-cluster-id - String - Optional - Filter by unique CDC ID, such as `cluster-11112222`.</li>
-	// <li> tag-key - String - Optional - Filter by tag key.</li>
-	// <li> tag-value - String - Optional - Filter by tag value.</li>
-	// <li> tag:tag-key - String - Optional - Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
+	// <li>tag-key - String - Optional - Filter by tag key.</li>
+	// <li>tag-value - String - Optional - Filter by tag value.</li>
+	// <li>tag:tag-key - String - Optional - Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// The Offset. The default value is 0. For more information on Offset, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/api/213/15688).
@@ -8807,24 +8821,26 @@ type DescribeAddressesRequestParams struct {
 type DescribeAddressesRequest struct {
 	*tchttp.BaseRequest
 	
-	// The list of unique IDs of EIPs in the format of `eip-11112222`. `AddressIds` and `Filters.address-id` cannot be specified at the same time.
+	// List of unique IDs for identifying Elastic IP (EIP). The EIP unique ID is in the format of `eip-11112222`. You can use the [DescribeAddresses](https://www.tencentcloud.com/document/product/215/16702) API to obtain the AddressId. The parameters `AddressIds` and `Filters.address-id` cannot be specified simultaneously.
 	AddressIds []*string `json:"AddressIds,omitnil,omitempty" name:"AddressIds"`
 
-	// Each request can have up to 10 `Filters` and 100 `Filter.Values`. Detailed filter conditions:
-	// <li> address-id - String - Optional - Filter by unique EIP ID, such as `eip-11112222`.</li>
-	// <li> address-name - String - Optional - Filter by EIP name. Fuzzy filtering is not supported.</li>
-	// <li> address-ip - String - Optional - Filter by EIP address.</li>
-	// <li> address-status - String - Optional - Filter by EIP status. Valid values: `CREATING`, `BINDING`, `BIND`, `UNBINDING`, `UNBIND`, `OFFLINING`, and `BIND_ENI`.</li>
-	// <li> instance-id - String - Optional - Filter by the ID of the instance bound to the EIP, such as `ins-11112222`.</li>
-	// <li> private-ip-address - String - Optional - Filter by the private IP address bound to the EIP.</li>
-	// <li> network-interface-id - String - Optional - Filter by ID of the ENI bound to the EIP, such as `eni-11112222`.</li>
-	// <li> is-arrears - String - Optional - Filter by the fact whether the EIP is overdue (TRUE: the EIP is overdue | FALSE: the billing status of the EIP is normal).</li>
-	// <li> address-type - String - Optional - Filter by IP type. Valid values: `WanIP`, `EIP`, `AnycastEIP`, and `HighQualityEIP`. Default value: `EIP`.</li>
-	// <li> address-isp - String - Optional - Filter by ISP type. Valid values: `BGP`, `CMCC`, `CUCC`, and `CTCC`.</li>
+	// The maximum number of `Filters` per request is 10, and the maximum number of `Filter.Values` per request is 100. The detailed filter conditions are as follows:
+	// <li> address-id - String - Optional - Filter by the unique id of the EIP. the unique id of EIP is in the format of `EIP-11112222`. you can obtain the address-id through the [DescribeAddresses](https://www.tencentcloud.com/document/product/215/16702) API.</li>
+	// <li> address-name - String - Optional - Filter by the EIP name. fuzzy filtering is not supported. available for use through the [DescribeAddresses](https://www.tencentcloud.com/document/product/215/16702) API to obtain the address-name. note: when specifying the address-name parameter, only the first passed in address-name parameter is supported for query execution.</li>
+	// <li> address-ip - String - Optional - Filter by the ip address of the EIP. you can obtain address-ip through the [DescribeAddresses](https://www.tencentcloud.com/document/product/215/16702) API.</li>
+	// <li> address-status - String - Optional - Filter by the EIP status. valid values: `CREATING`, `BINDING`, `BIND`, `UNBINDING`, `UNBIND`, `OFFLINING`, and `BIND_ENI`.</li>
+	// <li> instance-id - String - Optional - Filter by instance id bound to EIP. instance id is in the format of ins-11112222. you can obtain instance-id through the [DescribeAddresses](https://www.tencentcloud.com/document/product/215/16702) API.</li>
+	// <li> private-ip-address - String - Optional - Filter by the private ip bound to the EIP. you can obtain private-ip-address through the [DescribeAddresses](https://www.tencentcloud.com/document/product/215/16702) API. note: when specifying the private-ip-address parameter, only the first passed-in private-ip-address parameter is supported for query execution.</li>
+	// <li>network-interface-id - String - Optional - Filter by the id of the ENI bound to the EIP. the ENI id is in the format such as `eni-11112222`. you can obtain the network-interface-id through the [DescribeAddresses](https://www.tencentcloud.com/document/product/215/16702) API.</li>
+	// <li> is-arrears - String - Optional - Filters by whether the EIP is overdue. (TRUE: EIP is overdue | FALSE: EIP is in normal fee state).</li>
+	// <li>instance-type - String - Optional - Filters by the instance type bound to the EIP. valid values: `CVM`, `NAT`, `ENI`, `CLB`, `HAVIP`, `DHCPIP`, `EKS`, `VPCE`, and `WAF`.
+	// Note: when using only the instance-type filter condition, the system returns by default the list of bound resources for all EIP types (including EIP, AnycastEIP, HighQualityEIP, AntiDDoSEIP, and ResidentialEIP). to query bound resources for a specific EIP type or `WanIP`, specify both the instance-type and address-type parameters to configure.
+	// <li> address-type - String - Optional - Filter by IP type. valid values: `WanIP`, `EIP`, `AnycastEIP`, `HighQualityEIP`, `AntiDDoSEIP`, and `ResidentialEIP`. default value is `EIP`.</li>
+	// <li> address-isp - String - Optional - Filter by ISP type. valid values: `BGP`, `CMCC`, `CUCC`, and `CTCC`.</li>
 	// <li> dedicated-cluster-id - String - Optional - Filter by unique CDC ID, such as `cluster-11112222`.</li>
-	// <li> tag-key - String - Optional - Filter by tag key.</li>
-	// <li> tag-value - String - Optional - Filter by tag value.</li>
-	// <li> tag:tag-key - String - Optional - Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
+	// <li>tag-key - String - Optional - Filter by tag key.</li>
+	// <li>tag-value - String - Optional - Filter by tag value.</li>
+	// <li>tag:tag-key - String - Optional - Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// The Offset. The default value is 0. For more information on Offset, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/api/213/15688).

@@ -1768,23 +1768,32 @@ type CreateScheduledActionRequestParams struct {
 	// Scheduled task name, which can only contain letters, numbers, underscores, hyphens ("-"), and decimal points with a maximum length of 60 bytes and must be unique in an auto scaling group.
 	ScheduledActionName *string `json:"ScheduledActionName,omitnil,omitempty" name:"ScheduledActionName"`
 
-	// The maximum number of instances set for the auto scaling group when the scheduled task is triggered.
-	MaxSize *uint64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
-
 	// The minimum number of instances set for the auto scaling group when the scheduled task is triggered.
 	MinSize *uint64 `json:"MinSize,omitnil,omitempty" name:"MinSize"`
+
+	// Initial triggered time of the scheduled task. The value is in `Beijing time` (UTC+8) in the format of `YYYY-MM-DDThh:mm:ss+08:00` according to the `ISO8601` standard.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The desired number of instances set for the auto scaling group when the scheduled task is triggered.
 	DesiredCapacity *uint64 `json:"DesiredCapacity,omitnil,omitempty" name:"DesiredCapacity"`
 
-	// Initial triggered time of the scheduled task. The value is in `Beijing time` (UTC+8) in the format of `YYYY-MM-DDThh:mm:ss+08:00` according to the `ISO8601` standard.
-	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+	// The maximum number of instances set for the auto scaling group when the scheduled task is triggered.
+	MaxSize *uint64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
 
 	// End time of the scheduled task. The value is in `Beijing time` (UTC+8) in the format of `YYYY-MM-DDThh:mm:ss+08:00` according to the `ISO8601` standard. <br><br>This parameter and `Recurrence` need to be specified at the same time. After the end time, the scheduled task will no longer take effect.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The repeating mode of a scheduled task follows the standard Cron format. the [Recurrence parameter limits](https://intl.cloud.tencent.com/document/product/377/88119?from_cn_redirect=1) in a scheduled task consist of 5 fields separated by spaces, with the structure: minute, hour, date, month, week. this parameter must be simultaneously specified with `EndTime`.
 	Recurrence *string `json:"Recurrence,omitnil,omitempty" name:"Recurrence"`
+
+	// Disable update DesiredCapacity Indicates the DesiredCapacity is updated normally during scheduled task triggering.
+	// 
+	// Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+	// The following cases assume that DisableUpdateDesiredCapacity is True:
+	// - When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.
+	// - When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.
+	// - When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.
+	DisableUpdateDesiredCapacity *bool `json:"DisableUpdateDesiredCapacity,omitnil,omitempty" name:"DisableUpdateDesiredCapacity"`
 }
 
 type CreateScheduledActionRequest struct {
@@ -1798,23 +1807,32 @@ type CreateScheduledActionRequest struct {
 	// Scheduled task name, which can only contain letters, numbers, underscores, hyphens ("-"), and decimal points with a maximum length of 60 bytes and must be unique in an auto scaling group.
 	ScheduledActionName *string `json:"ScheduledActionName,omitnil,omitempty" name:"ScheduledActionName"`
 
-	// The maximum number of instances set for the auto scaling group when the scheduled task is triggered.
-	MaxSize *uint64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
-
 	// The minimum number of instances set for the auto scaling group when the scheduled task is triggered.
 	MinSize *uint64 `json:"MinSize,omitnil,omitempty" name:"MinSize"`
+
+	// Initial triggered time of the scheduled task. The value is in `Beijing time` (UTC+8) in the format of `YYYY-MM-DDThh:mm:ss+08:00` according to the `ISO8601` standard.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The desired number of instances set for the auto scaling group when the scheduled task is triggered.
 	DesiredCapacity *uint64 `json:"DesiredCapacity,omitnil,omitempty" name:"DesiredCapacity"`
 
-	// Initial triggered time of the scheduled task. The value is in `Beijing time` (UTC+8) in the format of `YYYY-MM-DDThh:mm:ss+08:00` according to the `ISO8601` standard.
-	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+	// The maximum number of instances set for the auto scaling group when the scheduled task is triggered.
+	MaxSize *uint64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
 
 	// End time of the scheduled task. The value is in `Beijing time` (UTC+8) in the format of `YYYY-MM-DDThh:mm:ss+08:00` according to the `ISO8601` standard. <br><br>This parameter and `Recurrence` need to be specified at the same time. After the end time, the scheduled task will no longer take effect.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The repeating mode of a scheduled task follows the standard Cron format. the [Recurrence parameter limits](https://intl.cloud.tencent.com/document/product/377/88119?from_cn_redirect=1) in a scheduled task consist of 5 fields separated by spaces, with the structure: minute, hour, date, month, week. this parameter must be simultaneously specified with `EndTime`.
 	Recurrence *string `json:"Recurrence,omitnil,omitempty" name:"Recurrence"`
+
+	// Disable update DesiredCapacity Indicates the DesiredCapacity is updated normally during scheduled task triggering.
+	// 
+	// Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+	// The following cases assume that DisableUpdateDesiredCapacity is True:
+	// - When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.
+	// - When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.
+	// - When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.
+	DisableUpdateDesiredCapacity *bool `json:"DisableUpdateDesiredCapacity,omitnil,omitempty" name:"DisableUpdateDesiredCapacity"`
 }
 
 func (r *CreateScheduledActionRequest) ToJsonString() string {
@@ -1831,12 +1849,13 @@ func (r *CreateScheduledActionRequest) FromJsonString(s string) error {
 	}
 	delete(f, "AutoScalingGroupId")
 	delete(f, "ScheduledActionName")
-	delete(f, "MaxSize")
 	delete(f, "MinSize")
-	delete(f, "DesiredCapacity")
 	delete(f, "StartTime")
+	delete(f, "DesiredCapacity")
+	delete(f, "MaxSize")
 	delete(f, "EndTime")
 	delete(f, "Recurrence")
+	delete(f, "DisableUpdateDesiredCapacity")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateScheduledActionRequest has unknown keys!", "")
 	}
@@ -5428,6 +5447,15 @@ type ModifyScheduledActionRequestParams struct {
 
 	// The repeating mode of the scheduled task. follows the standard Cron format. the Recurrence parameter limits (https://intl.cloud.tencent.com/document/product/377/88119?from_cn_redirect=1) consist of 5 fields separated by space, with the structure: minute, hr, date, month, week. this parameter must be simultaneously specified with `EndTime`.
 	Recurrence *string `json:"Recurrence,omitnil,omitempty" name:"Recurrence"`
+
+	// Disable update DesiredCapacity Indicates the DesiredCapacity is updated normally during scheduled task triggering.
+	// 
+	// Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+	// The following cases assume that DisableUpdateDesiredCapacity is True:
+	// - When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.
+	// - When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.
+	// - When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.
+	DisableUpdateDesiredCapacity *bool `json:"DisableUpdateDesiredCapacity,omitnil,omitempty" name:"DisableUpdateDesiredCapacity"`
 }
 
 type ModifyScheduledActionRequest struct {
@@ -5456,6 +5484,15 @@ type ModifyScheduledActionRequest struct {
 
 	// The repeating mode of the scheduled task. follows the standard Cron format. the Recurrence parameter limits (https://intl.cloud.tencent.com/document/product/377/88119?from_cn_redirect=1) consist of 5 fields separated by space, with the structure: minute, hr, date, month, week. this parameter must be simultaneously specified with `EndTime`.
 	Recurrence *string `json:"Recurrence,omitnil,omitempty" name:"Recurrence"`
+
+	// Disable update DesiredCapacity Indicates the DesiredCapacity is updated normally during scheduled task triggering.
+	// 
+	// Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+	// The following cases assume that DisableUpdateDesiredCapacity is True:
+	// - When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.
+	// - When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.
+	// - When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.
+	DisableUpdateDesiredCapacity *bool `json:"DisableUpdateDesiredCapacity,omitnil,omitempty" name:"DisableUpdateDesiredCapacity"`
 }
 
 func (r *ModifyScheduledActionRequest) ToJsonString() string {
@@ -5478,6 +5515,7 @@ func (r *ModifyScheduledActionRequest) FromJsonString(s string) error {
 	delete(f, "StartTime")
 	delete(f, "EndTime")
 	delete(f, "Recurrence")
+	delete(f, "DisableUpdateDesiredCapacity")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyScheduledActionRequest has unknown keys!", "")
 	}
@@ -6113,6 +6151,15 @@ type ScheduledAction struct {
 	// <li>CRONTAB: repeated execution.</li>
 	// <li>ONCE: single execution.</li>
 	ScheduledType *string `json:"ScheduledType,omitnil,omitempty" name:"ScheduledType"`
+
+	// Disable update DesiredCapacity Indicates the DesiredCapacity is updated normally during scheduled task triggering.
+	// 
+	// Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+	// The following cases assume that DisableUpdateDesiredCapacity is True:
+	// - When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.
+	// - When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.
+	// - When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.
+	DisableUpdateDesiredCapacity *bool `json:"DisableUpdateDesiredCapacity,omitnil,omitempty" name:"DisableUpdateDesiredCapacity"`
 }
 
 type ServiceSettings struct {
