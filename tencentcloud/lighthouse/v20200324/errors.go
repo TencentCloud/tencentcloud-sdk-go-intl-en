@@ -26,6 +26,9 @@ const (
 	// Operation failed.
 	FAILEDOPERATION = "FailedOperation"
 
+	// The account balance is insufficient.
+	FAILEDOPERATION_BALANCEINSUFFICIENT = "FailedOperation.BalanceInsufficient"
+
 	// Failed to create the image.
 	FAILEDOPERATION_CREATEBLUEPRINTFAILED = "FailedOperation.CreateBlueprintFailed"
 
@@ -40,6 +43,9 @@ const (
 
 	// Failed to delete the key pair.
 	FAILEDOPERATION_DELETEKEYPAIRFAILED = "FailedOperation.DeleteKeyPairFailed"
+
+	// Failed to query the image quota.
+	FAILEDOPERATION_DESCRIBEBLUEPRINTQUOTAFAILED = "FailedOperation.DescribeBlueprintQuotaFailed"
 
 	// Failed to query the image. Try again later.
 	FAILEDOPERATION_DESCRIBEBLUEPRINTSFAILED = "FailedOperation.DescribeBlueprintsFailed"
@@ -74,6 +80,9 @@ const (
 	// Failed to manipulate the firewall rule.
 	FAILEDOPERATION_FIREWALLRULESOPERATIONFAILED = "FailedOperation.FirewallRulesOperationFailed"
 
+	// Failed to perform operations on the image.
+	FAILEDOPERATION_IMAGEOPERATIONFAILED = "FailedOperation.ImageOperationFailed"
+
 	// Failed to import the key pair.
 	FAILEDOPERATION_IMPORTKEYPAIRFAILED = "FailedOperation.ImportKeyPairFailed"
 
@@ -95,6 +104,9 @@ const (
 	// Failed to change the resource attribute. Try again later...
 	FAILEDOPERATION_MODIFYRESOURCESATTRIBUTEFAILED = "FailedOperation.ModifyResourcesAttributeFailed"
 
+	// The upper limit of the purchase quantity is exceeded.
+	FAILEDOPERATION_NUMLIMITERROR = "FailedOperation.NumLimitError"
+
 	// Unable to renew the resource
 	FAILEDOPERATION_RENEWRESOURCESFAILED = "FailedOperation.RenewResourcesFailed"
 
@@ -115,6 +127,9 @@ const (
 
 	// Failed to create the instance
 	FAILEDOPERATION_UNABLETOCREATEINSTANCES = "FailedOperation.UnableToCreateInstances"
+
+	// The current image status does not allow cross-region synchronization.
+	FAILEDOPERATION_UNABLETOSYNCBLUEPRINT = "FailedOperation.UnableToSyncBlueprint"
 
 	// Internal error.
 	INTERNALERROR = "InternalError"
@@ -233,6 +248,9 @@ const (
 	// The client token is too long.
 	INVALIDPARAMETERVALUE_CLIENTTOKENTOOLONG = "InvalidParameterValue.ClientTokenTooLong"
 
+	// The target region is the same as the source region.
+	INVALIDPARAMETERVALUE_DESTINATIONREGIONSAMEASSOURCEREGION = "InvalidParameterValue.DestinationRegionSameAsSourceRegion"
+
 	// The AZ of cloud disk does not match the AZ of instance. 
 	INVALIDPARAMETERVALUE_DISKINSTANCEZONENOTMATCH = "InvalidParameterValue.DiskInstanceZoneNotMatch"
 
@@ -284,6 +302,9 @@ const (
 	// Invalid cloud disk type.
 	INVALIDPARAMETERVALUE_INVALIDDISKTYPE = "InvalidParameterValue.InvalidDiskType"
 
+	// The image ID format is invalid.
+	INVALIDPARAMETERVALUE_INVALIDIMAGEIDMALFORMED = "InvalidParameterValue.InvalidImageIdMalformed"
+
 	// The value of setting whether to use the default key pair for login is incorrect.
 	INVALIDPARAMETERVALUE_INVALIDINSTANCELOGINKEYPAIRPERMITLOGIN = "InvalidParameterValue.InvalidInstanceLoginKeyPairPermitLogin"
 
@@ -332,6 +353,9 @@ const (
 	// It is not allowed to change the OS type.
 	INVALIDPARAMETERVALUE_NOTALLOWTOCHANGEPLATFORMTYPE = "InvalidParameterValue.NotAllowToChangePlatformType"
 
+	// Cross-border image synchronization is not supported.
+	INVALIDPARAMETERVALUE_NOTSUPPORTCROSSBORDERSYNCBLUEPRINT = "InvalidParameterValue.NotSupportCrossBorderSyncBlueprint"
+
 	// Invalid parametric value: it is not within the valid range.
 	INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
 
@@ -361,6 +385,9 @@ const (
 
 	// The length of the parameter value exceeds the upper limit.
 	INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+
+	// The region is not available.
+	INVALIDPARAMETERVALUE_UNAVAILABLEREGION = "InvalidParameterValue.UnavailableRegion"
 
 	// Invalid AZ.
 	INVALIDPARAMETERVALUE_ZONEINVALID = "InvalidParameterValue.ZoneInvalid"
@@ -392,11 +419,17 @@ const (
 	// The snapshot quota is exceeded.
 	LIMITEXCEEDED_SNAPSHOTQUOTALIMITEXCEEDED = "LimitExceeded.SnapshotQuotaLimitExceeded"
 
+	// The image quota limit for the target region is exceeded.
+	LIMITEXCEEDED_SYNCBLUEPRINTQUOTALIMITEXCEEDED = "LimitExceeded.SyncBlueprintQuotaLimitExceeded"
+
 	// Missing parameter.
 	MISSINGPARAMETER = "MissingParameter"
 
 	// `Period` or `CurInstanceDeadline` is required. 
 	MISSINGPARAMETER_MISSINGPARAMETERPERIODCURINSTANCEDEADLINE = "MissingParameter.MissingParameterPeriodCurInstanceDeadline"
+
+	// The image is being operated on. Try again later.
+	OPERATIONDENIED_BLUEPRINTOPERATIONINPROGRESS = "OperationDenied.BlueprintOperationInProgress"
 
 	// This instance does not support upgrading packages.
 	OPERATIONDENIED_BUNDLENOTSUPPORTMODIFY = "OperationDenied.BundleNotSupportModify"
@@ -421,6 +454,12 @@ const (
 
 	// Instances using storage packages do not support snapshot creation.
 	OPERATIONDENIED_OPERATIONDENIEDCREATESNAPSHOTFORSTORAGEBUNDLE = "OperationDenied.OperationDeniedCreateSnapshotForStorageBundle"
+
+	// The image is undergoing sharing property modifications. The operation is not supported.
+	RESOURCEINUSE_BLUEPRINTMODIFYINGSHAREPERMISSION = "ResourceInUse.BlueprintModifyingSharePermission"
+
+	// The image is in use. The operation is not supported.
+	RESOURCEINUSE_IMAGEINUSE = "ResourceInUse.ImageInUse"
 
 	// The key pair is in use.
 	RESOURCEINUSE_KEYPAIRINUSE = "ResourceInUse.KeyPairInUse"
@@ -448,6 +487,9 @@ const (
 
 	// Firewall template not found.
 	RESOURCENOTFOUND_FIREWALLTEMPLATENOTFOUND = "ResourceNotFound.FirewallTemplateNotFound"
+
+	// The image ID does not exist.
+	RESOURCENOTFOUND_IMAGEIDNOTFOUND = "ResourceNotFound.ImageIdNotFound"
 
 	// There are no data disks mounted to the instance.
 	RESOURCENOTFOUND_INSTANCEDATADISKNOTFOUND = "ResourceNotFound.InstanceDataDiskNotFound"
@@ -497,6 +539,9 @@ const (
 	// There is no available configuration in the package.
 	RESOURCESSOLDOUT_ZONESHASNOBUNDLECONFIGS = "ResourcesSoldOut.ZonesHasNoBundleConfigs"
 
+	// Completing identity information is required for cloud resource purchases due to account security upgrades.
+	UNAUTHORIZEDOPERATION_CERTIFICATIONNEEDUPGRADE = "UnauthorizedOperation.CertificationNeedUpgrade"
+
 	// MFA has expired.
 	UNAUTHORIZEDOPERATION_MFAEXPIRED = "UnauthorizedOperation.MFAExpired"
 
@@ -505,6 +550,9 @@ const (
 
 	// No permission.
 	UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+
+	// The payment failed because the account identity verification has not been completed.
+	UNAUTHORIZEDOPERATION_NOTCERTIFICATION = "UnauthorizedOperation.NotCertification"
 
 	// You do not have permission to perform this operation. The token in the request is invalid.
 	UNAUTHORIZEDOPERATION_TOKENINVALID = "UnauthorizedOperation.TokenInvalid"
@@ -515,6 +563,9 @@ const (
 	// Unsupported operation.
 	UNSUPPORTEDOPERATION = "UnsupportedOperation"
 
+	// Failed to obtain role authorization. Grant authorizations to the Lighthouse-related role and try again.
+	UNSUPPORTEDOPERATION_ASSUMEROLEFAILED = "UnsupportedOperation.AssumeRoleFailed"
+
 	// Unable to associate with CCN: there is no instance in this region
 	UNSUPPORTEDOPERATION_ATTACHCCNCONDITIONUNSATISFIED = "UnsupportedOperation.AttachCcnConditionUnsatisfied"
 
@@ -523,6 +574,12 @@ const (
 
 	// The current status of the image does not support this operation.
 	UNSUPPORTEDOPERATION_BLUEPRINTCURSTATEINVALID = "UnsupportedOperation.BlueprintCurStateInvalid"
+
+	// The image has not been shared. The operation is not supported.
+	UNSUPPORTEDOPERATION_BLUEPRINTHASNOTSHARED = "UnsupportedOperation.BlueprintHasNotShared"
+
+	// The last operation on the image is not completed yet.
+	UNSUPPORTEDOPERATION_BLUEPRINTLATESTOPERATIONUNFINISHED = "UnsupportedOperation.BlueprintLatestOperationUnfinished"
 
 	// The image is in use, so this operation is not supported.
 	UNSUPPORTEDOPERATION_BLUEPRINTOCCUPIED = "UnsupportedOperation.BlueprintOccupied"
@@ -550,6 +607,15 @@ const (
 
 	// The specified firewall version number does not match the current version.
 	UNSUPPORTEDOPERATION_FIREWALLVERSIONMISMATCH = "UnsupportedOperation.FirewallVersionMismatch"
+
+	// The image has already been shared. The operation is not supported.
+	UNSUPPORTEDOPERATION_IMAGEALREADYSHARED = "UnsupportedOperation.ImageAlreadyShared"
+
+	// The image is currently in use by other operations. The operation is not supported. Try again later.
+	UNSUPPORTEDOPERATION_IMAGEOCCUPIED = "UnsupportedOperation.ImageOccupied"
+
+	// Image sharing is not supported.
+	UNSUPPORTEDOPERATION_IMAGEUNABLETOSHARE = "UnsupportedOperation.ImageUnableToShare"
 
 	// Unsupported operation: the instance has expired.
 	UNSUPPORTEDOPERATION_INSTANCEEXPIRED = "UnsupportedOperation.InstanceExpired"

@@ -407,6 +407,86 @@ func (c *Client) AttachDisksWithContext(ctx context.Context, request *AttachDisk
     return
 }
 
+func NewCancelShareBlueprintAcrossAccountsRequest() (request *CancelShareBlueprintAcrossAccountsRequest) {
+    request = &CancelShareBlueprintAcrossAccountsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lighthouse", APIVersion, "CancelShareBlueprintAcrossAccounts")
+    
+    
+    return
+}
+
+func NewCancelShareBlueprintAcrossAccountsResponse() (response *CancelShareBlueprintAcrossAccountsResponse) {
+    response = &CancelShareBlueprintAcrossAccountsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CancelShareBlueprintAcrossAccounts
+// This API is used to cancel image sharing across accounts.
+//
+// An image to be canceled sharing must be a custom image that is originally shared from another account to your account.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_BLUEPRINTIDMALFORMED = "InvalidParameterValue.BlueprintIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTID = "InvalidParameterValue.InvalidBlueprintId"
+//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTSTATE = "InvalidParameterValue.InvalidBlueprintState"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  OPERATIONDENIED_BLUEPRINTOPERATIONINPROGRESS = "OperationDenied.BlueprintOperationInProgress"
+//  RESOURCEINUSE_BLUEPRINTMODIFYINGSHAREPERMISSION = "ResourceInUse.BlueprintModifyingSharePermission"
+//  RESOURCENOTFOUND_BLUEPRINTIDNOTFOUND = "ResourceNotFound.BlueprintIdNotFound"
+//  RESOURCENOTFOUND_BLUEPRINTNOTFOUND = "ResourceNotFound.BlueprintNotFound"
+//  RESOURCENOTFOUND_PRIVATEBLUEPRINTNOTFOUND = "ResourceNotFound.PrivateBlueprintNotFound"
+//  UNAUTHORIZEDOPERATION_TOKENINVALID = "UnauthorizedOperation.TokenInvalid"
+//  UNSUPPORTEDOPERATION_BLUEPRINTCURSTATEINVALID = "UnsupportedOperation.BlueprintCurStateInvalid"
+//  UNSUPPORTEDOPERATION_BLUEPRINTHASNOTSHARED = "UnsupportedOperation.BlueprintHasNotShared"
+//  UNSUPPORTEDOPERATION_BLUEPRINTLATESTOPERATIONUNFINISHED = "UnsupportedOperation.BlueprintLatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_BLUEPRINTOCCUPIED = "UnsupportedOperation.BlueprintOccupied"
+func (c *Client) CancelShareBlueprintAcrossAccounts(request *CancelShareBlueprintAcrossAccountsRequest) (response *CancelShareBlueprintAcrossAccountsResponse, err error) {
+    return c.CancelShareBlueprintAcrossAccountsWithContext(context.Background(), request)
+}
+
+// CancelShareBlueprintAcrossAccounts
+// This API is used to cancel image sharing across accounts.
+//
+// An image to be canceled sharing must be a custom image that is originally shared from another account to your account.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_BLUEPRINTIDMALFORMED = "InvalidParameterValue.BlueprintIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTID = "InvalidParameterValue.InvalidBlueprintId"
+//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTSTATE = "InvalidParameterValue.InvalidBlueprintState"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  OPERATIONDENIED_BLUEPRINTOPERATIONINPROGRESS = "OperationDenied.BlueprintOperationInProgress"
+//  RESOURCEINUSE_BLUEPRINTMODIFYINGSHAREPERMISSION = "ResourceInUse.BlueprintModifyingSharePermission"
+//  RESOURCENOTFOUND_BLUEPRINTIDNOTFOUND = "ResourceNotFound.BlueprintIdNotFound"
+//  RESOURCENOTFOUND_BLUEPRINTNOTFOUND = "ResourceNotFound.BlueprintNotFound"
+//  RESOURCENOTFOUND_PRIVATEBLUEPRINTNOTFOUND = "ResourceNotFound.PrivateBlueprintNotFound"
+//  UNAUTHORIZEDOPERATION_TOKENINVALID = "UnauthorizedOperation.TokenInvalid"
+//  UNSUPPORTEDOPERATION_BLUEPRINTCURSTATEINVALID = "UnsupportedOperation.BlueprintCurStateInvalid"
+//  UNSUPPORTEDOPERATION_BLUEPRINTHASNOTSHARED = "UnsupportedOperation.BlueprintHasNotShared"
+//  UNSUPPORTEDOPERATION_BLUEPRINTLATESTOPERATIONUNFINISHED = "UnsupportedOperation.BlueprintLatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_BLUEPRINTOCCUPIED = "UnsupportedOperation.BlueprintOccupied"
+func (c *Client) CancelShareBlueprintAcrossAccountsWithContext(ctx context.Context, request *CancelShareBlueprintAcrossAccountsRequest) (response *CancelShareBlueprintAcrossAccountsResponse, err error) {
+    if request == nil {
+        request = NewCancelShareBlueprintAcrossAccountsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "CancelShareBlueprintAcrossAccounts")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CancelShareBlueprintAcrossAccounts require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCancelShareBlueprintAcrossAccountsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateBlueprintRequest() (request *CreateBlueprintRequest) {
     request = &CreateBlueprintRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4549,6 +4629,106 @@ func (c *Client) ModifyFirewallRulesWithContext(ctx context.Context, request *Mo
     return
 }
 
+func NewModifyImageSharePermissionRequest() (request *ModifyImageSharePermissionRequest) {
+    request = &ModifyImageSharePermissionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lighthouse", APIVersion, "ModifyImageSharePermission")
+    
+    
+    return
+}
+
+func NewModifyImageSharePermissionResponse() (response *ModifyImageSharePermissionResponse) {
+    response = &ModifyImageSharePermissionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyImageSharePermission
+// This API is used to share and cancel sharing of CVM custom images to the Lighthouse service.
+//
+// Sharing CVM images to Lighthouse requires the following conditions to be met:
+//
+// 1. Images that have been shared cannot be shared again.
+//
+// 2. Images imported from external sources are not supported for sharing.
+//
+// 3. Full-instance images are not supported for sharing.
+//
+// 4. Images need to support CloudInit to be eligible for sharing.
+//
+// 5. The Platform and OsName of the images must meet the sharing conditions before the images are eligible for sharing.
+//
+// 6. Only images in the NORMAL status are supported for sharing.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_IMAGEOPERATIONFAILED = "FailedOperation.ImageOperationFailed"
+//  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
+//  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
+//  INVALIDPARAMETERVALUE_INVALIDIMAGEIDMALFORMED = "InvalidParameterValue.InvalidImageIdMalformed"
+//  RESOURCEINUSE_IMAGEINUSE = "ResourceInUse.ImageInUse"
+//  RESOURCENOTFOUND_IMAGEIDNOTFOUND = "ResourceNotFound.ImageIdNotFound"
+//  RESOURCENOTFOUND_ROLENOTFOUND = "ResourceNotFound.RoleNotFound"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNSUPPORTEDOPERATION_ASSUMEROLEFAILED = "UnsupportedOperation.AssumeRoleFailed"
+//  UNSUPPORTEDOPERATION_IMAGEALREADYSHARED = "UnsupportedOperation.ImageAlreadyShared"
+//  UNSUPPORTEDOPERATION_IMAGEOCCUPIED = "UnsupportedOperation.ImageOccupied"
+//  UNSUPPORTEDOPERATION_IMAGEUNABLETOSHARE = "UnsupportedOperation.ImageUnableToShare"
+func (c *Client) ModifyImageSharePermission(request *ModifyImageSharePermissionRequest) (response *ModifyImageSharePermissionResponse, err error) {
+    return c.ModifyImageSharePermissionWithContext(context.Background(), request)
+}
+
+// ModifyImageSharePermission
+// This API is used to share and cancel sharing of CVM custom images to the Lighthouse service.
+//
+// Sharing CVM images to Lighthouse requires the following conditions to be met:
+//
+// 1. Images that have been shared cannot be shared again.
+//
+// 2. Images imported from external sources are not supported for sharing.
+//
+// 3. Full-instance images are not supported for sharing.
+//
+// 4. Images need to support CloudInit to be eligible for sharing.
+//
+// 5. The Platform and OsName of the images must meet the sharing conditions before the images are eligible for sharing.
+//
+// 6. Only images in the NORMAL status are supported for sharing.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_IMAGEOPERATIONFAILED = "FailedOperation.ImageOperationFailed"
+//  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
+//  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
+//  INVALIDPARAMETERVALUE_INVALIDIMAGEIDMALFORMED = "InvalidParameterValue.InvalidImageIdMalformed"
+//  RESOURCEINUSE_IMAGEINUSE = "ResourceInUse.ImageInUse"
+//  RESOURCENOTFOUND_IMAGEIDNOTFOUND = "ResourceNotFound.ImageIdNotFound"
+//  RESOURCENOTFOUND_ROLENOTFOUND = "ResourceNotFound.RoleNotFound"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNSUPPORTEDOPERATION_ASSUMEROLEFAILED = "UnsupportedOperation.AssumeRoleFailed"
+//  UNSUPPORTEDOPERATION_IMAGEALREADYSHARED = "UnsupportedOperation.ImageAlreadyShared"
+//  UNSUPPORTEDOPERATION_IMAGEOCCUPIED = "UnsupportedOperation.ImageOccupied"
+//  UNSUPPORTEDOPERATION_IMAGEUNABLETOSHARE = "UnsupportedOperation.ImageUnableToShare"
+func (c *Client) ModifyImageSharePermissionWithContext(ctx context.Context, request *ModifyImageSharePermissionRequest) (response *ModifyImageSharePermissionResponse, err error) {
+    if request == nil {
+        request = NewModifyImageSharePermissionRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "ModifyImageSharePermission")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyImageSharePermission require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyImageSharePermissionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyInstancesAttributeRequest() (request *ModifyInstancesAttributeRequest) {
     request = &ModifyInstancesAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5721,6 +5901,120 @@ func (c *Client) StopInstancesWithContext(ctx context.Context, request *StopInst
     request.SetContext(ctx)
     
     response = NewStopInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSyncBlueprintRequest() (request *SyncBlueprintRequest) {
+    request = &SyncBlueprintRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lighthouse", APIVersion, "SyncBlueprint")
+    
+    
+    return
+}
+
+func NewSyncBlueprintResponse() (response *SyncBlueprintResponse) {
+    response = &SyncBlueprintResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SyncBlueprint
+// This API is used to synchronize a custom image to other regions.
+//
+// 
+//
+// * Synchronization to multiple regions is supported. Up to 10 regions are supported.
+//
+// * Synchronization to the source region is not supported.
+//
+// * Only images in the NORMAL status are supported for synchronization.
+//
+// * Synchronization between Chinese mainland regions and regions outside the Chinese mainland is not supported.
+//
+//  * You can use the [DescribeBlueprints](https://www.tencentcloud.comom/document/api/1207/47689?from_cn_redirect=1) API to query the image status. When the status is NORMAL, it indicates that the source region synchronization ends.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_BALANCEINSUFFICIENT = "FailedOperation.BalanceInsufficient"
+//  FAILEDOPERATION_DESCRIBEBLUEPRINTQUOTAFAILED = "FailedOperation.DescribeBlueprintQuotaFailed"
+//  FAILEDOPERATION_NUMLIMITERROR = "FailedOperation.NumLimitError"
+//  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
+//  FAILEDOPERATION_UNABLETOSYNCBLUEPRINT = "FailedOperation.UnableToSyncBlueprint"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_BLUEPRINTIDMALFORMED = "InvalidParameterValue.BlueprintIdMalformed"
+//  INVALIDPARAMETERVALUE_DESTINATIONREGIONSAMEASSOURCEREGION = "InvalidParameterValue.DestinationRegionSameAsSourceRegion"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_NOTSUPPORTCROSSBORDERSYNCBLUEPRINT = "InvalidParameterValue.NotSupportCrossBorderSyncBlueprint"
+//  INVALIDPARAMETERVALUE_UNAVAILABLEREGION = "InvalidParameterValue.UnavailableRegion"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_SYNCBLUEPRINTQUOTALIMITEXCEEDED = "LimitExceeded.SyncBlueprintQuotaLimitExceeded"
+//  OPERATIONDENIED_BLUEPRINTOPERATIONINPROGRESS = "OperationDenied.BlueprintOperationInProgress"
+//  RESOURCENOTFOUND_PRIVATEBLUEPRINTNOTFOUND = "ResourceNotFound.PrivateBlueprintNotFound"
+//  UNAUTHORIZEDOPERATION_CERTIFICATIONNEEDUPGRADE = "UnauthorizedOperation.CertificationNeedUpgrade"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_NOTCERTIFICATION = "UnauthorizedOperation.NotCertification"
+//  UNSUPPORTEDOPERATION_BLUEPRINTCURSTATEINVALID = "UnsupportedOperation.BlueprintCurStateInvalid"
+//  UNSUPPORTEDOPERATION_BLUEPRINTLATESTOPERATIONUNFINISHED = "UnsupportedOperation.BlueprintLatestOperationUnfinished"
+func (c *Client) SyncBlueprint(request *SyncBlueprintRequest) (response *SyncBlueprintResponse, err error) {
+    return c.SyncBlueprintWithContext(context.Background(), request)
+}
+
+// SyncBlueprint
+// This API is used to synchronize a custom image to other regions.
+//
+// 
+//
+// * Synchronization to multiple regions is supported. Up to 10 regions are supported.
+//
+// * Synchronization to the source region is not supported.
+//
+// * Only images in the NORMAL status are supported for synchronization.
+//
+// * Synchronization between Chinese mainland regions and regions outside the Chinese mainland is not supported.
+//
+//  * You can use the [DescribeBlueprints](https://www.tencentcloud.comom/document/api/1207/47689?from_cn_redirect=1) API to query the image status. When the status is NORMAL, it indicates that the source region synchronization ends.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_BALANCEINSUFFICIENT = "FailedOperation.BalanceInsufficient"
+//  FAILEDOPERATION_DESCRIBEBLUEPRINTQUOTAFAILED = "FailedOperation.DescribeBlueprintQuotaFailed"
+//  FAILEDOPERATION_NUMLIMITERROR = "FailedOperation.NumLimitError"
+//  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
+//  FAILEDOPERATION_UNABLETOSYNCBLUEPRINT = "FailedOperation.UnableToSyncBlueprint"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_BLUEPRINTIDMALFORMED = "InvalidParameterValue.BlueprintIdMalformed"
+//  INVALIDPARAMETERVALUE_DESTINATIONREGIONSAMEASSOURCEREGION = "InvalidParameterValue.DestinationRegionSameAsSourceRegion"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_NOTSUPPORTCROSSBORDERSYNCBLUEPRINT = "InvalidParameterValue.NotSupportCrossBorderSyncBlueprint"
+//  INVALIDPARAMETERVALUE_UNAVAILABLEREGION = "InvalidParameterValue.UnavailableRegion"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_SYNCBLUEPRINTQUOTALIMITEXCEEDED = "LimitExceeded.SyncBlueprintQuotaLimitExceeded"
+//  OPERATIONDENIED_BLUEPRINTOPERATIONINPROGRESS = "OperationDenied.BlueprintOperationInProgress"
+//  RESOURCENOTFOUND_PRIVATEBLUEPRINTNOTFOUND = "ResourceNotFound.PrivateBlueprintNotFound"
+//  UNAUTHORIZEDOPERATION_CERTIFICATIONNEEDUPGRADE = "UnauthorizedOperation.CertificationNeedUpgrade"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_NOTCERTIFICATION = "UnauthorizedOperation.NotCertification"
+//  UNSUPPORTEDOPERATION_BLUEPRINTCURSTATEINVALID = "UnsupportedOperation.BlueprintCurStateInvalid"
+//  UNSUPPORTEDOPERATION_BLUEPRINTLATESTOPERATIONUNFINISHED = "UnsupportedOperation.BlueprintLatestOperationUnfinished"
+func (c *Client) SyncBlueprintWithContext(ctx context.Context, request *SyncBlueprintRequest) (response *SyncBlueprintResponse, err error) {
+    if request == nil {
+        request = NewSyncBlueprintRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "SyncBlueprint")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SyncBlueprint require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSyncBlueprintResponse()
     err = c.Send(request, response)
     return
 }
