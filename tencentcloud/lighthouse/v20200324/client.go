@@ -2283,6 +2283,80 @@ func (c *Client) DescribeGeneralResourceQuotasWithContext(ctx context.Context, r
     return
 }
 
+func NewDescribeImagesToShareRequest() (request *DescribeImagesToShareRequest) {
+    request = &DescribeImagesToShareRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeImagesToShare")
+    
+    
+    return
+}
+
+func NewDescribeImagesToShareResponse() (response *DescribeImagesToShareResponse) {
+    response = &DescribeImagesToShareResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeImagesToShare
+// This API is used to query the list of Cloud Virtual Machine (CVM) custom images and share the images to Tencent Cloud Lighthouse (Lighthouse).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DESCRIBEIMAGESFAILED = "FailedOperation.DescribeImagesFailed"
+//  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
+//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INVALIDIMAGEIDMALFORMED = "InvalidParameterValue.InvalidImageIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND_ROLENOTFOUND = "ResourceNotFound.RoleNotFound"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNSUPPORTEDOPERATION_ASSUMEROLEFAILED = "UnsupportedOperation.AssumeRoleFailed"
+func (c *Client) DescribeImagesToShare(request *DescribeImagesToShareRequest) (response *DescribeImagesToShareResponse, err error) {
+    return c.DescribeImagesToShareWithContext(context.Background(), request)
+}
+
+// DescribeImagesToShare
+// This API is used to query the list of Cloud Virtual Machine (CVM) custom images and share the images to Tencent Cloud Lighthouse (Lighthouse).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DESCRIBEIMAGESFAILED = "FailedOperation.DescribeImagesFailed"
+//  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
+//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INVALIDIMAGEIDMALFORMED = "InvalidParameterValue.InvalidImageIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND_ROLENOTFOUND = "ResourceNotFound.RoleNotFound"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNSUPPORTEDOPERATION_ASSUMEROLEFAILED = "UnsupportedOperation.AssumeRoleFailed"
+func (c *Client) DescribeImagesToShareWithContext(ctx context.Context, request *DescribeImagesToShareRequest) (response *DescribeImagesToShareResponse, err error) {
+    if request == nil {
+        request = NewDescribeImagesToShareRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "DescribeImagesToShare")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImagesToShare require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeImagesToShareResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstanceLoginKeyPairAttributeRequest() (request *DescribeInstanceLoginKeyPairAttributeRequest) {
     request = &DescribeInstanceLoginKeyPairAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5711,6 +5785,178 @@ func (c *Client) ResetInstancesPasswordWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewResetInstancesPasswordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewResizeDisksRequest() (request *ResizeDisksRequest) {
+    request = &ResizeDisksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lighthouse", APIVersion, "ResizeDisks")
+    
+    
+    return
+}
+
+func NewResizeDisksResponse() (response *ResizeDisksResponse) {
+    response = &ResizeDisksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ResizeDisks
+// This API is used to scale out a cloud disk. The operation currently only supports cloud disks of the data disk type that are in the ATTACHED or UNATTACHED status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
+//  FAILEDOPERATION_RESIZEDISKSFAILED = "FailedOperation.ResizeDisksFailed"
+//  INVALIDPARAMETERVALUE_DISKSIZESMALLERTHANCURRENTDISKSIZE = "InvalidParameterValue.DiskSizeSmallerThanCurrentDiskSize"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDDISKSIZE = "InvalidParameterValue.InvalidDiskSize"
+//  INVALIDPARAMETERVALUE_INVALIDDISKTYPE = "InvalidParameterValue.InvalidDiskType"
+//  OPERATIONDENIED_DISKUSAGENOTSUPPORTOPERATION = "OperationDenied.DiskUsageNotSupportOperation"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+//  RESOURCENOTFOUND_DISKNOTEXISTS = "ResourceNotFound.DiskNotExists"
+//  RESOURCENOTFOUND_DISKNOTFOUND = "ResourceNotFound.DiskNotFound"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNSUPPORTEDOPERATION_DISKLATESTOPERATIONUNFINISHED = "UnsupportedOperation.DiskLatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_SAMEWITHOLDCONFIG = "UnsupportedOperation.SameWithOldConfig"
+func (c *Client) ResizeDisks(request *ResizeDisksRequest) (response *ResizeDisksResponse, err error) {
+    return c.ResizeDisksWithContext(context.Background(), request)
+}
+
+// ResizeDisks
+// This API is used to scale out a cloud disk. The operation currently only supports cloud disks of the data disk type that are in the ATTACHED or UNATTACHED status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
+//  FAILEDOPERATION_RESIZEDISKSFAILED = "FailedOperation.ResizeDisksFailed"
+//  INVALIDPARAMETERVALUE_DISKSIZESMALLERTHANCURRENTDISKSIZE = "InvalidParameterValue.DiskSizeSmallerThanCurrentDiskSize"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDDISKSIZE = "InvalidParameterValue.InvalidDiskSize"
+//  INVALIDPARAMETERVALUE_INVALIDDISKTYPE = "InvalidParameterValue.InvalidDiskType"
+//  OPERATIONDENIED_DISKUSAGENOTSUPPORTOPERATION = "OperationDenied.DiskUsageNotSupportOperation"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+//  RESOURCENOTFOUND_DISKNOTEXISTS = "ResourceNotFound.DiskNotExists"
+//  RESOURCENOTFOUND_DISKNOTFOUND = "ResourceNotFound.DiskNotFound"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNSUPPORTEDOPERATION_DISKLATESTOPERATIONUNFINISHED = "UnsupportedOperation.DiskLatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_SAMEWITHOLDCONFIG = "UnsupportedOperation.SameWithOldConfig"
+func (c *Client) ResizeDisksWithContext(ctx context.Context, request *ResizeDisksRequest) (response *ResizeDisksResponse, err error) {
+    if request == nil {
+        request = NewResizeDisksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "ResizeDisks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ResizeDisks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewResizeDisksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewShareBlueprintAcrossAccountsRequest() (request *ShareBlueprintAcrossAccountsRequest) {
+    request = &ShareBlueprintAcrossAccountsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lighthouse", APIVersion, "ShareBlueprintAcrossAccounts")
+    
+    
+    return
+}
+
+func NewShareBlueprintAcrossAccountsResponse() (response *ShareBlueprintAcrossAccountsResponse) {
+    response = &ShareBlueprintAcrossAccountsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ShareBlueprintAcrossAccounts
+// This API is used to share an image across accounts.
+//
+// This API is used to share custom images only, and the status of the shared image must be NORMAL.
+//
+// The account receiving the shared image must be a root account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SHAREBLUEPRINTACROSSACCOUNTFAILED = "FailedOperation.ShareBlueprintAcrossAccountFailed"
+//  INVALIDPARAMETERVALUE_ACCOUNTIDINVALIDACCOUNTAREA = "InvalidParameterValue.AccountIdInvalidAccountArea"
+//  INVALIDPARAMETERVALUE_ACCOUNTIDSAMEWITHUIN = "InvalidParameterValue.AccountIdSameWithUin"
+//  INVALIDPARAMETERVALUE_ACCOUNTIDSNOTEXIST = "InvalidParameterValue.AccountIdsNotExist"
+//  INVALIDPARAMETERVALUE_ACCOUNTIDSNOTOWNERACCOUNT = "InvalidParameterValue.AccountIdsNotOwnerAccount"
+//  INVALIDPARAMETERVALUE_BLUEPRINTIDMALFORMED = "InvalidParameterValue.BlueprintIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTID = "InvalidParameterValue.InvalidBlueprintId"
+//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTSTATE = "InvalidParameterValue.InvalidBlueprintState"
+//  LIMITEXCEEDED_SHAREBLUEPRINTACROSSACCOUNTQUOTALIMITEXCEEDED = "LimitExceeded.ShareBlueprintAcrossAccountQuotaLimitExceeded"
+//  OPERATIONDENIED_BLUEPRINTOPERATIONINPROGRESS = "OperationDenied.BlueprintOperationInProgress"
+//  RESOURCEINUSE_BLUEPRINTMODIFYINGSHAREPERMISSION = "ResourceInUse.BlueprintModifyingSharePermission"
+//  RESOURCENOTFOUND_BLUEPRINTIDNOTFOUND = "ResourceNotFound.BlueprintIdNotFound"
+//  RESOURCENOTFOUND_PRIVATEBLUEPRINTNOTFOUND = "ResourceNotFound.PrivateBlueprintNotFound"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_TOKENINVALID = "UnauthorizedOperation.TokenInvalid"
+//  UNSUPPORTEDOPERATION_BLUEPRINTALREADYSHARED = "UnsupportedOperation.BlueprintAlreadyShared"
+//  UNSUPPORTEDOPERATION_BLUEPRINTCURSTATEINVALID = "UnsupportedOperation.BlueprintCurStateInvalid"
+//  UNSUPPORTEDOPERATION_BLUEPRINTLATESTOPERATIONUNFINISHED = "UnsupportedOperation.BlueprintLatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_BLUEPRINTOCCUPIED = "UnsupportedOperation.BlueprintOccupied"
+func (c *Client) ShareBlueprintAcrossAccounts(request *ShareBlueprintAcrossAccountsRequest) (response *ShareBlueprintAcrossAccountsResponse, err error) {
+    return c.ShareBlueprintAcrossAccountsWithContext(context.Background(), request)
+}
+
+// ShareBlueprintAcrossAccounts
+// This API is used to share an image across accounts.
+//
+// This API is used to share custom images only, and the status of the shared image must be NORMAL.
+//
+// The account receiving the shared image must be a root account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SHAREBLUEPRINTACROSSACCOUNTFAILED = "FailedOperation.ShareBlueprintAcrossAccountFailed"
+//  INVALIDPARAMETERVALUE_ACCOUNTIDINVALIDACCOUNTAREA = "InvalidParameterValue.AccountIdInvalidAccountArea"
+//  INVALIDPARAMETERVALUE_ACCOUNTIDSAMEWITHUIN = "InvalidParameterValue.AccountIdSameWithUin"
+//  INVALIDPARAMETERVALUE_ACCOUNTIDSNOTEXIST = "InvalidParameterValue.AccountIdsNotExist"
+//  INVALIDPARAMETERVALUE_ACCOUNTIDSNOTOWNERACCOUNT = "InvalidParameterValue.AccountIdsNotOwnerAccount"
+//  INVALIDPARAMETERVALUE_BLUEPRINTIDMALFORMED = "InvalidParameterValue.BlueprintIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTID = "InvalidParameterValue.InvalidBlueprintId"
+//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTSTATE = "InvalidParameterValue.InvalidBlueprintState"
+//  LIMITEXCEEDED_SHAREBLUEPRINTACROSSACCOUNTQUOTALIMITEXCEEDED = "LimitExceeded.ShareBlueprintAcrossAccountQuotaLimitExceeded"
+//  OPERATIONDENIED_BLUEPRINTOPERATIONINPROGRESS = "OperationDenied.BlueprintOperationInProgress"
+//  RESOURCEINUSE_BLUEPRINTMODIFYINGSHAREPERMISSION = "ResourceInUse.BlueprintModifyingSharePermission"
+//  RESOURCENOTFOUND_BLUEPRINTIDNOTFOUND = "ResourceNotFound.BlueprintIdNotFound"
+//  RESOURCENOTFOUND_PRIVATEBLUEPRINTNOTFOUND = "ResourceNotFound.PrivateBlueprintNotFound"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_TOKENINVALID = "UnauthorizedOperation.TokenInvalid"
+//  UNSUPPORTEDOPERATION_BLUEPRINTALREADYSHARED = "UnsupportedOperation.BlueprintAlreadyShared"
+//  UNSUPPORTEDOPERATION_BLUEPRINTCURSTATEINVALID = "UnsupportedOperation.BlueprintCurStateInvalid"
+//  UNSUPPORTEDOPERATION_BLUEPRINTLATESTOPERATIONUNFINISHED = "UnsupportedOperation.BlueprintLatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_BLUEPRINTOCCUPIED = "UnsupportedOperation.BlueprintOccupied"
+func (c *Client) ShareBlueprintAcrossAccountsWithContext(ctx context.Context, request *ShareBlueprintAcrossAccountsRequest) (response *ShareBlueprintAcrossAccountsResponse, err error) {
+    if request == nil {
+        request = NewShareBlueprintAcrossAccountsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "lighthouse", APIVersion, "ShareBlueprintAcrossAccounts")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ShareBlueprintAcrossAccounts require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewShareBlueprintAcrossAccountsResponse()
     err = c.Send(request, response)
     return
 }

@@ -638,8 +638,25 @@ type ReconstructDocumentSSEConfig struct {
 
 // Predefined struct for user
 type ReconstructDocumentSSERequestParams struct {
+	// File type.
+	// **Supported file types**: PDF, DOC, DOCX, PPT, PPTX, MD, TXT, XLS, XLSX, CSV, PNG, JPG, JPEG, BMP, GIF, WEBP, HEIC, EPS, ICNS, IM, PCX, PPM, TIFF, XBM, HEIF, JP2.
+	// **Supported file sizes**: 
+	// - Max 100 MB for PDF, DOC, DOCX, PPT, and PPTX .
+	// - Max 10 MB for MD, TXT, XLS, XLSX, and CSV.
+	// - Max20 MB for others.
+	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
+
+	// File URL. It is recommended to store the file in Tencent Cloud as the URL where the file is stored in Tencent Cloud can ensure higher download speed and stability. External URL may affect the speed and stability. Refer to: [Tencent Cloud COS Documentation](https://www.tencentcloud.com/document/product/436/7749)
+	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
+
 	// The base64 value of the file. File size limit: the downloaded file shall not exceed 8MB after base64 encoding. File download time does not exceed 3 seconds. Supported image pixels: the length of a single side is between 20-10000px. Either FileUrl or FileBase64 of the file must be provided. If both are provided, only the FileUrl is used.
 	FileBase64 *string `json:"FileBase64,omitnil,omitempty" name:"FileBase64"`
+
+	// The starting page number of the file. When type of the uploaded file is pdf, doc, docx, ppt, or pptx, it specifies the starting page number for recognition, including the current value.
+	FileStartPageNumber *int64 `json:"FileStartPageNumber,omitnil,omitempty" name:"FileStartPageNumber"`
+
+	// The end page number of the file. When type of the uploaded file is pdf, doc, docx, ppt, or pptx, it specifies the end page number for recognition, including the current value.
+	FileEndPageNumber *int64 `json:"FileEndPageNumber,omitnil,omitempty" name:"FileEndPageNumber"`
 
 	// Document parsing configuration information.	
 	Config *ReconstructDocumentSSEConfig `json:"Config,omitnil,omitempty" name:"Config"`
@@ -648,8 +665,25 @@ type ReconstructDocumentSSERequestParams struct {
 type ReconstructDocumentSSERequest struct {
 	*tchttp.BaseRequest
 	
+	// File type.
+	// **Supported file types**: PDF, DOC, DOCX, PPT, PPTX, MD, TXT, XLS, XLSX, CSV, PNG, JPG, JPEG, BMP, GIF, WEBP, HEIC, EPS, ICNS, IM, PCX, PPM, TIFF, XBM, HEIF, JP2.
+	// **Supported file sizes**: 
+	// - Max 100 MB for PDF, DOC, DOCX, PPT, and PPTX .
+	// - Max 10 MB for MD, TXT, XLS, XLSX, and CSV.
+	// - Max20 MB for others.
+	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
+
+	// File URL. It is recommended to store the file in Tencent Cloud as the URL where the file is stored in Tencent Cloud can ensure higher download speed and stability. External URL may affect the speed and stability. Refer to: [Tencent Cloud COS Documentation](https://www.tencentcloud.com/document/product/436/7749)
+	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
+
 	// The base64 value of the file. File size limit: the downloaded file shall not exceed 8MB after base64 encoding. File download time does not exceed 3 seconds. Supported image pixels: the length of a single side is between 20-10000px. Either FileUrl or FileBase64 of the file must be provided. If both are provided, only the FileUrl is used.
 	FileBase64 *string `json:"FileBase64,omitnil,omitempty" name:"FileBase64"`
+
+	// The starting page number of the file. When type of the uploaded file is pdf, doc, docx, ppt, or pptx, it specifies the starting page number for recognition, including the current value.
+	FileStartPageNumber *int64 `json:"FileStartPageNumber,omitnil,omitempty" name:"FileStartPageNumber"`
+
+	// The end page number of the file. When type of the uploaded file is pdf, doc, docx, ppt, or pptx, it specifies the end page number for recognition, including the current value.
+	FileEndPageNumber *int64 `json:"FileEndPageNumber,omitnil,omitempty" name:"FileEndPageNumber"`
 
 	// Document parsing configuration information.	
 	Config *ReconstructDocumentSSEConfig `json:"Config,omitnil,omitempty" name:"Config"`
@@ -667,7 +701,11 @@ func (r *ReconstructDocumentSSERequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "FileType")
+	delete(f, "FileUrl")
 	delete(f, "FileBase64")
+	delete(f, "FileStartPageNumber")
+	delete(f, "FileEndPageNumber")
 	delete(f, "Config")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReconstructDocumentSSERequest has unknown keys!", "")
