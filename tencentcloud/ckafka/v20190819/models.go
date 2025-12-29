@@ -947,141 +947,147 @@ type CreateInstancePreData struct {
 
 // Predefined struct for user
 type CreateInstancePreRequestParams struct {
-	// Specifies the ckafka cluster instance Name, an arbitrary string with length no more than 128 characters.
+	// <p>Specifies the Name of the ckafka cluster instance, which is any string with a length not more than 128 characters.</p>.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Availability zone. when purchasing a multi-availability zone instance, this parameter specifies the primary az. [view availability zones](https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1).
+	// <P>Availability zone. when purchasing a multi-availability zone instance, this parameter specifies the primary az. <a href="https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1">view availability zones</a></p>.
 	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Prepaid purchase duration, such as "1m", exactly one month. value ranges from 1m to 36m.
+	// <P>Specifies the prepaid purchase duration, such as "1m" (exactly one month). value ranges from 1m to 36m.</p>.
 	Period *string `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Specifies the standard edition instance specification for the international site. currently only the international site standard edition uses the current field to distinguish specifications, while the domestic site standard edition distinguishes specifications by peak bandwidth. fill in 1 for all instances except the international site standard edition. for international site standard edition instances: [entry-level (general)] fill 1; [standard type (standard)] fill 2; [advanced] fill 3; [capacity type (capacity)] fill 4; [advanced type 1 (specialized-1)] fill 5; [advanced type 2 (specialized-2)] fill 6; [advanced type 3 (specialized-3)] fill 7; [advanced type 4 (specialized-4)] fill 8.
+	// <P>Specifies the standard edition instance specification for the international site. currently only the standard edition on the international site uses the current field to distinguish specifications, while the domestic site standard edition uses peak bandwidth. fill in 1 for all instances except the international site standard edition. for international site standard edition instances: [entry-level (general)] fill 1; [standard type (standard)] fill 2; [advanced] fill 3; [capacity type (capacity)] fill 4; [advanced type 1 (specialized-1)] fill 5; [advanced type 2 (specialized-2)] fill 6; [advanced type 3 (specialized-3)] fill 7; [advanced type 4 (specialized-4)] fill 8.</p>.
 	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// VPC Id.
+	// <p>VPC Id.</p>.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet ID
+	// <P>Subnet id.</p>.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Optional. maximum retention time of instance logs, in minutes. default value: 1440 (1 day). value range: 1 minute to 90 days.
+	// <P>Optional. specifies the maximum retention time for instance logs, in minutes. default value: 1440 (1 day) when left blank. configurable range: 1 minute to 90 days.</p>.
 	MsgRetentionTime *int64 `json:"MsgRetentionTime,omitnil,omitempty" name:"MsgRetentionTime"`
 
-	// Specifies the cluster Id when creating an instance.
+	// <p>Specifies the cluster Id when creating an instance. this parameter indicates the cluster Id.</p>.
 	ClusterId *int64 `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Auto-Renewal tag for prepaid services. valid values: 0 (default state, not set by the user, initial status), 1 (auto-renew), 2 (explicitly no auto-renew, set by the user).
+	// <P>Auto-Renewal tag for prepaid services. 0 means default state (not set by the user, i.e. initial state), 1 means auto-renew, 2 means explicitly no auto-renew (set by the user).</p>.
 	RenewFlag *int64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 
-	// Specifies the CKafka version number. valid values: 2.4.1, 2.4.2, 2.8.1, 3.2.3. default value 2.4.1. 2.4.1 and 2.4.2 belong to the same version. any can be passed.
+	// <p>Specifies the CKafka version number. valid values: 2.4.1, 2.4.2, 2.8.1, 3.2.3. default value is 2.4.1. 2.4.1 and 2.4.2 belong to the same version, any one can be passed.</p>.
 	KafkaVersion *string `json:"KafkaVersion,omitnil,omitempty" name:"KafkaVersion"`
 
-	// Specifies the instance type. valid values: standard (default), profession, premium.
+	// <P>Instance type. specifies "standard" for standard edition instance (default), "profession" for professional edition instance, "premium" for advanced edition instance.</p>.
 	SpecificationsType *string `json:"SpecificationsType,omitnil,omitempty" name:"SpecificationsType"`
 
-	// Disk size. if it does not match the console specification ratio, the creation cannot succeed. default value is 500. step length is set to 100. can be accessed through the following link: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1
+	// <P>Disk size. if it does not match the console specification ratio, creation cannot succeed. default value is 500. step length is set to 100. can be accessed through the following link to view billing specifications: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1</p>.
 	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// Instance bandwidth. default value: 40 MB/s. minimum value: 20 MB/s. maximum value for advanced edition: 360 MB/s. maximum value for pro edition: 100000 MB/s. standard version fixed bandwidth specifications: 40 MB/s, 100 MB/s, 150 MB/s. view billing specifications through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1
+	// <p>Instance bandwidth, default value is 40, unit MB/s. minimum value: 20MB/s. advanced edition maximum value: 360MB/s. professional edition maximum value: 100000MB/s. standard version fixed bandwidth specifications: 40MB/s, 100MB/s, 150MB/s. billing specifications can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1</p>.
 	BandWidth *int64 `json:"BandWidth,omitnil,omitempty" name:"BandWidth"`
 
-	// Partition size. if it does not match the console specification ratio, creation will fail. default value is 800, step length is 100. billing specifications can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1
+	// <P>Specifies the partition size. if it does not match the console specification ratio, the creation cannot succeed. default value is 800 with a step length of 100. view billing specifications through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1</p>.
 	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
 
-	// Tag.
+	// <p>Tag.</p>.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Specifies the disk type for a pro/advanced edition instance. you do not need to fill it in for a standard edition instance. valid values: "CLOUD_SSD" for SSD CLOUD disk; "CLOUD_BASIC" for high-performance CLOUD block storage. default value: "CLOUD_BASIC".
+	// <p>Specifies the instance disk type for pro edition/advanced edition. standard edition instances do not require this field. valid values: "CLOUD_SSD" (SSD CLOUD disk), "CLOUD_BASIC" (high-performance CLOUD block storage). default value: "CLOUD_BASIC".</p>.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Specifies whether to create a cross-az instance. when the current parameter is true, zoneIds is required.
+	// <p>Specifies whether to create a cross-availability zone instance. when the current parameter is true, zoneIds is required.</p>.
 	MultiZoneFlag *bool `json:"MultiZoneFlag,omitnil,omitempty" name:"MultiZoneFlag"`
 
-	// Availability zone list. required item when purchasing a multi-availability zone instance.
+	// <P>Availability zone list. required item when purchasing multi-availability zone instance.</p>.
 	ZoneIds []*int64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-	// Public network bandwidth size, in Mbps. the default is no free 3 Mbps bandwidth. for example, for a total of 3 Mbps public network bandwidth, pass 0 here; for a total of 6 Mbps public network bandwidth, pass 3 here. default value is 0. ensure the input parameter is a multiple of 3.
+	// <p>Specifies the public bandwidth size in Mbps. the free 3 Mbps bandwidth is not included by default. for example, if the total required public network bandwidth is 3 Mbps, input 0 here; if the total required public network bandwidth is 6 Mbps, input 3 here. default value: 0. ensure the input parameter is a multiple of 3.</p>.
 	PublicNetworkMonthly *int64 `json:"PublicNetworkMonthly,omitnil,omitempty" name:"PublicNetworkMonthly"`
 
-	// Number of instances to purchase. optional. default value is 1. when you input this parameter, it enables the creation of multiple instances with case-sensitive suffixes added to instanceName.
+	// <p>Specifies the number of instances to purchase. optional. default value is 1. when input this parameter, it will create multiple instances with case-sensitive suffixes added to instanceName.</p>.
 	InstanceNum *int64 `json:"InstanceNum,omitnil,omitempty" name:"InstanceNum"`
 
-	// Whether to automatically select a voucher. valid values: 1 (yes), 0 (no). default is 0.
+	// <P>Specifies whether to automatically select voucher. valid values: 1-yes; 0-no. default is 0.</p>.
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-	// Elastic bandwidth switch. specifies whether to enable elastic bandwidth. valid values: 0 (not enabled, default), 1 (enabled).
+	// <P>Elastic bandwidth switch 0 disable 1 enable (0 default).</p>.
 	ElasticBandwidthSwitch *int64 `json:"ElasticBandwidthSwitch,omitnil,omitempty" name:"ElasticBandwidthSwitch"`
+
+	// <p>Specifies the custom certificate Id. this parameter is valid only when SpecificationsType is profession. supports custom certificate capacity.</p><p>can be obtained through the <a href="https://www.tencentcloud.comom/document/product/400/41673?from_cn_redirect=1">DescribeCertificateDetail</a> api.</p>.
+	CustomSSLCertId *string `json:"CustomSSLCertId,omitnil,omitempty" name:"CustomSSLCertId"`
 }
 
 type CreateInstancePreRequest struct {
 	*tchttp.BaseRequest
 	
-	// Specifies the ckafka cluster instance Name, an arbitrary string with length no more than 128 characters.
+	// <p>Specifies the Name of the ckafka cluster instance, which is any string with a length not more than 128 characters.</p>.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Availability zone. when purchasing a multi-availability zone instance, this parameter specifies the primary az. [view availability zones](https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1).
+	// <P>Availability zone. when purchasing a multi-availability zone instance, this parameter specifies the primary az. <a href="https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1">view availability zones</a></p>.
 	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Prepaid purchase duration, such as "1m", exactly one month. value ranges from 1m to 36m.
+	// <P>Specifies the prepaid purchase duration, such as "1m" (exactly one month). value ranges from 1m to 36m.</p>.
 	Period *string `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Specifies the standard edition instance specification for the international site. currently only the international site standard edition uses the current field to distinguish specifications, while the domestic site standard edition distinguishes specifications by peak bandwidth. fill in 1 for all instances except the international site standard edition. for international site standard edition instances: [entry-level (general)] fill 1; [standard type (standard)] fill 2; [advanced] fill 3; [capacity type (capacity)] fill 4; [advanced type 1 (specialized-1)] fill 5; [advanced type 2 (specialized-2)] fill 6; [advanced type 3 (specialized-3)] fill 7; [advanced type 4 (specialized-4)] fill 8.
+	// <P>Specifies the standard edition instance specification for the international site. currently only the standard edition on the international site uses the current field to distinguish specifications, while the domestic site standard edition uses peak bandwidth. fill in 1 for all instances except the international site standard edition. for international site standard edition instances: [entry-level (general)] fill 1; [standard type (standard)] fill 2; [advanced] fill 3; [capacity type (capacity)] fill 4; [advanced type 1 (specialized-1)] fill 5; [advanced type 2 (specialized-2)] fill 6; [advanced type 3 (specialized-3)] fill 7; [advanced type 4 (specialized-4)] fill 8.</p>.
 	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// VPC Id.
+	// <p>VPC Id.</p>.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet ID
+	// <P>Subnet id.</p>.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Optional. maximum retention time of instance logs, in minutes. default value: 1440 (1 day). value range: 1 minute to 90 days.
+	// <P>Optional. specifies the maximum retention time for instance logs, in minutes. default value: 1440 (1 day) when left blank. configurable range: 1 minute to 90 days.</p>.
 	MsgRetentionTime *int64 `json:"MsgRetentionTime,omitnil,omitempty" name:"MsgRetentionTime"`
 
-	// Specifies the cluster Id when creating an instance.
+	// <p>Specifies the cluster Id when creating an instance. this parameter indicates the cluster Id.</p>.
 	ClusterId *int64 `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Auto-Renewal tag for prepaid services. valid values: 0 (default state, not set by the user, initial status), 1 (auto-renew), 2 (explicitly no auto-renew, set by the user).
+	// <P>Auto-Renewal tag for prepaid services. 0 means default state (not set by the user, i.e. initial state), 1 means auto-renew, 2 means explicitly no auto-renew (set by the user).</p>.
 	RenewFlag *int64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 
-	// Specifies the CKafka version number. valid values: 2.4.1, 2.4.2, 2.8.1, 3.2.3. default value 2.4.1. 2.4.1 and 2.4.2 belong to the same version. any can be passed.
+	// <p>Specifies the CKafka version number. valid values: 2.4.1, 2.4.2, 2.8.1, 3.2.3. default value is 2.4.1. 2.4.1 and 2.4.2 belong to the same version, any one can be passed.</p>.
 	KafkaVersion *string `json:"KafkaVersion,omitnil,omitempty" name:"KafkaVersion"`
 
-	// Specifies the instance type. valid values: standard (default), profession, premium.
+	// <P>Instance type. specifies "standard" for standard edition instance (default), "profession" for professional edition instance, "premium" for advanced edition instance.</p>.
 	SpecificationsType *string `json:"SpecificationsType,omitnil,omitempty" name:"SpecificationsType"`
 
-	// Disk size. if it does not match the console specification ratio, the creation cannot succeed. default value is 500. step length is set to 100. can be accessed through the following link: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1
+	// <P>Disk size. if it does not match the console specification ratio, creation cannot succeed. default value is 500. step length is set to 100. can be accessed through the following link to view billing specifications: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1</p>.
 	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// Instance bandwidth. default value: 40 MB/s. minimum value: 20 MB/s. maximum value for advanced edition: 360 MB/s. maximum value for pro edition: 100000 MB/s. standard version fixed bandwidth specifications: 40 MB/s, 100 MB/s, 150 MB/s. view billing specifications through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1
+	// <p>Instance bandwidth, default value is 40, unit MB/s. minimum value: 20MB/s. advanced edition maximum value: 360MB/s. professional edition maximum value: 100000MB/s. standard version fixed bandwidth specifications: 40MB/s, 100MB/s, 150MB/s. billing specifications can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1</p>.
 	BandWidth *int64 `json:"BandWidth,omitnil,omitempty" name:"BandWidth"`
 
-	// Partition size. if it does not match the console specification ratio, creation will fail. default value is 800, step length is 100. billing specifications can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1
+	// <P>Specifies the partition size. if it does not match the console specification ratio, the creation cannot succeed. default value is 800 with a step length of 100. view billing specifications through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1</p>.
 	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
 
-	// Tag.
+	// <p>Tag.</p>.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Specifies the disk type for a pro/advanced edition instance. you do not need to fill it in for a standard edition instance. valid values: "CLOUD_SSD" for SSD CLOUD disk; "CLOUD_BASIC" for high-performance CLOUD block storage. default value: "CLOUD_BASIC".
+	// <p>Specifies the instance disk type for pro edition/advanced edition. standard edition instances do not require this field. valid values: "CLOUD_SSD" (SSD CLOUD disk), "CLOUD_BASIC" (high-performance CLOUD block storage). default value: "CLOUD_BASIC".</p>.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Specifies whether to create a cross-az instance. when the current parameter is true, zoneIds is required.
+	// <p>Specifies whether to create a cross-availability zone instance. when the current parameter is true, zoneIds is required.</p>.
 	MultiZoneFlag *bool `json:"MultiZoneFlag,omitnil,omitempty" name:"MultiZoneFlag"`
 
-	// Availability zone list. required item when purchasing a multi-availability zone instance.
+	// <P>Availability zone list. required item when purchasing multi-availability zone instance.</p>.
 	ZoneIds []*int64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-	// Public network bandwidth size, in Mbps. the default is no free 3 Mbps bandwidth. for example, for a total of 3 Mbps public network bandwidth, pass 0 here; for a total of 6 Mbps public network bandwidth, pass 3 here. default value is 0. ensure the input parameter is a multiple of 3.
+	// <p>Specifies the public bandwidth size in Mbps. the free 3 Mbps bandwidth is not included by default. for example, if the total required public network bandwidth is 3 Mbps, input 0 here; if the total required public network bandwidth is 6 Mbps, input 3 here. default value: 0. ensure the input parameter is a multiple of 3.</p>.
 	PublicNetworkMonthly *int64 `json:"PublicNetworkMonthly,omitnil,omitempty" name:"PublicNetworkMonthly"`
 
-	// Number of instances to purchase. optional. default value is 1. when you input this parameter, it enables the creation of multiple instances with case-sensitive suffixes added to instanceName.
+	// <p>Specifies the number of instances to purchase. optional. default value is 1. when input this parameter, it will create multiple instances with case-sensitive suffixes added to instanceName.</p>.
 	InstanceNum *int64 `json:"InstanceNum,omitnil,omitempty" name:"InstanceNum"`
 
-	// Whether to automatically select a voucher. valid values: 1 (yes), 0 (no). default is 0.
+	// <P>Specifies whether to automatically select voucher. valid values: 1-yes; 0-no. default is 0.</p>.
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-	// Elastic bandwidth switch. specifies whether to enable elastic bandwidth. valid values: 0 (not enabled, default), 1 (enabled).
+	// <P>Elastic bandwidth switch 0 disable 1 enable (0 default).</p>.
 	ElasticBandwidthSwitch *int64 `json:"ElasticBandwidthSwitch,omitnil,omitempty" name:"ElasticBandwidthSwitch"`
+
+	// <p>Specifies the custom certificate Id. this parameter is valid only when SpecificationsType is profession. supports custom certificate capacity.</p><p>can be obtained through the <a href="https://www.tencentcloud.comom/document/product/400/41673?from_cn_redirect=1">DescribeCertificateDetail</a> api.</p>.
+	CustomSSLCertId *string `json:"CustomSSLCertId,omitnil,omitempty" name:"CustomSSLCertId"`
 }
 
 func (r *CreateInstancePreRequest) ToJsonString() string {
@@ -1118,6 +1124,7 @@ func (r *CreateInstancePreRequest) FromJsonString(s string) error {
 	delete(f, "InstanceNum")
 	delete(f, "AutoVoucher")
 	delete(f, "ElasticBandwidthSwitch")
+	delete(f, "CustomSSLCertId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstancePreRequest has unknown keys!", "")
 	}
@@ -1142,7 +1149,7 @@ type CreateInstancePreResp struct {
 
 // Predefined struct for user
 type CreateInstancePreResponseParams struct {
-	// Returned result.
+	// <P>Returned result.</p>.
 	Result *CreateInstancePreResp `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1238,129 +1245,135 @@ func (r *CreatePartitionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreatePostPaidInstanceRequestParams struct {
-	// VPC Id, obtain through the API [DescribeVpcs](https://www.tencentcloud.comom/document/product/215/15778?from_cn_redirect=1).
+	// <p>VPC Id, can be obtained through the <a href="https://www.tencentcloud.comom/document/product/215/15778?from_cn_redirect=1">DescribeVpcs</a> api.</p>.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet Id. can be obtained through the [DescribeSubnets](https://www.tencentcloud.comom/document/product/215/15784?from_cn_redirect=1) api.
+	// <p>Subnet Id, which can be obtained through the <a href="https://www.tencentcloud.comom/document/product/215/15784?from_cn_redirect=1">DescribeSubnets</a> api.</p>.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Specifies the cluster instance name of ckafka, an arbitrary character with length not exceeding 128.
+	// <P>Specifies the cluster instance name of ckafka, with a length not exceeding 128 arbitrary characters.</p>.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Specifies the standard edition instance specification for the international site. currently only the international site standard edition uses the current field to distinguish specifications, while the domestic site standard edition distinguishes specifications by peak bandwidth. fill in 1 for all instances except the international site standard edition. for international site standard edition instances: [entry-level (general)] fill 1; [standard type (standard)] fill 2; [advanced] fill 3; [capacity type (capacity)] fill 4; [advanced type 1 (specialized-1)] fill 5; [advanced type 2 (specialized-2)] fill 6; [advanced type 3 (specialized-3)] fill 7; [advanced type 4 (specialized-4)] fill 8.
+	// <P>Specifies the standard edition instance specification for the international site. currently only the standard edition on the international site uses the current field to distinguish specifications, while the domestic site standard edition uses peak bandwidth. fill in 1 for all instances except the international site standard edition. for international site standard edition instances: [entry-level (general)] fill 1; [standard type (standard)] fill 2; [advanced] fill 3; [capacity type (capacity)] fill 4; [advanced type 1 (specialized-1)] fill 5; [advanced type 2 (specialized-2)] fill 6; [advanced type 3 (specialized-3)] fill 7; [advanced type 4 (specialized-4)] fill 8.</p>.
 	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// The maximum instance log retention period in minutes by default.  If this parameter is left empty, the default retention period is 1,440 minutes (1 day) to 30 days.  If the message retention period of the topic is explicitly set, it will prevail.
+	// <P>The default maximum retention time for instance logs, in minutes. default value: 1440 minutes (1 day) when this parameter is not input. maximum: 30 days. if the message retention time is explicitly set for a topic, the topic retention time takes precedence.</p>.
 	MsgRetentionTime *int64 `json:"MsgRetentionTime,omitnil,omitempty" name:"MsgRetentionTime"`
 
-	// Cluster ID, which can be selected when you create an instance.  You don’t need to pass in this parameter if the cluster where the instance resides is not specified.
+	// <p>Specifies the cluster Id when creating an instance. input this parameter to indicate the cluster Id. leave it empty if no cluster is specified.</p>.
 	ClusterId *int64 `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Instance version. currently supports "2.4.1", "2.4.2", "2.8.1", "3.2.3". default value "2.4.1". "2.4.1" and "2.4.2" belong to the same version. any one can be passed.
+	// <P>Instance version. currently supports "2.4.1", "2.4.2", "2.8.1", "3.2.3". default value is "2.4.1". "2.4.1" and "2.4.2" belong to the same version, any one can be passed.</p>.
 	KafkaVersion *string `json:"KafkaVersion,omitnil,omitempty" name:"KafkaVersion"`
 
-	// Instance type. "standard": standard version. "profession": pro edition. (standard version is only supported on the international site. currently, the chinese site supports pro edition.).
+	// <P>Instance type. "standard": standard version, "profession": professional version. (standard version is only supported on the international site. chinese site currently supports professional version)</p>.
 	SpecificationsType *string `json:"SpecificationsType,omitnil,omitempty" name:"SpecificationsType"`
 
-	// Specifies the disk type for a pro edition instance. you do not need to fill it in for a standard edition instance. valid values: "CLOUD_SSD" for SSD CLOUD disk; "CLOUD_BASIC" for high-performance CLOUD block storage. default value: "CLOUD_BASIC".
+	// <p>Specifies the instance disk type for pro edition. standard edition instances do not require this field. valid values: "CLOUD_SSD" (SSD CLOUD disk), "CLOUD_BASIC" (high-performance CLOUD block storage). default value: "CLOUD_BASIC".</p>.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Specifies the peak bandwidth of the instance private network, with a default value of 40 MB/s. for standard version, input the peak bandwidth corresponding to the current instance specifications. note that if the instance created is a pro edition instance, parameter configuration such as peak bandwidth and number of partitions should meet the billing specification of the professional edition. view billing specifications through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1
+	// <p>The peak bandwidth of the instance private network. the default value is 40 MB/s. for standard edition, input the peak bandwidth corresponding to the current instance specifications. note that if the instance created is a pro edition instance, parameter configurations such as peak bandwidth and number of partitions should meet the billing specification of the pro edition. you can view the billing specification through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1</p>.
 	BandWidth *int64 `json:"BandWidth,omitnil,omitempty" name:"BandWidth"`
 
-	// Instance disk size. default value is 500. step length is set to 100. should meet the billing specification of the current instance. can be accessed through the following link: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1
+	// <P>Instance disk size. default value is 500. step length is set to 100. should meet the billing specification of the current instance. can be accessed through the following link to view billing specifications: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1</p>.
 	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// Specifies the maximum number of partitions for the instance, which should meet the billing specification of the current instance. default value is 800 with a step length of 100. the billing specification can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1
+	// <P>Specifies the maximum number of partitions for the instance, which should meet the billing specification of the current instance. default value is 800 with a step length of 100. the billing specification can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1</p>.
 	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
 
-	// Maximum number of topics for the instance should meet the billing specification of the current instance. default value is 800, step length is set to 100.
+	// <P>Specifies the maximum number of topics for the instance, which should meet the billing specification of the current instance. default value is 800. step length is set to 100.</p>.
 	TopicNum *int64 `json:"TopicNum,omitnil,omitempty" name:"TopicNum"`
 
-	// Specifies the availability zone of the instance. when creating a multi-az instance, this parameter is the availability zone id of the subnet where the default access point is created. ZoneId and ZoneIds cannot be empty at the same time. obtain through the API [DescribeCkafkaZone](https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1).
+	// Specifies the availability zone where the instance is located. when creating a multi-az instance, this parameter indicates the availability zone id of the subnet where the default access point is created. ZoneId and ZoneIds cannot be empty at the same time. you can obtain this information through the API <a href="https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1">DescribeCkafkaZone</a>.
 	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Whether the current instance is a multi-AZ instance
+	// <P>Specifies whether the current instance is a multi-az instance.</p>.
 	MultiZoneFlag *bool `json:"MultiZoneFlag,omitnil,omitempty" name:"MultiZoneFlag"`
 
-	// Specifies the multi-az id list when the instance is a multi-az instance. note that the multi-az corresponding to parameter ZoneId must be included in this parameter array. ZoneId and ZoneIds cannot be empty at the same time. you can obtain this information through the [DescribeCkafkaZone](https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1) api.
+	// <p>Specifies the multi-availability zone id list when the instance is a multi-az instance. note the corresponding multi-availability zone for parameter ZoneId must be included in the parameter array. ZoneId and ZoneIds cannot be empty at the same time. obtain through the API <a href="https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1">DescribeCkafkaZone</a>.</p>.
 	ZoneIds []*int64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-	// The number of purchased instances.  Default value: `1`. This parameter is optional.  If it is passed in, multiple instances will be created, with their names being `instanceName` plus different suffixes.
+	// <p>Specifies the number of instances to purchase. optional. default value is 1. when input this parameter, it will create multiple instances with case-sensitive suffixes added to instanceName.</p>.
 	InstanceNum *int64 `json:"InstanceNum,omitnil,omitempty" name:"InstanceNum"`
 
-	// Public network bandwidth in Mbps.  The 3 Mbps of free bandwidth is not included here by default.  For example, if you need 3 Mbps of public network bandwidth, pass in `0`; if you need 6 Mbps, pass in `3`.  The value must be an integer multiple of 3.
+	// <p>Public bandwidth size in Mbps. the free 3 Mbps bandwidth is not included by default. for example, if the total required public network bandwidth is 3 Mbps, input 0 here; if the total required public network bandwidth is 6 Mbps, input 3 here. ensure the input parameter is a multiple of 3.</p>.
 	PublicNetworkMonthly *int64 `json:"PublicNetworkMonthly,omitnil,omitempty" name:"PublicNetworkMonthly"`
 
-	// Tag.
+	// <p>Tag.</p>.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Elastic bandwidth switch. valid values: 0 (disable, default), 1 (enable).
+	// <P>Specifies the elastic bandwidth switch. 0: disable (default); 1: enable.</p>.
 	ElasticBandwidthSwitch *int64 `json:"ElasticBandwidthSwitch,omitnil,omitempty" name:"ElasticBandwidthSwitch"`
+
+	// <p>Specifies the custom certificate Id. this parameter is valid only when SpecificationsType is profession. supports custom certificate capacity.</p><p>can be obtained through the <a href="https://www.tencentcloud.comom/document/product/400/41673?from_cn_redirect=1">DescribeCertificateDetail</a> api.</p>.
+	CustomSSLCertId *string `json:"CustomSSLCertId,omitnil,omitempty" name:"CustomSSLCertId"`
 }
 
 type CreatePostPaidInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// VPC Id, obtain through the API [DescribeVpcs](https://www.tencentcloud.comom/document/product/215/15778?from_cn_redirect=1).
+	// <p>VPC Id, can be obtained through the <a href="https://www.tencentcloud.comom/document/product/215/15778?from_cn_redirect=1">DescribeVpcs</a> api.</p>.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet Id. can be obtained through the [DescribeSubnets](https://www.tencentcloud.comom/document/product/215/15784?from_cn_redirect=1) api.
+	// <p>Subnet Id, which can be obtained through the <a href="https://www.tencentcloud.comom/document/product/215/15784?from_cn_redirect=1">DescribeSubnets</a> api.</p>.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Specifies the cluster instance name of ckafka, an arbitrary character with length not exceeding 128.
+	// <P>Specifies the cluster instance name of ckafka, with a length not exceeding 128 arbitrary characters.</p>.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Specifies the standard edition instance specification for the international site. currently only the international site standard edition uses the current field to distinguish specifications, while the domestic site standard edition distinguishes specifications by peak bandwidth. fill in 1 for all instances except the international site standard edition. for international site standard edition instances: [entry-level (general)] fill 1; [standard type (standard)] fill 2; [advanced] fill 3; [capacity type (capacity)] fill 4; [advanced type 1 (specialized-1)] fill 5; [advanced type 2 (specialized-2)] fill 6; [advanced type 3 (specialized-3)] fill 7; [advanced type 4 (specialized-4)] fill 8.
+	// <P>Specifies the standard edition instance specification for the international site. currently only the standard edition on the international site uses the current field to distinguish specifications, while the domestic site standard edition uses peak bandwidth. fill in 1 for all instances except the international site standard edition. for international site standard edition instances: [entry-level (general)] fill 1; [standard type (standard)] fill 2; [advanced] fill 3; [capacity type (capacity)] fill 4; [advanced type 1 (specialized-1)] fill 5; [advanced type 2 (specialized-2)] fill 6; [advanced type 3 (specialized-3)] fill 7; [advanced type 4 (specialized-4)] fill 8.</p>.
 	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// The maximum instance log retention period in minutes by default.  If this parameter is left empty, the default retention period is 1,440 minutes (1 day) to 30 days.  If the message retention period of the topic is explicitly set, it will prevail.
+	// <P>The default maximum retention time for instance logs, in minutes. default value: 1440 minutes (1 day) when this parameter is not input. maximum: 30 days. if the message retention time is explicitly set for a topic, the topic retention time takes precedence.</p>.
 	MsgRetentionTime *int64 `json:"MsgRetentionTime,omitnil,omitempty" name:"MsgRetentionTime"`
 
-	// Cluster ID, which can be selected when you create an instance.  You don’t need to pass in this parameter if the cluster where the instance resides is not specified.
+	// <p>Specifies the cluster Id when creating an instance. input this parameter to indicate the cluster Id. leave it empty if no cluster is specified.</p>.
 	ClusterId *int64 `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Instance version. currently supports "2.4.1", "2.4.2", "2.8.1", "3.2.3". default value "2.4.1". "2.4.1" and "2.4.2" belong to the same version. any one can be passed.
+	// <P>Instance version. currently supports "2.4.1", "2.4.2", "2.8.1", "3.2.3". default value is "2.4.1". "2.4.1" and "2.4.2" belong to the same version, any one can be passed.</p>.
 	KafkaVersion *string `json:"KafkaVersion,omitnil,omitempty" name:"KafkaVersion"`
 
-	// Instance type. "standard": standard version. "profession": pro edition. (standard version is only supported on the international site. currently, the chinese site supports pro edition.).
+	// <P>Instance type. "standard": standard version, "profession": professional version. (standard version is only supported on the international site. chinese site currently supports professional version)</p>.
 	SpecificationsType *string `json:"SpecificationsType,omitnil,omitempty" name:"SpecificationsType"`
 
-	// Specifies the disk type for a pro edition instance. you do not need to fill it in for a standard edition instance. valid values: "CLOUD_SSD" for SSD CLOUD disk; "CLOUD_BASIC" for high-performance CLOUD block storage. default value: "CLOUD_BASIC".
+	// <p>Specifies the instance disk type for pro edition. standard edition instances do not require this field. valid values: "CLOUD_SSD" (SSD CLOUD disk), "CLOUD_BASIC" (high-performance CLOUD block storage). default value: "CLOUD_BASIC".</p>.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Specifies the peak bandwidth of the instance private network, with a default value of 40 MB/s. for standard version, input the peak bandwidth corresponding to the current instance specifications. note that if the instance created is a pro edition instance, parameter configuration such as peak bandwidth and number of partitions should meet the billing specification of the professional edition. view billing specifications through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1
+	// <p>The peak bandwidth of the instance private network. the default value is 40 MB/s. for standard edition, input the peak bandwidth corresponding to the current instance specifications. note that if the instance created is a pro edition instance, parameter configurations such as peak bandwidth and number of partitions should meet the billing specification of the pro edition. you can view the billing specification through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1</p>.
 	BandWidth *int64 `json:"BandWidth,omitnil,omitempty" name:"BandWidth"`
 
-	// Instance disk size. default value is 500. step length is set to 100. should meet the billing specification of the current instance. can be accessed through the following link: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1
+	// <P>Instance disk size. default value is 500. step length is set to 100. should meet the billing specification of the current instance. can be accessed through the following link to view billing specifications: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1</p>.
 	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// Specifies the maximum number of partitions for the instance, which should meet the billing specification of the current instance. default value is 800 with a step length of 100. the billing specification can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1
+	// <P>Specifies the maximum number of partitions for the instance, which should meet the billing specification of the current instance. default value is 800 with a step length of 100. the billing specification can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1</p>.
 	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
 
-	// Maximum number of topics for the instance should meet the billing specification of the current instance. default value is 800, step length is set to 100.
+	// <P>Specifies the maximum number of topics for the instance, which should meet the billing specification of the current instance. default value is 800. step length is set to 100.</p>.
 	TopicNum *int64 `json:"TopicNum,omitnil,omitempty" name:"TopicNum"`
 
-	// Specifies the availability zone of the instance. when creating a multi-az instance, this parameter is the availability zone id of the subnet where the default access point is created. ZoneId and ZoneIds cannot be empty at the same time. obtain through the API [DescribeCkafkaZone](https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1).
+	// Specifies the availability zone where the instance is located. when creating a multi-az instance, this parameter indicates the availability zone id of the subnet where the default access point is created. ZoneId and ZoneIds cannot be empty at the same time. you can obtain this information through the API <a href="https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1">DescribeCkafkaZone</a>.
 	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Whether the current instance is a multi-AZ instance
+	// <P>Specifies whether the current instance is a multi-az instance.</p>.
 	MultiZoneFlag *bool `json:"MultiZoneFlag,omitnil,omitempty" name:"MultiZoneFlag"`
 
-	// Specifies the multi-az id list when the instance is a multi-az instance. note that the multi-az corresponding to parameter ZoneId must be included in this parameter array. ZoneId and ZoneIds cannot be empty at the same time. you can obtain this information through the [DescribeCkafkaZone](https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1) api.
+	// <p>Specifies the multi-availability zone id list when the instance is a multi-az instance. note the corresponding multi-availability zone for parameter ZoneId must be included in the parameter array. ZoneId and ZoneIds cannot be empty at the same time. obtain through the API <a href="https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1">DescribeCkafkaZone</a>.</p>.
 	ZoneIds []*int64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-	// The number of purchased instances.  Default value: `1`. This parameter is optional.  If it is passed in, multiple instances will be created, with their names being `instanceName` plus different suffixes.
+	// <p>Specifies the number of instances to purchase. optional. default value is 1. when input this parameter, it will create multiple instances with case-sensitive suffixes added to instanceName.</p>.
 	InstanceNum *int64 `json:"InstanceNum,omitnil,omitempty" name:"InstanceNum"`
 
-	// Public network bandwidth in Mbps.  The 3 Mbps of free bandwidth is not included here by default.  For example, if you need 3 Mbps of public network bandwidth, pass in `0`; if you need 6 Mbps, pass in `3`.  The value must be an integer multiple of 3.
+	// <p>Public bandwidth size in Mbps. the free 3 Mbps bandwidth is not included by default. for example, if the total required public network bandwidth is 3 Mbps, input 0 here; if the total required public network bandwidth is 6 Mbps, input 3 here. ensure the input parameter is a multiple of 3.</p>.
 	PublicNetworkMonthly *int64 `json:"PublicNetworkMonthly,omitnil,omitempty" name:"PublicNetworkMonthly"`
 
-	// Tag.
+	// <p>Tag.</p>.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Elastic bandwidth switch. valid values: 0 (disable, default), 1 (enable).
+	// <P>Specifies the elastic bandwidth switch. 0: disable (default); 1: enable.</p>.
 	ElasticBandwidthSwitch *int64 `json:"ElasticBandwidthSwitch,omitnil,omitempty" name:"ElasticBandwidthSwitch"`
+
+	// <p>Specifies the custom certificate Id. this parameter is valid only when SpecificationsType is profession. supports custom certificate capacity.</p><p>can be obtained through the <a href="https://www.tencentcloud.comom/document/product/400/41673?from_cn_redirect=1">DescribeCertificateDetail</a> api.</p>.
+	CustomSSLCertId *string `json:"CustomSSLCertId,omitnil,omitempty" name:"CustomSSLCertId"`
 }
 
 func (r *CreatePostPaidInstanceRequest) ToJsonString() string {
@@ -1395,6 +1408,7 @@ func (r *CreatePostPaidInstanceRequest) FromJsonString(s string) error {
 	delete(f, "PublicNetworkMonthly")
 	delete(f, "Tags")
 	delete(f, "ElasticBandwidthSwitch")
+	delete(f, "CustomSSLCertId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreatePostPaidInstanceRequest has unknown keys!", "")
 	}
@@ -1403,7 +1417,7 @@ func (r *CreatePostPaidInstanceRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreatePostPaidInstanceResponseParams struct {
-	// Returned result
+	// <P>Returned result.</p>.
 	Result *CreateInstancePostResp `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2154,6 +2168,77 @@ func (r *DeleteGroupResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteGroupSubscribeTopicRequestParams struct {
+	// CKafka cluster instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Consumer group name.
+	Group *string `json:"Group,omitnil,omitempty" name:"Group"`
+
+	// Topic name
+	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
+}
+
+type DeleteGroupSubscribeTopicRequest struct {
+	*tchttp.BaseRequest
+	
+	// CKafka cluster instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Consumer group name.
+	Group *string `json:"Group,omitnil,omitempty" name:"Group"`
+
+	// Topic name
+	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
+}
+
+func (r *DeleteGroupSubscribeTopicRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteGroupSubscribeTopicRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Group")
+	delete(f, "Topic")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteGroupSubscribeTopicRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteGroupSubscribeTopicResponseParams struct {
+	// Returned result.
+	Result *JgwOperateResponse `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteGroupSubscribeTopicResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteGroupSubscribeTopicResponseParams `json:"Response"`
+}
+
+func (r *DeleteGroupSubscribeTopicResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteGroupSubscribeTopicResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteInstancePostRequestParams struct {
 	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -2605,6 +2690,26 @@ func (r *DeleteUserResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescModifyType struct {
+	// Specifies the renewal type.
+	ModifyType *int64 `json:"ModifyType,omitnil,omitempty" name:"ModifyType"`
+
+	// Specifies whether to migrate.
+	MigrateFlag *bool `json:"MigrateFlag,omitnil,omitempty" name:"MigrateFlag"`
+
+	// Estimated duration of migration in stable mode (seconds).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MigrateCostTime *int64 `json:"MigrateCostTime,omitnil,omitempty" name:"MigrateCostTime"`
+
+	// Upgrade mode (1: stable mode, 2: high-speed mode).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpgradeStrategy *int64 `json:"UpgradeStrategy,omitnil,omitempty" name:"UpgradeStrategy"`
+
+	// Indicates the estimated time for migration in high-speed mode, in seconds.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MigrateCostTimeHighSpeed *int64 `json:"MigrateCostTimeHighSpeed,omitnil,omitempty" name:"MigrateCostTimeHighSpeed"`
+}
+
 // Predefined struct for user
 type DescribeACLRequestParams struct {
 	// The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
@@ -2809,6 +2914,9 @@ func (r *DescribeCkafkaVersionRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCkafkaVersionResponseParams struct {
+	// Instance version information.
+	Result *InstanceVersion `json:"Result,omitnil,omitempty" name:"Result"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -3756,6 +3864,112 @@ func (r *DescribeInstancesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeModifyTypeRequestParams struct {
+	// CKafka cluster instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Specifies the bandwidth after upgrade. measurement unit: mb.
+	BandWidth *int64 `json:"BandWidth,omitnil,omitempty" name:"BandWidth"`
+
+	// Specifies the disk after upgrade, in gb.
+	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
+
+	// Disk type, such as CLOUD_PREMIUM.
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
+
+	// Number of partitions.
+	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
+
+	// Number of Topics
+	Topic *int64 `json:"Topic,omitnil,omitempty" name:"Topic"`
+
+	// Instance type, such as sp_ckafka_profession.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Configuration change portal.
+	ModifyEntry *string `json:"ModifyEntry,omitnil,omitempty" name:"ModifyEntry"`
+}
+
+type DescribeModifyTypeRequest struct {
+	*tchttp.BaseRequest
+	
+	// CKafka cluster instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Specifies the bandwidth after upgrade. measurement unit: mb.
+	BandWidth *int64 `json:"BandWidth,omitnil,omitempty" name:"BandWidth"`
+
+	// Specifies the disk after upgrade, in gb.
+	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
+
+	// Disk type, such as CLOUD_PREMIUM.
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
+
+	// Number of partitions.
+	Partition *int64 `json:"Partition,omitnil,omitempty" name:"Partition"`
+
+	// Number of Topics
+	Topic *int64 `json:"Topic,omitnil,omitempty" name:"Topic"`
+
+	// Instance type, such as sp_ckafka_profession.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Configuration change portal.
+	ModifyEntry *string `json:"ModifyEntry,omitnil,omitempty" name:"ModifyEntry"`
+}
+
+func (r *DescribeModifyTypeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeModifyTypeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "BandWidth")
+	delete(f, "DiskSize")
+	delete(f, "DiskType")
+	delete(f, "Partition")
+	delete(f, "Topic")
+	delete(f, "Type")
+	delete(f, "ModifyEntry")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeModifyTypeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeModifyTypeResponseParams struct {
+	// Specifies the structure of the returned renewal type.
+	Result *DescModifyType `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeModifyTypeResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeModifyTypeResponseParams `json:"Response"`
+}
+
+func (r *DescribeModifyTypeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeModifyTypeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5380,161 +5594,142 @@ type Instance struct {
 }
 
 type InstanceAttributesResponse struct {
-	// The ckafka cluster instance Id.
+	// <p>ckafka cluster instance Id.</p>.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Specifies the Name of the ckafka cluster instance.
+	// <p>Specifies the Name of the ckafka cluster instance.</p>.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// VIP list information of access point
+	// <p>Access point VIP list information.</p>.
 	VipList []*VipEntity `json:"VipList,omitnil,omitempty" name:"VipList"`
 
-	// Virtual IP
+	// <p>Virtual IP.</p>.
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
-	// Virtual port
+	// <P>Virtual port.</p>.
 	Vport *string `json:"Vport,omitnil,omitempty" name:"Vport"`
 
-	// Instance status. 0: creating, 1: running, 2: deleting, 3: deleted, 5: isolated, 7: upgrading, -1: creation failed.
+	// <P>Specifies the instance status. valid values: 0 (creating), 1 (running), 2 (deleting), 3 (deleted), 5 (isolated), 7 (upgrading), -1 (creation failed).</p>.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Instance bandwidth in Mbps
+	// <p>Instance bandwidth (unit: Mbps).</p>.
 	Bandwidth *int64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
-	// Instance storage capacity in GB
+	// <p>Specifies the instance storage size in GB.</p>.
 	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// AZ
+	// <P>Specifies the availability zone.</p>.
 	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// VPC ID. If this parameter is empty, it means the basic network
+	// <p>VPC ID. being empty indicates a basic network.</p>.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet ID. If this parameter is empty, it means the basic network
+	// <p>Specifies the subnet ID. being empty indicates the basic network.</p>.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Instance health status. 1: healthy, 2: alarmed, 3: exceptional
+	// <P>Specifies the instance health status. valid values: 1 (healthy), 2 (alarm), 3 (abnormal).</p>.
 	Healthy *int64 `json:"Healthy,omitnil,omitempty" name:"Healthy"`
 
-	// Instance health information. Currently, the disk utilization is displayed with a maximum length of 256
+	// <P>Instance health information. currently shows disk utilization rate. maximum length is 256.</p>.
 	HealthyMessage *string `json:"HealthyMessage,omitnil,omitempty" name:"HealthyMessage"`
 
-	// Creation time
+	// <P>Creation time.</p>.
 	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Message retention period in minutes
+	// <P>Message retention period, in minutes.</p>.
 	MsgRetentionTime *int64 `json:"MsgRetentionTime,omitnil,omitempty" name:"MsgRetentionTime"`
 
-	// Configuration for automatic topic creation. If this field is empty, it means that automatic creation is not enabled
+	// <p>Automatic creation Topic configuration. if this field is empty, it indicates that automatic creation is not enabled.</p>.
 	Config *InstanceConfigDO `json:"Config,omitnil,omitempty" name:"Config"`
 
-	// Number of remaining creatable partitions
+	// <P>Number of remaining creatable partitions.</p>.
 	RemainderPartitions *int64 `json:"RemainderPartitions,omitnil,omitempty" name:"RemainderPartitions"`
 
-	// Number of remaining creatable topics
+	// <P>Number of remaining creatable topics.</p>.
 	RemainderTopics *int64 `json:"RemainderTopics,omitnil,omitempty" name:"RemainderTopics"`
 
-	// Number of partitions already created
+	// <P>Specifies the current number of partitions created.</p>.
 	CreatedPartitions *int64 `json:"CreatedPartitions,omitnil,omitempty" name:"CreatedPartitions"`
 
-	// Number of topics already created
+	// <P>Specifies the current number of topics created.</p>.
 	CreatedTopics *int64 `json:"CreatedTopics,omitnil,omitempty" name:"CreatedTopics"`
 
-	// Tag array
+	// <P>Tag array.</p>.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Expiration time
+	// <P>Specifies the expiration time.</p>.
 	ExpireTime *uint64 `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Availability Zone List
+	// <P>Specifies the availability zone list.</p>.
 	ZoneIds []*int64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-	// Specifies the ckafka cluster instance version.
+	// <P>Specifies the ckafka cluster instance version.</p>.
 	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
 
-	// Maximum number of groups.
+	// <P>Specifies the maximum number of groups.</p>.
 	MaxGroupNum *int64 `json:"MaxGroupNum,omitnil,omitempty" name:"MaxGroupNum"`
 
-	// Sale type. valid values: 0 (standard version), 1 (pro edition).
+	// <P>Sale type. 0: standard version; 1: pro edition.</p>.
 	Cvm *int64 `json:"Cvm,omitnil,omitempty" name:"Cvm"`
 
-	// Instance type. valid values:. 
-	// Specifies the pro edition.    
-	// Standard version.
-	// premium. specifies the advanced edition.
-	// Specifies the serverless version.
+	// <p>Instance type. enumerates the list: profession: pro edition; standards2: standard version; premium: advanced edition; serverless: serverless edition.</p>.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// Indicates the characteristics supported by the instance. FEATURE_SUBNET_ACL means the policy support for configuring subnets.
+	// <p>Indicates the characteristics supported by the instance. FEATURE_SUBNET_ACL: indicates that the ACL policy supports setting subnets.</p>.
 	Features []*string `json:"Features,omitnil,omitempty" name:"Features"`
 
-	// Dynamic message retention policy.
+	// <P>Dynamic message retention policy.</p>.
 	RetentionTimeConfig *DynamicRetentionTime `json:"RetentionTimeConfig,omitnil,omitempty" name:"RetentionTimeConfig"`
 
-	// Maximum number of connections.
+	// <P>Maximum number of connections.</p>.
 	MaxConnection *uint64 `json:"MaxConnection,omitnil,omitempty" name:"MaxConnection"`
 
-	// Public network bandwidth
+	// <P>Public network bandwidth.</p>.
 	PublicNetwork *int64 `json:"PublicNetwork,omitnil,omitempty" name:"PublicNetwork"`
 
-	// Specifies the deprecated field with no actual meaning.
+	// <P>Deprecated. no actual meaning.</p>.
 	DeleteRouteTimestamp *string `json:"DeleteRouteTimestamp,omitnil,omitempty" name:"DeleteRouteTimestamp"`
 
-	// Number of remaining creatable partitions.
+	// <P>Number of remaining creatable partitions.</p>.
 	RemainingPartitions *int64 `json:"RemainingPartitions,omitnil,omitempty" name:"RemainingPartitions"`
 
-	// Number of remaining creatable topics.
+	// <P>Number of remaining creatable topics.</p>.
 	RemainingTopics *int64 `json:"RemainingTopics,omitnil,omitempty" name:"RemainingTopics"`
 
-	// Scaling policy for dynamic disk.
+	// <P>Dynamic disk expansion policy.</p>.
 	DynamicDiskConfig *DynamicDiskConfig `json:"DynamicDiskConfig,omitnil,omitempty" name:"DynamicDiskConfig"`
 
-	// Specifies the system maintenance time.
+	// <P>Specifies the system maintenance time.</p>.
 	SystemMaintenanceTime *string `json:"SystemMaintenanceTime,omitnil,omitempty" name:"SystemMaintenanceTime"`
 
-	// Specifies the maximum size of messages at the instance level.
+	// <P>Specifies the maximum size of instance level messages.</p>.
 	MaxMessageByte *uint64 `json:"MaxMessageByte,omitnil,omitempty" name:"MaxMessageByte"`
 
-	// Specifies the instance billing type. POSTPAID_BY_HOUR: hourly billing; PREPAID: annual/monthly package.
+	// <p>Specifies the instance billing type. POSTPAID_BY_HOUR: hourly billing; PREPAID: annual/monthly package.</p>.
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
-	// Whether to enable the elastic bandwidth allowlist.   
-	// Indicates the allowlist feature with elastic bandwidth enabled.
-	// 0: elastic bandwidth allowlist feature is disabled.
+	// <p>Specifies whether to enable the elastic bandwidth allowlist. valid values: 1 (enabled), 0 (disabled).</p>.
 	ElasticBandwidthSwitch *int64 `json:"ElasticBandwidthSwitch,omitnil,omitempty" name:"ElasticBandwidthSwitch"`
 
-	// Indicates the elastic bandwidth activation status.
-	// 1: indicates elastic bandwidth is disabled.
-	// Enable elastic bandwidth.
-	// Enable elastic bandwidth successfully.
-	// 33: disabling elastic bandwidth.
-	// Indicates that the elastic bandwidth is successfully disabled.
-	// Enable elastic bandwidth failed.
-	// Bandwidth failure.
+	// <P>Specifies the elastic bandwidth activation status. 1: elastic bandwidth is disabled; 16: enabling elastic bandwidth; 32: elastic bandwidth enabled successfully; 33: disabling elastic bandwidth; 34: elastic bandwidth disabled successfully; 64: failed to enable elastic bandwidth; 65: failed to disable elastic bandwidth.</p>.
 	ElasticBandwidthOpenStatus *int64 `json:"ElasticBandwidthOpenStatus,omitnil,omitempty" name:"ElasticBandwidthOpenStatus"`
 
-	// Cluster type.  
-	// CLOUD_IDC idc cluster.
-	// CLOUD_CVM_SHARE shared cluster.
-	// CLOUD_CVM_YUNTI yunti cvm cluster.
-	// CLOUD_CVM. specifies the cvm cluster.
-	// CLOUD_CDC cdc cluster.
-	// CLOUD_EKS_TSE eks cluster.
+	// <p>ClusterType<br />CLOUD_IDC IDC cluster<br />CLOUD_CVM_SHARE CVM shared cluster<br />CLOUD_CVM_YUNTI YUNTI CVM cluster<br />CLOUD_CVM CVM cluster<br />CLOUD_CDC CDC cluster<br />CLOUD_EKS_TSE EKS cluster</p>.
 	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
 
-	// Number of free partitions.
+	// <P>Specifies the number of free partitions.</p>.
 	FreePartitionNumber *int64 `json:"FreePartitionNumber,omitnil,omitempty" name:"FreePartitionNumber"`
 
-	// Specifies the elastic bandwidth upper limit.
+	// <P>Specifies the elastic bandwidth upper limit.</p>.
 	ElasticFloatBandwidth *int64 `json:"ElasticFloatBandwidth,omitnil,omitempty" name:"ElasticFloatBandwidth"`
 
-	// ssl custom certificate id. only returned for instance clusters with custom certificates.
+	// <p>ssl custom certificate id. only returned for instance clusters with custom certificates.</p>.
 	CustomCertId *string `json:"CustomCertId,omitnil,omitempty" name:"CustomCertId"`
 
-	// Default unclean.leader.election.enable configuration for cluster topic: 1 enable 0 disable.
+	// <P>Specifies the default unclean.leader.election.enable configuration for cluster topics. valid values: 1 (enable), 0 (disable).</p>.
 	UncleanLeaderElectionEnable *int64 `json:"UncleanLeaderElectionEnable,omitnil,omitempty" name:"UncleanLeaderElectionEnable"`
 
-	// Instance deletion protection switch. 1: enabled; 0: disabled.
+	// <P>Specifies the instance deletion protection switch. valid values: 1 (enabled), 0 (disabled).</p>.
 	DeleteProtectionEnable *int64 `json:"DeleteProtectionEnable,omitnil,omitempty" name:"DeleteProtectionEnable"`
 }
 
@@ -5563,100 +5758,100 @@ type InstanceDeleteResponse struct {
 }
 
 type InstanceDetail struct {
-	// The ckafka cluster instance Id.
+	// <p>ckafka cluster instance Id.</p>.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// CKafka cluster instance name.
+	// <P>Specifies the name of the ckafka cluster instance.</p>.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Instance VIP information
+	// <P>Specifies the vip information for accessing the instance.</p>.
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
-	// Instance port information
+	// <P>Specifies the port information to access the instance.</p>.
 	Vport *string `json:"Vport,omitnil,omitempty" name:"Vport"`
 
-	// Virtual IP list
+	// <p>Specifies the virtual IP list.</p>.
 	VipList []*VipEntity `json:"VipList,omitnil,omitempty" name:"VipList"`
 
-	// Instance status. 0: creating, 1: running, 2: deleting, 3: deleted, 5: isolated, 7: upgrading, -1: creation failed.
+	// <P>Specifies the instance status. valid values: 0 (creating), 1 (running), 2 (deleting), 3 (deleted), 5 (isolated), 7 (upgrading), -1 (creation failed).</p>.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Instance bandwidth in Mbps
+	// <p>Specifies the instance bandwidth in Mbps.</p>.
 	Bandwidth *int64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
-	// Specifies the ckafka cluster instance disk size in gb.
+	// <p>Specifies the disk size of the ckafka cluster instance, in gb.</p>.
 	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// AZ ID
+	// <p>Specifies the available zone ID.</p>.
 	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// vpcId. If this parameter is empty, it means the basic network
+	// <p>vpcId. if empty, indicates a basic network.</p>.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet ID
+	// <P>Subnet id.</p>.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Whether to renew the instance automatically, which is an int-type enumerated value. 1: yes, 2: no
+	// <P>Specifies whether to renew the instance. int enumeration value: 1 means auto-renew, 2 means explicitly no auto-renew.</p>.
 	RenewFlag *int64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 
-	// Instance status. An int-type value will be returned. `0`: Healthy, `1`: Alarmed, `2`: Exceptional
+	// <p>Specifies the instance status. valid values: 1 (healthy), 2 (alarm), 3 (instance status exception).</p>.
 	Healthy *int64 `json:"Healthy,omitnil,omitempty" name:"Healthy"`
 
-	// Instance status information
+	// <P>Specifies the instance status information.</p>.
 	HealthyMessage *string `json:"HealthyMessage,omitnil,omitempty" name:"HealthyMessage"`
 
-	// Instance creation time
+	// <P>Specifies the instance creation time.</p>.
 	CreateTime *int64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Instance expiration time
+	// <P>Specifies the instance expiration time.</p>.
 	ExpireTime *int64 `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Whether it is an internal customer. 1: yes
+	// <P>Specifies whether it is an internal customer. a value of 1 indicates an internal customer.</p>.
 	IsInternal *int64 `json:"IsInternal,omitnil,omitempty" name:"IsInternal"`
 
-	// Number of topics
+	// <p>Specifies the number of topics.</p>.
 	TopicNum *int64 `json:"TopicNum,omitnil,omitempty" name:"TopicNum"`
 
-	// Tag
+	// <P>Specifies the identifier tag.</p>.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// kafka version information.
+	// <p>kafka version information.</p>.
 	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
 
-	// Cross-Availability zone.
+	// <P>Specifies the cross-availability zone.</p>.
 	ZoneIds []*int64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-	// ckafka sales type.
+	// <P>Specifies the ckafka sales type.</p>.
 	Cvm *int64 `json:"Cvm,omitnil,omitempty" name:"Cvm"`
 
-	// Specifies the cluster instance type of ckafka.
+	// <P>Specifies the ckafka cluster instance type.</p>.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// Specifies the ckafka cluster instance disk type.
+	// <P>Specifies the disk type of the ckafka cluster instance.</p>.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Maximum number of topics for current specifications.
+	// <p>Maximum number of topics for current specifications.</p>.
 	MaxTopicNumber *int64 `json:"MaxTopicNumber,omitnil,omitempty" name:"MaxTopicNumber"`
 
-	// Maximum number of partitions for current specifications.
+	// <p>Specifies the maximum number of partitions for current specifications.</p>.
 	MaxPartitionNumber *int64 `json:"MaxPartitionNumber,omitnil,omitempty" name:"MaxPartitionNumber"`
 
-	// Scheduled configuration upgrade time.
+	// <P>Specifies the planned configuration upgrade time.</p>.
 	RebalanceTime *string `json:"RebalanceTime,omitnil,omitempty" name:"RebalanceTime"`
 
-	// Specifies the number of partitions in the current instance.
+	// <P>Current number of partitions of the instance.</p>.
 	PartitionNumber *uint64 `json:"PartitionNumber,omitnil,omitempty" name:"PartitionNumber"`
 
-	// Specifies the public network bandwidth type of the ckafka cluster instance.
+	// <P>Specifies the public network bandwidth type of the ckafka cluster instance.</p>.
 	PublicNetworkChargeType *string `json:"PublicNetworkChargeType,omitnil,omitempty" name:"PublicNetworkChargeType"`
 
-	// Public network bandwidth. minimum 3 Mbps. maximum 999 Mbps. only the pro edition supports filling in.
+	// <p>Specifies the public network bandwidth. value range: 3Mbps to 999Mbps. only supported in pro edition.</p>.
 	PublicNetwork *int64 `json:"PublicNetwork,omitnil,omitempty" name:"PublicNetwork"`
 
-	// Specifies the underlying cluster type of the ckafka cluster instance.
+	// <P>Specifies the underlying cluster type of the ckafka cluster instance.</p>.
 	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
 
-	// Instance feature list.
+	// <P>Specifies the instance feature list.</p>.
 	Features []*string `json:"Features,omitnil,omitempty" name:"Features"`
 }
 
@@ -5789,6 +5984,26 @@ func (r *InstanceScalingDownResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type InstanceVersion struct {
+	// CKafka cluster instance version.
+	KafkaVersion *string `json:"KafkaVersion,omitnil,omitempty" name:"KafkaVersion"`
+
+	// Broker version information.
+	CurBrokerVersion *string `json:"CurBrokerVersion,omitnil,omitempty" name:"CurBrokerVersion"`
+
+	// Latest version information.
+	LatestBrokerVersion []*LatestBrokerVersion `json:"LatestBrokerVersion,omitnil,omitempty" name:"LatestBrokerVersion"`
+
+	// Whether to allow kernel upgrades across major versions.
+	AllowUpgradeHighVersion *bool `json:"AllowUpgradeHighVersion,omitnil,omitempty" name:"AllowUpgradeHighVersion"`
+
+	// Major version allowed for upgrades.
+	HighVersionSet []*string `json:"HighVersionSet,omitnil,omitempty" name:"HighVersionSet"`
+
+	// Whether to allow automatic deletion of consumer groups during minor version configuration.
+	AllowAutoDeleteTimestamp *bool `json:"AllowAutoDeleteTimestamp,omitnil,omitempty" name:"AllowAutoDeleteTimestamp"`
+}
+
 type JgwOperateResponse struct {
 	// Returned code. 0: normal, other values: error
 	ReturnCode *string `json:"ReturnCode,omitnil,omitempty" name:"ReturnCode"`
@@ -5799,6 +6014,14 @@ type JgwOperateResponse struct {
 	// Data returned by an operation, which may contain `flowId`, etc.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Data *OperateResponseData `json:"Data,omitnil,omitempty" name:"Data"`
+}
+
+type LatestBrokerVersion struct {
+	// CKafka cluster instance version.
+	KafkaVersion *string `json:"KafkaVersion,omitnil,omitempty" name:"KafkaVersion"`
+
+	// Broker version number.
+	BrokerVersion *string `json:"BrokerVersion,omitnil,omitempty" name:"BrokerVersion"`
 }
 
 type ListCvmAndIpInfoRsp struct {
