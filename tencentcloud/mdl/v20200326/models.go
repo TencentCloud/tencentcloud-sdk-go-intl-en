@@ -118,10 +118,10 @@ type AVTemplate struct {
 	// Quantity limit 0-20 Valid when MultiAudioTrackEnabled is turned on.
 	AudioTracks []*AudioTrackInfo `json:"AudioTracks,omitnil,omitempty" name:"AudioTracks"`
 
-
+	// Do you want to enable video enhancement? 1: Enable 0: Do not enable.
 	VideoEnhanceEnabled *uint64 `json:"VideoEnhanceEnabled,omitnil,omitempty" name:"VideoEnhanceEnabled"`
 
-
+	// Video enhancement configuration array.
 	VideoEnhanceSettings []*VideoEnhanceSetting `json:"VideoEnhanceSettings,omitnil,omitempty" name:"VideoEnhanceSettings"`
 
 	// Key frame interval, 300-10000, optional.
@@ -132,6 +132,9 @@ type AVTemplate struct {
 
 	// Color space setting.
 	ColorSpaceSettings *ColorSpaceSetting `json:"ColorSpaceSettings,omitnil,omitempty" name:"ColorSpaceSettings"`
+
+	// Traceability watermark.
+	ForensicWatermarkIds []*string `json:"ForensicWatermarkIds,omitnil,omitempty" name:"ForensicWatermarkIds"`
 }
 
 type AbWatermarkDetectionInfo struct {
@@ -178,7 +181,7 @@ type AbWatermarkInputInfo struct {
 }
 
 type AbWatermarkSettingsReq struct {
-
+	// Optional values: A/B.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -2287,10 +2290,10 @@ type DescribeTextSettings struct {
 	// Origin
 	Location *string `json:"Location,omitnil,omitempty" name:"Location"`
 
-	// The watermark image’s horizontal distance from the origin as a percentage of the video width
+	// The watermark image's horizontal distance from the origin as a percentage of the video width
 	XPos *int64 `json:"XPos,omitnil,omitempty" name:"XPos"`
 
-	// The watermark image’s vertical distance from the origin as a percentage of the video height
+	// The watermark image's vertical distance from the origin as a percentage of the video height
 	YPos *int64 `json:"YPos,omitnil,omitempty" name:"YPos"`
 
 	// Font size
@@ -4159,10 +4162,10 @@ type Tag struct {
 }
 
 type TaskNotifyConfig struct {
-
+	// Notification type. Currently only supports URLs
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// Callback URL. Starting with http/https, supporting a maximum of 512 characters
 	NotifyUrl *string `json:"NotifyUrl,omitnil,omitempty" name:"NotifyUrl"`
 }
 
@@ -4242,7 +4245,7 @@ type TimingSettingsResp struct {
 }
 
 type UrlInputInfo struct {
-
+	// Video URL, starting with http/https, supports up to 512 characters, currently only supports complete single file videos, does not support streaming formats based on playlists and segments (such as HLS or DASH)
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
@@ -4264,10 +4267,10 @@ type VideoCodecDetail struct {
 }
 
 type VideoEnhanceSetting struct {
-
+	// Video enhancement types, optional: "GameEnhance", "ColorEnhance", "Debur", "Comprehensive", "Denoising", "SR", "OutdoorSportsCompetitions", "IndoorSportsCompetitions", "ShowEnhance"
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// Video enhancement intensity, 0-1.0, granularity 0.1
 	Strength *float64 `json:"Strength,omitnil,omitempty" name:"Strength"`
 }
 
@@ -4338,14 +4341,17 @@ type VideoTemplateInfo struct {
 	// Video encoding configuration.
 	VideoCodecDetails *VideoCodecDetail `json:"VideoCodecDetails,omitnil,omitempty" name:"VideoCodecDetails"`
 
-
+	// Video enhancement switch, 1: on 0: off.
 	VideoEnhanceEnabled *uint64 `json:"VideoEnhanceEnabled,omitnil,omitempty" name:"VideoEnhanceEnabled"`
 
-
+	// Video enhancement parameter array.
 	VideoEnhanceSettings []*VideoEnhanceSetting `json:"VideoEnhanceSettings,omitnil,omitempty" name:"VideoEnhanceSettings"`
 
 	// Color space setting.
 	ColorSpaceSettings *ColorSpaceSetting `json:"ColorSpaceSettings,omitnil,omitempty" name:"ColorSpaceSettings"`
+
+	// Traceability watermark.
+	ForensicWatermarkIds []*string `json:"ForensicWatermarkIds,omitnil,omitempty" name:"ForensicWatermarkIds"`
 }
 
 type WebVTTFontStyle struct {
