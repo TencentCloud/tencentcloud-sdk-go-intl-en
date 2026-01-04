@@ -45,6 +45,50 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewQueryHunyuan3DPartJobRequest() (request *QueryHunyuan3DPartJobRequest) {
+    request = &QueryHunyuan3DPartJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("hunyuan", APIVersion, "QueryHunyuan3DPartJob")
+    
+    
+    return
+}
+
+func NewQueryHunyuan3DPartJobResponse() (response *QueryHunyuan3DPartJobResponse) {
+    response = &QueryHunyuan3DPartJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// QueryHunyuan3DPartJob
+// This API is used to query the generation task of a component.
+func (c *Client) QueryHunyuan3DPartJob(request *QueryHunyuan3DPartJobRequest) (response *QueryHunyuan3DPartJobResponse, err error) {
+    return c.QueryHunyuan3DPartJobWithContext(context.Background(), request)
+}
+
+// QueryHunyuan3DPartJob
+// This API is used to query the generation task of a component.
+func (c *Client) QueryHunyuan3DPartJobWithContext(ctx context.Context, request *QueryHunyuan3DPartJobRequest) (response *QueryHunyuan3DPartJobResponse, err error) {
+    if request == nil {
+        request = NewQueryHunyuan3DPartJobRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "hunyuan", APIVersion, "QueryHunyuan3DPartJob")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryHunyuan3DPartJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryHunyuan3DPartJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewQueryHunyuanTo3DProJobRequest() (request *QueryHunyuanTo3DProJobRequest) {
     request = &QueryHunyuanTo3DProJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -93,6 +137,98 @@ func (c *Client) QueryHunyuanTo3DProJobWithContext(ctx context.Context, request 
     return
 }
 
+func NewQueryHunyuanTo3DRapidJobRequest() (request *QueryHunyuanTo3DRapidJobRequest) {
+    request = &QueryHunyuanTo3DRapidJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("hunyuan", APIVersion, "QueryHunyuanTo3DRapidJob")
+    
+    
+    return
+}
+
+func NewQueryHunyuanTo3DRapidJobResponse() (response *QueryHunyuanTo3DRapidJobResponse) {
+    response = &QueryHunyuanTo3DRapidJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// QueryHunyuanTo3DRapidJob
+// This API is used to intelligently generate 3D content based on the HunYuan Large Model with input text descriptions or images.
+//
+// This API is used to provide 1 concurrent task by default, which means only 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+func (c *Client) QueryHunyuanTo3DRapidJob(request *QueryHunyuanTo3DRapidJobRequest) (response *QueryHunyuanTo3DRapidJobResponse, err error) {
+    return c.QueryHunyuanTo3DRapidJobWithContext(context.Background(), request)
+}
+
+// QueryHunyuanTo3DRapidJob
+// This API is used to intelligently generate 3D content based on the HunYuan Large Model with input text descriptions or images.
+//
+// This API is used to provide 1 concurrent task by default, which means only 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+func (c *Client) QueryHunyuanTo3DRapidJobWithContext(ctx context.Context, request *QueryHunyuanTo3DRapidJobRequest) (response *QueryHunyuanTo3DRapidJobResponse, err error) {
+    if request == nil {
+        request = NewQueryHunyuanTo3DRapidJobRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "hunyuan", APIVersion, "QueryHunyuanTo3DRapidJob")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryHunyuanTo3DRapidJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryHunyuanTo3DRapidJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSubmitHunyuan3DPartJobRequest() (request *SubmitHunyuan3DPartJobRequest) {
+    request = &SubmitHunyuan3DPartJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("hunyuan", APIVersion, "SubmitHunyuan3DPartJob")
+    
+    
+    return
+}
+
+func NewSubmitHunyuan3DPartJobResponse() (response *SubmitHunyuan3DPartJobResponse) {
+    response = &SubmitHunyuan3DPartJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SubmitHunyuan3DPartJob
+// This API is used to automatically perform component identification and generation based on the model structure after inputting a 3D model file.
+func (c *Client) SubmitHunyuan3DPartJob(request *SubmitHunyuan3DPartJobRequest) (response *SubmitHunyuan3DPartJobResponse, err error) {
+    return c.SubmitHunyuan3DPartJobWithContext(context.Background(), request)
+}
+
+// SubmitHunyuan3DPartJob
+// This API is used to automatically perform component identification and generation based on the model structure after inputting a 3D model file.
+func (c *Client) SubmitHunyuan3DPartJobWithContext(ctx context.Context, request *SubmitHunyuan3DPartJobRequest) (response *SubmitHunyuan3DPartJobResponse, err error) {
+    if request == nil {
+        request = NewSubmitHunyuan3DPartJobRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "hunyuan", APIVersion, "SubmitHunyuan3DPartJob")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SubmitHunyuan3DPartJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSubmitHunyuan3DPartJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSubmitHunyuanTo3DProJobRequest() (request *SubmitHunyuanTo3DProJobRequest) {
     request = &SubmitHunyuanTo3DProJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -137,6 +273,54 @@ func (c *Client) SubmitHunyuanTo3DProJobWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewSubmitHunyuanTo3DProJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSubmitHunyuanTo3DRapidJobRequest() (request *SubmitHunyuanTo3DRapidJobRequest) {
+    request = &SubmitHunyuanTo3DRapidJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("hunyuan", APIVersion, "SubmitHunyuanTo3DRapidJob")
+    
+    
+    return
+}
+
+func NewSubmitHunyuanTo3DRapidJobResponse() (response *SubmitHunyuanTo3DRapidJobResponse) {
+    response = &SubmitHunyuanTo3DRapidJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SubmitHunyuanTo3DRapidJob
+// This API is used to intelligently generate 3D content based on the HunYuan Large Model with input text descriptions or images.
+//
+// This API is used to provide 1 concurrent task by default, which means only 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+func (c *Client) SubmitHunyuanTo3DRapidJob(request *SubmitHunyuanTo3DRapidJobRequest) (response *SubmitHunyuanTo3DRapidJobResponse, err error) {
+    return c.SubmitHunyuanTo3DRapidJobWithContext(context.Background(), request)
+}
+
+// SubmitHunyuanTo3DRapidJob
+// This API is used to intelligently generate 3D content based on the HunYuan Large Model with input text descriptions or images.
+//
+// This API is used to provide 1 concurrent task by default, which means only 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+func (c *Client) SubmitHunyuanTo3DRapidJobWithContext(ctx context.Context, request *SubmitHunyuanTo3DRapidJobRequest) (response *SubmitHunyuanTo3DRapidJobResponse, err error) {
+    if request == nil {
+        request = NewSubmitHunyuanTo3DRapidJobRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "hunyuan", APIVersion, "SubmitHunyuanTo3DRapidJob")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SubmitHunyuanTo3DRapidJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSubmitHunyuanTo3DRapidJobResponse()
     err = c.Send(request, response)
     return
 }

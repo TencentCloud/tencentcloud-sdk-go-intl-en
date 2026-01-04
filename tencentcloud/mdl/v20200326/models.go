@@ -185,6 +185,28 @@ type AbWatermarkSettingsReq struct {
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
+type AbWatermarkSettingsResp struct {
+	// AB watermark type.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Watermark payload.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+}
+
+type AdBreakSetting struct {
+	// Advertising type, currently supports L-SQUEEZE
+	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
+
+	// Duration, in milliseconds, requires 1000<duration<=600000. The current accuracy is seconds, which is a multiple of 1000
+	Duration *uint64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+
+	// L-type compression recovery configuration
+	LSqueezeSetting *LSqueezeSetting `json:"LSqueezeSetting,omitnil,omitempty" name:"LSqueezeSetting"`
+
+	// AdSource type, supports UPLOAD_CREATIVES
+	AdSource *string `json:"AdSource,omitnil,omitempty" name:"AdSource"`
+}
+
 type AdditionalRateSetting struct {
 	// The maximum bit rate in a VBR scenario must be a multiple of 1000 and between 50000 - 40000000.
 	VideoMaxBitrate *uint64 `json:"VideoMaxBitrate,omitnil,omitempty" name:"VideoMaxBitrate"`
@@ -429,18 +451,18 @@ type CreateImageSettings struct {
 	// Origin. Valid values: TOP_LEFT, BOTTOM_LEFT, TOP_RIGHT, BOTTOM_RIGHT.
 	Location *string `json:"Location,omitnil,omitempty" name:"Location"`
 
-	// The watermark’s horizontal distance from the origin as a percentage of the video width. Value range: 0-100. Default: 10.
+	// The watermark's horizontal distance from the origin as a percentage of the video width. Value range: 0-100. Default: 10.
 	XPos *int64 `json:"XPos,omitnil,omitempty" name:"XPos"`
 
-	// The watermark’s vertical distance from the origin as a percentage of the video height. Value range: 0-100. Default: 10.
+	// The watermark's vertical distance from the origin as a percentage of the video height. Value range: 0-100. Default: 10.
 	YPos *int64 `json:"YPos,omitnil,omitempty" name:"YPos"`
 
-	// The watermark image’s width as a percentage of the video width. Value range: 0-100. Default: 10.
+	// The watermark image's width as a percentage of the video width. Value range: 0-100. Default: 10.
 	// `0` means to scale the width proportionally to the height.
 	// You cannot set both `Width` and `Height` to `0`.
 	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
-	// The watermark image’s height as a percentage of the video height. Value range: 0-100. Default: 10.
+	// The watermark image's height as a percentage of the video height. Value range: 0-100. Default: 10.
 	// `0` means to scale the height proportionally to the width.
 	// You cannot set both `Width` and `Height` to `0`.
 	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
@@ -911,10 +933,10 @@ type CreateTextSettings struct {
 	// Origin. Valid values: TOP_LEFT, BOTTOM_LEFT, TOP_RIGHT, BOTTOM_RIGHT.
 	Location *string `json:"Location,omitnil,omitempty" name:"Location"`
 
-	// The watermark’s horizontal distance from the origin as a percentage of the video width. Value range: 0-100. Default: 10.
+	// The watermark's horizontal distance from the origin as a percentage of the video width. Value range: 0-100. Default: 10.
 	XPos *int64 `json:"XPos,omitnil,omitempty" name:"XPos"`
 
-	// The watermark’s vertical distance from the origin as a percentage of the video height. Value range: 0-100. Default: 10.
+	// The watermark's vertical distance from the origin as a percentage of the video height. Value range: 0-100. Default: 10.
 	YPos *int64 `json:"YPos,omitnil,omitempty" name:"YPos"`
 
 	// Font size. Value range: 25-50.
@@ -2500,6 +2522,9 @@ type DescribeWatermarkInfo struct {
 	// List of channel IDs the watermark is bound to
 	// Note: This field may return `null`, indicating that no valid value was found.
 	AttachedChannels []*string `json:"AttachedChannels,omitnil,omitempty" name:"AttachedChannels"`
+
+	// AB watermark configuration.
+	AbWatermarkSettings *AbWatermarkSettingsResp `json:"AbWatermarkSettings,omitnil,omitempty" name:"AbWatermarkSettings"`
 }
 
 type DestinationInfo struct {
@@ -2642,6 +2667,9 @@ type EventSettingsReq struct {
 
 	// Dynamic graphic overlay activate configuration
 	MotionGraphicsActivateSetting *MotionGraphicsActivateSetting `json:"MotionGraphicsActivateSetting,omitnil,omitempty" name:"MotionGraphicsActivateSetting"`
+
+	// Ad Settings
+	AdBreakSetting *AdBreakSetting `json:"AdBreakSetting,omitnil,omitempty" name:"AdBreakSetting"`
 }
 
 type EventSettingsResp struct {
@@ -2683,6 +2711,9 @@ type EventSettingsResp struct {
 
 	// Dynamic graphic overlay activate configuration.
 	MotionGraphicsActivateSetting *MotionGraphicsActivateSetting `json:"MotionGraphicsActivateSetting,omitnil,omitempty" name:"MotionGraphicsActivateSetting"`
+
+	// Ad Settings
+	AdBreakSetting *AdBreakSetting `json:"AdBreakSetting,omitnil,omitempty" name:"AdBreakSetting"`
 }
 
 type FailOverSettings struct {
@@ -3011,6 +3042,26 @@ type InputTrack struct {
 type InputTracks struct {
 	// Audio track configuration information.
 	Tracks []*InputTrack `json:"Tracks,omitnil,omitempty" name:"Tracks"`
+}
+
+type LSqueezeSetting struct {
+	// Advertising benchmark position, 0 top left, 1 top right, 2 bottom right, 3 bottom left, default value 0, corresponding TOP_LEFT,TOP_RIGHT,BOTTOM_RIGHT,BOTTOM_LEFT
+	Location *uint64 `json:"Location,omitnil,omitempty" name:"Location"`
+
+	// The default value for the percentage in the X-axis direction is 20, with a range of 0-50
+	OffsetX *uint64 `json:"OffsetX,omitnil,omitempty" name:"OffsetX"`
+
+	// The default value for the percentage in the Y-axis direction is 20, with a range of 0-50
+	OffsetY *uint64 `json:"OffsetY,omitnil,omitempty" name:"OffsetY"`
+
+	// Background image URL, starting with http/https and ending in jpg/jpeg/png
+	BackgroundImgUrl *string `json:"BackgroundImgUrl,omitnil,omitempty" name:"BackgroundImgUrl"`
+
+	// Compress time. Unit ms, default value 2000, range: 500-10000, SqueezeInPeriod+SqueezeOutPeriod cannot be greater than duration, included in duration
+	SqueezeInPeriod *uint64 `json:"SqueezeInPeriod,omitnil,omitempty" name:"SqueezeInPeriod"`
+
+	// Restore to full screen time. Unit ms, default value 2000, range 500-10000, SqueezeInPeriod+SqueezeOutPeriod cannot be greater than duration, included in duration
+	SqueezeOutPeriod *uint64 `json:"SqueezeOutPeriod,omitnil,omitempty" name:"SqueezeOutPeriod"`
 }
 
 type LogInfo struct {
@@ -3472,6 +3523,9 @@ type OutputInfo struct {
 
 	// Frame capture template name array. Quantity limit: [0,1].
 	FrameCaptureTemplateNames []*string `json:"FrameCaptureTemplateNames,omitnil,omitempty" name:"FrameCaptureTemplateNames"`
+
+	// Name modification for sub m3u8.
+	NameModifier *string `json:"NameModifier,omitnil,omitempty" name:"NameModifier"`
 }
 
 type OutputsStatistics struct {
@@ -3503,6 +3557,15 @@ type PipelineInputStatistics struct {
 	// For `rtp/udp` input, the quantity is the number of `Pid` of the input audio.
 	// For other inputs, the quantity is 1.
 	Audio []*AudioPipelineInputStatistics `json:"Audio,omitnil,omitempty" name:"Audio"`
+
+	// Session ID
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// Rtt time, in milliseconds
+	RTT *int64 `json:"RTT,omitnil,omitempty" name:"RTT"`
+
+	// Is the Network parameter valid? 0 indicates invalid, 1 indicates valid
+	NetworkValid *int64 `json:"NetworkValid,omitnil,omitempty" name:"NetworkValid"`
 }
 
 type PipelineLogInfo struct {
@@ -3522,6 +3585,9 @@ type PipelineOutputStatistics struct {
 
 	// Output bandwidth in bps.
 	NetworkOut *uint64 `json:"NetworkOut,omitnil,omitempty" name:"NetworkOut"`
+
+	// Is the Network parameter valid? 0 indicates invalid, 1 indicates valid
+	NetworkValid *int64 `json:"NetworkValid,omitnil,omitempty" name:"NetworkValid"`
 }
 
 type PlanReq struct {
@@ -3690,7 +3756,7 @@ type SegmentationDescriptorInfo struct {
 	// Corresponds to SCTE-35 segmentation_type_id.
 	TypeID *uint64 `json:"TypeID,omitnil,omitempty" name:"TypeID"`
 
-	// Corresponds to SCTE-35 segment_num。This field provides support for numbering segments within a given collection of segments.
+	// Corresponds to SCTE-35 segment_num. This field provides support for numbering segments within a given collection of segments.
 	Num *uint64 `json:"Num,omitnil,omitempty" name:"Num"`
 
 	// Corresponds to SCTE-35 segment_expected.This field provides a count of the expected number of individual segments within a collection of segments.
@@ -3725,7 +3791,7 @@ type SegmentationDescriptorRespInfo struct {
 	// Corresponds to SCTE-35 segmentation_type_id.
 	TypeID *uint64 `json:"TypeID,omitnil,omitempty" name:"TypeID"`
 
-	// Corresponds to SCTE-35 segment_num。This field provides support for numbering segments within a given collection of segments.
+	// Corresponds to SCTE-35 segment_num. This field provides support for numbering segments within a given collection of segments.
 	Num *uint64 `json:"Num,omitnil,omitempty" name:"Num"`
 
 	// Corresponds to SCTE-35 segment_expected.This field provides a count of the expected number of individual segments within a collection of segments.
