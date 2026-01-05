@@ -258,10 +258,10 @@ type CacheInfoInfo struct {
 }
 
 type CdnDomainInfo struct {
-
+	// Total list size.
 	TotalSize *int64 `json:"TotalSize,omitnil,omitempty" name:"TotalSize"`
 
-
+	// List of associated domain name information.
 	Records []*DomainRecordInfo `json:"Records,omitnil,omitempty" name:"Records"`
 }
 
@@ -299,6 +299,12 @@ type ClipRangeInfo struct {
 	//
 	// Deprecated: Offset is deprecated.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Start offset, Valid when the Type is SpecifyTimeRange.
+	StartOffset *uint64 `json:"StartOffset,omitnil,omitempty" name:"StartOffset"`
+
+	// End offset, valid when Type is SpecifyTimeRange.
+	EndOffset *uint64 `json:"EndOffset,omitnil,omitempty" name:"EndOffset"`
 }
 
 type ConfigAliasesInfo struct {
@@ -310,13 +316,13 @@ type ConfigAliasesInfo struct {
 }
 
 type CosInputInfo struct {
-
+	// COS bucket name
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
-
+	// Region
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-
+	// File object path
 	Object *string `json:"Object,omitnil,omitempty" name:"Object"`
 }
 
@@ -3482,16 +3488,16 @@ func (r *DescribeStreamPackageVodRemuxTasksResponse) FromJsonString(s string) er
 }
 
 type DomainRecordInfo struct {
-
+	// Associated playback domain name.
 	CdnDomain *string `json:"CdnDomain,omitnil,omitempty" name:"CdnDomain"`
 
-
+	// Belonging region.
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-
+	// Channel ID.
 	ChannelId *string `json:"ChannelId,omitnil,omitempty" name:"ChannelId"`
 
-
+	// The ID of a record
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
@@ -3549,6 +3555,9 @@ type EndpointInfo struct {
 
 	// DRM configuration information.
 	DRMInfo *DRMInfo `json:"DRMInfo,omitnil,omitempty" name:"DRMInfo"`
+
+	// The switch of absolute path.
+	AbsolutePathEnable *bool `json:"AbsolutePathEnable,omitnil,omitempty" name:"AbsolutePathEnable"`
 }
 
 type HarvestJobResp struct {
@@ -3590,6 +3599,9 @@ type HarvestJobResp struct {
 
 	// The region corresponding to the harvest job.
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Callback URL after recording is completed
+	CallbackURL *string `json:"CallbackURL,omitnil,omitempty" name:"CallbackURL"`
 }
 
 type InputAuthInfo struct {
@@ -4665,6 +4677,9 @@ type SSAIChannelInfo struct {
 
 	// Region info
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Used for clickthrough addresses
+	SessionInitPrefix *string `json:"SessionInitPrefix,omitnil,omitempty" name:"SessionInitPrefix"`
 }
 
 type SSAIConf struct {
@@ -4861,10 +4876,10 @@ type SourcePackageConf struct {
 }
 
 type SourceTag struct {
-
+	// The key of the source tag supports capital letters, numbers, underscores, and dashes from 1 to 50 digits
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-
+	// The value of the source tag supports letters, numbers, underscores, dashes, periods, and percent signs (%) ranging from 1 to 200 characters
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
@@ -5296,22 +5311,67 @@ type UsageDetail struct {
 	Complete *uint64 `json:"Complete,omitnil,omitempty" name:"Complete"`
 
 	// Advertising tag time.
+	//
+	// Deprecated: AdMarkerTime is deprecated.
 	AdMarkerTime *float64 `json:"AdMarkerTime,omitnil,omitempty" name:"AdMarkerTime"`
 
 	// Personalization replacement time.
+	//
+	// Deprecated: ReplacedTime is deprecated.
 	ReplacedTime *float64 `json:"ReplacedTime,omitnil,omitempty" name:"ReplacedTime"`
 
 	// Fill factor for personalized ads.
+	//
+	// Deprecated: MidFillRate is deprecated.
 	MidFillRate *float64 `json:"MidFillRate,omitnil,omitempty" name:"MidFillRate"`
 
 	// Number of pre-roll ad requests.
+	//
+	// Deprecated: PreReqNum is deprecated.
 	PreReqNum *uint64 `json:"PreReqNum,omitnil,omitempty" name:"PreReqNum"`
 
 	// Number of pre-roll ad replacements.
+	//
+	// Deprecated: PreReplacedNum is deprecated.
 	PreReplacedNum *uint64 `json:"PreReplacedNum,omitnil,omitempty" name:"PreReplacedNum"`
 
 	// Ad replacement rate.
+	//
+	// Deprecated: PreReplaceRate is deprecated.
 	PreReplaceRate *float64 `json:"PreReplaceRate,omitnil,omitempty" name:"PreReplaceRate"`
+
+	// Number of ad tags found in the list
+	ADMarkerFound *uint64 `json:"ADMarkerFound,omitnil,omitempty" name:"ADMarkerFound"`
+
+	// Request advertising frequency from ADS
+	MakeAdsRequest *uint64 `json:"MakeAdsRequest,omitnil,omitempty" name:"MakeAdsRequest"`
+
+	// Received VAST returns from ADS
+	VASTResponse *uint64 `json:"VASTResponse,omitnil,omitempty" name:"VASTResponse"`
+
+	// Successfully filled the ad count
+	FilledAvail *uint64 `json:"FilledAvail,omitnil,omitempty" name:"FilledAvail"`
+
+	// The number of issues encountered during ad replacement execution
+	WarningNoAd *uint64 `json:"WarningNoAd,omitnil,omitempty" name:"WarningNoAd"`
+
+	// The number of timeouts returned by ADS
+	ErrorAdsTimeout *uint64 `json:"ErrorAdsTimeout,omitnil,omitempty" name:"ErrorAdsTimeout"`
+
+	// The number of empty VAST responses returned by ADS
+	EmptyVASTResponse *uint64 `json:"EmptyVASTResponse,omitnil,omitempty" name:"EmptyVASTResponse"`
+
+	// The number of empty VMAP responses returned by ADS
+	EmptyVMAPResponse *uint64 `json:"EmptyVMAPResponse,omitnil,omitempty" name:"EmptyVMAPResponse"`
+
+	// Date
+	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 type VodRemuxTaskInfo struct {
