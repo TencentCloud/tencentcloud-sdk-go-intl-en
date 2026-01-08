@@ -7661,6 +7661,60 @@ func (c *Client) HandleCurrentPlaylistWithContext(ctx context.Context, request *
     return
 }
 
+func NewImportMediaKnowledgeRequest() (request *ImportMediaKnowledgeRequest) {
+    request = &ImportMediaKnowledgeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ImportMediaKnowledge")
+    
+    
+    return
+}
+
+func NewImportMediaKnowledgeResponse() (response *ImportMediaKnowledgeResponse) {
+    response = &ImportMediaKnowledgeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ImportMediaKnowledge
+// This API is used to import AI analysis results into the knowledge base.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) ImportMediaKnowledge(request *ImportMediaKnowledgeRequest) (response *ImportMediaKnowledgeResponse, err error) {
+    return c.ImportMediaKnowledgeWithContext(context.Background(), request)
+}
+
+// ImportMediaKnowledge
+// This API is used to import AI analysis results into the knowledge base.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) ImportMediaKnowledgeWithContext(ctx context.Context, request *ImportMediaKnowledgeRequest) (response *ImportMediaKnowledgeResponse, err error) {
+    if request == nil {
+        request = NewImportMediaKnowledgeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ImportMediaKnowledge")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ImportMediaKnowledge require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewImportMediaKnowledgeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewInspectMediaQualityRequest() (request *InspectMediaQualityRequest) {
     request = &InspectMediaQualityRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -11511,6 +11565,58 @@ func (c *Client) SearchMediaWithContext(ctx context.Context, request *SearchMedi
     request.SetContext(ctx)
     
     response = NewSearchMediaResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSearchMediaBySemanticsRequest() (request *SearchMediaBySemanticsRequest) {
+    request = &SearchMediaBySemanticsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "SearchMediaBySemantics")
+    
+    
+    return
+}
+
+func NewSearchMediaBySemanticsResponse() (response *SearchMediaBySemanticsResponse) {
+    response = &SearchMediaBySemanticsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SearchMediaBySemantics
+// This API is used to conduct semantic search on media using natural language.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) SearchMediaBySemantics(request *SearchMediaBySemanticsRequest) (response *SearchMediaBySemanticsResponse, err error) {
+    return c.SearchMediaBySemanticsWithContext(context.Background(), request)
+}
+
+// SearchMediaBySemantics
+// This API is used to conduct semantic search on media using natural language.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) SearchMediaBySemanticsWithContext(ctx context.Context, request *SearchMediaBySemanticsRequest) (response *SearchMediaBySemanticsResponse, err error) {
+    if request == nil {
+        request = NewSearchMediaBySemanticsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "SearchMediaBySemantics")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SearchMediaBySemantics require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSearchMediaBySemanticsResponse()
     err = c.Send(request, response)
     return
 }

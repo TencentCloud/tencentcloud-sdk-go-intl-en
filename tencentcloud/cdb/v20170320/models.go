@@ -835,7 +835,7 @@ type BackupConfig struct {
 	// Replication mode of secondary database 2. Value range: async, semi-sync
 	ReplicationMode *string `json:"ReplicationMode,omitnil,omitempty" name:"ReplicationMode"`
 
-	// Name of the AZ of secondary database 2, such as ap-shanghai-1
+	// Name of the AZ of secondary database 2, such as ap-shanghai-2
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Private IP address of secondary database 2
@@ -5226,7 +5226,7 @@ type DescribeDBInstanceConfigResponseParams struct {
 	// Master instance deployment mode. Value range: 0 (single-AZ), 1 (multi-AZ)
 	DeployMode *int64 `json:"DeployMode,omitnil,omitempty" name:"DeployMode"`
 
-	// Instance AZ information in the format of "ap-shanghai-1".
+	// Instance AZ information in the format of "ap-shanghai-2".
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Configurations of the replica node
@@ -11843,7 +11843,7 @@ type RoInstanceInfo struct {
 	// RO instance region name, such as ap-shanghai
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Name of RO AZ, such as ap-shanghai-1
+	// Name of RO AZ, such as ap-shanghai-2
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// RO instance ID in the format of cdbro-c1nl9rpv
@@ -12053,7 +12053,7 @@ type SlaveConfig struct {
 	// Replication mode of the secondary database. Value range: async, semi-sync
 	ReplicationMode *string `json:"ReplicationMode,omitnil,omitempty" name:"ReplicationMode"`
 
-	// AZ name of the secondary database, such as ap-shanghai-1
+	// AZ name of the secondary database, such as ap-shanghai-2
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 }
 

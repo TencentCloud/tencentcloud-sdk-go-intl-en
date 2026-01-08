@@ -2085,6 +2085,49 @@ type AiSampleWordInfo struct {
 	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
+type AigcImageExtraParam struct {
+
+	AspectRatio *string `json:"AspectRatio,omitnil,omitempty" name:"AspectRatio"`
+
+
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
+}
+
+type AigcImageInfo struct {
+
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+
+	ReferenceType *string `json:"ReferenceType,omitnil,omitempty" name:"ReferenceType"`
+}
+
+type AigcStoreCosParam struct {
+
+	CosBucketName *string `json:"CosBucketName,omitnil,omitempty" name:"CosBucketName"`
+
+
+	CosBucketRegion *string `json:"CosBucketRegion,omitnil,omitempty" name:"CosBucketRegion"`
+
+
+	CosBucketPath *string `json:"CosBucketPath,omitnil,omitempty" name:"CosBucketPath"`
+}
+
+type AigcVideoExtraParam struct {
+
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
+
+
+	AspectRatio *string `json:"AspectRatio,omitnil,omitempty" name:"AspectRatio"`
+}
+
+type AigcVideoReferenceImageInfo struct {
+
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+
+	ReferenceType *string `json:"ReferenceType,omitnil,omitempty" name:"ReferenceType"`
+}
+
 type AnimatedGraphicTaskInput struct {
 	// Animated image generating template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
@@ -3680,6 +3723,338 @@ func (r *CreateAdaptiveDynamicStreamingTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateAdaptiveDynamicStreamingTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAigcImageTaskRequestParams struct {
+	// Model Name. Currently supported models include: Hunyuan,GEM,Qwen.
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+
+	// Specify the version number of a particular model. By default, the system utilizes the currently supported stable version of the model.  
+	// 1. GEM, available options [2.5, 3.0].
+	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+
+	// 
+	// Generate a description of the image. (Note: The maximum supported length is 1000 characters.) This parameter is mandatory when no reference image is provided.
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// Used to specify the content you wish to prevent the model from generating.Note: Supported by select models.Examples:  
+	// Overhead lighting, vibrant colors  
+	// Human figures, animals  
+	// Multiple vehicles, wind
+	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
+
+	// The default value is False, where the model strictly adheres to instructions. For optimal results with more refined prompts, setting this parameter to True will automatically optimize the input prompt to enhance generation quality.
+	EnhancePrompt *bool `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
+
+	// 
+	// Supports single image input by default. Models supporting multi-image input include GEM (up to 3 images).  
+	// Recommended image size should be under 7MB, with support for JPEG, PNG, and WebP formats.
+	ImageInfos []*AigcImageInfo `json:"ImageInfos,omitnil,omitempty" name:"ImageInfos"`
+
+	// Used to pass additional parameters.
+	ExtraParameters *AigcImageExtraParam `json:"ExtraParameters,omitnil,omitempty" name:"ExtraParameters"`
+
+	// The output files will be stored in the specified COS bucket. Note: COS service must be activated, and the MPS_QcsRole needs to be created and properly authorized.
+	StoreCosParam *AigcStoreCosParam `json:"StoreCosParam,omitnil,omitempty" name:"StoreCosParam"`
+
+	// Interface operator name.
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
+}
+
+type CreateAigcImageTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Model Name. Currently supported models include: Hunyuan,GEM,Qwen.
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+
+	// Specify the version number of a particular model. By default, the system utilizes the currently supported stable version of the model.  
+	// 1. GEM, available options [2.5, 3.0].
+	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+
+	// 
+	// Generate a description of the image. (Note: The maximum supported length is 1000 characters.) This parameter is mandatory when no reference image is provided.
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// Used to specify the content you wish to prevent the model from generating.Note: Supported by select models.Examples:  
+	// Overhead lighting, vibrant colors  
+	// Human figures, animals  
+	// Multiple vehicles, wind
+	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
+
+	// The default value is False, where the model strictly adheres to instructions. For optimal results with more refined prompts, setting this parameter to True will automatically optimize the input prompt to enhance generation quality.
+	EnhancePrompt *bool `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
+
+	// 
+	// Supports single image input by default. Models supporting multi-image input include GEM (up to 3 images).  
+	// Recommended image size should be under 7MB, with support for JPEG, PNG, and WebP formats.
+	ImageInfos []*AigcImageInfo `json:"ImageInfos,omitnil,omitempty" name:"ImageInfos"`
+
+	// Used to pass additional parameters.
+	ExtraParameters *AigcImageExtraParam `json:"ExtraParameters,omitnil,omitempty" name:"ExtraParameters"`
+
+	// The output files will be stored in the specified COS bucket. Note: COS service must be activated, and the MPS_QcsRole needs to be created and properly authorized.
+	StoreCosParam *AigcStoreCosParam `json:"StoreCosParam,omitnil,omitempty" name:"StoreCosParam"`
+
+	// Interface operator name.
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
+}
+
+func (r *CreateAigcImageTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAigcImageTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ModelName")
+	delete(f, "ModelVersion")
+	delete(f, "Prompt")
+	delete(f, "NegativePrompt")
+	delete(f, "EnhancePrompt")
+	delete(f, "ImageInfos")
+	delete(f, "ExtraParameters")
+	delete(f, "StoreCosParam")
+	delete(f, "Operator")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAigcImageTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAigcImageTaskResponseParams struct {
+	// Returns the task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateAigcImageTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAigcImageTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateAigcImageTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAigcImageTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAigcVideoTaskRequestParams struct {
+	// Model Name. Currently supported models include: Hunyuan, Hailuo, Kling, Vidu, OS, GV
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+
+	// Specify the version number of a particular model. By default, the system uses the currently supported stable version of the model.  
+	// 1. Hailuo: Available options [02, 2.3].  
+	// 2. Kling: Available options [2.0, 2.1, 2.5, O1, 2.6].  
+	// 3. Vidu: Available options [q2, q2-pro, q2-turbo].  
+	// 4. GV: Available option [3.1].  
+	// 5. OS: Available option [2.0].
+	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+
+	// Generate video description. (Note: Maximum 2000 characters supported). This parameter is mandatory when no images are provided.
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// Used to specify the content you wish to prevent the model from generating.Note: Supported by select models.Examples:  
+	// Overhead lighting, vibrant colors  
+	// Human figures, animals  
+	// Multiple vehicles, wind
+	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
+
+	// The default value is False, where the model strictly adheres to instructions. For optimal results with more refined prompts, setting this parameter to True will automatically optimize the input prompt to enhance generation quality.
+	EnhancePrompt *bool `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
+
+	// The URL of the image used to guide video generation, which must be publicly accessible via the internet.  
+	// Notes:  
+	// 1. The recommended image size should not exceed 10MB, though size limitations may vary across different models.  
+	// 2. Supported image formats: JPEG, PNG.  
+	// 3. When using the OS model, the input image dimensions must be either 1280x720 or 720x1280.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// The model will utilize the image provided via this parameter as the ending frame for video generation.  
+	// Supported models for this parameter:  
+	// 1. GV: When an ending frame image is provided, the ImageUrl parameter must also be specified as the starting frame.  
+	// 2. Kling: Under Resolution: 1080P, version 2.1 supports both start&end frames.  
+	// 3. Vidu, q2-pro, q2-turbo: Support start&end frames. 
+	// Notes:  
+	// 1. It is recommended that the image size does not exceed 10MB, though specific model limitations may vary.  
+	// 2. Supported image formats: JPEG, PNG.
+	LastImageUrl *string `json:"LastImageUrl,omitnil,omitempty" name:"LastImageUrl"`
+
+	// A list comprising up to three material resource images, utilized to depict the reference images the model will employ for video generation.  
+	// Models supporting multi-image input:  
+	// 1. GV: When utilizing multi-image input, neither ImageUrl nor LastImageUrl should be used.  
+	// 2. Vidu: Supports video generation with multiple reference images. For model q2, 1-7 images can be provided, with the subject ID specified via ReferenceType within ImageInfos.
+	// Notes:  
+	// 1. Each image must not exceed 10MB in size.  
+	// 2. Supported image formats: JPEG, PNG.
+	ImageInfos []*AigcVideoReferenceImageInfo `json:"ImageInfos,omitnil,omitempty" name:"ImageInfos"`
+
+	// Duration of generated videos.  
+	// Notes:  
+	// 1. Kling supports 5 and 10 seconds. Default: 5 seconds.  
+	// 2. Hailuo's standard mode supports 6 and 10 seconds, while other modes only support 6 seconds. Default: 6 seconds.  
+	// 3. Vidu supports 1 to 10 seconds.  
+	// 4. GV supports 8 seconds. Default: 8 seconds.  
+	// 5. OS supports 4, 8, and 12 seconds. Default: 8 seconds.
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+
+	// Used to pass additional parameters.
+	ExtraParameters *AigcVideoExtraParam `json:"ExtraParameters,omitnil,omitempty" name:"ExtraParameters"`
+
+	// The output files will be stored in the specified COS bucket. Note: COS service must be activated, and the MPS_QcsRole needs to be created and properly authorized.
+	StoreCosParam *AigcStoreCosParam `json:"StoreCosParam,omitnil,omitempty" name:"StoreCosParam"`
+
+	// 
+	// Used to pass specific scenario parameters required by the model, serialized into a JSON format string. Example: {"camera_control":{"type":"simple"}}
+	AdditionalParameters *string `json:"AdditionalParameters,omitnil,omitempty" name:"AdditionalParameters"`
+
+	// Interface operator name.
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
+}
+
+type CreateAigcVideoTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Model Name. Currently supported models include: Hunyuan, Hailuo, Kling, Vidu, OS, GV
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+
+	// Specify the version number of a particular model. By default, the system uses the currently supported stable version of the model.  
+	// 1. Hailuo: Available options [02, 2.3].  
+	// 2. Kling: Available options [2.0, 2.1, 2.5, O1, 2.6].  
+	// 3. Vidu: Available options [q2, q2-pro, q2-turbo].  
+	// 4. GV: Available option [3.1].  
+	// 5. OS: Available option [2.0].
+	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+
+	// Generate video description. (Note: Maximum 2000 characters supported). This parameter is mandatory when no images are provided.
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// Used to specify the content you wish to prevent the model from generating.Note: Supported by select models.Examples:  
+	// Overhead lighting, vibrant colors  
+	// Human figures, animals  
+	// Multiple vehicles, wind
+	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
+
+	// The default value is False, where the model strictly adheres to instructions. For optimal results with more refined prompts, setting this parameter to True will automatically optimize the input prompt to enhance generation quality.
+	EnhancePrompt *bool `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
+
+	// The URL of the image used to guide video generation, which must be publicly accessible via the internet.  
+	// Notes:  
+	// 1. The recommended image size should not exceed 10MB, though size limitations may vary across different models.  
+	// 2. Supported image formats: JPEG, PNG.  
+	// 3. When using the OS model, the input image dimensions must be either 1280x720 or 720x1280.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// The model will utilize the image provided via this parameter as the ending frame for video generation.  
+	// Supported models for this parameter:  
+	// 1. GV: When an ending frame image is provided, the ImageUrl parameter must also be specified as the starting frame.  
+	// 2. Kling: Under Resolution: 1080P, version 2.1 supports both start&end frames.  
+	// 3. Vidu, q2-pro, q2-turbo: Support start&end frames. 
+	// Notes:  
+	// 1. It is recommended that the image size does not exceed 10MB, though specific model limitations may vary.  
+	// 2. Supported image formats: JPEG, PNG.
+	LastImageUrl *string `json:"LastImageUrl,omitnil,omitempty" name:"LastImageUrl"`
+
+	// A list comprising up to three material resource images, utilized to depict the reference images the model will employ for video generation.  
+	// Models supporting multi-image input:  
+	// 1. GV: When utilizing multi-image input, neither ImageUrl nor LastImageUrl should be used.  
+	// 2. Vidu: Supports video generation with multiple reference images. For model q2, 1-7 images can be provided, with the subject ID specified via ReferenceType within ImageInfos.
+	// Notes:  
+	// 1. Each image must not exceed 10MB in size.  
+	// 2. Supported image formats: JPEG, PNG.
+	ImageInfos []*AigcVideoReferenceImageInfo `json:"ImageInfos,omitnil,omitempty" name:"ImageInfos"`
+
+	// Duration of generated videos.  
+	// Notes:  
+	// 1. Kling supports 5 and 10 seconds. Default: 5 seconds.  
+	// 2. Hailuo's standard mode supports 6 and 10 seconds, while other modes only support 6 seconds. Default: 6 seconds.  
+	// 3. Vidu supports 1 to 10 seconds.  
+	// 4. GV supports 8 seconds. Default: 8 seconds.  
+	// 5. OS supports 4, 8, and 12 seconds. Default: 8 seconds.
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+
+	// Used to pass additional parameters.
+	ExtraParameters *AigcVideoExtraParam `json:"ExtraParameters,omitnil,omitempty" name:"ExtraParameters"`
+
+	// The output files will be stored in the specified COS bucket. Note: COS service must be activated, and the MPS_QcsRole needs to be created and properly authorized.
+	StoreCosParam *AigcStoreCosParam `json:"StoreCosParam,omitnil,omitempty" name:"StoreCosParam"`
+
+	// 
+	// Used to pass specific scenario parameters required by the model, serialized into a JSON format string. Example: {"camera_control":{"type":"simple"}}
+	AdditionalParameters *string `json:"AdditionalParameters,omitnil,omitempty" name:"AdditionalParameters"`
+
+	// Interface operator name.
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
+}
+
+func (r *CreateAigcVideoTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAigcVideoTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ModelName")
+	delete(f, "ModelVersion")
+	delete(f, "Prompt")
+	delete(f, "NegativePrompt")
+	delete(f, "EnhancePrompt")
+	delete(f, "ImageUrl")
+	delete(f, "LastImageUrl")
+	delete(f, "ImageInfos")
+	delete(f, "Duration")
+	delete(f, "ExtraParameters")
+	delete(f, "StoreCosParam")
+	delete(f, "AdditionalParameters")
+	delete(f, "Operator")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAigcVideoTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAigcVideoTaskResponseParams struct {
+	// Upon successful task creation, the returned task ID can be used to invoke the query interface for polling task progress and retrieving generated results.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateAigcVideoTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAigcVideoTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateAigcVideoTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAigcVideoTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7818,6 +8193,143 @@ func (r *DescribeAdaptiveDynamicStreamingTemplatesResponse) ToJsonString() strin
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAdaptiveDynamicStreamingTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAigcImageTaskRequestParams struct {
+	// AIGC image task processing task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+type DescribeAigcImageTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// AIGC image task processing task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+func (r *DescribeAigcImageTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAigcImageTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAigcImageTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAigcImageTaskResponseParams struct {
+	// Current task status:
+	// WAIT: Pending,
+	// RUN: In progress,
+	// FAIL: Task failed,
+	// DONE: Task completed successfully.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// When the task status is DONE, the returned image URL list will be available for 12 hours. Please retrieve and utilize the images promptly.
+	ImageUrls []*string `json:"ImageUrls,omitnil,omitempty" name:"ImageUrls"`
+
+	// When the task status is FAIL, the failure information is returned.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAigcImageTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAigcImageTaskResponseParams `json:"Response"`
+}
+
+func (r *DescribeAigcImageTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAigcImageTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAigcVideoTaskRequestParams struct {
+	// AIGC video task processing task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+type DescribeAigcVideoTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// AIGC video task processing task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+func (r *DescribeAigcVideoTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAigcVideoTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAigcVideoTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAigcVideoTaskResponseParams struct {
+	// Current task status:
+	// WAIT: Pending,
+	// RUN: In progress,
+	// FAIL: Task failed,
+	// DONE: Task completed successfully.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// When the task status is DONE, the returned video URL list will be available for 12 hours. Please retrieve and utilize the video promptly.
+	VideoUrls []*string `json:"VideoUrls,omitnil,omitempty" name:"VideoUrls"`
+
+	// The resolution of the output video. Example: 1080*720.
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
+
+	// When the task status is FAIL, the failure information is returned.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAigcVideoTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAigcVideoTaskResponseParams `json:"Response"`
+}
+
+func (r *DescribeAigcVideoTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAigcVideoTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
