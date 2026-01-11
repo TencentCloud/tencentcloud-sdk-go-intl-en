@@ -3557,11 +3557,12 @@ func (r *VideoLivenessCompareResponse) FromJsonString(s string) error {
 }
 
 type WebVerificationConfigIntl struct {
-	// When starting verification, whether to skip the starting verification page. If true, enter the verification process directly. The default is false. This configuration will not take effect if the downgrade policy is triggered.
+	// When starting verification, whether to skip the starting verification page. If true, enter the verification process directly. This configuration will not take effect if the downgrade policy is triggered. The default is false.
+	// Example: false
 	AutoSkipStartPage *bool `json:"AutoSkipStartPage,omitnil,omitempty" name:"AutoSkipStartPage"`
 
 	// When the verification passed, whether to skip the result page and automatically jump to RedirectURL. The default value is false.
-	// Example value: false
+	// Example: false
 	AutoSkip *bool `json:"AutoSkip,omitnil,omitempty" name:"AutoSkip"`
 
 	// Detection mode, parameter values are as follows:
@@ -3570,10 +3571,10 @@ type WebVerificationConfigIntl struct {
 	// 3: Liveness detection;
 	// 4: OCR;
 	// The default value is 2.
-	// Example value: 3
+	// Example: 3
 	CheckMode *int64 `json:"CheckMode,omitnil,omitempty" name:"CheckMode"`
 
-	// The type of lisence used for verification. The following types are supported.
+	// Card Type for verification. The following types are supported:
 	// 1.HKIDCard: Hong Kong (China) ID card
 	// 2.MLIDCard: Malaysia ID card
 	// 3.IndonesialDCard: Indonesia ID card
@@ -3590,45 +3591,70 @@ type WebVerificationConfigIntl struct {
 	IDCardType *string `json:"IDCardType,omitnil,omitempty" name:"IDCardType"`
 
 	// Whether to turn off document alarms, the default is false (the alarm detection function is turned on). When enabled, the identity authentication process will be intercepted based on the alarm status of the certificate. If you need to use the document authentication function, please contact us.
+	// Example: false
 	DisableCheckOcrWarnings *bool `json:"DisableCheckOcrWarnings,omitnil,omitempty" name:"DisableCheckOcrWarnings"`
 
-	// Liveness security level: 1:Silent mode;2:Action mode;3:Lighting mode;4:Action+Lighting mode;5:Action+Lighting(High security) mode; default value is 3
+	// Liveness security level, the default value is 3. The currently supported security level are as follows:
+	// 1:Silent mode;
+	// 2:Action mode;
+	// 3:Lighting mode;
+	// 4:Action+Lighting mode;
+	// 5:Action+Lighting(High security) mode.
+	// Example: 4
 	SecurityLevel *int64 `json:"SecurityLevel,omitnil,omitempty" name:"SecurityLevel"`
 
-	// Whether to skip the agreement page, the default is false. When SkipPrivacyPolicy is false, the agreement page will be displayed and the privacy agreement needs to be checked; when SkipPrivacyPolicy is true, the agreement page will be skipped and the liveness process will be entered directly without checking the privacy agreement page.
+	// Whether to skip the agreement page. When SkipPrivacyPolicy is false, the agreement page will be displayed and the privacy agreement needs to be checked; when SkipPrivacyPolicy is true, the agreement page will be skipped and the liveness process will be entered directly without checking the privacy agreement page. The default is false.
+	// Example: false
 	SkipPrivacyPolicy *bool `json:"SkipPrivacyPolicy,omitnil,omitempty" name:"SkipPrivacyPolicy"`
 
-	// The default value is false. If it is false, the original ID image will be displayed. If it is true, the cut ID image will be displayed.
+	// whether to display the cropped ID card image. When set to false, the original ID card image is displayed. When set to true, the cropped version is displayed. The default value is false. 
+	// Example: false
 	IdCardCutReturn *bool `json:"IdCardCutReturn,omitnil,omitempty" name:"IdCardCutReturn"`
 
-	// Front-end theme color, in the format of RGB hexadecimal color code. The default value is "#2d72f1". If the format is incorrect, the default value color will be used. 
+	// Front-end theme color, in the format of RGB hexadecimal color code. If the format is incorrect, the default value color will be used. The default value is "#2d72f1".
+	// Example: #2d72f1
 	ThemeColor *string `json:"ThemeColor,omitnil,omitempty" name:"ThemeColor"`
 
-	// International language, the default value is en (English). Currently supported: th: Thai; en: English; zh-cn: Simplified Chinese; zh-tc: Tradionnal Chinese; id: Bahasa Indonesia.
+	// International language, the default value is en (English). The currently supported language are as follows: 
+	// th: Thai; 
+	// en: English; 
+	// zh-cn: Simplified Chinese; 
+	// zh-tc: Tradionnal Chinese; 
+	// id: Bahasa Indonesia.
 	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
 
-	// Automatic downgrade mode, with the following parameter values: 1: Downgrade to silent live mode; 2: Disable downgrade mode. The default value is 1.
+	// Automatic downgrade mode, the following parameter are supported: 
+	// 1: Downgrade to silent live mode; 
+	// 2: Disable downgrade mode. 
+	// The default value is 1.
 	AutoDowngrade *int64 `json:"AutoDowngrade,omitnil,omitempty" name:"AutoDowngrade"`
 
 	// This interface is used to control th action sequences.
-	// Action types are as follows:
-	// "blink"
-	// "mouth"
-	// "nod"
-	// "shake"
-	// You can choose 1-2 actions out of the four.
-	// Single action example: "blink"
-	// Multiple action example: "blink,mouth"
-	// The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2, 4, or 5; otherwise, the interface reports an error.
+	// The supported action types are as follows:
+	// "blink";
+	// "mouth";
+	// "nod";
+	// "shake".
+	// You can choose 1-2 actions out of the four. Single action example: "blink". Multiple action example: "blink,mouth". The different action types passed in this parameter take effect only when the SecurityLevel is 2, 4, or 5; otherwise, the interface reports an error.
+	// The default value is blink.
 	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
 
 	// Control liveness retry number.The value range is 1-99.
+	// The default value is 99.
 	LivenessRetryLimit *int64 `json:"LivenessRetryLimit,omitnil,omitempty" name:"LivenessRetryLimit"`
 
 	// Specifies the liveness detection timeout period in seconds. value range: (0,600].
+	// The default value is 45.
 	LivenessTimeout *uint64 `json:"LivenessTimeout,omitnil,omitempty" name:"LivenessTimeout"`
 
-	// Selects OCR alarms requiring attention. When an OCR Alarm occurs, the identity verification process will be interrupted. Default value is empty, indicating all alarms are monitored. This feature requires the parameter DisableCheckOcrWarnings=false. If the Alarm is disabled, this parameter will not be effective.
+	// Selects OCR alarms requiring attention. When an OCR Alarm occurs, the identity verification process will be interrupted. Default value is empty, indicating all alarms are monitored. This feature requires the parameter DisableCheckOcrWarnings=false. If the Alarm is disabled, this parameter will not be effective. The supported alarm types are as follows:
+	// -9101: Incomplete Border Alert;
+	// -9102: Copy Document Alert;
+	// -9103: Remediated Document Alert;
+	// -9104: PS-altered Document Alert;
+	// -9107: Glare Alert;
+	// -9108: Blurriness Alert;
+	// -9109: Alert Not Activated.
 	SelectedWarningCodes *string `json:"SelectedWarningCodes,omitnil,omitempty" name:"SelectedWarningCodes"`
 
 	// Whether expired identity documents are permitted to proceed to the liveness detection process. This parameter only takes effect when the document type is Hong Kong Identity Card (HKID).

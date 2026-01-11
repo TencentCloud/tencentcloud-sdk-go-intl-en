@@ -911,6 +911,9 @@ const (
 	// The default route table cannot be deleted.
 	UNSUPPORTEDOPERATION_NOTSUPPORTDELETEDEFAULTROUTETABLE = "UnsupportedOperation.NotSupportDeleteDefaultRouteTable"
 
+	// Unsupported custom routing type.
+	UNSUPPORTEDOPERATION_NOTSUPPORTROUTETYPE = "UnsupportedOperation.NotSupportRouteType"
+
 	// Unsupported availability zone.
 	UNSUPPORTEDOPERATION_NOTSUPPORTZONE = "UnsupportedOperation.NotSupportZone"
 

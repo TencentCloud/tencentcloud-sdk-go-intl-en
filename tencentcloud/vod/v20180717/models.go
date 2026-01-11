@@ -273,6 +273,10 @@ type AdaptiveStreamTemplate struct {
 	// TESHD transcoding parameters
 	// Note: This field may return `null`, indicating that no valid value was found.
 	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitnil,omitempty" name:"TEHDConfig"`
+
+	// Audio/Video enhancement configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
 }
 
 type AiAnalysisResult struct {
@@ -2570,18 +2574,69 @@ func (r *AttachMediaSubtitlesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type AudioBeautifyInfo struct {
+	// Whether to enable audio improvement. Valid values:
+	// <li>`ON`</li>
+	// <li>`OFF` </li>
+	// Default value: `OFF`.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// The audio improvement options. You can specify multiple options. Valid values:
+	// <li>`declick`: Noise removal.</li>
+	// <li>`deesser`: De-essing.</li>
+	// Default: `declick`.
+	Types []*string `json:"Types,omitnil,omitempty" name:"Types"`
+}
+
 type AudioDenoiseInfo struct {
 	// Whether to enable noise removal. Valid values:
 	// <li>`ON`</li>
 	// <li>`OFF`</li>
+	// Default value: `OFF`.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// The noise removal type. This parameter is valid only if `Switch` is `ON`. Valid values:
-	// <li>`weak`</li>
 	// <li>`normal`</li>
-	// <li>`strong`</li>
-	// Default value: `weak`.
+	// Default value: `normal`.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
+type AudioEnhanceConfig struct {
+	// The audio noise reduction configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Denoise *AudioDenoiseInfo `json:"Denoise,omitnil,omitempty" name:"Denoise"`
+
+	// The audio separation configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Separate *AudioSeparateInfo `json:"Separate,omitnil,omitempty" name:"Separate"`
+
+	// The volume equalization configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VolumeBalance *AudioVolumeBalanceInfo `json:"VolumeBalance,omitnil,omitempty" name:"VolumeBalance"`
+
+	// The audio improvement configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Beautify *AudioBeautifyInfo `json:"Beautify,omitnil,omitempty" name:"Beautify"`
+}
+
+type AudioSeparateInfo struct {
+	// Whether to enable audio separation. Valid values:
+	// <li>`ON`</li>
+	// <li>`OFF` </li>
+	// Default value: `OFF`.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// The scenario. Valid values:
+	// <li>`normal`: Separate voice and background audio.</li>
+	// <li>`music`: Separate vocals and instrumentals.</li>
+	// Default value: `normal`.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// The output audio track. Valid values:
+	// <li>`vocal`: Voice.</li>
+	// <li>`background`: Output background audio if the scenario is `normal`, and output instrumentals if the scenario is `music`.</li>
+	// Default value: `vocal`.
+	Track *string `json:"Track,omitnil,omitempty" name:"Track"`
 }
 
 type AudioTemplateInfo struct {
@@ -2699,6 +2754,20 @@ type AudioTransform struct {
 	// Volume adjustment parameter, which is valid if `Type` is `Volume`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VolumeParam *AudioVolumeParam `json:"VolumeParam,omitnil,omitempty" name:"VolumeParam"`
+}
+
+type AudioVolumeBalanceInfo struct {
+	// Whether to enable volume equalization. Valid values:
+	// <li>`ON`</li>
+	// <li>`OFF` </li>
+	// Default value: `OFF`.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// The type. Valid values:
+	// <li>`loudNorm`: Loudness normalization.</li>
+	// <li>`gainControl`: Volume leveling.</li>
+	// Default value: `loudNorm`.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type AudioVolumeParam struct {
@@ -6760,6 +6829,9 @@ type CreateTranscodeTemplateRequestParams struct {
 	// TESHD transcoding parameter.
 	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitnil,omitempty" name:"TEHDConfig"`
 
+	// Audio/Video enhancement parameter.
+	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
+
 	// The segment type. This parameter is valid only if `Container` is `hls`. Valid values:
 	// <li>ts: TS segment</li>
 	// <li>fmp4: fMP4 segment</li>
@@ -6803,6 +6875,9 @@ type CreateTranscodeTemplateRequest struct {
 	// TESHD transcoding parameter.
 	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitnil,omitempty" name:"TEHDConfig"`
 
+	// Audio/Video enhancement parameter.
+	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
+
 	// The segment type. This parameter is valid only if `Container` is `hls`. Valid values:
 	// <li>ts: TS segment</li>
 	// <li>fmp4: fMP4 segment</li>
@@ -6831,6 +6906,7 @@ func (r *CreateTranscodeTemplateRequest) FromJsonString(s string) error {
 	delete(f, "VideoTemplate")
 	delete(f, "AudioTemplate")
 	delete(f, "TEHDConfig")
+	delete(f, "EnhanceConfig")
 	delete(f, "SegmentType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTranscodeTemplateRequest has unknown keys!", "")
@@ -12815,6 +12891,25 @@ type DescribeTranscodeTemplatesRequestParams struct {
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Enhancement type. Valid values:
+	// <li>VideoEnhance: video enhancement only.</li>
+	// <li>AudioEnhance: audio enhancement only.</li>
+	// <li>AudioVideoEnhance: video and audio enhancement included.</li>
+	// <li> AnyEnhance: `VideoEnhance`, `AudioEnhance ` and `AudioVideoEnhance` included.</li>
+	// <li> None: Not any enhancement type</li>
+	EnhanceType *string `json:"EnhanceType,omitnil,omitempty" name:"EnhanceType"`
+
+	// Enhancement scenario configuration. Valid values:
+	// <li>common: common enhancement parameters, which are basic optimization parameters suitable for various video types, enhancing overall image quality.</li>
+	// <li>AIGC: overall resolution enhancement. It uses AI technology to improve the overall video resolution and image clarity.</li>
+	// <li>short_play: enhance facial and subtitle details, emphasizing characters' facial expressions and subtitle clarity to improve the viewing experience.</li>
+	// <li>short_video: optimize complex and diverse image quality issues, tailoring quality enhancements for the complex scenarios such as short videos to address various visual issues.</li>
+	// <li>game: fix motion blur and enhance details, with a focus on enhancing the clarity of game details and restoring blurry areas during motions to make the image content during gaming clearer and richer.</li>
+	// <li>HD_movie_series: provide a smooth playback effect for UHD videos. Standard 4K HDR videos with an FPS of 60 are generated to meet the needs of broadcasting/OTT for UHD videos. Formats for broadcasting scenarios are supported.</li>
+	// <li>LQ_material: low-definition material/old video restoration. It enhances overall resolution, and solves issues of old videos, such as low resolution, blur, distortion, scratches, and color temperature due to their age.</li>
+	// <li>lecture: live shows, e-commerce, conferences, and lectures. It improves the face display effect and performs specific optimizations, including face region enhancement, noise reduction, and artifacts removal, for scenarios involving human explanation, such as live shows, e-commerce, conferences, and lectures.</li>
+	EnhanceScenarioType *string `json:"EnhanceScenarioType,omitnil,omitempty" name:"EnhanceScenarioType"`
 }
 
 type DescribeTranscodeTemplatesRequest struct {
@@ -12846,6 +12941,25 @@ type DescribeTranscodeTemplatesRequest struct {
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Enhancement type. Valid values:
+	// <li>VideoEnhance: video enhancement only.</li>
+	// <li>AudioEnhance: audio enhancement only.</li>
+	// <li>AudioVideoEnhance: video and audio enhancement included.</li>
+	// <li> AnyEnhance: `VideoEnhance`, `AudioEnhance ` and `AudioVideoEnhance` included.</li>
+	// <li> None: Not any enhancement type</li>
+	EnhanceType *string `json:"EnhanceType,omitnil,omitempty" name:"EnhanceType"`
+
+	// Enhancement scenario configuration. Valid values:
+	// <li>common: common enhancement parameters, which are basic optimization parameters suitable for various video types, enhancing overall image quality.</li>
+	// <li>AIGC: overall resolution enhancement. It uses AI technology to improve the overall video resolution and image clarity.</li>
+	// <li>short_play: enhance facial and subtitle details, emphasizing characters' facial expressions and subtitle clarity to improve the viewing experience.</li>
+	// <li>short_video: optimize complex and diverse image quality issues, tailoring quality enhancements for the complex scenarios such as short videos to address various visual issues.</li>
+	// <li>game: fix motion blur and enhance details, with a focus on enhancing the clarity of game details and restoring blurry areas during motions to make the image content during gaming clearer and richer.</li>
+	// <li>HD_movie_series: provide a smooth playback effect for UHD videos. Standard 4K HDR videos with an FPS of 60 are generated to meet the needs of broadcasting/OTT for UHD videos. Formats for broadcasting scenarios are supported.</li>
+	// <li>LQ_material: low-definition material/old video restoration. It enhances overall resolution, and solves issues of old videos, such as low resolution, blur, distortion, scratches, and color temperature due to their age.</li>
+	// <li>lecture: live shows, e-commerce, conferences, and lectures. It improves the face display effect and performs specific optimizations, including face region enhancement, noise reduction, and artifacts removal, for scenarios involving human explanation, such as live shows, e-commerce, conferences, and lectures.</li>
+	EnhanceScenarioType *string `json:"EnhanceScenarioType,omitnil,omitempty" name:"EnhanceScenarioType"`
 }
 
 func (r *DescribeTranscodeTemplatesRequest) ToJsonString() string {
@@ -12867,6 +12981,8 @@ func (r *DescribeTranscodeTemplatesRequest) FromJsonString(s string) error {
 	delete(f, "TEHDType")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "EnhanceType")
+	delete(f, "EnhanceScenarioType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTranscodeTemplatesRequest has unknown keys!", "")
 	}
@@ -13191,6 +13307,21 @@ func (r *DescribeWordSamplesResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DescribeWordSamplesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type DiffusionEnhanceInfo struct {
+	// Whether to enable LLM enhancement. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
+	// Default value: OFF.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// The strength. Valid values:
+	// <li>weak</li>
+	// <li>normal</li>
+	// <li>strong</li>
+	// Default value: normal.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type DomainDetailInfo struct {
@@ -13600,6 +13731,26 @@ type EditMediaVideoStream struct {
 type EmptyTrackItem struct {
 	// Duration in seconds.
 	Duration *float64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+}
+
+type EnhanceConfig struct {
+	// Video enhancement configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VideoEnhance *VideoEnhanceConfig `json:"VideoEnhance,omitnil,omitempty" name:"VideoEnhance"`
+
+	// The audio enhancement configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AudioEnhance *AudioEnhanceConfig `json:"AudioEnhance,omitnil,omitempty" name:"AudioEnhance"`
+}
+
+type EnhanceConfigForUpdate struct {
+	// Video enhancement configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VideoEnhance *VideoEnhanceConfig `json:"VideoEnhance,omitnil,omitempty" name:"VideoEnhance"`
+
+	// The audio enhancement configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AudioEnhance *AudioEnhanceConfig `json:"AudioEnhance,omitnil,omitempty" name:"AudioEnhance"`
 }
 
 // Predefined struct for user
@@ -14630,6 +14781,20 @@ type ForceRedirect struct {
 	CarryHeaders *string `json:"CarryHeaders,omitnil,omitempty" name:"CarryHeaders"`
 }
 
+type FrameRateWithDenInfo struct {
+	// Capability configuration switch. Valid values:
+	// <li>ON: enabled.</li>
+	// <li>OFF: disabled.</li>
+	// Default value: OFF.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Frame rate numerator. Value range: non-negative number, which should be less than 100 when divided by the denominator, and in the unit of Hz. The default value is 0. Note: For transcoding, this parameter will overwrite the Fps in the VideoTemplate.
+	FpsNum *int64 `json:"FpsNum,omitnil,omitempty" name:"FpsNum"`
+
+	// Frame rate denominator.Value range: numbers equal to or greater than 1. The default value is 1. Note: For transcoding, this parameter will overwrite the FpsDenominator in the VideoTemplate.
+	FpsDen *int64 `json:"FpsDen,omitnil,omitempty" name:"FpsDen"`
+}
+
 type FrameTagConfigureInfo struct {
 	// Switch of intelligent frame-specific tagging task. Valid values:
 	// <li>ON: enables intelligent frame-specific tagging task;</li>
@@ -14654,6 +14819,7 @@ type HDRInfo struct {
 	// Whether to enable HDR. Valid values:
 	// <li>`ON`</li>
 	// <li>`OFF`</li>
+	// Default value: `OFF`.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// The HDR type. Valid values:
@@ -14662,7 +14828,7 @@ type HDRInfo struct {
 	// 
 	// Note:
 	// <li>This parameter is valid only if `Switch` is `ON`.</li>
-	// <li>For audio/video remastering, this parameter is valid only if the output video codec is `libx265`.</li>
+	// <li>For audio/video remastering, this parameter is valid only if the output video codec is `libx264` or`libx265`.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -14964,6 +15130,21 @@ type ImageProcessingTemplate struct {
 
 	// The template creation time in [ISO date format](https://www.tencentcloud.com/document/product/266/11732?lang=en&pg=#iso-date-format).
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+}
+
+type ImageQualityEnhanceInfo struct {
+	// Whether to enable overall enhancement. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
+	// Default value: OFF.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// The strength. Valid values:
+	// <li>weak</li>
+	// <li>normal</li>
+	// <li>strong</li>
+	// Default value: weak.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type ImageReviewUsageDataItem struct {
@@ -19898,6 +20079,9 @@ type ModifyTranscodeTemplateRequestParams struct {
 	// TESHD transcoding parameter.
 	TEHDConfig *TEHDConfigForUpdate `json:"TEHDConfig,omitnil,omitempty" name:"TEHDConfig"`
 
+	// Audio/Video enhancement parameter.
+	EnhanceConfig *EnhanceConfigForUpdate `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
+
 	// The segment type. This parameter is valid only if `Container` is `hls`. Valid values:
 	// <li>ts: TS segment</li>
 	// <li>fmp4: fMP4 segment</li>
@@ -19941,6 +20125,9 @@ type ModifyTranscodeTemplateRequest struct {
 	// TESHD transcoding parameter.
 	TEHDConfig *TEHDConfigForUpdate `json:"TEHDConfig,omitnil,omitempty" name:"TEHDConfig"`
 
+	// Audio/Video enhancement parameter.
+	EnhanceConfig *EnhanceConfigForUpdate `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
+
 	// The segment type. This parameter is valid only if `Container` is `hls`. Valid values:
 	// <li>ts: TS segment</li>
 	// <li>fmp4: fMP4 segment</li>
@@ -19969,6 +20156,7 @@ func (r *ModifyTranscodeTemplateRequest) FromJsonString(s string) error {
 	delete(f, "VideoTemplate")
 	delete(f, "AudioTemplate")
 	delete(f, "TEHDConfig")
+	delete(f, "EnhanceConfig")
 	delete(f, "SegmentType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTranscodeTemplateRequest has unknown keys!", "")
@@ -24224,9 +24412,10 @@ type ScratchRepairInfo struct {
 	// Whether to enable banding removal. Valid values:
 	// <li>`ON`</li>
 	// <li>`OFF`</li>
+	// Default value: `OFF`.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// The banding removal strength. Value range: 0.0 – 1.0. This parameter is valid only if `Switch` is `ON`.
+	// The banding removal strength. Value range: 0.0 - 1.0. This parameter is valid only if `Switch` is `ON`.
 	// Default value: `0.0`.
 	Intensity *float64 `json:"Intensity,omitnil,omitempty" name:"Intensity"`
 
@@ -25581,6 +25770,7 @@ type SuperResolutionInfo struct {
 	// <li>ON</li>
 	// <li>`OFF`</li>
 	// If super resolution is enabled, the output resolution will double.
+	// Default value: `OFF`.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// The super resolution type. This parameter is valid only if `Switch` is `ON`. Valid values:
@@ -26135,6 +26325,10 @@ type TranscodeTemplate struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitnil,omitempty" name:"TEHDConfig"`
 
+	// Audio/Video enhancement configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
+
 	// Container filter. Valid values:
 	// <li>Video: video container that can contain both video stream and audio stream;</li>
 	// <li>PureAudio: audio container that can contain only audio stream.</li>
@@ -26578,6 +26772,61 @@ type VideoDenoiseInfo struct {
 	// <li>`strong`</li>
 	// Default value: `weak`.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
+type VideoEnhanceConfig struct {
+	// Enhancement scenario configuration. Valid values:
+	// <li>common: common enhancement parameters, which are basic optimization parameters suitable for various video types, enhancing overall image quality.</li>
+	// <li>AIGC: overall resolution enhancement. It uses AI technology to improve the overall video resolution and image clarity.</li>
+	// <li>short_play: enhance facial and subtitle details, emphasizing characters' facial expressions and subtitle clarity to improve the viewing experience.</li>
+	// <li>short_video: optimize complex and diverse image quality issues, tailoring quality enhancements for the complex scenarios such as short videos to address various visual issues.</li>
+	// <li>game: fix motion blur and enhance details, with a focus on enhancing the clarity of game details and restoring blurry areas during motions to make the image content during gaming clearer and richer.</li>
+	// <li>HD_movie_series: provide a smooth playback effect for UHD videos. Standard 4K HDR videos with an FPS of 60 are generated to meet the needs of broadcasting/OTT for UHD videos. Formats for broadcasting scenarios are supported.</li>
+	// <li>LQ_material: low-definition material/old video restoration. It enhances overall resolution, and solves issues of old videos, such as low resolution, blur, distortion, scratches, and color temperature due to their age.</li>
+	// <li>lecture: live shows, e-commerce, conferences, and lectures. It improves the face display effect and performs specific optimizations, including face region enhancement, noise reduction, and artifacts removal, for scenarios involving human explanation, such as live shows, e-commerce, conferences, and lectures.</li>
+	// <li>Input of a null string indicates that the enhancement scenario is not used.</li>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnhanceScenarioType *string `json:"EnhanceScenarioType,omitnil,omitempty" name:"EnhanceScenarioType"`
+
+	// Super-resolution configuration. The video is not processed when the source resolution is higher than the target resolution. Note that it cannot be enabled simultaneously with Large Model enhancement.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SuperResolution *SuperResolutionInfo `json:"SuperResolution,omitnil,omitempty" name:"SuperResolution"`
+
+	// HDR configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Hdr *HDRInfo `json:"Hdr,omitnil,omitempty" name:"Hdr"`
+
+	// Video noise reduction configuration. Note that it cannot be enabled simultaneously with LLM enhancement.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Denoise *VideoDenoiseInfo `json:"Denoise,omitnil,omitempty" name:"Denoise"`
+
+	// Comprehensive enhancement configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ImageQualityEnhance *ImageQualityEnhanceInfo `json:"ImageQualityEnhance,omitnil,omitempty" name:"ImageQualityEnhance"`
+
+	// Color enhancement configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ColorEnhance *ColorEnhanceInfo `json:"ColorEnhance,omitnil,omitempty" name:"ColorEnhance"`
+
+	// Low-light enhancement configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LowLightEnhance *LowLightEnhanceInfo `json:"LowLightEnhance,omitnil,omitempty" name:"LowLightEnhance"`
+
+	// Banding removal configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ScratchRepair *ScratchRepairInfo `json:"ScratchRepair,omitnil,omitempty" name:"ScratchRepair"`
+
+	// Artifacts removal configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ArtifactRepair *ArtifactRepairInfo `json:"ArtifactRepair,omitnil,omitempty" name:"ArtifactRepair"`
+
+	// Large Model enhancement configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured. It cannot be enabled simultaneously with super-resolution and noise reduction.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiffusionEnhance *DiffusionEnhanceInfo `json:"DiffusionEnhance,omitnil,omitempty" name:"DiffusionEnhance"`
+
+	// Frame rate configuration for the frame interpolation, which supports fractions. Note that it is mutually exclusive with FrameRate. The configuration does not take effect if the source frame rate is greater than or equal to the target frame rate.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FrameRateWithDen *FrameRateWithDenInfo `json:"FrameRateWithDen,omitnil,omitempty" name:"FrameRateWithDen"`
 }
 
 type VideoFrameInterpolationInfo struct {

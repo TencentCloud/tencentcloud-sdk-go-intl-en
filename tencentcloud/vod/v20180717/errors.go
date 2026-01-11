@@ -479,6 +479,9 @@ const (
 	// Incorrect parameter value: SampleType.
 	INVALIDPARAMETERVALUE_SAMPLETYPE = "InvalidParameterValue.SampleType"
 
+	// 
+	INVALIDPARAMETERVALUE_SCENARIOTYPE = "InvalidParameterValue.ScenarioType"
+
 	// Incorrect parameter value: the value of the `ScreenshotInterval` parameter is invalid.
 	INVALIDPARAMETERVALUE_SCREENSHOTINTERVAL = "InvalidParameterValue.ScreenshotInterval"
 

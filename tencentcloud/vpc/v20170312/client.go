@@ -18859,6 +18859,66 @@ func (c *Client) ReplaceRoutesWithContext(ctx context.Context, request *ReplaceR
     return
 }
 
+func NewReplaceRoutesWithRoutePolicyRequest() (request *ReplaceRoutesWithRoutePolicyRequest) {
+    request = &ReplaceRoutesWithRoutePolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "ReplaceRoutesWithRoutePolicy")
+    
+    
+    return
+}
+
+func NewReplaceRoutesWithRoutePolicyResponse() (response *ReplaceRoutesWithRoutePolicyResponse) {
+    response = &ReplaceRoutesWithRoutePolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ReplaceRoutesWithRoutePolicy
+// This API (ReplaceRoutes) modifies the specified routing policy (Route) based on the routing policy ID (RouteId), supporting batch modifications.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_PARAMETERMISMATCH = "InvalidParameterValue.ParameterMismatch"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTROUTETYPE = "UnsupportedOperation.NotSupportRouteType"
+func (c *Client) ReplaceRoutesWithRoutePolicy(request *ReplaceRoutesWithRoutePolicyRequest) (response *ReplaceRoutesWithRoutePolicyResponse, err error) {
+    return c.ReplaceRoutesWithRoutePolicyWithContext(context.Background(), request)
+}
+
+// ReplaceRoutesWithRoutePolicy
+// This API (ReplaceRoutes) modifies the specified routing policy (Route) based on the routing policy ID (RouteId), supporting batch modifications.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_PARAMETERMISMATCH = "InvalidParameterValue.ParameterMismatch"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTROUTETYPE = "UnsupportedOperation.NotSupportRouteType"
+func (c *Client) ReplaceRoutesWithRoutePolicyWithContext(ctx context.Context, request *ReplaceRoutesWithRoutePolicyRequest) (response *ReplaceRoutesWithRoutePolicyResponse, err error) {
+    if request == nil {
+        request = NewReplaceRoutesWithRoutePolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vpc", APIVersion, "ReplaceRoutesWithRoutePolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ReplaceRoutesWithRoutePolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewReplaceRoutesWithRoutePolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewReplaceSecurityGroupPoliciesRequest() (request *ReplaceSecurityGroupPoliciesRequest) {
     request = &ReplaceSecurityGroupPoliciesRequest{
         BaseRequest: &tchttp.BaseRequest{},
