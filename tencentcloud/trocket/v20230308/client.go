@@ -757,7 +757,7 @@ func NewDescribeFusionInstanceListResponse() (response *DescribeFusionInstanceLi
 //
 // -InstanceId Cluster ID, exact query, obtain from the current API or console.
 //
-// - InstanceType cluster type, see [InstanceItem](https://www.tencentcloud.comom/document/api/1493/96031?from_cn_redirect=1#InstanceItem) data structure, supports multiple selections.
+// - InstanceType cluster type, see [InstanceItem](https://www.tencentcloud.com/document/api/1493/96031?from_cn_redirect=1#InstanceItem) data structure, supports multiple selections.
 //
 // - Version: cluster edition, enumeration values as follows:.
 //
@@ -786,7 +786,7 @@ func (c *Client) DescribeFusionInstanceList(request *DescribeFusionInstanceListR
 //
 // -InstanceId Cluster ID, exact query, obtain from the current API or console.
 //
-// - InstanceType cluster type, see [InstanceItem](https://www.tencentcloud.comom/document/api/1493/96031?from_cn_redirect=1#InstanceItem) data structure, supports multiple selections.
+// - InstanceType cluster type, see [InstanceItem](https://www.tencentcloud.com/document/api/1493/96031?from_cn_redirect=1#InstanceItem) data structure, supports multiple selections.
 //
 // - Version: cluster edition, enumeration values as follows:.
 //
@@ -895,11 +895,11 @@ func NewDescribeInstanceListResponse() (response *DescribeInstanceListResponse) 
 //
 // -InstanceName Cluster name, supports fuzzy search.
 //
-// - InstanceId The Tencent Cloud RocketMQ instance ID, obtained from the [DescribeFusionInstanceList](https://www.tencentcloud.comom/document/api/1493/106745?from_cn_redirect=1) API or console.
+// - InstanceId The Tencent Cloud RocketMQ instance ID, obtained from the [DescribeFusionInstanceList](https://www.tencentcloud.com/document/api/1493/106745?from_cn_redirect=1) API or console.
 //
-// - InstanceType cluster type, see [InstanceItem](https://www.tencentcloud.comom/document/api/1493/96031?from_cn_redirect=1#InstanceItem) data structure, supports multiple selections.
+// - InstanceType cluster type, see [InstanceItem](https://www.tencentcloud.com/document/api/1493/96031?from_cn_redirect=1#InstanceItem) data structure, supports multiple selections.
 //
-// -InstanceStatus cluster status, see [InstanceItem](https://www.tencentcloud.comom/document/api/1493/96031?from_cn_redirect=1#InstanceItem) data structure, supports multiple selections.
+// -InstanceStatus cluster status, see [InstanceItem](https://www.tencentcloud.com/document/api/1493/96031?from_cn_redirect=1#InstanceItem) data structure, supports multiple selections.
 //
 // 
 //
@@ -926,11 +926,11 @@ func (c *Client) DescribeInstanceList(request *DescribeInstanceListRequest) (res
 //
 // -InstanceName Cluster name, supports fuzzy search.
 //
-// - InstanceId The Tencent Cloud RocketMQ instance ID, obtained from the [DescribeFusionInstanceList](https://www.tencentcloud.comom/document/api/1493/106745?from_cn_redirect=1) API or console.
+// - InstanceId The Tencent Cloud RocketMQ instance ID, obtained from the [DescribeFusionInstanceList](https://www.tencentcloud.com/document/api/1493/106745?from_cn_redirect=1) API or console.
 //
-// - InstanceType cluster type, see [InstanceItem](https://www.tencentcloud.comom/document/api/1493/96031?from_cn_redirect=1#InstanceItem) data structure, supports multiple selections.
+// - InstanceType cluster type, see [InstanceItem](https://www.tencentcloud.com/document/api/1493/96031?from_cn_redirect=1#InstanceItem) data structure, supports multiple selections.
 //
-// -InstanceStatus cluster status, see [InstanceItem](https://www.tencentcloud.comom/document/api/1493/96031?from_cn_redirect=1#InstanceItem) data structure, supports multiple selections.
+// -InstanceStatus cluster status, see [InstanceItem](https://www.tencentcloud.com/document/api/1493/96031?from_cn_redirect=1#InstanceItem) data structure, supports multiple selections.
 //
 // 
 //
@@ -1197,7 +1197,7 @@ func NewDescribeMigratingTopicListResponse() (response *DescribeMigratingTopicLi
 //
 // This API is used to get topic names with fuzzy query support.
 //
-// This api is used to query the migration status. See the data structure in MigratingTopic (https://www.tencentcloud.comom/document/api/1493/96031?from_cn_redirect=1#MigratingTopic).
+// This api is used to query the migration status. See the data structure in MigratingTopic (https://www.tencentcloud.com/document/api/1493/96031?from_cn_redirect=1#MigratingTopic).
 //
 // This API is used to manage namespaces, valid only for 4.x clusters.
 //
@@ -1228,7 +1228,7 @@ func (c *Client) DescribeMigratingTopicList(request *DescribeMigratingTopicListR
 //
 // This API is used to get topic names with fuzzy query support.
 //
-// This api is used to query the migration status. See the data structure in MigratingTopic (https://www.tencentcloud.comom/document/api/1493/96031?from_cn_redirect=1#MigratingTopic).
+// This api is used to query the migration status. See the data structure in MigratingTopic (https://www.tencentcloud.com/document/api/1493/96031?from_cn_redirect=1#MigratingTopic).
 //
 // This API is used to manage namespaces, valid only for 4.x clusters.
 //
@@ -1619,7 +1619,7 @@ func NewDescribeSmoothMigrationTaskListResponse() (response *DescribeSmoothMigra
 //
 // Task status, supports multiple selections. 
 //
-// ConnectionType, network connection type, supports multiple selections. See the description of SmoothMigrationTaskItem (https://www.tencentcloud.comom/document/api/1493/96031?from_cn_redirect=1#SmoothMigrationTaskItem).
+// ConnectionType, network connection type, supports multiple selections. See the description of SmoothMigrationTaskItem (https://www.tencentcloud.com/document/api/1493/96031?from_cn_redirect=1#SmoothMigrationTaskItem).
 //
 // This API is used to search for an instance by instance ID with precise matching. 
 //
@@ -1655,7 +1655,7 @@ func (c *Client) DescribeSmoothMigrationTaskList(request *DescribeSmoothMigratio
 //
 // Task status, supports multiple selections. 
 //
-// ConnectionType, network connection type, supports multiple selections. See the description of SmoothMigrationTaskItem (https://www.tencentcloud.comom/document/api/1493/96031?from_cn_redirect=1#SmoothMigrationTaskItem).
+// ConnectionType, network connection type, supports multiple selections. See the description of SmoothMigrationTaskItem (https://www.tencentcloud.com/document/api/1493/96031?from_cn_redirect=1#SmoothMigrationTaskItem).
 //
 // This API is used to search for an instance by instance ID with precise matching. 
 //
@@ -1725,7 +1725,7 @@ func NewDescribeSourceClusterGroupListResponse() (response *DescribeSourceCluste
 //
 // This API is used to check whether the data is Imported.
 //
-// This api is used to check the import status. See SourceClusterGroupConfig (https://www.tencentcloud.comom/document/api/1493/96031?from_cn_redirect=1#SourceClusterGroupConfig) for details.
+// This api is used to check the import status. See SourceClusterGroupConfig (https://www.tencentcloud.com/document/api/1493/96031?from_cn_redirect=1#SourceClusterGroupConfig) for details.
 //
 // This API is used to manage namespaces, valid only for 4.x clusters.
 //
@@ -1761,7 +1761,7 @@ func (c *Client) DescribeSourceClusterGroupList(request *DescribeSourceClusterGr
 //
 // This API is used to check whether the data is Imported.
 //
-// This api is used to check the import status. See SourceClusterGroupConfig (https://www.tencentcloud.comom/document/api/1493/96031?from_cn_redirect=1#SourceClusterGroupConfig) for details.
+// This api is used to check the import status. See SourceClusterGroupConfig (https://www.tencentcloud.com/document/api/1493/96031?from_cn_redirect=1#SourceClusterGroupConfig) for details.
 //
 // This API is used to manage namespaces, valid only for 4.x clusters.
 //
@@ -1823,7 +1823,7 @@ func NewDescribeTopicResponse() (response *DescribeTopicResponse) {
 //
 // 
 //
-// -The ConsumerGroup name can be obtained from the [ConsumeGroupItem](https://www.tencentcloud.comom/document/api/1493/96031?from_cn_redirect=1#ConsumeGroupItem) in the API response of [DescribeConsumerGroupList](https://www.tencentcloud.comom/document/api/1493/101535?from_cn_redirect=1) or from the console.
+// -The ConsumerGroup name can be obtained from the [ConsumeGroupItem](https://www.tencentcloud.com/document/api/1493/96031?from_cn_redirect=1#ConsumeGroupItem) in the API response of [DescribeConsumerGroupList](https://www.tencentcloud.com/document/api/1493/101535?from_cn_redirect=1) or from the console.
 //
 // 
 //
@@ -1843,7 +1843,7 @@ func (c *Client) DescribeTopic(request *DescribeTopicRequest) (response *Describ
 //
 // 
 //
-// -The ConsumerGroup name can be obtained from the [ConsumeGroupItem](https://www.tencentcloud.comom/document/api/1493/96031?from_cn_redirect=1#ConsumeGroupItem) in the API response of [DescribeConsumerGroupList](https://www.tencentcloud.comom/document/api/1493/101535?from_cn_redirect=1) or from the console.
+// -The ConsumerGroup name can be obtained from the [ConsumeGroupItem](https://www.tencentcloud.com/document/api/1493/96031?from_cn_redirect=1#ConsumeGroupItem) in the API response of [DescribeConsumerGroupList](https://www.tencentcloud.com/document/api/1493/101535?from_cn_redirect=1) or from the console.
 //
 // 
 //
@@ -1895,9 +1895,9 @@ func NewDescribeTopicListResponse() (response *DescribeTopicListResponse) {
 //
 // 
 //
-// -TopicName supports fuzzy search. Obtain it from the [TopicItem](https://www.tencentcloud.comom/document/api/1493/96031?from_cn_redirect=1#TopicItem) in the [DescribeTopicList](https://www.tencentcloud.comom/document/api/1493/96030?from_cn_redirect=1) API response or the console.
+// -TopicName supports fuzzy search. Obtain it from the [TopicItem](https://www.tencentcloud.com/document/api/1493/96031?from_cn_redirect=1#TopicItem) in the [DescribeTopicList](https://www.tencentcloud.com/document/api/1493/96030?from_cn_redirect=1) API response or the console.
 //
-// -Search by TopicType, support multiple selections. See the TopicType field in the [DescribeTopic](https://www.tencentcloud.comom/document/api/1493/97945?from_cn_redirect=1) API.
+// -Search by TopicType, support multiple selections. See the TopicType field in the [DescribeTopic](https://www.tencentcloud.com/document/api/1493/97945?from_cn_redirect=1) API.
 //
 // 
 //
@@ -1916,9 +1916,9 @@ func (c *Client) DescribeTopicList(request *DescribeTopicListRequest) (response 
 //
 // 
 //
-// -TopicName supports fuzzy search. Obtain it from the [TopicItem](https://www.tencentcloud.comom/document/api/1493/96031?from_cn_redirect=1#TopicItem) in the [DescribeTopicList](https://www.tencentcloud.comom/document/api/1493/96030?from_cn_redirect=1) API response or the console.
+// -TopicName supports fuzzy search. Obtain it from the [TopicItem](https://www.tencentcloud.com/document/api/1493/96031?from_cn_redirect=1#TopicItem) in the [DescribeTopicList](https://www.tencentcloud.com/document/api/1493/96030?from_cn_redirect=1) API response or the console.
 //
-// -Search by TopicType, support multiple selections. See the TopicType field in the [DescribeTopic](https://www.tencentcloud.comom/document/api/1493/97945?from_cn_redirect=1) API.
+// -Search by TopicType, support multiple selections. See the TopicType field in the [DescribeTopic](https://www.tencentcloud.com/document/api/1493/97945?from_cn_redirect=1) API.
 //
 // 
 //
@@ -1969,7 +1969,7 @@ func NewDescribeTopicListByGroupResponse() (response *DescribeTopicListByGroupRe
 //
 // 
 //
-// -TopicName. It can be obtained from [TopicItem](https://www.tencentcloud.comom/document/api/1493/96031?from_cn_redirect=1#TopicItem) returned by the API [DescribeTopicList](https://www.tencentcloud.comom/document/api/1493/96030?from_cn_redirect=1) or from the console.
+// -TopicName. It can be obtained from [TopicItem](https://www.tencentcloud.com/document/api/1493/96031?from_cn_redirect=1#TopicItem) returned by the API [DescribeTopicList](https://www.tencentcloud.com/document/api/1493/96030?from_cn_redirect=1) or from the console.
 //
 // 
 //
@@ -1988,7 +1988,7 @@ func (c *Client) DescribeTopicListByGroup(request *DescribeTopicListByGroupReque
 //
 // 
 //
-// -TopicName. It can be obtained from [TopicItem](https://www.tencentcloud.comom/document/api/1493/96031?from_cn_redirect=1#TopicItem) returned by the API [DescribeTopicList](https://www.tencentcloud.comom/document/api/1493/96030?from_cn_redirect=1) or from the console.
+// -TopicName. It can be obtained from [TopicItem](https://www.tencentcloud.com/document/api/1493/96031?from_cn_redirect=1#TopicItem) returned by the API [DescribeTopicList](https://www.tencentcloud.com/document/api/1493/96030?from_cn_redirect=1) or from the console.
 //
 // 
 //

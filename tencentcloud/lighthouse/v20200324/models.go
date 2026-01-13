@@ -452,20 +452,20 @@ type Bundle struct {
 
 // Predefined struct for user
 type CancelShareBlueprintAcrossAccountsRequestParams struct {
-	// Image ID, which can be obtained through the BlueprintId returned by the [DescribeBlueprints](https://www.tencentcloud.comom/document/product/1207/47689?from_cn_redirect=1) API.
+	// Image ID, which can be obtained through the BlueprintId returned by the [DescribeBlueprints](https://www.tencentcloud.com/document/product/1207/47689?from_cn_redirect=1) API.
 	BlueprintId *string `json:"BlueprintId,omitnil,omitempty" name:"BlueprintId"`
 
-	// List of [account IDs](https://www.tencentcloud.comom/document/product/213/4944?from_cn_redirect=1#.E8.8E.B7.E5.8F.96.E4.B8.BB.E8.B4.A6.E5.8F.B7.E7.9A.84.E8.B4.A6.E5.8F.B7-id) that receive the shared images. The account ID is different from the QQ number. To query a user account ID, view the account ID column in the account information. The maximum number of accounts is 10.
+	// List of [account IDs](https://www.tencentcloud.com/document/product/213/4944?from_cn_redirect=1#.E8.8E.B7.E5.8F.96.E4.B8.BB.E8.B4.A6.E5.8F.B7.E7.9A.84.E8.B4.A6.E5.8F.B7-id) that receive the shared images. The account ID is different from the QQ number. To query a user account ID, view the account ID column in the account information. The maximum number of accounts is 10.
 	AccountIds []*string `json:"AccountIds,omitnil,omitempty" name:"AccountIds"`
 }
 
 type CancelShareBlueprintAcrossAccountsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Image ID, which can be obtained through the BlueprintId returned by the [DescribeBlueprints](https://www.tencentcloud.comom/document/product/1207/47689?from_cn_redirect=1) API.
+	// Image ID, which can be obtained through the BlueprintId returned by the [DescribeBlueprints](https://www.tencentcloud.com/document/product/1207/47689?from_cn_redirect=1) API.
 	BlueprintId *string `json:"BlueprintId,omitnil,omitempty" name:"BlueprintId"`
 
-	// List of [account IDs](https://www.tencentcloud.comom/document/product/213/4944?from_cn_redirect=1#.E8.8E.B7.E5.8F.96.E4.B8.BB.E8.B4.A6.E5.8F.B7.E7.9A.84.E8.B4.A6.E5.8F.B7-id) that receive the shared images. The account ID is different from the QQ number. To query a user account ID, view the account ID column in the account information. The maximum number of accounts is 10.
+	// List of [account IDs](https://www.tencentcloud.com/document/product/213/4944?from_cn_redirect=1#.E8.8E.B7.E5.8F.96.E4.B8.BB.E8.B4.A6.E5.8F.B7.E7.9A.84.E8.B4.A6.E5.8F.B7-id) that receive the shared images. The account ID is different from the QQ number. To query a user account ID, view the account ID column in the account information. The maximum number of accounts is 10.
 	AccountIds []*string `json:"AccountIds,omitnil,omitempty" name:"AccountIds"`
 }
 
@@ -2464,13 +2464,13 @@ func (r *DescribeGeneralResourceQuotasResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeImagesToShareRequestParams struct {
-	// List of CVM image IDs, which can be obtained through the ImageId in the returned value of the [DescribeImages](https://www.tencentcloud.comom/document/api/213/15715?from_cn_redirect=1) API.
+	// List of CVM image IDs, which can be obtained through the ImageId in the returned value of the [DescribeImages](https://www.tencentcloud.com/document/api/213/15715?from_cn_redirect=1) API.
 	ImageIds []*string `json:"ImageIds,omitnil,omitempty" name:"ImageIds"`
 
-	// Offset. The default value is 0. For more information on `Offset`, see the relevant section in API [Introduction](https://www.tencentcloud.comom/document/product/1207/47578?from_cn_redirect=1).
+	// Offset. The default value is 0. For more information on `Offset`, see the relevant section in API [Introduction](https://www.tencentcloud.com/document/product/1207/47578?from_cn_redirect=1).
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of returned results. The default value is 20, and the maximum value is 100. For more information on `Limit`, see the relevant section in API [Introduction](https://www.tencentcloud.comom/document/product/1207/47578?from_cn_redirect=1).
+	// Number of returned results. The default value is 20, and the maximum value is 100. For more information on `Limit`, see the relevant section in API [Introduction](https://www.tencentcloud.com/document/product/1207/47578?from_cn_redirect=1).
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filter list.
@@ -2497,13 +2497,13 @@ type DescribeImagesToShareRequestParams struct {
 type DescribeImagesToShareRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of CVM image IDs, which can be obtained through the ImageId in the returned value of the [DescribeImages](https://www.tencentcloud.comom/document/api/213/15715?from_cn_redirect=1) API.
+	// List of CVM image IDs, which can be obtained through the ImageId in the returned value of the [DescribeImages](https://www.tencentcloud.com/document/api/213/15715?from_cn_redirect=1) API.
 	ImageIds []*string `json:"ImageIds,omitnil,omitempty" name:"ImageIds"`
 
-	// Offset. The default value is 0. For more information on `Offset`, see the relevant section in API [Introduction](https://www.tencentcloud.comom/document/product/1207/47578?from_cn_redirect=1).
+	// Offset. The default value is 0. For more information on `Offset`, see the relevant section in API [Introduction](https://www.tencentcloud.com/document/product/1207/47578?from_cn_redirect=1).
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of returned results. The default value is 20, and the maximum value is 100. For more information on `Limit`, see the relevant section in API [Introduction](https://www.tencentcloud.comom/document/product/1207/47578?from_cn_redirect=1).
+	// Number of returned results. The default value is 20, and the maximum value is 100. For more information on `Limit`, see the relevant section in API [Introduction](https://www.tencentcloud.com/document/product/1207/47578?from_cn_redirect=1).
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filter list.
@@ -5453,7 +5453,7 @@ func (r *ModifyFirewallRulesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyImageSharePermissionRequestParams struct {
-	// Image ID, which can be obtained through the ImageId in the returned value of the [DescribeImages](https://www.tencentcloud.comom/document/api/213/15715?from_cn_redirect=1) API.
+	// Image ID, which can be obtained through the ImageId in the returned value of the [DescribeImages](https://www.tencentcloud.com/document/api/213/15715?from_cn_redirect=1) API.
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
 	// Sharing property, including SHARE and CANCEL. Among them, SHARE indicates sharing, and CANCEL indicates canceling sharing.
@@ -5463,7 +5463,7 @@ type ModifyImageSharePermissionRequestParams struct {
 type ModifyImageSharePermissionRequest struct {
 	*tchttp.BaseRequest
 	
-	// Image ID, which can be obtained through the ImageId in the returned value of the [DescribeImages](https://www.tencentcloud.comom/document/api/213/15715?from_cn_redirect=1) API.
+	// Image ID, which can be obtained through the ImageId in the returned value of the [DescribeImages](https://www.tencentcloud.com/document/api/213/15715?from_cn_redirect=1) API.
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
 	// Sharing property, including SHARE and CANCEL. Among them, SHARE indicates sharing, and CANCEL indicates canceling sharing.
@@ -6300,7 +6300,7 @@ func (r *ResetInstancesPasswordResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ResizeDisksRequestParams struct {
-	// Cloud disk ID list, which can be queried via the [DescribeDisks](https://www.tencentcloud.comom/document/api/1207/66093?from_cn_redirect=1) API. The maximum length of the list is 15.
+	// Cloud disk ID list, which can be queried via the [DescribeDisks](https://www.tencentcloud.com/document/api/1207/66093?from_cn_redirect=1) API. The maximum length of the list is 15.
 	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Size of the cloud disk after scale-out, in GB. The value range of the Premium Disk size is [10, 4000], and that of the Cloud SSD size is [20, 4000]. The cloud disk size after scale-out must be greater than the current disk size.
@@ -6310,7 +6310,7 @@ type ResizeDisksRequestParams struct {
 type ResizeDisksRequest struct {
 	*tchttp.BaseRequest
 	
-	// Cloud disk ID list, which can be queried via the [DescribeDisks](https://www.tencentcloud.comom/document/api/1207/66093?from_cn_redirect=1) API. The maximum length of the list is 15.
+	// Cloud disk ID list, which can be queried via the [DescribeDisks](https://www.tencentcloud.com/document/api/1207/66093?from_cn_redirect=1) API. The maximum length of the list is 15.
 	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Size of the cloud disk after scale-out, in GB. The value range of the Premium Disk size is [10, 4000], and that of the Cloud SSD size is [20, 4000]. The cloud disk size after scale-out must be greater than the current disk size.
@@ -6383,20 +6383,20 @@ type SceneInfo struct {
 
 // Predefined struct for user
 type ShareBlueprintAcrossAccountsRequestParams struct {
-	// Image ID, which can be obtained through the BlueprintId returned by the [DescribeBlueprints](https://www.tencentcloud.comom/document/product/1207/47689?from_cn_redirect=1) API.
+	// Image ID, which can be obtained through the BlueprintId returned by the [DescribeBlueprints](https://www.tencentcloud.com/document/product/1207/47689?from_cn_redirect=1) API.
 	BlueprintId *string `json:"BlueprintId,omitnil,omitempty" name:"BlueprintId"`
 
-	// List of [account IDs](https://www.tencentcloud.comom/document/product/213/4944?from_cn_redirect=1#.E8.8E.B7.E5.8F.96.E4.B8.BB.E8.B4.A6.E5.8F.B7.E7.9A.84.E8.B4.A6.E5.8F.B7-id) that receive the shared images. The account ID is different from the QQ number. To query a user account ID, view the account ID column in the account information. The maximum number of accounts is 10.
+	// List of [account IDs](https://www.tencentcloud.com/document/product/213/4944?from_cn_redirect=1#.E8.8E.B7.E5.8F.96.E4.B8.BB.E8.B4.A6.E5.8F.B7.E7.9A.84.E8.B4.A6.E5.8F.B7-id) that receive the shared images. The account ID is different from the QQ number. To query a user account ID, view the account ID column in the account information. The maximum number of accounts is 10.
 	AccountIds []*string `json:"AccountIds,omitnil,omitempty" name:"AccountIds"`
 }
 
 type ShareBlueprintAcrossAccountsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Image ID, which can be obtained through the BlueprintId returned by the [DescribeBlueprints](https://www.tencentcloud.comom/document/product/1207/47689?from_cn_redirect=1) API.
+	// Image ID, which can be obtained through the BlueprintId returned by the [DescribeBlueprints](https://www.tencentcloud.com/document/product/1207/47689?from_cn_redirect=1) API.
 	BlueprintId *string `json:"BlueprintId,omitnil,omitempty" name:"BlueprintId"`
 
-	// List of [account IDs](https://www.tencentcloud.comom/document/product/213/4944?from_cn_redirect=1#.E8.8E.B7.E5.8F.96.E4.B8.BB.E8.B4.A6.E5.8F.B7.E7.9A.84.E8.B4.A6.E5.8F.B7-id) that receive the shared images. The account ID is different from the QQ number. To query a user account ID, view the account ID column in the account information. The maximum number of accounts is 10.
+	// List of [account IDs](https://www.tencentcloud.com/document/product/213/4944?from_cn_redirect=1#.E8.8E.B7.E5.8F.96.E4.B8.BB.E8.B4.A6.E5.8F.B7.E7.9A.84.E8.B4.A6.E5.8F.B7-id) that receive the shared images. The account ID is different from the QQ number. To query a user account ID, view the account ID column in the account information. The maximum number of accounts is 10.
 	AccountIds []*string `json:"AccountIds,omitnil,omitempty" name:"AccountIds"`
 }
 

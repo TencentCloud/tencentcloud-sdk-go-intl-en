@@ -108,38 +108,38 @@ type AuthorizationPolicyItem struct {
 	// Rule syntax version. currently only support 1. defaults to 1.
 	Version *int64 `json:"Version,omitnil,omitempty" name:"Version"`
 
-	// Policy priority. a smaller priority ID indicates the policy takes effect with higher priority. see [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Policy priority. a smaller priority ID indicates the policy takes effect with higher priority. see [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 
 	// Specifies the decision.
 	// allow specifies permission for access requests from devices that match this policy.
 	// deny: denies access requests to the device that override the policy.
-	// Refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	Effect *string `json:"Effect,omitnil,omitempty" name:"Effect"`
 
 	// Operation.
 	// Specifies the connection.
 	// Publishes an mqtt message.
 	// Sub. specifies the subscription to mqtt messages.
-	// Refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	Actions *string `json:"Actions,omitnil,omitempty" name:"Actions"`
 
-	// Resource. see the data plane authorization policy description (https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Resource. see the data plane authorization policy description (https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	Resources *string `json:"Resources,omitnil,omitempty" name:"Resources"`
 
-	// Specifies the device ID for connection. refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Specifies the device ID for connection. refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	ClientId *string `json:"ClientId,omitnil,omitempty" name:"ClientId"`
 
-	// Condition - username. refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Condition - username. refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
-	// Specifies the client IP address. see the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Specifies the client IP address. see the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
 
-	// Condition - service quality. see the data plane authorization policy description (https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Condition - service quality. see the data plane authorization policy description (https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	Qos *string `json:"Qos,omitnil,omitempty" name:"Qos"`
 
-	// Condition - message retention. refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Condition - message retention. refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	// Indicates the match of retain messages.
 	// 2: indicates non-retain messages.
 	// 3: indicates matching retain and non-retain messages.
@@ -156,7 +156,7 @@ type AuthorizationPolicyItem struct {
 }
 
 type AuthorizationPolicyPriority struct {
-	// Specifies the authorization policy rule id, which can be obtained from the DescribeAuthorizationPolicies api (https://www.tencentcloud.comom/document/api/1778/111074?from_cn_redirect=1).
+	// Specifies the authorization policy rule id, which can be obtained from the DescribeAuthorizationPolicies api (https://www.tencentcloud.com/document/api/1778/111074?from_cn_redirect=1).
 	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Priority
@@ -165,7 +165,7 @@ type AuthorizationPolicyPriority struct {
 
 // Predefined struct for user
 type CreateAuthorizationPolicyRequestParams struct {
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Policy name, which cannot be empty, contains 3 to 64 characters, and supports chinese, letters, digits, "-", and "_".
@@ -174,22 +174,22 @@ type CreateAuthorizationPolicyRequestParams struct {
 	// Policy version, defaults to 1. currently only support 1.
 	PolicyVersion *int64 `json:"PolicyVersion,omitnil,omitempty" name:"PolicyVersion"`
 
-	// Policy priority. a smaller value indicates higher priority and must be unique. a smaller priority ID means the policy takes effect with higher priority. see [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Policy priority. a smaller value indicates higher priority and must be unique. a smaller priority ID means the policy takes effect with higher priority. see [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 
 	// Specifies the decision.
 	// allow specifies permission for access requests from devices that match this policy.
 	// deny: denies access requests to the device that override the policy.
-	// Refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	Effect *string `json:"Effect,omitnil,omitempty" name:"Effect"`
 
-	// Operation, supports multiple selections separated by commas. see the data plane policy description (https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Operation, supports multiple selections separated by commas. see the data plane policy description (https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	// Specifies the connection.
 	// Specifies the publish action.
 	// Sub. specifies the subscription.
 	Actions *string `json:"Actions,omitnil,omitempty" name:"Actions"`
 
-	// Condition - message retention. refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Condition - message retention. refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	// Matches message retention.
 	// Matches non-retention messages.
 	// 3. match retained and non-retained messages.
@@ -199,10 +199,10 @@ type CreateAuthorizationPolicyRequestParams struct {
 	// 0: at most once.
 	// Minimum once.
 	// 2: exactly once.
-	// Refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	Qos *string `json:"Qos,omitnil,omitempty" name:"Qos"`
 
-	// Specifies the resource and subscription to match. supports configuration of multiple match rules, separated by commas. see the data plane authorization policy description (https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Specifies the resource and subscription to match. supports configuration of multiple match rules, separated by commas. see the data plane authorization policy description (https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	Resources *string `json:"Resources,omitnil,omitempty" name:"Resources"`
 
 	// Specifies the condition-username.
@@ -211,7 +211,7 @@ type CreateAuthorizationPolicyRequestParams struct {
 	// Client ID. supports regular expressions.
 	ClientId *string `json:"ClientId,omitnil,omitempty" name:"ClientId"`
 
-	// Specifies the client IP address, supporting IP or CIDR. refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Specifies the client IP address, supporting IP or CIDR. refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
 
 	// Specifies the remark information with a maximum length of 128 characters.
@@ -221,7 +221,7 @@ type CreateAuthorizationPolicyRequestParams struct {
 type CreateAuthorizationPolicyRequest struct {
 	*tchttp.BaseRequest
 	
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Policy name, which cannot be empty, contains 3 to 64 characters, and supports chinese, letters, digits, "-", and "_".
@@ -230,22 +230,22 @@ type CreateAuthorizationPolicyRequest struct {
 	// Policy version, defaults to 1. currently only support 1.
 	PolicyVersion *int64 `json:"PolicyVersion,omitnil,omitempty" name:"PolicyVersion"`
 
-	// Policy priority. a smaller value indicates higher priority and must be unique. a smaller priority ID means the policy takes effect with higher priority. see [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Policy priority. a smaller value indicates higher priority and must be unique. a smaller priority ID means the policy takes effect with higher priority. see [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 
 	// Specifies the decision.
 	// allow specifies permission for access requests from devices that match this policy.
 	// deny: denies access requests to the device that override the policy.
-	// Refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	Effect *string `json:"Effect,omitnil,omitempty" name:"Effect"`
 
-	// Operation, supports multiple selections separated by commas. see the data plane policy description (https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Operation, supports multiple selections separated by commas. see the data plane policy description (https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	// Specifies the connection.
 	// Specifies the publish action.
 	// Sub. specifies the subscription.
 	Actions *string `json:"Actions,omitnil,omitempty" name:"Actions"`
 
-	// Condition - message retention. refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Condition - message retention. refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	// Matches message retention.
 	// Matches non-retention messages.
 	// 3. match retained and non-retained messages.
@@ -255,10 +255,10 @@ type CreateAuthorizationPolicyRequest struct {
 	// 0: at most once.
 	// Minimum once.
 	// 2: exactly once.
-	// Refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	Qos *string `json:"Qos,omitnil,omitempty" name:"Qos"`
 
-	// Specifies the resource and subscription to match. supports configuration of multiple match rules, separated by commas. see the data plane authorization policy description (https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Specifies the resource and subscription to match. supports configuration of multiple match rules, separated by commas. see the data plane authorization policy description (https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	Resources *string `json:"Resources,omitnil,omitempty" name:"Resources"`
 
 	// Specifies the condition-username.
@@ -267,7 +267,7 @@ type CreateAuthorizationPolicyRequest struct {
 	// Client ID. supports regular expressions.
 	ClientId *string `json:"ClientId,omitnil,omitempty" name:"ClientId"`
 
-	// Specifies the client IP address, supporting IP or CIDR. refer to the [data plane authorization policy description](https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Specifies the client IP address, supporting IP or CIDR. refer to the [data plane authorization policy description](https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
 
 	// Specifies the remark information with a maximum length of 128 characters.
@@ -335,7 +335,7 @@ func (r *CreateAuthorizationPolicyResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateInstanceRequestParams struct {
-	// Instance type, which needs to correspond to SkuCode. for details, see the [get MQTT product sales spec](https://www.tencentcloud.comom/document/api/1778/116232?from_cn_redirect=1) api.
+	// Instance type, which needs to correspond to SkuCode. for details, see the [get MQTT product sales spec](https://www.tencentcloud.com/document/api/1778/116232?from_cn_redirect=1) api.
 	// BASIC: basic edition.
 	// PRO edition.
 	// PLATINUM version.
@@ -344,7 +344,7 @@ type CreateInstanceRequestParams struct {
 	// Specifies the cluster name, cannot be empty, 3-64 characters, only comprised of digits, letters, "-", and "_".
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Product specification, which must correspond to InstanceType. see the [get MQTT product sales spec](https://www.tencentcloud.comom/document/api/1778/116232?from_cn_redirect=1) api to obtain details.
+	// Product specification, which must correspond to InstanceType. see the [get MQTT product sales spec](https://www.tencentcloud.com/document/api/1778/116232?from_cn_redirect=1) api to obtain details.
 	SkuCode *string `json:"SkuCode,omitnil,omitempty" name:"SkuCode"`
 
 	// Specifies the remark information with a maximum length of 128 characters.
@@ -378,7 +378,7 @@ type CreateInstanceRequestParams struct {
 type CreateInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance type, which needs to correspond to SkuCode. for details, see the [get MQTT product sales spec](https://www.tencentcloud.comom/document/api/1778/116232?from_cn_redirect=1) api.
+	// Instance type, which needs to correspond to SkuCode. for details, see the [get MQTT product sales spec](https://www.tencentcloud.com/document/api/1778/116232?from_cn_redirect=1) api.
 	// BASIC: basic edition.
 	// PRO edition.
 	// PLATINUM version.
@@ -387,7 +387,7 @@ type CreateInstanceRequest struct {
 	// Specifies the cluster name, cannot be empty, 3-64 characters, only comprised of digits, letters, "-", and "_".
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Product specification, which must correspond to InstanceType. see the [get MQTT product sales spec](https://www.tencentcloud.comom/document/api/1778/116232?from_cn_redirect=1) api to obtain details.
+	// Product specification, which must correspond to InstanceType. see the [get MQTT product sales spec](https://www.tencentcloud.com/document/api/1778/116232?from_cn_redirect=1) api to obtain details.
 	SkuCode *string `json:"SkuCode,omitnil,omitempty" name:"SkuCode"`
 
 	// Specifies the remark information with a maximum length of 128 characters.
@@ -475,7 +475,7 @@ func (r *CreateInstanceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateMessageEnrichmentRuleRequestParams struct {
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Rule name
@@ -508,7 +508,7 @@ type CreateMessageEnrichmentRuleRequestParams struct {
 type CreateMessageEnrichmentRuleRequest struct {
 	*tchttp.BaseRequest
 	
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Rule name
@@ -593,7 +593,7 @@ func (r *CreateMessageEnrichmentRuleResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateUserRequestParams struct {
-	// Instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// Instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Specifies the username, which cannot be empty, only supports numbers, uppercase and lowercase letters, and separators ("_", "-"), and must not exceed 32 characters.
@@ -609,7 +609,7 @@ type CreateUserRequestParams struct {
 type CreateUserRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// Instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Specifies the username, which cannot be empty, only supports numbers, uppercase and lowercase letters, and separators ("_", "-"), and must not exceed 32 characters.
@@ -668,20 +668,20 @@ func (r *CreateUserResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteAuthorizationPolicyRequestParams struct {
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Specifies the authorization policy rule id, which can be obtained from the DescribeAuthorizationPolicies api (https://www.tencentcloud.comom/document/api/1778/111074?from_cn_redirect=1).
+	// Specifies the authorization policy rule id, which can be obtained from the DescribeAuthorizationPolicies api (https://www.tencentcloud.com/document/api/1778/111074?from_cn_redirect=1).
 	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
 type DeleteAuthorizationPolicyRequest struct {
 	*tchttp.BaseRequest
 	
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Specifies the authorization policy rule id, which can be obtained from the DescribeAuthorizationPolicies api (https://www.tencentcloud.comom/document/api/1778/111074?from_cn_redirect=1).
+	// Specifies the authorization policy rule id, which can be obtained from the DescribeAuthorizationPolicies api (https://www.tencentcloud.com/document/api/1778/111074?from_cn_redirect=1).
 	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
@@ -797,14 +797,14 @@ func (r *DeleteClientSubscriptionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteInstanceRequestParams struct {
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DeleteInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -851,7 +851,7 @@ func (r *DeleteInstanceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteMessageEnrichmentRuleRequestParams struct {
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Message enrichment rule id.
@@ -861,7 +861,7 @@ type DeleteMessageEnrichmentRuleRequestParams struct {
 type DeleteMessageEnrichmentRuleRequest struct {
 	*tchttp.BaseRequest
 	
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Message enrichment rule id.
@@ -1034,14 +1034,14 @@ func (r *DeleteUserResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAuthorizationPoliciesRequestParams struct {
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeAuthorizationPoliciesRequest struct {
 	*tchttp.BaseRequest
 	
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -1091,7 +1091,7 @@ func (r *DescribeAuthorizationPoliciesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeClientListRequestParams struct {
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Client ID
@@ -1104,7 +1104,7 @@ type DescribeClientListRequestParams struct {
 type DescribeClientListRequest struct {
 	*tchttp.BaseRequest
 	
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Client ID
@@ -1162,14 +1162,14 @@ func (r *DescribeClientListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceRequestParams struct {
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -1326,7 +1326,7 @@ func (r *DescribeInstanceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMessageByTopicRequestParams struct {
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// home/room
@@ -1342,7 +1342,7 @@ type DescribeMessageByTopicRequestParams struct {
 type DescribeMessageByTopicRequest struct {
 	*tchttp.BaseRequest
 	
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// home/room
@@ -1404,7 +1404,7 @@ func (r *DescribeMessageByTopicResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMessageDetailsRequestParams struct {
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Message ID.
@@ -1417,7 +1417,7 @@ type DescribeMessageDetailsRequestParams struct {
 type DescribeMessageDetailsRequest struct {
 	*tchttp.BaseRequest
 	
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Message ID.
@@ -1666,7 +1666,7 @@ func (r *DescribeTopicResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeUserListRequestParams struct {
-	// Instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// Instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Specifies the supported fields in the query criteria list.
@@ -1683,7 +1683,7 @@ type DescribeUserListRequestParams struct {
 type DescribeUserListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// Instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Specifies the supported fields in the query criteria list.
@@ -1960,10 +1960,10 @@ type MessageEnrichmentRulePriority struct {
 
 // Predefined struct for user
 type ModifyAuthorizationPolicyRequestParams struct {
-	// Specifies the authorization policy ID, which can be obtained from the query authorization policy API (https://www.tencentcloud.comom/document/product/1778/111074?from_cn_redirect=1).
+	// Specifies the authorization policy ID, which can be obtained from the query authorization policy API (https://www.tencentcloud.com/document/product/1778/111074?from_cn_redirect=1).
 	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Policy name, which cannot be empty, contains 3 to 64 characters, and supports chinese, letters, digits, "-", and "_".
@@ -1980,13 +1980,13 @@ type ModifyAuthorizationPolicyRequestParams struct {
 	// Denies.
 	Effect *string `json:"Effect,omitnil,omitempty" name:"Effect"`
 
-	// Operation, supports multiple selections separated by commas. see the data plane policy description (https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Operation, supports multiple selections separated by commas. see the data plane policy description (https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	// Specifies the connection.
 	// Specifies the publish action.
 	// Sub. specifies the subscription.
 	Actions *string `json:"Actions,omitnil,omitempty" name:"Actions"`
 
-	// Specifies the resource and subscription to match. supports configuration of multiple match rules, separated by commas. see the data plane authorization policy description (https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Specifies the resource and subscription to match. supports configuration of multiple match rules, separated by commas. see the data plane authorization policy description (https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	Resources *string `json:"Resources,omitnil,omitempty" name:"Resources"`
 
 	// Specifies the condition-username.
@@ -2017,10 +2017,10 @@ type ModifyAuthorizationPolicyRequestParams struct {
 type ModifyAuthorizationPolicyRequest struct {
 	*tchttp.BaseRequest
 	
-	// Specifies the authorization policy ID, which can be obtained from the query authorization policy API (https://www.tencentcloud.comom/document/product/1778/111074?from_cn_redirect=1).
+	// Specifies the authorization policy ID, which can be obtained from the query authorization policy API (https://www.tencentcloud.com/document/product/1778/111074?from_cn_redirect=1).
 	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Policy name, which cannot be empty, contains 3 to 64 characters, and supports chinese, letters, digits, "-", and "_".
@@ -2037,13 +2037,13 @@ type ModifyAuthorizationPolicyRequest struct {
 	// Denies.
 	Effect *string `json:"Effect,omitnil,omitempty" name:"Effect"`
 
-	// Operation, supports multiple selections separated by commas. see the data plane policy description (https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Operation, supports multiple selections separated by commas. see the data plane policy description (https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	// Specifies the connection.
 	// Specifies the publish action.
 	// Sub. specifies the subscription.
 	Actions *string `json:"Actions,omitnil,omitempty" name:"Actions"`
 
-	// Specifies the resource and subscription to match. supports configuration of multiple match rules, separated by commas. see the data plane authorization policy description (https://www.tencentcloud.comom/document/product/1778/109715?from_cn_redirect=1).
+	// Specifies the resource and subscription to match. supports configuration of multiple match rules, separated by commas. see the data plane authorization policy description (https://www.tencentcloud.com/document/product/1778/109715?from_cn_redirect=1).
 	Resources *string `json:"Resources,omitnil,omitempty" name:"Resources"`
 
 	// Specifies the condition-username.
@@ -2127,7 +2127,7 @@ func (r *ModifyAuthorizationPolicyResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyInstanceRequestParams struct {
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Specifies the instance name to be modified, cannot be empty, 3-64 characters, only comprised of digits, letters, "-", and "_".
@@ -2170,7 +2170,7 @@ type ModifyInstanceRequestParams struct {
 type ModifyInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Specifies the instance name to be modified, cannot be empty, 3-64 characters, only comprised of digits, letters, "-", and "_".
@@ -2261,7 +2261,7 @@ type ModifyMessageEnrichmentRuleRequestParams struct {
 	// Message enrichment rule ID.
 	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// Tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Rule name, which cannot be empty, contains 3 to 64 characters, and supports chinese, letters, digits, "-", and "_".
@@ -2296,7 +2296,7 @@ type ModifyMessageEnrichmentRuleRequest struct {
 	// Message enrichment rule ID.
 	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// Tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Rule name, which cannot be empty, contains 3 to 64 characters, and supports chinese, letters, digits, "-", and "_".
@@ -2375,7 +2375,7 @@ func (r *ModifyMessageEnrichmentRuleResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyUserRequestParams struct {
-	// Instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// Instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Username.
@@ -2388,7 +2388,7 @@ type ModifyUserRequestParams struct {
 type ModifyUserRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// Instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Username.
@@ -2459,7 +2459,7 @@ type Tag struct {
 
 // Predefined struct for user
 type UpdateAuthorizationPolicyPriorityRequestParams struct {
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Policy ID and priority.
@@ -2469,7 +2469,7 @@ type UpdateAuthorizationPolicyPriorityRequestParams struct {
 type UpdateAuthorizationPolicyPriorityRequest struct {
 	*tchttp.BaseRequest
 	
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Policy ID and priority.
@@ -2520,7 +2520,7 @@ func (r *UpdateAuthorizationPolicyPriorityResponse) FromJsonString(s string) err
 
 // Predefined struct for user
 type UpdateMessageEnrichmentRulePriorityRequestParams struct {
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Policy ID and priority.
@@ -2530,7 +2530,7 @@ type UpdateMessageEnrichmentRulePriorityRequestParams struct {
 type UpdateMessageEnrichmentRulePriorityRequest struct {
 	*tchttp.BaseRequest
 	
-	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.comom/document/api/1778/111029?from_cn_redirect=1) api or console.
+	// tencent cloud MQTT instance ID, obtained from the [DescribeInstanceList](https://www.tencentcloud.com/document/api/1778/111029?from_cn_redirect=1) api or console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Policy ID and priority.

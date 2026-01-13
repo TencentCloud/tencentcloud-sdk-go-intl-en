@@ -6183,7 +6183,7 @@ func NewSyncBlueprintResponse() (response *SyncBlueprintResponse) {
 //
 // * Synchronization between Chinese mainland regions and regions outside the Chinese mainland is not supported.
 //
-//  * You can use the [DescribeBlueprints](https://www.tencentcloud.comom/document/api/1207/47689?from_cn_redirect=1) API to query the image status. When the status is NORMAL, it indicates that the source region synchronization ends.
+//  * You can use the [DescribeBlueprints](https://www.tencentcloud.com/document/api/1207/47689?from_cn_redirect=1) API to query the image status. When the status is NORMAL, it indicates that the source region synchronization ends.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -6224,7 +6224,7 @@ func (c *Client) SyncBlueprint(request *SyncBlueprintRequest) (response *SyncBlu
 //
 // * Synchronization between Chinese mainland regions and regions outside the Chinese mainland is not supported.
 //
-//  * You can use the [DescribeBlueprints](https://www.tencentcloud.comom/document/api/1207/47689?from_cn_redirect=1) API to query the image status. When the status is NORMAL, it indicates that the source region synchronization ends.
+//  * You can use the [DescribeBlueprints](https://www.tencentcloud.com/document/api/1207/47689?from_cn_redirect=1) API to query the image status. When the status is NORMAL, it indicates that the source region synchronization ends.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"

@@ -313,7 +313,10 @@ type ApplySdkVerificationTokenRequestParams struct {
 	// A passthrough field, which is returned together with the verification result and can contain up to 1,024 bits.
 	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 
-	// BASIC: Basic Version (default).
+	// BASIC: Basic version (Default).
+	// ENHANCE: Enhance version, enable additional output of device risk level field.
+	// PLUS: Plus version, enable additional output of device risk level and attack type fields.
+	// Please contact us to access enhance version & plus version.	
 	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
 
 	// This interface is used to control th action sequences.
@@ -389,7 +392,10 @@ type ApplySdkVerificationTokenRequest struct {
 	// A passthrough field, which is returned together with the verification result and can contain up to 1,024 bits.
 	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 
-	// BASIC: Basic Version (default).
+	// BASIC: Basic version (Default).
+	// ENHANCE: Enhance version, enable additional output of device risk level field.
+	// PLUS: Plus version, enable additional output of device risk level and attack type fields.
+	// Please contact us to access enhance version & plus version.	
 	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
 
 	// This interface is used to control th action sequences.
@@ -1092,6 +1098,22 @@ type CompareResult struct {
 
 	// The request ID of this verification process.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+
+	// Describes the detailed reason for the current liveness detection failure. Output only when SdkVersion is PLUS. Details are as follows:
+	// 01 - User kept eyes closed throughout the process.
+	// 02 - User failed to complete the specified action.
+	// 03 - Suspected photo replay attack.
+	// 04 - Suspected synthetic image.
+	// 05 - Suspected synthetic video.
+	// 06 - Suspected synthetic action.
+	// 07 - Suspected fraud template.
+	// 08 - Suspected watermark existence.
+	// 09 - Light verification failed.
+	// 10 - Face verification failed.
+	// 11 - Poor face quality.
+	// 12 - Unqualified collection quality.
+	// 13 - Suspected adversarial sample attack.
+	LivenessInfoTag []*string `json:"LivenessInfoTag,omitnil,omitempty" name:"LivenessInfoTag"`
 }
 
 // Predefined struct for user
@@ -1457,6 +1479,15 @@ type GeneralCard struct {
 	// Address
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Address *Address `json:"Address,omitnil,omitempty" name:"Address"`
+
+	// Localized name.
+	FullNameLocal *string `json:"FullNameLocal,omitnil,omitempty" name:"FullNameLocal"`
+
+	// Localization.
+	FirstNameLocal *string `json:"FirstNameLocal,omitnil,omitempty" name:"FirstNameLocal"`
+
+	// Localized surname.
+	LastNameLocal *string `json:"LastNameLocal,omitnil,omitempty" name:"LastNameLocal"`
 }
 
 // Predefined struct for user
@@ -1772,7 +1803,10 @@ type GetFaceIdTokenIntlRequestParams struct {
 	// The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2 or 4; otherwise, the interface reports an error.
 	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
 
-	// BASIC: Basic Version (Default).
+	// BASIC: Basic version (Default).
+	// ENHANCE: Enhance version, enable additional output of device risk level field.
+	// PLUS: Plus version, enable additional output of device risk level and attack type fields.
+	// Please contact us to access enhance version & plus version.	
 	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
 }
 
@@ -1811,7 +1845,10 @@ type GetFaceIdTokenIntlRequest struct {
 	// The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2 or 4; otherwise, the interface reports an error.
 	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
 
-	// BASIC: Basic Version (Default).
+	// BASIC: Basic version (Default).
+	// ENHANCE: Enhance version, enable additional output of device risk level field.
+	// PLUS: Plus version, enable additional output of device risk level and attack type fields.
+	// Please contact us to access enhance version & plus version.	
 	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
 }
 
@@ -2870,6 +2907,10 @@ type NormalHKIDCard struct {
 	// The current date of issue
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CurrentIssueDate *string `json:"CurrentIssueDate,omitnil,omitempty" name:"CurrentIssueDate"`
+
+	// Hong kong identity card version.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HKIDVersion *string `json:"HKIDVersion,omitnil,omitempty" name:"HKIDVersion"`
 }
 
 type NormalIndonesiaIDCard struct {
