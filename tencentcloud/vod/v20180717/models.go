@@ -1944,6 +1944,336 @@ type AiSampleWordInfo struct {
 	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
+type AigcImageOutputConfig struct {
+	// Storage mode. valid values: <li>Permanent: Permanent storage. the generated image file will be stored in VOD (video on demand), and the FileId can be obtained in the event notification.</li> <li>Temporary: Temporary storage. the generated image file will not be stored in vod, and the Temporary access URL can be obtained in the event notification.</li>.
+	// Default value: Temporary.
+	StorageMode *string `json:"StorageMode,omitnil,omitempty" name:"StorageMode"`
+
+	// Output filename, up to 64 characters. default filename is assigned by the system.
+	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
+
+	// Category ID, used to categorize and manage media. you can create a category and obtain the category ID via the [create classification](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) api.
+	// <Li>Default value: 0, indicating other categories.</li>.
+	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
+
+	// The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// Image generation resolution. available values are 720P, 1080P, 2K, 4K, 1024x1024, 2048x2048, 2304x1728, 2496x1664, 2560x1440, 3024x1296, 4096x4096, 4694x3520, 4992x3328, 5404x3040, 6198x2656.
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
+
+	// Specify the aspect ratio of the generated image. <li>when ModelName is GEM, the available values are 1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, and 21:9.</li> <li>when ModelName is Qwen, it is not currently supported.</li>.
+	AspectRatio *string `json:"AspectRatio,omitnil,omitempty" name:"AspectRatio"`
+
+	// Whether to allow figure or human face generation. valid values: <li>AllowAdult: allow adult generation.</li> <li>Disallowed: forbid including figures or human faces in images.</li>.
+	PersonGeneration *string `json:"PersonGeneration,omitnil,omitempty" name:"PersonGeneration"`
+
+	// Whether to enable compliance check for input content. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>.
+	InputComplianceCheck *string `json:"InputComplianceCheck,omitnil,omitempty" name:"InputComplianceCheck"`
+
+	// Whether to enable compliance check for output content. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>.
+	OutputComplianceCheck *string `json:"OutputComplianceCheck,omitnil,omitempty" name:"OutputComplianceCheck"`
+}
+
+type AigcImageSceneInfo struct {
+	// AI image generation scenario type. valid values:
+	// -change_clothes: AI clothing change.
+	// -product_image: AI-generated product image.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Valid when Type is change_clothes. this item is required and indicates the AI clothes-changing image generation config.
+	ChangeClothesConfig *ChangeClothesConfig `json:"ChangeClothesConfig,omitnil,omitempty" name:"ChangeClothesConfig"`
+
+	// Valid when Type is product_image. indicates the AI-generated product image config.
+	ProductImageConfig *ProductImageConfig `json:"ProductImageConfig,omitnil,omitempty" name:"ProductImageConfig"`
+}
+
+type AigcImageTask struct {
+	// The task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Task status, value: <li>PROCESSING: processing;</li><li>FINISH: completed.</li>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. A non-zero error code is returned when the source is abnormal. If 0 is returned, use the ErrCode of each specific task.
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message. If the source is abnormal, the corresponding exception message is returned. Otherwise, use the message of each specific task.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// The execution progress of a single adaptive bitrate stream. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// Input of AIGC image task.
+	Input *AigcImageTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Output of AIGC image task.
+	Output *AigcImageTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is not carried or is left empty, no deduplication will be performed.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this parameter. It can contain up to 1000 characters.
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+}
+
+type AigcImageTaskInput struct {
+	// Model name. 
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+
+	// Model version. 
+	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+
+	// File information of the input image for the AIGC image generation task.
+	FileInfos []*AigcImageTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+
+	// The prompt content for image generation.
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// Prevent the model from generating image generation prompts.
+	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
+
+	// Whether to optimize Prompt content automatically. when Enabled, it will optimize the passed in Prompt automatically to enhance generation quality. valid values: <li>Enabled: turn on;</li> <li>Disabled: turn off;</li>
+	EnhancePrompt *string `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
+
+
+	GenerationMode *string `json:"GenerationMode,omitnil,omitempty" name:"GenerationMode"`
+
+	// Output media file configuration for the task.
+	OutputConfig *AigcImageOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
+}
+
+type AigcImageTaskInputFileInfo struct {
+	// Input video File type. valid values: <li>File: on-demand media File;</li> <li>Url: accessible Url;</li>.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// The media File ID of the image File, which is the globally unique identifier of the File in vod, is assigned by the vod backend after successful upload. you can get this field in the [video upload completion event notification](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) or [vod console](https://console.cloud.tencent.com/vod/media). this parameter is valid when the Type value is File.
+	// Description:.
+	// 1. recommended for use: image less than 7 mb.
+	// 2. Valid values of image format: jpeg, jpg, png, and webp.
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// Accessible file URL. this parameter is valid when the Type value is URL.
+	// Description:.
+	// 1. recommended for use: image less than 7 mb.
+	// 2. Valid values of image format: jpeg, jpg, png, and webp.
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// Description of the input image, used to help the model understand the image. valid for GEM 2.5 and GEM 3.0 only.
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+}
+
+type AigcImageTaskOutput struct {
+	// File information of the out image for the AIGC image generation task.
+	FileInfos []*AigcImageTaskOutputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+}
+
+type AigcImageTaskOutputFileInfo struct {
+	// Storage mode. valid values: <li>Permanent: Permanent storage. the generated image file will be stored in VOD (video on demand).</li> <li>Temporary: Temporary storage. the generated image file will not be stored in vod.</li>.
+	// Default value: Temporary.
+	StorageMode *string `json:"StorageMode,omitnil,omitempty" name:"StorageMode"`
+
+	// Output filename, up to 64 characters. default filename is assigned by the system.
+	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
+
+	// Category ID, used to categorize and manage media. you can create a category and obtain the category ID via the [create classification](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) api.
+	// <Li>Default value: 0, indicating other categories.</li>.
+	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
+
+	// The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// File Type.
+	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
+
+	// File Url.
+	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
+
+	// File ID.
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// Meta Data.
+	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
+}
+
+type AigcVideoOutputConfig struct {
+	// Storage mode. valid values: <li>Permanent: Permanent storage. the generated video file will be stored in vod, and the FileId can be obtained from the event notification.</li> <li>Temporary: Temporary storage. the generated video file will not be stored in vod, and a Temporary access URL can be obtained from the event notification.</li>
+	// Default value: Temporary.
+	StorageMode *string `json:"StorageMode,omitnil,omitempty" name:"StorageMode"`
+
+	// Output media filename, longest 64 characters. default filename is specified by the system.
+	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
+
+	// Category ID, used to categorize and manage media. you can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) api.
+	// <Li>Default value: 0, indicate other categories.</li>.
+	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
+
+	// The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// Video duration, unit: seconds. <li>when ModelName is Kling, optional values: 5, 10, defaults to 5;</li> <li>when ModelName is Hailuo, optional values: 6, 10, defaults to 6;</li> <li>when ModelName is Vidu, specify 1-10;</li> <li>when ModelName is GV, optional values: 8, defaults to 8;</li> <li>when ModelName is OS, optional values: 4, 8, 12, defaults to 8;</li>
+	Duration *float64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+
+	// Generated video resolution.
+	// <li>When ModelName is Kling, available values are 720P and 1080P, with a default value of 720P.</li>
+	// <li>When ModelName is Hailuo, optional values are 768P and 1080P, with a default value of 768P.</li>
+	// <li>When ModelName is Vidu, optional values are 720P, 1080P, defaults to 720P.</li>
+	// <li>When ModelName is GV, optional values are 720P, 1080P, with a default value of 720P.</li>
+	// <li>When ModelName is OS, the optional values are 720P.</li>
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
+
+	// Specify the aspect ratio of the generated video.
+	// <li>When ModelName is Kling, for text-to-video, the optional values are 16:9, 9:16, 1:1, default is 16:9.</li>
+	// <li>When ModelName is Vidu, the optional values for video generation and image generation usage reference are 16:9, 9:16, 4:3, 3:4, and 1:1. among them, only version q2 supports 4:3 and 3:4.</li>
+	// <li>When ModelName is GV, optional values are 16:9 and 9:16, with a default value of 16:9.</li>
+	// <li>When ModelName is OS, for text-to-video, optional values are 16:9, 9:16, default is 16:9;</li>
+	// <li>When ModelName is Hailuo, it is not currently supported.</li>
+	AspectRatio *string `json:"AspectRatio,omitnil,omitempty" name:"AspectRatio"`
+
+	// Whether to generate audio. supported models include GV, OS, Vidu. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>
+	// Default value: Disabled.
+	AudioGeneration *string `json:"AudioGeneration,omitnil,omitempty" name:"AudioGeneration"`
+
+	// Whether to allow figure or human face generation. valid values: <li>AllowAdult: allow adult generation.</li> <li>Disallowed: forbid including figures or human faces in images.</li>
+	PersonGeneration *string `json:"PersonGeneration,omitnil,omitempty" name:"PersonGeneration"`
+
+	// Whether to enable compliance check for input content. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>
+	InputComplianceCheck *string `json:"InputComplianceCheck,omitnil,omitempty" name:"InputComplianceCheck"`
+
+	// Whether to enable compliance check for output content. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>
+	OutputComplianceCheck *string `json:"OutputComplianceCheck,omitnil,omitempty" name:"OutputComplianceCheck"`
+
+	// Whether to enable video enhancement. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>
+	// Note:
+	// 1. when the selected resolution exceeds the resolution the model can generate, enhancement is enabled by default.
+	// 2. for resolutions that the model can directly output, you can also proactively select the model to directly output low-resolution images and use enhancement to obtain the specified resolution.
+	EnhanceSwitch *string `json:"EnhanceSwitch,omitnil,omitempty" name:"EnhanceSwitch"`
+
+	// Whether to enable vidu intelligent frame interpolation. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>
+	FrameInterpolate *string `json:"FrameInterpolate,omitnil,omitempty" name:"FrameInterpolate"`
+}
+
+type AigcVideoTask struct {
+	// The task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Task status, value: <li>PROCESSING: processing;</li><li>FINISH: completed.</li>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. A non-zero error code is returned when the source is abnormal. If 0 is returned, use the ErrCode of each specific task.
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message. If the source is abnormal, the corresponding exception message is returned. Otherwise, use the message of each specific task.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// The execution progress of a single adaptive bitrate stream. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// Input of AIGC video task.
+	Input *AigcVideoTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Output of AIGC video task.
+	Output *AigcVideoTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is not carried or is left empty, no deduplication will be performed.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this parameter. It can contain up to 1000 characters.
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+}
+
+type AigcVideoTaskInput struct {
+	// Model name.
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+
+	// Model version. 
+	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+
+	// File information of the input video for the AIGC video generation task. 
+	FileInfos []*AigcVideoTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+
+	// The media file ID used as the end frame to generate video. 
+	LastFrameFileId *string `json:"LastFrameFileId,omitnil,omitempty" name:"LastFrameFileId"`
+
+	// Prompt content for video generation. 
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// Prevent the model from generating video prompts.
+	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
+
+	// Whether to optimize Prompt content automatically. when Enabled, the passed-in Prompt will be optimized automatically to enhance generation quality. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>.
+	EnhancePrompt *string `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
+
+
+	GenerationMode *string `json:"GenerationMode,omitnil,omitempty" name:"GenerationMode"`
+
+	// Specifies the output media file configuration for the video task.
+	OutputConfig *AigcVideoOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
+}
+
+type AigcVideoTaskInputFileInfo struct {
+	// Input video File type. valid values: <li>File: on-demand media File;</li> <li>Url: accessible Url;</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// The media File ID, which is the globally unique identifier (guid) of the File in vod, is assigned by the vod backend after successful upload. you can retrieve this field in the [video upload completion event notification](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) or [vod console](https://console.cloud.tencent.com/vod/media). this parameter is valid when the Type value is File. description:.
+	// 1. recommended image size: less than 10 mb.
+	// 2. image format value is jpeg, jpg, png.
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// Accessible file URL. this parameter is valid when Type value is URL.
+	// Note:.
+	// 1. recommended image size: less than 10 mb.
+	// 2. image format value is jpeg, jpg, png.
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// Reference type. Used for the GV model.
+	// Note:
+	// When using the GV model, can be used as a reference method, selectable asset (material), style.
+	ReferenceType *string `json:"ReferenceType,omitnil,omitempty" name:"ReferenceType"`
+
+	// Object id.
+	// Applicable model: Vidu-q2.
+	// When an image identifier is required, each image must have a subject id. the subject id can be used via @subject id in subsequent generation.
+	ObjectId *string `json:"ObjectId,omitnil,omitempty" name:"ObjectId"`
+
+	// Suitable for the Vidu-q2 model.
+	// When all images carry object ids, you can set the timbre id for the object. timbre list: https://shengshu.feishu.cn/sheets/EgFvs6DShhiEBStmjzccr5gonOg.
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+}
+
+type AigcVideoTaskOutput struct {
+	// File information of the output video for the AIGC video generation task.
+	FileInfos []*AigcVideoTaskOutputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+}
+
+type AigcVideoTaskOutputFileInfo struct {
+	// Storage mode. valid values: <li>Permanent: Permanent storage. the generated video file will be stored in vod.</li> <li>Temporary: Temporary storage. the generated video file will not be stored in vod.</li>
+	// Default value: Temporary.
+	StorageMode *string `json:"StorageMode,omitnil,omitempty" name:"StorageMode"`
+
+	// Output media filename, longest 64 characters. default filename is specified by the system.
+	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
+
+	// Category ID, used to categorize and manage media. you can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) api.
+	// <Li>Default value: 0, indicate other categories.</li>.
+	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
+
+	// The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// File Type.
+	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
+
+	// File Url.
+	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
+
+	// File ID.
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// Meta Data.
+	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
+}
+
 type AnimatedGraphicTaskInput struct {
 	// Animated image generating template ID
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
@@ -3152,6 +3482,11 @@ type CdnLogInfo struct {
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
+type ChangeClothesConfig struct {
+	// Manually input the image list of **clothing** that needs to be replaced. currently support a maximum of 4 images.
+	ClothesFileInfos []*SceneAigcImageTaskInputFileInfo `json:"ClothesFileInfos,omitnil,omitempty" name:"ClothesFileInfos"`
+}
+
 type ClassificationConfigureInfo struct {
 	// Switch of intelligent categorization task. Valid values:
 	// <li>ON: enables intelligent categorization task;</li>
@@ -4306,6 +4641,341 @@ func (r *CreateAdaptiveDynamicStreamingTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateAdaptiveDynamicStreamingTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAigcImageTaskRequestParams struct {
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// Model name. valid values:.
+	// <li>GEM:Gemini;</li>
+	// <Li>Qwen: qianwen.</li>
+	// <Li>Hunyuan: hunyuan.</li>
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+
+	// Model version. valid values:.
+	// <li>When ModelName is GEM, optional values are 2.5, 3.0;</li>
+	// <li>When ModelName is Qwen, optional values are 0925.</li>
+	// <li>When ModelName is Hunyuan, the optional values are 3.0.</li>
+	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+
+	// File information of the input image for the AIGC image generation task. By default only one image can be specified; when using the GEM model, version 2.5 supports up to 3 images and version 3.0 supports up to 14 images.
+	FileInfos []*AigcImageTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+
+	// The prompt content for image generation. this parameter is required when FileInfos is empty.
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// Prevent the model from generating image generation prompts.
+	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
+
+	// Whether to optimize Prompt content automatically. when Enabled, it will optimize the passed in Prompt automatically to enhance generation quality. valid values: <li>Enabled: turn on;</li> <li>Disabled: turn off;</li>
+	EnhancePrompt *string `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
+
+	// Output media file configuration for the task.
+	OutputConfig *AigcImageOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
+
+	// An identifier for deduplication. if there has been a request with the same identifier within the past 3 days, an error will be returned for the current request. the maximum length is 50 characters. leaving it blank or using an empty string indicates no deduplication.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// Source context, used to pass through user request information. the audio and video quality revival complete callback will return the value of this field. longest 1000 characters.
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+
+	// Task priority. the higher the value, the higher the priority. value range is from -10 to 10. if left blank, the default value is 0.
+	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
+
+	// Reserved field, used when special purpose.
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
+}
+
+type CreateAigcImageTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// Model name. valid values:.
+	// <li>GEM:Gemini;</li>
+	// <Li>Qwen: qianwen.</li>
+	// <Li>Hunyuan: hunyuan.</li>
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+
+	// Model version. valid values:.
+	// <li>When ModelName is GEM, optional values are 2.5, 3.0;</li>
+	// <li>When ModelName is Qwen, optional values are 0925.</li>
+	// <li>When ModelName is Hunyuan, the optional values are 3.0.</li>
+	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+
+	// File information of the input image for the AIGC image generation task. By default only one image can be specified; when using the GEM model, version 2.5 supports up to 3 images and version 3.0 supports up to 14 images.
+	FileInfos []*AigcImageTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+
+	// The prompt content for image generation. this parameter is required when FileInfos is empty.
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// Prevent the model from generating image generation prompts.
+	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
+
+	// Whether to optimize Prompt content automatically. when Enabled, it will optimize the passed in Prompt automatically to enhance generation quality. valid values: <li>Enabled: turn on;</li> <li>Disabled: turn off;</li>
+	EnhancePrompt *string `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
+
+	// Output media file configuration for the task.
+	OutputConfig *AigcImageOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
+
+	// An identifier for deduplication. if there has been a request with the same identifier within the past 3 days, an error will be returned for the current request. the maximum length is 50 characters. leaving it blank or using an empty string indicates no deduplication.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// Source context, used to pass through user request information. the audio and video quality revival complete callback will return the value of this field. longest 1000 characters.
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+
+	// Task priority. the higher the value, the higher the priority. value range is from -10 to 10. if left blank, the default value is 0.
+	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
+
+	// Reserved field, used when special purpose.
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
+}
+
+func (r *CreateAigcImageTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAigcImageTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubAppId")
+	delete(f, "ModelName")
+	delete(f, "ModelVersion")
+	delete(f, "FileInfos")
+	delete(f, "Prompt")
+	delete(f, "NegativePrompt")
+	delete(f, "EnhancePrompt")
+	delete(f, "OutputConfig")
+	delete(f, "SessionId")
+	delete(f, "SessionContext")
+	delete(f, "TasksPriority")
+	delete(f, "ExtInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAigcImageTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAigcImageTaskResponseParams struct {
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateAigcImageTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAigcImageTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateAigcImageTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAigcImageTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAigcVideoTaskRequestParams struct {
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// Model name. valid values: <li>Hailuo: conch;</li><li>Kling: Kling;</li><li>Jimeng: Jimeng;</li><li>Vidu;</li><li>Hunyuan: Hunyuan;</li><li>Mingmou: bright eyes;</li>
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+
+	// Model version. parameter value: <li>when ModelName is Hailuo, optional values are 02, 2.3, 2.3-fast;</li><li>when ModelName is Kling, optional values are 1.6, 2.0, 2.1, 2.5, O1;</li><li>when ModelName is Jimeng, optional values are 3.0pro;</li><li>when ModelName is Vidu, optional values are q2, q2-pro, q2-turbo;</li><li>when ModelName is GV, optional values are 3.1, 3.1-fast;</li><li>when ModelName is OS, optional values are 2.0;</li><li>when ModelName is Hunyuan, optional values are 1.5;</li><li>when ModelName is Mingmou, optional values are 1.0;</li>
+	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+
+	// List of up to three material resources for description of resource images to be used by the model in video generation.
+	// 
+	// Video generation with first and last frame: use the first table in FileInfos to represent the first frame (FileInfos contains at most one image at this point). LastFrameFileId or LastFrameUrl represents the last frame.
+	// 
+	// Model supporting multi-image input.
+	// 1. GV, when entering multiple images, LastFrameFileId and LastFrameUrl are unavailable.
+	// 2. Vidu supports multi-image reference for video generation. the q2 model accepts 1-7 images. use the ObjectId in FileInfos as the subject id for input.
+	// 
+	// Note:.
+	// 1. Image size: the size should not exceed 10 mb.
+	// 2. supported image formats: jpeg, png.
+	FileInfos []*AigcVideoTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+
+	// The media file ID used as the end frame to generate video. this file has a globally unique ID on vod, assigned by the vod backend after successful upload. you can get this field in the [video upload completion event notification](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) or [vod console](https://console.cloud.tencent.com/vod/media). description:.
+	// 1. only models GV, Kling, and Vidu are supported. other models are not currently supported. when ModelName is GV, if you specify this parameter, you must simultaneously specify FileInfos as the first frame of the video to be generated. when ModelName is Kling and ModelVersion is 2.1 and specify output Resolution Resolution as 1080P, you can specify this parameter. when ModelName is Vidu and ModelVersion is q2-pro or q2-turbo, you can specify this parameter.
+	// 2. Image size: the size should be less than 5 mb.
+	// 3. image format value is jpeg, jpg, png, webp.
+	LastFrameFileId *string `json:"LastFrameFileId,omitnil,omitempty" name:"LastFrameFileId"`
+
+	// Media file URL used as frames to generate video. description:.
+	// 1. only models GV, Kling, and Vidu are supported. other models are not currently supported. when ModelName is GV, if you specify this parameter, you must simultaneously specify FileInfos as the first frame of the video to be generated. when ModelName is Kling and ModelVersion is 2.1 and specify output Resolution Resolution as 1080P, you can specify this parameter. when ModelName is Vidu and ModelVersion is q2-pro or q2-turbo, you can specify this parameter.
+	// 2. Image size: the size should be less than 5 mb.
+	// 3. image format value is jpeg, jpg, png, webp.
+	LastFrameUrl *string `json:"LastFrameUrl,omitnil,omitempty" name:"LastFrameUrl"`
+
+	// Prompt content for video generation. this parameter is required when FileInfos is empty.
+	// Example value: move the picture.
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// Prevent the model from generating video prompts.
+	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
+
+	// Whether to optimize Prompt content automatically. when Enabled, the passed-in Prompt will be optimized automatically to enhance generation quality. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>.
+	EnhancePrompt *string `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
+
+	// Specifies the output media file configuration for the video task.
+	OutputConfig *AigcVideoOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
+
+	// An identifier for deduplication. if there has been a request with the same identifier within the past 3 days, an error will be returned for the current request. the maximum length is 50 characters. leaving it blank or using an empty string indicates no deduplication.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// Source context, used to pass through user request information. the audio and video quality revival complete callback will return the value of this field, up to 1000 characters.
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+
+	// Task priority. the higher the value, the higher the priority. the value range is from -10 to 10. if left blank, the default value is 0.
+	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
+
+	// Reserved field, used for special purpose.
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
+
+	// Specifies the region information of the input image. when the image url is a foreign address, selectable Oversea. default Mainland.
+	InputRegion *string `json:"InputRegion,omitnil,omitempty" name:"InputRegion"`
+}
+
+type CreateAigcVideoTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// Model name. valid values: <li>Hailuo: conch;</li><li>Kling: Kling;</li><li>Jimeng: Jimeng;</li><li>Vidu;</li><li>Hunyuan: Hunyuan;</li><li>Mingmou: bright eyes;</li>
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+
+	// Model version. parameter value: <li>when ModelName is Hailuo, optional values are 02, 2.3, 2.3-fast;</li><li>when ModelName is Kling, optional values are 1.6, 2.0, 2.1, 2.5, O1;</li><li>when ModelName is Jimeng, optional values are 3.0pro;</li><li>when ModelName is Vidu, optional values are q2, q2-pro, q2-turbo;</li><li>when ModelName is GV, optional values are 3.1, 3.1-fast;</li><li>when ModelName is OS, optional values are 2.0;</li><li>when ModelName is Hunyuan, optional values are 1.5;</li><li>when ModelName is Mingmou, optional values are 1.0;</li>
+	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+
+	// List of up to three material resources for description of resource images to be used by the model in video generation.
+	// 
+	// Video generation with first and last frame: use the first table in FileInfos to represent the first frame (FileInfos contains at most one image at this point). LastFrameFileId or LastFrameUrl represents the last frame.
+	// 
+	// Model supporting multi-image input.
+	// 1. GV, when entering multiple images, LastFrameFileId and LastFrameUrl are unavailable.
+	// 2. Vidu supports multi-image reference for video generation. the q2 model accepts 1-7 images. use the ObjectId in FileInfos as the subject id for input.
+	// 
+	// Note:.
+	// 1. Image size: the size should not exceed 10 mb.
+	// 2. supported image formats: jpeg, png.
+	FileInfos []*AigcVideoTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+
+	// The media file ID used as the end frame to generate video. this file has a globally unique ID on vod, assigned by the vod backend after successful upload. you can get this field in the [video upload completion event notification](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) or [vod console](https://console.cloud.tencent.com/vod/media). description:.
+	// 1. only models GV, Kling, and Vidu are supported. other models are not currently supported. when ModelName is GV, if you specify this parameter, you must simultaneously specify FileInfos as the first frame of the video to be generated. when ModelName is Kling and ModelVersion is 2.1 and specify output Resolution Resolution as 1080P, you can specify this parameter. when ModelName is Vidu and ModelVersion is q2-pro or q2-turbo, you can specify this parameter.
+	// 2. Image size: the size should be less than 5 mb.
+	// 3. image format value is jpeg, jpg, png, webp.
+	LastFrameFileId *string `json:"LastFrameFileId,omitnil,omitempty" name:"LastFrameFileId"`
+
+	// Media file URL used as frames to generate video. description:.
+	// 1. only models GV, Kling, and Vidu are supported. other models are not currently supported. when ModelName is GV, if you specify this parameter, you must simultaneously specify FileInfos as the first frame of the video to be generated. when ModelName is Kling and ModelVersion is 2.1 and specify output Resolution Resolution as 1080P, you can specify this parameter. when ModelName is Vidu and ModelVersion is q2-pro or q2-turbo, you can specify this parameter.
+	// 2. Image size: the size should be less than 5 mb.
+	// 3. image format value is jpeg, jpg, png, webp.
+	LastFrameUrl *string `json:"LastFrameUrl,omitnil,omitempty" name:"LastFrameUrl"`
+
+	// Prompt content for video generation. this parameter is required when FileInfos is empty.
+	// Example value: move the picture.
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// Prevent the model from generating video prompts.
+	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
+
+	// Whether to optimize Prompt content automatically. when Enabled, the passed-in Prompt will be optimized automatically to enhance generation quality. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>.
+	EnhancePrompt *string `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
+
+	// Specifies the output media file configuration for the video task.
+	OutputConfig *AigcVideoOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
+
+	// An identifier for deduplication. if there has been a request with the same identifier within the past 3 days, an error will be returned for the current request. the maximum length is 50 characters. leaving it blank or using an empty string indicates no deduplication.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// Source context, used to pass through user request information. the audio and video quality revival complete callback will return the value of this field, up to 1000 characters.
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+
+	// Task priority. the higher the value, the higher the priority. the value range is from -10 to 10. if left blank, the default value is 0.
+	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
+
+	// Reserved field, used for special purpose.
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
+
+	// Specifies the region information of the input image. when the image url is a foreign address, selectable Oversea. default Mainland.
+	InputRegion *string `json:"InputRegion,omitnil,omitempty" name:"InputRegion"`
+}
+
+func (r *CreateAigcVideoTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAigcVideoTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubAppId")
+	delete(f, "ModelName")
+	delete(f, "ModelVersion")
+	delete(f, "FileInfos")
+	delete(f, "LastFrameFileId")
+	delete(f, "LastFrameUrl")
+	delete(f, "Prompt")
+	delete(f, "NegativePrompt")
+	delete(f, "EnhancePrompt")
+	delete(f, "OutputConfig")
+	delete(f, "SessionId")
+	delete(f, "SessionContext")
+	delete(f, "TasksPriority")
+	delete(f, "ExtInfo")
+	delete(f, "InputRegion")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAigcVideoTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAigcVideoTaskResponseParams struct {
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateAigcVideoTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAigcVideoTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateAigcVideoTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAigcVideoTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6341,6 +7011,118 @@ func (r *CreateSampleSnapshotTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateSampleSnapshotTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSceneAigcImageTaskRequestParams struct {
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// Scenario-Based image generation parameter configuration.
+	SceneInfo *AigcImageSceneInfo `json:"SceneInfo,omitnil,omitempty" name:"SceneInfo"`
+
+	// Input image list. supported image formats: jpg, jpeg, png, webp. different scenarios require different input data.
+	// 
+	// - AI clothing change scenario: input only 1 model image.
+	// - AI product image scenario: manually input 1-10 images of different angles per product.
+	FileInfos []*SceneAigcImageTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+
+	// Specifies the output media file configuration for the scenario-based image task.
+	OutputConfig *SceneAigcImageOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
+
+	// An identifier for deduplication. if there has been a request with the same identifier within the past 3 days, an error will be returned for the current request. the maximum length is 50 characters. leaving it blank or using an empty string indicates no deduplication.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// Source context, used to pass through user request information. the audio and video quality revival complete callback will return the value of this field, up to 1000 characters.
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+
+	// Task priority. the higher the value, the higher the priority. the value range is from -10 to 10. if left blank, the default value is 0.
+	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
+
+	// Reserved field, used for special purpose.
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
+}
+
+type CreateSceneAigcImageTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// Scenario-Based image generation parameter configuration.
+	SceneInfo *AigcImageSceneInfo `json:"SceneInfo,omitnil,omitempty" name:"SceneInfo"`
+
+	// Input image list. supported image formats: jpg, jpeg, png, webp. different scenarios require different input data.
+	// 
+	// - AI clothing change scenario: input only 1 model image.
+	// - AI product image scenario: manually input 1-10 images of different angles per product.
+	FileInfos []*SceneAigcImageTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+
+	// Specifies the output media file configuration for the scenario-based image task.
+	OutputConfig *SceneAigcImageOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
+
+	// An identifier for deduplication. if there has been a request with the same identifier within the past 3 days, an error will be returned for the current request. the maximum length is 50 characters. leaving it blank or using an empty string indicates no deduplication.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// Source context, used to pass through user request information. the audio and video quality revival complete callback will return the value of this field, up to 1000 characters.
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+
+	// Task priority. the higher the value, the higher the priority. the value range is from -10 to 10. if left blank, the default value is 0.
+	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
+
+	// Reserved field, used for special purpose.
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
+}
+
+func (r *CreateSceneAigcImageTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSceneAigcImageTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubAppId")
+	delete(f, "SceneInfo")
+	delete(f, "FileInfos")
+	delete(f, "OutputConfig")
+	delete(f, "SessionId")
+	delete(f, "SessionContext")
+	delete(f, "TasksPriority")
+	delete(f, "ExtInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSceneAigcImageTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSceneAigcImageTaskResponseParams struct {
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateSceneAigcImageTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateSceneAigcImageTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateSceneAigcImageTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSceneAigcImageTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -12730,6 +13512,18 @@ type DescribeTaskDetailResponseParams struct {
 	// Media processing by MPS task information. This field contains a value only when TaskType is ProcessMediaByMPS.
 	ProcessMediaByMPSTask *ProcessMediaByMPS `json:"ProcessMediaByMPSTask,omitnil,omitempty" name:"ProcessMediaByMPSTask"`
 
+	// AIGC image task information. This field contains a value only when TaskType is AigcImageTask.
+	AigcImageTask *AigcImageTask `json:"AigcImageTask,omitnil,omitempty" name:"AigcImageTask"`
+
+	// AIGC video task information. This field contains a value only when TaskType is AigcVideoTask.
+	AigcVideoTask *AigcVideoTask `json:"AigcVideoTask,omitnil,omitempty" name:"AigcVideoTask"`
+
+
+	ImportMediaKnowledge *ImportMediaKnowledgeTask `json:"ImportMediaKnowledge,omitnil,omitempty" name:"ImportMediaKnowledge"`
+
+	// Scenario-based AIGC image task information. This field contains a value only when TaskType is SceneAigcImageTask.
+	SceneAigcImageTask *SceneAigcImageTask `json:"SceneAigcImageTask,omitnil,omitempty" name:"SceneAigcImageTask"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -14089,6 +14883,17 @@ type EventContent struct {
 	// Complex adaptive bitrate streaming processing completion event, valid when the event type is ComplexAdaptiveDynamicStreamingComplete.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	ComplexAdaptiveDynamicStreamingCompleteEvent *ComplexAdaptiveDynamicStreamingTask `json:"ComplexAdaptiveDynamicStreamingCompleteEvent,omitnil,omitempty" name:"ComplexAdaptiveDynamicStreamingCompleteEvent"`
+
+
+	ProcessMediaByMPSCompleteEvent *ProcessMediaByMPS `json:"ProcessMediaByMPSCompleteEvent,omitnil,omitempty" name:"ProcessMediaByMPSCompleteEvent"`
+
+	// AIGC image task completion event, valid when the event type is AigcImageTaskComplete.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	AigcImageCompleteEvent *AigcImageTask `json:"AigcImageCompleteEvent,omitnil,omitempty" name:"AigcImageCompleteEvent"`
+
+	// AIGC video task completion event, valid when the event type is AigcVideoTaskComplete.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	AigcVideoCompleteEvent *AigcVideoTask `json:"AigcVideoCompleteEvent,omitnil,omitempty" name:"AigcVideoCompleteEvent"`
 }
 
 // Predefined struct for user
@@ -15413,6 +16218,20 @@ func (r *ImportMediaKnowledgeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ImportMediaKnowledgeTask struct {
+
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+}
+
 // Predefined struct for user
 type InspectMediaQualityRequestParams struct {
 	// Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
@@ -15800,44 +16619,44 @@ type LowLightEnhanceInfo struct {
 }
 
 type MPSOutputFile struct {
-
+	// File type. Used to identify the specific file returned in the ProcessMediaByMPS task execution results. Values: <li>AiAnalysis.DeLogo.Video: The erased video file generated by the smart erase task;</li><li>AiAnalysis.DeLogo.OriginSubtitle: The subtitle file extracted based on the screen in the smart erase task;</li><li>AiAnalysis.DeLogo.TranslateSubtitle: The subtitle translation file extracted based on the screen in the smart erase task.</li>
 	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
 
-
+	// Storage mode. It is used to indicate the storage mode of the result file. The possible values are: <li> Permanent: permanent storage; </li><li> Temporary: temporary storage. </li>
 	StorageMode *string `json:"StorageMode,omitnil,omitempty" name:"StorageMode"`
 
-
+	// Media file ID. Valid when Type is Permanent, indicating that the result file is stored in the VOD platform as a video media asset. The field value is the FileId of the video media asset.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-
+	// Downloadable URL for the result file.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-
+	// Expiration time. Valid when StorageMode is Temporary. It indicates the expiration time of the URL in seconds.
 	ExpiredTime *uint64 `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 }
 
 type MPSSubTaskResult struct {
-
+	// Task type. Specific subtask type in the MPS WorkflowTask structure. Value: <li>AiAnalysis.DeLogo: Intelligent erasure task.</li>
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-
+	// Task status. There are three types: PROCESSING, SUCCESS, and FAIL.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// Error code. Returns 0 for success, other values for failure.
 	ErrCode *string `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-
+	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-
+	// MPS media processing task input. This field corresponds to the Input result in the MPS task response and is returned in JSON format.
 	Input *string `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// MPS media processing task output.
 	Output *MPSTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
 type MPSTaskOutput struct {
-
+	// The file type in the task's return result. For example, in a smart erase, the erased video file will be stored in the media asset and its FileId will be given in this field. The URL of the subtitle file extracted based on the image will also be given in this field.
 	OutputFiles []*MPSOutputFile `json:"OutputFiles,omitnil,omitempty" name:"OutputFiles"`
 }
 
@@ -21396,19 +22215,19 @@ type ProcedureTemplate struct {
 }
 
 type ProcessMediaByMPS struct {
-
+	// The task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-
+	// Task status, value: <li>PROCESSING: processing;</li><li>FINISH: completed.</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// Error code. A non-zero error code is returned when the source is abnormal. If 0 is returned, use the ErrCode of each specific task.
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-
+	// Error message. If the source is abnormal, the corresponding exception message is returned. Otherwise, use the message of each specific task.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-
+	// MPS media processing tasks.
 	SubTaskSet []*MPSSubTaskResult `json:"SubTaskSet,omitnil,omitempty" name:"SubTaskSet"`
 }
 
@@ -21847,6 +22666,23 @@ func (r *ProcessMediaResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ProcessMediaResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type ProductImageConfig struct {
+	// Prompt content for image generation background. if this field is default, inspiration is automatically generated internally.
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// Prevent the model from generating image prompts.
+	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
+
+	// Product description describes in detail, helping generate images that meet requirements.
+	ProductDesc *string `json:"ProductDesc,omitnil,omitempty" name:"ProductDesc"`
+
+	// Special requirements. if any, import them through this field.
+	MoreRequirement *string `json:"MoreRequirement,omitnil,omitempty" name:"MoreRequirement"`
+
+	// Specifies the number of images to generate. defaults to 1 if left empty. valid value: 10.
+	OutputImageCount *uint64 `json:"OutputImageCount,omitnil,omitempty" name:"OutputImageCount"`
 }
 
 type ProhibitedAsrReviewTemplateInfo struct {
@@ -23780,9 +24616,13 @@ type RestoreMediaTask struct {
 	RestoreDay *int64 `json:"RestoreDay,omitnil,omitempty" name:"RestoreDay"`
 
 	// This field has been disused.
+	//
+	// Deprecated: Status is deprecated.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// This field has been disused.
+	//
+	// Deprecated: Message is deprecated.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 }
 
@@ -24406,6 +25246,117 @@ type SampleSnapshotTemplate struct {
 	// <li>gauss: Keep the image’s original aspect ratio and apply Gaussian blur to the blank space.</li>
 	// Default value: black.
 	FillType *string `json:"FillType,omitnil,omitempty" name:"FillType"`
+}
+
+type SceneAigcImageOutputConfig struct {
+	// Storage mode. valid values: <li>Permanent: Permanent storage. the generated image file will be stored in vod, and the FileId can be obtained from the event notification.</li> <li>Temporary: Temporary storage. the generated image file will not be stored in vod, and the Temporary access URL can be obtained from the event notification.</li>
+	// Default value: Temporary.
+	StorageMode *string `json:"StorageMode,omitnil,omitempty" name:"StorageMode"`
+
+	// Output filename, longest 64 characters. default filename is specified by the system.
+	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
+
+	// Category ID, used to categorize and manage media. you can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) api.
+	// <Li>Default value: 0, indicate other categories.</li>
+	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
+
+	// The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// Specify the aspect ratio of the generated image. input format is W:H.
+	// 
+	// Only valid for product_image scenarios. available values are: 1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 16:9, 9:16, 21:9.
+	AspectRatio *string `json:"AspectRatio,omitnil,omitempty" name:"AspectRatio"`
+}
+
+type SceneAigcImageTask struct {
+	// The task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Task status, value: <li>PROCESSING: processing;</li><li>FINISH: completed.</li>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. A non-zero error code is returned when the source is abnormal. If 0 is returned, use the ErrCode of each specific task.
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message. If the source is abnormal, the corresponding exception message is returned. Otherwise, use the message of each specific task.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// The execution progress of a single adaptive bitrate stream. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// Input of AIGC image task.
+	Input *SceneAigcImageTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Output of AIGC image task.
+	Output *SceneAigcImageTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is not carried or is left empty, no deduplication will be performed.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this parameter. It can contain up to 1000 characters.
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+}
+
+type SceneAigcImageTaskInput struct {
+	// Scenario-based Image Generation Parameter Configuration.
+	SceneInfo *AigcImageSceneInfo `json:"SceneInfo,omitnil,omitempty" name:"SceneInfo"`
+
+	// File information of the input image.
+	FileInfos []*SceneAigcImageTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+
+	// Output media file configuration for the task.
+	OutputConfig *SceneAigcImageOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
+}
+
+type SceneAigcImageTaskInputFileInfo struct {
+	// Input video File type. valid values: <li>File: on-demand media File;</li> <li>Url: accessible Url;</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// The media File ID of the image File, which is the globally unique identifier of the File in vod, is assigned by the vod backend after successful upload. you can obtain this field in the [video upload completion event notification](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) or [vod console](https://console.cloud.tencent.com/vod/media). this parameter is valid when the Type value is File.
+	// Note:
+	// 1. recommended for use with images less than 7 mb.
+	// 2. image format value is jpeg, jpg, png, webp.
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// Accessible file URL. this parameter is valid when Type value is Url.
+	// Note:
+	// 1. recommended for use with images less than 7 MB.
+	// 2. image format value is jpeg, jpg, png, webp.
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+}
+
+type SceneAigcImageTaskOutput struct {
+	// File information of the out image for the AIGC image generation task.
+	FileInfos []*SceneAigcImageTaskOutputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+}
+
+type SceneAigcImageTaskOutputFileInfo struct {
+	// Storage mode. valid values: <li>Permanent: Permanent storage. the generated image file will be stored in VOD (video on demand).</li> <li>Temporary: Temporary storage. the generated image file will not be stored in vod.</li>.
+	// Default value: Temporary.
+	StorageMode *string `json:"StorageMode,omitnil,omitempty" name:"StorageMode"`
+
+	// Output filename, up to 64 characters. default filename is assigned by the system.
+	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
+
+	// Category ID, used to categorize and manage media. you can create a category and obtain the category ID via the [create classification](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) api.
+	// <Li>Default value: 0, indicating other categories.</li>.
+	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
+
+	// The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// File Type.
+	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
+
+	// File Url.
+	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
+
+	// File ID.
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// Meta Data.
+	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
 }
 
 type ScratchRepairInfo struct {

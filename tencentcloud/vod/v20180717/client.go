@@ -707,6 +707,140 @@ func (c *Client) CreateAdaptiveDynamicStreamingTemplateWithContext(ctx context.C
     return
 }
 
+func NewCreateAigcImageTaskRequest() (request *CreateAigcImageTaskRequest) {
+    request = &CreateAigcImageTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateAigcImageTask")
+    
+    
+    return
+}
+
+func NewCreateAigcImageTaskResponse() (response *CreateAigcImageTaskResponse) {
+    response = &CreateAigcImageTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAigcImageTask
+// This API is used to generate AIGC images. <b>The API is in beta. If needed, contact us. API calls will incur actual fees.</b>
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateAigcImageTask(request *CreateAigcImageTaskRequest) (response *CreateAigcImageTaskResponse, err error) {
+    return c.CreateAigcImageTaskWithContext(context.Background(), request)
+}
+
+// CreateAigcImageTask
+// This API is used to generate AIGC images. <b>The API is in beta. If needed, contact us. API calls will incur actual fees.</b>
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateAigcImageTaskWithContext(ctx context.Context, request *CreateAigcImageTaskRequest) (response *CreateAigcImageTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateAigcImageTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateAigcImageTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAigcImageTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAigcImageTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateAigcVideoTaskRequest() (request *CreateAigcVideoTaskRequest) {
+    request = &CreateAigcVideoTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateAigcVideoTask")
+    
+    
+    return
+}
+
+func NewCreateAigcVideoTaskResponse() (response *CreateAigcVideoTaskResponse) {
+    response = &CreateAigcVideoTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAigcVideoTask
+// This API is used to generate AIGC videos. <b>The API is in beta. If needed, contact us. API calls will incur actual fees.</b>
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateAigcVideoTask(request *CreateAigcVideoTaskRequest) (response *CreateAigcVideoTaskResponse, err error) {
+    return c.CreateAigcVideoTaskWithContext(context.Background(), request)
+}
+
+// CreateAigcVideoTask
+// This API is used to generate AIGC videos. <b>The API is in beta. If needed, contact us. API calls will incur actual fees.</b>
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateAigcVideoTaskWithContext(ctx context.Context, request *CreateAigcVideoTaskRequest) (response *CreateAigcVideoTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateAigcVideoTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateAigcVideoTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAigcVideoTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAigcVideoTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAnimatedGraphicsTemplateRequest() (request *CreateAnimatedGraphicsTemplateRequest) {
     request = &CreateAnimatedGraphicsTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1931,6 +2065,74 @@ func (c *Client) CreateSampleSnapshotTemplateWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewCreateSampleSnapshotTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateSceneAigcImageTaskRequest() (request *CreateSceneAigcImageTaskRequest) {
+    request = &CreateSceneAigcImageTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateSceneAigcImageTask")
+    
+    
+    return
+}
+
+func NewCreateSceneAigcImageTaskResponse() (response *CreateSceneAigcImageTaskResponse) {
+    response = &CreateSceneAigcImageTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateSceneAigcImageTask
+// This API is used to generate scenario-based AIGC images. <b>This interface is in beta. If you need to use it, please contact us. API calls will incur actual fees.</b>
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateSceneAigcImageTask(request *CreateSceneAigcImageTaskRequest) (response *CreateSceneAigcImageTaskResponse, err error) {
+    return c.CreateSceneAigcImageTaskWithContext(context.Background(), request)
+}
+
+// CreateSceneAigcImageTask
+// This API is used to generate scenario-based AIGC images. <b>This interface is in beta. If you need to use it, please contact us. API calls will incur actual fees.</b>
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateSceneAigcImageTaskWithContext(ctx context.Context, request *CreateSceneAigcImageTaskRequest) (response *CreateSceneAigcImageTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateSceneAigcImageTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateSceneAigcImageTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSceneAigcImageTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateSceneAigcImageTaskResponse()
     err = c.Send(request, response)
     return
 }
