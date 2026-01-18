@@ -45,6 +45,50 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewConvert3DFormatRequest() (request *Convert3DFormatRequest) {
+    request = &Convert3DFormatRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("hunyuan", APIVersion, "Convert3DFormat")
+    
+    
+    return
+}
+
+func NewConvert3DFormatResponse() (response *Convert3DFormatResponse) {
+    response = &Convert3DFormatResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// Convert3DFormat
+// After inputting a 3D model file, the 3D model file format can be switched.
+func (c *Client) Convert3DFormat(request *Convert3DFormatRequest) (response *Convert3DFormatResponse, err error) {
+    return c.Convert3DFormatWithContext(context.Background(), request)
+}
+
+// Convert3DFormat
+// After inputting a 3D model file, the 3D model file format can be switched.
+func (c *Client) Convert3DFormatWithContext(ctx context.Context, request *Convert3DFormatRequest) (response *Convert3DFormatResponse, err error) {
+    if request == nil {
+        request = NewConvert3DFormatRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "hunyuan", APIVersion, "Convert3DFormat")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("Convert3DFormat require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewConvert3DFormatResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewQueryHunyuan3DPartJobRequest() (request *QueryHunyuan3DPartJobRequest) {
     request = &QueryHunyuan3DPartJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
