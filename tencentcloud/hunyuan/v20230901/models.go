@@ -364,6 +364,12 @@ func (r *SubmitHunyuan3DPartJobResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SubmitHunyuanTo3DProJobRequestParams struct {
+	// Tencent HY 3D Global model version
+	// Defaults to 3.0, with optional choices: 3.0, 3.1
+	// When selecting version 3.1, the LowPoly parameter is unavailable
+	// Example value:3.0
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
 	// Generates 3D content, describes 3D content.
 	// Supports up to 1024 utf-8 characters.
 	// Text-To-3D. Specifies either ImageBase64/ImageUrl or Prompt is required. Prompt and ImageBase64/ImageUrl cannot coexist.
@@ -392,9 +398,13 @@ type SubmitHunyuanTo3DProJobRequestParams struct {
 	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
 	// Multi-Perspective model image. reference value for viewing angle:.
-	// left view.
-	// right view.
-	// back view.
+	// left: Left view;
+	// right: Right view;
+	// back: Rear view;
+	// top: Top view (only supported in Model 3.1);
+	// bottom: Bottom view (only supported in Model 3.1);
+	// left_front: Left front 45 degree view (only supported in Model 3.1);
+	// right_front: Right front 45 degree view (only supported in Model 3.1);
 	// 
 	// Each perspective is limited to one image.
 	// Image size limit. the value must not exceed 8 mb after encoding.
@@ -427,6 +437,12 @@ type SubmitHunyuanTo3DProJobRequestParams struct {
 type SubmitHunyuanTo3DProJobRequest struct {
 	*tchttp.BaseRequest
 	
+	// Tencent HY 3D Global model version
+	// Defaults to 3.0, with optional choices: 3.0, 3.1
+	// When selecting version 3.1, the LowPoly parameter is unavailable
+	// Example value:3.0
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
 	// Generates 3D content, describes 3D content.
 	// Supports up to 1024 utf-8 characters.
 	// Text-To-3D. Specifies either ImageBase64/ImageUrl or Prompt is required. Prompt and ImageBase64/ImageUrl cannot coexist.
@@ -455,9 +471,13 @@ type SubmitHunyuanTo3DProJobRequest struct {
 	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
 	// Multi-Perspective model image. reference value for viewing angle:.
-	// left view.
-	// right view.
-	// back view.
+	// left: Left view;
+	// right: Right view;
+	// back: Rear view;
+	// top: Top view (only supported in Model 3.1);
+	// bottom: Bottom view (only supported in Model 3.1);
+	// left_front: Left front 45 degree view (only supported in Model 3.1);
+	// right_front: Right front 45 degree view (only supported in Model 3.1);
 	// 
 	// Each perspective is limited to one image.
 	// Image size limit. the value must not exceed 8 mb after encoding.
@@ -499,6 +519,7 @@ func (r *SubmitHunyuanTo3DProJobRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "Model")
 	delete(f, "Prompt")
 	delete(f, "ImageBase64")
 	delete(f, "ImageUrl")

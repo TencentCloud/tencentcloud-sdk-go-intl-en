@@ -315,6 +315,7 @@ type ApplySdkVerificationTokenRequestParams struct {
 
 	// BASIC: Basic version (Default).
 	// ENHANCE: Enhance version, enable additional output of device risk level field.
+	// PRO: Pro version, enable additional output of attack type fields.
 	// PLUS: Plus version, enable additional output of device risk level and attack type fields.
 	// Please contact us to access enhance version & plus version.	
 	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
@@ -394,6 +395,7 @@ type ApplySdkVerificationTokenRequest struct {
 
 	// BASIC: Basic version (Default).
 	// ENHANCE: Enhance version, enable additional output of device risk level field.
+	// PRO: Pro version, enable additional output of attack type fields.
 	// PLUS: Plus version, enable additional output of device risk level and attack type fields.
 	// Please contact us to access enhance version & plus version.	
 	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
@@ -1805,6 +1807,7 @@ type GetFaceIdTokenIntlRequestParams struct {
 
 	// BASIC: Basic version (Default).
 	// ENHANCE: Enhance version, enable additional output of device risk level field.
+	// PRO: Pro version, enable additional output of attack type fields.
 	// PLUS: Plus version, enable additional output of device risk level and attack type fields.
 	// Please contact us to access enhance version & plus version.	
 	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
@@ -1847,6 +1850,7 @@ type GetFaceIdTokenIntlRequest struct {
 
 	// BASIC: Basic version (Default).
 	// ENHANCE: Enhance version, enable additional output of device risk level field.
+	// PRO: Pro version, enable additional output of attack type fields.
 	// PLUS: Plus version, enable additional output of device risk level and attack type fields.
 	// Please contact us to access enhance version & plus version.	
 	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
