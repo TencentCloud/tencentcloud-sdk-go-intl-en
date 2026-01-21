@@ -65,7 +65,7 @@ func NewControlAIConversationResponse() (response *ControlAIConversationResponse
 }
 
 // ControlAIConversation
-// Provides server-side control of AI Conversation
+// This API is used to provide service for server-side robot control.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
@@ -75,7 +75,7 @@ func (c *Client) ControlAIConversation(request *ControlAIConversationRequest) (r
 }
 
 // ControlAIConversation
-// Provides server-side control of AI Conversation
+// This API is used to provide service for server-side robot control.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"

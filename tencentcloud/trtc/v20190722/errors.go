@@ -68,7 +68,7 @@ const (
 	// Task has ended when calling the interface.
 	FAILEDOPERATION_TASKFINISHED = "FailedOperation.TaskFinished"
 
-	// The task does not exist.
+	// The run does not exist or is stopped.
 	FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
 
 	// The user is not in the room.

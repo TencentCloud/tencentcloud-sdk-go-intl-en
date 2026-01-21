@@ -212,29 +212,33 @@ type CloudVod struct {
 
 // Predefined struct for user
 type ControlAIConversationRequestParams struct {
-	// Unique ID of the task
+	// Task unique identifier.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Control commands, currently supported commands are as follows:
-	// - ServerPushText, the server sends text to the AI robot, and the AI robot will play the text
+	// Control command. currently supports the following commands: - ServerPushText: server sends text to the AI robot, and the AI robot will broadcast the text. - InvokeLLM: server sends text to the large model to trigger dialogue.
 	Command *string `json:"Command,omitnil,omitempty" name:"Command"`
 
-	// The server sends a text broadcast command. This is required when Command is ServerPushText.
+	// Server-Sent broadcast text Command. required when Command is ServerPushText.
 	ServerPushText *ServerPushText `json:"ServerPushText,omitnil,omitempty" name:"ServerPushText"`
+
+	// The server sends a Command to proactively request the large model. when Command is InvokeLLM, it sends the content request to the large model and adds X-Invoke-LLM="1" to the header.
+	InvokeLLM *InvokeLLM `json:"InvokeLLM,omitnil,omitempty" name:"InvokeLLM"`
 }
 
 type ControlAIConversationRequest struct {
 	*tchttp.BaseRequest
 	
-	// Unique ID of the task
+	// Task unique identifier.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Control commands, currently supported commands are as follows:
-	// - ServerPushText, the server sends text to the AI robot, and the AI robot will play the text
+	// Control command. currently supports the following commands: - ServerPushText: server sends text to the AI robot, and the AI robot will broadcast the text. - InvokeLLM: server sends text to the large model to trigger dialogue.
 	Command *string `json:"Command,omitnil,omitempty" name:"Command"`
 
-	// The server sends a text broadcast command. This is required when Command is ServerPushText.
+	// Server-Sent broadcast text Command. required when Command is ServerPushText.
 	ServerPushText *ServerPushText `json:"ServerPushText,omitnil,omitempty" name:"ServerPushText"`
+
+	// The server sends a Command to proactively request the large model. when Command is InvokeLLM, it sends the content request to the large model and adds X-Invoke-LLM="1" to the header.
+	InvokeLLM *InvokeLLM `json:"InvokeLLM,omitnil,omitempty" name:"InvokeLLM"`
 }
 
 func (r *ControlAIConversationRequest) ToJsonString() string {
@@ -252,6 +256,7 @@ func (r *ControlAIConversationRequest) FromJsonString(s string) error {
 	delete(f, "TaskId")
 	delete(f, "Command")
 	delete(f, "ServerPushText")
+	delete(f, "InvokeLLM")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ControlAIConversationRequest has unknown keys!", "")
 	}
@@ -2823,6 +2828,14 @@ type EventMessage struct {
 	ParamTwo *int64 `json:"ParamTwo,omitnil,omitempty" name:"ParamTwo"`
 }
 
+type InvokeLLM struct {
+	// Request the content of LLM.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Whether to allow the text to interrupt the robot's speaking.
+	Interrupt *bool `json:"Interrupt,omitnil,omitempty" name:"Interrupt"`
+}
+
 type MaxVideoUser struct {
 	// The stream information.
 	UserMediaStream *UserMediaStream `json:"UserMediaStream,omitnil,omitempty" name:"UserMediaStream"`
@@ -3867,14 +3880,39 @@ type SeriesInfos struct {
 }
 
 type ServerPushText struct {
-	// Server push broadcast text
+	// Server push broadcast text.
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
-	// Allow this text to interrupt the robot
+	// Whether to allow the text to interrupt the robot's speaking.
 	Interrupt *bool `json:"Interrupt,omitnil,omitempty" name:"Interrupt"`
 
-	// After the text is finished, whether to automatically close the conversation task
+	// Broadcast the text and automatically close the dialogue task.
 	StopAfterPlay *bool `json:"StopAfterPlay,omitnil,omitempty" name:"StopAfterPlay"`
+
+	// Server push broadcast audio.
+	// Format description: audio must be mono, sampling rate must be consistent with the corresponding TTS sampling rate, and coded as a Base64 string.
+	// Input rule: when the Audio field is provided, the system will not accept user-submitted input in the Text field. the system will play the Audio content in the Audio field directly.
+	Audio *string `json:"Audio,omitnil,omitempty" name:"Audio"`
+
+	// Defaults to 0. valid at that time only when Interrupt is false.
+	// -0 means drop messages with Interrupt set to false during the occurrence of interaction.
+	// -1 indicates that during the occurrence of an interaction, messages with Interrupt as false will not be dropped but cached, waiting to be processed when finished.
+	// 
+	// Note: if DropMode is 1, multiple messages can be cached. if an interruption occurs subsequently, the cache of messages will be cleared.
+	DropMode *uint64 `json:"DropMode,omitnil,omitempty" name:"DropMode"`
+
+	// The message priority of ServerPushText. 0 means interruptible, 1 means not interruptible. currently only support 0. if you need to input 1, submit a ticket to contact us to grant permission.
+	// Note: after receiving a message with Priority=1, any other messages will be ignored (including messages with Priority=1) until the message processing of Priority=1 is complete. this field can be used together with the Interrupt and DropMode fields.
+	// Example:.
+	// -Priority=1, Interrupt=true, interrupts existing interaction and broadcasts immediately. the broadcast will not be interrupted during the process.
+	// -Priority=1, Interrupt=false, DropMode=1. wait for the current interaction to complete before broadcasting. the broadcast will not be interrupted during the process.
+	Priority *uint64 `json:"Priority,omitnil,omitempty" name:"Priority"`
+
+	// Whether to add the text to the llm history context.
+	AddHistory *bool `json:"AddHistory,omitnil,omitempty" name:"AddHistory"`
+
+	// If filled, it will be bound to the subtitle and sent to the terminal. note that the content must be a json string.
+	MetaInfo *string `json:"MetaInfo,omitnil,omitempty" name:"MetaInfo"`
 }
 
 // Predefined struct for user

@@ -89,6 +89,54 @@ func (c *Client) Convert3DFormatWithContext(ctx context.Context, request *Conver
     return
 }
 
+func NewDescribe3DSmartTopologyJobRequest() (request *Describe3DSmartTopologyJobRequest) {
+    request = &Describe3DSmartTopologyJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("hunyuan", APIVersion, "Describe3DSmartTopologyJob")
+    
+    
+    return
+}
+
+func NewDescribe3DSmartTopologyJobResponse() (response *Describe3DSmartTopologyJobResponse) {
+    response = &Describe3DSmartTopologyJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// Describe3DSmartTopologyJob
+// The SmartTopoly API uses the Polygon 1.5 model. After manually inputting a 3D high-poly model, it can generate a neat 3D model with lower polygon count.
+//
+// 1 concurrent is provided by default, which means 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+func (c *Client) Describe3DSmartTopologyJob(request *Describe3DSmartTopologyJobRequest) (response *Describe3DSmartTopologyJobResponse, err error) {
+    return c.Describe3DSmartTopologyJobWithContext(context.Background(), request)
+}
+
+// Describe3DSmartTopologyJob
+// The SmartTopoly API uses the Polygon 1.5 model. After manually inputting a 3D high-poly model, it can generate a neat 3D model with lower polygon count.
+//
+// 1 concurrent is provided by default, which means 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+func (c *Client) Describe3DSmartTopologyJobWithContext(ctx context.Context, request *Describe3DSmartTopologyJobRequest) (response *Describe3DSmartTopologyJobResponse, err error) {
+    if request == nil {
+        request = NewDescribe3DSmartTopologyJobRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "hunyuan", APIVersion, "Describe3DSmartTopologyJob")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("Describe3DSmartTopologyJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribe3DSmartTopologyJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewQueryHunyuan3DPartJobRequest() (request *QueryHunyuan3DPartJobRequest) {
     request = &QueryHunyuan3DPartJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -225,6 +273,54 @@ func (c *Client) QueryHunyuanTo3DRapidJobWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewQueryHunyuanTo3DRapidJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSubmit3DSmartTopologyJobRequest() (request *Submit3DSmartTopologyJobRequest) {
+    request = &Submit3DSmartTopologyJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("hunyuan", APIVersion, "Submit3DSmartTopologyJob")
+    
+    
+    return
+}
+
+func NewSubmit3DSmartTopologyJobResponse() (response *Submit3DSmartTopologyJobResponse) {
+    response = &Submit3DSmartTopologyJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// Submit3DSmartTopologyJob
+// The SmartTopoly API uses the Polygon 1.5 model. After manually inputting a 3D high-poly model, it can generate a neat 3D model with lower polygon count.
+//
+// 1 concurrent is provided by default, which means 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+func (c *Client) Submit3DSmartTopologyJob(request *Submit3DSmartTopologyJobRequest) (response *Submit3DSmartTopologyJobResponse, err error) {
+    return c.Submit3DSmartTopologyJobWithContext(context.Background(), request)
+}
+
+// Submit3DSmartTopologyJob
+// The SmartTopoly API uses the Polygon 1.5 model. After manually inputting a 3D high-poly model, it can generate a neat 3D model with lower polygon count.
+//
+// 1 concurrent is provided by default, which means 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+func (c *Client) Submit3DSmartTopologyJobWithContext(ctx context.Context, request *Submit3DSmartTopologyJobRequest) (response *Submit3DSmartTopologyJobResponse, err error) {
+    if request == nil {
+        request = NewSubmit3DSmartTopologyJobRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "hunyuan", APIVersion, "Submit3DSmartTopologyJob")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("Submit3DSmartTopologyJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSubmit3DSmartTopologyJobResponse()
     err = c.Send(request, response)
     return
 }
