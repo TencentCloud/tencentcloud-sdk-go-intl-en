@@ -189,19 +189,24 @@ type CloudStorage struct {
 	// `0`: Tencent Cloud COS; `1`: AWS storage. Other vendors are not supported currently.
 	Vendor *uint64 `json:"Vendor,omitnil,omitempty" name:"Vendor"`
 
-	// The region of cloud storage.
+	// [Region information](https://www.tencentcloud.comom/document/product/436/6224?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F) of tencent cloud object storage.
+	// Example value: cn-shanghai-1.
+	// 
+	// [Region information](https://docs.AWS.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-regions) of AWS S3.
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// The storage bucket.
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
-	// The access_key of the cloud storage account.
+	// access_key account information of the cloud storage.
+	// To store files to tencent cloud object storage (COS), visit https://console.cloud.tencent.com/cam/capi to view or create the SecretId value corresponding to the key fields in the link.
 	AccessKey *string `json:"AccessKey,omitnil,omitempty" name:"AccessKey"`
 
-	// The secret_key of the cloud storage account.
+	// secret_key account information of the cloud storage.
+	// To store files to tencent cloud object storage (COS), visit https://console.cloud.tencent.com/cam/capi to view or create the SecretKey value corresponding to the key fields in the link.
 	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
 
-	// The bucket to save data, which is an array of strings that can contain letters (a-z and A-Z), numbers (0-9), underscores (_), and hyphens (-). For example, if the value of this parameter is `["prefix1", "prefix2"]`, the recording file `xxx.m3u8` will be saved as `prefix1/prefix2/TaskId/xxx.m3u8`.
+	// The specified position of the cloud storage bucket consists of an array of strings. valid values: az, az, 0-9, '_', and '-'. for example, the recording file xxx.m3u8 becomes prefix1/prefix2/TaskId/xxx.m3u8 under the function of ["prefix1", "prefix2"].
 	FileNamePrefix []*string `json:"FileNamePrefix,omitnil,omitempty" name:"FileNamePrefix"`
 }
 
@@ -396,7 +401,8 @@ type CreateCloudRecordingRequestParams struct {
 	// The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are recorded.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// The [room ID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are recorded.
+	// [RoomId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC, which is the RoomId corresponding to the TRTC room in the recording.
+	// Note: the room id type defaults to integer. if the room id type is a string, specify it via RoomIdType.
 	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
 
 	// The [user ID](https://www.tencentcloud.com/document/product/647/37714#userid) of the recording robot in the TRTC room, which cannot be identical to the user IDs of anchors in the room or other recording robots. To distinguish this user ID from others, we recommend you include the room ID in the user ID.
@@ -425,7 +431,7 @@ type CreateCloudRecordingRequestParams struct {
 	// The amount of time (in hours) during which API requests can be made after recording starts. Calculation starts when a recording task is started (when the recording task ID is returned). Once the period elapses, the query, modification, and stop recording APIs can no longer be called, but the recording task will continue. The default value is `72` (three days), and the maximum and minimum values allowed are `720` (30 days) and `6` respectively. If you do not set this parameter, the query, modification, and stop recording APIs can be called within 72 hours after recording starts.
 	ResourceExpiredHour *uint64 `json:"ResourceExpiredHour,omitnil,omitempty" name:"ResourceExpiredHour"`
 
-	// The permission ticket for a TRTC room. This parameter is required if advanced permission control is enabled in the console, in which case the TRTC backend will verify users’ [PrivateMapKey](https://intl.cloud.tencent.com/document/product/647/32240?from_cn_redirect=1), which include an encrypted room ID and permission bit list. A user providing only `UserSig` and not `PrivateMapKey` will be unable to enter the room.
+	// The permission ticket for a TRTC room. This parameter is required if advanced permission control is enabled in the console, in which case the TRTC backend will verify users' [PrivateMapKey](https://intl.cloud.tencent.com/document/product/647/32240?from_cn_redirect=1), which include an encrypted room ID and permission bit list. A user providing only `UserSig` and not `PrivateMapKey` will be unable to enter the room.
 	PrivateMapKey *string `json:"PrivateMapKey,omitnil,omitempty" name:"PrivateMapKey"`
 }
 
@@ -435,7 +441,8 @@ type CreateCloudRecordingRequest struct {
 	// The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are recorded.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// The [room ID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are recorded.
+	// [RoomId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC, which is the RoomId corresponding to the TRTC room in the recording.
+	// Note: the room id type defaults to integer. if the room id type is a string, specify it via RoomIdType.
 	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
 
 	// The [user ID](https://www.tencentcloud.com/document/product/647/37714#userid) of the recording robot in the TRTC room, which cannot be identical to the user IDs of anchors in the room or other recording robots. To distinguish this user ID from others, we recommend you include the room ID in the user ID.
@@ -464,7 +471,7 @@ type CreateCloudRecordingRequest struct {
 	// The amount of time (in hours) during which API requests can be made after recording starts. Calculation starts when a recording task is started (when the recording task ID is returned). Once the period elapses, the query, modification, and stop recording APIs can no longer be called, but the recording task will continue. The default value is `72` (three days), and the maximum and minimum values allowed are `720` (30 days) and `6` respectively. If you do not set this parameter, the query, modification, and stop recording APIs can be called within 72 hours after recording starts.
 	ResourceExpiredHour *uint64 `json:"ResourceExpiredHour,omitnil,omitempty" name:"ResourceExpiredHour"`
 
-	// The permission ticket for a TRTC room. This parameter is required if advanced permission control is enabled in the console, in which case the TRTC backend will verify users’ [PrivateMapKey](https://intl.cloud.tencent.com/document/product/647/32240?from_cn_redirect=1), which include an encrypted room ID and permission bit list. A user providing only `UserSig` and not `PrivateMapKey` will be unable to enter the room.
+	// The permission ticket for a TRTC room. This parameter is required if advanced permission control is enabled in the console, in which case the TRTC backend will verify users' [PrivateMapKey](https://intl.cloud.tencent.com/document/product/647/32240?from_cn_redirect=1), which include an encrypted room ID and permission bit list. A user providing only `UserSig` and not `PrivateMapKey` will be unable to enter the room.
 	PrivateMapKey *string `json:"PrivateMapKey,omitnil,omitempty" name:"PrivateMapKey"`
 }
 
@@ -3228,24 +3235,24 @@ type MixLayout struct {
 	// The image layer. 0 is the default value and means the bottommost layer.
 	ImageLayer *uint64 `json:"ImageLayer,omitnil,omitempty" name:"ImageLayer"`
 
-	// The URL of the background image for a window. The image must be in JPG or PNG format and cannot be larger than 5 MB. If the image’s aspect ratio is different from that of the window, the image will be rendered according to the value of `RenderMode`.
+	// The image url supports only jpg, png, and jpeg formats. the resolution limitation is no more than 2K, and the image size limit is no more than 5MB. note that the url must carry the format extension. the url supports only specific strings within the range of a-z, a-z, 0-9, '-', '.', '_', '~', ':', '/', '?', '#', '[', ']', '@', '!', '&', '(', ')', '*', '+', ',', '%', and '='.
 	SubBackgroundImage *string `json:"SubBackgroundImage,omitnil,omitempty" name:"SubBackgroundImage"`
 }
 
 type MixLayoutParams struct {
-	// Layout mode:
-	// 1: Floating
-	// 2: Screen sharing
-	// 3: Grid (default)
-	// 4: Custom
+	// Layout mode.
+	// 1: floating layout.
+	// 2: screen sharing layout.
+	// 3: nine-grid layout.
+	// 4: custom layout.
 	// 
-	// Floating: By default, the video of the first anchor (you can also specify an anchor) who enters the room is scaled to fill the screen. When other anchors enter the room, their videos appear smaller and are superimposed over the large video from left to right starting from the bottom of the canvas according to their room entry sequence. If the total number of videos is 17 or less, there will be four windows in each row (4 x 4); if it is greater than 17, there will be five windows in each row (5 x 5). Up to 25 videos can be displayed. A user who publishes only audio will still be displayed in one window.
+	// Floating layout: by default, the video footage of the first host who enters the room (or a specified host) fills the entire screen. other hosts' video images are arranged horizontally from the bottom-left corner in the room entry sequence, displayed as small pictures floating above the large screen. when the number of screens is less than or equal to 17, each line has 4 (4 x 4 arrangement). when the number of screens exceeds 17, the small pictures are rearranged with 5 per line (5 x 5 arrangement). a maximum of 25 screens are supported. if the user only sends audio, it still occupies a screen position.
 	// 
-	// Screen sharing: The video of a specified anchor occupies a larger part of the canvas on the left side (if you do not specify an anchor, the left window will display the canvas background). The videos of other anchors are smaller and are positioned on the right side. If the total number of videos is 17 or less, the small videos are positioned from top to bottom in up to two columns on the right side, with eight videos per column at most. If there are more than 17 videos, the additional videos are positioned at the bottom of the canvas from left to right. Up to 25 videos can be displayed. A user who publishes only audio will still be displayed in one window.
+	// Screen sharing layout: specifies a large screen position on the left side for one host (if not specified, the large screen position uses the background color). other hosts are arranged vertically on the right side from top to bottom. when the number of screens is less than 17, each column on the right supports up to 8 hosts, occupying a maximum of two columns. when the number of screens exceeds 17, hosts beyond the 17th are arranged horizontally starting from the bottom-left corner. a maximum of 25 screens is supported. if a host only sends audio, it still occupies a screen position.
 	// 
-	// Grid: The videos of anchors are scaled and positioned automatically according to the total number of anchors in a room. Each video has the same size. Up to 25 videos can be displayed.
+	// Nine-Grid layout: automatically adjust the size of each frame based on the number of hosts. each host's frame size is the same, supporting up to 25 frames.
 	// 
-	// Custom: Specify the layout of videos by using the `MixLayoutList` parameter.
+	// Custom layout: customize the layout of each host's video as needed in MixLayoutList.
 	MixLayoutMode *uint64 `json:"MixLayoutMode,omitnil,omitempty" name:"MixLayoutMode"`
 
 	// The custom layout details. This parameter is valid if `MixLayoutMode` is set to `4`. Up to 25 videos can be displayed.
@@ -3263,26 +3270,29 @@ type MixLayoutParams struct {
 	// This parameter specifies the type of the stream displayed in the big window. If it appears in `MixLayoutList`, it indicates the type of the stream of a specified user.
 	MediaId *uint64 `json:"MediaId,omitnil,omitempty" name:"MediaId"`
 
-	// The URL of the background image, which cannot contain Chinese characters. The image must be in JPG or PNG format and cannot be larger than 5 MB.
+	// The image url supports only jpg, png, and jpeg. the image resolution is limited to no more than 2K, and the image size limit is no more than 5MB. note that the url must carry the format extension, and only specific strings are supported in the url, including a-z, a-z, 0-9, '-', '.', '_', '~', ':', '/', '?', '#', '[', ']', '@', '!', '&', '(', ')', '*', '+', ',', '%', and '='.
 	BackgroundImageUrl *string `json:"BackgroundImageUrl,omitnil,omitempty" name:"BackgroundImageUrl"`
 
-	// `1` means to use placeholders, and `0` (default) means to not use placeholders. If this parameter is set to `1`, when a user is not publishing video, a placeholder image will be displayed in the window reserved for the user.
+	// Set to 1 to enable the placeholder image function, and 0 to disable it. default is 0. when enabled, the corresponding placeholder image can be displayed in the preset position if the user has no upload audio and video.
 	PlaceHolderMode *uint64 `json:"PlaceHolderMode,omitnil,omitempty" name:"PlaceHolderMode"`
 
-	// The render mode to use when the aspect ratio of a video is different from that of the window. This parameter is defined the same as `RenderMode` in `MixLayoufList`.
+	// Handling solution when the background image aspect ratio is not the same, consistent with the RenderMode defined in MixLayoutList.
 	BackgroundImageRenderMode *uint64 `json:"BackgroundImageRenderMode,omitnil,omitempty" name:"BackgroundImageRenderMode"`
 
-	// The URL of the background image for a window. The image must be in JPG or PNG format and cannot be larger than 5 MB. If the image’s aspect ratio is different from that of the window, the image will be rendered according to the value of `RenderMode`.
+	// Sub-Picture placeholder image url supports only jpg, png, jpeg. resolution limitation is no more than 2K. image size limit is no more than 5MB. note that the url must carry format extension and supports only specific string literals within the range of a-z a-z 0-9 '-', '.', '_', '~', ':', '/', '?', '#', '[', ']' '@', '!', '&', '(', ')', '*', '+', ',', '%', '='.
 	DefaultSubBackgroundImage *string `json:"DefaultSubBackgroundImage,omitnil,omitempty" name:"DefaultSubBackgroundImage"`
 
 	// The watermark layout. Up to 25 watermarks are supported.
 	WaterMarkList []*WaterMark `json:"WaterMarkList,omitnil,omitempty" name:"WaterMarkList"`
 
-	// The render mode to use when the aspect ratio of a video is different from that of the window. This parameter is invalid if a custom layout is used. It is defined the same as `RenderMode` in `MixLayoufList`.
+	// When the aspect ratio of the background image does not match in the template layout, the handling solution is applied. the custom layout is disabled and aligns with the RenderMode defined in MixLayoutList.
 	RenderMode *uint64 `json:"RenderMode,omitnil,omitempty" name:"RenderMode"`
 
 	// This parameter is valid only if the screen sharing layout is used. If you set it to `1`, the large video window will appear on the right and the small window on the left. The default value is `0`.
 	MaxResolutionUserAlign *uint64 `json:"MaxResolutionUserAlign,omitnil,omitempty" name:"MaxResolutionUserAlign"`
+
+	// Controls whether audio users inside the room occupy the stream mixing layout. this takes effect only in mixed stream recording and template layout. true: represents that audio users do not occupy placeholders. false: represents that audio users occupy placeholders (false by default).
+	PureAudioDisableLayout *bool `json:"PureAudioDisableLayout,omitnil,omitempty" name:"PureAudioDisableLayout"`
 }
 
 type MixTranscodeParams struct {
@@ -3628,35 +3638,50 @@ type RecognizeConfig struct {
 }
 
 type RecordParams struct {
-	// The recording mode.
-	// 1: Single-stream recording. Records the audio and video of each subscribed user (`UserId`) in a room and saves the recording files to the cloud.
-	// 2: Mixed-stream recording. Mixes the audios and videos of subscribed users (`UserId`) in a room, records the mixed stream, and saves the recording files to the cloud.
+	// Recording mode:.
+	// 1: single stream recording, record the audio and video of the subscribed UserId in the room separately, and upload the recording files to cloud storage.
+	// 2: mixed-stream recording. mix the audio and video of the subscribed UserId in the room into an audio-video file and upload the recording file to cloud storage.
 	RecordMode *uint64 `json:"RecordMode,omitnil,omitempty" name:"RecordMode"`
 
-	// The time period (seconds) to wait to automatically stop recording after there are no anchors (users who publish streams) in a room. Value range: 5-86400 (max 24 hours). Default value: 30.
+	// Recording stops automatically when there is no host inside the room for a duration exceeding MaxIdleTime. measurement unit: second. default value: 30 seconds. the value must be greater than or equal to 5 seconds and less than or equal to 86400 seconds (24 hours).
 	MaxIdleTime *uint64 `json:"MaxIdleTime,omitnil,omitempty" name:"MaxIdleTime"`
 
-	// The media type of the streams to record.
-	// 0: Audio and video streams (default)
-	// 1: Audio streams only
-	// 2: Video streams only
+	// Media stream type for recording.
+	// 0: recording audio and video streams (default).
+	// 1: record audio streams only.
+	// 2: record video stream only.
 	StreamType *uint64 `json:"StreamType,omitnil,omitempty" name:"StreamType"`
 
-	// The allowlist/blocklist for stream subscription.
+	// Specifies the allowlist or blocklist for the subscription stream.
 	SubscribeStreamUserIds *SubscribeStreamUserIds `json:"SubscribeStreamUserIds,omitnil,omitempty" name:"SubscribeStreamUserIds"`
 
-	// The output format. `0` (default): HLS; `1`: HLS + MP4; `2`: HLS + AAC;  `3` : MP4,  `4` : AAC. This parameter is invalid if you save recording files to VOD. To specify the format of files saved to VOD, use `MediaType` of `TencentVod`.
+	// Output file format (valid when stored in third-party storage such as COS). 0: (default) output file is in hls format. 1: output file format is hls+mp4. 2: output file format is hls+aac. 3: output file format is mp4. 4: output file format is aac.
+	// 
+	// This parameter is invalid when storing in VOD. when storing in VOD, set MediaType in TencentVod (https://www.tencentcloud.comom/document/api/647/44055?from_cn_redirect=1#TencentVod).
 	OutputFormat *uint64 `json:"OutputFormat,omitnil,omitempty" name:"OutputFormat"`
 
-	// Whether to merge the audio and video of a user in the single-stream recording mode. 0 (default): Do not mix the audio and video; 1: Mix the audio and video into one TS file. You don’t need to specify this parameter for mixed-stream recording, which merges audios and videos by default.
+	// In single-stream recording mode, determine whether to merge the user's audio and video. 0: do not merge the audio and video of a stream (default). 1: merge the audio and video of a stream into one ts. in mixed-stream recording, this parameter is not required, and the audio and video are merged by default.
 	AvMerge *uint64 `json:"AvMerge,omitnil,omitempty" name:"AvMerge"`
 
-	// The maximum file duration allowed (minutes). If the output format is AAC or MP4, and the maximum file duration is exceeded, the file will be segmented. Value range: 1-1440. Default value: 1440 (24 hours). The maximum file size allowed is 2 GB. If the file size exceeds 2 GB, or the file duration exceeds 24 hours, the file will also be segmented.
-	// This parameter is invalid if the output format is HLS.
+	// If the file format is aac or mp4, the system will automatically split the video file when the length limit is exceeded. measurement unit: minute. defaults to 1440 min (24h). value range: 1-1440. [single file limit is 2G. if file size exceeds 2G or recording duration exceeds 24h, the file will be automatically split.].
+	// Hls format recording. this parameter is not effective.
 	MaxMediaFileDuration *uint64 `json:"MaxMediaFileDuration,omitnil,omitempty" name:"MaxMediaFileDuration"`
 
-	// The type of stream to record. `0` (default): The primary stream and substream; `1`: The primary stream; `2`: The substream.
+	// Specify recording streams. 0: mainstream + auxiliary stream (default); 1: mainstream; 2: auxiliary stream.
 	MediaId *uint64 `json:"MediaId,omitnil,omitempty" name:"MediaId"`
+
+	// Specifies the type of frame to fill when the upstream video stream stops:
+	// - 0: Fill with the last frame (freeze the last video frame)
+	// - 1: Fill with black frames
+	FillType *uint64 `json:"FillType,omitnil,omitempty" name:"FillType"`
+
+	// Specifies whether the recording task subscribes to the stream published by the Mixed Stream Robot. 
+	// 
+	// - 1: Subscribe. 
+	// - 0: Do not subscribe (default).
+	// > Note: 
+	// When this option is enabled, it is recommended to use the "Subscription Allowlist." Avoid subscribing to both the stream published by the Mixed Stream Robot and the streams published by the hosts simultaneously; otherwise, it will result in audio echoing (duplicate audio) in the recorded file.
+	SubscribeAbility *uint64 `json:"SubscribeAbility,omitnil,omitempty" name:"SubscribeAbility"`
 }
 
 // Predefined struct for user
@@ -5099,32 +5124,33 @@ type TTSConfig struct {
 }
 
 type TencentVod struct {
-	// The operation to perform on the media uploaded. The value of this parameter is the name of a task flow template. You can create a custom task flow template in Tencent Cloud VOD.
+	// Subsequent media task processing operations allow automatic task initiation after media upload is completed. the parameter value is the task flow template name. VOD (video on demand) supports creating task flow templates and template naming.
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
-	// The expiration time of the media file, which is a time period (seconds) from the current time. For example, `86400` means to save the media file for one day. To save the file permanently, set this parameter to `0`.
+	// Media file expiry time is the absolute expiration time from the current system time. to save for one day, enter "86400". to retain permanently, enter "0". the default is permanent preservation.
 	ExpireTime *uint64 `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// The storage region. Set this parameter if you have special requirements on the storage region.
+	// Specify the upload park, applicable only to the user with special requirement for upload region.
 	StorageRegion *string `json:"StorageRegion,omitnil,omitempty" name:"StorageRegion"`
 
-	// The category ID, which is returned after you create a category by calling an API. You can use categories to manage media files.
-	// The default value is `0`, which means others.
+	// Category ID is used to categorize and manage media. you can create a category and obtain the category ID through the create category api.
+	// The default value is 0, indicating other categories.
 	ClassId *uint64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// The VOD subapplication ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// Subapplication ID for video-on-demand (vod). if you need to access resources belonging to a subapplication, fill in this field with the subapplication ID. otherwise, this field is not required.
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// The task flow context, which is passed through after the task is completed.
+	// Task flow context, passed through when task complete.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// The upload context, which is passed through after upload is completed.
+	// Upload context, passed through on upload completion callback.
 	SourceContext *string `json:"SourceContext,omitnil,omitempty" name:"SourceContext"`
 
-	// The format of recording files uploaded to VOD. `0` (default): MP4; `1`: HLS; `2`: AAC (valid only if `StreamType` is `1`); `3`: HLS+MP4; `4`: HLS+AAC.
+	// The recording file format type uploaded to the vod platform. valid values: 0: mp4 (default), 1: hls, 2: aac (valid at that time when StreamType=1 for audio-only recording).
+	// 3: hls+mp4, 4: hls+aac (valid at that time when StreamType=1 is audio-only recording).
 	MediaType *uint64 `json:"MediaType,omitnil,omitempty" name:"MediaType"`
 
-	// The custom prefix of recording files. This parameter is valid only if recording files are uploaded to VOD. It can contain letters, numbers, underscores, and hyphens and cannot exceed 64 bytes. This prefix and the automatically generated filename are connected with `__UserId_u_`.
+	// Only supports API recording upload to vod. this parameter indicates you can customize the recording file name prefix. [length limit: 64 bytes, only allows a combination of uppercase and lowercase letters (a-zA-Z), numbers (0-9), underline, and hyphen]. the prefix is separated from the automatically generated recording file name by `__UserDefine_u_`.
 	UserDefineRecordId *string `json:"UserDefineRecordId,omitnil,omitempty" name:"UserDefineRecordId"`
 }
 
@@ -5563,7 +5589,7 @@ type VideoParams struct {
 }
 
 type WaterMark struct {
-	// The watermark type. 0 (default): image; 1: text (not supported yet).
+	// The watermark type. 0 (default): image; 1: text; 2: timestamp.
 	WaterMarkType *uint64 `json:"WaterMarkType,omitnil,omitempty" name:"WaterMarkType"`
 
 	// The information of watermark images. This parameter is required if the watermark type is image.
@@ -5603,7 +5629,7 @@ type WaterMarkChar struct {
 }
 
 type WaterMarkImage struct {
-	// The download URLs of the watermark images, which must be in JPG or PNG format and cannot be larger than 5 MB.
+	// The download url address supports only jpg, png, and jpeg with a size limit of no more than 5M. note that the url must carry the format extension and supports only specific strings within the range of a-z, a-z, 0-9, '-', '.', '_', '~', ':', '/', '?', '#', '[', ']', '@', '!', '&', '(', ')', '*', '+', ',', '%', '='.
 	WaterMarkUrl *string `json:"WaterMarkUrl,omitnil,omitempty" name:"WaterMarkUrl"`
 
 	// The Y axis of the image's top-left corner. Value range: [0, 2560]. The value cannot be larger than the canvas height.
