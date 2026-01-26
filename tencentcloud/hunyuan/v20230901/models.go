@@ -399,7 +399,7 @@ type Submit3DSmartTopologyJobRequestParams struct {
 	// Polygon type, indicates the model surface is composed of grid components, defaults to triangle
 	// Reference value:
 	// triangle: triangle face
-	// quadrilateral: quadrangle face
+	// quadrilateral: triangular and quadrilateral mixed face
 	PolygonType *string `json:"PolygonType,omitnil,omitempty" name:"PolygonType"`
 
 	// Reduction level bit type
@@ -420,7 +420,7 @@ type Submit3DSmartTopologyJobRequest struct {
 	// Polygon type, indicates the model surface is composed of grid components, defaults to triangle
 	// Reference value:
 	// triangle: triangle face
-	// quadrilateral: quadrangle face
+	// quadrilateral: triangular and quadrilateral mixed face
 	PolygonType *string `json:"PolygonType,omitnil,omitempty" name:"PolygonType"`
 
 	// Reduction level bit type

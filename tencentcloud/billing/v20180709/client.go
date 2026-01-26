@@ -2512,3 +2512,173 @@ func (c *Client) PayDealsWithContext(ctx context.Context, request *PayDealsReque
     err = c.Send(request, response)
     return
 }
+
+func NewRefundInstanceRequest() (request *RefundInstanceRequest) {
+    request = &RefundInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "RefundInstance")
+    
+    
+    return
+}
+
+func NewRefundInstanceResponse() (response *RefundInstanceResponse) {
+    response = &RefundInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RefundInstance
+// To unsubscribe from an unneeded instance, only the actual payment amount will be refunded, any used vouchers will not be returned. The refunded amount will be credited to your Tencent Cloud account balance by default.The account calling this API must be granted the finace:RefundInstance permission; otherwise, the refund process will fail.
+//
+// Currently, the integrated and supported product for this operation includes: Cloud Firewall.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_BALANCEINSUFFICIENT = "FailedOperation.BalanceInsufficient"
+//  FAILEDOPERATION_BUSINESSCHECKERRCODE = "FailedOperation.BusinessCheckErrCode"
+//  FAILEDOPERATION_GETPRICEPARAMERROR = "FailedOperation.GetPriceParamError"
+//  FAILEDOPERATION_INVALIDDEAL = "FailedOperation.InvalidDeal"
+//  FAILEDOPERATION_NUMLIMITERROR = "FailedOperation.NumLimitError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_APIPARAMERROR = "InvalidParameter.ApiParamError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_RESOURCELOCKED = "InvalidParameter.ResourceLocked"
+//  UNAUTHORIZEDOPERATION_CERTIFICATIONNEEDUPGRADE = "UnauthorizedOperation.CertificationNeedUpgrade"
+//  UNAUTHORIZEDOPERATION_NOTCERTIFICATION = "UnauthorizedOperation.NotCertification"
+//  UNSUPPORTEDOPERATION_NOT_SUPPORT_THIS_ACTION = "UnsupportedOperation.NOT_SUPPORT_THIS_ACTION"
+func (c *Client) RefundInstance(request *RefundInstanceRequest) (response *RefundInstanceResponse, err error) {
+    return c.RefundInstanceWithContext(context.Background(), request)
+}
+
+// RefundInstance
+// To unsubscribe from an unneeded instance, only the actual payment amount will be refunded, any used vouchers will not be returned. The refunded amount will be credited to your Tencent Cloud account balance by default.The account calling this API must be granted the finace:RefundInstance permission; otherwise, the refund process will fail.
+//
+// Currently, the integrated and supported product for this operation includes: Cloud Firewall.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_BALANCEINSUFFICIENT = "FailedOperation.BalanceInsufficient"
+//  FAILEDOPERATION_BUSINESSCHECKERRCODE = "FailedOperation.BusinessCheckErrCode"
+//  FAILEDOPERATION_GETPRICEPARAMERROR = "FailedOperation.GetPriceParamError"
+//  FAILEDOPERATION_INVALIDDEAL = "FailedOperation.InvalidDeal"
+//  FAILEDOPERATION_NUMLIMITERROR = "FailedOperation.NumLimitError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_APIPARAMERROR = "InvalidParameter.ApiParamError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_RESOURCELOCKED = "InvalidParameter.ResourceLocked"
+//  UNAUTHORIZEDOPERATION_CERTIFICATIONNEEDUPGRADE = "UnauthorizedOperation.CertificationNeedUpgrade"
+//  UNAUTHORIZEDOPERATION_NOTCERTIFICATION = "UnauthorizedOperation.NotCertification"
+//  UNSUPPORTEDOPERATION_NOT_SUPPORT_THIS_ACTION = "UnsupportedOperation.NOT_SUPPORT_THIS_ACTION"
+func (c *Client) RefundInstanceWithContext(ctx context.Context, request *RefundInstanceRequest) (response *RefundInstanceResponse, err error) {
+    if request == nil {
+        request = NewRefundInstanceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "RefundInstance")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RefundInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRefundInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRenewInstanceRequest() (request *RenewInstanceRequest) {
+    request = &RenewInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "RenewInstance")
+    
+    
+    return
+}
+
+func NewRenewInstanceResponse() (response *RenewInstanceResponse) {
+    response = &RenewInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RenewInstance
+// Renewing an instance: when calling this API to renew a server, ensure that your Tencent Cloud account has sufficient balance; otherwise, the renewal will fail. The account calling this API must be granted the finace:tradepermission; otherwise, the renewal will fail.
+//
+// Currently, the integrated and supported product for renewal includes: Cloud Firewall.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_BALANCEINSUFFICIENT = "FailedOperation.BalanceInsufficient"
+//  FAILEDOPERATION_BUSINESSCHECKERRCODE = "FailedOperation.BusinessCheckErrCode"
+//  FAILEDOPERATION_DISTRIBUTEERROR = "FailedOperation.DistributeError"
+//  FAILEDOPERATION_GETPRICEPARAMERROR = "FailedOperation.GetPriceParamError"
+//  FAILEDOPERATION_INVALIDDEAL = "FailedOperation.InvalidDeal"
+//  FAILEDOPERATION_INVALIDGOODSCATEGORYID = "FailedOperation.InvalidGoodsCategoryId"
+//  FAILEDOPERATION_DEALCREATEWHITELISTERROR = "FailedOperation.dealCreateWhitelistError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_APIPARAMERROR = "InvalidParameter.ApiParamError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_RESOURCELOCKED = "InvalidParameter.ResourceLocked"
+//  UNAUTHORIZEDOPERATION_CERTIFICATIONNEEDUPGRADE = "UnauthorizedOperation.CertificationNeedUpgrade"
+//  UNAUTHORIZEDOPERATION_NOTCERTIFICATION = "UnauthorizedOperation.NotCertification"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_NOT_SUPPORT_THIS_ACTION = "UnsupportedOperation.NOT_SUPPORT_THIS_ACTION"
+func (c *Client) RenewInstance(request *RenewInstanceRequest) (response *RenewInstanceResponse, err error) {
+    return c.RenewInstanceWithContext(context.Background(), request)
+}
+
+// RenewInstance
+// Renewing an instance: when calling this API to renew a server, ensure that your Tencent Cloud account has sufficient balance; otherwise, the renewal will fail. The account calling this API must be granted the finace:tradepermission; otherwise, the renewal will fail.
+//
+// Currently, the integrated and supported product for renewal includes: Cloud Firewall.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_BALANCEINSUFFICIENT = "FailedOperation.BalanceInsufficient"
+//  FAILEDOPERATION_BUSINESSCHECKERRCODE = "FailedOperation.BusinessCheckErrCode"
+//  FAILEDOPERATION_DISTRIBUTEERROR = "FailedOperation.DistributeError"
+//  FAILEDOPERATION_GETPRICEPARAMERROR = "FailedOperation.GetPriceParamError"
+//  FAILEDOPERATION_INVALIDDEAL = "FailedOperation.InvalidDeal"
+//  FAILEDOPERATION_INVALIDGOODSCATEGORYID = "FailedOperation.InvalidGoodsCategoryId"
+//  FAILEDOPERATION_DEALCREATEWHITELISTERROR = "FailedOperation.dealCreateWhitelistError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_APIPARAMERROR = "InvalidParameter.ApiParamError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_RESOURCELOCKED = "InvalidParameter.ResourceLocked"
+//  UNAUTHORIZEDOPERATION_CERTIFICATIONNEEDUPGRADE = "UnauthorizedOperation.CertificationNeedUpgrade"
+//  UNAUTHORIZEDOPERATION_NOTCERTIFICATION = "UnauthorizedOperation.NotCertification"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_NOT_SUPPORT_THIS_ACTION = "UnsupportedOperation.NOT_SUPPORT_THIS_ACTION"
+func (c *Client) RenewInstanceWithContext(ctx context.Context, request *RenewInstanceRequest) (response *RenewInstanceResponse, err error) {
+    if request == nil {
+        request = NewRenewInstanceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "RenewInstance")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RenewInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRenewInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
