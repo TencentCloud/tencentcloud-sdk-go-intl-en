@@ -21,6 +21,166 @@ import (
 )
 
 // Predefined struct for user
+type ChatTranslationsRequestParams struct {
+	// Model name. optional values include hunyuan-translation.
+	// Please read the introduction in [the product overview](https://www.tencentcloud.com/document/product/1284/75277) for model descriptions.
+	// 
+	// Note:
+	// Different models have different pricing. according to [the purchase guide](https://www.tencentcloud.com/document/product/1284/77186), call as needed.
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// Streaming call switch.
+	// Note:.
+	// 1. it defaults to non-streaming (false) when no value is passed.
+	// 2. for streaming calls, the results are incrementally returned via the SSE protocol (the return value is taken from Choices[n].Delta, and incremental data must be concatenated to obtain the complete result).
+	// 3. for non-streaming calls:.
+	// The calling method is the same as an ordinary HTTP request.
+	// The API response is time-consuming. if needed, set it to true for reduced latency.
+	// Only return the final result once (return value takes the value from Choices[n].Message).
+	// 
+	// Note:.
+	// When making an SDK call, streaming and non-streaming calls require **different ways** to obtain the return value. refer to the comments or sample code in the SDK (in the examples/hunyuan/v20230901/ directory of each language SDK code repository).
+	Stream *bool `json:"Stream,omitnil,omitempty" name:"Stream"`
+
+	// Text to be translated.
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// Source language.
+	// Supported language list:. 
+	// Simplified chinese: zh, traditional chinese: zh-TR, cantonese: yue, english: en, french: fr, portuguese: pt, spanish: es, japanese: ja, turkish: TR, russian: ru, arabic: ar, korean: ko, thai: th, italian: it, german: de, vietnamese: vi, malay: ms, indonesian: id.
+	// The following languages are supported only by the hunyuan-translation model:.
+	// Filipino: fil, hindi: hi, polish: pl, czech: cs, dutch: nl, khmer: km, burmese: my, persian: fa, gujarati: gu, urdu: ur, telugu: te, marathi: mr, hebrew: he, bengali: bn, tamil: ta, ukrainian: uk, tibetan: bo, kazakh: kk, mongolian: mn, uyghur: ug.
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// Target language.
+	// Supported language list:. 
+	// Simplified chinese: zh, traditional chinese: zh-TR, cantonese: yue, english: en, french: fr, portuguese: pt, spanish: es, japanese: ja, turkish: TR, russian: ru, arabic: ar, korean: ko, thai: th, italian: it, german: de, vietnamese: vi, malay: ms, indonesian: id.
+	// The following languages are supported only by the hunyuan-translation model:.
+	// Filipino: fil, hindi: hi, polish: pl, czech: cs, dutch: nl, khmer: km, burmese: my, persian: fa, gujarati: gu, urdu: ur, telugu: te, marathi: mr, hebrew: he, bengali: bn, tamil: ta, ukrainian: uk, tibetan: bo, kazakh: kk, mongolian: mn, uyghur: ug.
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
+
+	// Domain of the text to be translated, such as game plot.
+	Field *string `json:"Field,omitnil,omitempty" name:"Field"`
+
+	// Reference example, up to 10.
+	References []*Reference `json:"References,omitnil,omitempty" name:"References"`
+}
+
+type ChatTranslationsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Model name. optional values include hunyuan-translation.
+	// Please read the introduction in [the product overview](https://www.tencentcloud.com/document/product/1284/75277) for model descriptions.
+	// 
+	// Note:
+	// Different models have different pricing. according to [the purchase guide](https://www.tencentcloud.com/document/product/1284/77186), call as needed.
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// Streaming call switch.
+	// Note:.
+	// 1. it defaults to non-streaming (false) when no value is passed.
+	// 2. for streaming calls, the results are incrementally returned via the SSE protocol (the return value is taken from Choices[n].Delta, and incremental data must be concatenated to obtain the complete result).
+	// 3. for non-streaming calls:.
+	// The calling method is the same as an ordinary HTTP request.
+	// The API response is time-consuming. if needed, set it to true for reduced latency.
+	// Only return the final result once (return value takes the value from Choices[n].Message).
+	// 
+	// Note:.
+	// When making an SDK call, streaming and non-streaming calls require **different ways** to obtain the return value. refer to the comments or sample code in the SDK (in the examples/hunyuan/v20230901/ directory of each language SDK code repository).
+	Stream *bool `json:"Stream,omitnil,omitempty" name:"Stream"`
+
+	// Text to be translated.
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// Source language.
+	// Supported language list:. 
+	// Simplified chinese: zh, traditional chinese: zh-TR, cantonese: yue, english: en, french: fr, portuguese: pt, spanish: es, japanese: ja, turkish: TR, russian: ru, arabic: ar, korean: ko, thai: th, italian: it, german: de, vietnamese: vi, malay: ms, indonesian: id.
+	// The following languages are supported only by the hunyuan-translation model:.
+	// Filipino: fil, hindi: hi, polish: pl, czech: cs, dutch: nl, khmer: km, burmese: my, persian: fa, gujarati: gu, urdu: ur, telugu: te, marathi: mr, hebrew: he, bengali: bn, tamil: ta, ukrainian: uk, tibetan: bo, kazakh: kk, mongolian: mn, uyghur: ug.
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// Target language.
+	// Supported language list:. 
+	// Simplified chinese: zh, traditional chinese: zh-TR, cantonese: yue, english: en, french: fr, portuguese: pt, spanish: es, japanese: ja, turkish: TR, russian: ru, arabic: ar, korean: ko, thai: th, italian: it, german: de, vietnamese: vi, malay: ms, indonesian: id.
+	// The following languages are supported only by the hunyuan-translation model:.
+	// Filipino: fil, hindi: hi, polish: pl, czech: cs, dutch: nl, khmer: km, burmese: my, persian: fa, gujarati: gu, urdu: ur, telugu: te, marathi: mr, hebrew: he, bengali: bn, tamil: ta, ukrainian: uk, tibetan: bo, kazakh: kk, mongolian: mn, uyghur: ug.
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
+
+	// Domain of the text to be translated, such as game plot.
+	Field *string `json:"Field,omitnil,omitempty" name:"Field"`
+
+	// Reference example, up to 10.
+	References []*Reference `json:"References,omitnil,omitempty" name:"References"`
+}
+
+func (r *ChatTranslationsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ChatTranslationsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Model")
+	delete(f, "Stream")
+	delete(f, "Text")
+	delete(f, "Source")
+	delete(f, "Target")
+	delete(f, "Field")
+	delete(f, "References")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ChatTranslationsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ChatTranslationsResponseParams struct {
+	// Request'S RequestId this time.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Disclaimer.
+	Note *string `json:"Note,omitnil,omitempty" name:"Note"`
+
+	// Unix timestamp, in seconds.
+	Created *int64 `json:"Created,omitnil,omitempty" name:"Created"`
+
+	// Token statistical information.
+	// Billing by Token quantity.
+	Usage *Usage `json:"Usage,omitnil,omitempty" name:"Usage"`
+
+	// Reply content.
+	Choices []*TranslationChoice `json:"Choices,omitnil,omitempty" name:"Choices"`
+
+	// Error message.
+	// If the service encounters an exception during streaming return, return this error.
+	ErrorMsg *ErrorMsg `json:"ErrorMsg,omitnil,omitempty" name:"ErrorMsg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem. As a streaming response API, when the request is successfully completed, the RequestId will be placed in the Header "X-TC-RequestId" of the HTTP response.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ChatTranslationsResponse struct {
+	tchttp.BaseSSEResponse `json:"-"`
+	Response *ChatTranslationsResponseParams `json:"Response"`
+}
+
+func (r *ChatTranslationsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ChatTranslationsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type Convert3DFormatRequestParams struct {
 	// 3D file url address. model file size not greater than 60 mb
 	// Supports fbx, obj, and glb format 3d file input
@@ -158,6 +318,16 @@ func (r *Describe3DSmartTopologyJobResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ErrorMsg struct {
+	// Error message.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// Error code.
+	// 4000 internal service error.
+	// 4001 request model timeout.
+	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
+}
+
 type File3D struct {
 	// 3D file format. valid values: GIF, OBJ.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
@@ -175,6 +345,11 @@ type InputFile3D struct {
 
 	// Specifies the file format.	
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
+type PromptTokensDetails struct {
+	// The number of cache tokens.
+	CachedTokens *string `json:"CachedTokens,omitnil,omitempty" name:"CachedTokens"`
 }
 
 // Predefined struct for user
@@ -387,6 +562,17 @@ func (r *QueryHunyuanTo3DRapidJobResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Reference struct {
+	// Translate text type, enumerate "sentence" means sentence, "term" means terminology.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Original.
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// Translation.
+	Translation *string `json:"Translation,omitnil,omitempty" name:"Translation"`
+}
+
 // Predefined struct for user
 type Submit3DSmartTopologyJobRequestParams struct {
 	// Source 3D file model link
@@ -541,7 +727,7 @@ func (r *SubmitHunyuan3DPartJobResponse) FromJsonString(s string) error {
 type SubmitHunyuanTo3DProJobRequestParams struct {
 	// Tencent HY 3D Global model version
 	// Defaults to 3.0, with optional choices: 3.0, 3.1
-	// When selecting version 3.1, the LowPoly parameter is unavailable
+	// When selecting version 3.1, the [LowPoly] and [Sketch] parameter is unavailable
 	// Example value:3.0
 	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
 
@@ -614,7 +800,7 @@ type SubmitHunyuanTo3DProJobRequest struct {
 	
 	// Tencent HY 3D Global model version
 	// Defaults to 3.0, with optional choices: 3.0, 3.1
-	// When selecting version 3.1, the LowPoly parameter is unavailable
+	// When selecting version 3.1, the [LowPoly] and [Sketch] parameter is unavailable
 	// Example value:3.0
 	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
 
@@ -839,6 +1025,52 @@ func (r *SubmitHunyuanTo3DRapidJobResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *SubmitHunyuanTo3DRapidJobResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type TranslationChoice struct {
+	// End flag, can be stop or sensitive.
+	// stop means output ends normally.
+	// sensitive only appears when streaming output review is enabled, indicating security review not passed.
+	FinishReason *string `json:"FinishReason,omitnil,omitempty" name:"FinishReason"`
+
+	// Index value, used when streaming.
+	Index *int64 `json:"Index,omitnil,omitempty" name:"Index"`
+
+	// Incremental return value used when streaming this field.
+	Delta *TranslationDelta `json:"Delta,omitnil,omitempty" name:"Delta"`
+
+	// Return value, used when non-streaming.
+	Message *TranslationMessage `json:"Message,omitnil,omitempty" name:"Message"`
+}
+
+type TranslationDelta struct {
+	// Role name.
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
+
+	// Content details.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+}
+
+type TranslationMessage struct {
+	// Role. valid values: system, user, assistant, tool.
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
+
+	// Text content.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+}
+
+type Usage struct {
+	// Input Token quantity.
+	PromptTokens *int64 `json:"PromptTokens,omitnil,omitempty" name:"PromptTokens"`
+
+	// Output Token quantity.
+	CompletionTokens *int64 `json:"CompletionTokens,omitnil,omitempty" name:"CompletionTokens"`
+
+	// Total Token quantity.
+	TotalTokens *int64 `json:"TotalTokens,omitnil,omitempty" name:"TotalTokens"`
+
+	// Details of the input token.
+	PromptTokensDetails *PromptTokensDetails `json:"PromptTokensDetails,omitnil,omitempty" name:"PromptTokensDetails"`
 }
 
 type ViewImage struct {

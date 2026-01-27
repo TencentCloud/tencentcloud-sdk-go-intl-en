@@ -197,6 +197,60 @@ func (c *Client) CreateAddressUnsubscribeConfigWithContext(ctx context.Context, 
     return
 }
 
+func NewCreateCustomBlacklistRequest() (request *CreateCustomBlacklistRequest) {
+    request = &CreateCustomBlacklistRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ses", APIVersion, "CreateCustomBlacklist")
+    
+    
+    return
+}
+
+func NewCreateCustomBlacklistResponse() (response *CreateCustomBlacklistResponse) {
+    response = &CreateCustomBlacklistResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateCustomBlacklist
+// Add a custom blocklist.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_WRONGDATE = "InvalidParameterValue.WrongDate"
+//  LIMITEXCEEDED_RECEIVERDETAILREQUESTLIMIT = "LimitExceeded.ReceiverDetailRequestLimit"
+//  MISSINGPARAMETER_EMAILSNECESSARY = "MissingParameter.EmailsNecessary"
+func (c *Client) CreateCustomBlacklist(request *CreateCustomBlacklistRequest) (response *CreateCustomBlacklistResponse, err error) {
+    return c.CreateCustomBlacklistWithContext(context.Background(), request)
+}
+
+// CreateCustomBlacklist
+// Add a custom blocklist.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_WRONGDATE = "InvalidParameterValue.WrongDate"
+//  LIMITEXCEEDED_RECEIVERDETAILREQUESTLIMIT = "LimitExceeded.ReceiverDetailRequestLimit"
+//  MISSINGPARAMETER_EMAILSNECESSARY = "MissingParameter.EmailsNecessary"
+func (c *Client) CreateCustomBlacklistWithContext(ctx context.Context, request *CreateCustomBlacklistRequest) (response *CreateCustomBlacklistResponse, err error) {
+    if request == nil {
+        request = NewCreateCustomBlacklistRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "CreateCustomBlacklist")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCustomBlacklist require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCustomBlacklistResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateEmailAddressRequest() (request *CreateEmailAddressRequest) {
     request = &CreateEmailAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -220,6 +274,7 @@ func NewCreateEmailAddressResponse() (response *CreateEmailAddressResponse) {
 // After the sender domain is verified, you need a sender address to send emails. For example, if your sender domain is mail.qcloud.com, your sender address can be service@mail.qcloud.com. If you want to display your name (such as "Tencent Cloud") in the inbox list of the recipients, the sender address should be in the format of `Tencent Cloud <email address>`. Please note that there must be a space between your name and the first angle bracket.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -240,6 +295,7 @@ func (c *Client) CreateEmailAddress(request *CreateEmailAddressRequest) (respons
 // After the sender domain is verified, you need a sender address to send emails. For example, if your sender domain is mail.qcloud.com, your sender address can be service@mail.qcloud.com. If you want to display your name (such as "Tencent Cloud") in the inbox list of the recipients, the sender address should be in the format of `Tencent Cloud <email address>`. Please note that there must be a space between your name and the first angle bracket.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -292,6 +348,7 @@ func NewCreateEmailIdentityResponse() (response *CreateEmailIdentityResponse) {
 // This API is used to create a sender domain. Before you can send an email using Tencent Cloud SES, you must create a sender domain as your identity. It can be the domain of your website or mobile app. You must verify the domain to prove that you own it and authorize Tencent Cloud SES to use it to send emails.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -311,6 +368,7 @@ func (c *Client) CreateEmailIdentity(request *CreateEmailIdentityRequest) (respo
 // This API is used to create a sender domain. Before you can send an email using Tencent Cloud SES, you must create a sender domain as your identity. It can be the domain of your website or mobile app. You must verify the domain to prove that you own it and authorize Tencent Cloud SES to use it to send emails.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -667,6 +725,56 @@ func (c *Client) DeleteBlackListWithContext(ctx context.Context, request *Delete
     return
 }
 
+func NewDeleteCustomBlackListRequest() (request *DeleteCustomBlackListRequest) {
+    request = &DeleteCustomBlackListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ses", APIVersion, "DeleteCustomBlackList")
+    
+    
+    return
+}
+
+func NewDeleteCustomBlackListResponse() (response *DeleteCustomBlackListResponse) {
+    response = &DeleteCustomBlackListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteCustomBlackList
+// Delete a custom blocklist email address.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DeleteCustomBlackList(request *DeleteCustomBlackListRequest) (response *DeleteCustomBlackListResponse, err error) {
+    return c.DeleteCustomBlackListWithContext(context.Background(), request)
+}
+
+// DeleteCustomBlackList
+// Delete a custom blocklist email address.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DeleteCustomBlackListWithContext(ctx context.Context, request *DeleteCustomBlackListRequest) (response *DeleteCustomBlackListResponse, err error) {
+    if request == nil {
+        request = NewDeleteCustomBlackListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "DeleteCustomBlackList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCustomBlackList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCustomBlackListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteEmailAddressRequest() (request *DeleteEmailAddressRequest) {
     request = &DeleteEmailAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -690,6 +798,7 @@ func NewDeleteEmailAddressResponse() (response *DeleteEmailAddressResponse) {
 // This API is used to delete a sender address.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -706,6 +815,7 @@ func (c *Client) DeleteEmailAddress(request *DeleteEmailAddressRequest) (respons
 // This API is used to delete a sender address.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -754,12 +864,14 @@ func NewDeleteEmailIdentityResponse() (response *DeleteEmailIdentityResponse) {
 // This API is used to delete a sender domain. After deleted, the sender domain can no longer be used to send emails.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_NOTALLOWDELETE = "OperationDenied.NotAllowDelete"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 func (c *Client) DeleteEmailIdentity(request *DeleteEmailIdentityRequest) (response *DeleteEmailIdentityResponse, err error) {
     return c.DeleteEmailIdentityWithContext(context.Background(), request)
@@ -769,12 +881,14 @@ func (c *Client) DeleteEmailIdentity(request *DeleteEmailIdentityRequest) (respo
 // This API is used to delete a sender domain. After deleted, the sender domain can no longer be used to send emails.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_NOTALLOWDELETE = "OperationDenied.NotAllowDelete"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 func (c *Client) DeleteEmailIdentityWithContext(ctx context.Context, request *DeleteEmailIdentityRequest) (response *DeleteEmailIdentityResponse, err error) {
     if request == nil {
@@ -932,6 +1046,7 @@ func NewGetEmailIdentityResponse() (response *GetEmailIdentityResponse) {
 // This API is used to get the configuration details of a sender domain.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -948,6 +1063,7 @@ func (c *Client) GetEmailIdentity(request *GetEmailIdentityRequest) (response *G
 // This API is used to get the configuration details of a sender domain.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -1057,9 +1173,7 @@ func NewGetSendEmailStatusResponse() (response *GetSendEmailStatusResponse) {
 }
 
 // GetSendEmailStatus
-// This API is used to get email sending status. Only data within 30 days can be queried.
-//
-// Default API request rate limit: 1 request/sec.
+// Search the email sending status. Only support querying data within 30 days.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_EMAILADDRINBLACKLIST = "FailedOperation.EmailAddrInBlacklist"
@@ -1099,9 +1213,7 @@ func (c *Client) GetSendEmailStatus(request *GetSendEmailStatusRequest) (respons
 }
 
 // GetSendEmailStatus
-// This API is used to get email sending status. Only data within 30 days can be queried.
-//
-// Default API request rate limit: 1 request/sec.
+// Search the email sending status. Only support querying data within 30 days.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_EMAILADDRINBLACKLIST = "FailedOperation.EmailAddrInBlacklist"
@@ -1333,6 +1445,58 @@ func (c *Client) ListBlackEmailAddressWithContext(ctx context.Context, request *
     return
 }
 
+func NewListCustomBlacklistRequest() (request *ListCustomBlacklistRequest) {
+    request = &ListCustomBlacklistRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ses", APIVersion, "ListCustomBlacklist")
+    
+    
+    return
+}
+
+func NewListCustomBlacklistResponse() (response *ListCustomBlacklistResponse) {
+    response = &ListCustomBlacklistResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListCustomBlacklist
+// Retrieve the custom blocklist.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDLIMIT = "FailedOperation.InvalidLimit"
+//  INTERNALERROR = "InternalError"
+func (c *Client) ListCustomBlacklist(request *ListCustomBlacklistRequest) (response *ListCustomBlacklistResponse, err error) {
+    return c.ListCustomBlacklistWithContext(context.Background(), request)
+}
+
+// ListCustomBlacklist
+// Retrieve the custom blocklist.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDLIMIT = "FailedOperation.InvalidLimit"
+//  INTERNALERROR = "InternalError"
+func (c *Client) ListCustomBlacklistWithContext(ctx context.Context, request *ListCustomBlacklistRequest) (response *ListCustomBlacklistResponse, err error) {
+    if request == nil {
+        request = NewListCustomBlacklistRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "ListCustomBlacklist")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListCustomBlacklist require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListCustomBlacklistResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListEmailAddressRequest() (request *ListEmailAddressRequest) {
     request = &ListEmailAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1418,6 +1582,7 @@ func NewListEmailIdentitiesResponse() (response *ListEmailIdentitiesResponse) {
 // This API is used to get the list of sender domains, including verified and unverified domains.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -1433,6 +1598,7 @@ func (c *Client) ListEmailIdentities(request *ListEmailIdentitiesRequest) (respo
 // This API is used to get the list of sender domains, including verified and unverified domains.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -1515,6 +1681,60 @@ func (c *Client) ListEmailTemplatesWithContext(ctx context.Context, request *Lis
     request.SetContext(ctx)
     
     response = NewListEmailTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListReceiverDetailsRequest() (request *ListReceiverDetailsRequest) {
+    request = &ListReceiverDetailsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ses", APIVersion, "ListReceiverDetails")
+    
+    
+    return
+}
+
+func NewListReceiverDetailsResponse() (response *ListReceiverDetailsResponse) {
+    response = &ListReceiverDetailsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListReceiverDetails
+// Query ALL recipient email addresses in the recipient list based on the recipient list id with paging query. Filter queries can be based on the recipient email address.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDLIMIT = "FailedOperation.InvalidLimit"
+//  INTERNALERROR = "InternalError"
+//  OPERATIONDENIED_RECEIVERNOTEXIST = "OperationDenied.ReceiverNotExist"
+func (c *Client) ListReceiverDetails(request *ListReceiverDetailsRequest) (response *ListReceiverDetailsResponse, err error) {
+    return c.ListReceiverDetailsWithContext(context.Background(), request)
+}
+
+// ListReceiverDetails
+// Query ALL recipient email addresses in the recipient list based on the recipient list id with paging query. Filter queries can be based on the recipient email address.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDLIMIT = "FailedOperation.InvalidLimit"
+//  INTERNALERROR = "InternalError"
+//  OPERATIONDENIED_RECEIVERNOTEXIST = "OperationDenied.ReceiverNotExist"
+func (c *Client) ListReceiverDetailsWithContext(ctx context.Context, request *ListReceiverDetailsRequest) (response *ListReceiverDetailsResponse, err error) {
+    if request == nil {
+        request = NewListReceiverDetailsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "ListReceiverDetails")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListReceiverDetails require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListReceiverDetailsResponse()
     err = c.Send(request, response)
     return
 }
@@ -1650,6 +1870,7 @@ func NewSendEmailResponse() (response *SendEmailResponse) {
 //  FAILEDOPERATION_EXCEEDSENDLIMIT = "FailedOperation.ExceedSendLimit"
 //  FAILEDOPERATION_FREQUENCYLIMIT = "FailedOperation.FrequencyLimit"
 //  FAILEDOPERATION_HIGHREJECTIONRATE = "FailedOperation.HighRejectionRate"
+//  FAILEDOPERATION_ILLEGALURL = "FailedOperation.IllegalURL"
 //  FAILEDOPERATION_INCORRECTEMAIL = "FailedOperation.IncorrectEmail"
 //  FAILEDOPERATION_INCORRECTSENDER = "FailedOperation.IncorrectSender"
 //  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
@@ -1666,6 +1887,7 @@ func NewSendEmailResponse() (response *SendEmailResponse) {
 //  FAILEDOPERATION_TEMPORARYBLOCKED = "FailedOperation.TemporaryBlocked"
 //  FAILEDOPERATION_TOOMANYATTACHMENTS = "FailedOperation.TooManyAttachments"
 //  FAILEDOPERATION_TOOMANYRECIPIENTS = "FailedOperation.TooManyRecipients"
+//  FAILEDOPERATION_URLFORBIDDEN = "FailedOperation.URLForbidden"
 //  FAILEDOPERATION_UNSUPPORTMAILTYPE = "FailedOperation.UnsupportMailType"
 //  FAILEDOPERATION_WITHOUTPERMISSION = "FailedOperation.WithOutPermission"
 //  FAILEDOPERATION_WRONGCONTENTJSON = "FailedOperation.WrongContentJson"
@@ -1699,6 +1921,7 @@ func (c *Client) SendEmail(request *SendEmailRequest) (response *SendEmailRespon
 //  FAILEDOPERATION_EXCEEDSENDLIMIT = "FailedOperation.ExceedSendLimit"
 //  FAILEDOPERATION_FREQUENCYLIMIT = "FailedOperation.FrequencyLimit"
 //  FAILEDOPERATION_HIGHREJECTIONRATE = "FailedOperation.HighRejectionRate"
+//  FAILEDOPERATION_ILLEGALURL = "FailedOperation.IllegalURL"
 //  FAILEDOPERATION_INCORRECTEMAIL = "FailedOperation.IncorrectEmail"
 //  FAILEDOPERATION_INCORRECTSENDER = "FailedOperation.IncorrectSender"
 //  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
@@ -1715,6 +1938,7 @@ func (c *Client) SendEmail(request *SendEmailRequest) (response *SendEmailRespon
 //  FAILEDOPERATION_TEMPORARYBLOCKED = "FailedOperation.TemporaryBlocked"
 //  FAILEDOPERATION_TOOMANYATTACHMENTS = "FailedOperation.TooManyAttachments"
 //  FAILEDOPERATION_TOOMANYRECIPIENTS = "FailedOperation.TooManyRecipients"
+//  FAILEDOPERATION_URLFORBIDDEN = "FailedOperation.URLForbidden"
 //  FAILEDOPERATION_UNSUPPORTMAILTYPE = "FailedOperation.UnsupportMailType"
 //  FAILEDOPERATION_WITHOUTPERMISSION = "FailedOperation.WithOutPermission"
 //  FAILEDOPERATION_WRONGCONTENTJSON = "FailedOperation.WrongContentJson"
@@ -1780,6 +2004,7 @@ func NewUpdateAddressUnsubscribeConfigResponse() (response *UpdateAddressUnsubsc
 //  FAILEDOPERATION_EXCEEDSENDLIMIT = "FailedOperation.ExceedSendLimit"
 //  FAILEDOPERATION_FREQUENCYLIMIT = "FailedOperation.FrequencyLimit"
 //  FAILEDOPERATION_HIGHREJECTIONRATE = "FailedOperation.HighRejectionRate"
+//  FAILEDOPERATION_ILLEGALURL = "FailedOperation.IllegalURL"
 //  FAILEDOPERATION_INCORRECTEMAIL = "FailedOperation.IncorrectEmail"
 //  FAILEDOPERATION_INCORRECTSENDER = "FailedOperation.IncorrectSender"
 //  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
@@ -1796,6 +2021,7 @@ func NewUpdateAddressUnsubscribeConfigResponse() (response *UpdateAddressUnsubsc
 //  FAILEDOPERATION_TEMPORARYBLOCKED = "FailedOperation.TemporaryBlocked"
 //  FAILEDOPERATION_TOOMANYATTACHMENTS = "FailedOperation.TooManyAttachments"
 //  FAILEDOPERATION_TOOMANYRECIPIENTS = "FailedOperation.TooManyRecipients"
+//  FAILEDOPERATION_URLFORBIDDEN = "FailedOperation.URLForbidden"
 //  FAILEDOPERATION_UNSUPPORTMAILTYPE = "FailedOperation.UnsupportMailType"
 //  FAILEDOPERATION_WITHOUTPERMISSION = "FailedOperation.WithOutPermission"
 //  FAILEDOPERATION_WRONGCONTENTJSON = "FailedOperation.WrongContentJson"
@@ -1829,6 +2055,7 @@ func (c *Client) UpdateAddressUnsubscribeConfig(request *UpdateAddressUnsubscrib
 //  FAILEDOPERATION_EXCEEDSENDLIMIT = "FailedOperation.ExceedSendLimit"
 //  FAILEDOPERATION_FREQUENCYLIMIT = "FailedOperation.FrequencyLimit"
 //  FAILEDOPERATION_HIGHREJECTIONRATE = "FailedOperation.HighRejectionRate"
+//  FAILEDOPERATION_ILLEGALURL = "FailedOperation.IllegalURL"
 //  FAILEDOPERATION_INCORRECTEMAIL = "FailedOperation.IncorrectEmail"
 //  FAILEDOPERATION_INCORRECTSENDER = "FailedOperation.IncorrectSender"
 //  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
@@ -1845,6 +2072,7 @@ func (c *Client) UpdateAddressUnsubscribeConfig(request *UpdateAddressUnsubscrib
 //  FAILEDOPERATION_TEMPORARYBLOCKED = "FailedOperation.TemporaryBlocked"
 //  FAILEDOPERATION_TOOMANYATTACHMENTS = "FailedOperation.TooManyAttachments"
 //  FAILEDOPERATION_TOOMANYRECIPIENTS = "FailedOperation.TooManyRecipients"
+//  FAILEDOPERATION_URLFORBIDDEN = "FailedOperation.URLForbidden"
 //  FAILEDOPERATION_UNSUPPORTMAILTYPE = "FailedOperation.UnsupportMailType"
 //  FAILEDOPERATION_WITHOUTPERMISSION = "FailedOperation.WithOutPermission"
 //  FAILEDOPERATION_WRONGCONTENTJSON = "FailedOperation.WrongContentJson"
@@ -1881,6 +2109,60 @@ func (c *Client) UpdateAddressUnsubscribeConfigWithContext(ctx context.Context, 
     return
 }
 
+func NewUpdateCustomBlackListRequest() (request *UpdateCustomBlackListRequest) {
+    request = &UpdateCustomBlackListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ses", APIVersion, "UpdateCustomBlackList")
+    
+    
+    return
+}
+
+func NewUpdateCustomBlackListResponse() (response *UpdateCustomBlackListResponse) {
+    response = &UpdateCustomBlackListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateCustomBlackList
+// Refresh custom blocklist.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_ILLEGALEMAILADDRESS = "InvalidParameterValue.IllegalEmailAddress"
+//  INVALIDPARAMETERVALUE_WRONGDATE = "InvalidParameterValue.WrongDate"
+func (c *Client) UpdateCustomBlackList(request *UpdateCustomBlackListRequest) (response *UpdateCustomBlackListResponse, err error) {
+    return c.UpdateCustomBlackListWithContext(context.Background(), request)
+}
+
+// UpdateCustomBlackList
+// Refresh custom blocklist.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_ILLEGALEMAILADDRESS = "InvalidParameterValue.IllegalEmailAddress"
+//  INVALIDPARAMETERVALUE_WRONGDATE = "InvalidParameterValue.WrongDate"
+func (c *Client) UpdateCustomBlackListWithContext(ctx context.Context, request *UpdateCustomBlackListRequest) (response *UpdateCustomBlackListResponse, err error) {
+    if request == nil {
+        request = NewUpdateCustomBlackListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "UpdateCustomBlackList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateCustomBlackList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateCustomBlackListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateEmailIdentityRequest() (request *UpdateEmailIdentityRequest) {
     request = &UpdateEmailIdentityRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1904,6 +2186,7 @@ func NewUpdateEmailIdentityResponse() (response *UpdateEmailIdentityResponse) {
 // This API is used to verify whether your DNS configuration is correct.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_SERVICENOTAVAILABLE = "FailedOperation.ServiceNotAvailable"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1921,6 +2204,7 @@ func (c *Client) UpdateEmailIdentity(request *UpdateEmailIdentityRequest) (respo
 // This API is used to verify whether your DNS configuration is correct.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_SERVICENOTAVAILABLE = "FailedOperation.ServiceNotAvailable"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1970,6 +2254,7 @@ func NewUpdateEmailSmtpPassWordResponse() (response *UpdateEmailSmtpPassWordResp
 // This API is used to set the SMTP password. Initially, no SMTP password is set for your email address, so emails cannot be sent over SMTP. To send emails over SMTP, you must set the SMTP password. The set password can be changed subsequently.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDSMTPPASSWORD = "InvalidParameterValue.InvalidSmtpPassWord"
 //  INVALIDPARAMETERVALUE_NOSUCHSENDER = "InvalidParameterValue.NoSuchSender"
@@ -1982,6 +2267,7 @@ func (c *Client) UpdateEmailSmtpPassWord(request *UpdateEmailSmtpPassWordRequest
 // This API is used to set the SMTP password. Initially, no SMTP password is set for your email address, so emails cannot be sent over SMTP. To send emails over SMTP, you must set the SMTP password. The set password can be changed subsequently.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDSMTPPASSWORD = "InvalidParameterValue.InvalidSmtpPassWord"
 //  INVALIDPARAMETERVALUE_NOSUCHSENDER = "InvalidParameterValue.NoSuchSender"

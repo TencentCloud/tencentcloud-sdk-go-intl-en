@@ -45,6 +45,98 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewChatTranslationsRequest() (request *ChatTranslationsRequest) {
+    request = &ChatTranslationsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("hunyuan", APIVersion, "ChatTranslations")
+    
+    
+    return
+}
+
+func NewChatTranslationsResponse() (response *ChatTranslationsResponse) {
+    response = &ChatTranslationsResponse{} 
+    return
+
+}
+
+// ChatTranslations
+// Tencent Hunyuan is a large language model (LLM) developed by Tencent R&D. It possesses powerful Chinese creation capacity, logical reasoning in complex context, and reliable task execution power. This API supports streaming or non-streaming calls. When using streaming calls, it follows the SSE protocol.
+//
+// 
+//
+// 1. This API does not currently support returning Image Content.
+//
+// 2. By default, this API has account restrictions with a number of concurrencies of 5. 
+//
+// 3. Please use the SDK to call this API. examples are provided in the Git repository examples/hunyuan/v20230901/ directory for each development language. The SDK link is provided in the "**Developer Resources - SDK**" part under the document.
+//
+// 4. We recommend you use API Explorer for quick online debugging interface and download example code in languages, [click to open](https://console.cloud.tencent.com/api/explorer?Product=hunyuan&Version=2023-09-01&Action=ChatCompletions).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) ChatTranslations(request *ChatTranslationsRequest) (response *ChatTranslationsResponse, err error) {
+    return c.ChatTranslationsWithContext(context.Background(), request)
+}
+
+// ChatTranslations
+// Tencent Hunyuan is a large language model (LLM) developed by Tencent R&D. It possesses powerful Chinese creation capacity, logical reasoning in complex context, and reliable task execution power. This API supports streaming or non-streaming calls. When using streaming calls, it follows the SSE protocol.
+//
+// 
+//
+// 1. This API does not currently support returning Image Content.
+//
+// 2. By default, this API has account restrictions with a number of concurrencies of 5. 
+//
+// 3. Please use the SDK to call this API. examples are provided in the Git repository examples/hunyuan/v20230901/ directory for each development language. The SDK link is provided in the "**Developer Resources - SDK**" part under the document.
+//
+// 4. We recommend you use API Explorer for quick online debugging interface and download example code in languages, [click to open](https://console.cloud.tencent.com/api/explorer?Product=hunyuan&Version=2023-09-01&Action=ChatCompletions).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) ChatTranslationsWithContext(ctx context.Context, request *ChatTranslationsRequest) (response *ChatTranslationsResponse, err error) {
+    if request == nil {
+        request = NewChatTranslationsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "hunyuan", APIVersion, "ChatTranslations")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ChatTranslations require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewChatTranslationsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewConvert3DFormatRequest() (request *Convert3DFormatRequest) {
     request = &Convert3DFormatRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -66,12 +158,42 @@ func NewConvert3DFormatResponse() (response *Convert3DFormatResponse) {
 
 // Convert3DFormat
 // After inputting a 3D model file, the 3D model file format can be switched.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) Convert3DFormat(request *Convert3DFormatRequest) (response *Convert3DFormatResponse, err error) {
     return c.Convert3DFormatWithContext(context.Background(), request)
 }
 
 // Convert3DFormat
 // After inputting a 3D model file, the 3D model file format can be switched.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) Convert3DFormatWithContext(ctx context.Context, request *Convert3DFormatRequest) (response *Convert3DFormatResponse, err error) {
     if request == nil {
         request = NewConvert3DFormatRequest()
@@ -112,6 +234,21 @@ func NewDescribe3DSmartTopologyJobResponse() (response *Describe3DSmartTopologyJ
 // The SmartTopoly API uses the Polygon 1.5 model. After manually inputting a 3D high-poly model, it can generate a neat 3D model with lower polygon count.
 //
 // 1 concurrent is provided by default, which means 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) Describe3DSmartTopologyJob(request *Describe3DSmartTopologyJobRequest) (response *Describe3DSmartTopologyJobResponse, err error) {
     return c.Describe3DSmartTopologyJobWithContext(context.Background(), request)
 }
@@ -120,6 +257,21 @@ func (c *Client) Describe3DSmartTopologyJob(request *Describe3DSmartTopologyJobR
 // The SmartTopoly API uses the Polygon 1.5 model. After manually inputting a 3D high-poly model, it can generate a neat 3D model with lower polygon count.
 //
 // 1 concurrent is provided by default, which means 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) Describe3DSmartTopologyJobWithContext(ctx context.Context, request *Describe3DSmartTopologyJobRequest) (response *Describe3DSmartTopologyJobResponse, err error) {
     if request == nil {
         request = NewDescribe3DSmartTopologyJobRequest()
@@ -158,12 +310,42 @@ func NewQueryHunyuan3DPartJobResponse() (response *QueryHunyuan3DPartJobResponse
 
 // QueryHunyuan3DPartJob
 // This API is used to query the generation task of a component.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) QueryHunyuan3DPartJob(request *QueryHunyuan3DPartJobRequest) (response *QueryHunyuan3DPartJobResponse, err error) {
     return c.QueryHunyuan3DPartJobWithContext(context.Background(), request)
 }
 
 // QueryHunyuan3DPartJob
 // This API is used to query the generation task of a component.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) QueryHunyuan3DPartJobWithContext(ctx context.Context, request *QueryHunyuan3DPartJobRequest) (response *QueryHunyuan3DPartJobResponse, err error) {
     if request == nil {
         request = NewQueryHunyuan3DPartJobRequest()
@@ -204,6 +386,21 @@ func NewQueryHunyuanTo3DProJobResponse() (response *QueryHunyuanTo3DProJobRespon
 // This API is used to intelligently generate 3D content based on the HunYuan Large Model and input text descriptions/images.
 //
 // This API is used to provide 3 concurrent tasks by default, which can process 3 submitted tasks simultaneously. The next task can be processed only after the previous task is completed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) QueryHunyuanTo3DProJob(request *QueryHunyuanTo3DProJobRequest) (response *QueryHunyuanTo3DProJobResponse, err error) {
     return c.QueryHunyuanTo3DProJobWithContext(context.Background(), request)
 }
@@ -212,6 +409,21 @@ func (c *Client) QueryHunyuanTo3DProJob(request *QueryHunyuanTo3DProJobRequest) 
 // This API is used to intelligently generate 3D content based on the HunYuan Large Model and input text descriptions/images.
 //
 // This API is used to provide 3 concurrent tasks by default, which can process 3 submitted tasks simultaneously. The next task can be processed only after the previous task is completed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) QueryHunyuanTo3DProJobWithContext(ctx context.Context, request *QueryHunyuanTo3DProJobRequest) (response *QueryHunyuanTo3DProJobResponse, err error) {
     if request == nil {
         request = NewQueryHunyuanTo3DProJobRequest()
@@ -252,6 +464,21 @@ func NewQueryHunyuanTo3DRapidJobResponse() (response *QueryHunyuanTo3DRapidJobRe
 // This API is used to intelligently generate 3D content based on the HunYuan Large Model with input text descriptions or images.
 //
 // This API is used to provide 1 concurrent task by default, which means only 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) QueryHunyuanTo3DRapidJob(request *QueryHunyuanTo3DRapidJobRequest) (response *QueryHunyuanTo3DRapidJobResponse, err error) {
     return c.QueryHunyuanTo3DRapidJobWithContext(context.Background(), request)
 }
@@ -260,6 +487,21 @@ func (c *Client) QueryHunyuanTo3DRapidJob(request *QueryHunyuanTo3DRapidJobReque
 // This API is used to intelligently generate 3D content based on the HunYuan Large Model with input text descriptions or images.
 //
 // This API is used to provide 1 concurrent task by default, which means only 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) QueryHunyuanTo3DRapidJobWithContext(ctx context.Context, request *QueryHunyuanTo3DRapidJobRequest) (response *QueryHunyuanTo3DRapidJobResponse, err error) {
     if request == nil {
         request = NewQueryHunyuanTo3DRapidJobRequest()
@@ -300,6 +542,21 @@ func NewSubmit3DSmartTopologyJobResponse() (response *Submit3DSmartTopologyJobRe
 // The SmartTopoly API uses the Polygen 1.5 model. After manually inputting a 3D high-poly model, it can generate a neat 3D model with lower polygon count.
 //
 // 1 concurrent is provided by default, which means 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) Submit3DSmartTopologyJob(request *Submit3DSmartTopologyJobRequest) (response *Submit3DSmartTopologyJobResponse, err error) {
     return c.Submit3DSmartTopologyJobWithContext(context.Background(), request)
 }
@@ -308,6 +565,21 @@ func (c *Client) Submit3DSmartTopologyJob(request *Submit3DSmartTopologyJobReque
 // The SmartTopoly API uses the Polygen 1.5 model. After manually inputting a 3D high-poly model, it can generate a neat 3D model with lower polygon count.
 //
 // 1 concurrent is provided by default, which means 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) Submit3DSmartTopologyJobWithContext(ctx context.Context, request *Submit3DSmartTopologyJobRequest) (response *Submit3DSmartTopologyJobResponse, err error) {
     if request == nil {
         request = NewSubmit3DSmartTopologyJobRequest()
@@ -346,12 +618,42 @@ func NewSubmitHunyuan3DPartJobResponse() (response *SubmitHunyuan3DPartJobRespon
 
 // SubmitHunyuan3DPartJob
 // This API is used to automatically perform component identification and generation based on the model structure after inputting a 3D model file.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) SubmitHunyuan3DPartJob(request *SubmitHunyuan3DPartJobRequest) (response *SubmitHunyuan3DPartJobResponse, err error) {
     return c.SubmitHunyuan3DPartJobWithContext(context.Background(), request)
 }
 
 // SubmitHunyuan3DPartJob
 // This API is used to automatically perform component identification and generation based on the model structure after inputting a 3D model file.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) SubmitHunyuan3DPartJobWithContext(ctx context.Context, request *SubmitHunyuan3DPartJobRequest) (response *SubmitHunyuan3DPartJobResponse, err error) {
     if request == nil {
         request = NewSubmitHunyuan3DPartJobRequest()
@@ -392,6 +694,21 @@ func NewSubmitHunyuanTo3DProJobResponse() (response *SubmitHunyuanTo3DProJobResp
 // This API is used to intelligently generate 3D content based on the HunYuan Large Model and input text descriptions/images.
 //
 // This API is used to provide 3 concurrent tasks by default. Up to 3 submitted tasks can be processed simultaneously. A new task can be processed only after the previous one is completed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) SubmitHunyuanTo3DProJob(request *SubmitHunyuanTo3DProJobRequest) (response *SubmitHunyuanTo3DProJobResponse, err error) {
     return c.SubmitHunyuanTo3DProJobWithContext(context.Background(), request)
 }
@@ -400,6 +717,21 @@ func (c *Client) SubmitHunyuanTo3DProJob(request *SubmitHunyuanTo3DProJobRequest
 // This API is used to intelligently generate 3D content based on the HunYuan Large Model and input text descriptions/images.
 //
 // This API is used to provide 3 concurrent tasks by default. Up to 3 submitted tasks can be processed simultaneously. A new task can be processed only after the previous one is completed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) SubmitHunyuanTo3DProJobWithContext(ctx context.Context, request *SubmitHunyuanTo3DProJobRequest) (response *SubmitHunyuanTo3DProJobResponse, err error) {
     if request == nil {
         request = NewSubmitHunyuanTo3DProJobRequest()
@@ -440,6 +772,21 @@ func NewSubmitHunyuanTo3DRapidJobResponse() (response *SubmitHunyuanTo3DRapidJob
 // This API is used to intelligently generate 3D content based on the HunYuan Large Model with input text descriptions or images.
 //
 // This API is used to provide 1 concurrent task by default, which means only 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) SubmitHunyuanTo3DRapidJob(request *SubmitHunyuanTo3DRapidJobRequest) (response *SubmitHunyuanTo3DRapidJobResponse, err error) {
     return c.SubmitHunyuanTo3DRapidJobWithContext(context.Background(), request)
 }
@@ -448,6 +795,21 @@ func (c *Client) SubmitHunyuanTo3DRapidJob(request *SubmitHunyuanTo3DRapidJobReq
 // This API is used to intelligently generate 3D content based on the HunYuan Large Model with input text descriptions or images.
 //
 // This API is used to provide 1 concurrent task by default, which means only 1 submitted task can be processed simultaneously. The next task can be processed only after the previous task is completed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) SubmitHunyuanTo3DRapidJobWithContext(ctx context.Context, request *SubmitHunyuanTo3DRapidJobRequest) (response *SubmitHunyuanTo3DRapidJobResponse, err error) {
     if request == nil {
         request = NewSubmitHunyuanTo3DRapidJobRequest()
