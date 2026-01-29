@@ -599,6 +599,76 @@ func (c *Client) CreateReceiverDetailWithContext(ctx context.Context, request *C
     return
 }
 
+func NewCreateReceiverDetailWithDataRequest() (request *CreateReceiverDetailWithDataRequest) {
+    request = &CreateReceiverDetailWithDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ses", APIVersion, "CreateReceiverDetailWithData")
+    
+    
+    return
+}
+
+func NewCreateReceiverDetailWithDataResponse() (response *CreateReceiverDetailWithDataResponse) {
+    response = &CreateReceiverDetailWithDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateReceiverDetailWithData
+// Add recipient addresses with Template parameters. Use this API to import Template parameters while adding recipient addresses, ensuring each recipient address uses Template variables with different values when sending emails. Users first call the CreateReceiver API to create a recipient list, then call this API to import recipient addresses and Template parameters for email sending, and finally use the BatchSendEmail API to complete batch email sending. Notably, after using this API, the Template parameter in the BatchSendEmail API does not need to be passed again. Users can also import recipient addresses, Template variables, and parameter values via the import file option in the console under Email Sending - Recipient List menu. This API limits the number of recipient addresses in a single request to 20,000 entries. It can also append recipient addresses to an already uploaded recipient list, but the total number of recipient addresses in the list must not exceed a certain limit, currently set at 50,000 entries. This API does not support removing duplicate recipient addresses. Users need to ensure uploaded and appended addresses are non-repeating and do not duplicate previously uploaded addresses.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICENOTAVAILABLE = "FailedOperation.ServiceNotAvailable"
+//  INVALIDPARAMETERVALUE_INVALIDTEMPLATEDATA = "InvalidParameterValue.InValidTemplateData"
+//  INVALIDPARAMETERVALUE_RECEIVEREMAILINVALID = "InvalidParameterValue.ReceiverEmailInvalid"
+//  INVALIDPARAMETERVALUE_TEMPLATEDATAERROR = "InvalidParameterValue.TemplateDataError"
+//  INVALIDPARAMETERVALUE_TEMPLATEDATAINCONSISTENT = "InvalidParameterValue.TemplateDataInconsistent"
+//  INVALIDPARAMETERVALUE_TEMPLATEDATALENLIMIT = "InvalidParameterValue.TemplateDataLenLimit"
+//  LIMITEXCEEDED_RECEIVERDETAILCOUNTLIMIT = "LimitExceeded.ReceiverDetailCountLimit"
+//  LIMITEXCEEDED_RECEIVERDETAILREQUESTLIMIT = "LimitExceeded.ReceiverDetailRequestLimit"
+//  MISSINGPARAMETER_EMAILSNECESSARY = "MissingParameter.EmailsNecessary"
+//  OPERATIONDENIED_RECEIVERISOPERATING = "OperationDenied.ReceiverIsOperating"
+//  OPERATIONDENIED_RECEIVERNOTEXIST = "OperationDenied.ReceiverNotExist"
+func (c *Client) CreateReceiverDetailWithData(request *CreateReceiverDetailWithDataRequest) (response *CreateReceiverDetailWithDataResponse, err error) {
+    return c.CreateReceiverDetailWithDataWithContext(context.Background(), request)
+}
+
+// CreateReceiverDetailWithData
+// Add recipient addresses with Template parameters. Use this API to import Template parameters while adding recipient addresses, ensuring each recipient address uses Template variables with different values when sending emails. Users first call the CreateReceiver API to create a recipient list, then call this API to import recipient addresses and Template parameters for email sending, and finally use the BatchSendEmail API to complete batch email sending. Notably, after using this API, the Template parameter in the BatchSendEmail API does not need to be passed again. Users can also import recipient addresses, Template variables, and parameter values via the import file option in the console under Email Sending - Recipient List menu. This API limits the number of recipient addresses in a single request to 20,000 entries. It can also append recipient addresses to an already uploaded recipient list, but the total number of recipient addresses in the list must not exceed a certain limit, currently set at 50,000 entries. This API does not support removing duplicate recipient addresses. Users need to ensure uploaded and appended addresses are non-repeating and do not duplicate previously uploaded addresses.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICENOTAVAILABLE = "FailedOperation.ServiceNotAvailable"
+//  INVALIDPARAMETERVALUE_INVALIDTEMPLATEDATA = "InvalidParameterValue.InValidTemplateData"
+//  INVALIDPARAMETERVALUE_RECEIVEREMAILINVALID = "InvalidParameterValue.ReceiverEmailInvalid"
+//  INVALIDPARAMETERVALUE_TEMPLATEDATAERROR = "InvalidParameterValue.TemplateDataError"
+//  INVALIDPARAMETERVALUE_TEMPLATEDATAINCONSISTENT = "InvalidParameterValue.TemplateDataInconsistent"
+//  INVALIDPARAMETERVALUE_TEMPLATEDATALENLIMIT = "InvalidParameterValue.TemplateDataLenLimit"
+//  LIMITEXCEEDED_RECEIVERDETAILCOUNTLIMIT = "LimitExceeded.ReceiverDetailCountLimit"
+//  LIMITEXCEEDED_RECEIVERDETAILREQUESTLIMIT = "LimitExceeded.ReceiverDetailRequestLimit"
+//  MISSINGPARAMETER_EMAILSNECESSARY = "MissingParameter.EmailsNecessary"
+//  OPERATIONDENIED_RECEIVERISOPERATING = "OperationDenied.ReceiverIsOperating"
+//  OPERATIONDENIED_RECEIVERNOTEXIST = "OperationDenied.ReceiverNotExist"
+func (c *Client) CreateReceiverDetailWithDataWithContext(ctx context.Context, request *CreateReceiverDetailWithDataRequest) (response *CreateReceiverDetailWithDataResponse, err error) {
+    if request == nil {
+        request = NewCreateReceiverDetailWithDataRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ses", APIVersion, "CreateReceiverDetailWithData")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateReceiverDetailWithData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateReceiverDetailWithDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteAddressUnsubscribeConfigRequest() (request *DeleteAddressUnsubscribeConfigRequest) {
     request = &DeleteAddressUnsubscribeConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -622,15 +692,15 @@ func NewDeleteAddressUnsubscribeConfigResponse() (response *DeleteAddressUnsubsc
 // Remove address-level unsubscribe configuration.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_SERVICENOTAVAILABLE = "FailedOperation.ServiceNotAvailable"
-//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_INVALIDTEMPLATEDATA = "InvalidParameterValue.InValidTemplateData"
+//  INVALIDPARAMETERVALUE_RECEIVEREMAILINVALID = "InvalidParameterValue.ReceiverEmailInvalid"
 //  INVALIDPARAMETERVALUE_TEMPLATEDATAERROR = "InvalidParameterValue.TemplateDataError"
 //  INVALIDPARAMETERVALUE_TEMPLATEDATAINCONSISTENT = "InvalidParameterValue.TemplateDataInconsistent"
+//  INVALIDPARAMETERVALUE_TEMPLATEDATALENLIMIT = "InvalidParameterValue.TemplateDataLenLimit"
 //  LIMITEXCEEDED_RECEIVERDETAILCOUNTLIMIT = "LimitExceeded.ReceiverDetailCountLimit"
 //  LIMITEXCEEDED_RECEIVERDETAILREQUESTLIMIT = "LimitExceeded.ReceiverDetailRequestLimit"
 //  MISSINGPARAMETER_EMAILSNECESSARY = "MissingParameter.EmailsNecessary"
-//  MISSINGPARAMETER_RECEIVERIDNECESSARY = "MissingParameter.ReceiverIdNecessary"
 //  OPERATIONDENIED_RECEIVERISOPERATING = "OperationDenied.ReceiverIsOperating"
 //  OPERATIONDENIED_RECEIVERNOTEXIST = "OperationDenied.ReceiverNotExist"
 func (c *Client) DeleteAddressUnsubscribeConfig(request *DeleteAddressUnsubscribeConfigRequest) (response *DeleteAddressUnsubscribeConfigResponse, err error) {
@@ -641,15 +711,15 @@ func (c *Client) DeleteAddressUnsubscribeConfig(request *DeleteAddressUnsubscrib
 // Remove address-level unsubscribe configuration.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_SERVICENOTAVAILABLE = "FailedOperation.ServiceNotAvailable"
-//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_INVALIDTEMPLATEDATA = "InvalidParameterValue.InValidTemplateData"
+//  INVALIDPARAMETERVALUE_RECEIVEREMAILINVALID = "InvalidParameterValue.ReceiverEmailInvalid"
 //  INVALIDPARAMETERVALUE_TEMPLATEDATAERROR = "InvalidParameterValue.TemplateDataError"
 //  INVALIDPARAMETERVALUE_TEMPLATEDATAINCONSISTENT = "InvalidParameterValue.TemplateDataInconsistent"
+//  INVALIDPARAMETERVALUE_TEMPLATEDATALENLIMIT = "InvalidParameterValue.TemplateDataLenLimit"
 //  LIMITEXCEEDED_RECEIVERDETAILCOUNTLIMIT = "LimitExceeded.ReceiverDetailCountLimit"
 //  LIMITEXCEEDED_RECEIVERDETAILREQUESTLIMIT = "LimitExceeded.ReceiverDetailRequestLimit"
 //  MISSINGPARAMETER_EMAILSNECESSARY = "MissingParameter.EmailsNecessary"
-//  MISSINGPARAMETER_RECEIVERIDNECESSARY = "MissingParameter.ReceiverIdNecessary"
 //  OPERATIONDENIED_RECEIVERISOPERATING = "OperationDenied.ReceiverIsOperating"
 //  OPERATIONDENIED_RECEIVERNOTEXIST = "OperationDenied.ReceiverNotExist"
 func (c *Client) DeleteAddressUnsubscribeConfigWithContext(ctx context.Context, request *DeleteAddressUnsubscribeConfigRequest) (response *DeleteAddressUnsubscribeConfigResponse, err error) {

@@ -191,6 +191,98 @@ type AssetBaseInfoResponse struct {
 	ProtectedDay *uint64 `json:"ProtectedDay,omitnil,omitempty" name:"ProtectedDay"`
 }
 
+type AssetCluster struct {
+	// Tenant ID
+	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// Tenant uin.
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Tenant Nickname
+	Nick *string `json:"Nick,omitnil,omitempty" name:"Nick"`
+
+	// Region.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Cluster ID.
+	AssetId *string `json:"AssetId,omitnil,omitempty" name:"AssetId"`
+
+	// Cluster name.
+	AssetName *string `json:"AssetName,omitnil,omitempty" name:"AssetName"`
+
+	// Cluster type.
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
+
+	// Cluster Creation Time
+	InstanceCreateTime *string `json:"InstanceCreateTime,omitnil,omitempty" name:"InstanceCreateTime"`
+
+	// Status.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Cluster protection status, enumerate on the left, display on the right.
+	// Protection status of the cluster. 
+	// 0: not connected.
+	// Unprotected. 
+	// 2: partial protection. 
+	// 3: under protection. 
+	// 4: access exception. 
+	// 5: accessing. 
+	// Uninstalling. 
+	// 7: uninstallation exception.
+	ProtectStatus *int64 `json:"ProtectStatus,omitnil,omitempty" name:"ProtectStatus"`
+
+	// Access information, being empty indicates no access exception info.
+	ProtectInfo *string `json:"ProtectInfo,omitnil,omitempty" name:"ProtectInfo"`
+
+	// VPC id.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// VPC name.
+	VpcName *string `json:"VpcName,omitnil,omitempty" name:"VpcName"`
+
+	// kubernetes version.
+	KubernetesVersion *string `json:"KubernetesVersion,omitnil,omitempty" name:"KubernetesVersion"`
+
+	// Runtime component.
+	Component *string `json:"Component,omitnil,omitempty" name:"Component"`
+
+	// Runtime component version.
+	ComponentVersion *string `json:"ComponentVersion,omitnil,omitempty" name:"ComponentVersion"`
+
+	// Component status.
+	ComponentStatus *string `json:"ComponentStatus,omitnil,omitempty" name:"ComponentStatus"`
+
+	// Health Checkup Time
+	CheckTime *string `json:"CheckTime,omitnil,omitempty" name:"CheckTime"`
+
+	// Associated hosts.
+	MachineCount *int64 `json:"MachineCount,omitnil,omitempty" name:"MachineCount"`
+
+	// Associated Pod Count
+	PodCount *int64 `json:"PodCount,omitnil,omitempty" name:"PodCount"`
+
+	// Associated Service Count
+	ServiceCount *int64 `json:"ServiceCount,omitnil,omitempty" name:"ServiceCount"`
+
+	// Vulnerability risk.
+	VulRisk *int64 `json:"VulRisk,omitnil,omitempty" name:"VulRisk"`
+
+	// Configuration risk.
+	CFGRisk *int64 `json:"CFGRisk,omitnil,omitempty" name:"CFGRisk"`
+
+	// Health Checkup Count
+	CheckCount *int64 `json:"CheckCount,omitnil,omitempty" name:"CheckCount"`
+
+	// Whether it is core. 1: Core; 2: Non-core.
+	IsCore *int64 `json:"IsCore,omitnil,omitempty" name:"IsCore"`
+
+	// New Asset or Not. 1: New
+	IsNewAsset *uint64 `json:"IsNewAsset,omitnil,omitempty" name:"IsNewAsset"`
+
+	// Cloud asset type: 0: tencent cloud, 1: aws, 2: azure.
+	CloudType *int64 `json:"CloudType,omitnil,omitempty" name:"CloudType"`
+}
+
 type AssetClusterPod struct {
 	// Tenant ID
 	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
@@ -1167,93 +1259,72 @@ func (r *CreateRiskCenterScanTaskResponse) FromJsonString(s string) error {
 
 type DBAssetVO struct {
 	// Asset ID
-	// Note: This field may return·null, indicating that no valid values can be obtained.
 	AssetId *string `json:"AssetId,omitnil,omitempty" name:"AssetId"`
 
-	// Asset name
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Asset name.
 	AssetName *string `json:"AssetName,omitnil,omitempty" name:"AssetName"`
 
-	// Asset type
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Asset type.
 	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 
-
+	// vpcid
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// VPC tags
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// vpc Tag.
 	VpcName *string `json:"VpcName,omitnil,omitempty" name:"VpcName"`
 
-	// Region
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Region.
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Domain name
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Domain
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// Asset creation time
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Asset creation time.
 	AssetCreateTime *string `json:"AssetCreateTime,omitnil,omitempty" name:"AssetCreateTime"`
 
 	// Last scan time
-	// Note: This field may return·null, indicating that no valid values can be obtained.
 	LastScanTime *string `json:"LastScanTime,omitnil,omitempty" name:"LastScanTime"`
 
-	// Configuration risks
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Configuration risk.
 	ConfigurationRisk *uint64 `json:"ConfigurationRisk,omitnil,omitempty" name:"ConfigurationRisk"`
 
-	// Network attacks
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Network attack.
 	Attack *uint64 `json:"Attack,omitnil,omitempty" name:"Attack"`
 
-
+	// Network access.
 	Access *uint64 `json:"Access,omitnil,omitempty" name:"Access"`
 
-	// Scan tasks
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Scan Task
 	ScanTask *uint64 `json:"ScanTask,omitnil,omitempty" name:"ScanTask"`
 
-	// User `appid`
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// User appid.
 	AppId *uint64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
 	// User UIN
-	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
 
-	// User name
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Nickname Alias
 	NickName *string `json:"NickName,omitnil,omitempty" name:"NickName"`
 
-	// Port
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Port.
 	Port *uint64 `json:"Port,omitnil,omitempty" name:"Port"`
 
-	// Tags
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Tag.
 	Tag []*Tag `json:"Tag,omitnil,omitempty" name:"Tag"`
 
-	// Private IP
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Private IP address
 	PrivateIp *string `json:"PrivateIp,omitnil,omitempty" name:"PrivateIp"`
 
-	// Public IP
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Public IP address
 	PublicIp *string `json:"PublicIp,omitnil,omitempty" name:"PublicIp"`
 
-	// Status
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Status.
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Whether it's a critical asset
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Core or Not
 	IsCore *uint64 `json:"IsCore,omitnil,omitempty" name:"IsCore"`
 
-	// Whether it's a newly-added asset. Values: `1` (Yes), `0` (No)
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// New Asset or Not. 1: New
 	IsNewAsset *uint64 `json:"IsNewAsset,omitnil,omitempty" name:"IsNewAsset"`
 }
 
@@ -1475,6 +1546,90 @@ func (r *DeleteRiskScanTaskResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeCFWAssetStatisticsRequestParams struct {
+
+}
+
+type DescribeCFWAssetStatisticsRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeCFWAssetStatisticsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCFWAssetStatisticsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCFWAssetStatisticsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCFWAssetStatisticsResponseParams struct {
+	// Total number of network assets
+	NetworkTotal *int64 `json:"NetworkTotal,omitnil,omitempty" name:"NetworkTotal"`
+
+	// Asset CLB Quantity
+	ClbTotal *int64 `json:"ClbTotal,omitnil,omitempty" name:"ClbTotal"`
+
+	// Number of NATs
+	NatTotal *int64 `json:"NatTotal,omitnil,omitempty" name:"NatTotal"`
+
+	// Number of Public IP Addresses
+	PublicAssetTotal *int64 `json:"PublicAssetTotal,omitnil,omitempty" name:"PublicAssetTotal"`
+
+	// Number of hosts
+	CVMAssetTotal *int64 `json:"CVMAssetTotal,omitnil,omitempty" name:"CVMAssetTotal"`
+
+	// Configuration risk.
+	CFGTotal *int64 `json:"CFGTotal,omitnil,omitempty" name:"CFGTotal"`
+
+	// Port risk.
+	PortTotal *int64 `json:"PortTotal,omitnil,omitempty" name:"PortTotal"`
+
+	// Content risk.
+	WebsiteTotal *int64 `json:"WebsiteTotal,omitnil,omitempty" name:"WebsiteTotal"`
+
+	// Risk service exposure.
+	ServerTotal *int64 `json:"ServerTotal,omitnil,omitempty" name:"ServerTotal"`
+
+	// Weak password risk.
+	WeakPasswordTotal *int64 `json:"WeakPasswordTotal,omitnil,omitempty" name:"WeakPasswordTotal"`
+
+	// Vulnerability risk.
+	VULTotal *int64 `json:"VULTotal,omitnil,omitempty" name:"VULTotal"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCFWAssetStatisticsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCFWAssetStatisticsResponseParams `json:"Response"`
+}
+
+func (r *DescribeCFWAssetStatisticsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCFWAssetStatisticsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeCVMAssetInfoRequestParams struct {
 	// u200c-
 	AssetId *string `json:"AssetId,omitnil,omitempty" name:"AssetId"`
@@ -1627,6 +1782,94 @@ func (r *DescribeCVMAssetsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeCVMAssetsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeClusterAssetsRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filter.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+type DescribeClusterAssetsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filter.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+func (r *DescribeClusterAssetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterAssetsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Filter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterAssetsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeClusterAssetsResponseParams struct {
+	// List
+	Data []*AssetCluster `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Total number.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Cluster Type Enumeration
+	ClusterTypeList []*FilterDataObject `json:"ClusterTypeList,omitnil,omitempty" name:"ClusterTypeList"`
+
+	// Cluster Status Enumeration
+	ClusterStatusList []*FilterDataObject `json:"ClusterStatusList,omitnil,omitempty" name:"ClusterStatusList"`
+
+	// Component Status Enumeration
+	ComponentStatusList []*FilterDataObject `json:"ComponentStatusList,omitnil,omitempty" name:"ComponentStatusList"`
+
+	// VPC Enumeration
+	VpcList []*FilterDataObject `json:"VpcList,omitnil,omitempty" name:"VpcList"`
+
+	// Region Enumeration
+	RegionList []*FilterDataObject `json:"RegionList,omitnil,omitempty" name:"RegionList"`
+
+	// Tenant Enumeration
+	AppIdList []*FilterDataObject `json:"AppIdList,omitnil,omitempty" name:"AppIdList"`
+
+	// Cluster protection status enumeration.
+	ProtectStatusList []*FilterDataObject `json:"ProtectStatusList,omitnil,omitempty" name:"ProtectStatusList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeClusterAssetsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeClusterAssetsResponseParams `json:"Response"`
+}
+
+func (r *DescribeClusterAssetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterAssetsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1938,6 +2181,85 @@ func (r *DescribeDomainAssetsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeGatewayAssetsRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filter parameters.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+type DescribeGatewayAssetsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filter parameters.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+func (r *DescribeGatewayAssetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGatewayAssetsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Filter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeGatewayAssetsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGatewayAssetsResponseParams struct {
+	// List
+	Data []*GateWayAsset `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Total number.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Region list
+	RegionList []*FilterDataObject `json:"RegionList,omitnil,omitempty" name:"RegionList"`
+
+	// Asset Type List
+	AssetTypeList []*FilterDataObject `json:"AssetTypeList,omitnil,omitempty" name:"AssetTypeList"`
+
+	// VPC List
+	VpcList []*FilterDataObject `json:"VpcList,omitnil,omitempty" name:"VpcList"`
+
+	// AppID List
+	AppIdList []*FilterDataObject `json:"AppIdList,omitnil,omitempty" name:"AppIdList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeGatewayAssetsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeGatewayAssetsResponseParams `json:"Response"`
+}
+
+func (r *DescribeGatewayAssetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGatewayAssetsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeListenerListRequestParams struct {
 	// u200c-
 	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
@@ -1996,6 +2318,85 @@ func (r *DescribeListenerListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeListenerListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNICAssetsRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filter parameters.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+type DescribeNICAssetsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filter parameters.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+func (r *DescribeNICAssetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNICAssetsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Filter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNICAssetsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNICAssetsResponseParams struct {
+	// List
+	Data []*NICAsset `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Total number.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Region list
+	RegionList []*FilterDataObject `json:"RegionList,omitnil,omitempty" name:"RegionList"`
+
+	// Asset Type List
+	AssetTypeList []*FilterDataObject `json:"AssetTypeList,omitnil,omitempty" name:"AssetTypeList"`
+
+	// VPC List
+	VpcList []*FilterDataObject `json:"VpcList,omitnil,omitempty" name:"VpcList"`
+
+	// AppID List
+	AppIdList []*FilterDataObject `json:"AppIdList,omitnil,omitempty" name:"AppIdList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeNICAssetsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeNICAssetsResponseParams `json:"Response"`
+}
+
+func (r *DescribeNICAssetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNICAssetsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2140,6 +2541,92 @@ func (r *DescribeOrganizationUserInfoResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeOtherCloudAssetsRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// -
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+
+	// Asset type: MYSQL/MARIADB/REDIS/MONGODB/POSTGRES/CTS/ES/KAFKA/COS/CBS/CFS
+	AssetTypes []*string `json:"AssetTypes,omitnil,omitempty" name:"AssetTypes"`
+}
+
+type DescribeOtherCloudAssetsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// -
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+
+	// Asset type: MYSQL/MARIADB/REDIS/MONGODB/POSTGRES/CTS/ES/KAFKA/COS/CBS/CFS
+	AssetTypes []*string `json:"AssetTypes,omitnil,omitempty" name:"AssetTypes"`
+}
+
+func (r *DescribeOtherCloudAssetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeOtherCloudAssetsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Filter")
+	delete(f, "AssetTypes")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeOtherCloudAssetsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeOtherCloudAssetsResponseParams struct {
+	// Total number.
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Total number of assets
+	Data []*DBAssetVO `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Region Enumeration
+	RegionList []*FilterDataObject `json:"RegionList,omitnil,omitempty" name:"RegionList"`
+
+	// Asset Type Enumeration
+	AssetTypeList []*FilterDataObject `json:"AssetTypeList,omitnil,omitempty" name:"AssetTypeList"`
+
+	// VPC Enumeration
+	VpcList []*FilterDataObject `json:"VpcList,omitnil,omitempty" name:"VpcList"`
+
+	// Appid Enumeration
+	AppIdList []*FilterDataObject `json:"AppIdList,omitnil,omitempty" name:"AppIdList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeOtherCloudAssetsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeOtherCloudAssetsResponseParams `json:"Response"`
+}
+
+func (r *DescribeOtherCloudAssetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeOtherCloudAssetsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribePublicIpAssetsRequestParams struct {
 	// Filter conditions
 	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
@@ -2228,6 +2715,76 @@ func (r *DescribePublicIpAssetsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribePublicIpAssetsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRepositoryImageAssetsRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filters
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+type DescribeRepositoryImageAssetsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filters
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+func (r *DescribeRepositoryImageAssetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRepositoryImageAssetsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Filter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRepositoryImageAssetsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRepositoryImageAssetsResponseParams struct {
+	// Repository Image List
+	Data []*RepositoryImageVO `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Total number.
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Region List
+	RegionList []*FilterDataObject `json:"RegionList,omitnil,omitempty" name:"RegionList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeRepositoryImageAssetsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRepositoryImageAssetsResponseParams `json:"Response"`
+}
+
+func (r *DescribeRepositoryImageAssetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRepositoryImageAssetsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3700,6 +4257,99 @@ type FilterDataObject struct {
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 }
 
+type GateWayAsset struct {
+	// appid
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// uin
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Asset ID.
+	AssetId *string `json:"AssetId,omitnil,omitempty" name:"AssetId"`
+
+	// Asset name.
+	AssetName *string `json:"AssetName,omitnil,omitempty" name:"AssetName"`
+
+	// Asset type.
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
+
+	// VPC IP
+	PrivateIp *string `json:"PrivateIp,omitnil,omitempty" name:"PrivateIp"`
+
+	// Public IP address
+	PublicIp *string `json:"PublicIp,omitnil,omitempty" name:"PublicIp"`
+
+	// Region.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// VPC id.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// VPC Name
+	VpcName *string `json:"VpcName,omitnil,omitempty" name:"VpcName"`
+
+	// Tag.
+	Tag []*Tag `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Outbound peak bandwidth.
+	OutboundPeakBandwidth *string `json:"OutboundPeakBandwidth,omitnil,omitempty" name:"OutboundPeakBandwidth"`
+
+	// Inbound peak bandwidth.
+	InboundPeakBandwidth *string `json:"InboundPeakBandwidth,omitnil,omitempty" name:"InboundPeakBandwidth"`
+
+	// Cumulative Outbound Traffic
+	OutboundCumulativeFlow *string `json:"OutboundCumulativeFlow,omitnil,omitempty" name:"OutboundCumulativeFlow"`
+
+	// Cumulative Inbound Traffic
+	InboundCumulativeFlow *string `json:"InboundCumulativeFlow,omitnil,omitempty" name:"InboundCumulativeFlow"`
+
+	// Network attack.
+	NetworkAttack *int64 `json:"NetworkAttack,omitnil,omitempty" name:"NetworkAttack"`
+
+	// Expose ports.
+	ExposedPort *int64 `json:"ExposedPort,omitnil,omitempty" name:"ExposedPort"`
+
+	// Exposed vulnerability.
+	ExposedVUL *int64 `json:"ExposedVUL,omitnil,omitempty" name:"ExposedVUL"`
+
+	// Configuration risk.
+	ConfigureRisk *int64 `json:"ConfigureRisk,omitnil,omitempty" name:"ConfigureRisk"`
+
+	// Creation time.
+	// 
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Number of tasks.
+	ScanTask *int64 `json:"ScanTask,omitnil,omitempty" name:"ScanTask"`
+
+	// Last scan time
+	LastScanTime *string `json:"LastScanTime,omitnil,omitempty" name:"LastScanTime"`
+
+	// Nickname.
+	Nick *string `json:"Nick,omitnil,omitempty" name:"Nick"`
+
+	// IPv6 address
+	AddressIPV6 *string `json:"AddressIPV6,omitnil,omitempty" name:"AddressIPV6"`
+
+	// Core or Not
+	IsCore *uint64 `json:"IsCore,omitnil,omitempty" name:"IsCore"`
+
+	// Risk service exposure.
+	RiskExposure *int64 `json:"RiskExposure,omitnil,omitempty" name:"RiskExposure"`
+
+	// New Asset or Not. 1: New
+	IsNewAsset *uint64 `json:"IsNewAsset,omitnil,omitempty" name:"IsNewAsset"`
+
+	// Gateway Status
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// TSE's Actual Gateway Region
+	EngineRegion *string `json:"EngineRegion,omitnil,omitempty" name:"EngineRegion"`
+
+	// Weak password risk.
+	WeakPasswordRisk *uint64 `json:"WeakPasswordRisk,omitnil,omitempty" name:"WeakPasswordRisk"`
+}
+
 type IpAssetListVO struct {
 	// Asset ID
 	// Note: This field may return·null, indicating that no valid values can be obtained.
@@ -3842,6 +4492,70 @@ type IpAssetListVO struct {
 }
 
 // Predefined struct for user
+type ModifyOrganizationAccountStatusRequestParams struct {
+	// Modify Group Account Status. 1: Enabled; 2: Disabled.
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+type ModifyOrganizationAccountStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Modify Group Account Status. 1: Enabled; 2: Disabled.
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+func (r *ModifyOrganizationAccountStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyOrganizationAccountStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Status")
+	delete(f, "MemberId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyOrganizationAccountStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyOrganizationAccountStatusResponseParams struct {
+	// If the returned value is 0, the modification was successful.
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyOrganizationAccountStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyOrganizationAccountStatusResponseParams `json:"Response"`
+}
+
+func (r *ModifyOrganizationAccountStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyOrganizationAccountStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyRiskCenterRiskStatusRequestParams struct {
 	// Data of risk assets
 	RiskStatusKeys []*RiskCenterStatusKey `json:"RiskStatusKeys,omitnil,omitempty" name:"RiskStatusKeys"`
@@ -3907,6 +4621,84 @@ func (r *ModifyRiskCenterRiskStatusResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ModifyRiskCenterRiskStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type NICAsset struct {
+	// appid
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// uin
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Asset ID.
+	AssetId *string `json:"AssetId,omitnil,omitempty" name:"AssetId"`
+
+	// Asset name.
+	AssetName *string `json:"AssetName,omitnil,omitempty" name:"AssetName"`
+
+	// Asset type.
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
+
+	// VPC IP
+	PrivateIp *string `json:"PrivateIp,omitnil,omitempty" name:"PrivateIp"`
+
+	// Public IP address
+	PublicIp *string `json:"PublicIp,omitnil,omitempty" name:"PublicIp"`
+
+	// Region.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// VPC id.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// VPC Name
+	VpcName *string `json:"VpcName,omitnil,omitempty" name:"VpcName"`
+
+	// Tag.
+	Tag []*Tag `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Outbound peak bandwidth.
+	OutboundPeakBandwidth *string `json:"OutboundPeakBandwidth,omitnil,omitempty" name:"OutboundPeakBandwidth"`
+
+	// Inbound peak bandwidth.
+	InboundPeakBandwidth *string `json:"InboundPeakBandwidth,omitnil,omitempty" name:"InboundPeakBandwidth"`
+
+	// Cumulative Outbound Traffic
+	OutboundCumulativeFlow *string `json:"OutboundCumulativeFlow,omitnil,omitempty" name:"OutboundCumulativeFlow"`
+
+	// Cumulative Inbound Traffic
+	InboundCumulativeFlow *string `json:"InboundCumulativeFlow,omitnil,omitempty" name:"InboundCumulativeFlow"`
+
+	// Network attack.
+	NetworkAttack *int64 `json:"NetworkAttack,omitnil,omitempty" name:"NetworkAttack"`
+
+	// Expose ports.
+	ExposedPort *int64 `json:"ExposedPort,omitnil,omitempty" name:"ExposedPort"`
+
+	// Exposed vulnerability.
+	ExposedVUL *int64 `json:"ExposedVUL,omitnil,omitempty" name:"ExposedVUL"`
+
+	// Configuration risk.
+	ConfigureRisk *int64 `json:"ConfigureRisk,omitnil,omitempty" name:"ConfigureRisk"`
+
+	// Creation time.
+	// 
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Number of tasks.
+	ScanTask *int64 `json:"ScanTask,omitnil,omitempty" name:"ScanTask"`
+
+	// Last scan time
+	LastScanTime *string `json:"LastScanTime,omitnil,omitempty" name:"LastScanTime"`
+
+	// Nickname.
+	Nick *string `json:"Nick,omitnil,omitempty" name:"Nick"`
+
+	// Core or Not
+	IsCore *uint64 `json:"IsCore,omitnil,omitempty" name:"IsCore"`
+
+	// New Asset or Not. 1: New
+	IsNewAsset *uint64 `json:"IsNewAsset,omitnil,omitempty" name:"IsNewAsset"`
 }
 
 type OrganizationInfo struct {
@@ -4134,6 +4926,65 @@ type ReportTaskIdList struct {
 
 	// User AppId
 	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+}
+
+type RepositoryImageVO struct {
+	// User appid.
+	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// User UIN
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Nickname.
+	NickName *string `json:"NickName,omitnil,omitempty" name:"NickName"`
+
+	// Mirror id.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Image name.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// Image creation time.
+	InstanceCreateTime *string `json:"InstanceCreateTime,omitnil,omitempty" name:"InstanceCreateTime"`
+
+	// Image Size with Unit
+	InstanceSize *string `json:"InstanceSize,omitnil,omitempty" name:"InstanceSize"`
+
+	// Build times.
+	BuildCount *int64 `json:"BuildCount,omitnil,omitempty" name:"BuildCount"`
+
+	// Image type.
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Authorization status.
+	AuthStatus *int64 `json:"AuthStatus,omitnil,omitempty" name:"AuthStatus"`
+
+	// Mirror version.
+	InstanceVersion *string `json:"InstanceVersion,omitnil,omitempty" name:"InstanceVersion"`
+
+	// Region.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Repository address.
+	RepositoryUrl *string `json:"RepositoryUrl,omitnil,omitempty" name:"RepositoryUrl"`
+
+	// Repository name.
+	RepositoryName *string `json:"RepositoryName,omitnil,omitempty" name:"RepositoryName"`
+
+	// Core or Not
+	IsCore *uint64 `json:"IsCore,omitnil,omitempty" name:"IsCore"`
+
+	// Vulnerability risk.
+	VulRisk *int64 `json:"VulRisk,omitnil,omitempty" name:"VulRisk"`
+
+	// Check task.
+	CheckCount *int64 `json:"CheckCount,omitnil,omitempty" name:"CheckCount"`
+
+	// Health Checkup Time
+	CheckTime *string `json:"CheckTime,omitnil,omitempty" name:"CheckTime"`
+
+	// New Asset or Not. 1: New
+	IsNewAsset *uint64 `json:"IsNewAsset,omitnil,omitempty" name:"IsNewAsset"`
 }
 
 type RiskCenterStatusKey struct {
@@ -5042,8 +5893,8 @@ type WhereFilter struct {
 	// Filter value
 	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 
-	//  
-	// `1`: =; `2`: >; `3`: <; `4`: ≥; `5`: ≤; `6`: ≠;
-	// `7`: Exact match; `9`: Fuzzy match; `13`: Non-fuzzy match; `14`: AND
+	// Central platform definition:.
+	// 1 equal 2 larger than 3 less than 4 greater than or equal to 5 less than or equal to 6 not equal to 9 fuzzy matching 13 non-fuzzy matching 14 bitwise and.
+	// Exact match fills 7. fuzzy matching fills 9. 
 	OperatorType *int64 `json:"OperatorType,omitnil,omitempty" name:"OperatorType"`
 }
