@@ -20,6 +20,358 @@ import (
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
+type AKInfo struct {
+	// ak id.
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// ak specific value. returns temporary key when temporary key is used.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Associated account.
+	User *string `json:"User,omitnil,omitempty" name:"User"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+}
+
+type AccessKeyAlarm struct {
+	// Alarm name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Alarm level.
+	// 0 - unavailable 1 - Note 2 - low risk 3 - medium risk 4 - high risk 5 - critical.
+	Level *int64 `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Alarm record ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Alarm rule ID.
+	AlarmRuleID *int64 `json:"AlarmRuleID,omitnil,omitempty" name:"AlarmRuleID"`
+
+	// Alarm type
+	// Abnormal call.
+	// Leak monitoring.
+	AlarmType *int64 `json:"AlarmType,omitnil,omitempty" name:"AlarmType"`
+
+	// Access key.
+	AccessKey *string `json:"AccessKey,omitnil,omitempty" name:"AccessKey"`
+
+	// Access key ID.
+	AccessKeyID *uint64 `json:"AccessKeyID,omitnil,omitempty" name:"AccessKeyID"`
+
+	// Access key remark.
+	AccessKeyRemark *string `json:"AccessKeyRemark,omitnil,omitempty" name:"AccessKeyRemark"`
+
+	// Last Alarm Time
+	LastAlarmTime *string `json:"LastAlarmTime,omitnil,omitempty" name:"LastAlarmTime"`
+
+	// Alarm status.
+	// 0 - unprocessed 1 - processed 2 - ignored.
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Aggregate date.
+	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
+
+	// Alarm Tag.
+	Tag []*string `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Account associate Uin belonging to main account.
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Nickname of the main account.
+	Nickname *string `json:"Nickname,omitnil,omitempty" name:"Nickname"`
+
+	// Sub-Account Uin belonging to.
+	SubUin *string `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+
+	// Sub-Account nickname.
+	SubNickname *string `json:"SubNickname,omitnil,omitempty" name:"SubNickname"`
+
+	// Account type.
+	// 0 root account AK 1 sub-account AK 2 temporary key.
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// App ID
+	AppID *int64 `json:"AppID,omitnil,omitempty" name:"AppID"`
+
+	// Leakage evidence.
+	LeakEvidence []*string `json:"LeakEvidence,omitnil,omitempty" name:"LeakEvidence"`
+
+	// Whether editing a trusted account is supported.
+	IsSupportEditWhiteAccount *bool `json:"IsSupportEditWhiteAccount,omitnil,omitempty" name:"IsSupportEditWhiteAccount"`
+
+	// Alarm evidence.
+	Evidence *string `json:"Evidence,omitnil,omitempty" name:"Evidence"`
+
+	// Alarm rule flag.
+	RuleKey *string `json:"RuleKey,omitnil,omitempty" name:"RuleKey"`
+
+	// Cloud vendor type 0: tencent cloud 1: amazon web services 2: microsoft azure 3: google cloud 4: alibaba cloud 5: huawei cloud.
+	CloudType *int64 `json:"CloudType,omitnil,omitempty" name:"CloudType"`
+
+	// Alarm AI analysis status.
+	// -Analysis failed.
+	// 0 not analyzed.
+	// Under analysis.
+	// 2 analysis successful, real Alarm.
+	// 3 analysis successful, suspicious Alarm.
+	AIStatus *int64 `json:"AIStatus,omitnil,omitempty" name:"AIStatus"`
+
+	// First Alarm timestamp (in seconds).
+	FirstAlarmTimestamp *int64 `json:"FirstAlarmTimestamp,omitnil,omitempty" name:"FirstAlarmTimestamp"`
+
+	// Last Alarm timestamp (in seconds).
+	LastAlarmTimestamp *int64 `json:"LastAlarmTimestamp,omitnil,omitempty" name:"LastAlarmTimestamp"`
+}
+
+type AccessKeyAlarmCount struct {
+	// Access key ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Access key.
+	AccessKey *string `json:"AccessKey,omitnil,omitempty" name:"AccessKey"`
+
+	// Alarm count.
+	AlarmCount *int64 `json:"AlarmCount,omitnil,omitempty" name:"AlarmCount"`
+
+	// Security credentials status. valid values: 0 (disabled), 1 (enabled), 2 (deleted).
+	AccessKeyStatus *int64 `json:"AccessKeyStatus,omitnil,omitempty" name:"AccessKeyStatus"`
+
+	// AK creation time.
+	AccessKeyCreateTime *string `json:"AccessKeyCreateTime,omitnil,omitempty" name:"AccessKeyCreateTime"`
+
+	// AK last usage time. returns "-" if never used.
+	LastAccessTime *string `json:"LastAccessTime,omitnil,omitempty" name:"LastAccessTime"`
+}
+
+type AccessKeyAlarmInfo struct {
+	// Alarm type/risktype.
+	// Alarm type:.
+	// Abnormal calls.
+	// Leakage detection.
+	// 2 custom.
+	// 
+	// Risk type:.
+	// Configuration risk.
+	// Custom risk.
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Alarm count/number of risks.
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
+}
+
+type AccessKeyAsset struct {
+	// AK id.
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// AK name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Account associate APPID.
+	AppID *int64 `json:"AppID,omitnil,omitempty" name:"AppID"`
+
+	// Account associate Uin belonging to main account.
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Nickname of the main account.
+	Nickname *string `json:"Nickname,omitnil,omitempty" name:"Nickname"`
+
+	// Sub-Account Uin belonging to.
+	SubUin *string `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+
+	// Sub-Account nickname.
+	SubNickname *string `json:"SubNickname,omitnil,omitempty" name:"SubNickname"`
+
+	// Root account AK.
+	// Sub-Account AK.
+	// 2 temporary key.
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Security advice enumeration.
+	// Normal.
+	// Process now.
+	// 2 recommend reinforcement.
+	Advice *int64 `json:"Advice,omitnil,omitempty" name:"Advice"`
+
+	// Alarm information list.
+	AccessKeyAlarmList []*AccessKeyAlarmInfo `json:"AccessKeyAlarmList,omitnil,omitempty" name:"AccessKeyAlarmList"`
+
+	// Risk information list.
+	AccessKeyRiskList []*AccessKeyAlarmInfo `json:"AccessKeyRiskList,omitnil,omitempty" name:"AccessKeyRiskList"`
+
+	// Source IP quantity.
+	IPCount *int64 `json:"IPCount,omitnil,omitempty" name:"IPCount"`
+
+	// Creation time.
+	// 
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Last access Time
+	LastAccessTime *string `json:"LastAccessTime,omitnil,omitempty" name:"LastAccessTime"`
+
+	// AK status. 
+	// 0: disabled.
+	// 1: enabled.
+	// 2: deleted (deleted in cam, the security center still retains the previous log).
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// 0 means detected.
+	// 1 indicates detecting.
+	CheckStatus *int64 `json:"CheckStatus,omitnil,omitempty" name:"CheckStatus"`
+
+	// Cloud vendor type 0: tencent cloud 1: amazon web services 2: microsoft azure 3: google cloud 4: alibaba cloud 5: huawei cloud.
+	CloudType *int64 `json:"CloudType,omitnil,omitempty" name:"CloudType"`
+}
+
+type AccessKeyRisk struct {
+	// Risk name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Risk level.
+	// 0 - unavailable 1 - Note 2 - low risk 3 - medium risk 4 - high risk 5 - critical.
+	Level *int64 `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Risk record ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Risk rule ID.
+	RiskRuleID *int64 `json:"RiskRuleID,omitnil,omitempty" name:"RiskRuleID"`
+
+	// Risk type.
+	// Configuration risk.
+	RiskType *int64 `json:"RiskType,omitnil,omitempty" name:"RiskType"`
+
+	// Access key.
+	AccessKey *string `json:"AccessKey,omitnil,omitempty" name:"AccessKey"`
+
+	// Access key ID.
+	AccessKeyID *uint64 `json:"AccessKeyID,omitnil,omitempty" name:"AccessKeyID"`
+
+	// Access key remark.
+	AccessKeyRemark *string `json:"AccessKeyRemark,omitnil,omitempty" name:"AccessKeyRemark"`
+
+	// Detection time of risk.
+	RiskTime *string `json:"RiskTime,omitnil,omitempty" name:"RiskTime"`
+
+	// Risk status.
+	// 0 - unprocessed 2 - ignored 3 - converged.
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Risk Tag.
+	Tag []*string `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Risk evidence.
+	Evidence *string `json:"Evidence,omitnil,omitempty" name:"Evidence"`
+
+	// Risk description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Account associate Uin belonging to main account.
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Nickname of the main account.
+	Nickname *string `json:"Nickname,omitnil,omitempty" name:"Nickname"`
+
+	// Sub-Account Uin belonging to.
+	SubUin *string `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+
+	// Sub-Account nickname.
+	SubNickname *string `json:"SubNickname,omitnil,omitempty" name:"SubNickname"`
+
+	// Account type.
+	// 0 root account AK 1 sub-account AK.
+	// 2 temporary key.
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Detection status.
+	// 0: detected.
+	// 1 indicates detecting.
+	CheckStatus *int64 `json:"CheckStatus,omitnil,omitempty" name:"CheckStatus"`
+
+	// App ID
+	AppID *int64 `json:"AppID,omitnil,omitempty" name:"AppID"`
+
+	// Query parameter corresponding to the risk.
+	QueryParam *string `json:"QueryParam,omitnil,omitempty" name:"QueryParam"`
+
+	// Cloud type 0 for tencent cloud 4 for alibaba cloud.
+	CloudType *int64 `json:"CloudType,omitnil,omitempty" name:"CloudType"`
+
+	// Related AK list, including AK name and remark.
+	RelatedAK []*AKInfo `json:"RelatedAK,omitnil,omitempty" name:"RelatedAK"`
+}
+
+type AccessKeyUser struct {
+	// Account ID.
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Account name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// 0 root account 1 sub-account.
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Access method.
+	// 0 API
+	// 1 console and API.
+	AccessType *int64 `json:"AccessType,omitnil,omitempty" name:"AccessType"`
+
+	// Security recommendation enumerate 0 normal 1 process immediately 2 recommend reinforcement.
+	Advice *int64 `json:"Advice,omitnil,omitempty" name:"Advice"`
+
+	// Alarm information list.
+	AccessKeyAlarmList []*AccessKeyAlarmInfo `json:"AccessKeyAlarmList,omitnil,omitempty" name:"AccessKeyAlarmList"`
+
+	// Risk information list.
+	AccessKeyRiskList []*AccessKeyAlarmInfo `json:"AccessKeyRiskList,omitnil,omitempty" name:"AccessKeyRiskList"`
+
+	// Account associate APPID.
+	AppID *int64 `json:"AppID,omitnil,omitempty" name:"AppID"`
+
+	// Nickname of the main account.
+	Nickname *string `json:"Nickname,omitnil,omitempty" name:"Nickname"`
+
+	// Sub-Account nickname.
+	SubNickname *string `json:"SubNickname,omitnil,omitempty" name:"SubNickname"`
+
+	// Account Uin belonging to main account.
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Account self uin, same as root account uin when it is the root account.
+	SubUin *string `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+
+	// Login IP.
+	LoginIP *string `json:"LoginIP,omitnil,omitempty" name:"LoginIP"`
+
+	// Login address.
+	LoginLocation *string `json:"LoginLocation,omitnil,omitempty" name:"LoginLocation"`
+
+	// Log-In time.
+	LoginTime *string `json:"LoginTime,omitnil,omitempty" name:"LoginTime"`
+
+	// ISP name
+	ISP *string `json:"ISP,omitnil,omitempty" name:"ISP"`
+
+	// Whether operation protection is enabled.
+	// 0 not enabled.
+	// 1: enabled.
+	ActionFlag *int64 `json:"ActionFlag,omitnil,omitempty" name:"ActionFlag"`
+
+	// Is login protection enabled?.
+	// 0 not enabled.
+	// 1: enabled.
+	LoginFlag *int64 `json:"LoginFlag,omitnil,omitempty" name:"LoginFlag"`
+
+	// 0 means detected. 1 means detecting.
+	CheckStatus *int64 `json:"CheckStatus,omitnil,omitempty" name:"CheckStatus"`
+
+	// Cloud vendor type 0: tencent cloud 1: amazon web services 2: microsoft azure 3: google cloud 4: alibaba cloud 5: huawei cloud.
+	CloudType *int64 `json:"CloudType,omitnil,omitempty" name:"CloudType"`
+}
+
 // Predefined struct for user
 type AddNewBindRoleUserRequestParams struct {
 
@@ -402,13 +754,46 @@ type AssetInfoDetail struct {
 	ScanTime *string `json:"ScanTime,omitnil,omitempty" name:"ScanTime"`
 }
 
+type AssetProcessItem struct {
+	// Cloud account ID.
+	CloudAccountID *string `json:"CloudAccountID,omitnil,omitempty" name:"CloudAccountID"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// Tenant ID.
+	AppID *uint64 `json:"AppID,omitnil,omitempty" name:"AppID"`
+
+	// Account name.
+	CloudAccountName *string `json:"CloudAccountName,omitnil,omitempty" name:"CloudAccountName"`
+
+	// Instance ID.
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
+
+	// Public IP address
+	PublicIp *string `json:"PublicIp,omitnil,omitempty" name:"PublicIp"`
+
+	// Private IP address
+	PrivateIp *string `json:"PrivateIp,omitnil,omitempty" name:"PrivateIp"`
+
+	// Process ID
+	ProcessID *string `json:"ProcessID,omitnil,omitempty" name:"ProcessID"`
+
+	// Process name
+	ProcessName *string `json:"ProcessName,omitnil,omitempty" name:"ProcessName"`
+
+	// Command line
+	CmdLine *string `json:"CmdLine,omitnil,omitempty" name:"CmdLine"`
+
+	// Listening port list.
+	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
+}
+
 type AssetTag struct {
-	// Tag key. It supports alphanumeric characters and underscores (_).
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Tag Key, can be letters, digits, and underscores.
 	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
 
-	// Tag value. It supports alphanumeric characters and underscores (_).
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Tag Value, can be letters, digits, and underscores.
 	TagValue *string `json:"TagValue,omitnil,omitempty" name:"TagValue"`
 }
 
@@ -541,7 +926,7 @@ type AssetViewVULRisk struct {
 	// Affected assets
 	AffectAsset *string `json:"AffectAsset,omitnil,omitempty" name:"AffectAsset"`
 
-	// Risk level
+	// Risk level: low - low risk, high - high risk, middle - medium risk, info - note, extreme - critical.
 	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Asset type
@@ -562,7 +947,7 @@ type AssetViewVULRisk struct {
 	// Status of the risk. `0`: Not handled, `1`: Handled; `2`: Ignored
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Unique ID of the asset
+	// Risk ID
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Frontend index
@@ -577,12 +962,10 @@ type AssetViewVULRisk struct {
 	// User `appid`
 	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
 
-	// User name.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// User Nickname
 	Nick *string `json:"Nick,omitnil,omitempty" name:"Nick"`
 
-	// User `uin`
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// User UIN
 	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
 
 	// Vulnerability type
@@ -591,19 +974,19 @@ type AssetViewVULRisk struct {
 	// Port
 	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
 
-	// Description
+	// Vulnerability description
 	Describe *string `json:"Describe,omitnil,omitempty" name:"Describe"`
 
-	// Components affected by the vulnerability 
+	// Vulnerability impact component.
 	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
-	// Reference information about the vulnerability
+	// Technology reference.
 	References *string `json:"References,omitnil,omitempty" name:"References"`
 
-	// Version
+	// Vulnerability impact version.
 	AppVersion *string `json:"AppVersion,omitnil,omitempty" name:"AppVersion"`
 
-	// Vulnerability URL
+	// Risks.
 	VULURL *string `json:"VULURL,omitnil,omitempty" name:"VULURL"`
 
 	// Vulnerability name
@@ -612,13 +995,13 @@ type AssetViewVULRisk struct {
 	// CVE number
 	CVE *string `json:"CVE,omitnil,omitempty" name:"CVE"`
 
-	// Fix suggestion
+	// Fixing solution
 	Fix *string `json:"Fix,omitnil,omitempty" name:"Fix"`
 
 	// POC ID
 	POCId *string `json:"POCId,omitnil,omitempty" name:"POCId"`
 
-	// Source of the task
+	// Scan Source
 	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// CWPP edition
@@ -633,11 +1016,10 @@ type AssetViewVULRisk struct {
 	// Instance UUID
 	InstanceUUID *string `json:"InstanceUUID,omitnil,omitempty" name:"InstanceUUID"`
 
-	// Pay load
+	// Payload
 	Payload *string `json:"Payload,omitnil,omitempty" name:"Payload"`
 
-	// Whether it's an emergency vulnerability. Values: `1` (emergency vulnerability); `0` (non-emergency vulnerability
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Emergency Vulnerability Type. 1-Emergency Vulnerability; 0-Non-emergency Vulnerability.
 	EMGCVulType *int64 `json:"EMGCVulType,omitnil,omitempty" name:"EMGCVulType"`
 }
 
@@ -788,6 +1170,67 @@ type BugInfoDetail struct {
 	// Sub-category of the vulnerability
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubCategory *string `json:"SubCategory,omitnil,omitempty" name:"SubCategory"`
+}
+
+type CFGViewCFGRisk struct {
+	// Impact assets.
+	NoHandleCount *int64 `json:"NoHandleCount,omitnil,omitempty" name:"NoHandleCount"`
+
+	// Risk level: low - low risk, high - high risk, middle - medium risk, info - note, extreme - critical.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Latest Recognition Time
+	RecentTime *string `json:"RecentTime,omitnil,omitempty" name:"RecentTime"`
+
+	// First Recognition Time
+	FirstTime *string `json:"FirstTime,omitnil,omitempty" name:"FirstTime"`
+
+	// Status. 0-Unprocessed; 1-Disposed; 2-Ignored.
+	AffectAssetCount *uint64 `json:"AffectAssetCount,omitnil,omitempty" name:"AffectAssetCount"`
+
+	// Unique ID of Asset
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Asset Subtype
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Front-end Index
+	Index *string `json:"Index,omitnil,omitempty" name:"Index"`
+
+	// User appid.
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// User Nickname
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Nick *string `json:"Nick,omitnil,omitempty" name:"Nick"`
+
+	// User UIN
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Configuration name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CFGName *string `json:"CFGName,omitnil,omitempty" name:"CFGName"`
+
+	// Check type.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CheckType *string `json:"CheckType,omitnil,omitempty" name:"CheckType"`
+
+	// -
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CFGSTD *string `json:"CFGSTD,omitnil,omitempty" name:"CFGSTD"`
+
+	// Description
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CFGDescribe *string `json:"CFGDescribe,omitnil,omitempty" name:"CFGDescribe"`
+
+	// Fixing suggestion
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CFGFix *string `json:"CFGFix,omitnil,omitempty" name:"CFGFix"`
+
+	// Help documentation.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CFGHelpURL *string `json:"CFGHelpURL,omitnil,omitempty" name:"CFGHelpURL"`
 }
 
 type CVMAssetVO struct {
@@ -995,6 +1438,89 @@ type CVMAssetVO struct {
 	IsNewAsset *uint64 `json:"IsNewAsset,omitnil,omitempty" name:"IsNewAsset"`
 }
 
+type CallRecord struct {
+	// Invocation record ID.
+	CallID *string `json:"CallID,omitnil,omitempty" name:"CallID"`
+
+	// Access key.
+	AccessKey *string `json:"AccessKey,omitnil,omitempty" name:"AccessKey"`
+
+	// Access key remark.
+	AccessKeyRemark *string `json:"AccessKeyRemark,omitnil,omitempty" name:"AccessKeyRemark"`
+
+	// Access key ID.
+	AccessKeyID *uint64 `json:"AccessKeyID,omitnil,omitempty" name:"AccessKeyID"`
+
+	// Source IP of the call.
+	SourceIP *string `json:"SourceIP,omitnil,omitempty" name:"SourceIP"`
+
+	// Source IP of the call remark.
+	SourceIPRemark *string `json:"SourceIPRemark,omitnil,omitempty" name:"SourceIPRemark"`
+
+	// Source IP region of the call.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// IP type 0: within the account (unremarked) 1: outside the account (unremarked) 2: within the account (remarked) 3: outside the account (remarked).
+	IPType *int64 `json:"IPType,omitnil,omitempty" name:"IPType"`
+
+	// Call interface name.
+	EventName *string `json:"EventName,omitnil,omitempty" name:"EventName"`
+
+	// Call the product name.
+	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
+
+	// Invocation type.
+	// 0: console invocation.
+	// 1:API
+	EventType *int64 `json:"EventType,omitnil,omitempty" name:"EventType"`
+
+	// Type of user: CAMUser/root/AssumedRole.
+	UserType *string `json:"UserType,omitnil,omitempty" name:"UserType"`
+
+	// User/Role name.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Policy List
+	PolicySet []*string `json:"PolicySet,omitnil,omitempty" name:"PolicySet"`
+
+	// Number of calls.
+	CallCount *int64 `json:"CallCount,omitnil,omitempty" name:"CallCount"`
+
+	// Error code.
+	// 0: Successful
+	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// First time call time.
+	FirstCallTime *string `json:"FirstCallTime,omitnil,omitempty" name:"FirstCallTime"`
+
+	// Call time.
+	LastCallTime *string `json:"LastCallTime,omitnil,omitempty" name:"LastCallTime"`
+
+	// IP associated asset ID. if an empty string, means not associated with.
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
+
+	// Associated asset name of the IP.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// Aggregate date.
+	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
+
+	// appid
+	AppID *int64 `json:"AppID,omitnil,omitempty" name:"AppID"`
+
+	// Display status.
+	ShowStatus *bool `json:"ShowStatus,omitnil,omitempty" name:"ShowStatus"`
+
+	// Carrier.
+	ISP *string `json:"ISP,omitnil,omitempty" name:"ISP"`
+
+	// vpc information list outside the account.
+	VpcInfo []*SourceIPVpcInfo `json:"VpcInfo,omitnil,omitempty" name:"VpcInfo"`
+
+	// Request client list.
+	ReqClient []*string `json:"ReqClient,omitnil,omitempty" name:"ReqClient"`
+}
+
 type ClbListenerListInfo struct {
 	// Listener ID
 	// Note: This field may return·null, indicating that no valid values can be obtained.
@@ -1058,6 +1584,157 @@ type CloudCountDesc struct {
 
 
 	CloudDesc *string `json:"CloudDesc,omitnil,omitempty" name:"CloudDesc"`
+}
+
+// Predefined struct for user
+type CreateAccessKeyCheckTaskRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Risk list.
+	RiskIDList []*int64 `json:"RiskIDList,omitnil,omitempty" name:"RiskIDList"`
+
+	// Access key list.
+	AccessKeyList []*string `json:"AccessKeyList,omitnil,omitempty" name:"AccessKeyList"`
+
+	// Account uin list.
+	SubUinList []*string `json:"SubUinList,omitnil,omitempty" name:"SubUinList"`
+
+	// Risk rule id list.
+	RiskRuleIDList []*int64 `json:"RiskRuleIDList,omitnil,omitempty" name:"RiskRuleIDList"`
+}
+
+type CreateAccessKeyCheckTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Risk list.
+	RiskIDList []*int64 `json:"RiskIDList,omitnil,omitempty" name:"RiskIDList"`
+
+	// Access key list.
+	AccessKeyList []*string `json:"AccessKeyList,omitnil,omitempty" name:"AccessKeyList"`
+
+	// Account uin list.
+	SubUinList []*string `json:"SubUinList,omitnil,omitempty" name:"SubUinList"`
+
+	// Risk rule id list.
+	RiskRuleIDList []*int64 `json:"RiskRuleIDList,omitnil,omitempty" name:"RiskRuleIDList"`
+}
+
+func (r *CreateAccessKeyCheckTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAccessKeyCheckTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "RiskIDList")
+	delete(f, "AccessKeyList")
+	delete(f, "SubUinList")
+	delete(f, "RiskRuleIDList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAccessKeyCheckTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAccessKeyCheckTaskResponseParams struct {
+	// 0 indicates success. 1 indicates failure.
+	Code *uint64 `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// Error message
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateAccessKeyCheckTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAccessKeyCheckTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateAccessKeyCheckTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAccessKeyCheckTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAccessKeySyncTaskRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+type CreateAccessKeySyncTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+func (r *CreateAccessKeySyncTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAccessKeySyncTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAccessKeySyncTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAccessKeySyncTaskResponseParams struct {
+	// Initiate a sync task.
+	TaskID *int64 `json:"TaskID,omitnil,omitempty" name:"TaskID"`
+
+	// 0: success; 1: failure.
+	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// Error message
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateAccessKeySyncTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAccessKeySyncTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateAccessKeySyncTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAccessKeySyncTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -1255,6 +1932,61 @@ func (r *CreateRiskCenterScanTaskResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *CreateRiskCenterScanTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type CsipRiskCenterStatistics struct {
+	// Total Number of Port Risks
+	PortTotal *uint64 `json:"PortTotal,omitnil,omitempty" name:"PortTotal"`
+
+	// High Port Risk Count
+	PortHighLevel *uint64 `json:"PortHighLevel,omitnil,omitempty" name:"PortHighLevel"`
+
+	// 	Total number of weak password risks.
+	WeakPasswordTotal *uint64 `json:"WeakPasswordTotal,omitnil,omitempty" name:"WeakPasswordTotal"`
+
+	// High Weak Password Risk Count
+	WeakPasswordHighLevel *uint64 `json:"WeakPasswordHighLevel,omitnil,omitempty" name:"WeakPasswordHighLevel"`
+
+	// Website Risk Count
+	WebsiteTotal *uint64 `json:"WebsiteTotal,omitnil,omitempty" name:"WebsiteTotal"`
+
+	// Number of High Risks on Websites
+	WebsiteHighLevel *uint64 `json:"WebsiteHighLevel,omitnil,omitempty" name:"WebsiteHighLevel"`
+
+	// Time of the Latest Scan
+	LastScanTime *string `json:"LastScanTime,omitnil,omitempty" name:"LastScanTime"`
+
+	// Number of vulnerability risks.
+	VULTotal *int64 `json:"VULTotal,omitnil,omitempty" name:"VULTotal"`
+
+	// Number of High-Risk Vulnerability Risks
+	VULHighLevel *int64 `json:"VULHighLevel,omitnil,omitempty" name:"VULHighLevel"`
+
+	// Number of Configuration Item Risks
+	CFGTotal *int64 `json:"CFGTotal,omitnil,omitempty" name:"CFGTotal"`
+
+	// Number of High-Risk Configuration Item Risks
+	CFGHighLevel *int64 `json:"CFGHighLevel,omitnil,omitempty" name:"CFGHighLevel"`
+
+	// Mapping Service Risk Count
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ServerTotal *int64 `json:"ServerTotal,omitnil,omitempty" name:"ServerTotal"`
+
+	// High Mapping Service Risk Count
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ServerHighLevel *int64 `json:"ServerHighLevel,omitnil,omitempty" name:"ServerHighLevel"`
+
+	// Number of host baseline risks.
+	HostBaseLineRiskTotal *int64 `json:"HostBaseLineRiskTotal,omitnil,omitempty" name:"HostBaseLineRiskTotal"`
+
+	// Number of high-risk risks.
+	HostBaseLineRiskHighLevel *int64 `json:"HostBaseLineRiskHighLevel,omitnil,omitempty" name:"HostBaseLineRiskHighLevel"`
+
+	// Baseline risk count of the container.
+	PodBaseLineRiskTotal *int64 `json:"PodBaseLineRiskTotal,omitnil,omitempty" name:"PodBaseLineRiskTotal"`
+
+	// Number of high-risk baseline risks in the container.
+	PodBaseLineRiskHighLevel *int64 `json:"PodBaseLineRiskHighLevel,omitnil,omitempty" name:"PodBaseLineRiskHighLevel"`
 }
 
 type DBAssetVO struct {
@@ -1546,6 +2278,718 @@ func (r *DeleteRiskScanTaskResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeAbnormalCallRecordRequestParams struct {
+	// Alarm rule ID.
+	AlarmRuleID *int64 `json:"AlarmRuleID,omitnil,omitempty" name:"AlarmRuleID"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Access key.
+	AccessKey *string `json:"AccessKey,omitnil,omitempty" name:"AccessKey"`
+
+	// Source IP of the call.
+	SourceIP *string `json:"SourceIP,omitnil,omitempty" name:"SourceIP"`
+
+	// Filter.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+type DescribeAbnormalCallRecordRequest struct {
+	*tchttp.BaseRequest
+	
+	// Alarm rule ID.
+	AlarmRuleID *int64 `json:"AlarmRuleID,omitnil,omitempty" name:"AlarmRuleID"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Access key.
+	AccessKey *string `json:"AccessKey,omitnil,omitempty" name:"AccessKey"`
+
+	// Source IP of the call.
+	SourceIP *string `json:"SourceIP,omitnil,omitempty" name:"SourceIP"`
+
+	// Filter.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+func (r *DescribeAbnormalCallRecordRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAbnormalCallRecordRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AlarmRuleID")
+	delete(f, "MemberId")
+	delete(f, "AccessKey")
+	delete(f, "SourceIP")
+	delete(f, "Filter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAbnormalCallRecordRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAbnormalCallRecordResponseParams struct {
+	// Invocation record list.
+	Data []*CallRecord `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Total number of records.
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAbnormalCallRecordResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAbnormalCallRecordResponseParams `json:"Response"`
+}
+
+func (r *DescribeAbnormalCallRecordResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAbnormalCallRecordResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAccessKeyAlarmDetailRequestParams struct {
+	// Alarm record ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+type DescribeAccessKeyAlarmDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Alarm record ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+func (r *DescribeAccessKeyAlarmDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccessKeyAlarmDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ID")
+	delete(f, "MemberId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccessKeyAlarmDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAccessKeyAlarmDetailResponseParams struct {
+	// Alarm information.
+	AlarmInfo *AccessKeyAlarm `json:"AlarmInfo,omitnil,omitempty" name:"AlarmInfo"`
+
+	// Number of CAM policies in the associated account.
+	CamCount *int64 `json:"CamCount,omitnil,omitempty" name:"CamCount"`
+
+	// Number of AK risks.
+	RiskCount *int64 `json:"RiskCount,omitnil,omitempty" name:"RiskCount"`
+
+	// Alarm policy description.
+	AlarmDesc *string `json:"AlarmDesc,omitnil,omitempty" name:"AlarmDesc"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAccessKeyAlarmDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAccessKeyAlarmDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeAccessKeyAlarmDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccessKeyAlarmDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAccessKeyAlarmRequestParams struct {
+	// Filter.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Access key ID.
+	AccessKeyID *uint64 `json:"AccessKeyID,omitnil,omitempty" name:"AccessKeyID"`
+
+	// ID of the source IP.
+	SourceIPID *uint64 `json:"SourceIPID,omitnil,omitempty" name:"SourceIPID"`
+
+	// Account UIN
+	SubUin *string `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+}
+
+type DescribeAccessKeyAlarmRequest struct {
+	*tchttp.BaseRequest
+	
+	// Filter.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Access key ID.
+	AccessKeyID *uint64 `json:"AccessKeyID,omitnil,omitempty" name:"AccessKeyID"`
+
+	// ID of the source IP.
+	SourceIPID *uint64 `json:"SourceIPID,omitnil,omitempty" name:"SourceIPID"`
+
+	// Account UIN
+	SubUin *string `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+}
+
+func (r *DescribeAccessKeyAlarmRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccessKeyAlarmRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filter")
+	delete(f, "MemberId")
+	delete(f, "AccessKeyID")
+	delete(f, "SourceIPID")
+	delete(f, "SubUin")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccessKeyAlarmRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAccessKeyAlarmResponseParams struct {
+	// Alarm list.
+	Data []*AccessKeyAlarm `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Total number.
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAccessKeyAlarmResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAccessKeyAlarmResponseParams `json:"Response"`
+}
+
+func (r *DescribeAccessKeyAlarmResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccessKeyAlarmResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAccessKeyAssetRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filter.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+type DescribeAccessKeyAssetRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filter.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+func (r *DescribeAccessKeyAssetRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccessKeyAssetRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Filter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccessKeyAssetRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAccessKeyAssetResponseParams struct {
+	// Access key asset list.
+	Data []*AccessKeyAsset `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Total quantity.
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAccessKeyAssetResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAccessKeyAssetResponseParams `json:"Response"`
+}
+
+func (r *DescribeAccessKeyAssetResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccessKeyAssetResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAccessKeyRiskDetailRequestParams struct {
+	// Risk record ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+type DescribeAccessKeyRiskDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Risk record ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+func (r *DescribeAccessKeyRiskDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccessKeyRiskDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ID")
+	delete(f, "MemberId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccessKeyRiskDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAccessKeyRiskDetailResponseParams struct {
+	// Risk list.
+	RiskInfo *AccessKeyRisk `json:"RiskInfo,omitnil,omitempty" name:"RiskInfo"`
+
+	// Total number of CAM policies.
+	CamCount *int64 `json:"CamCount,omitnil,omitempty" name:"CamCount"`
+
+	// Number of associated alarms for the account.
+	AlarmCount *int64 `json:"AlarmCount,omitnil,omitempty" name:"AlarmCount"`
+
+	// Access method 0 API 1 console and API.
+	AccessType *int64 `json:"AccessType,omitnil,omitempty" name:"AccessType"`
+
+	// Access key Alarm count list.
+	AccessKeyAlarmCount []*AccessKeyAlarmCount `json:"AccessKeyAlarmCount,omitnil,omitempty" name:"AccessKeyAlarmCount"`
+
+	// Whether operation protection is enabled. valid values: 0 (not enabled), 1 (enabled).
+	ActionFlag *int64 `json:"ActionFlag,omitnil,omitempty" name:"ActionFlag"`
+
+	// Whether login protection is enabled. valid values: 0 (not enabled), 1 (enabled).
+	LoginFlag *int64 `json:"LoginFlag,omitnil,omitempty" name:"LoginFlag"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAccessKeyRiskDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAccessKeyRiskDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeAccessKeyRiskDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccessKeyRiskDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAccessKeyRiskRequestParams struct {
+	// Filter.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Access key ID.
+	AccessKeyID *uint64 `json:"AccessKeyID,omitnil,omitempty" name:"AccessKeyID"`
+
+	// Account UIN
+	SubUin *string `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+}
+
+type DescribeAccessKeyRiskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Filter.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Access key ID.
+	AccessKeyID *uint64 `json:"AccessKeyID,omitnil,omitempty" name:"AccessKeyID"`
+
+	// Account UIN
+	SubUin *string `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+}
+
+func (r *DescribeAccessKeyRiskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccessKeyRiskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filter")
+	delete(f, "MemberId")
+	delete(f, "AccessKeyID")
+	delete(f, "SubUin")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccessKeyRiskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAccessKeyRiskResponseParams struct {
+	// Risk list.
+	Data []*AccessKeyRisk `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Total number.
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAccessKeyRiskResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAccessKeyRiskResponseParams `json:"Response"`
+}
+
+func (r *DescribeAccessKeyRiskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccessKeyRiskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAccessKeyUserDetailRequestParams struct {
+	// Account uin itself.
+	SubUin *string `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+type DescribeAccessKeyUserDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Account uin itself.
+	SubUin *string `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+func (r *DescribeAccessKeyUserDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccessKeyUserDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubUin")
+	delete(f, "MemberId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccessKeyUserDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAccessKeyUserDetailResponseParams struct {
+	// Account detailed information.
+	User *AccessKeyUser `json:"User,omitnil,omitempty" name:"User"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAccessKeyUserDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAccessKeyUserDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeAccessKeyUserDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccessKeyUserDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAccessKeyUserListRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filter.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+type DescribeAccessKeyUserListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filter.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+func (r *DescribeAccessKeyUserListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccessKeyUserListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Filter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccessKeyUserListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAccessKeyUserListResponseParams struct {
+	// Account list.
+	Data []*AccessKeyUser `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Total number.
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAccessKeyUserListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAccessKeyUserListResponseParams `json:"Response"`
+}
+
+func (r *DescribeAccessKeyUserListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccessKeyUserListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAssetProcessListRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filtered Content
+	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Pagination size.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting type
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sorting field.
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// Cloud service provider.
+	Provider *string `json:"Provider,omitnil,omitempty" name:"Provider"`
+}
+
+type DescribeAssetProcessListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filtered Content
+	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Pagination size.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting type
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sorting field.
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// Cloud service provider.
+	Provider *string `json:"Provider,omitnil,omitempty" name:"Provider"`
+}
+
+func (r *DescribeAssetProcessListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAssetProcessListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Order")
+	delete(f, "By")
+	delete(f, "Provider")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAssetProcessListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAssetProcessListResponseParams struct {
+	// Process quantity.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Process list.
+	AssetProcessList []*AssetProcessItem `json:"AssetProcessList,omitnil,omitempty" name:"AssetProcessList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAssetProcessListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAssetProcessListResponseParams `json:"Response"`
+}
+
+func (r *DescribeAssetProcessListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAssetProcessListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeCFWAssetStatisticsRequestParams struct {
 
 }
@@ -1626,6 +3070,70 @@ func (r *DescribeCFWAssetStatisticsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeCFWAssetStatisticsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCSIPRiskStatisticsRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filtered Content
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+type DescribeCSIPRiskStatisticsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filtered Content
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+func (r *DescribeCSIPRiskStatisticsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCSIPRiskStatisticsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Filter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCSIPRiskStatisticsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCSIPRiskStatisticsResponseParams struct {
+	// Asset Overview Data
+	Data *CsipRiskCenterStatistics `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCSIPRiskStatisticsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCSIPRiskStatisticsResponseParams `json:"Response"`
+}
+
+func (r *DescribeCSIPRiskStatisticsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCSIPRiskStatisticsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1782,6 +3290,94 @@ func (r *DescribeCVMAssetsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeCVMAssetsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCallRecordRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Access key ID.
+	AccessKeyID *uint64 `json:"AccessKeyID,omitnil,omitempty" name:"AccessKeyID"`
+
+	// ID of the source IP for the call.
+	SourceIPID *uint64 `json:"SourceIPID,omitnil,omitempty" name:"SourceIPID"`
+
+	// Access account uin.
+	AccUin *string `json:"AccUin,omitnil,omitempty" name:"AccUin"`
+
+	// Filter.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+type DescribeCallRecordRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Access key ID.
+	AccessKeyID *uint64 `json:"AccessKeyID,omitnil,omitempty" name:"AccessKeyID"`
+
+	// ID of the source IP for the call.
+	SourceIPID *uint64 `json:"SourceIPID,omitnil,omitempty" name:"SourceIPID"`
+
+	// Access account uin.
+	AccUin *string `json:"AccUin,omitnil,omitempty" name:"AccUin"`
+
+	// Filter.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+func (r *DescribeCallRecordRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCallRecordRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "AccessKeyID")
+	delete(f, "SourceIPID")
+	delete(f, "AccUin")
+	delete(f, "Filter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCallRecordRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCallRecordResponseParams struct {
+	// Invocation record list.
+	Data []*CallRecord `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Total number of records.
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCallRecordResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCallRecordResponseParams `json:"Response"`
+}
+
+func (r *DescribeCallRecordResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCallRecordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2181,6 +3777,243 @@ func (r *DescribeDomainAssetsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeExposeAssetCategoryRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+type DescribeExposeAssetCategoryRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+func (r *DescribeExposeAssetCategoryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeExposeAssetCategoryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeExposeAssetCategoryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeExposeAssetCategoryResponseParams struct {
+	// Cloud boundary analytics asset classification list.
+	ExposeAssetTypeList []*ExposeAssetTypeItem `json:"ExposeAssetTypeList,omitnil,omitempty" name:"ExposeAssetTypeList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeExposeAssetCategoryResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeExposeAssetCategoryResponseParams `json:"Response"`
+}
+
+func (r *DescribeExposeAssetCategoryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeExposeAssetCategoryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeExposePathRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Asset ID.
+	AssetId *string `json:"AssetId,omitnil,omitempty" name:"AssetId"`
+
+	// Asset IP.
+	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
+
+	// Asset domain name.
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// Port or port range.
+	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
+}
+
+type DescribeExposePathRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Asset ID.
+	AssetId *string `json:"AssetId,omitnil,omitempty" name:"AssetId"`
+
+	// Asset IP.
+	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
+
+	// Asset domain name.
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// Port or port range.
+	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
+}
+
+func (r *DescribeExposePathRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeExposePathRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "AssetId")
+	delete(f, "Ip")
+	delete(f, "Domain")
+	delete(f, "Port")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeExposePathRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeExposePathResponseParams struct {
+	// Cloud boundary analysis path within node.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeExposePathResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeExposePathResponseParams `json:"Response"`
+}
+
+func (r *DescribeExposePathResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeExposePathResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeExposuresRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filtered Content
+	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Pagination size.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting type
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sorting field.
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+}
+
+type DescribeExposuresRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filtered Content
+	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Pagination size.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting type
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sorting field.
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+}
+
+func (r *DescribeExposuresRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeExposuresRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Order")
+	delete(f, "By")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeExposuresRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeExposuresResponseParams struct {
+	// Cloud boundary analytics number of assets.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Cloud boundary analytics asset list.
+	ExposeList []*ExposesItem `json:"ExposeList,omitnil,omitempty" name:"ExposeList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeExposuresResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeExposuresResponseParams `json:"Response"`
+}
+
+func (r *DescribeExposuresResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeExposuresResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeGatewayAssetsRequestParams struct {
 	// Group Account Member ID
 	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
@@ -2256,6 +4089,115 @@ func (r *DescribeGatewayAssetsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeGatewayAssetsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeHighBaseLineRiskListRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filtered Content
+	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Pagination size.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting type
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sorting field.
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// Cloud account ID.
+	CloudAccountID *string `json:"CloudAccountID,omitnil,omitempty" name:"CloudAccountID"`
+
+	// Cloud service provider.
+	Provider *string `json:"Provider,omitnil,omitempty" name:"Provider"`
+}
+
+type DescribeHighBaseLineRiskListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filtered Content
+	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Pagination size.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting type
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sorting field.
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// Cloud account ID.
+	CloudAccountID *string `json:"CloudAccountID,omitnil,omitempty" name:"CloudAccountID"`
+
+	// Cloud service provider.
+	Provider *string `json:"Provider,omitnil,omitempty" name:"Provider"`
+}
+
+func (r *DescribeHighBaseLineRiskListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHighBaseLineRiskListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Order")
+	delete(f, "By")
+	delete(f, "CloudAccountID")
+	delete(f, "Provider")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeHighBaseLineRiskListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeHighBaseLineRiskListResponseParams struct {
+	// Number of high-risk risks.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// High-Risk baseline risk list.
+	HighBaseLineRiskList []*HighBaseLineRiskItem `json:"HighBaseLineRiskList,omitnil,omitempty" name:"HighBaseLineRiskList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeHighBaseLineRiskListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeHighBaseLineRiskListResponseParams `json:"Response"`
+}
+
+func (r *DescribeHighBaseLineRiskListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHighBaseLineRiskListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2957,6 +4899,9 @@ func (r *DescribeRiskCenterAssetViewPortRiskListResponse) FromJsonString(s strin
 
 // Predefined struct for user
 type DescribeRiskCenterAssetViewVULRiskListRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
 	// Filter conditions
 	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
 
@@ -2967,6 +4912,9 @@ type DescribeRiskCenterAssetViewVULRiskListRequestParams struct {
 type DescribeRiskCenterAssetViewVULRiskListRequest struct {
 	*tchttp.BaseRequest
 	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
 	// Filter conditions
 	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
 
@@ -2986,6 +4934,7 @@ func (r *DescribeRiskCenterAssetViewVULRiskListRequest) FromJsonString(s string)
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "MemberId")
 	delete(f, "Filter")
 	delete(f, "Tags")
 	if len(f) > 0 {
@@ -3116,6 +5065,91 @@ func (r *DescribeRiskCenterAssetViewWeakPasswordRiskListResponse) ToJsonString()
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeRiskCenterAssetViewWeakPasswordRiskListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRiskCenterCFGViewCFGRiskListRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filtered Content
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+type DescribeRiskCenterCFGViewCFGRiskListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filtered Content
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+func (r *DescribeRiskCenterCFGViewCFGRiskListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRiskCenterCFGViewCFGRiskListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Filter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRiskCenterCFGViewCFGRiskListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRiskCenterCFGViewCFGRiskListResponseParams struct {
+	// Total number of entries
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Configuration Risk List from Asset's Perspective
+	Data []*CFGViewCFGRisk `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Status list
+	StatusLists []*FilterDataObject `json:"StatusLists,omitnil,omitempty" name:"StatusLists"`
+
+	// Danger Level List
+	LevelLists []*FilterDataObject `json:"LevelLists,omitnil,omitempty" name:"LevelLists"`
+
+	// Configuration Name List
+	CFGNameLists []*FilterDataObject `json:"CFGNameLists,omitnil,omitempty" name:"CFGNameLists"`
+
+	// Check Type List
+	CheckTypeLists []*FilterDataObject `json:"CheckTypeLists,omitnil,omitempty" name:"CheckTypeLists"`
+
+	// Asset Type List
+	InstanceTypeLists []*FilterDataObject `json:"InstanceTypeLists,omitnil,omitempty" name:"InstanceTypeLists"`
+
+	// Source List
+	FromLists []*FilterDataObject `json:"FromLists,omitnil,omitempty" name:"FromLists"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeRiskCenterCFGViewCFGRiskListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRiskCenterCFGViewCFGRiskListResponseParams `json:"Response"`
+}
+
+func (r *DescribeRiskCenterCFGViewCFGRiskListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRiskCenterCFGViewCFGRiskListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3486,6 +5520,91 @@ func (r *DescribeScanReportListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeScanStatisticRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Health check task id.
+	TaskLogId *string `json:"TaskLogId,omitnil,omitempty" name:"TaskLogId"`
+}
+
+type DescribeScanStatisticRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Health check task id.
+	TaskLogId *string `json:"TaskLogId,omitnil,omitempty" name:"TaskLogId"`
+}
+
+func (r *DescribeScanStatisticRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeScanStatisticRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "TaskLogId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeScanStatisticRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeScanStatisticResponseParams struct {
+	// Port service quantity.
+	PortServiceCount *uint64 `json:"PortServiceCount,omitnil,omitempty" name:"PortServiceCount"`
+
+	// Number of Web services.
+	WebAppCount *uint64 `json:"WebAppCount,omitnil,omitempty" name:"WebAppCount"`
+
+	// Weak Password Risk Count
+	WeakPasswordCount *uint64 `json:"WeakPasswordCount,omitnil,omitempty" name:"WeakPasswordCount"`
+
+	// Vulnerability risk quantity.
+	VulCount *uint64 `json:"VulCount,omitnil,omitempty" name:"VulCount"`
+
+	// High-Risk port service quantity.
+	HighRiskPortServiceCount *uint64 `json:"HighRiskPortServiceCount,omitnil,omitempty" name:"HighRiskPortServiceCount"`
+
+	// Number of Web services at risk.
+	RiskWebAppCount *uint64 `json:"RiskWebAppCount,omitnil,omitempty" name:"RiskWebAppCount"`
+
+	// Newly-Added port services in the last 7 days.
+	PortServiceIncrement *uint64 `json:"PortServiceIncrement,omitnil,omitempty" name:"PortServiceIncrement"`
+
+	// Newly-Added Web services in the last 7 days.
+	WebAppIncrement *uint64 `json:"WebAppIncrement,omitnil,omitempty" name:"WebAppIncrement"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeScanStatisticResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeScanStatisticResponseParams `json:"Response"`
+}
+
+func (r *DescribeScanStatisticResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeScanStatisticResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeScanTaskListRequestParams struct {
 	// Filter conditions
 	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
@@ -3630,6 +5749,73 @@ func (r *DescribeSearchBugInfoResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeSearchBugInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSourceIPAssetRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filter.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+type DescribeSourceIPAssetRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filter.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+func (r *DescribeSourceIPAssetRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSourceIPAssetRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Filter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSourceIPAssetRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSourceIPAssetResponseParams struct {
+	// Access key asset list.
+	Data []*SourceIPAsset `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Total quantity.
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSourceIPAssetResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSourceIPAssetResponseParams `json:"Response"`
+}
+
+func (r *DescribeSourceIPAssetResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSourceIPAssetResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3920,6 +6106,165 @@ func (r *DescribeTaskLogURLResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeUserCallRecordRequestParams struct {
+	// Account UIN
+	SubUin *string `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filter.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+type DescribeUserCallRecordRequest struct {
+	*tchttp.BaseRequest
+	
+	// Account UIN
+	SubUin *string `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filter.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+func (r *DescribeUserCallRecordRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserCallRecordRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubUin")
+	delete(f, "MemberId")
+	delete(f, "Filter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUserCallRecordRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUserCallRecordResponseParams struct {
+	// Account call record list.
+	Data []*UserCallRecord `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Total number of records.
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeUserCallRecordResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeUserCallRecordResponseParams `json:"Response"`
+}
+
+func (r *DescribeUserCallRecordResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserCallRecordResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeVULListRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Query condition.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+type DescribeVULListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Query condition.
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+func (r *DescribeVULListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVULListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Filter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVULListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeVULListResponseParams struct {
+	// Total number.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Vulnerability list
+	Data []*VULBaseInfo `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Vulnerability Type List
+	VULTypeLists []*FilterDataObject `json:"VULTypeLists,omitnil,omitempty" name:"VULTypeLists"`
+
+	// Risk level list.
+	RiskLevels []*FilterDataObject `json:"RiskLevels,omitnil,omitempty" name:"RiskLevels"`
+
+	// Tag.
+	Tags []*FilterDataObject `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Product support.
+	ProductSupport []*FilterDataObject `json:"ProductSupport,omitnil,omitempty" name:"ProductSupport"`
+
+	// Product support.
+	CheckStatus []*FilterDataObject `json:"CheckStatus,omitnil,omitempty" name:"CheckStatus"`
+
+	// Attack intensity enumeration.
+	AttackHeat []*FilterDataObject `json:"AttackHeat,omitnil,omitempty" name:"AttackHeat"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeVULListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeVULListResponseParams `json:"Response"`
+}
+
+func (r *DescribeVULListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVULListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeVULRiskAdvanceCFGListRequestParams struct {
 	// Task ID
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
@@ -4000,6 +6345,89 @@ func (r *DescribeVULRiskAdvanceCFGListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeVULRiskDetailRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Risk id.
+	RiskId *string `json:"RiskId,omitnil,omitempty" name:"RiskId"`
+
+	// pcMgrId
+	PCMGRId *string `json:"PCMGRId,omitnil,omitempty" name:"PCMGRId"`
+}
+
+type DescribeVULRiskDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Risk id.
+	RiskId *string `json:"RiskId,omitnil,omitempty" name:"RiskId"`
+
+	// pcMgrId
+	PCMGRId *string `json:"PCMGRId,omitnil,omitempty" name:"PCMGRId"`
+}
+
+func (r *DescribeVULRiskDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVULRiskDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "RiskId")
+	delete(f, "PCMGRId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVULRiskDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeVULRiskDetailResponseParams struct {
+	// Security product support.
+	ServiceSupport []*ServiceSupport `json:"ServiceSupport,omitnil,omitempty" name:"ServiceSupport"`
+
+	// Vulnerability trends.
+	VulTrend []*VulTrend `json:"VulTrend,omitnil,omitempty" name:"VulTrend"`
+
+	// Vulnerability supplementary information.
+	VulData *VULRiskInfo `json:"VulData,omitnil,omitempty" name:"VulData"`
+
+	// Assistant q&a id.
+	QuestionId *string `json:"QuestionId,omitnil,omitempty" name:"QuestionId"`
+
+	// Session ID
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeVULRiskDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeVULRiskDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeVULRiskDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVULRiskDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeVpcAssetsRequestParams struct {
 	// Filter parameters
 	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
@@ -4065,6 +6493,201 @@ func (r *DescribeVpcAssetsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeVpcAssetsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeVulRiskListRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filtered Content
+	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Pagination size.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting type
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sorting field.
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// Cloud account ID.
+	CloudAccountID *string `json:"CloudAccountID,omitnil,omitempty" name:"CloudAccountID"`
+
+	// Cloud service provider.
+	Provider *string `json:"Provider,omitnil,omitempty" name:"Provider"`
+}
+
+type DescribeVulRiskListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filtered Content
+	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Pagination size.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting type
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sorting field.
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// Cloud account ID.
+	CloudAccountID *string `json:"CloudAccountID,omitnil,omitempty" name:"CloudAccountID"`
+
+	// Cloud service provider.
+	Provider *string `json:"Provider,omitnil,omitempty" name:"Provider"`
+}
+
+func (r *DescribeVulRiskListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVulRiskListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Order")
+	delete(f, "By")
+	delete(f, "CloudAccountID")
+	delete(f, "Provider")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVulRiskListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeVulRiskListResponseParams struct {
+	// Number of vulnerabilities
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Vulnerability list
+	VulRiskList []*VulRiskItem `json:"VulRiskList,omitnil,omitempty" name:"VulRiskList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeVulRiskListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeVulRiskListResponseParams `json:"Response"`
+}
+
+func (r *DescribeVulRiskListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVulRiskListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeVulViewVulRiskListRequestParams struct {
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filtered Content
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+
+	// Asset tag
+	Tags []*AssetTag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+type DescribeVulViewVulRiskListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Filtered Content
+	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
+
+	// Asset tag
+	Tags []*AssetTag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+func (r *DescribeVulViewVulRiskListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVulViewVulRiskListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Filter")
+	delete(f, "Tags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVulViewVulRiskListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeVulViewVulRiskListResponseParams struct {
+	// Total number of entries
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Vulnerability Risk List from Vulnerability Asset's Perspective
+	Data []*VULViewVULRiskData `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Danger Level List
+	LevelLists []*FilterDataObject `json:"LevelLists,omitnil,omitempty" name:"LevelLists"`
+
+	// Source List
+	FromLists []*FilterDataObject `json:"FromLists,omitnil,omitempty" name:"FromLists"`
+
+	// Vulnerability Type List
+	VULTypeLists []*FilterDataObject `json:"VULTypeLists,omitnil,omitempty" name:"VULTypeLists"`
+
+	// tag enumeration.
+	Tags []*FilterDataObject `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeVulViewVulRiskListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeVulViewVulRiskListResponseParams `json:"Response"`
+}
+
+func (r *DescribeVulViewVulRiskListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVulViewVulRiskListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4226,6 +6849,130 @@ type DomainAssetVO struct {
 	BotAccessCount *int64 `json:"BotAccessCount,omitnil,omitempty" name:"BotAccessCount"`
 }
 
+type ExposeAssetTypeItem struct {
+	// Cloud service provider.
+	Provider *string `json:"Provider,omitnil,omitempty" name:"Provider"`
+
+	// Vendor name.
+	ProviderName *string `json:"ProviderName,omitnil,omitempty" name:"ProviderName"`
+
+	// Asset type.
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
+
+	// Asset type name.
+	AssetTypeName *string `json:"AssetTypeName,omitnil,omitempty" name:"AssetTypeName"`
+}
+
+type ExposesItem struct {
+	// Cloud service provider.
+	Provider *string `json:"Provider,omitnil,omitempty" name:"Provider"`
+
+	// Account name.
+	CloudAccountName *string `json:"CloudAccountName,omitnil,omitempty" name:"CloudAccountName"`
+
+	// Cloud account.
+	CloudAccountId *string `json:"CloudAccountId,omitnil,omitempty" name:"CloudAccountId"`
+
+	// Domain
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// IP
+	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
+
+	// Port or port range.
+	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// Open.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Risk type.
+	RiskType *string `json:"RiskType,omitnil,omitempty" name:"RiskType"`
+
+	// acl type.
+	AclType *string `json:"AclType,omitnil,omitempty" name:"AclType"`
+
+	// ACL list.
+	AclList *string `json:"AclList,omitnil,omitempty" name:"AclList"`
+
+	// Asset ID.
+	AssetId *string `json:"AssetId,omitnil,omitempty" name:"AssetId"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// Asset type.
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
+
+	// Port service quantity.
+	PortServiceCount *uint64 `json:"PortServiceCount,omitnil,omitempty" name:"PortServiceCount"`
+
+	// Number of high-risk ports.
+	HighRiskPortServiceCount *uint64 `json:"HighRiskPortServiceCount,omitnil,omitempty" name:"HighRiskPortServiceCount"`
+
+	// Number of web applications.
+	WebAppCount *uint64 `json:"WebAppCount,omitnil,omitempty" name:"WebAppCount"`
+
+	// Number of web applications at risk.
+	RiskWebAppCount *uint64 `json:"RiskWebAppCount,omitnil,omitempty" name:"RiskWebAppCount"`
+
+	// Number of Weak Passwords
+	WeakPasswordCount *uint64 `json:"WeakPasswordCount,omitnil,omitempty" name:"WeakPasswordCount"`
+
+	// Number of vulnerabilities
+	VulCount *uint64 `json:"VulCount,omitnil,omitempty" name:"VulCount"`
+
+	// First detection time
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Latest update time.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Instance Type Name
+	AssetTypeName *string `json:"AssetTypeName,omitnil,omitempty" name:"AssetTypeName"`
+
+	// Open status.
+	DisplayStatus *string `json:"DisplayStatus,omitnil,omitempty" name:"DisplayStatus"`
+
+	// Port status.
+	DisplayRiskType *string `json:"DisplayRiskType,omitnil,omitempty" name:"DisplayRiskType"`
+
+	// Scan task status.
+	ScanTaskStatus *string `json:"ScanTaskStatus,omitnil,omitempty" name:"ScanTaskStatus"`
+
+	// uuid
+	Uuid *string `json:"Uuid,omitnil,omitempty" name:"Uuid"`
+
+	// Whether a security check has been performed.
+	HasScan *string `json:"HasScan,omitnil,omitempty" name:"HasScan"`
+
+	// Tenant ID.
+	AppId *uint64 `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// Tenant ID string.
+	AppIdStr *string `json:"AppIdStr,omitnil,omitempty" name:"AppIdStr"`
+
+	// Record ID
+	ExposureID *uint64 `json:"ExposureID,omitnil,omitempty" name:"ExposureID"`
+
+	// Number of ports open.
+	PortDetectCount *uint64 `json:"PortDetectCount,omitnil,omitempty" name:"PortDetectCount"`
+
+	// Port exposure result.
+	PortDetectResult *string `json:"PortDetectResult,omitnil,omitempty" name:"PortDetectResult"`
+
+	// Tag.
+	Tag *string `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Remarks
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Number of risks to be governed.
+	ToGovernedRiskCount *uint64 `json:"ToGovernedRiskCount,omitnil,omitempty" name:"ToGovernedRiskCount"`
+
+	// Risk content to be governed.
+	ToGovernedRiskContent *string `json:"ToGovernedRiskContent,omitnil,omitempty" name:"ToGovernedRiskContent"`
+}
+
 type Filter struct {
 	// Max number of returned results
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
@@ -4255,6 +7002,20 @@ type FilterDataObject struct {
 
 	// Filter name
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+}
+
+type Filters struct {
+	// Instance ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Instance ID content.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+
+	// Fuzzy matching.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExactMatch *string `json:"ExactMatch,omitnil,omitempty" name:"ExactMatch"`
 }
 
 type GateWayAsset struct {
@@ -4348,6 +7109,56 @@ type GateWayAsset struct {
 
 	// Weak password risk.
 	WeakPasswordRisk *uint64 `json:"WeakPasswordRisk,omitnil,omitempty" name:"WeakPasswordRisk"`
+}
+
+type HighBaseLineRiskItem struct {
+	// Cloud account ID.
+	CloudAccountID *string `json:"CloudAccountID,omitnil,omitempty" name:"CloudAccountID"`
+
+	// Instance ID.
+	AssetID *string `json:"AssetID,omitnil,omitempty" name:"AssetID"`
+
+	// Instance status
+	InstanceStatus *string `json:"InstanceStatus,omitnil,omitempty" name:"InstanceStatus"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// Risk name.
+	RiskName *string `json:"RiskName,omitnil,omitempty" name:"RiskName"`
+
+	// Risk classification.
+	RiskCategory *string `json:"RiskCategory,omitnil,omitempty" name:"RiskCategory"`
+
+	// Risk level.
+	RiskLevel *string `json:"RiskLevel,omitnil,omitempty" name:"RiskLevel"`
+
+	// Risk description.
+	RiskDesc *string `json:"RiskDesc,omitnil,omitempty" name:"RiskDesc"`
+
+	// Risk result.
+	RiskResult *string `json:"RiskResult,omitnil,omitempty" name:"RiskResult"`
+
+	// Fixing suggestion
+	FixAdvice *string `json:"FixAdvice,omitnil,omitempty" name:"FixAdvice"`
+
+	// Linux vulnerability.
+	RiskCategoryName *string `json:"RiskCategoryName,omitnil,omitempty" name:"RiskCategoryName"`
+
+	// Risk name.
+	RiskLevelName *string `json:"RiskLevelName,omitnil,omitempty" name:"RiskLevelName"`
+
+	// Instance status
+	InstanceStatusName *string `json:"InstanceStatusName,omitnil,omitempty" name:"InstanceStatusName"`
+
+	// First detection time
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Last discovery time
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Tenant ID.
+	AppID *uint64 `json:"AppID,omitnil,omitempty" name:"AppID"`
 }
 
 type IpAssetListVO struct {
@@ -4623,6 +7434,146 @@ func (r *ModifyRiskCenterRiskStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRiskCenterScanTaskRequestParams struct {
+	// Task name.
+	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
+
+	// 0: Full Scan; 1: Specified Asset Scan; 2: Excluded Asset Scan; 3: Manual Entry Scan. 1 and 2 require the Assets field; 3 requires SelfDefiningAssets.
+	ScanAssetType *int64 `json:"ScanAssetType,omitnil,omitempty" name:"ScanAssetType"`
+
+	// Scan items. port/poc/weakpass/webcontent/configrisk
+	ScanItem []*string `json:"ScanItem,omitnil,omitempty" name:"ScanItem"`
+
+	// 0: Periodic Task; 1: Scan Now; 2: Scheduled Scan; 3: Custom. If 0, 2, 3, ScanPlanContent is required.
+	ScanPlanType *int64 `json:"ScanPlanType,omitnil,omitempty" name:"ScanPlanType"`
+
+	// Task ID to be Modified
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Scanned Asset Information List
+	Assets []*TaskAssetObject `json:"Assets,omitnil,omitempty" name:"Assets"`
+
+	// Scan Plan Details
+	ScanPlanContent *string `json:"ScanPlanContent,omitnil,omitempty" name:"ScanPlanContent"`
+
+	// IP/Domain/URL Array
+	SelfDefiningAssets []*string `json:"SelfDefiningAssets,omitnil,omitempty" name:"SelfDefiningAssets"`
+
+	// Advanced configuration.
+	TaskAdvanceCFG *TaskAdvanceCFG `json:"TaskAdvanceCFG,omitnil,omitempty" name:"TaskAdvanceCFG"`
+
+	// Checkup Mode. 0: Standard Mode; 1: Quick Mode; 2: Advanced Mode. Standard Mode by default.
+	TaskMode *int64 `json:"TaskMode,omitnil,omitempty" name:"TaskMode"`
+
+	// Task complete callback webhook url.
+	FinishWebHook *string `json:"FinishWebHook,omitnil,omitempty" name:"FinishWebHook"`
+}
+
+type ModifyRiskCenterScanTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Task name.
+	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
+
+	// 0: Full Scan; 1: Specified Asset Scan; 2: Excluded Asset Scan; 3: Manual Entry Scan. 1 and 2 require the Assets field; 3 requires SelfDefiningAssets.
+	ScanAssetType *int64 `json:"ScanAssetType,omitnil,omitempty" name:"ScanAssetType"`
+
+	// Scan items. port/poc/weakpass/webcontent/configrisk
+	ScanItem []*string `json:"ScanItem,omitnil,omitempty" name:"ScanItem"`
+
+	// 0: Periodic Task; 1: Scan Now; 2: Scheduled Scan; 3: Custom. If 0, 2, 3, ScanPlanContent is required.
+	ScanPlanType *int64 `json:"ScanPlanType,omitnil,omitempty" name:"ScanPlanType"`
+
+	// Task ID to be Modified
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Scanned Asset Information List
+	Assets []*TaskAssetObject `json:"Assets,omitnil,omitempty" name:"Assets"`
+
+	// Scan Plan Details
+	ScanPlanContent *string `json:"ScanPlanContent,omitnil,omitempty" name:"ScanPlanContent"`
+
+	// IP/Domain/URL Array
+	SelfDefiningAssets []*string `json:"SelfDefiningAssets,omitnil,omitempty" name:"SelfDefiningAssets"`
+
+	// Advanced configuration.
+	TaskAdvanceCFG *TaskAdvanceCFG `json:"TaskAdvanceCFG,omitnil,omitempty" name:"TaskAdvanceCFG"`
+
+	// Checkup Mode. 0: Standard Mode; 1: Quick Mode; 2: Advanced Mode. Standard Mode by default.
+	TaskMode *int64 `json:"TaskMode,omitnil,omitempty" name:"TaskMode"`
+
+	// Task complete callback webhook url.
+	FinishWebHook *string `json:"FinishWebHook,omitnil,omitempty" name:"FinishWebHook"`
+}
+
+func (r *ModifyRiskCenterScanTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRiskCenterScanTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskName")
+	delete(f, "ScanAssetType")
+	delete(f, "ScanItem")
+	delete(f, "ScanPlanType")
+	delete(f, "TaskId")
+	delete(f, "MemberId")
+	delete(f, "Assets")
+	delete(f, "ScanPlanContent")
+	delete(f, "SelfDefiningAssets")
+	delete(f, "TaskAdvanceCFG")
+	delete(f, "TaskMode")
+	delete(f, "FinishWebHook")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRiskCenterScanTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRiskCenterScanTaskResponseParams struct {
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// 0: Modification succeeded; others: Failed; -1: Unauthenticated assets exist.
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Unauthenticated Asset List
+	UnAuthAsset []*string `json:"UnAuthAsset,omitnil,omitempty" name:"UnAuthAsset"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyRiskCenterScanTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyRiskCenterScanTaskResponseParams `json:"Response"`
+}
+
+func (r *ModifyRiskCenterScanTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRiskCenterScanTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type NICAsset struct {
 	// appid
 	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
@@ -4856,6 +7807,20 @@ type OrganizationUserInfo struct {
 
 
 	JoinTypeInfo *string `json:"JoinTypeInfo,omitnil,omitempty" name:"JoinTypeInfo"`
+}
+
+type PortRiskAdvanceCFGParamItem struct {
+	// Port Collection, separated by commas.
+	PortSets *string `json:"PortSets,omitnil,omitempty" name:"PortSets"`
+
+	// Detection Item Type. 0-System-Defined; 1-User-Defined.
+	CheckType *int64 `json:"CheckType,omitnil,omitempty" name:"CheckType"`
+
+	// Detection item description
+	Detail *string `json:"Detail,omitnil,omitempty" name:"Detail"`
+
+	// Enable/Disable. 1-Enable; 0-Disable.
+	Enable *int64 `json:"Enable,omitnil,omitempty" name:"Enable"`
 }
 
 type PortViewPortRisk struct {
@@ -5309,6 +8274,102 @@ type ServerRiskSuggestion struct {
 	Body *string `json:"Body,omitnil,omitempty" name:"Body"`
 }
 
+type ServiceSupport struct {
+	// Product name.
+	// "cfw_waf_virtual", "cwp_detect", "cwp_defense", "cwp_fix"
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
+
+	// Total number of processed assets.
+	SupportHandledCount *int64 `json:"SupportHandledCount,omitnil,omitempty" name:"SupportHandledCount"`
+
+	// Total number of supported assets.
+	SupportTotalCount *int64 `json:"SupportTotalCount,omitnil,omitempty" name:"SupportTotalCount"`
+
+	// Whether the product is supported: 1 for supported; 0 for unsupported.
+	IsSupport *bool `json:"IsSupport,omitnil,omitempty" name:"IsSupport"`
+}
+
+type SourceIPAsset struct {
+	// id of the source IP.
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Source IP.
+	SourceIP *string `json:"SourceIP,omitnil,omitempty" name:"SourceIP"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Account associate APPID.
+	AppID *int64 `json:"AppID,omitnil,omitempty" name:"AppID"`
+
+	// IP region.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// API call method.
+	// -1: uncounted.
+	// 0: console invocation.
+	// 1:API
+	EventType *int64 `json:"EventType,omitnil,omitempty" name:"EventType"`
+
+	// IP type.
+	// 0: within the account (unremarked).
+	// 1: external accounts (unremarked).
+	// 2: within the account (remarked).
+	// 3: external account (remarked).
+	IPType *int64 `json:"IPType,omitnil,omitempty" name:"IPType"`
+
+	// Alarm information list.
+	AccessKeyAlarmList []*AccessKeyAlarmInfo `json:"AccessKeyAlarmList,omitnil,omitempty" name:"AccessKeyAlarmList"`
+
+	// ak information list.
+	AKInfo []*AKInfo `json:"AKInfo,omitnil,omitempty" name:"AKInfo"`
+
+	// Number of API calls.
+	ActionCount *int64 `json:"ActionCount,omitnil,omitempty" name:"ActionCount"`
+
+	// Last access Time
+	LastAccessTime *string `json:"LastAccessTime,omitnil,omitempty" name:"LastAccessTime"`
+
+	// IP associated instance ID. if an empty string, represents an asset not within the account.
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
+
+	// Associated instance name.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// Account associate Uin.
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Nickname.
+	Nickname *string `json:"Nickname,omitnil,omitempty" name:"Nickname"`
+
+	// Display status.
+	ShowStatus *bool `json:"ShowStatus,omitnil,omitempty" name:"ShowStatus"`
+
+	// ISP field.
+	ISP *string `json:"ISP,omitnil,omitempty" name:"ISP"`
+
+	// vpc information outside the account.
+	VpcInfo []*SourceIPVpcInfo `json:"VpcInfo,omitnil,omitempty" name:"VpcInfo"`
+
+	// Cloud type.
+	// 0 for tencent cloud.
+	CloudType *int64 `json:"CloudType,omitnil,omitempty" name:"CloudType"`
+}
+
+type SourceIPVpcInfo struct {
+	// Account name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// App ID of the VPC.
+	AppID *uint64 `json:"AppID,omitnil,omitempty" name:"AppID"`
+
+	// vpc id
+	VpcID *string `json:"VpcID,omitnil,omitempty" name:"VpcID"`
+
+	// vpc name.
+	VpcName *string `json:"VpcName,omitnil,omitempty" name:"VpcName"`
+}
+
 // Predefined struct for user
 type StopRiskCenterTaskRequestParams struct {
 	// List of task IDs
@@ -5503,6 +8564,9 @@ type Tags struct {
 }
 
 type TaskAdvanceCFG struct {
+	// Port Risk Advanced Configuration
+	PortRisk []*PortRiskAdvanceCFGParamItem `json:"PortRisk,omitnil,omitempty" name:"PortRisk"`
+
 	// Advanced vulnerability scan configuration
 	VulRisk []*TaskCenterVulRiskInputParam `json:"VulRisk,omitnil,omitempty" name:"VulRisk"`
 
@@ -5514,27 +8578,22 @@ type TaskAdvanceCFG struct {
 }
 
 type TaskAssetObject struct {
-	// Asset name
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Asset name.
 	AssetName *string `json:"AssetName,omitnil,omitempty" name:"AssetName"`
 
-	// 	Asset category
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Asset type.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// Asset sub-category
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Asset category.
 	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 
 	// IP, domain name, asset ID, database ID, and more
 	Asset *string `json:"Asset,omitnil,omitempty" name:"Asset"`
 
-	// Region
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Region.
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// The ID specific for an asset synched from another cloud platform
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Unique ID of Multi-Cloud Assets
 	Arn *string `json:"Arn,omitnil,omitempty" name:"Arn"`
 }
 
@@ -5645,6 +8704,331 @@ type TaskLogURL struct {
 	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
 }
 
+// Predefined struct for user
+type UpdateAccessKeyAlarmStatusRequestParams struct {
+	// Status  0: unprocessed 1: fixed 2: ignored.
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Alarm ID list.
+	AlarmIDList []*int64 `json:"AlarmIDList,omitnil,omitempty" name:"AlarmIDList"`
+
+	// Risk ID list.
+	RiskIDList []*int64 `json:"RiskIDList,omitnil,omitempty" name:"RiskIDList"`
+}
+
+type UpdateAccessKeyAlarmStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Status  0: unprocessed 1: fixed 2: ignored.
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Alarm ID list.
+	AlarmIDList []*int64 `json:"AlarmIDList,omitnil,omitempty" name:"AlarmIDList"`
+
+	// Risk ID list.
+	RiskIDList []*int64 `json:"RiskIDList,omitnil,omitempty" name:"RiskIDList"`
+}
+
+func (r *UpdateAccessKeyAlarmStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateAccessKeyAlarmStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Status")
+	delete(f, "MemberId")
+	delete(f, "AlarmIDList")
+	delete(f, "RiskIDList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateAccessKeyAlarmStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateAccessKeyAlarmStatusResponseParams struct {
+	// 0: Success; 1: Failure
+	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// Error message
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UpdateAccessKeyAlarmStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateAccessKeyAlarmStatusResponseParams `json:"Response"`
+}
+
+func (r *UpdateAccessKeyAlarmStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateAccessKeyAlarmStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateAccessKeyRemarkRequestParams struct {
+	// Remarks
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Source IP name.
+	SourceIPList []*string `json:"SourceIPList,omitnil,omitempty" name:"SourceIPList"`
+
+	// ak name.
+	AccessKeyList []*string `json:"AccessKeyList,omitnil,omitempty" name:"AccessKeyList"`
+
+	// ID of the source IP.
+	SourceIPIDList []*uint64 `json:"SourceIPIDList,omitnil,omitempty" name:"SourceIPIDList"`
+
+	// AK ID.
+	AccessKeyIDList []*uint64 `json:"AccessKeyIDList,omitnil,omitempty" name:"AccessKeyIDList"`
+}
+
+type UpdateAccessKeyRemarkRequest struct {
+	*tchttp.BaseRequest
+	
+	// Remarks
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// Source IP name.
+	SourceIPList []*string `json:"SourceIPList,omitnil,omitempty" name:"SourceIPList"`
+
+	// ak name.
+	AccessKeyList []*string `json:"AccessKeyList,omitnil,omitempty" name:"AccessKeyList"`
+
+	// ID of the source IP.
+	SourceIPIDList []*uint64 `json:"SourceIPIDList,omitnil,omitempty" name:"SourceIPIDList"`
+
+	// AK ID.
+	AccessKeyIDList []*uint64 `json:"AccessKeyIDList,omitnil,omitempty" name:"AccessKeyIDList"`
+}
+
+func (r *UpdateAccessKeyRemarkRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateAccessKeyRemarkRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Remark")
+	delete(f, "MemberId")
+	delete(f, "SourceIPList")
+	delete(f, "AccessKeyList")
+	delete(f, "SourceIPIDList")
+	delete(f, "AccessKeyIDList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateAccessKeyRemarkRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateAccessKeyRemarkResponseParams struct {
+	// 0: success; 1: failure.
+	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// Error message
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UpdateAccessKeyRemarkResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateAccessKeyRemarkResponseParams `json:"Response"`
+}
+
+func (r *UpdateAccessKeyRemarkResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateAccessKeyRemarkResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UserCallRecord struct {
+	// Source IP of the call.
+	SourceIP *string `json:"SourceIP,omitnil,omitempty" name:"SourceIP"`
+
+	// Invocation type.
+	// 0: console invocation.
+	// 1:API
+	EventType *int64 `json:"EventType,omitnil,omitempty" name:"EventType"`
+
+	// Number of calls.
+	CallCount *int64 `json:"CallCount,omitnil,omitempty" name:"CallCount"`
+
+	// Error code.
+	// 0: Successful
+	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// First time call time.
+	FirstCallTime *string `json:"FirstCallTime,omitnil,omitempty" name:"FirstCallTime"`
+
+	// Call time.
+	LastCallTime *string `json:"LastCallTime,omitnil,omitempty" name:"LastCallTime"`
+
+	// Source IP of the call remark.
+	SourceIPRemark *string `json:"SourceIPRemark,omitnil,omitempty" name:"SourceIPRemark"`
+
+	// Source IP region of the call.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// User/Role name.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Aggregate date.
+	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
+
+	// appid
+	AppID *int64 `json:"AppID,omitnil,omitempty" name:"AppID"`
+
+	// Carrier.
+	ISP *string `json:"ISP,omitnil,omitempty" name:"ISP"`
+}
+
+type VULBaseInfo struct {
+	// Risk level.
+	// High - high risk, middle - medium risk, low - low risk, info - Note.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Component.
+	Component *string `json:"Component,omitnil,omitempty" name:"Component"`
+
+	// Release date.
+	PublishTime *string `json:"PublishTime,omitnil,omitempty" name:"PublishTime"`
+
+	// Last scan time
+	LastScanTime *string `json:"LastScanTime,omitnil,omitempty" name:"LastScanTime"`
+
+	// Number of Affected Assets
+	AffectAssetCount *uint64 `json:"AffectAssetCount,omitnil,omitempty" name:"AffectAssetCount"`
+
+	// Risk ID
+	RiskId *string `json:"RiskId,omitnil,omitempty" name:"RiskId"`
+
+	// Vulnerability type.
+	VULType *string `json:"VULType,omitnil,omitempty" name:"VULType"`
+
+	// Vulnerability name
+	VULName *string `json:"VULName,omitnil,omitempty" name:"VULName"`
+
+	// cve
+	CVE *string `json:"CVE,omitnil,omitempty" name:"CVE"`
+
+	// Description
+	Describe *string `json:"Describe,omitnil,omitempty" name:"Describe"`
+
+	// Vulnerability Payload
+	Payload *string `json:"Payload,omitnil,omitempty" name:"Payload"`
+
+	// Vulnerability impact component.
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
+
+	// Technology reference.
+	References *string `json:"References,omitnil,omitempty" name:"References"`
+
+	// Vulnerability impact version.
+	AppVersion *string `json:"AppVersion,omitnil,omitempty" name:"AppVersion"`
+
+	// Risks.
+	VULURL *string `json:"VULURL,omitnil,omitempty" name:"VULURL"`
+
+	// User Nickname
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Nick *string `json:"Nick,omitnil,omitempty" name:"Nick"`
+
+	// User appid.
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// User UIN
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Fixing suggestion
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Fix *string `json:"Fix,omitnil,omitempty" name:"Fix"`
+
+	// Emergency Vulnerability Type. 1-Emergency Vulnerability; 0-Non-emergency Vulnerability.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EMGCVulType *int64 `json:"EMGCVulType,omitnil,omitempty" name:"EMGCVulType"`
+
+	// CVSS score
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CVSS *float64 `json:"CVSS,omitnil,omitempty" name:"CVSS"`
+
+	// Attack intensity.
+	// 0/1/2/3 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AttackHeat *int64 `json:"AttackHeat,omitnil,omitempty" name:"AttackHeat"`
+
+	// Detection status 0 unscanned 1 scan in progress 2 scan complete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ScanStatus *int64 `json:"ScanStatus,omitnil,omitempty" name:"ScanStatus"`
+
+	// 1/0 whether compulsory.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsSuggest *int64 `json:"IsSuggest,omitnil,omitempty" name:"IsSuggest"`
+
+	// Tag.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VulTag []*string `json:"VulTag,omitnil,omitempty" name:"VulTag"`
+
+	// Support products: "cfw_waf_virtual", "cwp_detect", "cwp_defense", "cwp_fix" (comma-separated).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SupportProduct *string `json:"SupportProduct,omitnil,omitempty" name:"SupportProduct"`
+
+	// Vulnerability detection task id.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Primary key
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Index *string `json:"Index,omitnil,omitempty" name:"Index"`
+
+	// Vulnerability id old version.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PcmgrID *string `json:"PcmgrID,omitnil,omitempty" name:"PcmgrID"`
+
+	// Vulnerability id new version.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TvdID *string `json:"TvdID,omitnil,omitempty" name:"TvdID"`
+}
+
 type VULRiskAdvanceCFGList struct {
 	// Risk ID
 	RiskId *string `json:"RiskId,omitnil,omitempty" name:"RiskId"`
@@ -5694,6 +9078,20 @@ type VULRiskAdvanceCFGList struct {
 	// Affected components
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	ImpactComponent *string `json:"ImpactComponent,omitnil,omitempty" name:"ImpactComponent"`
+}
+
+type VULRiskInfo struct {
+	// Fixing suggestion
+	Fix *string `json:"Fix,omitnil,omitempty" name:"Fix"`
+
+	// Technology reference/reference link.
+	References *string `json:"References,omitnil,omitempty" name:"References"`
+
+	// Vulnerability description
+	Describe *string `json:"Describe,omitnil,omitempty" name:"Describe"`
+
+	// Affected component.
+	ImpactComponent []*VulImpactComponentInfo `json:"ImpactComponent,omitnil,omitempty" name:"ImpactComponent"`
 }
 
 type VULViewVULRisk struct {
@@ -5774,6 +9172,104 @@ type VULViewVULRisk struct {
 	EMGCVulType *int64 `json:"EMGCVulType,omitnil,omitempty" name:"EMGCVulType"`
 }
 
+type VULViewVULRiskData struct {
+	// Port.
+	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// Impact assets.
+	NoHandleCount *int64 `json:"NoHandleCount,omitnil,omitempty" name:"NoHandleCount"`
+
+	// Risk level: low - low risk, high - high risk, middle - medium risk, info - note, extreme - critical.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Component.
+	Component *string `json:"Component,omitnil,omitempty" name:"Component"`
+
+	// Latest Recognition Time
+	RecentTime *string `json:"RecentTime,omitnil,omitempty" name:"RecentTime"`
+
+	// First Recognition Time
+	FirstTime *string `json:"FirstTime,omitnil,omitempty" name:"FirstTime"`
+
+	// Number of Affected Assets
+	AffectAssetCount *uint64 `json:"AffectAssetCount,omitnil,omitempty" name:"AffectAssetCount"`
+
+	// Risk ID
+	RiskId *string `json:"RiskId,omitnil,omitempty" name:"RiskId"`
+
+	// Scan Source. See API Return Enumeration Type for details.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Front-end Index
+	Index *string `json:"Index,omitnil,omitempty" name:"Index"`
+
+	// Vulnerability type.
+	VULType *string `json:"VULType,omitnil,omitempty" name:"VULType"`
+
+	// Vulnerability name
+	VULName *string `json:"VULName,omitnil,omitempty" name:"VULName"`
+
+	// cve
+	CVE *string `json:"CVE,omitnil,omitempty" name:"CVE"`
+
+	// Vulnerability Payload
+	Payload *string `json:"Payload,omitnil,omitempty" name:"Payload"`
+
+	// Vulnerability impact component.
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
+
+	// Vulnerability impact version.
+	AppVersion *string `json:"AppVersion,omitnil,omitempty" name:"AppVersion"`
+
+	// Risks.
+	VULURL *string `json:"VULURL,omitnil,omitempty" name:"VULURL"`
+
+	// User Nickname
+	Nick *string `json:"Nick,omitnil,omitempty" name:"Nick"`
+
+	// User appid.
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// User UIN
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Emergency Vulnerability Type. 1-Emergency Vulnerability; 0-Non-emergency Vulnerability.
+	EMGCVulType *int64 `json:"EMGCVulType,omitnil,omitempty" name:"EMGCVulType"`
+
+	// CVSS score
+	CVSS *float64 `json:"CVSS,omitnil,omitempty" name:"CVSS"`
+
+	// PCMGRId
+	PCMGRId *string `json:"PCMGRId,omitnil,omitempty" name:"PCMGRId"`
+
+	// Vulnerability tag. during searching, emergency mandatory parameter VulTag=SuggestRepair/EMGCVul.
+	VulTag []*string `json:"VulTag,omitnil,omitempty" name:"VulTag"`
+
+	// Vulnerability disclosure time.
+	DisclosureTime *string `json:"DisclosureTime,omitnil,omitempty" name:"DisclosureTime"`
+
+	// Attack intensity.
+	AttackHeat *uint64 `json:"AttackHeat,omitnil,omitempty" name:"AttackHeat"`
+
+	// Whether a mandatory vulnerability: 1 - yes; 0 - no.
+	IsSuggest *int64 `json:"IsSuggest,omitnil,omitempty" name:"IsSuggest"`
+
+	// Disposal task id.
+	HandleTaskId *string `json:"HandleTaskId,omitnil,omitempty" name:"HandleTaskId"`
+
+	// Engine source.
+	EngineSource *string `json:"EngineSource,omitnil,omitempty" name:"EngineSource"`
+
+	// New vulnerability risk id.
+	VulRiskId *string `json:"VulRiskId,omitnil,omitempty" name:"VulRiskId"`
+
+	// New version vulnerability id.
+	TvdID *string `json:"TvdID,omitnil,omitempty" name:"TvdID"`
+
+	// Is it possible to perform a one-click physical examination. valid values: 1-yes, 0-not allowed.
+	IsOneClick *uint64 `json:"IsOneClick,omitnil,omitempty" name:"IsOneClick"`
+}
+
 type Vpc struct {
 	// Subnet (32-bit mask)
 	Subnet *uint64 `json:"Subnet,omitnil,omitempty" name:"Subnet"`
@@ -5823,6 +9319,82 @@ type Vpc struct {
 	// Whether it's a critical asset. `1`: Yes; `2`: No
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	IsCore *uint64 `json:"IsCore,omitnil,omitempty" name:"IsCore"`
+}
+
+type VulImpactComponentInfo struct {
+	// Component name
+	Component *string `json:"Component,omitnil,omitempty" name:"Component"`
+
+	// Version name.
+	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
+}
+
+type VulRiskItem struct {
+	// Cloud account ID.
+	CloudAccountID *string `json:"CloudAccountID,omitnil,omitempty" name:"CloudAccountID"`
+
+	// Instance ID.
+	AssetID *string `json:"AssetID,omitnil,omitempty" name:"AssetID"`
+
+	// Instance status
+	InstanceStatus *string `json:"InstanceStatus,omitnil,omitempty" name:"InstanceStatus"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// Creation time.
+	// 
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Update time
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Vulnerability name
+	VulName *string `json:"VulName,omitnil,omitempty" name:"VulName"`
+
+	// Vulnerability type.
+	VulCategory *string `json:"VulCategory,omitnil,omitempty" name:"VulCategory"`
+
+	// Vulnerability level
+	VulLevel *string `json:"VulLevel,omitnil,omitempty" name:"VulLevel"`
+
+	// CVE id.
+	CveID *string `json:"CveID,omitnil,omitempty" name:"CveID"`
+
+	// Vulnerability description
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Container ID.
+	ContainerID *string `json:"ContainerID,omitnil,omitempty" name:"ContainerID"`
+
+	// Vulnerability risk remediation recommendation.
+	Fix *string `json:"Fix,omitnil,omitempty" name:"Fix"`
+
+	// Linux vulnerability.
+	VulCategoryName *string `json:"VulCategoryName,omitnil,omitempty" name:"VulCategoryName"`
+
+	// Vulnerability level name.
+	VulLevelName *string `json:"VulLevelName,omitnil,omitempty" name:"VulLevelName"`
+
+	// Instance status chinese information.
+	InstanceStatusName *string `json:"InstanceStatusName,omitnil,omitempty" name:"InstanceStatusName"`
+
+	// Tenant ID.
+	AppID *uint64 `json:"AppID,omitnil,omitempty" name:"AppID"`
+}
+
+type VulTrend struct {
+	// Number of affected assets.
+	AffectAssetCount *int64 `json:"AffectAssetCount,omitnil,omitempty" name:"AffectAssetCount"`
+
+	// Number of users affected.
+	AffectUserCount *int64 `json:"AffectUserCount,omitnil,omitempty" name:"AffectUserCount"`
+
+	// Number of attacks.
+	AttackCount *int64 `json:"AttackCount,omitnil,omitempty" name:"AttackCount"`
+
+	// Time
+	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
 }
 
 type WebsiteRisk struct {

@@ -753,13 +753,13 @@ func (r *CreateDisasterRecoverGroupResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateImageRequestParams struct {
-	// Image name
+	// Image name.
 	ImageName *string `json:"ImageName,omitnil,omitempty" name:"ImageName"`
 
 	// ID of the instance from which an image will be created. This parameter is required when using instance to create an image.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Image description
+	// Image description.
 	ImageDescription *string `json:"ImageDescription,omitnil,omitempty" name:"ImageDescription"`
 
 	// Whether to perform forced power-off operation to create an image.
@@ -791,13 +791,13 @@ type CreateImageRequestParams struct {
 type CreateImageRequest struct {
 	*tchttp.BaseRequest
 	
-	// Image name
+	// Image name.
 	ImageName *string `json:"ImageName,omitnil,omitempty" name:"ImageName"`
 
 	// ID of the instance from which an image will be created. This parameter is required when using instance to create an image.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Image description
+	// Image description.
 	ImageDescription *string `json:"ImageDescription,omitnil,omitempty" name:"ImageDescription"`
 
 	// Whether to perform forced power-off operation to create an image.

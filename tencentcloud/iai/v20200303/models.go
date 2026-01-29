@@ -1595,7 +1595,7 @@ type DetectLiveFaceAccurateResponseParams struct {
 	// Liveness scoring.
 	// -Value range: [0,100].
 	// -Determines whether it is a rephotograph based on the liveness score and threshold range.
-	// -Current threshold can be divided into [5,10,40,70,90]. among them, the recommended threshold is 40.
+	// -Current threshold can be divided into [5,10,40,70,90]. among them, the recommended threshold is  40.
 	Score *float64 `json:"Score,omitnil,omitempty" name:"Score"`
 
 	// Algorithm model version used for face recognition.
