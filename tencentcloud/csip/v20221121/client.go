@@ -2851,7 +2851,7 @@ func NewDescribeOtherCloudAssetsResponse() (response *DescribeOtherCloudAssetsRe
 }
 
 // DescribeOtherCloudAssets
-// Asset list.
+// Gets the list of other cloud assets
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2877,7 +2877,7 @@ func (c *Client) DescribeOtherCloudAssets(request *DescribeOtherCloudAssetsReque
 }
 
 // DescribeOtherCloudAssets
-// Asset list.
+// Gets the list of other cloud assets
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3079,6 +3079,90 @@ func (c *Client) DescribeRepositoryImageAssetsWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewDescribeRepositoryImageAssetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRiskCallRecordRequest() (request *DescribeRiskCallRecordRequest) {
+    request = &DescribeRiskCallRecordRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeRiskCallRecord")
+    
+    
+    return
+}
+
+func NewDescribeRiskCallRecordResponse() (response *DescribeRiskCallRecordResponse) {
+    response = &DescribeRiskCallRecordResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRiskCallRecord
+// Retrieve risk call record list.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeRiskCallRecord(request *DescribeRiskCallRecordRequest) (response *DescribeRiskCallRecordResponse, err error) {
+    return c.DescribeRiskCallRecordWithContext(context.Background(), request)
+}
+
+// DescribeRiskCallRecord
+// Retrieve risk call record list.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeRiskCallRecordWithContext(ctx context.Context, request *DescribeRiskCallRecordRequest) (response *DescribeRiskCallRecordResponse, err error) {
+    if request == nil {
+        request = NewDescribeRiskCallRecordRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeRiskCallRecord")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRiskCallRecord require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRiskCallRecordResponse()
     err = c.Send(request, response)
     return
 }
@@ -5263,7 +5347,7 @@ func NewModifyOrganizationAccountStatusResponse() (response *ModifyOrganizationA
 }
 
 // ModifyOrganizationAccountStatus
-// Modify Group Account Status
+// Modify group account status
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -5289,7 +5373,7 @@ func (c *Client) ModifyOrganizationAccountStatus(request *ModifyOrganizationAcco
 }
 
 // ModifyOrganizationAccountStatus
-// Modify Group Account Status
+// Modify group account status
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"

@@ -369,7 +369,7 @@ func NewCreateAigcImageTaskResponse() (response *CreateAigcImageTaskResponse) {
 }
 
 // CreateAigcImageTask
-// This API is used to create an AIGC image generation task.
+// This API is used to create AIGC image generation tasks.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -396,7 +396,7 @@ func (c *Client) CreateAigcImageTask(request *CreateAigcImageTaskRequest) (respo
 }
 
 // CreateAigcImageTask
-// This API is used to create an AIGC image generation task.
+// This API is used to create AIGC image generation tasks.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -455,7 +455,7 @@ func NewCreateAigcVideoTaskResponse() (response *CreateAigcVideoTaskResponse) {
 }
 
 // CreateAigcVideoTask
-// This API is used to create an AIGC video generation task.
+// This API is used to create AI video generation tasks.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -482,7 +482,7 @@ func (c *Client) CreateAigcVideoTask(request *CreateAigcVideoTaskRequest) (respo
 }
 
 // CreateAigcVideoTask
-// This API is used to create an AIGC video generation task.
+// This API is used to create AI video generation tasks.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -3221,7 +3221,7 @@ func NewDescribeAigcImageTaskResponse() (response *DescribeAigcImageTaskResponse
 }
 
 // DescribeAigcImageTask
-// This API is used to query the details of the AIGC image task execution status and results by task ID (tasks submitted within the last 7 days can be queried).
+// This API is used to query the progress of AIGC image generation tasks and obtain the generation results.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -3235,7 +3235,7 @@ func (c *Client) DescribeAigcImageTask(request *DescribeAigcImageTaskRequest) (r
 }
 
 // DescribeAigcImageTask
-// This API is used to query the details of the AIGC image task execution status and results by task ID (tasks submitted within the last 7 days can be queried).
+// This API is used to query the progress of AIGC image generation tasks and obtain the generation results.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -3281,7 +3281,7 @@ func NewDescribeAigcVideoTaskResponse() (response *DescribeAigcVideoTaskResponse
 }
 
 // DescribeAigcVideoTask
-// This API is used to query the details of the AIGC video task execution status and results by task ID (tasks submitted within the last 7 days can be queried).
+// This API is used to query the progress of AIGC video generation tasks and obtain the generation results.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -3295,7 +3295,7 @@ func (c *Client) DescribeAigcVideoTask(request *DescribeAigcVideoTaskRequest) (r
 }
 
 // DescribeAigcVideoTask
-// This API is used to query the details of the AIGC video task execution status and results by task ID (tasks submitted within the last 7 days can be queried).
+// This API is used to query the progress of AIGC video generation tasks and obtain the generation results.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -7187,6 +7187,68 @@ func (c *Client) ProcessMediaWithContext(ctx context.Context, request *ProcessMe
     request.SetContext(ctx)
     
     response = NewProcessMediaResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRecognizeAudioRequest() (request *RecognizeAudioRequest) {
+    request = &RecognizeAudioRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "RecognizeAudio")
+    
+    
+    return
+}
+
+func NewRecognizeAudioResponse() (response *RecognizeAudioResponse) {
+    response = &RecognizeAudioResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RecognizeAudio
+// This API is used to return the speech recognition results synchronously.
+//
+// error code that may be returned:
+//  INTERNALERROR_RECOGNITIONERROR = "InternalError.RecognitionError"
+//  INVALIDPARAMETERVALUE_AUDIODATA = "InvalidParameterValue.AudioData"
+//  INVALIDPARAMETERVALUE_AUDIODATATOOLONG = "InvalidParameterValue.AudioDataTooLong"
+//  INVALIDPARAMETERVALUE_AUDIOFORMAT = "InvalidParameterValue.AudioFormat"
+//  INVALIDPARAMETERVALUE_SAMPLERATE = "InvalidParameterValue.SampleRate"
+//  INVALIDPARAMETERVALUE_SOURCELANGUAGE = "InvalidParameterValue.SourceLanguage"
+//  RESOURCENOTFOUND_USERUNREGISTER = "ResourceNotFound.UserUnregister"
+func (c *Client) RecognizeAudio(request *RecognizeAudioRequest) (response *RecognizeAudioResponse, err error) {
+    return c.RecognizeAudioWithContext(context.Background(), request)
+}
+
+// RecognizeAudio
+// This API is used to return the speech recognition results synchronously.
+//
+// error code that may be returned:
+//  INTERNALERROR_RECOGNITIONERROR = "InternalError.RecognitionError"
+//  INVALIDPARAMETERVALUE_AUDIODATA = "InvalidParameterValue.AudioData"
+//  INVALIDPARAMETERVALUE_AUDIODATATOOLONG = "InvalidParameterValue.AudioDataTooLong"
+//  INVALIDPARAMETERVALUE_AUDIOFORMAT = "InvalidParameterValue.AudioFormat"
+//  INVALIDPARAMETERVALUE_SAMPLERATE = "InvalidParameterValue.SampleRate"
+//  INVALIDPARAMETERVALUE_SOURCELANGUAGE = "InvalidParameterValue.SourceLanguage"
+//  RESOURCENOTFOUND_USERUNREGISTER = "ResourceNotFound.UserUnregister"
+func (c *Client) RecognizeAudioWithContext(ctx context.Context, request *RecognizeAudioRequest) (response *RecognizeAudioResponse, err error) {
+    if request == nil {
+        request = NewRecognizeAudioRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "RecognizeAudio")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RecognizeAudio require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRecognizeAudioResponse()
     err = c.Send(request, response)
     return
 }
