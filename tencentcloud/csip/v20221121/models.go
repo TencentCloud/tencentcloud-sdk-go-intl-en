@@ -4806,6 +4806,9 @@ func (r *DescribeRiskCallRecordResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeRiskCenterAssetViewCFGRiskListRequestParams struct {
+	// Group account member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
 	// Filter conditions
 	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
 
@@ -4816,6 +4819,9 @@ type DescribeRiskCenterAssetViewCFGRiskListRequestParams struct {
 type DescribeRiskCenterAssetViewCFGRiskListRequest struct {
 	*tchttp.BaseRequest
 	
+	// Group account member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
 	// Filter conditions
 	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
 
@@ -4835,6 +4841,7 @@ func (r *DescribeRiskCenterAssetViewCFGRiskListRequest) FromJsonString(s string)
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "MemberId")
 	delete(f, "Filter")
 	delete(f, "Tags")
 	if len(f) > 0 {

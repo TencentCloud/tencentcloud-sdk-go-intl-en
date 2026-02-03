@@ -3642,14 +3642,14 @@ type QueryDispatchInputInfo struct {
 
 // Predefined struct for user
 type QueryInputStreamStateRequestParams struct {
-	// The StreamLive input ID.
+	// The StreamLive input ID.Currently, only RTMP_PUSH and RTMPS_PUSH are supported
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
 type QueryInputStreamStateRequest struct {
 	*tchttp.BaseRequest
 	
-	// The StreamLive input ID.
+	// The StreamLive input ID.Currently, only RTMP_PUSH and RTMPS_PUSH are supported
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 }
 

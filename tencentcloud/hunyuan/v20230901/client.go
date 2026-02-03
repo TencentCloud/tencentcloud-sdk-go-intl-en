@@ -289,6 +289,80 @@ func (c *Client) Describe3DSmartTopologyJobWithContext(ctx context.Context, requ
     return
 }
 
+func NewDescribeHunyuanTo3DUVJobRequest() (request *DescribeHunyuanTo3DUVJobRequest) {
+    request = &DescribeHunyuanTo3DUVJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("hunyuan", APIVersion, "DescribeHunyuanTo3DUVJob")
+    
+    
+    return
+}
+
+func NewDescribeHunyuanTo3DUVJobResponse() (response *DescribeHunyuanTo3DUVJobResponse) {
+    response = &DescribeHunyuanTo3DUVJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeHunyuanTo3DUVJob
+// Query component splitting tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) DescribeHunyuanTo3DUVJob(request *DescribeHunyuanTo3DUVJobRequest) (response *DescribeHunyuanTo3DUVJobResponse, err error) {
+    return c.DescribeHunyuanTo3DUVJobWithContext(context.Background(), request)
+}
+
+// DescribeHunyuanTo3DUVJob
+// Query component splitting tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) DescribeHunyuanTo3DUVJobWithContext(ctx context.Context, request *DescribeHunyuanTo3DUVJobRequest) (response *DescribeHunyuanTo3DUVJobResponse, err error) {
+    if request == nil {
+        request = NewDescribeHunyuanTo3DUVJobRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "hunyuan", APIVersion, "DescribeHunyuanTo3DUVJob")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeHunyuanTo3DUVJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeHunyuanTo3DUVJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewQueryHunyuan3DPartJobRequest() (request *QueryHunyuan3DPartJobRequest) {
     request = &QueryHunyuan3DPartJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -515,6 +589,80 @@ func (c *Client) QueryHunyuanTo3DRapidJobWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewQueryHunyuanTo3DRapidJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewQueryHunyuanTo3DTextureEditJobRequest() (request *QueryHunyuanTo3DTextureEditJobRequest) {
+    request = &QueryHunyuanTo3DTextureEditJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("hunyuan", APIVersion, "QueryHunyuanTo3DTextureEditJob")
+    
+    
+    return
+}
+
+func NewQueryHunyuanTo3DTextureEditJobResponse() (response *QueryHunyuanTo3DTextureEditJobResponse) {
+    response = &QueryHunyuanTo3DTextureEditJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// QueryHunyuanTo3DTextureEditJob
+// Query 3D texture edit tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) QueryHunyuanTo3DTextureEditJob(request *QueryHunyuanTo3DTextureEditJobRequest) (response *QueryHunyuanTo3DTextureEditJobResponse, err error) {
+    return c.QueryHunyuanTo3DTextureEditJobWithContext(context.Background(), request)
+}
+
+// QueryHunyuanTo3DTextureEditJob
+// Query 3D texture edit tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) QueryHunyuanTo3DTextureEditJobWithContext(ctx context.Context, request *QueryHunyuanTo3DTextureEditJobRequest) (response *QueryHunyuanTo3DTextureEditJobResponse, err error) {
+    if request == nil {
+        request = NewQueryHunyuanTo3DTextureEditJobRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "hunyuan", APIVersion, "QueryHunyuanTo3DTextureEditJob")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryHunyuanTo3DTextureEditJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryHunyuanTo3DTextureEditJobResponse()
     err = c.Send(request, response)
     return
 }
@@ -823,6 +971,154 @@ func (c *Client) SubmitHunyuanTo3DRapidJobWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewSubmitHunyuanTo3DRapidJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSubmitHunyuanTo3DTextureEditJobRequest() (request *SubmitHunyuanTo3DTextureEditJobRequest) {
+    request = &SubmitHunyuanTo3DTextureEditJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("hunyuan", APIVersion, "SubmitHunyuanTo3DTextureEditJob")
+    
+    
+    return
+}
+
+func NewSubmitHunyuanTo3DTextureEditJobResponse() (response *SubmitHunyuanTo3DTextureEditJobResponse) {
+    response = &SubmitHunyuanTo3DTextureEditJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SubmitHunyuanTo3DTextureEditJob
+// After inputting the 3D model, perform 3D model texture redrawing based on semantics or images.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) SubmitHunyuanTo3DTextureEditJob(request *SubmitHunyuanTo3DTextureEditJobRequest) (response *SubmitHunyuanTo3DTextureEditJobResponse, err error) {
+    return c.SubmitHunyuanTo3DTextureEditJobWithContext(context.Background(), request)
+}
+
+// SubmitHunyuanTo3DTextureEditJob
+// After inputting the 3D model, perform 3D model texture redrawing based on semantics or images.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) SubmitHunyuanTo3DTextureEditJobWithContext(ctx context.Context, request *SubmitHunyuanTo3DTextureEditJobRequest) (response *SubmitHunyuanTo3DTextureEditJobResponse, err error) {
+    if request == nil {
+        request = NewSubmitHunyuanTo3DTextureEditJobRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "hunyuan", APIVersion, "SubmitHunyuanTo3DTextureEditJob")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SubmitHunyuanTo3DTextureEditJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSubmitHunyuanTo3DTextureEditJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSubmitHunyuanTo3DUVJobRequest() (request *SubmitHunyuanTo3DUVJobRequest) {
+    request = &SubmitHunyuanTo3DUVJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("hunyuan", APIVersion, "SubmitHunyuanTo3DUVJob")
+    
+    
+    return
+}
+
+func NewSubmitHunyuanTo3DUVJobResponse() (response *SubmitHunyuanTo3DUVJobResponse) {
+    response = &SubmitHunyuanTo3DUVJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SubmitHunyuanTo3DUVJob
+// After inputting the model, UV unfolding can be performed based on the model texture to output the corresponding UV texture
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) SubmitHunyuanTo3DUVJob(request *SubmitHunyuanTo3DUVJobRequest) (response *SubmitHunyuanTo3DUVJobResponse, err error) {
+    return c.SubmitHunyuanTo3DUVJobWithContext(context.Background(), request)
+}
+
+// SubmitHunyuanTo3DUVJob
+// After inputting the model, UV unfolding can be performed based on the model texture to output the corresponding UV texture
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) SubmitHunyuanTo3DUVJobWithContext(ctx context.Context, request *SubmitHunyuanTo3DUVJobRequest) (response *SubmitHunyuanTo3DUVJobResponse, err error) {
+    if request == nil {
+        request = NewSubmitHunyuanTo3DUVJobRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "hunyuan", APIVersion, "SubmitHunyuanTo3DUVJob")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SubmitHunyuanTo3DUVJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSubmitHunyuanTo3DUVJobResponse()
     err = c.Send(request, response)
     return
 }
