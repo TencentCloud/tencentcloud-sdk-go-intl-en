@@ -288,6 +288,8 @@ type ChannelInfo struct {
 
 	// Cache configuration
 	// Note: this field may return `null`, indicating that no valid value was found.
+	//
+	// Deprecated: CacheInfo is deprecated.
 	CacheInfo *CacheInfo `json:"CacheInfo,omitnil,omitempty" name:"CacheInfo"`
 }
 
@@ -459,6 +461,8 @@ type CreateStreamPackageChannelRequestParams struct {
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
 	// Cache configuration.
+	//
+	// Deprecated: CacheInfo is deprecated.
 	CacheInfo *CacheInfo `json:"CacheInfo,omitnil,omitempty" name:"CacheInfo"`
 }
 
@@ -1760,14 +1764,14 @@ func (r *DeleteStreamPackageSourceLocationResponse) FromJsonString(s string) err
 
 // Predefined struct for user
 type DeleteStreamPackageSourceRequestParams struct {
-	// SourceLocation Id.
+	// Source Id.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
 type DeleteStreamPackageSourceRequest struct {
 	*tchttp.BaseRequest
 	
-	// SourceLocation Id.
+	// Source Id.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
@@ -3975,6 +3979,8 @@ type ModifyStreamPackageChannelRequestParams struct {
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
 	// Cache configuration.
+	//
+	// Deprecated: CacheInfo is deprecated.
 	CacheInfo *CacheInfo `json:"CacheInfo,omitnil,omitempty" name:"CacheInfo"`
 }
 
