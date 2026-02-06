@@ -1180,7 +1180,7 @@ func (r *SubmitHunyuanTo3DRapidJobResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type SubmitHunyuanTo3DTextureEditJobRequestParams struct {
 	// File URL of the 3D model file that requires texture edit
-	// Supported formats: FBX, OBJ, GLB
+	// Supported formats: FBX
 	// 3D model limit: less than 100000 faces
 	File3D *InputFile3D `json:"File3D,omitnil,omitempty" name:"File3D"`
 
@@ -1205,7 +1205,7 @@ type SubmitHunyuanTo3DTextureEditJobRequest struct {
 	*tchttp.BaseRequest
 	
 	// File URL of the 3D model file that requires texture edit
-	// Supported formats: FBX, OBJ, GLB
+	// Supported formats: FBX
 	// 3D model limit: less than 100000 faces
 	File3D *InputFile3D `json:"File3D,omitnil,omitempty" name:"File3D"`
 
