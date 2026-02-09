@@ -5688,8 +5688,9 @@ type RecognizeThaiPinkCardResponseParams struct {
 	// Ref number
 	RefNumber *string `json:"RefNumber,omitnil,omitempty" name:"RefNumber"`
 
-	// Field confidence:
-	//  { "ID": { "Confidence": 0.9999 }, "ThaiName": { "Confidence": 0.9996 } }
+	// This field is deprecated and will always return "1". Usage is not recommended.
+	//
+	// Deprecated: AdvancedInfo is deprecated.
 	AdvancedInfo *string `json:"AdvancedInfo,omitnil,omitempty" name:"AdvancedInfo"`
 
 	// Identity photo
