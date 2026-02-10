@@ -2288,11 +2288,12 @@ type SendEmailRequestParams struct {
 	// Sender'S email address. when not using an alias, enter the sender's email address directly, for example: noreply@mail.qcloud.com. to enter a sender alias, follow this format (note that a space must separate the alias and email address): alias+space+<email address>. the alias cannot contain a colon (:).
 	FromEmailAddress *string `json:"FromEmailAddress,omitnil,omitempty" name:"FromEmailAddress"`
 
-	// Recipient email address, supports up to 50 recipients in mass sending. note: the email content displays all recipient addresses. for non-mass sending, call the API multiple times to send.
-	Destination []*string `json:"Destination,omitnil,omitempty" name:"Destination"`
-
 	// Email subject.
 	Subject *string `json:"Subject,omitnil,omitempty" name:"Subject"`
+
+	// Recipient email address, supports up to 50 recipients for mass sending. note: the email content will display all recipient addresses. for non-mass sending, call the API multiple times to send.
+	// Specifies that at least one of the Destination, Cc, or Bcc parameters must exist.
+	Destination []*string `json:"Destination,omitnil,omitempty" name:"Destination"`
 
 	// The "reply" email address of the mail. can be filled with an email address where you can receive mail, which can be a personal mailbox. if left empty, the recipient's reply mail will fail to send.
 	ReplyToAddresses *string `json:"ReplyToAddresses,omitnil,omitempty" name:"ReplyToAddresses"`
@@ -2336,11 +2337,12 @@ type SendEmailRequest struct {
 	// Sender'S email address. when not using an alias, enter the sender's email address directly, for example: noreply@mail.qcloud.com. to enter a sender alias, follow this format (note that a space must separate the alias and email address): alias+space+<email address>. the alias cannot contain a colon (:).
 	FromEmailAddress *string `json:"FromEmailAddress,omitnil,omitempty" name:"FromEmailAddress"`
 
-	// Recipient email address, supports up to 50 recipients in mass sending. note: the email content displays all recipient addresses. for non-mass sending, call the API multiple times to send.
-	Destination []*string `json:"Destination,omitnil,omitempty" name:"Destination"`
-
 	// Email subject.
 	Subject *string `json:"Subject,omitnil,omitempty" name:"Subject"`
+
+	// Recipient email address, supports up to 50 recipients for mass sending. note: the email content will display all recipient addresses. for non-mass sending, call the API multiple times to send.
+	// Specifies that at least one of the Destination, Cc, or Bcc parameters must exist.
+	Destination []*string `json:"Destination,omitnil,omitempty" name:"Destination"`
 
 	// The "reply" email address of the mail. can be filled with an email address where you can receive mail, which can be a personal mailbox. if left empty, the recipient's reply mail will fail to send.
 	ReplyToAddresses *string `json:"ReplyToAddresses,omitnil,omitempty" name:"ReplyToAddresses"`
@@ -2391,8 +2393,8 @@ func (r *SendEmailRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "FromEmailAddress")
-	delete(f, "Destination")
 	delete(f, "Subject")
+	delete(f, "Destination")
 	delete(f, "ReplyToAddresses")
 	delete(f, "Cc")
 	delete(f, "Bcc")

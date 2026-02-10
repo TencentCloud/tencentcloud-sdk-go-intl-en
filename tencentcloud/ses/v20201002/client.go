@@ -942,6 +942,7 @@ func NewDeleteEmailIdentityResponse() (response *DeleteEmailIdentityResponse) {
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_NOTALLOWDELETE = "OperationDenied.NotAllowDelete"
+//  OPERATIONDENIED_SENDERWITHDOMAINISNOTEMPTY = "OperationDenied.SenderWithDomainIsNotEmpty"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 func (c *Client) DeleteEmailIdentity(request *DeleteEmailIdentityRequest) (response *DeleteEmailIdentityResponse, err error) {
     return c.DeleteEmailIdentityWithContext(context.Background(), request)
@@ -959,6 +960,7 @@ func (c *Client) DeleteEmailIdentity(request *DeleteEmailIdentityRequest) (respo
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_NOTALLOWDELETE = "OperationDenied.NotAllowDelete"
+//  OPERATIONDENIED_SENDERWITHDOMAINISNOTEMPTY = "OperationDenied.SenderWithDomainIsNotEmpty"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 func (c *Client) DeleteEmailIdentityWithContext(ctx context.Context, request *DeleteEmailIdentityRequest) (response *DeleteEmailIdentityResponse, err error) {
     if request == nil {
@@ -1938,6 +1940,7 @@ func NewSendEmailResponse() (response *SendEmailResponse) {
 //  FAILEDOPERATION_EMAILADDRINBLACKLIST = "FailedOperation.EmailAddrInBlacklist"
 //  FAILEDOPERATION_EMAILCONTENTTOOLARGE = "FailedOperation.EmailContentToolarge"
 //  FAILEDOPERATION_EXCEEDSENDLIMIT = "FailedOperation.ExceedSendLimit"
+//  FAILEDOPERATION_FILEURLNOTEXIST = "FailedOperation.FileURLNotExist"
 //  FAILEDOPERATION_FREQUENCYLIMIT = "FailedOperation.FrequencyLimit"
 //  FAILEDOPERATION_HIGHREJECTIONRATE = "FailedOperation.HighRejectionRate"
 //  FAILEDOPERATION_ILLEGALURL = "FailedOperation.IllegalURL"
@@ -1989,6 +1992,7 @@ func (c *Client) SendEmail(request *SendEmailRequest) (response *SendEmailRespon
 //  FAILEDOPERATION_EMAILADDRINBLACKLIST = "FailedOperation.EmailAddrInBlacklist"
 //  FAILEDOPERATION_EMAILCONTENTTOOLARGE = "FailedOperation.EmailContentToolarge"
 //  FAILEDOPERATION_EXCEEDSENDLIMIT = "FailedOperation.ExceedSendLimit"
+//  FAILEDOPERATION_FILEURLNOTEXIST = "FailedOperation.FileURLNotExist"
 //  FAILEDOPERATION_FREQUENCYLIMIT = "FailedOperation.FrequencyLimit"
 //  FAILEDOPERATION_HIGHREJECTIONRATE = "FailedOperation.HighRejectionRate"
 //  FAILEDOPERATION_ILLEGALURL = "FailedOperation.IllegalURL"
@@ -2072,6 +2076,7 @@ func NewUpdateAddressUnsubscribeConfigResponse() (response *UpdateAddressUnsubsc
 //  FAILEDOPERATION_EMAILADDRINBLACKLIST = "FailedOperation.EmailAddrInBlacklist"
 //  FAILEDOPERATION_EMAILCONTENTTOOLARGE = "FailedOperation.EmailContentToolarge"
 //  FAILEDOPERATION_EXCEEDSENDLIMIT = "FailedOperation.ExceedSendLimit"
+//  FAILEDOPERATION_FILEURLNOTEXIST = "FailedOperation.FileURLNotExist"
 //  FAILEDOPERATION_FREQUENCYLIMIT = "FailedOperation.FrequencyLimit"
 //  FAILEDOPERATION_HIGHREJECTIONRATE = "FailedOperation.HighRejectionRate"
 //  FAILEDOPERATION_ILLEGALURL = "FailedOperation.IllegalURL"
@@ -2123,6 +2128,7 @@ func (c *Client) UpdateAddressUnsubscribeConfig(request *UpdateAddressUnsubscrib
 //  FAILEDOPERATION_EMAILADDRINBLACKLIST = "FailedOperation.EmailAddrInBlacklist"
 //  FAILEDOPERATION_EMAILCONTENTTOOLARGE = "FailedOperation.EmailContentToolarge"
 //  FAILEDOPERATION_EXCEEDSENDLIMIT = "FailedOperation.ExceedSendLimit"
+//  FAILEDOPERATION_FILEURLNOTEXIST = "FailedOperation.FileURLNotExist"
 //  FAILEDOPERATION_FREQUENCYLIMIT = "FailedOperation.FrequencyLimit"
 //  FAILEDOPERATION_HIGHREJECTIONRATE = "FailedOperation.HighRejectionRate"
 //  FAILEDOPERATION_ILLEGALURL = "FailedOperation.IllegalURL"

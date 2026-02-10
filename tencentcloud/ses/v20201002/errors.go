@@ -38,6 +38,9 @@ const (
 	// The number of templates exceeds the upper limit.
 	FAILEDOPERATION_EXCEEDTEMPLATELIMIT = "FailedOperation.ExceedTemplateLimit"
 
+	// URL is unavailable or not found.
+	FAILEDOPERATION_FILEURLNOTEXIST = "FailedOperation.FileURLNotExist"
+
 	// You have sent too many emails to the same address in a short period.
 	FAILEDOPERATION_FREQUENCYLIMIT = "FailedOperation.FrequencyLimit"
 
@@ -274,6 +277,9 @@ const (
 
 	// The sender address does not exist or hasn’t been approved.
 	OPERATIONDENIED_SENDADDRESSSTATUSERROR = "OperationDenied.SendAddressStatusError"
+
+	// The sender address related to that domain name is not empty.
+	OPERATIONDENIED_SENDERWITHDOMAINISNOTEMPTY = "OperationDenied.SenderWithDomainIsNotEmpty"
 
 	// The email template does not exist or hasn’t been approved.
 	OPERATIONDENIED_TEMPLATESTATUSERROR = "OperationDenied.TemplateStatusError"
