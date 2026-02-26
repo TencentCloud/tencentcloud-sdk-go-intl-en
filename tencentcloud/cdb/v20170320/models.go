@@ -630,10 +630,10 @@ type AuditInstanceInfo struct {
 	// Tag information.
 	TagList []*TagInfoUnit `json:"TagList,omitnil,omitempty" name:"TagList"`
 
-	// Database engine type.
+	// Database kernel type.
 	DbType *string `json:"DbType,omitnil,omitempty" name:"DbType"`
 
-	// Database engine version.
+	// Database kernel version.
 	DbVersion *string `json:"DbVersion,omitnil,omitempty" name:"DbVersion"`
 }
 

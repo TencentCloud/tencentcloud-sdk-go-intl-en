@@ -613,7 +613,7 @@ func NewQueryHunyuanTo3DTextureEditJobResponse() (response *QueryHunyuanTo3DText
 }
 
 // QueryHunyuanTo3DTextureEditJob
-// Query 3D texture edit tasks.
+// Query 3D texture edit tasks, redraw the texture of the 3D model based on semantics or images, and output a redrawn texture image.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
@@ -634,7 +634,7 @@ func (c *Client) QueryHunyuanTo3DTextureEditJob(request *QueryHunyuanTo3DTexture
 }
 
 // QueryHunyuanTo3DTextureEditJob
-// Query 3D texture edit tasks.
+// Query 3D texture edit tasks, redraw the texture of the 3D model based on semantics or images, and output a redrawn texture image.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
@@ -995,7 +995,7 @@ func NewSubmitHunyuanTo3DTextureEditJobResponse() (response *SubmitHunyuanTo3DTe
 }
 
 // SubmitHunyuanTo3DTextureEditJob
-// After inputting the 3D model, perform 3D model texture redrawing based on semantics or images.
+// After inputting the 3D model, redraw the texture of the 3D model based on semantics or images, and output a redrawn texture image.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
@@ -1016,7 +1016,7 @@ func (c *Client) SubmitHunyuanTo3DTextureEditJob(request *SubmitHunyuanTo3DTextu
 }
 
 // SubmitHunyuanTo3DTextureEditJob
-// After inputting the 3D model, perform 3D model texture redrawing based on semantics or images.
+// After inputting the 3D model, redraw the texture of the 3D model based on semantics or images, and output a redrawn texture image.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
