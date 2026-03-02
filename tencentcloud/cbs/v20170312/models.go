@@ -2151,13 +2151,19 @@ type DiskBackup struct {
 }
 
 type DiskChargePrepaid struct {
-	// Subscription period of the cloud disk in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+	// Specifies the duration for purchasing cloud block storage (cbs) in months. default unit: month. valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
 	Period *uint64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Auto-renewal flag. Valid values: <br><li>NOTIFY_AND_AUTO_RENEW: Notify upon expiration and renew automatically <br><li>NOTIFY_AND_MANUAL_RENEW: Notify upon expiration but do not renew automatically <br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: Neither notify upon expiration nor renew automatically <br><br>Default value: NOTIFY_AND_MANUAL_RENEW.
+	// Automatic renewal flag. valid values:.
+	// <ul>
+	// <Li>NOTIFY_AND_AUTO_RENEW: notifies expiry and renews automatically.</li>.
+	// <Li>NOTIFY_AND_MANUAL_RENEW: notifies expiry but does not renew automatically.</li>.
+	// <Li>DISABLE_NOTIFY_AND_MANUAL_RENEW: no notification is sent upon expiration, and the instance is not renewed automatically.</li>.
+	// </ul>
+	// Default value: NOTIFY_AND_MANUAL_RENEW.
 	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 
-	// You can specify this parameter when you need to ensure that a cloud disk and the CVM instance to which it is attached have the same expiration time. This parameter represents the current expiration time of the instance. In this case, if you specify `Period`, `Period` will represent how long you want to renew the instance, and the cloud disk will be renewed based on the new expiration time of the instance. For example, the value of this parameter can be `2018-03-30 20:15:03`.
+	// Specifies the current expiration time of the child machine when the expiration time of the cloud block storage needs to align with the mounted child machine. you can input this parameter. if Period is input at this time, it indicates the duration of child machine renewal. the cloud disk will automatically renew according to the expiration time after the child machine is renewed.
 	CurInstanceDeadline *string `json:"CurInstanceDeadline,omitnil,omitempty" name:"CurInstanceDeadline"`
 }
 
@@ -2499,25 +2505,27 @@ func (r *InquirePriceModifyDiskExtraPerformanceResponse) FromJsonString(s string
 
 // Predefined struct for user
 type InquiryPriceCreateDisksRequestParams struct {
-	// Cloud disk billing mode. <br><li>POSTPAID_BY_HOUR: Hourly pay-as-you-go.
+	// Cloud disk billing mode. <br>
+	// <li>PREPAID: Prepaid by month.</li>
+	// <li>POSTPAID_BY_HOUR: Hourly pay-as-you-go.</li>
 	DiskChargeType *string `json:"DiskChargeType,omitnil,omitempty" name:"DiskChargeType"`
 
-	// Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD Cloud Storage<br><li>CLOUD_PREMIUM: Premium Cloud Disk<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: ulTra SSD.
+	// Hard disk media type. valid values: <ul> <li>CLOUD_PREMIUM: high-performance CLOUD block storage</li> <li>CLOUD_SSD: SSD CLOUD disk</li> <li>CLOUD_HSSD: enhanced SSD CLOUD disk</li> <li>CLOUD_TSSD: ultra-fast SSD cbs</li> </ul>.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Cloud disk size in GB. For the value range, see [Cloud Disk Types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1).
+	// Specifies the disk capacity in GiB. for the cloud disk size range, please refer to the product type of cloud block storage (https://www.tencentcloud.com/document/product/362/2353?from_cn_redirect=1).
 	DiskSize *uint64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// ID of the project to which the cloud disk belongs.
+	// cloud disk project ID. obtain this parameter by calling the projectId field in the return value of [DescribeProject](https://www.tencentcloud.comom/document/api/651/78725?from_cn_redirect=1). default to the default project.
 	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Number of cloud disks to be purchased. If it is not specified, `1` will be used by default.
+	// Specifies the number of cloud block storage (cbs) disks to purchase. defaults to 1 if left blank.
 	DiskCount *uint64 `json:"DiskCount,omitnil,omitempty" name:"DiskCount"`
 
-	// Extra performance in MB/s purchased for a cloud disk.<br>This parameter is only valid for Enhanced SSD (CLOUD_HSSD) and ulTra SSD (CLOUD_TSSD).
+	// Specifies the additional performance value of the CBS disk in MiB/s. extra performance is only supported for enhanced SSD (CLOUD_HSSD) and ultra-fast SSD (CLOUD_TSSD) CBS disks exceeding 460GiB in size.
 	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitnil,omitempty" name:"ThroughputPerformance"`
 
-	// Relevant parameter settings for the prepaid mode (i.e., monthly subscription). The monthly subscription cloud disk purchase attributes such as usage period and whether or not auto-renewal is set up can be specified using this parameter. <br>This parameter is required when creating a prepaid cloud disk. This parameter is not required when creating an hourly postpaid cloud disk.
+	// Prepaid mode, that is, the settings for the monthly subscription-related parameters. through this parameter, you can specify the purchase duration of the monthly subscribed cloud disk, whether to enable auto-renewal, and other attributes. this parameter is required for creating a prepaid cloud disk, but no need to specify it when creating an hourly postpaid cloud disk.
 	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil,omitempty" name:"DiskChargePrepaid"`
 
 	// Specifies the cloud disk backup point quota.
@@ -2527,25 +2535,27 @@ type InquiryPriceCreateDisksRequestParams struct {
 type InquiryPriceCreateDisksRequest struct {
 	*tchttp.BaseRequest
 	
-	// Cloud disk billing mode. <br><li>POSTPAID_BY_HOUR: Hourly pay-as-you-go.
+	// Cloud disk billing mode. <br>
+	// <li>PREPAID: Prepaid by month.</li>
+	// <li>POSTPAID_BY_HOUR: Hourly pay-as-you-go.</li>
 	DiskChargeType *string `json:"DiskChargeType,omitnil,omitempty" name:"DiskChargeType"`
 
-	// Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD Cloud Storage<br><li>CLOUD_PREMIUM: Premium Cloud Disk<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: ulTra SSD.
+	// Hard disk media type. valid values: <ul> <li>CLOUD_PREMIUM: high-performance CLOUD block storage</li> <li>CLOUD_SSD: SSD CLOUD disk</li> <li>CLOUD_HSSD: enhanced SSD CLOUD disk</li> <li>CLOUD_TSSD: ultra-fast SSD cbs</li> </ul>.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Cloud disk size in GB. For the value range, see [Cloud Disk Types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1).
+	// Specifies the disk capacity in GiB. for the cloud disk size range, please refer to the product type of cloud block storage (https://www.tencentcloud.com/document/product/362/2353?from_cn_redirect=1).
 	DiskSize *uint64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// ID of the project to which the cloud disk belongs.
+	// cloud disk project ID. obtain this parameter by calling the projectId field in the return value of [DescribeProject](https://www.tencentcloud.comom/document/api/651/78725?from_cn_redirect=1). default to the default project.
 	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Number of cloud disks to be purchased. If it is not specified, `1` will be used by default.
+	// Specifies the number of cloud block storage (cbs) disks to purchase. defaults to 1 if left blank.
 	DiskCount *uint64 `json:"DiskCount,omitnil,omitempty" name:"DiskCount"`
 
-	// Extra performance in MB/s purchased for a cloud disk.<br>This parameter is only valid for Enhanced SSD (CLOUD_HSSD) and ulTra SSD (CLOUD_TSSD).
+	// Specifies the additional performance value of the CBS disk in MiB/s. extra performance is only supported for enhanced SSD (CLOUD_HSSD) and ultra-fast SSD (CLOUD_TSSD) CBS disks exceeding 460GiB in size.
 	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitnil,omitempty" name:"ThroughputPerformance"`
 
-	// Relevant parameter settings for the prepaid mode (i.e., monthly subscription). The monthly subscription cloud disk purchase attributes such as usage period and whether or not auto-renewal is set up can be specified using this parameter. <br>This parameter is required when creating a prepaid cloud disk. This parameter is not required when creating an hourly postpaid cloud disk.
+	// Prepaid mode, that is, the settings for the monthly subscription-related parameters. through this parameter, you can specify the purchase duration of the monthly subscribed cloud disk, whether to enable auto-renewal, and other attributes. this parameter is required for creating a prepaid cloud disk, but no need to specify it when creating an hourly postpaid cloud disk.
 	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil,omitempty" name:"DiskChargePrepaid"`
 
 	// Specifies the cloud disk backup point quota.
@@ -2583,7 +2593,7 @@ type InquiryPriceCreateDisksResponseParams struct {
 	// Describes the price of newly purchased cloud disks.
 	DiskPrice *Price `json:"DiskPrice,omitnil,omitempty" name:"DiskPrice"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3204,9 +3214,9 @@ type PrepayPrice struct {
 }
 
 type Price struct {
-	// Original price of a monthly-subscribed cloud disk, in USD.
+	// Discount unit price of a pay-as-you-go cloud disk, in USD.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	OriginalPrice *float64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
+	UnitPriceDiscount *float64 `json:"UnitPriceDiscount,omitnil,omitempty" name:"UnitPriceDiscount"`
 
 	// Discounted price of a monthly-subscribed cloud disk, in USD.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -3216,29 +3226,90 @@ type Price struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	UnitPrice *float64 `json:"UnitPrice,omitnil,omitempty" name:"UnitPrice"`
 
-	// Billing unit of a postpaid cloud disk. Value range: <br><li>HOUR: Billed by hour.
-	// Note: This field may return null, indicating that no valid value was found.
-	ChargeUnit *string `json:"ChargeUnit,omitnil,omitempty" name:"ChargeUnit"`
-
-	// Discount unit price of a pay-as-you-go cloud disk, in USD.
+	// Original unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	UnitPriceDiscount *float64 `json:"UnitPriceDiscount,omitnil,omitempty" name:"UnitPriceDiscount"`
+	UnitPriceHigh *string `json:"UnitPriceHigh,omitnil,omitempty" name:"UnitPriceHigh"`
 
 	// Original payment of a monthly-subscribed cloud disk, in USD, with six decimal places.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	OriginalPriceHigh *string `json:"OriginalPriceHigh,omitnil,omitempty" name:"OriginalPriceHigh"`
 
+	// Original price of a monthly-subscribed cloud disk, in USD.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	OriginalPrice *float64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
+
 	// Discounted payment price of a monthly-subscribed cloud disk, in USD, with six decimal places.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DiscountPriceHigh *string `json:"DiscountPriceHigh,omitnil,omitempty" name:"DiscountPriceHigh"`
 
-	// Original unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	UnitPriceHigh *string `json:"UnitPriceHigh,omitnil,omitempty" name:"UnitPriceHigh"`
-
 	// Discounted unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	UnitPriceDiscountHigh *string `json:"UnitPriceDiscountHigh,omitnil,omitempty" name:"UnitPriceDiscountHigh"`
+
+	// Billing unit for postpaid cloud disk. valid values:<br><li>HOUR: the billing unit for postpaid cloud disk is calculated hourly.</li>.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ChargeUnit *string `json:"ChargeUnit,omitnil,omitempty" name:"ChargeUnit"`
+}
+
+// Predefined struct for user
+type RenewDiskRequestParams struct {
+	// Specifies the parameter CurInstanceDeadline in the scenario where the cloud disk and mounted instance renew together. at this point, the cloud disk renewal aligns with the instance renewal expiry date.
+	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil,omitempty" name:"DiskChargePrepaid"`
+
+	// Cloud disk ID, which can be queried by calling the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) API.
+	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
+}
+
+type RenewDiskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the parameter CurInstanceDeadline in the scenario where the cloud disk and mounted instance renew together. at this point, the cloud disk renewal aligns with the instance renewal expiry date.
+	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil,omitempty" name:"DiskChargePrepaid"`
+
+	// Cloud disk ID, which can be queried by calling the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) API.
+	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
+}
+
+func (r *RenewDiskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RenewDiskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DiskChargePrepaid")
+	delete(f, "DiskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RenewDiskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RenewDiskResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type RenewDiskResponse struct {
+	*tchttp.BaseResponse
+	Response *RenewDiskResponseParams `json:"Response"`
+}
+
+func (r *RenewDiskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RenewDiskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user

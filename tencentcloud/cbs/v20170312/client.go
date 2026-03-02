@@ -2563,6 +2563,90 @@ func (c *Client) ModifySnapshotsSharePermissionWithContext(ctx context.Context, 
     return
 }
 
+func NewRenewDiskRequest() (request *RenewDiskRequest) {
+    request = &RenewDiskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cbs", APIVersion, "RenewDisk")
+    
+    
+    return
+}
+
+func NewRenewDiskResponse() (response *RenewDiskResponse) {
+    response = &RenewDiskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RenewDisk
+// This API is used to renew cloud disks.
+//
+// 
+//
+// This API is used to support renewal along with mounted instances. The parameter specifies CurInstanceDeadline in [DiskChargePrepaid](https://www.tencentcloud.com/document/product/362/15669?from_cn_redirect=1#DiskChargePrepaid), and renewal will be at the expiry date after the instance is renewed.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_COMPONENTERROR = "InternalError.ComponentError"
+//  INVALIDACCOUNT_INSUFFICIENTBALANCE = "InvalidAccount.InsufficientBalance"
+//  INVALIDDISK_BUSY = "InvalidDisk.Busy"
+//  INVALIDDISK_NOTPORTABLE = "InvalidDisk.NotPortable"
+//  INVALIDDISK_NOTSUPPORTED = "InvalidDisk.NotSupported"
+//  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE_NOTPORTABLE = "ResourceUnavailable.NotPortable"
+//  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
+//  TRADEDEALCONFLICT = "TradeDealConflict"
+func (c *Client) RenewDisk(request *RenewDiskRequest) (response *RenewDiskResponse, err error) {
+    return c.RenewDiskWithContext(context.Background(), request)
+}
+
+// RenewDisk
+// This API is used to renew cloud disks.
+//
+// 
+//
+// This API is used to support renewal along with mounted instances. The parameter specifies CurInstanceDeadline in [DiskChargePrepaid](https://www.tencentcloud.com/document/product/362/15669?from_cn_redirect=1#DiskChargePrepaid), and renewal will be at the expiry date after the instance is renewed.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_COMPONENTERROR = "InternalError.ComponentError"
+//  INVALIDACCOUNT_INSUFFICIENTBALANCE = "InvalidAccount.InsufficientBalance"
+//  INVALIDDISK_BUSY = "InvalidDisk.Busy"
+//  INVALIDDISK_NOTPORTABLE = "InvalidDisk.NotPortable"
+//  INVALIDDISK_NOTSUPPORTED = "InvalidDisk.NotSupported"
+//  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE_NOTPORTABLE = "ResourceUnavailable.NotPortable"
+//  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
+//  TRADEDEALCONFLICT = "TradeDealConflict"
+func (c *Client) RenewDiskWithContext(ctx context.Context, request *RenewDiskRequest) (response *RenewDiskResponse, err error) {
+    if request == nil {
+        request = NewRenewDiskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cbs", APIVersion, "RenewDisk")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RenewDisk require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRenewDiskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewResizeDiskRequest() (request *ResizeDiskRequest) {
     request = &ResizeDiskRequest{
         BaseRequest: &tchttp.BaseRequest{},

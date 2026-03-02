@@ -1374,7 +1374,7 @@ type Encryption struct {
 	// When using the encryption service, fill in the fields to be encrypted. One or more encrypted fields can be entered in this interface.
 	EncryptList []*string `json:"EncryptList,omitnil,omitempty" name:"EncryptList"`
 
-	// Symmetric key after encryption. For the generation and usage of the key, please refer to the <a href="https://cloud.tencent.com/document/product/1007/47180">Data Encryption</a> document.
+	// Symmetric key after encryption. For the generation and usage of the key, please refer to the <a href="https://www.tencentcloud.com/document/product/1061/77849?lang=en&pg=">Data Encryption</a> document.
 	CiphertextBlob *string `json:"CiphertextBlob,omitnil,omitempty" name:"CiphertextBlob"`
 
 	// initialization vector for CBC encryption (a customer-defined string with a length of 16 characters).
@@ -3688,11 +3688,11 @@ type WebVerificationConfigIntl struct {
 	// The default value is blink.
 	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
 
-	// Control liveness retry number.The value range is 1-99.
+	// Maximum liveness verification attempts. Valid range: [1,99].
 	// The default value is 99.
 	LivenessRetryLimit *int64 `json:"LivenessRetryLimit,omitnil,omitempty" name:"LivenessRetryLimit"`
 
-	// Specifies the liveness detection timeout period in seconds. value range: (0,600].
+	// Specifies the liveness detection timeout period in seconds. Value range: (0,600].
 	// The default value is 45.
 	LivenessTimeout *uint64 `json:"LivenessTimeout,omitnil,omitempty" name:"LivenessTimeout"`
 
