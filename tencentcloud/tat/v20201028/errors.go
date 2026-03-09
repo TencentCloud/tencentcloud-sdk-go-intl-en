@@ -20,6 +20,9 @@ const (
 	// CAM signature/authentication error.
 	AUTHFAILURE = "AuthFailure"
 
+	// Authentication error.
+	AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+
 	// Failed to access the CVM.
 	FAILEDOPERATION_CVMERROR = "FailedOperation.CVMError"
 
@@ -28,6 +31,9 @@ const (
 
 	// Internal error.
 	INTERNALERROR = "InternalError"
+
+	// Invalid Filter
+	INVALIDFILTER = "InvalidFilter"
 
 	// Invalid parameter.
 	INVALIDPARAMETER = "InvalidParameter"
@@ -52,6 +58,12 @@ const (
 
 	// Duplicate command name.
 	INVALIDPARAMETERVALUE_COMMANDNAMEDUPLICATED = "InvalidParameterValue.CommandNameDuplicated"
+
+	// Invalid ID format.
+	INVALIDPARAMETERVALUE_ID = "InvalidParameterValue.ID"
+
+	// Invalid ID format or inconsistent format in the array.
+	INVALIDPARAMETERVALUE_INCONSISTENTID = "InvalidParameterValue.InconsistentID"
 
 	// Inconsistent instance type.
 	INVALIDPARAMETERVALUE_INCONSISTENTINSTANCE = "InvalidParameterValue.InconsistentInstance"
@@ -91,6 +103,18 @@ const (
 
 	// Invalid OutputCOSKeyPrefix.
 	INVALIDPARAMETERVALUE_INVALIDOUTPUTCOSKEYPREFIX = "InvalidParameterValue.InvalidOutputCOSKeyPrefix"
+
+	// Invalid registration code ID.
+	INVALIDPARAMETERVALUE_INVALIDREGISTERCODEID = "InvalidParameterValue.InvalidRegisterCodeId"
+
+	// Invalid managed instance ID.
+	INVALIDPARAMETERVALUE_INVALIDREGISTERINSTANCEID = "InvalidParameterValue.InvalidRegisterInstanceId"
+
+	// Invalid scenario ID.
+	INVALIDPARAMETERVALUE_INVALIDSCENEID = "InvalidParameterValue.InvalidSceneId"
+
+	// Invalid scenario name.
+	INVALIDPARAMETERVALUE_INVALIDSCENENAME = "InvalidParameterValue.InvalidSceneName"
 
 	// Invalid time format.
 	INVALIDPARAMETERVALUE_INVALIDTIMEFORMAT = "InvalidParameterValue.InvalidTimeFormat"
@@ -140,8 +164,14 @@ const (
 	// The custom parameter feature is not enabled.
 	INVALIDPARAMETERVALUE_SUPPORTPARAMETERSONLYIFENABLEPARAMETER = "InvalidParameterValue.SupportParametersOnlyIfEnableParameter"
 
+	// Parameter value is too large.
+	INVALIDPARAMETERVALUE_TOOLARGE = "InvalidParameterValue.TooLarge"
+
 	// Length limit exceeded.
 	INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+
+	// Parameter value is too low.
+	INVALIDPARAMETERVALUE_TOOSMALL = "InvalidParameterValue.TooSmall"
 
 	// Reached the quota limit.
 	LIMITEXCEEDED = "LimitExceeded"
@@ -152,11 +182,17 @@ const (
 	// Missing parameter.
 	MISSINGPARAMETER = "MissingParameter"
 
+	// Operation denied.
+	OPERATIONDENIED = "OperationDenied"
+
 	// The resource does not exist.
 	RESOURCENOTFOUND = "ResourceNotFound"
 
 	// The command does not exist.
 	RESOURCENOTFOUND_COMMANDNOTFOUND = "ResourceNotFound.CommandNotFound"
+
+	// CosBucket does not exist.
+	RESOURCENOTFOUND_COSBUCKETNOTFOUNDCODE = "ResourceNotFound.CosBucketNotFoundCode"
 
 	// The instance does not exist.
 	RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
@@ -164,10 +200,16 @@ const (
 	// No execution activity found.
 	RESOURCENOTFOUND_INVOCATIONNOTFOUND = "ResourceNotFound.InvocationNotFound"
 
+	// Registration code not found.
+	RESOURCENOTFOUND_REGISTERCODESNOTFOUNDCODE = "ResourceNotFound.RegisterCodesNotFoundCode"
+
+	// Registered instance not found.
+	RESOURCENOTFOUND_REGISTERINSTANCENOTFOUNDCODE = "ResourceNotFound.RegisterInstanceNotFoundCode"
+
 	// The role does not exist.
 	RESOURCENOTFOUND_ROLENOTFOUND = "ResourceNotFound.RoleNotFound"
 
-	// Resource unavailable.
+	// Resources are unavailable.
 	RESOURCEUNAVAILABLE = "ResourceUnavailable"
 
 	// TAT Agent is not installed.
@@ -185,13 +227,16 @@ const (
 	// The instance is not running.
 	RESOURCEUNAVAILABLE_INSTANCESTATENOTRUNNING = "ResourceUnavailable.InstanceStateNotRunning"
 
+	// Non-Existing resource name.
+	RESOURCEUNAVAILABLE_INVALIDRESOURCEQUOTARESOURCECODE = "ResourceUnavailable.InvalidResourceQuotaResourceCode"
+
 	// Lighthouse is not supported in the region.
 	RESOURCEUNAVAILABLE_LIGHTHOUSEUNSUPPORTEDREGION = "ResourceUnavailable.LighthouseUnsupportedRegion"
 
-	// User quota exhausted.
+	// User quota run out.
 	RESOURCEUNAVAILABLE_USERHASNOQUOTACODE = "ResourceUnavailable.UserHasNoQuotaCode"
 
-	// Role assumption unauthorized.
+	// Role play unauthorized.
 	UNAUTHORIZEDOPERATION_ASSUMEROLEUNAUTHORIZED = "UnauthorizedOperation.AssumeRoleUnauthorized"
 
 	// CAM authentication failed.
@@ -209,6 +254,6 @@ const (
 	// Unknown parameter error.
 	UNKNOWNPARAMETER = "UnknownParameter"
 
-	// Operation not supported.
+	// The operation is not supported.
 	UNSUPPORTEDOPERATION = "UnsupportedOperation"
 )

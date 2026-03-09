@@ -30,14 +30,11 @@ type AutomationAgentInfo struct {
 	// Last heartbeat time
 	LastHeartbeatTime *string `json:"LastHeartbeatTime,omitnil,omitempty" name:"LastHeartbeatTime"`
 
-	// Agent status. Valid values:
-	// <li> `Online`
-	// <li> `Offline`
+	// Agent status. valid values:.
+	// Online: Online, Offline: Offline.
 	AgentStatus *string `json:"AgentStatus,omitnil,omitempty" name:"AgentStatus"`
 
-	// Agent runtime environment. Valid values:
-	// <li> `Linux`: Linux instance
-	// <li> `Windows`: Windows instance
+	// Agent execution environment. valid values: Linux: Linux instance. Windows: Windows instance.
 	Environment *string `json:"Environment,omitnil,omitempty" name:"Environment"`
 
 	// Features supported by the TAT agent.
@@ -46,24 +43,34 @@ type AutomationAgentInfo struct {
 
 // Predefined struct for user
 type CancelInvocationRequestParams struct {
-	// Execution activity ID
+	// Execution activity ID.
+	// 
+	// Call the [DescribeInvocations](https://www.tencentcloud.comom/document/api/1340/52679?from_cn_redirect=1) api to query execution.
 	InvocationId *string `json:"InvocationId,omitnil,omitempty" name:"InvocationId"`
 
-	// Instance ID list. A maximum of 100 IDs are allowed. Supported instance types:
-	// <li> `CVM`
-	// <li> `LIGHTHOUSE`
+	// Instance ID list. upper limit: 100.
+	// 
+	// Instance ID can be obtained through the query instance interface of corresponding cloud services. currently supported instance types:.
+	// - CVM
+	// - Lighthouse
+	// - TAT Register instance.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type CancelInvocationRequest struct {
 	*tchttp.BaseRequest
 	
-	// Execution activity ID
+	// Execution activity ID.
+	// 
+	// Call the [DescribeInvocations](https://www.tencentcloud.comom/document/api/1340/52679?from_cn_redirect=1) api to query execution.
 	InvocationId *string `json:"InvocationId,omitnil,omitempty" name:"InvocationId"`
 
-	// Instance ID list. A maximum of 100 IDs are allowed. Supported instance types:
-	// <li> `CVM`
-	// <li> `LIGHTHOUSE`
+	// Instance ID list. upper limit: 100.
+	// 
+	// Instance ID can be obtained through the query instance interface of corresponding cloud services. currently supported instance types:.
+	// - CVM
+	// - Lighthouse
+	// - TAT Register instance.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
@@ -110,55 +117,61 @@ func (r *CancelInvocationResponse) FromJsonString(s string) error {
 }
 
 type Command struct {
-	// Command ID.
+	// <p>Command ID.</p>.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
-	// Command name.
+	// <P>Command name.</p>.
 	CommandName *string `json:"CommandName,omitnil,omitempty" name:"CommandName"`
 
-	// Command description.
+	// <P>Command description.</p>.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Base64-encoded command.
+	// <p>The Base64-encoded command content.</p>.
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
-	// Command type.
+	// <p>Command type. value is one of SHELL, POWERSHELL, BAT.</p>.
 	CommandType *string `json:"CommandType,omitnil,omitempty" name:"CommandType"`
 
-	// Command execution path.
+	// <P>Command execution path.</p>.
 	WorkingDirectory *string `json:"WorkingDirectory,omitnil,omitempty" name:"WorkingDirectory"`
 
-	// Command timeout period.
+	// <p>Command timeout time.</p><p>unit: seconds.</p><p>when specifying the OutputCOSBucketUrl parameter, the timeout period includes the time taken to upload command output to COS.</p>.
 	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
-	// Command creation time.
+	// <p>Command creation time. the format is YYYY-MM-DDThh:MM:ssZ.</p>.
 	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
 
-	// Command update time.
+	// <p>Command last update time. format: YYYY-MM-DDThh:MM:ssZ.</p>.
 	UpdatedTime *string `json:"UpdatedTime,omitnil,omitempty" name:"UpdatedTime"`
 
-	// Whether to enable the custom parameter feature.
+	// <P>Whether to enable the custom parameter feature.</p>.
 	EnableParameter *bool `json:"EnableParameter,omitnil,omitempty" name:"EnableParameter"`
 
-	// Default custom parameter value.
+	// <P>Default value of custom parameter.</p>.
 	DefaultParameters *string `json:"DefaultParameters,omitnil,omitempty" name:"DefaultParameters"`
 
-	// Formatted description of the command. This parameter is an empty string for user commands and contains values for public commands.
+	// <P>Default value of custom parameters.</p>.
+	DefaultParameterConfs []*DefaultParameterConf `json:"DefaultParameterConfs,omitnil,omitempty" name:"DefaultParameterConfs"`
+
+	// <P>Command association scenarios</p>.
+	Scenes []*string `json:"Scenes,omitnil,omitempty" name:"Scenes"`
+
+	// <P>Structured description of the command. public commands have values, and user commands are empty strings.</p>.
 	FormattedDescription *string `json:"FormattedDescription,omitnil,omitempty" name:"FormattedDescription"`
 
-	// Command creator. `TAT` indicates a public command and `USER` indicates a personal command.
+	// <p>Command creator.</p><p>enumeration value:</p><ul><li>TAT: public command</li><li>USER: personal creation command</li></ul>.
 	CreatedBy *string `json:"CreatedBy,omitnil,omitempty" name:"CreatedBy"`
 
-	// The list of tags bound to the command.
+	// <P>Tag list associated with the command.</p>.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// The user who executes the command on the instance.
+	// <P>Username to run command on the instance.</p>.
 	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
-	// The COS bucket URL for uploading logs.
+	// <P>The cos bucket address for log upload.</p>.
 	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil,omitempty" name:"OutputCOSBucketUrl"`
 
-	// The COS bucket directory where the logs are saved.
+	// <P>Directory of logs in the cos bucket.</p>.
 	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil,omitempty" name:"OutputCOSKeyPrefix"`
 }
 
@@ -166,10 +179,10 @@ type CommandDocument struct {
 	// Base64-encoded command.
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
-	// Command type.
+	// Command type. value is one of SHELL, POWERSHELL, BAT.
 	CommandType *string `json:"CommandType,omitnil,omitempty" name:"CommandType"`
 
-	// Timeout period.
+	// Timeout period. unit: seconds.
 	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// Execution path.
@@ -196,7 +209,7 @@ type CreateCommandRequestParams struct {
 	// Command description. The maximum length is 120 characters.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Command type. `SHELL` and `POWERSHELL` are supported. The default value is `SHELL`.
+	// Command type. currently supports SHELL, POWERSHELL, BAT. default: SHELL.
 	CommandType *string `json:"CommandType,omitnil,omitempty" name:"CommandType"`
 
 	// Command execution path. The default value is /root for `SHELL` commands and C:\Program Files\qcloud\tat_agent\workdir for `POWERSHELL` commands.
@@ -210,12 +223,21 @@ type CreateCommandRequestParams struct {
 	// Default value: `false`.
 	EnableParameter *bool `json:"EnableParameter,omitnil,omitempty" name:"EnableParameter"`
 
-	// The default value of the custom parameter value when it is enabled. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
-	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
-	// If no parameter value is provided in the `InvokeCommand` API, the default value is used.
-	// Up to 20 custom parameters are supported.
-	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
+	// Enable the custom parameter feature. default value of the custom parameter. field type is json encoded string. for example: {"varA": "222"}.
+	// The key is the custom parameter name, and the value is the default. both kv are string-type.
+	// If no parameter value is provided when invoking the command, the default value here will be used to replace it.
+	// Parameters must not be specified simultaneously `DefaultParameters` and `DefaultParameterConfs`.
+	// Allow settings only when the EnableParameter parameter is true.
+	// Custom parameters can be up to 20.
+	// The custom parameter name must meet the following standard: the number of characters has a cap of 64, and the optional range is [a-zA-Z0-9-_].
 	DefaultParameters *string `json:"DefaultParameters,omitnil,omitempty" name:"DefaultParameters"`
+
+	// Custom parameter array.
+	// If no parameter value is provided when invoking the command, the default value here will be used to replace it.
+	// Parameters must not be specified simultaneously `DefaultParameters` and `DefaultParameterConfs`.
+	// Allow settings only when the EnableParameter parameter is true.
+	// Custom parameters can be up to 20.
+	DefaultParameterConfs []*DefaultParameterConf `json:"DefaultParameterConfs,omitnil,omitempty" name:"DefaultParameterConfs"`
 
 	// Tags bound to the command. At most 10 tags are allowed.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
@@ -246,7 +268,7 @@ type CreateCommandRequest struct {
 	// Command description. The maximum length is 120 characters.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Command type. `SHELL` and `POWERSHELL` are supported. The default value is `SHELL`.
+	// Command type. currently supports SHELL, POWERSHELL, BAT. default: SHELL.
 	CommandType *string `json:"CommandType,omitnil,omitempty" name:"CommandType"`
 
 	// Command execution path. The default value is /root for `SHELL` commands and C:\Program Files\qcloud\tat_agent\workdir for `POWERSHELL` commands.
@@ -260,12 +282,21 @@ type CreateCommandRequest struct {
 	// Default value: `false`.
 	EnableParameter *bool `json:"EnableParameter,omitnil,omitempty" name:"EnableParameter"`
 
-	// The default value of the custom parameter value when it is enabled. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
-	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
-	// If no parameter value is provided in the `InvokeCommand` API, the default value is used.
-	// Up to 20 custom parameters are supported.
-	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
+	// Enable the custom parameter feature. default value of the custom parameter. field type is json encoded string. for example: {"varA": "222"}.
+	// The key is the custom parameter name, and the value is the default. both kv are string-type.
+	// If no parameter value is provided when invoking the command, the default value here will be used to replace it.
+	// Parameters must not be specified simultaneously `DefaultParameters` and `DefaultParameterConfs`.
+	// Allow settings only when the EnableParameter parameter is true.
+	// Custom parameters can be up to 20.
+	// The custom parameter name must meet the following standard: the number of characters has a cap of 64, and the optional range is [a-zA-Z0-9-_].
 	DefaultParameters *string `json:"DefaultParameters,omitnil,omitempty" name:"DefaultParameters"`
+
+	// Custom parameter array.
+	// If no parameter value is provided when invoking the command, the default value here will be used to replace it.
+	// Parameters must not be specified simultaneously `DefaultParameters` and `DefaultParameterConfs`.
+	// Allow settings only when the EnableParameter parameter is true.
+	// Custom parameters can be up to 20.
+	DefaultParameterConfs []*DefaultParameterConf `json:"DefaultParameterConfs,omitnil,omitempty" name:"DefaultParameterConfs"`
 
 	// Tags bound to the command. At most 10 tags are allowed.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
@@ -304,6 +335,7 @@ func (r *CreateCommandRequest) FromJsonString(s string) error {
 	delete(f, "Timeout")
 	delete(f, "EnableParameter")
 	delete(f, "DefaultParameters")
+	delete(f, "DefaultParameterConfs")
 	delete(f, "Tags")
 	delete(f, "Username")
 	delete(f, "OutputCOSBucketUrl")
@@ -341,51 +373,85 @@ func (r *CreateCommandResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateInvokerRequestParams struct {
-	// Invoker name.
+	// Executor name. length not exceeding 120 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Invoker type. It can only be `SCHEDULE` (recurring invokers).
+	// Executor type.
+	// 
+	// Selectable values (currently only support one):.
+	// 
+	// -`SCHEDULE`: period type executor.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Remote command ID.
+	// 
+	// Call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
-	// ID of the instance bound to the trigger. Up to 100 IDs are allowed.
+	// Trigger associated instance ID. list cap 100.
+	// 
+	// You can get the instance ID through the query instance interface of corresponding cloud services. currently supports instance types: CVM, Lighthouse, and TAT managed instances.
+	// 
+	// The instance needs to have the TAT client installed, and the client must be in Online status. you can query client status via the [DescribeAutomationAgentStatus](https://www.tencentcloud.comom/document/api/1340/52682?from_cn_redirect=1) api.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// The user who executes the command.
+	// Command execution user. length not exceeding 256 characters.
 	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
-	// Custom parameters of the command.
+	// Command custom parameter. field type is JSON encode string.
+	// 
+	// This parameter can be set only when EnableParameter of the command specified by CommandId is true. obtain the EnableParameter settings through the [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
 	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
-	// Settings required for a recurring invoker.
+	// Recurring invoker settings.
+	// 
+	// When the executor type is `SCHEDULE`, specify this parameter.
 	ScheduleSettings *ScheduleSettings `json:"ScheduleSettings,omitnil,omitempty" name:"ScheduleSettings"`
+
+	// Tag associated with the command. list length not exceeding 10.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type CreateInvokerRequest struct {
 	*tchttp.BaseRequest
 	
-	// Invoker name.
+	// Executor name. length not exceeding 120 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Invoker type. It can only be `SCHEDULE` (recurring invokers).
+	// Executor type.
+	// 
+	// Selectable values (currently only support one):.
+	// 
+	// -`SCHEDULE`: period type executor.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Remote command ID.
+	// 
+	// Call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
-	// ID of the instance bound to the trigger. Up to 100 IDs are allowed.
+	// Trigger associated instance ID. list cap 100.
+	// 
+	// You can get the instance ID through the query instance interface of corresponding cloud services. currently supports instance types: CVM, Lighthouse, and TAT managed instances.
+	// 
+	// The instance needs to have the TAT client installed, and the client must be in Online status. you can query client status via the [DescribeAutomationAgentStatus](https://www.tencentcloud.comom/document/api/1340/52682?from_cn_redirect=1) api.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// The user who executes the command.
+	// Command execution user. length not exceeding 256 characters.
 	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
-	// Custom parameters of the command.
+	// Command custom parameter. field type is JSON encode string.
+	// 
+	// This parameter can be set only when EnableParameter of the command specified by CommandId is true. obtain the EnableParameter settings through the [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
 	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
-	// Settings required for a recurring invoker.
+	// Recurring invoker settings.
+	// 
+	// When the executor type is `SCHEDULE`, specify this parameter.
 	ScheduleSettings *ScheduleSettings `json:"ScheduleSettings,omitnil,omitempty" name:"ScheduleSettings"`
+
+	// Tag associated with the command. list length not exceeding 10.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 func (r *CreateInvokerRequest) ToJsonString() string {
@@ -407,6 +473,7 @@ func (r *CreateInvokerRequest) FromJsonString(s string) error {
 	delete(f, "Username")
 	delete(f, "Parameters")
 	delete(f, "ScheduleSettings")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInvokerRequest has unknown keys!", "")
 	}
@@ -439,15 +506,128 @@ func (r *CreateInvokerResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateRegisterCodeRequestParams struct {
+	// Describes the registration code. maximum length is 128 characters.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Prefix of the registered instance name. maximum length is 32 characters.
+	InstanceNamePrefix *string `json:"InstanceNamePrefix,omitnil,omitempty" name:"InstanceNamePrefix"`
+
+	// Number of instances allowed by the registration code. default value is 10, minimum value is 1, maximum value is 10000.
+	RegisterLimit *int64 `json:"RegisterLimit,omitnil,omitempty" name:"RegisterLimit"`
+
+	// The validity time of the registration code is measured in hours. default value is 4.
+	// 
+	// -If the input value is less than or equal to 99999, the time is deemed valid in hours.
+	// -If the input value is more than 99999, it is set to permanently valid.
+	EffectiveTime *int64 `json:"EffectiveTime,omitnil,omitempty" name:"EffectiveTime"`
+
+	// Restrict the registration code to register only from the public outbound ip described by IpAddressRange.
+	// 
+	// Empty by default, meaning no restrictions.
+	// 
+	// The value should be in standard IPv4 or CIDRv4 format, such as 192.168.1.1 or 192.168.0.0/16.
+	IpAddressRange *string `json:"IpAddressRange,omitnil,omitempty" name:"IpAddressRange"`
+}
+
+type CreateRegisterCodeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Describes the registration code. maximum length is 128 characters.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Prefix of the registered instance name. maximum length is 32 characters.
+	InstanceNamePrefix *string `json:"InstanceNamePrefix,omitnil,omitempty" name:"InstanceNamePrefix"`
+
+	// Number of instances allowed by the registration code. default value is 10, minimum value is 1, maximum value is 10000.
+	RegisterLimit *int64 `json:"RegisterLimit,omitnil,omitempty" name:"RegisterLimit"`
+
+	// The validity time of the registration code is measured in hours. default value is 4.
+	// 
+	// -If the input value is less than or equal to 99999, the time is deemed valid in hours.
+	// -If the input value is more than 99999, it is set to permanently valid.
+	EffectiveTime *int64 `json:"EffectiveTime,omitnil,omitempty" name:"EffectiveTime"`
+
+	// Restrict the registration code to register only from the public outbound ip described by IpAddressRange.
+	// 
+	// Empty by default, meaning no restrictions.
+	// 
+	// The value should be in standard IPv4 or CIDRv4 format, such as 192.168.1.1 or 192.168.0.0/16.
+	IpAddressRange *string `json:"IpAddressRange,omitnil,omitempty" name:"IpAddressRange"`
+}
+
+func (r *CreateRegisterCodeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRegisterCodeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Description")
+	delete(f, "InstanceNamePrefix")
+	delete(f, "RegisterLimit")
+	delete(f, "EffectiveTime")
+	delete(f, "IpAddressRange")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRegisterCodeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRegisterCodeResponseParams struct {
+	// Registration code ID.
+	RegisterCodeId *string `json:"RegisterCodeId,omitnil,omitempty" name:"RegisterCodeId"`
+
+	// Registration code value.
+	RegisterCodeValue *string `json:"RegisterCodeValue,omitnil,omitempty" name:"RegisterCodeValue"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateRegisterCodeResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateRegisterCodeResponseParams `json:"Response"`
+}
+
+func (r *CreateRegisterCodeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRegisterCodeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DefaultParameterConf struct {
+	// Parameter name.
+	ParameterName *string `json:"ParameterName,omitnil,omitempty" name:"ParameterName"`
+
+	// Default parameter value.
+	ParameterValue *string `json:"ParameterValue,omitnil,omitempty" name:"ParameterValue"`
+
+	// Parameter description.
+	ParameterDescription *string `json:"ParameterDescription,omitnil,omitempty" name:"ParameterDescription"`
+}
+
+// Predefined struct for user
 type DeleteCommandRequestParams struct {
-	// ID of the command to be deleted.
+	// Command ID to be deleted. call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 }
 
 type DeleteCommandRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the command to be deleted.
+	// Command ID to be deleted. call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 }
 
@@ -493,15 +673,73 @@ func (r *DeleteCommandResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteCommandsRequestParams struct {
+	// Command ID to be deleted. call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+	CommandIds []*string `json:"CommandIds,omitnil,omitempty" name:"CommandIds"`
+}
+
+type DeleteCommandsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Command ID to be deleted. call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+	CommandIds []*string `json:"CommandIds,omitnil,omitempty" name:"CommandIds"`
+}
+
+func (r *DeleteCommandsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCommandsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CommandIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCommandsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCommandsResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteCommandsResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteCommandsResponseParams `json:"Response"`
+}
+
+func (r *DeleteCommandsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCommandsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteInvokerRequestParams struct {
-	// ID of the invoker to be deleted.
+	// Pending deletion executor ID.
+	// 
+	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 }
 
 type DeleteInvokerRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the invoker to be deleted.
+	// Pending deletion executor ID.
+	// 
+	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 }
 
@@ -547,11 +785,137 @@ func (r *DeleteInvokerResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteRegisterCodesRequestParams struct {
+	// Registration code ID list. limits the input registration code ID quantity to more than 0 and less than 100.
+	// 
+	// Call the [DescribeRegisterCodes](https://www.tencentcloud.comom/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
+	RegisterCodeIds []*string `json:"RegisterCodeIds,omitnil,omitempty" name:"RegisterCodeIds"`
+}
+
+type DeleteRegisterCodesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Registration code ID list. limits the input registration code ID quantity to more than 0 and less than 100.
+	// 
+	// Call the [DescribeRegisterCodes](https://www.tencentcloud.comom/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
+	RegisterCodeIds []*string `json:"RegisterCodeIds,omitnil,omitempty" name:"RegisterCodeIds"`
+}
+
+func (r *DeleteRegisterCodesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRegisterCodesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RegisterCodeIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRegisterCodesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRegisterCodesResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteRegisterCodesResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteRegisterCodesResponseParams `json:"Response"`
+}
+
+func (r *DeleteRegisterCodesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRegisterCodesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRegisterInstanceRequestParams struct {
+	// Managed instance ID.
+	// 
+	// Call the [DescribeRegisterInstances](https://www.tencentcloud.comom/document/api/1340/96924?from_cn_redirect=1) api to query managed instances.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type DeleteRegisterInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Managed instance ID.
+	// 
+	// Call the [DescribeRegisterInstances](https://www.tencentcloud.comom/document/api/1340/96924?from_cn_redirect=1) api to query managed instances.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *DeleteRegisterInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRegisterInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRegisterInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRegisterInstanceResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteRegisterInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteRegisterInstanceResponseParams `json:"Response"`
+}
+
+func (r *DeleteRegisterInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRegisterInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeAutomationAgentStatusRequestParams struct {
-	// List of instance IDs for the query.
+	// List of instance ids to be queried.
+	// 
+	// You can get the instance ID through the query instance interface of corresponding cloud services. currently supports instance types: CVM, Lighthouse, and TAT managed instances.
+	// 
+	// The maximum per request is 100.
+	// 
+	// Parameters must not be specified simultaneously `InstanceIds` and `Filters`.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// Filter conditions.<br> <li>`agent-status` - String - Required: No - (Filter condition) Filter by agent status. Valid values: `Online`, `Offline`.<br> <li> `environment` - String - Required: No - (Filter condition) Filter by the agent environment. Valid value: `Linux`.<br> <li> `instance-id` - String - Required: No - (Filter condition) Filter by the instance ID. <br>Up to 10 `Filters` allowed in one request. For each filter, five `Filter.Values` can be specified. `InstanceIds` and `Filters` cannot be specified at the same time.
+	// -agent-status - String - required: no - (filter condition) filters by agent status. valid values: Online, Offline. 
+	// -environment - String - required: no - (filter condition) query by agent runtime environment. valid values: Linux, Windows.
+	// -instance-id - String - required: no - (filter condition) filter by instance id. you can get the instance id through the query instance API of the corresponding cloud services. currently supports instance types: CVM, Lighthouse, and managed instances.
+	// 
+	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `InstanceIds` and `Filters` parameters cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. It defaults to `20`. The maximum is 100. For more information on `Limit`, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
@@ -564,10 +928,20 @@ type DescribeAutomationAgentStatusRequestParams struct {
 type DescribeAutomationAgentStatusRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of instance IDs for the query.
+	// List of instance ids to be queried.
+	// 
+	// You can get the instance ID through the query instance interface of corresponding cloud services. currently supports instance types: CVM, Lighthouse, and TAT managed instances.
+	// 
+	// The maximum per request is 100.
+	// 
+	// Parameters must not be specified simultaneously `InstanceIds` and `Filters`.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// Filter conditions.<br> <li>`agent-status` - String - Required: No - (Filter condition) Filter by agent status. Valid values: `Online`, `Offline`.<br> <li> `environment` - String - Required: No - (Filter condition) Filter by the agent environment. Valid value: `Linux`.<br> <li> `instance-id` - String - Required: No - (Filter condition) Filter by the instance ID. <br>Up to 10 `Filters` allowed in one request. For each filter, five `Filter.Values` can be specified. `InstanceIds` and `Filters` cannot be specified at the same time.
+	// -agent-status - String - required: no - (filter condition) filters by agent status. valid values: Online, Offline. 
+	// -environment - String - required: no - (filter condition) query by agent runtime environment. valid values: Linux, Windows.
+	// -instance-id - String - required: no - (filter condition) filter by instance id. you can get the instance id through the query instance API of the corresponding cloud services. currently supports instance types: CVM, Lighthouse, and managed instances.
+	// 
+	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `InstanceIds` and `Filters` parameters cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. It defaults to `20`. The maximum is 100. For more information on `Limit`, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
@@ -632,16 +1006,18 @@ type DescribeCommandsRequestParams struct {
 	// List of command IDs. Up to 100 IDs are allowed for each request. `CommandIds` and `Filters` cannot be specified at the same time.
 	CommandIds []*string `json:"CommandIds,omitnil,omitempty" name:"CommandIds"`
 
-	// Filter conditions.
-	// <li> `command-id` - String - Required: No - (Filter condition) Filter by the command ID.
-	// <li> `command-name` - String - Required: No - (Filter condition) Filter by the command name.
-	// <li> `command-type` - String - Required: No - (Filter condition) Filter by the command type. Valid values: `SHELL` or `POWERSHELL`.
-	// <li> `created-by` - String - Required: No - (Filter condition) Filter by the creator. Valid values: `TAT` (public commands) or `USER` (custom commands).
-	// <li> `tag-key` - String - Required: No - (Filter condition) Filter by the tag key.</li>
-	// <li> `tag-value` - String - Required: No - (Filter condition) Filter by the tag value.</li>
-	// <li> `tag:tag-key` - String - Required: No - (Filter) Filter by the tag key-value pair. The tag-key should be replaced with a specified tag key. For detailed usage, see sample 4.</li>
+	// Filter criteria
 	// 
-	// Up to 10 `Filters` are allowed in one request. Each filter can have up to 5 `Filter.Values`. `CommandIds` and `Filters` cannot be specified at the same time.
+	// - command-id - String - required: no - (filter condition) filter by the command id.
+	// - command-name - String - required: no - (filter condition) filter by the command name.
+	// -command-type - String - required: no - (filtering conditions) filters by command type. valid values: SHELL, POWERSHELL, BAT.
+	// -scene-id - String - required: no - (filter condition) filter by scenario id. obtain scenario id through the [DescribeScenes (query scenario)](https://www.tencentcloud.comom/document/api/1340/109968?from_cn_redirect=1) api.
+	// -created-by - String - required: no - (filter condition) filter by command creator, value is TAT or USER. TAT represents public command, USER represents USER created command.
+	// - tag-key - String - required: no - (filter condition) filter by the tag key.
+	// - tag-value - String - required: no - (filter condition) filter by the tag value.
+	// - tag:tag-key - String - required: no - (filter condition) filter by the tag-key - value pair. replace tag-key with a specific tag key. for usage, see example 4.
+	// 
+	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `CommandIds` and `Filters` parameters cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. It defaults to `20`. The maximum is 100. For more information on `Limit`, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
@@ -657,16 +1033,18 @@ type DescribeCommandsRequest struct {
 	// List of command IDs. Up to 100 IDs are allowed for each request. `CommandIds` and `Filters` cannot be specified at the same time.
 	CommandIds []*string `json:"CommandIds,omitnil,omitempty" name:"CommandIds"`
 
-	// Filter conditions.
-	// <li> `command-id` - String - Required: No - (Filter condition) Filter by the command ID.
-	// <li> `command-name` - String - Required: No - (Filter condition) Filter by the command name.
-	// <li> `command-type` - String - Required: No - (Filter condition) Filter by the command type. Valid values: `SHELL` or `POWERSHELL`.
-	// <li> `created-by` - String - Required: No - (Filter condition) Filter by the creator. Valid values: `TAT` (public commands) or `USER` (custom commands).
-	// <li> `tag-key` - String - Required: No - (Filter condition) Filter by the tag key.</li>
-	// <li> `tag-value` - String - Required: No - (Filter condition) Filter by the tag value.</li>
-	// <li> `tag:tag-key` - String - Required: No - (Filter) Filter by the tag key-value pair. The tag-key should be replaced with a specified tag key. For detailed usage, see sample 4.</li>
+	// Filter criteria
 	// 
-	// Up to 10 `Filters` are allowed in one request. Each filter can have up to 5 `Filter.Values`. `CommandIds` and `Filters` cannot be specified at the same time.
+	// - command-id - String - required: no - (filter condition) filter by the command id.
+	// - command-name - String - required: no - (filter condition) filter by the command name.
+	// -command-type - String - required: no - (filtering conditions) filters by command type. valid values: SHELL, POWERSHELL, BAT.
+	// -scene-id - String - required: no - (filter condition) filter by scenario id. obtain scenario id through the [DescribeScenes (query scenario)](https://www.tencentcloud.comom/document/api/1340/109968?from_cn_redirect=1) api.
+	// -created-by - String - required: no - (filter condition) filter by command creator, value is TAT or USER. TAT represents public command, USER represents USER created command.
+	// - tag-key - String - required: no - (filter condition) filter by the tag key.
+	// - tag-value - String - required: no - (filter condition) filter by the tag value.
+	// - tag:tag-key - String - required: no - (filter condition) filter by the tag-key - value pair. replace tag-key with a specific tag key. for usage, see example 4.
+	// 
+	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `CommandIds` and `Filters` parameters cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. It defaults to `20`. The maximum is 100. For more information on `Limit`, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
@@ -731,7 +1109,14 @@ type DescribeInvocationTasksRequestParams struct {
 	// List of execution task IDs. Up to 100 IDs are allowed for each request. `InvocationTaskIds` and `Filters` cannot be specified at the same time.
 	InvocationTaskIds []*string `json:"InvocationTaskIds,omitnil,omitempty" name:"InvocationTaskIds"`
 
-	// Filter conditions.<br> <li> `invocation-id` - String - Required: No - (Filter condition) Filter by the execution activity ID.<br> <li> `invocation-task-id` - String - Required: No - (Filter condition) Filter by the execution task ID.<br> <li> `instance-id` - String - Required: No - (Filter condition) Filter by the instance ID. <br> <li> `command-id` - String - Required: No - (Filter condition) Filter by the command ID. <br>Up to 10 `Filters` are allowed for each request. Each filter can have up to five `Filter.Values`. `InvocationTaskIds` and `Filters` cannot be specified at the same time.
+	// Filter conditions.<br>.
+	// 
+	// -invocation-task-id - String - required: no - (filter condition) filter by executing task id.
+	// - invocation-id - String - required: no - (filter condition) filter by the execution activity id. you can obtain it through the [DescribeInvocations](https://www.tencentcloud.comom/document/api/1340/52679?from_cn_redirect=1) api.
+	// -instance-id - String - required: no - (filtering conditions) filter by instance id. you can get the instance id through the query instance interface of corresponding cloud services. currently supported instance types: CVM, Lighthouse, and managed instances of TAT.
+	// -command-id - String - required: no - (filter criteria) filter by command id. obtain through the api [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1).
+	// 
+	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `InvocationTaskIds` and `Filters` parameters cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. It defaults to `20`. The maximum is 100. For more information on `Limit`, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
@@ -740,7 +1125,12 @@ type DescribeInvocationTasksRequestParams struct {
 	// Offset. The default value is `0`. For more information on `Offset`, see the relevant section in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Whether to hide the output. Valid values:<br><li>`True` (default): Hide the output <br><li>`False`: Show the output <br>
+	// Whether to hide the command output result. valid values:.
+	// 
+	// -true: hide output.
+	// - false: do not hide.
+	//  
+	// The default value is true.
 	HideOutput *bool `json:"HideOutput,omitnil,omitempty" name:"HideOutput"`
 }
 
@@ -750,7 +1140,14 @@ type DescribeInvocationTasksRequest struct {
 	// List of execution task IDs. Up to 100 IDs are allowed for each request. `InvocationTaskIds` and `Filters` cannot be specified at the same time.
 	InvocationTaskIds []*string `json:"InvocationTaskIds,omitnil,omitempty" name:"InvocationTaskIds"`
 
-	// Filter conditions.<br> <li> `invocation-id` - String - Required: No - (Filter condition) Filter by the execution activity ID.<br> <li> `invocation-task-id` - String - Required: No - (Filter condition) Filter by the execution task ID.<br> <li> `instance-id` - String - Required: No - (Filter condition) Filter by the instance ID. <br> <li> `command-id` - String - Required: No - (Filter condition) Filter by the command ID. <br>Up to 10 `Filters` are allowed for each request. Each filter can have up to five `Filter.Values`. `InvocationTaskIds` and `Filters` cannot be specified at the same time.
+	// Filter conditions.<br>.
+	// 
+	// -invocation-task-id - String - required: no - (filter condition) filter by executing task id.
+	// - invocation-id - String - required: no - (filter condition) filter by the execution activity id. you can obtain it through the [DescribeInvocations](https://www.tencentcloud.comom/document/api/1340/52679?from_cn_redirect=1) api.
+	// -instance-id - String - required: no - (filtering conditions) filter by instance id. you can get the instance id through the query instance interface of corresponding cloud services. currently supported instance types: CVM, Lighthouse, and managed instances of TAT.
+	// -command-id - String - required: no - (filter criteria) filter by command id. obtain through the api [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1).
+	// 
+	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `InvocationTaskIds` and `Filters` parameters cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. It defaults to `20`. The maximum is 100. For more information on `Limit`, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
@@ -759,7 +1156,12 @@ type DescribeInvocationTasksRequest struct {
 	// Offset. The default value is `0`. For more information on `Offset`, see the relevant section in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Whether to hide the output. Valid values:<br><li>`True` (default): Hide the output <br><li>`False`: Show the output <br>
+	// Whether to hide the command output result. valid values:.
+	// 
+	// -true: hide output.
+	// - false: do not hide.
+	//  
+	// The default value is true.
 	HideOutput *bool `json:"HideOutput,omitnil,omitempty" name:"HideOutput"`
 }
 
@@ -819,11 +1221,13 @@ type DescribeInvocationsRequestParams struct {
 	// List of execution activity IDs. Up to 100 IDs are allowed for each request. `InvocationIds` and `Filters` cannot be specified at the same time.
 	InvocationIds []*string `json:"InvocationIds,omitnil,omitempty" name:"InvocationIds"`
 
-	// Filter conditions.<br> <li> `invocation-id` - String - Required: No - (Filter condition) Filter by the execution activity ID.<br> 
-	// <li> `command-id` - String - Required: No - (Filter condition) Filter by the command ID. 
-	// <li> `command-created-by` - String - Required: No - (Filter condition) Filter by the command type. Valid values: `TAT` (public commands) or `USER` (custom commands).
-	// <li> `instance-kind` - String - Required: No - (Filter condition) Filter by the instance type. Valid values: `CVM` or `LIGHTHOUSE`. 
-	// <br>Up to 10 `Filters` are allowed for each request. Each filter can have up to five `Filter.Values`. `InvocationIds` and `Filters` cannot be specified at the same time.
+	// Filter conditions.<br>.
+	// 
+	// <li> invocation-id - String - required: no - (filter condition) filter by execution activity id.</li>.
+	// <li>command-id - String - required: no - (filter condition) filter by command id.</li>. 
+	// <li> command-created-by - String - required: no - (filter criteria) filter by executed command type. valid values: TAT or USER. TAT represents public command, USER represents USER created command.</li>.
+	// <li> instance-kind - String - required: no - (filtering conditions) filter by running instance type. valid values: CVM or LIGHTHOUSE. CVM represents cloud virtual machine, LIGHTHOUSE represents tencent cloud LIGHTHOUSE.</li>.
+	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `InvocationIds` and `Filters` parameters cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. It defaults to `20`. The maximum is 100. For more information on `Limit`, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
@@ -839,11 +1243,13 @@ type DescribeInvocationsRequest struct {
 	// List of execution activity IDs. Up to 100 IDs are allowed for each request. `InvocationIds` and `Filters` cannot be specified at the same time.
 	InvocationIds []*string `json:"InvocationIds,omitnil,omitempty" name:"InvocationIds"`
 
-	// Filter conditions.<br> <li> `invocation-id` - String - Required: No - (Filter condition) Filter by the execution activity ID.<br> 
-	// <li> `command-id` - String - Required: No - (Filter condition) Filter by the command ID. 
-	// <li> `command-created-by` - String - Required: No - (Filter condition) Filter by the command type. Valid values: `TAT` (public commands) or `USER` (custom commands).
-	// <li> `instance-kind` - String - Required: No - (Filter condition) Filter by the instance type. Valid values: `CVM` or `LIGHTHOUSE`. 
-	// <br>Up to 10 `Filters` are allowed for each request. Each filter can have up to five `Filter.Values`. `InvocationIds` and `Filters` cannot be specified at the same time.
+	// Filter conditions.<br>.
+	// 
+	// <li> invocation-id - String - required: no - (filter condition) filter by execution activity id.</li>.
+	// <li>command-id - String - required: no - (filter condition) filter by command id.</li>. 
+	// <li> command-created-by - String - required: no - (filter criteria) filter by executed command type. valid values: TAT or USER. TAT represents public command, USER represents USER created command.</li>.
+	// <li> instance-kind - String - required: no - (filtering conditions) filter by running instance type. valid values: CVM or LIGHTHOUSE. CVM represents cloud virtual machine, LIGHTHOUSE represents tencent cloud LIGHTHOUSE.</li>.
+	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `InvocationIds` and `Filters` parameters cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. It defaults to `20`. The maximum is 100. For more information on `Limit`, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
@@ -905,7 +1311,9 @@ func (r *DescribeInvocationsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInvokerRecordsRequestParams struct {
-	// List of invoker IDs. Up to 100 IDs are allowed.
+	// Executor ID list. the list has a cap of 100.
+	// 
+	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerIds []*string `json:"InvokerIds,omitnil,omitempty" name:"InvokerIds"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
@@ -918,7 +1326,9 @@ type DescribeInvokerRecordsRequestParams struct {
 type DescribeInvokerRecordsRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of invoker IDs. Up to 100 IDs are allowed.
+	// Executor ID list. the list has a cap of 100.
+	// 
+	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerIds []*string `json:"InvokerIds,omitnil,omitempty" name:"InvokerIds"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
@@ -979,14 +1389,20 @@ func (r *DescribeInvokerRecordsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInvokersRequestParams struct {
-	// List of invoker IDs.
+	// Executor ID list.
+	// 
+	// The maximum per request is 100.
+	// 
+	// Parameters must not be specified simultaneously `InvokerIds` and `Filters`.
 	InvokerIds []*string `json:"InvokerIds,omitnil,omitempty" name:"InvokerIds"`
 
-	// Filter conditions:
+	// Filter criteria:.
 	// 
-	// <li> `invoker-id` - String - Required: No - (Filter condition) Filter by the invoker ID.
-	// <li> `command-id` - String - Required: No - (Filter condition) Filter by the command ID.
-	// <li> `type` - String - Required: No - (Filter condition) Filter by the invoker type.
+	// - invoker-id - String - required: no - (filter condition) filter by executor id.
+	// -command-id - String - required: no - (filter condition) filters commands by id. you can obtain the id through the [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+	// - invoker-type - String - required: no - (filter condition) filter by the executor type. currently only support SCHEDULE.
+	// 
+	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `InvokerIds` and `Filters` parameters cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
@@ -999,14 +1415,20 @@ type DescribeInvokersRequestParams struct {
 type DescribeInvokersRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of invoker IDs.
+	// Executor ID list.
+	// 
+	// The maximum per request is 100.
+	// 
+	// Parameters must not be specified simultaneously `InvokerIds` and `Filters`.
 	InvokerIds []*string `json:"InvokerIds,omitnil,omitempty" name:"InvokerIds"`
 
-	// Filter conditions:
+	// Filter criteria:.
 	// 
-	// <li> `invoker-id` - String - Required: No - (Filter condition) Filter by the invoker ID.
-	// <li> `command-id` - String - Required: No - (Filter condition) Filter by the command ID.
-	// <li> `type` - String - Required: No - (Filter condition) Filter by the invoker type.
+	// - invoker-id - String - required: no - (filter condition) filter by executor id.
+	// -command-id - String - required: no - (filter condition) filters commands by id. you can obtain the id through the [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+	// - invoker-type - String - required: no - (filter condition) filter by the executor type. currently only support SCHEDULE.
+	// 
+	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `InvokerIds` and `Filters` parameters cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
@@ -1063,6 +1485,73 @@ func (r *DescribeInvokersResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeInvokersResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeQuotasRequestParams struct {
+	// Resource name
+	// 
+	// Value is:.
+	// 
+	// - COMMAND: COMMAND.
+	// -REGISTER_CODE: managed instance registration code.
+	ResourceNames []*string `json:"ResourceNames,omitnil,omitempty" name:"ResourceNames"`
+}
+
+type DescribeQuotasRequest struct {
+	*tchttp.BaseRequest
+	
+	// Resource name
+	// 
+	// Value is:.
+	// 
+	// - COMMAND: COMMAND.
+	// -REGISTER_CODE: managed instance registration code.
+	ResourceNames []*string `json:"ResourceNames,omitnil,omitempty" name:"ResourceNames"`
+}
+
+func (r *DescribeQuotasRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeQuotasRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ResourceNames")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeQuotasRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeQuotasResponseParams struct {
+	// Resource quota list.
+	GeneralResourceQuotaSet []*GeneralResourceQuotaSet `json:"GeneralResourceQuotaSet,omitnil,omitempty" name:"GeneralResourceQuotaSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeQuotasResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeQuotasResponseParams `json:"Response"`
+}
+
+func (r *DescribeQuotasResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeQuotasResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1124,15 +1613,407 @@ func (r *DescribeRegionsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeRegisterCodesRequestParams struct {
+	// Registration code ID.
+	// 
+	// The maximum per request is 100.
+	// 
+	// Parameters must not be specified simultaneously `RegisterCodeIds` and `Filters`.
+	RegisterCodeIds []*string `json:"RegisterCodeIds,omitnil,omitempty" name:"RegisterCodeIds"`
+
+	// Offset. default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned results, defaults to 20, maximum value is 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeRegisterCodesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Registration code ID.
+	// 
+	// The maximum per request is 100.
+	// 
+	// Parameters must not be specified simultaneously `RegisterCodeIds` and `Filters`.
+	RegisterCodeIds []*string `json:"RegisterCodeIds,omitnil,omitempty" name:"RegisterCodeIds"`
+
+	// Offset. default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned results, defaults to 20, maximum value is 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeRegisterCodesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRegisterCodesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RegisterCodeIds")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRegisterCodesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRegisterCodesResponseParams struct {
+	// Total number of queried registration codes.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Registration code information list.
+	RegisterCodeSet []*RegisterCodeInfo `json:"RegisterCodeSet,omitnil,omitempty" name:"RegisterCodeSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeRegisterCodesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRegisterCodesResponseParams `json:"Response"`
+}
+
+func (r *DescribeRegisterCodesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRegisterCodesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRegisterInstancesRequestParams struct {
+	// Managed instance id.
+	// 
+	// The maximum per request is 100.
+	// 
+	// Parameters must not be specified simultaneously `InstanceIds` and `Filters`.
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
+
+	// Filter list. the maximum number of `Filters` is 10 per request, and the maximum number of `Filter.Values` is 5. parameters must not be specified simultaneously for `InstanceIds` and `Filters`.
+	// 
+	// 
+	// - instance-name
+	// 
+	// Filter by [managed instance name].
+	// Type: String.
+	// Required: No
+	// 
+	// - instance-id
+	// 
+	// Filter by [managed instance ID].
+	// Type: String.
+	// Required: No
+	// 
+	// - register-status
+	// 
+	// Filter by [managed instance status]. valid values: Online | Offline.
+	// Type: String.
+	// Required: No
+	// 
+	// - local-ip
+	// 
+	// Filter by [managed instance nic IP].
+	// Type: String.
+	// Required: No
+	// 
+	// - register-code-id
+	// 
+	// Filter by [managed instance registration code ID]. call the [DescribeRegisterCodes](https://www.tencentcloud.comom/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
+	// Type: String.
+	// Required: No
+	// 
+	// - sys-name
+	// 
+	// Filter by [operating system type]. valid values: Linux | Windows.
+	// Type: String.
+	// Required: No
+	// 
+	// - tag-key
+	// 
+	// Filter by [tag key].
+	// Type: String.
+	// Required: No
+	// 
+	// - tag-value
+	// 
+	// Filter by [tag value].
+	// Type: String.
+	// Required: No
+	// 
+	// - tag:tag-key
+	// 
+	// Filter by [tag key-value pair]. replace tag-key with a specific Tag key.
+	// Type: String.
+	// Required: No
+	// 
+	// For example, the Filter is {"Name": "tag:key1", "Values": ["v1", "v2"] }, which queries all resources belonging to tag key1:v1 or key1:v2.
+	// 
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Offset. default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned results, defaults to 20, maximum value is 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeRegisterInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Managed instance id.
+	// 
+	// The maximum per request is 100.
+	// 
+	// Parameters must not be specified simultaneously `InstanceIds` and `Filters`.
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
+
+	// Filter list. the maximum number of `Filters` is 10 per request, and the maximum number of `Filter.Values` is 5. parameters must not be specified simultaneously for `InstanceIds` and `Filters`.
+	// 
+	// 
+	// - instance-name
+	// 
+	// Filter by [managed instance name].
+	// Type: String.
+	// Required: No
+	// 
+	// - instance-id
+	// 
+	// Filter by [managed instance ID].
+	// Type: String.
+	// Required: No
+	// 
+	// - register-status
+	// 
+	// Filter by [managed instance status]. valid values: Online | Offline.
+	// Type: String.
+	// Required: No
+	// 
+	// - local-ip
+	// 
+	// Filter by [managed instance nic IP].
+	// Type: String.
+	// Required: No
+	// 
+	// - register-code-id
+	// 
+	// Filter by [managed instance registration code ID]. call the [DescribeRegisterCodes](https://www.tencentcloud.comom/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
+	// Type: String.
+	// Required: No
+	// 
+	// - sys-name
+	// 
+	// Filter by [operating system type]. valid values: Linux | Windows.
+	// Type: String.
+	// Required: No
+	// 
+	// - tag-key
+	// 
+	// Filter by [tag key].
+	// Type: String.
+	// Required: No
+	// 
+	// - tag-value
+	// 
+	// Filter by [tag value].
+	// Type: String.
+	// Required: No
+	// 
+	// - tag:tag-key
+	// 
+	// Filter by [tag key-value pair]. replace tag-key with a specific Tag key.
+	// Type: String.
+	// Required: No
+	// 
+	// For example, the Filter is {"Name": "tag:key1", "Values": ["v1", "v2"] }, which queries all resources belonging to tag key1:v1 or key1:v2.
+	// 
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Offset. default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned results, defaults to 20, maximum value is 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeRegisterInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRegisterInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRegisterInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRegisterInstancesResponseParams struct {
+	// The total number of registration codes registered by the instance.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// List of managed instance information.
+	RegisterInstanceSet []*RegisterInstanceInfo `json:"RegisterInstanceSet,omitnil,omitempty" name:"RegisterInstanceSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeRegisterInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRegisterInstancesResponseParams `json:"Response"`
+}
+
+func (r *DescribeRegisterInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRegisterInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeScenesRequestParams struct {
+	// Scene ID array.
+	// 
+	// The maximum per request is 100.
+	// 
+	// Parameters must not specify both `SceneIds` and `Filters` simultaneously.
+	SceneIds []*string `json:"SceneIds,omitnil,omitempty" name:"SceneIds"`
+
+	// Filter criteria
+	// 
+	// - scene-id - String - required: no - (filter condition) filter by the scene id.
+	// -scene-name - String - required: no - (filtering conditions) filter by scenario name.
+	// -created-by - String - required: no - (filter criteria) filter by scene creator, currently only support TAT, representing public scenarios.
+	// 
+	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `SceneIds` and `Filters` parameters cannot be specified at the same time.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Number of returned results, defaults to 20 with a maximum value of 100. for further introduction about `Limit`, see relevant sections in the API [overview](https://www.tencentcloud.comom/document/API/213/15688?from_cn_redirect=1).
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. The default value is `0`. For more information on `Offset`, see the relevant section in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+type DescribeScenesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Scene ID array.
+	// 
+	// The maximum per request is 100.
+	// 
+	// Parameters must not specify both `SceneIds` and `Filters` simultaneously.
+	SceneIds []*string `json:"SceneIds,omitnil,omitempty" name:"SceneIds"`
+
+	// Filter criteria
+	// 
+	// - scene-id - String - required: no - (filter condition) filter by the scene id.
+	// -scene-name - String - required: no - (filtering conditions) filter by scenario name.
+	// -created-by - String - required: no - (filter criteria) filter by scene creator, currently only support TAT, representing public scenarios.
+	// 
+	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `SceneIds` and `Filters` parameters cannot be specified at the same time.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Number of returned results, defaults to 20 with a maximum value of 100. for further introduction about `Limit`, see relevant sections in the API [overview](https://www.tencentcloud.comom/document/API/213/15688?from_cn_redirect=1).
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. The default value is `0`. For more information on `Offset`, see the relevant section in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+func (r *DescribeScenesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeScenesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SceneIds")
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeScenesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeScenesResponseParams struct {
+	// Total number of eligible scenarios.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// List of scenario details.
+	SceneSet []*Scene `json:"SceneSet,omitnil,omitempty" name:"SceneSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeScenesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeScenesResponseParams `json:"Response"`
+}
+
+func (r *DescribeScenesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeScenesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DisableInvokerRequestParams struct {
-	// ID of the invoker to be disabled.
+	// ID of the executor to terminate.
+	// 
+	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 }
 
 type DisableInvokerRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the invoker to be disabled.
+	// ID of the executor to terminate.
+	// 
+	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 }
 
@@ -1178,15 +2059,77 @@ func (r *DisableInvokerResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DisableRegisterCodesRequestParams struct {
+	// Registration code ID.
+	// 
+	// Call the [DescribeRegisterCodes](https://www.tencentcloud.comom/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
+	RegisterCodeIds []*string `json:"RegisterCodeIds,omitnil,omitempty" name:"RegisterCodeIds"`
+}
+
+type DisableRegisterCodesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Registration code ID.
+	// 
+	// Call the [DescribeRegisterCodes](https://www.tencentcloud.comom/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
+	RegisterCodeIds []*string `json:"RegisterCodeIds,omitnil,omitempty" name:"RegisterCodeIds"`
+}
+
+func (r *DisableRegisterCodesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisableRegisterCodesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RegisterCodeIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisableRegisterCodesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DisableRegisterCodesResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DisableRegisterCodesResponse struct {
+	*tchttp.BaseResponse
+	Response *DisableRegisterCodesResponseParams `json:"Response"`
+}
+
+func (r *DisableRegisterCodesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisableRegisterCodesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type EnableInvokerRequestParams struct {
-	// ID of the invoker to be enabled.
+	// Executor ID to be enabled.
+	// 
+	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 }
 
 type EnableInvokerRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the invoker to be enabled.
+	// Executor ID to be enabled.
+	// 
+	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 }
 
@@ -1239,6 +2182,22 @@ type Filter struct {
 	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 }
 
+type GeneralResourceQuotaSet struct {
+	// Resource name
+	// 
+	// Value is:.
+	// 
+	// - COMMAND: COMMAND.
+	// -REGISTER_CODE: managed instance registration code.
+	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
+
+	// Used credit limit.
+	ResourceQuotaUsed *int64 `json:"ResourceQuotaUsed,omitnil,omitempty" name:"ResourceQuotaUsed"`
+
+	// Total quota.
+	ResourceQuotaTotal *int64 `json:"ResourceQuotaTotal,omitnil,omitempty" name:"ResourceQuotaTotal"`
+}
+
 type Invocation struct {
 	// Execution activity ID.
 	InvocationId *string `json:"InvocationId,omitnil,omitempty" name:"InvocationId"`
@@ -1246,13 +2205,20 @@ type Invocation struct {
 	// Command ID.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
-	// Execution task status. Valid values:
-	// <li> PENDING: Pending 
-	// <li> RUNNING: Running
-	// <li> SUCCESS: Success
-	// <li> FAILED: Failed
-	// <li> TIMEOUT: Command timed out
-	// <li> PARTIAL_FAILED: Partial failure
+	// Name of the executed command.
+	CommandName *string `json:"CommandName,omitnil,omitempty" name:"CommandName"`
+
+	// Execution task status. valid values:.
+	// 
+	// -PENDING: waiting for distribution.
+	// - RUNNING: command RUNNING.
+	// -Canceling.
+	// -SUCCESS: command success.
+	// -TIMEOUT: command timeout.
+	// - FAILED: command FAILED.
+	// -CANCELLED: all commands canceled.
+	// -PARTIAL_FAILED: the command partially failed.
+	// -PARTIAL_CANCELLED: the command is partially canceled.
 	InvocationStatus *string `json:"InvocationStatus,omitnil,omitempty" name:"InvocationStatus"`
 
 	// Execution task information list.
@@ -1261,16 +2227,17 @@ type Invocation struct {
 	// Execution activity description.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Start time of the execution activity.
+	// Execute the activity start time. the format is YYYY-MM-DDThh:MM:ssZ.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time of the execution activity.
+	// Execute activity end time. format: YYYY-MM-DDThh:MM:ssZ.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Time when the execution activity is created.
+	// Execution activity createtime. format: YYYY-MM-DDThh:MM:ssZ.
 	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
 
-	// Time when the execution activity is updated.
+	// Update time of the execution activity. the format is YYYY-MM-DDThh:MM:ssZ.
 	UpdatedTime *string `json:"UpdatedTime,omitnil,omitempty" name:"UpdatedTime"`
 
 	// Values of custom parameters.
@@ -1286,6 +2253,9 @@ type Invocation struct {
 	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
 	// Invocation source.
+	// 
+	// -USER: originate from user invocation.
+	// -INVOKER: originate from scheduled execution.
 	InvocationSource *string `json:"InvocationSource,omitnil,omitempty" name:"InvocationSource"`
 
 	// Base64-encoded command
@@ -1317,20 +2287,21 @@ type InvocationTask struct {
 	// Command ID.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
-	// Execution task status. Valid values:
-	// <li> PENDING: Pending 
-	// <li> DELIVERING: Delivering
-	// <li> DELIVER_DELAYED: Delivery delayed 
-	// <li> DELIVER_FAILED: Delivery failed
-	// <li> START_FAILED: Failed to start the command
-	// <li> RUNNING: Running
-	// <li> SUCCESS: Success
-	// <li> FAILED: Failed to execute the command. The exit code is not 0 after execution.
-	// <li> TIMEOUT: Command timed out
-	// <li> TASK_TIMEOUT: Task timed out
-	// <li> CANCELLING: Canceling
-	// <li> CANCELLED: Canceled (canceled before execution)
-	// <li> TERMINATED: Terminated (canceled during execution)
+	// Execution task status. valid values:.
+	// 
+	// -PENDING: waiting for distribution.
+	// -DELIVERING: distributing.
+	// -DELIVER_DELAYED: delivery delay.
+	// -DELIVER_FAILED: delivery fail.
+	// -START_FAILED: command start failed.
+	// - RUNNING: command RUNNING.
+	// -SUCCESS: command success.
+	// -FAILED: command execution failed, exit code not 0.
+	// -TIMEOUT: command timeout.
+	// -TASK_TIMEOUT: client no response.
+	// -Canceling.
+	// - CANCELLED: canceled (command canceled before startup).
+	// -TERMINATED: suspended (canceled during command execution).
 	TaskStatus *string `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
 	// Instance ID.
@@ -1339,16 +2310,18 @@ type InvocationTask struct {
 	// Execution result.
 	TaskResult *TaskResult `json:"TaskResult,omitnil,omitempty" name:"TaskResult"`
 
-	// Start time of the execution task.
+	// Task start time. format: YYYY-MM-DDThh:MM:ssZ.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time of the execution task.
+	// Task end time. format: YYYY-MM-DDThh:MM:ssZ.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Creation time.
+	// Creation time. the format is YYYY-MM-DDThh:MM:ssZ.
 	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
 
-	// Update time.
+	// Update time. the format is YYYY-MM-DDThh:MM:ssZ.
 	UpdatedTime *string `json:"UpdatedTime,omitnil,omitempty" name:"UpdatedTime"`
 
 	// Command details of the execution task.
@@ -1358,27 +2331,34 @@ type InvocationTask struct {
 	ErrorInfo *string `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
 
 	// Invocation source.
+	// 
+	// -USER: originate from user invocation.
+	// -INVOKER: originate from scheduled execution.
 	InvocationSource *string `json:"InvocationSource,omitnil,omitempty" name:"InvocationSource"`
+
+	// Name of the executed command.
+	CommandName *string `json:"CommandName,omitnil,omitempty" name:"CommandName"`
 }
 
 type InvocationTaskBasicInfo struct {
 	// Execution task ID.
 	InvocationTaskId *string `json:"InvocationTaskId,omitnil,omitempty" name:"InvocationTaskId"`
 
-	// Execution task status. Valid values:
-	// <li> PENDING: Pending 
-	// <li> DELIVERING: Delivering
-	// <li> DELIVER_DELAYED: Delivery delayed 
-	// <li> DELIVER_FAILED: Delivery failed
-	// <li> START_FAILED: Failed to start the command
-	// <li> RUNNING: Running
-	// <li> SUCCESS: Success
-	// <li> FAILED: Failed to execute the command. The exit code is not 0 after execution.
-	// <li> TIMEOUT: Command timed out
-	// <li> TASK_TIMEOUT: Task timed out
-	// <li> CANCELLING: Canceling
-	// <li> CANCELLED: Canceled (canceled before execution)
-	// <li> TERMINATED: Terminated (canceled during execution)
+	// Execution task status. valid values:.
+	// 
+	// -PENDING: waiting for distribution.
+	// -DELIVERING: distributing.
+	// -DELIVER_DELAYED: delivery delay.
+	// -DELIVER_FAILED: delivery fail.
+	// -START_FAILED: command start failed.
+	// - RUNNING: command RUNNING.
+	// -SUCCESS: command success.
+	// -FAILED: command execution failed, exit code not 0.
+	// -TIMEOUT: command timeout.
+	// -TASK_TIMEOUT: client no response.
+	// -Canceling.
+	// - CANCELLED: canceled (command canceled before startup).
+	// -TERMINATED: suspended (canceled during command execution).
 	TaskStatus *string `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
 	// Instance ID.
@@ -1387,17 +2367,23 @@ type InvocationTaskBasicInfo struct {
 
 // Predefined struct for user
 type InvokeCommandRequestParams struct {
-	// ID of the command to be triggered.
+	// Pending trigger command ID. call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
-	// IDs of instances about to execute commands. At most 100 IDs are allowed.
+	// Instance ID list for the command to be executed, with a cap of 200.
+	// 
+	// Instance ID can be obtained through the query instance interface of corresponding cloud services. currently supported instance types:.
+	// - CVM
+	// - Lighthouse
+	// -TAT register instance.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// Custom parameters of the command. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
-	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
-	// If no parameter value is provided, the DefaultParameters of the command is used.
-	// Up to 20 custom parameters are supported.
-	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
+	// Custom parameter of Command. field type is json encoded string. for example: {"varA": "222"}.
+	// The key is the custom parameter name, and the value is the default. both kv are string-type.
+	// This parameter can be set only when the EnableParameter of the command is true. you can obtain the EnableParameter settings through the [DescribeCommands (detailed command information)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+	// If the parameter value is not provided, the DefaultParameters or DefaultParameterConfs of Command will be used to replace it.
+	// Custom parameters can be up to 20.
+	// The custom parameter name must meet the following standard: the number of characters has a cap of 64, and the optional range is [a-zA-Z0-9-_].
 	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// The username used to execute the command on the CVM or Lighthouse instance.
@@ -1423,17 +2409,23 @@ type InvokeCommandRequestParams struct {
 type InvokeCommandRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the command to be triggered.
+	// Pending trigger command ID. call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
-	// IDs of instances about to execute commands. At most 100 IDs are allowed.
+	// Instance ID list for the command to be executed, with a cap of 200.
+	// 
+	// Instance ID can be obtained through the query instance interface of corresponding cloud services. currently supported instance types:.
+	// - CVM
+	// - Lighthouse
+	// -TAT register instance.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// Custom parameters of the command. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
-	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
-	// If no parameter value is provided, the DefaultParameters of the command is used.
-	// Up to 20 custom parameters are supported.
-	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
+	// Custom parameter of Command. field type is json encoded string. for example: {"varA": "222"}.
+	// The key is the custom parameter name, and the value is the default. both kv are string-type.
+	// This parameter can be set only when the EnableParameter of the command is true. you can obtain the EnableParameter settings through the [DescribeCommands (detailed command information)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+	// If the parameter value is not provided, the DefaultParameters or DefaultParameterConfs of Command will be used to replace it.
+	// Custom parameters can be up to 20.
+	// The custom parameter name must meet the following standard: the number of characters has a cap of 64, and the optional range is [a-zA-Z0-9-_].
 	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// The username used to execute the command on the CVM or Lighthouse instance.
@@ -1514,7 +2506,7 @@ type Invoker struct {
 	// Invoker name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Invoker type.
+	// Executor type. currently only support SCHEDULE.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Command ID.
@@ -1532,14 +2524,13 @@ type Invoker struct {
 	// Whether to enable the invoker.
 	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
 
-	// Execution schedule of the invoker. This field is returned for recurring invokers.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Executor periodic schedule. recurring invoker will return this field.
 	ScheduleSettings *ScheduleSettings `json:"ScheduleSettings,omitnil,omitempty" name:"ScheduleSettings"`
 
-	// Creation time.
+	// Creation time. the format is YYYY-MM-DDThh:MM:ssZ.
 	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
 
-	// Modification time.
+	// Last modified. the format is YYYY-MM-DDThh:MM:ssZ.
 	UpdatedTime *string `json:"UpdatedTime,omitnil,omitempty" name:"UpdatedTime"`
 }
 
@@ -1547,7 +2538,7 @@ type InvokerRecord struct {
 	// Invoker ID.
 	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 
-	// Execution time.
+	// Execution time. format: YYYY-MM-DDThh:MM:ssZ.
 	InvokeTime *string `json:"InvokeTime,omitnil,omitempty" name:"InvokeTime"`
 
 	// Execution reason.
@@ -1557,97 +2548,95 @@ type InvokerRecord struct {
 	InvocationId *string `json:"InvocationId,omitnil,omitempty" name:"InvocationId"`
 
 	// Trigger result.
+	// 
+	// -PENDING: waiting for distribution.
+	// - RUNNING: command RUNNING.
+	// -Canceling.
+	// -SUCCESS: command success.
+	// -TIMEOUT: command timeout.
+	// - FAILED: command FAILED.
+	// -CANCELLED: all commands canceled.
+	// -PARTIAL_FAILED: the command partially failed.
+	// -PARTIAL_CANCELLED: the command is partially canceled.
 	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 }
 
 // Predefined struct for user
 type ModifyCommandRequestParams struct {
-	// Command ID.
+	// <p>Command ID. call the <a href="https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1">DescribeCommands</a> api to query command details.</p>.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
-	// Command name. The name can be up to 60 bytes, and contain [a-z], [A-Z], [0-9] and [_-.].
+	// <p>Command name. name only supports chinese, english, digits, underscore, separator "-", and decimal point. the maximum length cannot exceed 60 bytes.</p>.
 	CommandName *string `json:"CommandName,omitnil,omitempty" name:"CommandName"`
 
-	// Command description. The maximum length is 120 characters.
+	// <P>Command description. no more than 120 characters.</p>.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Base64-encoded command. The maximum length is 64 KB.
+	// <p>The Base64-encoded command content, length cannot exceed 64KB.</p>.
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
-	// Command type. `SHELL` and `POWERSHELL` are supported.
+	// <p>Command type. currently supports SHELL, POWERSHELL, BAT.</p>.
 	CommandType *string `json:"CommandType,omitnil,omitempty" name:"CommandType"`
 
-	// Command execution path.
+	// <P>Command execution path.</p>.
 	WorkingDirectory *string `json:"WorkingDirectory,omitnil,omitempty" name:"WorkingDirectory"`
 
-	// Command timeout period. Value range: [1, 86400].
+	// <p>Command timeout time.</p><p>value range: [1, 86400].</p><p>unit: seconds.</p><p>default value: 60.</p><p>when specifying the OutputCOSBucketUrl parameter, the timeout period includes the time taken to upload command output to COS.</p>.
 	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
-	// The default value of the custom parameter value when it is enabled. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
-	// All parameters are overwritten. All default values are required for modification.
-	// Modification is only allowed when `EnableParameter` is `true`.
-	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
-	// Up to 20 custom parameters are supported.
-	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
+	// <p>The default value of custom parameters when the custom parameter feature is enabled. the field type is a json-encoded string, for example: {"varA": "222"}.<br>parameters must not be specified simultaneously for <code>DefaultParameters</code> and <code>DefaultParameterConfs</code>.<br>a comprehensive modification is applied, meaning all new default values must be provided when modifying.<br>this parameter can be modified only when EnableParameter of the command is true. obtain the EnableParameter settings of the command through the <a href="https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1">DescribeCommands (query command details)</a> api.<br>the key is the custom parameter name, and the value is the default value of this parameter. both key and value are string-type.<br>there is an upper limit of 20 custom parameters.<br>custom parameter names must meet the following requirements: the upper limit of character quantity is 64, and the optional range is [a-zA-Z0-9-_].</p>.
 	DefaultParameters *string `json:"DefaultParameters,omitnil,omitempty" name:"DefaultParameters"`
 
-	// The username used to execute the command on the CVM or Lighthouse instance.
-	// The principle of least privilege is the best practice for permission management. We recommend you execute TAT commands as a general user.
+	// <p>Custom parameter array. if no parameter value is provided when invoking the command, the default value here will be used to replace it.<br>parameters do not support specifying both <code>DefaultParameters</code> and <code>DefaultParameterConfs</code>.<br>this parameter can be modified only when EnableParameter of the command is true. obtain the EnableParameter settings through the <a href="https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1">DescribeCommands (query command details)</a> api.<br>up to 20 custom parameters are allowed.</p>.
+	DefaultParameterConfs []*DefaultParameterConf `json:"DefaultParameterConfs,omitnil,omitempty" name:"DefaultParameterConfs"`
+
+	// <p>The username to run commands in a CVM or Lighthouse instance.<br>using minimum permission to execute commands is the best practice for permission management. we recommend running cloud assistant commands as a regular user identity.</p>.
 	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
-	// The COS bucket URL for uploading logs. The URL must start with `https`, such as `https://BucketName-123454321.cos.ap-beijing.myqcloud.com`.
+	// <p>Specifies the cos bucket address for the uploaded log, which must start with https, such as https://BucketName-123454321.cos.ap-beijing.myqcloud.com.</p>.
 	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil,omitempty" name:"OutputCOSBucketUrl"`
 
-	// The COS bucket directory where the logs are saved. Check below for the rules of the directory name. 
-	// 1. It must be a combination of number, letters, and visible characters. Up to 60 characters are allowed.
-	// 2. Use a slash (/) to create a subdirectory.
-	// 3. ".." can not be used as the folder name. It cannot start with a slash (/), and cannot contain consecutive slashes.
+	// <P>Specify the directory for logs in the cos bucket. the directory naming has the following rules:</p><ol><li>use a combination of numbers, chinese and english, and visible characters, with a maximum length of 60.</li><li>use / to split the path and quickly create subdirectories.</li><li>consecutive / are not allowed; cannot start with /; cannot use .. as the folder name.</li></ol>.
 	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil,omitempty" name:"OutputCOSKeyPrefix"`
 }
 
 type ModifyCommandRequest struct {
 	*tchttp.BaseRequest
 	
-	// Command ID.
+	// <p>Command ID. call the <a href="https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1">DescribeCommands</a> api to query command details.</p>.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
-	// Command name. The name can be up to 60 bytes, and contain [a-z], [A-Z], [0-9] and [_-.].
+	// <p>Command name. name only supports chinese, english, digits, underscore, separator "-", and decimal point. the maximum length cannot exceed 60 bytes.</p>.
 	CommandName *string `json:"CommandName,omitnil,omitempty" name:"CommandName"`
 
-	// Command description. The maximum length is 120 characters.
+	// <P>Command description. no more than 120 characters.</p>.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Base64-encoded command. The maximum length is 64 KB.
+	// <p>The Base64-encoded command content, length cannot exceed 64KB.</p>.
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
-	// Command type. `SHELL` and `POWERSHELL` are supported.
+	// <p>Command type. currently supports SHELL, POWERSHELL, BAT.</p>.
 	CommandType *string `json:"CommandType,omitnil,omitempty" name:"CommandType"`
 
-	// Command execution path.
+	// <P>Command execution path.</p>.
 	WorkingDirectory *string `json:"WorkingDirectory,omitnil,omitempty" name:"WorkingDirectory"`
 
-	// Command timeout period. Value range: [1, 86400].
+	// <p>Command timeout time.</p><p>value range: [1, 86400].</p><p>unit: seconds.</p><p>default value: 60.</p><p>when specifying the OutputCOSBucketUrl parameter, the timeout period includes the time taken to upload command output to COS.</p>.
 	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
-	// The default value of the custom parameter value when it is enabled. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
-	// All parameters are overwritten. All default values are required for modification.
-	// Modification is only allowed when `EnableParameter` is `true`.
-	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
-	// Up to 20 custom parameters are supported.
-	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
+	// <p>The default value of custom parameters when the custom parameter feature is enabled. the field type is a json-encoded string, for example: {"varA": "222"}.<br>parameters must not be specified simultaneously for <code>DefaultParameters</code> and <code>DefaultParameterConfs</code>.<br>a comprehensive modification is applied, meaning all new default values must be provided when modifying.<br>this parameter can be modified only when EnableParameter of the command is true. obtain the EnableParameter settings of the command through the <a href="https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1">DescribeCommands (query command details)</a> api.<br>the key is the custom parameter name, and the value is the default value of this parameter. both key and value are string-type.<br>there is an upper limit of 20 custom parameters.<br>custom parameter names must meet the following requirements: the upper limit of character quantity is 64, and the optional range is [a-zA-Z0-9-_].</p>.
 	DefaultParameters *string `json:"DefaultParameters,omitnil,omitempty" name:"DefaultParameters"`
 
-	// The username used to execute the command on the CVM or Lighthouse instance.
-	// The principle of least privilege is the best practice for permission management. We recommend you execute TAT commands as a general user.
+	// <p>Custom parameter array. if no parameter value is provided when invoking the command, the default value here will be used to replace it.<br>parameters do not support specifying both <code>DefaultParameters</code> and <code>DefaultParameterConfs</code>.<br>this parameter can be modified only when EnableParameter of the command is true. obtain the EnableParameter settings through the <a href="https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1">DescribeCommands (query command details)</a> api.<br>up to 20 custom parameters are allowed.</p>.
+	DefaultParameterConfs []*DefaultParameterConf `json:"DefaultParameterConfs,omitnil,omitempty" name:"DefaultParameterConfs"`
+
+	// <p>The username to run commands in a CVM or Lighthouse instance.<br>using minimum permission to execute commands is the best practice for permission management. we recommend running cloud assistant commands as a regular user identity.</p>.
 	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
-	// The COS bucket URL for uploading logs. The URL must start with `https`, such as `https://BucketName-123454321.cos.ap-beijing.myqcloud.com`.
+	// <p>Specifies the cos bucket address for the uploaded log, which must start with https, such as https://BucketName-123454321.cos.ap-beijing.myqcloud.com.</p>.
 	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil,omitempty" name:"OutputCOSBucketUrl"`
 
-	// The COS bucket directory where the logs are saved. Check below for the rules of the directory name. 
-	// 1. It must be a combination of number, letters, and visible characters. Up to 60 characters are allowed.
-	// 2. Use a slash (/) to create a subdirectory.
-	// 3. ".." can not be used as the folder name. It cannot start with a slash (/), and cannot contain consecutive slashes.
+	// <P>Specify the directory for logs in the cos bucket. the directory naming has the following rules:</p><ol><li>use a combination of numbers, chinese and english, and visible characters, with a maximum length of 60.</li><li>use / to split the path and quickly create subdirectories.</li><li>consecutive / are not allowed; cannot start with /; cannot use .. as the folder name.</li></ol>.
 	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil,omitempty" name:"OutputCOSKeyPrefix"`
 }
 
@@ -1671,6 +2660,7 @@ func (r *ModifyCommandRequest) FromJsonString(s string) error {
 	delete(f, "WorkingDirectory")
 	delete(f, "Timeout")
 	delete(f, "DefaultParameters")
+	delete(f, "DefaultParameterConfs")
 	delete(f, "Username")
 	delete(f, "OutputCOSBucketUrl")
 	delete(f, "OutputCOSKeyPrefix")
@@ -1704,56 +2694,88 @@ func (r *ModifyCommandResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyInvokerRequestParams struct {
-	// ID of the invoker to be modified.
+	// Executor ID to be modified.
+	// 
+	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 
-	// Name of the invoker to be modified.
+	// Executor name to be modified. length not exceeding 120 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Invoker type. It can only be `SCHEDULE` (recurring invokers).
+	// Executor type to be modified.
+	// 
+	// Selectable values (currently only support one):.
+	// 
+	// -`SCHEDULE`: period type executor.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// ID of the command to be modified.
+	// Command ID to be modified.
+	// 
+	// Call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
-	// The username to be modified.
+	// Username to be modified. length not exceeding 256 characters.
 	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
-	// Custom parameters to be modified.
+	// Custom parameters to be modified. field type is JSON encode string.
+	// 
+	// This parameter can be set only when EnableParameter of the command specified by CommandId is true. obtain the EnableParameter settings through the [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
 	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
-	// List of instance IDs to be modified. Up to 100 IDs are allowed.
+	// List of instance ids to be modified. list length limit 100.
+	// 
+	// You can get the instance ID through the query instance interface of corresponding cloud services. currently supports instance types: CVM, Lighthouse, and TAT managed instances.
+	// 
+	// The instance needs to have the TAT client installed, and the client must be in Online status. you can query client status via the [DescribeAutomationAgentStatus](https://www.tencentcloud.comom/document/api/1340/52682?from_cn_redirect=1) api.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// Scheduled invoker settings to be modified.
+	// Recurring invoker settings to be modified.
+	// 
+	// Change the executor type to `SCHEDULE` and specify this parameter.
 	ScheduleSettings *ScheduleSettings `json:"ScheduleSettings,omitnil,omitempty" name:"ScheduleSettings"`
 }
 
 type ModifyInvokerRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the invoker to be modified.
+	// Executor ID to be modified.
+	// 
+	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 
-	// Name of the invoker to be modified.
+	// Executor name to be modified. length not exceeding 120 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Invoker type. It can only be `SCHEDULE` (recurring invokers).
+	// Executor type to be modified.
+	// 
+	// Selectable values (currently only support one):.
+	// 
+	// -`SCHEDULE`: period type executor.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// ID of the command to be modified.
+	// Command ID to be modified.
+	// 
+	// Call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
-	// The username to be modified.
+	// Username to be modified. length not exceeding 256 characters.
 	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
-	// Custom parameters to be modified.
+	// Custom parameters to be modified. field type is JSON encode string.
+	// 
+	// This parameter can be set only when EnableParameter of the command specified by CommandId is true. obtain the EnableParameter settings through the [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
 	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
-	// List of instance IDs to be modified. Up to 100 IDs are allowed.
+	// List of instance ids to be modified. list length limit 100.
+	// 
+	// You can get the instance ID through the query instance interface of corresponding cloud services. currently supports instance types: CVM, Lighthouse, and TAT managed instances.
+	// 
+	// The instance needs to have the TAT client installed, and the client must be in Online status. you can query client status via the [DescribeAutomationAgentStatus](https://www.tencentcloud.comom/document/api/1340/52682?from_cn_redirect=1) api.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// Scheduled invoker settings to be modified.
+	// Recurring invoker settings to be modified.
+	// 
+	// Change the executor type to `SCHEDULE` and specify this parameter.
 	ScheduleSettings *ScheduleSettings `json:"ScheduleSettings,omitnil,omitempty" name:"ScheduleSettings"`
 }
 
@@ -1806,16 +2828,85 @@ func (r *ModifyInvokerResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyRegisterInstanceRequestParams struct {
+	// Managed instance ID.
+	// 
+	// Call the [DescribeRegisterInstances](https://www.tencentcloud.comom/document/api/1340/96924?from_cn_redirect=1) api to query managed instances.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Instance name. valid length is 1–60 characters.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+}
+
+type ModifyRegisterInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Managed instance ID.
+	// 
+	// Call the [DescribeRegisterInstances](https://www.tencentcloud.comom/document/api/1340/96924?from_cn_redirect=1) api to query managed instances.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Instance name. valid length is 1–60 characters.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+}
+
+func (r *ModifyRegisterInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRegisterInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "InstanceName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRegisterInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRegisterInstanceResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyRegisterInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyRegisterInstanceResponseParams `json:"Response"`
+}
+
+func (r *ModifyRegisterInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRegisterInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type PreviewReplacedCommandContentRequestParams struct {
-	// Custom parameters for the preview. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
-	// `key` is the name of the custom parameter and "value" is its specified value. Both "key" and "value" are strings.
-	// At most 20 custom parameters are supported.
-	// The name of the custom parameter cannot exceed 64 characters and can only contain [a-z], [A-Z], [0-9], [-_].
-	// This parameter can be left empty if DefaultParameters is set for the previewed CommandId.
+	// The preview uses custom parameters. field type is json encoded string, for example: {"varA": "222"}.
+	// This parameter can be set only when the EnableParameter of the command is true. you can obtain the EnableParameter settings through the [DescribeCommands (detailed command information)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+	// If DefaultParameters or DefaultParameterConfs has set, it will overlay with Parameters and prioritize the value of Parameters.
+	// 
+	// key specifies the custom parameter name, and value specifies the parameter. both kv are string-type.
+	// Custom parameters are limited to 20.
+	// The custom parameter name must meet the following standard: the number of characters has a cap of 64, and the optional range is [a-zA-Z0-9-_].
+	// If the previewed CommandId has DefaultParameters set, this parameter can be empty.
 	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
-	// The command to be previewed. If DefaultParameters is set, it is combined with Parameters and Parameters takes priority.
-	// `CommandId` or `Content` must be specified.
+	// Perform the replace preview command.
+	// Call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+	// CommandId and Content, you must provide one and can only provide one.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// Base64-encoded command to be previewed. The maximum length is 64 KB.
@@ -1826,15 +2917,19 @@ type PreviewReplacedCommandContentRequestParams struct {
 type PreviewReplacedCommandContentRequest struct {
 	*tchttp.BaseRequest
 	
-	// Custom parameters for the preview. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
-	// `key` is the name of the custom parameter and "value" is its specified value. Both "key" and "value" are strings.
-	// At most 20 custom parameters are supported.
-	// The name of the custom parameter cannot exceed 64 characters and can only contain [a-z], [A-Z], [0-9], [-_].
-	// This parameter can be left empty if DefaultParameters is set for the previewed CommandId.
+	// The preview uses custom parameters. field type is json encoded string, for example: {"varA": "222"}.
+	// This parameter can be set only when the EnableParameter of the command is true. you can obtain the EnableParameter settings through the [DescribeCommands (detailed command information)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+	// If DefaultParameters or DefaultParameterConfs has set, it will overlay with Parameters and prioritize the value of Parameters.
+	// 
+	// key specifies the custom parameter name, and value specifies the parameter. both kv are string-type.
+	// Custom parameters are limited to 20.
+	// The custom parameter name must meet the following standard: the number of characters has a cap of 64, and the optional range is [a-zA-Z0-9-_].
+	// If the previewed CommandId has DefaultParameters set, this parameter can be empty.
 	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
-	// The command to be previewed. If DefaultParameters is set, it is combined with Parameters and Parameters takes priority.
-	// `CommandId` or `Content` must be specified.
+	// Perform the replace preview command.
+	// Call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+	// CommandId and Content, you must provide one and can only provide one.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// Base64-encoded command to be previewed. The maximum length is 64 KB.
@@ -1895,8 +2990,85 @@ type RegionInfo struct {
 	// Region description, such as `Guangzhou`
 	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
 
-	// Region status. `AVAILABLE` indicates the region is available.
+	// Region availability status. AVAILABLE indicates the region is AVAILABLE. UNAVAILABLE indicates the region is UNAVAILABLE.
 	RegionState *string `json:"RegionState,omitnil,omitempty" name:"RegionState"`
+}
+
+type RegisterCodeInfo struct {
+	// Registration code ID.
+	RegisterCodeId *string `json:"RegisterCodeId,omitnil,omitempty" name:"RegisterCodeId"`
+
+	// Describes the registration code.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Prefix of the registered instance name.
+	InstanceNamePrefix *string `json:"InstanceNamePrefix,omitnil,omitempty" name:"InstanceNamePrefix"`
+
+	// The number of instances the registration code allows.
+	RegisterLimit *int64 `json:"RegisterLimit,omitnil,omitempty" name:"RegisterLimit"`
+
+	// The expiry date of the registration code is in ISO8601 standard representation and uses UTC time. 
+	// The format is YYYY-MM-DDThh:MM:ssZ.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExpiredTime *string `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
+
+	// The registration code limits tat_agent to register only from the public outbound ip described by IpAddressRange.
+	IpAddressRange *string `json:"IpAddressRange,omitnil,omitempty" name:"IpAddressRange"`
+
+	// Is the registration code available.
+	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// The number of registered registration codes.
+	RegisteredCount *int64 `json:"RegisteredCount,omitnil,omitempty" name:"RegisteredCount"`
+
+	// Registration code creation time, represented as ISO8601 standard and using UTC time. 
+	// The format is YYYY-MM-DDThh:MM:ssZ.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
+
+	// Last update time of the registration code, as ISO8601 standard representation and using UTC time. 
+	// The format is YYYY-MM-DDThh:MM:ssZ.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdatedTime *string `json:"UpdatedTime,omitnil,omitempty" name:"UpdatedTime"`
+}
+
+type RegisterInstanceInfo struct {
+	// Registration code ID.
+	RegisterCodeId *string `json:"RegisterCodeId,omitnil,omitempty" name:"RegisterCodeId"`
+
+	// Managed instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Managed instance name.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// Machine ID.
+	MachineId *string `json:"MachineId,omitnil,omitempty" name:"MachineId"`
+
+	// System name. valid values: Linux | Windows.
+	SystemName *string `json:"SystemName,omitnil,omitempty" name:"SystemName"`
+
+	// Host name.
+	HostName *string `json:"HostName,omitnil,omitempty" name:"HostName"`
+
+	// Private network IP
+	LocalIp *string `json:"LocalIp,omitnil,omitempty" name:"LocalIp"`
+
+	// Public key.
+	PublicKey *string `json:"PublicKey,omitnil,omitempty" name:"PublicKey"`
+
+	// Hosting status.
+	// Return Online means the instance is managed, return Offline means the instance is unhosted.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Creation time. the format is YYYY-MM-DDThh:MM:ssZ.
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
+
+	// Last update time. the format is YYYY-MM-DDThh:MM:ssZ.
+	UpdatedTime *string `json:"UpdatedTime,omitnil,omitempty" name:"UpdatedTime"`
+
+	// Tag.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 // Predefined struct for user
@@ -1904,9 +3076,12 @@ type RunCommandRequestParams struct {
 	// Base64-encoded command. The maximum length is 64 KB.
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
-	// IDs of instances about to execute commands. Up to 100 IDs are allowed. Supported instance types:
-	// <li> `CVM`
-	// <li> `LIGHTHOUSE`
+	// Instance ID list for the command to be executed, with a cap of 200.
+	// 
+	// Instance ID can be obtained through the query instance interface of corresponding cloud services. currently supported instance types:.
+	// - CVM
+	// - Lighthouse
+	// -TAT register instance.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Command name. The name can be up to 60 bytes, and contain [a-z], [A-Z], [0-9] and [_-.].
@@ -1915,7 +3090,7 @@ type RunCommandRequestParams struct {
 	// Command description. The maximum length is 120 characters.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Command type. `SHELL` and `POWERSHELL` are supported. The default value is `SHELL`.
+	// Command type. currently supports SHELL, POWERSHELL, BAT. default: SHELL.
 	CommandType *string `json:"CommandType,omitnil,omitempty" name:"CommandType"`
 
 	// Command execution path. The default value is /root for `SHELL` commands and C:\Program Files\qcloud\tat_agent\workdir for `POWERSHELL` commands.
@@ -1924,29 +3099,41 @@ type RunCommandRequestParams struct {
 	// Command timeout period. Default value: 60 seconds. Value range: [1, 86400].
 	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
-	// Whether to save the command. Valid values:
-	// <li> `True`: Save
-	// <li> `False`: Do not save
-	// The default value is `False`.
+	// Whether to save the command. value range:.
+	// <li>true: save</li>.
+	// <li>false: not saved.</li>.
+	// The default value is false.
 	SaveCommand *bool `json:"SaveCommand,omitnil,omitempty" name:"SaveCommand"`
 
 	// Whether to enable the custom parameter feature.
-	// This cannot be modified once created.
-	// Default value: `false`.
+	// Once created, this value does not offer modification.
+	// Valid values:.
+	// <li>true: enable</li>.
+	// <li>false: disabled.</li>.
+	// The default value is false.
 	EnableParameter *bool `json:"EnableParameter,omitnil,omitempty" name:"EnableParameter"`
 
-	// The default value of the custom parameter value when it is enabled. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
-	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
-	// If Parameters is not provided, the default values specified here are used.
-	// Up to 20 custom parameters are supported.
-	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
+	// Enable the custom parameter feature. default value of the custom parameter. field type is json encoded string. for example: {"varA": "222"}.
+	// The key is the custom parameter name, and the value is the default. both kv are string-type.
+	// This parameter can be set only when the EnableParameter of the command is true.
+	// Parameters must not be specified simultaneously `DefaultParameters` and `DefaultParameterConfs`.
+	// If Parameters is not provided, the default value here will be used to replace.
+	// Custom parameters can be up to 20.
+	// The custom parameter name must meet the following standard: the number of characters has a cap of 64, and the optional range is [a-zA-Z0-9-_].
 	DefaultParameters *string `json:"DefaultParameters,omitnil,omitempty" name:"DefaultParameters"`
 
-	// Custom parameters of `Command`. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
-	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
-	// If no parameter value is provided, the `DefaultParameters` is used.
-	// Up to 20 custom parameters are supported.
-	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
+	// Custom parameter array. if Parameters is not provided, the default value here will be used to replace. up to 20 custom Parameters are allowed.
+	// If Parameters is not provided, the default value here will be used to replace.
+	// This parameter can be set only when the EnableParameter of the command is true.
+	// Parameters must not be specified simultaneously `DefaultParameters` and `DefaultParameterConfs`.
+	DefaultParameterConfs []*DefaultParameterConf `json:"DefaultParameterConfs,omitnil,omitempty" name:"DefaultParameterConfs"`
+
+	// Custom parameter of Command. field type is json encoded string. for example: {"varA": "222"}.
+	// The key is the custom parameter name, and the value is the default. both kv are string-type.
+	// This parameter can be set only when the EnableParameter of the command is true.
+	// If the parameter value is not provided, DefaultParameters or DefaultParameterConfs will be used.
+	// Custom parameters can be up to 20.
+	// The custom parameter name must meet the following standard: the number of characters has a cap of 64, and the optional range is [a-zA-Z0-9-_].
 	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// The tags of the command. It is available when `SaveCommand` is `True`. A maximum of 10 tags are allowed.
@@ -1972,9 +3159,12 @@ type RunCommandRequest struct {
 	// Base64-encoded command. The maximum length is 64 KB.
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
-	// IDs of instances about to execute commands. Up to 100 IDs are allowed. Supported instance types:
-	// <li> `CVM`
-	// <li> `LIGHTHOUSE`
+	// Instance ID list for the command to be executed, with a cap of 200.
+	// 
+	// Instance ID can be obtained through the query instance interface of corresponding cloud services. currently supported instance types:.
+	// - CVM
+	// - Lighthouse
+	// -TAT register instance.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Command name. The name can be up to 60 bytes, and contain [a-z], [A-Z], [0-9] and [_-.].
@@ -1983,7 +3173,7 @@ type RunCommandRequest struct {
 	// Command description. The maximum length is 120 characters.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Command type. `SHELL` and `POWERSHELL` are supported. The default value is `SHELL`.
+	// Command type. currently supports SHELL, POWERSHELL, BAT. default: SHELL.
 	CommandType *string `json:"CommandType,omitnil,omitempty" name:"CommandType"`
 
 	// Command execution path. The default value is /root for `SHELL` commands and C:\Program Files\qcloud\tat_agent\workdir for `POWERSHELL` commands.
@@ -1992,29 +3182,41 @@ type RunCommandRequest struct {
 	// Command timeout period. Default value: 60 seconds. Value range: [1, 86400].
 	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
-	// Whether to save the command. Valid values:
-	// <li> `True`: Save
-	// <li> `False`: Do not save
-	// The default value is `False`.
+	// Whether to save the command. value range:.
+	// <li>true: save</li>.
+	// <li>false: not saved.</li>.
+	// The default value is false.
 	SaveCommand *bool `json:"SaveCommand,omitnil,omitempty" name:"SaveCommand"`
 
 	// Whether to enable the custom parameter feature.
-	// This cannot be modified once created.
-	// Default value: `false`.
+	// Once created, this value does not offer modification.
+	// Valid values:.
+	// <li>true: enable</li>.
+	// <li>false: disabled.</li>.
+	// The default value is false.
 	EnableParameter *bool `json:"EnableParameter,omitnil,omitempty" name:"EnableParameter"`
 
-	// The default value of the custom parameter value when it is enabled. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
-	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
-	// If Parameters is not provided, the default values specified here are used.
-	// Up to 20 custom parameters are supported.
-	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
+	// Enable the custom parameter feature. default value of the custom parameter. field type is json encoded string. for example: {"varA": "222"}.
+	// The key is the custom parameter name, and the value is the default. both kv are string-type.
+	// This parameter can be set only when the EnableParameter of the command is true.
+	// Parameters must not be specified simultaneously `DefaultParameters` and `DefaultParameterConfs`.
+	// If Parameters is not provided, the default value here will be used to replace.
+	// Custom parameters can be up to 20.
+	// The custom parameter name must meet the following standard: the number of characters has a cap of 64, and the optional range is [a-zA-Z0-9-_].
 	DefaultParameters *string `json:"DefaultParameters,omitnil,omitempty" name:"DefaultParameters"`
 
-	// Custom parameters of `Command`. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
-	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
-	// If no parameter value is provided, the `DefaultParameters` is used.
-	// Up to 20 custom parameters are supported.
-	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
+	// Custom parameter array. if Parameters is not provided, the default value here will be used to replace. up to 20 custom Parameters are allowed.
+	// If Parameters is not provided, the default value here will be used to replace.
+	// This parameter can be set only when the EnableParameter of the command is true.
+	// Parameters must not be specified simultaneously `DefaultParameters` and `DefaultParameterConfs`.
+	DefaultParameterConfs []*DefaultParameterConf `json:"DefaultParameterConfs,omitnil,omitempty" name:"DefaultParameterConfs"`
+
+	// Custom parameter of Command. field type is json encoded string. for example: {"varA": "222"}.
+	// The key is the custom parameter name, and the value is the default. both kv are string-type.
+	// This parameter can be set only when the EnableParameter of the command is true.
+	// If the parameter value is not provided, DefaultParameters or DefaultParameterConfs will be used.
+	// Custom parameters can be up to 20.
+	// The custom parameter name must meet the following standard: the number of characters has a cap of 64, and the optional range is [a-zA-Z0-9-_].
 	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// The tags of the command. It is available when `SaveCommand` is `True`. A maximum of 10 tags are allowed.
@@ -2056,6 +3258,7 @@ func (r *RunCommandRequest) FromJsonString(s string) error {
 	delete(f, "SaveCommand")
 	delete(f, "EnableParameter")
 	delete(f, "DefaultParameters")
+	delete(f, "DefaultParameterConfs")
 	delete(f, "Parameters")
 	delete(f, "Tags")
 	delete(f, "Username")
@@ -2095,16 +3298,38 @@ func (r *RunCommandResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Scene struct {
+	// Scene ID.
+	SceneId *string `json:"SceneId,omitnil,omitempty" name:"SceneId"`
+
+	// Scenario name.
+	SceneName *string `json:"SceneName,omitnil,omitempty" name:"SceneName"`
+
+	// Scene creator.
+	// 
+	// - TAT: public scenario.
+	CreatedBy *string `json:"CreatedBy,omitnil,omitempty" name:"CreatedBy"`
+
+	// Creation time. the format is YYYY-MM-DDThh:MM:ssZ.
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
+
+	// Update time. the format is YYYY-MM-DDThh:MM:ssZ.
+	UpdatedTime *string `json:"UpdatedTime,omitnil,omitempty" name:"UpdatedTime"`
+}
+
 type ScheduleSettings struct {
-	// Execution policy:
-	// <br><li>`ONCE`: Execute once
-	// <br><li>`RECURRENCE`: Execute repeatedly
+	// Execution policy.
+	// 
+	// -ONCE: one-time execution.
+	// -RECURRENCE: execute periodically.
 	Policy *string `json:"Policy,omitnil,omitempty" name:"Policy"`
 
 	// Trigger the crontab expression. This field is required if `Policy` is `RECURRENCE`. The crontab expression is parsed in UTC+8.
 	Recurrence *string `json:"Recurrence,omitnil,omitempty" name:"Recurrence"`
 
-	// The next execution time of the invoker. This field is required if `Policy` is `ONCE`.
+	// Next execution time of the executor. this field requires specifying when Policy is ONCE.
+	// 
+	// The time format is YYYY-MM-DDThh:MM:ssZ.
 	InvokeTime *string `json:"InvokeTime,omitnil,omitempty" name:"InvokeTime"`
 }
 
@@ -2123,10 +3348,12 @@ type TaskResult struct {
 	// Base64-encoded command output. The maximum length is 24 KB.
 	Output *string `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// Time when the execution is started.
+	// Command execution start time. the format is YYYY-MM-DDThh:MM:ssZ.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExecStartTime *string `json:"ExecStartTime,omitnil,omitempty" name:"ExecStartTime"`
 
-	// Time when the execution is ended.
+	// Execution end time of the command. format: YYYY-MM-DDThh:MM:ssZ.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExecEndTime *string `json:"ExecEndTime,omitnil,omitempty" name:"ExecEndTime"`
 
 	// Dropped bytes of the command output.

@@ -45,76 +45,6 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
-func NewApplyCardVerificationRequest() (request *ApplyCardVerificationRequest) {
-    request = &ApplyCardVerificationRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("faceid", APIVersion, "ApplyCardVerification")
-    
-    
-    return
-}
-
-func NewApplyCardVerificationResponse() (response *ApplyCardVerificationResponse) {
-    response = &ApplyCardVerificationResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// ApplyCardVerification
-// The types of national cards supported by the API and whether instructions on the back of the card are required are as follows:  
-//
-// <table> <thead> <tr> <td>Nationality</td> <td style="width:200px">CardType</td> <td style="width:200px">Back side required</td> </tr> </thead> <tbody> <tr> <td>Indonesia</td> <td>ID card</td> <td>No</td> </tr> <tr> <td>Indonesia</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Hongkong</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Thailand</td> <td>ID card</td> <td>No</td> </tr> <tr> <td>Thailand</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Malaysia</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Malaysia</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Singapore</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Singapore</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Philippine</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Philippine</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Japan</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Japan</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Taiwan</td> <td>ID Card</td> <td>Yes</td> </tr>  <tr> <td>Bangladesh</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Nigeria</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Nigeria</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Pakistan</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Pakistan</td> <td>Driving License</td> <td>Yes</td> </tr> </tbody> </table>
-//
-// error code that may be returned:
-//  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETER_ENGINEIMAGEDECODEFAILED = "InvalidParameter.EngineImageDecodeFailed"
-//  INVALIDPARAMETERVALUE_INVALIDFILECONTENTSIZE = "InvalidParameterValue.InvalidFileContentSize"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  RESOURCEUNAVAILABLE_IMAGEDOWNLOADERROR = "ResourceUnavailable.ImageDownloadError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-func (c *Client) ApplyCardVerification(request *ApplyCardVerificationRequest) (response *ApplyCardVerificationResponse, err error) {
-    return c.ApplyCardVerificationWithContext(context.Background(), request)
-}
-
-// ApplyCardVerification
-// The types of national cards supported by the API and whether instructions on the back of the card are required are as follows:  
-//
-// <table> <thead> <tr> <td>Nationality</td> <td style="width:200px">CardType</td> <td style="width:200px">Back side required</td> </tr> </thead> <tbody> <tr> <td>Indonesia</td> <td>ID card</td> <td>No</td> </tr> <tr> <td>Indonesia</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Hongkong</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Thailand</td> <td>ID card</td> <td>No</td> </tr> <tr> <td>Thailand</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Malaysia</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Malaysia</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Singapore</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Singapore</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Philippine</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Philippine</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Japan</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Japan</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Taiwan</td> <td>ID Card</td> <td>Yes</td> </tr>  <tr> <td>Bangladesh</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Nigeria</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Nigeria</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Pakistan</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Pakistan</td> <td>Driving License</td> <td>Yes</td> </tr> </tbody> </table>
-//
-// error code that may be returned:
-//  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETER_ENGINEIMAGEDECODEFAILED = "InvalidParameter.EngineImageDecodeFailed"
-//  INVALIDPARAMETERVALUE_INVALIDFILECONTENTSIZE = "InvalidParameterValue.InvalidFileContentSize"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  RESOURCEUNAVAILABLE_IMAGEDOWNLOADERROR = "ResourceUnavailable.ImageDownloadError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-func (c *Client) ApplyCardVerificationWithContext(ctx context.Context, request *ApplyCardVerificationRequest) (response *ApplyCardVerificationResponse, err error) {
-    if request == nil {
-        request = NewApplyCardVerificationRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "ApplyCardVerification")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ApplyCardVerification require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewApplyCardVerificationResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewApplyLivenessTokenRequest() (request *ApplyLivenessTokenRequest) {
     request = &ApplyLivenessTokenRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -285,68 +215,6 @@ func (c *Client) ApplyWebVerificationBizTokenIntlWithContext(ctx context.Context
     request.SetContext(ctx)
     
     response = NewApplyWebVerificationBizTokenIntlResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewApplyWebVerificationTokenRequest() (request *ApplyWebVerificationTokenRequest) {
-    request = &ApplyWebVerificationTokenRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("faceid", APIVersion, "ApplyWebVerificationToken")
-    
-    
-    return
-}
-
-func NewApplyWebVerificationTokenResponse() (response *ApplyWebVerificationTokenResponse) {
-    response = &ApplyWebVerificationTokenResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// ApplyWebVerificationToken
-// This API is used to apply for a token before calling the web-based verification service each time. This token is required for initiating the verification process and getting the result after the verification is completed.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  UNAUTHORIZEDOPERATION_ACTIVATEERROR = "UnauthorizedOperation.ActivateError"
-//  UNAUTHORIZEDOPERATION_ACTIVATING = "UnauthorizedOperation.Activating"
-//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
-//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
-func (c *Client) ApplyWebVerificationToken(request *ApplyWebVerificationTokenRequest) (response *ApplyWebVerificationTokenResponse, err error) {
-    return c.ApplyWebVerificationTokenWithContext(context.Background(), request)
-}
-
-// ApplyWebVerificationToken
-// This API is used to apply for a token before calling the web-based verification service each time. This token is required for initiating the verification process and getting the result after the verification is completed.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  UNAUTHORIZEDOPERATION_ACTIVATEERROR = "UnauthorizedOperation.ActivateError"
-//  UNAUTHORIZEDOPERATION_ACTIVATING = "UnauthorizedOperation.Activating"
-//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
-//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
-func (c *Client) ApplyWebVerificationTokenWithContext(ctx context.Context, request *ApplyWebVerificationTokenRequest) (response *ApplyWebVerificationTokenResponse, err error) {
-    if request == nil {
-        request = NewApplyWebVerificationTokenRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "ApplyWebVerificationToken")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ApplyWebVerificationToken require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewApplyWebVerificationTokenResponse()
     err = c.Send(request, response)
     return
 }
@@ -707,64 +575,6 @@ func (c *Client) GenerateReflectSequenceWithContext(ctx context.Context, request
     return
 }
 
-func NewGetCardVerificationResultRequest() (request *GetCardVerificationResultRequest) {
-    request = &GetCardVerificationResultRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("faceid", APIVersion, "GetCardVerificationResult")
-    
-    
-    return
-}
-
-func NewGetCardVerificationResultResponse() (response *GetCardVerificationResultResponse) {
-    response = &GetCardVerificationResultResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// GetCardVerificationResult
-// The interface supports obtaining the certificate authentication result based on the token.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-func (c *Client) GetCardVerificationResult(request *GetCardVerificationResultRequest) (response *GetCardVerificationResultResponse, err error) {
-    return c.GetCardVerificationResultWithContext(context.Background(), request)
-}
-
-// GetCardVerificationResult
-// The interface supports obtaining the certificate authentication result based on the token.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-func (c *Client) GetCardVerificationResultWithContext(ctx context.Context, request *GetCardVerificationResultRequest) (response *GetCardVerificationResultResponse, err error) {
-    if request == nil {
-        request = NewGetCardVerificationResultRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "GetCardVerificationResult")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("GetCardVerificationResult require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewGetCardVerificationResultResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewGetFaceIdResultIntlRequest() (request *GetFaceIdResultIntlRequest) {
     request = &GetFaceIdResultIntlRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -993,64 +803,6 @@ func (c *Client) GetSdkVerificationResultWithContext(ctx context.Context, reques
     return
 }
 
-func NewGetWebVerificationResultRequest() (request *GetWebVerificationResultRequest) {
-    request = &GetWebVerificationResultRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("faceid", APIVersion, "GetWebVerificationResult")
-    
-    
-    return
-}
-
-func NewGetWebVerificationResultResponse() (response *GetWebVerificationResultResponse) {
-    response = &GetWebVerificationResultResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// GetWebVerificationResult
-// This API is used to get the verification result with the corresponding token (BizToken) after the web-based verification is completed. The BizToken is valid for three days (3*24*3,600s) after issuance and can be called multiple times.
-//
-// error code that may be returned:
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_BIZTOKENEXPIRED = "InvalidParameterValue.BizTokenExpired"
-//  INVALIDPARAMETERVALUE_BIZTOKENILLEGAL = "InvalidParameterValue.BizTokenIllegal"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-func (c *Client) GetWebVerificationResult(request *GetWebVerificationResultRequest) (response *GetWebVerificationResultResponse, err error) {
-    return c.GetWebVerificationResultWithContext(context.Background(), request)
-}
-
-// GetWebVerificationResult
-// This API is used to get the verification result with the corresponding token (BizToken) after the web-based verification is completed. The BizToken is valid for three days (3*24*3,600s) after issuance and can be called multiple times.
-//
-// error code that may be returned:
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_BIZTOKENEXPIRED = "InvalidParameterValue.BizTokenExpired"
-//  INVALIDPARAMETERVALUE_BIZTOKENILLEGAL = "InvalidParameterValue.BizTokenIllegal"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-func (c *Client) GetWebVerificationResultWithContext(ctx context.Context, request *GetWebVerificationResultRequest) (response *GetWebVerificationResultResponse, err error) {
-    if request == nil {
-        request = NewGetWebVerificationResultRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "GetWebVerificationResult")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("GetWebVerificationResult require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewGetWebVerificationResultResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewGetWebVerificationResultIntlRequest() (request *GetWebVerificationResultIntlRequest) {
     request = &GetWebVerificationResultIntlRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1150,6 +902,7 @@ func NewLivenessCompareResponse() (response *LivenessCompareResponse) {
 //  FAILEDOPERATION_COMPAREFAIL = "FailedOperation.CompareFail"
 //  FAILEDOPERATION_COMPARELOWSIMILARITY = "FailedOperation.CompareLowSimilarity"
 //  FAILEDOPERATION_COMPARESYSTEMERROR = "FailedOperation.CompareSystemError"
+//  FAILEDOPERATION_COMPRESSVIDEOERROR = "FailedOperation.CompressVideoError"
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
 //  FAILEDOPERATION_DOWNLOADTIMEOUTERROR = "FailedOperation.DownLoadTimeoutError"
 //  FAILEDOPERATION_LIFEPHOTODETECTFACES = "FailedOperation.LifePhotoDetectFaces"
@@ -1213,6 +966,7 @@ func (c *Client) LivenessCompare(request *LivenessCompareRequest) (response *Liv
 //  FAILEDOPERATION_COMPAREFAIL = "FailedOperation.CompareFail"
 //  FAILEDOPERATION_COMPARELOWSIMILARITY = "FailedOperation.CompareLowSimilarity"
 //  FAILEDOPERATION_COMPARESYSTEMERROR = "FailedOperation.CompareSystemError"
+//  FAILEDOPERATION_COMPRESSVIDEOERROR = "FailedOperation.CompressVideoError"
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
 //  FAILEDOPERATION_DOWNLOADTIMEOUTERROR = "FailedOperation.DownLoadTimeoutError"
 //  FAILEDOPERATION_LIFEPHOTODETECTFACES = "FailedOperation.LifePhotoDetectFaces"
@@ -1265,158 +1019,6 @@ func (c *Client) LivenessCompareWithContext(ctx context.Context, request *Livene
     request.SetContext(ctx)
     
     response = NewLivenessCompareResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewVideoLivenessCompareRequest() (request *VideoLivenessCompareRequest) {
-    request = &VideoLivenessCompareRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("faceid", APIVersion, "VideoLivenessCompare")
-    
-    
-    return
-}
-
-func NewVideoLivenessCompareResponse() (response *VideoLivenessCompareResponse) {
-    response = &VideoLivenessCompareResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// VideoLivenessCompare
-// This API is used to pass in URLs of a video and a photo, determine whether the person in the video is real, and if yes, then determine whether the person in the video is the same as that in the photo.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_ACTIONCLOSEEYE = "FailedOperation.ActionCloseEye"
-//  FAILEDOPERATION_ACTIONFACECLOSE = "FailedOperation.ActionFaceClose"
-//  FAILEDOPERATION_ACTIONFACEFAR = "FailedOperation.ActionFaceFar"
-//  FAILEDOPERATION_ACTIONFACELEFT = "FailedOperation.ActionFaceLeft"
-//  FAILEDOPERATION_ACTIONFACERIGHT = "FailedOperation.ActionFaceRight"
-//  FAILEDOPERATION_ACTIONFIRSTACTION = "FailedOperation.ActionFirstAction"
-//  FAILEDOPERATION_ACTIONLIGHTDARK = "FailedOperation.ActionLightDark"
-//  FAILEDOPERATION_ACTIONLIGHTSTRONG = "FailedOperation.ActionLightStrong"
-//  FAILEDOPERATION_ACTIONNODETECTFACE = "FailedOperation.ActionNodetectFace"
-//  FAILEDOPERATION_ACTIONOPENMOUTH = "FailedOperation.ActionOpenMouth"
-//  FAILEDOPERATION_COMPAREFAIL = "FailedOperation.CompareFail"
-//  FAILEDOPERATION_COMPARELOWSIMILARITY = "FailedOperation.CompareLowSimilarity"
-//  FAILEDOPERATION_COMPARESYSTEMERROR = "FailedOperation.CompareSystemError"
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_DOWNLOADTIMEOUTERROR = "FailedOperation.DownLoadTimeoutError"
-//  FAILEDOPERATION_LIFEPHOTODETECTFACES = "FailedOperation.LifePhotoDetectFaces"
-//  FAILEDOPERATION_LIFEPHOTODETECTFAKE = "FailedOperation.LifePhotoDetectFake"
-//  FAILEDOPERATION_LIFEPHOTODETECTNOFACES = "FailedOperation.LifePhotoDetectNoFaces"
-//  FAILEDOPERATION_LIFEPHOTOPOORQUALITY = "FailedOperation.LifePhotoPoorQuality"
-//  FAILEDOPERATION_LIFEPHOTOSIZEERROR = "FailedOperation.LifePhotoSizeError"
-//  FAILEDOPERATION_LIPFACEINCOMPLETE = "FailedOperation.LipFaceIncomplete"
-//  FAILEDOPERATION_LIPMOVESMALL = "FailedOperation.LipMoveSmall"
-//  FAILEDOPERATION_LIPNETFAILED = "FailedOperation.LipNetFailed"
-//  FAILEDOPERATION_LIPSIZEERROR = "FailedOperation.LipSizeError"
-//  FAILEDOPERATION_LIPVIDEOINVALID = "FailedOperation.LipVideoInvalid"
-//  FAILEDOPERATION_LIPVIDEOQUAILITY = "FailedOperation.LipVideoQuaility"
-//  FAILEDOPERATION_LIPVOICEDETECT = "FailedOperation.LipVoiceDetect"
-//  FAILEDOPERATION_LIPVOICELOW = "FailedOperation.LipVoiceLow"
-//  FAILEDOPERATION_LIPVOICERECOGNIZE = "FailedOperation.LipVoiceRecognize"
-//  FAILEDOPERATION_LIVESSBESTFRAMEERROR = "FailedOperation.LivessBestFrameError"
-//  FAILEDOPERATION_LIVESSDETECTFAIL = "FailedOperation.LivessDetectFail"
-//  FAILEDOPERATION_LIVESSDETECTFAKE = "FailedOperation.LivessDetectFake"
-//  FAILEDOPERATION_LIVESSSYSTEMERROR = "FailedOperation.LivessSystemError"
-//  FAILEDOPERATION_LIVESSUNKNOWNERROR = "FailedOperation.LivessUnknownError"
-//  FAILEDOPERATION_SILENTDETECTFAIL = "FailedOperation.SilentDetectFail"
-//  FAILEDOPERATION_SILENTEYELIVEFAIL = "FailedOperation.SilentEyeLiveFail"
-//  FAILEDOPERATION_SILENTFACEDETECTFAIL = "FailedOperation.SilentFaceDetectFail"
-//  FAILEDOPERATION_SILENTFACEQUALITYFAIL = "FailedOperation.SilentFaceQualityFail"
-//  FAILEDOPERATION_SILENTFACEWITHMASKFAIL = "FailedOperation.SilentFaceWithMaskFail"
-//  FAILEDOPERATION_SILENTMOUTHLIVEFAIL = "FailedOperation.SilentMouthLiveFail"
-//  FAILEDOPERATION_SILENTMULTIFACEFAIL = "FailedOperation.SilentMultiFaceFail"
-//  FAILEDOPERATION_SILENTPICTURELIVEFAIL = "FailedOperation.SilentPictureLiveFail"
-//  FAILEDOPERATION_SILENTTHRESHOLD = "FailedOperation.SilentThreshold"
-//  FAILEDOPERATION_SILENTTOOSHORT = "FailedOperation.SilentTooShort"
-//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
-//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
-//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) VideoLivenessCompare(request *VideoLivenessCompareRequest) (response *VideoLivenessCompareResponse, err error) {
-    return c.VideoLivenessCompareWithContext(context.Background(), request)
-}
-
-// VideoLivenessCompare
-// This API is used to pass in URLs of a video and a photo, determine whether the person in the video is real, and if yes, then determine whether the person in the video is the same as that in the photo.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_ACTIONCLOSEEYE = "FailedOperation.ActionCloseEye"
-//  FAILEDOPERATION_ACTIONFACECLOSE = "FailedOperation.ActionFaceClose"
-//  FAILEDOPERATION_ACTIONFACEFAR = "FailedOperation.ActionFaceFar"
-//  FAILEDOPERATION_ACTIONFACELEFT = "FailedOperation.ActionFaceLeft"
-//  FAILEDOPERATION_ACTIONFACERIGHT = "FailedOperation.ActionFaceRight"
-//  FAILEDOPERATION_ACTIONFIRSTACTION = "FailedOperation.ActionFirstAction"
-//  FAILEDOPERATION_ACTIONLIGHTDARK = "FailedOperation.ActionLightDark"
-//  FAILEDOPERATION_ACTIONLIGHTSTRONG = "FailedOperation.ActionLightStrong"
-//  FAILEDOPERATION_ACTIONNODETECTFACE = "FailedOperation.ActionNodetectFace"
-//  FAILEDOPERATION_ACTIONOPENMOUTH = "FailedOperation.ActionOpenMouth"
-//  FAILEDOPERATION_COMPAREFAIL = "FailedOperation.CompareFail"
-//  FAILEDOPERATION_COMPARELOWSIMILARITY = "FailedOperation.CompareLowSimilarity"
-//  FAILEDOPERATION_COMPARESYSTEMERROR = "FailedOperation.CompareSystemError"
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_DOWNLOADTIMEOUTERROR = "FailedOperation.DownLoadTimeoutError"
-//  FAILEDOPERATION_LIFEPHOTODETECTFACES = "FailedOperation.LifePhotoDetectFaces"
-//  FAILEDOPERATION_LIFEPHOTODETECTFAKE = "FailedOperation.LifePhotoDetectFake"
-//  FAILEDOPERATION_LIFEPHOTODETECTNOFACES = "FailedOperation.LifePhotoDetectNoFaces"
-//  FAILEDOPERATION_LIFEPHOTOPOORQUALITY = "FailedOperation.LifePhotoPoorQuality"
-//  FAILEDOPERATION_LIFEPHOTOSIZEERROR = "FailedOperation.LifePhotoSizeError"
-//  FAILEDOPERATION_LIPFACEINCOMPLETE = "FailedOperation.LipFaceIncomplete"
-//  FAILEDOPERATION_LIPMOVESMALL = "FailedOperation.LipMoveSmall"
-//  FAILEDOPERATION_LIPNETFAILED = "FailedOperation.LipNetFailed"
-//  FAILEDOPERATION_LIPSIZEERROR = "FailedOperation.LipSizeError"
-//  FAILEDOPERATION_LIPVIDEOINVALID = "FailedOperation.LipVideoInvalid"
-//  FAILEDOPERATION_LIPVIDEOQUAILITY = "FailedOperation.LipVideoQuaility"
-//  FAILEDOPERATION_LIPVOICEDETECT = "FailedOperation.LipVoiceDetect"
-//  FAILEDOPERATION_LIPVOICELOW = "FailedOperation.LipVoiceLow"
-//  FAILEDOPERATION_LIPVOICERECOGNIZE = "FailedOperation.LipVoiceRecognize"
-//  FAILEDOPERATION_LIVESSBESTFRAMEERROR = "FailedOperation.LivessBestFrameError"
-//  FAILEDOPERATION_LIVESSDETECTFAIL = "FailedOperation.LivessDetectFail"
-//  FAILEDOPERATION_LIVESSDETECTFAKE = "FailedOperation.LivessDetectFake"
-//  FAILEDOPERATION_LIVESSSYSTEMERROR = "FailedOperation.LivessSystemError"
-//  FAILEDOPERATION_LIVESSUNKNOWNERROR = "FailedOperation.LivessUnknownError"
-//  FAILEDOPERATION_SILENTDETECTFAIL = "FailedOperation.SilentDetectFail"
-//  FAILEDOPERATION_SILENTEYELIVEFAIL = "FailedOperation.SilentEyeLiveFail"
-//  FAILEDOPERATION_SILENTFACEDETECTFAIL = "FailedOperation.SilentFaceDetectFail"
-//  FAILEDOPERATION_SILENTFACEQUALITYFAIL = "FailedOperation.SilentFaceQualityFail"
-//  FAILEDOPERATION_SILENTFACEWITHMASKFAIL = "FailedOperation.SilentFaceWithMaskFail"
-//  FAILEDOPERATION_SILENTMOUTHLIVEFAIL = "FailedOperation.SilentMouthLiveFail"
-//  FAILEDOPERATION_SILENTMULTIFACEFAIL = "FailedOperation.SilentMultiFaceFail"
-//  FAILEDOPERATION_SILENTPICTURELIVEFAIL = "FailedOperation.SilentPictureLiveFail"
-//  FAILEDOPERATION_SILENTTHRESHOLD = "FailedOperation.SilentThreshold"
-//  FAILEDOPERATION_SILENTTOOSHORT = "FailedOperation.SilentTooShort"
-//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
-//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
-//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) VideoLivenessCompareWithContext(ctx context.Context, request *VideoLivenessCompareRequest) (response *VideoLivenessCompareResponse, err error) {
-    if request == nil {
-        request = NewVideoLivenessCompareRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "VideoLivenessCompare")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("VideoLivenessCompare require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewVideoLivenessCompareResponse()
     err = c.Send(request, response)
     return
 }

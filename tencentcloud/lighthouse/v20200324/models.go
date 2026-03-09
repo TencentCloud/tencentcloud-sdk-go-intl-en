@@ -426,20 +426,19 @@ type Bundle struct {
 	// Package sale status. Valid values: AVAILABLE, SOLD_OUT
 	BundleSalesState *string `json:"BundleSalesState,omitnil,omitempty" name:"BundleSalesState"`
 
-	// Bundle type. 
-	// Valid values: 
-	// <li>STARTER_BUNDLE: Starter bundle</li>
-	// <li>GENERAL_BUNDLE: General bundle</li>
-	// <li>ENTERPRISE_BUNDLE: Enterprise bundle</li>
-	// <li>STORAGE_BUNDLE: Storage-optimized bundle</li>
-	// <li>EXCLUSIVE_BUNDLE: Dedicated bundle</li>
-	// <li>HK_EXCLUSIVE_BUNDLE: Hong Kong-dedicated bundle </li>
-	// <li>CAREFREE_BUNDLE: Lighthouse Care bundle</li>
-	// <li>BEFAST_BUNDLE: BeFast bundle </li>
+	// Package type.
+	// Value range:.
+	// <Li>GENERAL_BUNDLE: general.</li>.
+	// <Li>STORAGE_BUNDLE: storage type</li>.
+	// <Li>ENTERPRISE_BUNDLE: enterprise type</li>.
+	// <Li>EXCLUSIVE_BUNDLE: exclusive</li>.
+	// <Li>BEFAST_BUNDLE: beefast bundle</li>.
+	// <Li>STARTER_BUNDLE: entry-level.</li>.
+	// <Li>CAREFREE_BUNDLE: carefree</li>.
+	// <Li>RAZOR_SPEED_BUNDLE: razor speed bundle</li>.
 	BundleType *string `json:"BundleType,omitnil,omitempty" name:"BundleType"`
 
-	// Bundle type description 
-	// Note: This parameter may return null, indicating that no valid values can be obtained.
+	// Package type description.
 	BundleTypeDescription *string `json:"BundleTypeDescription,omitnil,omitempty" name:"BundleTypeDescription"`
 
 	// Package tag.
@@ -448,6 +447,9 @@ type Bundle struct {
 	// "NORMAL": regular package
 	// "CAREFREE": carefree package
 	BundleDisplayLabel *string `json:"BundleDisplayLabel,omitnil,omitempty" name:"BundleDisplayLabel"`
+
+	// Whether the traffic volume is unlimited.
+	TrafficUnlimited *bool `json:"TrafficUnlimited,omitnil,omitempty" name:"TrafficUnlimited"`
 }
 
 // Predefined struct for user
@@ -1077,23 +1079,22 @@ func (r *CreateKeyPairResponse) FromJsonString(s string) error {
 }
 
 type DataDiskPrice struct {
-	// Cloud disk ID.
+	// <p>Cloud disk ID.</p>.
 	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 
-	// Cloud disk unit price.
+	// <P>Cloud block storage (cbs) unit price.</p><p>unit: usd</p>.
 	OriginalDiskPrice *float64 `json:"OriginalDiskPrice,omitnil,omitempty" name:"OriginalDiskPrice"`
 
-	// Total price of cloud disk
+	// <P>Total CBS price.</p><p>unit: usd</p>.
 	OriginalPrice *float64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 
-	// Discount.
+	// <p>Discount.</p>.
 	Discount *float64 `json:"Discount,omitnil,omitempty" name:"Discount"`
 
-	// Discounted total price.
+	// <P>Discounted total price.</p><p>unit: usd</p>.
 	DiscountPrice *float64 `json:"DiscountPrice,omitnil,omitempty" name:"DiscountPrice"`
 
-	// ID of the instance to which the data disk is mounted.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// <p>Instance ID for data disk mounting.</p>.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -1659,7 +1660,7 @@ func (r *DescribeBundleDiscountResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBundlesRequestParams struct {
-	// Package ID list.
+	// List of bundle ids. the maximum is 100 per request for batch packages. you can get the BundleId in the return value from the API [DescribeBundles](https://www.tencentcloud.comom/document/product/1207/47575?from_cn_redirect=1).
 	BundleIds []*string `json:"BundleIds,omitnil,omitempty" name:"BundleIds"`
 
 	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
@@ -1669,32 +1670,33 @@ type DescribeBundlesRequestParams struct {
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filter list.
-	// <li>bundle-id</li>Filter by the **bundle ID**.
-	// Type: String
+	// <li>bundle-id</li>Filter by [bundle id].
+	// Type: String.
 	// Required: No
-	// <li>`support-platform-type`<li>Filter by the **system type**.
-	// Values: `LINUX_UNIX` (Linux/Unix), `WINDOWS` (Windows).
-	// Type: String
+	// <li>`support-platform-type`</li>Filter by the system type.
+	// Value: LINUX_UNIX (LINUX/UNIX system); WINDOWS (WINDOWS systems).
+	// Type: String.
 	// Required: No
-	// <li>bundle-type</li>Filter by the **bundle type**.
-	// Values: `GENERAL_BUNDLE` (General bundle), `STORAGE_BUNDLE` (Storage bundle), `ENTERPRISE_BUNDLE` (Enterprise bundle), `EXCLUSIVE_BUNDLE` (Dedicated bundle), `BEFAST_BUNDLE` (BeFast bundle), `STARTER_BUNDLE` (Beginner bundle); `CAREFREE_BUNDLE` (Carefree bundle);
-	// Type: String
+	// <li>bundle-type</li>Filter by [package type].
+	// Valid values: GENERAL_BUNDLE (GENERAL BUNDLE); STORAGE_BUNDLE (STORAGE BUNDLE); ENTERPRISE_BUNDLE (ENTERPRISE BUNDLE); EXCLUSIVE_BUNDLE (dedicated BUNDLE); BEFAST_BUNDLE (SPEED BUNDLE); STARTER_BUNDLE (STARTER BUNDLE); CAREFREE_BUNDLE (CAREFREE BUNDLE); RAZOR_SPEED_BUNDLE (RAZOR SPEED BUNDLE).
+	// Type: String.
 	// Required: No
-	// <li>bundle-state</li>Filter by the **bundle status**.
-	// Values: `ONLINE`, `OFFLINE`
-	// Type: String
+	// <li>bundle-state</li>Filter by [package status].
+	// Valid values: ONLINE, OFFLINE.
+	// Type: String.
 	// Required: No
-	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. You cannot specify both `BundleIds` and `Filters` at the same time.
+	// The maximum number of `Filters` per request is 10, and the maximum number of `Filter.Values` is 5. the parameter does not support specifying both `BundleIds` and `Filters`.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// AZ list, which contains all AZs by default.
+	// AZ list. default to all availability zones.
+	// <li>AZs can be queried through the API [DescribeZones](https://www.tencentcloud.comom/document/product/1207/57513?from_cn_redirect=1)</li>.
 	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 }
 
 type DescribeBundlesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Package ID list.
+	// List of bundle ids. the maximum is 100 per request for batch packages. you can get the BundleId in the return value from the API [DescribeBundles](https://www.tencentcloud.comom/document/product/1207/47575?from_cn_redirect=1).
 	BundleIds []*string `json:"BundleIds,omitnil,omitempty" name:"BundleIds"`
 
 	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
@@ -1704,25 +1706,26 @@ type DescribeBundlesRequest struct {
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filter list.
-	// <li>bundle-id</li>Filter by the **bundle ID**.
-	// Type: String
+	// <li>bundle-id</li>Filter by [bundle id].
+	// Type: String.
 	// Required: No
-	// <li>`support-platform-type`<li>Filter by the **system type**.
-	// Values: `LINUX_UNIX` (Linux/Unix), `WINDOWS` (Windows).
-	// Type: String
+	// <li>`support-platform-type`</li>Filter by the system type.
+	// Value: LINUX_UNIX (LINUX/UNIX system); WINDOWS (WINDOWS systems).
+	// Type: String.
 	// Required: No
-	// <li>bundle-type</li>Filter by the **bundle type**.
-	// Values: `GENERAL_BUNDLE` (General bundle), `STORAGE_BUNDLE` (Storage bundle), `ENTERPRISE_BUNDLE` (Enterprise bundle), `EXCLUSIVE_BUNDLE` (Dedicated bundle), `BEFAST_BUNDLE` (BeFast bundle), `STARTER_BUNDLE` (Beginner bundle); `CAREFREE_BUNDLE` (Carefree bundle);
-	// Type: String
+	// <li>bundle-type</li>Filter by [package type].
+	// Valid values: GENERAL_BUNDLE (GENERAL BUNDLE); STORAGE_BUNDLE (STORAGE BUNDLE); ENTERPRISE_BUNDLE (ENTERPRISE BUNDLE); EXCLUSIVE_BUNDLE (dedicated BUNDLE); BEFAST_BUNDLE (SPEED BUNDLE); STARTER_BUNDLE (STARTER BUNDLE); CAREFREE_BUNDLE (CAREFREE BUNDLE); RAZOR_SPEED_BUNDLE (RAZOR SPEED BUNDLE).
+	// Type: String.
 	// Required: No
-	// <li>bundle-state</li>Filter by the **bundle status**.
-	// Values: `ONLINE`, `OFFLINE`
-	// Type: String
+	// <li>bundle-state</li>Filter by [package status].
+	// Valid values: ONLINE, OFFLINE.
+	// Type: String.
 	// Required: No
-	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. You cannot specify both `BundleIds` and `Filters` at the same time.
+	// The maximum number of `Filters` per request is 10, and the maximum number of `Filter.Values` is 5. the parameter does not support specifying both `BundleIds` and `Filters`.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// AZ list, which contains all AZs by default.
+	// AZ list. default to all availability zones.
+	// <li>AZs can be queried through the API [DescribeZones](https://www.tencentcloud.comom/document/product/1207/57513?from_cn_redirect=1)</li>.
 	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 }
 
@@ -1757,7 +1760,7 @@ type DescribeBundlesResponseParams struct {
 	// Total number of eligible packages, which is used for pagination.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1897,26 +1900,26 @@ func (r *DescribeDiskConfigsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDiskDiscountRequestParams struct {
-	// Cloud disk type. Valid values: "CLOUD_PREMIUM".
+	// CLOUD disk type. valid values: CLOUD_PREMIUM: high-performance CLOUD block storage, CLOUD_SSD: SSD CLOUD disk.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Cloud disk size.
+	// CBS disk capacity, unit: GB.
 	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
+	// Specify the cloud disk backup point quota. by default, no backup point quota is set if not specified. currently only support setting no quota or a cloud disk backup point quota within [0 - 500].
 	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil,omitempty" name:"DiskBackupQuota"`
 }
 
 type DescribeDiskDiscountRequest struct {
 	*tchttp.BaseRequest
 	
-	// Cloud disk type. Valid values: "CLOUD_PREMIUM".
+	// CLOUD disk type. valid values: CLOUD_PREMIUM: high-performance CLOUD block storage, CLOUD_SSD: SSD CLOUD disk.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Cloud disk size.
+	// CBS disk capacity, unit: GB.
 	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
+	// Specify the cloud disk backup point quota. by default, no backup point quota is set if not specified. currently only support setting no quota or a cloud disk backup point quota within [0 - 500].
 	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil,omitempty" name:"DiskBackupQuota"`
 }
 
@@ -1943,13 +1946,13 @@ func (r *DescribeDiskDiscountRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDiskDiscountResponseParams struct {
-	// Currency: CNY, USD.
+	// Currency: USD.
 	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
 
 	// Discount tier details. The information of each tier includes the duration, discounted quantity, total price, discounted price, and discount details (user discount, official website discount, or final discount).
 	DiscountDetail []*DiscountDetail `json:"DiscountDetail,omitnil,omitempty" name:"DiscountDetail"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3907,21 +3910,19 @@ func (r *DetachDisksResponse) FromJsonString(s string) error {
 }
 
 type DetailPrice struct {
-	// Values: 
-	// <li>"DiskSpace": Cloud disk space</li>
-	// <li>"DiskBackupQuota": Cloud disk backups</li>
+	// <p>Name of a billable item, current parameter.</p><li>"DiskSpace" represents the CBS space charge item.</li><li>"DiskBackupQuota" represents the data disk backup point quota charge item.</li><li>"Instance" represents the Instance charge item.</li><li>"SystemDiskBackupQuota" represents the system disk backup point quota charge item.</li>.
 	PriceName *string `json:"PriceName,omitnil,omitempty" name:"PriceName"`
 
-	// Official unit price of the billable item
+	// <P>Unit price per billing item dimension.</p><p>unit: usd</p>.
 	OriginUnitPrice *float64 `json:"OriginUnitPrice,omitnil,omitempty" name:"OriginUnitPrice"`
 
-	// Official total price of the billable item
+	// <P>Total price of billing item dimension.</p><p>unit: usd</p>.
 	OriginalPrice *float64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 
-	// Discount of the billable item
+	// <P>Dimensional discount for billing items.</p>.
 	Discount *float64 `json:"Discount,omitnil,omitempty" name:"Discount"`
 
-	// Discounted total price of the billable item
+	// <P>Discounted total price by billing item dimension.</p><p>unit: usd</p>.
 	DiscountPrice *float64 `json:"DiscountPrice,omitnil,omitempty" name:"DiscountPrice"`
 }
 
@@ -3987,22 +3988,22 @@ func (r *DisassociateInstancesKeyPairsResponse) FromJsonString(s string) error {
 }
 
 type DiscountDetail struct {
-	// Billing duration.
+	// <P>Billing duration.</p>.
 	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
-	// Billing unit.
+	// <P>Time unit.<br>value is:</p><ul><li>m - month</li><li>d - day</li></ul>.
 	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
 
-	// Total price.
+	// <P>Total price.</p><p>unit: usd</p>.
 	TotalCost *float64 `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
 
-	// Discounted total price.
+	// <P>Discounted total price.</p><p>unit: usd</p>.
 	RealTotalCost *float64 `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
 
-	// Discount.
-	Discount *int64 `json:"Discount,omitnil,omitempty" name:"Discount"`
+	// <p>Discount.</p>.
+	Discount *float64 `json:"Discount,omitnil,omitempty" name:"Discount"`
 
-	// Discount details.
+	// <P>Specific discount details.</p>.
 	PolicyDetail *PolicyDetail `json:"PolicyDetail,omitnil,omitempty" name:"PolicyDetail"`
 }
 
@@ -4725,18 +4726,16 @@ type InquirePriceRenewInstancesResponseParams struct {
 	// Price information. It defaults to the price information of the first instance in the list.
 	Price *Price `json:"Price,omitnil,omitempty" name:"Price"`
 
-	// List of data disk price information.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Data disk price information list.
 	DataDiskPriceSet []*DataDiskPrice `json:"DataDiskPriceSet,omitnil,omitempty" name:"DataDiskPriceSet"`
 
-	// Price list of the instances to be renewed.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Price list for instances to be renewed.
 	InstancePriceDetailSet []*InstancePriceDetail `json:"InstancePriceDetailSet,omitnil,omitempty" name:"InstancePriceDetailSet"`
 
 	// Total price
 	TotalPrice *TotalPrice `json:"TotalPrice,omitnil,omitempty" name:"TotalPrice"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4858,10 +4857,12 @@ type Instance struct {
 }
 
 type InstanceChargePrepaid struct {
-	// Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
+	// Duration of instance purchase. measurement unit: month.
+	// -Valid values when creating an instance: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
+	// -When renewing an instance, valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Auto-Renewal flag. Valid values: <br><li>NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically <br><li>NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew <br><li>DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically<br><br>Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed monthly if the account balance is sufficient.
+	// AUTO-Renewal flag. valid values:<br><li>NOTIFY_AND_AUTO_RENEW: NOTIFY AND AUTO-RENEW on expiration</li><br><li>NOTIFY_AND_MANUAL_RENEW: NOTIFY expiration without AUTO-RENEW. users need to manually RENEW.</li><br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: no AUTO-renewal AND no notification</li><br><br>default value: NOTIFY_AND_MANUAL_RENEW. if this parameter is set to NOTIFY_AND_AUTO_RENEW, the instance will automatically RENEW on a monthly basis after expiration when the account balance is sufficient.
 	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 }
 
@@ -4875,34 +4876,33 @@ type InstanceDeniedActions struct {
 }
 
 type InstancePrice struct {
-	// Original package unit price.
+	// <P>Unit price of the package.</p><p>unit: usd</p>.
 	OriginalBundlePrice *float64 `json:"OriginalBundlePrice,omitnil,omitempty" name:"OriginalBundlePrice"`
 
-	// Original price.
+	// <P>Original price.</p><p>unit: usd</p>.
 	OriginalPrice *float64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 
-	// Discount.
-	Discount *int64 `json:"Discount,omitnil,omitempty" name:"Discount"`
+	// <p>Discount.</p>.
+	Discount *float64 `json:"Discount,omitnil,omitempty" name:"Discount"`
 
-	// Discounted price.
+	// <P>Discounted price.</p><p>unit: usd</p>.
 	DiscountPrice *float64 `json:"DiscountPrice,omitnil,omitempty" name:"DiscountPrice"`
 
-	// Currency unit. Valid values: `CNY` and `USD`.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// <p>Price currency unit. valid values: USD.</p>.
 	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
+
+	// <P>Billing item detail.</p>.
+	DetailPrices []*DetailPrice `json:"DetailPrices,omitnil,omitempty" name:"DetailPrices"`
 }
 
 type InstancePriceDetail struct {
 	// Instance ID.
-	// Note: This field may return `null`, indicating that no valid value was found.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Price query information.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Price inquiry information.
 	InstancePrice *InstancePrice `json:"InstancePrice,omitnil,omitempty" name:"InstancePrice"`
 
-	// Tiered-pricing details. The information of each tier includes the billable period, discount percentage, total price, discounted price, and discount details (`UserDiscount`, `CommonDiscount` and `FinalDiscount`).
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Discount gradient details. each gradient includes duration, discount percentage, total price, discount price, and discount details (user discount, official website discount, final discount).
 	DiscountDetail []*DiscountDetail `json:"DiscountDetail,omitnil,omitempty" name:"DiscountDetail"`
 }
 
@@ -5836,13 +5836,13 @@ func (r *ModifySnapshotAttributeResponse) FromJsonString(s string) error {
 
 type PolicyDetail struct {
 	// User discount.
-	UserDiscount *int64 `json:"UserDiscount,omitnil,omitempty" name:"UserDiscount"`
+	UserDiscount *float64 `json:"UserDiscount,omitnil,omitempty" name:"UserDiscount"`
 
 	// Public discount.
-	CommonDiscount *int64 `json:"CommonDiscount,omitnil,omitempty" name:"CommonDiscount"`
+	CommonDiscount *float64 `json:"CommonDiscount,omitnil,omitempty" name:"CommonDiscount"`
 
 	// Final discount.
-	FinalDiscount *int64 `json:"FinalDiscount,omitnil,omitempty" name:"FinalDiscount"`
+	FinalDiscount *float64 `json:"FinalDiscount,omitnil,omitempty" name:"FinalDiscount"`
 
 	// Activity discount. The value `null` indicates no discount.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
@@ -6828,12 +6828,10 @@ func (r *TerminateInstancesResponse) FromJsonString(s string) error {
 }
 
 type TotalPrice struct {
-	// Total original price
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// <P>Original total price.</p><p>unit: usd</p>.
 	OriginalPrice *float64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 
-	// Total discounted price
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// <P>Total price after discount.</p><p>unit: usd</p>.
 	DiscountPrice *float64 `json:"DiscountPrice,omitnil,omitempty" name:"DiscountPrice"`
 }
 

@@ -45,6 +45,226 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewAddCalcEnginesToProjectRequest() (request *AddCalcEnginesToProjectRequest) {
+    request = &AddCalcEnginesToProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "AddCalcEnginesToProject")
+    
+    
+    return
+}
+
+func NewAddCalcEnginesToProjectResponse() (response *AddCalcEnginesToProjectResponse) {
+    response = &AddCalcEnginesToProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AddCalcEnginesToProject
+// Associate a project cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_WORKSPACENOTEXIST = "InvalidParameter.WorkspaceNotExist"
+func (c *Client) AddCalcEnginesToProject(request *AddCalcEnginesToProjectRequest) (response *AddCalcEnginesToProjectResponse, err error) {
+    return c.AddCalcEnginesToProjectWithContext(context.Background(), request)
+}
+
+// AddCalcEnginesToProject
+// Associate a project cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_WORKSPACENOTEXIST = "InvalidParameter.WorkspaceNotExist"
+func (c *Client) AddCalcEnginesToProjectWithContext(ctx context.Context, request *AddCalcEnginesToProjectRequest) (response *AddCalcEnginesToProjectResponse, err error) {
+    if request == nil {
+        request = NewAddCalcEnginesToProjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "AddCalcEnginesToProject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddCalcEnginesToProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAddCalcEnginesToProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewAssociateResourceGroupToProjectRequest() (request *AssociateResourceGroupToProjectRequest) {
+    request = &AssociateResourceGroupToProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "AssociateResourceGroupToProject")
+    
+    
+    return
+}
+
+func NewAssociateResourceGroupToProjectResponse() (response *AssociateResourceGroupToProjectResponse) {
+    response = &AssociateResourceGroupToProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AssociateResourceGroupToProject
+// This API is used to bind the designated execution resource group to the project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_EXECUTORCLUSTERSTATUSERROR = "FailedOperation.ExecutorClusterStatusError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) AssociateResourceGroupToProject(request *AssociateResourceGroupToProjectRequest) (response *AssociateResourceGroupToProjectResponse, err error) {
+    return c.AssociateResourceGroupToProjectWithContext(context.Background(), request)
+}
+
+// AssociateResourceGroupToProject
+// This API is used to bind the designated execution resource group to the project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_EXECUTORCLUSTERSTATUSERROR = "FailedOperation.ExecutorClusterStatusError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) AssociateResourceGroupToProjectWithContext(ctx context.Context, request *AssociateResourceGroupToProjectRequest) (response *AssociateResourceGroupToProjectResponse, err error) {
+    if request == nil {
+        request = NewAssociateResourceGroupToProjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "AssociateResourceGroupToProject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AssociateResourceGroupToProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAssociateResourceGroupToProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewAuthorizeDataSourceRequest() (request *AuthorizeDataSourceRequest) {
+    request = &AuthorizeDataSourceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "AuthorizeDataSource")
+    
+    
+    return
+}
+
+func NewAuthorizeDataSourceResponse() (response *AuthorizeDataSourceResponse) {
+    response = &AuthorizeDataSourceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AuthorizeDataSource
+// Authorize a data source.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) AuthorizeDataSource(request *AuthorizeDataSourceRequest) (response *AuthorizeDataSourceResponse, err error) {
+    return c.AuthorizeDataSourceWithContext(context.Background(), request)
+}
+
+// AuthorizeDataSource
+// Authorize a data source.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) AuthorizeDataSourceWithContext(ctx context.Context, request *AuthorizeDataSourceRequest) (response *AuthorizeDataSourceResponse, err error) {
+    if request == nil {
+        request = NewAuthorizeDataSourceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "AuthorizeDataSource")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AuthorizeDataSource require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAuthorizeDataSourceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewAuthorizePrivilegesRequest() (request *AuthorizePrivilegesRequest) {
+    request = &AuthorizePrivilegesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "AuthorizePrivileges")
+    
+    
+    return
+}
+
+func NewAuthorizePrivilegesResponse() (response *AuthorizePrivilegesResponse) {
+    response = &AuthorizePrivilegesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AuthorizePrivileges
+// Authorization in Catalog mode.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_SIGNATUREEXPIRE = "AuthFailure.SignatureExpire"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) AuthorizePrivileges(request *AuthorizePrivilegesRequest) (response *AuthorizePrivilegesResponse, err error) {
+    return c.AuthorizePrivilegesWithContext(context.Background(), request)
+}
+
+// AuthorizePrivileges
+// Authorization in Catalog mode.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_SIGNATUREEXPIRE = "AuthFailure.SignatureExpire"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) AuthorizePrivilegesWithContext(ctx context.Context, request *AuthorizePrivilegesRequest) (response *AuthorizePrivilegesResponse, err error) {
+    if request == nil {
+        request = NewAuthorizePrivilegesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "AuthorizePrivileges")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AuthorizePrivileges require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAuthorizePrivilegesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateCodeFileRequest() (request *CreateCodeFileRequest) {
     request = &CreateCodeFileRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -145,6 +365,56 @@ func (c *Client) CreateCodeFolderWithContext(ctx context.Context, request *Creat
     return
 }
 
+func NewCreateCodePermissionsRequest() (request *CreateCodePermissionsRequest) {
+    request = &CreateCodePermissionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "CreateCodePermissions")
+    
+    
+    return
+}
+
+func NewCreateCodePermissionsResponse() (response *CreateCodePermissionsResponse) {
+    response = &CreateCodePermissionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateCodePermissions
+// Configure CodeStudio entity permission.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateCodePermissions(request *CreateCodePermissionsRequest) (response *CreateCodePermissionsResponse, err error) {
+    return c.CreateCodePermissionsWithContext(context.Background(), request)
+}
+
+// CreateCodePermissions
+// Configure CodeStudio entity permission.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateCodePermissionsWithContext(ctx context.Context, request *CreateCodePermissionsRequest) (response *CreateCodePermissionsResponse, err error) {
+    if request == nil {
+        request = NewCreateCodePermissionsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateCodePermissions")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCodePermissions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCodePermissionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDataBackfillPlanRequest() (request *CreateDataBackfillPlanRequest) {
     request = &CreateDataBackfillPlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -193,6 +463,56 @@ func (c *Client) CreateDataBackfillPlanWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewCreateDataBackfillPlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateDataSourceRequest() (request *CreateDataSourceRequest) {
+    request = &CreateDataSourceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "CreateDataSource")
+    
+    
+    return
+}
+
+func NewCreateDataSourceResponse() (response *CreateDataSourceResponse) {
+    response = &CreateDataSourceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDataSource
+// This API is used to create a data source in the designated project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateDataSource(request *CreateDataSourceRequest) (response *CreateDataSourceResponse, err error) {
+    return c.CreateDataSourceWithContext(context.Background(), request)
+}
+
+// CreateDataSource
+// This API is used to create a data source in the designated project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateDataSourceWithContext(ctx context.Context, request *CreateDataSourceRequest) (response *CreateDataSourceResponse, err error) {
+    if request == nil {
+        request = NewCreateDataSourceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateDataSource")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDataSource require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDataSourceResponse()
     err = c.Send(request, response)
     return
 }
@@ -249,6 +569,110 @@ func (c *Client) CreateOpsAlarmRuleWithContext(ctx context.Context, request *Cre
     request.SetContext(ctx)
     
     response = NewCreateOpsAlarmRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateProjectRequest() (request *CreateProjectRequest) {
+    request = &CreateProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "CreateProject")
+    
+    
+    return
+}
+
+func NewCreateProjectResponse() (response *CreateProjectResponse) {
+    response = &CreateProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateProject
+// Create a project with cluster information upon creation.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_QUOTAEXCEEDERROR = "InvalidParameter.QuotaExceedError"
+func (c *Client) CreateProject(request *CreateProjectRequest) (response *CreateProjectResponse, err error) {
+    return c.CreateProjectWithContext(context.Background(), request)
+}
+
+// CreateProject
+// Create a project with cluster information upon creation.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_QUOTAEXCEEDERROR = "InvalidParameter.QuotaExceedError"
+func (c *Client) CreateProjectWithContext(ctx context.Context, request *CreateProjectRequest) (response *CreateProjectResponse, err error) {
+    if request == nil {
+        request = NewCreateProjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateProject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateProjectMemberRequest() (request *CreateProjectMemberRequest) {
+    request = &CreateProjectMemberRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "CreateProjectMember")
+    
+    
+    return
+}
+
+func NewCreateProjectMemberResponse() (response *CreateProjectMemberResponse) {
+    response = &CreateProjectMemberResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateProjectMember
+// Add project user role.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateProjectMember(request *CreateProjectMemberRequest) (response *CreateProjectMemberResponse, err error) {
+    return c.CreateProjectMemberWithContext(context.Background(), request)
+}
+
+// CreateProjectMember
+// Add project user role.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateProjectMemberWithContext(ctx context.Context, request *CreateProjectMemberRequest) (response *CreateProjectMemberResponse, err error) {
+    if request == nil {
+        request = NewCreateProjectMemberRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateProjectMember")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateProjectMember require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateProjectMemberResponse()
     err = c.Send(request, response)
     return
 }
@@ -365,6 +789,64 @@ func (c *Client) CreateResourceFolderWithContext(ctx context.Context, request *C
     request.SetContext(ctx)
     
     response = NewCreateResourceFolderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateResourceGroupRequest() (request *CreateResourceGroupRequest) {
+    request = &CreateResourceGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "CreateResourceGroup")
+    
+    
+    return
+}
+
+func NewCreateResourceGroupResponse() (response *CreateResourceGroupResponse) {
+    response = &CreateResourceGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateResourceGroup
+// This API is used to purchase resources.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreateResourceGroup(request *CreateResourceGroupRequest) (response *CreateResourceGroupResponse, err error) {
+    return c.CreateResourceGroupWithContext(context.Background(), request)
+}
+
+// CreateResourceGroup
+// This API is used to purchase resources.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreateResourceGroupWithContext(ctx context.Context, request *CreateResourceGroupRequest) (response *CreateResourceGroupResponse, err error) {
+    if request == nil {
+        request = NewCreateResourceGroupRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateResourceGroup")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateResourceGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateResourceGroupResponse()
     err = c.Send(request, response)
     return
 }
@@ -525,6 +1007,184 @@ func (c *Client) CreateTaskWithContext(ctx context.Context, request *CreateTaskR
     return
 }
 
+func NewCreateTaskFolderRequest() (request *CreateTaskFolderRequest) {
+    request = &CreateTaskFolderRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "CreateTaskFolder")
+    
+    
+    return
+}
+
+func NewCreateTaskFolderResponse() (response *CreateTaskFolderResponse) {
+    response = &CreateTaskFolderResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateTaskFolder
+// Create a folder.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreateTaskFolder(request *CreateTaskFolderRequest) (response *CreateTaskFolderResponse, err error) {
+    return c.CreateTaskFolderWithContext(context.Background(), request)
+}
+
+// CreateTaskFolder
+// Create a folder.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreateTaskFolderWithContext(ctx context.Context, request *CreateTaskFolderRequest) (response *CreateTaskFolderResponse, err error) {
+    if request == nil {
+        request = NewCreateTaskFolderRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateTaskFolder")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateTaskFolder require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateTaskFolderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateTriggerTaskRequest() (request *CreateTriggerTaskRequest) {
+    request = &CreateTriggerTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "CreateTriggerTask")
+    
+    
+    return
+}
+
+func NewCreateTriggerTaskResponse() (response *CreateTriggerTaskResponse) {
+    response = &CreateTriggerTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateTriggerTask
+// This API is used to create a task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreateTriggerTask(request *CreateTriggerTaskRequest) (response *CreateTriggerTaskResponse, err error) {
+    return c.CreateTriggerTaskWithContext(context.Background(), request)
+}
+
+// CreateTriggerTask
+// This API is used to create a task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreateTriggerTaskWithContext(ctx context.Context, request *CreateTriggerTaskRequest) (response *CreateTriggerTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateTriggerTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateTriggerTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateTriggerTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateTriggerTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateTriggerWorkflowRequest() (request *CreateTriggerWorkflowRequest) {
+    request = &CreateTriggerWorkflowRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "CreateTriggerWorkflow")
+    
+    
+    return
+}
+
+func NewCreateTriggerWorkflowResponse() (response *CreateTriggerWorkflowResponse) {
+    response = &CreateTriggerWorkflowResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateTriggerWorkflow
+// create workflow.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) CreateTriggerWorkflow(request *CreateTriggerWorkflowRequest) (response *CreateTriggerWorkflowResponse, err error) {
+    return c.CreateTriggerWorkflowWithContext(context.Background(), request)
+}
+
+// CreateTriggerWorkflow
+// create workflow.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) CreateTriggerWorkflowWithContext(ctx context.Context, request *CreateTriggerWorkflowRequest) (response *CreateTriggerWorkflowResponse, err error) {
+    if request == nil {
+        request = NewCreateTriggerWorkflowRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateTriggerWorkflow")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateTriggerWorkflow require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateTriggerWorkflowResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateWorkflowRequest() (request *CreateWorkflowRequest) {
     request = &CreateWorkflowRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -645,6 +1305,62 @@ func (c *Client) CreateWorkflowFolderWithContext(ctx context.Context, request *C
     return
 }
 
+func NewCreateWorkflowPermissionsRequest() (request *CreateWorkflowPermissionsRequest) {
+    request = &CreateWorkflowPermissionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "CreateWorkflowPermissions")
+    
+    
+    return
+}
+
+func NewCreateWorkflowPermissionsResponse() (response *CreateWorkflowPermissionsResponse) {
+    response = &CreateWorkflowPermissionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateWorkflowPermissions
+// This API is used to configure data development permissions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) CreateWorkflowPermissions(request *CreateWorkflowPermissionsRequest) (response *CreateWorkflowPermissionsResponse, err error) {
+    return c.CreateWorkflowPermissionsWithContext(context.Background(), request)
+}
+
+// CreateWorkflowPermissions
+// This API is used to configure data development permissions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) CreateWorkflowPermissionsWithContext(ctx context.Context, request *CreateWorkflowPermissionsRequest) (response *CreateWorkflowPermissionsResponse, err error) {
+    if request == nil {
+        request = NewCreateWorkflowPermissionsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateWorkflowPermissions")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateWorkflowPermissions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateWorkflowPermissionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteCodeFileRequest() (request *DeleteCodeFileRequest) {
     request = &DeleteCodeFileRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -745,6 +1461,208 @@ func (c *Client) DeleteCodeFolderWithContext(ctx context.Context, request *Delet
     return
 }
 
+func NewDeleteCodePermissionsRequest() (request *DeleteCodePermissionsRequest) {
+    request = &DeleteCodePermissionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "DeleteCodePermissions")
+    
+    
+    return
+}
+
+func NewDeleteCodePermissionsResponse() (response *DeleteCodePermissionsResponse) {
+    response = &DeleteCodePermissionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteCodePermissions
+// Delete CodeStudio entity permission.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DeleteCodePermissions(request *DeleteCodePermissionsRequest) (response *DeleteCodePermissionsResponse, err error) {
+    return c.DeleteCodePermissionsWithContext(context.Background(), request)
+}
+
+// DeleteCodePermissions
+// Delete CodeStudio entity permission.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DeleteCodePermissionsWithContext(ctx context.Context, request *DeleteCodePermissionsRequest) (response *DeleteCodePermissionsResponse, err error) {
+    if request == nil {
+        request = NewDeleteCodePermissionsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteCodePermissions")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCodePermissions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCodePermissionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteDataBackfillPlanAsyncRequest() (request *DeleteDataBackfillPlanAsyncRequest) {
+    request = &DeleteDataBackfillPlanAsyncRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "DeleteDataBackfillPlanAsync")
+    
+    
+    return
+}
+
+func NewDeleteDataBackfillPlanAsyncResponse() (response *DeleteDataBackfillPlanAsyncResponse) {
+    response = &DeleteDataBackfillPlanAsyncResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteDataBackfillPlanAsync
+// Delete a replenishment plan.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteDataBackfillPlanAsync(request *DeleteDataBackfillPlanAsyncRequest) (response *DeleteDataBackfillPlanAsyncResponse, err error) {
+    return c.DeleteDataBackfillPlanAsyncWithContext(context.Background(), request)
+}
+
+// DeleteDataBackfillPlanAsync
+// Delete a replenishment plan.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteDataBackfillPlanAsyncWithContext(ctx context.Context, request *DeleteDataBackfillPlanAsyncRequest) (response *DeleteDataBackfillPlanAsyncResponse, err error) {
+    if request == nil {
+        request = NewDeleteDataBackfillPlanAsyncRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteDataBackfillPlanAsync")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDataBackfillPlanAsync require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteDataBackfillPlanAsyncResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteDataSourceRequest() (request *DeleteDataSourceRequest) {
+    request = &DeleteDataSourceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "DeleteDataSource")
+    
+    
+    return
+}
+
+func NewDeleteDataSourceResponse() (response *DeleteDataSourceResponse) {
+    response = &DeleteDataSourceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteDataSource
+// This API is used to delete a data source.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DeleteDataSource(request *DeleteDataSourceRequest) (response *DeleteDataSourceResponse, err error) {
+    return c.DeleteDataSourceWithContext(context.Background(), request)
+}
+
+// DeleteDataSource
+// This API is used to delete a data source.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DeleteDataSourceWithContext(ctx context.Context, request *DeleteDataSourceRequest) (response *DeleteDataSourceResponse, err error) {
+    if request == nil {
+        request = NewDeleteDataSourceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteDataSource")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDataSource require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteDataSourceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLineageRequest() (request *DeleteLineageRequest) {
+    request = &DeleteLineageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "DeleteLineage")
+    
+    
+    return
+}
+
+func NewDeleteLineageResponse() (response *DeleteLineageResponse) {
+    response = &DeleteLineageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteLineage
+// RegisterLineage
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DeleteLineage(request *DeleteLineageRequest) (response *DeleteLineageResponse, err error) {
+    return c.DeleteLineageWithContext(context.Background(), request)
+}
+
+// DeleteLineage
+// RegisterLineage
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DeleteLineageWithContext(ctx context.Context, request *DeleteLineageRequest) (response *DeleteLineageResponse, err error) {
+    if request == nil {
+        request = NewDeleteLineageRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteLineage")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteLineage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteLineageResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteOpsAlarmRuleRequest() (request *DeleteOpsAlarmRuleRequest) {
     request = &DeleteOpsAlarmRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -791,6 +1709,106 @@ func (c *Client) DeleteOpsAlarmRuleWithContext(ctx context.Context, request *Del
     request.SetContext(ctx)
     
     response = NewDeleteOpsAlarmRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteProjectRequest() (request *DeleteProjectRequest) {
+    request = &DeleteProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "DeleteProject")
+    
+    
+    return
+}
+
+func NewDeleteProjectResponse() (response *DeleteProjectResponse) {
+    response = &DeleteProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteProject
+// This API is used to delete a project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DeleteProject(request *DeleteProjectRequest) (response *DeleteProjectResponse, err error) {
+    return c.DeleteProjectWithContext(context.Background(), request)
+}
+
+// DeleteProject
+// This API is used to delete a project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DeleteProjectWithContext(ctx context.Context, request *DeleteProjectRequest) (response *DeleteProjectResponse, err error) {
+    if request == nil {
+        request = NewDeleteProjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteProject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteProjectMemberRequest() (request *DeleteProjectMemberRequest) {
+    request = &DeleteProjectMemberRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "DeleteProjectMember")
+    
+    
+    return
+}
+
+func NewDeleteProjectMemberResponse() (response *DeleteProjectMemberResponse) {
+    response = &DeleteProjectMemberResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteProjectMember
+// This API is used to delete project users.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DeleteProjectMember(request *DeleteProjectMemberRequest) (response *DeleteProjectMemberResponse, err error) {
+    return c.DeleteProjectMemberWithContext(context.Background(), request)
+}
+
+// DeleteProjectMember
+// This API is used to delete project users.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DeleteProjectMemberWithContext(ctx context.Context, request *DeleteProjectMemberRequest) (response *DeleteProjectMemberResponse, err error) {
+    if request == nil {
+        request = NewDeleteProjectMemberRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteProjectMember")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteProjectMember require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteProjectMemberResponse()
     err = c.Send(request, response)
     return
 }
@@ -907,6 +1925,64 @@ func (c *Client) DeleteResourceFolderWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDeleteResourceFolderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteResourceGroupRequest() (request *DeleteResourceGroupRequest) {
+    request = &DeleteResourceGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "DeleteResourceGroup")
+    
+    
+    return
+}
+
+func NewDeleteResourceGroupResponse() (response *DeleteResourceGroupResponse) {
+    response = &DeleteResourceGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteResourceGroup
+// This API is used to destroy resources.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteResourceGroup(request *DeleteResourceGroupRequest) (response *DeleteResourceGroupResponse, err error) {
+    return c.DeleteResourceGroupWithContext(context.Background(), request)
+}
+
+// DeleteResourceGroup
+// This API is used to destroy resources.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteResourceGroupWithContext(ctx context.Context, request *DeleteResourceGroupRequest) (response *DeleteResourceGroupResponse, err error) {
+    if request == nil {
+        request = NewDeleteResourceGroupRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteResourceGroup")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteResourceGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteResourceGroupResponse()
     err = c.Send(request, response)
     return
 }
@@ -1067,6 +2143,184 @@ func (c *Client) DeleteTaskWithContext(ctx context.Context, request *DeleteTaskR
     return
 }
 
+func NewDeleteTaskFolderRequest() (request *DeleteTaskFolderRequest) {
+    request = &DeleteTaskFolderRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "DeleteTaskFolder")
+    
+    
+    return
+}
+
+func NewDeleteTaskFolderResponse() (response *DeleteTaskFolderResponse) {
+    response = &DeleteTaskFolderResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteTaskFolder
+// Delete a data development task folder.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteTaskFolder(request *DeleteTaskFolderRequest) (response *DeleteTaskFolderResponse, err error) {
+    return c.DeleteTaskFolderWithContext(context.Background(), request)
+}
+
+// DeleteTaskFolder
+// Delete a data development task folder.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteTaskFolderWithContext(ctx context.Context, request *DeleteTaskFolderRequest) (response *DeleteTaskFolderResponse, err error) {
+    if request == nil {
+        request = NewDeleteTaskFolderRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteTaskFolder")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteTaskFolder require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteTaskFolderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteTriggerTaskRequest() (request *DeleteTriggerTaskRequest) {
+    request = &DeleteTriggerTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "DeleteTriggerTask")
+    
+    
+    return
+}
+
+func NewDeleteTriggerTaskResponse() (response *DeleteTriggerTaskResponse) {
+    response = &DeleteTriggerTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteTriggerTask
+// Delete a workflow scheduling task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteTriggerTask(request *DeleteTriggerTaskRequest) (response *DeleteTriggerTaskResponse, err error) {
+    return c.DeleteTriggerTaskWithContext(context.Background(), request)
+}
+
+// DeleteTriggerTask
+// Delete a workflow scheduling task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteTriggerTaskWithContext(ctx context.Context, request *DeleteTriggerTaskRequest) (response *DeleteTriggerTaskResponse, err error) {
+    if request == nil {
+        request = NewDeleteTriggerTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteTriggerTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteTriggerTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteTriggerTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteTriggerWorkflowRequest() (request *DeleteTriggerWorkflowRequest) {
+    request = &DeleteTriggerWorkflowRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "DeleteTriggerWorkflow")
+    
+    
+    return
+}
+
+func NewDeleteTriggerWorkflowResponse() (response *DeleteTriggerWorkflowResponse) {
+    response = &DeleteTriggerWorkflowResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteTriggerWorkflow
+// Deletes a workflow
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DeleteTriggerWorkflow(request *DeleteTriggerWorkflowRequest) (response *DeleteTriggerWorkflowResponse, err error) {
+    return c.DeleteTriggerWorkflowWithContext(context.Background(), request)
+}
+
+// DeleteTriggerWorkflow
+// Deletes a workflow
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DeleteTriggerWorkflowWithContext(ctx context.Context, request *DeleteTriggerWorkflowRequest) (response *DeleteTriggerWorkflowResponse, err error) {
+    if request == nil {
+        request = NewDeleteTriggerWorkflowRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteTriggerWorkflow")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteTriggerWorkflow require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteTriggerWorkflowResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteWorkflowRequest() (request *DeleteWorkflowRequest) {
     request = &DeleteWorkflowRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1187,6 +2441,266 @@ func (c *Client) DeleteWorkflowFolderWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDeleteWorkflowPermissionsRequest() (request *DeleteWorkflowPermissionsRequest) {
+    request = &DeleteWorkflowPermissionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "DeleteWorkflowPermissions")
+    
+    
+    return
+}
+
+func NewDeleteWorkflowPermissionsResponse() (response *DeleteWorkflowPermissionsResponse) {
+    response = &DeleteWorkflowPermissionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteWorkflowPermissions
+// This API is used to delete workflow folder permissions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DeleteWorkflowPermissions(request *DeleteWorkflowPermissionsRequest) (response *DeleteWorkflowPermissionsResponse, err error) {
+    return c.DeleteWorkflowPermissionsWithContext(context.Background(), request)
+}
+
+// DeleteWorkflowPermissions
+// This API is used to delete workflow folder permissions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DeleteWorkflowPermissionsWithContext(ctx context.Context, request *DeleteWorkflowPermissionsRequest) (response *DeleteWorkflowPermissionsResponse, err error) {
+    if request == nil {
+        request = NewDeleteWorkflowPermissionsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DeleteWorkflowPermissions")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteWorkflowPermissions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteWorkflowPermissionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDataSourceAuthorityRequest() (request *DescribeDataSourceAuthorityRequest) {
+    request = &DescribeDataSourceAuthorityRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "DescribeDataSourceAuthority")
+    
+    
+    return
+}
+
+func NewDescribeDataSourceAuthorityResponse() (response *DescribeDataSourceAuthorityResponse) {
+    response = &DescribeDataSourceAuthorityResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDataSourceAuthority
+// View Data Source Permission.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeDataSourceAuthority(request *DescribeDataSourceAuthorityRequest) (response *DescribeDataSourceAuthorityResponse, err error) {
+    return c.DescribeDataSourceAuthorityWithContext(context.Background(), request)
+}
+
+// DescribeDataSourceAuthority
+// View Data Source Permission.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeDataSourceAuthorityWithContext(ctx context.Context, request *DescribeDataSourceAuthorityRequest) (response *DescribeDataSourceAuthorityResponse, err error) {
+    if request == nil {
+        request = NewDescribeDataSourceAuthorityRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DescribeDataSourceAuthority")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDataSourceAuthority require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDataSourceAuthorityResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDisableProjectRequest() (request *DisableProjectRequest) {
+    request = &DisableProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "DisableProject")
+    
+    
+    return
+}
+
+func NewDisableProjectResponse() (response *DisableProjectResponse) {
+    response = &DisableProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DisableProject
+// Disable a project.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DisableProject(request *DisableProjectRequest) (response *DisableProjectResponse, err error) {
+    return c.DisableProjectWithContext(context.Background(), request)
+}
+
+// DisableProject
+// Disable a project.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DisableProjectWithContext(ctx context.Context, request *DisableProjectRequest) (response *DisableProjectResponse, err error) {
+    if request == nil {
+        request = NewDisableProjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DisableProject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DisableProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDisableProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDissociateResourceGroupFromProjectRequest() (request *DissociateResourceGroupFromProjectRequest) {
+    request = &DissociateResourceGroupFromProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "DissociateResourceGroupFromProject")
+    
+    
+    return
+}
+
+func NewDissociateResourceGroupFromProjectResponse() (response *DissociateResourceGroupFromProjectResponse) {
+    response = &DissociateResourceGroupFromProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DissociateResourceGroupFromProject
+// This API is used to unbind the designated execution resource group from the project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DissociateResourceGroupFromProject(request *DissociateResourceGroupFromProjectRequest) (response *DissociateResourceGroupFromProjectResponse, err error) {
+    return c.DissociateResourceGroupFromProjectWithContext(context.Background(), request)
+}
+
+// DissociateResourceGroupFromProject
+// This API is used to unbind the designated execution resource group from the project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DissociateResourceGroupFromProjectWithContext(ctx context.Context, request *DissociateResourceGroupFromProjectRequest) (response *DissociateResourceGroupFromProjectResponse, err error) {
+    if request == nil {
+        request = NewDissociateResourceGroupFromProjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "DissociateResourceGroupFromProject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DissociateResourceGroupFromProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDissociateResourceGroupFromProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEnableProjectRequest() (request *EnableProjectRequest) {
+    request = &EnableProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "EnableProject")
+    
+    
+    return
+}
+
+func NewEnableProjectResponse() (response *EnableProjectResponse) {
+    response = &EnableProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// EnableProject
+// Enable a project.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) EnableProject(request *EnableProjectRequest) (response *EnableProjectResponse, err error) {
+    return c.EnableProjectWithContext(context.Background(), request)
+}
+
+// EnableProject
+// Enable a project.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) EnableProjectWithContext(ctx context.Context, request *EnableProjectRequest) (response *EnableProjectResponse, err error) {
+    if request == nil {
+        request = NewEnableProjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "EnableProject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EnableProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEnableProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetAlarmMessageRequest() (request *GetAlarmMessageRequest) {
     request = &GetAlarmMessageRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1283,6 +2797,316 @@ func (c *Client) GetCodeFileWithContext(ctx context.Context, request *GetCodeFil
     request.SetContext(ctx)
     
     response = NewGetCodeFileResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetCodeFolderRequest() (request *GetCodeFolderRequest) {
+    request = &GetCodeFolderRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetCodeFolder")
+    
+    
+    return
+}
+
+func NewGetCodeFolderResponse() (response *GetCodeFolderResponse) {
+    response = &GetCodeFolderResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetCodeFolder
+// Retrieve sql folder details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GetCodeFolder(request *GetCodeFolderRequest) (response *GetCodeFolderResponse, err error) {
+    return c.GetCodeFolderWithContext(context.Background(), request)
+}
+
+// GetCodeFolder
+// Retrieve sql folder details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GetCodeFolderWithContext(ctx context.Context, request *GetCodeFolderRequest) (response *GetCodeFolderResponse, err error) {
+    if request == nil {
+        request = NewGetCodeFolderRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetCodeFolder")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetCodeFolder require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetCodeFolderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetDataBackfillPlanRequest() (request *GetDataBackfillPlanRequest) {
+    request = &GetDataBackfillPlanRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetDataBackfillPlan")
+    
+    
+    return
+}
+
+func NewGetDataBackfillPlanResponse() (response *GetDataBackfillPlanResponse) {
+    response = &GetDataBackfillPlanResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetDataBackfillPlan
+// Retrieve supplementary plan details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) GetDataBackfillPlan(request *GetDataBackfillPlanRequest) (response *GetDataBackfillPlanResponse, err error) {
+    return c.GetDataBackfillPlanWithContext(context.Background(), request)
+}
+
+// GetDataBackfillPlan
+// Retrieve supplementary plan details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) GetDataBackfillPlanWithContext(ctx context.Context, request *GetDataBackfillPlanRequest) (response *GetDataBackfillPlanResponse, err error) {
+    if request == nil {
+        request = NewGetDataBackfillPlanRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetDataBackfillPlan")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetDataBackfillPlan require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetDataBackfillPlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetDataSourceRequest() (request *GetDataSourceRequest) {
+    request = &GetDataSourceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetDataSource")
+    
+    
+    return
+}
+
+func NewGetDataSourceResponse() (response *GetDataSourceResponse) {
+    response = &GetDataSourceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetDataSource
+// This API is used to view detailed information of the specified data source.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhitelistError"
+func (c *Client) GetDataSource(request *GetDataSourceRequest) (response *GetDataSourceResponse, err error) {
+    return c.GetDataSourceWithContext(context.Background(), request)
+}
+
+// GetDataSource
+// This API is used to view detailed information of the specified data source.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhitelistError"
+func (c *Client) GetDataSourceWithContext(ctx context.Context, request *GetDataSourceRequest) (response *GetDataSourceResponse, err error) {
+    if request == nil {
+        request = NewGetDataSourceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetDataSource")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetDataSource require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetDataSourceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetDataSourceRelatedTasksRequest() (request *GetDataSourceRelatedTasksRequest) {
+    request = &GetDataSourceRelatedTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetDataSourceRelatedTasks")
+    
+    
+    return
+}
+
+func NewGetDataSourceRelatedTasksResponse() (response *GetDataSourceRelatedTasksResponse) {
+    response = &GetDataSourceRelatedTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetDataSourceRelatedTasks
+// Query the associated task details of a data source.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GetDataSourceRelatedTasks(request *GetDataSourceRelatedTasksRequest) (response *GetDataSourceRelatedTasksResponse, err error) {
+    return c.GetDataSourceRelatedTasksWithContext(context.Background(), request)
+}
+
+// GetDataSourceRelatedTasks
+// Query the associated task details of a data source.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GetDataSourceRelatedTasksWithContext(ctx context.Context, request *GetDataSourceRelatedTasksRequest) (response *GetDataSourceRelatedTasksResponse, err error) {
+    if request == nil {
+        request = NewGetDataSourceRelatedTasksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetDataSourceRelatedTasks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetDataSourceRelatedTasks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetDataSourceRelatedTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetMyCodeMaxPermissionRequest() (request *GetMyCodeMaxPermissionRequest) {
+    request = &GetMyCodeMaxPermissionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetMyCodeMaxPermission")
+    
+    
+    return
+}
+
+func NewGetMyCodeMaxPermissionResponse() (response *GetMyCodeMaxPermissionResponse) {
+    response = &GetMyCodeMaxPermissionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetMyCodeMaxPermission
+// View the current user's maximum permission scope for the CodeStudio entity.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GetMyCodeMaxPermission(request *GetMyCodeMaxPermissionRequest) (response *GetMyCodeMaxPermissionResponse, err error) {
+    return c.GetMyCodeMaxPermissionWithContext(context.Background(), request)
+}
+
+// GetMyCodeMaxPermission
+// View the current user's maximum permission scope for the CodeStudio entity.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GetMyCodeMaxPermissionWithContext(ctx context.Context, request *GetMyCodeMaxPermissionRequest) (response *GetMyCodeMaxPermissionResponse, err error) {
+    if request == nil {
+        request = NewGetMyCodeMaxPermissionRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetMyCodeMaxPermission")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetMyCodeMaxPermission require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetMyCodeMaxPermissionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetMyWorkflowMaxPermissionRequest() (request *GetMyWorkflowMaxPermissionRequest) {
+    request = &GetMyWorkflowMaxPermissionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetMyWorkflowMaxPermission")
+    
+    
+    return
+}
+
+func NewGetMyWorkflowMaxPermissionResponse() (response *GetMyWorkflowMaxPermissionResponse) {
+    response = &GetMyWorkflowMaxPermissionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetMyWorkflowMaxPermission
+// Check the current user's maximum permission scope for the workflow folder recursively.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) GetMyWorkflowMaxPermission(request *GetMyWorkflowMaxPermissionRequest) (response *GetMyWorkflowMaxPermissionResponse, err error) {
+    return c.GetMyWorkflowMaxPermissionWithContext(context.Background(), request)
+}
+
+// GetMyWorkflowMaxPermission
+// Check the current user's maximum permission scope for the workflow folder recursively.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) GetMyWorkflowMaxPermissionWithContext(ctx context.Context, request *GetMyWorkflowMaxPermissionRequest) (response *GetMyWorkflowMaxPermissionResponse, err error) {
+    if request == nil {
+        request = NewGetMyWorkflowMaxPermissionRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetMyWorkflowMaxPermission")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetMyWorkflowMaxPermission require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetMyWorkflowMaxPermissionResponse()
     err = c.Send(request, response)
     return
 }
@@ -1501,6 +3325,68 @@ func (c *Client) GetOpsTaskCodeWithContext(ctx context.Context, request *GetOpsT
     return
 }
 
+func NewGetOpsTriggerWorkflowRequest() (request *GetOpsTriggerWorkflowRequest) {
+    request = &GetOpsTriggerWorkflowRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetOpsTriggerWorkflow")
+    
+    
+    return
+}
+
+func NewGetOpsTriggerWorkflowResponse() (response *GetOpsTriggerWorkflowResponse) {
+    response = &GetOpsTriggerWorkflowResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetOpsTriggerWorkflow
+// Query workflow task details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) GetOpsTriggerWorkflow(request *GetOpsTriggerWorkflowRequest) (response *GetOpsTriggerWorkflowResponse, err error) {
+    return c.GetOpsTriggerWorkflowWithContext(context.Background(), request)
+}
+
+// GetOpsTriggerWorkflow
+// Query workflow task details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) GetOpsTriggerWorkflowWithContext(ctx context.Context, request *GetOpsTriggerWorkflowRequest) (response *GetOpsTriggerWorkflowResponse, err error) {
+    if request == nil {
+        request = NewGetOpsTriggerWorkflowRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetOpsTriggerWorkflow")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetOpsTriggerWorkflow require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetOpsTriggerWorkflowResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetOpsWorkflowRequest() (request *GetOpsWorkflowRequest) {
     request = &GetOpsWorkflowRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1553,6 +3439,58 @@ func (c *Client) GetOpsWorkflowWithContext(ctx context.Context, request *GetOpsW
     request.SetContext(ctx)
     
     response = NewGetOpsWorkflowResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetProjectRequest() (request *GetProjectRequest) {
+    request = &GetProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetProject")
+    
+    
+    return
+}
+
+func NewGetProjectResponse() (response *GetProjectResponse) {
+    response = &GetProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetProject
+// This API is used to get project information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_WORKSPACENOTEXIST = "InvalidParameter.WorkspaceNotExist"
+func (c *Client) GetProject(request *GetProjectRequest) (response *GetProjectResponse, err error) {
+    return c.GetProjectWithContext(context.Background(), request)
+}
+
+// GetProject
+// This API is used to get project information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_WORKSPACENOTEXIST = "InvalidParameter.WorkspaceNotExist"
+func (c *Client) GetProjectWithContext(ctx context.Context, request *GetProjectRequest) (response *GetProjectResponse, err error) {
+    if request == nil {
+        request = NewGetProjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetProject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetProjectResponse()
     err = c.Send(request, response)
     return
 }
@@ -1615,6 +3553,164 @@ func (c *Client) GetResourceFileWithContext(ctx context.Context, request *GetRes
     return
 }
 
+func NewGetResourceFolderRequest() (request *GetResourceFolderRequest) {
+    request = &GetResourceFolderRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetResourceFolder")
+    
+    
+    return
+}
+
+func NewGetResourceFolderResponse() (response *GetResourceFolderResponse) {
+    response = &GetResourceFolderResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetResourceFolder
+// Query a resource file folder details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) GetResourceFolder(request *GetResourceFolderRequest) (response *GetResourceFolderResponse, err error) {
+    return c.GetResourceFolderWithContext(context.Background(), request)
+}
+
+// GetResourceFolder
+// Query a resource file folder details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) GetResourceFolderWithContext(ctx context.Context, request *GetResourceFolderRequest) (response *GetResourceFolderResponse, err error) {
+    if request == nil {
+        request = NewGetResourceFolderRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetResourceFolder")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetResourceFolder require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetResourceFolderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetResourceGroupMetricsRequest() (request *GetResourceGroupMetricsRequest) {
+    request = &GetResourceGroupMetricsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetResourceGroupMetrics")
+    
+    
+    return
+}
+
+func NewGetResourceGroupMetricsResponse() (response *GetResourceGroupMetricsResponse) {
+    response = &GetResourceGroupMetricsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetResourceGroupMetrics
+// This API is used to view specified execution resource group monitoring metrics.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GetResourceGroupMetrics(request *GetResourceGroupMetricsRequest) (response *GetResourceGroupMetricsResponse, err error) {
+    return c.GetResourceGroupMetricsWithContext(context.Background(), request)
+}
+
+// GetResourceGroupMetrics
+// This API is used to view specified execution resource group monitoring metrics.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GetResourceGroupMetricsWithContext(ctx context.Context, request *GetResourceGroupMetricsRequest) (response *GetResourceGroupMetricsResponse, err error) {
+    if request == nil {
+        request = NewGetResourceGroupMetricsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetResourceGroupMetrics")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetResourceGroupMetrics require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetResourceGroupMetricsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetSQLFolderRequest() (request *GetSQLFolderRequest) {
+    request = &GetSQLFolderRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetSQLFolder")
+    
+    
+    return
+}
+
+func NewGetSQLFolderResponse() (response *GetSQLFolderResponse) {
+    response = &GetSQLFolderResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetSQLFolder
+// Retrieve sql folder details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GetSQLFolder(request *GetSQLFolderRequest) (response *GetSQLFolderResponse, err error) {
+    return c.GetSQLFolderWithContext(context.Background(), request)
+}
+
+// GetSQLFolder
+// Retrieve sql folder details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GetSQLFolderWithContext(ctx context.Context, request *GetSQLFolderRequest) (response *GetSQLFolderResponse, err error) {
+    if request == nil {
+        request = NewGetSQLFolderRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetSQLFolder")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetSQLFolder require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetSQLFolderResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetSQLScriptRequest() (request *GetSQLScriptRequest) {
     request = &GetSQLScriptRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1661,6 +3757,112 @@ func (c *Client) GetSQLScriptWithContext(ctx context.Context, request *GetSQLScr
     request.SetContext(ctx)
     
     response = NewGetSQLScriptResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetTableRequest() (request *GetTableRequest) {
+    request = &GetTableRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetTable")
+    
+    
+    return
+}
+
+func NewGetTableResponse() (response *GetTableResponse) {
+    response = &GetTableResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetTable
+// Query table details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) GetTable(request *GetTableRequest) (response *GetTableResponse, err error) {
+    return c.GetTableWithContext(context.Background(), request)
+}
+
+// GetTable
+// Query table details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) GetTableWithContext(ctx context.Context, request *GetTableRequest) (response *GetTableResponse, err error) {
+    if request == nil {
+        request = NewGetTableRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetTable")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetTable require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetTableResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetTableColumnsRequest() (request *GetTableColumnsRequest) {
+    request = &GetTableColumnsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetTableColumns")
+    
+    
+    return
+}
+
+func NewGetTableColumnsResponse() (response *GetTableColumnsResponse) {
+    response = &GetTableColumnsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetTableColumns
+// This API is used to obtain the list of all fields in a table.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) GetTableColumns(request *GetTableColumnsRequest) (response *GetTableColumnsResponse, err error) {
+    return c.GetTableColumnsWithContext(context.Background(), request)
+}
+
+// GetTableColumns
+// This API is used to obtain the list of all fields in a table.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) GetTableColumnsWithContext(ctx context.Context, request *GetTableColumnsRequest) (response *GetTableColumnsResponse, err error) {
+    if request == nil {
+        request = NewGetTableColumnsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetTableColumns")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetTableColumns require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetTableColumnsResponse()
     err = c.Send(request, response)
     return
 }
@@ -1771,6 +3973,70 @@ func (c *Client) GetTaskCodeWithContext(ctx context.Context, request *GetTaskCod
     request.SetContext(ctx)
     
     response = NewGetTaskCodeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetTaskFolderRequest() (request *GetTaskFolderRequest) {
+    request = &GetTaskFolderRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetTaskFolder")
+    
+    
+    return
+}
+
+func NewGetTaskFolderResponse() (response *GetTaskFolderResponse) {
+    response = &GetTaskFolderResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetTaskFolder
+// Query Task Folder Details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) GetTaskFolder(request *GetTaskFolderRequest) (response *GetTaskFolderResponse, err error) {
+    return c.GetTaskFolderWithContext(context.Background(), request)
+}
+
+// GetTaskFolder
+// Query Task Folder Details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) GetTaskFolderWithContext(ctx context.Context, request *GetTaskFolderRequest) (response *GetTaskFolderResponse, err error) {
+    if request == nil {
+        request = NewGetTaskFolderRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetTaskFolder")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetTaskFolder require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetTaskFolderResponse()
     err = c.Send(request, response)
     return
 }
@@ -1945,6 +4211,356 @@ func (c *Client) GetTaskVersionWithContext(ctx context.Context, request *GetTask
     return
 }
 
+func NewGetTriggerTaskRequest() (request *GetTriggerTaskRequest) {
+    request = &GetTriggerTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetTriggerTask")
+    
+    
+    return
+}
+
+func NewGetTriggerTaskResponse() (response *GetTriggerTaskResponse) {
+    response = &GetTriggerTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetTriggerTask
+// This API is used to retrieve task details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) GetTriggerTask(request *GetTriggerTaskRequest) (response *GetTriggerTaskResponse, err error) {
+    return c.GetTriggerTaskWithContext(context.Background(), request)
+}
+
+// GetTriggerTask
+// This API is used to retrieve task details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) GetTriggerTaskWithContext(ctx context.Context, request *GetTriggerTaskRequest) (response *GetTriggerTaskResponse, err error) {
+    if request == nil {
+        request = NewGetTriggerTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetTriggerTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetTriggerTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetTriggerTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetTriggerTaskCodeRequest() (request *GetTriggerTaskCodeRequest) {
+    request = &GetTriggerTaskCodeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetTriggerTaskCode")
+    
+    
+    return
+}
+
+func NewGetTriggerTaskCodeResponse() (response *GetTriggerTaskCodeResponse) {
+    response = &GetTriggerTaskCodeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetTriggerTaskCode
+// Retrieve workflow scheduling task code.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) GetTriggerTaskCode(request *GetTriggerTaskCodeRequest) (response *GetTriggerTaskCodeResponse, err error) {
+    return c.GetTriggerTaskCodeWithContext(context.Background(), request)
+}
+
+// GetTriggerTaskCode
+// Retrieve workflow scheduling task code.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) GetTriggerTaskCodeWithContext(ctx context.Context, request *GetTriggerTaskCodeRequest) (response *GetTriggerTaskCodeResponse, err error) {
+    if request == nil {
+        request = NewGetTriggerTaskCodeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetTriggerTaskCode")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetTriggerTaskCode require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetTriggerTaskCodeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetTriggerTaskRunRequest() (request *GetTriggerTaskRunRequest) {
+    request = &GetTriggerTaskRunRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetTriggerTaskRun")
+    
+    
+    return
+}
+
+func NewGetTriggerTaskRunResponse() (response *GetTriggerTaskRunResponse) {
+    response = &GetTriggerTaskRunResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetTriggerTaskRun
+// Query task execution details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) GetTriggerTaskRun(request *GetTriggerTaskRunRequest) (response *GetTriggerTaskRunResponse, err error) {
+    return c.GetTriggerTaskRunWithContext(context.Background(), request)
+}
+
+// GetTriggerTaskRun
+// Query task execution details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) GetTriggerTaskRunWithContext(ctx context.Context, request *GetTriggerTaskRunRequest) (response *GetTriggerTaskRunResponse, err error) {
+    if request == nil {
+        request = NewGetTriggerTaskRunRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetTriggerTaskRun")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetTriggerTaskRun require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetTriggerTaskRunResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetTriggerTaskVersionRequest() (request *GetTriggerTaskVersionRequest) {
+    request = &GetTriggerTaskVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetTriggerTaskVersion")
+    
+    
+    return
+}
+
+func NewGetTriggerTaskVersionResponse() (response *GetTriggerTaskVersionResponse) {
+    response = &GetTriggerTaskVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetTriggerTaskVersion
+// Get task version list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) GetTriggerTaskVersion(request *GetTriggerTaskVersionRequest) (response *GetTriggerTaskVersionResponse, err error) {
+    return c.GetTriggerTaskVersionWithContext(context.Background(), request)
+}
+
+// GetTriggerTaskVersion
+// Get task version list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) GetTriggerTaskVersionWithContext(ctx context.Context, request *GetTriggerTaskVersionRequest) (response *GetTriggerTaskVersionResponse, err error) {
+    if request == nil {
+        request = NewGetTriggerTaskVersionRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetTriggerTaskVersion")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetTriggerTaskVersion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetTriggerTaskVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetTriggerWorkflowRequest() (request *GetTriggerWorkflowRequest) {
+    request = &GetTriggerWorkflowRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetTriggerWorkflow")
+    
+    
+    return
+}
+
+func NewGetTriggerWorkflowResponse() (response *GetTriggerWorkflowResponse) {
+    response = &GetTriggerWorkflowResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetTriggerWorkflow
+// Retrieve workflow information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) GetTriggerWorkflow(request *GetTriggerWorkflowRequest) (response *GetTriggerWorkflowResponse, err error) {
+    return c.GetTriggerWorkflowWithContext(context.Background(), request)
+}
+
+// GetTriggerWorkflow
+// Retrieve workflow information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) GetTriggerWorkflowWithContext(ctx context.Context, request *GetTriggerWorkflowRequest) (response *GetTriggerWorkflowResponse, err error) {
+    if request == nil {
+        request = NewGetTriggerWorkflowRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetTriggerWorkflow")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetTriggerWorkflow require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetTriggerWorkflowResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetTriggerWorkflowRunRequest() (request *GetTriggerWorkflowRunRequest) {
+    request = &GetTriggerWorkflowRunRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetTriggerWorkflowRun")
+    
+    
+    return
+}
+
+func NewGetTriggerWorkflowRunResponse() (response *GetTriggerWorkflowRunResponse) {
+    response = &GetTriggerWorkflowRunResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetTriggerWorkflowRun
+// Query workflow task details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) GetTriggerWorkflowRun(request *GetTriggerWorkflowRunRequest) (response *GetTriggerWorkflowRunResponse, err error) {
+    return c.GetTriggerWorkflowRunWithContext(context.Background(), request)
+}
+
+// GetTriggerWorkflowRun
+// Query workflow task details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) GetTriggerWorkflowRunWithContext(ctx context.Context, request *GetTriggerWorkflowRunRequest) (response *GetTriggerWorkflowRunResponse, err error) {
+    if request == nil {
+        request = NewGetTriggerWorkflowRunRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetTriggerWorkflowRun")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetTriggerWorkflowRun require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetTriggerWorkflowRunResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetWorkflowRequest() (request *GetWorkflowRequest) {
     request = &GetWorkflowRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1997,6 +4613,120 @@ func (c *Client) GetWorkflowWithContext(ctx context.Context, request *GetWorkflo
     request.SetContext(ctx)
     
     response = NewGetWorkflowResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetWorkflowFolderRequest() (request *GetWorkflowFolderRequest) {
+    request = &GetWorkflowFolderRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GetWorkflowFolder")
+    
+    
+    return
+}
+
+func NewGetWorkflowFolderResponse() (response *GetWorkflowFolderResponse) {
+    response = &GetWorkflowFolderResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetWorkflowFolder
+// Query folder details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) GetWorkflowFolder(request *GetWorkflowFolderRequest) (response *GetWorkflowFolderResponse, err error) {
+    return c.GetWorkflowFolderWithContext(context.Background(), request)
+}
+
+// GetWorkflowFolder
+// Query folder details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) GetWorkflowFolderWithContext(ctx context.Context, request *GetWorkflowFolderRequest) (response *GetWorkflowFolderResponse, err error) {
+    if request == nil {
+        request = NewGetWorkflowFolderRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GetWorkflowFolder")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetWorkflowFolder require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetWorkflowFolderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGrantMemberProjectRoleRequest() (request *GrantMemberProjectRoleRequest) {
+    request = &GrantMemberProjectRoleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "GrantMemberProjectRole")
+    
+    
+    return
+}
+
+func NewGrantMemberProjectRoleResponse() (response *GrantMemberProjectRoleResponse) {
+    response = &GrantMemberProjectRoleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GrantMemberProjectRole
+// Modify project user roles.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GrantMemberProjectRole(request *GrantMemberProjectRoleRequest) (response *GrantMemberProjectRoleResponse, err error) {
+    return c.GrantMemberProjectRoleWithContext(context.Background(), request)
+}
+
+// GrantMemberProjectRole
+// Modify project user roles.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GrantMemberProjectRoleWithContext(ctx context.Context, request *GrantMemberProjectRoleRequest) (response *GrantMemberProjectRoleResponse, err error) {
+    if request == nil {
+        request = NewGrantMemberProjectRoleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "GrantMemberProjectRole")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GrantMemberProjectRole require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGrantMemberProjectRoleResponse()
     err = c.Send(request, response)
     return
 }
@@ -2057,6 +4787,68 @@ func (c *Client) KillTaskInstancesAsyncWithContext(ctx context.Context, request 
     return
 }
 
+func NewKillTriggerWorkflowRunsRequest() (request *KillTriggerWorkflowRunsRequest) {
+    request = &KillTriggerWorkflowRunsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "KillTriggerWorkflowRuns")
+    
+    
+    return
+}
+
+func NewKillTriggerWorkflowRunsResponse() (response *KillTriggerWorkflowRunsResponse) {
+    response = &KillTriggerWorkflowRunsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// KillTriggerWorkflowRuns
+// Terminate running.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) KillTriggerWorkflowRuns(request *KillTriggerWorkflowRunsRequest) (response *KillTriggerWorkflowRunsResponse, err error) {
+    return c.KillTriggerWorkflowRunsWithContext(context.Background(), request)
+}
+
+// KillTriggerWorkflowRuns
+// Terminate running.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) KillTriggerWorkflowRunsWithContext(ctx context.Context, request *KillTriggerWorkflowRunsRequest) (response *KillTriggerWorkflowRunsResponse, err error) {
+    if request == nil {
+        request = NewKillTriggerWorkflowRunsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "KillTriggerWorkflowRuns")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("KillTriggerWorkflowRuns require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewKillTriggerWorkflowRunsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListAlarmMessagesRequest() (request *ListAlarmMessagesRequest) {
     request = &ListAlarmMessagesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2103,6 +4895,56 @@ func (c *Client) ListAlarmMessagesWithContext(ctx context.Context, request *List
     request.SetContext(ctx)
     
     response = NewListAlarmMessagesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListCatalogRequest() (request *ListCatalogRequest) {
+    request = &ListCatalogRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListCatalog")
+    
+    
+    return
+}
+
+func NewListCatalogResponse() (response *ListCatalogResponse) {
+    response = &ListCatalogResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListCatalog
+// Retrieve asset catalog info.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListCatalog(request *ListCatalogRequest) (response *ListCatalogResponse, err error) {
+    return c.ListCatalogWithContext(context.Background(), request)
+}
+
+// ListCatalog
+// Retrieve asset catalog info.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListCatalogWithContext(ctx context.Context, request *ListCatalogRequest) (response *ListCatalogResponse, err error) {
+    if request == nil {
+        request = NewListCatalogRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListCatalog")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListCatalog require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListCatalogResponse()
     err = c.Send(request, response)
     return
 }
@@ -2157,6 +4999,106 @@ func (c *Client) ListCodeFolderContentsWithContext(ctx context.Context, request 
     return
 }
 
+func NewListCodePermissionsRequest() (request *ListCodePermissionsRequest) {
+    request = &ListCodePermissionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListCodePermissions")
+    
+    
+    return
+}
+
+func NewListCodePermissionsResponse() (response *ListCodePermissionsResponse) {
+    response = &ListCodePermissionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListCodePermissions
+// View CodeStudio entity permission.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListCodePermissions(request *ListCodePermissionsRequest) (response *ListCodePermissionsResponse, err error) {
+    return c.ListCodePermissionsWithContext(context.Background(), request)
+}
+
+// ListCodePermissions
+// View CodeStudio entity permission.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListCodePermissionsWithContext(ctx context.Context, request *ListCodePermissionsRequest) (response *ListCodePermissionsResponse, err error) {
+    if request == nil {
+        request = NewListCodePermissionsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListCodePermissions")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListCodePermissions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListCodePermissionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListColumnLineageRequest() (request *ListColumnLineageRequest) {
+    request = &ListColumnLineageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListColumnLineage")
+    
+    
+    return
+}
+
+func NewListColumnLineageResponse() (response *ListColumnLineageResponse) {
+    response = &ListColumnLineageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListColumnLineage
+// This API is used to obtain table field lineage information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListColumnLineage(request *ListColumnLineageRequest) (response *ListColumnLineageResponse, err error) {
+    return c.ListColumnLineageWithContext(context.Background(), request)
+}
+
+// ListColumnLineage
+// This API is used to obtain table field lineage information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListColumnLineageWithContext(ctx context.Context, request *ListColumnLineageRequest) (response *ListColumnLineageResponse, err error) {
+    if request == nil {
+        request = NewListColumnLineageRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListColumnLineage")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListColumnLineage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListColumnLineageResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListDataBackfillInstancesRequest() (request *ListDataBackfillInstancesRequest) {
     request = &ListDataBackfillInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2203,6 +5145,110 @@ func (c *Client) ListDataBackfillInstancesWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewListDataBackfillInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListDataSourcesRequest() (request *ListDataSourcesRequest) {
+    request = &ListDataSourcesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListDataSources")
+    
+    
+    return
+}
+
+func NewListDataSourcesResponse() (response *ListDataSourcesResponse) {
+    response = &ListDataSourcesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListDataSources
+// This API is used to query the data source list in the designated project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhitelistError"
+func (c *Client) ListDataSources(request *ListDataSourcesRequest) (response *ListDataSourcesResponse, err error) {
+    return c.ListDataSourcesWithContext(context.Background(), request)
+}
+
+// ListDataSources
+// This API is used to query the data source list in the designated project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhitelistError"
+func (c *Client) ListDataSourcesWithContext(ctx context.Context, request *ListDataSourcesRequest) (response *ListDataSourcesResponse, err error) {
+    if request == nil {
+        request = NewListDataSourcesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListDataSources")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListDataSources require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListDataSourcesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListDatabaseRequest() (request *ListDatabaseRequest) {
+    request = &ListDatabaseRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListDatabase")
+    
+    
+    return
+}
+
+func NewListDatabaseResponse() (response *ListDatabaseResponse) {
+    response = &ListDatabaseResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListDatabase
+// This API is used to obtain asset database info.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhitelistError"
+func (c *Client) ListDatabase(request *ListDatabaseRequest) (response *ListDatabaseResponse, err error) {
+    return c.ListDatabaseWithContext(context.Background(), request)
+}
+
+// ListDatabase
+// This API is used to obtain asset database info.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhitelistError"
+func (c *Client) ListDatabaseWithContext(ctx context.Context, request *ListDatabaseRequest) (response *ListDatabaseResponse, err error) {
+    if request == nil {
+        request = NewListDatabaseRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListDatabase")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListDatabase require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListDatabaseResponse()
     err = c.Send(request, response)
     return
 }
@@ -2381,6 +5427,122 @@ func (c *Client) ListDownstreamTasksWithContext(ctx context.Context, request *Li
     return
 }
 
+func NewListDownstreamTriggerTasksRequest() (request *ListDownstreamTriggerTasksRequest) {
+    request = &ListDownstreamTriggerTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListDownstreamTriggerTasks")
+    
+    
+    return
+}
+
+func NewListDownstreamTriggerTasksResponse() (response *ListDownstreamTriggerTasksResponse) {
+    response = &ListDownstreamTriggerTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListDownstreamTriggerTasks
+// This API is used to retrieve direct downstream task details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ListDownstreamTriggerTasks(request *ListDownstreamTriggerTasksRequest) (response *ListDownstreamTriggerTasksResponse, err error) {
+    return c.ListDownstreamTriggerTasksWithContext(context.Background(), request)
+}
+
+// ListDownstreamTriggerTasks
+// This API is used to retrieve direct downstream task details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ListDownstreamTriggerTasksWithContext(ctx context.Context, request *ListDownstreamTriggerTasksRequest) (response *ListDownstreamTriggerTasksResponse, err error) {
+    if request == nil {
+        request = NewListDownstreamTriggerTasksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListDownstreamTriggerTasks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListDownstreamTriggerTasks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListDownstreamTriggerTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListLineageRequest() (request *ListLineageRequest) {
+    request = &ListLineageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListLineage")
+    
+    
+    return
+}
+
+func NewListLineageResponse() (response *ListLineageResponse) {
+    response = &ListLineageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListLineage
+// This API is used to obtain asset lineage information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ListLineage(request *ListLineageRequest) (response *ListLineageResponse, err error) {
+    return c.ListLineageWithContext(context.Background(), request)
+}
+
+// ListLineage
+// This API is used to obtain asset lineage information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ListLineageWithContext(ctx context.Context, request *ListLineageRequest) (response *ListLineageResponse, err error) {
+    if request == nil {
+        request = NewListLineageRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListLineage")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListLineage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListLineageResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListOpsAlarmRulesRequest() (request *ListOpsAlarmRulesRequest) {
     request = &ListOpsAlarmRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2481,6 +5643,68 @@ func (c *Client) ListOpsTasksWithContext(ctx context.Context, request *ListOpsTa
     return
 }
 
+func NewListOpsTriggerWorkflowsRequest() (request *ListOpsTriggerWorkflowsRequest) {
+    request = &ListOpsTriggerWorkflowsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListOpsTriggerWorkflows")
+    
+    
+    return
+}
+
+func NewListOpsTriggerWorkflowsResponse() (response *ListOpsTriggerWorkflowsResponse) {
+    response = &ListOpsTriggerWorkflowsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListOpsTriggerWorkflows
+// This API is used to query the list of workflows.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ListOpsTriggerWorkflows(request *ListOpsTriggerWorkflowsRequest) (response *ListOpsTriggerWorkflowsResponse, err error) {
+    return c.ListOpsTriggerWorkflowsWithContext(context.Background(), request)
+}
+
+// ListOpsTriggerWorkflows
+// This API is used to query the list of workflows.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ListOpsTriggerWorkflowsWithContext(ctx context.Context, request *ListOpsTriggerWorkflowsRequest) (response *ListOpsTriggerWorkflowsResponse, err error) {
+    if request == nil {
+        request = NewListOpsTriggerWorkflowsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListOpsTriggerWorkflows")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListOpsTriggerWorkflows require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListOpsTriggerWorkflowsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListOpsWorkflowsRequest() (request *ListOpsWorkflowsRequest) {
     request = &ListOpsWorkflowsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2529,6 +5753,330 @@ func (c *Client) ListOpsWorkflowsWithContext(ctx context.Context, request *ListO
     request.SetContext(ctx)
     
     response = NewListOpsWorkflowsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListPermissionsRequest() (request *ListPermissionsRequest) {
+    request = &ListPermissionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListPermissions")
+    
+    
+    return
+}
+
+func NewListPermissionsResponse() (response *ListPermissionsResponse) {
+    response = &ListPermissionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListPermissions
+// Retrieve authorizable permission details.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INVALIDPARAMETER = "InternalError.InvalidParameter"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMSERROR = "InvalidParameter.InvalidParamsError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ListPermissions(request *ListPermissionsRequest) (response *ListPermissionsResponse, err error) {
+    return c.ListPermissionsWithContext(context.Background(), request)
+}
+
+// ListPermissions
+// Retrieve authorizable permission details.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INVALIDPARAMETER = "InternalError.InvalidParameter"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMSERROR = "InvalidParameter.InvalidParamsError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ListPermissionsWithContext(ctx context.Context, request *ListPermissionsRequest) (response *ListPermissionsResponse, err error) {
+    if request == nil {
+        request = NewListPermissionsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListPermissions")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListPermissions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListPermissionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListProcessLineageRequest() (request *ListProcessLineageRequest) {
+    request = &ListProcessLineageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListProcessLineage")
+    
+    
+    return
+}
+
+func NewListProcessLineageResponse() (response *ListProcessLineageResponse) {
+    response = &ListProcessLineageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListProcessLineage
+// This API is used to obtain asset lineage information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INVALIDPARAMETER = "InternalError.InvalidParameter"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMSERROR = "InvalidParameter.InvalidParamsError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ListProcessLineage(request *ListProcessLineageRequest) (response *ListProcessLineageResponse, err error) {
+    return c.ListProcessLineageWithContext(context.Background(), request)
+}
+
+// ListProcessLineage
+// This API is used to obtain asset lineage information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INVALIDPARAMETER = "InternalError.InvalidParameter"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMSERROR = "InvalidParameter.InvalidParamsError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ListProcessLineageWithContext(ctx context.Context, request *ListProcessLineageRequest) (response *ListProcessLineageResponse, err error) {
+    if request == nil {
+        request = NewListProcessLineageRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListProcessLineage")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListProcessLineage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListProcessLineageResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListProjectMembersRequest() (request *ListProjectMembersRequest) {
+    request = &ListProjectMembersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListProjectMembers")
+    
+    
+    return
+}
+
+func NewListProjectMembersResponse() (response *ListProjectMembersResponse) {
+    response = &ListProjectMembersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListProjectMembers
+// This API is used to obtain the user under the project with pagination return.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListProjectMembers(request *ListProjectMembersRequest) (response *ListProjectMembersResponse, err error) {
+    return c.ListProjectMembersWithContext(context.Background(), request)
+}
+
+// ListProjectMembers
+// This API is used to obtain the user under the project with pagination return.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListProjectMembersWithContext(ctx context.Context, request *ListProjectMembersRequest) (response *ListProjectMembersResponse, err error) {
+    if request == nil {
+        request = NewListProjectMembersRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListProjectMembers")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListProjectMembers require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListProjectMembersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListProjectRolesRequest() (request *ListProjectRolesRequest) {
+    request = &ListProjectRolesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListProjectRoles")
+    
+    
+    return
+}
+
+func NewListProjectRolesResponse() (response *ListProjectRolesResponse) {
+    response = &ListProjectRolesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListProjectRoles
+// Get role list info.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhitelistError"
+func (c *Client) ListProjectRoles(request *ListProjectRolesRequest) (response *ListProjectRolesResponse, err error) {
+    return c.ListProjectRolesWithContext(context.Background(), request)
+}
+
+// ListProjectRoles
+// Get role list info.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhitelistError"
+func (c *Client) ListProjectRolesWithContext(ctx context.Context, request *ListProjectRolesRequest) (response *ListProjectRolesResponse, err error) {
+    if request == nil {
+        request = NewListProjectRolesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListProjectRoles")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListProjectRoles require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListProjectRolesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListProjectsRequest() (request *ListProjectsRequest) {
+    request = &ListProjectsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListProjects")
+    
+    
+    return
+}
+
+func NewListProjectsResponse() (response *ListProjectsResponse) {
+    response = &ListProjectsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListProjects
+// The project list in the tenant's global scope is irrelevant to the user's viewing range.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhitelistError"
+func (c *Client) ListProjects(request *ListProjectsRequest) (response *ListProjectsResponse, err error) {
+    return c.ListProjectsWithContext(context.Background(), request)
+}
+
+// ListProjects
+// The project list in the tenant's global scope is irrelevant to the user's viewing range.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhitelistError"
+func (c *Client) ListProjectsWithContext(ctx context.Context, request *ListProjectsRequest) (response *ListProjectsResponse, err error) {
+    if request == nil {
+        request = NewListProjectsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListProjects")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListProjects require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListProjectsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListQualityRuleTemplatesRequest() (request *ListQualityRuleTemplatesRequest) {
+    request = &ListQualityRuleTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListQualityRuleTemplates")
+    
+    
+    return
+}
+
+func NewListQualityRuleTemplatesResponse() (response *ListQualityRuleTemplatesResponse) {
+    response = &ListQualityRuleTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListQualityRuleTemplates
+// [Filter criteria] {template Name, query usage with Keyword fuzzy matching} {template type, 1. system template 2. custom template} {quality detection dimensions (QualityDims), 1. accuracy 2. uniqueness 3. integrity 4. consistency 5. timeliness 6. validity} [Sorting field] {citation sorting type, sort ASC or DESC based on the number of references}.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDFILTERPARAMETER = "InvalidParameter.InvalidFilterParameter"
+//  UNAUTHORIZEDOPERATION_USERNOTINPROJECT = "UnauthorizedOperation.UserNotInProject"
+func (c *Client) ListQualityRuleTemplates(request *ListQualityRuleTemplatesRequest) (response *ListQualityRuleTemplatesResponse, err error) {
+    return c.ListQualityRuleTemplatesWithContext(context.Background(), request)
+}
+
+// ListQualityRuleTemplates
+// [Filter criteria] {template Name, query usage with Keyword fuzzy matching} {template type, 1. system template 2. custom template} {quality detection dimensions (QualityDims), 1. accuracy 2. uniqueness 3. integrity 4. consistency 5. timeliness 6. validity} [Sorting field] {citation sorting type, sort ASC or DESC based on the number of references}.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDFILTERPARAMETER = "InvalidParameter.InvalidFilterParameter"
+//  UNAUTHORIZEDOPERATION_USERNOTINPROJECT = "UnauthorizedOperation.UserNotInProject"
+func (c *Client) ListQualityRuleTemplatesWithContext(ctx context.Context, request *ListQualityRuleTemplatesRequest) (response *ListQualityRuleTemplatesResponse, err error) {
+    if request == nil {
+        request = NewListQualityRuleTemplatesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListQualityRuleTemplates")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListQualityRuleTemplates require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListQualityRuleTemplatesResponse()
     err = c.Send(request, response)
     return
 }
@@ -2649,6 +6197,56 @@ func (c *Client) ListResourceFoldersWithContext(ctx context.Context, request *Li
     return
 }
 
+func NewListResourceGroupsRequest() (request *ListResourceGroupsRequest) {
+    request = &ListResourceGroupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListResourceGroups")
+    
+    
+    return
+}
+
+func NewListResourceGroupsResponse() (response *ListResourceGroupsResponse) {
+    response = &ListResourceGroupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListResourceGroups
+// This API is used to query the execution resource group list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListResourceGroups(request *ListResourceGroupsRequest) (response *ListResourceGroupsResponse, err error) {
+    return c.ListResourceGroupsWithContext(context.Background(), request)
+}
+
+// ListResourceGroups
+// This API is used to query the execution resource group list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListResourceGroupsWithContext(ctx context.Context, request *ListResourceGroupsRequest) (response *ListResourceGroupsResponse, err error) {
+    if request == nil {
+        request = NewListResourceGroupsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListResourceGroups")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListResourceGroups require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListResourceGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListSQLFolderContentsRequest() (request *ListSQLFolderContentsRequest) {
     request = &ListSQLFolderContentsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2745,6 +6343,170 @@ func (c *Client) ListSQLScriptRunsWithContext(ctx context.Context, request *List
     request.SetContext(ctx)
     
     response = NewListSQLScriptRunsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListSchemaRequest() (request *ListSchemaRequest) {
+    request = &ListSchemaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListSchema")
+    
+    
+    return
+}
+
+func NewListSchemaResponse() (response *ListSchemaResponse) {
+    response = &ListSchemaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListSchema
+// This API is used to obtain the asset database Schema information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListSchema(request *ListSchemaRequest) (response *ListSchemaResponse, err error) {
+    return c.ListSchemaWithContext(context.Background(), request)
+}
+
+// ListSchema
+// This API is used to obtain the asset database Schema information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListSchemaWithContext(ctx context.Context, request *ListSchemaRequest) (response *ListSchemaResponse, err error) {
+    if request == nil {
+        request = NewListSchemaRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListSchema")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListSchema require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListSchemaResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListTableRequest() (request *ListTableRequest) {
+    request = &ListTableRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListTable")
+    
+    
+    return
+}
+
+func NewListTableResponse() (response *ListTableResponse) {
+    response = &ListTableResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListTable
+// This API is used to obtain table information of assets.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListTable(request *ListTableRequest) (response *ListTableResponse, err error) {
+    return c.ListTableWithContext(context.Background(), request)
+}
+
+// ListTable
+// This API is used to obtain table information of assets.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListTableWithContext(ctx context.Context, request *ListTableRequest) (response *ListTableResponse, err error) {
+    if request == nil {
+        request = NewListTableRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListTable")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListTable require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListTableResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListTaskFoldersRequest() (request *ListTaskFoldersRequest) {
+    request = &ListTaskFoldersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListTaskFolders")
+    
+    
+    return
+}
+
+func NewListTaskFoldersResponse() (response *ListTaskFoldersResponse) {
+    response = &ListTaskFoldersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListTaskFolders
+// Query Task Folder List.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ListTaskFolders(request *ListTaskFoldersRequest) (response *ListTaskFoldersResponse, err error) {
+    return c.ListTaskFoldersWithContext(context.Background(), request)
+}
+
+// ListTaskFolders
+// Query Task Folder List.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ListTaskFoldersWithContext(ctx context.Context, request *ListTaskFoldersRequest) (response *ListTaskFoldersResponse, err error) {
+    if request == nil {
+        request = NewListTaskFoldersRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListTaskFolders")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListTaskFolders require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListTaskFoldersResponse()
     err = c.Send(request, response)
     return
 }
@@ -2973,6 +6735,294 @@ func (c *Client) ListTasksWithContext(ctx context.Context, request *ListTasksReq
     return
 }
 
+func NewListTenantRolesRequest() (request *ListTenantRolesRequest) {
+    request = &ListTenantRolesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListTenantRoles")
+    
+    
+    return
+}
+
+func NewListTenantRolesResponse() (response *ListTenantRolesResponse) {
+    response = &ListTenantRolesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListTenantRoles
+// Get the role list of all root accounts.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ListTenantRoles(request *ListTenantRolesRequest) (response *ListTenantRolesResponse, err error) {
+    return c.ListTenantRolesWithContext(context.Background(), request)
+}
+
+// ListTenantRoles
+// Get the role list of all root accounts.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ListTenantRolesWithContext(ctx context.Context, request *ListTenantRolesRequest) (response *ListTenantRolesResponse, err error) {
+    if request == nil {
+        request = NewListTenantRolesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListTenantRoles")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListTenantRoles require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListTenantRolesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListTriggerTaskVersionsRequest() (request *ListTriggerTaskVersionsRequest) {
+    request = &ListTriggerTaskVersionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListTriggerTaskVersions")
+    
+    
+    return
+}
+
+func NewListTriggerTaskVersionsResponse() (response *ListTriggerTaskVersionsResponse) {
+    response = &ListTriggerTaskVersionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListTriggerTaskVersions
+// Task save version list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ListTriggerTaskVersions(request *ListTriggerTaskVersionsRequest) (response *ListTriggerTaskVersionsResponse, err error) {
+    return c.ListTriggerTaskVersionsWithContext(context.Background(), request)
+}
+
+// ListTriggerTaskVersions
+// Task save version list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ListTriggerTaskVersionsWithContext(ctx context.Context, request *ListTriggerTaskVersionsRequest) (response *ListTriggerTaskVersionsResponse, err error) {
+    if request == nil {
+        request = NewListTriggerTaskVersionsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListTriggerTaskVersions")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListTriggerTaskVersions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListTriggerTaskVersionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListTriggerTasksRequest() (request *ListTriggerTasksRequest) {
+    request = &ListTriggerTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListTriggerTasks")
+    
+    
+    return
+}
+
+func NewListTriggerTasksResponse() (response *ListTriggerTasksResponse) {
+    response = &ListTriggerTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListTriggerTasks
+// Query job pagination information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ListTriggerTasks(request *ListTriggerTasksRequest) (response *ListTriggerTasksResponse, err error) {
+    return c.ListTriggerTasksWithContext(context.Background(), request)
+}
+
+// ListTriggerTasks
+// Query job pagination information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ListTriggerTasksWithContext(ctx context.Context, request *ListTriggerTasksRequest) (response *ListTriggerTasksResponse, err error) {
+    if request == nil {
+        request = NewListTriggerTasksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListTriggerTasks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListTriggerTasks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListTriggerTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListTriggerWorkflowRunsRequest() (request *ListTriggerWorkflowRunsRequest) {
+    request = &ListTriggerWorkflowRunsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListTriggerWorkflowRuns")
+    
+    
+    return
+}
+
+func NewListTriggerWorkflowRunsResponse() (response *ListTriggerWorkflowRunsResponse) {
+    response = &ListTriggerWorkflowRunsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListTriggerWorkflowRuns
+// Query workflow operation.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ListTriggerWorkflowRuns(request *ListTriggerWorkflowRunsRequest) (response *ListTriggerWorkflowRunsResponse, err error) {
+    return c.ListTriggerWorkflowRunsWithContext(context.Background(), request)
+}
+
+// ListTriggerWorkflowRuns
+// Query workflow operation.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ListTriggerWorkflowRunsWithContext(ctx context.Context, request *ListTriggerWorkflowRunsRequest) (response *ListTriggerWorkflowRunsResponse, err error) {
+    if request == nil {
+        request = NewListTriggerWorkflowRunsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListTriggerWorkflowRuns")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListTriggerWorkflowRuns require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListTriggerWorkflowRunsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListTriggerWorkflowsRequest() (request *ListTriggerWorkflowsRequest) {
+    request = &ListTriggerWorkflowsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListTriggerWorkflows")
+    
+    
+    return
+}
+
+func NewListTriggerWorkflowsResponse() (response *ListTriggerWorkflowsResponse) {
+    response = &ListTriggerWorkflowsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListTriggerWorkflows
+// This API is used to query the list of workflows.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ListTriggerWorkflows(request *ListTriggerWorkflowsRequest) (response *ListTriggerWorkflowsResponse, err error) {
+    return c.ListTriggerWorkflowsWithContext(context.Background(), request)
+}
+
+// ListTriggerWorkflows
+// This API is used to query the list of workflows.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ListTriggerWorkflowsWithContext(ctx context.Context, request *ListTriggerWorkflowsRequest) (response *ListTriggerWorkflowsResponse, err error) {
+    if request == nil {
+        request = NewListTriggerWorkflowsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListTriggerWorkflows")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListTriggerWorkflows require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListTriggerWorkflowsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListUpstreamOpsTasksRequest() (request *ListUpstreamOpsTasksRequest) {
     request = &ListUpstreamOpsTasksRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3147,6 +7197,64 @@ func (c *Client) ListUpstreamTasksWithContext(ctx context.Context, request *List
     return
 }
 
+func NewListUpstreamTriggerTasksRequest() (request *ListUpstreamTriggerTasksRequest) {
+    request = &ListUpstreamTriggerTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListUpstreamTriggerTasks")
+    
+    
+    return
+}
+
+func NewListUpstreamTriggerTasksResponse() (response *ListUpstreamTriggerTasksResponse) {
+    response = &ListUpstreamTriggerTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListUpstreamTriggerTasks
+// This API is used to retrieve direct upstream tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ListUpstreamTriggerTasks(request *ListUpstreamTriggerTasksRequest) (response *ListUpstreamTriggerTasksResponse, err error) {
+    return c.ListUpstreamTriggerTasksWithContext(context.Background(), request)
+}
+
+// ListUpstreamTriggerTasks
+// This API is used to retrieve direct upstream tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ListUpstreamTriggerTasksWithContext(ctx context.Context, request *ListUpstreamTriggerTasksRequest) (response *ListUpstreamTriggerTasksResponse, err error) {
+    if request == nil {
+        request = NewListUpstreamTriggerTasksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListUpstreamTriggerTasks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListUpstreamTriggerTasks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListUpstreamTriggerTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListWorkflowFoldersRequest() (request *ListWorkflowFoldersRequest) {
     request = &ListWorkflowFoldersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3207,6 +7315,62 @@ func (c *Client) ListWorkflowFoldersWithContext(ctx context.Context, request *Li
     request.SetContext(ctx)
     
     response = NewListWorkflowFoldersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListWorkflowPermissionsRequest() (request *ListWorkflowPermissionsRequest) {
+    request = &ListWorkflowPermissionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ListWorkflowPermissions")
+    
+    
+    return
+}
+
+func NewListWorkflowPermissionsResponse() (response *ListWorkflowPermissionsResponse) {
+    response = &ListWorkflowPermissionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListWorkflowPermissions
+// Query workflow authorization permissions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ListWorkflowPermissions(request *ListWorkflowPermissionsRequest) (response *ListWorkflowPermissionsResponse, err error) {
+    return c.ListWorkflowPermissionsWithContext(context.Background(), request)
+}
+
+// ListWorkflowPermissions
+// Query workflow authorization permissions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ListWorkflowPermissionsWithContext(ctx context.Context, request *ListWorkflowPermissionsRequest) (response *ListWorkflowPermissionsResponse, err error) {
+    if request == nil {
+        request = NewListWorkflowPermissionsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "ListWorkflowPermissions")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListWorkflowPermissions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListWorkflowPermissionsResponse()
     err = c.Send(request, response)
     return
 }
@@ -3323,6 +7487,110 @@ func (c *Client) PauseOpsTasksAsyncWithContext(ctx context.Context, request *Pau
     return
 }
 
+func NewRegisterLineageRequest() (request *RegisterLineageRequest) {
+    request = &RegisterLineageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "RegisterLineage")
+    
+    
+    return
+}
+
+func NewRegisterLineageResponse() (response *RegisterLineageResponse) {
+    response = &RegisterLineageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RegisterLineage
+// RegisterLineage
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) RegisterLineage(request *RegisterLineageRequest) (response *RegisterLineageResponse, err error) {
+    return c.RegisterLineageWithContext(context.Background(), request)
+}
+
+// RegisterLineage
+// RegisterLineage
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) RegisterLineageWithContext(ctx context.Context, request *RegisterLineageRequest) (response *RegisterLineageResponse, err error) {
+    if request == nil {
+        request = NewRegisterLineageRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "RegisterLineage")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RegisterLineage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRegisterLineageResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRemoveMemberProjectRoleRequest() (request *RemoveMemberProjectRoleRequest) {
+    request = &RemoveMemberProjectRoleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "RemoveMemberProjectRole")
+    
+    
+    return
+}
+
+func NewRemoveMemberProjectRoleResponse() (response *RemoveMemberProjectRoleResponse) {
+    response = &RemoveMemberProjectRoleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RemoveMemberProjectRole
+// Delete project user roles.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) RemoveMemberProjectRole(request *RemoveMemberProjectRoleRequest) (response *RemoveMemberProjectRoleResponse, err error) {
+    return c.RemoveMemberProjectRoleWithContext(context.Background(), request)
+}
+
+// RemoveMemberProjectRole
+// Delete project user roles.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) RemoveMemberProjectRoleWithContext(ctx context.Context, request *RemoveMemberProjectRoleRequest) (response *RemoveMemberProjectRoleResponse, err error) {
+    if request == nil {
+        request = NewRemoveMemberProjectRoleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "RemoveMemberProjectRole")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RemoveMemberProjectRole require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRemoveMemberProjectRoleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRerunTaskInstancesAsyncRequest() (request *RerunTaskInstancesAsyncRequest) {
     request = &RerunTaskInstancesAsyncRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3369,6 +7637,186 @@ func (c *Client) RerunTaskInstancesAsyncWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewRerunTaskInstancesAsyncResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRerunTriggerWorkflowRunAsyncRequest() (request *RerunTriggerWorkflowRunAsyncRequest) {
+    request = &RerunTriggerWorkflowRunAsyncRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "RerunTriggerWorkflowRunAsync")
+    
+    
+    return
+}
+
+func NewRerunTriggerWorkflowRunAsyncResponse() (response *RerunTriggerWorkflowRunAsyncResponse) {
+    response = &RerunTriggerWorkflowRunAsyncResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RerunTriggerWorkflowRunAsync
+// Rerun an operation.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) RerunTriggerWorkflowRunAsync(request *RerunTriggerWorkflowRunAsyncRequest) (response *RerunTriggerWorkflowRunAsyncResponse, err error) {
+    return c.RerunTriggerWorkflowRunAsyncWithContext(context.Background(), request)
+}
+
+// RerunTriggerWorkflowRunAsync
+// Rerun an operation.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) RerunTriggerWorkflowRunAsyncWithContext(ctx context.Context, request *RerunTriggerWorkflowRunAsyncRequest) (response *RerunTriggerWorkflowRunAsyncResponse, err error) {
+    if request == nil {
+        request = NewRerunTriggerWorkflowRunAsyncRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "RerunTriggerWorkflowRunAsync")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RerunTriggerWorkflowRunAsync require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRerunTriggerWorkflowRunAsyncResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRevokeDataSourceAuthorizationRequest() (request *RevokeDataSourceAuthorizationRequest) {
+    request = &RevokeDataSourceAuthorizationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "RevokeDataSourceAuthorization")
+    
+    
+    return
+}
+
+func NewRevokeDataSourceAuthorizationResponse() (response *RevokeDataSourceAuthorizationResponse) {
+    response = &RevokeDataSourceAuthorizationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RevokeDataSourceAuthorization
+// Revoke data source permission.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) RevokeDataSourceAuthorization(request *RevokeDataSourceAuthorizationRequest) (response *RevokeDataSourceAuthorizationResponse, err error) {
+    return c.RevokeDataSourceAuthorizationWithContext(context.Background(), request)
+}
+
+// RevokeDataSourceAuthorization
+// Revoke data source permission.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) RevokeDataSourceAuthorizationWithContext(ctx context.Context, request *RevokeDataSourceAuthorizationRequest) (response *RevokeDataSourceAuthorizationResponse, err error) {
+    if request == nil {
+        request = NewRevokeDataSourceAuthorizationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "RevokeDataSourceAuthorization")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RevokeDataSourceAuthorization require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRevokeDataSourceAuthorizationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRevokePrivilegesRequest() (request *RevokePrivilegesRequest) {
+    request = &RevokePrivilegesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "RevokePrivileges")
+    
+    
+    return
+}
+
+func NewRevokePrivilegesResponse() (response *RevokePrivilegesResponse) {
+    response = &RevokePrivilegesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RevokePrivileges
+// Authorization Revoked in Catalog mode.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_SIGNATUREEXPIRE = "AuthFailure.SignatureExpire"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) RevokePrivileges(request *RevokePrivilegesRequest) (response *RevokePrivilegesResponse, err error) {
+    return c.RevokePrivilegesWithContext(context.Background(), request)
+}
+
+// RevokePrivileges
+// Authorization Revoked in Catalog mode.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_SIGNATUREEXPIRE = "AuthFailure.SignatureExpire"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) RevokePrivilegesWithContext(ctx context.Context, request *RevokePrivilegesRequest) (response *RevokePrivilegesResponse, err error) {
+    if request == nil {
+        request = NewRevokePrivilegesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "RevokePrivileges")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RevokePrivileges require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRevokePrivilegesResponse()
     err = c.Send(request, response)
     return
 }
@@ -3469,6 +7917,56 @@ func (c *Client) SetSuccessTaskInstancesAsyncWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewSetSuccessTaskInstancesAsyncResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStartOpsTasksRequest() (request *StartOpsTasksRequest) {
+    request = &StartOpsTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "StartOpsTasks")
+    
+    
+    return
+}
+
+func NewStartOpsTasksResponse() (response *StartOpsTasksResponse) {
+    response = &StartOpsTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StartOpsTasks
+// Start tasks asynchronously in batch.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) StartOpsTasks(request *StartOpsTasksRequest) (response *StartOpsTasksResponse, err error) {
+    return c.StartOpsTasksWithContext(context.Background(), request)
+}
+
+// StartOpsTasks
+// Start tasks asynchronously in batch.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) StartOpsTasksWithContext(ctx context.Context, request *StartOpsTasksRequest) (response *StartOpsTasksResponse, err error) {
+    if request == nil {
+        request = NewStartOpsTasksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "StartOpsTasks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartOpsTasks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStartOpsTasksResponse()
     err = c.Send(request, response)
     return
 }
@@ -3635,6 +8133,64 @@ func (c *Client) SubmitTaskWithContext(ctx context.Context, request *SubmitTaskR
     return
 }
 
+func NewSubmitTriggerTaskRequest() (request *SubmitTriggerTaskRequest) {
+    request = &SubmitTriggerTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "SubmitTriggerTask")
+    
+    
+    return
+}
+
+func NewSubmitTriggerTaskResponse() (response *SubmitTriggerTaskResponse) {
+    response = &SubmitTriggerTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SubmitTriggerTask
+// Submit a workflow scheduling task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) SubmitTriggerTask(request *SubmitTriggerTaskRequest) (response *SubmitTriggerTaskResponse, err error) {
+    return c.SubmitTriggerTaskWithContext(context.Background(), request)
+}
+
+// SubmitTriggerTask
+// Submit a workflow scheduling task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) SubmitTriggerTaskWithContext(ctx context.Context, request *SubmitTriggerTaskRequest) (response *SubmitTriggerTaskResponse, err error) {
+    if request == nil {
+        request = NewSubmitTriggerTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "SubmitTriggerTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SubmitTriggerTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSubmitTriggerTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateCodeFileRequest() (request *UpdateCodeFileRequest) {
     request = &UpdateCodeFileRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3731,6 +8287,56 @@ func (c *Client) UpdateCodeFolderWithContext(ctx context.Context, request *Updat
     request.SetContext(ctx)
     
     response = NewUpdateCodeFolderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateDataSourceRequest() (request *UpdateDataSourceRequest) {
+    request = &UpdateDataSourceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "UpdateDataSource")
+    
+    
+    return
+}
+
+func NewUpdateDataSourceResponse() (response *UpdateDataSourceResponse) {
+    response = &UpdateDataSourceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateDataSource
+// This API is used to update a data source.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) UpdateDataSource(request *UpdateDataSourceRequest) (response *UpdateDataSourceResponse, err error) {
+    return c.UpdateDataSourceWithContext(context.Background(), request)
+}
+
+// UpdateDataSource
+// This API is used to update a data source.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) UpdateDataSourceWithContext(ctx context.Context, request *UpdateDataSourceRequest) (response *UpdateDataSourceResponse, err error) {
+    if request == nil {
+        request = NewUpdateDataSourceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "UpdateDataSource")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateDataSource require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateDataSourceResponse()
     err = c.Send(request, response)
     return
 }
@@ -3847,6 +8453,116 @@ func (c *Client) UpdateOpsTasksOwnerWithContext(ctx context.Context, request *Up
     return
 }
 
+func NewUpdateOpsTriggerTasksOwnerRequest() (request *UpdateOpsTriggerTasksOwnerRequest) {
+    request = &UpdateOpsTriggerTasksOwnerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "UpdateOpsTriggerTasksOwner")
+    
+    
+    return
+}
+
+func NewUpdateOpsTriggerTasksOwnerResponse() (response *UpdateOpsTriggerTasksOwnerResponse) {
+    response = &UpdateOpsTriggerTasksOwnerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateOpsTriggerTasksOwner
+// Query task execution details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_MISSINGREQUESTPARAMETER = "InvalidParameter.MissingRequestParameter"
+//  INVALIDPARAMETERVALUE_RULENAMEREPEATED = "InvalidParameterValue.RuleNameRepeated"
+//  INVALIDPARAMETERVALUE_VALIDATIONERROR = "InvalidParameterValue.ValidationError"
+func (c *Client) UpdateOpsTriggerTasksOwner(request *UpdateOpsTriggerTasksOwnerRequest) (response *UpdateOpsTriggerTasksOwnerResponse, err error) {
+    return c.UpdateOpsTriggerTasksOwnerWithContext(context.Background(), request)
+}
+
+// UpdateOpsTriggerTasksOwner
+// Query task execution details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_MISSINGREQUESTPARAMETER = "InvalidParameter.MissingRequestParameter"
+//  INVALIDPARAMETERVALUE_RULENAMEREPEATED = "InvalidParameterValue.RuleNameRepeated"
+//  INVALIDPARAMETERVALUE_VALIDATIONERROR = "InvalidParameterValue.ValidationError"
+func (c *Client) UpdateOpsTriggerTasksOwnerWithContext(ctx context.Context, request *UpdateOpsTriggerTasksOwnerRequest) (response *UpdateOpsTriggerTasksOwnerResponse, err error) {
+    if request == nil {
+        request = NewUpdateOpsTriggerTasksOwnerRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "UpdateOpsTriggerTasksOwner")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateOpsTriggerTasksOwner require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateOpsTriggerTasksOwnerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateProjectRequest() (request *UpdateProjectRequest) {
+    request = &UpdateProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "UpdateProject")
+    
+    
+    return
+}
+
+func NewUpdateProjectResponse() (response *UpdateProjectResponse) {
+    response = &UpdateProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateProject
+// This API is used to modify project basic information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_WORKSPACENAMEDUPLICATION = "InvalidParameter.WorkspaceNameDuplication"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) UpdateProject(request *UpdateProjectRequest) (response *UpdateProjectResponse, err error) {
+    return c.UpdateProjectWithContext(context.Background(), request)
+}
+
+// UpdateProject
+// This API is used to modify project basic information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_WORKSPACENAMEDUPLICATION = "InvalidParameter.WorkspaceNameDuplication"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) UpdateProjectWithContext(ctx context.Context, request *UpdateProjectRequest) (response *UpdateProjectResponse, err error) {
+    if request == nil {
+        request = NewUpdateProjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "UpdateProject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateResourceFileRequest() (request *UpdateResourceFileRequest) {
     request = &UpdateResourceFileRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3925,7 +8641,7 @@ func NewUpdateResourceFolderResponse() (response *UpdateResourceFolderResponse) 
 }
 
 // UpdateResourceFolder
-// This API is used to update a resource folder.
+// Update resource folder.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3938,7 +8654,7 @@ func (c *Client) UpdateResourceFolder(request *UpdateResourceFolderRequest) (res
 }
 
 // UpdateResourceFolder
-// This API is used to update a resource folder.
+// Update resource folder.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3959,6 +8675,64 @@ func (c *Client) UpdateResourceFolderWithContext(ctx context.Context, request *U
     request.SetContext(ctx)
     
     response = NewUpdateResourceFolderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateResourceGroupRequest() (request *UpdateResourceGroupRequest) {
+    request = &UpdateResourceGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "UpdateResourceGroup")
+    
+    
+    return
+}
+
+func NewUpdateResourceGroupResponse() (response *UpdateResourceGroupResponse) {
+    response = &UpdateResourceGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateResourceGroup
+// This API is used to modify configurations or renew resources.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UpdateResourceGroup(request *UpdateResourceGroupRequest) (response *UpdateResourceGroupResponse, err error) {
+    return c.UpdateResourceGroupWithContext(context.Background(), request)
+}
+
+// UpdateResourceGroup
+// This API is used to modify configurations or renew resources.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UpdateResourceGroupWithContext(ctx context.Context, request *UpdateResourceGroupRequest) (response *UpdateResourceGroupResponse, err error) {
+    if request == nil {
+        request = NewUpdateResourceGroupRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "UpdateResourceGroup")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateResourceGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateResourceGroupResponse()
     err = c.Send(request, response)
     return
 }
@@ -4119,6 +8893,354 @@ func (c *Client) UpdateTaskWithContext(ctx context.Context, request *UpdateTaskR
     return
 }
 
+func NewUpdateTaskFolderRequest() (request *UpdateTaskFolderRequest) {
+    request = &UpdateTaskFolderRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "UpdateTaskFolder")
+    
+    
+    return
+}
+
+func NewUpdateTaskFolderResponse() (response *UpdateTaskFolderResponse) {
+    response = &UpdateTaskFolderResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateTaskFolder
+// Update a task folder.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UpdateTaskFolder(request *UpdateTaskFolderRequest) (response *UpdateTaskFolderResponse, err error) {
+    return c.UpdateTaskFolderWithContext(context.Background(), request)
+}
+
+// UpdateTaskFolder
+// Update a task folder.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UpdateTaskFolderWithContext(ctx context.Context, request *UpdateTaskFolderRequest) (response *UpdateTaskFolderResponse, err error) {
+    if request == nil {
+        request = NewUpdateTaskFolderRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "UpdateTaskFolder")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateTaskFolder require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateTaskFolderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateTaskPartiallyRequest() (request *UpdateTaskPartiallyRequest) {
+    request = &UpdateTaskPartiallyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "UpdateTaskPartially")
+    
+    
+    return
+}
+
+func NewUpdateTaskPartiallyResponse() (response *UpdateTaskPartiallyResponse) {
+    response = &UpdateTaskPartiallyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateTaskPartially
+// This API is used to update a task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UpdateTaskPartially(request *UpdateTaskPartiallyRequest) (response *UpdateTaskPartiallyResponse, err error) {
+    return c.UpdateTaskPartiallyWithContext(context.Background(), request)
+}
+
+// UpdateTaskPartially
+// This API is used to update a task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UpdateTaskPartiallyWithContext(ctx context.Context, request *UpdateTaskPartiallyRequest) (response *UpdateTaskPartiallyResponse, err error) {
+    if request == nil {
+        request = NewUpdateTaskPartiallyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "UpdateTaskPartially")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateTaskPartially require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateTaskPartiallyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateTriggerTaskRequest() (request *UpdateTriggerTaskRequest) {
+    request = &UpdateTriggerTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "UpdateTriggerTask")
+    
+    
+    return
+}
+
+func NewUpdateTriggerTaskResponse() (response *UpdateTriggerTaskResponse) {
+    response = &UpdateTriggerTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateTriggerTask
+// This API is used to update a task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UpdateTriggerTask(request *UpdateTriggerTaskRequest) (response *UpdateTriggerTaskResponse, err error) {
+    return c.UpdateTriggerTaskWithContext(context.Background(), request)
+}
+
+// UpdateTriggerTask
+// This API is used to update a task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UpdateTriggerTaskWithContext(ctx context.Context, request *UpdateTriggerTaskRequest) (response *UpdateTriggerTaskResponse, err error) {
+    if request == nil {
+        request = NewUpdateTriggerTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "UpdateTriggerTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateTriggerTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateTriggerTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateTriggerTaskPartiallyRequest() (request *UpdateTriggerTaskPartiallyRequest) {
+    request = &UpdateTriggerTaskPartiallyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "UpdateTriggerTaskPartially")
+    
+    
+    return
+}
+
+func NewUpdateTriggerTaskPartiallyResponse() (response *UpdateTriggerTaskPartiallyResponse) {
+    response = &UpdateTriggerTaskPartiallyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateTriggerTaskPartially
+// This API is used to update a task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UpdateTriggerTaskPartially(request *UpdateTriggerTaskPartiallyRequest) (response *UpdateTriggerTaskPartiallyResponse, err error) {
+    return c.UpdateTriggerTaskPartiallyWithContext(context.Background(), request)
+}
+
+// UpdateTriggerTaskPartially
+// This API is used to update a task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UpdateTriggerTaskPartiallyWithContext(ctx context.Context, request *UpdateTriggerTaskPartiallyRequest) (response *UpdateTriggerTaskPartiallyResponse, err error) {
+    if request == nil {
+        request = NewUpdateTriggerTaskPartiallyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "UpdateTriggerTaskPartially")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateTriggerTaskPartially require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateTriggerTaskPartiallyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateTriggerWorkflowRequest() (request *UpdateTriggerWorkflowRequest) {
+    request = &UpdateTriggerWorkflowRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "UpdateTriggerWorkflow")
+    
+    
+    return
+}
+
+func NewUpdateTriggerWorkflowResponse() (response *UpdateTriggerWorkflowResponse) {
+    response = &UpdateTriggerWorkflowResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateTriggerWorkflow
+// This API is used to update workflow, including basic information and workflow parameters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) UpdateTriggerWorkflow(request *UpdateTriggerWorkflowRequest) (response *UpdateTriggerWorkflowResponse, err error) {
+    return c.UpdateTriggerWorkflowWithContext(context.Background(), request)
+}
+
+// UpdateTriggerWorkflow
+// This API is used to update workflow, including basic information and workflow parameters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) UpdateTriggerWorkflowWithContext(ctx context.Context, request *UpdateTriggerWorkflowRequest) (response *UpdateTriggerWorkflowResponse, err error) {
+    if request == nil {
+        request = NewUpdateTriggerWorkflowRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "UpdateTriggerWorkflow")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateTriggerWorkflow require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateTriggerWorkflowResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateTriggerWorkflowPartiallyRequest() (request *UpdateTriggerWorkflowPartiallyRequest) {
+    request = &UpdateTriggerWorkflowPartiallyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "UpdateTriggerWorkflowPartially")
+    
+    
+    return
+}
+
+func NewUpdateTriggerWorkflowPartiallyResponse() (response *UpdateTriggerWorkflowPartiallyResponse) {
+    response = &UpdateTriggerWorkflowPartiallyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateTriggerWorkflowPartially
+// Update workflow (including basic info and workflow parameters).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) UpdateTriggerWorkflowPartially(request *UpdateTriggerWorkflowPartiallyRequest) (response *UpdateTriggerWorkflowPartiallyResponse, err error) {
+    return c.UpdateTriggerWorkflowPartiallyWithContext(context.Background(), request)
+}
+
+// UpdateTriggerWorkflowPartially
+// Update workflow (including basic info and workflow parameters).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) UpdateTriggerWorkflowPartiallyWithContext(ctx context.Context, request *UpdateTriggerWorkflowPartiallyRequest) (response *UpdateTriggerWorkflowPartiallyResponse, err error) {
+    if request == nil {
+        request = NewUpdateTriggerWorkflowPartiallyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "UpdateTriggerWorkflowPartially")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateTriggerWorkflowPartially require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateTriggerWorkflowPartiallyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateWorkflowRequest() (request *UpdateWorkflowRequest) {
     request = &UpdateWorkflowRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4195,7 +9317,7 @@ func NewUpdateWorkflowFolderResponse() (response *UpdateWorkflowFolderResponse) 
 }
 
 // UpdateWorkflowFolder
-// This API is used to update a workflow folder
+// Refresh workflow folder.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4211,7 +9333,7 @@ func (c *Client) UpdateWorkflowFolder(request *UpdateWorkflowFolderRequest) (res
 }
 
 // UpdateWorkflowFolder
-// This API is used to update a workflow folder
+// Refresh workflow folder.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

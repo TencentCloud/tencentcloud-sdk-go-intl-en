@@ -53,7 +53,7 @@ const (
 	// Query for plan discount failed.
 	FAILEDOPERATION_DESCRIBEBUNDLEDISCOUNTFAILED = "FailedOperation.DescribeBundleDiscountFailed"
 
-	// Query for plan failed.
+	// Query package failed.
 	FAILEDOPERATION_DESCRIBEBUNDLESFAILED = "FailedOperation.DescribeBundlesFailed"
 
 	// Querying CBS quota failed.
