@@ -514,10 +514,12 @@ type AiAnalysisResult struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	VideoComprehensionTask *AiAnalysisTaskVideoComprehensionResult `json:"VideoComprehensionTask,omitnil,omitempty" name:"VideoComprehensionTask"`
 
-	// Query result of a video matting task for video analysis, which is valid if the task type is Cutout.Note: This field may return null, indicating that no valid values can be obtained.
+	// Query result of video content analysis intelligent image masking task. valid when task type is Cutout.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CutoutTask *AiAnalysisTaskCutoutResult `json:"CutoutTask,omitnil,omitempty" name:"CutoutTask"`
 
-	// Query result of a video editing task for video analysis, which is valid if the task type is Reel.Note: This field may return null, indicating that no valid values can be obtained.
+	// Query result of the video content analysis AI narration and video re-creation task. valid when the task type is Reel.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReelTask *AiAnalysisTaskReelResult `json:"ReelTask,omitnil,omitempty" name:"ReelTask"`
 }
 
@@ -895,13 +897,20 @@ type AiAnalysisTaskReelInput struct {
 }
 
 type AiAnalysisTaskReelOutput struct {
-	// Path of the edited video.
+	// Path of the output video.
 	VideoPath *string `json:"VideoPath,omitnil,omitempty" name:"VideoPath"`
+
+	// Path list of the output videos.
+	// 
+	// **Note**:.
+	// 1. when returning a file, `VideoPath` returns a file path, and `VideoPaths` likewise populates an element with the same path.
+	// 2. when multiple files are returned, `VideoPath` returns an empty string, and `VideoPaths` returns the file path list.
+	VideoPaths []*string `json:"VideoPaths,omitnil,omitempty" name:"VideoPaths"`
 
 	// Script file path.
 	ScriptPath *string `json:"ScriptPath,omitnil,omitempty" name:"ScriptPath"`
 
-	// Storage location of the edited video.
+	// Storage location of the output video.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 }
 
@@ -915,10 +924,11 @@ type AiAnalysisTaskReelResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Input of the intelligent video editing task.
+	// AI narration and video re-creation task input.
 	Input *AiAnalysisTaskReelInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output of the intelligent video editing task.Note: This field may return null, indicating that no valid values can be obtained.
+	// AI narration and video re-creation task output.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Output *AiAnalysisTaskReelOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of MPS error codes.Note: This field may return null, indicating that no valid values can be obtained.
@@ -1005,6 +1015,12 @@ type AiAnalysisTaskVideoComprehensionInput struct {
 type AiAnalysisTaskVideoComprehensionOutput struct {
 	// Details of the video (audio) recognition output content.
 	VideoComprehensionAnalysisResult *string `json:"VideoComprehensionAnalysisResult,omitnil,omitempty" name:"VideoComprehensionAnalysisResult"`
+
+	// Video (audio) extended information.
+	VideoComprehensionExtInfo *string `json:"VideoComprehensionExtInfo,omitnil,omitempty" name:"VideoComprehensionExtInfo"`
+
+	// Video shot understanding result.
+	VideoComprehensionResultList []*VideoComprehensionResultItem `json:"VideoComprehensionResultList,omitnil,omitempty" name:"VideoComprehensionResultList"`
 }
 
 type AiAnalysisTaskVideoComprehensionResult struct {
@@ -2200,21 +2216,23 @@ type AigcStoreCosParam struct {
 }
 
 type AigcVideoExtraParam struct {
-	// The resolution of the generated video, which is related to the selected model and set video duration.Supported resolution options for different models:1. Kling: 720P (default) and 1080P.2. Hailuo: 768P (default) and 1080P.3. Vidu: 720P (default) and 1080P.4. GV: 720P (default) and 1080P.5. OS: 720P. For images, only 1280x720 and 720x1280 are supported. Resolution cannot be specified.Note: In addition to the resolution supported by the model, 2K and 4K resolutions are also available.
+	// <p>Resolution of the generated video. The resolution is related to the selected model and set video duration.</p><p>Supported resolution options for different models:</p><ol><li>Kling: 720P (default) and 1080P.</li><li>Hailuo: 768P (default) and 1080P.</li><li>Vidu: 720P (default) and 1080P.</li><li>GV: 720P (default) and 1080P.</li><li>OS: 720P. For images, only 1280x720 and 720x1280 are supported. Resolution cannot be specified.</li></ol><p>Note: In addition to the resolution supported by the model, 2K and 4K resolutions are also available.</p>
 	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
 
-	// The aspect ratio of the generated video.Support for this parameter by different models:1. Kling only supports this parameter for text-to-video, with aspect ratios of 16:9 (default), 9:16, and 1:1.2. Hailuo does not support this parameter.3. Vidu supports [16:9, 9:16, 4:3, 3:4, 1:1] for text-to-video and reference image-to-video only. Only q2 supports 4:3 and 3:4.4. GV supports 16:9 (default) and 9:16.5. OS only supports this parameter for text-to-video, with aspect ratios of 16:9 (default) and 9:16.Note: For more information about the supported aspect ratios of specific models, see the model website.
+	// <p>Aspect ratio of the generated video.</p><p>Support for this parameter by different models:</p><ol><li>Kling only supports this parameter for text-to-video, with aspect ratios of 16:9 (default), 9:16, and 1:1.</li><li>Hailuo does not support this parameter.</li><li>Vidu supports [16:9, 9:16, 4:3, 3:4, 1:1] for text-to-video and reference image-to-video only. Only q2 supports 4:3 and 3:4.</li><li>GV supports 16:9 (default) and 9:16.</li><li>OS only supports this parameter for text-to-video, with aspect ratios of 16:9 (default) and 9:16.</li></ol><p>Note: For more information about the supported aspect ratios of specific models, see the model website.</p>
 	AspectRatio *string `json:"AspectRatio,omitnil,omitempty" name:"AspectRatio"`
 
-	// Indicates whether to add a logo watermark.1. Hailuo supports this parameter.2. Kling supports this parameter.
-	// 3. Vidu supports this parameter.
+	// <p>Indicates whether to add a logo watermark.</p><ol><li>Hailuo supports this parameter.</li><li>Kling supports this parameter.</li><li>Vidu supports this parameter.</li></ol>
 	LogoAdd *int64 `json:"LogoAdd,omitnil,omitempty" name:"LogoAdd"`
 
-	// Indicates whether to generate audio for the video. Valid values: true or false.Models that support this parameter:1. GV. Default value: true.2. OS. Default value: true.
+	// <p>Indicates whether to generate audio for the video. Valid values: true or false.</p><p>Models that support this parameter:</p><ol><li>GV. Default value: true.</li><li>OS. Default value: true.</li></ol>
 	EnableAudio *bool `json:"EnableAudio,omitnil,omitempty" name:"EnableAudio"`
 
-	// Indicates whether to use the off-peak scheduling mode. Only Vidu supports this parameter.Tasks submitted in off-peak mode will be processed within 48 hours. Uncompleted tasks will be canceled.
+	// <p>Indicates whether to use the off-peak scheduling mode. Only Vidu supports this parameter.<br>Tasks submitted in off-peak mode will be processed within 48 hours. Uncompleted tasks will be canceled.</p>
 	OffPeak *bool `json:"OffPeak,omitnil,omitempty" name:"OffPeak"`
+
+	// <p>Indicates whether to add background music to the generated video. Default value: false. Valid values: true or false.<br>Note: Only some model versions support this.</p>
+	EnableBgm *bool `json:"EnableBgm,omitnil,omitempty" name:"EnableBgm"`
 }
 
 type AigcVideoReferenceImageInfo struct {
@@ -2224,6 +2242,20 @@ type AigcVideoReferenceImageInfo struct {
 	// Reference type.
 	// Note:1. If the GV model is used, this serves as the reference method. Valid values are asset and style.
 	ReferenceType *string `json:"ReferenceType,omitnil,omitempty" name:"ReferenceType"`
+}
+
+type AigcVideoReferenceVideoInfo struct {
+	// Reference video URL, which must be accessible from the public network.
+	// This can be used as a feature reference video or a video for editing. The default type is video for editing. You can choose to keep the original sound of the video.
+	// The ReferType parameter specifies the reference video type: feature indicates feature reference video, and base indicates video for editing.
+	// If the reference video is a video for editing, the first and last frames cannot be defined.
+	VideoUrl *string `json:"VideoUrl,omitnil,omitempty" name:"VideoUrl"`
+
+	// The ReferType parameter specifies the reference video type: feature indicates feature reference video, and base indicates video for editing.
+	ReferType *string `json:"ReferType,omitnil,omitempty" name:"ReferType"`
+
+	// The KeepOriginalSound parameter specifies whether to keep the original sound of the video. Valid values: yes (keep the original sound); no (remove the original sound). This parameter also applies to feature reference videos (feature).
+	KeepOriginalSound *string `json:"KeepOriginalSound,omitnil,omitempty" name:"KeepOriginalSound"`
 }
 
 type AnimatedGraphicTaskInput struct {
@@ -2657,8 +2689,8 @@ type BatchProcessMediaRequestParams struct {
 	// Path of the input file.
 	InputInfo []*MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
 
-	// Storage bucket for the output file. If it is left blank, the storage location in InputInfo will be inherited.
-	// Note: When InputInfo.Type is URL, this parameter is required.
+	// Specifies the target storage for the output file of media processing service (mps). if left empty, it inherits the storage location in InputInfo.
+	// Note: when InputInfo.Type is URL, this parameter is required. currently only support COS output.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
 	// Storage directory for the output file. It should start and end with a slash (/), such as `/movie/201907/`.
@@ -2677,7 +2709,7 @@ type BatchProcessMediaRequestParams struct {
 	// Source context, which is used to pass through the user request information. The callback for task flow status changes will return the value of this field. The maximum length is 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// Resource ID. Ensure the corresponding resource is in the enabled state. The default value is an account's primary resource ID.
+	// Resource ID. Ensure that the corresponding resource is enabled. The default value is the primary resource ID of the account.
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
 	// Whether to skip metadata acquisition. Valid values:
@@ -2693,8 +2725,8 @@ type BatchProcessMediaRequest struct {
 	// Path of the input file.
 	InputInfo []*MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
 
-	// Storage bucket for the output file. If it is left blank, the storage location in InputInfo will be inherited.
-	// Note: When InputInfo.Type is URL, this parameter is required.
+	// Specifies the target storage for the output file of media processing service (mps). if left empty, it inherits the storage location in InputInfo.
+	// Note: when InputInfo.Type is URL, this parameter is required. currently only support COS output.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
 	// Storage directory for the output file. It should start and end with a slash (/), such as `/movie/201907/`.
@@ -2713,7 +2745,7 @@ type BatchProcessMediaRequest struct {
 	// Source context, which is used to pass through the user request information. The callback for task flow status changes will return the value of this field. The maximum length is 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// Resource ID. Ensure the corresponding resource is in the enabled state. The default value is an account's primary resource ID.
+	// Resource ID. Ensure that the corresponding resource is enabled. The default value is the primary resource ID of the account.
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
 	// Whether to skip metadata acquisition. Valid values:
@@ -2825,6 +2857,12 @@ type BlindWatermarkTemplate struct {
 
 	// Last modification time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Digital watermark strength. 
+	// default: default, balance between hd video quality and resilience. 
+	// stronger: clear image quality, strong resilience. 
+	// strongest: normal video quality, strongest resilience.
+	Strength *string `json:"Strength,omitnil,omitempty" name:"Strength"`
 }
 
 type ClassificationConfigureInfo struct {
@@ -3941,104 +3979,98 @@ func (r *CreateAigcImageTaskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAigcVideoTaskRequestParams struct {
-	// Model name.
-	// Supported models:Hunyuan,
-	// Hailuo,
-	// Kling,
-	// Vidu,
-	// OS,
-	// GV.
+	// <p>Model name.<br>Supported models:<br>Hunyuan.<br>Hailuo.<br>Kling.<br>Vidu.<br>OS.<br>GV.</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// Specific version number of the model. By default, the system uses the supported stable version of the model.1. Hailuo: [02 and 2.3].2. Kling: [2.0, 2.1, 2.5, O1, and 2.6].3. Vidu: [q2, q2-pro, and q2-turbo].4. GV: [3.1].5. OS: [2.0].
+	// <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hailuo: [02 and 2.3].</li><li>Kling: [2.0, 2.1, 2.5, O1, 2.6, 3.0, and 3.0-Omni].</li><li>Vidu: [q2, q2-pro, q2-turbo, q3-pro, and q3-turbo].</li><li>GV: [3.1].</li><li>OS: [2.0].</li></ol>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
-	// Scenario for the generated video.Note: Not all models support scenarios.1. Kling supports motion control (motion_control).2. Mingmou supports landscape-to-portrait conversion (land2port).3. Vidu supports special effect templates (template_effect).
+	// <p>Scenario for the generated video.<br>Note: Not all models support scenarios.</p><ol><li>Kling supports motion control (motion_control).</li><li>Mingmou supports landscape-to-portrait conversion (land2port).</li><li>Vidu supports special effect templates (template_effect).</li></ol>
 	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
 
-	// Description of the generated video. (Note: A maximum of 2000 characters is supported.) This parameter is required when no reference image is specified.
+	// <p>Description of the generated video. (Note: A maximum of 2000 characters is supported.) This parameter is required when no reference image is specified.</p>
 	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
 
-	// Content you want to prevent the model from generating.Note: Not all models support this.For example:Top lighting and bright color.People and animals.Multiple vehicles and wind.
+	// <p>Specifies the content you want to prevent the model from generating.<br>Note: Not all models support this.<br>For example:<br>Top lighting and bright colors.<br>People and animals.<br>Multiple vehicles and wind.</p>
 	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
 
-	// The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.
+	// <p>The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.</p>
 	EnhancePrompt *bool `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
 
-	// Image URL for video generation. The URL must be accessible from the public network.Note:1. The recommended image size is no more than 10 MB. Different models have different size limits.2. Supported image formats: JPEG and PNG.3. If the OS model is used, the input image dimension should be 1280x720 or 720x1280.
+	// <p>Image URL for video generation. The URL must be accessible from the public network.<br>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different size limits.</li><li>Supported image formats: JPEG and PNG.</li><li>If the OS model is used, the input image dimension should be 1280x720 or 720x1280.</li></ol>
 	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
-	// The model will generate a video using the image of this parameter as the ending frame.Models that support this parameter:1. GV. If the ending frame image is specified, ImageUrl is required as the starting frame.2. Kling. Version 2.1 supports starting and ending frames with a resolution of 1080P.3. Vidu. q2-pro and q2-turbo support starting and ending frames.Note:1. The recommended image size is no more than 10 MB. Different models have different limits.2. Supported image formats: JPEG and PNG.
+	// <p>The model will generate a video using the image of this parameter as the ending frame.<br>Models that support this parameter:</p><ol><li>GV. If the ending frame image is specified, ImageUrl is required as the starting frame.</li><li>Kling. Version 2.1 supports starting and ending frames with a resolution of 1080P.</li><li>Vidu. q2-pro and q2-turbo support starting and ending frames.</li></ol><p>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different limits.</li><li>Supported image formats: JPEG and PNG.</li></ol>
 	LastImageUrl *string `json:"LastImageUrl,omitnil,omitempty" name:"LastImageUrl"`
 
-	// List of up to 3 asset images, used to describe the images the model should use for video generation.Model that supports multiple images:1. GV. If multiple images are specified, ImageUrl and LastImageUrl are unavailable.2. Vidu supports video generation with multiple reference images. The q2 model accepts 1 to 7 images. The ReferenceType in ImageInfos can be used to specify the subject ID for the input.Note:1. The image size cannot exceed 10 MB.2. Supported image formats: JPEG and PNG.
+	// <p>List of up to 3 asset images, used to describe the images the model should use for video generation.</p><p>Model that supports multiple images:</p><ol><li>GV. If multiple images are specified, ImageUrl and LastImageUrl are unavailable.</li><li>Vidu supports video generation with multiple reference images. The q2 model accepts 1 to 7 images. The ReferenceType in ImageInfos can be used to specify the subject ID for the input.</li></ol><p>Note:</p><ol><li>The image size cannot exceed 10 MB.</li><li>Supported image formats: JPEG and PNG.</li></ol>
 	ImageInfos []*AigcVideoReferenceImageInfo `json:"ImageInfos,omitnil,omitempty" name:"ImageInfos"`
 
-	// Duration of the generated video.Note:1. Kling supports 5 and 10 seconds. Default value: 5 seconds.2. The std mode of Hailuo supports 6 and 10 seconds, and other modes support 6 seconds. Default value: 6 seconds.3. Vidu supports 1 to 10 seconds.4. GV supports 8 seconds. Default value: 8 seconds.5. OS supports 4, 8, and 12 seconds. Default value: 8 seconds.
+	// <p>Only Kling O1 supports reference video information.<br>This can be used as a feature reference video or a video for editing. The default type is video for editing. You can choose to keep the original sound of the video.</p>
+	VideoInfos []*AigcVideoReferenceVideoInfo `json:"VideoInfos,omitnil,omitempty" name:"VideoInfos"`
+
+	// <p>Duration of the generated video.<br>Note:</p><ol><li>Kling supports 5 and 10 seconds. Default value: 5 seconds.</li><li>The std mode of Hailuo supports 6 and 10 seconds, and other modes support 6 seconds. Default value: 6 seconds.</li><li>Vidu supports 1 to 10 seconds.</li><li>GV supports 8 seconds. Default value: 8 seconds.</li><li>OS supports 4, 8, and 12 seconds. Default value: 8 seconds.</li></ol>
 	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
-	// Additional parameters required.
+	// <p>Additional parameters required.</p>
 	ExtraParameters *AigcVideoExtraParam `json:"ExtraParameters,omitnil,omitempty" name:"ExtraParameters"`
 
-	// COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.
+	// <p>COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.</p>
 	StoreCosParam *AigcStoreCosParam `json:"StoreCosParam,omitnil,omitempty" name:"StoreCosParam"`
 
-	// Special scenario parameters required by the model, formatted as a JSON serialized string.Example:{\"camera_control\":{\"type\":\"simple\"}}
+	// <p>Special scenario parameters required by the model, formatted as a JSON serialized string.<br>Example:<br>{"camera_control":{"type":"simple"}}.</p>
 	AdditionalParameters *string `json:"AdditionalParameters,omitnil,omitempty" name:"AdditionalParameters"`
 
-	// API operator name.
+	// <p>API operator name.</p>
 	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 }
 
 type CreateAigcVideoTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// Model name.
-	// Supported models:Hunyuan,
-	// Hailuo,
-	// Kling,
-	// Vidu,
-	// OS,
-	// GV.
+	// <p>Model name.<br>Supported models:<br>Hunyuan.<br>Hailuo.<br>Kling.<br>Vidu.<br>OS.<br>GV.</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// Specific version number of the model. By default, the system uses the supported stable version of the model.1. Hailuo: [02 and 2.3].2. Kling: [2.0, 2.1, 2.5, O1, and 2.6].3. Vidu: [q2, q2-pro, and q2-turbo].4. GV: [3.1].5. OS: [2.0].
+	// <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hailuo: [02 and 2.3].</li><li>Kling: [2.0, 2.1, 2.5, O1, 2.6, 3.0, and 3.0-Omni].</li><li>Vidu: [q2, q2-pro, q2-turbo, q3-pro, and q3-turbo].</li><li>GV: [3.1].</li><li>OS: [2.0].</li></ol>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
-	// Scenario for the generated video.Note: Not all models support scenarios.1. Kling supports motion control (motion_control).2. Mingmou supports landscape-to-portrait conversion (land2port).3. Vidu supports special effect templates (template_effect).
+	// <p>Scenario for the generated video.<br>Note: Not all models support scenarios.</p><ol><li>Kling supports motion control (motion_control).</li><li>Mingmou supports landscape-to-portrait conversion (land2port).</li><li>Vidu supports special effect templates (template_effect).</li></ol>
 	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
 
-	// Description of the generated video. (Note: A maximum of 2000 characters is supported.) This parameter is required when no reference image is specified.
+	// <p>Description of the generated video. (Note: A maximum of 2000 characters is supported.) This parameter is required when no reference image is specified.</p>
 	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
 
-	// Content you want to prevent the model from generating.Note: Not all models support this.For example:Top lighting and bright color.People and animals.Multiple vehicles and wind.
+	// <p>Specifies the content you want to prevent the model from generating.<br>Note: Not all models support this.<br>For example:<br>Top lighting and bright colors.<br>People and animals.<br>Multiple vehicles and wind.</p>
 	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
 
-	// The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.
+	// <p>The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.</p>
 	EnhancePrompt *bool `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
 
-	// Image URL for video generation. The URL must be accessible from the public network.Note:1. The recommended image size is no more than 10 MB. Different models have different size limits.2. Supported image formats: JPEG and PNG.3. If the OS model is used, the input image dimension should be 1280x720 or 720x1280.
+	// <p>Image URL for video generation. The URL must be accessible from the public network.<br>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different size limits.</li><li>Supported image formats: JPEG and PNG.</li><li>If the OS model is used, the input image dimension should be 1280x720 or 720x1280.</li></ol>
 	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
-	// The model will generate a video using the image of this parameter as the ending frame.Models that support this parameter:1. GV. If the ending frame image is specified, ImageUrl is required as the starting frame.2. Kling. Version 2.1 supports starting and ending frames with a resolution of 1080P.3. Vidu. q2-pro and q2-turbo support starting and ending frames.Note:1. The recommended image size is no more than 10 MB. Different models have different limits.2. Supported image formats: JPEG and PNG.
+	// <p>The model will generate a video using the image of this parameter as the ending frame.<br>Models that support this parameter:</p><ol><li>GV. If the ending frame image is specified, ImageUrl is required as the starting frame.</li><li>Kling. Version 2.1 supports starting and ending frames with a resolution of 1080P.</li><li>Vidu. q2-pro and q2-turbo support starting and ending frames.</li></ol><p>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different limits.</li><li>Supported image formats: JPEG and PNG.</li></ol>
 	LastImageUrl *string `json:"LastImageUrl,omitnil,omitempty" name:"LastImageUrl"`
 
-	// List of up to 3 asset images, used to describe the images the model should use for video generation.Model that supports multiple images:1. GV. If multiple images are specified, ImageUrl and LastImageUrl are unavailable.2. Vidu supports video generation with multiple reference images. The q2 model accepts 1 to 7 images. The ReferenceType in ImageInfos can be used to specify the subject ID for the input.Note:1. The image size cannot exceed 10 MB.2. Supported image formats: JPEG and PNG.
+	// <p>List of up to 3 asset images, used to describe the images the model should use for video generation.</p><p>Model that supports multiple images:</p><ol><li>GV. If multiple images are specified, ImageUrl and LastImageUrl are unavailable.</li><li>Vidu supports video generation with multiple reference images. The q2 model accepts 1 to 7 images. The ReferenceType in ImageInfos can be used to specify the subject ID for the input.</li></ol><p>Note:</p><ol><li>The image size cannot exceed 10 MB.</li><li>Supported image formats: JPEG and PNG.</li></ol>
 	ImageInfos []*AigcVideoReferenceImageInfo `json:"ImageInfos,omitnil,omitempty" name:"ImageInfos"`
 
-	// Duration of the generated video.Note:1. Kling supports 5 and 10 seconds. Default value: 5 seconds.2. The std mode of Hailuo supports 6 and 10 seconds, and other modes support 6 seconds. Default value: 6 seconds.3. Vidu supports 1 to 10 seconds.4. GV supports 8 seconds. Default value: 8 seconds.5. OS supports 4, 8, and 12 seconds. Default value: 8 seconds.
+	// <p>Only Kling O1 supports reference video information.<br>This can be used as a feature reference video or a video for editing. The default type is video for editing. You can choose to keep the original sound of the video.</p>
+	VideoInfos []*AigcVideoReferenceVideoInfo `json:"VideoInfos,omitnil,omitempty" name:"VideoInfos"`
+
+	// <p>Duration of the generated video.<br>Note:</p><ol><li>Kling supports 5 and 10 seconds. Default value: 5 seconds.</li><li>The std mode of Hailuo supports 6 and 10 seconds, and other modes support 6 seconds. Default value: 6 seconds.</li><li>Vidu supports 1 to 10 seconds.</li><li>GV supports 8 seconds. Default value: 8 seconds.</li><li>OS supports 4, 8, and 12 seconds. Default value: 8 seconds.</li></ol>
 	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
-	// Additional parameters required.
+	// <p>Additional parameters required.</p>
 	ExtraParameters *AigcVideoExtraParam `json:"ExtraParameters,omitnil,omitempty" name:"ExtraParameters"`
 
-	// COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.
+	// <p>COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.</p>
 	StoreCosParam *AigcStoreCosParam `json:"StoreCosParam,omitnil,omitempty" name:"StoreCosParam"`
 
-	// Special scenario parameters required by the model, formatted as a JSON serialized string.Example:{\"camera_control\":{\"type\":\"simple\"}}
+	// <p>Special scenario parameters required by the model, formatted as a JSON serialized string.<br>Example:<br>{"camera_control":{"type":"simple"}}.</p>
 	AdditionalParameters *string `json:"AdditionalParameters,omitnil,omitempty" name:"AdditionalParameters"`
 
-	// API operator name.
+	// <p>API operator name.</p>
 	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 }
 
@@ -4063,6 +4095,7 @@ func (r *CreateAigcVideoTaskRequest) FromJsonString(s string) error {
 	delete(f, "ImageUrl")
 	delete(f, "LastImageUrl")
 	delete(f, "ImageInfos")
+	delete(f, "VideoInfos")
 	delete(f, "Duration")
 	delete(f, "ExtraParameters")
 	delete(f, "StoreCosParam")
@@ -4076,8 +4109,7 @@ func (r *CreateAigcVideoTaskRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAigcVideoTaskResponseParams struct {
-	// ID of the successfully created task.
-	// The task progress and generation results can be obtained by calling the query API.
+	// <p>Returned task ID after the task is created successfully.<br>The task progress and generation results can be obtained by calling the query API.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4332,6 +4364,12 @@ type CreateBlindWatermarkTemplateRequestParams struct {
 
 	// Description information of the digital watermark template. The length cannot exceed 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Digital watermark strength.
+	// default: default, balance between high-definition quality and resilience.
+	// stronger: clear image quality, strong resilience.
+	// strongest: normal video quality, highest resilience.
+	Strength *string `json:"Strength,omitnil,omitempty" name:"Strength"`
 }
 
 type CreateBlindWatermarkTemplateRequest struct {
@@ -4348,6 +4386,12 @@ type CreateBlindWatermarkTemplateRequest struct {
 
 	// Description information of the digital watermark template. The length cannot exceed 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Digital watermark strength.
+	// default: default, balance between high-definition quality and resilience.
+	// stronger: clear image quality, strong resilience.
+	// strongest: normal video quality, highest resilience.
+	Strength *string `json:"Strength,omitnil,omitempty" name:"Strength"`
 }
 
 func (r *CreateBlindWatermarkTemplateRequest) ToJsonString() string {
@@ -4366,6 +4410,7 @@ func (r *CreateBlindWatermarkTemplateRequest) FromJsonString(s string) error {
 	delete(f, "TextContent")
 	delete(f, "Name")
 	delete(f, "Comment")
+	delete(f, "Strength")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateBlindWatermarkTemplateRequest has unknown keys!", "")
 	}
@@ -4856,6 +4901,9 @@ type CreateProcessImageTemplateRequestParams struct {
 
 	// Description information of the image processing template. The length cannot exceed 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Extended parameters for the image processing template.
+	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 }
 
 type CreateProcessImageTemplateRequest struct {
@@ -4869,6 +4917,9 @@ type CreateProcessImageTemplateRequest struct {
 
 	// Description information of the image processing template. The length cannot exceed 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Extended parameters for the image processing template.
+	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 }
 
 func (r *CreateProcessImageTemplateRequest) ToJsonString() string {
@@ -4886,6 +4937,7 @@ func (r *CreateProcessImageTemplateRequest) FromJsonString(s string) error {
 	delete(f, "ProcessImageTemplate")
 	delete(f, "Name")
 	delete(f, "Comment")
+	delete(f, "StdExtInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateProcessImageTemplateRequest has unknown keys!", "")
 	}
@@ -10248,7 +10300,7 @@ func (r *DescribeTranscodeTemplatesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeUsageDataRequestParams struct {
-	// Start date. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Start date. use ISO date format.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End date, which should be greater than or equal to the start date. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
@@ -10281,7 +10333,7 @@ type DescribeUsageDataRequestParams struct {
 type DescribeUsageDataRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start date. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Start date. use ISO date format.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End date, which should be greater than or equal to the start date. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
@@ -10917,71 +10969,69 @@ type EditMediaOutputConfig struct {
 
 // Predefined struct for user
 type EditMediaRequestParams struct {
-	// Information of input video file.
+	// <p>Input video file information.</p>
 	FileInfos []*EditMediaFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
 
-	// The storage location of the media processing output file.
+	// <p>Target storage for the output file of the media processing task.</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// The path to save the media processing output file.
-	// 
-	// Note: For complex compositing tasks, the filename can be up to 64 characters long and can only contain digits, letters, and special characters -_
+	// <p>Target path for the output file of the media processing task.</p><p>Note: For a complex compositing task, the file name in the path can contain only digits, letters, hyphens (-), and underscores (_), with a maximum of 64 characters.</p>
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
 
-	// The output settings for a video clipping task.
+	// <p>Configuration of the file generated by the [editing] task.</p>
 	OutputConfig *EditMediaOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
 
-	// The settings for a video compositing task.
-	// 
-	// Note: If this parameter is not empty, the task is a video compositing task. Otherwise, the task is a video clipping task.
+	// <p>[Compositing] task configuration.</p><p>Note: If this is not empty, the task is a compositing task. Otherwise, the task is an editing task.</p>
 	ComposeConfig *ComposeMediaConfig `json:"ComposeConfig,omitnil,omitempty" name:"ComposeConfig"`
 
-	// Event notification information of task. If this parameter is left empty, no event notifications will be obtained.
+	// <p>Event notification information of the task. If this is not specified, no event notification is obtained.</p>
 	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
 
-	// Task priority. The higher the value, the higher the priority. Value range: -10 - 10. If this parameter is left empty, 0 will be used.
+	// <p>Task priority. The higher the value, the higher the priority. The value range is from -10 to 10. If this is not specified, the default value is 0.</p>
 	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
 
-	// The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past three days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+	// <p>Source context. This is used to pass user request information. The task status change callback returns the value of this field. The maximum length is 1000 characters.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+
+	// <p>Resource ID. The resource needs to be enabled. The default value is the account's primary resource ID.</p>
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 }
 
 type EditMediaRequest struct {
 	*tchttp.BaseRequest
 	
-	// Information of input video file.
+	// <p>Input video file information.</p>
 	FileInfos []*EditMediaFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
 
-	// The storage location of the media processing output file.
+	// <p>Target storage for the output file of the media processing task.</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// The path to save the media processing output file.
-	// 
-	// Note: For complex compositing tasks, the filename can be up to 64 characters long and can only contain digits, letters, and special characters -_
+	// <p>Target path for the output file of the media processing task.</p><p>Note: For a complex compositing task, the file name in the path can contain only digits, letters, hyphens (-), and underscores (_), with a maximum of 64 characters.</p>
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
 
-	// The output settings for a video clipping task.
+	// <p>Configuration of the file generated by the [editing] task.</p>
 	OutputConfig *EditMediaOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
 
-	// The settings for a video compositing task.
-	// 
-	// Note: If this parameter is not empty, the task is a video compositing task. Otherwise, the task is a video clipping task.
+	// <p>[Compositing] task configuration.</p><p>Note: If this is not empty, the task is a compositing task. Otherwise, the task is an editing task.</p>
 	ComposeConfig *ComposeMediaConfig `json:"ComposeConfig,omitnil,omitempty" name:"ComposeConfig"`
 
-	// Event notification information of task. If this parameter is left empty, no event notifications will be obtained.
+	// <p>Event notification information of the task. If this is not specified, no event notification is obtained.</p>
 	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
 
-	// Task priority. The higher the value, the higher the priority. Value range: -10 - 10. If this parameter is left empty, 0 will be used.
+	// <p>Task priority. The higher the value, the higher the priority. The value range is from -10 to 10. If this is not specified, the default value is 0.</p>
 	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
 
-	// The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past three days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+	// <p>Source context. This is used to pass user request information. The task status change callback returns the value of this field. The maximum length is 1000 characters.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+
+	// <p>Resource ID. The resource needs to be enabled. The default value is the account's primary resource ID.</p>
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 }
 
 func (r *EditMediaRequest) ToJsonString() string {
@@ -11005,6 +11055,7 @@ func (r *EditMediaRequest) FromJsonString(s string) error {
 	delete(f, "TasksPriority")
 	delete(f, "SessionId")
 	delete(f, "SessionContext")
+	delete(f, "ResourceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EditMediaRequest has unknown keys!", "")
 	}
@@ -11013,7 +11064,7 @@ func (r *EditMediaRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type EditMediaResponseParams struct {
-	// Video editing task ID, which can be used to query the status of an editing task.
+	// <p>Video editing task ID. This can be used to query the task status.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -12099,6 +12150,44 @@ type LiveScheduleTask struct {
 	LiveActivityResultSet []*LiveActivityResult `json:"LiveActivityResultSet,omitnil,omitempty" name:"LiveActivityResultSet"`
 }
 
+type LiveSmartSubtitleResult struct {
+	// Recognized text.
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// Translate the starting PTS time of a segment, in seconds.
+	StartPTSTime *float64 `json:"StartPTSTime,omitnil,omitempty" name:"StartPTSTime"`
+
+	// End PTS time of a translated segment, in seconds.
+	EndPTSTime *float64 `json:"EndPTSTime,omitnil,omitempty" name:"EndPTSTime"`
+
+	// Translated text.
+	Trans *string `json:"Trans,omitnil,omitempty" name:"Trans"`
+
+	// Translation started at UTC time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Translation ends at UTC time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Steady-State tag.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SteadyState *bool `json:"SteadyState,omitnil,omitempty" name:"SteadyState"`
+
+	// websocket and trtc real-time translation UserId.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+}
+
+type LiveSmartSubtitlesTaskInput struct {
+	// Smart subtitle template ID.	
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// User extension field, which does not need to be filled in for general scenarios.
+	UserExtPara *string `json:"UserExtPara,omitnil,omitempty" name:"UserExtPara"`
+}
+
 type LiveStreamAiAnalysisResultInfo struct {
 	// Live streaming analysis subtask result. Valid values:
 	// <li>Live streaming video splitting.</li>
@@ -12341,6 +12430,11 @@ type LiveStreamAiReviewVoicePornResult struct {
 	// Tag of the detected porn information in video. Valid values:
 	// <li>sexual_moan: Sexual moans.</li>
 	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
+}
+
+type LiveStreamAiSmartSubtitleResultInfo struct {
+	// Live stream smart subtitling task result list.
+	SmartSubtitleResult []*LiveSmartSubtitleResult `json:"SmartSubtitleResult,omitnil,omitempty" name:"SmartSubtitleResult"`
 }
 
 type LiveStreamAsrFullTextRecognitionResult struct {
@@ -13997,6 +14091,12 @@ type ModifyBlindWatermarkTemplateRequestParams struct {
 
 	// Text content of the digital watermark. The length cannot exceed 64 characters. The text content cannot be modified for NAGRA watermark templates.
 	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
+
+	// Digital watermark strength. 
+	// default: default, balance between high-definition quality and resilience. 
+	// stronger: clear image quality, strong resilience. 
+	// strongest: normal video quality, strongest resilience.
+	Strength *string `json:"Strength,omitnil,omitempty" name:"Strength"`
 }
 
 type ModifyBlindWatermarkTemplateRequest struct {
@@ -14013,6 +14113,12 @@ type ModifyBlindWatermarkTemplateRequest struct {
 
 	// Text content of the digital watermark. The length cannot exceed 64 characters. The text content cannot be modified for NAGRA watermark templates.
 	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
+
+	// Digital watermark strength. 
+	// default: default, balance between high-definition quality and resilience. 
+	// stronger: clear image quality, strong resilience. 
+	// strongest: normal video quality, strongest resilience.
+	Strength *string `json:"Strength,omitnil,omitempty" name:"Strength"`
 }
 
 func (r *ModifyBlindWatermarkTemplateRequest) ToJsonString() string {
@@ -14031,6 +14137,7 @@ func (r *ModifyBlindWatermarkTemplateRequest) FromJsonString(s string) error {
 	delete(f, "Name")
 	delete(f, "Comment")
 	delete(f, "TextContent")
+	delete(f, "Strength")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBlindWatermarkTemplateRequest has unknown keys!", "")
 	}
@@ -16182,12 +16289,13 @@ func (r *ParseLiveStreamProcessNotificationRequest) FromJsonString(s string) err
 
 // Predefined struct for user
 type ParseLiveStreamProcessNotificationResponseParams struct {
-	// Live stream processing result type. Valid values:
-	// <li>AiReviewResult: content review result.</li>
-	// <li>AiRecognitionResult: content recognition result.</li>
-	// <li>LiveRecordResult: live streaming recording result.</li>
-	// <li>AiQualityControlResult: media live quality control result.</li>
-	// <li>AiAnalysisResult: content analysis result.</li>
+	// Live stream processing result type, including:.
+	// <Li>AiReviewResult: content moderation result;</li>.
+	// <Li>AiRecognitionResult: content recognition result;</li>.
+	// <Li>LiveRecordResult: live streaming result;</li>.
+	// <Li>AiQualityControlResult: media quality inspection result.</li>.
+	// <Li>AiAnalysisResult: content analysis result.</li>.
+	// <Li>AiSmartSubtitleResult: smart subtitle result.</li>.
 	// <li>ProcessEof: end of live stream processing.</li>
 	NotificationType *string `json:"NotificationType,omitnil,omitempty" name:"NotificationType"`
 
@@ -16214,6 +16322,9 @@ type ParseLiveStreamProcessNotificationResponseParams struct {
 	// Live recording result is valid when NotificationType is LiveRecordResult.
 	// Note: when this field return null, means no valid values can be obtained.
 	LiveRecordResultInfo *LiveStreamRecordResultInfo `json:"LiveRecordResultInfo,omitnil,omitempty" name:"LiveRecordResultInfo"`
+
+	// Smart subtitle result. valid when NotificationType is AiSmartSubtitleResult.
+	AiSmartSubtitleResultInfo *LiveStreamAiSmartSubtitleResultInfo `json:"AiSmartSubtitleResultInfo,omitnil,omitempty" name:"AiSmartSubtitleResultInfo"`
 
 	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
@@ -16612,6 +16723,9 @@ type ProcessImageRequestParams struct {
 
 	// Image processing parameter.
 	ImageTask *ImageTaskInput `json:"ImageTask,omitnil,omitempty" name:"ImageTask"`
+
+	// Extended parameters for image processing.
+	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 }
 
 type ProcessImageRequest struct {
@@ -16647,6 +16761,9 @@ type ProcessImageRequest struct {
 
 	// Image processing parameter.
 	ImageTask *ImageTaskInput `json:"ImageTask,omitnil,omitempty" name:"ImageTask"`
+
+	// Extended parameters for image processing.
+	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 }
 
 func (r *ProcessImageRequest) ToJsonString() string {
@@ -16668,6 +16785,7 @@ func (r *ProcessImageRequest) FromJsonString(s string) error {
 	delete(f, "Definition")
 	delete(f, "ResourceId")
 	delete(f, "ImageTask")
+	delete(f, "StdExtInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessImageRequest has unknown keys!", "")
 	}
@@ -16724,94 +16842,87 @@ type ProcessImageTemplate struct {
 
 // Predefined struct for user
 type ProcessLiveStreamRequestParams struct {
-	// Live stream URL. (It should be a live streaming file address. RTMP, HLS, FLV, and TRTC addresses are supported.)
-	// A TRTC address is as follows:
-	//  trtc: //trtc.rtc.qq.com/mps/`<roomid>`?sdkappid=`<sdkappid>`&userid=`<userid>`&usersig=<`usersig>`
-	// `<roomid>` is the TRTC room ID, which is a number.
-	// `<sdkappid>` is the SDK app ID of TRTC.
-	// `<userid>` is the user ID for accessing a room, which can be used to distinguish robots.
-	// <`usersig>` is the TRTC user signature.
+	// <p>Live stream URL (this must be a live stream address; supported formats include RTMP, HLS, FLV, TRTC, WebRTC, and SRT).<br>TRTC address example:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room ID, which is a number.<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID.<br><code>&lt;userid&gt;</code> is the ID of the user who enters the room, which can be used to distinguish bots.<br><code>&lt;usersig&gt;</code> is the TRTC user signature.</p><p>WebRTC supports <a href="https://www.tencentcloud.comom/product/leb?from_cn_redirect=1">LEB</a> live streams. For more information about how to obtain the address, see <a href="https://www.tencentcloud.comom/document/product/267/32720?from_cn_redirect=1">this reference</a>.</p><p>For supported SRT addresses, see <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">this reference</a>.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// Event notification information of a task, which is used to specify the live stream processing result.
+	// <p>Event notification information of the task. This is used to specify the live stream processing result.</p>
 	TaskNotifyConfig *LiveStreamTaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
 
-	// Target bucket of a live stream processing output file. This parameter is required if a file will be output.
+	// <p>Target storage for the output file of the live stream processing task. This parameter is required if the processing task has an output file.</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// Target directory of a live stream processing output file, such as `/movie/201909/`. If this parameter is left empty, the `/` directory will be used.
+	// <p>Target output directory for the file generated by the live stream processing task, such as <code>/movie/201909/</code>. If this is not specified, the default directory is <code>/</code>.</p>
 	OutputDir *string `json:"OutputDir,omitnil,omitempty" name:"OutputDir"`
 
-	// Type parameter of a video content audit task.
+	// <p>Parameters for the video content review task.</p>
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitnil,omitempty" name:"AiContentReviewTask"`
 
-	// Type parameter of video content recognition task.
+	// <p>Parameters for the video content recognition task.</p>
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil,omitempty" name:"AiRecognitionTask"`
 
-
+	// <p>Parameters for the video content analysis task.</p>
 	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil,omitempty" name:"AiAnalysisTask"`
 
-	// Media quality inspection type task parameters.
+	// <p>Parameters for the media quality inspection task.</p>
 	AiQualityControlTask *AiQualityControlTaskInput `json:"AiQualityControlTask,omitnil,omitempty" name:"AiQualityControlTask"`
 
-	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
+	// <p>Parameters for the smart subtitle task.</p>
+	SmartSubtitlesTask *LiveSmartSubtitlesTaskInput `json:"SmartSubtitlesTask,omitnil,omitempty" name:"SmartSubtitlesTask"`
+
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past seven days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+	// <p>Source context. This is used to pass user request information. The task status change callback returns the value of this field. The maximum length is 1000 characters.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// The live scheme ID.
-	// Note 1:
-	// <li>If an output storage (`OutputStorage`) and directory (`OutputDir`) are specified for a subtask of the scheme, those output settings will be applied. </li>
-	// u200c<li>If an output storage (`OutputStorage`) and directory (`OutputDir`) are not specified for a subtask of the scheme, the output parameters specified for `ProcessLiveStream` (if any) will be applied. </li>
-	// Note 2: If `TaskNotifyConfig` is specified when `ProcessLiveStream` is called, the specified settings will be applied instead of the default callback settings of the scheme.
+	// <p>Live streaming orchestration ID.<br>Note 1: For the OutputStorage and OutputDir parameters:</p><li>If OutputStorage and OutputDir are configured in the subtask node of service orchestration, the output configured in the subtask node serves as the subtask output.</li><li>If OutputStorage and OutputDir are not configured in the subtask node of service orchestration and ProcessLiveStream has output, the default output of the original orchestration is overridden.</li>Note 2: For the TaskNotifyConfig parameter, if it has been configured in the task creation API (ProcessLiveStream), the default callback of the original orchestration is overridden.
 	ScheduleId *int64 `json:"ScheduleId,omitnil,omitempty" name:"ScheduleId"`
+
+	// <p>Resource ID. The resource needs to be enabled. The default value is the account's primary resource ID.</p>
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 }
 
 type ProcessLiveStreamRequest struct {
 	*tchttp.BaseRequest
 	
-	// Live stream URL. (It should be a live streaming file address. RTMP, HLS, FLV, and TRTC addresses are supported.)
-	// A TRTC address is as follows:
-	//  trtc: //trtc.rtc.qq.com/mps/`<roomid>`?sdkappid=`<sdkappid>`&userid=`<userid>`&usersig=<`usersig>`
-	// `<roomid>` is the TRTC room ID, which is a number.
-	// `<sdkappid>` is the SDK app ID of TRTC.
-	// `<userid>` is the user ID for accessing a room, which can be used to distinguish robots.
-	// <`usersig>` is the TRTC user signature.
+	// <p>Live stream URL (this must be a live stream address; supported formats include RTMP, HLS, FLV, TRTC, WebRTC, and SRT).<br>TRTC address example:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room ID, which is a number.<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID.<br><code>&lt;userid&gt;</code> is the ID of the user who enters the room, which can be used to distinguish bots.<br><code>&lt;usersig&gt;</code> is the TRTC user signature.</p><p>WebRTC supports <a href="https://www.tencentcloud.comom/product/leb?from_cn_redirect=1">LEB</a> live streams. For more information about how to obtain the address, see <a href="https://www.tencentcloud.comom/document/product/267/32720?from_cn_redirect=1">this reference</a>.</p><p>For supported SRT addresses, see <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">this reference</a>.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// Event notification information of a task, which is used to specify the live stream processing result.
+	// <p>Event notification information of the task. This is used to specify the live stream processing result.</p>
 	TaskNotifyConfig *LiveStreamTaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
 
-	// Target bucket of a live stream processing output file. This parameter is required if a file will be output.
+	// <p>Target storage for the output file of the live stream processing task. This parameter is required if the processing task has an output file.</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// Target directory of a live stream processing output file, such as `/movie/201909/`. If this parameter is left empty, the `/` directory will be used.
+	// <p>Target output directory for the file generated by the live stream processing task, such as <code>/movie/201909/</code>. If this is not specified, the default directory is <code>/</code>.</p>
 	OutputDir *string `json:"OutputDir,omitnil,omitempty" name:"OutputDir"`
 
-	// Type parameter of a video content audit task.
+	// <p>Parameters for the video content review task.</p>
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitnil,omitempty" name:"AiContentReviewTask"`
 
-	// Type parameter of video content recognition task.
+	// <p>Parameters for the video content recognition task.</p>
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil,omitempty" name:"AiRecognitionTask"`
 
+	// <p>Parameters for the video content analysis task.</p>
 	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil,omitempty" name:"AiAnalysisTask"`
 
-	// Media quality inspection type task parameters.
+	// <p>Parameters for the media quality inspection task.</p>
 	AiQualityControlTask *AiQualityControlTaskInput `json:"AiQualityControlTask,omitnil,omitempty" name:"AiQualityControlTask"`
 
-	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
+	// <p>Parameters for the smart subtitle task.</p>
+	SmartSubtitlesTask *LiveSmartSubtitlesTaskInput `json:"SmartSubtitlesTask,omitnil,omitempty" name:"SmartSubtitlesTask"`
+
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past seven days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+	// <p>Source context. This is used to pass user request information. The task status change callback returns the value of this field. The maximum length is 1000 characters.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// The live scheme ID.
-	// Note 1:
-	// <li>If an output storage (`OutputStorage`) and directory (`OutputDir`) are specified for a subtask of the scheme, those output settings will be applied. </li>
-	// u200c<li>If an output storage (`OutputStorage`) and directory (`OutputDir`) are not specified for a subtask of the scheme, the output parameters specified for `ProcessLiveStream` (if any) will be applied. </li>
-	// Note 2: If `TaskNotifyConfig` is specified when `ProcessLiveStream` is called, the specified settings will be applied instead of the default callback settings of the scheme.
+	// <p>Live streaming orchestration ID.<br>Note 1: For the OutputStorage and OutputDir parameters:</p><li>If OutputStorage and OutputDir are configured in the subtask node of service orchestration, the output configured in the subtask node serves as the subtask output.</li><li>If OutputStorage and OutputDir are not configured in the subtask node of service orchestration and ProcessLiveStream has output, the default output of the original orchestration is overridden.</li>Note 2: For the TaskNotifyConfig parameter, if it has been configured in the task creation API (ProcessLiveStream), the default callback of the original orchestration is overridden.
 	ScheduleId *int64 `json:"ScheduleId,omitnil,omitempty" name:"ScheduleId"`
+
+	// <p>Resource ID. The resource needs to be enabled. The default value is the account's primary resource ID.</p>
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 }
 
 func (r *ProcessLiveStreamRequest) ToJsonString() string {
@@ -16834,9 +16945,11 @@ func (r *ProcessLiveStreamRequest) FromJsonString(s string) error {
 	delete(f, "AiRecognitionTask")
 	delete(f, "AiAnalysisTask")
 	delete(f, "AiQualityControlTask")
+	delete(f, "SmartSubtitlesTask")
 	delete(f, "SessionId")
 	delete(f, "SessionContext")
 	delete(f, "ScheduleId")
+	delete(f, "ResourceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessLiveStreamRequest has unknown keys!", "")
 	}
@@ -16845,7 +16958,7 @@ func (r *ProcessLiveStreamRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ProcessLiveStreamResponseParams struct {
-	// Task ID
+	// <p>Task ID.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -18163,6 +18276,9 @@ type ScheduleQualityControlTaskResult struct {
 
 	// Media quality inspection task output.Note: This field may return null, indicating that no valid values can be obtained.
 	Output *QualityControlData `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// Task execution progress.
+	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 }
 
 type ScheduleRecognitionTaskResult struct {
@@ -19193,31 +19309,43 @@ type SubtitleTemplate struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubtitleFileInput *MediaInputInfo `json:"SubtitleFileInput,omitnil,omitempty" name:"SubtitleFileInput"`
 
-	// Font type. valid values:.
-	// <li>hei.ttf: simhei.</li>.
-	// <li>song.ttf: simsun.</li>.
-	// <Li>Kai.Ttf (recommend) or simkai.ttf: kaiti.</li>.
-	// <li>msyh.ttf: microsoft yahei</li>.
-	// <li>msyhbd.ttf: microsoft yahei in bold.</li>.
-	// <li>hkjgt.ttf: dynafont king gothic</li>.
-	// <li>dhttx.ttf: dianheitexiti.</li>.
-	// <li>xqgdzt.ttf: xiqueguzidianti</li>.
-	// <li>qpcyt.ttf: smart splice super round body.</li>.
-	// <li>arial.ttf: english only.</li>.
-	// <li>dinalternate.ttf:DIN Alternate Bold</li>
-	// <li>helveticalt.ttf:Helvetica</li>
-	// <li>helveticains.ttf:Helvetica Inserat</li>
-	// <li>trajanpro.ttf:TrajanPro-Bold</li>
-	// <li>korean.ttf: specifies the korean language.</li>.
-	// <li>japanese.ttf: specifies the japanese language.</li>.
-	// <li>thai.ttf: specifies the thai language.</li>.
-	// Default: hei.ttf (heiti). note: kaiti is recommended for use with kai.ttf.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Input information of the font file of the burned-in subtitle. URL and COS are supported. If both are specified, the URL information is used. If FontFileInput is specified, FontFileInput takes precedence over FontType.
+	FontFileInput *MediaInputInfo `json:"FontFileInput,omitnil,omitempty" name:"FontFileInput"`
+
+	// Font type. Valid values:
+	// <li>hei.ttf: SimHei.</li>
+	// <li>song.ttf: SimSun.</li>
+	// <li>kai.ttf (recommend) or simkai.ttf: SimKai.</li>
+	// <li>msyh.ttf: Microsoft YaHei.</li>
+	// <li>msyhbd.ttf: Microsoft YaHei Bold.</li>
+	// <li>hkjgt.ttf: DynaFont King Gothic.</li>
+	// <li>dhttx.ttf: DianHei Extra Light.</li>
+	// <li>xqgdzt.ttf: XiQue GuZiDian.</li>
+	// <li>qpcyt.ttf: QiaoPin ChaoYuan.</li>
+	// <li>arial.ttf: English only.</li>
+	// <li>dinalternate.ttf: DIN Alternate Bold.</li>
+	// <li>helveticalt.ttf: Helvetica.</li>
+	// <li>helveticains.ttf: Helvetica Inserat.</li>
+	// <li>trajanpro.ttf: TrajanPro-Bold.</li>
+	// <li>korean.ttf: Korean.</li>
+	// <li>japanese.ttf: Japanese.</li>
+	// <li>thai.ttf: Thai.</li>
+	// Default value: hei.ttf.
+	// <br>Note:
+	// <li>kai.ttf is recommended for SimKai.</li>
+	// <li>FontFileInput takes precedence when specified.</li>
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	FontType *string `json:"FontType,omitnil,omitempty" name:"FontType"`
 
-	// Font size. Format: Npx, where N is a numerical value. If it is not specified, the font size of the subtitle file applies.
-	// It is 5% of the source video height by default.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Font size. If not specified, the font size of the subtitle file applies. Pixel and percentage formats are supported:
+	// 
+	// - Pixel: Npx. Value range of N: (0,4096].
+	// - Percentage: N%. Value range of N: (0,100]. For example, 10% means the subtitle font size is 10% of the source video height.
+	// 
+	// The default size is 5% of the source video height if this parameter is not specified or the font size is not configured in the subtitle file.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	FontSize *string `json:"FontSize,omitnil,omitempty" name:"FontSize"`
 
 	// Font color. Format: 0xRRGGBB. Default value: 0xFFFFFF (white).
@@ -19255,15 +19383,20 @@ type SubtitleTemplate struct {
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	BoardY *string `json:"BoardY,omitnil,omitempty" name:"BoardY"`
 
-	// Board width. Unit: pixels. Value range: [0,4096].
-	// It is 90% of the source video width by default.
+	// Background width. The value should be a positive integer.
+	// - Value range for pixels: [0,4096].
+	// - Value range for percentages: [0, 100].
+	// If background is enabled and this parameter is not specified, the default width is 90% of the source video width.
 	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	BoardWidth *int64 `json:"BoardWidth,omitnil,omitempty" name:"BoardWidth"`
 
-	// Board height. Unit: pixels. Value range: [0,4096].
-	// It is 15% of the source video height by default.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Background height. The value should be a positive integer.
+	// - Value range for pixels: [0,4096].
+	// - Value range for percentages: [0, 100].
+	// If background is enabled and this parameter is not specified, the default height is 15% of the source video height.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	BoardHeight *int64 `json:"BoardHeight,omitnil,omitempty" name:"BoardHeight"`
 
 	// Board color. Format: 0xRRGGBB.
@@ -19278,37 +19411,52 @@ type SubtitleTemplate struct {
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	BoardAlpha *float64 `json:"BoardAlpha,omitnil,omitempty" name:"BoardAlpha"`
 
-	// Stroke width.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Stroke width. The value should be a floating-point number.
+	// - Value range for pixels: [0, 1000].
+	// - Value range for percentages: [0, 100].
+	// If this is not specified, the default width is 0.3% of the source video height.
 	OutlineWidth *float64 `json:"OutlineWidth,omitnil,omitempty" name:"OutlineWidth"`
 
-	// Stroke color. The value should be a 6-digit hexadecimal RGB value.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Stroke color. The value should be a 6-digit hexadecimal RGB value. If this is not specified, the default color is black.
 	OutlineColor *string `json:"OutlineColor,omitnil,omitempty" name:"OutlineColor"`
 
-	// Stroke transparency. The value should be a positive floating-point number in the range of (0, 1].
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Stroke transparency. The value should be a positive floating-point number in the range of (0, 1]. If this is not specified, the default value is 1, which means completely opaque.
 	OutlineAlpha *float64 `json:"OutlineAlpha,omitnil,omitempty" name:"OutlineAlpha"`
 
-	// Shadow width. The value should be a floating-point number in the range of [0, 1000].
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Shadow width. The value should be a floating-point number.
+	// - Value range for pixels: [0, 1000].
+	// - Value range for percentages: [0, 100].
+	// If this is not specified, no shadow is applied by default.
 	ShadowWidth *float64 `json:"ShadowWidth,omitnil,omitempty" name:"ShadowWidth"`
 
-	// Shadow color. The value should be a 6-digit hexadecimal RGB value.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Shadow color. The value should be a 6-digit hexadecimal RGB value. If this is not specified, the default color is black (with shadow configured).
 	ShadowColor *string `json:"ShadowColor,omitnil,omitempty" name:"ShadowColor"`
 
-	// Shadow transparency. The value should be a positive floating-point number in the range of (0, 1].
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Shadow transparency. The value should be a positive floating-point number in the range of (0, 1]. If this is not specified, the default value is 1, which means completely opaque (with shadow configured).
 	ShadowAlpha *float64 `json:"ShadowAlpha,omitnil,omitempty" name:"ShadowAlpha"`
 
-	// Line spacing. The value should be a positive integer in the range of [0, 1000].
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Line spacing. The value should be a positive integer.
+	// - Value range for pixels: [0, 1000].
+	// - Value range for percentages: [0, 100]. If this is not specified, the default value is 0.
 	LineSpacing *int64 `json:"LineSpacing,omitnil,omitempty" name:"LineSpacing"`
 
-	// Alignment mode. Valid values: top alignment. The top position of subtitles is fixed, while the bottom position changes according to the number of lines. bottom: bottom alignment. The bottom position of subtitles is fixed, while the top position changes according to the number of lines.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Alignment mode. Valid values: top: The top position of the subtitle is fixed, while the bottom position changes according to the number of lines. bottom: The bottom position of the subtitle is fixed, while the top position changes according to the number of lines. If this is not specified, bottom alignment is used by default.
 	Alignment *string `json:"Alignment,omitnil,omitempty" name:"Alignment"`
+
+	// Default value is 0. If this is set to 1, the value of BoardWidth is a percentage based on the video width.
+	BoardWidthUnit *int64 `json:"BoardWidthUnit,omitnil,omitempty" name:"BoardWidthUnit"`
+
+	// Default value is 0. If this is set to 1, the value of BoardHeight is a percentage based on the video height.
+	BoardHeightUnit *int64 `json:"BoardHeightUnit,omitnil,omitempty" name:"BoardHeightUnit"`
+
+	// Default value is 0. If this is set to 1, the value of OutlineWidth is a percentage based on the video height.
+	OutlineWidthUnit *int64 `json:"OutlineWidthUnit,omitnil,omitempty" name:"OutlineWidthUnit"`
+
+	// Default value is 0. If this is set to 1, the value of ShadowWidth is a percentage based on the video height.
+	ShadowWidthUnit *int64 `json:"ShadowWidthUnit,omitnil,omitempty" name:"ShadowWidthUnit"`
+
+	// Default value is 0. If this is set to 1, the value of LineSpacing is a percentage based on the video height.
+	LineSpacingUnit *int64 `json:"LineSpacingUnit,omitnil,omitempty" name:"LineSpacingUnit"`
 }
 
 type SubtitleTransResultItem struct {
@@ -19394,6 +19542,193 @@ type SvgWatermarkInputForUpdate struct {
 	// <li>If the string ends in %, the meaning is the same as `W%`.</li>
 	// Default value: 0px.
 	Height *string `json:"Height,omitnil,omitempty" name:"Height"`
+}
+
+// Predefined struct for user
+type SyncDubbingRequestParams struct {
+	// Text for the synthesis. This is required for text to speech. The text cannot exceed 2000 characters in length.
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// Text language. This defaults to zh (Chinese) if left empty.
+	// Supported languages:
+	// zh: Chinese.
+	// en: English.
+	// ja: Japanese.
+	// de: German.
+	// fr: French.
+	// ko: Korean.
+	// ru: Russian.
+	// uk: Ukrainian.
+	// pt: Portuguese.
+	// it: Italian.
+	// es: Spanish.
+	// id: Indonesian.
+	// nl: Dutch.
+	// tr: Turkish.
+	// fil: Filipino.
+	// ms: Malay.
+	// el: Greek.
+	// fi: Finnish.
+	// hr: Croatian.
+	// sk: Slovak.
+	// pl: Polish.
+	// sv: Swedish.
+	// hi: Hindi.
+	// bg: Bulgarian.
+	// ro: Romanian.
+	// ar: Arabic.
+	// cs: Czech.
+	// da: Danish.
+	// ta: Tamil.
+	// hun: Hungarian.
+	// vi: Vietnamese.
+	// no: Norwegian.
+	// yue: Cantonese.
+	// th: Thai.
+	// he: Hebrew.
+	// ca: Catalan.
+	// nn: Nynorsk.
+	// af: Afrikaans.
+	// fa: Persian.
+	// sl: Slovenian.
+	TextLang *string `json:"TextLang,omitnil,omitempty" name:"TextLang"`
+
+	// Voice type ID. This is required for synthesis with a specific voice type. System voice types and voice type cloning are supported.
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// Base64-encoded audio for cloning.
+	AudioData *string `json:"AudioData,omitnil,omitempty" name:"AudioData"`
+
+	// Cloning audio language. The default language is Chinese.
+	// Supported languages are the same as those for TextLang.
+	AudioLang *string `json:"AudioLang,omitnil,omitempty" name:"AudioLang"`
+
+	// Extended parameters in the format of a JSON string.
+	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
+}
+
+type SyncDubbingRequest struct {
+	*tchttp.BaseRequest
+	
+	// Text for the synthesis. This is required for text to speech. The text cannot exceed 2000 characters in length.
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// Text language. This defaults to zh (Chinese) if left empty.
+	// Supported languages:
+	// zh: Chinese.
+	// en: English.
+	// ja: Japanese.
+	// de: German.
+	// fr: French.
+	// ko: Korean.
+	// ru: Russian.
+	// uk: Ukrainian.
+	// pt: Portuguese.
+	// it: Italian.
+	// es: Spanish.
+	// id: Indonesian.
+	// nl: Dutch.
+	// tr: Turkish.
+	// fil: Filipino.
+	// ms: Malay.
+	// el: Greek.
+	// fi: Finnish.
+	// hr: Croatian.
+	// sk: Slovak.
+	// pl: Polish.
+	// sv: Swedish.
+	// hi: Hindi.
+	// bg: Bulgarian.
+	// ro: Romanian.
+	// ar: Arabic.
+	// cs: Czech.
+	// da: Danish.
+	// ta: Tamil.
+	// hun: Hungarian.
+	// vi: Vietnamese.
+	// no: Norwegian.
+	// yue: Cantonese.
+	// th: Thai.
+	// he: Hebrew.
+	// ca: Catalan.
+	// nn: Nynorsk.
+	// af: Afrikaans.
+	// fa: Persian.
+	// sl: Slovenian.
+	TextLang *string `json:"TextLang,omitnil,omitempty" name:"TextLang"`
+
+	// Voice type ID. This is required for synthesis with a specific voice type. System voice types and voice type cloning are supported.
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// Base64-encoded audio for cloning.
+	AudioData *string `json:"AudioData,omitnil,omitempty" name:"AudioData"`
+
+	// Cloning audio language. The default language is Chinese.
+	// Supported languages are the same as those for TextLang.
+	AudioLang *string `json:"AudioLang,omitnil,omitempty" name:"AudioLang"`
+
+	// Extended parameters in the format of a JSON string.
+	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
+}
+
+func (r *SyncDubbingRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SyncDubbingRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Text")
+	delete(f, "TextLang")
+	delete(f, "VoiceId")
+	delete(f, "AudioData")
+	delete(f, "AudioLang")
+	delete(f, "ExtParam")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SyncDubbingRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SyncDubbingResponseParams struct {
+	// Error code. 0 is returned if the request is successful.
+	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
+
+	// Error message. success is returned if the request is successful.
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// Synthetic audio in Base64 encoding and WAV format.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AudioData *string `json:"AudioData,omitnil,omitempty" name:"AudioData"`
+
+	// Cloned voice type ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type SyncDubbingResponse struct {
+	*tchttp.BaseResponse
+	Response *SyncDubbingResponseParams `json:"Response"`
+}
+
+func (r *SyncDubbingResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SyncDubbingResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type TEHDConfig struct {
@@ -19610,7 +19945,7 @@ type TaskStatData struct {
 }
 
 type TaskStatDataItem struct {
-	// Start time of the time interval where the data resides. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). For example, when the time granularity is day, 2018-12-01T00:00:00+08:00 indicates the interval from December 1, 2018 (inclusive) to December 2, 2018 (exclusive).
+	// The start time of the time interval where the data resides, using the ISO date format. for example, when the time granularity is day, 2018-12-01T00:00:00+08:00 indicates the interval from december 1, 2018 (inclusive) to december 2, 2018 (exclusive).
 	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
 	// Number of tasks.
@@ -21062,6 +21397,23 @@ type VODOutputStorage struct {
 
 	// VOD Pro application Id.
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+}
+
+type VideoComprehensionResultItem struct {
+	// Segment start time (unit: seconds).
+	StartTime *float64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Segment end time (unit: s).
+	EndTime *float64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Video clip title.
+	Title *string `json:"Title,omitnil,omitempty" name:"Title"`
+
+	// Storyboard clip information description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Scene clip keywords.
+	Keywords []*string `json:"Keywords,omitnil,omitempty" name:"Keywords"`
 }
 
 type VideoDenoiseConfig struct {
