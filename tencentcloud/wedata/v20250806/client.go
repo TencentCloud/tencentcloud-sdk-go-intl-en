@@ -1185,6 +1185,76 @@ func (c *Client) CreateTriggerWorkflowWithContext(ctx context.Context, request *
     return
 }
 
+func NewCreateTriggerWorkflowRunRequest() (request *CreateTriggerWorkflowRunRequest) {
+    request = &CreateTriggerWorkflowRunRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "CreateTriggerWorkflowRun")
+    
+    
+    return
+}
+
+func NewCreateTriggerWorkflowRunResponse() (response *CreateTriggerWorkflowRunResponse) {
+    response = &CreateTriggerWorkflowRunResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateTriggerWorkflowRun
+// Run workflow under workflow scheduling model.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_PARAMILLEGALERROR = "InvalidParameterValue.ParamIllegalError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateTriggerWorkflowRun(request *CreateTriggerWorkflowRunRequest) (response *CreateTriggerWorkflowRunResponse, err error) {
+    return c.CreateTriggerWorkflowRunWithContext(context.Background(), request)
+}
+
+// CreateTriggerWorkflowRun
+// Run workflow under workflow scheduling model.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_PARAMILLEGALERROR = "InvalidParameterValue.ParamIllegalError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateTriggerWorkflowRunWithContext(ctx context.Context, request *CreateTriggerWorkflowRunRequest) (response *CreateTriggerWorkflowRunResponse, err error) {
+    if request == nil {
+        request = NewCreateTriggerWorkflowRunRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "wedata", APIVersion, "CreateTriggerWorkflowRun")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateTriggerWorkflowRun require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateTriggerWorkflowRunResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateWorkflowRequest() (request *CreateWorkflowRequest) {
     request = &CreateWorkflowRequest{
         BaseRequest: &tchttp.BaseRequest{},
