@@ -221,72 +221,6 @@ func (c *Client) DeleteDBSBackupSetsWithContext(ctx context.Context, request *De
     return
 }
 
-func NewDescribeBillingEnableRequest() (request *DescribeBillingEnableRequest) {
-    request = &DescribeBillingEnableRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("tdmysql", APIVersion, "DescribeBillingEnable")
-    
-    
-    return
-}
-
-func NewDescribeBillingEnableResponse() (response *DescribeBillingEnableResponse) {
-    response = &DescribeBillingEnableResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeBillingEnable
-// No place to call.
-//
-// 
-//
-// This API is used to query whether billing is enabled.
-//
-// error code that may be returned:
-//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
-//  INTERNALERROR_ROUTERNOTFOUND = "InternalError.RouterNotFound"
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_DELETERUNNINGBACKUPTASKERR = "OperationDenied.DeleteRunningBackupTaskErr"
-//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
-func (c *Client) DescribeBillingEnable(request *DescribeBillingEnableRequest) (response *DescribeBillingEnableResponse, err error) {
-    return c.DescribeBillingEnableWithContext(context.Background(), request)
-}
-
-// DescribeBillingEnable
-// No place to call.
-//
-// 
-//
-// This API is used to query whether billing is enabled.
-//
-// error code that may be returned:
-//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
-//  INTERNALERROR_ROUTERNOTFOUND = "InternalError.RouterNotFound"
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_DELETERUNNINGBACKUPTASKERR = "OperationDenied.DeleteRunningBackupTaskErr"
-//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
-func (c *Client) DescribeBillingEnableWithContext(ctx context.Context, request *DescribeBillingEnableRequest) (response *DescribeBillingEnableResponse, err error) {
-    if request == nil {
-        request = NewDescribeBillingEnableRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "DescribeBillingEnable")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeBillingEnable require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeBillingEnableResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeDBParametersRequest() (request *DescribeDBParametersRequest) {
     request = &DescribeDBParametersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -589,64 +523,6 @@ func (c *Client) DescribeDatabaseObjectsWithContext(ctx context.Context, request
     return
 }
 
-func NewDescribeDatabaseTableRequest() (request *DescribeDatabaseTableRequest) {
-    request = &DescribeDatabaseTableRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("tdmysql", APIVersion, "DescribeDatabaseTable")
-    
-    
-    return
-}
-
-func NewDescribeDatabaseTableResponse() (response *DescribeDatabaseTableResponse) {
-    response = &DescribeDatabaseTableResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeDatabaseTable
-// Redundant API, no API calls.
-//
-// 
-//
-// This API is used to query table information of a cloud database instance.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_QUERYDBERROR = "FailedOperation.QueryDBError"
-func (c *Client) DescribeDatabaseTable(request *DescribeDatabaseTableRequest) (response *DescribeDatabaseTableResponse, err error) {
-    return c.DescribeDatabaseTableWithContext(context.Background(), request)
-}
-
-// DescribeDatabaseTable
-// Redundant API, no API calls.
-//
-// 
-//
-// This API is used to query table information of a cloud database instance.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_QUERYDBERROR = "FailedOperation.QueryDBError"
-func (c *Client) DescribeDatabaseTableWithContext(ctx context.Context, request *DescribeDatabaseTableRequest) (response *DescribeDatabaseTableResponse, err error) {
-    if request == nil {
-        request = NewDescribeDatabaseTableRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "DescribeDatabaseTable")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeDatabaseTable require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeDatabaseTableResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeFlowRequest() (request *DescribeFlowRequest) {
     request = &DescribeFlowRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -871,64 +747,6 @@ func (c *Client) ModifyAutoRenewFlagWithContext(ctx context.Context, request *Mo
     request.SetContext(ctx)
     
     response = NewModifyAutoRenewFlagResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewModifyBinlogStatusRequest() (request *ModifyBinlogStatusRequest) {
-    request = &ModifyBinlogStatusRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("tdmysql", APIVersion, "ModifyBinlogStatus")
-    
-    
-    return
-}
-
-func NewModifyBinlogStatusResponse() (response *ModifyBinlogStatusResponse) {
-    response = &ModifyBinlogStatusResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// ModifyBinlogStatus
-// This API is used to entirely overwrite the API feature of ModifyInstanceCdc.
-//
-// 
-//
-// Modify the binlog status.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_CHECKSPECERROR = "InvalidParameterValue.CheckSpecError"
-func (c *Client) ModifyBinlogStatus(request *ModifyBinlogStatusRequest) (response *ModifyBinlogStatusResponse, err error) {
-    return c.ModifyBinlogStatusWithContext(context.Background(), request)
-}
-
-// ModifyBinlogStatus
-// This API is used to entirely overwrite the API feature of ModifyInstanceCdc.
-//
-// 
-//
-// Modify the binlog status.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_CHECKSPECERROR = "InvalidParameterValue.CheckSpecError"
-func (c *Client) ModifyBinlogStatusWithContext(ctx context.Context, request *ModifyBinlogStatusRequest) (response *ModifyBinlogStatusResponse, err error) {
-    if request == nil {
-        request = NewModifyBinlogStatusRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "ModifyBinlogStatus")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ModifyBinlogStatus require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewModifyBinlogStatusResponse()
     err = c.Send(request, response)
     return
 }

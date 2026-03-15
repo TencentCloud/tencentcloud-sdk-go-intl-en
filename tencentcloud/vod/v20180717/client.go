@@ -707,6 +707,62 @@ func (c *Client) CreateAdaptiveDynamicStreamingTemplateWithContext(ctx context.C
     return
 }
 
+func NewCreateAigcApiTokenRequest() (request *CreateAigcApiTokenRequest) {
+    request = &CreateAigcApiTokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateAigcApiToken")
+    
+    
+    return
+}
+
+func NewCreateAigcApiTokenResponse() (response *CreateAigcApiTokenResponse) {
+    response = &CreateAigcApiTokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAigcApiToken
+// This API is used to create a Token for invoking AIGC API. After creation, there is a delay in data sync. It becomes queryable or deletable after about 30 seconds.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) CreateAigcApiToken(request *CreateAigcApiTokenRequest) (response *CreateAigcApiTokenResponse, err error) {
+    return c.CreateAigcApiTokenWithContext(context.Background(), request)
+}
+
+// CreateAigcApiToken
+// This API is used to create a Token for invoking AIGC API. After creation, there is a delay in data sync. It becomes queryable or deletable after about 30 seconds.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) CreateAigcApiTokenWithContext(ctx context.Context, request *CreateAigcApiTokenRequest) (response *CreateAigcApiTokenResponse, err error) {
+    if request == nil {
+        request = NewCreateAigcApiTokenRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateAigcApiToken")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAigcApiToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAigcApiTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAigcImageTaskRequest() (request *CreateAigcImageTaskRequest) {
     request = &CreateAigcImageTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2909,6 +2965,60 @@ func (c *Client) DeleteAdaptiveDynamicStreamingTemplateWithContext(ctx context.C
     return
 }
 
+func NewDeleteAigcApiTokenRequest() (request *DeleteAigcApiTokenRequest) {
+    request = &DeleteAigcApiTokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteAigcApiToken")
+    
+    
+    return
+}
+
+func NewDeleteAigcApiTokenResponse() (response *DeleteAigcApiTokenResponse) {
+    response = &DeleteAigcApiTokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteAigcApiToken
+// Delete an AIGC API Token.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) DeleteAigcApiToken(request *DeleteAigcApiTokenRequest) (response *DeleteAigcApiTokenResponse, err error) {
+    return c.DeleteAigcApiTokenWithContext(context.Background(), request)
+}
+
+// DeleteAigcApiToken
+// Delete an AIGC API Token.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) DeleteAigcApiTokenWithContext(ctx context.Context, request *DeleteAigcApiTokenRequest) (response *DeleteAigcApiTokenResponse, err error) {
+    if request == nil {
+        request = NewDeleteAigcApiTokenRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteAigcApiToken")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAigcApiToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteAigcApiTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteAnimatedGraphicsTemplateRequest() (request *DeleteAnimatedGraphicsTemplateRequest) {
     request = &DeleteAnimatedGraphicsTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4433,6 +4543,58 @@ func (c *Client) DescribeAdaptiveDynamicStreamingTemplatesWithContext(ctx contex
     request.SetContext(ctx)
     
     response = NewDescribeAdaptiveDynamicStreamingTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAigcApiTokensRequest() (request *DescribeAigcApiTokensRequest) {
+    request = &DescribeAigcApiTokensRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeAigcApiTokens")
+    
+    
+    return
+}
+
+func NewDescribeAigcApiTokensResponse() (response *DescribeAigcApiTokensResponse) {
+    response = &DescribeAigcApiTokensResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAigcApiTokens
+// Query the AIGC API Token list. There is a delay in data sync after creation or deletion. The latest data is queryable after about 30 seconds.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) DescribeAigcApiTokens(request *DescribeAigcApiTokensRequest) (response *DescribeAigcApiTokensResponse, err error) {
+    return c.DescribeAigcApiTokensWithContext(context.Background(), request)
+}
+
+// DescribeAigcApiTokens
+// Query the AIGC API Token list. There is a delay in data sync after creation or deletion. The latest data is queryable after about 30 seconds.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) DescribeAigcApiTokensWithContext(ctx context.Context, request *DescribeAigcApiTokensRequest) (response *DescribeAigcApiTokensResponse, err error) {
+    if request == nil {
+        request = NewDescribeAigcApiTokensRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeAigcApiTokens")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAigcApiTokens require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAigcApiTokensResponse()
     err = c.Send(request, response)
     return
 }
