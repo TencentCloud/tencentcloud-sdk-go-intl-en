@@ -24,7 +24,7 @@ type ActionSummaryOverviewItem struct {
 	// Transaction type code
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-	// Transaction type, which can be monthly subscription purchase, monthly subscription renewal, or pay-as-you-go deduction.
+	// Transaction type, which can be yearly/monthly subscription purchase, monthly subscription renewal, or pay-as-you-go deduction.
 	ActionTypeName *string `json:"ActionTypeName,omitnil,omitempty" name:"ActionTypeName"`
 
 	// Cost ratio, to two decimal points
@@ -33,16 +33,16 @@ type ActionSummaryOverviewItem struct {
 	// Total amount after discount
 	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
 
-	// Cash credit: The amount paid from the user’s cash account
+	// Cash credit: The amount paid from the user's cash account
 	CashPayAmount *string `json:"CashPayAmount,omitnil,omitempty" name:"CashPayAmount"`
 
-	// Free credit: The amount paid with the user’s free credit
+	// Free credit: The amount paid with the user's free credit
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
 
 	// Voucher payment: The voucher deduction amount
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
 
-	// Commission credit: The amount paid with the user’s commission credit. Note: This field may return null, indicating that no valid values can be obtained.
+	// Commission credit: The amount paid with the user's commission credit. Note: This field may return null, indicating that no valid values can be obtained.
 	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
 
 	// Billing month, e.g. `2019-08`
@@ -2673,17 +2673,17 @@ type DescribeBillDetailForOrganizationRequestParams struct {
 	// Valid values: `1` (required), `0` (not required).
 	NeedRecordNum *int64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
 
-	// Billing mode, which can be `prePay` (monthly subscription) or `postPay` (pay-as-you-go).
+	// Billing mode, which can be `prePay` (yearly/monthly subscription) or `postPay` (pay-as-you-go).
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
 	// ID of the instance to be queried.
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
 	// Transaction type. This parameter needs to be input using the `ActionTypeName` value. Valid values:
-	// Monthly subscription purchase
-	// Monthly subscription renewal
-	// Monthly subscription upgrade/downgrade
-	// Monthly subscription refund 
+	// Yearly/monthly subscription purchase
+	// Yearly/monthly subscription renewal
+	// Yearly/monthly subscription upgrade/downgrade
+	// Yearly/monthly subscription refund 
 	// Pay-as-you-go deduction 
 	// Offline project deduction 
 	// Offline product deduction 
@@ -2699,13 +2699,13 @@ type DescribeBillDetailForOrganizationRequestParams struct {
 	// Offer compensation 
 	// Pay-as-you-go resource migration in 
 	// Pay-as-you-go resource migration out 
-	// Monthly subscription resource migration in 
-	// Monthly subscription resource migration out 
+	// Yearly/monthly subscription resource migration in 
+	// Yearly/monthly subscription resource migration out 
 	// Prepaid 
 	// Hourly 
 	// RI refund 
 	// Pay-as-you-go reversal 
-	// Monthly subscription to pay-as-you-go 
+	// Yearly/monthly subscription to pay-as-you-go 
 	// Minimum spend deduction 
 	// Hourly savings plan fee
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
@@ -2746,17 +2746,17 @@ type DescribeBillDetailForOrganizationRequest struct {
 	// Valid values: `1` (required), `0` (not required).
 	NeedRecordNum *int64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
 
-	// Billing mode, which can be `prePay` (monthly subscription) or `postPay` (pay-as-you-go).
+	// Billing mode, which can be `prePay` (yearly/monthly subscription) or `postPay` (pay-as-you-go).
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
 	// ID of the instance to be queried.
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
 	// Transaction type. This parameter needs to be input using the `ActionTypeName` value. Valid values:
-	// Monthly subscription purchase
-	// Monthly subscription renewal
-	// Monthly subscription upgrade/downgrade
-	// Monthly subscription refund 
+	// Yearly/monthly subscription purchase
+	// Yearly/monthly subscription renewal
+	// Yearly/monthly subscription upgrade/downgrade
+	// Yearly/monthly subscription refund 
 	// Pay-as-you-go deduction 
 	// Offline project deduction 
 	// Offline product deduction 
@@ -2772,13 +2772,13 @@ type DescribeBillDetailForOrganizationRequest struct {
 	// Offer compensation 
 	// Pay-as-you-go resource migration in 
 	// Pay-as-you-go resource migration out 
-	// Monthly subscription resource migration in 
-	// Monthly subscription resource migration out 
+	// Yearly/monthly subscription resource migration in 
+	// Yearly/monthly subscription resource migration out 
 	// Prepaid 
 	// Hourly 
 	// RI refund 
 	// Pay-as-you-go reversal 
-	// Monthly subscription to pay-as-you-go 
+	// Yearly/monthly subscription to pay-as-you-go 
 	// Minimum spend deduction 
 	// Hourly savings plan fee
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
@@ -2909,12 +2909,12 @@ type DescribeBillDetailRequestParams struct {
 
 	// Hourly settlement
 	// Daily settlement
-	// Monthly settlement
+	// Yearly/monthly subscription
 	// Spot
 	// New monthly subscription
-	// Monthly subscription renewal
-	// Monthly subscription specification adjustment
-	// Monthly subscription refund
+	// Yearly/monthly subscription renewal
+	// Yearly/monthly subscription specification adjustment
+	// Yearly/monthly subscription refund
 	// Adjustment - deduction
 	// Adjustment - refund
 	// Hourly RI fee
@@ -2986,12 +2986,12 @@ type DescribeBillDetailRequest struct {
 
 	// Hourly settlement
 	// Daily settlement
-	// Monthly settlement
+	// Yearly/monthly subscription
 	// Spot
 	// New monthly subscription
-	// Monthly subscription renewal
-	// Monthly subscription specification adjustment
-	// Monthly subscription refund
+	// Yearly/monthly subscription renewal
+	// Yearly/monthly subscription specification adjustment
+	// Yearly/monthly subscription refund
 	// Adjustment - deduction
 	// Adjustment - refund
 	// Hourly RI fee
@@ -3180,6 +3180,8 @@ type DescribeBillResourceSummaryForOrganizationRequestParams struct {
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
 	// Cycle type, which can be `byUsedTime` (by billing cycle) or `byPayTime` (by deduction time). This value must be the same as the billing period type in Billing Center for that particular month. You can check your billing cycle at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page.
+	//
+	// Deprecated: PeriodType is deprecated.
 	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
 
 	// Indicates whether the total number of records is required, used for pagination.
@@ -3187,10 +3189,10 @@ type DescribeBillResourceSummaryForOrganizationRequestParams struct {
 	NeedRecordNum *int64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
 
 	// Transaction type. This parameter needs to be input using the `ActionTypeName` value. Valid values:
-	// Monthly subscription purchase
-	// Monthly subscription renewal
-	// Monthly subscription upgrade/downgrade
-	// Monthly subscription refund 
+	// Yearly/monthly subscription purchase
+	// Yearly/monthly subscription renewal
+	// Yearly/monthly subscription upgrade/downgrade
+	// Yearly/monthly subscription refund 
 	// Pay-as-you-go deduction 
 	// Offline project deduction 
 	// Offline product deduction 
@@ -3206,13 +3208,13 @@ type DescribeBillResourceSummaryForOrganizationRequestParams struct {
 	// Offer compensation 
 	// Pay-as-you-go resource migration in 
 	// Pay-as-you-go resource migration out 
-	// Monthly subscription resource migration in 
-	// Monthly subscription resource migration out 
+	// Yearly/monthly subscription resource migration in 
+	// Yearly/monthly subscription resource migration out 
 	// Prepaid 
 	// Hourly 
 	// RI refund 
 	// Pay-as-you-go reversal 
-	// Monthly subscription to pay-as-you-go 
+	// Yearly/monthly subscription to pay-as-you-go 
 	// Minimum spend deduction 
 	// Hourly savings plan fee
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
@@ -3255,10 +3257,10 @@ type DescribeBillResourceSummaryForOrganizationRequest struct {
 	NeedRecordNum *int64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
 
 	// Transaction type. This parameter needs to be input using the `ActionTypeName` value. Valid values:
-	// Monthly subscription purchase
-	// Monthly subscription renewal
-	// Monthly subscription upgrade/downgrade
-	// Monthly subscription refund 
+	// Yearly/monthly subscription purchase
+	// Yearly/monthly subscription renewal
+	// Yearly/monthly subscription upgrade/downgrade
+	// Yearly/monthly subscription refund 
 	// Pay-as-you-go deduction 
 	// Offline project deduction 
 	// Offline product deduction 
@@ -3274,13 +3276,13 @@ type DescribeBillResourceSummaryForOrganizationRequest struct {
 	// Offer compensation 
 	// Pay-as-you-go resource migration in 
 	// Pay-as-you-go resource migration out 
-	// Monthly subscription resource migration in 
-	// Monthly subscription resource migration out 
+	// Yearly/monthly subscription resource migration in 
+	// Yearly/monthly subscription resource migration out 
 	// Prepaid 
 	// Hourly 
 	// RI refund 
 	// Pay-as-you-go reversal 
-	// Monthly subscription to pay-as-you-go 
+	// Yearly/monthly subscription to pay-as-you-go 
 	// Minimum spend deduction 
 	// Hourly savings plan fee
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
@@ -3383,12 +3385,12 @@ type DescribeBillResourceSummaryRequestParams struct {
 
 	// Hourly settlement
 	// Daily settlement
-	// Monthly settlement
+	// Yearly/monthly subscription
 	// Spot
 	// New monthly subscription
-	// Monthly subscription renewal
-	// Monthly subscription specification adjustment
-	// Monthly subscription refund
+	// Yearly/monthly subscription renewal
+	// Yearly/monthly subscription specification adjustment
+	// Yearly/monthly subscription refund
 	// Adjustment - deduction
 	// Adjustment - refund
 	// Hourly RI fee
@@ -3440,12 +3442,12 @@ type DescribeBillResourceSummaryRequest struct {
 
 	// Hourly settlement
 	// Daily settlement
-	// Monthly settlement
+	// Yearly/monthly subscription
 	// Spot
 	// New monthly subscription
-	// Monthly subscription renewal
-	// Monthly subscription specification adjustment
-	// Monthly subscription refund
+	// Yearly/monthly subscription renewal
+	// Yearly/monthly subscription specification adjustment
+	// Yearly/monthly subscription refund
 	// Adjustment - deduction
 	// Adjustment - refund
 	// Hourly RI fee
@@ -4032,6 +4034,12 @@ type DescribeBillSummaryRequestParams struct {
 
 	// Tag key, which is used when `GroupType` is `tag`.
 	TagKey []*string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
+
+
+	OperateUin *string `json:"OperateUin,omitnil,omitempty" name:"OperateUin"`
+
+
+	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
 }
 
 type DescribeBillSummaryRequest struct {
@@ -4045,6 +4053,10 @@ type DescribeBillSummaryRequest struct {
 
 	// Tag key, which is used when `GroupType` is `tag`.
 	TagKey []*string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
+
+	OperateUin *string `json:"OperateUin,omitnil,omitempty" name:"OperateUin"`
+
+	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
 }
 
 func (r *DescribeBillSummaryRequest) ToJsonString() string {
@@ -4062,6 +4074,8 @@ func (r *DescribeBillSummaryRequest) FromJsonString(s string) error {
 	delete(f, "Month")
 	delete(f, "GroupType")
 	delete(f, "TagKey")
+	delete(f, "OperateUin")
+	delete(f, "PayerUin")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBillSummaryRequest has unknown keys!", "")
 	}
