@@ -991,9 +991,7 @@ type FlightItem struct {
 
 // Predefined struct for user
 type GeneralAccurateOCRRequestParams struct {
-	// Base64-encoded value of image.
-	// The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported.
-	// Either `ImageUrl` or `ImageBase64` of the image must be provided; if both are provided, only `ImageUrl` will be used.
+	// The Base64 value of an image/PDF. the image must be no more than 10M after encoding, with a resolution of 600*800 or higher recommended. supported formats include PNG, JPG, JPEG, BMP, and PDF. either ImageUrl or ImageBase64 must be provided. if both are provided, only ImageUrl will be used.
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
 	// URL address of image. (This field is not supported outside Chinese mainland)
@@ -1001,10 +999,7 @@ type GeneralAccurateOCRRequestParams struct {
 	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
 	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
-	// Whether to return the character information. Default value: `false`
-	IsWords *bool `json:"IsWords,omitnil,omitempty" name:"IsWords"`
-
-	// Whether to slice the input image to enhance the recognition effects for scenarios where the whole image is big, but the size of a single character is small (e.g., test papers). This feature is disabled by default.
+	// Whether to enable original image slicing detection. once enabled, it improves recognition accuracy in scenarios where "the overall image area is large but the single character area is small" (for example: exam paper). default: disabled. note: only supported when ConfigID is configured as OCR.
 	EnableDetectSplit *bool `json:"EnableDetectSplit,omitnil,omitempty" name:"EnableDetectSplit"`
 
 	// Whether to enable PDF recognition. Default value: `false`. If you enable this feature, both images and PDF files can be recognized.
@@ -1012,14 +1007,18 @@ type GeneralAccurateOCRRequestParams struct {
 
 	// Number of a PDF page that needs to be recognized. Currently, only one single page can be recognized. This parameter takes effect only if a PDF file is uploaded and `IsPdf` is set to `true`. Default value: `1`
 	PdfPageNumber *uint64 `json:"PdfPageNumber,omitnil,omitempty" name:"PdfPageNumber"`
+
+	// Text detection switch, default is true. set to false to directly perform single-line text recognition, suitable for image scenarios containing only forward single-line text.
+	EnableDetectText *bool `json:"EnableDetectText,omitnil,omitempty" name:"EnableDetectText"`
+
+	// Configuration ID supports: OCR - general scenario MulOCR - multilingual scenario. default value is OCR.
+	ConfigID *string `json:"ConfigID,omitnil,omitempty" name:"ConfigID"`
 }
 
 type GeneralAccurateOCRRequest struct {
 	*tchttp.BaseRequest
 	
-	// Base64-encoded value of image.
-	// The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported.
-	// Either `ImageUrl` or `ImageBase64` of the image must be provided; if both are provided, only `ImageUrl` will be used.
+	// The Base64 value of an image/PDF. the image must be no more than 10M after encoding, with a resolution of 600*800 or higher recommended. supported formats include PNG, JPG, JPEG, BMP, and PDF. either ImageUrl or ImageBase64 must be provided. if both are provided, only ImageUrl will be used.
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
 	// URL address of image. (This field is not supported outside Chinese mainland)
@@ -1027,10 +1026,7 @@ type GeneralAccurateOCRRequest struct {
 	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
 	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
-	// Whether to return the character information. Default value: `false`
-	IsWords *bool `json:"IsWords,omitnil,omitempty" name:"IsWords"`
-
-	// Whether to slice the input image to enhance the recognition effects for scenarios where the whole image is big, but the size of a single character is small (e.g., test papers). This feature is disabled by default.
+	// Whether to enable original image slicing detection. once enabled, it improves recognition accuracy in scenarios where "the overall image area is large but the single character area is small" (for example: exam paper). default: disabled. note: only supported when ConfigID is configured as OCR.
 	EnableDetectSplit *bool `json:"EnableDetectSplit,omitnil,omitempty" name:"EnableDetectSplit"`
 
 	// Whether to enable PDF recognition. Default value: `false`. If you enable this feature, both images and PDF files can be recognized.
@@ -1038,6 +1034,12 @@ type GeneralAccurateOCRRequest struct {
 
 	// Number of a PDF page that needs to be recognized. Currently, only one single page can be recognized. This parameter takes effect only if a PDF file is uploaded and `IsPdf` is set to `true`. Default value: `1`
 	PdfPageNumber *uint64 `json:"PdfPageNumber,omitnil,omitempty" name:"PdfPageNumber"`
+
+	// Text detection switch, default is true. set to false to directly perform single-line text recognition, suitable for image scenarios containing only forward single-line text.
+	EnableDetectText *bool `json:"EnableDetectText,omitnil,omitempty" name:"EnableDetectText"`
+
+	// Configuration ID supports: OCR - general scenario MulOCR - multilingual scenario. default value is OCR.
+	ConfigID *string `json:"ConfigID,omitnil,omitempty" name:"ConfigID"`
 }
 
 func (r *GeneralAccurateOCRRequest) ToJsonString() string {
@@ -1054,10 +1056,11 @@ func (r *GeneralAccurateOCRRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ImageBase64")
 	delete(f, "ImageUrl")
-	delete(f, "IsWords")
 	delete(f, "EnableDetectSplit")
 	delete(f, "IsPdf")
 	delete(f, "PdfPageNumber")
+	delete(f, "EnableDetectText")
+	delete(f, "ConfigID")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GeneralAccurateOCRRequest has unknown keys!", "")
 	}
@@ -1070,9 +1073,14 @@ type GeneralAccurateOCRResponseParams struct {
 	TextDetections []*TextDetection `json:"TextDetections,omitnil,omitempty" name:"TextDetections"`
 
 	// Image rotation angle in degrees. 0°: The horizontal direction of the text on the image; a positive value: rotate clockwise; a negative value: rotate counterclockwise.
+	//
+	// Deprecated: Angel is deprecated.
 	Angel *float64 `json:"Angel,omitnil,omitempty" name:"Angel"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// Image rotation angle (angle system). the text's horizontal direction is 0°. clockwise is positive, counterclockwise is negative. click to view <a href="https://www.tencentcloud.com/document/product/866/45139?from_cn_redirect=1">how to correct tilt text</a>.
+	Angle *float64 `json:"Angle,omitnil,omitempty" name:"Angle"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 

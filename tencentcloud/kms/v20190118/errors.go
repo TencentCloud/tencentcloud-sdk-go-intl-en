@@ -182,6 +182,9 @@ const (
 	// Incorrect CMK type. Only `External` CMKs are supported.
 	UNSUPPORTEDOPERATION_NOTEXTERNALCMK = "UnsupportedOperation.NotExternalCmk"
 
+	// Unsupported operations for user roles.
+	UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+
 	// You can only update the CMKs created by you.
 	UNSUPPORTEDOPERATION_NOTUSERCREATEDCMK = "UnsupportedOperation.NotUserCreatedCmk"
 

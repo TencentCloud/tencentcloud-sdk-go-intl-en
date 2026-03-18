@@ -32,6 +32,9 @@ type AlgorithmInfo struct {
 type ArchiveKeyRequestParams struct {
 	// Unique CMK ID
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type ArchiveKeyRequest struct {
@@ -39,6 +42,9 @@ type ArchiveKeyRequest struct {
 	
 	// Unique CMK ID
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *ArchiveKeyRequest) ToJsonString() string {
@@ -54,6 +60,7 @@ func (r *ArchiveKeyRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "KeyId")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ArchiveKeyRequest has unknown keys!", "")
 	}
@@ -295,6 +302,9 @@ func (r *BindCloudResourceResponse) FromJsonString(s string) error {
 type CancelDataKeyDeletionRequestParams struct {
 	// Unique id of a data key.
 	DataKeyId *string `json:"DataKeyId,omitnil,omitempty" name:"DataKeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type CancelDataKeyDeletionRequest struct {
@@ -302,6 +312,9 @@ type CancelDataKeyDeletionRequest struct {
 	
 	// Unique id of a data key.
 	DataKeyId *string `json:"DataKeyId,omitnil,omitempty" name:"DataKeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *CancelDataKeyDeletionRequest) ToJsonString() string {
@@ -317,6 +330,7 @@ func (r *CancelDataKeyDeletionRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "DataKeyId")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CancelDataKeyDeletionRequest has unknown keys!", "")
 	}
@@ -352,6 +366,9 @@ func (r *CancelDataKeyDeletionResponse) FromJsonString(s string) error {
 type CancelKeyArchiveRequestParams struct {
 	// Unique CMK ID
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type CancelKeyArchiveRequest struct {
@@ -359,6 +376,9 @@ type CancelKeyArchiveRequest struct {
 	
 	// Unique CMK ID
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *CancelKeyArchiveRequest) ToJsonString() string {
@@ -374,6 +394,7 @@ func (r *CancelKeyArchiveRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "KeyId")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CancelKeyArchiveRequest has unknown keys!", "")
 	}
@@ -406,6 +427,9 @@ func (r *CancelKeyArchiveResponse) FromJsonString(s string) error {
 type CancelKeyDeletionRequestParams struct {
 	// Unique ID of the CMK for which to cancel schedule deletion
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type CancelKeyDeletionRequest struct {
@@ -413,6 +437,9 @@ type CancelKeyDeletionRequest struct {
 	
 	// Unique ID of the CMK for which to cancel schedule deletion
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *CancelKeyDeletionRequest) ToJsonString() string {
@@ -428,6 +455,7 @@ func (r *CancelKeyDeletionRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "KeyId")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CancelKeyDeletionRequest has unknown keys!", "")
 	}
@@ -733,6 +761,15 @@ type DataKeyMetadata struct {
 
 	// Synchronous original cluster. if empty, it is a public cloud public cluster.
 	SourceHsmClusterId *string `json:"SourceHsmClusterId,omitnil,omitempty" name:"SourceHsmClusterId"`
+
+	// Member account appId.
+	AccountAppId *uint64 `json:"AccountAppId,omitnil,omitempty" name:"AccountAppId"`
+
+	// Member account UIN
+	AccountUin *uint64 `json:"AccountUin,omitnil,omitempty" name:"AccountUin"`
+
+	// Member account name.
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
 }
 
 // Predefined struct for user
@@ -929,6 +966,9 @@ func (r *DeleteWhiteBoxKeyResponse) FromJsonString(s string) error {
 type DescribeDataKeyRequestParams struct {
 	// Data key globally unique id.
 	DataKeyId *string `json:"DataKeyId,omitnil,omitempty" name:"DataKeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type DescribeDataKeyRequest struct {
@@ -936,6 +976,9 @@ type DescribeDataKeyRequest struct {
 	
 	// Data key globally unique id.
 	DataKeyId *string `json:"DataKeyId,omitnil,omitempty" name:"DataKeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *DescribeDataKeyRequest) ToJsonString() string {
@@ -951,6 +994,7 @@ func (r *DescribeDataKeyRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "DataKeyId")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataKeyRequest has unknown keys!", "")
 	}
@@ -986,6 +1030,9 @@ func (r *DescribeDataKeyResponse) FromJsonString(s string) error {
 type DescribeDataKeysRequestParams struct {
 	// Specifies the ID list of datakeys to query. supports up to 100 DataKey ids in a batch query.
 	DataKeyIds []*string `json:"DataKeyIds,omitnil,omitempty" name:"DataKeyIds"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type DescribeDataKeysRequest struct {
@@ -993,6 +1040,9 @@ type DescribeDataKeysRequest struct {
 	
 	// Specifies the ID list of datakeys to query. supports up to 100 DataKey ids in a batch query.
 	DataKeyIds []*string `json:"DataKeyIds,omitnil,omitempty" name:"DataKeyIds"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *DescribeDataKeysRequest) ToJsonString() string {
@@ -1008,6 +1058,7 @@ func (r *DescribeDataKeysRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "DataKeyIds")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataKeysRequest has unknown keys!", "")
 	}
@@ -1043,6 +1094,9 @@ func (r *DescribeDataKeysResponse) FromJsonString(s string) error {
 type DescribeKeyRequestParams struct {
 	// Globally unique CMK ID
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type DescribeKeyRequest struct {
@@ -1050,6 +1104,9 @@ type DescribeKeyRequest struct {
 	
 	// Globally unique CMK ID
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *DescribeKeyRequest) ToJsonString() string {
@@ -1065,6 +1122,7 @@ func (r *DescribeKeyRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "KeyId")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeKeyRequest has unknown keys!", "")
 	}
@@ -1100,6 +1158,9 @@ func (r *DescribeKeyResponse) FromJsonString(s string) error {
 type DescribeKeysRequestParams struct {
 	// List of IDs of the CMKs to be queried in batches. Up to 100 `KeyId` values are supported in one query.
 	KeyIds []*string `json:"KeyIds,omitnil,omitempty" name:"KeyIds"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type DescribeKeysRequest struct {
@@ -1107,6 +1168,9 @@ type DescribeKeysRequest struct {
 	
 	// List of IDs of the CMKs to be queried in batches. Up to 100 `KeyId` values are supported in one query.
 	KeyIds []*string `json:"KeyIds,omitnil,omitempty" name:"KeyIds"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *DescribeKeysRequest) ToJsonString() string {
@@ -1122,6 +1186,7 @@ func (r *DescribeKeysRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "KeyIds")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeKeysRequest has unknown keys!", "")
 	}
@@ -1479,6 +1544,9 @@ type DeviceFingerprint struct {
 type DisableDataKeyRequestParams struct {
 	// Specifies the unique identifier of the data key.
 	DataKeyId *string `json:"DataKeyId,omitnil,omitempty" name:"DataKeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type DisableDataKeyRequest struct {
@@ -1486,6 +1554,9 @@ type DisableDataKeyRequest struct {
 	
 	// Specifies the unique identifier of the data key.
 	DataKeyId *string `json:"DataKeyId,omitnil,omitempty" name:"DataKeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *DisableDataKeyRequest) ToJsonString() string {
@@ -1501,6 +1572,7 @@ func (r *DisableDataKeyRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "DataKeyId")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisableDataKeyRequest has unknown keys!", "")
 	}
@@ -1533,6 +1605,9 @@ func (r *DisableDataKeyResponse) FromJsonString(s string) error {
 type DisableDataKeysRequestParams struct {
 	// Specifies the Id list of datakeys to be bulk disabled. supports a maximum of 100 data keys.
 	DataKeyIds []*string `json:"DataKeyIds,omitnil,omitempty" name:"DataKeyIds"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type DisableDataKeysRequest struct {
@@ -1540,6 +1615,9 @@ type DisableDataKeysRequest struct {
 	
 	// Specifies the Id list of datakeys to be bulk disabled. supports a maximum of 100 data keys.
 	DataKeyIds []*string `json:"DataKeyIds,omitnil,omitempty" name:"DataKeyIds"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *DisableDataKeysRequest) ToJsonString() string {
@@ -1555,6 +1633,7 @@ func (r *DisableDataKeysRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "DataKeyIds")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisableDataKeysRequest has unknown keys!", "")
 	}
@@ -1587,6 +1666,9 @@ func (r *DisableDataKeysResponse) FromJsonString(s string) error {
 type DisableKeyRequestParams struct {
 	// Unique CMK ID
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type DisableKeyRequest struct {
@@ -1594,6 +1676,9 @@ type DisableKeyRequest struct {
 	
 	// Unique CMK ID
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *DisableKeyRequest) ToJsonString() string {
@@ -1609,6 +1694,7 @@ func (r *DisableKeyRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "KeyId")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisableKeyRequest has unknown keys!", "")
 	}
@@ -1641,6 +1727,9 @@ func (r *DisableKeyResponse) FromJsonString(s string) error {
 type DisableKeyRotationRequestParams struct {
 	// Unique CMK ID
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type DisableKeyRotationRequest struct {
@@ -1648,6 +1737,9 @@ type DisableKeyRotationRequest struct {
 	
 	// Unique CMK ID
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *DisableKeyRotationRequest) ToJsonString() string {
@@ -1663,6 +1755,7 @@ func (r *DisableKeyRotationRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "KeyId")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisableKeyRotationRequest has unknown keys!", "")
 	}
@@ -1695,6 +1788,9 @@ func (r *DisableKeyRotationResponse) FromJsonString(s string) error {
 type DisableKeysRequestParams struct {
 	// List of IDs of the CMKs to be disabled in batches. Up to 100 CMKs are supported at a time
 	KeyIds []*string `json:"KeyIds,omitnil,omitempty" name:"KeyIds"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type DisableKeysRequest struct {
@@ -1702,6 +1798,9 @@ type DisableKeysRequest struct {
 	
 	// List of IDs of the CMKs to be disabled in batches. Up to 100 CMKs are supported at a time
 	KeyIds []*string `json:"KeyIds,omitnil,omitempty" name:"KeyIds"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *DisableKeysRequest) ToJsonString() string {
@@ -1717,6 +1816,7 @@ func (r *DisableKeysRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "KeyIds")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisableKeysRequest has unknown keys!", "")
 	}
@@ -1857,6 +1957,9 @@ func (r *DisableWhiteBoxKeysResponse) FromJsonString(s string) error {
 type EnableDataKeyRequestParams struct {
 	// Unique id of a data key.
 	DataKeyId *string `json:"DataKeyId,omitnil,omitempty" name:"DataKeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type EnableDataKeyRequest struct {
@@ -1864,6 +1967,9 @@ type EnableDataKeyRequest struct {
 	
 	// Unique id of a data key.
 	DataKeyId *string `json:"DataKeyId,omitnil,omitempty" name:"DataKeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *EnableDataKeyRequest) ToJsonString() string {
@@ -1879,6 +1985,7 @@ func (r *EnableDataKeyRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "DataKeyId")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableDataKeyRequest has unknown keys!", "")
 	}
@@ -1911,6 +2018,9 @@ func (r *EnableDataKeyResponse) FromJsonString(s string) error {
 type EnableDataKeysRequestParams struct {
 	// The Id list of datakeys that need to be batch enabled supports a maximum of 100 data keys.
 	DataKeyIds []*string `json:"DataKeyIds,omitnil,omitempty" name:"DataKeyIds"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type EnableDataKeysRequest struct {
@@ -1918,6 +2028,9 @@ type EnableDataKeysRequest struct {
 	
 	// The Id list of datakeys that need to be batch enabled supports a maximum of 100 data keys.
 	DataKeyIds []*string `json:"DataKeyIds,omitnil,omitempty" name:"DataKeyIds"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *EnableDataKeysRequest) ToJsonString() string {
@@ -1933,6 +2046,7 @@ func (r *EnableDataKeysRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "DataKeyIds")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableDataKeysRequest has unknown keys!", "")
 	}
@@ -1965,6 +2079,9 @@ func (r *EnableDataKeysResponse) FromJsonString(s string) error {
 type EnableKeyRequestParams struct {
 	// Unique CMK ID
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type EnableKeyRequest struct {
@@ -1972,6 +2089,9 @@ type EnableKeyRequest struct {
 	
 	// Unique CMK ID
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *EnableKeyRequest) ToJsonString() string {
@@ -1987,6 +2107,7 @@ func (r *EnableKeyRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "KeyId")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableKeyRequest has unknown keys!", "")
 	}
@@ -2022,6 +2143,9 @@ type EnableKeyRotationRequestParams struct {
 
 	// The interval between each key rotation in days. Value range: 7 - 365 (default).
 	RotateDays *uint64 `json:"RotateDays,omitnil,omitempty" name:"RotateDays"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type EnableKeyRotationRequest struct {
@@ -2032,6 +2156,9 @@ type EnableKeyRotationRequest struct {
 
 	// The interval between each key rotation in days. Value range: 7 - 365 (default).
 	RotateDays *uint64 `json:"RotateDays,omitnil,omitempty" name:"RotateDays"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *EnableKeyRotationRequest) ToJsonString() string {
@@ -2048,6 +2175,7 @@ func (r *EnableKeyRotationRequest) FromJsonString(s string) error {
 	}
 	delete(f, "KeyId")
 	delete(f, "RotateDays")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableKeyRotationRequest has unknown keys!", "")
 	}
@@ -2080,6 +2208,9 @@ func (r *EnableKeyRotationResponse) FromJsonString(s string) error {
 type EnableKeysRequestParams struct {
 	// List of IDs of the CMKs to be enabled in batches. Up to 100 CMKs are supported at a time
 	KeyIds []*string `json:"KeyIds,omitnil,omitempty" name:"KeyIds"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type EnableKeysRequest struct {
@@ -2087,6 +2218,9 @@ type EnableKeysRequest struct {
 	
 	// List of IDs of the CMKs to be enabled in batches. Up to 100 CMKs are supported at a time
 	KeyIds []*string `json:"KeyIds,omitnil,omitempty" name:"KeyIds"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *EnableKeysRequest) ToJsonString() string {
@@ -2102,6 +2236,7 @@ func (r *EnableKeysRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "KeyIds")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableKeysRequest has unknown keys!", "")
 	}
@@ -2598,6 +2733,9 @@ func (r *GenerateRandomResponse) FromJsonString(s string) error {
 type GetDataKeyCiphertextBlobRequestParams struct {
 	// Unique id of a data key.
 	DataKeyId *string `json:"DataKeyId,omitnil,omitempty" name:"DataKeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type GetDataKeyCiphertextBlobRequest struct {
@@ -2605,6 +2743,9 @@ type GetDataKeyCiphertextBlobRequest struct {
 	
 	// Unique id of a data key.
 	DataKeyId *string `json:"DataKeyId,omitnil,omitempty" name:"DataKeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *GetDataKeyCiphertextBlobRequest) ToJsonString() string {
@@ -2620,6 +2761,7 @@ func (r *GetDataKeyCiphertextBlobRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "DataKeyId")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetDataKeyCiphertextBlobRequest has unknown keys!", "")
 	}
@@ -2726,6 +2868,9 @@ func (r *GetDataKeyPlaintextResponse) FromJsonString(s string) error {
 type GetKeyRotationStatusRequestParams struct {
 	// Unique CMK ID
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type GetKeyRotationStatusRequest struct {
@@ -2733,6 +2878,9 @@ type GetKeyRotationStatusRequest struct {
 	
 	// Unique CMK ID
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *GetKeyRotationStatusRequest) ToJsonString() string {
@@ -2748,6 +2896,7 @@ func (r *GetKeyRotationStatusRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "KeyId")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetKeyRotationStatusRequest has unknown keys!", "")
 	}
@@ -3346,6 +3495,15 @@ type KeyMetadata struct {
 
 	// Synchronous original cluster. if empty, it is a public cloud public cluster.
 	SourceHsmClusterId *string `json:"SourceHsmClusterId,omitnil,omitempty" name:"SourceHsmClusterId"`
+
+	// Member account appId.
+	AccountAppId *uint64 `json:"AccountAppId,omitnil,omitempty" name:"AccountAppId"`
+
+	// Member account UIN
+	AccountUin *uint64 `json:"AccountUin,omitnil,omitempty" name:"AccountUin"`
+
+	// Member account name.
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
 }
 
 // Predefined struct for user
@@ -3442,6 +3600,9 @@ type ListDataKeyDetailRequestParams struct {
 
 	// Tag filtering conditions.
 	TagFilters []*TagFilter `json:"TagFilters,omitnil,omitempty" name:"TagFilters"`
+
+	// Array of member account information.
+	MemberAccounts []*MemberAccount `json:"MemberAccounts,omitnil,omitempty" name:"MemberAccounts"`
 }
 
 type ListDataKeyDetailRequest struct {
@@ -3479,6 +3640,9 @@ type ListDataKeyDetailRequest struct {
 
 	// Tag filtering conditions.
 	TagFilters []*TagFilter `json:"TagFilters,omitnil,omitempty" name:"TagFilters"`
+
+	// Array of member account information.
+	MemberAccounts []*MemberAccount `json:"MemberAccounts,omitnil,omitempty" name:"MemberAccounts"`
 }
 
 func (r *ListDataKeyDetailRequest) ToJsonString() string {
@@ -3504,6 +3668,7 @@ func (r *ListDataKeyDetailRequest) FromJsonString(s string) error {
 	delete(f, "KeyId")
 	delete(f, "DataKeyLen")
 	delete(f, "TagFilters")
+	delete(f, "MemberAccounts")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListDataKeyDetailRequest has unknown keys!", "")
 	}
@@ -3650,6 +3815,9 @@ type ListKeyDetailRequestParams struct {
 
 	// ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
 	HsmClusterId *string `json:"HsmClusterId,omitnil,omitempty" name:"HsmClusterId"`
+
+	// Array of trusted service member account information.
+	MemberAccounts []*MemberAccount `json:"MemberAccounts,omitnil,omitempty" name:"MemberAccounts"`
 }
 
 type ListKeyDetailRequest struct {
@@ -3684,6 +3852,9 @@ type ListKeyDetailRequest struct {
 
 	// ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
 	HsmClusterId *string `json:"HsmClusterId,omitnil,omitempty" name:"HsmClusterId"`
+
+	// Array of trusted service member account information.
+	MemberAccounts []*MemberAccount `json:"MemberAccounts,omitnil,omitempty" name:"MemberAccounts"`
 }
 
 func (r *ListKeyDetailRequest) ToJsonString() string {
@@ -3708,6 +3879,7 @@ func (r *ListKeyDetailRequest) FromJsonString(s string) error {
 	delete(f, "KeyUsage")
 	delete(f, "TagFilters")
 	delete(f, "HsmClusterId")
+	delete(f, "MemberAccounts")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListKeyDetailRequest has unknown keys!", "")
 	}
@@ -3821,6 +3993,14 @@ func (r *ListKeysResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ListKeysResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type MemberAccount struct {
+	// Member account appid.
+	MemberAppId *uint64 `json:"MemberAppId,omitnil,omitempty" name:"MemberAppId"`
+
+	// Member account UIN
+	MemberUin *uint64 `json:"MemberUin,omitnil,omitempty" name:"MemberUin"`
 }
 
 // Predefined struct for user
@@ -4255,6 +4435,9 @@ type ScheduleDataKeyDeletionRequestParams struct {
 
 	// Schedule deletion time range: [7,30].
 	PendingWindowInDays *uint64 `json:"PendingWindowInDays,omitnil,omitempty" name:"PendingWindowInDays"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type ScheduleDataKeyDeletionRequest struct {
@@ -4265,6 +4448,9 @@ type ScheduleDataKeyDeletionRequest struct {
 
 	// Schedule deletion time range: [7,30].
 	PendingWindowInDays *uint64 `json:"PendingWindowInDays,omitnil,omitempty" name:"PendingWindowInDays"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *ScheduleDataKeyDeletionRequest) ToJsonString() string {
@@ -4281,6 +4467,7 @@ func (r *ScheduleDataKeyDeletionRequest) FromJsonString(s string) error {
 	}
 	delete(f, "DataKeyId")
 	delete(f, "PendingWindowInDays")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ScheduleDataKeyDeletionRequest has unknown keys!", "")
 	}
@@ -4322,6 +4509,9 @@ type ScheduleKeyDeletionRequestParams struct {
 
 	// Schedule deletion time range. Value range: [7,30]
 	PendingWindowInDays *uint64 `json:"PendingWindowInDays,omitnil,omitempty" name:"PendingWindowInDays"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type ScheduleKeyDeletionRequest struct {
@@ -4332,6 +4522,9 @@ type ScheduleKeyDeletionRequest struct {
 
 	// Schedule deletion time range. Value range: [7,30]
 	PendingWindowInDays *uint64 `json:"PendingWindowInDays,omitnil,omitempty" name:"PendingWindowInDays"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *ScheduleKeyDeletionRequest) ToJsonString() string {
@@ -4348,6 +4541,7 @@ func (r *ScheduleKeyDeletionRequest) FromJsonString(s string) error {
 	}
 	delete(f, "KeyId")
 	delete(f, "PendingWindowInDays")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ScheduleKeyDeletionRequest has unknown keys!", "")
 	}
@@ -4551,6 +4745,9 @@ type UpdateAliasRequestParams struct {
 
 	// Globally unique CMK ID
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type UpdateAliasRequest struct {
@@ -4561,6 +4758,9 @@ type UpdateAliasRequest struct {
 
 	// Globally unique CMK ID
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *UpdateAliasRequest) ToJsonString() string {
@@ -4577,6 +4777,7 @@ func (r *UpdateAliasRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Alias")
 	delete(f, "KeyId")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateAliasRequest has unknown keys!", "")
 	}
@@ -4612,6 +4813,9 @@ type UpdateDataKeyDescriptionRequestParams struct {
 
 	// Data key description of up to 100 bytes.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type UpdateDataKeyDescriptionRequest struct {
@@ -4622,6 +4826,9 @@ type UpdateDataKeyDescriptionRequest struct {
 
 	// Data key description of up to 100 bytes.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *UpdateDataKeyDescriptionRequest) ToJsonString() string {
@@ -4638,6 +4845,7 @@ func (r *UpdateDataKeyDescriptionRequest) FromJsonString(s string) error {
 	}
 	delete(f, "DataKeyId")
 	delete(f, "Description")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateDataKeyDescriptionRequest has unknown keys!", "")
 	}
@@ -4673,6 +4881,9 @@ type UpdateDataKeyNameRequestParams struct {
 
 	// Name of the data key.
 	DataKeyName *string `json:"DataKeyName,omitnil,omitempty" name:"DataKeyName"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type UpdateDataKeyNameRequest struct {
@@ -4683,6 +4894,9 @@ type UpdateDataKeyNameRequest struct {
 
 	// Name of the data key.
 	DataKeyName *string `json:"DataKeyName,omitnil,omitempty" name:"DataKeyName"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *UpdateDataKeyNameRequest) ToJsonString() string {
@@ -4699,6 +4913,7 @@ func (r *UpdateDataKeyNameRequest) FromJsonString(s string) error {
 	}
 	delete(f, "DataKeyId")
 	delete(f, "DataKeyName")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateDataKeyNameRequest has unknown keys!", "")
 	}
@@ -4734,6 +4949,9 @@ type UpdateKeyDescriptionRequestParams struct {
 
 	// ID of the CMK for which to modify the description
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 type UpdateKeyDescriptionRequest struct {
@@ -4744,6 +4962,9 @@ type UpdateKeyDescriptionRequest struct {
 
 	// ID of the CMK for which to modify the description
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Trusted service member account information. valid at that time when the current account is admin or delegated admin.
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
 }
 
 func (r *UpdateKeyDescriptionRequest) ToJsonString() string {
@@ -4760,6 +4981,7 @@ func (r *UpdateKeyDescriptionRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Description")
 	delete(f, "KeyId")
+	delete(f, "MemberAccount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateKeyDescriptionRequest has unknown keys!", "")
 	}
