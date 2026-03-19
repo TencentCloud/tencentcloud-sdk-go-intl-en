@@ -230,7 +230,7 @@ const (
 	// Invalid parameter value
 	INVALIDPARAMETERVALUE_PARAMETEROUTRANGEERROR = "InvalidParameterValue.ParameterOutRangeError"
 
-	// This operation is not allowed for monthly-subscribed instances.
+	// This operation is not allowed for yearly/monthly subscribed instances.
 	INVALIDPARAMETERVALUE_PREPAYPAYMODEERROR = "InvalidParameterValue.PrePayPayModeError"
 
 	// The `ProjectId` was not found.
@@ -272,6 +272,9 @@ const (
 	// For the cluster in this status, the operation is not allowed.
 	OPERATIONDENIED_CLUSTERSTATUSDENIEDERROR = "OperationDenied.ClusterStatusDeniedError"
 
+	// 
+	OPERATIONDENIED_DISABLENEWSTORAGEMULTIZONEDEPLOYMENTERROR = "OperationDenied.DisableNewStorageMultiZoneDeploymentError"
+
 	// Feature {{1}} is not currently supported.
 	OPERATIONDENIED_FEATURENOTSUPPORTERROR = "OperationDenied.FeatureNotSupportError"
 
@@ -298,6 +301,12 @@ const (
 
 	// The cloned cluster is not within {{1}} days of {{2}}.
 	OPERATIONDENIED_LIMITDAYFORAUDITREPLAYERROR = "OperationDenied.LimitDayForAuditReplayError"
+
+	// 
+	OPERATIONDENIED_NEWSTORAGEONLYSUPPORT80ERROR = "OperationDenied.NewStorageOnlySupport80Error"
+
+	// 
+	OPERATIONDENIED_ONLYNEWSTORAGESUPPORTSTORAGECOMPRESSIONERROR = "OperationDenied.OnlyNewStorageSupportStorageCompressionError"
 
 	// You do not have permission to operate the resource (carry out this operation).
 	OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"

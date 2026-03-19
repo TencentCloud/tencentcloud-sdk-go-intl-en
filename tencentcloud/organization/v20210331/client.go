@@ -136,6 +136,8 @@ func NewAddExternalSAMLIdPCertificateResponse() (response *AddExternalSAMLIdPCer
 // error code that may be returned:
 //  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
 //  FAILEDOPERATION_X509CERTIFICATEALREADYEXIST = "FailedOperation.X509CertificateAlreadyExist"
+//  FAILEDOPERATION_X509CERTIFICATELIMITEXCEEDED = "FailedOperation.X509CertificateLimitExceeded"
+//  FAILEDOPERATION_X509CERTIFICATEMINIMUMREQUIRED = "FailedOperation.X509CertificateMinimumRequired"
 //  FAILEDOPERATION_X509CERTIFICATEPARSINGFAILED = "FailedOperation.X509CertificateParsingFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_X509CERTIFICATEFORMATERROR = "InvalidParameterValue.X509CertificateFormatError"
@@ -149,6 +151,8 @@ func (c *Client) AddExternalSAMLIdPCertificate(request *AddExternalSAMLIdPCertif
 // error code that may be returned:
 //  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
 //  FAILEDOPERATION_X509CERTIFICATEALREADYEXIST = "FailedOperation.X509CertificateAlreadyExist"
+//  FAILEDOPERATION_X509CERTIFICATELIMITEXCEEDED = "FailedOperation.X509CertificateLimitExceeded"
+//  FAILEDOPERATION_X509CERTIFICATEMINIMUMREQUIRED = "FailedOperation.X509CertificateMinimumRequired"
 //  FAILEDOPERATION_X509CERTIFICATEPARSINGFAILED = "FailedOperation.X509CertificateParsingFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_X509CERTIFICATEFORMATERROR = "InvalidParameterValue.X509CertificateFormatError"
@@ -517,6 +521,78 @@ func (c *Client) AddShareUnitMembersWithContext(ctx context.Context, request *Ad
     return
 }
 
+func NewAddShareUnitNodeRequest() (request *AddShareUnitNodeRequest) {
+    request = &AddShareUnitNodeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "AddShareUnitNode")
+    
+    
+    return
+}
+
+func NewAddShareUnitNodeResponse() (response *AddShareUnitNodeResponse) {
+    response = &AddShareUnitNodeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AddShareUnitNode
+// Add a shared unit department.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_MEMBERACCOUNTDEREGISTERPENDING = "FailedOperation.MemberAccountDeregisterPending"
+//  FAILEDOPERATION_SHAREAREANOTEXIST = "FailedOperation.ShareAreaNotExist"
+//  FAILEDOPERATION_SHAREUNITNOTEXIST = "FailedOperation.ShareUnitNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_SHAREUNITNODEOVERLIMIT = "LimitExceeded.ShareUnitNodeOverLimit"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_ORGANIZATIONNODENOTEXIST = "ResourceNotFound.OrganizationNodeNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AddShareUnitNode(request *AddShareUnitNodeRequest) (response *AddShareUnitNodeResponse, err error) {
+    return c.AddShareUnitNodeWithContext(context.Background(), request)
+}
+
+// AddShareUnitNode
+// Add a shared unit department.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_MEMBERACCOUNTDEREGISTERPENDING = "FailedOperation.MemberAccountDeregisterPending"
+//  FAILEDOPERATION_SHAREAREANOTEXIST = "FailedOperation.ShareAreaNotExist"
+//  FAILEDOPERATION_SHAREUNITNOTEXIST = "FailedOperation.ShareUnitNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_SHAREUNITNODEOVERLIMIT = "LimitExceeded.ShareUnitNodeOverLimit"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_ORGANIZATIONNODENOTEXIST = "ResourceNotFound.OrganizationNodeNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AddShareUnitNodeWithContext(ctx context.Context, request *AddShareUnitNodeRequest) (response *AddShareUnitNodeResponse, err error) {
+    if request == nil {
+        request = NewAddShareUnitNodeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "AddShareUnitNode")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddShareUnitNode require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAddShareUnitNodeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAddShareUnitResourcesRequest() (request *AddShareUnitResourcesRequest) {
     request = &AddShareUnitResourcesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -663,6 +739,74 @@ func (c *Client) AddUserToGroupWithContext(ctx context.Context, request *AddUser
     return
 }
 
+func NewAttachPolicyRequest() (request *AttachPolicyRequest) {
+    request = &AttachPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "AttachPolicy")
+    
+    
+    return
+}
+
+func NewAttachPolicyResponse() (response *AttachPolicyResponse) {
+    response = &AttachPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AttachPolicy
+// Bind a policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYISNOTENABLED = "FailedOperation.OrganizationPolicyIsNotEnabled"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ATTACHMENTFULL = "InvalidParameter.AttachmentFull"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNODENOTEXIST = "ResourceNotFound.OrganizationNodeNotExist"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) AttachPolicy(request *AttachPolicyRequest) (response *AttachPolicyResponse, err error) {
+    return c.AttachPolicyWithContext(context.Background(), request)
+}
+
+// AttachPolicy
+// Bind a policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYISNOTENABLED = "FailedOperation.OrganizationPolicyIsNotEnabled"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ATTACHMENTFULL = "InvalidParameter.AttachmentFull"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNODENOTEXIST = "ResourceNotFound.OrganizationNodeNotExist"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) AttachPolicyWithContext(ctx context.Context, request *AttachPolicyRequest) (response *AttachPolicyResponse, err error) {
+    if request == nil {
+        request = NewAttachPolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "AttachPolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AttachPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAttachPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewBindOrganizationMemberAuthAccountRequest() (request *BindOrganizationMemberAuthAccountRequest) {
     request = &BindOrganizationMemberAuthAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -729,6 +873,68 @@ func (c *Client) BindOrganizationMemberAuthAccountWithContext(ctx context.Contex
     return
 }
 
+func NewBindOrganizationPolicySubAccountRequest() (request *BindOrganizationPolicySubAccountRequest) {
+    request = &BindOrganizationPolicySubAccountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "BindOrganizationPolicySubAccount")
+    
+    
+    return
+}
+
+func NewBindOrganizationPolicySubAccountResponse() (response *BindOrganizationPolicySubAccountResponse) {
+    response = &BindOrganizationPolicySubAccountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// BindOrganizationPolicySubAccount
+// This API is used to bind member access authorization policies to the sub-accounts of the organization administrator.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATEPOLICY = "FailedOperation.OperatePolicy"
+//  FAILEDOPERATION_SUBACCOUNTNOTEXIST = "FailedOperation.SubAccountNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_MEMBERPOLICYNOTEXIST = "ResourceNotFound.MemberPolicyNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) BindOrganizationPolicySubAccount(request *BindOrganizationPolicySubAccountRequest) (response *BindOrganizationPolicySubAccountResponse, err error) {
+    return c.BindOrganizationPolicySubAccountWithContext(context.Background(), request)
+}
+
+// BindOrganizationPolicySubAccount
+// This API is used to bind member access authorization policies to the sub-accounts of the organization administrator.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATEPOLICY = "FailedOperation.OperatePolicy"
+//  FAILEDOPERATION_SUBACCOUNTNOTEXIST = "FailedOperation.SubAccountNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_MEMBERPOLICYNOTEXIST = "ResourceNotFound.MemberPolicyNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) BindOrganizationPolicySubAccountWithContext(ctx context.Context, request *BindOrganizationPolicySubAccountRequest) (response *BindOrganizationPolicySubAccountResponse, err error) {
+    if request == nil {
+        request = NewBindOrganizationPolicySubAccountRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "BindOrganizationPolicySubAccount")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BindOrganizationPolicySubAccount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBindOrganizationPolicySubAccountResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCancelOrganizationMemberAuthAccountRequest() (request *CancelOrganizationMemberAuthAccountRequest) {
     request = &CancelOrganizationMemberAuthAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -787,6 +993,66 @@ func (c *Client) CancelOrganizationMemberAuthAccountWithContext(ctx context.Cont
     request.SetContext(ctx)
     
     response = NewCancelOrganizationMemberAuthAccountResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCancelOrganizationPolicySubAccountRequest() (request *CancelOrganizationPolicySubAccountRequest) {
+    request = &CancelOrganizationPolicySubAccountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "CancelOrganizationPolicySubAccount")
+    
+    
+    return
+}
+
+func NewCancelOrganizationPolicySubAccountResponse() (response *CancelOrganizationPolicySubAccountResponse) {
+    response = &CancelOrganizationPolicySubAccountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CancelOrganizationPolicySubAccount
+// This API is used to unbind member access authorization policies from the sub-accounts of the organization administrator.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATEPOLICY = "FailedOperation.OperatePolicy"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_MEMBERPOLICYNOTEXIST = "ResourceNotFound.MemberPolicyNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CancelOrganizationPolicySubAccount(request *CancelOrganizationPolicySubAccountRequest) (response *CancelOrganizationPolicySubAccountResponse, err error) {
+    return c.CancelOrganizationPolicySubAccountWithContext(context.Background(), request)
+}
+
+// CancelOrganizationPolicySubAccount
+// This API is used to unbind member access authorization policies from the sub-accounts of the organization administrator.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATEPOLICY = "FailedOperation.OperatePolicy"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_MEMBERPOLICYNOTEXIST = "ResourceNotFound.MemberPolicyNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CancelOrganizationPolicySubAccountWithContext(ctx context.Context, request *CancelOrganizationPolicySubAccountRequest) (response *CancelOrganizationPolicySubAccountResponse, err error) {
+    if request == nil {
+        request = NewCancelOrganizationPolicySubAccountRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "CancelOrganizationPolicySubAccount")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CancelOrganizationPolicySubAccount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCancelOrganizationPolicySubAccountResponse()
     err = c.Send(request, response)
     return
 }
@@ -1419,6 +1685,128 @@ func (c *Client) CreateOrganizationMembersPolicyWithContext(ctx context.Context,
     return
 }
 
+func NewCreatePolicyRequest() (request *CreatePolicyRequest) {
+    request = &CreatePolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "CreatePolicy")
+    
+    
+    return
+}
+
+func NewCreatePolicyResponse() (response *CreatePolicyResponse) {
+    response = &CreatePolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreatePolicy
+// This API is used to create a special type of policy that can be attached to the enterprise organization Root node, enterprise department nodes, or enterprise member accounts.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYISNOTENABLED = "FailedOperation.OrganizationPolicyIsNotEnabled"
+//  FAILEDOPERATION_POLICYFULL = "FailedOperation.PolicyFull"
+//  FAILEDOPERATION_POLICYNAMEINUSE = "FailedOperation.PolicyNameInUse"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ACTIONERROR = "InvalidParameter.ActionError"
+//  INVALIDPARAMETER_ACTIONMISS = "InvalidParameter.ActionMiss"
+//  INVALIDPARAMETER_ACTIONNOTEXIST = "InvalidParameter.ActionNotExist"
+//  INVALIDPARAMETER_ACTIONSERVICENOTEXIST = "InvalidParameter.ActionServiceNotExist"
+//  INVALIDPARAMETER_CONDITIONCONTENTERROR = "InvalidParameter.ConditionContentError"
+//  INVALIDPARAMETER_CONDITIONERROR = "InvalidParameter.ConditionError"
+//  INVALIDPARAMETER_CONDITIONTYPEERROR = "InvalidParameter.ConditionTypeError"
+//  INVALIDPARAMETER_EFFECTERROR = "InvalidParameter.EffectError"
+//  INVALIDPARAMETER_NOTSUPPORTPRODUCT = "InvalidParameter.NotSupportProduct"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_POLICYDOCUMENTERROR = "InvalidParameter.PolicyDocumentError"
+//  INVALIDPARAMETER_POLICYDOCUMENTLENGTHOVERLIMIT = "InvalidParameter.PolicyDocumentLengthOverLimit"
+//  INVALIDPARAMETER_POLICYKEYDUPLICATED = "InvalidParameter.PolicyKeyDuplicated"
+//  INVALIDPARAMETER_POLICYNAMEERROR = "InvalidParameter.PolicyNameError"
+//  INVALIDPARAMETER_POLICYNAMEEXISTED = "InvalidParameter.PolicyNameExisted"
+//  INVALIDPARAMETER_PRINCIPALERROR = "InvalidParameter.PrincipalError"
+//  INVALIDPARAMETER_PRINCIPALQCSERROR = "InvalidParameter.PrincipalQcsError"
+//  INVALIDPARAMETER_PRINCIPALQCSNOTEXIST = "InvalidParameter.PrincipalQcsNotExist"
+//  INVALIDPARAMETER_PRINCIPALSERVICENOTEXIST = "InvalidParameter.PrincipalServiceNotExist"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
+//  INVALIDPARAMETER_RESOURCECONTENTERROR = "InvalidParameter.ResourceContentError"
+//  INVALIDPARAMETER_RESOURCEERROR = "InvalidParameter.ResourceError"
+//  INVALIDPARAMETER_RESOURCEPROJECTERROR = "InvalidParameter.ResourceProjectError"
+//  INVALIDPARAMETER_RESOURCEQCSERROR = "InvalidParameter.ResourceQcsError"
+//  INVALIDPARAMETER_RESOURCEREGIONERROR = "InvalidParameter.ResourceRegionError"
+//  INVALIDPARAMETER_RESOURCESERVICENOTEXIST = "InvalidParameter.ResourceServiceNotExist"
+//  INVALIDPARAMETER_RESOURCEUINERROR = "InvalidParameter.ResourceUinError"
+//  INVALIDPARAMETER_STATEMENTERROR = "InvalidParameter.StatementError"
+//  INVALIDPARAMETER_UNSUPPORTEDSERVICE = "InvalidParameter.UnsupportedService"
+//  INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"
+//  INVALIDPARAMETERVALUE_POLICYCONTENTINVALID = "InvalidParameterValue.PolicyContentInvalid"
+//  LIMITEXCEEDED_TAGPOLICY = "LimitExceeded.TagPolicy"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreatePolicy(request *CreatePolicyRequest) (response *CreatePolicyResponse, err error) {
+    return c.CreatePolicyWithContext(context.Background(), request)
+}
+
+// CreatePolicy
+// This API is used to create a special type of policy that can be attached to the enterprise organization Root node, enterprise department nodes, or enterprise member accounts.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYISNOTENABLED = "FailedOperation.OrganizationPolicyIsNotEnabled"
+//  FAILEDOPERATION_POLICYFULL = "FailedOperation.PolicyFull"
+//  FAILEDOPERATION_POLICYNAMEINUSE = "FailedOperation.PolicyNameInUse"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ACTIONERROR = "InvalidParameter.ActionError"
+//  INVALIDPARAMETER_ACTIONMISS = "InvalidParameter.ActionMiss"
+//  INVALIDPARAMETER_ACTIONNOTEXIST = "InvalidParameter.ActionNotExist"
+//  INVALIDPARAMETER_ACTIONSERVICENOTEXIST = "InvalidParameter.ActionServiceNotExist"
+//  INVALIDPARAMETER_CONDITIONCONTENTERROR = "InvalidParameter.ConditionContentError"
+//  INVALIDPARAMETER_CONDITIONERROR = "InvalidParameter.ConditionError"
+//  INVALIDPARAMETER_CONDITIONTYPEERROR = "InvalidParameter.ConditionTypeError"
+//  INVALIDPARAMETER_EFFECTERROR = "InvalidParameter.EffectError"
+//  INVALIDPARAMETER_NOTSUPPORTPRODUCT = "InvalidParameter.NotSupportProduct"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_POLICYDOCUMENTERROR = "InvalidParameter.PolicyDocumentError"
+//  INVALIDPARAMETER_POLICYDOCUMENTLENGTHOVERLIMIT = "InvalidParameter.PolicyDocumentLengthOverLimit"
+//  INVALIDPARAMETER_POLICYKEYDUPLICATED = "InvalidParameter.PolicyKeyDuplicated"
+//  INVALIDPARAMETER_POLICYNAMEERROR = "InvalidParameter.PolicyNameError"
+//  INVALIDPARAMETER_POLICYNAMEEXISTED = "InvalidParameter.PolicyNameExisted"
+//  INVALIDPARAMETER_PRINCIPALERROR = "InvalidParameter.PrincipalError"
+//  INVALIDPARAMETER_PRINCIPALQCSERROR = "InvalidParameter.PrincipalQcsError"
+//  INVALIDPARAMETER_PRINCIPALQCSNOTEXIST = "InvalidParameter.PrincipalQcsNotExist"
+//  INVALIDPARAMETER_PRINCIPALSERVICENOTEXIST = "InvalidParameter.PrincipalServiceNotExist"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
+//  INVALIDPARAMETER_RESOURCECONTENTERROR = "InvalidParameter.ResourceContentError"
+//  INVALIDPARAMETER_RESOURCEERROR = "InvalidParameter.ResourceError"
+//  INVALIDPARAMETER_RESOURCEPROJECTERROR = "InvalidParameter.ResourceProjectError"
+//  INVALIDPARAMETER_RESOURCEQCSERROR = "InvalidParameter.ResourceQcsError"
+//  INVALIDPARAMETER_RESOURCEREGIONERROR = "InvalidParameter.ResourceRegionError"
+//  INVALIDPARAMETER_RESOURCESERVICENOTEXIST = "InvalidParameter.ResourceServiceNotExist"
+//  INVALIDPARAMETER_RESOURCEUINERROR = "InvalidParameter.ResourceUinError"
+//  INVALIDPARAMETER_STATEMENTERROR = "InvalidParameter.StatementError"
+//  INVALIDPARAMETER_UNSUPPORTEDSERVICE = "InvalidParameter.UnsupportedService"
+//  INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"
+//  INVALIDPARAMETERVALUE_POLICYCONTENTINVALID = "InvalidParameterValue.PolicyContentInvalid"
+//  LIMITEXCEEDED_TAGPOLICY = "LimitExceeded.TagPolicy"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreatePolicyWithContext(ctx context.Context, request *CreatePolicyRequest) (response *CreatePolicyResponse, err error) {
+    if request == nil {
+        request = NewCreatePolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "CreatePolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreatePolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateRoleAssignmentRequest() (request *CreateRoleAssignmentRequest) {
     request = &CreateRoleAssignmentRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1872,6 +2260,7 @@ func NewDeleteOrganizationResponse() (response *DeleteOrganizationResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_MEMBEREXISTDELEGATEPAYERNOTALLOWDELETE = "FailedOperation.MemberExistDelegatePayerNotAllowDelete"
 //  FAILEDOPERATION_MEMBERISDELEGATEPAYERNOTALLOWDELETE = "FailedOperation.MemberIsDelegatePayerNotAllowDelete"
+//  FAILEDOPERATION_ORGMEMBERPOLICYEXIST = "FailedOperation.OrgMemberPolicyExist"
 //  FAILEDOPERATION_ORGANIZATIONNOTEMPTY = "FailedOperation.OrganizationNotEmpty"
 //  FAILEDOPERATION_ORGANIZATIONPOLICYISNOTDISABLED = "FailedOperation.OrganizationPolicyIsNotDisabled"
 //  FAILEDOPERATION_QUITSHAREUINT = "FailedOperation.QuitShareUint"
@@ -1890,6 +2279,7 @@ func (c *Client) DeleteOrganization(request *DeleteOrganizationRequest) (respons
 // error code that may be returned:
 //  FAILEDOPERATION_MEMBEREXISTDELEGATEPAYERNOTALLOWDELETE = "FailedOperation.MemberExistDelegatePayerNotAllowDelete"
 //  FAILEDOPERATION_MEMBERISDELEGATEPAYERNOTALLOWDELETE = "FailedOperation.MemberIsDelegatePayerNotAllowDelete"
+//  FAILEDOPERATION_ORGMEMBERPOLICYEXIST = "FailedOperation.OrgMemberPolicyExist"
 //  FAILEDOPERATION_ORGANIZATIONNOTEMPTY = "FailedOperation.OrganizationNotEmpty"
 //  FAILEDOPERATION_ORGANIZATIONPOLICYISNOTDISABLED = "FailedOperation.OrganizationPolicyIsNotDisabled"
 //  FAILEDOPERATION_QUITSHAREUINT = "FailedOperation.QuitShareUint"
@@ -2195,6 +2585,7 @@ func NewDeleteOrganizationNodesResponse() (response *DeleteOrganizationNodesResp
 //  FAILEDOPERATION_NODENOTEMPTY = "FailedOperation.NodeNotEmpty"
 //  FAILEDOPERATION_ORGANIZATIONNODEDELETEOVERLIMIT = "FailedOperation.OrganizationNodeDeleteOverLimit"
 //  FAILEDOPERATION_ORGANIZATIONNODENOTEMPTY = "FailedOperation.OrganizationNodeNotEmpty"
+//  FAILEDOPERATION_SHARENODEEXISTED = "FailedOperation.ShareNodeExisted"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
@@ -2210,6 +2601,7 @@ func (c *Client) DeleteOrganizationNodes(request *DeleteOrganizationNodesRequest
 //  FAILEDOPERATION_NODENOTEMPTY = "FailedOperation.NodeNotEmpty"
 //  FAILEDOPERATION_ORGANIZATIONNODEDELETEOVERLIMIT = "FailedOperation.OrganizationNodeDeleteOverLimit"
 //  FAILEDOPERATION_ORGANIZATIONNODENOTEMPTY = "FailedOperation.OrganizationNodeNotEmpty"
+//  FAILEDOPERATION_SHARENODEEXISTED = "FailedOperation.ShareNodeExisted"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
@@ -2227,6 +2619,74 @@ func (c *Client) DeleteOrganizationNodesWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDeleteOrganizationNodesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeletePolicyRequest() (request *DeletePolicyRequest) {
+    request = &DeletePolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DeletePolicy")
+    
+    
+    return
+}
+
+func NewDeletePolicyResponse() (response *DeletePolicyResponse) {
+    response = &DeletePolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeletePolicy
+// Deleting a Policy
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ORGANIZATIONPOLICYINUSED = "FailedOperation.OrganizationPolicyInUsed"
+//  FAILEDOPERATION_ORGANIZATIONPOLICYISNOTENABLED = "FailedOperation.OrganizationPolicyIsNotEnabled"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
+//  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeletePolicy(request *DeletePolicyRequest) (response *DeletePolicyResponse, err error) {
+    return c.DeletePolicyWithContext(context.Background(), request)
+}
+
+// DeletePolicy
+// Deleting a Policy
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ORGANIZATIONPOLICYINUSED = "FailedOperation.OrganizationPolicyInUsed"
+//  FAILEDOPERATION_ORGANIZATIONPOLICYISNOTENABLED = "FailedOperation.OrganizationPolicyIsNotEnabled"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
+//  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeletePolicyWithContext(ctx context.Context, request *DeletePolicyRequest) (response *DeletePolicyResponse, err error) {
+    if request == nil {
+        request = NewDeletePolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "DeletePolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeletePolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeletePolicyResponse()
     err = c.Send(request, response)
     return
 }
@@ -2535,6 +2995,76 @@ func (c *Client) DeleteShareUnitMembersWithContext(ctx context.Context, request 
     return
 }
 
+func NewDeleteShareUnitNodeRequest() (request *DeleteShareUnitNodeRequest) {
+    request = &DeleteShareUnitNodeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DeleteShareUnitNode")
+    
+    
+    return
+}
+
+func NewDeleteShareUnitNodeResponse() (response *DeleteShareUnitNodeResponse) {
+    response = &DeleteShareUnitNodeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteShareUnitNode
+// Delete a shared unit department.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SHARENODENOTEXIST = "FailedOperation.ShareNodeNotExist"
+//  FAILEDOPERATION_SHARERESOURCEMEMBERINUSE = "FailedOperation.ShareResourceMemberInUse"
+//  FAILEDOPERATION_SHARERESOURCENOTEXIST = "FailedOperation.ShareResourceNotExist"
+//  FAILEDOPERATION_SHARERESOURCETYPENOTEXIST = "FailedOperation.ShareResourceTypeNotExist"
+//  FAILEDOPERATION_SHAREUNITNOTEXIST = "FailedOperation.ShareUnitNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteShareUnitNode(request *DeleteShareUnitNodeRequest) (response *DeleteShareUnitNodeResponse, err error) {
+    return c.DeleteShareUnitNodeWithContext(context.Background(), request)
+}
+
+// DeleteShareUnitNode
+// Delete a shared unit department.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SHARENODENOTEXIST = "FailedOperation.ShareNodeNotExist"
+//  FAILEDOPERATION_SHARERESOURCEMEMBERINUSE = "FailedOperation.ShareResourceMemberInUse"
+//  FAILEDOPERATION_SHARERESOURCENOTEXIST = "FailedOperation.ShareResourceNotExist"
+//  FAILEDOPERATION_SHARERESOURCETYPENOTEXIST = "FailedOperation.ShareResourceTypeNotExist"
+//  FAILEDOPERATION_SHAREUNITNOTEXIST = "FailedOperation.ShareUnitNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteShareUnitNodeWithContext(ctx context.Context, request *DeleteShareUnitNodeRequest) (response *DeleteShareUnitNodeResponse, err error) {
+    if request == nil {
+        request = NewDeleteShareUnitNodeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "DeleteShareUnitNode")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteShareUnitNode require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteShareUnitNodeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteShareUnitResourcesRequest() (request *DeleteShareUnitResourcesRequest) {
     request = &DeleteShareUnitResourcesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2723,6 +3253,68 @@ func (c *Client) DeleteUserSyncProvisioningWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewDeleteUserSyncProvisioningResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeEffectivePolicyRequest() (request *DescribeEffectivePolicyRequest) {
+    request = &DescribeEffectivePolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DescribeEffectivePolicy")
+    
+    
+    return
+}
+
+func NewDescribeEffectivePolicyResponse() (response *DescribeEffectivePolicyResponse) {
+    response = &DescribeEffectivePolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeEffectivePolicy
+// This API is used to query the valid policy associated with the target.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INTERFACENOTEXIST = "InvalidParameter.InterfaceNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_ORGANIZATIONNOTEXIST = "InvalidParameter.OrganizationNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_EFFECTIVEPOLICYNOTFOUND = "ResourceNotFound.EffectivePolicyNotFound"
+func (c *Client) DescribeEffectivePolicy(request *DescribeEffectivePolicyRequest) (response *DescribeEffectivePolicyResponse, err error) {
+    return c.DescribeEffectivePolicyWithContext(context.Background(), request)
+}
+
+// DescribeEffectivePolicy
+// This API is used to query the valid policy associated with the target.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INTERFACENOTEXIST = "InvalidParameter.InterfaceNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_ORGANIZATIONNOTEXIST = "InvalidParameter.OrganizationNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_EFFECTIVEPOLICYNOTFOUND = "ResourceNotFound.EffectivePolicyNotFound"
+func (c *Client) DescribeEffectivePolicyWithContext(ctx context.Context, request *DescribeEffectivePolicyRequest) (response *DescribeEffectivePolicyResponse, err error) {
+    if request == nil {
+        request = NewDescribeEffectivePolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "DescribeEffectivePolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeEffectivePolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeEffectivePolicyResponse()
     err = c.Send(request, response)
     return
 }
@@ -3139,6 +3731,60 @@ func (c *Client) DescribeOrganizationMembersWithContext(ctx context.Context, req
     return
 }
 
+func NewDescribeOrganizationMembersAuthPolicyRequest() (request *DescribeOrganizationMembersAuthPolicyRequest) {
+    request = &DescribeOrganizationMembersAuthPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DescribeOrganizationMembersAuthPolicy")
+    
+    
+    return
+}
+
+func NewDescribeOrganizationMembersAuthPolicyResponse() (response *DescribeOrganizationMembersAuthPolicyResponse) {
+    response = &DescribeOrganizationMembersAuthPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeOrganizationMembersAuthPolicy
+// This API is used to query the list of organization member access policies.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+func (c *Client) DescribeOrganizationMembersAuthPolicy(request *DescribeOrganizationMembersAuthPolicyRequest) (response *DescribeOrganizationMembersAuthPolicyResponse, err error) {
+    return c.DescribeOrganizationMembersAuthPolicyWithContext(context.Background(), request)
+}
+
+// DescribeOrganizationMembersAuthPolicy
+// This API is used to query the list of organization member access policies.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+func (c *Client) DescribeOrganizationMembersAuthPolicyWithContext(ctx context.Context, request *DescribeOrganizationMembersAuthPolicyRequest) (response *DescribeOrganizationMembersAuthPolicyResponse, err error) {
+    if request == nil {
+        request = NewDescribeOrganizationMembersAuthPolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "DescribeOrganizationMembersAuthPolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeOrganizationMembersAuthPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeOrganizationMembersAuthPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeOrganizationNodesRequest() (request *DescribeOrganizationNodesRequest) {
     request = &DescribeOrganizationNodesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3189,6 +3835,250 @@ func (c *Client) DescribeOrganizationNodesWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewDescribeOrganizationNodesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePolicyRequest() (request *DescribePolicyRequest) {
+    request = &DescribePolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DescribePolicy")
+    
+    
+    return
+}
+
+func NewDescribePolicyResponse() (response *DescribePolicyResponse) {
+    response = &DescribePolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribePolicy
+// This API is used to query policy details.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INTERFACENOTEXIST = "InvalidParameter.InterfaceNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTEXIST = "InvalidParameter.OrganizationMemberNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_ORGANIZATIONNODENOTEXIST = "InvalidParameter.OrganizationNodeNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONNOTEXIST = "InvalidParameter.OrganizationNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+func (c *Client) DescribePolicy(request *DescribePolicyRequest) (response *DescribePolicyResponse, err error) {
+    return c.DescribePolicyWithContext(context.Background(), request)
+}
+
+// DescribePolicy
+// This API is used to query policy details.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INTERFACENOTEXIST = "InvalidParameter.InterfaceNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTEXIST = "InvalidParameter.OrganizationMemberNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_ORGANIZATIONNODENOTEXIST = "InvalidParameter.OrganizationNodeNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONNOTEXIST = "InvalidParameter.OrganizationNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+func (c *Client) DescribePolicyWithContext(ctx context.Context, request *DescribePolicyRequest) (response *DescribePolicyResponse, err error) {
+    if request == nil {
+        request = NewDescribePolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "DescribePolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePolicyConfigRequest() (request *DescribePolicyConfigRequest) {
+    request = &DescribePolicyConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DescribePolicyConfig")
+    
+    
+    return
+}
+
+func NewDescribePolicyConfigResponse() (response *DescribePolicyConfigResponse) {
+    response = &DescribePolicyConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribePolicyConfig
+// This API is used to query enterprise organization policy configurations.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INTERFACENOTEXIST = "InvalidParameter.InterfaceNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTEXIST = "InvalidParameter.OrganizationMemberNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_ORGANIZATIONNODENOTEXIST = "InvalidParameter.OrganizationNodeNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONNOTEXIST = "InvalidParameter.OrganizationNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_APPLYNOTEXIST = "ResourceNotFound.ApplyNotExist"
+//  RESOURCENOTFOUND_CHANGEPERMISSIONNOTEXIST = "ResourceNotFound.ChangePermissionNotExist"
+//  RESOURCENOTFOUND_EMAILBINDRECORDNOTEXIST = "ResourceNotFound.EmailBindRecordNotExist"
+//  RESOURCENOTFOUND_INVITATIONNOTEXIST = "ResourceNotFound.InvitationNotExist"
+//  RESOURCENOTFOUND_MEMBEREVENTNOTEXIST = "ResourceNotFound.MemberEventNotExist"
+//  RESOURCENOTFOUND_MEMBERIDENTITYNOTEXIST = "ResourceNotFound.MemberIdentityNotExist"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  RESOURCENOTFOUND_MEMBEROPERATEPROCESSNOTEXIST = "ResourceNotFound.MemberOperateProcessNotExist"
+//  RESOURCENOTFOUND_MEMBERPOLICYNOTEXIST = "ResourceNotFound.MemberPolicyNotExist"
+//  RESOURCENOTFOUND_NODENOTEXIST = "ResourceNotFound.NodeNotExist"
+//  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCENOTFOUND_ORGANIZATIONAUTHRELATIONNOTEXIST = "ResourceNotFound.OrganizationAuthRelationNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONIDENTITYNOTEXIST = "ResourceNotFound.OrganizationIdentityNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNODENOTEXIST = "ResourceNotFound.OrganizationNodeNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONSERVICEASSIGNNOTEXIST = "ResourceNotFound.OrganizationServiceAssignNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONSERVICENOTEXIST = "ResourceNotFound.OrganizationServiceNotExist"
+//  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+//  RESOURCENOTFOUND_RESOURCETYPENOTEXIST = "ResourceNotFound.ResourceTypeNotExist"
+//  RESOURCENOTFOUND_SERVICEROLENOTEXIST = "ResourceNotFound.ServiceRoleNotExist"
+//  RESOURCENOTFOUND_SHARERESOURCEMEMBERNOTEXIST = "ResourceNotFound.ShareResourceMemberNotExist"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) DescribePolicyConfig(request *DescribePolicyConfigRequest) (response *DescribePolicyConfigResponse, err error) {
+    return c.DescribePolicyConfigWithContext(context.Background(), request)
+}
+
+// DescribePolicyConfig
+// This API is used to query enterprise organization policy configurations.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INTERFACENOTEXIST = "InvalidParameter.InterfaceNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTEXIST = "InvalidParameter.OrganizationMemberNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_ORGANIZATIONNODENOTEXIST = "InvalidParameter.OrganizationNodeNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONNOTEXIST = "InvalidParameter.OrganizationNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_APPLYNOTEXIST = "ResourceNotFound.ApplyNotExist"
+//  RESOURCENOTFOUND_CHANGEPERMISSIONNOTEXIST = "ResourceNotFound.ChangePermissionNotExist"
+//  RESOURCENOTFOUND_EMAILBINDRECORDNOTEXIST = "ResourceNotFound.EmailBindRecordNotExist"
+//  RESOURCENOTFOUND_INVITATIONNOTEXIST = "ResourceNotFound.InvitationNotExist"
+//  RESOURCENOTFOUND_MEMBEREVENTNOTEXIST = "ResourceNotFound.MemberEventNotExist"
+//  RESOURCENOTFOUND_MEMBERIDENTITYNOTEXIST = "ResourceNotFound.MemberIdentityNotExist"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  RESOURCENOTFOUND_MEMBEROPERATEPROCESSNOTEXIST = "ResourceNotFound.MemberOperateProcessNotExist"
+//  RESOURCENOTFOUND_MEMBERPOLICYNOTEXIST = "ResourceNotFound.MemberPolicyNotExist"
+//  RESOURCENOTFOUND_NODENOTEXIST = "ResourceNotFound.NodeNotExist"
+//  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCENOTFOUND_ORGANIZATIONAUTHRELATIONNOTEXIST = "ResourceNotFound.OrganizationAuthRelationNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONIDENTITYNOTEXIST = "ResourceNotFound.OrganizationIdentityNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNODENOTEXIST = "ResourceNotFound.OrganizationNodeNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONSERVICEASSIGNNOTEXIST = "ResourceNotFound.OrganizationServiceAssignNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONSERVICENOTEXIST = "ResourceNotFound.OrganizationServiceNotExist"
+//  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+//  RESOURCENOTFOUND_RESOURCETYPENOTEXIST = "ResourceNotFound.ResourceTypeNotExist"
+//  RESOURCENOTFOUND_SERVICEROLENOTEXIST = "ResourceNotFound.ServiceRoleNotExist"
+//  RESOURCENOTFOUND_SHARERESOURCEMEMBERNOTEXIST = "ResourceNotFound.ShareResourceMemberNotExist"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) DescribePolicyConfigWithContext(ctx context.Context, request *DescribePolicyConfigRequest) (response *DescribePolicyConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribePolicyConfigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "DescribePolicyConfig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePolicyConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePolicyConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeResourceToShareMemberRequest() (request *DescribeResourceToShareMemberRequest) {
+    request = &DescribeResourceToShareMemberRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DescribeResourceToShareMember")
+    
+    
+    return
+}
+
+func NewDescribeResourceToShareMemberResponse() (response *DescribeResourceToShareMemberResponse) {
+    response = &DescribeResourceToShareMemberResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeResourceToShareMember
+// This API is used to obtain the list of resources shared with me.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeResourceToShareMember(request *DescribeResourceToShareMemberRequest) (response *DescribeResourceToShareMemberResponse, err error) {
+    return c.DescribeResourceToShareMemberWithContext(context.Background(), request)
+}
+
+// DescribeResourceToShareMember
+// This API is used to obtain the list of resources shared with me.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeResourceToShareMemberWithContext(ctx context.Context, request *DescribeResourceToShareMemberRequest) (response *DescribeResourceToShareMemberResponse, err error) {
+    if request == nil {
+        request = NewDescribeResourceToShareMemberRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "DescribeResourceToShareMember")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeResourceToShareMember require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeResourceToShareMemberResponse()
     err = c.Send(request, response)
     return
 }
@@ -3307,6 +4197,66 @@ func (c *Client) DescribeShareUnitMembersWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewDescribeShareUnitMembersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeShareUnitNodesRequest() (request *DescribeShareUnitNodesRequest) {
+    request = &DescribeShareUnitNodesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DescribeShareUnitNodes")
+    
+    
+    return
+}
+
+func NewDescribeShareUnitNodesResponse() (response *DescribeShareUnitNodesResponse) {
+    response = &DescribeShareUnitNodesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeShareUnitNodes
+// This API is used to obtain a list of shared unit departments.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeShareUnitNodes(request *DescribeShareUnitNodesRequest) (response *DescribeShareUnitNodesResponse, err error) {
+    return c.DescribeShareUnitNodesWithContext(context.Background(), request)
+}
+
+// DescribeShareUnitNodes
+// This API is used to obtain a list of shared unit departments.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeShareUnitNodesWithContext(ctx context.Context, request *DescribeShareUnitNodesRequest) (response *DescribeShareUnitNodesResponse, err error) {
+    if request == nil {
+        request = NewDescribeShareUnitNodesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "DescribeShareUnitNodes")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeShareUnitNodes require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeShareUnitNodesResponse()
     err = c.Send(request, response)
     return
 }
@@ -3433,6 +4383,130 @@ func (c *Client) DescribeShareUnitsWithContext(ctx context.Context, request *Des
     return
 }
 
+func NewDetachPolicyRequest() (request *DetachPolicyRequest) {
+    request = &DetachPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DetachPolicy")
+    
+    
+    return
+}
+
+func NewDetachPolicyResponse() (response *DetachPolicyResponse) {
+    response = &DetachPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DetachPolicy
+// Unbind a policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONDETACHLASTPOLICYERROR = "FailedOperation.OrganizationDetachLastPolicyError"
+//  FAILEDOPERATION_ORGANIZATIONDETACHPOLICYERROR = "FailedOperation.OrganizationDetachPolicyError"
+//  FAILEDOPERATION_ORGANIZATIONPOLICYISNOTENABLED = "FailedOperation.OrganizationPolicyIsNotEnabled"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DetachPolicy(request *DetachPolicyRequest) (response *DetachPolicyResponse, err error) {
+    return c.DetachPolicyWithContext(context.Background(), request)
+}
+
+// DetachPolicy
+// Unbind a policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONDETACHLASTPOLICYERROR = "FailedOperation.OrganizationDetachLastPolicyError"
+//  FAILEDOPERATION_ORGANIZATIONDETACHPOLICYERROR = "FailedOperation.OrganizationDetachPolicyError"
+//  FAILEDOPERATION_ORGANIZATIONPOLICYISNOTENABLED = "FailedOperation.OrganizationPolicyIsNotEnabled"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DetachPolicyWithContext(ctx context.Context, request *DetachPolicyRequest) (response *DetachPolicyResponse, err error) {
+    if request == nil {
+        request = NewDetachPolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "DetachPolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DetachPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDetachPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDisablePolicyTypeRequest() (request *DisablePolicyTypeRequest) {
+    request = &DisablePolicyTypeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DisablePolicyType")
+    
+    
+    return
+}
+
+func NewDisablePolicyTypeResponse() (response *DisablePolicyTypeResponse) {
+    response = &DisablePolicyTypeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DisablePolicyType
+// This API is used to disable a policy type.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYISNOTENABLED = "FailedOperation.OrganizationPolicyIsNotEnabled"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DisablePolicyType(request *DisablePolicyTypeRequest) (response *DisablePolicyTypeResponse, err error) {
+    return c.DisablePolicyTypeWithContext(context.Background(), request)
+}
+
+// DisablePolicyType
+// This API is used to disable a policy type.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYISNOTENABLED = "FailedOperation.OrganizationPolicyIsNotEnabled"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DisablePolicyTypeWithContext(ctx context.Context, request *DisablePolicyTypeRequest) (response *DisablePolicyTypeResponse, err error) {
+    if request == nil {
+        request = NewDisablePolicyTypeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "DisablePolicyType")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DisablePolicyType require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDisablePolicyTypeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDismantleRoleConfigurationRequest() (request *DismantleRoleConfigurationRequest) {
     request = &DismantleRoleConfigurationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3489,6 +4563,66 @@ func (c *Client) DismantleRoleConfigurationWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewDismantleRoleConfigurationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEnablePolicyTypeRequest() (request *EnablePolicyTypeRequest) {
+    request = &EnablePolicyTypeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "EnablePolicyType")
+    
+    
+    return
+}
+
+func NewEnablePolicyTypeResponse() (response *EnablePolicyTypeResponse) {
+    response = &EnablePolicyTypeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// EnablePolicyType
+// This API is used to enable a policy type.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYISNOTDISABLED = "FailedOperation.OrganizationPolicyIsNotDisabled"
+//  FAILEDOPERATION_POLICYENABLEINVALID = "FailedOperation.PolicyEnableInvalid"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) EnablePolicyType(request *EnablePolicyTypeRequest) (response *EnablePolicyTypeResponse, err error) {
+    return c.EnablePolicyTypeWithContext(context.Background(), request)
+}
+
+// EnablePolicyType
+// This API is used to enable a policy type.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYISNOTDISABLED = "FailedOperation.OrganizationPolicyIsNotDisabled"
+//  FAILEDOPERATION_POLICYENABLEINVALID = "FailedOperation.PolicyEnableInvalid"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) EnablePolicyTypeWithContext(ctx context.Context, request *EnablePolicyTypeRequest) (response *EnablePolicyTypeResponse, err error) {
+    if request == nil {
+        request = NewEnablePolicyTypeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "EnablePolicyType")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EnablePolicyType require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEnablePolicyTypeResponse()
     err = c.Send(request, response)
     return
 }
@@ -4399,6 +5533,60 @@ func (c *Client) ListJoinedGroupsForUserWithContext(ctx context.Context, request
     return
 }
 
+func NewListNonCompliantResourceRequest() (request *ListNonCompliantResourceRequest) {
+    request = &ListNonCompliantResourceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "ListNonCompliantResource")
+    
+    
+    return
+}
+
+func NewListNonCompliantResourceResponse() (response *ListNonCompliantResourceResponse) {
+    response = &ListNonCompliantResourceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListNonCompliantResource
+// This API is used to obtain the list of non-compliant resources detected by member tags.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+func (c *Client) ListNonCompliantResource(request *ListNonCompliantResourceRequest) (response *ListNonCompliantResourceResponse, err error) {
+    return c.ListNonCompliantResourceWithContext(context.Background(), request)
+}
+
+// ListNonCompliantResource
+// This API is used to obtain the list of non-compliant resources detected by member tags.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+func (c *Client) ListNonCompliantResourceWithContext(ctx context.Context, request *ListNonCompliantResourceRequest) (response *ListNonCompliantResourceResponse, err error) {
+    if request == nil {
+        request = NewListNonCompliantResourceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "ListNonCompliantResource")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListNonCompliantResource require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListNonCompliantResourceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListOrgServiceAssignMemberRequest() (request *ListOrgServiceAssignMemberRequest) {
     request = &ListOrgServiceAssignMemberRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4613,6 +5801,118 @@ func (c *Client) ListPermissionPoliciesInRoleConfigurationWithContext(ctx contex
     request.SetContext(ctx)
     
     response = NewListPermissionPoliciesInRoleConfigurationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListPoliciesForTargetRequest() (request *ListPoliciesForTargetRequest) {
+    request = &ListPoliciesForTargetRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "ListPoliciesForTarget")
+    
+    
+    return
+}
+
+func NewListPoliciesForTargetResponse() (response *ListPoliciesForTargetResponse) {
+    response = &ListPoliciesForTargetResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListPoliciesForTarget
+// This API is used to query the list of policies associated with a target.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INTERFACENOTEXIST = "InvalidParameter.InterfaceNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTEXIST = "InvalidParameter.OrganizationMemberNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_ORGANIZATIONNODENOTEXIST = "InvalidParameter.OrganizationNodeNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONNOTEXIST = "InvalidParameter.OrganizationNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_APPLYNOTEXIST = "ResourceNotFound.ApplyNotExist"
+//  RESOURCENOTFOUND_CHANGEPERMISSIONNOTEXIST = "ResourceNotFound.ChangePermissionNotExist"
+//  RESOURCENOTFOUND_EMAILBINDRECORDNOTEXIST = "ResourceNotFound.EmailBindRecordNotExist"
+//  RESOURCENOTFOUND_INVITATIONNOTEXIST = "ResourceNotFound.InvitationNotExist"
+//  RESOURCENOTFOUND_MEMBEREVENTNOTEXIST = "ResourceNotFound.MemberEventNotExist"
+//  RESOURCENOTFOUND_MEMBERIDENTITYNOTEXIST = "ResourceNotFound.MemberIdentityNotExist"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  RESOURCENOTFOUND_MEMBEROPERATEPROCESSNOTEXIST = "ResourceNotFound.MemberOperateProcessNotExist"
+//  RESOURCENOTFOUND_MEMBERPOLICYNOTEXIST = "ResourceNotFound.MemberPolicyNotExist"
+//  RESOURCENOTFOUND_NODENOTEXIST = "ResourceNotFound.NodeNotExist"
+//  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCENOTFOUND_ORGANIZATIONAUTHRELATIONNOTEXIST = "ResourceNotFound.OrganizationAuthRelationNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONIDENTITYNOTEXIST = "ResourceNotFound.OrganizationIdentityNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNODENOTEXIST = "ResourceNotFound.OrganizationNodeNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONSERVICEASSIGNNOTEXIST = "ResourceNotFound.OrganizationServiceAssignNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONSERVICENOTEXIST = "ResourceNotFound.OrganizationServiceNotExist"
+//  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+//  RESOURCENOTFOUND_RESOURCETYPENOTEXIST = "ResourceNotFound.ResourceTypeNotExist"
+//  RESOURCENOTFOUND_SERVICEROLENOTEXIST = "ResourceNotFound.ServiceRoleNotExist"
+//  RESOURCENOTFOUND_SHARERESOURCEMEMBERNOTEXIST = "ResourceNotFound.ShareResourceMemberNotExist"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) ListPoliciesForTarget(request *ListPoliciesForTargetRequest) (response *ListPoliciesForTargetResponse, err error) {
+    return c.ListPoliciesForTargetWithContext(context.Background(), request)
+}
+
+// ListPoliciesForTarget
+// This API is used to query the list of policies associated with a target.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INTERFACENOTEXIST = "InvalidParameter.InterfaceNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTEXIST = "InvalidParameter.OrganizationMemberNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_ORGANIZATIONNODENOTEXIST = "InvalidParameter.OrganizationNodeNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONNOTEXIST = "InvalidParameter.OrganizationNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_APPLYNOTEXIST = "ResourceNotFound.ApplyNotExist"
+//  RESOURCENOTFOUND_CHANGEPERMISSIONNOTEXIST = "ResourceNotFound.ChangePermissionNotExist"
+//  RESOURCENOTFOUND_EMAILBINDRECORDNOTEXIST = "ResourceNotFound.EmailBindRecordNotExist"
+//  RESOURCENOTFOUND_INVITATIONNOTEXIST = "ResourceNotFound.InvitationNotExist"
+//  RESOURCENOTFOUND_MEMBEREVENTNOTEXIST = "ResourceNotFound.MemberEventNotExist"
+//  RESOURCENOTFOUND_MEMBERIDENTITYNOTEXIST = "ResourceNotFound.MemberIdentityNotExist"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  RESOURCENOTFOUND_MEMBEROPERATEPROCESSNOTEXIST = "ResourceNotFound.MemberOperateProcessNotExist"
+//  RESOURCENOTFOUND_MEMBERPOLICYNOTEXIST = "ResourceNotFound.MemberPolicyNotExist"
+//  RESOURCENOTFOUND_NODENOTEXIST = "ResourceNotFound.NodeNotExist"
+//  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCENOTFOUND_ORGANIZATIONAUTHRELATIONNOTEXIST = "ResourceNotFound.OrganizationAuthRelationNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONIDENTITYNOTEXIST = "ResourceNotFound.OrganizationIdentityNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNODENOTEXIST = "ResourceNotFound.OrganizationNodeNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONSERVICEASSIGNNOTEXIST = "ResourceNotFound.OrganizationServiceAssignNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONSERVICENOTEXIST = "ResourceNotFound.OrganizationServiceNotExist"
+//  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+//  RESOURCENOTFOUND_RESOURCETYPENOTEXIST = "ResourceNotFound.ResourceTypeNotExist"
+//  RESOURCENOTFOUND_SERVICEROLENOTEXIST = "ResourceNotFound.ServiceRoleNotExist"
+//  RESOURCENOTFOUND_SHARERESOURCEMEMBERNOTEXIST = "ResourceNotFound.ShareResourceMemberNotExist"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) ListPoliciesForTargetWithContext(ctx context.Context, request *ListPoliciesForTargetRequest) (response *ListPoliciesForTargetResponse, err error) {
+    if request == nil {
+        request = NewListPoliciesForTargetRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "ListPoliciesForTarget")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListPoliciesForTarget require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListPoliciesForTargetResponse()
     err = c.Send(request, response)
     return
 }
@@ -4837,6 +6137,114 @@ func (c *Client) ListSCIMCredentialsWithContext(ctx context.Context, request *Li
     request.SetContext(ctx)
     
     response = NewListSCIMCredentialsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListTargetsForPolicyRequest() (request *ListTargetsForPolicyRequest) {
+    request = &ListTargetsForPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "ListTargetsForPolicy")
+    
+    
+    return
+}
+
+func NewListTargetsForPolicyResponse() (response *ListTargetsForPolicyResponse) {
+    response = &ListTargetsForPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListTargetsForPolicy
+// This API is used to query the list of targets associated with a specified policy.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INTERFACENOTEXIST = "InvalidParameter.InterfaceNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTEXIST = "InvalidParameter.OrganizationMemberNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_ORGANIZATIONNODENOTEXIST = "InvalidParameter.OrganizationNodeNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONNOTEXIST = "InvalidParameter.OrganizationNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_CHANGEPERMISSIONNOTEXIST = "ResourceNotFound.ChangePermissionNotExist"
+//  RESOURCENOTFOUND_EMAILBINDRECORDNOTEXIST = "ResourceNotFound.EmailBindRecordNotExist"
+//  RESOURCENOTFOUND_INVITATIONNOTEXIST = "ResourceNotFound.InvitationNotExist"
+//  RESOURCENOTFOUND_MEMBEREVENTNOTEXIST = "ResourceNotFound.MemberEventNotExist"
+//  RESOURCENOTFOUND_MEMBERIDENTITYNOTEXIST = "ResourceNotFound.MemberIdentityNotExist"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  RESOURCENOTFOUND_MEMBEROPERATEPROCESSNOTEXIST = "ResourceNotFound.MemberOperateProcessNotExist"
+//  RESOURCENOTFOUND_MEMBERPOLICYNOTEXIST = "ResourceNotFound.MemberPolicyNotExist"
+//  RESOURCENOTFOUND_NODENOTEXIST = "ResourceNotFound.NodeNotExist"
+//  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCENOTFOUND_ORGANIZATIONAUTHRELATIONNOTEXIST = "ResourceNotFound.OrganizationAuthRelationNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONIDENTITYNOTEXIST = "ResourceNotFound.OrganizationIdentityNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNODENOTEXIST = "ResourceNotFound.OrganizationNodeNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONSERVICEASSIGNNOTEXIST = "ResourceNotFound.OrganizationServiceAssignNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONSERVICENOTEXIST = "ResourceNotFound.OrganizationServiceNotExist"
+//  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+//  RESOURCENOTFOUND_RESOURCETYPENOTEXIST = "ResourceNotFound.ResourceTypeNotExist"
+//  RESOURCENOTFOUND_SERVICEROLENOTEXIST = "ResourceNotFound.ServiceRoleNotExist"
+//  RESOURCENOTFOUND_SHARERESOURCEMEMBERNOTEXIST = "ResourceNotFound.ShareResourceMemberNotExist"
+func (c *Client) ListTargetsForPolicy(request *ListTargetsForPolicyRequest) (response *ListTargetsForPolicyResponse, err error) {
+    return c.ListTargetsForPolicyWithContext(context.Background(), request)
+}
+
+// ListTargetsForPolicy
+// This API is used to query the list of targets associated with a specified policy.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INTERFACENOTEXIST = "InvalidParameter.InterfaceNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTEXIST = "InvalidParameter.OrganizationMemberNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_ORGANIZATIONNODENOTEXIST = "InvalidParameter.OrganizationNodeNotExist"
+//  INVALIDPARAMETER_ORGANIZATIONNOTEXIST = "InvalidParameter.OrganizationNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_CHANGEPERMISSIONNOTEXIST = "ResourceNotFound.ChangePermissionNotExist"
+//  RESOURCENOTFOUND_EMAILBINDRECORDNOTEXIST = "ResourceNotFound.EmailBindRecordNotExist"
+//  RESOURCENOTFOUND_INVITATIONNOTEXIST = "ResourceNotFound.InvitationNotExist"
+//  RESOURCENOTFOUND_MEMBEREVENTNOTEXIST = "ResourceNotFound.MemberEventNotExist"
+//  RESOURCENOTFOUND_MEMBERIDENTITYNOTEXIST = "ResourceNotFound.MemberIdentityNotExist"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  RESOURCENOTFOUND_MEMBEROPERATEPROCESSNOTEXIST = "ResourceNotFound.MemberOperateProcessNotExist"
+//  RESOURCENOTFOUND_MEMBERPOLICYNOTEXIST = "ResourceNotFound.MemberPolicyNotExist"
+//  RESOURCENOTFOUND_NODENOTEXIST = "ResourceNotFound.NodeNotExist"
+//  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCENOTFOUND_ORGANIZATIONAUTHRELATIONNOTEXIST = "ResourceNotFound.OrganizationAuthRelationNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONIDENTITYNOTEXIST = "ResourceNotFound.OrganizationIdentityNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNODENOTEXIST = "ResourceNotFound.OrganizationNodeNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONSERVICEASSIGNNOTEXIST = "ResourceNotFound.OrganizationServiceAssignNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONSERVICENOTEXIST = "ResourceNotFound.OrganizationServiceNotExist"
+//  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+//  RESOURCENOTFOUND_RESOURCETYPENOTEXIST = "ResourceNotFound.ResourceTypeNotExist"
+//  RESOURCENOTFOUND_SERVICEROLENOTEXIST = "ResourceNotFound.ServiceRoleNotExist"
+//  RESOURCENOTFOUND_SHARERESOURCEMEMBERNOTEXIST = "ResourceNotFound.ShareResourceMemberNotExist"
+func (c *Client) ListTargetsForPolicyWithContext(ctx context.Context, request *ListTargetsForPolicyRequest) (response *ListTargetsForPolicyResponse, err error) {
+    if request == nil {
+        request = NewListTargetsForPolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "ListTargetsForPolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListTargetsForPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListTargetsForPolicyResponse()
     err = c.Send(request, response)
     return
 }
@@ -5357,6 +6765,8 @@ func NewRemoveExternalSAMLIdPCertificateResponse() (response *RemoveExternalSAML
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  FAILEDOPERATION_X509CERTIFICATELIMITEXCEEDED = "FailedOperation.X509CertificateLimitExceeded"
+//  FAILEDOPERATION_X509CERTIFICATEMINIMUMREQUIRED = "FailedOperation.X509CertificateMinimumRequired"
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND_X509CERTIFICATENOTFOUND = "ResourceNotFound.X509CertificateNotFound"
 func (c *Client) RemoveExternalSAMLIdPCertificate(request *RemoveExternalSAMLIdPCertificateRequest) (response *RemoveExternalSAMLIdPCertificateResponse, err error) {
@@ -5368,6 +6778,8 @@ func (c *Client) RemoveExternalSAMLIdPCertificate(request *RemoveExternalSAMLIdP
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  FAILEDOPERATION_X509CERTIFICATELIMITEXCEEDED = "FailedOperation.X509CertificateLimitExceeded"
+//  FAILEDOPERATION_X509CERTIFICATEMINIMUMREQUIRED = "FailedOperation.X509CertificateMinimumRequired"
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND_X509CERTIFICATENOTFOUND = "ResourceNotFound.X509CertificateNotFound"
 func (c *Client) RemoveExternalSAMLIdPCertificateWithContext(ctx context.Context, request *RemoveExternalSAMLIdPCertificateRequest) (response *RemoveExternalSAMLIdPCertificateResponse, err error) {
@@ -6003,6 +7415,70 @@ func (c *Client) UpdateOrganizationMemberEmailBindWithContext(ctx context.Contex
     return
 }
 
+func NewUpdateOrganizationMembersPolicyRequest() (request *UpdateOrganizationMembersPolicyRequest) {
+    request = &UpdateOrganizationMembersPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "UpdateOrganizationMembersPolicy")
+    
+    
+    return
+}
+
+func NewUpdateOrganizationMembersPolicyResponse() (response *UpdateOrganizationMembersPolicyResponse) {
+    response = &UpdateOrganizationMembersPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateOrganizationMembersPolicy
+// This API is used to modify an organization's member access policies.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATEPOLICY = "FailedOperation.OperatePolicy"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_MEMBERIDENTITYNOTEXIST = "ResourceNotFound.MemberIdentityNotExist"
+//  RESOURCENOTFOUND_MEMBERPOLICYNOTEXIST = "ResourceNotFound.MemberPolicyNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) UpdateOrganizationMembersPolicy(request *UpdateOrganizationMembersPolicyRequest) (response *UpdateOrganizationMembersPolicyResponse, err error) {
+    return c.UpdateOrganizationMembersPolicyWithContext(context.Background(), request)
+}
+
+// UpdateOrganizationMembersPolicy
+// This API is used to modify an organization's member access policies.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATEPOLICY = "FailedOperation.OperatePolicy"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_MEMBERIDENTITYNOTEXIST = "ResourceNotFound.MemberIdentityNotExist"
+//  RESOURCENOTFOUND_MEMBERPOLICYNOTEXIST = "ResourceNotFound.MemberPolicyNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) UpdateOrganizationMembersPolicyWithContext(ctx context.Context, request *UpdateOrganizationMembersPolicyRequest) (response *UpdateOrganizationMembersPolicyResponse, err error) {
+    if request == nil {
+        request = NewUpdateOrganizationMembersPolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "UpdateOrganizationMembersPolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateOrganizationMembersPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateOrganizationMembersPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateOrganizationNodeRequest() (request *UpdateOrganizationNodeRequest) {
     request = &UpdateOrganizationNodeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6053,6 +7529,136 @@ func (c *Client) UpdateOrganizationNodeWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewUpdateOrganizationNodeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdatePolicyRequest() (request *UpdatePolicyRequest) {
+    request = &UpdatePolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "UpdatePolicy")
+    
+    
+    return
+}
+
+func NewUpdatePolicyResponse() (response *UpdatePolicyResponse) {
+    response = &UpdatePolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdatePolicy
+// Edit policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYISNOTENABLED = "FailedOperation.OrganizationPolicyIsNotEnabled"
+//  FAILEDOPERATION_POLICYNAMEINUSE = "FailedOperation.PolicyNameInUse"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ACTIONERROR = "InvalidParameter.ActionError"
+//  INVALIDPARAMETER_ACTIONMISS = "InvalidParameter.ActionMiss"
+//  INVALIDPARAMETER_ACTIONNOTEXIST = "InvalidParameter.ActionNotExist"
+//  INVALIDPARAMETER_ACTIONSERVICENOTEXIST = "InvalidParameter.ActionServiceNotExist"
+//  INVALIDPARAMETER_CONDITIONCONTENTERROR = "InvalidParameter.ConditionContentError"
+//  INVALIDPARAMETER_CONDITIONERROR = "InvalidParameter.ConditionError"
+//  INVALIDPARAMETER_CONDITIONTYPEERROR = "InvalidParameter.ConditionTypeError"
+//  INVALIDPARAMETER_DESCRIPTIONLENGTHOVERLIMIT = "InvalidParameter.DescriptionLengthOverlimit"
+//  INVALIDPARAMETER_EFFECTERROR = "InvalidParameter.EffectError"
+//  INVALIDPARAMETER_NOTSUPPORTPRODUCT = "InvalidParameter.NotSupportProduct"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_POLICYDOCUMENTERROR = "InvalidParameter.PolicyDocumentError"
+//  INVALIDPARAMETER_POLICYDOCUMENTLENGTHOVERLIMIT = "InvalidParameter.PolicyDocumentLengthOverLimit"
+//  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
+//  INVALIDPARAMETER_POLICYKEYDUPLICATED = "InvalidParameter.PolicyKeyDuplicated"
+//  INVALIDPARAMETER_POLICYNAMEERROR = "InvalidParameter.PolicyNameError"
+//  INVALIDPARAMETER_POLICYNAMEEXISTED = "InvalidParameter.PolicyNameExisted"
+//  INVALIDPARAMETER_PRINCIPALERROR = "InvalidParameter.PrincipalError"
+//  INVALIDPARAMETER_PRINCIPALQCSERROR = "InvalidParameter.PrincipalQcsError"
+//  INVALIDPARAMETER_PRINCIPALQCSNOTEXIST = "InvalidParameter.PrincipalQcsNotExist"
+//  INVALIDPARAMETER_PRINCIPALSERVICENOTEXIST = "InvalidParameter.PrincipalServiceNotExist"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
+//  INVALIDPARAMETER_RESOURCECONTENTERROR = "InvalidParameter.ResourceContentError"
+//  INVALIDPARAMETER_RESOURCEERROR = "InvalidParameter.ResourceError"
+//  INVALIDPARAMETER_RESOURCEPROJECTERROR = "InvalidParameter.ResourceProjectError"
+//  INVALIDPARAMETER_RESOURCEQCSERROR = "InvalidParameter.ResourceQcsError"
+//  INVALIDPARAMETER_RESOURCEREGIONERROR = "InvalidParameter.ResourceRegionError"
+//  INVALIDPARAMETER_RESOURCESERVICENOTEXIST = "InvalidParameter.ResourceServiceNotExist"
+//  INVALIDPARAMETER_RESOURCEUINERROR = "InvalidParameter.ResourceUinError"
+//  INVALIDPARAMETER_STATEMENTERROR = "InvalidParameter.StatementError"
+//  INVALIDPARAMETER_UNSUPPORTEDSERVICE = "InvalidParameter.UnsupportedService"
+//  INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"
+//  INVALIDPARAMETERVALUE_POLICYCONTENTINVALID = "InvalidParameterValue.PolicyContentInvalid"
+//  LIMITEXCEEDED_TAGPOLICY = "LimitExceeded.TagPolicy"
+//  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) UpdatePolicy(request *UpdatePolicyRequest) (response *UpdatePolicyResponse, err error) {
+    return c.UpdatePolicyWithContext(context.Background(), request)
+}
+
+// UpdatePolicy
+// Edit policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYISNOTENABLED = "FailedOperation.OrganizationPolicyIsNotEnabled"
+//  FAILEDOPERATION_POLICYNAMEINUSE = "FailedOperation.PolicyNameInUse"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ACTIONERROR = "InvalidParameter.ActionError"
+//  INVALIDPARAMETER_ACTIONMISS = "InvalidParameter.ActionMiss"
+//  INVALIDPARAMETER_ACTIONNOTEXIST = "InvalidParameter.ActionNotExist"
+//  INVALIDPARAMETER_ACTIONSERVICENOTEXIST = "InvalidParameter.ActionServiceNotExist"
+//  INVALIDPARAMETER_CONDITIONCONTENTERROR = "InvalidParameter.ConditionContentError"
+//  INVALIDPARAMETER_CONDITIONERROR = "InvalidParameter.ConditionError"
+//  INVALIDPARAMETER_CONDITIONTYPEERROR = "InvalidParameter.ConditionTypeError"
+//  INVALIDPARAMETER_DESCRIPTIONLENGTHOVERLIMIT = "InvalidParameter.DescriptionLengthOverlimit"
+//  INVALIDPARAMETER_EFFECTERROR = "InvalidParameter.EffectError"
+//  INVALIDPARAMETER_NOTSUPPORTPRODUCT = "InvalidParameter.NotSupportProduct"
+//  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_POLICYDOCUMENTERROR = "InvalidParameter.PolicyDocumentError"
+//  INVALIDPARAMETER_POLICYDOCUMENTLENGTHOVERLIMIT = "InvalidParameter.PolicyDocumentLengthOverLimit"
+//  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
+//  INVALIDPARAMETER_POLICYKEYDUPLICATED = "InvalidParameter.PolicyKeyDuplicated"
+//  INVALIDPARAMETER_POLICYNAMEERROR = "InvalidParameter.PolicyNameError"
+//  INVALIDPARAMETER_POLICYNAMEEXISTED = "InvalidParameter.PolicyNameExisted"
+//  INVALIDPARAMETER_PRINCIPALERROR = "InvalidParameter.PrincipalError"
+//  INVALIDPARAMETER_PRINCIPALQCSERROR = "InvalidParameter.PrincipalQcsError"
+//  INVALIDPARAMETER_PRINCIPALQCSNOTEXIST = "InvalidParameter.PrincipalQcsNotExist"
+//  INVALIDPARAMETER_PRINCIPALSERVICENOTEXIST = "InvalidParameter.PrincipalServiceNotExist"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
+//  INVALIDPARAMETER_RESOURCECONTENTERROR = "InvalidParameter.ResourceContentError"
+//  INVALIDPARAMETER_RESOURCEERROR = "InvalidParameter.ResourceError"
+//  INVALIDPARAMETER_RESOURCEPROJECTERROR = "InvalidParameter.ResourceProjectError"
+//  INVALIDPARAMETER_RESOURCEQCSERROR = "InvalidParameter.ResourceQcsError"
+//  INVALIDPARAMETER_RESOURCEREGIONERROR = "InvalidParameter.ResourceRegionError"
+//  INVALIDPARAMETER_RESOURCESERVICENOTEXIST = "InvalidParameter.ResourceServiceNotExist"
+//  INVALIDPARAMETER_RESOURCEUINERROR = "InvalidParameter.ResourceUinError"
+//  INVALIDPARAMETER_STATEMENTERROR = "InvalidParameter.StatementError"
+//  INVALIDPARAMETER_UNSUPPORTEDSERVICE = "InvalidParameter.UnsupportedService"
+//  INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"
+//  INVALIDPARAMETERVALUE_POLICYCONTENTINVALID = "InvalidParameterValue.PolicyContentInvalid"
+//  LIMITEXCEEDED_TAGPOLICY = "LimitExceeded.TagPolicy"
+//  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) UpdatePolicyWithContext(ctx context.Context, request *UpdatePolicyRequest) (response *UpdatePolicyResponse, err error) {
+    if request == nil {
+        request = NewUpdatePolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "organization", APIVersion, "UpdatePolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdatePolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdatePolicyResponse()
     err = c.Send(request, response)
     return
 }
@@ -6319,6 +7925,7 @@ func NewUpdateUserResponse() (response *UpdateUserResponse) {
 //  FAILEDOPERATION_SYNCHRONIZEDUSERNOTUPDATE = "FailedOperation.SynchronizedUserNotUpdate"
 //  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
 //  INVALIDPARAMETER_EMAILALREADYEXISTS = "InvalidParameter.EmailAlreadyExists"
+//  INVALIDPARAMETER_USERTYPEERROR = "InvalidParameter.UserTypeError"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) UpdateUser(request *UpdateUserRequest) (response *UpdateUserResponse, err error) {
     return c.UpdateUserWithContext(context.Background(), request)
@@ -6333,6 +7940,7 @@ func (c *Client) UpdateUser(request *UpdateUserRequest) (response *UpdateUserRes
 //  FAILEDOPERATION_SYNCHRONIZEDUSERNOTUPDATE = "FailedOperation.SynchronizedUserNotUpdate"
 //  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
 //  INVALIDPARAMETER_EMAILALREADYEXISTS = "InvalidParameter.EmailAlreadyExists"
+//  INVALIDPARAMETER_USERTYPEERROR = "InvalidParameter.UserTypeError"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) UpdateUserWithContext(ctx context.Context, request *UpdateUserRequest) (response *UpdateUserResponse, err error) {
     if request == nil {

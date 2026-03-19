@@ -164,6 +164,9 @@ const (
 	// Manually created users cannot be updated.
 	FAILEDOPERATION_MANUALUSERNOTUPDATE = "FailedOperation.ManualUserNotUpdate"
 
+	// Account deletion under review.
+	FAILEDOPERATION_MEMBERACCOUNTDEREGISTERPENDING = "FailedOperation.MemberAccountDeregisterPending"
+
 	// Mailbox binding failed.
 	FAILEDOPERATION_MEMBERBINDEMAILERROR = "FailedOperation.MemberBindEmailError"
 
@@ -209,11 +212,20 @@ const (
 	// Failed to manipulate the policy.
 	FAILEDOPERATION_OPERATEPOLICY = "FailedOperation.OperatePolicy"
 
+	// An organization member access policy exists.
+	FAILEDOPERATION_ORGMEMBERPOLICYEXIST = "FailedOperation.OrgMemberPolicyExist"
+
 	// The member is an entity admin account and cannot quit the organization.
 	FAILEDOPERATION_ORGANIZATIONAUTHMANAGENOTALLOWDELETE = "FailedOperation.OrganizationAuthManageNotAllowDelete"
 
 	// Real-name authentication relationship already exists.
 	FAILEDOPERATION_ORGANIZATIONAUTHRELATIONEXIST = "FailedOperation.OrganizationAuthRelationExist"
+
+	// Unbind the last policy failed.
+	FAILEDOPERATION_ORGANIZATIONDETACHLASTPOLICYERROR = "FailedOperation.OrganizationDetachLastPolicyError"
+
+	// Unbind policy failed.
+	FAILEDOPERATION_ORGANIZATIONDETACHPOLICYERROR = "FailedOperation.OrganizationDetachPolicyError"
 
 	// The organization already exists.
 	FAILEDOPERATION_ORGANIZATIONEXISTALREADY = "FailedOperation.OrganizationExistAlready"
@@ -257,8 +269,14 @@ const (
 	// The organization policy is invalid.
 	FAILEDOPERATION_ORGANIZATIONPOLICYILLEGAL = "FailedOperation.OrganizationPolicyIllegal"
 
+	// Group policy is being used.
+	FAILEDOPERATION_ORGANIZATIONPOLICYINUSED = "FailedOperation.OrganizationPolicyInUsed"
+
 	// Group policy is not disabled.
 	FAILEDOPERATION_ORGANIZATIONPOLICYISNOTDISABLED = "FailedOperation.OrganizationPolicyIsNotDisabled"
+
+	// Group policy is not enabled.
+	FAILEDOPERATION_ORGANIZATIONPOLICYISNOTENABLED = "FailedOperation.OrganizationPolicyIsNotEnabled"
 
 	// Organization service delegation is in use.
 	FAILEDOPERATION_ORGANIZATIONSERVICEASSIGNISUSE = "FailedOperation.OrganizationServiceAssignIsUse"
@@ -268,6 +286,15 @@ const (
 
 	// The payer is invalid.
 	FAILEDOPERATION_PAYUINILLEGAL = "FailedOperation.PayUinIllegal"
+
+	// Member accounts with enabled tag policies exist. the group tag policy does not support enabling.
+	FAILEDOPERATION_POLICYENABLEINVALID = "FailedOperation.PolicyEnableInvalid"
+
+	// The number of user policies exceeds the limit.
+	FAILEDOPERATION_POLICYFULL = "FailedOperation.PolicyFull"
+
+	// The policy name specified in the name field already exists.
+	FAILEDOPERATION_POLICYNAMEINUSE = "FailedOperation.PolicyNameInUse"
 
 	// Failed to exit the shared unit.
 	FAILEDOPERATION_QUITSHAREUINT = "FailedOperation.QuitShareUint"
@@ -316,6 +343,12 @@ const (
 
 	// The shared member does not exist.
 	FAILEDOPERATION_SHAREMEMBERNOTEXIST = "FailedOperation.ShareMemberNotExist"
+
+	// The department is in the shared unit.
+	FAILEDOPERATION_SHARENODEEXISTED = "FailedOperation.ShareNodeExisted"
+
+	// The shared department does not exist.
+	FAILEDOPERATION_SHARENODENOTEXIST = "FailedOperation.ShareNodeNotExist"
 
 	// The member is using a shared resource.
 	FAILEDOPERATION_SHARERESOURCEMEMBERINUSE = "FailedOperation.ShareResourceMemberInUse"
@@ -389,6 +422,12 @@ const (
 	// The X509 certificate already exists.
 	FAILEDOPERATION_X509CERTIFICATEALREADYEXIST = "FailedOperation.X509CertificateAlreadyExist"
 
+	// The number of x509 certificates exceeds the limit.
+	FAILEDOPERATION_X509CERTIFICATELIMITEXCEEDED = "FailedOperation.X509CertificateLimitExceeded"
+
+	// A minimum of one x509 certificate is required.
+	FAILEDOPERATION_X509CERTIFICATEMINIMUMREQUIRED = "FailedOperation.X509CertificateMinimumRequired"
+
 	// X509 certificate parsing failed.
 	FAILEDOPERATION_X509CERTIFICATEPARSINGFAILED = "FailedOperation.X509CertificateParsingFailed"
 
@@ -404,8 +443,23 @@ const (
 	// The parameter is incorrect.
 	INVALIDPARAMETER = "InvalidParameter"
 
+	// The Action field in the policy document is invalid.
+	INVALIDPARAMETER_ACTIONERROR = "InvalidParameter.ActionError"
+
+	// The operation does not exist in the policy syntax.
+	INVALIDPARAMETER_ACTIONMISS = "InvalidParameter.ActionMiss"
+
+	// The operation does not exist in the policy syntax.
+	INVALIDPARAMETER_ACTIONNOTEXIST = "InvalidParameter.ActionNotExist"
+
+	// The operation service does not exist in the policy syntax.
+	INVALIDPARAMETER_ACTIONSERVICENOTEXIST = "InvalidParameter.ActionServiceNotExist"
+
 	// The member in pay-on-behalf mode is not allowed to exit the organization voluntarily.
 	INVALIDPARAMETER_ALLOWQUITILLEGAL = "InvalidParameter.AllowQuitIllegal"
+
+	// The authorized object policy has reached the upper limit.
+	INVALIDPARAMETER_ATTACHMENTFULL = "InvalidParameter.AttachmentFull"
 
 	// The permission configuration cannot be bound to this policy.
 	INVALIDPARAMETER_BINDPOLICYNAMENOTALLOWED = "InvalidParameter.BindPolicyNameNotAllowed"
@@ -416,11 +470,26 @@ const (
 	// The mobile phone verification code has expired.
 	INVALIDPARAMETER_CODEEXPIRED = "InvalidParameter.CodeExpired"
 
+	// The condition content in policy syntax is incorrect.
+	INVALIDPARAMETER_CONDITIONCONTENTERROR = "InvalidParameter.ConditionContentError"
+
+	// The condition field in the policy document is invalid.
+	INVALIDPARAMETER_CONDITIONERROR = "InvalidParameter.ConditionError"
+
+	// The conditional operator in policy syntax is incorrect.
+	INVALIDPARAMETER_CONDITIONTYPEERROR = "InvalidParameter.ConditionTypeError"
+
 	// The permission configuration name already exists.
 	INVALIDPARAMETER_CONFIGURATIONNAMEALREADYEXISTS = "InvalidParameter.ConfigurationNameAlreadyExists"
 
 	// The permission configuration name has a format error.
 	INVALIDPARAMETER_CONFIGURATIONNAMEFORMATERROR = "InvalidParameter.ConfigurationNameFormatError"
+
+	// The length of the Description parameter cannot be greater than 300 bytes.
+	INVALIDPARAMETER_DESCRIPTIONLENGTHOVERLIMIT = "InvalidParameter.DescriptionLengthOverlimit"
+
+	// The Effect field in the policy document is invalid.
+	INVALIDPARAMETER_EFFECTERROR = "InvalidParameter.EffectError"
 
 	// The email address already exists.
 	INVALIDPARAMETER_EMAILALREADYEXISTS = "InvalidParameter.EmailAlreadyExists"
@@ -440,17 +509,29 @@ const (
 	// The user does not exist in the user group.
 	INVALIDPARAMETER_GROUPUSERNOTEXIST = "InvalidParameter.GroupUserNotExist"
 
+	// The API does not exist.
+	INVALIDPARAMETER_INTERFACENOTEXIST = "InvalidParameter.InterfaceNotExist"
+
 	// The mailbox is invalid.
 	INVALIDPARAMETER_INVALIDEMAIL = "InvalidParameter.InvalidEmail"
 
 	// Invalid nextToken.
 	INVALIDPARAMETER_NEXTTOKENINVALID = "InvalidParameter.NextTokenInvalid"
 
+	// CAM does not support the resource type specified in the policy document.
+	INVALIDPARAMETER_NOTSUPPORTPRODUCT = "InvalidParameter.NotSupportProduct"
+
 	// The organization member does not exist.
 	INVALIDPARAMETER_ORGANIZATIONMEMBERNOTEXIST = "InvalidParameter.OrganizationMemberNotExist"
 
+	// The member is not an enterprise administrator.
+	INVALIDPARAMETER_ORGANIZATIONMEMBERNOTMANAGER = "InvalidParameter.OrganizationMemberNotManager"
+
 	// The organization node does not exist.
 	INVALIDPARAMETER_ORGANIZATIONNODENOTEXIST = "InvalidParameter.OrganizationNodeNotExist"
+
+	// Enterprise organization does not exist.
+	INVALIDPARAMETER_ORGANIZATIONNOTEXIST = "InvalidParameter.OrganizationNotExist"
 
 	// Parameter error.
 	INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
@@ -461,14 +542,68 @@ const (
 	// The custom policy content cannot be empty.
 	INVALIDPARAMETER_POLICYDOCUMENTEMPTY = "InvalidParameter.PolicyDocumentEmpty"
 
+	// The PolicyDocument field is invalid.
+	INVALIDPARAMETER_POLICYDOCUMENTERROR = "InvalidParameter.PolicyDocumentError"
+
+	// The PolicyDocument field exceeds the length limit.
+	INVALIDPARAMETER_POLICYDOCUMENTLENGTHOVERLIMIT = "InvalidParameter.PolicyDocumentLengthOverLimit"
+
+	// Policy ID does not exist.
+	INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
+
+	// The policy key of the tag policy content is duplicated.
+	INVALIDPARAMETER_POLICYKEYDUPLICATED = "InvalidParameter.PolicyKeyDuplicated"
+
 	// The policy name already exists.
 	INVALIDPARAMETER_POLICYNAMEALREADYEXISTS = "InvalidParameter.PolicyNameAlreadyExists"
+
+	// The PolicyName field is invalid.
+	INVALIDPARAMETER_POLICYNAMEERROR = "InvalidParameter.PolicyNameError"
+
+	// The policy name already exists.
+	INVALIDPARAMETER_POLICYNAMEEXISTED = "InvalidParameter.PolicyNameExisted"
 
 	// The policy name exceeds the length limit.
 	INVALIDPARAMETER_POLICYNAMESIZEOVERUPPERLIMIT = "InvalidParameter.PolicyNameSizeOverUpperLimit"
 
 	// Errors occurred when the policy type is modified. Only custom policies can be modified.
 	INVALIDPARAMETER_POLICYTYPEERROR = "InvalidParameter.PolicyTypeError"
+
+	// The principal field in the policy document is invalid.
+	INVALIDPARAMETER_PRINCIPALERROR = "InvalidParameter.PrincipalError"
+
+	// PrincipalQcs error.
+	INVALIDPARAMETER_PRINCIPALQCSERROR = "InvalidParameter.PrincipalQcsError"
+
+	// PrincipalQcs does not exist.
+	INVALIDPARAMETER_PRINCIPALQCSNOTEXIST = "InvalidParameter.PrincipalQcsNotExist"
+
+	// PrincipalService does not exist.
+	INVALIDPARAMETER_PRINCIPALSERVICENOTEXIST = "InvalidParameter.PrincipalServiceNotExist"
+
+	// System-Reserved tag keys qcloud, tencent, and project are creation prohibited.
+	INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
+
+	// The resource content in policy syntax is incorrect.
+	INVALIDPARAMETER_RESOURCECONTENTERROR = "InvalidParameter.ResourceContentError"
+
+	// The Resource field in the policy document is invalid.
+	INVALIDPARAMETER_RESOURCEERROR = "InvalidParameter.ResourceError"
+
+	// The resource project in policy syntax is incorrect.
+	INVALIDPARAMETER_RESOURCEPROJECTERROR = "InvalidParameter.ResourceProjectError"
+
+	// Resource QCS error.
+	INVALIDPARAMETER_RESOURCEQCSERROR = "InvalidParameter.ResourceQcsError"
+
+	// The resource region in policy syntax is incorrect.
+	INVALIDPARAMETER_RESOURCEREGIONERROR = "InvalidParameter.ResourceRegionError"
+
+	// The service does not exist in the policy syntax.
+	INVALIDPARAMETER_RESOURCESERVICENOTEXIST = "InvalidParameter.ResourceServiceNotExist"
+
+	// The main account to which the resource belongs in policy syntax is incorrect.
+	INVALIDPARAMETER_RESOURCEUINERROR = "InvalidParameter.ResourceUinError"
 
 	// The permission configuration does not exist.
 	INVALIDPARAMETER_ROLECONFIGURATIONNOTEXIST = "InvalidParameter.RoleConfigurationNotExist"
@@ -485,8 +620,14 @@ const (
 	// SCIM synchronization status error
 	INVALIDPARAMETER_SCIMSYNCSTATUSERROR = "InvalidParameter.ScimSyncStatusError"
 
+	// The Statement field in the policy document is invalid.
+	INVALIDPARAMETER_STATEMENTERROR = "InvalidParameter.StatementError"
+
 	// Tag value error.
 	INVALIDPARAMETER_TAGERROR = "InvalidParameter.TagError"
+
+	// The current business does not support tag operations.
+	INVALIDPARAMETER_UNSUPPORTEDSERVICE = "InvalidParameter.UnsupportedService"
 
 	// The user still exists in the user group.
 	INVALIDPARAMETER_USERALREADYEXISTSGROUP = "InvalidParameter.UserAlreadyExistsGroup"
@@ -494,14 +635,23 @@ const (
 	// SCIM key status error
 	INVALIDPARAMETER_USERSCIMCREDENTIALSTATUSERROR = "InvalidParameter.UserScimCredentialStatusError"
 
+	// Incorrect user type.
+	INVALIDPARAMETER_USERTYPEERROR = "InvalidParameter.UserTypeError"
+
 	// The username already exists.
 	INVALIDPARAMETER_USERNAMEALREADYEXISTS = "InvalidParameter.UsernameAlreadyExists"
 
 	// The username has a format error.
 	INVALIDPARAMETER_USERNAMEFORMATERROR = "InvalidParameter.UsernameFormatError"
 
+	// The Version field in the policy document is invalid.
+	INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"
+
 	// The CIC space name already exists. You should change the space name.
 	INVALIDPARAMETERVALUE_IDENTITYCENTERZONENAMEALREADYEXIST = "InvalidParameterValue.IdentityCenterZoneNameAlreadyExist"
+
+	// Policy content is invalid.
+	INVALIDPARAMETERVALUE_POLICYCONTENTINVALID = "InvalidParameterValue.PolicyContentInvalid"
 
 	// The SSO enabling status is invalid.
 	INVALIDPARAMETERVALUE_SSOSTATUSINVALID = "InvalidParameterValue.SSoStatusInvalid"
@@ -566,11 +716,20 @@ const (
 	// The number of shared members for this operation exceeds the upper limit.
 	LIMITEXCEEDED_SHAREUNITMEMBEROVERLIMIT = "LimitExceeded.ShareUnitMemberOverLimit"
 
+	// The number of departments in the shared unit exceeds the upper limit.
+	LIMITEXCEEDED_SHAREUNITNODEOVERLIMIT = "LimitExceeded.ShareUnitNodeOverLimit"
+
 	// The number of shared resources for this operation exceeds the upper limit.
 	LIMITEXCEEDED_SHAREUNITRESOURCEOVERLIMIT = "LimitExceeded.ShareUnitResourceOverLimit"
 
+	// The number of tag policies exceeds the limit.
+	LIMITEXCEEDED_TAGPOLICY = "LimitExceeded.TagPolicy"
+
 	// The number of modifications to member binding information exceeds the limit.
 	LIMITEXCEEDED_UPDATEEMAILBINDOVERLIMIT = "LimitExceeded.UpdateEmailBindOverLimit"
+
+	// Parameters are missing.
+	MISSINGPARAMETER = "MissingParameter"
 
 	// Operation denied.
 	OPERATIONDENIED = "OperationDenied"
@@ -578,8 +737,23 @@ const (
 	// The resource does not exist.
 	RESOURCENOTFOUND = "ResourceNotFound"
 
+	// Application does not exist.
+	RESOURCENOTFOUND_APPLYNOTEXIST = "ResourceNotFound.ApplyNotExist"
+
+	// The member permission change record does not exist.
+	RESOURCENOTFOUND_CHANGEPERMISSIONNOTEXIST = "ResourceNotFound.ChangePermissionNotExist"
+
+	// Valid policy does not exist.
+	RESOURCENOTFOUND_EFFECTIVEPOLICYNOTFOUND = "ResourceNotFound.EffectivePolicyNotFound"
+
 	// The mailbox binding record does not exist.
 	RESOURCENOTFOUND_EMAILBINDRECORDNOTEXIST = "ResourceNotFound.EmailBindRecordNotExist"
+
+	// Invitation message does not exist.
+	RESOURCENOTFOUND_INVITATIONNOTEXIST = "ResourceNotFound.InvitationNotExist"
+
+	// The operation event does not exist.
+	RESOURCENOTFOUND_MEMBEREVENTNOTEXIST = "ResourceNotFound.MemberEventNotExist"
 
 	// The authorizable member identity does not exist.
 	RESOURCENOTFOUND_MEMBERIDENTITYNOTEXIST = "ResourceNotFound.MemberIdentityNotExist"
@@ -587,8 +761,17 @@ const (
 	// The member does not exist.
 	RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
 
+	// The member operation approval does not exist.
+	RESOURCENOTFOUND_MEMBEROPERATEPROCESSNOTEXIST = "ResourceNotFound.MemberOperateProcessNotExist"
+
 	// The organization member policy does not exist.
 	RESOURCENOTFOUND_MEMBERPOLICYNOTEXIST = "ResourceNotFound.MemberPolicyNotExist"
+
+	// Enterprise organizational unit does not exist.
+	RESOURCENOTFOUND_NODENOTEXIST = "ResourceNotFound.NodeNotExist"
+
+	// The resource does not exist.
+	RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 
 	// The authentication subject does not exist.
 	RESOURCENOTFOUND_ORGANIZATIONAUTHRELATIONNOTEXIST = "ResourceNotFound.OrganizationAuthRelationNotExist"
@@ -612,7 +795,13 @@ const (
 	RESOURCENOTFOUND_ORGANIZATIONSERVICENOTEXIST = "ResourceNotFound.OrganizationServiceNotExist"
 
 	// Policy does not exist.
+	RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
+
+	// Policy does not exist.
 	RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+
+	// The shareable resource type does not exist.
+	RESOURCENOTFOUND_RESOURCETYPENOTEXIST = "ResourceNotFound.ResourceTypeNotExist"
 
 	// The permission authorization record does not exist.
 	RESOURCENOTFOUND_ROLECONFIGURATIONAUTHORIZATIONNOTFOUND = "ResourceNotFound.RoleConfigurationAuthorizationNotFound"
@@ -632,6 +821,9 @@ const (
 	// The organization service role does not exist.
 	RESOURCENOTFOUND_SERVICEROLENOTEXIST = "ResourceNotFound.ServiceRoleNotExist"
 
+	// The shared resource member information does not exist.
+	RESOURCENOTFOUND_SHARERESOURCEMEMBERNOTEXIST = "ResourceNotFound.ShareResourceMemberNotExist"
+
 	// The user does not exist.
 	RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 
@@ -646,6 +838,9 @@ const (
 
 	// Resources are unavailable.
 	RESOURCEUNAVAILABLE = "ResourceUnavailable"
+
+	// Unauthorized operation.
+	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 
 	// The operation is not supported.
 	UNSUPPORTEDOPERATION = "UnsupportedOperation"

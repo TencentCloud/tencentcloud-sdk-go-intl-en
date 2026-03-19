@@ -1178,8 +1178,7 @@ type CdbSellConfig struct {
 	// Status. The value `0` indicates that this specification is available.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Instance type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance), `BASIC_V2` (basic v2 instance).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance type, possible value ranges from UNIVERSAL (universal type), EXCLUSIVE (exclusive), BASIC (basic), to BASIC_V2 (basic v2).
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
 	// Engine type description. Valid values: `Innodb`, `RocksDB`.
@@ -1190,7 +1189,13 @@ type CdbSellConfig struct {
 }
 
 type CdbSellType struct {
-	// Name of the purchasable instance. Valid values: `Z3` (High-availability instance. `DeviceType`:`UNIVERSAL`, `EXCLUSIVE`; `CVM` (basic instance. `DeviceType`: `BASIC`); `TKE` (basic v2 instance. `DeviceType`: `BASIC_V2`).
+	// Purchasable instance name.
+	// Z3: High-availability, corresponds to the specified specification DeviceType, including UNIVERSAL and EXCLUSIVE.
+	// CVM: It is a basic edition type, and the DeviceType in the corresponding specifications is BASIC (Offline).
+	// TKE: It is the basic version v2 type, and the DeviceType in the corresponding specifications is BASIC_V2.
+	// CLOUD_NATIVE_CLUSTER: Represents the standard type of cloud disk edition.
+	// CLOUD_NATIVE_CLUSTER_EXCLUSIVE: Indicates the enhanced cloud disk edition.
+	// ECONOMICAL: Means economical.
 	TypeName *string `json:"TypeName,omitnil,omitempty" name:"TypeName"`
 
 	// Engine version number
@@ -1233,7 +1238,7 @@ type CdbZoneSellConf struct {
 	// Whether it is a BM zone
 	IsBm *bool `json:"IsBm,omitnil,omitempty" name:"IsBm"`
 
-	// Supported billing method. Valid values: `0` (monthly subscribed), `1` (hourly billed), `2` (pay-as-you-go)
+	// Supported billing method. Valid values: `0` (yearly/monthly subscribed), `1` (hourly billed), `2` (pay-as-you-go)
 	PayType []*string `json:"PayType,omitnil,omitempty" name:"PayType"`
 
 	// Data replication type. Valid values: `0` (async), `1` (semi-sync), `2` (strong sync)
@@ -1274,6 +1279,12 @@ type CdbZoneSellConf struct {
 
 	// Supported engine types for purchasable database
 	EngineType []*string `json:"EngineType,omitnil,omitempty" name:"EngineType"`
+
+	// Sales status of the cloud disk edition instance in the current availability zone. Possible returned values: 1-launched; 3-not available for sale; 4-not displayed.
+	CloudNativeClusterStatus *int64 `json:"CloudNativeClusterStatus,omitnil,omitempty" name:"CloudNativeClusterStatus"`
+
+	// Cloud disk edition or single-node basic edition supported disk type.
+	DiskTypeConf []*DiskTypeConfigItem `json:"DiskTypeConf,omitnil,omitempty" name:"DiskTypeConf"`
 }
 
 type CloneItem struct {
@@ -1557,6 +1568,16 @@ type ClusterInfo struct {
 
 	// Region.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+}
+
+type ClusterTopology struct {
+	// RW node topology.
+	// Description: NodeId can be obtained through [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1).
+	ReadWriteNode *ReadWriteNode `json:"ReadWriteNode,omitnil,omitempty" name:"ReadWriteNode"`
+
+	// RO node topology.
+	// Description: NodeId can be obtained through [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1).
+	ReadOnlyNodes []*ReadonlyNode `json:"ReadOnlyNodes,omitnil,omitempty" name:"ReadOnlyNodes"`
 }
 
 type ColumnPrivilege struct {
@@ -2959,28 +2980,34 @@ type CreateDBInstanceRequestParams struct {
 	// Number of instances. Value range: 1-100. Default value: `1`.
 	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// AZ information. The system will automatically select an AZ by default. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported AZs.
+	// For AZ information, please use the [Obtain the Purchasable Specifications of Cloud Databases](https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1) API to obtain the availability zones that can be created.
+	// Description: If you create a single-node, two-node, or three-node instance, this parameter is required. Specify an availability zone. If you do not specify an availability zone, the system will automatically select one (possibly not the availability zone you want to deploy in). If you create a cloud disk edition instance, leave this parameter empty. Configure the availability zone for the read-write node and read-only node with parameter ClusterTopology.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// VPC ID. If this parameter is not passed in, the basic network will be selected by default. You can use the [DescribeVpcs](https://intl.cloud.tencent.com/document/api/215/15778?from_cn_redirect=1) API to query the VPCs.
+	// VPC ID. Please use [Querying VPC list](https://www.tencentcloud.com/document/api/215/15778?from_cn_redirect=1).
+	// Description: If a cloud disk edition instance is created, this item is required and must be a VPC type. If this item is left blank, the system will select the default VPC.
 	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
-	// VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. You can use the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API to query the subnet lists.
+	// Subnet ID in the private network. If UniqVpcId is set up, UniqSubnetId is required. Please use [query subnet list](https://www.tencentcloud.com/document/api/215/15784?from_cn_redirect=1).
+	// Description: If this item is left empty, the system will select the default subnet in the Default VPC.
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
 	// Project ID. If this parameter is left empty, the default project will be used. When you purchase read-only instances and disaster recovery instances, the project ID is the same as that of the source instance by default.
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Custom port. Value range: 1024-65535.
+	// Custom port. Port range: 1024-65535.
+	// Description: If this item is left blank, it defaults to 3306.
 	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
-	// Instance typeA. Valid values: `master` (source instance), `dr` (disaster recovery instance), `ro` (read-only instance).
+	// Instance type. Supported values include: master - indicates the primary instance, dr - indicates the disaster recovery instance, ro - indicates the read-only instance.
+	// Description: Select instance type. The master type is selected by default if left empty.
 	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
 
-	// Instance ID. It is required when purchasing a read-only instance, which is the same as the source instance ID. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the instance ID.
+	// Instance ID, required when purchasing a read-only instance or disaster recovery instance. This field represents the primary instance ID of the read-only instance or disaster recovery instance. Please use the [Query Instance List](https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1) API to query the cloud database instance ID.
 	MasterInstanceId *string `json:"MasterInstanceId,omitnil,omitempty" name:"MasterInstanceId"`
 
-	// MySQL version. Valid values: `5.5`, `5.6`, `5.7`, and `8.0`. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported instance versions.
+	// MySQL version, including 5.5, 5.6, 5.7, and 8.0. Please use the [obtain the purchasable specifications of cloud databases](https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1) API to get the version of the instance created.
+	// Description: When creating a non-cloud disk edition instance, specify the instance version as needed (recommend 5.7 or 8.0). If this parameter is left empty, the default value is 8.0. If creating a cloud disk edition instance, this parameter can only be set to 5.7 or 8.0.
 	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
 
 	// The root account password, which can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and symbols `_+-&=!@#$%^*()`. This parameter applies to source instances but not to read-only or disaster recovery instances.
@@ -2992,16 +3019,18 @@ type CreateDBInstanceRequestParams struct {
 	// Multi-AZ or single-AZ. Valid values: `0` (single-AZ), `1` (multi-AZ). Default value: `0`.
 	DeployMode *int64 `json:"DeployMode,omitnil,omitempty" name:"DeployMode"`
 
-	// Information of replica AZ 1, which is the `Zone` value by default.
+	// AZ information of standby database 1.
+	// Description: For two-node and three-node instances, specify this parameter. If not specified, it defaults to the value of Zone. For cloud disk edition instances, this parameter is optional. Configure the availability zone for read-write nodes and read-only nodes with parameter ClusterTopology. Single-node instances are single availability zone and no need to specify this parameter.
 	SlaveZone *string `json:"SlaveZone,omitnil,omitempty" name:"SlaveZone"`
 
-	// List of parameters in the format of ParamList.0.Name=auto_increment&ParamList.0.Value=1. You can use the [DescribeDefaultParams](https://intl.cloud.tencent.com/document/api/236/32662?from_cn_redirect=1) API to query the configurable parameters.
+	// Parameter list. The parameter format is ParamList.0.Name=auto_increment&ParamList.0.Value=1. You can query the configurable parameters by default by referring to [Querying the Default Configurable Parameter List](https://www.tencentcloud.com/document/api/236/32662?from_cn_redirect=1).
+	// Description: table name case sensitivity can be enabled or disabled with parameter lower_case_table_names. A parameter value of 0 means enabling, and 1 means disabling. If not set, the default value is 0. For MySQL 8.0 edition instances, you need to set the lower_case_table_names parameter when creating an instance to turn on or off table name case sensitivity. Once created, the parameter cannot be modified, meaning table name case sensitivity cannot be changed after creation. Other database versions support modifying the lower_case_table_names parameter after the instance is created. For the function invocation method to set table name case sensitivity when creating an instance, please see example 3 in this document.
 	ParamList []*ParamInfo `json:"ParamList,omitnil,omitempty" name:"ParamList"`
 
 	// Information of replica AZ 2, which is left empty by default. Specify this parameter when purchasing a source instance in the one-source-two-replica architecture.
 	BackupZone *string `json:"BackupZone,omitnil,omitempty" name:"BackupZone"`
 
-	// Auto-renewal flag. Valid values: `0` (auto-renewal not enabled), `1` (auto-renewal enabled).
+	// Auto-renewal flag. Available values are: 0 - no auto-renewal; 1 - auto-renewal. Default is 0.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
 	// Region information of the source instance, which is required when purchasing a read-only or disaster recovery instance.
@@ -3025,10 +3054,12 @@ type CreateDBInstanceRequestParams struct {
 	// A string unique in 48 hours, which is supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
 	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
 
-	// Instance isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). Default value: `UNIVERSAL`.
+	// Instance isolation type. Supported values include "UNIVERSAL" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "BASIC_V2" - ONTKE single-node instance, "CLOUD_NATIVE_CLUSTER" - standard type for cloud disk edition, "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - enhanced for cloud disk edition. Default to general-purpose instance if not specified.
+	// Description: If a cloud disk edition instance is created, this parameter is required.
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-	// Parameter template ID
+	// Parameter template id.
+	// Remark: If you use a custom parameter template ID, you can input the custom parameter template ID. If you plan to use the default parameter template, inputting the parameter template ID is invalid, and you need to set ParamTemplateType.
 	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
 
 	// Array of alarm policy IDs, which can be obtained through the `OriginId` field in the return value of the `DescribeAlarmPolicy` API of TCOP.
@@ -3046,13 +3077,15 @@ type CreateDBInstanceRequestParams struct {
 	// Financial cage ID.
 	CageId *string `json:"CageId,omitnil,omitempty" name:"CageId"`
 
-	// Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
+	// Default parameter template type. Supported values include: "HIGH_STABILITY" - high-stability template, "HIGH_PERFORMANCE" - high-performance template.
+	// Remark: If you need to use the TencentDB for MySQL default parameter template, set up ParamTemplateType.
 	ParamTemplateType *string `json:"ParamTemplateType,omitnil,omitempty" name:"ParamTemplateType"`
 
 	// The array of alarm policy names, such as ["policy-uyoee9wg"]. If the `AlarmPolicyList` parameter is specified, this parameter is invalid.
 	AlarmPolicyIdList []*string `json:"AlarmPolicyIdList,omitnil,omitempty" name:"AlarmPolicyIdList"`
 
-	// Whether to check the request without creating any instance. Valid values: `true`, `false` (default). After being submitted, the request will be checked to see if it is in correct format and has all required parameters with valid values. An error code is returned if the check failed, and `RequestId` is returned if the check succeeded. After a successful check, no instance will be created if this parameter is set to `true`, whereas an instance will be created and if it is set to `false`.
+	// Whether to only pre-check this request. true: Send a check request without creating an instance. Check items include whether required parameters are filled, request format, and service limit. If the check failed, return the corresponding error code; if the check passed, return RequestId. false: Send a normal request and create the instance directly after passing the check.
+	// Defaults to false.
 	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
 
 	// Instance engine type. Valid values: `InnoDB` (default), `RocksDB`.
@@ -3060,6 +3093,20 @@ type CreateDBInstanceRequestParams struct {
 
 	// The list of IPs for sources instances. Only one IP address can be assigned to a single source instance. If all IPs are used up, the system will automatically assign IPs to the remaining source instances that do not have one.
 	Vips []*string `json:"Vips,omitnil,omitempty" name:"Vips"`
+
+	// Data protection space size of the cloud disk edition instance in GB. Setting range is 1 - 10.
+	DataProtectVolume *int64 `json:"DataProtectVolume,omitnil,omitempty" name:"DataProtectVolume"`
+
+	// Cloud disk edition node topology configuration.
+	// Description: If a cloud disk edition instance is purchased, this parameter is required. Set the RW and RO node topology for the cloud disk edition instance. The RO node scope is 1-5. Set at least 1 RO node.
+	ClusterTopology *ClusterTopology `json:"ClusterTopology,omitnil,omitempty" name:"ClusterTopology"`
+
+	// Disk Type. This parameter can be specified for single-node (cloud disk edition) or cloud disk edition instance. CLOUD_SSD means SSD Cloud Block Storage, CLOUD_HSSD refers to enhanced SSD cloud disk, and CLOUD_PREMIUM indicates high-performance cloud block storage.
+	// Description: The supported regions for the hard disk type of single-node (cloud disk edition) and cloud disk edition instances vary slightly. For the specific support situation, refer to [Regions and Availability Zones](https://www.tencentcloud.com/document/product/236/8458?from_cn_redirect=1).
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
+
+	// Turn on or off instance destruction protection. on - enabled, off - disabled.
+	DestroyProtect *string `json:"DestroyProtect,omitnil,omitempty" name:"DestroyProtect"`
 }
 
 type CreateDBInstanceRequest struct {
@@ -3077,28 +3124,34 @@ type CreateDBInstanceRequest struct {
 	// Number of instances. Value range: 1-100. Default value: `1`.
 	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// AZ information. The system will automatically select an AZ by default. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported AZs.
+	// For AZ information, please use the [Obtain the Purchasable Specifications of Cloud Databases](https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1) API to obtain the availability zones that can be created.
+	// Description: If you create a single-node, two-node, or three-node instance, this parameter is required. Specify an availability zone. If you do not specify an availability zone, the system will automatically select one (possibly not the availability zone you want to deploy in). If you create a cloud disk edition instance, leave this parameter empty. Configure the availability zone for the read-write node and read-only node with parameter ClusterTopology.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// VPC ID. If this parameter is not passed in, the basic network will be selected by default. You can use the [DescribeVpcs](https://intl.cloud.tencent.com/document/api/215/15778?from_cn_redirect=1) API to query the VPCs.
+	// VPC ID. Please use [Querying VPC list](https://www.tencentcloud.com/document/api/215/15778?from_cn_redirect=1).
+	// Description: If a cloud disk edition instance is created, this item is required and must be a VPC type. If this item is left blank, the system will select the default VPC.
 	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
-	// VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. You can use the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API to query the subnet lists.
+	// Subnet ID in the private network. If UniqVpcId is set up, UniqSubnetId is required. Please use [query subnet list](https://www.tencentcloud.com/document/api/215/15784?from_cn_redirect=1).
+	// Description: If this item is left empty, the system will select the default subnet in the Default VPC.
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
 	// Project ID. If this parameter is left empty, the default project will be used. When you purchase read-only instances and disaster recovery instances, the project ID is the same as that of the source instance by default.
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Custom port. Value range: 1024-65535.
+	// Custom port. Port range: 1024-65535.
+	// Description: If this item is left blank, it defaults to 3306.
 	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
-	// Instance typeA. Valid values: `master` (source instance), `dr` (disaster recovery instance), `ro` (read-only instance).
+	// Instance type. Supported values include: master - indicates the primary instance, dr - indicates the disaster recovery instance, ro - indicates the read-only instance.
+	// Description: Select instance type. The master type is selected by default if left empty.
 	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
 
-	// Instance ID. It is required when purchasing a read-only instance, which is the same as the source instance ID. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the instance ID.
+	// Instance ID, required when purchasing a read-only instance or disaster recovery instance. This field represents the primary instance ID of the read-only instance or disaster recovery instance. Please use the [Query Instance List](https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1) API to query the cloud database instance ID.
 	MasterInstanceId *string `json:"MasterInstanceId,omitnil,omitempty" name:"MasterInstanceId"`
 
-	// MySQL version. Valid values: `5.5`, `5.6`, `5.7`, and `8.0`. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported instance versions.
+	// MySQL version, including 5.5, 5.6, 5.7, and 8.0. Please use the [obtain the purchasable specifications of cloud databases](https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1) API to get the version of the instance created.
+	// Description: When creating a non-cloud disk edition instance, specify the instance version as needed (recommend 5.7 or 8.0). If this parameter is left empty, the default value is 8.0. If creating a cloud disk edition instance, this parameter can only be set to 5.7 or 8.0.
 	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
 
 	// The root account password, which can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and symbols `_+-&=!@#$%^*()`. This parameter applies to source instances but not to read-only or disaster recovery instances.
@@ -3110,16 +3163,18 @@ type CreateDBInstanceRequest struct {
 	// Multi-AZ or single-AZ. Valid values: `0` (single-AZ), `1` (multi-AZ). Default value: `0`.
 	DeployMode *int64 `json:"DeployMode,omitnil,omitempty" name:"DeployMode"`
 
-	// Information of replica AZ 1, which is the `Zone` value by default.
+	// AZ information of standby database 1.
+	// Description: For two-node and three-node instances, specify this parameter. If not specified, it defaults to the value of Zone. For cloud disk edition instances, this parameter is optional. Configure the availability zone for read-write nodes and read-only nodes with parameter ClusterTopology. Single-node instances are single availability zone and no need to specify this parameter.
 	SlaveZone *string `json:"SlaveZone,omitnil,omitempty" name:"SlaveZone"`
 
-	// List of parameters in the format of ParamList.0.Name=auto_increment&ParamList.0.Value=1. You can use the [DescribeDefaultParams](https://intl.cloud.tencent.com/document/api/236/32662?from_cn_redirect=1) API to query the configurable parameters.
+	// Parameter list. The parameter format is ParamList.0.Name=auto_increment&ParamList.0.Value=1. You can query the configurable parameters by default by referring to [Querying the Default Configurable Parameter List](https://www.tencentcloud.com/document/api/236/32662?from_cn_redirect=1).
+	// Description: table name case sensitivity can be enabled or disabled with parameter lower_case_table_names. A parameter value of 0 means enabling, and 1 means disabling. If not set, the default value is 0. For MySQL 8.0 edition instances, you need to set the lower_case_table_names parameter when creating an instance to turn on or off table name case sensitivity. Once created, the parameter cannot be modified, meaning table name case sensitivity cannot be changed after creation. Other database versions support modifying the lower_case_table_names parameter after the instance is created. For the function invocation method to set table name case sensitivity when creating an instance, please see example 3 in this document.
 	ParamList []*ParamInfo `json:"ParamList,omitnil,omitempty" name:"ParamList"`
 
 	// Information of replica AZ 2, which is left empty by default. Specify this parameter when purchasing a source instance in the one-source-two-replica architecture.
 	BackupZone *string `json:"BackupZone,omitnil,omitempty" name:"BackupZone"`
 
-	// Auto-renewal flag. Valid values: `0` (auto-renewal not enabled), `1` (auto-renewal enabled).
+	// Auto-renewal flag. Available values are: 0 - no auto-renewal; 1 - auto-renewal. Default is 0.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
 	// Region information of the source instance, which is required when purchasing a read-only or disaster recovery instance.
@@ -3143,10 +3198,12 @@ type CreateDBInstanceRequest struct {
 	// A string unique in 48 hours, which is supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
 	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
 
-	// Instance isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). Default value: `UNIVERSAL`.
+	// Instance isolation type. Supported values include "UNIVERSAL" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "BASIC_V2" - ONTKE single-node instance, "CLOUD_NATIVE_CLUSTER" - standard type for cloud disk edition, "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - enhanced for cloud disk edition. Default to general-purpose instance if not specified.
+	// Description: If a cloud disk edition instance is created, this parameter is required.
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-	// Parameter template ID
+	// Parameter template id.
+	// Remark: If you use a custom parameter template ID, you can input the custom parameter template ID. If you plan to use the default parameter template, inputting the parameter template ID is invalid, and you need to set ParamTemplateType.
 	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
 
 	// Array of alarm policy IDs, which can be obtained through the `OriginId` field in the return value of the `DescribeAlarmPolicy` API of TCOP.
@@ -3164,13 +3221,15 @@ type CreateDBInstanceRequest struct {
 	// Financial cage ID.
 	CageId *string `json:"CageId,omitnil,omitempty" name:"CageId"`
 
-	// Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
+	// Default parameter template type. Supported values include: "HIGH_STABILITY" - high-stability template, "HIGH_PERFORMANCE" - high-performance template.
+	// Remark: If you need to use the TencentDB for MySQL default parameter template, set up ParamTemplateType.
 	ParamTemplateType *string `json:"ParamTemplateType,omitnil,omitempty" name:"ParamTemplateType"`
 
 	// The array of alarm policy names, such as ["policy-uyoee9wg"]. If the `AlarmPolicyList` parameter is specified, this parameter is invalid.
 	AlarmPolicyIdList []*string `json:"AlarmPolicyIdList,omitnil,omitempty" name:"AlarmPolicyIdList"`
 
-	// Whether to check the request without creating any instance. Valid values: `true`, `false` (default). After being submitted, the request will be checked to see if it is in correct format and has all required parameters with valid values. An error code is returned if the check failed, and `RequestId` is returned if the check succeeded. After a successful check, no instance will be created if this parameter is set to `true`, whereas an instance will be created and if it is set to `false`.
+	// Whether to only pre-check this request. true: Send a check request without creating an instance. Check items include whether required parameters are filled, request format, and service limit. If the check failed, return the corresponding error code; if the check passed, return RequestId. false: Send a normal request and create the instance directly after passing the check.
+	// Defaults to false.
 	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
 
 	// Instance engine type. Valid values: `InnoDB` (default), `RocksDB`.
@@ -3178,6 +3237,20 @@ type CreateDBInstanceRequest struct {
 
 	// The list of IPs for sources instances. Only one IP address can be assigned to a single source instance. If all IPs are used up, the system will automatically assign IPs to the remaining source instances that do not have one.
 	Vips []*string `json:"Vips,omitnil,omitempty" name:"Vips"`
+
+	// Data protection space size of the cloud disk edition instance in GB. Setting range is 1 - 10.
+	DataProtectVolume *int64 `json:"DataProtectVolume,omitnil,omitempty" name:"DataProtectVolume"`
+
+	// Cloud disk edition node topology configuration.
+	// Description: If a cloud disk edition instance is purchased, this parameter is required. Set the RW and RO node topology for the cloud disk edition instance. The RO node scope is 1-5. Set at least 1 RO node.
+	ClusterTopology *ClusterTopology `json:"ClusterTopology,omitnil,omitempty" name:"ClusterTopology"`
+
+	// Disk Type. This parameter can be specified for single-node (cloud disk edition) or cloud disk edition instance. CLOUD_SSD means SSD Cloud Block Storage, CLOUD_HSSD refers to enhanced SSD cloud disk, and CLOUD_PREMIUM indicates high-performance cloud block storage.
+	// Description: The supported regions for the hard disk type of single-node (cloud disk edition) and cloud disk edition instances vary slightly. For the specific support situation, refer to [Regions and Availability Zones](https://www.tencentcloud.com/document/product/236/8458?from_cn_redirect=1).
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
+
+	// Turn on or off instance destruction protection. on - enabled, off - disabled.
+	DestroyProtect *string `json:"DestroyProtect,omitnil,omitempty" name:"DestroyProtect"`
 }
 
 func (r *CreateDBInstanceRequest) ToJsonString() string {
@@ -3230,6 +3303,10 @@ func (r *CreateDBInstanceRequest) FromJsonString(s string) error {
 	delete(f, "DryRun")
 	delete(f, "EngineType")
 	delete(f, "Vips")
+	delete(f, "DataProtectVolume")
+	delete(f, "ClusterTopology")
+	delete(f, "DiskType")
+	delete(f, "DestroyProtect")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBInstanceRequest has unknown keys!", "")
 	}
@@ -6822,22 +6899,22 @@ type DescribeDBPriceRequestParams struct {
 	// Number of instances. Value range: 1-100. Default value: 1. This parameter is required when `InstanceId` is empty.
 	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// Instance memory size in MB. This parameter is required when `InstanceId` is empty.
+	// Instance memory size, unit: MB. This parameter is required when InstanceId is empty. To ensure the input value is valid, please use the [obtain the purchasable specifications of cloud databases](https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1) API to get the saleable instance memory size range.
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance disk size in GB. This parameter is required when `InstanceId` is empty.
+	// Instance disk size, unit: GB. This parameter is required when InstanceId is empty. To ensure the input value is valid, please use the [obtain the purchasable specifications of cloud databases](https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1) API to get the saleable disk size range.
 	Volume *int64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
 	// Instance type. Valid values: `master` (source instance), `dr` (disaster recovery instance), `ro` (read-only instance). Default value: `master`. This parameter is required when `InstanceId` is empty.
 	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
 
-	// Billing mode. Valid values: `PRE_PAID` (monthly subscribed), `HOUR_PAID` (pay-as-you-go). This parameter is required when `InstanceId` is empty.
+	// Billing mode. Valid values: `PRE_PAID` (yearly/monthly subscribed), `HOUR_PAID` (pay-as-you-go). This parameter is required when `InstanceId` is empty.
 	PayType *string `json:"PayType,omitnil,omitempty" name:"PayType"`
 
 	// Data replication mode. Valid values: `0` (async), 1 (semi-sync), `2` (strong sync). Default value: `0`.
 	ProtectMode *int64 `json:"ProtectMode,omitnil,omitempty" name:"ProtectMode"`
 
-	// Instance isolation types Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). Default value: `UNIVERSAL`.  Default value: `UNIVERSAL`.
+	// Instance isolation type. Supported values include: "UNIVERSAL" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "BASIC_V2" - single-node instance of cloud disk edition, "CLOUD_NATIVE_CLUSTER" - cluster version standard type, "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - cluster version enhanced. Default to general-purpose instance if not specified.
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
 	// The number of the instance. Valid values: `1` (for read-only and basic instances), `2` (for other source instances). To query the price of a three-node instance, set this value to `3`.
@@ -6852,7 +6929,7 @@ type DescribeDBPriceRequestParams struct {
 	// Tiered pay-as-you-go pricing, which is valid only when `PayType` is set to `HOUR_PAID`. Valid values: `1`, `2`, `3`. For more information on tiered duration, visit https://intl.cloud.tencent.com/document/product/236/18335.?from_cn_redirect=1
 	Ladder *uint64 `json:"Ladder,omitnil,omitempty" name:"Ladder"`
 
-
+	// Disk Type. Specify this parameter when querying the price of a cluster edition or single-node instance of cloud disk edition. Supported values include "CLOUD_SSD" - SSD cloud disk, "CLOUD_HSSD" - enhanced SSD cloud disk. Default is SSD cloud disk.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 }
 
@@ -6868,22 +6945,22 @@ type DescribeDBPriceRequest struct {
 	// Number of instances. Value range: 1-100. Default value: 1. This parameter is required when `InstanceId` is empty.
 	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// Instance memory size in MB. This parameter is required when `InstanceId` is empty.
+	// Instance memory size, unit: MB. This parameter is required when InstanceId is empty. To ensure the input value is valid, please use the [obtain the purchasable specifications of cloud databases](https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1) API to get the saleable instance memory size range.
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance disk size in GB. This parameter is required when `InstanceId` is empty.
+	// Instance disk size, unit: GB. This parameter is required when InstanceId is empty. To ensure the input value is valid, please use the [obtain the purchasable specifications of cloud databases](https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1) API to get the saleable disk size range.
 	Volume *int64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
 	// Instance type. Valid values: `master` (source instance), `dr` (disaster recovery instance), `ro` (read-only instance). Default value: `master`. This parameter is required when `InstanceId` is empty.
 	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
 
-	// Billing mode. Valid values: `PRE_PAID` (monthly subscribed), `HOUR_PAID` (pay-as-you-go). This parameter is required when `InstanceId` is empty.
+	// Billing mode. Valid values: `PRE_PAID` (yearly/monthly subscribed), `HOUR_PAID` (pay-as-you-go). This parameter is required when `InstanceId` is empty.
 	PayType *string `json:"PayType,omitnil,omitempty" name:"PayType"`
 
 	// Data replication mode. Valid values: `0` (async), 1 (semi-sync), `2` (strong sync). Default value: `0`.
 	ProtectMode *int64 `json:"ProtectMode,omitnil,omitempty" name:"ProtectMode"`
 
-	// Instance isolation types Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). Default value: `UNIVERSAL`.  Default value: `UNIVERSAL`.
+	// Instance isolation type. Supported values include: "UNIVERSAL" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "BASIC_V2" - single-node instance of cloud disk edition, "CLOUD_NATIVE_CLUSTER" - cluster version standard type, "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - cluster version enhanced. Default to general-purpose instance if not specified.
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
 	// The number of the instance. Valid values: `1` (for read-only and basic instances), `2` (for other source instances). To query the price of a three-node instance, set this value to `3`.
@@ -6898,6 +6975,7 @@ type DescribeDBPriceRequest struct {
 	// Tiered pay-as-you-go pricing, which is valid only when `PayType` is set to `HOUR_PAID`. Valid values: `1`, `2`, `3`. For more information on tiered duration, visit https://intl.cloud.tencent.com/document/product/236/18335.?from_cn_redirect=1
 	Ladder *uint64 `json:"Ladder,omitnil,omitempty" name:"Ladder"`
 
+	// Disk Type. Specify this parameter when querying the price of a cluster edition or single-node instance of cloud disk edition. Supported values include "CLOUD_SSD" - SSD cloud disk, "CLOUD_HSSD" - enhanced SSD cloud disk. Default is SSD cloud disk.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 }
 
@@ -9308,6 +9386,14 @@ func (r *DisassociateSecurityGroupsResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DisassociateSecurityGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type DiskTypeConfigItem struct {
+	// Type of instance corresponding to the disk. Only support single node (cloud disk) and cloud disk edition.
+	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
+
+	// List of disk types to choose.
+	DiskType []*string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 }
 
 type DrInfo struct {
@@ -12730,6 +12816,25 @@ type ProxyNodeCustom struct {
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 }
 
+type ReadWriteNode struct {
+	// Availability zone where the RW node is located.
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// When upgrading a cloud disk edition instance, if you need to adjust the Availability Zone of Read-Only Nodes, you must specify the node ID.
+	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
+}
+
+type ReadonlyNode struct {
+	// Whether distributed in a random availability Zone. Import YES means random availability Zone. Otherwise used specified availability Zone.
+	IsRandomZone *string `json:"IsRandomZone,omitnil,omitempty" name:"IsRandomZone"`
+
+	// Specify the availability zone for node distribution.
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// When upgrading a cloud disk edition instance, if you need to adjust the Availability Zone of Read-Only Nodes, you must specify the node ID.
+	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
+}
+
 // Predefined struct for user
 type ReleaseIsolatedDBInstancesRequestParams struct {
 	// Array of instance IDs in the format of `cdb-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the ID, whose value is the `InstanceId` value in the output parameters.
@@ -12887,8 +12992,11 @@ type RenewDBInstanceRequestParams struct {
 	// Renewal period in months. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
-	// To renew a pay-as-you-go instance to a monthly subscribed one, you need to set this parameter to `PREPAID`.
+	// To renew a pay-as-you-go instance to a yearly/monthly subscribed one, you need to set this parameter to `PREPAID`.
 	ModifyPayType *string `json:"ModifyPayType,omitnil,omitempty" name:"ModifyPayType"`
+
+	// Auto-renewal flag. 0 means no auto-renewal, 1 means auto-renewal.
+	AutoRenew *int64 `json:"AutoRenew,omitnil,omitempty" name:"AutoRenew"`
 }
 
 type RenewDBInstanceRequest struct {
@@ -12900,8 +13008,11 @@ type RenewDBInstanceRequest struct {
 	// Renewal period in months. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
-	// To renew a pay-as-you-go instance to a monthly subscribed one, you need to set this parameter to `PREPAID`.
+	// To renew a pay-as-you-go instance to a yearly/monthly subscribed one, you need to set this parameter to `PREPAID`.
 	ModifyPayType *string `json:"ModifyPayType,omitnil,omitempty" name:"ModifyPayType"`
+
+	// Auto-renewal flag. 0 means no auto-renewal, 1 means auto-renewal.
+	AutoRenew *int64 `json:"AutoRenew,omitnil,omitempty" name:"AutoRenew"`
 }
 
 func (r *RenewDBInstanceRequest) ToJsonString() string {
@@ -12919,6 +13030,7 @@ func (r *RenewDBInstanceRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "TimeSpan")
 	delete(f, "ModifyPayType")
+	delete(f, "AutoRenew")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RenewDBInstanceRequest has unknown keys!", "")
 	}
@@ -13062,53 +13174,52 @@ func (r *RestartDBInstancesResponse) FromJsonString(s string) error {
 }
 
 type RoGroup struct {
-	// Read-only group mode. Valid values: `alone` (the system assigns a read-only group automatically), `allinone` (a new read-only group will be created), `join` (an existing read-only group will be used).
+	// <p>Read-only group mode. Available values are: alone-automatic allocation by the system; allinone-create a read-only group; join-use an existing read-only group.</p>
 	RoGroupMode *string `json:"RoGroupMode,omitnil,omitempty" name:"RoGroupMode"`
 
-	// Read-only group ID.
-	// Note: If the data structure is used during instance purchase, this item is required only when the read-only group mode is set to join.
+	// <p>Read-only group ID.<br>Note: If the data structure is used during instance purchase, this item is required only when the read-only group mode is set to join.</p>
 	RoGroupId *string `json:"RoGroupId,omitnil,omitempty" name:"RoGroupId"`
 
-	// Read-only group name.
+	// <p>Read-only group name.</p>
 	RoGroupName *string `json:"RoGroupName,omitnil,omitempty" name:"RoGroupName"`
 
-	// Whether to enable the function of isolating an instance that exceeds the latency threshold. If it is enabled, when the latency between the read-only instance and the primary instance exceeds the latency threshold, the read-only instance will be isolated. Valid values: 1 (enabled), 0 (not enabled)
+	// <p>Whether to enable the feature to isolate an instance that exceeds the latency threshold. After enabling this feature, if the delay between a read-only instance and the primary instance exceeds the delay threshold, the read-only instance will be isolated. Available values: 1-enable; 0-disable.</p>
 	RoOfflineDelay *int64 `json:"RoOfflineDelay,omitnil,omitempty" name:"RoOfflineDelay"`
 
-	// Delay threshold, in seconds. Value range: 1–10000. The value is an integer.
+	// <p>Delay threshold, in seconds. Value range: 1–10000. The value is an integer.</p>
 	RoMaxDelayTime *int64 `json:"RoMaxDelayTime,omitnil,omitempty" name:"RoMaxDelayTime"`
 
-	// Minimum number of instances to be retained. If the number of the purchased read-only instances is smaller than the set value, they will not be removed.
+	// <p>Minimum number of instances to retain. If the number of read-only instances purchased is less than the set number, removal will not occur.</p>
 	MinRoInGroup *int64 `json:"MinRoInGroup,omitnil,omitempty" name:"MinRoInGroup"`
 
-	// Read/write weight distribution mode. Valid values: `system` (weights are assigned by the system automatically), `custom` (weights are customized)
+	// <p>Read-write weight allocation mode. Available values: system-automatic allocation by the system; custom-customization.</p>
 	WeightMode *string `json:"WeightMode,omitnil,omitempty" name:"WeightMode"`
 
-	// This field has been disused. To view the weight of a read-only instance, check the `Weight` value in the `RoInstances` field.
+	// <p>This field is deprecated and meaningless. To view the weight of a read-only instance, check the Weight value in the RoInstances field.</p>
 	Weight *int64 `json:"Weight,omitnil,omitempty" name:"Weight"`
 
-	// Details of read-only instances in read-only group
+	// <p>Details of read-only instances in the read-only group.</p>
 	RoInstances []*RoInstanceInfo `json:"RoInstances,omitnil,omitempty" name:"RoInstances"`
 
-	// Private IP of read-only group.
+	// <p>Private IP address of the read-only group.</p>
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
-	// Private network port number of read-only group.
+	// <p>Private network port number of the read-only group.</p>
 	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
 
-	// Virtual Private Cloud (VPC) ID.
+	// <p>VPC ID.</p>
 	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
-	// Subnet ID.
+	// <p>Subnet ID.</p>
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
-	// Region of the read-only group.
+	// <p>Region of the read-only group.</p>
 	RoGroupRegion *string `json:"RoGroupRegion,omitnil,omitempty" name:"RoGroupRegion"`
 
-	// AZ of the read-only group.
+	// <p>AZ of the read-only group.</p>
 	RoGroupZone *string `json:"RoGroupZone,omitnil,omitempty" name:"RoGroupZone"`
 
-	// Replication delay time, in seconds. Value range: 1–259200. The value is an integer.
+	// <p>Replication delay time, in seconds. Value range: 1–259200. The value is an integer.</p>
 	DelayReplicationTime *int64 `json:"DelayReplicationTime,omitnil,omitempty" name:"DelayReplicationTime"`
 }
 
@@ -13148,7 +13259,7 @@ type RoInstanceInfo struct {
 	// RO instance region name, such as ap-shanghai
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Name of RO AZ, such as ap-shanghai-2
+	// Canonical name of the RO Availability Zone, for example ap-shanghai-2
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// RO instance ID in the format of cdbro-c1nl9rpv
