@@ -1571,7 +1571,7 @@ type CreateCloudReadOnlyDBInstancesRequestParams struct {
 	// Minimum number of reserved read-only replicas when the delayed removal is enabled for the new read-only group, which is required when `ReadOnlyGroupType` is `2` and `ReadOnlyGroupIsOfflineDelay` is `1`.
 	ReadOnlyGroupMinInGroup *int64 `json:"ReadOnlyGroupMinInGroup,omitnil,omitempty" name:"ReadOnlyGroupMinInGroup"`
 
-	// Billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID` (pay-as-you-go).
+	// Billing mode. Valid values: `PREPAID` (yearly/monthly subscription), `POSTPAID` (pay-as-you-go).
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
 	// Number of read-only instances to be purchased this time. Default value: `2`.
@@ -1650,7 +1650,7 @@ type CreateCloudReadOnlyDBInstancesRequest struct {
 	// Minimum number of reserved read-only replicas when the delayed removal is enabled for the new read-only group, which is required when `ReadOnlyGroupType` is `2` and `ReadOnlyGroupIsOfflineDelay` is `1`.
 	ReadOnlyGroupMinInGroup *int64 `json:"ReadOnlyGroupMinInGroup,omitnil,omitempty" name:"ReadOnlyGroupMinInGroup"`
 
-	// Billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID` (pay-as-you-go).
+	// Billing mode. Valid values: `PREPAID` (yearly/monthly subscription), `POSTPAID` (pay-as-you-go).
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
 	// Number of read-only instances to be purchased this time. Default value: `2`.

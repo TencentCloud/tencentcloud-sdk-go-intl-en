@@ -4599,6 +4599,74 @@ func (c *Client) DescribeAigcApiTokensWithContext(ctx context.Context, request *
     return
 }
 
+func NewDescribeAigcUsageDataRequest() (request *DescribeAigcUsageDataRequest) {
+    request = &DescribeAigcUsageDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeAigcUsageData")
+    
+    
+    return
+}
+
+func NewDescribeAigcUsageDataResponse() (response *DescribeAigcUsageDataResponse) {
+    response = &DescribeAigcUsageDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAigcUsageData
+// This API is used to return statistical information of AIGC within a specified time range.
+//
+// 1. AIGC stats from the last 365 days can be queried.
+//
+//    2. The query time span should not exceed 90 days.
+//
+// 3. If the query time span exceeds 1 day, return data with day-level granularity. Otherwise, return data with 5-minute granularity.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeAigcUsageData(request *DescribeAigcUsageDataRequest) (response *DescribeAigcUsageDataResponse, err error) {
+    return c.DescribeAigcUsageDataWithContext(context.Background(), request)
+}
+
+// DescribeAigcUsageData
+// This API is used to return statistical information of AIGC within a specified time range.
+//
+// 1. AIGC stats from the last 365 days can be queried.
+//
+//    2. The query time span should not exceed 90 days.
+//
+// 3. If the query time span exceeds 1 day, return data with day-level granularity. Otherwise, return data with 5-minute granularity.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeAigcUsageDataWithContext(ctx context.Context, request *DescribeAigcUsageDataRequest) (response *DescribeAigcUsageDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeAigcUsageDataRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeAigcUsageData")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAigcUsageData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAigcUsageDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAllClassRequest() (request *DescribeAllClassRequest) {
     request = &DescribeAllClassRequest{
         BaseRequest: &tchttp.BaseRequest{},

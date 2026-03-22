@@ -5841,7 +5841,7 @@ func NewInquiryPriceUpgradeDBInstanceResponse() (response *InquiryPriceUpgradeDB
 }
 
 // InquiryPriceUpgradeDBInstance
-// This API is used to query the upgrade prices of a monthly subscribed instance.
+// This API is used to query the upgrade prices of a yearly/monthly subscribed instance.
 //
 // .
 //
@@ -5862,7 +5862,7 @@ func (c *Client) InquiryPriceUpgradeDBInstance(request *InquiryPriceUpgradeDBIns
 }
 
 // InquiryPriceUpgradeDBInstance
-// This API is used to query the upgrade prices of a monthly subscribed instance.
+// This API is used to query the upgrade prices of a yearly/monthly subscribed instance.
 //
 // .
 //
