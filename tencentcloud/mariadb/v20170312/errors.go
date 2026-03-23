@@ -92,6 +92,9 @@ const (
 	// Either tag key/value verification or tag API authentication failed.
 	FAILEDOPERATION_TAGDRYRUNERROR = "FailedOperation.TagDryRunError"
 
+	// 
+	FAILEDOPERATION_TRADECONFIGNOTFOUND = "FailedOperation.TradeConfigNotFound"
+
 	// Failed to update the security group information of an instance.
 	FAILEDOPERATION_UPDATEINSTANCEINFOFAILED = "FailedOperation.UpdateInstanceInfoFailed"
 

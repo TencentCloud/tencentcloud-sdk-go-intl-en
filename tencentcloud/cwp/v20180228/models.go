@@ -3965,7 +3965,7 @@ type CreateBuyBindTaskRequestParams struct {
 	// Order Number
 	DealName *string `json:"DealName,omitnil,omitempty" name:"DealName"`
 
-	// Optional parameters. 1: Pro Edition-monthly subscription; 2: Ultimate Edition-monthly subscription
+	// Optional parameters. 1: Pro Edition-yearly/monthly subscription; 2: Ultimate Edition-yearly/monthly subscription
 	LicenseType *uint64 `json:"LicenseType,omitnil,omitempty" name:"LicenseType"`
 
 	// Machine list
@@ -3981,7 +3981,7 @@ type CreateBuyBindTaskRequest struct {
 	// Order Number
 	DealName *string `json:"DealName,omitnil,omitempty" name:"DealName"`
 
-	// Optional parameters. 1: Pro Edition-monthly subscription; 2: Ultimate Edition-monthly subscription
+	// Optional parameters. 1: Pro Edition-yearly/monthly subscription; 2: Ultimate Edition-yearly/monthly subscription
 	LicenseType *uint64 `json:"LicenseType,omitnil,omitempty" name:"LicenseType"`
 
 	// Machine list
@@ -4162,7 +4162,7 @@ type CreateLicenseOrderRequestParams struct {
 	// Tag array. Leaving it blank indicates no tags need to be bound.
 	Tags []*Tags `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-monthly subscription; 2 - Ultimate Edition-monthly subscriptionThe default is 0.
+	// Authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-yearly/monthly subscription; 2 - Ultimate Edition-yearly/monthly subscription default is 0.
 	LicenseType *uint64 `json:"LicenseType,omitnil,omitempty" name:"LicenseType"`
 
 	// Authorization quantity: the number of units that need to be purchased
@@ -4182,7 +4182,7 @@ type CreateLicenseOrderRequestParams struct {
 	TimeSpan *uint64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
 	// Whether to auto-renew. The default is not to auto-renew.
-	// This parameter is only valid for monthly subscription.
+	// This parameter is only valid for yearly/monthly subscription.
 	AutoRenewFlag *bool `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
 	// This field is deprecated.
@@ -4198,7 +4198,7 @@ type CreateLicenseOrderRequest struct {
 	// Tag array. Leaving it blank indicates no tags need to be bound.
 	Tags []*Tags `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-monthly subscription; 2 - Ultimate Edition-monthly subscriptionThe default is 0.
+	// Authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-yearly/monthly subscription; 2 - Ultimate Edition-yearly/monthly subscription default is 0.
 	LicenseType *uint64 `json:"LicenseType,omitnil,omitempty" name:"LicenseType"`
 
 	// Authorization quantity: the number of units that need to be purchased
@@ -4218,7 +4218,7 @@ type CreateLicenseOrderRequest struct {
 	TimeSpan *uint64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
 	// Whether to auto-renew. The default is not to auto-renew.
-	// This parameter is only valid for monthly subscription.
+	// This parameter is only valid for yearly/monthly subscription.
 	AutoRenewFlag *bool `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
 	// This field is deprecated.
@@ -17646,11 +17646,11 @@ type DescribeLicenseListRequestParams struct {
 	// Take the intersection when filtering with multiple conditions.
 	// <li> LicenseStatus authorization status information: 0 - not used; 1 - partially used; 2 - used up; 3 - unavailable; 4 - available</li>
 	// <li> BuyTime: time of purchase</li>
-	// <li> LicenseType authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-monthly subscription; 2: Ultimate Edition-monthly subscription</li>
+	// <li> LicenseType authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-yearly/monthly subscription; 2: Ultimate Edition-yearly/monthly subscription</li>
 	// <li>DeadlineStatus expiration status: NotExpired -not expired; expire - expired (including terminated); nearexpiry - about to expire</li>
 	// <li>ResourceId resource ID</li>
 	// <li>Keywords IP filtering</li>
-	// <li>PayMode payment mode. 0: pay-as-you-go; 1: monthly subscription</li>
+	// <li>PayMode payment mode. 0: pay-as-you-go; 1: yearly/monthly subscription</li>
 	// <li>OrderStatus order status. 1: normal; 2: isolated; 3: terminated</li>
 	// <li>DealNames sub-order number, with a maximum length of 10, exceeding this will result in a failure.</li>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
@@ -17663,6 +17663,12 @@ type DescribeLicenseListRequestParams struct {
 
 	// Tag filtering; filter by the platform's tag capabilities. In this case, you should pass in the tag key and tag value as an object.
 	Tags []*Tags `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+
+	By *string `json:"By,omitnil,omitempty" name:"By"`
 }
 
 type DescribeLicenseListRequest struct {
@@ -17671,11 +17677,11 @@ type DescribeLicenseListRequest struct {
 	// Take the intersection when filtering with multiple conditions.
 	// <li> LicenseStatus authorization status information: 0 - not used; 1 - partially used; 2 - used up; 3 - unavailable; 4 - available</li>
 	// <li> BuyTime: time of purchase</li>
-	// <li> LicenseType authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-monthly subscription; 2: Ultimate Edition-monthly subscription</li>
+	// <li> LicenseType authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-yearly/monthly subscription; 2: Ultimate Edition-yearly/monthly subscription</li>
 	// <li>DeadlineStatus expiration status: NotExpired -not expired; expire - expired (including terminated); nearexpiry - about to expire</li>
 	// <li>ResourceId resource ID</li>
 	// <li>Keywords IP filtering</li>
-	// <li>PayMode payment mode. 0: pay-as-you-go; 1: monthly subscription</li>
+	// <li>PayMode payment mode. 0: pay-as-you-go; 1: yearly/monthly subscription</li>
 	// <li>OrderStatus order status. 1: normal; 2: isolated; 3: terminated</li>
 	// <li>DealNames sub-order number, with a maximum length of 10, exceeding this will result in a failure.</li>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
@@ -17688,6 +17694,10 @@ type DescribeLicenseListRequest struct {
 
 	// Tag filtering; filter by the platform's tag capabilities. In this case, you should pass in the tag key and tag value as an object.
 	Tags []*Tags `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	By *string `json:"By,omitnil,omitempty" name:"By"`
 }
 
 func (r *DescribeLicenseListRequest) ToJsonString() string {
@@ -17706,6 +17716,8 @@ func (r *DescribeLicenseListRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "Offset")
 	delete(f, "Tags")
+	delete(f, "Order")
+	delete(f, "By")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLicenseListRequest has unknown keys!", "")
 	}
@@ -19572,7 +19584,7 @@ type DescribeMachinesSimpleRequestParams struct {
 	// BM: BM
 	// ECM: Edge Computing Machine
 	// LH: Lighthouse
-	// Other: Hybrid Cloud Zone
+	// Other: Hybrid Cloud Zone
 	MachineType *string `json:"MachineType,omitnil,omitempty" name:"MachineType"`
 
 	// Machine region. For example, ap-guangzhou and ap-shanghai.
@@ -19586,7 +19598,7 @@ type DescribeMachinesSimpleRequestParams struct {
 
 	// Filtering criteria
 	// <li>Keywords - String - required: no - keywords for querying </li>
-	// <li>Version - String required: no - current protection edition ( PRO_VERSION: Pro Edition | BASIC_VERSION: Basic Edition | Flagship: Ultimate Edition | ProtectedMachines: Pro + Ultimate Editions | UnFlagship: Non-Ultimate Edition | PRO_POST_PAY: Pro Edition in pay-as-you-go mode | PRO_PRE_PAY: Pro Edition in monthly subscription mode)</li>
+	// <li>Version - String required: no - current protection edition ( PRO_VERSION: Pro Edition | BASIC_VERSION: Basic Edition | Flagship: Ultimate Edition | ProtectedMachines: Pro + Ultimate Editions | UnFlagship: Non-Ultimate Edition | PRO_POST_PAY: Pro Edition in pay-as-you-go mode | PRO_PRE_PAY: Pro Edition in yearly/monthly subscription mode)</li>
 	// <li>TagId - String - required: no - tag ID </li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
@@ -19602,7 +19614,7 @@ type DescribeMachinesSimpleRequest struct {
 	// BM: BM
 	// ECM: Edge Computing Machine
 	// LH: Lighthouse
-	// Other: Hybrid Cloud Zone
+	// Other: Hybrid Cloud Zone
 	MachineType *string `json:"MachineType,omitnil,omitempty" name:"MachineType"`
 
 	// Machine region. For example, ap-guangzhou and ap-shanghai.
@@ -19616,7 +19628,7 @@ type DescribeMachinesSimpleRequest struct {
 
 	// Filtering criteria
 	// <li>Keywords - String - required: no - keywords for querying </li>
-	// <li>Version - String required: no - current protection edition ( PRO_VERSION: Pro Edition | BASIC_VERSION: Basic Edition | Flagship: Ultimate Edition | ProtectedMachines: Pro + Ultimate Editions | UnFlagship: Non-Ultimate Edition | PRO_POST_PAY: Pro Edition in pay-as-you-go mode | PRO_PRE_PAY: Pro Edition in monthly subscription mode)</li>
+	// <li>Version - String required: no - current protection edition ( PRO_VERSION: Pro Edition | BASIC_VERSION: Basic Edition | Flagship: Ultimate Edition | ProtectedMachines: Pro + Ultimate Editions | UnFlagship: Non-Ultimate Edition | PRO_POST_PAY: Pro Edition in pay-as-you-go mode | PRO_PRE_PAY: Pro Edition in yearly/monthly subscription mode)</li>
 	// <li>TagId - String - required: no - tag ID </li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
@@ -28063,7 +28075,7 @@ type DestroyOrderRequestParams struct {
 	// Resource ID
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
-	// Authorization type. 0: Pro Edition - pay-as-you-go; 1: Pro Edition - monthly subscription; 2: Ultimate Edition - monthly subscription.
+	// Authorization type. 0: Pro Edition - pay-as-you-go; 1: Pro Edition - yearly/monthly subscription; 2: Ultimate Edition - yearly/monthly subscription.
 	LicenseType *uint64 `json:"LicenseType,omitnil,omitempty" name:"LicenseType"`
 }
 
@@ -28073,7 +28085,7 @@ type DestroyOrderRequest struct {
 	// Resource ID
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
-	// Authorization type. 0: Pro Edition - pay-as-you-go; 1: Pro Edition - monthly subscription; 2: Ultimate Edition - monthly subscription.
+	// Authorization type. 0: Pro Edition - pay-as-you-go; 1: Pro Edition - yearly/monthly subscription; 2: Ultimate Edition - yearly/monthly subscription.
 	LicenseType *uint64 `json:"LicenseType,omitnil,omitempty" name:"LicenseType"`
 }
 
@@ -31544,7 +31556,7 @@ func (r *ExportJavaMemShellsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ExportLicenseDetailRequestParams struct {
 	// Take the intersection when filtering with multiple conditions: LicenseStatus, DeadlineStatus, ResourceId, and Keywords
-	// <li> LicenseType authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-monthly subscription; 2: Ultimate Edition-monthly subscription</li>
+	// <li> LicenseType authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-yearly/monthly subscription; 2: Ultimate Edition-yearly/monthly subscription</li>
 	// <li>ResourceId resource ID</li>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
@@ -31562,7 +31574,7 @@ type ExportLicenseDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// Take the intersection when filtering with multiple conditions: LicenseStatus, DeadlineStatus, ResourceId, and Keywords
-	// <li> LicenseType authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-monthly subscription; 2: Ultimate Edition-monthly subscription</li>
+	// <li> LicenseType authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-yearly/monthly subscription; 2: Ultimate Edition-yearly/monthly subscription</li>
 	// <li>ResourceId resource ID</li>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
@@ -34354,7 +34366,7 @@ type LicenseDetail struct {
 	// Authorization ID
 	LicenseId *uint64 `json:"LicenseId,omitnil,omitempty" name:"LicenseId"`
 
-	// Authorization type. 0: Pro Edition - pay-as-you-go; 1: Pro Edition - monthly subscription; 2: Ultimate Edition - monthly subscription.
+	// Authorization type. 0: Pro Edition - pay-as-you-go; 1: Pro Edition - yearly/monthly subscription; 2: Ultimate Edition - yearly/monthly subscription.
 	LicenseType *uint64 `json:"LicenseType,omitnil,omitempty" name:"LicenseType"`
 
 	// Authorization status. 0: not in use; 1: partially in use; 2: used up; 3: unavailable.
@@ -34556,6 +34568,12 @@ type Machine struct {
 	// <li>UNINSTALLED: Unprotected</li>
 	MachineStatus *string `json:"MachineStatus,omitnil,omitempty" name:"MachineStatus"`
 
+
+	AgentStatus *string `json:"AgentStatus,omitnil,omitempty" name:"AgentStatus"`
+
+
+	InstanceStatus *string `json:"InstanceStatus,omitnil,omitempty" name:"InstanceStatus"`
+
 	// Yunjing client UUID. If the client is offline for a long time, an empty string is returned.
 	Uuid *string `json:"Uuid,omitnil,omitempty" name:"Uuid"`
 
@@ -34578,7 +34596,7 @@ type Machine struct {
 
 	// Host status
 	// <li>POSTPAY: postpaid, indicating pay-as-you-go mode  </li>
-	// <li>PREPAY: prepaid, indicating monthly subscription mode</li>
+	// <li>PREPAY: prepaid, indicating yearly/monthly subscription mode</li>
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
 	// Number of Trojans
@@ -34652,6 +34670,9 @@ type Machine struct {
 	// Remarks
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+
+	AgentVersion *string `json:"AgentVersion,omitnil,omitempty" name:"AgentVersion"`
 }
 
 type MachineClearHistory struct {
