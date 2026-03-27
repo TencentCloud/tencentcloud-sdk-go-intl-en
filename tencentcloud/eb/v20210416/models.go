@@ -30,18 +30,20 @@ type APIGWParams struct {
 
 // Predefined struct for user
 type CheckRuleRequestParams struct {
-
+	// Event Information
 	Event *string `json:"Event,omitnil,omitempty" name:"Event"`
 
-
+	// EventPattern Information
 	EventPattern *string `json:"EventPattern,omitnil,omitempty" name:"EventPattern"`
 }
 
 type CheckRuleRequest struct {
 	*tchttp.BaseRequest
 	
+	// Event Information
 	Event *string `json:"Event,omitnil,omitempty" name:"Event"`
 
+	// EventPattern Information
 	EventPattern *string `json:"EventPattern,omitnil,omitempty" name:"EventPattern"`
 }
 

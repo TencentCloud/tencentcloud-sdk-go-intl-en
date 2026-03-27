@@ -1956,7 +1956,7 @@ type AigcImageOutputConfig struct {
 	// <Li>Default value: 0, indicating other categories.</li>.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+	// The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// Image generation resolution. available values are 720P, 1080P, 2K, 4K, 1024x1024, 2048x2048, 2304x1728, 2496x1664, 2560x1440, 3024x1296, 4096x4096, 4694x3520, 4992x3328, 5404x3040, 6198x2656.
@@ -2036,7 +2036,7 @@ type AigcImageTaskInput struct {
 	// Whether to optimize Prompt content automatically. when Enabled, it will optimize the passed in Prompt automatically to enhance generation quality. valid values: <li>Enabled: turn on;</li> <li>Disabled: turn off;</li>
 	EnhancePrompt *string `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
 
-
+	// Generation mode. Available values: <li>Standard: Standard mode;</li> <li>Professional: High-quality mode;</li>
 	GenerationMode *string `json:"GenerationMode,omitnil,omitempty" name:"GenerationMode"`
 
 	// Output media file configuration for the task.
@@ -2080,7 +2080,7 @@ type AigcImageTaskOutputFileInfo struct {
 	// <Li>Default value: 0, indicating other categories.</li>.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+	// The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// File Type.
@@ -2116,7 +2116,7 @@ type AigcVideoOutputConfig struct {
 	// <Li>Default value: 0, indicate other categories.</li>.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+	// The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// Video duration, unit: seconds. <li>when ModelName is Kling, optional values: 5, 10, defaults to 5;</li> <li>when ModelName is Hailuo, optional values: 6, 10, defaults to 6;</li> <li>when ModelName is Vidu, specify 1-10;</li> <li>when ModelName is GV, optional values: 8, defaults to 8;</li> <li>when ModelName is OS, optional values: 4, 8, 12, defaults to 8;</li>
@@ -2212,7 +2212,7 @@ type AigcVideoTaskInput struct {
 	// Whether to optimize Prompt content automatically. when Enabled, the passed-in Prompt will be optimized automatically to enhance generation quality. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>.
 	EnhancePrompt *string `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
 
-
+	// Generation mode. Available values: <li>Standard: Standard mode;</li> <li>Professional: High-quality mode;</li>
 	GenerationMode *string `json:"GenerationMode,omitnil,omitempty" name:"GenerationMode"`
 
 	// Specifies the output media file configuration for the video task.
@@ -2266,7 +2266,7 @@ type AigcVideoTaskOutputFileInfo struct {
 	// <Li>Default value: 0, indicate other categories.</li>.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+	// The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// File Type.
@@ -6730,10 +6730,10 @@ type CreateReviewTemplateRequestParams struct {
 	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *string `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-
+	// Audit template name, length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-
+	// Audit template description, length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 }
 
@@ -6746,8 +6746,10 @@ type CreateReviewTemplateRequest struct {
 	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *string `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
+	// Audit template name, length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
+	// Audit template description, length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 }
 
@@ -7402,7 +7404,7 @@ type CreateSubAppIdRequestParams struct {
 	// Subapplication overview. Length limit: 300 characters.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-
+	// Application type. Available values: <li>AllInOne: All-in-one;</li><li>Professional: Professional.</li>Default value: AllInOne.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -7415,6 +7417,7 @@ type CreateSubAppIdRequest struct {
 	// Subapplication overview. Length limit: 300 characters.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
+	// Application type. Available values: <li>AllInOne: All-in-one;</li><li>Professional: Professional.</li>Default value: AllInOne.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -14413,7 +14416,7 @@ type DomainDetailInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	QUICConfig *DomainQUICConfig `json:"QUICConfig,omitnil,omitempty" name:"QUICConfig"`
 
-
+	// IP access limit configuration information.
 	IPFilterPolicy *IPFilterPolicy `json:"IPFilterPolicy,omitnil,omitempty" name:"IPFilterPolicy"`
 
 	// Domain type. Valid values:
@@ -15145,7 +15148,7 @@ type EventContent struct {
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	ComplexAdaptiveDynamicStreamingCompleteEvent *ComplexAdaptiveDynamicStreamingTask `json:"ComplexAdaptiveDynamicStreamingCompleteEvent,omitnil,omitempty" name:"ComplexAdaptiveDynamicStreamingCompleteEvent"`
 
-
+	// MPS video processing task information, valid only when EventType is ProcessMediaByMPSComplete.
 	ProcessMediaByMPSCompleteEvent *ProcessMediaByMPS `json:"ProcessMediaByMPSCompleteEvent,omitnil,omitempty" name:"ProcessMediaByMPSCompleteEvent"`
 
 	// AIGC image task completion event, valid when the event type is AigcImageTaskComplete.
@@ -16120,13 +16123,17 @@ type HwPrivateAccess struct {
 }
 
 type IPFilterPolicy struct {
-
+	// IP access restriction status. Optional values:
+	// <li>Enabled: enable;</li>
+	// <li>Disabled: disable.</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// IP access restriction type:
+	// <li>Black: blocklist-based verification. Only IP requests from the IPList will be blocked.</li>
+	// <li>White: allowlist-based verification. Only IP requests from the IPList will be allowed.</li>When Status is set to Enabled, FilterType must be assigned.
 	FilterType *string `json:"FilterType,omitnil,omitempty" name:"FilterType"`
 
-
+	// IP list, supporting IPV4 addresses in X.X.X.X format, IPV6 addresses in X:X:X:X:X:X:X:X format, or CIDR notation /N (IPV4: 1 ≤ N ≤ 32; IPV6: 1 ≤ N ≤ 128). A maximum of 200 IPs or CIDR blocks can be added. When Status is set to Enabled, IPList must be assigned.
 	IPList []*string `json:"IPList,omitnil,omitempty" name:"IPList"`
 }
 
@@ -16351,7 +16358,13 @@ type ImageWatermarkInput struct {
 	// <li>repeat (default): repeats the playback until the video ends.</li>
 	RepeatType *string `json:"RepeatType,omitnil,omitempty" name:"RepeatType"`
 
-
+	// Image transparency, value range: [0, 100]
+	// 
+	// <li>0: Completely opaque</li>
+	// 
+	// <li>100: Completely transparent</li>
+	// 
+	// Default value: 0.
 	Transparency *int64 `json:"Transparency,omitnil,omitempty" name:"Transparency"`
 }
 
@@ -16375,7 +16388,11 @@ type ImageWatermarkInputForUpdate struct {
 	// <li>repeat (default): repeats the playback until the video ends.</li>
 	RepeatType *string `json:"RepeatType,omitnil,omitempty" name:"RepeatType"`
 
-
+	// Image transparency, value range: [0, 100]
+	// 
+	// <li>0: Completely opaque</li>
+	// 
+	// <li>100: Completely transparent.</li>
 	Transparency *int64 `json:"Transparency,omitnil,omitempty" name:"Transparency"`
 }
 
@@ -16400,7 +16417,11 @@ type ImageWatermarkTemplate struct {
 	// <li>repeat (default): repeats the playback until the video ends.</li>
 	RepeatType *string `json:"RepeatType,omitnil,omitempty" name:"RepeatType"`
 
-
+	// Image transparency, value range: [0, 100]
+	// 
+	// <li>0: Completely opaque</li>
+	// 
+	// <li>100: Completely transparent.</li>
 	Transparency *int64 `json:"Transparency,omitnil,omitempty" name:"Transparency"`
 }
 
@@ -16480,16 +16501,16 @@ func (r *ImportMediaKnowledgeResponse) FromJsonString(s string) error {
 }
 
 type ImportMediaKnowledgeTask struct {
-
+	// Task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-
+	// Task Status. Valid values: <li>PROCESSING: Processing;</li><li>FINISH: Completed.</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// Error code; 0 indicates success, other values indicate failure
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-
+	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 }
 
@@ -17219,10 +17240,14 @@ type MediaBasicInfo struct {
 }
 
 type MediaCastEvent struct {
-
+	// Media relay ID.
 	CastId *string `json:"CastId,omitnil,omitempty" name:"CastId"`
 
-
+	// Relay status. Valid values:
+	// <li>Working: Running;</li>
+	// <li>Scheduled: To be started after the scheduled time arrives;</li>
+	// <li>Stopped: Relay stopped;</li>
+	// <li>Idle: Idle.</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
@@ -18183,7 +18208,7 @@ type MediaTranscodeItem struct {
 	// <li>None: Regular watermark</li>
 	DigitalWatermarkType *string `json:"DigitalWatermarkType,omitnil,omitempty" name:"DigitalWatermarkType"`
 
-
+	// Copyright information.
 	CopyRightWatermarkText *string `json:"CopyRightWatermarkText,omitnil,omitempty" name:"CopyRightWatermarkText"`
 }
 
@@ -20332,16 +20357,16 @@ func (r *ModifyRebuildMediaTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyReviewTemplateRequestParams struct {
-
+	// Audit template unique ID.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-
+	// Audit template name, length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-
+	// Audit template description, length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
 	// The violation labels to use. Valid values: <li>`Porn`: Pornographic content</li> <li>`Terror`: Terrorist content</li> <li>`Moan`: Moaning</li>
@@ -20351,13 +20376,16 @@ type ModifyReviewTemplateRequestParams struct {
 type ModifyReviewTemplateRequest struct {
 	*tchttp.BaseRequest
 	
+	// Audit template unique ID.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
+	// Audit template name, length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
+	// Audit template description, length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
 	// The violation labels to use. Valid values: <li>`Porn`: Pornographic content</li> <li>`Terror`: Terrorist content</li> <li>`Moan`: Moaning</li>
@@ -25521,7 +25549,7 @@ type SceneAigcImageOutputConfig struct {
 	// <Li>Default value: 0, indicate other categories.</li>
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+	// The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// Specify the aspect ratio of the generated image. input format is W:H.
@@ -25604,7 +25632,7 @@ type SceneAigcImageTaskOutputFileInfo struct {
 	// <Li>Default value: 0, indicating other categories.</li>.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+	// The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// File Type.
@@ -26330,13 +26358,13 @@ type SimpleHlsClipRequestParams struct {
 	// The session context, which is used to pass through user request information. If the `Procedure` parameter is specified, the [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 1,000 characters and is valid only if `IsPersistence` is `1`.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-
+	// This field is deprecated.
 	Precision *string `json:"Precision,omitnil,omitempty" name:"Precision"`
 
-
+	// Output video type. Valid values are: <li>hls: outputs hls files.</li> Default value: hls.
 	OutputMediaType *string `json:"OutputMediaType,omitnil,omitempty" name:"OutputMediaType"`
 
-
+	// Reserved field, used for special purposes. Example value: ""
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
@@ -26375,10 +26403,13 @@ type SimpleHlsClipRequest struct {
 	// The session context, which is used to pass through user request information. If the `Procedure` parameter is specified, the [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 1,000 characters and is valid only if `IsPersistence` is `1`.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
+	// This field is deprecated.
 	Precision *string `json:"Precision,omitnil,omitempty" name:"Precision"`
 
+	// Output video type. Valid values are: <li>hls: outputs hls files.</li> Default value: hls.
 	OutputMediaType *string `json:"OutputMediaType,omitnil,omitempty" name:"OutputMediaType"`
 
+	// Reserved field, used for special purposes. Example value: ""
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
@@ -27090,7 +27121,7 @@ type TaskOutputMediaInfo struct {
 	// Media file ID.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-
+	// Basic information of the media files generated after transcoding and pulling.
 	MediaBasicInfo *MediaBasicInfo `json:"MediaBasicInfo,omitnil,omitempty" name:"MediaBasicInfo"`
 }
 

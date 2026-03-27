@@ -327,7 +327,7 @@ type ApplicationStatics struct {
 	// `SumMemorySeconds` meaning
 	SumMemorySeconds *int64 `json:"SumMemorySeconds,omitnil,omitempty" name:"SumMemorySeconds"`
 
-
+	// Total VCore Seconds
 	SumVCoreSeconds *int64 `json:"SumVCoreSeconds,omitnil,omitempty" name:"SumVCoreSeconds"`
 
 	// SumHDFSBytesWritten (with unit)
@@ -1560,7 +1560,7 @@ type CreateInstanceRequestParams struct {
 	// Shared component information
 	ExternalService []*ExternalService `json:"ExternalService,omitnil,omitempty" name:"ExternalService"`
 
-
+	// If the value is 0, MultiZone, MultiDeployStrategy, and MultiZoneSettings are disabled. If the value is 1, ResourceSpec is deprecated and MultiZoneSettings is used instead.
 	VersionID *int64 `json:"VersionID,omitnil,omitempty" name:"VersionID"`
 
 	// `true` indicates that the multi-AZ deployment mode is enabled. This parameter is available only in cluster creation and cannot be changed after setting.
@@ -1707,6 +1707,7 @@ type CreateInstanceRequest struct {
 	// Shared component information
 	ExternalService []*ExternalService `json:"ExternalService,omitnil,omitempty" name:"ExternalService"`
 
+	// If the value is 0, MultiZone, MultiDeployStrategy, and MultiZoneSettings are disabled. If the value is 1, ResourceSpec is deprecated and MultiZoneSettings is used instead.
 	VersionID *int64 `json:"VersionID,omitnil,omitempty" name:"VersionID"`
 
 	// `true` indicates that the multi-AZ deployment mode is enabled. This parameter is available only in cluster creation and cannot be changed after setting.
@@ -1832,7 +1833,7 @@ type CreateSLInstanceRequestParams struct {
 	// The unique random identifier with a time efficiency of 5 minutes, which needs to be specified by the caller to prevent the client from creating resources repeatedly. For example: a9a90aa6-****-****-****-fae360632808.
 	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
 
-
+	// Deployment Mode
 	DeploymentMode *string `json:"DeploymentMode,omitnil,omitempty" name:"DeploymentMode"`
 }
 
@@ -1866,6 +1867,7 @@ type CreateSLInstanceRequest struct {
 	// The unique random identifier with a time efficiency of 5 minutes, which needs to be specified by the caller to prevent the client from creating resources repeatedly. For example: a9a90aa6-****-****-****-fae360632808.
 	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
 
+	// Deployment Mode
 	DeploymentMode *string `json:"DeploymentMode,omitnil,omitempty" name:"DeploymentMode"`
 }
 
@@ -3536,7 +3538,7 @@ type DescribeInsightListRequestParams struct {
 	// Query type. Types such as Hive,Spark,DLC_Spark,Spark_SQL,SCHEDULE,MapReduce,Trino are supported. All are queried by default.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// Whether it includes specific parameter suggestions and other information
 	MustHasContext *bool `json:"MustHasContext,omitnil,omitempty" name:"MustHasContext"`
 }
 
@@ -3561,6 +3563,7 @@ type DescribeInsightListRequest struct {
 	// Query type. Types such as Hive,Spark,DLC_Spark,Spark_SQL,SCHEDULE,MapReduce,Trino are supported. All are queried by default.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
+	// Whether it includes specific parameter suggestions and other information
 	MustHasContext *bool `json:"MustHasContext,omitnil,omitempty" name:"MustHasContext"`
 }
 
@@ -6302,7 +6305,7 @@ type InquiryPriceCreateInstanceRequestParams struct {
 	// Shared component information
 	ExternalService []*ExternalService `json:"ExternalService,omitnil,omitempty" name:"ExternalService"`
 
-
+	// The current default value is 0. After cross-AZ feature support is enabled, it becomes 1.
 	VersionID *uint64 `json:"VersionID,omitnil,omitempty" name:"VersionID"`
 
 	// AZ specs
@@ -6366,6 +6369,7 @@ type InquiryPriceCreateInstanceRequest struct {
 	// Shared component information
 	ExternalService []*ExternalService `json:"ExternalService,omitnil,omitempty" name:"ExternalService"`
 
+	// The current default value is 0. After cross-AZ feature support is enabled, it becomes 1.
 	VersionID *uint64 `json:"VersionID,omitnil,omitempty" name:"VersionID"`
 
 	// AZ specs
@@ -10951,7 +10955,7 @@ type StageInfoDetail struct {
 	// Step duration.
 	TimeConsuming *string `json:"TimeConsuming,omitnil,omitempty" name:"TimeConsuming"`
 
-
+	// id, for frontend
 	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
@@ -11691,10 +11695,10 @@ type UserInfoForUserManager struct {
 	// The group to which the user belongs
 	UserGroup *string `json:"UserGroup,omitnil,omitempty" name:"UserGroup"`
 
-
+	// Password
 	PassWord *string `json:"PassWord,omitnil,omitempty" name:"PassWord"`
 
-
+	// Remarks
 	ReMark *string `json:"ReMark,omitnil,omitempty" name:"ReMark"`
 
 	// User subgroup.

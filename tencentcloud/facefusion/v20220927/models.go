@@ -144,36 +144,48 @@ func (r *FuseFaceResponse) FromJsonString(s string) error {
 }
 
 type FuseFaceReviewDetail struct {
-
+	// Reserved Field
 	Field *string `json:"Field,omitnil,omitempty" name:"Field"`
 
-
+	// Tag name matched in audit
 	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
 
-
+	// Confidence score corresponding to the identified label. A higher score indicates a higher probability of violation.
+	// 
+	// 0 to 70: Suggestion is PASS;
+	// 
+	// 70 to 80: Suggestion is REVIEW;
+	// 
+	// 80 to 100: Suggestion is BLOCK.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-
+	// Audit conclusion for identified scenarios:
+	// 
+	// PASS: Normal
+	// 
+	// REVIEW: Suspected
+	// 
+	// BLOCK: Violation
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 }
 
 type FuseFaceReviewResult struct {
-
+	// Reserved Field
 	Category *string `json:"Category,omitnil,omitempty" name:"Category"`
 
-
+	// Status code; 0 indicates successful processing, other values indicate processing failure
 	Code *string `json:"Code,omitnil,omitempty" name:"Code"`
 
-
+	// Description for the status code
 	CodeDescription *string `json:"CodeDescription,omitnil,omitempty" name:"CodeDescription"`
 
-
+	// Reserved Field
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-
+	// Reserved Field
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-
+	// Audit Details
 	DetailSet []*FuseFaceReviewDetail `json:"DetailSet,omitnil,omitempty" name:"DetailSet"`
 }
 

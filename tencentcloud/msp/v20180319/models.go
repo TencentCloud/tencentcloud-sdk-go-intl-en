@@ -135,7 +135,7 @@ type DstInfo struct {
 	// Migration destination region
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-
+	// Migration destination Ip
 	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
 
 	// Migration destination port
@@ -554,7 +554,7 @@ type SrcInfo struct {
 	// Migration source region
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-
+	// Migration source Ip
 	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
 
 	// Migration source port

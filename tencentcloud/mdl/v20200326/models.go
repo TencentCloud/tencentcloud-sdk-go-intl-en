@@ -3415,7 +3415,7 @@ type ModifyStreamLiveWatermarkRequestParams struct {
 	// Watermark text settings. This parameter is valid if `Type` is `TEXT`.
 	TextSettings *CreateTextSettings `json:"TextSettings,omitnil,omitempty" name:"TextSettings"`
 
-
+	// AB watermark configuration.
 	AbWatermarkSettings *AbWatermarkSettingsReq `json:"AbWatermarkSettings,omitnil,omitempty" name:"AbWatermarkSettings"`
 }
 
@@ -3434,6 +3434,7 @@ type ModifyStreamLiveWatermarkRequest struct {
 	// Watermark text settings. This parameter is valid if `Type` is `TEXT`.
 	TextSettings *CreateTextSettings `json:"TextSettings,omitnil,omitempty" name:"TextSettings"`
 
+	// AB watermark configuration.
 	AbWatermarkSettings *AbWatermarkSettingsReq `json:"AbWatermarkSettings,omitnil,omitempty" name:"AbWatermarkSettings"`
 }
 

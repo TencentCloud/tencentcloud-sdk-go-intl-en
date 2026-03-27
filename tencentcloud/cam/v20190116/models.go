@@ -5177,10 +5177,10 @@ type SubAccountUser struct {
 	// User type (1: root account; 2: sub-user; 3: WeCom sub-user; 4: collaborator; 5: message recipient)
 	UserType *uint64 `json:"UserType,omitnil,omitempty" name:"UserType"`
 
-
+	// Recent Login IP
 	LastLoginIp *string `json:"LastLoginIp,omitnil,omitempty" name:"LastLoginIp"`
 
-
+	// Recent login time; if the returned value is empty, it means the console has never been logged in to.
 	LastLoginTime *string `json:"LastLoginTime,omitnil,omitempty" name:"LastLoginTime"`
 }
 

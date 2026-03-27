@@ -1024,7 +1024,7 @@ type CreateCSRRequestParams struct {
 	// The remarks.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
-
+	// Tag List
 	Tags []*Tags `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
@@ -1067,6 +1067,7 @@ type CreateCSRRequest struct {
 	// The remarks.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
+	// Tag List
 	Tags []*Tags `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 

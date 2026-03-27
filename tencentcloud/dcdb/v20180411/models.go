@@ -959,7 +959,7 @@ type CreateDedicatedClusterDCDBInstanceRequestParams struct {
 	// Rollback time
 	RollbackTime *string `json:"RollbackTime,omitnil,omitempty" name:"RollbackTime"`
 
-
+	// DCN synchronization mode: 0: asynchronous, 1: strong synchronization
 	DcnSyncMode *int64 `json:"DcnSyncMode,omitnil,omitempty" name:"DcnSyncMode"`
 }
 
@@ -1053,6 +1053,7 @@ type CreateDedicatedClusterDCDBInstanceRequest struct {
 	// Rollback time
 	RollbackTime *string `json:"RollbackTime,omitnil,omitempty" name:"RollbackTime"`
 
+	// DCN synchronization mode: 0: asynchronous, 1: strong synchronization
 	DcnSyncMode *int64 `json:"DcnSyncMode,omitnil,omitempty" name:"DcnSyncMode"`
 }
 

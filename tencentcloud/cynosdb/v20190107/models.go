@@ -390,13 +390,13 @@ type Addr struct {
 }
 
 type AuditInstanceFilters struct {
-
+	// Filter condition values. Supports InstanceId-Instance ID, InstanceName-Instance Name, ProjectId-Project ID, TagKey-Tag Key, Tag-Tag (separated by a vertical bar, e.g.: Tagkey|Tagvalue).
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-
+	// true indicates exact match; false indicates fuzzy match.
 	ExactMatch *bool `json:"ExactMatch,omitnil,omitempty" name:"ExactMatch"`
 
-
+	// Filter value
 	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 }
 
@@ -634,19 +634,19 @@ type BinlogItem struct {
 }
 
 type BizTaskInfo struct {
-
+	// Task id
 	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
-
+	// User appid
 	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
-
+	// cluster id
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// Region
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-
+	// Task Creation Time
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Specifies the delayed execution time.
@@ -655,63 +655,63 @@ type BizTaskInfo struct {
 	// Task failure information.
 	ErrMsg *string `json:"ErrMsg,omitnil,omitempty" name:"ErrMsg"`
 
-
+	// asynchronous task flow id
 	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
-
+	// task input information
 	Input *string `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// instance group id
 	//
 	// Deprecated: InstanceGrpId is deprecated.
 	InstanceGrpId *string `json:"InstanceGrpId,omitnil,omitempty" name:"InstanceGrpId"`
 
-
+	// instance group id
 	InstanceGroupId *string `json:"InstanceGroupId,omitnil,omitempty" name:"InstanceGroupId"`
 
-
+	// Instance id
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-
+	// Task Operation Target id
 	ObjectId *string `json:"ObjectId,omitnil,omitempty" name:"ObjectId"`
 
-
+	// Task Operation Target Type
 	ObjectType *string `json:"ObjectType,omitnil,omitempty" name:"ObjectType"`
 
-
+	// Operator uin
 	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 
-
+	// task output information
 	Output *string `json:"Output,omitnil,omitempty" name:"Output"`
 
-
+	// Task Status
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// task type
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-
+	// Parent Task ID that Triggered This Task
 	TriggerTaskId *int64 `json:"TriggerTaskId,omitnil,omitempty" name:"TriggerTaskId"`
 
-
+	// Update Time
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-
+	// Task Start Time
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-
+	// Task End Time
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-
+	// Cluster Name
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-
+	// Instance Name
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-
+	// Task Progress
 	Process *int64 `json:"Process,omitnil,omitempty" name:"Process"`
 
-
+	// Parameter Modification Task Information
 	//
 	// Deprecated: ModifyParamsData is deprecated.
 	ModifyParamsData []*ModifyParamsData `json:"ModifyParamsData,omitnil,omitempty" name:"ModifyParamsData"`
@@ -725,7 +725,7 @@ type BizTaskInfo struct {
 	// Instance configuration change task information.
 	ModifyInstanceData *ModifyInstanceData `json:"ModifyInstanceData,omitnil,omitempty" name:"ModifyInstanceData"`
 
-
+	// Manual Backup Task Information
 	ManualBackupData *ManualBackupData `json:"ManualBackupData,omitnil,omitempty" name:"ManualBackupData"`
 
 	// Modify kernel version task information.
@@ -734,10 +734,10 @@ type BizTaskInfo struct {
 	// Cluster availability zone information.
 	ClusterSlaveData *ClusterSlaveData `json:"ClusterSlaveData,omitnil,omitempty" name:"ClusterSlaveData"`
 
-
+	// Cluster Log Conversion
 	SwitchClusterLogBin *SwitchClusterLogBin `json:"SwitchClusterLogBin,omitnil,omitempty" name:"SwitchClusterLogBin"`
 
-
+	// Instance Parameter Modification
 	ModifyInstanceParamsData *BizTaskModifyParamsData `json:"ModifyInstanceParamsData,omitnil,omitempty" name:"ModifyInstanceParamsData"`
 
 	// Maintenance time.
@@ -751,7 +751,7 @@ type BizTaskInfo struct {
 }
 
 type BizTaskModifyInstanceParam struct {
-
+	// Instance ID
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Details of instance parameter modification task.
@@ -759,7 +759,7 @@ type BizTaskModifyInstanceParam struct {
 }
 
 type BizTaskModifyParamsData struct {
-
+	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// Cluster parameter modification data.
@@ -770,25 +770,31 @@ type BizTaskModifyParamsData struct {
 }
 
 type CLSInfo struct {
-
+	// Log topic operation: optional create, reuse.
+	// create: create a new log topic using TopicName.
+	// reuse: use an existing log topic by specifying TopicId.
+	// Combining the use of an existing log topic and creating a new log set is not allowed.
 	TopicOperation *string `json:"TopicOperation,omitnil,omitempty" name:"TopicOperation"`
 
-
+	// Log set operation: optional create, reuse.
+	// create: create a new log set using GroupName.
+	// reuse: use an existing log set by specifying GroupId.
+	// Combining the use of an existing log topic and creating a new log set is not allowed.
 	GroupOperation *string `json:"GroupOperation,omitnil,omitempty" name:"GroupOperation"`
 
-
+	// Log Delivery Region
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-
+	// log topic id
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-
+	// log topic name
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-
+	// log set id
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
-
+	// log set name
 	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 }
 
@@ -1246,13 +1252,13 @@ type ClusterSlaveData struct {
 	// Old primary availability zone.
 	OldMasterZone *string `json:"OldMasterZone,omitnil,omitempty" name:"OldMasterZone"`
 
-
+	// Standby AZ
 	OldSlaveZone []*string `json:"OldSlaveZone,omitnil,omitempty" name:"OldSlaveZone"`
 
 	// New primary availability zone.
 	NewMasterZone *string `json:"NewMasterZone,omitnil,omitempty" name:"NewMasterZone"`
 
-
+	// New Standby AZ
 	NewSlaveZone []*string `json:"NewSlaveZone,omitnil,omitempty" name:"NewSlaveZone"`
 
 	// New from availability zone attribute.
@@ -1719,13 +1725,13 @@ func (r *CreateClusterDatabaseResponse) FromJsonString(s string) error {
 }
 
 type CreateClustersData struct {
-
+	// Instance CPU
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-
+	// Instance Memory
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-
+	// Cluster storage limit
 	StorageLimit *int64 `json:"StorageLimit,omitnil,omitempty" name:"StorageLimit"`
 }
 
@@ -4023,7 +4029,7 @@ type DeleteClusterDatabaseRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-
+	// Database Name
 	DbNames []*string `json:"DbNames,omitnil,omitempty" name:"DbNames"`
 }
 
@@ -4033,6 +4039,7 @@ type DeleteClusterDatabaseRequest struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
+	// Database Name
 	DbNames []*string `json:"DbNames,omitnil,omitempty" name:"DbNames"`
 }
 
@@ -4877,7 +4884,7 @@ type DescribeBackupListRequestParams struct {
 	// Back mode. Valid values: `auto` (automatic backup), `manual` (manual backup)
 	BackupMethod *string `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
 
-
+	// Snapshot type. Optional values: full, full backup; increment, incremental backup
 	SnapShotType *string `json:"SnapShotType,omitnil,omitempty" name:"SnapShotType"`
 
 	// Backup start time
@@ -4886,7 +4893,7 @@ type DescribeBackupListRequestParams struct {
 	// Backup end time
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-
+	// Backup file name, fuzzy search
 	FileNames []*string `json:"FileNames,omitnil,omitempty" name:"FileNames"`
 
 	// Backup alias, which supports fuzzy query.
@@ -4921,6 +4928,7 @@ type DescribeBackupListRequest struct {
 	// Back mode. Valid values: `auto` (automatic backup), `manual` (manual backup)
 	BackupMethod *string `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
 
+	// Snapshot type. Optional values: full, full backup; increment, incremental backup
 	SnapShotType *string `json:"SnapShotType,omitnil,omitempty" name:"SnapShotType"`
 
 	// Backup start time
@@ -4929,6 +4937,7 @@ type DescribeBackupListRequest struct {
 	// Backup end time
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
+	// Backup file name, fuzzy search
 	FileNames []*string `json:"FileNames,omitnil,omitempty" name:"FileNames"`
 
 	// Backup alias, which supports fuzzy query.
@@ -6355,7 +6364,7 @@ type DescribeInstanceErrorLogsRequestParams struct {
 	// Log level, which supports combo search by multiple levels. Valid values: `error`, `warning`, `note`.
 	LogLevels []*string `json:"LogLevels,omitnil,omitempty" name:"LogLevels"`
 
-
+	// Keywords, supports fuzzy search
 	KeyWords []*string `json:"KeyWords,omitnil,omitempty" name:"KeyWords"`
 }
 
@@ -6386,6 +6395,7 @@ type DescribeInstanceErrorLogsRequest struct {
 	// Log level, which supports combo search by multiple levels. Valid values: `error`, `warning`, `note`.
 	LogLevels []*string `json:"LogLevels,omitnil,omitempty" name:"LogLevels"`
 
+	// Keywords, supports fuzzy search
 	KeyWords []*string `json:"KeyWords,omitnil,omitempty" name:"KeyWords"`
 }
 
@@ -8590,7 +8600,7 @@ type ExportInstanceErrorLogsRequestParams struct {
 	// Log level
 	LogLevels []*string `json:"LogLevels,omitnil,omitempty" name:"LogLevels"`
 
-
+	// Keywords
 	KeyWords []*string `json:"KeyWords,omitnil,omitempty" name:"KeyWords"`
 
 	// The template type. Valid values: `csv`, `original`.
@@ -8624,6 +8634,7 @@ type ExportInstanceErrorLogsRequest struct {
 	// Log level
 	LogLevels []*string `json:"LogLevels,omitnil,omitempty" name:"LogLevels"`
 
+	// Keywords
 	KeyWords []*string `json:"KeyWords,omitnil,omitempty" name:"KeyWords"`
 
 	// The template type. Valid values: `csv`, `original`.
@@ -9001,7 +9012,9 @@ type InquirePriceCreateRequestParams struct {
 	// Storage type for purchase. Valid values: `PREPAID`, `POSTPAID`.
 	StoragePayMode *string `json:"StoragePayMode,omitnil,omitempty" name:"StoragePayMode"`
 
-	// device type:common, exclusive
+	// Instance device type. Supported values are as follows:
+	// - common: indicates the general type
+	// - exclusive: indicates the exclusive type.
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
 	// Number of CPU cores, which is required when `InstancePayMode` is `PREPAID` or `POSTPAID`.
@@ -9038,7 +9051,9 @@ type InquirePriceCreateRequest struct {
 	// Storage type for purchase. Valid values: `PREPAID`, `POSTPAID`.
 	StoragePayMode *string `json:"StoragePayMode,omitnil,omitempty" name:"StoragePayMode"`
 
-	// device type:common, exclusive
+	// Instance device type. Supported values are as follows:
+	// - common: indicates the general type
+	// - exclusive: indicates the exclusive type.
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
 	// Number of CPU cores, which is required when `InstancePayMode` is `PREPAID` or `POSTPAID`.
@@ -9406,10 +9421,10 @@ type InstanceAuditRule struct {
 }
 
 type InstanceAuditStatus struct {
-
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-
+	// Audit status. ON- Audit is enabled; OFF- Audit is disabled.
 	AuditStatus *string `json:"AuditStatus,omitnil,omitempty" name:"AuditStatus"`
 
 	// Specifies the log retention period.
@@ -9787,18 +9802,18 @@ type LogicBackupConfigInfo struct {
 	// Whether cross-regional logical backup is enabled.
 	LogicCrossRegionsEnable *string `json:"LogicCrossRegionsEnable,omitnil,omitempty" name:"LogicCrossRegionsEnable"`
 
-
+	// Logical Backup Cross-Region
 	LogicCrossRegions []*string `json:"LogicCrossRegions,omitnil,omitempty" name:"LogicCrossRegions"`
 }
 
 type ManualBackupData struct {
-
+	// Backup type. snapshot-snapshot backup
 	BackupType *string `json:"BackupType,omitnil,omitempty" name:"BackupType"`
 
-
+	// Backup method. auto-automatic backup, manual-manual
 	BackupMethod *string `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
 
-
+	// Backup Time
 	SnapshotTime *string `json:"SnapshotTime,omitnil,omitempty" name:"SnapshotTime"`
 
 	// Detailed information of cross-region backup items.
@@ -9807,7 +9822,7 @@ type ManualBackupData struct {
 }
 
 type ModifiableInfo struct {
-
+	// Whether the parameter is modifiable. 1: Yes 0: No
 	IsModifiable *int64 `json:"IsModifiable,omitnil,omitempty" name:"IsModifiable"`
 }
 
@@ -10220,10 +10235,10 @@ type ModifyBackupConfigRequestParams struct {
 	// Currently, this parameter does not support modification and is not required.
 	BackupType *string `json:"BackupType,omitnil,omitempty" name:"BackupType"`
 
-
+	// Logical Backup Configuration
 	LogicBackupConfig *LogicBackupConfigInfo `json:"LogicBackupConfig,omitnil,omitempty" name:"LogicBackupConfig"`
 
-
+	// Whether to delete the automatic logical backup
 	DeleteAutoLogicBackup *bool `json:"DeleteAutoLogicBackup,omitnil,omitempty" name:"DeleteAutoLogicBackup"`
 }
 
@@ -10248,8 +10263,10 @@ type ModifyBackupConfigRequest struct {
 	// Currently, this parameter does not support modification and is not required.
 	BackupType *string `json:"BackupType,omitnil,omitempty" name:"BackupType"`
 
+	// Logical Backup Configuration
 	LogicBackupConfig *LogicBackupConfigInfo `json:"LogicBackupConfig,omitnil,omitempty" name:"LogicBackupConfig"`
 
+	// Whether to delete the automatic logical backup
 	DeleteAutoLogicBackup *bool `json:"DeleteAutoLogicBackup,omitnil,omitempty" name:"DeleteAutoLogicBackup"`
 }
 
@@ -11060,7 +11077,7 @@ type ModifyClusterSlaveZoneRequestParams struct {
 	// Specifies the binlog synchronization mode. the default value is async. valid values are sync, semisync, and async.
 	BinlogSyncWay *string `json:"BinlogSyncWay,omitnil,omitempty" name:"BinlogSyncWay"`
 
-
+	// Semi-sync timeout period in ms. To ensure business stability, the semi-synchronous replication includes a degradation mechanism. If the primary AZ cluster exceeds this timeout while waiting for transaction confirmation from the secondary AZ cluster, the replication mode will fall back to asynchronous replication. Minimum setting: 1000 ms; maximum support: 4294967295 ms; default: 10000 ms.
 	SemiSyncTimeout *int64 `json:"SemiSyncTimeout,omitnil,omitempty" name:"SemiSyncTimeout"`
 }
 
@@ -11079,6 +11096,7 @@ type ModifyClusterSlaveZoneRequest struct {
 	// Specifies the binlog synchronization mode. the default value is async. valid values are sync, semisync, and async.
 	BinlogSyncWay *string `json:"BinlogSyncWay,omitnil,omitempty" name:"BinlogSyncWay"`
 
+	// Semi-sync timeout period in ms. To ensure business stability, the semi-synchronous replication includes a degradation mechanism. If the primary AZ cluster exceeds this timeout while waiting for transaction confirmation from the secondary AZ cluster, the replication mode will fall back to asynchronous replication. Minimum setting: 1000 ms; maximum support: 4294967295 ms; default: 10000 ms.
 	SemiSyncTimeout *int64 `json:"SemiSyncTimeout,omitnil,omitempty" name:"SemiSyncTimeout"`
 }
 
@@ -11199,33 +11217,33 @@ func (r *ModifyDBInstanceSecurityGroupsResponse) FromJsonString(s string) error 
 }
 
 type ModifyDbVersionData struct {
-
+	// pre-modification version
 	OldVersion *string `json:"OldVersion,omitnil,omitempty" name:"OldVersion"`
 
-
+	// Post-modification Version
 	NewVersion *string `json:"NewVersion,omitnil,omitempty" name:"NewVersion"`
 
-
+	// Upgrade Method
 	UpgradeType *string `json:"UpgradeType,omitnil,omitempty" name:"UpgradeType"`
 }
 
 type ModifyInstanceData struct {
-
+	// CPU After Resizing
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-
+	// Memory After Resizing
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-
+	// Storage Limit After Resizing
 	StorageLimit *int64 `json:"StorageLimit,omitnil,omitempty" name:"StorageLimit"`
 
-
+	// CPU Before Resizing
 	OldCpu *int64 `json:"OldCpu,omitnil,omitempty" name:"OldCpu"`
 
-
+	// Memory Before Resizing
 	OldMemory *int64 `json:"OldMemory,omitnil,omitempty" name:"OldMemory"`
 
-
+	// Storage Limit Before Resizing
 	OldStorageLimit *int64 `json:"OldStorageLimit,omitnil,omitempty" name:"OldStorageLimit"`
 
 	// Instance machine type before scaling.
@@ -11234,7 +11252,7 @@ type ModifyInstanceData struct {
 	// Instance machine type after scaling.
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-
+	// Upgrade Method. Switchover is performed after upgrade completion or during maintenance windows
 	UpgradeType *string `json:"UpgradeType,omitnil,omitempty" name:"UpgradeType"`
 
 	// Specifies the quantity of libra nodes.
@@ -11623,13 +11641,13 @@ func (r *ModifyParamTemplateResponse) FromJsonString(s string) error {
 }
 
 type ModifyParamsData struct {
-
+	// Parameter Name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-
+	// Parameter Value Before Modification
 	OldValue *string `json:"OldValue,omitnil,omitempty" name:"OldValue"`
 
-
+	// Parameter Value After Modification
 	CurValue *string `json:"CurValue,omitnil,omitempty" name:"CurValue"`
 }
 
@@ -13546,7 +13564,7 @@ type ProxyNodeInfo struct {
 	// AZ
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-
+	// Database Proxy Node Name
 	OssProxyNodeName *string `json:"OssProxyNodeName,omitnil,omitempty" name:"OssProxyNodeName"`
 }
 
@@ -14298,25 +14316,25 @@ func (r *RollBackClusterResponse) FromJsonString(s string) error {
 }
 
 type RollbackData struct {
-
+	// Instance CPU
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-
+	// Instance Memory
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-
+	// Cluster storage limit
 	StorageLimit *int64 `json:"StorageLimit,omitnil,omitempty" name:"StorageLimit"`
 
-
+	// Original Cluster id
 	OriginalClusterId *string `json:"OriginalClusterId,omitnil,omitempty" name:"OriginalClusterId"`
 
-
+	// Original Cluster Name
 	OriginalClusterName *string `json:"OriginalClusterName,omitnil,omitempty" name:"OriginalClusterName"`
 
-
+	// Rollback Method
 	RollbackStrategy *string `json:"RollbackStrategy,omitnil,omitempty" name:"RollbackStrategy"`
 
-
+	// Snapshot Time
 	SnapshotTime *string `json:"SnapshotTime,omitnil,omitempty" name:"SnapshotTime"`
 
 	// Minimum CPU when rolling back to a serverlessls cluster.
@@ -14328,10 +14346,10 @@ type RollbackData struct {
 	// Snapshot ID.
 	SnapShotId *uint64 `json:"SnapShotId,omitnil,omitempty" name:"SnapShotId"`
 
-
+	// Rollback Database
 	RollbackDatabases []*RollbackDatabase `json:"RollbackDatabases,omitnil,omitempty" name:"RollbackDatabases"`
 
-
+	// Rollback Data Table
 	RollbackTables []*RollbackTable `json:"RollbackTables,omitnil,omitempty" name:"RollbackTables"`
 
 	// Specifies the backup file name.
@@ -14342,10 +14360,10 @@ type RollbackData struct {
 }
 
 type RollbackDatabase struct {
-
+	// Old Database Name
 	OldDatabase *string `json:"OldDatabase,omitnil,omitempty" name:"OldDatabase"`
 
-
+	// New Database Name
 	NewDatabase *string `json:"NewDatabase,omitnil,omitempty" name:"NewDatabase"`
 }
 
@@ -14394,10 +14412,10 @@ type RollbackProcessInfo struct {
 	// The exchangeable time of vip.
 	VipSwitchableTime *string `json:"VipSwitchableTime,omitnil,omitempty" name:"VipSwitchableTime"`
 
-
+	// Exchange Instance List
 	ExchangeInstanceInfoList []*ExchangeInstanceInfo `json:"ExchangeInstanceInfoList,omitnil,omitempty" name:"ExchangeInstanceInfoList"`
 
-
+	// Swap RO Group List
 	ExchangeRoGroupInfoList []*ExchangeRoGroupInfo `json:"ExchangeRoGroupInfoList,omitnil,omitempty" name:"ExchangeRoGroupInfoList"`
 
 	// Current step.
@@ -14428,10 +14446,10 @@ type RollbackRoGroupInfo struct {
 }
 
 type RollbackTable struct {
-
+	// Database Name
 	Database *string `json:"Database,omitnil,omitempty" name:"Database"`
 
-
+	// Database Table
 	Tables []*RollbackTableInfo `json:"Tables,omitnil,omitempty" name:"Tables"`
 }
 
@@ -15659,23 +15677,32 @@ type TemplateParamInfo struct {
 }
 
 type TradePrice struct {
-	// Resource total price under prepaid mode, excluding discounts. unit: cent.
+	// Resource total price under prepaid mode, excluding discounts. unit: microCent. 1 US dollar equals 1e8 microCents.
 	TotalPrice *int64 `json:"TotalPrice,omitnil,omitempty" name:"TotalPrice"`
 
 	// Total discount. `100` means no discount.
 	Discount *float64 `json:"Discount,omitnil,omitempty" name:"Discount"`
 
-	// Discounted total price under prepaid mode, unit: fen. for example, the user enjoys a Discount = TotalPrice × Discount.
+	// Discounted total price under prepaid mode, unit: cent. 1 US dollar equals 1e8 microCents. for example, the user enjoys a Discount = TotalPrice * Discount.
 	TotalPriceDiscount *int64 `json:"TotalPriceDiscount,omitnil,omitempty" name:"TotalPriceDiscount"`
 
-	// Unit resource price in postpaid mode, excluding discounts. unit: cent.
+	// Unit resource price in postpaid mode, excluding discounts. unit: cent. 1 US dollar equals 1e2 cents
 	UnitPrice *int64 `json:"UnitPrice,omitnil,omitempty" name:"UnitPrice"`
 
-	// Unit resource price in postpaid mode after Discount, unit: fen. for example, the user enjoys a Discount = unitprice × Discount.
+	// Unit resource price in postpaid mode after Discount, unit: cent. 1 US dollar equals 1e2 cents. for example, the user enjoys a Discount = unitprice * Discount.
 	UnitPriceDiscount *int64 `json:"UnitPriceDiscount,omitnil,omitempty" name:"UnitPriceDiscount"`
 
 	// Price unit
 	ChargeUnit *string `json:"ChargeUnit,omitnil,omitempty" name:"ChargeUnit"`
+
+	// Excludes discounted rates under high precision.
+	UnitPriceHighPrecision *string `json:"UnitPriceHighPrecision,omitnil,omitempty" name:"UnitPriceHighPrecision"`
+
+	// Discounted price under high precision.
+	UnitPriceDiscountHighPrecision *string `json:"UnitPriceDiscountHighPrecision,omitnil,omitempty" name:"UnitPriceDiscountHighPrecision"`
+
+	// Currency unit.
+	AmountUnit *string `json:"AmountUnit,omitnil,omitempty" name:"AmountUnit"`
 }
 
 // Predefined struct for user

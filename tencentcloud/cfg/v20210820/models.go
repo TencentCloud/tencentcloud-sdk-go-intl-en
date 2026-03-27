@@ -765,10 +765,10 @@ type DescribeTaskListRequestParams struct {
 	// Task status for filtering, supporting multiple states (1001: not started; 1002: in progress; 1003: paused; 1004: ended)
 	TaskStatusList []*uint64 `json:"TaskStatusList,omitnil,omitempty" name:"TaskStatusList"`
 
-
+	// Architecture ID
 	ArchId *string `json:"ArchId,omitnil,omitempty" name:"ArchId"`
 
-
+	// Architecture Name
 	ArchName *string `json:"ArchName,omitnil,omitempty" name:"ArchName"`
 }
 
@@ -817,8 +817,10 @@ type DescribeTaskListRequest struct {
 	// Task status for filtering, supporting multiple states (1001: not started; 1002: in progress; 1003: paused; 1004: ended)
 	TaskStatusList []*uint64 `json:"TaskStatusList,omitnil,omitempty" name:"TaskStatusList"`
 
+	// Architecture ID
 	ArchId *string `json:"ArchId,omitnil,omitempty" name:"ArchId"`
 
+	// Architecture Name
 	ArchName *string `json:"ArchName,omitnil,omitempty" name:"ArchName"`
 }
 

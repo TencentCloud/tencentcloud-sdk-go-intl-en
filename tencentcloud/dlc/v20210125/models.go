@@ -4319,10 +4319,10 @@ type DescribeDataEngineImageVersionsRequestParams struct {
 	// Types of engines: SQL, SparkBatch, StandardSpark, and StandardPresto
 	EngineType *string `json:"EngineType,omitnil,omitempty" name:"EngineType"`
 
-
+	// Sort field: InsertTime (Insertion time, default), UpdateTime (Update time)
 	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
 
-
+	// Sort order: false (descending, default), true (ascending)
 	Asc *bool `json:"Asc,omitnil,omitempty" name:"Asc"`
 }
 
@@ -4332,8 +4332,10 @@ type DescribeDataEngineImageVersionsRequest struct {
 	// Types of engines: SQL, SparkBatch, StandardSpark, and StandardPresto
 	EngineType *string `json:"EngineType,omitnil,omitempty" name:"EngineType"`
 
+	// Sort field: InsertTime (Insertion time, default), UpdateTime (Update time)
 	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
 
+	// Sort order: false (descending, default), true (ascending)
 	Asc *bool `json:"Asc,omitnil,omitempty" name:"Asc"`
 }
 
@@ -6212,10 +6214,10 @@ type DescribeUpdatableDataEnginesRequestParams struct {
 	// Operation commands of engine configuration. UpdateSparkSQLLakefsPath updates the path of managed tables, and UpdateSparkSQLResultPath updates the path of result buckets.
 	DataEngineConfigCommand *string `json:"DataEngineConfigCommand,omitnil,omitempty" name:"DataEngineConfigCommand"`
 
-
+	// Whether to use managed storage as result storage
 	UseLakeFs *bool `json:"UseLakeFs,omitnil,omitempty" name:"UseLakeFs"`
 
-
+	// User-defined Result Storage Path
 	CustomResultPath *string `json:"CustomResultPath,omitnil,omitempty" name:"CustomResultPath"`
 }
 
@@ -6225,8 +6227,10 @@ type DescribeUpdatableDataEnginesRequest struct {
 	// Operation commands of engine configuration. UpdateSparkSQLLakefsPath updates the path of managed tables, and UpdateSparkSQLResultPath updates the path of result buckets.
 	DataEngineConfigCommand *string `json:"DataEngineConfigCommand,omitnil,omitempty" name:"DataEngineConfigCommand"`
 
+	// Whether to use managed storage as result storage
 	UseLakeFs *bool `json:"UseLakeFs,omitnil,omitempty" name:"UseLakeFs"`
 
+	// User-defined Result Storage Path
 	CustomResultPath *string `json:"CustomResultPath,omitnil,omitempty" name:"CustomResultPath"`
 }
 

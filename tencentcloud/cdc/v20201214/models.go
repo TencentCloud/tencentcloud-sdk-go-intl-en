@@ -586,25 +586,25 @@ type DedicatedClusterOrder struct {
 	// Note: The returned value of this field may be null, indicating that no valid value is obtained.
 	OrderType *string `json:"OrderType,omitnil,omitempty" name:"OrderType"`
 
-
+	// Acceptance Status
 	CheckStatus *string `json:"CheckStatus,omitnil,omitempty" name:"CheckStatus"`
 
-
+	// Expected Delivery Time
 	DeliverExpectTime *string `json:"DeliverExpectTime,omitnil,omitempty" name:"DeliverExpectTime"`
 
-
+	// Actual Delivery Completion Time
 	DeliverFinishTime *string `json:"DeliverFinishTime,omitnil,omitempty" name:"DeliverFinishTime"`
 
-
+	// Expected Acceptance Time
 	CheckExpectTime *string `json:"CheckExpectTime,omitnil,omitempty" name:"CheckExpectTime"`
 
-
+	// Actual Acceptance Completion Time
 	CheckFinishTime *string `json:"CheckFinishTime,omitnil,omitempty" name:"CheckFinishTime"`
 
-
+	// Order SLA
 	OrderSLA *string `json:"OrderSLA,omitnil,omitempty" name:"OrderSLA"`
 
-
+	// Order Payment Plan
 	OrderPayPlan *string `json:"OrderPayPlan,omitnil,omitempty" name:"OrderPayPlan"`
 }
 
@@ -1113,7 +1113,7 @@ type DescribeDedicatedClusterOrdersRequestParams struct {
 	// The order type is the filter condition: CREATE EXTEND
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-
+	// Order Type List
 	OrderTypes []*string `json:"OrderTypes,omitnil,omitempty" name:"OrderTypes"`
 }
 
@@ -1138,6 +1138,7 @@ type DescribeDedicatedClusterOrdersRequest struct {
 	// The order type is the filter condition: CREATE EXTEND
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
+	// Order Type List
 	OrderTypes []*string `json:"OrderTypes,omitnil,omitempty" name:"OrderTypes"`
 }
 
@@ -1699,19 +1700,19 @@ type DetailData struct {
 }
 
 type HostDetailInfo struct {
-
+	// Type Family
 	HostTypeFamily *string `json:"HostTypeFamily,omitnil,omitempty" name:"HostTypeFamily"`
 
-
+	// Total CPU
 	CpuTotal *float64 `json:"CpuTotal,omitnil,omitempty" name:"CpuTotal"`
 
-
+	// Available CPU
 	CpuAvailable *float64 `json:"CpuAvailable,omitnil,omitempty" name:"CpuAvailable"`
 
-
+	// Total Memory
 	MemTotal *float64 `json:"MemTotal,omitnil,omitempty" name:"MemTotal"`
 
-
+	// Available Memory
 	MemAvailable *float64 `json:"MemAvailable,omitnil,omitempty" name:"MemAvailable"`
 }
 

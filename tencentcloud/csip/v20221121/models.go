@@ -427,7 +427,7 @@ func (r *AddNewBindRoleUserResponse) FromJsonString(s string) error {
 }
 
 type AssetBaseInfoResponse struct {
-
+	// vpc-id
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// vpc-name
@@ -1266,7 +1266,7 @@ type CVMAssetVO struct {
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	PrivateIp *string `json:"PrivateIp,omitnil,omitempty" name:"PrivateIp"`
 
-
+	// vpc id
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// VPC name
@@ -1576,13 +1576,14 @@ type ClbListenerListInfo struct {
 }
 
 type CloudCountDesc struct {
-
+	// 0 represents Tencent Cloud
+	// 1 represents AWS
 	CloudType *int64 `json:"CloudType,omitnil,omitempty" name:"CloudType"`
 
-
+	// Account quantity
 	CloudCount *int64 `json:"CloudCount,omitnil,omitempty" name:"CloudCount"`
 
-
+	// The cloud account type description
 	CloudDesc *string `json:"CloudDesc,omitnil,omitempty" name:"CloudDesc"`
 }
 
@@ -2122,7 +2123,7 @@ type DbAssetInfo struct {
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-
+	// vpc information
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Asset name
@@ -7275,7 +7276,7 @@ type IpAssetListVO struct {
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	PublicIpType *uint64 `json:"PublicIpType,omitnil,omitempty" name:"PublicIpType"`
 
-
+	// vpc
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// VPC name
@@ -7734,159 +7735,164 @@ type NICAsset struct {
 }
 
 type OrganizationInfo struct {
-
+	// Member account name
 	NickName *string `json:"NickName,omitnil,omitempty" name:"NickName"`
 
-
+	// Department node name, department of account
 	NodeName *string `json:"NodeName,omitnil,omitempty" name:"NodeName"`
 
-
+	// Member/Admin/DelegatedAdmin/EntityAdmin; Member/Admin/DelegatedAdmin/EntityAdmin
 	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
 
-
+	// Member account id
 	MemberId *string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
 
-
+	// account joining method,create/invite
 	JoinType *string `json:"JoinType,omitnil,omitempty" name:"JoinType"`
 
-
+	// Group name
 	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 
-
+	// Admin account name
 	AdminName *string `json:"AdminName,omitnil,omitempty" name:"AdminName"`
 
-
+	// Admin Uin
 	AdminUin *string `json:"AdminUin,omitnil,omitempty" name:"AdminUin"`
 
-
+	// Creation Time
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-
+	// Number of departments
 	NodeCount *int64 `json:"NodeCount,omitnil,omitempty" name:"NodeCount"`
 
-
+	// Number of members
 	MemberCount *int64 `json:"MemberCount,omitnil,omitempty" name:"MemberCount"`
 
-
+	// Sub-account count
 	SubAccountCount *int64 `json:"SubAccountCount,omitnil,omitempty" name:"SubAccountCount"`
 
-
+	// Abnormal sub-account quantity
 	AbnormalSubUserCount *int64 `json:"AbnormalSubUserCount,omitnil,omitempty" name:"AbnormalSubUserCount"`
 
-
+	// Organization Relationship Policy Permissions
 	GroupPermission []*string `json:"GroupPermission,omitnil,omitempty" name:"GroupPermission"`
 
-
+	// Membership Policy Permissions
 	MemberPermission []*string `json:"MemberPermission,omitnil,omitempty" name:"MemberPermission"`
 
-
+	// Organization Billing Mode; 0/Self-paid, 1/Proxy-paid
 	GroupPayMode *int64 `json:"GroupPayMode,omitnil,omitempty" name:"GroupPayMode"`
 
-
+	// Personal Billing Mode; 0/Self-paid, 1/Proxy-paid
 	MemberPayMode *int64 `json:"MemberPayMode,omitnil,omitempty" name:"MemberPayMode"`
 
-
+	// If empty, it is not enabled; otherwise, different strings correspond to different versions, with 'common' being general and not version-specific.
 	CFWProtect *string `json:"CFWProtect,omitnil,omitempty" name:"CFWProtect"`
 
-
+	// If empty, it is not enabled; otherwise, different strings correspond to different versions, with 'common' being general and not version-specific.
 	WAFProtect *string `json:"WAFProtect,omitnil,omitempty" name:"WAFProtect"`
 
-
+	// If empty, it is not enabled; otherwise, different strings correspond to different versions, with 'common' being general and not version-specific.
 	CWPProtect *string `json:"CWPProtect,omitnil,omitempty" name:"CWPProtect"`
 
-
+	// Array of all departments
 	Departments []*string `json:"Departments,omitnil,omitempty" name:"Departments"`
 
-
+	// Member Creation Time
 	MemberCreateTime *string `json:"MemberCreateTime,omitnil,omitempty" name:"MemberCreateTime"`
 
 	// Advanced/Enterprise/Ultimate 
 	CSIPProtect *string `json:"CSIPProtect,omitnil,omitempty" name:"CSIPProtect"`
 
-
+	// 1 indicates the quota consumer
 	QuotaConsumer *int64 `json:"QuotaConsumer,omitnil,omitempty" name:"QuotaConsumer"`
 
-
+	// Number of enabled Admin/Delegated Admin accounts
 	EnableAdminCount *int64 `json:"EnableAdminCount,omitnil,omitempty" name:"EnableAdminCount"`
 
-
+	// Multi-cloud account statistics in array format. Refer to the CloudCountDesc description for details.
 	CloudCountDesc []*CloudCountDesc `json:"CloudCountDesc,omitnil,omitempty" name:"CloudCountDesc"`
 
-
+	// Total Number of Admin/Delegated Admin Accounts
 	AdminCount *int64 `json:"AdminCount,omitnil,omitempty" name:"AdminCount"`
 }
 
 type OrganizationUserInfo struct {
-
+	// Member account Uin
 	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
 
-
+	// Member account name
 	NickName *string `json:"NickName,omitnil,omitempty" name:"NickName"`
 
-
+	// Department node name, department of account
 	NodeName *string `json:"NodeName,omitnil,omitempty" name:"NodeName"`
 
-
+	// Asset Quantity
 	AssetCount *int64 `json:"AssetCount,omitnil,omitempty" name:"AssetCount"`
 
-
+	// Risk Quantity
 	RiskCount *int64 `json:"RiskCount,omitnil,omitempty" name:"RiskCount"`
 
-
+	// Attack Quantity
 	AttackCount *int64 `json:"AttackCount,omitnil,omitempty" name:"AttackCount"`
 
-
+	// Member/Admin/;Member or Administrator
 	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
 
-
+	// Member account id
 	MemberId *string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
 
-
+	// Member account Appid
 	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
 
-
+	// account joining method,create/invite
 	JoinType *string `json:"JoinType,omitnil,omitempty" name:"JoinType"`
 
-
+	// If empty, it is not enabled; otherwise, different strings correspond to different versions, with 'common' being general and not version-specific.
 	CFWProtect *string `json:"CFWProtect,omitnil,omitempty" name:"CFWProtect"`
 
-
+	// If empty, it is not enabled; otherwise, different strings correspond to different versions, with 'common' being general and not version-specific.
 	WAFProtect *string `json:"WAFProtect,omitnil,omitempty" name:"WAFProtect"`
 
-
+	// If empty, it is not enabled; otherwise, different strings correspond to different versions, with 'common' being general and not version-specific.
 	CWPProtect *string `json:"CWPProtect,omitnil,omitempty" name:"CWPProtect"`
 
-
+	// 1 enable, 0 not enabled
 	Enable *int64 `json:"Enable,omitnil,omitempty" name:"Enable"`
 
-
+	// "Free"      
+	//    //Free edition
+	//    "Advanced"   //Advanced edition "Enterprise" //Enterprise edition "Ultimate"  
+	//    //Ultimate edition
 	CSIPProtect *string `json:"CSIPProtect,omitnil,omitempty" name:"CSIPProtect"`
 
-
+	// 1 indicates the quota consumer
 	QuotaConsumer *int64 `json:"QuotaConsumer,omitnil,omitempty" name:"QuotaConsumer"`
 
-
+	// Account type: 0 for Tencent Cloud account, 1 for AWS account
 	CloudType *int64 `json:"CloudType,omitnil,omitempty" name:"CloudType"`
 
-
+	// 0 indicates the default value; 1 indicates 10 minutes; 2 indicates 1 hour; 3 indicates 24 hours
 	SyncFrequency *int64 `json:"SyncFrequency,omitnil,omitempty" name:"SyncFrequency"`
 
-
+	// Whether the multi-cloud account has expired
 	IsExpired *bool `json:"IsExpired,omitnil,omitempty" name:"IsExpired"`
 
-
+	// Multi-cloud account permissions list
 	PermissionList []*string `json:"PermissionList,omitnil,omitempty" name:"PermissionList"`
 
 	// 1
 	AuthType *int64 `json:"AuthType,omitnil,omitempty" name:"AuthType"`
 
-
+	// 0 Tencent Cloud group account
+	// 1 Tencent Cloud access account
+	// 2 non-Tencent Cloud
 	TcMemberType *int64 `json:"TcMemberType,omitnil,omitempty" name:"TcMemberType"`
 
-
+	// Sub-account count
 	SubUserCount *int64 `json:"SubUserCount,omitnil,omitempty" name:"SubUserCount"`
 
-
+	// Joining method details
 	JoinTypeInfo *string `json:"JoinTypeInfo,omitnil,omitempty" name:"JoinTypeInfo"`
 }
 
@@ -8214,7 +8220,7 @@ type ScanTaskInfoList struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CWPBlProcess *uint64 `json:"CWPBlProcess,omitnil,omitempty" name:"CWPBlProcess"`
 
-
+	// Exception status codes
 	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
 
 	// Exception information
@@ -8529,58 +8535,58 @@ func (r *StopRiskCenterTaskResponse) FromJsonString(s string) error {
 }
 
 type SubUserInfo struct {
-
+	// Primary key ID, which has no business meaning and serves solely as a unique identifier
 	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
-
+	// sub-account Appid
 	AppID *string `json:"AppID,omitnil,omitempty" name:"AppID"`
 
-
+	// sub-account UIn
 	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
 
-
+	// Sub-account name
 	NickName *string `json:"NickName,omitnil,omitempty" name:"NickName"`
 
-
+	// master account Appid
 	OwnerAppID *string `json:"OwnerAppID,omitnil,omitempty" name:"OwnerAppID"`
 
-
+	// master account Uin
 	OwnerUin *string `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
 
-
+	// master account name
 	OwnerNickName *string `json:"OwnerNickName,omitnil,omitempty" name:"OwnerNickName"`
 
-
+	// master account's memberId information
 	OwnerMemberID *string `json:"OwnerMemberID,omitnil,omitempty" name:"OwnerMemberID"`
 
-
+	// Account type: 0 for Tencent Cloud account, 1 for AWS account
 	CloudType *int64 `json:"CloudType,omitnil,omitempty" name:"CloudType"`
 
-
+	// Accessible services count
 	ServiceCount *int64 `json:"ServiceCount,omitnil,omitempty" name:"ServiceCount"`
 
-
+	// Accessible API count
 	InterfaceCount *int64 `json:"InterfaceCount,omitnil,omitempty" name:"InterfaceCount"`
 
-
+	// Accessible resources count
 	AssetCount *int64 `json:"AssetCount,omitnil,omitempty" name:"AssetCount"`
 
-
+	// Access/Behavior Logs Count
 	LogCount *int64 `json:"LogCount,omitnil,omitempty" name:"LogCount"`
 
-
+	// Permissions configuration risk
 	ConfigRiskCount *int64 `json:"ConfigRiskCount,omitnil,omitempty" name:"ConfigRiskCount"`
 
-
+	// Dangerous behavior alarm
 	ActionRiskCount *int64 `json:"ActionRiskCount,omitnil,omitempty" name:"ActionRiskCount"`
 
-
+	// whether to enable CloudAudit logs
 	IsAccessCloudAudit *bool `json:"IsAccessCloudAudit,omitnil,omitempty" name:"IsAccessCloudAudit"`
 
-
+	// whether risk configuration security assessment
 	IsAccessCheck *bool `json:"IsAccessCheck,omitnil,omitempty" name:"IsAccessCheck"`
 
-
+	// whether to configure user behavior management policies
 	IsAccessUeba *bool `json:"IsAccessUeba,omitnil,omitempty" name:"IsAccessUeba"`
 }
 

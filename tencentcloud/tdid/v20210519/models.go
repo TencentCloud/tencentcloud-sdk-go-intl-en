@@ -25,7 +25,7 @@ type AddLabelRequestParams struct {
 	// The label ID.
 	LabelId *uint64 `json:"LabelId,omitnil,omitempty" name:"LabelId"`
 
-
+	// tdid
 	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 }
 
@@ -35,6 +35,7 @@ type AddLabelRequest struct {
 	// The label ID.
 	LabelId *uint64 `json:"LabelId,omitnil,omitempty" name:"LabelId"`
 
+	// tdid
 	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 }
 
@@ -930,7 +931,7 @@ type CreateTDidRequestParams struct {
 	// The network ID.
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	//  
+	// Deployment mechanism: 1 for enabled, 0 for disabled
 	Relegation *uint64 `json:"Relegation,omitnil,omitempty" name:"Relegation"`
 }
 
@@ -943,7 +944,7 @@ type CreateTDidRequest struct {
 	// The network ID.
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	//  
+	// Deployment mechanism: 1 for enabled, 0 for disabled
 	Relegation *uint64 `json:"Relegation,omitnil,omitempty" name:"Relegation"`
 }
 

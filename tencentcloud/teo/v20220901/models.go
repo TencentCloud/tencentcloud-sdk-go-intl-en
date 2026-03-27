@@ -735,7 +735,7 @@ func (r *ApplyFreeCertificateResponse) FromJsonString(s string) error {
 }
 
 type AscriptionInfo struct {
-
+	// Host record.
 	Subdomain *string `json:"Subdomain,omitnil,omitempty" name:"Subdomain"`
 
 	// The record type.
@@ -1174,7 +1174,7 @@ type BotPortraitRule struct {
 }
 
 type BotUserRule struct {
-
+	// Rule name can only consist of English letters, numbers, and underscores, and cannot start with an underscore.
 	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
 	// The action. Values:
@@ -19474,7 +19474,10 @@ type OriginProtectionInfo struct {
 }
 
 type OriginPullProtocolParameters struct {
-
+	// Origin protocol configuration, with values:
+	// <li>http: Use HTTP protocol for origin pull;</li>
+	// <li>https: Use HTTPS protocol for origin pull;</li>
+	// <li>follow: Protocol following.</li>
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 }
 
@@ -19755,7 +19758,7 @@ type Quic struct {
 }
 
 type Quota struct {
-
+	// Single batch submission quota limit.
 	Batch *int64 `json:"Batch,omitnil,omitempty" name:"Batch"`
 
 	// Daily submission quota limit.
@@ -20505,7 +20508,7 @@ type RuleEngineAction struct {
 	// Note: this field may return null, which indicates a failure to obtain a valid value.
 	ForceRedirectHTTPSParameters *ForceRedirectHTTPSParameters `json:"ForceRedirectHTTPSParameters,omitnil,omitempty" name:"ForceRedirectHTTPSParameters"`
 
-
+	// Origin HTTPS configuration parameters. When Name is set to OriginPullProtocol, this parameter is required.
 	OriginPullProtocolParameters *OriginPullProtocolParameters `json:"OriginPullProtocolParameters,omitnil,omitempty" name:"OriginPullProtocolParameters"`
 
 	// Intelligent compression configuration. this parameter is required when name is set to compression.

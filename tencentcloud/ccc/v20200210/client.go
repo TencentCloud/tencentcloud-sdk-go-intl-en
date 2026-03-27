@@ -381,13 +381,14 @@ func NewCreateAIAgentCallResponse() (response *CreateAIAgentCallResponse) {
 }
 
 // CreateAIAgentCall
-// This API is used to initiate outbound calls using an AI model, limited to owned phone numbers only. Currently, a limited-time free trial of Advanced Agents is available.
+// Used to create one-time Intelligent Agent outbound calls. You can create a voice Intelligent Agent in the management console - Intelligent Agent Management and perform dialogue process configuration (https://www.tencentcloud.comom/document/product/679/119796?from_cn_redirect=1). This API is used to initiate a single outbound call task with a configured Intelligent Agent. To create batch Intelligent Agent outbound call tasks, refer to the documentation for creating automatic outbound call tasks (https://www.tencentcloud.comom/document/product/679/69194?from_cn_redirect=1).
 //
 // 
 //
-// Before initiating a call, please ensure your AI model is compatible with OpenAI, Azure, or Minimax protocols, and visit the model provider's website to obtain relevant authentication information. For detailed feature descriptions, please refer to the documentation [Tencent Cloud Contact Center AI Call Platform](https://www.tencentcloud.com/document/product/1229/70681).
+// The feature requires purchase of the Intelligent Agent call package and is only available for own telephone number. For details, refer to the [Intelligent Agent Call Purchase Guide](https://www.tencentcloud.comom/document/product/679/125953?from_cn_redirect=1).
 //
 // error code that may be returned:
+//  FAILEDOPERATION_AILICENSEHASEXPIRED = "FailedOperation.AILicenseHasExpired"
 //  FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"
 //  FAILEDOPERATION_CALLEEISBLACKUSER = "FailedOperation.CalleeIsBlackUser"
 //  FAILEDOPERATION_CALLEROVERFREQUENCY = "FailedOperation.CallerOverFrequency"
@@ -406,13 +407,14 @@ func (c *Client) CreateAIAgentCall(request *CreateAIAgentCallRequest) (response 
 }
 
 // CreateAIAgentCall
-// This API is used to initiate outbound calls using an AI model, limited to owned phone numbers only. Currently, a limited-time free trial of Advanced Agents is available.
+// Used to create one-time Intelligent Agent outbound calls. You can create a voice Intelligent Agent in the management console - Intelligent Agent Management and perform dialogue process configuration (https://www.tencentcloud.comom/document/product/679/119796?from_cn_redirect=1). This API is used to initiate a single outbound call task with a configured Intelligent Agent. To create batch Intelligent Agent outbound call tasks, refer to the documentation for creating automatic outbound call tasks (https://www.tencentcloud.comom/document/product/679/69194?from_cn_redirect=1).
 //
 // 
 //
-// Before initiating a call, please ensure your AI model is compatible with OpenAI, Azure, or Minimax protocols, and visit the model provider's website to obtain relevant authentication information. For detailed feature descriptions, please refer to the documentation [Tencent Cloud Contact Center AI Call Platform](https://www.tencentcloud.com/document/product/1229/70681).
+// The feature requires purchase of the Intelligent Agent call package and is only available for own telephone number. For details, refer to the [Intelligent Agent Call Purchase Guide](https://www.tencentcloud.comom/document/product/679/125953?from_cn_redirect=1).
 //
 // error code that may be returned:
+//  FAILEDOPERATION_AILICENSEHASEXPIRED = "FailedOperation.AILicenseHasExpired"
 //  FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"
 //  FAILEDOPERATION_CALLEEISBLACKUSER = "FailedOperation.CalleeIsBlackUser"
 //  FAILEDOPERATION_CALLEROVERFREQUENCY = "FailedOperation.CallerOverFrequency"
@@ -675,7 +677,11 @@ func NewCreateAutoCalloutTaskResponse() (response *CreateAutoCalloutTaskResponse
 }
 
 // CreateAutoCalloutTask
-// This API is used to create the automatic outbound call task.
+// This API is used to create bulk automatic outbound calls. The system will automatically initiate outbound calls to the designated called number list based on task configuration. This API can call the configured Intelligent Agent to perform batch outbound call tasks. You can create a voice Intelligent Agent in the management console-Intelligent Agent Management and configure the dialogue process (https://www.tencentcloud.comom/document/product/679/119796?from_cn_redirect=1). To create a single Intelligent Agent outbound call task, refer to the documentation (https://www.tencentcloud.comom/document/product/679/115681?from_cn_redirect=1).
+//
+// 
+//
+// The feature requires purchase of the Intelligent Agent call package and is only available for own telephone number. For details, refer to the [Intelligent Agent Call Purchase Guide](https://www.tencentcloud.comom/document/product/679/125953?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PERMISSIONDENIED = "FailedOperation.PermissionDenied"
@@ -689,7 +695,11 @@ func (c *Client) CreateAutoCalloutTask(request *CreateAutoCalloutTaskRequest) (r
 }
 
 // CreateAutoCalloutTask
-// This API is used to create the automatic outbound call task.
+// This API is used to create bulk automatic outbound calls. The system will automatically initiate outbound calls to the designated called number list based on task configuration. This API can call the configured Intelligent Agent to perform batch outbound call tasks. You can create a voice Intelligent Agent in the management console-Intelligent Agent Management and configure the dialogue process (https://www.tencentcloud.comom/document/product/679/119796?from_cn_redirect=1). To create a single Intelligent Agent outbound call task, refer to the documentation (https://www.tencentcloud.comom/document/product/679/115681?from_cn_redirect=1).
+//
+// 
+//
+// The feature requires purchase of the Intelligent Agent call package and is only available for own telephone number. For details, refer to the [Intelligent Agent Call Purchase Guide](https://www.tencentcloud.comom/document/product/679/125953?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PERMISSIONDENIED = "FailedOperation.PermissionDenied"
@@ -1527,7 +1537,7 @@ func NewDescribeAIAgentInfoListResponse() (response *DescribeAIAgentInfoListResp
 }
 
 // DescribeAIAgentInfoList
-// This API is used to get the list of Intelligent Agents.
+// This API is used to query the information list of configured Intelligent Agents under a specified instance (SdkAppId) by paging, including basic information such as Intelligent Agent ID and name.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1539,7 +1549,7 @@ func (c *Client) DescribeAIAgentInfoList(request *DescribeAIAgentInfoListRequest
 }
 
 // DescribeAIAgentInfoList
-// This API is used to get the list of Intelligent Agents.
+// This API is used to query the information list of configured Intelligent Agents under a specified instance (SdkAppId) by paging, including basic information such as Intelligent Agent ID and name.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1637,7 +1647,7 @@ func NewDescribeAICallExtractResultResponse() (response *DescribeAICallExtractRe
 }
 
 // DescribeAICallExtractResult
-// Obtain AI call content extraction result
+// This API is used to query specified session's post-call Tag results by Session ID after the Intelligent Agent call session ends. Related post-call Tags need to be configured in advance in the management console. For details, please refer to post-call Tags (https://www.tencentcloud.comom/document/product/679/119800?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1648,7 +1658,7 @@ func (c *Client) DescribeAICallExtractResult(request *DescribeAICallExtractResul
 }
 
 // DescribeAICallExtractResult
-// Obtain AI call content extraction result
+// This API is used to query specified session's post-call Tag results by Session ID after the Intelligent Agent call session ends. Related post-call Tags need to be configured in advance in the management console. For details, please refer to post-call Tags (https://www.tencentcloud.comom/document/product/679/119800?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1691,7 +1701,15 @@ func NewDescribeAILatencyResponse() (response *DescribeAILatencyResponse) {
 }
 
 // DescribeAILatency
-// This API is used to obtain AI latency information.
+// Call this API to query the processing latency detail and stats of specified Session by Session ID within a specific time period. The latency info includes:.
+//
+// -End-to-end (ETE) delay: Statistics of the overall duration from user voice input to AI returning a complete response.
+//
+// -ASR latency: statistics of the processing time consumption required for voice input to be recognized as text.
+//
+// -LLM latency: Statistics of inference latency for AI model to generate text content.
+//
+// -Text To Speech (TTS) latency: Statistics of text conversion to speech audio synthesis duration.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
@@ -1702,7 +1720,15 @@ func (c *Client) DescribeAILatency(request *DescribeAILatencyRequest) (response 
 }
 
 // DescribeAILatency
-// This API is used to obtain AI latency information.
+// Call this API to query the processing latency detail and stats of specified Session by Session ID within a specific time period. The latency info includes:.
+//
+// -End-to-end (ETE) delay: Statistics of the overall duration from user voice input to AI returning a complete response.
+//
+// -ASR latency: statistics of the processing time consumption required for voice input to be recognized as text.
+//
+// -LLM latency: Statistics of inference latency for AI model to generate text content.
+//
+// -Text To Speech (TTS) latency: Statistics of text conversion to speech audio synthesis duration.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
@@ -1799,7 +1825,9 @@ func NewDescribeAutoCalloutTaskResponse() (response *DescribeAutoCalloutTaskResp
 }
 
 // DescribeAutoCalloutTask
-// This API is used to query automatic outbound call task details.
+// This API is used to query detailed information of an automatic outbound call task by TaskId, including basic configuration, start and end time, name list, execution status, and call status.
+//
+// This API is usually used together with Create Bulk Automatic Outbound Call Task (https://www.tencentcloud.comom/document/product/679/69194?from_cn_redirect=1) to check whether the task configuration takes effect, the current task status, and real-time progress during execution once created.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
@@ -1810,7 +1838,9 @@ func (c *Client) DescribeAutoCalloutTask(request *DescribeAutoCalloutTaskRequest
 }
 
 // DescribeAutoCalloutTask
-// This API is used to query automatic outbound call task details.
+// This API is used to query detailed information of an automatic outbound call task by TaskId, including basic configuration, start and end time, name list, execution status, and call status.
+//
+// This API is usually used together with Create Bulk Automatic Outbound Call Task (https://www.tencentcloud.comom/document/product/679/69194?from_cn_redirect=1) to check whether the task configuration takes effect, the current task status, and real-time progress during execution once created.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
@@ -2501,7 +2531,7 @@ func NewDescribeSessionDetailResponse() (response *DescribeSessionDetailResponse
 }
 
 // DescribeSessionDetail
-// This API is used to query call detail.
+// This API is used to query call details for a single call by session id and timestamp after call ends, including caller and contact information, voice recording.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SESSIONNOTEXISTS = "FailedOperation.SessionNotExists"
@@ -2513,7 +2543,7 @@ func (c *Client) DescribeSessionDetail(request *DescribeSessionDetailRequest) (r
 }
 
 // DescribeSessionDetail
-// This API is used to query call detail.
+// This API is used to query call details for a single call by session id and timestamp after call ends, including caller and contact information, voice recording.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SESSIONNOTEXISTS = "FailedOperation.SessionNotExists"
@@ -3325,6 +3355,7 @@ func NewModifyStaffResponse() (response *ModifyStaffResponse) {
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
 //  INVALIDPARAMETERVALUE_PHONENUMISBOUNDOTHERACCOUNT = "InvalidParameterValue.PhoneNumIsBoundOtherAccount"
 //  INVALIDPARAMETERVALUE_SKILLGROUPERROR = "InvalidParameterValue.SkillGroupError"
+//  LIMITEXCEEDED_INSUFFICIENTLICENSE = "LimitExceeded.InsufficientLicense"
 //  OPERATIONDENIED_NOTINWHITELIST = "OperationDenied.NotInWhiteList"
 func (c *Client) ModifyStaff(request *ModifyStaffRequest) (response *ModifyStaffResponse, err error) {
     return c.ModifyStaffWithContext(context.Background(), request)
@@ -3341,6 +3372,7 @@ func (c *Client) ModifyStaff(request *ModifyStaffRequest) (response *ModifyStaff
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
 //  INVALIDPARAMETERVALUE_PHONENUMISBOUNDOTHERACCOUNT = "InvalidParameterValue.PhoneNumIsBoundOtherAccount"
 //  INVALIDPARAMETERVALUE_SKILLGROUPERROR = "InvalidParameterValue.SkillGroupError"
+//  LIMITEXCEEDED_INSUFFICIENTLICENSE = "LimitExceeded.InsufficientLicense"
 //  OPERATIONDENIED_NOTINWHITELIST = "OperationDenied.NotInWhiteList"
 func (c *Client) ModifyStaffWithContext(ctx context.Context, request *ModifyStaffRequest) (response *ModifyStaffResponse, err error) {
     if request == nil {
@@ -3411,6 +3443,66 @@ func (c *Client) ModifyStaffPasswordWithContext(ctx context.Context, request *Mo
     return
 }
 
+func NewPauseAutoCalloutTaskRequest() (request *PauseAutoCalloutTaskRequest) {
+    request = &PauseAutoCalloutTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "PauseAutoCalloutTask")
+    
+    
+    return
+}
+
+func NewPauseAutoCalloutTaskResponse() (response *PauseAutoCalloutTaskResponse) {
+    response = &PauseAutoCalloutTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// PauseAutoCalloutTask
+// This API is used to suspend an ongoing automatic outbound call task by TaskId. After calling this API, the task will be temporarily interrupted and no longer initiate new outbound call requests; initiated calls are not affected.
+//
+// A paused task can continue execution via the [Restore Suspended Automatic Outbound Call Task](https://www.tencentcloud.comom/document/product/679/125356?from_cn_redirect=1) API. If needed, refer to [Stop Automatic Outbound Call Task](https://www.tencentcloud.comom/document/product/679/69192?from_cn_redirect=1) to permanently terminate the task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) PauseAutoCalloutTask(request *PauseAutoCalloutTaskRequest) (response *PauseAutoCalloutTaskResponse, err error) {
+    return c.PauseAutoCalloutTaskWithContext(context.Background(), request)
+}
+
+// PauseAutoCalloutTask
+// This API is used to suspend an ongoing automatic outbound call task by TaskId. After calling this API, the task will be temporarily interrupted and no longer initiate new outbound call requests; initiated calls are not affected.
+//
+// A paused task can continue execution via the [Restore Suspended Automatic Outbound Call Task](https://www.tencentcloud.comom/document/product/679/125356?from_cn_redirect=1) API. If needed, refer to [Stop Automatic Outbound Call Task](https://www.tencentcloud.comom/document/product/679/69192?from_cn_redirect=1) to permanently terminate the task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) PauseAutoCalloutTaskWithContext(ctx context.Context, request *PauseAutoCalloutTaskRequest) (response *PauseAutoCalloutTaskResponse, err error) {
+    if request == nil {
+        request = NewPauseAutoCalloutTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "PauseAutoCalloutTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PauseAutoCalloutTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewPauseAutoCalloutTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewPausePredictiveDialingCampaignRequest() (request *PausePredictiveDialingCampaignRequest) {
     request = &PausePredictiveDialingCampaignRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3463,6 +3555,64 @@ func (c *Client) PausePredictiveDialingCampaignWithContext(ctx context.Context, 
     return
 }
 
+func NewPlaySoundCallRequest() (request *PlaySoundCallRequest) {
+    request = &PlaySoundCallRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "PlaySoundCall")
+    
+    
+    return
+}
+
+func NewPlaySoundCallResponse() (response *PlaySoundCallResponse) {
+    response = &PlaySoundCallResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// PlaySoundCall
+// This API is used to perform playback for a session in a call with an agent.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PERMISSIONDENIED = "FailedOperation.PermissionDenied"
+//  FAILEDOPERATION_SESSIONNOTEXISTS = "FailedOperation.SessionNotExists"
+//  FAILEDOPERATION_SESSIONNOTINCONTROLSTATE = "FailedOperation.SessionNotInControlState"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_FILENOTEXIST = "InvalidParameterValue.FileNotExist"
+func (c *Client) PlaySoundCall(request *PlaySoundCallRequest) (response *PlaySoundCallResponse, err error) {
+    return c.PlaySoundCallWithContext(context.Background(), request)
+}
+
+// PlaySoundCall
+// This API is used to perform playback for a session in a call with an agent.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PERMISSIONDENIED = "FailedOperation.PermissionDenied"
+//  FAILEDOPERATION_SESSIONNOTEXISTS = "FailedOperation.SessionNotExists"
+//  FAILEDOPERATION_SESSIONNOTINCONTROLSTATE = "FailedOperation.SessionNotInControlState"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_FILENOTEXIST = "InvalidParameterValue.FileNotExist"
+func (c *Client) PlaySoundCallWithContext(ctx context.Context, request *PlaySoundCallRequest) (response *PlaySoundCallResponse, err error) {
+    if request == nil {
+        request = NewPlaySoundCallRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "PlaySoundCall")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PlaySoundCall require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewPlaySoundCallResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewResetExtensionPasswordRequest() (request *ResetExtensionPasswordRequest) {
     request = &ResetExtensionPasswordRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3486,8 +3636,11 @@ func NewResetExtensionPasswordResponse() (response *ResetExtensionPasswordRespon
 // This API is used to reset the telephone register password.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_PERMISSIONDENIED = "FailedOperation.PermissionDenied"
+//  FAILEDOPERATION_SESSIONNOTEXISTS = "FailedOperation.SessionNotExists"
+//  FAILEDOPERATION_SESSIONNOTINCONTROLSTATE = "FailedOperation.SessionNotInControlState"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_FILENOTEXIST = "InvalidParameterValue.FileNotExist"
 func (c *Client) ResetExtensionPassword(request *ResetExtensionPasswordRequest) (response *ResetExtensionPasswordResponse, err error) {
     return c.ResetExtensionPasswordWithContext(context.Background(), request)
 }
@@ -3496,8 +3649,11 @@ func (c *Client) ResetExtensionPassword(request *ResetExtensionPasswordRequest) 
 // This API is used to reset the telephone register password.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_PERMISSIONDENIED = "FailedOperation.PermissionDenied"
+//  FAILEDOPERATION_SESSIONNOTEXISTS = "FailedOperation.SessionNotExists"
+//  FAILEDOPERATION_SESSIONNOTINCONTROLSTATE = "FailedOperation.SessionNotInControlState"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_FILENOTEXIST = "InvalidParameterValue.FileNotExist"
 func (c *Client) ResetExtensionPasswordWithContext(ctx context.Context, request *ResetExtensionPasswordRequest) (response *ResetExtensionPasswordResponse, err error) {
     if request == nil {
         request = NewResetExtensionPasswordRequest()
@@ -3565,6 +3721,62 @@ func (c *Client) RestoreMemberOnlineWithContext(ctx context.Context, request *Re
     request.SetContext(ctx)
     
     response = NewRestoreMemberOnlineResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewResumeAutoCalloutTaskRequest() (request *ResumeAutoCalloutTaskRequest) {
+    request = &ResumeAutoCalloutTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "ResumeAutoCalloutTask")
+    
+    
+    return
+}
+
+func NewResumeAutoCalloutTaskResponse() (response *ResumeAutoCalloutTaskResponse) {
+    response = &ResumeAutoCalloutTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ResumeAutoCalloutTask
+// This API is used to restore a paused automatic outbound call task by TaskId. This API is suitable for scenarios where you need to continue execution of the remaining outbound call plan after calling Suspend Automatic Outbound Call Task. After a successful call, the task will resume from the paused state and re-initiate incomplete outbound requests.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ResumeAutoCalloutTask(request *ResumeAutoCalloutTaskRequest) (response *ResumeAutoCalloutTaskResponse, err error) {
+    return c.ResumeAutoCalloutTaskWithContext(context.Background(), request)
+}
+
+// ResumeAutoCalloutTask
+// This API is used to restore a paused automatic outbound call task by TaskId. This API is suitable for scenarios where you need to continue execution of the remaining outbound call plan after calling Suspend Automatic Outbound Call Task. After a successful call, the task will resume from the paused state and re-initiate incomplete outbound requests.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ResumeAutoCalloutTaskWithContext(ctx context.Context, request *ResumeAutoCalloutTaskRequest) (response *ResumeAutoCalloutTaskResponse, err error) {
+    if request == nil {
+        request = NewResumeAutoCalloutTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ccc", APIVersion, "ResumeAutoCalloutTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ResumeAutoCalloutTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewResumeAutoCalloutTaskResponse()
     err = c.Send(request, response)
     return
 }

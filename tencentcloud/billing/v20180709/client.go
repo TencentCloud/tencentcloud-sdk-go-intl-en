@@ -2091,6 +2091,70 @@ func (c *Client) DescribeGatherRuleDetailWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribeRenewInstancesRequest() (request *DescribeRenewInstancesRequest) {
+    request = &DescribeRenewInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeRenewInstances")
+    
+    
+    return
+}
+
+func NewDescribeRenewInstancesResponse() (response *DescribeRenewInstancesResponse) {
+    response = &DescribeRenewInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRenewInstances
+// Notes:
+//
+// 1. This API supports querying annual and monthly subscription instances integrated into the renewal management page, including running and isolated instances (some products unsupported).
+//
+// 2. When using this API, a sub-user should have the QcloudFinanceRenewManageFullAccess permission policy.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATERROR = "InternalError.DbOperatError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeRenewInstances(request *DescribeRenewInstancesRequest) (response *DescribeRenewInstancesResponse, err error) {
+    return c.DescribeRenewInstancesWithContext(context.Background(), request)
+}
+
+// DescribeRenewInstances
+// Notes:
+//
+// 1. This API supports querying annual and monthly subscription instances integrated into the renewal management page, including running and isolated instances (some products unsupported).
+//
+// 2. When using this API, a sub-user should have the QcloudFinanceRenewManageFullAccess permission policy.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATERROR = "InternalError.DbOperatError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeRenewInstancesWithContext(ctx context.Context, request *DescribeRenewInstancesRequest) (response *DescribeRenewInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeRenewInstancesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeRenewInstances")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRenewInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRenewInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTagListRequest() (request *DescribeTagListRequest) {
     request = &DescribeTagListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2679,6 +2743,102 @@ func (c *Client) RenewInstanceWithContext(ctx context.Context, request *RenewIns
     request.SetContext(ctx)
     
     response = NewRenewInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSetRenewalRequest() (request *SetRenewalRequest) {
+    request = &SetRenewalRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "SetRenewal")
+    
+    
+    return
+}
+
+func NewSetRenewalResponse() (response *SetRenewalResponse) {
+    response = &SetRenewalResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SetRenewal
+// Notes:
+//
+// 1. This API supports setting auto-renewal mode and period for annual and monthly subscription instances.
+//
+// 2. Obtain the product code and region code through an instance query API.
+//
+// 3. When using this API, a sub-user must possess the QcloudFinanceRenewManageFullAccess permission policy.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_BALANCEINSUFFICIENT = "FailedOperation.BalanceInsufficient"
+//  FAILEDOPERATION_BUSINESSCHECKERRCODE = "FailedOperation.BusinessCheckErrCode"
+//  FAILEDOPERATION_DISTRIBUTEERROR = "FailedOperation.DistributeError"
+//  FAILEDOPERATION_GETPRICEPARAMERROR = "FailedOperation.GetPriceParamError"
+//  FAILEDOPERATION_INVALIDDEAL = "FailedOperation.InvalidDeal"
+//  FAILEDOPERATION_INVALIDGOODSCATEGORYID = "FailedOperation.InvalidGoodsCategoryId"
+//  FAILEDOPERATION_DEALCREATEWHITELISTERROR = "FailedOperation.dealCreateWhitelistError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_APIPARAMERROR = "InvalidParameter.ApiParamError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_RESOURCELOCKED = "InvalidParameter.ResourceLocked"
+//  UNAUTHORIZEDOPERATION_CERTIFICATIONNEEDUPGRADE = "UnauthorizedOperation.CertificationNeedUpgrade"
+//  UNAUTHORIZEDOPERATION_NOTCERTIFICATION = "UnauthorizedOperation.NotCertification"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_NOT_SUPPORT_THIS_ACTION = "UnsupportedOperation.NOT_SUPPORT_THIS_ACTION"
+func (c *Client) SetRenewal(request *SetRenewalRequest) (response *SetRenewalResponse, err error) {
+    return c.SetRenewalWithContext(context.Background(), request)
+}
+
+// SetRenewal
+// Notes:
+//
+// 1. This API supports setting auto-renewal mode and period for annual and monthly subscription instances.
+//
+// 2. Obtain the product code and region code through an instance query API.
+//
+// 3. When using this API, a sub-user must possess the QcloudFinanceRenewManageFullAccess permission policy.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_BALANCEINSUFFICIENT = "FailedOperation.BalanceInsufficient"
+//  FAILEDOPERATION_BUSINESSCHECKERRCODE = "FailedOperation.BusinessCheckErrCode"
+//  FAILEDOPERATION_DISTRIBUTEERROR = "FailedOperation.DistributeError"
+//  FAILEDOPERATION_GETPRICEPARAMERROR = "FailedOperation.GetPriceParamError"
+//  FAILEDOPERATION_INVALIDDEAL = "FailedOperation.InvalidDeal"
+//  FAILEDOPERATION_INVALIDGOODSCATEGORYID = "FailedOperation.InvalidGoodsCategoryId"
+//  FAILEDOPERATION_DEALCREATEWHITELISTERROR = "FailedOperation.dealCreateWhitelistError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_APIPARAMERROR = "InvalidParameter.ApiParamError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_RESOURCELOCKED = "InvalidParameter.ResourceLocked"
+//  UNAUTHORIZEDOPERATION_CERTIFICATIONNEEDUPGRADE = "UnauthorizedOperation.CertificationNeedUpgrade"
+//  UNAUTHORIZEDOPERATION_NOTCERTIFICATION = "UnauthorizedOperation.NotCertification"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_NOT_SUPPORT_THIS_ACTION = "UnsupportedOperation.NOT_SUPPORT_THIS_ACTION"
+func (c *Client) SetRenewalWithContext(ctx context.Context, request *SetRenewalRequest) (response *SetRenewalResponse, err error) {
+    if request == nil {
+        request = NewSetRenewalRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "SetRenewal")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetRenewal require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSetRenewalResponse()
     err = c.Send(request, response)
     return
 }

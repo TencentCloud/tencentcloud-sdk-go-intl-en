@@ -9431,7 +9431,7 @@ type EnvironmentRoleSet struct {
 }
 
 type ExchangeQuota struct {
-
+	// Maximum number of creatable exchanges
 	MaxExchange *int64 `json:"MaxExchange,omitnil,omitempty" name:"MaxExchange"`
 
 	// Number of created exchanges.
@@ -11531,16 +11531,16 @@ type ProducerLog struct {
 }
 
 type PrometheusEndpointInfo struct {
-
+	// Status of the Prometheus switch
 	PrometheusEndpointStatus *string `json:"PrometheusEndpointStatus,omitnil,omitempty" name:"PrometheusEndpointStatus"`
 
-
+	// prometheus Information
 	VpcPrometheusEndpoint []*string `json:"VpcPrometheusEndpoint,omitnil,omitempty" name:"VpcPrometheusEndpoint"`
 
-
+	// Node Information
 	NodePrometheusAddress []*string `json:"NodePrometheusAddress,omitnil,omitempty" name:"NodePrometheusAddress"`
 
-
+	// vpc information
 	VpcEndpointInfo *VpcEndpointInfo `json:"VpcEndpointInfo,omitnil,omitempty" name:"VpcEndpointInfo"`
 }
 
@@ -11880,7 +11880,7 @@ type PulsarProInstance struct {
 }
 
 type QueueQuota struct {
-
+	// Maximum number of creatable queues
 	MaxQueue *int64 `json:"MaxQueue,omitnil,omitempty" name:"MaxQueue"`
 
 	// Number of created Queues.
@@ -11923,28 +11923,28 @@ type RabbitMQBindingListInfo struct {
 }
 
 type RabbitMQClusterAccessInfo struct {
-
+	// Cluster Public Network Access Address
 	PublicAccessEndpoint *string `json:"PublicAccessEndpoint,omitnil,omitempty" name:"PublicAccessEndpoint"`
 
-
+	// Cluster Console Access Address
 	WebConsoleEndpoint *string `json:"WebConsoleEndpoint,omitnil,omitempty" name:"WebConsoleEndpoint"`
 
-
+	// Cluster Console Login Username
 	WebConsoleUsername *string `json:"WebConsoleUsername,omitnil,omitempty" name:"WebConsoleUsername"`
 
-
+	// Cluster Console Login Password
 	WebConsolePassword *string `json:"WebConsolePassword,omitnil,omitempty" name:"WebConsolePassword"`
 
-
+	// Deprecated
 	PublicAccessEndpointStatus *bool `json:"PublicAccessEndpointStatus,omitnil,omitempty" name:"PublicAccessEndpointStatus"`
 
-
+	// Deprecated
 	PublicControlConsoleSwitchStatus *bool `json:"PublicControlConsoleSwitchStatus,omitnil,omitempty" name:"PublicControlConsoleSwitchStatus"`
 
-
+	// Deprecated
 	VpcControlConsoleSwitchStatus *bool `json:"VpcControlConsoleSwitchStatus,omitnil,omitempty" name:"VpcControlConsoleSwitchStatus"`
 
-
+	// Vpc management console access address, example value: http://1.1.1.1:15672
 	VpcWebConsoleEndpoint *string `json:"VpcWebConsoleEndpoint,omitnil,omitempty" name:"VpcWebConsoleEndpoint"`
 
 	// Status of the public network access point in the console. Valid values: OFF, ON, CREATING, and DELETING.
@@ -11977,10 +11977,10 @@ type RabbitMQClusterInfo struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-
+	// Cluster Name
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-
+	// Region Information
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// Creation time in milliseconds. unix timestamp.
@@ -11989,37 +11989,37 @@ type RabbitMQClusterInfo struct {
 	// Cluster description information
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
-
+	// VPC and network information
 	Vpcs []*VpcEndpointInfo `json:"Vpcs,omitnil,omitempty" name:"Vpcs"`
 
 	// AZ information
 	ZoneIds []*int64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-
+	// Virtual Host Quantity
 	VirtualHostNumber *int64 `json:"VirtualHostNumber,omitnil,omitempty" name:"VirtualHostNumber"`
 
-
+	// Number of Queues
 	QueueNumber *int64 `json:"QueueNumber,omitnil,omitempty" name:"QueueNumber"`
 
-
+	// Number of messages produced per second Unit: messages/second
 	MessagePublishRate *float64 `json:"MessagePublishRate,omitnil,omitempty" name:"MessagePublishRate"`
 
-
+	// Number of backlogged messages Unit: messages
 	MessageStackNumber *int64 `json:"MessageStackNumber,omitnil,omitempty" name:"MessageStackNumber"`
 
 	// Specifies the instance expiration time in milliseconds as a unix timestamp. the value is 0 for pay-as-you-go resources.
 	ExpireTime *int64 `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-
+	// Channel Count
 	ChannelNumber *int64 `json:"ChannelNumber,omitnil,omitempty" name:"ChannelNumber"`
 
-
+	// Connection Count
 	ConnectionNumber *int64 `json:"ConnectionNumber,omitnil,omitempty" name:"ConnectionNumber"`
 
-
+	// Consumer Count
 	ConsumerNumber *int64 `json:"ConsumerNumber,omitnil,omitempty" name:"ConsumerNumber"`
 
-
+	// Exchange Count
 	ExchangeNumber *int64 `json:"ExchangeNumber,omitnil,omitempty" name:"ExchangeNumber"`
 
 	// Cluster exception information.
@@ -12061,22 +12061,22 @@ type RabbitMQClusterInfo struct {
 }
 
 type RabbitMQClusterSpecInfo struct {
-
+	// Cluster Specification Name
 	SpecName *string `json:"SpecName,omitnil,omitempty" name:"SpecName"`
 
-
+	// Number of Nodes
 	NodeCount *uint64 `json:"NodeCount,omitnil,omitempty" name:"NodeCount"`
 
-
+	// Peak tps
 	MaxTps *uint64 `json:"MaxTps,omitnil,omitempty" name:"MaxTps"`
 
-
+	// Peak bandwidth Unit: mbps
 	MaxBandWidth *uint64 `json:"MaxBandWidth,omitnil,omitempty" name:"MaxBandWidth"`
 
-
+	// Storage capacity Unit: GB
 	MaxStorage *uint64 `json:"MaxStorage,omitnil,omitempty" name:"MaxStorage"`
 
-
+	// public network bandwidth tps. Unit: Mbps
 	PublicNetworkTps *uint64 `json:"PublicNetworkTps,omitnil,omitempty" name:"PublicNetworkTps"`
 }
 
@@ -12090,10 +12090,10 @@ type RabbitMQClusterWhiteListInfo struct {
 	// Public network data flow allowlist.
 	PublicDataStreamWhiteList *string `json:"PublicDataStreamWhiteList,omitnil,omitempty" name:"PublicDataStreamWhiteList"`
 
-
+	// Public Network Management Console Allowlist Status
 	PublicControlConsoleWhiteListStatus *string `json:"PublicControlConsoleWhiteListStatus,omitnil,omitempty" name:"PublicControlConsoleWhiteListStatus"`
 
-
+	// Public Network Data Flow Allowlist Status
 	PublicDataStreamWhiteListStatus *string `json:"PublicDataStreamWhiteListStatus,omitnil,omitempty" name:"PublicDataStreamWhiteListStatus"`
 }
 
@@ -13236,7 +13236,7 @@ type RocketMQInstanceConfig struct {
 	// Topic distribution
 	TopicDistribution []*RocketMQTopicDistribution `json:"TopicDistribution,omitnil,omitempty" name:"TopicDistribution"`
 
-
+	// Maximum number of queues per topic
 	MaxQueuesPerTopic *uint64 `json:"MaxQueuesPerTopic,omitnil,omitempty" name:"MaxQueuesPerTopic"`
 
 	// Maximum configurable message retention time, in hours	
@@ -14454,7 +14454,7 @@ func (r *UnbindCmqDeadLetterResponse) FromJsonString(s string) error {
 }
 
 type VirtualHostQuota struct {
-
+	// Maximum number of vhosts allowed to be created
 	MaxVirtualHost *int64 `json:"MaxVirtualHost,omitnil,omitempty" name:"MaxVirtualHost"`
 
 	// Number of created vhosts.
@@ -14500,13 +14500,13 @@ type VpcConfig struct {
 }
 
 type VpcEndpointInfo struct {
-
+	// vpc id
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-
+	// subnet id
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-
+	// vpc Access Point Information
 	VpcEndpoint *string `json:"VpcEndpoint,omitnil,omitempty" name:"VpcEndpoint"`
 
 	// Access point status. valid values: OFF, ON, CREATING, DELETING.

@@ -340,10 +340,10 @@ func (r *CancelBackupJobResponse) FromJsonString(s string) error {
 }
 
 type CatalogPermission struct {
-
+	// catalog Name
 	CatalogName *string `json:"CatalogName,omitnil,omitempty" name:"CatalogName"`
 
-
+	// catalog permission
 	Permissions []*string `json:"Permissions,omitnil,omitempty" name:"Permissions"`
 }
 
@@ -3358,33 +3358,38 @@ func (r *DescribeInstanceOperationHistoryResponse) FromJsonString(s string) erro
 
 // Predefined struct for user
 type DescribeInstanceOperationsRequestParams struct {
-
+	// Cluster ID
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-
+	// Pagination parameter, offset, starting from 0
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-
+	// Pagination parameter, page size, default 10
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-
+	// Start Time
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-
+	// End Time
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 type DescribeInstanceOperationsRequest struct {
 	*tchttp.BaseRequest
 	
+	// Cluster ID
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
+	// Pagination parameter, offset, starting from 0
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
+	// Pagination parameter, page size, default 10
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
+	// Start Time
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
+	// End Time
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 

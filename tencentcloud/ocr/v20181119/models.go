@@ -2627,31 +2627,31 @@ func (r *MainlandPermitOCRResponse) FromJsonString(s string) error {
 }
 
 type MedicalInvoice struct {
-
+	// Invoice name.
 	Title *string `json:"Title,omitnil,omitempty" name:"Title"`
 
-
+	// Invoice code.
 	Code *string `json:"Code,omitnil,omitempty" name:"Code"`
 
-
+	// Invoice number.
 	Number *string `json:"Number,omitnil,omitempty" name:"Number"`
 
-
+	// Total amount (in figures).
 	Total *string `json:"Total,omitnil,omitempty" name:"Total"`
 
-
+	// Total Amount (in words).
 	TotalCn *string `json:"TotalCn,omitnil,omitempty" name:"TotalCn"`
 
-
+	// Invoice date.
 	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
 
-
+	// Verification code
 	CheckCode *string `json:"CheckCode,omitnil,omitempty" name:"CheckCode"`
 
-
+	// Place of Issue.
 	Place *string `json:"Place,omitnil,omitempty" name:"Place"`
 
-
+	// Reviewer.
 	Reviewer *string `json:"Reviewer,omitnil,omitempty" name:"Reviewer"`
 }
 
@@ -2908,46 +2908,52 @@ type OtherInvoiceList struct {
 }
 
 type PassportRecognizeInfos struct {
-
+	// Document Type (Passport Information Page Recognition Result).
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// Issuing Country (Passport Information Page Recognition Result).
 	IssuingCountry *string `json:"IssuingCountry,omitnil,omitempty" name:"IssuingCountry"`
 
-
+	// Passport Number (Passport Information Page Recognition Result).
 	PassportID *string `json:"PassportID,omitnil,omitempty" name:"PassportID"`
 
-
+	// Surname (Passport Information Page Recognition Result).
 	Surname *string `json:"Surname,omitnil,omitempty" name:"Surname"`
 
-
+	// Given Name (Passport Information Page Recognition Result).
 	GivenName *string `json:"GivenName,omitnil,omitempty" name:"GivenName"`
 
-
+	// Full Name (Passport Information Page Recognition Result).
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-
+	// Nationality Information (Passport Information Page Recognition Result).
 	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
 
-
+	// Date of Birth (Passport Information Page Recognition Result).
 	DateOfBirth *string `json:"DateOfBirth,omitnil,omitempty" name:"DateOfBirth"`
 
-
+	// Gender (Passport Information Page Recognition Result).
 	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
 
-
+	// Date of Issue (Passport Information Page Recognition Result).
 	DateOfIssuance *string `json:"DateOfIssuance,omitnil,omitempty" name:"DateOfIssuance"`
 
-
+	// Expiry Date (Passport Information Page Recognition Result).
 	DateOfExpiration *string `json:"DateOfExpiration,omitnil,omitempty" name:"DateOfExpiration"`
 
-
+	// Cardholder Signature (Passport Information Page Recognition Result)
+	// 
+	// This field is only supported for Chinese mainland passports and not available for Hong Kong (China), Macao (China), and Taiwan (China) passports or foreign passports.
 	Signature *string `json:"Signature,omitnil,omitempty" name:"Signature"`
 
-
+	// Place of Issue (Passport Information Page Recognition Result)
+	// 
+	// This field is only supported for Chinese mainland passports and not available for Hong Kong (China), Macao (China), and Taiwan (China) passports or foreign passports.
 	IssuePlace *string `json:"IssuePlace,omitnil,omitempty" name:"IssuePlace"`
 
-
+	// Issuing Authority (Passport Information Page Recognition Result)
+	// 
+	// This field is only supported for Chinese mainland passports and not available for Hong Kong (China), Macao (China), and Taiwan (China) passports or foreign passports.
 	IssuingAuthority *string `json:"IssuingAuthority,omitnil,omitempty" name:"IssuingAuthority"`
 }
 
@@ -5985,10 +5991,10 @@ type SingleInvoiceItem struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TrainTicket *TrainTicket `json:"TrainTicket,omitnil,omitempty" name:"TrainTicket"`
 
-
+	// Medical Outpatient Fee Invoice (Electronic).
 	MedicalOutpatientInvoice *MedicalInvoice `json:"MedicalOutpatientInvoice,omitnil,omitempty" name:"MedicalOutpatientInvoice"`
 
-
+	// Inpatient Medical Fee Invoice (Electronic).
 	MedicalHospitalizedInvoice *MedicalInvoice `json:"MedicalHospitalizedInvoice,omitnil,omitempty" name:"MedicalHospitalizedInvoice"`
 }
 
@@ -6925,13 +6931,13 @@ type VatInvoiceInfo struct {
 	// Payee
 	Receiptor *string `json:"Receiptor,omitnil,omitempty" name:"Receiptor"`
 
-
+	// Whether fully electronic and paper tickets exist (0: No, 1: Yes).
 	ElectronicFullMark *int64 `json:"ElectronicFullMark,omitnil,omitempty" name:"ElectronicFullMark"`
 
-
+	// Fully Electronic Number
 	ElectronicFullNumber *string `json:"ElectronicFullNumber,omitnil,omitempty" name:"ElectronicFullNumber"`
 
-
+	// Co-branded Invoice.
 	FormName *string `json:"FormName,omitnil,omitempty" name:"FormName"`
 }
 

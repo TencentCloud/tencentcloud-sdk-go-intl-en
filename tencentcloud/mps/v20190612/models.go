@@ -603,7 +603,7 @@ type AiAnalysisTaskCutoutResult struct {
 	// Task status. Valid values are `PROCESSING`, `SUCCESS`, and `FAIL`.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
 	// Error message.
@@ -2551,7 +2551,7 @@ type AudioTemplateInfo struct {
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
 	// Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
-	// For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.comom/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
+	// For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
 	// Unit: Hz.
 	// Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
 	SampleRate *uint64 `json:"SampleRate,omitnil,omitempty" name:"SampleRate"`
@@ -2596,7 +2596,7 @@ type AudioTemplateInfoForUpdate struct {
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
 	// Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
-	// For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.comom/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
+	// For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
 	// Unit: Hz.
 	// Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -2852,10 +2852,10 @@ type BlindWatermarkTemplate struct {
 	// Description information of the digital watermark template.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Creation time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+	// Creation time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Last modification time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+	// Last modification time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Digital watermark strength. 
@@ -8823,7 +8823,7 @@ type DescribeImageTaskDetailResponseParams struct {
 	// Error code when the task fails.
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrMsg *string `json:"ErrMsg,omitnil,omitempty" name:"ErrMsg"`
 
 	// Task exception message.
@@ -10303,7 +10303,7 @@ type DescribeUsageDataRequestParams struct {
 	// Start date. use ISO date format.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End date, which should be greater than or equal to the start date. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// End date, which should be greater than or equal to the start date. Use the [ISO date and time format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Type of MPS tasks to query. The transcoding tasks are queried by default.<li>Transcode: transcoding.</li><li>Enhance: enhancement.</li><li>AIAnalysis: intelligent analysis.</li><li>AIRecognition: intelligent identification.</li><li>AIReview: content moderation.</li><li>Snapshot: screenshot.</li><li>AnimatedGraphics: animated graphics.</li><li>AiQualityControl: quality inspection.</li><li>Evaluation: video evaluation.</li><li>ImageProcess: image processing.</li>
@@ -10336,7 +10336,7 @@ type DescribeUsageDataRequest struct {
 	// Start date. use ISO date format.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End date, which should be greater than or equal to the start date. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// End date, which should be greater than or equal to the start date. Use the [ISO date and time format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Type of MPS tasks to query. The transcoding tasks are queried by default.<li>Transcode: transcoding.</li><li>Enhance: enhancement.</li><li>AIAnalysis: intelligent analysis.</li><li>AIRecognition: intelligent identification.</li><li>AIReview: content moderation.</li><li>Snapshot: screenshot.</li><li>AnimatedGraphics: animated graphics.</li><li>AiQualityControl: quality inspection.</li><li>Evaluation: video evaluation.</li><li>ImageProcess: image processing.</li>
@@ -10755,13 +10755,13 @@ type DiagnoseResult struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// The PTS timestamp for the exception start.
 	Timestamp *float64 `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
 
-
+	// Diagnosed abnormal description.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-
+	// Abnormality detection time in Beijing time, using ISO date format.
 	DateTime *string `json:"DateTime,omitnil,omitempty" name:"DateTime"`
 
 	// Diagnosed exception level. Valid values:
@@ -11774,7 +11774,7 @@ type ImageProcessTaskResult struct {
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrMsg *string `json:"ErrMsg,omitnil,omitempty" name:"ErrMsg"`
 
 	// Error message.
@@ -12204,7 +12204,8 @@ type LiveStreamAiAnalysisResultItem struct {
 	// <li>Description: summary.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// Segmentation results are valid when Type is
+	// SegmentRecognition.
 	SegmentResultSet []*SegmentRecognitionItem `json:"SegmentResultSet,omitnil,omitempty" name:"SegmentResultSet"`
 
 	// Highlight result. This field is valid when Type is set to Highlight.
@@ -12222,7 +12223,7 @@ type LiveStreamAiQualityControlResultInfo struct {
 	// Deprecated: QualityControlResults is deprecated.
 	QualityControlResults []*QualityControlResult `json:"QualityControlResults,omitnil,omitempty" name:"QualityControlResults"`
 
-
+	// Format diagnostic results list.
 	//
 	// Deprecated: DiagnoseResults is deprecated.
 	DiagnoseResults []*DiagnoseResult `json:"DiagnoseResults,omitnil,omitempty" name:"DiagnoseResults"`
@@ -12280,7 +12281,7 @@ type LiveStreamAiRecognitionResultItem struct {
 	// Object recognition result, which is valid when Type is ObjectRecognition.
 	ObjectRecognitionResultSet []*LiveStreamObjectRecognitionResult `json:"ObjectRecognitionResultSet,omitnil,omitempty" name:"ObjectRecognitionResultSet"`
 
-
+	// Tagging results are valid when Type is TagRecognition.
 	TagRecognitionResultSet []*LiveStreamTagRecognitionResult `json:"TagRecognitionResultSet,omitnil,omitempty" name:"TagRecognitionResultSet"`
 }
 
@@ -12450,13 +12451,13 @@ type LiveStreamAsrFullTextRecognitionResult struct {
 	// Confidence of recognized segment. Value range: 0–100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-
+	// Recognition start UTC time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-
+	// Recognition end UTC time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-
+	// Steady state marker.
 	SteadyState *bool `json:"SteadyState,omitnil,omitempty" name:"SteadyState"`
 
 	// User ID in the result of recognition via WebSocket and TRTC.Note: This field may return null, indicating that no valid value can be obtained.
@@ -12599,23 +12600,23 @@ type LiveStreamRecordResultInfo struct {
 }
 
 type LiveStreamTagRecognitionResult struct {
-
+	// Tagging events.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-
+	// Start PTS time of the recognition segment, unit: seconds.
 	StartPtsTime *float64 `json:"StartPtsTime,omitnil,omitempty" name:"StartPtsTime"`
 
-
+	// Termination PTS time of the recognition segment, unit: seconds.
 	EndPtsTime *float64 `json:"EndPtsTime,omitnil,omitempty" name:"EndPtsTime"`
 
-
+	// Recognition segment confidence. Range: 0-100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 }
 
 type LiveStreamTaskNotifyConfig struct {
 	// Notification type:
 	// TDMQ-CMQ: message queue.
-	// "URL": When a URL is specified, HTTP callbacks are pushed to the address specified by NotifyUrl. The callback protocol is HTTP+JSON. The content of the packet body is the same as the output parameters of [ParseLiveStreamProcessNotification](https://www.tencentcloud.comom/document/product/862/39229?from_cn_redirect=1).
+	// "URL": When a URL is specified, HTTP callbacks are pushed to the address specified by NotifyUrl. The callback protocol is HTTP+JSON. The content of the packet body is the same as the output parameters of [ParseLiveStreamProcessNotification](https://www.tencentcloud.com/document/product/862/39229?from_cn_redirect=1).
 	// <Font color="red"> Note: if it is unspecified or left blank, no callback will be sent. To send a callback, fill in the corresponding type value. </font>
 	NotifyType *string `json:"NotifyType,omitnil,omitempty" name:"NotifyType"`
 
@@ -12655,13 +12656,13 @@ type LiveStreamTransTextRecognitionResult struct {
 	// The translation.
 	Trans *string `json:"Trans,omitnil,omitempty" name:"Trans"`
 
-
+	// Translation start UTC time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-
+	// Translation end UTC time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-
+	// Steady state marker.
 	SteadyState *bool `json:"SteadyState,omitnil,omitempty" name:"SteadyState"`
 
 	// User ID in the result of real-time translation via WebSocket and TRTC.
@@ -12810,7 +12811,9 @@ type MediaAiAnalysisFrameTagItem struct {
 	// Frame-specific tag name.
 	Tag *string `json:"Tag,omitnil,omitempty" name:"Tag"`
 
-
+	// Classification list of frame-level tags, where CategorySet.N represents the (N+1)th level classification.
+	// 
+	// For example, when the Tag is "tower", CategorySet contains two elements: CategorySet.0 is "scene" and CategorySet.1 is "architecture", indicating the frame-level tag is "tower" with Level 1 classification as "scene" and Level 2 classification as "architecture".
 	CategorySet []*string `json:"CategorySet,omitnil,omitempty" name:"CategorySet"`
 
 	// Confidence of intelligently generated frame-specific tag between 0 and 100.
@@ -13485,7 +13488,7 @@ type MediaVideoStreamItem struct {
 	// Note: This field may return `null`, indicating that no valid value was found.
 	HdrType *string `json:"HdrType,omitnil,omitempty" name:"HdrType"`
 
-
+	// Video Codecs.
 	Codecs *string `json:"Codecs,omitnil,omitempty" name:"Codecs"`
 
 	// Numerator of the frame rate.
@@ -16842,7 +16845,7 @@ type ProcessImageTemplate struct {
 
 // Predefined struct for user
 type ProcessLiveStreamRequestParams struct {
-	// <p>Live stream URL (this must be a live stream address; supported formats include RTMP, HLS, FLV, TRTC, WebRTC, and SRT).<br>TRTC address example:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room ID, which is a number.<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID.<br><code>&lt;userid&gt;</code> is the ID of the user who enters the room, which can be used to distinguish bots.<br><code>&lt;usersig&gt;</code> is the TRTC user signature.</p><p>WebRTC supports <a href="https://www.tencentcloud.comom/product/leb?from_cn_redirect=1">LEB</a> live streams. For more information about how to obtain the address, see <a href="https://www.tencentcloud.comom/document/product/267/32720?from_cn_redirect=1">this reference</a>.</p><p>For supported SRT addresses, see <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">this reference</a>.</p>
+	// <p>Live stream URL (this must be a live stream address; supported formats include RTMP, HLS, FLV, TRTC, WebRTC, and SRT).<br>TRTC address example:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room ID, which is a number.<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID.<br><code>&lt;userid&gt;</code> is the ID of the user who enters the room, which can be used to distinguish bots.<br><code>&lt;usersig&gt;</code> is the TRTC user signature.</p><p>WebRTC supports <a href="https://www.tencentcloud.com/product/leb?from_cn_redirect=1">LEB</a> live streams. For more information about how to obtain the address, see <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">this reference</a>.</p><p>For supported SRT addresses, see <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">this reference</a>.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// <p>Event notification information of the task. This is used to specify the live stream processing result.</p>
@@ -16885,7 +16888,7 @@ type ProcessLiveStreamRequestParams struct {
 type ProcessLiveStreamRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Live stream URL (this must be a live stream address; supported formats include RTMP, HLS, FLV, TRTC, WebRTC, and SRT).<br>TRTC address example:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room ID, which is a number.<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID.<br><code>&lt;userid&gt;</code> is the ID of the user who enters the room, which can be used to distinguish bots.<br><code>&lt;usersig&gt;</code> is the TRTC user signature.</p><p>WebRTC supports <a href="https://www.tencentcloud.comom/product/leb?from_cn_redirect=1">LEB</a> live streams. For more information about how to obtain the address, see <a href="https://www.tencentcloud.comom/document/product/267/32720?from_cn_redirect=1">this reference</a>.</p><p>For supported SRT addresses, see <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">this reference</a>.</p>
+	// <p>Live stream URL (this must be a live stream address; supported formats include RTMP, HLS, FLV, TRTC, WebRTC, and SRT).<br>TRTC address example:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room ID, which is a number.<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID.<br><code>&lt;userid&gt;</code> is the ID of the user who enters the room, which can be used to distinguish bots.<br><code>&lt;usersig&gt;</code> is the TRTC user signature.</p><p>WebRTC supports <a href="https://www.tencentcloud.com/product/leb?from_cn_redirect=1">LEB</a> live streams. For more information about how to obtain the address, see <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">this reference</a>.</p><p>For supported SRT addresses, see <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">this reference</a>.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// <p>Event notification information of the task. This is used to specify the live stream processing result.</p>
@@ -18244,7 +18247,7 @@ type ScheduleExecRuleTaskResult struct {
 	// Task status, which can be PROCESSING, SUCCESS, or FAIL.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. An empty string indicates success, while other values indicate failure. For specific values, see the list of MPS error codes at https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81.
+	// Error code. An empty string indicates success, while other values indicate failure. For specific values, see the list of MPS error codes at https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81.
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
 	// Error message.
@@ -18471,13 +18474,13 @@ type SecurityGroupInfo struct {
 }
 
 type SegmentRecognitionItem struct {
-
+	// Confidence.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-
+	// Segment start time offset.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-
+	// Segment end time offset.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
 	// Specifies the split segment URL.
@@ -18677,7 +18680,7 @@ type SmartEraseTaskResult struct {
 	// Task status, including PROCESSING, SUCCESS, and FAIL.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
 	// Error message.
@@ -18734,10 +18737,10 @@ type SmartEraseTemplateItem struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ErasePrivacyConfig *SmartErasePrivacyConfig `json:"ErasePrivacyConfig,omitnil,omitempty" name:"ErasePrivacyConfig"`
 
-	// Template creation time in [ISO datetime format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+	// Template creation time in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Last modification time of the template in [ISO datetime format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+	// Last modification time of the template in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Alias of the preset smart erasing template.
@@ -18863,7 +18866,7 @@ type SmartSubtitleTaskFullTextResult struct {
 	// Task status, which can be PROCESSING, SUCCESS, or FAIL.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
 	// Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
@@ -19134,7 +19137,7 @@ type SmartSubtitlesTaskInput struct {
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
 	// Output path of the generated subtitle file, which can be a relative or absolute path.
-	// To define the output path, end the path with .{format}. For variable names, see the description of file name variables at https://www.tencentcloud.comom/document/product/862/37039.?from_cn_redirect=1
+	// To define the output path, end the path with .{format}. For variable names, see the description of file name variables at https://www.tencentcloud.com/document/product/862/37039.?from_cn_redirect=1
 	// 
 	// Relative path example:
 	//  - File name_{variable name}.{format}.
@@ -21118,10 +21121,10 @@ type TranslateConfigureInfo struct {
 	// <li>OFF: Disables an intelligent full speech recognition task.</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-
+	// Video source language.
 	SourceLanguage *string `json:"SourceLanguage,omitnil,omitempty" name:"SourceLanguage"`
 
-
+	// Translated target language.
 	DestinationLanguage *string `json:"DestinationLanguage,omitnil,omitempty" name:"DestinationLanguage"`
 
 	// Generated subtitle file format. Leaving it as an empty string means no subtitle file will be generated. Valid value:

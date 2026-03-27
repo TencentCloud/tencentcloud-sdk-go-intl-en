@@ -10627,7 +10627,7 @@ type Metric struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Periods []*int64 `json:"Periods,omitnil,omitempty" name:"Periods"`
 
-
+	// Whether delay metrics
 	IsLatenessMetric *int64 `json:"IsLatenessMetric,omitnil,omitempty" name:"IsLatenessMetric"`
 }
 

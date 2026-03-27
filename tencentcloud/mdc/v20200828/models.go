@@ -62,12 +62,12 @@ type CreateInput struct {
 }
 
 type CreateInputHLSPullSettings struct {
-
+	// The origin server address for the HLS origin server. There can be only one.
 	SourceAddresses []*HLSPullSourceAddress `json:"SourceAddresses,omitnil,omitempty" name:"SourceAddresses"`
 }
 
 type CreateInputRTMPPullSettings struct {
-
+	// The origin server address for the RTMP origin server. There can be only one.
 	SourceAddresses []*RTMPPullSourceAddress `json:"SourceAddresses,omitnil,omitempty" name:"SourceAddresses"`
 }
 
@@ -80,7 +80,7 @@ type CreateInputRTPSettings struct {
 }
 
 type CreateInputRTSPPullSettings struct {
-
+	// The origin server address for the RTSP origin server. There can be only one.
 	SourceAddresses []*RTSPPullSourceAddress `json:"SourceAddresses,omitnil,omitempty" name:"SourceAddresses"`
 }
 
@@ -566,7 +566,7 @@ type DescribeFlow struct {
 }
 
 type DescribeHLSPullSourceAddress struct {
-
+	// The Url of the HLS origin server.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
@@ -608,16 +608,16 @@ type DescribeInput struct {
 	// Note: this field may return `null`, indicating that no valid value was found.
 	FailOver *string `json:"FailOver,omitnil,omitempty" name:"FailOver"`
 
-
+	// Input RTMP_PULL configuration.
 	RTMPPullSettings *DescribeInputRTMPPullSettings `json:"RTMPPullSettings,omitnil,omitempty" name:"RTMPPullSettings"`
 
-
+	// Input RTSP_PULL configuration.
 	RTSPPullSettings *DescribeInputRTSPPullSettings `json:"RTSPPullSettings,omitnil,omitempty" name:"RTSPPullSettings"`
 
-
+	// Input HLS_PULL configuration.
 	HLSPullSettings *DescribeInputHLSPullSettings `json:"HLSPullSettings,omitnil,omitempty" name:"HLSPullSettings"`
 
-
+	// Delayed broadcast smooth stream delivery configuration.
 	ResilientStream *ResilientStreamConf `json:"ResilientStream,omitnil,omitempty" name:"ResilientStream"`
 
 	// The bound security group ID.
@@ -625,12 +625,12 @@ type DescribeInput struct {
 }
 
 type DescribeInputHLSPullSettings struct {
-
+	// The address information of the HLS origin server.
 	SourceAddresses []*DescribeHLSPullSourceAddress `json:"SourceAddresses,omitnil,omitempty" name:"SourceAddresses"`
 }
 
 type DescribeInputRTMPPullSettings struct {
-
+	// The address information of the RTMP origin server.
 	SourceAddresses []*DescribeRTMPPullSourceAddress `json:"SourceAddresses,omitnil,omitempty" name:"SourceAddresses"`
 }
 
@@ -653,7 +653,7 @@ type DescribeInputRTPSettings struct {
 }
 
 type DescribeInputRTSPPullSettings struct {
-
+	// The address information of the RTSP origin server.
 	SourceAddresses []*DescribeRTSPPullSourceAddress `json:"SourceAddresses,omitnil,omitempty" name:"SourceAddresses"`
 }
 
@@ -733,13 +733,13 @@ type DescribeOutput struct {
 	// Note: This field may return `null`, indicating that no valid value was found.
 	AllowIpList []*string `json:"AllowIpList,omitnil,omitempty" name:"AllowIpList"`
 
-
+	// Output RTSP pull stream configuration.
 	RTSPPullSettings *DescribeOutputRTSPPullSettings `json:"RTSPPullSettings,omitnil,omitempty" name:"RTSPPullSettings"`
 
-
+	// Output HLS pull stream configuration.
 	HLSPullSettings *DescribeOutputHLSPullSettings `json:"HLSPullSettings,omitnil,omitempty" name:"HLSPullSettings"`
 
-
+	// Maximum pull stream concurrency, maximum 4, default 4.
 	MaxConcurrent *uint64 `json:"MaxConcurrent,omitnil,omitempty" name:"MaxConcurrent"`
 
 	// The bound security group IDs.
@@ -747,12 +747,12 @@ type DescribeOutput struct {
 }
 
 type DescribeOutputHLSPullServerUrl struct {
-
+	// The Url of the HLS pull stream address.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
 type DescribeOutputHLSPullSettings struct {
-
+	// HLS pull stream address list.
 	ServerUrls []*DescribeOutputHLSPullServerUrl `json:"ServerUrls,omitnil,omitempty" name:"ServerUrls"`
 }
 
@@ -799,12 +799,12 @@ type DescribeOutputRTPSettings struct {
 }
 
 type DescribeOutputRTSPPullServerUrl struct {
-
+	// RTSP pull stream address Url.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
 type DescribeOutputRTSPPullSettings struct {
-
+	// RTSP pull stream address list.
 	ServerUrls []*DescribeOutputRTSPPullServerUrl `json:"ServerUrls,omitnil,omitempty" name:"ServerUrls"`
 }
 
@@ -851,15 +851,17 @@ type DescribeOutputSRTSettings struct {
 }
 
 type DescribeRTMPPullSourceAddress struct {
-
+	// The TcUrl address of the RTMP origin server.
 	TcUrl *string `json:"TcUrl,omitnil,omitempty" name:"TcUrl"`
 
-
+	// The StreamKey of the RTMP origin server.
+	// 
+	// The concatenation rule for the RTMP origin server address is: $TcUrl/$StreamKey.
 	StreamKey *string `json:"StreamKey,omitnil,omitempty" name:"StreamKey"`
 }
 
 type DescribeRTSPPullSourceAddress struct {
-
+	// The Url address of the RTSP origin server.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
@@ -1800,7 +1802,7 @@ type FlowVideo struct {
 }
 
 type HLSPullSourceAddress struct {
-
+	// The Url of the HLS origin server.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
@@ -2102,10 +2104,10 @@ type RTMPAddressDestination struct {
 }
 
 type RTMPPullSourceAddress struct {
-
+	// The TcUrl address of the RTMP origin server.
 	TcUrl *string `json:"TcUrl,omitnil,omitempty" name:"TcUrl"`
 
-
+	// The StreamKey of the RTMP origin server.
 	StreamKey *string `json:"StreamKey,omitnil,omitempty" name:"StreamKey"`
 }
 
@@ -2118,7 +2120,7 @@ type RTPAddressDestination struct {
 }
 
 type RTSPPullSourceAddress struct {
-
+	// The Url address of the RTSP origin server.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
@@ -2128,10 +2130,10 @@ type RegionInfo struct {
 }
 
 type ResilientStreamConf struct {
-
+	// Whether to enable delayed broadcast smooth stream delivery: true to enable, false to disable. It is disabled by default.
 	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
 
-
+	// Delayed broadcast duration, in seconds. Supported range: 10 to 300 seconds.
 	BufferTime *uint64 `json:"BufferTime,omitnil,omitempty" name:"BufferTime"`
 }
 

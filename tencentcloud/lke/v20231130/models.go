@@ -21,27 +21,27 @@ import (
 )
 
 type AICallConfig struct {
-
+	// Enable voice interaction feature
 	EnableVoiceInteract *bool `json:"EnableVoiceInteract,omitnil,omitempty" name:"EnableVoiceInteract"`
 
-
+	// Enable voice call
 	EnableVoiceCall *bool `json:"EnableVoiceCall,omitnil,omitempty" name:"EnableVoiceCall"`
 
-
+	// Enable digital human
 	EnableDigitalHuman *bool `json:"EnableDigitalHuman,omitnil,omitempty" name:"EnableDigitalHuman"`
 
-
+	// Timbre Configuration
 	Voice *VoiceConfig `json:"Voice,omitnil,omitempty" name:"Voice"`
 
-
+	// Digital Human Configuration
 	DigitalHuman *DigitalHumanConfig `json:"DigitalHuman,omitnil,omitempty" name:"DigitalHuman"`
 }
 
 type AgentDebugInfo struct {
-
+	// Input Information for Tools and Large Models, json
 	Input *string `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output Information for Tools and Large Models, json
 	Output *string `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -3467,10 +3467,10 @@ type DescribeTokenUsageGraphRequestParams struct {
 	// Application ID list.
 	AppBizIds []*string `json:"AppBizIds,omitnil,omitempty" name:"AppBizIds"`
 
-
+	// Application type. Optional values: knowledge_qa(knowledge QA)/plugin_parsing_qa(plugin)/shared_knowledge(knowledge base)/evaluate_test(evaluation). If not filled, query all types.
 	AppType *string `json:"AppType,omitnil,omitempty" name:"AppType"`
 
-
+	// Filter Sub-scenarios
 	SubScenes []*string `json:"SubScenes,omitnil,omitempty" name:"SubScenes"`
 }
 
@@ -3495,8 +3495,10 @@ type DescribeTokenUsageGraphRequest struct {
 	// Application ID list.
 	AppBizIds []*string `json:"AppBizIds,omitnil,omitempty" name:"AppBizIds"`
 
+	// Application type. Optional values: knowledge_qa(knowledge QA)/plugin_parsing_qa(plugin)/shared_knowledge(knowledge base)/evaluate_test(evaluation). If not filled, query all types.
 	AppType *string `json:"AppType,omitnil,omitempty" name:"AppType"`
 
+	// Filter Sub-scenarios
 	SubScenes []*string `json:"SubScenes,omitnil,omitempty" name:"SubScenes"`
 }
 
@@ -3586,10 +3588,10 @@ type DescribeTokenUsageRequestParams struct {
 	// Filter sub-scenario (used in document parsing scenario).
 	SubScenes []*string `json:"SubScenes,omitnil,omitempty" name:"SubScenes"`
 
-
+	// Application type (knowledge_qa application management, shared_knowlege shared knowledge base)
 	AppType *string `json:"AppType,omitnil,omitempty" name:"AppType"`
 
-
+	// Space ID, used to limit the query scope. When not filled, data from all spaces are queried.
 	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
 }
 
@@ -3623,8 +3625,10 @@ type DescribeTokenUsageRequest struct {
 	// Filter sub-scenario (used in document parsing scenario).
 	SubScenes []*string `json:"SubScenes,omitnil,omitempty" name:"SubScenes"`
 
+	// Application type (knowledge_qa application management, shared_knowlege shared knowledge base)
 	AppType *string `json:"AppType,omitnil,omitempty" name:"AppType"`
 
+	// Space ID, used to limit the query scope. When not filled, data from all spaces are queried.
 	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
 }
 
@@ -3791,21 +3795,21 @@ func (r *DescribeUnsatisfiedReplyContextResponse) FromJsonString(s string) error
 }
 
 type DigitalHumanConfig struct {
-
+	// Digital Human Asset key
 	AssetKey *string `json:"AssetKey,omitnil,omitempty" name:"AssetKey"`
 
-
+	// Digital Human Name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-
+	// Image
 	Avatar *string `json:"Avatar,omitnil,omitempty" name:"Avatar"`
 }
 
 type DocFilterFlag struct {
-
+	// Flag
 	Flag *string `json:"Flag,omitnil,omitempty" name:"Flag"`
 
-
+	// ID Value
 	Value *bool `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
@@ -3842,10 +3846,10 @@ type DocSegment struct {
 }
 
 type DuplicateFileHandle struct {
-
+	// Duplicate document identification method, 1: By document content, i.e., using the cos_hash field to determine whether duplicates exist
 	CheckType *uint64 `json:"CheckType,omitnil,omitempty" name:"CheckType"`
 
-
+	// Duplicate document handling method, 1: Return an error, 2: Skip and return the business ID of the duplicate document
 	HandleType *uint64 `json:"HandleType,omitnil,omitempty" name:"HandleType"`
 }
 
@@ -4085,7 +4089,7 @@ func (r *ExportUnsatisfiedReplyResponse) FromJsonString(s string) error {
 }
 
 type ExtraInfo struct {
-
+	// ECharts Information
 	EChartsInfo []*string `json:"EChartsInfo,omitnil,omitempty" name:"EChartsInfo"`
 }
 
@@ -5220,10 +5224,10 @@ func (r *IgnoreUnsatisfiedReplyResponse) FromJsonString(s string) error {
 }
 
 type IntentAchievement struct {
-
+	// Intent Implementation Approach, qa: Q&A response, doc: document-based response, workflow: workflow-based response, llm: LLM response
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-
+	// Intent Implementation Approach Description
 	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 }
 
@@ -9132,16 +9136,110 @@ type SaveDocRequestParams struct {
 	// Category ID.
 	CateBizId *string `json:"CateBizId,omitnil,omitempty" name:"CateBizId"`
 
-
+	// Whether it can be downloaded. This value is meaningful only when IsRefer is true and ReferUrlType is 0.
 	IsDownload *bool `json:"IsDownload,omitnil,omitempty" name:"IsDownload"`
 
-
+	// Duplicate document handling method, processed by sequentially matching the first condition that is met
 	DuplicateFileHandles []*DuplicateFileHandle `json:"DuplicateFileHandles,omitnil,omitempty" name:"DuplicateFileHandles"`
 
-
+	// Custom Segmentation Rules
+	// 
+	// The request parameter is a **JSON Object**. For specific format, refer to the interface sample value. It contains the following main fields:
+	// 
+	// | Field Name          | Type     | Description                                  |
+	// |--------------------|----------|---------------------------------------------|
+	// | `xlsx_splitter`    | Object   | **Excel (xlsx) file segmentation policy configuration**, valid only when processing Excel files |
+	// | `common_splitter`  | Object   | **General file (e.g., txt, pdf) segmentation policy configuration**, segmented by page or tag |
+	// | `table_style`      | String   | Output format of table content, e.g., HTML or Markdown |
+	// 
+	// ---
+	// 
+	// ## `xlsx_splitter` (Excel Segmentation Policy)
+	// 
+	// Used to configure **segmentation methods for spreadsheet files**.
+	// **Type: Object**
+	// 
+	// ```json
+	// "xlsx_splitter": {
+	//   "header_interval": [1, 2],
+	//   "content_start": 10,
+	//   "split_row": 2
+	// }
+	// ```
+	// 
+	// ### Field Description:
+	// 
+	// | Field Name         | Type          | Description                                                                
+	//    |
+	// |--------------------|---------------|-----------------------------------------------------------------------------|
+	// | `header_interval` | Array\<Number\> | Row range of headers, formatted as `[start_row, end_row]`, **row numbers start from 1**. E.g., `[1, 2]` indicates rows 1-2 are headers. |
+	// | `content_start`   | Number        | **Starting row number of table content (1-based)**.                        
+	//    |
+	// | `split_row`       | Number        | **Number of rows per segment**.                                            
+	//    |
+	// 
+	// ---
+	// ## `common_splitter` (General File Segmentation Policy)
+	// 
+	// Used to configure **segmentation methods for non-Excel files (e.g., TXT, PDF, DOCX)**, supporting two strategies: **by-page segmentation** or **by-tag segmentation**.
+	// 
+	// **Type: Object**
+	// 
+	// ```json
+	// "common_splitter": {
+	//   "splitter": "page",
+	//   "page_splitter": {
+	//     "chunk_length": 1000,
+	//     "chunk_overlap_length": 100
+	//   }
+	// }
+	// ```
+	// 
+	// ### Field Description:
+	// 
+	// | Field Name                     | Type          | Description                                                                
+	//    |
+	// |--------------------------------|---------------|-----------------------------------------------------------------------------|
+	// | `splitter`                     | String        | Segmentation strategy type. Valid values: `"page"` (by-page) or `"tag"` (by-tag). |
+	// | `page_splitter`                | Object        | **By-page segmentation configuration**.                                     |
+	// | `page_splitter.chunk_length`   | Number        | **Maximum chunk length**.                                                  
+	//    |
+	// | `page_splitter.chunk_overlap_length` | Number | **Chunk overlap length**.                                                  
+	//    |
+	// | `tag_splitter`                 | Object        | **Custom segmentation configuration**.                                      |
+	// | `tag_splitter.tag`             | Array\<String\> | **Segmentation tags**.                                                     
+	//    |
+	// | `tag_splitter.chunk_length`    | Number        | **Maximum chunk length**.                                                  
+	//    |
+	// | `tag_splitter.chunk_overlap_length` | Number | **Chunk overlap length**.                                                  
+	//    |
+	// 
+	// 🔹 **Additional Notes:**
+	// 
+	// - Valid values for `splitter`:
+	//     - `"page"`: Only use by-page segmentation logic. Only `page_splitter` fields are relevant.
+	//     - `"tag"`: Only use by-tag segmentation logic (e.g., using delimiters like semicolons or line breaks). Only `tag_splitter` fields are relevant.
+	// ---
+	// 
+	// ## `table_style` (Table Output Style)
+	// 
+	// Specifies **the format in which tabular content (e.g., tables extracted from Excel or CSV) is returned**, facilitating frontend display or subsequent processing.
+	// 
+	// **Type: String**
+	// 
+	// ```json
+	// "table_style": "md"
+	// ```
+	// 
+	// ### Field Description:
+	// 
+	// | Field Name     | Type   | Description                                                                
+	//    |
+	// |----------------|--------|-----------------------------------------------------------------------------|
+	// | `table_style`  | String | Output format of table content. Valid values:<br>• `"html"`: Returns as HTML tables, suitable for web display.<br>• `"md"`: Returns in Markdown table syntax, suitable for documentation or Markdown rendering environments. |
 	SplitRule *string `json:"SplitRule,omitnil,omitempty" name:"SplitRule"`
 
-
+	// Document update frequency, default value is 0 (no updates)
 	UpdatePeriodInfo *UpdatePeriodInfo `json:"UpdatePeriodInfo,omitnil,omitempty" name:"UpdatePeriodInfo"`
 }
 
@@ -9200,12 +9298,110 @@ type SaveDocRequest struct {
 	// Category ID.
 	CateBizId *string `json:"CateBizId,omitnil,omitempty" name:"CateBizId"`
 
+	// Whether it can be downloaded. This value is meaningful only when IsRefer is true and ReferUrlType is 0.
 	IsDownload *bool `json:"IsDownload,omitnil,omitempty" name:"IsDownload"`
 
+	// Duplicate document handling method, processed by sequentially matching the first condition that is met
 	DuplicateFileHandles []*DuplicateFileHandle `json:"DuplicateFileHandles,omitnil,omitempty" name:"DuplicateFileHandles"`
 
+	// Custom Segmentation Rules
+	// 
+	// The request parameter is a **JSON Object**. For specific format, refer to the interface sample value. It contains the following main fields:
+	// 
+	// | Field Name          | Type     | Description                                  |
+	// |--------------------|----------|---------------------------------------------|
+	// | `xlsx_splitter`    | Object   | **Excel (xlsx) file segmentation policy configuration**, valid only when processing Excel files |
+	// | `common_splitter`  | Object   | **General file (e.g., txt, pdf) segmentation policy configuration**, segmented by page or tag |
+	// | `table_style`      | String   | Output format of table content, e.g., HTML or Markdown |
+	// 
+	// ---
+	// 
+	// ## `xlsx_splitter` (Excel Segmentation Policy)
+	// 
+	// Used to configure **segmentation methods for spreadsheet files**.
+	// **Type: Object**
+	// 
+	// ```json
+	// "xlsx_splitter": {
+	//   "header_interval": [1, 2],
+	//   "content_start": 10,
+	//   "split_row": 2
+	// }
+	// ```
+	// 
+	// ### Field Description:
+	// 
+	// | Field Name         | Type          | Description                                                                
+	//    |
+	// |--------------------|---------------|-----------------------------------------------------------------------------|
+	// | `header_interval` | Array\<Number\> | Row range of headers, formatted as `[start_row, end_row]`, **row numbers start from 1**. E.g., `[1, 2]` indicates rows 1-2 are headers. |
+	// | `content_start`   | Number        | **Starting row number of table content (1-based)**.                        
+	//    |
+	// | `split_row`       | Number        | **Number of rows per segment**.                                            
+	//    |
+	// 
+	// ---
+	// ## `common_splitter` (General File Segmentation Policy)
+	// 
+	// Used to configure **segmentation methods for non-Excel files (e.g., TXT, PDF, DOCX)**, supporting two strategies: **by-page segmentation** or **by-tag segmentation**.
+	// 
+	// **Type: Object**
+	// 
+	// ```json
+	// "common_splitter": {
+	//   "splitter": "page",
+	//   "page_splitter": {
+	//     "chunk_length": 1000,
+	//     "chunk_overlap_length": 100
+	//   }
+	// }
+	// ```
+	// 
+	// ### Field Description:
+	// 
+	// | Field Name                     | Type          | Description                                                                
+	//    |
+	// |--------------------------------|---------------|-----------------------------------------------------------------------------|
+	// | `splitter`                     | String        | Segmentation strategy type. Valid values: `"page"` (by-page) or `"tag"` (by-tag). |
+	// | `page_splitter`                | Object        | **By-page segmentation configuration**.                                     |
+	// | `page_splitter.chunk_length`   | Number        | **Maximum chunk length**.                                                  
+	//    |
+	// | `page_splitter.chunk_overlap_length` | Number | **Chunk overlap length**.                                                  
+	//    |
+	// | `tag_splitter`                 | Object        | **Custom segmentation configuration**.                                      |
+	// | `tag_splitter.tag`             | Array\<String\> | **Segmentation tags**.                                                     
+	//    |
+	// | `tag_splitter.chunk_length`    | Number        | **Maximum chunk length**.                                                  
+	//    |
+	// | `tag_splitter.chunk_overlap_length` | Number | **Chunk overlap length**.                                                  
+	//    |
+	// 
+	// 🔹 **Additional Notes:**
+	// 
+	// - Valid values for `splitter`:
+	//     - `"page"`: Only use by-page segmentation logic. Only `page_splitter` fields are relevant.
+	//     - `"tag"`: Only use by-tag segmentation logic (e.g., using delimiters like semicolons or line breaks). Only `tag_splitter` fields are relevant.
+	// ---
+	// 
+	// ## `table_style` (Table Output Style)
+	// 
+	// Specifies **the format in which tabular content (e.g., tables extracted from Excel or CSV) is returned**, facilitating frontend display or subsequent processing.
+	// 
+	// **Type: String**
+	// 
+	// ```json
+	// "table_style": "md"
+	// ```
+	// 
+	// ### Field Description:
+	// 
+	// | Field Name     | Type   | Description                                                                
+	//    |
+	// |----------------|--------|-----------------------------------------------------------------------------|
+	// | `table_style`  | String | Output format of table content. Valid values:<br>• `"html"`: Returns as HTML tables, suitable for web display.<br>• `"md"`: Returns in Markdown table syntax, suitable for documentation or Markdown rendering environments. |
 	SplitRule *string `json:"SplitRule,omitnil,omitempty" name:"SplitRule"`
 
+	// Document update frequency, default value is 0 (no updates)
 	UpdatePeriodInfo *UpdatePeriodInfo `json:"UpdatePeriodInfo,omitnil,omitempty" name:"UpdatePeriodInfo"`
 }
 
@@ -9538,7 +9734,7 @@ type UnsatisfiedReply struct {
 }
 
 type UpdatePeriodInfo struct {
-
+	// Document update frequency type: 0: No update, -H: Hourly granularity. Currently only supports 24 (1 day), 72 (3 days), 168 (7 days). Only valid for source=2 Tencent document type.
 	UpdatePeriodH *uint64 `json:"UpdatePeriodH,omitnil,omitempty" name:"UpdatePeriodH"`
 }
 
@@ -9749,13 +9945,13 @@ func (r *VerifyQAResponse) FromJsonString(s string) error {
 }
 
 type VoiceConfig struct {
-
+	// Public Cloud Timbre ID
 	VoiceType *uint64 `json:"VoiceType,omitnil,omitempty" name:"VoiceType"`
 
-
+	// Timbre Key
 	TimbreKey *string `json:"TimbreKey,omitnil,omitempty" name:"TimbreKey"`
 
-
+	// Timbre Name
 	VoiceName *string `json:"VoiceName,omitnil,omitempty" name:"VoiceName"`
 }
 
@@ -9783,22 +9979,22 @@ type WorkFlowSummary struct {
 }
 
 type WorkflowInfo struct {
-
+	// Workflow ID
 	WorkflowId *string `json:"WorkflowId,omitnil,omitempty" name:"WorkflowId"`
 
-
+	// Workflow Name
 	WorkflowName *string `json:"WorkflowName,omitnil,omitempty" name:"WorkflowName"`
 
-
+	// Workflow Run ID
 	WorkflowRunId *string `json:"WorkflowRunId,omitnil,omitempty" name:"WorkflowRunId"`
 
-
+	// Tab
 	OptionCards []*string `json:"OptionCards,omitnil,omitempty" name:"OptionCards"`
 
-
+	// Multi-bubble output results
 	Outputs []*string `json:"Outputs,omitnil,omitempty" name:"Outputs"`
 
-
+	// Workflow Publish Time, unix timestamp
 	WorkflowReleaseTime *string `json:"WorkflowReleaseTime,omitnil,omitempty" name:"WorkflowReleaseTime"`
 }
 

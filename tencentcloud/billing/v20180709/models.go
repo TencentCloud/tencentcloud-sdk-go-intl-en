@@ -24,7 +24,7 @@ type ActionSummaryOverviewItem struct {
 	// Transaction type code
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-	// Transaction type, which can be yearly/monthly subscription purchase, monthly subscription renewal, or pay-as-you-go deduction.
+	// Transaction type, which can be yearly/monthly subscription purchase, yearly/monthly subscription renewal, or pay-as-you-go deduction.
 	ActionTypeName *string `json:"ActionTypeName,omitnil,omitempty" name:"ActionTypeName"`
 
 	// Cost ratio, to two decimal points
@@ -2911,7 +2911,7 @@ type DescribeBillDetailRequestParams struct {
 	// Daily settlement
 	// Yearly/monthly subscription
 	// Spot
-	// New monthly subscription
+	// New yearly/monthly subscription
 	// Yearly/monthly subscription renewal
 	// Yearly/monthly subscription specification adjustment
 	// Yearly/monthly subscription refund
@@ -2988,7 +2988,7 @@ type DescribeBillDetailRequest struct {
 	// Daily settlement
 	// Yearly/monthly subscription
 	// Spot
-	// New monthly subscription
+	// New yearly/monthly subscription
 	// Yearly/monthly subscription renewal
 	// Yearly/monthly subscription specification adjustment
 	// Yearly/monthly subscription refund
@@ -3387,7 +3387,7 @@ type DescribeBillResourceSummaryRequestParams struct {
 	// Daily settlement
 	// Yearly/monthly subscription
 	// Spot
-	// New monthly subscription
+	// New yearly/monthly subscription
 	// Yearly/monthly subscription renewal
 	// Yearly/monthly subscription specification adjustment
 	// Yearly/monthly subscription refund
@@ -3444,7 +3444,7 @@ type DescribeBillResourceSummaryRequest struct {
 	// Daily settlement
 	// Yearly/monthly subscription
 	// Spot
-	// New monthly subscription
+	// New yearly/monthly subscription
 	// Yearly/monthly subscription renewal
 	// Yearly/monthly subscription specification adjustment
 	// Yearly/monthly subscription refund
@@ -5087,6 +5087,119 @@ func (r *DescribeGatherRuleDetailResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeRenewInstancesRequestParams struct {
+	// Maximum number of instances per page. Value range: 1-100.
+	MaxResults *uint64 `json:"MaxResults,omitnil,omitempty" name:"MaxResults"`
+
+	// Token for querying the next page of returned results. NextToken is not needed when calling the API for the first time.
+	NextToken *string `json:"NextToken,omitnil,omitempty" name:"NextToken"`
+
+	// Get the sorting order of the instance. The enumerated values are as follows:
+	// false = Ascending (default)
+	// true=Descending
+	Reverse *bool `json:"Reverse,omitnil,omitempty" name:"Reverse"`
+
+	// Renewal flag. Multiple values separated by commas. Enumeration value as follows:
+	// NOTIFY_AND_MANUAL_RENEW: manual renewal.
+	// NOTIFY_AND_AUTO_RENEW: automatic renewal.
+	// DISABLE_NOTIFY_AND_MANUAL_RENEW: non-renewal upon expiration.
+	RenewFlagList []*string `json:"RenewFlagList,omitnil,omitempty" name:"RenewFlagList"`
+
+	// Instance ID. Multiple IDs separated by commas, with a maximum of 100.
+	InstanceIdList []*string `json:"InstanceIdList,omitnil,omitempty" name:"InstanceIdList"`
+
+	// Expiry time start, format yyyy-MM-dd HH:mm:ss.
+	ExpireTimeStart *string `json:"ExpireTimeStart,omitnil,omitempty" name:"ExpireTimeStart"`
+
+	// Expiry time in the format of yyyy-MM-dd HH:mm:ss.
+	ExpireTimeEnd *string `json:"ExpireTimeEnd,omitnil,omitempty" name:"ExpireTimeEnd"`
+}
+
+type DescribeRenewInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Maximum number of instances per page. Value range: 1-100.
+	MaxResults *uint64 `json:"MaxResults,omitnil,omitempty" name:"MaxResults"`
+
+	// Token for querying the next page of returned results. NextToken is not needed when calling the API for the first time.
+	NextToken *string `json:"NextToken,omitnil,omitempty" name:"NextToken"`
+
+	// Get the sorting order of the instance. The enumerated values are as follows:
+	// false = Ascending (default)
+	// true=Descending
+	Reverse *bool `json:"Reverse,omitnil,omitempty" name:"Reverse"`
+
+	// Renewal flag. Multiple values separated by commas. Enumeration value as follows:
+	// NOTIFY_AND_MANUAL_RENEW: manual renewal.
+	// NOTIFY_AND_AUTO_RENEW: automatic renewal.
+	// DISABLE_NOTIFY_AND_MANUAL_RENEW: non-renewal upon expiration.
+	RenewFlagList []*string `json:"RenewFlagList,omitnil,omitempty" name:"RenewFlagList"`
+
+	// Instance ID. Multiple IDs separated by commas, with a maximum of 100.
+	InstanceIdList []*string `json:"InstanceIdList,omitnil,omitempty" name:"InstanceIdList"`
+
+	// Expiry time start, format yyyy-MM-dd HH:mm:ss.
+	ExpireTimeStart *string `json:"ExpireTimeStart,omitnil,omitempty" name:"ExpireTimeStart"`
+
+	// Expiry time in the format of yyyy-MM-dd HH:mm:ss.
+	ExpireTimeEnd *string `json:"ExpireTimeEnd,omitnil,omitempty" name:"ExpireTimeEnd"`
+}
+
+func (r *DescribeRenewInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRenewInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MaxResults")
+	delete(f, "NextToken")
+	delete(f, "Reverse")
+	delete(f, "RenewFlagList")
+	delete(f, "InstanceIdList")
+	delete(f, "ExpireTimeStart")
+	delete(f, "ExpireTimeEnd")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRenewInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRenewInstancesResponseParams struct {
+	// Instance summary list.
+	InstanceList []*RenewInstance `json:"InstanceList,omitnil,omitempty" name:"InstanceList"`
+
+	// Token for querying the next page of returned results.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NextToken *string `json:"NextToken,omitnil,omitempty" name:"NextToken"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeRenewInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRenewInstancesResponseParams `json:"Response"`
+}
+
+func (r *DescribeRenewInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRenewInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeTagListRequestParams struct {
 	// The number of entries returned at a time. The maximum value is `1000`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
@@ -5792,6 +5905,20 @@ func (r *ModifyGatherRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type OperateRsp struct {
+	// Operation failure code at the instance dimension
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// Failure reason for operating related resources
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Instance ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
 // Predefined struct for user
 type PayDealsRequestParams struct {
 	// Specifies one or more Sub-order No. that need to pay. must pass either this parameter or the BigDealIds field, but not both.
@@ -6080,6 +6207,58 @@ type RegionSummaryOverviewItem struct {
 	TotalCost *string `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
 }
 
+type RenewInstance struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Product code
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// Subproduct code
+	SubProductCode *string `json:"SubProductCode,omitnil,omitempty" name:"SubProductCode"`
+
+	// Region encoding
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RegionCode *string `json:"RegionCode,omitnil,omitempty" name:"RegionCode"`
+
+	// Instance status:
+	// NORMAL
+	// ISOLATED Isolated
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Renewal flag:
+	// NOTIFY_AND_MANUAL_RENEW: manual renewal
+	// NOTIFY_AND_AUTO_RENEW: auto-renewal.
+	// DISABLE_NOTIFY_AND_MANUAL_RENEW: non-renewal upon expiration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
+
+	// Instance expiration time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// Instance alias: The name set by the user for the instance in the console, which is empty by default if not set.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// Product name: Cloud products purchased by users, such as Cloud Virtual Machine (CVM)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
+
+	// Project name: Instance Ownership of the project. User can autonomously assign project to the instance on the console. Default project if not allocated.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
+
+	// Automatic renewal cycle length
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RenewPeriod *uint64 `json:"RenewPeriod,omitnil,omitempty" name:"RenewPeriod"`
+
+	// Automatic renewal cycle unit: y year, m month
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RenewPeriodUnit *string `json:"RenewPeriodUnit,omitnil,omitempty" name:"RenewPeriodUnit"`
+}
+
 // Predefined struct for user
 type RenewInstanceRequestParams struct {
 	// ClientToken is a unique, case-sensitive string generated by the client, with no more than 64 ASCII characters. for example, ClientToken=123e4567-e89b-12d3-a456-42665544.
@@ -6185,6 +6364,114 @@ func (r *RenewInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SetRenewalRequestParams struct {
+	// Product code.
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// Region code.
+	RegionCode *string `json:"RegionCode,omitnil,omitempty" name:"RegionCode"`
+
+	// Instance ID. Only one can be specified.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Renewal flag. Enumeration values are as follows:
+	// NOTIFY_AND_MANUAL_RENEW: manual renewal.
+	// NOTIFY_AND_AUTO_RENEW: automatic renewal.
+	// DISABLE_NOTIFY_AND_MANUAL_RENEW: non-renewal upon expiration.
+	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
+
+	// Automatic renewal cycle length. If left empty, the default value set by product is used.
+	// If it is month, support: 1-11
+	// If it is year, support: 1-5.
+	// Supported range mainly depends on the product side.
+	RenewPeriod *string `json:"RenewPeriod,omitnil,omitempty" name:"RenewPeriod"`
+
+	// Automatic renewal cycle unit. If left empty, the default value set by the product is used.
+	// Year y, month m
+	// Supported range mainly depends on the product side.
+	RenewPeriodUnit *string `json:"RenewPeriodUnit,omitnil,omitempty" name:"RenewPeriodUnit"`
+}
+
+type SetRenewalRequest struct {
+	*tchttp.BaseRequest
+	
+	// Product code.
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// Region code.
+	RegionCode *string `json:"RegionCode,omitnil,omitempty" name:"RegionCode"`
+
+	// Instance ID. Only one can be specified.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Renewal flag. Enumeration values are as follows:
+	// NOTIFY_AND_MANUAL_RENEW: manual renewal.
+	// NOTIFY_AND_AUTO_RENEW: automatic renewal.
+	// DISABLE_NOTIFY_AND_MANUAL_RENEW: non-renewal upon expiration.
+	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
+
+	// Automatic renewal cycle length. If left empty, the default value set by product is used.
+	// If it is month, support: 1-11
+	// If it is year, support: 1-5.
+	// Supported range mainly depends on the product side.
+	RenewPeriod *string `json:"RenewPeriod,omitnil,omitempty" name:"RenewPeriod"`
+
+	// Automatic renewal cycle unit. If left empty, the default value set by the product is used.
+	// Year y, month m
+	// Supported range mainly depends on the product side.
+	RenewPeriodUnit *string `json:"RenewPeriodUnit,omitnil,omitempty" name:"RenewPeriodUnit"`
+}
+
+func (r *SetRenewalRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetRenewalRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProductCode")
+	delete(f, "RegionCode")
+	delete(f, "InstanceId")
+	delete(f, "RenewFlag")
+	delete(f, "RenewPeriod")
+	delete(f, "RenewPeriodUnit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SetRenewalRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SetRenewalResponseParams struct {
+	// Instance list when the operation fails.
+	InstanceList []*OperateRsp `json:"InstanceList,omitnil,omitempty" name:"InstanceList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type SetRenewalResponse struct {
+	*tchttp.BaseResponse
+	Response *SetRenewalResponseParams `json:"Response"`
+}
+
+func (r *SetRenewalResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetRenewalResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type SummaryDetail struct {
 	// Bill dimension code. Note: This field may return null, indicating that no valid values can be obtained.
 	GroupKey *string `json:"GroupKey,omitnil,omitempty" name:"GroupKey"`
@@ -6269,7 +6556,7 @@ type UsageDetails struct {
 	// Note: This field may return `null`, indicating that no valid value was found.
 	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
 
-
+	// Product Details
 	SubProductName *string `json:"SubProductName,omitnil,omitempty" name:"SubProductName"`
 }
 

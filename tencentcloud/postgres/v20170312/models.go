@@ -1077,7 +1077,7 @@ type CreateInstancesRequestParams struct {
 	// For more information on `KMSRegion`, see [Enabling TDE](https://intl.cloud.tencent.com/document/product/409/71749?from_cn_redirect=1).
 	KMSRegion *string `json:"KMSRegion,omitnil,omitempty" name:"KMSRegion"`
 
-
+	// <p>For clusters that specify the KMS service, if KMSClusterId is empty, the default cluster's KMS is used. If you choose to specify a KMS cluster, you need to provide KMSClusterId. For details about KMSClusterId, see Enabling Transparent Data Encryption.</p>
 	KMSClusterId *string `json:"KMSClusterId,omitnil,omitempty" name:"KMSClusterId"`
 
 	// Database engine, which supports:
@@ -1223,6 +1223,7 @@ type CreateInstancesRequest struct {
 	// For more information on `KMSRegion`, see [Enabling TDE](https://intl.cloud.tencent.com/document/product/409/71749?from_cn_redirect=1).
 	KMSRegion *string `json:"KMSRegion,omitnil,omitempty" name:"KMSRegion"`
 
+	// <p>For clusters that specify the KMS service, if KMSClusterId is empty, the default cluster's KMS is used. If you choose to specify a KMS cluster, you need to provide KMSClusterId. For details about KMSClusterId, see Enabling Transparent Data Encryption.</p>
 	KMSClusterId *string `json:"KMSClusterId,omitnil,omitempty" name:"KMSClusterId"`
 
 	// Database engine, which supports:
@@ -1492,7 +1493,7 @@ type CreateReadOnlyDBInstanceRequestParams struct {
 	// Deprecated: DBVersion is deprecated.
 	DBVersion *string `json:"DBVersion,omitnil,omitempty" name:"DBVersion"`
 
-
+	// <p>Dedicated Cluster ID</p>
 	DedicatedClusterId *string `json:"DedicatedClusterId,omitnil,omitempty" name:"DedicatedClusterId"`
 }
 
@@ -1574,6 +1575,7 @@ type CreateReadOnlyDBInstanceRequest struct {
 	// (Disused) You don't need to specify a version, as the kernel version is as the same as that of the instance.
 	DBVersion *string `json:"DBVersion,omitnil,omitempty" name:"DBVersion"`
 
+	// <p>Dedicated Cluster ID</p>
 	DedicatedClusterId *string `json:"DedicatedClusterId,omitnil,omitempty" name:"DedicatedClusterId"`
 }
 
@@ -5822,7 +5824,7 @@ type InquiryPriceCreateDBInstancesRequestParams struct {
 	// `readonly` (read-only instance)
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-
+	// <p>DB engine, default is postgresql, supports the following:<br>postgresql (TencentDB for PostgreSQL)<br>mssql_compatible (MSSQL-compatible - TencentDB for PostgreSQL)</p>
 	DBEngine *string `json:"DBEngine,omitnil,omitempty" name:"DBEngine"`
 }
 
@@ -5855,6 +5857,7 @@ type InquiryPriceCreateDBInstancesRequest struct {
 	// `readonly` (read-only instance)
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
+	// <p>DB engine, default is postgresql, supports the following:<br>postgresql (TencentDB for PostgreSQL)<br>mssql_compatible (MSSQL-compatible - TencentDB for PostgreSQL)</p>
 	DBEngine *string `json:"DBEngine,omitnil,omitempty" name:"DBEngine"`
 }
 

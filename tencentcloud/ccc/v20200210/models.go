@@ -26,6 +26,9 @@ type AIAgentInfo struct {
 
 	// Intelligent agent name.
 	AIAgentName *string `json:"AIAgentName,omitnil,omitempty" name:"AIAgentName"`
+
+	// List of intelligent agent variable names.
+	VariableNames []*string `json:"VariableNames,omitnil,omitempty" name:"VariableNames"`
 }
 
 type AIAnalysisResult struct {
@@ -335,15 +338,19 @@ type AutoCalloutTaskInfo struct {
 	IvrId *uint64 `json:"IvrId,omitnil,omitempty" name:"IvrId"`
 
 	// Task status:.
-	// 0 initial: task creation, call not started.
-	// 1 running.
-	// 2 completed: all calls in the task are completed.
-	// 3 ending: the task has expired, but there are still some calls not ended.
-	// 4 ended: task terminated due to expiration.
+	// 0 initial: task created, call not started.
+	// 1: running.
+	// 2 completed: all calls in the task are done.
+	// 3 ending: the task expires, but some calls are not ended.
+	// 4 stopped: the task expired and ended.
+	// 5 paused: recoverable to continue execution.
 	State *uint64 `json:"State,omitnil,omitempty" name:"State"`
 
 	// <Task id>.
 	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Maximum ringing duration. auto hang up when the duration threshold is reached. only own number supports this parameter.
+	MaxRingTimeoutSecond *int64 `json:"MaxRingTimeoutSecond,omitnil,omitempty" name:"MaxRingTimeoutSecond"`
 }
 
 // Predefined struct for user
@@ -497,13 +504,13 @@ type BindStaffSkillGroupListRequestParams struct {
 	// Agent email.
 	StaffEmail *string `json:"StaffEmail,omitnil,omitempty" name:"StaffEmail"`
 
+	// Bound skill group list (required).
+	StaffSkillGroupList []*StaffSkillGroupList `json:"StaffSkillGroupList,omitnil,omitempty" name:"StaffSkillGroupList"`
+
 	// Bound skill group list.
 	//
 	// Deprecated: SkillGroupList is deprecated.
 	SkillGroupList []*int64 `json:"SkillGroupList,omitnil,omitempty" name:"SkillGroupList"`
-
-	// Bound skill group list (required).
-	StaffSkillGroupList []*StaffSkillGroupList `json:"StaffSkillGroupList,omitnil,omitempty" name:"StaffSkillGroupList"`
 }
 
 type BindStaffSkillGroupListRequest struct {
@@ -515,11 +522,11 @@ type BindStaffSkillGroupListRequest struct {
 	// Agent email.
 	StaffEmail *string `json:"StaffEmail,omitnil,omitempty" name:"StaffEmail"`
 
-	// Bound skill group list.
-	SkillGroupList []*int64 `json:"SkillGroupList,omitnil,omitempty" name:"SkillGroupList"`
-
 	// Bound skill group list (required).
 	StaffSkillGroupList []*StaffSkillGroupList `json:"StaffSkillGroupList,omitnil,omitempty" name:"StaffSkillGroupList"`
+
+	// Bound skill group list.
+	SkillGroupList []*int64 `json:"SkillGroupList,omitnil,omitempty" name:"SkillGroupList"`
 }
 
 func (r *BindStaffSkillGroupListRequest) ToJsonString() string {
@@ -536,8 +543,8 @@ func (r *BindStaffSkillGroupListRequest) FromJsonString(s string) error {
 	}
 	delete(f, "SdkAppId")
 	delete(f, "StaffEmail")
-	delete(f, "SkillGroupList")
 	delete(f, "StaffSkillGroupList")
+	delete(f, "SkillGroupList")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BindStaffSkillGroupListRequest has unknown keys!", "")
 	}
@@ -755,6 +762,9 @@ type CreateAIAgentCallRequestParams struct {
 	// 2. the dify-inputs-user specifies the user value for dify.
 	// 3. dify-inputs-conversation_id is the conversation_id value of dify.
 	Variables []*Variable `json:"Variables,omitnil,omitempty" name:"Variables"`
+
+	// Maximum ringing duration. auto hang up when the duration threshold is reached. only own number supports current parameter.
+	MaxRingTimeoutSecond *int64 `json:"MaxRingTimeoutSecond,omitnil,omitempty" name:"MaxRingTimeoutSecond"`
 }
 
 type CreateAIAgentCallRequest struct {
@@ -781,6 +791,9 @@ type CreateAIAgentCallRequest struct {
 	// 2. the dify-inputs-user specifies the user value for dify.
 	// 3. dify-inputs-conversation_id is the conversation_id value of dify.
 	Variables []*Variable `json:"Variables,omitnil,omitempty" name:"Variables"`
+
+	// Maximum ringing duration. auto hang up when the duration threshold is reached. only own number supports current parameter.
+	MaxRingTimeoutSecond *int64 `json:"MaxRingTimeoutSecond,omitnil,omitempty" name:"MaxRingTimeoutSecond"`
 }
 
 func (r *CreateAIAgentCallRequest) ToJsonString() string {
@@ -801,6 +814,7 @@ func (r *CreateAIAgentCallRequest) FromJsonString(s string) error {
 	delete(f, "Callers")
 	delete(f, "PromptVariables")
 	delete(f, "Variables")
+	delete(f, "MaxRingTimeoutSecond")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAIAgentCallRequest has unknown keys!", "")
 	}
@@ -900,7 +914,7 @@ type CreateAICallRequestParams struct {
 	// 4. Tell Cindy to not eat or drink that day before the checkup. Also tell Cindy to give you a callback if there's any changes in health condition.
 	// 5. Ask Cindy if she has any questions, and if so, answer them until there are no questions.
 	//   - If user asks something you do not know, let them know you don't have the answer. Ask them if they have any other questions.
-	//   - If user do not have any questions, call function end_call to hang up.
+	//   - If user do not have any questions, call function call_end to hang up.
 	SystemPrompt *string `json:"SystemPrompt,omitnil,omitempty" name:"SystemPrompt"`
 
 	// Model name, such as
@@ -1020,56 +1034,56 @@ type CreateAICallRequestParams struct {
 	// Maximum number of times to trigger ai prompt sound, unlimited by default.
 	NotifyMaxCount *uint64 `json:"NotifyMaxCount,omitnil,omitempty" name:"NotifyMaxCount"`
 
-	// <p>Either the VoiceType field or a custom TTS is required. this uses your own custom TTS, while VoiceType provides some built-in voice types.</p>.
+	// <p>Either the VoiceType field or a custom TTS is required. this uses your own custom TTS, while VoiceType provides some built-in voice types.</p>
 	// <ul>
 	// <li>Tencent TTS<br>
-	// For configuration, see <a href="https://www.tencentcloud.comom/document/product/1073/92668?from_cn_redirect=1#55924b56-1a73-4663-a7a1-a8dd82d6e823" target="_blank">tencent cloud TTS documentation link</a></li>.
+	// For configuration, see <a href="https://www.tencentcloud.comom/document/product/1073/92668?from_cn_redirect=1#55924b56-1a73-4663-a7a1-a8dd82d6e823" target="_blank">tencent cloud TTS documentation link</a></li>
 	// </ul>
 	// <div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{ 
 	// "TTSType": "tencent", // String TTS type. currently supports "tencent" and "minixmax". the rest manufacturers are under support.
-	//   "AppId": "your application ID", // String required.
-	//   "SecretId": "your key ID", // String required.
-	//   "SecretKey": "your Key", // String required.
-	//   "VoiceType": 101001, // Integer  required. the voice ID, including standard timbre and premium timbre. premium timbre has higher fidelity and different pricing from standard timbre. please refer to the text to speech billing overview. for the complete supported timbre list, see the text to speech timbre list.
-	//   "Speed": 1.25, // Integer optional, speaking rate, value range: [-2,6], respectively represent different speaking rates: -2: 0.6x -1: 0.8x 0: 1.0x (default) 1: 1.2x 2: 1.5x 6: 2.5x. if more refined speaking rates are needed, up to 2 decimal places can be retained, such as 0.5, 1.25, or 2.81. for parameter value to actual speech Speed conversion, refer to speech Speed switch.
-	//   "Volume": 5, // Integer optional. specifies the Volume level. value range: [0,10], corresponding to 11 severity levels respectively. default value: 0, which represents normal Volume.
-	//   "PrimaryLanguage": 1, // Integer option primary language 1-chinese (default) 2-english 3-japanese.
-	// "FastVoiceType": "xxxx"   //  optional parameter. parameters for quick voice clone. 
-	//   }
+	// "AppId": "your application ID", // String required.
+	// "SecretId": "your key ID", // String required.
+	// "SecretKey": "your Key", // String required.
+	// "VoiceType": 101001, // Integer required. the voice ID, including standard timbre and premium timbre. premium timbre has higher fidelity and different pricing from standard timbre. please refer to the text to speech billing overview. for the complete supported timbre list, see the text to speech timbre list.
+	//  "Speed": 1.25, // Integer optional, speaking rate, value range: [-2,6], respectively represent different speaking rates: -2: 0.6x -1: 0.8x 0: 1.0x (default) 1: 1.2x 2: 1.5x 6: 2.5x. if more refined speaking rates are needed, up to 2 decimal places can be retained, such as 0.5, 1.25, or 2.81. for parameter value to actual speech Speed conversion, refer to speech Speed switch.
+	//  "Volume": 5, // Integer optional. specifies the Volume level. value range: [0,10], corresponding to 11 severity levels respectively. default value: 0, which represents normal Volume.
+	//  "PrimaryLanguage": 1, // Integer option primary language 1-chinese (default) 2-english 3-japanese.
+	// "FastVoiceType": "xxxx"   // optional parameter. parameters for quick voice clone. 
+	//  }
 	// </code></pre>
 	//  </div><ul>
 	// <li>Minimax TTS<br>
-	// For configuration, refer to the <a href="https://platform.minimaxi.com/document/T2a%20V2?key=66719005a427f0c8a5701643" target="_blank">Minimax TTS documentation link</a>. note that Minimax TTS has frequency limits. overfrequency may result in response delays. see the <a href="https://platform.minimaxi.com/document/Rate%20limits?key=66b19417290299a26b234572" target="_blank">Minimax TTS frequency limit documentation link</a>.</li>.
+	// For configuration, refer to the <a href="https://platform.minimaxi.com/document/T2a%20V2?key=66719005a427f0c8a5701643" target="_blank">Minimax TTS documentation link</a>. note that Minimax TTS has frequency limits. overfrequency may result in response delays. see the <a href="https://platform.minimaxi.com/document/Rate%20limits?key=66b19417290299a26b234572" target="_blank">Minimax TTS frequency limit documentation link</a>.</li>
 	// </ul>
 	// <div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
 	// "TTSType": "minimax",  // String TTS type. 
-	//         &quot;Model&quot;: &quot;speech-01-turbo&quot;,
-	//         &quot;APIUrl&quot;: &quot;https://api.minimax.chat/v1/t2a_v2&quot;,
-	//         &quot;APIKey&quot;: &quot;eyxxxx&quot;,
-	//         &quot;GroupId&quot;: &quot;181000000000000&quot;,
-	//         &quot;VoiceType&quot;:&quot;female-tianmei&quot;,
-	//         &quot;Speed&quot;: 1.2
+	// "Model": "speech-01-turbo",
+	// "APIUrl": "https://api.minimax.chat/v1/t2a_v2",
+	// "APIKey": "eyxxxx",
+	// "GroupId": "181000000000000",
+	// "VoiceType":"female-tianmei",
+	// "Speed": 1.2
 	// }
 	// </code></pre>
 	// </div><ul>
-	// <li>Volcano TTS</li>.
+	// <li>Volcano TTS</li>
 	// </ul>
-	// <p>Configure the timbre type. see <a href="https://www.volcengine.com/docs/6561/162929" target="_blank">volcano TTS documentation link</a><br>.
+	// <p>Configure the timbre type. see <a href="https://www.volcengine.com/docs/6561/162929" target="_blank">volcano TTS documentation link</a><br>
 	// Text to speech timbre list - voice technology - volcano engine.
-	// Large model TTS timbre list - voice technology - volcano engine</p>.
+	// Large model TTS timbre list - voice technology - volcano engine</p>
 	// <div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
 	// "TTSType": "volcengine",  // required: String TTS type.
 	// "AppId": "xxxxxxxx",   // required: String AppId assigned by volcano engine.
 	// "Token": "TY9d4sQXHxxxxxxx", // required: String type, access Token for volcano engine.
-	// "Speed": 1.0,            // optional parameter. speaking rate, defaults to 1.0.
-	// "Volume": 1.0,            // optional parameter, Volume, defaults to 1.0.
+	// "Speed": 1.0,  // optional parameter. speaking rate, defaults to 1.0.
+	// "Volume": 1.0,  // optional parameter, Volume, defaults to 1.0.
 	// "Cluster": "volcano_tts", // optional parameter, business Cluster, is selected by default.
 	// "VoiceType": "zh_male_aojiaobazong_moon_bigtts" // timbre type, defaults to the TTS voice type of the large model. if using ordinary text to speech, you need to fill in the corresponding voice type. input errors in voice type can cause no sound.
 	// }
 	// </code></pre>
 	// </div><ul>
 	// <li>Azure TTS<br>
-	// For configuration, refer to the <a href="https://docs.azure.cn/zh-cn/ai-services/speech-service/speech-synthesis-markup-voice" target="_blank">AzureTTS documentation link</a></li>.
+	// For configuration, refer to the <a href="https://docs.azure.cn/zh-cn/ai-services/speech-service/speech-synthesis-markup-voice" target="_blank">AzureTTS documentation link</a></li>
 	// </ul>
 	// <div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
 	// "TTSType": "azure", // required: String TTS type.
@@ -1077,13 +1091,13 @@ type CreateAICallRequestParams struct {
 	// "Region": "chinanorth3",  // required: String the Region to subscribe to.
 	// "VoiceName": "zh-CN-XiaoxiaoNeural", // required: String specifies the required VoiceName.
 	// "Language": "zh-CN", // required: String specifies the synthesis Language.  
-	// "Rate": 1 // optional: float, speech speed. value range: 0.5–2. default is 1.
+	// "Rate": 1 // optional: float, speech speed. value range: 0.5-2. default is 1.
 	// }
 	// </code></pre>
 	// </div><ul>
-	// <li>Custom TTS</li>.
+	// <li>Custom TTS</li>
 	// </ul>
-	// <p>For the specific protocol specification, refer to <a href="https://doc.weixin.qq.com/doc/w3_ANQAiAbdAFwHILbJBmtSqSbV1WZ3L?scode=AJEAIQdfAAo5a1xajYANQAiAbdAFw" target="_blank">tencent documentation</a></p>.
+	// <p>For the specific protocol specification, refer to <a href="https://doc.weixin.qq.com/doc/w3_ANQAiAbdAFwHILbJBmtSqSbV1WZ3L?scode=AJEAIQdfAAo5a1xajYANQAiAbdAFw " target="_blank">tencent documentation</a></p>
 	// <div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
 	// "TTSType": "custom", // String required.
 	// "APIKey": "APIKey", // String required. be used to authenticate.
@@ -1147,6 +1161,14 @@ type CreateAICallRequestParams struct {
 
 	// Maximum ringing duration. auto hang up when the duration threshold is reached. **only own number supports current parameter.**.
 	MaxRingTimeoutSecond *int64 `json:"MaxRingTimeoutSecond,omitnil,omitempty" name:"MaxRingTimeoutSecond"`
+
+	// Ambient sound scenario. if so, leave it blank.
+	// Coffee_shops: chat in the coffee shop communication environment with background.
+	// busy_office: customer service center.
+	AmbientSoundType *string `json:"AmbientSoundType,omitnil,omitempty" name:"AmbientSoundType"`
+
+	// Ambient sound volume. if AmbientSoundType is empty, this field is left blank. value ranges from [0,2]. the lower the value, the softer the ambient sound; the higher the value, the louder the ambient sound. if not set, use the default value 1.
+	AmbientSoundVolume *float64 `json:"AmbientSoundVolume,omitnil,omitempty" name:"AmbientSoundVolume"`
 }
 
 type CreateAICallRequest struct {
@@ -1218,7 +1240,7 @@ type CreateAICallRequest struct {
 	// 4. Tell Cindy to not eat or drink that day before the checkup. Also tell Cindy to give you a callback if there's any changes in health condition.
 	// 5. Ask Cindy if she has any questions, and if so, answer them until there are no questions.
 	//   - If user asks something you do not know, let them know you don't have the answer. Ask them if they have any other questions.
-	//   - If user do not have any questions, call function end_call to hang up.
+	//   - If user do not have any questions, call function call_end to hang up.
 	SystemPrompt *string `json:"SystemPrompt,omitnil,omitempty" name:"SystemPrompt"`
 
 	// Model name, such as
@@ -1338,56 +1360,56 @@ type CreateAICallRequest struct {
 	// Maximum number of times to trigger ai prompt sound, unlimited by default.
 	NotifyMaxCount *uint64 `json:"NotifyMaxCount,omitnil,omitempty" name:"NotifyMaxCount"`
 
-	// <p>Either the VoiceType field or a custom TTS is required. this uses your own custom TTS, while VoiceType provides some built-in voice types.</p>.
+	// <p>Either the VoiceType field or a custom TTS is required. this uses your own custom TTS, while VoiceType provides some built-in voice types.</p>
 	// <ul>
 	// <li>Tencent TTS<br>
-	// For configuration, see <a href="https://www.tencentcloud.comom/document/product/1073/92668?from_cn_redirect=1#55924b56-1a73-4663-a7a1-a8dd82d6e823" target="_blank">tencent cloud TTS documentation link</a></li>.
+	// For configuration, see <a href="https://www.tencentcloud.comom/document/product/1073/92668?from_cn_redirect=1#55924b56-1a73-4663-a7a1-a8dd82d6e823" target="_blank">tencent cloud TTS documentation link</a></li>
 	// </ul>
 	// <div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{ 
 	// "TTSType": "tencent", // String TTS type. currently supports "tencent" and "minixmax". the rest manufacturers are under support.
-	//   "AppId": "your application ID", // String required.
-	//   "SecretId": "your key ID", // String required.
-	//   "SecretKey": "your Key", // String required.
-	//   "VoiceType": 101001, // Integer  required. the voice ID, including standard timbre and premium timbre. premium timbre has higher fidelity and different pricing from standard timbre. please refer to the text to speech billing overview. for the complete supported timbre list, see the text to speech timbre list.
-	//   "Speed": 1.25, // Integer optional, speaking rate, value range: [-2,6], respectively represent different speaking rates: -2: 0.6x -1: 0.8x 0: 1.0x (default) 1: 1.2x 2: 1.5x 6: 2.5x. if more refined speaking rates are needed, up to 2 decimal places can be retained, such as 0.5, 1.25, or 2.81. for parameter value to actual speech Speed conversion, refer to speech Speed switch.
-	//   "Volume": 5, // Integer optional. specifies the Volume level. value range: [0,10], corresponding to 11 severity levels respectively. default value: 0, which represents normal Volume.
-	//   "PrimaryLanguage": 1, // Integer option primary language 1-chinese (default) 2-english 3-japanese.
-	// "FastVoiceType": "xxxx"   //  optional parameter. parameters for quick voice clone. 
-	//   }
+	// "AppId": "your application ID", // String required.
+	// "SecretId": "your key ID", // String required.
+	// "SecretKey": "your Key", // String required.
+	// "VoiceType": 101001, // Integer required. the voice ID, including standard timbre and premium timbre. premium timbre has higher fidelity and different pricing from standard timbre. please refer to the text to speech billing overview. for the complete supported timbre list, see the text to speech timbre list.
+	//  "Speed": 1.25, // Integer optional, speaking rate, value range: [-2,6], respectively represent different speaking rates: -2: 0.6x -1: 0.8x 0: 1.0x (default) 1: 1.2x 2: 1.5x 6: 2.5x. if more refined speaking rates are needed, up to 2 decimal places can be retained, such as 0.5, 1.25, or 2.81. for parameter value to actual speech Speed conversion, refer to speech Speed switch.
+	//  "Volume": 5, // Integer optional. specifies the Volume level. value range: [0,10], corresponding to 11 severity levels respectively. default value: 0, which represents normal Volume.
+	//  "PrimaryLanguage": 1, // Integer option primary language 1-chinese (default) 2-english 3-japanese.
+	// "FastVoiceType": "xxxx"   // optional parameter. parameters for quick voice clone. 
+	//  }
 	// </code></pre>
 	//  </div><ul>
 	// <li>Minimax TTS<br>
-	// For configuration, refer to the <a href="https://platform.minimaxi.com/document/T2a%20V2?key=66719005a427f0c8a5701643" target="_blank">Minimax TTS documentation link</a>. note that Minimax TTS has frequency limits. overfrequency may result in response delays. see the <a href="https://platform.minimaxi.com/document/Rate%20limits?key=66b19417290299a26b234572" target="_blank">Minimax TTS frequency limit documentation link</a>.</li>.
+	// For configuration, refer to the <a href="https://platform.minimaxi.com/document/T2a%20V2?key=66719005a427f0c8a5701643" target="_blank">Minimax TTS documentation link</a>. note that Minimax TTS has frequency limits. overfrequency may result in response delays. see the <a href="https://platform.minimaxi.com/document/Rate%20limits?key=66b19417290299a26b234572" target="_blank">Minimax TTS frequency limit documentation link</a>.</li>
 	// </ul>
 	// <div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
 	// "TTSType": "minimax",  // String TTS type. 
-	//         &quot;Model&quot;: &quot;speech-01-turbo&quot;,
-	//         &quot;APIUrl&quot;: &quot;https://api.minimax.chat/v1/t2a_v2&quot;,
-	//         &quot;APIKey&quot;: &quot;eyxxxx&quot;,
-	//         &quot;GroupId&quot;: &quot;181000000000000&quot;,
-	//         &quot;VoiceType&quot;:&quot;female-tianmei&quot;,
-	//         &quot;Speed&quot;: 1.2
+	// "Model": "speech-01-turbo",
+	// "APIUrl": "https://api.minimax.chat/v1/t2a_v2",
+	// "APIKey": "eyxxxx",
+	// "GroupId": "181000000000000",
+	// "VoiceType":"female-tianmei",
+	// "Speed": 1.2
 	// }
 	// </code></pre>
 	// </div><ul>
-	// <li>Volcano TTS</li>.
+	// <li>Volcano TTS</li>
 	// </ul>
-	// <p>Configure the timbre type. see <a href="https://www.volcengine.com/docs/6561/162929" target="_blank">volcano TTS documentation link</a><br>.
+	// <p>Configure the timbre type. see <a href="https://www.volcengine.com/docs/6561/162929" target="_blank">volcano TTS documentation link</a><br>
 	// Text to speech timbre list - voice technology - volcano engine.
-	// Large model TTS timbre list - voice technology - volcano engine</p>.
+	// Large model TTS timbre list - voice technology - volcano engine</p>
 	// <div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
 	// "TTSType": "volcengine",  // required: String TTS type.
 	// "AppId": "xxxxxxxx",   // required: String AppId assigned by volcano engine.
 	// "Token": "TY9d4sQXHxxxxxxx", // required: String type, access Token for volcano engine.
-	// "Speed": 1.0,            // optional parameter. speaking rate, defaults to 1.0.
-	// "Volume": 1.0,            // optional parameter, Volume, defaults to 1.0.
+	// "Speed": 1.0,  // optional parameter. speaking rate, defaults to 1.0.
+	// "Volume": 1.0,  // optional parameter, Volume, defaults to 1.0.
 	// "Cluster": "volcano_tts", // optional parameter, business Cluster, is selected by default.
 	// "VoiceType": "zh_male_aojiaobazong_moon_bigtts" // timbre type, defaults to the TTS voice type of the large model. if using ordinary text to speech, you need to fill in the corresponding voice type. input errors in voice type can cause no sound.
 	// }
 	// </code></pre>
 	// </div><ul>
 	// <li>Azure TTS<br>
-	// For configuration, refer to the <a href="https://docs.azure.cn/zh-cn/ai-services/speech-service/speech-synthesis-markup-voice" target="_blank">AzureTTS documentation link</a></li>.
+	// For configuration, refer to the <a href="https://docs.azure.cn/zh-cn/ai-services/speech-service/speech-synthesis-markup-voice" target="_blank">AzureTTS documentation link</a></li>
 	// </ul>
 	// <div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
 	// "TTSType": "azure", // required: String TTS type.
@@ -1395,13 +1417,13 @@ type CreateAICallRequest struct {
 	// "Region": "chinanorth3",  // required: String the Region to subscribe to.
 	// "VoiceName": "zh-CN-XiaoxiaoNeural", // required: String specifies the required VoiceName.
 	// "Language": "zh-CN", // required: String specifies the synthesis Language.  
-	// "Rate": 1 // optional: float, speech speed. value range: 0.5–2. default is 1.
+	// "Rate": 1 // optional: float, speech speed. value range: 0.5-2. default is 1.
 	// }
 	// </code></pre>
 	// </div><ul>
-	// <li>Custom TTS</li>.
+	// <li>Custom TTS</li>
 	// </ul>
-	// <p>For the specific protocol specification, refer to <a href="https://doc.weixin.qq.com/doc/w3_ANQAiAbdAFwHILbJBmtSqSbV1WZ3L?scode=AJEAIQdfAAo5a1xajYANQAiAbdAFw" target="_blank">tencent documentation</a></p>.
+	// <p>For the specific protocol specification, refer to <a href="https://doc.weixin.qq.com/doc/w3_ANQAiAbdAFwHILbJBmtSqSbV1WZ3L?scode=AJEAIQdfAAo5a1xajYANQAiAbdAFw " target="_blank">tencent documentation</a></p>
 	// <div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
 	// "TTSType": "custom", // String required.
 	// "APIKey": "APIKey", // String required. be used to authenticate.
@@ -1463,6 +1485,14 @@ type CreateAICallRequest struct {
 
 	// Maximum ringing duration. auto hang up when the duration threshold is reached. **only own number supports current parameter.**.
 	MaxRingTimeoutSecond *int64 `json:"MaxRingTimeoutSecond,omitnil,omitempty" name:"MaxRingTimeoutSecond"`
+
+	// Ambient sound scenario. if so, leave it blank.
+	// Coffee_shops: chat in the coffee shop communication environment with background.
+	// busy_office: customer service center.
+	AmbientSoundType *string `json:"AmbientSoundType,omitnil,omitempty" name:"AmbientSoundType"`
+
+	// Ambient sound volume. if AmbientSoundType is empty, this field is left blank. value ranges from [0,2]. the lower the value, the softer the ambient sound; the higher the value, the louder the ambient sound. if not set, use the default value 1.
+	AmbientSoundVolume *float64 `json:"AmbientSoundVolume,omitnil,omitempty" name:"AmbientSoundVolume"`
 }
 
 func (r *CreateAICallRequest) ToJsonString() string {
@@ -1515,6 +1545,8 @@ func (r *CreateAICallRequest) FromJsonString(s string) error {
 	delete(f, "LLMExtraBody")
 	delete(f, "MaxCallDurationMs")
 	delete(f, "MaxRingTimeoutSecond")
+	delete(f, "AmbientSoundType")
+	delete(f, "AmbientSoundVolume")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAICallRequest has unknown keys!", "")
 	}
@@ -1776,6 +1808,12 @@ type CreateAutoCalloutTaskRequestParams struct {
 
 	// Intelligent agent ID. if not filled, IvrId needs to be filled.
 	AIAgentId *int64 `json:"AIAgentId,omitnil,omitempty" name:"AIAgentId"`
+
+	// Retry interval for task failure. value range: 600-86400 seconds.
+	RetryInterval *int64 `json:"RetryInterval,omitnil,omitempty" name:"RetryInterval"`
+
+	// Maximum ringing duration. auto hang up when the duration threshold is reached. only own number supports this parameter.
+	MaxRingTimeoutSecond *int64 `json:"MaxRingTimeoutSecond,omitnil,omitempty" name:"MaxRingTimeoutSecond"`
 }
 
 type CreateAutoCalloutTaskRequest struct {
@@ -1825,6 +1863,12 @@ type CreateAutoCalloutTaskRequest struct {
 
 	// Intelligent agent ID. if not filled, IvrId needs to be filled.
 	AIAgentId *int64 `json:"AIAgentId,omitnil,omitempty" name:"AIAgentId"`
+
+	// Retry interval for task failure. value range: 600-86400 seconds.
+	RetryInterval *int64 `json:"RetryInterval,omitnil,omitempty" name:"RetryInterval"`
+
+	// Maximum ringing duration. auto hang up when the duration threshold is reached. only own number supports this parameter.
+	MaxRingTimeoutSecond *int64 `json:"MaxRingTimeoutSecond,omitnil,omitempty" name:"MaxRingTimeoutSecond"`
 }
 
 func (r *CreateAutoCalloutTaskRequest) ToJsonString() string {
@@ -1854,6 +1898,8 @@ func (r *CreateAutoCalloutTaskRequest) FromJsonString(s string) error {
 	delete(f, "TimeZone")
 	delete(f, "AvailableTime")
 	delete(f, "AIAgentId")
+	delete(f, "RetryInterval")
+	delete(f, "MaxRingTimeoutSecond")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAutoCalloutTaskRequest has unknown keys!", "")
 	}
@@ -1970,7 +2016,7 @@ type CreateCallOutSessionRequestParams struct {
 	// Application id.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Customer service user ID, generally the customer service email. ensure that the mobile number has been bound. https://intl.cloud.tencent.com/document/product/679/76067?from_cn_redirect=1#.E6.AD.A5.E9.AA.A42.EF.BC.9A.E5.AE.8C.E5.96.84.E8.B4.A6.E5.8F.B7.E4.BF.A1.E6.81.AF.
+	// Agent email, underwrite the mobile number has been bound. https://www.tencentcloud.comom/document/product/679/76067?from_cn_redirect=1#.E6.AD.A5.E9.AA.A42.EF.BC.9A.E5.AE.8C.E5.96.84.E8.B4.A6.E5.8F.B7.E4.BF.A1.E6.81.AF.
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
 	// Called number must be preceded by 0086.
@@ -2000,7 +2046,7 @@ type CreateCallOutSessionRequest struct {
 	// Application id.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Customer service user ID, generally the customer service email. ensure that the mobile number has been bound. https://intl.cloud.tencent.com/document/product/679/76067?from_cn_redirect=1#.E6.AD.A5.E9.AA.A42.EF.BC.9A.E5.AE.8C.E5.96.84.E8.B4.A6.E5.8F.B7.E4.BF.A1.E6.81.AF.
+	// Agent email, underwrite the mobile number has been bound. https://www.tencentcloud.comom/document/product/679/76067?from_cn_redirect=1#.E6.AD.A5.E9.AA.A42.EF.BC.9A.E5.AE.8C.E5.96.84.E8.B4.A6.E5.8F.B7.E4.BF.A1.E6.81.AF.
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
 	// Called number must be preceded by 0086.
@@ -2174,6 +2220,9 @@ type CreateIVRSessionRequestParams struct {
 
 	// User data.
 	UUI *string `json:"UUI,omitnil,omitempty" name:"UUI"`
+
+	// Maximum ringing duration. auto hang up when the duration threshold is reached. only own number supports this parameter.
+	MaxRingTimeoutSecond *int64 `json:"MaxRingTimeoutSecond,omitnil,omitempty" name:"MaxRingTimeoutSecond"`
 }
 
 type CreateIVRSessionRequest struct {
@@ -2196,6 +2245,9 @@ type CreateIVRSessionRequest struct {
 
 	// User data.
 	UUI *string `json:"UUI,omitnil,omitempty" name:"UUI"`
+
+	// Maximum ringing duration. auto hang up when the duration threshold is reached. only own number supports this parameter.
+	MaxRingTimeoutSecond *int64 `json:"MaxRingTimeoutSecond,omitnil,omitempty" name:"MaxRingTimeoutSecond"`
 }
 
 func (r *CreateIVRSessionRequest) ToJsonString() string {
@@ -2216,6 +2268,7 @@ func (r *CreateIVRSessionRequest) FromJsonString(s string) error {
 	delete(f, "Callers")
 	delete(f, "Variables")
 	delete(f, "UUI")
+	delete(f, "MaxRingTimeoutSecond")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateIVRSessionRequest has unknown keys!", "")
 	}
@@ -2671,11 +2724,11 @@ type CreateUserSigRequestParams struct {
 	// User ID, must be consistent with the Uid value in the ClientData field.
 	Uid *string `json:"Uid,omitnil,omitempty" name:"Uid"`
 
-	// Valid period, in seconds, no more than 1 hr.
-	ExpiredTime *int64 `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
-
 	// Signature data of the user. required field. standard JSON format.
 	ClientData *string `json:"ClientData,omitnil,omitempty" name:"ClientData"`
+
+	// Valid period, in seconds, no more than 1 hr.
+	ExpiredTime *int64 `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 }
 
 type CreateUserSigRequest struct {
@@ -2687,11 +2740,11 @@ type CreateUserSigRequest struct {
 	// User ID, must be consistent with the Uid value in the ClientData field.
 	Uid *string `json:"Uid,omitnil,omitempty" name:"Uid"`
 
-	// Valid period, in seconds, no more than 1 hr.
-	ExpiredTime *int64 `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
-
 	// Signature data of the user. required field. standard JSON format.
 	ClientData *string `json:"ClientData,omitnil,omitempty" name:"ClientData"`
+
+	// Valid period, in seconds, no more than 1 hr.
+	ExpiredTime *int64 `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 }
 
 func (r *CreateUserSigRequest) ToJsonString() string {
@@ -2708,8 +2761,8 @@ func (r *CreateUserSigRequest) FromJsonString(s string) error {
 	}
 	delete(f, "SdkAppId")
 	delete(f, "Uid")
-	delete(f, "ExpiredTime")
 	delete(f, "ClientData")
+	delete(f, "ExpiredTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateUserSigRequest has unknown keys!", "")
 	}
@@ -3455,8 +3508,11 @@ type DescribeAutoCalloutTaskResponseParams struct {
 	// IvrId used by the task.
 	IvrId *uint64 `json:"IvrId,omitnil,omitempty" name:"IvrId"`
 
-	// Task status: 0 - initial, 1 - running, 2 - completed, 3 - ending, 4 - terminated.
+	// Task status 0 initial 1 running 2 completed 3 ending 4 terminated 5 suspended.
 	State *uint64 `json:"State,omitnil,omitempty" name:"State"`
+
+	// Maximum ringing duration. auto hang up when the duration threshold is reached. only own number supports this parameter.
+	MaxRingTimeoutSecond *int64 `json:"MaxRingTimeoutSecond,omitnil,omitempty" name:"MaxRingTimeoutSecond"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -4500,32 +4556,32 @@ func (r *DescribeProtectedTelCdrResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSessionDetailRequestParams struct {
-	// App ID (required). can be used to view https://console.cloud.tencent.com/ccc.
+	// <p>App ID (required). can check https://console.cloud.tencent.com/ccc</p>.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Specifies the session id of the call.
+	// <P>Call session id</p>.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// Start timestamp. Unix second-level timestamp. supports up to nearly 180 days.
+	// <p>Start timestamp, Unix second-level timestamp, supports up to the last 180 days.</p>.
 	StartTimestamp *int64 `json:"StartTimestamp,omitnil,omitempty" name:"StartTimestamp"`
 
-	// End timestamp, Unix second-level timestamp. the interval range between end time and start time is less than 90 days.
+	// <p>End timestamp, Unix second-level timestamp. the interval range between end time and start time is less than 90 days.</p>.
 	EndTimestamp *int64 `json:"EndTimestamp,omitnil,omitempty" name:"EndTimestamp"`
 }
 
 type DescribeSessionDetailRequest struct {
 	*tchttp.BaseRequest
 	
-	// App ID (required). can be used to view https://console.cloud.tencent.com/ccc.
+	// <p>App ID (required). can check https://console.cloud.tencent.com/ccc</p>.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Specifies the session id of the call.
+	// <P>Call session id</p>.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// Start timestamp. Unix second-level timestamp. supports up to nearly 180 days.
+	// <p>Start timestamp, Unix second-level timestamp, supports up to the last 180 days.</p>.
 	StartTimestamp *int64 `json:"StartTimestamp,omitnil,omitempty" name:"StartTimestamp"`
 
-	// End timestamp, Unix second-level timestamp. the interval range between end time and start time is less than 90 days.
+	// <p>End timestamp, Unix second-level timestamp. the interval range between end time and start time is less than 90 days.</p>.
 	EndTimestamp *int64 `json:"EndTimestamp,omitnil,omitempty" name:"EndTimestamp"`
 }
 
@@ -4553,74 +4609,80 @@ func (r *DescribeSessionDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSessionDetailResponseParams struct {
-	// Calling number.
+	// <P>Calling number</p>.
 	Caller *string `json:"Caller,omitnil,omitempty" name:"Caller"`
 
-	// Called number.
+	// <P>Called number</p>.
 	Callee *string `json:"Callee,omitnil,omitempty" name:"Callee"`
 
-	// Call type. valid values: 1 (outgoing call), 2 (incoming call), 3 (audio dial-in), 5 (predictive outbound call), 6 (internal call).
+	// <P>Call type 1 outgoing call 2 incoming call 3 audio dial-in 5 predictive outbound call 6 extension call</p>.
 	CallType *int64 `json:"CallType,omitnil,omitempty" name:"CallType"`
 
-	// Start timestamp. Unix second-level timestamp.
+	// <p>Start timestamp, Unix second-level timestamp</p>.
 	StartTimeStamp *int64 `json:"StartTimeStamp,omitnil,omitempty" name:"StartTimeStamp"`
 
-	// Ring timestamp. UNIX second-level timestamp.
+	// <p>Ring timestamp, UNIX second-level timestamp</p>.
 	RingTimestamp *int64 `json:"RingTimestamp,omitnil,omitempty" name:"RingTimestamp"`
 
-	// Answer timestamp. UNIX second-level timestamp.
+	// <p>Answer timestamp, UNIX second-level timestamp</p>.
 	AcceptTimestamp *int64 `json:"AcceptTimestamp,omitnil,omitempty" name:"AcceptTimestamp"`
 
-	// End timestamp, UNIX second-level timestamp.
+	// <p>End timestamp, UNIX second-level timestamp</p>.
 	EndedTimestamp *int64 `json:"EndedTimestamp,omitnil,omitempty" name:"EndedTimestamp"`
 
-	// Queue entry time. Unix second-level timestamp.
+	// <p>Queue entry time, Unix second-level timestamp</p>.
 	QueuedTimestamp *int64 `json:"QueuedTimestamp,omitnil,omitempty" name:"QueuedTimestamp"`
 
-	// Agent account.
+	// <P>Agent account</p>.
 	StaffUserId *string `json:"StaffUserId,omitnil,omitempty" name:"StaffUserId"`
 
-	// Refers to the EndStatus field in the DescribeTelCdr api.
+	// <p>Refer to the EndStatus field in the DescribeTelCdr api.</p>.
 	EndStatus *int64 `json:"EndStatus,omitnil,omitempty" name:"EndStatus"`
 
-	// Queue skill group ID.
+	// <p>Queue skill group ID</p>.
 	QueuedSkillGroupId *int64 `json:"QueuedSkillGroupId,omitnil,omitempty" name:"QueuedSkillGroupId"`
 
-	// Queue skill group name.
+	// <P>Queue skill group name</p>.
 	QueuedSkillGroupName *string `json:"QueuedSkillGroupName,omitnil,omitempty" name:"QueuedSkillGroupName"`
 
-	// Recording url with authentication and valid period. obtain and pull within a short time frame. do not persist this link.
+	// <P>The recording link comes with authentication and a valid period. after obtaining it, please retrieve the content within 24 hours. do not persist this link. if the link has expired, call this api again to get a new link.</p>.
 	RecordURL *string `json:"RecordURL,omitnil,omitempty" name:"RecordURL"`
 
-	// Specifies the COS link for recording transfer to a third party.
+	// <p>Recording transfer to external COS link</p>.
 	CustomRecordURL *string `json:"CustomRecordURL,omitnil,omitempty" name:"CustomRecordURL"`
 
-	// Recording text information link with authentication and valid period. retrieve it within a short time frame. do not persist this link.
+	// <P>Text information link of the voice recording, with authentication and valid period. please retrieve it within 24 hr after obtaining. do not persist this link. if the link has expired, call this api again to get a new link.</p>.
 	AsrURL *string `json:"AsrURL,omitnil,omitempty" name:"AsrURL"`
 
-	// Voicemail recording url.
+	// <P>Voicemail recording link</p>.
 	VoicemailRecordURL []*string `json:"VoicemailRecordURL,omitnil,omitempty" name:"VoicemailRecordURL"`
 
-	// Voicemail recording text information url. purchase the offline speech recognition package through the console and enable the offline speech recognition switch.
+	// <P>Voicemail voice recording text information link. you need to purchase an offline speech recognition package through the console and enable the offline speech recognition switch.</p>.
 	VoicemailAsrURL []*string `json:"VoicemailAsrURL,omitnil,omitempty" name:"VoicemailAsrURL"`
 
-	// IVR key information.
+	// <P>IVR key information</p>.
 	IVRKeyPressed []*IVRKeyPressedElement `json:"IVRKeyPressed,omitnil,omitempty" name:"IVRKeyPressed"`
 
-	// Satisfaction rate keystroke information.
+	// <P>Key information of satisfaction rate</p>.
 	PostIVRKeyPressed []*IVRKeyPressedElement `json:"PostIVRKeyPressed,omitnil,omitempty" name:"PostIVRKeyPressed"`
 
-	// Hang-Up side. valid values: seat, user, system.
+	// <P>Hang-Up side seat agent user system</p>.
 	HungUpSide *string `json:"HungUpSide,omitnil,omitempty" name:"HungUpSide"`
 
-	// Customer custom data (User-to-User Interface).
+	// <p>Customer custom data (User-to-User Interface)</p>.
 	UUI *string `json:"UUI,omitnil,omitempty" name:"UUI"`
 
-	// List of events during a call.
+	// <P>Event list for calls in progress</p>.
 	Events []*SessionEvent `json:"Events,omitnil,omitempty" name:"Events"`
 
-	// List of service participants.
+	// <P>Service participant list</p>.
 	ServeParticipants []*ServeParticipant `json:"ServeParticipants,omitnil,omitempty" name:"ServeParticipants"`
+
+	// <P>Status code for reason of system hang-up after connect.</p><p><a href="https://www.tencentcloud.com/document/product/679/123938?from_cn_redirect=1">details</a></p>.
+	SysHangupReason *int64 `json:"SysHangupReason,omitnil,omitempty" name:"SysHangupReason"`
+
+	// <P>Reason for system hang up after connect.</p><p><a href="https://www.tencentcloud.com/document/product/679/123938?from_cn_redirect=1">details</a></p>.
+	SysHangupReasonString *string `json:"SysHangupReasonString,omitnil,omitempty" name:"SysHangupReasonString"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -4739,44 +4801,44 @@ func (r *DescribeSkillGroupInfoListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeStaffInfoListRequestParams struct {
-	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+	// <p>App ID (required). can check https://console.cloud.tencent.com/ccc</p>.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Page size, upper limit 9,999.
+	// <P>Pagination size. upper limit: 9999.</p>.
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
-	// Page number starting from 0.
+	// <P>Page number, starting from 0.</p>.
 	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
-	// Agent account used when querying a single agent.
+	// <P>Agent account, used when query single agent.</p>.
 	StaffMail *string `json:"StaffMail,omitnil,omitempty" name:"StaffMail"`
 
-	// Use when querying for agents with a modification time greater or equal to modifiedtime.
+	// <p>Use when querying for agents with modified time equal to or greater than ModifiedTime</p>.
 	ModifiedTime *int64 `json:"ModifiedTime,omitnil,omitempty" name:"ModifiedTime"`
 
-	// Skill group id.
+	// <p>Skill group ID</p>.
 	SkillGroupId *int64 `json:"SkillGroupId,omitnil,omitempty" name:"SkillGroupId"`
 }
 
 type DescribeStaffInfoListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+	// <p>App ID (required). can check https://console.cloud.tencent.com/ccc</p>.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Page size, upper limit 9,999.
+	// <P>Pagination size. upper limit: 9999.</p>.
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
-	// Page number starting from 0.
+	// <P>Page number, starting from 0.</p>.
 	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
-	// Agent account used when querying a single agent.
+	// <P>Agent account, used when query single agent.</p>.
 	StaffMail *string `json:"StaffMail,omitnil,omitempty" name:"StaffMail"`
 
-	// Use when querying for agents with a modification time greater or equal to modifiedtime.
+	// <p>Use when querying for agents with modified time equal to or greater than ModifiedTime</p>.
 	ModifiedTime *int64 `json:"ModifiedTime,omitnil,omitempty" name:"ModifiedTime"`
 
-	// Skill group id.
+	// <p>Skill group ID</p>.
 	SkillGroupId *int64 `json:"SkillGroupId,omitnil,omitempty" name:"SkillGroupId"`
 }
 
@@ -4806,10 +4868,10 @@ func (r *DescribeStaffInfoListRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeStaffInfoListResponseParams struct {
-	// Total number of agent users.
+	// <P>Total number of agent users</p>.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Agent user information list.
+	// <P>Agent user information list</p>.
 	StaffList []*StaffInfo `json:"StaffList,omitnil,omitempty" name:"StaffList"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5004,26 +5066,26 @@ func (r *DescribeStaffStatusMetricsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTelCallInfoRequestParams struct {
-	// Start timestamp, unix timestamp (query dimension supports only daily. for example, to query may 1st, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-01 23:59:59" timestamp. to query may 1st and may 2nd, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-02 23:59:59" timestamp).
+	// <p>Start timestamp, Unix timestamp (query dimension only supports day, for example, to query may 1, you should pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-01 23:59:59" timestamp; to query may 1 and may 2, you should pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-02 23:59:59" timestamp)</p>.
 	StartTimeStamp *int64 `json:"StartTimeStamp,omitnil,omitempty" name:"StartTimeStamp"`
 
-	// End timestamp, unix timestamp, the query time range is up to 90 days (query dimension supports only daily. for example, to query may 1st, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-01 23:59:59" timestamp. to query may 1st and may 2nd, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-02 23:59:59" timestamp).
+	// <p>End timestamp, Unix timestamp. the maximum query time range is 90 days (query dimension only supports day, for example, to query may 1, you should pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-01 23:59:59" timestamp; to query may 1 and may 2, you should pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-02 23:59:59" timestamp).</p>.
 	EndTimeStamp *int64 `json:"EndTimeStamp,omitnil,omitempty" name:"EndTimeStamp"`
 
-	// Application id list, when having multiple ids, the returned value is the sum of all the ids.
+	// <p>Application ID list. for multiple ids, the return value is the sum of multiple ids.</p>.
 	SdkAppIdList []*int64 `json:"SdkAppIdList,omitnil,omitempty" name:"SdkAppIdList"`
 }
 
 type DescribeTelCallInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start timestamp, unix timestamp (query dimension supports only daily. for example, to query may 1st, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-01 23:59:59" timestamp. to query may 1st and may 2nd, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-02 23:59:59" timestamp).
+	// <p>Start timestamp, Unix timestamp (query dimension only supports day, for example, to query may 1, you should pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-01 23:59:59" timestamp; to query may 1 and may 2, you should pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-02 23:59:59" timestamp)</p>.
 	StartTimeStamp *int64 `json:"StartTimeStamp,omitnil,omitempty" name:"StartTimeStamp"`
 
-	// End timestamp, unix timestamp, the query time range is up to 90 days (query dimension supports only daily. for example, to query may 1st, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-01 23:59:59" timestamp. to query may 1st and may 2nd, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-02 23:59:59" timestamp).
+	// <p>End timestamp, Unix timestamp. the maximum query time range is 90 days (query dimension only supports day, for example, to query may 1, you should pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-01 23:59:59" timestamp; to query may 1 and may 2, you should pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-02 23:59:59" timestamp).</p>.
 	EndTimeStamp *int64 `json:"EndTimeStamp,omitnil,omitempty" name:"EndTimeStamp"`
 
-	// Application id list, when having multiple ids, the returned value is the sum of all the ids.
+	// <p>Application ID list. for multiple ids, the return value is the sum of multiple ids.</p>.
 	SdkAppIdList []*int64 `json:"SdkAppIdList,omitnil,omitempty" name:"SdkAppIdList"`
 }
 
@@ -5050,27 +5112,27 @@ func (r *DescribeTelCallInfoRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTelCallInfoResponseParams struct {
-	// Number of minutes consumed by outbound package.
+	// <P>Minutes consumed by outbound package</p>.
 	TelCallOutCount *int64 `json:"TelCallOutCount,omitnil,omitempty" name:"TelCallOutCount"`
 
-	// Number of minutes consumed by inbound package.
+	// <P>Minutes consumed by inbound package</p>.
 	TelCallInCount *int64 `json:"TelCallInCount,omitnil,omitempty" name:"TelCallInCount"`
 
-	// Number of agent usage statistics.
+	// <P>Number of agent usage statistics</p>.
 	SeatUsedCount *int64 `json:"SeatUsedCount,omitnil,omitempty" name:"SeatUsedCount"`
 
-	// Number of minutes consumed by audio package.
+	// <P>Minutes consumed by audio package</p>.
 	//
 	// Deprecated: VoipCallInCount is deprecated.
 	VoipCallInCount *int64 `json:"VoipCallInCount,omitnil,omitempty" name:"VoipCallInCount"`
 
-	// Number of minutes consumed by audio package.
+	// <P>Minutes consumed by audio package</p>.
 	VOIPCallInCount *int64 `json:"VOIPCallInCount,omitnil,omitempty" name:"VOIPCallInCount"`
 
-	// Number of minutes consumed by offline speech-to-text package.
+	// <P>Minutes consumed by offline speech-to-text package</p>.
 	AsrOfflineCount *int64 `json:"AsrOfflineCount,omitnil,omitempty" name:"AsrOfflineCount"`
 
-	// Number of minutes consumed by real-time speech-to-text package.
+	// <P>Minutes consumed by real-time speech-to-text package</p>.
 	AsrRealtimeCount *int64 `json:"AsrRealtimeCount,omitnil,omitempty" name:"AsrRealtimeCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -6165,6 +6227,67 @@ type PackageBuyInfo struct {
 }
 
 // Predefined struct for user
+type PauseAutoCalloutTaskRequestParams struct {
+	// Task ID
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Application ID (required). you can view it at https://console.cloud.tencent.com/ccc.
+	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+}
+
+type PauseAutoCalloutTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Task ID
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Application ID (required). you can view it at https://console.cloud.tencent.com/ccc.
+	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+}
+
+func (r *PauseAutoCalloutTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *PauseAutoCalloutTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "SdkAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PauseAutoCalloutTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type PauseAutoCalloutTaskResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type PauseAutoCalloutTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *PauseAutoCalloutTaskResponseParams `json:"Response"`
+}
+
+func (r *PauseAutoCalloutTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *PauseAutoCalloutTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type PausePredictiveDialingCampaignRequestParams struct {
 	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
@@ -6243,6 +6366,81 @@ type PhoneNumBuyInfo struct {
 
 	// Number status, 1-normal | 2-suspended due to non-payment | 4-admin suspended | 5-suspended due to violation.
 	State *int64 `json:"State,omitnil,omitempty" name:"State"`
+}
+
+// Predefined struct for user
+type PlaySoundCallRequestParams struct {
+	// App ID (required). you can view it at https://console.cloud.tencent.com/ccc.
+	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Session ID.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// Audio file ID. please refer to the management console - telephone customer service - audio file management.
+	FileId *int64 `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// Number of playbacks. default 1.
+	PlayTimes *int64 `json:"PlayTimes,omitnil,omitempty" name:"PlayTimes"`
+}
+
+type PlaySoundCallRequest struct {
+	*tchttp.BaseRequest
+	
+	// App ID (required). you can view it at https://console.cloud.tencent.com/ccc.
+	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Session ID.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// Audio file ID. please refer to the management console - telephone customer service - audio file management.
+	FileId *int64 `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// Number of playbacks. default 1.
+	PlayTimes *int64 `json:"PlayTimes,omitnil,omitempty" name:"PlayTimes"`
+}
+
+func (r *PlaySoundCallRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *PlaySoundCallRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "SessionId")
+	delete(f, "FileId")
+	delete(f, "PlayTimes")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PlaySoundCallRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type PlaySoundCallResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type PlaySoundCallResponse struct {
+	*tchttp.BaseResponse
+	Response *PlaySoundCallResponseParams `json:"Response"`
+}
+
+func (r *PlaySoundCallResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *PlaySoundCallResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -6367,6 +6565,67 @@ func (r *RestoreMemberOnlineResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *RestoreMemberOnlineResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResumeAutoCalloutTaskRequestParams struct {
+	// Task ID
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// App ID (required). you can view it at https://console.cloud.tencent.com/ccc.
+	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+}
+
+type ResumeAutoCalloutTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Task ID
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// App ID (required). you can view it at https://console.cloud.tencent.com/ccc.
+	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+}
+
+func (r *ResumeAutoCalloutTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResumeAutoCalloutTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "SdkAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResumeAutoCalloutTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResumeAutoCalloutTaskResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ResumeAutoCalloutTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *ResumeAutoCalloutTaskResponseParams `json:"Response"`
+}
+
+func (r *ResumeAutoCalloutTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResumeAutoCalloutTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6520,7 +6779,11 @@ type ServeParticipant struct {
 	// Skill group id.
 	SkillGroupId *int64 `json:"SkillGroupId,omitnil,omitempty" name:"SkillGroupId"`
 
-	// Ending status.
+	// End status.
+	// 
+	// For chinese description, see [https://www.tencentcloud.com/zh/document/product/1229/71847](https://www.tencentcloud.com/zh/document/product/1229/71847).
+	// 
+	// For english details, see [reference](https://www.tencentcloud.com/document/product/1229/71847?lang=en).
 	EndStatusString *string `json:"EndStatusString,omitnil,omitempty" name:"EndStatusString"`
 
 	// Recording url.
@@ -6968,79 +7231,81 @@ type TelCdrInfo struct {
 
 	// EndStatus corresponds one-to-one with EndStatusString. the specific enumeration is as follows:.
 	// 
-	// **Scenario**	EndStatus	EndStatusString	Status description.
+	// **Scenario**  **EndStatus**  **EndStatusString**  **status description**.
 	// 
-	// Incoming & outgoing calls. 1. ok. normal call.
+	// Call in & out    1        ok                        **normal call**.
 	// 
-	// IVR period user give up.
+	// Inbound call    102    ivrGiveUp    **user give up during IVR period**.
 	// 
-	// **User give up while in queue**.
+	// Inbound call 103 waitingGiveUp **user give up in queue**.
 	// 
-	// Inbound call 104 ringingGiveUp. specifies the user gives up during ringing.
+	// Inbound call 104 ringingGiveUp **user gives up during ring**.
 	// 
-	// Inbound call 105. specifies no agent online.
+	// Inbound call	105	noSeatOnline	**no agent online**.
 	// 
-	// Inbound call notWorkTime **off hours**.   
+	// Inbound call              106	       notWorkTime	       **off hours**.   
 	// 
-	// IVR ends automatically (no manual intervention).
+	// Inbound call    107    ivrEnd    **IVR ends automatically (no manual intervention)**.
 	// 
-	// Inbound call. 100. blocklist (system side).
+	// Inbound calls    100    blocklist (system side).
 	// 
-	// restrictedCallee. specifies the global outbound call risk number interception (system side).
+	// Outgoing call              108        restrictedCallee        **global outbound call risk number blocklist (system side)**.
 	// 
-	// Outbound call 109 tooManyRequest **outbound call frequency control interception (system side)**.
+	// Outgoing call     109        tooManyRequest    **outbound call frequency control block (system side)**.
 	// 
-	// Outbound call 110 restrictedArea **block outgoing calls by region (system side)**.
+	// Outbound call  110  restrictedArea  **outgoing call region block (system side)**.
 	// 
-	// restrictedTime. specifies the outbound call interception period on the system side.
+	// Outgoing call 111 restrictedTime **outbound call interception (system side)**.
 	//                          
-	// 202 notAnswer **callee unanswered**.
+	// Outgoing call             202            notAnswer	 **callee unanswered**.
 	// 
-	// Outbound call 203 userReject **callee reject hangup**.
+	// Outgoing call            203	    userReject	**callee reject hangup**.
 	// 
-	// Power off. **callee powered off**.
+	// Outgoing call    204    powerOff    **callee shutdown**.
 	// 
-	// 205            numberNotExist	**callee nonexistent number**.
+	// Outgoing call           205            numberNotExist	**called nonexistent number**.
 	// 
-	// Busy. specifies the callee is busy.
+	// Outbound call    206    busy    **callee busy**.
 	// 
-	// Outbound call 207 outOfCredit **callee in arrears**.
+	// Outbound call    207    outOfCredit    **callee in arrears**.
 	// 
-	// 208 operatorError indicates operator channel exception.
+	// 208    operatorError    **operator channel exception**.
 	// 
-	// Outgoing call caller cancellation.
+	// Outgoing call          209           callerCancel          **call cancellation by the caller**.
 	// 
-	// Outgoing call	        210	           notInService	**callee out of service area**.
+	// Outgoing call 210 notInService **callee out of service area**.
 	// 
-	// Phone call in/out 211 clientError **client error**.
+	// Phone call in & out 211 clientError **agent client error**.
 	// 
-	// Outgoing call 212 carrierBlocked **carrier blocklist**.
+	// Outgoing call    212     carrierBlocked      **isp blocked**.
 	// 
-	// Note: call reminder.
+	// Outgoing call 213 callReminder **note: call reminder**.
 	// 
-	// Outbound call 215 numberInvalid **called number is invalid**.
+	// Outbound call 215 numberInvalid **called number invalid**.
 	// 
-	// Outbound call 216 callRestricted. note: call restricted.
+	// Outgoing call 216 callRestricted **note: call restricted**.
 	// 
-	// Callee restricted by blocklist.
+	// Outgoing call 217 calleeRestricted **callee blocklist restricted**.
 	// 
-	// Outbound call 218 areaRestricted. **callee area restricted**.
+	// Outbound call 218 areaRestricted **callee area restricted**.
 	// 
-	// Prompt call forwarding.
+	// Outbound call    219     promptCallForwarding      **note call transfer**.
 	// 
-	// Caller cancellation during ringing.
+	// Outbound call 220 callerCancelWhileRing **caller cancellation while ringing**.
 	// 
-	// Caller cancel without ring.
+	// Outgoing call 221 callerCancelWithoutRing **called number anomaly without ring**.
 	// 
-	// Audio dial-in 501 call conflict **VoIP user call termination**.
+	// Outgoing call  222  voiceMailReached  **voice mail hangup**.
 	// 
-	// VoIP user client timeout.
+	// Audio inbound 501 callConflict **VoIP user call conflict termination**.
 	// 
-	// Audio dial-in 503 VoIP user client error.
+	// Audio dial-in 502 clientTimeout **VoIP user client timeout**.
 	// 
-	// Chinese version please go domestic site (https://cloud.tencent.com/document/product/679/123938).
+	// Audio inbound 503 voipClientError **VoIP client error**.
 	// 
-	// English version please go international site (https://www.tencentcloud.com/document/product/1229/71847?lang=en).
+	// For chinese description, see [https://www.tencentcloud.com/zh/document/product/1229/71847](https://www.tencentcloud.com/zh/document/product/1229/71847).
+	// 
+	// For english details, see [reference](https://www.tencentcloud.com/document/product/1229/71847?lang=en).
 	EndStatus *int64 `json:"EndStatus,omitnil,omitempty" name:"EndStatus"`
 
 	// Skill group name.
@@ -7134,6 +7399,18 @@ type TelCdrInfo struct {
 
 	// Text information address of asr audio message during a call.
 	VoicemailAsrURL []*string `json:"VoicemailAsrURL,omitnil,omitempty" name:"VoicemailAsrURL"`
+
+	// If it is a call related to intelligent agent, this is the intelligent agent ID.
+	AIAgentId *int64 `json:"AIAgentId,omitnil,omitempty" name:"AIAgentId"`
+
+	// If it is a call related to intelligent agent, this is the intelligent agent name.
+	AIAgentName *string `json:"AIAgentName,omitnil,omitempty" name:"AIAgentName"`
+
+	// Reasons for system hang-up after connection, enumeration class.
+	SysHangupReason *int64 `json:"SysHangupReason,omitnil,omitempty" name:"SysHangupReason"`
+
+	// Reason for hang-up after connect, text description.
+	SysHangupReasonString *string `json:"SysHangupReasonString,omitnil,omitempty" name:"SysHangupReasonString"`
 }
 
 type TimeRange struct {

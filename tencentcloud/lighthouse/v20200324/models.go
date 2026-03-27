@@ -1660,7 +1660,7 @@ func (r *DescribeBundleDiscountResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBundlesRequestParams struct {
-	// List of bundle ids. the maximum is 100 per request for batch packages. you can get the BundleId in the return value from the API [DescribeBundles](https://www.tencentcloud.comom/document/product/1207/47575?from_cn_redirect=1).
+	// List of bundle ids. the maximum is 100 per request for batch packages. you can get the BundleId in the return value from the API [DescribeBundles](https://www.tencentcloud.com/document/product/1207/47575?from_cn_redirect=1).
 	BundleIds []*string `json:"BundleIds,omitnil,omitempty" name:"BundleIds"`
 
 	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
@@ -1689,14 +1689,14 @@ type DescribeBundlesRequestParams struct {
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// AZ list. default to all availability zones.
-	// <li>AZs can be queried through the API [DescribeZones](https://www.tencentcloud.comom/document/product/1207/57513?from_cn_redirect=1)</li>.
+	// <li>AZs can be queried through the API [DescribeZones](https://www.tencentcloud.com/document/product/1207/57513?from_cn_redirect=1)</li>.
 	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 }
 
 type DescribeBundlesRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of bundle ids. the maximum is 100 per request for batch packages. you can get the BundleId in the return value from the API [DescribeBundles](https://www.tencentcloud.comom/document/product/1207/47575?from_cn_redirect=1).
+	// List of bundle ids. the maximum is 100 per request for batch packages. you can get the BundleId in the return value from the API [DescribeBundles](https://www.tencentcloud.com/document/product/1207/47575?from_cn_redirect=1).
 	BundleIds []*string `json:"BundleIds,omitnil,omitempty" name:"BundleIds"`
 
 	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
@@ -1725,7 +1725,7 @@ type DescribeBundlesRequest struct {
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// AZ list. default to all availability zones.
-	// <li>AZs can be queried through the API [DescribeZones](https://www.tencentcloud.comom/document/product/1207/57513?from_cn_redirect=1)</li>.
+	// <li>AZs can be queried through the API [DescribeZones](https://www.tencentcloud.com/document/product/1207/57513?from_cn_redirect=1)</li>.
 	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 }
 
@@ -5098,7 +5098,7 @@ type LoginConfiguration struct {
 	// <li>Symbols: ()`~!@#$%^&*-+=_|{}[]:;'<>,.?/</li>
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-
+	// Key ID list. You can specify up to 5 keys simultaneously. After associating keys, you can access the instance using the corresponding private key. Keys and passwords cannot be specified simultaneously. Additionally, the WINDOWS operating system does not support key specification. The key ID list can be obtained via the [DescribeKeyPairs](https://cloud.tencent.com/document/product/1207/55540) API.
 	KeyIds []*string `json:"KeyIds,omitnil,omitempty" name:"KeyIds"`
 }
 

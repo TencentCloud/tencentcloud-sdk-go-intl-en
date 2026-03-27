@@ -1502,7 +1502,7 @@ type DBEndpointInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DatabaseNetEnv *string `json:"DatabaseNetEnv,omitnil,omitempty" name:"DatabaseNetEnv"`
 
-
+	// TDSQL connection method: proxy - access each set node via TDSQL proxy hosts. Note that this connection method is only available in self-developed cloud environments. Only proxy host information needs to be provided in Info. set - directly connect to set nodes. If selecting direct set connection, both proxy host information and all set node information must be correctly filled in Info. Mandatory when source is TDSQL MySQL type.
 	ConnectType *string `json:"ConnectType,omitnil,omitempty" name:"ConnectType"`
 }
 
@@ -3807,13 +3807,13 @@ type Endpoint struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	CcnOwnerUin *string `json:"CcnOwnerUin,omitnil,omitempty" name:"CcnOwnerUin"`
 
-
+	// The ID of the sub-instance when the database is cynos and it is a sub-database instance within a cynos cluster
 	ChildInstanceId *string `json:"ChildInstanceId,omitnil,omitempty" name:"ChildInstanceId"`
 
-
+	// When the database is cynos and it is a sub-database instance within a cynos cluster, this parameter represents the type of the sub-instance, for example: pass 'ro' for read-only instances, 'rw' for read-write instances.
 	ChildInstanceType *string `json:"ChildInstanceType,omitnil,omitempty" name:"ChildInstanceType"`
 
-
+	// Shard id of tdsql. Mandatory when node type is set.
 	SetId *string `json:"SetId,omitnil,omitempty" name:"SetId"`
 }
 
@@ -3866,10 +3866,10 @@ type EndpointItem struct {
 	// Additional information added for the business. Parameter name is called key, parameter value is called value. Mandatory parameters for tdpg: PgDatabase (subscribed database name).Note: This field may return null, indicating that no valid values can be obtained.
 	ExtraAttr []*KeyValuePairOption `json:"ExtraAttr,omitnil,omitempty" name:"ExtraAttr"`
 
-
+	// The ID of the sub-instance when the database is cynos and it is a sub-database instance within a cynos cluster
 	ChildInstanceId *string `json:"ChildInstanceId,omitnil,omitempty" name:"ChildInstanceId"`
 
-
+	// When the database is cynos and it is a sub-database instance within a cynos cluster, this parameter represents the type of the sub-instance, for example: pass 'ro' for read-only instances, 'rw' for read-write instances.
 	ChildInstanceType *string `json:"ChildInstanceType,omitnil,omitempty" name:"ChildInstanceType"`
 }
 
@@ -4284,7 +4284,7 @@ type MigrateOption struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExtraAttr []*KeyValuePairOption `json:"ExtraAttr,omitnil,omitempty" name:"ExtraAttr"`
 
-
+	// PostgreSQL migration types: logical (logical migration), physical (physical migration)
 	MigrateWay *string `json:"MigrateWay,omitnil,omitempty" name:"MigrateWay"`
 }
 
@@ -5448,10 +5448,10 @@ type Options struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AutoRetryTimeRangeMinutes *int64 `json:"AutoRetryTimeRangeMinutes,omitnil,omitempty" name:"AutoRetryTimeRangeMinutes"`
 
-
+	// Whether to filter out begin and commit messages when synchronizing to the kafka link. Currently only supported for MySQL-to-kafka links.
 	FilterBeginCommit *bool `json:"FilterBeginCommit,omitnil,omitempty" name:"FilterBeginCommit"`
 
-
+	// Whether to filter out checkpoint messages when synchronizing to the kafka link. Currently only supported for MySQL-to-kafka links.
 	FilterCheckpoint *bool `json:"FilterCheckpoint,omitnil,omitempty" name:"FilterCheckpoint"`
 }
 

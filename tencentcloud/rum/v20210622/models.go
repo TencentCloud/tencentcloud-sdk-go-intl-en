@@ -3157,10 +3157,14 @@ type DescribeDataPvUrlStatisticsRequestParams struct {
 	// Environment
 	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 
-
+	// group by parameter value enumeration: 1:1m
+	//    2:5m  3:30m 
+	//    4:1h
+	//  5:1d
 	GroupByType *int64 `json:"GroupByType,omitnil,omitempty" name:"GroupByType"`
 
-
+	// 1: Query Intelligent Research
+	// 0: Use old logic, already offline, do not use
 	IsNewData *int64 `json:"IsNewData,omitnil,omitempty" name:"IsNewData"`
 }
 
@@ -3230,8 +3234,14 @@ type DescribeDataPvUrlStatisticsRequest struct {
 	// Environment
 	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 
+	// group by parameter value enumeration: 1:1m
+	//    2:5m  3:30m 
+	//    4:1h
+	//  5:1d
 	GroupByType *int64 `json:"GroupByType,omitnil,omitempty" name:"GroupByType"`
 
+	// 1: Query Intelligent Research
+	// 0: Use old logic, already offline, do not use
 	IsNewData *int64 `json:"IsNewData,omitnil,omitempty" name:"IsNewData"`
 }
 

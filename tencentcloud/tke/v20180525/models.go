@@ -2596,7 +2596,7 @@ func (r *CreatePrometheusAlertRuleResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateTKEEdgeClusterRequestParams struct {
-
+	// k8s version number
 	K8SVersion *string `json:"K8SVersion,omitnil,omitempty" name:"K8SVersion"`
 
 	// VPC ID
@@ -2645,6 +2645,7 @@ type CreateTKEEdgeClusterRequestParams struct {
 type CreateTKEEdgeClusterRequest struct {
 	*tchttp.BaseRequest
 	
+	// k8s version number
 	K8SVersion *string `json:"K8SVersion,omitnil,omitempty" name:"K8SVersion"`
 
 	// VPC ID
@@ -8370,7 +8371,7 @@ type EdgeCluster struct {
 	// Cluster service CIDR block
 	ServiceCIDR *string `json:"ServiceCIDR,omitnil,omitempty" name:"ServiceCIDR"`
 
-
+	// k8s version number
 	K8SVersion *string `json:"K8SVersion,omitnil,omitempty" name:"K8SVersion"`
 
 	// Cluster status
@@ -10639,7 +10640,7 @@ type NodePool struct {
 	// Node list
 	NodeCountSummary *NodeCountSummary `json:"NodeCountSummary,omitnil,omitempty" name:"NodeCountSummary"`
 
-
+	// Status information
 	AutoscalingGroupStatus *string `json:"AutoscalingGroupStatus,omitnil,omitempty" name:"AutoscalingGroupStatus"`
 
 	// Maximum number of nodes

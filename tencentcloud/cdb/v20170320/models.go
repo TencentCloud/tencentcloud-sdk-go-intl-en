@@ -199,10 +199,10 @@ type AdjustCdbProxyAddressRequestParams struct {
 	// Assignment of read/write weights If `system` is passed in for `WeightMode`, only the default weight assigned by the system will take effect.
 	ProxyAllocation []*ProxyAllocation `json:"ProxyAllocation,omitnil,omitempty" name:"ProxyAllocation"`
 
-
+	// Whether to enable adaptive load balancing. Disabled by default.
 	AutoLoadBalance *bool `json:"AutoLoadBalance,omitnil,omitempty" name:"AutoLoadBalance"`
 
-
+	// Access Mode: nearby - nearby access, balance - balanced allocation. Default is nearby access.
 	AccessMode *string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
 }
 
@@ -245,8 +245,10 @@ type AdjustCdbProxyAddressRequest struct {
 	// Assignment of read/write weights If `system` is passed in for `WeightMode`, only the default weight assigned by the system will take effect.
 	ProxyAllocation []*ProxyAllocation `json:"ProxyAllocation,omitnil,omitempty" name:"ProxyAllocation"`
 
+	// Whether to enable adaptive load balancing. Disabled by default.
 	AutoLoadBalance *bool `json:"AutoLoadBalance,omitnil,omitempty" name:"AutoLoadBalance"`
 
+	// Access Mode: nearby - nearby access, balance - balanced allocation. Default is nearby access.
 	AccessMode *string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
 }
 
@@ -644,16 +646,16 @@ type AuditLog struct {
 	// The error code
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-
+	// SQL Type.
 	SqlType *string `json:"SqlType,omitnil,omitempty" name:"SqlType"`
 
 	// Audit policy name, which will be unavailable soon.
 	PolicyName *string `json:"PolicyName,omitnil,omitempty" name:"PolicyName"`
 
-
+	// Database Name.
 	DBName *string `json:"DBName,omitnil,omitempty" name:"DBName"`
 
-
+	// SQL Statement.
 	Sql *string `json:"Sql,omitnil,omitempty" name:"Sql"`
 
 	// Client address
@@ -740,7 +742,7 @@ type AuditLogFilter struct {
 	// Username
 	User []*string `json:"User,omitnil,omitempty" name:"User"`
 
-
+	// Database Name.
 	DBName []*string `json:"DBName,omitnil,omitempty" name:"DBName"`
 
 	// Table name
@@ -749,10 +751,10 @@ type AuditLogFilter struct {
 	// Audit policy name
 	PolicyName []*string `json:"PolicyName,omitnil,omitempty" name:"PolicyName"`
 
-
+	// SQL statement. Supports fuzzy matching.
 	Sql *string `json:"Sql,omitnil,omitempty" name:"Sql"`
 
-
+	// SQL Type. Currently supports: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "DROP", "ALTER", "SET", "REPLACE", "EXECUTE".
 	SqlType *string `json:"SqlType,omitnil,omitempty" name:"SqlType"`
 
 	// Execution time in ms, which is used to filter the audit log with execution time greater than this value.
@@ -1321,14 +1323,14 @@ type CloneItem struct {
 
 // Predefined struct for user
 type CloseAuditServiceRequestParams struct {
-	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type CloseAuditServiceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -1713,7 +1715,7 @@ func (r *CreateAccountsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAuditLogFileRequestParams struct {
-	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Start time. We recommend that the interval between start and end time does not exceed 7 days.
@@ -1743,7 +1745,7 @@ type CreateAuditLogFileRequestParams struct {
 type CreateAuditLogFileRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Start time. We recommend that the interval between start and end time does not exceed 7 days.
@@ -2132,10 +2134,10 @@ type CreateCdbProxyAddressRequestParams struct {
 	// Connection pool type, which will take effect only when `ConnectionPool` is `true`. Valid values:  `transaction` (transaction-level), `connection` (session-level).
 	ConnectionPoolType *string `json:"ConnectionPoolType,omitnil,omitempty" name:"ConnectionPoolType"`
 
-
+	// Whether to enable adaptive load balancing. Disabled by default.
 	AutoLoadBalance *bool `json:"AutoLoadBalance,omitnil,omitempty" name:"AutoLoadBalance"`
 
-
+	// Access Mode. nearBy - nearby access, balance - balanced allocation. Default value: nearBy.
 	AccessMode *string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
 }
 
@@ -2196,8 +2198,10 @@ type CreateCdbProxyAddressRequest struct {
 	// Connection pool type, which will take effect only when `ConnectionPool` is `true`. Valid values:  `transaction` (transaction-level), `connection` (session-level).
 	ConnectionPoolType *string `json:"ConnectionPoolType,omitnil,omitempty" name:"ConnectionPoolType"`
 
+	// Whether to enable adaptive load balancing. Disabled by default.
 	AutoLoadBalance *bool `json:"AutoLoadBalance,omitnil,omitempty" name:"AutoLoadBalance"`
 
+	// Access Mode. nearBy - nearby access, balance - balanced allocation. Default value: nearBy.
 	AccessMode *string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
 }
 
@@ -3346,7 +3350,7 @@ type CreateDatabaseRequestParams struct {
 	// Instance ID in the format of `cdb-c1nl9rpv`,  which is the same as the one displayed in the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-
+	// Database Name, up to 64 characters in length.
 	DBName *string `json:"DBName,omitnil,omitempty" name:"DBName"`
 
 	// Character set. Valid values:  `utf8`, `gbk`, `latin1`, `utf8mb4`.
@@ -3359,6 +3363,7 @@ type CreateDatabaseRequest struct {
 	// Instance ID in the format of `cdb-c1nl9rpv`,  which is the same as the one displayed in the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
+	// Database Name, up to 64 characters in length.
 	DBName *string `json:"DBName,omitnil,omitempty" name:"DBName"`
 
 	// Character set. Valid values:  `utf8`, `gbk`, `latin1`, `utf8mb4`.
@@ -3760,20 +3765,20 @@ func (r *DeleteAccountsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteAuditLogFileRequestParams struct {
-	// Audit log file name, which can be obtained through the [DescribeAuditLogFiles](https://www.tencentcloud.comom/document/api/236/45454?from_cn_redirect=1) API.
+	// Audit log file name, which can be obtained through the [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/236/45454?from_cn_redirect=1) API.
 	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 
-	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DeleteAuditLogFileRequest struct {
 	*tchttp.BaseRequest
 	
-	// Audit log file name, which can be obtained through the [DescribeAuditLogFiles](https://www.tencentcloud.comom/document/api/236/45454?from_cn_redirect=1) API.
+	// Audit log file name, which can be obtained through the [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/236/45454?from_cn_redirect=1) API.
 	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 
-	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -3882,14 +3887,14 @@ func (r *DeleteAuditPolicyResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteAuditRuleTemplatesRequestParams struct {
-	// Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.comom/document/api/236/101811?from_cn_redirect=1) API. A maximum of 5 rule templates can be deleted per request.
+	// Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.com/document/api/236/101811?from_cn_redirect=1) API. A maximum of 5 rule templates can be deleted per request.
 	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil,omitempty" name:"RuleTemplateIds"`
 }
 
 type DeleteAuditRuleTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.comom/document/api/236/101811?from_cn_redirect=1) API. A maximum of 5 rule templates can be deleted per request.
+	// Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.com/document/api/236/101811?from_cn_redirect=1) API. A maximum of 5 rule templates can be deleted per request.
 	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil,omitempty" name:"RuleTemplateIds"`
 }
 
@@ -4790,7 +4795,7 @@ func (r *DescribeAuditPoliciesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAuditRuleTemplateModifyHistoryRequestParams struct {
-	// Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.comom/document/api/236/101811?from_cn_redirect=1) API.
+	// Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.com/document/api/236/101811?from_cn_redirect=1) API.
 	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil,omitempty" name:"RuleTemplateIds"`
 
 	// Start time of the query range.
@@ -4812,7 +4817,7 @@ type DescribeAuditRuleTemplateModifyHistoryRequestParams struct {
 type DescribeAuditRuleTemplateModifyHistoryRequest struct {
 	*tchttp.BaseRequest
 	
-	// Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.comom/document/api/236/101811?from_cn_redirect=1) API.
+	// Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.com/document/api/236/101811?from_cn_redirect=1) API.
 	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil,omitempty" name:"RuleTemplateIds"`
 
 	// Start time of the query range.
@@ -10266,7 +10271,7 @@ func (r *ModifyAccountPrivilegesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyAuditConfigRequestParams struct {
-	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Audit log retention period. Valid values:7 - One week;30 - One month;180 - Six months;365 - One year;1095 - Three years;1825 - Five years.
@@ -10282,7 +10287,7 @@ type ModifyAuditConfigRequestParams struct {
 type ModifyAuditConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Audit log retention period. Valid values:7 - One week;30 - One month;180 - Six months;365 - One year;1095 - Three years;1825 - Five years.
@@ -10341,7 +10346,7 @@ func (r *ModifyAuditConfigResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyAuditRuleTemplatesRequestParams struct {
-	// Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.comom/document/api/236/101811?from_cn_redirect=1) API.
+	// Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.com/document/api/236/101811?from_cn_redirect=1) API.
 	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil,omitempty" name:"RuleTemplateIds"`
 
 	// Modified audit rule.
@@ -10363,7 +10368,7 @@ type ModifyAuditRuleTemplatesRequestParams struct {
 type ModifyAuditRuleTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.comom/document/api/236/101811?from_cn_redirect=1) API.
+	// Audit rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.com/document/api/236/101811?from_cn_redirect=1) API.
 	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil,omitempty" name:"RuleTemplateIds"`
 
 	// Modified audit rule.
@@ -10430,7 +10435,7 @@ func (r *ModifyAuditRuleTemplatesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyAuditServiceRequestParams struct {
-	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Log retention period. Valid values:7 - One week;30 - One month;90 - Three months;180 - Six months;365 - One year;1095 - Three years;1825 - Five years.
@@ -10447,14 +10452,14 @@ type ModifyAuditServiceRequestParams struct {
 	// Deprecated: AuditRuleFilters is deprecated.
 	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitnil,omitempty" name:"AuditRuleFilters"`
 
-	// Rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.comom/document/api/236/101811?from_cn_redirect=1) API.
+	// Rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.com/document/api/236/101811?from_cn_redirect=1) API.
 	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil,omitempty" name:"RuleTemplateIds"`
 }
 
 type ModifyAuditServiceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.comom/document/product/236/15872?from_cn_redirect=1) API.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Log retention period. Valid values:7 - One week;30 - One month;90 - Three months;180 - Six months;365 - One year;1095 - Three years;1825 - Five years.
@@ -10469,7 +10474,7 @@ type ModifyAuditServiceRequest struct {
 	// Deprecated.
 	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitnil,omitempty" name:"AuditRuleFilters"`
 
-	// Rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.comom/document/api/236/101811?from_cn_redirect=1) API.
+	// Rule template ID, which can be obtained through the [DescribeAuditRuleTemplates](https://www.tencentcloud.com/document/api/236/101811?from_cn_redirect=1) API.
 	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil,omitempty" name:"RuleTemplateIds"`
 }
 

@@ -181,10 +181,10 @@ type ApiEnvironmentStrategy struct {
 }
 
 type ApiEnvironmentStrategyStatus struct {
-
+	// The quantity of rate limiting policies bound to APIs.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-
+	// API Binding Rate Limiting Policy List.
 	ApiEnvironmentStrategySet []*ApiEnvironmentStrategy `json:"ApiEnvironmentStrategySet,omitnil,omitempty" name:"ApiEnvironmentStrategySet"`
 }
 
@@ -1475,7 +1475,7 @@ type CreateApiKeyRequestParams struct {
 	// Custom key, which is required if `AccessKeyType` is `manual`. It can contain 10-50 letters, digits, and underscores.
 	AccessKeySecret *string `json:"AccessKeySecret,omitnil,omitempty" name:"AccessKeySecret"`
 
-
+	// Tag
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
@@ -1494,6 +1494,7 @@ type CreateApiKeyRequest struct {
 	// Custom key, which is required if `AccessKeyType` is `manual`. It can contain 10-50 letters, digits, and underscores.
 	AccessKeySecret *string `json:"AccessKeySecret,omitnil,omitempty" name:"AccessKeySecret"`
 
+	// Tag
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
@@ -6785,10 +6786,10 @@ type HealthCheckConf struct {
 }
 
 type IPStrategiesStatus struct {
-
+	// Number of policies.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-
+	// Policy List.
 	StrategySet []*IPStrategy `json:"StrategySet,omitnil,omitempty" name:"StrategySet"`
 }
 

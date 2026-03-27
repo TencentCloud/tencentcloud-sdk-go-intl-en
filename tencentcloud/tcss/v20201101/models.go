@@ -3079,13 +3079,13 @@ type ContainerInfo struct {
 	// Memory specification of the Pod
 	PodMem *int64 `json:"PodMem,omitnil,omitempty" name:"PodMem"`
 
-
+	// Cluster Name
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-
+	// Cluster ID
 	ClusterID *string `json:"ClusterID,omitnil,omitempty" name:"ClusterID"`
 
-
+	// pod uid
 	PodUid *string `json:"PodUid,omitnil,omitempty" name:"PodUid"`
 }
 
@@ -5409,18 +5409,20 @@ func (r *CreateProcessEventsExportJobResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateRefreshTaskRequestParams struct {
-
+	// Specify the cluster list. If empty, it indicates synchronization of all clusters.
 	ClusterIDs []*string `json:"ClusterIDs,omitnil,omitempty" name:"ClusterIDs"`
 
-
+	// Whether to synchronize only the list
 	IsSyncListOnly *bool `json:"IsSyncListOnly,omitnil,omitempty" name:"IsSyncListOnly"`
 }
 
 type CreateRefreshTaskRequest struct {
 	*tchttp.BaseRequest
 	
+	// Specify the cluster list. If empty, it indicates synchronization of all clusters.
 	ClusterIDs []*string `json:"ClusterIDs,omitnil,omitempty" name:"ClusterIDs"`
 
+	// Whether to synchronize only the list
 	IsSyncListOnly *bool `json:"IsSyncListOnly,omitnil,omitempty" name:"IsSyncListOnly"`
 }
 
@@ -11432,13 +11434,14 @@ func (r *DescribeAssetImageRegistryScanStatusOneKeyResponse) FromJsonString(s st
 
 // Predefined struct for user
 type DescribeAssetImageRegistrySummaryRequestParams struct {
-
+	// Filter Field
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribeAssetImageRegistrySummaryRequest struct {
 	*tchttp.BaseRequest
 	
+	// Filter Field
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -23562,7 +23565,7 @@ type DescribeVulRegistryImageListRequestParams struct {
 	// The number of results returned. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-
+	// Offset, defaults to 0.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Filter condition
@@ -23592,6 +23595,7 @@ type DescribeVulRegistryImageListRequest struct {
 	// The number of results returned. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
+	// Offset, defaults to 0.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Filter condition
@@ -24817,10 +24821,10 @@ type HostInfo struct {
 	// Cluster ID
 	ClusterID *string `json:"ClusterID,omitnil,omitempty" name:"ClusterID"`
 
-
+	// Cluster Name
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-
+	// Cluster Access Status
 	ClusterAccessedStatus *string `json:"ClusterAccessedStatus,omitnil,omitempty" name:"ClusterAccessedStatus"`
 }
 
@@ -25080,55 +25084,55 @@ type ImageRepoInfo struct {
 }
 
 type ImageRepoRegistryInfo struct {
-
+	// Repository id
 	RegistryId *uint64 `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
-
+	// Repository Name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-
+	// Repository Type, list: harbor, tcr
 	RegistryType *string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
-
+	// Repository url
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-
+	// Network Type, list: public
 	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
-
+	// Region, list: default
 	RegistryRegion *string `json:"RegistryRegion,omitnil,omitempty" name:"RegistryRegion"`
 
-
+	// Repository Version
 	RegistryVersion *string `json:"RegistryVersion,omitnil,omitempty" name:"RegistryVersion"`
 
-
+	// Repository connection error message (to be deprecated, use ConnDetectException instead)
 	ConnectMsg *string `json:"ConnectMsg,omitnil,omitempty" name:"ConnectMsg"`
 
-
+	// Connectivity Detection Method
 	ConnDetectType *string `json:"ConnDetectType,omitnil,omitempty" name:"ConnDetectType"`
 
-
+	// Connectivity Detection Host Count
 	ConnDetectHostCount *uint64 `json:"ConnDetectHostCount,omitnil,omitempty" name:"ConnDetectHostCount"`
 
-
+	// Connectivity Detection Details
 	ConnDetectDetail []*RegistryConnDetectResult `json:"ConnDetectDetail,omitnil,omitempty" name:"ConnDetectDetail"`
 
-
+	// instance_id in tcr
 	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
-
+	// Latest Successful Synchronization Time
 	LatestSyncTime *string `json:"LatestSyncTime,omitnil,omitempty" name:"LatestSyncTime"`
 
-
+	// Synchronization Status
 	SyncStatus *string `json:"SyncStatus,omitnil,omitempty" name:"SyncStatus"`
 
-
+	// Synchronization Failure Reason
 	SyncFailReason *string `json:"SyncFailReason,omitnil,omitempty" name:"SyncFailReason"`
 
-
+	// Synchronization Failure Solution
 	SyncSolution *string `json:"SyncSolution,omitnil,omitempty" name:"SyncSolution"`
 
-
+	// Synchronization Failure Message
 	SyncMessage *string `json:"SyncMessage,omitnil,omitempty" name:"SyncMessage"`
 }
 
@@ -28820,22 +28824,22 @@ type RegionInfo struct {
 }
 
 type RegistryConnDetectResult struct {
-
+	// Host quuid or backend for Connectivity Detection
 	Quuid *string `json:"Quuid,omitnil,omitempty" name:"Quuid"`
 
-
+	// Host uuid or backend for Connectivity Detection
 	Uuid *string `json:"Uuid,omitnil,omitempty" name:"Uuid"`
 
-
+	// Detection Result Status
 	ConnDetectStatus *string `json:"ConnDetectStatus,omitnil,omitempty" name:"ConnDetectStatus"`
 
-
+	// Detection Result Information
 	ConnDetectMessage *string `json:"ConnDetectMessage,omitnil,omitempty" name:"ConnDetectMessage"`
 
-
+	// Failure Resolution
 	Solution *string `json:"Solution,omitnil,omitempty" name:"Solution"`
 
-
+	// Failure Cause
 	FailReason *string `json:"FailReason,omitnil,omitempty" name:"FailReason"`
 }
 
@@ -29488,10 +29492,10 @@ type RunTimeEventBaseInfo struct {
 	// uuid
 	HostID *string `json:"HostID,omitnil,omitempty" name:"HostID"`
 
-
+	// Namespace
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-
+	// WorkloadType
 	WorkloadType *string `json:"WorkloadType,omitnil,omitempty" name:"WorkloadType"`
 }
 
@@ -30313,18 +30317,20 @@ func (r *SwitchImageAutoAuthorizedRuleResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SyncAssetImageRegistryAssetRequestParams struct {
-
+	// Whether to synchronize all image repositories
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
-
+	// Partial image repositories requiring synchronization
 	RegistryIds []*uint64 `json:"RegistryIds,omitnil,omitempty" name:"RegistryIds"`
 }
 
 type SyncAssetImageRegistryAssetRequest struct {
 	*tchttp.BaseRequest
 	
+	// Whether to synchronize all image repositories
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
+	// Partial image repositories requiring synchronization
 	RegistryIds []*uint64 `json:"RegistryIds,omitnil,omitempty" name:"RegistryIds"`
 }
 
@@ -30757,19 +30763,19 @@ type UpdateImageRegistryTimingScanTaskRequestParams struct {
 	// Whether to scan for the latest version
 	Latest *bool `json:"Latest,omitnil,omitempty" name:"Latest"`
 
-
+	// Whether running containers exist
 	ContainerRunning *bool `json:"ContainerRunning,omitnil,omitempty" name:"ContainerRunning"`
 
-
+	// Scan End Time
 	ScanEndTime *string `json:"ScanEndTime,omitnil,omitempty" name:"ScanEndTime"`
 
-
+	// Scan Scope: 0 All Images, 1 Custom Images, 2 Recommended Scan Images
 	ScanScope *uint64 `json:"ScanScope,omitnil,omitempty" name:"ScanScope"`
 
-
+	// Repository Type tcr,ccr,harbor
 	RegistryType []*string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
-
+	// Namespace
 	Namespace []*string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 }
 
@@ -30800,14 +30806,19 @@ type UpdateImageRegistryTimingScanTaskRequest struct {
 	// Whether to scan for the latest version
 	Latest *bool `json:"Latest,omitnil,omitempty" name:"Latest"`
 
+	// Whether running containers exist
 	ContainerRunning *bool `json:"ContainerRunning,omitnil,omitempty" name:"ContainerRunning"`
 
+	// Scan End Time
 	ScanEndTime *string `json:"ScanEndTime,omitnil,omitempty" name:"ScanEndTime"`
 
+	// Scan Scope: 0 All Images, 1 Custom Images, 2 Recommended Scan Images
 	ScanScope *uint64 `json:"ScanScope,omitnil,omitempty" name:"ScanScope"`
 
+	// Repository Type tcr,ccr,harbor
 	RegistryType []*string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
+	// Namespace
 	Namespace []*string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 }
 
@@ -31721,10 +31732,10 @@ type VulDefenceEventDetail struct {
 	// Cluster name
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-
+	// Namespace
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-
+	// Workload
 	WorkloadType *string `json:"WorkloadType,omitnil,omitempty" name:"WorkloadType"`
 }
 

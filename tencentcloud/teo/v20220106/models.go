@@ -1166,7 +1166,7 @@ type CreateDnsRecordRequestParams struct {
 	// Proxy mode. Valid values: `dns_only`, `cdn_only`, and `secure_cdn`.
 	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
-
+	// Time to Live Value
 	Ttl *int64 `json:"Ttl,omitnil,omitempty" name:"Ttl"`
 
 	// Priority
@@ -1191,6 +1191,7 @@ type CreateDnsRecordRequest struct {
 	// Proxy mode. Valid values: `dns_only`, `cdn_only`, and `secure_cdn`.
 	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
+	// Time to Live Value
 	Ttl *int64 `json:"Ttl,omitnil,omitempty" name:"Ttl"`
 
 	// Priority
@@ -8576,7 +8577,7 @@ type ModifyDnsRecordRequestParams struct {
 	// Record content
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
-
+	// Time to Live Value
 	Ttl *int64 `json:"Ttl,omitnil,omitempty" name:"Ttl"`
 
 	// Priority
@@ -8604,6 +8605,7 @@ type ModifyDnsRecordRequest struct {
 	// Record content
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
+	// Time to Live Value
 	Ttl *int64 `json:"Ttl,omitnil,omitempty" name:"Ttl"`
 
 	// Priority
@@ -9728,7 +9730,7 @@ type OriginRecord struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	PrivateParameter []*OriginRecordPrivateParameter `json:"PrivateParameter,omitnil,omitempty" name:"PrivateParameter"`
 
-
+	// When the origin site configuration type Type=proto, it indicates the client request protocol, values: http/https
 	Proto *string `json:"Proto,omitnil,omitempty" name:"Proto"`
 }
 
@@ -9998,7 +10000,11 @@ type Resource struct {
 	// ID of the plan
 	PlanId *string `json:"PlanId,omitnil,omitempty" name:"PlanId"`
 
-
+	// Region, with values:
+	// 
+	// <li>mainland: Chinese mainland;</li>
+	// 
+	// <li>overseas: Overseas.</li>
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 }
 
@@ -10570,7 +10576,13 @@ type Zone struct {
 	// Site modification date
 	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
 
-
+	// Site access region, with values:
+	// 
+	// <li> global: Global;</li>
+	// 
+	// <li> mainland: Chinese mainland;</li>
+	// 
+	// <li> overseas: Overseas regions.</li>
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 }
 

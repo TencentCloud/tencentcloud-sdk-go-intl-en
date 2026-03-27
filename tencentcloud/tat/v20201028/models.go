@@ -45,7 +45,7 @@ type AutomationAgentInfo struct {
 type CancelInvocationRequestParams struct {
 	// Execution activity ID.
 	// 
-	// Call the [DescribeInvocations](https://www.tencentcloud.comom/document/api/1340/52679?from_cn_redirect=1) api to query execution.
+	// Call the [DescribeInvocations](https://www.tencentcloud.com/document/api/1340/52679?from_cn_redirect=1) api to query execution.
 	InvocationId *string `json:"InvocationId,omitnil,omitempty" name:"InvocationId"`
 
 	// Instance ID list. upper limit: 100.
@@ -62,7 +62,7 @@ type CancelInvocationRequest struct {
 	
 	// Execution activity ID.
 	// 
-	// Call the [DescribeInvocations](https://www.tencentcloud.comom/document/api/1340/52679?from_cn_redirect=1) api to query execution.
+	// Call the [DescribeInvocations](https://www.tencentcloud.com/document/api/1340/52679?from_cn_redirect=1) api to query execution.
 	InvocationId *string `json:"InvocationId,omitnil,omitempty" name:"InvocationId"`
 
 	// Instance ID list. upper limit: 100.
@@ -385,14 +385,14 @@ type CreateInvokerRequestParams struct {
 
 	// Remote command ID.
 	// 
-	// Call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+	// Call the [DescribeCommands](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// Trigger associated instance ID. list cap 100.
 	// 
 	// You can get the instance ID through the query instance interface of corresponding cloud services. currently supports instance types: CVM, Lighthouse, and TAT managed instances.
 	// 
-	// The instance needs to have the TAT client installed, and the client must be in Online status. you can query client status via the [DescribeAutomationAgentStatus](https://www.tencentcloud.comom/document/api/1340/52682?from_cn_redirect=1) api.
+	// The instance needs to have the TAT client installed, and the client must be in Online status. you can query client status via the [DescribeAutomationAgentStatus](https://www.tencentcloud.com/document/api/1340/52682?from_cn_redirect=1) api.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Command execution user. length not exceeding 256 characters.
@@ -400,7 +400,7 @@ type CreateInvokerRequestParams struct {
 
 	// Command custom parameter. field type is JSON encode string.
 	// 
-	// This parameter can be set only when EnableParameter of the command specified by CommandId is true. obtain the EnableParameter settings through the [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+	// This parameter can be set only when EnableParameter of the command specified by CommandId is true. obtain the EnableParameter settings through the [DescribeCommands (query command details)](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api.
 	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// Recurring invoker settings.
@@ -427,14 +427,14 @@ type CreateInvokerRequest struct {
 
 	// Remote command ID.
 	// 
-	// Call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+	// Call the [DescribeCommands](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// Trigger associated instance ID. list cap 100.
 	// 
 	// You can get the instance ID through the query instance interface of corresponding cloud services. currently supports instance types: CVM, Lighthouse, and TAT managed instances.
 	// 
-	// The instance needs to have the TAT client installed, and the client must be in Online status. you can query client status via the [DescribeAutomationAgentStatus](https://www.tencentcloud.comom/document/api/1340/52682?from_cn_redirect=1) api.
+	// The instance needs to have the TAT client installed, and the client must be in Online status. you can query client status via the [DescribeAutomationAgentStatus](https://www.tencentcloud.com/document/api/1340/52682?from_cn_redirect=1) api.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Command execution user. length not exceeding 256 characters.
@@ -442,7 +442,7 @@ type CreateInvokerRequest struct {
 
 	// Command custom parameter. field type is JSON encode string.
 	// 
-	// This parameter can be set only when EnableParameter of the command specified by CommandId is true. obtain the EnableParameter settings through the [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+	// This parameter can be set only when EnableParameter of the command specified by CommandId is true. obtain the EnableParameter settings through the [DescribeCommands (query command details)](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api.
 	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// Recurring invoker settings.
@@ -620,14 +620,14 @@ type DefaultParameterConf struct {
 
 // Predefined struct for user
 type DeleteCommandRequestParams struct {
-	// Command ID to be deleted. call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+	// Command ID to be deleted. call the [DescribeCommands](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 }
 
 type DeleteCommandRequest struct {
 	*tchttp.BaseRequest
 	
-	// Command ID to be deleted. call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+	// Command ID to be deleted. call the [DescribeCommands](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 }
 
@@ -674,14 +674,14 @@ func (r *DeleteCommandResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteCommandsRequestParams struct {
-	// Command ID to be deleted. call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+	// Command ID to be deleted. call the [DescribeCommands](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	CommandIds []*string `json:"CommandIds,omitnil,omitempty" name:"CommandIds"`
 }
 
 type DeleteCommandsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Command ID to be deleted. call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+	// Command ID to be deleted. call the [DescribeCommands](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	CommandIds []*string `json:"CommandIds,omitnil,omitempty" name:"CommandIds"`
 }
 
@@ -730,7 +730,7 @@ func (r *DeleteCommandsResponse) FromJsonString(s string) error {
 type DeleteInvokerRequestParams struct {
 	// Pending deletion executor ID.
 	// 
-	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
+	// Call the [DescribeInvokers](https://www.tencentcloud.com/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 }
 
@@ -739,7 +739,7 @@ type DeleteInvokerRequest struct {
 	
 	// Pending deletion executor ID.
 	// 
-	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
+	// Call the [DescribeInvokers](https://www.tencentcloud.com/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 }
 
@@ -788,7 +788,7 @@ func (r *DeleteInvokerResponse) FromJsonString(s string) error {
 type DeleteRegisterCodesRequestParams struct {
 	// Registration code ID list. limits the input registration code ID quantity to more than 0 and less than 100.
 	// 
-	// Call the [DescribeRegisterCodes](https://www.tencentcloud.comom/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
+	// Call the [DescribeRegisterCodes](https://www.tencentcloud.com/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
 	RegisterCodeIds []*string `json:"RegisterCodeIds,omitnil,omitempty" name:"RegisterCodeIds"`
 }
 
@@ -797,7 +797,7 @@ type DeleteRegisterCodesRequest struct {
 	
 	// Registration code ID list. limits the input registration code ID quantity to more than 0 and less than 100.
 	// 
-	// Call the [DescribeRegisterCodes](https://www.tencentcloud.comom/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
+	// Call the [DescribeRegisterCodes](https://www.tencentcloud.com/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
 	RegisterCodeIds []*string `json:"RegisterCodeIds,omitnil,omitempty" name:"RegisterCodeIds"`
 }
 
@@ -846,7 +846,7 @@ func (r *DeleteRegisterCodesResponse) FromJsonString(s string) error {
 type DeleteRegisterInstanceRequestParams struct {
 	// Managed instance ID.
 	// 
-	// Call the [DescribeRegisterInstances](https://www.tencentcloud.comom/document/api/1340/96924?from_cn_redirect=1) api to query managed instances.
+	// Call the [DescribeRegisterInstances](https://www.tencentcloud.com/document/api/1340/96924?from_cn_redirect=1) api to query managed instances.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -855,7 +855,7 @@ type DeleteRegisterInstanceRequest struct {
 	
 	// Managed instance ID.
 	// 
-	// Call the [DescribeRegisterInstances](https://www.tencentcloud.comom/document/api/1340/96924?from_cn_redirect=1) api to query managed instances.
+	// Call the [DescribeRegisterInstances](https://www.tencentcloud.com/document/api/1340/96924?from_cn_redirect=1) api to query managed instances.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -1011,7 +1011,7 @@ type DescribeCommandsRequestParams struct {
 	// - command-id - String - required: no - (filter condition) filter by the command id.
 	// - command-name - String - required: no - (filter condition) filter by the command name.
 	// -command-type - String - required: no - (filtering conditions) filters by command type. valid values: SHELL, POWERSHELL, BAT.
-	// -scene-id - String - required: no - (filter condition) filter by scenario id. obtain scenario id through the [DescribeScenes (query scenario)](https://www.tencentcloud.comom/document/api/1340/109968?from_cn_redirect=1) api.
+	// -scene-id - String - required: no - (filter condition) filter by scenario id. obtain scenario id through the [DescribeScenes (query scenario)](https://www.tencentcloud.com/document/api/1340/109968?from_cn_redirect=1) api.
 	// -created-by - String - required: no - (filter condition) filter by command creator, value is TAT or USER. TAT represents public command, USER represents USER created command.
 	// - tag-key - String - required: no - (filter condition) filter by the tag key.
 	// - tag-value - String - required: no - (filter condition) filter by the tag value.
@@ -1038,7 +1038,7 @@ type DescribeCommandsRequest struct {
 	// - command-id - String - required: no - (filter condition) filter by the command id.
 	// - command-name - String - required: no - (filter condition) filter by the command name.
 	// -command-type - String - required: no - (filtering conditions) filters by command type. valid values: SHELL, POWERSHELL, BAT.
-	// -scene-id - String - required: no - (filter condition) filter by scenario id. obtain scenario id through the [DescribeScenes (query scenario)](https://www.tencentcloud.comom/document/api/1340/109968?from_cn_redirect=1) api.
+	// -scene-id - String - required: no - (filter condition) filter by scenario id. obtain scenario id through the [DescribeScenes (query scenario)](https://www.tencentcloud.com/document/api/1340/109968?from_cn_redirect=1) api.
 	// -created-by - String - required: no - (filter condition) filter by command creator, value is TAT or USER. TAT represents public command, USER represents USER created command.
 	// - tag-key - String - required: no - (filter condition) filter by the tag key.
 	// - tag-value - String - required: no - (filter condition) filter by the tag value.
@@ -1112,9 +1112,9 @@ type DescribeInvocationTasksRequestParams struct {
 	// Filter conditions.<br>.
 	// 
 	// -invocation-task-id - String - required: no - (filter condition) filter by executing task id.
-	// - invocation-id - String - required: no - (filter condition) filter by the execution activity id. you can obtain it through the [DescribeInvocations](https://www.tencentcloud.comom/document/api/1340/52679?from_cn_redirect=1) api.
+	// - invocation-id - String - required: no - (filter condition) filter by the execution activity id. you can obtain it through the [DescribeInvocations](https://www.tencentcloud.com/document/api/1340/52679?from_cn_redirect=1) api.
 	// -instance-id - String - required: no - (filtering conditions) filter by instance id. you can get the instance id through the query instance interface of corresponding cloud services. currently supported instance types: CVM, Lighthouse, and managed instances of TAT.
-	// -command-id - String - required: no - (filter criteria) filter by command id. obtain through the api [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1).
+	// -command-id - String - required: no - (filter criteria) filter by command id. obtain through the api [DescribeCommands (query command details)](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1).
 	// 
 	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `InvocationTaskIds` and `Filters` parameters cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
@@ -1143,9 +1143,9 @@ type DescribeInvocationTasksRequest struct {
 	// Filter conditions.<br>.
 	// 
 	// -invocation-task-id - String - required: no - (filter condition) filter by executing task id.
-	// - invocation-id - String - required: no - (filter condition) filter by the execution activity id. you can obtain it through the [DescribeInvocations](https://www.tencentcloud.comom/document/api/1340/52679?from_cn_redirect=1) api.
+	// - invocation-id - String - required: no - (filter condition) filter by the execution activity id. you can obtain it through the [DescribeInvocations](https://www.tencentcloud.com/document/api/1340/52679?from_cn_redirect=1) api.
 	// -instance-id - String - required: no - (filtering conditions) filter by instance id. you can get the instance id through the query instance interface of corresponding cloud services. currently supported instance types: CVM, Lighthouse, and managed instances of TAT.
-	// -command-id - String - required: no - (filter criteria) filter by command id. obtain through the api [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1).
+	// -command-id - String - required: no - (filter criteria) filter by command id. obtain through the api [DescribeCommands (query command details)](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1).
 	// 
 	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `InvocationTaskIds` and `Filters` parameters cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
@@ -1313,7 +1313,7 @@ func (r *DescribeInvocationsResponse) FromJsonString(s string) error {
 type DescribeInvokerRecordsRequestParams struct {
 	// Executor ID list. the list has a cap of 100.
 	// 
-	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
+	// Call the [DescribeInvokers](https://www.tencentcloud.com/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerIds []*string `json:"InvokerIds,omitnil,omitempty" name:"InvokerIds"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
@@ -1328,7 +1328,7 @@ type DescribeInvokerRecordsRequest struct {
 	
 	// Executor ID list. the list has a cap of 100.
 	// 
-	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
+	// Call the [DescribeInvokers](https://www.tencentcloud.com/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerIds []*string `json:"InvokerIds,omitnil,omitempty" name:"InvokerIds"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
@@ -1399,7 +1399,7 @@ type DescribeInvokersRequestParams struct {
 	// Filter criteria:.
 	// 
 	// - invoker-id - String - required: no - (filter condition) filter by executor id.
-	// -command-id - String - required: no - (filter condition) filters commands by id. you can obtain the id through the [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+	// -command-id - String - required: no - (filter condition) filters commands by id. you can obtain the id through the [DescribeCommands (query command details)](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api.
 	// - invoker-type - String - required: no - (filter condition) filter by the executor type. currently only support SCHEDULE.
 	// 
 	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `InvokerIds` and `Filters` parameters cannot be specified at the same time.
@@ -1425,7 +1425,7 @@ type DescribeInvokersRequest struct {
 	// Filter criteria:.
 	// 
 	// - invoker-id - String - required: no - (filter condition) filter by executor id.
-	// -command-id - String - required: no - (filter condition) filters commands by id. you can obtain the id through the [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+	// -command-id - String - required: no - (filter condition) filters commands by id. you can obtain the id through the [DescribeCommands (query command details)](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api.
 	// - invoker-type - String - required: no - (filter condition) filter by the executor type. currently only support SCHEDULE.
 	// 
 	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `InvokerIds` and `Filters` parameters cannot be specified at the same time.
@@ -1732,7 +1732,7 @@ type DescribeRegisterInstancesRequestParams struct {
 	// 
 	// - register-code-id
 	// 
-	// Filter by [managed instance registration code ID]. call the [DescribeRegisterCodes](https://www.tencentcloud.comom/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
+	// Filter by [managed instance registration code ID]. call the [DescribeRegisterCodes](https://www.tencentcloud.com/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
 	// Type: String.
 	// Required: No
 	// 
@@ -1810,7 +1810,7 @@ type DescribeRegisterInstancesRequest struct {
 	// 
 	// - register-code-id
 	// 
-	// Filter by [managed instance registration code ID]. call the [DescribeRegisterCodes](https://www.tencentcloud.comom/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
+	// Filter by [managed instance registration code ID]. call the [DescribeRegisterCodes](https://www.tencentcloud.com/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
 	// Type: String.
 	// Required: No
 	// 
@@ -1917,7 +1917,7 @@ type DescribeScenesRequestParams struct {
 	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `SceneIds` and `Filters` parameters cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Number of returned results, defaults to 20 with a maximum value of 100. for further introduction about `Limit`, see relevant sections in the API [overview](https://www.tencentcloud.comom/document/API/213/15688?from_cn_redirect=1).
+	// Number of returned results, defaults to 20 with a maximum value of 100. for further introduction about `Limit`, see relevant sections in the API [overview](https://www.tencentcloud.com/document/API/213/15688?from_cn_redirect=1).
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. The default value is `0`. For more information on `Offset`, see the relevant section in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
@@ -1943,7 +1943,7 @@ type DescribeScenesRequest struct {
 	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `SceneIds` and `Filters` parameters cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Number of returned results, defaults to 20 with a maximum value of 100. for further introduction about `Limit`, see relevant sections in the API [overview](https://www.tencentcloud.comom/document/API/213/15688?from_cn_redirect=1).
+	// Number of returned results, defaults to 20 with a maximum value of 100. for further introduction about `Limit`, see relevant sections in the API [overview](https://www.tencentcloud.com/document/API/213/15688?from_cn_redirect=1).
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. The default value is `0`. For more information on `Offset`, see the relevant section in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
@@ -2004,7 +2004,7 @@ func (r *DescribeScenesResponse) FromJsonString(s string) error {
 type DisableInvokerRequestParams struct {
 	// ID of the executor to terminate.
 	// 
-	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
+	// Call the [DescribeInvokers](https://www.tencentcloud.com/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 }
 
@@ -2013,7 +2013,7 @@ type DisableInvokerRequest struct {
 	
 	// ID of the executor to terminate.
 	// 
-	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
+	// Call the [DescribeInvokers](https://www.tencentcloud.com/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 }
 
@@ -2062,7 +2062,7 @@ func (r *DisableInvokerResponse) FromJsonString(s string) error {
 type DisableRegisterCodesRequestParams struct {
 	// Registration code ID.
 	// 
-	// Call the [DescribeRegisterCodes](https://www.tencentcloud.comom/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
+	// Call the [DescribeRegisterCodes](https://www.tencentcloud.com/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
 	RegisterCodeIds []*string `json:"RegisterCodeIds,omitnil,omitempty" name:"RegisterCodeIds"`
 }
 
@@ -2071,7 +2071,7 @@ type DisableRegisterCodesRequest struct {
 	
 	// Registration code ID.
 	// 
-	// Call the [DescribeRegisterCodes](https://www.tencentcloud.comom/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
+	// Call the [DescribeRegisterCodes](https://www.tencentcloud.com/document/api/1340/96925?from_cn_redirect=1) api to query registration codes.
 	RegisterCodeIds []*string `json:"RegisterCodeIds,omitnil,omitempty" name:"RegisterCodeIds"`
 }
 
@@ -2120,7 +2120,7 @@ func (r *DisableRegisterCodesResponse) FromJsonString(s string) error {
 type EnableInvokerRequestParams struct {
 	// Executor ID to be enabled.
 	// 
-	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
+	// Call the [DescribeInvokers](https://www.tencentcloud.com/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 }
 
@@ -2129,7 +2129,7 @@ type EnableInvokerRequest struct {
 	
 	// Executor ID to be enabled.
 	// 
-	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
+	// Call the [DescribeInvokers](https://www.tencentcloud.com/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 }
 
@@ -2367,7 +2367,7 @@ type InvocationTaskBasicInfo struct {
 
 // Predefined struct for user
 type InvokeCommandRequestParams struct {
-	// Pending trigger command ID. call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+	// Pending trigger command ID. call the [DescribeCommands](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// Instance ID list for the command to be executed, with a cap of 200.
@@ -2380,7 +2380,7 @@ type InvokeCommandRequestParams struct {
 
 	// Custom parameter of Command. field type is json encoded string. for example: {"varA": "222"}.
 	// The key is the custom parameter name, and the value is the default. both kv are string-type.
-	// This parameter can be set only when the EnableParameter of the command is true. you can obtain the EnableParameter settings through the [DescribeCommands (detailed command information)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+	// This parameter can be set only when the EnableParameter of the command is true. you can obtain the EnableParameter settings through the [DescribeCommands (detailed command information)](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api.
 	// If the parameter value is not provided, the DefaultParameters or DefaultParameterConfs of Command will be used to replace it.
 	// Custom parameters can be up to 20.
 	// The custom parameter name must meet the following standard: the number of characters has a cap of 64, and the optional range is [a-zA-Z0-9-_].
@@ -2409,7 +2409,7 @@ type InvokeCommandRequestParams struct {
 type InvokeCommandRequest struct {
 	*tchttp.BaseRequest
 	
-	// Pending trigger command ID. call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+	// Pending trigger command ID. call the [DescribeCommands](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// Instance ID list for the command to be executed, with a cap of 200.
@@ -2422,7 +2422,7 @@ type InvokeCommandRequest struct {
 
 	// Custom parameter of Command. field type is json encoded string. for example: {"varA": "222"}.
 	// The key is the custom parameter name, and the value is the default. both kv are string-type.
-	// This parameter can be set only when the EnableParameter of the command is true. you can obtain the EnableParameter settings through the [DescribeCommands (detailed command information)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+	// This parameter can be set only when the EnableParameter of the command is true. you can obtain the EnableParameter settings through the [DescribeCommands (detailed command information)](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api.
 	// If the parameter value is not provided, the DefaultParameters or DefaultParameterConfs of Command will be used to replace it.
 	// Custom parameters can be up to 20.
 	// The custom parameter name must meet the following standard: the number of characters has a cap of 64, and the optional range is [a-zA-Z0-9-_].
@@ -2563,7 +2563,7 @@ type InvokerRecord struct {
 
 // Predefined struct for user
 type ModifyCommandRequestParams struct {
-	// <p>Command ID. call the <a href="https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1">DescribeCommands</a> api to query command details.</p>.
+	// <p>Command ID. call the <a href="https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1">DescribeCommands</a> api to query command details.</p>.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// <p>Command name. name only supports chinese, english, digits, underscore, separator "-", and decimal point. the maximum length cannot exceed 60 bytes.</p>.
@@ -2584,10 +2584,10 @@ type ModifyCommandRequestParams struct {
 	// <p>Command timeout time.</p><p>value range: [1, 86400].</p><p>unit: seconds.</p><p>default value: 60.</p><p>when specifying the OutputCOSBucketUrl parameter, the timeout period includes the time taken to upload command output to COS.</p>.
 	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
-	// <p>The default value of custom parameters when the custom parameter feature is enabled. the field type is a json-encoded string, for example: {"varA": "222"}.<br>parameters must not be specified simultaneously for <code>DefaultParameters</code> and <code>DefaultParameterConfs</code>.<br>a comprehensive modification is applied, meaning all new default values must be provided when modifying.<br>this parameter can be modified only when EnableParameter of the command is true. obtain the EnableParameter settings of the command through the <a href="https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1">DescribeCommands (query command details)</a> api.<br>the key is the custom parameter name, and the value is the default value of this parameter. both key and value are string-type.<br>there is an upper limit of 20 custom parameters.<br>custom parameter names must meet the following requirements: the upper limit of character quantity is 64, and the optional range is [a-zA-Z0-9-_].</p>.
+	// <p>The default value of custom parameters when the custom parameter feature is enabled. the field type is a json-encoded string, for example: {"varA": "222"}.<br>parameters must not be specified simultaneously for <code>DefaultParameters</code> and <code>DefaultParameterConfs</code>.<br>a comprehensive modification is applied, meaning all new default values must be provided when modifying.<br>this parameter can be modified only when EnableParameter of the command is true. obtain the EnableParameter settings of the command through the <a href="https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1">DescribeCommands (query command details)</a> api.<br>the key is the custom parameter name, and the value is the default value of this parameter. both key and value are string-type.<br>there is an upper limit of 20 custom parameters.<br>custom parameter names must meet the following requirements: the upper limit of character quantity is 64, and the optional range is [a-zA-Z0-9-_].</p>.
 	DefaultParameters *string `json:"DefaultParameters,omitnil,omitempty" name:"DefaultParameters"`
 
-	// <p>Custom parameter array. if no parameter value is provided when invoking the command, the default value here will be used to replace it.<br>parameters do not support specifying both <code>DefaultParameters</code> and <code>DefaultParameterConfs</code>.<br>this parameter can be modified only when EnableParameter of the command is true. obtain the EnableParameter settings through the <a href="https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1">DescribeCommands (query command details)</a> api.<br>up to 20 custom parameters are allowed.</p>.
+	// <p>Custom parameter array. if no parameter value is provided when invoking the command, the default value here will be used to replace it.<br>parameters do not support specifying both <code>DefaultParameters</code> and <code>DefaultParameterConfs</code>.<br>this parameter can be modified only when EnableParameter of the command is true. obtain the EnableParameter settings through the <a href="https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1">DescribeCommands (query command details)</a> api.<br>up to 20 custom parameters are allowed.</p>.
 	DefaultParameterConfs []*DefaultParameterConf `json:"DefaultParameterConfs,omitnil,omitempty" name:"DefaultParameterConfs"`
 
 	// <p>The username to run commands in a CVM or Lighthouse instance.<br>using minimum permission to execute commands is the best practice for permission management. we recommend running cloud assistant commands as a regular user identity.</p>.
@@ -2603,7 +2603,7 @@ type ModifyCommandRequestParams struct {
 type ModifyCommandRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Command ID. call the <a href="https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1">DescribeCommands</a> api to query command details.</p>.
+	// <p>Command ID. call the <a href="https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1">DescribeCommands</a> api to query command details.</p>.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// <p>Command name. name only supports chinese, english, digits, underscore, separator "-", and decimal point. the maximum length cannot exceed 60 bytes.</p>.
@@ -2624,10 +2624,10 @@ type ModifyCommandRequest struct {
 	// <p>Command timeout time.</p><p>value range: [1, 86400].</p><p>unit: seconds.</p><p>default value: 60.</p><p>when specifying the OutputCOSBucketUrl parameter, the timeout period includes the time taken to upload command output to COS.</p>.
 	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
-	// <p>The default value of custom parameters when the custom parameter feature is enabled. the field type is a json-encoded string, for example: {"varA": "222"}.<br>parameters must not be specified simultaneously for <code>DefaultParameters</code> and <code>DefaultParameterConfs</code>.<br>a comprehensive modification is applied, meaning all new default values must be provided when modifying.<br>this parameter can be modified only when EnableParameter of the command is true. obtain the EnableParameter settings of the command through the <a href="https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1">DescribeCommands (query command details)</a> api.<br>the key is the custom parameter name, and the value is the default value of this parameter. both key and value are string-type.<br>there is an upper limit of 20 custom parameters.<br>custom parameter names must meet the following requirements: the upper limit of character quantity is 64, and the optional range is [a-zA-Z0-9-_].</p>.
+	// <p>The default value of custom parameters when the custom parameter feature is enabled. the field type is a json-encoded string, for example: {"varA": "222"}.<br>parameters must not be specified simultaneously for <code>DefaultParameters</code> and <code>DefaultParameterConfs</code>.<br>a comprehensive modification is applied, meaning all new default values must be provided when modifying.<br>this parameter can be modified only when EnableParameter of the command is true. obtain the EnableParameter settings of the command through the <a href="https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1">DescribeCommands (query command details)</a> api.<br>the key is the custom parameter name, and the value is the default value of this parameter. both key and value are string-type.<br>there is an upper limit of 20 custom parameters.<br>custom parameter names must meet the following requirements: the upper limit of character quantity is 64, and the optional range is [a-zA-Z0-9-_].</p>.
 	DefaultParameters *string `json:"DefaultParameters,omitnil,omitempty" name:"DefaultParameters"`
 
-	// <p>Custom parameter array. if no parameter value is provided when invoking the command, the default value here will be used to replace it.<br>parameters do not support specifying both <code>DefaultParameters</code> and <code>DefaultParameterConfs</code>.<br>this parameter can be modified only when EnableParameter of the command is true. obtain the EnableParameter settings through the <a href="https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1">DescribeCommands (query command details)</a> api.<br>up to 20 custom parameters are allowed.</p>.
+	// <p>Custom parameter array. if no parameter value is provided when invoking the command, the default value here will be used to replace it.<br>parameters do not support specifying both <code>DefaultParameters</code> and <code>DefaultParameterConfs</code>.<br>this parameter can be modified only when EnableParameter of the command is true. obtain the EnableParameter settings through the <a href="https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1">DescribeCommands (query command details)</a> api.<br>up to 20 custom parameters are allowed.</p>.
 	DefaultParameterConfs []*DefaultParameterConf `json:"DefaultParameterConfs,omitnil,omitempty" name:"DefaultParameterConfs"`
 
 	// <p>The username to run commands in a CVM or Lighthouse instance.<br>using minimum permission to execute commands is the best practice for permission management. we recommend running cloud assistant commands as a regular user identity.</p>.
@@ -2696,7 +2696,7 @@ func (r *ModifyCommandResponse) FromJsonString(s string) error {
 type ModifyInvokerRequestParams struct {
 	// Executor ID to be modified.
 	// 
-	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
+	// Call the [DescribeInvokers](https://www.tencentcloud.com/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 
 	// Executor name to be modified. length not exceeding 120 characters.
@@ -2711,7 +2711,7 @@ type ModifyInvokerRequestParams struct {
 
 	// Command ID to be modified.
 	// 
-	// Call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+	// Call the [DescribeCommands](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// Username to be modified. length not exceeding 256 characters.
@@ -2719,14 +2719,14 @@ type ModifyInvokerRequestParams struct {
 
 	// Custom parameters to be modified. field type is JSON encode string.
 	// 
-	// This parameter can be set only when EnableParameter of the command specified by CommandId is true. obtain the EnableParameter settings through the [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+	// This parameter can be set only when EnableParameter of the command specified by CommandId is true. obtain the EnableParameter settings through the [DescribeCommands (query command details)](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api.
 	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// List of instance ids to be modified. list length limit 100.
 	// 
 	// You can get the instance ID through the query instance interface of corresponding cloud services. currently supports instance types: CVM, Lighthouse, and TAT managed instances.
 	// 
-	// The instance needs to have the TAT client installed, and the client must be in Online status. you can query client status via the [DescribeAutomationAgentStatus](https://www.tencentcloud.comom/document/api/1340/52682?from_cn_redirect=1) api.
+	// The instance needs to have the TAT client installed, and the client must be in Online status. you can query client status via the [DescribeAutomationAgentStatus](https://www.tencentcloud.com/document/api/1340/52682?from_cn_redirect=1) api.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Recurring invoker settings to be modified.
@@ -2740,7 +2740,7 @@ type ModifyInvokerRequest struct {
 	
 	// Executor ID to be modified.
 	// 
-	// Call the [DescribeInvokers](https://www.tencentcloud.comom/document/api/1340/61759?from_cn_redirect=1) api to query execution.
+	// Call the [DescribeInvokers](https://www.tencentcloud.com/document/api/1340/61759?from_cn_redirect=1) api to query execution.
 	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 
 	// Executor name to be modified. length not exceeding 120 characters.
@@ -2755,7 +2755,7 @@ type ModifyInvokerRequest struct {
 
 	// Command ID to be modified.
 	// 
-	// Call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+	// Call the [DescribeCommands](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// Username to be modified. length not exceeding 256 characters.
@@ -2763,14 +2763,14 @@ type ModifyInvokerRequest struct {
 
 	// Custom parameters to be modified. field type is JSON encode string.
 	// 
-	// This parameter can be set only when EnableParameter of the command specified by CommandId is true. obtain the EnableParameter settings through the [DescribeCommands (query command details)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+	// This parameter can be set only when EnableParameter of the command specified by CommandId is true. obtain the EnableParameter settings through the [DescribeCommands (query command details)](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api.
 	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// List of instance ids to be modified. list length limit 100.
 	// 
 	// You can get the instance ID through the query instance interface of corresponding cloud services. currently supports instance types: CVM, Lighthouse, and TAT managed instances.
 	// 
-	// The instance needs to have the TAT client installed, and the client must be in Online status. you can query client status via the [DescribeAutomationAgentStatus](https://www.tencentcloud.comom/document/api/1340/52682?from_cn_redirect=1) api.
+	// The instance needs to have the TAT client installed, and the client must be in Online status. you can query client status via the [DescribeAutomationAgentStatus](https://www.tencentcloud.com/document/api/1340/52682?from_cn_redirect=1) api.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Recurring invoker settings to be modified.
@@ -2831,7 +2831,7 @@ func (r *ModifyInvokerResponse) FromJsonString(s string) error {
 type ModifyRegisterInstanceRequestParams struct {
 	// Managed instance ID.
 	// 
-	// Call the [DescribeRegisterInstances](https://www.tencentcloud.comom/document/api/1340/96924?from_cn_redirect=1) api to query managed instances.
+	// Call the [DescribeRegisterInstances](https://www.tencentcloud.com/document/api/1340/96924?from_cn_redirect=1) api to query managed instances.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance name. valid length is 1–60 characters.
@@ -2843,7 +2843,7 @@ type ModifyRegisterInstanceRequest struct {
 	
 	// Managed instance ID.
 	// 
-	// Call the [DescribeRegisterInstances](https://www.tencentcloud.comom/document/api/1340/96924?from_cn_redirect=1) api to query managed instances.
+	// Call the [DescribeRegisterInstances](https://www.tencentcloud.com/document/api/1340/96924?from_cn_redirect=1) api to query managed instances.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance name. valid length is 1–60 characters.
@@ -2895,7 +2895,7 @@ func (r *ModifyRegisterInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type PreviewReplacedCommandContentRequestParams struct {
 	// The preview uses custom parameters. field type is json encoded string, for example: {"varA": "222"}.
-	// This parameter can be set only when the EnableParameter of the command is true. you can obtain the EnableParameter settings through the [DescribeCommands (detailed command information)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+	// This parameter can be set only when the EnableParameter of the command is true. you can obtain the EnableParameter settings through the [DescribeCommands (detailed command information)](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api.
 	// If DefaultParameters or DefaultParameterConfs has set, it will overlay with Parameters and prioritize the value of Parameters.
 	// 
 	// key specifies the custom parameter name, and value specifies the parameter. both kv are string-type.
@@ -2905,7 +2905,7 @@ type PreviewReplacedCommandContentRequestParams struct {
 	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// Perform the replace preview command.
-	// Call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+	// Call the [DescribeCommands](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	// CommandId and Content, you must provide one and can only provide one.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
@@ -2918,7 +2918,7 @@ type PreviewReplacedCommandContentRequest struct {
 	*tchttp.BaseRequest
 	
 	// The preview uses custom parameters. field type is json encoded string, for example: {"varA": "222"}.
-	// This parameter can be set only when the EnableParameter of the command is true. you can obtain the EnableParameter settings through the [DescribeCommands (detailed command information)](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api.
+	// This parameter can be set only when the EnableParameter of the command is true. you can obtain the EnableParameter settings through the [DescribeCommands (detailed command information)](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api.
 	// If DefaultParameters or DefaultParameterConfs has set, it will overlay with Parameters and prioritize the value of Parameters.
 	// 
 	// key specifies the custom parameter name, and value specifies the parameter. both kv are string-type.
@@ -2928,7 +2928,7 @@ type PreviewReplacedCommandContentRequest struct {
 	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// Perform the replace preview command.
-	// Call the [DescribeCommands](https://www.tencentcloud.comom/document/api/1340/52681?from_cn_redirect=1) api to query command details.
+	// Call the [DescribeCommands](https://www.tencentcloud.com/document/api/1340/52681?from_cn_redirect=1) api to query command details.
 	// CommandId and Content, you must provide one and can only provide one.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 

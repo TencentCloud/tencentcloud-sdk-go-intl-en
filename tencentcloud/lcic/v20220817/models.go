@@ -4513,37 +4513,37 @@ type RoomItem struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	EnableDirectControl *uint64 `json:"EnableDirectControl,omitnil,omitempty" name:"EnableDirectControl"`
 
-
+	// Enable Focus Mode. 0: View all participants (default) 1: View only teacher and TA
 	InteractionMode *int64 `json:"InteractionMode,omitnil,omitempty" name:"InteractionMode"`
 
-
+	// Landscape/Portrait. 0: Landscape broadcast (default); 1: Portrait broadcast. Currently supported only for video-only type on mobile devices.
 	VideoOrientation *int64 `json:"VideoOrientation,omitnil,omitempty" name:"VideoOrientation"`
 
-
+	// Enable post-class evaluation. 0: Disable (default) 1: Enable
 	IsGradingRequiredPostClass *int64 `json:"IsGradingRequiredPostClass,omitnil,omitempty" name:"IsGradingRequiredPostClass"`
 
 	// Room Type: 0 Small Classroom(default); 1 Lecture Hall(public class)
 	RoomType *int64 `json:"RoomType,omitnil,omitempty" name:"RoomType"`
 
-
+	// Overtime duration: Unit in minutes. 0: No limitation (default); -1: Overtime prohibited; Values >0: Overtime duration in minutes, maximum 120 minutes
 	EndDelayTime *int64 `json:"EndDelayTime,omitnil,omitempty" name:"EndDelayTime"`
 
-
+	// Live Streaming Type: 0: Regular (default) 1: Simulated Live
 	LiveType *uint64 `json:"LiveType,omitnil,omitempty" name:"LiveType"`
 
-
+	// Simulated Live Playback Link
 	RecordLiveUrl *string `json:"RecordLiveUrl,omitnil,omitempty" name:"RecordLiveUrl"`
 
-
+	// Whether to auto-start class: 0: Do not auto-start (default) 1: Auto-start. Effective when live_type=1
 	EnableAutoStart *uint64 `json:"EnableAutoStart,omitnil,omitempty" name:"EnableAutoStart"`
 
-
+	// Background image for recording files, supports png, jpg, jpeg, bmp formats. Alpha channel is currently not supported.
 	RecordBackground *string `json:"RecordBackground,omitnil,omitempty" name:"RecordBackground"`
 
-
+	// Recording custom scenes. This parameter is valid only when recordlayout=9. The data content consists of user-defined scene parameters in json key-value pair format, where the value is of string type.
 	RecordScene *string `json:"RecordScene,omitnil,omitempty" name:"RecordScene"`
 
-
+	// Recording custom language. This parameter is valid only when recordlayout=9.
 	RecordLang *string `json:"RecordLang,omitnil,omitempty" name:"RecordLang"`
 }
 

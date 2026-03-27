@@ -189,7 +189,7 @@ type CloudStorage struct {
 	// `0`: Tencent Cloud COS; `1`: AWS storage. Other vendors are not supported currently.
 	Vendor *uint64 `json:"Vendor,omitnil,omitempty" name:"Vendor"`
 
-	// [Region information](https://www.tencentcloud.comom/document/product/436/6224?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F) of tencent cloud object storage.
+	// [Region information](https://www.tencentcloud.com/document/product/436/6224?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F) of tencent cloud object storage.
 	// Example value: cn-shanghai-1.
 	// 
 	// [Region information](https://docs.AWS.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-regions) of AWS S3.
@@ -401,7 +401,7 @@ type CreateCloudRecordingRequestParams struct {
 	// The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are recorded.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// [RoomId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC, which is the RoomId corresponding to the TRTC room in the recording.
+	// [RoomId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC, which is the RoomId corresponding to the TRTC room in the recording.
 	// Note: the room id type defaults to integer. if the room id type is a string, specify it via RoomIdType.
 	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
 
@@ -441,7 +441,7 @@ type CreateCloudRecordingRequest struct {
 	// The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are recorded.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// [RoomId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC, which is the RoomId corresponding to the TRTC room in the recording.
+	// [RoomId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC, which is the RoomId corresponding to the TRTC room in the recording.
 	// Note: the room id type defaults to integer. if the room id type is a string, specify it via RoomIdType.
 	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
 
@@ -2799,10 +2799,14 @@ func (r *DismissRoomResponse) FromJsonString(s string) error {
 }
 
 type EmulateMobileParams struct {
-
+	// Mobile device types,
+	// 0: Phone
+	// 1: Tablet
 	MobileDeviceType *uint64 `json:"MobileDeviceType,omitnil,omitempty" name:"MobileDeviceType"`
 
-
+	// Screen orientation,
+	// 0: Portrait,
+	// 1: Landscape
 	ScreenOrientation *uint64 `json:"ScreenOrientation,omitnil,omitempty" name:"ScreenOrientation"`
 }
 
@@ -3657,7 +3661,7 @@ type RecordParams struct {
 
 	// Output file format (valid when stored in third-party storage such as COS). 0: (default) output file is in hls format. 1: output file format is hls+mp4. 2: output file format is hls+aac. 3: output file format is mp4. 4: output file format is aac.
 	// 
-	// This parameter is invalid when storing in VOD. when storing in VOD, set MediaType in TencentVod (https://www.tencentcloud.comom/document/api/647/44055?from_cn_redirect=1#TencentVod).
+	// This parameter is invalid when storing in VOD. when storing in VOD, set MediaType in TencentVod (https://www.tencentcloud.com/document/api/647/44055?from_cn_redirect=1#TencentVod).
 	OutputFormat *uint64 `json:"OutputFormat,omitnil,omitempty" name:"OutputFormat"`
 
 	// In single-stream recording mode, determine whether to merge the user's audio and video. 0: do not merge the audio and video of a stream (default). 1: merge the audio and video of a stream into one ts. in mixed-stream recording, this parameter is not required, and the audio and video are merged by default.
@@ -4525,7 +4529,7 @@ type StartStreamIngestRequestParams struct {
 	// Deprecated: SourceUrl is deprecated.
 	SourceUrl []*string `json:"SourceUrl,omitnil,omitempty" name:"SourceUrl"`
 
-
+	// Specify that the video plays from a specific second timestamp.
 	SeekSecond *int64 `json:"SeekSecond,omitnil,omitempty" name:"SeekSecond"`
 
 	// Enable auto relay to cdn, please make sure that this feature has been enabled in the console.
@@ -4575,6 +4579,7 @@ type StartStreamIngestRequest struct {
 	// Source URL. Example value: https://a.b/test.mp4
 	SourceUrl []*string `json:"SourceUrl,omitnil,omitempty" name:"SourceUrl"`
 
+	// Specify that the video plays from a specific second timestamp.
 	SeekSecond *int64 `json:"SeekSecond,omitnil,omitempty" name:"SeekSecond"`
 
 	// Enable auto relay to cdn, please make sure that this feature has been enabled in the console.
@@ -5119,7 +5124,7 @@ type TRTCDataResult struct {
 }
 
 type TTSConfig struct {
-
+	// Voice ID
 	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
 }
 
@@ -5654,15 +5659,18 @@ type WaterMarkTimestamp struct {
 }
 
 type WebRecordVideoParams struct {
-
+	// Recording screen width, defaults to 1280, value range [0, 1920]
 	Width *uint64 `json:"Width,omitnil,omitempty" name:"Width"`
 
-
+	// Recording screen height, defaults to 720, value range [0, 1080]
 	Height *uint64 `json:"Height,omitnil,omitempty" name:"Height"`
 
-
+	// Specify the output format, optional hls, mp4. When storing to VOD, this parameter is invalid; please use the MediaType setting within TencentVod (https://cloud.tencent.com/document/api/647/44055#TencentVod).
+	//  
 	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
 
-
+	// If the file format is aac or mp4, the system will automatically split the video file when it exceeds the length limit. Unit: minutes. Default: 1440 min (24h), value range: 1-1440. [Single file size is limited to a maximum of 2G. Files will be automatically split if either condition is met: file size >2G or recording duration > 24h]
+	// This parameter does not take effect for Hls format recordings.
+	// Sample value: 1440
 	MaxMediaFileDuration *int64 `json:"MaxMediaFileDuration,omitnil,omitempty" name:"MaxMediaFileDuration"`
 }

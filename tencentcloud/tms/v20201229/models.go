@@ -91,27 +91,27 @@ type RiskDetails struct {
 }
 
 type SentimentAnalysis struct {
-
+	// Sentiment Tag
 	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
 
-
+	// Tag score, ranging from 0 to 100
 	Score *int64 `json:"Score,omitnil,omitempty" name:"Score"`
 
-
+	// Sentiment analysis details
 	Detail *SentimentDetail `json:"Detail,omitnil,omitempty" name:"Detail"`
 
-
+	// Response code; "OK" for success, "InternalError" for failure
 	Code *string `json:"Code,omitnil,omitempty" name:"Code"`
 
-
+	// Exception information
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 }
 
 type SentimentDetail struct {
-
+	// Positive score, ranging from 0 to 100
 	Positive *int64 `json:"Positive,omitnil,omitempty" name:"Positive"`
 
-
+	// Negative score, ranging from 0 to 100
 	Negative *int64 `json:"Negative,omitnil,omitempty" name:"Negative"`
 }
 

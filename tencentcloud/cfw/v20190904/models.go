@@ -558,7 +558,7 @@ type BlockIgnoreRule struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Country *string `json:"Country,omitnil,omitempty" name:"Country"`
 
-
+	// Remarks
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 }
 
@@ -6531,78 +6531,120 @@ type VpcDnsInfo struct {
 }
 
 type VpcRuleItem struct {
-
+	// Access source example:
+	// 
+	// net: IP/CIDR (192.168.0.2)
 	SourceContent *string `json:"SourceContent,omitnil,omitempty" name:"SourceContent"`
 
-
+	// Access source type, which can be: net
 	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
 
-
+	// Access destination example:
+	// 
+	// net: IP/CIDR (192.168.0.2)
+	// 
+	// domain: domain name rules, for example *.qq.com
 	DestContent *string `json:"DestContent,omitnil,omitempty" name:"DestContent"`
 
-
+	// Access destination type, which can be: net, domain, dnsparse
 	DestType *string `json:"DestType,omitnil,omitempty" name:"DestType"`
 
-
+	// Protocol, optional values:
+	// 
+	// TCP
+	// 
+	// UDP
+	// 
+	// ICMP
+	// 
+	// ANY
+	// 
+	// HTTP
+	// 
+	// HTTPS
+	// 
+	// HTTP/HTTPS
+	// 
+	// SMTP
+	// 
+	// SMTPS
+	// 
+	// SMTP/SMTPS
+	// 
+	// FTP
+	// 
+	// DNS
+	// 
+	// TLS/SSL
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
-
+	// How traffic set in the access control policy passes through CFW. Values:
+	// 
+	// accept: allow
+	// 
+	// drop: deny
+	// 
+	// log: observe
 	RuleAction *string `json:"RuleAction,omitnil,omitempty" name:"RuleAction"`
 
-
+	// Access control policy ports. Values:
+	// 
+	// -1/-1: all ports
+	// 
+	// 80: port 80
 	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
 
-
+	// Description
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-
+	// Rule order, where -1 indicates the lowest and 1 indicates the highest.
 	OrderIndex *int64 `json:"OrderIndex,omitnil,omitempty" name:"OrderIndex"`
 
-
+	// Rule status, where true indicates enabled and false indicates disabled.
 	Enable *string `json:"Enable,omitnil,omitempty" name:"Enable"`
 
-
+	// The scope of effect for the rule, specifying whether it applies between a specific pair of VPCs or across all VPCs.
 	EdgeId *string `json:"EdgeId,omitnil,omitempty" name:"EdgeId"`
 
-
+	// The unique id corresponding to the rule. This field is ignored when adding a rule; when modifying the rule, the Uuid needs to be filled in. This parameter will be returned in query results.
 	Uuid *int64 `json:"Uuid,omitnil,omitempty" name:"Uuid"`
 
-
+	// The hit count of the rule. This parameter does not need to be passed during CRUD operations and is mainly used for returning query result data.
 	DetectedTimes *int64 `json:"DetectedTimes,omitnil,omitempty" name:"DetectedTimes"`
 
-
+	// Description of the firewall between the pair of VPCs corresponding to EdgeId
 	EdgeName *string `json:"EdgeName,omitnil,omitempty" name:"EdgeName"`
 
-
+	// Internal-use uuid, generally not used
 	InternalUuid *int64 `json:"InternalUuid,omitnil,omitempty" name:"InternalUuid"`
 
-
+	// Rule deletion status: 1 indicates deleted; 0 indicates not deleted
 	Deleted *int64 `json:"Deleted,omitnil,omitempty" name:"Deleted"`
 
-
+	// The firewall instance ID where the rule takes effect
 	FwGroupId *string `json:"FwGroupId,omitnil,omitempty" name:"FwGroupId"`
 
-
+	// Firewall name
 	FwGroupName *string `json:"FwGroupName,omitnil,omitempty" name:"FwGroupName"`
 
-
+	// beta task details
 	BetaList []*BetaInfoByACL `json:"BetaList,omitnil,omitempty" name:"BetaList"`
 
-
+	// Port Protocol Group ID
 	ParamTemplateId *string `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
 
-
+	// Port Protocol Group Name
 	ParamTemplateName *string `json:"ParamTemplateName,omitnil,omitempty" name:"ParamTemplateName"`
 
-
+	// Access destination name
 	TargetName *string `json:"TargetName,omitnil,omitempty" name:"TargetName"`
 
-
+	// Access source name
 	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
 
-
+	// Ip version, 0: IPv4, 1: IPv6, default is IPv4
 	IpVersion *int64 `json:"IpVersion,omitnil,omitempty" name:"IpVersion"`
 
-
+	// Whether the rule is invalid, where 0 indicates a valid rule and 1 indicates an invalid rule, used in output parameters.
 	Invalid *int64 `json:"Invalid,omitnil,omitempty" name:"Invalid"`
 }

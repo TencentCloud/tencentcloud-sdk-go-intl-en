@@ -2225,7 +2225,7 @@ type InstanceTypeQuotaItem struct {
 	// Descriptive information of the instance.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
-
+	// The number of physical GPU cards mapped to the instance model, unit: card. For vGPU configurations, the value is less than 1; for passthrough configurations, the value is greater than or equal to 1. vGPU utilizes slicing virtualization technology to partition physical GPU cards, allowing a single GPU card to be allocated to multiple instances after virtualization. Passthrough configurations directly mount GPU devices to instances.
 	GpuCount *float64 `json:"GpuCount,omitnil,omitempty" name:"GpuCount"`
 
 	// CPU clock rate of the instance

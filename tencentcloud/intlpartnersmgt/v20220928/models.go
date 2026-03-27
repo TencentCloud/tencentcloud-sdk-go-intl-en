@@ -462,10 +462,10 @@ type CountryCodeItem struct {
 	// Country/region name in Chinese
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-
+	// ISO2 standard country/region code
 	IOS2 *string `json:"IOS2,omitnil,omitempty" name:"IOS2"`
 
-
+	// ISO3 standard country/region code
 	IOS3 *string `json:"IOS3,omitnil,omitempty" name:"IOS3"`
 
 	// International dialing code

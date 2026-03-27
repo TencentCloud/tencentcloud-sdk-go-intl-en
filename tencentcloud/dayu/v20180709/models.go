@@ -10206,7 +10206,7 @@ type SchedulingDomain struct {
 	// The creation time.
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-
+	// ttl
 	TTL *uint64 `json:"TTL,omitnil,omitempty" name:"TTL"`
 
 	// Status

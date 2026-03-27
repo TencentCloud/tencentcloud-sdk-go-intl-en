@@ -3104,7 +3104,7 @@ type CanFixVulInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FixTag []*string `json:"FixTag,omitnil,omitempty" name:"FixTag"`
 
-
+	// Vulnerability categories: 1 web cms vulnerabilities, 2 application vulnerabilities, 4 linux software vulnerabilities, 5 windows system vulnerabilities
 	VulCategory *uint64 `json:"VulCategory,omitnil,omitempty" name:"VulCategory"`
 }
 
@@ -4468,7 +4468,7 @@ type CreateMalwareWhiteListRequestParams struct {
 	// Trojan event ID
 	EventId *uint64 `json:"EventId,omitnil,omitempty" name:"EventId"`
 
-
+	// Perform allowlisting operations on pending historical items; 0 indicates no action, 1 indicates processing
 	IsHandleHistoryEvents *uint64 `json:"IsHandleHistoryEvents,omitnil,omitempty" name:"IsHandleHistoryEvents"`
 }
 
@@ -4502,6 +4502,7 @@ type CreateMalwareWhiteListRequest struct {
 	// Trojan event ID
 	EventId *uint64 `json:"EventId,omitnil,omitempty" name:"EventId"`
 
+	// Perform allowlisting operations on pending historical items; 0 indicates no action, 1 indicates processing
 	IsHandleHistoryEvents *uint64 `json:"IsHandleHistoryEvents,omitnil,omitempty" name:"IsHandleHistoryEvents"`
 }
 
@@ -5063,7 +5064,7 @@ type CreateVulFixTaskQuuids struct {
 	// Hosts that need to fix vulnerabilities. All hosts need to have the vulnerability with the ID of VulId and be in a pending fix status.
 	Quuids []*string `json:"Quuids,omitnil,omitempty" name:"Quuids"`
 
-
+	// Repair method: 0 component update or patch installation, 1 disable service
 	FixMethod *uint64 `json:"FixMethod,omitnil,omitempty" name:"FixMethod"`
 }
 
@@ -28535,7 +28536,7 @@ type EmergencyResponseInfo struct {
 	// Number of hosts
 	HostNum *uint64 `json:"HostNum,omitnil,omitempty" name:"HostNum"`
 
-
+	// Service status: 0 not started, · in progress, 2 completed
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Service start time
@@ -38039,7 +38040,7 @@ type ModifyWarningHostConfigRequestParams struct {
 	// List of Project or Tag IDs, empty for custom hosts
 	ItemLabelIds []*string `json:"ItemLabelIds,omitnil,omitempty" name:"ItemLabelIds"`
 
-
+	// Machines to be excluded
 	ExcludedQuuids []*string `json:"ExcludedQuuids,omitnil,omitempty" name:"ExcludedQuuids"`
 }
 
@@ -38061,6 +38062,7 @@ type ModifyWarningHostConfigRequest struct {
 	// List of Project or Tag IDs, empty for custom hosts
 	ItemLabelIds []*string `json:"ItemLabelIds,omitnil,omitempty" name:"ItemLabelIds"`
 
+	// Machines to be excluded
 	ExcludedQuuids []*string `json:"ExcludedQuuids,omitnil,omitempty" name:"ExcludedQuuids"`
 }
 
@@ -38193,7 +38195,7 @@ type ModifyWebHookPolicyRequestParams struct {
 	// Host list
 	Quuids []*string `json:"Quuids,omitnil,omitempty" name:"Quuids"`
 
-
+	// Machines to be excluded
 	ExcludedQuuids []*string `json:"ExcludedQuuids,omitnil,omitempty" name:"ExcludedQuuids"`
 }
 
@@ -38227,6 +38229,7 @@ type ModifyWebHookPolicyRequest struct {
 	// Host list
 	Quuids []*string `json:"Quuids,omitnil,omitempty" name:"Quuids"`
 
+	// Machines to be excluded
 	ExcludedQuuids []*string `json:"ExcludedQuuids,omitnil,omitempty" name:"ExcludedQuuids"`
 }
 
@@ -40586,7 +40589,7 @@ type ScanVulRequestParams struct {
 	// IDs of vulnerabilities to be scanned
 	VulIds []*uint64 `json:"VulIds,omitnil,omitempty" name:"VulIds"`
 
-
+	// 0 version comparison, 2 version comparison + poc
 	ScanMethod *uint64 `json:"ScanMethod,omitnil,omitempty" name:"ScanMethod"`
 }
 
@@ -40614,6 +40617,7 @@ type ScanVulRequest struct {
 	// IDs of vulnerabilities to be scanned
 	VulIds []*uint64 `json:"VulIds,omitnil,omitempty" name:"VulIds"`
 
+	// 0 version comparison, 2 version comparison + poc
 	ScanMethod *uint64 `json:"ScanMethod,omitnil,omitempty" name:"ScanMethod"`
 }
 
@@ -40698,7 +40702,7 @@ type ScanVulSettingRequestParams struct {
 	// If empty, scan hosts with all Professional, Premium, and General Discount editions by default; if not empty, only scan the selected hosts.
 	Uuids []*string `json:"Uuids,omitnil,omitempty" name:"Uuids"`
 
-
+	// 0 version comparison, 2 version comparison + poc
 	ScanMethod *uint64 `json:"ScanMethod,omitnil,omitempty" name:"ScanMethod"`
 }
 
@@ -40732,6 +40736,7 @@ type ScanVulSettingRequest struct {
 	// If empty, scan hosts with all Professional, Premium, and General Discount editions by default; if not empty, only scan the selected hosts.
 	Uuids []*string `json:"Uuids,omitnil,omitempty" name:"Uuids"`
 
+	// 0 version comparison, 2 version comparison + poc
 	ScanMethod *uint64 `json:"ScanMethod,omitnil,omitempty" name:"ScanMethod"`
 }
 
@@ -43144,7 +43149,7 @@ type VulFixStatusInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FixSuccessCnt *uint64 `json:"FixSuccessCnt,omitnil,omitempty" name:"FixSuccessCnt"`
 
-
+	// Repair method: 0 component update or patch installation, 1 disable service
 	FixMethod *uint64 `json:"FixMethod,omitnil,omitempty" name:"FixMethod"`
 }
 

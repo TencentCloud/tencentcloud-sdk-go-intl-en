@@ -8041,7 +8041,7 @@ type ProxyInfo struct {
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	BanStatus *string `json:"BanStatus,omitnil,omitempty" name:"BanStatus"`
 
-
+	// IP List
 	IPList []*IPDetail `json:"IPList,omitnil,omitempty" name:"IPList"`
 
 	// Specifies whether to enable HTTP3. Valid values:

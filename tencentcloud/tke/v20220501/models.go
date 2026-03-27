@@ -1495,7 +1495,10 @@ type NativeNodeInfo struct {
 	// Note: This field may return "null", indicating that no valid value can be obtained.
 	OsImage *string `json:"OsImage,omitnil,omitempty" name:"OsImage"`
 
-
+	// **Instance ID corresponding to the native node**
+	// 
+	// - ins-q47ofw6 indicates that this instance is a CVM instance
+	// - eks-f8mvyaep indicates that this instance is a CXM instance
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 

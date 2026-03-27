@@ -374,22 +374,24 @@ type BusinessIntelligenceFile struct {
 }
 
 type CheckItem struct {
-
+	// Check item names: CK_CPU - Post-Resizing CPU Risk Check; CK_MASTER_STORAGE - During read-only replica resizing, verify that read-only replica storage space is not less than that of the primary instance; CK_MEMORY - Post-Resizing Memory Risk Check; CK_STORAGE - Post-Resizing Storage Space Risk Check; CK_UPGRATE - Resizing Migration Requirement Check;
 	CheckName *string `json:"CheckName,omitnil,omitempty" name:"CheckName"`
 
-
+	// Check item return values: CK_CPU - Maximum CPU utilization (%) in the last 7 days; CK_MASTER_STORAGE - Disk space of the primary instance (GB); CK_MEMORY - Maximum memory usage (GB) in the last 7 days;
+	// 
+	// CK_STORAGE - Maximum disk usage (GB) in the last 7 days; CK_UPGRATE - Whether the current resizing check requires migration: MIGRATE indicates migration resizing is required, LOCAL indicates local resizing;
 	CurrentValue *string `json:"CurrentValue,omitnil,omitempty" name:"CurrentValue"`
 
-
+	// Check item pass status: 0 - Not passed, resizing not allowed; 1 - Passed, resizing allowed
 	Passed *int64 `json:"Passed,omitnil,omitempty" name:"Passed"`
 
-
+	// Whether this resizing item affects the instance: 0 - No impact; 1 - Impact exists
 	IsAffect *int64 `json:"IsAffect,omitnil,omitempty" name:"IsAffect"`
 
-
+	// Required description when impact exists or the check is not passed
 	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
-
+	// Describe the corresponding code
 	MsgCode *int64 `json:"MsgCode,omitnil,omitempty" name:"MsgCode"`
 }
 
@@ -1247,7 +1249,7 @@ type CreateBusinessIntelligenceFileRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-
+	// COS_URL
 	FileURL *string `json:"FileURL,omitnil,omitempty" name:"FileURL"`
 
 	// File type. Valid values: `FLAT` (flat file as data source), `SSIS` (.ispac SSIS package file)
@@ -1263,6 +1265,7 @@ type CreateBusinessIntelligenceFileRequest struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
+	// COS_URL
 	FileURL *string `json:"FileURL,omitnil,omitempty" name:"FileURL"`
 
 	// File type. Valid values: `FLAT` (flat file as data source), `SSIS` (.ispac SSIS package file)
@@ -2519,46 +2522,46 @@ type CrossRegionStatus struct {
 }
 
 type CrossSummaryDetailRes struct {
-
+	// Instance Status
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// Instance Region
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-
+	// Instance ID
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-
+	// Instance Name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-
+	// Cross-Region Backup Status: enable - Enabled, disable - Disabled
 	CrossBackupEnabled *string `json:"CrossBackupEnabled,omitnil,omitempty" name:"CrossBackupEnabled"`
 
-
+	// Cross-Region Backup Target Region
 	CrossRegions []*string `json:"CrossRegions,omitnil,omitempty" name:"CrossRegions"`
 
-
+	// Latest Backup Start Time
 	LastBackupStartTime *string `json:"LastBackupStartTime,omitnil,omitempty" name:"LastBackupStartTime"`
 
-
+	// Cross-Region Backup Retention Days
 	CrossBackupSaveDays *int64 `json:"CrossBackupSaveDays,omitnil,omitempty" name:"CrossBackupSaveDays"`
 
-
+	// Cross-Region Data Backup Total Space
 	DataBackupSpace *uint64 `json:"DataBackupSpace,omitnil,omitempty" name:"DataBackupSpace"`
 
-
+	// Cross-Region Data Backup Total File Count
 	DataBackupCount *uint64 `json:"DataBackupCount,omitnil,omitempty" name:"DataBackupCount"`
 
-
+	// Cross-Region Log Backup Total Space
 	LogBackupSpace *uint64 `json:"LogBackupSpace,omitnil,omitempty" name:"LogBackupSpace"`
 
-
+	// Cross-Region Log Backup Total File Count
 	LogBackupCount *uint64 `json:"LogBackupCount,omitnil,omitempty" name:"LogBackupCount"`
 
-
+	// Cross-Region Backup Total Space
 	ActualUsedSpace *uint64 `json:"ActualUsedSpace,omitnil,omitempty" name:"ActualUsedSpace"`
 
-
+	// Cross-Region Backup Total Count
 	ActualUsedCount *uint64 `json:"ActualUsedCount,omitnil,omitempty" name:"ActualUsedCount"`
 }
 
@@ -2819,7 +2822,7 @@ type DBInstance struct {
 	// Type flag. EXCLUSIVE: exclusive; SHARED: shared.
 	Style *string `json:"Style,omitnil,omitempty" name:"Style"`
 
-
+	// Multi-Node Instance Secondary AZ Information
 	MultiSlaveZones []*SlaveZones `json:"MultiSlaveZones,omitnil,omitempty" name:"MultiSlaveZones"`
 }
 
@@ -2856,7 +2859,7 @@ type DBRenameRes struct {
 }
 
 type DBTDEEncrypt struct {
-
+	// Database Name
 	DBName *string `json:"DBName,omitnil,omitempty" name:"DBName"`
 
 	// TDE status. Valid values: `enable` (enabled), `disable` (disabled).
@@ -2864,32 +2867,32 @@ type DBTDEEncrypt struct {
 }
 
 type DataBasePrivilegeModifyInfo struct {
-
+	// Database Name
 	DataBaseName *string `json:"DataBaseName,omitnil,omitempty" name:"DataBaseName"`
 
-
+	// Database Permission Modification Information
 	AccountPrivileges []*AccountPrivilege `json:"AccountPrivileges,omitnil,omitempty" name:"AccountPrivileges"`
 }
 
 type DatabaseTuple struct {
-
+	// Publish Database Name
 	PublishDatabase *string `json:"PublishDatabase,omitnil,omitempty" name:"PublishDatabase"`
 
-
+	// Subscription Database Name
 	SubscribeDatabase *string `json:"SubscribeDatabase,omitnil,omitempty" name:"SubscribeDatabase"`
 }
 
 type DatabaseTupleStatus struct {
-
+	// Publish Database Name
 	PublishDatabase *string `json:"PublishDatabase,omitnil,omitempty" name:"PublishDatabase"`
 
-
+	// Subscription Database Name
 	SubscribeDatabase *string `json:"SubscribeDatabase,omitnil,omitempty" name:"SubscribeDatabase"`
 
-
+	// Latest Synchronization Time
 	LastSyncTime *string `json:"LastSyncTime,omitnil,omitempty" name:"LastSyncTime"`
 
-
+	// Publish/Subscribe Status Between Databases: running, success, fail, unknow
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
@@ -8085,18 +8088,20 @@ func (r *DescribeRestoreTaskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeRestoreTimeRangeRequestParams struct {
-
+	// Instance ID
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-
+	// Target instance ID for restoration; if left blank, defaults to restoring to the original instance.
 	TargetInstanceId *string `json:"TargetInstanceId,omitnil,omitempty" name:"TargetInstanceId"`
 }
 
 type DescribeRestoreTimeRangeRequest struct {
 	*tchttp.BaseRequest
 	
+	// Instance ID
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
+	// Target instance ID for restoration; if left blank, defaults to restoring to the original instance.
 	TargetInstanceId *string `json:"TargetInstanceId,omitnil,omitempty" name:"TargetInstanceId"`
 }
 
@@ -9109,28 +9114,28 @@ type InstanceDBDetail struct {
 }
 
 type InstanceTask struct {
-
+	// Unique id
 	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 
-
+	// Job Type
 	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// Job Status
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// Progress Percentage 0~100
 	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
-
+	// Start Time
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-
+	// End Time
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-
+	// Error Code
 	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
 
-
+	// Error Message Description
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 }
 
@@ -10681,13 +10686,13 @@ func (r *ModifyDReadableResponse) FromJsonString(s string) error {
 }
 
 type ModifyDataBaseTuple struct {
-
+	// Subscription Relationship to be Modified
 	DatabaseTuple *DatabaseTuple `json:"DatabaseTuple,omitnil,omitempty" name:"DatabaseTuple"`
 
-
+	// Modified subscription relationship. Takes effect when DeleteDataBasesTuple is false
 	NewDatabaseTuple *DatabaseTuple `json:"NewDatabaseTuple,omitnil,omitempty" name:"NewDatabaseTuple"`
 
-
+	// Whether to delete the subscription relationship. When this option is true, NewDatabaseTuple is invalid
 	DeleteDataBasesTuple *bool `json:"DeleteDataBasesTuple,omitnil,omitempty" name:"DeleteDataBasesTuple"`
 }
 
@@ -11866,45 +11871,45 @@ type ParameterDetail struct {
 }
 
 type Price struct {
-
+	// Reference price for yearly/monthly subscription, unit-cent
 	PrepaidPrice *uint64 `json:"PrepaidPrice,omitnil,omitempty" name:"PrepaidPrice"`
 
-
+	// Price unit for yearly/monthly subscription, M-month
 	PrepaidPriceUnit *string `json:"PrepaidPriceUnit,omitnil,omitempty" name:"PrepaidPriceUnit"`
 
-
+	// Pay-as-you-go price, unit-cent
 	PostpaidPrice *uint64 `json:"PostpaidPrice,omitnil,omitempty" name:"PostpaidPrice"`
 
-
+	// Pay-as-you-go price unit, H-hour
 	PostpaidPriceUnit *string `json:"PostpaidPriceUnit,omitnil,omitempty" name:"PostpaidPriceUnit"`
 }
 
 type PublishSubscribe struct {
-
+	// Pub/Sub ID
 	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
-
+	// Pub/Sub Name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-
+	// Published Instance ID
 	PublishInstanceId *string `json:"PublishInstanceId,omitnil,omitempty" name:"PublishInstanceId"`
 
-
+	// Published Instance Name
 	PublishInstanceName *string `json:"PublishInstanceName,omitnil,omitempty" name:"PublishInstanceName"`
 
-
+	// Published Instance IP
 	PublishInstanceIp *string `json:"PublishInstanceIp,omitnil,omitempty" name:"PublishInstanceIp"`
 
-
+	// Subscription Instance ID
 	SubscribeInstanceId *string `json:"SubscribeInstanceId,omitnil,omitempty" name:"SubscribeInstanceId"`
 
-
+	// Subscription Instance Name
 	SubscribeInstanceName *string `json:"SubscribeInstanceName,omitnil,omitempty" name:"SubscribeInstanceName"`
 
-
+	// Subscription Instance IP
 	SubscribeInstanceIp *string `json:"SubscribeInstanceIp,omitnil,omitempty" name:"SubscribeInstanceIp"`
 
-
+	// Publication-Subscription Relationship Collection of Database
 	DatabaseTupleSet []*DatabaseTupleStatus `json:"DatabaseTupleSet,omitnil,omitempty" name:"DatabaseTupleSet"`
 }
 
@@ -11972,46 +11977,46 @@ func (r *QueryMigrationCheckProcessResponse) FromJsonString(s string) error {
 }
 
 type ReadOnlyGroup struct {
-
+	// Read-Only Group ID
 	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitnil,omitempty" name:"ReadOnlyGroupId"`
 
-
+	// Read-Only Group Name
 	ReadOnlyGroupName *string `json:"ReadOnlyGroupName,omitnil,omitempty" name:"ReadOnlyGroupName"`
 
-
+	// Region ID of the Read-Only Group, same as the Primary Instance
 	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
-
+	// Read-Only Group's AZ ID, same as the Primary Instance
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-
+	// Whether to enable the timeout culling feature; 0 - disabled, 1 - enabled
 	IsOfflineDelay *int64 `json:"IsOfflineDelay,omitnil,omitempty" name:"IsOfflineDelay"`
 
-
+	// Timeout threshold used after enabling the timeout culling feature
 	ReadOnlyMaxDelayTime *int64 `json:"ReadOnlyMaxDelayTime,omitnil,omitempty" name:"ReadOnlyMaxDelayTime"`
 
-
+	// Minimum number of read-only replicas retained in the read-only group after enabling the timeout culling feature
 	MinReadOnlyInGroup *int64 `json:"MinReadOnlyInGroup,omitnil,omitempty" name:"MinReadOnlyInGroup"`
 
-
+	// Read-Only Group vip
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
-
+	// Read-Only Group vport
 	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
 
-
+	// Read-Only Group VPC ID
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-
+	// Read-Only Group VPC Subnet ID
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-
+	// Read-Only Group Status: 1-Running, 5-Creating
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// Primary instance ID, in the form of mssql-sgeshe3th
 	MasterInstanceId *string `json:"MasterInstanceId,omitnil,omitempty" name:"MasterInstanceId"`
 
-
+	// Read-Only Instance Replica Set
 	ReadOnlyInstanceSet []*ReadOnlyInstance `json:"ReadOnlyInstanceSet,omitnil,omitempty" name:"ReadOnlyInstanceSet"`
 
 	// RO group's public network address domain name
@@ -12022,84 +12027,112 @@ type ReadOnlyGroup struct {
 }
 
 type ReadOnlyInstance struct {
-
+	// Read-Only Replica ID, in the format of: mssqlro-3l3fgqn7
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-
+	// Read-Only Replica Name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-
+	// Read-Only Replica Unique UID
 	Uid *string `json:"Uid,omitnil,omitempty" name:"Uid"`
 
-
+	// Read-Only Replica Project ID
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-
+	// Read-Only Replica Status: 1: Creating, 2: Running, 3: Delayed Removal, 4: Isolated, 5: Recycling, 6: Recycled, 7: Task Executing, 8: Offline, 9: Instance Scaling, 10: Instance Migrating, 12: Restarting
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// Read-Only Replica Creation Time
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-
+	// Read-Only Replica Update Time
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-
+	// Read-Only Replica Memory Size (Unit: GB)
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-
+	// Read-Only Replica Storage Space Size (Unit: GB)
 	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
-
+	// Read-Only Replica cpu Core Count
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-
+	// Read-Only Replica Codenames
 	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
 
-
+	// Host Machine Code
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// Read-Only Replica Mode, 2-Standalone
 	Model *int64 `json:"Model,omitnil,omitempty" name:"Model"`
 
-
+	// Read-Only Replica Billing Mode, 1-yearly/monthly subscription, 0-pay-as-you-go
 	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-
+	// Read-Only Replica Weight
 	Weight *int64 `json:"Weight,omitnil,omitempty" name:"Weight"`
 
-
+	// Read-Only Replica Latency Time (Unit: seconds)
 	DelayTime *string `json:"DelayTime,omitnil,omitempty" name:"DelayTime"`
 
-
+	// Synchronization status between the read-only replica and the primary instance.
+	// 
+	// Init: Initializing
+	// 
+	// DeployReadOnlyInPorgress: Deploying replica in progress
+	// 
+	// DeployReadOnlySuccess: Replica deployment succeeded
+	// 
+	// DeployReadOnlyFail: Replica deployment failed
+	// 
+	// DeployMasterDBInPorgress: Adding replica database to primary node in progress
+	// 
+	// DeployMasterDBSuccess: Successfully added replica database to primary node
+	// 
+	// DeployMasterDBFail: Failed to add replica database to primary node
+	// 
+	// DeployReadOnlyDBInPorgress: Replica restoration and database joining started
+	// 
+	// DeployReadOnlyDBSuccess: Replica restoration and database joining succeeded
+	// 
+	// DeployReadOnlyDBFail: Replica restoration and database joining failed
+	// 
+	// SyncDelay: Synchronization delayed
+	// 
+	// SyncFail: Synchronization failed
+	// 
+	// SyncExcluded: Removed from read-only group
+	// 
+	// SyncNormal: Normal
 	SynStatus *string `json:"SynStatus,omitnil,omitempty" name:"SynStatus"`
 
-
+	// Databases not synchronized between the read-only replica and the primary instance
 	DatabaseDifference *string `json:"DatabaseDifference,omitnil,omitempty" name:"DatabaseDifference"`
 
-
+	// Accounts not synchronized between the read-only replica and the primary instance
 	AccountDifference *string `json:"AccountDifference,omitnil,omitempty" name:"AccountDifference"`
 
-
+	// Read-Only Replica Billing Start Time
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-
+	// Read-Only Replica Billing End Time
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-
+	// Read-Only Replica Isolation Time
 	IsolateTime *string `json:"IsolateTime,omitnil,omitempty" name:"IsolateTime"`
 
-
+	// Read-Only Replica Region Location
 	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
-
+	// Read-Only Replica AZ Location
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 type ReadOnlyInstanceWeightPair struct {
-
+	// Read-Only Instance ID, in the format of: mssqlro-3l3fgqn7
 	ReadOnlyInstanceId *string `json:"ReadOnlyInstanceId,omitnil,omitempty" name:"ReadOnlyInstanceId"`
 
-
+	// Read-Only Instance Weight, in the range of 0-100
 	ReadOnlyWeight *int64 `json:"ReadOnlyWeight,omitnil,omitempty" name:"ReadOnlyWeight"`
 }
 
@@ -12605,40 +12638,52 @@ func (r *RestoreInstanceResponse) FromJsonString(s string) error {
 }
 
 type RestoreTask struct {
-
+	// Target Instance ID
 	TargetInstanceId *string `json:"TargetInstanceId,omitnil,omitempty" name:"TargetInstanceId"`
 
-
+	// Target Instance Name
 	TargetInstanceName *string `json:"TargetInstanceName,omitnil,omitempty" name:"TargetInstanceName"`
 
-
+	// Target Instance Status. Valid values:
+	// 1: Creating
+	// 2: Running
+	// 3: Restricted Running (primary/secondary switching)
+	// 4: Isolated
+	// 5: Recycling
+	// 6: Recycled
+	// 7: Task Executing (instance backup, rollback, etc.)
+	// 8: Offline
+	// 9: Instance Scaling
+	// 10: Instance Migrating
+	// 11: Read-Only
+	// 12: Restarting
 	TargetInstanceStatus *int64 `json:"TargetInstanceStatus,omitnil,omitempty" name:"TargetInstanceStatus"`
 
-
+	// Target Instance Region
 	TargetRegion *string `json:"TargetRegion,omitnil,omitempty" name:"TargetRegion"`
 
-
+	// Rollback Record ID
 	RestoreId *int64 `json:"RestoreId,omitnil,omitempty" name:"RestoreId"`
 
-
+	// Restoration target instance type: 0 - current instance, 1 - existing instance, 2 - new instance
 	TargetType *int64 `json:"TargetType,omitnil,omitempty" name:"TargetType"`
 
-
+	// Rollback method: 0 - by point-in-time, 1 - by backup set
 	RestoreType *int64 `json:"RestoreType,omitnil,omitempty" name:"RestoreType"`
 
-
+	// Rollback Target Time
 	RestoreTime *string `json:"RestoreTime,omitnil,omitempty" name:"RestoreTime"`
 
-
+	// Start Time
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-
+	// End Time
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-
+	// Rollback status: 0 - Initialization, 1 - Running, 2 - Success, 3 - Failure
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// Rollback Asynchronous Task ID
 	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 }
 
@@ -12792,53 +12837,59 @@ func (r *RunMigrationResponse) FromJsonString(s string) error {
 }
 
 type SSLConfig struct {
-
+	// SSL Encryption Status
+	// enable - Enabled
+	// disable - Disabled
+	// enable_doing - Enabling
+	// disable_doing - Disabling
+	// renew_doing - Updating
+	// wait_doing - Waiting to be executed during maintenance window
 	Encryption *string `json:"Encryption,omitnil,omitempty" name:"Encryption"`
 
-
+	// SSL Certificates Validity Period, Time Format YYYY-MM-DD HH:MM:SS
 	SSLValidityPeriod *string `json:"SSLValidityPeriod,omitnil,omitempty" name:"SSLValidityPeriod"`
 
-
+	// SSL Certificates Validity: 0 - Invalid, 1 - Valid
 	SSLValidity *uint64 `json:"SSLValidity,omitnil,omitempty" name:"SSLValidity"`
 }
 
 type SecurityGroup struct {
-
+	// Project ID
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-
+	// Creation Time, Time format: yyyy-mm-dd hh:mm:ss
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-
+	// Inbound Rules
 	InboundSet []*SecurityGroupPolicy `json:"InboundSet,omitnil,omitempty" name:"InboundSet"`
 
-
+	// Outbound Rules
 	OutboundSet []*SecurityGroupPolicy `json:"OutboundSet,omitnil,omitempty" name:"OutboundSet"`
 
-
+	// Security Group ID
 	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
-
+	// Security Group Name
 	SecurityGroupName *string `json:"SecurityGroupName,omitnil,omitempty" name:"SecurityGroupName"`
 
-
+	// Security Group Remarks
 	SecurityGroupRemark *string `json:"SecurityGroupRemark,omitnil,omitempty" name:"SecurityGroupRemark"`
 }
 
 type SecurityGroupPolicy struct {
-
+	// Policy, ACCEPT or DROP
 	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
-
+	// Destination IP or IP range, for example 172.16.0.0/12
 	CidrIp *string `json:"CidrIp,omitnil,omitempty" name:"CidrIp"`
 
-
+	// port or port range
 	PortRange *string `json:"PortRange,omitnil,omitempty" name:"PortRange"`
 
-
+	// Network protocol supports UDP, TCP, etc.
 	IpProtocol *string `json:"IpProtocol,omitnil,omitempty" name:"IpProtocol"`
 
-
+	// Rule direction, OUTPUT - Outbound Rules, INPUT - Inbound Rules
 	Dir *string `json:"Dir,omitnil,omitempty" name:"Dir"`
 }
 
@@ -12956,37 +13007,38 @@ type SpecInfo struct {
 }
 
 type SpecSellStatus struct {
-
+	// Sellable Specification Unique ID
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-
+	// Instance Type ID
 	SpecId *uint64 `json:"SpecId,omitnil,omitempty" name:"SpecId"`
 
-
+	// Supported payment modes for this specification: POST - only supports pay-as-you-go, PRE - only supports yearly/monthly subscription, ALL - supports all.
 	PayModeStatus *string `json:"PayModeStatus,omitnil,omitempty" name:"PayModeStatus"`
 
-
+	// Product type. Types of instances for purchase: HA - Local Disk High Availability (including dual-node high availability, alwaysOn cluster), RO - Local Disk Read-Only Replica, SI - Cloud Disk Edition Single Node, BI - Business Intelligence Service, cvmHA - Cloud Disk Edition High Availability, cvmRO - Cloud Disk Edition Read-Only Replica, MultiHA - Multi-node, cvmMultiHA - Cloud Disk Multi-node.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-
+	// Whether this specification supports cross-AZ deployment: MultiZones - only supports cross-AZ, SameZones - only supports same-AZ, ALL - supports all.
 	MultiZonesStatus *string `json:"MultiZonesStatus,omitnil,omitempty" name:"MultiZonesStatus"`
 
-
+	// Architecture Type, SINGLE - single node, DOUBLE - dual node, TRIPLE - three-node, MULTI - multi-node
+	// Example value: SINGLE
 	Architecture *string `json:"Architecture,omitnil,omitempty" name:"Architecture"`
 
-
+	// Type identifier, EXCLUSIVE - Dedicated, SHARED - Shared
 	Style *string `json:"Style,omitnil,omitempty" name:"Style"`
 
-
+	// Database Version Information
 	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
 
-
+	// Sellable Status Set Per AZ
 	ZoneStatusSet []*ZoneStatus `json:"ZoneStatusSet,omitnil,omitempty" name:"ZoneStatusSet"`
 
-
+	// Reference price for specifications. The actual price is subject to the quotation API.
 	Price *Price `json:"Price,omitnil,omitempty" name:"Price"`
 
-
+	// Specification Sale Status: 1 - Normal, 2 - Sale disabled but upgradable, 3 - Sale completely disabled.
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
@@ -13187,57 +13239,67 @@ func (r *StartInstanceXEventResponse) FromJsonString(s string) error {
 }
 
 type StepDetail struct {
-
+	// Detailed Steps Return Information
 	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
-
+	// Current Step Status, 0 Success, -2 Not Started
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// Step Name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type SummaryDetailRes struct {
-
+	// Region Identifier
 	RegionId *uint64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
-
+	// Instance Status. Valid values:
+	// 1: Creating
+	// 2: Running
+	// 3: Restricted Running (primary/secondary switching)
+	// 4: Isolated
+	// 5: Recycling
+	// 6: Recycled
+	// 7: Task Executing (performing instance backup, rollback, etc.)
+	// 8: Offline
+	// 9: Instance Scaling
+	// 10: Instance Migrating
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// Instance ID
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-
+	// Instance Name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-
+	// Backup Space
 	ActualUsedSpace *uint64 `json:"ActualUsedSpace,omitnil,omitempty" name:"ActualUsedSpace"`
 
-
+	// Data Backup Space
 	DataBackupSpace *uint64 `json:"DataBackupSpace,omitnil,omitempty" name:"DataBackupSpace"`
 
-
+	// Data Backup Total File Count
 	DataBackupCount *uint64 `json:"DataBackupCount,omitnil,omitempty" name:"DataBackupCount"`
 
-
+	// Log Backup Space
 	LogBackupSpace *uint64 `json:"LogBackupSpace,omitnil,omitempty" name:"LogBackupSpace"`
 
-
+	// Log Backup Total File Count
 	LogBackupCount *uint64 `json:"LogBackupCount,omitnil,omitempty" name:"LogBackupCount"`
 
-
+	// Automatic Backup Space
 	AutoBackupSpace *uint64 `json:"AutoBackupSpace,omitnil,omitempty" name:"AutoBackupSpace"`
 
-
+	// Automatic Backup Total File Count
 	AutoBackupCount *uint64 `json:"AutoBackupCount,omitnil,omitempty" name:"AutoBackupCount"`
 
-
+	// Manual Backup Space
 	ManualBackupSpace *uint64 `json:"ManualBackupSpace,omitnil,omitempty" name:"ManualBackupSpace"`
 
-
+	// Manual Backup Total File Count
 	ManualBackupCount *uint64 `json:"ManualBackupCount,omitnil,omitempty" name:"ManualBackupCount"`
 
-
+	// Instance Region Code
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 }
 
@@ -13306,19 +13368,19 @@ func (r *SwitchCloudInstanceHAResponse) FromJsonString(s string) error {
 }
 
 type SwitchLog struct {
-
+	// Switchover Event ID
 	EventId *string `json:"EventId,omitnil,omitempty" name:"EventId"`
 
-
+	// Switchover Mode 0-System Automatic Switchover, 1-Manual Switchover
 	SwitchType *uint64 `json:"SwitchType,omitnil,omitempty" name:"SwitchType"`
 
-
+	// Switchover Start Time
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-
+	// Switchover End Time
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-
+	// Machine failure causes automatic switchover.
 	Reason *string `json:"Reason,omitnil,omitempty" name:"Reason"`
 }
 
@@ -13532,12 +13594,12 @@ type ZoneInfo struct {
 }
 
 type ZoneStatus struct {
-
+	// Specification AZ
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-
+	// Specification Region
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-
+	// Specification Sale Status in the AZ: 1 - Normal, 2 - Sale disabled but upgradable, 3 - Sale completely disabled.
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 }

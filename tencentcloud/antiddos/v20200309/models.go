@@ -686,7 +686,7 @@ type CcGeoIpPolicyNew struct {
 	// IP address
 	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
 
-
+	// domain name
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
 	// Protocol. Valid values: `HTTP` and `HTTPS`.
@@ -2021,7 +2021,7 @@ type DDoSSpeedLimitConfig struct {
 	// This field is replaced with a new field DstPortList.
 	DstPortScopes []*PortSegment `json:"DstPortScopes,omitnil,omitempty" name:"DstPortScopes"`
 
-
+	// Configuration ID is generated after the configuration is successfully added. When adding a new restriction configuration, this field does not need to be filled in; when modifying or deleting a rate limiting configuration, the Configuration ID needs to be filled in.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// IP protocol number. Valid values:
@@ -2693,13 +2693,13 @@ type DescribeBasicDeviceStatusRequestParams struct {
 	// List of IP resources
 	IpList []*string `json:"IpList,omitnil,omitempty" name:"IpList"`
 
-
+	// Pass id for domain-bound resources
 	IdList []*string `json:"IdList,omitnil,omitempty" name:"IdList"`
 
-
+	// region name
 	FilterRegion *uint64 `json:"FilterRegion,omitnil,omitempty" name:"FilterRegion"`
 
-
+	// CNAME WAF resource
 	CnameWafIdList []*string `json:"CnameWafIdList,omitnil,omitempty" name:"CnameWafIdList"`
 }
 
@@ -2709,10 +2709,13 @@ type DescribeBasicDeviceStatusRequest struct {
 	// List of IP resources
 	IpList []*string `json:"IpList,omitnil,omitempty" name:"IpList"`
 
+	// Pass id for domain-bound resources
 	IdList []*string `json:"IdList,omitnil,omitempty" name:"IdList"`
 
+	// region name
 	FilterRegion *uint64 `json:"FilterRegion,omitnil,omitempty" name:"FilterRegion"`
 
+	// CNAME WAF resource
 	CnameWafIdList []*string `json:"CnameWafIdList,omitnil,omitempty" name:"CnameWafIdList"`
 }
 
@@ -5773,7 +5776,7 @@ type IPLineInfo struct {
 	// ]
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// line IP
 	Eip *string `json:"Eip,omitnil,omitempty" name:"Eip"`
 
 	// CNAME of the instance
@@ -5816,22 +5819,22 @@ type InstanceRelation struct {
 }
 
 type IpBlockData struct {
-
+	// Status (Blocked: Blocked; UnBlocking: Unblocking; UnBlockFailed: Unblock failed)
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// Resource IP
 	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
 
-
+	// Blocking Time
 	BlockTime *string `json:"BlockTime,omitnil,omitempty" name:"BlockTime"`
 
-
+	// Unblock Time (Estimated Unblock Time)
 	UnBlockTime *string `json:"UnBlockTime,omitnil,omitempty" name:"UnBlockTime"`
 
-
+	// Unblock type (user: self-service unblocking; auto: automatic unblocking; update: upgrade unblocking; bind: Anti-DDoS Pro binding unblocking)
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-
+	// Anti-DDoS flag, 0: non-Anti-DDoS, 1: Anti-DDoS
 	ProtectFlag *uint64 `json:"ProtectFlag,omitnil,omitempty" name:"ProtectFlag"`
 }
 

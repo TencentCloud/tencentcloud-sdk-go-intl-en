@@ -401,10 +401,10 @@ type AnalysisDimensional struct {
 }
 
 type AnonymousInfo struct {
-
+	// Operation list supports trackLog (JS/HTTP log upload) and realtimeProducer (kafka protocol log upload).
 	Operations []*string `json:"Operations,omitnil,omitempty" name:"Operations"`
 
-
+	// Condition list
 	Conditions []*ConditionInfo `json:"Conditions,omitnil,omitempty" name:"Conditions"`
 }
 
@@ -726,13 +726,13 @@ type CompressInfo struct {
 }
 
 type ConditionInfo struct {
-
+	// Condition attribute, currently supports only VpcID
 	Attributes *string `json:"Attributes,omitnil,omitempty" name:"Attributes"`
 
-
+	// Condition rule, 1: equal to, 2: not equal to
 	Rule *uint64 `json:"Rule,omitnil,omitempty" name:"Rule"`
 
-
+	// Value of the corresponding condition attribute
 	ConditionValue *string `json:"ConditionValue,omitnil,omitempty" name:"ConditionValue"`
 }
 
@@ -9390,7 +9390,7 @@ type Tag struct {
 }
 
 type TopicExtendInfo struct {
-
+	// Log topic authentication-free configuration information
 	AnonymousAccess *AnonymousInfo `json:"AnonymousAccess,omitnil,omitempty" name:"AnonymousAccess"`
 }
 
@@ -9458,7 +9458,7 @@ type TopicInfo struct {
 	// Free authentication switch. false: disabled; true: enabled.After enabling, anonymous access to the log topic will be supported for specified operations. For details, please refer to Log Topic (https://intl.cloud.tencent.com/document/product/614/41035?from_cn_redirect=1).Note: This field may return null, indicating that no valid values can be obtained.
 	IsWebTracking *bool `json:"IsWebTracking,omitnil,omitempty" name:"IsWebTracking"`
 
-
+	// Log topic extended information
 	Extends *TopicExtendInfo `json:"Extends,omitnil,omitempty" name:"Extends"`
 }
 

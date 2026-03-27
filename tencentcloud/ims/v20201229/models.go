@@ -73,7 +73,7 @@ type ImageModerationRequestParams struct {
 	// This field indicates the information of the device that corresponds to the object to be detected. It can be passed in to identify the device involved in the violation.
 	Device *Device `json:"Device,omitnil,omitempty" name:"Device"`
 
-
+	// This field indicates the input image auditing type, with values including: IMAGE (Content Security) and IMAGE_AIGC (AI-generated content recognition). The default value is IMAGE.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -104,6 +104,7 @@ type ImageModerationRequest struct {
 	// This field indicates the information of the device that corresponds to the object to be detected. It can be passed in to identify the device involved in the violation.
 	Device *Device `json:"Device,omitnil,omitempty" name:"Device"`
 
+	// This field indicates the input image auditing type, with values including: IMAGE (Content Security) and IMAGE_AIGC (AI-generated content recognition). The default value is IMAGE.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 

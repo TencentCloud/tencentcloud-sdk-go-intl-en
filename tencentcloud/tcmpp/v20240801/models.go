@@ -7781,18 +7781,20 @@ type DisableEnterpriseDomainResp struct {
 
 // Predefined struct for user
 type DisableTeamDomainRequestParams struct {
-
+	// Domain Name ID
 	DomainId *int64 `json:"DomainId,omitnil,omitempty" name:"DomainId"`
 
-
+	// Platform ID
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
 }
 
 type DisableTeamDomainRequest struct {
 	*tchttp.BaseRequest
 	
+	// Domain Name ID
 	DomainId *int64 `json:"DomainId,omitnil,omitempty" name:"DomainId"`
 
+	// Platform ID
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
 }
 

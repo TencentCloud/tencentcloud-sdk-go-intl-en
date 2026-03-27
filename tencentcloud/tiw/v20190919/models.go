@@ -3383,7 +3383,7 @@ type RoomUsageDataItem struct {
 	// - The unit of sp_tiw_board and sp_tiw_ric is minutes.
 	Value *float64 `json:"Value,omitnil,omitempty" name:"Value"`
 
-
+	// Interactive whiteboard room ID
 	RoomID *uint64 `json:"RoomID,omitnil,omitempty" name:"RoomID"`
 }
 
@@ -3964,10 +3964,20 @@ type StartOnlineRecordRequestParams struct {
 	// A group of real-time recording parameters. It specifies the streams to be recorded, whether to disable the audio recording, and whether to record only low-resolution videos, etc.
 	RecordControl *RecordControl `json:"RecordControl,omitnil,omitempty" name:"RecordControl"`
 
-
+	// Recording mode
+	// 
+	// 
+	// 
+	// REALTIME_MODE - Real-time recording mode (default)
+	// 
+	// VIDEO_GENERATION_MODE - Video generation mode (internal testing, requires email application to activate)
 	RecordMode *string `json:"RecordMode,omitnil,omitempty" name:"RecordMode"`
 
-
+	// Chat group ID. This field is only applicable to `video generation mode`.
+	// 
+	// 
+	// 
+	// In `video generation mode`, non-whiteboard signaling messages in the whiteboard group are recorded by default. If `ChatGroupId` is specified, chat messages from the designated group ID will be recorded.
 	ChatGroupId *string `json:"ChatGroupId,omitnil,omitempty" name:"ChatGroupId"`
 
 	// Recording timeout. Unit: seconds. Valid range: [300,86400]. Default value: 300.
@@ -4021,8 +4031,20 @@ type StartOnlineRecordRequest struct {
 	// A group of real-time recording parameters. It specifies the streams to be recorded, whether to disable the audio recording, and whether to record only low-resolution videos, etc.
 	RecordControl *RecordControl `json:"RecordControl,omitnil,omitempty" name:"RecordControl"`
 
+	// Recording mode
+	// 
+	// 
+	// 
+	// REALTIME_MODE - Real-time recording mode (default)
+	// 
+	// VIDEO_GENERATION_MODE - Video generation mode (internal testing, requires email application to activate)
 	RecordMode *string `json:"RecordMode,omitnil,omitempty" name:"RecordMode"`
 
+	// Chat group ID. This field is only applicable to `video generation mode`.
+	// 
+	// 
+	// 
+	// In `video generation mode`, non-whiteboard signaling messages in the whiteboard group are recorded by default. If `ChatGroupId` is specified, chat messages from the designated group ID will be recorded.
 	ChatGroupId *string `json:"ChatGroupId,omitnil,omitempty" name:"ChatGroupId"`
 
 	// Recording timeout. Unit: seconds. Valid range: [300,86400]. Default value: 300.

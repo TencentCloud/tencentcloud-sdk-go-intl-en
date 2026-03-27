@@ -2057,7 +2057,7 @@ type DescribeBillingDataRequestParams struct {
 	// Specifies the product to query, either `cdn` (default) or `ecdn`.
 	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
-
+	// Specify the time zone for query time, default UTC+08:00
 	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
 }
 
@@ -2110,6 +2110,7 @@ type DescribeBillingDataRequest struct {
 	// Specifies the product to query, either `cdn` (default) or `ecdn`.
 	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
+	// Specify the time zone for query time, default UTC+08:00
 	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
 }
 
@@ -2916,7 +2917,7 @@ type DescribeIpStatusRequestParams struct {
 	// Whether to return a value as an IP range
 	Segment *bool `json:"Segment,omitnil,omitempty" name:"Segment"`
 
-
+	// whether to query node IPV6 information.
 	ShowIpv6 *bool `json:"ShowIpv6,omitnil,omitempty" name:"ShowIpv6"`
 
 	// Whether to abbreviate the IPv6 address.
@@ -2944,6 +2945,7 @@ type DescribeIpStatusRequest struct {
 	// Whether to return a value as an IP range
 	Segment *bool `json:"Segment,omitnil,omitempty" name:"Segment"`
 
+	// whether to query node IPV6 information.
 	ShowIpv6 *bool `json:"ShowIpv6,omitnil,omitempty" name:"ShowIpv6"`
 
 	// Whether to abbreviate the IPv6 address.
@@ -7578,7 +7580,7 @@ type StatisticItem struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Metric *string `json:"Metric,omitnil,omitempty" name:"Metric"`
 
-
+	// Detection Cycle, Unit: Minutes, 60 or 1440
 	Cycle *uint64 `json:"Cycle,omitnil,omitempty" name:"Cycle"`
 
 	// Whether to enable cumulative usage limit. Values:

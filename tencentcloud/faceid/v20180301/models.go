@@ -1180,7 +1180,7 @@ type Encryption struct {
 }
 
 type ExtraInfo struct {
-
+	// Details of matched templates, only returns the template information with the highest similarity
 	RetrievalLivenessExtraInfo []*RetrievalLivenessExtraInfo `json:"RetrievalLivenessExtraInfo,omitnil,omitempty" name:"RetrievalLivenessExtraInfo"`
 }
 
@@ -2942,13 +2942,13 @@ type PhilippinesVoteID struct {
 }
 
 type RetrievalLivenessExtraInfo struct {
-
+	// Matched template types, where Common - public library; Auto - automatic clustering library; Owner - self-built template library.
 	HitGroup *string `json:"HitGroup,omitnil,omitempty" name:"HitGroup"`
 
-
+	// Matched Similarity
 	SimilarityScore *float64 `json:"SimilarityScore,omitnil,omitempty" name:"SimilarityScore"`
 
-
+	// Matched Template id
 	HitTemplate *string `json:"HitTemplate,omitnil,omitempty" name:"HitTemplate"`
 }
 
