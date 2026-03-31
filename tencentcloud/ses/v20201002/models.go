@@ -85,86 +85,80 @@ type Attachment struct {
 
 // Predefined struct for user
 type BatchSendEmailRequestParams struct {
-	// Sender'S email address. please fill in the sender's email address, such as noreply@mail.qcloud.com. if you need to fill in the sender's description, please follow.
-	// Sender &lt;email address&gt; via fill in, such as:.
-	// Tencent cloud team &lt;noreply@mail.qcloud.com&gt;.
+	// <p>Sender's email address. Please fill in the sender's email address, for example: noreply@mail.qcloud.com. If you need to fill in the sender description, please enter it via<br>sender &lt;email address&gt;, for example:<br>Tencent Cloud team &lt;noreply@mail.qcloud.com&gt;</p>
 	FromEmailAddress *string `json:"FromEmailAddress,omitnil,omitempty" name:"FromEmailAddress"`
 
-	// Recipient list ID.
+	// <p>Recipient list ID</p>
 	ReceiverId *uint64 `json:"ReceiverId,omitnil,omitempty" name:"ReceiverId"`
 
-	// Email subject.
+	// <p>Email Subject</p>
 	Subject *string `json:"Subject,omitnil,omitempty" name:"Subject"`
 
-	// Task type 1: send now 2: scheduled sending 3: cycle (frequency) sending.
+	// <p>Task type 1: Send now 2: Scheduled sending 3: Cycle (frequency) sending</p>
 	TaskType *uint64 `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-	// The "reply" email address of the mail. can be filled with an email address you can receive mail from, can be a personal mailbox. if left empty, the recipient's reply mail will fail to send.
+	// <p>The "reply" email address of the mail. Can be filled with an email address you can receive mail, can be a personal mailbox. If left empty, the recipient's reply mail will fail to send.</p>
 	ReplyToAddresses *string `json:"ReplyToAddresses,omitnil,omitempty" name:"ReplyToAddresses"`
 
-	// When using a template to send, fill in the related parameters of the template.
-	// <Dx-Alert infotype="notice" title="note">this field must be specified if you have not applied for special configuration.</dx-alert>.
+	// <p>Template-related parameters to fill in when sending with a template</p><blockquote class="rno-document-tips rno-document-tips-notice">    <div class="rno-document-tips-body">        <i class="rno-document-tip-icon"></i>        <div class="rno-document-tip-title">Note</div>        <div class="rno-document-tip-desc"><p>This field must be specified if you have not applied for special configuration</p></div>    </div></blockquote>
 	Template *Template `json:"Template,omitnil,omitempty" name:"Template"`
 
-	// Abandoned<Dx-Alert infotype="notice" title="description">only customers who historically applied for special configuration require the use of it. if you have not applied for special configuration, this field does not exist.</dx-alert>.
+	// <p>Abandoned<blockquote class="rno-document-tips rno-document-tips-notice">    <div class="rno-document-tips-body">        <i class="rno-document-tip-icon"></i>        <div class="rno-document-tip-title">Description</div>        <div class="rno-document-tip-desc"><p>Only customers who historically applied for special configuration need to use this. If you have not applied for special configuration, this field does not exist.</p></div>    </div></blockquote></p>
 	Simple *Simple `json:"Simple,omitnil,omitempty" name:"Simple"`
 
-	// Send attachment when required. fill in related parameters (not supported).
+	// <p>When you need to send an attachment, fill in the related parameters (not supported).</p>
 	Attachments []*Attachment `json:"Attachments,omitnil,omitempty" name:"Attachments"`
 
-	// Required parameter for sending tasks periodically.
+	// <p>Required parameter for sending tasks periodically</p>
 	CycleParam *CycleEmailParam `json:"CycleParam,omitnil,omitempty" name:"CycleParam"`
 
-	// Required parameter for scheduled task assignment.
+	// <p>Required parameter of scheduled task assignment</p>
 	TimedParam *TimedEmailParam `json:"TimedParam,omitnil,omitempty" name:"TimedParam"`
 
-	// Unsubscription link options 0: do not add 1: english 2: simplified chinese 3: traditional chinese 4: spanish 5: french 6: german 7: japanese 8: korean 9: arabic 10: thai.
+	// Unsubscription link options 0: do not add 1: english 2: simplified chinese 3: traditional chinese 4: spanish 5: french 6: german 7: japanese 8: korean 9: arabic 10: thai. 11: indonesian.
 	Unsubscribe *string `json:"Unsubscribe,omitnil,omitempty" name:"Unsubscribe"`
 
-	// Whether to add an ad flag. valid values: 0 (do not add), 1 (add to the previous subject), 2 (add to the following subject).
+	// <p>Whether to add an ad flag 0: do not add 1: add to the previous subject 2: add to the following subject</p>
 	ADLocation *uint64 `json:"ADLocation,omitnil,omitempty" name:"ADLocation"`
 }
 
 type BatchSendEmailRequest struct {
 	*tchttp.BaseRequest
 	
-	// Sender'S email address. please fill in the sender's email address, such as noreply@mail.qcloud.com. if you need to fill in the sender's description, please follow.
-	// Sender &lt;email address&gt; via fill in, such as:.
-	// Tencent cloud team &lt;noreply@mail.qcloud.com&gt;.
+	// <p>Sender's email address. Please fill in the sender's email address, for example: noreply@mail.qcloud.com. If you need to fill in the sender description, please enter it via<br>sender &lt;email address&gt;, for example:<br>Tencent Cloud team &lt;noreply@mail.qcloud.com&gt;</p>
 	FromEmailAddress *string `json:"FromEmailAddress,omitnil,omitempty" name:"FromEmailAddress"`
 
-	// Recipient list ID.
+	// <p>Recipient list ID</p>
 	ReceiverId *uint64 `json:"ReceiverId,omitnil,omitempty" name:"ReceiverId"`
 
-	// Email subject.
+	// <p>Email Subject</p>
 	Subject *string `json:"Subject,omitnil,omitempty" name:"Subject"`
 
-	// Task type 1: send now 2: scheduled sending 3: cycle (frequency) sending.
+	// <p>Task type 1: Send now 2: Scheduled sending 3: Cycle (frequency) sending</p>
 	TaskType *uint64 `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-	// The "reply" email address of the mail. can be filled with an email address you can receive mail from, can be a personal mailbox. if left empty, the recipient's reply mail will fail to send.
+	// <p>The "reply" email address of the mail. Can be filled with an email address you can receive mail, can be a personal mailbox. If left empty, the recipient's reply mail will fail to send.</p>
 	ReplyToAddresses *string `json:"ReplyToAddresses,omitnil,omitempty" name:"ReplyToAddresses"`
 
-	// When using a template to send, fill in the related parameters of the template.
-	// <Dx-Alert infotype="notice" title="note">this field must be specified if you have not applied for special configuration.</dx-alert>.
+	// <p>Template-related parameters to fill in when sending with a template</p><blockquote class="rno-document-tips rno-document-tips-notice">    <div class="rno-document-tips-body">        <i class="rno-document-tip-icon"></i>        <div class="rno-document-tip-title">Note</div>        <div class="rno-document-tip-desc"><p>This field must be specified if you have not applied for special configuration</p></div>    </div></blockquote>
 	Template *Template `json:"Template,omitnil,omitempty" name:"Template"`
 
-	// Abandoned<Dx-Alert infotype="notice" title="description">only customers who historically applied for special configuration require the use of it. if you have not applied for special configuration, this field does not exist.</dx-alert>.
+	// <p>Abandoned<blockquote class="rno-document-tips rno-document-tips-notice">    <div class="rno-document-tips-body">        <i class="rno-document-tip-icon"></i>        <div class="rno-document-tip-title">Description</div>        <div class="rno-document-tip-desc"><p>Only customers who historically applied for special configuration need to use this. If you have not applied for special configuration, this field does not exist.</p></div>    </div></blockquote></p>
 	Simple *Simple `json:"Simple,omitnil,omitempty" name:"Simple"`
 
-	// Send attachment when required. fill in related parameters (not supported).
+	// <p>When you need to send an attachment, fill in the related parameters (not supported).</p>
 	Attachments []*Attachment `json:"Attachments,omitnil,omitempty" name:"Attachments"`
 
-	// Required parameter for sending tasks periodically.
+	// <p>Required parameter for sending tasks periodically</p>
 	CycleParam *CycleEmailParam `json:"CycleParam,omitnil,omitempty" name:"CycleParam"`
 
-	// Required parameter for scheduled task assignment.
+	// <p>Required parameter of scheduled task assignment</p>
 	TimedParam *TimedEmailParam `json:"TimedParam,omitnil,omitempty" name:"TimedParam"`
 
-	// Unsubscription link options 0: do not add 1: english 2: simplified chinese 3: traditional chinese 4: spanish 5: french 6: german 7: japanese 8: korean 9: arabic 10: thai.
+	// Unsubscription link options 0: do not add 1: english 2: simplified chinese 3: traditional chinese 4: spanish 5: french 6: german 7: japanese 8: korean 9: arabic 10: thai. 11: indonesian.
 	Unsubscribe *string `json:"Unsubscribe,omitnil,omitempty" name:"Unsubscribe"`
 
-	// Whether to add an ad flag. valid values: 0 (do not add), 1 (add to the previous subject), 2 (add to the following subject).
+	// <p>Whether to add an ad flag 0: do not add 1: add to the previous subject 2: add to the following subject</p>
 	ADLocation *uint64 `json:"ADLocation,omitnil,omitempty" name:"ADLocation"`
 }
 
@@ -200,7 +194,7 @@ func (r *BatchSendEmailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type BatchSendEmailResponseParams struct {
-	// Send task ID.
+	// <p>Send task ID</p>
 	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2442,98 +2436,92 @@ type ReceiverInputData struct {
 
 // Predefined struct for user
 type SendEmailRequestParams struct {
-	// Sender'S email address. when not using an alias, enter the sender's email address directly, for example: noreply@mail.qcloud.com. to enter a sender alias, follow this format (note that a space must separate the alias and email address): alias+space+<email address>. the alias cannot contain a colon (:).
+	// <p>Sender's email address. If no alias is used, enter the sender's email address directly, for example: noreply@mail.qcloud.com. To use a sender alias, follow this format (note that a space must be used between the alias and the email address): alias+space+&lt;email address&gt;. The alias cannot contain a colon (:).</p>
 	FromEmailAddress *string `json:"FromEmailAddress,omitnil,omitempty" name:"FromEmailAddress"`
 
-	// Email subject.
+	// <p>Email Subject</p>
 	Subject *string `json:"Subject,omitnil,omitempty" name:"Subject"`
 
-	// Recipient email address, supports up to 50 recipients for mass sending. note: the email content will display all recipient addresses. for non-mass sending, call the API multiple times to send.
-	// Specifies that at least one of the Destination, Cc, or Bcc parameters must exist.
+	// <p>Recipient email address, supports up to 50 recipients in mass sending. Note: The email content displays all recipient addresses. For non-mass sending, call the API multiple times to send.<br>At least one of the three parameters Destination/Cc/Bcc must exist.</p>
 	Destination []*string `json:"Destination,omitnil,omitempty" name:"Destination"`
 
-	// The "reply" email address of the mail. can be filled with an email address where you can receive mail, which can be a personal mailbox. if left empty, the recipient's reply mail will fail to send.
+	// <p>The "reply" email address of the mail. Can be filled with a mailbox address where you can receive emails, which can be a personal mailbox. If left empty, the recipient's reply mail will fail to send.</p>
 	ReplyToAddresses *string `json:"ReplyToAddresses,omitnil,omitempty" name:"ReplyToAddresses"`
 
-	// Cc recipient email address, supports up to 20 carbon copies.
+	// <p>Email address of CC recipients, supports up to 20 carbon copies.</p>
 	Cc []*string `json:"Cc,omitnil,omitempty" name:"Cc"`
 
-	// Bcc email address, supports up to 20 carbon copies. Bcc and Destination must be unique.
+	// <p>Bcc email address, supports up to 20 carbon copies. Bcc and Destination must be unique.</p>
 	Bcc []*string `json:"Bcc,omitnil,omitempty" name:"Bcc"`
 
-	// Use template for sending and fill in related parameters.
-	// <dx-alert infotype="notice" title="note">this field must be specified if you have not applied for special configuration.</dx-alert>.
+	// <p>Fill in the template parameters when sending with a template.</p><blockquote class="rno-document-tips rno-document-tips-notice">    <div class="rno-document-tips-body">        <i class="rno-document-tip-icon"></i>        <div class="rno-document-tip-title">Note</div>        <div class="rno-document-tip-desc"><p>This field must be specified if you have not applied for special configuration</p></div>    </div></blockquote>
 	Template *Template `json:"Template,omitnil,omitempty" name:"Template"`
 
-	// This parameter has been deprecated.
-	// <dx-alert infotype="notice" title="description"> only customers who have applied for special configuration in the past need to use this. if you have not applied for special configuration, this field does not exist.</dx-alert>.
+	// <p>Abandoned</p><blockquote class="rno-document-tips rno-document-tips-notice">    <div class="rno-document-tips-body">        <i class="rno-document-tip-icon"></i>        <div class="rno-document-tip-title">Description</div>        <div class="rno-document-tip-desc"><p>Only customers who historically applied for special configuration require the use of this. If you have not applied for special configuration, this field does not exist.</p></div>    </div></blockquote>
 	Simple *Simple `json:"Simple,omitnil,omitempty" name:"Simple"`
 
-	// When sending an attachment, fill in the related parameters. the tencent cloud API request supports a maximum of 8M request packet. the attachment content transits Base64 and is expected to expand by 1.5 times. you should control the total size of all attachments within 4M. the API will return an error if the overall request exceeds 8M.
+	// <p>To send an attachment, fill in the relevant parameters. The Tencent Cloud API request supports a maximum of 8M request packet. The attachment content is expected to expand by 1.5 times after Base64 encoding. The total size of all attachments should not exceed 4M. The API will return an error if the overall request exceeds 8M.</p>
 	Attachments []*Attachment `json:"Attachments,omitnil,omitempty" name:"Attachments"`
 
-	// Unsubscription link options 0: do not add unsubscription link 1: english 2: simplified chinese 3: traditional chinese 4: spanish 5: french 6: german 7: japanese 8: korean 9: arabic 10: thai.
+	// Unsubscription link options 0: do not add unsubscription link 1: english 2: simplified chinese 3: traditional chinese 4: spanish 5: french 6: german 7: japanese 8: korean 9: arabic 10: thai 11: indonesian.
 	Unsubscribe *string `json:"Unsubscribe,omitnil,omitempty" name:"Unsubscribe"`
 
-	// Mail trigger type. 0: non-trigger class, default type, select this type for marketing emails and non-instant emails. 1: trigger class, instant delivery emails such as captcha-intl. if the mail exceeds a certain size, the system will automatically select the non-trigger class channel.
+	// <p>Mail trigger type 0: Non-trigger class, default type, select this type for marketing email, non-instant mail. 1: Trigger class, instant delivery mail such as verification code. If the mail exceeds a certain size, the system will automatically select a non-trigger type channel.</p>
 	TriggerType *uint64 `json:"TriggerType,omitnil,omitempty" name:"TriggerType"`
 
-	// Message-Id field in the smtp header.
+	// <p>Message-Id field in the smtp header</p>
 	SmtpMessageId *string `json:"SmtpMessageId,omitnil,omitempty" name:"SmtpMessageId"`
 
-	// Other fields that can be set in the smtp header.
+	// <p>Other fields that can be set in the smtp header</p>
 	SmtpHeaders *string `json:"SmtpHeaders,omitnil,omitempty" name:"SmtpHeaders"`
 
-	// from field in the smtp header. the domain name should be consistent with FromEmailAddress.
+	// <p>The from field in the smtp header. The domain name should be consistent with the FromEmailAddress.</p>
 	HeaderFrom *string `json:"HeaderFrom,omitnil,omitempty" name:"HeaderFrom"`
 }
 
 type SendEmailRequest struct {
 	*tchttp.BaseRequest
 	
-	// Sender'S email address. when not using an alias, enter the sender's email address directly, for example: noreply@mail.qcloud.com. to enter a sender alias, follow this format (note that a space must separate the alias and email address): alias+space+<email address>. the alias cannot contain a colon (:).
+	// <p>Sender's email address. If no alias is used, enter the sender's email address directly, for example: noreply@mail.qcloud.com. To use a sender alias, follow this format (note that a space must be used between the alias and the email address): alias+space+&lt;email address&gt;. The alias cannot contain a colon (:).</p>
 	FromEmailAddress *string `json:"FromEmailAddress,omitnil,omitempty" name:"FromEmailAddress"`
 
-	// Email subject.
+	// <p>Email Subject</p>
 	Subject *string `json:"Subject,omitnil,omitempty" name:"Subject"`
 
-	// Recipient email address, supports up to 50 recipients for mass sending. note: the email content will display all recipient addresses. for non-mass sending, call the API multiple times to send.
-	// Specifies that at least one of the Destination, Cc, or Bcc parameters must exist.
+	// <p>Recipient email address, supports up to 50 recipients in mass sending. Note: The email content displays all recipient addresses. For non-mass sending, call the API multiple times to send.<br>At least one of the three parameters Destination/Cc/Bcc must exist.</p>
 	Destination []*string `json:"Destination,omitnil,omitempty" name:"Destination"`
 
-	// The "reply" email address of the mail. can be filled with an email address where you can receive mail, which can be a personal mailbox. if left empty, the recipient's reply mail will fail to send.
+	// <p>The "reply" email address of the mail. Can be filled with a mailbox address where you can receive emails, which can be a personal mailbox. If left empty, the recipient's reply mail will fail to send.</p>
 	ReplyToAddresses *string `json:"ReplyToAddresses,omitnil,omitempty" name:"ReplyToAddresses"`
 
-	// Cc recipient email address, supports up to 20 carbon copies.
+	// <p>Email address of CC recipients, supports up to 20 carbon copies.</p>
 	Cc []*string `json:"Cc,omitnil,omitempty" name:"Cc"`
 
-	// Bcc email address, supports up to 20 carbon copies. Bcc and Destination must be unique.
+	// <p>Bcc email address, supports up to 20 carbon copies. Bcc and Destination must be unique.</p>
 	Bcc []*string `json:"Bcc,omitnil,omitempty" name:"Bcc"`
 
-	// Use template for sending and fill in related parameters.
-	// <dx-alert infotype="notice" title="note">this field must be specified if you have not applied for special configuration.</dx-alert>.
+	// <p>Fill in the template parameters when sending with a template.</p><blockquote class="rno-document-tips rno-document-tips-notice">    <div class="rno-document-tips-body">        <i class="rno-document-tip-icon"></i>        <div class="rno-document-tip-title">Note</div>        <div class="rno-document-tip-desc"><p>This field must be specified if you have not applied for special configuration</p></div>    </div></blockquote>
 	Template *Template `json:"Template,omitnil,omitempty" name:"Template"`
 
-	// This parameter has been deprecated.
-	// <dx-alert infotype="notice" title="description"> only customers who have applied for special configuration in the past need to use this. if you have not applied for special configuration, this field does not exist.</dx-alert>.
+	// <p>Abandoned</p><blockquote class="rno-document-tips rno-document-tips-notice">    <div class="rno-document-tips-body">        <i class="rno-document-tip-icon"></i>        <div class="rno-document-tip-title">Description</div>        <div class="rno-document-tip-desc"><p>Only customers who historically applied for special configuration require the use of this. If you have not applied for special configuration, this field does not exist.</p></div>    </div></blockquote>
 	Simple *Simple `json:"Simple,omitnil,omitempty" name:"Simple"`
 
-	// When sending an attachment, fill in the related parameters. the tencent cloud API request supports a maximum of 8M request packet. the attachment content transits Base64 and is expected to expand by 1.5 times. you should control the total size of all attachments within 4M. the API will return an error if the overall request exceeds 8M.
+	// <p>To send an attachment, fill in the relevant parameters. The Tencent Cloud API request supports a maximum of 8M request packet. The attachment content is expected to expand by 1.5 times after Base64 encoding. The total size of all attachments should not exceed 4M. The API will return an error if the overall request exceeds 8M.</p>
 	Attachments []*Attachment `json:"Attachments,omitnil,omitempty" name:"Attachments"`
 
-	// Unsubscription link options 0: do not add unsubscription link 1: english 2: simplified chinese 3: traditional chinese 4: spanish 5: french 6: german 7: japanese 8: korean 9: arabic 10: thai.
+	// Unsubscription link options 0: do not add unsubscription link 1: english 2: simplified chinese 3: traditional chinese 4: spanish 5: french 6: german 7: japanese 8: korean 9: arabic 10: thai 11: indonesian.
 	Unsubscribe *string `json:"Unsubscribe,omitnil,omitempty" name:"Unsubscribe"`
 
-	// Mail trigger type. 0: non-trigger class, default type, select this type for marketing emails and non-instant emails. 1: trigger class, instant delivery emails such as captcha-intl. if the mail exceeds a certain size, the system will automatically select the non-trigger class channel.
+	// <p>Mail trigger type 0: Non-trigger class, default type, select this type for marketing email, non-instant mail. 1: Trigger class, instant delivery mail such as verification code. If the mail exceeds a certain size, the system will automatically select a non-trigger type channel.</p>
 	TriggerType *uint64 `json:"TriggerType,omitnil,omitempty" name:"TriggerType"`
 
-	// Message-Id field in the smtp header.
+	// <p>Message-Id field in the smtp header</p>
 	SmtpMessageId *string `json:"SmtpMessageId,omitnil,omitempty" name:"SmtpMessageId"`
 
-	// Other fields that can be set in the smtp header.
+	// <p>Other fields that can be set in the smtp header</p>
 	SmtpHeaders *string `json:"SmtpHeaders,omitnil,omitempty" name:"SmtpHeaders"`
 
-	// from field in the smtp header. the domain name should be consistent with FromEmailAddress.
+	// <p>The from field in the smtp header. The domain name should be consistent with the FromEmailAddress.</p>
 	HeaderFrom *string `json:"HeaderFrom,omitnil,omitempty" name:"HeaderFrom"`
 }
 
@@ -2571,7 +2559,7 @@ func (r *SendEmailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SendEmailResponseParams struct {
-	// Uniquely generated message identifier for receive message.
+	// <p>Uniquely generated message identifier for receiving messages.</p>
 	MessageId *string `json:"MessageId,omitnil,omitempty" name:"MessageId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.

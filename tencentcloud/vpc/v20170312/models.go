@@ -5679,45 +5679,57 @@ func (r *CreateTrafficMirrorResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateVpcEndPointRequestParams struct {
-	// VPC instance ID
+	// VPC instance ID. obtain through the API [DescribeVpcs](https://www.tencentcloud.comom/document/product/1108/43663?from_cn_redirect=1).
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet instance ID
+	// Subnet instance ID. can be obtained through the [DescribeSubnets](https://www.tencentcloud.comom/document/product/215/15784?from_cn_redirect=1) api.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Endpoint name
+	// Endpoint name. limited to 60 characters.
 	EndPointName *string `json:"EndPointName,omitnil,omitempty" name:"EndPointName"`
 
-	// Endpoint service ID
+	// Endpoint service ID, which can be obtained through the [DescribeVpcEndPointService](https://www.tencentcloud.comom/document/product/215/54678?from_cn_redirect=1) api.
 	EndPointServiceId *string `json:"EndPointServiceId,omitnil,omitempty" name:"EndPointServiceId"`
 
 	// Endpoint VIP. You can apply for a specified IP.
 	EndPointVip *string `json:"EndPointVip,omitnil,omitempty" name:"EndPointVip"`
 
-	// Security group ID
+	// Security group ID. can be obtained through the API [DescribeSecurityGroups](https://www.tencentcloud.comom/document/product/215/15808?from_cn_redirect=1).
 	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
+
+	// List of tags to be bound, for example, [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Protocol type. supports Ipv4 and Ipv6. default is Ipv4.
+	IpAddressType *string `json:"IpAddressType,omitnil,omitempty" name:"IpAddressType"`
 }
 
 type CreateVpcEndPointRequest struct {
 	*tchttp.BaseRequest
 	
-	// VPC instance ID
+	// VPC instance ID. obtain through the API [DescribeVpcs](https://www.tencentcloud.comom/document/product/1108/43663?from_cn_redirect=1).
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet instance ID
+	// Subnet instance ID. can be obtained through the [DescribeSubnets](https://www.tencentcloud.comom/document/product/215/15784?from_cn_redirect=1) api.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Endpoint name
+	// Endpoint name. limited to 60 characters.
 	EndPointName *string `json:"EndPointName,omitnil,omitempty" name:"EndPointName"`
 
-	// Endpoint service ID
+	// Endpoint service ID, which can be obtained through the [DescribeVpcEndPointService](https://www.tencentcloud.comom/document/product/215/54678?from_cn_redirect=1) api.
 	EndPointServiceId *string `json:"EndPointServiceId,omitnil,omitempty" name:"EndPointServiceId"`
 
 	// Endpoint VIP. You can apply for a specified IP.
 	EndPointVip *string `json:"EndPointVip,omitnil,omitempty" name:"EndPointVip"`
 
-	// Security group ID
+	// Security group ID. can be obtained through the API [DescribeSecurityGroups](https://www.tencentcloud.comom/document/product/215/15808?from_cn_redirect=1).
 	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
+
+	// List of tags to be bound, for example, [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Protocol type. supports Ipv4 and Ipv6. default is Ipv4.
+	IpAddressType *string `json:"IpAddressType,omitnil,omitempty" name:"IpAddressType"`
 }
 
 func (r *CreateVpcEndPointRequest) ToJsonString() string {
@@ -5738,6 +5750,8 @@ func (r *CreateVpcEndPointRequest) FromJsonString(s string) error {
 	delete(f, "EndPointServiceId")
 	delete(f, "EndPointVip")
 	delete(f, "SecurityGroupId")
+	delete(f, "Tags")
+	delete(f, "IpAddressType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVpcEndPointRequest has unknown keys!", "")
 	}
@@ -16648,7 +16662,7 @@ type EndPoint struct {
 	// Endpoint ID
 	EndPointId *string `json:"EndPointId,omitnil,omitempty" name:"EndPointId"`
 
-	// VPC ID
+	// The unique ID of the VPC. obtain through the API [DescribeVpcs](https://www.tencentcloud.comom/document/product/215/15778?from_cn_redirect=1).
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Subnet ID
@@ -16675,15 +16689,20 @@ type EndPoint struct {
 	// Endpoint status. Valid values: `ACTIVE` (available), `PENDING` (to be accepted), `ACCEPTING` (being accepted), `REJECTED` (rejected), and `FAILED` (failed).
 	State *string `json:"State,omitnil,omitempty" name:"State"`
 
-	// Creation time
+	// Creation time. format: YYYY-MM-DD HH:MM:SS.
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// ID list of security group instances bound with endpoints
 	GroupSet []*string `json:"GroupSet,omitnil,omitempty" name:"GroupSet"`
 
-	// Endpoint service name
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Endpoint service name.
 	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
+
+	// CDC cluster unique ID.
+	CdcId *string `json:"CdcId,omitnil,omitempty" name:"CdcId"`
+
+	// Tag key-value pair.		
+	TagSet []*Tag `json:"TagSet,omitnil,omitempty" name:"TagSet"`
 }
 
 type EndPointService struct {

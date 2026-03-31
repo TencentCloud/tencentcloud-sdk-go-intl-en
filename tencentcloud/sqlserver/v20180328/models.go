@@ -1327,22 +1327,22 @@ type CreateCloudDBInstancesRequestParams struct {
 	// Instance AZ, such as `ap-guangzhou-1` (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the`DescribeZones` API.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Instance memory size in GB
+	// Instance memory size in GB.
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance disk size in GB
+	// Instance disk size in GB.
 	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
-	// Number of CPU cores
+	// Number of CPU cores.
 	Cpu *uint64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
 	// The host type of the purchased instance. Valid values: `CLOUD_HSSD` (virtual machine with enhanced SSD), `CLOUD_TSSD` (virtual machine with ulTra SSD), `CLOUD_BSSD` (virtual machine with balanced SSD).
 	MachineType *string `json:"MachineType,omitnil,omitempty" name:"MachineType"`
 
-	// Billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID` (pay-as-you-go).
+	// Billing mode. Valid values: `PREPAID` (yearly/monthly subscription), `POSTPAID` (pay-as-you-go).
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
-	// Project ID
+	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Number of instances purchased this time. Default value: `1`.  Maximum value: `10`.
@@ -1360,13 +1360,13 @@ type CreateCloudDBInstancesRequestParams struct {
 	// Whether to automatically use voucher. Valid values: `0` (no, default), `1` (yes).
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-	// Array of voucher IDs (currently, only one voucher can be used per order)
+	// Array of voucher IDs (currently, only one voucher can be used per order).
 	VoucherIds []*string `json:"VoucherIds,omitnil,omitempty" name:"VoucherIds"`
 
 	// SQL Server version. Valid values:  `2008R2` (SQL Server 2008 R2 Enterprise), `2012SP3` (SQL Server 2012 Enterprise), `201202` (SQL Server 2012 Standard), `2014SP2` (SQL Server 2014 Enterprise), 201402 (SQL Server 2014 Standard), `2016SP1` (SQL Server 2016 Enterprise), `201602` (SQL Server 2016 Standard), `2017` (SQL Server 2017 Enterprise), `201702` (SQL Server 2017 Standard), `2019` (SQL Server 2019 Enterprise), `201902` (SQL Server 2019 Standard).  Default value: `2008R2`.  The available version varies by region, and you can pull the version information through the `DescribeProductConfig` API.
 	DBVersion *string `json:"DBVersion,omitnil,omitempty" name:"DBVersion"`
 
-	// Auto-renewal flag, which takes effect only when purchasing a monthly subscribed instance.  Valid values:  `0` (auto-renewal disabled), `1` (auto-renewal enabled). Default value: `0`.
+	// Auto-renewal flag, which takes effect only when purchasing a yearly/monthly subscribed instance.  Valid values:  `0` (auto-renewal disabled), `1` (auto-renewal enabled). Default value: `0`.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
 	// Security group list, which contains security group IDs in the format of `sg-xxx`.
@@ -1378,13 +1378,13 @@ type CreateCloudDBInstancesRequestParams struct {
 	// Configuration of the maintenance window, which specifies the start time of daily maintenance.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Configuration of the maintenance window, which specifies the maintenance duration in hours. Hour
+	// Configuration of the maintenance window, which specifies the maintenance duration in hours. Hour.
 	Span *int64 `json:"Span,omitnil,omitempty" name:"Span"`
 
 	// Whether to deploy across AZs. Default value: `false`.
 	MultiZones *bool `json:"MultiZones,omitnil,omitempty" name:"MultiZones"`
 
-	// Tags associated with the instances to be created
+	// Tags associated with the instances to be created.
 	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
 	// Collation of system character sets. Default value:  `Chinese_PRC_CI_AS`.
@@ -1392,6 +1392,15 @@ type CreateCloudDBInstancesRequestParams struct {
 
 	// System time zone. Default value:  `China Standard Time`.
 	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// Whether it is a multi-node architecture instance. Default value: `false`.If MultiNodes = true, the value of the MultiZones parameter must be true.
+	MultiNodes *bool `json:"MultiNodes,omitnil,omitempty" name:"MultiNodes"`
+
+	// The zone in which the standby node is available. Default is empty. When MultiNodes = true, the availability zones of the primary and standby nodes cannot all be the same. The minimum number of availability zones for the standby nodes is 2, and the maximum is 5.
+	DrZones []*string `json:"DrZones,omitnil,omitempty" name:"DrZones"`
+
+	// Disk encryption identifier, 0-unencrypted, 1-encrypted.
+	DiskEncryptFlag *int64 `json:"DiskEncryptFlag,omitnil,omitempty" name:"DiskEncryptFlag"`
 }
 
 type CreateCloudDBInstancesRequest struct {
@@ -1400,22 +1409,22 @@ type CreateCloudDBInstancesRequest struct {
 	// Instance AZ, such as `ap-guangzhou-1` (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the`DescribeZones` API.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Instance memory size in GB
+	// Instance memory size in GB.
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance disk size in GB
+	// Instance disk size in GB.
 	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
-	// Number of CPU cores
+	// Number of CPU cores.
 	Cpu *uint64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
 	// The host type of the purchased instance. Valid values: `CLOUD_HSSD` (virtual machine with enhanced SSD), `CLOUD_TSSD` (virtual machine with ulTra SSD), `CLOUD_BSSD` (virtual machine with balanced SSD).
 	MachineType *string `json:"MachineType,omitnil,omitempty" name:"MachineType"`
 
-	// Billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID` (pay-as-you-go).
+	// Billing mode. Valid values: `PREPAID` (yearly/monthly subscription), `POSTPAID` (pay-as-you-go).
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
-	// Project ID
+	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Number of instances purchased this time. Default value: `1`.  Maximum value: `10`.
@@ -1433,13 +1442,13 @@ type CreateCloudDBInstancesRequest struct {
 	// Whether to automatically use voucher. Valid values: `0` (no, default), `1` (yes).
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-	// Array of voucher IDs (currently, only one voucher can be used per order)
+	// Array of voucher IDs (currently, only one voucher can be used per order).
 	VoucherIds []*string `json:"VoucherIds,omitnil,omitempty" name:"VoucherIds"`
 
 	// SQL Server version. Valid values:  `2008R2` (SQL Server 2008 R2 Enterprise), `2012SP3` (SQL Server 2012 Enterprise), `201202` (SQL Server 2012 Standard), `2014SP2` (SQL Server 2014 Enterprise), 201402 (SQL Server 2014 Standard), `2016SP1` (SQL Server 2016 Enterprise), `201602` (SQL Server 2016 Standard), `2017` (SQL Server 2017 Enterprise), `201702` (SQL Server 2017 Standard), `2019` (SQL Server 2019 Enterprise), `201902` (SQL Server 2019 Standard).  Default value: `2008R2`.  The available version varies by region, and you can pull the version information through the `DescribeProductConfig` API.
 	DBVersion *string `json:"DBVersion,omitnil,omitempty" name:"DBVersion"`
 
-	// Auto-renewal flag, which takes effect only when purchasing a monthly subscribed instance.  Valid values:  `0` (auto-renewal disabled), `1` (auto-renewal enabled). Default value: `0`.
+	// Auto-renewal flag, which takes effect only when purchasing a yearly/monthly subscribed instance.  Valid values:  `0` (auto-renewal disabled), `1` (auto-renewal enabled). Default value: `0`.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
 	// Security group list, which contains security group IDs in the format of `sg-xxx`.
@@ -1451,13 +1460,13 @@ type CreateCloudDBInstancesRequest struct {
 	// Configuration of the maintenance window, which specifies the start time of daily maintenance.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Configuration of the maintenance window, which specifies the maintenance duration in hours. Hour
+	// Configuration of the maintenance window, which specifies the maintenance duration in hours. Hour.
 	Span *int64 `json:"Span,omitnil,omitempty" name:"Span"`
 
 	// Whether to deploy across AZs. Default value: `false`.
 	MultiZones *bool `json:"MultiZones,omitnil,omitempty" name:"MultiZones"`
 
-	// Tags associated with the instances to be created
+	// Tags associated with the instances to be created.
 	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
 	// Collation of system character sets. Default value:  `Chinese_PRC_CI_AS`.
@@ -1465,6 +1474,15 @@ type CreateCloudDBInstancesRequest struct {
 
 	// System time zone. Default value:  `China Standard Time`.
 	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// Whether it is a multi-node architecture instance. Default value: `false`.If MultiNodes = true, the value of the MultiZones parameter must be true.
+	MultiNodes *bool `json:"MultiNodes,omitnil,omitempty" name:"MultiNodes"`
+
+	// The zone in which the standby node is available. Default is empty. When MultiNodes = true, the availability zones of the primary and standby nodes cannot all be the same. The minimum number of availability zones for the standby nodes is 2, and the maximum is 5.
+	DrZones []*string `json:"DrZones,omitnil,omitempty" name:"DrZones"`
+
+	// Disk encryption identifier, 0-unencrypted, 1-encrypted.
+	DiskEncryptFlag *int64 `json:"DiskEncryptFlag,omitnil,omitempty" name:"DiskEncryptFlag"`
 }
 
 func (r *CreateCloudDBInstancesRequest) ToJsonString() string {
@@ -1502,6 +1520,9 @@ func (r *CreateCloudDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "ResourceTags")
 	delete(f, "Collation")
 	delete(f, "TimeZone")
+	delete(f, "MultiNodes")
+	delete(f, "DrZones")
+	delete(f, "DiskEncryptFlag")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloudDBInstancesRequest has unknown keys!", "")
 	}
@@ -1510,7 +1531,7 @@ func (r *CreateCloudDBInstancesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateCloudDBInstancesResponseParams struct {
-	// Order name
+	// Order name.
 	DealName *string `json:"DealName,omitnil,omitempty" name:"DealName"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
