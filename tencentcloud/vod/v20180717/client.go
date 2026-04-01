@@ -1675,6 +1675,64 @@ func (c *Client) CreateJustInTimeTranscodeTemplateWithContext(ctx context.Contex
     return
 }
 
+func NewCreateLLMComprehendTemplateRequest() (request *CreateLLMComprehendTemplateRequest) {
+    request = &CreateLLMComprehendTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateLLMComprehendTemplate")
+    
+    
+    return
+}
+
+func NewCreateLLMComprehendTemplateResponse() (response *CreateLLMComprehendTemplateResponse) {
+    response = &CreateLLMComprehendTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateLLMComprehendTemplate
+// Create a large model comprehend template
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_EXTENDEDPARAMETER = "InvalidParameterValue.ExtendedParameter"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateLLMComprehendTemplate(request *CreateLLMComprehendTemplateRequest) (response *CreateLLMComprehendTemplateResponse, err error) {
+    return c.CreateLLMComprehendTemplateWithContext(context.Background(), request)
+}
+
+// CreateLLMComprehendTemplate
+// Create a large model comprehend template
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_EXTENDEDPARAMETER = "InvalidParameterValue.ExtendedParameter"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateLLMComprehendTemplateWithContext(ctx context.Context, request *CreateLLMComprehendTemplateRequest) (response *CreateLLMComprehendTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateLLMComprehendTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateLLMComprehendTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateLLMComprehendTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateLLMComprehendTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreatePersonSampleRequest() (request *CreatePersonSampleRequest) {
     request = &CreatePersonSampleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3543,6 +3601,74 @@ func (c *Client) DeleteJustInTimeTranscodeTemplateWithContext(ctx context.Contex
     request.SetContext(ctx)
     
     response = NewDeleteJustInTimeTranscodeTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLLMComprehendTemplateRequest() (request *DeleteLLMComprehendTemplateRequest) {
+    request = &DeleteLLMComprehendTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteLLMComprehendTemplate")
+    
+    
+    return
+}
+
+func NewDeleteLLMComprehendTemplateResponse() (response *DeleteLLMComprehendTemplateResponse) {
+    response = &DeleteLLMComprehendTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteLLMComprehendTemplate
+// This API is used to delete a user-customized  large model comprehend template.
+//
+// 
+//
+// Note: Templates with an ID below 10000 are system-preset templates and cannot be deleted.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteLLMComprehendTemplate(request *DeleteLLMComprehendTemplateRequest) (response *DeleteLLMComprehendTemplateResponse, err error) {
+    return c.DeleteLLMComprehendTemplateWithContext(context.Background(), request)
+}
+
+// DeleteLLMComprehendTemplate
+// This API is used to delete a user-customized  large model comprehend template.
+//
+// 
+//
+// Note: Templates with an ID below 10000 are system-preset templates and cannot be deleted.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteLLMComprehendTemplateWithContext(ctx context.Context, request *DeleteLLMComprehendTemplateRequest) (response *DeleteLLMComprehendTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteLLMComprehendTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteLLMComprehendTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteLLMComprehendTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteLLMComprehendTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -5911,6 +6037,68 @@ func (c *Client) DescribeJustInTimeTranscodeTemplatesWithContext(ctx context.Con
     request.SetContext(ctx)
     
     response = NewDescribeJustInTimeTranscodeTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLLMComprehendTemplatesRequest() (request *DescribeLLMComprehendTemplatesRequest) {
+    request = &DescribeLLMComprehendTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeLLMComprehendTemplates")
+    
+    
+    return
+}
+
+func NewDescribeLLMComprehendTemplatesResponse() (response *DescribeLLMComprehendTemplatesResponse) {
+    response = &DescribeLLMComprehendTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeLLMComprehendTemplates
+// This API is used to obtain the template detail list based on the Template Unique Identifier of the large model comprehend template. The returned results include all eligible customized large model parsing templates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeLLMComprehendTemplates(request *DescribeLLMComprehendTemplatesRequest) (response *DescribeLLMComprehendTemplatesResponse, err error) {
+    return c.DescribeLLMComprehendTemplatesWithContext(context.Background(), request)
+}
+
+// DescribeLLMComprehendTemplates
+// This API is used to obtain the template detail list based on the Template Unique Identifier of the large model comprehend template. The returned results include all eligible customized large model parsing templates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeLLMComprehendTemplatesWithContext(ctx context.Context, request *DescribeLLMComprehendTemplatesRequest) (response *DescribeLLMComprehendTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeLLMComprehendTemplatesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeLLMComprehendTemplates")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLLMComprehendTemplates require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLLMComprehendTemplatesResponse()
     err = c.Send(request, response)
     return
 }
@@ -9347,6 +9535,64 @@ func (c *Client) ModifyJustInTimeTranscodeTemplateWithContext(ctx context.Contex
     request.SetContext(ctx)
     
     response = NewModifyJustInTimeTranscodeTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyLLMComprehendTemplateRequest() (request *ModifyLLMComprehendTemplateRequest) {
+    request = &ModifyLLMComprehendTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyLLMComprehendTemplate")
+    
+    
+    return
+}
+
+func NewModifyLLMComprehendTemplateResponse() (response *ModifyLLMComprehendTemplateResponse) {
+    response = &ModifyLLMComprehendTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyLLMComprehendTemplate
+// Modify the parsing template of a large model
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_EXTENDEDPARAMETER = "InvalidParameterValue.ExtendedParameter"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) ModifyLLMComprehendTemplate(request *ModifyLLMComprehendTemplateRequest) (response *ModifyLLMComprehendTemplateResponse, err error) {
+    return c.ModifyLLMComprehendTemplateWithContext(context.Background(), request)
+}
+
+// ModifyLLMComprehendTemplate
+// Modify the parsing template of a large model
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_EXTENDEDPARAMETER = "InvalidParameterValue.ExtendedParameter"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) ModifyLLMComprehendTemplateWithContext(ctx context.Context, request *ModifyLLMComprehendTemplateRequest) (response *ModifyLLMComprehendTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyLLMComprehendTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyLLMComprehendTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyLLMComprehendTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyLLMComprehendTemplateResponse()
     err = c.Send(request, response)
     return
 }

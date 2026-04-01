@@ -269,6 +269,9 @@ const (
 	// Incorrect `expiretime`.
 	INVALIDPARAMETERVALUE_EXPIREDTIME = "InvalidParameterValue.ExpiredTime"
 
+	// Parameter value error: Invalid ExtendedParameter value.
+	INVALIDPARAMETERVALUE_EXTENDEDPARAMETER = "InvalidParameterValue.ExtendedParameter"
+
 	// Incorrect parameter value: the same face already exists.
 	INVALIDPARAMETERVALUE_FACEDUPLICATE = "InvalidParameterValue.FaceDuplicate"
 

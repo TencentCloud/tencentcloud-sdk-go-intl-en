@@ -260,7 +260,7 @@ const (
 	// An exception occurred while executing the request.
 	INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 
-	// 
+	// Json data parsing failed. contact our customer service for assistance.
 	INTERNALERROR_JSONPARSEERROR = "InternalError.JsonParseError"
 
 	// Failed to parse background data. Please contact customer service.
@@ -326,7 +326,7 @@ const (
 	// Failed to convert data format. Please contact customer service.
 	INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
 
-	// 
+	// Decrypting the password failed. confirm whether the password encryption is correct.
 	INVALIDPARAMETERVALUE_DECRYPTPASSWORDFAILED = "InvalidParameterValue.DecryptPasswordFailed"
 
 	// Unsupported billing type.
@@ -362,10 +362,10 @@ const (
 	// The current account name cannot be a reserved character.
 	INVALIDPARAMETERVALUE_INVALIDACCOUNTNAME = "InvalidParameterValue.InvalidAccountName"
 
-	// 
+	// The account setting is invalid. please follow the account naming rules: the account name must be 1-16 characters, can only consist of letters, digits, or underscores; cannot be postgres; cannot start with a digit, pg_, or tencentdb_; all rules are case-insensitive.
 	INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEERROR = "InvalidParameterValue.InvalidAccountNameError"
 
-	// 
+	// The account is invalid. follow the account naming rules: it must consist of letters (a-z, a-z), digits (0-9), and underscores (_), start with a letter or underscore (_), and be no more than 63 characters. system reserved keywords cannot be used, 'postgres' is not allowed, and it cannot start with 'pg_' or 'tencentdb_'.
 	INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
 
 	// Incorrect database character set. Currently, only `UTF8` and `LATIN1` are supported.
@@ -479,7 +479,7 @@ const (
 	// Invalid instance type
 	OPERATIONDENIED_INSTANCETYPEDENIED = "OperationDenied.InstanceTypeDenied"
 
-	// 
+	// Insufficient account balance.
 	OPERATIONDENIED_INSUFFICIENTBALANCEERROR = "OperationDenied.InsufficientBalanceError"
 
 	// Serverless is not supported in this availability zone.
@@ -503,7 +503,7 @@ const (
 	// The total number of read-only nodes should not exceed the upper limit.
 	OPERATIONDENIED_ROINSTANCECOUNTEXEEDERROR = "OperationDenied.RoInstanceCountExeedError"
 
-	// 
+	// No payment permission. activation failed.
 	OPERATIONDENIED_TRADEPERMISSIONERROR = "OperationDenied.TradePermissionError"
 
 	// You need to verify your identity to make a purchase.
