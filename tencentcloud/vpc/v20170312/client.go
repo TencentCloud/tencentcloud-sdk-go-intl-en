@@ -6024,7 +6024,10 @@ func NewCreateVpnGatewayResponse() (response *CreateVpnGatewayResponse) {
 // This API (CreateVpnGateway) is used to create a VPN gateway.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CREATEVPNGATEWAYFAILED = "FailedOperation.CreateVpnGatewayFailed"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ACCESSSUBNETMASK = "InvalidParameterValue.AccessSubnetMask"
+//  INVALIDPARAMETERVALUE_ACCESSSUBNETPREFIX = "InvalidParameterValue.AccessSubnetPrefix"
 //  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
 //  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
@@ -6055,11 +6058,17 @@ func NewCreateVpnGatewayResponse() (response *CreateVpnGatewayResponse) {
 //  UNAUTHORIZEDOPERATION_NOREALNAMEAUTHENTICATION = "UnauthorizedOperation.NoRealNameAuthentication"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_INSUFFICIENTFUNDS = "UnsupportedOperation.InsufficientFunds"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTCREATEIPV6VPNGATEWAY = "UnsupportedOperation.NotSupportCreateIpv6VpnGateway"
+//  UNSUPPORTEDOPERATION_PRIVATEBGPVPNGATEWAY = "UnsupportedOperation.PrivateBgpVpnGateway"
+//  UNSUPPORTEDOPERATION_PRIVATESSLVPNGATEWAY = "UnsupportedOperation.PrivateSslVpnGateway"
+//  UNSUPPORTEDOPERATION_PRIVATEVPNGATEWAY = "UnsupportedOperation.PrivateVpnGateway"
 //  UNSUPPORTEDOPERATION_TAGALLOCATE = "UnsupportedOperation.TagAllocate"
 //  UNSUPPORTEDOPERATION_TAGFREE = "UnsupportedOperation.TagFree"
 //  UNSUPPORTEDOPERATION_TAGNOTPERMIT = "UnsupportedOperation.TagNotPermit"
 //  UNSUPPORTEDOPERATION_TAGSYSTEMRESERVEDTAGKEY = "UnsupportedOperation.TagSystemReservedTagKey"
+//  UNSUPPORTEDOPERATION_VPNGATEWAYVPCNOIPV6SUBNET = "UnsupportedOperation.VpnGatewayVpcNoIpv6Subnet"
 //  UNSUPPORTEDOPERATION_VPNGWVPCIDMUSTHAVE = "UnsupportedOperation.VpnGwVpcIdMustHave"
+//  UNSUPPORTEDOPERATION_VPNGWVPCIDNOTHAVE = "UnsupportedOperation.VpnGwVpcIdNotHave"
 //  UNSUPPORTEDOPERATION_VPNUNSUPPORTEDBGP = "UnsupportedOperation.VpnUnsupportedBgp"
 func (c *Client) CreateVpnGateway(request *CreateVpnGatewayRequest) (response *CreateVpnGatewayResponse, err error) {
     return c.CreateVpnGatewayWithContext(context.Background(), request)
@@ -6069,7 +6078,10 @@ func (c *Client) CreateVpnGateway(request *CreateVpnGatewayRequest) (response *C
 // This API (CreateVpnGateway) is used to create a VPN gateway.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CREATEVPNGATEWAYFAILED = "FailedOperation.CreateVpnGatewayFailed"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ACCESSSUBNETMASK = "InvalidParameterValue.AccessSubnetMask"
+//  INVALIDPARAMETERVALUE_ACCESSSUBNETPREFIX = "InvalidParameterValue.AccessSubnetPrefix"
 //  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
 //  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
@@ -6100,11 +6112,17 @@ func (c *Client) CreateVpnGateway(request *CreateVpnGatewayRequest) (response *C
 //  UNAUTHORIZEDOPERATION_NOREALNAMEAUTHENTICATION = "UnauthorizedOperation.NoRealNameAuthentication"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_INSUFFICIENTFUNDS = "UnsupportedOperation.InsufficientFunds"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTCREATEIPV6VPNGATEWAY = "UnsupportedOperation.NotSupportCreateIpv6VpnGateway"
+//  UNSUPPORTEDOPERATION_PRIVATEBGPVPNGATEWAY = "UnsupportedOperation.PrivateBgpVpnGateway"
+//  UNSUPPORTEDOPERATION_PRIVATESSLVPNGATEWAY = "UnsupportedOperation.PrivateSslVpnGateway"
+//  UNSUPPORTEDOPERATION_PRIVATEVPNGATEWAY = "UnsupportedOperation.PrivateVpnGateway"
 //  UNSUPPORTEDOPERATION_TAGALLOCATE = "UnsupportedOperation.TagAllocate"
 //  UNSUPPORTEDOPERATION_TAGFREE = "UnsupportedOperation.TagFree"
 //  UNSUPPORTEDOPERATION_TAGNOTPERMIT = "UnsupportedOperation.TagNotPermit"
 //  UNSUPPORTEDOPERATION_TAGSYSTEMRESERVEDTAGKEY = "UnsupportedOperation.TagSystemReservedTagKey"
+//  UNSUPPORTEDOPERATION_VPNGATEWAYVPCNOIPV6SUBNET = "UnsupportedOperation.VpnGatewayVpcNoIpv6Subnet"
 //  UNSUPPORTEDOPERATION_VPNGWVPCIDMUSTHAVE = "UnsupportedOperation.VpnGwVpcIdMustHave"
+//  UNSUPPORTEDOPERATION_VPNGWVPCIDNOTHAVE = "UnsupportedOperation.VpnGwVpcIdNotHave"
 //  UNSUPPORTEDOPERATION_VPNUNSUPPORTEDBGP = "UnsupportedOperation.VpnUnsupportedBgp"
 func (c *Client) CreateVpnGatewayWithContext(ctx context.Context, request *CreateVpnGatewayRequest) (response *CreateVpnGatewayResponse, err error) {
     if request == nil {
@@ -18887,7 +18905,7 @@ func NewRenewVpnGatewayResponse() (response *RenewVpnGatewayResponse) {
 }
 
 // RenewVpnGateway
-// This API (RenewVpnGateway) is used to renew prepaid (monthly subscription) VPN gateways. Currently, only IPSEC gateways are supported.
+// This API (RenewVpnGateway) is used to renew prepaid (yearly/monthly subscription) VPN gateways. Currently, only IPSEC gateways are supported.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
@@ -18898,7 +18916,7 @@ func (c *Client) RenewVpnGateway(request *RenewVpnGatewayRequest) (response *Ren
 }
 
 // RenewVpnGateway
-// This API (RenewVpnGateway) is used to renew prepaid (monthly subscription) VPN gateways. Currently, only IPSEC gateways are supported.
+// This API (RenewVpnGateway) is used to renew prepaid (yearly/monthly subscription) VPN gateways. Currently, only IPSEC gateways are supported.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"

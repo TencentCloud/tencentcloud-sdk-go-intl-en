@@ -1130,6 +1130,294 @@ func (r *DeleteWhitelistResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDataBridgeUrlV2RequestParams struct {
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// pagepv: performance view. allcount: performance view. falls: page loading waterfall chart. samp: first meaningful paint. day: 14-day data. nettype: network or platform view. performance: top page performance view. version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: ISP view, region view, browser view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Network type.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Global or not.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Duration calculation method.
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
+
+	// Environment variable.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// URL name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// HTTP status code.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// retcode
+	Ret *string `json:"Ret,omitnil,omitempty" name:"Ret"`
+
+	// Network status.
+	NetStatus *string `json:"NetStatus,omitnil,omitempty" name:"NetStatus"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+type DescribeDataBridgeUrlV2Request struct {
+	*tchttp.BaseRequest
+	
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// pagepv: performance view. allcount: performance view. falls: page loading waterfall chart. samp: first meaningful paint. day: 14-day data. nettype: network or platform view. performance: top page performance view. version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: ISP view, region view, browser view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Network type.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Global or not.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Duration calculation method.
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
+
+	// Environment variable.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// URL name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// HTTP status code.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// retcode
+	Ret *string `json:"Ret,omitnil,omitempty" name:"Ret"`
+
+	// Network status.
+	NetStatus *string `json:"NetStatus,omitnil,omitempty" name:"NetStatus"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+func (r *DescribeDataBridgeUrlV2Request) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataBridgeUrlV2Request) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ID")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Type")
+	delete(f, "Level")
+	delete(f, "Isp")
+	delete(f, "Area")
+	delete(f, "NetType")
+	delete(f, "Platform")
+	delete(f, "Device")
+	delete(f, "VersionNum")
+	delete(f, "ExtFirst")
+	delete(f, "ExtSecond")
+	delete(f, "ExtThird")
+	delete(f, "IsAbroad")
+	delete(f, "Browser")
+	delete(f, "Os")
+	delete(f, "Engine")
+	delete(f, "Brand")
+	delete(f, "From")
+	delete(f, "CostType")
+	delete(f, "Env")
+	delete(f, "Name")
+	delete(f, "Status")
+	delete(f, "Ret")
+	delete(f, "NetStatus")
+	delete(f, "ExtFourth")
+	delete(f, "ExtFifth")
+	delete(f, "ExtSixth")
+	delete(f, "ExtSeventh")
+	delete(f, "ExtEighth")
+	delete(f, "ExtNinth")
+	delete(f, "ExtTenth")
+	delete(f, "Granularity")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataBridgeUrlV2Request has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDataBridgeUrlV2ResponseParams struct {
+	// Return value.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDataBridgeUrlV2Response struct {
+	*tchttp.BaseResponse
+	Response *DescribeDataBridgeUrlV2ResponseParams `json:"Response"`
+}
+
+func (r *DescribeDataBridgeUrlV2Response) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataBridgeUrlV2Response) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDataCustomUrlRequestParams struct {
 	// Start time
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
@@ -1341,6 +1629,273 @@ func (r *DescribeDataCustomUrlResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDataCustomUrlV2RequestParams struct {
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// top: top resource view. allcount: performance view. day: 14-day data. condition: condition list. pagepv: performance view. area: request speed distribution. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type (1, 2, 3, 4, 5, or 100). 1 indicates Wi-Fi. 2 indicates 2G. 3 indicates 3G. 4 indicates 4G. 5 indicates 5G. 6 indicates 6G. 100 indicates unknown.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Duration calculation method.
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
+
+	// Value of the custom speed test key.
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+type DescribeDataCustomUrlV2Request struct {
+	*tchttp.BaseRequest
+	
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// top: top resource view. allcount: performance view. day: 14-day data. condition: condition list. pagepv: performance view. area: request speed distribution. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type (1, 2, 3, 4, 5, or 100). 1 indicates Wi-Fi. 2 indicates 2G. 3 indicates 3G. 4 indicates 4G. 5 indicates 5G. 6 indicates 6G. 100 indicates unknown.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Duration calculation method.
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
+
+	// Value of the custom speed test key.
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+func (r *DescribeDataCustomUrlV2Request) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataCustomUrlV2Request) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "Type")
+	delete(f, "EndTime")
+	delete(f, "ID")
+	delete(f, "ExtSecond")
+	delete(f, "Engine")
+	delete(f, "Isp")
+	delete(f, "From")
+	delete(f, "Level")
+	delete(f, "Brand")
+	delete(f, "Area")
+	delete(f, "VersionNum")
+	delete(f, "Platform")
+	delete(f, "ExtThird")
+	delete(f, "ExtFirst")
+	delete(f, "NetType")
+	delete(f, "Device")
+	delete(f, "IsAbroad")
+	delete(f, "Os")
+	delete(f, "Browser")
+	delete(f, "CostType")
+	delete(f, "Url")
+	delete(f, "Env")
+	delete(f, "ExtFourth")
+	delete(f, "ExtFifth")
+	delete(f, "ExtSixth")
+	delete(f, "ExtSeventh")
+	delete(f, "ExtEighth")
+	delete(f, "ExtNinth")
+	delete(f, "ExtTenth")
+	delete(f, "Granularity")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataCustomUrlV2Request has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDataCustomUrlV2ResponseParams struct {
+	// Return value.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDataCustomUrlV2Response struct {
+	*tchttp.BaseResponse
+	Response *DescribeDataCustomUrlV2ResponseParams `json:"Response"`
+}
+
+func (r *DescribeDataCustomUrlV2Response) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataCustomUrlV2Response) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDataEventUrlRequestParams struct {
 	// Start time
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
@@ -1541,6 +2096,266 @@ func (r *DescribeDataEventUrlResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDataEventUrlResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDataEventUrlV2RequestParams struct {
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// allcount: performance view. day: 14-day data. condition: condition list. ckuv: obtaining UV trend. ckpv: obtaining PV trend. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Filter condition.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+type DescribeDataEventUrlV2Request struct {
+	*tchttp.BaseRequest
+	
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// allcount: performance view. day: 14-day data. condition: condition list. ckuv: obtaining UV trend. ckpv: obtaining PV trend. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Filter condition.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+func (r *DescribeDataEventUrlV2Request) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataEventUrlV2Request) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "Type")
+	delete(f, "EndTime")
+	delete(f, "ID")
+	delete(f, "ExtSecond")
+	delete(f, "Engine")
+	delete(f, "Isp")
+	delete(f, "From")
+	delete(f, "Level")
+	delete(f, "Brand")
+	delete(f, "Area")
+	delete(f, "VersionNum")
+	delete(f, "Platform")
+	delete(f, "ExtThird")
+	delete(f, "ExtFirst")
+	delete(f, "NetType")
+	delete(f, "Device")
+	delete(f, "IsAbroad")
+	delete(f, "Os")
+	delete(f, "Browser")
+	delete(f, "Name")
+	delete(f, "Env")
+	delete(f, "ExtFourth")
+	delete(f, "ExtFifth")
+	delete(f, "ExtSixth")
+	delete(f, "ExtSeventh")
+	delete(f, "ExtEighth")
+	delete(f, "ExtNinth")
+	delete(f, "ExtTenth")
+	delete(f, "Granularity")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataEventUrlV2Request has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDataEventUrlV2ResponseParams struct {
+	// Return value.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDataEventUrlV2Response struct {
+	*tchttp.BaseResponse
+	Response *DescribeDataEventUrlV2ResponseParams `json:"Response"`
+}
+
+func (r *DescribeDataEventUrlV2Response) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataEventUrlV2Response) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2213,6 +3028,294 @@ func (r *DescribeDataFetchUrlResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDataFetchUrlV2RequestParams struct {
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// allcount: performance view. pagepv: PV view. day: 14-day data. count40x: 40X view. count50x: 50X view. count5xand4x: 40∑50 view. top: top resource view. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Duration calculation method.
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
+
+	// Source.
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// HTTP response code.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// retcode
+	Ret *string `json:"Ret,omitnil,omitempty" name:"Ret"`
+
+	// Network status.
+	NetStatus *string `json:"NetStatus,omitnil,omitempty" name:"NetStatus"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+type DescribeDataFetchUrlV2Request struct {
+	*tchttp.BaseRequest
+	
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// allcount: performance view. pagepv: PV view. day: 14-day data. count40x: 40X view. count50x: 50X view. count5xand4x: 40∑50 view. top: top resource view. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Duration calculation method.
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
+
+	// Source.
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// HTTP response code.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// retcode
+	Ret *string `json:"Ret,omitnil,omitempty" name:"Ret"`
+
+	// Network status.
+	NetStatus *string `json:"NetStatus,omitnil,omitempty" name:"NetStatus"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+func (r *DescribeDataFetchUrlV2Request) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataFetchUrlV2Request) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "Type")
+	delete(f, "EndTime")
+	delete(f, "ID")
+	delete(f, "ExtSecond")
+	delete(f, "Engine")
+	delete(f, "Isp")
+	delete(f, "From")
+	delete(f, "Level")
+	delete(f, "Brand")
+	delete(f, "Area")
+	delete(f, "VersionNum")
+	delete(f, "Platform")
+	delete(f, "ExtThird")
+	delete(f, "ExtFirst")
+	delete(f, "NetType")
+	delete(f, "Device")
+	delete(f, "IsAbroad")
+	delete(f, "Os")
+	delete(f, "Browser")
+	delete(f, "CostType")
+	delete(f, "Url")
+	delete(f, "Env")
+	delete(f, "Status")
+	delete(f, "Ret")
+	delete(f, "NetStatus")
+	delete(f, "ExtFourth")
+	delete(f, "ExtFifth")
+	delete(f, "ExtSixth")
+	delete(f, "ExtSeventh")
+	delete(f, "ExtEighth")
+	delete(f, "ExtNinth")
+	delete(f, "ExtTenth")
+	delete(f, "Granularity")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataFetchUrlV2Request has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDataFetchUrlV2ResponseParams struct {
+	// Return value.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDataFetchUrlV2Response struct {
+	*tchttp.BaseResponse
+	Response *DescribeDataFetchUrlV2ResponseParams `json:"Response"`
+}
+
+func (r *DescribeDataFetchUrlV2Response) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataFetchUrlV2Response) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDataLogUrlInfoRequestParams struct {
 	// Project ID
 	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
@@ -2481,6 +3584,266 @@ func (r *DescribeDataLogUrlStatisticsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDataLogUrlStatisticsV2RequestParams struct {
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// analysis: exception analysis. compare: exception list comparison. allcount: performance view. condition: condition list. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Environment differentiation.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// JavaScript exception message.
+	ErrorMsg *string `json:"ErrorMsg,omitnil,omitempty" name:"ErrorMsg"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+type DescribeDataLogUrlStatisticsV2Request struct {
+	*tchttp.BaseRequest
+	
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// analysis: exception analysis. compare: exception list comparison. allcount: performance view. condition: condition list. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Environment differentiation.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// JavaScript exception message.
+	ErrorMsg *string `json:"ErrorMsg,omitnil,omitempty" name:"ErrorMsg"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+func (r *DescribeDataLogUrlStatisticsV2Request) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataLogUrlStatisticsV2Request) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "Type")
+	delete(f, "EndTime")
+	delete(f, "ID")
+	delete(f, "ExtSecond")
+	delete(f, "Engine")
+	delete(f, "Isp")
+	delete(f, "From")
+	delete(f, "Level")
+	delete(f, "Brand")
+	delete(f, "Area")
+	delete(f, "VersionNum")
+	delete(f, "Platform")
+	delete(f, "ExtThird")
+	delete(f, "ExtFirst")
+	delete(f, "NetType")
+	delete(f, "Device")
+	delete(f, "IsAbroad")
+	delete(f, "Os")
+	delete(f, "Browser")
+	delete(f, "Env")
+	delete(f, "ErrorMsg")
+	delete(f, "ExtFourth")
+	delete(f, "ExtFifth")
+	delete(f, "ExtSixth")
+	delete(f, "ExtSeventh")
+	delete(f, "ExtEighth")
+	delete(f, "ExtNinth")
+	delete(f, "ExtTenth")
+	delete(f, "Granularity")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataLogUrlStatisticsV2Request has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDataLogUrlStatisticsV2ResponseParams struct {
+	// Return value.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDataLogUrlStatisticsV2Response struct {
+	*tchttp.BaseResponse
+	Response *DescribeDataLogUrlStatisticsV2ResponseParams `json:"Response"`
+}
+
+func (r *DescribeDataLogUrlStatisticsV2Response) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataLogUrlStatisticsV2Response) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDataPerformancePageRequestParams struct {
 	// Project ID
 	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
@@ -2688,6 +4051,280 @@ func (r *DescribeDataPerformancePageResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDataPerformancePageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDataPerformancePageV2RequestParams struct {
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// pagepv: PV view. allcount: performance view. falls: page loading waterfall chart. samp: first meaningful paint. day: 14-day data. nettype: network or platform view. performance: top page performance view. version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: ISP view, region view, browser view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Network type.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Duration calculation method.
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
+
+	// Environment variable.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// Network status.
+	NetStatus *string `json:"NetStatus,omitnil,omitempty" name:"NetStatus"`
+
+	// Indicates whether to return webvitals data.
+	WebVitals *bool `json:"WebVitals,omitnil,omitempty" name:"WebVitals"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+type DescribeDataPerformancePageV2Request struct {
+	*tchttp.BaseRequest
+	
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// pagepv: PV view. allcount: performance view. falls: page loading waterfall chart. samp: first meaningful paint. day: 14-day data. nettype: network or platform view. performance: top page performance view. version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: ISP view, region view, browser view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Network type.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Duration calculation method.
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
+
+	// Environment variable.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// Network status.
+	NetStatus *string `json:"NetStatus,omitnil,omitempty" name:"NetStatus"`
+
+	// Indicates whether to return webvitals data.
+	WebVitals *bool `json:"WebVitals,omitnil,omitempty" name:"WebVitals"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+func (r *DescribeDataPerformancePageV2Request) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataPerformancePageV2Request) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ID")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Type")
+	delete(f, "Level")
+	delete(f, "Isp")
+	delete(f, "Area")
+	delete(f, "NetType")
+	delete(f, "Platform")
+	delete(f, "Device")
+	delete(f, "VersionNum")
+	delete(f, "ExtFirst")
+	delete(f, "ExtSecond")
+	delete(f, "ExtThird")
+	delete(f, "IsAbroad")
+	delete(f, "Browser")
+	delete(f, "Os")
+	delete(f, "Engine")
+	delete(f, "Brand")
+	delete(f, "From")
+	delete(f, "CostType")
+	delete(f, "Env")
+	delete(f, "NetStatus")
+	delete(f, "WebVitals")
+	delete(f, "ExtFourth")
+	delete(f, "ExtFifth")
+	delete(f, "ExtSixth")
+	delete(f, "ExtSeventh")
+	delete(f, "ExtEighth")
+	delete(f, "ExtNinth")
+	delete(f, "ExtTenth")
+	delete(f, "Granularity")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataPerformancePageV2Request has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDataPerformancePageV2ResponseParams struct {
+	// Return value.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDataPerformancePageV2Response struct {
+	*tchttp.BaseResponse
+	Response *DescribeDataPerformancePageV2ResponseParams `json:"Response"`
+}
+
+func (r *DescribeDataPerformancePageV2Response) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataPerformancePageV2Response) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3312,6 +4949,277 @@ func (r *DescribeDataPvUrlStatisticsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDataPvUrlStatisticsV2RequestParams struct {
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// allcount: performance view. day: 14-day data. vp: performance. ckuv: UV. ckpv: PV. condition: condition list. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type (1, 2, 3, 4, 5, or 100). 1 indicates Wi-Fi. 2 indicates 2G. 3 indicates 3G. 4 indicates 4G. 5 indicates 5G. 6 indicates 6G. 100 indicates unknown.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// Parameter value enumeration for group by. 1: 1 minute. 2: 5 minutes. 3: 30 minutes. 4: 1 hour.
+	//  5:1d
+	GroupByType *int64 `json:"GroupByType,omitnil,omitempty" name:"GroupByType"`
+
+	// 1: Queries Zhiyan.
+	// 0: Uses the old logic, which is removed. Do not use this value.
+	IsNewData *int64 `json:"IsNewData,omitnil,omitempty" name:"IsNewData"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+type DescribeDataPvUrlStatisticsV2Request struct {
+	*tchttp.BaseRequest
+	
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// allcount: performance view. day: 14-day data. vp: performance. ckuv: UV. ckpv: PV. condition: condition list. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type (1, 2, 3, 4, 5, or 100). 1 indicates Wi-Fi. 2 indicates 2G. 3 indicates 3G. 4 indicates 4G. 5 indicates 5G. 6 indicates 6G. 100 indicates unknown.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// Parameter value enumeration for group by. 1: 1 minute. 2: 5 minutes. 3: 30 minutes. 4: 1 hour.
+	//  5:1d
+	GroupByType *int64 `json:"GroupByType,omitnil,omitempty" name:"GroupByType"`
+
+	// 1: Queries Zhiyan.
+	// 0: Uses the old logic, which is removed. Do not use this value.
+	IsNewData *int64 `json:"IsNewData,omitnil,omitempty" name:"IsNewData"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+func (r *DescribeDataPvUrlStatisticsV2Request) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataPvUrlStatisticsV2Request) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "Type")
+	delete(f, "EndTime")
+	delete(f, "ID")
+	delete(f, "ExtSecond")
+	delete(f, "Engine")
+	delete(f, "Isp")
+	delete(f, "From")
+	delete(f, "Level")
+	delete(f, "Brand")
+	delete(f, "Area")
+	delete(f, "VersionNum")
+	delete(f, "Platform")
+	delete(f, "ExtThird")
+	delete(f, "ExtFirst")
+	delete(f, "NetType")
+	delete(f, "Device")
+	delete(f, "IsAbroad")
+	delete(f, "Os")
+	delete(f, "Browser")
+	delete(f, "Env")
+	delete(f, "GroupByType")
+	delete(f, "IsNewData")
+	delete(f, "ExtFourth")
+	delete(f, "ExtFifth")
+	delete(f, "ExtSixth")
+	delete(f, "ExtSeventh")
+	delete(f, "ExtEighth")
+	delete(f, "ExtNinth")
+	delete(f, "ExtTenth")
+	delete(f, "Granularity")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataPvUrlStatisticsV2Request has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDataPvUrlStatisticsV2ResponseParams struct {
+	// Return value.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDataPvUrlStatisticsV2Response struct {
+	*tchttp.BaseResponse
+	Response *DescribeDataPvUrlStatisticsV2ResponseParams `json:"Response"`
+}
+
+func (r *DescribeDataPvUrlStatisticsV2Response) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataPvUrlStatisticsV2Response) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDataReportCountRequestParams struct {
 	// Start time
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
@@ -3393,6 +5301,91 @@ func (r *DescribeDataReportCountResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDataReportCountResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDataReportCountV2RequestParams struct {
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Reporting type (custom, event, log, miniProgramData, performance, pv, speed, and webvitals).
+	ReportType *string `json:"ReportType,omitnil,omitempty" name:"ReportType"`
+
+	// Instance ID.
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
+}
+
+type DescribeDataReportCountV2Request struct {
+	*tchttp.BaseRequest
+	
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Reporting type (custom, event, log, miniProgramData, performance, pv, speed, and webvitals).
+	ReportType *string `json:"ReportType,omitnil,omitempty" name:"ReportType"`
+
+	// Instance ID.
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
+}
+
+func (r *DescribeDataReportCountV2Request) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataReportCountV2Request) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "ID")
+	delete(f, "ReportType")
+	delete(f, "InstanceID")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataReportCountV2Request has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDataReportCountV2ResponseParams struct {
+	// Return value.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDataReportCountV2Response struct {
+	*tchttp.BaseResponse
+	Response *DescribeDataReportCountV2ResponseParams `json:"Response"`
+}
+
+func (r *DescribeDataReportCountV2Response) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataReportCountV2Response) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3672,6 +5665,273 @@ func (r *DescribeDataSetUrlStatisticsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDataSetUrlStatisticsV2RequestParams struct {
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// allcount: performance view. data: mini program. component: related to mini program. day: 14-day data. nettype: network or platform view. performance: top page performance view. version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: ISP view, region view, browser view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Duration calculation.
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// Obtaining package.
+	PackageType *string `json:"PackageType,omitnil,omitempty" name:"PackageType"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+type DescribeDataSetUrlStatisticsV2Request struct {
+	*tchttp.BaseRequest
+	
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// allcount: performance view. data: mini program. component: related to mini program. day: 14-day data. nettype: network or platform view. performance: top page performance view. version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: ISP view, region view, browser view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Duration calculation.
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// Obtaining package.
+	PackageType *string `json:"PackageType,omitnil,omitempty" name:"PackageType"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+func (r *DescribeDataSetUrlStatisticsV2Request) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataSetUrlStatisticsV2Request) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "Type")
+	delete(f, "EndTime")
+	delete(f, "ID")
+	delete(f, "ExtSecond")
+	delete(f, "Engine")
+	delete(f, "Isp")
+	delete(f, "From")
+	delete(f, "Level")
+	delete(f, "Brand")
+	delete(f, "Area")
+	delete(f, "VersionNum")
+	delete(f, "Platform")
+	delete(f, "ExtThird")
+	delete(f, "ExtFirst")
+	delete(f, "NetType")
+	delete(f, "Device")
+	delete(f, "IsAbroad")
+	delete(f, "Os")
+	delete(f, "Browser")
+	delete(f, "CostType")
+	delete(f, "Env")
+	delete(f, "PackageType")
+	delete(f, "ExtFourth")
+	delete(f, "ExtFifth")
+	delete(f, "ExtSixth")
+	delete(f, "ExtSeventh")
+	delete(f, "ExtEighth")
+	delete(f, "ExtNinth")
+	delete(f, "ExtTenth")
+	delete(f, "Granularity")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataSetUrlStatisticsV2Request has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDataSetUrlStatisticsV2ResponseParams struct {
+	// Return value.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDataSetUrlStatisticsV2Response struct {
+	*tchttp.BaseResponse
+	Response *DescribeDataSetUrlStatisticsV2ResponseParams `json:"Response"`
+}
+
+func (r *DescribeDataSetUrlStatisticsV2Response) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataSetUrlStatisticsV2Response) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDataStaticProjectRequestParams struct {
 	// Start time
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
@@ -3879,6 +6139,273 @@ func (r *DescribeDataStaticProjectResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDataStaticProjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDataStaticProjectV2RequestParams struct {
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// allcount: performance view. day: 14-day data. condition: condition list. area: request speed distribution. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level (1 indicates allowlist log. 2 indicates general log. 4 indicates error log. 8 indicates Promise error. 16 indicates AJAX request exception. 32 indicates JavaScript loading exception. 64 indicates image loading exception. 128 indicates CSS loading exception. 256 indicates console.error. 512 indicates audio or video resource exception. 1024 indicates retcode exception. 2048 indicates Aegis report. 4096 indicates PV log. 8192 indicates custom event. 16384 indicates mini program page does not exist. 32768 indicates WebSocket error. 65536 indicates JavaScript bridge error).
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type (1, 2, 3, 4, 5, or 100). 1 indicates Wi-Fi. 2 indicates 2G. 3 indicates 3G. 4 indicates 4G. 5 indicates 5G. 6 indicates 6G. 100 indicates unknown.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Duration calculation.
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
+
+	// Source.
+	Url []*string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+type DescribeDataStaticProjectV2Request struct {
+	*tchttp.BaseRequest
+	
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// allcount: performance view. day: 14-day data. condition: condition list. area: request speed distribution. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level (1 indicates allowlist log. 2 indicates general log. 4 indicates error log. 8 indicates Promise error. 16 indicates AJAX request exception. 32 indicates JavaScript loading exception. 64 indicates image loading exception. 128 indicates CSS loading exception. 256 indicates console.error. 512 indicates audio or video resource exception. 1024 indicates retcode exception. 2048 indicates Aegis report. 4096 indicates PV log. 8192 indicates custom event. 16384 indicates mini program page does not exist. 32768 indicates WebSocket error. 65536 indicates JavaScript bridge error).
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type (1, 2, 3, 4, 5, or 100). 1 indicates Wi-Fi. 2 indicates 2G. 3 indicates 3G. 4 indicates 4G. 5 indicates 5G. 6 indicates 6G. 100 indicates unknown.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Duration calculation.
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
+
+	// Source.
+	Url []*string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+func (r *DescribeDataStaticProjectV2Request) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataStaticProjectV2Request) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "Type")
+	delete(f, "EndTime")
+	delete(f, "ID")
+	delete(f, "ExtSecond")
+	delete(f, "Engine")
+	delete(f, "Isp")
+	delete(f, "From")
+	delete(f, "Level")
+	delete(f, "Brand")
+	delete(f, "Area")
+	delete(f, "VersionNum")
+	delete(f, "Platform")
+	delete(f, "ExtThird")
+	delete(f, "ExtFirst")
+	delete(f, "NetType")
+	delete(f, "Device")
+	delete(f, "IsAbroad")
+	delete(f, "Os")
+	delete(f, "Browser")
+	delete(f, "CostType")
+	delete(f, "Url")
+	delete(f, "Env")
+	delete(f, "ExtFourth")
+	delete(f, "ExtFifth")
+	delete(f, "ExtSixth")
+	delete(f, "ExtSeventh")
+	delete(f, "ExtEighth")
+	delete(f, "ExtNinth")
+	delete(f, "ExtTenth")
+	delete(f, "Granularity")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataStaticProjectV2Request has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDataStaticProjectV2ResponseParams struct {
+	// Return value.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDataStaticProjectV2Response struct {
+	*tchttp.BaseResponse
+	Response *DescribeDataStaticProjectV2ResponseParams `json:"Response"`
+}
+
+func (r *DescribeDataStaticProjectV2Response) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataStaticProjectV2Response) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4094,6 +6621,273 @@ func (r *DescribeDataStaticResourceResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDataStaticResourceV2RequestParams struct {
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// top: top resource view. count40x: 40X view. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Duration calculation method.
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
+
+	// Source.
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+type DescribeDataStaticResourceV2Request struct {
+	*tchttp.BaseRequest
+	
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// top: top resource view. count40x: 40X view. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Duration calculation method.
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
+
+	// Source.
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+func (r *DescribeDataStaticResourceV2Request) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataStaticResourceV2Request) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "Type")
+	delete(f, "EndTime")
+	delete(f, "ID")
+	delete(f, "ExtSecond")
+	delete(f, "Engine")
+	delete(f, "Isp")
+	delete(f, "From")
+	delete(f, "Level")
+	delete(f, "Brand")
+	delete(f, "Area")
+	delete(f, "VersionNum")
+	delete(f, "Platform")
+	delete(f, "ExtThird")
+	delete(f, "ExtFirst")
+	delete(f, "NetType")
+	delete(f, "Device")
+	delete(f, "IsAbroad")
+	delete(f, "Os")
+	delete(f, "Browser")
+	delete(f, "CostType")
+	delete(f, "Url")
+	delete(f, "Env")
+	delete(f, "ExtFourth")
+	delete(f, "ExtFifth")
+	delete(f, "ExtSixth")
+	delete(f, "ExtSeventh")
+	delete(f, "ExtEighth")
+	delete(f, "ExtNinth")
+	delete(f, "ExtTenth")
+	delete(f, "Granularity")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataStaticResourceV2Request has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDataStaticResourceV2ResponseParams struct {
+	// Return value.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDataStaticResourceV2Response struct {
+	*tchttp.BaseResponse
+	Response *DescribeDataStaticResourceV2ResponseParams `json:"Response"`
+}
+
+func (r *DescribeDataStaticResourceV2Response) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataStaticResourceV2Response) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDataStaticUrlRequestParams struct {
 	// Start time
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
@@ -4305,6 +7099,273 @@ func (r *DescribeDataStaticUrlResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDataStaticUrlV2RequestParams struct {
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// pagepv: performance view. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Duration calculation method.
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
+
+	// Source.
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+type DescribeDataStaticUrlV2Request struct {
+	*tchttp.BaseRequest
+	
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// pagepv: performance view. nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/: network platform view, version view, device view, ISP view, region view, browser view, ext1 view, and so on.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Duration calculation method.
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
+
+	// Source.
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// Custom parameter 4.
+	ExtFourth *string `json:"ExtFourth,omitnil,omitempty" name:"ExtFourth"`
+
+	// Custom parameter 5.
+	ExtFifth *string `json:"ExtFifth,omitnil,omitempty" name:"ExtFifth"`
+
+	// Custom parameter 6.
+	ExtSixth *string `json:"ExtSixth,omitnil,omitempty" name:"ExtSixth"`
+
+	// Custom parameter 7.
+	ExtSeventh *string `json:"ExtSeventh,omitnil,omitempty" name:"ExtSeventh"`
+
+	// Custom parameter 8.
+	ExtEighth *string `json:"ExtEighth,omitnil,omitempty" name:"ExtEighth"`
+
+	// Custom parameter 9.
+	ExtNinth *string `json:"ExtNinth,omitnil,omitempty" name:"ExtNinth"`
+
+	// Custom parameter 10.
+	ExtTenth *string `json:"ExtTenth,omitnil,omitempty" name:"ExtTenth"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+func (r *DescribeDataStaticUrlV2Request) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataStaticUrlV2Request) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "Type")
+	delete(f, "EndTime")
+	delete(f, "ID")
+	delete(f, "ExtSecond")
+	delete(f, "Engine")
+	delete(f, "Isp")
+	delete(f, "From")
+	delete(f, "Level")
+	delete(f, "Brand")
+	delete(f, "Area")
+	delete(f, "VersionNum")
+	delete(f, "Platform")
+	delete(f, "ExtThird")
+	delete(f, "ExtFirst")
+	delete(f, "NetType")
+	delete(f, "Device")
+	delete(f, "IsAbroad")
+	delete(f, "Os")
+	delete(f, "Browser")
+	delete(f, "CostType")
+	delete(f, "Url")
+	delete(f, "Env")
+	delete(f, "ExtFourth")
+	delete(f, "ExtFifth")
+	delete(f, "ExtSixth")
+	delete(f, "ExtSeventh")
+	delete(f, "ExtEighth")
+	delete(f, "ExtNinth")
+	delete(f, "ExtTenth")
+	delete(f, "Granularity")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataStaticUrlV2Request has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDataStaticUrlV2ResponseParams struct {
+	// Return value.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDataStaticUrlV2Response struct {
+	*tchttp.BaseResponse
+	Response *DescribeDataStaticUrlV2ResponseParams `json:"Response"`
+}
+
+func (r *DescribeDataStaticUrlV2Response) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataStaticUrlV2Response) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDataWebVitalsPageRequestParams struct {
 	// Start time
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
@@ -4505,6 +7566,217 @@ func (r *DescribeDataWebVitalsPageResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDataWebVitalsPageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDataWebVitalsPageV2RequestParams struct {
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// No type.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Duration calculation.
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+type DescribeDataWebVitalsPageV2Request struct {
+	*tchttp.BaseRequest
+	
+	// Start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Custom parameter 2.
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
+
+	// Browser engine.
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
+
+	// Internet service provider.
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// Source page.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Log level.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// No type.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Brand.
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
+
+	// Region.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Version.
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
+
+	// Platform.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Custom parameter 3.
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
+
+	// Custom parameter 1.
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
+
+	// Network type.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Model.
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// Indicates whether to query global data. 1 indicates global. 0 indicates not global. This is empty by default, which means to query all data.
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
+
+	// Operating system.
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
+
+	// Browser.
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// Duration calculation.
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+
+	// Time period.
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
+}
+
+func (r *DescribeDataWebVitalsPageV2Request) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataWebVitalsPageV2Request) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "ID")
+	delete(f, "ExtSecond")
+	delete(f, "Engine")
+	delete(f, "Isp")
+	delete(f, "From")
+	delete(f, "Level")
+	delete(f, "Type")
+	delete(f, "Brand")
+	delete(f, "Area")
+	delete(f, "VersionNum")
+	delete(f, "Platform")
+	delete(f, "ExtThird")
+	delete(f, "ExtFirst")
+	delete(f, "NetType")
+	delete(f, "Device")
+	delete(f, "IsAbroad")
+	delete(f, "Os")
+	delete(f, "Browser")
+	delete(f, "CostType")
+	delete(f, "Env")
+	delete(f, "Granularity")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataWebVitalsPageV2Request has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDataWebVitalsPageV2ResponseParams struct {
+	// Return value.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDataWebVitalsPageV2Response struct {
+	*tchttp.BaseResponse
+	Response *DescribeDataWebVitalsPageV2ResponseParams `json:"Response"`
+}
+
+func (r *DescribeDataWebVitalsPageV2Response) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataWebVitalsPageV2Response) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5817,6 +9089,91 @@ func (r *DescribeScoresResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeScoresV2RequestParams struct {
+	// Start time.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID list.
+	IDList []*int64 `json:"IDList,omitnil,omitempty" name:"IDList"`
+
+	// Query granularity. Valid values: hour or day.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+}
+
+type DescribeScoresV2Request struct {
+	*tchttp.BaseRequest
+	
+	// Start time.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Project ID list.
+	IDList []*int64 `json:"IDList,omitnil,omitempty" name:"IDList"`
+
+	// Query granularity. Valid values: hour or day.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Environment.
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
+}
+
+func (r *DescribeScoresV2Request) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeScoresV2Request) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "IDList")
+	delete(f, "Type")
+	delete(f, "Env")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeScoresV2Request has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeScoresV2ResponseParams struct {
+	// Project score array.
+	ScoreSet []*ScoreInfoV2 `json:"ScoreSet,omitnil,omitempty" name:"ScoreSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeScoresV2Response struct {
+	*tchttp.BaseResponse
+	Response *DescribeScoresV2ResponseParams `json:"Response"`
+}
+
+func (r *DescribeScoresV2Response) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeScoresV2Response) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeTawAreasRequestParams struct {
 	// Region ID
 	AreaIds []*int64 `json:"AreaIds,omitnil,omitempty" name:"AreaIds"`
@@ -6646,6 +10003,77 @@ type ScoreInfo struct {
 	// Time
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+}
+
+type ScoreInfoV2 struct {
+	// Project ID.
+	ProjectID *int64 `json:"ProjectID,omitnil,omitempty" name:"ProjectID"`
+
+	// Total project score.
+	Score *float64 `json:"Score,omitnil,omitempty" name:"Score"`
+
+	// API performance score.
+	ApiPerformanceScore *float64 `json:"ApiPerformanceScore,omitnil,omitempty" name:"ApiPerformanceScore"`
+
+	// API availability score.
+	ApiAvailableScore *float64 `json:"ApiAvailableScore,omitnil,omitempty" name:"ApiAvailableScore"`
+
+	// Total API calls.
+	ApiNum *int64 `json:"ApiNum,omitnil,omitempty" name:"ApiNum"`
+
+	// API failures.
+	ApiFail *int64 `json:"ApiFail,omitnil,omitempty" name:"ApiFail"`
+
+	// Average API duration.
+	ApiDuration *float64 `json:"ApiDuration,omitnil,omitempty" name:"ApiDuration"`
+
+	// Page performance score.
+	PagePerformanceScore *float64 `json:"PagePerformanceScore,omitnil,omitempty" name:"PagePerformanceScore"`
+
+	// Page views.
+	PagePv *int64 `json:"PagePv,omitnil,omitempty" name:"PagePv"`
+
+	// Unique visitors.
+	PageUv *int64 `json:"PageUv,omitnil,omitempty" name:"PageUv"`
+
+	// Page errors.
+	PageError *int64 `json:"PageError,omitnil,omitempty" name:"PageError"`
+
+	// First meaningful paint.
+	PageDuration *float64 `json:"PageDuration,omitnil,omitempty" name:"PageDuration"`
+
+	// Average largest contentful paint (LCP).
+	PageLCP *float64 `json:"PageLCP,omitnil,omitempty" name:"PageLCP"`
+
+	// Average first input delay (FID).
+	PageFID *float64 `json:"PageFID,omitnil,omitempty" name:"PageFID"`
+
+	// Average cumulative layout shift (CLS).
+	PageCLS *float64 `json:"PageCLS,omitnil,omitempty" name:"PageCLS"`
+
+	// Average first contentful paint (FCP).
+	PageFCP *float64 `json:"PageFCP,omitnil,omitempty" name:"PageFCP"`
+
+	// Average interaction to next paint (INP).
+	PageINP *float64 `json:"PageINP,omitnil,omitempty" name:"PageINP"`
+
+	// JavaScript error score.
+	JsErrorScore *float64 `json:"JsErrorScore,omitnil,omitempty" name:"JsErrorScore"`
+
+	// Static resource availability score.
+	StaticAvailableScore *float64 `json:"StaticAvailableScore,omitnil,omitempty" name:"StaticAvailableScore"`
+
+	// Static resource performance score.
+	StaticPerformanceScore *float64 `json:"StaticPerformanceScore,omitnil,omitempty" name:"StaticPerformanceScore"`
+
+	// Total static resource requests.
+	StaticNum *int64 `json:"StaticNum,omitnil,omitempty" name:"StaticNum"`
+
+	// Static resource loading failures.
+	StaticFail *int64 `json:"StaticFail,omitnil,omitempty" name:"StaticFail"`
+
+	// Static resource loading time.
+	StaticDuration *float64 `json:"StaticDuration,omitnil,omitempty" name:"StaticDuration"`
 }
 
 // Predefined struct for user

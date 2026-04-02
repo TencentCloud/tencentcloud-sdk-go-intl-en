@@ -6224,10 +6224,10 @@ type CreateVpnGatewayRequestParams struct {
 	// The public network bandwidth configuration. Available bandwidth specifications: 5, 10, 20, 50, and 100. Unit: Mbps
 	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
 
-	// The VPN gateway billing mode. PREPAID: prepaid means monthly subscription. POSTPAID_BY_HOUR: postpaid means pay-as-you-go. Default: POSTPAID_BY_HOUR. If prepaid mode is specified, the `InstanceChargePrepaid` parameter must be entered.
+	// The VPN gateway billing mode. PREPAID: prepaid means yearly/monthly subscription. POSTPAID_BY_HOUR: postpaid means pay-as-you-go. Default: POSTPAID_BY_HOUR. If prepaid mode is specified, the `InstanceChargePrepaid` parameter must be entered.
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
-	// Parameter settings for prepaid billing mode, also known as monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. This parameter is mandatory for prepaid instances.
+	// Parameter settings for prepaid billing mode, also known as yearly/monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. This parameter is mandatory for prepaid instances.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
 
 	// The availability zone, such as `ap-guangzhou-2`.
@@ -6244,6 +6244,9 @@ type CreateVpnGatewayRequestParams struct {
 
 	// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
 	MaxConnection *uint64 `json:"MaxConnection,omitnil,omitempty" name:"MaxConnection"`
+
+
+	BgpAsn *uint64 `json:"BgpAsn,omitnil,omitempty" name:"BgpAsn"`
 }
 
 type CreateVpnGatewayRequest struct {
@@ -6258,10 +6261,10 @@ type CreateVpnGatewayRequest struct {
 	// The public network bandwidth configuration. Available bandwidth specifications: 5, 10, 20, 50, and 100. Unit: Mbps
 	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
 
-	// The VPN gateway billing mode. PREPAID: prepaid means monthly subscription. POSTPAID_BY_HOUR: postpaid means pay-as-you-go. Default: POSTPAID_BY_HOUR. If prepaid mode is specified, the `InstanceChargePrepaid` parameter must be entered.
+	// The VPN gateway billing mode. PREPAID: prepaid means yearly/monthly subscription. POSTPAID_BY_HOUR: postpaid means pay-as-you-go. Default: POSTPAID_BY_HOUR. If prepaid mode is specified, the `InstanceChargePrepaid` parameter must be entered.
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
-	// Parameter settings for prepaid billing mode, also known as monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. This parameter is mandatory for prepaid instances.
+	// Parameter settings for prepaid billing mode, also known as yearly/monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. This parameter is mandatory for prepaid instances.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
 
 	// The availability zone, such as `ap-guangzhou-2`.
@@ -6278,6 +6281,8 @@ type CreateVpnGatewayRequest struct {
 
 	// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
 	MaxConnection *uint64 `json:"MaxConnection,omitnil,omitempty" name:"MaxConnection"`
+
+	BgpAsn *uint64 `json:"BgpAsn,omitnil,omitempty" name:"BgpAsn"`
 }
 
 func (r *CreateVpnGatewayRequest) ToJsonString() string {
@@ -6302,6 +6307,7 @@ func (r *CreateVpnGatewayRequest) FromJsonString(s string) error {
 	delete(f, "Tags")
 	delete(f, "CdcId")
 	delete(f, "MaxConnection")
+	delete(f, "BgpAsn")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVpnGatewayRequest has unknown keys!", "")
 	}
@@ -21379,8 +21385,14 @@ type ModifyVpnGatewayAttributeRequestParams struct {
 	// The VPN gateway name. The maximum length is 60 bytes.
 	VpnGatewayName *string `json:"VpnGatewayName,omitnil,omitempty" name:"VpnGatewayName"`
 
-	// VPN gateway billing mode. Currently, only the conversion of prepaid (monthly subscription) to postpaid (that is, pay-as-you-go) is supported. That is, the parameters only supports POSTPAID_BY_HOUR.
+	// VPN gateway billing mode. Currently, only the conversion of prepaid (yearly/monthly subscription) to postpaid (that is, pay-as-you-go) is supported. That is, the parameters only supports POSTPAID_BY_HOUR.
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
+
+
+	BgpAsn *uint64 `json:"BgpAsn,omitnil,omitempty" name:"BgpAsn"`
+
+
+	MaxConnection *uint64 `json:"MaxConnection,omitnil,omitempty" name:"MaxConnection"`
 }
 
 type ModifyVpnGatewayAttributeRequest struct {
@@ -21392,8 +21404,12 @@ type ModifyVpnGatewayAttributeRequest struct {
 	// The VPN gateway name. The maximum length is 60 bytes.
 	VpnGatewayName *string `json:"VpnGatewayName,omitnil,omitempty" name:"VpnGatewayName"`
 
-	// VPN gateway billing mode. Currently, only the conversion of prepaid (monthly subscription) to postpaid (that is, pay-as-you-go) is supported. That is, the parameters only supports POSTPAID_BY_HOUR.
+	// VPN gateway billing mode. Currently, only the conversion of prepaid (yearly/monthly subscription) to postpaid (that is, pay-as-you-go) is supported. That is, the parameters only supports POSTPAID_BY_HOUR.
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
+
+	BgpAsn *uint64 `json:"BgpAsn,omitnil,omitempty" name:"BgpAsn"`
+
+	MaxConnection *uint64 `json:"MaxConnection,omitnil,omitempty" name:"MaxConnection"`
 }
 
 func (r *ModifyVpnGatewayAttributeRequest) ToJsonString() string {
@@ -21411,6 +21427,8 @@ func (r *ModifyVpnGatewayAttributeRequest) FromJsonString(s string) error {
 	delete(f, "VpnGatewayId")
 	delete(f, "VpnGatewayName")
 	delete(f, "InstanceChargeType")
+	delete(f, "BgpAsn")
+	delete(f, "MaxConnection")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVpnGatewayAttributeRequest has unknown keys!", "")
 	}
@@ -25586,7 +25604,7 @@ type VpnGateway struct {
 	// Whether the public IP is blocked.
 	IsAddressBlocked *bool `json:"IsAddressBlocked,omitnil,omitempty" name:"IsAddressBlocked"`
 
-	// Change of billing method. PREPAID_TO_POSTPAID: Monthly subscription prepaid to postpaid by hour.
+	// Change of billing method. PREPAID_TO_POSTPAID: Yearly/monthly subscription prepaid to postpaid by hour.
 	NewPurchasePlan *string `json:"NewPurchasePlan,omitnil,omitempty" name:"NewPurchasePlan"`
 
 	// Gateway billing status. PROTECTIVELY_ISOLATED: Instance is isolated; NORMAL: Normal.
@@ -25609,6 +25627,9 @@ type VpnGateway struct {
 
 	// Maximum number of connected clients allowed for the SSL VPN gateway.
 	MaxConnection *uint64 `json:"MaxConnection,omitnil,omitempty" name:"MaxConnection"`
+
+
+	BgpAsn *uint64 `json:"BgpAsn,omitnil,omitempty" name:"BgpAsn"`
 }
 
 type VpnGatewayQuota struct {

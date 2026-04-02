@@ -1255,6 +1255,98 @@ func (c *Client) DescribeDataWithContext(ctx context.Context, request *DescribeD
     return
 }
 
+func NewDescribeDataBridgeUrlV2Request() (request *DescribeDataBridgeUrlV2Request) {
+    request = &DescribeDataBridgeUrlV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("rum", APIVersion, "DescribeDataBridgeUrlV2")
+    
+    
+    return
+}
+
+func NewDescribeDataBridgeUrlV2Response() (response *DescribeDataBridgeUrlV2Response) {
+    response = &DescribeDataBridgeUrlV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDataBridgeUrlV2
+// This API is used to obtain DescribeDataBridgeUrl information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataBridgeUrlV2(request *DescribeDataBridgeUrlV2Request) (response *DescribeDataBridgeUrlV2Response, err error) {
+    return c.DescribeDataBridgeUrlV2WithContext(context.Background(), request)
+}
+
+// DescribeDataBridgeUrlV2
+// This API is used to obtain DescribeDataBridgeUrl information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataBridgeUrlV2WithContext(ctx context.Context, request *DescribeDataBridgeUrlV2Request) (response *DescribeDataBridgeUrlV2Response, err error) {
+    if request == nil {
+        request = NewDescribeDataBridgeUrlV2Request()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "rum", APIVersion, "DescribeDataBridgeUrlV2")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDataBridgeUrlV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDataBridgeUrlV2Response()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDataCustomUrlRequest() (request *DescribeDataCustomUrlRequest) {
     request = &DescribeDataCustomUrlRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1347,6 +1439,98 @@ func (c *Client) DescribeDataCustomUrlWithContext(ctx context.Context, request *
     return
 }
 
+func NewDescribeDataCustomUrlV2Request() (request *DescribeDataCustomUrlV2Request) {
+    request = &DescribeDataCustomUrlV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("rum", APIVersion, "DescribeDataCustomUrlV2")
+    
+    
+    return
+}
+
+func NewDescribeDataCustomUrlV2Response() (response *DescribeDataCustomUrlV2Response) {
+    response = &DescribeDataCustomUrlV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDataCustomUrlV2
+// This API is used to obtain DescribeDataCustomUrl information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataCustomUrlV2(request *DescribeDataCustomUrlV2Request) (response *DescribeDataCustomUrlV2Response, err error) {
+    return c.DescribeDataCustomUrlV2WithContext(context.Background(), request)
+}
+
+// DescribeDataCustomUrlV2
+// This API is used to obtain DescribeDataCustomUrl information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataCustomUrlV2WithContext(ctx context.Context, request *DescribeDataCustomUrlV2Request) (response *DescribeDataCustomUrlV2Response, err error) {
+    if request == nil {
+        request = NewDescribeDataCustomUrlV2Request()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "rum", APIVersion, "DescribeDataCustomUrlV2")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDataCustomUrlV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDataCustomUrlV2Response()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDataEventUrlRequest() (request *DescribeDataEventUrlRequest) {
     request = &DescribeDataEventUrlRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1435,6 +1619,98 @@ func (c *Client) DescribeDataEventUrlWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDescribeDataEventUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDataEventUrlV2Request() (request *DescribeDataEventUrlV2Request) {
+    request = &DescribeDataEventUrlV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("rum", APIVersion, "DescribeDataEventUrlV2")
+    
+    
+    return
+}
+
+func NewDescribeDataEventUrlV2Response() (response *DescribeDataEventUrlV2Response) {
+    response = &DescribeDataEventUrlV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDataEventUrlV2
+// This API is used to obtain DescribeDataEventUrl information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataEventUrlV2(request *DescribeDataEventUrlV2Request) (response *DescribeDataEventUrlV2Response, err error) {
+    return c.DescribeDataEventUrlV2WithContext(context.Background(), request)
+}
+
+// DescribeDataEventUrlV2
+// This API is used to obtain DescribeDataEventUrl information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataEventUrlV2WithContext(ctx context.Context, request *DescribeDataEventUrlV2Request) (response *DescribeDataEventUrlV2Response, err error) {
+    if request == nil {
+        request = NewDescribeDataEventUrlV2Request()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "rum", APIVersion, "DescribeDataEventUrlV2")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDataEventUrlV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDataEventUrlV2Response()
     err = c.Send(request, response)
     return
 }
@@ -1715,6 +1991,98 @@ func (c *Client) DescribeDataFetchUrlInfoWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribeDataFetchUrlV2Request() (request *DescribeDataFetchUrlV2Request) {
+    request = &DescribeDataFetchUrlV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("rum", APIVersion, "DescribeDataFetchUrlV2")
+    
+    
+    return
+}
+
+func NewDescribeDataFetchUrlV2Response() (response *DescribeDataFetchUrlV2Response) {
+    response = &DescribeDataFetchUrlV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDataFetchUrlV2
+// This API is used to obtain DescribeDataFetchUrl information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataFetchUrlV2(request *DescribeDataFetchUrlV2Request) (response *DescribeDataFetchUrlV2Response, err error) {
+    return c.DescribeDataFetchUrlV2WithContext(context.Background(), request)
+}
+
+// DescribeDataFetchUrlV2
+// This API is used to obtain DescribeDataFetchUrl information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataFetchUrlV2WithContext(ctx context.Context, request *DescribeDataFetchUrlV2Request) (response *DescribeDataFetchUrlV2Response, err error) {
+    if request == nil {
+        request = NewDescribeDataFetchUrlV2Request()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "rum", APIVersion, "DescribeDataFetchUrlV2")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDataFetchUrlV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDataFetchUrlV2Response()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDataLogUrlInfoRequest() (request *DescribeDataLogUrlInfoRequest) {
     request = &DescribeDataLogUrlInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1897,6 +2265,96 @@ func (c *Client) DescribeDataLogUrlStatisticsWithContext(ctx context.Context, re
     return
 }
 
+func NewDescribeDataLogUrlStatisticsV2Request() (request *DescribeDataLogUrlStatisticsV2Request) {
+    request = &DescribeDataLogUrlStatisticsV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("rum", APIVersion, "DescribeDataLogUrlStatisticsV2")
+    
+    
+    return
+}
+
+func NewDescribeDataLogUrlStatisticsV2Response() (response *DescribeDataLogUrlStatisticsV2Response) {
+    response = &DescribeDataLogUrlStatisticsV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDataLogUrlStatisticsV2
+// This API is used to obtain LogUrlStatistics information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataLogUrlStatisticsV2(request *DescribeDataLogUrlStatisticsV2Request) (response *DescribeDataLogUrlStatisticsV2Response, err error) {
+    return c.DescribeDataLogUrlStatisticsV2WithContext(context.Background(), request)
+}
+
+// DescribeDataLogUrlStatisticsV2
+// This API is used to obtain LogUrlStatistics information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataLogUrlStatisticsV2WithContext(ctx context.Context, request *DescribeDataLogUrlStatisticsV2Request) (response *DescribeDataLogUrlStatisticsV2Response, err error) {
+    if request == nil {
+        request = NewDescribeDataLogUrlStatisticsV2Request()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "rum", APIVersion, "DescribeDataLogUrlStatisticsV2")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDataLogUrlStatisticsV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDataLogUrlStatisticsV2Response()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDataPerformancePageRequest() (request *DescribeDataPerformancePageRequest) {
     request = &DescribeDataPerformancePageRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1985,6 +2443,98 @@ func (c *Client) DescribeDataPerformancePageWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewDescribeDataPerformancePageResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDataPerformancePageV2Request() (request *DescribeDataPerformancePageV2Request) {
+    request = &DescribeDataPerformancePageV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("rum", APIVersion, "DescribeDataPerformancePageV2")
+    
+    
+    return
+}
+
+func NewDescribeDataPerformancePageV2Response() (response *DescribeDataPerformancePageV2Response) {
+    response = &DescribeDataPerformancePageV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDataPerformancePageV2
+// This API is used to obtain PerformancePage information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataPerformancePageV2(request *DescribeDataPerformancePageV2Request) (response *DescribeDataPerformancePageV2Response, err error) {
+    return c.DescribeDataPerformancePageV2WithContext(context.Background(), request)
+}
+
+// DescribeDataPerformancePageV2
+// This API is used to obtain PerformancePage information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataPerformancePageV2WithContext(ctx context.Context, request *DescribeDataPerformancePageV2Request) (response *DescribeDataPerformancePageV2Response, err error) {
+    if request == nil {
+        request = NewDescribeDataPerformancePageV2Request()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "rum", APIVersion, "DescribeDataPerformancePageV2")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDataPerformancePageV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDataPerformancePageV2Response()
     err = c.Send(request, response)
     return
 }
@@ -2263,6 +2813,98 @@ func (c *Client) DescribeDataPvUrlStatisticsWithContext(ctx context.Context, req
     return
 }
 
+func NewDescribeDataPvUrlStatisticsV2Request() (request *DescribeDataPvUrlStatisticsV2Request) {
+    request = &DescribeDataPvUrlStatisticsV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("rum", APIVersion, "DescribeDataPvUrlStatisticsV2")
+    
+    
+    return
+}
+
+func NewDescribeDataPvUrlStatisticsV2Response() (response *DescribeDataPvUrlStatisticsV2Response) {
+    response = &DescribeDataPvUrlStatisticsV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDataPvUrlStatisticsV2
+// This API is used to obtain DescribeDataPvUrlStatistics information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataPvUrlStatisticsV2(request *DescribeDataPvUrlStatisticsV2Request) (response *DescribeDataPvUrlStatisticsV2Response, err error) {
+    return c.DescribeDataPvUrlStatisticsV2WithContext(context.Background(), request)
+}
+
+// DescribeDataPvUrlStatisticsV2
+// This API is used to obtain DescribeDataPvUrlStatistics information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataPvUrlStatisticsV2WithContext(ctx context.Context, request *DescribeDataPvUrlStatisticsV2Request) (response *DescribeDataPvUrlStatisticsV2Response, err error) {
+    if request == nil {
+        request = NewDescribeDataPvUrlStatisticsV2Request()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "rum", APIVersion, "DescribeDataPvUrlStatisticsV2")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDataPvUrlStatisticsV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDataPvUrlStatisticsV2Response()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDataReportCountRequest() (request *DescribeDataReportCountRequest) {
     request = &DescribeDataReportCountRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2351,6 +2993,98 @@ func (c *Client) DescribeDataReportCountWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDescribeDataReportCountResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDataReportCountV2Request() (request *DescribeDataReportCountV2Request) {
+    request = &DescribeDataReportCountV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("rum", APIVersion, "DescribeDataReportCountV2")
+    
+    
+    return
+}
+
+func NewDescribeDataReportCountV2Response() (response *DescribeDataReportCountV2Response) {
+    response = &DescribeDataReportCountV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDataReportCountV2
+// This API is used to obtain the project reporting volume.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataReportCountV2(request *DescribeDataReportCountV2Request) (response *DescribeDataReportCountV2Response, err error) {
+    return c.DescribeDataReportCountV2WithContext(context.Background(), request)
+}
+
+// DescribeDataReportCountV2
+// This API is used to obtain the project reporting volume.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataReportCountV2WithContext(ctx context.Context, request *DescribeDataReportCountV2Request) (response *DescribeDataReportCountV2Response, err error) {
+    if request == nil {
+        request = NewDescribeDataReportCountV2Request()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "rum", APIVersion, "DescribeDataReportCountV2")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDataReportCountV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDataReportCountV2Response()
     err = c.Send(request, response)
     return
 }
@@ -2447,6 +3181,98 @@ func (c *Client) DescribeDataSetUrlStatisticsWithContext(ctx context.Context, re
     return
 }
 
+func NewDescribeDataSetUrlStatisticsV2Request() (request *DescribeDataSetUrlStatisticsV2Request) {
+    request = &DescribeDataSetUrlStatisticsV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("rum", APIVersion, "DescribeDataSetUrlStatisticsV2")
+    
+    
+    return
+}
+
+func NewDescribeDataSetUrlStatisticsV2Response() (response *DescribeDataSetUrlStatisticsV2Response) {
+    response = &DescribeDataSetUrlStatisticsV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDataSetUrlStatisticsV2
+// This API is used to obtain DescribeDataSetUrlStatistics information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataSetUrlStatisticsV2(request *DescribeDataSetUrlStatisticsV2Request) (response *DescribeDataSetUrlStatisticsV2Response, err error) {
+    return c.DescribeDataSetUrlStatisticsV2WithContext(context.Background(), request)
+}
+
+// DescribeDataSetUrlStatisticsV2
+// This API is used to obtain DescribeDataSetUrlStatistics information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataSetUrlStatisticsV2WithContext(ctx context.Context, request *DescribeDataSetUrlStatisticsV2Request) (response *DescribeDataSetUrlStatisticsV2Response, err error) {
+    if request == nil {
+        request = NewDescribeDataSetUrlStatisticsV2Request()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "rum", APIVersion, "DescribeDataSetUrlStatisticsV2")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDataSetUrlStatisticsV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDataSetUrlStatisticsV2Response()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDataStaticProjectRequest() (request *DescribeDataStaticProjectRequest) {
     request = &DescribeDataStaticProjectRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2535,6 +3361,98 @@ func (c *Client) DescribeDataStaticProjectWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewDescribeDataStaticProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDataStaticProjectV2Request() (request *DescribeDataStaticProjectV2Request) {
+    request = &DescribeDataStaticProjectV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("rum", APIVersion, "DescribeDataStaticProjectV2")
+    
+    
+    return
+}
+
+func NewDescribeDataStaticProjectV2Response() (response *DescribeDataStaticProjectV2Response) {
+    response = &DescribeDataStaticProjectV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDataStaticProjectV2
+// This API is used to obtain DescribeDataStaticProject information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataStaticProjectV2(request *DescribeDataStaticProjectV2Request) (response *DescribeDataStaticProjectV2Response, err error) {
+    return c.DescribeDataStaticProjectV2WithContext(context.Background(), request)
+}
+
+// DescribeDataStaticProjectV2
+// This API is used to obtain DescribeDataStaticProject information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataStaticProjectV2WithContext(ctx context.Context, request *DescribeDataStaticProjectV2Request) (response *DescribeDataStaticProjectV2Response, err error) {
+    if request == nil {
+        request = NewDescribeDataStaticProjectV2Request()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "rum", APIVersion, "DescribeDataStaticProjectV2")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDataStaticProjectV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDataStaticProjectV2Response()
     err = c.Send(request, response)
     return
 }
@@ -2631,6 +3549,98 @@ func (c *Client) DescribeDataStaticResourceWithContext(ctx context.Context, requ
     return
 }
 
+func NewDescribeDataStaticResourceV2Request() (request *DescribeDataStaticResourceV2Request) {
+    request = &DescribeDataStaticResourceV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("rum", APIVersion, "DescribeDataStaticResourceV2")
+    
+    
+    return
+}
+
+func NewDescribeDataStaticResourceV2Response() (response *DescribeDataStaticResourceV2Response) {
+    response = &DescribeDataStaticResourceV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDataStaticResourceV2
+// This API is used to obtain DescribeDataStaticResource information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataStaticResourceV2(request *DescribeDataStaticResourceV2Request) (response *DescribeDataStaticResourceV2Response, err error) {
+    return c.DescribeDataStaticResourceV2WithContext(context.Background(), request)
+}
+
+// DescribeDataStaticResourceV2
+// This API is used to obtain DescribeDataStaticResource information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataStaticResourceV2WithContext(ctx context.Context, request *DescribeDataStaticResourceV2Request) (response *DescribeDataStaticResourceV2Response, err error) {
+    if request == nil {
+        request = NewDescribeDataStaticResourceV2Request()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "rum", APIVersion, "DescribeDataStaticResourceV2")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDataStaticResourceV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDataStaticResourceV2Response()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDataStaticUrlRequest() (request *DescribeDataStaticUrlRequest) {
     request = &DescribeDataStaticUrlRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2719,6 +3729,98 @@ func (c *Client) DescribeDataStaticUrlWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDescribeDataStaticUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDataStaticUrlV2Request() (request *DescribeDataStaticUrlV2Request) {
+    request = &DescribeDataStaticUrlV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("rum", APIVersion, "DescribeDataStaticUrlV2")
+    
+    
+    return
+}
+
+func NewDescribeDataStaticUrlV2Response() (response *DescribeDataStaticUrlV2Response) {
+    response = &DescribeDataStaticUrlV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDataStaticUrlV2
+// This API is used to obtain DescribeDataStaticUrl information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataStaticUrlV2(request *DescribeDataStaticUrlV2Request) (response *DescribeDataStaticUrlV2Response, err error) {
+    return c.DescribeDataStaticUrlV2WithContext(context.Background(), request)
+}
+
+// DescribeDataStaticUrlV2
+// This API is used to obtain DescribeDataStaticUrl information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataStaticUrlV2WithContext(ctx context.Context, request *DescribeDataStaticUrlV2Request) (response *DescribeDataStaticUrlV2Response, err error) {
+    if request == nil {
+        request = NewDescribeDataStaticUrlV2Request()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "rum", APIVersion, "DescribeDataStaticUrlV2")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDataStaticUrlV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDataStaticUrlV2Response()
     err = c.Send(request, response)
     return
 }
@@ -2815,6 +3917,102 @@ func (c *Client) DescribeDataWebVitalsPageWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewDescribeDataWebVitalsPageResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDataWebVitalsPageV2Request() (request *DescribeDataWebVitalsPageV2Request) {
+    request = &DescribeDataWebVitalsPageV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("rum", APIVersion, "DescribeDataWebVitalsPageV2")
+    
+    
+    return
+}
+
+func NewDescribeDataWebVitalsPageV2Response() (response *DescribeDataWebVitalsPageV2Response) {
+    response = &DescribeDataWebVitalsPageV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDataWebVitalsPageV2
+// This API is used to obtain DescribeDataWebVitalsPage information, which is the core user activity information.
+//
+// Web Vitals for page loading performance are key performance metrics.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataWebVitalsPageV2(request *DescribeDataWebVitalsPageV2Request) (response *DescribeDataWebVitalsPageV2Response, err error) {
+    return c.DescribeDataWebVitalsPageV2WithContext(context.Background(), request)
+}
+
+// DescribeDataWebVitalsPageV2
+// This API is used to obtain DescribeDataWebVitalsPage information, which is the core user activity information.
+//
+// Web Vitals for page loading performance are key performance metrics.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  FAILEDOPERATION_INFRASTRUCTUREERROR = "FailedOperation.InfrastructureError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDataWebVitalsPageV2WithContext(ctx context.Context, request *DescribeDataWebVitalsPageV2Request) (response *DescribeDataWebVitalsPageV2Response, err error) {
+    if request == nil {
+        request = NewDescribeDataWebVitalsPageV2Request()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "rum", APIVersion, "DescribeDataWebVitalsPageV2")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDataWebVitalsPageV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDataWebVitalsPageV2Response()
     err = c.Send(request, response)
     return
 }
@@ -4165,6 +5363,94 @@ func (c *Client) DescribeScoresWithContext(ctx context.Context, request *Describ
     request.SetContext(ctx)
     
     response = NewDescribeScoresResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeScoresV2Request() (request *DescribeScoresV2Request) {
+    request = &DescribeScoresV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("rum", APIVersion, "DescribeScoresV2")
+    
+    
+    return
+}
+
+func NewDescribeScoresV2Response() (response *DescribeScoresV2Response) {
+    response = &DescribeScoresV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeScoresV2
+// This API is used to obtain the home page score list.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeScoresV2(request *DescribeScoresV2Request) (response *DescribeScoresV2Response, err error) {
+    return c.DescribeScoresV2WithContext(context.Background(), request)
+}
+
+// DescribeScoresV2
+// This API is used to obtain the home page score list.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeScoresV2WithContext(ctx context.Context, request *DescribeScoresV2Request) (response *DescribeScoresV2Response, err error) {
+    if request == nil {
+        request = NewDescribeScoresV2Request()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "rum", APIVersion, "DescribeScoresV2")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeScoresV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeScoresV2Response()
     err = c.Send(request, response)
     return
 }

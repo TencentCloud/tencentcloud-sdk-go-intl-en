@@ -32,6 +32,9 @@ const (
 	// Insufficient account balance.
 	FAILEDOPERATION_BALANCEINSUFFICIENT = "FailedOperation.BalanceInsufficient"
 
+	// 
+	FAILEDOPERATION_CREATEVPNGATEWAYFAILED = "FailedOperation.CreateVpnGatewayFailed"
+
 	// Unsupported region.
 	FAILEDOPERATION_INVALIDREGION = "FailedOperation.InvalidRegion"
 
@@ -127,6 +130,12 @@ const (
 
 	// The parameter value is invalid.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
+
+	// 
+	INVALIDPARAMETERVALUE_ACCESSSUBNETMASK = "InvalidParameterValue.AccessSubnetMask"
+
+	// 
+	INVALIDPARAMETERVALUE_ACCESSSUBNETPREFIX = "InvalidParameterValue.AccessSubnetPrefix"
 
 	// Attacked IP address.
 	INVALIDPARAMETERVALUE_ADDRESSATTACKED = "InvalidParameterValue.AddressAttacked"
@@ -941,6 +950,9 @@ const (
 	// A CCN instance cannot be associated with an edge instance and a cross-boarder instance at the same time. 
 	UNSUPPORTEDOPERATION_NOTSUPPORTATTACHEDGEANDCROSSBORDERINSTANCE = "UnsupportedOperation.NotSupportAttachEdgeAndCrossBorderInstance"
 
+	// 
+	UNSUPPORTEDOPERATION_NOTSUPPORTCREATEIPV6VPNGATEWAY = "UnsupportedOperation.NotSupportCreateIpv6VpnGateway"
+
 	// The default route table cannot be deleted.
 	UNSUPPORTEDOPERATION_NOTSUPPORTDELETEDEFAULTROUTETABLE = "UnsupportedOperation.NotSupportDeleteDefaultRouteTable"
 
@@ -973,6 +985,15 @@ const (
 
 	// The specified value is a primary IP.
 	UNSUPPORTEDOPERATION_PRIMARYIP = "UnsupportedOperation.PrimaryIp"
+
+	// 
+	UNSUPPORTEDOPERATION_PRIVATEBGPVPNGATEWAY = "UnsupportedOperation.PrivateBgpVpnGateway"
+
+	// 
+	UNSUPPORTEDOPERATION_PRIVATESSLVPNGATEWAY = "UnsupportedOperation.PrivateSslVpnGateway"
+
+	// 
+	UNSUPPORTEDOPERATION_PRIVATEVPNGATEWAY = "UnsupportedOperation.PrivateVpnGateway"
 
 	// Public CLBs are not supported.
 	UNSUPPORTEDOPERATION_PUBLICCLBNOTSUPPORT = "UnsupportedOperation.PublicClbNotSupport"
@@ -1118,8 +1139,14 @@ const (
 	// There is a conflict in the SPD local network segment. Please check and try again.
 	UNSUPPORTEDOPERATION_VPNCONNSPDOVERLAP = "UnsupportedOperation.VpnConnSPDOverlap"
 
+	// 
+	UNSUPPORTEDOPERATION_VPNGATEWAYVPCNOIPV6SUBNET = "UnsupportedOperation.VpnGatewayVpcNoIpv6Subnet"
+
 	// A VPC-type VPN gateway must specify VpcId.
 	UNSUPPORTEDOPERATION_VPNGWVPCIDMUSTHAVE = "UnsupportedOperation.VpnGwVpcIdMustHave"
+
+	// 
+	UNSUPPORTEDOPERATION_VPNGWVPCIDNOTHAVE = "UnsupportedOperation.VpnGwVpcIdNotHave"
 
 	// VPN does not support BGP.
 	UNSUPPORTEDOPERATION_VPNUNSUPPORTEDBGP = "UnsupportedOperation.VpnUnsupportedBgp"
