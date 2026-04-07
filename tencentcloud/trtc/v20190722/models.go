@@ -80,6 +80,60 @@ type AgentParams struct {
 	MaxIdleTime *uint64 `json:"MaxIdleTime,omitnil,omitempty" name:"MaxIdleTime"`
 }
 
+type AsrParam struct {
+	// The model type used for the transcription service. Example: `"zh"`.
+	// 
+	// Supported languages for speech-to-text:
+	// 
+	// - `"zh"`: Chinese (Simplified) - Powered by the latest 16k large model engine. Supports Mandarin, English, multiple Chinese regional accents, and code-switching between Chinese and English.
+	// - `"zh-TW"`: Chinese (Traditional)
+	// - `"vi"`: Vietnamese
+	// - `"ja"`: Japanese
+	// - `"ko"`: Korean
+	// - `"id"`: Indonesian
+	// - `"th"`: Thai
+	// - `"pt"`: Portuguese
+	// - `"tr"`: Turkish
+	// - `"ar"`: Arabic
+	// - `"es"`: Spanish
+	// - `"hi"`: Hindi
+	// - `"fr"`: French
+	// - `"ms"`: Malay
+	// - `"fil"`: Filipino
+	// - `"de"`: German
+	// - `"it"`: Italian
+	// - `"ru"`: Russian
+	// - `"sv"`: Swedish
+	// - `"da"`: Danish
+	// - `"no"`: Norwegian
+	// 
+	// > **Note:** If the language you need is not listed, please contact our support team.
+	Lang *string `json:"Lang,omitnil,omitempty" name:"Lang"`
+
+	// The time for speech recognition vad ranges (ms) from 240 to 2000, with a default of 1000. A smaller value enables faster sentence segmentation in speech recognition.Example value: 1000.
+	VadSilenceTime *uint64 `json:"VadSilenceTime,omitnil,omitempty" name:"VadSilenceTime"`
+
+	// Temporary hotword list: This parameter is used for improving recognition accuracy.
+	// 
+	// - Hotword limit: "hotword|weight". Each hotword contains no more than 30 characters (10 Chinese characters max). Weight ranges from 1 to 11 or 100, for example: "Tencent Cloud|5" or "ASR|11".
+	// - Restrictions for the temporary term list: multiple terms separated by commas, supports up to 128 terms, for example: "Tencent Cloud|10,speech recognition|5,ASR|11".
+	// 
+	// > Note:
+	// - When the hotword weight is set to 11, the current hotword will be upgraded to a super term. It is advisable to only set important and must-effective hotwords to 11. Setting too many hotwords with weight 11 will affect overall accuracy.
+	// - When a hotword weight is set to 100, the hotword enhancement feature forces an exact match replacement: any recognized word that is a homophone of the configured hotword will be replaced with the hotword in the transcription output. 
+	// - For example, if the hotword Lyft|100 is configured, the word lift, which is phonetically identical, will always be transcribed as Lyft. 
+	// - Use this feature with caution. Only assign a weight of 100 to hotwords that are business-critical and must always appear verbatim in the output. Overuse of weight 100 hotwords may degrade overall transcription accuracy.
+	// - Hot words cannot contain spaces, for example: ASR Tencent Cloud
+	// - Example value: voice assistant|10
+	HotWordList *string `json:"HotWordList,omitnil,omitempty" name:"HotWordList"`
+
+	// Fuzzy language detection is an advanced function, which is billed at the Advanced tier rate by default. Only Advanced tier languages are supported, excluding zh-dialect and zh-yue. Note: A maximum of 4 languages can be specified.
+	AlternativeLanguage []*string `json:"AlternativeLanguage,omitnil,omitempty" name:"AlternativeLanguage"`
+
+	// vad far-field voice suppression capacity (does not impact asr recognition accuracy), range [0, 3], default is 0. Recommended setting is 2 for better far-field voice suppression.
+	VadLevel *uint64 `json:"VadLevel,omitnil,omitempty" name:"VadLevel"`
+}
+
 type AudioEncode struct {
 	// The audio sample rate (Hz). Valid values: 48000, 44100, 32000, 24000, 16000, 8000.
 	SampleRate *uint64 `json:"SampleRate,omitnil,omitempty" name:"SampleRate"`
@@ -643,6 +697,98 @@ func (r *CreateCloudSliceTaskResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateCloudTranscriptionRequestParams struct {
+	// [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid) of TRTC, which is the same as the SdkAppId corresponding to the transcribed room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// [RoomId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#roomid) of TRTC, which is the RoomId corresponding to the transcribed TRTC room. Note: The room ID type defaults to integer. If the room ID type is string, specify it via RoomIdType.
+	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
+
+	// Room information RoomType must be the same as the RoomId type of the corresponding transcribed room. 0 indicates an integer type room ID, and 1 indicates a string Room Number.
+	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
+
+	// Parameters for transcribe service to join TRTC room.
+	TranscriptionParam *TranscriptionParam `json:"TranscriptionParam,omitnil,omitempty" name:"TranscriptionParam"`
+
+	// Parameters used by the ASR transcribe service.
+	AsrParam *AsrParam `json:"AsrParam,omitnil,omitempty" name:"AsrParam"`
+
+	// Translation parameters used for transcription.
+	TranslationParam *TranslationParam `json:"TranslationParam,omitnil,omitempty" name:"TranslationParam"`
+}
+
+type CreateCloudTranscriptionRequest struct {
+	*tchttp.BaseRequest
+	
+	// [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid) of TRTC, which is the same as the SdkAppId corresponding to the transcribed room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// [RoomId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#roomid) of TRTC, which is the RoomId corresponding to the transcribed TRTC room. Note: The room ID type defaults to integer. If the room ID type is string, specify it via RoomIdType.
+	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
+
+	// Room information RoomType must be the same as the RoomId type of the corresponding transcribed room. 0 indicates an integer type room ID, and 1 indicates a string Room Number.
+	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
+
+	// Parameters for transcribe service to join TRTC room.
+	TranscriptionParam *TranscriptionParam `json:"TranscriptionParam,omitnil,omitempty" name:"TranscriptionParam"`
+
+	// Parameters used by the ASR transcribe service.
+	AsrParam *AsrParam `json:"AsrParam,omitnil,omitempty" name:"AsrParam"`
+
+	// Translation parameters used for transcription.
+	TranslationParam *TranslationParam `json:"TranslationParam,omitnil,omitempty" name:"TranslationParam"`
+}
+
+func (r *CreateCloudTranscriptionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudTranscriptionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "RoomId")
+	delete(f, "RoomIdType")
+	delete(f, "TranscriptionParam")
+	delete(f, "AsrParam")
+	delete(f, "TranslationParam")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloudTranscriptionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudTranscriptionResponseParams struct {
+	// A unique identifier for the transcription task, generated by the Tencent Cloud server. The TaskID parameter is required for all subsequent query and stop requests.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateCloudTranscriptionResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCloudTranscriptionResponseParams `json:"Response"`
+}
+
+func (r *CreateCloudTranscriptionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudTranscriptionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteCloudModerationRequestParams struct {
 	// SDKAppId of TRTC, which is the same as the SDKAppId corresponding to the TRTC room.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
@@ -831,6 +977,70 @@ func (r *DeleteCloudSliceTaskResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteCloudSliceTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudTranscriptionRequestParams struct {
+	// SDKAppId of TRTC, which is the same as the SDKAppId of the room being transcribed.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// The unique Id of the task will be returned upon success.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+type DeleteCloudTranscriptionRequest struct {
+	*tchttp.BaseRequest
+	
+	// SDKAppId of TRTC, which is the same as the SDKAppId of the room being transcribed.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// The unique Id of the task will be returned upon success.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+func (r *DeleteCloudTranscriptionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudTranscriptionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCloudTranscriptionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudTranscriptionResponseParams struct {
+	// Task ID of the service allocation for transcribing. The task ID is the unique identifier for a transcription lifecycle process and loses its meaning once the transcription is complete.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteCloudTranscriptionResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteCloudTranscriptionResponseParams `json:"Response"`
+}
+
+func (r *DeleteCloudTranscriptionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudTranscriptionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1354,6 +1564,80 @@ func (r *DescribeCloudSliceTaskResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeCloudSliceTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudTranscriptionRequestParams struct {
+	// SDKAppId of TRTC, which is the same as the SDKAppId of the room being transcribed.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// The unique Id of the transcription task will be returned upon successful startup.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+type DescribeCloudTranscriptionRequest struct {
+	*tchttp.BaseRequest
+	
+	// SDKAppId of TRTC, which is the same as the SDKAppId of the room being transcribed.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// The unique Id of the transcription task will be returned upon successful startup.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+func (r *DescribeCloudTranscriptionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudTranscriptionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudTranscriptionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudTranscriptionResponseParams struct {
+	// Time of starting the transcription task.
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Transcription task status. 
+	// 
+	// - Idle: Indicates the current transcription task is idle. 
+	// - InProgress: Indicates the current transcription task is in progress. 
+	// - Exited: Indicates the current transcription task is in the process of exiting.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Unique Id of the transcribe task.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudTranscriptionResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudTranscriptionResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudTranscriptionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudTranscriptionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5175,6 +5459,33 @@ type TimeValue struct {
 	Value *float64 `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
+type TranscriptionParam struct {
+	// [UserId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#userid) used by the transcription service in the TRTC room. Note that this userId cannot duplicate those already used by other TRTC or transcription services etc. You may use the room ID as part of the user identification.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// User signature for the transcription service to join a TRTC room. The signature verification corresponding to the current UserId serves as the login password. For specific details, see TRTC solution for calculating [UserSig](https://www.tencentcloud.com/document/product/647/45910?from_cn_redirect=1#UserSig).
+	UserSig *string `json:"UserSig,omitnil,omitempty" name:"UserSig"`
+
+	// Allowlist of user IDs whose audio will be transcribed.
+	// Specifies which anchor audio streams to transcribe when the service starts. If left empty or omitted, audio from all anchors will be transcribed. If one or more values are provided, only audio from the specified anchors will be transcribed.
+	// 
+	// > Note: If a user ID appears in both the `SubscribeList` and `UnSubscribeList`, the `UnSubscribeList` takes precedence.
+	SubscribeList []*TranscriptionUserInfoParams `json:"SubscribeList,omitnil,omitempty" name:"SubscribeList"`
+
+	// Blocklist of user IDs whose audio will be excluded from transcription. 
+	// Leave empty or omit to disable the blocklist. Provide specific values to exclude the specified anchors' audio from transcription.
+	UnSubscribeList []*TranscriptionUserInfoParams `json:"UnSubscribeList,omitnil,omitempty" name:"UnSubscribeList"`
+
+	// Maximum idle duration before the transcription task is automatically stopped, in seconds.
+	// If all anchors being transcribed continuously leave the TRTC room or switch to the audience role for longer than this value, the transcription task stops automatically.
+	// - Default: 30
+	// - Range: 5 - 86400 (24 hours)
+	MaxIdleTime *uint64 `json:"MaxIdleTime,omitnil,omitempty" name:"MaxIdleTime"`
+
+	// Controls whether the custom data channel is enabled. Accepted values: 0 (disabled) or 1 (enabled). Defaults to 0 if omitted.
+	SendCustomMode *uint64 `json:"SendCustomMode,omitnil,omitempty" name:"SendCustomMode"`
+}
+
 type TranscriptionParams struct {
 	// The robot's UserId is used to enter a room and initiate tasks. [Note] This UserId cannot be repeated with the host viewer [UserId](https://cloud.tencent.com/document/product/647/46351#userid) in the current room. If multiple tasks are initiated in a room, the robot's UserId cannot be repeated, otherwise the previous task will be interrupted. The robot's UserId must be unique in the room.
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
@@ -5192,6 +5503,11 @@ type TranscriptionParams struct {
 	TargetUserId *string `json:"TargetUserId,omitnil,omitempty" name:"TargetUserId"`
 }
 
+type TranscriptionUserInfoParams struct {
+	// User ID.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+}
+
 type TranslationConfig struct {
 	// Target language, target language list (ISO 639-1).
 	TargetLanguages []*string `json:"TargetLanguages,omitnil,omitempty" name:"TargetLanguages"`
@@ -5204,6 +5520,29 @@ type TranslationConfig struct {
 
 	// Translation terminology.
 	Terminology []*Terminology `json:"Terminology,omitnil,omitempty" name:"Terminology"`
+}
+
+type TranslationParam struct {
+	// Target language for translation. Example: `["en", "ja"]`.
+	// 
+	// Supported target languages:
+	// 
+	// - `"zh"`: Chinese
+	// - `"en"`: English
+	// - `"vi"`: Vietnamese
+	// - `"ja"`: Japanese
+	// - `"ko"`: Korean
+	// - `"id"`: Indonesian
+	// - `"th"`: Thai
+	// - `"pt"`: Portuguese
+	// - `"ar"`: Arabic
+	// - `"es"`: Spanish
+	// - `"fr"`: French
+	// - `"ms"`: Malay
+	// - `"de"`: German
+	// - `"it"`: Italian
+	// - `"ru"`: Russian
+	TargetLang []*string `json:"TargetLang,omitnil,omitempty" name:"TargetLang"`
 }
 
 type TrtcUsage struct {
