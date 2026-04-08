@@ -603,7 +603,7 @@ type AiAnalysisTaskCutoutResult struct {
 	// Task status. Valid values are `PROCESSING`, `SUCCESS`, and `FAIL`.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
 	// Error message.
@@ -631,28 +631,28 @@ type AiAnalysisTaskDelLogoInput struct {
 }
 
 type AiAnalysisTaskDelLogoOutput struct {
-	// Path of a file after removal.
+	// <p>Path of a file after removal.</p>
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
-	// Storage location of a file after removal.
+	// <p>Storage location of a file after removal.</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// Path of a subtitle file extracted from a video.
+	// <p>Path of subtitle file extracted from video.</p>
 	OriginSubtitlePath *string `json:"OriginSubtitlePath,omitnil,omitempty" name:"OriginSubtitlePath"`
 
-	// Path of a subtitle translation file extracted from a video.
+	// <p>Path of a subtitle translation file extracted from a video.</p>
 	TranslateSubtitlePath *string `json:"TranslateSubtitlePath,omitnil,omitempty" name:"TranslateSubtitlePath"`
 
-	// Position of the erased subtitle. Note: This field is only valid for subtitle extraction when the option to return subtitle positions is enabled.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Subtitle position after removal. <strong>Note</strong>: only applicable to subtitle extraction when return of subtitle position is enabled.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubtitlePos *SubtitlePosition `json:"SubtitlePos,omitnil,omitempty" name:"SubtitlePos"`
 
-	// Specifies the file url of the video after voice cloning.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>File URL of the video after voice type cloning</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	VoiceClonedVideo *string `json:"VoiceClonedVideo,omitnil,omitempty" name:"VoiceClonedVideo"`
 
-	// Specifies the file address of the voice type clone annotation.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>File address of the voice type clone annotation</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	VoiceClonedMarkFile *string `json:"VoiceClonedMarkFile,omitnil,omitempty" name:"VoiceClonedMarkFile"`
 }
 
@@ -707,16 +707,16 @@ type AiAnalysisTaskDubbingInput struct {
 }
 
 type AiAnalysisTaskDubbingOutput struct {
-	// Specifies the video path for translation.
+	// <p>Dubbed video path.</p>
 	VideoPath *string `json:"VideoPath,omitnil,omitempty" name:"VideoPath"`
 
-	// Specifies the file path of the tag.
+	// <p>Tag file path</p>
 	SpeakerPath *string `json:"SpeakerPath,omitnil,omitempty" name:"SpeakerPath"`
 
-	// Voice type ID.
+	// <p>Voice type id</p>
 	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
 
-	// Specifies the storage location of the transcoded video.
+	// <p>Storage location of the dubbed video.</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 }
 
@@ -2551,7 +2551,7 @@ type AudioTemplateInfo struct {
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
 	// Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
-	// For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
+	// For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.comom/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
 	// Unit: Hz.
 	// Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
 	SampleRate *uint64 `json:"SampleRate,omitnil,omitempty" name:"SampleRate"`
@@ -2596,7 +2596,7 @@ type AudioTemplateInfoForUpdate struct {
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
 	// Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
-	// For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
+	// For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.comom/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
 	// Unit: Hz.
 	// Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -2852,10 +2852,10 @@ type BlindWatermarkTemplate struct {
 	// Description information of the digital watermark template.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Creation time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Creation time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Last modification time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Last modification time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Digital watermark strength. 
@@ -3860,68 +3860,68 @@ func (r *CreateAdaptiveDynamicStreamingTemplateResponse) FromJsonString(s string
 
 // Predefined struct for user
 type CreateAigcImageTaskRequestParams struct {
-	// Model name.
-	// Supported models:Hunyuan,
-	// GEM,
-	// Qwen.
+	// <p>Model name.<br>Supported models:<br>Hunyuan.<br>GEM.<br>Qwen.</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// Specific version number of the model. By default, the system uses the supported stable version of the model.1. GEM: [2.5 and 3.0].
+	// <p>Specify the model version number. By default, the system uses the supported stable version of the model.</p><ol><li>GEM: [2.5 and 3.0].</li></ol>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
-	// Description of the generated image. (Note: A maximum of 1000 characters is supported.) This parameter is required when no reference image is specified.
+	// <p>Description of the generated image. (Note: Supports up to 1000 characters.) This parameter is required when no reference image is passed in.</p>
 	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
 
-	// Specifies the content you want to prevent the model from generating. Note: Not all models support this. For example: top lighting, bright colors, people, animals, multiple vehicles, and wind.
+	// <p>Specifies the content you want to prevent the model from generating. Note: Not all models support this. For example: top lighting, bright colors, people, animals, multiple vehicles, and wind.</p>
 	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
 
-	// The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.
+	// <p>The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.</p>
 	EnhancePrompt *bool `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
 
-	// Reference resource images. By default, one image can be specified.Model that supports multiple images:1. GEM supports up to 3 resource images.Note:1. The recommended image size is less than 7 MB. Different models have different limits.2. Supported image format: JPEG, PNG, and WebP.
+	// <p>Used for inputting image information as a resource for reference. Default support for inputting an image.</p><p>Models supporting multi-image input:</p><ol><li>GEM, supporting up to 3 images as resource input.</li></ol><p>Note:</p><ol><li>Recommended image less than 7M. Limits vary by model.</li><li>Format support: jpeg, png, webp.</li></ol>
 	ImageInfos []*AigcImageInfo `json:"ImageInfos,omitnil,omitempty" name:"ImageInfos"`
 
-	// Additional parameters required for the model.
+	// <p>Additional parameters required for the model.</p>
 	ExtraParameters *AigcImageExtraParam `json:"ExtraParameters,omitnil,omitempty" name:"ExtraParameters"`
 
-	// COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.
+	// <p>Used to input some special scene parameters required by the model, serialized into a string in Json format. Example: {"size":"2048x2048"}</p>
+	AdditionalParameters *string `json:"AdditionalParameters,omitnil,omitempty" name:"AdditionalParameters"`
+
+	// <p>COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.</p>
 	StoreCosParam *AigcStoreCosParam `json:"StoreCosParam,omitnil,omitempty" name:"StoreCosParam"`
 
-	// API operator name.
+	// <p>API operator name.</p>
 	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 }
 
 type CreateAigcImageTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// Model name.
-	// Supported models:Hunyuan,
-	// GEM,
-	// Qwen.
+	// <p>Model name.<br>Supported models:<br>Hunyuan.<br>GEM.<br>Qwen.</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// Specific version number of the model. By default, the system uses the supported stable version of the model.1. GEM: [2.5 and 3.0].
+	// <p>Specify the model version number. By default, the system uses the supported stable version of the model.</p><ol><li>GEM: [2.5 and 3.0].</li></ol>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
-	// Description of the generated image. (Note: A maximum of 1000 characters is supported.) This parameter is required when no reference image is specified.
+	// <p>Description of the generated image. (Note: Supports up to 1000 characters.) This parameter is required when no reference image is passed in.</p>
 	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
 
-	// Specifies the content you want to prevent the model from generating. Note: Not all models support this. For example: top lighting, bright colors, people, animals, multiple vehicles, and wind.
+	// <p>Specifies the content you want to prevent the model from generating. Note: Not all models support this. For example: top lighting, bright colors, people, animals, multiple vehicles, and wind.</p>
 	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
 
-	// The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.
+	// <p>The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.</p>
 	EnhancePrompt *bool `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
 
-	// Reference resource images. By default, one image can be specified.Model that supports multiple images:1. GEM supports up to 3 resource images.Note:1. The recommended image size is less than 7 MB. Different models have different limits.2. Supported image format: JPEG, PNG, and WebP.
+	// <p>Used for inputting image information as a resource for reference. Default support for inputting an image.</p><p>Models supporting multi-image input:</p><ol><li>GEM, supporting up to 3 images as resource input.</li></ol><p>Note:</p><ol><li>Recommended image less than 7M. Limits vary by model.</li><li>Format support: jpeg, png, webp.</li></ol>
 	ImageInfos []*AigcImageInfo `json:"ImageInfos,omitnil,omitempty" name:"ImageInfos"`
 
-	// Additional parameters required for the model.
+	// <p>Additional parameters required for the model.</p>
 	ExtraParameters *AigcImageExtraParam `json:"ExtraParameters,omitnil,omitempty" name:"ExtraParameters"`
 
-	// COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.
+	// <p>Used to input some special scene parameters required by the model, serialized into a string in Json format. Example: {"size":"2048x2048"}</p>
+	AdditionalParameters *string `json:"AdditionalParameters,omitnil,omitempty" name:"AdditionalParameters"`
+
+	// <p>COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.</p>
 	StoreCosParam *AigcStoreCosParam `json:"StoreCosParam,omitnil,omitempty" name:"StoreCosParam"`
 
-	// API operator name.
+	// <p>API operator name.</p>
 	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 }
 
@@ -3944,6 +3944,7 @@ func (r *CreateAigcImageTaskRequest) FromJsonString(s string) error {
 	delete(f, "EnhancePrompt")
 	delete(f, "ImageInfos")
 	delete(f, "ExtraParameters")
+	delete(f, "AdditionalParameters")
 	delete(f, "StoreCosParam")
 	delete(f, "Operator")
 	if len(f) > 0 {
@@ -3954,7 +3955,7 @@ func (r *CreateAigcImageTaskRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAigcImageTaskResponseParams struct {
-	// Returned task ID.
+	// <p>Returned task ID.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5296,50 +5297,44 @@ func (r *CreateScheduleResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSmartEraseTemplateRequestParams struct {
-	// Length limit for the smart erasing template name: 64 characters.
+	// <p>Length limit for the smart erasing template name: 64 characters.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Erasing type.
-	// -subtitle: subtitle removal.
-	// -watermark: watermark removal.
-	// -privacy: privacy protection.
+	// <p>Removal Type</p><ul><li>subtitle removal</li><li>watermark removal</li><li>privacy protection</li></ul>
 	EraseType *string `json:"EraseType,omitnil,omitempty" name:"EraseType"`
 
-	// Length limit for the description information of the smart erasing template: 256 characters.
+	// <p>Length limit for the description information of the smart erasing template: 256 characters.</p>
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Subtitle erasing configuration. This parameter is required and valid only when the value of EraseType is set to subtitle.
+	// <p>Subtitle erasing configuration. This parameter is required and valid only when the value of EraseType is set to subtitle.</p>
 	EraseSubtitleConfig *SmartEraseSubtitleConfig `json:"EraseSubtitleConfig,omitnil,omitempty" name:"EraseSubtitleConfig"`
 
-	// Watermark erasing configuration. This parameter is required and valid only when the value of EraseType is set to watermark.
+	// <p>Watermark erasing configuration. This parameter is required and valid only when the value of EraseType is set to watermark.</p>
 	EraseWatermarkConfig *SmartEraseWatermarkConfig `json:"EraseWatermarkConfig,omitnil,omitempty" name:"EraseWatermarkConfig"`
 
-	// Privacy protection configuration. This parameter is required and valid only when the value of EraseType is set to privacy.
+	// <p>Privacy protection configuration. This parameter is required and valid only when the value of EraseType is set to privacy.</p>
 	ErasePrivacyConfig *SmartErasePrivacyConfig `json:"ErasePrivacyConfig,omitnil,omitempty" name:"ErasePrivacyConfig"`
 }
 
 type CreateSmartEraseTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// Length limit for the smart erasing template name: 64 characters.
+	// <p>Length limit for the smart erasing template name: 64 characters.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Erasing type.
-	// -subtitle: subtitle removal.
-	// -watermark: watermark removal.
-	// -privacy: privacy protection.
+	// <p>Removal Type</p><ul><li>subtitle removal</li><li>watermark removal</li><li>privacy protection</li></ul>
 	EraseType *string `json:"EraseType,omitnil,omitempty" name:"EraseType"`
 
-	// Length limit for the description information of the smart erasing template: 256 characters.
+	// <p>Length limit for the description information of the smart erasing template: 256 characters.</p>
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Subtitle erasing configuration. This parameter is required and valid only when the value of EraseType is set to subtitle.
+	// <p>Subtitle erasing configuration. This parameter is required and valid only when the value of EraseType is set to subtitle.</p>
 	EraseSubtitleConfig *SmartEraseSubtitleConfig `json:"EraseSubtitleConfig,omitnil,omitempty" name:"EraseSubtitleConfig"`
 
-	// Watermark erasing configuration. This parameter is required and valid only when the value of EraseType is set to watermark.
+	// <p>Watermark erasing configuration. This parameter is required and valid only when the value of EraseType is set to watermark.</p>
 	EraseWatermarkConfig *SmartEraseWatermarkConfig `json:"EraseWatermarkConfig,omitnil,omitempty" name:"EraseWatermarkConfig"`
 
-	// Privacy protection configuration. This parameter is required and valid only when the value of EraseType is set to privacy.
+	// <p>Privacy protection configuration. This parameter is required and valid only when the value of EraseType is set to privacy.</p>
 	ErasePrivacyConfig *SmartErasePrivacyConfig `json:"ErasePrivacyConfig,omitnil,omitempty" name:"ErasePrivacyConfig"`
 }
 
@@ -5369,7 +5364,7 @@ func (r *CreateSmartEraseTemplateRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSmartEraseTemplateResponseParams struct {
-	// Unique identifier of the smart erasing template.
+	// <p>Unique identifier of the intelligent erasure template</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5394,459 +5389,75 @@ func (r *CreateSmartEraseTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSmartSubtitleTemplateRequestParams struct {
-	// Smart subtitle template name.
-	// Length limit: 64 characters.
+	// <p>Intelligent subtitle template name<br>Length limit: 64 characters.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Source language of the video with smart subtitles.
-	// OCR recognition only supports the following languages:
-	// `zh_en`: Chinese and English.
-	// `multi`: others.
-	// ASR recognition and pure subtitle translation currently support the following languages:
-	// `auto`: automatic recognition (it is only supported in pure subtitle translation).
-	// `zh`: Simplified Chinese.
-	// `en`: English.
-	// `ja`: Japanese.
-	// `ko`: Korean.
-	// `zh-PY`: Chinese, English, and Cantonese.
-	// `zh_medical`: Chinese (medical scenario).
-	// `vi`: Vietnamese.
-	// `ms`: Malay.
-	// `id`: Indonesian.
-	// `fil`: Filipino.
-	// `th`: Thai.
-	// `pt`: Portuguese.
-	// `tr`: Turkish.
-	// `ar`: Arabic.
-	// `es`: Spanish.
-	// `hi`: Hindi.
-	// `fr`: French.
-	// `de`: German.
-	// `it`: Italian.
-	// `zh_dialect`: Chinese dialect.
-	// `zh_en`: Chinese and English.
-	// `yue`: Cantonese.
-	// `ru`: Russian.
-	// `prime_zh`: Chinese, English, and Chinese dialects.
-	// `af-ZA`: Afrikaans (South Africa).
-	// `sq-AL`: Albanian (Albania).
-	// `am-ET`: Amharic (Ethiopia).
-	// `ar-DZ`: Arabic (Algeria).
-	// `ar-BH`: Arabic (Bahrain).
-	// `ar-EG`: Arabic (Egypt).
-	// `ar-IQ`: Arabic (Iraq).
-	// `ar-IL`: Arabic (Israel).
-	// `ar-JO`: Arabic (Jordan).
-	// `ar-KW`: Arabic (Kuwait).
-	// `ar-LB`: Arabic (Lebanon).
-	// `ar-MR`: Arabic (Mauritania).
-	// `ar-MA`: Arabic (Morocco).
-	// `ar-OM`: Arabic (Oman).
-	// `ar-QA`: Arabic (Qatar).
-	// `ar-SA`: Arabic (Saudi Arabia).
-	// `ar-PS`: Arabic (State of Palestine).
-	// `ar-SY`: Arabic (Syria).
-	// `ar-TN`: Arabic (Tunisia).
-	// `ar-AE`: Arabic (United Arab Emirates).
-	// `ar-YE`: Arabic (Yemen).
-	// `hy-AM`: Armenian (Armenia).
-	// `az-AZ`: Azerbaijani (Azerbaijan).
-	// `eu-ES`: Basque (Spain).
-	// `bn-BD`: Bengali (Bangladesh).
-	// `bn-IN`: Bengali (India).
-	// `bs-BA`: Bosnian (Bosnia and Herzegovina).
-	// `bg-BG`: Bulgarian (Bulgaria).
-	// `my-MM`: Burmese (Myanmar).
-	// `ca-ES`: Catalan (Spain).
-	// `hr-HR`: Croatian (Croatia).
-	// `cs-CZ`: Czech (Czech Republic).
-	// `da-DK`: Danish (Denmark).
-	// `nl-BE`: Dutch (Belgium).
-	// `nl-NL`: Dutch (Holland).
-	// `en-AU`: English (Australia).
-	// `en-CA`: English (Canada).
-	// `en-GH`: English (Ghana).
-	// `en-HK`: English (Hong Kong (China)).
-	// `en-IN`: English (India).
-	// `en-IE`: English (Ireland).
-	// `en-KE`: English (Kenya).
-	// `en-NZ`: English (New Zealand).
-	// `en-NG`: English (Nigeria).
-	// `en-PK`: English (Pakistan).
-	// `en-PH`: English (Philippines).
-	// `en-SG`: English (Singapore).
-	// `en-ZA`: English (South Africa).
-	// `en-TZ`: English (Tanzania).
-	// `en-GB`: English (UK).
-	// `en-US`: English (US).
-	// `et-EE`: Estonian (Estonia).
-	// `fil-PH`: Filipino (Philippines).
-	// `fi-FI`: Finnish (Finland).
-	// `fr-BE`: French (Belgium).
-	// `fr-CA`: French (Canada).
-	// `fr-FR`: French (France).
-	// `fr-CH`: French (Switzerland).
-	// `gl-ES`: Galician (Spain).
-	// `ka-GE`: Georgian (Georgia).
-	// `el-GR`: Greek (Greece).
-	// `gu-IN`: Gujarati (India).
-	// `iw-IL`: Hebrew (Israel).
-	// `hi-IN`: Hindi (India).
-	// `hu-HU`: Hungarian (Hungary).
-	// `is-IS`: Icelandic (Iceland).
-	// `id-ID`: Indonesian (Indonesia).
-	// `it-IT`: Italian (Italy).
-	// `it-CH`: Italian (Switzerland).
-	// `ja-JP`: Japanese (Japan).
-	// `jv-ID`: Javanese (Indonesia).
-	// `kn-IN`: Kannada (India).
-	// `kk-KZ`: Kazakh (Kazakhstan).
-	// `km-KH`: Khmer (Cambodia).
-	// `rw-RW`: Kinyarwanda (Rwanda).
-	// `ko-KR`: Korean (South Korea).
-	// `lo-LA`: Lao (Laos).
-	// `lv-LV`: Latvian (Latvia).
-	// `lt-LT`: Lithuanian (Lithuania).
-	// `mk-MK`: Macedonian (North Macedonia).
-	// `ms-MY`: Malay (Malaysia).
-	// `ml-IN`: Malayalam (India).
-	// `mr-IN`: Marathi (India).
-	// `mn-MN`: Mongolian (Mongolia).
-	// `ne-NP`: Nepali (Nepal).
-	// `no-NO`: Bokmal Norwegian (Norway).
-	// `fa-IR`: Persian (Iran).
-	// `pl-PL`: Polish (Poland).
-	// `pt-BR`: Portuguese (Brazil).
-	// `pt-PT`: Portuguese (Portugal).
-	// `ro-RO`: Romanian (Romania).
-	// `ru-RU`: Russian (Russia).
-	// `sr-RS`: Serbian (Serbia).
-	// `si-LK`: Sinhalese (Sri Lanka).
-	// `sk-SK`: Slovak (Slovakia).
-	// `sl-SI`: Slovenian (Slovenia).
-	// `st-ZA`: Sesotho (South Africa).
-	// `es-AR`: Spanish (Argentina).
-	// `es-BO`: Spanish (Bolivia).
-	// `es-CL`: Spanish (Chile).
-	// `es-CO`: Spanish (Colombia).
-	// `es-CR`: Spanish (Costa Rica).
-	// `es-DO`: Spanish (Dominican Republic).
-	// `es-EC`: Spanish (Ecuador).
-	// `es-SV`: Spanish (El Salvador).
-	// `es-GT`: Spanish (Guatemala).
-	// `es-HN`: Spanish (Honduras).
-	// `es-MX`: Spanish (Mexico).
-	// `es-NI`: Spanish (Nicaragua).
-	// `es-PA`: Spanish (Panama).
-	// `es-PY`: Spanish (Paraguay).
-	// `es-PE`: Spanish (Peru).
-	// `es-PR`: Spanish (Puerto Rico).
-	// `es-ES`: Spanish (Spain).
-	// `es-US`: Spanish (US).
-	// `es-UY`: Spanish (Uruguay).
-	// `es-VE`: Spanish (Venezuela).
-	// `su-ID`: Sundanese (Indonesia).
-	// `sw-KE`: Swahili (Kenya).
-	// `sw-TZ`: Swahili (Tanzania).
-	// `sv-SE`: Swedish (Sweden).
-	// `ta-IN`: Tamil (India).
-	// `ta-MY`: Tamil (Malaysia).
-	// `ta-SG`: Tamil (Singapore).
-	// `ta-LK`: Tamil (Sri Lanka).
-	// `te-IN`: Telugu (India).
-	// `th-TH`: Thai (Thailand).
-	// `ts-ZA`: Tsonga (South Africa).
-	// `tr-TR`: Turkish (Turkey).
-	// `uk-UA`: Ukrainian (Ukraine).
-	// `ur-IN`: Urdu (India).
-	// `ur-PK`: Urdu (Pakistan).
-	// `uz-UZ`: Uzbek (Uzbekistan).
-	// `ve-ZA`: Venda (South Africa).
-	// `vi-VN`: Vietnamese (Vietnam).
-	// `xh-ZA`: Xhosa (South Africa).
-	// `zu-ZA`: Zulu (South Africa).
+	// <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br>ASR recognition and pure caption translation currently support the following languages:<br><code>auto</code>: Auto-identification<br><code>zh</code>: Simplified Chinese<br><code>en</code>: English<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>zh-PY</code>: Chinese-English-Cantonese<br><code>zh_medical</code>: Chinese health care<br><code>vi</code>: Vietnamese<br><code>ms</code>: Malay<br><code>id</code>: Indonesian<br><code>fil</code>: Filipino<br><code>th</code>: Thai<br><code>pt</code>: Portuguese<br><code>tr</code>: Turkish<br><code>ar</code>: Arabic<br><code>es</code>: Spanish<br><code>hi</code>: Hindi<br><code>fr</code>: French<br><code>de</code>: German<br><code>it</code>: Italian<br><code>zh_dialect</code>: Chinese dialect<br><code>zh_en</code>: Chinese-English<br><code>yue</code>: Cantonese<br><code>ru</code>: Russian<br><code>prime_zh</code>: Chinese-English dialect<br><code>af-ZA</code>: Afrikaans (South Africa)<br><code>sq-AL</code>: Albanian (Albania)<br><code>am-ET</code>: Amharic (Ethiopia)<br><code>ar-DZ</code>: Arabic (Algeria)<br><code>ar-BH</code>: Arabic (Bahrain)<br><code>ar-EG</code>: Arabic (Egypt)<br><code>ar-IQ</code>: Arabic (Iraq)<br><code>ar-IL</code>: Arabic (Israel)<br><code>ar-JO</code>: Arabic (Jordan)<br><code>ar-KW</code>: Arabic (Kuwait)<br><code>ar-LB</code>: Arabic (Lebanon)<br><code>ar-MR</code>: Arabic (Mauritania)<br><code>ar-MA</code>: Arabic (Morocco)<br><code>ar-OM</code>: Arabic (Oman)<br><code>ar-QA</code>: Arabic (Qatar)<br><code>ar-SA</code>: Arabic (Saudi Arabia)<br><code>ar-PS</code>: Arabic (State of Palestine)<br><code>ar-SY</code>: Arabic (Syria)<br><code>ar-TN</code>: Arabic (Tunisia)<br><code>ar-AE</code>: Arabic (United Arab Emirates)<br><code>ar-YE</code>: Arabic (Yemen)<br><code>hy-AM</code>: Armenian (Armenia)<br><code>az-AZ</code>: Azerbaijani (Azerbaijan)<br><code>eu-ES</code>: Basque (Spain)<br><code>bn-BD</code>: Bengali (Bangladesh)<br><code>bn-IN</code>: Bengali (India)<br><code>bs-BA</code>: Bosnian (Bosnia and Herzegovina)<br><code>bg-BG</code>: Bulgarian (Bulgaria)<br><code>my-MM</code>: Burmese (Myanmar)<br><code>ca-ES</code>: Catalan (Spain)<br><code>hr-HR</code>: Croatian (Croatia)<br><code>cs-CZ</code>: Czech (Czech Republic)<br><code>da-DK</code>: Danish (Denmark)<br><code>nl-BE</code>: Dutch (Belgium)<br><code>nl-NL</code>: Dutch (Netherlands)<br><code>en-AU</code>: English (Australia)<br><code>en-CA</code>: English (Canada)<br><code>en-GH</code>: English (Ghana)<br><code>en-HK</code>: English (Hong Kong (China))<br><code>en-IN</code>: English (India)<br><code>en-IE</code>: English (Ireland)<br><code>en-KE</code>: English (Kenya)<br><code>en-NZ</code>: English (New Zealand)<br><code>en-NG</code>: English (Nigeria)<br><code>en-PK</code>: English (Pakistan)<br><code>en-PH</code>: English (Philippines)<br><code>en-SG</code>: English (Singapore)<br><code>en-ZA</code>: English (South Africa)<br><code>en-TZ</code>: English (Tanzania)<br><code>en-GB</code>: English (UK)<br><code>en-US</code>: English (United States)<br><code>et-EE</code>: Estonian (Estonia)<br><code>fil-PH</code>: Filipino (Philippines)<br><code>fi-FI</code>: Finnish (Finland)<br><code>fr-BE</code>: French (Belgium)<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fr-CH</code>: French (Switzerland)<br><code>gl-ES</code>: Galician (Spain)<br><code>ka-GE</code>: Georgian (Georgia)<br><code>el-GR</code>: Greek (Greece)<br><code>gu-IN</code>: Gujarati (India)<br><code>iw-IL</code>: Hebrew (Israel)<br><code>hi-IN</code>: Hindi (India)<br><code>hu-HU</code>: Hungarian (Hungary)<br><code>is-IS</code>: Icelandic (Iceland)<br><code>id-ID</code>: Indonesian (Indonesia)<br><code>it-IT</code>: Italian (Italy)<br><code>it-CH</code>: Italian (Switzerland)<br><code>ja-JP</code>: Japanese (Japan)<br><code>jv-ID</code>: Javanese (Indonesia)<br><code>kn-IN</code>: Kannada (India)<br><code>kk-KZ</code>: Kazakh (Kazakhstan)<br><code>km-KH</code>: Khmer (Cambodia)<br><code>rw-RW</code>: Kinyarwanda (Rwanda)<br><code>ko-KR</code>: Korean (South Korea)<br><code>lo-LA</code>: Lao (Laos)<br><code>lv-LV</code>: Latvian (Latvia)<br><code>lt-LT</code>: Lithuanian (Lithuania)<br><code>mk-MK</code>: Macedonian (North Macedonia)<br><code>ms-MY</code>: Malay (Malaysia)<br><code>ml-IN</code>: Malayalam (India)<br><code>mr-IN</code>: Marathi (India)<br><code>mn-MN</code>: Mongolian (Mongolia)<br><code>ne-NP</code>: Nepali (Nepal)<br><code>no-NO</code>: Norwegian Bokmål (Norway)<br><code>fa-IR</code>: Persian (Iran)<br><code>pl-PL</code>: Polish (Poland)<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>ro-RO</code>: Romanian (Romania)<br><code>ru-RU</code>: Russian (Russia)<br><code>sr-RS</code>: Serbian (Serbia)<br><code>si-LK</code>: Sinhalese (Sri Lanka)<br><code>sk-SK</code>: Slovak (Slovakia)<br><code>sl-SI</code>: Slovenian (Slovenia)<br><code>st-ZA</code>: Southern Sotho (South Africa)<br><code>es-AR</code>: Spanish (Argentina)<br><code>es-BO</code>: Spanish (Bolivia)<br><code>es-CL</code>: Spanish (Chile)<br><code>es-CO</code>: Spanish (Colombia)<br><code>es-CR</code>: Spanish (Costa Rica)<br><code>es-DO</code>: Spanish (Dominican Republic)<br><code>es-EC</code>: Spanish (Ecuador)<br><code>es-SV</code>: Spanish (El Salvador)<br><code>es-GT</code>: Spanish (Guatemala)<br><code>es-HN</code>: Spanish (Honduras)<br><code>es-MX</code>: Spanish (Mexico)<br><code>es-NI</code>: Spanish (Nicaragua)<br><code>es-PA</code>: Spanish (Panama)<br><code>es-PY</code>: Spanish (Paraguay)<br><code>es-PE</code>: Spanish (Peru)<br><code>es-PR</code>: Spanish (Puerto Rico)<br><code>es-ES</code>: Spanish (Spain)<br><code>es-US</code>: Spanish (United States)<br><code>es-UY</code>: Spanish (Uruguay)<br><code>es-VE</code>: Spanish (Venezuela)<br><code>su-ID</code>: Sundanese (Indonesia)<br><code>sw-KE</code>: Swahili (Kenya)<br><code>sw-TZ</code>: Swahili (Tanzania)<br><code>sv-SE</code>: Swedish (Sweden)<br><code>ta-IN</code>: Tamil (India)<br><code>ta-MY</code>: Tamil (Malaysia)<br><code>ta-SG</code>: Tamil (Singapore)<br><code>ta-LK</code>: Tamil (Sri Lanka)<br><code>te-IN</code>: Telugu (India)<br><code>th-TH</code>: Thai (Thailand)<br><code>ts-ZA</code>: Tsonga (South Africa)<br><code>tr-TR</code>: Turkish (Türkiye)<br><code>uk-UA</code>: Ukrainian (Ukraine)<br><code>ur-IN</code>: Urdu (India)<br><code>ur-PK</code>: Urdu (Pakistan)<br><code>uz-UZ</code>: Uzbek (Uzbekistan)<br><code>ve-ZA</code>: Venda (South Africa)<code>vi-VN</code>: Vietnamese (Vietnam)<br><code>xh-ZA</code>: Xhosa (South Africa)<br><code>zu-ZA</code>: Zulu (South Africa)</p>
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
-	// Smart subtitle language type.
-	// 0: source language
-	// 1: target language
-	// 2: source language + target language
-	// The value can only be 0 when TranslateSwitch is set to OFF. The value can only be 1 or 2 when TranslateSwitch is set to ON.
+	// <p>Intelligent caption subtitle language type<br>0: Source language<br>1: Target language<br>2: Source language + target language<br>Only 0 is supported when TranslateSwitch is OFF<br>Only 1 or 2 is supported when TranslateSwitch is ON</p>
 	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
 
-	// Smart subtitle template description.
-	// Length limit: 256 characters.
+	// <p>Intelligent caption template description information<br>Length limit: 256 characters.</p>
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Smart subtitle file format:
-	// - Under the ASR recognition and translation processing type:
-	//      - vtt: WebVTT format subtitle.
-	//      - srt: SRT format subtitle.
-	//      - Unspecified or left blank: no subtitle file generated.
-	// - Under the pure subtitle translation processing type:
-	//     - original: consistent with the source file.
-	//     - vtt: WebVTT format subtitle.
-	//     - srt: SRT format subtitle.
-	// - Under the OCR recognition and translation processing type:
-	//      - vtt: WebVTT format subtitle.
-	//      - srt: SRT format subtitle.
-	// **Note**:
-	// - For ASR recognition mode, when 2 or more languages are involved in translation, this field cannot be unspecified or left blank.
-	// - For pure subtitle translation and OCR recognition mode, this field cannot be unspecified or left blank.
+	// <p>Intelligent subtitle file format:</p><ul><li>For ASR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li><li>Leave blank or fill in the blank: no subtitle file generated</li></ul></li><li>For pure subtitle translation processing type:<ul><li>original: consistent with the source file</li><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li><li>For OCR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li></ul><p><strong>Note</strong>:</p><ul><li>For ASR recognition method, do not leave blank or not pass when translating 2 or more languages.</li><li>For pure subtitle translation method, do not leave blank or not pass.</li><li>For OCR tasks, it is allowed to leave blank or not pass when suppression is enabled.</li></ul>
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
-	// ASR hotword lexicon parameter.
+	// <p>ASR hot word lexicon parameter</p>
 	AsrHotWordsConfigure *AsrHotWordsConfigure `json:"AsrHotWordsConfigure,omitnil,omitempty" name:"AsrHotWordsConfigure"`
 
-	// Subtitle translation switch.
-	// `ON`: translation enabled.
-	// `OFF`: translation disabled.
-	// **Note**: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to `OFF`.
+	// <p>Subtitle translation switch<br><code>ON</code>: Enable translation<br><code>OFF</code>: Disable translation</p><p><strong>Note</strong>: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to <code>OFF</code>.</p>
 	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
 
-	// Target language for subtitle translation.
-	// This parameter takes effect when the value of TranslateSwitch is ON. Valid translation languages:`ab`: Abkhazian.`ace`: Acehnese.`ach`: Acholi.`af`: Afrikaans.`ak`: Twi (Akan).`am`: Amharic.`ar`: Arabic.`as`: Assamese.`ay`: Aymara.`az`: Azerbaijani.`ba`: Bashkir.`ban`: Balinese.`bbc`: Batak toba.`bem`: Bemba.`bew`: Betawi.`bg`: Bulgarian.`bho`: Bhojpuri.`bik`: Bikol.`bm`: Bambara.`bn`: Bengali.`br`: Breton.`bs`: Bosnian.`btx`: Batak Karo.`bts`: Batak Simalungun.`bua`: Buryat.`ca`: Catalan.`ceb`: Cebuano.`cgg`: Kiga.`chm`: Meadow Mari.`ckb`: Kurdish (Sorani).`cnh`: Hakha Chin.`co`: Corsican.`crh`: Crimean Tatar.`crs`: Seychellois Creole.`cs`: Czech.`cv`: Chuvash.`cy`: Welsh.`da`: Danish.`de`: German.`din`: Dinka.`doi`: Dogri.`dov`: Dombe.`dv`: Dhivehi.`dz`: Dzongkha.`ee`: Ewe.`el`: Greek.`en`: English.`eo`: Esperanto.`es`: Spanish.`et`: Estonian.`eu`: Basque.`fa`: Persian.`ff`: Fulah.`fi`: Finnish.`fil`: Filipino (Tagalog).`fj`: Fijian.`fr`: French.`fr-CA`: French (Canada).`fr-FR`: French (France).`fy`: Frisian.`ga`: Irish.`gaa`: Ga.
-	// `gd`: Scottish Gaelic.`gl`: Galician.`gn`: Guarani.`gom`: Konkani.`gu`: Gujarati.`gv`: Manx.`ha`: Hausa.`haw`: Hawaiian.`he`: Hebrew.`hi`: Hindi.`hil`: Hiligaynon.`hmn`: Hmong.`hr`: Croatian.`hrx`: Hunsrik.`ht`: Haitian Creole.`hu`: Hungarian.`hy`: Armenian.`id`: Indonesian.`ig`: Igbo.`ilo`: Iloko.`is`: Icelandic.`it`: Italian.`iw`: Hebrew.`ja`: Japanese.`jv`: Javanese.`ka`: Georgian.`kk`: Kazakh.`km`: Khmer.`kn`: Kannada.`ko`: Korean.`kri`: Krio.`ku`: Kurdish (Kurmanji).`ktu`: Kituba.`ky`: Kyrgyz.`la`: Latin.`lb`: Luxembourgish.`lg`: Ganda (Luganda).`li`: Limburgish.`lij`: Ligurian.`lmo`: Lombard.`ln`: Lingala.`lo`: Lao.`lt`: Lithuanian.`ltg`: Latgalian.`luo`: Luo.`lus`: Mizo.`lv`: Latvian.`mai`: Maithili.`mak`: Makasar.`mg`: Malagasy.`mi`: Maori.`min`: Minangkabau.`mk`: Macedonian.`ml`: Malayalam.`mn`: Mongolian.`mr`: Marathi.`ms`: Malay.`mt`: Maltese.`my`: Burmese.`ne`: Nepali.`new`: Newari.`nl`: Dutch.`no`: Norwegian.`nr`: Southern Ndebele.`nso`: Northern Sotho (Sepedi).`nus`: Nuer.`ny`: Chichewa (Nyanja).`oc`: Occitan.`om`: Oromo.`or`: Odia.`pa`: Punjabi.`pag`: Pangasinan.`pam`: Kapampangan.`pap`: Papiamento.`pl`: Polish.`ps`: Pashto.`pt`: Portuguese.`pt-BR`: Portuguese (Brazil).`pt-PT`: Portuguese (Portugal).`qu`: Quechua.`ro`: Romanian.`rom`: Romani.`rn`: Rundi.`ru`: Russian.`rw`: Kinyarwanda.`sa`: Sanskrit.`scn`: Sicilian.`sd`: Sindhi.`sg`: Sango.`shn`: Shan.`si`: Sinhala.`sk`: Slovak.`sl`: Slovenian.`sm`: Samoan.`sn`: Shona.`so`: Somali.`sq`: Albanian.`sr`: Serbian.`ss`: Swazi.`st`: Southern Sotho.`su`: Sundanese.`sv`: Swedish.`sw`: Swahili.`szl`: Silesian.`ta`: Tamil.`te`: Telugu.`tet`: Tetum.`tg`: Tajik.`th`: Thai.`ti`: Tigrinya.`tk`: Turkmen.`tn`: Tswana.`tr`: Turkish.`ts`: Tsonga.`tt`: Tatar.`ug`: Uyghur.`uk`: Ukrainian.`ur`: Urdu.`uz`: Uzbek.`vi`: Vietnamese.`xh`: Xhosa.`yi`: Yiddish.`yo`: Yoruba.`yua`: Yucatec Maya.`yue`: Cantonese.`zh`: Chinese (Simplified).`zh-TW`: Chinese (Traditional).`zu`: Zulu.**Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
+	// <p>Subtitle target language<br>Take effect when TranslateSwitch is ON. Translation language list:<br><code>ab</code>: Abkhaz<br><code>ace</code>: Acehnese<br><code>ach</code>: Acholi<br><code>af</code>: Afrikaans<br><code>ak</code>: Akan<br><code>am</code>: Amharic<br><code>ar</code>: Arabic<br><code>as</code>: Assamese<br><code>ay</code>: Aymara<br><code>az</code>: Azerbaijani<br><code>ba</code>: Bashkir<br><code>ban</code>: Balinese<br><code>bbc</code>: Batak Toba<br><code>bem</code>: Bemba<br><code>bew</code>: Betawi<br><code>bg</code>: Bulgarian<br><code>bho</code>: Bhojpuri<br><code>bik</code>: Bikol<br><code>bm</code>: Bambara<br><code>bn</code>: Bengali<br><code>br</code>: Breton<br><code>bs</code>: Bosnian<br><code>btx</code>: Batak Karo<br><code>bts</code>: Batak Simalungun<br><code>bua</code>: Buryat<br><code>ca</code>: Catalan<br><code>ceb</code>: Cebuano<br><code>cgg</code>: Kiga<br><code>chm</code>: Meadow Mari<br><code>ckb</code>: Kurdish (Sorani)<br><code>cnh</code>: Hakha Chin<br><code>co</code>: Corsican<br><code>crh</code>: Crimean Tatar<br><code>crs</code>: Seychellois Creole<br><code>cs</code>: Czech<br><code>cv</code>: Chuvash<br><code>cy</code>: Welsh<br><code>da</code>: Danish<br><code>de</code>: German<br><code>din</code>: Dinka<br><code>doi</code>: Dogri<br><code>dov</code>: Dombe<br><code>dv</code>: Dhivehi<br><code>dz</code>: Dzongkha<br><code>ee</code>: Ewe<br><code>el</code>: Greek<br><code>en</code>: English<br><code>eo</code>: Esperanto<br><code>es</code>: Spanish<br><code>et</code>: Estonian<br><code>eu</code>: Basque<br><code>fa</code>: Persian<br><code>ff</code>: Fula<br><code>fi</code>: Finnish<br><code>fil</code>: Filipino (Tagalog)<br><code>fj</code>: Fijian<br><code>fr</code>: French<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fy</code>: Frisian<br><code>ga</code>: Irish<br><code>gaa</code>: GaLanguage<br><code>gd</code>: Scottish Gaelic<br><code>gl</code>: Galician<br><code>gn</code>: Guarani<br><code>gom</code>: Konkani<br><code>gu</code>: Gujarati<br><code>gv</code>: Manx<br><code>ha</code>: Hausa<br><code>haw</code>: Hawaiian<br><code>he</code>: Hebrew<br><code>hi</code>: Hindi<br><code>hil</code>: Hiligaynon<br><code>hmn</code>: Hmong<br><code>hr</code>: Croatian<br><code>hrx</code>: Hunsrik<br><code>ht</code>: Haitian Creole<br><code>hu</code>: Hungarian<br><code>hy</code>: Armenian<br><code>id</code>: Indonesian<br><code>ig</code>: Igbo<br><code>ilo</code>: Ilocano<br><code>is</code>: Icelandic<br><code>it</code>: Italian<br><code>iw</code>: Hebrew<br><code>ja</code>: Japanese<br><code>jv</code>: Javanese<br><code>ka</code>: Georgian<br><code>kk</code>: Kazakh<br><code>km</code>: Khmer<br><code>kn</code>: Kannada<br><code>ko</code>: Korean<br><code>kri</code>: Krio<br><code>ku</code>: Kurdish (Kurmanji)<br><code>ktu</code>: Kituba<br><code>ky</code>: Kyrgyz<br><code>la</code>: Latin<br><code>lb</code>: Luxembourgish<br><code>lg</code>: Ganda (Luganda)<br><code>li</code>: Limburgish<br><code>lij</code>: Ligurian<br><code>lmo</code>: Lombard<br><code>ln</code>: Lingala<br><code>lo</code>: Lao<br><code>lt</code>: Lithuanian<br><code>ltg</code>: Latgalian<br><code>luo</code>: Luo<br><code>lus</code>: Mizo<br><code>lv</code>: Latvian<br><code>mai</code>: Maithili<br><code>mak</code>: Makassar<br><code>mg</code>: Malagasy<br><code>mi</code>: Maori<br><code>min</code>: Minangkabau<br><code>mk</code>: Macedonian<br><code>ml</code>: Malayalam<br><code>mn</code>: Mongolian<br><code>mr</code>: Marathi<br><code>ms</code>: Malay<br><code>mt</code>: Maltese<br><code>my</code>: Burmese<br><code>ne</code>: Nepali<br><code>new</code>: Newari<br><code>nl</code>: Dutch<br><code>no</code>: Norwegian<br><code>nr</code>: Southern Ndebele<br><code>nso</code>: Northern Sotho (Sepedi)<br><code>nus</code>: Nuer<br><code>ny</code>: Chichewa (Nyanja)<br><code>oc</code>: Occitan<br><code>om</code>: Oromo<br><code>or</code>: Odia<br><code>pa</code>: Punjabi<br><code>pag</code>: Pangasinan<br><code>pam</code>: Kapampangan<br><code>pap</code>: Papiamento<br><code>pl</code>: Polish<br><code>ps</code>: Pashto<br><code>pt</code>: Portuguese<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>qu</code>: Quechua<br><code>ro</code>: Romanian<br><code>rom</code>: Romani<br><code>rn</code>: Rundi<br><code>ru</code>: Russian<br><code>rw</code>: Kinyarwanda<br><code>sa</code>: Sanskrit<br><code>scn</code>: Sicilian<br><code>sd</code>: Sindhi<br><code>sg</code>: Sango<br><code>shn</code>: Shan<br><code>si</code>: Sinhalese<br><code>sk</code>: Slovak<br><code>sl</code>: Slovenian<br><code>sm</code>: Samoan<br><code>sn</code>: Shona<br><code>so</code>: Somali<br><code>sq</code>: Albanian<br><code>sr</code>: Serbian<br><code>ss</code>: Swati<br><code>st</code>: Sesotho<br><code>su</code>: Sundanese<br><code>sv</code>: Swedish<br><code>sw</code>: Swahili<br><code>szl</code>: Silesian<br><code>ta</code>: Tamil<br><code>te</code>: Telugu<br><code>tet</code>: Tetum<br><code>tg</code>: Tajik<br><code>th</code>: Thai<br><code>ti</code>: Tigrinya<br><code>tk</code>: Turkmen<br><code>tn</code>: Tswana<br><code>tr</code>: Turkish<br><code>ts</code>: Tsonga<br><code>tt</code>: Tatar<br><code>ug</code>: Uyghur<br><code>uk</code>: Ukrainian<br><code>ur</code>: Urdu<br><code>uz</code>: Uzbek<br><code>vi</code>: Vietnamese<br><code>xh</code>: Xhosa<br><code>yi</code>: Yiddish<br><code>yo</code>: Yoruba<br><code>yua</code>: Yucatec Maya<br><code>yue</code>: Cantonese<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese<br><code>zu</code>: Zulu</p><p><strong>Note</strong>: Use the multilingual method.<code>/</code> to separate, such as <code>en/ja</code>, which indicates English and Japanese.</p>
 	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
 
-	// Subtitle processing type.
-	// - 0: ASR recognition subtitle.
-	// - 1: pure subtitle translation.
-	// - 2: OCR recognition subtitle.
-	// **Note**: The default processing type is ASR recognition subtitle if the field is unspecified.
+	// <p>Subtitle processing type:</p><ul><li>0: ASR recognition subtitle</li><li>1: Pure caption translation</li><li>2: OCR recognition subtitle</li></ul><p><strong>Note</strong>: The default type is ASR recognition subtitle if the field is unspecified.</p>
 	ProcessType *uint64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 
-	// Area configurations for the subtitle OCR extraction box.
+	// <p>Area configurations for the subtitle OCR extraction box</p>
 	SelectingSubtitleAreasConfig *SelectingSubtitleAreasConfig `json:"SelectingSubtitleAreasConfig,omitnil,omitempty" name:"SelectingSubtitleAreasConfig"`
+
+	// <p>Suppression Template id. Only allowed to fill in when ProcessType is 0 or 2 (task type is ASR or OCR). Cannot fill in when multiple target languages are enabled.</p>
+	SubtitleEmbedId *int64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
 }
 
 type CreateSmartSubtitleTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// Smart subtitle template name.
-	// Length limit: 64 characters.
+	// <p>Intelligent subtitle template name<br>Length limit: 64 characters.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Source language of the video with smart subtitles.
-	// OCR recognition only supports the following languages:
-	// `zh_en`: Chinese and English.
-	// `multi`: others.
-	// ASR recognition and pure subtitle translation currently support the following languages:
-	// `auto`: automatic recognition (it is only supported in pure subtitle translation).
-	// `zh`: Simplified Chinese.
-	// `en`: English.
-	// `ja`: Japanese.
-	// `ko`: Korean.
-	// `zh-PY`: Chinese, English, and Cantonese.
-	// `zh_medical`: Chinese (medical scenario).
-	// `vi`: Vietnamese.
-	// `ms`: Malay.
-	// `id`: Indonesian.
-	// `fil`: Filipino.
-	// `th`: Thai.
-	// `pt`: Portuguese.
-	// `tr`: Turkish.
-	// `ar`: Arabic.
-	// `es`: Spanish.
-	// `hi`: Hindi.
-	// `fr`: French.
-	// `de`: German.
-	// `it`: Italian.
-	// `zh_dialect`: Chinese dialect.
-	// `zh_en`: Chinese and English.
-	// `yue`: Cantonese.
-	// `ru`: Russian.
-	// `prime_zh`: Chinese, English, and Chinese dialects.
-	// `af-ZA`: Afrikaans (South Africa).
-	// `sq-AL`: Albanian (Albania).
-	// `am-ET`: Amharic (Ethiopia).
-	// `ar-DZ`: Arabic (Algeria).
-	// `ar-BH`: Arabic (Bahrain).
-	// `ar-EG`: Arabic (Egypt).
-	// `ar-IQ`: Arabic (Iraq).
-	// `ar-IL`: Arabic (Israel).
-	// `ar-JO`: Arabic (Jordan).
-	// `ar-KW`: Arabic (Kuwait).
-	// `ar-LB`: Arabic (Lebanon).
-	// `ar-MR`: Arabic (Mauritania).
-	// `ar-MA`: Arabic (Morocco).
-	// `ar-OM`: Arabic (Oman).
-	// `ar-QA`: Arabic (Qatar).
-	// `ar-SA`: Arabic (Saudi Arabia).
-	// `ar-PS`: Arabic (State of Palestine).
-	// `ar-SY`: Arabic (Syria).
-	// `ar-TN`: Arabic (Tunisia).
-	// `ar-AE`: Arabic (United Arab Emirates).
-	// `ar-YE`: Arabic (Yemen).
-	// `hy-AM`: Armenian (Armenia).
-	// `az-AZ`: Azerbaijani (Azerbaijan).
-	// `eu-ES`: Basque (Spain).
-	// `bn-BD`: Bengali (Bangladesh).
-	// `bn-IN`: Bengali (India).
-	// `bs-BA`: Bosnian (Bosnia and Herzegovina).
-	// `bg-BG`: Bulgarian (Bulgaria).
-	// `my-MM`: Burmese (Myanmar).
-	// `ca-ES`: Catalan (Spain).
-	// `hr-HR`: Croatian (Croatia).
-	// `cs-CZ`: Czech (Czech Republic).
-	// `da-DK`: Danish (Denmark).
-	// `nl-BE`: Dutch (Belgium).
-	// `nl-NL`: Dutch (Holland).
-	// `en-AU`: English (Australia).
-	// `en-CA`: English (Canada).
-	// `en-GH`: English (Ghana).
-	// `en-HK`: English (Hong Kong (China)).
-	// `en-IN`: English (India).
-	// `en-IE`: English (Ireland).
-	// `en-KE`: English (Kenya).
-	// `en-NZ`: English (New Zealand).
-	// `en-NG`: English (Nigeria).
-	// `en-PK`: English (Pakistan).
-	// `en-PH`: English (Philippines).
-	// `en-SG`: English (Singapore).
-	// `en-ZA`: English (South Africa).
-	// `en-TZ`: English (Tanzania).
-	// `en-GB`: English (UK).
-	// `en-US`: English (US).
-	// `et-EE`: Estonian (Estonia).
-	// `fil-PH`: Filipino (Philippines).
-	// `fi-FI`: Finnish (Finland).
-	// `fr-BE`: French (Belgium).
-	// `fr-CA`: French (Canada).
-	// `fr-FR`: French (France).
-	// `fr-CH`: French (Switzerland).
-	// `gl-ES`: Galician (Spain).
-	// `ka-GE`: Georgian (Georgia).
-	// `el-GR`: Greek (Greece).
-	// `gu-IN`: Gujarati (India).
-	// `iw-IL`: Hebrew (Israel).
-	// `hi-IN`: Hindi (India).
-	// `hu-HU`: Hungarian (Hungary).
-	// `is-IS`: Icelandic (Iceland).
-	// `id-ID`: Indonesian (Indonesia).
-	// `it-IT`: Italian (Italy).
-	// `it-CH`: Italian (Switzerland).
-	// `ja-JP`: Japanese (Japan).
-	// `jv-ID`: Javanese (Indonesia).
-	// `kn-IN`: Kannada (India).
-	// `kk-KZ`: Kazakh (Kazakhstan).
-	// `km-KH`: Khmer (Cambodia).
-	// `rw-RW`: Kinyarwanda (Rwanda).
-	// `ko-KR`: Korean (South Korea).
-	// `lo-LA`: Lao (Laos).
-	// `lv-LV`: Latvian (Latvia).
-	// `lt-LT`: Lithuanian (Lithuania).
-	// `mk-MK`: Macedonian (North Macedonia).
-	// `ms-MY`: Malay (Malaysia).
-	// `ml-IN`: Malayalam (India).
-	// `mr-IN`: Marathi (India).
-	// `mn-MN`: Mongolian (Mongolia).
-	// `ne-NP`: Nepali (Nepal).
-	// `no-NO`: Bokmal Norwegian (Norway).
-	// `fa-IR`: Persian (Iran).
-	// `pl-PL`: Polish (Poland).
-	// `pt-BR`: Portuguese (Brazil).
-	// `pt-PT`: Portuguese (Portugal).
-	// `ro-RO`: Romanian (Romania).
-	// `ru-RU`: Russian (Russia).
-	// `sr-RS`: Serbian (Serbia).
-	// `si-LK`: Sinhalese (Sri Lanka).
-	// `sk-SK`: Slovak (Slovakia).
-	// `sl-SI`: Slovenian (Slovenia).
-	// `st-ZA`: Sesotho (South Africa).
-	// `es-AR`: Spanish (Argentina).
-	// `es-BO`: Spanish (Bolivia).
-	// `es-CL`: Spanish (Chile).
-	// `es-CO`: Spanish (Colombia).
-	// `es-CR`: Spanish (Costa Rica).
-	// `es-DO`: Spanish (Dominican Republic).
-	// `es-EC`: Spanish (Ecuador).
-	// `es-SV`: Spanish (El Salvador).
-	// `es-GT`: Spanish (Guatemala).
-	// `es-HN`: Spanish (Honduras).
-	// `es-MX`: Spanish (Mexico).
-	// `es-NI`: Spanish (Nicaragua).
-	// `es-PA`: Spanish (Panama).
-	// `es-PY`: Spanish (Paraguay).
-	// `es-PE`: Spanish (Peru).
-	// `es-PR`: Spanish (Puerto Rico).
-	// `es-ES`: Spanish (Spain).
-	// `es-US`: Spanish (US).
-	// `es-UY`: Spanish (Uruguay).
-	// `es-VE`: Spanish (Venezuela).
-	// `su-ID`: Sundanese (Indonesia).
-	// `sw-KE`: Swahili (Kenya).
-	// `sw-TZ`: Swahili (Tanzania).
-	// `sv-SE`: Swedish (Sweden).
-	// `ta-IN`: Tamil (India).
-	// `ta-MY`: Tamil (Malaysia).
-	// `ta-SG`: Tamil (Singapore).
-	// `ta-LK`: Tamil (Sri Lanka).
-	// `te-IN`: Telugu (India).
-	// `th-TH`: Thai (Thailand).
-	// `ts-ZA`: Tsonga (South Africa).
-	// `tr-TR`: Turkish (Turkey).
-	// `uk-UA`: Ukrainian (Ukraine).
-	// `ur-IN`: Urdu (India).
-	// `ur-PK`: Urdu (Pakistan).
-	// `uz-UZ`: Uzbek (Uzbekistan).
-	// `ve-ZA`: Venda (South Africa).
-	// `vi-VN`: Vietnamese (Vietnam).
-	// `xh-ZA`: Xhosa (South Africa).
-	// `zu-ZA`: Zulu (South Africa).
+	// <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br>ASR recognition and pure caption translation currently support the following languages:<br><code>auto</code>: Auto-identification<br><code>zh</code>: Simplified Chinese<br><code>en</code>: English<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>zh-PY</code>: Chinese-English-Cantonese<br><code>zh_medical</code>: Chinese health care<br><code>vi</code>: Vietnamese<br><code>ms</code>: Malay<br><code>id</code>: Indonesian<br><code>fil</code>: Filipino<br><code>th</code>: Thai<br><code>pt</code>: Portuguese<br><code>tr</code>: Turkish<br><code>ar</code>: Arabic<br><code>es</code>: Spanish<br><code>hi</code>: Hindi<br><code>fr</code>: French<br><code>de</code>: German<br><code>it</code>: Italian<br><code>zh_dialect</code>: Chinese dialect<br><code>zh_en</code>: Chinese-English<br><code>yue</code>: Cantonese<br><code>ru</code>: Russian<br><code>prime_zh</code>: Chinese-English dialect<br><code>af-ZA</code>: Afrikaans (South Africa)<br><code>sq-AL</code>: Albanian (Albania)<br><code>am-ET</code>: Amharic (Ethiopia)<br><code>ar-DZ</code>: Arabic (Algeria)<br><code>ar-BH</code>: Arabic (Bahrain)<br><code>ar-EG</code>: Arabic (Egypt)<br><code>ar-IQ</code>: Arabic (Iraq)<br><code>ar-IL</code>: Arabic (Israel)<br><code>ar-JO</code>: Arabic (Jordan)<br><code>ar-KW</code>: Arabic (Kuwait)<br><code>ar-LB</code>: Arabic (Lebanon)<br><code>ar-MR</code>: Arabic (Mauritania)<br><code>ar-MA</code>: Arabic (Morocco)<br><code>ar-OM</code>: Arabic (Oman)<br><code>ar-QA</code>: Arabic (Qatar)<br><code>ar-SA</code>: Arabic (Saudi Arabia)<br><code>ar-PS</code>: Arabic (State of Palestine)<br><code>ar-SY</code>: Arabic (Syria)<br><code>ar-TN</code>: Arabic (Tunisia)<br><code>ar-AE</code>: Arabic (United Arab Emirates)<br><code>ar-YE</code>: Arabic (Yemen)<br><code>hy-AM</code>: Armenian (Armenia)<br><code>az-AZ</code>: Azerbaijani (Azerbaijan)<br><code>eu-ES</code>: Basque (Spain)<br><code>bn-BD</code>: Bengali (Bangladesh)<br><code>bn-IN</code>: Bengali (India)<br><code>bs-BA</code>: Bosnian (Bosnia and Herzegovina)<br><code>bg-BG</code>: Bulgarian (Bulgaria)<br><code>my-MM</code>: Burmese (Myanmar)<br><code>ca-ES</code>: Catalan (Spain)<br><code>hr-HR</code>: Croatian (Croatia)<br><code>cs-CZ</code>: Czech (Czech Republic)<br><code>da-DK</code>: Danish (Denmark)<br><code>nl-BE</code>: Dutch (Belgium)<br><code>nl-NL</code>: Dutch (Netherlands)<br><code>en-AU</code>: English (Australia)<br><code>en-CA</code>: English (Canada)<br><code>en-GH</code>: English (Ghana)<br><code>en-HK</code>: English (Hong Kong (China))<br><code>en-IN</code>: English (India)<br><code>en-IE</code>: English (Ireland)<br><code>en-KE</code>: English (Kenya)<br><code>en-NZ</code>: English (New Zealand)<br><code>en-NG</code>: English (Nigeria)<br><code>en-PK</code>: English (Pakistan)<br><code>en-PH</code>: English (Philippines)<br><code>en-SG</code>: English (Singapore)<br><code>en-ZA</code>: English (South Africa)<br><code>en-TZ</code>: English (Tanzania)<br><code>en-GB</code>: English (UK)<br><code>en-US</code>: English (United States)<br><code>et-EE</code>: Estonian (Estonia)<br><code>fil-PH</code>: Filipino (Philippines)<br><code>fi-FI</code>: Finnish (Finland)<br><code>fr-BE</code>: French (Belgium)<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fr-CH</code>: French (Switzerland)<br><code>gl-ES</code>: Galician (Spain)<br><code>ka-GE</code>: Georgian (Georgia)<br><code>el-GR</code>: Greek (Greece)<br><code>gu-IN</code>: Gujarati (India)<br><code>iw-IL</code>: Hebrew (Israel)<br><code>hi-IN</code>: Hindi (India)<br><code>hu-HU</code>: Hungarian (Hungary)<br><code>is-IS</code>: Icelandic (Iceland)<br><code>id-ID</code>: Indonesian (Indonesia)<br><code>it-IT</code>: Italian (Italy)<br><code>it-CH</code>: Italian (Switzerland)<br><code>ja-JP</code>: Japanese (Japan)<br><code>jv-ID</code>: Javanese (Indonesia)<br><code>kn-IN</code>: Kannada (India)<br><code>kk-KZ</code>: Kazakh (Kazakhstan)<br><code>km-KH</code>: Khmer (Cambodia)<br><code>rw-RW</code>: Kinyarwanda (Rwanda)<br><code>ko-KR</code>: Korean (South Korea)<br><code>lo-LA</code>: Lao (Laos)<br><code>lv-LV</code>: Latvian (Latvia)<br><code>lt-LT</code>: Lithuanian (Lithuania)<br><code>mk-MK</code>: Macedonian (North Macedonia)<br><code>ms-MY</code>: Malay (Malaysia)<br><code>ml-IN</code>: Malayalam (India)<br><code>mr-IN</code>: Marathi (India)<br><code>mn-MN</code>: Mongolian (Mongolia)<br><code>ne-NP</code>: Nepali (Nepal)<br><code>no-NO</code>: Norwegian Bokmål (Norway)<br><code>fa-IR</code>: Persian (Iran)<br><code>pl-PL</code>: Polish (Poland)<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>ro-RO</code>: Romanian (Romania)<br><code>ru-RU</code>: Russian (Russia)<br><code>sr-RS</code>: Serbian (Serbia)<br><code>si-LK</code>: Sinhalese (Sri Lanka)<br><code>sk-SK</code>: Slovak (Slovakia)<br><code>sl-SI</code>: Slovenian (Slovenia)<br><code>st-ZA</code>: Southern Sotho (South Africa)<br><code>es-AR</code>: Spanish (Argentina)<br><code>es-BO</code>: Spanish (Bolivia)<br><code>es-CL</code>: Spanish (Chile)<br><code>es-CO</code>: Spanish (Colombia)<br><code>es-CR</code>: Spanish (Costa Rica)<br><code>es-DO</code>: Spanish (Dominican Republic)<br><code>es-EC</code>: Spanish (Ecuador)<br><code>es-SV</code>: Spanish (El Salvador)<br><code>es-GT</code>: Spanish (Guatemala)<br><code>es-HN</code>: Spanish (Honduras)<br><code>es-MX</code>: Spanish (Mexico)<br><code>es-NI</code>: Spanish (Nicaragua)<br><code>es-PA</code>: Spanish (Panama)<br><code>es-PY</code>: Spanish (Paraguay)<br><code>es-PE</code>: Spanish (Peru)<br><code>es-PR</code>: Spanish (Puerto Rico)<br><code>es-ES</code>: Spanish (Spain)<br><code>es-US</code>: Spanish (United States)<br><code>es-UY</code>: Spanish (Uruguay)<br><code>es-VE</code>: Spanish (Venezuela)<br><code>su-ID</code>: Sundanese (Indonesia)<br><code>sw-KE</code>: Swahili (Kenya)<br><code>sw-TZ</code>: Swahili (Tanzania)<br><code>sv-SE</code>: Swedish (Sweden)<br><code>ta-IN</code>: Tamil (India)<br><code>ta-MY</code>: Tamil (Malaysia)<br><code>ta-SG</code>: Tamil (Singapore)<br><code>ta-LK</code>: Tamil (Sri Lanka)<br><code>te-IN</code>: Telugu (India)<br><code>th-TH</code>: Thai (Thailand)<br><code>ts-ZA</code>: Tsonga (South Africa)<br><code>tr-TR</code>: Turkish (Türkiye)<br><code>uk-UA</code>: Ukrainian (Ukraine)<br><code>ur-IN</code>: Urdu (India)<br><code>ur-PK</code>: Urdu (Pakistan)<br><code>uz-UZ</code>: Uzbek (Uzbekistan)<br><code>ve-ZA</code>: Venda (South Africa)<code>vi-VN</code>: Vietnamese (Vietnam)<br><code>xh-ZA</code>: Xhosa (South Africa)<br><code>zu-ZA</code>: Zulu (South Africa)</p>
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
-	// Smart subtitle language type.
-	// 0: source language
-	// 1: target language
-	// 2: source language + target language
-	// The value can only be 0 when TranslateSwitch is set to OFF. The value can only be 1 or 2 when TranslateSwitch is set to ON.
+	// <p>Intelligent caption subtitle language type<br>0: Source language<br>1: Target language<br>2: Source language + target language<br>Only 0 is supported when TranslateSwitch is OFF<br>Only 1 or 2 is supported when TranslateSwitch is ON</p>
 	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
 
-	// Smart subtitle template description.
-	// Length limit: 256 characters.
+	// <p>Intelligent caption template description information<br>Length limit: 256 characters.</p>
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Smart subtitle file format:
-	// - Under the ASR recognition and translation processing type:
-	//      - vtt: WebVTT format subtitle.
-	//      - srt: SRT format subtitle.
-	//      - Unspecified or left blank: no subtitle file generated.
-	// - Under the pure subtitle translation processing type:
-	//     - original: consistent with the source file.
-	//     - vtt: WebVTT format subtitle.
-	//     - srt: SRT format subtitle.
-	// - Under the OCR recognition and translation processing type:
-	//      - vtt: WebVTT format subtitle.
-	//      - srt: SRT format subtitle.
-	// **Note**:
-	// - For ASR recognition mode, when 2 or more languages are involved in translation, this field cannot be unspecified or left blank.
-	// - For pure subtitle translation and OCR recognition mode, this field cannot be unspecified or left blank.
+	// <p>Intelligent subtitle file format:</p><ul><li>For ASR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li><li>Leave blank or fill in the blank: no subtitle file generated</li></ul></li><li>For pure subtitle translation processing type:<ul><li>original: consistent with the source file</li><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li><li>For OCR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li></ul><p><strong>Note</strong>:</p><ul><li>For ASR recognition method, do not leave blank or not pass when translating 2 or more languages.</li><li>For pure subtitle translation method, do not leave blank or not pass.</li><li>For OCR tasks, it is allowed to leave blank or not pass when suppression is enabled.</li></ul>
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
-	// ASR hotword lexicon parameter.
+	// <p>ASR hot word lexicon parameter</p>
 	AsrHotWordsConfigure *AsrHotWordsConfigure `json:"AsrHotWordsConfigure,omitnil,omitempty" name:"AsrHotWordsConfigure"`
 
-	// Subtitle translation switch.
-	// `ON`: translation enabled.
-	// `OFF`: translation disabled.
-	// **Note**: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to `OFF`.
+	// <p>Subtitle translation switch<br><code>ON</code>: Enable translation<br><code>OFF</code>: Disable translation</p><p><strong>Note</strong>: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to <code>OFF</code>.</p>
 	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
 
-	// Target language for subtitle translation.
-	// This parameter takes effect when the value of TranslateSwitch is ON. Valid translation languages:`ab`: Abkhazian.`ace`: Acehnese.`ach`: Acholi.`af`: Afrikaans.`ak`: Twi (Akan).`am`: Amharic.`ar`: Arabic.`as`: Assamese.`ay`: Aymara.`az`: Azerbaijani.`ba`: Bashkir.`ban`: Balinese.`bbc`: Batak toba.`bem`: Bemba.`bew`: Betawi.`bg`: Bulgarian.`bho`: Bhojpuri.`bik`: Bikol.`bm`: Bambara.`bn`: Bengali.`br`: Breton.`bs`: Bosnian.`btx`: Batak Karo.`bts`: Batak Simalungun.`bua`: Buryat.`ca`: Catalan.`ceb`: Cebuano.`cgg`: Kiga.`chm`: Meadow Mari.`ckb`: Kurdish (Sorani).`cnh`: Hakha Chin.`co`: Corsican.`crh`: Crimean Tatar.`crs`: Seychellois Creole.`cs`: Czech.`cv`: Chuvash.`cy`: Welsh.`da`: Danish.`de`: German.`din`: Dinka.`doi`: Dogri.`dov`: Dombe.`dv`: Dhivehi.`dz`: Dzongkha.`ee`: Ewe.`el`: Greek.`en`: English.`eo`: Esperanto.`es`: Spanish.`et`: Estonian.`eu`: Basque.`fa`: Persian.`ff`: Fulah.`fi`: Finnish.`fil`: Filipino (Tagalog).`fj`: Fijian.`fr`: French.`fr-CA`: French (Canada).`fr-FR`: French (France).`fy`: Frisian.`ga`: Irish.`gaa`: Ga.
-	// `gd`: Scottish Gaelic.`gl`: Galician.`gn`: Guarani.`gom`: Konkani.`gu`: Gujarati.`gv`: Manx.`ha`: Hausa.`haw`: Hawaiian.`he`: Hebrew.`hi`: Hindi.`hil`: Hiligaynon.`hmn`: Hmong.`hr`: Croatian.`hrx`: Hunsrik.`ht`: Haitian Creole.`hu`: Hungarian.`hy`: Armenian.`id`: Indonesian.`ig`: Igbo.`ilo`: Iloko.`is`: Icelandic.`it`: Italian.`iw`: Hebrew.`ja`: Japanese.`jv`: Javanese.`ka`: Georgian.`kk`: Kazakh.`km`: Khmer.`kn`: Kannada.`ko`: Korean.`kri`: Krio.`ku`: Kurdish (Kurmanji).`ktu`: Kituba.`ky`: Kyrgyz.`la`: Latin.`lb`: Luxembourgish.`lg`: Ganda (Luganda).`li`: Limburgish.`lij`: Ligurian.`lmo`: Lombard.`ln`: Lingala.`lo`: Lao.`lt`: Lithuanian.`ltg`: Latgalian.`luo`: Luo.`lus`: Mizo.`lv`: Latvian.`mai`: Maithili.`mak`: Makasar.`mg`: Malagasy.`mi`: Maori.`min`: Minangkabau.`mk`: Macedonian.`ml`: Malayalam.`mn`: Mongolian.`mr`: Marathi.`ms`: Malay.`mt`: Maltese.`my`: Burmese.`ne`: Nepali.`new`: Newari.`nl`: Dutch.`no`: Norwegian.`nr`: Southern Ndebele.`nso`: Northern Sotho (Sepedi).`nus`: Nuer.`ny`: Chichewa (Nyanja).`oc`: Occitan.`om`: Oromo.`or`: Odia.`pa`: Punjabi.`pag`: Pangasinan.`pam`: Kapampangan.`pap`: Papiamento.`pl`: Polish.`ps`: Pashto.`pt`: Portuguese.`pt-BR`: Portuguese (Brazil).`pt-PT`: Portuguese (Portugal).`qu`: Quechua.`ro`: Romanian.`rom`: Romani.`rn`: Rundi.`ru`: Russian.`rw`: Kinyarwanda.`sa`: Sanskrit.`scn`: Sicilian.`sd`: Sindhi.`sg`: Sango.`shn`: Shan.`si`: Sinhala.`sk`: Slovak.`sl`: Slovenian.`sm`: Samoan.`sn`: Shona.`so`: Somali.`sq`: Albanian.`sr`: Serbian.`ss`: Swazi.`st`: Southern Sotho.`su`: Sundanese.`sv`: Swedish.`sw`: Swahili.`szl`: Silesian.`ta`: Tamil.`te`: Telugu.`tet`: Tetum.`tg`: Tajik.`th`: Thai.`ti`: Tigrinya.`tk`: Turkmen.`tn`: Tswana.`tr`: Turkish.`ts`: Tsonga.`tt`: Tatar.`ug`: Uyghur.`uk`: Ukrainian.`ur`: Urdu.`uz`: Uzbek.`vi`: Vietnamese.`xh`: Xhosa.`yi`: Yiddish.`yo`: Yoruba.`yua`: Yucatec Maya.`yue`: Cantonese.`zh`: Chinese (Simplified).`zh-TW`: Chinese (Traditional).`zu`: Zulu.**Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
+	// <p>Subtitle target language<br>Take effect when TranslateSwitch is ON. Translation language list:<br><code>ab</code>: Abkhaz<br><code>ace</code>: Acehnese<br><code>ach</code>: Acholi<br><code>af</code>: Afrikaans<br><code>ak</code>: Akan<br><code>am</code>: Amharic<br><code>ar</code>: Arabic<br><code>as</code>: Assamese<br><code>ay</code>: Aymara<br><code>az</code>: Azerbaijani<br><code>ba</code>: Bashkir<br><code>ban</code>: Balinese<br><code>bbc</code>: Batak Toba<br><code>bem</code>: Bemba<br><code>bew</code>: Betawi<br><code>bg</code>: Bulgarian<br><code>bho</code>: Bhojpuri<br><code>bik</code>: Bikol<br><code>bm</code>: Bambara<br><code>bn</code>: Bengali<br><code>br</code>: Breton<br><code>bs</code>: Bosnian<br><code>btx</code>: Batak Karo<br><code>bts</code>: Batak Simalungun<br><code>bua</code>: Buryat<br><code>ca</code>: Catalan<br><code>ceb</code>: Cebuano<br><code>cgg</code>: Kiga<br><code>chm</code>: Meadow Mari<br><code>ckb</code>: Kurdish (Sorani)<br><code>cnh</code>: Hakha Chin<br><code>co</code>: Corsican<br><code>crh</code>: Crimean Tatar<br><code>crs</code>: Seychellois Creole<br><code>cs</code>: Czech<br><code>cv</code>: Chuvash<br><code>cy</code>: Welsh<br><code>da</code>: Danish<br><code>de</code>: German<br><code>din</code>: Dinka<br><code>doi</code>: Dogri<br><code>dov</code>: Dombe<br><code>dv</code>: Dhivehi<br><code>dz</code>: Dzongkha<br><code>ee</code>: Ewe<br><code>el</code>: Greek<br><code>en</code>: English<br><code>eo</code>: Esperanto<br><code>es</code>: Spanish<br><code>et</code>: Estonian<br><code>eu</code>: Basque<br><code>fa</code>: Persian<br><code>ff</code>: Fula<br><code>fi</code>: Finnish<br><code>fil</code>: Filipino (Tagalog)<br><code>fj</code>: Fijian<br><code>fr</code>: French<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fy</code>: Frisian<br><code>ga</code>: Irish<br><code>gaa</code>: GaLanguage<br><code>gd</code>: Scottish Gaelic<br><code>gl</code>: Galician<br><code>gn</code>: Guarani<br><code>gom</code>: Konkani<br><code>gu</code>: Gujarati<br><code>gv</code>: Manx<br><code>ha</code>: Hausa<br><code>haw</code>: Hawaiian<br><code>he</code>: Hebrew<br><code>hi</code>: Hindi<br><code>hil</code>: Hiligaynon<br><code>hmn</code>: Hmong<br><code>hr</code>: Croatian<br><code>hrx</code>: Hunsrik<br><code>ht</code>: Haitian Creole<br><code>hu</code>: Hungarian<br><code>hy</code>: Armenian<br><code>id</code>: Indonesian<br><code>ig</code>: Igbo<br><code>ilo</code>: Ilocano<br><code>is</code>: Icelandic<br><code>it</code>: Italian<br><code>iw</code>: Hebrew<br><code>ja</code>: Japanese<br><code>jv</code>: Javanese<br><code>ka</code>: Georgian<br><code>kk</code>: Kazakh<br><code>km</code>: Khmer<br><code>kn</code>: Kannada<br><code>ko</code>: Korean<br><code>kri</code>: Krio<br><code>ku</code>: Kurdish (Kurmanji)<br><code>ktu</code>: Kituba<br><code>ky</code>: Kyrgyz<br><code>la</code>: Latin<br><code>lb</code>: Luxembourgish<br><code>lg</code>: Ganda (Luganda)<br><code>li</code>: Limburgish<br><code>lij</code>: Ligurian<br><code>lmo</code>: Lombard<br><code>ln</code>: Lingala<br><code>lo</code>: Lao<br><code>lt</code>: Lithuanian<br><code>ltg</code>: Latgalian<br><code>luo</code>: Luo<br><code>lus</code>: Mizo<br><code>lv</code>: Latvian<br><code>mai</code>: Maithili<br><code>mak</code>: Makassar<br><code>mg</code>: Malagasy<br><code>mi</code>: Maori<br><code>min</code>: Minangkabau<br><code>mk</code>: Macedonian<br><code>ml</code>: Malayalam<br><code>mn</code>: Mongolian<br><code>mr</code>: Marathi<br><code>ms</code>: Malay<br><code>mt</code>: Maltese<br><code>my</code>: Burmese<br><code>ne</code>: Nepali<br><code>new</code>: Newari<br><code>nl</code>: Dutch<br><code>no</code>: Norwegian<br><code>nr</code>: Southern Ndebele<br><code>nso</code>: Northern Sotho (Sepedi)<br><code>nus</code>: Nuer<br><code>ny</code>: Chichewa (Nyanja)<br><code>oc</code>: Occitan<br><code>om</code>: Oromo<br><code>or</code>: Odia<br><code>pa</code>: Punjabi<br><code>pag</code>: Pangasinan<br><code>pam</code>: Kapampangan<br><code>pap</code>: Papiamento<br><code>pl</code>: Polish<br><code>ps</code>: Pashto<br><code>pt</code>: Portuguese<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>qu</code>: Quechua<br><code>ro</code>: Romanian<br><code>rom</code>: Romani<br><code>rn</code>: Rundi<br><code>ru</code>: Russian<br><code>rw</code>: Kinyarwanda<br><code>sa</code>: Sanskrit<br><code>scn</code>: Sicilian<br><code>sd</code>: Sindhi<br><code>sg</code>: Sango<br><code>shn</code>: Shan<br><code>si</code>: Sinhalese<br><code>sk</code>: Slovak<br><code>sl</code>: Slovenian<br><code>sm</code>: Samoan<br><code>sn</code>: Shona<br><code>so</code>: Somali<br><code>sq</code>: Albanian<br><code>sr</code>: Serbian<br><code>ss</code>: Swati<br><code>st</code>: Sesotho<br><code>su</code>: Sundanese<br><code>sv</code>: Swedish<br><code>sw</code>: Swahili<br><code>szl</code>: Silesian<br><code>ta</code>: Tamil<br><code>te</code>: Telugu<br><code>tet</code>: Tetum<br><code>tg</code>: Tajik<br><code>th</code>: Thai<br><code>ti</code>: Tigrinya<br><code>tk</code>: Turkmen<br><code>tn</code>: Tswana<br><code>tr</code>: Turkish<br><code>ts</code>: Tsonga<br><code>tt</code>: Tatar<br><code>ug</code>: Uyghur<br><code>uk</code>: Ukrainian<br><code>ur</code>: Urdu<br><code>uz</code>: Uzbek<br><code>vi</code>: Vietnamese<br><code>xh</code>: Xhosa<br><code>yi</code>: Yiddish<br><code>yo</code>: Yoruba<br><code>yua</code>: Yucatec Maya<br><code>yue</code>: Cantonese<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese<br><code>zu</code>: Zulu</p><p><strong>Note</strong>: Use the multilingual method.<code>/</code> to separate, such as <code>en/ja</code>, which indicates English and Japanese.</p>
 	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
 
-	// Subtitle processing type.
-	// - 0: ASR recognition subtitle.
-	// - 1: pure subtitle translation.
-	// - 2: OCR recognition subtitle.
-	// **Note**: The default processing type is ASR recognition subtitle if the field is unspecified.
+	// <p>Subtitle processing type:</p><ul><li>0: ASR recognition subtitle</li><li>1: Pure caption translation</li><li>2: OCR recognition subtitle</li></ul><p><strong>Note</strong>: The default type is ASR recognition subtitle if the field is unspecified.</p>
 	ProcessType *uint64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 
-	// Area configurations for the subtitle OCR extraction box.
+	// <p>Area configurations for the subtitle OCR extraction box</p>
 	SelectingSubtitleAreasConfig *SelectingSubtitleAreasConfig `json:"SelectingSubtitleAreasConfig,omitnil,omitempty" name:"SelectingSubtitleAreasConfig"`
+
+	// <p>Suppression Template id. Only allowed to fill in when ProcessType is 0 or 2 (task type is ASR or OCR). Cannot fill in when multiple target languages are enabled.</p>
+	SubtitleEmbedId *int64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
 }
 
 func (r *CreateSmartSubtitleTemplateRequest) ToJsonString() string {
@@ -5871,6 +5482,7 @@ func (r *CreateSmartSubtitleTemplateRequest) FromJsonString(s string) error {
 	delete(f, "TranslateDstLanguage")
 	delete(f, "ProcessType")
 	delete(f, "SelectingSubtitleAreasConfig")
+	delete(f, "SubtitleEmbedId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSmartSubtitleTemplateRequest has unknown keys!", "")
 	}
@@ -5879,7 +5491,7 @@ func (r *CreateSmartSubtitleTemplateRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSmartSubtitleTemplateResponseParams struct {
-	// Unique identifier of the smart subtitle template.
+	// <p>Unique identifier of the smart subtitle template.</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -6014,6 +5626,77 @@ func (r *CreateSnapshotByTimeOffsetTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateSnapshotByTimeOffsetTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSubtitleEmbedTemplateRequestParams struct {
+	// <p>Subtitle suppression template name<br>Length limit: 64 characters.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Subtitle suppression template description information<br>Length limit: 256 characters.</p>
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// <p>Subtitle suppression configuration</p>
+	SubtitleEmbedConfig *SubtitleEmbedConfig `json:"SubtitleEmbedConfig,omitnil,omitempty" name:"SubtitleEmbedConfig"`
+}
+
+type CreateSubtitleEmbedTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Subtitle suppression template name<br>Length limit: 64 characters.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Subtitle suppression template description information<br>Length limit: 256 characters.</p>
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// <p>Subtitle suppression configuration</p>
+	SubtitleEmbedConfig *SubtitleEmbedConfig `json:"SubtitleEmbedConfig,omitnil,omitempty" name:"SubtitleEmbedConfig"`
+}
+
+func (r *CreateSubtitleEmbedTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSubtitleEmbedTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "Comment")
+	delete(f, "SubtitleEmbedConfig")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSubtitleEmbedTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSubtitleEmbedTemplateResponseParams struct {
+	// <p>Unique identifier of the subtitle suppression template.</p>
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateSubtitleEmbedTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateSubtitleEmbedTemplateResponseParams `json:"Response"`
+}
+
+func (r *CreateSubtitleEmbedTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSubtitleEmbedTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7407,6 +7090,60 @@ func (r *DeleteSnapshotByTimeOffsetTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteSnapshotByTimeOffsetTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSubtitleEmbedTemplateRequestParams struct {
+	// <p>Unique identifier of the subtitle suppression template.</p>
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+type DeleteSubtitleEmbedTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Unique identifier of the subtitle suppression template.</p>
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+func (r *DeleteSubtitleEmbedTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSubtitleEmbedTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definition")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSubtitleEmbedTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSubtitleEmbedTemplateResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteSubtitleEmbedTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteSubtitleEmbedTemplateResponseParams `json:"Response"`
+}
+
+func (r *DeleteSubtitleEmbedTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSubtitleEmbedTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -8823,7 +8560,7 @@ type DescribeImageTaskDetailResponseParams struct {
 	// Error code when the task fails.
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrMsg *string `json:"ErrMsg,omitnil,omitempty" name:"ErrMsg"`
 
 	// Task exception message.
@@ -9865,6 +9602,94 @@ func (r *DescribeStreamLinkSecurityGroupResponse) FromJsonString(s string) error
 }
 
 // Predefined struct for user
+type DescribeSubtitleEmbedTemplatesRequestParams struct {
+	// <p>Unique identifiers of intelligent caption templates for filtering. The array can contain up to 100 unique identifiers.</p>
+	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
+
+	// <p>Paging offset. Default value: 0.</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of returned entries. Default value: 10. Maximum value: 100.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Filtering condition for the template type. Leave it blank to return all. Valid values:</p><ul><li>Preset: system preset template;</li><li>Custom: user-defined template.</li></ul>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// <p>Condition for filtering subtitle suppression templates by ID. Length limit: 64 characters.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+type DescribeSubtitleEmbedTemplatesRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Unique identifiers of intelligent caption templates for filtering. The array can contain up to 100 unique identifiers.</p>
+	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
+
+	// <p>Paging offset. Default value: 0.</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of returned entries. Default value: 10. Maximum value: 100.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Filtering condition for the template type. Leave it blank to return all. Valid values:</p><ul><li>Preset: system preset template;</li><li>Custom: user-defined template.</li></ul>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// <p>Condition for filtering subtitle suppression templates by ID. Length limit: 64 characters.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+func (r *DescribeSubtitleEmbedTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSubtitleEmbedTemplatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definitions")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Type")
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSubtitleEmbedTemplatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSubtitleEmbedTemplatesResponseParams struct {
+	// <p>Total number of records that meet filter conditions.</p>
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>List of subtitle suppression template details.</p>
+	SubtitleEmbedTemplateSet []*SubtitleEmbedTemplateItem `json:"SubtitleEmbedTemplateSet,omitnil,omitempty" name:"SubtitleEmbedTemplateSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSubtitleEmbedTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSubtitleEmbedTemplatesResponseParams `json:"Response"`
+}
+
+func (r *DescribeSubtitleEmbedTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSubtitleEmbedTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeTaskDetailRequestParams struct {
 	// Video processing task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
@@ -10303,7 +10128,7 @@ type DescribeUsageDataRequestParams struct {
 	// Start date. use ISO date format.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End date, which should be greater than or equal to the start date. Use the [ISO date and time format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// End date, which should be greater than or equal to the start date. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Type of MPS tasks to query. The transcoding tasks are queried by default.<li>Transcode: transcoding.</li><li>Enhance: enhancement.</li><li>AIAnalysis: intelligent analysis.</li><li>AIRecognition: intelligent identification.</li><li>AIReview: content moderation.</li><li>Snapshot: screenshot.</li><li>AnimatedGraphics: animated graphics.</li><li>AiQualityControl: quality inspection.</li><li>Evaluation: video evaluation.</li><li>ImageProcess: image processing.</li>
@@ -10336,7 +10161,7 @@ type DescribeUsageDataRequest struct {
 	// Start date. use ISO date format.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End date, which should be greater than or equal to the start date. Use the [ISO date and time format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// End date, which should be greater than or equal to the start date. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Type of MPS tasks to query. The transcoding tasks are queried by default.<li>Transcode: transcoding.</li><li>Enhance: enhancement.</li><li>AIAnalysis: intelligent analysis.</li><li>AIRecognition: intelligent identification.</li><li>AIReview: content moderation.</li><li>Snapshot: screenshot.</li><li>AnimatedGraphics: animated graphics.</li><li>AiQualityControl: quality inspection.</li><li>Evaluation: video evaluation.</li><li>ImageProcess: image processing.</li>
@@ -10755,13 +10580,13 @@ type DiagnoseResult struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// The PTS timestamp for the exception start.
+
 	Timestamp *float64 `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
 
-	// Diagnosed abnormal description.
+
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Abnormality detection time in Beijing time, using ISO date format.
+
 	DateTime *string `json:"DateTime,omitnil,omitempty" name:"DateTime"`
 
 	// Diagnosed exception level. Valid values:
@@ -11774,7 +11599,7 @@ type ImageProcessTaskResult struct {
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrMsg *string `json:"ErrMsg,omitnil,omitempty" name:"ErrMsg"`
 
 	// Error message.
@@ -12204,8 +12029,7 @@ type LiveStreamAiAnalysisResultItem struct {
 	// <li>Description: summary.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Segmentation results are valid when Type is
-	// SegmentRecognition.
+
 	SegmentResultSet []*SegmentRecognitionItem `json:"SegmentResultSet,omitnil,omitempty" name:"SegmentResultSet"`
 
 	// Highlight result. This field is valid when Type is set to Highlight.
@@ -12223,7 +12047,7 @@ type LiveStreamAiQualityControlResultInfo struct {
 	// Deprecated: QualityControlResults is deprecated.
 	QualityControlResults []*QualityControlResult `json:"QualityControlResults,omitnil,omitempty" name:"QualityControlResults"`
 
-	// Format diagnostic results list.
+
 	//
 	// Deprecated: DiagnoseResults is deprecated.
 	DiagnoseResults []*DiagnoseResult `json:"DiagnoseResults,omitnil,omitempty" name:"DiagnoseResults"`
@@ -12281,7 +12105,7 @@ type LiveStreamAiRecognitionResultItem struct {
 	// Object recognition result, which is valid when Type is ObjectRecognition.
 	ObjectRecognitionResultSet []*LiveStreamObjectRecognitionResult `json:"ObjectRecognitionResultSet,omitnil,omitempty" name:"ObjectRecognitionResultSet"`
 
-	// Tagging results are valid when Type is TagRecognition.
+
 	TagRecognitionResultSet []*LiveStreamTagRecognitionResult `json:"TagRecognitionResultSet,omitnil,omitempty" name:"TagRecognitionResultSet"`
 }
 
@@ -12451,13 +12275,13 @@ type LiveStreamAsrFullTextRecognitionResult struct {
 	// Confidence of recognized segment. Value range: 0–100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Recognition start UTC time.
+
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Recognition end UTC time.
+
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Steady state marker.
+
 	SteadyState *bool `json:"SteadyState,omitnil,omitempty" name:"SteadyState"`
 
 	// User ID in the result of recognition via WebSocket and TRTC.Note: This field may return null, indicating that no valid value can be obtained.
@@ -12600,23 +12424,23 @@ type LiveStreamRecordResultInfo struct {
 }
 
 type LiveStreamTagRecognitionResult struct {
-	// Tagging events.
+
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Start PTS time of the recognition segment, unit: seconds.
+
 	StartPtsTime *float64 `json:"StartPtsTime,omitnil,omitempty" name:"StartPtsTime"`
 
-	// Termination PTS time of the recognition segment, unit: seconds.
+
 	EndPtsTime *float64 `json:"EndPtsTime,omitnil,omitempty" name:"EndPtsTime"`
 
-	// Recognition segment confidence. Range: 0-100.
+
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 }
 
 type LiveStreamTaskNotifyConfig struct {
 	// Notification type:
 	// TDMQ-CMQ: message queue.
-	// "URL": When a URL is specified, HTTP callbacks are pushed to the address specified by NotifyUrl. The callback protocol is HTTP+JSON. The content of the packet body is the same as the output parameters of [ParseLiveStreamProcessNotification](https://www.tencentcloud.com/document/product/862/39229?from_cn_redirect=1).
+	// "URL": When a URL is specified, HTTP callbacks are pushed to the address specified by NotifyUrl. The callback protocol is HTTP+JSON. The content of the packet body is the same as the output parameters of [ParseLiveStreamProcessNotification](https://www.tencentcloud.comom/document/product/862/39229?from_cn_redirect=1).
 	// <Font color="red"> Note: if it is unspecified or left blank, no callback will be sent. To send a callback, fill in the corresponding type value. </font>
 	NotifyType *string `json:"NotifyType,omitnil,omitempty" name:"NotifyType"`
 
@@ -12656,13 +12480,13 @@ type LiveStreamTransTextRecognitionResult struct {
 	// The translation.
 	Trans *string `json:"Trans,omitnil,omitempty" name:"Trans"`
 
-	// Translation start UTC time.
+
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Translation end UTC time.
+
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Steady state marker.
+
 	SteadyState *bool `json:"SteadyState,omitnil,omitempty" name:"SteadyState"`
 
 	// User ID in the result of real-time translation via WebSocket and TRTC.
@@ -12811,9 +12635,7 @@ type MediaAiAnalysisFrameTagItem struct {
 	// Frame-specific tag name.
 	Tag *string `json:"Tag,omitnil,omitempty" name:"Tag"`
 
-	// Classification list of frame-level tags, where CategorySet.N represents the (N+1)th level classification.
-	// 
-	// For example, when the Tag is "tower", CategorySet contains two elements: CategorySet.0 is "scene" and CategorySet.1 is "architecture", indicating the frame-level tag is "tower" with Level 1 classification as "scene" and Level 2 classification as "architecture".
+
 	CategorySet []*string `json:"CategorySet,omitnil,omitempty" name:"CategorySet"`
 
 	// Confidence of intelligently generated frame-specific tag between 0 and 100.
@@ -13488,7 +13310,7 @@ type MediaVideoStreamItem struct {
 	// Note: This field may return `null`, indicating that no valid value was found.
 	HdrType *string `json:"HdrType,omitnil,omitempty" name:"HdrType"`
 
-	// Video Codecs.
+
 	Codecs *string `json:"Codecs,omitnil,omitempty" name:"Codecs"`
 
 	// Numerator of the frame rate.
@@ -15035,56 +14857,50 @@ func (r *ModifyScheduleResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifySmartEraseTemplateRequestParams struct {
-	// Unique identifier of the smart erasing template.
+	// <p>Unique identifier of the intelligent erasure template</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Length limit for the smart erasing template name: 64 characters.
+	// <p>Length limit for the smart erasing template name: 64 characters.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Length limit for the description information of the smart erasing template: 256 characters.
+	// <p>Length limit for the description information of the smart erasing template: 256 characters.</p>
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Erasing type.
-	// -subtitle: subtitle removal.
-	// -watermark: watermark removal.
-	// -privacy: privacy protection.
+	// <p>Removal Type</p><ul><li>subtitle removal</li><li>watermark removal</li><li>privacy protection</li></ul>
 	EraseType *string `json:"EraseType,omitnil,omitempty" name:"EraseType"`
 
-	// Subtitle erasing configuration. It takes effect when the value of EraseType is set to subtitle, or when the value of EraseType is left unspecified but the original EraseType value of the modified template is subtitle.
+	// <p>Subtitle erasing configuration. It takes effect when the value of EraseType is set to subtitle, or when the value of EraseType is left unspecified but the original EraseType value of the modified template is subtitle.</p>
 	EraseSubtitleConfig *SmartEraseSubtitleConfig `json:"EraseSubtitleConfig,omitnil,omitempty" name:"EraseSubtitleConfig"`
 
-	// Watermark erasing configuration. The value of EraseType can be set to watermark or left unspecified. This parameter is valid only when the value of EraseType of the corresponding template is set to watermark.
+	// <p>Watermark erasing configuration. The value of EraseType can be set to watermark or left unspecified. This parameter is valid only when the value of EraseType of the corresponding template is set to watermark.</p>
 	EraseWatermarkConfig *SmartEraseWatermarkConfig `json:"EraseWatermarkConfig,omitnil,omitempty" name:"EraseWatermarkConfig"`
 
-	// Privacy protection configuration. The value of EraseType can be set to privacy or left unspecified. This parameter is valid only when the value of EraseType of the corresponding template is set to privacy.
+	// <p>Privacy protection configuration. The value of EraseType can be set to privacy or left unspecified. This parameter is valid only when the value of EraseType of the corresponding template is set to privacy.</p>
 	ErasePrivacyConfig *SmartErasePrivacyConfig `json:"ErasePrivacyConfig,omitnil,omitempty" name:"ErasePrivacyConfig"`
 }
 
 type ModifySmartEraseTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// Unique identifier of the smart erasing template.
+	// <p>Unique identifier of the intelligent erasure template</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Length limit for the smart erasing template name: 64 characters.
+	// <p>Length limit for the smart erasing template name: 64 characters.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Length limit for the description information of the smart erasing template: 256 characters.
+	// <p>Length limit for the description information of the smart erasing template: 256 characters.</p>
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Erasing type.
-	// -subtitle: subtitle removal.
-	// -watermark: watermark removal.
-	// -privacy: privacy protection.
+	// <p>Removal Type</p><ul><li>subtitle removal</li><li>watermark removal</li><li>privacy protection</li></ul>
 	EraseType *string `json:"EraseType,omitnil,omitempty" name:"EraseType"`
 
-	// Subtitle erasing configuration. It takes effect when the value of EraseType is set to subtitle, or when the value of EraseType is left unspecified but the original EraseType value of the modified template is subtitle.
+	// <p>Subtitle erasing configuration. It takes effect when the value of EraseType is set to subtitle, or when the value of EraseType is left unspecified but the original EraseType value of the modified template is subtitle.</p>
 	EraseSubtitleConfig *SmartEraseSubtitleConfig `json:"EraseSubtitleConfig,omitnil,omitempty" name:"EraseSubtitleConfig"`
 
-	// Watermark erasing configuration. The value of EraseType can be set to watermark or left unspecified. This parameter is valid only when the value of EraseType of the corresponding template is set to watermark.
+	// <p>Watermark erasing configuration. The value of EraseType can be set to watermark or left unspecified. This parameter is valid only when the value of EraseType of the corresponding template is set to watermark.</p>
 	EraseWatermarkConfig *SmartEraseWatermarkConfig `json:"EraseWatermarkConfig,omitnil,omitempty" name:"EraseWatermarkConfig"`
 
-	// Privacy protection configuration. The value of EraseType can be set to privacy or left unspecified. This parameter is valid only when the value of EraseType of the corresponding template is set to privacy.
+	// <p>Privacy protection configuration. The value of EraseType can be set to privacy or left unspecified. This parameter is valid only when the value of EraseType of the corresponding template is set to privacy.</p>
 	ErasePrivacyConfig *SmartErasePrivacyConfig `json:"ErasePrivacyConfig,omitnil,omitempty" name:"ErasePrivacyConfig"`
 }
 
@@ -15137,467 +14953,81 @@ func (r *ModifySmartEraseTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifySmartSubtitleTemplateRequestParams struct {
-	// Unique identifier of the smart subtitle template.
+	// <p>Unique identifier of the smart subtitle template.</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Subtitle translation switch.
-	// `ON`: translation enabled.
-	// `OFF`: translation disabled.
-	// **Note**: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to `OFF`.
+	// <p>Subtitle translation switch<br><code>ON</code>: Enable translation<br><code>OFF</code>: Disable translation</p><p><strong>Note</strong>: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to <code>OFF</code>.</p>
 	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
 
-	// Smart subtitle template name.
-	// Length limit: 64 characters.
+	// <p>Intelligent subtitle template name<br>Length limit: 64 characters.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Smart subtitle template description.
-	// Length limit: 256 characters.
+	// <p>Intelligent caption template description information<br>Length limit: 256 characters.</p>
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Source language of the video with smart subtitles.
-	// OCR recognition only supports the following languages:
-	// `zh_en`: Chinese and English.
-	// `multi`: others.
-	// ASR recognition and pure subtitle translation currently support the following languages:
-	// `auto`: automatic recognition (it is only supported in pure subtitle translation).
-	// `zh`: Simplified Chinese.
-	// `en`: English.
-	// `ja`: Japanese.
-	// `ko`: Korean.
-	// `zh-PY`: Chinese, English, and Cantonese.
-	// `zh_medical`: Chinese (medical scenario).
-	// `vi`: Vietnamese.
-	// `ms`: Malay.
-	// `id`: Indonesian.
-	// `fil`: Filipino.
-	// `th`: Thai.
-	// `pt`: Portuguese.
-	// `tr`: Turkish.
-	// `ar`: Arabic.
-	// `es`: Spanish.
-	// `hi`: Hindi.
-	// `fr`: French.
-	// `de`: German.
-	// `it`: Italian.
-	// `zh_dialect`: Chinese dialect.
-	// `zh_en`: Chinese and English.
-	// `yue`: Cantonese.
-	// `ru`: Russian.
-	// `prime_zh`: Chinese, English, and Chinese dialects.
-	// `af-ZA`: Afrikaans (South Africa).
-	// `sq-AL`: Albanian (Albania).
-	// `am-ET`: Amharic (Ethiopia).
-	// `ar-DZ`: Arabic (Algeria).
-	// `ar-BH`: Arabic (Bahrain).
-	// `ar-EG`: Arabic (Egypt).
-	// `ar-IQ`: Arabic (Iraq).
-	// `ar-IL`: Arabic (Israel).
-	// `ar-JO`: Arabic (Jordan).
-	// `ar-KW`: Arabic (Kuwait).
-	// `ar-LB`: Arabic (Lebanon).
-	// `ar-MR`: Arabic (Mauritania).
-	// `ar-MA`: Arabic (Morocco).
-	// `ar-OM`: Arabic (Oman).
-	// `ar-QA`: Arabic (Qatar).
-	// `ar-SA`: Arabic (Saudi Arabia).
-	// `ar-PS`: Arabic (State of Palestine).
-	// `ar-SY`: Arabic (Syria).
-	// `ar-TN`: Arabic (Tunisia).
-	// `ar-AE`: Arabic (United Arab Emirates).
-	// `ar-YE`: Arabic (Yemen).
-	// `hy-AM`: Armenian (Armenia).
-	// `az-AZ`: Azerbaijani (Azerbaijan).
-	// `eu-ES`: Basque (Spain).
-	// `bn-BD`: Bengali (Bangladesh).
-	// `bn-IN`: Bengali (India).
-	// `bs-BA`: Bosnian (Bosnia and Herzegovina).
-	// `bg-BG`: Bulgarian (Bulgaria).
-	// `my-MM`: Burmese (Myanmar).
-	// `ca-ES`: Catalan (Spain).
-	// `hr-HR`: Croatian (Croatia).
-	// `cs-CZ`: Czech (Czech Republic).
-	// `da-DK`: Danish (Denmark).
-	// `nl-BE`: Dutch (Belgium).
-	// `nl-NL`: Dutch (Holland).
-	// `en-AU`: English (Australia).
-	// `en-CA`: English (Canada).
-	// `en-GH`: English (Ghana).
-	// `en-HK`: English (Hong Kong (China)).
-	// `en-IN`: English (India).
-	// `en-IE`: English (Ireland).
-	// `en-KE`: English (Kenya).
-	// `en-NZ`: English (New Zealand).
-	// `en-NG`: English (Nigeria).
-	// `en-PK`: English (Pakistan).
-	// `en-PH`: English (Philippines).
-	// `en-SG`: English (Singapore).
-	// `en-ZA`: English (South Africa).
-	// `en-TZ`: English (Tanzania).
-	// `en-GB`: English (UK).
-	// `en-US`: English (US).
-	// `et-EE`: Estonian (Estonia).
-	// `fil-PH`: Filipino (Philippines).
-	// `fi-FI`: Finnish (Finland).
-	// `fr-BE`: French (Belgium).
-	// `fr-CA`: French (Canada).
-	// `fr-FR`: French (France).
-	// `fr-CH`: French (Switzerland).
-	// `gl-ES`: Galician (Spain).
-	// `ka-GE`: Georgian (Georgia).
-	// `el-GR`: Greek (Greece).
-	// `gu-IN`: Gujarati (India).
-	// `iw-IL`: Hebrew (Israel).
-	// `hi-IN`: Hindi (India).
-	// `hu-HU`: Hungarian (Hungary).
-	// `is-IS`: Icelandic (Iceland).
-	// `id-ID`: Indonesian (Indonesia).
-	// `it-IT`: Italian (Italy).
-	// `it-CH`: Italian (Switzerland).
-	// `ja-JP`: Japanese (Japan).
-	// `jv-ID`: Javanese (Indonesia).
-	// `kn-IN`: Kannada (India).
-	// `kk-KZ`: Kazakh (Kazakhstan).
-	// `km-KH`: Khmer (Cambodia).
-	// `rw-RW`: Kinyarwanda (Rwanda).
-	// `ko-KR`: Korean (South Korea).
-	// `lo-LA`: Lao (Laos).
-	// `lv-LV`: Latvian (Latvia).
-	// `lt-LT`: Lithuanian (Lithuania).
-	// `mk-MK`: Macedonian (North Macedonia).
-	// `ms-MY`: Malay (Malaysia).
-	// `ml-IN`: Malayalam (India).
-	// `mr-IN`: Marathi (India).
-	// `mn-MN`: Mongolian (Mongolia).
-	// `ne-NP`: Nepali (Nepal).
-	// `no-NO`: Bokmal Norwegian (Norway).
-	// `fa-IR`: Persian (Iran).
-	// `pl-PL`: Polish (Poland).
-	// `pt-BR`: Portuguese (Brazil).
-	// `pt-PT`: Portuguese (Portugal).
-	// `ro-RO`: Romanian (Romania).
-	// `ru-RU`: Russian (Russia).
-	// `sr-RS`: Serbian (Serbia).
-	// `si-LK`: Sinhalese (Sri Lanka).
-	// `sk-SK`: Slovak (Slovakia).
-	// `sl-SI`: Slovenian (Slovenia).
-	// `st-ZA`: Sesotho (South Africa).
-	// `es-AR`: Spanish (Argentina).
-	// `es-BO`: Spanish (Bolivia).
-	// `es-CL`: Spanish (Chile).
-	// `es-CO`: Spanish (Colombia).
-	// `es-CR`: Spanish (Costa Rica).
-	// `es-DO`: Spanish (Dominican Republic).
-	// `es-EC`: Spanish (Ecuador).
-	// `es-SV`: Spanish (El Salvador).
-	// `es-GT`: Spanish (Guatemala).
-	// `es-HN`: Spanish (Honduras).
-	// `es-MX`: Spanish (Mexico).
-	// `es-NI`: Spanish (Nicaragua).
-	// `es-PA`: Spanish (Panama).
-	// `es-PY`: Spanish (Paraguay).
-	// `es-PE`: Spanish (Peru).
-	// `es-PR`: Spanish (Puerto Rico).
-	// `es-ES`: Spanish (Spain).
-	// `es-US`: Spanish (US).
-	// `es-UY`: Spanish (Uruguay).
-	// `es-VE`: Spanish (Venezuela).
-	// `su-ID`: Sundanese (Indonesia).
-	// `sw-KE`: Swahili (Kenya).
-	// `sw-TZ`: Swahili (Tanzania).
-	// `sv-SE`: Swedish (Sweden).
-	// `ta-IN`: Tamil (India).
-	// `ta-MY`: Tamil (Malaysia).
-	// `ta-SG`: Tamil (Singapore).
-	// `ta-LK`: Tamil (Sri Lanka).
-	// `te-IN`: Telugu (India).
-	// `th-TH`: Thai (Thailand).
-	// `ts-ZA`: Tsonga (South Africa).
-	// `tr-TR`: Turkish (Turkey).
-	// `uk-UA`: Ukrainian (Ukraine).
-	// `ur-IN`: Urdu (India).
-	// `ur-PK`: Urdu (Pakistan).
-	// `uz-UZ`: Uzbek (Uzbekistan).
-	// `ve-ZA`: Venda (South Africa).
-	// `vi-VN`: Vietnamese (Vietnam).
-	// `xh-ZA`: Xhosa (South Africa).
-	// `zu-ZA`: Zulu (South Africa).
-	// 
+	// <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br>ASR recognition and pure caption translation currently support the following languages:<br><code>auto</code>: Auto-identification<br><code>zh</code>: Simplified Chinese<br><code>en</code>: English<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>zh-PY</code>: Chinese-English-Cantonese<br><code>zh_medical</code>: Chinese health care<br><code>vi</code>: Vietnamese<br><code>ms</code>: Malay<br><code>id</code>: Indonesian<br><code>fil</code>: Filipino<br><code>th</code>: Thai<br><code>pt</code>: Portuguese<br><code>tr</code>: Turkish<br><code>ar</code>: Arabic<br><code>es</code>: Spanish<br><code>hi</code>: Hindi<br><code>fr</code>: French<br><code>de</code>: German<br><code>it</code>: Italian<br><code>zh_dialect</code>: Chinese dialect<br><code>zh_en</code>: Chinese-English<br><code>yue</code>: Cantonese<br><code>ru</code>: Russian<br><code>prime_zh</code>: Chinese-English dialect<br><code>af-ZA</code>: Afrikaans (South Africa)<br><code>sq-AL</code>: Albanian (Albania)<br><code>am-ET</code>: Amharic (Ethiopia)<br><code>ar-DZ</code>: Arabic (Algeria)<br><code>ar-BH</code>: Arabic (Bahrain)<br><code>ar-EG</code>: Arabic (Egypt)<br><code>ar-IQ</code>: Arabic (Iraq)<br><code>ar-IL</code>: Arabic (Israel)<br><code>ar-JO</code>: Arabic (Jordan)<br><code>ar-KW</code>: Arabic (Kuwait)<br><code>ar-LB</code>: Arabic (Lebanon)<br><code>ar-MR</code>: Arabic (Mauritania)<br><code>ar-MA</code>: Arabic (Morocco)<br><code>ar-OM</code>: Arabic (Oman)<br><code>ar-QA</code>: Arabic (Qatar)<br><code>ar-SA</code>: Arabic (Saudi Arabia)<br><code>ar-PS</code>: Arabic (State of Palestine)<br><code>ar-SY</code>: Arabic (Syria)<br><code>ar-TN</code>: Arabic (Tunisia)<br><code>ar-AE</code>: Arabic (United Arab Emirates)<br><code>ar-YE</code>: Arabic (Yemen)<br><code>hy-AM</code>: Armenian (Armenia)<br><code>az-AZ</code>: Azerbaijani (Azerbaijan)<br><code>eu-ES</code>: Basque (Spain)<br><code>bn-BD</code>: Bengali (Bangladesh)<br><code>bn-IN</code>: Bengali (India)<br><code>bs-BA</code>: Bosnian (Bosnia and Herzegovina)<br><code>bg-BG</code>: Bulgarian (Bulgaria)<br><code>my-MM</code>: Burmese (Myanmar)<br><code>ca-ES</code>: Catalan (Spain)<br><code>hr-HR</code>: Croatian (Croatia)<br><code>cs-CZ</code>: Czech (Czech Republic)<br><code>da-DK</code>: Danish (Denmark)<br><code>nl-BE</code>: Dutch (Belgium)<br><code>nl-NL</code>: Dutch (Netherlands)<br><code>en-AU</code>: English (Australia)<br><code>en-CA</code>: English (Canada)<br><code>en-GH</code>: English (Ghana)<br><code>en-HK</code>: English (Hong Kong (China))<br><code>en-IN</code>: English (India)<br><code>en-IE</code>: English (Ireland)<br><code>en-KE</code>: English (Kenya)<br><code>en-NZ</code>: English (New Zealand)<br><code>en-NG</code>: English (Nigeria)<br><code>en-PK</code>: English (Pakistan)<br><code>en-PH</code>: English (Philippines)<br><code>en-SG</code>: English (Singapore)<br><code>en-ZA</code>: English (South Africa)<br><code>en-TZ</code>: English (Tanzania)<br><code>en-GB</code>: English (UK)<br><code>en-US</code>: English (United States)<br><code>et-EE</code>: Estonian (Estonia)<br><code>fil-PH</code>: Filipino (Philippines)<br><code>fi-FI</code>: Finnish (Finland)<br><code>fr-BE</code>: French (Belgium)<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fr-CH</code>: French (Switzerland)<br><code>gl-ES</code>: Galician (Spain)<br><code>ka-GE</code>: Georgian (Georgia)<br><code>el-GR</code>: Greek (Greece)<br><code>gu-IN</code>: Gujarati (India)<br><code>iw-IL</code>: Hebrew (Israel)<br><code>hi-IN</code>: Hindi (India)<br><code>hu-HU</code>: Hungarian (Hungary)<br><code>is-IS</code>: Icelandic (Iceland)<br><code>id-ID</code>: Indonesian (Indonesia)<br><code>it-IT</code>: Italian (Italy)<br><code>it-CH</code>: Italian (Switzerland)<br><code>ja-JP</code>: Japanese (Japan)<br><code>jv-ID</code>: Javanese (Indonesia)<br><code>kn-IN</code>: Kannada (India)<br><code>kk-KZ</code>: Kazakh (Kazakhstan)<br><code>km-KH</code>: Khmer (Cambodia)<br><code>rw-RW</code>: Kinyarwanda (Rwanda)<br><code>ko-KR</code>: Korean (South Korea)<br><code>lo-LA</code>: Lao (Laos)<br><code>lv-LV</code>: Latvian (Latvia)<br><code>lt-LT</code>: Lithuanian (Lithuania)<br><code>mk-MK</code>: Macedonian (North Macedonia)<br><code>ms-MY</code>: Malay (Malaysia)<br><code>ml-IN</code>: Malayalam (India)<br><code>mr-IN</code>: Marathi (India)<br><code>mn-MN</code>: Mongolian (Mongolia)<br><code>ne-NP</code>: Nepali (Nepal)<br><code>no-NO</code>: Norwegian Bokmål (Norway)<br><code>fa-IR</code>: Persian (Iran)<br><code>pl-PL</code>: Polish (Poland)<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>ro-RO</code>: Romanian (Romania)<br><code>ru-RU</code>: Russian (Russia)<br><code>sr-RS</code>: Serbian (Serbia)<br><code>si-LK</code>: Sinhalese (Sri Lanka)<br><code>sk-SK</code>: Slovak (Slovakia)<br><code>sl-SI</code>: Slovenian (Slovenia)<br><code>st-ZA</code>: Southern Sotho (South Africa)<br><code>es-AR</code>: Spanish (Argentina)<br><code>es-BO</code>: Spanish (Bolivia)<br><code>es-CL</code>: Spanish (Chile)<br><code>es-CO</code>: Spanish (Colombia)<br><code>es-CR</code>: Spanish (Costa Rica)<br><code>es-DO</code>: Spanish (Dominican Republic)<br><code>es-EC</code>: Spanish (Ecuador)<br><code>es-SV</code>: Spanish (El Salvador)<br><code>es-GT</code>: Spanish (Guatemala)<br><code>es-HN</code>: Spanish (Honduras)<br><code>es-MX</code>: Spanish (Mexico)<br><code>es-NI</code>: Spanish (Nicaragua)<br><code>es-PA</code>: Spanish (Panama)<br><code>es-PY</code>: Spanish (Paraguay)<br><code>es-PE</code>: Spanish (Peru)<br><code>es-PR</code>: Spanish (Puerto Rico)<br><code>es-ES</code>: Spanish (Spain)<br><code>es-US</code>: Spanish (United States)<br><code>es-UY</code>: Spanish (Uruguay)<br><code>es-VE</code>: Spanish (Venezuela)<br><code>su-ID</code>: Sundanese (Indonesia)<br><code>sw-KE</code>: Swahili (Kenya)<br><code>sw-TZ</code>: Swahili (Tanzania)<br><code>sv-SE</code>: Swedish (Sweden)<br><code>ta-IN</code>: Tamil (India)<br><code>ta-MY</code>: Tamil (Malaysia)<br><code>ta-SG</code>: Tamil (Singapore)<br><code>ta-LK</code>: Tamil (Sri Lanka)<br><code>te-IN</code>: Telugu (India)<br><code>th-TH</code>: Thai (Thailand)<br><code>ts-ZA</code>: Tsonga (South Africa)<br><code>tr-TR</code>: Turkish (Türkiye)<br><code>uk-UA</code>: Ukrainian (Ukraine)<br><code>ur-IN</code>: Urdu (India)<br><code>ur-PK</code>: Urdu (Pakistan)<br><code>uz-UZ</code>: Uzbek (Uzbekistan)<br><code>ve-ZA</code>: Venda (South Africa)<code>vi-VN</code>: Vietnamese (Vietnam)<br><code>xh-ZA</code>: Xhosa (South Africa)<br><code>zu-ZA</code>: Zulu (South Africa)</p>
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
-	// Smart subtitle file format:
-	// - Under the ASR recognition and translation processing type:
-	//      - vtt: WebVTT format subtitle.
-	//      - srt: SRT format subtitle.
-	//      - Unspecified or left blank: no subtitle file generated.
-	// - Under the pure subtitle translation processing type:
-	//     - original: consistent with the source file.
-	//     - vtt: WebVTT format subtitle.
-	//     - srt: SRT format subtitle.
-	// - Under the OCR recognition and translation processing type:
-	//      - vtt: WebVTT format subtitle.
-	//      - srt: SRT format subtitle.
-	// **Note**:
-	// - For ASR recognition mode, when 2 or more languages are involved in translation, this field cannot be unspecified or left blank.
-	// - For pure subtitle translation and OCR recognition mode, this field cannot be unspecified or left blank.
+	// <p>Intelligent subtitle file format:</p><ul><li>For ASR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li><li>Leave blank or fill in the blank: no subtitle file generated</li></ul></li><li>For pure subtitle translation processing type:<ul><li>original: consistent with the source file</li><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li><li>For OCR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li></ul><p><strong>Note</strong>:</p><ul><li>For ASR recognition method, do not leave blank or not pass when translating 2 or more languages.</li><li>For pure subtitle translation method, do not leave blank or not pass.</li><li>For OCR tasks, it is allowed to leave blank or not pass when suppression is enabled.</li></ul>
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
-	// Smart subtitle language type.
-	// 0: source language
-	// 1: target language
-	// 2: source language + target language
-	// The value can only be 0 when TranslateSwitch is set to OFF. The value can only be 1 or 2 when TranslateSwitch is set to ON.
+	// <p>Intelligent caption subtitle language type<br>0: Source language<br>1: Target language<br>2: Source language + target language<br>Only 0 is supported when TranslateSwitch is OFF<br>Only 1 or 2 is supported when TranslateSwitch is ON</p>
 	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
 
-	// ASR hotword lexicon parameter.
+	// <p>ASR hot word lexicon parameter</p>
 	AsrHotWordsConfigure *AsrHotWordsConfigure `json:"AsrHotWordsConfigure,omitnil,omitempty" name:"AsrHotWordsConfigure"`
 
-	// Target language for subtitle translation.
-	// This parameter takes effect when the value of TranslateSwitch is ON. Valid translation languages:`ab`: Abkhazian.`ace`: Acehnese.`ach`: Acholi.`af`: Afrikaans.`ak`: Twi (Akan).`am`: Amharic.`ar`: Arabic.`as`: Assamese.`ay`: Aymara.`az`: Azerbaijani.`ba`: Bashkir.`ban`: Balinese.`bbc`: Batak toba.`bem`: Bemba.`bew`: Betawi.`bg`: Bulgarian.`bho`: Bhojpuri.`bik`: Bikol.`bm`: Bambara.`bn`: Bengali.`br`: Breton.`bs`: Bosnian.`btx`: Batak Karo.`bts`: Batak Simalungun.`bua`: Buryat.`ca`: Catalan.`ceb`: Cebuano.`cgg`: Kiga.`chm`: Meadow Mari.`ckb`: Kurdish (Sorani).`cnh`: Hakha Chin.`co`: Corsican.`crh`: Crimean Tatar.`crs`: Seychellois Creole.`cs`: Czech.`cv`: Chuvash.`cy`: Welsh.`da`: Danish.`de`: German.`din`: Dinka.`doi`: Dogri.`dov`: Dombe.`dv`: Dhivehi.`dz`: Dzongkha.`ee`: Ewe.`el`: Greek.`en`: English.`eo`: Esperanto.`es`: Spanish.`et`: Estonian.`eu`: Basque.`fa`: Persian.`ff`: Fulah.`fi`: Finnish.`fil`: Filipino (Tagalog).`fj`: Fijian.`fr`: French.`fr-CA`: French (Canada).`fr-FR`: French (France).`fy`: Frisian.`ga`: Irish.`gaa`: Ga.
-	// `gd`: Scottish Gaelic.`gl`: Galician.`gn`: Guarani.`gom`: Konkani.`gu`: Gujarati.`gv`: Manx.`ha`: Hausa.`haw`: Hawaiian.`he`: Hebrew.`hi`: Hindi.`hil`: Hiligaynon.`hmn`: Hmong.`hr`: Croatian.`hrx`: Hunsrik.`ht`: Haitian Creole.`hu`: Hungarian.`hy`: Armenian.`id`: Indonesian.`ig`: Igbo.`ilo`: Iloko.`is`: Icelandic.`it`: Italian.`iw`: Hebrew.`ja`: Japanese.`jv`: Javanese.`ka`: Georgian.`kk`: Kazakh.`km`: Khmer.`kn`: Kannada.`ko`: Korean.`kri`: Krio.`ku`: Kurdish (Kurmanji).`ktu`: Kituba.`ky`: Kyrgyz.`la`: Latin.`lb`: Luxembourgish.`lg`: Ganda (Luganda).`li`: Limburgish.`lij`: Ligurian.`lmo`: Lombard.`ln`: Lingala.`lo`: Lao.`lt`: Lithuanian.`ltg`: Latgalian.`luo`: Luo.`lus`: Mizo.`lv`: Latvian.`mai`: Maithili.`mak`: Makasar.`mg`: Malagasy.`mi`: Maori.`min`: Minangkabau.`mk`: Macedonian.`ml`: Malayalam.`mn`: Mongolian.`mr`: Marathi.`ms`: Malay.`mt`: Maltese.`my`: Burmese.`ne`: Nepali.`new`: Newari.`nl`: Dutch.`no`: Norwegian.`nr`: Southern Ndebele.`nso`: Northern Sotho (Sepedi).`nus`: Nuer.`ny`: Chichewa (Nyanja).`oc`: Occitan.`om`: Oromo.`or`: Odia.`pa`: Punjabi.`pag`: Pangasinan.`pam`: Kapampangan.`pap`: Papiamento.`pl`: Polish.`ps`: Pashto.`pt`: Portuguese.`pt-BR`: Portuguese (Brazil).`pt-PT`: Portuguese (Portugal).`qu`: Quechua.`ro`: Romanian.`rom`: Romani.`rn`: Rundi.`ru`: Russian.`rw`: Kinyarwanda.`sa`: Sanskrit.`scn`: Sicilian.`sd`: Sindhi.`sg`: Sango.`shn`: Shan.`si`: Sinhala.`sk`: Slovak.`sl`: Slovenian.`sm`: Samoan.`sn`: Shona.`so`: Somali.`sq`: Albanian.`sr`: Serbian.`ss`: Swazi.`st`: Southern Sotho.`su`: Sundanese.`sv`: Swedish.`sw`: Swahili.`szl`: Silesian.`ta`: Tamil.`te`: Telugu.`tet`: Tetum.`tg`: Tajik.`th`: Thai.`ti`: Tigrinya.`tk`: Turkmen.`tn`: Tswana.`tr`: Turkish.`ts`: Tsonga.`tt`: Tatar.`ug`: Uyghur.`uk`: Ukrainian.`ur`: Urdu.`uz`: Uzbek.`vi`: Vietnamese.`xh`: Xhosa.`yi`: Yiddish.`yo`: Yoruba.`yua`: Yucatec Maya.`yue`: Cantonese.`zh`: Chinese (Simplified).`zh-TW`: Chinese (Traditional).`zu`: Zulu.**Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
+	// <p>Subtitle target language<br>Take effect when TranslateSwitch is ON. Translation language list:<br><code>ab</code>: Abkhaz<br><code>ace</code>: Acehnese<br><code>ach</code>: Acholi<br><code>af</code>: Afrikaans<br><code>ak</code>: Akan<br><code>am</code>: Amharic<br><code>ar</code>: Arabic<br><code>as</code>: Assamese<br><code>ay</code>: Aymara<br><code>az</code>: Azerbaijani<br><code>ba</code>: Bashkir<br><code>ban</code>: Balinese<br><code>bbc</code>: Batak Toba<br><code>bem</code>: Bemba<br><code>bew</code>: Betawi<br><code>bg</code>: Bulgarian<br><code>bho</code>: Bhojpuri<br><code>bik</code>: Bikol<br><code>bm</code>: Bambara<br><code>bn</code>: Bengali<br><code>br</code>: Breton<br><code>bs</code>: Bosnian<br><code>btx</code>: Batak Karo<br><code>bts</code>: Batak Simalungun<br><code>bua</code>: Buryat<br><code>ca</code>: Catalan<br><code>ceb</code>: Cebuano<br><code>cgg</code>: Kiga<br><code>chm</code>: Meadow Mari<br><code>ckb</code>: Kurdish (Sorani)<br><code>cnh</code>: Hakha Chin<br><code>co</code>: Corsican<br><code>crh</code>: Crimean Tatar<br><code>crs</code>: Seychellois Creole<br><code>cs</code>: Czech<br><code>cv</code>: Chuvash<br><code>cy</code>: Welsh<br><code>da</code>: Danish<br><code>de</code>: German<br><code>din</code>: Dinka<br><code>doi</code>: Dogri<br><code>dov</code>: Dombe<br><code>dv</code>: Dhivehi<br><code>dz</code>: Dzongkha<br><code>ee</code>: Ewe<br><code>el</code>: Greek<br><code>en</code>: English<br><code>eo</code>: Esperanto<br><code>es</code>: Spanish<br><code>et</code>: Estonian<br><code>eu</code>: Basque<br><code>fa</code>: Persian<br><code>ff</code>: Fula<br><code>fi</code>: Finnish<br><code>fil</code>: Filipino (Tagalog)<br><code>fj</code>: Fijian<br><code>fr</code>: French<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fy</code>: Frisian<br><code>ga</code>: Irish<br><code>gaa</code>: GaLanguage<br><code>gd</code>: Scottish Gaelic<br><code>gl</code>: Galician<br><code>gn</code>: Guarani<br><code>gom</code>: Konkani<br><code>gu</code>: Gujarati<br><code>gv</code>: Manx<br><code>ha</code>: Hausa<br><code>haw</code>: Hawaiian<br><code>he</code>: Hebrew<br><code>hi</code>: Hindi<br><code>hil</code>: Hiligaynon<br><code>hmn</code>: Hmong<br><code>hr</code>: Croatian<br><code>hrx</code>: Hunsrik<br><code>ht</code>: Haitian Creole<br><code>hu</code>: Hungarian<br><code>hy</code>: Armenian<br><code>id</code>: Indonesian<br><code>ig</code>: Igbo<br><code>ilo</code>: Ilocano<br><code>is</code>: Icelandic<br><code>it</code>: Italian<br><code>iw</code>: Hebrew<br><code>ja</code>: Japanese<br><code>jv</code>: Javanese<br><code>ka</code>: Georgian<br><code>kk</code>: Kazakh<br><code>km</code>: Khmer<br><code>kn</code>: Kannada<br><code>ko</code>: Korean<br><code>kri</code>: Krio<br><code>ku</code>: Kurdish (Kurmanji)<br><code>ktu</code>: Kituba<br><code>ky</code>: Kyrgyz<br><code>la</code>: Latin<br><code>lb</code>: Luxembourgish<br><code>lg</code>: Ganda (Luganda)<br><code>li</code>: Limburgish<br><code>lij</code>: Ligurian<br><code>lmo</code>: Lombard<br><code>ln</code>: Lingala<br><code>lo</code>: Lao<br><code>lt</code>: Lithuanian<br><code>ltg</code>: Latgalian<br><code>luo</code>: Luo<br><code>lus</code>: Mizo<br><code>lv</code>: Latvian<br><code>mai</code>: Maithili<br><code>mak</code>: Makassar<br><code>mg</code>: Malagasy<br><code>mi</code>: Maori<br><code>min</code>: Minangkabau<br><code>mk</code>: Macedonian<br><code>ml</code>: Malayalam<br><code>mn</code>: Mongolian<br><code>mr</code>: Marathi<br><code>ms</code>: Malay<br><code>mt</code>: Maltese<br><code>my</code>: Burmese<br><code>ne</code>: Nepali<br><code>new</code>: Newari<br><code>nl</code>: Dutch<br><code>no</code>: Norwegian<br><code>nr</code>: Southern Ndebele<br><code>nso</code>: Northern Sotho (Sepedi)<br><code>nus</code>: Nuer<br><code>ny</code>: Chichewa (Nyanja)<br><code>oc</code>: Occitan<br><code>om</code>: Oromo<br><code>or</code>: Odia<br><code>pa</code>: Punjabi<br><code>pag</code>: Pangasinan<br><code>pam</code>: Kapampangan<br><code>pap</code>: Papiamento<br><code>pl</code>: Polish<br><code>ps</code>: Pashto<br><code>pt</code>: Portuguese<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>qu</code>: Quechua<br><code>ro</code>: Romanian<br><code>rom</code>: Romani<br><code>rn</code>: Rundi<br><code>ru</code>: Russian<br><code>rw</code>: Kinyarwanda<br><code>sa</code>: Sanskrit<br><code>scn</code>: Sicilian<br><code>sd</code>: Sindhi<br><code>sg</code>: Sango<br><code>shn</code>: Shan<br><code>si</code>: Sinhalese<br><code>sk</code>: Slovak<br><code>sl</code>: Slovenian<br><code>sm</code>: Samoan<br><code>sn</code>: Shona<br><code>so</code>: Somali<br><code>sq</code>: Albanian<br><code>sr</code>: Serbian<br><code>ss</code>: Swati<br><code>st</code>: Sesotho<br><code>su</code>: Sundanese<br><code>sv</code>: Swedish<br><code>sw</code>: Swahili<br><code>szl</code>: Silesian<br><code>ta</code>: Tamil<br><code>te</code>: Telugu<br><code>tet</code>: Tetum<br><code>tg</code>: Tajik<br><code>th</code>: Thai<br><code>ti</code>: Tigrinya<br><code>tk</code>: Turkmen<br><code>tn</code>: Tswana<br><code>tr</code>: Turkish<br><code>ts</code>: Tsonga<br><code>tt</code>: Tatar<br><code>ug</code>: Uyghur<br><code>uk</code>: Ukrainian<br><code>ur</code>: Urdu<br><code>uz</code>: Uzbek<br><code>vi</code>: Vietnamese<br><code>xh</code>: Xhosa<br><code>yi</code>: Yiddish<br><code>yo</code>: Yoruba<br><code>yua</code>: Yucatec Maya<br><code>yue</code>: Cantonese<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese<br><code>zu</code>: Zulu</p><p><strong>Note</strong>: Use the multilingual method.<code>/</code> to separate, such as <code>en/ja</code>, which indicates English and Japanese.</p>
 	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
 
-	// Subtitle processing type:
-	// - 0: ASR recognition subtitle.
-	// - 1: pure subtitle translation.
-	// - 2: OCR recognition subtitle.
-	// **Note**: If the field is unspecified, ASR is used by default.
+	// <p>Subtitle processing type:</p><ul><li>0: ASR recognition subtitle</li><li>1: Pure caption translation</li><li>2: OCR recognition subtitle</li></ul><p><strong>Note</strong>: ASR is selected by default if the field is unspecified.</p>
 	ProcessType *uint64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 
-	// Area configurations for the subtitle OCR extraction box.
+	// <p>Area configurations for the subtitle OCR extraction box</p>
 	SelectingSubtitleAreasConfig *SelectingSubtitleAreasConfig `json:"SelectingSubtitleAreasConfig,omitnil,omitempty" name:"SelectingSubtitleAreasConfig"`
+
+	// <p>Suppression Template id. Only allowed to fill in when ProcessType is 0 or 2 (task type is ASR or OCR). Cannot fill in when multiple target languages are enabled.</p>
+	SubtitleEmbedId *int64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
 }
 
 type ModifySmartSubtitleTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// Unique identifier of the smart subtitle template.
+	// <p>Unique identifier of the smart subtitle template.</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Subtitle translation switch.
-	// `ON`: translation enabled.
-	// `OFF`: translation disabled.
-	// **Note**: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to `OFF`.
+	// <p>Subtitle translation switch<br><code>ON</code>: Enable translation<br><code>OFF</code>: Disable translation</p><p><strong>Note</strong>: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to <code>OFF</code>.</p>
 	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
 
-	// Smart subtitle template name.
-	// Length limit: 64 characters.
+	// <p>Intelligent subtitle template name<br>Length limit: 64 characters.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Smart subtitle template description.
-	// Length limit: 256 characters.
+	// <p>Intelligent caption template description information<br>Length limit: 256 characters.</p>
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Source language of the video with smart subtitles.
-	// OCR recognition only supports the following languages:
-	// `zh_en`: Chinese and English.
-	// `multi`: others.
-	// ASR recognition and pure subtitle translation currently support the following languages:
-	// `auto`: automatic recognition (it is only supported in pure subtitle translation).
-	// `zh`: Simplified Chinese.
-	// `en`: English.
-	// `ja`: Japanese.
-	// `ko`: Korean.
-	// `zh-PY`: Chinese, English, and Cantonese.
-	// `zh_medical`: Chinese (medical scenario).
-	// `vi`: Vietnamese.
-	// `ms`: Malay.
-	// `id`: Indonesian.
-	// `fil`: Filipino.
-	// `th`: Thai.
-	// `pt`: Portuguese.
-	// `tr`: Turkish.
-	// `ar`: Arabic.
-	// `es`: Spanish.
-	// `hi`: Hindi.
-	// `fr`: French.
-	// `de`: German.
-	// `it`: Italian.
-	// `zh_dialect`: Chinese dialect.
-	// `zh_en`: Chinese and English.
-	// `yue`: Cantonese.
-	// `ru`: Russian.
-	// `prime_zh`: Chinese, English, and Chinese dialects.
-	// `af-ZA`: Afrikaans (South Africa).
-	// `sq-AL`: Albanian (Albania).
-	// `am-ET`: Amharic (Ethiopia).
-	// `ar-DZ`: Arabic (Algeria).
-	// `ar-BH`: Arabic (Bahrain).
-	// `ar-EG`: Arabic (Egypt).
-	// `ar-IQ`: Arabic (Iraq).
-	// `ar-IL`: Arabic (Israel).
-	// `ar-JO`: Arabic (Jordan).
-	// `ar-KW`: Arabic (Kuwait).
-	// `ar-LB`: Arabic (Lebanon).
-	// `ar-MR`: Arabic (Mauritania).
-	// `ar-MA`: Arabic (Morocco).
-	// `ar-OM`: Arabic (Oman).
-	// `ar-QA`: Arabic (Qatar).
-	// `ar-SA`: Arabic (Saudi Arabia).
-	// `ar-PS`: Arabic (State of Palestine).
-	// `ar-SY`: Arabic (Syria).
-	// `ar-TN`: Arabic (Tunisia).
-	// `ar-AE`: Arabic (United Arab Emirates).
-	// `ar-YE`: Arabic (Yemen).
-	// `hy-AM`: Armenian (Armenia).
-	// `az-AZ`: Azerbaijani (Azerbaijan).
-	// `eu-ES`: Basque (Spain).
-	// `bn-BD`: Bengali (Bangladesh).
-	// `bn-IN`: Bengali (India).
-	// `bs-BA`: Bosnian (Bosnia and Herzegovina).
-	// `bg-BG`: Bulgarian (Bulgaria).
-	// `my-MM`: Burmese (Myanmar).
-	// `ca-ES`: Catalan (Spain).
-	// `hr-HR`: Croatian (Croatia).
-	// `cs-CZ`: Czech (Czech Republic).
-	// `da-DK`: Danish (Denmark).
-	// `nl-BE`: Dutch (Belgium).
-	// `nl-NL`: Dutch (Holland).
-	// `en-AU`: English (Australia).
-	// `en-CA`: English (Canada).
-	// `en-GH`: English (Ghana).
-	// `en-HK`: English (Hong Kong (China)).
-	// `en-IN`: English (India).
-	// `en-IE`: English (Ireland).
-	// `en-KE`: English (Kenya).
-	// `en-NZ`: English (New Zealand).
-	// `en-NG`: English (Nigeria).
-	// `en-PK`: English (Pakistan).
-	// `en-PH`: English (Philippines).
-	// `en-SG`: English (Singapore).
-	// `en-ZA`: English (South Africa).
-	// `en-TZ`: English (Tanzania).
-	// `en-GB`: English (UK).
-	// `en-US`: English (US).
-	// `et-EE`: Estonian (Estonia).
-	// `fil-PH`: Filipino (Philippines).
-	// `fi-FI`: Finnish (Finland).
-	// `fr-BE`: French (Belgium).
-	// `fr-CA`: French (Canada).
-	// `fr-FR`: French (France).
-	// `fr-CH`: French (Switzerland).
-	// `gl-ES`: Galician (Spain).
-	// `ka-GE`: Georgian (Georgia).
-	// `el-GR`: Greek (Greece).
-	// `gu-IN`: Gujarati (India).
-	// `iw-IL`: Hebrew (Israel).
-	// `hi-IN`: Hindi (India).
-	// `hu-HU`: Hungarian (Hungary).
-	// `is-IS`: Icelandic (Iceland).
-	// `id-ID`: Indonesian (Indonesia).
-	// `it-IT`: Italian (Italy).
-	// `it-CH`: Italian (Switzerland).
-	// `ja-JP`: Japanese (Japan).
-	// `jv-ID`: Javanese (Indonesia).
-	// `kn-IN`: Kannada (India).
-	// `kk-KZ`: Kazakh (Kazakhstan).
-	// `km-KH`: Khmer (Cambodia).
-	// `rw-RW`: Kinyarwanda (Rwanda).
-	// `ko-KR`: Korean (South Korea).
-	// `lo-LA`: Lao (Laos).
-	// `lv-LV`: Latvian (Latvia).
-	// `lt-LT`: Lithuanian (Lithuania).
-	// `mk-MK`: Macedonian (North Macedonia).
-	// `ms-MY`: Malay (Malaysia).
-	// `ml-IN`: Malayalam (India).
-	// `mr-IN`: Marathi (India).
-	// `mn-MN`: Mongolian (Mongolia).
-	// `ne-NP`: Nepali (Nepal).
-	// `no-NO`: Bokmal Norwegian (Norway).
-	// `fa-IR`: Persian (Iran).
-	// `pl-PL`: Polish (Poland).
-	// `pt-BR`: Portuguese (Brazil).
-	// `pt-PT`: Portuguese (Portugal).
-	// `ro-RO`: Romanian (Romania).
-	// `ru-RU`: Russian (Russia).
-	// `sr-RS`: Serbian (Serbia).
-	// `si-LK`: Sinhalese (Sri Lanka).
-	// `sk-SK`: Slovak (Slovakia).
-	// `sl-SI`: Slovenian (Slovenia).
-	// `st-ZA`: Sesotho (South Africa).
-	// `es-AR`: Spanish (Argentina).
-	// `es-BO`: Spanish (Bolivia).
-	// `es-CL`: Spanish (Chile).
-	// `es-CO`: Spanish (Colombia).
-	// `es-CR`: Spanish (Costa Rica).
-	// `es-DO`: Spanish (Dominican Republic).
-	// `es-EC`: Spanish (Ecuador).
-	// `es-SV`: Spanish (El Salvador).
-	// `es-GT`: Spanish (Guatemala).
-	// `es-HN`: Spanish (Honduras).
-	// `es-MX`: Spanish (Mexico).
-	// `es-NI`: Spanish (Nicaragua).
-	// `es-PA`: Spanish (Panama).
-	// `es-PY`: Spanish (Paraguay).
-	// `es-PE`: Spanish (Peru).
-	// `es-PR`: Spanish (Puerto Rico).
-	// `es-ES`: Spanish (Spain).
-	// `es-US`: Spanish (US).
-	// `es-UY`: Spanish (Uruguay).
-	// `es-VE`: Spanish (Venezuela).
-	// `su-ID`: Sundanese (Indonesia).
-	// `sw-KE`: Swahili (Kenya).
-	// `sw-TZ`: Swahili (Tanzania).
-	// `sv-SE`: Swedish (Sweden).
-	// `ta-IN`: Tamil (India).
-	// `ta-MY`: Tamil (Malaysia).
-	// `ta-SG`: Tamil (Singapore).
-	// `ta-LK`: Tamil (Sri Lanka).
-	// `te-IN`: Telugu (India).
-	// `th-TH`: Thai (Thailand).
-	// `ts-ZA`: Tsonga (South Africa).
-	// `tr-TR`: Turkish (Turkey).
-	// `uk-UA`: Ukrainian (Ukraine).
-	// `ur-IN`: Urdu (India).
-	// `ur-PK`: Urdu (Pakistan).
-	// `uz-UZ`: Uzbek (Uzbekistan).
-	// `ve-ZA`: Venda (South Africa).
-	// `vi-VN`: Vietnamese (Vietnam).
-	// `xh-ZA`: Xhosa (South Africa).
-	// `zu-ZA`: Zulu (South Africa).
-	// 
+	// <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br>ASR recognition and pure caption translation currently support the following languages:<br><code>auto</code>: Auto-identification<br><code>zh</code>: Simplified Chinese<br><code>en</code>: English<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>zh-PY</code>: Chinese-English-Cantonese<br><code>zh_medical</code>: Chinese health care<br><code>vi</code>: Vietnamese<br><code>ms</code>: Malay<br><code>id</code>: Indonesian<br><code>fil</code>: Filipino<br><code>th</code>: Thai<br><code>pt</code>: Portuguese<br><code>tr</code>: Turkish<br><code>ar</code>: Arabic<br><code>es</code>: Spanish<br><code>hi</code>: Hindi<br><code>fr</code>: French<br><code>de</code>: German<br><code>it</code>: Italian<br><code>zh_dialect</code>: Chinese dialect<br><code>zh_en</code>: Chinese-English<br><code>yue</code>: Cantonese<br><code>ru</code>: Russian<br><code>prime_zh</code>: Chinese-English dialect<br><code>af-ZA</code>: Afrikaans (South Africa)<br><code>sq-AL</code>: Albanian (Albania)<br><code>am-ET</code>: Amharic (Ethiopia)<br><code>ar-DZ</code>: Arabic (Algeria)<br><code>ar-BH</code>: Arabic (Bahrain)<br><code>ar-EG</code>: Arabic (Egypt)<br><code>ar-IQ</code>: Arabic (Iraq)<br><code>ar-IL</code>: Arabic (Israel)<br><code>ar-JO</code>: Arabic (Jordan)<br><code>ar-KW</code>: Arabic (Kuwait)<br><code>ar-LB</code>: Arabic (Lebanon)<br><code>ar-MR</code>: Arabic (Mauritania)<br><code>ar-MA</code>: Arabic (Morocco)<br><code>ar-OM</code>: Arabic (Oman)<br><code>ar-QA</code>: Arabic (Qatar)<br><code>ar-SA</code>: Arabic (Saudi Arabia)<br><code>ar-PS</code>: Arabic (State of Palestine)<br><code>ar-SY</code>: Arabic (Syria)<br><code>ar-TN</code>: Arabic (Tunisia)<br><code>ar-AE</code>: Arabic (United Arab Emirates)<br><code>ar-YE</code>: Arabic (Yemen)<br><code>hy-AM</code>: Armenian (Armenia)<br><code>az-AZ</code>: Azerbaijani (Azerbaijan)<br><code>eu-ES</code>: Basque (Spain)<br><code>bn-BD</code>: Bengali (Bangladesh)<br><code>bn-IN</code>: Bengali (India)<br><code>bs-BA</code>: Bosnian (Bosnia and Herzegovina)<br><code>bg-BG</code>: Bulgarian (Bulgaria)<br><code>my-MM</code>: Burmese (Myanmar)<br><code>ca-ES</code>: Catalan (Spain)<br><code>hr-HR</code>: Croatian (Croatia)<br><code>cs-CZ</code>: Czech (Czech Republic)<br><code>da-DK</code>: Danish (Denmark)<br><code>nl-BE</code>: Dutch (Belgium)<br><code>nl-NL</code>: Dutch (Netherlands)<br><code>en-AU</code>: English (Australia)<br><code>en-CA</code>: English (Canada)<br><code>en-GH</code>: English (Ghana)<br><code>en-HK</code>: English (Hong Kong (China))<br><code>en-IN</code>: English (India)<br><code>en-IE</code>: English (Ireland)<br><code>en-KE</code>: English (Kenya)<br><code>en-NZ</code>: English (New Zealand)<br><code>en-NG</code>: English (Nigeria)<br><code>en-PK</code>: English (Pakistan)<br><code>en-PH</code>: English (Philippines)<br><code>en-SG</code>: English (Singapore)<br><code>en-ZA</code>: English (South Africa)<br><code>en-TZ</code>: English (Tanzania)<br><code>en-GB</code>: English (UK)<br><code>en-US</code>: English (United States)<br><code>et-EE</code>: Estonian (Estonia)<br><code>fil-PH</code>: Filipino (Philippines)<br><code>fi-FI</code>: Finnish (Finland)<br><code>fr-BE</code>: French (Belgium)<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fr-CH</code>: French (Switzerland)<br><code>gl-ES</code>: Galician (Spain)<br><code>ka-GE</code>: Georgian (Georgia)<br><code>el-GR</code>: Greek (Greece)<br><code>gu-IN</code>: Gujarati (India)<br><code>iw-IL</code>: Hebrew (Israel)<br><code>hi-IN</code>: Hindi (India)<br><code>hu-HU</code>: Hungarian (Hungary)<br><code>is-IS</code>: Icelandic (Iceland)<br><code>id-ID</code>: Indonesian (Indonesia)<br><code>it-IT</code>: Italian (Italy)<br><code>it-CH</code>: Italian (Switzerland)<br><code>ja-JP</code>: Japanese (Japan)<br><code>jv-ID</code>: Javanese (Indonesia)<br><code>kn-IN</code>: Kannada (India)<br><code>kk-KZ</code>: Kazakh (Kazakhstan)<br><code>km-KH</code>: Khmer (Cambodia)<br><code>rw-RW</code>: Kinyarwanda (Rwanda)<br><code>ko-KR</code>: Korean (South Korea)<br><code>lo-LA</code>: Lao (Laos)<br><code>lv-LV</code>: Latvian (Latvia)<br><code>lt-LT</code>: Lithuanian (Lithuania)<br><code>mk-MK</code>: Macedonian (North Macedonia)<br><code>ms-MY</code>: Malay (Malaysia)<br><code>ml-IN</code>: Malayalam (India)<br><code>mr-IN</code>: Marathi (India)<br><code>mn-MN</code>: Mongolian (Mongolia)<br><code>ne-NP</code>: Nepali (Nepal)<br><code>no-NO</code>: Norwegian Bokmål (Norway)<br><code>fa-IR</code>: Persian (Iran)<br><code>pl-PL</code>: Polish (Poland)<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>ro-RO</code>: Romanian (Romania)<br><code>ru-RU</code>: Russian (Russia)<br><code>sr-RS</code>: Serbian (Serbia)<br><code>si-LK</code>: Sinhalese (Sri Lanka)<br><code>sk-SK</code>: Slovak (Slovakia)<br><code>sl-SI</code>: Slovenian (Slovenia)<br><code>st-ZA</code>: Southern Sotho (South Africa)<br><code>es-AR</code>: Spanish (Argentina)<br><code>es-BO</code>: Spanish (Bolivia)<br><code>es-CL</code>: Spanish (Chile)<br><code>es-CO</code>: Spanish (Colombia)<br><code>es-CR</code>: Spanish (Costa Rica)<br><code>es-DO</code>: Spanish (Dominican Republic)<br><code>es-EC</code>: Spanish (Ecuador)<br><code>es-SV</code>: Spanish (El Salvador)<br><code>es-GT</code>: Spanish (Guatemala)<br><code>es-HN</code>: Spanish (Honduras)<br><code>es-MX</code>: Spanish (Mexico)<br><code>es-NI</code>: Spanish (Nicaragua)<br><code>es-PA</code>: Spanish (Panama)<br><code>es-PY</code>: Spanish (Paraguay)<br><code>es-PE</code>: Spanish (Peru)<br><code>es-PR</code>: Spanish (Puerto Rico)<br><code>es-ES</code>: Spanish (Spain)<br><code>es-US</code>: Spanish (United States)<br><code>es-UY</code>: Spanish (Uruguay)<br><code>es-VE</code>: Spanish (Venezuela)<br><code>su-ID</code>: Sundanese (Indonesia)<br><code>sw-KE</code>: Swahili (Kenya)<br><code>sw-TZ</code>: Swahili (Tanzania)<br><code>sv-SE</code>: Swedish (Sweden)<br><code>ta-IN</code>: Tamil (India)<br><code>ta-MY</code>: Tamil (Malaysia)<br><code>ta-SG</code>: Tamil (Singapore)<br><code>ta-LK</code>: Tamil (Sri Lanka)<br><code>te-IN</code>: Telugu (India)<br><code>th-TH</code>: Thai (Thailand)<br><code>ts-ZA</code>: Tsonga (South Africa)<br><code>tr-TR</code>: Turkish (Türkiye)<br><code>uk-UA</code>: Ukrainian (Ukraine)<br><code>ur-IN</code>: Urdu (India)<br><code>ur-PK</code>: Urdu (Pakistan)<br><code>uz-UZ</code>: Uzbek (Uzbekistan)<br><code>ve-ZA</code>: Venda (South Africa)<code>vi-VN</code>: Vietnamese (Vietnam)<br><code>xh-ZA</code>: Xhosa (South Africa)<br><code>zu-ZA</code>: Zulu (South Africa)</p>
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
-	// Smart subtitle file format:
-	// - Under the ASR recognition and translation processing type:
-	//      - vtt: WebVTT format subtitle.
-	//      - srt: SRT format subtitle.
-	//      - Unspecified or left blank: no subtitle file generated.
-	// - Under the pure subtitle translation processing type:
-	//     - original: consistent with the source file.
-	//     - vtt: WebVTT format subtitle.
-	//     - srt: SRT format subtitle.
-	// - Under the OCR recognition and translation processing type:
-	//      - vtt: WebVTT format subtitle.
-	//      - srt: SRT format subtitle.
-	// **Note**:
-	// - For ASR recognition mode, when 2 or more languages are involved in translation, this field cannot be unspecified or left blank.
-	// - For pure subtitle translation and OCR recognition mode, this field cannot be unspecified or left blank.
+	// <p>Intelligent subtitle file format:</p><ul><li>For ASR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li><li>Leave blank or fill in the blank: no subtitle file generated</li></ul></li><li>For pure subtitle translation processing type:<ul><li>original: consistent with the source file</li><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li><li>For OCR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li></ul><p><strong>Note</strong>:</p><ul><li>For ASR recognition method, do not leave blank or not pass when translating 2 or more languages.</li><li>For pure subtitle translation method, do not leave blank or not pass.</li><li>For OCR tasks, it is allowed to leave blank or not pass when suppression is enabled.</li></ul>
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
-	// Smart subtitle language type.
-	// 0: source language
-	// 1: target language
-	// 2: source language + target language
-	// The value can only be 0 when TranslateSwitch is set to OFF. The value can only be 1 or 2 when TranslateSwitch is set to ON.
+	// <p>Intelligent caption subtitle language type<br>0: Source language<br>1: Target language<br>2: Source language + target language<br>Only 0 is supported when TranslateSwitch is OFF<br>Only 1 or 2 is supported when TranslateSwitch is ON</p>
 	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
 
-	// ASR hotword lexicon parameter.
+	// <p>ASR hot word lexicon parameter</p>
 	AsrHotWordsConfigure *AsrHotWordsConfigure `json:"AsrHotWordsConfigure,omitnil,omitempty" name:"AsrHotWordsConfigure"`
 
-	// Target language for subtitle translation.
-	// This parameter takes effect when the value of TranslateSwitch is ON. Valid translation languages:`ab`: Abkhazian.`ace`: Acehnese.`ach`: Acholi.`af`: Afrikaans.`ak`: Twi (Akan).`am`: Amharic.`ar`: Arabic.`as`: Assamese.`ay`: Aymara.`az`: Azerbaijani.`ba`: Bashkir.`ban`: Balinese.`bbc`: Batak toba.`bem`: Bemba.`bew`: Betawi.`bg`: Bulgarian.`bho`: Bhojpuri.`bik`: Bikol.`bm`: Bambara.`bn`: Bengali.`br`: Breton.`bs`: Bosnian.`btx`: Batak Karo.`bts`: Batak Simalungun.`bua`: Buryat.`ca`: Catalan.`ceb`: Cebuano.`cgg`: Kiga.`chm`: Meadow Mari.`ckb`: Kurdish (Sorani).`cnh`: Hakha Chin.`co`: Corsican.`crh`: Crimean Tatar.`crs`: Seychellois Creole.`cs`: Czech.`cv`: Chuvash.`cy`: Welsh.`da`: Danish.`de`: German.`din`: Dinka.`doi`: Dogri.`dov`: Dombe.`dv`: Dhivehi.`dz`: Dzongkha.`ee`: Ewe.`el`: Greek.`en`: English.`eo`: Esperanto.`es`: Spanish.`et`: Estonian.`eu`: Basque.`fa`: Persian.`ff`: Fulah.`fi`: Finnish.`fil`: Filipino (Tagalog).`fj`: Fijian.`fr`: French.`fr-CA`: French (Canada).`fr-FR`: French (France).`fy`: Frisian.`ga`: Irish.`gaa`: Ga.
-	// `gd`: Scottish Gaelic.`gl`: Galician.`gn`: Guarani.`gom`: Konkani.`gu`: Gujarati.`gv`: Manx.`ha`: Hausa.`haw`: Hawaiian.`he`: Hebrew.`hi`: Hindi.`hil`: Hiligaynon.`hmn`: Hmong.`hr`: Croatian.`hrx`: Hunsrik.`ht`: Haitian Creole.`hu`: Hungarian.`hy`: Armenian.`id`: Indonesian.`ig`: Igbo.`ilo`: Iloko.`is`: Icelandic.`it`: Italian.`iw`: Hebrew.`ja`: Japanese.`jv`: Javanese.`ka`: Georgian.`kk`: Kazakh.`km`: Khmer.`kn`: Kannada.`ko`: Korean.`kri`: Krio.`ku`: Kurdish (Kurmanji).`ktu`: Kituba.`ky`: Kyrgyz.`la`: Latin.`lb`: Luxembourgish.`lg`: Ganda (Luganda).`li`: Limburgish.`lij`: Ligurian.`lmo`: Lombard.`ln`: Lingala.`lo`: Lao.`lt`: Lithuanian.`ltg`: Latgalian.`luo`: Luo.`lus`: Mizo.`lv`: Latvian.`mai`: Maithili.`mak`: Makasar.`mg`: Malagasy.`mi`: Maori.`min`: Minangkabau.`mk`: Macedonian.`ml`: Malayalam.`mn`: Mongolian.`mr`: Marathi.`ms`: Malay.`mt`: Maltese.`my`: Burmese.`ne`: Nepali.`new`: Newari.`nl`: Dutch.`no`: Norwegian.`nr`: Southern Ndebele.`nso`: Northern Sotho (Sepedi).`nus`: Nuer.`ny`: Chichewa (Nyanja).`oc`: Occitan.`om`: Oromo.`or`: Odia.`pa`: Punjabi.`pag`: Pangasinan.`pam`: Kapampangan.`pap`: Papiamento.`pl`: Polish.`ps`: Pashto.`pt`: Portuguese.`pt-BR`: Portuguese (Brazil).`pt-PT`: Portuguese (Portugal).`qu`: Quechua.`ro`: Romanian.`rom`: Romani.`rn`: Rundi.`ru`: Russian.`rw`: Kinyarwanda.`sa`: Sanskrit.`scn`: Sicilian.`sd`: Sindhi.`sg`: Sango.`shn`: Shan.`si`: Sinhala.`sk`: Slovak.`sl`: Slovenian.`sm`: Samoan.`sn`: Shona.`so`: Somali.`sq`: Albanian.`sr`: Serbian.`ss`: Swazi.`st`: Southern Sotho.`su`: Sundanese.`sv`: Swedish.`sw`: Swahili.`szl`: Silesian.`ta`: Tamil.`te`: Telugu.`tet`: Tetum.`tg`: Tajik.`th`: Thai.`ti`: Tigrinya.`tk`: Turkmen.`tn`: Tswana.`tr`: Turkish.`ts`: Tsonga.`tt`: Tatar.`ug`: Uyghur.`uk`: Ukrainian.`ur`: Urdu.`uz`: Uzbek.`vi`: Vietnamese.`xh`: Xhosa.`yi`: Yiddish.`yo`: Yoruba.`yua`: Yucatec Maya.`yue`: Cantonese.`zh`: Chinese (Simplified).`zh-TW`: Chinese (Traditional).`zu`: Zulu.**Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
+	// <p>Subtitle target language<br>Take effect when TranslateSwitch is ON. Translation language list:<br><code>ab</code>: Abkhaz<br><code>ace</code>: Acehnese<br><code>ach</code>: Acholi<br><code>af</code>: Afrikaans<br><code>ak</code>: Akan<br><code>am</code>: Amharic<br><code>ar</code>: Arabic<br><code>as</code>: Assamese<br><code>ay</code>: Aymara<br><code>az</code>: Azerbaijani<br><code>ba</code>: Bashkir<br><code>ban</code>: Balinese<br><code>bbc</code>: Batak Toba<br><code>bem</code>: Bemba<br><code>bew</code>: Betawi<br><code>bg</code>: Bulgarian<br><code>bho</code>: Bhojpuri<br><code>bik</code>: Bikol<br><code>bm</code>: Bambara<br><code>bn</code>: Bengali<br><code>br</code>: Breton<br><code>bs</code>: Bosnian<br><code>btx</code>: Batak Karo<br><code>bts</code>: Batak Simalungun<br><code>bua</code>: Buryat<br><code>ca</code>: Catalan<br><code>ceb</code>: Cebuano<br><code>cgg</code>: Kiga<br><code>chm</code>: Meadow Mari<br><code>ckb</code>: Kurdish (Sorani)<br><code>cnh</code>: Hakha Chin<br><code>co</code>: Corsican<br><code>crh</code>: Crimean Tatar<br><code>crs</code>: Seychellois Creole<br><code>cs</code>: Czech<br><code>cv</code>: Chuvash<br><code>cy</code>: Welsh<br><code>da</code>: Danish<br><code>de</code>: German<br><code>din</code>: Dinka<br><code>doi</code>: Dogri<br><code>dov</code>: Dombe<br><code>dv</code>: Dhivehi<br><code>dz</code>: Dzongkha<br><code>ee</code>: Ewe<br><code>el</code>: Greek<br><code>en</code>: English<br><code>eo</code>: Esperanto<br><code>es</code>: Spanish<br><code>et</code>: Estonian<br><code>eu</code>: Basque<br><code>fa</code>: Persian<br><code>ff</code>: Fula<br><code>fi</code>: Finnish<br><code>fil</code>: Filipino (Tagalog)<br><code>fj</code>: Fijian<br><code>fr</code>: French<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fy</code>: Frisian<br><code>ga</code>: Irish<br><code>gaa</code>: GaLanguage<br><code>gd</code>: Scottish Gaelic<br><code>gl</code>: Galician<br><code>gn</code>: Guarani<br><code>gom</code>: Konkani<br><code>gu</code>: Gujarati<br><code>gv</code>: Manx<br><code>ha</code>: Hausa<br><code>haw</code>: Hawaiian<br><code>he</code>: Hebrew<br><code>hi</code>: Hindi<br><code>hil</code>: Hiligaynon<br><code>hmn</code>: Hmong<br><code>hr</code>: Croatian<br><code>hrx</code>: Hunsrik<br><code>ht</code>: Haitian Creole<br><code>hu</code>: Hungarian<br><code>hy</code>: Armenian<br><code>id</code>: Indonesian<br><code>ig</code>: Igbo<br><code>ilo</code>: Ilocano<br><code>is</code>: Icelandic<br><code>it</code>: Italian<br><code>iw</code>: Hebrew<br><code>ja</code>: Japanese<br><code>jv</code>: Javanese<br><code>ka</code>: Georgian<br><code>kk</code>: Kazakh<br><code>km</code>: Khmer<br><code>kn</code>: Kannada<br><code>ko</code>: Korean<br><code>kri</code>: Krio<br><code>ku</code>: Kurdish (Kurmanji)<br><code>ktu</code>: Kituba<br><code>ky</code>: Kyrgyz<br><code>la</code>: Latin<br><code>lb</code>: Luxembourgish<br><code>lg</code>: Ganda (Luganda)<br><code>li</code>: Limburgish<br><code>lij</code>: Ligurian<br><code>lmo</code>: Lombard<br><code>ln</code>: Lingala<br><code>lo</code>: Lao<br><code>lt</code>: Lithuanian<br><code>ltg</code>: Latgalian<br><code>luo</code>: Luo<br><code>lus</code>: Mizo<br><code>lv</code>: Latvian<br><code>mai</code>: Maithili<br><code>mak</code>: Makassar<br><code>mg</code>: Malagasy<br><code>mi</code>: Maori<br><code>min</code>: Minangkabau<br><code>mk</code>: Macedonian<br><code>ml</code>: Malayalam<br><code>mn</code>: Mongolian<br><code>mr</code>: Marathi<br><code>ms</code>: Malay<br><code>mt</code>: Maltese<br><code>my</code>: Burmese<br><code>ne</code>: Nepali<br><code>new</code>: Newari<br><code>nl</code>: Dutch<br><code>no</code>: Norwegian<br><code>nr</code>: Southern Ndebele<br><code>nso</code>: Northern Sotho (Sepedi)<br><code>nus</code>: Nuer<br><code>ny</code>: Chichewa (Nyanja)<br><code>oc</code>: Occitan<br><code>om</code>: Oromo<br><code>or</code>: Odia<br><code>pa</code>: Punjabi<br><code>pag</code>: Pangasinan<br><code>pam</code>: Kapampangan<br><code>pap</code>: Papiamento<br><code>pl</code>: Polish<br><code>ps</code>: Pashto<br><code>pt</code>: Portuguese<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>qu</code>: Quechua<br><code>ro</code>: Romanian<br><code>rom</code>: Romani<br><code>rn</code>: Rundi<br><code>ru</code>: Russian<br><code>rw</code>: Kinyarwanda<br><code>sa</code>: Sanskrit<br><code>scn</code>: Sicilian<br><code>sd</code>: Sindhi<br><code>sg</code>: Sango<br><code>shn</code>: Shan<br><code>si</code>: Sinhalese<br><code>sk</code>: Slovak<br><code>sl</code>: Slovenian<br><code>sm</code>: Samoan<br><code>sn</code>: Shona<br><code>so</code>: Somali<br><code>sq</code>: Albanian<br><code>sr</code>: Serbian<br><code>ss</code>: Swati<br><code>st</code>: Sesotho<br><code>su</code>: Sundanese<br><code>sv</code>: Swedish<br><code>sw</code>: Swahili<br><code>szl</code>: Silesian<br><code>ta</code>: Tamil<br><code>te</code>: Telugu<br><code>tet</code>: Tetum<br><code>tg</code>: Tajik<br><code>th</code>: Thai<br><code>ti</code>: Tigrinya<br><code>tk</code>: Turkmen<br><code>tn</code>: Tswana<br><code>tr</code>: Turkish<br><code>ts</code>: Tsonga<br><code>tt</code>: Tatar<br><code>ug</code>: Uyghur<br><code>uk</code>: Ukrainian<br><code>ur</code>: Urdu<br><code>uz</code>: Uzbek<br><code>vi</code>: Vietnamese<br><code>xh</code>: Xhosa<br><code>yi</code>: Yiddish<br><code>yo</code>: Yoruba<br><code>yua</code>: Yucatec Maya<br><code>yue</code>: Cantonese<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese<br><code>zu</code>: Zulu</p><p><strong>Note</strong>: Use the multilingual method.<code>/</code> to separate, such as <code>en/ja</code>, which indicates English and Japanese.</p>
 	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
 
-	// Subtitle processing type:
-	// - 0: ASR recognition subtitle.
-	// - 1: pure subtitle translation.
-	// - 2: OCR recognition subtitle.
-	// **Note**: If the field is unspecified, ASR is used by default.
+	// <p>Subtitle processing type:</p><ul><li>0: ASR recognition subtitle</li><li>1: Pure caption translation</li><li>2: OCR recognition subtitle</li></ul><p><strong>Note</strong>: ASR is selected by default if the field is unspecified.</p>
 	ProcessType *uint64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 
-	// Area configurations for the subtitle OCR extraction box.
+	// <p>Area configurations for the subtitle OCR extraction box</p>
 	SelectingSubtitleAreasConfig *SelectingSubtitleAreasConfig `json:"SelectingSubtitleAreasConfig,omitnil,omitempty" name:"SelectingSubtitleAreasConfig"`
+
+	// <p>Suppression Template id. Only allowed to fill in when ProcessType is 0 or 2 (task type is ASR or OCR). Cannot fill in when multiple target languages are enabled.</p>
+	SubtitleEmbedId *int64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
 }
 
 func (r *ModifySmartSubtitleTemplateRequest) ToJsonString() string {
@@ -15623,6 +15053,7 @@ func (r *ModifySmartSubtitleTemplateRequest) FromJsonString(s string) error {
 	delete(f, "TranslateDstLanguage")
 	delete(f, "ProcessType")
 	delete(f, "SelectingSubtitleAreasConfig")
+	delete(f, "SubtitleEmbedId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySmartSubtitleTemplateRequest has unknown keys!", "")
 	}
@@ -15767,6 +15198,81 @@ func (r *ModifySnapshotByTimeOffsetTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifySnapshotByTimeOffsetTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySubtitleEmbedTemplateRequestParams struct {
+	// <p>Unique identifier of the subtitle suppression template</p>
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Subtitle suppression name<br>Length limit: 64 characters.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Subtitle suppression template description information<br>Length limit: 256 characters.</p>
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// <p>Subtitle suppression configuration</p>
+	SubtitleEmbedConfig *SubtitleEmbedConfig `json:"SubtitleEmbedConfig,omitnil,omitempty" name:"SubtitleEmbedConfig"`
+}
+
+type ModifySubtitleEmbedTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Unique identifier of the subtitle suppression template</p>
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Subtitle suppression name<br>Length limit: 64 characters.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Subtitle suppression template description information<br>Length limit: 256 characters.</p>
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// <p>Subtitle suppression configuration</p>
+	SubtitleEmbedConfig *SubtitleEmbedConfig `json:"SubtitleEmbedConfig,omitnil,omitempty" name:"SubtitleEmbedConfig"`
+}
+
+func (r *ModifySubtitleEmbedTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySubtitleEmbedTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definition")
+	delete(f, "Name")
+	delete(f, "Comment")
+	delete(f, "SubtitleEmbedConfig")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySubtitleEmbedTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySubtitleEmbedTemplateResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifySubtitleEmbedTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifySubtitleEmbedTemplateResponseParams `json:"Response"`
+}
+
+func (r *ModifySubtitleEmbedTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySubtitleEmbedTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -16202,23 +15708,20 @@ type OcrWordsConfigureInfoForUpdate struct {
 }
 
 type OverrideEraseParameter struct {
-	// Erasing type.
-	// -subtitle: subtitle removal.
-	// -watermark: watermark removal.
-	// -privacy: privacy protection.
+	// <p>Removal Type</p><ul><li>subtitle removal</li><li>watermark removal</li><li>privacy protection</li></ul>
 	EraseType *string `json:"EraseType,omitnil,omitempty" name:"EraseType"`
 
-	// Subtitle erasing configuration.
-	// This field is required when the value of EraseType is subtitle.
+	// <p>Subtitle erasing configuration;<br>This field is required when the value of EraseType is set to subtitle.</p>
 	EraseSubtitleConfig *UpdateSmartEraseSubtitleConfig `json:"EraseSubtitleConfig,omitnil,omitempty" name:"EraseSubtitleConfig"`
 
-	// Watermark erasing configuration.
-	// This field is required when the value of EraseType is watermark.
+	// <p>Watermark erasing configuration.<br>This field is required when the value of EraseType is set to watermark.</p>
 	EraseWatermarkConfig *UpdateSmartEraseWatermarkConfig `json:"EraseWatermarkConfig,omitnil,omitempty" name:"EraseWatermarkConfig"`
 
-	// Privacy protection configuration.
-	// This field is required when the value of EraseType is privacy.
+	// <p>Privacy protection configuration.<br>This field is required when the value of EraseType is privacy.</p>
 	ErasePrivacyConfig *UpdateSmartErasePrivacyConfig `json:"ErasePrivacyConfig,omitnil,omitempty" name:"ErasePrivacyConfig"`
+
+	// <p>id of the subtitle removal suppression template.</p>
+	SubtitleEmbedId *int64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
 }
 
 type OverrideTranscodeParameter struct {
@@ -16845,7 +16348,7 @@ type ProcessImageTemplate struct {
 
 // Predefined struct for user
 type ProcessLiveStreamRequestParams struct {
-	// <p>Live stream URL (this must be a live stream address; supported formats include RTMP, HLS, FLV, TRTC, WebRTC, and SRT).<br>TRTC address example:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room ID, which is a number.<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID.<br><code>&lt;userid&gt;</code> is the ID of the user who enters the room, which can be used to distinguish bots.<br><code>&lt;usersig&gt;</code> is the TRTC user signature.</p><p>WebRTC supports <a href="https://www.tencentcloud.com/product/leb?from_cn_redirect=1">LEB</a> live streams. For more information about how to obtain the address, see <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">this reference</a>.</p><p>For supported SRT addresses, see <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">this reference</a>.</p>
+	// <p>The live streaming URL (must be a live streaming address, supporting rtmp, hls, flv, trtc, webrtc, srt, etc.).<br>The trtc address is as follows:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the trtc room number ID, which must be a number.<br><code>&lt;sdkappid&gt;</code> is the trtc SDK app ID.<br><code>&lt;userid&gt;</code> is the user ID of the service entering the room, which can distinguish robots.<br><code>&lt;usersig&gt;</code> is the trtc user's signature.</p><p>WebRTC supports the live stream of <a href="https://www.tencentcloud.com/product/leb?from_cn_redirect=1">LEB</a>. To obtain the address, <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">see</a>.</p><p>For SRT-supported addresses, <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">refer</a>.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// <p>Event notification information of the task. This is used to specify the live stream processing result.</p>
@@ -16888,7 +16391,7 @@ type ProcessLiveStreamRequestParams struct {
 type ProcessLiveStreamRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Live stream URL (this must be a live stream address; supported formats include RTMP, HLS, FLV, TRTC, WebRTC, and SRT).<br>TRTC address example:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room ID, which is a number.<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID.<br><code>&lt;userid&gt;</code> is the ID of the user who enters the room, which can be used to distinguish bots.<br><code>&lt;usersig&gt;</code> is the TRTC user signature.</p><p>WebRTC supports <a href="https://www.tencentcloud.com/product/leb?from_cn_redirect=1">LEB</a> live streams. For more information about how to obtain the address, see <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">this reference</a>.</p><p>For supported SRT addresses, see <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">this reference</a>.</p>
+	// <p>The live streaming URL (must be a live streaming address, supporting rtmp, hls, flv, trtc, webrtc, srt, etc.).<br>The trtc address is as follows:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the trtc room number ID, which must be a number.<br><code>&lt;sdkappid&gt;</code> is the trtc SDK app ID.<br><code>&lt;userid&gt;</code> is the user ID of the service entering the room, which can distinguish robots.<br><code>&lt;usersig&gt;</code> is the trtc user's signature.</p><p>WebRTC supports the live stream of <a href="https://www.tencentcloud.com/product/leb?from_cn_redirect=1">LEB</a>. To obtain the address, <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">see</a>.</p><p>For SRT-supported addresses, <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">refer</a>.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// <p>Event notification information of the task. This is used to specify the live stream processing result.</p>
@@ -17523,252 +17026,66 @@ type RawImageWatermarkInput struct {
 }
 
 type RawSmartEraseParameter struct {
-	// Specifies the removal type.
-	// -subtitle removal.
-	// -Remove watermark.
-	// -privacy protection.
+	// <p>Removal Type</p><ul><li>subtitle removal</li><li>watermark removal</li><li>privacy protection</li></ul>
 	EraseType *string `json:"EraseType,omitnil,omitempty" name:"EraseType"`
 
-	// Subtitle erasure configuration.
-	// When EraseType is subtitle, this field is required.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Subtitle erasing configuration;<br>This field is required when the value of EraseType is set to subtitle.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	EraseSubtitleConfig *SmartEraseSubtitleConfig `json:"EraseSubtitleConfig,omitnil,omitempty" name:"EraseSubtitleConfig"`
 
-	// Specifies the watermark removal configuration.
-	// When EraseType is watermark, this field is required.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Watermark erasing configuration.<br>This field is required when the value of EraseType is set to watermark.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	EraseWatermarkConfig *SmartEraseWatermarkConfig `json:"EraseWatermarkConfig,omitnil,omitempty" name:"EraseWatermarkConfig"`
 
-	// Privacy protection configuration.
-	// When EraseType is privacy, this field is required.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Privacy protection configuration.<br>This field is required when the value of EraseType is privacy.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ErasePrivacyConfig *SmartErasePrivacyConfig `json:"ErasePrivacyConfig,omitnil,omitempty" name:"ErasePrivacyConfig"`
+
+	// <p>id of the subtitle removal suppression template.</p>
+	SubtitleEmbedId *int64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
+
+	// <p>Suppression configuration, enabled by default, moves subtitles back to the original subtitle position.</p>
+	UseOriginalPos *int64 `json:"UseOriginalPos,omitnil,omitempty" name:"UseOriginalPos"`
+
+	// <p>Suppression configuration, enabled by default. When enabled, use the original subtitle font size.</p>
+	UseOriginalSize *int64 `json:"UseOriginalSize,omitnil,omitempty" name:"UseOriginalSize"`
 }
 
 type RawSmartSubtitleParameter struct {
-	// Smart subtitle language type.
-	// 0: source language
-	// 1: target language
-	// 2: source language + target language
-	// The value can only be 0 when TranslateSwitch is set to OFF. The value can only be 1 or 2 when TranslateSwitch is set to ON.
+	// <p>Intelligent caption subtitle language type<br>0: Source language<br>1: Target language<br>2: Source language + target language<br>Only 0 is supported when TranslateSwitch is OFF<br>Only 1 or 2 is supported when TranslateSwitch is ON</p>
 	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
 
-	// Source language of the video with smart subtitles.
-	// OCR recognition only supports the following languages:
-	// `zh_en`: Chinese and English.
-	// `multi`: others.
-	// ASR recognition and pure subtitle translation currently support the following languages:
-	// `auto`: automatic recognition (it is only supported in pure subtitle translation).
-	// `zh`: Simplified Chinese.
-	// `en`: English.
-	// `ja`: Japanese.
-	// `ko`: Korean.
-	// `zh-PY`: Chinese, English, and Cantonese.
-	// `zh_medical`: Chinese (medical scenario).
-	// `vi`: Vietnamese.
-	// `ms`: Malay.
-	// `id`: Indonesian.
-	// `fil`: Filipino.
-	// `th`: Thai.
-	// `pt`: Portuguese.
-	// `tr`: Turkish.
-	// `ar`: Arabic.
-	// `es`: Spanish.
-	// `hi`: Hindi.
-	// `fr`: French.
-	// `de`: German.
-	// `it`: Italian.
-	// `zh_dialect`: Chinese dialect.
-	// `zh_en`: Chinese and English.
-	// `yue`: Cantonese.
-	// `ru`: Russian.
-	// `prime_zh`: Chinese, English, and Chinese dialects.
-	// `af-ZA`: Afrikaans (South Africa).
-	// `sq-AL`: Albanian (Albania).
-	// `am-ET`: Amharic (Ethiopia).
-	// `ar-DZ`: Arabic (Algeria).
-	// `ar-BH`: Arabic (Bahrain).
-	// `ar-EG`: Arabic (Egypt).
-	// `ar-IQ`: Arabic (Iraq).
-	// `ar-IL`: Arabic (Israel).
-	// `ar-JO`: Arabic (Jordan).
-	// `ar-KW`: Arabic (Kuwait).
-	// `ar-LB`: Arabic (Lebanon).
-	// `ar-MR`: Arabic (Mauritania).
-	// `ar-MA`: Arabic (Morocco).
-	// `ar-OM`: Arabic (Oman).
-	// `ar-QA`: Arabic (Qatar).
-	// `ar-SA`: Arabic (Saudi Arabia).
-	// `ar-PS`: Arabic (State of Palestine).
-	// `ar-SY`: Arabic (Syria).
-	// `ar-TN`: Arabic (Tunisia).
-	// `ar-AE`: Arabic (United Arab Emirates).
-	// `ar-YE`: Arabic (Yemen).
-	// `hy-AM`: Armenian (Armenia).
-	// `az-AZ`: Azerbaijani (Azerbaijan).
-	// `eu-ES`: Basque (Spain).
-	// `bn-BD`: Bengali (Bangladesh).
-	// `bn-IN`: Bengali (India).
-	// `bs-BA`: Bosnian (Bosnia and Herzegovina).
-	// `bg-BG`: Bulgarian (Bulgaria).
-	// `my-MM`: Burmese (Myanmar).
-	// `ca-ES`: Catalan (Spain).
-	// `hr-HR`: Croatian (Croatia).
-	// `cs-CZ`: Czech (Czech Republic).
-	// `da-DK`: Danish (Denmark).
-	// `nl-BE`: Dutch (Belgium).
-	// `nl-NL`: Dutch (Holland).
-	// `en-AU`: English (Australia).
-	// `en-CA`: English (Canada).
-	// `en-GH`: English (Ghana).
-	// `en-HK`: English (Hong Kong (China)).
-	// `en-IN`: English (India).
-	// `en-IE`: English (Ireland).
-	// `en-KE`: English (Kenya).
-	// `en-NZ`: English (New Zealand).
-	// `en-NG`: English (Nigeria).
-	// `en-PK`: English (Pakistan).
-	// `en-PH`: English (Philippines).
-	// `en-SG`: English (Singapore).
-	// `en-ZA`: English (South Africa).
-	// `en-TZ`: English (Tanzania).
-	// `en-GB`: English (UK).
-	// `en-US`: English (US).
-	// `et-EE`: Estonian (Estonia).
-	// `fil-PH`: Filipino (Philippines).
-	// `fi-FI`: Finnish (Finland).
-	// `fr-BE`: French (Belgium).
-	// `fr-CA`: French (Canada).
-	// `fr-FR`: French (France).
-	// `fr-CH`: French (Switzerland).
-	// `gl-ES`: Galician (Spain).
-	// `ka-GE`: Georgian (Georgia).
-	// `el-GR`: Greek (Greece).
-	// `gu-IN`: Gujarati (India).
-	// `iw-IL`: Hebrew (Israel).
-	// `hi-IN`: Hindi (India).
-	// `hu-HU`: Hungarian (Hungary).
-	// `is-IS`: Icelandic (Iceland).
-	// `id-ID`: Indonesian (Indonesia).
-	// `it-IT`: Italian (Italy).
-	// `it-CH`: Italian (Switzerland).
-	// `ja-JP`: Japanese (Japan).
-	// `jv-ID`: Javanese (Indonesia).
-	// `kn-IN`: Kannada (India).
-	// `kk-KZ`: Kazakh (Kazakhstan).
-	// `km-KH`: Khmer (Cambodia).
-	// `rw-RW`: Kinyarwanda (Rwanda).
-	// `ko-KR`: Korean (South Korea).
-	// `lo-LA`: Lao (Laos).
-	// `lv-LV`: Latvian (Latvia).
-	// `lt-LT`: Lithuanian (Lithuania).
-	// `mk-MK`: Macedonian (North Macedonia).
-	// `ms-MY`: Malay (Malaysia).
-	// `ml-IN`: Malayalam (India).
-	// `mr-IN`: Marathi (India).
-	// `mn-MN`: Mongolian (Mongolia).
-	// `ne-NP`: Nepali (Nepal).
-	// `no-NO`: Bokmål Norwegian (Norway).
-	// `fa-IR`: Persian (Iran).
-	// `pl-PL`: Polish (Poland).
-	// `pt-BR`: Portuguese (Brazil).
-	// `pt-PT`: Portuguese (Portugal).
-	// `ro-RO`: Romanian (Romania).
-	// `ru-RU`: Russian (Russia).
-	// `sr-RS`: Serbian (Serbia).
-	// `si-LK`: Sinhalese (Sri Lanka).
-	// `sk-SK`: Slovak (Slovakia).
-	// `sl-SI`: Slovenian (Slovenia).
-	// `st-ZA`: Sesotho (South Africa).
-	// `es-AR`: Spanish (Argentina).
-	// `es-BO`: Spanish (Bolivia).
-	// `es-CL`: Spanish (Chile).
-	// `es-CO`: Spanish (Colombia).
-	// `es-CR`: Spanish (Costa Rica).
-	// `es-DO`: Spanish (Dominican Republic).
-	// `es-EC`: Spanish (Ecuador).
-	// `es-SV`: Spanish (El Salvador).
-	// `es-GT`: Spanish (Guatemala).
-	// `es-HN`: Spanish (Honduras).
-	// `es-MX`: Spanish (Mexico).
-	// `es-NI`: Spanish (Nicaragua).
-	// `es-PA`: Spanish (Panama).
-	// `es-PY`: Spanish (Paraguay).
-	// `es-PE`: Spanish (Peru).
-	// `es-PR`: Spanish (Puerto Rico).
-	// `es-ES`: Spanish (Spain).
-	// `es-US`: Spanish (US).
-	// `es-UY`: Spanish (Uruguay).
-	// `es-VE`: Spanish (Venezuela).
-	// `su-ID`: Sundanese (Indonesia).
-	// `sw-KE`: Swahili (Kenya).
-	// `sw-TZ`: Swahili (Tanzania).
-	// `sv-SE`: Swedish (Sweden).
-	// `ta-IN`: Tamil (India).
-	// `ta-MY`: Tamil (Malaysia).
-	// `ta-SG`: Tamil (Singapore).
-	// `ta-LK`: Tamil (Sri Lanka).
-	// `te-IN`: Telugu (India).
-	// `th-TH`: Thai (Thailand).
-	// `ts-ZA`: Tsonga (South Africa).
-	// `tr-TR`: Turkish (Turkey).
-	// `uk-UA`: Ukrainian (Ukraine).
-	// `ur-IN`: Urdu (India).
-	// `ur-PK`: Urdu (Pakistan).
-	// `uz-UZ`: Uzbek (Uzbekistan).
-	// `ve-ZA`: Venda (South Africa).
-	// `vi-VN`: Vietnamese (Vietnam).
-	// `xh-ZA`: Xhosa (South Africa).
-	// `zu-ZA`: Zulu (South Africa).
+	// <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br>ASR recognition and pure caption translation currently support the following languages:<br><code>auto</code>: Auto-identification<br><code>zh</code>: Simplified Chinese<br><code>en</code>: English<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>zh-PY</code>: Chinese-English-Cantonese<br><code>zh_medical</code>: Chinese health care<br><code>vi</code>: Vietnamese<br><code>ms</code>: Malay<br><code>id</code>: Indonesian<br><code>fil</code>: Filipino<br><code>th</code>: Thai<br><code>pt</code>: Portuguese<br><code>tr</code>: Turkish<br><code>ar</code>: Arabic<br><code>es</code>: Spanish<br><code>hi</code>: Hindi<br><code>fr</code>: French<br><code>de</code>: German<br><code>it</code>: Italian<br><code>zh_dialect</code>: Chinese dialect<br><code>zh_en</code>: Chinese-English<br><code>yue</code>: Cantonese<br><code>ru</code>: Russian<br><code>prime_zh</code>: Chinese-English dialect<br><code>af-ZA</code>: Afrikaans (South Africa)<br><code>sq-AL</code>: Albanian (Albania)<br><code>am-ET</code>: Amharic (Ethiopia)<br><code>ar-DZ</code>: Arabic (Algeria)<br><code>ar-BH</code>: Arabic (Bahrain)<br><code>ar-EG</code>: Arabic (Egypt)<br><code>ar-IQ</code>: Arabic (Iraq)<br><code>ar-IL</code>: Arabic (Israel)<br><code>ar-JO</code>: Arabic (Jordan)<br><code>ar-KW</code>: Arabic (Kuwait)<br><code>ar-LB</code>: Arabic (Lebanon)<br><code>ar-MR</code>: Arabic (Mauritania)<br><code>ar-MA</code>: Arabic (Morocco)<br><code>ar-OM</code>: Arabic (Oman)<br><code>ar-QA</code>: Arabic (Qatar)<br><code>ar-SA</code>: Arabic (Saudi Arabia)<br><code>ar-PS</code>: Arabic (State of Palestine)<br><code>ar-SY</code>: Arabic (Syria)<br><code>ar-TN</code>: Arabic (Tunisia)<br><code>ar-AE</code>: Arabic (United Arab Emirates)<br><code>ar-YE</code>: Arabic (Yemen)<br><code>hy-AM</code>: Armenian (Armenia)<br><code>az-AZ</code>: Azerbaijani (Azerbaijan)<br><code>eu-ES</code>: Basque (Spain)<br><code>bn-BD</code>: Bengali (Bangladesh)<br><code>bn-IN</code>: Bengali (India)<br><code>bs-BA</code>: Bosnian (Bosnia and Herzegovina)<br><code>bg-BG</code>: Bulgarian (Bulgaria)<br><code>my-MM</code>: Burmese (Myanmar)<br><code>ca-ES</code>: Catalan (Spain)<br><code>hr-HR</code>: Croatian (Croatia)<br><code>cs-CZ</code>: Czech (Czech Republic)<br><code>da-DK</code>: Danish (Denmark)<br><code>nl-BE</code>: Dutch (Belgium)<br><code>nl-NL</code>: Dutch (Netherlands)<br><code>en-AU</code>: English (Australia)<br><code>en-CA</code>: English (Canada)<br><code>en-GH</code>: English (Ghana)<br><code>en-HK</code>: English (Hong Kong (China))<br><code>en-IN</code>: English (India)<br><code>en-IE</code>: English (Ireland)<br><code>en-KE</code>: English (Kenya)<br><code>en-NZ</code>: English (New Zealand)<br><code>en-NG</code>: English (Nigeria)<br><code>en-PK</code>: English (Pakistan)<br><code>en-PH</code>: English (Philippines)<br><code>en-SG</code>: English (Singapore)<br><code>en-ZA</code>: English (South Africa)<br><code>en-TZ</code>: English (Tanzania)<br><code>en-GB</code>: English (UK)<br><code>en-US</code>: English (United States)<br><code>et-EE</code>: Estonian (Estonia)<br><code>fil-PH</code>: Filipino (Philippines)<br><code>fi-FI</code>: Finnish (Finland)<br><code>fr-BE</code>: French (Belgium)<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fr-CH</code>: French (Switzerland)<br><code>gl-ES</code>: Galician (Spain)<br><code>ka-GE</code>: Georgian (Georgia)<br><code>el-GR</code>: Greek (Greece)<br><code>gu-IN</code>: Gujarati (India)<br><code>iw-IL</code>: Hebrew (Israel)<br><code>hi-IN</code>: Hindi (India)<br><code>hu-HU</code>: Hungarian (Hungary)<br><code>is-IS</code>: Icelandic (Iceland)<br><code>id-ID</code>: Indonesian (Indonesia)<br><code>it-IT</code>: Italian (Italy)<br><code>it-CH</code>: Italian (Switzerland)<br><code>ja-JP</code>: Japanese (Japan)<br><code>jv-ID</code>: Javanese (Indonesia)<br><code>kn-IN</code>: Kannada (India)<br><code>kk-KZ</code>: Kazakh (Kazakhstan)<br><code>km-KH</code>: Khmer (Cambodia)<br><code>rw-RW</code>: Kinyarwanda (Rwanda)<br><code>ko-KR</code>: Korean (South Korea)<br><code>lo-LA</code>: Lao (Laos)<br><code>lv-LV</code>: Latvian (Latvia)<br><code>lt-LT</code>: Lithuanian (Lithuania)<br><code>mk-MK</code>: Macedonian (North Macedonia)<br><code>ms-MY</code>: Malay (Malaysia)<br><code>ml-IN</code>: Malayalam (India)<br><code>mr-IN</code>: Marathi (India)<br><code>mn-MN</code>: Mongolian (Mongolia)<br><code>ne-NP</code>: Nepali (Nepal)<br><code>no-NO</code>: Norwegian Bokmål (Norway)<br><code>fa-IR</code>: Persian (Iran)<br><code>pl-PL</code>: Polish (Poland)<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>ro-RO</code>: Romanian (Romania)<br><code>ru-RU</code>: Russian (Russia)<br><code>sr-RS</code>: Serbian (Serbia)<br><code>si-LK</code>: Sinhalese (Sri Lanka)<br><code>sk-SK</code>: Slovak (Slovakia)<br><code>sl-SI</code>: Slovenian (Slovenia)<br><code>st-ZA</code>: Southern Sotho (South Africa)<br><code>es-AR</code>: Spanish (Argentina)<br><code>es-BO</code>: Spanish (Bolivia)<br><code>es-CL</code>: Spanish (Chile)<br><code>es-CO</code>: Spanish (Colombia)<br><code>es-CR</code>: Spanish (Costa Rica)<br><code>es-DO</code>: Spanish (Dominican Republic)<br><code>es-EC</code>: Spanish (Ecuador)<br><code>es-SV</code>: Spanish (El Salvador)<br><code>es-GT</code>: Spanish (Guatemala)<br><code>es-HN</code>: Spanish (Honduras)<br><code>es-MX</code>: Spanish (Mexico)<br><code>es-NI</code>: Spanish (Nicaragua)<br><code>es-PA</code>: Spanish (Panama)<br><code>es-PY</code>: Spanish (Paraguay)<br><code>es-PE</code>: Spanish (Peru)<br><code>es-PR</code>: Spanish (Puerto Rico)<br><code>es-ES</code>: Spanish (Spain)<br><code>es-US</code>: Spanish (United States)<br><code>es-UY</code>: Spanish (Uruguay)<br><code>es-VE</code>: Spanish (Venezuela)<br><code>su-ID</code>: Sundanese (Indonesia)<br><code>sw-KE</code>: Swahili (Kenya)<br><code>sw-TZ</code>: Swahili (Tanzania)<br><code>sv-SE</code>: Swedish (Sweden)<br><code>ta-IN</code>: Tamil (India)<br><code>ta-MY</code>: Tamil (Malaysia)<br><code>ta-SG</code>: Tamil (Singapore)<br><code>ta-LK</code>: Tamil (Sri Lanka)<br><code>te-IN</code>: Telugu (India)<br><code>th-TH</code>: Thai (Thailand)<br><code>ts-ZA</code>: Tsonga (South Africa)<br><code>tr-TR</code>: Turkish (Türkiye)<br><code>uk-UA</code>: Ukrainian (Ukraine)<br><code>ur-IN</code>: Urdu (India)<br><code>ur-PK</code>: Urdu (Pakistan)<br><code>uz-UZ</code>: Uzbek (Uzbekistan)<br><code>ve-ZA</code>: Venda (South Africa)<code>vi-VN</code>: Vietnamese (Vietnam)<br><code>xh-ZA</code>: Xhosa (South Africa)<br><code>zu-ZA</code>: Zulu (South Africa)</p>
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
-	// Smart subtitle file format:
-	// - Under the ASR recognition and translation processing type:
-	//      - vtt: WebVTT format subtitle.
-	//      - srt: SRT format subtitle.
-	//      - Unspecified or left blank: no subtitle file generated.
-	// - Under the pure subtitle translation processing type:
-	//     - original: consistent with the source file.
-	//     - vtt: WebVTT format subtitle.
-	//     - srt: SRT format subtitle.
-	// - Under the OCR recognition and translation processing type:
-	//      - vtt: WebVTT format subtitle.
-	//      - srt: SRT format subtitle.
-	// **Note**:
-	// - For ASR recognition mode, when 2 or more languages are involved in translation, this field cannot be unspecified or left blank.
-	// - For pure subtitle translation and OCR recognition mode, this field cannot be unspecified or left blank.
+	// <p>Intelligent subtitle file format:</p><ul><li>For ASR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li><li>Blank or fill in the blank: no subtitle file generated</li></ul></li><li>For pure caption translation processing type:<ul><li>original: consistent with the source file</li><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li><li>For OCR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li></ul><p><strong>Note</strong>:</p><ul><li>For ASR recognition method, passing blank or unspecified is not allowed when translating at least 2 languages.</li><li>For pure caption translation and OCR recognition translation methods, passing blank or unspecified is not allowed.</li><li>For OCR type tasks, passing blank or unspecified is allowed when suppression is enabled.</li></ul>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
-	// Subtitle translation switch.
-	// `ON`: translation enabled.
-	// `OFF`: translation disabled.
-	// **Note**: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to `OFF`.
+	// <p>Subtitle translation switch<br><code>ON</code>: Enable translation<br><code>OFF</code>: Disable translation</p><p><strong>Note</strong>: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to <code>OFF</code>.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
 
-	// Target language for subtitle translation.
-	// This parameter takes effect when the value of TranslateSwitch is ON. Valid translation languages:`ab`: Abkhazian.`ace`: Acehnese.`ach`: Acholi.`af`: Afrikaans.`ak`: Twi (Akan).`am`: Amharic.`ar`: Arabic.`as`: Assamese.`ay`: Aymara.`az`: Azerbaijani.`ba`: Bashkir.`ban`: Balinese.`bbc`: Batak toba.`bem`: Bemba.`bew`: Betawi.`bg`: Bulgarian.`bho`: Bhojpuri.`bik`: Bikol.`bm`: Bambara.`bn`: Bengali.`br`: Breton.`bs`: Bosnian.`btx`: Batak Karo.`bts`: Batak Simalungun.`bua`: Buryat.`ca`: Catalan.`ceb`: Cebuano.`cgg`: Kiga.`chm`: Meadow Mari.`ckb`: Kurdish (Sorani).`cnh`: Hakha Chin.`co`: Corsican.`crh`: Crimean Tatar.`crs`: Seychellois Creole.`cs`: Czech.`cv`: Chuvash.`cy`: Welsh.`da`: Danish.`de`: German.`din`: Dinka.`doi`: Dogri.`dov`: Dombe.`dv`: Dhivehi.`dz`: Dzongkha.`ee`: Ewe.`el`: Greek.`en`: English.`eo`: Esperanto.`es`: Spanish.`et`: Estonian.`eu`: Basque.`fa`: Persian.`ff`: Fulah.`fi`: Finnish.`fil`: Filipino (Tagalog).`fj`: Fijian.`fr`: French.`fr-CA`: French (Canada).`fr-FR`: French (France).`fy`: Frisian.`ga`: Irish.`gaa`: Ga.
-	// `gd`: Scottish Gaelic.`gl`: Galician.`gn`: Guarani.`gom`: Konkani.`gu`: Gujarati.`gv`: Manx.`ha`: Hausa.`haw`: Hawaiian.`he`: Hebrew.`hi`: Hindi.`hil`: Hiligaynon.`hmn`: Hmong.`hr`: Croatian.`hrx`: Hunsrik.`ht`: Haitian Creole.`hu`: Hungarian.`hy`: Armenian.`id`: Indonesian.`ig`: Igbo.`ilo`: Iloko.`is`: Icelandic.`it`: Italian.`iw`: Hebrew.`ja`: Japanese.`jv`: Javanese.`ka`: Georgian.`kk`: Kazakh.`km`: Khmer.`kn`: Kannada.`ko`: Korean.`kri`: Krio.`ku`: Kurdish (Kurmanji).`ktu`: Kituba.`ky`: Kyrgyz.`la`: Latin.`lb`: Luxembourgish.`lg`: Ganda (Luganda).`li`: Limburgish.`lij`: Ligurian.`lmo`: Lombard.`ln`: Lingala.`lo`: Lao.`lt`: Lithuanian.`ltg`: Latgalian.`luo`: Luo.`lus`: Mizo.`lv`: Latvian.`mai`: Maithili.`mak`: Makasar.`mg`: Malagasy.`mi`: Maori.`min`: Minangkabau.`mk`: Macedonian.`ml`: Malayalam.`mn`: Mongolian.`mr`: Marathi.`ms`: Malay.`mt`: Maltese.`my`: Burmese.`ne`: Nepali.`new`: Newari.`nl`: Dutch.`no`: Norwegian.`nr`: Southern Ndebele.`nso`: Northern Sotho (Sepedi).`nus`: Nuer.`ny`: Chichewa (Nyanja).`oc`: Occitan.`om`: Oromo.`or`: Odia.`pa`: Punjabi.`pag`: Pangasinan.`pam`: Kapampangan.`pap`: Papiamento.`pl`: Polish.`ps`: Pashto.`pt`: Portuguese.`pt-BR`: Portuguese (Brazil).`pt-PT`: Portuguese (Portugal).`qu`: Quechua.`ro`: Romanian.`rom`: Romani.`rn`: Rundi.`ru`: Russian.`rw`: Kinyarwanda.`sa`: Sanskrit.`scn`: Sicilian.`sd`: Sindhi.`sg`: Sango.`shn`: Shan.`si`: Sinhala.`sk`: Slovak.`sl`: Slovenian.`sm`: Samoan.`sn`: Shona.`so`: Somali.`sq`: Albanian.`sr`: Serbian.`ss`: Swazi.`st`: Southern Sotho.`su`: Sundanese.`sv`: Swedish.`sw`: Swahili.`szl`: Silesian.`ta`: Tamil.`te`: Telugu.`tet`: Tetum.`tg`: Tajik.`th`: Thai.`ti`: Tigrinya.`tk`: Turkmen.`tn`: Tswana.`tr`: Turkish.`ts`: Tsonga.`tt`: Tatar.`ug`: Uyghur.`uk`: Ukrainian.`ur`: Urdu.`uz`: Uzbek.`vi`: Vietnamese.`xh`: Xhosa.`yi`: Yiddish.`yo`: Yoruba.`yua`: Yucatec Maya.`yue`: Cantonese.`zh`: Chinese (Simplified).`zh-TW`: Chinese (Traditional).`zu`: Zulu.**Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
+	// <p>Subtitle target language<br>Take effect when TranslateSwitch is ON. Translation language list:<br><code>ab</code>: Abkhaz<br><code>ace</code>: Acehnese<br><code>ach</code>: Acholi<br><code>af</code>: Afrikaans<br><code>ak</code>: Akan<br><code>am</code>: Amharic<br><code>ar</code>: Arabic<br><code>as</code>: Assamese<br><code>ay</code>: Aymara<br><code>az</code>: Azerbaijani<br><code>ba</code>: Bashkir<br><code>ban</code>: Balinese<br><code>bbc</code>: Batak Toba<br><code>bem</code>: Bemba<br><code>bew</code>: Betawi<br><code>bg</code>: Bulgarian<br><code>bho</code>: Bhojpuri<br><code>bik</code>: Bikol<br><code>bm</code>: Bambara<br><code>bn</code>: Bengali<br><code>br</code>: Breton<br><code>bs</code>: Bosnian<br><code>btx</code>: Batak Karo<br><code>bts</code>: Batak Simalungun<br><code>bua</code>: Buryat<br><code>ca</code>: Catalan<br><code>ceb</code>: Cebuano<br><code>cgg</code>: Kiga<br><code>chm</code>: Meadow Mari<br><code>ckb</code>: Kurdish (Sorani)<br><code>cnh</code>: Hakha Chin<br><code>co</code>: Corsican<br><code>crh</code>: Crimean Tatar<br><code>crs</code>: Seychellois Creole<br><code>cs</code>: Czech<br><code>cv</code>: Chuvash<br><code>cy</code>: Welsh<br><code>da</code>: Danish<br><code>de</code>: German<br><code>din</code>: Dinka<br><code>doi</code>: Dogri<br><code>dov</code>: Dombe<br><code>dv</code>: Dhivehi<br><code>dz</code>: Dzongkha<br><code>ee</code>: Ewe<br><code>el</code>: Greek<br><code>en</code>: English<br><code>eo</code>: Esperanto<br><code>es</code>: Spanish<br><code>et</code>: Estonian<br><code>eu</code>: Basque<br><code>fa</code>: Persian<br><code>ff</code>: Fula<br><code>fi</code>: Finnish<br><code>fil</code>: Filipino (Tagalog)<br><code>fj</code>: Fijian<br><code>fr</code>: French<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fy</code>: Frisian<br><code>ga</code>: Irish<br><code>gaa</code>: GaLanguage<br><code>gd</code>: Scottish Gaelic<br><code>gl</code>: Galician<br><code>gn</code>: Guarani<br><code>gom</code>: Konkani<br><code>gu</code>: Gujarati<br><code>gv</code>: Manx<br><code>ha</code>: Hausa<br><code>haw</code>: Hawaiian<br><code>he</code>: Hebrew<br><code>hi</code>: Hindi<br><code>hil</code>: Hiligaynon<br><code>hmn</code>: Hmong<br><code>hr</code>: Croatian<br><code>hrx</code>: Hunsrik<br><code>ht</code>: Haitian Creole<br><code>hu</code>: Hungarian<br><code>hy</code>: Armenian<br><code>id</code>: Indonesian<br><code>ig</code>: Igbo<br><code>ilo</code>: Ilocano<br><code>is</code>: Icelandic<br><code>it</code>: Italian<br><code>iw</code>: Hebrew<br><code>ja</code>: Japanese<br><code>jv</code>: Javanese<br><code>ka</code>: Georgian<br><code>kk</code>: Kazakh<br><code>km</code>: Khmer<br><code>kn</code>: Kannada<br><code>ko</code>: Korean<br><code>kri</code>: Krio<br><code>ku</code>: Kurdish (Kurmanji)<br><code>ktu</code>: Kituba<br><code>ky</code>: Kyrgyz<br><code>la</code>: Latin<br><code>lb</code>: Luxembourgish<br><code>lg</code>: Ganda (Luganda)<br><code>li</code>: Limburgish<br><code>lij</code>: Ligurian<br><code>lmo</code>: Lombard<br><code>ln</code>: Lingala<br><code>lo</code>: Lao<br><code>lt</code>: Lithuanian<br><code>ltg</code>: Latgalian<br><code>luo</code>: Luo<br><code>lus</code>: Mizo<br><code>lv</code>: Latvian<br><code>mai</code>: Maithili<br><code>mak</code>: Makassar<br><code>mg</code>: Malagasy<br><code>mi</code>: Maori<br><code>min</code>: Minangkabau<br><code>mk</code>: Macedonian<br><code>ml</code>: Malayalam<br><code>mn</code>: Mongolian<br><code>mr</code>: Marathi<br><code>ms</code>: Malay<br><code>mt</code>: Maltese<br><code>my</code>: Burmese<br><code>ne</code>: Nepali<br><code>new</code>: Newari<br><code>nl</code>: Dutch<br><code>no</code>: Norwegian<br><code>nr</code>: Southern Ndebele<br><code>nso</code>: Northern Sotho (Sepedi)<br><code>nus</code>: Nuer<br><code>ny</code>: Chichewa (Nyanja)<br><code>oc</code>: Occitan<br><code>om</code>: Oromo<br><code>or</code>: Odia<br><code>pa</code>: Punjabi<br><code>pag</code>: Pangasinan<br><code>pam</code>: Kapampangan<br><code>pap</code>: Papiamento<br><code>pl</code>: Polish<br><code>ps</code>: Pashto<br><code>pt</code>: Portuguese<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>qu</code>: Quechua<br><code>ro</code>: Romanian<br><code>rom</code>: Romani<br><code>rn</code>: Rundi<br><code>ru</code>: Russian<br><code>rw</code>: Kinyarwanda<br><code>sa</code>: Sanskrit<br><code>scn</code>: Sicilian<br><code>sd</code>: Sindhi<br><code>sg</code>: Sango<br><code>shn</code>: Shan<br><code>si</code>: Sinhalese<br><code>sk</code>: Slovak<br><code>sl</code>: Slovenian<br><code>sm</code>: Samoan<br><code>sn</code>: Shona<br><code>so</code>: Somali<br><code>sq</code>: Albanian<br><code>sr</code>: Serbian<br><code>ss</code>: Swati<br><code>st</code>: Sesotho<br><code>su</code>: Sundanese<br><code>sv</code>: Swedish<br><code>sw</code>: Swahili<br><code>szl</code>: Silesian<br><code>ta</code>: Tamil<br><code>te</code>: Telugu<br><code>tet</code>: Tetum<br><code>tg</code>: Tajik<br><code>th</code>: Thai<br><code>ti</code>: Tigrinya<br><code>tk</code>: Turkmen<br><code>tn</code>: Tswana<br><code>tr</code>: Turkish<br><code>ts</code>: Tsonga<br><code>tt</code>: Tatar<br><code>ug</code>: Uyghur<br><code>uk</code>: Ukrainian<br><code>ur</code>: Urdu<br><code>uz</code>: Uzbek<br><code>vi</code>: Vietnamese<br><code>xh</code>: Xhosa<br><code>yi</code>: Yiddish<br><code>yo</code>: Yoruba<br><code>yua</code>: Yucatec Maya<br><code>yue</code>: Cantonese<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese<br><code>zu</code>: Zulu</p><p><strong>Note</strong>: Use the multilingual method.<code>/</code> to separate, such as <code>en/ja</code>, which indicates English and Japanese.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
 
-	// ASR hotword lexicon parameter.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>ASR hot word lexicon parameter</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AsrHotWordsConfigure *AsrHotWordsConfigure `json:"AsrHotWordsConfigure,omitnil,omitempty" name:"AsrHotWordsConfigure"`
 
-	// Custom parameter.
+	// <p>Custom parameter</p>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 
-	// Subtitle processing type:
-	// - 0: ASR recognition subtitle.
-	// - 1: pure subtitle translation.
-	// - 2: OCR recognition subtitle.
-	// **Note**: The default processing type is ASR recognition subtitle if the field is unspecified.
+	// <p>Subtitle processing type:</p><ul><li>0: ASR recognition subtitle</li><li>1: Pure caption translation</li><li>2: OCR recognition subtitle</li></ul><p><strong>Note</strong>: The default type is ASR recognition subtitle if the field is unspecified.</p>
 	ProcessType *uint64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 
-	// Area configurations for the subtitle OCR extraction box.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Area configurations for the subtitle OCR extraction box</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SelectingSubtitleAreasConfig *SelectingSubtitleAreasConfig `json:"SelectingSubtitleAreasConfig,omitnil,omitempty" name:"SelectingSubtitleAreasConfig"`
+
+	// <p>Suppression Template id. Only allowed to fill in when ProcessType is 0 or 2 (task type is ASR or OCR).</p>
+	SubtitleEmbedId *int64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
 }
 
 type RawTranscodeParameter struct {
@@ -18247,7 +17564,7 @@ type ScheduleExecRuleTaskResult struct {
 	// Task status, which can be PROCESSING, SUCCESS, or FAIL.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. An empty string indicates success, while other values indicate failure. For specific values, see the list of MPS error codes at https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81.
+	// Error code. An empty string indicates success, while other values indicate failure. For specific values, see the list of MPS error codes at https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81.
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
 	// Error message.
@@ -18474,13 +17791,13 @@ type SecurityGroupInfo struct {
 }
 
 type SegmentRecognitionItem struct {
-	// Confidence.
+
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Segment start time offset.
+
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// Segment end time offset.
+
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
 	// Specifies the split segment URL.
@@ -18576,76 +17893,41 @@ type SmartErasePrivacyConfig struct {
 }
 
 type SmartEraseSubtitleConfig struct {
-	// Specifies the subtitle erasure method.
-	// **Automatic erasing:** automatically identifies subtitle text content in videos through AI models and performs seamless erasure to generate new videos. frame interference and unique subtitle styles may cause certain missed or incorrect erasures, which can be handled through specified area erasure.
-	// When using automatic erasure, if AutoAreas is not specified, the default region (lower middle of the frame) will be erased automatically. if AutoAreas is specified, it will change to erase the designated area.
-	// **Specified area erasing:** if your subtitle position is fixed, directly specify the erasure area to decrease the chance of removal omission to the maximum extent.
-	// When your choice is specified area erasure, please import at least one designated region in CustomAreas.
-	// -Automated removal.
-	// - specifies the custom specified area erasure.
+	// <p>Subtitle erasure method.<br><strong>Automatic erasing:</strong> Video subtitles are automatically recognized using an AI model and are erased without traces to generate a new video. However, missed or incorrect erasing may occur due to image interference and special subtitle styles. In this case, you can specify the erasing area.<br>When using automatic erasing, if you do not specify AutoAreas, the default region (lower middle part of the frame) will be erased automatically. If AutoAreas is specified, the designated region will be erased instead.<br><strong>Specified area erasure:</strong> If your subtitle position is fixed, it is recommended to directly specify the erasure area to minimize missed erasures.<br>When choosing specified area erasure, please input at least one designated region in CustomAreas.</p><ul><li>auto: Automatic erasing</li><li>custom: Specified area erasure</li></ul>
 	SubtitleEraseMethod *string `json:"SubtitleEraseMethod,omitnil,omitempty" name:"SubtitleEraseMethod"`
 
-	// Subtitle erasure model.
-	// **Standard version (recommend):** if your subtitle style is standard, normally recommend choose this version for better effectiveness with seamless detail.
-	// **Regional version:** if your subtitles have special styles such as italics, shadows, or motion effects, we recommend choosing the regional version for larger removal area, though the detail effect is not as good as the standard version.
-	// -Specifies the standard model.
-	// -area. specifies the regional model.
+	// <p>Subtitle erasure model.<br><strong>Standard version (recommended):</strong> If your subtitles have a standard style, it is usually recommended to select this version for better effectiveness in seamless detail removal.<br><strong>Area edition:</strong> If the subtitles have special styles, such as calligraphy, shadow, or motion effects, you are recommended to select this edition to ensure a larger erasing area. However, the erasing effect in the details is not as good as the standard edition.</p><ul><li>standard Standard model</li><li>area Regional model</li></ul>
 	SubtitleModel *string `json:"SubtitleModel,omitnil,omitempty" name:"SubtitleModel"`
 
-	// Whether OCR subtitle extraction is enabled. default value: OFF.
-	// Supports enabling OCR subtitle extraction only when SubtitleEraseMethod is set to auto. when enabled, it identifies the longest and most stable text area within the region as the subtitle area, then performs text extraction and removal.
-	// -ON: enable.
-	// -OFF. specifies the disabled state.
+	// <p>Whether OCR subtitle extraction is enabled. The default value is OFF.<br>OCR subtitle extraction is supported if and only if SubtitleEraseMethod is set to auto. When enabled, it identifies the text region that appears most persistently and stably within the automatic erasing area as the subtitle area. The text within the subtitle area is extracted and erased.</p><ul><li>ON Enable</li><li>OFF Disable</li></ul>
 	OcrSwitch *string `json:"OcrSwitch,omitnil,omitempty" name:"OcrSwitch"`
 
-	// Subtitle language, for OCR guidance, default value zh_en. this parameter is valid only when OcrSwitch is ON.
-	// -Chinese and english.
-	// -multi other.
-	// Other supported languages:.
-	// Chinese, english, japanese, korean, spanish, french, german, portuguese, vietnamese, malay, russian, italian, dutch, swedish, finnish, danish, norwegian, hungarian, thai, hindi, arabic, indian-bengali, indian-gujarati, indian-kannada, indian-malayalam, indian-tamil, indian-telugu, slovenian, polish, catalan, bosnian, czech, estonian, croatian, punjabi, marathi, azerbaijani, indonesian, luxembourgish, lithuanian, latvian, maltese, slovak, turkish, kazakh, greek, irish, belarusian, khmer, tagalog, pashto, persian, tajik.
-	// 
+	// <p>Subtitle language, used to guide OCR recognition, default value is zh_en. This parameter is valid only when OcrSwitch is "ON".</p><ul><li>zh_en Chinese and English</li><li>multi other<br>The following languages are supported for recognition:<br>Chinese, English, Japanese, Korean, Spanish, French, German, Portuguese, Vietnamese, Malay, Russian, Italian, Dutch, Swedish, Finnish, Danish, Norwegian, Hungarian, Thai, Hindi, Arabic, Bengali, Gujarati, Kannada, Malayalam, Tamil, Telugu, Slovenian, Polish, Catalan, Bosnia, Czech, Estonian, Croatian, Punjabi, Marathi, Azerbaijan, Indonesian, Luxembourg, Lithuanian, Latvian, Malta, Slovak, Turkish, Kazakh, Greek, Irish, Belarus, Khmer, Tagalog, Pashto, Persian, Tajikistan</li></ul>
 	SubtitleLang *string `json:"SubtitleLang,omitnil,omitempty" name:"SubtitleLang"`
 
-	// Specifies the subtitle file format. default value: vtt. this parameter is valid only when OcrSwitch is set to ON.
-	// -srt format.
-	// -vtt: WebVTT format.
+	// <p>Subtitle file format. Default value is vtt. This parameter is valid only when OcrSwitch takes value "ON".</p><ul><li>srt srt format</li><li>vtt WebVTT format</li><li>When SubtitleEmbedId is filled, it can take value empty string, which means no subtitle file is output.</li></ul>
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
-	// Specifies whether to enable subtitle translation. default value: OFF. this parameter is valid only when OcrSwitch is set to ON.
-	// -ON: enable.
-	// -OFF. specifies the disabled state.
+	// <p>Whether to enable subtitle translation. The default value is OFF. This parameter is valid only when OcrSwitch is set to "ON".</p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul>
 	TransSwitch *string `json:"TransSwitch,omitnil,omitempty" name:"TransSwitch"`
 
-	// Subtitle target language. default value: en. this parameter is valid only when TransSwitch is set to ON.
-	// Supported languages:.
-	// Simplified chinese.
-	// Specifies the language. valid values: en (english).
-	// Ja: japanese.
-	// Ko: korean.
-	// Fr: french.
-	// es: spanish.
-	// It: italian.
-	// de: german.
-	// tr: turkish.
-	// Ru: russian.
-	// pt: portuguese.
-	// Vi: vietnamese.
-	// id: indonesian.
-	// ms: malay.
-	// Th: thai.
-	// Ar: arabic.
-	// hi: Hindi
+	// <p>The target language for subtitle translation defaults to en. This parameter is valid only when TransSwitch is set to "ON".<br>The following languages are currently supported:<br>zh: Simplified Chinese<br>en: English<br>ja: Japanese<br>ko: Korean<br>fr: French<br>es: Spanish<br>it: Italian<br>de: German<br>tr: Turkish<br>ru: Russian<br>pt: Portuguese<br>vi: Vietnamese<br>id: Indonesian<br>ms: Malay<br>th: Thai<br>ar: Arabic<br>hi: Hindi</p>
 	TransDstLang *string `json:"TransDstLang,omitnil,omitempty" name:"TransDstLang"`
 
-	// Specifies automatic removal of a custom region.
-	// Specifies the use of an AI model to automatically detect and erase existing targets in the specified region.
-	// Note that this parameter will not take effect when the removal method is custom. for template modification, input [] to clean up the region. the template region information remains unchanged if not imported.
+	// <p>Automatically erase custom regions.<br>For selected regions, use the AI model to automatically detect and erase existing targets.<br>Note: When the erase method is set to custom, this parameter will not take effect. To modify the template, input [] for region cleanup. If not provided, the template region information remains unchanged.</p>
 	AutoAreas []*EraseArea `json:"AutoAreas,omitnil,omitempty" name:"AutoAreas"`
 
-	// Specifies erasure of a custom region.
-	// Detects and directly performs removal within a specified time range for the selected region.
-	// Note: when modifying the template, pass [] to clear the region. the template region information remains unchanged if not passed.
+	// <p>Designate the removal of custom regions.<br>For specified regions, directly perform erasure without detection and recognition within a selected time range.<br>Note: When modifying the template, import [] to clear regions. The template region information remains unchanged if not imported.</p>
 	CustomAreas []*EraseTimeArea `json:"CustomAreas,omitnil,omitempty" name:"CustomAreas"`
+
+	// <p>Subtitle suppression template id. Only allowed to fill in when OCR translation is enabled.</p>
+	SubtitleEmbedId *uint64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
+
+	// <p>Suppression configuration, enabled by default, compresses subtitles back to their original position. It can be filled only when OCR translation is turned on. A value of 0 indicates disabled suppression.</p>
+	UseOriginalPos *int64 `json:"UseOriginalPos,omitnil,omitempty" name:"UseOriginalPos"`
+
+	// <p>Suppression configuration, enabled by default. After being turned on, the original subtitle font size is used. It can only be filled when OCR translation is enabled. Setting it to 0 means non-use of the original font size.</p>
+	UseOriginalSize *int64 `json:"UseOriginalSize,omitnil,omitempty" name:"UseOriginalSize"`
 }
 
 type SmartEraseTaskInput struct {
@@ -18680,7 +17962,7 @@ type SmartEraseTaskResult struct {
 	// Task status, including PROCESSING, SUCCESS, and FAIL.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
 	// Error message.
@@ -18737,10 +18019,10 @@ type SmartEraseTemplateItem struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ErasePrivacyConfig *SmartErasePrivacyConfig `json:"ErasePrivacyConfig,omitnil,omitempty" name:"ErasePrivacyConfig"`
 
-	// Template creation time in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Template creation time in [ISO datetime format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Last modification time of the template in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Last modification time of the template in [ISO datetime format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Alias of the preset smart erasing template.
@@ -18804,17 +18086,20 @@ type SmartSubtitleTaskAsrFullTextResult struct {
 }
 
 type SmartSubtitleTaskAsrFullTextResultOutput struct {
-	// List of segments for full speech recognition.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>List of segments for full speech recognition.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SegmentSet []*SmartSubtitleTaskAsrFullTextSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 
-	// Subtitle file path.
+	// <p>Subtitle file path</p>
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
-	// Subtitle file path.
+	// <p>Subtitle file URL.</p>
 	SubtitlePath *string `json:"SubtitlePath,omitnil,omitempty" name:"SubtitlePath"`
 
-	// Subtitle file storage location.
+	// <p>Subtitle recognition result info.</p>
+	SubtitleInfo *SubtitleResult `json:"SubtitleInfo,omitnil,omitempty" name:"SubtitleInfo"`
+
+	// <p>Storage location of the subtitle file.</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 }
 
@@ -18866,7 +18151,7 @@ type SmartSubtitleTaskFullTextResult struct {
 	// Task status, which can be PROCESSING, SUCCESS, or FAIL.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
 	// Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
@@ -18898,15 +18183,15 @@ type SmartSubtitleTaskResultInput struct {
 }
 
 type SmartSubtitleTaskTextResultOutput struct {
-	// Subtitle recognition result.
+	// <p>Subtitle recognition result</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RecognizeSubtitleResult []*SubtitleResult `json:"RecognizeSubtitleResult,omitnil,omitempty" name:"RecognizeSubtitleResult"`
 
-	// Subtitle translation result.
+	// <p>Translated subtitles</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TransSubtitleResult []*SubtitleResult `json:"TransSubtitleResult,omitnil,omitempty" name:"TransSubtitleResult"`
 
-	// Storage location of the subtitle file.
+	// <p>Storage location of the subtitle file</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 }
@@ -18938,43 +18223,45 @@ type SmartSubtitleTaskTransTextResult struct {
 }
 
 type SmartSubtitleTaskTransTextResultOutput struct {
-	// List of segments for translation.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>List of segments for translation.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SegmentSet []*SmartSubtitleTaskTransTextSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 
-	// Subtitle file path.
+	// <p>Subtitle file URL.</p>
 	SubtitlePath *string `json:"SubtitlePath,omitnil,omitempty" name:"SubtitlePath"`
 
-	// Subtitle file storage location.
+	// <p>Smart subtitling result storage information.</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// Subtitle file URL.
+	// <p>Subtitle file path</p>
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
-	// Returned translation result during multilingual translation.	
+	// <p>Returned translation result during multilingual translation.</p>
 	SubtitleResults []*SubtitleTransResultItem `json:"SubtitleResults,omitnil,omitempty" name:"SubtitleResults"`
 }
 
 type SmartSubtitleTaskTransTextSegmentItem struct {
-	// Confidence of a recognized segment. Value range: 0-100.
+	// <p>Confidence of a recognized segment. Value range: 0-100.</p>
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Start time offset of a recognized segment, in seconds.
+	// <p>Start time offset of a recognized segment, in seconds.</p>
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// End time offset of a recognized segment, in seconds.
+	// <p>End time offset of a recognized segment, in seconds.</p>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-	// Recognized text.
+	// <p>Recognized text.</p>
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
-	// Translated text.
+	// <p>Translated text.</p>
 	Trans *string `json:"Trans,omitnil,omitempty" name:"Trans"`
 
-	// Word timestamp information.
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Word timestamp information.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Wordlist []*WordResult `json:"Wordlist,omitnil,omitempty" name:"Wordlist"`
+
+	// <p>Speaker ID (if speaker recognition is enabled)</p>
+	SpeakerId *string `json:"SpeakerId,omitnil,omitempty" name:"SpeakerId"`
 }
 
 type SmartSubtitleTemplateItem struct {
@@ -19137,7 +18424,7 @@ type SmartSubtitlesTaskInput struct {
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
 	// Output path of the generated subtitle file, which can be a relative or absolute path.
-	// To define the output path, end the path with .{format}. For variable names, see the description of file name variables at https://www.tencentcloud.com/document/product/862/37039.?from_cn_redirect=1
+	// To define the output path, end the path with .{format}. For variable names, see the description of file name variables at https://www.tencentcloud.comom/document/product/862/37039.?from_cn_redirect=1
 	// 
 	// Relative path example:
 	//  - File name_{variable name}.{format}.
@@ -19279,20 +18566,220 @@ type SpekeDrm struct {
 	EncryptionPreset *string `json:"EncryptionPreset,omitnil,omitempty" name:"EncryptionPreset"`
 }
 
+type SubtitleBoardConfig struct {
+	// Subtitle suppression module background configuration switch, 0 for off, 1 for on, default 0
+	SubtitleBoardConfigSwitch *int64 `json:"SubtitleBoardConfigSwitch,omitnil,omitempty" name:"SubtitleBoardConfigSwitch"`
+
+	// Subtitle background base plate x-axis coordinate position; Supports pixel and percentage format:
+	// 
+	// - Pixel: Npx. Value range of N: [-4096,4096].
+	// -Percentage: N%, N range: [-100,100]. For example, 10% means the X-coordinate of the subtitle background base plate is 10% of the source video width.
+	// 
+	// Default value: 0px.
+	// Note: The origin of the coordinate axes is at the bottom of the central axis of the source video, and the reference position of the subtitle base plate is at the bottom of the central axis, as shown in the figure below.
+	// ![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png)
+	BoardX *int64 `json:"BoardX,omitnil,omitempty" name:"BoardX"`
+
+	// BoardX unit, 0 pixel, 1 percentage, default is 0, pixel
+	BoardXUnit *int64 `json:"BoardXUnit,omitnil,omitempty" name:"BoardXUnit"`
+
+	// Subtitle background base plate y-axis coordinate position; Supports pixel and percentage format:
+	// 
+	// - Pixel: Npx. Value range of N: [0,4096].
+	// -Percentage: N%, where N ranges from [0,100]. For example, 10% means the y-coordinate of the subtitle background base plate equals 10% of the video height.
+	// 
+	// If this parameter is not specified, the subtitle background is disabled.
+	// Note: The origin point of the coordinate axis is located at the bottom of the central axis of the source video, and the benchmark of the subtitle background base plate is at the bottom of its central axis. See the following diagram.
+	// ![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png)
+	BoardY *int64 `json:"BoardY,omitnil,omitempty" name:"BoardY"`
+
+	// BoardY unit, 0 pixel, 1 percentage, default is 0, pixel
+	BoardYUnit *int64 `json:"BoardYUnit,omitnil,omitempty" name:"BoardYUnit"`
+
+	// Background width. The value should be a positive integer.
+	// - Value range for pixels: [0,4096].
+	// - Value range for percentages: [0, 100].
+	// If the base plate is enabled and this parameter is not specified, the default width is 90% of the source video width.
+	BoardWidth *int64 `json:"BoardWidth,omitnil,omitempty" name:"BoardWidth"`
+
+	// Background width measurement unit. 0: pixel, 1: percentage. Default is 0 (pixel).
+	BoardWidthUnit *int64 `json:"BoardWidthUnit,omitnil,omitempty" name:"BoardWidthUnit"`
+
+	// Background height. The value should be a positive integer.
+	// - Value range for pixels: [0,4096].
+	// - Value range for percentages: [0, 100].
+	// If the base plate is enabled and this parameter is not specified, the default height is 15% of the source video height.
+	BoardHeight *int64 `json:"BoardHeight,omitnil,omitempty" name:"BoardHeight"`
+
+	// Base plate height unit, 0 pixel, 1 percentage, defaults to 0, pixel
+	BoardHeightUnit *int64 `json:"BoardHeightUnit,omitnil,omitempty" name:"BoardHeightUnit"`
+
+	// Board color. Format: 0xRRGGBB.
+	// Default value: 0x000000 (black).
+	BoardColor *string `json:"BoardColor,omitnil,omitempty" name:"BoardColor"`
+
+	// Subtitle background transparency. Value range: [0, 1].
+	// <li>0: completely transparent.</li>
+	// <li>1: completely opaque.</li>
+	// Default value: 0.8.
+	BoardAlpha *float64 `json:"BoardAlpha,omitnil,omitempty" name:"BoardAlpha"`
+}
+
+type SubtitleEmbedConfig struct {
+	// <p>Font type, supports:</p><li>hei.ttf: Heiti</li><li>song.ttf: Song Typeface</li><li>kai.ttf (recommended) or simkai.ttf: KaiTi</li><li>msyh.ttf: Microsoft YaHei</li><li>msyhbd.ttf: Microsoft YaHei in bold</li><li>hkjgt.ttf: Hwakangangtai</li><li>dhttx.ttf: Dianheiti Ultra Light</li><li>xqgdzt.ttf: Xique Ancient Dictionary</li><li>qpcyt.ttf: Smart Splice Super Round Body</li><li>arial.ttf: only supports English</li><li>dinalternate.ttf: DIN Alternate Bold</li><li>helveticalt.ttf: Helvetica</li><li>helveticains.ttf: Helvetica Inserat</li><li>trajanpro.ttf: TrajanPro-Bold</li><li>korean.ttf: Korean</li><li>japanese.ttf: Japanese</li><li>thai.ttf: Thai</li><li>roboto.ttf: Roboto</li><li>notosans.ttf: NotoSans</li><li>notosansthai.ttf: Thai NotoSansThai</li><li>sarabun.ttf: Thai Sarabun</li><li>kanit.ttf: Thai Kanit</li><li>charmonman.ttf: Thai Charmonman</li><li>notonaskharabic.ttf: Arabic NotoNaskhArabic</li><li>notosansdevanagari.ttf: India NotoSansDevanagari</li><li>notosanstc.ttf: Cantonese NotoSansTC</li><li>notosanskr.ttf: Korean NotoSansKR</li><li>gothica1.ttf: Korean GothicA1</li><li>nanummyeongjo.ttf: Korean NanumMyeongjo</li><li>notosansjp.ttf: Japanese NotoSansJP</li><li>notoserifjp.ttf: Japanese NotoSerifJP</li><li>shipporimincho.ttf: Japanese ShipporiMincho</li>Default: hei.ttf Heiti.<br>Note:<li>KaiTi is recommended for use with kai.ttf</li><li>FontPath takes precedence when filled</li>
+	FontType *string `json:"FontType,omitnil,omitempty" name:"FontType"`
+
+	// <p>Custom font file url address, either this or CosInputInfo</p>
+	FontPath *string `json:"FontPath,omitnil,omitempty" name:"FontPath"`
+
+	// <p>Custom font file cos bucket address</p>
+	CosInputInfo *CosInputInfo `json:"CosInputInfo,omitnil,omitempty" name:"CosInputInfo"`
+
+	// <p>Font size. If not specified, the font size of the subtitle file applies. Pixel and percentage formats are supported:</p><ul><li>Pixel: Npx, where N ranges from (0,4096].</li><li>Percentage: N%, where N ranges from (0,100]. For example, 10% means the subtitle font size equals 10% of the source video height.</li></ul><p>If left blank and the subtitle file has no settings, the default is 5% of the source video height.</p>
+	FontSize *int64 `json:"FontSize,omitnil,omitempty" name:"FontSize"`
+
+	// <p>FontSize unit, 0 pixel, 1 percentage, defaults to 0, pixel</p>
+	FontSizeUnit *int64 `json:"FontSizeUnit,omitnil,omitempty" name:"FontSizeUnit"`
+
+	// <p>Font color. Format: 0xRRGGBB. Default value: 0xFFFFFF (white).</p>
+	FontColor *string `json:"FontColor,omitnil,omitempty" name:"FontColor"`
+
+	// <p>Text opacity, value ranges from 0 to 1.</p><li>0: completely transparent</li><li>1: completely opaque</li>Default value: 1.
+	FontAlpha *float64 `json:"FontAlpha,omitnil,omitempty" name:"FontAlpha"`
+
+	// <p>The X-coordinate position of subtitles. Specifying this parameter will ignore the built-in coordinates in the subtitle file. Supports pixel and percentage formats:</p><ul><li>Pixel: Npx, where N ranges from [-4096, 4096].</li><li>Percentage: N%, where N ranges from [-100, 100]; for example, 10% means the X-coordinate of the subtitle equals 10% of the source video width.</li></ul><p>Default value: 0px.<br>Note: The origin of the coordinate axes is at the bottom of the central axis of the source video, and the subtitle reference position is at the bottom of the central axis of the subtitles, as shown in the figure below:<br><img src="https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png" alt="image"></p>
+	PosX *int64 `json:"PosX,omitnil,omitempty" name:"PosX"`
+
+	// <p>PosX unit, 0 pixel, 1 percentage, defaults to 0, pixel</p>
+	PosXUnit *int64 `json:"PosXUnit,omitnil,omitempty" name:"PosXUnit"`
+
+	// <p>Subtitle Y-coordinate position. Specify this parameter to ignore the built-in coordinates in the subtitle file. Supports pixel and percentage formats:</p><ul><li>Pixel: Npx, where N ranges from [0,4096].</li><li>Percentage: N%, where N ranges from [0,100]. For example, 10% means the subtitle Y-coordinate = 10% * source video height.</li></ul><p>Default value: source video height * 4%.<br>Note: The coordinate axis origin is at the bottom of the central axis of the source video, and the subtitle reference point is at the bottom of the central axis of the subtitle. Refer to the figure below:<br><img src="https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png" alt="image"></p>
+	PosY *int64 `json:"PosY,omitnil,omitempty" name:"PosY"`
+
+	// <p>PosY measurement unit, 0 pixel, 1 percentage, defaults to 0, pixel</p>
+	PosYUnit *int64 `json:"PosYUnit,omitnil,omitempty" name:"PosYUnit"`
+
+	// <p>Background configuration</p>
+	SubtitleBoardConfig *SubtitleBoardConfig `json:"SubtitleBoardConfig,omitnil,omitempty" name:"SubtitleBoardConfig"`
+
+	// <p>Column configuration</p>
+	SubtitleLayoutConfig *SubtitleLayoutConfig `json:"SubtitleLayoutConfig,omitnil,omitempty" name:"SubtitleLayoutConfig"`
+
+	// <p>Text stroke configuration</p>
+	SubtitleOutlineConfig *SubtitleOutlineConfig `json:"SubtitleOutlineConfig,omitnil,omitempty" name:"SubtitleOutlineConfig"`
+
+	// <p>Text shadow configuration</p>
+	SubtitleShadowConfig *SubtitleShadowConfig `json:"SubtitleShadowConfig,omitnil,omitempty" name:"SubtitleShadowConfig"`
+
+	// <p>Width of the source video dimensions, in pixels</p>
+	SampleWidth *int64 `json:"SampleWidth,omitnil,omitempty" name:"SampleWidth"`
+
+	// <p>Height of the source video dimensions, in unit pixel</p>
+	SampleHeight *int64 `json:"SampleHeight,omitnil,omitempty" name:"SampleHeight"`
+}
+
+type SubtitleEmbedTemplateItem struct {
+	// Unique identifier of the subtitle suppression template
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Subtitle suppression template name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Subtitle suppression template description
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Template type. Valid values:
+	// * Preset: system preset template
+	// * Custom: user-defined template.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Deletion mark. 0 Not deleted. 1 Deleted.
+	DeleteTag *int64 `json:"DeleteTag,omitnil,omitempty" name:"DeleteTag"`
+
+	// Template creation time in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Last modification time of the template in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Subtitle suppression module settings
+	SubtitleEmbedConfig *SubtitleEmbedConfig `json:"SubtitleEmbedConfig,omitnil,omitempty" name:"SubtitleEmbedConfig"`
+
+	// Subtitle suppression template English name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AliasName *string `json:"AliasName,omitnil,omitempty" name:"AliasName"`
+}
+
+type SubtitleLayoutConfig struct {
+	// Subtitle arrangement configuration switch, 0 for off, 1 for on, default 0
+	SubtitleLayoutConfigSwitch *int64 `json:"SubtitleLayoutConfigSwitch,omitnil,omitempty" name:"SubtitleLayoutConfigSwitch"`
+
+	// Line spacing. The value should be a positive integer.
+	// -Value range for pixels: [0, 1000].
+	// - Value range for percentages: [0, 100]. If this is not specified, the default value is 0.
+	LineSpacing *int64 `json:"LineSpacing,omitnil,omitempty" name:"LineSpacing"`
+
+	// LineSpacing unit, 0 pixel, 1 percentage, defaults to 0, pixel
+	LineSpacingUnit *int64 `json:"LineSpacingUnit,omitnil,omitempty" name:"LineSpacingUnit"`
+
+	// Alignment mode. Valid values: top: The top position of the subtitle is fixed, while the bottom position changes according to the line count. bottom: The bottom position of the subtitle is fixed, while the top position changes according to the line count. If this is not specified, bottom alignment is used by default.
+	Alignment *string `json:"Alignment,omitnil,omitempty" name:"Alignment"`
+}
+
+type SubtitleOutlineConfig struct {
+	// <p>Text stroke configuration switch, 0 for off, 1 for on, default 0</p>
+	SubtitleOutlineConfigSwitch *int64 `json:"SubtitleOutlineConfigSwitch,omitnil,omitempty" name:"SubtitleOutlineConfigSwitch"`
+
+	// <p>Stroke width, default unit pixel, underlying default value is 0.3% of the source video height</p>
+	OutlineWidth *float64 `json:"OutlineWidth,omitnil,omitempty" name:"OutlineWidth"`
+
+	// <p>Stroke width unit, 0 pixel, 1 percentage, defaults to 0, pixel</p>
+	OutlineWidthUnit *int64 `json:"OutlineWidthUnit,omitnil,omitempty" name:"OutlineWidthUnit"`
+
+	// <p>Border color. 6-digit base 16 RGB. Black by default if left blank.</p>
+	OutlineColor *string `json:"OutlineColor,omitnil,omitempty" name:"OutlineColor"`
+
+	// <p>Stroke transparency. The value should be a positive floating-point number in the range of (0, 1]. If this is not specified, the default value is 1, which means completely opaque.</p>
+	OutlineAlpha *float64 `json:"OutlineAlpha,omitnil,omitempty" name:"OutlineAlpha"`
+}
+
 type SubtitlePosition struct {
 	// Y-coordinate value when the subtitle is centered.
 	CenterY *int64 `json:"CenterY,omitnil,omitempty" name:"CenterY"`
 }
 
 type SubtitleResult struct {
-	// Language of the subtitle file.
+	// <p>Language of the subtitle file</p>
 	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
 
-	// Whether the processing is successful.
+	// <p>Whether the processing is successful.</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Subtitle file URL.
+	// <p>Subtitle file path</p>
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+
+	// <p>Subtitle suppression video path.</p>
+	SubtitleEmbedPath *string `json:"SubtitleEmbedPath,omitnil,omitempty" name:"SubtitleEmbedPath"`
+}
+
+type SubtitleShadowConfig struct {
+	// Text shadow configuration switch, 0 for off, 1 for on, default 0
+	SubtitleShadowConfigSwitch *int64 `json:"SubtitleShadowConfigSwitch,omitnil,omitempty" name:"SubtitleShadowConfigSwitch"`
+
+	// Shadow width, default unit pixel, underlying default value 0, no shading
+	ShadowWidth *float64 `json:"ShadowWidth,omitnil,omitempty" name:"ShadowWidth"`
+
+	// Shadow width unit. 0 for pixel, 1 for percentage. Default is 0 (pixel).
+	ShadowWidthUnit *int64 `json:"ShadowWidthUnit,omitnil,omitempty" name:"ShadowWidthUnit"`
+
+	// Shadow color. 6-digit base 16 RGB. Black by default if left blank (has set shadow in the current situation).
+	ShadowColor *string `json:"ShadowColor,omitnil,omitempty" name:"ShadowColor"`
+
+	// Shadow transparency. The value should be a positive floating-point number in the range of (0, 1]. If this is not specified, the default value is 1, which means completely opaque (with shadow configured).
+	ShadowAlpha *float64 `json:"ShadowAlpha,omitnil,omitempty" name:"ShadowAlpha"`
 }
 
 type SubtitleTemplate struct {
@@ -19316,23 +18803,38 @@ type SubtitleTemplate struct {
 	FontFileInput *MediaInputInfo `json:"FontFileInput,omitnil,omitempty" name:"FontFileInput"`
 
 	// Font type. Valid values:
-	// <li>hei.ttf: SimHei.</li>
+	// <li>hei.ttf: SimHei</li>
 	// <li>song.ttf: SimSun.</li>
-	// <li>kai.ttf (recommend) or simkai.ttf: SimKai.</li>
+	// <li>kai.ttf (recommend) or simkai.ttf: KaiTi.</li>
 	// <li>msyh.ttf: Microsoft YaHei.</li>
 	// <li>msyhbd.ttf: Microsoft YaHei Bold.</li>
 	// <li>hkjgt.ttf: DynaFont King Gothic.</li>
 	// <li>dhttx.ttf: DianHei Extra Light.</li>
 	// <li>xqgdzt.ttf: XiQue GuZiDian.</li>
-	// <li>qpcyt.ttf: QiaoPin ChaoYuan.</li>
+	// <li>qpcyt.ttf: Smart Splice Super Round Body</li>
 	// <li>arial.ttf: English only.</li>
-	// <li>dinalternate.ttf: DIN Alternate Bold.</li>
-	// <li>helveticalt.ttf: Helvetica.</li>
-	// <li>helveticains.ttf: Helvetica Inserat.</li>
-	// <li>trajanpro.ttf: TrajanPro-Bold.</li>
+	// <li>dinalternate.ttf:DIN Alternate Bold</li>
+	// <li>helveticalt.ttf:Helvetica</li>
+	// <li>helveticains.ttf:Helvetica Inserat</li>
+	// <li>trajanpro.ttf:TrajanPro-Bold</li>
 	// <li>korean.ttf: Korean.</li>
 	// <li>japanese.ttf: Japanese.</li>
 	// <li>thai.ttf: Thai.</li>
+	// <li>roboto.ttf:Roboto</li>
+	// <li>notosans.ttf:NotoSans</li>
+	// <li>notosansthai.ttf: Thai NotoSansThai</li>
+	// <li>sarabun.ttf: Thai Sarabun</li>
+	// <li>kanit.ttf: Thai Kanit</li>
+	// <li>charmonman.ttf: Thai Charmonman.</li>
+	// <li>notonaskharabic.ttf: Arabic NotoNaskhArabic.</li>
+	// <li>notosansdevanagari.ttf: NotoSansDevanagari for India.</li>
+	// <li>notosanstc.ttf: Cantonese Source Han Sans NotoSansTC</li>
+	// <li>notosanskr.ttf: Korean NotoSansKR.</li>
+	// <li>gothica1.ttf: Korean GothicA1.</li>
+	// <li>nanummyeongjo.ttf: Korean NanumMyeongjo.</li>
+	// <li>notosansjp.ttf: Japanese NotoSansJP.</li>
+	// <li>notoserifjp.ttf: Japanese NotoSerifJP.</li>
+	// <li>shipporimincho.ttf: Japanese ShipporiMincho.</li>
 	// Default value: hei.ttf.
 	// <br>Note:
 	// <li>kai.ttf is recommended for SimKai.</li>
@@ -19463,19 +18965,20 @@ type SubtitleTemplate struct {
 }
 
 type SubtitleTransResultItem struct {
-	// Translation marker.
-	// - Success
-	// - Error
+	// <p>Translation flag:</p><ul><li>Success</li><li>Error</li></ul>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Source language (such as "en").
+	// <p>Source language (such as "en")</p>
 	TransSrc *string `json:"TransSrc,omitnil,omitempty" name:"TransSrc"`
 
-	// Target language (such as "zh").
+	// <p>Target language (such as "zh")</p>
 	TransDst *string `json:"TransDst,omitnil,omitempty" name:"TransDst"`
 
-	// Subtitle file URL.
+	// <p>Subtitle file URL</p>
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+
+	// <p>Subtitle translation suppression video path.</p>
+	SubtitleEmbedPath *string `json:"SubtitleEmbedPath,omitnil,omitempty" name:"SubtitleEmbedPath"`
 }
 
 type SuperResolutionConfig struct {
@@ -19547,6 +19050,11 @@ type SvgWatermarkInputForUpdate struct {
 	Height *string `json:"Height,omitnil,omitempty" name:"Height"`
 }
 
+type SyncDubbingOutputOption struct {
+
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
 // Predefined struct for user
 type SyncDubbingRequestParams struct {
 	// Text for the synthesis. This is required for text to speech. The text cannot exceed 2000 characters in length.
@@ -19602,9 +19110,15 @@ type SyncDubbingRequestParams struct {
 	// Base64-encoded audio for cloning.
 	AudioData *string `json:"AudioData,omitnil,omitempty" name:"AudioData"`
 
+
+	AudioUrl *string `json:"AudioUrl,omitnil,omitempty" name:"AudioUrl"`
+
 	// Cloning audio language. The default language is Chinese.
 	// Supported languages are the same as those for TextLang.
 	AudioLang *string `json:"AudioLang,omitnil,omitempty" name:"AudioLang"`
+
+
+	Output *SyncDubbingOutputOption `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Extended parameters in the format of a JSON string.
 	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
@@ -19666,9 +19180,13 @@ type SyncDubbingRequest struct {
 	// Base64-encoded audio for cloning.
 	AudioData *string `json:"AudioData,omitnil,omitempty" name:"AudioData"`
 
+	AudioUrl *string `json:"AudioUrl,omitnil,omitempty" name:"AudioUrl"`
+
 	// Cloning audio language. The default language is Chinese.
 	// Supported languages are the same as those for TextLang.
 	AudioLang *string `json:"AudioLang,omitnil,omitempty" name:"AudioLang"`
+
+	Output *SyncDubbingOutputOption `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Extended parameters in the format of a JSON string.
 	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
@@ -19690,7 +19208,9 @@ func (r *SyncDubbingRequest) FromJsonString(s string) error {
 	delete(f, "TextLang")
 	delete(f, "VoiceId")
 	delete(f, "AudioData")
+	delete(f, "AudioUrl")
 	delete(f, "AudioLang")
+	delete(f, "Output")
 	delete(f, "ExtParam")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SyncDubbingRequest has unknown keys!", "")
@@ -19710,9 +19230,15 @@ type SyncDubbingResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AudioData *string `json:"AudioData,omitnil,omitempty" name:"AudioData"`
 
+
+	AudioUrl *string `json:"AudioUrl,omitnil,omitempty" name:"AudioUrl"`
+
 	// Cloned voice type ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -21121,10 +20647,10 @@ type TranslateConfigureInfo struct {
 	// <li>OFF: Disables an intelligent full speech recognition task.</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Video source language.
+
 	SourceLanguage *string `json:"SourceLanguage,omitnil,omitempty" name:"SourceLanguage"`
 
-	// Translated target language.
+
 	DestinationLanguage *string `json:"DestinationLanguage,omitnil,omitempty" name:"DestinationLanguage"`
 
 	// Generated subtitle file format. Leaving it as an empty string means no subtitle file will be generated. Valid value:

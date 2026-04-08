@@ -128,6 +128,9 @@ const (
 	// The tag value exceeded the length limit.
 	FAILEDOPERATION_TAGVALUETOOLONG = "FailedOperation.TagValueTooLong"
 
+	// 
+	FAILEDOPERATION_TASKOVERTIMEFETCHRESULT = "FailedOperation.TaskOvertimeFetchResult"
+
 	// The number of resources reached the limit.
 	FAILEDOPERATION_TOOMANYRESOURCES = "FailedOperation.TooManyResources"
 
@@ -226,6 +229,9 @@ const (
 
 	// The specified Spark task package file format does not match. Currently, only .jar or .py is supported.
 	INVALIDPARAMETER_INVALIDAPPFILEFORMAT = "InvalidParameter.InvalidAppFileFormat"
+
+	// 
+	INVALIDPARAMETER_INVALIDBUCKETNAME = "InvalidParameter.InvalidBucketName"
 
 	// The field name is set incorrectly. The field name must be less than or equal to 128 bytes.
 	INVALIDPARAMETER_INVALIDCOLUMNNAMELENGTH = "InvalidParameter.InvalidColumnNameLength"
@@ -473,6 +479,9 @@ const (
 	// Operation denied.
 	OPERATIONDENIED = "OperationDenied"
 
+	// 
+	REGIONERROR = "RegionError"
+
 	// The resource is occupied.
 	RESOURCEINUSE = "ResourceInUse"
 
@@ -646,6 +655,9 @@ const (
 
 	// Sub-users do not have the authority to revoke specific permissions.
 	UNAUTHORIZEDOPERATION_REVOKEPOLICY = "UnauthorizedOperation.RevokePolicy"
+
+	// 
+	UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONCODE_NOENGINECAMPERMISSIONS = "UnauthorizedOperation.UnauthorizedOperationCode_NoEngineCamPermissions"
 
 	// Sub-users are not administrators and cannot unbind working groups and users.
 	UNAUTHORIZEDOPERATION_UNBINDWORKGROUPSFROMUSER = "UnauthorizedOperation.UnbindWorkgroupsFromUser"

@@ -372,25 +372,7 @@ func NewCreateAigcImageTaskResponse() (response *CreateAigcImageTaskResponse) {
 // This API is used to create AIGC image generation tasks.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_BITRATE = "InvalidParameterValue.Bitrate"
-//  INVALIDPARAMETERVALUE_CODEC = "InvalidParameterValue.Codec"
-//  INVALIDPARAMETERVALUE_DISABLEHIGHERVIDEOBITRATE = "InvalidParameterValue.DisableHigherVideoBitrate"
-//  INVALIDPARAMETERVALUE_DISABLEHIGHERVIDEORESOLUTION = "InvalidParameterValue.DisableHigherVideoResolution"
-//  INVALIDPARAMETERVALUE_FILLTYPE = "InvalidParameterValue.FillType"
-//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
-//  INVALIDPARAMETERVALUE_FPS = "InvalidParameterValue.Fps"
-//  INVALIDPARAMETERVALUE_GOP = "InvalidParameterValue.Gop"
-//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
-//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
-//  INVALIDPARAMETERVALUE_REMOVEAUDIO = "InvalidParameterValue.RemoveAudio"
-//  INVALIDPARAMETERVALUE_REMOVEVIDEO = "InvalidParameterValue.RemoveVideo"
-//  INVALIDPARAMETERVALUE_SAMPLERATE = "InvalidParameterValue.SampleRate"
-//  INVALIDPARAMETERVALUE_SOUNDSYSTEM = "InvalidParameterValue.SoundSystem"
-//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
-//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  INVALIDPARAMETER_VIOLATIONCONTENT = "InvalidParameter.ViolationContent"
 func (c *Client) CreateAigcImageTask(request *CreateAigcImageTaskRequest) (response *CreateAigcImageTaskResponse, err error) {
     return c.CreateAigcImageTaskWithContext(context.Background(), request)
 }
@@ -399,25 +381,7 @@ func (c *Client) CreateAigcImageTask(request *CreateAigcImageTaskRequest) (respo
 // This API is used to create AIGC image generation tasks.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_BITRATE = "InvalidParameterValue.Bitrate"
-//  INVALIDPARAMETERVALUE_CODEC = "InvalidParameterValue.Codec"
-//  INVALIDPARAMETERVALUE_DISABLEHIGHERVIDEOBITRATE = "InvalidParameterValue.DisableHigherVideoBitrate"
-//  INVALIDPARAMETERVALUE_DISABLEHIGHERVIDEORESOLUTION = "InvalidParameterValue.DisableHigherVideoResolution"
-//  INVALIDPARAMETERVALUE_FILLTYPE = "InvalidParameterValue.FillType"
-//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
-//  INVALIDPARAMETERVALUE_FPS = "InvalidParameterValue.Fps"
-//  INVALIDPARAMETERVALUE_GOP = "InvalidParameterValue.Gop"
-//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
-//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
-//  INVALIDPARAMETERVALUE_REMOVEAUDIO = "InvalidParameterValue.RemoveAudio"
-//  INVALIDPARAMETERVALUE_REMOVEVIDEO = "InvalidParameterValue.RemoveVideo"
-//  INVALIDPARAMETERVALUE_SAMPLERATE = "InvalidParameterValue.SampleRate"
-//  INVALIDPARAMETERVALUE_SOUNDSYSTEM = "InvalidParameterValue.SoundSystem"
-//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
-//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  INVALIDPARAMETER_VIOLATIONCONTENT = "InvalidParameter.ViolationContent"
 func (c *Client) CreateAigcImageTaskWithContext(ctx context.Context, request *CreateAigcImageTaskRequest) (response *CreateAigcImageTaskResponse, err error) {
     if request == nil {
         request = NewCreateAigcImageTaskRequest()
@@ -458,25 +422,7 @@ func NewCreateAigcVideoTaskResponse() (response *CreateAigcVideoTaskResponse) {
 // This API is used to create AI video generation tasks.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_BITRATE = "InvalidParameterValue.Bitrate"
-//  INVALIDPARAMETERVALUE_CODEC = "InvalidParameterValue.Codec"
-//  INVALIDPARAMETERVALUE_DISABLEHIGHERVIDEOBITRATE = "InvalidParameterValue.DisableHigherVideoBitrate"
-//  INVALIDPARAMETERVALUE_DISABLEHIGHERVIDEORESOLUTION = "InvalidParameterValue.DisableHigherVideoResolution"
-//  INVALIDPARAMETERVALUE_FILLTYPE = "InvalidParameterValue.FillType"
-//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
-//  INVALIDPARAMETERVALUE_FPS = "InvalidParameterValue.Fps"
-//  INVALIDPARAMETERVALUE_GOP = "InvalidParameterValue.Gop"
-//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
-//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
-//  INVALIDPARAMETERVALUE_REMOVEAUDIO = "InvalidParameterValue.RemoveAudio"
-//  INVALIDPARAMETERVALUE_REMOVEVIDEO = "InvalidParameterValue.RemoveVideo"
-//  INVALIDPARAMETERVALUE_SAMPLERATE = "InvalidParameterValue.SampleRate"
-//  INVALIDPARAMETERVALUE_SOUNDSYSTEM = "InvalidParameterValue.SoundSystem"
-//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
-//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  INVALIDPARAMETER_VIOLATIONCONTENT = "InvalidParameter.ViolationContent"
 func (c *Client) CreateAigcVideoTask(request *CreateAigcVideoTaskRequest) (response *CreateAigcVideoTaskResponse, err error) {
     return c.CreateAigcVideoTaskWithContext(context.Background(), request)
 }
@@ -485,25 +431,7 @@ func (c *Client) CreateAigcVideoTask(request *CreateAigcVideoTaskRequest) (respo
 // This API is used to create AI video generation tasks.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_BITRATE = "InvalidParameterValue.Bitrate"
-//  INVALIDPARAMETERVALUE_CODEC = "InvalidParameterValue.Codec"
-//  INVALIDPARAMETERVALUE_DISABLEHIGHERVIDEOBITRATE = "InvalidParameterValue.DisableHigherVideoBitrate"
-//  INVALIDPARAMETERVALUE_DISABLEHIGHERVIDEORESOLUTION = "InvalidParameterValue.DisableHigherVideoResolution"
-//  INVALIDPARAMETERVALUE_FILLTYPE = "InvalidParameterValue.FillType"
-//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
-//  INVALIDPARAMETERVALUE_FPS = "InvalidParameterValue.Fps"
-//  INVALIDPARAMETERVALUE_GOP = "InvalidParameterValue.Gop"
-//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
-//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
-//  INVALIDPARAMETERVALUE_REMOVEAUDIO = "InvalidParameterValue.RemoveAudio"
-//  INVALIDPARAMETERVALUE_REMOVEVIDEO = "InvalidParameterValue.RemoveVideo"
-//  INVALIDPARAMETERVALUE_SAMPLERATE = "InvalidParameterValue.SampleRate"
-//  INVALIDPARAMETERVALUE_SOUNDSYSTEM = "InvalidParameterValue.SoundSystem"
-//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
-//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  INVALIDPARAMETER_VIOLATIONCONTENT = "InvalidParameter.ViolationContent"
 func (c *Client) CreateAigcVideoTaskWithContext(ctx context.Context, request *CreateAigcVideoTaskRequest) (response *CreateAigcVideoTaskResponse, err error) {
     if request == nil {
         request = NewCreateAigcVideoTaskRequest()
@@ -1321,12 +1249,15 @@ func NewCreateSmartEraseTemplateResponse() (response *CreateSmartEraseTemplateRe
 //  INVALIDPARAMETERVALUE_OCRSWITCH = "InvalidParameterValue.OcrSwitch"
 //  INVALIDPARAMETERVALUE_PRIVACYMODEL = "InvalidParameterValue.PrivacyModel"
 //  INVALIDPARAMETERVALUE_PRIVACYTARGETS = "InvalidParameterValue.PrivacyTargets"
+//  INVALIDPARAMETERVALUE_SUBTITLEEMBEDID = "InvalidParameterValue.SubtitleEmbedId"
 //  INVALIDPARAMETERVALUE_SUBTITLEERASEMETHOD = "InvalidParameterValue.SubtitleEraseMethod"
 //  INVALIDPARAMETERVALUE_SUBTITLELANG = "InvalidParameterValue.SubtitleLang"
 //  INVALIDPARAMETERVALUE_SUBTITLEMODEL = "InvalidParameterValue.SubtitleModel"
 //  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
 //  INVALIDPARAMETERVALUE_TRANSDSTLANG = "InvalidParameterValue.TransDstLang"
 //  INVALIDPARAMETERVALUE_TRANSSWITCH = "InvalidParameterValue.TransSwitch"
+//  INVALIDPARAMETERVALUE_USEORIGINALPOS = "InvalidParameterValue.UseOriginalPos"
+//  INVALIDPARAMETERVALUE_USEORIGINALSIZE = "InvalidParameterValue.UseOriginalSize"
 //  INVALIDPARAMETERVALUE_WATERMARKERASEMETHOD = "InvalidParameterValue.WatermarkEraseMethod"
 //  INVALIDPARAMETERVALUE_WATERMARKMODEL = "InvalidParameterValue.WatermarkModel"
 func (c *Client) CreateSmartEraseTemplate(request *CreateSmartEraseTemplateRequest) (response *CreateSmartEraseTemplateResponse, err error) {
@@ -1348,12 +1279,15 @@ func (c *Client) CreateSmartEraseTemplate(request *CreateSmartEraseTemplateReque
 //  INVALIDPARAMETERVALUE_OCRSWITCH = "InvalidParameterValue.OcrSwitch"
 //  INVALIDPARAMETERVALUE_PRIVACYMODEL = "InvalidParameterValue.PrivacyModel"
 //  INVALIDPARAMETERVALUE_PRIVACYTARGETS = "InvalidParameterValue.PrivacyTargets"
+//  INVALIDPARAMETERVALUE_SUBTITLEEMBEDID = "InvalidParameterValue.SubtitleEmbedId"
 //  INVALIDPARAMETERVALUE_SUBTITLEERASEMETHOD = "InvalidParameterValue.SubtitleEraseMethod"
 //  INVALIDPARAMETERVALUE_SUBTITLELANG = "InvalidParameterValue.SubtitleLang"
 //  INVALIDPARAMETERVALUE_SUBTITLEMODEL = "InvalidParameterValue.SubtitleModel"
 //  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
 //  INVALIDPARAMETERVALUE_TRANSDSTLANG = "InvalidParameterValue.TransDstLang"
 //  INVALIDPARAMETERVALUE_TRANSSWITCH = "InvalidParameterValue.TransSwitch"
+//  INVALIDPARAMETERVALUE_USEORIGINALPOS = "InvalidParameterValue.UseOriginalPos"
+//  INVALIDPARAMETERVALUE_USEORIGINALSIZE = "InvalidParameterValue.UseOriginalSize"
 //  INVALIDPARAMETERVALUE_WATERMARKERASEMETHOD = "InvalidParameterValue.WatermarkEraseMethod"
 //  INVALIDPARAMETERVALUE_WATERMARKMODEL = "InvalidParameterValue.WatermarkModel"
 func (c *Client) CreateSmartEraseTemplateWithContext(ctx context.Context, request *CreateSmartEraseTemplateRequest) (response *CreateSmartEraseTemplateResponse, err error) {
@@ -1401,6 +1335,7 @@ func NewCreateSmartSubtitleTemplateResponse() (response *CreateSmartSubtitleTemp
 //  INVALIDPARAMETERVALUE_ASRHOTWORDSSWITCH = "InvalidParameterValue.AsrHotWordsSwitch"
 //  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_SUBTITLEEMBEDID = "InvalidParameterValue.SubtitleEmbedId"
 //  INVALIDPARAMETERVALUE_SUBTITLEFORMAT = "InvalidParameterValue.SubtitleFormat"
 //  INVALIDPARAMETERVALUE_SUBTITLETYPE = "InvalidParameterValue.SubtitleType"
 //  INVALIDPARAMETERVALUE_TRANSLATEDSTLANGUAGE = "InvalidParameterValue.TranslateDstLanguage"
@@ -1419,6 +1354,7 @@ func (c *Client) CreateSmartSubtitleTemplate(request *CreateSmartSubtitleTemplat
 //  INVALIDPARAMETERVALUE_ASRHOTWORDSSWITCH = "InvalidParameterValue.AsrHotWordsSwitch"
 //  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_SUBTITLEEMBEDID = "InvalidParameterValue.SubtitleEmbedId"
 //  INVALIDPARAMETERVALUE_SUBTITLEFORMAT = "InvalidParameterValue.SubtitleFormat"
 //  INVALIDPARAMETERVALUE_SUBTITLETYPE = "InvalidParameterValue.SubtitleType"
 //  INVALIDPARAMETERVALUE_TRANSLATEDSTLANGUAGE = "InvalidParameterValue.TranslateDstLanguage"
@@ -1503,6 +1439,58 @@ func (c *Client) CreateSnapshotByTimeOffsetTemplateWithContext(ctx context.Conte
     request.SetContext(ctx)
     
     response = NewCreateSnapshotByTimeOffsetTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateSubtitleEmbedTemplateRequest() (request *CreateSubtitleEmbedTemplateRequest) {
+    request = &CreateSubtitleEmbedTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "CreateSubtitleEmbedTemplate")
+    
+    
+    return
+}
+
+func NewCreateSubtitleEmbedTemplateResponse() (response *CreateSubtitleEmbedTemplateResponse) {
+    response = &CreateSubtitleEmbedTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateSubtitleEmbedTemplate
+// This API is used to create a custom subtitle suppression template.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+func (c *Client) CreateSubtitleEmbedTemplate(request *CreateSubtitleEmbedTemplateRequest) (response *CreateSubtitleEmbedTemplateResponse, err error) {
+    return c.CreateSubtitleEmbedTemplateWithContext(context.Background(), request)
+}
+
+// CreateSubtitleEmbedTemplate
+// This API is used to create a custom subtitle suppression template.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+func (c *Client) CreateSubtitleEmbedTemplateWithContext(ctx context.Context, request *CreateSubtitleEmbedTemplateRequest) (response *CreateSubtitleEmbedTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateSubtitleEmbedTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "CreateSubtitleEmbedTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSubtitleEmbedTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateSubtitleEmbedTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -2793,6 +2781,64 @@ func (c *Client) DeleteSnapshotByTimeOffsetTemplateWithContext(ctx context.Conte
     request.SetContext(ctx)
     
     response = NewDeleteSnapshotByTimeOffsetTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteSubtitleEmbedTemplateRequest() (request *DeleteSubtitleEmbedTemplateRequest) {
+    request = &DeleteSubtitleEmbedTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DeleteSubtitleEmbedTemplate")
+    
+    
+    return
+}
+
+func NewDeleteSubtitleEmbedTemplateResponse() (response *DeleteSubtitleEmbedTemplateResponse) {
+    response = &DeleteSubtitleEmbedTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteSubtitleEmbedTemplate
+// Delete a user-customized Subtitle Suppression Template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteSubtitleEmbedTemplate(request *DeleteSubtitleEmbedTemplateRequest) (response *DeleteSubtitleEmbedTemplateResponse, err error) {
+    return c.DeleteSubtitleEmbedTemplateWithContext(context.Background(), request)
+}
+
+// DeleteSubtitleEmbedTemplate
+// Delete a user-customized Subtitle Suppression Template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteSubtitleEmbedTemplateWithContext(ctx context.Context, request *DeleteSubtitleEmbedTemplateRequest) (response *DeleteSubtitleEmbedTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteSubtitleEmbedTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DeleteSubtitleEmbedTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteSubtitleEmbedTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteSubtitleEmbedTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -4401,6 +4447,66 @@ func (c *Client) DescribeStreamLinkSecurityGroupWithContext(ctx context.Context,
     request.SetContext(ctx)
     
     response = NewDescribeStreamLinkSecurityGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSubtitleEmbedTemplatesRequest() (request *DescribeSubtitleEmbedTemplatesRequest) {
+    request = &DescribeSubtitleEmbedTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeSubtitleEmbedTemplates")
+    
+    
+    return
+}
+
+func NewDescribeSubtitleEmbedTemplatesResponse() (response *DescribeSubtitleEmbedTemplatesResponse) {
+    response = &DescribeSubtitleEmbedTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSubtitleEmbedTemplates
+// This API is used to retrieve the subtitle suppression template details list based on template unique identifier. The returned results include all eligible user-customized subtitle suppression templates and system preset subtitle suppression templates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeSubtitleEmbedTemplates(request *DescribeSubtitleEmbedTemplatesRequest) (response *DescribeSubtitleEmbedTemplatesResponse, err error) {
+    return c.DescribeSubtitleEmbedTemplatesWithContext(context.Background(), request)
+}
+
+// DescribeSubtitleEmbedTemplates
+// This API is used to retrieve the subtitle suppression template details list based on template unique identifier. The returned results include all eligible user-customized subtitle suppression templates and system preset subtitle suppression templates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeSubtitleEmbedTemplatesWithContext(ctx context.Context, request *DescribeSubtitleEmbedTemplatesRequest) (response *DescribeSubtitleEmbedTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeSubtitleEmbedTemplatesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DescribeSubtitleEmbedTemplates")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSubtitleEmbedTemplates require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSubtitleEmbedTemplatesResponse()
     err = c.Send(request, response)
     return
 }
@@ -6370,12 +6476,15 @@ func NewModifySmartEraseTemplateResponse() (response *ModifySmartEraseTemplateRe
 //  INVALIDPARAMETERVALUE_OCRSWITCH = "InvalidParameterValue.OcrSwitch"
 //  INVALIDPARAMETERVALUE_PRIVACYMODEL = "InvalidParameterValue.PrivacyModel"
 //  INVALIDPARAMETERVALUE_PRIVACYTARGETS = "InvalidParameterValue.PrivacyTargets"
+//  INVALIDPARAMETERVALUE_SUBTITLEEMBEDID = "InvalidParameterValue.SubtitleEmbedId"
 //  INVALIDPARAMETERVALUE_SUBTITLEERASEMETHOD = "InvalidParameterValue.SubtitleEraseMethod"
 //  INVALIDPARAMETERVALUE_SUBTITLEFORMAT = "InvalidParameterValue.SubtitleFormat"
 //  INVALIDPARAMETERVALUE_SUBTITLELANG = "InvalidParameterValue.SubtitleLang"
 //  INVALIDPARAMETERVALUE_SUBTITLEMODEL = "InvalidParameterValue.SubtitleModel"
 //  INVALIDPARAMETERVALUE_TRANSDSTLANG = "InvalidParameterValue.TransDstLang"
 //  INVALIDPARAMETERVALUE_TRANSSWITCH = "InvalidParameterValue.TransSwitch"
+//  INVALIDPARAMETERVALUE_USEORIGINALPOS = "InvalidParameterValue.UseOriginalPos"
+//  INVALIDPARAMETERVALUE_USEORIGINALSIZE = "InvalidParameterValue.UseOriginalSize"
 //  INVALIDPARAMETERVALUE_WATERMARKERASEMETHOD = "InvalidParameterValue.WatermarkEraseMethod"
 //  INVALIDPARAMETERVALUE_WATERMARKMODEL = "InvalidParameterValue.WatermarkModel"
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
@@ -6403,12 +6512,15 @@ func (c *Client) ModifySmartEraseTemplate(request *ModifySmartEraseTemplateReque
 //  INVALIDPARAMETERVALUE_OCRSWITCH = "InvalidParameterValue.OcrSwitch"
 //  INVALIDPARAMETERVALUE_PRIVACYMODEL = "InvalidParameterValue.PrivacyModel"
 //  INVALIDPARAMETERVALUE_PRIVACYTARGETS = "InvalidParameterValue.PrivacyTargets"
+//  INVALIDPARAMETERVALUE_SUBTITLEEMBEDID = "InvalidParameterValue.SubtitleEmbedId"
 //  INVALIDPARAMETERVALUE_SUBTITLEERASEMETHOD = "InvalidParameterValue.SubtitleEraseMethod"
 //  INVALIDPARAMETERVALUE_SUBTITLEFORMAT = "InvalidParameterValue.SubtitleFormat"
 //  INVALIDPARAMETERVALUE_SUBTITLELANG = "InvalidParameterValue.SubtitleLang"
 //  INVALIDPARAMETERVALUE_SUBTITLEMODEL = "InvalidParameterValue.SubtitleModel"
 //  INVALIDPARAMETERVALUE_TRANSDSTLANG = "InvalidParameterValue.TransDstLang"
 //  INVALIDPARAMETERVALUE_TRANSSWITCH = "InvalidParameterValue.TransSwitch"
+//  INVALIDPARAMETERVALUE_USEORIGINALPOS = "InvalidParameterValue.UseOriginalPos"
+//  INVALIDPARAMETERVALUE_USEORIGINALSIZE = "InvalidParameterValue.UseOriginalSize"
 //  INVALIDPARAMETERVALUE_WATERMARKERASEMETHOD = "InvalidParameterValue.WatermarkEraseMethod"
 //  INVALIDPARAMETERVALUE_WATERMARKMODEL = "InvalidParameterValue.WatermarkModel"
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
@@ -6460,6 +6572,7 @@ func NewModifySmartSubtitleTemplateResponse() (response *ModifySmartSubtitleTemp
 //  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
 //  INVALIDPARAMETERVALUE_MODIFYDEFAULTTEMPLATE = "InvalidParameterValue.ModifyDefaultTemplate"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_SUBTITLEEMBEDID = "InvalidParameterValue.SubtitleEmbedId"
 //  INVALIDPARAMETERVALUE_SUBTITLEFORMAT = "InvalidParameterValue.SubtitleFormat"
 //  INVALIDPARAMETERVALUE_SUBTITLETYPE = "InvalidParameterValue.SubtitleType"
 //  INVALIDPARAMETERVALUE_TRANSLATEDSTLANGUAGE = "InvalidParameterValue.TranslateDstLanguage"
@@ -6482,6 +6595,7 @@ func (c *Client) ModifySmartSubtitleTemplate(request *ModifySmartSubtitleTemplat
 //  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
 //  INVALIDPARAMETERVALUE_MODIFYDEFAULTTEMPLATE = "InvalidParameterValue.ModifyDefaultTemplate"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_SUBTITLEEMBEDID = "InvalidParameterValue.SubtitleEmbedId"
 //  INVALIDPARAMETERVALUE_SUBTITLEFORMAT = "InvalidParameterValue.SubtitleFormat"
 //  INVALIDPARAMETERVALUE_SUBTITLETYPE = "InvalidParameterValue.SubtitleType"
 //  INVALIDPARAMETERVALUE_TRANSLATEDSTLANGUAGE = "InvalidParameterValue.TranslateDstLanguage"
@@ -6567,6 +6681,68 @@ func (c *Client) ModifySnapshotByTimeOffsetTemplateWithContext(ctx context.Conte
     request.SetContext(ctx)
     
     response = NewModifySnapshotByTimeOffsetTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifySubtitleEmbedTemplateRequest() (request *ModifySubtitleEmbedTemplateRequest) {
+    request = &ModifySubtitleEmbedTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "ModifySubtitleEmbedTemplate")
+    
+    
+    return
+}
+
+func NewModifySubtitleEmbedTemplateResponse() (response *ModifySubtitleEmbedTemplateResponse) {
+    response = &ModifySubtitleEmbedTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifySubtitleEmbedTemplate
+// This API is used to modify a user-customized subtitle suppression template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_MODIFYDEFAULTTEMPLATE = "InvalidParameterValue.ModifyDefaultTemplate"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifySubtitleEmbedTemplate(request *ModifySubtitleEmbedTemplateRequest) (response *ModifySubtitleEmbedTemplateResponse, err error) {
+    return c.ModifySubtitleEmbedTemplateWithContext(context.Background(), request)
+}
+
+// ModifySubtitleEmbedTemplate
+// This API is used to modify a user-customized subtitle suppression template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_MODIFYDEFAULTTEMPLATE = "InvalidParameterValue.ModifyDefaultTemplate"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifySubtitleEmbedTemplateWithContext(ctx context.Context, request *ModifySubtitleEmbedTemplateRequest) (response *ModifySubtitleEmbedTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifySubtitleEmbedTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "ModifySubtitleEmbedTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySubtitleEmbedTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifySubtitleEmbedTemplateResponse()
     err = c.Send(request, response)
     return
 }

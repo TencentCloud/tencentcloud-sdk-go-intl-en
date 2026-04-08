@@ -68,6 +68,9 @@ const (
 	// InvalidParameter.NotFound
 	INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 
+	// Review blocklist for user-submitted input.
+	INVALIDPARAMETER_VIOLATIONCONTENT = "InvalidParameter.ViolationContent"
+
 	// Incorrect parameter value.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
 
@@ -323,6 +326,9 @@ const (
 	// Source file error.
 	INVALIDPARAMETERVALUE_SRCFILE = "InvalidParameterValue.SrcFile"
 
+	// Subtitle suppression ID invalid
+	INVALIDPARAMETERVALUE_SUBTITLEEMBEDID = "InvalidParameterValue.SubtitleEmbedId"
+
 	// The subtitle erasing method of the erasing template is incorrect.
 	INVALIDPARAMETERVALUE_SUBTITLEERASEMETHOD = "InvalidParameterValue.SubtitleEraseMethod"
 
@@ -385,6 +391,12 @@ const (
 
 	// Unknown detection category.
 	INVALIDPARAMETERVALUE_UNKNOWNCATEGORY = "InvalidParameterValue.UnknownCategory"
+
+	// UseOriginalPos unavailable
+	INVALIDPARAMETERVALUE_USEORIGINALPOS = "InvalidParameterValue.UseOriginalPos"
+
+	// UseOriginalSize Unavailable
+	INVALIDPARAMETERVALUE_USEORIGINALSIZE = "InvalidParameterValue.UseOriginalSize"
 
 	// Incorrect parameter value: the custom face library filter tag is invalid.
 	INVALIDPARAMETERVALUE_USERDEFINELIBRARYLABELSET = "InvalidParameterValue.UserDefineLibraryLabelSet"
