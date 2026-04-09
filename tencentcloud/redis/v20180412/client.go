@@ -5319,6 +5319,58 @@ func (c *Client) ModifyInstanceBackupModeWithContext(ctx context.Context, reques
     return
 }
 
+func NewModifyInstanceChargeTypeRequest() (request *ModifyInstanceChargeTypeRequest) {
+    request = &ModifyInstanceChargeTypeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("redis", APIVersion, "ModifyInstanceChargeType")
+    
+    
+    return
+}
+
+func NewModifyInstanceChargeTypeResponse() (response *ModifyInstanceChargeTypeResponse) {
+    response = &ModifyInstanceChargeTypeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyInstanceChargeType
+// This API is used to change the billing type of an instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_EMPTYPARAM = "InvalidParameter.EmptyParam"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+func (c *Client) ModifyInstanceChargeType(request *ModifyInstanceChargeTypeRequest) (response *ModifyInstanceChargeTypeResponse, err error) {
+    return c.ModifyInstanceChargeTypeWithContext(context.Background(), request)
+}
+
+// ModifyInstanceChargeType
+// This API is used to change the billing type of an instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_EMPTYPARAM = "InvalidParameter.EmptyParam"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+func (c *Client) ModifyInstanceChargeTypeWithContext(ctx context.Context, request *ModifyInstanceChargeTypeRequest) (response *ModifyInstanceChargeTypeResponse, err error) {
+    if request == nil {
+        request = NewModifyInstanceChargeTypeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "redis", APIVersion, "ModifyInstanceChargeType")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyInstanceChargeType require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyInstanceChargeTypeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyInstanceEventRequest() (request *ModifyInstanceEventRequest) {
     request = &ModifyInstanceEventRequest{
         BaseRequest: &tchttp.BaseRequest{},

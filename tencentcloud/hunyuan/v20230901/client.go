@@ -289,6 +289,80 @@ func (c *Client) Describe3DSmartTopologyJobWithContext(ctx context.Context, requ
     return
 }
 
+func NewDescribeConvert3DFormatJobRequest() (request *DescribeConvert3DFormatJobRequest) {
+    request = &DescribeConvert3DFormatJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("hunyuan", APIVersion, "DescribeConvert3DFormatJob")
+    
+    
+    return
+}
+
+func NewDescribeConvert3DFormatJobResponse() (response *DescribeConvert3DFormatJobResponse) {
+    response = &DescribeConvert3DFormatJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeConvert3DFormatJob
+// According to Convert3DFormatJob, querying the specific results of the model format conversion typically requires the unique JobID corresponding to that task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) DescribeConvert3DFormatJob(request *DescribeConvert3DFormatJobRequest) (response *DescribeConvert3DFormatJobResponse, err error) {
+    return c.DescribeConvert3DFormatJobWithContext(context.Background(), request)
+}
+
+// DescribeConvert3DFormatJob
+// According to Convert3DFormatJob, querying the specific results of the model format conversion typically requires the unique JobID corresponding to that task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) DescribeConvert3DFormatJobWithContext(ctx context.Context, request *DescribeConvert3DFormatJobRequest) (response *DescribeConvert3DFormatJobResponse, err error) {
+    if request == nil {
+        request = NewDescribeConvert3DFormatJobRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "hunyuan", APIVersion, "DescribeConvert3DFormatJob")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeConvert3DFormatJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeConvert3DFormatJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeHunyuanTo3DUVJobRequest() (request *DescribeHunyuanTo3DUVJobRequest) {
     request = &DescribeHunyuanTo3DUVJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -741,6 +815,80 @@ func (c *Client) Submit3DSmartTopologyJobWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewSubmit3DSmartTopologyJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSubmitConvert3DFormatJobRequest() (request *SubmitConvert3DFormatJobRequest) {
+    request = &SubmitConvert3DFormatJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("hunyuan", APIVersion, "SubmitConvert3DFormatJob")
+    
+    
+    return
+}
+
+func NewSubmitConvert3DFormatJobResponse() (response *SubmitConvert3DFormatJobResponse) {
+    response = &SubmitConvert3DFormatJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SubmitConvert3DFormatJob
+// After inputting the 3D model file, the system will automatically convert it to the required format. The maximum supported file size is 200MB.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) SubmitConvert3DFormatJob(request *SubmitConvert3DFormatJobRequest) (response *SubmitConvert3DFormatJobResponse, err error) {
+    return c.SubmitConvert3DFormatJobWithContext(context.Background(), request)
+}
+
+// SubmitConvert3DFormatJob
+// After inputting the 3D model file, the system will automatically convert it to the required format. The maximum supported file size is 200MB.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) SubmitConvert3DFormatJobWithContext(ctx context.Context, request *SubmitConvert3DFormatJobRequest) (response *SubmitConvert3DFormatJobResponse, err error) {
+    if request == nil {
+        request = NewSubmitConvert3DFormatJobRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "hunyuan", APIVersion, "SubmitConvert3DFormatJob")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SubmitConvert3DFormatJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSubmitConvert3DFormatJobResponse()
     err = c.Send(request, response)
     return
 }

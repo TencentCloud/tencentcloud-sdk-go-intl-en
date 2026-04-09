@@ -5289,111 +5289,153 @@ func (r *DescribeTagListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeVoucherInfoRequestParams struct {
-	// The number of records per page. The default is 20, and the maximum is 1,000.
+	// <p>How many data entries per page, 20 is selected by default, maximum not exceeding 1000</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// The page number the records start from. The default is 1.
+	// <p>Page number, starts from 1 by default</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// The voucher status. Valid values: `unUsed`, `used`, `delivered`, `cancel`, `overdue`.
+	// <p>Voucher status: pending use: unUsed, Used: used, delivered: delivered, discarded: cancel, expired: overdue</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// The voucher ID.
+	// <p>Voucher id</p>
 	VoucherId *string `json:"VoucherId,omitnil,omitempty" name:"VoucherId"`
 
-	// The voucher order ID.
+	// <p>Voucher order id</p>
 	CodeId *string `json:"CodeId,omitnil,omitempty" name:"CodeId"`
 
-	// The product code.
+	// <p>product code</p>
 	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
 
-	// The campaign ID.
+	// <p>Activity id</p>
 	ActivityId *string `json:"ActivityId,omitnil,omitempty" name:"ActivityId"`
 
-	// The voucher name.
+	// <p>Voucher name</p>
 	VoucherName *string `json:"VoucherName,omitnil,omitempty" name:"VoucherName"`
 
-	// The start date of the voucher issuance, such as `2021-01-01`.
+	// <p>Start time of delivery. Example: 2021-01-01</p>
 	TimeFrom *string `json:"TimeFrom,omitnil,omitempty" name:"TimeFrom"`
 
-	// The end date of the voucher issuance, such as `2021-01-01`.
+	// <p>Delivery end time. Example: 2021-01-01</p>
 	TimeTo *string `json:"TimeTo,omitnil,omitempty" name:"TimeTo"`
 
-	// The field used to sort the records. Valid values: BeginTime, EndTime, CreateTime.
+	// <p>Specified sorting field: BeginTime start time, EndTime expiry time, CreateTime creation time</p>
 	SortField *string `json:"SortField,omitnil,omitempty" name:"SortField"`
 
-	// Whether to sort the records in ascending or descending order. Valid values: desc, asc.
+	// <p>Specify ascending/descending order: desc, asc</p>
 	SortOrder *string `json:"SortOrder,omitnil,omitempty" name:"SortOrder"`
 
-	// The payment mode. Valid values: `postPay`: pay-as-you-go; `prePay`: prepaid; `riPay`: reserved instance; empty or `*`: all. If this parameter is empty or `*`, `productCode` and `subProductCode` must also be empty.
+	// <p>Payment mode, postPay (postpaid)/prePay (prepaid)/riPay (reserved instance)/"" or "*" means all modes. If payMode is "" or "*", productCode and subProductCode must be empty.</p>
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// If `PayMode` is `postPay`, this parameter may be `spotpay` (spot instance) or `settle account` (regular pay-as-you-go). If `PayMode` is `prePay`, this parameter may be `purchase`, `renew`, or `modify` (downgrade/upgrade). If `PayMode` is `riPay`, this parameter may be `oneOffFee` (prepayment of reserved instance) or `hourlyFee` (hourly billing of reserved instance). `*` means to query vouchers that support all billing scenarios.
+	// <p>Payment scenario PayMode=postPay: spotpay - spot instance, "settle account" - standard post-paid. PayMode=prePay: purchase - monthly subscription new purchase, renew - annual and monthly renewal (auto renewal), modify - monthly subscription configuration change. PayMode=riPay: oneOffFee - prepayment of reserved instance, hourlyFee - hourly charge for reserved instance, * - support all payment scenarios.</p>
 	PayScene *string `json:"PayScene,omitnil,omitempty" name:"PayScene"`
 
-	// The operator. The default is the UIN of the current user.
+	// <p>Operator is used by default as user uin</p>
 	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 
-	// The primary types of vouchers are has_price and no_price, which represent the cash voucher with a price and the cash voucher without a price respectively.
+	// <p>The primary types of vouchers are has_price and no_price, which represent the cash voucher with a price and the cash voucher without a price respectively.</p>
 	VoucherMainType *string `json:"VoucherMainType,omitnil,omitempty" name:"VoucherMainType"`
 
-	// Voucher subtype: Discount is a discount voucher, and deduct is a deduction voucher.
+	// <p>Voucher subtype: Discount is a discount voucher, and deduct is a deduction voucher.</p>
 	VoucherSubType *string `json:"VoucherSubType,omitnil,omitempty" name:"VoucherSubType"`
+
+	// <p>Voucher validity start time</p>
+	StartTimeFrom *string `json:"StartTimeFrom,omitnil,omitempty" name:"StartTimeFrom"`
+
+	// <p>Voucher validity time end time</p>
+	StartTimeTo *string `json:"StartTimeTo,omitnil,omitempty" name:"StartTimeTo"`
+
+	// <p>Voucher expiration time start time</p>
+	EndTimeFrom *string `json:"EndTimeFrom,omitnil,omitempty" name:"EndTimeFrom"`
+
+	// <p>Voucher expiration time end time</p>
+	EndTimeTo *string `json:"EndTimeTo,omitnil,omitempty" name:"EndTimeTo"`
+
+	// <p>Voucher issuance start time</p>
+	CreateTimeFrom *string `json:"CreateTimeFrom,omitnil,omitempty" name:"CreateTimeFrom"`
+
+	// <p>Voucher issuance time end time</p>
+	CreateTimeTo *string `json:"CreateTimeTo,omitnil,omitempty" name:"CreateTimeTo"`
+
+	// <p>Language parameter</p><p>Default value: zh</p><p>Expect the product name to return in Chinese or other languages. Currently only support Chinese and English. Return in Chinese when "zh" is entered or left blank; return in English in other cases.</p>
+	Lang *string `json:"Lang,omitnil,omitempty" name:"Lang"`
 }
 
 type DescribeVoucherInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// The number of records per page. The default is 20, and the maximum is 1,000.
+	// <p>How many data entries per page, 20 is selected by default, maximum not exceeding 1000</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// The page number the records start from. The default is 1.
+	// <p>Page number, starts from 1 by default</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// The voucher status. Valid values: `unUsed`, `used`, `delivered`, `cancel`, `overdue`.
+	// <p>Voucher status: pending use: unUsed, Used: used, delivered: delivered, discarded: cancel, expired: overdue</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// The voucher ID.
+	// <p>Voucher id</p>
 	VoucherId *string `json:"VoucherId,omitnil,omitempty" name:"VoucherId"`
 
-	// The voucher order ID.
+	// <p>Voucher order id</p>
 	CodeId *string `json:"CodeId,omitnil,omitempty" name:"CodeId"`
 
-	// The product code.
+	// <p>product code</p>
 	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
 
-	// The campaign ID.
+	// <p>Activity id</p>
 	ActivityId *string `json:"ActivityId,omitnil,omitempty" name:"ActivityId"`
 
-	// The voucher name.
+	// <p>Voucher name</p>
 	VoucherName *string `json:"VoucherName,omitnil,omitempty" name:"VoucherName"`
 
-	// The start date of the voucher issuance, such as `2021-01-01`.
+	// <p>Start time of delivery. Example: 2021-01-01</p>
 	TimeFrom *string `json:"TimeFrom,omitnil,omitempty" name:"TimeFrom"`
 
-	// The end date of the voucher issuance, such as `2021-01-01`.
+	// <p>Delivery end time. Example: 2021-01-01</p>
 	TimeTo *string `json:"TimeTo,omitnil,omitempty" name:"TimeTo"`
 
-	// The field used to sort the records. Valid values: BeginTime, EndTime, CreateTime.
+	// <p>Specified sorting field: BeginTime start time, EndTime expiry time, CreateTime creation time</p>
 	SortField *string `json:"SortField,omitnil,omitempty" name:"SortField"`
 
-	// Whether to sort the records in ascending or descending order. Valid values: desc, asc.
+	// <p>Specify ascending/descending order: desc, asc</p>
 	SortOrder *string `json:"SortOrder,omitnil,omitempty" name:"SortOrder"`
 
-	// The payment mode. Valid values: `postPay`: pay-as-you-go; `prePay`: prepaid; `riPay`: reserved instance; empty or `*`: all. If this parameter is empty or `*`, `productCode` and `subProductCode` must also be empty.
+	// <p>Payment mode, postPay (postpaid)/prePay (prepaid)/riPay (reserved instance)/"" or "*" means all modes. If payMode is "" or "*", productCode and subProductCode must be empty.</p>
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// If `PayMode` is `postPay`, this parameter may be `spotpay` (spot instance) or `settle account` (regular pay-as-you-go). If `PayMode` is `prePay`, this parameter may be `purchase`, `renew`, or `modify` (downgrade/upgrade). If `PayMode` is `riPay`, this parameter may be `oneOffFee` (prepayment of reserved instance) or `hourlyFee` (hourly billing of reserved instance). `*` means to query vouchers that support all billing scenarios.
+	// <p>Payment scenario PayMode=postPay: spotpay - spot instance, "settle account" - standard post-paid. PayMode=prePay: purchase - monthly subscription new purchase, renew - annual and monthly renewal (auto renewal), modify - monthly subscription configuration change. PayMode=riPay: oneOffFee - prepayment of reserved instance, hourlyFee - hourly charge for reserved instance, * - support all payment scenarios.</p>
 	PayScene *string `json:"PayScene,omitnil,omitempty" name:"PayScene"`
 
-	// The operator. The default is the UIN of the current user.
+	// <p>Operator is used by default as user uin</p>
 	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 
-	// The primary types of vouchers are has_price and no_price, which represent the cash voucher with a price and the cash voucher without a price respectively.
+	// <p>The primary types of vouchers are has_price and no_price, which represent the cash voucher with a price and the cash voucher without a price respectively.</p>
 	VoucherMainType *string `json:"VoucherMainType,omitnil,omitempty" name:"VoucherMainType"`
 
-	// Voucher subtype: Discount is a discount voucher, and deduct is a deduction voucher.
+	// <p>Voucher subtype: Discount is a discount voucher, and deduct is a deduction voucher.</p>
 	VoucherSubType *string `json:"VoucherSubType,omitnil,omitempty" name:"VoucherSubType"`
+
+	// <p>Voucher validity start time</p>
+	StartTimeFrom *string `json:"StartTimeFrom,omitnil,omitempty" name:"StartTimeFrom"`
+
+	// <p>Voucher validity time end time</p>
+	StartTimeTo *string `json:"StartTimeTo,omitnil,omitempty" name:"StartTimeTo"`
+
+	// <p>Voucher expiration time start time</p>
+	EndTimeFrom *string `json:"EndTimeFrom,omitnil,omitempty" name:"EndTimeFrom"`
+
+	// <p>Voucher expiration time end time</p>
+	EndTimeTo *string `json:"EndTimeTo,omitnil,omitempty" name:"EndTimeTo"`
+
+	// <p>Voucher issuance start time</p>
+	CreateTimeFrom *string `json:"CreateTimeFrom,omitnil,omitempty" name:"CreateTimeFrom"`
+
+	// <p>Voucher issuance time end time</p>
+	CreateTimeTo *string `json:"CreateTimeTo,omitnil,omitempty" name:"CreateTimeTo"`
+
+	// <p>Language parameter</p><p>Default value: zh</p><p>Expect the product name to return in Chinese or other languages. Currently only support Chinese and English. Return in Chinese when "zh" is entered or left blank; return in English in other cases.</p>
+	Lang *string `json:"Lang,omitnil,omitempty" name:"Lang"`
 }
 
 func (r *DescribeVoucherInfoRequest) ToJsonString() string {
@@ -5425,6 +5467,13 @@ func (r *DescribeVoucherInfoRequest) FromJsonString(s string) error {
 	delete(f, "Operator")
 	delete(f, "VoucherMainType")
 	delete(f, "VoucherSubType")
+	delete(f, "StartTimeFrom")
+	delete(f, "StartTimeTo")
+	delete(f, "EndTimeFrom")
+	delete(f, "EndTimeTo")
+	delete(f, "CreateTimeFrom")
+	delete(f, "CreateTimeTo")
+	delete(f, "Lang")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVoucherInfoRequest has unknown keys!", "")
 	}
@@ -5433,15 +5482,17 @@ func (r *DescribeVoucherInfoRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeVoucherInfoResponseParams struct {
-	// The total number of vouchers.
+	// <p>Total count</p>
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// The total voucher balance. The value of this parameter is the total balance (USD, rounded to 8 decimal places) multiplied by 100,000,000.
+	// <p>Total balance (differential)</p>
 	TotalBalance *int64 `json:"TotalBalance,omitnil,omitempty" name:"TotalBalance"`
 
-	// The voucher information.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// <p>Voucher information related to</p>
 	VoucherInfos []*VoucherInfos `json:"VoucherInfos,omitnil,omitempty" name:"VoucherInfos"`
+
+	// <p>Unit of the amount field in the API response</p><p>Default value: micro</p><p>Currency unit: micro (microcent)<br>Voucher issuance and use are processed with 8-digit high-precision, so the currency unit defaults to micro (microcent). If CNY or USD is needed, convert using the following formula:<br>CNY: 1 micro = 0.00000001  yuan<br>USD: 1 micro = 0.00000001  USD</p>
+	Unit *string `json:"Unit,omitnil,omitempty" name:"Unit"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -6600,11 +6651,15 @@ type VoucherInfos struct {
 	// The end time of the validity period.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// The products that are applicable.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Product information applies to
 	ApplicableProducts *ApplicableProducts `json:"ApplicableProducts,omitnil,omitempty" name:"ApplicableProducts"`
 
-	// The products that are not applicable.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Product information not applicable
 	ExcludedProducts []*ExcludedProducts `json:"ExcludedProducts,omitnil,omitempty" name:"ExcludedProducts"`
+
+	// Instructions/Batch Remarks
+	PolicyRemark *string `json:"PolicyRemark,omitnil,omitempty" name:"PolicyRemark"`
+
+	// Coupon issuance time
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 }
