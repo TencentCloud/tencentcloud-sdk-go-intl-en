@@ -1371,6 +1371,60 @@ func (c *Client) DescribeCustomerVoucherListWithContext(ctx context.Context, req
     return
 }
 
+func NewDescribeCustomerVoucherUsageDetailsRequest() (request *DescribeCustomerVoucherUsageDetailsRequest) {
+    request = &DescribeCustomerVoucherUsageDetailsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "DescribeCustomerVoucherUsageDetails")
+    
+    
+    return
+}
+
+func NewDescribeCustomerVoucherUsageDetailsResponse() (response *DescribeCustomerVoucherUsageDetailsResponse) {
+    response = &DescribeCustomerVoucherUsageDetailsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCustomerVoucherUsageDetails
+// Description: The current API is used to query the usage details of reseller's customer vouchers by Reseller, Second-level Reseller or Distributor.
+//
+// Reseller, Second-level Reseller or Distributor can call this API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeCustomerVoucherUsageDetails(request *DescribeCustomerVoucherUsageDetailsRequest) (response *DescribeCustomerVoucherUsageDetailsResponse, err error) {
+    return c.DescribeCustomerVoucherUsageDetailsWithContext(context.Background(), request)
+}
+
+// DescribeCustomerVoucherUsageDetails
+// Description: The current API is used to query the usage details of reseller's customer vouchers by Reseller, Second-level Reseller or Distributor.
+//
+// Reseller, Second-level Reseller or Distributor can call this API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeCustomerVoucherUsageDetailsWithContext(ctx context.Context, request *DescribeCustomerVoucherUsageDetailsRequest) (response *DescribeCustomerVoucherUsageDetailsResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomerVoucherUsageDetailsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "DescribeCustomerVoucherUsageDetails")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCustomerVoucherUsageDetails require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCustomerVoucherUsageDetailsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRebateDownloadUrlRequest() (request *DescribeRebateDownloadUrlRequest) {
     request = &DescribeRebateDownloadUrlRequest{
         BaseRequest: &tchttp.BaseRequest{},
