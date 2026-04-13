@@ -94,64 +94,66 @@ type AccelerationDomain struct {
 	// Accelerated domain name
 	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
-	// Status of the accelerated domain name. Values:
-	// <li>`online`: Activated</li>
-	// <li>`process`: Being deployed</li>
-	// <li>`offline`: Disabled</li>
-	// <li>`forbidden`: Blocked</li>
-	// <li>`init`: Pending activation</li>
+	// Accelerated domain name status. valid values:.
+	// <li>online: in effect;</li>.
+	// <li>process: deployment in progress.</li>.
+	// <li>offline: disabled;</li>.
+	// <li>`forbidden`: banned.</li>.
+	// <li>init: not applied, site to be activated.</li>.
 	DomainStatus *string `json:"DomainStatus,omitnil,omitempty" name:"DomainStatus"`
+
+	// The CNAME address.
+	Cname *string `json:"Cname,omitnil,omitempty" name:"Cname"`
+
+	// IPv6 status. valid values:.
+	// <li>follow: specifies whether to adhere to the site IPv6 configuration.</li>.
+	// <li>on: enabled status.</li>.
+	// <li>off: disabled.</li>.
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	IPv6Status *string `json:"IPv6Status,omitnil,omitempty" name:"IPv6Status"`
+
+	// Acceleration domain ownership verification status. valid values:. 
+	// <li>pending: to be verified.</li>.
+	// <li>finished: verified.</li>.	
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	IdentificationStatus *string `json:"IdentificationStatus,omitnil,omitempty" name:"IdentificationStatus"`
+
+	// Acceleration domain name needs to perform ownership verification to continue providing services. this object carries the required information for the corresponding verification method.
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	OwnershipVerification *OwnershipVerification `json:"OwnershipVerification,omitnil,omitempty" name:"OwnershipVerification"`
 
 	// Details of the origin.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OriginDetail *OriginDetail `json:"OriginDetail,omitnil,omitempty" name:"OriginDetail"`
 
-	// Origin-pull protocol configuration. Values:
-	// <li>`FOLLOW`: Follow the protocol of origin</li>
-	// <li>`HTTP`: Send requests to the origin over HTTP</li>
-	// <li>`HTTPS`: Send requests to the origin over HTTPS</li>
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Origin-Pull protocol. valid values:.
+	// <Li>FOLLOW: follow protocol.</li>.
+	// <Li>HTTP: specifies the http protocol for origin-pull.</li>.
+	// <Li>HTTPS: specifies the https protocol for origin-pull.</li>.
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
 	OriginProtocol *string `json:"OriginProtocol,omitnil,omitempty" name:"OriginProtocol"`
 
-	// The port used for HTTP origin-pull requests
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Specifies the HTTP origin port.
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
 	HttpOriginPort *uint64 `json:"HttpOriginPort,omitnil,omitempty" name:"HttpOriginPort"`
 
-	// The port used for HTTPS origin-pull requests
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Specifies the HTTPS origin port.
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
 	HttpsOriginPort *uint64 `json:"HttpsOriginPort,omitnil,omitempty" name:"HttpsOriginPort"`
 
-	// IPv6 status. Values:
-	// <li>`follow`: Follow the IPv6 configuration of the site</li>
-	// <li>`on`: Enable</li>
-	// <li>`off`: Disable</li>
-	// Note: This field may return·null, indicating that no valid values can be obtained.
-	IPv6Status *string `json:"IPv6Status,omitnil,omitempty" name:"IPv6Status"`
-
-	// The CNAME address.
-	Cname *string `json:"Cname,omitnil,omitempty" name:"Cname"`
-
-	// Ownership verification status. Values: <li>`pending`: Pending verification</li> <li>`finished`: Verified</li>	
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdentificationStatus *string `json:"IdentificationStatus,omitnil,omitempty" name:"IdentificationStatus"`
+	// Accelerates domain name certificate information.
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	Certificate *AccelerationDomainCertificate `json:"Certificate,omitnil,omitempty" name:"Certificate"`
 
 	// Creation time of the accelerated domain name.
 	CreatedOn *string `json:"CreatedOn,omitnil,omitempty" name:"CreatedOn"`
 
 	// Modification time of the accelerated domain name.
 	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
-
-	// Information required to verify the ownership of a domain name.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
-	OwnershipVerification *OwnershipVerification `json:"OwnershipVerification,omitnil,omitempty" name:"OwnershipVerification"`
-
-	// Domain name certificate information
-	// Note: This field may return·null, indicating that no valid values can be obtained.
-	Certificate *AccelerationDomainCertificate `json:"Certificate,omitnil,omitempty" name:"Certificate"`
 }
 
 type AccelerationDomainCertificate struct {
-	// Certificate configuration mode. Values: <li>`disable`: Do not configure the certificate;</li><li>`eofreecert`: Use a free certificate provided by EdgeOne; </li><li>`sslcert`: Configure an SSL certificate.</li>
+	// The server certificate configuration mode has the following valid values: <ul><li>disable: do not configure a server certificate.</li> <li>eofreecert: apply for a free certificate through automatic verification and deploy it. for verification methods, see: [supported verification methods for free certificate applications](https://www.tencentcloud.comom/document/product/1552/90437?from_cn_redirect=1). - in NS or DNSPod hosting access mode, only the automatic verification method is supported for free certificate applications. - if the free certificate application fails, it will cause deployment failure. you can obtain the reason for the failure through the <a href='https://www.tencentcloud.comom/document/product/1552/124806?from_cn_redirect=1'>check free certificate application result</a> api.</li> <li>eofreecert_manual: deploy a free certificate applied through DNS delegation verification or file verification. before deploying the free certificate, you need to trigger the <a href='https://www.tencentcloud.comom/document/product/1552/124807?from_cn_redirect=1'>apply for free certificate</a> API to apply for a free certificate. once the application is successful, you can deploy the free certificate using this enumeration value.</li> <ul><li>note: when deploying a free certificate, ensure that a successfully applied free certificate already exists. you can check whether a successfully applied free certificate exists through the <a href='https://www.tencentcloud.comom/document/product/1552/124806?from_cn_redirect=1'>check free certificate application result</a> api.</li> </ul> <li>sslcert: configure an SSL managed server-side certificate.</li></ul>.
 	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
 	// List of server certificates. The relevant certificates are deployed on the entrance side of the EO.
@@ -161,7 +163,7 @@ type AccelerationDomainCertificate struct {
 	// In the edge mutual authentication scenario, this field represents the client's CA certificate, which is deployed inside the EO node and used for EO node authentication of the client certificate.
 	ClientCertInfo *MutualTLS `json:"ClientCertInfo,omitnil,omitempty" name:"ClientCertInfo"`
 
-	// The certificate carried during EO node origin-pull is used when the origin server enables the mutual authentication handshake to validate the client certificate, ensuring that the request originates from a trusted EO node.
+	// Specifies whether to enable or disable origin-pull mutual authentication and origin certificate verification. the certificate for origin-pull mutual authentication is carried during EO node origin-pull, and the origin server can choose to validate this certificate to ensure the request originates from a trusted EO node. when origin certificate verification is enabled, the certificate configuration is used for the EO node to verify whether the origin certificate is trustworthy.
 	UpstreamCertInfo *UpstreamCertInfo `json:"UpstreamCertInfo,omitnil,omitempty" name:"UpstreamCertInfo"`
 }
 
@@ -674,11 +676,11 @@ type ApplyFreeCertificateRequestParams struct {
 	// Specifies the target domain name for free certificate application.
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// Specifies the verification method for applying for a free certificate. for detailed verification methods, refer to the [free certificate application documentation](https://www.tencentcloud.com/document/product/1552/90437?from_cn_redirect=1). valid values:.
+	// Specifies the verification method for applying for a free certificate. for detailed verification methods, refer to the [free certificate application documentation](https://www.tencentcloud.comom/document/product/1552/90437?from_cn_redirect=1). valid values:.
 	// <li>http_challenge: specifies the file validation mode for http access. verifies by getting file information from the specified URL of the access domain to complete free certificate application.</li>
 	// <li>dns_challenge: specifies the dns delegation verification method. verifies the free certificate application by adding the designated host record pointing to EdgeOne.</li>
 	// 
-	// Note: after triggering this api, you need to complete the verification content configuration based on the returned verification information. once configured, you must also verify by calling the <a href = 'https://www.tencentcloud.com/document/product/1552/124806?from_cn_redirect=1'>check free certificate application result</a> api. after verification passes, the application succeeds. once the application is successful, you can call the <a href = 'https://www.tencentcloud.com/document/product/1552/80764?from_cn_redirect=1'>configure domain name certificate</a> API to deploy a free certificate for the current domain name.
+	// Note: after triggering this api, you need to complete the verification content configuration based on the returned verification information. once configured, you must also verify by calling the <a href = 'https://www.tencentcloud.comom/document/product/1552/124806?from_cn_redirect=1'>check free certificate application result</a> api. after verification passes, the application succeeds. once the application is successful, you can call the <a href = 'https://www.tencentcloud.com/document/product/1145/50539'>configure domain name certificate</a> API to deploy a free certificate for the current domain name.
 	VerificationMethod *string `json:"VerificationMethod,omitnil,omitempty" name:"VerificationMethod"`
 }
 
@@ -691,11 +693,11 @@ type ApplyFreeCertificateRequest struct {
 	// Specifies the target domain name for free certificate application.
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// Specifies the verification method for applying for a free certificate. for detailed verification methods, refer to the [free certificate application documentation](https://www.tencentcloud.com/document/product/1552/90437?from_cn_redirect=1). valid values:.
+	// Specifies the verification method for applying for a free certificate. for detailed verification methods, refer to the [free certificate application documentation](https://www.tencentcloud.comom/document/product/1552/90437?from_cn_redirect=1). valid values:.
 	// <li>http_challenge: specifies the file validation mode for http access. verifies by getting file information from the specified URL of the access domain to complete free certificate application.</li>
 	// <li>dns_challenge: specifies the dns delegation verification method. verifies the free certificate application by adding the designated host record pointing to EdgeOne.</li>
 	// 
-	// Note: after triggering this api, you need to complete the verification content configuration based on the returned verification information. once configured, you must also verify by calling the <a href = 'https://www.tencentcloud.com/document/product/1552/124806?from_cn_redirect=1'>check free certificate application result</a> api. after verification passes, the application succeeds. once the application is successful, you can call the <a href = 'https://www.tencentcloud.com/document/product/1552/80764?from_cn_redirect=1'>configure domain name certificate</a> API to deploy a free certificate for the current domain name.
+	// Note: after triggering this api, you need to complete the verification content configuration based on the returned verification information. once configured, you must also verify by calling the <a href = 'https://www.tencentcloud.comom/document/product/1552/124806?from_cn_redirect=1'>check free certificate application result</a> api. after verification passes, the application succeeds. once the application is successful, you can call the <a href = 'https://www.tencentcloud.com/document/product/1145/50539'>configure domain name certificate</a> API to deploy a free certificate for the current domain name.
 	VerificationMethod *string `json:"VerificationMethod,omitnil,omitempty" name:"VerificationMethod"`
 }
 
@@ -749,7 +751,7 @@ func (r *ApplyFreeCertificateResponse) FromJsonString(s string) error {
 }
 
 type AscriptionInfo struct {
-	// Host record.
+
 	Subdomain *string `json:"Subdomain,omitnil,omitempty" name:"Subdomain"`
 
 	// The record type.
@@ -877,8 +879,8 @@ type BindSecurityTemplateToEntityRequestParams struct {
 	Entities []*string `json:"Entities,omitnil,omitempty" name:"Entities"`
 
 	// Bind or unbind operation option. valid values:.
-	// <Li>`Bind`: bind the domain name to the policy template.</li>.
-	// <li>unbind-keep-policy: unbind a domain name from the policy template while retaining the current policy.</li>.
+	// <Li>bind: bind the domain name to the policy template.</li>
+	// <li>unbind-keep-policy: unbind a domain name from the policy template while retaining the current policy.</li>
 	// <li>unbind-use-default: unbind a domain name from the policy template and use the default blank policy.</li> note: the unbinding operation currently only supports unbinding a single domain name. that is, when the Operate parameter value is unbind-keep-policy or unbind-use-default, the Entities parameter list only supports filling in one domain name.
 	Operate *string `json:"Operate,omitnil,omitempty" name:"Operate"`
 
@@ -903,8 +905,8 @@ type BindSecurityTemplateToEntityRequest struct {
 	Entities []*string `json:"Entities,omitnil,omitempty" name:"Entities"`
 
 	// Bind or unbind operation option. valid values:.
-	// <Li>`Bind`: bind the domain name to the policy template.</li>.
-	// <li>unbind-keep-policy: unbind a domain name from the policy template while retaining the current policy.</li>.
+	// <Li>bind: bind the domain name to the policy template.</li>
+	// <li>unbind-keep-policy: unbind a domain name from the policy template while retaining the current policy.</li>
 	// <li>unbind-use-default: unbind a domain name from the policy template and use the default blank policy.</li> note: the unbinding operation currently only supports unbinding a single domain name. that is, when the Operate parameter value is unbind-keep-policy or unbind-use-default, the Entities parameter list only supports filling in one domain name.
 	Operate *string `json:"Operate,omitnil,omitempty" name:"Operate"`
 
@@ -1417,6 +1419,16 @@ type CLSTopic struct {
 	LogSetRegion *string `json:"LogSetRegion,omitnil,omitempty" name:"LogSetRegion"`
 }
 
+type CNAMEDetail struct {
+	// Whether it is a fake site, with values:.
+	// <Li>0: non-fake site.</li>.
+	// <Li>1: fake site.</li>.
+	IsFake *int64 `json:"IsFake,omitnil,omitempty" name:"IsFake"`
+
+	// Ownership verification information. for details, refer to [site/domain ownership verification](https://www.tencentcloud.comom/document/product/1552/70789?from_cn_redirect=1).
+	OwnershipVerification *OwnershipVerification `json:"OwnershipVerification,omitnil,omitempty" name:"OwnershipVerification"`
+}
+
 type Cache struct {
 	// Whether to enable cache configuration. Values:
 	// <li>`on`: Enable</li>
@@ -1734,7 +1746,7 @@ type CheckFreeCertificateVerificationRequestParams struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Acceleration domain name, that domain name used when [applying for free certificate](https://www.tencentcloud.com/document/product/1552/124807?from_cn_redirect=1).
+	// Acceleration domain name, that domain name used when [applying for free certificate](https://www.tencentcloud.comom/document/product/1552/124807?from_cn_redirect=1).
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 }
 
@@ -1744,7 +1756,7 @@ type CheckFreeCertificateVerificationRequest struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Acceleration domain name, that domain name used when [applying for free certificate](https://www.tencentcloud.com/document/product/1552/124807?from_cn_redirect=1).
+	// Acceleration domain name, that domain name used when [applying for free certificate](https://www.tencentcloud.comom/document/product/1552/124807?from_cn_redirect=1).
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 }
 
@@ -1857,9 +1869,10 @@ type ClientAttester struct {
 	// <Li>CUSTOM: user-defined rules.</li>.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Authentication method. valid values:.
-	// <Li>TC-RCE: uses the full-stack risk control engine for authentication.</li>.
-	// <Li>TC-CAPTCHA-Intl: specifies authentication using captcha-intl.</li>.
+	// Authentication method. Valid values:
+	// <li>TC-RCE: Authentication with RCE risk identification;</li>
+	// <li>TC-CAPTCHA: Authentication using Tianyu verification code;</li>
+	// <li>TC-EO-CAPTCHA: Use EdgeOne CAPTCHA for authentication.</li>
 	AttesterSource *string `json:"AttesterSource,omitnil,omitempty" name:"AttesterSource"`
 
 	// Validity time of the authentication. defaults to 60s. supported measurement units:.
@@ -1875,6 +1888,10 @@ type ClientAttester struct {
 	// Specifies the configuration message for TC-CAPTCHA certification.
 	// <li>Specifies the required field when the AttesterSource parameter value is TC-CAPTCHA.</li>.
 	TCCaptchaOption *TCCaptchaOption `json:"TCCaptchaOption,omitnil,omitempty" name:"TCCaptchaOption"`
+
+	// Configuration message of TC-EO-CAPTCHA authentication.
+	// <li>This field is required when the AttesterSource parameter value is TC-EO-CAPTCHA.</li>
+	TCEOCaptchaOption *TCEOCaptchaOption `json:"TCEOCaptchaOption,omitnil,omitempty" name:"TCEOCaptchaOption"`
 }
 
 type ClientBehaviorDetection struct {
@@ -1973,6 +1990,29 @@ type CodeAction struct {
 	Parameters []*RuleCodeActionParams `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 }
 
+type ComponentReference struct {
+	// Refer to the instance type. Valid values:
+	// <li>edge-function: Edge function.</li>
+	ReferenceType *string `json:"ReferenceType,omitnil,omitempty" name:"ReferenceType"`
+
+	// Referenced instance ID. According to the value of ReferenceType, return the corresponding instance ID.
+	// <li>When ReferenceType is edge-function: Return the edge function ID in the format of ef-2vc5oe9mzqhm.</li>
+	ReferenceId *string `json:"ReferenceId,omitnil,omitempty" name:"ReferenceId"`
+
+	// Referenced instance name. According to the value of ReferenceType, return the corresponding instance name.
+	// <li>When ReferenceType is edge-function: Returns the edge function name.</li>
+	ReferenceName *string `json:"ReferenceName,omitnil,omitempty" name:"ReferenceName"`
+
+	// Site ID. Site identifier of the instance ownership that refers to the namespace.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Site name. Refer to the site name of the instance ownership in namespace.
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
+
+	// Refer to the site alias of the namespace instance. If the site alias is not set, return an empty string.
+	AliasZoneName *string `json:"AliasZoneName,omitnil,omitempty" name:"AliasZoneName"`
+}
+
 type Compression struct {
 	// Whether to enable smart compression. Values:
 	// <li>`on`: Enable</li>
@@ -2024,6 +2064,14 @@ type ConfigGroupVersionInfo struct {
 
 	// Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+}
+
+type ConfigGroupWorkModeInfo struct {
+	// Configuration group type. Options are as follows:<li>l7_acceleration: layer-7 acceleration configuration group;</li><li>edge_functions: edge function configuration group.</li><li>web_security: web protection configuration group.</li>
+	ConfigGroupType *string `json:"ConfigGroupType,omitnil,omitempty" name:"ConfigGroupType"`
+
+	// Working mode. options are as follows: <li>immediate_effect: immediate effect mode;</li><li>version_control: version management mode.</li>.
+	WorkMode *string `json:"WorkMode,omitnil,omitempty" name:"WorkMode"`
 }
 
 // Predefined struct for user
@@ -2146,6 +2194,14 @@ func (r *ConfirmOriginACLUpdateResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ConfirmOriginACLUpdateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type ContentCompressionParameters struct {
+	// Specifies the content compression configuration switch. valid values:.
+	// <li>`on`: Enable;</li>
+	// <li>off: Disable.</li>
+	// Specifies whether to simultaneously support brotli and gzip compression algorithms when Switch is on.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
 type ContentIdentifier struct {
@@ -3104,6 +3160,74 @@ func (r *CreateDnsRecordResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateEdgeKVNamespaceRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Namespace name. Input content with the following restrictions: support input of 1-50 characters, allowed characters are a-z, A-Z, 0-9, -, and - cannot be registered alone or used continuously, cannot be placed at the beginning or the end. Under the same site, ensure the name is unique.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Namespace description. Used to describe the purpose or business meaning of a namespace. Supports a maximum of 256 characters.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+}
+
+type CreateEdgeKVNamespaceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Namespace name. Input content with the following restrictions: support input of 1-50 characters, allowed characters are a-z, A-Z, 0-9, -, and - cannot be registered alone or used continuously, cannot be placed at the beginning or the end. Under the same site, ensure the name is unique.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Namespace description. Used to describe the purpose or business meaning of a namespace. Supports a maximum of 256 characters.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+}
+
+func (r *CreateEdgeKVNamespaceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateEdgeKVNamespaceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Namespace")
+	delete(f, "Remark")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateEdgeKVNamespaceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateEdgeKVNamespaceResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateEdgeKVNamespaceResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateEdgeKVNamespaceResponseParams `json:"Response"`
+}
+
+func (r *CreateEdgeKVNamespaceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateEdgeKVNamespaceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateFunctionRequestParams struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -3189,8 +3313,21 @@ type CreateFunctionRuleRequestParams struct {
 	// Rule condition list. There is an OR relationship between different conditions of the same trigger rule.
 	FunctionRuleConditions []*FunctionRuleCondition `json:"FunctionRuleConditions,omitnil,omitempty" name:"FunctionRuleConditions"`
 
-	// Function ID, specifying a function executed when a trigger rule condition is met.
+	// Function selection configuration type.
+	// <Li>Direct: specifies the execution function directly.</li>.
+	// <Li>Weight: selects the function based on weight ratio.</li>.
+	// <li> region: specifies the country/region selection function based on client IP.</li>.
+	// Specifies the default value as direct when left blank.
+	TriggerType *string `json:"TriggerType,omitnil,omitempty" name:"TriggerType"`
+
+	// Specifies the function ID to be executed. this parameter is valid only when TriggerType is direct or left empty.
 	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
+
+	// Function selection configuration based on client IP country/region. this parameter is valid only when TriggerType is region and RegionMappingSelections is required. RegionMappingSelections must include at least one configuration with Regions set to Default.
+	RegionMappingSelections []*FunctionRegionSelection `json:"RegionMappingSelections,omitnil,omitempty" name:"RegionMappingSelections"`
+
+	// Weighted function selection configuration. this parameter is valid only when TriggerType is weight and WeightedSelections is required. the sum of all weights in WeightedSelections need to be 100.
+	WeightedSelections []*FunctionWeightedSelection `json:"WeightedSelections,omitnil,omitempty" name:"WeightedSelections"`
 
 	// Rule description, which can contain up to 60 characters.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
@@ -3205,8 +3342,21 @@ type CreateFunctionRuleRequest struct {
 	// Rule condition list. There is an OR relationship between different conditions of the same trigger rule.
 	FunctionRuleConditions []*FunctionRuleCondition `json:"FunctionRuleConditions,omitnil,omitempty" name:"FunctionRuleConditions"`
 
-	// Function ID, specifying a function executed when a trigger rule condition is met.
+	// Function selection configuration type.
+	// <Li>Direct: specifies the execution function directly.</li>.
+	// <Li>Weight: selects the function based on weight ratio.</li>.
+	// <li> region: specifies the country/region selection function based on client IP.</li>.
+	// Specifies the default value as direct when left blank.
+	TriggerType *string `json:"TriggerType,omitnil,omitempty" name:"TriggerType"`
+
+	// Specifies the function ID to be executed. this parameter is valid only when TriggerType is direct or left empty.
 	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
+
+	// Function selection configuration based on client IP country/region. this parameter is valid only when TriggerType is region and RegionMappingSelections is required. RegionMappingSelections must include at least one configuration with Regions set to Default.
+	RegionMappingSelections []*FunctionRegionSelection `json:"RegionMappingSelections,omitnil,omitempty" name:"RegionMappingSelections"`
+
+	// Weighted function selection configuration. this parameter is valid only when TriggerType is weight and WeightedSelections is required. the sum of all weights in WeightedSelections need to be 100.
+	WeightedSelections []*FunctionWeightedSelection `json:"WeightedSelections,omitnil,omitempty" name:"WeightedSelections"`
 
 	// Rule description, which can contain up to 60 characters.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
@@ -3226,7 +3376,10 @@ func (r *CreateFunctionRuleRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ZoneId")
 	delete(f, "FunctionRuleConditions")
+	delete(f, "TriggerType")
 	delete(f, "FunctionId")
+	delete(f, "RegionMappingSelections")
+	delete(f, "WeightedSelections")
 	delete(f, "Remark")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateFunctionRuleRequest has unknown keys!", "")
@@ -3384,23 +3537,25 @@ type CreateL4ProxyRequestParams struct {
 	// <li>global: global availability zone.</li>
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
-	// Whether to enable IPv6 access. If this parameter is not input, the default value `off` is used. This configuration can be enabled only in certain acceleration zones and security protection configurations. For details, see [Creating an L4 Proxy Instance] (https://intl.cloud.tencent.com/document/product/1552/90025?from_cn_redirect=1). Valid values:
-	// <li>on: Enable;</li>
+	// Whether IPv6 access is enabled. default off if left empty. this configuration can only be enabled in certain acceleration zones and security protection configurations. for details, refer to [creating a new layer 4 proxy instance](https://www.tencentcloud.comom/document/product/1552/90025?from_cn_redirect=1). valid values:.
+	// <li>`on`: Enable;</li>
 	// <li>off: Disable.</li>
-	// 
 	Ipv6 *string `json:"Ipv6,omitnil,omitempty" name:"Ipv6"`
 
-	// Whether to enable static IP. If this parameter is not input, the default value `off` is used. This configuration can be enabled only in certain acceleration zones and security protection configurations. For details, see [Creating an L4 Proxy Instance] (https://intl.cloud.tencent.com/document/product/1552/90025?from_cn_redirect=1). Valid values:
-	// <li>on: Enable;</li>
+	// Whether to enable static IP, default off if left empty. this configuration can only be enabled in certain acceleration zones and security protection configurations. for details, refer to creating a new layer 4 proxy instance (https://www.tencentcloud.comom/document/product/1552/90025?from_cn_redirect=1). valid values:.
+	// <li>`on`: Enable;</li>
 	// <li>off: Disable.</li>
 	StaticIp *string `json:"StaticIp,omitnil,omitempty" name:"StaticIp"`
 
-	// Whether to enable network optimization for the Chinese mainland. If this parameter is not input, the default value `off` is used. This configuration can be enabled only in certain acceleration zones and security protection configurations. For details, see [Creating an L4 Proxy Instance] (https://intl.cloud.tencent.com/document/product/1552/90025?from_cn_redirect=1). Valid values:
-	// <li>on: Enable;</li>
+	// Whether network optimization in the chinese mainland is enabled. default off if left empty. this configuration can only be enabled in certain acceleration zones and security protection configurations. for details, refer to creating a new layer 4 proxy instance (https://www.tencentcloud.comom/document/product/1552/90025?from_cn_redirect=1). valid values:.
+	// <li>`on`: Enable;</li>
 	// <li>off: Disable.</li>
 	AccelerateMainland *string `json:"AccelerateMainland,omitnil,omitempty" name:"AccelerateMainland"`
 
-	// Configuration of L3/L4 DDoS protection. If this parameter is not input, the default platform protection option is used. For details, see [Exclusive DDoS Protection Usage] (https://intl.cloud.tencent.com/document/product/1552/95994?from_cn_redirect=1).
+	// Configuration of L3/L4 DDoS protection. If this parameter is not input, the default platform protection option is used. For details, see [Exclusive DDoS Protection Usage] (https://www.tencentcloud.comom/document/product/1552/95994?from_cn_redirect=1).
+	// This field is deprecated, please use DDosProtectionId field specification for associated protection configuration.
+	//
+	// Deprecated: DDosProtectionConfig is deprecated.
 	DDosProtectionConfig *DDosProtectionConfig `json:"DDosProtectionConfig,omitnil,omitempty" name:"DDosProtectionConfig"`
 }
 
@@ -3419,23 +3574,23 @@ type CreateL4ProxyRequest struct {
 	// <li>global: global availability zone.</li>
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
-	// Whether to enable IPv6 access. If this parameter is not input, the default value `off` is used. This configuration can be enabled only in certain acceleration zones and security protection configurations. For details, see [Creating an L4 Proxy Instance] (https://intl.cloud.tencent.com/document/product/1552/90025?from_cn_redirect=1). Valid values:
-	// <li>on: Enable;</li>
+	// Whether IPv6 access is enabled. default off if left empty. this configuration can only be enabled in certain acceleration zones and security protection configurations. for details, refer to [creating a new layer 4 proxy instance](https://www.tencentcloud.comom/document/product/1552/90025?from_cn_redirect=1). valid values:.
+	// <li>`on`: Enable;</li>
 	// <li>off: Disable.</li>
-	// 
 	Ipv6 *string `json:"Ipv6,omitnil,omitempty" name:"Ipv6"`
 
-	// Whether to enable static IP. If this parameter is not input, the default value `off` is used. This configuration can be enabled only in certain acceleration zones and security protection configurations. For details, see [Creating an L4 Proxy Instance] (https://intl.cloud.tencent.com/document/product/1552/90025?from_cn_redirect=1). Valid values:
-	// <li>on: Enable;</li>
+	// Whether to enable static IP, default off if left empty. this configuration can only be enabled in certain acceleration zones and security protection configurations. for details, refer to creating a new layer 4 proxy instance (https://www.tencentcloud.comom/document/product/1552/90025?from_cn_redirect=1). valid values:.
+	// <li>`on`: Enable;</li>
 	// <li>off: Disable.</li>
 	StaticIp *string `json:"StaticIp,omitnil,omitempty" name:"StaticIp"`
 
-	// Whether to enable network optimization for the Chinese mainland. If this parameter is not input, the default value `off` is used. This configuration can be enabled only in certain acceleration zones and security protection configurations. For details, see [Creating an L4 Proxy Instance] (https://intl.cloud.tencent.com/document/product/1552/90025?from_cn_redirect=1). Valid values:
-	// <li>on: Enable;</li>
+	// Whether network optimization in the chinese mainland is enabled. default off if left empty. this configuration can only be enabled in certain acceleration zones and security protection configurations. for details, refer to creating a new layer 4 proxy instance (https://www.tencentcloud.comom/document/product/1552/90025?from_cn_redirect=1). valid values:.
+	// <li>`on`: Enable;</li>
 	// <li>off: Disable.</li>
 	AccelerateMainland *string `json:"AccelerateMainland,omitnil,omitempty" name:"AccelerateMainland"`
 
-	// Configuration of L3/L4 DDoS protection. If this parameter is not input, the default platform protection option is used. For details, see [Exclusive DDoS Protection Usage] (https://intl.cloud.tencent.com/document/product/1552/95994?from_cn_redirect=1).
+	// Configuration of L3/L4 DDoS protection. If this parameter is not input, the default platform protection option is used. For details, see [Exclusive DDoS Protection Usage] (https://www.tencentcloud.comom/document/product/1552/95994?from_cn_redirect=1).
+	// This field is deprecated, please use DDosProtectionId field specification for associated protection configuration.
 	DDosProtectionConfig *DDosProtectionConfig `json:"DDosProtectionConfig,omitnil,omitempty" name:"DDosProtectionConfig"`
 }
 
@@ -3999,6 +4154,9 @@ type CreateOriginGroupRequestParams struct {
 	// Site ID
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
+	// (Required) Origins in the origin group.
+	Records []*OriginRecord `json:"Records,omitnil,omitempty" name:"Records"`
+
 	// Origin group name. It can contain 1 to 200 characters ([a-z], [A-Z], [0-9] and [_-]).
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
@@ -4006,9 +4164,6 @@ type CreateOriginGroupRequestParams struct {
 	// <li>`GENERAL`: General origin groups. It supports IPs and domain names. It can be referenced by DNS, Rule Engine, Layer 4 Proxy and General LoadBalancer. </li>
 	// <li>`HTTP`: HTTP-specific origin groups. It supports IPs/domain names and object storage buckets. It can be referenced by acceleration domain names, rule engines and HTTP LoadBalancer. It cannot be referenced by L4 proxies. </li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
-
-	// (Required) Origins in the origin group.
-	Records []*OriginRecord `json:"Records,omitnil,omitempty" name:"Records"`
 
 	// Host header used for origin-pull. It only works when `Type=HTTP`. The `HostHeader` specified in `RuleEngine` takes a higher priority over this configuration.
 	HostHeader *string `json:"HostHeader,omitnil,omitempty" name:"HostHeader"`
@@ -4020,6 +4175,9 @@ type CreateOriginGroupRequest struct {
 	// Site ID
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
+	// (Required) Origins in the origin group.
+	Records []*OriginRecord `json:"Records,omitnil,omitempty" name:"Records"`
+
 	// Origin group name. It can contain 1 to 200 characters ([a-z], [A-Z], [0-9] and [_-]).
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
@@ -4027,9 +4185,6 @@ type CreateOriginGroupRequest struct {
 	// <li>`GENERAL`: General origin groups. It supports IPs and domain names. It can be referenced by DNS, Rule Engine, Layer 4 Proxy and General LoadBalancer. </li>
 	// <li>`HTTP`: HTTP-specific origin groups. It supports IPs/domain names and object storage buckets. It can be referenced by acceleration domain names, rule engines and HTTP LoadBalancer. It cannot be referenced by L4 proxies. </li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
-
-	// (Required) Origins in the origin group.
-	Records []*OriginRecord `json:"Records,omitnil,omitempty" name:"Records"`
 
 	// Host header used for origin-pull. It only works when `Type=HTTP`. The `HostHeader` specified in `RuleEngine` takes a higher priority over this configuration.
 	HostHeader *string `json:"HostHeader,omitnil,omitempty" name:"HostHeader"`
@@ -4048,9 +4203,9 @@ func (r *CreateOriginGroupRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "ZoneId")
+	delete(f, "Records")
 	delete(f, "Name")
 	delete(f, "Type")
-	delete(f, "Records")
 	delete(f, "HostHeader")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateOriginGroupRequest has unknown keys!", "")
@@ -4263,30 +4418,39 @@ type CreatePrefetchTaskRequestParams struct {
 	// If you wish to quickly submit Targets urls under different sites, you can fill in * as the value. but the premise is that the account calling this API must have the permission to all site resources under the root account.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// List of resources to be preheated. Each element format is similar to the following:
-	// http://www.example.com/example.txt. The parameter value is currently required.
-	// Note: The number of tasks that can be submitted is limited by the quota of a billing package. For details, see [Billing Overview] (https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1).
+	// List of resources to be preheated. required. each element format is as follows:.
+	// http://www.example.com/example.txt.
+	// Note: the number of submitted tasks is limited by the quota of a billing package. check the [EO billing package](https://www.tencentcloud.comom/document/product/1552/77380?from_cn_redirect=1).
 	Targets []*string `json:"Targets,omitnil,omitempty" name:"Targets"`
+
+	// Preheat mode. valid values:.
+	// <Li>Default: default mode, which preheats to the middle layer.</li>.
+	// <Li>Edge: specifies edge preheating mode, which preheats to both edge and middle layer.</li> if left empty, the default value is default.
+	// Notes:.
+	// Preheating to the edge generates edge layer traffic, which is included in billing traffic.
+	// 2. specifies the default allocation of edge preheating as a separate preheating amount of 1000 per day, which does not consume the standard preheating amount.
+	// Description:.
+	// This parameter is the allowlist feature. if needed, contact tencent cloud engineers.
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
 	// Whether to encode a URL according to RFC3986. Enable this field when the URL contains non-ASCII characters.
 	//
 	// Deprecated: EncodeUrl is deprecated.
 	EncodeUrl *bool `json:"EncodeUrl,omitnil,omitempty" name:"EncodeUrl"`
 
-	// HTTP header information
+	// Specifies whether to carry HTTP header information for preheating. leave it empty otherwise.
 	Headers []*Header `json:"Headers,omitnil,omitempty" name:"Headers"`
 
 	// Media fragment preheating control. valid values:.
 	// <Li>On: enables shard preheating, preheats the description file, and performs recursive resolution of the description file shards for preheating.</li>.
-	// <Li>Off: only preheat the submitted description file.</li>default value: off if left empty.
-	// 
+	// <Li>Off: only preheats the submitted description file.</li>default value: off if left empty.
 	// Notes:.
-	// 1. the supported description file is M3U8, and the corresponding shard is TS.
-	// Describes the requirement that the description file can process normal requests and specify the sharding path as per industry standards.
-	// Recursive resolution depth is no more than 3.
-	// Parsed shards normally accumulate daily pre-warming amount. when usage exceeds the quota limit, silent processing is triggered and preheating is no longer executed.
-	// 
-	// This parameter specifies the allowlist feature. if necessary, contact tencent cloud engineers.
+	// Supported description file is M3U8; corresponding shard is TS.
+	// Specifies the description file must support normal requests and describe sharding paths as per industry standards.
+	// Specifies the recursive resolution depth is no more than 3.
+	// Parsed shards normally accumulate daily pre-warming amount. when usage exceeds the limit, silent processing is triggered and preheating is no longer executed.
+	// Description:.
+	// This parameter is the allowlist feature. if needed, contact tencent cloud engineers.
 	PrefetchMediaSegments *string `json:"PrefetchMediaSegments,omitnil,omitempty" name:"PrefetchMediaSegments"`
 }
 
@@ -4298,28 +4462,37 @@ type CreatePrefetchTaskRequest struct {
 	// If you wish to quickly submit Targets urls under different sites, you can fill in * as the value. but the premise is that the account calling this API must have the permission to all site resources under the root account.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// List of resources to be preheated. Each element format is similar to the following:
-	// http://www.example.com/example.txt. The parameter value is currently required.
-	// Note: The number of tasks that can be submitted is limited by the quota of a billing package. For details, see [Billing Overview] (https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1).
+	// List of resources to be preheated. required. each element format is as follows:.
+	// http://www.example.com/example.txt.
+	// Note: the number of submitted tasks is limited by the quota of a billing package. check the [EO billing package](https://www.tencentcloud.comom/document/product/1552/77380?from_cn_redirect=1).
 	Targets []*string `json:"Targets,omitnil,omitempty" name:"Targets"`
+
+	// Preheat mode. valid values:.
+	// <Li>Default: default mode, which preheats to the middle layer.</li>.
+	// <Li>Edge: specifies edge preheating mode, which preheats to both edge and middle layer.</li> if left empty, the default value is default.
+	// Notes:.
+	// Preheating to the edge generates edge layer traffic, which is included in billing traffic.
+	// 2. specifies the default allocation of edge preheating as a separate preheating amount of 1000 per day, which does not consume the standard preheating amount.
+	// Description:.
+	// This parameter is the allowlist feature. if needed, contact tencent cloud engineers.
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
 	// Whether to encode a URL according to RFC3986. Enable this field when the URL contains non-ASCII characters.
 	EncodeUrl *bool `json:"EncodeUrl,omitnil,omitempty" name:"EncodeUrl"`
 
-	// HTTP header information
+	// Specifies whether to carry HTTP header information for preheating. leave it empty otherwise.
 	Headers []*Header `json:"Headers,omitnil,omitempty" name:"Headers"`
 
 	// Media fragment preheating control. valid values:.
 	// <Li>On: enables shard preheating, preheats the description file, and performs recursive resolution of the description file shards for preheating.</li>.
-	// <Li>Off: only preheat the submitted description file.</li>default value: off if left empty.
-	// 
+	// <Li>Off: only preheats the submitted description file.</li>default value: off if left empty.
 	// Notes:.
-	// 1. the supported description file is M3U8, and the corresponding shard is TS.
-	// Describes the requirement that the description file can process normal requests and specify the sharding path as per industry standards.
-	// Recursive resolution depth is no more than 3.
-	// Parsed shards normally accumulate daily pre-warming amount. when usage exceeds the quota limit, silent processing is triggered and preheating is no longer executed.
-	// 
-	// This parameter specifies the allowlist feature. if necessary, contact tencent cloud engineers.
+	// Supported description file is M3U8; corresponding shard is TS.
+	// Specifies the description file must support normal requests and describe sharding paths as per industry standards.
+	// Specifies the recursive resolution depth is no more than 3.
+	// Parsed shards normally accumulate daily pre-warming amount. when usage exceeds the limit, silent processing is triggered and preheating is no longer executed.
+	// Description:.
+	// This parameter is the allowlist feature. if needed, contact tencent cloud engineers.
 	PrefetchMediaSegments *string `json:"PrefetchMediaSegments,omitnil,omitempty" name:"PrefetchMediaSegments"`
 }
 
@@ -4337,6 +4510,7 @@ func (r *CreatePrefetchTaskRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ZoneId")
 	delete(f, "Targets")
+	delete(f, "Mode")
 	delete(f, "EncodeUrl")
 	delete(f, "Headers")
 	delete(f, "PrefetchMediaSegments")
@@ -4382,12 +4556,12 @@ type CreatePurgeTaskRequestParams struct {
 	// If you want to quickly submit targets urls under different sites, you can set it to *, but the account calling this api must have permission for all site resources under the main account.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Type of cache purging. Values:
-	// <li>`purge_url`: Purge by the URL</li>
-	// <li>`purge_prefix`: Purge by the directory</li>
-	// <li>`purge_host`: Purge by the hostname</li>
-	// <li>`purge_all`: Purge all caches</li>
-	// <li>`purge_cache_tag`: Purge by the cache-tag </li>For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/product/1552/70759?from_cn_redirect=1).
+	// Node cache clearing type, valid values:
+	// <li>purge_url: URL refresh;</li>
+	// <li>purge_prefix: Directory refresh.</li>
+	// <li>purge_host: Hostname refresh;</li>
+	// <li>purge_all: Purge all caches under the site (ZoneId input as * is not supported when this value is taken);</li>
+	// <li>purge_cache_tag: cache-tag refresh.</li>For details on purge types, see [Purge Cache](https://www.tencentcloud.com/document/product/1552/70759?from_cn_redirect=1).
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Node cache clearing method is valid for directory refresh, Hostname refresh, and refresh all cache types. valid values: <li> invalidate: refresh only resources that have been updated under the directory;</li> <li> delete: refresh node resources regardless of whether resources under the directory are updated.</li> default value: invalidate.
@@ -4414,12 +4588,12 @@ type CreatePurgeTaskRequest struct {
 	// If you want to quickly submit targets urls under different sites, you can set it to *, but the account calling this api must have permission for all site resources under the main account.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Type of cache purging. Values:
-	// <li>`purge_url`: Purge by the URL</li>
-	// <li>`purge_prefix`: Purge by the directory</li>
-	// <li>`purge_host`: Purge by the hostname</li>
-	// <li>`purge_all`: Purge all caches</li>
-	// <li>`purge_cache_tag`: Purge by the cache-tag </li>For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/product/1552/70759?from_cn_redirect=1).
+	// Node cache clearing type, valid values:
+	// <li>purge_url: URL refresh;</li>
+	// <li>purge_prefix: Directory refresh.</li>
+	// <li>purge_host: Hostname refresh;</li>
+	// <li>purge_all: Purge all caches under the site (ZoneId input as * is not supported when this value is taken);</li>
+	// <li>purge_cache_tag: cache-tag refresh.</li>For details on purge types, see [Purge Cache](https://www.tencentcloud.com/document/product/1552/70759?from_cn_redirect=1).
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Node cache clearing method is valid for directory refresh, Hostname refresh, and refresh all cache types. valid values: <li> invalidate: refresh only resources that have been updated under the directory;</li> <li> delete: refresh node resources regardless of whether resources under the directory are updated.</li> default value: invalidate.
@@ -4497,25 +4671,26 @@ type CreateRealtimeLogDeliveryTaskRequestParams struct {
 	// Name of a real-time log delivery task, which can contain up to 200 characters, including digits, English letters, hyphens (-) and underscores (_).
 	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
 
-	// Type of a real-time log delivery task. Valid values:
-	// <li>cls: push to Tencent Cloud CLS;</li>
-	// <li>custom_endpoint: push to a custom HTTP(S) endpoint;</li>
-	// <li>s3: push to an AWS S3-compatible bucket.</li>
+	// Type of a real-time log shipping task. valid values:.
+	// <li>cls: push to tencent cloud cls.</li>.
+	// <li>custom_endpoint: push to a custom HTTP(S) address.</li>.
+	// <li>s3: push to an AWS s3-compatible bucket address.</li>.
+	// <li>log_analysis: pushes to EdgeOne log analytics. this task type only supports the "site acceleration log" data delivery type.</li>.
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-	// List of entities associated with the real-time log delivery task. Valid value examples:
-	// <li>L7 domain name: domain.example.com</li>
-	// <li>L4 proxy instance: sid-2s69eb5wcms7</li>
-	// <li>Edge Function instance: test-zone-2mxigizoh9l9-1257626257</li>
+	// Entity list corresponding to the real-time log delivery task. example values:.
+	// <Li>Specifies the layer-7 domain name: domain.example.com.</li>.
+	// <Li>Specifies the l4 proxy instance: sid-2s69eb5wcms7.</li>.
+	// <Li>Edge function instance: test-zone-2mxigizoh9l9-1257626257.</li>.
 	EntityList []*string `json:"EntityList,omitnil,omitempty" name:"EntityList"`
 
-	// Dataset type. Valid values:
-	// <li>domain: site acceleration logs;</li>
-	// <li>application: L4 proxy logs;</li>
-	// <li>function: Edge Function execution log;</li>
-	// <li>web-rateLiming: rate limiting and CC attack protection logs;</li>
-	// <li>web-attack: managed rule logs;</li>
-	// <li>web-rule: custom rule logs;</li>
+	// Data delivery type. valid values:.
+	// <li>domain: specifies the site acceleration logs.</li>.
+	// <li>application: four-layer proxy logs.</li>.
+	// <Li>Function: specifies the edge function logs.</li>.
+	// <li>web-rateLiming: specifies the rate limit and CC attack defense logs.</li>.
+	// <li>web-attack: managed rule logs;</li>.
+	// <li>web-rule: custom rule logs;</li>.
 	// <li>web-bot: Bot management logs.</li>
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 
@@ -4524,10 +4699,10 @@ type CreateRealtimeLogDeliveryTaskRequestParams struct {
 	// <li>overseas: global (excluding the Chinese mainland).</li>
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
-	// Pre-defined log fields to be delivered. Refer to:
-	// <li>[Site acceleration log (L7 access log)](https://www.tencentcloud.com/document/product/1145/61300)</li>
-	// <li>[L4 proxy log](https://www.tencentcloud.com/document/product/1145/61301)</li>
-	// <li>[Edge Function execution log](https://www.tencentcloud.com/document/product/1145/67840)</li>
+	// Predefined fields for delivery. valid values:.
+	// <Li>[Site acceleration log (l7 access log)](https://www.tencentcloud.comom/document/product/1552/105791?from_cn_redirect=1)</li>.
+	// <Li><A href="https://www.tencentcloud.comom/document/product/1552/105792?from_cn_redirect=1">four-layer proxy logs</a></li>.
+	// <Li>Specifies the edge function logs (https://www.tencentcloud.comom/document/product/1552/115585?from_cn_redirect=1).</li>.
 	Fields []*string `json:"Fields,omitnil,omitempty" name:"Fields"`
 
 	// The list of custom fields for log delivery, which supports extracting specified content from HTTP request headers, response headers, cookies, and request bodies. Custom field names must be unique. The number of custom fields cannot exceed a maximum of 200. A single real-time log delivery task can configure up to 5 custom fields of the request body type. Currently, only site acceleration logs (`LogType`=`domain`) support custom fields.
@@ -4539,9 +4714,9 @@ type CreateRealtimeLogDeliveryTaskRequestParams struct {
 	// Sampling ratio in permille. Value range: 1-1000. For example, 605 indicates a sampling ratio of 60.5%. If this parameter is not specified, the sampling ratio is 100%.
 	Sample *uint64 `json:"Sample,omitnil,omitempty" name:"Sample"`
 
-	// Output format for log delivery. If this field is not specified, the default format is used, which works as follows:
-	// <li>When `TaskType` is `custom_endpoint`, the default format is an array of JSON objects, with each JSON object representing a log entry;</li>
-	// <li>When `TaskType` is `s3`, the default format is JSON Lines;</li>Specifically, when `TaskType` is `cls`, the only allowed value for `LogFormat.FormatType` is `json`, and other parameters in `LogFormat` will be ignored. It is recommended not to input `LogFormat`.
+	// Output format for log delivery. if this field is not specified, the default format is used, which works as follows:.
+	// <li>When TaskType is 'custom_endpoint', the default format is an array of JSON objects, with each JSON object representing a log entry;</li>.
+	// <li>When TaskType is 's3', the default format is JSON Lines;</li>specifically, when TaskType is 'cls' or 'log_analysis', the only allowed value for LogFormat.FormatType is 'JSON', and other parameters in LogFormat will be ignored. it is recommended not to transfer LogFormat.
 	LogFormat *LogFormat `json:"LogFormat,omitnil,omitempty" name:"LogFormat"`
 
 	// Configuration information of CLS. This parameter is required when `TaskType` is `cls`.
@@ -4563,25 +4738,26 @@ type CreateRealtimeLogDeliveryTaskRequest struct {
 	// Name of a real-time log delivery task, which can contain up to 200 characters, including digits, English letters, hyphens (-) and underscores (_).
 	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
 
-	// Type of a real-time log delivery task. Valid values:
-	// <li>cls: push to Tencent Cloud CLS;</li>
-	// <li>custom_endpoint: push to a custom HTTP(S) endpoint;</li>
-	// <li>s3: push to an AWS S3-compatible bucket.</li>
+	// Type of a real-time log shipping task. valid values:.
+	// <li>cls: push to tencent cloud cls.</li>.
+	// <li>custom_endpoint: push to a custom HTTP(S) address.</li>.
+	// <li>s3: push to an AWS s3-compatible bucket address.</li>.
+	// <li>log_analysis: pushes to EdgeOne log analytics. this task type only supports the "site acceleration log" data delivery type.</li>.
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-	// List of entities associated with the real-time log delivery task. Valid value examples:
-	// <li>L7 domain name: domain.example.com</li>
-	// <li>L4 proxy instance: sid-2s69eb5wcms7</li>
-	// <li>Edge Function instance: test-zone-2mxigizoh9l9-1257626257</li>
+	// Entity list corresponding to the real-time log delivery task. example values:.
+	// <Li>Specifies the layer-7 domain name: domain.example.com.</li>.
+	// <Li>Specifies the l4 proxy instance: sid-2s69eb5wcms7.</li>.
+	// <Li>Edge function instance: test-zone-2mxigizoh9l9-1257626257.</li>.
 	EntityList []*string `json:"EntityList,omitnil,omitempty" name:"EntityList"`
 
-	// Dataset type. Valid values:
-	// <li>domain: site acceleration logs;</li>
-	// <li>application: L4 proxy logs;</li>
-	// <li>function: Edge Function execution log;</li>
-	// <li>web-rateLiming: rate limiting and CC attack protection logs;</li>
-	// <li>web-attack: managed rule logs;</li>
-	// <li>web-rule: custom rule logs;</li>
+	// Data delivery type. valid values:.
+	// <li>domain: specifies the site acceleration logs.</li>.
+	// <li>application: four-layer proxy logs.</li>.
+	// <Li>Function: specifies the edge function logs.</li>.
+	// <li>web-rateLiming: specifies the rate limit and CC attack defense logs.</li>.
+	// <li>web-attack: managed rule logs;</li>.
+	// <li>web-rule: custom rule logs;</li>.
 	// <li>web-bot: Bot management logs.</li>
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 
@@ -4590,10 +4766,10 @@ type CreateRealtimeLogDeliveryTaskRequest struct {
 	// <li>overseas: global (excluding the Chinese mainland).</li>
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
-	// Pre-defined log fields to be delivered. Refer to:
-	// <li>[Site acceleration log (L7 access log)](https://www.tencentcloud.com/document/product/1145/61300)</li>
-	// <li>[L4 proxy log](https://www.tencentcloud.com/document/product/1145/61301)</li>
-	// <li>[Edge Function execution log](https://www.tencentcloud.com/document/product/1145/67840)</li>
+	// Predefined fields for delivery. valid values:.
+	// <Li>[Site acceleration log (l7 access log)](https://www.tencentcloud.comom/document/product/1552/105791?from_cn_redirect=1)</li>.
+	// <Li><A href="https://www.tencentcloud.comom/document/product/1552/105792?from_cn_redirect=1">four-layer proxy logs</a></li>.
+	// <Li>Specifies the edge function logs (https://www.tencentcloud.comom/document/product/1552/115585?from_cn_redirect=1).</li>.
 	Fields []*string `json:"Fields,omitnil,omitempty" name:"Fields"`
 
 	// The list of custom fields for log delivery, which supports extracting specified content from HTTP request headers, response headers, cookies, and request bodies. Custom field names must be unique. The number of custom fields cannot exceed a maximum of 200. A single real-time log delivery task can configure up to 5 custom fields of the request body type. Currently, only site acceleration logs (`LogType`=`domain`) support custom fields.
@@ -4605,9 +4781,9 @@ type CreateRealtimeLogDeliveryTaskRequest struct {
 	// Sampling ratio in permille. Value range: 1-1000. For example, 605 indicates a sampling ratio of 60.5%. If this parameter is not specified, the sampling ratio is 100%.
 	Sample *uint64 `json:"Sample,omitnil,omitempty" name:"Sample"`
 
-	// Output format for log delivery. If this field is not specified, the default format is used, which works as follows:
-	// <li>When `TaskType` is `custom_endpoint`, the default format is an array of JSON objects, with each JSON object representing a log entry;</li>
-	// <li>When `TaskType` is `s3`, the default format is JSON Lines;</li>Specifically, when `TaskType` is `cls`, the only allowed value for `LogFormat.FormatType` is `json`, and other parameters in `LogFormat` will be ignored. It is recommended not to input `LogFormat`.
+	// Output format for log delivery. if this field is not specified, the default format is used, which works as follows:.
+	// <li>When TaskType is 'custom_endpoint', the default format is an array of JSON objects, with each JSON object representing a log entry;</li>.
+	// <li>When TaskType is 's3', the default format is JSON Lines;</li>specifically, when TaskType is 'cls' or 'log_analysis', the only allowed value for LogFormat.FormatType is 'JSON', and other parameters in LogFormat will be ignored. it is recommended not to transfer LogFormat.
 	LogFormat *LogFormat `json:"LogFormat,omitnil,omitempty" name:"LogFormat"`
 
 	// Configuration information of CLS. This parameter is required when `TaskType` is `cls`.
@@ -5238,11 +5414,12 @@ func (r *CreateWebSecurityTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateZoneRequestParams struct {
-	// Site access type. If this parameter is not input, the default value `partial` is used. Valid values of this parameter are as follows:
-	// <li>partial: CNAME access;</li>
-	// <li>full: NS access;</li>
-	// <li>noDomainAccess: access with no domain name.</li>
-	// <li>dnsPodAccess: DNSPod hosted access. To use this access mode, your domain name should have been hosted on DNSPod.</li>
+	// Site access type. if this parameter is not input, the default value `partial` is used. valid values of this parameter are as follows:.
+	// <li>partial: CNAME access;</li>.
+	// <li>full: NS access;</li>.
+	// <li>noDomainAccess: access with no domain name.</li>.
+	// <li>dnsPodAccess: DNSPod hosted access. to use this access mode, your domain name should have been hosted on DNSPod.</li>.
+	// <li>ai: edge reasoning integration.</li>.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Site name. For sites connected via CNAME/NS, pass in the secondary domain name (example.com). Leave it blank if the site is connected without a domain name. 
@@ -5281,11 +5458,12 @@ type CreateZoneRequestParams struct {
 type CreateZoneRequest struct {
 	*tchttp.BaseRequest
 	
-	// Site access type. If this parameter is not input, the default value `partial` is used. Valid values of this parameter are as follows:
-	// <li>partial: CNAME access;</li>
-	// <li>full: NS access;</li>
-	// <li>noDomainAccess: access with no domain name.</li>
-	// <li>dnsPodAccess: DNSPod hosted access. To use this access mode, your domain name should have been hosted on DNSPod.</li>
+	// Site access type. if this parameter is not input, the default value `partial` is used. valid values of this parameter are as follows:.
+	// <li>partial: CNAME access;</li>.
+	// <li>full: NS access;</li>.
+	// <li>noDomainAccess: access with no domain name.</li>.
+	// <li>dnsPodAccess: DNSPod hosted access. to use this access mode, your domain name should have been hosted on DNSPod.</li>.
+	// <li>ai: edge reasoning integration.</li>.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Site name. For sites connected via CNAME/NS, pass in the secondary domain name (example.com). Leave it blank if the site is connected without a domain name. 
@@ -5464,22 +5642,22 @@ type CustomRule struct {
 	// The custom rule name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// The specifics of the custom rule, must comply with the expression grammar, please refer to product documentation for details.
+	// The specific content of custom rules must comply with expression grammar. For detailed specifications, please refer to the product document (https://www.tencentcloud.com/document/product/1552/125343?from_cn_redirect=1).
 	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 
-	// Action for custom rules. The Name parameter of SecurityAction supports: <li>`Deny`: block;</li> <li>`Monitor`: observe;</li> <li>`ReturnCustomPage`: block with customized page;</li> <li>`Redirect`: Redirect to URL;</li> <li>`BlockIP`: IP blocking;</li> <li>`JSChallenge`: JavaScript challenge;</li> <li>`ManagedChallenge`: managed challenge;</li> <li>`Allow`: Allow.</li>.
+	// The handling action of custom rules. The value range of SecurityAction.Name is as follows:<ul><li>Deny: blocking;</li><li>Monitor: observation;</li><li>ReturnCustomPage: use specified page to block;</li><li>Redirect: redirect to URL;</li><li>BlockIP: IP blocking;</li><li>JSChallenge: JavaScript challenge;</li><li>ManagedChallenge: managed challenge;</li><li>Allow: allowing.</li></ul>
 	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
 
-	// The custom rule status. Values: <li>`on`: enabled</li> <li>`off`: disabled</li>.
+	// Whether the custom rule is enabled. Valid values: <ul><li>on: enable</li><li>off: disable</li></ul>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// Custom rule ID. <br>Different rule configuration operations are supported by rule ID : <br> - Add a new rule: ID is empty or the ID parameter is not specified; <br> - Modify an existing rule: specify the rule ID that needs to be updated/modified; <br> - Delete an existing rule: existing rules not included in the Rules parameter will be deleted.
+	// ID of the custom rule. Different rule configuration operations are supported by rule ID:<ul><li>Add a new rule: The ID is empty or the ID parameter is not specified.</li><li>Modify an existing rule: Specify the rule ID that needs to be updated or modified.</li><li>Delete an existing rule: Existing rules not included in the Rules list in the CustomRules parameter will be deleted.</li></ul>
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Type of custom rule. Values: <li>`BasicAccessRule`: basic access control;</li> <li>`PreciseMatchRule`: exact custom rule, default;</li> <li>`ManagedAccessRule`: expert customized rule, output parameter only.</li>The default value is PreciseMatchRule.
+	// Type of custom rule. Valid values: <ul><li>BasicAccessRule: basic access control;</li><li>PreciseMatchRule: exact matching rule;</li><li>ManagedAccessRule: expert customized rule, only supported in output parameters.</li></ul>Description: When RuleType is not specified, it defaults to `PreciseMatchRule`.
 	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
 
-	// Customize the priority of custom rule. Range: 0-100, the default value is 0, this parameter only supports PreciseMatchRule.
+	// Priority of custom rules, ranging from 0 to 100, defaults to 0, and only supports exact matching rules (`PreciseMatchRule`).
 	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 }
 
@@ -5602,6 +5780,21 @@ type DDosProtectionConfig struct {
 	// <li>ANYCAST300: uses dedicated anti-DDoS, which provides 300 Gbps protection bandwidth;</li>
 	// <li>ANYCAST_ALLIN: uses dedicated anti-DDoS, which provides all available protection resources. </li>If this field is not specified, the default value 'PLATFORM' will be used.
 	LevelOverseas *string `json:"LevelOverseas,omitnil,omitempty" name:"LevelOverseas"`
+}
+
+type DNSPodDetail struct {
+	// Whether it is a fake site, with values:.
+	// <Li>0: non-fake site.</li>.
+	// <Li>1: fake site.</li>.
+	IsFake *int64 `json:"IsFake,omitnil,omitempty" name:"IsFake"`
+}
+
+type DefaultDenySecurityActionParameters struct {
+	// The managed rule uses the default disposition action configuration. DenyActionParameters supported configuration parameters: <li>ReturnCustomPage: Whether to use a custom page.</li><li>ResponseCode: Status code of the custom page.</li><li>ErrorPageId: PageId of the custom page.</li>
+	ManagedRules *DenyActionParameters `json:"ManagedRules,omitnil,omitempty" name:"ManagedRules"`
+
+	// Security protection rules other than managed rules (custom rule, rate limit, and Bot management function) default to disposition action configuration. DenyActionParameters supported configuration parameters: <li>ReturnCustomPage: Whether to use custom page.</li> <li>ResponseCode: Status code of custom pages.</li> <li>ErrorPageId: PageId of custom pages.</li>
+	OtherModules *DenyActionParameters `json:"OtherModules,omitnil,omitempty" name:"OtherModules"`
 }
 
 type DefaultServerCertInfo struct {
@@ -6079,6 +6272,67 @@ func (r *DeleteDnsRecordsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteDnsRecordsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteEdgeKVNamespaceRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Namespace name to delete.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+}
+
+type DeleteEdgeKVNamespaceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Namespace name to delete.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+}
+
+func (r *DeleteEdgeKVNamespaceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteEdgeKVNamespaceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Namespace")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteEdgeKVNamespaceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteEdgeKVNamespaceResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteEdgeKVNamespaceResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteEdgeKVNamespaceResponseParams `json:"Response"`
+}
+
+func (r *DeleteEdgeKVNamespaceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteEdgeKVNamespaceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -8323,7 +8577,7 @@ type DescribeDDoSAttackDataRequestParams struct {
 	// <li>`ddos_attackPackageRate`: Time-series data of attack packet rate.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). A maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+	// Site ID set. this parameter will change from option to required after may 30, 2024. for details, see the notice: [tencent cloud EdgeOne API change notification](https://www.tencentcloud.comom/document/product/1552/104902?from_cn_redirect=1). a maximum of 100 site ids can be imported. use `*` to query all site data under the tencent cloud root account. querying account-level data requires all resource permissions for all sites in this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// IDs of DDoS policies to be queried. All policies will be selected if this field is not specified.
@@ -8359,7 +8613,7 @@ type DescribeDDoSAttackDataRequest struct {
 	// <li>`ddos_attackPackageRate`: Time-series data of attack packet rate.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). A maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+	// Site ID set. this parameter will change from option to required after may 30, 2024. for details, see the notice: [tencent cloud EdgeOne API change notification](https://www.tencentcloud.comom/document/product/1552/104902?from_cn_redirect=1). a maximum of 100 site ids can be imported. use `*` to query all site data under the tencent cloud root account. querying account-level data requires all resource permissions for all sites in this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// IDs of DDoS policies to be queried. All policies will be selected if this field is not specified.
@@ -8444,7 +8698,7 @@ type DescribeDDoSAttackEventRequestParams struct {
 	// List of DDoS policy IDs. All policies are selected if this field is not specified.
 	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
-	// Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). A maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+	// Site ID set. this parameter will change from option to required after may 30, 2024. for details, see the notice: [tencent cloud EdgeOne API change notification](https://www.tencentcloud.comom/document/product/1552/104902?from_cn_redirect=1). a maximum of 100 site ids can be imported. use `*` to query all site data under the tencent cloud root account. querying account-level data requires all resource permissions for all sites in this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
@@ -8485,7 +8739,7 @@ type DescribeDDoSAttackEventRequest struct {
 	// List of DDoS policy IDs. All policies are selected if this field is not specified.
 	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
-	// Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). A maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+	// Site ID set. this parameter will change from option to required after may 30, 2024. for details, see the notice: [tencent cloud EdgeOne API change notification](https://www.tencentcloud.comom/document/product/1552/104902?from_cn_redirect=1). a maximum of 100 site ids can be imported. use `*` to query all site data under the tencent cloud root account. querying account-level data requires all resource permissions for all sites in this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
@@ -8588,7 +8842,7 @@ type DescribeDDoSAttackTopDataRequestParams struct {
 	// <li>`ddos_attackFlux_sregion`: Rank attacker regions by the number of attacks.</li>
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
-	// Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). A maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+	// Site ID set. this parameter will change from option to required after may 30, 2024. for details, see the notice: [tencent cloud EdgeOne API change notification](https://www.tencentcloud.comom/document/product/1552/104902?from_cn_redirect=1). a maximum of 100 site ids can be imported. use `*` to query all site data under the tencent cloud root account. querying account-level data requires all resource permissions for all sites in this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// The list of DDoS policy IDs to be specified. All policies will be selected if this field is not specified.
@@ -8636,7 +8890,7 @@ type DescribeDDoSAttackTopDataRequest struct {
 	// <li>`ddos_attackFlux_sregion`: Rank attacker regions by the number of attacks.</li>
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
-	// Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). A maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+	// Site ID set. this parameter will change from option to required after may 30, 2024. for details, see the notice: [tencent cloud EdgeOne API change notification](https://www.tencentcloud.comom/document/product/1552/104902?from_cn_redirect=1). a maximum of 100 site ids can be imported. use `*` to query all site data under the tencent cloud root account. querying account-level data requires all resource permissions for all sites in this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// The list of DDoS policy IDs to be specified. All policies will be selected if this field is not specified.
@@ -9042,6 +9296,117 @@ func (r *DescribeDnsRecordsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeEdgeKVNamespacesRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// The offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// The limit of paginated query. Default value: 20. Maximum value: 1,000.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Sorting basis. Valid values:
+	// <li>created-on: creation time;</li>
+	// <li>updated-on: Update time.</li>
+	// Default value is created-on.
+	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
+
+	// List sort method. Valid values:
+	// <li>asc: ascending order;</li>
+	// <li>desc: descending order.</li>
+	// Default value is desc.
+	SortOrder *string `json:"SortOrder,omitnil,omitempty" name:"SortOrder"`
+
+	// Filter criteria. The maximum of Filters.Values is 20. If this parameter is left empty, return all KV namespaces under the site ID. Detailed filter criteria:
+	// <li>Namespace: Filter by KV namespace name. Fuzzy query is supported.</li>
+	// <li>remark: Filter by namespace description. Fuzzy query is supported.</li>
+	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeEdgeKVNamespacesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// The offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// The limit of paginated query. Default value: 20. Maximum value: 1,000.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Sorting basis. Valid values:
+	// <li>created-on: creation time;</li>
+	// <li>updated-on: Update time.</li>
+	// Default value is created-on.
+	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
+
+	// List sort method. Valid values:
+	// <li>asc: ascending order;</li>
+	// <li>desc: descending order.</li>
+	// Default value is desc.
+	SortOrder *string `json:"SortOrder,omitnil,omitempty" name:"SortOrder"`
+
+	// Filter criteria. The maximum of Filters.Values is 20. If this parameter is left empty, return all KV namespaces under the site ID. Detailed filter criteria:
+	// <li>Namespace: Filter by KV namespace name. Fuzzy query is supported.</li>
+	// <li>remark: Filter by namespace description. Fuzzy query is supported.</li>
+	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeEdgeKVNamespacesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEdgeKVNamespacesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "SortBy")
+	delete(f, "SortOrder")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEdgeKVNamespacesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEdgeKVNamespacesResponseParams struct {
+	// Total number of eligible namespaces.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// KV namespace information list. If no matching criteria, return an empty array.
+	KVNamespaces []*KVNamespace `json:"KVNamespaces,omitnil,omitempty" name:"KVNamespaces"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeEdgeKVNamespacesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeEdgeKVNamespacesResponseParams `json:"Response"`
+}
+
+func (r *DescribeEdgeKVNamespacesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEdgeKVNamespacesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeEnvironmentsRequestParams struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -9098,6 +9463,98 @@ func (r *DescribeEnvironmentsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeEnvironmentsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeFunctionComponentBindingsRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Function ID.
+	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
+
+	// The offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// The limit of paginated query. Default value: 20. Maximum value: 1,000.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filter conditions. The maximum number of Filters.Values is 20. Detailed filter criteria:
+	// <li>Name: Filter by the bound variable name. Fuzzy query is supported.</li>
+	// <li>type: Filter by binding type. Fuzzy queries are not supported.</li>
+	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeFunctionComponentBindingsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Function ID.
+	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
+
+	// The offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// The limit of paginated query. Default value: 20. Maximum value: 1,000.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filter conditions. The maximum number of Filters.Values is 20. Detailed filter criteria:
+	// <li>Name: Filter by the bound variable name. Fuzzy query is supported.</li>
+	// <li>type: Filter by binding type. Fuzzy queries are not supported.</li>
+	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeFunctionComponentBindingsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeFunctionComponentBindingsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "FunctionId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeFunctionComponentBindingsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeFunctionComponentBindingsResponseParams struct {
+	// Total number of eligible functions bound.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Function component bound list.
+	FunctionComponentBindings []*FunctionComponentBinding `json:"FunctionComponentBindings,omitnil,omitempty" name:"FunctionComponentBindings"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeFunctionComponentBindingsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeFunctionComponentBindingsResponseParams `json:"Response"`
+}
+
+func (r *DescribeFunctionComponentBindingsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeFunctionComponentBindingsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9544,7 +10001,7 @@ type DescribeJustInTimeTranscodeTemplatesRequestParams struct {
 	// Specifies the site ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// The maximum number of Filters is 20. the upper limit for Filters.Values is 20. if this parameter is left empty, it returns the authorized just-in-time transcoding templates in the current ZoneId by default. detailed filter criteria: <li>template-name: filter by template name in batch. example: mytemplate;</li> <li>template-type: filter by template type in batch. example: preset or custom.</li> <li>template-id: filter by template id in batch. example: C1LZ7982VgTpYhJ7M.</li> empty by default.
+	// Filter criteria. the maximum number of Filters is 20, and the maximum number of Filters.Values is 20. if this parameter is left empty, it returns the authorized just-in-time transcoding templates in the current ZoneId by default. detailed filter criteria are as follows: <li>template-name: filter by template name in batch. example: mytemplate;</li><li>template-type: filter by template type in batch. example: preset or custom.</li><li>template-id: filter by template id in batch. example: C1LZ7982VgTpYhJ7M.</li>empty by default.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Sorting field. valid values: <li>createTime: template creation time.</li> default value: createTime.
@@ -9566,7 +10023,7 @@ type DescribeJustInTimeTranscodeTemplatesRequest struct {
 	// Specifies the site ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// The maximum number of Filters is 20. the upper limit for Filters.Values is 20. if this parameter is left empty, it returns the authorized just-in-time transcoding templates in the current ZoneId by default. detailed filter criteria: <li>template-name: filter by template name in batch. example: mytemplate;</li> <li>template-type: filter by template type in batch. example: preset or custom.</li> <li>template-id: filter by template id in batch. example: C1LZ7982VgTpYhJ7M.</li> empty by default.
+	// Filter criteria. the maximum number of Filters is 20, and the maximum number of Filters.Values is 20. if this parameter is left empty, it returns the authorized just-in-time transcoding templates in the current ZoneId by default. detailed filter criteria are as follows: <li>template-name: filter by template name in batch. example: mytemplate;</li><li>template-type: filter by template type in batch. example: preset or custom.</li><li>template-id: filter by template id in batch. example: C1LZ7982VgTpYhJ7M.</li>empty by default.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Sorting field. valid values: <li>createTime: template creation time.</li> default value: createTime.
@@ -9865,7 +10322,7 @@ type DescribeL7AccRulesResponseParams struct {
 	// Total number of rules.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Rule list. rules are executed in top-down order. for details, refer to [rule priority](https://intl.cloud.tencent.com/document/product/1552/70901?from_cn_redirect=1#.e4.bc.98.e5.85.88.e7.ba.a7).
+	// Rule list. rules are executed in top-down order. for details, refer to [rule priority](https://www.tencentcloud.com/document/product/1145/46151#.E4.BC.98.E5.85.88.E7.BA.A7).
 	// Note: this field may return null, which indicates a failure to obtain a valid value.
 	Rules []*RuleEngineItem `json:"Rules,omitnil,omitempty" name:"Rules"`
 
@@ -10986,8 +11443,93 @@ func (r *DescribePlansResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribePrefetchOriginLimitRequestParams struct {
+	// Specifies the site ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Specifies the paginated query limit. default value: 20. upper limit: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filter condition. specifies the maximum number of Filters.Values is 20. detailed filter criteria:.
+	// <Li>Domain-Name: specifies domain filtering. the domain-name format is like www.qq.com. fuzzy queries are not supported.</li>.
+	// <li>area: specifies the acceleration region to filter by limit. fuzzy queries are not supported. valid values:<br> Overseas: global availability zone (excludes chinese mainland);<br> MainlandChina: chinese mainland availability zone.</li>.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribePrefetchOriginLimitRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the site ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Specifies the paginated query limit. default value: 20. upper limit: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filter condition. specifies the maximum number of Filters.Values is 20. detailed filter criteria:.
+	// <Li>Domain-Name: specifies domain filtering. the domain-name format is like www.qq.com. fuzzy queries are not supported.</li>.
+	// <li>area: specifies the acceleration region to filter by limit. fuzzy queries are not supported. valid values:<br> Overseas: global availability zone (excludes chinese mainland);<br> MainlandChina: chinese mainland availability zone.</li>.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribePrefetchOriginLimitRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePrefetchOriginLimitRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePrefetchOriginLimitRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePrefetchOriginLimitResponseParams struct {
+	// Specifies the total count of origin-pull speed limit restrictions.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Describes the List of origin-pull speed limit details.
+	Limits []*PrefetchOriginLimit `json:"Limits,omitnil,omitempty" name:"Limits"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribePrefetchOriginLimitResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribePrefetchOriginLimitResponseParams `json:"Response"`
+}
+
+func (r *DescribePrefetchOriginLimitResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePrefetchOriginLimitResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribePrefetchTasksRequestParams struct {
-	// Site ID.The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980)
+	// Site ID. this parameter will change from selectable to required after may 30, 2024. for details, see the announcement: [tencent cloud EdgeOne: tencentcloud API change notification](https://www.tencentcloud.comom/document/product/1552/104902?from_cn_redirect=1).
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Start time of the query. Either time or job-id is required.
@@ -11002,14 +11544,14 @@ type DescribePrefetchTasksRequestParams struct {
 	// Number limit of paginated query. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter criteria. The maximum number of Filters.Values is 20. The detailed filter criteria are as follows: <li>job-id: Filter by task ID in the format like 1379afjk91u32h. Multiple values and fuzzy queries are not supported.</li><li>target: Filter by target resource information in the format like http://www.qq.com/1.txt. Multiple values and fuzzy queries are not supported.</li><li>domains: Filter by domain name in the format like www.qq.com. Fuzzy queries are not supported.</li><li>statuses: Filter by task status. Fuzzy queries are not supported. Options:<br>processing: processing<br>success: successful<br>failed: failed<br>timeout: timed out<br>invalid: invalid, that is, the response status code of the origin server is not 2xx. Please check the origin server service.<br>canceled: Canceled
+	// Filter criteria. the maximum number of Filters.Values is 20. the detailed filter criteria are as follows: <li>job-id: filter by task id in the format like 1379afjk91u32h. multiple Values and fuzzy queries are not supported.</li><li>target: filter by target resource information in the format like http://www.qq.com/1.txt. multiple Values and fuzzy queries are not supported.</li><li>domains: filter by domain name in the format like www.qq.com. fuzzy queries are not supported.</li><li>statuses: filter by task status. fuzzy queries are not supported. options:<br>  processing: processing<br>  success: successful<br>  failed: failed<br>  timeout: timed out<br>  canceled: canceled<br>  invalid: invalid, that is, the origin server response status code is not 2xx. please check the origin server service.</li>.
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribePrefetchTasksRequest struct {
 	*tchttp.BaseRequest
 	
-	// Site ID.The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980)
+	// Site ID. this parameter will change from selectable to required after may 30, 2024. for details, see the announcement: [tencent cloud EdgeOne: tencentcloud API change notification](https://www.tencentcloud.comom/document/product/1552/104902?from_cn_redirect=1).
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Start time of the query. Either time or job-id is required.
@@ -11024,7 +11566,7 @@ type DescribePrefetchTasksRequest struct {
 	// Number limit of paginated query. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter criteria. The maximum number of Filters.Values is 20. The detailed filter criteria are as follows: <li>job-id: Filter by task ID in the format like 1379afjk91u32h. Multiple values and fuzzy queries are not supported.</li><li>target: Filter by target resource information in the format like http://www.qq.com/1.txt. Multiple values and fuzzy queries are not supported.</li><li>domains: Filter by domain name in the format like www.qq.com. Fuzzy queries are not supported.</li><li>statuses: Filter by task status. Fuzzy queries are not supported. Options:<br>processing: processing<br>success: successful<br>failed: failed<br>timeout: timed out<br>invalid: invalid, that is, the response status code of the origin server is not 2xx. Please check the origin server service.<br>canceled: Canceled
+	// Filter criteria. the maximum number of Filters.Values is 20. the detailed filter criteria are as follows: <li>job-id: filter by task id in the format like 1379afjk91u32h. multiple Values and fuzzy queries are not supported.</li><li>target: filter by target resource information in the format like http://www.qq.com/1.txt. multiple Values and fuzzy queries are not supported.</li><li>domains: filter by domain name in the format like www.qq.com. fuzzy queries are not supported.</li><li>statuses: filter by task status. fuzzy queries are not supported. options:<br>  processing: processing<br>  success: successful<br>  failed: failed<br>  timeout: timed out<br>  canceled: canceled<br>  invalid: invalid, that is, the origin server response status code is not 2xx. please check the origin server service.</li>.
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -11082,7 +11624,7 @@ func (r *DescribePrefetchTasksResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePurgeTasksRequestParams struct {
-	// Site ID. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980)
+	// Site ID. this parameter will change from selectable to required after may 30, 2024. for details, see the announcement: [tencent cloud EdgeOne] tencentcloud API change notification (https://www.tencentcloud.comom/document/product/1552/104902?from_cn_redirect=1).
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Start time of the query. Either time or job-id is required.
@@ -11097,19 +11639,19 @@ type DescribePurgeTasksRequestParams struct {
 	// Number limit of paginated query. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter criteria. The maximum number of Filters.Values is 20. The detailed filter criteria are as follows:
-	// <li>job-id: Filter by task ID in the format like 1379afjk91u32h. Multiple values and fuzzy queries are not supported.</li>
-	// <li>target: Filter by target resource information in the format like http://www.qq.com/1.txt or tag1. Multiple values are not supported yet. Fuzzy queries are supported.</li>
-	// <li>domains: Filter by domain name in the format like www.qq.com. Fuzzy queries are not supported.</li>
-	// <li>statuses: Filter by task status. Fuzzy queries are not supported. Options:<br>processing: processing<br>success: successful<br>failed: failed<br>timeout: timed out<br>canceled: Canceled</li>
-	// <li>type: Filter by cache clearance type. Multiple values and fuzzy queries are not supported yet. Options: <br>purge_url: URL<br>purge_prefix: prefix<br>purge_all: all cached content<br>purge_host: Hostname<br>purge_cache_tag: CacheTag</li>
+	// Filter criteria. The maximum value of Filters.Values is 20. The detailed filter criteria are as follows:
+	// <li>job-id: specifies the task id for filtering. the task id is in the format like 1379afjk91u32h. multiple values and fuzzy queries are not supported.</li>.
+	// <Li>Target: specifies the target resource information for filtering in formats like http://www.qq.com/1.txt or tag1. multiple values are not supported yet. fuzzy query is supported.</li>.
+	// <li>domains: specifies the domain name for filtering in the format like www.qq.com. fuzzy queries are not supported.</li>.
+	// <li>statuses: specifies the task status for filtering. fuzzy queries are not supported. valid values:<br>   processing: processing<br>   success: successful<br>   failed: failed<br>   timeout: timed out<br>   canceled: canceled</li>.
+	// <li>type: Filter by cache clearance type. Multiple values and fuzzy queries are not supported yet. Options: <br>?? purge_url: URL<br>?? purge_prefix: prefix<br>?? purge_all: all cached content<br>?? purge_host: Hostname<br>?? purge_cache_tag: CacheTag</li>
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribePurgeTasksRequest struct {
 	*tchttp.BaseRequest
 	
-	// Site ID. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980)
+	// Site ID. this parameter will change from selectable to required after may 30, 2024. for details, see the announcement: [tencent cloud EdgeOne] tencentcloud API change notification (https://www.tencentcloud.comom/document/product/1552/104902?from_cn_redirect=1).
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Start time of the query. Either time or job-id is required.
@@ -11124,12 +11666,12 @@ type DescribePurgeTasksRequest struct {
 	// Number limit of paginated query. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter criteria. The maximum number of Filters.Values is 20. The detailed filter criteria are as follows:
-	// <li>job-id: Filter by task ID in the format like 1379afjk91u32h. Multiple values and fuzzy queries are not supported.</li>
-	// <li>target: Filter by target resource information in the format like http://www.qq.com/1.txt or tag1. Multiple values are not supported yet. Fuzzy queries are supported.</li>
-	// <li>domains: Filter by domain name in the format like www.qq.com. Fuzzy queries are not supported.</li>
-	// <li>statuses: Filter by task status. Fuzzy queries are not supported. Options:<br>processing: processing<br>success: successful<br>failed: failed<br>timeout: timed out<br>canceled: Canceled</li>
-	// <li>type: Filter by cache clearance type. Multiple values and fuzzy queries are not supported yet. Options: <br>purge_url: URL<br>purge_prefix: prefix<br>purge_all: all cached content<br>purge_host: Hostname<br>purge_cache_tag: CacheTag</li>
+	// Filter criteria. The maximum value of Filters.Values is 20. The detailed filter criteria are as follows:
+	// <li>job-id: specifies the task id for filtering. the task id is in the format like 1379afjk91u32h. multiple values and fuzzy queries are not supported.</li>.
+	// <Li>Target: specifies the target resource information for filtering in formats like http://www.qq.com/1.txt or tag1. multiple values are not supported yet. fuzzy query is supported.</li>.
+	// <li>domains: specifies the domain name for filtering in the format like www.qq.com. fuzzy queries are not supported.</li>.
+	// <li>statuses: specifies the task status for filtering. fuzzy queries are not supported. valid values:<br>   processing: processing<br>   success: successful<br>   failed: failed<br>   timeout: timed out<br>   canceled: canceled</li>.
+	// <li>type: Filter by cache clearance type. Multiple values and fuzzy queries are not supported yet. Options: <br>?? purge_url: URL<br>?? purge_prefix: prefix<br>?? purge_all: all cached content<br>?? purge_host: Hostname<br>?? purge_cache_tag: CacheTag</li>
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -11196,11 +11738,11 @@ type DescribeRealtimeLogDeliveryTasksRequestParams struct {
 	// The limit of paginated query. Default value: 20. Maximum value: 1000.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter conditions. The maximum value for Filters.Values is 20. If this field is not filled in, all the real-time log delivery task information under the current zone-id will be returned. Detailed filter conditions are as follows:
-	// <li>task-id: Filter by real-time log delivery task ID. Fuzzy search is not supported.</li>
-	// <li>task-name: Filter by real-time log delivery task name. Fuzzy search is supported, but only one real-time log delivery task name can be filled in for fuzzy search.</li>
-	// <li>entity-list: Filter by entity corresponding to the real-time log delivery task. Fuzzy search is not supported. Example values: domain.example.com or sid-2s69eb5wcms7.</li>
-	// <li>task-type: Filter by real-time log delivery task type. Fuzzy search is not supported. Optional values:<br>cls: Push to Tencent Cloud CLS;<br>custom_endpoint: Push to a user-defined HTTP(S) address;<br>s3: Push to an AWS S3-compatible bucket address.</li>
+	// Filter criteria. the maximum number of Filters.Values is 20. if this parameter is left empty, all real-time log delivery task information under the current zone-id will be returned. the detailed filter criteria are as follows:.
+	// <li>task-id: filters by real-time log delivery task id. fuzzy queries are not supported.</li>.
+	// <Li>Task-Name: filters by real-time log delivery task name. supports fuzzy query. when fuzzy search is used, only one real-time log delivery task name can be filled in.</li>.
+	// <li>entity-list: filters by the entity corresponding to the real-time log delivery task. fuzzy queries are not supported. example value: domain.example.com or sid-2s69eb5wcms7.</li>.
+	// <li>task-type: specifies the filter by real-time log delivery task type. fuzzy queries are not supported. valid values:<br> cls: push to tencent cloud cls;<br> custom_endpoint: push to a custom HTTP(S) address;<br> S3: push to an AWS S3-compatible bucket address;<br> log_analysis: push to EdgeOne log analytics.</li>.
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -11216,11 +11758,11 @@ type DescribeRealtimeLogDeliveryTasksRequest struct {
 	// The limit of paginated query. Default value: 20. Maximum value: 1000.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter conditions. The maximum value for Filters.Values is 20. If this field is not filled in, all the real-time log delivery task information under the current zone-id will be returned. Detailed filter conditions are as follows:
-	// <li>task-id: Filter by real-time log delivery task ID. Fuzzy search is not supported.</li>
-	// <li>task-name: Filter by real-time log delivery task name. Fuzzy search is supported, but only one real-time log delivery task name can be filled in for fuzzy search.</li>
-	// <li>entity-list: Filter by entity corresponding to the real-time log delivery task. Fuzzy search is not supported. Example values: domain.example.com or sid-2s69eb5wcms7.</li>
-	// <li>task-type: Filter by real-time log delivery task type. Fuzzy search is not supported. Optional values:<br>cls: Push to Tencent Cloud CLS;<br>custom_endpoint: Push to a user-defined HTTP(S) address;<br>s3: Push to an AWS S3-compatible bucket address.</li>
+	// Filter criteria. the maximum number of Filters.Values is 20. if this parameter is left empty, all real-time log delivery task information under the current zone-id will be returned. the detailed filter criteria are as follows:.
+	// <li>task-id: filters by real-time log delivery task id. fuzzy queries are not supported.</li>.
+	// <Li>Task-Name: filters by real-time log delivery task name. supports fuzzy query. when fuzzy search is used, only one real-time log delivery task name can be filled in.</li>.
+	// <li>entity-list: filters by the entity corresponding to the real-time log delivery task. fuzzy queries are not supported. example value: domain.example.com or sid-2s69eb5wcms7.</li>.
+	// <li>task-type: specifies the filter by real-time log delivery task type. fuzzy queries are not supported. valid values:<br> cls: push to tencent cloud cls;<br> custom_endpoint: push to a custom HTTP(S) address;<br> S3: push to an AWS S3-compatible bucket address;<br> log_analysis: push to EdgeOne log analytics.</li>.
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -12064,6 +12606,126 @@ func (r *DescribeSecurityTemplateBindingsResponse) FromJsonString(s string) erro
 }
 
 // Predefined struct for user
+type DescribeSharedCNAMERequestParams struct {
+	// Shared CNAME associated site ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Filter criteria. The maximum value of Filters.Values is 20. The detailed filter criteria are as follows:
+	// <li>shared-cname<br>   Filter by [<strong>shared CNAME</strong>].<br>   Type: String<br>   Required: No</li>
+	// <li>type<br>   Filter by [<strong>shared CNAME type</strong>].<br>   type: String<br>   Required: No</li>
+	// <li>Description<br>   Filter by [<strong>description</strong>].<br>   Type: String<br>   Required: No</li>
+	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// List sort method. Valid values:
+	// <li>asc: ascending order;</li>
+	// <li>desc: Sort in descending order.</li>The default value is `asc`.
+	Direction *string `json:"Direction,omitnil,omitempty" name:"Direction"`
+
+	// Match mode. Valid values:
+	// <li>all: Returns the shared CNAME that matches all query conditions.</li>
+	// <li>any: Returns the shared CNAME that matches any query condition.</li> Default value is all.
+	Match *string `json:"Match,omitnil,omitempty" name:"Match"`
+
+	// Sorting basis. Valid values:
+	// <li>create-time: Creation time;</li>
+	// <li>shared-cname: Shared CNAME.</li> Default sorting order is based on the shared-cname attribute.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number limit of paginated query. Default value: 20. Upper limit: 200.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeSharedCNAMERequest struct {
+	*tchttp.BaseRequest
+	
+	// Shared CNAME associated site ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Filter criteria. The maximum value of Filters.Values is 20. The detailed filter criteria are as follows:
+	// <li>shared-cname<br>   Filter by [<strong>shared CNAME</strong>].<br>   Type: String<br>   Required: No</li>
+	// <li>type<br>   Filter by [<strong>shared CNAME type</strong>].<br>   type: String<br>   Required: No</li>
+	// <li>Description<br>   Filter by [<strong>description</strong>].<br>   Type: String<br>   Required: No</li>
+	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// List sort method. Valid values:
+	// <li>asc: ascending order;</li>
+	// <li>desc: Sort in descending order.</li>The default value is `asc`.
+	Direction *string `json:"Direction,omitnil,omitempty" name:"Direction"`
+
+	// Match mode. Valid values:
+	// <li>all: Returns the shared CNAME that matches all query conditions.</li>
+	// <li>any: Returns the shared CNAME that matches any query condition.</li> Default value is all.
+	Match *string `json:"Match,omitnil,omitempty" name:"Match"`
+
+	// Sorting basis. Valid values:
+	// <li>create-time: Creation time;</li>
+	// <li>shared-cname: Shared CNAME.</li> Default sorting order is based on the shared-cname attribute.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number limit of paginated query. Default value: 20. Upper limit: 200.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeSharedCNAMERequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSharedCNAMERequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Filters")
+	delete(f, "Direction")
+	delete(f, "Match")
+	delete(f, "Order")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSharedCNAMERequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSharedCNAMEResponseParams struct {
+	// Total number of shared CNAMEs that meet filtering criteria.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Shared CNAME table detail.
+	SharedCNAMEInfo []*SharedCNAMEInfo `json:"SharedCNAMEInfo,omitnil,omitempty" name:"SharedCNAMEInfo"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSharedCNAMEResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSharedCNAMEResponseParams `json:"Response"`
+}
+
+func (r *DescribeSharedCNAMEResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSharedCNAMEResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeTimingL4DataRequestParams struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
@@ -12071,34 +12733,39 @@ type DescribeTimingL4DataRequestParams struct {
 	// End time. the query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Metric list. Valid values:
-	// <Li>l4Flow_connections: number of concurrent connections;</li>
-	// <Li>l4Flow_flux: total traffic;</li>
-	// <Li>l4Flow_inFlux: inbound traffic;</li>
-	// <Li>l4Flow_outFlux: outbound traffic.</li>
-	// <Li>l4Flow_inBandwidth: inbound peak bandwidth.</li>
-	// <Li>l4Flow_outBandwidth: outbound peak bandwidth.</li>
+	// Query metrics. valid values:.
+	// <ul><li>**l4Flow_flux**: specifies the total access traffic. measurement unit: Byte. metric value type: Integer.</li>.
+	// <li>**l4Flow_inFlux**: specifies access inbound traffic. measurement unit: Byte. metric value type: Integer.</li>.
+	// <li>**l4Flow_outFlux**: access outbound traffic. measurement unit: Byte. metric value type: Integer.</li>.
+	// <li>**l4Flow_inBandwidth**: specifies the inbound bandwidth peak of the visit. measurement unit: bps. metric value type: Integer.</li>.
+	// <li>**l4Flow_outBandwidth**: specifies the outbound bandwidth peak. measurement unit: bps. metric value type: Integer.</li>.
+	// <li>**l4Flow_connections**: specifies the number of concurrent connections, measurement unit: unit, metric value type: Integer.</li>.
+	// <li>**l4Flow_newConnectionsRate**: the rate of new connections, measurement unit: per second, metric value type: Float, rounded to two decimal places.</li></ul>**note**:<ul><li>metrics of <code>Integer</code> type will return corresponding time series Data from <code>Data.N.TypeValue</code>;</li>.
+	// <li>Metrics with <code>Float</code> value type will return corresponding time series Data from <code>Data.N.FloatTypeValue</code>.</li></ul>.
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+	// Site ID. this parameter will change from selectable to required after may 30, 2024. for details, see the announcement: [tencent cloud EdgeOne: tencentcloud API change notification](https://www.tencentcloud.comom/document/product/1552/104902?from_cn_redirect=1).
+	// Import up to 100 site ids. to query all site data under the tencent cloud root account, use `*` as a replacement. querying account-level data requires permission for all site resources of this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of L4 proxy IDs. All L4 proxies will be selected if this field is not specified.
 	ProxyIds []*string `json:"ProxyIds,omitnil,omitempty" name:"ProxyIds"`
 
-	// The query granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minutes;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period <= 1 hour: `min`; <br>1 hour < period <= 2 days: `5min`; <br>2 days < period <= 7 days: `hour`; <br>Period > 7 days: `day`.
+	// Time granularity of the query. valid values:.
+	// <ul><li>**min**: 1 minute;</li>.
+	// <Li>**5min**: 5 minutes;</li>.
+	// <Li>**Hour**: 1 hour;</li>.
+	// <Li>**Day**: 1 day.</li></ul>if this parameter is not input, the granularity will be automatically inferred based on the interval between the start time and end time. specifically, data will be queried with a granularity of <code>min</code>, <code>5min</code>, <code>hour</code>, and <code>day</code> respectively when the period is no more than 1 hour, no more than 2 days, no more than 7 days, and over 7 days.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Filter criteria. The detailed key values of filter criteria are as follows:
-	// <li>ruleId: filter by forwarding rule ID.</li>
-	// <li>proxyId: filter by L4 proxy instance ID.</li>
+	// Filter criteria. the detailed Key values of filter criteria are as follows:.
+	// <ul><li>**ruleId**: filter by forwarding rule ID.</li>.
+	// <li>**proxyId**: filters by l4 proxy instance ID.</li></ul>.
 	Filters []*QueryCondition `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Data ownership region. This parameter is deprecated. Please filter data by client region in Filters.country.
+	//
+	// Deprecated: Area is deprecated.
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 }
 
@@ -12111,31 +12778,34 @@ type DescribeTimingL4DataRequest struct {
 	// End time. the query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Metric list. Valid values:
-	// <Li>l4Flow_connections: number of concurrent connections;</li>
-	// <Li>l4Flow_flux: total traffic;</li>
-	// <Li>l4Flow_inFlux: inbound traffic;</li>
-	// <Li>l4Flow_outFlux: outbound traffic.</li>
-	// <Li>l4Flow_inBandwidth: inbound peak bandwidth.</li>
-	// <Li>l4Flow_outBandwidth: outbound peak bandwidth.</li>
+	// Query metrics. valid values:.
+	// <ul><li>**l4Flow_flux**: specifies the total access traffic. measurement unit: Byte. metric value type: Integer.</li>.
+	// <li>**l4Flow_inFlux**: specifies access inbound traffic. measurement unit: Byte. metric value type: Integer.</li>.
+	// <li>**l4Flow_outFlux**: access outbound traffic. measurement unit: Byte. metric value type: Integer.</li>.
+	// <li>**l4Flow_inBandwidth**: specifies the inbound bandwidth peak of the visit. measurement unit: bps. metric value type: Integer.</li>.
+	// <li>**l4Flow_outBandwidth**: specifies the outbound bandwidth peak. measurement unit: bps. metric value type: Integer.</li>.
+	// <li>**l4Flow_connections**: specifies the number of concurrent connections, measurement unit: unit, metric value type: Integer.</li>.
+	// <li>**l4Flow_newConnectionsRate**: the rate of new connections, measurement unit: per second, metric value type: Float, rounded to two decimal places.</li></ul>**note**:<ul><li>metrics of <code>Integer</code> type will return corresponding time series Data from <code>Data.N.TypeValue</code>;</li>.
+	// <li>Metrics with <code>Float</code> value type will return corresponding time series Data from <code>Data.N.FloatTypeValue</code>.</li></ul>.
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+	// Site ID. this parameter will change from selectable to required after may 30, 2024. for details, see the announcement: [tencent cloud EdgeOne: tencentcloud API change notification](https://www.tencentcloud.comom/document/product/1552/104902?from_cn_redirect=1).
+	// Import up to 100 site ids. to query all site data under the tencent cloud root account, use `*` as a replacement. querying account-level data requires permission for all site resources of this api.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of L4 proxy IDs. All L4 proxies will be selected if this field is not specified.
 	ProxyIds []*string `json:"ProxyIds,omitnil,omitempty" name:"ProxyIds"`
 
-	// The query granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minutes;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period <= 1 hour: `min`; <br>1 hour < period <= 2 days: `5min`; <br>2 days < period <= 7 days: `hour`; <br>Period > 7 days: `day`.
+	// Time granularity of the query. valid values:.
+	// <ul><li>**min**: 1 minute;</li>.
+	// <Li>**5min**: 5 minutes;</li>.
+	// <Li>**Hour**: 1 hour;</li>.
+	// <Li>**Day**: 1 day.</li></ul>if this parameter is not input, the granularity will be automatically inferred based on the interval between the start time and end time. specifically, data will be queried with a granularity of <code>min</code>, <code>5min</code>, <code>hour</code>, and <code>day</code> respectively when the period is no more than 1 hour, no more than 2 days, no more than 7 days, and over 7 days.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Filter criteria. The detailed key values of filter criteria are as follows:
-	// <li>ruleId: filter by forwarding rule ID.</li>
-	// <li>proxyId: filter by L4 proxy instance ID.</li>
+	// Filter criteria. the detailed Key values of filter criteria are as follows:.
+	// <ul><li>**ruleId**: filter by forwarding rule ID.</li>.
+	// <li>**proxyId**: filters by l4 proxy instance ID.</li></ul>.
 	Filters []*QueryCondition `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Data ownership region. This parameter is deprecated. Please filter data by client region in Filters.country.
@@ -12173,8 +12843,9 @@ type DescribeTimingL4DataResponseParams struct {
 	// Total number of query results.
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// The list of L4 traffic data recorded over time.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Layer 4 time series traffic Data list.<br>for different queried metrics, time series Data is returned from different parameters based on the value type.<br>currently, there are the following two value types:</p><ul><li><strong>Integer</strong>: metrics with <code>Integer</code> value type return corresponding time series Data from <code>Data.N.TypeValue</code>.<br>queried metrics <code>MetricName</code> include:<ul><li><code>l4Flow_flux</code>: total access traffic;</li><li><code>l4Flow_inFlux</code>: access inbound traffic;</li><li><code>l4Flow_outFlux</code>: access outbound traffic;</li><li><code>l4Flow_inBandwidth</code>: inbound bandwidth peak;</li><li><code>l4Flow_outBandwidth</code>: outbound bandwidth peak;</li><li><code>l4Flow_connections</code>: number of concurrent connections.</li></ul></li><li><strong>Float</strong>: metrics with <code>Float</code> value type return corresponding time series Data from <code>Data.N.FloatTypeValue</code>.<br>queried metrics <code>MetricName</code> include:<ul><li><code>l4Flow_newConnectionsRate</code>: rate of new connections.</li></ul></li>.
+	// </ul><p>This API does not support dimension query for now. it aggregates and returns Data by root account by default, which means <code>Data.N.TypeKey = AppId</code>. AppId is the unique id of the tencent cloud root account, and N always equals 1.</p>.
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
 	Data []*TimingDataRecord `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -12451,59 +13122,69 @@ func (r *DescribeTimingL7CacheDataResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTimingL7OriginPullDataRequestParams struct {
+	// Site ID set. This parameter is required. A maximum of 100 zone-ids can be imported. Use `*` to query data for all sites under the Tencent Cloud root account. Querying account-level data requires permissions for all site resources in this API.
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+
+	// Metric list. valid values:
+	// <ul><li>l7Flow_outFlux_hy: specifies the request traffic from the EdgeOne node to the origin server direction. measurement unit: Byte.</li>
+	// <li>l7Flow_outBandwidth_hy: request bandwidth from EdgeOne node to origin server direction, measurement unit: bps;</li>.
+	// <li>l7Flow_request_hy: number of requests in the EdgeOne node to origin server direction. unit: count.</li>.
+	// <li>l7Flow_inFlux_hy: specifies the response traffic from the origin server to the EdgeOne node direction, measurement unit: Byte.</li>.
+	// <li>l7Flow_inBandwidth_hy: specifies the response bandwidth from the origin server to the EdgeOne node. measurement unit: bps.</li></ul>.
+	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
+
 	// Start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Metric list. Valid values:.
-	// <li>l7Flow_outFlux_hy: specifies the request traffic from the EdgeOne node to the origin server. Unit: byte.</li>
-	// <li>l7Flow_outBandwidth_hy: specifies the request bandwidth from EdgeOne node to origin server. Unit: bps.</li>
-	// <li>l7Flow_request_hy: specifies the request count from EdgeOne node to origin server. Unit: times.</li>
-	// <li>l7Flow_inFlux_hy: specifies the response traffic from the origin server to the EdgeOne node. Unit: byte.</li>
-	// <li>l7Flow_inBandwidth_hy: specifies the response bandwidth from the origin server to the EdgeOne node. Unit: bps.</li>
-	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
-
-	// Site ID set. This parameter is required. A maximum of 100 zone-ids can be imported. Use `*` to query data for all sites under the Tencent Cloud root account. Querying account-level data requires permissions for all site resources in this interface.
-	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
-
-	// Time granularity of the query. Valid values:
-	// <Li>min: 1 minute.</li><Li>5min: 5 minutes;</li><Li>hour: 1 hour;</li><li>day: 1 day.</li>If this parameter is not input, the granularity will be automatically calculated based on the interval between the start time and end time. Specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is no more than 2 hours, no more than 2 days, no more than 7 days, and over 7 days.
+	// Time granularity of the query. valid values:.
+	// <Ul><Li>Min: 1 minute;</li><li>5min: 5 minutes;</li><li>hour: 1 hour;</li><li>day: 1 day.</li></ul>if this parameter is not input, the granularity will be automatically inferred based on the interval between the start time and end time. specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is within 2 hours, within 2 days, within 7 days, and exceeding 7 days.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Filter conditions. Details:
-	// <li>domain: specifies the domain name in client requests. When the domain is onboarded via a wildcard, the recorded value is the wildcard domain itself, not the specific subdomain.</li>
+	// Filter criteria. detailed filter criteria:.
+	// <ul><li><strong>domain</strong>: the requested domain name from the client. if accessing EdgeOne via wildcard domain, the data records the wildcard domain name rather than the specific domain.</li><li><strong>originStatusCode</strong>: origin status code. this filter item is supported only when <code>MetricNames = ["l7Flow_request_hy"]</code>.<br>the corresponding Value options are as follows:<ul><li><code>1xx</code>: status codes of the 1xx kind.</li><li><code>2xx</code>: status codes of the 2xx kind.</li><li><code>3xx</code>: status codes of the 3xx kind.</li><li><code>4xx</code>: status codes of the 4xx kind.</li><li><code>5xx</code>: status codes of the 5xx kind.</li><li>integer within range <code>[0, 600)</code> (excluding 600).</li></ul></li></ul>.
+	// **Note**: when <code>DimensionName</code> is not empty, only the <code>equals</code> operator is supported.
 	Filters []*QueryCondition `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Query dimension name. valid values:</p><ul><li><strong>domain</strong>: the domain name requested by the client. if EdgeOne is accessed via a wildcard domain name, the data records the wildcard domain name.<br>when using the domain dimension, the <code>Filters</code> must include the <code>domain</code> filter item, specifying a list of no more than 100 domain names to query.</li><li><strong>origin-status-code</strong>: origin status code, such as 200, 404.<br>this dimension is supported only when <code>MetricNames = ["l7Flow_request_hy"]</code>.</li><li><strong>origin-status-code-category</strong>: origin status code category, such as 2xx, 4xx.<br>this dimension is supported only when <code>MetricNames =["l7Flow_request_hy"]</code>.</li></ul><p>if the <code>DimensionName</code> input parameter is empty, the data is aggregated by the <code>AppId</code> dimension by default, returning only one set of data.</p><p>if the <code>DimensionName</code> input parameter is not empty, the corresponding time series data is returned grouped by the specified query dimension. for example:</p><ul>when <code>DimensionName = origin-status-code</code>:<ul><li>the <code>TimingDataRecords.TypeKey</code> in the returned data is the specific origin status code, such as 200.</li><li>the <code>TimingDataRecords.TypeValue</code> in the returned data is the time series data corresponding to that status code.</li></ul></ul>.
+	// <strong>Note</strong>: when specifying DimensionName during queries, concurrent calls are forbidden. if exceeded the query frequency limit, it will return an error <code><strong>InvalidParameter.ActionInProgress</strong></code>.
+	DimensionName *string `json:"DimensionName,omitnil,omitempty" name:"DimensionName"`
 }
 
 type DescribeTimingL7OriginPullDataRequest struct {
 	*tchttp.BaseRequest
 	
+	// Site ID set. This parameter is required. A maximum of 100 zone-ids can be imported. Use `*` to query data for all sites under the Tencent Cloud root account. Querying account-level data requires permissions for all site resources in this API.
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+
+	// Metric list. valid values:
+	// <ul><li>l7Flow_outFlux_hy: specifies the request traffic from the EdgeOne node to the origin server direction. measurement unit: Byte.</li>
+	// <li>l7Flow_outBandwidth_hy: request bandwidth from EdgeOne node to origin server direction, measurement unit: bps;</li>.
+	// <li>l7Flow_request_hy: number of requests in the EdgeOne node to origin server direction. unit: count.</li>.
+	// <li>l7Flow_inFlux_hy: specifies the response traffic from the origin server to the EdgeOne node direction, measurement unit: Byte.</li>.
+	// <li>l7Flow_inBandwidth_hy: specifies the response bandwidth from the origin server to the EdgeOne node. measurement unit: bps.</li></ul>.
+	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
+
 	// Start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Metric list. Valid values:.
-	// <li>l7Flow_outFlux_hy: specifies the request traffic from the EdgeOne node to the origin server. Unit: byte.</li>
-	// <li>l7Flow_outBandwidth_hy: specifies the request bandwidth from EdgeOne node to origin server. Unit: bps.</li>
-	// <li>l7Flow_request_hy: specifies the request count from EdgeOne node to origin server. Unit: times.</li>
-	// <li>l7Flow_inFlux_hy: specifies the response traffic from the origin server to the EdgeOne node. Unit: byte.</li>
-	// <li>l7Flow_inBandwidth_hy: specifies the response bandwidth from the origin server to the EdgeOne node. Unit: bps.</li>
-	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
-
-	// Site ID set. This parameter is required. A maximum of 100 zone-ids can be imported. Use `*` to query data for all sites under the Tencent Cloud root account. Querying account-level data requires permissions for all site resources in this interface.
-	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
-
-	// Time granularity of the query. Valid values:
-	// <Li>min: 1 minute.</li><Li>5min: 5 minutes;</li><Li>hour: 1 hour;</li><li>day: 1 day.</li>If this parameter is not input, the granularity will be automatically calculated based on the interval between the start time and end time. Specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is no more than 2 hours, no more than 2 days, no more than 7 days, and over 7 days.
+	// Time granularity of the query. valid values:.
+	// <Ul><Li>Min: 1 minute;</li><li>5min: 5 minutes;</li><li>hour: 1 hour;</li><li>day: 1 day.</li></ul>if this parameter is not input, the granularity will be automatically inferred based on the interval between the start time and end time. specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is within 2 hours, within 2 days, within 7 days, and exceeding 7 days.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Filter conditions. Details:
-	// <li>domain: specifies the domain name in client requests. When the domain is onboarded via a wildcard, the recorded value is the wildcard domain itself, not the specific subdomain.</li>
+	// Filter criteria. detailed filter criteria:.
+	// <ul><li><strong>domain</strong>: the requested domain name from the client. if accessing EdgeOne via wildcard domain, the data records the wildcard domain name rather than the specific domain.</li><li><strong>originStatusCode</strong>: origin status code. this filter item is supported only when <code>MetricNames = ["l7Flow_request_hy"]</code>.<br>the corresponding Value options are as follows:<ul><li><code>1xx</code>: status codes of the 1xx kind.</li><li><code>2xx</code>: status codes of the 2xx kind.</li><li><code>3xx</code>: status codes of the 3xx kind.</li><li><code>4xx</code>: status codes of the 4xx kind.</li><li><code>5xx</code>: status codes of the 5xx kind.</li><li>integer within range <code>[0, 600)</code> (excluding 600).</li></ul></li></ul>.
+	// **Note**: when <code>DimensionName</code> is not empty, only the <code>equals</code> operator is supported.
 	Filters []*QueryCondition `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Query dimension name. valid values:</p><ul><li><strong>domain</strong>: the domain name requested by the client. if EdgeOne is accessed via a wildcard domain name, the data records the wildcard domain name.<br>when using the domain dimension, the <code>Filters</code> must include the <code>domain</code> filter item, specifying a list of no more than 100 domain names to query.</li><li><strong>origin-status-code</strong>: origin status code, such as 200, 404.<br>this dimension is supported only when <code>MetricNames = ["l7Flow_request_hy"]</code>.</li><li><strong>origin-status-code-category</strong>: origin status code category, such as 2xx, 4xx.<br>this dimension is supported only when <code>MetricNames =["l7Flow_request_hy"]</code>.</li></ul><p>if the <code>DimensionName</code> input parameter is empty, the data is aggregated by the <code>AppId</code> dimension by default, returning only one set of data.</p><p>if the <code>DimensionName</code> input parameter is not empty, the corresponding time series data is returned grouped by the specified query dimension. for example:</p><ul>when <code>DimensionName = origin-status-code</code>:<ul><li>the <code>TimingDataRecords.TypeKey</code> in the returned data is the specific origin status code, such as 200.</li><li>the <code>TimingDataRecords.TypeValue</code> in the returned data is the time series data corresponding to that status code.</li></ul></ul>.
+	// <strong>Note</strong>: when specifying DimensionName during queries, concurrent calls are forbidden. if exceeded the query frequency limit, it will return an error <code><strong>InvalidParameter.ActionInProgress</strong></code>.
+	DimensionName *string `json:"DimensionName,omitnil,omitempty" name:"DimensionName"`
 }
 
 func (r *DescribeTimingL7OriginPullDataRequest) ToJsonString() string {
@@ -12518,12 +13199,13 @@ func (r *DescribeTimingL7OriginPullDataRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "ZoneIds")
+	delete(f, "MetricNames")
 	delete(f, "StartTime")
 	delete(f, "EndTime")
-	delete(f, "MetricNames")
-	delete(f, "ZoneIds")
 	delete(f, "Interval")
 	delete(f, "Filters")
+	delete(f, "DimensionName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTimingL7OriginPullDataRequest has unknown keys!", "")
 	}
@@ -12566,34 +13248,34 @@ type DescribeTopL7AnalysisDataRequestParams struct {
 	// End time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Queried metric. Valid values:
-	// <li> l7Flow_outFlux_country: specifies the l7 EdgeOne response traffic metric counted by the country/region dimension.</li>
-	// <li> l7Flow_outFlux_province: specifies the l7 EdgeOne response traffic metric counted by the dimension of provinces in chinese mainland.</li>
-	// <li> l7Flow_outFlux_statusCode: specifies the l7 EdgeOne response traffic metric by status code dimension.</li>
-	// <li> l7Flow_outFlux_domain: specifies the l7 EdgeOne response traffic metric counted by domain name dimension.</li>
-	// <li>l7Flow_outFlux_url: specifies the l7 EdgeOne response traffic metric counted by url Path dimension.</li>
-	// <li> l7Flow_outFlux_resourceType: specifies the l7 EdgeOne response traffic metric counted by resource type dimension.</li>
-	// <li> l7Flow_outFlux_sip: specifies the l7 EdgeOne response traffic metric counted by the client IP dimension.</li>
-	// <li>l7Flow_outFlux_referers: specifies the l7 EdgeOne response traffic statistics by Referer dimension.</li>
-	// <li> l7Flow_outFlux_ua_device: specifies the l7 EdgeOne response traffic metric counted by device type dimension.</li>
-	// <li> l7Flow_outFlux_ua_browser: specifies the l7 EdgeOne response traffic metric by browser type dimension.</li>
-	// <li> l7Flow_outFlux_ua_os: specifies the l7 EdgeOne response traffic metric counted by the operating system type dimension.</li>
-	// <li> l7Flow_outFlux_ua: specifies the l7 EdgeOne response traffic metric by User-Agent dimension statistics.</li>
-	// <li> l7Flow_request_country: specifies the l7 access request count metric by country/region dimension.</li>
-	// <li> l7Flow_request_province: specifies the l7 access request count metric by province in the chinese mainland.</li>
-	// <li> l7Flow_request_statusCode: specifies the l7 access request count metric by status code dimension.</li>
-	// <li> l7Flow_request_domain: specifies the l7 access request count metric counted by the domain name dimension.</li>
-	// <li> l7Flow_request_url: specifies the l7 access request count metric counted by url Path dimension. </li>
-	// <li> l7Flow_request_resourceType: specifies the l7 access request count metric counted by the resource type dimension.</li>
-	// <li> l7Flow_request_sip: specifies the l7 access request count metric counted by the client IP dimension.</li>
-	// <li>l7Flow_request_referers: specifies l7 access request count metrics by referer dimension.</li>
-	// <li> l7Flow_request_ua_device: specifies the l7 access request count metric by device type dimension.</li>
-	// <li> l7Flow_request_ua_browser: specifies the l7 access request count metric by browser type dimension.</li>
-	// <li> l7Flow_request_ua_os: specifies the l7 access request count metric counted by the operating system type dimension.</li>
-	// <li> l7Flow_request_ua: l7 access request count metric counted by the User-Agent dimension.</li>
+	// Queried metric. valid values:.
+	// <li> l7Flow_outFlux_country: specifies the l7 EdgeOne response traffic metric by country/region dimension.</li>.
+	// <li> l7Flow_outFlux_province: specifies the l7 EdgeOne response traffic metric counted by the dimension of provinces in chinese mainland.</li>.
+	// <li> l7Flow_outFlux_statusCode: specifies the l7 EdgeOne response traffic metric by status code dimension.</li>.
+	// <li> l7Flow_outFlux_domain: specifies the l7 EdgeOne response traffic metric counted by the domain name dimension.</li>.
+	// <li> l7Flow_outFlux_url: specifies the l7 EdgeOne response traffic metric counted by url Path dimension. </li>.
+	// <li> l7Flow_outFlux_resourceType: specifies the l7 EdgeOne response traffic metric counted by resource type dimension.</li>.
+	// <li> l7Flow_outFlux_sip: specifies the l7 EdgeOne response traffic metric counted by the client IP dimension.</li>.
+	// <li> l7Flow_outFlux_referers: specifies the l7 EdgeOne response traffic metrics statistics by Referer dimension.</li>.
+	// <li> l7Flow_outFlux_ua_device: specifies the l7 EdgeOne response traffic metric counted by the device type dimension.</li>.
+	// <li> l7Flow_outFlux_ua_browser: specifies the l7 EdgeOne response traffic metric by browser type dimension.</li>.
+	// <li> l7Flow_outFlux_ua_os: specifies the l7 EdgeOne response traffic metric counted by the operating system type dimension.</li>.
+	// <li> l7Flow_outFlux_ua: specifies the l7 EdgeOne response traffic metric by User-Agent dimension statistics.</li>.
+	// <li> l7Flow_request_country: specifies the l7 access request count metric by country/region dimension.</li>.
+	// <li> l7Flow_request_province: specifies the l7 access request count metric by the dimension of provinces in the chinese mainland.</li>.
+	// <li> l7Flow_request_statusCode: specifies the l7 access request count metric by status code dimension.</li>.
+	// <li> l7Flow_request_domain: specifies the l7 access request count metric counted by the domain name dimension.</li>.
+	// <li> l7Flow_request_url: specifies the request count metrics of l7 access counted by url Path dimension. </li>.
+	// <li> l7Flow_request_resourceType: specifies the l7 access request count metric counted by the resource type dimension.</li>.
+	// <li> l7Flow_request_sip: specifies the l7 access request count metric counted by the client IP dimension.</li>.
+	// <li> l7Flow_request_referers: specifies the request count metrics for l7 access statistics by Referer dimension.</li>.
+	// <li> l7Flow_request_ua_device: specifies the l7 access request count metric by device type dimension.</li>.
+	// <li> l7Flow_request_ua_browser: specifies the l7 access request count metric by browser type dimension.</li>.
+	// <li> l7Flow_request_ua_os: specifies the l7 access request count metric counted by the operating system type dimension.</li>.
+	// <li> l7Flow_request_ua: specifies the l7 access request count metric counted by the User-Agent dimension.</li>.
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
-	// Site ID set. this parameter will change from option to required after may 30, 2024. for details, see the notice: [tencent cloud EdgeOne API change notification](https://www.tencentcloud.com/document/product/1552/104902?from_cn_redirect=1). a maximum of 100 site ids can be imported. use `*` to query all site data under the tencent cloud root account. querying account-level data requires all resource permissions for all sites in this interface.
+	// Site ID set. this parameter will change from option to required after may 30, 2024. for details, see the notice: [tencent cloud EdgeOne API change notification](https://www.tencentcloud.com/document/product/1145/59980). a maximum of 100 site ids can be imported. use `*` to query all site data under the tencent cloud root account. querying account-level data requires all resource permissions for all sites in this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Indicates the top N data to be queried. The maximum value is 1000. If this parameter is not input, the default value is 10, indicating querying the top 10 data.
@@ -12619,34 +13301,34 @@ type DescribeTopL7AnalysisDataRequest struct {
 	// End time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Queried metric. Valid values:
-	// <li> l7Flow_outFlux_country: specifies the l7 EdgeOne response traffic metric counted by the country/region dimension.</li>
-	// <li> l7Flow_outFlux_province: specifies the l7 EdgeOne response traffic metric counted by the dimension of provinces in chinese mainland.</li>
-	// <li> l7Flow_outFlux_statusCode: specifies the l7 EdgeOne response traffic metric by status code dimension.</li>
-	// <li> l7Flow_outFlux_domain: specifies the l7 EdgeOne response traffic metric counted by domain name dimension.</li>
-	// <li>l7Flow_outFlux_url: specifies the l7 EdgeOne response traffic metric counted by url Path dimension.</li>
-	// <li> l7Flow_outFlux_resourceType: specifies the l7 EdgeOne response traffic metric counted by resource type dimension.</li>
-	// <li> l7Flow_outFlux_sip: specifies the l7 EdgeOne response traffic metric counted by the client IP dimension.</li>
-	// <li>l7Flow_outFlux_referers: specifies the l7 EdgeOne response traffic statistics by Referer dimension.</li>
-	// <li> l7Flow_outFlux_ua_device: specifies the l7 EdgeOne response traffic metric counted by device type dimension.</li>
-	// <li> l7Flow_outFlux_ua_browser: specifies the l7 EdgeOne response traffic metric by browser type dimension.</li>
-	// <li> l7Flow_outFlux_ua_os: specifies the l7 EdgeOne response traffic metric counted by the operating system type dimension.</li>
-	// <li> l7Flow_outFlux_ua: specifies the l7 EdgeOne response traffic metric by User-Agent dimension statistics.</li>
-	// <li> l7Flow_request_country: specifies the l7 access request count metric by country/region dimension.</li>
-	// <li> l7Flow_request_province: specifies the l7 access request count metric by province in the chinese mainland.</li>
-	// <li> l7Flow_request_statusCode: specifies the l7 access request count metric by status code dimension.</li>
-	// <li> l7Flow_request_domain: specifies the l7 access request count metric counted by the domain name dimension.</li>
-	// <li> l7Flow_request_url: specifies the l7 access request count metric counted by url Path dimension. </li>
-	// <li> l7Flow_request_resourceType: specifies the l7 access request count metric counted by the resource type dimension.</li>
-	// <li> l7Flow_request_sip: specifies the l7 access request count metric counted by the client IP dimension.</li>
-	// <li>l7Flow_request_referers: specifies l7 access request count metrics by referer dimension.</li>
-	// <li> l7Flow_request_ua_device: specifies the l7 access request count metric by device type dimension.</li>
-	// <li> l7Flow_request_ua_browser: specifies the l7 access request count metric by browser type dimension.</li>
-	// <li> l7Flow_request_ua_os: specifies the l7 access request count metric counted by the operating system type dimension.</li>
-	// <li> l7Flow_request_ua: l7 access request count metric counted by the User-Agent dimension.</li>
+	// Queried metric. valid values:.
+	// <li> l7Flow_outFlux_country: specifies the l7 EdgeOne response traffic metric by country/region dimension.</li>.
+	// <li> l7Flow_outFlux_province: specifies the l7 EdgeOne response traffic metric counted by the dimension of provinces in chinese mainland.</li>.
+	// <li> l7Flow_outFlux_statusCode: specifies the l7 EdgeOne response traffic metric by status code dimension.</li>.
+	// <li> l7Flow_outFlux_domain: specifies the l7 EdgeOne response traffic metric counted by the domain name dimension.</li>.
+	// <li> l7Flow_outFlux_url: specifies the l7 EdgeOne response traffic metric counted by url Path dimension. </li>.
+	// <li> l7Flow_outFlux_resourceType: specifies the l7 EdgeOne response traffic metric counted by resource type dimension.</li>.
+	// <li> l7Flow_outFlux_sip: specifies the l7 EdgeOne response traffic metric counted by the client IP dimension.</li>.
+	// <li> l7Flow_outFlux_referers: specifies the l7 EdgeOne response traffic metrics statistics by Referer dimension.</li>.
+	// <li> l7Flow_outFlux_ua_device: specifies the l7 EdgeOne response traffic metric counted by the device type dimension.</li>.
+	// <li> l7Flow_outFlux_ua_browser: specifies the l7 EdgeOne response traffic metric by browser type dimension.</li>.
+	// <li> l7Flow_outFlux_ua_os: specifies the l7 EdgeOne response traffic metric counted by the operating system type dimension.</li>.
+	// <li> l7Flow_outFlux_ua: specifies the l7 EdgeOne response traffic metric by User-Agent dimension statistics.</li>.
+	// <li> l7Flow_request_country: specifies the l7 access request count metric by country/region dimension.</li>.
+	// <li> l7Flow_request_province: specifies the l7 access request count metric by the dimension of provinces in the chinese mainland.</li>.
+	// <li> l7Flow_request_statusCode: specifies the l7 access request count metric by status code dimension.</li>.
+	// <li> l7Flow_request_domain: specifies the l7 access request count metric counted by the domain name dimension.</li>.
+	// <li> l7Flow_request_url: specifies the request count metrics of l7 access counted by url Path dimension. </li>.
+	// <li> l7Flow_request_resourceType: specifies the l7 access request count metric counted by the resource type dimension.</li>.
+	// <li> l7Flow_request_sip: specifies the l7 access request count metric counted by the client IP dimension.</li>.
+	// <li> l7Flow_request_referers: specifies the request count metrics for l7 access statistics by Referer dimension.</li>.
+	// <li> l7Flow_request_ua_device: specifies the l7 access request count metric by device type dimension.</li>.
+	// <li> l7Flow_request_ua_browser: specifies the l7 access request count metric by browser type dimension.</li>.
+	// <li> l7Flow_request_ua_os: specifies the l7 access request count metric counted by the operating system type dimension.</li>.
+	// <li> l7Flow_request_ua: specifies the l7 access request count metric counted by the User-Agent dimension.</li>.
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
-	// Site ID set. this parameter will change from option to required after may 30, 2024. for details, see the notice: [tencent cloud EdgeOne API change notification](https://www.tencentcloud.com/document/product/1552/104902?from_cn_redirect=1). a maximum of 100 site ids can be imported. use `*` to query all site data under the tencent cloud root account. querying account-level data requires all resource permissions for all sites in this interface.
+	// Site ID set. this parameter will change from option to required after may 30, 2024. for details, see the notice: [tencent cloud EdgeOne API change notification](https://www.tencentcloud.com/document/product/1145/59980). a maximum of 100 site ids can be imported. use `*` to query all site data under the tencent cloud root account. querying account-level data requires all resource permissions for all sites in this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Indicates the top N data to be queried. The maximum value is 1000. If this parameter is not input, the default value is 10, indicating querying the top 10 data.
@@ -13130,8 +13812,7 @@ type DescribeZonesRequestParams struct {
 	// Limit on paginated queries. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter criteria. the maximum value of Filters.Values is 20. if this parameter is left empty, all site information authorized under the current appid will be returned. detailed filter criteria are as follows:.
-	// <li>zone-name: filter by site name;</li> <li>zone-id: filter by site id. the site id is in the format of zone-2noz78a8ev6k;</li> <li>status: filter by site status;</li> <li>tag-key: filter by tag key;</li> <li>tag-value: filter by tag value;</li> <li>alias-zone-name: filter by identical site identifier.</li> when performing a fuzzy query, the fields that support filtering are named zone-name or alias-zone-name.
+	// Filter criteria. the maximum number of Filters.Values is 20. if this parameter is left empty, it returns all authorized site information under the current appid. the detailed filter criteria are as follows: <li>zone-name: filter by site name.</li><li>zone-type: filter by website type. options:<br>??full: NS access type;<br>??partial: CNAME-based;<br>??partialComposite: no domain access;<br>??dnsPodAccess: DNSPod managed access;<br>??pages: pages access type;<br>??ai: edge reasoning access type.</li><li>zone-id: filter by site id in the format like zone-2noz78a8ev6k.</li><li>status: filter by site status. options:<br>??active: NS switchover completed;<br>??pending: NS to be switched;<br>??deleted: has been deleted.</li><li>tag-key: filter according to the tag key.</li><li>tag-value: filter by tag value.</li><li>alias-zone-name: filter by identical site identifier.</li>fuzzy query supports filtering fields named zone-name or alias-zone-name.
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Sort the returned results according to this field. Values include:
@@ -13158,8 +13839,7 @@ type DescribeZonesRequest struct {
 	// Limit on paginated queries. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter criteria. the maximum value of Filters.Values is 20. if this parameter is left empty, all site information authorized under the current appid will be returned. detailed filter criteria are as follows:.
-	// <li>zone-name: filter by site name;</li> <li>zone-id: filter by site id. the site id is in the format of zone-2noz78a8ev6k;</li> <li>status: filter by site status;</li> <li>tag-key: filter by tag key;</li> <li>tag-value: filter by tag value;</li> <li>alias-zone-name: filter by identical site identifier.</li> when performing a fuzzy query, the fields that support filtering are named zone-name or alias-zone-name.
+	// Filter criteria. the maximum number of Filters.Values is 20. if this parameter is left empty, it returns all authorized site information under the current appid. the detailed filter criteria are as follows: <li>zone-name: filter by site name.</li><li>zone-type: filter by website type. options:<br>??full: NS access type;<br>??partial: CNAME-based;<br>??partialComposite: no domain access;<br>??dnsPodAccess: DNSPod managed access;<br>??pages: pages access type;<br>??ai: edge reasoning access type.</li><li>zone-id: filter by site id in the format like zone-2noz78a8ev6k.</li><li>status: filter by site status. options:<br>??active: NS switchover completed;<br>??pending: NS to be switched;<br>??deleted: has been deleted.</li><li>tag-key: filter according to the tag key.</li><li>tag-value: filter by tag value.</li><li>alias-zone-name: filter by identical site identifier.</li>fuzzy query supports filtering fields named zone-name or alias-zone-name.
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Sort the returned results according to this field. Values include:
@@ -13205,7 +13885,7 @@ type DescribeZonesResponseParams struct {
 	// Number of eligible sites.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Details of sites.
+	// Describes the list details of sites.
 	Zones []*Zone `json:"Zones,omitnil,omitempty" name:"Zones"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -13410,7 +14090,7 @@ type DetectLengthLimitRule struct {
 }
 
 type DeviceProfile struct {
-	// Client device type. valid values: <li>iOS;</li> <li>Android;</li> <li>WebView.</li>.
+	// Client device type. Valid values: <li>iOS;</li> <li>Android;</li> <li>WebView;</li> <li>WeChatMiniProgram.</li>
 	ClientType *string `json:"ClientType,omitnil,omitempty" name:"ClientType"`
 
 	// The minimum value to determine a request as high-risk ranges from 1–99. the larger the value, the higher the request risk, and the closer it resembles a request initiated by a Bot client. the default value is 50, corresponding to high-risk for values 51–100.
@@ -13569,7 +14249,7 @@ type DownloadL4LogsRequestParams struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// ZoneId set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980).
+	// The site ID set. this parameter will change from selectable to required after may 30, 2024. for details, see the notice: [tencent cloud EdgeOne: tencentcloud API change notification](https://www.tencentcloud.comom/document/product/1552/104902?from_cn_redirect=1).
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of L4 proxy instance IDs.
@@ -13591,7 +14271,7 @@ type DownloadL4LogsRequest struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// ZoneId set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980).
+	// The site ID set. this parameter will change from selectable to required after may 30, 2024. for details, see the notice: [tencent cloud EdgeOne: tencentcloud API change notification](https://www.tencentcloud.comom/document/product/1552/104902?from_cn_redirect=1).
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of L4 proxy instance IDs.
@@ -13664,7 +14344,7 @@ type DownloadL7LogsRequestParams struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// ZoneId set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980).
+	// Specifies the site ID set. this parameter will change from selectable to required after may 30, 2024. for details, see the announcement: [tencent cloud EdgeOne: tencentcloud API change notification](https://www.tencentcloud.comom/document/product/1552/104902?from_cn_redirect=1).
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
@@ -13686,7 +14366,7 @@ type DownloadL7LogsRequest struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// ZoneId set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980).
+	// Specifies the site ID set. this parameter will change from selectable to required after may 30, 2024. for details, see the announcement: [tencent cloud EdgeOne: tencentcloud API change notification](https://www.tencentcloud.comom/document/product/1552/104902?from_cn_redirect=1).
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
@@ -13784,25 +14464,351 @@ type DropPageDetail struct {
 }
 
 // Predefined struct for user
+type EdgeKVDeleteRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Namespace name.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Name list. Maximum array length is 20. Each key cannot be empty, with a length of 1-512 characters. Allowed characters include letters, numbers, hyphens, and underscores. To delete a single key, import an array with one element.
+	Keys []*string `json:"Keys,omitnil,omitempty" name:"Keys"`
+}
+
+type EdgeKVDeleteRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Namespace name.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Name list. Maximum array length is 20. Each key cannot be empty, with a length of 1-512 characters. Allowed characters include letters, numbers, hyphens, and underscores. To delete a single key, import an array with one element.
+	Keys []*string `json:"Keys,omitnil,omitempty" name:"Keys"`
+}
+
+func (r *EdgeKVDeleteRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EdgeKVDeleteRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Namespace")
+	delete(f, "Keys")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EdgeKVDeleteRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EdgeKVDeleteResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type EdgeKVDeleteResponse struct {
+	*tchttp.BaseResponse
+	Response *EdgeKVDeleteResponseParams `json:"Response"`
+}
+
+func (r *EdgeKVDeleteResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EdgeKVDeleteResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EdgeKVGetRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Namespace name. You can obtain the list of namespaces under the site through the DescribeEdgeKVNamespaces API.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Name list. Maximum array length is 20. Each key cannot be empty, with a length of 1-512 characters. Allowed characters include letters, numbers, hyphens, and underscores. To query a single key, input an array with one element.
+	Keys []*string `json:"Keys,omitnil,omitempty" name:"Keys"`
+}
+
+type EdgeKVGetRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Namespace name. You can obtain the list of namespaces under the site through the DescribeEdgeKVNamespaces API.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Name list. Maximum array length is 20. Each key cannot be empty, with a length of 1-512 characters. Allowed characters include letters, numbers, hyphens, and underscores. To query a single key, input an array with one element.
+	Keys []*string `json:"Keys,omitnil,omitempty" name:"Keys"`
+}
+
+func (r *EdgeKVGetRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EdgeKVGetRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Namespace")
+	delete(f, "Keys")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EdgeKVGetRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EdgeKVGetResponseParams struct {
+	// Key-value pair data list. Return results sequentially in the order of input Keys. If a key does not exist, the corresponding Value Field returns empty string.
+	Data []*KeyValuePair `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type EdgeKVGetResponse struct {
+	*tchttp.BaseResponse
+	Response *EdgeKVGetResponseParams `json:"Response"`
+}
+
+func (r *EdgeKVGetResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EdgeKVGetResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EdgeKVListRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Namespace name.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Prefix filtering for key names. Only return key names that begin with the specified prefix, with a length of 1-512 characters. Not specified means return all key names; does not allow input of empty string.
+	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
+
+	// Cursor position. Indicates the starting position of the current query for traversing large amounts of data. Do not fill in during the initial query, start traversal from the beginning. Fill in the Cursor value returned last time during follow-up queries to proceed with traversal from that position.
+	Cursor *string `json:"Cursor,omitnil,omitempty" name:"Cursor"`
+
+	// Number of key names returned. Default value: 20. Maximum value: 1000.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type EdgeKVListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Namespace name.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Prefix filtering for key names. Only return key names that begin with the specified prefix, with a length of 1-512 characters. Not specified means return all key names; does not allow input of empty string.
+	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
+
+	// Cursor position. Indicates the starting position of the current query for traversing large amounts of data. Do not fill in during the initial query, start traversal from the beginning. Fill in the Cursor value returned last time during follow-up queries to proceed with traversal from that position.
+	Cursor *string `json:"Cursor,omitnil,omitempty" name:"Cursor"`
+
+	// Number of key names returned. Default value: 20. Maximum value: 1000.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *EdgeKVListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EdgeKVListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Namespace")
+	delete(f, "Prefix")
+	delete(f, "Cursor")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EdgeKVListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EdgeKVListResponseParams struct {
+	// Key name list.
+	Keys []*string `json:"Keys,omitnil,omitempty" name:"Keys"`
+
+	// Cursor position. Indicates current traversal position to obtain next batch data. Fill in this value for the Cursor parameter in the next request to proceed with backward traversal. If it is an empty string, it means all data has been traversed.
+	Cursor *string `json:"Cursor,omitnil,omitempty" name:"Cursor"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type EdgeKVListResponse struct {
+	*tchttp.BaseResponse
+	Response *EdgeKVListResponseParams `json:"Response"`
+}
+
+func (r *EdgeKVListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EdgeKVListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EdgeKVPutRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Namespace name.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Key name. The length is 1-512 characters. Allowed characters include letters, digits, hyphens, and underscores.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Key-value. Cannot be empty and supports up to 1 MB. Supports storing string data.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+
+	// Expiration time, absolute time. It means the seconds elapsed since midnight (UTC/GMT) on January 1, 1970, and cannot be earlier than the current time. If both Expiration and ExpirationTTL are filled in, ExpirationTTL takes precedence. If neither Expiration nor ExpirationTTL is specified, the key-value pair will never expire.
+	Expiration *int64 `json:"Expiration,omitnil,omitempty" name:"Expiration"`
+
+	// Expiration time, relative time, in seconds. Indicates the data will expire after the specified seconds, must be greater than 0. If both Expiration and ExpirationTTL are filled in, ExpirationTTL takes precedence. If neither Expiration nor ExpirationTTL is specified, the key-value pair will never expire.
+	ExpirationTTL *int64 `json:"ExpirationTTL,omitnil,omitempty" name:"ExpirationTTL"`
+}
+
+type EdgeKVPutRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Namespace name.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Key name. The length is 1-512 characters. Allowed characters include letters, digits, hyphens, and underscores.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Key-value. Cannot be empty and supports up to 1 MB. Supports storing string data.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+
+	// Expiration time, absolute time. It means the seconds elapsed since midnight (UTC/GMT) on January 1, 1970, and cannot be earlier than the current time. If both Expiration and ExpirationTTL are filled in, ExpirationTTL takes precedence. If neither Expiration nor ExpirationTTL is specified, the key-value pair will never expire.
+	Expiration *int64 `json:"Expiration,omitnil,omitempty" name:"Expiration"`
+
+	// Expiration time, relative time, in seconds. Indicates the data will expire after the specified seconds, must be greater than 0. If both Expiration and ExpirationTTL are filled in, ExpirationTTL takes precedence. If neither Expiration nor ExpirationTTL is specified, the key-value pair will never expire.
+	ExpirationTTL *int64 `json:"ExpirationTTL,omitnil,omitempty" name:"ExpirationTTL"`
+}
+
+func (r *EdgeKVPutRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EdgeKVPutRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Namespace")
+	delete(f, "Key")
+	delete(f, "Value")
+	delete(f, "Expiration")
+	delete(f, "ExpirationTTL")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EdgeKVPutRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EdgeKVPutResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type EdgeKVPutResponse struct {
+	*tchttp.BaseResponse
+	Response *EdgeKVPutResponseParams `json:"Response"`
+}
+
+func (r *EdgeKVPutResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EdgeKVPutResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type EnableOriginACLRequestParams struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// L7 acceleration domain name activation in origin protection mode.
-	// <li>`all`: enable layer-7 acceleration domain names for the site.</li>.
-	// <Li>Specific: enable for the site's designated layer-7 acceleration domain name.</li>when no parameter is defined, the default is specific.
+	// When first enabling origin protection for a site, configure the layer-7 acceleration domain name in specific IP range mode.
+	// <li>ALL: Target all layer-7 acceleration domain names under the current site. When the number of domains exceeds 200, please go through first in specific mode to enable 200 domain names, and enable the remaining resource via the ModifyOriginACL API.</li>
+	// <li>Specific: Enables layer-7 acceleration for the site's designated domain name.</li>Note: When no parameter is defined, the default is specific. For subsequent addition of layer-7 acceleration domain names or layer-4 proxy instances, configure them via the ModifyOriginACL API.
 	L7EnableMode *string `json:"L7EnableMode,omitnil,omitempty" name:"L7EnableMode"`
 
 	// Enable the list of layer-7 acceleration domain names with origin protection. this parameter is valid only when L7EnableMode is set to specific. when L7EnableMode is set to all, retain this parameter as empty. only supports up to 200 layer-7 acceleration domain names in a single operation.
 	L7Hosts []*string `json:"L7Hosts,omitnil,omitempty" name:"L7Hosts"`
 
-	// Specifies the origin protection mode of the l4 proxy instance.
-	// <Li>ALL: enable for all l4 proxy instances under the site.</li>.
-	// <Li>Specific: enable for the designated layer 4 proxy instance of the site.</li>when no parameter is defined, the default is specific.
+	// When first enabling origin protection for a site, configure the Layer 4 Proxy Instance Configuration in specific IP range mode.
+	// <li>ALL: Enable all L4 proxy instances under the current site. When the instance count exceeds 100, please go through specific mode to enable 100 domain names first. Enable the remaining resources via the ModifyOriginACL API.</li>
+	// <li>specific: Enable for the designated L4 proxy instance under the site.</li>Note: When no parameter is defined, the default is specific. Configure subsequent addition of L7 acceleration domains/L4 proxy instances via the ModifyOriginACL API.
 	L4EnableMode *string `json:"L4EnableMode,omitnil,omitempty" name:"L4EnableMode"`
 
 	// The list of L4 proxy instances with origin protection enabled. this parameter is valid only when L4EnableMode is set to specific. retain this parameter empty when L4EnableMode is set to all. only supports up to 100 layer-4 proxy instances per operation.
 	L4ProxyIds []*string `json:"L4ProxyIds,omitnil,omitempty" name:"L4ProxyIds"`
+
+	// The origin protection back-to-origin ACL control domain. If left empty, the standard global control domain is used by default. Available control domain information can be obtained through the DescribeAvailableOriginACLFamily API query.
+	// Valid values are as follows:
+	// <li>gaz: Standard global availability zone control domain;</li>
+	// <li>mlc: Standard Chinese mainland availability zone control domain;</li>
+	// <li>emc: Standard global (exclude Chinese mainland) availability zone control domain;</li>
+	// <li>plat-gaz: Simplify global availability zone control domain;</li>
+	// <li>plat-mlc: Simplified Chinese mainland availability zone control domain;</li>
+	// <li>plat-emc: Simplify the global (excluding Chinese mainland) availability zone control domain;</li>
+	OriginACLFamily *string `json:"OriginACLFamily,omitnil,omitempty" name:"OriginACLFamily"`
 }
 
 type EnableOriginACLRequest struct {
@@ -13811,21 +14817,31 @@ type EnableOriginACLRequest struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// L7 acceleration domain name activation in origin protection mode.
-	// <li>`all`: enable layer-7 acceleration domain names for the site.</li>.
-	// <Li>Specific: enable for the site's designated layer-7 acceleration domain name.</li>when no parameter is defined, the default is specific.
+	// When first enabling origin protection for a site, configure the layer-7 acceleration domain name in specific IP range mode.
+	// <li>ALL: Target all layer-7 acceleration domain names under the current site. When the number of domains exceeds 200, please go through first in specific mode to enable 200 domain names, and enable the remaining resource via the ModifyOriginACL API.</li>
+	// <li>Specific: Enables layer-7 acceleration for the site's designated domain name.</li>Note: When no parameter is defined, the default is specific. For subsequent addition of layer-7 acceleration domain names or layer-4 proxy instances, configure them via the ModifyOriginACL API.
 	L7EnableMode *string `json:"L7EnableMode,omitnil,omitempty" name:"L7EnableMode"`
 
 	// Enable the list of layer-7 acceleration domain names with origin protection. this parameter is valid only when L7EnableMode is set to specific. when L7EnableMode is set to all, retain this parameter as empty. only supports up to 200 layer-7 acceleration domain names in a single operation.
 	L7Hosts []*string `json:"L7Hosts,omitnil,omitempty" name:"L7Hosts"`
 
-	// Specifies the origin protection mode of the l4 proxy instance.
-	// <Li>ALL: enable for all l4 proxy instances under the site.</li>.
-	// <Li>Specific: enable for the designated layer 4 proxy instance of the site.</li>when no parameter is defined, the default is specific.
+	// When first enabling origin protection for a site, configure the Layer 4 Proxy Instance Configuration in specific IP range mode.
+	// <li>ALL: Enable all L4 proxy instances under the current site. When the instance count exceeds 100, please go through specific mode to enable 100 domain names first. Enable the remaining resources via the ModifyOriginACL API.</li>
+	// <li>specific: Enable for the designated L4 proxy instance under the site.</li>Note: When no parameter is defined, the default is specific. Configure subsequent addition of L7 acceleration domains/L4 proxy instances via the ModifyOriginACL API.
 	L4EnableMode *string `json:"L4EnableMode,omitnil,omitempty" name:"L4EnableMode"`
 
 	// The list of L4 proxy instances with origin protection enabled. this parameter is valid only when L4EnableMode is set to specific. retain this parameter empty when L4EnableMode is set to all. only supports up to 100 layer-4 proxy instances per operation.
 	L4ProxyIds []*string `json:"L4ProxyIds,omitnil,omitempty" name:"L4ProxyIds"`
+
+	// The origin protection back-to-origin ACL control domain. If left empty, the standard global control domain is used by default. Available control domain information can be obtained through the DescribeAvailableOriginACLFamily API query.
+	// Valid values are as follows:
+	// <li>gaz: Standard global availability zone control domain;</li>
+	// <li>mlc: Standard Chinese mainland availability zone control domain;</li>
+	// <li>emc: Standard global (exclude Chinese mainland) availability zone control domain;</li>
+	// <li>plat-gaz: Simplify global availability zone control domain;</li>
+	// <li>plat-mlc: Simplified Chinese mainland availability zone control domain;</li>
+	// <li>plat-emc: Simplify the global (excluding Chinese mainland) availability zone control domain;</li>
+	OriginACLFamily *string `json:"OriginACLFamily,omitnil,omitempty" name:"OriginACLFamily"`
 }
 
 func (r *EnableOriginACLRequest) ToJsonString() string {
@@ -13845,6 +14861,7 @@ func (r *EnableOriginACLRequest) FromJsonString(s string) error {
 	delete(f, "L7Hosts")
 	delete(f, "L4EnableMode")
 	delete(f, "L4ProxyIds")
+	delete(f, "OriginACLFamily")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableOriginACLRequest has unknown keys!", "")
 	}
@@ -14077,8 +15094,7 @@ type ExportZoneConfigRequestParams struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// It indicates exporting the type list of configuration . If it is left blank, all types of configurations will be exported. Currently supported valid values:<li>L7AccelerationConfig: It indicates exporting the Layer-7 acceleration configuration, corresponding to the console's "Site Acceleration - Global Acceleration Configuration" and "Site Acceleration - Rule Engine".</li>
-	// Note: The types that will be supported for export in the future will increase with iterations. When exporting all types, pay attention to the export file size. It is recommended to specify the configuration types to be exported to control the request and response packet payload size.
+	// Export the type list of configuration items. Leave it blank to export all types of configurations. Currently supported values include: <li>L7AccelerationConfig: means exporting the Layer-7 acceleration configuration, corresponding to the console "Site Acceleration - Global Acceleration Configuration" and "Site Acceleration - Rule Engine".</li><li>WebSecurity: refers to exporting the Web protection configuration.</li> Note: Types supported for future export will increase with iterations. When exporting all types, pay attention to export file size. It is recommended to specify the configuration types to be exported to control the request and response packet payload size.
 	Types []*string `json:"Types,omitnil,omitempty" name:"Types"`
 }
 
@@ -14088,8 +15104,7 @@ type ExportZoneConfigRequest struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// It indicates exporting the type list of configuration . If it is left blank, all types of configurations will be exported. Currently supported valid values:<li>L7AccelerationConfig: It indicates exporting the Layer-7 acceleration configuration, corresponding to the console's "Site Acceleration - Global Acceleration Configuration" and "Site Acceleration - Rule Engine".</li>
-	// Note: The types that will be supported for export in the future will increase with iterations. When exporting all types, pay attention to the export file size. It is recommended to specify the configuration types to be exported to control the request and response packet payload size.
+	// Export the type list of configuration items. Leave it blank to export all types of configurations. Currently supported values include: <li>L7AccelerationConfig: means exporting the Layer-7 acceleration configuration, corresponding to the console "Site Acceleration - Global Acceleration Configuration" and "Site Acceleration - Rule Engine".</li><li>WebSecurity: refers to exporting the Web protection configuration.</li> Note: Types supported for future export will increase with iterations. When exporting all types, pay attention to export file size. It is recommended to specify the configuration types to be exported to control the request and response packet payload size.
 	Types []*string `json:"Types,omitnil,omitempty" name:"Types"`
 }
 
@@ -14179,6 +15194,31 @@ type FirstPartConfig struct {
 
 	// The statistical period of the first segment packet is in seconds. expect the duration to be 5 seconds by default.
 	StatTime *uint64 `json:"StatTime,omitnil,omitempty" name:"StatTime"`
+}
+
+type FloatTimingDataItem struct {
+	// Time point for returning data, in the format of Unix timestamp in seconds.
+	Timestamp *int64 `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
+
+	// Specific values.
+	Value *float64 `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type FloatTimingTypeValue struct {
+	// Data and.
+	Sum *float64 `json:"Sum,omitnil,omitempty" name:"Sum"`
+
+	// Maximum value.
+	Max *float64 `json:"Max,omitnil,omitempty" name:"Max"`
+
+	// Average.
+	Avg *float64 `json:"Avg,omitnil,omitempty" name:"Avg"`
+
+	// Metric name.
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
+
+	// Details.
+	Detail []*FloatTimingDataItem `json:"Detail,omitnil,omitempty" name:"Detail"`
 }
 
 type FollowOrigin struct {
@@ -14272,6 +15312,22 @@ type Function struct {
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
+type FunctionComponentBinding struct {
+	// Bound component type. Valid values:
+	// <li>kv_namespace: KV namespace.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Variable name for binding. Limited to 1-50 characters. Allowed characters are letters, digits, and underscores. Digits cannot be at the beginning. Access the bound component via this variable name in the edge function code. Based on the Type value, the usage is as follows:
+	// <li>When Type is kv_namespace: In code, you can access the KV namespace through the variable name, for example, when setting it to "MY_KV", you can perform read-write operations via MY_KV.get("key").</li>
+	VariableName *string `json:"VariableName,omitnil,omitempty" name:"VariableName"`
+
+	// KV namespace configuration parameter. Used for designated binding namespace details. Required when Type is kv_namespace.
+	// 
+	// 
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	KVNamespaceParameters *KVNamespaceParameters `json:"KVNamespaceParameters,omitnil,omitempty" name:"KVNamespaceParameters"`
+}
+
 type FunctionEnvironmentVariable struct {
 	// Variable name, which should be unique and can only contain uppercase and lowercase letters, digits, and special characters including at signs (@), periods (.), hyphens (-), and underscores (_). Its maximum size is 64 bytes.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
@@ -14285,6 +15341,14 @@ type FunctionEnvironmentVariable struct {
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
+type FunctionRegionSelection struct {
+	// Function ID.
+	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
+
+	// List of countries/regions. example value: CN: china, CN.GD: guangdong, china. for values, see: [country/region and corresponding code enumeration](https://www.tencentcloud.comom/document/product/1552/112542?from_cn_redirect=1).
+	Regions []*string `json:"Regions,omitnil,omitempty" name:"Regions"`
+}
+
 type FunctionRule struct {
 	// Rule ID.
 	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
@@ -14292,17 +15356,29 @@ type FunctionRule struct {
 	// Rule condition list. There is an OR relationship between items in the list.
 	FunctionRuleConditions []*FunctionRuleCondition `json:"FunctionRuleConditions,omitnil,omitempty" name:"FunctionRuleConditions"`
 
-	// Function ID, specifying a function executed when a trigger rule condition is met.
+	// Function selection configuration type.
+	// <Li>Direct: specifies the execution function directly.</li>.
+	// <Li>Weight: selects the function based on weight ratio.</li>.
+	// <li> region: specifies the country/region selection function based on client IP.</li>.
+	TriggerType *string `json:"TriggerType,omitnil,omitempty" name:"TriggerType"`
+
+	// Specifies the function ID to be executed. valid only when TriggerType is direct.
 	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
 
-	// Rule description.
-	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
-
-	// Function name.
+	// Specifies the name of the function executed.
 	FunctionName *string `json:"FunctionName,omitnil,omitempty" name:"FunctionName"`
+
+	// Function selection configuration based on client IP country/region.
+	RegionMappingSelections []*FunctionRegionSelection `json:"RegionMappingSelections,omitnil,omitempty" name:"RegionMappingSelections"`
+
+	// Describes the function selection configuration based on weight.
+	WeightedSelections []*FunctionWeightedSelection `json:"WeightedSelections,omitnil,omitempty" name:"WeightedSelections"`
 
 	// Priority of a trigger rule for a function. The larger the value, the higher the priority.
 	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
+
+	// Rule description.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// Creation time, which adopts Coordinated Universal Time (UTC) and follows the date and time format of the ISO 8601 standard.
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
@@ -14314,6 +15390,16 @@ type FunctionRule struct {
 type FunctionRuleCondition struct {
 	// Condition of a trigger rule for an edge function. This condition is considered met if all items in the list are met.
 	RuleConditions []*RuleCondition `json:"RuleConditions,omitnil,omitempty" name:"RuleConditions"`
+}
+
+type FunctionWeightedSelection struct {
+	// Function ID.
+	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
+
+	// Specifies the selected weight. value ranges from 0 to 100. the sum of all weights needs to be 100.
+	// Specifies the calculation method for the select probability.
+	// weight/100. for example, setting two functions A and B, among them A has A weight of 30, then B must be 70, finally the probability of selecting A is 30%, and the probability of selecting B is 70%.
+	Weight *uint64 `json:"Weight,omitnil,omitempty" name:"Weight"`
 }
 
 type GatewayRegion struct {
@@ -14688,6 +15774,27 @@ type IPReputationGroup struct {
 
 	// The specific configuration of the IP intelligence library (originally client profile analysis), used to override the default configuration in BaseAction. among them, the Ids in BotManagementActionOverrides can be filled with: <li>IPREP_WEB_AND_DDOS_ATTACKERS_LOW: network attack - general confidence;</li> <li>IPREP_WEB_AND_DDOS_ATTACKERS_MID: network attack - medium confidence;</li> <li>IPREP_WEB_AND_DDOS_ATTACKERS_HIGH: network attack - HIGH confidence;</li> <li>IPREP_PROXIES_AND_ANONYMIZERS_LOW: network proxy - general confidence;</li> <li>IPREP_PROXIES_AND_ANONYMIZERS_MID: network proxy - medium confidence;</li> <li>IPREP_PROXIES_AND_ANONYMIZERS_HIGH: network proxy - HIGH confidence;</li> <li>IPREP_SCANNING_TOOLS_LOW: scanner - general confidence;</li> <li>IPREP_SCANNING_TOOLS_MID: scanner - medium confidence;</li> <li>IPREP_SCANNING_TOOLS_HIGH: scanner - HIGH confidence;</li> <li>IPREP_ATO_ATTACKERS_LOW: account takeover attack - general confidence;</li> <li>IPREP_ATO_ATTACKERS_MID: account takeover attack - medium confidence;</li> <li>IPREP_ATO_ATTACKERS_HIGH: account takeover attack - HIGH confidence;</li> <li>IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_LOW: malicious BOT - general confidence;</li> <li>IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_MID: malicious BOT - medium confidence;</li> <li>IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_HIGH: malicious BOT - HIGH confidence.</li>.
 	BotManagementActionOverrides []*BotManagementActionOverrides `json:"BotManagementActionOverrides,omitnil,omitempty" name:"BotManagementActionOverrides"`
+}
+
+type IPSSLConfig struct {
+	// Domain name associated with IP SSL. If the Status value is unbound, this field is empty.
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	AssociatedDomain *string `json:"AssociatedDomain,omitnil,omitempty" name:"AssociatedDomain"`
+
+	// Association status. Values as follows:
+	// <li>bound: The IP SSL configuration is bound</li>
+	// <li>Binding: IP SSL configuration binding in progress</li>
+	// <li>unbinding: IP SSL configuration is being unbound</li>
+	// <li>unbound: IP SSL configuration not bound to</li>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
+type IPSSLSetting struct {
+	// Operation type, values as follows: <li>bind: bind</li> <li>unbind: unbind</li>
+	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
+
+	// Domain name of the IP SSL that should be bound.
+	AssociatedDomain *string `json:"AssociatedDomain,omitnil,omitempty" name:"AssociatedDomain"`
 }
 
 type IPWhitelist struct {
@@ -15075,11 +16182,53 @@ type JustInTimeTranscodeTemplate struct {
 	// Audio stream configuration parameters. specifies this field is valid only when AudioStreamSwitch is on.
 	AudioTemplate *AudioTemplateInfo `json:"AudioTemplate,omitnil,omitempty" name:"AudioTemplate"`
 
-	// Template creation time. uses [ISO date format](https://www.tencentcloud.com/zh/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Template creation time. uses [ISO date format](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Template last modified time. uses [ISO date format](https://www.tencentcloud.com/zh/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Template last modified time. uses [ISO date format](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+}
+
+type KVNamespace struct {
+	// Namespace name. Has uniqueness in the same site.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Namespace description. Remark information filled in upon creation, used for explaining the purpose or business meaning of the namespace. Supports a maximum of 256 characters.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Available capacity of KV storage space in bytes. It indicates the maximum capacity limit of storable data in namespace, defaulting to 1 GB.
+	Capacity *int64 `json:"Capacity,omitnil,omitempty" name:"Capacity"`
+
+	// KV storage space used capacity in bytes (Byte). It indicates the currently used storage space size of the namespace.
+	CapacityUsed *int64 `json:"CapacityUsed,omitnil,omitempty" name:"CapacityUsed"`
+
+	// List of referenced instances in the namespace. Shows which edge function instances reference the current namespace and the site information referenced. Returns an empty array if not referenced.
+	References []*ComponentReference `json:"References,omitnil,omitempty" name:"References"`
+
+	// The creation time of the namespace follows the ISO 8601 standard in the format YYYY-MM-DDThh:mm:ssZ (UTC time).
+	CreatedOn *string `json:"CreatedOn,omitnil,omitempty" name:"CreatedOn"`
+
+	// The last modification time of the namespace follows the ISO 8601 standard in the format YYYY-MM-DDThh:mm:ssZ (UTC time).
+	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
+}
+
+type KVNamespaceParameters struct {
+	// The site ID belonging to the KV namespace. Specifies the site where the KV namespace resides that should be bound, supporting cross-site binding.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// KV namespace name. Specifies the specific namespace that should be bound. You can obtain the list of namespaces under the site through the DescribeKVNamespace API.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+}
+
+type KeyValuePair struct {
+	// Key name. Each key name cannot be empty, with a length of 1-512 characters. Allowed characters include letters, digits, hyphens, and underscores.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Key-value. Cannot be empty for input parameters and supports up to 1 MB. Returns an empty string if the key does not exist for output parameters.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+
+	// Expiration time, following ISO 8601 standard, format YYYY-MM-DDThh:mm:ssZ (UTC time). If it is an empty string in the output, it means the key-value pair will never expire.
+	Expiration *string `json:"Expiration,omitnil,omitempty" name:"Expiration"`
 }
 
 type KnownBotCategories struct {
@@ -15154,8 +16303,11 @@ type L4Proxy struct {
 	// Specifies whether to enable network optimization in the Chinese mainland.<li>on: Enable</li> <li>off: Disable</li>
 	AccelerateMainland *string `json:"AccelerateMainland,omitnil,omitempty" name:"AccelerateMainland"`
 
-	// Security protection configuration.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Security protection settings.
+	// This field is deprecated.
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	//
+	// Deprecated: DDosProtectionConfig is deprecated.
 	DDosProtectionConfig *DDosProtectionConfig `json:"DDosProtectionConfig,omitnil,omitempty" name:"DDosProtectionConfig"`
 
 	// Number of forwarding rules under the Layer 4 proxy instance.
@@ -15321,6 +16473,9 @@ type LoadBalancer struct {
 
 	// List of Layer-7 domain names bound to a LoadBalancer.
 	L7UsedList []*string `json:"L7UsedList,omitnil,omitempty" name:"L7UsedList"`
+
+	// Specifies the list of instances referenced by cloud load balancer.
+	References []*OriginGroupReference `json:"References,omitnil,omitempty" name:"References"`
 }
 
 type LogFormat struct {
@@ -16591,6 +17746,157 @@ func (r *ModifyDnsRecordsStatusResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyEdgeKVNamespaceRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Namespace name.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Namespace description. Used to describe the purpose or business meaning of a namespace. Supports a maximum of 256 characters.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+}
+
+type ModifyEdgeKVNamespaceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Namespace name.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Namespace description. Used to describe the purpose or business meaning of a namespace. Supports a maximum of 256 characters.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+}
+
+func (r *ModifyEdgeKVNamespaceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyEdgeKVNamespaceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Namespace")
+	delete(f, "Remark")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyEdgeKVNamespaceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyEdgeKVNamespaceResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyEdgeKVNamespaceResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyEdgeKVNamespaceResponseParams `json:"Response"`
+}
+
+func (r *ModifyEdgeKVNamespaceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyEdgeKVNamespaceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyFunctionComponentBindingsRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Function ID.
+	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
+
+	// Operation type. Valid values:
+	// <li>bind: bind component;</li>
+	// <li>bind-override: Bind a component. If the binding already exists, it is a rebind action; otherwise, it is a bind action.</li>
+	// <li>unbind: Unbind a component;</li>
+	// <li>rebind: Reset the binding relationship. Clear all existing bindings and set to the passed in bound list. If an empty list is passed in, clear all bindings.</li>
+	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
+
+	// Bound list of function components to operate. When Operation is rebind and an empty list is input, it means to clear ALL bindings.
+	FunctionComponentBindings []*FunctionComponentBinding `json:"FunctionComponentBindings,omitnil,omitempty" name:"FunctionComponentBindings"`
+}
+
+type ModifyFunctionComponentBindingsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Function ID.
+	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
+
+	// Operation type. Valid values:
+	// <li>bind: bind component;</li>
+	// <li>bind-override: Bind a component. If the binding already exists, it is a rebind action; otherwise, it is a bind action.</li>
+	// <li>unbind: Unbind a component;</li>
+	// <li>rebind: Reset the binding relationship. Clear all existing bindings and set to the passed in bound list. If an empty list is passed in, clear all bindings.</li>
+	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
+
+	// Bound list of function components to operate. When Operation is rebind and an empty list is input, it means to clear ALL bindings.
+	FunctionComponentBindings []*FunctionComponentBinding `json:"FunctionComponentBindings,omitnil,omitempty" name:"FunctionComponentBindings"`
+}
+
+func (r *ModifyFunctionComponentBindingsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyFunctionComponentBindingsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "FunctionId")
+	delete(f, "Operation")
+	delete(f, "FunctionComponentBindings")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyFunctionComponentBindingsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyFunctionComponentBindingsResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyFunctionComponentBindingsResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyFunctionComponentBindingsResponseParams `json:"Response"`
+}
+
+func (r *ModifyFunctionComponentBindingsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyFunctionComponentBindingsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyFunctionRequestParams struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -16731,14 +18037,27 @@ type ModifyFunctionRuleRequestParams struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Rule ID.
+	// Rule ID. you can first use the DescribeFunctionRules API to get the RuleId that needs to be modified, then input the modified rule content. the original rule content will be overwritten.
 	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Rule condition list. There is an OR relationship between different conditions of the same trigger rule. If this parameter is not input, the original configuration is maintained.
 	FunctionRuleConditions []*FunctionRuleCondition `json:"FunctionRuleConditions,omitnil,omitempty" name:"FunctionRuleConditions"`
 
-	// Function ID, specifying a function executed when a trigger rule condition is met. If this parameter is not input, the original configuration is maintained.
+	// Function selection configuration type.
+	// <Li>Direct: specifies the execution function directly.</li>.
+	// <Li>Weight: selects the function based on weight ratio.</li>.
+	// <li> region: specifies the country/region selection function based on client IP.</li>.
+	// Specifies the default value as direct when left blank.
+	TriggerType *string `json:"TriggerType,omitnil,omitempty" name:"TriggerType"`
+
+	// Specifies the function ID to be executed. this parameter is valid only when TriggerType is direct or left empty.
 	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
+
+	// Function selection configuration based on client IP country/region. this parameter is valid only when TriggerType is region and RegionMappingSelections is required. RegionMappingSelections must include at least one configuration with Regions set to Default.
+	RegionMappingSelections []*FunctionRegionSelection `json:"RegionMappingSelections,omitnil,omitempty" name:"RegionMappingSelections"`
+
+	// Weighted function selection configuration. this parameter is valid only when TriggerType is weight and WeightedSelections is required. the sum of all weights in WeightedSelections need to be 100.
+	WeightedSelections []*FunctionWeightedSelection `json:"WeightedSelections,omitnil,omitempty" name:"WeightedSelections"`
 
 	// Rule description, which can contain up to 60 characters. If this parameter is not input, the original configuration is maintained.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
@@ -16750,14 +18069,27 @@ type ModifyFunctionRuleRequest struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Rule ID.
+	// Rule ID. you can first use the DescribeFunctionRules API to get the RuleId that needs to be modified, then input the modified rule content. the original rule content will be overwritten.
 	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Rule condition list. There is an OR relationship between different conditions of the same trigger rule. If this parameter is not input, the original configuration is maintained.
 	FunctionRuleConditions []*FunctionRuleCondition `json:"FunctionRuleConditions,omitnil,omitempty" name:"FunctionRuleConditions"`
 
-	// Function ID, specifying a function executed when a trigger rule condition is met. If this parameter is not input, the original configuration is maintained.
+	// Function selection configuration type.
+	// <Li>Direct: specifies the execution function directly.</li>.
+	// <Li>Weight: selects the function based on weight ratio.</li>.
+	// <li> region: specifies the country/region selection function based on client IP.</li>.
+	// Specifies the default value as direct when left blank.
+	TriggerType *string `json:"TriggerType,omitnil,omitempty" name:"TriggerType"`
+
+	// Specifies the function ID to be executed. this parameter is valid only when TriggerType is direct or left empty.
 	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
+
+	// Function selection configuration based on client IP country/region. this parameter is valid only when TriggerType is region and RegionMappingSelections is required. RegionMappingSelections must include at least one configuration with Regions set to Default.
+	RegionMappingSelections []*FunctionRegionSelection `json:"RegionMappingSelections,omitnil,omitempty" name:"RegionMappingSelections"`
+
+	// Weighted function selection configuration. this parameter is valid only when TriggerType is weight and WeightedSelections is required. the sum of all weights in WeightedSelections need to be 100.
+	WeightedSelections []*FunctionWeightedSelection `json:"WeightedSelections,omitnil,omitempty" name:"WeightedSelections"`
 
 	// Rule description, which can contain up to 60 characters. If this parameter is not input, the original configuration is maintained.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
@@ -16778,7 +18110,10 @@ func (r *ModifyFunctionRuleRequest) FromJsonString(s string) error {
 	delete(f, "ZoneId")
 	delete(f, "RuleId")
 	delete(f, "FunctionRuleConditions")
+	delete(f, "TriggerType")
 	delete(f, "FunctionId")
+	delete(f, "RegionMappingSelections")
+	delete(f, "WeightedSelections")
 	delete(f, "Remark")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyFunctionRuleRequest has unknown keys!", "")
@@ -16816,15 +18151,15 @@ type ModifyHostsCertificateRequestParams struct {
 	// Domain names that you need to modify the certificate configuration
 	Hosts []*string `json:"Hosts,omitnil,omitempty" name:"Hosts"`
 
-	// Configures the server certificate mode. valid values:.
+	// Configures the mode of the server certificate. valid values:.
+	// Disables server-side certificate configuration.
+	// <li>eofreecert: specifies to apply for a free certificate through automatic validation and deploy. for verification methods, see: [verification methods supported for free certificate application](https://www.tencentcloud.comom/document/product/1552/90437?from_cn_redirect=1).</li>.
 	// 
-	// - disable: without configuring server certificate.
-	// - eofreecert: specifies to apply for a free certificate through automatic validation and deploy it. for verification methods, see [free certificate application supported verification methods](https://www.tencentcloud.com/document/product/1552/90437?from_cn_redirect=1).
-	//     - In ns or DNSPod hosting access mode, free certificates can only be applied for via automatic validation.
-	//     - When a free certificate application fails, it can cause deployment failure. you can obtain the failure reason through the <a href = 'https://www.tencentcloud.com/document/product/1552/124806?from_cn_redirect=1)'>check free certificate application result</a> .
-	// - eofreecert_manual: specifies the deployment of free certificates applied through DNS delegation verification or file verification. before deploying a free certificate, you need to trigger the [apply for free certificate](https://www.tencentcloud.com/document/product/1552/124807?from_cn_redirect=1)) api to apply for a free certificate. once the application is successful, you can use this enumeration value to deploy the free certificate.
-	// Note: when deploying a free certificate, ensure a successful application for a free certificate already exists. you can check whether a successful application for a free certificate already exists through the <a href = 'https://www.tencentcloud.com/document/product/1552/124806?from_cn_redirect=1)'>check free certificate application result</a> api.
-	// - sslcert: specifies the configuration of the managed service side certificate.
+	// -In ns or DNSPod hosting access mode, free certificates can only be applied for via automatic validation.
+	// -When the free certificate application fails, it can cause certificate deployment failure. you can obtain the reason for the application failure through the <a href = 'https://www.tencentcloud.comom/document/product/1552/124806?from_cn_redirect=1'>check free certificate application result</a> api.
+	// eofreecert_manual: specifies the deployment of a free certificate applied through DNS delegation verification or file verification. before deploying the free certificate, you need to trigger the apply for free certificate API to apply for a free certificate. once the application is successful, you can use this enumeration value to deploy the free certificate.
+	// Note: during deployment of a free certificate, ensure a successful application for a free certificate already exists. you can check whether a successful application for a free certificate already exists through the <a href = 'https://www.tencentcloud.comom/document/product/1552/124806?from_cn_redirect=1'>check free certificate application result</a> api.
+	// sslcert: specifies the managed service side certificate configuration.
 	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
 	// SSL certificate configuration. This parameter is effective only when the mode is sslcert. You only need to provide the CertId of the corresponding certificate. You can check the CertId from the [SSL Certificate List](https://console.cloud.tencent.com/ssl).
@@ -16841,7 +18176,7 @@ type ModifyHostsCertificateRequestParams struct {
 	// In the mutual authentication scenario, this field represents the client's CA certificate, which is deployed inside the EO node and used for the client to authenticate the EO node. By default, it is disabled. If it is left blank, it indicates retaining the original configuration.
 	ClientCertInfo *MutualTLS `json:"ClientCertInfo,omitnil,omitempty" name:"ClientCertInfo"`
 
-	// Specifies the certificate carried during EO node origin-pull for origin-pull mutual authentication handshake, off by default. leave blank to indicate retaining the original configuration. this configuration is currently in closed beta testing for the allowlist feature. if you need to use it, please contact us (https://www.tencentcloud.com/online?from_cn_redirect=1-service).
+	// Specifies whether to enable/disable origin-pull mutual authentication and origin certificate verification. off by default. leave blank to indicate retaining the original configuration. the origin-pull mutual authentication configuration is currently in internal allowlist testing. if needed, please contact us (https://www.tencentcloud.comom/online?from_cn_redirect=1-service).
 	UpstreamCertInfo *UpstreamCertInfo `json:"UpstreamCertInfo,omitnil,omitempty" name:"UpstreamCertInfo"`
 }
 
@@ -16854,15 +18189,15 @@ type ModifyHostsCertificateRequest struct {
 	// Domain names that you need to modify the certificate configuration
 	Hosts []*string `json:"Hosts,omitnil,omitempty" name:"Hosts"`
 
-	// Configures the server certificate mode. valid values:.
+	// Configures the mode of the server certificate. valid values:.
+	// Disables server-side certificate configuration.
+	// <li>eofreecert: specifies to apply for a free certificate through automatic validation and deploy. for verification methods, see: [verification methods supported for free certificate application](https://www.tencentcloud.comom/document/product/1552/90437?from_cn_redirect=1).</li>.
 	// 
-	// - disable: without configuring server certificate.
-	// - eofreecert: specifies to apply for a free certificate through automatic validation and deploy it. for verification methods, see [free certificate application supported verification methods](https://www.tencentcloud.com/document/product/1552/90437?from_cn_redirect=1).
-	//     - In ns or DNSPod hosting access mode, free certificates can only be applied for via automatic validation.
-	//     - When a free certificate application fails, it can cause deployment failure. you can obtain the failure reason through the <a href = 'https://www.tencentcloud.com/document/product/1552/124806?from_cn_redirect=1)'>check free certificate application result</a> .
-	// - eofreecert_manual: specifies the deployment of free certificates applied through DNS delegation verification or file verification. before deploying a free certificate, you need to trigger the [apply for free certificate](https://www.tencentcloud.com/document/product/1552/124807?from_cn_redirect=1)) api to apply for a free certificate. once the application is successful, you can use this enumeration value to deploy the free certificate.
-	// Note: when deploying a free certificate, ensure a successful application for a free certificate already exists. you can check whether a successful application for a free certificate already exists through the <a href = 'https://www.tencentcloud.com/document/product/1552/124806?from_cn_redirect=1)'>check free certificate application result</a> api.
-	// - sslcert: specifies the configuration of the managed service side certificate.
+	// -In ns or DNSPod hosting access mode, free certificates can only be applied for via automatic validation.
+	// -When the free certificate application fails, it can cause certificate deployment failure. you can obtain the reason for the application failure through the <a href = 'https://www.tencentcloud.comom/document/product/1552/124806?from_cn_redirect=1'>check free certificate application result</a> api.
+	// eofreecert_manual: specifies the deployment of a free certificate applied through DNS delegation verification or file verification. before deploying the free certificate, you need to trigger the apply for free certificate API to apply for a free certificate. once the application is successful, you can use this enumeration value to deploy the free certificate.
+	// Note: during deployment of a free certificate, ensure a successful application for a free certificate already exists. you can check whether a successful application for a free certificate already exists through the <a href = 'https://www.tencentcloud.comom/document/product/1552/124806?from_cn_redirect=1'>check free certificate application result</a> api.
+	// sslcert: specifies the managed service side certificate configuration.
 	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
 	// SSL certificate configuration. This parameter is effective only when the mode is sslcert. You only need to provide the CertId of the corresponding certificate. You can check the CertId from the [SSL Certificate List](https://console.cloud.tencent.com/ssl).
@@ -16877,7 +18212,7 @@ type ModifyHostsCertificateRequest struct {
 	// In the mutual authentication scenario, this field represents the client's CA certificate, which is deployed inside the EO node and used for the client to authenticate the EO node. By default, it is disabled. If it is left blank, it indicates retaining the original configuration.
 	ClientCertInfo *MutualTLS `json:"ClientCertInfo,omitnil,omitempty" name:"ClientCertInfo"`
 
-	// Specifies the certificate carried during EO node origin-pull for origin-pull mutual authentication handshake, off by default. leave blank to indicate retaining the original configuration. this configuration is currently in closed beta testing for the allowlist feature. if you need to use it, please contact us (https://www.tencentcloud.com/online?from_cn_redirect=1-service).
+	// Specifies whether to enable/disable origin-pull mutual authentication and origin certificate verification. off by default. leave blank to indicate retaining the original configuration. the origin-pull mutual authentication configuration is currently in internal allowlist testing. if needed, please contact us (https://www.tencentcloud.comom/online?from_cn_redirect=1-service).
 	UpstreamCertInfo *UpstreamCertInfo `json:"UpstreamCertInfo,omitnil,omitempty" name:"UpstreamCertInfo"`
 }
 
@@ -17835,6 +19170,16 @@ type ModifyOriginACLRequestParams struct {
 
 	// Specifies the instance that needs to configurate origin ACLs.
 	OriginACLEntities []*OriginACLEntity `json:"OriginACLEntities,omitnil,omitempty" name:"OriginACLEntities"`
+
+	// The origin protection back-to-origin ACL control domain remains unchanged by default if left blank. The domain information can be obtained through the DescribeAvailableOriginACLFamily API query.
+	// Valid values are as follows:
+	// <li>gaz: Standard global availability zone control domain;</li>
+	// <li>mlc: Standard Chinese mainland availability zone control domain;</li>
+	// <li>emc: Standard global (exclude Chinese mainland) availability zone control domain;</li>
+	// <li>plat-gaz: Simplify global availability zone control domain;</li>
+	// <li>plat-mlc: Simplified Chinese mainland availability zone control domain;</li>
+	// <li>plat-emc: Simplify the global (excluding Chinese mainland) availability zone control domain;</li>
+	OriginACLFamily *string `json:"OriginACLFamily,omitnil,omitempty" name:"OriginACLFamily"`
 }
 
 type ModifyOriginACLRequest struct {
@@ -17845,6 +19190,16 @@ type ModifyOriginACLRequest struct {
 
 	// Specifies the instance that needs to configurate origin ACLs.
 	OriginACLEntities []*OriginACLEntity `json:"OriginACLEntities,omitnil,omitempty" name:"OriginACLEntities"`
+
+	// The origin protection back-to-origin ACL control domain remains unchanged by default if left blank. The domain information can be obtained through the DescribeAvailableOriginACLFamily API query.
+	// Valid values are as follows:
+	// <li>gaz: Standard global availability zone control domain;</li>
+	// <li>mlc: Standard Chinese mainland availability zone control domain;</li>
+	// <li>emc: Standard global (exclude Chinese mainland) availability zone control domain;</li>
+	// <li>plat-gaz: Simplify global availability zone control domain;</li>
+	// <li>plat-mlc: Simplified Chinese mainland availability zone control domain;</li>
+	// <li>plat-emc: Simplify the global (excluding Chinese mainland) availability zone control domain;</li>
+	OriginACLFamily *string `json:"OriginACLFamily,omitnil,omitempty" name:"OriginACLFamily"`
 }
 
 func (r *ModifyOriginACLRequest) ToJsonString() string {
@@ -17861,6 +19216,7 @@ func (r *ModifyOriginACLRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ZoneId")
 	delete(f, "OriginACLEntities")
+	delete(f, "OriginACLFamily")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyOriginACLRequest has unknown keys!", "")
 	}
@@ -18079,6 +19435,102 @@ func (r *ModifyPlanResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyPlanResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyPrefetchOriginLimitRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Acceleration domain name.
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
+
+	// Specifies the acceleration region with origin-pull speed limit.
+	// During preheating, the acceleration region will be subject to the configured Bandwidth value limit. valid values:.
+	// <Li>Overseas: global availability zone (excluding the chinese mainland);</li>.
+	// <Li>MainlandChina: chinese mainland availability zone.</li>.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Specifies the bandwidth limit for origin-pull.
+	// Specifies the upper limit of bandwidth returning to the origin server during preheating. value ranges from 100 to 100,000 Mbps.
+	Bandwidth *int64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
+
+	// Specifies the control switch for origin-pull rate limiting.
+	// Used to enable/delete the origin-pull speed limit. valid values:.
+	// <li>on: enablement limit.</li>.
+	// <li>off: delete restriction.</li>.
+	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+}
+
+type ModifyPrefetchOriginLimitRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Acceleration domain name.
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
+
+	// Specifies the acceleration region with origin-pull speed limit.
+	// During preheating, the acceleration region will be subject to the configured Bandwidth value limit. valid values:.
+	// <Li>Overseas: global availability zone (excluding the chinese mainland);</li>.
+	// <Li>MainlandChina: chinese mainland availability zone.</li>.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Specifies the bandwidth limit for origin-pull.
+	// Specifies the upper limit of bandwidth returning to the origin server during preheating. value ranges from 100 to 100,000 Mbps.
+	Bandwidth *int64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
+
+	// Specifies the control switch for origin-pull rate limiting.
+	// Used to enable/delete the origin-pull speed limit. valid values:.
+	// <li>on: enablement limit.</li>.
+	// <li>off: delete restriction.</li>.
+	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+}
+
+func (r *ModifyPrefetchOriginLimitRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyPrefetchOriginLimitRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "DomainName")
+	delete(f, "Area")
+	delete(f, "Bandwidth")
+	delete(f, "Enabled")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyPrefetchOriginLimitRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyPrefetchOriginLimitResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyPrefetchOriginLimitResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyPrefetchOriginLimitResponseParams `json:"Response"`
+}
+
+func (r *ModifyPrefetchOriginLimitResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyPrefetchOriginLimitResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -18731,6 +20183,81 @@ func (r *ModifySecurityPolicyResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifySharedCNAMERequestParams struct {
+	// Shared CNAME associated site ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Shared CNAME.
+	SharedCNAME *string `json:"SharedCNAME,omitnil,omitempty" name:"SharedCNAME"`
+
+	// Enter the adjusted description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Set the IP SSL message of the shared CNAME with IP SSL type.
+	IPSSLSetting *IPSSLSetting `json:"IPSSLSetting,omitnil,omitempty" name:"IPSSLSetting"`
+}
+
+type ModifySharedCNAMERequest struct {
+	*tchttp.BaseRequest
+	
+	// Shared CNAME associated site ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Shared CNAME.
+	SharedCNAME *string `json:"SharedCNAME,omitnil,omitempty" name:"SharedCNAME"`
+
+	// Enter the adjusted description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Set the IP SSL message of the shared CNAME with IP SSL type.
+	IPSSLSetting *IPSSLSetting `json:"IPSSLSetting,omitnil,omitempty" name:"IPSSLSetting"`
+}
+
+func (r *ModifySharedCNAMERequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySharedCNAMERequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "SharedCNAME")
+	delete(f, "Description")
+	delete(f, "IPSSLSetting")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySharedCNAMERequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySharedCNAMEResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifySharedCNAMEResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifySharedCNAMEResponseParams `json:"Response"`
+}
+
+func (r *ModifySharedCNAMEResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySharedCNAMEResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyWebSecurityTemplateRequestParams struct {
 	// Zone ID. The zone to which the target policy template belongs for access control. Use the DescribeWebSecurityTemplates interface to query the zone of the policy template.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -19219,6 +20746,67 @@ func (r *ModifyZoneStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyZoneWorkModeRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Version management configuration group working mode. site configuration modules can enable "version management mode" or "immediate effect mode" by configuration group dimension. for details, see [version management](https://www.tencentcloud.comom/document/product/1552/113690?from_cn_redirect=1).
+	WorkModeInfos []*ConfigGroupWorkModeInfo `json:"WorkModeInfos,omitnil,omitempty" name:"WorkModeInfos"`
+}
+
+type ModifyZoneWorkModeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Version management configuration group working mode. site configuration modules can enable "version management mode" or "immediate effect mode" by configuration group dimension. for details, see [version management](https://www.tencentcloud.comom/document/product/1552/113690?from_cn_redirect=1).
+	WorkModeInfos []*ConfigGroupWorkModeInfo `json:"WorkModeInfos,omitnil,omitempty" name:"WorkModeInfos"`
+}
+
+func (r *ModifyZoneWorkModeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyZoneWorkModeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "WorkModeInfos")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyZoneWorkModeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyZoneWorkModeResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyZoneWorkModeResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyZoneWorkModeResponseParams `json:"Response"`
+}
+
+func (r *ModifyZoneWorkModeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyZoneWorkModeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type MultiPathGateway struct {
 	// Specifies the gateway ID.
 	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
@@ -19249,6 +20837,9 @@ type MultiPathGateway struct {
 
 	// Line information. The line information will be returned when querying gateway information with DescribeMultiPathGateway ande not returned when querying the gateway list with DescribeMultiPathGateways.
 	Lines []*MultiPathGatewayLine `json:"Lines,omitnil,omitempty" name:"Lines"`
+
+	// Specifies whether the origin-pull IP list has changed and re-confirmation is required. valid values: <li>true: the origin-pull IP list has changed and confirmation is needed.</li><li>false: the origin-pull IP list remains unchanged and no confirmation is required.</li>.
+	NeedConfirm *string `json:"NeedConfirm,omitnil,omitempty" name:"NeedConfirm"`
 }
 
 type MultiPathGatewayCurrentOriginACL struct {
@@ -19320,6 +20911,33 @@ type MutualTLS struct {
 	// Mutual authentication certificate list.
 	// Note: When using MutualTLS as an input parameter in ModifyHostsCertificate, you only need to provide the CertId of the corresponding certificate. You can check the CertId from the [SSL Certificate List](https://console.cloud.tencent.com/ssl).
 	CertInfos []*CertificateInfo `json:"CertInfos,omitnil,omitempty" name:"CertInfos"`
+}
+
+type NSDetail struct {
+	// Specifies whether CNAME acceleration is enabled. valid values:.
+	// <Li>Enabled: specifies whether the feature is enabled.</li>.
+	// <li>disabled: specifies that the feature is turned off.</li>.
+	CnameSpeedUp *string `json:"CnameSpeedUp,omitnil,omitempty" name:"CnameSpeedUp"`
+
+	// Existence of a site with the same name. valid values:.
+	// <Li>0: no site with the same name exists.</li>.
+	// <Li>Specifies the name already exists.</li>.
+	IsFake *int64 `json:"IsFake,omitnil,omitempty" name:"IsFake"`
+
+	// Ownership verification information. for sites with NS access type, switching the current NS server to the designated NS server of tencent cloud EdgeOne is deemed as passing the ownership verification. for details, refer to [site/domain ownership verification](https://www.tencentcloud.comom/document/product/1552/70789?from_cn_redirect=1).
+	OwnershipVerification *OwnershipVerification `json:"OwnershipVerification,omitnil,omitempty" name:"OwnershipVerification"`
+
+	// Lists the NS servers currently in use by the selected site detected by EdgeOne.
+	OriginalNameServers []*string `json:"OriginalNameServers,omitnil,omitempty" name:"OriginalNameServers"`
+
+	// Lists the NS servers allocated by tencent cloud EdgeOne. requires pointing the current site's NS servers to this address for the changes to take effect.
+	NameServers []*string `json:"NameServers,omitnil,omitempty" name:"NameServers"`
+
+	// Specifies the user-customized NS server domain name information. if enabled, the NS needs to be pointed to this address in the registered vendor of the domains.
+	VanityNameServers *VanityNameServers `json:"VanityNameServers,omitnil,omitempty" name:"VanityNameServers"`
+
+	// Describes the IP address information of the user-customized NS server.
+	VanityNameServersIps []*VanityNameServersIps `json:"VanityNameServersIps,omitnil,omitempty" name:"VanityNameServersIps"`
 }
 
 type NetworkErrorLogging struct {
@@ -19455,6 +21073,34 @@ type OriginACLInfo struct {
 	// - offline: disabled;
 	// - updating: configuration deployment in progress.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Origin protection back-to-origin ACL control domain.
+	OriginACLFamily *string `json:"OriginACLFamily,omitnil,omitempty" name:"OriginACLFamily"`
+}
+
+type OriginAuthenticationParameters struct {
+	// Specifies the authentication request attribute for origin pull.
+	RequestProperties []*OriginAuthenticationRequestProperties `json:"RequestProperties,omitnil,omitempty" name:"RequestProperties"`
+}
+
+type OriginAuthenticationRequestProperties struct {
+	// Specifies the origin-pull authentication parameter type. valid values: <li>QueryString: indicates setting the origin-pull authentication parameter type to query string.</li><li>Header: indicates setting the origin-pull authentication parameter type to request Header.</li>.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Specifies the parameter name for the origin-pull authentication type.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Specifies the parameter value for the origin-pull authentication type.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type OriginCertificateVerify struct {
+	// Origin certificate verification mode. valid values: <li>disable: disable origin certificate verification.</li> <li>custom_ca: use designated trusted ca certificate for verification.</li>.
+	VerificationMode *string `json:"VerificationMode,omitnil,omitempty" name:"VerificationMode"`
+
+	// Specifies the trusted CA certificate list. the origin certificate must be issued by this CA to pass verification. note: this parameter is required only when VerificationMode is custom_CA. input this parameter to specify the trusted CA certificate information.
+	// OriginCertificateVerify specifies CertId of the corresponding certificate as an input parameter in ModifyHostsCertificate. only need to go to the SSL certificate service list (https://console.cloud.tencent.com/SSL) to check CertId.	
+	CustomCACerts []*CertificateInfo `json:"CustomCACerts,omitnil,omitempty" name:"CustomCACerts"`
 }
 
 type OriginDetail struct {
@@ -19591,18 +21237,27 @@ type OriginGroupInLoadBalancer struct {
 }
 
 type OriginGroupReference struct {
-	// Services referencing the origin group. Values:
-	// <li>`AccelerationDomain`: Acceleration domain name</li>
-	// <li>`RuleEngine`: Rules engine</li>
-	// <li>`Loadbalance`: Load balancer</li>
-	// <li>`ApplicationProxy`: L4 proxy</li>
+	// Reference service type. valid values:.
+	// <Li>Acceleration-Domain: specifies the acceleration domain name.</li>.
+	// <Li>Rule-Engine: specifies the rule engine.</li>.
+	// <Li>Load-Balancer: specifies the cloud load balancer.</li>.
+	// <li>application-proxy: layer 4 proxy.</li>.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
 	// ID of the instances referencing the origin group
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Name of the instance referencing the origin group
+	// Specifies the instance name of the reference type.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// Referer ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Refers to the site name.
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
+
+	// Refers to the site alias.
+	AliasZoneName *string `json:"AliasZoneName,omitnil,omitempty" name:"AliasZoneName"`
 }
 
 type OriginHealthStatus struct {
@@ -19730,10 +21385,10 @@ type OriginProtectionInfo struct {
 }
 
 type OriginPullProtocolParameters struct {
-	// Origin protocol configuration, with values:
-	// <li>http: Use HTTP protocol for origin pull;</li>
-	// <li>https: Use HTTPS protocol for origin pull;</li>
-	// <li>follow: Protocol following.</li>
+	// Origin protocol configuration. valid values:.
+	// <li>http: specifies to use http protocol for origin.</li>.
+	// <li>https: use the https protocol for origin-pull.</li>.
+	// <Li>Follow: follow protocol.</li>.
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 }
 
@@ -19750,8 +21405,8 @@ type OriginRecord struct {
 	// The origin record ID.
 	RecordId *string `json:"RecordId,omitnil,omitempty" name:"RecordId"`
 
-	// Weight of an origin. Range: 0-100. If it is not specified, a random weight is assigned. If `0` is passed in, there is no traffic scheduled to this origin.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// [Origin server weight]: a parameter used to control traffic allocation priority, value ranges from 0 to 100 (integer): <li>empty value: no weight is set, and the system schedules traffic based on the default policy;</li> <li>0 value: explicitly set the weight to 0, and traffic will not be assigned to this origin server. note: make sure at least one origin server has a weight value above 0;</li> <li>normal value: the larger the value, the more traffic is assigned;</li>.
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
 	Weight *uint64 `json:"Weight,omitnil,omitempty" name:"Weight"`
 
 	// Whether to enable private authentication. It is valid when `OriginType=COS/AWS_S3`. Values:
@@ -19939,6 +21594,30 @@ type PostMaxSizeParameters struct {
 	MaxSize *int64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
 }
 
+type PrefetchOriginLimit struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Acceleration domain name.
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
+
+	// Specifies the acceleration region with origin-pull speed limit.
+	// During preheating, the acceleration region will be subject to the configured Bandwidth value limit. valid values:.
+	// <Li>Overseas: global availability zone (excluding the chinese mainland);</li>.
+	// <Li>MainlandChina: chinese mainland availability zone.</li>.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Specifies the bandwidth limit for origin-pull.
+	// Specifies the upper limit of bandwidth returning to the origin server during preheating. value ranges from 100 to 100,000 Mbps.
+	Bandwidth *int64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
+
+	// Describes the time when the origin-pull speed limit was created.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Describes the time when the origin-pull speed limit is updated.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+}
+
 type PrepaidPlanParam struct {
 	// Prepaid plan duration, unit: month. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
 	// 
@@ -20014,7 +21693,7 @@ type Quic struct {
 }
 
 type Quota struct {
-	// Single batch submission quota limit.
+
 	Batch *int64 `json:"Batch,omitnil,omitempty" name:"Batch"`
 
 	// Daily submission quota limit.
@@ -20231,7 +21910,7 @@ type RealtimeLogDeliveryTask struct {
 	// Status of a real-time log shipping task. Valid values: <li>enabled: enabled;</li><li>disabled: disabled;</li><li>deleted: deleted abnormally. Check whether the destination log set/log topic of Tencent Cloud CLS has been deleted.</li>
 	DeliveryStatus *string `json:"DeliveryStatus,omitnil,omitempty" name:"DeliveryStatus"`
 
-	// Type of a real-time log shipping task. Valid values:<li>cls: push to Tencent Cloud CLS;</li><li>custom_endpoint: push to a custom HTTP(S) address;</li><li>s3: push to an AWS S3-compatible bucket address.</li>
+	// Type of a real-time log shipping task. valid values:<li>cls: push to tencent cloud cls;</li><li>custom_endpoint: push to a custom HTTP(S) address;</li><li>S3: push to an AWS S3-compatible bucket address;</li><li>log_analysis: push to EdgeOne log analysis.</li>.
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
 	// List of entities (L7 domain names or L4 proxy instances) corresponding to a real-time log shipping task. Valid value examples: <li>L7 domain name: domain.example.com;</li><li>L4 proxy instance: sid-2s69eb5wcms7.</li>	
@@ -20283,6 +21962,18 @@ type RealtimeLogDeliveryTask struct {
 type RedirectActionParameters struct {
 	// Redirect URL.
 	URL *string `json:"URL,omitnil,omitempty" name:"URL"`
+}
+
+type ReferenceHolder struct {
+	// Site ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Instance type. Values as follows:
+	// <li>acceleration-domain: Acceleration domain name;</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Referenced instance information.
+	Instance *string `json:"Instance,omitnil,omitempty" name:"Instance"`
 }
 
 // Predefined struct for user
@@ -20488,10 +22179,10 @@ type Resource struct {
 	// ID of the resource associated with the plan.
 	PlanId *string `json:"PlanId,omitnil,omitempty" name:"PlanId"`
 
-	// Applicable area. Values:
-	// <li>`mainland`: Chinese mainland</li>
-	// <li>`overseas`: Regions outside the Chinese mainland</li>
-	// <li>`global`: Global</li>
+	// Region. valid values:.
+	// <Li>Mainland: within the chinese mainland;</li>.
+	// <li>overseas: outside the chinese mainland.</li>.
+	// <Li>Global: global.</li>.
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// The resource type. Values:
@@ -20661,43 +22352,45 @@ type RuleCondition struct {
 }
 
 type RuleEngineAction struct {
-	// Operation Name. the Name must correspond to the parameter structure, for example, if Name=Cache, CacheParameters is required.
+	// Operation Name. the Name must correspond to the parameter structure, such as Name=Cache, then CacheParameters is required.
 	// <li>Cache: specifies the node Cache TTL.</li>.
 	// <Li>CacheKey: specifies the custom cache key.</li>.
-	// <Li>CachePrefresh: cache pre-refresh;</li>.
-	// <Li>AccessURLRedirect: url redirection;</li>.
+	// <Li>CachePrefresh: specifies cache pre-refresh.</li>.
+	// <Li>AccessURLRedirect: specifies access url redirection.</li>.
 	// <Li>UpstreamURLRewrite: specifies the origin-pull url rewrite.</li>.
 	// <li>QUIC:QUIC;</li>
 	// <li>WebSocket:WebSocket;</li>
 	// <li>Authentication: Token Authentication;</li>.
-	// <li>MaxAge: browser caching TTL;</li>.
+	// <li>MaxAge: specifies the browser cache TTL.</li>.
 	// <li>StatusCodeCache: specifies the status code cache TTL.</li>.
-	// <Li>OfflineCache: offline caching;</li>.
-	// <Li>SmartRouting: smart acceleration;</li>.
-	// <Li>RangeOriginPull: range-based origin pull;</li>.
-	// <Li>UpstreamHTTP2: http/2 origin pull;</li>.
-	// <Li>HostHeader: host header rewrite;</li>.
-	// <Li>`ForceRedirectHTTPS`: force https redirect configuration for access protocol.</li>.
-	// <li>OriginPullProtocol: HTTPS origin pull;</li>.
-	// <Li>Compression: intelligent compression configuration;</li>.
+	// <Li>OfflineCache: specifies the offline cache.</li>.
+	// <Li>SmartRouting: specifies smart acceleration.</li>.
+	// <Li>RangeOriginPull: specifies range-based origin pull.</li>.
+	// <Li>UpstreamHTTP2: specifies http/2 origin pull.</li>.
+	// <Li>HostHeader: specifies the host header rewrite.</li>.
+	// <Li>ForceRedirectHTTPS: specifies the forced https redirect configuration for access protocol.</li>.
+	// <li>OriginPullProtocol: specifies HTTPS origin pull.</li>.
+	// <Li>Compression: specifies the intelligent compression configuration.</li>.
 	// <li>HSTS:HSTS;</li>
-	// <Li>ClientIPHeader: configuration for storing client request ip in header information;</li>.
-	// <Li>OCSPStapling: ocsp stapling;</li>.
-	// <Li>HTTP2: http/2 integration;</li>.
-	// <li>PostMaxSize: maximum size of the file uploaded for streaming via a POST request;</li>.
-	// <Li>ClientIPCountry: region of the client ip during origin-pull;</li>.
+	// <Li>ClientIPHeader: specifies the header information configuration for storing client request ip.</li>.
+	// <Li>OCSPStapling: specifies ocsp stapling.</li>.
+	// <Li>HTTP2: specifies http/2 integration.</li>.
+	// <li>PostMaxSize: specifies the maximum limit for file streaming transmission in POST request upload.</li>.
+	// <Li>ClientIPCountry: specifies the regional information of the client ip carried during origin-pull.</li>.
 	// <Li>UpstreamFollowRedirect: specifies the parameter configuration for redirection during origin pull.</li>.
-	// <Li>UpstreamRequest: origin pull request parameter;</li>.
+	// <Li>UpstreamRequest: specifies the origin-pull request parameters.</li>.
 	// <li>TLSConfig: specifies SSL/TLS security.</li>.
-	// <Li>ModifyOrigin: modify origin server;</li>.
-	// <Li>HTTPUpstreamTimeout: specifies the layer 7 origin pull timeout configuration.</li>.
-	// <li>HttpResponse: HTTP response;</li>.
+	// <Li>ModifyOrigin: modifies the origin server.</li>.
+	// <Li>HTTPUpstreamTimeout: specifies the layer-7 origin-pull timeout configuration.</li>.
+	// <li>HttpResponse: HTTP response.</li>.
 	// <Li>ErrorPage: specifies the custom error page.</li>.
 	// <li>ModifyResponseHeader: modifies the HTTP node response header.</li>.
-	// <li>ModifyRequestHeader: modifies the HTTP node request header.</li>.
-	// <Li>ResponseSpeedLimit: download speed limit for a single connection;</li>.
-	// <Li>SetContentIdentifier: sets the content identifier;</li>.
-	// <Li>Vary: vary feature configuration.</li>.
+	// <li>ModifyRequestHeader: modifies the request header of an HTTP node.</li>.
+	// <Li>ResponseSpeedLimit: specifies the download speed limit for a single connection.</li>.
+	// <Li>SetContentIdentifier: specifies the content identifier.</li>.
+	// <Li>Vary: specifies the vary feature configuration.</li>.
+	// <Li>ContentCompression: specifies the content compression configuration.</li>.
+	// <Li>OriginAuthentication. specifies the origin authentication configuration.</li>.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Node cache ttl configuration parameter. when name is cache, this parameter is required.
@@ -20764,7 +22457,8 @@ type RuleEngineAction struct {
 	// Note: this field may return null, which indicates a failure to obtain a valid value.
 	ForceRedirectHTTPSParameters *ForceRedirectHTTPSParameters `json:"ForceRedirectHTTPSParameters,omitnil,omitempty" name:"ForceRedirectHTTPSParameters"`
 
-	// Origin HTTPS configuration parameters. When Name is set to OriginPullProtocol, this parameter is required.
+	// HTTPS configuration for origin-pull. this parameter is required when the Name value is OriginPullProtocol.
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
 	OriginPullProtocolParameters *OriginPullProtocolParameters `json:"OriginPullProtocolParameters,omitnil,omitempty" name:"OriginPullProtocolParameters"`
 
 	// Intelligent compression configuration. this parameter is required when name is set to compression.
@@ -20842,6 +22536,12 @@ type RuleEngineAction struct {
 
 	// Vary feature configuration parameter. when Name value is Vary, this parameter is required.
 	VaryParameters *VaryParameters `json:"VaryParameters,omitnil,omitempty" name:"VaryParameters"`
+
+	// The content compression configuration parameter is required when Name value is ContentCompression. this parameter is an allowlist feature. if needed, contact tencent cloud engineers.
+	ContentCompressionParameters *ContentCompressionParameters `json:"ContentCompressionParameters,omitnil,omitempty" name:"ContentCompressionParameters"`
+
+	// The origin authentication configuration parameter. this parameter is required when the Name value is OriginAuthentication. this parameter is the allowlist feature. if needed, contact tencent cloud engineers.
+	OriginAuthenticationParameters *OriginAuthenticationParameters `json:"OriginAuthenticationParameters,omitnil,omitempty" name:"OriginAuthenticationParameters"`
 }
 
 type RuleEngineItem struct {
@@ -21152,6 +22852,9 @@ type SecurityPolicy struct {
 
 	// Basic Bot management configuration.
 	BotManagementLite *BotManagementLite `json:"BotManagementLite,omitnil,omitempty" name:"BotManagementLite"`
+
+	// Default intercept action configuration.
+	DefaultDenySecurityActionParameters *DefaultDenySecurityActionParameters `json:"DefaultDenySecurityActionParameters,omitnil,omitempty" name:"DefaultDenySecurityActionParameters"`
 }
 
 type SecurityPolicyTemplateInfo struct {
@@ -21234,6 +22937,28 @@ type SessionRateControl struct {
 type SetContentIdentifierParameters struct {
 	// Content identifier id.
 	ContentIdentifier *string `json:"ContentIdentifier,omitnil,omitempty" name:"ContentIdentifier"`
+}
+
+type SharedCNAMEInfo struct {
+	// Shared CNAME type: Value ranges from...to...
+	// <li>custom: User-created custom shared CNAME</li>
+	// <li>ip-ssl: Shared CNAME of IP SSL type</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Shared CNAME name.
+	SharedCNAME *string `json:"SharedCNAME,omitnil,omitempty" name:"SharedCNAME"`
+
+	// Description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// When type is ip-ssl, show the associated IP SSL configuration message of the shared CNAME.
+	IPSSLConfig *IPSSLConfig `json:"IPSSLConfig,omitnil,omitempty" name:"IPSSLConfig"`
+
+	// Number of acceleration domain names bound to the shared CNAME.
+	BindDomainCount *int64 `json:"BindDomainCount,omitnil,omitempty" name:"BindDomainCount"`
+
+	// List of acceleration domain names added to the shared CNAME. When the number of domains exceeds 100, only return the first 100 acceleration domain names.
+	AccelerationDomains []*ReferenceHolder `json:"AccelerationDomains,omitnil,omitempty" name:"AccelerationDomains"`
 }
 
 type SkipCondition struct {
@@ -21442,9 +23167,17 @@ type TCCaptchaOption struct {
 	AppSecretKey *string `json:"AppSecretKey,omitnil,omitempty" name:"AppSecretKey"`
 }
 
+type TCEOCaptchaOption struct {
+	// EdgeOne human-machine verification mode. Valid values:<li>Invisible: invisible verification;</li><li>Adaptive: self adaptive interactive verification.</li>
+	CaptchaMode *string `json:"CaptchaMode,omitnil,omitempty" name:"CaptchaMode"`
+}
+
 type TCRCEOption struct {
 	// Channel information.
 	Channel *string `json:"Channel,omitnil,omitempty" name:"Channel"`
+
+	// Enabled regions for RCE Channel. currently optional value ranges from: <li>ap-beijing: north china (beijing);</li><li>ap-jakarta: southeast asia pacific (jakarta);</li><li>ap-singapore: southeast asia pacific (singapore);</li><li>eu-frankfurt: Europe (frankfurt);</li><li>na-siliconvalley: west us (silicon valley).</li>.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 }
 
 type TLSConfigParameters struct {
@@ -21536,8 +23269,11 @@ type TimingDataRecord struct {
 	// The query dimension value.
 	TypeKey *string `json:"TypeKey,omitnil,omitempty" name:"TypeKey"`
 
-	// Detailed time series data
+	// Detailed time series data of the <code>Integer</code> type. query metrics with the <code>Integer</code> value type will return corresponding time series data through this field.<br> **note**: if the query metric does not specify the value type, this field will return data by default.
 	TypeValue []*TimingTypeValue `json:"TypeValue,omitnil,omitempty" name:"TypeValue"`
+
+	// Detailed time series data of <code>Float</code> type. query metrics with <code>Float</code> value type will return corresponding time series data via this field.
+	FloatTypeValue []*FloatTimingTypeValue `json:"FloatTypeValue,omitnil,omitempty" name:"FloatTypeValue"`
 }
 
 type TimingTypeValue struct {
@@ -21678,6 +23414,9 @@ func (r *UpgradePlanResponse) FromJsonString(s string) error {
 type UpstreamCertInfo struct {
 	// In the origin-pull mutual authentication scenario, this field represents the certificate (including the public and private keys) carried during EO node origin-pull, which is deployed in the EO node for the origin server to authenticate the EO node. When used as an input parameter, it is left blank to indicate retaining the original configuration.
 	UpstreamMutualTLS *MutualTLS `json:"UpstreamMutualTLS,omitnil,omitempty" name:"UpstreamMutualTLS"`
+
+	// In the origin certificate verification scenario, this field represents the CA certificate used by the EO node to verify the server-side certificate when returning to the origin. it is deployed in the EO node and used for the EO node to authenticate the server certificate. when used as an input parameter, leave blank to indicate retaining the original configuration.
+	UpstreamCertificateVerify *OriginCertificateVerify `json:"UpstreamCertificateVerify,omitnil,omitempty" name:"UpstreamCertificateVerify"`
 }
 
 type UpstreamFollowRedirectParameters struct {
@@ -21966,11 +23705,44 @@ type Zone struct {
 	// The site name.
 	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
-	// List of name servers used by the site
-	OriginalNameServers []*string `json:"OriginalNameServers,omitnil,omitempty" name:"OriginalNameServers"`
+	// Identical site identifier. specifies a composite of numbers, english letters, ".", "-", and "_" with a character limit of 200.
+	AliasZoneName *string `json:"AliasZoneName,omitnil,omitempty" name:"AliasZoneName"`
 
-	// The list of name servers assigned by Tencent Cloud.
-	NameServers []*string `json:"NameServers,omitnil,omitempty" name:"NameServers"`
+	// Site acceleration region. valid values:.
+	// <Li>Global: global availability zone.</li>.
+	// <Li>Mainland: chinese mainland availability zone.</li>.
+	// <li>overseas: global availability zone (excluding the chinese mainland).</li>.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Site access type. valid values:.
+	// <li>full: NS access type;</li>.
+	// <li>partial: CNAME access type;</li>.
+	// <li>noDomainAccess: domainless access type.</li>.
+	// <li>dnsPodAccess: DNSPod managed type. this type requires your domain name to be hosted on tencent cloud DNSPod.</li>.
+	// <li> pages: pages data type;</li>.
+	// <li>ai: edge reasoning access type.</li>.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Specifies the Tag associated with the site.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// The list of billable resources.
+	Resources []*Resource `json:"Resources,omitnil,omitempty" name:"Resources"`
+
+	// NS site detail. returned only when Type = full.
+	NSDetail *NSDetail `json:"NSDetail,omitnil,omitempty" name:"NSDetail"`
+
+	// CNAME site detail. returned only when Type = partial.
+	CNAMEDetail *CNAMEDetail `json:"CNAMEDetail,omitnil,omitempty" name:"CNAMEDetail"`
+
+	// DNSPod managed Type site detail. returned only when Type = dnsPodAccess.
+	DNSPodDetail *DNSPodDetail `json:"DNSPodDetail,omitnil,omitempty" name:"DNSPodDetail"`
+
+	// The creation time of the site.
+	CreatedOn *string `json:"CreatedOn,omitnil,omitempty" name:"CreatedOn"`
+
+	// The modification date of the site.
+	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
 
 	// The site status. Values:
 	// u200c<li>`active`: The name server is switched to EdgeOne.</li>
@@ -21980,50 +23752,10 @@ type Zone struct {
 	// <li>`initializing`: The site is not bound with any plan. </li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Site access method. Valid values:
-	// <li>full: NS access;</li>
-	// <li>partial: CNAME access;</li>
-	// <li>noDomainAccess: access with no domain name.</li>
-	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
-
-	// Whether the site is disabled.
-	Paused *bool `json:"Paused,omitnil,omitempty" name:"Paused"`
-
-	// Whether CNAME acceleration is enabled. Values:
-	// <li>`enabled`: Enabled</li>
-	// <li>`disabled`: Disabled</li>
-	CnameSpeedUp *string `json:"CnameSpeedUp,omitnil,omitempty" name:"CnameSpeedUp"`
-
 	// CNAME record access status. Values:
 	// <li>`finished`: The site is verified.</li>
 	// <li>`pending`: The site is being verified.</li>
 	CnameStatus *string `json:"CnameStatus,omitnil,omitempty" name:"CnameStatus"`
-
-	// The list of resource tags.
-	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
-
-	// The list of billable resources.
-	Resources []*Resource `json:"Resources,omitnil,omitempty" name:"Resources"`
-
-	// The creation time of the site.
-	CreatedOn *string `json:"CreatedOn,omitnil,omitempty" name:"CreatedOn"`
-
-	// The modification date of the site.
-	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
-
-	// The site access region. Values:
-	// <li>`global`: Global.</li>
-	// <li>`mainland`: Chinese mainland.</li>
-	// <li>`overseas`: Outside the Chinese mainland.</li>
-	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
-
-	// The custom name server information.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	VanityNameServers *VanityNameServers `json:"VanityNameServers,omitnil,omitempty" name:"VanityNameServers"`
-
-	// The custom name server IP information.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	VanityNameServersIps []*VanityNameServersIps `json:"VanityNameServersIps,omitnil,omitempty" name:"VanityNameServersIps"`
 
 	// Status of the proxy. Values:
 	// <li>`active`: Enabled</li>
@@ -22031,20 +23763,42 @@ type Zone struct {
 	// <li>`paused`: Disabled</li>
 	ActiveStatus *string `json:"ActiveStatus,omitnil,omitempty" name:"ActiveStatus"`
 
-	// Site alias. a composite of digits, numbers, english letters, -, and _, limited to 20 characters.
-	AliasZoneName *string `json:"AliasZoneName,omitnil,omitempty" name:"AliasZoneName"`
-
-	// Whether it’s a fake site. Valid values: 
-	// <li>`0`: Non-fake site;</li>
-	// <li>`1`: Fake site.</li>
-	IsFake *int64 `json:"IsFake,omitnil,omitempty" name:"IsFake"`
-
 	// Lock status. Values: <li>`enable`: Normal. Modification is allowed.</li><li>`disable`: Locked. Modification is not allowed.</li><li>`plan_migrate`: Adjusting the plan. Modification is not allowed.</li> 
 	LockStatus *string `json:"LockStatus,omitnil,omitempty" name:"LockStatus"`
 
-	// Ownership verification information
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Whether the site is disabled.
+	Paused *bool `json:"Paused,omitnil,omitempty" name:"Paused"`
+
+	// Specifies whether it is a fake site (this field is a historic reserved field and is no longer maintained, refer to the website type for the corresponding field). valid values:.
+	// <Li>0: non-fake site.</li>.
+	// <Li>1: fake site.</li>.
+	IsFake *int64 `json:"IsFake,omitnil,omitempty" name:"IsFake"`
+
+	// Whether to enable CNAME acceleration (this field is a historic reserved field and is no longer maintained. refer to the website type for the corresponding field). valid values:.
+	// <Li>Enabled: specifies whether the feature is enabled.</li>.
+	// <li>disabled: specifies that the feature is turned off.</li>.
+	CnameSpeedUp *string `json:"CnameSpeedUp,omitnil,omitempty" name:"CnameSpeedUp"`
+
+	// Ownership verification information. (this field is a historic reserved field and is no longer maintained. refer to the website type for the corresponding field.).
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
 	OwnershipVerification *OwnershipVerification `json:"OwnershipVerification,omitnil,omitempty" name:"OwnershipVerification"`
+
+	// Lists the currently used NS of the site. (this field is a historic reserved field and is no longer maintained. refer to the corresponding field based on the website type.).
+	OriginalNameServers []*string `json:"OriginalNameServers,omitnil,omitempty" name:"OriginalNameServers"`
+
+	// Lists of NS assigned by tencent cloud. (this field is a historic reserved field and no longer maintained. refer to the website type for the corresponding field.).
+	NameServers []*string `json:"NameServers,omitnil,omitempty" name:"NameServers"`
+
+	// Specifies user-customized NS information. (this field is a historic reserved field and is no longer maintained. refer to the corresponding field according to the website type.).
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	VanityNameServers *VanityNameServers `json:"VanityNameServers,omitnil,omitempty" name:"VanityNameServers"`
+
+	// User-Customized NS IP information. (this field is a historic reserved field and is no longer maintained. refer to the corresponding field according to the website type.).
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	VanityNameServersIps []*VanityNameServersIps `json:"VanityNameServersIps,omitnil,omitempty" name:"VanityNameServersIps"`
+
+	// Version management configuration group working mode. site configuration modules can enable "version management mode" or "immediate effect mode" by configuration group dimension. for details, see [version management](https://www.tencentcloud.comom/document/product/1552/113690?from_cn_redirect=1).
+	WorkModeInfos []*ConfigGroupWorkModeInfo `json:"WorkModeInfos,omitnil,omitempty" name:"WorkModeInfos"`
 }
 
 type ZoneConfig struct {

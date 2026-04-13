@@ -6933,6 +6933,68 @@ func (c *Client) DescribeProvinceIspPlayInfoListWithContext(ctx context.Context,
     return
 }
 
+func NewDescribePushBandwidthAndFluxListRequest() (request *DescribePushBandwidthAndFluxListRequest) {
+    request = &DescribePushBandwidthAndFluxListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("live", APIVersion, "DescribePushBandwidthAndFluxList")
+    
+    
+    return
+}
+
+func NewDescribePushBandwidthAndFluxListResponse() (response *DescribePushBandwidthAndFluxListResponse) {
+    response = &DescribePushBandwidthAndFluxListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribePushBandwidthAndFluxList
+// Live Streaming Push Bandwidth and Traffic Data Query. The push billing will first compare the global push usage with the global playback usage. If the billing conditions are met, billing will be issued based on the usage in each region. For details, refer to the Billing Documentation.(https://cloud.tencent.com/document/product/267/34175)
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+func (c *Client) DescribePushBandwidthAndFluxList(request *DescribePushBandwidthAndFluxListRequest) (response *DescribePushBandwidthAndFluxListResponse, err error) {
+    return c.DescribePushBandwidthAndFluxListWithContext(context.Background(), request)
+}
+
+// DescribePushBandwidthAndFluxList
+// Live Streaming Push Bandwidth and Traffic Data Query. The push billing will first compare the global push usage with the global playback usage. If the billing conditions are met, billing will be issued based on the usage in each region. For details, refer to the Billing Documentation.(https://cloud.tencent.com/document/product/267/34175)
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+func (c *Client) DescribePushBandwidthAndFluxListWithContext(ctx context.Context, request *DescribePushBandwidthAndFluxListRequest) (response *DescribePushBandwidthAndFluxListResponse, err error) {
+    if request == nil {
+        request = NewDescribePushBandwidthAndFluxListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribePushBandwidthAndFluxList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePushBandwidthAndFluxList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePushBandwidthAndFluxListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRecordTaskRequest() (request *DescribeRecordTaskRequest) {
     request = &DescribeRecordTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},

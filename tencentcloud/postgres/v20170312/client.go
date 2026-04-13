@@ -451,6 +451,152 @@ func (c *Client) CloseServerlessDBExtranetAccessWithContext(ctx context.Context,
     return
 }
 
+func NewCreateAccountRequest() (request *CreateAccountRequest) {
+    request = &CreateAccountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "CreateAccount")
+    
+    
+    return
+}
+
+func NewCreateAccountResponse() (response *CreateAccountResponse) {
+    response = &CreateAccountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAccount
+// This API is used to create a data account. The returned Oid is the unique identifier of the account, which matches the oid recorded in the database system table pg_roles.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_DECRYPTPASSWORDFAILED = "InvalidParameterValue.DecryptPasswordFailed"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEERROR = "InvalidParameterValue.InvalidAccountNameError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
+//  INVALIDPARAMETERVALUE_INVALIDDATABASENAMEFORMATERROR = "InvalidParameterValue.InvalidDatabaseNameFormatError"
+//  INVALIDPARAMETERVALUE_INVALIDPASSWORDLENGTHERROR = "InvalidParameterValue.InvalidPasswordLengthError"
+//  INVALIDPARAMETERVALUE_INVALIDPASSWORDVALUEERROR = "InvalidParameterValue.InvalidPasswordValueError"
+//  INVALIDPARAMETERVALUE_PARAMETERCHARACTERERROR = "InvalidParameterValue.ParameterCharacterError"
+//  INVALIDPARAMETERVALUE_PARAMETERLENGTHLIMITERROR = "InvalidParameterValue.ParameterLengthLimitError"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDREGIONERROR = "InvalidParameterValue.UnsupportedRegionError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  OPERATIONDENIED_KERNELVERSIONERROR = "OperationDenied.KernelVersionError"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhiteListError"
+func (c *Client) CreateAccount(request *CreateAccountRequest) (response *CreateAccountResponse, err error) {
+    return c.CreateAccountWithContext(context.Background(), request)
+}
+
+// CreateAccount
+// This API is used to create a data account. The returned Oid is the unique identifier of the account, which matches the oid recorded in the database system table pg_roles.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_DECRYPTPASSWORDFAILED = "InvalidParameterValue.DecryptPasswordFailed"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEERROR = "InvalidParameterValue.InvalidAccountNameError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
+//  INVALIDPARAMETERVALUE_INVALIDDATABASENAMEFORMATERROR = "InvalidParameterValue.InvalidDatabaseNameFormatError"
+//  INVALIDPARAMETERVALUE_INVALIDPASSWORDLENGTHERROR = "InvalidParameterValue.InvalidPasswordLengthError"
+//  INVALIDPARAMETERVALUE_INVALIDPASSWORDVALUEERROR = "InvalidParameterValue.InvalidPasswordValueError"
+//  INVALIDPARAMETERVALUE_PARAMETERCHARACTERERROR = "InvalidParameterValue.ParameterCharacterError"
+//  INVALIDPARAMETERVALUE_PARAMETERLENGTHLIMITERROR = "InvalidParameterValue.ParameterLengthLimitError"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDREGIONERROR = "InvalidParameterValue.UnsupportedRegionError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  OPERATIONDENIED_KERNELVERSIONERROR = "OperationDenied.KernelVersionError"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhiteListError"
+func (c *Client) CreateAccountWithContext(ctx context.Context, request *CreateAccountRequest) (response *CreateAccountResponse, err error) {
+    if request == nil {
+        request = NewCreateAccountRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CreateAccount")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAccount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAccountResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateBackupPlanRequest() (request *CreateBackupPlanRequest) {
+    request = &CreateBackupPlanRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "CreateBackupPlan")
+    
+    
+    return
+}
+
+func NewCreateBackupPlanResponse() (response *CreateBackupPlanResponse) {
+    response = &CreateBackupPlanResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateBackupPlan
+// This API is used to create a backup policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_PARAMETERLENGTHLIMITERROR = "InvalidParameterValue.ParameterLengthLimitError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+func (c *Client) CreateBackupPlan(request *CreateBackupPlanRequest) (response *CreateBackupPlanResponse, err error) {
+    return c.CreateBackupPlanWithContext(context.Background(), request)
+}
+
+// CreateBackupPlan
+// This API is used to create a backup policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_PARAMETERLENGTHLIMITERROR = "InvalidParameterValue.ParameterLengthLimitError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+func (c *Client) CreateBackupPlanWithContext(ctx context.Context, request *CreateBackupPlanRequest) (response *CreateBackupPlanResponse, err error) {
+    if request == nil {
+        request = NewCreateBackupPlanRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CreateBackupPlan")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateBackupPlan require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateBackupPlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateBaseBackupRequest() (request *CreateBaseBackupRequest) {
     request = &CreateBaseBackupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -531,7 +677,7 @@ func NewCreateDBInstanceNetworkAccessResponse() (response *CreateDBInstanceNetwo
 }
 
 // CreateDBInstanceNetworkAccess
-// This API is used to create a network for an instance.
+// This API is used to create instance networks. Each instance allows a maximum of 2 network configurations and a minimum of 1.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -561,7 +707,7 @@ func (c *Client) CreateDBInstanceNetworkAccess(request *CreateDBInstanceNetworkA
 }
 
 // CreateDBInstanceNetworkAccess
-// This API is used to create a network for an instance.
+// This API is used to create instance networks. Each instance allows a maximum of 2 network configurations and a minimum of 1.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -789,6 +935,78 @@ func (c *Client) CreateDBInstancesWithContext(ctx context.Context, request *Crea
     request.SetContext(ctx)
     
     response = NewCreateDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateDatabaseRequest() (request *CreateDatabaseRequest) {
+    request = &CreateDatabaseRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "CreateDatabase")
+    
+    
+    return
+}
+
+func NewCreateDatabaseResponse() (response *CreateDatabaseResponse) {
+    response = &CreateDatabaseResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDatabase
+// This API is used to create a database, requiring the specified database name and owner.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_CHARSETNOTFOUNDERROR = "InvalidParameterValue.CharsetNotFoundError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTERROR = "InvalidParameterValue.InvalidAccountError"
+//  INVALIDPARAMETERVALUE_PARAMETERLENGTHLIMITERROR = "InvalidParameterValue.ParameterLengthLimitError"
+//  INVALIDPARAMETERVALUE_PARAMETEROUTRANGEERROR = "InvalidParameterValue.ParameterOutRangeError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) CreateDatabase(request *CreateDatabaseRequest) (response *CreateDatabaseResponse, err error) {
+    return c.CreateDatabaseWithContext(context.Background(), request)
+}
+
+// CreateDatabase
+// This API is used to create a database, requiring the specified database name and owner.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_CHARSETNOTFOUNDERROR = "InvalidParameterValue.CharsetNotFoundError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTERROR = "InvalidParameterValue.InvalidAccountError"
+//  INVALIDPARAMETERVALUE_PARAMETERLENGTHLIMITERROR = "InvalidParameterValue.ParameterLengthLimitError"
+//  INVALIDPARAMETERVALUE_PARAMETEROUTRANGEERROR = "InvalidParameterValue.ParameterOutRangeError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) CreateDatabaseWithContext(ctx context.Context, request *CreateDatabaseRequest) (response *CreateDatabaseResponse, err error) {
+    if request == nil {
+        request = NewCreateDatabaseRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CreateDatabase")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDatabase require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDatabaseResponse()
     err = c.Send(request, response)
     return
 }
@@ -1399,7 +1617,7 @@ func NewCreateReadOnlyGroupNetworkAccessResponse() (response *CreateReadOnlyGrou
 }
 
 // CreateReadOnlyGroupNetworkAccess
-// This API is used to create a network for an RO group.
+// This API is used to create network for RO groups. The largest quantity of networks to create is 2.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1424,7 +1642,7 @@ func (c *Client) CreateReadOnlyGroupNetworkAccess(request *CreateReadOnlyGroupNe
 }
 
 // CreateReadOnlyGroupNetworkAccess
-// This API is used to create a network for an RO group.
+// This API is used to create network for RO groups. The largest quantity of networks to create is 2.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1585,6 +1803,132 @@ func (c *Client) CreateServerlessDBInstanceWithContext(ctx context.Context, requ
     return
 }
 
+func NewDeleteAccountRequest() (request *DeleteAccountRequest) {
+    request = &DeleteAccountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DeleteAccount")
+    
+    
+    return
+}
+
+func NewDeleteAccountResponse() (response *DeleteAccountResponse) {
+    response = &DeleteAccountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteAccount
+// This API is used to delete a database account. Oid and UserName must be input simultaneously to avoid accidental deletion. Note: This API is reentrant. If the account no longer exists, calling this API to delete it will not trigger an error.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEERROR = "InvalidParameterValue.InvalidAccountNameError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDREGIONERROR = "InvalidParameterValue.UnsupportedRegionError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhiteListError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DeleteAccount(request *DeleteAccountRequest) (response *DeleteAccountResponse, err error) {
+    return c.DeleteAccountWithContext(context.Background(), request)
+}
+
+// DeleteAccount
+// This API is used to delete a database account. Oid and UserName must be input simultaneously to avoid accidental deletion. Note: This API is reentrant. If the account no longer exists, calling this API to delete it will not trigger an error.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEERROR = "InvalidParameterValue.InvalidAccountNameError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDREGIONERROR = "InvalidParameterValue.UnsupportedRegionError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhiteListError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DeleteAccountWithContext(ctx context.Context, request *DeleteAccountRequest) (response *DeleteAccountResponse, err error) {
+    if request == nil {
+        request = NewDeleteAccountRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DeleteAccount")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAccount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteAccountResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteBackupPlanRequest() (request *DeleteBackupPlanRequest) {
+    request = &DeleteBackupPlanRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DeleteBackupPlan")
+    
+    
+    return
+}
+
+func NewDeleteBackupPlanResponse() (response *DeleteBackupPlanResponse) {
+    response = &DeleteBackupPlanResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteBackupPlan
+// This API is used to delete a backup policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+func (c *Client) DeleteBackupPlan(request *DeleteBackupPlanRequest) (response *DeleteBackupPlanResponse, err error) {
+    return c.DeleteBackupPlanWithContext(context.Background(), request)
+}
+
+// DeleteBackupPlan
+// This API is used to delete a backup policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+func (c *Client) DeleteBackupPlanWithContext(ctx context.Context, request *DeleteBackupPlanRequest) (response *DeleteBackupPlanResponse, err error) {
+    if request == nil {
+        request = NewDeleteBackupPlanRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DeleteBackupPlan")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteBackupPlan require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteBackupPlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteBaseBackupRequest() (request *DeleteBaseBackupRequest) {
     request = &DeleteBaseBackupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1612,6 +1956,7 @@ func NewDeleteBaseBackupResponse() (response *DeleteBaseBackupResponse) {
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_DELETERUNNINGBACKUPTASKERR = "OperationDenied.DeleteRunningBackupTaskErr"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 func (c *Client) DeleteBaseBackup(request *DeleteBaseBackupRequest) (response *DeleteBaseBackupResponse, err error) {
     return c.DeleteBaseBackupWithContext(context.Background(), request)
@@ -1625,6 +1970,7 @@ func (c *Client) DeleteBaseBackup(request *DeleteBaseBackupRequest) (response *D
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_DELETERUNNINGBACKUPTASKERR = "OperationDenied.DeleteRunningBackupTaskErr"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 func (c *Client) DeleteBaseBackupWithContext(ctx context.Context, request *DeleteBaseBackupRequest) (response *DeleteBaseBackupResponse, err error) {
     if request == nil {
@@ -2083,6 +2429,74 @@ func (c *Client) DeleteServerlessDBInstanceWithContext(ctx context.Context, requ
     return
 }
 
+func NewDescribeAccountPrivilegesRequest() (request *DescribeAccountPrivilegesRequest) {
+    request = &DescribeAccountPrivilegesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeAccountPrivileges")
+    
+    
+    return
+}
+
+func NewDescribeAccountPrivilegesResponse() (response *DescribeAccountPrivilegesResponse) {
+    response = &DescribeAccountPrivilegesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAccountPrivileges
+// This API is used to query the permission list of a database account on a database object.
+//
+// error code that may be returned:
+//  DBERROR = "DBError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEERROR = "InvalidParameterValue.InvalidAccountNameError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
+//  INVALIDPARAMETERVALUE_INVALIDDATABASEOBJECTNAME = "InvalidParameterValue.InvalidDatabaseObjectName"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DescribeAccountPrivileges(request *DescribeAccountPrivilegesRequest) (response *DescribeAccountPrivilegesResponse, err error) {
+    return c.DescribeAccountPrivilegesWithContext(context.Background(), request)
+}
+
+// DescribeAccountPrivileges
+// This API is used to query the permission list of a database account on a database object.
+//
+// error code that may be returned:
+//  DBERROR = "DBError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEERROR = "InvalidParameterValue.InvalidAccountNameError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
+//  INVALIDPARAMETERVALUE_INVALIDDATABASEOBJECTNAME = "InvalidParameterValue.InvalidDatabaseObjectName"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DescribeAccountPrivilegesWithContext(ctx context.Context, request *DescribeAccountPrivilegesRequest) (response *DescribeAccountPrivilegesResponse, err error) {
+    if request == nil {
+        request = NewDescribeAccountPrivilegesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeAccountPrivileges")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAccountPrivileges require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAccountPrivilegesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAccountsRequest() (request *DescribeAccountsRequest) {
     request = &DescribeAccountsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2107,12 +2521,16 @@ func NewDescribeAccountsResponse() (response *DescribeAccountsResponse) {
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  DBERROR = "DBError"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
 //  INVALIDPARAMETERVALUE_ACCOUNTNOTEXIST = "InvalidParameterValue.AccountNotExist"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -2128,12 +2546,16 @@ func (c *Client) DescribeAccounts(request *DescribeAccountsRequest) (response *D
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  DBERROR = "DBError"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
 //  INVALIDPARAMETERVALUE_ACCOUNTNOTEXIST = "InvalidParameterValue.AccountNotExist"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -2826,6 +3248,7 @@ func NewDescribeDBErrlogsResponse() (response *DescribeDBErrlogsResponse) {
 //  FAILEDOPERATION_ESCONNECTERROR = "FailedOperation.ESConnectError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2838,6 +3261,7 @@ func NewDescribeDBErrlogsResponse() (response *DescribeDBErrlogsResponse) {
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+//  UNKNOWNPARAMETER_HTTPERROR = "UnknownParameter.HttpError"
 func (c *Client) DescribeDBErrlogs(request *DescribeDBErrlogsRequest) (response *DescribeDBErrlogsResponse, err error) {
     return c.DescribeDBErrlogsWithContext(context.Background(), request)
 }
@@ -2852,6 +3276,7 @@ func (c *Client) DescribeDBErrlogs(request *DescribeDBErrlogsRequest) (response 
 //  FAILEDOPERATION_ESCONNECTERROR = "FailedOperation.ESConnectError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2864,6 +3289,7 @@ func (c *Client) DescribeDBErrlogs(request *DescribeDBErrlogsRequest) (response 
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+//  UNKNOWNPARAMETER_HTTPERROR = "UnknownParameter.HttpError"
 func (c *Client) DescribeDBErrlogsWithContext(ctx context.Context, request *DescribeDBErrlogsRequest) (response *DescribeDBErrlogsResponse, err error) {
     if request == nil {
         request = NewDescribeDBErrlogsRequest()
@@ -3105,6 +3531,60 @@ func (c *Client) DescribeDBInstanceParametersWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewDescribeDBInstanceParametersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDBInstanceSSLConfigRequest() (request *DescribeDBInstanceSSLConfigRequest) {
+    request = &DescribeDBInstanceSSLConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeDBInstanceSSLConfig")
+    
+    
+    return
+}
+
+func NewDescribeDBInstanceSSLConfigResponse() (response *DescribeDBInstanceSSLConfigResponse) {
+    response = &DescribeDBInstanceSSLConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDBInstanceSSLConfig
+// This API is used to query the SSL status of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DescribeDBInstanceSSLConfig(request *DescribeDBInstanceSSLConfigRequest) (response *DescribeDBInstanceSSLConfigResponse, err error) {
+    return c.DescribeDBInstanceSSLConfigWithContext(context.Background(), request)
+}
+
+// DescribeDBInstanceSSLConfig
+// This API is used to query the SSL status of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DescribeDBInstanceSSLConfigWithContext(ctx context.Context, request *DescribeDBInstanceSSLConfigRequest) (response *DescribeDBInstanceSSLConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBInstanceSSLConfigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeDBInstanceSSLConfig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBInstanceSSLConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBInstanceSSLConfigResponse()
     err = c.Send(request, response)
     return
 }
@@ -3503,6 +3983,64 @@ func (c *Client) DescribeDBXlogsWithContext(ctx context.Context, request *Descri
     return
 }
 
+func NewDescribeDatabaseObjectsRequest() (request *DescribeDatabaseObjectsRequest) {
+    request = &DescribeDatabaseObjectsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeDatabaseObjects")
+    
+    
+    return
+}
+
+func NewDescribeDatabaseObjectsResponse() (response *DescribeDatabaseObjectsResponse) {
+    response = &DescribeDatabaseObjectsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDatabaseObjects
+// This API is used to query database object list, such as the mode list in test database.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DescribeDatabaseObjects(request *DescribeDatabaseObjectsRequest) (response *DescribeDatabaseObjectsResponse, err error) {
+    return c.DescribeDatabaseObjectsWithContext(context.Background(), request)
+}
+
+// DescribeDatabaseObjects
+// This API is used to query database object list, such as the mode list in test database.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DescribeDatabaseObjectsWithContext(ctx context.Context, request *DescribeDatabaseObjectsRequest) (response *DescribeDatabaseObjectsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDatabaseObjectsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeDatabaseObjects")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDatabaseObjects require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDatabaseObjectsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDatabasesRequest() (request *DescribeDatabasesRequest) {
     request = &DescribeDatabasesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3527,17 +4065,20 @@ func NewDescribeDatabasesResponse() (response *DescribeDatabasesResponse) {
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  DBERROR = "DBError"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  FAILEDOPERATION_LIMITOPERATION = "FailedOperation.LimitOperation"
 //  FAILEDOPERATION_OSSACCESSERROR = "FailedOperation.OssAccessError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_INSTANCEDATAERROR = "InternalError.InstanceDataError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDINSTANCESTATUS = "InvalidInstanceStatus"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
 //  INVALIDPARAMETERVALUE_ACCOUNTNOTEXISTERROR = "InvalidParameterValue.AccountNotExistError"
 //  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -3557,17 +4098,20 @@ func (c *Client) DescribeDatabases(request *DescribeDatabasesRequest) (response 
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  DBERROR = "DBError"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  FAILEDOPERATION_LIMITOPERATION = "FailedOperation.LimitOperation"
 //  FAILEDOPERATION_OSSACCESSERROR = "FailedOperation.OssAccessError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_INSTANCEDATAERROR = "InternalError.InstanceDataError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDINSTANCESTATUS = "InvalidInstanceStatus"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
 //  INVALIDPARAMETERVALUE_ACCOUNTNOTEXISTERROR = "InvalidParameterValue.AccountNotExistError"
 //  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -3591,6 +4135,66 @@ func (c *Client) DescribeDatabasesWithContext(ctx context.Context, request *Desc
     request.SetContext(ctx)
     
     response = NewDescribeDatabasesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDedicatedClustersRequest() (request *DescribeDedicatedClustersRequest) {
+    request = &DescribeDedicatedClustersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeDedicatedClusters")
+    
+    
+    return
+}
+
+func NewDescribeDedicatedClustersResponse() (response *DescribeDedicatedClustersResponse) {
+    response = &DescribeDedicatedClustersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDedicatedClusters
+// This API is used to query an exclusive cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_SERVICEACCESSERROR = "FailedOperation.ServiceAccessError"
+//  INTERNALERROR_JSONPARSEERROR = "InternalError.JsonParseError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+func (c *Client) DescribeDedicatedClusters(request *DescribeDedicatedClustersRequest) (response *DescribeDedicatedClustersResponse, err error) {
+    return c.DescribeDedicatedClustersWithContext(context.Background(), request)
+}
+
+// DescribeDedicatedClusters
+// This API is used to query an exclusive cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_SERVICEACCESSERROR = "FailedOperation.ServiceAccessError"
+//  INTERNALERROR_JSONPARSEERROR = "InternalError.JsonParseError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+func (c *Client) DescribeDedicatedClustersWithContext(ctx context.Context, request *DescribeDedicatedClustersRequest) (response *DescribeDedicatedClustersResponse, err error) {
+    if request == nil {
+        request = NewDescribeDedicatedClustersRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeDedicatedClusters")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDedicatedClusters require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDedicatedClustersResponse()
     err = c.Send(request, response)
     return
 }
@@ -3759,6 +4363,76 @@ func (c *Client) DescribeLogBackupsWithContext(ctx context.Context, request *Des
     request.SetContext(ctx)
     
     response = NewDescribeLogBackupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMaintainTimeWindowRequest() (request *DescribeMaintainTimeWindowRequest) {
+    request = &DescribeMaintainTimeWindowRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeMaintainTimeWindow")
+    
+    
+    return
+}
+
+func NewDescribeMaintainTimeWindowResponse() (response *DescribeMaintainTimeWindowResponse) {
+    response = &DescribeMaintainTimeWindowResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMaintainTimeWindow
+// This API is used to query instance maintenance window.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DescribeMaintainTimeWindow(request *DescribeMaintainTimeWindowRequest) (response *DescribeMaintainTimeWindowResponse, err error) {
+    return c.DescribeMaintainTimeWindowWithContext(context.Background(), request)
+}
+
+// DescribeMaintainTimeWindow
+// This API is used to query instance maintenance window.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DescribeMaintainTimeWindowWithContext(ctx context.Context, request *DescribeMaintainTimeWindowRequest) (response *DescribeMaintainTimeWindowResponse, err error) {
+    if request == nil {
+        request = NewDescribeMaintainTimeWindowRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeMaintainTimeWindow")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMaintainTimeWindow require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMaintainTimeWindowResponse()
     err = c.Send(request, response)
     return
 }
@@ -4477,6 +5151,68 @@ func (c *Client) DescribeSlowQueryListWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDescribeSlowQueryListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTasksRequest() (request *DescribeTasksRequest) {
+    request = &DescribeTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeTasks")
+    
+    
+    return
+}
+
+func NewDescribeTasksResponse() (response *DescribeTasksResponse) {
+    response = &DescribeTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTasks
+// This API is used to query the task list and show the progress of async task execution.
+//
+// This API is used to show summarized steps, which may be adjusted during version iteration. It is not recommended for key logic usage.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_PARAMETERVALUEEXCEEDERROR = "InvalidParameterValue.ParameterValueExceedError"
+func (c *Client) DescribeTasks(request *DescribeTasksRequest) (response *DescribeTasksResponse, err error) {
+    return c.DescribeTasksWithContext(context.Background(), request)
+}
+
+// DescribeTasks
+// This API is used to query the task list and show the progress of async task execution.
+//
+// This API is used to show summarized steps, which may be adjusted during version iteration. It is not recommended for key logic usage.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_PARAMETERVALUEEXCEEDERROR = "InvalidParameterValue.ParameterValueExceedError"
+func (c *Client) DescribeTasksWithContext(ctx context.Context, request *DescribeTasksRequest) (response *DescribeTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeTasksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeTasks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTasks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTasksResponse()
     err = c.Send(request, response)
     return
 }
@@ -5307,6 +6043,152 @@ func (c *Client) IsolateDBInstancesWithContext(ctx context.Context, request *Iso
     return
 }
 
+func NewLockAccountRequest() (request *LockAccountRequest) {
+    request = &LockAccountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "LockAccount")
+    
+    
+    return
+}
+
+func NewLockAccountResponse() (response *LockAccountResponse) {
+    response = &LockAccountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// LockAccount
+// This API is used to lock a database account. After being locked, the current connection will disconnect and unable to establish a new connection.
+//
+// error code that may be returned:
+//  DBERROR = "DBError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEERROR = "InvalidParameterValue.InvalidAccountNameError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) LockAccount(request *LockAccountRequest) (response *LockAccountResponse, err error) {
+    return c.LockAccountWithContext(context.Background(), request)
+}
+
+// LockAccount
+// This API is used to lock a database account. After being locked, the current connection will disconnect and unable to establish a new connection.
+//
+// error code that may be returned:
+//  DBERROR = "DBError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEERROR = "InvalidParameterValue.InvalidAccountNameError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) LockAccountWithContext(ctx context.Context, request *LockAccountRequest) (response *LockAccountResponse, err error) {
+    if request == nil {
+        request = NewLockAccountRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "LockAccount")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("LockAccount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewLockAccountResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyAccountPrivilegesRequest() (request *ModifyAccountPrivilegesRequest) {
+    request = &ModifyAccountPrivilegesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "ModifyAccountPrivileges")
+    
+    
+    return
+}
+
+func NewModifyAccountPrivilegesResponse() (response *ModifyAccountPrivilegesResponse) {
+    response = &ModifyAccountPrivilegesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyAccountPrivileges
+// This API is used to modify the permission of an account on a database object and modify the account type.
+//
+// error code that may be returned:
+//  DBERROR = "DBError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEERROR = "InvalidParameterValue.InvalidAccountNameError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
+//  INVALIDPARAMETERVALUE_INVALIDDATABASEOBJECTNAME = "InvalidParameterValue.InvalidDatabaseObjectName"
+//  INVALIDPARAMETERVALUE_PARAMETEROUTOFRANGE = "InvalidParameterValue.ParameterOutOfRange"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  OPERATIONDENIED_KERNELVERSIONERROR = "OperationDenied.KernelVersionError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) ModifyAccountPrivileges(request *ModifyAccountPrivilegesRequest) (response *ModifyAccountPrivilegesResponse, err error) {
+    return c.ModifyAccountPrivilegesWithContext(context.Background(), request)
+}
+
+// ModifyAccountPrivileges
+// This API is used to modify the permission of an account on a database object and modify the account type.
+//
+// error code that may be returned:
+//  DBERROR = "DBError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEERROR = "InvalidParameterValue.InvalidAccountNameError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
+//  INVALIDPARAMETERVALUE_INVALIDDATABASEOBJECTNAME = "InvalidParameterValue.InvalidDatabaseObjectName"
+//  INVALIDPARAMETERVALUE_PARAMETEROUTOFRANGE = "InvalidParameterValue.ParameterOutOfRange"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  OPERATIONDENIED_KERNELVERSIONERROR = "OperationDenied.KernelVersionError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) ModifyAccountPrivilegesWithContext(ctx context.Context, request *ModifyAccountPrivilegesRequest) (response *ModifyAccountPrivilegesResponse, err error) {
+    if request == nil {
+        request = NewModifyAccountPrivilegesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyAccountPrivileges")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAccountPrivileges require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyAccountPrivilegesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyAccountRemarkRequest() (request *ModifyAccountRemarkRequest) {
     request = &ModifyAccountRemarkRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6013,6 +6895,70 @@ func (c *Client) ModifyDBInstanceReadOnlyGroupWithContext(ctx context.Context, r
     return
 }
 
+func NewModifyDBInstanceSSLConfigRequest() (request *ModifyDBInstanceSSLConfigRequest) {
+    request = &ModifyDBInstanceSSLConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "ModifyDBInstanceSSLConfig")
+    
+    
+    return
+}
+
+func NewModifyDBInstanceSSLConfigResponse() (response *ModifyDBInstanceSSLConfigResponse) {
+    response = &ModifyDBInstanceSSLConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDBInstanceSSLConfig
+// This API is used to modify the SSL configuration of an instance, including enabling, disabling, and modifying the connection address protected by an SSL certificate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_PARAMETERCHARACTERLIMITERROR = "InvalidParameterValue.ParameterCharacterLimitError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) ModifyDBInstanceSSLConfig(request *ModifyDBInstanceSSLConfigRequest) (response *ModifyDBInstanceSSLConfigResponse, err error) {
+    return c.ModifyDBInstanceSSLConfigWithContext(context.Background(), request)
+}
+
+// ModifyDBInstanceSSLConfig
+// This API is used to modify the SSL configuration of an instance, including enabling, disabling, and modifying the connection address protected by an SSL certificate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_PARAMETERCHARACTERLIMITERROR = "InvalidParameterValue.ParameterCharacterLimitError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) ModifyDBInstanceSSLConfigWithContext(ctx context.Context, request *ModifyDBInstanceSSLConfigRequest) (response *ModifyDBInstanceSSLConfigResponse, err error) {
+    if request == nil {
+        request = NewModifyDBInstanceSSLConfigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyDBInstanceSSLConfig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDBInstanceSSLConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDBInstanceSSLConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyDBInstanceSecurityGroupsRequest() (request *ModifyDBInstanceSecurityGroupsRequest) {
     request = &ModifyDBInstanceSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6239,6 +7185,144 @@ func (c *Client) ModifyDBInstancesProjectWithContext(ctx context.Context, reques
     return
 }
 
+func NewModifyDatabaseOwnerRequest() (request *ModifyDatabaseOwnerRequest) {
+    request = &ModifyDatabaseOwnerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "ModifyDatabaseOwner")
+    
+    
+    return
+}
+
+func NewModifyDatabaseOwnerResponse() (response *ModifyDatabaseOwnerResponse) {
+    response = &ModifyDatabaseOwnerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDatabaseOwner
+// This API is used to change database owner.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTERROR = "InvalidParameterValue.InvalidAccountError"
+//  INVALIDPARAMETERVALUE_INVALIDDATABASENAMEFORMATERROR = "InvalidParameterValue.InvalidDatabaseNameFormatError"
+//  INVALIDPARAMETERVALUE_PARAMETERLENGTHLIMITERROR = "InvalidParameterValue.ParameterLengthLimitError"
+//  INVALIDPARAMETERVALUE_PARAMETEROUTRANGEERROR = "InvalidParameterValue.ParameterOutRangeError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+//  RESOURCEUNAVAILABLE_INVALIDINSTANCESTATUS = "ResourceUnavailable.InvalidInstanceStatus"
+func (c *Client) ModifyDatabaseOwner(request *ModifyDatabaseOwnerRequest) (response *ModifyDatabaseOwnerResponse, err error) {
+    return c.ModifyDatabaseOwnerWithContext(context.Background(), request)
+}
+
+// ModifyDatabaseOwner
+// This API is used to change database owner.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTERROR = "InvalidParameterValue.InvalidAccountError"
+//  INVALIDPARAMETERVALUE_INVALIDDATABASENAMEFORMATERROR = "InvalidParameterValue.InvalidDatabaseNameFormatError"
+//  INVALIDPARAMETERVALUE_PARAMETERLENGTHLIMITERROR = "InvalidParameterValue.ParameterLengthLimitError"
+//  INVALIDPARAMETERVALUE_PARAMETEROUTRANGEERROR = "InvalidParameterValue.ParameterOutRangeError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+//  RESOURCEUNAVAILABLE_INVALIDINSTANCESTATUS = "ResourceUnavailable.InvalidInstanceStatus"
+func (c *Client) ModifyDatabaseOwnerWithContext(ctx context.Context, request *ModifyDatabaseOwnerRequest) (response *ModifyDatabaseOwnerResponse, err error) {
+    if request == nil {
+        request = NewModifyDatabaseOwnerRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyDatabaseOwner")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDatabaseOwner require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDatabaseOwnerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyMaintainTimeWindowRequest() (request *ModifyMaintainTimeWindowRequest) {
+    request = &ModifyMaintainTimeWindowRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "ModifyMaintainTimeWindow")
+    
+    
+    return
+}
+
+func NewModifyMaintainTimeWindowResponse() (response *ModifyMaintainTimeWindowResponse) {
+    response = &ModifyMaintainTimeWindowResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyMaintainTimeWindow
+// This API is used to modify the instance maintenance window.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) ModifyMaintainTimeWindow(request *ModifyMaintainTimeWindowRequest) (response *ModifyMaintainTimeWindowResponse, err error) {
+    return c.ModifyMaintainTimeWindowWithContext(context.Background(), request)
+}
+
+// ModifyMaintainTimeWindow
+// This API is used to modify the instance maintenance window.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) ModifyMaintainTimeWindowWithContext(ctx context.Context, request *ModifyMaintainTimeWindowRequest) (response *ModifyMaintainTimeWindowResponse, err error) {
+    if request == nil {
+        request = NewModifyMaintainTimeWindowRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyMaintainTimeWindow")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyMaintainTimeWindow require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyMaintainTimeWindowResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyParameterTemplateRequest() (request *ModifyParameterTemplateRequest) {
     request = &ModifyParameterTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6289,6 +7373,92 @@ func (c *Client) ModifyParameterTemplateWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewModifyParameterTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyReadOnlyDBInstanceWeightRequest() (request *ModifyReadOnlyDBInstanceWeightRequest) {
+    request = &ModifyReadOnlyDBInstanceWeightRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "ModifyReadOnlyDBInstanceWeight")
+    
+    
+    return
+}
+
+func NewModifyReadOnlyDBInstanceWeightResponse() (response *ModifyReadOnlyDBInstanceWeightResponse) {
+    response = &ModifyReadOnlyDBInstanceWeightResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyReadOnlyDBInstanceWeight
+// This API is used to modify the read-only instance weight.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_ILLEGALROINSTANCENUM = "FailedOperation.IllegalROInstanceNum"
+//  FAILEDOPERATION_ROGROUPMASTERINSTANCENOTRIGHT = "FailedOperation.ROGroupMasterInstanceNotRight"
+//  FAILEDOPERATION_ROGROUPNOTFOUNDERROR = "FailedOperation.ROGroupNotFoundError"
+//  INSTANCENOTEXIST = "InstanceNotExist"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INVALIDINSTANCESTATUS = "InvalidInstanceStatus"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_INVALIDREADONLYGROUPSTATUS = "InvalidParameterValue.InvalidReadOnlyGroupStatus"
+//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
+//  INVALIDPARAMETERVALUE_READONLYGROUPNOTEXIST = "InvalidParameterValue.ReadOnlyGroupNotExist"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  OPERATIONDENIED_ROGROUPSTATUSERROR = "OperationDenied.ROGroupStatusError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+//  RESOURCEUNAVAILABLE_INVALIDINSTANCESTATUS = "ResourceUnavailable.InvalidInstanceStatus"
+func (c *Client) ModifyReadOnlyDBInstanceWeight(request *ModifyReadOnlyDBInstanceWeightRequest) (response *ModifyReadOnlyDBInstanceWeightResponse, err error) {
+    return c.ModifyReadOnlyDBInstanceWeightWithContext(context.Background(), request)
+}
+
+// ModifyReadOnlyDBInstanceWeight
+// This API is used to modify the read-only instance weight.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_ILLEGALROINSTANCENUM = "FailedOperation.IllegalROInstanceNum"
+//  FAILEDOPERATION_ROGROUPMASTERINSTANCENOTRIGHT = "FailedOperation.ROGroupMasterInstanceNotRight"
+//  FAILEDOPERATION_ROGROUPNOTFOUNDERROR = "FailedOperation.ROGroupNotFoundError"
+//  INSTANCENOTEXIST = "InstanceNotExist"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INVALIDINSTANCESTATUS = "InvalidInstanceStatus"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_INVALIDREADONLYGROUPSTATUS = "InvalidParameterValue.InvalidReadOnlyGroupStatus"
+//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
+//  INVALIDPARAMETERVALUE_READONLYGROUPNOTEXIST = "InvalidParameterValue.ReadOnlyGroupNotExist"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  OPERATIONDENIED_ROGROUPSTATUSERROR = "OperationDenied.ROGroupStatusError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+//  RESOURCEUNAVAILABLE_INVALIDINSTANCESTATUS = "ResourceUnavailable.InvalidInstanceStatus"
+func (c *Client) ModifyReadOnlyDBInstanceWeightWithContext(ctx context.Context, request *ModifyReadOnlyDBInstanceWeightRequest) (response *ModifyReadOnlyDBInstanceWeightResponse, err error) {
+    if request == nil {
+        request = NewModifyReadOnlyDBInstanceWeightRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyReadOnlyDBInstanceWeight")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyReadOnlyDBInstanceWeight require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyReadOnlyDBInstanceWeightResponse()
     err = c.Send(request, response)
     return
 }
@@ -7345,6 +8515,80 @@ func (c *Client) SwitchDBInstancePrimaryWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewSwitchDBInstancePrimaryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUnlockAccountRequest() (request *UnlockAccountRequest) {
+    request = &UnlockAccountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "UnlockAccount")
+    
+    
+    return
+}
+
+func NewUnlockAccountResponse() (response *UnlockAccountResponse) {
+    response = &UnlockAccountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UnlockAccount
+// This API is used to unlock a database account. The account can log in to the database after being unlocked.
+//
+// error code that may be returned:
+//  DBERROR = "DBError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEERROR = "InvalidParameterValue.InvalidAccountNameError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
+//  INVALIDPARAMETERVALUE_INVALIDDATABASEOBJECTNAME = "InvalidParameterValue.InvalidDatabaseObjectName"
+//  INVALIDPARAMETERVALUE_PARAMETERLENGTHLIMITERROR = "InvalidParameterValue.ParameterLengthLimitError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) UnlockAccount(request *UnlockAccountRequest) (response *UnlockAccountResponse, err error) {
+    return c.UnlockAccountWithContext(context.Background(), request)
+}
+
+// UnlockAccount
+// This API is used to unlock a database account. The account can log in to the database after being unlocked.
+//
+// error code that may be returned:
+//  DBERROR = "DBError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEERROR = "InvalidParameterValue.InvalidAccountNameError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
+//  INVALIDPARAMETERVALUE_INVALIDDATABASEOBJECTNAME = "InvalidParameterValue.InvalidDatabaseObjectName"
+//  INVALIDPARAMETERVALUE_PARAMETERLENGTHLIMITERROR = "InvalidParameterValue.ParameterLengthLimitError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) UnlockAccountWithContext(ctx context.Context, request *UnlockAccountRequest) (response *UnlockAccountResponse, err error) {
+    if request == nil {
+        request = NewUnlockAccountRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "UnlockAccount")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UnlockAccount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUnlockAccountResponse()
     err = c.Send(request, response)
     return
 }

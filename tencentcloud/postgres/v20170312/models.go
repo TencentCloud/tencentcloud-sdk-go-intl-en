@@ -27,17 +27,29 @@ type AccountInfo struct {
 	// Account
 	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
-	// Account remarks
+	// Specifies the account remark.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
-	// Account status. 1: creating, 2: normal, 3: modifying, 4: resetting password, -1: deleting
+	// Account status. valid values: 1-creating, 2-normal, 3-modifying, 4-resetting password, 5-locked, -1-deleting.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Account creation time
+	// Creation time.
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Account last modified time
+	// Last update time of the account.
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Specifies the last modified time of the account.
+	// 
+	// This field will only take effect after 2025-10-31. No matter whether the password is modified before, the value will be the default value: 0000-00-00 00:00:00
+	// Indicates that this field is updated only when the password is modified via the cloud API or the console.
+	PasswordUpdateTime *string `json:"PasswordUpdateTime,omitnil,omitempty" name:"PasswordUpdateTime"`
+
+	// Account type. valid values: normal, tencentDBSuper. normal references a general user, tencentDBSuper possesses the pg_tencentdb_superuser user role.
+	UserType *string `json:"UserType,omitnil,omitempty" name:"UserType"`
+
+	// Specifies whether CAM verification is enabled for the user account.
+	OpenCam *bool `json:"OpenCam,omitnil,omitempty" name:"OpenCam"`
 }
 
 // Predefined struct for user
@@ -146,7 +158,7 @@ type AnalysisItems struct {
 }
 
 type BackupDownloadRestriction struct {
-	// Type of the network restrictions for downloading backup files. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+	// Backup file download limit type. valid values: NONE (unlimited, allows download from both private and public networks), INTRANET (only allows private network download), CUSTOMIZE (custom limits for download by vpc or ip). when the parameter value is CUSTOMIZE, at least one item must be filled in for vpc or ip information.
 	RestrictionType *string `json:"RestrictionType,omitnil,omitempty" name:"RestrictionType"`
 
 	// Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
@@ -215,13 +227,13 @@ type BaseBackup struct {
 	// Backup file name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Backup method, including physical and logical.
+	// Specifies the backup method: physical - physical backup, logical - logical backup.
 	BackupMethod *string `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
 
-	// Backup mode, including automatic and manual.
+	// Backup mode: automatic - automatic backup, manual - manual backup.
 	BackupMode *string `json:"BackupMode,omitnil,omitempty" name:"BackupMode"`
 
-	// Backup task status
+	// Backup task status. valid values: init, running, finished, failed, canceled.
 	State *string `json:"State,omitnil,omitempty" name:"State"`
 
 	// Backup set size in bytes
@@ -503,20 +515,20 @@ func (r *CloneDBInstanceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CloseDBExtranetAccessRequestParams struct {
-	// Instance ID in the format of postgres-6r233v55
+	// Specifies the instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en). such as postgres-6r233v55.
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// Whether to disable public network access over IPv6 address. Valid values: 1 (yes), 0 (no)
+	// Specifies whether to close public network Ipv6. 1: yes. 0: no. default value: 0.
 	IsIpv6 *int64 `json:"IsIpv6,omitnil,omitempty" name:"IsIpv6"`
 }
 
 type CloseDBExtranetAccessRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of postgres-6r233v55
+	// Specifies the instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en). such as postgres-6r233v55.
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// Whether to disable public network access over IPv6 address. Valid values: 1 (yes), 0 (no)
+	// Specifies whether to close public network Ipv6. 1: yes. 0: no. default value: 0.
 	IsIpv6 *int64 `json:"IsIpv6,omitnil,omitempty" name:"IsIpv6"`
 }
 
@@ -542,8 +554,11 @@ func (r *CloseDBExtranetAccessRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CloseDBExtranetAccessResponseParams struct {
-	// Async task flow ID
+	// Process ID. FlowId is equivalent to TaskId.
 	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// Task ID.
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -627,15 +642,221 @@ func (r *CloseServerlessDBExtranetAccessResponse) FromJsonString(s string) error
 }
 
 // Predefined struct for user
+type CreateAccountRequestParams struct {
+	// Instance ID. can be obtained through the DescribeDBInstances api (https://www.tencentcloud.com/document/product/409/16773?lang=en).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// The name of the account created. Consists of letters (a-z, A-Z), numbers (0-9), underscores (_), starts with a letter or (_), up to 63 characters. Cannot use system reserved keywords, cannot be postgres, and cannot begin with pg_or tencentdb_
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Account type. currently supported: normal, tencentDBSuper. normal references a general user, tencentDBSuper is an account that possesses the pg_tencentdb_superuser role.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Specifies the corresponding password for the account. the password rules are as follows:.
+	// <Li>Specifies a length of 8 to 32 characters. a password of more than 12 characters is recommended.</li>.
+	// <Li>Cannot start with "/".</li>.
+	// <Li>Specifies the following four items must be included.</li>.
+	// 
+	// Valid values: a to z (lowercase letters).           
+	// Uppercase letters: A - Z.
+	// Valid values: 0 - 9.
+	// Special symbols: ()`~!@#$%^&*-+=_|{}[]:<>,.?/.
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// Account remark. only allow english letters, digits, underscore, hyphen, and chinese characters, limited to 60 characters.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Specifies whether CAM verification is enabled for the account.
+	OpenCam *bool `json:"OpenCam,omitnil,omitempty" name:"OpenCam"`
+}
+
+type CreateAccountRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. can be obtained through the DescribeDBInstances api (https://www.tencentcloud.com/document/product/409/16773?lang=en).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// The name of the account created. Consists of letters (a-z, A-Z), numbers (0-9), underscores (_), starts with a letter or (_), up to 63 characters. Cannot use system reserved keywords, cannot be postgres, and cannot begin with pg_or tencentdb_
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Account type. currently supported: normal, tencentDBSuper. normal references a general user, tencentDBSuper is an account that possesses the pg_tencentdb_superuser role.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Specifies the corresponding password for the account. the password rules are as follows:.
+	// <Li>Specifies a length of 8 to 32 characters. a password of more than 12 characters is recommended.</li>.
+	// <Li>Cannot start with "/".</li>.
+	// <Li>Specifies the following four items must be included.</li>.
+	// 
+	// Valid values: a to z (lowercase letters).           
+	// Uppercase letters: A - Z.
+	// Valid values: 0 - 9.
+	// Special symbols: ()`~!@#$%^&*-+=_|{}[]:<>,.?/.
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// Account remark. only allow english letters, digits, underscore, hyphen, and chinese characters, limited to 60 characters.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Specifies whether CAM verification is enabled for the account.
+	OpenCam *bool `json:"OpenCam,omitnil,omitempty" name:"OpenCam"`
+}
+
+func (r *CreateAccountRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAccountRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "UserName")
+	delete(f, "Type")
+	delete(f, "Password")
+	delete(f, "Remark")
+	delete(f, "OpenCam")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAccountRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAccountResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateAccountResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAccountResponseParams `json:"Response"`
+}
+
+func (r *CreateAccountResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAccountResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateBackupPlanRequestParams struct {
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Specifies the name of the backup plan.
+	PlanName *string `json:"PlanName,omitnil,omitempty" name:"PlanName"`
+
+	// Specifies the schedule type of the backup created. currently only support month.
+	BackupPeriodType *string `json:"BackupPeriodType,omitnil,omitempty" name:"BackupPeriodType"`
+
+	// Backup date. example: enable backup on the 2nd of every month.
+	BackupPeriod []*string `json:"BackupPeriod,omitnil,omitempty" name:"BackupPeriod"`
+
+	// Specifies the backup start time. if not passed, it follows the default backup plan.
+	MinBackupStartTime *string `json:"MinBackupStartTime,omitnil,omitempty" name:"MinBackupStartTime"`
+
+	// Backup end time. follows the default plan if not specified.
+	MaxBackupStartTime *string `json:"MaxBackupStartTime,omitnil,omitempty" name:"MaxBackupStartTime"`
+
+	// Specifies the data backup retention duration in days. value range: [0,30000).
+	// BackupPeriodType defaults to 7 when set to week and 31 when set to month.
+	BaseBackupRetentionPeriod *uint64 `json:"BaseBackupRetentionPeriod,omitnil,omitempty" name:"BaseBackupRetentionPeriod"`
+}
+
+type CreateBackupPlanRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Specifies the name of the backup plan.
+	PlanName *string `json:"PlanName,omitnil,omitempty" name:"PlanName"`
+
+	// Specifies the schedule type of the backup created. currently only support month.
+	BackupPeriodType *string `json:"BackupPeriodType,omitnil,omitempty" name:"BackupPeriodType"`
+
+	// Backup date. example: enable backup on the 2nd of every month.
+	BackupPeriod []*string `json:"BackupPeriod,omitnil,omitempty" name:"BackupPeriod"`
+
+	// Specifies the backup start time. if not passed, it follows the default backup plan.
+	MinBackupStartTime *string `json:"MinBackupStartTime,omitnil,omitempty" name:"MinBackupStartTime"`
+
+	// Backup end time. follows the default plan if not specified.
+	MaxBackupStartTime *string `json:"MaxBackupStartTime,omitnil,omitempty" name:"MaxBackupStartTime"`
+
+	// Specifies the data backup retention duration in days. value range: [0,30000).
+	// BackupPeriodType defaults to 7 when set to week and 31 when set to month.
+	BaseBackupRetentionPeriod *uint64 `json:"BaseBackupRetentionPeriod,omitnil,omitempty" name:"BaseBackupRetentionPeriod"`
+}
+
+func (r *CreateBackupPlanRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateBackupPlanRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "PlanName")
+	delete(f, "BackupPeriodType")
+	delete(f, "BackupPeriod")
+	delete(f, "MinBackupStartTime")
+	delete(f, "MaxBackupStartTime")
+	delete(f, "BaseBackupRetentionPeriod")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateBackupPlanRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateBackupPlanResponseParams struct {
+	// Backup policy ID.
+	PlanId *string `json:"PlanId,omitnil,omitempty" name:"PlanId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateBackupPlanResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateBackupPlanResponseParams `json:"Response"`
+}
+
+func (r *CreateBackupPlanResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateBackupPlanResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateBaseBackupRequestParams struct {
-	// Instance ID
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 }
 
 type CreateBaseBackupRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 }
 
@@ -685,7 +906,7 @@ func (r *CreateBaseBackupResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateDBInstanceNetworkAccessRequestParams struct {
-	// Instance ID in the format of postgres-6bwgamo3.
+	// Specifies the instance ID, such as postgres-6bwgamo3. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
 	// Unified VPC ID.
@@ -697,14 +918,14 @@ type CreateDBInstanceNetworkAccessRequestParams struct {
 	// Whether to manually assign the VIP. Valid values: `true` (manually assign), `false` (automatically assign).
 	IsAssignVip *bool `json:"IsAssignVip,omitnil,omitempty" name:"IsAssignVip"`
 
-	// Target VIP.
+	// Target VIP address. when this parameter is not specified and IsAssignVip is true, the system automatically assigns a VIP by default.
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 }
 
 type CreateDBInstanceNetworkAccessRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of postgres-6bwgamo3.
+	// Specifies the instance ID, such as postgres-6bwgamo3. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
 	// Unified VPC ID.
@@ -716,7 +937,7 @@ type CreateDBInstanceNetworkAccessRequest struct {
 	// Whether to manually assign the VIP. Valid values: `true` (manually assign), `false` (automatically assign).
 	IsAssignVip *bool `json:"IsAssignVip,omitnil,omitempty" name:"IsAssignVip"`
 
-	// Target VIP.
+	// Target VIP address. when this parameter is not specified and IsAssignVip is true, the system automatically assigns a VIP by default.
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 }
 
@@ -745,9 +966,11 @@ func (r *CreateDBInstanceNetworkAccessRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateDBInstanceNetworkAccessResponseParams struct {
-	// Task ID.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Process ID. FlowId is equivalent to TaskId.
 	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// Task ID.
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -968,6 +1191,101 @@ func (r *CreateDBInstancesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateDBInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDatabaseRequestParams struct {
+	// Specifies the instance ID, such as postgres-6fego161. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/api/409/16773?from_cn_redirect=1).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Specifies the user-created database name.
+	// Name specification: consists of letters (a-z, a-z), digits (0-9), and underscores (_), starting with a letter or underscore (_), up to 63 characters. system reserved keywords cannot be used, and 'postgres' is not allowed.
+	DatabaseName *string `json:"DatabaseName,omitnil,omitempty" name:"DatabaseName"`
+
+	// Owner of the database. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1).
+	DatabaseOwner *string `json:"DatabaseOwner,omitnil,omitempty" name:"DatabaseOwner"`
+
+	// Specifies the character encoding of the database.
+	// Supported character sets include UTF8, LATIN1, LATIN2, WIN1250, WIN1251, WIN1252, KOI8R, EUC_JP, and EUC_KR.
+	// Default value: UTF8.
+	Encoding *string `json:"Encoding,omitnil,omitempty" name:"Encoding"`
+
+	// Specifies the database sorting rule.
+	Collate *string `json:"Collate,omitnil,omitempty" name:"Collate"`
+
+	// Specifies the character category of the database.
+	Ctype *string `json:"Ctype,omitnil,omitempty" name:"Ctype"`
+}
+
+type CreateDatabaseRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the instance ID, such as postgres-6fego161. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/api/409/16773?from_cn_redirect=1).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Specifies the user-created database name.
+	// Name specification: consists of letters (a-z, a-z), digits (0-9), and underscores (_), starting with a letter or underscore (_), up to 63 characters. system reserved keywords cannot be used, and 'postgres' is not allowed.
+	DatabaseName *string `json:"DatabaseName,omitnil,omitempty" name:"DatabaseName"`
+
+	// Owner of the database. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1).
+	DatabaseOwner *string `json:"DatabaseOwner,omitnil,omitempty" name:"DatabaseOwner"`
+
+	// Specifies the character encoding of the database.
+	// Supported character sets include UTF8, LATIN1, LATIN2, WIN1250, WIN1251, WIN1252, KOI8R, EUC_JP, and EUC_KR.
+	// Default value: UTF8.
+	Encoding *string `json:"Encoding,omitnil,omitempty" name:"Encoding"`
+
+	// Specifies the database sorting rule.
+	Collate *string `json:"Collate,omitnil,omitempty" name:"Collate"`
+
+	// Specifies the character category of the database.
+	Ctype *string `json:"Ctype,omitnil,omitempty" name:"Ctype"`
+}
+
+func (r *CreateDatabaseRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDatabaseRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "DatabaseName")
+	delete(f, "DatabaseOwner")
+	delete(f, "Encoding")
+	delete(f, "Collate")
+	delete(f, "Ctype")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDatabaseRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDatabaseResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateDatabaseResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateDatabaseResponseParams `json:"Response"`
+}
+
+func (r *CreateDatabaseResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDatabaseResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1583,7 +1901,7 @@ func (r *CreateReadOnlyDBInstanceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateReadOnlyGroupNetworkAccessRequestParams struct {
-	// RO group ID in the format of pgro-4t9c6g7k.
+	// ROGroupId specifies the read-only group ID in the format of pgrogrp-4t9c6g7k. it can be obtained through the DescribeReadOnlyGroups api (https://www.tencentcloud.com/document/product/409/39725?lang=en).
 	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitnil,omitempty" name:"ReadOnlyGroupId"`
 
 	// Unified VPC ID.
@@ -1595,14 +1913,14 @@ type CreateReadOnlyGroupNetworkAccessRequestParams struct {
 	// Whether to manually assign the VIP. Valid values: `true` (manually assign), `false` (automatically assign).
 	IsAssignVip *bool `json:"IsAssignVip,omitnil,omitempty" name:"IsAssignVip"`
 
-	// Target VIP.
+	// Target VIP address. when this parameter is not specified and IsAssignVip is true, the system automatically assigns a VIP by default.
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 }
 
 type CreateReadOnlyGroupNetworkAccessRequest struct {
 	*tchttp.BaseRequest
 	
-	// RO group ID in the format of pgro-4t9c6g7k.
+	// ROGroupId specifies the read-only group ID in the format of pgrogrp-4t9c6g7k. it can be obtained through the DescribeReadOnlyGroups api (https://www.tencentcloud.com/document/product/409/39725?lang=en).
 	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitnil,omitempty" name:"ReadOnlyGroupId"`
 
 	// Unified VPC ID.
@@ -1614,7 +1932,7 @@ type CreateReadOnlyGroupNetworkAccessRequest struct {
 	// Whether to manually assign the VIP. Valid values: `true` (manually assign), `false` (automatically assign).
 	IsAssignVip *bool `json:"IsAssignVip,omitnil,omitempty" name:"IsAssignVip"`
 
-	// Target VIP.
+	// Target VIP address. when this parameter is not specified and IsAssignVip is true, the system automatically assigns a VIP by default.
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 }
 
@@ -1643,9 +1961,11 @@ func (r *CreateReadOnlyGroupNetworkAccessRequest) FromJsonString(s string) error
 
 // Predefined struct for user
 type CreateReadOnlyGroupNetworkAccessResponseParams struct {
-	// Task ID.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Process ID. FlowId is equivalent to TaskId.
 	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// Task ID.
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -2112,22 +2432,232 @@ type DBNode struct {
 	DedicatedClusterId *string `json:"DedicatedClusterId,omitnil,omitempty" name:"DedicatedClusterId"`
 }
 
+type Database struct {
+	// Database name
+	DatabaseName *string `json:"DatabaseName,omitnil,omitempty" name:"DatabaseName"`
+
+	// Specifies the database owner.
+	DatabaseOwner *string `json:"DatabaseOwner,omitnil,omitempty" name:"DatabaseOwner"`
+
+	// Specifies the database character encoding.
+	Encoding *string `json:"Encoding,omitnil,omitempty" name:"Encoding"`
+
+	// Specifies the database sorting rule.
+	Collate *string `json:"Collate,omitnil,omitempty" name:"Collate"`
+
+	// Specifies the character category of the database.
+	Ctype *string `json:"Ctype,omitnil,omitempty" name:"Ctype"`
+
+	// Specifies whether the database allows connections.
+	AllowConn *bool `json:"AllowConn,omitnil,omitempty" name:"AllowConn"`
+
+	// Maximum number of connections for the database. -1 indicates unlimited.
+	ConnLimit *int64 `json:"ConnLimit,omitnil,omitempty" name:"ConnLimit"`
+
+	// Specifies the database permission list.
+	Privileges *string `json:"Privileges,omitnil,omitempty" name:"Privileges"`
+}
+
+type DatabaseObject struct {
+	// Specifies the supported object types in the database: account, database, schema, sequence, procedure, type, function, table, view, matview, column.
+	ObjectType *string `json:"ObjectType,omitnil,omitempty" name:"ObjectType"`
+
+	// Specifies the database object name.
+	ObjectName *string `json:"ObjectName,omitnil,omitempty" name:"ObjectName"`
+
+	// Describes the database object and the database name it belongs to. this parameter is required when the description object type is not database.
+	DatabaseName *string `json:"DatabaseName,omitnil,omitempty" name:"DatabaseName"`
+
+	// Specifies the schema name of the database object to describe. this parameter is required when the description object is not database or schema.
+	SchemaName *string `json:"SchemaName,omitnil,omitempty" name:"SchemaName"`
+
+	// Specifies the database object to describe and the table name it belongs to. this parameter is required when the object type is column.
+	TableName *string `json:"TableName,omitnil,omitempty" name:"TableName"`
+}
+
+type DatabasePrivilege struct {
+	// The database object. when ObjectType is database, DatabaseName/SchemaName/TableName can be empty. when ObjectType is schema, SchemaName/TableName can be empty. when ObjectType is column, TableName cannot be empty. other cases can be empty.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Object *DatabaseObject `json:"Object,omitnil,omitempty" name:"Object"`
+
+	// Specifies the permission list of the specified account for the database object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PrivilegeSet []*string `json:"PrivilegeSet,omitnil,omitempty" name:"PrivilegeSet"`
+}
+
+type DedicatedCluster struct {
+	// CDC ID.
+	DedicatedClusterId *string `json:"DedicatedClusterId,omitnil,omitempty" name:"DedicatedClusterId"`
+
+	// Dedicated cluster name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Specifies the AZ of the exclusive cluster.
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// Disaster recovery cluster.
+	StandbyDedicatedClusterSet []*string `json:"StandbyDedicatedClusterSet,omitnil,omitempty" name:"StandbyDedicatedClusterSet"`
+
+	// Specifies the instance count.
+	InstanceCount *int64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
+
+	// Total number of cpus.
+	CpuTotal *int64 `json:"CpuTotal,omitnil,omitempty" name:"CpuTotal"`
+
+	// Specifies the available amount of Cpu.
+	CpuAvailable *int64 `json:"CpuAvailable,omitnil,omitempty" name:"CpuAvailable"`
+
+	// Total memory capacity in GB.
+	MemTotal *int64 `json:"MemTotal,omitnil,omitempty" name:"MemTotal"`
+
+	// Available memory in GB.
+	MemAvailable *int64 `json:"MemAvailable,omitnil,omitempty" name:"MemAvailable"`
+
+	// Total disk capacity (unit: GB).
+	DiskTotal *int64 `json:"DiskTotal,omitnil,omitempty" name:"DiskTotal"`
+
+	// Disk availability (unit: GB).
+	DiskAvailable *int64 `json:"DiskAvailable,omitnil,omitempty" name:"DiskAvailable"`
+}
+
 // Predefined struct for user
-type DeleteBaseBackupRequestParams struct {
-	// Instance ID
+type DeleteAccountRequestParams struct {
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/api/409/16773?from_cn_redirect=1).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// Data Backup ID.
+	// Account name to be deleted. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1).
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+}
+
+type DeleteAccountRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/api/409/16773?from_cn_redirect=1).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Account name to be deleted. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1).
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+}
+
+func (r *DeleteAccountRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAccountRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "UserName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAccountRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteAccountResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteAccountResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteAccountResponseParams `json:"Response"`
+}
+
+func (r *DeleteAccountResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAccountResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteBackupPlanRequestParams struct {
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Backup plan ID. obtain through the api [DescribeBackupPlans](https://www.tencentcloud.com/document/product/409/45151?lang=en).
+	PlanId *string `json:"PlanId,omitnil,omitempty" name:"PlanId"`
+}
+
+type DeleteBackupPlanRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Backup plan ID. obtain through the api [DescribeBackupPlans](https://www.tencentcloud.com/document/product/409/45151?lang=en).
+	PlanId *string `json:"PlanId,omitnil,omitempty" name:"PlanId"`
+}
+
+func (r *DeleteBackupPlanRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteBackupPlanRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "PlanId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteBackupPlanRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteBackupPlanResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteBackupPlanResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteBackupPlanResponseParams `json:"Response"`
+}
+
+func (r *DeleteBackupPlanResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteBackupPlanResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteBaseBackupRequestParams struct {
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Data backup ID. obtain through the api [DescribeBaseBackups](https://www.tencentcloud.com/document/product/409/54343?lang=en). automatic backup sets cannot be deleted within 7 days.
 	BaseBackupId *string `json:"BaseBackupId,omitnil,omitempty" name:"BaseBackupId"`
 }
 
 type DeleteBaseBackupRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// Data Backup ID.
+	// Data backup ID. obtain through the api [DescribeBaseBackups](https://www.tencentcloud.com/document/product/409/54343?lang=en). automatic backup sets cannot be deleted within 7 days.
 	BaseBackupId *string `json:"BaseBackupId,omitnil,omitempty" name:"BaseBackupId"`
 }
 
@@ -2566,39 +3096,114 @@ func (r *DeleteServerlessDBInstanceResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type DescribeAccountsRequestParams struct {
-	// Instance ID in the format of postgres-6fego161
+type DescribeAccountPrivilegesRequestParams struct {
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// Number of entries returned per page. Default value: 10. Value range: 1–100.
+	// Describes the permissions owned by this account for a database object. the account name can be obtained through the [DescribeAccounts](https://www.tencentcloud.com/document/product/409/18109?lang=en) api.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Specifies the database object information to query.
+	DatabaseObjectSet []*DatabaseObject `json:"DatabaseObjectSet,omitnil,omitempty" name:"DatabaseObjectSet"`
+}
+
+type DescribeAccountPrivilegesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Describes the permissions owned by this account for a database object. the account name can be obtained through the [DescribeAccounts](https://www.tencentcloud.com/document/product/409/18109?lang=en) api.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Specifies the database object information to query.
+	DatabaseObjectSet []*DatabaseObject `json:"DatabaseObjectSet,omitnil,omitempty" name:"DatabaseObjectSet"`
+}
+
+func (r *DescribeAccountPrivilegesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccountPrivilegesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "UserName")
+	delete(f, "DatabaseObjectSet")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccountPrivilegesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAccountPrivilegesResponseParams struct {
+	// Specifies that the user has CREATE, CONNECT, and TEMPORARY permissions on the database user_database.
+	PrivilegeSet []*DatabasePrivilege `json:"PrivilegeSet,omitnil,omitempty" name:"PrivilegeSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAccountPrivilegesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAccountPrivilegesResponseParams `json:"Response"`
+}
+
+func (r *DescribeAccountPrivilegesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccountPrivilegesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAccountsRequestParams struct {
+	// Instance ID, such as postgres-6fego161. can be obtained through the DescribeDBInstances api (https://www.tencentcloud.com/document/product/409/16773?lang=en).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Pagination return. maximum return per page. default 20. value range 1-100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Data offset, which starts from 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Whether to sort by creation time or username. Valid values: `createTime` (sort by creation time), `name` (sort by username)
+	// Return data is sorted by creation time or username. valid values: createTime, name, updateTime. createTime - sort by creation time; name - sort by username; updateTime - sort by update time.
+	// Default value: createTime.
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// Whether returns are sorted in ascending or descending order. Valid values: `desc` (descending), `asc` (ascending)
+	// Specifies whether the returned results are in ascending or descending order. valid values: desc or asc. desc - descending order; asc - ascending order.
+	// Default value: desc.
 	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
 }
 
 type DescribeAccountsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of postgres-6fego161
+	// Instance ID, such as postgres-6fego161. can be obtained through the DescribeDBInstances api (https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// Number of entries returned per page. Default value: 10. Value range: 1–100.
+	// Pagination return. maximum return per page. default 20. value range 1-100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Data offset, which starts from 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Whether to sort by creation time or username. Valid values: `createTime` (sort by creation time), `name` (sort by username)
+	// Return data is sorted by creation time or username. valid values: createTime, name, updateTime. createTime - sort by creation time; name - sort by username; updateTime - sort by update time.
+	// Default value: createTime.
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// Whether returns are sorted in ascending or descending order. Valid values: `desc` (descending), `asc` (ascending)
+	// Specifies whether the returned results are in ascending or descending order. valid values: desc or asc. desc - descending order; asc - ascending order.
+	// Default value: desc.
 	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
 }
 
@@ -2630,7 +3235,7 @@ type DescribeAccountsResponseParams struct {
 	// Number of date entries returned for this API call.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Detailed account list information.
+	// Detailed account list information. when the CreateTime field is 0000-00-00 00:00:00, it means the corresponding account is created by direct connection database, not through the CreateAccount api.
 	Details []*AccountInfo `json:"Details,omitnil,omitempty" name:"Details"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2785,7 +3390,7 @@ func (r *DescribeBackupDownloadRestrictionResponse) FromJsonString(s string) err
 
 // Predefined struct for user
 type DescribeBackupDownloadURLRequestParams struct {
-	// Instance ID.
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
 	// Backup type. Valid values: `LogBackup`, `BaseBackup`.
@@ -2794,7 +3399,7 @@ type DescribeBackupDownloadURLRequestParams struct {
 	// Unique backup ID.
 	BackupId *string `json:"BackupId,omitnil,omitempty" name:"BackupId"`
 
-	// Validity period of a URL, which is 12 hours by default.
+	// Validity time of the connection. value range: [0,36]. default value: 12 hours.
 	URLExpireTime *uint64 `json:"URLExpireTime,omitnil,omitempty" name:"URLExpireTime"`
 
 	// Backup download restriction
@@ -2804,7 +3409,7 @@ type DescribeBackupDownloadURLRequestParams struct {
 type DescribeBackupDownloadURLRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
 	// Backup type. Valid values: `LogBackup`, `BaseBackup`.
@@ -2813,7 +3418,7 @@ type DescribeBackupDownloadURLRequest struct {
 	// Unique backup ID.
 	BackupId *string `json:"BackupId,omitnil,omitempty" name:"BackupId"`
 
-	// Validity period of a URL, which is 12 hours by default.
+	// Validity time of the connection. value range: [0,36]. default value: 12 hours.
 	URLExpireTime *uint64 `json:"URLExpireTime,omitnil,omitempty" name:"URLExpireTime"`
 
 	// Backup download restriction
@@ -3105,7 +3710,12 @@ type DescribeBaseBackupsRequestParams struct {
 	// Maximum end time of a backup in the format of `2018-01-01 00:00:00`. It is the current time by default.
 	MaxFinishTime *string `json:"MaxFinishTime,omitnil,omitempty" name:"MaxFinishTime"`
 
-	// Filter instances by using one or more filters. Valid values:  `db-instance-idFilter` (filter by instance ID in string),  `db-instance-name` (filter by instance name in string),  `db-instance-ip` (filter by instance VPC IP address in string),  `base-backup-id` (filter by backup set ID in string), 
+	// Query using one or more filter criteria. filter criteria currently supported include:.
+	// db-instance-id: filter by instance id (string type).
+	// db-instance-name: specifies the instance name to filter by, supports fuzzy matching (string type).
+	// db-instance-ip: specifies the instance VPC ip for filtering (string type).
+	// base-backup-id: filter by backup set id (in string format).
+	// db-instance-status: filter by instance status (in string format). valid values refer to the DBInstanceStatus field in the DBInstance structure (https://www.tencentcloud.com/document/product/409/16778#dbinstance).
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// The maximum number of results returned per page. Value range: 1-100. Default: `10`
@@ -3114,10 +3724,10 @@ type DescribeBaseBackupsRequestParams struct {
 	// Data offset, which starts from 0.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Sorting field. Valid values: `StartTime`, `FinishTime`, `Size`.
+	// Specifies the sorting field, supports StartTime, FinishTime, and Size. default value: StartTime.
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// Sorting order. Valid values: `asc` (ascending), `desc` (descending).
+	// Sorting method, including ascending: `asc` and descending: `desc`. the default value is `desc`.
 	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
 }
 
@@ -3130,7 +3740,12 @@ type DescribeBaseBackupsRequest struct {
 	// Maximum end time of a backup in the format of `2018-01-01 00:00:00`. It is the current time by default.
 	MaxFinishTime *string `json:"MaxFinishTime,omitnil,omitempty" name:"MaxFinishTime"`
 
-	// Filter instances by using one or more filters. Valid values:  `db-instance-idFilter` (filter by instance ID in string),  `db-instance-name` (filter by instance name in string),  `db-instance-ip` (filter by instance VPC IP address in string),  `base-backup-id` (filter by backup set ID in string), 
+	// Query using one or more filter criteria. filter criteria currently supported include:.
+	// db-instance-id: filter by instance id (string type).
+	// db-instance-name: specifies the instance name to filter by, supports fuzzy matching (string type).
+	// db-instance-ip: specifies the instance VPC ip for filtering (string type).
+	// base-backup-id: filter by backup set id (in string format).
+	// db-instance-status: filter by instance status (in string format). valid values refer to the DBInstanceStatus field in the DBInstance structure (https://www.tencentcloud.com/document/product/409/16778#dbinstance).
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// The maximum number of results returned per page. Value range: 1-100. Default: `10`
@@ -3139,10 +3754,10 @@ type DescribeBaseBackupsRequest struct {
 	// Data offset, which starts from 0.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Sorting field. Valid values: `StartTime`, `FinishTime`, `Size`.
+	// Specifies the sorting field, supports StartTime, FinishTime, and Size. default value: StartTime.
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// Sorting order. Valid values: `asc` (ascending), `desc` (descending).
+	// Sorting method, including ascending: `asc` and descending: `desc`. the default value is `desc`.
 	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
 }
 
@@ -3276,10 +3891,10 @@ func (r *DescribeClassesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCloneDBInstanceSpecRequestParams struct {
-	// Instance ID.
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// Basic backup set ID. Either this parameter or `RecoveryTargetTime` must be passed in. If both are passed in, only this parameter takes effect.
+	// Basic backup set ID. obtain through the api [DescribeBaseBackups](https://www.tencentcloud.com/document/product/409/54343?lang=en). this parameter and RecoveryTargetTime must be selected. if set simultaneously with RecoveryTargetTime, this parameter takes precedence.
 	BackupSetId *string `json:"BackupSetId,omitnil,omitempty" name:"BackupSetId"`
 
 	// Restoration time (UTC+8). Either this parameter or `BackupSetId` must be passed in.
@@ -3289,10 +3904,10 @@ type DescribeCloneDBInstanceSpecRequestParams struct {
 type DescribeCloneDBInstanceSpecRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// Basic backup set ID. Either this parameter or `RecoveryTargetTime` must be passed in. If both are passed in, only this parameter takes effect.
+	// Basic backup set ID. obtain through the api [DescribeBaseBackups](https://www.tencentcloud.com/document/product/409/54343?lang=en). this parameter and RecoveryTargetTime must be selected. if set simultaneously with RecoveryTargetTime, this parameter takes precedence.
 	BackupSetId *string `json:"BackupSetId,omitnil,omitempty" name:"BackupSetId"`
 
 	// Restoration time (UTC+8). Either this parameter or `BackupSetId` must be passed in.
@@ -3445,7 +4060,7 @@ func (r *DescribeDBBackupsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDBErrlogsRequestParams struct {
-	// Instance ID	
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
 	// u200cu200cu200cQuery start time in the format of 2018-01-01 00:00:00. The log is retained for seven days by default, so the start time must fall within the retention period.	
@@ -3470,7 +4085,7 @@ type DescribeDBErrlogsRequestParams struct {
 type DescribeDBErrlogsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID	
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
 	// u200cu200cu200cQuery start time in the format of 2018-01-01 00:00:00. The log is retained for seven days by default, so the start time must fall within the retention period.	
@@ -3687,7 +4302,7 @@ func (r *DescribeDBInstanceHAConfigResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDBInstanceParametersRequestParams struct {
-	// Instance ID
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
 	// Name of the parameter to be queried. If `ParamName` is left empty or not passed in, the list of all parameters will be returned.
@@ -3697,7 +4312,7 @@ type DescribeDBInstanceParametersRequestParams struct {
 type DescribeDBInstanceParametersRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
 	// Name of the parameter to be queried. If `ParamName` is left empty or not passed in, the list of all parameters will be returned.
@@ -3753,21 +4368,84 @@ func (r *DescribeDBInstanceParametersResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDBInstanceSSLConfigRequestParams struct {
+	// Specifies the instance ID, such as postgres-6bwgamo3. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+}
+
+type DescribeDBInstanceSSLConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the instance ID, such as postgres-6bwgamo3. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+}
+
+func (r *DescribeDBInstanceSSLConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstanceSSLConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstanceSSLConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBInstanceSSLConfigResponseParams struct {
+	// true represents enabled. false represents not enabled.
+	SSLEnabled *bool `json:"SSLEnabled,omitnil,omitempty" name:"SSLEnabled"`
+
+	// Certificate download url for the cloud root certificate.
+	CAUrl *string `json:"CAUrl,omitnil,omitempty" name:"CAUrl"`
+
+	// Specifies the intranet or public network connection address in the server certificate.
+	ConnectAddress *string `json:"ConnectAddress,omitnil,omitempty" name:"ConnectAddress"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDBInstanceSSLConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBInstanceSSLConfigResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBInstanceSSLConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstanceSSLConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDBInstanceSecurityGroupsRequestParams struct {
-	// Instance ID. Either this parameter or `ReadOnlyGroupId` must be passed in. If both parameters are passed in, `ReadOnlyGroupId` will be ignored.
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en). specify either DBInstanceId or ReadOnlyGroupId. if both are provided, ReadOnlyGroupId is ignored.
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// RO group ID. Either this parameter or `DBInstanceId` must be passed in. To query the security groups associated with the RO groups, only pass in `ReadOnlyGroupId`.
+	// ReadOnlyGroupId. specifies the read-only group ID, which can be obtained through the api [DescribeReadOnlyGroups](https://www.tencentcloud.com/document/product/409/39725?lang=en). valid values: DBInstanceId and ReadOnlyGroupId (at least one is required). if you need to query the associated security group of the read-only group, only ReadOnlyGroupId is required.
 	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitnil,omitempty" name:"ReadOnlyGroupId"`
 }
 
 type DescribeDBInstanceSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID. Either this parameter or `ReadOnlyGroupId` must be passed in. If both parameters are passed in, `ReadOnlyGroupId` will be ignored.
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en). specify either DBInstanceId or ReadOnlyGroupId. if both are provided, ReadOnlyGroupId is ignored.
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// RO group ID. Either this parameter or `DBInstanceId` must be passed in. To query the security groups associated with the RO groups, only pass in `ReadOnlyGroupId`.
+	// ReadOnlyGroupId. specifies the read-only group ID, which can be obtained through the api [DescribeReadOnlyGroups](https://www.tencentcloud.com/document/product/409/39725?lang=en). valid values: DBInstanceId and ReadOnlyGroupId (at least one is required). if you need to query the associated security group of the read-only group, only ReadOnlyGroupId is required.
 	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitnil,omitempty" name:"ReadOnlyGroupId"`
 }
 
@@ -4170,8 +4848,111 @@ func (r *DescribeDBXlogsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDatabaseObjectsRequestParams struct {
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/api/409/16773?from_cn_redirect=1).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Specifies the object type for querying. supported objects: database, schema, sequence, procedure, type, function, table, view, matview, column.
+	ObjectType *string `json:"ObjectType,omitnil,omitempty" name:"ObjectType"`
+
+	// Number of items displayed at a time. default 20. value range 0-100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Data offset, starting from 0.		
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Describes the database the query object belongs to. this parameter is required when the query object type is not database.
+	DatabaseName *string `json:"DatabaseName,omitnil,omitempty" name:"DatabaseName"`
+
+	// Specifies the mode belonging to the query object. this parameter is required when the query object type is not database or schema.
+	SchemaName *string `json:"SchemaName,omitnil,omitempty" name:"SchemaName"`
+
+	// Specifies the table belonging to the query object. this parameter is required when the query object type is column.
+	TableName *string `json:"TableName,omitnil,omitempty" name:"TableName"`
+}
+
+type DescribeDatabaseObjectsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/api/409/16773?from_cn_redirect=1).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Specifies the object type for querying. supported objects: database, schema, sequence, procedure, type, function, table, view, matview, column.
+	ObjectType *string `json:"ObjectType,omitnil,omitempty" name:"ObjectType"`
+
+	// Number of items displayed at a time. default 20. value range 0-100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Data offset, starting from 0.		
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Describes the database the query object belongs to. this parameter is required when the query object type is not database.
+	DatabaseName *string `json:"DatabaseName,omitnil,omitempty" name:"DatabaseName"`
+
+	// Specifies the mode belonging to the query object. this parameter is required when the query object type is not database or schema.
+	SchemaName *string `json:"SchemaName,omitnil,omitempty" name:"SchemaName"`
+
+	// Specifies the table belonging to the query object. this parameter is required when the query object type is column.
+	TableName *string `json:"TableName,omitnil,omitempty" name:"TableName"`
+}
+
+func (r *DescribeDatabaseObjectsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDatabaseObjectsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "ObjectType")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "DatabaseName")
+	delete(f, "SchemaName")
+	delete(f, "TableName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDatabaseObjectsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDatabaseObjectsResponseParams struct {
+	// Query object list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ObjectSet []*string `json:"ObjectSet,omitnil,omitempty" name:"ObjectSet"`
+
+	// Specifies the total number of objects.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDatabaseObjectsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDatabaseObjectsResponseParams `json:"Response"`
+}
+
+func (r *DescribeDatabaseObjectsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDatabaseObjectsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDatabasesRequestParams struct {
-	// Instance ID
+	// Instance ID. obtain through the API [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?from_cn_redirect=1).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
 	// Query using one or more filter criteria. Filter criteria currently supported include: database-name: filter by database name (in string format). Fuzzy matching is used to search for databases that meet the criteria.
@@ -4180,14 +4961,15 @@ type DescribeDatabasesRequestParams struct {
 	// Data offset, which starts from 0.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of items displayed at a time
+	// Number of items displayed at a time. the maximum value is recommended to be 100.
+	// Default value: 20.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeDatabasesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID. obtain through the API [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?from_cn_redirect=1).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
 	// Query using one or more filter criteria. Filter criteria currently supported include: database-name: filter by database name (in string format). Fuzzy matching is used to search for databases that meet the criteria.
@@ -4196,7 +4978,8 @@ type DescribeDatabasesRequest struct {
 	// Data offset, which starts from 0.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of items displayed at a time
+	// Number of items displayed at a time. the maximum value is recommended to be 100.
+	// Default value: 20.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -4230,6 +5013,9 @@ type DescribeDatabasesResponseParams struct {
 	// Total number of databases
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
+	// Specifies the database details list.
+	Databases []*Database `json:"Databases,omitnil,omitempty" name:"Databases"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -4247,6 +5033,65 @@ func (r *DescribeDatabasesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDatabasesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDedicatedClustersRequestParams struct {
+	// Query using one or more filter criteria. filter criteria currently supported include:.
+	// dedicated-cluster-id: filters by dedicated cluster id. string type.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeDedicatedClustersRequest struct {
+	*tchttp.BaseRequest
+	
+	// Query using one or more filter criteria. filter criteria currently supported include:.
+	// dedicated-cluster-id: filters by dedicated cluster id. string type.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeDedicatedClustersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDedicatedClustersRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDedicatedClustersRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDedicatedClustersResponseParams struct {
+	// Exclusive cluster information.
+	DedicatedClusterSet []*DedicatedCluster `json:"DedicatedClusterSet,omitnil,omitempty" name:"DedicatedClusterSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDedicatedClustersResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDedicatedClustersResponseParams `json:"Response"`
+}
+
+func (r *DescribeDedicatedClustersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDedicatedClustersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4320,14 +5165,14 @@ func (r *DescribeDefaultParametersResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeEncryptionKeysRequestParams struct {
-	// Instance ID
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 }
 
 type DescribeEncryptionKeysRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 }
 
@@ -4352,8 +5197,7 @@ func (r *DescribeEncryptionKeysRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeEncryptionKeysResponseParams struct {
-	// Instance key list
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Specifies the key information list of the instance.
 	EncryptionKeys []*EncryptionKey `json:"EncryptionKeys,omitnil,omitempty" name:"EncryptionKeys"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4481,6 +5325,72 @@ func (r *DescribeLogBackupsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeLogBackupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMaintainTimeWindowRequestParams struct {
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+}
+
+type DescribeMaintainTimeWindowRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+}
+
+func (r *DescribeMaintainTimeWindowRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMaintainTimeWindowRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMaintainTimeWindowRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMaintainTimeWindowResponseParams struct {
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Maintenance start time. time zone is UTC+8.
+	MaintainStartTime *string `json:"MaintainStartTime,omitnil,omitempty" name:"MaintainStartTime"`
+
+	// Maintenance duration. unit: hr.
+	MaintainDuration *uint64 `json:"MaintainDuration,omitnil,omitempty" name:"MaintainDuration"`
+
+	// Specifies the maintenance period.
+	MaintainWeekDays []*string `json:"MaintainWeekDays,omitnil,omitempty" name:"MaintainWeekDays"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeMaintainTimeWindowResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMaintainTimeWindowResponseParams `json:"Response"`
+}
+
+func (r *DescribeMaintainTimeWindowResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMaintainTimeWindowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4716,14 +5626,14 @@ func (r *DescribeParameterTemplatesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeParamsEventRequestParams struct {
-	// Instance ID
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 }
 
 type DescribeParamsEventRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 }
 
@@ -5311,6 +6221,115 @@ func (r *DescribeSlowQueryListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeTasksRequestParams struct {
+	// Query by task ID. the FlowId and TaskId returned in other cloud apis are equivalent.
+	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Query by database instance ID.
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Earliest start time of the task, such as 2024-08-23 00:00:00. default shows data within the last 180 days.
+	MinStartTime *string `json:"MinStartTime,omitnil,omitempty" name:"MinStartTime"`
+
+	// Latest start time of the task, such as 2024-08-23 00:00:00, defaults to the current time.
+	MaxStartTime *string `json:"MaxStartTime,omitnil,omitempty" name:"MaxStartTime"`
+
+	// Number of results displayed per page. value range 1-100. default 20.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Data offset, starting from 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field, supports StartTime and EndTime. defaults to StartTime.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Specifies the sorting method, including ascending: `asc` and descending: `desc`. defaults to `desc`.
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
+}
+
+type DescribeTasksRequest struct {
+	*tchttp.BaseRequest
+	
+	// Query by task ID. the FlowId and TaskId returned in other cloud apis are equivalent.
+	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Query by database instance ID.
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Earliest start time of the task, such as 2024-08-23 00:00:00. default shows data within the last 180 days.
+	MinStartTime *string `json:"MinStartTime,omitnil,omitempty" name:"MinStartTime"`
+
+	// Latest start time of the task, such as 2024-08-23 00:00:00, defaults to the current time.
+	MaxStartTime *string `json:"MaxStartTime,omitnil,omitempty" name:"MaxStartTime"`
+
+	// Number of results displayed per page. value range 1-100. default 20.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Data offset, starting from 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field, supports StartTime and EndTime. defaults to StartTime.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Specifies the sorting method, including ascending: `asc` and descending: `desc`. defaults to `desc`.
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
+}
+
+func (r *DescribeTasksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTasksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "DBInstanceId")
+	delete(f, "MinStartTime")
+	delete(f, "MaxStartTime")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "OrderBy")
+	delete(f, "OrderByType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTasksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTasksResponseParams struct {
+	// Number of queried tasks.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Task Information List
+	TaskSet []*TaskSet `json:"TaskSet,omitnil,omitempty" name:"TaskSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeTasksResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTasksResponseParams `json:"Response"`
+}
+
+func (r *DescribeTasksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTasksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeZonesRequestParams struct {
 
 }
@@ -5527,29 +6546,26 @@ type DurationAnalysis struct {
 }
 
 type EncryptionKey struct {
-	// Encrypted KeyId of KMS instance
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Specifies the KeyId for KMS instance encryption.
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
 
-	// Encryption key alias of KMS instance 
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Alias name of the KMS instance encryption Key.
 	KeyAlias *string `json:"KeyAlias,omitnil,omitempty" name:"KeyAlias"`
 
-	// Instance DEK ciphertext
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Specifies the ciphertext of the instance encryption key DEK.
 	DEKCipherTextBlob *string `json:"DEKCipherTextBlob,omitnil,omitempty" name:"DEKCipherTextBlob"`
 
-	// Whether the key is enabled. Valid values: `1` (yes), `0` (no)
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether the key is enabled. valid values: 1 (enabled), 0 (disabled).
 	IsEnabled *int64 `json:"IsEnabled,omitnil,omitempty" name:"IsEnabled"`
 
-	// Region where KMS key resides
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Specifies the region of the KMS key.
 	KeyRegion *string `json:"KeyRegion,omitnil,omitempty" name:"KeyRegion"`
 
-	// DEK key creation time
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Creation time of the DEK key.
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Specifies the Id of the KMS service cluster where the key resides. being empty indicates the key is in the default KMS cluster. a non-empty value indicates the key is in the specified KMS service cluster.
+	KMSClusterId *string `json:"KMSClusterId,omitnil,omitempty" name:"KMSClusterId"`
 }
 
 type ErrLogDetail struct {
@@ -5567,50 +6583,39 @@ type ErrLogDetail struct {
 }
 
 type EventInfo struct {
-	// Parameter name
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Parameter name.
 	ParamName *string `json:"ParamName,omitnil,omitempty" name:"ParamName"`
 
-	// Original parameter value
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Original parameter value.
 	OldValue *string `json:"OldValue,omitnil,omitempty" name:"OldValue"`
 
-	// New parameter value in this modification event
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// This modification specifies the expected parameter value.
 	NewValue *string `json:"NewValue,omitnil,omitempty" name:"NewValue"`
 
-	// Start time of parameter modification
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Specifies the start time for backend parameter modification.
 	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
 
-	// Start time when the modified parameter takes effect
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Specifies the start of effective time for the backend parameter.
 	EffectiveTime *string `json:"EffectiveTime,omitnil,omitempty" name:"EffectiveTime"`
 
-	// Modification status
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Modification status. valid values: in progress, success, paused.
 	State *string `json:"State,omitnil,omitempty" name:"State"`
 
-	// Operator (generally, the value is the UIN of a sub-user)
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Operator (normal: user sub UIN).
 	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 
-	// Event log
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Time log.
 	EventLog *string `json:"EventLog,omitnil,omitempty" name:"EventLog"`
 }
 
 type EventItem struct {
-	// Parameter name
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Parameter name.
 	ParamName *string `json:"ParamName,omitnil,omitempty" name:"ParamName"`
 
-	// The number of modification events
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Number of modified events.
 	EventCount *int64 `json:"EventCount,omitnil,omitempty" name:"EventCount"`
 
-	// Modification event details
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Last modification time.
 	EventDetail []*EventInfo `json:"EventDetail,omitnil,omitempty" name:"EventDetail"`
 }
 
@@ -5702,67 +6707,69 @@ func (r *InitDBInstancesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type InquiryPriceCreateDBInstancesRequestParams struct {
-	// AZ ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
+	// <p>Availability zone name. The value of this parameter can be obtained from the returned Zone field of the <a href="https://www.tencentcloud.com/document/product/409/16769?from_cn_redirect=1">DescribeZones</a> API.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeClasses` API.
+	// <p>Specification ID. The value of this parameter can be obtained from the returned SpecCode field of the <a href="https://www.tencentcloud.com/document/product/409/89019?from_cn_redirect=1">DescribeClasses</a> API.</p>
 	SpecCode *string `json:"SpecCode,omitnil,omitempty" name:"SpecCode"`
 
-	// Storage capacity size in GB.
+	// <p>Storage capacity, in GB. The value for this parameter must be set in increments of 10.</p>
 	Storage *uint64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
-	// Number of instances. Maximum value: 100. If you need to create more instances at a time, please contact customer service.
+	// <p>Instance quantity. The maximum allowed quantity is no more than 100. If you need to create more instances at a time, please contact customer service.</p>
 	InstanceCount *uint64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
 
-	// Length of purchase in months. Currently, only 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36 are supported.
+	// <p>Purchased duration, in months. Only 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36 are supported.</p>
 	Period *uint64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// [Disused] Billing ID, which can be obtained through the `Pid` field in the returned value of the `DescribeProductConfig` API.
+	// <p>[Deprecated and no longer effective] Billing ID. The value of this parameter can be obtained from the returned Pid field of the DescribeProductConfig API.</p>
 	Pid *uint64 `json:"Pid,omitnil,omitempty" name:"Pid"`
 
-	// Instance billing type. Valid value: POSTPAID_BY_HOUR (pay-as-you-go)
+	// <p>Instance billing type. Valid values: PREPAID (prepaid, also known as yearly/monthly subscription) and POSTPAID (pay-as-you-go).<br>Default value: PREPAID.</p>
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
-	// Instance type. Default value: `primary`. Valid values:
-	// `primary` (dual-server high-availability, one-primary-one-standby)
-	// `readonly` (read-only instance)
+	// <p>Instance type. The default value is primary. Valid values:<br>primary (dual-server high availability (one primary and one standby)).<br>readonly (read-only instance).</p>
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// <p>DB engine, default is postgresql, supports the following:<br>postgresql (TencentDB for PostgreSQL)<br>mssql_compatible (MSSQL-compatible - TencentDB for PostgreSQL)</p>
+	// <p>Database engine. The default value is postgresql. Valid values:<br>postgresql (TencentDB for PostgreSQL).<br>mssql_compatible (MSSQL compatible - TencentDB for PostgreSQL).</p>
 	DBEngine *string `json:"DBEngine,omitnil,omitempty" name:"DBEngine"`
+
+	// <p>Instance storage type. Valid values: PHYSICAL_LOCAL_SSD: local SSD of physical machine. CLOUD_PREMIUM: Premium Disk. CLOUD_SSD: Cloud SSD. CLOUD_HSSD: Enhanced SSD.</p>
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
 }
 
 type InquiryPriceCreateDBInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// AZ ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
+	// <p>Availability zone name. The value of this parameter can be obtained from the returned Zone field of the <a href="https://www.tencentcloud.com/document/product/409/16769?from_cn_redirect=1">DescribeZones</a> API.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeClasses` API.
+	// <p>Specification ID. The value of this parameter can be obtained from the returned SpecCode field of the <a href="https://www.tencentcloud.com/document/product/409/89019?from_cn_redirect=1">DescribeClasses</a> API.</p>
 	SpecCode *string `json:"SpecCode,omitnil,omitempty" name:"SpecCode"`
 
-	// Storage capacity size in GB.
+	// <p>Storage capacity, in GB. The value for this parameter must be set in increments of 10.</p>
 	Storage *uint64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
-	// Number of instances. Maximum value: 100. If you need to create more instances at a time, please contact customer service.
+	// <p>Instance quantity. The maximum allowed quantity is no more than 100. If you need to create more instances at a time, please contact customer service.</p>
 	InstanceCount *uint64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
 
-	// Length of purchase in months. Currently, only 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36 are supported.
+	// <p>Purchased duration, in months. Only 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36 are supported.</p>
 	Period *uint64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// [Disused] Billing ID, which can be obtained through the `Pid` field in the returned value of the `DescribeProductConfig` API.
+	// <p>[Deprecated and no longer effective] Billing ID. The value of this parameter can be obtained from the returned Pid field of the DescribeProductConfig API.</p>
 	Pid *uint64 `json:"Pid,omitnil,omitempty" name:"Pid"`
 
-	// Instance billing type. Valid value: POSTPAID_BY_HOUR (pay-as-you-go)
+	// <p>Instance billing type. Valid values: PREPAID (prepaid, also known as yearly/monthly subscription) and POSTPAID (pay-as-you-go).<br>Default value: PREPAID.</p>
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
-	// Instance type. Default value: `primary`. Valid values:
-	// `primary` (dual-server high-availability, one-primary-one-standby)
-	// `readonly` (read-only instance)
+	// <p>Instance type. The default value is primary. Valid values:<br>primary (dual-server high availability (one primary and one standby)).<br>readonly (read-only instance).</p>
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// <p>DB engine, default is postgresql, supports the following:<br>postgresql (TencentDB for PostgreSQL)<br>mssql_compatible (MSSQL-compatible - TencentDB for PostgreSQL)</p>
+	// <p>Database engine. The default value is postgresql. Valid values:<br>postgresql (TencentDB for PostgreSQL).<br>mssql_compatible (MSSQL compatible - TencentDB for PostgreSQL).</p>
 	DBEngine *string `json:"DBEngine,omitnil,omitempty" name:"DBEngine"`
+
+	// <p>Instance storage type. Valid values: PHYSICAL_LOCAL_SSD: local SSD of physical machine. CLOUD_PREMIUM: Premium Disk. CLOUD_SSD: Cloud SSD. CLOUD_HSSD: Enhanced SSD.</p>
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
 }
 
 func (r *InquiryPriceCreateDBInstancesRequest) ToJsonString() string {
@@ -5786,6 +6793,7 @@ func (r *InquiryPriceCreateDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "InstanceChargeType")
 	delete(f, "InstanceType")
 	delete(f, "DBEngine")
+	delete(f, "StorageType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceCreateDBInstancesRequest has unknown keys!", "")
 	}
@@ -5794,10 +6802,10 @@ func (r *InquiryPriceCreateDBInstancesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type InquiryPriceCreateDBInstancesResponseParams struct {
-	// Published price in US Cent
+	// <p>List price, in cents.</p>
 	OriginalPrice *uint64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 
-	// Discounted total amount in US Cent
+	// <p>Actual payment amount after discount, in cents.</p>
 	Price *uint64 `json:"Price,omitnil,omitempty" name:"Price"`
 
 	// Currency, such as USD.
@@ -6038,6 +7046,67 @@ func (r *IsolateDBInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type LockAccountRequestParams struct {
+	// Instance ID.		
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Account name.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+}
+
+type LockAccountRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID.		
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Account name.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+}
+
+func (r *LockAccountRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *LockAccountRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "UserName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "LockAccountRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type LockAccountResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type LockAccountResponse struct {
+	*tchttp.BaseResponse
+	Response *LockAccountResponseParams `json:"Response"`
+}
+
+func (r *LockAccountResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *LockAccountResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type LogBackup struct {
 	// Instance ID
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
@@ -6068,6 +7137,74 @@ type LogBackup struct {
 
 	// Backup expiration time
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+}
+
+// Predefined struct for user
+type ModifyAccountPrivilegesRequestParams struct {
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/api/409/16773?from_cn_redirect=1).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Modify the permission of this account for a database object. obtain through the [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1) api.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Permission information to modify. supports batch modification. the maximum number of modifications per batch is 50.
+	ModifyPrivilegeSet []*ModifyPrivilege `json:"ModifyPrivilegeSet,omitnil,omitempty" name:"ModifyPrivilegeSet"`
+}
+
+type ModifyAccountPrivilegesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/api/409/16773?from_cn_redirect=1).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Modify the permission of this account for a database object. obtain through the [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1) api.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Permission information to modify. supports batch modification. the maximum number of modifications per batch is 50.
+	ModifyPrivilegeSet []*ModifyPrivilege `json:"ModifyPrivilegeSet,omitnil,omitempty" name:"ModifyPrivilegeSet"`
+}
+
+func (r *ModifyAccountPrivilegesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAccountPrivilegesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "UserName")
+	delete(f, "ModifyPrivilegeSet")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAccountPrivilegesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyAccountPrivilegesResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyAccountPrivilegesResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyAccountPrivilegesResponseParams `json:"Response"`
+}
+
+func (r *ModifyAccountPrivilegesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAccountPrivilegesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -6311,10 +7448,10 @@ func (r *ModifyBackupPlanResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyBaseBackupExpireTimeRequestParams struct {
-	// Instance ID
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// Data Backup ID.
+	// Data backup ID. obtain through the api [DescribeBaseBackups](https://www.tencentcloud.com/document/product/409/54343?lang=en).
 	BaseBackupId *string `json:"BaseBackupId,omitnil,omitempty" name:"BaseBackupId"`
 
 	// New expiration time
@@ -6324,10 +7461,10 @@ type ModifyBaseBackupExpireTimeRequestParams struct {
 type ModifyBaseBackupExpireTimeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// Data Backup ID.
+	// Data backup ID. obtain through the api [DescribeBaseBackups](https://www.tencentcloud.com/document/product/409/54343?lang=en).
 	BaseBackupId *string `json:"BaseBackupId,omitnil,omitempty" name:"BaseBackupId"`
 
 	// New expiration time
@@ -6752,7 +7889,7 @@ func (r *ModifyDBInstanceNameResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDBInstanceParametersRequestParams struct {
-	// Instance ID.
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
 	// Parameters to be modified and expected values.
@@ -6762,7 +7899,7 @@ type ModifyDBInstanceParametersRequestParams struct {
 type ModifyDBInstanceParametersRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
 	// Parameters to be modified and expected values.
@@ -6791,6 +7928,9 @@ func (r *ModifyDBInstanceParametersRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDBInstanceParametersResponseParams struct {
+	// Task ID.
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -6879,6 +8019,77 @@ func (r *ModifyDBInstanceReadOnlyGroupResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyDBInstanceReadOnlyGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDBInstanceSSLConfigRequestParams struct {
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Turn on or off SSL. true - turn on; false - turn off.
+	SSLEnabled *bool `json:"SSLEnabled,omitnil,omitempty" name:"SSLEnabled"`
+
+	// The unique connection address protected by an SSL certificate. for a primary instance, it can be set to private and public IP addresses. for a read-only instance, it can be set to the instance IP or read-only group IP. this parameter is required when enabling SSL or modifying the SSL-protected connection address. it will be ignored when disabling SSL.
+	ConnectAddress *string `json:"ConnectAddress,omitnil,omitempty" name:"ConnectAddress"`
+}
+
+type ModifyDBInstanceSSLConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Turn on or off SSL. true - turn on; false - turn off.
+	SSLEnabled *bool `json:"SSLEnabled,omitnil,omitempty" name:"SSLEnabled"`
+
+	// The unique connection address protected by an SSL certificate. for a primary instance, it can be set to private and public IP addresses. for a read-only instance, it can be set to the instance IP or read-only group IP. this parameter is required when enabling SSL or modifying the SSL-protected connection address. it will be ignored when disabling SSL.
+	ConnectAddress *string `json:"ConnectAddress,omitnil,omitempty" name:"ConnectAddress"`
+}
+
+func (r *ModifyDBInstanceSSLConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceSSLConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "SSLEnabled")
+	delete(f, "ConnectAddress")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceSSLConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDBInstanceSSLConfigResponseParams struct {
+	// Task ID
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyDBInstanceSSLConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDBInstanceSSLConfigResponseParams `json:"Response"`
+}
+
+func (r *ModifyDBInstanceSSLConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceSSLConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7154,8 +8365,151 @@ func (r *ModifyDBInstancesProjectResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyDatabaseOwnerRequestParams struct {
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/api/409/16773?from_cn_redirect=1).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Database name. obtain through the api [DescribeDatabases](https://www.tencentcloud.com/document/api/409/43353?from_cn_redirect=1).
+	DatabaseName *string `json:"DatabaseName,omitnil,omitempty" name:"DatabaseName"`
+
+	// New owner of the database. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1).
+	DatabaseOwner *string `json:"DatabaseOwner,omitnil,omitempty" name:"DatabaseOwner"`
+}
+
+type ModifyDatabaseOwnerRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/api/409/16773?from_cn_redirect=1).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Database name. obtain through the api [DescribeDatabases](https://www.tencentcloud.com/document/api/409/43353?from_cn_redirect=1).
+	DatabaseName *string `json:"DatabaseName,omitnil,omitempty" name:"DatabaseName"`
+
+	// New owner of the database. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1).
+	DatabaseOwner *string `json:"DatabaseOwner,omitnil,omitempty" name:"DatabaseOwner"`
+}
+
+func (r *ModifyDatabaseOwnerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDatabaseOwnerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "DatabaseName")
+	delete(f, "DatabaseOwner")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDatabaseOwnerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDatabaseOwnerResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyDatabaseOwnerResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDatabaseOwnerResponseParams `json:"Response"`
+}
+
+func (r *ModifyDatabaseOwnerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDatabaseOwnerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyMaintainTimeWindowRequestParams struct {
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Maintenance start time. time zone is UTC+8.
+	MaintainStartTime *string `json:"MaintainStartTime,omitnil,omitempty" name:"MaintainStartTime"`
+
+	// Maintenance duration. unit: hr. value range: [1,4].
+	MaintainDuration *uint64 `json:"MaintainDuration,omitnil,omitempty" name:"MaintainDuration"`
+
+	// Specifies the maintenance period.
+	MaintainWeekDays []*string `json:"MaintainWeekDays,omitnil,omitempty" name:"MaintainWeekDays"`
+}
+
+type ModifyMaintainTimeWindowRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Maintenance start time. time zone is UTC+8.
+	MaintainStartTime *string `json:"MaintainStartTime,omitnil,omitempty" name:"MaintainStartTime"`
+
+	// Maintenance duration. unit: hr. value range: [1,4].
+	MaintainDuration *uint64 `json:"MaintainDuration,omitnil,omitempty" name:"MaintainDuration"`
+
+	// Specifies the maintenance period.
+	MaintainWeekDays []*string `json:"MaintainWeekDays,omitnil,omitempty" name:"MaintainWeekDays"`
+}
+
+func (r *ModifyMaintainTimeWindowRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMaintainTimeWindowRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "MaintainStartTime")
+	delete(f, "MaintainDuration")
+	delete(f, "MaintainWeekDays")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMaintainTimeWindowRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyMaintainTimeWindowResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyMaintainTimeWindowResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyMaintainTimeWindowResponseParams `json:"Response"`
+}
+
+func (r *ModifyMaintainTimeWindowResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMaintainTimeWindowResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyParameterTemplateRequestParams struct {
-	// Parameter template ID, which uniquely identifies a parameter template and cannot be modified.
+	// Specifies the parameter template ID, which uniquely identifies the parameter template and cannot be modified. it can be obtained through the api [DescribeParameterTemplates](https://www.tencentcloud.com/document/product/409/52651?lang=en).
 	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Parameter template name, which can contain 1-60 letters, digits, and symbols (-_./()[]()+=:@). If this field is empty, the original parameter template name will be used.
@@ -7174,7 +8528,7 @@ type ModifyParameterTemplateRequestParams struct {
 type ModifyParameterTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// Parameter template ID, which uniquely identifies a parameter template and cannot be modified.
+	// Specifies the parameter template ID, which uniquely identifies the parameter template and cannot be modified. it can be obtained through the api [DescribeParameterTemplates](https://www.tencentcloud.com/document/product/409/52651?lang=en).
 	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Parameter template name, which can contain 1-60 letters, digits, and symbols (-_./()[]()+=:@). If this field is empty, the original parameter template name will be used.
@@ -7232,6 +8586,85 @@ func (r *ModifyParameterTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyParameterTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyPrivilege struct {
+	// Specifies the database object and permission list to be modified.
+	DatabasePrivilege *DatabasePrivilege `json:"DatabasePrivilege,omitnil,omitempty" name:"DatabasePrivilege"`
+
+	// Modifies via grantObject, revokeObject, or alterRole. grantObject represents authorization, revokeObject represents withdraw, alterRole represents modify account type.
+	ModifyType *string `json:"ModifyType,omitnil,omitempty" name:"ModifyType"`
+
+	// This parameter is required only when ModifyType is revokeObject. when set to true, the permission will be revoked with cascading effect. default false.
+	IsCascade *bool `json:"IsCascade,omitnil,omitempty" name:"IsCascade"`
+}
+
+// Predefined struct for user
+type ModifyReadOnlyDBInstanceWeightRequestParams struct {
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// ReadOnlyGroupId. specifies the read-only group ID, which can be obtained through the api [DescribeReadOnlyGroups](https://www.tencentcloud.com/document/product/409/39725?lang=en).
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitnil,omitempty" name:"ReadOnlyGroupId"`
+
+	// Specifies the traffic weight of the read-only instance in the read-only group. valid values: 1-50.
+	Weight *int64 `json:"Weight,omitnil,omitempty" name:"Weight"`
+}
+
+type ModifyReadOnlyDBInstanceWeightRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// ReadOnlyGroupId. specifies the read-only group ID, which can be obtained through the api [DescribeReadOnlyGroups](https://www.tencentcloud.com/document/product/409/39725?lang=en).
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitnil,omitempty" name:"ReadOnlyGroupId"`
+
+	// Specifies the traffic weight of the read-only instance in the read-only group. valid values: 1-50.
+	Weight *int64 `json:"Weight,omitnil,omitempty" name:"Weight"`
+}
+
+func (r *ModifyReadOnlyDBInstanceWeightRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyReadOnlyDBInstanceWeightRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "ReadOnlyGroupId")
+	delete(f, "Weight")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyReadOnlyDBInstanceWeightRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyReadOnlyDBInstanceWeightResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyReadOnlyDBInstanceWeightResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyReadOnlyDBInstanceWeightResponseParams `json:"Response"`
+}
+
+func (r *ModifyReadOnlyDBInstanceWeightResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyReadOnlyDBInstanceWeightResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7474,20 +8907,22 @@ type NormalQueryItem struct {
 
 // Predefined struct for user
 type OpenDBExtranetAccessRequestParams struct {
-	// Instance ID in the format of postgres-hez4fh0v
+	// Specifies the instance ID, such as postgres-hez4fh0v. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// Whether to enable public network access over IPv6 address. Valid values: 1 (yes), 0 (no)
+	// Specifies whether to enable public network Ipv6. valid values: 1 (yes), 0 (no).
+	// Default value: 0
 	IsIpv6 *int64 `json:"IsIpv6,omitnil,omitempty" name:"IsIpv6"`
 }
 
 type OpenDBExtranetAccessRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of postgres-hez4fh0v
+	// Specifies the instance ID, such as postgres-hez4fh0v. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/product/409/16773?lang=en).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// Whether to enable public network access over IPv6 address. Valid values: 1 (yes), 0 (no)
+	// Specifies whether to enable public network Ipv6. valid values: 1 (yes), 0 (no).
+	// Default value: 0
 	IsIpv6 *int64 `json:"IsIpv6,omitnil,omitempty" name:"IsIpv6"`
 }
 
@@ -7513,8 +8948,11 @@ func (r *OpenDBExtranetAccessRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type OpenDBExtranetAccessResponseParams struct {
-	// Async task flow ID
+	// Process ID. FlowId is equivalent to TaskId.
 	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// Task ID.
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -7607,78 +9045,61 @@ type ParamEntry struct {
 
 type ParamInfo struct {
 	// Parameter ID
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
-	// Parameter name
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Parameter name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Value type of the parameter. Valid values: `integer`, `real` (floating-point), `bool`, `enum`, `mutil_enum` (this type of parameter can be set to multiple enumerated values).
-	// For an `integer` or `real` parameter, the `Min` field represents the minimum value and the `Max` field the maximum value. 
-	// For a `bool` parameter, the valid values include `true` and `false`; 
-	// For an `enum` or `mutil_enum` parameter, the `EnumValue` field represents the valid values.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Parameter value type: integer, real, bool, enum, mutil_enum.
+	// When the parameter type is integer or real (floating-point), the value range is determined based on the Max and Min of the return value. 
+	// When the parameter type is boolean, the valid values are true or false. 
+	// When the parameter type is enum (enumeration type) or mutil_enum (multi-enum type), the valid values are determined by EnumValue in the return value.
 	ParamValueType *string `json:"ParamValueType,omitnil,omitempty" name:"ParamValueType"`
 
-	// Unit of the parameter value. If the parameter has no unit, this field will return null.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Parameter value unit. returns null if the parameter has no units.
 	Unit *string `json:"Unit,omitnil,omitempty" name:"Unit"`
 
-	// Default value of the parameter, which is returned as a string
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Default parameter value. returns in string form.
 	DefaultValue *string `json:"DefaultValue,omitnil,omitempty" name:"DefaultValue"`
 
-	// Current value of the parameter, which is returned as a string
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Specifies the current value in string form.
 	CurrentValue *string `json:"CurrentValue,omitnil,omitempty" name:"CurrentValue"`
 
-	// The maximum value of the `integer` or `real` parameter
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Specifies the numerical type (integer, real) parameter and its lower bound.
 	Max *float64 `json:"Max,omitnil,omitempty" name:"Max"`
 
 	// Value range of the enum parameter
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	EnumValue []*string `json:"EnumValue,omitnil,omitempty" name:"EnumValue"`
 
-	// The minimum value of the `integer` or `real` parameter
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Numerical type (integer, real) parameter specifies the upper bound.
 	Min *float64 `json:"Min,omitnil,omitempty" name:"Min"`
 
-	// Parameter description in Chinese
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Chinese description.
 	ParamDescriptionCH *string `json:"ParamDescriptionCH,omitnil,omitempty" name:"ParamDescriptionCH"`
 
-	// Parameter description in English
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Specifies the english description of the parameter.
 	ParamDescriptionEN *string `json:"ParamDescriptionEN,omitnil,omitempty" name:"ParamDescriptionEN"`
 
-	// Whether to restart the instance for the modified parameter to take effect. Valid values: `true` (yes), `false` (no)
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Specifies whether a restart is required for parameter modification (true indicates required, false indicates not required).
 	NeedReboot *bool `json:"NeedReboot,omitnil,omitempty" name:"NeedReboot"`
 
-	// Parameter category in Chinese
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Parameter chinese category.
 	ClassificationCN *string `json:"ClassificationCN,omitnil,omitempty" name:"ClassificationCN"`
 
-	// Parameter category in English
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Parameter english category.
 	ClassificationEN *string `json:"ClassificationEN,omitnil,omitempty" name:"ClassificationEN"`
 
-	// Whether the parameter is related to specifications. Valid values: `true` (yes), `false` (no)
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Specifies whether it is related to the specification (true for related, false for unrelated).
 	SpecRelated *bool `json:"SpecRelated,omitnil,omitempty" name:"SpecRelated"`
 
-	// Whether it is a key parameter. Valid values: `true` (yes, and modifying it may affect instance performance), `false` (no)
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Indicates whether it is a key parameter (true means it is a key parameter, modification requires special attention and may affect instance performance).
 	Advanced *bool `json:"Advanced,omitnil,omitempty" name:"Advanced"`
 
-	// The last modified time of the parameter
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Specifies the last modified time.
 	LastModifyTime *string `json:"LastModifyTime,omitnil,omitempty" name:"LastModifyTime"`
 
-	// Parameter primary-secondary constraints, `0`: No constraint, `1`: Standby parameter value must be greater than that of the primary machine, `2`: Primary parameter value must be greater than that of the standby machine.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Parameter primary-secondary constraints. `0`: no constraint between primary and standby. `1`: standby parameter value > primary machine parameter value. `2`: primary parameter value must be greater than that of the standby machine.
 	StandbyRelated *int64 `json:"StandbyRelated,omitnil,omitempty" name:"StandbyRelated"`
 
 	// Parameter version association information, containing detailed parameter information for the respective kernel version
@@ -7691,28 +9112,22 @@ type ParamInfo struct {
 }
 
 type ParamSpecRelation struct {
-	// Parameter name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Parameter name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// The specification that corresponds to the parameter information
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Parameter information belonging to specification.
 	Memory *string `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// The default parameter value under this specification
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Default value of the parameter for this specification.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 
-	// Unit of the parameter value. If the parameter has no unit, this field will return null.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Parameter value unit. returns null if the parameter has no units.
 	Unit *string `json:"Unit,omitnil,omitempty" name:"Unit"`
 
-	// The maximum value of the `integer` or `real` parameter
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Numerical type (integer, real) parameter specifies the upper bound.
 	Max *float64 `json:"Max,omitnil,omitempty" name:"Max"`
 
-	// The minimum value of the `integer` or `real` parameter
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the numerical type (integer, real) parameter and its lower bound.
 	Min *float64 `json:"Min,omitnil,omitempty" name:"Min"`
 
 	// Value range of the enum parameter
@@ -7721,28 +9136,22 @@ type ParamSpecRelation struct {
 }
 
 type ParamVersionRelation struct {
-	// Parameter name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Parameter name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// The kernel version that corresponds to the parameter information
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Parameter information belonging to kernel version.
 	DBKernelVersion *string `json:"DBKernelVersion,omitnil,omitempty" name:"DBKernelVersion"`
 
-	// Default parameter value under the kernel version and specification of the instance
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Default value of the parameter for this version and specification.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 
-	// Unit of the parameter value. If the parameter has no unit, this field will return null.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Parameter value unit. returns null if the parameter has no units.
 	Unit *string `json:"Unit,omitnil,omitempty" name:"Unit"`
 
-	// The maximum value of the `integer` or `real` parameter
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Numerical type (integer, real) parameter specifies the upper bound.
 	Max *float64 `json:"Max,omitnil,omitempty" name:"Max"`
 
-	// The minimum value of the `integer` or `real` parameter
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the numerical type (integer, real) parameter and its lower bound.
 	Min *float64 `json:"Min,omitnil,omitempty" name:"Min"`
 
 	// Value range of the enum parameter
@@ -8662,6 +10071,120 @@ type Tag struct {
 
 	// Tag value
 	TagValue *string `json:"TagValue,omitnil,omitempty" name:"TagValue"`
+}
+
+type TaskDetail struct {
+	// Current task step name.
+	CurrentStep *string `json:"CurrentStep,omitnil,omitempty" name:"CurrentStep"`
+
+	// Describes the step description of the current task you own.
+	AllSteps *string `json:"AllSteps,omitnil,omitempty" name:"AllSteps"`
+
+	// Input of the task.
+	Input *string `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Output parameter of the task.
+	Output *string `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// Specifies the switch time after instance configurations are modified. default value: 0.
+	// This task does not require switching.
+	// Switch immediately.
+	// 2: switch at specified time.
+	// 3: switch during maintenance time window.
+	SwitchTag *uint64 `json:"SwitchTag,omitnil,omitempty" name:"SwitchTag"`
+
+	// Specifies the switch time.
+	SwitchTime *string `json:"SwitchTime,omitnil,omitempty" name:"SwitchTime"`
+
+	// Note of the task.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+}
+
+type TaskSet struct {
+	// Task ID.
+	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Specifies the task type.
+	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
+
+	// Specifies the instance ID of the task instance.
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Start time of the task.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Task end time.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Specifies the task Running status, including Running, Success, WaitSwitch, Fail, Pause.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Indicates the progress of task execution, with a value range of 0-100.
+	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// Specifies the task details.
+	TaskDetail *TaskDetail `json:"TaskDetail,omitnil,omitempty" name:"TaskDetail"`
+}
+
+// Predefined struct for user
+type UnlockAccountRequestParams struct {
+	// Instance ID.		
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Account name.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+}
+
+type UnlockAccountRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID.		
+	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
+
+	// Account name.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+}
+
+func (r *UnlockAccountRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnlockAccountRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "UserName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnlockAccountRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UnlockAccountResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UnlockAccountResponse struct {
+	*tchttp.BaseResponse
+	Response *UnlockAccountResponseParams `json:"Response"`
+}
+
+func (r *UnlockAccountResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnlockAccountResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user

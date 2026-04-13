@@ -77,7 +77,7 @@ func NewApplyFreeCertificateResponse() (response *ApplyFreeCertificateResponse) 
 //
 // 
 //
-// The application method introduction in the document: [Free Certificate Application Description](https://www.tencentcloud.com/document/product/1552/90437?from_cn_redirect=1). 
+// The application method introduction in the document: [Free Certificate Application Description](https://www.tencentcloud.comom/document/product/1552/90437?from_cn_redirect=1). 
 //
 // description:.
 //
@@ -103,7 +103,7 @@ func (c *Client) ApplyFreeCertificate(request *ApplyFreeCertificateRequest) (res
 //
 // 
 //
-// The application method introduction in the document: [Free Certificate Application Description](https://www.tencentcloud.com/document/product/1552/90437?from_cn_redirect=1). 
+// The application method introduction in the document: [Free Certificate Application Description](https://www.tencentcloud.comom/document/product/1552/90437?from_cn_redirect=1). 
 //
 // description:.
 //
@@ -149,7 +149,7 @@ func NewBindSecurityTemplateToEntityResponse() (response *BindSecurityTemplateTo
 }
 
 // BindSecurityTemplateToEntity
-// This API is used to bind/unbind a domain name to/from a specific policy template. 
+// This API is used to bind/unbind a domain name to/from a specific policy template.
 //
 // error code that may be returned:
 //  INTERNALERROR_CONFIGLOCKED = "InternalError.ConfigLocked"
@@ -164,7 +164,7 @@ func (c *Client) BindSecurityTemplateToEntity(request *BindSecurityTemplateToEnt
 }
 
 // BindSecurityTemplateToEntity
-// This API is used to bind/unbind a domain name to/from a specific policy template. 
+// This API is used to bind/unbind a domain name to/from a specific policy template.
 //
 // error code that may be returned:
 //  INTERNALERROR_CONFIGLOCKED = "InternalError.ConfigLocked"
@@ -389,7 +389,7 @@ func NewCheckFreeCertificateVerificationResponse() (response *CheckFreeCertifica
 // CheckFreeCertificateVerification
 // This API is used to verify a free certificate and obtain the application result. If verified, you can query the free certificate information for the corresponding domain name application through this API. If failed to apply, this API will return the corresponding verification failure message.
 //
-// This API is used to check the free certificate application result after triggering the [ApplyFreeCertificate](https://www.tencentcloud.com/document/product/1552/124807?from_cn_redirect=1) . Once the application is successful, you need to configure through the [ModifyHostsCertificate](https://www.tencentcloud.com/document/product/1552/80764?from_cn_redirect=1) to deploy the free certificate to the acceleration domain.
+// This API is used to check the free certificate application result after triggering the [ApplyFreeCertificate](https://www.tencentcloud.comom/document/product/1552/124807?from_cn_redirect=1) . Once the application is successful, you need to configure through the [ModifyHostsCertificate](https://www.tencentcloud.comom/document/product/1552/80764?from_cn_redirect=1) to deploy the free certificate to the acceleration domain.
 //
 // error code that may be returned:
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
@@ -403,7 +403,7 @@ func (c *Client) CheckFreeCertificateVerification(request *CheckFreeCertificateV
 // CheckFreeCertificateVerification
 // This API is used to verify a free certificate and obtain the application result. If verified, you can query the free certificate information for the corresponding domain name application through this API. If failed to apply, this API will return the corresponding verification failure message.
 //
-// This API is used to check the free certificate application result after triggering the [ApplyFreeCertificate](https://www.tencentcloud.com/document/product/1552/124807?from_cn_redirect=1) . Once the application is successful, you need to configure through the [ModifyHostsCertificate](https://www.tencentcloud.com/document/product/1552/80764?from_cn_redirect=1) to deploy the free certificate to the acceleration domain.
+// This API is used to check the free certificate application result after triggering the [ApplyFreeCertificate](https://www.tencentcloud.comom/document/product/1552/124807?from_cn_redirect=1) . Once the application is successful, you need to configure through the [ModifyHostsCertificate](https://www.tencentcloud.comom/document/product/1552/80764?from_cn_redirect=1) to deploy the free certificate to the acceleration domain.
 //
 // error code that may be returned:
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
@@ -1369,6 +1369,64 @@ func (c *Client) CreateDnsRecordWithContext(ctx context.Context, request *Create
     return
 }
 
+func NewCreateEdgeKVNamespaceRequest() (request *CreateEdgeKVNamespaceRequest) {
+    request = &CreateEdgeKVNamespaceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "CreateEdgeKVNamespace")
+    
+    
+    return
+}
+
+func NewCreateEdgeKVNamespaceResponse() (response *CreateEdgeKVNamespaceResponse) {
+    response = &CreateEdgeKVNamespaceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateEdgeKVNamespace
+// This API is used to create a KV namespace in the specified site.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_BADNAMESPACENAME = "InvalidParameter.BadNamespaceName"
+//  INVALIDPARAMETER_DUPLICATEBINDINGNAME = "InvalidParameter.DuplicateBindingName"
+//  INVALIDPARAMETER_REMARKTOOLONG = "InvalidParameter.RemarkTooLong"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) CreateEdgeKVNamespace(request *CreateEdgeKVNamespaceRequest) (response *CreateEdgeKVNamespaceResponse, err error) {
+    return c.CreateEdgeKVNamespaceWithContext(context.Background(), request)
+}
+
+// CreateEdgeKVNamespace
+// This API is used to create a KV namespace in the specified site.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_BADNAMESPACENAME = "InvalidParameter.BadNamespaceName"
+//  INVALIDPARAMETER_DUPLICATEBINDINGNAME = "InvalidParameter.DuplicateBindingName"
+//  INVALIDPARAMETER_REMARKTOOLONG = "InvalidParameter.RemarkTooLong"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) CreateEdgeKVNamespaceWithContext(ctx context.Context, request *CreateEdgeKVNamespaceRequest) (response *CreateEdgeKVNamespaceResponse, err error) {
+    if request == nil {
+        request = NewCreateEdgeKVNamespaceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "CreateEdgeKVNamespace")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateEdgeKVNamespace require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateEdgeKVNamespaceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateFunctionRequest() (request *CreateFunctionRequest) {
     request = &CreateFunctionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1461,7 +1519,7 @@ func NewCreateFunctionRuleResponse() (response *CreateFunctionRuleResponse) {
 }
 
 // CreateFunctionRule
-// This API is used to create a trigger rule for an edge function.
+// This API is used to create trigger rules for edge functions. It supports determining whether to execute the function via customized filter conditions. When execution is required, it provides multiple ways to select the target function, including directly specifying, selecting based on client region, and selecting based on weight.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1478,7 +1536,7 @@ func (c *Client) CreateFunctionRule(request *CreateFunctionRuleRequest) (respons
 }
 
 // CreateFunctionRule
-// This API is used to create a trigger rule for an edge function.
+// This API is used to create trigger rules for edge functions. It supports determining whether to execute the function via customized filter conditions. When execution is required, it provides multiple ways to select the target function, including directly specifying, selecting based on client region, and selecting based on weight.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1531,7 +1589,7 @@ func NewCreateJustInTimeTranscodeTemplateResponse() (response *CreateJustInTimeT
 //
 // This API is used to ensure the consistency of JIT transcoding effect, avoid video output exceptions caused by EO cache or M3U8 sharding template changes during the process, and templates cannot be modified after creation.
 //
-// This API is used to learn about the detailed capacity of JIT transcoding. EdgeOne video instant processing function introduction (https://www.tencentcloud.com/document/product/1552/111927?from_cn_redirect=1).
+// This API is used to learn about the detailed capacity of JIT transcoding. EdgeOne video instant processing function introduction (https://www.tencentcloud.comom/document/product/1552/111927?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PRODUCTDISCONTINUED = "FailedOperation.ProductDiscontinued"
@@ -1552,7 +1610,7 @@ func (c *Client) CreateJustInTimeTranscodeTemplate(request *CreateJustInTimeTran
 //
 // This API is used to ensure the consistency of JIT transcoding effect, avoid video output exceptions caused by EO cache or M3U8 sharding template changes during the process, and templates cannot be modified after creation.
 //
-// This API is used to learn about the detailed capacity of JIT transcoding. EdgeOne video instant processing function introduction (https://www.tencentcloud.com/document/product/1552/111927?from_cn_redirect=1).
+// This API is used to learn about the detailed capacity of JIT transcoding. EdgeOne video instant processing function introduction (https://www.tencentcloud.comom/document/product/1552/111927?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PRODUCTDISCONTINUED = "FailedOperation.ProductDiscontinued"
@@ -2565,23 +2623,21 @@ func NewCreateRealtimeLogDeliveryTaskResponse() (response *CreateRealtimeLogDeli
 }
 
 // CreateRealtimeLogDeliveryTask
-// This API is used to create a real-time log delivery task.
+// This API is used to create a real-time log delivery task. The following limits apply.
 //
-// The following restrictions apply:
+// -When the data delivery type (LogType) is site acceleration log (Layer 7 Access Logs), L4 proxy logs, or edge function logs, an entity (L7 domain, L4 proxy instance, or edge function instance) under the same combination of data delivery type (LogType) and data delivery area (Area) can only be added to the following real-time log delivery task type (TaskType) combinations:.
 //
-// 
+// -A task to push to Tencent Cloud CLS, add another task to push to a custom HTTP(S) address;.
 //
-// - When the log type (`LogType`) is site acceleration log (L7 access log) (`domain`), L4 proxy log (`application`), or Edge Function execution log (`function`), the same entity (L7 domain, L4 proxy instance, or Edge Function instance) can be added to only one of the following `TaskType` combinations within the same `LogType`-`Area` pair:
+// -A task to push to Tencent Cloud CLS, add another task to push to AWS S3-compatible Cloud Object Storage;.
 //
-//     - One task delivering to Tencent Cloud CLS plus one task delivering to a custom HTTP(S) endpoint;
+// -When the data delivery type (LogType) is rate limit and CC attack defense log, managed rule log, custom rule log, or Bot Management Log, an entity can only be added to one real-time log delivery task under the same combination of data delivery type (LogType) and data delivery Area.
 //
-//     - One task delivering to Tencent Cloud CLS plus one task delivering to an AWS S3-compatible bucket.
-//
-// - When the log type (`LogType`) is rate-limiting & CC attack protection log (`web-rateLiming`), managed rule log (`web-attack`), custom rule log (`web-rule`), or bot management log (`web-bot`), the same entity can be added to only one real-time log delivery task within the same `LogType`-`Area` pair.
+// -When the real-time log delivery task type (TaskType) is EdgeOne log analysis (log_analysis), it supports only the data delivery type (LogType) as site acceleration log (domain). Under the combination of the same site (ZoneId) and data delivery area (Area), you can only add one real-time log delivery task for EdgeOne log analysis.
 //
 // 
 //
-// Before creating a task, we recommend that you first call [DescribeRealtimeLogDeliveryTasks](https://intl.cloud.tencent.com/document/product/1552/104110?from_cn_redirect=1) to list existing tasks for the entity and verify whether it has already been added to another task.
+// This API is used to query the real-time log delivery task list based on the entity to check whether the entity has been added to another real-time log delivery task. It is advisable to use the [DescribeRealtimeLogDeliveryTasks](https://www.tencentcloud.comom/document/product/1552/104110?from_cn_redirect=1) API first.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2611,23 +2667,21 @@ func (c *Client) CreateRealtimeLogDeliveryTask(request *CreateRealtimeLogDeliver
 }
 
 // CreateRealtimeLogDeliveryTask
-// This API is used to create a real-time log delivery task.
+// This API is used to create a real-time log delivery task. The following limits apply.
 //
-// The following restrictions apply:
+// -When the data delivery type (LogType) is site acceleration log (Layer 7 Access Logs), L4 proxy logs, or edge function logs, an entity (L7 domain, L4 proxy instance, or edge function instance) under the same combination of data delivery type (LogType) and data delivery area (Area) can only be added to the following real-time log delivery task type (TaskType) combinations:.
 //
-// 
+// -A task to push to Tencent Cloud CLS, add another task to push to a custom HTTP(S) address;.
 //
-// - When the log type (`LogType`) is site acceleration log (L7 access log) (`domain`), L4 proxy log (`application`), or Edge Function execution log (`function`), the same entity (L7 domain, L4 proxy instance, or Edge Function instance) can be added to only one of the following `TaskType` combinations within the same `LogType`-`Area` pair:
+// -A task to push to Tencent Cloud CLS, add another task to push to AWS S3-compatible Cloud Object Storage;.
 //
-//     - One task delivering to Tencent Cloud CLS plus one task delivering to a custom HTTP(S) endpoint;
+// -When the data delivery type (LogType) is rate limit and CC attack defense log, managed rule log, custom rule log, or Bot Management Log, an entity can only be added to one real-time log delivery task under the same combination of data delivery type (LogType) and data delivery Area.
 //
-//     - One task delivering to Tencent Cloud CLS plus one task delivering to an AWS S3-compatible bucket.
-//
-// - When the log type (`LogType`) is rate-limiting & CC attack protection log (`web-rateLiming`), managed rule log (`web-attack`), custom rule log (`web-rule`), or bot management log (`web-bot`), the same entity can be added to only one real-time log delivery task within the same `LogType`-`Area` pair.
+// -When the real-time log delivery task type (TaskType) is EdgeOne log analysis (log_analysis), it supports only the data delivery type (LogType) as site acceleration log (domain). Under the combination of the same site (ZoneId) and data delivery area (Area), you can only add one real-time log delivery task for EdgeOne log analysis.
 //
 // 
 //
-// Before creating a task, we recommend that you first call [DescribeRealtimeLogDeliveryTasks](https://intl.cloud.tencent.com/document/product/1552/104110?from_cn_redirect=1) to list existing tasks for the entity and verify whether it has already been added to another task.
+// This API is used to query the real-time log delivery task list based on the entity to check whether the entity has been added to another real-time log delivery task. It is advisable to use the [DescribeRealtimeLogDeliveryTasks](https://www.tencentcloud.comom/document/product/1552/104110?from_cn_redirect=1) API first.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4337,6 +4391,62 @@ func (c *Client) DeleteDnsRecordsWithContext(ctx context.Context, request *Delet
     request.SetContext(ctx)
     
     response = NewDeleteDnsRecordsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteEdgeKVNamespaceRequest() (request *DeleteEdgeKVNamespaceRequest) {
+    request = &DeleteEdgeKVNamespaceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DeleteEdgeKVNamespace")
+    
+    
+    return
+}
+
+func NewDeleteEdgeKVNamespaceResponse() (response *DeleteEdgeKVNamespaceResponse) {
+    response = &DeleteEdgeKVNamespaceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteEdgeKVNamespace
+// This API is used to delete specified KV namespace. Once deleted, all keys in namespace will be cleared and cannot be recovered. If the namespace is being referred by edge function, you need to unbind relationship before it can only be deleted.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_NAMESPACEINUSE = "InvalidParameter.NamespaceInUse"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE_NAMESPACENOTFOUND = "ResourceUnavailable.NamespaceNotFound"
+func (c *Client) DeleteEdgeKVNamespace(request *DeleteEdgeKVNamespaceRequest) (response *DeleteEdgeKVNamespaceResponse, err error) {
+    return c.DeleteEdgeKVNamespaceWithContext(context.Background(), request)
+}
+
+// DeleteEdgeKVNamespace
+// This API is used to delete specified KV namespace. Once deleted, all keys in namespace will be cleared and cannot be recovered. If the namespace is being referred by edge function, you need to unbind relationship before it can only be deleted.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_NAMESPACEINUSE = "InvalidParameter.NamespaceInUse"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE_NAMESPACENOTFOUND = "ResourceUnavailable.NamespaceNotFound"
+func (c *Client) DeleteEdgeKVNamespaceWithContext(ctx context.Context, request *DeleteEdgeKVNamespaceRequest) (response *DeleteEdgeKVNamespaceResponse, err error) {
+    if request == nil {
+        request = NewDeleteEdgeKVNamespaceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DeleteEdgeKVNamespace")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteEdgeKVNamespace require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteEdgeKVNamespaceResponse()
     err = c.Send(request, response)
     return
 }
@@ -6663,6 +6773,66 @@ func (c *Client) DescribeDnsRecordsWithContext(ctx context.Context, request *Des
     return
 }
 
+func NewDescribeEdgeKVNamespacesRequest() (request *DescribeEdgeKVNamespacesRequest) {
+    request = &DescribeEdgeKVNamespacesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeEdgeKVNamespaces")
+    
+    
+    return
+}
+
+func NewDescribeEdgeKVNamespacesResponse() (response *DescribeEdgeKVNamespacesResponse) {
+    response = &DescribeEdgeKVNamespacesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeEdgeKVNamespaces
+// This API is used to query the KV namespace list of a specified site, supporting pagination, sorting and conditional filtering. It returns the basic info, capacity utilization and reference relationship of namespaces. If data not found, return an empty array.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDFILTERNAME = "InvalidParameter.InvalidFilterName"
+//  INVALIDPARAMETER_INVALIDSORTBY = "InvalidParameter.InvalidSortBy"
+//  INVALIDPARAMETER_INVALIDSORTORDER = "InvalidParameter.InvalidSortOrder"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_NAMESPACELIMITEXCEEDED = "LimitExceeded.NamespaceLimitExceeded"
+func (c *Client) DescribeEdgeKVNamespaces(request *DescribeEdgeKVNamespacesRequest) (response *DescribeEdgeKVNamespacesResponse, err error) {
+    return c.DescribeEdgeKVNamespacesWithContext(context.Background(), request)
+}
+
+// DescribeEdgeKVNamespaces
+// This API is used to query the KV namespace list of a specified site, supporting pagination, sorting and conditional filtering. It returns the basic info, capacity utilization and reference relationship of namespaces. If data not found, return an empty array.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDFILTERNAME = "InvalidParameter.InvalidFilterName"
+//  INVALIDPARAMETER_INVALIDSORTBY = "InvalidParameter.InvalidSortBy"
+//  INVALIDPARAMETER_INVALIDSORTORDER = "InvalidParameter.InvalidSortOrder"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_NAMESPACELIMITEXCEEDED = "LimitExceeded.NamespaceLimitExceeded"
+func (c *Client) DescribeEdgeKVNamespacesWithContext(ctx context.Context, request *DescribeEdgeKVNamespacesRequest) (response *DescribeEdgeKVNamespacesResponse, err error) {
+    if request == nil {
+        request = NewDescribeEdgeKVNamespacesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DescribeEdgeKVNamespaces")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeEdgeKVNamespaces require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeEdgeKVNamespacesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeEnvironmentsRequest() (request *DescribeEnvironmentsRequest) {
     request = &DescribeEnvironmentsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6686,7 +6856,12 @@ func NewDescribeEnvironmentsResponse() (response *DescribeEnvironmentsResponse) 
 // This API is used to query environment information in version management mode. The response includes the environment ID, type, and current effective version. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
 //
 // error code that may be returned:
-//  RESOURCENOTFOUND = "ResourceNotFound"
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDFILTERNAME = "InvalidParameter.InvalidFilterName"
+//  INVALIDPARAMETER_INVALIDSORTBY = "InvalidParameter.InvalidSortBy"
+//  INVALIDPARAMETER_INVALIDSORTORDER = "InvalidParameter.InvalidSortOrder"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_NAMESPACELIMITEXCEEDED = "LimitExceeded.NamespaceLimitExceeded"
 func (c *Client) DescribeEnvironments(request *DescribeEnvironmentsRequest) (response *DescribeEnvironmentsResponse, err error) {
     return c.DescribeEnvironmentsWithContext(context.Background(), request)
 }
@@ -6695,7 +6870,12 @@ func (c *Client) DescribeEnvironments(request *DescribeEnvironmentsRequest) (res
 // This API is used to query environment information in version management mode. The response includes the environment ID, type, and current effective version. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
 //
 // error code that may be returned:
-//  RESOURCENOTFOUND = "ResourceNotFound"
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDFILTERNAME = "InvalidParameter.InvalidFilterName"
+//  INVALIDPARAMETER_INVALIDSORTBY = "InvalidParameter.InvalidSortBy"
+//  INVALIDPARAMETER_INVALIDSORTORDER = "InvalidParameter.InvalidSortOrder"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_NAMESPACELIMITEXCEEDED = "LimitExceeded.NamespaceLimitExceeded"
 func (c *Client) DescribeEnvironmentsWithContext(ctx context.Context, request *DescribeEnvironmentsRequest) (response *DescribeEnvironmentsResponse, err error) {
     if request == nil {
         request = NewDescribeEnvironmentsRequest()
@@ -6709,6 +6889,60 @@ func (c *Client) DescribeEnvironmentsWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDescribeEnvironmentsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeFunctionComponentBindingsRequest() (request *DescribeFunctionComponentBindingsRequest) {
+    request = &DescribeFunctionComponentBindingsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeFunctionComponentBindings")
+    
+    
+    return
+}
+
+func NewDescribeFunctionComponentBindingsResponse() (response *DescribeFunctionComponentBindingsResponse) {
+    response = &DescribeFunctionComponentBindingsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeFunctionComponentBindings
+// This API is used to query the component binding list of a specified edge function. It supports pagination and conditional filtering, and returns detailed information such as bound component types, variable names, and configuration parameters. Currently supported bound component types include KV namespace (kv_namespace).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDFILTERNAME = "InvalidParameter.InvalidFilterName"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeFunctionComponentBindings(request *DescribeFunctionComponentBindingsRequest) (response *DescribeFunctionComponentBindingsResponse, err error) {
+    return c.DescribeFunctionComponentBindingsWithContext(context.Background(), request)
+}
+
+// DescribeFunctionComponentBindings
+// This API is used to query the component binding list of a specified edge function. It supports pagination and conditional filtering, and returns detailed information such as bound component types, variable names, and configuration parameters. Currently supported bound component types include KV namespace (kv_namespace).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDFILTERNAME = "InvalidParameter.InvalidFilterName"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeFunctionComponentBindingsWithContext(ctx context.Context, request *DescribeFunctionComponentBindingsRequest) (response *DescribeFunctionComponentBindingsResponse, err error) {
+    if request == nil {
+        request = NewDescribeFunctionComponentBindingsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DescribeFunctionComponentBindings")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeFunctionComponentBindings require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeFunctionComponentBindingsResponse()
     err = c.Send(request, response)
     return
 }
@@ -8109,6 +8343,72 @@ func (c *Client) DescribePlansWithContext(ctx context.Context, request *Describe
     return
 }
 
+func NewDescribePrefetchOriginLimitRequest() (request *DescribePrefetchOriginLimitRequest) {
+    request = &DescribePrefetchOriginLimitRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribePrefetchOriginLimit")
+    
+    
+    return
+}
+
+func NewDescribePrefetchOriginLimitResponse() (response *DescribePrefetchOriginLimitResponse) {
+    response = &DescribePrefetchOriginLimitResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribePrefetchOriginLimit
+// This API is used to query the origin speed limit. This feature is in closed beta testing.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_BACKENDERROR = "InternalError.BackendError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DOMAINNOTFOUND = "InvalidParameter.DomainNotFound"
+//  INVALIDPARAMETER_PREFETCHORIGINLIMITAREAINVALID = "InvalidParameter.PrefetchOriginLimitAreaInvalid"
+//  OPERATIONDENIED_NOTINPREFETCHORIGINLIMITWHITELIST = "OperationDenied.NotInPrefetchOriginLimitWhiteList"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) DescribePrefetchOriginLimit(request *DescribePrefetchOriginLimitRequest) (response *DescribePrefetchOriginLimitResponse, err error) {
+    return c.DescribePrefetchOriginLimitWithContext(context.Background(), request)
+}
+
+// DescribePrefetchOriginLimit
+// This API is used to query the origin speed limit. This feature is in closed beta testing.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_BACKENDERROR = "InternalError.BackendError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DOMAINNOTFOUND = "InvalidParameter.DomainNotFound"
+//  INVALIDPARAMETER_PREFETCHORIGINLIMITAREAINVALID = "InvalidParameter.PrefetchOriginLimitAreaInvalid"
+//  OPERATIONDENIED_NOTINPREFETCHORIGINLIMITWHITELIST = "OperationDenied.NotInPrefetchOriginLimitWhiteList"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) DescribePrefetchOriginLimitWithContext(ctx context.Context, request *DescribePrefetchOriginLimitRequest) (response *DescribePrefetchOriginLimitResponse, err error) {
+    if request == nil {
+        request = NewDescribePrefetchOriginLimitRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DescribePrefetchOriginLimit")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrefetchOriginLimit require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrefetchOriginLimitResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribePrefetchTasksRequest() (request *DescribePrefetchTasksRequest) {
     request = &DescribePrefetchTasksRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -8885,6 +9185,56 @@ func (c *Client) DescribeSecurityTemplateBindingsWithContext(ctx context.Context
     return
 }
 
+func NewDescribeSharedCNAMERequest() (request *DescribeSharedCNAMERequest) {
+    request = &DescribeSharedCNAMERequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeSharedCNAME")
+    
+    
+    return
+}
+
+func NewDescribeSharedCNAMEResponse() (response *DescribeSharedCNAMEResponse) {
+    response = &DescribeSharedCNAMEResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSharedCNAME
+// Query the shared CNAME list, support fuzzy search, paginate, and sort.
+//
+// error code that may be returned:
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) DescribeSharedCNAME(request *DescribeSharedCNAMERequest) (response *DescribeSharedCNAMEResponse, err error) {
+    return c.DescribeSharedCNAMEWithContext(context.Background(), request)
+}
+
+// DescribeSharedCNAME
+// Query the shared CNAME list, support fuzzy search, paginate, and sort.
+//
+// error code that may be returned:
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) DescribeSharedCNAMEWithContext(ctx context.Context, request *DescribeSharedCNAMERequest) (response *DescribeSharedCNAMEResponse, err error) {
+    if request == nil {
+        request = NewDescribeSharedCNAMERequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DescribeSharedCNAME")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSharedCNAME require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSharedCNAMEResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTimingL4DataRequest() (request *DescribeTimingL4DataRequest) {
     request = &DescribeTimingL4DataRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -8905,7 +9255,7 @@ func NewDescribeTimingL4DataResponse() (response *DescribeTimingL4DataResponse) 
 }
 
 // DescribeTimingL4Data
-// This API is used to query the list of L4 traffic data recorded over time.
+// <p>This API is used to query the time series Data list of Layer 4.</p>.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -8920,7 +9270,7 @@ func (c *Client) DescribeTimingL4Data(request *DescribeTimingL4DataRequest) (res
 }
 
 // DescribeTimingL4Data
-// This API is used to query the list of L4 traffic data recorded over time.
+// <p>This API is used to query the time series Data list of Layer 4.</p>.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -9103,20 +9453,30 @@ func NewDescribeTimingL7OriginPullDataResponse() (response *DescribeTimingL7Orig
 }
 
 // DescribeTimingL7OriginPullData
-// This API is used to query time series data for layer-7 domain services' origin-pull data.
+// This API is used to query time series data of origin-pull for L7 domains. 
+//
+// Group aggregation can be performed by specifying the query dimension <code>DimensionName</code>, returning multiple groups of time series data. For detailed guide and limits, see [How to Use API to Implement Grouping Aggregation in a Single Call](https://www.tencentcloud.com/document/product/1145/77047?lang=en&pg=).
 //
 // error code that may be returned:
+//  INVALIDPARAMETER_ACTIONINPROGRESS = "InvalidParameter.ActionInProgress"
+//  INVALIDPARAMETERVALUE_FILTERSMUSTINCLUDEDIMENSIONNAME = "InvalidParameterValue.FiltersMustIncludeDimensionName"
 //  LIMITEXCEEDED_QUERYTIMELIMITEXCEEDED = "LimitExceeded.QueryTimeLimitExceeded"
+//  LIMITEXCEEDED_TIMINGDATAITEMLIMITEXCEEDED = "LimitExceeded.TimingDataItemLimitExceeded"
 //  OPERATIONDENIED_ORIGINPULLDATANOTSUPPORTED = "OperationDenied.OriginPullDataNotSupported"
 func (c *Client) DescribeTimingL7OriginPullData(request *DescribeTimingL7OriginPullDataRequest) (response *DescribeTimingL7OriginPullDataResponse, err error) {
     return c.DescribeTimingL7OriginPullDataWithContext(context.Background(), request)
 }
 
 // DescribeTimingL7OriginPullData
-// This API is used to query time series data for layer-7 domain services' origin-pull data.
+// This API is used to query time series data of origin-pull for L7 domains. 
+//
+// Group aggregation can be performed by specifying the query dimension <code>DimensionName</code>, returning multiple groups of time series data. For detailed guide and limits, see [How to Use API to Implement Grouping Aggregation in a Single Call](https://www.tencentcloud.com/document/product/1145/77047?lang=en&pg=).
 //
 // error code that may be returned:
+//  INVALIDPARAMETER_ACTIONINPROGRESS = "InvalidParameter.ActionInProgress"
+//  INVALIDPARAMETERVALUE_FILTERSMUSTINCLUDEDIMENSIONNAME = "InvalidParameterValue.FiltersMustIncludeDimensionName"
 //  LIMITEXCEEDED_QUERYTIMELIMITEXCEEDED = "LimitExceeded.QueryTimeLimitExceeded"
+//  LIMITEXCEEDED_TIMINGDATAITEMLIMITEXCEEDED = "LimitExceeded.TimingDataItemLimitExceeded"
 //  OPERATIONDENIED_ORIGINPULLDATANOTSUPPORTED = "OperationDenied.OriginPullDataNotSupported"
 func (c *Client) DescribeTimingL7OriginPullDataWithContext(ctx context.Context, request *DescribeTimingL7OriginPullDataRequest) (response *DescribeTimingL7OriginPullDataResponse, err error) {
     if request == nil {
@@ -9803,6 +10163,220 @@ func (c *Client) DownloadL7LogsWithContext(ctx context.Context, request *Downloa
     return
 }
 
+func NewEdgeKVDeleteRequest() (request *EdgeKVDeleteRequest) {
+    request = &EdgeKVDeleteRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "EdgeKVDelete")
+    
+    
+    return
+}
+
+func NewEdgeKVDeleteResponse() (response *EdgeKVDeleteResponse) {
+    response = &EdgeKVDeleteResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// EdgeKVDelete
+// This API is used to delete one or more key-value pair data in the specified namespace, with batch deletion supported. Data cannot be recovered after deletion.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_KEYSTOOMANY = "InvalidParameter.KeysTooMany"
+//  RESOURCEUNAVAILABLE_NAMESPACENOTFOUND = "ResourceUnavailable.NamespaceNotFound"
+func (c *Client) EdgeKVDelete(request *EdgeKVDeleteRequest) (response *EdgeKVDeleteResponse, err error) {
+    return c.EdgeKVDeleteWithContext(context.Background(), request)
+}
+
+// EdgeKVDelete
+// This API is used to delete one or more key-value pair data in the specified namespace, with batch deletion supported. Data cannot be recovered after deletion.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_KEYSTOOMANY = "InvalidParameter.KeysTooMany"
+//  RESOURCEUNAVAILABLE_NAMESPACENOTFOUND = "ResourceUnavailable.NamespaceNotFound"
+func (c *Client) EdgeKVDeleteWithContext(ctx context.Context, request *EdgeKVDeleteRequest) (response *EdgeKVDeleteResponse, err error) {
+    if request == nil {
+        request = NewEdgeKVDeleteRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "EdgeKVDelete")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EdgeKVDelete require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEdgeKVDeleteResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEdgeKVGetRequest() (request *EdgeKVGetRequest) {
+    request = &EdgeKVGetRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "EdgeKVGet")
+    
+    
+    return
+}
+
+func NewEdgeKVGetResponse() (response *EdgeKVGetResponse) {
+    response = &EdgeKVGetResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// EdgeKVGet
+// This API is used to batch read key values from a specified namespace, supporting a single query of up to 20 keys.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_KEYSTOOMANY = "InvalidParameter.KeysTooMany"
+//  RESOURCEUNAVAILABLE_NAMESPACENOTFOUND = "ResourceUnavailable.NamespaceNotFound"
+func (c *Client) EdgeKVGet(request *EdgeKVGetRequest) (response *EdgeKVGetResponse, err error) {
+    return c.EdgeKVGetWithContext(context.Background(), request)
+}
+
+// EdgeKVGet
+// This API is used to batch read key values from a specified namespace, supporting a single query of up to 20 keys.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_KEYSTOOMANY = "InvalidParameter.KeysTooMany"
+//  RESOURCEUNAVAILABLE_NAMESPACENOTFOUND = "ResourceUnavailable.NamespaceNotFound"
+func (c *Client) EdgeKVGetWithContext(ctx context.Context, request *EdgeKVGetRequest) (response *EdgeKVGetResponse, err error) {
+    if request == nil {
+        request = NewEdgeKVGetRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "EdgeKVGet")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EdgeKVGet require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEdgeKVGetResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEdgeKVListRequest() (request *EdgeKVListRequest) {
+    request = &EdgeKVListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "EdgeKVList")
+    
+    
+    return
+}
+
+func NewEdgeKVListResponse() (response *EdgeKVListResponse) {
+    response = &EdgeKVListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// EdgeKVList
+// This API is used to list all keys in the specified namespace with prefix filtering support. It implements cursor traversal through Cursor and returns the next cursor to proceed with querying. Suitable for traversal of all keys in the namespace.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE_NAMESPACENOTFOUND = "ResourceUnavailable.NamespaceNotFound"
+func (c *Client) EdgeKVList(request *EdgeKVListRequest) (response *EdgeKVListResponse, err error) {
+    return c.EdgeKVListWithContext(context.Background(), request)
+}
+
+// EdgeKVList
+// This API is used to list all keys in the specified namespace with prefix filtering support. It implements cursor traversal through Cursor and returns the next cursor to proceed with querying. Suitable for traversal of all keys in the namespace.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE_NAMESPACENOTFOUND = "ResourceUnavailable.NamespaceNotFound"
+func (c *Client) EdgeKVListWithContext(ctx context.Context, request *EdgeKVListRequest) (response *EdgeKVListResponse, err error) {
+    if request == nil {
+        request = NewEdgeKVListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "EdgeKVList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EdgeKVList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEdgeKVListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEdgeKVPutRequest() (request *EdgeKVPutRequest) {
+    request = &EdgeKVPutRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "EdgeKVPut")
+    
+    
+    return
+}
+
+func NewEdgeKVPutResponse() (response *EdgeKVPutResponse) {
+    response = &EdgeKVPutResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// EdgeKVPut
+// This API is used to write key-value pair data to a specified namespace and supports setting expiration time. If the key already exists, it overwrites the original value. If Not Exist, it creates a new key-value pair.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCEUNAVAILABLE_NAMESPACENOTFOUND = "ResourceUnavailable.NamespaceNotFound"
+func (c *Client) EdgeKVPut(request *EdgeKVPutRequest) (response *EdgeKVPutResponse, err error) {
+    return c.EdgeKVPutWithContext(context.Background(), request)
+}
+
+// EdgeKVPut
+// This API is used to write key-value pair data to a specified namespace and supports setting expiration time. If the key already exists, it overwrites the original value. If Not Exist, it creates a new key-value pair.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCEUNAVAILABLE_NAMESPACENOTFOUND = "ResourceUnavailable.NamespaceNotFound"
+func (c *Client) EdgeKVPutWithContext(ctx context.Context, request *EdgeKVPutRequest) (response *EdgeKVPutResponse, err error) {
+    if request == nil {
+        request = NewEdgeKVPutRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "EdgeKVPut")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EdgeKVPut require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEdgeKVPutResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewEnableOriginACLRequest() (request *EnableOriginACLRequest) {
     request = &EnableOriginACLRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -9823,15 +10397,15 @@ func NewEnableOriginACLResponse() (response *EnableOriginACLResponse) {
 }
 
 // EnableOriginACL
-// This API is used to enable origin protection for a site for the first time. Enabled, EdgeOne will use specific origin IP ranges to backhaul traffic for L7 acceleration domains/L4 proxy instances. The maximum allowed number of L7 acceleration domains per submission is 200, and the maximum allowed number of L4 proxy instances is 100. Mixing L7 acceleration domains and L4 proxy instances in a single submission is supported, with a total maximum of 200 instances. To enable more than 200 resources, first enable the maximum quantity via specified resources, then enable the remaining resources via the ModifyOriginACL API. Subsequent addition of L7 acceleration domains/L4 proxy instances should be configured via the ModifyOriginACL API.
+// This API is used to enable origin protection for a site for the first time. Enabled, EdgeOne will use specific origin-pull IP ranges for L7 acceleration domains/L4 proxy instances. The maximum quantity of L7 acceleration domains supported in a single submission is 200, and the maximum quantity of L4 proxy instances is 100. It supports composite submission of L7 acceleration domains/L4 proxy instances, with a maximum total number of instances of 200. To enable exceeding 200 resources, you can first enable the maximum allowed number via specified resources, and enable the remaining resources via the ModifyOriginACL API. Subsequent addition of L7 acceleration domains/L4 proxy instances should be configured via the ModifyOriginACL API. When enabling simultaneously, allowlisted accounts support selecting other origin-pull IP range versions, such as simplified edition, to achieve origin-pull effect with fewer IP ranges.
 //
 // 
 //
-// Create and bind policy Query instance Reset instance access password.
+// Note:
 //
-// -Call this API to deem as consent to the origin protection enablement special agreement (https://intl.cloud.tencent.com/document/product/1552/120141?from_cn_redirect=1);.
+// -Calling this API is deemed as agreement to the special agreement for origin protection enablement (https://www.tencentcloud.com/document/product/1552/120141?from_cn_redirect=1);
 //
-// -The origin IP range may change irregularly. tencent cloud EdgeOne (EdgeOne) will trigger notifications via message Center, SMS, or email 14 days, 7 days, 3 days, and 1 day before the change. To ensure you receive the change notification for the origin IP range, please ensure you have selected EdgeOne product services in the [tencent cloud message Center console](https://console.cloud.tencent.com/message) and configured the correct message recipient. For the setting method, refer to [message Subscription Management](https://intl.cloud.tencent.com/document/product/567/43476?from_cn_redirect=1).
+// -The origin IP range may change irregularly. EdgeOne will trigger notifications via Message Center, SMS, or email 14 days, 7 days, 3 days, and 1 day before the change. To ensure you receive the origin IP range change notification, please ensure you have selected the edge security acceleration platform EO product services relevant message notification and configured the correct message recipients in the Tencent Cloud Message Center Console (https://console.cloud.tencent.com/message). For the setting method, refer to Message Subscription Management (https://www.tencentcloud.com/document/product/567/43476?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -9839,6 +10413,7 @@ func NewEnableOriginACLResponse() (response *EnableOriginACLResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INVALIDDOMAINS = "InvalidParameter.InvalidDomains"
 //  INVALIDPARAMETER_INVALIDPROXIES = "InvalidParameter.InvalidProxies"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTORIGINWHITELIST = "InvalidParameter.ShieldNotSupportHostOriginWhitelist"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_UNSUPPORTEDPLAN = "OperationDenied.UnsupportedPlan"
 //  OPERATIONDENIED_VERSIONCONTROLISGRAYING = "OperationDenied.VersionControlIsGraying"
@@ -9848,15 +10423,15 @@ func (c *Client) EnableOriginACL(request *EnableOriginACLRequest) (response *Ena
 }
 
 // EnableOriginACL
-// This API is used to enable origin protection for a site for the first time. Enabled, EdgeOne will use specific origin IP ranges to backhaul traffic for L7 acceleration domains/L4 proxy instances. The maximum allowed number of L7 acceleration domains per submission is 200, and the maximum allowed number of L4 proxy instances is 100. Mixing L7 acceleration domains and L4 proxy instances in a single submission is supported, with a total maximum of 200 instances. To enable more than 200 resources, first enable the maximum quantity via specified resources, then enable the remaining resources via the ModifyOriginACL API. Subsequent addition of L7 acceleration domains/L4 proxy instances should be configured via the ModifyOriginACL API.
+// This API is used to enable origin protection for a site for the first time. Enabled, EdgeOne will use specific origin-pull IP ranges for L7 acceleration domains/L4 proxy instances. The maximum quantity of L7 acceleration domains supported in a single submission is 200, and the maximum quantity of L4 proxy instances is 100. It supports composite submission of L7 acceleration domains/L4 proxy instances, with a maximum total number of instances of 200. To enable exceeding 200 resources, you can first enable the maximum allowed number via specified resources, and enable the remaining resources via the ModifyOriginACL API. Subsequent addition of L7 acceleration domains/L4 proxy instances should be configured via the ModifyOriginACL API. When enabling simultaneously, allowlisted accounts support selecting other origin-pull IP range versions, such as simplified edition, to achieve origin-pull effect with fewer IP ranges.
 //
 // 
 //
-// Create and bind policy Query instance Reset instance access password.
+// Note:
 //
-// -Call this API to deem as consent to the origin protection enablement special agreement (https://intl.cloud.tencent.com/document/product/1552/120141?from_cn_redirect=1);.
+// -Calling this API is deemed as agreement to the special agreement for origin protection enablement (https://www.tencentcloud.com/document/product/1552/120141?from_cn_redirect=1);
 //
-// -The origin IP range may change irregularly. tencent cloud EdgeOne (EdgeOne) will trigger notifications via message Center, SMS, or email 14 days, 7 days, 3 days, and 1 day before the change. To ensure you receive the change notification for the origin IP range, please ensure you have selected EdgeOne product services in the [tencent cloud message Center console](https://console.cloud.tencent.com/message) and configured the correct message recipient. For the setting method, refer to [message Subscription Management](https://intl.cloud.tencent.com/document/product/567/43476?from_cn_redirect=1).
+// -The origin IP range may change irregularly. EdgeOne will trigger notifications via Message Center, SMS, or email 14 days, 7 days, 3 days, and 1 day before the change. To ensure you receive the origin IP range change notification, please ensure you have selected the edge security acceleration platform EO product services relevant message notification and configured the correct message recipients in the Tencent Cloud Message Center Console (https://console.cloud.tencent.com/message). For the setting method, refer to Message Subscription Management (https://www.tencentcloud.com/document/product/567/43476?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -9864,6 +10439,7 @@ func (c *Client) EnableOriginACL(request *EnableOriginACLRequest) (response *Ena
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INVALIDDOMAINS = "InvalidParameter.InvalidDomains"
 //  INVALIDPARAMETER_INVALIDPROXIES = "InvalidParameter.InvalidProxies"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTORIGINWHITELIST = "InvalidParameter.ShieldNotSupportHostOriginWhitelist"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_UNSUPPORTEDPLAN = "OperationDenied.UnsupportedPlan"
 //  OPERATIONDENIED_VERSIONCONTROLISGRAYING = "OperationDenied.VersionControlIsGraying"
@@ -9905,7 +10481,7 @@ func NewExportZoneConfigResponse() (response *ExportZoneConfigResponse) {
 }
 
 // ExportZoneConfig
-// This API is used to export site configuration . The exported configuration is used for import via the API (ImportZoneConfig). This feature only supports the sites in the plans of the Standard Edition and the Enterprise Edition.
+// This API is used to export site configuration based on desired configuration items. The exported configuration is used for import via the site configuration import API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -9913,6 +10489,7 @@ func NewExportZoneConfigResponse() (response *ExportZoneConfigResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INVALIDDOMAINS = "InvalidParameter.InvalidDomains"
 //  INVALIDPARAMETER_INVALIDPROXIES = "InvalidParameter.InvalidProxies"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTORIGINWHITELIST = "InvalidParameter.ShieldNotSupportHostOriginWhitelist"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_UNSUPPORTEDPLAN = "OperationDenied.UnsupportedPlan"
 //  OPERATIONDENIED_VERSIONCONTROLISGRAYING = "OperationDenied.VersionControlIsGraying"
@@ -9922,7 +10499,7 @@ func (c *Client) ExportZoneConfig(request *ExportZoneConfigRequest) (response *E
 }
 
 // ExportZoneConfig
-// This API is used to export site configuration . The exported configuration is used for import via the API (ImportZoneConfig). This feature only supports the sites in the plans of the Standard Edition and the Enterprise Edition.
+// This API is used to export site configuration based on desired configuration items. The exported configuration is used for import via the site configuration import API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -9930,6 +10507,7 @@ func (c *Client) ExportZoneConfig(request *ExportZoneConfigRequest) (response *E
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INVALIDDOMAINS = "InvalidParameter.InvalidDomains"
 //  INVALIDPARAMETER_INVALIDPROXIES = "InvalidParameter.InvalidProxies"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTORIGINWHITELIST = "InvalidParameter.ShieldNotSupportHostOriginWhitelist"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_UNSUPPORTEDPLAN = "OperationDenied.UnsupportedPlan"
 //  OPERATIONDENIED_VERSIONCONTROLISGRAYING = "OperationDenied.VersionControlIsGraying"
@@ -11011,6 +11589,62 @@ func (c *Client) ModifyDnsRecordsStatusWithContext(ctx context.Context, request 
     return
 }
 
+func NewModifyEdgeKVNamespaceRequest() (request *ModifyEdgeKVNamespaceRequest) {
+    request = &ModifyEdgeKVNamespaceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ModifyEdgeKVNamespace")
+    
+    
+    return
+}
+
+func NewModifyEdgeKVNamespaceResponse() (response *ModifyEdgeKVNamespaceResponse) {
+    response = &ModifyEdgeKVNamespaceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyEdgeKVNamespace
+// This API is used to modify the attribute information of a specified KV namespace. Currently supported is namespace description modification.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_REMARKTOOLONG = "InvalidParameter.RemarkTooLong"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE_NAMESPACENOTFOUND = "ResourceUnavailable.NamespaceNotFound"
+func (c *Client) ModifyEdgeKVNamespace(request *ModifyEdgeKVNamespaceRequest) (response *ModifyEdgeKVNamespaceResponse, err error) {
+    return c.ModifyEdgeKVNamespaceWithContext(context.Background(), request)
+}
+
+// ModifyEdgeKVNamespace
+// This API is used to modify the attribute information of a specified KV namespace. Currently supported is namespace description modification.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_REMARKTOOLONG = "InvalidParameter.RemarkTooLong"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE_NAMESPACENOTFOUND = "ResourceUnavailable.NamespaceNotFound"
+func (c *Client) ModifyEdgeKVNamespaceWithContext(ctx context.Context, request *ModifyEdgeKVNamespaceRequest) (response *ModifyEdgeKVNamespaceResponse, err error) {
+    if request == nil {
+        request = NewModifyEdgeKVNamespaceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "ModifyEdgeKVNamespace")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyEdgeKVNamespace require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyEdgeKVNamespaceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyFunctionRequest() (request *ModifyFunctionRequest) {
     request = &ModifyFunctionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -11077,6 +11711,70 @@ func (c *Client) ModifyFunctionWithContext(ctx context.Context, request *ModifyF
     return
 }
 
+func NewModifyFunctionComponentBindingsRequest() (request *ModifyFunctionComponentBindingsRequest) {
+    request = &ModifyFunctionComponentBindingsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ModifyFunctionComponentBindings")
+    
+    
+    return
+}
+
+func NewModifyFunctionComponentBindingsResponse() (response *ModifyFunctionComponentBindingsResponse) {
+    response = &ModifyFunctionComponentBindingsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyFunctionComponentBindings
+// This API is used to modify the binding relationship between edge functions and components, supporting four operation modes: bind, bind-override, unbind, and rebind. By specifying the operation type and component list, you can manage the component binding of functions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_BINDINGNOTFOUND = "InvalidParameter.BindingNotFound"
+//  INVALIDPARAMETER_DUPLICATEBINDINGNAME = "InvalidParameter.DuplicateBindingName"
+//  INVALIDPARAMETER_FUNCTIONBINDVARIABLENAMECONFLICT = "InvalidParameter.FunctionBindVariableNameConflict"
+//  INVALIDPARAMETER_INVALIDOPERATION = "InvalidParameter.InvalidOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+//  RESOURCEUNAVAILABLE_NAMESPACENOTFOUND = "ResourceUnavailable.NamespaceNotFound"
+func (c *Client) ModifyFunctionComponentBindings(request *ModifyFunctionComponentBindingsRequest) (response *ModifyFunctionComponentBindingsResponse, err error) {
+    return c.ModifyFunctionComponentBindingsWithContext(context.Background(), request)
+}
+
+// ModifyFunctionComponentBindings
+// This API is used to modify the binding relationship between edge functions and components, supporting four operation modes: bind, bind-override, unbind, and rebind. By specifying the operation type and component list, you can manage the component binding of functions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_BINDINGNOTFOUND = "InvalidParameter.BindingNotFound"
+//  INVALIDPARAMETER_DUPLICATEBINDINGNAME = "InvalidParameter.DuplicateBindingName"
+//  INVALIDPARAMETER_FUNCTIONBINDVARIABLENAMECONFLICT = "InvalidParameter.FunctionBindVariableNameConflict"
+//  INVALIDPARAMETER_INVALIDOPERATION = "InvalidParameter.InvalidOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+//  RESOURCEUNAVAILABLE_NAMESPACENOTFOUND = "ResourceUnavailable.NamespaceNotFound"
+func (c *Client) ModifyFunctionComponentBindingsWithContext(ctx context.Context, request *ModifyFunctionComponentBindingsRequest) (response *ModifyFunctionComponentBindingsResponse, err error) {
+    if request == nil {
+        request = NewModifyFunctionComponentBindingsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "ModifyFunctionComponentBindings")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyFunctionComponentBindings require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyFunctionComponentBindingsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyFunctionRuleRequest() (request *ModifyFunctionRuleRequest) {
     request = &ModifyFunctionRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -11097,7 +11795,7 @@ func NewModifyFunctionRuleResponse() (response *ModifyFunctionRuleResponse) {
 }
 
 // ModifyFunctionRule
-// This API is used to modify a trigger rule for an edge function. It supports modifying rule conditions, execution functions, and description.
+// This API is used to modify a trigger rule for an edge function. It supports modifying rule conditions, execution functions, and description. You can first use the DescribeFunctionRules API to get the RuleId of the rule that needs to be modified, then input the modified rule content. The original rule content will be overwritten.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -11113,7 +11811,7 @@ func (c *Client) ModifyFunctionRule(request *ModifyFunctionRuleRequest) (respons
 }
 
 // ModifyFunctionRule
-// This API is used to modify a trigger rule for an edge function. It supports modifying rule conditions, execution functions, and description.
+// This API is used to modify a trigger rule for an edge function. It supports modifying rule conditions, execution functions, and description. You can first use the DescribeFunctionRules API to get the RuleId of the rule that needs to be modified, then input the modified rule content. The original rule content will be overwritten.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -12403,13 +13101,14 @@ func NewModifyOriginACLResponse() (response *ModifyOriginACLResponse) {
 }
 
 // ModifyOriginACL
-// This API is used to enable or disable specific origin ACLs for L7 acceleration domain names or L4 proxy instances. A single submission supports up to 200 L7 acceleration domain names or 100 L4 proxy instances. Hybrid submissions of L7 acceleration domain names and L4 proxy instances are supported, with a maximum total number of instances of 200. If changes are needed for exceeding 200 instances, submit them in batches via this API.
+// This API is used to enable or disable specific origin IP ranges for L7 acceleration domains or L4 proxy instances. The maximum quantity for single submission is 200 L7 acceleration domains or 100 L4 proxy instances, with mixed submissions supported up to a total of 200 instances. If changes are needed for submissions exceeding 200 instances, please submit in batches via this interface. Meanwhile, allowlisted customers can switch to other available origin protection IP range versions such as the simplified edition, which can reduce origin IP ranges.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INVALIDDOMAINS = "InvalidParameter.InvalidDomains"
 //  INVALIDPARAMETER_INVALIDPROXIES = "InvalidParameter.InvalidProxies"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTORIGINWHITELIST = "InvalidParameter.ShieldNotSupportHostOriginWhitelist"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_UNSUPPORTEDPLAN = "OperationDenied.UnsupportedPlan"
 //  OPERATIONDENIED_UPDATEIPWHITELISTFIRST = "OperationDenied.UpdateIPWhitelistFirst"
@@ -12418,13 +13117,14 @@ func (c *Client) ModifyOriginACL(request *ModifyOriginACLRequest) (response *Mod
 }
 
 // ModifyOriginACL
-// This API is used to enable or disable specific origin ACLs for L7 acceleration domain names or L4 proxy instances. A single submission supports up to 200 L7 acceleration domain names or 100 L4 proxy instances. Hybrid submissions of L7 acceleration domain names and L4 proxy instances are supported, with a maximum total number of instances of 200. If changes are needed for exceeding 200 instances, submit them in batches via this API.
+// This API is used to enable or disable specific origin IP ranges for L7 acceleration domains or L4 proxy instances. The maximum quantity for single submission is 200 L7 acceleration domains or 100 L4 proxy instances, with mixed submissions supported up to a total of 200 instances. If changes are needed for submissions exceeding 200 instances, please submit in batches via this interface. Meanwhile, allowlisted customers can switch to other available origin protection IP range versions such as the simplified edition, which can reduce origin IP ranges.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INVALIDDOMAINS = "InvalidParameter.InvalidDomains"
 //  INVALIDPARAMETER_INVALIDPROXIES = "InvalidParameter.InvalidProxies"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTORIGINWHITELIST = "InvalidParameter.ShieldNotSupportHostOriginWhitelist"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_UNSUPPORTEDPLAN = "OperationDenied.UnsupportedPlan"
 //  OPERATIONDENIED_UPDATEIPWHITELISTFIRST = "OperationDenied.UpdateIPWhitelistFirst"
@@ -12573,6 +13273,96 @@ func (c *Client) ModifyPlanWithContext(ctx context.Context, request *ModifyPlanR
     request.SetContext(ctx)
     
     response = NewModifyPlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyPrefetchOriginLimitRequest() (request *ModifyPrefetchOriginLimitRequest) {
+    request = &ModifyPrefetchOriginLimitRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ModifyPrefetchOriginLimit")
+    
+    
+    return
+}
+
+func NewModifyPrefetchOriginLimitResponse() (response *ModifyPrefetchOriginLimitResponse) {
+    response = &ModifyPrefetchOriginLimitResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyPrefetchOriginLimit
+// This API is used to configure the origin speed limit. This feature is in beta test.
+//
+// This API is used to create, modify and delete preheating origin speed limit restrictions. Each account supports up to 100 restrictions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CREATEPREFETCHORIGINLIMITFAILED = "FailedOperation.CreatePrefetchOriginLimitFailed"
+//  FAILEDOPERATION_PREFETCHORIGINLIMITCOUNTEXCEEDED = "FailedOperation.PrefetchOriginLimitCountExceeded"
+//  FAILEDOPERATION_PREFETCHORIGINLIMITNOTFOUND = "FailedOperation.PrefetchOriginLimitNotFound"
+//  INTERNALERROR_BACKENDERROR = "InternalError.BackendError"
+//  INTERNALERROR_DOMAINCONFIG = "InternalError.DomainConfig"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DOMAINAREANOTSUPPORTPREFETCHORIGINLIMITAREA = "InvalidParameter.DomainAreaNotSupportPrefetchOriginLimitArea"
+//  INVALIDPARAMETER_DOMAINNOTFOUND = "InvalidParameter.DomainNotFound"
+//  INVALIDPARAMETER_PREFETCHORIGINLIMITAREAINVALID = "InvalidParameter.PrefetchOriginLimitAreaInvalid"
+//  INVALIDPARAMETER_PREFETCHORIGINLIMITBANDWIDTHTOOLARGE = "InvalidParameter.PrefetchOriginLimitBandwidthTooLarge"
+//  INVALIDPARAMETER_PREFETCHORIGINLIMITBANDWIDTHTOOSMALL = "InvalidParameter.PrefetchOriginLimitBandwidthTooSmall"
+//  INVALIDPARAMETER_PREFETCHORIGINLIMITENABLEDINVALID = "InvalidParameter.PrefetchOriginLimitEnabledInvalid"
+//  INVALIDPARAMETER_ZONEAREANOTSUPPORTPREFETCHORIGINLIMITAREA = "InvalidParameter.ZoneAreaNotSupportPrefetchOriginLimitArea"
+//  OPERATIONDENIED_NOTINPREFETCHORIGINLIMITWHITELIST = "OperationDenied.NotInPrefetchOriginLimitWhiteList"
+//  RESOURCEINUSE_PREFETCHORIGINLIMITALREADYEXISTS = "ResourceInUse.PrefetchOriginLimitAlreadyExists"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) ModifyPrefetchOriginLimit(request *ModifyPrefetchOriginLimitRequest) (response *ModifyPrefetchOriginLimitResponse, err error) {
+    return c.ModifyPrefetchOriginLimitWithContext(context.Background(), request)
+}
+
+// ModifyPrefetchOriginLimit
+// This API is used to configure the origin speed limit. This feature is in beta test.
+//
+// This API is used to create, modify and delete preheating origin speed limit restrictions. Each account supports up to 100 restrictions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CREATEPREFETCHORIGINLIMITFAILED = "FailedOperation.CreatePrefetchOriginLimitFailed"
+//  FAILEDOPERATION_PREFETCHORIGINLIMITCOUNTEXCEEDED = "FailedOperation.PrefetchOriginLimitCountExceeded"
+//  FAILEDOPERATION_PREFETCHORIGINLIMITNOTFOUND = "FailedOperation.PrefetchOriginLimitNotFound"
+//  INTERNALERROR_BACKENDERROR = "InternalError.BackendError"
+//  INTERNALERROR_DOMAINCONFIG = "InternalError.DomainConfig"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DOMAINAREANOTSUPPORTPREFETCHORIGINLIMITAREA = "InvalidParameter.DomainAreaNotSupportPrefetchOriginLimitArea"
+//  INVALIDPARAMETER_DOMAINNOTFOUND = "InvalidParameter.DomainNotFound"
+//  INVALIDPARAMETER_PREFETCHORIGINLIMITAREAINVALID = "InvalidParameter.PrefetchOriginLimitAreaInvalid"
+//  INVALIDPARAMETER_PREFETCHORIGINLIMITBANDWIDTHTOOLARGE = "InvalidParameter.PrefetchOriginLimitBandwidthTooLarge"
+//  INVALIDPARAMETER_PREFETCHORIGINLIMITBANDWIDTHTOOSMALL = "InvalidParameter.PrefetchOriginLimitBandwidthTooSmall"
+//  INVALIDPARAMETER_PREFETCHORIGINLIMITENABLEDINVALID = "InvalidParameter.PrefetchOriginLimitEnabledInvalid"
+//  INVALIDPARAMETER_ZONEAREANOTSUPPORTPREFETCHORIGINLIMITAREA = "InvalidParameter.ZoneAreaNotSupportPrefetchOriginLimitArea"
+//  OPERATIONDENIED_NOTINPREFETCHORIGINLIMITWHITELIST = "OperationDenied.NotInPrefetchOriginLimitWhiteList"
+//  RESOURCEINUSE_PREFETCHORIGINLIMITALREADYEXISTS = "ResourceInUse.PrefetchOriginLimitAlreadyExists"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) ModifyPrefetchOriginLimitWithContext(ctx context.Context, request *ModifyPrefetchOriginLimitRequest) (response *ModifyPrefetchOriginLimitResponse, err error) {
+    if request == nil {
+        request = NewModifyPrefetchOriginLimitRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "ModifyPrefetchOriginLimit")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyPrefetchOriginLimit require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyPrefetchOriginLimitResponse()
     err = c.Send(request, response)
     return
 }
@@ -13747,6 +14537,64 @@ func (c *Client) ModifySecurityPolicyWithContext(ctx context.Context, request *M
     return
 }
 
+func NewModifySharedCNAMERequest() (request *ModifySharedCNAMERequest) {
+    request = &ModifySharedCNAMERequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ModifySharedCNAME")
+    
+    
+    return
+}
+
+func NewModifySharedCNAMEResponse() (response *ModifySharedCNAMEResponse) {
+    response = &ModifySharedCNAMEResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifySharedCNAME
+// This API is used to modify a shared CNAME. Currently only support modifying the description of a shared CNAME and setting the associated IP SSL domain name of a shared CNAME with IP SSL type. The shared CNAME itself cannot be modified after creation. This feature is in beta test.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  OPERATIONDENIED_DOMAINMUSTINIPSSLSHAREDCNAMEZONEANDINSHAREDCNAME = "OperationDenied.DomainMustInIPSSLSharedCNAMEZoneAndInSharedCNAME"
+//  OPERATIONDENIED_IPSSLALREADYBOUNDANOTHERDOMAIN = "OperationDenied.IPSSLAlreadyBoundAnotherDomain"
+//  OPERATIONDENIED_LASTIPSSLOPERATIONNOTCOMPLETE = "OperationDenied.LastIPSSLOperationNotComplete"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifySharedCNAME(request *ModifySharedCNAMERequest) (response *ModifySharedCNAMEResponse, err error) {
+    return c.ModifySharedCNAMEWithContext(context.Background(), request)
+}
+
+// ModifySharedCNAME
+// This API is used to modify a shared CNAME. Currently only support modifying the description of a shared CNAME and setting the associated IP SSL domain name of a shared CNAME with IP SSL type. The shared CNAME itself cannot be modified after creation. This feature is in beta test.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  OPERATIONDENIED_DOMAINMUSTINIPSSLSHAREDCNAMEZONEANDINSHAREDCNAME = "OperationDenied.DomainMustInIPSSLSharedCNAMEZoneAndInSharedCNAME"
+//  OPERATIONDENIED_IPSSLALREADYBOUNDANOTHERDOMAIN = "OperationDenied.IPSSLAlreadyBoundAnotherDomain"
+//  OPERATIONDENIED_LASTIPSSLOPERATIONNOTCOMPLETE = "OperationDenied.LastIPSSLOperationNotComplete"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifySharedCNAMEWithContext(ctx context.Context, request *ModifySharedCNAMERequest) (response *ModifySharedCNAMEResponse, err error) {
+    if request == nil {
+        request = NewModifySharedCNAMERequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "ModifySharedCNAME")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySharedCNAME require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifySharedCNAMEResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyWebSecurityTemplateRequest() (request *ModifyWebSecurityTemplateRequest) {
     request = &ModifyWebSecurityTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -14173,6 +15021,82 @@ func (c *Client) ModifyZoneStatusWithContext(ctx context.Context, request *Modif
     request.SetContext(ctx)
     
     response = NewModifyZoneStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyZoneWorkModeRequest() (request *ModifyZoneWorkModeRequest) {
+    request = &ModifyZoneWorkModeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ModifyZoneWorkMode")
+    
+    
+    return
+}
+
+func NewModifyZoneWorkModeResponse() (response *ModifyZoneWorkModeResponse) {
+    response = &ModifyZoneWorkModeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyZoneWorkMode
+// This API is used to modify the working mode of configuration modules under a site. Configuration modules can enable version management mode or immediate effect mode by configuration group dimension. For details, refer to version management (https://www.tencentcloud.comom/document/product/1552/113690?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_WORKMODEISSAME = "InvalidParameter.WorkModeIsSame"
+//  INVALIDPARAMETER_ZONENOTFOUND = "InvalidParameter.ZoneNotFound"
+//  INVALIDPARAMETERVALUE_OWNERSHIPVERIFICATIONNOTPASSED = "InvalidParameterValue.OwnershipVerificationNotPassed"
+//  OPERATIONDENIED_ALIASDOMAINNOTSUPPORT = "OperationDenied.AliasDomainNotSupport"
+//  OPERATIONDENIED_CONFIGLOCKED = "OperationDenied.ConfigLocked"
+//  OPERATIONDENIED_DOMAINSTATUSUNSTABLE = "OperationDenied.DomainStatusUnstable"
+//  OPERATIONDENIED_ERRZONEISALREADYPAUSED = "OperationDenied.ErrZoneIsAlreadyPaused"
+//  OPERATIONDENIED_NOTINVERSIONCONTROLWHITELIST = "OperationDenied.NotInVersionControlWhiteList"
+//  OPERATIONDENIED_OWNERSHIPVERIFICATIONNOTPASSED = "OperationDenied.OwnershipVerificationNotPassed"
+//  OPERATIONDENIED_PLANTYPEISWRONG = "OperationDenied.PlanTypeIsWrong"
+//  OPERATIONDENIED_VERSIONCONTROLLOCKED = "OperationDenied.VersionControlLocked"
+//  OPERATIONDENIED_VERSIONCONTROLNEEDNSSWITCHED = "OperationDenied.VersionControlNeedNSSwitched"
+//  RESOURCENOTFOUND_ZONENOTFOUND = "ResourceNotFound.ZoneNotFound"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) ModifyZoneWorkMode(request *ModifyZoneWorkModeRequest) (response *ModifyZoneWorkModeResponse, err error) {
+    return c.ModifyZoneWorkModeWithContext(context.Background(), request)
+}
+
+// ModifyZoneWorkMode
+// This API is used to modify the working mode of configuration modules under a site. Configuration modules can enable version management mode or immediate effect mode by configuration group dimension. For details, refer to version management (https://www.tencentcloud.comom/document/product/1552/113690?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_WORKMODEISSAME = "InvalidParameter.WorkModeIsSame"
+//  INVALIDPARAMETER_ZONENOTFOUND = "InvalidParameter.ZoneNotFound"
+//  INVALIDPARAMETERVALUE_OWNERSHIPVERIFICATIONNOTPASSED = "InvalidParameterValue.OwnershipVerificationNotPassed"
+//  OPERATIONDENIED_ALIASDOMAINNOTSUPPORT = "OperationDenied.AliasDomainNotSupport"
+//  OPERATIONDENIED_CONFIGLOCKED = "OperationDenied.ConfigLocked"
+//  OPERATIONDENIED_DOMAINSTATUSUNSTABLE = "OperationDenied.DomainStatusUnstable"
+//  OPERATIONDENIED_ERRZONEISALREADYPAUSED = "OperationDenied.ErrZoneIsAlreadyPaused"
+//  OPERATIONDENIED_NOTINVERSIONCONTROLWHITELIST = "OperationDenied.NotInVersionControlWhiteList"
+//  OPERATIONDENIED_OWNERSHIPVERIFICATIONNOTPASSED = "OperationDenied.OwnershipVerificationNotPassed"
+//  OPERATIONDENIED_PLANTYPEISWRONG = "OperationDenied.PlanTypeIsWrong"
+//  OPERATIONDENIED_VERSIONCONTROLLOCKED = "OperationDenied.VersionControlLocked"
+//  OPERATIONDENIED_VERSIONCONTROLNEEDNSSWITCHED = "OperationDenied.VersionControlNeedNSSwitched"
+//  RESOURCENOTFOUND_ZONENOTFOUND = "ResourceNotFound.ZoneNotFound"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) ModifyZoneWorkModeWithContext(ctx context.Context, request *ModifyZoneWorkModeRequest) (response *ModifyZoneWorkModeResponse, err error) {
+    if request == nil {
+        request = NewModifyZoneWorkModeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "ModifyZoneWorkMode")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyZoneWorkMode require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyZoneWorkModeResponse()
     err = c.Send(request, response)
     return
 }
