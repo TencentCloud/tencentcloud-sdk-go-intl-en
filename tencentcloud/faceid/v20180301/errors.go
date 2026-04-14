@@ -65,6 +65,9 @@ const (
 	// The face in the picture is blocked, please upload a picture without any blockage
 	FAILEDOPERATION_COVEREDFACE = "FailedOperation.CoveredFace"
 
+	// Decryption failed.
+	FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+
 	// The service engine call failed, please try again
 	FAILEDOPERATION_DETECTENGINESYSTEMERROR = "FailedOperation.DetectEngineSystemError"
 
@@ -176,6 +179,9 @@ const (
 	// The video is too short. Please capture a video longer than 2 seconds.
 	FAILEDOPERATION_SILENTTOOSHORT = "FailedOperation.SilentTooShort"
 
+	// STS unauthorized.
+	FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+
 	// Unknown internal error.
 	FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
 
@@ -211,6 +217,9 @@ const (
 
 	// Invalid parameter.
 	INVALIDPARAMETER = "InvalidParameter"
+
+	// Unencrypted fields exist. Refer to the documentation to modify.
+	INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
 
 	// Incorrect parameter value.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"

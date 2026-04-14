@@ -219,6 +219,210 @@ func (c *Client) ApplyWebVerificationBizTokenIntlWithContext(ctx context.Context
     return
 }
 
+func NewBankCard2EVerificationRequest() (request *BankCard2EVerificationRequest) {
+    request = &BankCard2EVerificationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "BankCard2EVerification")
+    
+    
+    return
+}
+
+func NewBankCard2EVerificationResponse() (response *BankCard2EVerificationResponse) {
+    response = &BankCard2EVerificationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// BankCard2EVerification
+// This API is used to validate the authenticity and consistency of the name and bank card number.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) BankCard2EVerification(request *BankCard2EVerificationRequest) (response *BankCard2EVerificationResponse, err error) {
+    return c.BankCard2EVerificationWithContext(context.Background(), request)
+}
+
+// BankCard2EVerification
+// This API is used to validate the authenticity and consistency of the name and bank card number.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) BankCard2EVerificationWithContext(ctx context.Context, request *BankCard2EVerificationRequest) (response *BankCard2EVerificationResponse, err error) {
+    if request == nil {
+        request = NewBankCard2EVerificationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "BankCard2EVerification")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BankCard2EVerification require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBankCard2EVerificationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewBankCard4EVerificationRequest() (request *BankCard4EVerificationRequest) {
+    request = &BankCard4EVerificationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "BankCard4EVerification")
+    
+    
+    return
+}
+
+func NewBankCard4EVerificationResponse() (response *BankCard4EVerificationResponse) {
+    response = &BankCard4EVerificationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// BankCard4EVerification
+// This API is used to verify the authenticity and consistency of the bank card number, name, ID number, and mobile number for account opening.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) BankCard4EVerification(request *BankCard4EVerificationRequest) (response *BankCard4EVerificationResponse, err error) {
+    return c.BankCard4EVerificationWithContext(context.Background(), request)
+}
+
+// BankCard4EVerification
+// This API is used to verify the authenticity and consistency of the bank card number, name, ID number, and mobile number for account opening.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) BankCard4EVerificationWithContext(ctx context.Context, request *BankCard4EVerificationRequest) (response *BankCard4EVerificationResponse, err error) {
+    if request == nil {
+        request = NewBankCard4EVerificationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "BankCard4EVerification")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BankCard4EVerification require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBankCard4EVerificationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewBankCardVerificationRequest() (request *BankCardVerificationRequest) {
+    request = &BankCardVerificationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "BankCardVerification")
+    
+    
+    return
+}
+
+func NewBankCardVerificationResponse() (response *BankCardVerificationResponse) {
+    response = &BankCardVerificationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// BankCardVerification
+// This API is used to verify the authenticity and consistency of the bank card number, name, and ID number of information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) BankCardVerification(request *BankCardVerificationRequest) (response *BankCardVerificationResponse, err error) {
+    return c.BankCardVerificationWithContext(context.Background(), request)
+}
+
+// BankCardVerification
+// This API is used to verify the authenticity and consistency of the bank card number, name, and ID number of information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) BankCardVerificationWithContext(ctx context.Context, request *BankCardVerificationRequest) (response *BankCardVerificationResponse, err error) {
+    if request == nil {
+        request = NewBankCardVerificationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "BankCardVerification")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BankCardVerification require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBankCardVerificationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCompareFaceLivenessRequest() (request *CompareFaceLivenessRequest) {
     request = &CompareFaceLivenessRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1019,6 +1223,158 @@ func (c *Client) LivenessCompareWithContext(ctx context.Context, request *Livene
     request.SetContext(ctx)
     
     response = NewLivenessCompareResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewVideoLivenessCompareRequest() (request *VideoLivenessCompareRequest) {
+    request = &VideoLivenessCompareRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "VideoLivenessCompare")
+    
+    
+    return
+}
+
+func NewVideoLivenessCompareResponse() (response *VideoLivenessCompareResponse) {
+    response = &VideoLivenessCompareResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// VideoLivenessCompare
+// This API is used to pass in URLs of a video and a photo, determine whether the person in the video is real, and if yes, then determine whether the person in the video is the same as that in the photo.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ACTIONCLOSEEYE = "FailedOperation.ActionCloseEye"
+//  FAILEDOPERATION_ACTIONFACECLOSE = "FailedOperation.ActionFaceClose"
+//  FAILEDOPERATION_ACTIONFACEFAR = "FailedOperation.ActionFaceFar"
+//  FAILEDOPERATION_ACTIONFACELEFT = "FailedOperation.ActionFaceLeft"
+//  FAILEDOPERATION_ACTIONFACERIGHT = "FailedOperation.ActionFaceRight"
+//  FAILEDOPERATION_ACTIONFIRSTACTION = "FailedOperation.ActionFirstAction"
+//  FAILEDOPERATION_ACTIONLIGHTDARK = "FailedOperation.ActionLightDark"
+//  FAILEDOPERATION_ACTIONLIGHTSTRONG = "FailedOperation.ActionLightStrong"
+//  FAILEDOPERATION_ACTIONNODETECTFACE = "FailedOperation.ActionNodetectFace"
+//  FAILEDOPERATION_ACTIONOPENMOUTH = "FailedOperation.ActionOpenMouth"
+//  FAILEDOPERATION_COMPAREFAIL = "FailedOperation.CompareFail"
+//  FAILEDOPERATION_COMPARELOWSIMILARITY = "FailedOperation.CompareLowSimilarity"
+//  FAILEDOPERATION_COMPARESYSTEMERROR = "FailedOperation.CompareSystemError"
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_DOWNLOADTIMEOUTERROR = "FailedOperation.DownLoadTimeoutError"
+//  FAILEDOPERATION_LIFEPHOTODETECTFACES = "FailedOperation.LifePhotoDetectFaces"
+//  FAILEDOPERATION_LIFEPHOTODETECTFAKE = "FailedOperation.LifePhotoDetectFake"
+//  FAILEDOPERATION_LIFEPHOTODETECTNOFACES = "FailedOperation.LifePhotoDetectNoFaces"
+//  FAILEDOPERATION_LIFEPHOTOPOORQUALITY = "FailedOperation.LifePhotoPoorQuality"
+//  FAILEDOPERATION_LIFEPHOTOSIZEERROR = "FailedOperation.LifePhotoSizeError"
+//  FAILEDOPERATION_LIPFACEINCOMPLETE = "FailedOperation.LipFaceIncomplete"
+//  FAILEDOPERATION_LIPMOVESMALL = "FailedOperation.LipMoveSmall"
+//  FAILEDOPERATION_LIPNETFAILED = "FailedOperation.LipNetFailed"
+//  FAILEDOPERATION_LIPSIZEERROR = "FailedOperation.LipSizeError"
+//  FAILEDOPERATION_LIPVIDEOINVALID = "FailedOperation.LipVideoInvalid"
+//  FAILEDOPERATION_LIPVIDEOQUAILITY = "FailedOperation.LipVideoQuaility"
+//  FAILEDOPERATION_LIPVOICEDETECT = "FailedOperation.LipVoiceDetect"
+//  FAILEDOPERATION_LIPVOICELOW = "FailedOperation.LipVoiceLow"
+//  FAILEDOPERATION_LIPVOICERECOGNIZE = "FailedOperation.LipVoiceRecognize"
+//  FAILEDOPERATION_LIVESSBESTFRAMEERROR = "FailedOperation.LivessBestFrameError"
+//  FAILEDOPERATION_LIVESSDETECTFAIL = "FailedOperation.LivessDetectFail"
+//  FAILEDOPERATION_LIVESSDETECTFAKE = "FailedOperation.LivessDetectFake"
+//  FAILEDOPERATION_LIVESSSYSTEMERROR = "FailedOperation.LivessSystemError"
+//  FAILEDOPERATION_LIVESSUNKNOWNERROR = "FailedOperation.LivessUnknownError"
+//  FAILEDOPERATION_SILENTDETECTFAIL = "FailedOperation.SilentDetectFail"
+//  FAILEDOPERATION_SILENTEYELIVEFAIL = "FailedOperation.SilentEyeLiveFail"
+//  FAILEDOPERATION_SILENTFACEDETECTFAIL = "FailedOperation.SilentFaceDetectFail"
+//  FAILEDOPERATION_SILENTFACEQUALITYFAIL = "FailedOperation.SilentFaceQualityFail"
+//  FAILEDOPERATION_SILENTFACEWITHMASKFAIL = "FailedOperation.SilentFaceWithMaskFail"
+//  FAILEDOPERATION_SILENTMOUTHLIVEFAIL = "FailedOperation.SilentMouthLiveFail"
+//  FAILEDOPERATION_SILENTMULTIFACEFAIL = "FailedOperation.SilentMultiFaceFail"
+//  FAILEDOPERATION_SILENTPICTURELIVEFAIL = "FailedOperation.SilentPictureLiveFail"
+//  FAILEDOPERATION_SILENTTHRESHOLD = "FailedOperation.SilentThreshold"
+//  FAILEDOPERATION_SILENTTOOSHORT = "FailedOperation.SilentTooShort"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) VideoLivenessCompare(request *VideoLivenessCompareRequest) (response *VideoLivenessCompareResponse, err error) {
+    return c.VideoLivenessCompareWithContext(context.Background(), request)
+}
+
+// VideoLivenessCompare
+// This API is used to pass in URLs of a video and a photo, determine whether the person in the video is real, and if yes, then determine whether the person in the video is the same as that in the photo.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ACTIONCLOSEEYE = "FailedOperation.ActionCloseEye"
+//  FAILEDOPERATION_ACTIONFACECLOSE = "FailedOperation.ActionFaceClose"
+//  FAILEDOPERATION_ACTIONFACEFAR = "FailedOperation.ActionFaceFar"
+//  FAILEDOPERATION_ACTIONFACELEFT = "FailedOperation.ActionFaceLeft"
+//  FAILEDOPERATION_ACTIONFACERIGHT = "FailedOperation.ActionFaceRight"
+//  FAILEDOPERATION_ACTIONFIRSTACTION = "FailedOperation.ActionFirstAction"
+//  FAILEDOPERATION_ACTIONLIGHTDARK = "FailedOperation.ActionLightDark"
+//  FAILEDOPERATION_ACTIONLIGHTSTRONG = "FailedOperation.ActionLightStrong"
+//  FAILEDOPERATION_ACTIONNODETECTFACE = "FailedOperation.ActionNodetectFace"
+//  FAILEDOPERATION_ACTIONOPENMOUTH = "FailedOperation.ActionOpenMouth"
+//  FAILEDOPERATION_COMPAREFAIL = "FailedOperation.CompareFail"
+//  FAILEDOPERATION_COMPARELOWSIMILARITY = "FailedOperation.CompareLowSimilarity"
+//  FAILEDOPERATION_COMPARESYSTEMERROR = "FailedOperation.CompareSystemError"
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_DOWNLOADTIMEOUTERROR = "FailedOperation.DownLoadTimeoutError"
+//  FAILEDOPERATION_LIFEPHOTODETECTFACES = "FailedOperation.LifePhotoDetectFaces"
+//  FAILEDOPERATION_LIFEPHOTODETECTFAKE = "FailedOperation.LifePhotoDetectFake"
+//  FAILEDOPERATION_LIFEPHOTODETECTNOFACES = "FailedOperation.LifePhotoDetectNoFaces"
+//  FAILEDOPERATION_LIFEPHOTOPOORQUALITY = "FailedOperation.LifePhotoPoorQuality"
+//  FAILEDOPERATION_LIFEPHOTOSIZEERROR = "FailedOperation.LifePhotoSizeError"
+//  FAILEDOPERATION_LIPFACEINCOMPLETE = "FailedOperation.LipFaceIncomplete"
+//  FAILEDOPERATION_LIPMOVESMALL = "FailedOperation.LipMoveSmall"
+//  FAILEDOPERATION_LIPNETFAILED = "FailedOperation.LipNetFailed"
+//  FAILEDOPERATION_LIPSIZEERROR = "FailedOperation.LipSizeError"
+//  FAILEDOPERATION_LIPVIDEOINVALID = "FailedOperation.LipVideoInvalid"
+//  FAILEDOPERATION_LIPVIDEOQUAILITY = "FailedOperation.LipVideoQuaility"
+//  FAILEDOPERATION_LIPVOICEDETECT = "FailedOperation.LipVoiceDetect"
+//  FAILEDOPERATION_LIPVOICELOW = "FailedOperation.LipVoiceLow"
+//  FAILEDOPERATION_LIPVOICERECOGNIZE = "FailedOperation.LipVoiceRecognize"
+//  FAILEDOPERATION_LIVESSBESTFRAMEERROR = "FailedOperation.LivessBestFrameError"
+//  FAILEDOPERATION_LIVESSDETECTFAIL = "FailedOperation.LivessDetectFail"
+//  FAILEDOPERATION_LIVESSDETECTFAKE = "FailedOperation.LivessDetectFake"
+//  FAILEDOPERATION_LIVESSSYSTEMERROR = "FailedOperation.LivessSystemError"
+//  FAILEDOPERATION_LIVESSUNKNOWNERROR = "FailedOperation.LivessUnknownError"
+//  FAILEDOPERATION_SILENTDETECTFAIL = "FailedOperation.SilentDetectFail"
+//  FAILEDOPERATION_SILENTEYELIVEFAIL = "FailedOperation.SilentEyeLiveFail"
+//  FAILEDOPERATION_SILENTFACEDETECTFAIL = "FailedOperation.SilentFaceDetectFail"
+//  FAILEDOPERATION_SILENTFACEQUALITYFAIL = "FailedOperation.SilentFaceQualityFail"
+//  FAILEDOPERATION_SILENTFACEWITHMASKFAIL = "FailedOperation.SilentFaceWithMaskFail"
+//  FAILEDOPERATION_SILENTMOUTHLIVEFAIL = "FailedOperation.SilentMouthLiveFail"
+//  FAILEDOPERATION_SILENTMULTIFACEFAIL = "FailedOperation.SilentMultiFaceFail"
+//  FAILEDOPERATION_SILENTPICTURELIVEFAIL = "FailedOperation.SilentPictureLiveFail"
+//  FAILEDOPERATION_SILENTTHRESHOLD = "FailedOperation.SilentThreshold"
+//  FAILEDOPERATION_SILENTTOOSHORT = "FailedOperation.SilentTooShort"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) VideoLivenessCompareWithContext(ctx context.Context, request *VideoLivenessCompareRequest) (response *VideoLivenessCompareResponse, err error) {
+    if request == nil {
+        request = NewVideoLivenessCompareRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "VideoLivenessCompare")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("VideoLivenessCompare require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewVideoLivenessCompareResponse()
     err = c.Send(request, response)
     return
 }
