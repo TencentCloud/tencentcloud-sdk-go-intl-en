@@ -423,6 +423,74 @@ func (c *Client) BankCardVerificationWithContext(ctx context.Context, request *B
     return
 }
 
+func NewCheckBankCardInformationRequest() (request *CheckBankCardInformationRequest) {
+    request = &CheckBankCardInformationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "CheckBankCardInformation")
+    
+    
+    return
+}
+
+func NewCheckBankCardInformationResponse() (response *CheckBankCardInformationResponse) {
+    response = &CheckBankCardInformationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CheckBankCardInformation
+// Bank card basic information query
+//
+// error code that may be returned:
+//  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) CheckBankCardInformation(request *CheckBankCardInformationRequest) (response *CheckBankCardInformationResponse, err error) {
+    return c.CheckBankCardInformationWithContext(context.Background(), request)
+}
+
+// CheckBankCardInformation
+// Bank card basic information query
+//
+// error code that may be returned:
+//  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) CheckBankCardInformationWithContext(ctx context.Context, request *CheckBankCardInformationRequest) (response *CheckBankCardInformationResponse, err error) {
+    if request == nil {
+        request = NewCheckBankCardInformationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "CheckBankCardInformation")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CheckBankCardInformation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCheckBankCardInformationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCompareFaceLivenessRequest() (request *CompareFaceLivenessRequest) {
     request = &CompareFaceLivenessRequest{
         BaseRequest: &tchttp.BaseRequest{},
