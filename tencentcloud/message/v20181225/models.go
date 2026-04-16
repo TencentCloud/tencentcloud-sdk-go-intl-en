@@ -22,14 +22,14 @@ import (
 
 // Predefined struct for user
 type ModifySendChannelOnMsgTypesRequestParams struct {
-	// Message sending channel.
+	// Message sending channel
 	SendTypes []*SendType `json:"SendTypes,omitnil,omitempty" name:"SendTypes"`
 }
 
 type ModifySendChannelOnMsgTypesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Message sending channel.
+	// Message sending channel
 	SendTypes []*SendType `json:"SendTypes,omitnil,omitempty" name:"SendTypes"`
 }
 

@@ -65,7 +65,7 @@ func NewDescribeRiskAssessmentResponse() (response *DescribeRiskAssessmentRespon
 }
 
 // DescribeRiskAssessment
-// This API is used to query risk assessment results.
+// This API is used to query risk assessment results
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -117,7 +117,7 @@ func (c *Client) DescribeRiskAssessment(request *DescribeRiskAssessmentRequest) 
 }
 
 // DescribeRiskAssessment
-// This API is used to query risk assessment results.
+// This API is used to query risk assessment results
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"

@@ -65,7 +65,7 @@ func NewModifySendChannelOnMsgTypesResponse() (response *ModifySendChannelOnMsgT
 }
 
 // ModifySendChannelOnMsgTypes
-// This API is used to batch modify delivery methods.
+// This API is used to batch modify delivery methods
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -77,7 +77,7 @@ func (c *Client) ModifySendChannelOnMsgTypes(request *ModifySendChannelOnMsgType
 }
 
 // ModifySendChannelOnMsgTypes
-// This API is used to batch modify delivery methods.
+// This API is used to batch modify delivery methods
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

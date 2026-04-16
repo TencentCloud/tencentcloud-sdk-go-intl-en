@@ -65,14 +65,14 @@ type CloudDedicatedZoneResourceSummaryInfo struct {
 
 // Predefined struct for user
 type DescribeCloudDedicatedZoneResourceSummaryRequestParams struct {
-	// Unique id of the cloud dedicated zone.
+	// Unique id of the cloud dedicated zone
 	CdzId *string `json:"CdzId,omitnil,omitempty" name:"CdzId"`
 }
 
 type DescribeCloudDedicatedZoneResourceSummaryRequest struct {
 	*tchttp.BaseRequest
 	
-	// Unique id of the cloud dedicated zone.
+	// Unique id of the cloud dedicated zone
 	CdzId *string `json:"CdzId,omitnil,omitempty" name:"CdzId"`
 }
 

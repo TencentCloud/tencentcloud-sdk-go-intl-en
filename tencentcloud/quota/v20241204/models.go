@@ -61,7 +61,7 @@ type Alarm struct {
 
 // Predefined struct for user
 type CreateAlarmRequestParams struct {
-	// Alarm rule name. specifies the name of the Alarm rule.
+	// Alarm rule name. specifies the name of the Alarm rule
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Product ID.
@@ -86,7 +86,7 @@ type CreateAlarmRequestParams struct {
 type CreateAlarmRequest struct {
 	*tchttp.BaseRequest
 	
-	// Alarm rule name. specifies the name of the Alarm rule.
+	// Alarm rule name. specifies the name of the Alarm rule
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Product ID.
