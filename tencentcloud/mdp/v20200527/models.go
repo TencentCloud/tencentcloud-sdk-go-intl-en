@@ -755,6 +755,9 @@ type CreateStreamPackageLinearAssemblyProgramRequestParams struct {
 
 	// AdBreaks is only valid when the source type is Vod.
 	AdBreaks []*AdBreakInfo `json:"AdBreaks,omitnil,omitempty" name:"AdBreaks"`
+
+	// VOD acquisition methods, supporting PreCaching and DynamicUpdating, with PreCaching as the default, and only Linear channels are supported.
+	VodAcquisitionMethod *string `json:"VodAcquisitionMethod,omitnil,omitempty" name:"VodAcquisitionMethod"`
 }
 
 type CreateStreamPackageLinearAssemblyProgramRequest struct {
@@ -781,6 +784,9 @@ type CreateStreamPackageLinearAssemblyProgramRequest struct {
 
 	// AdBreaks is only valid when the source type is Vod.
 	AdBreaks []*AdBreakInfo `json:"AdBreaks,omitnil,omitempty" name:"AdBreaks"`
+
+	// VOD acquisition methods, supporting PreCaching and DynamicUpdating, with PreCaching as the default, and only Linear channels are supported.
+	VodAcquisitionMethod *string `json:"VodAcquisitionMethod,omitnil,omitempty" name:"VodAcquisitionMethod"`
 }
 
 func (r *CreateStreamPackageLinearAssemblyProgramRequest) ToJsonString() string {
@@ -802,6 +808,7 @@ func (r *CreateStreamPackageLinearAssemblyProgramRequest) FromJsonString(s strin
 	delete(f, "SourceName")
 	delete(f, "PlaybackConf")
 	delete(f, "AdBreaks")
+	delete(f, "VodAcquisitionMethod")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamPackageLinearAssemblyProgramRequest has unknown keys!", "")
 	}
@@ -3712,6 +3719,9 @@ type LinearAssemblyProgramInfo struct {
 
 	// SourceLocation name.
 	SourceLocationName *string `json:"SourceLocationName,omitnil,omitempty" name:"SourceLocationName"`
+
+	// VOD acquisition methods, supporting PreCaching and DynamicUpdating, with PreCaching as the default, and only Linear channels are supported
+	VodAcquisitionMethod *string `json:"VodAcquisitionMethod,omitnil,omitempty" name:"VodAcquisitionMethod"`
 }
 
 type LocationAlert struct {
@@ -4171,6 +4181,9 @@ type ModifyStreamPackageLinearAssemblyProgramRequestParams struct {
 
 	// AdBreaks.
 	AdBreaks []*AdBreakInfo `json:"AdBreaks,omitnil,omitempty" name:"AdBreaks"`
+
+	// VOD acquisition methods, supporting PreCaching and DynamicUpdating, with PreCaching as the default, and only Linear channels are supported.
+	VodAcquisitionMethod *string `json:"VodAcquisitionMethod,omitnil,omitempty" name:"VodAcquisitionMethod"`
 }
 
 type ModifyStreamPackageLinearAssemblyProgramRequest struct {
@@ -4196,6 +4209,9 @@ type ModifyStreamPackageLinearAssemblyProgramRequest struct {
 
 	// AdBreaks.
 	AdBreaks []*AdBreakInfo `json:"AdBreaks,omitnil,omitempty" name:"AdBreaks"`
+
+	// VOD acquisition methods, supporting PreCaching and DynamicUpdating, with PreCaching as the default, and only Linear channels are supported.
+	VodAcquisitionMethod *string `json:"VodAcquisitionMethod,omitnil,omitempty" name:"VodAcquisitionMethod"`
 }
 
 func (r *ModifyStreamPackageLinearAssemblyProgramRequest) ToJsonString() string {
@@ -4217,6 +4233,7 @@ func (r *ModifyStreamPackageLinearAssemblyProgramRequest) FromJsonString(s strin
 	delete(f, "SourceName")
 	delete(f, "PlaybackConf")
 	delete(f, "AdBreaks")
+	delete(f, "VodAcquisitionMethod")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamPackageLinearAssemblyProgramRequest has unknown keys!", "")
 	}
