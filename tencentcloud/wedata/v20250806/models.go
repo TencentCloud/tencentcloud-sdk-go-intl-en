@@ -13197,6 +13197,187 @@ type ListTriggerTaskInfo struct {
 	TotalPageNumber *uint64 `json:"TotalPageNumber,omitnil,omitempty" name:"TotalPageNumber"`
 }
 
+type ListTriggerTaskRunBrief struct {
+	// Running ID of the task
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExecutionId *string `json:"ExecutionId,omitnil,omitempty" name:"ExecutionId"`
+
+	// Workflow ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WorkflowId *string `json:"WorkflowId,omitnil,omitempty" name:"WorkflowId"`
+
+	// Running ID of the workflow
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WorkflowExecutionId *string `json:"WorkflowExecutionId,omitnil,omitempty" name:"WorkflowExecutionId"`
+
+	// Task ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Trigger Type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TriggerType *string `json:"TriggerType,omitnil,omitempty" name:"TriggerType"`
+
+	// Waiting duration, in seconds
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WaitTime *string `json:"WaitTime,omitnil,omitempty" name:"WaitTime"`
+
+	// Operating Account
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExecuteUserUin *string `json:"ExecuteUserUin,omitnil,omitempty" name:"ExecuteUserUin"`
+
+	// Planned scheduling time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ScheduleTime *string `json:"ScheduleTime,omitnil,omitempty" name:"ScheduleTime"`
+
+	// Start time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExecutionStartTime *string `json:"ExecutionStartTime,omitnil,omitempty" name:"ExecutionStartTime"`
+
+	// Running end time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExecutionEndTime *string `json:"ExecutionEndTime,omitnil,omitempty" name:"ExecutionEndTime"`
+
+	// Running time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExecutionTime *string `json:"ExecutionTime,omitnil,omitempty" name:"ExecutionTime"`
+
+	// Times of automatic retry
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RetryTimes *int64 `json:"RetryTimes,omitnil,omitempty" name:"RetryTimes"`
+
+	// Error code description
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorCodeStr *string `json:"ErrorCodeStr,omitnil,omitempty" name:"ErrorCodeStr"`
+
+	// Task name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
+
+	// Workflow name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WorkflowName *string `json:"WorkflowName,omitnil,omitempty" name:"WorkflowName"`
+
+	// Number of manual rerun attempts by the user
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RerunTimes *int64 `json:"RerunTimes,omitnil,omitempty" name:"RerunTimes"`
+
+	// Task running status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskExecutionState *string `json:"TaskExecutionState,omitnil,omitempty" name:"TaskExecutionState"`
+
+	// Whether it is the most recent run
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsLatestExecution *bool `json:"IsLatestExecution,omitnil,omitempty" name:"IsLatestExecution"`
+}
+
+type ListTriggerTaskRunResult struct {
+	// Total number of records
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Number of pages.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalPageNumber *uint64 `json:"TotalPageNumber,omitnil,omitempty" name:"TotalPageNumber"`
+
+	// Page number
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
+	// Page size.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Task running information collection
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Items []*ListTriggerTaskRunBrief `json:"Items,omitnil,omitempty" name:"Items"`
+}
+
+// Predefined struct for user
+type ListTriggerTaskRunsRequestParams struct {
+	// Project ID.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Filtering parameters: Keyword for task name or ID query, WorkflowId for workflow ID query, FolderId for folder query, InChargeUin for responsible person query, WorkflowExecutionId for workflow execution ID, ExecutionId for task execution ID, TaskId for task ID, ScheduleTimeGreaterEqual / ScheduleTimeLessEqual for planned scheduling time interval
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Sorting field, sorting field name as follows: start time: CreateTime, end time: EndTime, scheduled dispatch time: ScheduleTime
+	OrderFields []*OrderField `json:"OrderFields,omitnil,omitempty" name:"OrderFields"`
+
+	// Page number
+	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
+	// Page size.
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+}
+
+type ListTriggerTaskRunsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Project ID.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Filtering parameters: Keyword for task name or ID query, WorkflowId for workflow ID query, FolderId for folder query, InChargeUin for responsible person query, WorkflowExecutionId for workflow execution ID, ExecutionId for task execution ID, TaskId for task ID, ScheduleTimeGreaterEqual / ScheduleTimeLessEqual for planned scheduling time interval
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Sorting field, sorting field name as follows: start time: CreateTime, end time: EndTime, scheduled dispatch time: ScheduleTime
+	OrderFields []*OrderField `json:"OrderFields,omitnil,omitempty" name:"OrderFields"`
+
+	// Page number
+	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
+	// Page size.
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+}
+
+func (r *ListTriggerTaskRunsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ListTriggerTaskRunsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProjectId")
+	delete(f, "Filters")
+	delete(f, "OrderFields")
+	delete(f, "PageNumber")
+	delete(f, "PageSize")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListTriggerTaskRunsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ListTriggerTaskRunsResponseParams struct {
+	// Task run query result
+	Data *ListTriggerTaskRunResult `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ListTriggerTaskRunsResponse struct {
+	*tchttp.BaseResponse
+	Response *ListTriggerTaskRunsResponseParams `json:"Response"`
+}
+
+func (r *ListTriggerTaskRunsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ListTriggerTaskRunsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ListTriggerTaskVersions struct {
 	// Record list	
 	// Note: This field may return null, indicating that no valid values can be obtained.

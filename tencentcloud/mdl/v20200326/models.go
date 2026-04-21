@@ -3415,7 +3415,7 @@ type ModifyStreamLiveWatermarkRequestParams struct {
 	// Watermark text settings. This parameter is valid if `Type` is `TEXT`.
 	TextSettings *CreateTextSettings `json:"TextSettings,omitnil,omitempty" name:"TextSettings"`
 
-	// AB watermark configuration.
+
 	AbWatermarkSettings *AbWatermarkSettingsReq `json:"AbWatermarkSettings,omitnil,omitempty" name:"AbWatermarkSettings"`
 }
 
@@ -3434,7 +3434,6 @@ type ModifyStreamLiveWatermarkRequest struct {
 	// Watermark text settings. This parameter is valid if `Type` is `TEXT`.
 	TextSettings *CreateTextSettings `json:"TextSettings,omitnil,omitempty" name:"TextSettings"`
 
-	// AB watermark configuration.
 	AbWatermarkSettings *AbWatermarkSettingsReq `json:"AbWatermarkSettings,omitnil,omitempty" name:"AbWatermarkSettings"`
 }
 
@@ -4255,8 +4254,11 @@ type TimeShiftSettingsInfo struct {
 }
 
 type TimedMetadataInfo struct {
-	// Base64-encoded id3 metadata information, with a maximum limit of 1024 characters.
+	// Base64-encoded ID3 metadata information, with a maximum limit of 1024 characters. When both ID3 and Tag have values, the ID3 value takes precedence
 	ID3 *string `json:"ID3,omitnil,omitempty" name:"ID3"`
+
+	// Label, the maximum supported length is 1024 characters for the label, 
+	Tag *string `json:"Tag,omitnil,omitempty" name:"Tag"`
 }
 
 type TimedMetadataSettingInfo struct {
