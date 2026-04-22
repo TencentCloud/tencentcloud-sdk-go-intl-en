@@ -6517,6 +6517,62 @@ func (c *Client) ModifyDBInstanceChargeTypeWithContext(ctx context.Context, requ
     return
 }
 
+func NewModifyDBInstanceDeletionProtectionRequest() (request *ModifyDBInstanceDeletionProtectionRequest) {
+    request = &ModifyDBInstanceDeletionProtectionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "ModifyDBInstanceDeletionProtection")
+    
+    
+    return
+}
+
+func NewModifyDBInstanceDeletionProtectionResponse() (response *ModifyDBInstanceDeletionProtectionResponse) {
+    response = &ModifyDBInstanceDeletionProtectionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDBInstanceDeletionProtection
+// This interface (DeletionProtection) is used to enable or disable instance destruction protection.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+func (c *Client) ModifyDBInstanceDeletionProtection(request *ModifyDBInstanceDeletionProtectionRequest) (response *ModifyDBInstanceDeletionProtectionResponse, err error) {
+    return c.ModifyDBInstanceDeletionProtectionWithContext(context.Background(), request)
+}
+
+// ModifyDBInstanceDeletionProtection
+// This interface (DeletionProtection) is used to enable or disable instance destruction protection.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+func (c *Client) ModifyDBInstanceDeletionProtectionWithContext(ctx context.Context, request *ModifyDBInstanceDeletionProtectionRequest) (response *ModifyDBInstanceDeletionProtectionResponse, err error) {
+    if request == nil {
+        request = NewModifyDBInstanceDeletionProtectionRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyDBInstanceDeletionProtection")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDBInstanceDeletionProtection require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDBInstanceDeletionProtectionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyDBInstanceDeploymentRequest() (request *ModifyDBInstanceDeploymentRequest) {
     request = &ModifyDBInstanceDeploymentRequest{
         BaseRequest: &tchttp.BaseRequest{},

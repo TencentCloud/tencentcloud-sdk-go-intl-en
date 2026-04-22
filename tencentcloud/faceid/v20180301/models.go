@@ -198,6 +198,12 @@ type ApplySdkVerificationTokenRequestParams struct {
 	// true (default value): Expired HKID is allowed to enter the liveness process.
 	// false : Expired HKID is rejected and cannot enter the liveness process.
 	AllowExpiredDocument *bool `json:"AllowExpiredDocument,omitnil,omitempty" name:"AllowExpiredDocument"`
+
+
+	SkipResultPage *bool `json:"SkipResultPage,omitnil,omitempty" name:"SkipResultPage"`
+
+
+	CardOcrDisplayFields []*string `json:"CardOcrDisplayFields,omitnil,omitempty" name:"CardOcrDisplayFields"`
 }
 
 type ApplySdkVerificationTokenRequest struct {
@@ -278,6 +284,10 @@ type ApplySdkVerificationTokenRequest struct {
 	// true (default value): Expired HKID is allowed to enter the liveness process.
 	// false : Expired HKID is rejected and cannot enter the liveness process.
 	AllowExpiredDocument *bool `json:"AllowExpiredDocument,omitnil,omitempty" name:"AllowExpiredDocument"`
+
+	SkipResultPage *bool `json:"SkipResultPage,omitnil,omitempty" name:"SkipResultPage"`
+
+	CardOcrDisplayFields []*string `json:"CardOcrDisplayFields,omitnil,omitempty" name:"CardOcrDisplayFields"`
 }
 
 func (r *ApplySdkVerificationTokenRequest) ToJsonString() string {
@@ -304,6 +314,8 @@ func (r *ApplySdkVerificationTokenRequest) FromJsonString(s string) error {
 	delete(f, "SdkVersion")
 	delete(f, "ActionList")
 	delete(f, "AllowExpiredDocument")
+	delete(f, "SkipResultPage")
+	delete(f, "CardOcrDisplayFields")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplySdkVerificationTokenRequest has unknown keys!", "")
 	}
