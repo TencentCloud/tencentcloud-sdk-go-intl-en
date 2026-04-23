@@ -147,37 +147,41 @@ type AccelerateAreaInfo struct {
 }
 
 type AdaptiveDynamicStreamingInfoItem struct {
-	// Adaptive bitrate streaming specification.
+	// <p>Convert to adaptive bitrate streaming specification.</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// The packaging format. Valid values:
-	// <li>`HLS`</li>
-	// <li>`DASH`</li>
+	// <p>Packaging format. Value ranges from:</p><li>HLS;</li><li>DASH.</li>
 	Package *string `json:"Package,omitnil,omitempty" name:"Package"`
 
-	// Encryption type.
+	// <p>Encryption type.</p>
 	DrmType *string `json:"DrmType,omitnil,omitempty" name:"DrmType"`
 
-	// Playback address.
+	// <p>Playback address.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// File size (bytes)
-	// <li>If the file is an HLS file, the value of this parameter is the sum of the size of the M3U8 and TS files.</li>
-	// <li>If the file is a DASH file, the value of this parameter is the sum of the size of the MPD and segment files.</li>
-	// <li><font color=red>Note</font>: For adaptive bitrate streaming files generated before 2022-01-10T16:00:00Z, the value of this parameter is `0`.</li>
+	// <p>Media file size, unit: byte.</p><li>When the media file is HLS, the size is the sum of m3u8 and ts file sizes.</li><li>When the media file is DASH, the size is the sum of mpd and fragment file sizes.</li><li><font color="red">Note</font>: This field is 0 for adaptive bitrate stream files generated through pre-processing before 2022-01-10T16:00:00Z.</li>
 	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 
-	// Digital watermark type. Optional values:
-	// <li>Trace means traceability watermark processing; </li>
-	// <li>CopyRight means copyright watermark processing; </li>
-	// <li>None means no digital watermark processing. </li>
+	// <p>Watermark type. Available values:</p><li>Trace means transit watermark processing;</li><li>CopyRight means copyright watermark processing;</li><li>None means no watermark processing.</li>
 	DigitalWatermarkType *string `json:"DigitalWatermarkType,omitnil,omitempty" name:"DigitalWatermarkType"`
 
-	// The information of the streams.
+	// <p>Substream info list.</p>
 	SubStreamSet []*MediaSubStreamInfoItem `json:"SubStreamSet,omitnil,omitempty" name:"SubStreamSet"`
 
-	// Copyright Information.
+	// <p>Copyright information.</p>
 	CopyRightWatermarkText *string `json:"CopyRightWatermarkText,omitnil,omitempty" name:"CopyRightWatermarkText"`
+
+	// <p>Digital watermark template id.</p>
+	BlindWatermarkDefinition *int64 `json:"BlindWatermarkDefinition,omitnil,omitempty" name:"BlindWatermarkDefinition"`
+
+	// <p>Subtitle information list.</p>
+	SubtitleSet []*MediaSubtitleItem `json:"SubtitleSet,omitnil,omitempty" name:"SubtitleSet"`
+
+	// <p>Unique identifier for default subtitle.</p>
+	DefaultSubtitleId *string `json:"DefaultSubtitleId,omitnil,omitempty" name:"DefaultSubtitleId"`
+
+	// <p>DRM encryption method.</p>
+	DrmEncryptType *string `json:"DrmEncryptType,omitnil,omitempty" name:"DrmEncryptType"`
 }
 
 type AdaptiveDynamicStreamingTaskInput struct {
@@ -15856,6 +15860,27 @@ type FaceEnhanceInfo struct {
 	Intensity *float64 `json:"Intensity,omitnil,omitempty" name:"Intensity"`
 }
 
+type FaceRecognitionInfo struct {
+	// <p>Face recognition task list</p>
+	FaceRecognitionTasks []*FaceRecognitionTask `json:"FaceRecognitionTasks,omitnil,omitempty" name:"FaceRecognitionTasks"`
+}
+
+type FaceRecognitionOutputFileInfo struct {
+	// <p>Face recognition output file type</p><p>Enumeration value:</p><ul><li>Output: Result output of task generation. The file corresponds to the result in the face recognition task return and is generated in JSON format.</li></ul>
+	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
+
+	// <p>File URL of face recognition output</p>
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+}
+
+type FaceRecognitionTask struct {
+	// <p>Face identification template No.</p>
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Output file information</p>
+	OutputFile []*FaceRecognitionOutputFileInfo `json:"OutputFile,omitnil,omitempty" name:"OutputFile"`
+}
+
 type FastEditMediaFileInfo struct {
 	// Media file ID.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
@@ -16584,6 +16609,19 @@ type ImageTransform struct {
 	Flip *string `json:"Flip,omitnil,omitempty" name:"Flip"`
 }
 
+type ImageUnderstandingInfo struct {
+	// Image understanding collection.
+	ImageUnderstandingSet []*ImageUnderstandingItem `json:"ImageUnderstandingSet,omitnil,omitempty" name:"ImageUnderstandingSet"`
+}
+
+type ImageUnderstandingItem struct {
+	// Template id.
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Task output file.
+	OutputFile []*MPSOutputFileInfo `json:"OutputFile,omitnil,omitempty" name:"OutputFile"`
+}
+
 type ImageWatermarkInput struct {
 	// The [Base64](https://tools.ietf.org/html/rfc4648) encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.
 	ImageContent *string `json:"ImageContent,omitnil,omitempty" name:"ImageContent"`
@@ -16936,6 +16974,11 @@ type JustInTimeTranscodeTemplate struct {
 	WatermarkConfigure *WatermarkConfigureData `json:"WatermarkConfigure,omitnil,omitempty" name:"WatermarkConfigure"`
 }
 
+type KnowledgeBasesInfo struct {
+	// <p>Current library list of media assets to import</p>
+	Bases []*string `json:"Bases,omitnil,omitempty" name:"Bases"`
+}
+
 type LLMComprehendAsr struct {
 	// Text transcription task switch. Available values:
 	// -ON: Enable the transcription task.
@@ -17231,13 +17274,19 @@ type LiveRealTimeClipStreamInfo struct {
 }
 
 type LiveRecordInfo struct {
-	// Live recording stream ID.
+	// <p>Live streaming Recording domain name</p>
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// <p>Live streaming Recording Path</p>
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+
+	// <p>Live recording stream ID.</p>
 	StreamId *string `json:"StreamId,omitnil,omitempty" name:"StreamId"`
 
-	// Recording start time, use [ISO date format](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
+	// <p>Recording start time in <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO datetime format</a>.</p>
 	RecordStartTime *string `json:"RecordStartTime,omitnil,omitempty" name:"RecordStartTime"`
 
-	// Recording end time, using [ISO date format](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
+	// <p>Recording end time, using <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format</a>.</p>
 	RecordEndTime *string `json:"RecordEndTime,omitnil,omitempty" name:"RecordEndTime"`
 }
 
@@ -17251,6 +17300,63 @@ type LowLightEnhanceInfo struct {
 	// <li>`normal`</li>
 	// Default value: `normal`.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
+type MPSAiMediaInfo struct {
+	// List of intelligent media information processed by MPS
+	AiMediaList []*MPSAiMediaItem `json:"AiMediaList,omitnil,omitempty" name:"AiMediaList"`
+}
+
+type MPSAiMediaItem struct {
+	// MPS intelligent processing task type. Valid values:
+	// <li>AiAnalysis.ClassificationTask: intelligent classification task.</li>
+	// <li>AiAnalysis.CoverTask: intelligent thumbnail generating.</li>
+	// <li>AiAnalysis.TagTask: intelligent tag task.</li>
+	// <li>AiAnalysis.FrameTagTask: intelligent frame-by-frame tagging task.</li>
+	// <li>AiAnalysis.HighlightTask: Intelligent highlight task.</li>
+	// <li>AiAnalysis.SegmentTask: Intelligent video splitting task.</li>
+	// <li>AiAnalysis.HeadTailTask: Intelligent opening and closing credits task.</li>
+	// <li>AiAnalysis.DescriptionTask: Intelligent summary task.</li>
+	// <li>AiAnalysis.HorizontalToVerticalTask: Intelligent Landscape to Portrait Task.</li>
+	// <li>AiAnalysis.DubbingTask: Intelligent dubbing task.</li>
+	// <li>AiAnalysis.VideoRemakeTask: Intelligent deduplication task.</li>
+	// <li>AiAnalysis.VideoComprehensionTask: Video understanding task.</li>
+	// <li>SmartSubtitle.AsrFullTextTask: Intelligent speech full-text recognition task.</li>
+	// <li>SmartSubtitle.TransTextTask: Translation result.</li>
+	// <li>SmartSubtitle.PureSubtitleTransTask: Returns the pure subtitle file translation result.</li>
+	// <li>SmartSubtitle.OcrFullTextTask: Intelligent text extraction subtitle task.</li>
+	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
+
+	// MPS intelligent processing task result set
+	AiMediaTasks []*MPSAiMediaTask `json:"AiMediaTasks,omitnil,omitempty" name:"AiMediaTasks"`
+}
+
+type MPSAiMediaTask struct {
+	// MPS intelligent task template ID
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// MPS intelligent task output file collection
+	OutputFile []*MPSOutputFileInfo `json:"OutputFile,omitnil,omitempty" name:"OutputFile"`
+
+	// The returned result of the MPS intelligent task. This field corresponds to the Output result in the MPS task return and is returned in JSON format.
+	// Different MPS task output results have different structures. For the specific return content, see the MPS task output struct.
+	// [Intelligent classification result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskClassificationOutput)
+	// [Intelligent cover result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskCoverOutput)
+	// [Intelligent Tag Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskTagOutput)
+	// [Intelligent frame tagging classification result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskFrameTagOutput)
+	// [Intelligent Highlight Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskHighlightOutput)
+	// [Video Splitting Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskSegmentOutput)
+	// [Intelligent video opening/closing credits result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskHeadTailOutput)
+	// [Intelligent summary result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskDescriptionOutput)
+	// [Horizontal-to-Vertical Video Transformation Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskHorizontalToVerticalOutput)
+	// [Intelligent dubbing result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskDubbingOutput)
+	// [Intelligent video understanding result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskVideoComprehensionOutput)
+	// [Intelligent caption full speech recognition result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#SmartSubtitleTaskAsrFullTextResultOutput)
+	// [Intelligent caption translation result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#SmartSubtitleTaskTransTextResultOutput)
+	// [Intelligent caption pure srt translation result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#PureSubtitleTransResultOutput)
+	// [Smart subtitling text extraction result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#SmartSubtitleTaskTextResultOutput)
+	// 
+	OutputText *string `json:"OutputText,omitnil,omitempty" name:"OutputText"`
 }
 
 type MPSOutputFile struct {
@@ -17268,6 +17374,35 @@ type MPSOutputFile struct {
 
 	// Expiration time. Valid when StorageMode is Temporary. It indicates the expiration time of the URL in seconds.
 	ExpiredTime *uint64 `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
+}
+
+type MPSOutputFileInfo struct {
+	// MPS output file type. Valid values:
+	// <li>Video: the generated video file of the task.</li>
+	// <li>Cover: cover file generated by task generation.</li>
+	// <li>Audio: audio file generated by task generation.</li>
+	// <li>Output: The result output of task generation. The file corresponds to the Output result in the MPS task response and is generated in JSON format.</li>
+	// 
+	// Output file. Different MPS tasks have different output results. For specific return content, refer to the MPS task output struct. The struct is JSON-serialized to generate the Output file.
+	// [Intelligent classification result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskClassificationOutput)
+	// [Intelligent cover result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskCoverOutput)
+	// [Intelligent Tag Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskTagOutput)
+	// [Intelligent frame tagging classification result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskFrameTagOutput)
+	// [Intelligent Highlight Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskHighlightOutput)
+	// [Video Splitting Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskSegmentOutput)
+	// [Intelligent video opening/closing credits result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskHeadTailOutput)
+	// [Intelligent summary result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskDescriptionOutput)
+	// [Horizontal-to-Vertical Video Transformation Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskHorizontalToVerticalOutput)
+	// [Intelligent dubbing result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskDubbingOutput)
+	// [Intelligent video understanding result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskVideoComprehensionOutput)
+	// [Intelligent caption full speech recognition result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#SmartSubtitleTaskAsrFullTextResultOutput)
+	// [Intelligent caption translation result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#SmartSubtitleTaskTransTextResultOutput)
+	// [Intelligent caption pure srt translation result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#PureSubtitleTransResultOutput)
+	// [Smart subtitling text extraction result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#SmartSubtitleTaskTextResultOutput)
+	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
+
+	// MPS output file URL
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
 type MPSSubTaskResult struct {
@@ -17503,16 +17638,13 @@ type MediaAnimatedGraphicsItem struct {
 }
 
 type MediaAudioStreamItem struct {
-	// Bitrate of audio stream in bps.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Bitrate of the audio stream. Measurement unit: bps.</p>
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
-	// Sample rate of audio stream in Hz.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Sampling rate of the audio stream, unit: hz.</p>
 	SamplingRate *int64 `json:"SamplingRate,omitnil,omitempty" name:"SamplingRate"`
 
-	// Audio stream encoder, such as aac.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Audio stream encoding format, such as aac.</p>
 	Codec *string `json:"Codec,omitnil,omitempty" name:"Codec"`
 }
 
@@ -17567,6 +17699,9 @@ type MediaBasicInfo struct {
 
 	// Regions where media files are stored, such as `ap-chongqing`. For more regions, see [Storage Region](https://intl.cloud.tencent.com/document/product/266/9760).
 	StorageRegion *string `json:"StorageRegion,omitnil,omitempty" name:"StorageRegion"`
+
+	// Media storage path.
+	StoragePath *string `json:"StoragePath,omitnil,omitempty" name:"StoragePath"`
 
 	// Tag information of media file.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -17797,24 +17932,19 @@ type MediaImageSpriteInfo struct {
 }
 
 type MediaImageSpriteItem struct {
-	// Image sprite specification. For more information, please see [Image Sprite Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF).
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Sprite sheet specification. Please refer to <a href="https://www.tencentcloud.com/document/product/266/33480?from_cn_redirect=1#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF">sprite sheet parameter template</a>.</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Subimage height of image sprite.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Height of the sprite sheet.</p>
 	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
-	// Subimage width of image sprite.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Width of the sprite sheet.</p>
 	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
-	// Total number of subimages in each image sprite.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>The number of small images in each sprite sheet.</p>
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Address of each image sprite.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>The domain names or IP addresses of each sprite sheet.</p>
 	ImageUrlSet []*string `json:"ImageUrlSet,omitnil,omitempty" name:"ImageUrlSet"`
 
 	// Address of WebVtt file for the position-time relationship among subimages in an image sprite. The WebVtt file indicates the corresponding time points of each subimage and their coordinates in the image sprite, which is typically used by the player for implementing preview.
@@ -17823,56 +17953,69 @@ type MediaImageSpriteItem struct {
 }
 
 type MediaInfo struct {
-	// Basic information, such as video name, category, playback address, and cover image.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Basic information. Include video name, category, playback address, cover image.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	BasicInfo *MediaBasicInfo `json:"BasicInfo,omitnil,omitempty" name:"BasicInfo"`
 
-	// Metadata, such as size, duration, video stream information, and audio stream information.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Meta information, including size, duration, video stream information, and audio stream information.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
 
-	// Result information of transcoding, such as address, specification, bitrate, and resolution of the videos in various bitrates generated by transcoding a video.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Transcoding result information, including domain names or IP addresses, specifications, bitrates, and resolutions of various types of videos generated by video transcoding.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TranscodeInfo *MediaTranscodeInfo `json:"TranscodeInfo,omitnil,omitempty" name:"TranscodeInfo"`
 
-	// Result information of animated image generating, i.e., relevant information of an animated image (such as .gif) generated from a video.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>AnimatedGraphicsInfo. Information related to the animated graphics (such as gif) after video-to-gif conversion.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AnimatedGraphicsInfo *MediaAnimatedGraphicsInfo `json:"AnimatedGraphicsInfo,omitnil,omitempty" name:"AnimatedGraphicsInfo"`
 
-	// Sampled screenshot information, i.e., relevant information of a sampled screenshot generated from a video.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Sampling screenshot information. Screenshot information related to the video after sampling screenshot taking.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SampleSnapshotInfo *MediaSampleSnapshotInfo `json:"SampleSnapshotInfo,omitnil,omitempty" name:"SampleSnapshotInfo"`
 
-	// Image sprite information, i.e., relevant information of image sprite generated from video.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Sprite image information. Relevant information of the sprite after capturing CSS sprites from the video.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ImageSpriteInfo *MediaImageSpriteInfo `json:"ImageSpriteInfo,omitnil,omitempty" name:"ImageSpriteInfo"`
 
-	// Time point screenshot information, i.e., information of each time point screenshot generated from a video.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Screenshot information at the specified time point. Information of each screenshot after capturing the video at the specified time point.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SnapshotByTimeOffsetInfo *MediaSnapshotByTimeOffsetInfo `json:"SnapshotByTimeOffsetInfo,omitnil,omitempty" name:"SnapshotByTimeOffsetInfo"`
 
-	// Timestamp information, i.e., information of each timestamp set for a video.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Video timestamp information. Each dotting information set for the video.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	KeyFrameDescInfo *MediaKeyFrameDescInfo `json:"KeyFrameDescInfo,omitnil,omitempty" name:"KeyFrameDescInfo"`
 
-	// Adaptive bitrate streaming information, such as specification, encryption type, and container format.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Adaptive Bitrate Streaming information. Includes specification, encryption type, packaging format and information related to.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AdaptiveDynamicStreamingInfo *MediaAdaptiveDynamicStreamingInfo `json:"AdaptiveDynamicStreamingInfo,omitnil,omitempty" name:"AdaptiveDynamicStreamingInfo"`
 
-	// WeChat Mini Program audit information.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>miniProgramReviewInfo</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MiniProgramReviewInfo *MediaMiniProgramReviewInfo `json:"MiniProgramReviewInfo,omitnil,omitempty" name:"MiniProgramReviewInfo"`
 
-	// Subtitle information
-	// Note: this field may return `null`, indicating that no valid value is obtained.
+	// <p>Subtitle information.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubtitleInfo *MediaSubtitleInfo `json:"SubtitleInfo,omitnil,omitempty" name:"SubtitleInfo"`
 
-	// Unique ID of media file.
+	// <p>Media file unique identifier ID.</p>
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// Moderation details.
+	// <p>Verification information.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReviewInfo *FileReviewInfo `json:"ReviewInfo,omitnil,omitempty" name:"ReviewInfo"`
+
+	// <p>MPS intelligent media asset information</p>
+	MPSAiMediaInfo *MPSAiMediaInfo `json:"MPSAiMediaInfo,omitnil,omitempty" name:"MPSAiMediaInfo"`
+
+	// <p>Image understanding information.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ImageUnderstandingInfo *ImageUnderstandingInfo `json:"ImageUnderstandingInfo,omitnil,omitempty" name:"ImageUnderstandingInfo"`
+
+	// <p>Intelligent library information.</p>
+	KnowledgeBasesInfo *KnowledgeBasesInfo `json:"KnowledgeBasesInfo,omitnil,omitempty" name:"KnowledgeBasesInfo"`
+
+	// <p>Facial recognition information.</p>
+	FaceRecognitionInfo *FaceRecognitionInfo `json:"FaceRecognitionInfo,omitnil,omitempty" name:"FaceRecognitionInfo"`
 }
 
 type MediaInputInfo struct {
@@ -18355,19 +18498,28 @@ type MediaSnapshotByTimePicInfoItem struct {
 }
 
 type MediaSourceData struct {
-	// Media files source category: <li>Record: From recording. Such as live streaming recording, live time shift recording, etc.</li> <li>Upload: From upload. Such as pull upload, upload from server, client UGC upload, etc.</li> <li>VideoProcessing: From video processing. Such as video splicing, video editing, etc.</li> <li>TrtcRecord: From TRTC accompanying recording.</li> <li>WebPageRecord: From panoramic recording.</li> <li>Unknown: Unknown source.</li>
+	// Media file source category:
+	// <li>Record: comes from recording, such as live recording, live streaming time shift recording.</li>
+	// <li>Upload: Comes from upload, such as pull upload, server-side upload, and client UGC upload.</li>
+	// <li>VideoProcessing: comes from video processing, such as video splicing, video editing.</li>
+	// <li>TrtcRecord: Comes from TRTC simultaneous recording.</li>
+	// <li>WebPageRecord: comes from panoramic recording.</li>
+	// <li>Unknown: Unknown source.</li>
 	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
 
-	// User-transparent transmission field when creating a file.
+	// Field passed through when the user creates a file.
 	SourceContext *string `json:"SourceContext,omitnil,omitempty" name:"SourceContext"`
 
-	// Live streaming recording information, valid when the file source is Record.
+	// Live recording information is valid when file source is Record.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	LiveRecordInfo *LiveRecordInfo `json:"LiveRecordInfo,omitnil,omitempty" name:"LiveRecordInfo"`
 
-	// TRTC recording information, valid when the file source is TrtcRecord.
+	// TRTC Companion Recording Information. Valid at that time when the file source is TrtcRecord.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TrtcRecordInfo *TrtcRecordInfo `json:"TrtcRecordInfo,omitnil,omitempty" name:"TrtcRecordInfo"`
 
-	// Panoramic recording information, valid when the file source is WebPageRecord.
+	// Panoramic recording information. Valid when the file source is WebPageRecord.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	WebPageRecordInfo *WebPageRecordInfo `json:"WebPageRecordInfo,omitnil,omitempty" name:"WebPageRecordInfo"`
 }
 
@@ -18431,20 +18583,21 @@ type MediaSubtitleItem struct {
 	// Subtitle name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Subtitle language. Common values:
-	// <li>`zh`: Chinese</li>
-	// <li>`en`: English</li>
-	// <li>`ja`: Japanese</li>
-	// <li>`ko`: Korean</li>
-	// <li>`vi`: Vietnamese</li>
-	// <li>`ms`: Malay</li>
-	// <li>`th`: Thai</li>
-	// <li>`pt`: Portuguese</li>
-	// <li>`tr`: Turkish</li>
-	// <li>`ar`: Arabic</li>
-	// <li>`es`: Spanish</li>
-	// <li>`hi`: Hindi</li>
-	// <li>`fr`: French</li>For other valid values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
+	// Subtitle language. Common values are as follows:
+	// <li>zh: Chinese;</li>
+	// <li>en: English;</li>
+	// <li>ja: Japanese;</li>
+	// <li>ko: Korean;</li>
+	// <li>vi: Vietnamese.</li>
+	// <li>ms: Malay;</li>
+	// <li>th: Thai;</li>
+	// <li>pt: Portuguese;</li>
+	// <li>tr: Turkish;</li>
+	// <li>ar: Arabic;</li>
+	// <li>es: Spanish;</li>
+	// <li>hi: Hindi;</li>
+	// <li>fr: French.</li>
+	// For other values, see [RFC5646](https://tools.ietf.org/html/rfc5646)
 	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
 
 	// Subtitle format. Valid value:
@@ -18454,9 +18607,9 @@ type MediaSubtitleItem struct {
 	// Subtitle URL
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// Subtitle source, values:
-	// <li>UserUploaded: user uploaded;</li>
-	// <li>AIRecognition: AI recognition, generated through asr full text recognition or voice translation.</li>
+	// Subtitle source. Value ranges from...to...
+	// <li>UserUploaded: User upload.</li>
+	// <li>AIRecognition: AI recognition, generated through speech recognition or speech translation generation.</li>
 	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
 }
 
@@ -18561,8 +18714,11 @@ type MediaTranscodeItem struct {
 	// <li>None: Regular watermark</li>
 	DigitalWatermarkType *string `json:"DigitalWatermarkType,omitnil,omitempty" name:"DigitalWatermarkType"`
 
-	// Copyright information.
+
 	CopyRightWatermarkText *string `json:"CopyRightWatermarkText,omitnil,omitempty" name:"CopyRightWatermarkText"`
+
+	// Digital watermark template id.
+	BlindWatermarkDefinition *int64 `json:"BlindWatermarkDefinition,omitnil,omitempty" name:"BlindWatermarkDefinition"`
 }
 
 type MediaTransitionItem struct {
@@ -26222,309 +26378,201 @@ func (r *SearchMediaBySemanticsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SearchMediaRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/33987">application</a> ID. For customers who activate on-demand services from December 25, 2023, they must fill this field with the app ID when accessing resources in on-demand applications (whether it's the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// File ID set. Any element in the set can be matched.
-	// <li>Array length limit: 10.</li>
-	// <li>ID length limit: 40 characters.</li>
+	// <p>File id collection, match any element in the collection.</p><li>Array length limit: 10.</li><li>Single ID length limit: 40 character.</li>
 	FileIds []*string `json:"FileIds,omitnil,omitempty" name:"FileIds"`
 
-	// The file names to use for fuzzy search, which are sorted by relevance in descending order.
-	// <li>Name length limit: 100 characters.</li>
-	// <li>Array length limit: 10</li>
+	// <p>File name collection. Fuzzy match media files by file name. The higher the matching degree, the higher the priority in sorting.</p><li>Single file name length limit: 100 characters.</li><li>Array length limit: 10.</li>
 	Names []*string `json:"Names,omitnil,omitempty" name:"Names"`
 
-	// The file name prefixes to search.
-	// <li>Prefix length limit: 100 characters.</li>
-	// <li>Array length limit: 10.</li>
+	// <p>File name prefix. Prefix match media files.</p><li>Single file name prefix length limit: 100 characters.</li><li>Array length limit: 10.</li>
 	NamePrefixes []*string `json:"NamePrefixes,omitnil,omitempty" name:"NamePrefixes"`
 
-	// File description set. Media file descriptions are fuzzily matched. The higher the match rate, the higher-ranked the result.
-	// <li>Length limit for a single description: 100 characters</li>
-	// <li>Array length limit: 10</li>
+	// <p>File description set, fuzzy match media files. The higher the matching degree, higher priority in sorting.</p><li>Single description length limit: 100 characters.</li><li>Array length limit: 10.</li>
 	Descriptions []*string `json:"Descriptions,omitnil,omitempty" name:"Descriptions"`
 
-	// Category ID set. The categories of the specified IDs and all subcategories in the set are matched.
-	// <li>Array length limit: 10.</li>
+	// <p>Category id collection, match the specified ID in the collection and all its subclasses.</p><li>Array length limit: 10.</li>
 	ClassIds []*int64 `json:"ClassIds,omitnil,omitempty" name:"ClassIds"`
 
-	// The tags to search. A file is considered a match if it has any of the tags specified.
-	// <li>Tag length limit: 32 characters.</li>
-	// <li>Array length limit: 16.</li>
+	// <p>Tag set, match any element in the collection.</p><li>Single tag length limit: 32 character.</li><li>Array length limit: 16.</li>
 	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// File type. Any element in the set can be matched.
-	// <li>Video: video file</li>
-	// <li>Audio: audio file</li>
-	// <li>Image: image file</li>
+	// <p>File type. Match any element in the collection:</p><li>Video: video file</li><li>Audio: audio file</li><li>Image: image file</li>
 	Categories []*string `json:"Categories,omitnil,omitempty" name:"Categories"`
 
-	// Media file source set. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
-	// <li>Array length limit: 10.</li>
+	// <p>Media file source collection. Source value reference <a href="https://www.tencentcloud.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData">SourceType</a>.</p><li>Array length limit: 10.</li>
 	SourceTypes []*string `json:"SourceTypes,omitnil,omitempty" name:"SourceTypes"`
 
-	// The live stream code array. A media file will be returned if it matches any element in the array.
-	// <li>Array length limit: 10</li>
+	// <p>Push stream live code collection. Match any element in the collection.</p><li>Array length limit: 10.</li>
 	StreamIds []*string `json:"StreamIds,omitnil,omitempty" name:"StreamIds"`
 
-	// Matches files created within the time period.
-	// <li>Includes specified start and end points in time.</li>
+	// <p>Match files with creation time within this time period.</p><li>Include the specified start and end points in time.</li>
 	CreateTime *TimeRange `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Files whose expiration time points are within the specified time range will be returned. Expired files will not be returned.
-	// <li>The files whose expiration time points are on the start or end time of the specified range will also be returned.</li>
+	// <p>Match files with expiration time within this period. Unable to retrieve expired files.</p><li>Include the specified start and end points in time.</li>
 	ExpireTime *TimeRange `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Regions where media files are stored, such as `ap-chongqing`. For more regions, see [Storage Regions](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E5.B7.B2.E6.94.AF.E6.8C.81.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
-	// <li>Length limit for a single region: 20 characters</li>
-	// <li>Array length limit: 20</li>
+	// <p>Media file storage region, such as ap-chongqing. Please refer to <a href="https://www.tencentcloud.com/document/product/266/9760?from_cn_redirect=1#.E5.B7.B2.E6.94.AF.E6.8C.81.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">region list</a>.</p><li>Single storage region length limit: 20 characters.</li><li>Array length limit: 20.</li>
 	StorageRegions []*string `json:"StorageRegions,omitnil,omitempty" name:"StorageRegions"`
 
-	// An array of storage classes. Valid values:
-	// <li>STANDARD</li>
-	// <li>STANDARD_IA</li>
-	// <li>ARCHIVE</li>
-	// <li>DEEP_ARCHIVE</li>
+	// <p>Storage type array. Optional values:</p><li> STANDARD: Standard storage.</li><li> STANDARD_IA: Infrequent storage.</li><li> ARCHIVE: Archive storage.</li><li> DEEP_ARCHIVE: Deep archive storage.</li>
 	StorageClasses []*string `json:"StorageClasses,omitnil,omitempty" name:"StorageClasses"`
 
-	// The file formats.
-	// <li>Array length limit: 10</li>
+	// <p>Media file packaging format collection, match any element in the collection.</p><li>Array length limit: 10.</li>
 	MediaTypes []*string `json:"MediaTypes,omitnil,omitempty" name:"MediaTypes"`
 
-	// The file statuses.
-	// <li>`Normal`</li>
-	// <li>`SystemForbidden` (blocked by VOD)</li>
-	// <li>`Forbidden` (blocked by you)</li>
+	// <p>Media file status, match any element in the collection.</p><li> Normal: normal;</li><li> SystemForbidden: Platform Ban;</li><li> Forbidden: proactive ban.</li>
 	Status []*string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// The types of moderation result.
-	// <li>`pass`</li>
-	// <li>`review` (the content may be non-compliant and needs to be reviewed)</li>
-	// <li>`block` (the content is non-compliant and should be blocked)</li>
-	// <li>`notModerated` (the file hasn't been moderated yet)</li>
+	// <p>Media file review result, match any element in the collection.</p><li> pass: Pass review;</li><li> review: Suspected violation, suggest re-examination;</li><li> block: Confirmed violation, suggest banning;</li><li> notModerated: Not moderated.</li>
 	ReviewResults []*string `json:"ReviewResults,omitnil,omitempty" name:"ReviewResults"`
 
-	// The TRTC application IDs. Any file that matches one of the application IDs will be returned.
-	// <li>Array length limit: 10</li>
+	// <p>TRTC application ID collection. Matches any element in the collection.</p><li>Array length limit: 10.</li>
 	TrtcSdkAppIds []*uint64 `json:"TrtcSdkAppIds,omitnil,omitempty" name:"TrtcSdkAppIds"`
 
-	// The TRTC room IDs. Any file that matches one of the room IDs will be returned.
-	// <li>Element length limit: 64 characters.</li>
-	// <li>Array length limit: 10.</li>
+	// <p>TRTC room ID collection. Matches any element in the collection.</p><li>Single room ID length limit: 64 characters;</li><li>Array length limit: 10.</li>
 	TrtcRoomIds []*string `json:"TrtcRoomIds,omitnil,omitempty" name:"TrtcRoomIds"`
 
-	// Specifies information entry that needs to be returned for all media files. Multiple entries can be specified simultaneously. N starts from 0. If this field is left empty, all information entries will be returned by default. Valid values:
-	// <li>basicInfo (basic video information).</li>
-	// <li>metaData (video metadata).</li>
-	// <li>transcodeInfo (result information of video transcoding).</li>
-	// <li>animatedGraphicsInfo (result information of animated image generating task).</li>
-	// <li>imageSpriteInfo (image sprite information).</li>
-	// <li>snapshotByTimeOffsetInfo (point-in-time screenshot information).</li>
-	// <li>sampleSnapshotInfo (sampled screenshot information).</li>
-	// <li>keyFrameDescInfo (timestamp information).</li>
-	// <li>adaptiveDynamicStreamingInfo (information of adaptive bitrate streaming).</li>
-	// <li>miniProgramReviewInfo (WeChat Mini Program audit information).</li>
+	// <p>Information to be returned for all specified media files, multiple information can be specified simultaneously, N starts incrementing from 0. If this field is not filled in, default return all information. Options include:</p><li>basicInfo (video basic information).</li><li>metaData (video metadata).</li><li>transcodeInfo (video transcoding result information).</li><li>animatedGraphicsInfo (video motion graphic result information).</li><li>imageSpriteInfo (video thumbnail information).</li><li>snapshotByTimeOffsetInfo (video screenshot by specified time point).</li><li>sampleSnapshotInfo (sampling screenshot information).</li><li>keyFrameDescInfo (Dotting Information).</li><li>adaptiveDynamicStreamingInfo (Adaptive Bitrate Streaming information).</li><li>miniProgramReviewInfo (miniProgramReviewInfo).</li>
 	Filters []*string `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Sorting order.
-	// <li>Valid value of `Sort.Field`: CreateTime.</li>
-	// <li>If `Text`, `Names`, or `Descriptions` is not empty, the `Sort.Field` field will not take effect, and the search results will be sorted by match rate.</li>
+	// <p>Sorting method.</p><li>Sort.Field optional CreateTime.</li><li>When Text, Names, or Descriptions is not empty, the Sort.Field field is invalid. Search results sorted by relevance.</li>
 	Sort *SortBy `json:"Sort,omitnil,omitempty" name:"Sort"`
 
-	// <div id="p_offset">Start offset of a paged return. Default value: 0. Entries from No. "Offset" to No. "Offset + Limit - 1" will be returned.
-	// <li>Value range: "Offset + Limit" cannot be more than 5,000. (For more information, please see <a href="#maxResultsDesc">Limit on the Number of Results Returned by API</a>)</li></div>
+	// <div id="p_offset">Starting offset amount for pagination return, default value: 0. Returns entries from Offset to Offset+Limit-1.<li>Value ranges from...to... Offset + Limit is no more than 5000. (See: <a href="#maxResultsDesc">API return result count limit</a>)</li></div>
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// <div id="p_limit">Number of entries returned by a paged query. Default value: 10. Entries from No. "Offset" to No. "Offset + Limit - 1" will be returned.
-	// <li>Value range: "Offset + Limit" cannot be more than 5,000. (For more information, please see <a href="#maxResultsDesc">Limit on the Number of Results Returned by API</a>)</li></div>
+	// <div id="p_limit">Number of records returned in pages. Default value: 10. Records from Offset to Offset+Limit-1 will be returned.<li>Value ranges from...to... Offset + Limit is no more than 5000. (Refer to: <a href="#maxResultsDesc">API return result count limit</a>)</li></div>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// (This is not recommended. `Names`, `NamePrefixes`, or `Descriptions` should be used instead)
-	// Search text, which fuzzily matches the media file name or description. The more matching items and the higher the match rate, the higher-ranked the result. It can contain up to 64 characters.
+	// <p>(Not recommended: Use Names, NamePrefixes, or Descriptions as alternatives)<br>Search text, fuzzy match media file name or description information. The higher the matching degree and more matches, the higher priority in sorting. Length limit: 64 characters.</p>
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
-	// (This is not recommended. `SourceTypes` should be used instead)
-	// Media file source. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
+	// <p>(Not recommended: Use SourceTypes as an alternative)<br>Media file source. Source value reference <a href="https://www.tencentcloud.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData">SourceType</a>.</p>
 	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
 
-	// (Not recommended. Consider using `StreamIds` instead.)
-	// The live stream code.
+	// <p>(Not recommended: Use StreamIds as an alternative)<br>Push stream live code.</p>
 	StreamId *string `json:"StreamId,omitnil,omitempty" name:"StreamId"`
 
-	// (This is not recommended. `CreateTime` should be used instead)
-	// Start time in the creation time range.
-	// <li>After or at the start time.</li>
-	// <li>If `CreateTime.After` also exists, it will be used first.</li>
-	// <li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
+	// <p>(Not recommended: Use CreateTime instead)<br>Start time of creation time.</p><li>Greater than or equal to start time.</li><li>When CreateTime.After also exists, CreateTime.After will be used first.</li><li>Format according to ISO 8601 standard. For details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).</li>
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// (This is not recommended. `CreateTime` should be used instead)
-	// End time in the creation time range.
-	// <li>Before the end time.</li>
-	// <li>If `CreateTime.Before` also exists, it will be used first.</li>
-	// <li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
+	// <p>(Not recommended: Use CreateTime instead)<br>End time of creation time.</p><li>Less than end time.</li><li>When CreateTime.Before also exists, CreateTime.Before will be used first.</li><li>Format according to ISO 8601 standard. For details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).</li>
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// This parameter is invalid now.
+	// <p>This field is invalid.</p>
 	Vids []*string `json:"Vids,omitnil,omitempty" name:"Vids"`
 
-	// This parameter is invalid now.
+	// <p>This field is invalid.</p>
 	Vid *string `json:"Vid,omitnil,omitempty" name:"Vid"`
+
+	// <p>Live streaming push Domain. Valid when the media source is Live streaming Recording.</p>
+	StreamDomains []*string `json:"StreamDomains,omitnil,omitempty" name:"StreamDomains"`
+
+	// <p>Live streaming push Path. Valid at that time when the source is live recording.</p>
+	StreamPaths []*string `json:"StreamPaths,omitnil,omitempty" name:"StreamPaths"`
 }
 
 type SearchMediaRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/33987">application</a> ID. For customers who activate on-demand services from December 25, 2023, they must fill this field with the app ID when accessing resources in on-demand applications (whether it's the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// File ID set. Any element in the set can be matched.
-	// <li>Array length limit: 10.</li>
-	// <li>ID length limit: 40 characters.</li>
+	// <p>File id collection, match any element in the collection.</p><li>Array length limit: 10.</li><li>Single ID length limit: 40 character.</li>
 	FileIds []*string `json:"FileIds,omitnil,omitempty" name:"FileIds"`
 
-	// The file names to use for fuzzy search, which are sorted by relevance in descending order.
-	// <li>Name length limit: 100 characters.</li>
-	// <li>Array length limit: 10</li>
+	// <p>File name collection. Fuzzy match media files by file name. The higher the matching degree, the higher the priority in sorting.</p><li>Single file name length limit: 100 characters.</li><li>Array length limit: 10.</li>
 	Names []*string `json:"Names,omitnil,omitempty" name:"Names"`
 
-	// The file name prefixes to search.
-	// <li>Prefix length limit: 100 characters.</li>
-	// <li>Array length limit: 10.</li>
+	// <p>File name prefix. Prefix match media files.</p><li>Single file name prefix length limit: 100 characters.</li><li>Array length limit: 10.</li>
 	NamePrefixes []*string `json:"NamePrefixes,omitnil,omitempty" name:"NamePrefixes"`
 
-	// File description set. Media file descriptions are fuzzily matched. The higher the match rate, the higher-ranked the result.
-	// <li>Length limit for a single description: 100 characters</li>
-	// <li>Array length limit: 10</li>
+	// <p>File description set, fuzzy match media files. The higher the matching degree, higher priority in sorting.</p><li>Single description length limit: 100 characters.</li><li>Array length limit: 10.</li>
 	Descriptions []*string `json:"Descriptions,omitnil,omitempty" name:"Descriptions"`
 
-	// Category ID set. The categories of the specified IDs and all subcategories in the set are matched.
-	// <li>Array length limit: 10.</li>
+	// <p>Category id collection, match the specified ID in the collection and all its subclasses.</p><li>Array length limit: 10.</li>
 	ClassIds []*int64 `json:"ClassIds,omitnil,omitempty" name:"ClassIds"`
 
-	// The tags to search. A file is considered a match if it has any of the tags specified.
-	// <li>Tag length limit: 32 characters.</li>
-	// <li>Array length limit: 16.</li>
+	// <p>Tag set, match any element in the collection.</p><li>Single tag length limit: 32 character.</li><li>Array length limit: 16.</li>
 	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// File type. Any element in the set can be matched.
-	// <li>Video: video file</li>
-	// <li>Audio: audio file</li>
-	// <li>Image: image file</li>
+	// <p>File type. Match any element in the collection:</p><li>Video: video file</li><li>Audio: audio file</li><li>Image: image file</li>
 	Categories []*string `json:"Categories,omitnil,omitempty" name:"Categories"`
 
-	// Media file source set. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
-	// <li>Array length limit: 10.</li>
+	// <p>Media file source collection. Source value reference <a href="https://www.tencentcloud.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData">SourceType</a>.</p><li>Array length limit: 10.</li>
 	SourceTypes []*string `json:"SourceTypes,omitnil,omitempty" name:"SourceTypes"`
 
-	// The live stream code array. A media file will be returned if it matches any element in the array.
-	// <li>Array length limit: 10</li>
+	// <p>Push stream live code collection. Match any element in the collection.</p><li>Array length limit: 10.</li>
 	StreamIds []*string `json:"StreamIds,omitnil,omitempty" name:"StreamIds"`
 
-	// Matches files created within the time period.
-	// <li>Includes specified start and end points in time.</li>
+	// <p>Match files with creation time within this time period.</p><li>Include the specified start and end points in time.</li>
 	CreateTime *TimeRange `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Files whose expiration time points are within the specified time range will be returned. Expired files will not be returned.
-	// <li>The files whose expiration time points are on the start or end time of the specified range will also be returned.</li>
+	// <p>Match files with expiration time within this period. Unable to retrieve expired files.</p><li>Include the specified start and end points in time.</li>
 	ExpireTime *TimeRange `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Regions where media files are stored, such as `ap-chongqing`. For more regions, see [Storage Regions](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E5.B7.B2.E6.94.AF.E6.8C.81.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
-	// <li>Length limit for a single region: 20 characters</li>
-	// <li>Array length limit: 20</li>
+	// <p>Media file storage region, such as ap-chongqing. Please refer to <a href="https://www.tencentcloud.com/document/product/266/9760?from_cn_redirect=1#.E5.B7.B2.E6.94.AF.E6.8C.81.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">region list</a>.</p><li>Single storage region length limit: 20 characters.</li><li>Array length limit: 20.</li>
 	StorageRegions []*string `json:"StorageRegions,omitnil,omitempty" name:"StorageRegions"`
 
-	// An array of storage classes. Valid values:
-	// <li>STANDARD</li>
-	// <li>STANDARD_IA</li>
-	// <li>ARCHIVE</li>
-	// <li>DEEP_ARCHIVE</li>
+	// <p>Storage type array. Optional values:</p><li> STANDARD: Standard storage.</li><li> STANDARD_IA: Infrequent storage.</li><li> ARCHIVE: Archive storage.</li><li> DEEP_ARCHIVE: Deep archive storage.</li>
 	StorageClasses []*string `json:"StorageClasses,omitnil,omitempty" name:"StorageClasses"`
 
-	// The file formats.
-	// <li>Array length limit: 10</li>
+	// <p>Media file packaging format collection, match any element in the collection.</p><li>Array length limit: 10.</li>
 	MediaTypes []*string `json:"MediaTypes,omitnil,omitempty" name:"MediaTypes"`
 
-	// The file statuses.
-	// <li>`Normal`</li>
-	// <li>`SystemForbidden` (blocked by VOD)</li>
-	// <li>`Forbidden` (blocked by you)</li>
+	// <p>Media file status, match any element in the collection.</p><li> Normal: normal;</li><li> SystemForbidden: Platform Ban;</li><li> Forbidden: proactive ban.</li>
 	Status []*string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// The types of moderation result.
-	// <li>`pass`</li>
-	// <li>`review` (the content may be non-compliant and needs to be reviewed)</li>
-	// <li>`block` (the content is non-compliant and should be blocked)</li>
-	// <li>`notModerated` (the file hasn't been moderated yet)</li>
+	// <p>Media file review result, match any element in the collection.</p><li> pass: Pass review;</li><li> review: Suspected violation, suggest re-examination;</li><li> block: Confirmed violation, suggest banning;</li><li> notModerated: Not moderated.</li>
 	ReviewResults []*string `json:"ReviewResults,omitnil,omitempty" name:"ReviewResults"`
 
-	// The TRTC application IDs. Any file that matches one of the application IDs will be returned.
-	// <li>Array length limit: 10</li>
+	// <p>TRTC application ID collection. Matches any element in the collection.</p><li>Array length limit: 10.</li>
 	TrtcSdkAppIds []*uint64 `json:"TrtcSdkAppIds,omitnil,omitempty" name:"TrtcSdkAppIds"`
 
-	// The TRTC room IDs. Any file that matches one of the room IDs will be returned.
-	// <li>Element length limit: 64 characters.</li>
-	// <li>Array length limit: 10.</li>
+	// <p>TRTC room ID collection. Matches any element in the collection.</p><li>Single room ID length limit: 64 characters;</li><li>Array length limit: 10.</li>
 	TrtcRoomIds []*string `json:"TrtcRoomIds,omitnil,omitempty" name:"TrtcRoomIds"`
 
-	// Specifies information entry that needs to be returned for all media files. Multiple entries can be specified simultaneously. N starts from 0. If this field is left empty, all information entries will be returned by default. Valid values:
-	// <li>basicInfo (basic video information).</li>
-	// <li>metaData (video metadata).</li>
-	// <li>transcodeInfo (result information of video transcoding).</li>
-	// <li>animatedGraphicsInfo (result information of animated image generating task).</li>
-	// <li>imageSpriteInfo (image sprite information).</li>
-	// <li>snapshotByTimeOffsetInfo (point-in-time screenshot information).</li>
-	// <li>sampleSnapshotInfo (sampled screenshot information).</li>
-	// <li>keyFrameDescInfo (timestamp information).</li>
-	// <li>adaptiveDynamicStreamingInfo (information of adaptive bitrate streaming).</li>
-	// <li>miniProgramReviewInfo (WeChat Mini Program audit information).</li>
+	// <p>Information to be returned for all specified media files, multiple information can be specified simultaneously, N starts incrementing from 0. If this field is not filled in, default return all information. Options include:</p><li>basicInfo (video basic information).</li><li>metaData (video metadata).</li><li>transcodeInfo (video transcoding result information).</li><li>animatedGraphicsInfo (video motion graphic result information).</li><li>imageSpriteInfo (video thumbnail information).</li><li>snapshotByTimeOffsetInfo (video screenshot by specified time point).</li><li>sampleSnapshotInfo (sampling screenshot information).</li><li>keyFrameDescInfo (Dotting Information).</li><li>adaptiveDynamicStreamingInfo (Adaptive Bitrate Streaming information).</li><li>miniProgramReviewInfo (miniProgramReviewInfo).</li>
 	Filters []*string `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Sorting order.
-	// <li>Valid value of `Sort.Field`: CreateTime.</li>
-	// <li>If `Text`, `Names`, or `Descriptions` is not empty, the `Sort.Field` field will not take effect, and the search results will be sorted by match rate.</li>
+	// <p>Sorting method.</p><li>Sort.Field optional CreateTime.</li><li>When Text, Names, or Descriptions is not empty, the Sort.Field field is invalid. Search results sorted by relevance.</li>
 	Sort *SortBy `json:"Sort,omitnil,omitempty" name:"Sort"`
 
-	// <div id="p_offset">Start offset of a paged return. Default value: 0. Entries from No. "Offset" to No. "Offset + Limit - 1" will be returned.
-	// <li>Value range: "Offset + Limit" cannot be more than 5,000. (For more information, please see <a href="#maxResultsDesc">Limit on the Number of Results Returned by API</a>)</li></div>
+	// <div id="p_offset">Starting offset amount for pagination return, default value: 0. Returns entries from Offset to Offset+Limit-1.<li>Value ranges from...to... Offset + Limit is no more than 5000. (See: <a href="#maxResultsDesc">API return result count limit</a>)</li></div>
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// <div id="p_limit">Number of entries returned by a paged query. Default value: 10. Entries from No. "Offset" to No. "Offset + Limit - 1" will be returned.
-	// <li>Value range: "Offset + Limit" cannot be more than 5,000. (For more information, please see <a href="#maxResultsDesc">Limit on the Number of Results Returned by API</a>)</li></div>
+	// <div id="p_limit">Number of records returned in pages. Default value: 10. Records from Offset to Offset+Limit-1 will be returned.<li>Value ranges from...to... Offset + Limit is no more than 5000. (Refer to: <a href="#maxResultsDesc">API return result count limit</a>)</li></div>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// (This is not recommended. `Names`, `NamePrefixes`, or `Descriptions` should be used instead)
-	// Search text, which fuzzily matches the media file name or description. The more matching items and the higher the match rate, the higher-ranked the result. It can contain up to 64 characters.
+	// <p>(Not recommended: Use Names, NamePrefixes, or Descriptions as alternatives)<br>Search text, fuzzy match media file name or description information. The higher the matching degree and more matches, the higher priority in sorting. Length limit: 64 characters.</p>
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
-	// (This is not recommended. `SourceTypes` should be used instead)
-	// Media file source. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
+	// <p>(Not recommended: Use SourceTypes as an alternative)<br>Media file source. Source value reference <a href="https://www.tencentcloud.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData">SourceType</a>.</p>
 	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
 
-	// (Not recommended. Consider using `StreamIds` instead.)
-	// The live stream code.
+	// <p>(Not recommended: Use StreamIds as an alternative)<br>Push stream live code.</p>
 	StreamId *string `json:"StreamId,omitnil,omitempty" name:"StreamId"`
 
-	// (This is not recommended. `CreateTime` should be used instead)
-	// Start time in the creation time range.
-	// <li>After or at the start time.</li>
-	// <li>If `CreateTime.After` also exists, it will be used first.</li>
-	// <li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
+	// <p>(Not recommended: Use CreateTime instead)<br>Start time of creation time.</p><li>Greater than or equal to start time.</li><li>When CreateTime.After also exists, CreateTime.After will be used first.</li><li>Format according to ISO 8601 standard. For details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).</li>
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// (This is not recommended. `CreateTime` should be used instead)
-	// End time in the creation time range.
-	// <li>Before the end time.</li>
-	// <li>If `CreateTime.Before` also exists, it will be used first.</li>
-	// <li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
+	// <p>(Not recommended: Use CreateTime instead)<br>End time of creation time.</p><li>Less than end time.</li><li>When CreateTime.Before also exists, CreateTime.Before will be used first.</li><li>Format according to ISO 8601 standard. For details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).</li>
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// This parameter is invalid now.
+	// <p>This field is invalid.</p>
 	Vids []*string `json:"Vids,omitnil,omitempty" name:"Vids"`
 
-	// This parameter is invalid now.
+	// <p>This field is invalid.</p>
 	Vid *string `json:"Vid,omitnil,omitempty" name:"Vid"`
+
+	// <p>Live streaming push Domain. Valid when the media source is Live streaming Recording.</p>
+	StreamDomains []*string `json:"StreamDomains,omitnil,omitempty" name:"StreamDomains"`
+
+	// <p>Live streaming push Path. Valid at that time when the source is live recording.</p>
+	StreamPaths []*string `json:"StreamPaths,omitnil,omitempty" name:"StreamPaths"`
 }
 
 func (r *SearchMediaRequest) ToJsonString() string {
@@ -26569,6 +26617,8 @@ func (r *SearchMediaRequest) FromJsonString(s string) error {
 	delete(f, "EndTime")
 	delete(f, "Vids")
 	delete(f, "Vid")
+	delete(f, "StreamDomains")
+	delete(f, "StreamPaths")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SearchMediaRequest has unknown keys!", "")
 	}
@@ -26577,11 +26627,10 @@ func (r *SearchMediaRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SearchMediaResponseParams struct {
-	// Number of eligible entries.
-	// <li>Maximum value: 5000. If the number of eligible entries is greater than 5,000, this field will return 5,000 instead of the actual number.</li>
+	// <p>Total records that meet search criteria.</p><li>Maximum value: 5000. When the number of records hit exceeds 5000, this field will return 5000 instead of the actual total count.</li>
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Media file information list
+	// <p>Media file information list.</p>
 	MediaInfoSet []*MediaInfo `json:"MediaInfoSet,omitnil,omitempty" name:"MediaInfoSet"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.

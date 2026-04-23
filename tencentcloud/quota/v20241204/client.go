@@ -157,6 +157,60 @@ func (c *Client) DeleteAlarmWithContext(ctx context.Context, request *DeleteAlar
     return
 }
 
+func NewDescribeAggregateUserQuotasRequest() (request *DescribeAggregateUserQuotasRequest) {
+    request = &DescribeAggregateUserQuotasRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("quota", APIVersion, "DescribeAggregateUserQuotas")
+    
+    
+    return
+}
+
+func NewDescribeAggregateUserQuotasResponse() (response *DescribeAggregateUserQuotasResponse) {
+    response = &DescribeAggregateUserQuotasResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAggregateUserQuotas
+// user quota list
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_ALARMNOTEXIST = "ResourceNotFound.AlarmNotExist"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeAggregateUserQuotas(request *DescribeAggregateUserQuotasRequest) (response *DescribeAggregateUserQuotasResponse, err error) {
+    return c.DescribeAggregateUserQuotasWithContext(context.Background(), request)
+}
+
+// DescribeAggregateUserQuotas
+// user quota list
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_ALARMNOTEXIST = "ResourceNotFound.AlarmNotExist"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeAggregateUserQuotasWithContext(ctx context.Context, request *DescribeAggregateUserQuotasRequest) (response *DescribeAggregateUserQuotasResponse, err error) {
+    if request == nil {
+        request = NewDescribeAggregateUserQuotasRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "quota", APIVersion, "DescribeAggregateUserQuotas")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAggregateUserQuotas require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAggregateUserQuotasResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAlarmsRequest() (request *DescribeAlarmsRequest) {
     request = &DescribeAlarmsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -205,6 +259,58 @@ func (c *Client) DescribeAlarmsWithContext(ctx context.Context, request *Describ
     request.SetContext(ctx)
     
     response = NewDescribeAlarmsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUserQuotaRequest() (request *DescribeUserQuotaRequest) {
+    request = &DescribeUserQuotaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("quota", APIVersion, "DescribeUserQuota")
+    
+    
+    return
+}
+
+func NewDescribeUserQuotaResponse() (response *DescribeUserQuotaResponse) {
+    response = &DescribeUserQuotaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeUserQuota
+// Query a user quota
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+func (c *Client) DescribeUserQuota(request *DescribeUserQuotaRequest) (response *DescribeUserQuotaResponse, err error) {
+    return c.DescribeUserQuotaWithContext(context.Background(), request)
+}
+
+// DescribeUserQuota
+// Query a user quota
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+func (c *Client) DescribeUserQuotaWithContext(ctx context.Context, request *DescribeUserQuotaRequest) (response *DescribeUserQuotaResponse, err error) {
+    if request == nil {
+        request = NewDescribeUserQuotaRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "quota", APIVersion, "DescribeUserQuota")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUserQuota require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUserQuotaResponse()
     err = c.Send(request, response)
     return
 }
