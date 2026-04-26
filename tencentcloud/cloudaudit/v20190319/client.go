@@ -45,116 +45,6 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
-func NewCreateAuditRequest() (request *CreateAuditRequest) {
-    request = &CreateAuditRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "CreateAudit")
-    
-    
-    return
-}
-
-func NewCreateAuditResponse() (response *CreateAuditResponse) {
-    response = &CreateAuditResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// CreateAudit
-// Parameter requirements:
-//
-// 1. If the value of `IsCreateNewBucket` exists, `cosRegion` and `osBucketName` are required.
-//
-// 2. If the value of `IsEnableCmqNotify` is 1, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` are required.
-//
-// 3. If the value of `IsEnableCmqNotify` is 0, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` cannot be passed in.
-//
-// 4. If the value of `IsEnableKmsEncry` is 1, `KmsRegion` and `KeyId` are required.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_CREATEBUCKETFAIL = "FailedOperation.CreateBucketFail"
-//  INTERNALERROR_CMQERROR = "InternalError.CmqError"
-//  INTERNALERROR_CREATEAUDITERROR = "InternalError.CreateAuditError"
-//  INVALIDPARAMETERVALUE_AUDITNAMEERROR = "InvalidParameterValue.AuditNameError"
-//  INVALIDPARAMETERVALUE_CMQREGIONERROR = "InvalidParameterValue.CmqRegionError"
-//  INVALIDPARAMETERVALUE_COSNAMEERROR = "InvalidParameterValue.CosNameError"
-//  INVALIDPARAMETERVALUE_COSREGIONERROR = "InvalidParameterValue.CosRegionError"
-//  INVALIDPARAMETERVALUE_ISCREATENEWBUCKETERROR = "InvalidParameterValue.IsCreateNewBucketError"
-//  INVALIDPARAMETERVALUE_ISCREATENEWQUEUEERROR = "InvalidParameterValue.IsCreateNewQueueError"
-//  INVALIDPARAMETERVALUE_ISENABLECMQNOTIFYERROR = "InvalidParameterValue.IsEnableCmqNotifyError"
-//  INVALIDPARAMETERVALUE_LOGFILEPREFIXERROR = "InvalidParameterValue.LogFilePrefixError"
-//  INVALIDPARAMETERVALUE_QUEUENAMEERROR = "InvalidParameterValue.QueueNameError"
-//  INVALIDPARAMETERVALUE_READWRITEATTRIBUTEERROR = "InvalidParameterValue.ReadWriteAttributeError"
-//  LIMITEXCEEDED_OVERAMOUNT = "LimitExceeded.OverAmount"
-//  MISSINGPARAMETER_MISSAUDITNAME = "MissingParameter.MissAuditName"
-//  MISSINGPARAMETER_MISSCOSBUCKETNAME = "MissingParameter.MissCosBucketName"
-//  MISSINGPARAMETER_MISSCOSREGION = "MissingParameter.MissCosRegion"
-//  MISSINGPARAMETER_CMQ = "MissingParameter.cmq"
-//  RESOURCEINUSE_ALREADYEXISTSSAMEAUDIT = "ResourceInUse.AlreadyExistsSameAudit"
-//  RESOURCEINUSE_ALREADYEXISTSSAMEAUDITCMQCONFIG = "ResourceInUse.AlreadyExistsSameAuditCmqConfig"
-//  RESOURCEINUSE_ALREADYEXISTSSAMEAUDITCOSCONFIG = "ResourceInUse.AlreadyExistsSameAuditCosConfig"
-//  RESOURCEINUSE_COSBUCKETEXISTS = "ResourceInUse.CosBucketExists"
-//  RESOURCENOTFOUND_ROLENOTEXIST = "ResourceNotFound.RoleNotExist"
-func (c *Client) CreateAudit(request *CreateAuditRequest) (response *CreateAuditResponse, err error) {
-    return c.CreateAuditWithContext(context.Background(), request)
-}
-
-// CreateAudit
-// Parameter requirements:
-//
-// 1. If the value of `IsCreateNewBucket` exists, `cosRegion` and `osBucketName` are required.
-//
-// 2. If the value of `IsEnableCmqNotify` is 1, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` are required.
-//
-// 3. If the value of `IsEnableCmqNotify` is 0, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` cannot be passed in.
-//
-// 4. If the value of `IsEnableKmsEncry` is 1, `KmsRegion` and `KeyId` are required.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_CREATEBUCKETFAIL = "FailedOperation.CreateBucketFail"
-//  INTERNALERROR_CMQERROR = "InternalError.CmqError"
-//  INTERNALERROR_CREATEAUDITERROR = "InternalError.CreateAuditError"
-//  INVALIDPARAMETERVALUE_AUDITNAMEERROR = "InvalidParameterValue.AuditNameError"
-//  INVALIDPARAMETERVALUE_CMQREGIONERROR = "InvalidParameterValue.CmqRegionError"
-//  INVALIDPARAMETERVALUE_COSNAMEERROR = "InvalidParameterValue.CosNameError"
-//  INVALIDPARAMETERVALUE_COSREGIONERROR = "InvalidParameterValue.CosRegionError"
-//  INVALIDPARAMETERVALUE_ISCREATENEWBUCKETERROR = "InvalidParameterValue.IsCreateNewBucketError"
-//  INVALIDPARAMETERVALUE_ISCREATENEWQUEUEERROR = "InvalidParameterValue.IsCreateNewQueueError"
-//  INVALIDPARAMETERVALUE_ISENABLECMQNOTIFYERROR = "InvalidParameterValue.IsEnableCmqNotifyError"
-//  INVALIDPARAMETERVALUE_LOGFILEPREFIXERROR = "InvalidParameterValue.LogFilePrefixError"
-//  INVALIDPARAMETERVALUE_QUEUENAMEERROR = "InvalidParameterValue.QueueNameError"
-//  INVALIDPARAMETERVALUE_READWRITEATTRIBUTEERROR = "InvalidParameterValue.ReadWriteAttributeError"
-//  LIMITEXCEEDED_OVERAMOUNT = "LimitExceeded.OverAmount"
-//  MISSINGPARAMETER_MISSAUDITNAME = "MissingParameter.MissAuditName"
-//  MISSINGPARAMETER_MISSCOSBUCKETNAME = "MissingParameter.MissCosBucketName"
-//  MISSINGPARAMETER_MISSCOSREGION = "MissingParameter.MissCosRegion"
-//  MISSINGPARAMETER_CMQ = "MissingParameter.cmq"
-//  RESOURCEINUSE_ALREADYEXISTSSAMEAUDIT = "ResourceInUse.AlreadyExistsSameAudit"
-//  RESOURCEINUSE_ALREADYEXISTSSAMEAUDITCMQCONFIG = "ResourceInUse.AlreadyExistsSameAuditCmqConfig"
-//  RESOURCEINUSE_ALREADYEXISTSSAMEAUDITCOSCONFIG = "ResourceInUse.AlreadyExistsSameAuditCosConfig"
-//  RESOURCEINUSE_COSBUCKETEXISTS = "ResourceInUse.CosBucketExists"
-//  RESOURCENOTFOUND_ROLENOTEXIST = "ResourceNotFound.RoleNotExist"
-func (c *Client) CreateAuditWithContext(ctx context.Context, request *CreateAuditRequest) (response *CreateAuditResponse, err error) {
-    if request == nil {
-        request = NewCreateAuditRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cloudaudit", APIVersion, "CreateAudit")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateAudit require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateAuditResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewCreateAuditTrackRequest() (request *CreateAuditTrackRequest) {
     request = &CreateAuditTrackRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -225,58 +115,6 @@ func (c *Client) CreateAuditTrackWithContext(ctx context.Context, request *Creat
     request.SetContext(ctx)
     
     response = NewCreateAuditTrackResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDeleteAuditRequest() (request *DeleteAuditRequest) {
-    request = &DeleteAuditRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "DeleteAudit")
-    
-    
-    return
-}
-
-func NewDeleteAuditResponse() (response *DeleteAuditResponse) {
-    response = &DeleteAuditResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DeleteAudit
-// This API is used to delete a tracking set.
-//
-// error code that may be returned:
-//  INTERNALERROR_DELETEAUDITERROR = "InternalError.DeleteAuditError"
-//  RESOURCENOTFOUND_AUDITNOTEXIST = "ResourceNotFound.AuditNotExist"
-func (c *Client) DeleteAudit(request *DeleteAuditRequest) (response *DeleteAuditResponse, err error) {
-    return c.DeleteAuditWithContext(context.Background(), request)
-}
-
-// DeleteAudit
-// This API is used to delete a tracking set.
-//
-// error code that may be returned:
-//  INTERNALERROR_DELETEAUDITERROR = "InternalError.DeleteAuditError"
-//  RESOURCENOTFOUND_AUDITNOTEXIST = "ResourceNotFound.AuditNotExist"
-func (c *Client) DeleteAuditWithContext(ctx context.Context, request *DeleteAuditRequest) (response *DeleteAuditResponse, err error) {
-    if request == nil {
-        request = NewDeleteAuditRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cloudaudit", APIVersion, "DeleteAudit")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DeleteAudit require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDeleteAuditResponse()
     err = c.Send(request, response)
     return
 }
@@ -913,6 +751,7 @@ func NewModifyAuditTrackResponse() (response *ModifyAuditTrackResponse) {
 //  LIMITEXCEEDED_OVERAMOUNT = "LimitExceeded.OverAmount"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_AUDITNOTEXIST = "ResourceNotFound.AuditNotExist"
+//  RESOURCENOTFOUND_COSNOTEXIST = "ResourceNotFound.CosNotExist"
 func (c *Client) ModifyAuditTrack(request *ModifyAuditTrackRequest) (response *ModifyAuditTrackResponse, err error) {
     return c.ModifyAuditTrackWithContext(context.Background(), request)
 }
@@ -934,6 +773,7 @@ func (c *Client) ModifyAuditTrack(request *ModifyAuditTrackRequest) (response *M
 //  LIMITEXCEEDED_OVERAMOUNT = "LimitExceeded.OverAmount"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_AUDITNOTEXIST = "ResourceNotFound.AuditNotExist"
+//  RESOURCENOTFOUND_COSNOTEXIST = "ResourceNotFound.CosNotExist"
 func (c *Client) ModifyAuditTrackWithContext(ctx context.Context, request *ModifyAuditTrackRequest) (response *ModifyAuditTrackResponse, err error) {
     if request == nil {
         request = NewModifyAuditTrackRequest()

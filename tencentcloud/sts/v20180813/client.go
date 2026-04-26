@@ -65,9 +65,37 @@ func NewAssumeRoleResponse() (response *AssumeRoleResponse) {
 }
 
 // AssumeRole
-// This API is used to request for the temporary security credentials of a role.
+// This API is used to request temporary access credentials for assuming a role.
+//
+// 
+//
+// This API is used to describe the composition of role policies.
+//
+// 
+//
+// This API is used to specify the role trust policy, which defines who can assume the role.
+//
+// 
+//
+// This API is used to specify the role permission policy, which defines what actions can be performed after assuming the role.
+//
+// 
+//
+// 
+//
+// This API is used to describe the conditions under which a role can be assumed.
+//
+// 
+//
+// This API is used to bind a policy that allows a user to call AssumeRole.
+//
+// 
+//
+// This API is used to add a user as a principal in the role trust policy.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CHECKMFAERROR = "FailedOperation.CheckMFAError"
+//  FAILEDOPERATION_MFATYPENOTSUPPORTED = "FailedOperation.MFATypeNotSupported"
 //  INTERNALERROR_DBERROR = "InternalError.DbError"
 //  INTERNALERROR_ENCRYPTERROR = "InternalError.EncryptError"
 //  INTERNALERROR_GETAPPIDERROR = "InternalError.GetAppIdError"
@@ -96,9 +124,37 @@ func (c *Client) AssumeRole(request *AssumeRoleRequest) (response *AssumeRoleRes
 }
 
 // AssumeRole
-// This API is used to request for the temporary security credentials of a role.
+// This API is used to request temporary access credentials for assuming a role.
+//
+// 
+//
+// This API is used to describe the composition of role policies.
+//
+// 
+//
+// This API is used to specify the role trust policy, which defines who can assume the role.
+//
+// 
+//
+// This API is used to specify the role permission policy, which defines what actions can be performed after assuming the role.
+//
+// 
+//
+// 
+//
+// This API is used to describe the conditions under which a role can be assumed.
+//
+// 
+//
+// This API is used to bind a policy that allows a user to call AssumeRole.
+//
+// 
+//
+// This API is used to add a user as a principal in the role trust policy.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CHECKMFAERROR = "FailedOperation.CheckMFAError"
+//  FAILEDOPERATION_MFATYPENOTSUPPORTED = "FailedOperation.MFATypeNotSupported"
 //  INTERNALERROR_DBERROR = "InternalError.DbError"
 //  INTERNALERROR_ENCRYPTERROR = "InternalError.EncryptError"
 //  INTERNALERROR_GETAPPIDERROR = "InternalError.GetAppIdError"
@@ -159,7 +215,11 @@ func NewAssumeRoleWithSAMLResponse() (response *AssumeRoleWithSAMLResponse) {
 }
 
 // AssumeRoleWithSAML
-// This API is used to request for the temporary credentials for a role that has been authenticated via a SAML assertion.
+// This API is used to request temporary access credentials for a role based on a SAML assertion.
+//
+// 
+//
+// Note: When called with signature method v3, header `X-TC-Token` could be ignored, and `Authorization` should be SKIP.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DbError"
@@ -174,6 +234,7 @@ func NewAssumeRoleWithSAMLResponse() (response *AssumeRoleWithSAMLResponse) {
 //  INVALIDPARAMETER_ACCOUNTNOTAVALIABLE = "InvalidParameter.AccountNotAvaliable"
 //  INVALIDPARAMETER_EXTENDSTRATEGYOVERSIZE = "InvalidParameter.ExtendStrategyOverSize"
 //  INVALIDPARAMETER_GRANTOTHERRESOURCE = "InvalidParameter.GrantOtherResource"
+//  INVALIDPARAMETER_OVERLIMIT = "InvalidParameter.OverLimit"
 //  INVALIDPARAMETER_OVERTIMEERROR = "InvalidParameter.OverTimeError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_POLICYTOOLONG = "InvalidParameter.PolicyTooLong"
@@ -181,6 +242,7 @@ func NewAssumeRoleWithSAMLResponse() (response *AssumeRoleWithSAMLResponse) {
 //  INVALIDPARAMETER_STRATEGYFORMATERROR = "InvalidParameter.StrategyFormatError"
 //  INVALIDPARAMETER_STRATEGYINVALID = "InvalidParameter.StrategyInvalid"
 //  INVALIDPARAMETER_TEMPCODENOTAVALIABLE = "InvalidParameter.TempCodeNotAvaliable"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  RESOURCENOTFOUND_ROLENOTFOUND = "ResourceNotFound.RoleNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) AssumeRoleWithSAML(request *AssumeRoleWithSAMLRequest) (response *AssumeRoleWithSAMLResponse, err error) {
@@ -188,7 +250,11 @@ func (c *Client) AssumeRoleWithSAML(request *AssumeRoleWithSAMLRequest) (respons
 }
 
 // AssumeRoleWithSAML
-// This API is used to request for the temporary credentials for a role that has been authenticated via a SAML assertion.
+// This API is used to request temporary access credentials for a role based on a SAML assertion.
+//
+// 
+//
+// Note: When called with signature method v3, header `X-TC-Token` could be ignored, and `Authorization` should be SKIP.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DbError"
@@ -203,6 +269,7 @@ func (c *Client) AssumeRoleWithSAML(request *AssumeRoleWithSAMLRequest) (respons
 //  INVALIDPARAMETER_ACCOUNTNOTAVALIABLE = "InvalidParameter.AccountNotAvaliable"
 //  INVALIDPARAMETER_EXTENDSTRATEGYOVERSIZE = "InvalidParameter.ExtendStrategyOverSize"
 //  INVALIDPARAMETER_GRANTOTHERRESOURCE = "InvalidParameter.GrantOtherResource"
+//  INVALIDPARAMETER_OVERLIMIT = "InvalidParameter.OverLimit"
 //  INVALIDPARAMETER_OVERTIMEERROR = "InvalidParameter.OverTimeError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_POLICYTOOLONG = "InvalidParameter.PolicyTooLong"
@@ -210,6 +277,7 @@ func (c *Client) AssumeRoleWithSAML(request *AssumeRoleWithSAMLRequest) (respons
 //  INVALIDPARAMETER_STRATEGYFORMATERROR = "InvalidParameter.StrategyFormatError"
 //  INVALIDPARAMETER_STRATEGYINVALID = "InvalidParameter.StrategyInvalid"
 //  INVALIDPARAMETER_TEMPCODENOTAVALIABLE = "InvalidParameter.TempCodeNotAvaliable"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  RESOURCENOTFOUND_ROLENOTFOUND = "ResourceNotFound.RoleNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) AssumeRoleWithSAMLWithContext(ctx context.Context, request *AssumeRoleWithSAMLRequest) (response *AssumeRoleWithSAMLResponse, err error) {
@@ -247,12 +315,18 @@ func NewAssumeRoleWithWebIdentityResponse() (response *AssumeRoleWithWebIdentity
 // AssumeRoleWithWebIdentity
 // This API is used to apply for an OIDC role credential.
 //
+// 
+//
+// Note: When called with signature method v3, header `X-TC-Token` could be ignored, and `Authorization` should be SKIP.
+//
 // error code that may be returned:
 //  INTERNALERROR_GETROLEERROR = "InternalError.GetRoleError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER_OVERLIMIT = "InvalidParameter.OverLimit"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_WEBIDENTITYTOKENERROR = "InvalidParameter.WebIdentityTokenError"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) AssumeRoleWithWebIdentity(request *AssumeRoleWithWebIdentityRequest) (response *AssumeRoleWithWebIdentityResponse, err error) {
     return c.AssumeRoleWithWebIdentityWithContext(context.Background(), request)
@@ -261,12 +335,18 @@ func (c *Client) AssumeRoleWithWebIdentity(request *AssumeRoleWithWebIdentityReq
 // AssumeRoleWithWebIdentity
 // This API is used to apply for an OIDC role credential.
 //
+// 
+//
+// Note: When called with signature method v3, header `X-TC-Token` could be ignored, and `Authorization` should be SKIP.
+//
 // error code that may be returned:
 //  INTERNALERROR_GETROLEERROR = "InternalError.GetRoleError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER_OVERLIMIT = "InvalidParameter.OverLimit"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_WEBIDENTITYTOKENERROR = "InvalidParameter.WebIdentityTokenError"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) AssumeRoleWithWebIdentityWithContext(ctx context.Context, request *AssumeRoleWithWebIdentityRequest) (response *AssumeRoleWithWebIdentityResponse, err error) {
     if request == nil {
@@ -303,7 +383,9 @@ func NewGetCallerIdentityResponse() (response *GetCallerIdentityResponse) {
 // GetCallerIdentity
 // This API is used to get the identity information of the current caller.
 //
-// The persistent keys of the root account and sub-account as well as the temporary credentials generated by `AssumeRole` and `GetFederationToken` can be used to get the identity information.
+// 
+//
+// This API is used to get the identity information using the persistent keys of the root account and sub-account as well as the temporary credentials generated by AssumeRole and GetFederationToken.
 //
 // error code that may be returned:
 //  AUTHFAILURE_ACCESSKEYILLEGAL = "AuthFailure.AccessKeyIllegal"
@@ -316,7 +398,9 @@ func (c *Client) GetCallerIdentity(request *GetCallerIdentityRequest) (response 
 // GetCallerIdentity
 // This API is used to get the identity information of the current caller.
 //
-// The persistent keys of the root account and sub-account as well as the temporary credentials generated by `AssumeRole` and `GetFederationToken` can be used to get the identity information.
+// 
+//
+// This API is used to get the identity information using the persistent keys of the root account and sub-account as well as the temporary credentials generated by AssumeRole and GetFederationToken.
 //
 // error code that may be returned:
 //  AUTHFAILURE_ACCESSKEYILLEGAL = "AuthFailure.AccessKeyIllegal"
@@ -359,7 +443,23 @@ func NewGetFederationTokenResponse() (response *GetFederationTokenResponse) {
 }
 
 // GetFederationToken
-// This API is used to get temporary credentials for a federated user.
+// This API is used to provide instructions.
+//
+// 
+//
+// This API is used to return a set of temporary access credentials. A typical application scenario is for proxy applications to centrally request temporary access credentials and distribute them to other distributed terminal applications within the enterprise network, such as terminal applications uploading files to COS. This API only supports calls with permanent keys.
+//
+// 
+//
+// This API is used to implement best practices.
+//
+// 
+//
+// 1. This API is used to recommend reusing temporary access credentials within their validity period to avoid rate limiting due to increased business request rates.
+//
+// 2. This API is used to recommend granting temporary access credentials with the principle of least privilege.
+//
+// 3. This API is used to recommend not using the root account for permanent keys calling the API.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DbError"
@@ -379,12 +479,29 @@ func NewGetFederationTokenResponse() (response *GetFederationTokenResponse) {
 //  INVALIDPARAMETER_TEMPCODENOTAVALIABLE = "InvalidParameter.TempCodeNotAvaliable"
 //  RESOURCENOTFOUND_ROLENOTFOUND = "ResourceNotFound.RoleNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) GetFederationToken(request *GetFederationTokenRequest) (response *GetFederationTokenResponse, err error) {
     return c.GetFederationTokenWithContext(context.Background(), request)
 }
 
 // GetFederationToken
-// This API is used to get temporary credentials for a federated user.
+// This API is used to provide instructions.
+//
+// 
+//
+// This API is used to return a set of temporary access credentials. A typical application scenario is for proxy applications to centrally request temporary access credentials and distribute them to other distributed terminal applications within the enterprise network, such as terminal applications uploading files to COS. This API only supports calls with permanent keys.
+//
+// 
+//
+// This API is used to implement best practices.
+//
+// 
+//
+// 1. This API is used to recommend reusing temporary access credentials within their validity period to avoid rate limiting due to increased business request rates.
+//
+// 2. This API is used to recommend granting temporary access credentials with the principle of least privilege.
+//
+// 3. This API is used to recommend not using the root account for permanent keys calling the API.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DbError"
@@ -404,6 +521,7 @@ func (c *Client) GetFederationToken(request *GetFederationTokenRequest) (respons
 //  INVALIDPARAMETER_TEMPCODENOTAVALIABLE = "InvalidParameter.TempCodeNotAvaliable"
 //  RESOURCENOTFOUND_ROLENOTFOUND = "ResourceNotFound.RoleNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) GetFederationTokenWithContext(ctx context.Context, request *GetFederationTokenRequest) (response *GetFederationTokenResponse, err error) {
     if request == nil {
         request = NewGetFederationTokenRequest()

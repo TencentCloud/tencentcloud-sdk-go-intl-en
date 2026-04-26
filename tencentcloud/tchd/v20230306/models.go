@@ -28,7 +28,7 @@ type DescribeEventsRequestParams struct {
 	// Query by Product ID(s). Product ID examples: cvm, lb, cdb, cdn, crs.
 	ProductIds []*string `json:"ProductIds,omitnil,omitempty" name:"ProductIds"`
 
-	//  1. Query by Region ID(s). Region ID examples: ap-guangzhou、ap-shanghai、ap-singapore.
+	//  1. Query by Region ID(s). Region ID examples: ap-guangzhou, ap-shanghai, ap-singapore.
 	// 2. The region ID for non-region-specific products should be set to non-regional.
 	RegionIds []*string `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
 }
@@ -42,7 +42,7 @@ type DescribeEventsRequest struct {
 	// Query by Product ID(s). Product ID examples: cvm, lb, cdb, cdn, crs.
 	ProductIds []*string `json:"ProductIds,omitnil,omitempty" name:"ProductIds"`
 
-	//  1. Query by Region ID(s). Region ID examples: ap-guangzhou、ap-shanghai、ap-singapore.
+	//  1. Query by Region ID(s). Region ID examples: ap-guangzhou, ap-shanghai, ap-singapore.
 	// 2. The region ID for non-region-specific products should be set to non-regional.
 	RegionIds []*string `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
 }

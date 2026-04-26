@@ -17,6 +17,9 @@ package v20180709
 const (
 	// error codes for specific actions
 
+	// CAM signature/authentication error.
+	AUTHFAILURE = "AuthFailure"
+
 	// No permission.
 	AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 
@@ -106,6 +109,9 @@ const (
 
 	// Invalid parameter value.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
+
+	// Parameters are missing
+	MISSINGPARAMETER = "MissingParameter"
 
 	// Operation denied.
 	OPERATIONDENIED = "OperationDenied"

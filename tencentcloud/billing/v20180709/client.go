@@ -645,6 +645,306 @@ func (c *Client) DescribeAccountBalanceWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeAllocateConditionsRequest() (request *DescribeAllocateConditionsRequest) {
+    request = &DescribeAllocateConditionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeAllocateConditions")
+    
+    
+    return
+}
+
+func NewDescribeAllocateConditionsResponse() (response *DescribeAllocateConditionsResponse) {
+    response = &DescribeAllocateConditionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAllocateConditions
+// This API is used to query the filter conditions of a resource directory.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeAllocateConditions(request *DescribeAllocateConditionsRequest) (response *DescribeAllocateConditionsResponse, err error) {
+    return c.DescribeAllocateConditionsWithContext(context.Background(), request)
+}
+
+// DescribeAllocateConditions
+// This API is used to query the filter conditions of a resource directory.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeAllocateConditionsWithContext(ctx context.Context, request *DescribeAllocateConditionsRequest) (response *DescribeAllocateConditionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllocateConditionsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeAllocateConditions")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAllocateConditions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAllocateConditionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAllocationBillConditionsRequest() (request *DescribeAllocationBillConditionsRequest) {
+    request = &DescribeAllocationBillConditionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeAllocationBillConditions")
+    
+    
+    return
+}
+
+func NewDescribeAllocationBillConditionsResponse() (response *DescribeAllocationBillConditionsResponse) {
+    response = &DescribeAllocationBillConditionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAllocationBillConditions
+// This API is used to query the filter conditions of a cost allocation bill.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeAllocationBillConditions(request *DescribeAllocationBillConditionsRequest) (response *DescribeAllocationBillConditionsResponse, err error) {
+    return c.DescribeAllocationBillConditionsWithContext(context.Background(), request)
+}
+
+// DescribeAllocationBillConditions
+// This API is used to query the filter conditions of a cost allocation bill.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeAllocationBillConditionsWithContext(ctx context.Context, request *DescribeAllocationBillConditionsRequest) (response *DescribeAllocationBillConditionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllocationBillConditionsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeAllocationBillConditions")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAllocationBillConditions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAllocationBillConditionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAllocationBillDetailRequest() (request *DescribeAllocationBillDetailRequest) {
+    request = &DescribeAllocationBillDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeAllocationBillDetail")
+    
+    
+    return
+}
+
+func NewDescribeAllocationBillDetailResponse() (response *DescribeAllocationBillDetailResponse) {
+    response = &DescribeAllocationBillDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAllocationBillDetail
+// This API is used to query the details of a cost allocation bill.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeAllocationBillDetail(request *DescribeAllocationBillDetailRequest) (response *DescribeAllocationBillDetailResponse, err error) {
+    return c.DescribeAllocationBillDetailWithContext(context.Background(), request)
+}
+
+// DescribeAllocationBillDetail
+// This API is used to query the details of a cost allocation bill.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeAllocationBillDetailWithContext(ctx context.Context, request *DescribeAllocationBillDetailRequest) (response *DescribeAllocationBillDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllocationBillDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeAllocationBillDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAllocationBillDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAllocationBillDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAllocationMonthOverviewRequest() (request *DescribeAllocationMonthOverviewRequest) {
+    request = &DescribeAllocationMonthOverviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeAllocationMonthOverview")
+    
+    
+    return
+}
+
+func NewDescribeAllocationMonthOverviewResponse() (response *DescribeAllocationMonthOverviewResponse) {
+    response = &DescribeAllocationMonthOverviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAllocationMonthOverview
+// This API is used to query the monthly overview of a cost allocation bill.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeAllocationMonthOverview(request *DescribeAllocationMonthOverviewRequest) (response *DescribeAllocationMonthOverviewResponse, err error) {
+    return c.DescribeAllocationMonthOverviewWithContext(context.Background(), request)
+}
+
+// DescribeAllocationMonthOverview
+// This API is used to query the monthly overview of a cost allocation bill.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeAllocationMonthOverviewWithContext(ctx context.Context, request *DescribeAllocationMonthOverviewRequest) (response *DescribeAllocationMonthOverviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllocationMonthOverviewRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeAllocationMonthOverview")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAllocationMonthOverview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAllocationMonthOverviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAllocationOverviewRequest() (request *DescribeAllocationOverviewRequest) {
+    request = &DescribeAllocationOverviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeAllocationOverview")
+    
+    
+    return
+}
+
+func NewDescribeAllocationOverviewResponse() (response *DescribeAllocationOverviewResponse) {
+    response = &DescribeAllocationOverviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAllocationOverview
+// This API is used to query the daily overview of a cost allocation bill.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeAllocationOverview(request *DescribeAllocationOverviewRequest) (response *DescribeAllocationOverviewResponse, err error) {
+    return c.DescribeAllocationOverviewWithContext(context.Background(), request)
+}
+
+// DescribeAllocationOverview
+// This API is used to query the daily overview of a cost allocation bill.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeAllocationOverviewWithContext(ctx context.Context, request *DescribeAllocationOverviewRequest) (response *DescribeAllocationOverviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllocationOverviewRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeAllocationOverview")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAllocationOverview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAllocationOverviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAllocationRuleDetailRequest() (request *DescribeAllocationRuleDetailRequest) {
     request = &DescribeAllocationRuleDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -757,6 +1057,186 @@ func (c *Client) DescribeAllocationRuleSummaryWithContext(ctx context.Context, r
     return
 }
 
+func NewDescribeAllocationSummaryByBusinessRequest() (request *DescribeAllocationSummaryByBusinessRequest) {
+    request = &DescribeAllocationSummaryByBusinessRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeAllocationSummaryByBusiness")
+    
+    
+    return
+}
+
+func NewDescribeAllocationSummaryByBusinessResponse() (response *DescribeAllocationSummaryByBusinessResponse) {
+    response = &DescribeAllocationSummaryByBusinessResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAllocationSummaryByBusiness
+// This API is used to query the details of a cost allocation bill by product.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeAllocationSummaryByBusiness(request *DescribeAllocationSummaryByBusinessRequest) (response *DescribeAllocationSummaryByBusinessResponse, err error) {
+    return c.DescribeAllocationSummaryByBusinessWithContext(context.Background(), request)
+}
+
+// DescribeAllocationSummaryByBusiness
+// This API is used to query the details of a cost allocation bill by product.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeAllocationSummaryByBusinessWithContext(ctx context.Context, request *DescribeAllocationSummaryByBusinessRequest) (response *DescribeAllocationSummaryByBusinessResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllocationSummaryByBusinessRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeAllocationSummaryByBusiness")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAllocationSummaryByBusiness require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAllocationSummaryByBusinessResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAllocationSummaryByItemRequest() (request *DescribeAllocationSummaryByItemRequest) {
+    request = &DescribeAllocationSummaryByItemRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeAllocationSummaryByItem")
+    
+    
+    return
+}
+
+func NewDescribeAllocationSummaryByItemResponse() (response *DescribeAllocationSummaryByItemResponse) {
+    response = &DescribeAllocationSummaryByItemResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAllocationSummaryByItem
+// This API is used to query the details of a cost allocation bill by item.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeAllocationSummaryByItem(request *DescribeAllocationSummaryByItemRequest) (response *DescribeAllocationSummaryByItemResponse, err error) {
+    return c.DescribeAllocationSummaryByItemWithContext(context.Background(), request)
+}
+
+// DescribeAllocationSummaryByItem
+// This API is used to query the details of a cost allocation bill by item.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeAllocationSummaryByItemWithContext(ctx context.Context, request *DescribeAllocationSummaryByItemRequest) (response *DescribeAllocationSummaryByItemResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllocationSummaryByItemRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeAllocationSummaryByItem")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAllocationSummaryByItem require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAllocationSummaryByItemResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAllocationSummaryByResourceRequest() (request *DescribeAllocationSummaryByResourceRequest) {
+    request = &DescribeAllocationSummaryByResourceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeAllocationSummaryByResource")
+    
+    
+    return
+}
+
+func NewDescribeAllocationSummaryByResourceResponse() (response *DescribeAllocationSummaryByResourceResponse) {
+    response = &DescribeAllocationSummaryByResourceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAllocationSummaryByResource
+// This API is used to query the details of a cost allocation bill by resource.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeAllocationSummaryByResource(request *DescribeAllocationSummaryByResourceRequest) (response *DescribeAllocationSummaryByResourceResponse, err error) {
+    return c.DescribeAllocationSummaryByResourceWithContext(context.Background(), request)
+}
+
+// DescribeAllocationSummaryByResource
+// This API is used to query the details of a cost allocation bill by resource.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeAllocationSummaryByResourceWithContext(ctx context.Context, request *DescribeAllocationSummaryByResourceRequest) (response *DescribeAllocationSummaryByResourceResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllocationSummaryByResourceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeAllocationSummaryByResource")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAllocationSummaryByResource require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAllocationSummaryByResourceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAllocationTreeRequest() (request *DescribeAllocationTreeRequest) {
     request = &DescribeAllocationTreeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -809,6 +1289,62 @@ func (c *Client) DescribeAllocationTreeWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDescribeAllocationTreeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAllocationTrendByMonthRequest() (request *DescribeAllocationTrendByMonthRequest) {
+    request = &DescribeAllocationTrendByMonthRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeAllocationTrendByMonth")
+    
+    
+    return
+}
+
+func NewDescribeAllocationTrendByMonthResponse() (response *DescribeAllocationTrendByMonthResponse) {
+    response = &DescribeAllocationTrendByMonthResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAllocationTrendByMonth
+// This API is used to query the cost trend of a cost allocation bill.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeAllocationTrendByMonth(request *DescribeAllocationTrendByMonthRequest) (response *DescribeAllocationTrendByMonthResponse, err error) {
+    return c.DescribeAllocationTrendByMonthWithContext(context.Background(), request)
+}
+
+// DescribeAllocationTrendByMonth
+// This API is used to query the cost trend of a cost allocation bill.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeAllocationTrendByMonthWithContext(ctx context.Context, request *DescribeAllocationTrendByMonthRequest) (response *DescribeAllocationTrendByMonthResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllocationTrendByMonthRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeAllocationTrendByMonth")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAllocationTrendByMonth require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAllocationTrendByMonthResponse()
     err = c.Send(request, response)
     return
 }
@@ -887,7 +1423,7 @@ func NewDescribeBillAdjustInfoResponse() (response *DescribeBillAdjustInfoRespon
 }
 
 // DescribeBillAdjustInfo
-// This API is used to check whether the current UIN has any adjustment, enabling customers to proactively obtain the adjustment status faster.
+// This API is used to query whether there is a bill adjustment for the current UIN through API. Customers can obtain bill adjustment status faster and proactively.
 //
 // error code that may be returned:
 //  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
@@ -897,7 +1433,7 @@ func (c *Client) DescribeBillAdjustInfo(request *DescribeBillAdjustInfoRequest) 
 }
 
 // DescribeBillAdjustInfo
-// This API is used to check whether the current UIN has any adjustment, enabling customers to proactively obtain the adjustment status faster.
+// This API is used to query whether there is a bill adjustment for the current UIN through API. Customers can obtain bill adjustment status faster and proactively.
 //
 // error code that may be returned:
 //  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
@@ -1631,6 +2167,64 @@ func (c *Client) DescribeBillSummaryForOrganizationWithContext(ctx context.Conte
     return
 }
 
+func NewDescribeCPQBillingMappingRequest() (request *DescribeCPQBillingMappingRequest) {
+    request = &DescribeCPQBillingMappingRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeCPQBillingMapping")
+    
+    
+    return
+}
+
+func NewDescribeCPQBillingMappingResponse() (response *DescribeCPQBillingMappingResponse) {
+    response = &DescribeCPQBillingMappingResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCPQBillingMapping
+// Query the four-layer matching relationship between the quoted product name and billing products
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGKEYNOTEXIST = "FailedOperation.TagKeyNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeCPQBillingMapping(request *DescribeCPQBillingMappingRequest) (response *DescribeCPQBillingMappingResponse, err error) {
+    return c.DescribeCPQBillingMappingWithContext(context.Background(), request)
+}
+
+// DescribeCPQBillingMapping
+// Query the four-layer matching relationship between the quoted product name and billing products
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGKEYNOTEXIST = "FailedOperation.TagKeyNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeCPQBillingMappingWithContext(ctx context.Context, request *DescribeCPQBillingMappingRequest) (response *DescribeCPQBillingMappingResponse, err error) {
+    if request == nil {
+        request = NewDescribeCPQBillingMappingRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeCPQBillingMapping")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCPQBillingMapping require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCPQBillingMappingResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCostDetailRequest() (request *DescribeCostDetailRequest) {
     request = &DescribeCostDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1653,9 +2247,20 @@ func NewDescribeCostDetailResponse() (response *DescribeCostDetailResponse) {
 // DescribeCostDetail
 // This API is used to query consumption details.
 //
+// 
+//
+// Notes:
+//
+// For customers with large-scale consumption detail (for example, monthly consumption detail exceeding 1M), there will be a timeout risk when retrieving detailed data via API call. It is recommended to enable the billing data storage function and analyze bill files obtained in a bucket. [Store bills to COS](https://www.tencentcloud.com/document/product/555/61275?from_cn_redirect=1)
+//
 // error code that may be returned:
+//  FAILEDOPERATION_QUERYCOUNTFAILED = "FailedOperation.QueryCountFailed"
+//  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeCostDetail(request *DescribeCostDetailRequest) (response *DescribeCostDetailResponse, err error) {
     return c.DescribeCostDetailWithContext(context.Background(), request)
 }
@@ -1663,9 +2268,20 @@ func (c *Client) DescribeCostDetail(request *DescribeCostDetailRequest) (respons
 // DescribeCostDetail
 // This API is used to query consumption details.
 //
+// 
+//
+// Notes:
+//
+// For customers with large-scale consumption detail (for example, monthly consumption detail exceeding 1M), there will be a timeout risk when retrieving detailed data via API call. It is recommended to enable the billing data storage function and analyze bill files obtained in a bucket. [Store bills to COS](https://www.tencentcloud.com/document/product/555/61275?from_cn_redirect=1)
+//
 // error code that may be returned:
+//  FAILEDOPERATION_QUERYCOUNTFAILED = "FailedOperation.QueryCountFailed"
+//  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeCostDetailWithContext(ctx context.Context, request *DescribeCostDetailRequest) (response *DescribeCostDetailResponse, err error) {
     if request == nil {
         request = NewDescribeCostDetailRequest()
@@ -1706,8 +2322,13 @@ func NewDescribeCostExplorerSummaryResponse() (response *DescribeCostExplorerSum
 // This API is used to view cost analysis details.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_QUERYCOUNTFAILED = "FailedOperation.QueryCountFailed"
+//  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeCostExplorerSummary(request *DescribeCostExplorerSummaryRequest) (response *DescribeCostExplorerSummaryResponse, err error) {
     return c.DescribeCostExplorerSummaryWithContext(context.Background(), request)
 }
@@ -1716,8 +2337,13 @@ func (c *Client) DescribeCostExplorerSummary(request *DescribeCostExplorerSummar
 // This API is used to view cost analysis details.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_QUERYCOUNTFAILED = "FailedOperation.QueryCountFailed"
+//  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeCostExplorerSummaryWithContext(ctx context.Context, request *DescribeCostExplorerSummaryRequest) (response *DescribeCostExplorerSummaryResponse, err error) {
     if request == nil {
         request = NewDescribeCostExplorerSummaryRequest()
@@ -1758,7 +2384,10 @@ func NewDescribeCostSummaryByProductResponse() (response *DescribeCostSummaryByP
 // This API is used to obtain consumption details summarized by product.
 //
 // error code that may be returned:
+//  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeCostSummaryByProduct(request *DescribeCostSummaryByProductRequest) (response *DescribeCostSummaryByProductResponse, err error) {
     return c.DescribeCostSummaryByProductWithContext(context.Background(), request)
 }
@@ -1767,7 +2396,10 @@ func (c *Client) DescribeCostSummaryByProduct(request *DescribeCostSummaryByProd
 // This API is used to obtain consumption details summarized by product.
 //
 // error code that may be returned:
+//  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeCostSummaryByProductWithContext(ctx context.Context, request *DescribeCostSummaryByProductRequest) (response *DescribeCostSummaryByProductResponse, err error) {
     if request == nil {
         request = NewDescribeCostSummaryByProductRequest()
@@ -1808,7 +2440,10 @@ func NewDescribeCostSummaryByProjectResponse() (response *DescribeCostSummaryByP
 // This API is used to obtain consumption details summarized by project.
 //
 // error code that may be returned:
+//  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeCostSummaryByProject(request *DescribeCostSummaryByProjectRequest) (response *DescribeCostSummaryByProjectResponse, err error) {
     return c.DescribeCostSummaryByProjectWithContext(context.Background(), request)
 }
@@ -1817,7 +2452,10 @@ func (c *Client) DescribeCostSummaryByProject(request *DescribeCostSummaryByProj
 // This API is used to obtain consumption details summarized by project.
 //
 // error code that may be returned:
+//  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeCostSummaryByProjectWithContext(ctx context.Context, request *DescribeCostSummaryByProjectRequest) (response *DescribeCostSummaryByProjectResponse, err error) {
     if request == nil {
         request = NewDescribeCostSummaryByProjectRequest()
@@ -1858,7 +2496,10 @@ func NewDescribeCostSummaryByRegionResponse() (response *DescribeCostSummaryByRe
 // This API is used to obtain consumption details summarized by region.
 //
 // error code that may be returned:
+//  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeCostSummaryByRegion(request *DescribeCostSummaryByRegionRequest) (response *DescribeCostSummaryByRegionResponse, err error) {
     return c.DescribeCostSummaryByRegionWithContext(context.Background(), request)
 }
@@ -1867,7 +2508,10 @@ func (c *Client) DescribeCostSummaryByRegion(request *DescribeCostSummaryByRegio
 // This API is used to obtain consumption details summarized by region.
 //
 // error code that may be returned:
+//  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeCostSummaryByRegionWithContext(ctx context.Context, request *DescribeCostSummaryByRegionRequest) (response *DescribeCostSummaryByRegionResponse, err error) {
     if request == nil {
         request = NewDescribeCostSummaryByRegionRequest()
@@ -1908,7 +2552,10 @@ func NewDescribeCostSummaryByResourceResponse() (response *DescribeCostSummaryBy
 // This API is used to obtain consumption details summarized by resource.
 //
 // error code that may be returned:
+//  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeCostSummaryByResource(request *DescribeCostSummaryByResourceRequest) (response *DescribeCostSummaryByResourceResponse, err error) {
     return c.DescribeCostSummaryByResourceWithContext(context.Background(), request)
 }
@@ -1917,7 +2564,10 @@ func (c *Client) DescribeCostSummaryByResource(request *DescribeCostSummaryByRes
 // This API is used to obtain consumption details summarized by resource.
 //
 // error code that may be returned:
+//  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeCostSummaryByResourceWithContext(ctx context.Context, request *DescribeCostSummaryByResourceRequest) (response *DescribeCostSummaryByResourceResponse, err error) {
     if request == nil {
         request = NewDescribeCostSummaryByResourceRequest()
@@ -2031,6 +2681,56 @@ func (c *Client) DescribeDosageCosDetailByDateWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewDescribeDosageCosDetailByDateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeGatherResourceRequest() (request *DescribeGatherResourceRequest) {
+    request = &DescribeGatherResourceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeGatherResource")
+    
+    
+    return
+}
+
+func NewDescribeGatherResourceResponse() (response *DescribeGatherResourceResponse) {
+    response = &DescribeGatherResourceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeGatherResource
+// This API is used to query the details of a cost allocation bill by resource.
+//
+// error code that may be returned:
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+func (c *Client) DescribeGatherResource(request *DescribeGatherResourceRequest) (response *DescribeGatherResourceResponse, err error) {
+    return c.DescribeGatherResourceWithContext(context.Background(), request)
+}
+
+// DescribeGatherResource
+// This API is used to query the details of a cost allocation bill by resource.
+//
+// error code that may be returned:
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+func (c *Client) DescribeGatherResourceWithContext(ctx context.Context, request *DescribeGatherResourceRequest) (response *DescribeGatherResourceResponse, err error) {
+    if request == nil {
+        request = NewDescribeGatherResourceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeGatherResource")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeGatherResource require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeGatherResourceResponse()
     err = c.Send(request, response)
     return
 }

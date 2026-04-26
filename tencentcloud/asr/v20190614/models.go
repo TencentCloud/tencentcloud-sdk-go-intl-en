@@ -62,7 +62,7 @@ type CreateRecTaskRequestParams struct {
 
 	// Audio source.
 	// 0: Audio URL.
-	// 1: Local audio file (body of the POST request).
+	// 1: Local audio file (body of the POST request)
 	SourceType *uint64 `json:"SourceType,omitnil,omitempty" name:"SourceType"`
 
 	// Audio file Base64 code.
@@ -71,7 +71,7 @@ type CreateRecTaskRequestParams struct {
 	// Note: The audio data size cannot exceed 5 MB.
 	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
 
-	// Data length (before Base64 encoding).
+	// Data length (before Base64 encoding)
 	DataLen *uint64 `json:"DataLen,omitnil,omitempty" name:"DataLen"`
 
 	// Audio URL. (The audio should be downloadable via a public network browser.)
@@ -192,6 +192,9 @@ type CreateRecTaskRequestParams struct {
 
 	// List of keyword IDs for recognition. This parameter is left blank by default, indicating that no keyword is recognized. You can enter up to 10 IDs.
 	KeyWordLibIdList []*string `json:"KeyWordLibIdList,omitnil,omitempty" name:"KeyWordLibIdList"`
+
+
+	ReplaceTextId *string `json:"ReplaceTextId,omitnil,omitempty" name:"ReplaceTextId"`
 }
 
 type CreateRecTaskRequest struct {
@@ -237,7 +240,7 @@ type CreateRecTaskRequest struct {
 
 	// Audio source.
 	// 0: Audio URL.
-	// 1: Local audio file (body of the POST request).
+	// 1: Local audio file (body of the POST request)
 	SourceType *uint64 `json:"SourceType,omitnil,omitempty" name:"SourceType"`
 
 	// Audio file Base64 code.
@@ -246,7 +249,7 @@ type CreateRecTaskRequest struct {
 	// Note: The audio data size cannot exceed 5 MB.
 	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
 
-	// Data length (before Base64 encoding).
+	// Data length (before Base64 encoding)
 	DataLen *uint64 `json:"DataLen,omitnil,omitempty" name:"DataLen"`
 
 	// Audio URL. (The audio should be downloadable via a public network browser.)
@@ -365,6 +368,8 @@ type CreateRecTaskRequest struct {
 
 	// List of keyword IDs for recognition. This parameter is left blank by default, indicating that no keyword is recognized. You can enter up to 10 IDs.
 	KeyWordLibIdList []*string `json:"KeyWordLibIdList,omitnil,omitempty" name:"KeyWordLibIdList"`
+
+	ReplaceTextId *string `json:"ReplaceTextId,omitnil,omitempty" name:"ReplaceTextId"`
 }
 
 func (r *CreateRecTaskRequest) ToJsonString() string {
@@ -402,6 +407,7 @@ func (r *CreateRecTaskRequest) FromJsonString(s string) error {
 	delete(f, "Extra")
 	delete(f, "HotwordList")
 	delete(f, "KeyWordLibIdList")
+	delete(f, "ReplaceTextId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRecTaskRequest has unknown keys!", "")
 	}

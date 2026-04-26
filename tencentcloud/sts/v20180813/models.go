@@ -33,13 +33,15 @@ type AssumeRoleRequestParams struct {
 	// It can contain 2-128 letters, digits, and symbols (=,.@_-). Regex: [\w+=,.@_-]*
 	RoleSessionName *string `json:"RoleSessionName,omitnil,omitempty" name:"RoleSessionName"`
 
-	// Specifies the validity period of credentials in seconds. Default value: 7200. Maximum value: 43200
+	// Specifies the validity period of the temporary access credentials in seconds. Default value: 7,200s. Maximum value: 43,200s.
 	DurationSeconds *uint64 `json:"DurationSeconds,omitnil,omitempty" name:"DurationSeconds"`
 
 	// Policy description
+	// 
 	// Note:
-	// 1. The policy needs to be URL-encoded (if you request a TencentCloud API through the GET method, all parameters must be URL-encoded again in accordance with [Signature v3](https://intl.cloud.tencent.com/document/api/598/33159?from_cn_redirect=1#1.-.E6.8B.BC.E6.8E.A5.E8.A7.84.E8.8C.83.E8.AF.B7.E6.B1.82.E4.B8.B2) before the request is sent).
-	// 2. For the policy syntax, please see CAM's [Syntax Logic](https://intl.cloud.tencent.com/document/product/598/10603?from_cn_redirect=1).
+	// 
+	// This parameter needs to be URL-encoded. The server will URL-decode this field and grant temporary access credentials based on the processed policy. Please pass the parameter according to the specification. (If you request a TencentCloud API through the GET method, all parameters must be URL-encoded again in accordance with [Signature v3](https://intl.cloud.tencent.com/document/api/598/33159?from_cn_redirect=1#1.-.E6.8B.BC.E6.8E.A5.E8.A7.84.E8.8C.83.E8.AF.B7.E6.B1.82.E4.B8.B2) before the request is sent).
+	// The policy syntax refers to [CAM's Syntax Logic](https://intl.cloud.tencent.com/document/product/598/10603?from_cn_redirect=1).
 	// 3. The policy cannot contain the `principal` element.
 	Policy *string `json:"Policy,omitnil,omitempty" name:"Policy"`
 
@@ -52,6 +54,12 @@ type AssumeRoleRequestParams struct {
 
 	// UIN of the initiator
 	SourceIdentity *string `json:"SourceIdentity,omitnil,omitempty" name:"SourceIdentity"`
+
+
+	SerialNumber *string `json:"SerialNumber,omitnil,omitempty" name:"SerialNumber"`
+
+
+	TokenCode *string `json:"TokenCode,omitnil,omitempty" name:"TokenCode"`
 }
 
 type AssumeRoleRequest struct {
@@ -68,13 +76,15 @@ type AssumeRoleRequest struct {
 	// It can contain 2-128 letters, digits, and symbols (=,.@_-). Regex: [\w+=,.@_-]*
 	RoleSessionName *string `json:"RoleSessionName,omitnil,omitempty" name:"RoleSessionName"`
 
-	// Specifies the validity period of credentials in seconds. Default value: 7200. Maximum value: 43200
+	// Specifies the validity period of the temporary access credentials in seconds. Default value: 7,200s. Maximum value: 43,200s.
 	DurationSeconds *uint64 `json:"DurationSeconds,omitnil,omitempty" name:"DurationSeconds"`
 
 	// Policy description
+	// 
 	// Note:
-	// 1. The policy needs to be URL-encoded (if you request a TencentCloud API through the GET method, all parameters must be URL-encoded again in accordance with [Signature v3](https://intl.cloud.tencent.com/document/api/598/33159?from_cn_redirect=1#1.-.E6.8B.BC.E6.8E.A5.E8.A7.84.E8.8C.83.E8.AF.B7.E6.B1.82.E4.B8.B2) before the request is sent).
-	// 2. For the policy syntax, please see CAM's [Syntax Logic](https://intl.cloud.tencent.com/document/product/598/10603?from_cn_redirect=1).
+	// 
+	// This parameter needs to be URL-encoded. The server will URL-decode this field and grant temporary access credentials based on the processed policy. Please pass the parameter according to the specification. (If you request a TencentCloud API through the GET method, all parameters must be URL-encoded again in accordance with [Signature v3](https://intl.cloud.tencent.com/document/api/598/33159?from_cn_redirect=1#1.-.E6.8B.BC.E6.8E.A5.E8.A7.84.E8.8C.83.E8.AF.B7.E6.B1.82.E4.B8.B2) before the request is sent).
+	// The policy syntax refers to [CAM's Syntax Logic](https://intl.cloud.tencent.com/document/product/598/10603?from_cn_redirect=1).
 	// 3. The policy cannot contain the `principal` element.
 	Policy *string `json:"Policy,omitnil,omitempty" name:"Policy"`
 
@@ -87,6 +97,10 @@ type AssumeRoleRequest struct {
 
 	// UIN of the initiator
 	SourceIdentity *string `json:"SourceIdentity,omitnil,omitempty" name:"SourceIdentity"`
+
+	SerialNumber *string `json:"SerialNumber,omitnil,omitempty" name:"SerialNumber"`
+
+	TokenCode *string `json:"TokenCode,omitnil,omitempty" name:"TokenCode"`
 }
 
 func (r *AssumeRoleRequest) ToJsonString() string {
@@ -108,6 +122,8 @@ func (r *AssumeRoleRequest) FromJsonString(s string) error {
 	delete(f, "ExternalId")
 	delete(f, "Tags")
 	delete(f, "SourceIdentity")
+	delete(f, "SerialNumber")
+	delete(f, "TokenCode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssumeRoleRequest has unknown keys!", "")
 	}
@@ -116,16 +132,16 @@ func (r *AssumeRoleRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type AssumeRoleResponseParams struct {
-	// Temporary security credentials
+	// Temporary access credentials
 	Credentials *Credentials `json:"Credentials,omitnil,omitempty" name:"Credentials"`
 
-	// Credentials expiration time. A Unix timestamp will be returned which is accurate to the second
+	// Expiration time of the temporary access credentials. A Unix timestamp will be returned which is accurate to the second.
 	ExpiredTime *int64 `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 
-	// Credentials expiration time in UTC time in ISO 8601 format.
+	// Expiration time of the temporary access credentials in UTC time in ISO 8601 format.
 	Expiration *string `json:"Expiration,omitnil,omitempty" name:"Expiration"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -159,7 +175,7 @@ type AssumeRoleWithSAMLRequestParams struct {
 	// Session name
 	RoleSessionName *string `json:"RoleSessionName,omitnil,omitempty" name:"RoleSessionName"`
 
-	// The validity period of the temporary credentials in seconds. Default value: 7,200s. Maximum value: 43,200s.
+	// Specifies the validity period of the temporary access credentials in seconds. Default value: 7,200s. Maximum value: 43,200s.
 	DurationSeconds *uint64 `json:"DurationSeconds,omitnil,omitempty" name:"DurationSeconds"`
 }
 
@@ -178,7 +194,7 @@ type AssumeRoleWithSAMLRequest struct {
 	// Session name
 	RoleSessionName *string `json:"RoleSessionName,omitnil,omitempty" name:"RoleSessionName"`
 
-	// The validity period of the temporary credentials in seconds. Default value: 7,200s. Maximum value: 43,200s.
+	// Specifies the validity period of the temporary access credentials in seconds. Default value: 7,200s. Maximum value: 43,200s.
 	DurationSeconds *uint64 `json:"DurationSeconds,omitnil,omitempty" name:"DurationSeconds"`
 }
 
@@ -210,13 +226,13 @@ type AssumeRoleWithSAMLResponseParams struct {
 	// An object consists of the `Token`, `TmpSecretId`, and `TmpSecretId`
 	Credentials *Credentials `json:"Credentials,omitnil,omitempty" name:"Credentials"`
 
-	// Credentials expiration time. A Unix timestamp will be returned which is accurate to the second
+	// Indicates the expiration time of the temporary access credentials. A Unix timestamp will be returned which is accurate to the second.
 	ExpiredTime *uint64 `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 
-	// Credentials expiration time in UTC time in ISO 8601 format.
+	// Indicates the expiration time of the temporary access credentials in UTC time in ISO 8601 format.
 	Expiration *string `json:"Expiration,omitnil,omitempty" name:"Expiration"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -250,7 +266,7 @@ type AssumeRoleWithWebIdentityRequestParams struct {
 	// Session name
 	RoleSessionName *string `json:"RoleSessionName,omitnil,omitempty" name:"RoleSessionName"`
 
-	// The validity period of the temporary credential in seconds. Default value: 7,200s. Maximum value: 43,200s.
+	// Specifies the validity period of the temporary access credentials in seconds. Default value: 7,200s. Maximum value: 43,200s.
 	DurationSeconds *int64 `json:"DurationSeconds,omitnil,omitempty" name:"DurationSeconds"`
 }
 
@@ -269,7 +285,7 @@ type AssumeRoleWithWebIdentityRequest struct {
 	// Session name
 	RoleSessionName *string `json:"RoleSessionName,omitnil,omitempty" name:"RoleSessionName"`
 
-	// The validity period of the temporary credential in seconds. Default value: 7,200s. Maximum value: 43,200s.
+	// Specifies the validity period of the temporary access credentials in seconds. Default value: 7,200s. Maximum value: 43,200s.
 	DurationSeconds *int64 `json:"DurationSeconds,omitnil,omitempty" name:"DurationSeconds"`
 }
 
@@ -298,16 +314,16 @@ func (r *AssumeRoleWithWebIdentityRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type AssumeRoleWithWebIdentityResponseParams struct {
-	// Expiration time of the temporary credential (timestamp)
+	// Expiration time of the temporary access credentials (timestamp).
 	ExpiredTime *uint64 `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 
-	// Expiration time of the temporary credential
+	// Expiration time of the temporary access credentials.
 	Expiration *string `json:"Expiration,omitnil,omitempty" name:"Expiration"`
 
-	// Temporary credential
+	// Temporary access credentials
 	Credentials *Credentials `json:"Credentials,omitnil,omitempty" name:"Credentials"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -389,7 +405,7 @@ type GetCallerIdentityResponseParams struct {
 	// Identity type.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -414,11 +430,11 @@ type GetFederationTokenRequestParams struct {
 	// The customizable name of the caller, consisting of letters
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Policy description
 	// Note:
-	// 1. The policy needs to be URL-encoded (if you request a TencentCloud API through the GET method, all parameters must be URL-encoded again in accordance with [Signature v3](https://intl.cloud.tencent.com/document/api/598/33159?from_cn_redirect=1#1.-.E6.8B.BC.E6.8E.A5.E8.A7.84.E8.8C.83.E8.AF.B7.E6.B1.82.E4.B8.B2) before the request is sent).
-	// 2. For the policy syntax, please see CAM's [Syntax Logic](https://intl.cloud.tencent.com/document/product/598/10603?from_cn_redirect=1).
-	// 3. The policy cannot contain the `principal` element.
+	// 
+	// The policy syntax refers to [CAM's Syntax Logic](https://intl.cloud.tencent.com/document/product/598/10603?from_cn_redirect=1).
+	// The policy cannot contain the principal element.
+	// This parameter needs to be URL-encoded. The server will URL-decode this field and grant temporary access credentials based on the processed policy. Please pass the parameter according to the specification.
 	Policy *string `json:"Policy,omitnil,omitempty" name:"Policy"`
 
 	// The validity period of temporary credentials in seconds. Default value: 1,800s. Maximum value for a root account: 7,200s. Maximum value for a sub-account: 129,600s.
@@ -431,11 +447,11 @@ type GetFederationTokenRequest struct {
 	// The customizable name of the caller, consisting of letters
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Policy description
 	// Note:
-	// 1. The policy needs to be URL-encoded (if you request a TencentCloud API through the GET method, all parameters must be URL-encoded again in accordance with [Signature v3](https://intl.cloud.tencent.com/document/api/598/33159?from_cn_redirect=1#1.-.E6.8B.BC.E6.8E.A5.E8.A7.84.E8.8C.83.E8.AF.B7.E6.B1.82.E4.B8.B2) before the request is sent).
-	// 2. For the policy syntax, please see CAM's [Syntax Logic](https://intl.cloud.tencent.com/document/product/598/10603?from_cn_redirect=1).
-	// 3. The policy cannot contain the `principal` element.
+	// 
+	// The policy syntax refers to [CAM's Syntax Logic](https://intl.cloud.tencent.com/document/product/598/10603?from_cn_redirect=1).
+	// The policy cannot contain the principal element.
+	// This parameter needs to be URL-encoded. The server will URL-decode this field and grant temporary access credentials based on the processed policy. Please pass the parameter according to the specification.
 	Policy *string `json:"Policy,omitnil,omitempty" name:"Policy"`
 
 	// The validity period of temporary credentials in seconds. Default value: 1,800s. Maximum value for a root account: 7,200s. Maximum value for a sub-account: 129,600s.
@@ -465,17 +481,17 @@ func (r *GetFederationTokenRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type GetFederationTokenResponseParams struct {
-	// Temporary credentials
+	// Temporary access credentials
 	Credentials *Credentials `json:"Credentials,omitnil,omitempty" name:"Credentials"`
 
-	// Temporary credentials expiration time. A Unix timestamp will be returned which is accurate to the second
+	// Temporary access credentials expiration time. A Unix timestamp will be returned which is accurate to the second.
 	ExpiredTime *uint64 `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 
-	// Credentials expiration time in UTC time in ISO 8601 format.
+	// Temporary access credentials expiration time in UTC time in ISO 8601 format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Expiration *string `json:"Expiration,omitnil,omitempty" name:"Expiration"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 

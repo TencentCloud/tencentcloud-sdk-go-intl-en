@@ -491,6 +491,184 @@ func (c *Client) CheckBankCardInformationWithContext(ctx context.Context, reques
     return
 }
 
+func NewCheckIdCardInformationRequest() (request *CheckIdCardInformationRequest) {
+    request = &CheckIdCardInformationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "CheckIdCardInformation")
+    
+    
+    return
+}
+
+func NewCheckIdCardInformationResponse() (response *CheckIdCardInformationResponse) {
+    response = &CheckIdCardInformationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CheckIdCardInformation
+// This API is used to import the ID card portrait side photo, recognize the information on the ID card photo, and compare the name, identity card number, and ID card portrait photo with the ID photo in the authoritative database to verify if they belong to the same person, thereby verifying the authenticity of the identity card information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPAREFAIL = "FailedOperation.CompareFail"
+//  FAILEDOPERATION_COMPARELOWSIMILARITY = "FailedOperation.CompareLowSimilarity"
+//  FAILEDOPERATION_COMPARESYSTEMERROR = "FailedOperation.CompareSystemError"
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
+//  FAILEDOPERATION_ENCRYPTSYSTEMERROR = "FailedOperation.EncryptSystemError"
+//  FAILEDOPERATION_FILESAVEERROR = "FailedOperation.FileSaveError"
+//  FAILEDOPERATION_IDFORMATERROR = "FailedOperation.IdFormatError"
+//  FAILEDOPERATION_IDNAMEMISMATCH = "FailedOperation.IdNameMisMatch"
+//  FAILEDOPERATION_IDNOEXISTSYSTEM = "FailedOperation.IdNoExistSystem"
+//  FAILEDOPERATION_IDPHOTONOEXIST = "FailedOperation.IdPhotoNoExist"
+//  FAILEDOPERATION_IDPHOTOPOORQUALITY = "FailedOperation.IdPhotoPoorQuality"
+//  FAILEDOPERATION_IDPHOTOSYSTEMNOANSWER = "FailedOperation.IdPhotoSystemNoanswer"
+//  FAILEDOPERATION_IMAGEBLUR = "FailedOperation.ImageBlur"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGENOIDCARD = "FailedOperation.ImageNoIdCard"
+//  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"
+//  FAILEDOPERATION_LIFEPHOTODETECTFACES = "FailedOperation.LifePhotoDetectFaces"
+//  FAILEDOPERATION_LIFEPHOTODETECTFAKE = "FailedOperation.LifePhotoDetectFake"
+//  FAILEDOPERATION_LIFEPHOTODETECTNOFACES = "FailedOperation.LifePhotoDetectNoFaces"
+//  FAILEDOPERATION_LIFEPHOTOPOORQUALITY = "FailedOperation.LifePhotoPoorQuality"
+//  FAILEDOPERATION_LIFEPHOTOSIZEERROR = "FailedOperation.LifePhotoSizeError"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_REQUESTLIMITEXCEEDED = "FailedOperation.RequestLimitExceeded"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INTERNALERROR_ENCRYPTSYSTEMERROR = "InternalError.EncryptSystemError"
+//  INTERNALERROR_UNKNOWN = "InternalError.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) CheckIdCardInformation(request *CheckIdCardInformationRequest) (response *CheckIdCardInformationResponse, err error) {
+    return c.CheckIdCardInformationWithContext(context.Background(), request)
+}
+
+// CheckIdCardInformation
+// This API is used to import the ID card portrait side photo, recognize the information on the ID card photo, and compare the name, identity card number, and ID card portrait photo with the ID photo in the authoritative database to verify if they belong to the same person, thereby verifying the authenticity of the identity card information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPAREFAIL = "FailedOperation.CompareFail"
+//  FAILEDOPERATION_COMPARELOWSIMILARITY = "FailedOperation.CompareLowSimilarity"
+//  FAILEDOPERATION_COMPARESYSTEMERROR = "FailedOperation.CompareSystemError"
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
+//  FAILEDOPERATION_ENCRYPTSYSTEMERROR = "FailedOperation.EncryptSystemError"
+//  FAILEDOPERATION_FILESAVEERROR = "FailedOperation.FileSaveError"
+//  FAILEDOPERATION_IDFORMATERROR = "FailedOperation.IdFormatError"
+//  FAILEDOPERATION_IDNAMEMISMATCH = "FailedOperation.IdNameMisMatch"
+//  FAILEDOPERATION_IDNOEXISTSYSTEM = "FailedOperation.IdNoExistSystem"
+//  FAILEDOPERATION_IDPHOTONOEXIST = "FailedOperation.IdPhotoNoExist"
+//  FAILEDOPERATION_IDPHOTOPOORQUALITY = "FailedOperation.IdPhotoPoorQuality"
+//  FAILEDOPERATION_IDPHOTOSYSTEMNOANSWER = "FailedOperation.IdPhotoSystemNoanswer"
+//  FAILEDOPERATION_IMAGEBLUR = "FailedOperation.ImageBlur"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGENOIDCARD = "FailedOperation.ImageNoIdCard"
+//  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"
+//  FAILEDOPERATION_LIFEPHOTODETECTFACES = "FailedOperation.LifePhotoDetectFaces"
+//  FAILEDOPERATION_LIFEPHOTODETECTFAKE = "FailedOperation.LifePhotoDetectFake"
+//  FAILEDOPERATION_LIFEPHOTODETECTNOFACES = "FailedOperation.LifePhotoDetectNoFaces"
+//  FAILEDOPERATION_LIFEPHOTOPOORQUALITY = "FailedOperation.LifePhotoPoorQuality"
+//  FAILEDOPERATION_LIFEPHOTOSIZEERROR = "FailedOperation.LifePhotoSizeError"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_REQUESTLIMITEXCEEDED = "FailedOperation.RequestLimitExceeded"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INTERNALERROR_ENCRYPTSYSTEMERROR = "InternalError.EncryptSystemError"
+//  INTERNALERROR_UNKNOWN = "InternalError.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) CheckIdCardInformationWithContext(ctx context.Context, request *CheckIdCardInformationRequest) (response *CheckIdCardInformationResponse, err error) {
+    if request == nil {
+        request = NewCheckIdCardInformationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "CheckIdCardInformation")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CheckIdCardInformation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCheckIdCardInformationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCheckIdNameDateRequest() (request *CheckIdNameDateRequest) {
+    request = &CheckIdNameDateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "CheckIdNameDate")
+    
+    
+    return
+}
+
+func NewCheckIdNameDateResponse() (response *CheckIdNameDateResponse) {
+    response = &CheckIdNameDateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CheckIdNameDate
+// This API is used to validate the authenticity and consistency of the name, identity card number, and valid period.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) CheckIdNameDate(request *CheckIdNameDateRequest) (response *CheckIdNameDateResponse, err error) {
+    return c.CheckIdNameDateWithContext(context.Background(), request)
+}
+
+// CheckIdNameDate
+// This API is used to validate the authenticity and consistency of the name, identity card number, and valid period.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) CheckIdNameDateWithContext(ctx context.Context, request *CheckIdNameDateRequest) (response *CheckIdNameDateResponse, err error) {
+    if request == nil {
+        request = NewCheckIdNameDateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "CheckIdNameDate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CheckIdNameDate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCheckIdNameDateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCompareFaceLivenessRequest() (request *CompareFaceLivenessRequest) {
     request = &CompareFaceLivenessRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1135,6 +1313,368 @@ func (c *Client) GetWebVerificationResultIntlWithContext(ctx context.Context, re
     return
 }
 
+func NewIdCardOCRVerificationRequest() (request *IdCardOCRVerificationRequest) {
+    request = &IdCardOCRVerificationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "IdCardOCRVerification")
+    
+    
+    return
+}
+
+func NewIdCardOCRVerificationResponse() (response *IdCardOCRVerificationResponse) {
+    response = &IdCardOCRVerificationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// IdCardOCRVerification
+// This API is used to validate the authenticity and consistency of the name and identity card number. You can provide the required verification information by manually inputting the name and identity card number or importing the ID card portrait side image.
+//
+// error code that may be returned:
+//  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
+//  FAILEDOPERATION_IMAGEBLUR = "FailedOperation.ImageBlur"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGENOIDCARD = "FailedOperation.ImageNoIdCard"
+//  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) IdCardOCRVerification(request *IdCardOCRVerificationRequest) (response *IdCardOCRVerificationResponse, err error) {
+    return c.IdCardOCRVerificationWithContext(context.Background(), request)
+}
+
+// IdCardOCRVerification
+// This API is used to validate the authenticity and consistency of the name and identity card number. You can provide the required verification information by manually inputting the name and identity card number or importing the ID card portrait side image.
+//
+// error code that may be returned:
+//  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
+//  FAILEDOPERATION_IMAGEBLUR = "FailedOperation.ImageBlur"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGENOIDCARD = "FailedOperation.ImageNoIdCard"
+//  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) IdCardOCRVerificationWithContext(ctx context.Context, request *IdCardOCRVerificationRequest) (response *IdCardOCRVerificationResponse, err error) {
+    if request == nil {
+        request = NewIdCardOCRVerificationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "IdCardOCRVerification")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("IdCardOCRVerification require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewIdCardOCRVerificationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewIdCardVerificationRequest() (request *IdCardVerificationRequest) {
+    request = &IdCardVerificationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "IdCardVerification")
+    
+    
+    return
+}
+
+func NewIdCardVerificationResponse() (response *IdCardVerificationResponse) {
+    response = &IdCardVerificationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// IdCardVerification
+// This API is used to validate the authenticity and consistency of the name and identity card number.
+//
+// error code that may be returned:
+//  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) IdCardVerification(request *IdCardVerificationRequest) (response *IdCardVerificationResponse, err error) {
+    return c.IdCardVerificationWithContext(context.Background(), request)
+}
+
+// IdCardVerification
+// This API is used to validate the authenticity and consistency of the name and identity card number.
+//
+// error code that may be returned:
+//  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) IdCardVerificationWithContext(ctx context.Context, request *IdCardVerificationRequest) (response *IdCardVerificationResponse, err error) {
+    if request == nil {
+        request = NewIdCardVerificationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "IdCardVerification")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("IdCardVerification require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewIdCardVerificationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewImageRecognitionRequest() (request *ImageRecognitionRequest) {
+    request = &ImageRecognitionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "ImageRecognition")
+    
+    
+    return
+}
+
+func NewImageRecognitionResponse() (response *ImageRecognitionResponse) {
+    response = &ImageRecognitionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ImageRecognition
+// This API is used to judge whether the image passed in and the ID photo in the authoritative database belong to the same person based on the identity information (this interface has stopped integration, new customers please use the <a href="https://www.tencentcloud.com/document/product/1007/102203?from_cn_redirect=1">photo face verification (V2.0)</a> API).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPAREFAIL = "FailedOperation.CompareFail"
+//  FAILEDOPERATION_COMPARELIBSERVICEUNAVAILABLE = "FailedOperation.CompareLibServiceUnavailable"
+//  FAILEDOPERATION_COMPARELOWSIMILARITY = "FailedOperation.CompareLowSimilarity"
+//  FAILEDOPERATION_COMPARESYSTEMERROR = "FailedOperation.CompareSystemError"
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_IDFORMATERROR = "FailedOperation.IdFormatError"
+//  FAILEDOPERATION_IDNAMEMISMATCH = "FailedOperation.IdNameMisMatch"
+//  FAILEDOPERATION_IDNOEXISTSYSTEM = "FailedOperation.IdNoExistSystem"
+//  FAILEDOPERATION_IDPHOTONOEXIST = "FailedOperation.IdPhotoNoExist"
+//  FAILEDOPERATION_IDPHOTOPOORQUALITY = "FailedOperation.IdPhotoPoorQuality"
+//  FAILEDOPERATION_IDPHOTOSYSTEMNOANSWER = "FailedOperation.IdPhotoSystemNoanswer"
+//  FAILEDOPERATION_IDENTITYAUTHLIMITEXCEEDED = "FailedOperation.IdentityAuthLimitExceeded"
+//  FAILEDOPERATION_LIFEPHOTODETECTFACES = "FailedOperation.LifePhotoDetectFaces"
+//  FAILEDOPERATION_LIFEPHOTODETECTFAKE = "FailedOperation.LifePhotoDetectFake"
+//  FAILEDOPERATION_LIFEPHOTODETECTNOFACES = "FailedOperation.LifePhotoDetectNoFaces"
+//  FAILEDOPERATION_LIFEPHOTOPOORQUALITY = "FailedOperation.LifePhotoPoorQuality"
+//  FAILEDOPERATION_LIFEPHOTOSIZEERROR = "FailedOperation.LifePhotoSizeError"
+//  FAILEDOPERATION_NAMEFORMATERROR = "FailedOperation.NameFormatError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ImageRecognition(request *ImageRecognitionRequest) (response *ImageRecognitionResponse, err error) {
+    return c.ImageRecognitionWithContext(context.Background(), request)
+}
+
+// ImageRecognition
+// This API is used to judge whether the image passed in and the ID photo in the authoritative database belong to the same person based on the identity information (this interface has stopped integration, new customers please use the <a href="https://www.tencentcloud.com/document/product/1007/102203?from_cn_redirect=1">photo face verification (V2.0)</a> API).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPAREFAIL = "FailedOperation.CompareFail"
+//  FAILEDOPERATION_COMPARELIBSERVICEUNAVAILABLE = "FailedOperation.CompareLibServiceUnavailable"
+//  FAILEDOPERATION_COMPARELOWSIMILARITY = "FailedOperation.CompareLowSimilarity"
+//  FAILEDOPERATION_COMPARESYSTEMERROR = "FailedOperation.CompareSystemError"
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_IDFORMATERROR = "FailedOperation.IdFormatError"
+//  FAILEDOPERATION_IDNAMEMISMATCH = "FailedOperation.IdNameMisMatch"
+//  FAILEDOPERATION_IDNOEXISTSYSTEM = "FailedOperation.IdNoExistSystem"
+//  FAILEDOPERATION_IDPHOTONOEXIST = "FailedOperation.IdPhotoNoExist"
+//  FAILEDOPERATION_IDPHOTOPOORQUALITY = "FailedOperation.IdPhotoPoorQuality"
+//  FAILEDOPERATION_IDPHOTOSYSTEMNOANSWER = "FailedOperation.IdPhotoSystemNoanswer"
+//  FAILEDOPERATION_IDENTITYAUTHLIMITEXCEEDED = "FailedOperation.IdentityAuthLimitExceeded"
+//  FAILEDOPERATION_LIFEPHOTODETECTFACES = "FailedOperation.LifePhotoDetectFaces"
+//  FAILEDOPERATION_LIFEPHOTODETECTFAKE = "FailedOperation.LifePhotoDetectFake"
+//  FAILEDOPERATION_LIFEPHOTODETECTNOFACES = "FailedOperation.LifePhotoDetectNoFaces"
+//  FAILEDOPERATION_LIFEPHOTOPOORQUALITY = "FailedOperation.LifePhotoPoorQuality"
+//  FAILEDOPERATION_LIFEPHOTOSIZEERROR = "FailedOperation.LifePhotoSizeError"
+//  FAILEDOPERATION_NAMEFORMATERROR = "FailedOperation.NameFormatError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ImageRecognitionWithContext(ctx context.Context, request *ImageRecognitionRequest) (response *ImageRecognitionResponse, err error) {
+    if request == nil {
+        request = NewImageRecognitionRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "ImageRecognition")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ImageRecognition require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewImageRecognitionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewImageRecognitionV2Request() (request *ImageRecognitionV2Request) {
+    request = &ImageRecognitionV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "ImageRecognitionV2")
+    
+    
+    return
+}
+
+func NewImageRecognitionV2Response() (response *ImageRecognitionV2Response) {
+    response = &ImageRecognitionV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ImageRecognitionV2
+// This API is used to judge whether the image passed in and the ID photo in the authoritative database belong to the same person based on the identity information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPAREFAIL = "FailedOperation.CompareFail"
+//  FAILEDOPERATION_COMPARELIBSERVICEUNAVAILABLE = "FailedOperation.CompareLibServiceUnavailable"
+//  FAILEDOPERATION_COMPARELOWSIMILARITY = "FailedOperation.CompareLowSimilarity"
+//  FAILEDOPERATION_COMPARESYSTEMERROR = "FailedOperation.CompareSystemError"
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_IDFORMATERROR = "FailedOperation.IdFormatError"
+//  FAILEDOPERATION_IDNAMEMISMATCH = "FailedOperation.IdNameMisMatch"
+//  FAILEDOPERATION_IDNOEXISTSYSTEM = "FailedOperation.IdNoExistSystem"
+//  FAILEDOPERATION_IDPHOTONOEXIST = "FailedOperation.IdPhotoNoExist"
+//  FAILEDOPERATION_IDPHOTOPOORQUALITY = "FailedOperation.IdPhotoPoorQuality"
+//  FAILEDOPERATION_IDPHOTOSYSTEMNOANSWER = "FailedOperation.IdPhotoSystemNoanswer"
+//  FAILEDOPERATION_IDENTITYAUTHLIMITEXCEEDED = "FailedOperation.IdentityAuthLimitExceeded"
+//  FAILEDOPERATION_LIFEPHOTODETECTFACES = "FailedOperation.LifePhotoDetectFaces"
+//  FAILEDOPERATION_LIFEPHOTODETECTFAKE = "FailedOperation.LifePhotoDetectFake"
+//  FAILEDOPERATION_LIFEPHOTODETECTNOFACES = "FailedOperation.LifePhotoDetectNoFaces"
+//  FAILEDOPERATION_LIFEPHOTOPOORQUALITY = "FailedOperation.LifePhotoPoorQuality"
+//  FAILEDOPERATION_LIFEPHOTOSIZEERROR = "FailedOperation.LifePhotoSizeError"
+//  FAILEDOPERATION_NAMEFORMATERROR = "FailedOperation.NameFormatError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ImageRecognitionV2(request *ImageRecognitionV2Request) (response *ImageRecognitionV2Response, err error) {
+    return c.ImageRecognitionV2WithContext(context.Background(), request)
+}
+
+// ImageRecognitionV2
+// This API is used to judge whether the image passed in and the ID photo in the authoritative database belong to the same person based on the identity information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPAREFAIL = "FailedOperation.CompareFail"
+//  FAILEDOPERATION_COMPARELIBSERVICEUNAVAILABLE = "FailedOperation.CompareLibServiceUnavailable"
+//  FAILEDOPERATION_COMPARELOWSIMILARITY = "FailedOperation.CompareLowSimilarity"
+//  FAILEDOPERATION_COMPARESYSTEMERROR = "FailedOperation.CompareSystemError"
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_IDFORMATERROR = "FailedOperation.IdFormatError"
+//  FAILEDOPERATION_IDNAMEMISMATCH = "FailedOperation.IdNameMisMatch"
+//  FAILEDOPERATION_IDNOEXISTSYSTEM = "FailedOperation.IdNoExistSystem"
+//  FAILEDOPERATION_IDPHOTONOEXIST = "FailedOperation.IdPhotoNoExist"
+//  FAILEDOPERATION_IDPHOTOPOORQUALITY = "FailedOperation.IdPhotoPoorQuality"
+//  FAILEDOPERATION_IDPHOTOSYSTEMNOANSWER = "FailedOperation.IdPhotoSystemNoanswer"
+//  FAILEDOPERATION_IDENTITYAUTHLIMITEXCEEDED = "FailedOperation.IdentityAuthLimitExceeded"
+//  FAILEDOPERATION_LIFEPHOTODETECTFACES = "FailedOperation.LifePhotoDetectFaces"
+//  FAILEDOPERATION_LIFEPHOTODETECTFAKE = "FailedOperation.LifePhotoDetectFake"
+//  FAILEDOPERATION_LIFEPHOTODETECTNOFACES = "FailedOperation.LifePhotoDetectNoFaces"
+//  FAILEDOPERATION_LIFEPHOTOPOORQUALITY = "FailedOperation.LifePhotoPoorQuality"
+//  FAILEDOPERATION_LIFEPHOTOSIZEERROR = "FailedOperation.LifePhotoSizeError"
+//  FAILEDOPERATION_NAMEFORMATERROR = "FailedOperation.NameFormatError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ImageRecognitionV2WithContext(ctx context.Context, request *ImageRecognitionV2Request) (response *ImageRecognitionV2Response, err error) {
+    if request == nil {
+        request = NewImageRecognitionV2Request()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "ImageRecognitionV2")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ImageRecognitionV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewImageRecognitionV2Response()
+    err = c.Send(request, response)
+    return
+}
+
 func NewLivenessCompareRequest() (request *LivenessCompareRequest) {
     request = &LivenessCompareRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1291,6 +1831,214 @@ func (c *Client) LivenessCompareWithContext(ctx context.Context, request *Livene
     request.SetContext(ctx)
     
     response = NewLivenessCompareResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewMobileNetworkTimeVerificationRequest() (request *MobileNetworkTimeVerificationRequest) {
+    request = &MobileNetworkTimeVerificationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "MobileNetworkTimeVerification")
+    
+    
+    return
+}
+
+func NewMobileNetworkTimeVerificationResponse() (response *MobileNetworkTimeVerificationResponse) {
+    response = &MobileNetworkTimeVerificationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// MobileNetworkTimeVerification
+// This API is used to query the duration of a mobile number. Enter mobile number to query.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_BIZTOKENEXPIRED = "InvalidParameterValue.BizTokenExpired"
+//  INVALIDPARAMETERVALUE_RULEIDNOTEXIST = "InvalidParameterValue.RuleIdNotExist"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) MobileNetworkTimeVerification(request *MobileNetworkTimeVerificationRequest) (response *MobileNetworkTimeVerificationResponse, err error) {
+    return c.MobileNetworkTimeVerificationWithContext(context.Background(), request)
+}
+
+// MobileNetworkTimeVerification
+// This API is used to query the duration of a mobile number. Enter mobile number to query.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_BIZTOKENEXPIRED = "InvalidParameterValue.BizTokenExpired"
+//  INVALIDPARAMETERVALUE_RULEIDNOTEXIST = "InvalidParameterValue.RuleIdNotExist"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) MobileNetworkTimeVerificationWithContext(ctx context.Context, request *MobileNetworkTimeVerificationRequest) (response *MobileNetworkTimeVerificationResponse, err error) {
+    if request == nil {
+        request = NewMobileNetworkTimeVerificationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "MobileNetworkTimeVerification")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("MobileNetworkTimeVerification require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewMobileNetworkTimeVerificationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewMobileStatusRequest() (request *MobileStatusRequest) {
+    request = &MobileStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "MobileStatus")
+    
+    
+    return
+}
+
+func NewMobileStatusResponse() (response *MobileStatusResponse) {
+    response = &MobileStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// MobileStatus
+// This API is used to verify phone number status. You can enter mobile number to query.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) MobileStatus(request *MobileStatusRequest) (response *MobileStatusResponse, err error) {
+    return c.MobileStatusWithContext(context.Background(), request)
+}
+
+// MobileStatus
+// This API is used to verify phone number status. You can enter mobile number to query.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) MobileStatusWithContext(ctx context.Context, request *MobileStatusRequest) (response *MobileStatusResponse, err error) {
+    if request == nil {
+        request = NewMobileStatusRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "MobileStatus")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("MobileStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewMobileStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewPhoneVerificationRequest() (request *PhoneVerificationRequest) {
+    request = &PhoneVerificationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "PhoneVerification")
+    
+    
+    return
+}
+
+func NewPhoneVerificationResponse() (response *PhoneVerificationResponse) {
+    response = &PhoneVerificationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// PhoneVerification
+// This API is used to validate the authenticity and consistency of the mobile number, name, and identity card number. For details on supported mobile number segments, see the <a href="https://www.tencentcloud.com/document/product/1007/46063?from_cn_redirect=1">carrier</a> document.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) PhoneVerification(request *PhoneVerificationRequest) (response *PhoneVerificationResponse, err error) {
+    return c.PhoneVerificationWithContext(context.Background(), request)
+}
+
+// PhoneVerification
+// This API is used to validate the authenticity and consistency of the mobile number, name, and identity card number. For details on supported mobile number segments, see the <a href="https://www.tencentcloud.com/document/product/1007/46063?from_cn_redirect=1">carrier</a> document.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DECRYPTSYSTEMERROR = "FailedOperation.DecryptSystemError"
+//  FAILEDOPERATION_STSUNAUTHERRERROR = "FailedOperation.StsUnAuthErrError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTENCRYPTFIELD = "InvalidParameter.UnsupportEncryptField"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) PhoneVerificationWithContext(ctx context.Context, request *PhoneVerificationRequest) (response *PhoneVerificationResponse, err error) {
+    if request == nil {
+        request = NewPhoneVerificationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "PhoneVerification")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PhoneVerification require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewPhoneVerificationResponse()
     err = c.Send(request, response)
     return
 }

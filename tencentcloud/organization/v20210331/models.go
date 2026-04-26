@@ -218,7 +218,7 @@ func (r *AddOrganizationMemberEmailResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type AddOrganizationNodeRequestParams struct {
-	// Parent node ID, which can be obtained through [DescribeOrganizationNodes](https://intl.cloud.tencent.com/document/product/850/82926?from_cn_redirect=1).
+	// Parent node ID, which can be obtained through [DescribeOrganizationNodes](https://intl.cloud.tencent.com/document/product/850/82926?from_cn_redirect=1)
 	ParentNodeId *uint64 `json:"ParentNodeId,omitnil,omitempty" name:"ParentNodeId"`
 
 	// Node name, which can contain up to 40 letters, digits, and symbols `+@&._[]-`.
@@ -234,7 +234,7 @@ type AddOrganizationNodeRequestParams struct {
 type AddOrganizationNodeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Parent node ID, which can be obtained through [DescribeOrganizationNodes](https://intl.cloud.tencent.com/document/product/850/82926?from_cn_redirect=1).
+	// Parent node ID, which can be obtained through [DescribeOrganizationNodes](https://intl.cloud.tencent.com/document/product/850/82926?from_cn_redirect=1)
 	ParentNodeId *uint64 `json:"ParentNodeId,omitnil,omitempty" name:"ParentNodeId"`
 
 	// Node name, which can contain up to 40 letters, digits, and symbols `+@&._[]-`.

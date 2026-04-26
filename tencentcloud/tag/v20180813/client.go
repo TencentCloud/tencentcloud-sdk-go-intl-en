@@ -65,7 +65,7 @@ func NewAddProjectResponse() (response *AddProjectResponse) {
 }
 
 // AddProject
-// Creates a project
+// Creates a project.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -77,7 +77,7 @@ func (c *Client) AddProject(request *AddProjectRequest) (response *AddProjectRes
 }
 
 // AddProject
-// Creates a project
+// Creates a project.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

@@ -42,7 +42,7 @@ type ActionSummaryOverviewItem struct {
 	// Voucher payment: The voucher deduction amount
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
 
-	// Commission credit: The amount paid with the user's commission credit. Note: This field may return null, indicating that no valid values can be obtained.
+	// Royalty account expenditure: The amount paid through the royalty account
 	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
 
 	// Billing month, e.g. `2019-08`
@@ -53,38 +53,507 @@ type ActionSummaryOverviewItem struct {
 }
 
 type AdjustInfoDetail struct {
-	// Payer UIN, namely the account ID of the payer. The account ID is the user's unique account identifier on Tencent Cloud.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	// Example value: 909619400.
+	// Payer UIN: Account ID of the payer, which is the unique account identifier for the user in Tencent Cloud.
 	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
 
-	// Bill month. Format: yyyy-MM.
-	// Note: This field may return null, indicating that no valid value can be obtained.
-	// Example value: 2024-10.
+	// Bill month, formatted as yyyy-MM.
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// Adjustment type.
-	// Adjustment: manualAdjustment.
-	// Supplementary settlement: supplementarySettlement.
-	// Re-settlement: reSettlement.
-	// Note: This field may return null, indicating that no valid value can be obtained.
-	// Example value: manualAdjustment.
+	// Adjustment type
+	// Bill adjustment: manualAdjustment
+	// Supplementary settlement: supplementarySettlement
+	// Re-settlement
 	AdjustType *string `json:"AdjustType,omitnil,omitempty" name:"AdjustType"`
 
-	// Adjustment order number.
-	// Note: This field may return null, indicating that no valid value can be obtained.
-	// Example value: 2220726096135.
+	// Adjustment Number
 	AdjustNum *string `json:"AdjustNum,omitnil,omitempty" name:"AdjustNum"`
 
-	// Completion time of exception adjustment. Format: yyyy-MM-dd HH:mm:ss.
-	// Note: This field may return null, indicating that no valid value can be obtained.
-	// Example value: 2022-12-02 12:39:04.
+	// Abnormal adjustment completion time. Format: yyyy-MM-dd HH:mm:ss
 	AdjustCompletionTime *string `json:"AdjustCompletionTime,omitnil,omitempty" name:"AdjustCompletionTime"`
 
-	// Adjustment amount.
-	// Note: This field may return null, indicating that no valid value can be obtained.
-	// Example value: 333.00000000.
+	// Adjustment Amount
 	AdjustAmount *float64 `json:"AdjustAmount,omitnil,omitempty" name:"AdjustAmount"`
+}
+
+type AllocationAverageData struct {
+	// Start month
+	BeginMonth *string `json:"BeginMonth,omitnil,omitempty" name:"BeginMonth"`
+
+	// End month.
+	EndMonth *string `json:"EndMonth,omitnil,omitempty" name:"EndMonth"`
+
+	// Average value of total fees (discounted total)
+	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
+}
+
+type AllocationBillTrendDetail struct {
+	// Bill month
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Displayed name of bill month
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Total fees (discounted total): Total fees of the cost allocation unit, Collected Fees (discounted total) + Allocated Fees (discounted total)
+	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
+}
+
+type AllocationDetail struct {
+	// Unique identifier of a cost allocation unit
+	TreeNodeUniqKey *string `json:"TreeNodeUniqKey,omitnil,omitempty" name:"TreeNodeUniqKey"`
+
+	// Name of a cost allocation unit
+	TreeNodeUniqKeyName *string `json:"TreeNodeUniqKeyName,omitnil,omitempty" name:"TreeNodeUniqKeyName"`
+
+	// Date: Settlement date
+	BillDate *string `json:"BillDate,omitnil,omitempty" name:"BillDate"`
+
+	// Payer UIN: Account ID of the payer, which is the unique account identifier for the user in Tencent Cloud.
+	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
+
+	// User UIN: Account ID of the actual resource user
+	OwnerUin *string `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
+
+	// Operator account ID (the resource account ID or role ID opened by prepaid resource ordering or postpaid operation)
+	OperateUin *string `json:"OperateUin,omitnil,omitempty" name:"OperateUin"`
+
+	// Product code
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+
+	// Product name: Various cloud products purchased by users
+	BusinessCodeName *string `json:"BusinessCodeName,omitnil,omitempty" name:"BusinessCodeName"`
+
+	// Billing mode code
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Billing mode: Resource billing mode, which can be monthly subscription or pay-as-you-go.
+	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
+
+	// Project ID
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Project name: The Project to which a resource belongs, which is independently allocated by the user for the resource in the console. If a resource has not been allocated to an Project, it will be a default Project.
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
+
+	// Region ID
+	RegionId *uint64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+
+	// Region name: The region where the resource is located
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
+
+	// AZ ID
+	ZoneId *uint64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Availability zone: The availability zone where the resource is located.
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
+
+	// Resource ID: Resources vary by product, and the content is not identical. For example, Cloud Virtual Machine (CVM) corresponds to the instance ID. If the product is split, it shows the split item ID, such as COS bucket ID and CDN domain name.
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// Instance name: The name set by the user for the resource in the console, which is empty by default if not set. If the product is split, it shows the split resource alias.
+	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
+
+	// Instance type code
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Instance type: The type of an instance corresponding to the product service purchased, including resource packages, RI, SP, and spot instances. It is displayed as "-" by default for regular instances.
+	InstanceTypeName *string `json:"InstanceTypeName,omitnil,omitempty" name:"InstanceTypeName"`
+
+	// Split item ID: The ID of the split item involved in the split product, such as COS bucket ID and CDN domain name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: SplitItemId is deprecated.
+	SplitItemId *string `json:"SplitItemId,omitnil,omitempty" name:"SplitItemId"`
+
+	// Split item name: The split item involved in the split product
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: SplitItemName is deprecated.
+	SplitItemName *string `json:"SplitItemName,omitnil,omitempty" name:"SplitItemName"`
+
+	// Subproduct code
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// Subproduct name: Product subdivision type purchased by the user
+	ProductCodeName *string `json:"ProductCodeName,omitnil,omitempty" name:"ProductCodeName"`
+
+	// Transaction type code
+	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
+
+	// Transaction type: Detailed transaction type
+	ActionTypeName *string `json:"ActionTypeName,omitnil,omitempty" name:"ActionTypeName"`
+
+	// Order ID: The order number for purchase in the annual and monthly billing mode
+	OrderId *string `json:"OrderId,omitnil,omitempty" name:"OrderId"`
+
+	// Transaction ID: The settlement and deduction number
+	BillId *string `json:"BillId,omitnil,omitempty" name:"BillId"`
+
+	// Deduction time: Deduction time
+	PayTime *string `json:"PayTime,omitnil,omitempty" name:"PayTime"`
+
+	// Usage start time: Usage start time
+	FeeBeginTime *string `json:"FeeBeginTime,omitnil,omitempty" name:"FeeBeginTime"`
+
+	// Usage end time: Product or service usage end time
+	FeeEndTime *string `json:"FeeEndTime,omitnil,omitempty" name:"FeeEndTime"`
+
+	// Component type code
+	ComponentCode *string `json:"ComponentCode,omitnil,omitempty" name:"ComponentCode"`
+
+	// Component type: The major component category corresponding to the product or service purchased by the user
+	ComponentCodeName *string `json:"ComponentCodeName,omitnil,omitempty" name:"ComponentCodeName"`
+
+	// Component list price: The original unit price of the component on the portal (not displayed if the customer enjoys a fixed price/contract price)
+	SinglePrice *string `json:"SinglePrice,omitnil,omitempty" name:"SinglePrice"`
+
+	// Component unit price: Discounted unit price of the component. Component unit price = list price * discount.
+	ContractPrice *string `json:"ContractPrice,omitnil,omitempty" name:"ContractPrice"`
+
+	// Component Price Unit: Unit of component price, Unit Composition: CNY/usage unit/duration unit
+	SinglePriceUnit *string `json:"SinglePriceUnit,omitnil,omitempty" name:"SinglePriceUnit"`
+
+	// Component usage: The actual settlement usage of the component, Component Usage = Original Component Usage - Deducted Usage (including resource packages)
+	UsedAmount *string `json:"UsedAmount,omitnil,omitempty" name:"UsedAmount"`
+
+	// Component usage unit: Unit of measurement corresponding to component usage.
+	UsedAmountUnit *string `json:"UsedAmountUnit,omitnil,omitempty" name:"UsedAmountUnit"`
+
+	// Usage duration: The duration of resource usage, Component Usage = Original Component Usage Duration - Deducted Duration (including resource packages)
+	TimeSpan *string `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
+
+	// Duration unit: Unit of resource usage duration.
+	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
+
+	// Remark attribute (instance configuration): Additional remark information, such as reserved instance type and transaction type for reserved instances, regional information of both ends for CCN products.
+	ReserveDetail *string `json:"ReserveDetail,omitnil,omitempty" name:"ReserveDetail"`
+
+	// Split item usage/duration ratio: Split item usage (duration) ratio, Split Item Usage (Duration) /Total Usage Before Splitting (Duration)
+	SplitRatio *string `json:"SplitRatio,omitnil,omitempty" name:"SplitRatio"`
+
+	// Original price of a component: Original Price = Component List Price * Component Usage * Duration of Use (not displayed if the customer enjoys a fixed price/contract price, and not displayed by default in refund scenarios), specified price mode
+	TotalCost *string `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
+
+	// Reserved instance deduction duration: The duration of use deducted by reserved instances for this product or service.
+	RITimeSpan *string `json:"RITimeSpan,omitnil,omitempty" name:"RITimeSpan"`
+
+	// Original price deducted by a reserved instance: The original price of a component deducted by reserved instances for this product or service
+	RICost *string `json:"RICost,omitnil,omitempty" name:"RICost"`
+
+	// Savings plan deduction from original price: Savings Plan Deduction from Original Price = Monetary Value of Savings Plan Deduction/ Savings Plan Deduction Rate
+	SPCost *string `json:"SPCost,omitnil,omitempty" name:"SPCost"`
+
+	// Discount rate: The discount rate enjoyed by this resource (it is not shown by default if the customer enjoys a fixed/contract price, and it is also not shown by default in the refund scenario)
+	Discount *string `json:"Discount,omitnil,omitempty" name:"Discount"`
+
+	// Mixed discount rate: The final discount rate after integrating various discount deductions. Mixed Discount Rate = Discounted total price/Original Price.
+	BlendedDiscount *string `json:"BlendedDiscount,omitnil,omitempty" name:"BlendedDiscount"`
+
+	// Discounted total: discounted total = (Original Price - Original Price Deducted by a Reserved Instance - Savings Plan Deduction from Original Price) * Discount Rate
+	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
+
+	// Cash account expenditure (CNY): The amount paid through the cash account
+	CashPayAmount *string `json:"CashPayAmount,omitnil,omitempty" name:"CashPayAmount"`
+
+	// Promo voucher expenditure (CNY): The amount paid using various vouchers (such as promo vouchers and cash vouchers)
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
+
+	// Gift account expenditure (CNY): The amount paid using free credits
+	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
+
+	// Royalty account expenditure (CNY): The amount paid through the royalty account
+	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
+
+	// Allocation tag: The resource-bound tag
+	Tag []*BillTag `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Domestic and international codes
+	RegionType *string `json:"RegionType,omitnil,omitempty" name:"RegionType"`
+
+	// Domestic and international: Resource region type (domestic, international)
+	RegionTypeName *string `json:"RegionTypeName,omitnil,omitempty" name:"RegionTypeName"`
+
+	// Component name code
+	ItemCode *string `json:"ItemCode,omitnil,omitempty" name:"ItemCode"`
+
+	// Component name: The specific component of a product or service purchased by the user
+	ItemCodeName *string `json:"ItemCodeName,omitnil,omitempty" name:"ItemCodeName"`
+
+	// Associated document ID: Document ID associated with this transaction, such as the original new purchase order corresponding to a refund order
+	AssociatedOrder *string `json:"AssociatedOrder,omitnil,omitempty" name:"AssociatedOrder"`
+
+	// Price attribute: Other attributes of the component that affect discount pricing besides unit price and duration
+	PriceInfo []*string `json:"PriceInfo,omitnil,omitempty" name:"PriceInfo"`
+
+	// Calculation rule explanation: A detailed explanation to calculations of billing settlement for special transaction types, such as refund and configuration changes.
+	Formula *string `json:"Formula,omitnil,omitempty" name:"Formula"`
+
+	// Billing Rules: The detailed billing rules for each product shown in the portal explanation link
+	FormulaUrl *string `json:"FormulaUrl,omitnil,omitempty" name:"FormulaUrl"`
+
+	// Original usage/duration: The original usage of the component before deduction by resource packages.
+	// (Currently only TRTC, TEM, Cloud Call Center, and CDZ products support this information display. Other products are being integrated.)
+	RealTotalMeasure *string `json:"RealTotalMeasure,omitnil,omitempty" name:"RealTotalMeasure"`
+
+	// Deduction of usage/duration (including resource packages): The amount of usage deducted by resource packages
+	// (Currently only TRTC, TEM, Cloud Call Center, and CDZ products support this information display. Other products are being integrated.)
+	DeductedMeasure *string `json:"DeductedMeasure,omitnil,omitempty" name:"DeductedMeasure"`
+
+	// Configuration description: Information on specification of resource configuration
+	ComponentConfig *string `json:"ComponentConfig,omitnil,omitempty" name:"ComponentConfig"`
+
+	// Cost collection type: The source types of fees, including allocated, collection and unallocated.
+	// 0 - Allocation
+	// 1 - Collection
+	// 2 - Unallocated
+	AllocationType *uint64 `json:"AllocationType,omitnil,omitempty" name:"AllocationType"`
+
+	// CostBeforeTax
+	CostBeforeTax *string `json:"CostBeforeTax,omitnil,omitempty" name:"CostBeforeTax"`
+
+	// Tax
+	Tax *string `json:"Tax,omitnil,omitempty" name:"Tax"`
+
+	// AmountBeforeTax
+	AmountBeforeTax *string `json:"AmountBeforeTax,omitnil,omitempty" name:"AmountBeforeTax"`
+
+	// Discount object of the current consumption item, such as official website discount, user discount and activity discount.
+	DiscountObject *string `json:"DiscountObject,omitnil,omitempty" name:"DiscountObject"`
+
+	// Discount type of the current consumption item, such as discount and contract price.
+	DiscountType *string `json:"DiscountType,omitnil,omitempty" name:"DiscountType"`
+
+	// Supplementary description of the offer type, for example: business discount 20% off, the offer type is "discount" and the discount content is "0.8".
+	DiscountContent *string `json:"DiscountContent,omitnil,omitempty" name:"DiscountContent"`
+
+	// SPDeduction
+	SPDeduction *string `json:"SPDeduction,omitnil,omitempty" name:"SPDeduction"`
+
+	// SPDeduction
+	SPDeductionRate *string `json:"SPDeductionRate,omitnil,omitempty" name:"SPDeductionRate"`
+
+	// Currency
+	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
+
+	// Billing month
+	BillMonth *string `json:"BillMonth,omitnil,omitempty" name:"BillMonth"`
+
+	// tax rate
+	TaxRate *string `json:"TaxRate,omitnil,omitempty" name:"TaxRate"`
+}
+
+type AllocationMonthOverviewDetail struct {
+	// Collected fees (cash): Cash directly collected to the cost allocation unit based on the collection rules
+	GatherCashPayAmount *string `json:"GatherCashPayAmount,omitnil,omitempty" name:"GatherCashPayAmount"`
+
+	// Collected fees (voucher): Resource vouchers directly collected to the cost allocation unit based on the collection rules
+	GatherVoucherPayAmount *string `json:"GatherVoucherPayAmount,omitnil,omitempty" name:"GatherVoucherPayAmount"`
+
+	// Collected fees (free credit): Resource free credit directly collected to the cost allocation unit based on the collection rules
+	GatherIncentivePayAmount *string `json:"GatherIncentivePayAmount,omitnil,omitempty" name:"GatherIncentivePayAmount"`
+
+	// Collected fees (royalty amount): Resource royalty amount directly collected to the cost allocation unit based on the collection rules
+	GatherTransferPayAmount *string `json:"GatherTransferPayAmount,omitnil,omitempty" name:"GatherTransferPayAmount"`
+
+	// Allocated fees (cash): Resource cash allocated to the cost allocation unit based on the allocation rules
+	AllocateCashPayAmount *string `json:"AllocateCashPayAmount,omitnil,omitempty" name:"AllocateCashPayAmount"`
+
+	// Allocated fees (vouchers): Resource vouchers allocated to the cost allocation unit based on the allocation rules
+	AllocateVoucherPayAmount *string `json:"AllocateVoucherPayAmount,omitnil,omitempty" name:"AllocateVoucherPayAmount"`
+
+	// Allocated fees (free credit): Resource free credit allocated to the cost allocation unit based on the allocation rules
+	AllocateIncentivePayAmount *string `json:"AllocateIncentivePayAmount,omitnil,omitempty" name:"AllocateIncentivePayAmount"`
+
+	// Allocated fees (royalty amount): Resource royalty amount allocated to the cost allocation unit based on the allocation rules
+	AllocateTransferPayAmount *string `json:"AllocateTransferPayAmount,omitnil,omitempty" name:"AllocateTransferPayAmount"`
+
+	// Total fees (cash): Total fees of the cost allocation unit, Collected Fees (Cash) + Allocated fees (Cash)
+	TotalCashPayAmount *string `json:"TotalCashPayAmount,omitnil,omitempty" name:"TotalCashPayAmount"`
+
+	// Total fees (voucher): Total fees of the cost allocation unit, Collected Fees (Voucher) + Allocated fees (Voucher)
+	TotalVoucherPayAmount *string `json:"TotalVoucherPayAmount,omitnil,omitempty" name:"TotalVoucherPayAmount"`
+
+	// Total fees (free credit): Total fees of the cost allocation unit, Collected Fees (Free Credit) + Allocated fees (Free Credit)
+	TotalIncentivePayAmount *string `json:"TotalIncentivePayAmount,omitnil,omitempty" name:"TotalIncentivePayAmount"`
+
+	// Total fees (royalty amount): Total cost of the cost allocation unit, Collected Fees (Royalty Amount) + Allocated fees (Royalty Amount)
+	TotalTransferPayAmount *string `json:"TotalTransferPayAmount,omitnil,omitempty" name:"TotalTransferPayAmount"`
+
+	// Collected fees (discounted total): Total resource amount after discount directly collected to the cost allocation unit based on the collection rules
+	GatherRealCost *string `json:"GatherRealCost,omitnil,omitempty" name:"GatherRealCost"`
+
+	// Allocated fees (discounted total): Total resource amount after discount directly allocated to the cost allocation unit based on the allocation rules
+	AllocateRealCost *string `json:"AllocateRealCost,omitnil,omitempty" name:"AllocateRealCost"`
+
+	// Total fees (discounted total): Total fees of the cost allocation unit, Collected Fees (discounted total) + Allocated fees (discounted total)
+	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
+
+	// Proportion (discounted total): Total fees (discounted total) of the Cost Allocation Unit/Total Fees (discounted total) * 100%
+	Ratio *string `json:"Ratio,omitnil,omitempty" name:"Ratio"`
+
+	// Month-on-month ratio (discounted total): [Total fees (discounted total) of the cost allocation unit in this month - Total fees (discounted total) of the cost allocation unit in the previous month]/Total fees (discounted total) of the cost allocation unit in the previous month * 100%
+	Trend *string `json:"Trend,omitnil,omitempty" name:"Trend"`
+
+	// Sequential Comparison Arrow
+	// upward - Upward
+	// downward - Downward
+	// none - Stable
+	TrendType *string `json:"TrendType,omitnil,omitempty" name:"TrendType"`
+
+	// AllocateCostBeforeTax
+	AllocateCostBeforeTax *string `json:"AllocateCostBeforeTax,omitnil,omitempty" name:"AllocateCostBeforeTax"`
+
+	// GatherCostBeforeTax
+	GatherCostBeforeTax *string `json:"GatherCostBeforeTax,omitnil,omitempty" name:"GatherCostBeforeTax"`
+
+	// TotalCostBeforeTax
+	TotalCostBeforeTax *string `json:"TotalCostBeforeTax,omitnil,omitempty" name:"TotalCostBeforeTax"`
+
+	// AllocateTax
+	AllocateTax *string `json:"AllocateTax,omitnil,omitempty" name:"AllocateTax"`
+
+	// GatherTax
+	GatherTax *string `json:"GatherTax,omitnil,omitempty" name:"GatherTax"`
+
+	// TotalTax
+	TotalTax *string `json:"TotalTax,omitnil,omitempty" name:"TotalTax"`
+}
+
+type AllocationOverviewDetail struct {
+	// Unique identifier of a cost allocation unit
+	TreeNodeUniqKey *string `json:"TreeNodeUniqKey,omitnil,omitempty" name:"TreeNodeUniqKey"`
+
+	// Name of a cost allocation unit
+	TreeNodeUniqKeyName *string `json:"TreeNodeUniqKeyName,omitnil,omitempty" name:"TreeNodeUniqKeyName"`
+
+	// Date: Settlement date
+	BillDate *string `json:"BillDate,omitnil,omitempty" name:"BillDate"`
+
+	// Collected fees (cash): Cash directly collected to the cost allocation unit based on the collection rules
+	GatherCashPayAmount *string `json:"GatherCashPayAmount,omitnil,omitempty" name:"GatherCashPayAmount"`
+
+	// Collected fees (voucher): Resource vouchers directly collected to the cost allocation unit based on the collection rules
+	GatherVoucherPayAmount *string `json:"GatherVoucherPayAmount,omitnil,omitempty" name:"GatherVoucherPayAmount"`
+
+	// Collected fees (free credit): Resource free credit directly collected to the cost allocation unit based on the collection rules
+	GatherIncentivePayAmount *string `json:"GatherIncentivePayAmount,omitnil,omitempty" name:"GatherIncentivePayAmount"`
+
+	// Collected fees (royalty amount): Resource royalty amount directly collected to the cost allocation unit based on the collection rules
+	GatherTransferPayAmount *string `json:"GatherTransferPayAmount,omitnil,omitempty" name:"GatherTransferPayAmount"`
+
+	// Allocated fees (cash): Resource cash allocated to the cost allocation unit based on the allocation rules
+	AllocateCashPayAmount *string `json:"AllocateCashPayAmount,omitnil,omitempty" name:"AllocateCashPayAmount"`
+
+	// Allocated fees (voucher): Resource vouchers allocated to the cost allocation unit based on the allocation rules
+	AllocateVoucherPayAmount *string `json:"AllocateVoucherPayAmount,omitnil,omitempty" name:"AllocateVoucherPayAmount"`
+
+	// Allocated fees (free credit): Resource free credit allocated to the cost allocation unit based on the allocation rules
+	AllocateIncentivePayAmount *string `json:"AllocateIncentivePayAmount,omitnil,omitempty" name:"AllocateIncentivePayAmount"`
+
+	// Allocated fees (royalty amount): Resource royalty amount allocated to the cost allocation unit based on the allocation rules
+	AllocateTransferPayAmount *string `json:"AllocateTransferPayAmount,omitnil,omitempty" name:"AllocateTransferPayAmount"`
+
+	// Total fees (cash): Total fees of the cost allocation unit, Collected Fees (Cash) + Allocated Fees (Cash)
+	TotalCashPayAmount *string `json:"TotalCashPayAmount,omitnil,omitempty" name:"TotalCashPayAmount"`
+
+	// Total fees (voucher): Total fees of the cost allocation unit, Collected Fees (Voucher) + Allocated Fees (Voucher)
+	TotalVoucherPayAmount *string `json:"TotalVoucherPayAmount,omitnil,omitempty" name:"TotalVoucherPayAmount"`
+
+	// Total fees (free credit): Total fees of the cost allocation unit, Collected Fees (Free Credit) + Allocated Fees (Free Credit)
+	TotalIncentivePayAmount *string `json:"TotalIncentivePayAmount,omitnil,omitempty" name:"TotalIncentivePayAmount"`
+
+	// Total fees (royalty amount): Total fees of the cost allocation unit, Collected Fees (Royalty Amount) + Allocated Fees (Royalty Amount)
+	TotalTransferPayAmount *string `json:"TotalTransferPayAmount,omitnil,omitempty" name:"TotalTransferPayAmount"`
+
+	// Collected fees (discounted total): Total resource amount after discount directly collected to the cost allocation unit based on the collection rules
+	GatherRealCost *string `json:"GatherRealCost,omitnil,omitempty" name:"GatherRealCost"`
+
+	// Allocated fees (discounted total): Total resource amount after discount directly allocated to the cost allocation unit based on the allocation rules
+	AllocateRealCost *string `json:"AllocateRealCost,omitnil,omitempty" name:"AllocateRealCost"`
+
+	// Total fees (discounted total): Total fees of the cost allocation unit, Collected Fees (discounted total) + Allocated Fees (discounted total)
+	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
+
+	// Proportion (discounted total): Total fees (discounted total) of the Cost Allocation Unit/Total Fees (discounted total) * 100%
+	Ratio *string `json:"Ratio,omitnil,omitempty" name:"Ratio"`
+
+	// Month-on-month ratio (discounted total): [Total fees (discounted total) of the cost allocation unit in this month - Total fees (discounted total) of the cost allocation unit in the previous month]/Total fees (discounted total) of the cost allocation unit in the previous month * 100%
+	Trend *string `json:"Trend,omitnil,omitempty" name:"Trend"`
+
+	// Sequential Comparison Arrow
+	// upward - Upward
+	// downward - Downward
+	// none - Stable
+	TrendType *string `json:"TrendType,omitnil,omitempty" name:"TrendType"`
+
+	// GatherCostBeforeTax
+	GatherCostBeforeTax *string `json:"GatherCostBeforeTax,omitnil,omitempty" name:"GatherCostBeforeTax"`
+
+	// AllocateCostBeforeTax
+	AllocateCostBeforeTax *string `json:"AllocateCostBeforeTax,omitnil,omitempty" name:"AllocateCostBeforeTax"`
+
+	// TotalCostBeforeTax
+	TotalCostBeforeTax *string `json:"TotalCostBeforeTax,omitnil,omitempty" name:"TotalCostBeforeTax"`
+
+	// GatherTax
+	GatherTax *string `json:"GatherTax,omitnil,omitempty" name:"GatherTax"`
+
+	// AllocateTax
+	AllocateTax *string `json:"AllocateTax,omitnil,omitempty" name:"AllocateTax"`
+
+	// TotalTax
+	TotalTax *string `json:"TotalTax,omitnil,omitempty" name:"TotalTax"`
+}
+
+type AllocationOverviewNode struct {
+	// Cost allocation unit ID
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Name of a cost allocation unit
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Unique identifier of a cost allocation unit
+	TreeNodeUniqKey *string `json:"TreeNodeUniqKey,omitnil,omitempty" name:"TreeNodeUniqKey"`
+
+	// Billing unit including a rule flag
+	// 0 - No rule exists.
+	// 1 - Both collection rules and allocation rules exist.
+	// 2 - Only collection rules exist.
+	// 3 - Only allocation rules exist.
+	Symbol *uint64 `json:"Symbol,omitnil,omitempty" name:"Symbol"`
+
+	// Detailed monthly overview of a sub-unit
+	Children []*AllocationOverviewNode `json:"Children,omitnil,omitempty" name:"Children"`
+
+	// Monthly overview amount details of a cost allocation bill
+	Detail *AllocationMonthOverviewDetail `json:"Detail,omitnil,omitempty" name:"Detail"`
+}
+
+type AllocationOverviewTotal struct {
+	// Total fees: Total Fees (Cash) + Total Fees (Royalty Amount) + Total Fees (Free Credit) + Total Fees (Voucher)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
+
+	// Cash: Total fees of cash
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CashPayAmount *string `json:"CashPayAmount,omitnil,omitempty" name:"CashPayAmount"`
+
+	// Free credit: Total fees of free credit
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
+
+	// Voucher: Total fees of voucher
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
+
+	// Royalty amount: Total fees of royalty amount
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
+
+	// Pre-tax price after discount
+	CostBeforeTax *string `json:"CostBeforeTax,omitnil,omitempty" name:"CostBeforeTax"`
+
+	// Tax
+	Tax *string `json:"Tax,omitnil,omitempty" name:"Tax"`
 }
 
 type AllocationRationExpression struct {
@@ -93,6 +562,14 @@ type AllocationRationExpression struct {
 
 	// Sharing proportion occupied by allocation unit, pass 0 for allocation by proportion.
 	Ratio *float64 `json:"Ratio,omitnil,omitempty" name:"Ratio"`
+}
+
+type AllocationRule struct {
+	// Allocation rule ID
+	RuleId *uint64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
+	// Allocation rule name
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 }
 
 type AllocationRuleExpression struct {
@@ -168,6 +645,523 @@ type AllocationRulesSummary struct {
 	RatioDetail []*AllocationRationExpression `json:"RatioDetail,omitnil,omitempty" name:"RatioDetail"`
 }
 
+type AllocationStat struct {
+	// Average cost information
+	Average *AllocationAverageData `json:"Average,omitnil,omitempty" name:"Average"`
+}
+
+type AllocationSummaryByBusiness struct {
+	// Unique identifier of a cost allocation unit
+	TreeNodeUniqKey *string `json:"TreeNodeUniqKey,omitnil,omitempty" name:"TreeNodeUniqKey"`
+
+	// Name of a cost allocation unit
+	TreeNodeUniqKeyName *string `json:"TreeNodeUniqKeyName,omitnil,omitempty" name:"TreeNodeUniqKeyName"`
+
+	// Date: Settlement date
+	BillDate *string `json:"BillDate,omitnil,omitempty" name:"BillDate"`
+
+	// Collected fees (cash): Cash directly collected to the cost allocation unit based on the collection rules
+	GatherCashPayAmount *string `json:"GatherCashPayAmount,omitnil,omitempty" name:"GatherCashPayAmount"`
+
+	// Collected fees (voucher): Resource vouchers directly collected to the cost allocation unit based on the collection rules
+	GatherVoucherPayAmount *string `json:"GatherVoucherPayAmount,omitnil,omitempty" name:"GatherVoucherPayAmount"`
+
+	// Collected fees (free credit): Resource free credit directly collected to the cost allocation unit based on the collection rules
+	GatherIncentivePayAmount *string `json:"GatherIncentivePayAmount,omitnil,omitempty" name:"GatherIncentivePayAmount"`
+
+	// Collected fees (royalty amount): Resource royalty amount directly collected to the cost allocation unit based on the collection rules
+	GatherTransferPayAmount *string `json:"GatherTransferPayAmount,omitnil,omitempty" name:"GatherTransferPayAmount"`
+
+	// Allocated fees (cash): Resource cash allocated to the cost allocation unit based on the allocation rules
+	AllocateCashPayAmount *string `json:"AllocateCashPayAmount,omitnil,omitempty" name:"AllocateCashPayAmount"`
+
+	// Allocated fees (voucher): Resource vouchers allocated to the cost allocation unit based on the allocation rules
+	AllocateVoucherPayAmount *string `json:"AllocateVoucherPayAmount,omitnil,omitempty" name:"AllocateVoucherPayAmount"`
+
+	// Allocated fees (free credit): Resource free credit allocated to the cost allocation unit based on the allocation rules
+	AllocateIncentivePayAmount *string `json:"AllocateIncentivePayAmount,omitnil,omitempty" name:"AllocateIncentivePayAmount"`
+
+	// Allocated fees (royalty amount): Resource royalty amount allocated to the cost allocation unit based on the allocation rules
+	AllocateTransferPayAmount *string `json:"AllocateTransferPayAmount,omitnil,omitempty" name:"AllocateTransferPayAmount"`
+
+	// Total fees (cash): Total fees of the cost allocation unit, Collected Fees (Cash) + Allocated fees (Cash)
+	TotalCashPayAmount *string `json:"TotalCashPayAmount,omitnil,omitempty" name:"TotalCashPayAmount"`
+
+	// Total fees (voucher): Total fees of the cost allocation unit, Collected Fees (Vouchers) + Allocated fees (Vouchers)
+	TotalVoucherPayAmount *string `json:"TotalVoucherPayAmount,omitnil,omitempty" name:"TotalVoucherPayAmount"`
+
+	// Total fees (free credit): Total fees of the cost allocation unit, Collected Fees (Free Credit) + Allocated fees (Free Credit)
+	TotalIncentivePayAmount *string `json:"TotalIncentivePayAmount,omitnil,omitempty" name:"TotalIncentivePayAmount"`
+
+	// Total fees (royalty amount): Total fees of the cost allocation unit, Collected Fees (Royalty Amount) + Allocated fees (Royalty Amount)
+	TotalTransferPayAmount *string `json:"TotalTransferPayAmount,omitnil,omitempty" name:"TotalTransferPayAmount"`
+
+	// Collected fees (discounted total): Total resource amount after discount directly collected to the cost allocation unit based on the collection rules
+	GatherRealCost *string `json:"GatherRealCost,omitnil,omitempty" name:"GatherRealCost"`
+
+	// Allocated fees (discounted total): Total resource amount after discount allocated to the cost allocation unit based on the allocation rules
+	AllocateRealCost *string `json:"AllocateRealCost,omitnil,omitempty" name:"AllocateRealCost"`
+
+	// Total fees (discounted total): Total fees of the cost allocation unit, Collected Fees (discounted total) + Allocated fees (discounted total)
+	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
+
+	// Proportion (discounted total): Total fees (discounted total) of the Cost Allocation Unit/Total Fees (discounted total) * 100%
+	Ratio *string `json:"Ratio,omitnil,omitempty" name:"Ratio"`
+
+	// Month-on-month ratio (discounted total): [Total fees (discounted total) of the cost allocation unit in this month - Total fees (discounted total) of the cost allocation unit in the previous month]/Total fees (discounted total) of the cost allocation unit in the previous month * 100%
+	Trend *string `json:"Trend,omitnil,omitempty" name:"Trend"`
+
+	// Sequential Comparison Arrow
+	// upward - Upward
+	// downward - Downward
+	// none - Stable
+	TrendType *string `json:"TrendType,omitnil,omitempty" name:"TrendType"`
+
+	// Product code
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+
+	// Product name: Various cloud products purchased by users
+	BusinessCodeName *string `json:"BusinessCodeName,omitnil,omitempty" name:"BusinessCodeName"`
+
+	// Original price of a component: Original Price = Component List Price * Component Usage * Duration of Use (not displayed if the customer enjoys a fixed price/contract price, and not displayed by default in refund scenarios), specified price mode
+	TotalCost *string `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
+
+	// Original price deducted by a reserved instance: The original price of a component deducted by reserved instances for this product or service
+	RICost *string `json:"RICost,omitnil,omitempty" name:"RICost"`
+
+	// Savings plan deduction from original price: Savings Plan Deduction from Original Price = Monetary Value of Savings Plan Deduction/ Savings Plan Deduction Rate
+	SPCost *string `json:"SPCost,omitnil,omitempty" name:"SPCost"`
+
+	// Cash account expenditure (CNY): The amount paid through the cash account
+	CashPayAmount *string `json:"CashPayAmount,omitnil,omitempty" name:"CashPayAmount"`
+
+	// Promo voucher expenditure (CNY): The amount paid using various vouchers (such as promo vouchers and cash vouchers)
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
+
+	// Gift account expenditure (CNY): The amount paid using free credits
+	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
+
+	// Royalty account expenditure (CNY): The amount paid through the royalty account
+	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
+
+	// Discounted total: discounted total = (Original Price - Original Price Deducted by a Reserved Instance - Savings Plan Deduction from Original Price) * Discount Rate
+	AllocationRealTotalCost *string `json:"AllocationRealTotalCost,omitnil,omitempty" name:"AllocationRealTotalCost"`
+
+	// Collected fees (tax): Tax directly collected to the cost allocation unit based on the collection rules
+	GatherTax *string `json:"GatherTax,omitnil,omitempty" name:"GatherTax"`
+
+	// Allocated fees (tax): Resource tax allocated to the cost allocation unit based on the allocation rules
+	AllocateTax *string `json:"AllocateTax,omitnil,omitempty" name:"AllocateTax"`
+
+	// Total fees (tax): Total fees of the cost allocation unit, Collected Fees (Tax) + Allocated fees (Tax)
+	TotalTax *string `json:"TotalTax,omitnil,omitempty" name:"TotalTax"`
+
+	// GatherCostBeforeTax
+	GatherCostBeforeTax *string `json:"GatherCostBeforeTax,omitnil,omitempty" name:"GatherCostBeforeTax"`
+
+	// AllocateCostBeforeTax
+	AllocateCostBeforeTax *string `json:"AllocateCostBeforeTax,omitnil,omitempty" name:"AllocateCostBeforeTax"`
+
+	// TotalCostBeforeTax
+	TotalCostBeforeTax *string `json:"TotalCostBeforeTax,omitnil,omitempty" name:"TotalCostBeforeTax"`
+
+	// Tax
+	Tax *string `json:"Tax,omitnil,omitempty" name:"Tax"`
+
+	// CostBeforeTax
+	CostBeforeTax *string `json:"CostBeforeTax,omitnil,omitempty" name:"CostBeforeTax"`
+}
+
+type AllocationSummaryByItem struct {
+	// Unique identifier of a cost allocation unit
+	TreeNodeUniqKey *string `json:"TreeNodeUniqKey,omitnil,omitempty" name:"TreeNodeUniqKey"`
+
+	// Name of a cost allocation unit
+	TreeNodeUniqKeyName *string `json:"TreeNodeUniqKeyName,omitnil,omitempty" name:"TreeNodeUniqKeyName"`
+
+	// Date: Settlement date
+	BillDate *string `json:"BillDate,omitnil,omitempty" name:"BillDate"`
+
+	// Payer UIN: Account ID of the payer, which is the unique account identifier for the user in Tencent Cloud.
+	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
+
+	// User UIN: Account ID of the actual resource user
+	OwnerUin *string `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
+
+	// Operator account ID (the resource account ID or role ID opened by prepaid resource ordering or postpaid operation)
+	OperateUin *string `json:"OperateUin,omitnil,omitempty" name:"OperateUin"`
+
+	// Billing mode code
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Billing mode: Resource billing mode, which can be monthly subscription or pay-as-you-go.
+	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
+
+	// Transaction type code
+	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
+
+	// Transaction type: Detailed transaction type
+	ActionTypeName *string `json:"ActionTypeName,omitnil,omitempty" name:"ActionTypeName"`
+
+	// Product code
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+
+	// Product name: Various cloud products purchased by users
+	BusinessCodeName *string `json:"BusinessCodeName,omitnil,omitempty" name:"BusinessCodeName"`
+
+	// Subproduct code
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// Subproduct name: Product subdivision type purchased by the user
+	ProductCodeName *string `json:"ProductCodeName,omitnil,omitempty" name:"ProductCodeName"`
+
+	// Region ID
+	RegionId *uint64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+
+	// Region name: The region where the resource is located
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
+
+	// AZ ID
+	ZoneId *uint64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Availability zone: The availability zone where the resource is located.
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
+
+	// Instance type code
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Instance type: The type of an instance corresponding to the product service purchased, including resource packages, RI, SP, and spot instances. It is displayed as "-" by default for regular instances.
+	InstanceTypeName *string `json:"InstanceTypeName,omitnil,omitempty" name:"InstanceTypeName"`
+
+	// Resource ID: Resources vary by product, and the content is not identical. For example, Cloud Virtual Machine (CVM) corresponds to the instance ID. If the product is split, it shows the split item ID, such as COS bucket ID and CDN domain name.
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// Instance name: The name set by the user for the resource in the console, which is empty by default if not set. If the product is split, it shows the split resource alias.
+	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
+
+	// Allocation tag: The resource-bound tag
+	Tag []*BillTag `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Project ID
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Project name: The Project to which a resource belongs, which is independently allocated by the user for the resource in the console. If a resource has not been allocated to an Project, it will be a default Project.
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
+
+	// Cost collection type: The source types of fees, including allocated, collection and unallocated.
+	// 0 - Allocation
+	// 1 - Collection
+	// -1 - Unallocated
+	AllocationType *int64 `json:"AllocationType,omitnil,omitempty" name:"AllocationType"`
+
+	// Original price of a component: Original Price = Component List Price * Component Usage * Duration of Use (not displayed if the customer enjoys a fixed price/contract price, and not displayed by default in refund scenarios), specified price mode
+	TotalCost *string `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
+
+	// Reserved instance deduction duration: The duration of use deducted by reserved instances for this product or service.
+	RiTimeSpan *string `json:"RiTimeSpan,omitnil,omitempty" name:"RiTimeSpan"`
+
+	// Original price deducted by a reserved instance: The original price of a component deducted by reserved instances for this product or service
+	RiCost *string `json:"RiCost,omitnil,omitempty" name:"RiCost"`
+
+	// Discounted total: discounted total = (Original Price - Original Price Deducted by a Reserved Instance - Savings Plan Deduction from Original Price) * Discount Rate
+	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
+
+	// Cash account expenditure (CNY): The amount paid through the cash account
+	CashPayAmount *string `json:"CashPayAmount,omitnil,omitempty" name:"CashPayAmount"`
+
+	// Promo voucher expenditure (CNY): The amount paid using various vouchers (such as promo vouchers and cash vouchers)
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
+
+	// Gift account expenditure (CNY): The amount paid using free credits
+	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
+
+	// Royalty account expenditure (CNY): The amount paid through the royalty account
+	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
+
+	// Component name code
+	ItemCode *string `json:"ItemCode,omitnil,omitempty" name:"ItemCode"`
+
+	// Component name: The specific component of a product or service purchased by the user
+	ItemCodeName *string `json:"ItemCodeName,omitnil,omitempty" name:"ItemCodeName"`
+
+	// Component type code
+	ComponentCode *string `json:"ComponentCode,omitnil,omitempty" name:"ComponentCode"`
+
+	// Component type: The major component category corresponding to the product or service purchased by the user
+	ComponentCodeName *string `json:"ComponentCodeName,omitnil,omitempty" name:"ComponentCodeName"`
+
+	// Split item ID: The ID of the split item involved in the split product, such as COS bucket ID and CDN domain name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: SplitItemId is deprecated.
+	SplitItemId *string `json:"SplitItemId,omitnil,omitempty" name:"SplitItemId"`
+
+	// Split item name: The split item involved in the split product
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: SplitItemName is deprecated.
+	SplitItemName *string `json:"SplitItemName,omitnil,omitempty" name:"SplitItemName"`
+
+	// Usage start time: Usage start time
+	FeeBeginTime *string `json:"FeeBeginTime,omitnil,omitempty" name:"FeeBeginTime"`
+
+	// Usage end time: Product or service usage end time
+	FeeEndTime *string `json:"FeeEndTime,omitnil,omitempty" name:"FeeEndTime"`
+
+	// Savings plan deduction from original price: Savings Plan Deduction from Original Price = Monetary Value of Savings Plan Deduction/ Savings Plan Deduction Rate
+	SPCost *string `json:"SPCost,omitnil,omitempty" name:"SPCost"`
+
+	// Domestic and international codes
+	RegionType *string `json:"RegionType,omitnil,omitempty" name:"RegionType"`
+
+	// Domestic and international: Resource region type (domestic, international)
+	RegionTypeName *string `json:"RegionTypeName,omitnil,omitempty" name:"RegionTypeName"`
+
+	// Component list price: The original unit price of the component on the portal (not displayed if the customer enjoys a fixed price/contract price)
+	SinglePrice *string `json:"SinglePrice,omitnil,omitempty" name:"SinglePrice"`
+
+	// Component unit price: Discounted unit price of the component. Component unit price = list price * discount.
+	ContractPrice *string `json:"ContractPrice,omitnil,omitempty" name:"ContractPrice"`
+
+	// Component Price Unit: Unit of component price, Unit Composition: CNY/usage unit/duration unit
+	SinglePriceUnit *string `json:"SinglePriceUnit,omitnil,omitempty" name:"SinglePriceUnit"`
+
+	// Component usage: The actual settlement usage of the component, Component Usage = Original Component Usage - Deducted Usage (including resource packages)
+	UsedAmount *string `json:"UsedAmount,omitnil,omitempty" name:"UsedAmount"`
+
+	// Component usage unit: Unit of measurement corresponding to component usage.
+	UsedAmountUnit *string `json:"UsedAmountUnit,omitnil,omitempty" name:"UsedAmountUnit"`
+
+	// Usage duration: The duration of resource usage, Component Usage = Original Component Usage Duration - Deducted Duration (including resource packages)
+	TimeSpan *string `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
+
+	// Duration unit: Unit of resource usage duration.
+	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
+
+	// Remark attribute (instance configuration): Additional remark information, such as reserved instance type and transaction type for reserved instances, regional information of both ends for CCN products.
+	ReserveDetail *string `json:"ReserveDetail,omitnil,omitempty" name:"ReserveDetail"`
+
+	// Original usage/duration: The original usage of the component before deduction by resource packages.
+	// (Currently only TRTC, TEM, Cloud Call Center, and CDZ products support this information display. Other products are being integrated.)
+	RealTotalMeasure *string `json:"RealTotalMeasure,omitnil,omitempty" name:"RealTotalMeasure"`
+
+	// Deduction of usage/duration (including resource packages): The amount of usage deducted by resource packages
+	// (Currently only TRTC, TEM, Cloud Call Center, and CDZ products support this information display. Other products are being integrated.)
+	DeductedMeasure *string `json:"DeductedMeasure,omitnil,omitempty" name:"DeductedMeasure"`
+
+	// Discount rate: The discount rate enjoyed by this resource (it is not shown by default if the customer enjoys a fixed/contract price, and it is also not shown by default in the refund scenario)
+	Discount *string `json:"Discount,omitnil,omitempty" name:"Discount"`
+
+	// Mixed discount rate: The final discount rate after integrating various discount deductions. Mixed Discount Rate = Discounted total price/Original Price.
+	BlendedDiscount *string `json:"BlendedDiscount,omitnil,omitempty" name:"BlendedDiscount"`
+
+	// Price attribute: Other attributes of the component that affect discount pricing besides unit price and duration
+	PriceInfo []*string `json:"PriceInfo,omitnil,omitempty" name:"PriceInfo"`
+
+	// Calculation rule explanation: A detailed explanation to calculations of billing settlement for special transaction types, such as refund and configuration changes.
+	Formula *string `json:"Formula,omitnil,omitempty" name:"Formula"`
+
+	// Billing Rules: The detailed billing rules for each product shown in the portal explanation link
+	FormulaUrl *string `json:"FormulaUrl,omitnil,omitempty" name:"FormulaUrl"`
+
+	// Configuration description: Information on specification of resource configuration
+	ComponentConfig *string `json:"ComponentConfig,omitnil,omitempty" name:"ComponentConfig"`
+
+	// SPDeduction
+	SPDeduction *string `json:"SPDeduction,omitnil,omitempty" name:"SPDeduction"`
+
+	// Savings plan deduction rate: The discount rate for this component within the available balance limit of the savings plan
+	SPDeductionRate *string `json:"SPDeductionRate,omitnil,omitempty" name:"SPDeductionRate"`
+
+	// Currency.
+	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
+
+	// Tax
+	Tax *string `json:"Tax,omitnil,omitempty" name:"Tax"`
+
+	// tax rate
+	TaxRate *string `json:"TaxRate,omitnil,omitempty" name:"TaxRate"`
+
+	// CostBeforeTax
+	CostBeforeTax *string `json:"CostBeforeTax,omitnil,omitempty" name:"CostBeforeTax"`
+
+	// AmountBeforeTax
+	AmountBeforeTax *string `json:"AmountBeforeTax,omitnil,omitempty" name:"AmountBeforeTax"`
+
+	// AssociatedOrder
+	AssociatedOrder *string `json:"AssociatedOrder,omitnil,omitempty" name:"AssociatedOrder"`
+
+	// Discount object of the current consumption item, such as official website discount, user discount and activity discount.
+	DiscountObject *string `json:"DiscountObject,omitnil,omitempty" name:"DiscountObject"`
+
+	// Discount type of the current consumption item, such as discount and contract price.
+	DiscountType *string `json:"DiscountType,omitnil,omitempty" name:"DiscountType"`
+
+	// Supplementary description of the offer type, for example: business discount 20% off, the offer type is "discount" and the discount content is "0.8".
+	DiscountContent *string `json:"DiscountContent,omitnil,omitempty" name:"DiscountContent"`
+
+	// Billing month
+	BillMonth *string `json:"BillMonth,omitnil,omitempty" name:"BillMonth"`
+}
+
+type AllocationSummaryByResource struct {
+	// Unique identifier of a cost allocation unit
+	TreeNodeUniqKey *string `json:"TreeNodeUniqKey,omitnil,omitempty" name:"TreeNodeUniqKey"`
+
+	// Name of a cost allocation unit
+	TreeNodeUniqKeyName *string `json:"TreeNodeUniqKeyName,omitnil,omitempty" name:"TreeNodeUniqKeyName"`
+
+	// Date: Settlement date
+	BillDate *string `json:"BillDate,omitnil,omitempty" name:"BillDate"`
+
+	// Payer UIN: Account ID of the payer, which is the unique account identifier for the user in Tencent Cloud.
+	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
+
+	// User UIN: Account ID of the actual resource user
+	OwnerUin *string `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
+
+	// Operator account ID (the resource account ID or role ID opened by prepaid resource ordering or postpaid operation)
+	OperateUin *string `json:"OperateUin,omitnil,omitempty" name:"OperateUin"`
+
+	// Billing mode code
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Billing mode: Resource billing mode, which can be monthly subscription or pay-as-you-go.
+	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
+
+	// Transaction type code
+	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
+
+	// Transaction type: Detailed transaction type
+	ActionTypeName *string `json:"ActionTypeName,omitnil,omitempty" name:"ActionTypeName"`
+
+	// Product code
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+
+	// Product name: Various cloud products purchased by users
+	BusinessCodeName *string `json:"BusinessCodeName,omitnil,omitempty" name:"BusinessCodeName"`
+
+	// Subproduct code
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// Subproduct name: Product subdivision type purchased by the user
+	ProductCodeName *string `json:"ProductCodeName,omitnil,omitempty" name:"ProductCodeName"`
+
+	// Region ID
+	RegionId *uint64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+
+	// Region name: The region where the resource is located
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
+
+	// AZ ID
+	ZoneId *uint64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Availability zone: The availability zone where the resource is located.
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
+
+	// Instance type code
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Instance type: The type of an instance corresponding to the product service purchased, including resource packages, RI, SP, and spot instances. It is displayed as "-" by default for regular instances.
+	InstanceTypeName *string `json:"InstanceTypeName,omitnil,omitempty" name:"InstanceTypeName"`
+
+	// Resource ID: Resources vary by product, and the content is not identical. For example, Cloud Virtual Machine (CVM) corresponds to the instance ID. If the product is split, it shows the split item ID, such as COS bucket ID and CDN domain name.
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// Instance name: The name set by the user for the resource in the console, which is empty by default if not set. If the product is split, it shows the split resource alias.
+	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
+
+	// Allocation tag: The resource-bound tag
+	Tag []*BillTag `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Project ID
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Project name: The Project to which a resource belongs, which is independently allocated by the user for the resource in the console. If a resource has not been allocated to an Project, it will be a default Project.
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
+
+	// Cost collection type: The source types of fees, including allocated, collection and unallocated.
+	// 0 - Allocation 
+	// 1 - Collection 
+	// -1 - Unallocated
+	AllocationType *int64 `json:"AllocationType,omitnil,omitempty" name:"AllocationType"`
+
+	// Original price of a component: Original Price = Component List Price * Component Usage * Duration of Use (not displayed if the customer enjoys a fixed price/contract price, and not displayed by default in refund scenarios), specified price mode
+	TotalCost *string `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
+
+	// Reserved instance deduction duration: The duration of use deducted by reserved instances for this product or service.
+	RiTimeSpan *string `json:"RiTimeSpan,omitnil,omitempty" name:"RiTimeSpan"`
+
+	// Original price deducted by a reserved instance: The original price of a component deducted by reserved instances for this product or service
+	RiCost *string `json:"RiCost,omitnil,omitempty" name:"RiCost"`
+
+	// Discounted total: discounted total = (Original Price - Original Price Deducted by a Reserved Instance - Savings Plan Deduction from Original Price) * Discount Rate
+	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
+
+	// Cash account expenditure (CNY): The amount paid through the cash account
+	CashPayAmount *string `json:"CashPayAmount,omitnil,omitempty" name:"CashPayAmount"`
+
+	// Promo voucher expenditure (CNY): The amount paid using various vouchers (such as promo vouchers and cash vouchers)
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
+
+	// Gift account expenditure (CNY): The amount paid using free credits
+	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
+
+	// Royalty account expenditure (CNY): The amount paid through the royalty account
+	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
+
+	// Split item ID: The ID of the split item involved in the split product, such as COS bucket ID and CDN domain name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: SplitItemId is deprecated.
+	SplitItemId *string `json:"SplitItemId,omitnil,omitempty" name:"SplitItemId"`
+
+	// Split item name: The split item involved in the split product
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: SplitItemName is deprecated.
+	SplitItemName *string `json:"SplitItemName,omitnil,omitempty" name:"SplitItemName"`
+
+	// Usage start time: Usage start time
+	FeeBeginTime *string `json:"FeeBeginTime,omitnil,omitempty" name:"FeeBeginTime"`
+
+	// Usage end time: Product or service usage end time
+	FeeEndTime *string `json:"FeeEndTime,omitnil,omitempty" name:"FeeEndTime"`
+
+	// Savings plan deduction from original price: Savings Plan Deduction from Original Price = Monetary Value of Savings Plan Deduction/ Savings Plan Deduction Rate
+	SPCost *string `json:"SPCost,omitnil,omitempty" name:"SPCost"`
+
+	// Domestic and international codes
+	RegionType *string `json:"RegionType,omitnil,omitempty" name:"RegionType"`
+
+	// Domestic and international: Resource region type (domestic, international)
+	RegionTypeName *string `json:"RegionTypeName,omitnil,omitempty" name:"RegionTypeName"`
+
+	// Configuration description: Name and usage of each component under the corresponding resource (the total usage if the component is cumulative usage billing type)
+	ComponentConfig *string `json:"ComponentConfig,omitnil,omitempty" name:"ComponentConfig"`
+
+	// SPDeduction
+	SPDeduction *string `json:"SPDeduction,omitnil,omitempty" name:"SPDeduction"`
+
+	// Currency.
+	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
+
+	// Tax
+	Tax *string `json:"Tax,omitnil,omitempty" name:"Tax"`
+
+	// tax rate
+	TaxRate *string `json:"TaxRate,omitnil,omitempty" name:"TaxRate"`
+
+	// CostBeforeTax
+	CostBeforeTax *string `json:"CostBeforeTax,omitnil,omitempty" name:"CostBeforeTax"`
+
+	// AmountBeforeTax
+	AmountBeforeTax *string `json:"AmountBeforeTax,omitnil,omitempty" name:"AmountBeforeTax"`
+
+	// Billing month
+	BillMonth *string `json:"BillMonth,omitnil,omitempty" name:"BillMonth"`
+}
+
 type AllocationTree struct {
 	// ID of a cost allocation unit.
 	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
@@ -182,6 +1176,14 @@ type AllocationTree struct {
 	Children []*AllocationTree `json:"Children,omitnil,omitempty" name:"Children"`
 }
 
+type AllocationTreeNode struct {
+	// Unique identifier of a cost allocation unit
+	TreeNodeUniqKey *string `json:"TreeNodeUniqKey,omitnil,omitempty" name:"TreeNodeUniqKey"`
+
+	// Name of a cost allocation unit
+	TreeNodeUniqKeyName *string `json:"TreeNodeUniqKeyName,omitnil,omitempty" name:"TreeNodeUniqKeyName"`
+}
+
 type AllocationUnit struct {
 	// Cost allocation unit ID.
 	NodeId *uint64 `json:"NodeId,omitnil,omitempty" name:"NodeId"`
@@ -191,93 +1193,98 @@ type AllocationUnit struct {
 }
 
 type AnalyseActionTypeDetail struct {
-	// Transaction type codeNote: This field may return null, indicating that no valid values can be obtained.
+	// Transaction type code
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-	// Transaction type nameNote: This field may return null, indicating that no valid values can be obtained.
+	// Transaction type Name
 	ActionTypeName *string `json:"ActionTypeName,omitnil,omitempty" name:"ActionTypeName"`
 }
 
 type AnalyseAmountDetail struct {
-	// Fee typeNote: This field may return null, indicating that no valid values can be obtained.
+	// Fee type
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-	// Whether to displayNote: This field may return null, indicating that no valid values can be obtained.
+	// Indicates whether to display
 	Display *int64 `json:"Display,omitnil,omitempty" name:"Display"`
 }
 
 type AnalyseBusinessDetail struct {
-	// Product codeNote: This field may return null, indicating that no valid values can be obtained.
+	// Product code
 	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
 
-	// Product nameNote: This field may return null, indicating that no valid values can be obtained.
+	// Product name
 	BusinessCodeName *string `json:"BusinessCodeName,omitnil,omitempty" name:"BusinessCodeName"`
 }
 
 type AnalyseConditionDetail struct {
-	// ProductNote: This field may return null, indicating that no valid values can be obtained.
+	// product
 	Business []*AnalyseBusinessDetail `json:"Business,omitnil,omitempty" name:"Business"`
 
-	// ItemNote: This field may return null, indicating that no valid values can be obtained.
+	// Project
 	Project []*AnalyseProjectDetail `json:"Project,omitnil,omitempty" name:"Project"`
 
-	// RegionNote: This field may return null, indicating that no valid values can be obtained.
+	// Region.
 	Region []*AnalyseRegionDetail `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Billing modeNote: This field may return null, indicating that no valid values can be obtained.
+	// Billing mode.
 	PayMode []*AnalysePayModeDetail `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Transaction typeNote: This field may return null, indicating that no valid values can be obtained.
+	// Transaction type
 	ActionType []*AnalyseActionTypeDetail `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-	// Availability zoneNote: This field may return null, indicating that no valid values can be obtained.
+	// Availability zone
 	Zone []*AnalyseZoneDetail `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Resource owner UINNote: This field may return null, indicating that no valid values can be obtained.
+	// Resource owner Uin
 	OwnerUin []*AnalyseOwnerUinDetail `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
 
-	// Fee typeNote: This field may return null, indicating that no valid values can be obtained.
+	// Fee type
 	Amount []*AnalyseAmountDetail `json:"Amount,omitnil,omitempty" name:"Amount"`
 }
 
 type AnalyseConditions struct {
-	// Product name codeNote: This field may return null, indicating that no valid values can be obtained.
+	// Product name code
 	BusinessCodes *string `json:"BusinessCodes,omitnil,omitempty" name:"BusinessCodes"`
 
-	// Sub-product name codeNote: This field may return null, indicating that no valid values can be obtained.
+	// Subproduct name code
 	ProductCodes *string `json:"ProductCodes,omitnil,omitempty" name:"ProductCodes"`
 
-	// Component type codeNote: This field may return null, indicating that no valid values can be obtained.
+	// Component type code
 	ComponentCode *string `json:"ComponentCode,omitnil,omitempty" name:"ComponentCode"`
 
-	// Availability zone ID: The availability zone ID to which the resource belongsNote: This field may return null, indicating that no valid values can be obtained.
+	// Availability zone ID: The availability zone ID where the resource is located.
 	ZoneIds *string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-	// Region ID: The region ID to which the resource belongsNote: This field may return null, indicating that no valid values can be obtained.
+	// Region ID: Resource region ID
 	RegionIds *string `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
 
-	// Project ID: The project ID to which the resource belongsNote: This field may return null, indicating that no valid values can be obtained.
+	// Project ID: Project ID of the resource
 	ProjectIds *string `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
 
-	// Billing mode prePay (indicates monthly subscription)/postPay (indicates pay-as-you-go billing)Note: This field may return null, indicating that no valid values can be obtained.
+	// Billing mode prePay (monthly subscription)/postPay (pay-as-you-go billing)
 	PayModes *string `json:"PayModes,omitnil,omitempty" name:"PayModes"`
 
-	// Transaction type. Query transaction type. (Use transaction type code input parameter.)Note: This field may return null, indicating that no valid values can be obtained.
+	// Transaction type. Query transaction type (please use transaction type code as input parameter).
 	ActionTypes *string `json:"ActionTypes,omitnil,omitempty" name:"ActionTypes"`
 
-	// Cost allocation tag keyNote: This field may return null, indicating that no valid values can be obtained.
+	// Cost allocation tag key
 	Tags *string `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Fee type. Query fee type. (Use fee type code input parameter.) The input parameter enumeration is as follows:cashPayAmount: cash incentivePayAmount: free credits voucherPayAmount: coupons tax:taxes costBeforeTax: price before taxNote: This field may return null, indicating that no valid values can be obtained.
+	// Fee type. Query fee type (please use fee type code input parameter). The input parameter enumeration is as follows:
+	// cashPayAmount: Cash 
+	// incentivePayAmount: Bonus 
+	// voucherPayAmount: Coupon 
+	// tax: tax. 
+	// costBeforeTax: pre-tax price
 	FeeType *string `json:"FeeType,omitnil,omitempty" name:"FeeType"`
 
-	// User UIN for querying cost analysis dataNote: This field may return null, indicating that no valid values can be obtained.
+	// User UIN for querying cost analysis data
 	PayerUins *string `json:"PayerUins,omitnil,omitempty" name:"PayerUins"`
 
-	// User UIN for using resourcesNote: This field may return null, indicating that no valid values can be obtained.
+	// User UIN for using resources
 	OwnerUins *string `json:"OwnerUins,omitnil,omitempty" name:"OwnerUins"`
 
-	// Consumption type. Query consumption type. (Use consumption type code input parameter.)Note: This field may return null, indicating that no valid values can be obtained.
+	// Consumption type. Query consumption type (please use consumption type code input parameter).
 	ConsumptionTypes *string `json:"ConsumptionTypes,omitnil,omitempty" name:"ConsumptionTypes"`
 }
 
@@ -288,71 +1295,68 @@ type AnalyseDetail struct {
 	// Amount
 	Total *string `json:"Total,omitnil,omitempty" name:"Total"`
 
-	// Date detailed amountNote: This field may return null, indicating that no valid values can be obtained.
+	// Date Detail Amount
 	TimeDetail []*AnalyseTimeDetail `json:"TimeDetail,omitnil,omitempty" name:"TimeDetail"`
 }
 
 type AnalyseHeaderDetail struct {
-	// Header dateNote: This field may return null, indicating that no valid values can be obtained.
+	// Header date
 	HeadDetail []*AnalyseHeaderTimeDetail `json:"HeadDetail,omitnil,omitempty" name:"HeadDetail"`
 
-	// TimeNote: This field may return null, indicating that no valid values can be obtained.
+	// Time
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// TotalNote: This field may return null, indicating that no valid values can be obtained.
+	// total
 	Total *string `json:"Total,omitnil,omitempty" name:"Total"`
 }
 
 type AnalyseHeaderTimeDetail struct {
-	// DateNote: This field may return null, indicating that no valid values can be obtained.
+	// Date
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type AnalyseOwnerUinDetail struct {
-	// User UIN
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// User uin
 	OwnerUin *string `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
 }
 
 type AnalysePayModeDetail struct {
-	// Billing mode codeNote: This field may return null, indicating that no valid values can be obtained.
+	// Billing mode code
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Billing mode nameNote: This field may return null, indicating that no valid values can be obtained.
+	// Billing mode Name
 	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
 }
 
 type AnalyseProjectDetail struct {
 	// Project ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Default projectNote: This field may return null, indicating that no valid values can be obtained.
+	// default project
 	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
 }
 
 type AnalyseRegionDetail struct {
-	// Region ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Region ID.
 	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
-	// Region nameNote: This field may return null, indicating that no valid values can be obtained.
+	// Region name
 	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
 }
 
 type AnalyseTimeDetail struct {
-	// DateNote: This field may return null, indicating that no valid values can be obtained.
+	// Date
 	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
-	// AmountNote: This field may return null, indicating that no valid values can be obtained.
+	// Amount
 	Money *string `json:"Money,omitnil,omitempty" name:"Money"`
 }
 
 type AnalyseZoneDetail struct {
-	// Availability zone IDNote: This field may return null, indicating that no valid values can be obtained.
+	// AZ ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Availability zone nameNote: This field may return null, indicating that no valid values can be obtained.
+	// Available zone Name
 	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 }
 
@@ -362,6 +1366,47 @@ type ApplicableProducts struct {
 
 	// Valid values: `postPay`: pay-as-you-go; `prePay`: prepaid; `riPay`: reserved instance; empty or `*`: all. If `GoodsName` contains multiple product names and `PayMode` is `*`, it indicates that the voucher can be used in all billing modes for each of the products.
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+}
+
+type BillActionType struct {
+	// Transaction type code
+	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
+
+	// Transaction type: Detailed transaction type
+	ActionTypeName *string `json:"ActionTypeName,omitnil,omitempty" name:"ActionTypeName"`
+}
+
+type BillBusiness struct {
+	// Product code
+	// 
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+
+	// Product name: Various cloud products purchased by users
+	BusinessCodeName *string `json:"BusinessCodeName,omitnil,omitempty" name:"BusinessCodeName"`
+}
+
+type BillBusinessLink struct {
+	// Product code
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+
+	// Product name
+	BusinessCodeName *string `json:"BusinessCodeName,omitnil,omitempty" name:"BusinessCodeName"`
+
+	// Subproduct
+	Children []*BillProductLink `json:"Children,omitnil,omitempty" name:"Children"`
+}
+
+type BillComponent struct {
+	// Component type code
+	ComponentCode *string `json:"ComponentCode,omitnil,omitempty" name:"ComponentCode"`
+
+	// Component type: The major component category corresponding to the product or service purchased by the user
+	ComponentCodeName *string `json:"ComponentCodeName,omitnil,omitempty" name:"ComponentCodeName"`
+}
+
+type BillDays struct {
+	// Date: Settlement date
+	BillDay *string `json:"BillDay,omitnil,omitempty" name:"BillDay"`
 }
 
 type BillDetail struct {
@@ -392,7 +1437,7 @@ type BillDetail struct {
 	// Transaction type, which can be monthly subscription purchase, monthly subscription renewal, or pay-as-you-go deduction.
 	ActionTypeName *string `json:"ActionTypeName,omitnil,omitempty" name:"ActionTypeName"`
 
-	// Order ID: The order number for a monthly subscription purchase
+	// Order ID: The sub-order number corresponding to the monthly subscription mode. In the postpaid billing model, the bill amount does not exist as an order concept, and this parameter can be ignored.
 	OrderId *string `json:"OrderId,omitnil,omitempty" name:"OrderId"`
 
 	// Transaction ID: The bill number for a deducted payment
@@ -419,91 +1464,81 @@ type BillDetail struct {
 	// Operator account ID: The account or role ID of the operator who purchases or activates a resource
 	OperateUin *string `json:"OperateUin,omitnil,omitempty" name:"OperateUin"`
 
-	// Tag information. Note: This field may return null, indicating that no valid values can be obtained.
+	// Tag information.
 	Tags []*BillTagInfo `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Product code. Note: This field may return null, indicating that no valid values can be obtained.
+	// Product code
 	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
 
-	// Subproduct code. Note: This field may return null, indicating that no valid values can be obtained.
+	// Subproduct code
 	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
 
-	// Transaction type code. Note: This field may return null, indicating that no valid values can be obtained.
+	// Transaction type code
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-	// Region ID. Note: This field may return null, indicating that no valid values can be obtained.
+	// Region ID
 	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Project ID
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Price attribute: A set of attributes which will determine the price of a component, apart from unit price and usage duration.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Price attribute: Other attributes of the component that affect discount pricing besides unit price and duration
 	PriceInfo []*string `json:"PriceInfo,omitnil,omitempty" name:"PriceInfo"`
 
-	// Associated transaction document ID: The ID of the document associated with a transaction, such as a write-off order, the original order showing a deduction error during first settlement, a restructured order, or the original purchase order corresponding to a refund order.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Associated transaction document ID: Document ID associated with this transaction, such as a write-off order, the original order, a resettlement order, or the original purchase order number recorded in a refund order.
 	AssociatedOrder *BillDetailAssociatedOrder `json:"AssociatedOrder,omitnil,omitempty" name:"AssociatedOrder"`
 
-	// Calculation formula: The detailed calculation formula for a specific transaction type, such as refund or configuration change.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Calculation explanation: A detailed explanation to calculations of billing settlement for special transaction types, such as refund and configuration changes.
 	Formula *string `json:"Formula,omitnil,omitempty" name:"Formula"`
 
-	// Billing rules: Official website links for detailed billing rules of each product.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Billing Rules: The detailed billing rules for each product shown in the portal explanation link
 	FormulaUrl *string `json:"FormulaUrl,omitnil,omitempty" name:"FormulaUrl"`
 
-	// Billing dayNote: This field may return null, indicating that no valid values can be obtained.
+	// Billing day
 	BillDay *string `json:"BillDay,omitnil,omitempty" name:"BillDay"`
 
-	// Billing monthNote: This field may return null, indicating that no valid values can be obtained.
+	// Billing month
 	BillMonth *string `json:"BillMonth,omitnil,omitempty" name:"BillMonth"`
 
-	// Billing record IDNote: This field may return null, indicating that no valid values can be obtained.
+	// Billing record ID
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Domestic and international codesNote: This field may return null, indicating that no valid values can be obtained.
+	// Domestic and international codes
 	RegionType *string `json:"RegionType,omitnil,omitempty" name:"RegionType"`
 
-	// Domestic and International: The region type to which the resource belongs (domestic, international)Note: This field may return null, indicating that no valid values can be obtained.
+	// Domestic and international: Resource region type (domestic, international)
 	RegionTypeName *string `json:"RegionTypeName,omitnil,omitempty" name:"RegionTypeName"`
 
-	// Note attributes (instance configuration): Other note information, such as the reserved instance, the reserved instance type, the transaction type, and the region information on both ends of the CCN product.Note: This field may return null, indicating that no valid values can be obtained.
+	// Remark attribute (instance configuration): Additional remark information, such as reserved instance type and transaction type for reserved instances, regional information of both ends for CCN products.
 	ReserveDetail *string `json:"ReserveDetail,omitnil,omitempty" name:"ReserveDetail"`
 
-	// the discount object for the current consumption item, such as official website discount, user discount, and event discount.
+	// discount object
 	DiscountObject *string `json:"DiscountObject,omitnil,omitempty" name:"DiscountObject"`
 
-	// the discount type for the current consumption item, such as discount and contract price.
+	// Offer type
 	DiscountType *string `json:"DiscountType,omitnil,omitempty" name:"DiscountType"`
 
-	// supplementary description of the discount type, such as 0.2.
+	// discount content
 	DiscountContent *string `json:"DiscountContent,omitnil,omitempty" name:"DiscountContent"`
 }
 
 type BillDetailAssociatedOrder struct {
-	// Purchase order.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Newly purchased order
 	PrepayPurchase *string `json:"PrepayPurchase,omitnil,omitempty" name:"PrepayPurchase"`
 
-	// Renewal order.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Renewal order
 	PrepayRenew *string `json:"PrepayRenew,omitnil,omitempty" name:"PrepayRenew"`
 
-	// Upgrade order.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Configuration upgrade order
 	PrepayModifyUp *string `json:"PrepayModifyUp,omitnil,omitempty" name:"PrepayModifyUp"`
 
-	// Write-off order.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Write-off order
 	ReverseOrder *string `json:"ReverseOrder,omitnil,omitempty" name:"ReverseOrder"`
 
-	// The order after discount.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Order after discount adjustment
 	NewOrder *string `json:"NewOrder,omitnil,omitempty" name:"NewOrder"`
 
-	// The original order before discount.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Order before discount adjustment
 	Original *string `json:"Original,omitnil,omitempty" name:"Original"`
 }
 
@@ -531,10 +1566,10 @@ type BillDetailComponent struct {
 	// Component usage unit: The unit of measurement for component usage
 	UsedAmountUnit *string `json:"UsedAmountUnit,omitnil,omitempty" name:"UsedAmountUnit"`
 
-	// Raw usage/duration: The raw usage/duration of a component before deduction. Note: This field may return null, indicating that no valid values can be obtained.
+	// Original usage/duration: The original usage of the component before deduction by resource packages.
 	RealTotalMeasure *string `json:"RealTotalMeasure,omitnil,omitempty" name:"RealTotalMeasure"`
 
-	// Deducted usage/duration (including packages): The usage/duration deducted with a package. Note: This field may return null, indicating that no valid values can be obtained.
+	// Deduction of usage/duration (including resource packages): The amount of usage/duration deducted by resource packages
 	DeductedMeasure *string `json:"DeductedMeasure,omitnil,omitempty" name:"DeductedMeasure"`
 
 	// Usage duration: The resource usage duration
@@ -564,28 +1599,28 @@ type BillDetailComponent struct {
 	// Free credit: The amount paid with the user's free credit
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
 
-	// Commission credit: The amount paid with the user's commission credit. Note: This field may return null, indicating that no valid values can be obtained.
+	// Royalty account expenditure: The amount paid through the royalty account
 	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
 
-	// Component type code. Note: This field may return null, indicating that no valid values can be obtained.
+	// Component type code
 	ItemCode *string `json:"ItemCode,omitnil,omitempty" name:"ItemCode"`
 
-	// Component name code. Note: This field may return null, indicating that no valid values can be obtained.
+	// Component name code
 	ComponentCode *string `json:"ComponentCode,omitnil,omitempty" name:"ComponentCode"`
 
-	// Component contracted price: The contracted unit price of a component, which is "List price x Discount". Note: This field may return null, indicating that no valid values can be obtained.
+	// Component unit price: Discounted unit price of the component. Component unit price = list price * discount.
 	ContractPrice *string `json:"ContractPrice,omitnil,omitempty" name:"ContractPrice"`
 
-	// Instance type: The instance type of a product or service purchased, which can be resource package, RI, SP, or spot instance. Other instance types are not displayed by default. Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance type: The type of an instance corresponding to the product service purchased, including resource packages, RI, SP, and spot instances. Normal instance display is not displayed by default.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// RI deduction (duration): The usage duration deducted by RI. Note: This field may return null, indicating that no valid values can be obtained.
+	// RI deduction duration: The duration of use deducted by reserved instances for this product or service.
 	RiTimeSpan *string `json:"RiTimeSpan,omitnil,omitempty" name:"RiTimeSpan"`
 
-	// RI deduction (cost): The amount deducted from the original cost by RI. Note: This field may return null, indicating that no valid values can be obtained.
+	// Reserved Instance Deduction Component Original Price: The original price of a component deducted by reserved instances for this product or service
 	OriginalCostWithRI *string `json:"OriginalCostWithRI,omitnil,omitempty" name:"OriginalCostWithRI"`
 
-	// Savings plan deduction rate: The discount multiplier that applies to the component based on the remaining commitment of the savings plan. Note: This field may return null, indicating that no valid values can be obtained.
+	// Savings plan deduction rate: The discount rate for this component within the available balance limit of the savings plan
 	SPDeductionRate *string `json:"SPDeductionRate,omitnil,omitempty" name:"SPDeductionRate"`
 
 	// Cost deduction by SP. This parameter has been deprecated. Note: This field may return null, indicating that no valid values can be obtained.
@@ -593,33 +1628,30 @@ type BillDetailComponent struct {
 	// Deprecated: SPDeduction is deprecated.
 	SPDeduction *string `json:"SPDeduction,omitnil,omitempty" name:"SPDeduction"`
 
-	// SP deduction (cost): SP deduction (cost) = Cost deduction by SP / SP deduction rate. Note: This field may return null, indicating that no valid values can be obtained.
+	// Original Price of Savings Plan Deduction Component: Savings Plan Deduction from Original Price = Deduction Amount of Savings Plan Package / Savings Plan Deduction Rate
 	OriginalCostWithSP *string `json:"OriginalCostWithSP,omitnil,omitempty" name:"OriginalCostWithSP"`
 
-	// Blended discount multiplier: The final discount multiplier that is applied after combining multiple discount types, which is "Total amount after discount / Original cost". Note: This field may return null, indicating that no valid values can be obtained.
+	// Mixed discount rate: The final discount rate after integrating various discount deductions. Mixed Discount Rate = Discounted total price/Component original price.
 	BlendedDiscount *string `json:"BlendedDiscount,omitnil,omitempty" name:"BlendedDiscount"`
 
-	// Configuration description: The specification configuration of an instance.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Configuration description: Information on specification of resource configuration
 	ComponentConfig []*BillDetailComponentConfig `json:"ComponentConfig,omitnil,omitempty" name:"ComponentConfig"`
 
-	// The tax rate.
+	// tax rate
 	TaxRate *string `json:"TaxRate,omitnil,omitempty" name:"TaxRate"`
 
-	// The tax amount.
+	// Tax.
 	TaxAmount *string `json:"TaxAmount,omitnil,omitempty" name:"TaxAmount"`
 
-	// The currency used for the settlement of a component.
+	// Currency.
 	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
 }
 
 type BillDetailComponentConfig struct {
 	// Configuration description name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Configuration description value
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
@@ -693,8 +1725,7 @@ type BillDistributionResourceSummary struct {
 	// Free credit payment: The amount paid with the user's free credit.
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
 
-	// Commission credit payment: The amount paid with the user's commission credit.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Royalty account expenditure: The amount paid through the royalty account
 	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
 
 	// Extended field 3: The extended attribute information of a product, which is displayed on the resource bill only.
@@ -707,7 +1738,6 @@ type BillDistributionResourceSummary struct {
 	ExtendField5 *string `json:"ExtendField5,omitnil,omitempty" name:"ExtendField5"`
 
 	// Tag information.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Tags []*BillTagInfo `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Owner account ID: The account ID of the actual resource user.
@@ -739,8 +1769,77 @@ type BillDistributionResourceSummary struct {
 	// SP deduction (cost): The amount of cost deducted by a savings plan based on the component's original cost. SP deduction (cost) = Cost deduction by SP / SP deduction rate	
 	OriginalCostWithSP *string `json:"OriginalCostWithSP,omitnil,omitempty" name:"OriginalCostWithSP"`
 
-	// Billing monthNote: This field may return null, indicating that no valid values can be obtained.
+	// Billing month
 	BillMonth *string `json:"BillMonth,omitnil,omitempty" name:"BillMonth"`
+}
+
+type BillInstanceType struct {
+	// Instance type code
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Instance type: The type of an instance corresponding to the product service purchased, including resource packages, RI, SP, and spot instances. It is displayed as "-" by default for regular instances.
+	InstanceTypeName *string `json:"InstanceTypeName,omitnil,omitempty" name:"InstanceTypeName"`
+}
+
+type BillItem struct {
+	// Component name code
+	ItemCode *string `json:"ItemCode,omitnil,omitempty" name:"ItemCode"`
+
+	// Component name: The specific component of a product or service purchased by the user
+	ItemCodeName *string `json:"ItemCodeName,omitnil,omitempty" name:"ItemCodeName"`
+}
+
+type BillOperateUin struct {
+	// Operator account ID (the resource account ID or role ID opened by prepaid resource ordering or postpaid operation)
+	OperateUin *string `json:"OperateUin,omitnil,omitempty" name:"OperateUin"`
+}
+
+type BillOwnerUin struct {
+	// User UIN: Account ID of the actual resource user
+	OwnerUin *string `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
+}
+
+type BillPayMode struct {
+	// Billing mode code
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Billing mode: Resource billing mode, which can be monthly subscription or pay-as-you-go.
+	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
+}
+
+type BillProduct struct {
+	// Subproduct code
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// Subproduct name: Product subdivision type purchased by the user
+	ProductCodeName *string `json:"ProductCodeName,omitnil,omitempty" name:"ProductCodeName"`
+}
+
+type BillProductLink struct {
+	// Subproduct code
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// Subproduct name
+	ProductCodeName *string `json:"ProductCodeName,omitnil,omitempty" name:"ProductCodeName"`
+
+	// Component name
+	Children []*BillItem `json:"Children,omitnil,omitempty" name:"Children"`
+}
+
+type BillProject struct {
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Project name: The Project to which a resource belongs, which is independently allocated by the user for the resource in the console. If a resource has not been allocated to an Project, it will be a default Project.
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
+}
+
+type BillRegion struct {
+	// Region ID
+	RegionId *int64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+
+	// Region name: The region where the resource is located
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
 }
 
 type BillResourceSummary struct {
@@ -813,7 +1912,7 @@ type BillResourceSummary struct {
 	// Free credit: The amount paid with the user's free credit
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
 
-	// Commission credit: The amount paid with the user's commission credit. Note: This field may return null, indicating that no valid values can be obtained.
+	// Royalty account expenditure: The amount paid through the royalty account
 	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
 
 	// Extended field 3: Extended attribute information of a product, which is displayed on the resource bill only.
@@ -825,7 +1924,7 @@ type BillResourceSummary struct {
 	// Extended field 5: Extended attribute information of a product, which is displayed on the resource bill only.
 	ExtendField5 *string `json:"ExtendField5,omitnil,omitempty" name:"ExtendField5"`
 
-	// Tag information. Note: This field may return null, indicating that no valid values can be obtained.
+	// Tag information.
 	Tags []*BillTagInfo `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Payer account ID: The account ID of the payer, which is the unique identifier of a Tencent Cloud user.
@@ -860,8 +1959,16 @@ type BillResourceSummary struct {
 	// SP deduction (cost): SP deduction (cost) = Cost deduction by SP / SP deduction rate	
 	OriginalCostWithSP *string `json:"OriginalCostWithSP,omitnil,omitempty" name:"OriginalCostWithSP"`
 
-	// Billing monthNote: This field may return null, indicating that no valid values can be obtained.
+	// Billing month
 	BillMonth *string `json:"BillMonth,omitnil,omitempty" name:"BillMonth"`
+}
+
+type BillTag struct {
+	// Tag key
+	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
+
+	// Tag value
+	TagValue *string `json:"TagValue,omitnil,omitempty" name:"TagValue"`
 }
 
 type BillTagInfo struct {
@@ -872,6 +1979,14 @@ type BillTagInfo struct {
 	TagValue *string `json:"TagValue,omitnil,omitempty" name:"TagValue"`
 }
 
+type BillZoneId struct {
+	// AZ ID
+	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Availability zone: The availability zone where the resource is located.
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
+}
+
 type BusinessSummaryInfo struct {
 	// Product code
 	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
@@ -879,8 +1994,7 @@ type BusinessSummaryInfo struct {
 	// Product name: The name of a Tencent Cloud product purchased by the user, such as CVM.
 	BusinessCodeName *string `json:"BusinessCodeName,omitnil,omitempty" name:"BusinessCodeName"`
 
-	// Original cost in USD. This parameter became valid when Bill 3.0 took effect in May 2021. Before that, `-` was returned for this parameter. If a customer has applied for a contract price different from the prices listed on the official website, `-` will also be returned for this parameter. 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Original price in CNY. The TotalCost field comes into effect after bill 3.0 (May 2021) and returns "-" before bill 3.0. In the current situation of contract price, the TotalCost field returns "-" if a price difference exists with the official website price.
 	TotalCost *string `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
 
 	// Total amount after discount
@@ -895,12 +2009,12 @@ type BusinessSummaryInfo struct {
 	// Voucher payment: The voucher deduction amount
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
 
-	// Commission credit: The amount paid with the user’s commission credit. Note: This field may return null, indicating that no valid values can be obtained.
+	// Royalty account expenditure: The amount paid through the royalty account
 	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
 }
 
 type BusinessSummaryOverviewItem struct {
-	// Product code. Note: This field may return null, indicating that no valid values can be obtained.
+	// Product code
 	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
 
 	// Product name: The name of a Tencent Cloud product purchased by the user, such as CVM.
@@ -1056,21 +2170,24 @@ type ConsumptionBusinessSummaryDataItem struct {
 	Trend *ConsumptionSummaryTrend `json:"Trend,omitnil,omitempty" name:"Trend"`
 
 	// Cash
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	CashPayAmount *string `json:"CashPayAmount,omitnil,omitempty" name:"CashPayAmount"`
 
 	// Bonus
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
 
-	// VoucherNote: This field may return null, indicating that no valid values can be obtained.
+	// Voucher
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
 
-	// Share revenueNote: This field may return null, indicating that no valid values can be obtained.
+	// Royalty amount
 	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
 
+	// Cash payment (pre-tax)
+	AmountBeforeTax *string `json:"AmountBeforeTax,omitnil,omitempty" name:"AmountBeforeTax"`
+
+	// Tax
+	Tax *string `json:"Tax,omitnil,omitempty" name:"Tax"`
+
 	// Region name (only shown in regional summary)
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
 }
 
@@ -1091,18 +2208,22 @@ type ConsumptionProjectSummaryDataItem struct {
 	Business []*ConsumptionBusinessSummaryDataItem `json:"Business,omitnil,omitempty" name:"Business"`
 
 	// Cash
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	CashPayAmount *string `json:"CashPayAmount,omitnil,omitempty" name:"CashPayAmount"`
 
 	// Bonus
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
 
-	// VoucherNote: This field may return null, indicating that no valid values can be obtained.
+	// Voucher
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
 
-	// Share revenueNote: This field may return null, indicating that no valid values can be obtained.
+	// Royalty amount
 	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
+
+	// Tax
+	Tax *string `json:"Tax,omitnil,omitempty" name:"Tax"`
+
+	// Cash payment (pre-tax)
+	AmountBeforeTax *string `json:"AmountBeforeTax,omitnil,omitempty" name:"AmountBeforeTax"`
 }
 
 type ConsumptionRegionSummaryDataItem struct {
@@ -1122,18 +2243,22 @@ type ConsumptionRegionSummaryDataItem struct {
 	Business []*ConsumptionBusinessSummaryDataItem `json:"Business,omitnil,omitempty" name:"Business"`
 
 	// Cash
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	CashPayAmount *string `json:"CashPayAmount,omitnil,omitempty" name:"CashPayAmount"`
 
-	// VoucherNote: This field may return null, indicating that no valid values can be obtained.
+	// Voucher
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
 
 	// Bonus
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
 
-	// Share revenueNote: This field may return null, indicating that no valid values can be obtained.
+	// Royalty amount
 	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
+
+	// Tax
+	Tax *string `json:"Tax,omitnil,omitempty" name:"Tax"`
+
+	// Cash payment (pre-tax)
+	AmountBeforeTax *string `json:"AmountBeforeTax,omitnil,omitempty" name:"AmountBeforeTax"`
 }
 
 type ConsumptionResourceSummaryConditionValue struct {
@@ -1190,87 +2315,94 @@ type ConsumptionResourceSummaryDataItem struct {
 	// Consumption type
 	ConsumptionTypeName *string `json:"ConsumptionTypeName,omitnil,omitempty" name:"ConsumptionTypeName"`
 
-	// Pre-discount priceNote: This field may return null, indicating that no valid values can be obtained.
+	// Original price
 	RealCost *string `json:"RealCost,omitnil,omitempty" name:"RealCost"`
 
-	// Start time of feesNote: This field may return null, indicating that no valid values can be obtained.
+	// Fee start time
 	FeeBeginTime *string `json:"FeeBeginTime,omitnil,omitempty" name:"FeeBeginTime"`
 
-	// End time of feesNote: This field may return null, indicating that no valid values can be obtained.
+	// End time of fees
 	FeeEndTime *string `json:"FeeEndTime,omitnil,omitempty" name:"FeeEndTime"`
 
 	// Days
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	DayDiff *string `json:"DayDiff,omitnil,omitempty" name:"DayDiff"`
 
-	// Daily consumptionNote: This field may return null, indicating that no valid values can be obtained.
+	// Daily consumption
 	DailyTotalCost *string `json:"DailyTotalCost,omitnil,omitempty" name:"DailyTotalCost"`
 
-	// Order numberNote: This field may return null, indicating that no valid values can be obtained.
+	// Order ID
 	OrderId *string `json:"OrderId,omitnil,omitempty" name:"OrderId"`
 
-	// VoucherNote: This field may return null, indicating that no valid values can be obtained.
+	// Voucher
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
 
 	// Bonus
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
 
-	// Share revenueNote: This field may return null, indicating that no valid values can be obtained.
+	// Royalty amount
 	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
 
-	// Payer UIN: the account ID of the payer, which is the unique identifier of a Tencent Cloud userNote: This field may return null, indicating that no valid values can be obtained.
+	// Tax
+	Tax *string `json:"Tax,omitnil,omitempty" name:"Tax"`
+
+	// tax rate
+	TaxRate *string `json:"TaxRate,omitnil,omitempty" name:"TaxRate"`
+
+	// Cash payment (pre-tax)
+	AmountBeforeTax *string `json:"AmountBeforeTax,omitnil,omitempty" name:"AmountBeforeTax"`
+
+	// Payer UIN: Account ID of the payer, which is the unique account identifier for the user in Tencent Cloud.
 	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
 
-	// User UIN: the account ID of the actual resource userNote: This field may return null, indicating that no valid values can be obtained.
+	// User UIN: Account ID of the actual resource user
 	OwnerUin *string `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
 
-	// Operator UIN: the account ID or role ID of the operator who places orders for prepaid resources or activates postpaid resourcesNote: This field may return null, indicating that no valid values can be obtained.
+	// Operator UIN: Operator account ID (ID of the operator who places orders for prepaid resources or activates postpaid resource account, or role ID).
 	OperateUin *string `json:"OperateUin,omitnil,omitempty" name:"OperateUin"`
 
-	// Subproduct codeNote: This field may return null, indicating that no valid values can be obtained.
+	// Subproduct code
 	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
 
-	// Subproduct name: the subcategory of a product purchased by the user, such as CVM – Standard S1Note: This field may return null, indicating that no valid values can be obtained.
+	// Subproduct name: Product subdivision type purchased by the user, such as Cloud Virtual Machine (CVM)-Standard Type S1
 	ProductCodeName *string `json:"ProductCodeName,omitnil,omitempty" name:"ProductCodeName"`
 
-	// Region typeNote: This field may return null, indicating that no valid values can be obtained.
+	// Region type
 	RegionType *string `json:"RegionType,omitnil,omitempty" name:"RegionType"`
 
-	// Region type nameNote: This field may return null, indicating that no valid values can be obtained.
+	// Region type name.
 	RegionTypeName *string `json:"RegionTypeName,omitnil,omitempty" name:"RegionTypeName"`
 
-	// Extended field 1Note: This field may return null, indicating that no valid values can be obtained.
+	// Extension Field 1
 	Extend1 *string `json:"Extend1,omitnil,omitempty" name:"Extend1"`
 
-	// Extended field 2Note: This field may return null, indicating that no valid values can be obtained.
+	// Extension Field 2
 	Extend2 *string `json:"Extend2,omitnil,omitempty" name:"Extend2"`
 
-	// Extended field 3Note: This field may return null, indicating that no valid values can be obtained.
+	// Extension Field 3
 	Extend3 *string `json:"Extend3,omitnil,omitempty" name:"Extend3"`
 
-	// Extended field 4Note: This field may return null, indicating that no valid values can be obtained.
+	// Extension Field 4
 	Extend4 *string `json:"Extend4,omitnil,omitempty" name:"Extend4"`
 
-	// Extended field 5Note: This field may return null, indicating that no valid values can be obtained.
+	// Extension Field 5
 	Extend5 *string `json:"Extend5,omitnil,omitempty" name:"Extend5"`
 
-	// Instance typeNote: This field may return null, indicating that no valid values can be obtained.
+	// Instance type
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// Instance type nameNote: This field may return null, indicating that no valid values can be obtained.
+	// Instance Type Name
 	InstanceTypeName *string `json:"InstanceTypeName,omitnil,omitempty" name:"InstanceTypeName"`
 
-	// Deduction time: the time at which a payment is deductedNote: This field may return null, indicating that no valid values can be obtained.
+	// Deduction time: Deduction time
 	PayTime *string `json:"PayTime,omitnil,omitempty" name:"PayTime"`
 
-	// Availability zone: availability zone of a resource, e.g. Guangzhou Zone 3Note: This field may return null, indicating that no valid values can be obtained.
+	// Availability zone: The availability zone where the resource is located, such as Guangzhou Zone 3.
 	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
-	// Configuration descriptionNote: This field may return null, indicating that no valid values can be obtained.
+	// Describing Configurations
 	ComponentConfig *string `json:"ComponentConfig,omitnil,omitempty" name:"ComponentConfig"`
 
-	// Tag information.Note: This field may return null, indicating that no valid values can be obtained.
+	// Tag information.
 	Tags *string `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
@@ -1283,7 +2415,7 @@ type ConsumptionSummaryTrend struct {
 	// Trend type, upward for rising, downward for falling, none for no change
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Trend value. The value is null when Type is none.Note: This field may return null, indicating that no valid values can be obtained.
+	// Trend value. The value of this field is null when Type is none.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
@@ -1346,6 +2478,12 @@ type CostComponentSet struct {
 
 	// Bonus payment amount
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
+
+	// Tax
+	Tax *string `json:"Tax,omitnil,omitempty" name:"Tax"`
+
+	// tax rate
+	TaxRate *string `json:"TaxRate,omitnil,omitempty" name:"TaxRate"`
 }
 
 type CostDetail struct {
@@ -1376,7 +2514,7 @@ type CostDetail struct {
 	// Resource name
 	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
 
-	// Type nameNote: This field may return null, indicating that no valid values can be obtained.
+	// Type name
 	ActionTypeName *string `json:"ActionTypeName,omitnil,omitempty" name:"ActionTypeName"`
 
 	// Order ID
@@ -1396,11 +2534,14 @@ type CostDetail struct {
 
 	// Subproduct name code
 	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// Tag information.	
+	Tags []*BillTagInfo `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 // Predefined struct for user
 type CreateAllocationRuleRequestParams struct {
-	// List of sharing rules.
+	// List of sharing rules
 	RuleList *AllocationRulesSummary `json:"RuleList,omitnil,omitempty" name:"RuleList"`
 
 	// Month, the current month by default if not provided.
@@ -1410,7 +2551,7 @@ type CreateAllocationRuleRequestParams struct {
 type CreateAllocationRuleRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of sharing rules.
+	// List of sharing rules
 	RuleList *AllocationRulesSummary `json:"RuleList,omitnil,omitempty" name:"RuleList"`
 
 	// Month, the current month by default if not provided.
@@ -1898,6 +3039,9 @@ type Deal struct {
 	// The resource ID corresponding to the order. If the query parameter `Limit` exceeds 200, null will be returned.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ResourceId []*string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// Availability zone Id corresponding to the order
+	ZoneCode *string `json:"ZoneCode,omitnil,omitempty" name:"ZoneCode"`
 }
 
 // Predefined struct for user
@@ -2139,12 +3283,15 @@ func (r *DeleteGatherRuleResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAccountBalanceRequestParams struct {
-
+	// Query the temporary limit
+	TempCredit *bool `json:"TempCredit,omitnil,omitempty" name:"TempCredit"`
 }
 
 type DescribeAccountBalanceRequest struct {
 	*tchttp.BaseRequest
 	
+	// Query the temporary limit
+	TempCredit *bool `json:"TempCredit,omitnil,omitempty" name:"TempCredit"`
 }
 
 func (r *DescribeAccountBalanceRequest) ToJsonString() string {
@@ -2159,7 +3306,7 @@ func (r *DescribeAccountBalanceRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	
+	delete(f, "TempCredit")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccountBalanceRequest has unknown keys!", "")
 	}
@@ -2171,7 +3318,7 @@ type DescribeAccountBalanceResponseParams struct {
 	// Available account balance in cents, which takes the same calculation rules as `RealBalance`, `CreditBalance`, and `RealCreditBalance`.
 	Balance *int64 `json:"Balance,omitnil,omitempty" name:"Balance"`
 
-	// The UIN to query.
+	// The user Uin for the query
 	Uin *uint64 `json:"Uin,omitnil,omitempty" name:"Uin"`
 
 	// Available account balance in cents, which takes the same calculation rules as `Balance`, `CreditBalance`, and `RealCreditBalance`.
@@ -2193,9 +3340,13 @@ type DescribeAccountBalanceResponseParams struct {
 	OweAmount *float64 `json:"OweAmount,omitnil,omitempty" name:"OweAmount"`
 
 	// Whether overdue payments are allowed. Currently, this field is not applied.
+	//
+	// Deprecated: IsAllowArrears is deprecated.
 	IsAllowArrears *bool `json:"IsAllowArrears,omitnil,omitempty" name:"IsAllowArrears"`
 
 	// Whether you have a credit limit. Currently, this field is not applied.
+	//
+	// Deprecated: IsCreditLimited is deprecated.
 	IsCreditLimited *bool `json:"IsCreditLimited,omitnil,omitempty" name:"IsCreditLimited"`
 
 	// Credit limit in cents. Credit limit－available credit balance = consumption amount
@@ -2206,6 +3357,12 @@ type DescribeAccountBalanceResponseParams struct {
 
 	// Available account balance in cents, which takes the same calculation rules as `Balance`, `RealBalance`, and `CreditBalance`.
 	RealCreditBalance *float64 `json:"RealCreditBalance,omitnil,omitempty" name:"RealCreditBalance"`
+
+	// Temporary limit, unit cent
+	TempCredit *float64 `json:"TempCredit,omitnil,omitempty" name:"TempCredit"`
+
+	// Temporary limit details
+	TempAmountInfoList []*UinTempAmountModel `json:"TempAmountInfoList,omitnil,omitempty" name:"TempAmountInfoList"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -2224,6 +3381,742 @@ func (r *DescribeAccountBalanceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAccountBalanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocateConditionsRequestParams struct {
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+type DescribeAllocateConditionsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+func (r *DescribeAllocateConditionsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocateConditionsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Month")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAllocateConditionsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocateConditionsResponseParams struct {
+	// Product filter list
+	Business []*BillBusinessLink `json:"Business,omitnil,omitempty" name:"Business"`
+
+	// Subproduct filter list
+	Product []*BillProduct `json:"Product,omitnil,omitempty" name:"Product"`
+
+	// Component name filter list
+	Item []*BillItem `json:"Item,omitnil,omitempty" name:"Item"`
+
+	// Region filter list
+	Region []*BillRegion `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Instance type filter list
+	InstanceType []*BillInstanceType `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Billing mode filter list
+	PayMode []*BillPayMode `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Project filter list
+	Project []*BillProject `json:"Project,omitnil,omitempty" name:"Project"`
+
+	// Tag filter list
+	Tag []*BillTag `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// User UIN filter list
+	OwnerUin []*BillOwnerUin `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
+
+	// Operator UIN filter list
+	OperateUin []*BillOperateUin `json:"OperateUin,omitnil,omitempty" name:"OperateUin"`
+
+	// Transaction type filter list
+	ActionType []*BillActionType `json:"ActionType,omitnil,omitempty" name:"ActionType"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAllocateConditionsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAllocateConditionsResponseParams `json:"Response"`
+}
+
+func (r *DescribeAllocateConditionsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocateConditionsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationBillConditionsRequestParams struct {
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Unique identifier of a billing unit, used for filtering
+	TreeNodeUniqKeys []*string `json:"TreeNodeUniqKeys,omitnil,omitempty" name:"TreeNodeUniqKeys"`
+
+	// Date
+	BillDates []*string `json:"BillDates,omitnil,omitempty" name:"BillDates"`
+
+	// Product code
+	BusinessCodes []*string `json:"BusinessCodes,omitnil,omitempty" name:"BusinessCodes"`
+
+	// User UIN
+	OwnerUins []*string `json:"OwnerUins,omitnil,omitempty" name:"OwnerUins"`
+
+	// Operator UIN
+	OperateUins []*string `json:"OperateUins,omitnil,omitempty" name:"OperateUins"`
+
+	// Billing mode code
+	PayModes []*string `json:"PayModes,omitnil,omitempty" name:"PayModes"`
+
+	// Transaction type code
+	ActionTypes []*string `json:"ActionTypes,omitnil,omitempty" name:"ActionTypes"`
+
+	// Subproduct code
+	ProductCodes []*string `json:"ProductCodes,omitnil,omitempty" name:"ProductCodes"`
+
+	// Region ID
+	RegionIds []*string `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
+
+	// AZ ID
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+
+	// Instance type code
+	InstanceTypes []*string `json:"InstanceTypes,omitnil,omitempty" name:"InstanceTypes"`
+
+	// Tag
+	Tag []*string `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Component type code
+	ComponentCodes []*string `json:"ComponentCodes,omitnil,omitempty" name:"ComponentCodes"`
+
+	// Component name code
+	ItemCodes []*string `json:"ItemCodes,omitnil,omitempty" name:"ItemCodes"`
+
+	// Fuzzy search criteria
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
+
+	// Project ID
+	ProjectIds []*uint64 `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
+
+	// Cost collection type
+	AllocationType []*int64 `json:"AllocationType,omitnil,omitempty" name:"AllocationType"`
+}
+
+type DescribeAllocationBillConditionsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Unique identifier of a billing unit, used for filtering
+	TreeNodeUniqKeys []*string `json:"TreeNodeUniqKeys,omitnil,omitempty" name:"TreeNodeUniqKeys"`
+
+	// Date
+	BillDates []*string `json:"BillDates,omitnil,omitempty" name:"BillDates"`
+
+	// Product code
+	BusinessCodes []*string `json:"BusinessCodes,omitnil,omitempty" name:"BusinessCodes"`
+
+	// User UIN
+	OwnerUins []*string `json:"OwnerUins,omitnil,omitempty" name:"OwnerUins"`
+
+	// Operator UIN
+	OperateUins []*string `json:"OperateUins,omitnil,omitempty" name:"OperateUins"`
+
+	// Billing mode code
+	PayModes []*string `json:"PayModes,omitnil,omitempty" name:"PayModes"`
+
+	// Transaction type code
+	ActionTypes []*string `json:"ActionTypes,omitnil,omitempty" name:"ActionTypes"`
+
+	// Subproduct code
+	ProductCodes []*string `json:"ProductCodes,omitnil,omitempty" name:"ProductCodes"`
+
+	// Region ID
+	RegionIds []*string `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
+
+	// AZ ID
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+
+	// Instance type code
+	InstanceTypes []*string `json:"InstanceTypes,omitnil,omitempty" name:"InstanceTypes"`
+
+	// Tag
+	Tag []*string `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Component type code
+	ComponentCodes []*string `json:"ComponentCodes,omitnil,omitempty" name:"ComponentCodes"`
+
+	// Component name code
+	ItemCodes []*string `json:"ItemCodes,omitnil,omitempty" name:"ItemCodes"`
+
+	// Fuzzy search criteria
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
+
+	// Project ID
+	ProjectIds []*uint64 `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
+
+	// Cost collection type
+	AllocationType []*int64 `json:"AllocationType,omitnil,omitempty" name:"AllocationType"`
+}
+
+func (r *DescribeAllocationBillConditionsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationBillConditionsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Month")
+	delete(f, "TreeNodeUniqKeys")
+	delete(f, "BillDates")
+	delete(f, "BusinessCodes")
+	delete(f, "OwnerUins")
+	delete(f, "OperateUins")
+	delete(f, "PayModes")
+	delete(f, "ActionTypes")
+	delete(f, "ProductCodes")
+	delete(f, "RegionIds")
+	delete(f, "ZoneIds")
+	delete(f, "InstanceTypes")
+	delete(f, "Tag")
+	delete(f, "ComponentCodes")
+	delete(f, "ItemCodes")
+	delete(f, "SearchKey")
+	delete(f, "ProjectIds")
+	delete(f, "AllocationType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAllocationBillConditionsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationBillConditionsResponseParams struct {
+	// Product filter list
+	Business []*BillBusiness `json:"Business,omitnil,omitempty" name:"Business"`
+
+	// Subproduct filter list
+	Product []*BillProduct `json:"Product,omitnil,omitempty" name:"Product"`
+
+	// Component name filter list
+	Item []*BillItem `json:"Item,omitnil,omitempty" name:"Item"`
+
+	// Region filter list
+	Region []*BillRegion `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Instance type filter list
+	InstanceType []*BillInstanceType `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Billing mode filter list
+	PayMode []*BillPayMode `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Project filter list
+	Project []*BillProject `json:"Project,omitnil,omitempty" name:"Project"`
+
+	// Tag filter list
+	Tag []*BillTag `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// User UIN filter list
+	OwnerUin []*BillOwnerUin `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
+
+	// Operator UIN filter list
+	OperateUin []*BillOperateUin `json:"OperateUin,omitnil,omitempty" name:"OperateUin"`
+
+	// Date filter list
+	BillDay []*BillDays `json:"BillDay,omitnil,omitempty" name:"BillDay"`
+
+	// Transaction type filter list
+	ActionType []*BillActionType `json:"ActionType,omitnil,omitempty" name:"ActionType"`
+
+	// Component type filter list
+	Component []*BillComponent `json:"Component,omitnil,omitempty" name:"Component"`
+
+	// Availability zone filter list
+	Zone []*BillZoneId `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// Cost allocation unit filter list
+	AllocationTreeNode []*AllocationTreeNode `json:"AllocationTreeNode,omitnil,omitempty" name:"AllocationTreeNode"`
+
+	// Cost allocation tag key
+	TagKey []*string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAllocationBillConditionsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAllocationBillConditionsResponseParams `json:"Response"`
+}
+
+func (r *DescribeAllocationBillConditionsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationBillConditionsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationBillDetailRequestParams struct {
+	// Quantity, with the maximum value of 1,000
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset. If Offset is 0, it indicates the first page. If Limit is 100, then Offset is 100, and it indicates the second page. If Offset is 200, it indicates the third page, and so on.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Unique identifier of a billing unit, used for filtering
+	TreeNodeUniqKeys []*string `json:"TreeNodeUniqKeys,omitnil,omitempty" name:"TreeNodeUniqKeys"`
+
+	// Sorting field, with the enumerated values as follows:
+	// RiTimeSpan - Deduction duration of a reserved instance
+	// ExtendPayAmount1 - Original price for the deduction duration of a reserved instance
+	// RealCost - Discounted total
+	// CashPayAmount - Cash amount
+	// VoucherPayAmount - Amount of promo voucher
+	// IncentivePayAmount - Amount of free credit
+	// TransferPayAmount - Royalty amount
+	// Cost - Original price of a component
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+
+	// Sorting type, with the enumerated values as follows:
+	// asc - Ascending
+	// desc - Descending
+	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+	// Product code, used for filtering
+	BusinessCodes []*string `json:"BusinessCodes,omitnil,omitempty" name:"BusinessCodes"`
+
+	// User UIN, used for filtering
+	OwnerUins []*string `json:"OwnerUins,omitnil,omitempty" name:"OwnerUins"`
+
+	// Operator UIN, used for filtering
+	OperateUins []*string `json:"OperateUins,omitnil,omitempty" name:"OperateUins"`
+
+	// Billing mode code, used for filtering
+	PayModes []*string `json:"PayModes,omitnil,omitempty" name:"PayModes"`
+
+	// Transaction type code, used for filtering
+	ActionTypes []*string `json:"ActionTypes,omitnil,omitempty" name:"ActionTypes"`
+
+	// Subproduct code, used for filtering
+	ProductCodes []*string `json:"ProductCodes,omitnil,omitempty" name:"ProductCodes"`
+
+	// Region ID, used for filtering
+	RegionIds []*string `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
+
+	// AZ ID, used for filtering
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+
+	// Instance type code, used for filtering
+	InstanceTypes []*string `json:"InstanceTypes,omitnil,omitempty" name:"InstanceTypes"`
+
+	// Tag, used for filtering
+	Tag []*string `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Component type code, used for filtering
+	ComponentCodes []*string `json:"ComponentCodes,omitnil,omitempty" name:"ComponentCodes"`
+
+	// Component name code, used for filtering
+	ItemCodes []*string `json:"ItemCodes,omitnil,omitempty" name:"ItemCodes"`
+
+	// Fuzzy search: supports tag, resource ID, and resource alias.
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
+
+	// Project ID, used for filtering
+	ProjectIds []*uint64 `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
+}
+
+type DescribeAllocationBillDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Quantity, with the maximum value of 1,000
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset. If Offset is 0, it indicates the first page. If Limit is 100, then Offset is 100, and it indicates the second page. If Offset is 200, it indicates the third page, and so on.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Unique identifier of a billing unit, used for filtering
+	TreeNodeUniqKeys []*string `json:"TreeNodeUniqKeys,omitnil,omitempty" name:"TreeNodeUniqKeys"`
+
+	// Sorting field, with the enumerated values as follows:
+	// RiTimeSpan - Deduction duration of a reserved instance
+	// ExtendPayAmount1 - Original price for the deduction duration of a reserved instance
+	// RealCost - Discounted total
+	// CashPayAmount - Cash amount
+	// VoucherPayAmount - Amount of promo voucher
+	// IncentivePayAmount - Amount of free credit
+	// TransferPayAmount - Royalty amount
+	// Cost - Original price of a component
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+
+	// Sorting type, with the enumerated values as follows:
+	// asc - Ascending
+	// desc - Descending
+	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+	// Product code, used for filtering
+	BusinessCodes []*string `json:"BusinessCodes,omitnil,omitempty" name:"BusinessCodes"`
+
+	// User UIN, used for filtering
+	OwnerUins []*string `json:"OwnerUins,omitnil,omitempty" name:"OwnerUins"`
+
+	// Operator UIN, used for filtering
+	OperateUins []*string `json:"OperateUins,omitnil,omitempty" name:"OperateUins"`
+
+	// Billing mode code, used for filtering
+	PayModes []*string `json:"PayModes,omitnil,omitempty" name:"PayModes"`
+
+	// Transaction type code, used for filtering
+	ActionTypes []*string `json:"ActionTypes,omitnil,omitempty" name:"ActionTypes"`
+
+	// Subproduct code, used for filtering
+	ProductCodes []*string `json:"ProductCodes,omitnil,omitempty" name:"ProductCodes"`
+
+	// Region ID, used for filtering
+	RegionIds []*string `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
+
+	// AZ ID, used for filtering
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+
+	// Instance type code, used for filtering
+	InstanceTypes []*string `json:"InstanceTypes,omitnil,omitempty" name:"InstanceTypes"`
+
+	// Tag, used for filtering
+	Tag []*string `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Component type code, used for filtering
+	ComponentCodes []*string `json:"ComponentCodes,omitnil,omitempty" name:"ComponentCodes"`
+
+	// Component name code, used for filtering
+	ItemCodes []*string `json:"ItemCodes,omitnil,omitempty" name:"ItemCodes"`
+
+	// Fuzzy search: supports tag, resource ID, and resource alias.
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
+
+	// Project ID, used for filtering
+	ProjectIds []*uint64 `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
+}
+
+func (r *DescribeAllocationBillDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationBillDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Month")
+	delete(f, "TreeNodeUniqKeys")
+	delete(f, "Sort")
+	delete(f, "SortType")
+	delete(f, "BusinessCodes")
+	delete(f, "OwnerUins")
+	delete(f, "OperateUins")
+	delete(f, "PayModes")
+	delete(f, "ActionTypes")
+	delete(f, "ProductCodes")
+	delete(f, "RegionIds")
+	delete(f, "ZoneIds")
+	delete(f, "InstanceTypes")
+	delete(f, "Tag")
+	delete(f, "ComponentCodes")
+	delete(f, "ItemCodes")
+	delete(f, "SearchKey")
+	delete(f, "ProjectIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAllocationBillDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationBillDetailResponseParams struct {
+	// Total quantity.
+	RecordNum *uint64 `json:"RecordNum,omitnil,omitempty" name:"RecordNum"`
+
+	// Total amount of a cost allocation bill
+	Total *AllocationOverviewTotal `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Details of a cost allocation bill
+	Detail []*AllocationDetail `json:"Detail,omitnil,omitempty" name:"Detail"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAllocationBillDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAllocationBillDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeAllocationBillDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationBillDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationMonthOverviewRequestParams struct {
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+type DescribeAllocationMonthOverviewRequest struct {
+	*tchttp.BaseRequest
+	
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+func (r *DescribeAllocationMonthOverviewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationMonthOverviewRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Month")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAllocationMonthOverviewRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationMonthOverviewResponseParams struct {
+	// Monthly overview of a cost allocation bill
+	Detail []*AllocationOverviewNode `json:"Detail,omitnil,omitempty" name:"Detail"`
+
+	// Total amount of a cost allocation bill
+	Total *AllocationOverviewTotal `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAllocationMonthOverviewResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAllocationMonthOverviewResponseParams `json:"Response"`
+}
+
+func (r *DescribeAllocationMonthOverviewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationMonthOverviewResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationOverviewRequestParams struct {
+	// Quantity, with the maximum value of 1,000
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset. If offset is 0, it indicates the first page. If limit is 100, then offset is 100, it indicates the second page; if offset is 200, it indicates the third page, and so on
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Statistical period, with the enumerated values as follows:
+	// month - Month
+	// day - Day
+	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
+
+	// Unique identifier of a billing unit, used for filtering
+	TreeNodeUniqKeys []*string `json:"TreeNodeUniqKeys,omitnil,omitempty" name:"TreeNodeUniqKeys"`
+
+	// Sorting field, with the enumerated values as follows: 
+	// GatherCashPayAmount - Collected fees (cash)
+	// GatherVoucherPayAmount - Collected fees (voucher)
+	// GatherIncentivePayAmount - Collected fees (free credit)
+	// GatherTransferPayAmount - Collected fees (royalty amount)
+	// AllocateCashPayAmount - Allocated fees (cash)
+	// AllocateVoucherPayAmount - Allocated fees (voucher)
+	// AllocateIncentivePayAmount - Allocated fees (free credit)
+	// AllocateTransferPayAmount - Allocated fees (royalty amount)
+	// TotalCashPayAmount - Total fees (cash)
+	// TotalVoucherPayAmount - Total fees (voucher)
+	// TotalIncentivePayAmount - Total fees (free credit)
+	// TotalTransferPayAmount - Total fees (royalty amount)
+	// GatherRealCost - Collected fees (discounted total)
+	// AllocateRealCost - Allocated fees (discounted total)
+	// RealTotalCost - Total fees (discounted total)
+	// Ratio - Proportion (discounted total)
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+
+	// Sorting type, with the enumerated values as follows:
+	// asc - Ascending
+	// desc - Descending
+	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+	// Date, used for filtering
+	BillDates []*string `json:"BillDates,omitnil,omitempty" name:"BillDates"`
+}
+
+type DescribeAllocationOverviewRequest struct {
+	*tchttp.BaseRequest
+	
+	// Quantity, with the maximum value of 1,000
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset. If offset is 0, it indicates the first page. If limit is 100, then offset is 100, it indicates the second page; if offset is 200, it indicates the third page, and so on
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Statistical period, with the enumerated values as follows:
+	// month - Month
+	// day - Day
+	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
+
+	// Unique identifier of a billing unit, used for filtering
+	TreeNodeUniqKeys []*string `json:"TreeNodeUniqKeys,omitnil,omitempty" name:"TreeNodeUniqKeys"`
+
+	// Sorting field, with the enumerated values as follows: 
+	// GatherCashPayAmount - Collected fees (cash)
+	// GatherVoucherPayAmount - Collected fees (voucher)
+	// GatherIncentivePayAmount - Collected fees (free credit)
+	// GatherTransferPayAmount - Collected fees (royalty amount)
+	// AllocateCashPayAmount - Allocated fees (cash)
+	// AllocateVoucherPayAmount - Allocated fees (voucher)
+	// AllocateIncentivePayAmount - Allocated fees (free credit)
+	// AllocateTransferPayAmount - Allocated fees (royalty amount)
+	// TotalCashPayAmount - Total fees (cash)
+	// TotalVoucherPayAmount - Total fees (voucher)
+	// TotalIncentivePayAmount - Total fees (free credit)
+	// TotalTransferPayAmount - Total fees (royalty amount)
+	// GatherRealCost - Collected fees (discounted total)
+	// AllocateRealCost - Allocated fees (discounted total)
+	// RealTotalCost - Total fees (discounted total)
+	// Ratio - Proportion (discounted total)
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+
+	// Sorting type, with the enumerated values as follows:
+	// asc - Ascending
+	// desc - Descending
+	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+	// Date, used for filtering
+	BillDates []*string `json:"BillDates,omitnil,omitempty" name:"BillDates"`
+}
+
+func (r *DescribeAllocationOverviewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationOverviewRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Month")
+	delete(f, "PeriodType")
+	delete(f, "TreeNodeUniqKeys")
+	delete(f, "Sort")
+	delete(f, "SortType")
+	delete(f, "BillDates")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAllocationOverviewRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationOverviewResponseParams struct {
+	// Total quantity.
+	RecordNum *uint64 `json:"RecordNum,omitnil,omitempty" name:"RecordNum"`
+
+	// Total amount of a cost allocation bill
+	Total *AllocationOverviewTotal `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Details of the cost allocation overview
+	Detail []*AllocationOverviewDetail `json:"Detail,omitnil,omitempty" name:"Detail"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAllocationOverviewResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAllocationOverviewResponseParams `json:"Response"`
+}
+
+func (r *DescribeAllocationOverviewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationOverviewResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2406,6 +4299,696 @@ func (r *DescribeAllocationRuleSummaryResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeAllocationSummaryByBusinessRequestParams struct {
+	// Quantity, with the maximum value of 1,000
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset. If Offset is 0, it indicates the first page. If Limit is 100, then Offset is 100, and it indicates the second page. If Offset is 200, it indicates the third page, and so on.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided
+	// 
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Statistical period, with the enumerated values as follows:
+	// month - Month
+	// day - Day
+	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
+
+	// Unique identifier of a billing unit, used for filtering
+	// 
+	TreeNodeUniqKeys []*string `json:"TreeNodeUniqKeys,omitnil,omitempty" name:"TreeNodeUniqKeys"`
+
+	// Sorting type, with the enumerated values as follows:
+	// asc - Ascending
+	// desc - Descending
+	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+	// Sorting field, with the enumerated values as follows:
+	// GatherCashPayAmount - Collected fees (cash)
+	// GatherVoucherPayAmount - Collected fees (voucher)
+	// GatherIncentivePayAmount - Collected fees (free credit)
+	// GatherTransferPayAmount - Collected fees (royalty amount)
+	// AllocateCashPayAmount - Allocated fees (cash)
+	// AllocateVoucherPayAmount - Allocated fees (voucher)
+	// AllocateIncentivePayAmount - Allocated fees (free credit)
+	// AllocateTransferPayAmount - Allocated fees (royalty amount)
+	// TotalCashPayAmount - Total fees (cash)
+	// TotalVoucherPayAmount - Total fees (voucher)
+	// TotalIncentivePayAmount - Total fees (free credit)
+	// TotalTransferPayAmount - Total fees (royalty amount)
+	// GatherRealCost - Collected fees (discounted total)
+	// AllocateRealCost - Allocated fees (discounted total)
+	// RealTotalCost - Total fees (discounted total)
+	// BusinessCode - Product code
+	// Ratio - Proportion (discounted total)
+	// Trend - Month-on-month ratio (discounted total)
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+
+	// Date, used for filtering and provided when PeriodType is set to day
+	BillDates []*string `json:"BillDates,omitnil,omitempty" name:"BillDates"`
+
+	// Product code, used for filtering
+	BusinessCodes []*string `json:"BusinessCodes,omitnil,omitempty" name:"BusinessCodes"`
+
+	// Fuzzy search criteria
+	//
+	// Deprecated: SearchKey is deprecated.
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
+}
+
+type DescribeAllocationSummaryByBusinessRequest struct {
+	*tchttp.BaseRequest
+	
+	// Quantity, with the maximum value of 1,000
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset. If Offset is 0, it indicates the first page. If Limit is 100, then Offset is 100, and it indicates the second page. If Offset is 200, it indicates the third page, and so on.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided
+	// 
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Statistical period, with the enumerated values as follows:
+	// month - Month
+	// day - Day
+	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
+
+	// Unique identifier of a billing unit, used for filtering
+	// 
+	TreeNodeUniqKeys []*string `json:"TreeNodeUniqKeys,omitnil,omitempty" name:"TreeNodeUniqKeys"`
+
+	// Sorting type, with the enumerated values as follows:
+	// asc - Ascending
+	// desc - Descending
+	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+	// Sorting field, with the enumerated values as follows:
+	// GatherCashPayAmount - Collected fees (cash)
+	// GatherVoucherPayAmount - Collected fees (voucher)
+	// GatherIncentivePayAmount - Collected fees (free credit)
+	// GatherTransferPayAmount - Collected fees (royalty amount)
+	// AllocateCashPayAmount - Allocated fees (cash)
+	// AllocateVoucherPayAmount - Allocated fees (voucher)
+	// AllocateIncentivePayAmount - Allocated fees (free credit)
+	// AllocateTransferPayAmount - Allocated fees (royalty amount)
+	// TotalCashPayAmount - Total fees (cash)
+	// TotalVoucherPayAmount - Total fees (voucher)
+	// TotalIncentivePayAmount - Total fees (free credit)
+	// TotalTransferPayAmount - Total fees (royalty amount)
+	// GatherRealCost - Collected fees (discounted total)
+	// AllocateRealCost - Allocated fees (discounted total)
+	// RealTotalCost - Total fees (discounted total)
+	// BusinessCode - Product code
+	// Ratio - Proportion (discounted total)
+	// Trend - Month-on-month ratio (discounted total)
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+
+	// Date, used for filtering and provided when PeriodType is set to day
+	BillDates []*string `json:"BillDates,omitnil,omitempty" name:"BillDates"`
+
+	// Product code, used for filtering
+	BusinessCodes []*string `json:"BusinessCodes,omitnil,omitempty" name:"BusinessCodes"`
+
+	// Fuzzy search criteria
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
+}
+
+func (r *DescribeAllocationSummaryByBusinessRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationSummaryByBusinessRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Month")
+	delete(f, "PeriodType")
+	delete(f, "TreeNodeUniqKeys")
+	delete(f, "SortType")
+	delete(f, "Sort")
+	delete(f, "BillDates")
+	delete(f, "BusinessCodes")
+	delete(f, "SearchKey")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAllocationSummaryByBusinessRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationSummaryByBusinessResponseParams struct {
+	// Total quantity.
+	RecordNum *uint64 `json:"RecordNum,omitnil,omitempty" name:"RecordNum"`
+
+	// Total amount of a cost allocation bill
+	Total *AllocationOverviewTotal `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Detailed summary of the cost allocation bill by business
+	Detail []*AllocationSummaryByBusiness `json:"Detail,omitnil,omitempty" name:"Detail"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAllocationSummaryByBusinessResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAllocationSummaryByBusinessResponseParams `json:"Response"`
+}
+
+func (r *DescribeAllocationSummaryByBusinessResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationSummaryByBusinessResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationSummaryByItemRequestParams struct {
+	// Quantity, with the maximum value of 1,000
+	// 
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset. If Offset is 0, it indicates the first page. If Limit is 100, then Offset is 100, and it indicates the second page. If Offset is 200, it indicates the third page, and so on.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided
+	// 
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Statistical period, with the enumerated values as follows:
+	// month - Month
+	// day - Day
+	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
+
+	// Unique identifier of a billing unit, used for filtering
+	// 
+	TreeNodeUniqKeys []*string `json:"TreeNodeUniqKeys,omitnil,omitempty" name:"TreeNodeUniqKeys"`
+
+	// Sorting field, with the enumerated values as follows:
+	// RiTimeSpan - Deduction duration of a reserved instance
+	// ExtendPayAmount1 - Original price for the deduction duration of a reserved instance
+	// RealCost - Discounted total
+	// CashPayAmount - Cash amount
+	// VoucherPayAmount - Amount of promo voucher
+	// IncentivePayAmount - Amount of free credit
+	// TransferPayAmount - Royalty amount
+	// Cost - Original price of a component
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+
+	// Sorting type, with the enumerated values as follows:
+	// asc - Ascending
+	// desc - Descending
+	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+	// Date, used for filtering
+	// 
+	BillDates []*string `json:"BillDates,omitnil,omitempty" name:"BillDates"`
+
+	// Product code, used for filtering
+	// 
+	BusinessCodes []*string `json:"BusinessCodes,omitnil,omitempty" name:"BusinessCodes"`
+
+	// User UIN, used for filtering
+	// 
+	OwnerUins []*string `json:"OwnerUins,omitnil,omitempty" name:"OwnerUins"`
+
+	// Operator UIN, used for filtering
+	// 
+	OperateUins []*string `json:"OperateUins,omitnil,omitempty" name:"OperateUins"`
+
+	// Billing mode code, used for filtering
+	// 
+	PayModes []*string `json:"PayModes,omitnil,omitempty" name:"PayModes"`
+
+	// Transaction type code, used for filtering
+	// 
+	ActionTypes []*string `json:"ActionTypes,omitnil,omitempty" name:"ActionTypes"`
+
+	// Subproduct code, used for filtering
+	// 
+	ProductCodes []*string `json:"ProductCodes,omitnil,omitempty" name:"ProductCodes"`
+
+	// Region ID, used for filtering
+	// 
+	RegionIds []*string `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
+
+	// Availability Zone (AZ) ID, used for filtering
+	// 
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+
+	// Instance type code, used for filtering
+	// 
+	InstanceTypes []*string `json:"InstanceTypes,omitnil,omitempty" name:"InstanceTypes"`
+
+	// Tag, used for filtering
+	// 
+	Tag []*string `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Component type code, used for filtering
+	ComponentCodes []*string `json:"ComponentCodes,omitnil,omitempty" name:"ComponentCodes"`
+
+	// Component name code, used for filtering
+	ItemCodes []*string `json:"ItemCodes,omitnil,omitempty" name:"ItemCodes"`
+
+	// Fuzzy search: supports tag, resource ID, and resource alias.
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
+
+	// Project ID, used for filtering
+	// 
+	ProjectIds []*uint64 `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
+
+	// Cost collection type, with the enumerated values as follows:
+	// 0 - Allocation
+	// 1 - Collection
+	// -1 - Unallocated
+	AllocationType []*int64 `json:"AllocationType,omitnil,omitempty" name:"AllocationType"`
+}
+
+type DescribeAllocationSummaryByItemRequest struct {
+	*tchttp.BaseRequest
+	
+	// Quantity, with the maximum value of 1,000
+	// 
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset. If Offset is 0, it indicates the first page. If Limit is 100, then Offset is 100, and it indicates the second page. If Offset is 200, it indicates the third page, and so on.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided
+	// 
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Statistical period, with the enumerated values as follows:
+	// month - Month
+	// day - Day
+	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
+
+	// Unique identifier of a billing unit, used for filtering
+	// 
+	TreeNodeUniqKeys []*string `json:"TreeNodeUniqKeys,omitnil,omitempty" name:"TreeNodeUniqKeys"`
+
+	// Sorting field, with the enumerated values as follows:
+	// RiTimeSpan - Deduction duration of a reserved instance
+	// ExtendPayAmount1 - Original price for the deduction duration of a reserved instance
+	// RealCost - Discounted total
+	// CashPayAmount - Cash amount
+	// VoucherPayAmount - Amount of promo voucher
+	// IncentivePayAmount - Amount of free credit
+	// TransferPayAmount - Royalty amount
+	// Cost - Original price of a component
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+
+	// Sorting type, with the enumerated values as follows:
+	// asc - Ascending
+	// desc - Descending
+	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+	// Date, used for filtering
+	// 
+	BillDates []*string `json:"BillDates,omitnil,omitempty" name:"BillDates"`
+
+	// Product code, used for filtering
+	// 
+	BusinessCodes []*string `json:"BusinessCodes,omitnil,omitempty" name:"BusinessCodes"`
+
+	// User UIN, used for filtering
+	// 
+	OwnerUins []*string `json:"OwnerUins,omitnil,omitempty" name:"OwnerUins"`
+
+	// Operator UIN, used for filtering
+	// 
+	OperateUins []*string `json:"OperateUins,omitnil,omitempty" name:"OperateUins"`
+
+	// Billing mode code, used for filtering
+	// 
+	PayModes []*string `json:"PayModes,omitnil,omitempty" name:"PayModes"`
+
+	// Transaction type code, used for filtering
+	// 
+	ActionTypes []*string `json:"ActionTypes,omitnil,omitempty" name:"ActionTypes"`
+
+	// Subproduct code, used for filtering
+	// 
+	ProductCodes []*string `json:"ProductCodes,omitnil,omitempty" name:"ProductCodes"`
+
+	// Region ID, used for filtering
+	// 
+	RegionIds []*string `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
+
+	// Availability Zone (AZ) ID, used for filtering
+	// 
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+
+	// Instance type code, used for filtering
+	// 
+	InstanceTypes []*string `json:"InstanceTypes,omitnil,omitempty" name:"InstanceTypes"`
+
+	// Tag, used for filtering
+	// 
+	Tag []*string `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Component type code, used for filtering
+	ComponentCodes []*string `json:"ComponentCodes,omitnil,omitempty" name:"ComponentCodes"`
+
+	// Component name code, used for filtering
+	ItemCodes []*string `json:"ItemCodes,omitnil,omitempty" name:"ItemCodes"`
+
+	// Fuzzy search: supports tag, resource ID, and resource alias.
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
+
+	// Project ID, used for filtering
+	// 
+	ProjectIds []*uint64 `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
+
+	// Cost collection type, with the enumerated values as follows:
+	// 0 - Allocation
+	// 1 - Collection
+	// -1 - Unallocated
+	AllocationType []*int64 `json:"AllocationType,omitnil,omitempty" name:"AllocationType"`
+}
+
+func (r *DescribeAllocationSummaryByItemRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationSummaryByItemRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Month")
+	delete(f, "PeriodType")
+	delete(f, "TreeNodeUniqKeys")
+	delete(f, "Sort")
+	delete(f, "SortType")
+	delete(f, "BillDates")
+	delete(f, "BusinessCodes")
+	delete(f, "OwnerUins")
+	delete(f, "OperateUins")
+	delete(f, "PayModes")
+	delete(f, "ActionTypes")
+	delete(f, "ProductCodes")
+	delete(f, "RegionIds")
+	delete(f, "ZoneIds")
+	delete(f, "InstanceTypes")
+	delete(f, "Tag")
+	delete(f, "ComponentCodes")
+	delete(f, "ItemCodes")
+	delete(f, "SearchKey")
+	delete(f, "ProjectIds")
+	delete(f, "AllocationType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAllocationSummaryByItemRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationSummaryByItemResponseParams struct {
+	// Total quantity.
+	RecordNum *uint64 `json:"RecordNum,omitnil,omitempty" name:"RecordNum"`
+
+	// Total amount of a cost allocation bill
+	Total *AllocationOverviewTotal `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Details of a Cost Allocation Bill by item
+	Detail []*AllocationSummaryByItem `json:"Detail,omitnil,omitempty" name:"Detail"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAllocationSummaryByItemResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAllocationSummaryByItemResponseParams `json:"Response"`
+}
+
+func (r *DescribeAllocationSummaryByItemResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationSummaryByItemResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationSummaryByResourceRequestParams struct {
+	// Quantity, with the maximum value of 1,000
+	// 
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset. If Offset is 0, it indicates the first page. If Limit is 100, then Offset is 100, and it indicates the second page. If Offset is 200, it indicates the third page, and so on.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided
+	// 
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Statistical period, with the enumerated values as follows:
+	// month - Month
+	// day - Day
+	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
+
+	// Unique identifier of a billing unit, used for filtering
+	TreeNodeUniqKeys []*string `json:"TreeNodeUniqKeys,omitnil,omitempty" name:"TreeNodeUniqKeys"`
+
+	// Sorting field, with the enumerated values as follows:
+	// RiTimeSpan - Deduction duration of a reserved instance
+	// ExtendPayAmount1 - Original price for the deduction duration of a reserved instance
+	// RealCost - Discounted total
+	// CashPayAmount - Cash amount
+	// VoucherPayAmount - Amount of promo voucher
+	// IncentivePayAmount - Amount of free credit
+	// TransferPayAmount - Royalty amount
+	// Cost - Original price of a component
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+
+	// Sorting type, with the enumerated values as follows:
+	// asc - Ascending
+	// desc - Descending
+	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+	// Date, used for filtering
+	BillDates []*string `json:"BillDates,omitnil,omitempty" name:"BillDates"`
+
+	// Product code, used for filtering
+	BusinessCodes []*string `json:"BusinessCodes,omitnil,omitempty" name:"BusinessCodes"`
+
+	// User UIN, used for filtering
+	OwnerUins []*string `json:"OwnerUins,omitnil,omitempty" name:"OwnerUins"`
+
+	// Operator UIN, used for filtering
+	OperateUins []*string `json:"OperateUins,omitnil,omitempty" name:"OperateUins"`
+
+	// Billing mode code, used for filtering
+	PayModes []*string `json:"PayModes,omitnil,omitempty" name:"PayModes"`
+
+	// Transaction type code, used for filtering
+	ActionTypes []*string `json:"ActionTypes,omitnil,omitempty" name:"ActionTypes"`
+
+	// Subproduct code, used for filtering
+	ProductCodes []*string `json:"ProductCodes,omitnil,omitempty" name:"ProductCodes"`
+
+	// Region ID, used for filtering
+	RegionIds []*string `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
+
+	// Availability zone (AZ) ID, used for filtering
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+
+	// Instance type code, used for filtering
+	InstanceTypes []*string `json:"InstanceTypes,omitnil,omitempty" name:"InstanceTypes"`
+
+	// Tag, used for filtering
+	Tag []*string `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Fuzzy search: supports tag, resource ID, and resource alias
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
+
+	// Project ID, used for filtering
+	ProjectIds []*uint64 `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
+
+	// Cost collection type, with the enumerated values as follows:
+	// 0 - Allocation 
+	// 1 - Collection 
+	// -1 - Unallocated
+	AllocationType []*int64 `json:"AllocationType,omitnil,omitempty" name:"AllocationType"`
+}
+
+type DescribeAllocationSummaryByResourceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Quantity, with the maximum value of 1,000
+	// 
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset. If Offset is 0, it indicates the first page. If Limit is 100, then Offset is 100, and it indicates the second page. If Offset is 200, it indicates the third page, and so on.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided
+	// 
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Statistical period, with the enumerated values as follows:
+	// month - Month
+	// day - Day
+	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
+
+	// Unique identifier of a billing unit, used for filtering
+	TreeNodeUniqKeys []*string `json:"TreeNodeUniqKeys,omitnil,omitempty" name:"TreeNodeUniqKeys"`
+
+	// Sorting field, with the enumerated values as follows:
+	// RiTimeSpan - Deduction duration of a reserved instance
+	// ExtendPayAmount1 - Original price for the deduction duration of a reserved instance
+	// RealCost - Discounted total
+	// CashPayAmount - Cash amount
+	// VoucherPayAmount - Amount of promo voucher
+	// IncentivePayAmount - Amount of free credit
+	// TransferPayAmount - Royalty amount
+	// Cost - Original price of a component
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+
+	// Sorting type, with the enumerated values as follows:
+	// asc - Ascending
+	// desc - Descending
+	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+	// Date, used for filtering
+	BillDates []*string `json:"BillDates,omitnil,omitempty" name:"BillDates"`
+
+	// Product code, used for filtering
+	BusinessCodes []*string `json:"BusinessCodes,omitnil,omitempty" name:"BusinessCodes"`
+
+	// User UIN, used for filtering
+	OwnerUins []*string `json:"OwnerUins,omitnil,omitempty" name:"OwnerUins"`
+
+	// Operator UIN, used for filtering
+	OperateUins []*string `json:"OperateUins,omitnil,omitempty" name:"OperateUins"`
+
+	// Billing mode code, used for filtering
+	PayModes []*string `json:"PayModes,omitnil,omitempty" name:"PayModes"`
+
+	// Transaction type code, used for filtering
+	ActionTypes []*string `json:"ActionTypes,omitnil,omitempty" name:"ActionTypes"`
+
+	// Subproduct code, used for filtering
+	ProductCodes []*string `json:"ProductCodes,omitnil,omitempty" name:"ProductCodes"`
+
+	// Region ID, used for filtering
+	RegionIds []*string `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
+
+	// Availability zone (AZ) ID, used for filtering
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+
+	// Instance type code, used for filtering
+	InstanceTypes []*string `json:"InstanceTypes,omitnil,omitempty" name:"InstanceTypes"`
+
+	// Tag, used for filtering
+	Tag []*string `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Fuzzy search: supports tag, resource ID, and resource alias
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
+
+	// Project ID, used for filtering
+	ProjectIds []*uint64 `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
+
+	// Cost collection type, with the enumerated values as follows:
+	// 0 - Allocation 
+	// 1 - Collection 
+	// -1 - Unallocated
+	AllocationType []*int64 `json:"AllocationType,omitnil,omitempty" name:"AllocationType"`
+}
+
+func (r *DescribeAllocationSummaryByResourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationSummaryByResourceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Month")
+	delete(f, "PeriodType")
+	delete(f, "TreeNodeUniqKeys")
+	delete(f, "Sort")
+	delete(f, "SortType")
+	delete(f, "BillDates")
+	delete(f, "BusinessCodes")
+	delete(f, "OwnerUins")
+	delete(f, "OperateUins")
+	delete(f, "PayModes")
+	delete(f, "ActionTypes")
+	delete(f, "ProductCodes")
+	delete(f, "RegionIds")
+	delete(f, "ZoneIds")
+	delete(f, "InstanceTypes")
+	delete(f, "Tag")
+	delete(f, "SearchKey")
+	delete(f, "ProjectIds")
+	delete(f, "AllocationType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAllocationSummaryByResourceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationSummaryByResourceResponseParams struct {
+	// Total quantity.
+	RecordNum *uint64 `json:"RecordNum,omitnil,omitempty" name:"RecordNum"`
+
+	// Total amount of a cost allocation bill
+	Total *AllocationOverviewTotal `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Detailed summary of the cost allocation bill by resource
+	Detail []*AllocationSummaryByResource `json:"Detail,omitnil,omitempty" name:"Detail"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAllocationSummaryByResourceResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAllocationSummaryByResourceResponseParams `json:"Response"`
+}
+
+func (r *DescribeAllocationSummaryByResourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationSummaryByResourceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeAllocationTreeRequestParams struct {
 	// Month, the current month by default if not provided.
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
@@ -2468,6 +5051,83 @@ func (r *DescribeAllocationTreeResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAllocationTreeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationTrendByMonthRequestParams struct {
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Unique identifier of a cost allocation unit
+	TreeNodeUniqKey *string `json:"TreeNodeUniqKey,omitnil,omitempty" name:"TreeNodeUniqKey"`
+
+	// Product code, used for filtering
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+}
+
+type DescribeAllocationTrendByMonthRequest struct {
+	*tchttp.BaseRequest
+	
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Unique identifier of a cost allocation unit
+	TreeNodeUniqKey *string `json:"TreeNodeUniqKey,omitnil,omitempty" name:"TreeNodeUniqKey"`
+
+	// Product code, used for filtering
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+}
+
+func (r *DescribeAllocationTrendByMonthRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationTrendByMonthRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Month")
+	delete(f, "TreeNodeUniqKey")
+	delete(f, "BusinessCode")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAllocationTrendByMonthRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationTrendByMonthResponseParams struct {
+	// Current month's expense information
+	Current *AllocationBillTrendDetail `json:"Current,omitnil,omitempty" name:"Current"`
+
+	// Previous months' expense information
+	Previous []*AllocationBillTrendDetail `json:"Previous,omitnil,omitempty" name:"Previous"`
+
+	// Expense statistical information
+	Stat *AllocationStat `json:"Stat,omitnil,omitempty" name:"Stat"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAllocationTrendByMonthResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAllocationTrendByMonthResponseParams `json:"Response"`
+}
+
+func (r *DescribeAllocationTrendByMonthResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationTrendByMonthResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2561,39 +5221,33 @@ func (r *DescribeAllocationUnitDetailResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillAdjustInfoRequestParams struct {
-	// Format: yyyy-MM.
-	// Billing month. Either Month or the combination of TimeFrom and TimeTo needs to be passed. If the TimeFrom and TimeTo are passed, the Month field is invalid.
-	// Example: 2024-10.
+	// <p>Format: yyyy-MM<br>Bill month. Either month or timeFrom&amp;timeTo must be specified. If timeFrom&amp;timeTo is specified, the month field is invalid.</p>
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// Format: yyyy-MM-dd.
-	// Start date. Either Month or the combination of TimeFrom and TimeTo needs to be passed. If TimeFrom and TimeTo are passed, the Month field is invalid. TimeFrom and TimeTo should represent the same month and be passed in together. Cross-month queries are not supported. The result will include the full month's data.
-	// Example: 2024-10-01.
+	// <p>Format: yyyy-MM-dd<br>Start time. Either month or timeFrom&amp;timeTo must be specified. If timeFrom&amp;timeTo is specified, the month field is invalid. timeFrom and timeTo must be specified together and must be in the same month. Cross-month queries are not supported and the query results are data for the entire month.</p>
 	TimeFrom *string `json:"TimeFrom,omitnil,omitempty" name:"TimeFrom"`
 
-	// Format: yyyy-MM-dd.
-	// End date. Either Month or the combination of TimeFrom and TimeTo needs to be passed. If TimeFrom and TimeTo are passed, the Month field is invalid. TimeFrom and TimeTo should represent the same month and be passed in together. Cross-month queries are not supported. The result will include the full month's data.
-	// Example: 2024-10-02.
+	// <p>Format: yyyy-MM-dd<br>End time. Either month or timeFrom&amp;timeTo must be specified. If this field is specified, the month field is invalid. timeFrom and timeTo must be passed together and be in the same month. Cross-month queries are not supported. The query result is data of the entire month.</p>
 	TimeTo *string `json:"TimeTo,omitnil,omitempty" name:"TimeTo"`
+
+	// <p>Account ID of the payer (Account ID is the unique account identifier for the user in Tencent Cloud). By default, the query returns the account statement of the current account. If the group management account needs to query the self-pay bills of member accounts, enter the member account UIN in this field.</p>
+	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
 }
 
 type DescribeBillAdjustInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// Format: yyyy-MM.
-	// Billing month. Either Month or the combination of TimeFrom and TimeTo needs to be passed. If the TimeFrom and TimeTo are passed, the Month field is invalid.
-	// Example: 2024-10.
+	// <p>Format: yyyy-MM<br>Bill month. Either month or timeFrom&amp;timeTo must be specified. If timeFrom&amp;timeTo is specified, the month field is invalid.</p>
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// Format: yyyy-MM-dd.
-	// Start date. Either Month or the combination of TimeFrom and TimeTo needs to be passed. If TimeFrom and TimeTo are passed, the Month field is invalid. TimeFrom and TimeTo should represent the same month and be passed in together. Cross-month queries are not supported. The result will include the full month's data.
-	// Example: 2024-10-01.
+	// <p>Format: yyyy-MM-dd<br>Start time. Either month or timeFrom&amp;timeTo must be specified. If timeFrom&amp;timeTo is specified, the month field is invalid. timeFrom and timeTo must be specified together and must be in the same month. Cross-month queries are not supported and the query results are data for the entire month.</p>
 	TimeFrom *string `json:"TimeFrom,omitnil,omitempty" name:"TimeFrom"`
 
-	// Format: yyyy-MM-dd.
-	// End date. Either Month or the combination of TimeFrom and TimeTo needs to be passed. If TimeFrom and TimeTo are passed, the Month field is invalid. TimeFrom and TimeTo should represent the same month and be passed in together. Cross-month queries are not supported. The result will include the full month's data.
-	// Example: 2024-10-02.
+	// <p>Format: yyyy-MM-dd<br>End time. Either month or timeFrom&amp;timeTo must be specified. If this field is specified, the month field is invalid. timeFrom and timeTo must be passed together and be in the same month. Cross-month queries are not supported. The query result is data of the entire month.</p>
 	TimeTo *string `json:"TimeTo,omitnil,omitempty" name:"TimeTo"`
+
+	// <p>Account ID of the payer (Account ID is the unique account identifier for the user in Tencent Cloud). By default, the query returns the account statement of the current account. If the group management account needs to query the self-pay bills of member accounts, enter the member account UIN in this field.</p>
+	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
 }
 
 func (r *DescribeBillAdjustInfoRequest) ToJsonString() string {
@@ -2611,6 +5265,7 @@ func (r *DescribeBillAdjustInfoRequest) FromJsonString(s string) error {
 	delete(f, "Month")
 	delete(f, "TimeFrom")
 	delete(f, "TimeTo")
+	delete(f, "PayerUin")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBillAdjustInfoRequest has unknown keys!", "")
 	}
@@ -2619,12 +5274,10 @@ func (r *DescribeBillAdjustInfoRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillAdjustInfoResponseParams struct {
-	// Total amount of data.
-	// Example value: 10.
+	// <p>Total data</p>
 	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
 
-	// Detailed data.
-	// Example value: [].
+	// <p>Detailed data</p>
 	Data []*AdjustInfoDetail `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2834,8 +5487,7 @@ type DescribeBillDetailForOrganizationResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
 
-	// Context information of the current request, which can be used in the parameters of the next request to speed up the query.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Context information of this request can be used in the request parameter of the next request to accelerate query speed.
 	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2860,40 +5512,28 @@ func (r *DescribeBillDetailForOrganizationResponse) FromJsonString(s string) err
 
 // Predefined struct for user
 type DescribeBillDetailRequestParams struct {
-	// Offset
+	// Pagination offset. Offset=0 indicates the first page. If Limit=100, Offset=100 indicates the second page, Offset=200 indicates the third page, and so on.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Quantity, maximum is 300
+	// The number of entries returned at a time. The maximum value is `300`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// The period type. byUsedTime: By usage period; byPayTime: By payment period. Must be the same as the period of the current monthly bill of the Billing Center. You can check your bill statistics period type at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page. 
+	// Period type, byUsedTime by billing period/byPayTime by fee deduction cycle. It should be consistent with the billing cycle for the month in the expense center. You can go to the top of the [bill overview](https://console.cloud.tencent.com/expense/bill/overview) page to view and confirm your billing cycle type.
 	//
 	// Deprecated: PeriodType is deprecated.
 	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
 
-	// Month; format: yyyy-mm. You only have to enter either Month or BeginTime and EndTime. When you enter values for BeginTime and EndTime, Month becomes invalid. This value must be no earlier than the month when Bill 2.0 is activated; last 24 months data are available.
+	// The month is in the format of yyyy-mm. Either Month or BeginTime&EndTime must be specified. If BeginTime&EndTime is specified, the Month field is invalid. Data within the last 18 months can be pulled at most.
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// The start time of the query range, which should be in the format Y-m-d H:i:s . The query range must be in the last 18 months and cannot be earlier than May 2018 (when Bill 2.0 was introduced). The start time and end time must be in the same month.
-	// 
-	// Example: tccli billing DescribeBillDetail --cli-unfold-argument --Offset 1 --Limit 100 --BeginTime '2023-04-01 12:05:15' --EndTime '2023-04-18 12:00:10' --ProjectId 1000000731  --version "2018-07-09"
-	// 
-	// Alternatively, you can use Month to query the billing details of a month.
-	// Example:
-	// ccli billing DescribeBillDetail --cli-unfold-argument --Offset 1 --Limit 100 --Month 2023-04  --version "2018-07-09" --ResourceId "disk-oj9okstm"
+	// The start time of the period in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be specified. If BeginTime&EndTime is specified, the Month field is invalid. BeginTime and EndTime must be specified together and must be in the same month. Cross-month queries are not supported and the query results are data for the entire month. Data within the last 18 months can be pulled at most.
 	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
-	// The end time of the query range, which should be in the format `Y-m-d H:i:s `. The query range must be in the last 18 months and cannot be earlier than May 2018 (when Bill 2.0 was introduced). The start time and end time must be in the same month.
-	// 
-	// Example: tccli billing DescribeBillDetail --cli-unfold-argument --Offset 1 --Limit 100 --BeginTime '2023-04-01 12:05:15' --EndTime '2023-04-18 12:00:10' --ProjectId 1000000731  --version "2018-07-09"
-	// 
-	// Alternatively, you can use `Month` to query the billing details of a month. 
-	// Example:
-	// ccli billing DescribeBillDetail --cli-unfold-argument --Offset 1 --Limit 100 --Month 2023-04  --version "2018-07-09" --ResourceId "disk-oj9okstm"
+	// The end time of the period in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be specified. If BeginTime&EndTime is specified, the Month field is invalid. BeginTime and EndTime must be specified together and must be in the same month. Cross-month queries are not supported and the query results are data for the entire month. Data within the last 18 months can be pulled at most.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Indicates whether or not the total number of records of accessing the list is required, used for frontend pages.
-	// 1 = yes, 0 = no
+	// Total number of records for access list needed for frontend pagination
+	// 1: needed, 0: not needed
 	NeedRecordNum *int64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
 
 	// Queries information on a specified product
@@ -2924,55 +5564,43 @@ type DescribeBillDetailRequestParams struct {
 	// Offline product deduction
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-	// Project ID: ID of the project to which the resource belongs
+	// Project ID: Project ID of the resource
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Product code
-	// Note: To query the product codes used in the current month, call <a href="https://www.tencentcloud.com/document/product/555/32374">DescribeBillSummaryByProduct</a>.
+	// Product name code
+	// Remark: If needed to obtain BusinessCode used in current month, invoke API: <a href="https://www.tencentcloud.com/document/product/555/35761?from_cn_redirect=1">Get fee distribution by product</a>
 	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
 
-	// Context information returned by the last request. You can set `Month` to `2023-05` or later to accelerate queries. We recommend users whose data volume is over 100 thousand entries use the paginated query feature, which can help greatly speed up your queries.
+	// Context information returned from the last request. Paginated query of data for months with Month>=2023-05 can speed up query speed. Recommended for users with data volume at tens of thousands level. Query speed can be improved by 2-10x.
 	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
 
-	// The account ID of the payer, which is the unique identifier of a Tencent Cloud user. This account is allowed to query its own bills by default. If an organization admin account needs to query the self-pay bills of members, this field should be specified as the member account ID.
+	// Account ID of the payer (Account ID is the unique account identifier for the user in Tencent Cloud). By default, the query returns the account statement of the current account. If the group management account needs to query the self-pay bills of member accounts, enter the member account UIN in this field.
 	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
 }
 
 type DescribeBillDetailRequest struct {
 	*tchttp.BaseRequest
 	
-	// Offset
+	// Pagination offset. Offset=0 indicates the first page. If Limit=100, Offset=100 indicates the second page, Offset=200 indicates the third page, and so on.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Quantity, maximum is 300
+	// The number of entries returned at a time. The maximum value is `300`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// The period type. byUsedTime: By usage period; byPayTime: By payment period. Must be the same as the period of the current monthly bill of the Billing Center. You can check your bill statistics period type at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page. 
+	// Period type, byUsedTime by billing period/byPayTime by fee deduction cycle. It should be consistent with the billing cycle for the month in the expense center. You can go to the top of the [bill overview](https://console.cloud.tencent.com/expense/bill/overview) page to view and confirm your billing cycle type.
 	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
 
-	// Month; format: yyyy-mm. You only have to enter either Month or BeginTime and EndTime. When you enter values for BeginTime and EndTime, Month becomes invalid. This value must be no earlier than the month when Bill 2.0 is activated; last 24 months data are available.
+	// The month is in the format of yyyy-mm. Either Month or BeginTime&EndTime must be specified. If BeginTime&EndTime is specified, the Month field is invalid. Data within the last 18 months can be pulled at most.
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// The start time of the query range, which should be in the format Y-m-d H:i:s . The query range must be in the last 18 months and cannot be earlier than May 2018 (when Bill 2.0 was introduced). The start time and end time must be in the same month.
-	// 
-	// Example: tccli billing DescribeBillDetail --cli-unfold-argument --Offset 1 --Limit 100 --BeginTime '2023-04-01 12:05:15' --EndTime '2023-04-18 12:00:10' --ProjectId 1000000731  --version "2018-07-09"
-	// 
-	// Alternatively, you can use Month to query the billing details of a month.
-	// Example:
-	// ccli billing DescribeBillDetail --cli-unfold-argument --Offset 1 --Limit 100 --Month 2023-04  --version "2018-07-09" --ResourceId "disk-oj9okstm"
+	// The start time of the period in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be specified. If BeginTime&EndTime is specified, the Month field is invalid. BeginTime and EndTime must be specified together and must be in the same month. Cross-month queries are not supported and the query results are data for the entire month. Data within the last 18 months can be pulled at most.
 	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
-	// The end time of the query range, which should be in the format `Y-m-d H:i:s `. The query range must be in the last 18 months and cannot be earlier than May 2018 (when Bill 2.0 was introduced). The start time and end time must be in the same month.
-	// 
-	// Example: tccli billing DescribeBillDetail --cli-unfold-argument --Offset 1 --Limit 100 --BeginTime '2023-04-01 12:05:15' --EndTime '2023-04-18 12:00:10' --ProjectId 1000000731  --version "2018-07-09"
-	// 
-	// Alternatively, you can use `Month` to query the billing details of a month. 
-	// Example:
-	// ccli billing DescribeBillDetail --cli-unfold-argument --Offset 1 --Limit 100 --Month 2023-04  --version "2018-07-09" --ResourceId "disk-oj9okstm"
+	// The end time of the period in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be specified. If BeginTime&EndTime is specified, the Month field is invalid. BeginTime and EndTime must be specified together and must be in the same month. Cross-month queries are not supported and the query results are data for the entire month. Data within the last 18 months can be pulled at most.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Indicates whether or not the total number of records of accessing the list is required, used for frontend pages.
-	// 1 = yes, 0 = no
+	// Total number of records for access list needed for frontend pagination
+	// 1: needed, 0: not needed
 	NeedRecordNum *int64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
 
 	// Queries information on a specified product
@@ -3001,17 +5629,17 @@ type DescribeBillDetailRequest struct {
 	// Offline product deduction
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-	// Project ID: ID of the project to which the resource belongs
+	// Project ID: Project ID of the resource
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Product code
-	// Note: To query the product codes used in the current month, call <a href="https://www.tencentcloud.com/document/product/555/32374">DescribeBillSummaryByProduct</a>.
+	// Product name code
+	// Remark: If needed to obtain BusinessCode used in current month, invoke API: <a href="https://www.tencentcloud.com/document/product/555/35761?from_cn_redirect=1">Get fee distribution by product</a>
 	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
 
-	// Context information returned by the last request. You can set `Month` to `2023-05` or later to accelerate queries. We recommend users whose data volume is over 100 thousand entries use the paginated query feature, which can help greatly speed up your queries.
+	// Context information returned from the last request. Paginated query of data for months with Month>=2023-05 can speed up query speed. Recommended for users with data volume at tens of thousands level. Query speed can be improved by 2-10x.
 	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
 
-	// The account ID of the payer, which is the unique identifier of a Tencent Cloud user. This account is allowed to query its own bills by default. If an organization admin account needs to query the self-pay bills of members, this field should be specified as the member account ID.
+	// Account ID of the payer (Account ID is the unique account identifier for the user in Tencent Cloud). By default, the query returns the account statement of the current account. If the group management account needs to query the self-pay bills of member accounts, enter the member account UIN in this field.
 	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
 }
 
@@ -3050,14 +5678,13 @@ func (r *DescribeBillDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillDetailResponseParams struct {
-	// Details list
+	// Detail list
 	DetailSet []*BillDetail `json:"DetailSet,omitnil,omitempty" name:"DetailSet"`
 
-	// 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Total record count, cached once every 24 hours, may be less than the actual total record count
 	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Context information of this request can be used in the request parameter of the next request to accelerate query speed.
 	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3082,40 +5709,40 @@ func (r *DescribeBillDetailResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillDownloadUrlRequestParams struct {
-	// Bill type. Valid values:
-	// `billOverview` (L0: PDF bills)
-	// `billSummary` (L1: Bill summary)	
-	// `billResource` (L2: Bill by instance)	
-	// `billDetail` (L3: Bill details)	
-	// `billPack` (Bill packs)
+	// Billing mode. Enumeration values
+	// billOverview=L0-PDF Bill
+	// Bill Summary=L1-Summary Bill	
+	// billResource=L2-Resource bill	
+	// billDetail=L3-Detailed Bill	
+	// billPack
 	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
 
-	// Bill month.
-	// The earliest month that can be queried is January 2021.
-	// L0 bills and bill packs cannot be downloaded for the current month. Please download the current month's bills after it is generated at 19:00 on the 1st day of the next month.
+	// Billing month
+	// Earliest start month supported is 2021-01
+	// L0-PDF&bill package does not support download for the current month. Please download the monthly bill after billing on the 1st of next month at 19:00.
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// List of account IDs for downloading the bill. By default, it queries the bill for the current account. If you are an admin account and need to download bills for member accounts with their own payment, input the member account's UIN for this parameter.
+	// Downloaded account ID list. By default, the query returns the account statement of the current account. If the group management account needs to download the self-pay bills of member accounts, enter the member account UIN in this field.
 	ChildUin []*string `json:"ChildUin,omitnil,omitempty" name:"ChildUin"`
 }
 
 type DescribeBillDownloadUrlRequest struct {
 	*tchttp.BaseRequest
 	
-	// Bill type. Valid values:
-	// `billOverview` (L0: PDF bills)
-	// `billSummary` (L1: Bill summary)	
-	// `billResource` (L2: Bill by instance)	
-	// `billDetail` (L3: Bill details)	
-	// `billPack` (Bill packs)
+	// Billing mode. Enumeration values
+	// billOverview=L0-PDF Bill
+	// Bill Summary=L1-Summary Bill	
+	// billResource=L2-Resource bill	
+	// billDetail=L3-Detailed Bill	
+	// billPack
 	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
 
-	// Bill month.
-	// The earliest month that can be queried is January 2021.
-	// L0 bills and bill packs cannot be downloaded for the current month. Please download the current month's bills after it is generated at 19:00 on the 1st day of the next month.
+	// Billing month
+	// Earliest start month supported is 2021-01
+	// L0-PDF&bill package does not support download for the current month. Please download the monthly bill after billing on the 1st of next month at 19:00.
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// List of account IDs for downloading the bill. By default, it queries the bill for the current account. If you are an admin account and need to download bills for member accounts with their own payment, input the member account's UIN for this parameter.
+	// Downloaded account ID list. By default, the query returns the account statement of the current account. If the group management account needs to download the self-pay bills of member accounts, enter the member account UIN in this field.
 	ChildUin []*string `json:"ChildUin,omitnil,omitempty" name:"ChildUin"`
 }
 
@@ -3142,10 +5769,11 @@ func (r *DescribeBillDownloadUrlRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillDownloadUrlResponseParams struct {
-	// Indicates whether the bill file is ready. Valid values: `0` (the file is being generated), `1` (the file has been generated).
+	// Whether the bill file is ready. 0: file generating, 1: file generated
 	Ready *int64 `json:"Ready,omitnil,omitempty" name:"Ready"`
 
-	// Billing file download link, valid for 1 day. Note: This field may return null, indicating that no valid values can be obtained.
+	// Billing file download link, valid for 1 day
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DownloadUrl *string `json:"DownloadUrl,omitnil,omitempty" name:"DownloadUrl"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4026,36 +6654,38 @@ func (r *DescribeBillSummaryForOrganizationResponse) FromJsonString(s string) er
 
 // Predefined struct for user
 type DescribeBillSummaryRequestParams struct {
-	// Bill month in the format of "yyyy-mm"
+	// <p>Bill month, formatted as 2023-04</p>
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// Bill dimension. Valid values: `business`, `project`, `region`, `payMode`, and `tag`
+	// <p>Billing dimension type. Enumeration values as follows: business, project, region, payMode, tag</p>
 	GroupType *string `json:"GroupType,omitnil,omitempty" name:"GroupType"`
 
-	// Tag key, which is used when `GroupType` is `tag`.
+	// <p>Tag key. Pass GroupType=tag when obtaining dimensional billing by tag.</p>
 	TagKey []*string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
 
-
+	// <p>Operator UIN: Operator account ID (ID of the prepaid resource order or postpaid operation, activate postpaid resource account or role ID)</p>
 	OperateUin *string `json:"OperateUin,omitnil,omitempty" name:"OperateUin"`
 
-
+	// <p>Account ID of the payer (Account ID is the unique account identifier for the user in Tencent Cloud). By default, the query returns the account statement of the current account. If the group management account needs to query the self-pay bills of member accounts, enter the member account UIN in this field.</p>
 	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
 }
 
 type DescribeBillSummaryRequest struct {
 	*tchttp.BaseRequest
 	
-	// Bill month in the format of "yyyy-mm"
+	// <p>Bill month, formatted as 2023-04</p>
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// Bill dimension. Valid values: `business`, `project`, `region`, `payMode`, and `tag`
+	// <p>Billing dimension type. Enumeration values as follows: business, project, region, payMode, tag</p>
 	GroupType *string `json:"GroupType,omitnil,omitempty" name:"GroupType"`
 
-	// Tag key, which is used when `GroupType` is `tag`.
+	// <p>Tag key. Pass GroupType=tag when obtaining dimensional billing by tag.</p>
 	TagKey []*string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
 
+	// <p>Operator UIN: Operator account ID (ID of the prepaid resource order or postpaid operation, activate postpaid resource account or role ID)</p>
 	OperateUin *string `json:"OperateUin,omitnil,omitempty" name:"OperateUin"`
 
+	// <p>Account ID of the payer (Account ID is the unique account identifier for the user in Tencent Cloud). By default, the query returns the account statement of the current account. If the group management account needs to query the self-pay bills of member accounts, enter the member account UIN in this field.</p>
 	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
 }
 
@@ -4084,10 +6714,10 @@ func (r *DescribeBillSummaryRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillSummaryResponseParams struct {
-	// Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first time. Wait for 5-10 minutes and try again.
+	// <p>Data readiness, 0 preparing, 1 ready. (Ready=0 indicates the first time initialization billing is in progress for the present UIN, is expected to take 5-10 minutes. Just retry after 10 minutes.)</p>
 	Ready *uint64 `json:"Ready,omitnil,omitempty" name:"Ready"`
 
-	// Detailed summary of costs by multiple dimensions
+	// <p>Multidimensional bill summary of consumption detail</p>
 	SummaryDetail []*SummaryDetail `json:"SummaryDetail,omitnil,omitempty" name:"SummaryDetail"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4111,6 +6741,143 @@ func (r *DescribeBillSummaryResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeCPQBillingMappingRequestParams struct {
+	// Offset
+	Offset *string `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// The number of entries returned at a time. The maximum value is `100`.	
+	Limit *string `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Quoted subproduct name
+	SpuName *string `json:"SpuName,omitnil,omitempty" name:"SpuName"`
+
+	// Quoted product name
+	CategoryName *string `json:"CategoryName,omitnil,omitempty" name:"CategoryName"`
+
+	// Product name
+	BusinessName *string `json:"BusinessName,omitnil,omitempty" name:"BusinessName"`
+
+	// Subproduct name
+	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
+
+	// Component type name
+	ComponentName *string `json:"ComponentName,omitnil,omitempty" name:"ComponentName"`
+
+	// Component name
+	ItemName *string `json:"ItemName,omitnil,omitempty" name:"ItemName"`
+
+	// Product code
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+
+	// Subproduct code
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// Component type code
+	ComponentCode *string `json:"ComponentCode,omitnil,omitempty" name:"ComponentCode"`
+
+	// Component code
+	ItemCode *string `json:"ItemCode,omitnil,omitempty" name:"ItemCode"`
+}
+
+type DescribeCPQBillingMappingRequest struct {
+	*tchttp.BaseRequest
+	
+	// Offset
+	Offset *string `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// The number of entries returned at a time. The maximum value is `100`.	
+	Limit *string `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Quoted subproduct name
+	SpuName *string `json:"SpuName,omitnil,omitempty" name:"SpuName"`
+
+	// Quoted product name
+	CategoryName *string `json:"CategoryName,omitnil,omitempty" name:"CategoryName"`
+
+	// Product name
+	BusinessName *string `json:"BusinessName,omitnil,omitempty" name:"BusinessName"`
+
+	// Subproduct name
+	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
+
+	// Component type name
+	ComponentName *string `json:"ComponentName,omitnil,omitempty" name:"ComponentName"`
+
+	// Component name
+	ItemName *string `json:"ItemName,omitnil,omitempty" name:"ItemName"`
+
+	// Product code
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+
+	// Subproduct code
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// Component type code
+	ComponentCode *string `json:"ComponentCode,omitnil,omitempty" name:"ComponentCode"`
+
+	// Component code
+	ItemCode *string `json:"ItemCode,omitnil,omitempty" name:"ItemCode"`
+}
+
+func (r *DescribeCPQBillingMappingRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCPQBillingMappingRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "SpuName")
+	delete(f, "CategoryName")
+	delete(f, "BusinessName")
+	delete(f, "ProductName")
+	delete(f, "ComponentName")
+	delete(f, "ItemName")
+	delete(f, "BusinessCode")
+	delete(f, "ProductCode")
+	delete(f, "ComponentCode")
+	delete(f, "ItemCode")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCPQBillingMappingRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCPQBillingMappingResponseParams struct {
+	// Return data details
+	ResourceSpuSet []*ResourceSpuSet `json:"ResourceSpuSet,omitnil,omitempty" name:"ResourceSpuSet"`
+
+	// 10
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCPQBillingMappingResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCPQBillingMappingResponseParams `json:"Response"`
+}
+
+func (r *DescribeCPQBillingMappingResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCPQBillingMappingResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeCostDetailRequestParams struct {
 	// The number of entries returned at a time. The maximum value is `100`.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
@@ -4118,19 +6885,19 @@ type DescribeCostDetailRequestParams struct {
 	// Offset
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Cycle start time in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be entered, and if this field is present, Month becomes invalid. BeginTime and EndTime must be entered together, and must be in the same month. Cross-month retrieval is not currently supported. Data retrievable is the data after cost analysis is activated and within the past 24 months.
+	// Cycle start time. The query granularity is daily. The hour/minute/second parameter must be input in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be entered, and if this field is present, Month becomes invalid. BeginTime and EndTime must be entered together, and must be in the same month. Cross-month retrieval is not currently supported. Data retrievable is the data after consumption bill is enabled and within the past 18 months.
 	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
-	// Cycle end time in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be entered, and if this field is present, Month becomes invalid. BeginTime and EndTime must be entered together, and must be in the same month. Cross-month retrieval is not currently supported. Data retrievable is the data after cost analysis is activated and within the past 24 months.
+	// Cycle end time. The query granularity is daily. The hour-minute-second parameter must be imported in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be specified. If this field is present, Month becomes invalid. BeginTime and EndTime must be specified together and must be in the same month. Cross-month retrieval is not currently supported. Data retrievable is the data after consumption bill is enabled and within the past 18 months.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Whether the total number of records in the list is needed, for frontend pagination1: needed, 0: not needed
 	NeedRecordNum *uint64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
 
-	// Month, in the format of yyyy-mm. Either Month or BeginTime&EndTime must be entered, and if BeginTime&EndTime is entered, Month becomes invalid. It cannot be earlier than the month when cost analysis is activated. Data of up to 24 months can be retrieved.
+	// The month is in the format of yyyy-mm. Either Month or BeginTime&EndTime must be specified. If BeginTime&EndTime is specified, the Month field is invalid. It cannot be earlier than the month when the consumption bill was enabled. Data within the last 18 months can be pulled at most.
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// Used to query information of a specified product (currently not available)
+	// Query information of a specified product
 	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
 
 	// Payment mode. Options include prePay and postPay.
@@ -4149,19 +6916,19 @@ type DescribeCostDetailRequest struct {
 	// Offset
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Cycle start time in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be entered, and if this field is present, Month becomes invalid. BeginTime and EndTime must be entered together, and must be in the same month. Cross-month retrieval is not currently supported. Data retrievable is the data after cost analysis is activated and within the past 24 months.
+	// Cycle start time. The query granularity is daily. The hour/minute/second parameter must be input in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be entered, and if this field is present, Month becomes invalid. BeginTime and EndTime must be entered together, and must be in the same month. Cross-month retrieval is not currently supported. Data retrievable is the data after consumption bill is enabled and within the past 18 months.
 	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
-	// Cycle end time in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be entered, and if this field is present, Month becomes invalid. BeginTime and EndTime must be entered together, and must be in the same month. Cross-month retrieval is not currently supported. Data retrievable is the data after cost analysis is activated and within the past 24 months.
+	// Cycle end time. The query granularity is daily. The hour-minute-second parameter must be imported in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be specified. If this field is present, Month becomes invalid. BeginTime and EndTime must be specified together and must be in the same month. Cross-month retrieval is not currently supported. Data retrievable is the data after consumption bill is enabled and within the past 18 months.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Whether the total number of records in the list is needed, for frontend pagination1: needed, 0: not needed
 	NeedRecordNum *uint64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
 
-	// Month, in the format of yyyy-mm. Either Month or BeginTime&EndTime must be entered, and if BeginTime&EndTime is entered, Month becomes invalid. It cannot be earlier than the month when cost analysis is activated. Data of up to 24 months can be retrieved.
+	// The month is in the format of yyyy-mm. Either Month or BeginTime&EndTime must be specified. If BeginTime&EndTime is specified, the Month field is invalid. It cannot be earlier than the month when the consumption bill was enabled. Data within the last 18 months can be pulled at most.
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// Used to query information of a specified product (currently not available)
+	// Query information of a specified product
 	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
 
 	// Payment mode. Options include prePay and postPay.
@@ -4201,7 +6968,6 @@ func (r *DescribeCostDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeCostDetailResponseParams struct {
 	// Consumption details
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	DetailSet []*CostDetail `json:"DetailSet,omitnil,omitempty" name:"DetailSet"`
 
 	// Record countNote: This field may return null, indicating that no valid values can be obtained.
@@ -4247,7 +7013,7 @@ type DescribeCostExplorerSummaryRequestParams struct {
 	// zone = Availability zoneactionType = Transaction typepayMode = Billing modetags = Tagproject = ProjectpayerUin = Payer accountownerUin = User account
 	Dimensions *string `json:"Dimensions,omitnil,omitempty" name:"Dimensions"`
 
-	// Fee type: cost-total cost, totalCost-original price cost
+	// Fee type: cost-discounted total cost, totalCost-original price cost
 	FeeType *string `json:"FeeType,omitnil,omitempty" name:"FeeType"`
 
 	// Quantity. The maximum value per page is 100.
@@ -4287,7 +7053,7 @@ type DescribeCostExplorerSummaryRequest struct {
 	// zone = Availability zoneactionType = Transaction typepayMode = Billing modetags = Tagproject = ProjectpayerUin = Payer accountownerUin = User account
 	Dimensions *string `json:"Dimensions,omitnil,omitempty" name:"Dimensions"`
 
-	// Fee type: cost-total cost, totalCost-original price cost
+	// Fee type: cost-discounted total cost, totalCost-original price cost
 	FeeType *string `json:"FeeType,omitnil,omitempty" name:"FeeType"`
 
 	// Quantity. The maximum value per page is 100.
@@ -4337,20 +7103,19 @@ func (r *DescribeCostExplorerSummaryRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCostExplorerSummaryResponseParams struct {
-	// Number of data entries
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of data records
 	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
 
-	// Header informationNote: This field may return null, indicating that no valid values can be obtained.
+	// Header information.
 	Header *AnalyseHeaderDetail `json:"Header,omitnil,omitempty" name:"Header"`
 
-	// Data detailsNote: This field may return null, indicating that no valid values can be obtained.
+	// Data details
 	Detail []*AnalyseDetail `json:"Detail,omitnil,omitempty" name:"Detail"`
 
-	// Data amountNote: This field may return null, indicating that no valid values can be obtained.
+	// data total
 	TotalDetail *AnalyseDetail `json:"TotalDetail,omitnil,omitempty" name:"TotalDetail"`
 
-	// Filter boxNote: This field may return null, indicating that no valid values can be obtained.
+	// filtering box
 	ConditionValue *AnalyseConditionDetail `json:"ConditionValue,omitnil,omitempty" name:"ConditionValue"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4448,10 +7213,10 @@ type DescribeCostSummaryByProductResponseParams struct {
 	// Consumption details
 	Total *ConsumptionSummaryTotal `json:"Total,omitnil,omitempty" name:"Total"`
 
-	// Consumption details summarized by productNote: This field may return null, indicating that no valid values can be obtained.
+	// Consumption details summarized by product
 	Data []*ConsumptionBusinessSummaryDataItem `json:"Data,omitnil,omitempty" name:"Data"`
 
-	// Record count. The system returns null when NeedRecordNum is 0.Note: This field may return null, indicating that no valid values can be obtained.
+	// Record count. If NeedRecordNum is 0, null is returned.
 	RecordNum *uint64 `json:"RecordNum,omitnil,omitempty" name:"RecordNum"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4552,7 +7317,7 @@ type DescribeCostSummaryByProjectResponseParams struct {
 	// Consumption details summarized by business
 	Data []*ConsumptionProjectSummaryDataItem `json:"Data,omitnil,omitempty" name:"Data"`
 
-	// Record count. The system returns null when NeedRecordNum is 0.
+	// Record count. If NeedRecordNum is 0, null is returned.
 	RecordNum *uint64 `json:"RecordNum,omitnil,omitempty" name:"RecordNum"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4653,7 +7418,7 @@ type DescribeCostSummaryByRegionResponseParams struct {
 	// Consumption details summarized by region
 	Data []*ConsumptionRegionSummaryDataItem `json:"Data,omitnil,omitempty" name:"Data"`
 
-	// Record count. The system returns null when NeedRecordNum is 0.Note: This field may return null, indicating that no valid values can be obtained.
+	// Record count. If NeedRecordNum is 0, null is returned.
 	RecordNum *uint64 `json:"RecordNum,omitnil,omitempty" name:"RecordNum"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4762,7 +7527,7 @@ type DescribeCostSummaryByResourceResponseParams struct {
 	// Data readiness, 0 for not ready, 1 for ready
 	Ready *uint64 `json:"Ready,omitnil,omitempty" name:"Ready"`
 
-	// Consumption detailsNote: This field may return null, indicating that no valid values can be obtained.
+	// Consumption details
 	Total *ConsumptionSummaryTotal `json:"Total,omitnil,omitempty" name:"Total"`
 
 	// Filter criteria
@@ -4772,7 +7537,7 @@ type DescribeCostSummaryByResourceResponseParams struct {
 	// Record countNote: This field may return null, indicating that no valid values can be obtained.
 	RecordNum *uint64 `json:"RecordNum,omitnil,omitempty" name:"RecordNum"`
 
-	// Resource consumption detailsNote: This field may return null, indicating that no valid values can be obtained.
+	// Resource consumption details
 	Data []*ConsumptionResourceSummaryDataItem `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4839,6 +7604,9 @@ type DescribeDealsByCondRequestParams struct {
 	// Resource ID
 	// Example:ins-a2bb34
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// Order status
+	StatusSet []*int64 `json:"StatusSet,omitnil,omitempty" name:"StatusSet"`
 }
 
 type DescribeDealsByCondRequest struct {
@@ -4886,6 +7654,9 @@ type DescribeDealsByCondRequest struct {
 	// Resource ID
 	// Example:ins-a2bb34
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// Order status
+	StatusSet []*int64 `json:"StatusSet,omitnil,omitempty" name:"StatusSet"`
 }
 
 func (r *DescribeDealsByCondRequest) ToJsonString() string {
@@ -4908,6 +7679,7 @@ func (r *DescribeDealsByCondRequest) FromJsonString(s string) error {
 	delete(f, "OrderId")
 	delete(f, "BigDealId")
 	delete(f, "ResourceId")
+	delete(f, "StatusSet")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDealsByCondRequest has unknown keys!", "")
 	}
@@ -4944,10 +7716,10 @@ func (r *DescribeDealsByCondResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDosageCosDetailByDateRequestParams struct {
-	// The start date of the usage query, such as `2020-09-01`.
+	// The start date of the usage query in the format of yyyy-mm-dd, such as `2020-09-01`.
 	StartDate *string `json:"StartDate,omitnil,omitempty" name:"StartDate"`
 
-	// The end date of the usage query (end date must be in the same month as the start date), such as `2020-09-30`.
+	// The end date of the usage query in the format of yyyy-mm-dd, such as `2020-09-30`. (The end date must be in the same month as the start date. Cross-month queries are not supported.)
 	EndDate *string `json:"EndDate,omitnil,omitempty" name:"EndDate"`
 
 	// Bucket name. You can use `Get Service` to query the list of all buckets under a requester account. For details, see [GET Service (List Buckets)](https://www.tencentcloud.com/document/product/436/8291).
@@ -4957,10 +7729,10 @@ type DescribeDosageCosDetailByDateRequestParams struct {
 type DescribeDosageCosDetailByDateRequest struct {
 	*tchttp.BaseRequest
 	
-	// The start date of the usage query, such as `2020-09-01`.
+	// The start date of the usage query in the format of yyyy-mm-dd, such as `2020-09-01`.
 	StartDate *string `json:"StartDate,omitnil,omitempty" name:"StartDate"`
 
-	// The end date of the usage query (end date must be in the same month as the start date), such as `2020-09-30`.
+	// The end date of the usage query in the format of yyyy-mm-dd, such as `2020-09-30`. (The end date must be in the same month as the start date. Cross-month queries are not supported.)
 	EndDate *string `json:"EndDate,omitnil,omitempty" name:"EndDate"`
 
 	// Bucket name. You can use `Get Service` to query the list of all buckets under a requester account. For details, see [GET Service (List Buckets)](https://www.tencentcloud.com/document/product/436/8291).
@@ -5010,6 +7782,217 @@ func (r *DescribeDosageCosDetailByDateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDosageCosDetailByDateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGatherResourceRequestParams struct {
+	// Quantity, with the maximum value of 1,000
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset. If Offset is 0, it indicates the first page. If Limit is 100, then Offset is 100, and it indicates the second page. If Offset is 200, it indicates the third page, and so on.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Unique identifier of a billing unit, used for filtering
+	TreeNodeUniqKey *string `json:"TreeNodeUniqKey,omitnil,omitempty" name:"TreeNodeUniqKey"`
+
+	// Resource directory category, with the enumerated values as follows:
+	// all - All 
+	// none - Not collected
+	GatherType *string `json:"GatherType,omitnil,omitempty" name:"GatherType"`
+
+	// Sorting field, with the enumerated values as follows:
+	// realCost - Discounted total
+	// cashPayAmount - Cash amount
+	// voucherPayAmount - Amount of promo voucher
+	// incentivePayAmount - Amount of free credit
+	// transferPayAmount - Royalty amount
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+
+	// Sorting type, with the enumerated values as follows:
+	// asc - Ascending
+	// desc - Descending
+	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+	// Product code, used for filtering
+	BusinessCodes []*string `json:"BusinessCodes,omitnil,omitempty" name:"BusinessCodes"`
+
+	// Subproduct code, used for filtering
+	ProductCodes []*string `json:"ProductCodes,omitnil,omitempty" name:"ProductCodes"`
+
+	// Component name code, used for filtering
+	ItemCodes []*string `json:"ItemCodes,omitnil,omitempty" name:"ItemCodes"`
+
+	// Region ID, used for filtering
+	RegionIds []*uint64 `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
+
+	// Instance type code, used for filtering
+	InstanceTypes []*string `json:"InstanceTypes,omitnil,omitempty" name:"InstanceTypes"`
+
+	// Billing mode code, used for filtering
+	PayModes []*string `json:"PayModes,omitnil,omitempty" name:"PayModes"`
+
+	// Operator UIN, used for filtering
+	OperateUins []*string `json:"OperateUins,omitnil,omitempty" name:"OperateUins"`
+
+	// User UIN, used for filtering
+	OwnerUins []*string `json:"OwnerUins,omitnil,omitempty" name:"OwnerUins"`
+
+	// Fuzzy search: supports tag, resource ID, and resource alias.
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
+
+	// Tag, used for filtering
+	Tag []*string `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Project ID, used for filtering
+	ProjectIds []*string `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
+
+	// Transaction type code, used for filtering
+	ActionTypes []*string `json:"ActionTypes,omitnil,omitempty" name:"ActionTypes"`
+}
+
+type DescribeGatherResourceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Quantity, with the maximum value of 1,000
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset. If Offset is 0, it indicates the first page. If Limit is 100, then Offset is 100, and it indicates the second page. If Offset is 200, it indicates the third page, and so on.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Bill month, in the format of 2024-02, which is the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Unique identifier of a billing unit, used for filtering
+	TreeNodeUniqKey *string `json:"TreeNodeUniqKey,omitnil,omitempty" name:"TreeNodeUniqKey"`
+
+	// Resource directory category, with the enumerated values as follows:
+	// all - All 
+	// none - Not collected
+	GatherType *string `json:"GatherType,omitnil,omitempty" name:"GatherType"`
+
+	// Sorting field, with the enumerated values as follows:
+	// realCost - Discounted total
+	// cashPayAmount - Cash amount
+	// voucherPayAmount - Amount of promo voucher
+	// incentivePayAmount - Amount of free credit
+	// transferPayAmount - Royalty amount
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+
+	// Sorting type, with the enumerated values as follows:
+	// asc - Ascending
+	// desc - Descending
+	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+	// Product code, used for filtering
+	BusinessCodes []*string `json:"BusinessCodes,omitnil,omitempty" name:"BusinessCodes"`
+
+	// Subproduct code, used for filtering
+	ProductCodes []*string `json:"ProductCodes,omitnil,omitempty" name:"ProductCodes"`
+
+	// Component name code, used for filtering
+	ItemCodes []*string `json:"ItemCodes,omitnil,omitempty" name:"ItemCodes"`
+
+	// Region ID, used for filtering
+	RegionIds []*uint64 `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
+
+	// Instance type code, used for filtering
+	InstanceTypes []*string `json:"InstanceTypes,omitnil,omitempty" name:"InstanceTypes"`
+
+	// Billing mode code, used for filtering
+	PayModes []*string `json:"PayModes,omitnil,omitempty" name:"PayModes"`
+
+	// Operator UIN, used for filtering
+	OperateUins []*string `json:"OperateUins,omitnil,omitempty" name:"OperateUins"`
+
+	// User UIN, used for filtering
+	OwnerUins []*string `json:"OwnerUins,omitnil,omitempty" name:"OwnerUins"`
+
+	// Fuzzy search: supports tag, resource ID, and resource alias.
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
+
+	// Tag, used for filtering
+	Tag []*string `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Project ID, used for filtering
+	ProjectIds []*string `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
+
+	// Transaction type code, used for filtering
+	ActionTypes []*string `json:"ActionTypes,omitnil,omitempty" name:"ActionTypes"`
+}
+
+func (r *DescribeGatherResourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGatherResourceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Month")
+	delete(f, "TreeNodeUniqKey")
+	delete(f, "GatherType")
+	delete(f, "Sort")
+	delete(f, "SortType")
+	delete(f, "BusinessCodes")
+	delete(f, "ProductCodes")
+	delete(f, "ItemCodes")
+	delete(f, "RegionIds")
+	delete(f, "InstanceTypes")
+	delete(f, "PayModes")
+	delete(f, "OperateUins")
+	delete(f, "OwnerUins")
+	delete(f, "SearchKey")
+	delete(f, "Tag")
+	delete(f, "ProjectIds")
+	delete(f, "ActionTypes")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeGatherResourceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGatherResourceResponseParams struct {
+	// Total quantity.
+	RecordNum *int64 `json:"RecordNum,omitnil,omitempty" name:"RecordNum"`
+
+	// Resource collection summary
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GatherResourceSummary []*GatherResourceSummary `json:"GatherResourceSummary,omitnil,omitempty" name:"GatherResourceSummary"`
+
+	// Data update time
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LastUpdateTime *string `json:"LastUpdateTime,omitnil,omitempty" name:"LastUpdateTime"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeGatherResourceResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeGatherResourceResponseParams `json:"Response"`
+}
+
+func (r *DescribeGatherResourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGatherResourceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5201,38 +8184,38 @@ func (r *DescribeRenewInstancesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTagListRequestParams struct {
-	// The number of entries returned at a time. The maximum value is `1000`.
+	// Quantity, with the maximum value of 1,000
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Pagination offset. If `Offset` is `0`, it indicates the first page. When `Limit` is `100`, if `Offset` is `100`, it indicates the second page; if `Offset` is `200`, it indicates the third page, and so on.
+	// Pagination offset. Offset=0 indicates the first page. If Limit=100, Offset=100 indicates the second page, Offset=200 indicates the third page, and so on.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Cost allocation tag key, used for fuzzy search.
+	// Cost allocation tag key, used as fuzzy search
 	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
 
-	// Tag type, used for tag filtering. Valid values: `0` (general tags), `1` (cost allocation tags). If it is not specified, all tag keys will be queried.
+	// Tag type, enumeration value: 0 ordinary tag, 1 allocation tag, used for filtering. If not passed, get all tag keys.
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Sorting order. Valid values: `asc` (ascending order), `desc` (descending order).
+	// Sorting method, enumeration value: asc for ascending order, desc for descending order.
 	OrderType *string `json:"OrderType,omitnil,omitempty" name:"OrderType"`
 }
 
 type DescribeTagListRequest struct {
 	*tchttp.BaseRequest
 	
-	// The number of entries returned at a time. The maximum value is `1000`.
+	// Quantity, with the maximum value of 1,000
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Pagination offset. If `Offset` is `0`, it indicates the first page. When `Limit` is `100`, if `Offset` is `100`, it indicates the second page; if `Offset` is `200`, it indicates the third page, and so on.
+	// Pagination offset. Offset=0 indicates the first page. If Limit=100, Offset=100 indicates the second page, Offset=200 indicates the third page, and so on.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Cost allocation tag key, used for fuzzy search.
+	// Cost allocation tag key, used as fuzzy search
 	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
 
-	// Tag type, used for tag filtering. Valid values: `0` (general tags), `1` (cost allocation tags). If it is not specified, all tag keys will be queried.
+	// Tag type, enumeration value: 0 ordinary tag, 1 allocation tag, used for filtering. If not passed, get all tag keys.
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Sorting order. Valid values: `asc` (ascending order), `desc` (descending order).
+	// Sorting method, enumeration value: asc for ascending order, desc for descending order.
 	OrderType *string `json:"OrderType,omitnil,omitempty" name:"OrderType"`
 }
 
@@ -5261,7 +8244,7 @@ func (r *DescribeTagListRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTagListResponseParams struct {
-	// Total number of records.
+	// Total number of records
 	RecordNum *uint64 `json:"RecordNum,omitnil,omitempty" name:"RecordNum"`
 
 	// Tag information.
@@ -5575,8 +8558,7 @@ type DescribeVoucherUsageDetailsResponseParams struct {
 	// The total amount used. The value of this parameter is the total amount used (USD, rounded to 8 decimal places) multiplied by 100,000,000.
 	TotalUsedAmount *int64 `json:"TotalUsedAmount,omitnil,omitempty" name:"TotalUsedAmount"`
 
-	// The usage details.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Voucher usage record details
 	UsageRecords []*UsageRecords `json:"UsageRecords,omitnil,omitempty" name:"UsageRecords"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5652,48 +8634,39 @@ type DistributionBillDetail struct {
 	OperateUin *string `json:"OperateUin,omitnil,omitempty" name:"OperateUin"`
 
 	// Tag information.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Tags []*BillTagInfo `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Product code.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Product code
 	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
 
-	// Subproduct code.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Subproduct code
 	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
 
-	// Transaction type code.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Transaction type code
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-	// Region ID.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Region ID
 	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Price attribute: A set of attributes which will determine the price of a component, apart from unit price and usage duration.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Price attribute: Other attributes of the component that affect discount pricing besides unit price and duration
 	PriceInfo []*string `json:"PriceInfo,omitnil,omitempty" name:"PriceInfo"`
 
-	// Associated transaction document ID: The ID of the document associated with a transaction, such as a write-off order, the original order showing a deduction error during first settlement, a restructured order, or the original purchase order corresponding to a refund order.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Associated transaction document ID: Document ID associated with this transaction, such as a write-off order, the original order, a resettlement order, or the original purchase order number recorded in a refund order.
 	AssociatedOrder *BillDetailAssociatedOrder `json:"AssociatedOrder,omitnil,omitempty" name:"AssociatedOrder"`
 
-	// Calculation formula: The detailed calculation formula for a specific transaction type, such as refund or configuration change.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Calculation explanation: A detailed explanation to calculations of billing settlement for special transaction types, such as refund and configuration changes.
 	Formula *string `json:"Formula,omitnil,omitempty" name:"Formula"`
 
-	// Billing rules: Official website links for detailed billing rules of each product.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Billing Rules: The detailed billing rules for each product shown in the portal explanation link
 	FormulaUrl *string `json:"FormulaUrl,omitnil,omitempty" name:"FormulaUrl"`
 
-	// Billing monthNote: This field may return null, indicating that no valid values can be obtained.
+	// Billing month
 	BillMonth *string `json:"BillMonth,omitnil,omitempty" name:"BillMonth"`
 
-	// Billing dayNote: This field may return null, indicating that no valid values can be obtained.
+	// Billing day
 	BillDay *string `json:"BillDay,omitnil,omitempty" name:"BillDay"`
 }
 
@@ -5703,6 +8676,131 @@ type ExcludedProducts struct {
 
 	// `postPay`: pay-as-you-go; `prePay`: prepaid; `riPay`: reserved instance; empty or `*`: all.
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+}
+
+type GatherResourceSummary struct {
+	// Payer UIN: Account ID of the payer, which is the unique account identifier for the user in Tencent Cloud.
+	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
+
+	// User UIN: Account ID of the actual resource user
+	OwnerUin *string `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
+
+	// Operator account ID (the resource account ID or role ID opened by prepaid resource ordering or postpaid operation)
+	OperateUin *string `json:"OperateUin,omitnil,omitempty" name:"OperateUin"`
+
+	// Instance type code
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Instance type: The type of an instance corresponding to the product service purchased, including resource packages, RI, SP, and spot instances. It is displayed as "-" by default for regular instances.
+	InstanceTypeName *string `json:"InstanceTypeName,omitnil,omitempty" name:"InstanceTypeName"`
+
+	// Resource ID: Resources vary by product, and the content is not identical. For example, Cloud Virtual Machine (CVM) corresponds to the instance ID. If the product is split, it shows the split item ID, such as COS bucket ID and CDN domain name.
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// Instance name: The name set by the user for the resource in the console, which is empty by default if not set. If the product is split, it shows the split resource alias.
+	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
+
+	// Unique identifier of a cost allocation unit
+	TreeNodeUniqKey *string `json:"TreeNodeUniqKey,omitnil,omitempty" name:"TreeNodeUniqKey"`
+
+	// Name of a cost allocation unit
+	TreeNodeUniqKeyName *string `json:"TreeNodeUniqKeyName,omitnil,omitempty" name:"TreeNodeUniqKeyName"`
+
+	// Allocation rule ID hit by the resource
+	RuleId *uint64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
+	// Allocation rule name hit by the resource
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
+
+	// Product code
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+
+	// Product name: Various cloud products purchased by users
+	BusinessCodeName *string `json:"BusinessCodeName,omitnil,omitempty" name:"BusinessCodeName"`
+
+	// Component name code
+	ItemCode *string `json:"ItemCode,omitnil,omitempty" name:"ItemCode"`
+
+	// Component name: The specific component of a product or service purchased by the user
+	ItemCodeName *string `json:"ItemCodeName,omitnil,omitempty" name:"ItemCodeName"`
+
+	// Region ID
+	RegionId *uint64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+
+	// Region name: The region where the resource is located
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
+
+	// Allocation tag: The resource-bound tag
+	Tag []*BillTag `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Discounted total: discounted total = (Original Price - Original Price Deducted by a Reserved Instance - Savings Plan Deduction from Original Price) * Discount Rate
+	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
+
+	// Cash account expenditure (CNY): The amount paid through the cash account
+	CashPayAmount *string `json:"CashPayAmount,omitnil,omitempty" name:"CashPayAmount"`
+
+	// Promo voucher expenditure (CNY): The amount paid using various vouchers (such as promo vouchers and cash vouchers)
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
+
+	// Gift account expenditure (CNY): The amount paid using free credits
+	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
+
+	// Royalty account expenditure (CNY): The amount paid through the royalty account
+	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
+
+	// Cost collection type: The source types of fees, including allocated, collection and unallocated.
+	// 0 - Allocation
+	// 1 - Collection
+	// -1 - Unallocated
+	AllocationType *int64 `json:"AllocationType,omitnil,omitempty" name:"AllocationType"`
+
+	// Information of the current allocation unit
+	BelongTreeNodeUniqKey *AllocationTreeNode `json:"BelongTreeNodeUniqKey,omitnil,omitempty" name:"BelongTreeNodeUniqKey"`
+
+	// Information on allocation rules hit by the current resource
+	BelongRule *AllocationRule `json:"BelongRule,omitnil,omitempty" name:"BelongRule"`
+
+	// Information on other allocation units
+	OtherTreeNodeUniqKeys []*AllocationTreeNode `json:"OtherTreeNodeUniqKeys,omitnil,omitempty" name:"OtherTreeNodeUniqKeys"`
+
+	// Information on other hit rules
+	OtherRules []*AllocationRule `json:"OtherRules,omitnil,omitempty" name:"OtherRules"`
+
+	// Project ID
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Project name: The Project to which a resource belongs, which is independently allocated by the user for the resource in the console. If a resource has not been allocated to an Project, it will be a default Project.
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
+
+	// Subproduct code
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// Subproduct name: Product subdivision type purchased by the user
+	ProductCodeName *string `json:"ProductCodeName,omitnil,omitempty" name:"ProductCodeName"`
+
+	// Billing mode code
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Billing mode: Resource billing mode, which can be monthly subscription or pay-as-you-go.
+	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
+
+	// Transaction type code
+	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
+
+	// Transaction type: Detailed transaction type
+	ActionTypeName *string `json:"ActionTypeName,omitnil,omitempty" name:"ActionTypeName"`
+
+	// Split item ID: The ID of the split item involved in the split product, such as COS bucket ID and CDN domain name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: SplitItemId is deprecated.
+	SplitItemId *string `json:"SplitItemId,omitnil,omitempty" name:"SplitItemId"`
+
+	// Split item name: The split item involved in the split product
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: SplitItemName is deprecated.
+	SplitItemName *string `json:"SplitItemName,omitnil,omitempty" name:"SplitItemName"`
 }
 
 type GatherRuleSummary struct {
@@ -6227,7 +9325,6 @@ func (r *RefundInstanceResponse) FromJsonString(s string) error {
 
 type RegionSummaryOverviewItem struct {
 	// Region ID
-	// Note: This field may return null, indicating that no valid value was found.
 	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Region: The region to which a resource belongs, such as South China (Guangzhou).
@@ -6415,6 +9512,56 @@ func (r *RenewInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ResourceSpuSet struct {
+	// Quoted subproduct (Chinese)
+	SpuNameZh *string `json:"SpuNameZh,omitnil,omitempty" name:"SpuNameZh"`
+
+	// Quoted subproduct (English)
+	SpuNameEn *string `json:"SpuNameEn,omitnil,omitempty" name:"SpuNameEn"`
+
+	// Quoted product (Chinese)
+	CategoryNameZh *string `json:"CategoryNameZh,omitnil,omitempty" name:"CategoryNameZh"`
+
+	// Quoted product (English)
+	CategoryNameEn *string `json:"CategoryNameEn,omitnil,omitempty" name:"CategoryNameEn"`
+
+	// Product code
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+
+	// Product name (Chinese)
+	BusinessNameZh *string `json:"BusinessNameZh,omitnil,omitempty" name:"BusinessNameZh"`
+
+	// Product name (English)
+	BusinessNameEn *string `json:"BusinessNameEn,omitnil,omitempty" name:"BusinessNameEn"`
+
+	// Subproduct code
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// Subproduct name (Chinese)
+	ProductNameZh *string `json:"ProductNameZh,omitnil,omitempty" name:"ProductNameZh"`
+
+	// Subproduct name (English)
+	ProductNameEn *string `json:"ProductNameEn,omitnil,omitempty" name:"ProductNameEn"`
+
+	// Component type code
+	ComponentCode *string `json:"ComponentCode,omitnil,omitempty" name:"ComponentCode"`
+
+	// Component type name (Chinese)
+	ComponentNameZh *string `json:"ComponentNameZh,omitnil,omitempty" name:"ComponentNameZh"`
+
+	// Component type name (English)
+	ComponentNameEn *string `json:"ComponentNameEn,omitnil,omitempty" name:"ComponentNameEn"`
+
+	// Component code
+	ItemCode *string `json:"ItemCode,omitnil,omitempty" name:"ItemCode"`
+
+	// Component name (Chinese)
+	ItemNameZh *string `json:"ItemNameZh,omitnil,omitempty" name:"ItemNameZh"`
+
+	// Component name (English)
+	ItemNameEn *string `json:"ItemNameEn,omitnil,omitempty" name:"ItemNameEn"`
+}
+
 // Predefined struct for user
 type SetRenewalRequestParams struct {
 	// Product code.
@@ -6524,10 +9671,10 @@ func (r *SetRenewalResponse) FromJsonString(s string) error {
 }
 
 type SummaryDetail struct {
-	// Bill dimension code. Note: This field may return null, indicating that no valid values can be obtained.
+	// Bill dimension code
 	GroupKey *string `json:"GroupKey,omitnil,omitempty" name:"GroupKey"`
 
-	// Bill dimension value. Note: This field may return null, indicating that no valid values can be obtained.
+	// Billing dimension value
 	GroupValue *string `json:"GroupValue,omitnil,omitempty" name:"GroupValue"`
 
 	// Original cost in USD. This parameter has become valid since Bill 3.0 took effect in May 2021, and before that `-` was returned for this parameter. If a customer has applied for a contract price different from the prices listed on the official website, `-` will also be returned for this parameter.
@@ -6545,19 +9692,18 @@ type SummaryDetail struct {
 	// Voucher payment: The voucher deduction amount
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
 
-	// Commission credit: The amount paid with the user’s commission credit. Note: This field may return null, indicating that no valid values can be obtained.
+	// Royalty account expenditure: The amount paid through the royalty account
 	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
 
-	// Detailed summary of products. Note: This field may return null, indicating that no valid values can be obtained.
+	// Product summary information
 	Business []*BusinessSummaryInfo `json:"Business,omitnil,omitempty" name:"Business"`
 }
 
 type SummaryTotal struct {
-	// Total amount after discount. Note: This field may return null, indicating that no valid values can be obtained.
+	// discounted total price
 	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
 
-	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Original price in CNY. The TotalCost field comes into effect after bill 3.0 (May 2021) and returns "-" before bill 3.0. In the current situation of contract price, the TotalCost field returns "-" if a price difference exists with the official website price.
 	TotalCost *string `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
 }
 
@@ -6568,47 +9714,80 @@ type TagDataInfo struct {
 	// Tag type. Valid values: `0` (general tags), `1` (cost allocation tags).
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Time to set the cost allocation tag. It will not be returned if `Status` is `0`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Set the allocation tag time. Ordinary tags do not return.
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
 type TagSummaryOverviewItem struct {
 	// Tag value
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	TagValue *string `json:"TagValue,omitnil,omitempty" name:"TagValue"`
 
-	// Cost percentage rounded to two decimal places
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Percentage of the fee, with 2 decimal places.
 	RealTotalCostRatio *string `json:"RealTotalCostRatio,omitnil,omitempty" name:"RealTotalCostRatio"`
 
-	// Total amount after discount. Note: This field may return null, indicating that no valid values can be obtained.
+	// discounted total price
 	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
 
-	// Cash credit: The amount paid from the user’s cash account. Note: This field may return null, indicating that no valid values can be obtained.
+	// Cash account expenditure: The amount paid through the cash account
 	CashPayAmount *string `json:"CashPayAmount,omitnil,omitempty" name:"CashPayAmount"`
 
-	// Free credit: The amount paid with the user’s free credit. Note: This field may return null, indicating that no valid values can be obtained.
+	// Gift account expenditure: The amount paid using free credits
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
 
-	// Voucher payment: The amount deducted by using vouchers. Note: This field may return null, indicating that no valid values can be obtained.
+	// Coupon expenditure: The amount paid using various vouchers (such as vouchers and cash vouchers)
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
 
-	// Commission credit: The amount paid with the user’s commission credit. Note: This field may return null, indicating that no valid values can be obtained.
+	// Royalty account expenditure: The amount paid through the royalty account
 	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
 
-	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Original price in CNY. The TotalCost field comes into effect after bill 3.0 (May 2021) and returns "-" before bill 3.0. In the current situation of contract price, the TotalCost field returns "-" if a price difference exists with the official website price.
 	TotalCost *string `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
 }
 
+type UinTempAmountModel struct {
+	// User UIN
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// temporary limit
+	TempAmount *float64 `json:"TempAmount,omitnil,omitempty" name:"TempAmount"`
+
+	// Start time.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
 type UsageDetails struct {
-	// The name of the product.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Product name
 	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
 
-	// Product Details
+	// product details
 	SubProductName *string `json:"SubProductName,omitnil,omitempty" name:"SubProductName"`
+
+	// Product code	
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// Sub-product code	
+	SubProductCode *string `json:"SubProductCode,omitnil,omitempty" name:"SubProductCode"`
+
+	// Billing item code.	
+	BillingItemCode *string `json:"BillingItemCode,omitnil,omitempty" name:"BillingItemCode"`
+
+	// Billing sub-item code.	
+	SubBillingItemCode *string `json:"SubBillingItemCode,omitnil,omitempty" name:"SubBillingItemCode"`
+
+	// Product English Name	
+	ProductEnName *string `json:"ProductEnName,omitnil,omitempty" name:"ProductEnName"`
+
+	// English name of the sub-product.	
+	SubProductEnName *string `json:"SubProductEnName,omitnil,omitempty" name:"SubProductEnName"`
+
+	// billing cycle	
+	CalcUnit *string `json:"CalcUnit,omitnil,omitempty" name:"CalcUnit"`
+
+	// payMode is prepay and payScene is common in the current situation
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 }
 
 type UsageRecords struct {
@@ -6618,9 +9797,20 @@ type UsageRecords struct {
 	// The time when the voucher was used.
 	UsedTime *string `json:"UsedTime,omitnil,omitempty" name:"UsedTime"`
 
-	// The details of the product purchased.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Usage record details
 	UsageDetails []*UsageDetails `json:"UsageDetails,omitnil,omitempty" name:"UsageDetails"`
+
+	// Payment mode
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Queried coupon id
+	VoucherId *string `json:"VoucherId,omitnil,omitempty" name:"VoucherId"`
+
+	// Transaction scene: (adjust: adjust accounts, common: normal transaction scene)
+	PayScene *string `json:"PayScene,omitnil,omitempty" name:"PayScene"`
+
+	// Unique ID, corresponding to transaction: prepaid dealName, bill adjustment/postpaid outTradeNo
+	SeqId *string `json:"SeqId,omitnil,omitempty" name:"SeqId"`
 }
 
 type VoucherInfos struct {

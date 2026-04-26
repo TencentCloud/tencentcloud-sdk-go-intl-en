@@ -1149,6 +1149,245 @@ func (r *CheckBankCardInformationResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CheckIdCardInformationRequestParams struct {
+	// <p>Base64 value of the ID card portrait side.</p><ul><li>Supported image formats: PNG, JPG, JPEG. GIF format is not currently supported.</li><li>Supported image size: the downloaded image should be no more than 7M after Base64 encoding.</li><li>Please use the standard Base64 encoding method (with = padding). Refer to RFC4648 for coding specification.</li><li>Either ImageBase64 or ImageUrl must be provided. If both are provided, proceed to use parameters according to the priority of ImageUrl > ImageBase64.</li></ul>
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// <p>Url address of the ID card portrait side</p><ul><li>Supported image formats: PNG, JPG, JPEG. GIF format is not currently supported.</li><li>Supported image size: The downloaded image after Base64 encoding is no more than 3M. Image download time is no more than 3 seconds.</li><li>Images stored in Tencent Cloud's Url can guarantee higher download speed and stability. It is recommended to store images in Tencent Cloud.</li><li>Speed and stability of non-Tencent Cloud Storage URLs may be impacted to a certain extent.</li></ul>
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// <p>Configuration.</p><ul><li><p>All the following optional fields are bool type, default false.<br>CopyWarn, alarm for photocopy.<br>BorderCheckWarn, border and frame block alarm.<br>ReshootWarn, alarm for rephotographing.<br>DetectPsWarn, PS detection alarm (suspected PS traces).<br>TempIdWarn, temporary ID card alarm.<br>Quality, image Quality alarm (evaluates blurriness).</p></li><li><p>SDK configuration method for reference:<br>Config = Json.stringify({"CopyWarn":true,"ReshootWarn":true}).</p></li><li><p>API 3.0 Explorer setting method for reference:<br>Config = {"CopyWarn":true,"ReshootWarn":true}.</p></li></ul>
+	Config *string `json:"Config,omitnil,omitempty" name:"Config"`
+
+	// <p>Whether required to encrypt sensitive information in the response.</p><ul><li>Default false.</li><li>Sensitive information includes Response.IdNum and Response.Name.</li></ul>
+	IsEncrypt *bool `json:"IsEncrypt,omitnil,omitempty" name:"IsEncrypt"`
+
+	// <p>Whether required to encrypt the response body.</p>
+	IsEncryptResponse *bool `json:"IsEncryptResponse,omitnil,omitempty" name:"IsEncryptResponse"`
+
+	// <p>Whether required to encrypt sensitive information in the response, need to be specified encryption algorithm Algorithm, initial vector for CBC encryption, and encrypted symmetric key.</p>
+	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+}
+
+type CheckIdCardInformationRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Base64 value of the ID card portrait side.</p><ul><li>Supported image formats: PNG, JPG, JPEG. GIF format is not currently supported.</li><li>Supported image size: the downloaded image should be no more than 7M after Base64 encoding.</li><li>Please use the standard Base64 encoding method (with = padding). Refer to RFC4648 for coding specification.</li><li>Either ImageBase64 or ImageUrl must be provided. If both are provided, proceed to use parameters according to the priority of ImageUrl > ImageBase64.</li></ul>
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// <p>Url address of the ID card portrait side</p><ul><li>Supported image formats: PNG, JPG, JPEG. GIF format is not currently supported.</li><li>Supported image size: The downloaded image after Base64 encoding is no more than 3M. Image download time is no more than 3 seconds.</li><li>Images stored in Tencent Cloud's Url can guarantee higher download speed and stability. It is recommended to store images in Tencent Cloud.</li><li>Speed and stability of non-Tencent Cloud Storage URLs may be impacted to a certain extent.</li></ul>
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// <p>Configuration.</p><ul><li><p>All the following optional fields are bool type, default false.<br>CopyWarn, alarm for photocopy.<br>BorderCheckWarn, border and frame block alarm.<br>ReshootWarn, alarm for rephotographing.<br>DetectPsWarn, PS detection alarm (suspected PS traces).<br>TempIdWarn, temporary ID card alarm.<br>Quality, image Quality alarm (evaluates blurriness).</p></li><li><p>SDK configuration method for reference:<br>Config = Json.stringify({"CopyWarn":true,"ReshootWarn":true}).</p></li><li><p>API 3.0 Explorer setting method for reference:<br>Config = {"CopyWarn":true,"ReshootWarn":true}.</p></li></ul>
+	Config *string `json:"Config,omitnil,omitempty" name:"Config"`
+
+	// <p>Whether required to encrypt sensitive information in the response.</p><ul><li>Default false.</li><li>Sensitive information includes Response.IdNum and Response.Name.</li></ul>
+	IsEncrypt *bool `json:"IsEncrypt,omitnil,omitempty" name:"IsEncrypt"`
+
+	// <p>Whether required to encrypt the response body.</p>
+	IsEncryptResponse *bool `json:"IsEncryptResponse,omitnil,omitempty" name:"IsEncryptResponse"`
+
+	// <p>Whether required to encrypt sensitive information in the response, need to be specified encryption algorithm Algorithm, initial vector for CBC encryption, and encrypted symmetric key.</p>
+	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+}
+
+func (r *CheckIdCardInformationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CheckIdCardInformationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	delete(f, "Config")
+	delete(f, "IsEncrypt")
+	delete(f, "IsEncryptResponse")
+	delete(f, "Encryption")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CheckIdCardInformationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CheckIdCardInformationResponseParams struct {
+	// <p>Similarity. - Value ranges from 0.00 to 100.00. - Recommend threshold at least 70 to judge as same person, self-adjust based on specific scenario (pass rate for threshold 70 is 0.01%).</p>
+	Sim *float64 `json:"Sim,omitnil,omitempty" name:"Sim"`
+
+	// <p>Business error code.</p><ul><li>Success case returns Success.</li><li>For error conditions, refer to the FailedOperation part in the error code list below.</li></ul>
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// <p>Business result description.</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// <p>Name.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Gender.</p>
+	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
+
+	// <p>Ethnicity.</p>
+	Nation *string `json:"Nation,omitnil,omitempty" name:"Nation"`
+
+	// <p>Date of birth.</p>
+	Birth *string `json:"Birth,omitnil,omitempty" name:"Birth"`
+
+	// <p>Address.</p>
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
+
+	// <p>Identity card number.</p>
+	IdNum *string `json:"IdNum,omitnil,omitempty" name:"IdNum"`
+
+	// <p>The base64 encoding of the ID card portrait photo. If the image cropping fails, it will compare with the entire ID card and return null.</p>
+	Portrait *string `json:"Portrait,omitnil,omitempty" name:"Portrait"`
+
+	// <p>Alarm information.</p><ul><li><p>When alarm information is configured in Config, portrait comparison will be disabled, Result returns an error (FailedOperation.OcrWarningOccurred) with this alarm information.</p></li><li><p>Code list of alarm codes and definition:<br>&#39;-9101&#39;: Incomplete ID card border alarm.<br>&#39;-9102&#39;: ID card copy alarm.<br>&#39;-9103&#39;: ID card photocopy alarm.<br>&#39;-9105&#39;: ID card frame occlusion alarm.<br>&#39;-9104&#39;: Temporary ID card alarm.<br>&#39;-9106&#39;: ID card PS alarm (suspected PS traces).<br>&#39;-8001&#39;: Warn about blurry images.</p></li><li><p>Multiple codes are separated by "|", such as "-9101|-9106|-9104".</p></li></ul>
+	Warnings *string `json:"Warnings,omitnil,omitempty" name:"Warnings"`
+
+	// <p>Image quality score.</p><ul><li>This parameter is significant only when warn about blurry images is configured in the request Config.</li><li>Value ranges from 0 to 100. The current default threshold is 50. A score lower than 50 triggers blurry image warnings.</li></ul>
+	Quality *float64 `json:"Quality,omitnil,omitempty" name:"Quality"`
+
+	// <p>Sensitive data encryption info.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+
+	// <p>Encrypted data.</p>
+	EncryptedBody *string `json:"EncryptedBody,omitnil,omitempty" name:"EncryptedBody"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CheckIdCardInformationResponse struct {
+	*tchttp.BaseResponse
+	Response *CheckIdCardInformationResponseParams `json:"Response"`
+}
+
+func (r *CheckIdCardInformationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CheckIdCardInformationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CheckIdNameDateRequestParams struct {
+	// Name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Identity card number.
+	IdCard *string `json:"IdCard,omitnil,omitempty" name:"IdCard"`
+
+	// ID card validity start time.
+	// -Format: YYYYMMDD, for example: 20210701.
+	ValidityBegin *string `json:"ValidityBegin,omitnil,omitempty" name:"ValidityBegin"`
+
+	// ID card expiration time.
+	// Format: YYYYMMDD, use "00000000" for long-term, for example: 20210701.
+	ValidityEnd *string `json:"ValidityEnd,omitnil,omitempty" name:"ValidityEnd"`
+
+	// Sensitive data encryption info.
+	// -Users with encryption requirements for incoming information (name, identity card number) can use this parameter. For details, please click the left-side link.
+	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+}
+
+type CheckIdNameDateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Identity card number.
+	IdCard *string `json:"IdCard,omitnil,omitempty" name:"IdCard"`
+
+	// ID card validity start time.
+	// -Format: YYYYMMDD, for example: 20210701.
+	ValidityBegin *string `json:"ValidityBegin,omitnil,omitempty" name:"ValidityBegin"`
+
+	// ID card expiration time.
+	// Format: YYYYMMDD, use "00000000" for long-term, for example: 20210701.
+	ValidityEnd *string `json:"ValidityEnd,omitnil,omitempty" name:"ValidityEnd"`
+
+	// Sensitive data encryption info.
+	// -Users with encryption requirements for incoming information (name, identity card number) can use this parameter. For details, please click the left-side link.
+	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+}
+
+func (r *CheckIdNameDateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CheckIdNameDateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "IdCard")
+	delete(f, "ValidityBegin")
+	delete(f, "ValidityEnd")
+	delete(f, "Encryption")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CheckIdNameDateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CheckIdNameDateResponseParams struct {
+	// Verification result code. Billing is as follows.
+	// 
+	// -Result code for charges
+	// Same.
+	// -1: Inconsistent.
+	// 
+	// -Result code with no charge
+	// -2: Invalid ID number (incorrect length or check digit).
+	// -3: Invalid name (incorrect length or format).
+	// -4: Invalid validity period (incorrect length, format, etc.).
+	// -5: Invalid identity information.
+	// -6: Document library service exception.
+	// -7: No ID card record found in the document library.
+	// -8: Authentication attempts exceeded the daily limit. Retry the next day.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// Business result description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CheckIdNameDateResponse struct {
+	*tchttp.BaseResponse
+	Response *CheckIdNameDateResponseParams `json:"Response"`
+}
+
+func (r *CheckIdNameDateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CheckIdNameDateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CompareFaceLivenessRequestParams struct {
 	// Base64 string of the image for face comparison.
 	// - The size of the Base64-encoded image data can be up to 3 MB. JPG and PNG formats are supported.
@@ -1633,7 +1872,7 @@ type Encryption struct {
 }
 
 type ExtraInfo struct {
-	// Details of matched templates, only returns the template information with the highest similarity
+
 	RetrievalLivenessExtraInfo []*RetrievalLivenessExtraInfo `json:"RetrievalLivenessExtraInfo,omitnil,omitempty" name:"RetrievalLivenessExtraInfo"`
 }
 
@@ -2372,6 +2611,422 @@ type HMTPermit struct {
 	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
 }
 
+// Predefined struct for user
+type IdCardOCRVerificationRequestParams struct {
+	// Identity card number.
+	// -Name, identity card number, ImageBase64, or ImageUrl must provide one of the three.
+	// -If both are provided, proceed to use parameters according to the priority of name and identity card number > ImageBase64 > ImageUrl.
+	IdCard *string `json:"IdCard,omitnil,omitempty" name:"IdCard"`
+
+	// Name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Base64 value of the ID card portrait side.
+	// -Supported image formats: PNG, JPG, JPEG. GIF format is not currently supported.
+	// -Supported image size: The downloaded image after Base64 encoding is no more than 3M. Please use the standard Base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// Url of the ID card portrait side.
+	// -Supported image formats: PNG, JPG, JPEG. GIF format is not currently supported.
+	// -Supported image size: The downloaded image is no more than 3M after Base64 encoding. Image download time is no more than 3 seconds.
+	// -Images stored on Tencent Cloud's Url guarantee higher download speed and stability. It is advisable to store images on Tencent Cloud.
+	// -The speed and stability of non-Tencent Cloud Storage URLs may be impacted.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// Sensitive data encryption info.
+	// -Users with encryption requirements for incoming information (name, identity card number) can use this parameter. For details, please click the left-side link.
+	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+}
+
+type IdCardOCRVerificationRequest struct {
+	*tchttp.BaseRequest
+	
+	// Identity card number.
+	// -Name, identity card number, ImageBase64, or ImageUrl must provide one of the three.
+	// -If both are provided, proceed to use parameters according to the priority of name and identity card number > ImageBase64 > ImageUrl.
+	IdCard *string `json:"IdCard,omitnil,omitempty" name:"IdCard"`
+
+	// Name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Base64 value of the ID card portrait side.
+	// -Supported image formats: PNG, JPG, JPEG. GIF format is not currently supported.
+	// -Supported image size: The downloaded image after Base64 encoding is no more than 3M. Please use the standard Base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// Url of the ID card portrait side.
+	// -Supported image formats: PNG, JPG, JPEG. GIF format is not currently supported.
+	// -Supported image size: The downloaded image is no more than 3M after Base64 encoding. Image download time is no more than 3 seconds.
+	// -Images stored on Tencent Cloud's Url guarantee higher download speed and stability. It is advisable to store images on Tencent Cloud.
+	// -The speed and stability of non-Tencent Cloud Storage URLs may be impacted.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// Sensitive data encryption info.
+	// -Users with encryption requirements for incoming information (name, identity card number) can use this parameter. For details, please click the left-side link.
+	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+}
+
+func (r *IdCardOCRVerificationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IdCardOCRVerificationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IdCard")
+	delete(f, "Name")
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	delete(f, "Encryption")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "IdCardOCRVerificationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IdCardOCRVerificationResponseParams struct {
+	// Verification result code. Billing is as follows.
+	// -Result code for charges
+	// The name and identity card number match.
+	// -Name and ID card number mismatch.
+	// -Result code with no charge
+	// -2: Invalid ID number (incorrect length or check digit).
+	// -3: Invalid name (incorrect length or format).
+	// -4: Document library service exception.
+	// -5: No ID card record found in the document library.
+	// -6: The authoritative comparison system is being upgraded. Try again later.
+	// -7: Authentication attempts exceeded the daily limit.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// Business result description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Name to verify.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Identity card number to verify.
+	IdCard *string `json:"IdCard,omitnil,omitempty" name:"IdCard"`
+
+	// Gender obtained by OCR.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
+
+	// Ethnicity obtained by OCR.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Nation *string `json:"Nation,omitnil,omitempty" name:"Nation"`
+
+	// Birthday obtained by OCR.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Birth *string `json:"Birth,omitnil,omitempty" name:"Birth"`
+
+	// Address obtained by OCR.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type IdCardOCRVerificationResponse struct {
+	*tchttp.BaseResponse
+	Response *IdCardOCRVerificationResponseParams `json:"Response"`
+}
+
+func (r *IdCardOCRVerificationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IdCardOCRVerificationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IdCardVerificationRequestParams struct {
+	// Identity card number.
+	IdCard *string `json:"IdCard,omitnil,omitempty" name:"IdCard"`
+
+	// Name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Sensitive data encryption info.
+	// -Users with encryption requirements for incoming information (name, identity card number) can use this parameter. For details, please click the left-side link.
+	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+}
+
+type IdCardVerificationRequest struct {
+	*tchttp.BaseRequest
+	
+	// Identity card number.
+	IdCard *string `json:"IdCard,omitnil,omitempty" name:"IdCard"`
+
+	// Name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Sensitive data encryption info.
+	// -Users with encryption requirements for incoming information (name, identity card number) can use this parameter. For details, please click the left-side link.
+	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+}
+
+func (r *IdCardVerificationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IdCardVerificationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IdCard")
+	delete(f, "Name")
+	delete(f, "Encryption")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "IdCardVerificationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IdCardVerificationResponseParams struct {
+	// Verification result code. Billing is as follows.
+	// -Result code for charges
+	// Name and identity card number match
+	// -Name and ID card number mismatch
+	// No charge result code:
+	// -2: Invalid ID number (incorrect length or check digit).
+	// -3: Invalid name (incorrect length, format, etc.)
+	// -4: Document library service exception
+	// -5: No ID card record found in the document library
+	// -6: The authoritative comparison system is being upgraded. Try again later.
+	// -7: Authentication attempts exceeded the daily limit.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// Business result description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type IdCardVerificationResponse struct {
+	*tchttp.BaseResponse
+	Response *IdCardVerificationResponseParams `json:"Response"`
+}
+
+func (r *IdCardVerificationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IdCardVerificationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ImageRecognitionRequestParams struct {
+	// <p>Identity card number</p>
+	IdCard *string `json:"IdCard,omitnil,omitempty" name:"IdCard"`
+
+	// <p>Name. For Chinese, please use UTF-8 encode.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Image for face comparison, the Base64 value of the image.<br>The size of the Base64-encoded image data should be no more than 3M. Only jpg and png formats are supported.<br>Please use the standard Base64 encoding type (with = padding). Refer to RFC4648 for the coding specification.</p>
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// <p>This parameter is not required for this API.</p>
+	Optional *string `json:"Optional,omitnil,omitempty" name:"Optional"`
+
+	// <p>Sensitive data encryption information. Users with encryption requirements for incoming information (name, identity card number) can use this parameter. For details, please click the left-side link.</p>
+	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+}
+
+type ImageRecognitionRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Identity card number</p>
+	IdCard *string `json:"IdCard,omitnil,omitempty" name:"IdCard"`
+
+	// <p>Name. For Chinese, please use UTF-8 encode.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Image for face comparison, the Base64 value of the image.<br>The size of the Base64-encoded image data should be no more than 3M. Only jpg and png formats are supported.<br>Please use the standard Base64 encoding type (with = padding). Refer to RFC4648 for the coding specification.</p>
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// <p>This parameter is not required for this API.</p>
+	Optional *string `json:"Optional,omitnil,omitempty" name:"Optional"`
+
+	// <p>Sensitive data encryption information. Users with encryption requirements for incoming information (name, identity card number) can use this parameter. For details, please click the left-side link.</p>
+	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+}
+
+func (r *ImageRecognitionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ImageRecognitionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IdCard")
+	delete(f, "Name")
+	delete(f, "ImageBase64")
+	delete(f, "Optional")
+	delete(f, "Encryption")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ImageRecognitionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ImageRecognitionResponseParams struct {
+	// <p>Similarity, value ranges from 0.00 to 100.00. Recommend judging as the same person when similarity is at least 70. Threshold can be self-adjusted based on specific scenarios (pass rate for false matches is one in a thousand at threshold 70, and one in ten thousand at threshold 80).</p>
+	Sim *float64 `json:"Sim,omitnil,omitempty" name:"Sim"`
+
+	// <p>Business error code. Successfully returns Success in successful case. For error conditions, refer to the FailedOperation part in the error code list below.</p>
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// <p>Business result description.</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ImageRecognitionResponse struct {
+	*tchttp.BaseResponse
+	Response *ImageRecognitionResponseParams `json:"Response"`
+}
+
+func (r *ImageRecognitionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ImageRecognitionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ImageRecognitionV2RequestParams struct {
+	// <p>Identity card number.</p>
+	IdCard *string `json:"IdCard,omitnil,omitempty" name:"IdCard"`
+
+	// <p>Name.</p><ul><li>For Chinese, please use UTF-8 encode.</li></ul>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Image for face comparison, the Base64 value of the image.<br>The size of the Base64-encoded image data should be no more than 3M. Only jpg and png formats are supported.<br>Please use the standard Base64 encoding type (with = padding). Refer to RFC4648 for the coding specification.</p>
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// <p>This parameter is not required for this API.</p>
+	Optional *string `json:"Optional,omitnil,omitempty" name:"Optional"`
+
+	// <p>Sensitive data encryption information.</p><ul><li>Users with encryption requirements for incoming information (name, identity card number) can use this parameter. For details, please click the left-side link.</li></ul>
+	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+
+	// <p>Customized description field.</p><ul><li>For description of invoke business info. This description field will return in the output.</li><li>Each customized description field supports [1,10] characters.</li></ul>
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+}
+
+type ImageRecognitionV2Request struct {
+	*tchttp.BaseRequest
+	
+	// <p>Identity card number.</p>
+	IdCard *string `json:"IdCard,omitnil,omitempty" name:"IdCard"`
+
+	// <p>Name.</p><ul><li>For Chinese, please use UTF-8 encode.</li></ul>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Image for face comparison, the Base64 value of the image.<br>The size of the Base64-encoded image data should be no more than 3M. Only jpg and png formats are supported.<br>Please use the standard Base64 encoding type (with = padding). Refer to RFC4648 for the coding specification.</p>
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// <p>This parameter is not required for this API.</p>
+	Optional *string `json:"Optional,omitnil,omitempty" name:"Optional"`
+
+	// <p>Sensitive data encryption information.</p><ul><li>Users with encryption requirements for incoming information (name, identity card number) can use this parameter. For details, please click the left-side link.</li></ul>
+	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+
+	// <p>Customized description field.</p><ul><li>For description of invoke business info. This description field will return in the output.</li><li>Each customized description field supports [1,10] characters.</li></ul>
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+}
+
+func (r *ImageRecognitionV2Request) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ImageRecognitionV2Request) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IdCard")
+	delete(f, "Name")
+	delete(f, "ImageBase64")
+	delete(f, "Optional")
+	delete(f, "Encryption")
+	delete(f, "Extra")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ImageRecognitionV2Request has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ImageRecognitionV2ResponseParams struct {
+	// <p>Similarity. - Value ranges from 0.00 to 100.00. - Recommend at least 70 to be determined as the same person. You can self-adjust the threshold based on specific scenarios (the pass rate for false matches at threshold 70 is 0.01%).</p>
+	Sim *float64 `json:"Sim,omitnil,omitempty" name:"Sim"`
+
+	// <p>Business error code.</p><ul><li>Success case returns Success.</li><li>For error conditions, refer to the FailedOperation part in the error code list below.</li></ul>
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// <p>Business result description.</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// <p>Custom description field in the API call.</p>
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ImageRecognitionV2Response struct {
+	*tchttp.BaseResponse
+	Response *ImageRecognitionV2ResponseParams `json:"Response"`
+}
+
+func (r *ImageRecognitionV2Response) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ImageRecognitionV2Response) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type IndonesiaDrivingLicense struct {
 	// Last name
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -2808,6 +3463,175 @@ type MainlandIDCard struct {
 	// Address
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FormattedAddress *string `json:"FormattedAddress,omitnil,omitempty" name:"FormattedAddress"`
+}
+
+// Predefined struct for user
+type MobileNetworkTimeVerificationRequestParams struct {
+	// Mobile number.
+	Mobile *string `json:"Mobile,omitnil,omitempty" name:"Mobile"`
+
+	// Sensitive data encryption info.
+	// -Users with encryption requirements for incoming information (mobile number) can use this parameter. For details, please click the left-side link.
+	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+}
+
+type MobileNetworkTimeVerificationRequest struct {
+	*tchttp.BaseRequest
+	
+	// Mobile number.
+	Mobile *string `json:"Mobile,omitnil,omitempty" name:"Mobile"`
+
+	// Sensitive data encryption info.
+	// -Users with encryption requirements for incoming information (mobile number) can use this parameter. For details, please click the left-side link.
+	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+}
+
+func (r *MobileNetworkTimeVerificationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *MobileNetworkTimeVerificationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Mobile")
+	delete(f, "Encryption")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "MobileNetworkTimeVerificationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type MobileNetworkTimeVerificationResponseParams struct {
+	// Verification result code. Billing is as follows.
+	// -Result code for charges
+	// Success.
+	// -2: Mobile number does not exist.
+	// -3: The mobile number exists, but unable to query the duration.
+	// 
+	// -Result code with no charge
+	// -Invalid phone number format.
+	// -4: Verification Center Service is busy.
+	// -5: Authentication attempts exceeded the daily limit. Retry the next day.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// Business result description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Online duration interval.
+	// -The format is [a,b), which means the online duration is longer than a months and shorter than b months.
+	// -If b is +, it means no upper limit.
+	Range *string `json:"Range,omitnil,omitempty" name:"Range"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type MobileNetworkTimeVerificationResponse struct {
+	*tchttp.BaseResponse
+	Response *MobileNetworkTimeVerificationResponseParams `json:"Response"`
+}
+
+func (r *MobileNetworkTimeVerificationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *MobileNetworkTimeVerificationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type MobileStatusRequestParams struct {
+	// Mobile number.
+	Mobile *string `json:"Mobile,omitnil,omitempty" name:"Mobile"`
+
+	// Sensitive data encryption info.
+	// -Users with encryption requirements for incoming information (mobile number) can use this parameter. For details, please click the left-side link.
+	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+}
+
+type MobileStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Mobile number.
+	Mobile *string `json:"Mobile,omitnil,omitempty" name:"Mobile"`
+
+	// Sensitive data encryption info.
+	// -Users with encryption requirements for incoming information (mobile number) can use this parameter. For details, please click the left-side link.
+	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+}
+
+func (r *MobileStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *MobileStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Mobile")
+	delete(f, "Encryption")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "MobileStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type MobileStatusResponseParams struct {
+	// Verification result code. Billing is as follows.
+	// -Result code for charges
+	// 0: Success.
+	// 
+	// -Result code with no charge
+	// -No results found.
+	// -2: Invalid phone number format.
+	// -3: Verification Center Service is busy.
+	// -4: Authentication attempts exceeded the daily limit. Retry the next day.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// Business result description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Status code.
+	// -Value range:
+	// 0: Normal.
+	// 1: Out of service.
+	// 2: Account cancellation.
+	// 4: Offline.
+	// 99: unknown status.
+	StatusCode *int64 `json:"StatusCode,omitnil,omitempty" name:"StatusCode"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type MobileStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *MobileStatusResponseParams `json:"Response"`
+}
+
+func (r *MobileStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *MobileStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type NigeriaDrivingLicense struct {
@@ -3394,14 +4218,127 @@ type PhilippinesVoteID struct {
 	PrecinctNo *string `json:"PrecinctNo,omitnil,omitempty" name:"PrecinctNo"`
 }
 
+// Predefined struct for user
+type PhoneVerificationRequestParams struct {
+	// Identity card number.
+	IdCard *string `json:"IdCard,omitnil,omitempty" name:"IdCard"`
+
+	// Name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Mobile number.
+	Phone *string `json:"Phone,omitnil,omitempty" name:"Phone"`
+
+	// Users with encryption requirements can import the CiphertextBlob of kms. Read the <a href="https://www.tencentcloud.com/document/product/1007/47180?from_cn_redirect=1">data encryption</a> document about encrypting data.
+	CiphertextBlob *string `json:"CiphertextBlob,omitnil,omitempty" name:"CiphertextBlob"`
+
+	// When using the encryption service, fill in the field to be encrypted.
+	// -This API can fill in one or more of encrypted IdCard, Name, and Phone.
+	EncryptList []*string `json:"EncryptList,omitnil,omitempty" name:"EncryptList"`
+
+	// Users with encryption requirements import the initial vector for CBC encryption.
+	Iv *string `json:"Iv,omitnil,omitempty" name:"Iv"`
+}
+
+type PhoneVerificationRequest struct {
+	*tchttp.BaseRequest
+	
+	// Identity card number.
+	IdCard *string `json:"IdCard,omitnil,omitempty" name:"IdCard"`
+
+	// Name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Mobile number.
+	Phone *string `json:"Phone,omitnil,omitempty" name:"Phone"`
+
+	// Users with encryption requirements can import the CiphertextBlob of kms. Read the <a href="https://www.tencentcloud.com/document/product/1007/47180?from_cn_redirect=1">data encryption</a> document about encrypting data.
+	CiphertextBlob *string `json:"CiphertextBlob,omitnil,omitempty" name:"CiphertextBlob"`
+
+	// When using the encryption service, fill in the field to be encrypted.
+	// -This API can fill in one or more of encrypted IdCard, Name, and Phone.
+	EncryptList []*string `json:"EncryptList,omitnil,omitempty" name:"EncryptList"`
+
+	// Users with encryption requirements import the initial vector for CBC encryption.
+	Iv *string `json:"Iv,omitnil,omitempty" name:"Iv"`
+}
+
+func (r *PhoneVerificationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *PhoneVerificationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IdCard")
+	delete(f, "Name")
+	delete(f, "Phone")
+	delete(f, "CiphertextBlob")
+	delete(f, "EncryptList")
+	delete(f, "Iv")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PhoneVerificationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type PhoneVerificationResponseParams struct {
+	// Verification result code.
+	// -Fee result code
+	// Three-element information consistency.
+	// -4: Three-element information inconsistency.
+	// 
+	// -No charge result code
+	// -6: Invalid phone number.
+	// -7: Identity number error.
+	// -8: Name verification failed.
+	// -9: No records.
+	// -11: The Verification Center Service is busy.
+	// -12: Authentication attempts exceeded the daily limit. Retry the next day.
+	// -13: The number range is unsupported for verification.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// Business result description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// ISP name.
+	// -Valid values: ["", "mobile", "telecom", "cucc"]
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type PhoneVerificationResponse struct {
+	*tchttp.BaseResponse
+	Response *PhoneVerificationResponseParams `json:"Response"`
+}
+
+func (r *PhoneVerificationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *PhoneVerificationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type RetrievalLivenessExtraInfo struct {
-	// Matched template types, where Common - public library; Auto - automatic clustering library; Owner - self-built template library.
+
 	HitGroup *string `json:"HitGroup,omitnil,omitempty" name:"HitGroup"`
 
-	// Matched Similarity
+
 	SimilarityScore *float64 `json:"SimilarityScore,omitnil,omitempty" name:"SimilarityScore"`
 
-	// Matched Template id
+
 	HitTemplate *string `json:"HitTemplate,omitnil,omitempty" name:"HitTemplate"`
 }
 

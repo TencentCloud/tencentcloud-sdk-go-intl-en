@@ -244,7 +244,7 @@ type CloudStorage struct {
 	// `0`: Tencent Cloud COS; `1`: AWS storage. Other vendors are not supported currently.
 	Vendor *uint64 `json:"Vendor,omitnil,omitempty" name:"Vendor"`
 
-	// [Region information](https://www.tencentcloud.com/document/product/436/6224?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F) of tencent cloud object storage.
+	// [Region information](https://www.tencentcloud.comom/document/product/436/6224?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F) of tencent cloud object storage.
 	// Example value: cn-shanghai-1.
 	// 
 	// [Region information](https://docs.AWS.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-regions) of AWS S3.
@@ -263,6 +263,9 @@ type CloudStorage struct {
 
 	// The specified position of the cloud storage bucket consists of an array of strings. valid values: az, az, 0-9, '_', and '-'. for example, the recording file xxx.m3u8 becomes prefix1/prefix2/TaskId/xxx.m3u8 under the function of ["prefix1", "prefix2"].
 	FileNamePrefix []*string `json:"FileNamePrefix,omitnil,omitempty" name:"FileNamePrefix"`
+
+	// If specified, the client uses this S3-compatible endpoint override instead of the default AWS S3 endpoint. This is useful for S3-compatible storage services such as Cloudflare R2. Example: "account_id.r2.cloudflarestorage.com"
+	EndpointUrl *string `json:"EndpointUrl,omitnil,omitempty" name:"EndpointUrl"`
 }
 
 type CloudVod struct {
@@ -456,7 +459,7 @@ type CreateCloudRecordingRequestParams struct {
 	// The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are recorded.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// [RoomId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC, which is the RoomId corresponding to the TRTC room in the recording.
+	// [RoomId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC, which is the RoomId corresponding to the TRTC room in the recording.
 	// Note: the room id type defaults to integer. if the room id type is a string, specify it via RoomIdType.
 	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
 
@@ -496,7 +499,7 @@ type CreateCloudRecordingRequest struct {
 	// The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are recorded.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// [RoomId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC, which is the RoomId corresponding to the TRTC room in the recording.
+	// [RoomId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC, which is the RoomId corresponding to the TRTC room in the recording.
 	// Note: the room id type defaults to integer. if the room id type is a string, specify it via RoomIdType.
 	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
 
@@ -3084,14 +3087,14 @@ func (r *DismissRoomResponse) FromJsonString(s string) error {
 }
 
 type EmulateMobileParams struct {
-	// Mobile device types,
-	// 0: Phone
-	// 1: Tablet
+	// Mobile device type.
+	// Mobile phone.
+	// Tablet.
 	MobileDeviceType *uint64 `json:"MobileDeviceType,omitnil,omitempty" name:"MobileDeviceType"`
 
-	// Screen orientation,
-	// 0: Portrait,
-	// 1: Landscape
+	// Screen orientation.
+	// Portrait mode.
+	// Landscape mode.
 	ScreenOrientation *uint64 `json:"ScreenOrientation,omitnil,omitempty" name:"ScreenOrientation"`
 }
 
@@ -3141,8 +3144,9 @@ type McuAudioParams struct {
 	// The audio encoding parameters.
 	AudioEncode *AudioEncode `json:"AudioEncode,omitnil,omitempty" name:"AudioEncode"`
 
-	// The audio mix allowlist. For the `StartPublishCdnStream` API, if you do not pass this parameter or leave it empty, the audios of all anchors will be mixed. For the `UpdatePublishCdnStream` API, if you do not pass this parameter, no changes will be made to the current allowlist; if you pass in an empty string, the audios of all anchors will be mixed.
-	// In cases where `SubscribeAudioList` and `UnSubscribeAudioList` are used at the same time, you need to specify both parameters. If you pass neither `SubscribeAudioList` nor `UnSubscribeAudioList`, no changes will be made. If a user is included in both parameters, the user’s audio will not be mixed.
+	// The audio user allowlist. for start, being empty or not filled means mixing all anchor audio; filling a specific value means mixing specified anchor audio. for update, not filling means does not update; being empty means update to mixing all anchor audio; filling a specific value means update to mixing specified anchor audio.
+	// When using blocklist and allowlist, both must be filled in simultaneously. if left empty, it means the list does not update. if the same user is in both lists, the blocklist takes precedence.
+	// Note: if it is cross-room pk, the cross-room mix requires specifying the audio allowlist, otherwise the pk host's audio uplink will be pulled twice, causing accent.
 	SubscribeAudioList []*McuUserInfoParams `json:"SubscribeAudioList,omitnil,omitempty" name:"SubscribeAudioList"`
 
 	// The audio mix blocklist. If you do not pass this parameter or leave it empty, there won’t be a blocklist. For the `UpdatePublishCdnStream` API, if you do not pass this parameter, no changes will be made to the current blocklist; if you pass in an empty string, the blocklist will be reset.
@@ -3150,9 +3154,19 @@ type McuAudioParams struct {
 	UnSubscribeAudioList []*McuUserInfoParams `json:"UnSubscribeAudioList,omitnil,omitempty" name:"UnSubscribeAudioList"`
 }
 
+type McuBackgroundCustomRender struct {
+
+	Width *uint64 `json:"Width,omitnil,omitempty" name:"Width"`
+
+
+	Height *uint64 `json:"Height,omitnil,omitempty" name:"Height"`
+
+
+	Radius *uint64 `json:"Radius,omitnil,omitempty" name:"Radius"`
+}
+
 type McuCloudVod struct {
-	// Tencent VOD Parameters
-	// Example :{"ExpireTime":86400}
+	// Parameters of tencent cloud video on demand (vod).	
 	McuTencentVod *McuTencentVod `json:"McuTencentVod,omitnil,omitempty" name:"McuTencentVod"`
 }
 
@@ -3185,55 +3199,77 @@ type McuFeedBackRoomParams struct {
 }
 
 type McuLayout struct {
-	// The information of the stream that is displayed. If you do not pass this parameter, TRTC will display the videos of anchors in the room according to their room entry sequence.
+	// User media stream parameters. if left blank, tencent cloud backend fills them automatically by the room entry sequence of the uplink host.
 	UserMediaStream *UserMediaStream `json:"UserMediaStream,omitnil,omitempty" name:"UserMediaStream"`
 
-	// The video width (pixels). If you do not pass this parameter, 0 will be used.
+	// The width of the sub-screen in the output, unit: pixel value. defaults to 0 if left blank.
 	ImageWidth *uint64 `json:"ImageWidth,omitnil,omitempty" name:"ImageWidth"`
 
-	// The video height (pixels). If you do not pass this parameter, 0 will be used.
+	// The height of the sub-screen in the output, in pixel values. default is 0.
 	ImageHeight *uint64 `json:"ImageHeight,omitnil,omitempty" name:"ImageHeight"`
 
-	// The horizontal offset (pixels) of the video. The sum of `LocationX` and `ImageWidth` cannot exceed the width of the canvas. If you do not pass this parameter, 0 will be used.
+	// The X-axis offset of the sub-screen in the output, unit: pixel value. the sum of LocationX and ImageWidth must not exceed the total width of the mixed stream output. default is 0.
 	LocationX *uint64 `json:"LocationX,omitnil,omitempty" name:"LocationX"`
 
-	// The vertical offset of the video. The sum of `LocationY` and `ImageHeight` cannot exceed the height of the canvas. If you do not pass this parameter, 0 will be used.
+	// The Y-axis offset of the sub-screen in the output, unit: pixel value. the sum of LocationY and ImageHeight must not exceed the total height of the mixed stream output. default is 0 if left blank.
 	LocationY *uint64 `json:"LocationY,omitnil,omitempty" name:"LocationY"`
 
-	// The image layer of the video. If you do not pass this parameter, 0 will be used.
+	// The hierarchy of the sub-screen in the output. default is 0.
 	ZOrder *uint64 `json:"ZOrder,omitnil,omitempty" name:"ZOrder"`
 
-	// The rendering mode of the video. 0 (the video is scaled and the excess parts are cropped), 1 (the video is scaled), 2 (the video is scaled and the blank spaces are filled with black bars). If you do not pass this parameter, 0 will be used.
+	// The display mode of the sub-screen in the output: 0 for crop, 1 for scale and display background, 2 for scale and display black background. defaults to 0 if left blank.
 	RenderMode *uint64 `json:"RenderMode,omitnil,omitempty" name:"RenderMode"`
 
-	// (Not supported yet) The background color of a video. Below are the values for some commonly used colors:
-	// Red: `0xcc0033`
-	// Yellow: `0xcc9900`
-	// Green: `0xcccc33`
-	// Blue: `0x99CCFF`
-	// Black: `0x000000`
-	// White: `0xFFFFFF`
-	// Grey: `0x999999`
+	// [This parameter configuration is invalid and not currently supported] the background color of the sub-picture. commonly used colors are:.
+	// Red: 0xcc0033.
+	// Yellow: 0xcc9900.
+	// Green: 0xcccc33.
+	// Blue: 0x99CCFF.
+	// Black: 0x000000.
+	// White: 0xFFFFFF.
+	// Gray: 0x999999.
 	BackGroundColor *string `json:"BackGroundColor,omitnil,omitempty" name:"BackGroundColor"`
 
-	// The URL of the background image for the video. This parameter allows you to specify an image to display when the user’s camera is turned off or before the user enters the room. If the dimensions of the image specified are different from those of the video window, the image will be stretched to fit the space. This parameter has a higher priority than `BackGroundColor`.
+	// The url of the placeholder image for the sub-window. fill in this parameter to specify the image displayed in the layout position when the user turns the camera off or has not joined the TRTC room. if the specified image has a different size ratio from the layout position, it will be stretched. this parameter has a higher priority than BackGroundColor. supported formats include png, jpg, jpeg, bmp, gif, and webm. the image size limit is no more than 5MB.
+	// Note:.
+	// 1. make sure the image link is accessible. the backend single download timeout period is 10 seconds with a maximum of 3 retries. if the image download fails eventually, the placeholder image will not take effect.
+	// 2. supported character sets for urls: ['0-9', 'a-z', 'a-z', '-', '.', '_', '~', ':', '/', '?', '#', '[', ']', '@', '!', '&', '(', ')', '*', '+', ',', '%', '=', ';', '|']. make sure url characters are within the supported character sets. if characters outside the supported character sets exist, the placeholder image will not take effect.
 	BackgroundImageUrl *string `json:"BackgroundImageUrl,omitnil,omitempty" name:"BackgroundImageUrl"`
 
-	// Custom cropping.
+	// Customer custom crop, targeting the input stream.
 	CustomCrop *McuCustomCrop `json:"CustomCrop,omitnil,omitempty" name:"CustomCrop"`
 
-	// The display mode of the sub-background image during output: 0 for cropping, 1 for scaling and displaying the background, 2 for scaling and displaying the black background, 3 for proportional scaling. If not filled in, the default is 3.
+	// The display mode of the sub-background image in the output: 0 for crop, 1 for scale and display background, 2 for scale and display black background, 3 for variable-scale scaling, 4 for custom rendering. defaults to 3 if left blank.
 	BackgroundRenderMode *uint64 `json:"BackgroundRenderMode,omitnil,omitempty" name:"BackgroundRenderMode"`
+
+	// The sub-screen template url points to a template image with an alpha channel. fill in this parameter, and the backend will extract the alpha channel of the template image during compositing, scale it as the alpha channel of the target frame, and mix it with other frames. you can use the transparent template to achieve a semi-transparent effect and arbitrary shape cropping (such as rounded corners, stars, hearts) for the target frame. png format is supported. the image size limit is no more than 5MB.
+	// Note:.
+	// 1. the image aspect ratio of the template should be close to the target frame aspect ratio to avoid deformation of the template effect when scaling to fit the target frame. 2. the transparent template only takes effect when RenderMode is 0 (crop). 3. make sure the image link is accessible. the backend single download timeout period is 10 seconds with a maximum of 3 retries. if the image download fails eventually, the transparent template will not take effect.
+	// 2. url supported character sets: ['0-9','a-z','a-z','-', '.', '_', '~', ':', '/', '?', '#', '[', ']','@', '!', '&', '(', ')', '*', '+', ',', '%', '=', ';', '|']. make sure url characters are within the supported character sets. if characters outside the supported character sets exist, the transparent template will not take effect.
+	TransparentUrl *string `json:"TransparentUrl,omitnil,omitempty" name:"TransparentUrl"`
+
+
+	BackgroundCustomRender *McuBackgroundCustomRender `json:"BackgroundCustomRender,omitnil,omitempty" name:"BackgroundCustomRender"`
+
+	// Sub-Background color effective mode. default value 0 means disabled.
+	// bit0 specifies whether placeholder image scaling takes effect.
+	// bit1 specifies whether upstream flow scaling takes effect.
+	// You can set the corresponding bit position to 1 to start up and take effect, such as:.
+	// 0(00) means the sub background color is disabled.
+	// 1(01) indicates the sub-background color is valid only when placeholder image scaling is enabled.
+	// 2(10) means the sub background color is valid only when upstream flow scaling.
+	// 3(11) indicates the sub-background color takes effect in both placeholder image scaling and upstream flow scaling.
+	BackGroundColorMode *uint64 `json:"BackGroundColorMode,omitnil,omitempty" name:"BackGroundColorMode"`
 }
 
 type McuLayoutParams struct {
-	// The layout mode. Valid values: 1 (floating), 2 (screen sharing), 3 (grid), 4 (custom). Floating, screen sharing, and grid are dynamic layouts. Custom layouts are static layouts.
+	// Layout mode: dynamic layout (1: floating layout (default), 2: screen sharing layout, 3: nine-grid layout), static layout (4: custom layout). supports up to 16 mixed media streams. if the user only sends upstream audio, it will be counted as one stream. in custom layout, if the sub-screen only uses placeholder images, it will also be counted as one stream.
 	MixLayoutMode *uint64 `json:"MixLayoutMode,omitnil,omitempty" name:"MixLayoutMode"`
 
 	// Whether to display users who publish only audio. 0: No; 1: Yes. This parameter is valid only if a dynamic layout is used. If you do not pass this parameter, 0 will be used.
 	PureAudioHoldPlaceMode *uint64 `json:"PureAudioHoldPlaceMode,omitnil,omitempty" name:"PureAudioHoldPlaceMode"`
 
-	// The details of a custom layout.
+	// Valid in custom template. specifies the position of designated user video in mixed display. supports setting up to 16 input streams.
 	MixLayoutList []*McuLayout `json:"MixLayoutList,omitnil,omitempty" name:"MixLayoutList"`
 
 	// The information of the large video in screen sharing or floating layout mode.
@@ -3261,7 +3297,8 @@ type McuPassThrough struct {
 	// The payload of the pass-through SEI.
 	PayloadContent *string `json:"PayloadContent,omitnil,omitempty" name:"PayloadContent"`
 
-	// The payload type of the SEI message. Value range: 5 and 100-254 (244 is used internally by Tencent Cloud for timestamps).
+	// PayloadType of SEI message. valid values: 5, 100-254 (exclusion: 244, which is internal custom timestamp SEI).
+	// Note: some players may not support the standard type with PayloadType 5 and PayloadUuid. recommend using another PayloadType.
 	PayloadType *uint64 `json:"PayloadType,omitnil,omitempty" name:"PayloadType"`
 
 	// This parameter is required only if `PayloadType` is 5. It must be a 32-character hexadecimal string. If `PayloadType` is not 5, this parameter will be ignored.
@@ -3283,59 +3320,40 @@ type McuPublishCdnParam struct {
 }
 
 type McuRecordParams struct {
-	// Relay Recording Mode
-	// 0/blank: Not currently supported, behavior undefined.
-	// 1: Disable recording.
-	// 2: Start recording (uses console's auto-recording template parameters. Reference: [Link to Documentation]).
-	// 3: Start recording (uses API-specified parameters).
-	// Example: 2
+	// Retweet recording mode. 
+	// 0/Leave blank: not currently supported; behavior is undefined.
+	// 1: disable recording.
+	// 2: enable recording (via console automatic recording template parameters, see: [redirection document](https://www.tencentcloud.comom/document/product/647/111748?from_cn_redirect=1#.E5.BD.95.E5.88.B6.E6.8E.A7.E5.88.B6.E6.96.B9.E6.A1.88));.
+	// 3: enable recording (use API to specify parameter).
 	UniRecord *uint64 `json:"UniRecord,omitnil,omitempty" name:"UniRecord"`
 
-	// Recording Task Key
-	// Identifies a recording task. This parameter allows merging multiple relay tasks into one recording file. If unspecified, only records the current relay task.
-	// [Format: Up to 128 bytes; only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-).]
-	// Example: test_record_key_a
+	// Recording task key, identifies a recording task. you can record multiple relay tasks into a file by specifying this parameter. if this parameter is not specified, only the current relay task is recorded.
+	// Limit length to 128 bytes, only allow a combination of uppercase and lowercase letters (a-zA-Z), digits (0-9), underscores (_), and hyphens (-).
 	RecordKey *string `json:"RecordKey,omitnil,omitempty" name:"RecordKey"`
 
-	// [Valid only when UniRecord=3]
-	// Recording Resume Wait Time
-	// Corresponds to template parameter "Resume Wait Duration." Unit: seconds.
-	// Range: 5-86400 (24 hours). Default: 30. Recording stops if idle longer than this value.
-	// Example: 30
+	// [Valid only when UniRecord=3.].
+	// Resume recording waiting time, corresponding to the "wait time for resumption" in the recording template, unit: seconds. the value must be greater than or equal to 5 and less than or equal to 86400 (24 hours), with a default value of 30. when resumption is enabled, the recording task ends automatically if idle for a duration exceeding RecordWaitTime.
 	RecordWaitTime *uint64 `json:"RecordWaitTime,omitnil,omitempty" name:"RecordWaitTime"`
 
-	// [Valid only when UniRecord=3]
-	// Recording Output Formats
-	// Corresponds to template parameter "File Format." Supported values: hls, mp4, aac. Default: mp4.
-	// Note: mp4 and aac formats are mutually exclusive.
-	// Example (MP4 only): ["mp4"]
-	// Example (MP4 + HLS): ["mp4","hls"]
+	// [Valid only when UniRecord=3.].
+	// The list of output file formats for recording corresponds to the "file format" in the recording template. it supports three formats: "hls", "mp4", and "aac". the default value is "mp4". among them, "mp4" and "aac" formats cannot be specified simultaneously.
+	// Record only the mp4 format, example value: ["mp4"]. record both mp4 and HLS formats simultaneously, example value: ["mp4","HLS"].
 	RecordFormat []*string `json:"RecordFormat,omitnil,omitempty" name:"RecordFormat"`
 
-	// [Valid only when UniRecord=3]
-	// Single File Duration
-	// Corresponds to template parameter "Max File Duration." Unit: minutes.
-	// Range: 1-1440 (24 hours). Default: 1440. Applies only to mp4/aac. Actual duration is capped at 2GB file size.
-	// Example: 1440
+	// [Valid only when UniRecord=3.].
+	// Single file recording duration, corresponding to the "max recording time per file" in the recording template, unit: minutes. the value must be greater than or equal to 1 and less than or equal to 1440 (24 hours), with a default value of 1440. it only takes effect for "mp4" or "aac" format. the actual single file recording duration is also limited by the file size not exceeding 2G. if it exceeds 2G, the file will be forcibly split.
 	MaxMediaFileDuration *uint64 `json:"MaxMediaFileDuration,omitnil,omitempty" name:"MaxMediaFileDuration"`
 
-	// [Valid only when UniRecord=3]
-	// Recording Media Type
-	// Corresponds to template parameter "Recording Format."
-	// 0: Audio+Video, 1: Audio only, 2: Video only. Output is the intersection of this setting and relay content.
-	// Example: 0
+	// [Valid only when UniRecord=3.].
+	// The audio and video type of the recording corresponds to the "recording format" in the recording template. valid values: 0 (audio and video), 1 (pure audio), 2 (video only). the final recording file content is the intersection of the specified type and the relayed content.
 	StreamType *uint64 `json:"StreamType,omitnil,omitempty" name:"StreamType"`
 
-	// Recording Filename Prefix
-	// Filename prefix (<=64 bytes). Applies only to VOD storage.
-	// *Format: Letters (a-z, A-Z), numbers (0-9), underscores (_), hyphens (-).*
-	// Example: mcu_record_prefix
+	// Recording file name prefix, no more than 64 characters. this parameter is valid only when store is vod.
+	// Limit length to 64 bytes, only allow a combination of uppercase and lowercase letters (a-zA-Z), digits (0-9), underscores (_), and hyphens (-).
 	UserDefineRecordPrefix *string `json:"UserDefineRecordPrefix,omitnil,omitempty" name:"UserDefineRecordPrefix"`
 
-	// [Valid only when UniRecord=3]
-	// Recording Storage Parameters
-	// Corresponds to console parameter "Storage Location." Supports Tencent VOD or COS (exclusively).
-	// Example: {"McuCloudVod":{"McuTencentVod":{"ExpireTime":86400}}}
+	// [Valid only when UniRecord=3.].
+	// Recording files storage parameters, corresponding console "storage location" and related parameters. currently supports VOD and COS storage methods. only one can be filled.
 	McuStorageParams *McuStorageParams `json:"McuStorageParams,omitnil,omitempty" name:"McuStorageParams"`
 }
 
@@ -3348,91 +3366,81 @@ type McuSeiParams struct {
 }
 
 type McuStorageParams struct {
-	// Third-Party Cloud Storage Account Information
-	// (Note: Storing files in Object Storage COS will incur recording file delivery fees. For details, see [Cloud Recording Billing]. Storing in VOD does not incur this fee.)
-	// Example:{"Vendor":0,"Region":"ap-shanghai","Bucket":"*","AccessKey":"*","SecretKey":"***","FileNamePrefix":["mcu_record"]}
+	// Account information for third-party cloud storage (special note: if you select storage to cloud object storage (COS), there will be a charge for shipping recorded files to COS. for details, see cloud recording pricing information. storing to VOD will incur no charge for this item.).
 	CloudStorage *CloudStorage `json:"CloudStorage,omitnil,omitempty" name:"CloudStorage"`
 
-	// Tencent Cloud VOD Account Information
-	// Example:{"McuTencentVod":{"ExpireTime":86400}}
+	// Account information of tencent cloud vod.
 	McuCloudVod *McuCloudVod `json:"McuCloudVod,omitnil,omitempty" name:"McuCloudVod"`
 }
 
 type McuTencentVod struct {
-	// Post-Upload Task Processing
-	// Automatically initiates task flows after media uploads complete. Value = Task flow template name.
-	// VOD supports creating and naming task flow templates.
-	// Example: template_name
+	// Subsequent media task processing operations allow automatic task initiation after media upload is completed. the parameter value is the task flow template name. VOD (video on demand) supports creating task flow templates and template naming.
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
-	// Media File Expiration Time
-	// Absolute expiration time from current timestamp.
-	// 86400 = 1 day retention
-	// 0 = permanent storage (default)
-	// Example: 86400
+	// Media file expiry time is the absolute expiration time from the current system time. to save for one day, enter "86400". to retain permanently, enter "0". the default is permanent preservation.
 	ExpireTime *uint64 `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Upload Region Specification
-	// For users requiring specific upload regions.
-	// Example: ap-shanghai
+	// Specify the upload park, applicable only to the user with special requirement for upload region.
 	StorageRegion *string `json:"StorageRegion,omitnil,omitempty" name:"StorageRegion"`
 
-	// Category ID
-	// Manages media classification. Obtain via category creation API.
-	// Default: 0 (Other category)
-	// Example: 0
+	// Category ID is used to categorize and manage media. you can create a category and obtain the category ID through the create category api.
+	// The default value is 0, indicating other categories.
 	ClassId *uint64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// VOD SubAppId
-	// Required when accessing sub-application resources. Leave empty otherwise.
-	// Example: 0
+	// Subapplication ID for video-on-demand (vod). if you need to access resources belonging to a subapplication, fill in this field with the subapplication ID. otherwise, this field is not required.
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// Task Flow Context
-	// Passed through in task completion callbacks.
-	// Example: user_custom
+	// Task flow context, passed through when task complete.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// Upload Context
-	// Passed through in upload completion callbacks.
-	// Example: user_custom
+	// Upload context, passed through on upload completion callback.
 	SourceContext *string `json:"SourceContext,omitnil,omitempty" name:"SourceContext"`
 }
 
 type McuUserInfoParams struct {
 	// The user information.
 	UserInfo *MixUserInfo `json:"UserInfo,omitnil,omitempty" name:"UserInfo"`
+
+	// Audio mix volume adjustment. value ranges from 0 to 100. 100 indicates the original uplink volume. the default value is 100 if left blank. a lower value results in a lower volume.
+	// Note: this parameter takes effect only when configured in the volume allowlist and is unavailable in other scenarios.
+	SoundLevel *uint64 `json:"SoundLevel,omitnil,omitempty" name:"SoundLevel"`
 }
 
 type McuVideoParams struct {
-	// The video encoding parameters.
+	// Video encoding parameter for the output stream.
 	VideoEncode *VideoEncode `json:"VideoEncode,omitnil,omitempty" name:"VideoEncode"`
 
-	// The layout parameters.
+	// Stream mixing layout parameter.
 	LayoutParams *McuLayoutParams `json:"LayoutParams,omitnil,omitempty" name:"LayoutParams"`
 
-	// The canvas color. Below are the values for some common colors:
-	// Red: 0xcc0033
-	// Yellow: 0xcc9900
-	// Green: 0xcccc33
-	// Blue: 0x99CCFF
-	// Black: 0x000000
-	// White: 0xFFFFFF
-	// Grey: 0x999999
+	// The entire canvas background color. commonly used colors:.
+	// Red: 0xcc0033.
+	// Yellow: 0xcc9900.
+	// Green: 0xcccc33.
+	// Blue: 0x99CCFF.
+	// Black: 0x000000.
+	// White: 0xFFFFFF.
+	// Gray: 0x999999.
 	BackGroundColor *string `json:"BackGroundColor,omitnil,omitempty" name:"BackGroundColor"`
 
-	// The URL of the background image for the canvas. This parameter has a higher priority than `BackGroundColor`.
+	// The url of the background image for the entire canvas. priority is higher than BackGroundColor. supports png, jpg, and jpeg formats. image size limit is not more than 5MB.
+	// Note:.
+	// 1. make sure the image link is accessible. the backend download timeout is 10 seconds with a maximum of 3 retries. if the image download fails eventually, the background image will not take effect.
+	// 2. url supported character sets: ['0-9','a-z','a-z','-', '.', '_', '~', ':', '/', '?', '#', '[', ']','@', '!', '&', '(', ')', '*', '+', ',', '%', '=', ';', '|']. make sure url characters are within the supported character sets. if any character outside the supported character sets exists, the background image will not take effect.
 	BackgroundImageUrl *string `json:"BackgroundImageUrl,omitnil,omitempty" name:"BackgroundImageUrl"`
 
-	// The watermark information for the mixed stream.
+	// Watermark parameters for the stream mixing layout.
 	WaterMarkList []*McuWaterMarkParams `json:"WaterMarkList,omitnil,omitempty" name:"WaterMarkList"`
 
-	// Background image display mode during output: 0 for crop, 1 for scale and display with black background, 2 for proportional scaling. The backend default is proportional scaling.
+	// The display mode of the background image in the output: 0 for crop, 1 for scale and display black background, 2 for variable-scale scaling. the backend defaults to variable-scale scaling.
 	BackgroundRenderMode *uint64 `json:"BackgroundRenderMode,omitnil,omitempty" name:"BackgroundRenderMode"`
 }
 
 type McuWaterMarkImage struct {
-	// The URL of the watermark image, which must be in PNG, JPG, or JPEG format and cannot exceed 5 MB.
+	// Watermark image URL address. supports png, jpg, and jpeg formats. image size limit not more than 5MB.
+	// Note:.
+	// Make sure the image link has data accessibility. the backend download timeout is 10 seconds with a maximum of 3 retries. if the image download fails eventually, the watermark image will not take effect.
+	// 2. supported character sets for urls: ['0-9', 'a-z', 'a-z', '-', '.', '_', '~', ':', '/', '?', '#', '[', ']', '@', '!', '&', '(', ')', '*', '+', ',', '%', '=', ';', '|']. make sure url characters are within the supported character sets. if any characters exist outside the supported character sets, the watermark image will not take effect.
 	WaterMarkUrl *string `json:"WaterMarkUrl,omitnil,omitempty" name:"WaterMarkUrl"`
 
 	// The watermark width (pixels).
@@ -3449,6 +3457,9 @@ type McuWaterMarkImage struct {
 
 	// The image layer of the watermark. If you do not pass this parameter, 0 will be used.
 	ZOrder *uint64 `json:"ZOrder,omitnil,omitempty" name:"ZOrder"`
+
+
+	DynamicPosType *uint64 `json:"DynamicPosType,omitnil,omitempty" name:"DynamicPosType"`
 }
 
 type McuWaterMarkParams struct {
@@ -3486,6 +3497,15 @@ type McuWaterMarkText struct {
 
 	// The text fill color. If you do not specify this parameter, the fill color will be transparent. Values for some commonly used colors: Red: `0xcc0033`; yellow: `0xcc9900`; green: `0xcccc33`; blue: `0x99CCFF`; black: `0x000000`; white: `0xFFFFFF`; gray: `0x999999`.	
 	BackGroundColor *string `json:"BackGroundColor,omitnil,omitempty" name:"BackGroundColor"`
+
+
+	DynamicPosType *uint64 `json:"DynamicPosType,omitnil,omitempty" name:"DynamicPosType"`
+
+
+	ZOrder *uint64 `json:"ZOrder,omitnil,omitempty" name:"ZOrder"`
+
+	// Watermark font, by default if left blank is Tencent. valid values: Tencent (default), SourceHanSans.
+	Font *string `json:"Font,omitnil,omitempty" name:"Font"`
 }
 
 type MixLayout struct {
@@ -3599,7 +3619,7 @@ type MixUserInfo struct {
 	// If a dynamic layout is used, the value of this parameter should be the ID of the main room. If a custom layout is used, the value of this parameter should be the same as the room ID in `MixLayoutList`.
 	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
 
-	// The type of the `RoomId` parameter. 0: integer; 1: string.
+	// Room id type. 0 indicates integer room number. 1 indicates string room number.
 	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
 }
 
@@ -3946,7 +3966,7 @@ type RecordParams struct {
 
 	// Output file format (valid when stored in third-party storage such as COS). 0: (default) output file is in hls format. 1: output file format is hls+mp4. 2: output file format is hls+aac. 3: output file format is mp4. 4: output file format is aac.
 	// 
-	// This parameter is invalid when storing in VOD. when storing in VOD, set MediaType in TencentVod (https://www.tencentcloud.com/document/api/647/44055?from_cn_redirect=1#TencentVod).
+	// This parameter is invalid when storing in VOD. when storing in VOD, set MediaType in TencentVod (https://www.tencentcloud.comom/document/api/647/44055?from_cn_redirect=1#TencentVod).
 	OutputFormat *uint64 `json:"OutputFormat,omitnil,omitempty" name:"OutputFormat"`
 
 	// In single-stream recording mode, determine whether to merge the user's audio and video. 0: do not merge the audio and video of a stream (default). 1: merge the audio and video of a stream into one ts. in mixed-stream recording, this parameter is not required, and the audio and video are merged by default.
@@ -4641,82 +4661,82 @@ func (r *StartAITranscriptionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StartPublishCdnStreamRequestParams struct {
-	// The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are relayed.
+	// [SdkAppId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#SdkAppId) of TRTC, which is the same as the SdkAppId corresponding to the relayed room.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// The ID of the room whose streams are relayed (the main room).
+	// Main room information RoomId, the RoomId corresponding to the TRTC room for relay.
 	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
 
-	// The type of the `RoomId` parameter, which must be the same as the ID type of the room whose streams are relayed. 0: integer; 1: string.
+	// Main room information RoomType must be the same as the RoomId type of the relayed room. 0 indicates integer type room id, and 1 indicates string room number.
 	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
 
-	// The information of the relaying robot in the room.
+	// Relay service bot parameters for joining TRTC room.
 	AgentParams *AgentParams `json:"AgentParams,omitnil,omitempty" name:"AgentParams"`
 
-	// Whether to transcode the streams. `0`: No. `1`: Yes. This parameter determines whether transcoding fees are charged. If it is `0`, streams will only be relayed, and no transcoding fees will be incurred. If it is `1`, streams will be transcoded before being relayed, and transcoding fees will be incurred.
+	// Whether to transcode. 0 indicates no need to transcode, 1 indicates requirement to transcode. whether to charge transcoding fee is determined by the WithTranscoding parameter. WithTranscoding set to 0 means bypass forwarding and no transcoding costs will be incurred. WithTranscoding set to 1 means mixed-stream relay and transcoding costs will be charged.
+	// Note: transcoding is required for stream mixing, and this parameter must be set to 1.
 	WithTranscoding *uint64 `json:"WithTranscoding,omitnil,omitempty" name:"WithTranscoding"`
 
-	// The audio encoding parameters. Because audio is always transcoded (no fees are incurred), this parameter is required when you start a relay task.
+	// Audio encoding parameters for stream retransmission. since audio must be transcoded (no transcoding costs will be incurred), this field is required when starting a task.
 	AudioParams *McuAudioParams `json:"AudioParams,omitnil,omitempty" name:"AudioParams"`
 
-	// The video encoding parameters for relaying. If you do not pass this parameter, only audio will be relayed.
+	// Video encoding parameters for the relay stream. leave blank for audio-only relay.
 	VideoParams *McuVideoParams `json:"VideoParams,omitnil,omitempty" name:"VideoParams"`
 
-	// The information of a single stream relayed. When you relay a single stream, set `WithTranscoding` to 0.
+	// The user uplink parameters require single stream bypass forwarding. WithTranscoding needs to be set to 0 for single stream bypass forwarding.
 	SingleSubscribeParams *SingleSubscribeParams `json:"SingleSubscribeParams,omitnil,omitempty" name:"SingleSubscribeParams"`
 
-	// The information of the CDNs to relay to. You need to specify at least one between this parameter and `FeedBackRoomParams.N`.
+	// The CDN parameters for relay push support up to 10 push urls for a task. there must be one pushback room parameter.
 	PublishCdnParams []*McuPublishCdnParam `json:"PublishCdnParams,omitnil,omitempty" name:"PublishCdnParams"`
 
-	// The stream mixing SEI parameters.
+	// Stream mixing SEI parameter.
 	SeiParams *McuSeiParams `json:"SeiParams,omitnil,omitempty" name:"SeiParams"`
 
-	// The information of the room to which streams are relayed. Between this parameter and `PublishCdnParams`, you must specify at least one. Please note that relaying to a TRTC room is only supported in some SDK versions. For details, please contact technical support.
+	// Push back room information. a task supports up to 10 push rooms, and there must be one forward CDN parameter. note: use SDK version 10.4 or higher to push room. if you need assistance, contact tencent cloud technical support.
 	FeedBackRoomParams []*McuFeedBackRoomParams `json:"FeedBackRoomParams,omitnil,omitempty" name:"FeedBackRoomParams"`
 
-	// Relay Recording Parameters.
-	// Example value:{"UniRecord":1,"RecordKey": "test_recore_key_a"}
+	// Relay recording parameters. refer to the reference document (https://www.tencentcloud.comom/document/product/647/111748?from_cn_redirect=1).
 	RecordParams *McuRecordParams `json:"RecordParams,omitnil,omitempty" name:"RecordParams"`
 }
 
 type StartPublishCdnStreamRequest struct {
 	*tchttp.BaseRequest
 	
-	// The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are relayed.
+	// [SdkAppId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#SdkAppId) of TRTC, which is the same as the SdkAppId corresponding to the relayed room.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// The ID of the room whose streams are relayed (the main room).
+	// Main room information RoomId, the RoomId corresponding to the TRTC room for relay.
 	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
 
-	// The type of the `RoomId` parameter, which must be the same as the ID type of the room whose streams are relayed. 0: integer; 1: string.
+	// Main room information RoomType must be the same as the RoomId type of the relayed room. 0 indicates integer type room id, and 1 indicates string room number.
 	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
 
-	// The information of the relaying robot in the room.
+	// Relay service bot parameters for joining TRTC room.
 	AgentParams *AgentParams `json:"AgentParams,omitnil,omitempty" name:"AgentParams"`
 
-	// Whether to transcode the streams. `0`: No. `1`: Yes. This parameter determines whether transcoding fees are charged. If it is `0`, streams will only be relayed, and no transcoding fees will be incurred. If it is `1`, streams will be transcoded before being relayed, and transcoding fees will be incurred.
+	// Whether to transcode. 0 indicates no need to transcode, 1 indicates requirement to transcode. whether to charge transcoding fee is determined by the WithTranscoding parameter. WithTranscoding set to 0 means bypass forwarding and no transcoding costs will be incurred. WithTranscoding set to 1 means mixed-stream relay and transcoding costs will be charged.
+	// Note: transcoding is required for stream mixing, and this parameter must be set to 1.
 	WithTranscoding *uint64 `json:"WithTranscoding,omitnil,omitempty" name:"WithTranscoding"`
 
-	// The audio encoding parameters. Because audio is always transcoded (no fees are incurred), this parameter is required when you start a relay task.
+	// Audio encoding parameters for stream retransmission. since audio must be transcoded (no transcoding costs will be incurred), this field is required when starting a task.
 	AudioParams *McuAudioParams `json:"AudioParams,omitnil,omitempty" name:"AudioParams"`
 
-	// The video encoding parameters for relaying. If you do not pass this parameter, only audio will be relayed.
+	// Video encoding parameters for the relay stream. leave blank for audio-only relay.
 	VideoParams *McuVideoParams `json:"VideoParams,omitnil,omitempty" name:"VideoParams"`
 
-	// The information of a single stream relayed. When you relay a single stream, set `WithTranscoding` to 0.
+	// The user uplink parameters require single stream bypass forwarding. WithTranscoding needs to be set to 0 for single stream bypass forwarding.
 	SingleSubscribeParams *SingleSubscribeParams `json:"SingleSubscribeParams,omitnil,omitempty" name:"SingleSubscribeParams"`
 
-	// The information of the CDNs to relay to. You need to specify at least one between this parameter and `FeedBackRoomParams.N`.
+	// The CDN parameters for relay push support up to 10 push urls for a task. there must be one pushback room parameter.
 	PublishCdnParams []*McuPublishCdnParam `json:"PublishCdnParams,omitnil,omitempty" name:"PublishCdnParams"`
 
-	// The stream mixing SEI parameters.
+	// Stream mixing SEI parameter.
 	SeiParams *McuSeiParams `json:"SeiParams,omitnil,omitempty" name:"SeiParams"`
 
-	// The information of the room to which streams are relayed. Between this parameter and `PublishCdnParams`, you must specify at least one. Please note that relaying to a TRTC room is only supported in some SDK versions. For details, please contact technical support.
+	// Push back room information. a task supports up to 10 push rooms, and there must be one forward CDN parameter. note: use SDK version 10.4 or higher to push room. if you need assistance, contact tencent cloud technical support.
 	FeedBackRoomParams []*McuFeedBackRoomParams `json:"FeedBackRoomParams,omitnil,omitempty" name:"FeedBackRoomParams"`
 
-	// Relay Recording Parameters.
-	// Example value:{"UniRecord":1,"RecordKey": "test_recore_key_a"}
+	// Relay recording parameters. refer to the reference document (https://www.tencentcloud.comom/document/product/647/111748?from_cn_redirect=1).
 	RecordParams *McuRecordParams `json:"RecordParams,omitnil,omitempty" name:"RecordParams"`
 }
 
@@ -4752,7 +4772,7 @@ func (r *StartPublishCdnStreamRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StartPublishCdnStreamResponseParams struct {
-	// The task ID, which is generated by the Tencent Cloud server. You need to pass in the task ID when making a request to update or stop a relaying task.
+	// Used to uniquely identify the forwarding task, generated by the tencent cloud server. you need to carry the TaskID parameter for follow-up updates and to stop the request.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4940,62 +4960,64 @@ func (r *StartStreamIngestResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StartWebRecordRequestParams struct {
-	// URL of the web page to be recorded
+	// [Required] webpage URL that needs to be recorded.
 	RecordUrl *string `json:"RecordUrl,omitnil,omitempty" name:"RecordUrl"`
 
-	// Maximum recording duration limit, in seconds. Valid range: [1800, 36000]. Default is 36,000 seconds (10 hours).
-	MaxDurationLimit *uint64 `json:"MaxDurationLimit,omitnil,omitempty" name:"MaxDurationLimit"`
-
-	// [Required] Parameters related to cloud storage. Currently, Tencent Cloud Object Storage and Tencent Cloud VOD are supported, but third-party cloud storage is not supported. The storage format of the output file only supports hls or mp4.
+	// [Required] cloud storage related parameters. currently supports tencent cloud object storage as well as VOD. no support for third-party cloud storage. the storage format of the output file is only supported for hls or mp4.
 	StorageParams *StorageParams `json:"StorageParams,omitnil,omitempty" name:"StorageParams"`
 
-	// web-page recording video parameters
-	WebRecordVideoParams *WebRecordVideoParams `json:"WebRecordVideoParams,omitnil,omitempty" name:"WebRecordVideoParams"`
-
-	// [Required] The SDKAppID of the TRTC room 
+	// [Required] the SdkAppId of TRTC.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// When sensitive to repetitive tasks, please pay attention to this value: To avoid tasks being initiated repeatedly in a short period, leading to task duplication, pass in the recording RecordId to identify the current task. The RecordId should be less than 32 bytes. If you carry the RecordId and initiate the start recording request more than once, only one task will be started, and the second one will report the error FailedOperation.TaskExist. Note that if the StartWebRecord call fails with an error other than FailedOperation.TaskExist, please change the RecordId and initiate the request again.
+	// Maximum recording duration limit in seconds. valid values [1800, 86400]. default 86400s (24 hr).
+	MaxDurationLimit *uint64 `json:"MaxDurationLimit,omitnil,omitempty" name:"MaxDurationLimit"`
+
+	// Page recording video parameter.
+	WebRecordVideoParams *WebRecordVideoParams `json:"WebRecordVideoParams,omitnil,omitempty" name:"WebRecordVideoParams"`
+
+	// When sensitive to repetition tasks, pay attention to this value: to avoid triggering tasks repeatedly in a short time frame, which may lead to task duplication.
+	// Import the recording RecordId to identify the task, less than 32 bytes. if carrying RecordId initiates start recording requests more than twice, only one task will start up, and the second will report error FailedOperation.TaskExist. note that when StartWebRecord call fails instead of FailedOperation.TaskExist error, change RecordId and re-initiate the request.
 	RecordId *string `json:"RecordId,omitnil,omitempty" name:"RecordId"`
 
-	// If you want to push the stream to a CDN, you can use the PublishCdnParams.N parameter to set it. It supports pushing streams to up to 10 CDN addresses simultaneously. If the relay address is a Tencent Cloud CDN, please explicitly set IsTencentCdn to 1.
+	// If you want to push stream to CDN, you can configure parameters in PublishCdnParams.N. it supports streaming simultaneously to up to 10 CDN addresses. if the relay address is tencent cloud CDN, set IsTencentCdn to 1.
 	PublishCdnParams []*McuPublishCdnParam `json:"PublishCdnParams,omitnil,omitempty" name:"PublishCdnParams"`
 
-	// The timeout for loading page resources during recording, in seconds. The default value is 0 seconds. This value must be greater than or equal to 0 seconds and less than or equal to 60 seconds. If page load timeout detection is not enabled for the recording page, please do not set this parameter.
+	// Timeout period for recording page resource loading, unit: second. default value is 0, which must be greater than or equal to 0 and less than or equal to 60. do not set this parameter when page loading timeout detection is disabled for the recording page.
 	ReadyTimeout *uint64 `json:"ReadyTimeout,omitnil,omitempty" name:"ReadyTimeout"`
 
-	// Render mobile mode parameters; do not set this parameter if you are not going to render mobile mode pages.
+	// Render the mobile mode parameter. do not set this parameter when not preparing to render the mobile mode webpage.
 	EmulateMobileParams *EmulateMobileParams `json:"EmulateMobileParams,omitnil,omitempty" name:"EmulateMobileParams"`
 }
 
 type StartWebRecordRequest struct {
 	*tchttp.BaseRequest
 	
-	// URL of the web page to be recorded
+	// [Required] webpage URL that needs to be recorded.
 	RecordUrl *string `json:"RecordUrl,omitnil,omitempty" name:"RecordUrl"`
 
-	// Maximum recording duration limit, in seconds. Valid range: [1800, 36000]. Default is 36,000 seconds (10 hours).
-	MaxDurationLimit *uint64 `json:"MaxDurationLimit,omitnil,omitempty" name:"MaxDurationLimit"`
-
-	// [Required] Parameters related to cloud storage. Currently, Tencent Cloud Object Storage and Tencent Cloud VOD are supported, but third-party cloud storage is not supported. The storage format of the output file only supports hls or mp4.
+	// [Required] cloud storage related parameters. currently supports tencent cloud object storage as well as VOD. no support for third-party cloud storage. the storage format of the output file is only supported for hls or mp4.
 	StorageParams *StorageParams `json:"StorageParams,omitnil,omitempty" name:"StorageParams"`
 
-	// web-page recording video parameters
-	WebRecordVideoParams *WebRecordVideoParams `json:"WebRecordVideoParams,omitnil,omitempty" name:"WebRecordVideoParams"`
-
-	// [Required] The SDKAppID of the TRTC room 
+	// [Required] the SdkAppId of TRTC.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// When sensitive to repetitive tasks, please pay attention to this value: To avoid tasks being initiated repeatedly in a short period, leading to task duplication, pass in the recording RecordId to identify the current task. The RecordId should be less than 32 bytes. If you carry the RecordId and initiate the start recording request more than once, only one task will be started, and the second one will report the error FailedOperation.TaskExist. Note that if the StartWebRecord call fails with an error other than FailedOperation.TaskExist, please change the RecordId and initiate the request again.
+	// Maximum recording duration limit in seconds. valid values [1800, 86400]. default 86400s (24 hr).
+	MaxDurationLimit *uint64 `json:"MaxDurationLimit,omitnil,omitempty" name:"MaxDurationLimit"`
+
+	// Page recording video parameter.
+	WebRecordVideoParams *WebRecordVideoParams `json:"WebRecordVideoParams,omitnil,omitempty" name:"WebRecordVideoParams"`
+
+	// When sensitive to repetition tasks, pay attention to this value: to avoid triggering tasks repeatedly in a short time frame, which may lead to task duplication.
+	// Import the recording RecordId to identify the task, less than 32 bytes. if carrying RecordId initiates start recording requests more than twice, only one task will start up, and the second will report error FailedOperation.TaskExist. note that when StartWebRecord call fails instead of FailedOperation.TaskExist error, change RecordId and re-initiate the request.
 	RecordId *string `json:"RecordId,omitnil,omitempty" name:"RecordId"`
 
-	// If you want to push the stream to a CDN, you can use the PublishCdnParams.N parameter to set it. It supports pushing streams to up to 10 CDN addresses simultaneously. If the relay address is a Tencent Cloud CDN, please explicitly set IsTencentCdn to 1.
+	// If you want to push stream to CDN, you can configure parameters in PublishCdnParams.N. it supports streaming simultaneously to up to 10 CDN addresses. if the relay address is tencent cloud CDN, set IsTencentCdn to 1.
 	PublishCdnParams []*McuPublishCdnParam `json:"PublishCdnParams,omitnil,omitempty" name:"PublishCdnParams"`
 
-	// The timeout for loading page resources during recording, in seconds. The default value is 0 seconds. This value must be greater than or equal to 0 seconds and less than or equal to 60 seconds. If page load timeout detection is not enabled for the recording page, please do not set this parameter.
+	// Timeout period for recording page resource loading, unit: second. default value is 0, which must be greater than or equal to 0 and less than or equal to 60. do not set this parameter when page loading timeout detection is disabled for the recording page.
 	ReadyTimeout *uint64 `json:"ReadyTimeout,omitnil,omitempty" name:"ReadyTimeout"`
 
-	// Render mobile mode parameters; do not set this parameter if you are not going to render mobile mode pages.
+	// Render the mobile mode parameter. do not set this parameter when not preparing to render the mobile mode webpage.
 	EmulateMobileParams *EmulateMobileParams `json:"EmulateMobileParams,omitnil,omitempty" name:"EmulateMobileParams"`
 }
 
@@ -5012,10 +5034,10 @@ func (r *StartWebRecordRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "RecordUrl")
-	delete(f, "MaxDurationLimit")
 	delete(f, "StorageParams")
-	delete(f, "WebRecordVideoParams")
 	delete(f, "SdkAppId")
+	delete(f, "MaxDurationLimit")
+	delete(f, "WebRecordVideoParams")
 	delete(f, "RecordId")
 	delete(f, "PublishCdnParams")
 	delete(f, "ReadyTimeout")
@@ -5028,7 +5050,7 @@ func (r *StartWebRecordRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StartWebRecordResponseParams struct {
-	// The unique ID of the recording task
+	// Unique Id of the recording task.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5886,7 +5908,7 @@ type VideoEncode struct {
 	// The width of the output stream (pixels). This parameter is required if audio and video are relayed. Value range: [0, 1920].
 	Width *uint64 `json:"Width,omitnil,omitempty" name:"Width"`
 
-	// The height of the output stream (pixels). This parameter is required if audio and video are relayed. Value range: [0, 1080].
+	// Output stream is high and required for audio and video output. value ranges from 0 to 1920. unit: pixel value.
 	Height *uint64 `json:"Height,omitnil,omitempty" name:"Height"`
 
 	// The frame rate (fps) of the output stream. This parameter is required if audio and video are relayed. Value range: [0, 60].
@@ -5999,18 +6021,17 @@ type WaterMarkTimestamp struct {
 }
 
 type WebRecordVideoParams struct {
-	// Recording screen width, defaults to 1280, value range [0, 1920]
+	// Recording image width defaults to 1280, with a value range of [0, 1920].
 	Width *uint64 `json:"Width,omitnil,omitempty" name:"Width"`
 
-	// Recording screen height, defaults to 720, value range [0, 1080]
+	// Recording image height, defaults to 720, in the range of [0, 1080].
 	Height *uint64 `json:"Height,omitnil,omitempty" name:"Height"`
 
-	// Specify the output format, optional hls, mp4. When storing to VOD, this parameter is invalid; please use the MediaType setting within TencentVod (https://cloud.tencent.com/document/api/647/44055#TencentVod).
-	//  
+	// Specify output format. valid values: hls, mp4. this parameter is invalid when storing in VOD. to store in VOD, set MediaType in TencentVod (https://www.tencentcloud.comom/document/api/647/44055?from_cn_redirect=1#TencentVod).
 	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
 
-	// If the file format is aac or mp4, the system will automatically split the video file when it exceeds the length limit. Unit: minutes. Default: 1440 min (24h), value range: 1-1440. [Single file size is limited to a maximum of 2G. Files will be automatically split if either condition is met: file size >2G or recording duration > 24h]
-	// This parameter does not take effect for Hls format recordings.
-	// Sample value: 1440
+	// If the file format is aac or mp4, the system will automatically split the video file when the length limit is exceeded. measurement unit: minute. defaults to 1440 min (24h). value range: 1-1440. [single file limit is 2G. if file size exceeds 2G or recording duration exceeds 24h, the file will be automatically split.].
+	// Hls format recording. this parameter is not effective.
+	// Example value: 1440.
 	MaxMediaFileDuration *int64 `json:"MaxMediaFileDuration,omitnil,omitempty" name:"MaxMediaFileDuration"`
 }
