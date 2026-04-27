@@ -921,6 +921,60 @@ func (c *Client) CreateMNPDomainACLWithContext(ctx context.Context, request *Cre
     return
 }
 
+func NewCreateMNPSecretKeyRequest() (request *CreateMNPSecretKeyRequest) {
+    request = &CreateMNPSecretKeyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "CreateMNPSecretKey")
+    
+    
+    return
+}
+
+func NewCreateMNPSecretKeyResponse() (response *CreateMNPSecretKeyResponse) {
+    response = &CreateMNPSecretKeyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateMNPSecretKey
+// This API is used to create a secret key for a mini program or mini game.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_EXISTMISMATCHPARAMETERTYPE = "InvalidParameterValue.ExistMismatchParameterType"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) CreateMNPSecretKey(request *CreateMNPSecretKeyRequest) (response *CreateMNPSecretKeyResponse, err error) {
+    return c.CreateMNPSecretKeyWithContext(context.Background(), request)
+}
+
+// CreateMNPSecretKey
+// This API is used to create a secret key for a mini program or mini game.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_EXISTMISMATCHPARAMETERTYPE = "InvalidParameterValue.ExistMismatchParameterType"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) CreateMNPSecretKeyWithContext(ctx context.Context, request *CreateMNPSecretKeyRequest) (response *CreateMNPSecretKeyResponse, err error) {
+    if request == nil {
+        request = NewCreateMNPSecretKeyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "CreateMNPSecretKey")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateMNPSecretKey require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateMNPSecretKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateMNPSensitiveAPIPermissionApprovalRequest() (request *CreateMNPSensitiveAPIPermissionApprovalRequest) {
     request = &CreateMNPSensitiveAPIPermissionApprovalRequest{
         BaseRequest: &tchttp.BaseRequest{},

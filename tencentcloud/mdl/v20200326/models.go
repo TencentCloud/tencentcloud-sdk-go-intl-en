@@ -782,20 +782,20 @@ func (r *CreateStreamLiveInputSecurityGroupResponse) FromJsonString(s string) er
 
 // Predefined struct for user
 type CreateStreamLivePlanRequestParams struct {
-	// ID of the channel for which you want to configure an event
+	// ID of the channel for which you want to configure an event.
 	ChannelId *string `json:"ChannelId,omitnil,omitempty" name:"ChannelId"`
 
-	// Event configuration
+	// Event configuration.
 	Plan *PlanReq `json:"Plan,omitnil,omitempty" name:"Plan"`
 }
 
 type CreateStreamLivePlanRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the channel for which you want to configure an event
+	// ID of the channel for which you want to configure an event.
 	ChannelId *string `json:"ChannelId,omitnil,omitempty" name:"ChannelId"`
 
-	// Event configuration
+	// Event configuration.
 	Plan *PlanReq `json:"Plan,omitnil,omitempty" name:"Plan"`
 }
 
@@ -2632,7 +2632,7 @@ type EventSettingsReq struct {
 	// Valid values: `INPUT_SWITCH`, `TIMED_RECORD`, `SCTE35_TIME_SIGNAL`, `SCTE35_SPLICE_INSERT`, `SCTE35_RETURN_TO_NETWORK`,`TIMED_METADATA `,`STATIC_IMAGE_ACTIVATE `,`STATIC_IMAGE_DEACTIVATE `. If it is not specified, `INPUT_SWITCH` will be used.
 	EventType *string `json:"EventType,omitnil,omitempty" name:"EventType"`
 
-	// ID of the input to attach, which is required if `EventType` is `INPUT_SWITCH`
+	// ID of the input to attach, which is required if `EventType` is `INPUT_SWITCH`.
 	InputAttachment *string `json:"InputAttachment,omitnil,omitempty" name:"InputAttachment"`
 
 	// When the type is FIXED_PTS, it is mandatory and defaults to 0
