@@ -77,7 +77,7 @@ func NewApplyFreeCertificateResponse() (response *ApplyFreeCertificateResponse) 
 //
 // 
 //
-// The application method introduction in the document: [Free Certificate Application Description](https://www.tencentcloud.comom/document/product/1552/90437?from_cn_redirect=1). 
+// The application method introduction in the document: [Free Certificate Application Description](https://www.tencentcloud.com/document/product/1552/90437?from_cn_redirect=1). 
 //
 // description:.
 //
@@ -103,7 +103,7 @@ func (c *Client) ApplyFreeCertificate(request *ApplyFreeCertificateRequest) (res
 //
 // 
 //
-// The application method introduction in the document: [Free Certificate Application Description](https://www.tencentcloud.comom/document/product/1552/90437?from_cn_redirect=1). 
+// The application method introduction in the document: [Free Certificate Application Description](https://www.tencentcloud.com/document/product/1552/90437?from_cn_redirect=1). 
 //
 // description:.
 //
@@ -389,7 +389,7 @@ func NewCheckFreeCertificateVerificationResponse() (response *CheckFreeCertifica
 // CheckFreeCertificateVerification
 // This API is used to verify a free certificate and obtain the application result. If verified, you can query the free certificate information for the corresponding domain name application through this API. If failed to apply, this API will return the corresponding verification failure message.
 //
-// This API is used to check the free certificate application result after triggering the [ApplyFreeCertificate](https://www.tencentcloud.comom/document/product/1552/124807?from_cn_redirect=1) . Once the application is successful, you need to configure through the [ModifyHostsCertificate](https://www.tencentcloud.comom/document/product/1552/80764?from_cn_redirect=1) to deploy the free certificate to the acceleration domain.
+// This API is used to check the free certificate application result after triggering the [ApplyFreeCertificate](https://www.tencentcloud.com/document/product/1552/124807?from_cn_redirect=1) . Once the application is successful, you need to configure through the [ModifyHostsCertificate](https://www.tencentcloud.com/document/product/1552/80764?from_cn_redirect=1) to deploy the free certificate to the acceleration domain.
 //
 // error code that may be returned:
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
@@ -403,7 +403,7 @@ func (c *Client) CheckFreeCertificateVerification(request *CheckFreeCertificateV
 // CheckFreeCertificateVerification
 // This API is used to verify a free certificate and obtain the application result. If verified, you can query the free certificate information for the corresponding domain name application through this API. If failed to apply, this API will return the corresponding verification failure message.
 //
-// This API is used to check the free certificate application result after triggering the [ApplyFreeCertificate](https://www.tencentcloud.comom/document/product/1552/124807?from_cn_redirect=1) . Once the application is successful, you need to configure through the [ModifyHostsCertificate](https://www.tencentcloud.comom/document/product/1552/80764?from_cn_redirect=1) to deploy the free certificate to the acceleration domain.
+// This API is used to check the free certificate application result after triggering the [ApplyFreeCertificate](https://www.tencentcloud.com/document/product/1552/124807?from_cn_redirect=1) . Once the application is successful, you need to configure through the [ModifyHostsCertificate](https://www.tencentcloud.com/document/product/1552/80764?from_cn_redirect=1) to deploy the free certificate to the acceleration domain.
 //
 // error code that may be returned:
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
@@ -1861,6 +1861,7 @@ func NewCreateL7AccRulesResponse() (response *CreateL7AccRulesResponse) {
 //  INVALIDPARAMETER_INVALIDRULEENGINETARGETSEXTENSION = "InvalidParameter.InvalidRuleEngineTargetsExtension"
 //  INVALIDPARAMETER_INVALIDRULEENGINETARGETSURL = "InvalidParameter.InvalidRuleEngineTargetsUrl"
 //  INVALIDPARAMETER_INVALIDSERVERNAME = "InvalidParameter.InvalidServerName"
+//  INVALIDPARAMETER_INVALIDSHIELDUNSUPPORTED = "InvalidParameter.InvalidShieldUnsupported"
 //  INVALIDPARAMETER_INVALIDSTANDARDDEBUGEXPIRETIMELIMIT = "InvalidParameter.InvalidStandardDebugExpireTimeLimit"
 //  INVALIDPARAMETER_INVALIDUPSTREAMREQUESTQUERYSTRINGVALUE = "InvalidParameter.InvalidUpstreamRequestQueryStringValue"
 //  INVALIDPARAMETER_INVALIDURLREDIRECT = "InvalidParameter.InvalidUrlRedirect"
@@ -1872,20 +1873,34 @@ func NewCreateL7AccRulesResponse() (response *CreateL7AccRulesResponse) {
 //  INVALIDPARAMETER_NOTSUPPORTTHISPRESET = "InvalidParameter.NotSupportThisPreset"
 //  INVALIDPARAMETER_ORIGINORIGINGROUPIDISREQUIRED = "InvalidParameter.OriginOriginGroupIdIsRequired"
 //  INVALIDPARAMETER_POSTMAXSIZELIMITEXCEEDED = "InvalidParameter.PostMaxSizeLimitExceeded"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTCACHEPREFRESH = "InvalidParameter.ShieldNotSupportHostCachePrefresh"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTORIGINWHITELIST = "InvalidParameter.ShieldNotSupportHostOriginWhitelist"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTSMARTROUTING = "InvalidParameter.ShieldNotSupportHostSmartRouting"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTZONECACHEPREFRESH = "InvalidParameter.ShieldNotSupportZoneCachePrefresh"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTZONESMARTROUTING = "InvalidParameter.ShieldNotSupportZoneSmartRouting"
+//  INVALIDPARAMETER_SHIELDSPACENOTFOUND = "InvalidParameter.ShieldSpaceNotFound"
+//  INVALIDPARAMETER_SHIELDSPACEREQUIREDERROR = "InvalidParameter.ShieldSpaceRequiredError"
+//  INVALIDPARAMETER_SHIELDSPACESTATUSMUSTONLINE = "InvalidParameter.ShieldSpaceStatusMustOnline"
 //  INVALIDPARAMETER_TASKSYSTEMERROR = "InvalidParameter.TaskSystemError"
 //  INVALIDPARAMETERVALUE_FORMATMISMATCH = "InvalidParameterValue.FormatMismatch"
 //  INVALIDPARAMETERVALUE_GENERALMISMATCH = "InvalidParameterValue.GeneralMismatch"
 //  INVALIDPARAMETERVALUE_INCLUDEINVALIDVALUE = "InvalidParameterValue.IncludeInvalidValue"
+//  INVALIDPARAMETERVALUE_INVALIDSITEFAILOVERUNSUPPORTED = "InvalidParameterValue.InvalidSiteFailoverUnsupported"
 //  INVALIDPARAMETERVALUE_MISSINGNECESSARYPARAM = "InvalidParameterValue.MissingNecessaryParam"
 //  INVALIDPARAMETERVALUE_NOTINENUMERATION = "InvalidParameterValue.NotInEnumeration"
 //  INVALIDPARAMETERVALUE_NOTWITHINRANGE = "InvalidParameterValue.NotWithinRange"
 //  INVALIDPARAMETERVALUE_REGEXMISMATCH = "InvalidParameterValue.RegExMismatch"
+//  INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTORIGINPULLRATELIMIT = "InvalidParameterValue.SiteFailoverNotSupportHostOriginPullRateLimit"
+//  INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTORIGINTYPEVOD = "InvalidParameterValue.SiteFailoverNotSupportHostOriginTypeVod"
+//  INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTUPSTREAMVERIFY = "InvalidParameterValue.SiteFailoverNotSupportHostUpstreamVerify"
 //  INVALIDPARAMETERVALUE_UNRECOGNIZABLEVALUE = "InvalidParameterValue.UnrecognizableValue"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACCELERATEMAINLANDMULTIPLYLAYERCONFLICT = "OperationDenied.AccelerateMainlandMultiplyLayerConflict"
 //  OPERATIONDENIED_ERRZONEISALREADYPAUSED = "OperationDenied.ErrZoneIsAlreadyPaused"
 //  OPERATIONDENIED_INVALIDADVANCEDDEFENSESECURITYTYPE = "OperationDenied.InvalidAdvancedDefenseSecurityType"
+//  OPERATIONDENIED_NOTINSHIELDSPACEWHITELIST = "OperationDenied.NotInShieldSpaceWhiteList"
+//  OPERATIONDENIED_NOTINSITEFAILOVERWHITELIST = "OperationDenied.NotInSiteFailoverWhiteList"
 //  RESOURCEINUSE = "ResourceInUse"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) CreateL7AccRules(request *CreateL7AccRulesRequest) (response *CreateL7AccRulesResponse, err error) {
@@ -1961,6 +1976,7 @@ func (c *Client) CreateL7AccRules(request *CreateL7AccRulesRequest) (response *C
 //  INVALIDPARAMETER_INVALIDRULEENGINETARGETSEXTENSION = "InvalidParameter.InvalidRuleEngineTargetsExtension"
 //  INVALIDPARAMETER_INVALIDRULEENGINETARGETSURL = "InvalidParameter.InvalidRuleEngineTargetsUrl"
 //  INVALIDPARAMETER_INVALIDSERVERNAME = "InvalidParameter.InvalidServerName"
+//  INVALIDPARAMETER_INVALIDSHIELDUNSUPPORTED = "InvalidParameter.InvalidShieldUnsupported"
 //  INVALIDPARAMETER_INVALIDSTANDARDDEBUGEXPIRETIMELIMIT = "InvalidParameter.InvalidStandardDebugExpireTimeLimit"
 //  INVALIDPARAMETER_INVALIDUPSTREAMREQUESTQUERYSTRINGVALUE = "InvalidParameter.InvalidUpstreamRequestQueryStringValue"
 //  INVALIDPARAMETER_INVALIDURLREDIRECT = "InvalidParameter.InvalidUrlRedirect"
@@ -1972,20 +1988,34 @@ func (c *Client) CreateL7AccRules(request *CreateL7AccRulesRequest) (response *C
 //  INVALIDPARAMETER_NOTSUPPORTTHISPRESET = "InvalidParameter.NotSupportThisPreset"
 //  INVALIDPARAMETER_ORIGINORIGINGROUPIDISREQUIRED = "InvalidParameter.OriginOriginGroupIdIsRequired"
 //  INVALIDPARAMETER_POSTMAXSIZELIMITEXCEEDED = "InvalidParameter.PostMaxSizeLimitExceeded"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTCACHEPREFRESH = "InvalidParameter.ShieldNotSupportHostCachePrefresh"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTORIGINWHITELIST = "InvalidParameter.ShieldNotSupportHostOriginWhitelist"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTSMARTROUTING = "InvalidParameter.ShieldNotSupportHostSmartRouting"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTZONECACHEPREFRESH = "InvalidParameter.ShieldNotSupportZoneCachePrefresh"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTZONESMARTROUTING = "InvalidParameter.ShieldNotSupportZoneSmartRouting"
+//  INVALIDPARAMETER_SHIELDSPACENOTFOUND = "InvalidParameter.ShieldSpaceNotFound"
+//  INVALIDPARAMETER_SHIELDSPACEREQUIREDERROR = "InvalidParameter.ShieldSpaceRequiredError"
+//  INVALIDPARAMETER_SHIELDSPACESTATUSMUSTONLINE = "InvalidParameter.ShieldSpaceStatusMustOnline"
 //  INVALIDPARAMETER_TASKSYSTEMERROR = "InvalidParameter.TaskSystemError"
 //  INVALIDPARAMETERVALUE_FORMATMISMATCH = "InvalidParameterValue.FormatMismatch"
 //  INVALIDPARAMETERVALUE_GENERALMISMATCH = "InvalidParameterValue.GeneralMismatch"
 //  INVALIDPARAMETERVALUE_INCLUDEINVALIDVALUE = "InvalidParameterValue.IncludeInvalidValue"
+//  INVALIDPARAMETERVALUE_INVALIDSITEFAILOVERUNSUPPORTED = "InvalidParameterValue.InvalidSiteFailoverUnsupported"
 //  INVALIDPARAMETERVALUE_MISSINGNECESSARYPARAM = "InvalidParameterValue.MissingNecessaryParam"
 //  INVALIDPARAMETERVALUE_NOTINENUMERATION = "InvalidParameterValue.NotInEnumeration"
 //  INVALIDPARAMETERVALUE_NOTWITHINRANGE = "InvalidParameterValue.NotWithinRange"
 //  INVALIDPARAMETERVALUE_REGEXMISMATCH = "InvalidParameterValue.RegExMismatch"
+//  INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTORIGINPULLRATELIMIT = "InvalidParameterValue.SiteFailoverNotSupportHostOriginPullRateLimit"
+//  INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTORIGINTYPEVOD = "InvalidParameterValue.SiteFailoverNotSupportHostOriginTypeVod"
+//  INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTUPSTREAMVERIFY = "InvalidParameterValue.SiteFailoverNotSupportHostUpstreamVerify"
 //  INVALIDPARAMETERVALUE_UNRECOGNIZABLEVALUE = "InvalidParameterValue.UnrecognizableValue"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACCELERATEMAINLANDMULTIPLYLAYERCONFLICT = "OperationDenied.AccelerateMainlandMultiplyLayerConflict"
 //  OPERATIONDENIED_ERRZONEISALREADYPAUSED = "OperationDenied.ErrZoneIsAlreadyPaused"
 //  OPERATIONDENIED_INVALIDADVANCEDDEFENSESECURITYTYPE = "OperationDenied.InvalidAdvancedDefenseSecurityType"
+//  OPERATIONDENIED_NOTINSHIELDSPACEWHITELIST = "OperationDenied.NotInShieldSpaceWhiteList"
+//  OPERATIONDENIED_NOTINSITEFAILOVERWHITELIST = "OperationDenied.NotInSiteFailoverWhiteList"
 //  RESOURCEINUSE = "ResourceInUse"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) CreateL7AccRulesWithContext(ctx context.Context, request *CreateL7AccRulesRequest) (response *CreateL7AccRulesResponse, err error) {
@@ -2637,7 +2667,7 @@ func NewCreateRealtimeLogDeliveryTaskResponse() (response *CreateRealtimeLogDeli
 //
 // 
 //
-// This API is used to query the real-time log delivery task list based on the entity to check whether the entity has been added to another real-time log delivery task. It is advisable to use the [DescribeRealtimeLogDeliveryTasks](https://www.tencentcloud.comom/document/product/1552/104110?from_cn_redirect=1) API first.
+// This API is used to query the real-time log delivery task list based on the entity to check whether the entity has been added to another real-time log delivery task. It is advisable to use the [DescribeRealtimeLogDeliveryTasks](https://www.tencentcloud.com/document/product/1552/104110?from_cn_redirect=1) API first.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2681,7 +2711,7 @@ func (c *Client) CreateRealtimeLogDeliveryTask(request *CreateRealtimeLogDeliver
 //
 // 
 //
-// This API is used to query the real-time log delivery task list based on the entity to check whether the entity has been added to another real-time log delivery task. It is advisable to use the [DescribeRealtimeLogDeliveryTasks](https://www.tencentcloud.comom/document/product/1552/104110?from_cn_redirect=1) API first.
+// This API is used to query the real-time log delivery task list based on the entity to check whether the entity has been added to another real-time log delivery task. It is advisable to use the [DescribeRealtimeLogDeliveryTasks](https://www.tencentcloud.com/document/product/1552/104110?from_cn_redirect=1) API first.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -9255,7 +9285,7 @@ func NewDescribeTimingL4DataResponse() (response *DescribeTimingL4DataResponse) 
 }
 
 // DescribeTimingL4Data
-// <p>This API is used to query the time series Data list of Layer 4.</p>.
+// <p>This API is used to query time series monitoring data for L4 proxy instences.</p>
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -9270,7 +9300,7 @@ func (c *Client) DescribeTimingL4Data(request *DescribeTimingL4DataRequest) (res
 }
 
 // DescribeTimingL4Data
-// <p>This API is used to query the time series Data list of Layer 4.</p>.
+// <p>This API is used to query time series monitoring data for L4 proxy instences.</p>
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -12412,6 +12442,7 @@ func NewModifyL7AccRuleResponse() (response *ModifyL7AccRuleResponse) {
 //  INVALIDPARAMETER_INVALIDRULEENGINETARGETSEXTENSION = "InvalidParameter.InvalidRuleEngineTargetsExtension"
 //  INVALIDPARAMETER_INVALIDRULEENGINETARGETSURL = "InvalidParameter.InvalidRuleEngineTargetsUrl"
 //  INVALIDPARAMETER_INVALIDSERVERNAME = "InvalidParameter.InvalidServerName"
+//  INVALIDPARAMETER_INVALIDSHIELDUNSUPPORTED = "InvalidParameter.InvalidShieldUnsupported"
 //  INVALIDPARAMETER_INVALIDUPSTREAMREQUESTQUERYSTRINGVALUE = "InvalidParameter.InvalidUpstreamRequestQueryStringValue"
 //  INVALIDPARAMETER_INVALIDURLREDIRECTHOST = "InvalidParameter.InvalidUrlRedirectHost"
 //  INVALIDPARAMETER_INVALIDURLREDIRECTURL = "InvalidParameter.InvalidUrlRedirectUrl"
@@ -12422,15 +12453,27 @@ func NewModifyL7AccRuleResponse() (response *ModifyL7AccRuleResponse) {
 //  INVALIDPARAMETER_ORIGINPULLPROTOCOLISREQUIRED = "InvalidParameter.OriginPullProtocolIsRequired"
 //  INVALIDPARAMETER_POSTMAXSIZELIMITEXCEEDED = "InvalidParameter.PostMaxSizeLimitExceeded"
 //  INVALIDPARAMETER_RESPONSEHEADERCACHECONTROLNOTALLOWDELETE = "InvalidParameter.ResponseHeaderCacheControlNotAllowDelete"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTCACHEPREFRESH = "InvalidParameter.ShieldNotSupportHostCachePrefresh"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTORIGINWHITELIST = "InvalidParameter.ShieldNotSupportHostOriginWhitelist"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTSMARTROUTING = "InvalidParameter.ShieldNotSupportHostSmartRouting"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTZONECACHEPREFRESH = "InvalidParameter.ShieldNotSupportZoneCachePrefresh"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTZONESMARTROUTING = "InvalidParameter.ShieldNotSupportZoneSmartRouting"
+//  INVALIDPARAMETER_SHIELDSPACENOTFOUND = "InvalidParameter.ShieldSpaceNotFound"
+//  INVALIDPARAMETER_SHIELDSPACEREQUIREDERROR = "InvalidParameter.ShieldSpaceRequiredError"
+//  INVALIDPARAMETER_SHIELDSPACESTATUSMUSTONLINE = "InvalidParameter.ShieldSpaceStatusMustOnline"
 //  INVALIDPARAMETER_STATUSCODECACHEINVALIDSTATUSCODE = "InvalidParameter.StatusCodeCacheInvalidStatusCode"
 //  INVALIDPARAMETER_TLSVERSIONNOTINSEQUENCE = "InvalidParameter.TlsVersionNotInSequence"
 //  INVALIDPARAMETERVALUE_FORMATMISMATCH = "InvalidParameterValue.FormatMismatch"
 //  INVALIDPARAMETERVALUE_GENERALMISMATCH = "InvalidParameterValue.GeneralMismatch"
 //  INVALIDPARAMETERVALUE_INCLUDEINVALIDVALUE = "InvalidParameterValue.IncludeInvalidValue"
+//  INVALIDPARAMETERVALUE_INVALIDSITEFAILOVERUNSUPPORTED = "InvalidParameterValue.InvalidSiteFailoverUnsupported"
 //  INVALIDPARAMETERVALUE_MISSINGNECESSARYPARAM = "InvalidParameterValue.MissingNecessaryParam"
 //  INVALIDPARAMETERVALUE_NOTINENUMERATION = "InvalidParameterValue.NotInEnumeration"
 //  INVALIDPARAMETERVALUE_NOTWITHINRANGE = "InvalidParameterValue.NotWithinRange"
 //  INVALIDPARAMETERVALUE_REGEXMISMATCH = "InvalidParameterValue.RegExMismatch"
+//  INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTORIGINPULLRATELIMIT = "InvalidParameterValue.SiteFailoverNotSupportHostOriginPullRateLimit"
+//  INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTORIGINTYPEVOD = "InvalidParameterValue.SiteFailoverNotSupportHostOriginTypeVod"
+//  INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTUPSTREAMVERIFY = "InvalidParameterValue.SiteFailoverNotSupportHostUpstreamVerify"
 //  INVALIDPARAMETERVALUE_TRIALPLANRESPONSEPAGE = "InvalidParameterValue.TrialPlanResponsePage"
 //  INVALIDPARAMETERVALUE_UNRECOGNIZABLEVALUE = "InvalidParameterValue.UnrecognizableValue"
 //  LIMITEXCEEDED = "LimitExceeded"
@@ -12438,6 +12481,8 @@ func NewModifyL7AccRuleResponse() (response *ModifyL7AccRuleResponse) {
 //  OPERATIONDENIED_CONFIGLOCKED = "OperationDenied.ConfigLocked"
 //  OPERATIONDENIED_ERRZONEISALREADYPAUSED = "OperationDenied.ErrZoneIsAlreadyPaused"
 //  OPERATIONDENIED_INVALIDADVANCEDDEFENSESECURITYTYPE = "OperationDenied.InvalidAdvancedDefenseSecurityType"
+//  OPERATIONDENIED_NOTINSHIELDSPACEWHITELIST = "OperationDenied.NotInShieldSpaceWhiteList"
+//  OPERATIONDENIED_NOTINSITEFAILOVERWHITELIST = "OperationDenied.NotInSiteFailoverWhiteList"
 //  RESOURCEINUSE = "ResourceInUse"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 //  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
@@ -12511,6 +12556,7 @@ func (c *Client) ModifyL7AccRule(request *ModifyL7AccRuleRequest) (response *Mod
 //  INVALIDPARAMETER_INVALIDRULEENGINETARGETSEXTENSION = "InvalidParameter.InvalidRuleEngineTargetsExtension"
 //  INVALIDPARAMETER_INVALIDRULEENGINETARGETSURL = "InvalidParameter.InvalidRuleEngineTargetsUrl"
 //  INVALIDPARAMETER_INVALIDSERVERNAME = "InvalidParameter.InvalidServerName"
+//  INVALIDPARAMETER_INVALIDSHIELDUNSUPPORTED = "InvalidParameter.InvalidShieldUnsupported"
 //  INVALIDPARAMETER_INVALIDUPSTREAMREQUESTQUERYSTRINGVALUE = "InvalidParameter.InvalidUpstreamRequestQueryStringValue"
 //  INVALIDPARAMETER_INVALIDURLREDIRECTHOST = "InvalidParameter.InvalidUrlRedirectHost"
 //  INVALIDPARAMETER_INVALIDURLREDIRECTURL = "InvalidParameter.InvalidUrlRedirectUrl"
@@ -12521,15 +12567,27 @@ func (c *Client) ModifyL7AccRule(request *ModifyL7AccRuleRequest) (response *Mod
 //  INVALIDPARAMETER_ORIGINPULLPROTOCOLISREQUIRED = "InvalidParameter.OriginPullProtocolIsRequired"
 //  INVALIDPARAMETER_POSTMAXSIZELIMITEXCEEDED = "InvalidParameter.PostMaxSizeLimitExceeded"
 //  INVALIDPARAMETER_RESPONSEHEADERCACHECONTROLNOTALLOWDELETE = "InvalidParameter.ResponseHeaderCacheControlNotAllowDelete"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTCACHEPREFRESH = "InvalidParameter.ShieldNotSupportHostCachePrefresh"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTORIGINWHITELIST = "InvalidParameter.ShieldNotSupportHostOriginWhitelist"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTSMARTROUTING = "InvalidParameter.ShieldNotSupportHostSmartRouting"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTZONECACHEPREFRESH = "InvalidParameter.ShieldNotSupportZoneCachePrefresh"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTZONESMARTROUTING = "InvalidParameter.ShieldNotSupportZoneSmartRouting"
+//  INVALIDPARAMETER_SHIELDSPACENOTFOUND = "InvalidParameter.ShieldSpaceNotFound"
+//  INVALIDPARAMETER_SHIELDSPACEREQUIREDERROR = "InvalidParameter.ShieldSpaceRequiredError"
+//  INVALIDPARAMETER_SHIELDSPACESTATUSMUSTONLINE = "InvalidParameter.ShieldSpaceStatusMustOnline"
 //  INVALIDPARAMETER_STATUSCODECACHEINVALIDSTATUSCODE = "InvalidParameter.StatusCodeCacheInvalidStatusCode"
 //  INVALIDPARAMETER_TLSVERSIONNOTINSEQUENCE = "InvalidParameter.TlsVersionNotInSequence"
 //  INVALIDPARAMETERVALUE_FORMATMISMATCH = "InvalidParameterValue.FormatMismatch"
 //  INVALIDPARAMETERVALUE_GENERALMISMATCH = "InvalidParameterValue.GeneralMismatch"
 //  INVALIDPARAMETERVALUE_INCLUDEINVALIDVALUE = "InvalidParameterValue.IncludeInvalidValue"
+//  INVALIDPARAMETERVALUE_INVALIDSITEFAILOVERUNSUPPORTED = "InvalidParameterValue.InvalidSiteFailoverUnsupported"
 //  INVALIDPARAMETERVALUE_MISSINGNECESSARYPARAM = "InvalidParameterValue.MissingNecessaryParam"
 //  INVALIDPARAMETERVALUE_NOTINENUMERATION = "InvalidParameterValue.NotInEnumeration"
 //  INVALIDPARAMETERVALUE_NOTWITHINRANGE = "InvalidParameterValue.NotWithinRange"
 //  INVALIDPARAMETERVALUE_REGEXMISMATCH = "InvalidParameterValue.RegExMismatch"
+//  INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTORIGINPULLRATELIMIT = "InvalidParameterValue.SiteFailoverNotSupportHostOriginPullRateLimit"
+//  INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTORIGINTYPEVOD = "InvalidParameterValue.SiteFailoverNotSupportHostOriginTypeVod"
+//  INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTUPSTREAMVERIFY = "InvalidParameterValue.SiteFailoverNotSupportHostUpstreamVerify"
 //  INVALIDPARAMETERVALUE_TRIALPLANRESPONSEPAGE = "InvalidParameterValue.TrialPlanResponsePage"
 //  INVALIDPARAMETERVALUE_UNRECOGNIZABLEVALUE = "InvalidParameterValue.UnrecognizableValue"
 //  LIMITEXCEEDED = "LimitExceeded"
@@ -12537,6 +12595,8 @@ func (c *Client) ModifyL7AccRule(request *ModifyL7AccRuleRequest) (response *Mod
 //  OPERATIONDENIED_CONFIGLOCKED = "OperationDenied.ConfigLocked"
 //  OPERATIONDENIED_ERRZONEISALREADYPAUSED = "OperationDenied.ErrZoneIsAlreadyPaused"
 //  OPERATIONDENIED_INVALIDADVANCEDDEFENSESECURITYTYPE = "OperationDenied.InvalidAdvancedDefenseSecurityType"
+//  OPERATIONDENIED_NOTINSHIELDSPACEWHITELIST = "OperationDenied.NotInShieldSpaceWhiteList"
+//  OPERATIONDENIED_NOTINSITEFAILOVERWHITELIST = "OperationDenied.NotInSiteFailoverWhiteList"
 //  RESOURCEINUSE = "ResourceInUse"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 //  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
@@ -12677,6 +12737,8 @@ func NewModifyL7AccSettingResponse() (response *ModifyL7AccSettingResponse) {
 //  INVALIDPARAMETER_OCDIRECTORIGINREQUIRESSMARTROUTING = "InvalidParameter.OCDirectOriginRequiresSmartRouting"
 //  INVALIDPARAMETER_POSTMAXSIZELIMITEXCEEDED = "InvalidParameter.PostMaxSizeLimitExceeded"
 //  INVALIDPARAMETER_SETTINGINVALIDPARAM = "InvalidParameter.SettingInvalidParam"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTZONECACHEPREFRESH = "InvalidParameter.ShieldNotSupportZoneCachePrefresh"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTZONESMARTROUTING = "InvalidParameter.ShieldNotSupportZoneSmartRouting"
 //  INVALIDPARAMETER_ZONEISGRAYPUBLISHING = "InvalidParameter.ZoneIsGrayPublishing"
 //  INVALIDPARAMETER_ZONENOTFOUND = "InvalidParameter.ZoneNotFound"
 //  INVALIDPARAMETERVALUE_FORMATMISMATCH = "InvalidParameterValue.FormatMismatch"
@@ -12755,6 +12817,8 @@ func (c *Client) ModifyL7AccSetting(request *ModifyL7AccSettingRequest) (respons
 //  INVALIDPARAMETER_OCDIRECTORIGINREQUIRESSMARTROUTING = "InvalidParameter.OCDirectOriginRequiresSmartRouting"
 //  INVALIDPARAMETER_POSTMAXSIZELIMITEXCEEDED = "InvalidParameter.PostMaxSizeLimitExceeded"
 //  INVALIDPARAMETER_SETTINGINVALIDPARAM = "InvalidParameter.SettingInvalidParam"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTZONECACHEPREFRESH = "InvalidParameter.ShieldNotSupportZoneCachePrefresh"
+//  INVALIDPARAMETER_SHIELDNOTSUPPORTZONESMARTROUTING = "InvalidParameter.ShieldNotSupportZoneSmartRouting"
 //  INVALIDPARAMETER_ZONEISGRAYPUBLISHING = "InvalidParameter.ZoneIsGrayPublishing"
 //  INVALIDPARAMETER_ZONENOTFOUND = "InvalidParameter.ZoneNotFound"
 //  INVALIDPARAMETERVALUE_FORMATMISMATCH = "InvalidParameterValue.FormatMismatch"
@@ -14687,6 +14751,7 @@ func NewModifyZoneResponse() (response *ModifyZoneResponse) {
 //  OPERATIONDENIED_MULTIPLECNAMEZONE = "OperationDenied.MultipleCnameZone"
 //  OPERATIONDENIED_NSNOTALLOWTRAFFICSTRATEGY = "OperationDenied.NSNotAllowTrafficStrategy"
 //  OPERATIONDENIED_NODOMAINACCESSZONEONLYALLOWMODIFIEDTOCNAME = "OperationDenied.NoDomainAccessZoneOnlyAllowModifiedToCNAME"
+//  OPERATIONDENIED_NODOMAINACCESSZONEONLYSUPPORTMODIFYAREAANDALIASZONENAME = "OperationDenied.NoDomainAccessZoneOnlySupportModifyAreaAndAliasZoneName"
 //  OPERATIONDENIED_NODOMAINACCESSZONEONLYSUPPORTMODIFYTYPE = "OperationDenied.NoDomainAccessZoneOnlySupportModifyType"
 //  OPERATIONDENIED_PLANNOTSUPPORTMODIFYZONEAREA = "OperationDenied.PlanNotSupportModifyZoneArea"
 //  OPERATIONDENIED_RESOURCELOCKEDTEMPORARY = "OperationDenied.ResourceLockedTemporary"
@@ -14731,6 +14796,7 @@ func (c *Client) ModifyZone(request *ModifyZoneRequest) (response *ModifyZoneRes
 //  OPERATIONDENIED_MULTIPLECNAMEZONE = "OperationDenied.MultipleCnameZone"
 //  OPERATIONDENIED_NSNOTALLOWTRAFFICSTRATEGY = "OperationDenied.NSNotAllowTrafficStrategy"
 //  OPERATIONDENIED_NODOMAINACCESSZONEONLYALLOWMODIFIEDTOCNAME = "OperationDenied.NoDomainAccessZoneOnlyAllowModifiedToCNAME"
+//  OPERATIONDENIED_NODOMAINACCESSZONEONLYSUPPORTMODIFYAREAANDALIASZONENAME = "OperationDenied.NoDomainAccessZoneOnlySupportModifyAreaAndAliasZoneName"
 //  OPERATIONDENIED_NODOMAINACCESSZONEONLYSUPPORTMODIFYTYPE = "OperationDenied.NoDomainAccessZoneOnlySupportModifyType"
 //  OPERATIONDENIED_PLANNOTSUPPORTMODIFYZONEAREA = "OperationDenied.PlanNotSupportModifyZoneArea"
 //  OPERATIONDENIED_RESOURCELOCKEDTEMPORARY = "OperationDenied.ResourceLockedTemporary"
@@ -15045,7 +15111,7 @@ func NewModifyZoneWorkModeResponse() (response *ModifyZoneWorkModeResponse) {
 }
 
 // ModifyZoneWorkMode
-// This API is used to modify the working mode of configuration modules under a site. Configuration modules can enable version management mode or immediate effect mode by configuration group dimension. For details, refer to version management (https://www.tencentcloud.comom/document/product/1552/113690?from_cn_redirect=1).
+// This API is used to modify the working mode of configuration modules under a site. Configuration modules can enable version management mode or immediate effect mode by configuration group dimension. For details, refer to [version management](https://www.tencentcloud.com/document/product/1145/67719).
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_WORKMODEISSAME = "InvalidParameter.WorkModeIsSame"
@@ -15067,7 +15133,7 @@ func (c *Client) ModifyZoneWorkMode(request *ModifyZoneWorkModeRequest) (respons
 }
 
 // ModifyZoneWorkMode
-// This API is used to modify the working mode of configuration modules under a site. Configuration modules can enable version management mode or immediate effect mode by configuration group dimension. For details, refer to version management (https://www.tencentcloud.comom/document/product/1552/113690?from_cn_redirect=1).
+// This API is used to modify the working mode of configuration modules under a site. Configuration modules can enable version management mode or immediate effect mode by configuration group dimension. For details, refer to [version management](https://www.tencentcloud.com/document/product/1145/67719).
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_WORKMODEISSAME = "InvalidParameter.WorkModeIsSame"

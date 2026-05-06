@@ -953,6 +953,62 @@ func (c *Client) CreateProcessImageTemplateWithContext(ctx context.Context, requ
     return
 }
 
+func NewCreateProjectRequest() (request *CreateProjectRequest) {
+    request = &CreateProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "CreateProject")
+    
+    
+    return
+}
+
+func NewCreateProjectResponse() (response *CreateProjectResponse) {
+    response = &CreateProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateProject
+// This API is used to create an episode project.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_PROJECTLIMITEXCEEDED = "InvalidParameterValue.ProjectLimitExceeded"
+//  INVALIDPARAMETERVALUE_PROJECTNAMEDUPLICATE = "InvalidParameterValue.ProjectNameDuplicate"
+//  INVALIDPARAMETERVALUE_PROJECTNOTFOUND = "InvalidParameterValue.ProjectNotFound"
+//  INVALIDPARAMETERVALUE_USERUNREGISTER = "InvalidParameterValue.UserUnRegister"
+func (c *Client) CreateProject(request *CreateProjectRequest) (response *CreateProjectResponse, err error) {
+    return c.CreateProjectWithContext(context.Background(), request)
+}
+
+// CreateProject
+// This API is used to create an episode project.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_PROJECTLIMITEXCEEDED = "InvalidParameterValue.ProjectLimitExceeded"
+//  INVALIDPARAMETERVALUE_PROJECTNAMEDUPLICATE = "InvalidParameterValue.ProjectNameDuplicate"
+//  INVALIDPARAMETERVALUE_PROJECTNOTFOUND = "InvalidParameterValue.ProjectNotFound"
+//  INVALIDPARAMETERVALUE_USERUNREGISTER = "InvalidParameterValue.UserUnRegister"
+func (c *Client) CreateProjectWithContext(ctx context.Context, request *CreateProjectRequest) (response *CreateProjectResponse, err error) {
+    if request == nil {
+        request = NewCreateProjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "CreateProject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateQualityControlTemplateRequest() (request *CreateQualityControlTemplateRequest) {
     request = &CreateQualityControlTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2451,6 +2507,56 @@ func (c *Client) DeleteProcessImageTemplateWithContext(ctx context.Context, requ
     return
 }
 
+func NewDeleteProjectRequest() (request *DeleteProjectRequest) {
+    request = &DeleteProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DeleteProject")
+    
+    
+    return
+}
+
+func NewDeleteProjectResponse() (response *DeleteProjectResponse) {
+    response = &DeleteProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteProject
+// This API is used to delete an episode project.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_PROJECTNOTFOUND = "InvalidParameterValue.ProjectNotFound"
+func (c *Client) DeleteProject(request *DeleteProjectRequest) (response *DeleteProjectResponse, err error) {
+    return c.DeleteProjectWithContext(context.Background(), request)
+}
+
+// DeleteProject
+// This API is used to delete an episode project.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_PROJECTNOTFOUND = "InvalidParameterValue.ProjectNotFound"
+func (c *Client) DeleteProjectWithContext(ctx context.Context, request *DeleteProjectRequest) (response *DeleteProjectResponse, err error) {
+    if request == nil {
+        request = NewDeleteProjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DeleteProject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteQualityControlTemplateRequest() (request *DeleteQualityControlTemplateRequest) {
     request = &DeleteQualityControlTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3701,6 +3807,66 @@ func (c *Client) DescribeContentReviewTemplatesWithContext(ctx context.Context, 
     request.SetContext(ctx)
     
     response = NewDescribeContentReviewTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDesignTaskRequest() (request *DescribeDesignTaskRequest) {
+    request = &DescribeDesignTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeDesignTask")
+    
+    
+    return
+}
+
+func NewDescribeDesignTaskResponse() (response *DescribeDesignTaskResponse) {
+    response = &DescribeDesignTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDesignTask
+// This API is used to query the result of an asynchronous voice design task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeDesignTask(request *DescribeDesignTaskRequest) (response *DescribeDesignTaskResponse, err error) {
+    return c.DescribeDesignTaskWithContext(context.Background(), request)
+}
+
+// DescribeDesignTask
+// This API is used to query the result of an asynchronous voice design task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeDesignTaskWithContext(ctx context.Context, request *DescribeDesignTaskRequest) (response *DescribeDesignTaskResponse, err error) {
+    if request == nil {
+        request = NewDescribeDesignTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DescribeDesignTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDesignTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDesignTaskResponse()
     err = c.Send(request, response)
     return
 }

@@ -375,14 +375,14 @@ func (r *DeleteOrganizationMembersResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteOrganizationNodesRequestParams struct {
-	// Organizational unit ID list
+	// Organizational unit ID list.
 	NodeIds []*uint64 `json:"NodeIds,omitnil,omitempty" name:"NodeIds"`
 }
 
 type DeleteOrganizationNodesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Organizational unit ID list
+	// Organizational unit ID list.
 	NodeIds []*uint64 `json:"NodeIds,omitnil,omitempty" name:"NodeIds"`
 }
 

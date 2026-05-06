@@ -605,6 +605,9 @@ const (
 	// Invalid origin domain.
 	INVALIDPARAMETER_INVALIDSERVERNAME = "InvalidParameter.InvalidServerName"
 
+	// 
+	INVALIDPARAMETER_INVALIDSHIELDUNSUPPORTED = "InvalidParameter.InvalidShieldUnsupported"
+
 	// Invalid sorting order field.
 	INVALIDPARAMETER_INVALIDSORTBY = "InvalidParameter.InvalidSortBy"
 
@@ -791,8 +794,29 @@ const (
 	// Configuration parameter error.
 	INVALIDPARAMETER_SETTINGINVALIDPARAM = "InvalidParameter.SettingInvalidParam"
 
+	// 
+	INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTCACHEPREFRESH = "InvalidParameter.ShieldNotSupportHostCachePrefresh"
+
 	// The domain name does not support enabling EdgeOne Shield and origin protection simultaneously.
 	INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTORIGINWHITELIST = "InvalidParameter.ShieldNotSupportHostOriginWhitelist"
+
+	// 
+	INVALIDPARAMETER_SHIELDNOTSUPPORTHOSTSMARTROUTING = "InvalidParameter.ShieldNotSupportHostSmartRouting"
+
+	// 
+	INVALIDPARAMETER_SHIELDNOTSUPPORTZONECACHEPREFRESH = "InvalidParameter.ShieldNotSupportZoneCachePrefresh"
+
+	// 
+	INVALIDPARAMETER_SHIELDNOTSUPPORTZONESMARTROUTING = "InvalidParameter.ShieldNotSupportZoneSmartRouting"
+
+	// 
+	INVALIDPARAMETER_SHIELDSPACENOTFOUND = "InvalidParameter.ShieldSpaceNotFound"
+
+	// 
+	INVALIDPARAMETER_SHIELDSPACEREQUIREDERROR = "InvalidParameter.ShieldSpaceRequiredError"
+
+	// 
+	INVALIDPARAMETER_SHIELDSPACESTATUSMUSTONLINE = "InvalidParameter.ShieldSpaceStatusMustOnline"
 
 	// Some bound origin server groups do not exist.
 	INVALIDPARAMETER_SOMEORIGINGROUPNOTEXIST = "InvalidParameter.SomeOriginGroupNotExist"
@@ -953,6 +977,9 @@ const (
 	// Incorrect DNS proxy
 	INVALIDPARAMETERVALUE_INVALIDPROXYORIGIN = "InvalidParameterValue.InvalidProxyOrigin"
 
+	// 
+	INVALIDPARAMETERVALUE_INVALIDSITEFAILOVERUNSUPPORTED = "InvalidParameterValue.InvalidSiteFailoverUnsupported"
+
 	// The tag value contains invalid characters.
 	INVALIDPARAMETERVALUE_INVALIDTAGVALUE = "InvalidParameterValue.InvalidTagValue"
 
@@ -991,6 +1018,15 @@ const (
 
 	// Enter a valid shared CNAME prefix of up to 50 characters.
 	INVALIDPARAMETERVALUE_SHAREDCNAMEPREFIXNOTMATCH = "InvalidParameterValue.SharedCNAMEPrefixNotMatch"
+
+	// 
+	INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTORIGINPULLRATELIMIT = "InvalidParameterValue.SiteFailoverNotSupportHostOriginPullRateLimit"
+
+	// 
+	INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTORIGINTYPEVOD = "InvalidParameterValue.SiteFailoverNotSupportHostOriginTypeVod"
+
+	// 
+	INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTUPSTREAMVERIFY = "InvalidParameterValue.SiteFailoverNotSupportHostUpstreamVerify"
 
 	// The input template contains a template that is not a custom template.
 	INVALIDPARAMETERVALUE_TEMPLATENOTCUSTOM = "InvalidParameterValue.TemplateNotCustom"
@@ -1235,6 +1271,9 @@ const (
 	// You can only switch a site connected without a domain name to connecting via the CNAME
 	OPERATIONDENIED_NODOMAINACCESSZONEONLYALLOWMODIFIEDTOCNAME = "OperationDenied.NoDomainAccessZoneOnlyAllowModifiedToCNAME"
 
+	// 
+	OPERATIONDENIED_NODOMAINACCESSZONEONLYSUPPORTMODIFYAREAANDALIASZONENAME = "OperationDenied.NoDomainAccessZoneOnlySupportModifyAreaAndAliasZoneName"
+
 	// You can only switch a site connected without a domain name to connecting via the CNAME. Other operations are not allowed.
 	OPERATIONDENIED_NODOMAINACCESSZONEONLYSUPPORTMODIFYTYPE = "OperationDenied.NoDomainAccessZoneOnlySupportModifyType"
 
@@ -1243,6 +1282,12 @@ const (
 
 	// Not in the preheating origin speed limit allowlist. submit a ticket.
 	OPERATIONDENIED_NOTINPREFETCHORIGINLIMITWHITELIST = "OperationDenied.NotInPrefetchOriginLimitWhiteList"
+
+	// 
+	OPERATIONDENIED_NOTINSHIELDSPACEWHITELIST = "OperationDenied.NotInShieldSpaceWhiteList"
+
+	// 
+	OPERATIONDENIED_NOTINSITEFAILOVERWHITELIST = "OperationDenied.NotInSiteFailoverWhiteList"
 
 	// The current origin-pull mutual authentication feature is only available to allowlist users.
 	OPERATIONDENIED_NOTINUPSTREAMMTLSWHITELIST = "OperationDenied.NotInUpstreamMTLSWhiteList"
