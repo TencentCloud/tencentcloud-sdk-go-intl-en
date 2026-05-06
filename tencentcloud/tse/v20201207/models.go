@@ -1,0 +1,8191 @@
+// Copyright (c) 2017-2025 Tencent. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package v20201207
+
+import (
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
+    tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
+)
+
+type AccurateQpsThreshold struct {
+	// qps threshold control dimension, including: second, minute, hour, day, month, year.
+	Unit *string `json:"Unit,omitnil,omitempty" name:"Unit"`
+
+	// Global configuration ID
+	GlobalConfigId *string `json:"GlobalConfigId,omitnil,omitempty" name:"GlobalConfigId"`
+}
+
+type Argument struct {
+	// Type.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Key value
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Matching condition parameter
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Value *ArgumentValue `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type ArgumentValue struct {
+	// expression type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Match Value
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+
+	// value type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ValueType *string `json:"ValueType,omitnil,omitempty" name:"ValueType"`
+}
+
+type AutoScalerBehavior struct {
+	// Scale-out behavior configuration
+	ScaleUp *AutoScalerRules `json:"ScaleUp,omitnil,omitempty" name:"ScaleUp"`
+
+	// Behavior configuration for scale-in
+	ScaleDown *AutoScalerRules `json:"ScaleDown,omitnil,omitempty" name:"ScaleDown"`
+}
+
+type AutoScalerPolicy struct {
+	// Type, Pods
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Quantity.
+	Value *int64 `json:"Value,omitnil,omitempty" name:"Value"`
+
+	// Expansion cycle
+	PeriodSeconds *int64 `json:"PeriodSeconds,omitnil,omitempty" name:"PeriodSeconds"`
+}
+
+type AutoScalerRules struct {
+	// Stability window time. Default is 0 during scaling and 300 during descaling.
+	StabilizationWindowSeconds *int64 `json:"StabilizationWindowSeconds,omitnil,omitempty" name:"StabilizationWindowSeconds"`
+
+	// Selection policy basis
+	SelectPolicy *string `json:"SelectPolicy,omitnil,omitempty" name:"SelectPolicy"`
+
+	// Scaling policy
+	Policies []*AutoScalerPolicy `json:"Policies,omitnil,omitempty" name:"Policies"`
+}
+
+// Predefined struct for user
+type BindAutoScalerResourceStrategyToGroupsRequestParams struct {
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Policy ID
+	StrategyId *string `json:"StrategyId,omitnil,omitempty" name:"StrategyId"`
+
+	// gateway group ID list
+	GroupIds []*string `json:"GroupIds,omitnil,omitempty" name:"GroupIds"`
+}
+
+type BindAutoScalerResourceStrategyToGroupsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Policy ID
+	StrategyId *string `json:"StrategyId,omitnil,omitempty" name:"StrategyId"`
+
+	// gateway group ID list
+	GroupIds []*string `json:"GroupIds,omitnil,omitempty" name:"GroupIds"`
+}
+
+func (r *BindAutoScalerResourceStrategyToGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BindAutoScalerResourceStrategyToGroupsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "StrategyId")
+	delete(f, "GroupIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BindAutoScalerResourceStrategyToGroupsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type BindAutoScalerResourceStrategyToGroupsResponseParams struct {
+	// Success status
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type BindAutoScalerResourceStrategyToGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *BindAutoScalerResourceStrategyToGroupsResponseParams `json:"Response"`
+}
+
+func (r *BindAutoScalerResourceStrategyToGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BindAutoScalerResourceStrategyToGroupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CanaryPriorityRule struct {
+	// Priority
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
+
+	// Grayscale rule configuration
+	CanaryRule *CloudNativeAPIGatewayCanaryRule `json:"CanaryRule,omitnil,omitempty" name:"CanaryRule"`
+}
+
+type CertificateInfo struct {
+	// Unique ID
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+// Predefined struct for user
+type CloseWafProtectionRequestParams struct {
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Type of protection resource.
+	// -Global instance
+	// -Service
+	// -Route
+	// -Object
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// When resource type Type is Service or Route, input the list of services or routes
+	List []*string `json:"List,omitnil,omitempty" name:"List"`
+}
+
+type CloseWafProtectionRequest struct {
+	*tchttp.BaseRequest
+	
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Type of protection resource.
+	// -Global instance
+	// -Service
+	// -Route
+	// -Object
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// When resource type Type is Service or Route, input the list of services or routes
+	List []*string `json:"List,omitnil,omitempty" name:"List"`
+}
+
+func (r *CloseWafProtectionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseWafProtectionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Type")
+	delete(f, "List")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloseWafProtectionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CloseWafProtectionResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CloseWafProtectionResponse struct {
+	*tchttp.BaseResponse
+	Response *CloseWafProtectionResponseParams `json:"Response"`
+}
+
+func (r *CloseWafProtectionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseWafProtectionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CloudAPIGatewayCanaryRuleList struct {
+	// Grayscale rule
+	CanaryRuleList []*CloudNativeAPIGatewayCanaryRule `json:"CanaryRuleList,omitnil,omitempty" name:"CanaryRuleList"`
+
+	// Total number.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+}
+
+type CloudNativeAPIGatewayBalancedService struct {
+	// Service ID, required as an input parameter
+	ServiceID *string `json:"ServiceID,omitnil,omitempty" name:"ServiceID"`
+
+	// Service name, as an input parameter, meaningless
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
+
+	// Upstream name, meaningless as an input parameter
+	UpstreamName *string `json:"UpstreamName,omitnil,omitempty" name:"UpstreamName"`
+
+	// Percentage, 10 means 10%, range 0-100
+	Percent *float64 `json:"Percent,omitnil,omitempty" name:"Percent"`
+}
+
+type CloudNativeAPIGatewayCanaryRule struct {
+	// Priority, with a range of 0 to 100. A larger value indicates a higher priority. Priorities must be unique across different rules.
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
+
+	// Whether the rule is enabled.
+	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// Match condition parameter
+	ConditionList []*CloudNativeAPIGatewayCanaryRuleCondition `json:"ConditionList,omitnil,omitempty" name:"ConditionList"`
+
+	// Traffic percentage configuration of the service
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BalancedServiceList []*CloudNativeAPIGatewayBalancedService `json:"BalancedServiceList,omitnil,omitempty" name:"BalancedServiceList"`
+
+	// service ID
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
+
+	// Service name
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
+
+	// Grayscale rule type
+	// Standard｜Lane
+	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
+
+	// Full-link grayscale policy match mode between multiple conditions: AND, OR
+	MatchType *string `json:"MatchType,omitnil,omitempty" name:"MatchType"`
+
+	// Lane group ID
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Lane group name
+	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
+
+	// Lane ID
+	LaneId *string `json:"LaneId,omitnil,omitempty" name:"LaneId"`
+
+	// swimlane name
+	LaneName *string `json:"LaneName,omitnil,omitempty" name:"LaneName"`
+
+	// Lane match rule: STRICT | PERMISSIVE
+	MatchMode *string `json:"MatchMode,omitnil,omitempty" name:"MatchMode"`
+
+	// Lane tag
+	LaneTag *string `json:"LaneTag,omitnil,omitempty" name:"LaneTag"`
+}
+
+type CloudNativeAPIGatewayCanaryRuleCondition struct {
+	// Condition type, support path, method, query, header, cookie, body, and system.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Parameter name.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Operator, supports "le", "eq", "lt", "ne", "ge", "gt", "regex", "exists", "in", "not in", "prefix", "exact", "regex"
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
+
+	// Target parameter value
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+
+	// Separator. This parameter is valid only when Operator is in or not in. Supported values: comma, semicolon, space, line break.
+	Delimiter *string `json:"Delimiter,omitnil,omitempty" name:"Delimiter"`
+
+	// Global configuration Id
+	GlobalConfigId *string `json:"GlobalConfigId,omitnil,omitempty" name:"GlobalConfigId"`
+
+	// Global configuration name
+	GlobalConfigName *string `json:"GlobalConfigName,omitnil,omitempty" name:"GlobalConfigName"`
+}
+
+type CloudNativeAPIGatewayConfig struct {
+	// Console type.
+	ConsoleType *string `json:"ConsoleType,omitnil,omitempty" name:"ConsoleType"`
+
+	// HTTP URL.
+	HttpUrl *string `json:"HttpUrl,omitnil,omitempty" name:"HttpUrl"`
+
+	// HTTPS URL.
+	HttpsUrl *string `json:"HttpsUrl,omitnil,omitempty" name:"HttpsUrl"`
+
+	// Network type, Open|Internal.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Admin username.
+	AdminUser *string `json:"AdminUser,omitnil,omitempty" name:"AdminUser"`
+
+	// Administrator password.
+	AdminPassword *string `json:"AdminPassword,omitnil,omitempty" name:"AdminPassword"`
+
+	// Network Status, Open|Closed|Updating
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Network access policy
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AccessControl *NetworkAccessControl `json:"AccessControl,omitnil,omitempty" name:"AccessControl"`
+
+	// Intranet subnet ID
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// Private network VPC ID
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Description of load balancing
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Load balancing specification type
+	SlaType *string `json:"SlaType,omitnil,omitempty" name:"SlaType"`
+
+	// clb specification name
+	SlaName *string `json:"SlaName,omitnil,omitempty" name:"SlaName"`
+
+	// clb vip
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// Bandwidth
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Whether the multiple-AZ deployment mode is used.
+	MultiZoneFlag *bool `json:"MultiZoneFlag,omitnil,omitempty" name:"MultiZoneFlag"`
+
+	// Primary AZ.
+	MasterZoneId *string `json:"MasterZoneId,omitnil,omitempty" name:"MasterZoneId"`
+
+	// standby availability zone
+	SlaveZoneId *string `json:"SlaveZoneId,omitnil,omitempty" name:"SlaveZoneId"`
+
+	// Primary availability zone name
+	MasterZoneName *string `json:"MasterZoneName,omitnil,omitempty" name:"MasterZoneName"`
+
+	// Backup availability zone name
+	SlaveZoneName *string `json:"SlaveZoneName,omitnil,omitempty" name:"SlaveZoneName"`
+
+	// Network id
+	NetworkId *string `json:"NetworkId,omitnil,omitempty" name:"NetworkId"`
+
+	// Whether the CLB is a new ipv6 CLB
+	IPV6FullChain *bool `json:"IPV6FullChain,omitnil,omitempty" name:"IPV6FullChain"`
+
+	// Load balancing personalized configuration content
+	CustomizedConfigContent *string `json:"CustomizedConfigContent,omitnil,omitempty" name:"CustomizedConfigContent"`
+}
+
+type CloudNativeAPIGatewayNode struct {
+	// Cloud-native gateway node id
+	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
+
+	// Node ip
+	NodeIp *string `json:"NodeIp,omitnil,omitempty" name:"NodeIp"`
+
+	// Zone id
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Zone
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// group ID
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Group name
+	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
+
+	// Status.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Node weight
+	Weight *int64 `json:"Weight,omitnil,omitempty" name:"Weight"`
+
+	// Default weight required or not
+	IsDefaultWeight *bool `json:"IsDefaultWeight,omitnil,omitempty" name:"IsDefaultWeight"`
+}
+
+type CloudNativeAPIGatewayNodeConfig struct {
+	// Node configuration, 1c2g|2c4g|4c8g|8c16g.
+	Specification *string `json:"Specification,omitnil,omitempty" name:"Specification"`
+
+	// Node count, 2-9.
+	Number *int64 `json:"Number,omitnil,omitempty" name:"Number"`
+}
+
+type CloudNativeAPIGatewayRateLimitDetail struct {
+	// Plug-in enable status
+	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// qps threshold
+	QpsThresholds []*QpsThreshold `json:"QpsThresholds,omitnil,omitempty" name:"QpsThresholds"`
+
+	// Request path that requires traffic control
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+
+	// Request header Key for traffic control
+	Header *string `json:"Header,omitnil,omitempty" name:"Header"`
+
+	// Traffic throttling basis
+	// ip service consumer credential path header
+	LimitBy *string `json:"LimitBy,omitnil,omitempty" name:"LimitBy"`
+
+	// external redis configuration
+	ExternalRedis *ExternalRedis `json:"ExternalRedis,omitnil,omitempty" name:"ExternalRedis"`
+
+	// redis configuration in global configuration
+	GlobalConfigId *string `json:"GlobalConfigId,omitnil,omitempty" name:"GlobalConfigId"`
+
+	// Counter policy 
+	// local standalone
+	// default redis
+	// external redis
+	Policy *string `json:"Policy,omitnil,omitempty" name:"Policy"`
+
+	// Response configuration, response policy is text
+	RateLimitResponse *RateLimitResponse `json:"RateLimitResponse,omitnil,omitempty" name:"RateLimitResponse"`
+
+	// Request forwarding address
+	RateLimitResponseUrl *string `json:"RateLimitResponseUrl,omitnil,omitempty" name:"RateLimitResponseUrl"`
+
+	// response policy
+	// url request forwarding
+	// Response configuration
+	// default mode: return directly.
+	ResponseType *string `json:"ResponseType,omitnil,omitempty" name:"ResponseType"`
+
+	// Whether to hide the traffic throttling client response header
+	HideClientHeaders *bool `json:"HideClientHeaders,omitnil,omitempty" name:"HideClientHeaders"`
+
+	// queuing time
+	LineUpTime *int64 `json:"LineUpTime,omitnil,omitempty" name:"LineUpTime"`
+
+	// Whether request queuing is enabled
+	IsDelay *bool `json:"IsDelay,omitnil,omitempty" name:"IsDelay"`
+
+	// Basic throttling
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BasicLimitQpsThresholds []*QpsThreshold `json:"BasicLimitQpsThresholds,omitnil,omitempty" name:"BasicLimitQpsThresholds"`
+
+	// Parameter throttling policy
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LimitRules []*LimitRule `json:"LimitRules,omitnil,omitempty" name:"LimitRules"`
+}
+
+type CloudNativeAPIGatewayStrategy struct {
+	// Policy ID
+	StrategyId *string `json:"StrategyId,omitnil,omitempty" name:"StrategyId"`
+
+	// Policy name.
+	StrategyName *string `json:"StrategyName,omitnil,omitempty" name:"StrategyName"`
+
+	// Creation time.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Update time
+	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
+
+	// Policy description
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Auto scaling configuration
+	Config *CloudNativeAPIGatewayStrategyAutoScalerConfig `json:"Config,omitnil,omitempty" name:"Config"`
+
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Scheduled scaling configuration
+	CronConfig *CloudNativeAPIGatewayStrategyCronScalerConfig `json:"CronConfig,omitnil,omitempty" name:"CronConfig"`
+
+	// Maximum number of nodes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: MaxReplicas is deprecated.
+	MaxReplicas *uint64 `json:"MaxReplicas,omitnil,omitempty" name:"MaxReplicas"`
+}
+
+type CloudNativeAPIGatewayStrategyAutoScalerConfig struct {
+	// Maximum number of replicas
+	MaxReplicas *int64 `json:"MaxReplicas,omitnil,omitempty" name:"MaxReplicas"`
+
+	// Metric list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Metrics []*CloudNativeAPIGatewayStrategyAutoScalerConfigMetric `json:"Metrics,omitnil,omitempty" name:"Metrics"`
+
+	// Whether metric scaling is enabled
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: Enabled is deprecated.
+	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// Creation time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: CreateTime is deprecated.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Modification time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: ModifyTime is deprecated.
+	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
+
+	// Policy ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: StrategyId is deprecated.
+	StrategyId *string `json:"StrategyId,omitnil,omitempty" name:"StrategyId"`
+
+	// Metric configuration ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: AutoScalerId is deprecated.
+	AutoScalerId *string `json:"AutoScalerId,omitnil,omitempty" name:"AutoScalerId"`
+
+	// Metric scaling behavior configuration
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Behavior *AutoScalerBehavior `json:"Behavior,omitnil,omitempty" name:"Behavior"`
+}
+
+type CloudNativeAPIGatewayStrategyAutoScalerConfigMetric struct {
+	// Metric Type
+	// - Resource
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Metric resource name
+	// - cpu
+	// - memory
+	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
+
+	// Metric target type, currently only support percentage Utilization
+	TargetType *string `json:"TargetType,omitnil,omitempty" name:"TargetType"`
+
+	// Target value of the metric
+	TargetValue *int64 `json:"TargetValue,omitnil,omitempty" name:"TargetValue"`
+}
+
+type CloudNativeAPIGatewayStrategyBindingGroupInfo struct {
+	// gateway group ID
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Node configuration
+	NodeConfig *CloudNativeAPIGatewayNodeConfig `json:"NodeConfig,omitnil,omitempty" name:"NodeConfig"`
+
+	// Binding time
+	BindTime *string `json:"BindTime,omitnil,omitempty" name:"BindTime"`
+
+	// gateway group name
+	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
+
+	// Binding status
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
+type CloudNativeAPIGatewayStrategyCronScalerConfig struct {
+	// Enable scheduled scaling
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: Enabled is deprecated.
+	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// Scheduled scaling configuration parameter list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Params []*CloudNativeAPIGatewayStrategyCronScalerConfigParam `json:"Params,omitnil,omitempty" name:"Params"`
+
+	// Creation time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: CreateTime is deprecated.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Modification time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: ModifyTime is deprecated.
+	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
+
+	// Auto scaling policy ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: StrategyId is deprecated.
+	StrategyId *string `json:"StrategyId,omitnil,omitempty" name:"StrategyId"`
+}
+
+type CloudNativeAPIGatewayStrategyCronScalerConfigParam struct {
+	// Scheduled scaling period
+	Period *string `json:"Period,omitnil,omitempty" name:"Period"`
+
+	// Start time of scheduled scaling
+	StartAt *string `json:"StartAt,omitnil,omitempty" name:"StartAt"`
+
+	// Scheduled scaling target node count, no more than the maximum node count defined in metric scaling
+	TargetReplicas *int64 `json:"TargetReplicas,omitnil,omitempty" name:"TargetReplicas"`
+
+	// Scheduled scaling cron expression, no need to input
+	Crontab *string `json:"Crontab,omitnil,omitempty" name:"Crontab"`
+}
+
+type CloudNativeAPIGatewayVpcConfig struct {
+	// VPC ID.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Subnet ID.
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+}
+
+// Predefined struct for user
+type CreateAutoScalerResourceStrategyRequestParams struct {
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Policy name.
+	StrategyName *string `json:"StrategyName,omitnil,omitempty" name:"StrategyName"`
+
+	// Policy description
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Metric scaling configuration
+	Config *CloudNativeAPIGatewayStrategyAutoScalerConfig `json:"Config,omitnil,omitempty" name:"Config"`
+
+	// Scheduled scaling configuration list
+	//
+	// Deprecated: CronScalerConfig is deprecated.
+	CronScalerConfig *CloudNativeAPIGatewayStrategyCronScalerConfig `json:"CronScalerConfig,omitnil,omitempty" name:"CronScalerConfig"`
+
+	// Maximum number of nodes
+	//
+	// Deprecated: MaxReplicas is deprecated.
+	MaxReplicas *int64 `json:"MaxReplicas,omitnil,omitempty" name:"MaxReplicas"`
+
+	// Scheduled scaling configuration
+	CronConfig *CloudNativeAPIGatewayStrategyCronScalerConfig `json:"CronConfig,omitnil,omitempty" name:"CronConfig"`
+}
+
+type CreateAutoScalerResourceStrategyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Policy name.
+	StrategyName *string `json:"StrategyName,omitnil,omitempty" name:"StrategyName"`
+
+	// Policy description
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Metric scaling configuration
+	Config *CloudNativeAPIGatewayStrategyAutoScalerConfig `json:"Config,omitnil,omitempty" name:"Config"`
+
+	// Scheduled scaling configuration list
+	CronScalerConfig *CloudNativeAPIGatewayStrategyCronScalerConfig `json:"CronScalerConfig,omitnil,omitempty" name:"CronScalerConfig"`
+
+	// Maximum number of nodes
+	MaxReplicas *int64 `json:"MaxReplicas,omitnil,omitempty" name:"MaxReplicas"`
+
+	// Scheduled scaling configuration
+	CronConfig *CloudNativeAPIGatewayStrategyCronScalerConfig `json:"CronConfig,omitnil,omitempty" name:"CronConfig"`
+}
+
+func (r *CreateAutoScalerResourceStrategyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAutoScalerResourceStrategyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "StrategyName")
+	delete(f, "Description")
+	delete(f, "Config")
+	delete(f, "CronScalerConfig")
+	delete(f, "MaxReplicas")
+	delete(f, "CronConfig")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAutoScalerResourceStrategyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAutoScalerResourceStrategyResponseParams struct {
+	// Success status
+	//
+	// Deprecated: Result is deprecated.
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// Policy ID
+	StrategyId *string `json:"StrategyId,omitnil,omitempty" name:"StrategyId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateAutoScalerResourceStrategyResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAutoScalerResourceStrategyResponseParams `json:"Response"`
+}
+
+func (r *CreateAutoScalerResourceStrategyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAutoScalerResourceStrategyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudNativeAPIGatewayCanaryRuleRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service ID
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
+
+	// Grayscale rule configuration
+	CanaryRule *CloudNativeAPIGatewayCanaryRule `json:"CanaryRule,omitnil,omitempty" name:"CanaryRule"`
+
+	// Grayscale rule configuration list. If configured, this parameter takes precedence and the CanaryRule parameter is ignored.
+	CanaryRuleList []*CloudNativeAPIGatewayCanaryRule `json:"CanaryRuleList,omitnil,omitempty" name:"CanaryRuleList"`
+}
+
+type CreateCloudNativeAPIGatewayCanaryRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service ID
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
+
+	// Grayscale rule configuration
+	CanaryRule *CloudNativeAPIGatewayCanaryRule `json:"CanaryRule,omitnil,omitempty" name:"CanaryRule"`
+
+	// Grayscale rule configuration list. If configured, this parameter takes precedence and the CanaryRule parameter is ignored.
+	CanaryRuleList []*CloudNativeAPIGatewayCanaryRule `json:"CanaryRuleList,omitnil,omitempty" name:"CanaryRuleList"`
+}
+
+func (r *CreateCloudNativeAPIGatewayCanaryRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudNativeAPIGatewayCanaryRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "ServiceId")
+	delete(f, "CanaryRule")
+	delete(f, "CanaryRuleList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloudNativeAPIGatewayCanaryRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudNativeAPIGatewayCanaryRuleResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateCloudNativeAPIGatewayCanaryRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCloudNativeAPIGatewayCanaryRuleResponseParams `json:"Response"`
+}
+
+func (r *CreateCloudNativeAPIGatewayCanaryRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudNativeAPIGatewayCanaryRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudNativeAPIGatewayCertificateRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Bound domain name
+	BindDomains []*string `json:"BindDomains,omitnil,omitempty" name:"BindDomains"`
+
+	// ssl platform cert Id
+	CertId *string `json:"CertId,omitnil,omitempty" name:"CertId"`
+
+	// Certificate Name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Certificate Private Key
+	//
+	// Deprecated: Key is deprecated.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Certificate in pem format
+	//
+	// Deprecated: Crt is deprecated.
+	Crt *string `json:"Crt,omitnil,omitempty" name:"Crt"`
+}
+
+type CreateCloudNativeAPIGatewayCertificateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Bound domain name
+	BindDomains []*string `json:"BindDomains,omitnil,omitempty" name:"BindDomains"`
+
+	// ssl platform cert Id
+	CertId *string `json:"CertId,omitnil,omitempty" name:"CertId"`
+
+	// Certificate Name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Certificate Private Key
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Certificate in pem format
+	Crt *string `json:"Crt,omitnil,omitempty" name:"Crt"`
+}
+
+func (r *CreateCloudNativeAPIGatewayCertificateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudNativeAPIGatewayCertificateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "BindDomains")
+	delete(f, "CertId")
+	delete(f, "Name")
+	delete(f, "Key")
+	delete(f, "Crt")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloudNativeAPIGatewayCertificateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudNativeAPIGatewayCertificateResponseParams struct {
+	// Create certificate result
+	Result *CertificateInfo `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateCloudNativeAPIGatewayCertificateResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCloudNativeAPIGatewayCertificateResponseParams `json:"Response"`
+}
+
+func (r *CreateCloudNativeAPIGatewayCertificateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudNativeAPIGatewayCertificateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudNativeAPIGatewayPublicNetworkRequestParams struct {
+	// Cloud native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// group id.
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Public network CLB configuration.
+	InternetConfig *InternetConfig `json:"InternetConfig,omitnil,omitempty" name:"InternetConfig"`
+}
+
+type CreateCloudNativeAPIGatewayPublicNetworkRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cloud native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// group id.
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Public network CLB configuration.
+	InternetConfig *InternetConfig `json:"InternetConfig,omitnil,omitempty" name:"InternetConfig"`
+}
+
+func (r *CreateCloudNativeAPIGatewayPublicNetworkRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudNativeAPIGatewayPublicNetworkRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "GroupId")
+	delete(f, "InternetConfig")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloudNativeAPIGatewayPublicNetworkRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudNativeAPIGatewayPublicNetworkResponseParams struct {
+	// Returned results
+	Result *CreatePublicNetworkResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateCloudNativeAPIGatewayPublicNetworkResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCloudNativeAPIGatewayPublicNetworkResponseParams `json:"Response"`
+}
+
+func (r *CreateCloudNativeAPIGatewayPublicNetworkResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudNativeAPIGatewayPublicNetworkResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudNativeAPIGatewayRequestParams struct {
+	// Cloud native API gateway name supports up to 60 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Cloud native API gateway type, currently only support kong.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Cloud Native API gateway version. Reference value:
+	// - 2.4.1
+	// - 2.5.1
+	GatewayVersion *string `json:"GatewayVersion,omitnil,omitempty" name:"GatewayVersion"`
+
+	// Cloud Native API gateway node configuration.
+	NodeConfig *CloudNativeAPIGatewayNodeConfig `json:"NodeConfig,omitnil,omitempty" name:"NodeConfig"`
+
+	// Cloud native API gateway vpc configuration.
+	VpcConfig *CloudNativeAPIGatewayVpcConfig `json:"VpcConfig,omitnil,omitempty" name:"VpcConfig"`
+
+	// Cloud native API gateway description supports up to 120 characters.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Tag list
+	Tags []*InstanceTagInfo `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Whether CLS log is enabled. Default value: false.
+	EnableCls *bool `json:"EnableCls,omitnil,omitempty" name:"EnableCls"`
+
+	// Product version. Reference value:
+	// -TRIAL: Development edition
+	// -STANDARD: Standard version (default value)
+	// -PROFESSIONAL: Pro Edition
+	FeatureVersion *string `json:"FeatureVersion,omitnil,omitempty" name:"FeatureVersion"`
+
+	// Public network outbound traffic bandwidth, [1,2048]Mbps
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Actual region information of the instance. Default value: ap-guangzhou.
+	EngineRegion *string `json:"EngineRegion,omitnil,omitempty" name:"EngineRegion"`
+
+	// ingress Class name
+	IngressClassName *string `json:"IngressClassName,omitnil,omitempty" name:"IngressClassName"`
+
+	// Payment type. Reference value:
+	// 0: Postpaid (default value)
+	// 1: Prepayment (The API does not currently support creating prepaid instances)
+	TradeType *int64 `json:"TradeType,omitnil,omitempty" name:"TradeType"`
+
+	// Public network configuration
+	InternetConfig *InternetConfig `json:"InternetConfig,omitnil,omitempty" name:"InternetConfig"`
+
+	// Associated prometheus ID
+	PromId *string `json:"PromId,omitnil,omitempty" name:"PromId"`
+}
+
+type CreateCloudNativeAPIGatewayRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cloud native API gateway name supports up to 60 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Cloud native API gateway type, currently only support kong.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Cloud Native API gateway version. Reference value:
+	// - 2.4.1
+	// - 2.5.1
+	GatewayVersion *string `json:"GatewayVersion,omitnil,omitempty" name:"GatewayVersion"`
+
+	// Cloud Native API gateway node configuration.
+	NodeConfig *CloudNativeAPIGatewayNodeConfig `json:"NodeConfig,omitnil,omitempty" name:"NodeConfig"`
+
+	// Cloud native API gateway vpc configuration.
+	VpcConfig *CloudNativeAPIGatewayVpcConfig `json:"VpcConfig,omitnil,omitempty" name:"VpcConfig"`
+
+	// Cloud native API gateway description supports up to 120 characters.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Tag list
+	Tags []*InstanceTagInfo `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Whether CLS log is enabled. Default value: false.
+	EnableCls *bool `json:"EnableCls,omitnil,omitempty" name:"EnableCls"`
+
+	// Product version. Reference value:
+	// -TRIAL: Development edition
+	// -STANDARD: Standard version (default value)
+	// -PROFESSIONAL: Pro Edition
+	FeatureVersion *string `json:"FeatureVersion,omitnil,omitempty" name:"FeatureVersion"`
+
+	// Public network outbound traffic bandwidth, [1,2048]Mbps
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Actual region information of the instance. Default value: ap-guangzhou.
+	EngineRegion *string `json:"EngineRegion,omitnil,omitempty" name:"EngineRegion"`
+
+	// ingress Class name
+	IngressClassName *string `json:"IngressClassName,omitnil,omitempty" name:"IngressClassName"`
+
+	// Payment type. Reference value:
+	// 0: Postpaid (default value)
+	// 1: Prepayment (The API does not currently support creating prepaid instances)
+	TradeType *int64 `json:"TradeType,omitnil,omitempty" name:"TradeType"`
+
+	// Public network configuration
+	InternetConfig *InternetConfig `json:"InternetConfig,omitnil,omitempty" name:"InternetConfig"`
+
+	// Associated prometheus ID
+	PromId *string `json:"PromId,omitnil,omitempty" name:"PromId"`
+}
+
+func (r *CreateCloudNativeAPIGatewayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudNativeAPIGatewayRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "Type")
+	delete(f, "GatewayVersion")
+	delete(f, "NodeConfig")
+	delete(f, "VpcConfig")
+	delete(f, "Description")
+	delete(f, "Tags")
+	delete(f, "EnableCls")
+	delete(f, "FeatureVersion")
+	delete(f, "InternetMaxBandwidthOut")
+	delete(f, "EngineRegion")
+	delete(f, "IngressClassName")
+	delete(f, "TradeType")
+	delete(f, "InternetConfig")
+	delete(f, "PromId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloudNativeAPIGatewayRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudNativeAPIGatewayResponseParams struct {
+	// Create the response result of the Cloud Native API gateway instance.
+	Result *CreateCloudNativeAPIGatewayResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateCloudNativeAPIGatewayResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCloudNativeAPIGatewayResponseParams `json:"Response"`
+}
+
+func (r *CreateCloudNativeAPIGatewayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudNativeAPIGatewayResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateCloudNativeAPIGatewayResult struct {
+	// Cloud Native API Gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Cloud-native gateway status.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+// Predefined struct for user
+type CreateCloudNativeAPIGatewayRouteRateLimitRequestParams struct {
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Route id or routing name.
+	// "Unnamed" is not supported.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Configure stream
+	LimitDetail *CloudNativeAPIGatewayRateLimitDetail `json:"LimitDetail,omitnil,omitempty" name:"LimitDetail"`
+}
+
+type CreateCloudNativeAPIGatewayRouteRateLimitRequest struct {
+	*tchttp.BaseRequest
+	
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Route id or routing name.
+	// "Unnamed" is not supported.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Configure stream
+	LimitDetail *CloudNativeAPIGatewayRateLimitDetail `json:"LimitDetail,omitnil,omitempty" name:"LimitDetail"`
+}
+
+func (r *CreateCloudNativeAPIGatewayRouteRateLimitRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudNativeAPIGatewayRouteRateLimitRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Id")
+	delete(f, "LimitDetail")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloudNativeAPIGatewayRouteRateLimitRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudNativeAPIGatewayRouteRateLimitResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateCloudNativeAPIGatewayRouteRateLimitResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCloudNativeAPIGatewayRouteRateLimitResponseParams `json:"Response"`
+}
+
+func (r *CreateCloudNativeAPIGatewayRouteRateLimitResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudNativeAPIGatewayRouteRateLimitResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudNativeAPIGatewayRouteRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service ID
+	ServiceID *string `json:"ServiceID,omitnil,omitempty" name:"ServiceID"`
+
+	// The name of the route, unique at the instance level, does not need to be provided.
+	RouteName *string `json:"RouteName,omitnil,omitempty" name:"RouteName"`
+
+	// Method of route. Available values:
+	// - GET
+	// - POST
+	// - DELETE
+	// - PUT
+	// - OPTIONS
+	// - PATCH
+	// - HEAD
+	// - ANY
+	// - TRACE
+	// - COPY
+	// - MOVE
+	// - PROPFIND
+	// - PROPPATCH
+	// - MKCOL
+	// - LOCK
+	// - UNLOCK
+	Methods []*string `json:"Methods,omitnil,omitempty" name:"Methods"`
+
+	// Domain of the route
+	Hosts []*string `json:"Hosts,omitnil,omitempty" name:"Hosts"`
+
+	// Path of the route
+	Paths []*string `json:"Paths,omitnil,omitempty" name:"Paths"`
+
+	// Route protocol, optional
+	// - https
+	// - http
+	Protocols []*string `json:"Protocols,omitnil,omitempty" name:"Protocols"`
+
+	// Preserve Host when forwarding to backend
+	PreserveHost *bool `json:"PreserveHost,omitnil,omitempty" name:"PreserveHost"`
+
+	// HTTP redirection status code
+	HttpsRedirectStatusCode *int64 `json:"HttpsRedirectStatusCode,omitnil,omitempty" name:"HttpsRedirectStatusCode"`
+
+	// StripPath when forwarding to backend
+	StripPath *bool `json:"StripPath,omitnil,omitempty" name:"StripPath"`
+
+	// Whether to enable mandatory HTTPS
+	//
+	// Deprecated: ForceHttps is deprecated.
+	ForceHttps *bool `json:"ForceHttps,omitnil,omitempty" name:"ForceHttps"`
+
+	// Destination port for Layer 4 match
+	DestinationPorts []*uint64 `json:"DestinationPorts,omitnil,omitempty" name:"DestinationPorts"`
+
+	// Headers of the route
+	Headers []*KVMapping `json:"Headers,omitnil,omitempty" name:"Headers"`
+
+	// Whether to cache the request body, default true
+	RequestBuffering *bool `json:"RequestBuffering,omitnil,omitempty" name:"RequestBuffering"`
+
+	// Whether to cache the response body. Default true
+	ResponseBuffering *bool `json:"ResponseBuffering,omitnil,omitempty" name:"ResponseBuffering"`
+
+	// Regular priority
+	RegexPriority *int64 `json:"RegexPriority,omitnil,omitempty" name:"RegexPriority"`
+
+	// queryString parameter
+	QueryStringParameters []*KVMapping `json:"QueryStringParameters,omitnil,omitempty" name:"QueryStringParameters"`
+}
+
+type CreateCloudNativeAPIGatewayRouteRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service ID
+	ServiceID *string `json:"ServiceID,omitnil,omitempty" name:"ServiceID"`
+
+	// The name of the route, unique at the instance level, does not need to be provided.
+	RouteName *string `json:"RouteName,omitnil,omitempty" name:"RouteName"`
+
+	// Method of route. Available values:
+	// - GET
+	// - POST
+	// - DELETE
+	// - PUT
+	// - OPTIONS
+	// - PATCH
+	// - HEAD
+	// - ANY
+	// - TRACE
+	// - COPY
+	// - MOVE
+	// - PROPFIND
+	// - PROPPATCH
+	// - MKCOL
+	// - LOCK
+	// - UNLOCK
+	Methods []*string `json:"Methods,omitnil,omitempty" name:"Methods"`
+
+	// Domain of the route
+	Hosts []*string `json:"Hosts,omitnil,omitempty" name:"Hosts"`
+
+	// Path of the route
+	Paths []*string `json:"Paths,omitnil,omitempty" name:"Paths"`
+
+	// Route protocol, optional
+	// - https
+	// - http
+	Protocols []*string `json:"Protocols,omitnil,omitempty" name:"Protocols"`
+
+	// Preserve Host when forwarding to backend
+	PreserveHost *bool `json:"PreserveHost,omitnil,omitempty" name:"PreserveHost"`
+
+	// HTTP redirection status code
+	HttpsRedirectStatusCode *int64 `json:"HttpsRedirectStatusCode,omitnil,omitempty" name:"HttpsRedirectStatusCode"`
+
+	// StripPath when forwarding to backend
+	StripPath *bool `json:"StripPath,omitnil,omitempty" name:"StripPath"`
+
+	// Whether to enable mandatory HTTPS
+	ForceHttps *bool `json:"ForceHttps,omitnil,omitempty" name:"ForceHttps"`
+
+	// Destination port for Layer 4 match
+	DestinationPorts []*uint64 `json:"DestinationPorts,omitnil,omitempty" name:"DestinationPorts"`
+
+	// Headers of the route
+	Headers []*KVMapping `json:"Headers,omitnil,omitempty" name:"Headers"`
+
+	// Whether to cache the request body, default true
+	RequestBuffering *bool `json:"RequestBuffering,omitnil,omitempty" name:"RequestBuffering"`
+
+	// Whether to cache the response body. Default true
+	ResponseBuffering *bool `json:"ResponseBuffering,omitnil,omitempty" name:"ResponseBuffering"`
+
+	// Regular priority
+	RegexPriority *int64 `json:"RegexPriority,omitnil,omitempty" name:"RegexPriority"`
+
+	// queryString parameter
+	QueryStringParameters []*KVMapping `json:"QueryStringParameters,omitnil,omitempty" name:"QueryStringParameters"`
+}
+
+func (r *CreateCloudNativeAPIGatewayRouteRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudNativeAPIGatewayRouteRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "ServiceID")
+	delete(f, "RouteName")
+	delete(f, "Methods")
+	delete(f, "Hosts")
+	delete(f, "Paths")
+	delete(f, "Protocols")
+	delete(f, "PreserveHost")
+	delete(f, "HttpsRedirectStatusCode")
+	delete(f, "StripPath")
+	delete(f, "ForceHttps")
+	delete(f, "DestinationPorts")
+	delete(f, "Headers")
+	delete(f, "RequestBuffering")
+	delete(f, "ResponseBuffering")
+	delete(f, "RegexPriority")
+	delete(f, "QueryStringParameters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloudNativeAPIGatewayRouteRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudNativeAPIGatewayRouteResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateCloudNativeAPIGatewayRouteResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCloudNativeAPIGatewayRouteResponseParams `json:"Response"`
+}
+
+func (r *CreateCloudNativeAPIGatewayRouteResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudNativeAPIGatewayRouteResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateCloudNativeAPIGatewayServerGroupResult struct {
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Group ID
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Status.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+// Predefined struct for user
+type CreateCloudNativeAPIGatewayServiceRateLimitRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name or service ID
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Configure throttling
+	LimitDetail *CloudNativeAPIGatewayRateLimitDetail `json:"LimitDetail,omitnil,omitempty" name:"LimitDetail"`
+}
+
+type CreateCloudNativeAPIGatewayServiceRateLimitRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name or service ID
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Configure throttling
+	LimitDetail *CloudNativeAPIGatewayRateLimitDetail `json:"LimitDetail,omitnil,omitempty" name:"LimitDetail"`
+}
+
+func (r *CreateCloudNativeAPIGatewayServiceRateLimitRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudNativeAPIGatewayServiceRateLimitRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Name")
+	delete(f, "LimitDetail")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloudNativeAPIGatewayServiceRateLimitRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudNativeAPIGatewayServiceRateLimitResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateCloudNativeAPIGatewayServiceRateLimitResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCloudNativeAPIGatewayServiceRateLimitResponseParams `json:"Response"`
+}
+
+func (r *CreateCloudNativeAPIGatewayServiceRateLimitResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudNativeAPIGatewayServiceRateLimitResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudNativeAPIGatewayServiceRequestParams struct {
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Request protocol:
+	// - https
+	// - http
+	// - tcp
+	// - udp
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
+
+	// Timeout interval. Unit: ms
+	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// Number of retries.
+	Retries *int64 `json:"Retries,omitnil,omitempty" name:"Retries"`
+
+	// Service type 
+	// - Kubernetes 
+	// - Registry
+	// - IPList
+	// - HostIP
+	// - Scf	
+	UpstreamType *string `json:"UpstreamType,omitnil,omitempty" name:"UpstreamType"`
+
+	// Service configuration information
+	UpstreamInfo *KongUpstreamInfo `json:"UpstreamInfo,omitnil,omitempty" name:"UpstreamInfo"`
+
+	// Request path
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+}
+
+type CreateCloudNativeAPIGatewayServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Request protocol:
+	// - https
+	// - http
+	// - tcp
+	// - udp
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
+
+	// Timeout interval. Unit: ms
+	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// Number of retries.
+	Retries *int64 `json:"Retries,omitnil,omitempty" name:"Retries"`
+
+	// Service type 
+	// - Kubernetes 
+	// - Registry
+	// - IPList
+	// - HostIP
+	// - Scf	
+	UpstreamType *string `json:"UpstreamType,omitnil,omitempty" name:"UpstreamType"`
+
+	// Service configuration information
+	UpstreamInfo *KongUpstreamInfo `json:"UpstreamInfo,omitnil,omitempty" name:"UpstreamInfo"`
+
+	// Request path
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+}
+
+func (r *CreateCloudNativeAPIGatewayServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudNativeAPIGatewayServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Name")
+	delete(f, "Protocol")
+	delete(f, "Timeout")
+	delete(f, "Retries")
+	delete(f, "UpstreamType")
+	delete(f, "UpstreamInfo")
+	delete(f, "Path")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloudNativeAPIGatewayServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudNativeAPIGatewayServiceResponseParams struct {
+	// Gateway service creation result
+	Result *CreateGatewayServiceResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateCloudNativeAPIGatewayServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCloudNativeAPIGatewayServiceResponseParams `json:"Response"`
+}
+
+func (r *CreateCloudNativeAPIGatewayServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudNativeAPIGatewayServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateGatewayServiceResult struct {
+	// Gateway Service ID
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
+}
+
+// Predefined struct for user
+type CreateGovernanceLaneGroupsRequestParams struct {
+	// Engine Instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Lane group rule list
+	LaneGroups []*GovernanceLaneGroup `json:"LaneGroups,omitnil,omitempty" name:"LaneGroups"`
+}
+
+type CreateGovernanceLaneGroupsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Engine Instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Lane group rule list
+	LaneGroups []*GovernanceLaneGroup `json:"LaneGroups,omitnil,omitempty" name:"LaneGroups"`
+}
+
+func (r *CreateGovernanceLaneGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateGovernanceLaneGroupsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "LaneGroups")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateGovernanceLaneGroupsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateGovernanceLaneGroupsResponseParams struct {
+	// Whether the creation succeeded
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateGovernanceLaneGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateGovernanceLaneGroupsResponseParams `json:"Response"`
+}
+
+func (r *CreateGovernanceLaneGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateGovernanceLaneGroupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateNativeGatewayServerGroupRequestParams struct {
+	// Gateway instance id.
+	// Only supports postpaid instances
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// gateway group name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Node configuration
+	NodeConfig *CloudNativeAPIGatewayNodeConfig `json:"NodeConfig,omitnil,omitempty" name:"NodeConfig"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// Description information
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Public network bandwidth information
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Public Network Configuration.
+	InternetConfig *InternetConfig `json:"InternetConfig,omitnil,omitempty" name:"InternetConfig"`
+}
+
+type CreateNativeGatewayServerGroupRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance id.
+	// Only supports postpaid instances
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// gateway group name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Node configuration
+	NodeConfig *CloudNativeAPIGatewayNodeConfig `json:"NodeConfig,omitnil,omitempty" name:"NodeConfig"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// Description information
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Public network bandwidth information
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Public Network Configuration.
+	InternetConfig *InternetConfig `json:"InternetConfig,omitnil,omitempty" name:"InternetConfig"`
+}
+
+func (r *CreateNativeGatewayServerGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNativeGatewayServerGroupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Name")
+	delete(f, "NodeConfig")
+	delete(f, "SubnetId")
+	delete(f, "Description")
+	delete(f, "InternetMaxBandwidthOut")
+	delete(f, "InternetConfig")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNativeGatewayServerGroupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateNativeGatewayServerGroupResponseParams struct {
+	// gateway group creation info
+	Result *CreateCloudNativeAPIGatewayServerGroupResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateNativeGatewayServerGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateNativeGatewayServerGroupResponseParams `json:"Response"`
+}
+
+func (r *CreateNativeGatewayServerGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNativeGatewayServerGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateNativeGatewayServiceSourceRequestParams struct {
+	// Gateway instance ID
+	GatewayID *string `json:"GatewayID,omitnil,omitempty" name:"GatewayID"`
+
+	// Service source type. Reference value:
+	// - TSE-Nacos 
+	// - TSE-Consul 
+	// - TSE-PolarisMesh
+	// - Customer-Nacos
+	// - Customer-Consul
+	// - Customer-PolarisMesh
+	// - TSF
+	// - TKE
+	// - EKS
+	// - PrivateDNS
+	// - Customer-DNS
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// Instance ID of the service source. Required when SourceType is not PrivateDNS or Customer-DNS.
+	SourceID *string `json:"SourceID,omitnil,omitempty" name:"SourceID"`
+
+	// Source instance name of the service. Required when SourceType is not PrivateDNS.
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// Service source instance additional information
+	SourceInfo *SourceInfo `json:"SourceInfo,omitnil,omitempty" name:"SourceInfo"`
+}
+
+type CreateNativeGatewayServiceSourceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance ID
+	GatewayID *string `json:"GatewayID,omitnil,omitempty" name:"GatewayID"`
+
+	// Service source type. Reference value:
+	// - TSE-Nacos 
+	// - TSE-Consul 
+	// - TSE-PolarisMesh
+	// - Customer-Nacos
+	// - Customer-Consul
+	// - Customer-PolarisMesh
+	// - TSF
+	// - TKE
+	// - EKS
+	// - PrivateDNS
+	// - Customer-DNS
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// Instance ID of the service source. Required when SourceType is not PrivateDNS or Customer-DNS.
+	SourceID *string `json:"SourceID,omitnil,omitempty" name:"SourceID"`
+
+	// Source instance name of the service. Required when SourceType is not PrivateDNS.
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// Service source instance additional information
+	SourceInfo *SourceInfo `json:"SourceInfo,omitnil,omitempty" name:"SourceInfo"`
+}
+
+func (r *CreateNativeGatewayServiceSourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNativeGatewayServiceSourceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayID")
+	delete(f, "SourceType")
+	delete(f, "SourceID")
+	delete(f, "SourceName")
+	delete(f, "SourceInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNativeGatewayServiceSourceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateNativeGatewayServiceSourceResponseParams struct {
+	// Whether the creation succeeded
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// Service Source ID
+	SourceID *string `json:"SourceID,omitnil,omitempty" name:"SourceID"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateNativeGatewayServiceSourceResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateNativeGatewayServiceSourceResponseParams `json:"Response"`
+}
+
+func (r *CreateNativeGatewayServiceSourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNativeGatewayServiceSourceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateOrModifyCloudNativeAPIGatewayCORSRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Resource type bound to the cross-origin plug-in: route|service
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// id of the route or service
+	SourceId *string `json:"SourceId,omitnil,omitempty" name:"SourceId"`
+
+	// Whether to enable the plug-in
+	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// Cross-Origin Access-Control-Allow-Origin
+	Origins []*string `json:"Origins,omitnil,omitempty" name:"Origins"`
+
+	// Cross-Origin Access-Control-Allow-Headers header
+	Headers []*string `json:"Headers,omitnil,omitempty" name:"Headers"`
+
+	// Access-Control-Allow-Methods for CORS
+	Methods []*string `json:"Methods,omitnil,omitempty" name:"Methods"`
+
+	// Access-Control-Expose-Headers
+	ExposedHeaders []*string `json:"ExposedHeaders,omitnil,omitempty" name:"ExposedHeaders"`
+
+	// preflight request cache time
+	MaxAge *int64 `json:"MaxAge,omitnil,omitempty" name:"MaxAge"`
+
+	// Access-Control-Allow-Credentials for CORS
+	Credentials *bool `json:"Credentials,omitnil,omitempty" name:"Credentials"`
+
+	// Whether to pass through the OPTIONS request to the backend
+	PreFlightContinue *bool `json:"PreFlightContinue,omitnil,omitempty" name:"PreFlightContinue"`
+}
+
+type CreateOrModifyCloudNativeAPIGatewayCORSRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Resource type bound to the cross-origin plug-in: route|service
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// id of the route or service
+	SourceId *string `json:"SourceId,omitnil,omitempty" name:"SourceId"`
+
+	// Whether to enable the plug-in
+	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// Cross-Origin Access-Control-Allow-Origin
+	Origins []*string `json:"Origins,omitnil,omitempty" name:"Origins"`
+
+	// Cross-Origin Access-Control-Allow-Headers header
+	Headers []*string `json:"Headers,omitnil,omitempty" name:"Headers"`
+
+	// Access-Control-Allow-Methods for CORS
+	Methods []*string `json:"Methods,omitnil,omitempty" name:"Methods"`
+
+	// Access-Control-Expose-Headers
+	ExposedHeaders []*string `json:"ExposedHeaders,omitnil,omitempty" name:"ExposedHeaders"`
+
+	// preflight request cache time
+	MaxAge *int64 `json:"MaxAge,omitnil,omitempty" name:"MaxAge"`
+
+	// Access-Control-Allow-Credentials for CORS
+	Credentials *bool `json:"Credentials,omitnil,omitempty" name:"Credentials"`
+
+	// Whether to pass through the OPTIONS request to the backend
+	PreFlightContinue *bool `json:"PreFlightContinue,omitnil,omitempty" name:"PreFlightContinue"`
+}
+
+func (r *CreateOrModifyCloudNativeAPIGatewayCORSRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateOrModifyCloudNativeAPIGatewayCORSRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "SourceType")
+	delete(f, "SourceId")
+	delete(f, "Enabled")
+	delete(f, "Origins")
+	delete(f, "Headers")
+	delete(f, "Methods")
+	delete(f, "ExposedHeaders")
+	delete(f, "MaxAge")
+	delete(f, "Credentials")
+	delete(f, "PreFlightContinue")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateOrModifyCloudNativeAPIGatewayCORSRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateOrModifyCloudNativeAPIGatewayCORSResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateOrModifyCloudNativeAPIGatewayCORSResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateOrModifyCloudNativeAPIGatewayCORSResponseParams `json:"Response"`
+}
+
+func (r *CreateOrModifyCloudNativeAPIGatewayCORSResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateOrModifyCloudNativeAPIGatewayCORSResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreatePublicNetworkResult struct {
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// group ID
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Client public network ID
+	NetworkId *string `json:"NetworkId,omitnil,omitempty" name:"NetworkId"`
+}
+
+// Predefined struct for user
+type CreateWafDomainsRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// List of WAF-protected domain names
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
+}
+
+type CreateWafDomainsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// List of WAF-protected domain names
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
+}
+
+func (r *CreateWafDomainsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateWafDomainsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Domains")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateWafDomainsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateWafDomainsResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateWafDomainsResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateWafDomainsResponseParams `json:"Response"`
+}
+
+func (r *CreateWafDomainsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateWafDomainsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteAutoScalerResourceStrategyRequestParams struct {
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Policy ID
+	StrategyId *string `json:"StrategyId,omitnil,omitempty" name:"StrategyId"`
+}
+
+type DeleteAutoScalerResourceStrategyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Policy ID
+	StrategyId *string `json:"StrategyId,omitnil,omitempty" name:"StrategyId"`
+}
+
+func (r *DeleteAutoScalerResourceStrategyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAutoScalerResourceStrategyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "StrategyId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAutoScalerResourceStrategyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteAutoScalerResourceStrategyResponseParams struct {
+	// Success status
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteAutoScalerResourceStrategyResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteAutoScalerResourceStrategyResponseParams `json:"Response"`
+}
+
+func (r *DeleteAutoScalerResourceStrategyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAutoScalerResourceStrategyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudNativeAPIGatewayCORSRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Resource type bound to the cross-origin plug-in: route|service
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// id of the route or service
+	SourceId *string `json:"SourceId,omitnil,omitempty" name:"SourceId"`
+}
+
+type DeleteCloudNativeAPIGatewayCORSRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Resource type bound to the cross-origin plug-in: route|service
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// id of the route or service
+	SourceId *string `json:"SourceId,omitnil,omitempty" name:"SourceId"`
+}
+
+func (r *DeleteCloudNativeAPIGatewayCORSRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudNativeAPIGatewayCORSRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "SourceType")
+	delete(f, "SourceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCloudNativeAPIGatewayCORSRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudNativeAPIGatewayCORSResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteCloudNativeAPIGatewayCORSResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteCloudNativeAPIGatewayCORSResponseParams `json:"Response"`
+}
+
+func (r *DeleteCloudNativeAPIGatewayCORSResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudNativeAPIGatewayCORSResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudNativeAPIGatewayCanaryRuleRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service ID
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
+
+	// Priority
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
+
+	// Priority list. If configured, this parameter takes precedence and the Priority parameter is ignored.
+	PriorityList []*int64 `json:"PriorityList,omitnil,omitempty" name:"PriorityList"`
+}
+
+type DeleteCloudNativeAPIGatewayCanaryRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service ID
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
+
+	// Priority
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
+
+	// Priority list. If configured, this parameter takes precedence and the Priority parameter is ignored.
+	PriorityList []*int64 `json:"PriorityList,omitnil,omitempty" name:"PriorityList"`
+}
+
+func (r *DeleteCloudNativeAPIGatewayCanaryRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudNativeAPIGatewayCanaryRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "ServiceId")
+	delete(f, "Priority")
+	delete(f, "PriorityList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCloudNativeAPIGatewayCanaryRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudNativeAPIGatewayCanaryRuleResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteCloudNativeAPIGatewayCanaryRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteCloudNativeAPIGatewayCanaryRuleResponseParams `json:"Response"`
+}
+
+func (r *DeleteCloudNativeAPIGatewayCanaryRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudNativeAPIGatewayCanaryRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudNativeAPIGatewayCertificateRequestParams struct {
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Certificate ID
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+type DeleteCloudNativeAPIGatewayCertificateRequest struct {
+	*tchttp.BaseRequest
+	
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Certificate ID
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+func (r *DeleteCloudNativeAPIGatewayCertificateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudNativeAPIGatewayCertificateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCloudNativeAPIGatewayCertificateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudNativeAPIGatewayCertificateResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteCloudNativeAPIGatewayCertificateResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteCloudNativeAPIGatewayCertificateResponseParams `json:"Response"`
+}
+
+func (r *DeleteCloudNativeAPIGatewayCertificateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudNativeAPIGatewayCertificateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudNativeAPIGatewayPublicNetworkRequestParams struct {
+	// Cloud native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// group id, required for kong event type
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// public network type
+	// -IPV4 (default value)
+	// - IPV6
+	InternetAddressVersion *string `json:"InternetAddressVersion,omitnil,omitempty" name:"InternetAddressVersion"`
+
+	// Public IP address. Required when public IP addresses exist across multiple public networks.
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+}
+
+type DeleteCloudNativeAPIGatewayPublicNetworkRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cloud native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// group id, required for kong event type
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// public network type
+	// -IPV4 (default value)
+	// - IPV6
+	InternetAddressVersion *string `json:"InternetAddressVersion,omitnil,omitempty" name:"InternetAddressVersion"`
+
+	// Public IP address. Required when public IP addresses exist across multiple public networks.
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+}
+
+func (r *DeleteCloudNativeAPIGatewayPublicNetworkRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudNativeAPIGatewayPublicNetworkRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "GroupId")
+	delete(f, "InternetAddressVersion")
+	delete(f, "Vip")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCloudNativeAPIGatewayPublicNetworkRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudNativeAPIGatewayPublicNetworkResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteCloudNativeAPIGatewayPublicNetworkResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteCloudNativeAPIGatewayPublicNetworkResponseParams `json:"Response"`
+}
+
+func (r *DeleteCloudNativeAPIGatewayPublicNetworkResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudNativeAPIGatewayPublicNetworkResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudNativeAPIGatewayRequestParams struct {
+	// Cloud native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Whether to delete the CLS log topic associated with the instance.
+	DeleteClsTopic *bool `json:"DeleteClsTopic,omitnil,omitempty" name:"DeleteClsTopic"`
+}
+
+type DeleteCloudNativeAPIGatewayRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cloud native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Whether to delete the CLS log topic associated with the instance.
+	DeleteClsTopic *bool `json:"DeleteClsTopic,omitnil,omitempty" name:"DeleteClsTopic"`
+}
+
+func (r *DeleteCloudNativeAPIGatewayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudNativeAPIGatewayRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "DeleteClsTopic")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCloudNativeAPIGatewayRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudNativeAPIGatewayResponseParams struct {
+	// Delete the cloud native API gateway instance response result.
+	Result *DeleteCloudNativeAPIGatewayResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteCloudNativeAPIGatewayResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteCloudNativeAPIGatewayResponseParams `json:"Response"`
+}
+
+func (r *DeleteCloudNativeAPIGatewayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudNativeAPIGatewayResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteCloudNativeAPIGatewayResult struct {
+	// Cloud-native gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Cloud-native gateway status.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
+// Predefined struct for user
+type DeleteCloudNativeAPIGatewayRouteRateLimitRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Route Id or routing name.
+	// "Unnamed" is not supported.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+type DeleteCloudNativeAPIGatewayRouteRateLimitRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Route Id or routing name.
+	// "Unnamed" is not supported.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+func (r *DeleteCloudNativeAPIGatewayRouteRateLimitRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudNativeAPIGatewayRouteRateLimitRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCloudNativeAPIGatewayRouteRateLimitRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudNativeAPIGatewayRouteRateLimitResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteCloudNativeAPIGatewayRouteRateLimitResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteCloudNativeAPIGatewayRouteRateLimitResponseParams `json:"Response"`
+}
+
+func (r *DeleteCloudNativeAPIGatewayRouteRateLimitResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudNativeAPIGatewayRouteRateLimitResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudNativeAPIGatewayRouteRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// The ID or name of the route. The name "unnamed" is not supported.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+type DeleteCloudNativeAPIGatewayRouteRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// The ID or name of the route. The name "unnamed" is not supported.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+func (r *DeleteCloudNativeAPIGatewayRouteRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudNativeAPIGatewayRouteRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCloudNativeAPIGatewayRouteRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudNativeAPIGatewayRouteResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteCloudNativeAPIGatewayRouteResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteCloudNativeAPIGatewayRouteResponseParams `json:"Response"`
+}
+
+func (r *DeleteCloudNativeAPIGatewayRouteResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudNativeAPIGatewayRouteResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudNativeAPIGatewayServiceRateLimitRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name or service ID
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+type DeleteCloudNativeAPIGatewayServiceRateLimitRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name or service ID
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+func (r *DeleteCloudNativeAPIGatewayServiceRateLimitRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudNativeAPIGatewayServiceRateLimitRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCloudNativeAPIGatewayServiceRateLimitRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudNativeAPIGatewayServiceRateLimitResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteCloudNativeAPIGatewayServiceRateLimitResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteCloudNativeAPIGatewayServiceRateLimitResponseParams `json:"Response"`
+}
+
+func (r *DeleteCloudNativeAPIGatewayServiceRateLimitResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudNativeAPIGatewayServiceRateLimitResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudNativeAPIGatewayServiceRequestParams struct {
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name, service ID
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Whether to synchronize the deletion of routes bound to the service
+	DeleteRoutes *bool `json:"DeleteRoutes,omitnil,omitempty" name:"DeleteRoutes"`
+}
+
+type DeleteCloudNativeAPIGatewayServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name, service ID
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Whether to synchronize the deletion of routes bound to the service
+	DeleteRoutes *bool `json:"DeleteRoutes,omitnil,omitempty" name:"DeleteRoutes"`
+}
+
+func (r *DeleteCloudNativeAPIGatewayServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudNativeAPIGatewayServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Name")
+	delete(f, "DeleteRoutes")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCloudNativeAPIGatewayServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudNativeAPIGatewayServiceResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteCloudNativeAPIGatewayServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteCloudNativeAPIGatewayServiceResponseParams `json:"Response"`
+}
+
+func (r *DeleteCloudNativeAPIGatewayServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudNativeAPIGatewayServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteGovernanceLaneGroup struct {
+	// lane name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Lane group ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Lane entry service list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TrafficEntries []*LaneTrafficEntry `json:"TrafficEntries,omitnil,omitempty" name:"TrafficEntries"`
+
+	// Lane service list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Destinations []*GovernanceServiceDestination `json:"Destinations,omitnil,omitempty" name:"Destinations"`
+
+	// Lane group description
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Rule content summary
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Revision *string `json:"Revision,omitnil,omitempty" name:"Revision"`
+
+	// Creation time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Modification time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
+
+	// Rule consistency status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Consistency *string `json:"Consistency,omitnil,omitempty" name:"Consistency"`
+
+	// Lane rule list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Rules []*GovernanceLaneRule `json:"Rules,omitnil,omitempty" name:"Rules"`
+}
+
+// Predefined struct for user
+type DeleteGovernanceLaneGroupsRequestParams struct {
+	// Engine Instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Lane group rule list
+	LaneGroups []*DeleteGovernanceLaneGroup `json:"LaneGroups,omitnil,omitempty" name:"LaneGroups"`
+}
+
+type DeleteGovernanceLaneGroupsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Engine Instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Lane group rule list
+	LaneGroups []*DeleteGovernanceLaneGroup `json:"LaneGroups,omitnil,omitempty" name:"LaneGroups"`
+}
+
+func (r *DeleteGovernanceLaneGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteGovernanceLaneGroupsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "LaneGroups")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteGovernanceLaneGroupsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteGovernanceLaneGroupsResponseParams struct {
+	// Whether the creation succeeded
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteGovernanceLaneGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteGovernanceLaneGroupsResponseParams `json:"Response"`
+}
+
+func (r *DeleteGovernanceLaneGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteGovernanceLaneGroupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteNativeGatewayServerGroupRequestParams struct {
+	// Gateway instance id.
+	// Only supports postpaid instances
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// gateway group id
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+}
+
+type DeleteNativeGatewayServerGroupRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance id.
+	// Only supports postpaid instances
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// gateway group id
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+}
+
+func (r *DeleteNativeGatewayServerGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteNativeGatewayServerGroupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "GroupId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteNativeGatewayServerGroupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteNativeGatewayServerGroupResponseParams struct {
+	// Deletes messages.
+	Result *DeleteNativeGatewayServerGroupResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteNativeGatewayServerGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteNativeGatewayServerGroupResponseParams `json:"Response"`
+}
+
+func (r *DeleteNativeGatewayServerGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteNativeGatewayServerGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteNativeGatewayServerGroupResult struct {
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Gateway group id
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// deleted
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+// Predefined struct for user
+type DeleteNativeGatewayServiceSourceRequestParams struct {
+	// Gateway instance ID
+	GatewayID *string `json:"GatewayID,omitnil,omitempty" name:"GatewayID"`
+
+	// Service source instance ID
+	SourceID *string `json:"SourceID,omitnil,omitempty" name:"SourceID"`
+}
+
+type DeleteNativeGatewayServiceSourceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance ID
+	GatewayID *string `json:"GatewayID,omitnil,omitempty" name:"GatewayID"`
+
+	// Service source instance ID
+	SourceID *string `json:"SourceID,omitnil,omitempty" name:"SourceID"`
+}
+
+func (r *DeleteNativeGatewayServiceSourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteNativeGatewayServiceSourceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayID")
+	delete(f, "SourceID")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteNativeGatewayServiceSourceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteNativeGatewayServiceSourceResponseParams struct {
+	// Result
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteNativeGatewayServiceSourceResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteNativeGatewayServiceSourceResponseParams `json:"Response"`
+}
+
+func (r *DeleteNativeGatewayServiceSourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteNativeGatewayServiceSourceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteWafDomainsRequestParams struct {
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// WAF-protected domain name list
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
+}
+
+type DeleteWafDomainsRequest struct {
+	*tchttp.BaseRequest
+	
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// WAF-protected domain name list
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
+}
+
+func (r *DeleteWafDomainsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteWafDomainsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Domains")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteWafDomainsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteWafDomainsResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteWafDomainsResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteWafDomainsResponseParams `json:"Response"`
+}
+
+func (r *DeleteWafDomainsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteWafDomainsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAutoScalerResourceStrategiesRequestParams struct {
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Policy ID
+	StrategyId *string `json:"StrategyId,omitnil,omitempty" name:"StrategyId"`
+}
+
+type DescribeAutoScalerResourceStrategiesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Policy ID
+	StrategyId *string `json:"StrategyId,omitnil,omitempty" name:"StrategyId"`
+}
+
+func (r *DescribeAutoScalerResourceStrategiesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAutoScalerResourceStrategiesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "StrategyId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAutoScalerResourceStrategiesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAutoScalerResourceStrategiesResponseParams struct {
+	// Get the response result of the auto scaling policy list for the Cloud Native API gateway instance.
+	Result *ListCloudNativeAPIGatewayStrategyResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAutoScalerResourceStrategiesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAutoScalerResourceStrategiesResponseParams `json:"Response"`
+}
+
+func (r *DescribeAutoScalerResourceStrategiesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAutoScalerResourceStrategiesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAutoScalerResourceStrategyBindingGroupsRequestParams struct {
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Policy ID
+	StrategyId *string `json:"StrategyId,omitnil,omitempty" name:"StrategyId"`
+
+	// Query offset
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Query Quantity Limit
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeAutoScalerResourceStrategyBindingGroupsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Policy ID
+	StrategyId *string `json:"StrategyId,omitnil,omitempty" name:"StrategyId"`
+
+	// Query offset
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Query Quantity Limit
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeAutoScalerResourceStrategyBindingGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAutoScalerResourceStrategyBindingGroupsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "StrategyId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAutoScalerResourceStrategyBindingGroupsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAutoScalerResourceStrategyBindingGroupsResponseParams struct {
+	// Cloud Native API gateway instance policy binding gateway grouping list response result
+	Result *ListCloudNativeAPIGatewayStrategyBindingGroupInfoResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAutoScalerResourceStrategyBindingGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAutoScalerResourceStrategyBindingGroupsResponseParams `json:"Response"`
+}
+
+func (r *DescribeAutoScalerResourceStrategyBindingGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAutoScalerResourceStrategyBindingGroupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayCORSRequestParams struct {
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Resource type bound by the cross-origin plug-in: route|service
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// id of the route or services
+	SourceId *string `json:"SourceId,omitnil,omitempty" name:"SourceId"`
+}
+
+type DescribeCloudNativeAPIGatewayCORSRequest struct {
+	*tchttp.BaseRequest
+	
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Resource type bound by the cross-origin plug-in: route|service
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// id of the route or services
+	SourceId *string `json:"SourceId,omitnil,omitempty" name:"SourceId"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayCORSRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayCORSRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "SourceType")
+	delete(f, "SourceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudNativeAPIGatewayCORSRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayCORSResponseParams struct {
+	// Output parameters
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Result *DescribeKongCORSResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudNativeAPIGatewayCORSResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudNativeAPIGatewayCORSResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayCORSResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayCORSResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayCanaryRulesRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// service ID
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
+
+	// Grayscale rule type Standard | Lane
+	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
+
+	// Number of tables in the list
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// List offset
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+type DescribeCloudNativeAPIGatewayCanaryRulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// service ID
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
+
+	// Grayscale rule type Standard | Lane
+	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
+
+	// Number of tables in the list
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// List offset
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayCanaryRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayCanaryRulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "ServiceId")
+	delete(f, "RuleType")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudNativeAPIGatewayCanaryRulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayCanaryRulesResponseParams struct {
+	// Grayscale rule list.
+	Result *CloudAPIGatewayCanaryRuleList `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudNativeAPIGatewayCanaryRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudNativeAPIGatewayCanaryRulesResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayCanaryRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayCanaryRulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayCertificateDetailsRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Certificate ID
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+type DescribeCloudNativeAPIGatewayCertificateDetailsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Certificate ID
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayCertificateDetailsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayCertificateDetailsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudNativeAPIGatewayCertificateDetailsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayCertificateDetailsResponseParams struct {
+	// None.
+	Result *KongCertificate `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudNativeAPIGatewayCertificateDetailsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudNativeAPIGatewayCertificateDetailsResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayCertificateDetailsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayCertificateDetailsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayCertificatesRequestParams struct {
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Number of tables in the list
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// List offset
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Filter criteria. Multiple filter conditions are in an AND relationship with each other. Support BindDomain and Name.
+	Filters []*ListFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeCloudNativeAPIGatewayCertificatesRequest struct {
+	*tchttp.BaseRequest
+	
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Number of tables in the list
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// List offset
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Filter criteria. Multiple filter conditions are in an AND relationship with each other. Support BindDomain and Name.
+	Filters []*ListFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayCertificatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayCertificatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudNativeAPIGatewayCertificatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayCertificatesResponseParams struct {
+	// None.
+	Result *KongCertificatesList `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudNativeAPIGatewayCertificatesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudNativeAPIGatewayCertificatesResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayCertificatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayCertificatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayConfigRequestParams struct {
+	// Cloud Native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// group id. Default group if left blank.
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+}
+
+type DescribeCloudNativeAPIGatewayConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cloud Native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// group id. Default group if left blank.
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "GroupId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudNativeAPIGatewayConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayConfigResponseParams struct {
+	// Retrieve the response result of the cloud native API gateway.
+	Result *DescribeCloudNativeAPIGatewayConfigResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudNativeAPIGatewayConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudNativeAPIGatewayConfigResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCloudNativeAPIGatewayConfigResult struct {
+	// Gateway Instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Grouped network configuration list.
+	ConfigList []*CloudNativeAPIGatewayConfig `json:"ConfigList,omitnil,omitempty" name:"ConfigList"`
+
+	// Grouped subnet info
+	GroupSubnetId *string `json:"GroupSubnetId,omitnil,omitempty" name:"GroupSubnetId"`
+
+	// Grouped VPC info
+	GroupVpcId *string `json:"GroupVpcId,omitnil,omitempty" name:"GroupVpcId"`
+
+	// group ID
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayInfoByIpRequestParams struct {
+	// Public ip address of the cloud-native gateway
+	PublicNetworkIP *string `json:"PublicNetworkIP,omitnil,omitempty" name:"PublicNetworkIP"`
+}
+
+type DescribeCloudNativeAPIGatewayInfoByIpRequest struct {
+	*tchttp.BaseRequest
+	
+	// Public ip address of the cloud-native gateway
+	PublicNetworkIP *string `json:"PublicNetworkIP,omitnil,omitempty" name:"PublicNetworkIP"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayInfoByIpRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayInfoByIpRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PublicNetworkIP")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudNativeAPIGatewayInfoByIpRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayInfoByIpResponseParams struct {
+	// Output parameters
+	Result *DescribeInstanceInfoByIpResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudNativeAPIGatewayInfoByIpResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudNativeAPIGatewayInfoByIpResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayInfoByIpResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayInfoByIpResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayNodesRequestParams struct {
+	// Cloud Native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Instance Group ID
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Number of paginated items
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Start acquisition from page number
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+type DescribeCloudNativeAPIGatewayNodesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cloud Native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Instance Group ID
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Number of paginated items
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Start acquisition from page number
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayNodesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayNodesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "GroupId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudNativeAPIGatewayNodesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayNodesResponseParams struct {
+	// Retrieve cloud-native gateway node list results.
+	Result *DescribeCloudNativeAPIGatewayNodesResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudNativeAPIGatewayNodesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudNativeAPIGatewayNodesResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayNodesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayNodesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCloudNativeAPIGatewayNodesResult struct {
+	// Retrieve the cloud native API gateway node list response result.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Cloud native API gateway node list.
+	NodeList []*CloudNativeAPIGatewayNode `json:"NodeList,omitnil,omitempty" name:"NodeList"`
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayPortsRequestParams struct {
+	// Cloud native API gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+}
+
+type DescribeCloudNativeAPIGatewayPortsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cloud native API gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayPortsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayPortsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudNativeAPIGatewayPortsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayPortsResponseParams struct {
+	// Cloud Native API gateway instance protocol port list response result
+	Result *DescribeGatewayInstancePortResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudNativeAPIGatewayPortsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudNativeAPIGatewayPortsResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayPortsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayPortsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayRequestParams struct {
+	// Cloud Native API gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+}
+
+type DescribeCloudNativeAPIGatewayRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cloud Native API gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudNativeAPIGatewayRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayResponseParams struct {
+	// Retrieve the response result of the Cloud Native API gateway basic information.
+	Result *DescribeCloudNativeAPIGatewayResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudNativeAPIGatewayResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudNativeAPIGatewayResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCloudNativeAPIGatewayResult struct {
+	// Cloud Native API Gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Cloud native API gateway status.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Cloud native API gateway name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Cloud native API gateway type.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Instance version:
+	// - 2.4.1
+	// - 2.5.1
+	GatewayVersion *string `json:"GatewayVersion,omitnil,omitempty" name:"GatewayVersion"`
+
+	// Cloud native API gateway node information.
+	NodeConfig *CloudNativeAPIGatewayNodeConfig `json:"NodeConfig,omitnil,omitempty" name:"NodeConfig"`
+
+	// Cloud native API gateway vpc configuration.
+	VpcConfig *CloudNativeAPIGatewayVpcConfig `json:"VpcConfig,omitnil,omitempty" name:"VpcConfig"`
+
+	// Cloud native API gateway description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Creation time of the cloud native API gateway.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Tag information of the instance
+	Tags []*InstanceTagInfo `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Is cls log enabled?
+	EnableCls *bool `json:"EnableCls,omitnil,omitempty" name:"EnableCls"`
+
+	// Payment mode. 0 indicates postpaid, and 1 indicates prepaid.
+	TradeType *int64 `json:"TradeType,omitnil,omitempty" name:"TradeType"`
+
+	// Instance version. Currently supported: development edition, standard version, and professional version [TRIAL, STANDARD, PROFESSIONAL].
+	FeatureVersion *string `json:"FeatureVersion,omitnil,omitempty" name:"FeatureVersion"`
+
+	// Public network outbound traffic bandwidth, [1,2048]Mbps
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Auto-renewal flag. 0 means the default state (not set by the user, that is, the initial state).
+	// 1 means auto-renew, 2 means no automatic renewal (set by the user). If the business has no renewal concept or no need for auto-renewal, set it to 0.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
+
+	// Expiry time, used when prepaid
+	CurDeadline *string `json:"CurDeadline,omitnil,omitempty" name:"CurDeadline"`
+
+	// Isolation time. Used when an instance is isolated.
+	IsolateTime *string `json:"IsolateTime,omitnil,omitempty" name:"IsolateTime"`
+
+	// Is client public network enabled?
+	EnableInternet *bool `json:"EnableInternet,omitnil,omitempty" name:"EnableInternet"`
+
+	// Actual regional information of the instance
+	EngineRegion *string `json:"EngineRegion,omitnil,omitempty" name:"EngineRegion"`
+
+	// Ingress class name
+	IngressClassName *string `json:"IngressClassName,omitnil,omitempty" name:"IngressClassName"`
+
+	// Public network billing method. Selectable values: BANDWIDTH | TRAFFIC, representing billing by bandwidth and by traffic.
+	InternetPayMode *string `json:"InternetPayMode,omitnil,omitempty" name:"InternetPayMode"`
+
+	// Cloud Native API Gateway minor version number
+	GatewayMinorVersion *string `json:"GatewayMinorVersion,omitnil,omitempty" name:"GatewayMinorVersion"`
+
+	// Ports monitored by the instance
+	InstancePort *InstancePort `json:"InstancePort,omitnil,omitempty" name:"InstancePort"`
+
+	// Public network CLB default type
+	LoadBalancerType *string `json:"LoadBalancerType,omitnil,omitempty" name:"LoadBalancerType"`
+
+	// Public IP address list
+	PublicIpAddresses []*string `json:"PublicIpAddresses,omitnil,omitempty" name:"PublicIpAddresses"`
+
+	// Whether to enable deletion protection
+	DeleteProtect *bool `json:"DeleteProtect,omitnil,omitempty" name:"DeleteProtect"`
+
+	// Version number that can be upgraded
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AvailableVersions []*string `json:"AvailableVersions,omitnil,omitempty" name:"AvailableVersions"`
+
+	// Version list for gateway upgrade
+	AvailableUpgradeVersions []*string `json:"AvailableUpgradeVersions,omitnil,omitempty" name:"AvailableUpgradeVersions"`
+
+	// Whether to prompt for upgrade
+	AvailableUpgrade *bool `json:"AvailableUpgrade,omitnil,omitempty" name:"AvailableUpgrade"`
+
+	// Rollback version
+	AvailableRollbackVersion *string `json:"AvailableRollbackVersion,omitnil,omitempty" name:"AvailableRollbackVersion"`
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayRouteRateLimitRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Route Id or routing name.
+	// "Unnamed" is not supported.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+type DescribeCloudNativeAPIGatewayRouteRateLimitRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Route Id or routing name.
+	// "Unnamed" is not supported.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayRouteRateLimitRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayRouteRateLimitRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudNativeAPIGatewayRouteRateLimitRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayRouteRateLimitResponseParams struct {
+	// Retrieve the cloud-native gateway traffic throttling plugin (route)
+	Result *CloudNativeAPIGatewayRateLimitDetail `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudNativeAPIGatewayRouteRateLimitResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudNativeAPIGatewayRouteRateLimitResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayRouteRateLimitResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayRouteRateLimitResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayRoutesRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Pagination query limit count [0,1000], default value 0
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Page offset amount for pagination. Default value: 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Service name, exact match
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
+
+	// Route name, exact match
+	RouteName *string `json:"RouteName,omitnil,omitempty" name:"RouteName"`
+
+	// Filter conditions. Multiple filter conditions have an AND relationship with each other, supporting name, path, host, method, service, and protocol.
+	Filters []*ListFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeCloudNativeAPIGatewayRoutesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Pagination query limit count [0,1000], default value 0
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Page offset amount for pagination. Default value: 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Service name, exact match
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
+
+	// Route name, exact match
+	RouteName *string `json:"RouteName,omitnil,omitempty" name:"RouteName"`
+
+	// Filter conditions. Multiple filter conditions have an AND relationship with each other, supporting name, path, host, method, service, and protocol.
+	Filters []*ListFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayRoutesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayRoutesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "ServiceName")
+	delete(f, "RouteName")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudNativeAPIGatewayRoutesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayRoutesResponseParams struct {
+	// None.
+	Result *KongServiceRouteList `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudNativeAPIGatewayRoutesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudNativeAPIGatewayRoutesResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayRoutesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayRoutesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayServiceRateLimitRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name or service ID.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+type DescribeCloudNativeAPIGatewayServiceRateLimitRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name or service ID.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayServiceRateLimitRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayServiceRateLimitRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudNativeAPIGatewayServiceRateLimitRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayServiceRateLimitResponseParams struct {
+	// Query the cloud-native gateway traffic throttling plugin (service)
+	Result *CloudNativeAPIGatewayRateLimitDetail `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudNativeAPIGatewayServiceRateLimitResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudNativeAPIGatewayServiceRateLimitResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayServiceRateLimitResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayServiceRateLimitResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayServicesLightRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Number of tables in the list
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// List offset
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Filter conditions. Multiple filter conditions have an AND relationship with each other, supporting id, name, and upstreamType.
+	Filters []*ListFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeCloudNativeAPIGatewayServicesLightRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Number of tables in the list
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// List offset
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Filter conditions. Multiple filter conditions have an AND relationship with each other, supporting id, name, and upstreamType.
+	Filters []*ListFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayServicesLightRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayServicesLightRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudNativeAPIGatewayServicesLightRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayServicesLightResponseParams struct {
+	// None.
+	Result *GatewayServices `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudNativeAPIGatewayServicesLightResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudNativeAPIGatewayServicesLightResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayServicesLightResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayServicesLightResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayServicesRequestParams struct {
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Number of tables in the list
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// List offset
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Filter criteria. Multiple filter conditions are in an AND relationship with each other. Support name and upstreamType.
+	Filters []*ListFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeCloudNativeAPIGatewayServicesRequest struct {
+	*tchttp.BaseRequest
+	
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Number of tables in the list
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// List offset
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Filter criteria. Multiple filter conditions are in an AND relationship with each other. Support name and upstreamType.
+	Filters []*ListFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayServicesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayServicesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudNativeAPIGatewayServicesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayServicesResponseParams struct {
+	// None.
+	Result *KongServices `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudNativeAPIGatewayServicesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudNativeAPIGatewayServicesResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayServicesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayServicesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayUpstreamRequestParams struct {
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name.
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
+}
+
+type DescribeCloudNativeAPIGatewayUpstreamRequest struct {
+	*tchttp.BaseRequest
+	
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name.
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayUpstreamRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayUpstreamRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "ServiceName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudNativeAPIGatewayUpstreamRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewayUpstreamResponseParams struct {
+	// None.
+	Result *KongUpstreamList `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudNativeAPIGatewayUpstreamResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudNativeAPIGatewayUpstreamResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudNativeAPIGatewayUpstreamResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewayUpstreamResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewaysRequestParams struct {
+	// Number of returned results, defaults to 20, maximum value is 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Request filter parameters support filtering by instance name, ID, and tag key value (Name, GatewayId, Tag).
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeCloudNativeAPIGatewaysRequest struct {
+	*tchttp.BaseRequest
+	
+	// Number of returned results, defaults to 20, maximum value is 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Request filter parameters support filtering by instance name, ID, and tag key value (Name, GatewayId, Tag).
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeCloudNativeAPIGatewaysRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewaysRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudNativeAPIGatewaysRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudNativeAPIGatewaysResponseParams struct {
+	// Retrieve the response result of the cloud native API gateway instance list.
+	Result *ListCloudNativeAPIGatewayResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudNativeAPIGatewaysResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudNativeAPIGatewaysResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudNativeAPIGatewaysResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudNativeAPIGatewaysResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeGatewayInstancePortResult struct {
+	// Cloud Native API Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Gateway instance protocol port list
+	GatewayInstancePortList []*GatewayInstanceSchemeAndPorts `json:"GatewayInstancePortList,omitnil,omitempty" name:"GatewayInstancePortList"`
+}
+
+// Predefined struct for user
+type DescribeGovernanceLaneGroupsRequestParams struct {
+	// Engine Instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Pagination query offset.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of items per page.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// swimlane name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Lane ID
+	GroupID *string `json:"GroupID,omitnil,omitempty" name:"GroupID"`
+
+	// Whether to display the lane rule list
+	Brief *bool `json:"Brief,omitnil,omitempty" name:"Brief"`
+}
+
+type DescribeGovernanceLaneGroupsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Engine Instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Pagination query offset.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of items per page.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// swimlane name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Lane ID
+	GroupID *string `json:"GroupID,omitnil,omitempty" name:"GroupID"`
+
+	// Whether to display the lane rule list
+	Brief *bool `json:"Brief,omitnil,omitempty" name:"Brief"`
+}
+
+func (r *DescribeGovernanceLaneGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGovernanceLaneGroupsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Name")
+	delete(f, "GroupID")
+	delete(f, "Brief")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeGovernanceLaneGroupsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGovernanceLaneGroupsResponseParams struct {
+	// Total number.
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Lane rule list
+	LaneGroups []*GovernanceLaneGroup `json:"LaneGroups,omitnil,omitempty" name:"LaneGroups"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeGovernanceLaneGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeGovernanceLaneGroupsResponseParams `json:"Response"`
+}
+
+func (r *DescribeGovernanceLaneGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGovernanceLaneGroupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceInfoByIpResult struct {
+	// Instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Group ID
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+}
+
+type DescribeKongCORSResult struct {
+	// Resource type.
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// Resource ID
+	SourceId *string `json:"SourceId,omitnil,omitempty" name:"SourceId"`
+
+	// enabled or not
+	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// Cross-origin Origins
+	Origins []*string `json:"Origins,omitnil,omitempty" name:"Origins"`
+
+	// Cross-Origin Headers
+	Headers []*string `json:"Headers,omitnil,omitempty" name:"Headers"`
+
+	// Cross-origin Methods
+	Methods []*string `json:"Methods,omitnil,omitempty" name:"Methods"`
+
+	// Cross-Origin ExposedHeaders
+	ExposedHeaders []*string `json:"ExposedHeaders,omitnil,omitempty" name:"ExposedHeaders"`
+
+	// Cache time of cross-origin OPTIONS request
+	MaxAge *int64 `json:"MaxAge,omitnil,omitempty" name:"MaxAge"`
+
+	// Whether cross-origin access requests are allowed to carry identity information
+	Credentials *bool `json:"Credentials,omitnil,omitempty" name:"Credentials"`
+
+	// Whether to forward cross-origin access requests to the backend
+	PreFlightContinue *bool `json:"PreFlightContinue,omitnil,omitempty" name:"PreFlightContinue"`
+}
+
+// Predefined struct for user
+type DescribeNativeGatewayServerGroupsRequestParams struct {
+	// Cloud native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned results, defaults to 20.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filter parameters, based on group name and group ID (Name, GroupId) for filter criteria.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeNativeGatewayServerGroupsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cloud native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned results, defaults to 20.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filter parameters, based on group name and group ID (Name, GroupId) for filter criteria.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeNativeGatewayServerGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNativeGatewayServerGroupsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNativeGatewayServerGroupsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNativeGatewayServerGroupsResponseParams struct {
+	// Group list info
+	Result *NativeGatewayServerGroups `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeNativeGatewayServerGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeNativeGatewayServerGroupsResponseParams `json:"Response"`
+}
+
+func (r *DescribeNativeGatewayServerGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNativeGatewayServerGroupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNativeGatewayServiceSourcesRequestParams struct {
+	// Gateway instance ID
+	GatewayID *string `json:"GatewayID,omitnil,omitempty" name:"GatewayID"`
+
+	// Items per page. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Service Source ID
+	SourceID *string `json:"SourceID,omitnil,omitempty" name:"SourceID"`
+
+	// Service Source Instance Name, Fuzzy Search
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// Microservice engine type: TSE-Nacos｜TSE-Consul｜TSE-PolarisMesh｜Customer-Nacos｜Customer-Consul｜Customer-PolarisMesh
+	SourceTypes []*string `json:"SourceTypes,omitnil,omitempty" name:"SourceTypes"`
+
+	// Sorting field data type, currently only support SourceName
+	OrderField *string `json:"OrderField,omitnil,omitempty" name:"OrderField"`
+
+	// Sorting type, AES/DESC
+	OrderType *string `json:"OrderType,omitnil,omitempty" name:"OrderType"`
+}
+
+type DescribeNativeGatewayServiceSourcesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance ID
+	GatewayID *string `json:"GatewayID,omitnil,omitempty" name:"GatewayID"`
+
+	// Items per page. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Service Source ID
+	SourceID *string `json:"SourceID,omitnil,omitempty" name:"SourceID"`
+
+	// Service Source Instance Name, Fuzzy Search
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// Microservice engine type: TSE-Nacos｜TSE-Consul｜TSE-PolarisMesh｜Customer-Nacos｜Customer-Consul｜Customer-PolarisMesh
+	SourceTypes []*string `json:"SourceTypes,omitnil,omitempty" name:"SourceTypes"`
+
+	// Sorting field data type, currently only support SourceName
+	OrderField *string `json:"OrderField,omitnil,omitempty" name:"OrderField"`
+
+	// Sorting type, AES/DESC
+	OrderType *string `json:"OrderType,omitnil,omitempty" name:"OrderType"`
+}
+
+func (r *DescribeNativeGatewayServiceSourcesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNativeGatewayServiceSourcesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayID")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "SourceID")
+	delete(f, "SourceName")
+	delete(f, "SourceTypes")
+	delete(f, "OrderField")
+	delete(f, "OrderType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNativeGatewayServiceSourcesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNativeGatewayServiceSourcesResponseParams struct {
+	// Total instances
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Service source instance list
+	List []*NativeGatewayServiceSourceItem `json:"List,omitnil,omitempty" name:"List"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeNativeGatewayServiceSourcesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeNativeGatewayServiceSourcesResponseParams `json:"Response"`
+}
+
+func (r *DescribeNativeGatewayServiceSourcesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNativeGatewayServiceSourcesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeOneCloudNativeAPIGatewayServiceRequestParams struct {
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name or service ID
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+type DescribeOneCloudNativeAPIGatewayServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name or service ID
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+func (r *DescribeOneCloudNativeAPIGatewayServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeOneCloudNativeAPIGatewayServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeOneCloudNativeAPIGatewayServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeOneCloudNativeAPIGatewayServiceResponseParams struct {
+	// None.
+	Result *KongServiceDetail `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeOneCloudNativeAPIGatewayServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeOneCloudNativeAPIGatewayServiceResponseParams `json:"Response"`
+}
+
+func (r *DescribeOneCloudNativeAPIGatewayServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeOneCloudNativeAPIGatewayServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePublicAddressConfigRequestParams struct {
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Query public network information of this group. If not specified, query all public network load balance information of the instance.
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+}
+
+type DescribePublicAddressConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Query public network information of this group. If not specified, query all public network load balance information of the instance.
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+}
+
+func (r *DescribePublicAddressConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePublicAddressConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "GroupId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePublicAddressConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePublicAddressConfigResponseParams struct {
+	// Public IP address info
+	Result *DescribePublicAddressConfigResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribePublicAddressConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribePublicAddressConfigResponseParams `json:"Response"`
+}
+
+func (r *DescribePublicAddressConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePublicAddressConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribePublicAddressConfigResult struct {
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Public IP address info
+	ConfigList []*PublicAddressConfig `json:"ConfigList,omitnil,omitempty" name:"ConfigList"`
+
+	// Total number	
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+}
+
+// Predefined struct for user
+type DescribePublicNetworkRequestParams struct {
+	// Cloud native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// gateway group ID
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Network ID.
+	NetworkId *string `json:"NetworkId,omitnil,omitempty" name:"NetworkId"`
+}
+
+type DescribePublicNetworkRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cloud native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// gateway group ID
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Network ID.
+	NetworkId *string `json:"NetworkId,omitnil,omitempty" name:"NetworkId"`
+}
+
+func (r *DescribePublicNetworkRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePublicNetworkRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "GroupId")
+	delete(f, "NetworkId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePublicNetworkRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePublicNetworkResponseParams struct {
+	// Retrieve the cloud native API gateway public network detailed information response result.
+	Result *DescribePublicNetworkResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribePublicNetworkResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribePublicNetworkResponseParams `json:"Response"`
+}
+
+func (r *DescribePublicNetworkResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePublicNetworkResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribePublicNetworkResult struct {
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// gateway group ID
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Client public network information
+	PublicNetwork *CloudNativeAPIGatewayConfig `json:"PublicNetwork,omitnil,omitempty" name:"PublicNetwork"`
+}
+
+// Predefined struct for user
+type DescribeUpstreamHealthCheckConfigRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Gateway service name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+type DescribeUpstreamHealthCheckConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Gateway service name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+func (r *DescribeUpstreamHealthCheckConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUpstreamHealthCheckConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUpstreamHealthCheckConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUpstreamHealthCheckConfigResponseParams struct {
+	// Health check configuration
+	Result *UpstreamHealthCheckConfig `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeUpstreamHealthCheckConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeUpstreamHealthCheckConfigResponseParams `json:"Response"`
+}
+
+func (r *DescribeUpstreamHealthCheckConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUpstreamHealthCheckConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeWafDomainsRequestParams struct {
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+}
+
+type DescribeWafDomainsRequest struct {
+	*tchttp.BaseRequest
+	
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+}
+
+func (r *DescribeWafDomainsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeWafDomainsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeWafDomainsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeWafDomainsResponseParams struct {
+	// WAF-protected domain name
+	Result *DescribeWafDomainsResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeWafDomainsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeWafDomainsResponseParams `json:"Response"`
+}
+
+func (r *DescribeWafDomainsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeWafDomainsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeWafDomainsResult struct {
+	// WAF-protected domain name list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
+}
+
+// Predefined struct for user
+type DescribeWafProtectionRequestParams struct {
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Type of protection resource.
+	// -Global instance
+	// -Service
+	// -Route
+	// -Object
+	//
+	// Deprecated: Type is deprecated.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Resource type list for protection supports querying multiple types (Global, Service, Route, Object). If left empty, it defaults to querying the Global type.
+	TypeList []*string `json:"TypeList,omitnil,omitempty" name:"TypeList"`
+}
+
+type DescribeWafProtectionRequest struct {
+	*tchttp.BaseRequest
+	
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Type of protection resource.
+	// -Global instance
+	// -Service
+	// -Route
+	// -Object
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Resource type list for protection supports querying multiple types (Global, Service, Route, Object). If left empty, it defaults to querying the Global type.
+	TypeList []*string `json:"TypeList,omitnil,omitempty" name:"TypeList"`
+}
+
+func (r *DescribeWafProtectionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeWafProtectionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Type")
+	delete(f, "TypeList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeWafProtectionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeWafProtectionResponseParams struct {
+	// Protection status
+	Result *DescribeWafProtectionResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeWafProtectionResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeWafProtectionResponseParams `json:"Response"`
+}
+
+func (r *DescribeWafProtectionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeWafProtectionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeWafProtectionResult struct {
+	// Global protection status
+	GlobalStatus *string `json:"GlobalStatus,omitnil,omitempty" name:"GlobalStatus"`
+
+	// Protection status
+	ServicesStatus []*ServiceWafStatus `json:"ServicesStatus,omitnil,omitempty" name:"ServicesStatus"`
+
+	// Route protection status
+	RouteStatus []*RouteWafStatus `json:"RouteStatus,omitnil,omitempty" name:"RouteStatus"`
+
+	// Object protection status
+	ObjectStatus *string `json:"ObjectStatus,omitnil,omitempty" name:"ObjectStatus"`
+}
+
+type ExternalRedis struct {
+	// redis ip
+	RedisHost *string `json:"RedisHost,omitnil,omitempty" name:"RedisHost"`
+
+	// redis password
+	RedisPassword *string `json:"RedisPassword,omitnil,omitempty" name:"RedisPassword"`
+
+	// redis port
+	RedisPort *int64 `json:"RedisPort,omitnil,omitempty" name:"RedisPort"`
+
+	// Timeout interval. Unit: ms
+	RedisTimeout *int64 `json:"RedisTimeout,omitnil,omitempty" name:"RedisTimeout"`
+}
+
+type Filter struct {
+	// Filter parameter name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Filter parameter value
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+}
+
+type GatewayInstanceSchemeAndPorts struct {
+	// Port protocol, selectable HTTP, HTTPS, TCP, and UDP.
+	Scheme *string `json:"Scheme,omitnil,omitempty" name:"Scheme"`
+
+	// port list
+	PortList []*uint64 `json:"PortList,omitnil,omitempty" name:"PortList"`
+}
+
+type GatewayServices struct {
+	// Service list
+	ServiceList []*KongServiceLightPreview `json:"ServiceList,omitnil,omitempty" name:"ServiceList"`
+
+	// Total number of results
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+}
+
+type GovernanceLaneGroup struct {
+	// lane name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Lane group ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Lane entry service list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TrafficEntries []*LaneTrafficEntry `json:"TrafficEntries,omitnil,omitempty" name:"TrafficEntries"`
+
+	// Lane service list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Destinations []*GovernanceServiceDestination `json:"Destinations,omitnil,omitempty" name:"Destinations"`
+
+	// Lane group description
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Lane rule list of ALL lane groups
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Rules []*GovernanceLaneRule `json:"Rules,omitnil,omitempty" name:"Rules"`
+
+	// Rule content summary
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Revision *string `json:"Revision,omitnil,omitempty" name:"Revision"`
+
+	// Creation time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Modification time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
+
+	// Rule consistency status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Consistency *string `json:"Consistency,omitnil,omitempty" name:"Consistency"`
+}
+
+type GovernanceLaneRule struct {
+	// Lane rule ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// lane name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Swimlane group of the lane
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LaneGroup *string `json:"LaneGroup,omitnil,omitempty" name:"LaneGroup"`
+
+	// Rule Enable Status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
+
+	// Traffic Tag
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TrafficLabels []*Argument `json:"TrafficLabels,omitnil,omitempty" name:"TrafficLabels"`
+
+	// Multiple traffic tag matching methods
+	// AND
+	// OR
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TrafficMatchMode *string `json:"TrafficMatchMode,omitnil,omitempty" name:"TrafficMatchMode"`
+
+	// Lane match mode
+	// STRICT: Strict match
+	// PERMISSIVE: Loose match
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LaneMatchMode *string `json:"LaneMatchMode,omitnil,omitempty" name:"LaneMatchMode"`
+
+	// Lane grayscale rule
+	TrafficGray *TrafficGray `json:"TrafficGray,omitnil,omitempty" name:"TrafficGray"`
+
+	// Lane rule description
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Lane tag content
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LaneLabelValue *string `json:"LaneLabelValue,omitnil,omitempty" name:"LaneLabelValue"`
+
+	// Creation time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Enabling time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnableTime *string `json:"EnableTime,omitnil,omitempty" name:"EnableTime"`
+
+	// Modification time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
+
+	// Lane rule priority
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
+
+	// Rule abstract
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Revision *string `json:"Revision,omitnil,omitempty" name:"Revision"`
+}
+
+type GovernanceServiceDestination struct {
+	// Namespace
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Service.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Service *string `json:"Service,omitnil,omitempty" name:"Service"`
+
+	// Instance tag
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Labels []*RoutingDestinationRuleLabel `json:"Labels,omitnil,omitempty" name:"Labels"`
+}
+
+type InstancePort struct {
+	// Listen http port range.
+	HttpPort *string `json:"HttpPort,omitnil,omitempty" name:"HttpPort"`
+
+	// Listen port range for https.
+	HttpsPort *string `json:"HttpsPort,omitnil,omitempty" name:"HttpsPort"`
+
+	// Listen port range for tcp.
+	TcpPort *string `json:"TcpPort,omitnil,omitempty" name:"TcpPort"`
+
+	// Listen udp port range.
+	UdpPort *string `json:"UdpPort,omitnil,omitempty" name:"UdpPort"`
+}
+
+type InstanceTagInfo struct {
+	// Tag key.
+	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
+
+	// Tag value.
+	TagValue *string `json:"TagValue,omitnil,omitempty" name:"TagValue"`
+}
+
+type InternetConfig struct {
+	// Public network address version. Optional: "IPV4" | "IPV6". By default IPV4 if left blank.
+	InternetAddressVersion *string `json:"InternetAddressVersion,omitnil,omitempty" name:"InternetAddressVersion"`
+
+	// Public network payment mode. Currently, only "BANDWIDTH" is selectable. Defaults to "BANDWIDTH" if left blank.
+	InternetPayMode *string `json:"InternetPayMode,omitnil,omitempty" name:"InternetPayMode"`
+
+	// Public network bandwidth.
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Description of load balancing
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Load balancing specification type. Support clb.c2.medium, clb.c3.small, clb.c3.medium, clb.c4.small, clb.c4.medium, clb.c4.large, clb.c4.xlarge. Defaults to shared type.
+	SlaType *string `json:"SlaType,omitnil,omitempty" name:"SlaType"`
+
+	// Whether load balancing is multi-availability zone
+	MultiZoneFlag *bool `json:"MultiZoneFlag,omitnil,omitempty" name:"MultiZoneFlag"`
+
+	// Primary AZ.
+	MasterZoneId *string `json:"MasterZoneId,omitnil,omitempty" name:"MasterZoneId"`
+
+	// standby availability zone
+	SlaveZoneId *string `json:"SlaveZoneId,omitnil,omitempty" name:"SlaveZoneId"`
+}
+
+type KVMapping struct {
+	// key
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// value
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type KeyValue struct {
+	// Key of the condition
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Value of the condition
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type KongActiveHealthCheck struct {
+	// Probe interval for active health check in seconds. 0 means disabled.
+	HealthyInterval *uint64 `json:"HealthyInterval,omitnil,omitempty" name:"HealthyInterval"`
+
+	// Proactive health check exception probe interval, unit: second. 0 indicates disabled.
+	UnHealthyInterval *uint64 `json:"UnHealthyInterval,omitnil,omitempty" name:"UnHealthyInterval"`
+
+	// Path used in GET HTTP request to run as a proactive health check probe. Default: "/".
+	HttpPath *string `json:"HttpPath,omitnil,omitempty" name:"HttpPath"`
+
+	// Timeout for GET HTTP requests, unit: seconds. Default 60.
+	Timeout *float64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+}
+
+type KongCertificate struct {
+	// None.
+	Cert *KongCertificatesPreview `json:"Cert,omitnil,omitempty" name:"Cert"`
+}
+
+type KongCertificatesList struct {
+	// Total Quantity of Certificate Lists
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// None.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CertificatesList []*KongCertificatesPreview `json:"CertificatesList,omitnil,omitempty" name:"CertificatesList"`
+
+	// Total number of pages in the certificate list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: Pages is deprecated.
+	Pages *int64 `json:"Pages,omitnil,omitempty" name:"Pages"`
+}
+
+type KongCertificatesPreview struct {
+	// certificate name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Id
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Bound domain name
+	BindDomains []*string `json:"BindDomains,omitnil,omitempty" name:"BindDomains"`
+
+	// Certificate status: expired.
+	// active
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Certificate in pem format
+	Crt *string `json:"Crt,omitnil,omitempty" name:"Crt"`
+
+	// Certificate Private Key
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// certificate expiration time
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// Certificate upload time
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Certificate issuance time
+	IssueTime *string `json:"IssueTime,omitnil,omitempty" name:"IssueTime"`
+
+	// Certificate source: native (kong custom certificate)
+	// ssl (platform cert)
+	CertSource *string `json:"CertSource,omitnil,omitempty" name:"CertSource"`
+
+	// ssl Platform Certificate Id
+	CertId *string `json:"CertId,omitnil,omitempty" name:"CertId"`
+}
+
+type KongPassiveHealthCheck struct {
+	// Backend target protocol type. Passive health check supports http and tcp. Proactive health check supports http.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
+type KongRoutePreview struct {
+	// Service ID
+	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Service name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// None.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Methods []*string `json:"Methods,omitnil,omitempty" name:"Methods"`
+
+	// None.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Paths []*string `json:"Paths,omitnil,omitempty" name:"Paths"`
+
+	// None.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Hosts []*string `json:"Hosts,omitnil,omitempty" name:"Hosts"`
+
+	// None.
+	Protocols []*string `json:"Protocols,omitnil,omitempty" name:"Protocols"`
+
+	// None.
+	PreserveHost *bool `json:"PreserveHost,omitnil,omitempty" name:"PreserveHost"`
+
+	// None.
+	HttpsRedirectStatusCode *int64 `json:"HttpsRedirectStatusCode,omitnil,omitempty" name:"HttpsRedirectStatusCode"`
+
+	// None.
+	StripPath *bool `json:"StripPath,omitnil,omitempty" name:"StripPath"`
+
+	// None.
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
+
+	// Is mandatory HTTPS enabled?
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: ForceHttps is deprecated.
+	ForceHttps *bool `json:"ForceHttps,omitnil,omitempty" name:"ForceHttps"`
+
+	// Service name
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
+
+	// Service ID
+	ServiceID *string `json:"ServiceID,omitnil,omitempty" name:"ServiceID"`
+
+	// Destination Port
+	DestinationPorts []*uint64 `json:"DestinationPorts,omitnil,omitempty" name:"DestinationPorts"`
+
+	// Headers of the route
+	Headers []*KVMapping `json:"Headers,omitnil,omitempty" name:"Headers"`
+
+	// Whether to cache the request body, default true
+	RequestBuffering *bool `json:"RequestBuffering,omitnil,omitempty" name:"RequestBuffering"`
+
+	// Whether to cache response body, default true
+	ResponseBuffering *bool `json:"ResponseBuffering,omitnil,omitempty" name:"ResponseBuffering"`
+
+	// Regular Priority
+	RegexPriority *int64 `json:"RegexPriority,omitnil,omitempty" name:"RegexPriority"`
+
+	// querystring parameter
+	QueryStringParameters []*KVMapping `json:"QueryStringParameters,omitnil,omitempty" name:"QueryStringParameters"`
+}
+
+type KongServiceDetail struct {
+	// service ID
+	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Service name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Backend protocol
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
+
+	// Backend path
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+
+	// Backend delay in milliseconds
+	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// Number of retries.
+	Retries *int64 `json:"Retries,omitnil,omitempty" name:"Retries"`
+
+	// Tag.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// backend configuration
+	UpstreamInfo *KongUpstreamInfo `json:"UpstreamInfo,omitnil,omitempty" name:"UpstreamInfo"`
+
+	// Backend type
+	UpstreamType *string `json:"UpstreamType,omitnil,omitempty" name:"UpstreamType"`
+
+	// Whether it is editable.
+	Editable *bool `json:"Editable,omitnil,omitempty" name:"Editable"`
+
+	// Creation time.
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
+}
+
+type KongServiceLightPreview struct {
+	// service ID
+	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Service name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// backend configuration
+	UpstreamInfo *KongUpstreamInfo `json:"UpstreamInfo,omitnil,omitempty" name:"UpstreamInfo"`
+
+	// Backend type
+	UpstreamType *string `json:"UpstreamType,omitnil,omitempty" name:"UpstreamType"`
+
+	// Creation time.
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
+
+	// request path
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+
+	// Backend protocol
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
+
+	// Number of retries.
+	Retries *uint64 `json:"Retries,omitnil,omitempty" name:"Retries"`
+
+	// Backend delay in milliseconds
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+}
+
+type KongServicePreview struct {
+	// service ID
+	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Service name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Tag.
+	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// backend configuration
+	UpstreamInfo *KongUpstreamInfo `json:"UpstreamInfo,omitnil,omitempty" name:"UpstreamInfo"`
+
+	// Backend type
+	UpstreamType *string `json:"UpstreamType,omitnil,omitempty" name:"UpstreamType"`
+
+	// Creation time.
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
+
+	// Whether it is editable.
+	Editable *bool `json:"Editable,omitnil,omitempty" name:"Editable"`
+
+	// request path
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+}
+
+type KongServiceRouteList struct {
+	// None.
+	RouteList []*KongRoutePreview `json:"RouteList,omitnil,omitempty" name:"RouteList"`
+
+	// Total number.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+}
+
+type KongServices struct {
+	// Service list of the kong instance
+	ServiceList []*KongServicePreview `json:"ServiceList,omitnil,omitempty" name:"ServiceList"`
+
+	// Total Quantity of Lists
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+}
+
+type KongTarget struct {
+	// Host
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// Port.
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// Weight
+	Weight *int64 `json:"Weight,omitnil,omitempty" name:"Weight"`
+
+	// Health status.
+	Health *string `json:"Health,omitnil,omitempty" name:"Health"`
+
+	// Creation time.
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
+
+	// Source of the Target
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// CVM instance ID
+	CvmInstanceId *string `json:"CvmInstanceId,omitnil,omitempty" name:"CvmInstanceId"`
+
+	// CVM instance name.
+	CvmInstanceName *string `json:"CvmInstanceName,omitnil,omitempty" name:"CvmInstanceName"`
+
+	// target tag
+	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+type KongUpstreamInfo struct {
+	// IP or domain
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// Port.
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// Service source ID
+	SourceID *string `json:"SourceID,omitnil,omitempty" name:"SourceID"`
+
+	// Namespace
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Service (registration center or service in Kubernetes) name
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
+
+	// The backend type is IPList when provided by the service
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Targets []*KongTarget `json:"Targets,omitnil,omitempty" name:"Targets"`
+
+	// Service source type
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// SCF Function Type
+	ScfType *string `json:"ScfType,omitnil,omitempty" name:"ScfType"`
+
+	// SCF function namespace
+	ScfNamespace *string `json:"ScfNamespace,omitnil,omitempty" name:"ScfNamespace"`
+
+	// SCF Function Name
+	ScfLambdaName *string `json:"ScfLambdaName,omitnil,omitempty" name:"ScfLambdaName"`
+
+	// SCF Function Version
+	ScfLambdaQualifier *string `json:"ScfLambdaQualifier,omitnil,omitempty" name:"ScfLambdaQualifier"`
+
+	// Cold start time, in seconds
+	SlowStart *int64 `json:"SlowStart,omitnil,omitempty" name:"SlowStart"`
+
+	// Load balancing algorithm, defaults to round-robin, also supports least-connections, consisten_hashing
+	Algorithm *string `json:"Algorithm,omitnil,omitempty" name:"Algorithm"`
+
+	// Auto scaling group ID of CVM
+	AutoScalingGroupID *string `json:"AutoScalingGroupID,omitnil,omitempty" name:"AutoScalingGroupID"`
+
+	// CVM auto scaling group port
+	AutoScalingCvmPort *uint64 `json:"AutoScalingCvmPort,omitnil,omitempty" name:"AutoScalingCvmPort"`
+
+	// TAT command status of the CVM used in the auto scaling group
+	AutoScalingTatCmdStatus *string `json:"AutoScalingTatCmdStatus,omitnil,omitempty" name:"AutoScalingTatCmdStatus"`
+
+	// CVM auto scaling group lifecycle hook status
+	AutoScalingHookStatus *string `json:"AutoScalingHookStatus,omitnil,omitempty" name:"AutoScalingHookStatus"`
+
+	// Service source name.
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// Precise service source type. Type passed in when creating a service source.
+	RealSourceType *string `json:"RealSourceType,omitnil,omitempty" name:"RealSourceType"`
+
+	// upstream health status HEALTHY (healthy), UNHEALTHY (abnormal), HEALTHCHECKS_OFF (not enabled), and NONE (health checks not supported)
+	HealthStatus *string `json:"HealthStatus,omitnil,omitempty" name:"HealthStatus"`
+
+	// Whether CAM authentication is enabled for SCF. Enabled by default (true) when left blank.
+	ScfCamAuthEnable *bool `json:"ScfCamAuthEnable,omitnil,omitempty" name:"ScfCamAuthEnable"`
+
+	// Whether Base64 encoding is enabled for SCF, default false
+	ScfIsBase64Encoded *bool `json:"ScfIsBase64Encoded,omitnil,omitempty" name:"ScfIsBase64Encoded"`
+
+	// Whether response integration is enabled for the cloud function, default false
+	ScfIsIntegratedResponse *bool `json:"ScfIsIntegratedResponse,omitnil,omitempty" name:"ScfIsIntegratedResponse"`
+}
+
+type KongUpstreamList struct {
+	// None.
+	UpstreamList []*KongUpstreamPreview `json:"UpstreamList,omitnil,omitempty" name:"UpstreamList"`
+}
+
+type KongUpstreamPreview struct {
+	// Service ID
+	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Service name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Backend configuration
+	Target []*KongTarget `json:"Target,omitnil,omitempty" name:"Target"`
+}
+
+type Label struct {
+	// Tag key name
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Tag value.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type LaneTrafficEntry struct {
+	// // If type == "polarismesh.cn/gateway/tse-gateway", the selector is TSEGatewaySelector.
+	// // type == "polarismesh.cn/gateway/spring-cloud-gateway", selector is ServiceGatewaySelector
+	// // If type == "polarismesh.cn/service", selector is ServiceSelector
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EntryType *string `json:"EntryType,omitnil,omitempty" name:"EntryType"`
+
+	// TSE cloud-native gateway selector
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TSEGatewaySelector *TSEGatewaySelector `json:"TSEGatewaySelector,omitnil,omitempty" name:"TSEGatewaySelector"`
+
+	// Microservice gateway selector
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ServiceGatewaySelector *ServiceGatewaySelector `json:"ServiceGatewaySelector,omitnil,omitempty" name:"ServiceGatewaySelector"`
+
+	// Standard microservice selector
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ServiceSelector *ServiceSelector `json:"ServiceSelector,omitnil,omitempty" name:"ServiceSelector"`
+}
+
+type LimitRule struct {
+	// Request matching conditions
+	Filters []*RuleFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Parameter throttling based on composite
+	LimitBy []*KeyValue `json:"LimitBy,omitnil,omitempty" name:"LimitBy"`
+
+	// Throttling threshold
+	QpsThresholds []*QpsThreshold `json:"QpsThresholds,omitnil,omitempty" name:"QpsThresholds"`
+
+	// Precise throttling threshold
+	AccurateQpsThresholds []*AccurateQpsThreshold `json:"AccurateQpsThresholds,omitnil,omitempty" name:"AccurateQpsThresholds"`
+}
+
+type ListCloudNativeAPIGatewayResult struct {
+	// Total quantity.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Cloud Native API gateway instance list.
+	GatewayList []*DescribeCloudNativeAPIGatewayResult `json:"GatewayList,omitnil,omitempty" name:"GatewayList"`
+}
+
+type ListCloudNativeAPIGatewayStrategyBindingGroupInfoResult struct {
+	// Quantity.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Cloud native API gateway instance policy binding gateway grouping list
+	GroupInfos []*CloudNativeAPIGatewayStrategyBindingGroupInfo `json:"GroupInfos,omitnil,omitempty" name:"GroupInfos"`
+}
+
+type ListCloudNativeAPIGatewayStrategyResult struct {
+	// Total quantity.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Cloud Native API gateway instance policy list.
+	StrategyList []*CloudNativeAPIGatewayStrategy `json:"StrategyList,omitnil,omitempty" name:"StrategyList"`
+}
+
+type ListFilter struct {
+	// Filter fields
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Values after filtering
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+// Predefined struct for user
+type ModifyAutoScalerResourceStrategyRequestParams struct {
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Policy ID
+	StrategyId *string `json:"StrategyId,omitnil,omitempty" name:"StrategyId"`
+
+	// Policy name.
+	StrategyName *string `json:"StrategyName,omitnil,omitempty" name:"StrategyName"`
+
+	// Policy description
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Metric scaling configuration
+	Config *CloudNativeAPIGatewayStrategyAutoScalerConfig `json:"Config,omitnil,omitempty" name:"Config"`
+
+	// Scheduled scaling configuration
+	//
+	// Deprecated: CronScalerConfig is deprecated.
+	CronScalerConfig *CloudNativeAPIGatewayStrategyCronScalerConfig `json:"CronScalerConfig,omitnil,omitempty" name:"CronScalerConfig"`
+
+	// Maximum number of nodes
+	//
+	// Deprecated: MaxReplicas is deprecated.
+	MaxReplicas *int64 `json:"MaxReplicas,omitnil,omitempty" name:"MaxReplicas"`
+
+	// Metric scaling configuration
+	CronConfig *CloudNativeAPIGatewayStrategyCronScalerConfig `json:"CronConfig,omitnil,omitempty" name:"CronConfig"`
+}
+
+type ModifyAutoScalerResourceStrategyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Policy ID
+	StrategyId *string `json:"StrategyId,omitnil,omitempty" name:"StrategyId"`
+
+	// Policy name.
+	StrategyName *string `json:"StrategyName,omitnil,omitempty" name:"StrategyName"`
+
+	// Policy description
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Metric scaling configuration
+	Config *CloudNativeAPIGatewayStrategyAutoScalerConfig `json:"Config,omitnil,omitempty" name:"Config"`
+
+	// Scheduled scaling configuration
+	CronScalerConfig *CloudNativeAPIGatewayStrategyCronScalerConfig `json:"CronScalerConfig,omitnil,omitempty" name:"CronScalerConfig"`
+
+	// Maximum number of nodes
+	MaxReplicas *int64 `json:"MaxReplicas,omitnil,omitempty" name:"MaxReplicas"`
+
+	// Metric scaling configuration
+	CronConfig *CloudNativeAPIGatewayStrategyCronScalerConfig `json:"CronConfig,omitnil,omitempty" name:"CronConfig"`
+}
+
+func (r *ModifyAutoScalerResourceStrategyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAutoScalerResourceStrategyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "StrategyId")
+	delete(f, "StrategyName")
+	delete(f, "Description")
+	delete(f, "Config")
+	delete(f, "CronScalerConfig")
+	delete(f, "MaxReplicas")
+	delete(f, "CronConfig")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAutoScalerResourceStrategyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyAutoScalerResourceStrategyResponseParams struct {
+	// Success status
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyAutoScalerResourceStrategyResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyAutoScalerResourceStrategyResponseParams `json:"Response"`
+}
+
+func (r *ModifyAutoScalerResourceStrategyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAutoScalerResourceStrategyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCloudNativeAPIGatewayCanaryRuleRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service ID
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
+
+	// Priority. The grayscale rule priority of a service is unique.
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
+
+	// Grayscale rule configuration
+	CanaryRule *CloudNativeAPIGatewayCanaryRule `json:"CanaryRule,omitnil,omitempty" name:"CanaryRule"`
+
+	// Grayscale rule configuration list. If configured, this parameter takes precedence and the Priority and CanaryRule parameters are ignored.
+	CanaryRuleList []*CanaryPriorityRule `json:"CanaryRuleList,omitnil,omitempty" name:"CanaryRuleList"`
+}
+
+type ModifyCloudNativeAPIGatewayCanaryRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service ID
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
+
+	// Priority. The grayscale rule priority of a service is unique.
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
+
+	// Grayscale rule configuration
+	CanaryRule *CloudNativeAPIGatewayCanaryRule `json:"CanaryRule,omitnil,omitempty" name:"CanaryRule"`
+
+	// Grayscale rule configuration list. If configured, this parameter takes precedence and the Priority and CanaryRule parameters are ignored.
+	CanaryRuleList []*CanaryPriorityRule `json:"CanaryRuleList,omitnil,omitempty" name:"CanaryRuleList"`
+}
+
+func (r *ModifyCloudNativeAPIGatewayCanaryRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudNativeAPIGatewayCanaryRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "ServiceId")
+	delete(f, "Priority")
+	delete(f, "CanaryRule")
+	delete(f, "CanaryRuleList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCloudNativeAPIGatewayCanaryRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCloudNativeAPIGatewayCanaryRuleResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyCloudNativeAPIGatewayCanaryRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyCloudNativeAPIGatewayCanaryRuleResponseParams `json:"Response"`
+}
+
+func (r *ModifyCloudNativeAPIGatewayCanaryRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudNativeAPIGatewayCanaryRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCloudNativeAPIGatewayCertificateRequestParams struct {
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Certificate ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Certificate name, will already be deprecated
+	//
+	// Deprecated: Name is deprecated.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Certificate private key. Required when CertSource is native.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Certificate in pem format. Required when CertSource is native.
+	Crt *string `json:"Crt,omitnil,omitempty" name:"Crt"`
+
+	// Bound domain names will already be deprecated
+	//
+	// Deprecated: BindDomains is deprecated.
+	BindDomains []*string `json:"BindDomains,omitnil,omitempty" name:"BindDomains"`
+
+	// ssl platform cert Id. Required when CertSource is ssl.
+	CertId *string `json:"CertId,omitnil,omitempty" name:"CertId"`
+
+	// Certificate source
+	// -ssl (Platform Cert), default value
+	// -native (kong custom certificate) 
+	CertSource *string `json:"CertSource,omitnil,omitempty" name:"CertSource"`
+}
+
+type ModifyCloudNativeAPIGatewayCertificateRequest struct {
+	*tchttp.BaseRequest
+	
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Certificate ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Certificate name, will already be deprecated
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Certificate private key. Required when CertSource is native.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Certificate in pem format. Required when CertSource is native.
+	Crt *string `json:"Crt,omitnil,omitempty" name:"Crt"`
+
+	// Bound domain names will already be deprecated
+	BindDomains []*string `json:"BindDomains,omitnil,omitempty" name:"BindDomains"`
+
+	// ssl platform cert Id. Required when CertSource is ssl.
+	CertId *string `json:"CertId,omitnil,omitempty" name:"CertId"`
+
+	// Certificate source
+	// -ssl (Platform Cert), default value
+	// -native (kong custom certificate) 
+	CertSource *string `json:"CertSource,omitnil,omitempty" name:"CertSource"`
+}
+
+func (r *ModifyCloudNativeAPIGatewayCertificateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudNativeAPIGatewayCertificateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Id")
+	delete(f, "Name")
+	delete(f, "Key")
+	delete(f, "Crt")
+	delete(f, "BindDomains")
+	delete(f, "CertId")
+	delete(f, "CertSource")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCloudNativeAPIGatewayCertificateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCloudNativeAPIGatewayCertificateResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyCloudNativeAPIGatewayCertificateResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyCloudNativeAPIGatewayCertificateResponseParams `json:"Response"`
+}
+
+func (r *ModifyCloudNativeAPIGatewayCertificateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudNativeAPIGatewayCertificateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCloudNativeAPIGatewayRequestParams struct {
+	// Cloud native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Cloud Native API Gateway name, supports up to 60 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Cloud native API gateway description, supports up to 120 characters.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Whether CLS log is enabled. The value can only be true temporarily, meaning it can only be changed from disabled to enabled.
+	EnableCls *bool `json:"EnableCls,omitnil,omitempty" name:"EnableCls"`
+
+	// Public network billing mode. Option values: BANDWIDTH | TRAFFIC, which means billing by bandwidth or by traffic.
+	InternetPayMode *string `json:"InternetPayMode,omitnil,omitempty" name:"InternetPayMode"`
+
+	// Enable instance deletion protection, default false
+	DeleteProtect *bool `json:"DeleteProtect,omitnil,omitempty" name:"DeleteProtect"`
+}
+
+type ModifyCloudNativeAPIGatewayRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cloud native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Cloud Native API Gateway name, supports up to 60 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Cloud native API gateway description, supports up to 120 characters.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Whether CLS log is enabled. The value can only be true temporarily, meaning it can only be changed from disabled to enabled.
+	EnableCls *bool `json:"EnableCls,omitnil,omitempty" name:"EnableCls"`
+
+	// Public network billing mode. Option values: BANDWIDTH | TRAFFIC, which means billing by bandwidth or by traffic.
+	InternetPayMode *string `json:"InternetPayMode,omitnil,omitempty" name:"InternetPayMode"`
+
+	// Enable instance deletion protection, default false
+	DeleteProtect *bool `json:"DeleteProtect,omitnil,omitempty" name:"DeleteProtect"`
+}
+
+func (r *ModifyCloudNativeAPIGatewayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudNativeAPIGatewayRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Name")
+	delete(f, "Description")
+	delete(f, "EnableCls")
+	delete(f, "InternetPayMode")
+	delete(f, "DeleteProtect")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCloudNativeAPIGatewayRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCloudNativeAPIGatewayResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyCloudNativeAPIGatewayResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyCloudNativeAPIGatewayResponseParams `json:"Response"`
+}
+
+func (r *ModifyCloudNativeAPIGatewayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudNativeAPIGatewayResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCloudNativeAPIGatewayRouteRateLimitRequestParams struct {
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Route id or routing name.
+	// "Unnamed" is not supported.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Configure stream
+	LimitDetail *CloudNativeAPIGatewayRateLimitDetail `json:"LimitDetail,omitnil,omitempty" name:"LimitDetail"`
+}
+
+type ModifyCloudNativeAPIGatewayRouteRateLimitRequest struct {
+	*tchttp.BaseRequest
+	
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Route id or routing name.
+	// "Unnamed" is not supported.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Configure stream
+	LimitDetail *CloudNativeAPIGatewayRateLimitDetail `json:"LimitDetail,omitnil,omitempty" name:"LimitDetail"`
+}
+
+func (r *ModifyCloudNativeAPIGatewayRouteRateLimitRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudNativeAPIGatewayRouteRateLimitRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Id")
+	delete(f, "LimitDetail")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCloudNativeAPIGatewayRouteRateLimitRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCloudNativeAPIGatewayRouteRateLimitResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyCloudNativeAPIGatewayRouteRateLimitResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyCloudNativeAPIGatewayRouteRateLimitResponseParams `json:"Response"`
+}
+
+func (r *ModifyCloudNativeAPIGatewayRouteRateLimitResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudNativeAPIGatewayRouteRateLimitResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCloudNativeAPIGatewayRouteRequestParams struct {
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// ID of the associated service
+	ServiceID *string `json:"ServiceID,omitnil,omitempty" name:"ServiceID"`
+
+	// Route ID, unique at the instance level
+	RouteID *string `json:"RouteID,omitnil,omitempty" name:"RouteID"`
+
+	// Route name, unique at the instance level, does not provide
+	RouteName *string `json:"RouteName,omitnil,omitempty" name:"RouteName"`
+
+	// Route method. Available values:
+	// - GET
+	// - POST
+	// - DELETE
+	// - PUT
+	// - OPTIONS
+	// - PATCH
+	// - HEAD
+	// - ANY
+	// - TRACE
+	// - COPY
+	// - MOVE
+	// - PROPFIND
+	// - PROPPATCH
+	// - MKCOL
+	// - LOCK
+	// - UNLOCK
+	Methods []*string `json:"Methods,omitnil,omitempty" name:"Methods"`
+
+	// Domain name of the route
+	Hosts []*string `json:"Hosts,omitnil,omitempty" name:"Hosts"`
+
+	// Path of the route
+	Paths []*string `json:"Paths,omitnil,omitempty" name:"Paths"`
+
+	// Route protocol, selectable
+	// - https
+	// - http
+	Protocols []*string `json:"Protocols,omitnil,omitempty" name:"Protocols"`
+
+	// Preserve Host when forwarding to backend
+	PreserveHost *bool `json:"PreserveHost,omitnil,omitempty" name:"PreserveHost"`
+
+	// HTTP redirection status code
+	HttpsRedirectStatusCode *int64 `json:"HttpsRedirectStatusCode,omitnil,omitempty" name:"HttpsRedirectStatusCode"`
+
+	// StripPath when forwarding to backend
+	StripPath *bool `json:"StripPath,omitnil,omitempty" name:"StripPath"`
+
+	// Whether to enable mandatory HTTPS
+	//
+	// Deprecated: ForceHttps is deprecated.
+	ForceHttps *bool `json:"ForceHttps,omitnil,omitempty" name:"ForceHttps"`
+
+	// Destination port for Layer 4 match	
+	DestinationPorts []*uint64 `json:"DestinationPorts,omitnil,omitempty" name:"DestinationPorts"`
+
+	// Headers of the route
+	Headers []*KVMapping `json:"Headers,omitnil,omitempty" name:"Headers"`
+
+	// Whether to cache the request body, default true
+	RequestBuffering *bool `json:"RequestBuffering,omitnil,omitempty" name:"RequestBuffering"`
+
+	// Whether to cache response body, default true
+	ResponseBuffering *bool `json:"ResponseBuffering,omitnil,omitempty" name:"ResponseBuffering"`
+
+	// Add priority
+	RegexPriority *int64 `json:"RegexPriority,omitnil,omitempty" name:"RegexPriority"`
+
+	// QueryString parameter
+	QueryStringParameters []*KVMapping `json:"QueryStringParameters,omitnil,omitempty" name:"QueryStringParameters"`
+}
+
+type ModifyCloudNativeAPIGatewayRouteRequest struct {
+	*tchttp.BaseRequest
+	
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// ID of the associated service
+	ServiceID *string `json:"ServiceID,omitnil,omitempty" name:"ServiceID"`
+
+	// Route ID, unique at the instance level
+	RouteID *string `json:"RouteID,omitnil,omitempty" name:"RouteID"`
+
+	// Route name, unique at the instance level, does not provide
+	RouteName *string `json:"RouteName,omitnil,omitempty" name:"RouteName"`
+
+	// Route method. Available values:
+	// - GET
+	// - POST
+	// - DELETE
+	// - PUT
+	// - OPTIONS
+	// - PATCH
+	// - HEAD
+	// - ANY
+	// - TRACE
+	// - COPY
+	// - MOVE
+	// - PROPFIND
+	// - PROPPATCH
+	// - MKCOL
+	// - LOCK
+	// - UNLOCK
+	Methods []*string `json:"Methods,omitnil,omitempty" name:"Methods"`
+
+	// Domain name of the route
+	Hosts []*string `json:"Hosts,omitnil,omitempty" name:"Hosts"`
+
+	// Path of the route
+	Paths []*string `json:"Paths,omitnil,omitempty" name:"Paths"`
+
+	// Route protocol, selectable
+	// - https
+	// - http
+	Protocols []*string `json:"Protocols,omitnil,omitempty" name:"Protocols"`
+
+	// Preserve Host when forwarding to backend
+	PreserveHost *bool `json:"PreserveHost,omitnil,omitempty" name:"PreserveHost"`
+
+	// HTTP redirection status code
+	HttpsRedirectStatusCode *int64 `json:"HttpsRedirectStatusCode,omitnil,omitempty" name:"HttpsRedirectStatusCode"`
+
+	// StripPath when forwarding to backend
+	StripPath *bool `json:"StripPath,omitnil,omitempty" name:"StripPath"`
+
+	// Whether to enable mandatory HTTPS
+	ForceHttps *bool `json:"ForceHttps,omitnil,omitempty" name:"ForceHttps"`
+
+	// Destination port for Layer 4 match	
+	DestinationPorts []*uint64 `json:"DestinationPorts,omitnil,omitempty" name:"DestinationPorts"`
+
+	// Headers of the route
+	Headers []*KVMapping `json:"Headers,omitnil,omitempty" name:"Headers"`
+
+	// Whether to cache the request body, default true
+	RequestBuffering *bool `json:"RequestBuffering,omitnil,omitempty" name:"RequestBuffering"`
+
+	// Whether to cache response body, default true
+	ResponseBuffering *bool `json:"ResponseBuffering,omitnil,omitempty" name:"ResponseBuffering"`
+
+	// Add priority
+	RegexPriority *int64 `json:"RegexPriority,omitnil,omitempty" name:"RegexPriority"`
+
+	// QueryString parameter
+	QueryStringParameters []*KVMapping `json:"QueryStringParameters,omitnil,omitempty" name:"QueryStringParameters"`
+}
+
+func (r *ModifyCloudNativeAPIGatewayRouteRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudNativeAPIGatewayRouteRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "ServiceID")
+	delete(f, "RouteID")
+	delete(f, "RouteName")
+	delete(f, "Methods")
+	delete(f, "Hosts")
+	delete(f, "Paths")
+	delete(f, "Protocols")
+	delete(f, "PreserveHost")
+	delete(f, "HttpsRedirectStatusCode")
+	delete(f, "StripPath")
+	delete(f, "ForceHttps")
+	delete(f, "DestinationPorts")
+	delete(f, "Headers")
+	delete(f, "RequestBuffering")
+	delete(f, "ResponseBuffering")
+	delete(f, "RegexPriority")
+	delete(f, "QueryStringParameters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCloudNativeAPIGatewayRouteRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCloudNativeAPIGatewayRouteResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyCloudNativeAPIGatewayRouteResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyCloudNativeAPIGatewayRouteResponseParams `json:"Response"`
+}
+
+func (r *ModifyCloudNativeAPIGatewayRouteResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudNativeAPIGatewayRouteResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCloudNativeAPIGatewayServiceRateLimitRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name or service ID
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Configure throttling
+	LimitDetail *CloudNativeAPIGatewayRateLimitDetail `json:"LimitDetail,omitnil,omitempty" name:"LimitDetail"`
+}
+
+type ModifyCloudNativeAPIGatewayServiceRateLimitRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name or service ID
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Configure throttling
+	LimitDetail *CloudNativeAPIGatewayRateLimitDetail `json:"LimitDetail,omitnil,omitempty" name:"LimitDetail"`
+}
+
+func (r *ModifyCloudNativeAPIGatewayServiceRateLimitRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudNativeAPIGatewayServiceRateLimitRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Name")
+	delete(f, "LimitDetail")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCloudNativeAPIGatewayServiceRateLimitRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCloudNativeAPIGatewayServiceRateLimitResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyCloudNativeAPIGatewayServiceRateLimitResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyCloudNativeAPIGatewayServiceRateLimitResponseParams `json:"Response"`
+}
+
+func (r *ModifyCloudNativeAPIGatewayServiceRateLimitResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudNativeAPIGatewayServiceRateLimitResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCloudNativeAPIGatewayServiceRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Request protocol: 
+	// - https 
+	// - http 
+	// - tcp 
+	// - udp
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
+
+	// Timeout interval. Unit: ms
+	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// Number of retries.
+	Retries *int64 `json:"Retries,omitnil,omitempty" name:"Retries"`
+
+	// Service type 
+	// - Kubernetes 
+	// - Registry
+	// - IPList
+	// - HostIP
+	// - Scf	
+	UpstreamType *string `json:"UpstreamType,omitnil,omitempty" name:"UpstreamType"`
+
+	// service configuration
+	UpstreamInfo *KongUpstreamInfo `json:"UpstreamInfo,omitnil,omitempty" name:"UpstreamInfo"`
+
+	// service ID
+	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Request path
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+}
+
+type ModifyCloudNativeAPIGatewayServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Request protocol: 
+	// - https 
+	// - http 
+	// - tcp 
+	// - udp
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
+
+	// Timeout interval. Unit: ms
+	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// Number of retries.
+	Retries *int64 `json:"Retries,omitnil,omitempty" name:"Retries"`
+
+	// Service type 
+	// - Kubernetes 
+	// - Registry
+	// - IPList
+	// - HostIP
+	// - Scf	
+	UpstreamType *string `json:"UpstreamType,omitnil,omitempty" name:"UpstreamType"`
+
+	// service configuration
+	UpstreamInfo *KongUpstreamInfo `json:"UpstreamInfo,omitnil,omitempty" name:"UpstreamInfo"`
+
+	// service ID
+	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Request path
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+}
+
+func (r *ModifyCloudNativeAPIGatewayServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudNativeAPIGatewayServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Name")
+	delete(f, "Protocol")
+	delete(f, "Timeout")
+	delete(f, "Retries")
+	delete(f, "UpstreamType")
+	delete(f, "UpstreamInfo")
+	delete(f, "ID")
+	delete(f, "Path")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCloudNativeAPIGatewayServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCloudNativeAPIGatewayServiceResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyCloudNativeAPIGatewayServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyCloudNativeAPIGatewayServiceResponseParams `json:"Response"`
+}
+
+func (r *ModifyCloudNativeAPIGatewayServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudNativeAPIGatewayServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyConsoleNetworkRequestParams struct {
+	// Cloud Native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Network type:
+	// -Open public network
+	// -Internal private network (not currently supported)
+	NetworkType *string `json:"NetworkType,omitnil,omitempty" name:"NetworkType"`
+
+	// Enable the Konga network. Default is Open.
+	// -Open
+	// - Close: disabled.
+	Operate *string `json:"Operate,omitnil,omitempty" name:"Operate"`
+
+	// Access control policy
+	AccessControl *NetworkAccessControl `json:"AccessControl,omitnil,omitempty" name:"AccessControl"`
+}
+
+type ModifyConsoleNetworkRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cloud Native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Network type:
+	// -Open public network
+	// -Internal private network (not currently supported)
+	NetworkType *string `json:"NetworkType,omitnil,omitempty" name:"NetworkType"`
+
+	// Enable the Konga network. Default is Open.
+	// -Open
+	// - Close: disabled.
+	Operate *string `json:"Operate,omitnil,omitempty" name:"Operate"`
+
+	// Access control policy
+	AccessControl *NetworkAccessControl `json:"AccessControl,omitnil,omitempty" name:"AccessControl"`
+}
+
+func (r *ModifyConsoleNetworkRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyConsoleNetworkRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "NetworkType")
+	delete(f, "Operate")
+	delete(f, "AccessControl")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyConsoleNetworkRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyConsoleNetworkResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyConsoleNetworkResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyConsoleNetworkResponseParams `json:"Response"`
+}
+
+func (r *ModifyConsoleNetworkResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyConsoleNetworkResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyGovernanceLaneGroupsRequestParams struct {
+	// Engine Instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Lane group rule list
+	LaneGroups []*GovernanceLaneGroup `json:"LaneGroups,omitnil,omitempty" name:"LaneGroups"`
+}
+
+type ModifyGovernanceLaneGroupsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Engine Instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Lane group rule list
+	LaneGroups []*GovernanceLaneGroup `json:"LaneGroups,omitnil,omitempty" name:"LaneGroups"`
+}
+
+func (r *ModifyGovernanceLaneGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyGovernanceLaneGroupsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "LaneGroups")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyGovernanceLaneGroupsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyGovernanceLaneGroupsResponseParams struct {
+	// Whether the creation succeeded
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyGovernanceLaneGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyGovernanceLaneGroupsResponseParams `json:"Response"`
+}
+
+func (r *ModifyGovernanceLaneGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyGovernanceLaneGroupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNativeGatewayServerGroupRequestParams struct {
+	// Cloud Native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// gateway group id
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Cloud native API gateway name supports up to 60 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Cloud native API gateway description supports up to 120 characters.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+type ModifyNativeGatewayServerGroupRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cloud Native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// gateway group id
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Cloud native API gateway name supports up to 60 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Cloud native API gateway description supports up to 120 characters.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+func (r *ModifyNativeGatewayServerGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNativeGatewayServerGroupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "GroupId")
+	delete(f, "Name")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNativeGatewayServerGroupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNativeGatewayServerGroupResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyNativeGatewayServerGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyNativeGatewayServerGroupResponseParams `json:"Response"`
+}
+
+func (r *ModifyNativeGatewayServerGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNativeGatewayServerGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNativeGatewayServiceSourceRequestParams struct {
+	// Gateway instance ID
+	GatewayID *string `json:"GatewayID,omitnil,omitempty" name:"GatewayID"`
+
+	// Service Source Instance ID
+	SourceID *string `json:"SourceID,omitnil,omitempty" name:"SourceID"`
+
+	// Service Source Name
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// Service source instance additional information
+	SourceInfo *SourceInfo `json:"SourceInfo,omitnil,omitempty" name:"SourceInfo"`
+}
+
+type ModifyNativeGatewayServiceSourceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance ID
+	GatewayID *string `json:"GatewayID,omitnil,omitempty" name:"GatewayID"`
+
+	// Service Source Instance ID
+	SourceID *string `json:"SourceID,omitnil,omitempty" name:"SourceID"`
+
+	// Service Source Name
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// Service source instance additional information
+	SourceInfo *SourceInfo `json:"SourceInfo,omitnil,omitempty" name:"SourceInfo"`
+}
+
+func (r *ModifyNativeGatewayServiceSourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNativeGatewayServiceSourceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayID")
+	delete(f, "SourceID")
+	delete(f, "SourceName")
+	delete(f, "SourceInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNativeGatewayServiceSourceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNativeGatewayServiceSourceResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyNativeGatewayServiceSourceResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyNativeGatewayServiceSourceResponseParams `json:"Response"`
+}
+
+func (r *ModifyNativeGatewayServiceSourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNativeGatewayServiceSourceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNetworkAccessStrategyRequestParams struct {
+	// Cloud Native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Group ID
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Network type: 
+	// -Open public network
+	// -Internal private network (not currently supported)
+	NetworkType *string `json:"NetworkType,omitnil,omitempty" name:"NetworkType"`
+
+	// IP address
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// Access control policy
+	AccessControl *NetworkAccessControl `json:"AccessControl,omitnil,omitempty" name:"AccessControl"`
+}
+
+type ModifyNetworkAccessStrategyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cloud Native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Group ID
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Network type: 
+	// -Open public network
+	// -Internal private network (not currently supported)
+	NetworkType *string `json:"NetworkType,omitnil,omitempty" name:"NetworkType"`
+
+	// IP address
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// Access control policy
+	AccessControl *NetworkAccessControl `json:"AccessControl,omitnil,omitempty" name:"AccessControl"`
+}
+
+func (r *ModifyNetworkAccessStrategyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNetworkAccessStrategyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "GroupId")
+	delete(f, "NetworkType")
+	delete(f, "Vip")
+	delete(f, "AccessControl")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNetworkAccessStrategyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNetworkAccessStrategyResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyNetworkAccessStrategyResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyNetworkAccessStrategyResponseParams `json:"Response"`
+}
+
+func (r *ModifyNetworkAccessStrategyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNetworkAccessStrategyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNetworkBasicInfoRequestParams struct {
+	// Cloud Native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Group ID
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Network type:
+	// -Enable public IP address
+	// -Public IPv6 address
+	// -Internal private network
+	NetworkType *string `json:"NetworkType,omitnil,omitempty" name:"NetworkType"`
+
+	// IP address
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// Public network outbound traffic bandwidth, [1,2048]Mbps
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Description of load balancing
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Load balancing specification types support:
+	// -Leave empty for shared type.
+	// -clb.c2.medium: standard specification
+	// -clb.c3.small: High-performance type 1 specification
+	// -clb.c3.medium: High-performance type 2 specification
+	// -clb.c4.small: Super high-performance specification 1
+	// -clb.c4.medium: Super high-performance specification 2
+	// -clb.c4.large: Super high-performance specification 3
+	// -clb.c4.xlarge: Super high-performance 4 specification.
+	SlaType *string `json:"SlaType,omitnil,omitempty" name:"SlaType"`
+}
+
+type ModifyNetworkBasicInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cloud Native API gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Group ID
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Network type:
+	// -Enable public IP address
+	// -Public IPv6 address
+	// -Internal private network
+	NetworkType *string `json:"NetworkType,omitnil,omitempty" name:"NetworkType"`
+
+	// IP address
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// Public network outbound traffic bandwidth, [1,2048]Mbps
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Description of load balancing
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Load balancing specification types support:
+	// -Leave empty for shared type.
+	// -clb.c2.medium: standard specification
+	// -clb.c3.small: High-performance type 1 specification
+	// -clb.c3.medium: High-performance type 2 specification
+	// -clb.c4.small: Super high-performance specification 1
+	// -clb.c4.medium: Super high-performance specification 2
+	// -clb.c4.large: Super high-performance specification 3
+	// -clb.c4.xlarge: Super high-performance 4 specification.
+	SlaType *string `json:"SlaType,omitnil,omitempty" name:"SlaType"`
+}
+
+func (r *ModifyNetworkBasicInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNetworkBasicInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "GroupId")
+	delete(f, "NetworkType")
+	delete(f, "Vip")
+	delete(f, "InternetMaxBandwidthOut")
+	delete(f, "Description")
+	delete(f, "SlaType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNetworkBasicInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNetworkBasicInfoResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyNetworkBasicInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyNetworkBasicInfoResponseParams `json:"Response"`
+}
+
+func (r *ModifyNetworkBasicInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNetworkBasicInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyUpstreamNodeStatusRequestParams struct {
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
+
+	// Access IP address or domain name
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// Access Port
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// HEALTHY or UNHEALTHY
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
+type ModifyUpstreamNodeStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
+
+	// Access IP address or domain name
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// Access Port
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// HEALTHY or UNHEALTHY
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
+func (r *ModifyUpstreamNodeStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyUpstreamNodeStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "ServiceName")
+	delete(f, "Host")
+	delete(f, "Port")
+	delete(f, "Status")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyUpstreamNodeStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyUpstreamNodeStatusResponseParams struct {
+	// Success status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyUpstreamNodeStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyUpstreamNodeStatusResponseParams `json:"Response"`
+}
+
+func (r *ModifyUpstreamNodeStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyUpstreamNodeStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type NativeGatewayServerGroup struct {
+	// Cloud-Native Gateway Group Unique id
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Group name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Description information
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Node specification, number of nodes info
+	NodeConfig *CloudNativeAPIGatewayNodeConfig `json:"NodeConfig,omitnil,omitempty" name:"NodeConfig"`
+
+	// Gateway group status.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Creation time.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Whether it is the default group.
+	// 0: No.
+	// 1: Yes.
+	IsFirstGroup *int64 `json:"IsFirstGroup,omitnil,omitempty" name:"IsFirstGroup"`
+
+	// Associate policy information
+	BindingStrategy *CloudNativeAPIGatewayStrategy `json:"BindingStrategy,omitnil,omitempty" name:"BindingStrategy"`
+
+	// Gateway instance ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Bandwidth
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Modification time.
+	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
+
+	// Subnet ID
+	SubnetIds *string `json:"SubnetIds,omitnil,omitempty" name:"SubnetIds"`
+
+	// Default weight of the group
+	DefaultWeight *int64 `json:"DefaultWeight,omitnil,omitempty" name:"DefaultWeight"`
+
+	// elastic node
+	ElasticNumber *uint64 `json:"ElasticNumber,omitnil,omitempty" name:"ElasticNumber"`
+
+	// Whether TOA is supported
+	SupportTOA *bool `json:"SupportTOA,omitnil,omitempty" name:"SupportTOA"`
+
+	// Whether IPV6 is supported
+	SupportIPV6 *bool `json:"SupportIPV6,omitnil,omitempty" name:"SupportIPV6"`
+}
+
+type NativeGatewayServerGroups struct {
+	// Total number.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Group information array.
+	GatewayGroupList []*NativeGatewayServerGroup `json:"GatewayGroupList,omitnil,omitempty" name:"GatewayGroupList"`
+}
+
+type NativeGatewayServiceSourceItem struct {
+	// Gateway instance ID
+	GatewayID *string `json:"GatewayID,omitnil,omitempty" name:"GatewayID"`
+
+	// Service Source ID
+	SourceID *string `json:"SourceID,omitnil,omitempty" name:"SourceID"`
+
+	// Service Source Name
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// Service source type
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// Service source additional information
+	SourceInfo *SourceInfo `json:"SourceInfo,omitnil,omitempty" name:"SourceInfo"`
+
+	// Creation time.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Modification time.
+	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
+}
+
+type NetworkAccessControl struct {
+	// Access mode: Whitelist|Blacklist
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
+
+	// List of allowlist
+	CidrWhiteList []*string `json:"CidrWhiteList,omitnil,omitempty" name:"CidrWhiteList"`
+
+	// blocklist
+	CidrBlackList []*string `json:"CidrBlackList,omitnil,omitempty" name:"CidrBlackList"`
+}
+
+// Predefined struct for user
+type OpenWafProtectionRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Type of protection resource.
+	// -Global instance
+	// -Service
+	// -Route
+	// -Object (not currently supported)
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// When resource type Type is Service or Route, list of passed in services or routes
+	List []*string `json:"List,omitnil,omitempty" name:"List"`
+}
+
+type OpenWafProtectionRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Type of protection resource.
+	// -Global instance
+	// -Service
+	// -Route
+	// -Object (not currently supported)
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// When resource type Type is Service or Route, list of passed in services or routes
+	List []*string `json:"List,omitnil,omitempty" name:"List"`
+}
+
+func (r *OpenWafProtectionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenWafProtectionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Type")
+	delete(f, "List")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenWafProtectionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OpenWafProtectionResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type OpenWafProtectionResponse struct {
+	*tchttp.BaseResponse
+	Response *OpenWafProtectionResponseParams `json:"Response"`
+}
+
+func (r *OpenWafProtectionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenWafProtectionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type PublicAddressConfig struct {
+	// Public ip address
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// Maximum public network bandwidth
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// public network associated group id
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Public network associated group name
+	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
+
+	// Public network CLB id
+	NetworkId *string `json:"NetworkId,omitnil,omitempty" name:"NetworkId"`
+
+	// Description of public network CLB
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+type QpsThreshold struct {
+	// qps threshold control dimension, including: second, minute, hour, day, month, year.
+	Unit *string `json:"Unit,omitnil,omitempty" name:"Unit"`
+
+	// Threshold.
+	Max *int64 `json:"Max,omitnil,omitempty" name:"Max"`
+}
+
+type RateLimitResponse struct {
+	// Custom response body
+	Body *string `json:"Body,omitnil,omitempty" name:"Body"`
+
+	// Headers
+	Headers []*KVMapping `json:"Headers,omitnil,omitempty" name:"Headers"`
+
+	// HTTP status code.
+	HttpStatus *int64 `json:"HttpStatus,omitnil,omitempty" name:"HttpStatus"`
+}
+
+type RouteWafStatus struct {
+	// Route name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// ID of the route
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Whether WAF protection is enabled for the route
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Method.
+	Methods []*string `json:"Methods,omitnil,omitempty" name:"Methods"`
+
+	// Path.
+	Paths []*string `json:"Paths,omitnil,omitempty" name:"Paths"`
+
+	// Domain
+	Hosts []*string `json:"Hosts,omitnil,omitempty" name:"Hosts"`
+
+	// Name of the service corresponding to the route
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
+
+	// ID of the service corresponding to the route
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
+}
+
+type RoutingDestinationRuleLabel struct {
+	// Tag key.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LabelKey *string `json:"LabelKey,omitnil,omitempty" name:"LabelKey"`
+
+	// Tag value.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LabelValue *string `json:"LabelValue,omitnil,omitempty" name:"LabelValue"`
+
+	// expression type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LabelType *string `json:"LabelType,omitnil,omitempty" name:"LabelType"`
+
+	// value type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LabelValueType *string `json:"LabelValueType,omitnil,omitempty" name:"LabelValueType"`
+}
+
+type RuleFilter struct {
+	// Key of throttling conditions
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Values of throttling conditions
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+
+	// operator
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
+
+	// name in header or query
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+type ServiceGatewaySelector struct {
+	// Namespace
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Service.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Service *string `json:"Service,omitnil,omitempty" name:"Service"`
+
+	// Instance tag
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Labels []*Label `json:"Labels,omitnil,omitempty" name:"Labels"`
+}
+
+type ServiceSelector struct {
+	// Namespace
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Service.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Service *string `json:"Service,omitnil,omitempty" name:"Service"`
+
+	// Instance tag
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Labels []*Label `json:"Labels,omitnil,omitempty" name:"Labels"`
+}
+
+type ServiceWafStatus struct {
+	// Service name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Service ID
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Service type
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Whether WAF protection is enabled for the service
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
+type SourceInfo struct {
+	// Microservice engine integration IP address information
+	Addresses []*string `json:"Addresses,omitnil,omitempty" name:"Addresses"`
+
+	// VPC information of the microservice engine
+	VpcInfo *SourceInstanceVpcInfo `json:"VpcInfo,omitnil,omitempty" name:"VpcInfo"`
+
+	// Microservice engine authentication information
+	Auth *SourceInstanceAuth `json:"Auth,omitnil,omitempty" name:"Auth"`
+}
+
+type SourceInstanceAuth struct {
+	// Username.
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
+
+	// account password
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// token credential
+	AccessToken *string `json:"AccessToken,omitnil,omitempty" name:"AccessToken"`
+}
+
+type SourceInstanceVpcInfo struct {
+	// VPC information of the microservice engine
+	VpcID *string `json:"VpcID,omitnil,omitempty" name:"VpcID"`
+
+	// Microservice engine subnet info
+	SubnetID *string `json:"SubnetID,omitnil,omitempty" name:"SubnetID"`
+}
+
+type TSEGatewaySelector struct {
+	// Gateway engine instance ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Gateway service
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Services []*string `json:"Services,omitnil,omitempty" name:"Services"`
+}
+
+type TrafficGray struct {
+	// Grayscale release rules for traffic, grayscale by ratio or preheat method
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
+
+	// Grayscale percentage value 1-100 by proportion
+	Percent *int64 `json:"Percent,omitnil,omitempty" name:"Percent"`
+
+	// Preheated interval
+	IntervalSecond *int64 `json:"IntervalSecond,omitnil,omitempty" name:"IntervalSecond"`
+
+	// Preheated curvature
+	Curvature *int64 `json:"Curvature,omitnil,omitempty" name:"Curvature"`
+}
+
+// Predefined struct for user
+type UnbindAutoScalerResourceStrategyFromGroupsRequestParams struct {
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Policy ID
+	StrategyId *string `json:"StrategyId,omitnil,omitempty" name:"StrategyId"`
+
+	// gateway group ID list
+	GroupIds []*string `json:"GroupIds,omitnil,omitempty" name:"GroupIds"`
+}
+
+type UnbindAutoScalerResourceStrategyFromGroupsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Policy ID
+	StrategyId *string `json:"StrategyId,omitnil,omitempty" name:"StrategyId"`
+
+	// gateway group ID list
+	GroupIds []*string `json:"GroupIds,omitnil,omitempty" name:"GroupIds"`
+}
+
+func (r *UnbindAutoScalerResourceStrategyFromGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnbindAutoScalerResourceStrategyFromGroupsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "StrategyId")
+	delete(f, "GroupIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnbindAutoScalerResourceStrategyFromGroupsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UnbindAutoScalerResourceStrategyFromGroupsResponseParams struct {
+	// Success status
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UnbindAutoScalerResourceStrategyFromGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *UnbindAutoScalerResourceStrategyFromGroupsResponseParams `json:"Response"`
+}
+
+func (r *UnbindAutoScalerResourceStrategyFromGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnbindAutoScalerResourceStrategyFromGroupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateCloudNativeAPIGatewayCertificateInfoRequestParams struct {
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Certificate ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Domain name list bound to
+	BindDomains []*string `json:"BindDomains,omitnil,omitempty" name:"BindDomains"`
+
+	// Certificate Name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+type UpdateCloudNativeAPIGatewayCertificateInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Certificate ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Domain name list bound to
+	BindDomains []*string `json:"BindDomains,omitnil,omitempty" name:"BindDomains"`
+
+	// Certificate Name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+func (r *UpdateCloudNativeAPIGatewayCertificateInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateCloudNativeAPIGatewayCertificateInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Id")
+	delete(f, "BindDomains")
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateCloudNativeAPIGatewayCertificateInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateCloudNativeAPIGatewayCertificateInfoResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UpdateCloudNativeAPIGatewayCertificateInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateCloudNativeAPIGatewayCertificateInfoResponseParams `json:"Response"`
+}
+
+func (r *UpdateCloudNativeAPIGatewayCertificateInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateCloudNativeAPIGatewayCertificateInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateCloudNativeAPIGatewayResult struct {
+	// Cloud Native API Gateway ID.
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Cloud-native gateway status.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+// Predefined struct for user
+type UpdateCloudNativeAPIGatewaySpecRequestParams struct {
+	// Cloud Native API gateway instance ID.
+	// Only supports postpaid instances
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Gateway group id
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Gateway grouping node specification configuration.
+	NodeConfig *CloudNativeAPIGatewayNodeConfig `json:"NodeConfig,omitnil,omitempty" name:"NodeConfig"`
+}
+
+type UpdateCloudNativeAPIGatewaySpecRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cloud Native API gateway instance ID.
+	// Only supports postpaid instances
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Gateway group id
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Gateway grouping node specification configuration.
+	NodeConfig *CloudNativeAPIGatewayNodeConfig `json:"NodeConfig,omitnil,omitempty" name:"NodeConfig"`
+}
+
+func (r *UpdateCloudNativeAPIGatewaySpecRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateCloudNativeAPIGatewaySpecRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "GroupId")
+	delete(f, "NodeConfig")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateCloudNativeAPIGatewaySpecRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateCloudNativeAPIGatewaySpecResponseParams struct {
+	// Refresh the cloud native API gateway instance specification response result.
+	Result *UpdateCloudNativeAPIGatewayResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UpdateCloudNativeAPIGatewaySpecResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateCloudNativeAPIGatewaySpecResponseParams `json:"Response"`
+}
+
+func (r *UpdateCloudNativeAPIGatewaySpecResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateCloudNativeAPIGatewaySpecResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateUpstreamHealthCheckConfigRequestParams struct {
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Gateway service name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Health check configuration
+	HealthCheckConfig *UpstreamHealthCheckConfig `json:"HealthCheckConfig,omitnil,omitempty" name:"HealthCheckConfig"`
+}
+
+type UpdateUpstreamHealthCheckConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// gateway ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Gateway service name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Health check configuration
+	HealthCheckConfig *UpstreamHealthCheckConfig `json:"HealthCheckConfig,omitnil,omitempty" name:"HealthCheckConfig"`
+}
+
+func (r *UpdateUpstreamHealthCheckConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateUpstreamHealthCheckConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Name")
+	delete(f, "HealthCheckConfig")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateUpstreamHealthCheckConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateUpstreamHealthCheckConfigResponseParams struct {
+	// Success status
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UpdateUpstreamHealthCheckConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateUpstreamHealthCheckConfigResponseParams `json:"Response"`
+}
+
+func (r *UpdateUpstreamHealthCheckConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateUpstreamHealthCheckConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateUpstreamTargetsRequestParams struct {
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name or ID
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Instance list
+	Targets []*KongTarget `json:"Targets,omitnil,omitempty" name:"Targets"`
+}
+
+type UpdateUpstreamTargetsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance ID
+	GatewayId *string `json:"GatewayId,omitnil,omitempty" name:"GatewayId"`
+
+	// Service name or ID
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Instance list
+	Targets []*KongTarget `json:"Targets,omitnil,omitempty" name:"Targets"`
+}
+
+func (r *UpdateUpstreamTargetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateUpstreamTargetsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Name")
+	delete(f, "Targets")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateUpstreamTargetsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateUpstreamTargetsResponseParams struct {
+	// Whether update succeeded
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UpdateUpstreamTargetsResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateUpstreamTargetsResponseParams `json:"Response"`
+}
+
+func (r *UpdateUpstreamTargetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateUpstreamTargetsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpstreamHealthCheckConfig struct {
+	// Enable active health check
+	EnableActiveHealthCheck *bool `json:"EnableActiveHealthCheck,omitnil,omitempty" name:"EnableActiveHealthCheck"`
+
+	// Active health check configuration
+	ActiveHealthCheck *KongActiveHealthCheck `json:"ActiveHealthCheck,omitnil,omitempty" name:"ActiveHealthCheck"`
+
+	// Enable passive health check
+	EnablePassiveHealthCheck *bool `json:"EnablePassiveHealthCheck,omitnil,omitempty" name:"EnablePassiveHealthCheck"`
+
+	// Passive health check configuration
+	PassiveHealthCheck *KongPassiveHealthCheck `json:"PassiveHealthCheck,omitnil,omitempty" name:"PassiveHealthCheck"`
+
+	// Consecutive health threshold, unit: times
+	Successes *uint64 `json:"Successes,omitnil,omitempty" name:"Successes"`
+
+	// Continuous anomaly threshold, unit: times	
+	Failures *uint64 `json:"Failures,omitnil,omitempty" name:"Failures"`
+
+	// Timeout threshold, unit: times
+	Timeouts *uint64 `json:"Timeouts,omitnil,omitempty" name:"Timeouts"`
+
+	// Healthy HTTP status code
+	HealthyHttpStatuses []*uint64 `json:"HealthyHttpStatuses,omitnil,omitempty" name:"HealthyHttpStatuses"`
+
+	// abnormal HTTP status code
+	UnhealthyHttpStatuses []*uint64 `json:"UnhealthyHttpStatuses,omitnil,omitempty" name:"UnhealthyHttpStatuses"`
+
+	// Health check monitoring blocks nodes with a weight of 0 in reported data
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: IgnoreZeroWeightNodes is deprecated.
+	IgnoreZeroWeightNodes *bool `json:"IgnoreZeroWeightNodes,omitnil,omitempty" name:"IgnoreZeroWeightNodes"`
+
+	// Health check supports nodes with support weights of 0
+	ZeroWeightHeathCheck *bool `json:"ZeroWeightHeathCheck,omitnil,omitempty" name:"ZeroWeightHeathCheck"`
+}
