@@ -78,6 +78,7 @@ func NewCreateLibraryResponse() (response *CreateLibraryResponse) {
 //  INVALIDPARAMETERVALUE_BUCKETREGIONINVALID = "InvalidParameterValue.BucketRegionInvalid"
 //  INVALIDPARAMETERVALUE_COSSTORAGECLASS = "InvalidParameterValue.CosStorageClass"
 //  INVALIDPARAMETERVALUE_COSSTORAGECLASSINTELLIGENTTIERING = "InvalidParameterValue.CosStorageClassIntelligentTiering"
+//  MISSINGPARAMETER = "MissingParameter"
 //  UNAUTHORIZEDOPERATION_PASSROLE = "UnauthorizedOperation.PassRole"
 //  UNAUTHORIZEDOPERATION_SERVICELINKEDROLE = "UnauthorizedOperation.ServiceLinkedRole"
 //  UNSUPPORTEDOPERATION_BALANCELESS = "UnsupportedOperation.BalanceLess"
@@ -99,6 +100,7 @@ func (c *Client) CreateLibrary(request *CreateLibraryRequest) (response *CreateL
 //  INVALIDPARAMETERVALUE_BUCKETREGIONINVALID = "InvalidParameterValue.BucketRegionInvalid"
 //  INVALIDPARAMETERVALUE_COSSTORAGECLASS = "InvalidParameterValue.CosStorageClass"
 //  INVALIDPARAMETERVALUE_COSSTORAGECLASSINTELLIGENTTIERING = "InvalidParameterValue.CosStorageClassIntelligentTiering"
+//  MISSINGPARAMETER = "MissingParameter"
 //  UNAUTHORIZEDOPERATION_PASSROLE = "UnauthorizedOperation.PassRole"
 //  UNAUTHORIZEDOPERATION_SERVICELINKEDROLE = "UnauthorizedOperation.ServiceLinkedRole"
 //  UNSUPPORTEDOPERATION_BALANCELESS = "UnsupportedOperation.BalanceLess"
@@ -458,6 +460,7 @@ func NewModifyLibraryResponse() (response *ModifyLibraryResponse) {
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_LIBRARY = "ResourceNotFound.Library"
 func (c *Client) ModifyLibrary(request *ModifyLibraryRequest) (response *ModifyLibraryResponse, err error) {
     return c.ModifyLibraryWithContext(context.Background(), request)
@@ -469,6 +472,7 @@ func (c *Client) ModifyLibrary(request *ModifyLibraryRequest) (response *ModifyL
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_LIBRARY = "ResourceNotFound.Library"
 func (c *Client) ModifyLibraryWithContext(ctx context.Context, request *ModifyLibraryRequest) (response *ModifyLibraryResponse, err error) {
     if request == nil {

@@ -715,7 +715,7 @@ type CreateApplicationSensitiveAPIRequestParams struct {
 	// Application ID
 	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
 
-	// List of newly-added APIs
+	// List of newly-added APIs.
 	APIList []*CreateApplicationSensitiveAPIReq `json:"APIList,omitnil,omitempty" name:"APIList"`
 
 	// Platform ID
@@ -728,7 +728,7 @@ type CreateApplicationSensitiveAPIRequest struct {
 	// Application ID
 	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
 
-	// List of newly-added APIs
+	// List of newly-added APIs.
 	APIList []*CreateApplicationSensitiveAPIReq `json:"APIList,omitnil,omitempty" name:"APIList"`
 
 	// Platform ID

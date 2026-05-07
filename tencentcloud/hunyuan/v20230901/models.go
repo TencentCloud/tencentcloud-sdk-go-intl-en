@@ -64,6 +64,9 @@ type ChatTranslationsRequestParams struct {
 
 	// Reference example, up to 10.
 	References []*Reference `json:"References,omitnil,omitempty" name:"References"`
+
+
+	GlossaryIDs []*string `json:"GlossaryIDs,omitnil,omitempty" name:"GlossaryIDs"`
 }
 
 type ChatTranslationsRequest struct {
@@ -111,6 +114,8 @@ type ChatTranslationsRequest struct {
 
 	// Reference example, up to 10.
 	References []*Reference `json:"References,omitnil,omitempty" name:"References"`
+
+	GlossaryIDs []*string `json:"GlossaryIDs,omitnil,omitempty" name:"GlossaryIDs"`
 }
 
 func (r *ChatTranslationsRequest) ToJsonString() string {
@@ -132,6 +137,7 @@ func (r *ChatTranslationsRequest) FromJsonString(s string) error {
 	delete(f, "Target")
 	delete(f, "Field")
 	delete(f, "References")
+	delete(f, "GlossaryIDs")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ChatTranslationsRequest has unknown keys!", "")
 	}
@@ -1076,8 +1082,8 @@ type SubmitHunyuanTo3DProJobRequestParams struct {
 
 	// Generation task type. default: Normal. valid values:
 	// Normal: generates a geometric model with textures
-	// LowPoly: specifies the model generated after intelligent polygon reduction.
-	// Geometry: specifies whether to generate a Geometry model without textures (white model). when this task is selected, the EnablePBR parameter does not take effect
+	// LowPoly: specifies the model generated after intelligent polygon reduction
+	// Geometry: specifies whether to generate a Geometry model without textures (white model). When this parameter is enabled, only GLB will be output andthe EnablePBR parameter does not take effect
 	// Specifies the Sketch for the generative model, allowing input of a Sketch or line drawing. in this mode, both prompt and ImageUrl/ImageBase64 can be entered together
 	GenerateType *string `json:"GenerateType,omitnil,omitempty" name:"GenerateType"`
 
@@ -1149,8 +1155,8 @@ type SubmitHunyuanTo3DProJobRequest struct {
 
 	// Generation task type. default: Normal. valid values:
 	// Normal: generates a geometric model with textures
-	// LowPoly: specifies the model generated after intelligent polygon reduction.
-	// Geometry: specifies whether to generate a Geometry model without textures (white model). when this task is selected, the EnablePBR parameter does not take effect
+	// LowPoly: specifies the model generated after intelligent polygon reduction
+	// Geometry: specifies whether to generate a Geometry model without textures (white model). When this parameter is enabled, only GLB will be output andthe EnablePBR parameter does not take effect
 	// Specifies the Sketch for the generative model, allowing input of a Sketch or line drawing. in this mode, both prompt and ImageUrl/ImageBase64 can be entered together
 	GenerateType *string `json:"GenerateType,omitnil,omitempty" name:"GenerateType"`
 
@@ -1434,7 +1440,7 @@ func (r *SubmitHunyuanTo3DTextureEditJobResponse) FromJsonString(s string) error
 type SubmitHunyuanTo3DUVJobRequestParams struct {
 	// File URL of the 3D model requiring UV unfold
 	// Supported formats: FBX, OBJ, GLB
-	// 3D model limit: less than 30000 faces
+	// 3D model limit: The face count of the 3D model is less than 30,000 and the number of connected components does not exceed 100
 	File *InputFile3D `json:"File,omitnil,omitempty" name:"File"`
 }
 
@@ -1443,7 +1449,7 @@ type SubmitHunyuanTo3DUVJobRequest struct {
 	
 	// File URL of the 3D model requiring UV unfold
 	// Supported formats: FBX, OBJ, GLB
-	// 3D model limit: less than 30000 faces
+	// 3D model limit: The face count of the 3D model is less than 30,000 and the number of connected components does not exceed 100
 	File *InputFile3D `json:"File,omitnil,omitempty" name:"File"`
 }
 

@@ -89,6 +89,7 @@ func NewChatTranslationsResponse() (response *ChatTranslationsResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ChatTranslations(request *ChatTranslationsRequest) (response *ChatTranslationsResponse, err error) {
     return c.ChatTranslationsWithContext(context.Background(), request)
 }
@@ -120,6 +121,7 @@ func (c *Client) ChatTranslations(request *ChatTranslationsRequest) (response *C
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ChatTranslationsWithContext(ctx context.Context, request *ChatTranslationsRequest) (response *ChatTranslationsResponse, err error) {
     if request == nil {
         request = NewChatTranslationsRequest()
@@ -173,6 +175,7 @@ func NewConvert3DFormatResponse() (response *Convert3DFormatResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) Convert3DFormat(request *Convert3DFormatRequest) (response *Convert3DFormatResponse, err error) {
     return c.Convert3DFormatWithContext(context.Background(), request)
 }
@@ -194,6 +197,7 @@ func (c *Client) Convert3DFormat(request *Convert3DFormatRequest) (response *Con
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) Convert3DFormatWithContext(ctx context.Context, request *Convert3DFormatRequest) (response *Convert3DFormatResponse, err error) {
     if request == nil {
         request = NewConvert3DFormatRequest()
@@ -249,6 +253,7 @@ func NewDescribe3DSmartTopologyJobResponse() (response *Describe3DSmartTopologyJ
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) Describe3DSmartTopologyJob(request *Describe3DSmartTopologyJobRequest) (response *Describe3DSmartTopologyJobResponse, err error) {
     return c.Describe3DSmartTopologyJobWithContext(context.Background(), request)
 }
@@ -272,6 +277,7 @@ func (c *Client) Describe3DSmartTopologyJob(request *Describe3DSmartTopologyJobR
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) Describe3DSmartTopologyJobWithContext(ctx context.Context, request *Describe3DSmartTopologyJobRequest) (response *Describe3DSmartTopologyJobResponse, err error) {
     if request == nil {
         request = NewDescribe3DSmartTopologyJobRequest()
@@ -325,6 +331,7 @@ func NewDescribeConvert3DFormatJobResponse() (response *DescribeConvert3DFormatJ
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeConvert3DFormatJob(request *DescribeConvert3DFormatJobRequest) (response *DescribeConvert3DFormatJobResponse, err error) {
     return c.DescribeConvert3DFormatJobWithContext(context.Background(), request)
 }
@@ -346,6 +353,7 @@ func (c *Client) DescribeConvert3DFormatJob(request *DescribeConvert3DFormatJobR
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeConvert3DFormatJobWithContext(ctx context.Context, request *DescribeConvert3DFormatJobRequest) (response *DescribeConvert3DFormatJobResponse, err error) {
     if request == nil {
         request = NewDescribeConvert3DFormatJobRequest()
@@ -399,6 +407,7 @@ func NewDescribeHunyuanTo3DUVJobResponse() (response *DescribeHunyuanTo3DUVJobRe
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeHunyuanTo3DUVJob(request *DescribeHunyuanTo3DUVJobRequest) (response *DescribeHunyuanTo3DUVJobResponse, err error) {
     return c.DescribeHunyuanTo3DUVJobWithContext(context.Background(), request)
 }
@@ -420,6 +429,7 @@ func (c *Client) DescribeHunyuanTo3DUVJob(request *DescribeHunyuanTo3DUVJobReque
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeHunyuanTo3DUVJobWithContext(ctx context.Context, request *DescribeHunyuanTo3DUVJobRequest) (response *DescribeHunyuanTo3DUVJobResponse, err error) {
     if request == nil {
         request = NewDescribeHunyuanTo3DUVJobRequest()
@@ -473,6 +483,7 @@ func NewQueryHunyuan3DPartJobResponse() (response *QueryHunyuan3DPartJobResponse
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) QueryHunyuan3DPartJob(request *QueryHunyuan3DPartJobRequest) (response *QueryHunyuan3DPartJobResponse, err error) {
     return c.QueryHunyuan3DPartJobWithContext(context.Background(), request)
 }
@@ -494,6 +505,7 @@ func (c *Client) QueryHunyuan3DPartJob(request *QueryHunyuan3DPartJobRequest) (r
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) QueryHunyuan3DPartJobWithContext(ctx context.Context, request *QueryHunyuan3DPartJobRequest) (response *QueryHunyuan3DPartJobResponse, err error) {
     if request == nil {
         request = NewQueryHunyuan3DPartJobRequest()
@@ -549,6 +561,7 @@ func NewQueryHunyuanTo3DProJobResponse() (response *QueryHunyuanTo3DProJobRespon
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) QueryHunyuanTo3DProJob(request *QueryHunyuanTo3DProJobRequest) (response *QueryHunyuanTo3DProJobResponse, err error) {
     return c.QueryHunyuanTo3DProJobWithContext(context.Background(), request)
 }
@@ -572,6 +585,7 @@ func (c *Client) QueryHunyuanTo3DProJob(request *QueryHunyuanTo3DProJobRequest) 
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) QueryHunyuanTo3DProJobWithContext(ctx context.Context, request *QueryHunyuanTo3DProJobRequest) (response *QueryHunyuanTo3DProJobResponse, err error) {
     if request == nil {
         request = NewQueryHunyuanTo3DProJobRequest()
@@ -627,6 +641,7 @@ func NewQueryHunyuanTo3DRapidJobResponse() (response *QueryHunyuanTo3DRapidJobRe
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) QueryHunyuanTo3DRapidJob(request *QueryHunyuanTo3DRapidJobRequest) (response *QueryHunyuanTo3DRapidJobResponse, err error) {
     return c.QueryHunyuanTo3DRapidJobWithContext(context.Background(), request)
 }
@@ -650,6 +665,7 @@ func (c *Client) QueryHunyuanTo3DRapidJob(request *QueryHunyuanTo3DRapidJobReque
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) QueryHunyuanTo3DRapidJobWithContext(ctx context.Context, request *QueryHunyuanTo3DRapidJobRequest) (response *QueryHunyuanTo3DRapidJobResponse, err error) {
     if request == nil {
         request = NewQueryHunyuanTo3DRapidJobRequest()
@@ -703,6 +719,7 @@ func NewQueryHunyuanTo3DTextureEditJobResponse() (response *QueryHunyuanTo3DText
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) QueryHunyuanTo3DTextureEditJob(request *QueryHunyuanTo3DTextureEditJobRequest) (response *QueryHunyuanTo3DTextureEditJobResponse, err error) {
     return c.QueryHunyuanTo3DTextureEditJobWithContext(context.Background(), request)
 }
@@ -724,6 +741,7 @@ func (c *Client) QueryHunyuanTo3DTextureEditJob(request *QueryHunyuanTo3DTexture
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) QueryHunyuanTo3DTextureEditJobWithContext(ctx context.Context, request *QueryHunyuanTo3DTextureEditJobRequest) (response *QueryHunyuanTo3DTextureEditJobResponse, err error) {
     if request == nil {
         request = NewQueryHunyuanTo3DTextureEditJobRequest()
@@ -779,6 +797,7 @@ func NewSubmit3DSmartTopologyJobResponse() (response *Submit3DSmartTopologyJobRe
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) Submit3DSmartTopologyJob(request *Submit3DSmartTopologyJobRequest) (response *Submit3DSmartTopologyJobResponse, err error) {
     return c.Submit3DSmartTopologyJobWithContext(context.Background(), request)
 }
@@ -802,6 +821,7 @@ func (c *Client) Submit3DSmartTopologyJob(request *Submit3DSmartTopologyJobReque
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) Submit3DSmartTopologyJobWithContext(ctx context.Context, request *Submit3DSmartTopologyJobRequest) (response *Submit3DSmartTopologyJobResponse, err error) {
     if request == nil {
         request = NewSubmit3DSmartTopologyJobRequest()
@@ -855,6 +875,7 @@ func NewSubmitConvert3DFormatJobResponse() (response *SubmitConvert3DFormatJobRe
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) SubmitConvert3DFormatJob(request *SubmitConvert3DFormatJobRequest) (response *SubmitConvert3DFormatJobResponse, err error) {
     return c.SubmitConvert3DFormatJobWithContext(context.Background(), request)
 }
@@ -876,6 +897,7 @@ func (c *Client) SubmitConvert3DFormatJob(request *SubmitConvert3DFormatJobReque
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) SubmitConvert3DFormatJobWithContext(ctx context.Context, request *SubmitConvert3DFormatJobRequest) (response *SubmitConvert3DFormatJobResponse, err error) {
     if request == nil {
         request = NewSubmitConvert3DFormatJobRequest()
@@ -929,6 +951,7 @@ func NewSubmitHunyuan3DPartJobResponse() (response *SubmitHunyuan3DPartJobRespon
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) SubmitHunyuan3DPartJob(request *SubmitHunyuan3DPartJobRequest) (response *SubmitHunyuan3DPartJobResponse, err error) {
     return c.SubmitHunyuan3DPartJobWithContext(context.Background(), request)
 }
@@ -950,6 +973,7 @@ func (c *Client) SubmitHunyuan3DPartJob(request *SubmitHunyuan3DPartJobRequest) 
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) SubmitHunyuan3DPartJobWithContext(ctx context.Context, request *SubmitHunyuan3DPartJobRequest) (response *SubmitHunyuan3DPartJobResponse, err error) {
     if request == nil {
         request = NewSubmitHunyuan3DPartJobRequest()
@@ -1005,6 +1029,7 @@ func NewSubmitHunyuanTo3DProJobResponse() (response *SubmitHunyuanTo3DProJobResp
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) SubmitHunyuanTo3DProJob(request *SubmitHunyuanTo3DProJobRequest) (response *SubmitHunyuanTo3DProJobResponse, err error) {
     return c.SubmitHunyuanTo3DProJobWithContext(context.Background(), request)
 }
@@ -1028,6 +1053,7 @@ func (c *Client) SubmitHunyuanTo3DProJob(request *SubmitHunyuanTo3DProJobRequest
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) SubmitHunyuanTo3DProJobWithContext(ctx context.Context, request *SubmitHunyuanTo3DProJobRequest) (response *SubmitHunyuanTo3DProJobResponse, err error) {
     if request == nil {
         request = NewSubmitHunyuanTo3DProJobRequest()
@@ -1083,6 +1109,7 @@ func NewSubmitHunyuanTo3DRapidJobResponse() (response *SubmitHunyuanTo3DRapidJob
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) SubmitHunyuanTo3DRapidJob(request *SubmitHunyuanTo3DRapidJobRequest) (response *SubmitHunyuanTo3DRapidJobResponse, err error) {
     return c.SubmitHunyuanTo3DRapidJobWithContext(context.Background(), request)
 }
@@ -1106,6 +1133,7 @@ func (c *Client) SubmitHunyuanTo3DRapidJob(request *SubmitHunyuanTo3DRapidJobReq
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) SubmitHunyuanTo3DRapidJobWithContext(ctx context.Context, request *SubmitHunyuanTo3DRapidJobRequest) (response *SubmitHunyuanTo3DRapidJobResponse, err error) {
     if request == nil {
         request = NewSubmitHunyuanTo3DRapidJobRequest()
@@ -1159,6 +1187,7 @@ func NewSubmitHunyuanTo3DTextureEditJobResponse() (response *SubmitHunyuanTo3DTe
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) SubmitHunyuanTo3DTextureEditJob(request *SubmitHunyuanTo3DTextureEditJobRequest) (response *SubmitHunyuanTo3DTextureEditJobResponse, err error) {
     return c.SubmitHunyuanTo3DTextureEditJobWithContext(context.Background(), request)
 }
@@ -1180,6 +1209,7 @@ func (c *Client) SubmitHunyuanTo3DTextureEditJob(request *SubmitHunyuanTo3DTextu
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) SubmitHunyuanTo3DTextureEditJobWithContext(ctx context.Context, request *SubmitHunyuanTo3DTextureEditJobRequest) (response *SubmitHunyuanTo3DTextureEditJobResponse, err error) {
     if request == nil {
         request = NewSubmitHunyuanTo3DTextureEditJobRequest()
@@ -1233,6 +1263,7 @@ func NewSubmitHunyuanTo3DUVJobResponse() (response *SubmitHunyuanTo3DUVJobRespon
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) SubmitHunyuanTo3DUVJob(request *SubmitHunyuanTo3DUVJobRequest) (response *SubmitHunyuanTo3DUVJobResponse, err error) {
     return c.SubmitHunyuanTo3DUVJobWithContext(context.Background(), request)
 }
@@ -1254,6 +1285,7 @@ func (c *Client) SubmitHunyuanTo3DUVJob(request *SubmitHunyuanTo3DUVJobRequest) 
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) SubmitHunyuanTo3DUVJobWithContext(ctx context.Context, request *SubmitHunyuanTo3DUVJobRequest) (response *SubmitHunyuanTo3DUVJobResponse, err error) {
     if request == nil {
         request = NewSubmitHunyuanTo3DUVJobRequest()

@@ -65,7 +65,7 @@ func NewAddTeamMemberResponse() (response *AddTeamMemberResponse) {
 }
 
 // AddTeamMember
-// This API is used to add a team member.
+// This API is used to add a team member
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -78,7 +78,7 @@ func (c *Client) AddTeamMember(request *AddTeamMemberRequest) (response *AddTeam
 }
 
 // AddTeamMember
-// This API is used to add a team member.
+// This API is used to add a team member
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"

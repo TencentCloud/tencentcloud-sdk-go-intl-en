@@ -55,4 +55,7 @@ const (
 
 	// The quota limit is exceeded.
 	LIMITEXCEEDED = "LimitExceeded"
+
+	// 
+	RESOURCENOTFOUND = "ResourceNotFound"
 )
