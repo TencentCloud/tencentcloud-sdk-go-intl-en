@@ -607,27 +607,43 @@ type DescribeSignListStatus struct {
 
 // Predefined struct for user
 type DescribeSmsSignListRequestParams struct {
-	// Signature ID array.
-	// Note: the maximum length of the array is 100 by default.
-	SignIdSet []*uint64 `json:"SignIdSet,omitnil,omitempty" name:"SignIdSet"`
-
 	// Whether it is Global SMS:
 	// 0: Mainland China SMS.
 	// 1: Global SMS.
 	International *uint64 `json:"International,omitnil,omitempty" name:"International"`
+
+	// Signature ID array.
+	// Note: the maximum length of the array is 100 by default.
+	SignIdSet []*uint64 `json:"SignIdSet,omitnil,omitempty" name:"SignIdSet"`
+
+	// Upper limit. Maximum value: 100.
+	// Note: it is 10 by default and is enabled when SignIdSet is empty.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	// Note: it is 0 by default and is enabled when SignIdSet is empty.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeSmsSignListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Signature ID array.
-	// Note: the maximum length of the array is 100 by default.
-	SignIdSet []*uint64 `json:"SignIdSet,omitnil,omitempty" name:"SignIdSet"`
-
 	// Whether it is Global SMS:
 	// 0: Mainland China SMS.
 	// 1: Global SMS.
 	International *uint64 `json:"International,omitnil,omitempty" name:"International"`
+
+	// Signature ID array.
+	// Note: the maximum length of the array is 100 by default.
+	SignIdSet []*uint64 `json:"SignIdSet,omitnil,omitempty" name:"SignIdSet"`
+
+	// Upper limit. Maximum value: 100.
+	// Note: it is 10 by default and is enabled when SignIdSet is empty.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	// Note: it is 0 by default and is enabled when SignIdSet is empty.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeSmsSignListRequest) ToJsonString() string {
@@ -642,8 +658,10 @@ func (r *DescribeSmsSignListRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "SignIdSet")
 	delete(f, "International")
+	delete(f, "SignIdSet")
+	delete(f, "Limit")
+	delete(f, "Offset")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSmsSignListRequest has unknown keys!", "")
 	}

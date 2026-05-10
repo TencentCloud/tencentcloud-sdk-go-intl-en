@@ -1589,7 +1589,7 @@ func NewCreateJustInTimeTranscodeTemplateResponse() (response *CreateJustInTimeT
 //
 // This API is used to ensure the consistency of JIT transcoding effect, avoid video output exceptions caused by EO cache or M3U8 sharding template changes during the process, and templates cannot be modified after creation.
 //
-// This API is used to learn about the detailed capacity of JIT transcoding. EdgeOne video instant processing function introduction (https://www.tencentcloud.comom/document/product/1552/111927?from_cn_redirect=1).
+// This API is used to learn about the detailed capacity of JIT transcoding. EdgeOne video instant processing function introduction (https://www.tencentcloud.com/document/product/1552/111927?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PRODUCTDISCONTINUED = "FailedOperation.ProductDiscontinued"
@@ -1610,7 +1610,7 @@ func (c *Client) CreateJustInTimeTranscodeTemplate(request *CreateJustInTimeTran
 //
 // This API is used to ensure the consistency of JIT transcoding effect, avoid video output exceptions caused by EO cache or M3U8 sharding template changes during the process, and templates cannot be modified after creation.
 //
-// This API is used to learn about the detailed capacity of JIT transcoding. EdgeOne video instant processing function introduction (https://www.tencentcloud.comom/document/product/1552/111927?from_cn_redirect=1).
+// This API is used to learn about the detailed capacity of JIT transcoding. EdgeOne video instant processing function introduction (https://www.tencentcloud.com/document/product/1552/111927?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PRODUCTDISCONTINUED = "FailedOperation.ProductDiscontinued"

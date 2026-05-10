@@ -125,7 +125,7 @@ func NewApplyInternetAddressResponse() (response *ApplyInternetAddressResponse) 
 }
 
 // ApplyInternetAddress
-// This API is used to apply for an internet tunnel’s CIDR block.
+// This API is used to apply for an internet tunnel's CIDR block.
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
@@ -134,7 +134,7 @@ func (c *Client) ApplyInternetAddress(request *ApplyInternetAddressRequest) (res
 }
 
 // ApplyInternetAddress
-// This API is used to apply for an internet tunnel’s CIDR block.
+// This API is used to apply for an internet tunnel's CIDR block.
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"

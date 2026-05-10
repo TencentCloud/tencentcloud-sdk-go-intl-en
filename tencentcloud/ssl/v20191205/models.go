@@ -569,6 +569,468 @@ type CertificateExtra struct {
 	CompanyType *int64 `json:"CompanyType,omitnil,omitempty" name:"CompanyType"`
 }
 
+// Predefined struct for user
+type CertificateInfoSubmitRequestParams struct {
+	// Paid SSL certificate ID of materials to be submitted.	
+	CertId *string `json:"CertId,omitnil,omitempty" name:"CertId"`
+
+	// This field is required. CSR generation method, value is:
+	// -online: Tencent Cloud submits the filled parameter information to generate a CSR and private key, and by Tencent Cloud for encrypted storage.
+	// -parse: Generate CSR and private key manually, and apply for a certificate by uploading CSR.
+	GenCsrType *string `json:"GenCsrType,omitnil,omitempty" name:"GenCsrType"`
+
+	// Common name for certificate binding. If an uploaded CSR is used, that domain name must match the common name resolved by the CSR.
+	CertCommonName *string `json:"CertCommonName,omitnil,omitempty" name:"CertCommonName"`
+
+	// Organization information type. Valid values:
+	// 1 (Personal): Only DV-type certificates can be set to 1. For personal-type certificates, organization information fields (Org, Admin, Tech) can be omitted.
+	// 2 (Company): All types of certificates can be set to 2. Pass organization information fields as needed.
+	CompanyType *uint64 `json:"CompanyType,omitnil,omitempty" name:"CompanyType"`
+
+	// Company ID can be viewed in the [Tencent Cloud Console](https://console.cloud.tencent.com/ssl/info). If no company information is found, set this parameter to 0. If company information matching the current order exists, you can view the company ID via [DescribeCompanies](https://www.tencentcloud.com/document/product/400/90375?from_cn_redirect=1). If a company ID is provided, parameters starting with "Org" can be omitted.
+	// 
+	CompanyId *string `json:"CompanyId,omitnil,omitempty" name:"CompanyId"`
+
+	// Company document type. Valid values:
+	// TYDMZ (unified social credit code): This field is required only for CFCA certificates, not required for other types.
+	// OTHERS
+	OrgIdType *string `json:"OrgIdType,omitnil,omitempty" name:"OrgIdType"`
+
+	// Company identification number, value ranges from...to...
+	// TYDMZ (unified social credit code): 11532xxxxxxxx24820
+	OrgIdNumber *string `json:"OrgIdNumber,omitnil,omitempty" name:"OrgIdNumber"`
+
+	// Document type of the manager. Valid values:
+	// SFZ (ID card): This field is required only for CFCA certs, not required for other types.
+	// HZ (passport): This field is required only for CFCA certs and not required for other types.
+	AdminIdType *string `json:"AdminIdType,omitnil,omitempty" name:"AdminIdType"`
+
+	// ID number of the manager. This field is required only for CFCA certificates, not required for other types. Value ranges from...to...
+	// ID card: 110000xxxxxxxx1242
+	// HZ (Passport): EFxxxxxxx
+	AdminIdNumber *string `json:"AdminIdNumber,omitnil,omitempty" name:"AdminIdNumber"`
+
+	// Contact person document type. Valid values:
+	// SFZ (ID card): This field is required only for CFCA certs, not required for other types.
+	// HZ (passport): This field is required only for CFCA certs and not required for other types.
+	TechIdType *string `json:"TechIdType,omitnil,omitempty" name:"TechIdType"`
+
+	// ID number of the contact person. This field is required only for CFCA certs and not required for other types. Value ranges from...to...
+	// ID card: 110000xxxxxxxx1242
+	// HZ (Passport): EFxxxxxxx
+	TechIdNumber *string `json:"TechIdNumber,omitnil,omitempty" name:"TechIdNumber"`
+
+	// Uploaded CSR content.
+	// If GenCsrType is parse, this field is required.
+	Csr *string `json:"Csr,omitnil,omitempty" name:"Csr"`
+
+	// Other domains bound to the certificate. No need to provide for single domain or wildcard certificates. Required for multi-domain names and multiple wildcard certificates.
+	DnsNames []*string `json:"DnsNames,omitnil,omitempty" name:"DnsNames"`
+
+	// Private key password. Currently used only when generating certs in jks or pfx format; private key certificates in other formats are unencrypted.	
+	KeyPass *string `json:"KeyPass,omitnil,omitempty" name:"KeyPass"`
+
+	// Company name. This field is required if CompanyId or ManagerId is not provided.
+	OrgOrganization *string `json:"OrgOrganization,omitnil,omitempty" name:"OrgOrganization"`
+
+	// Department name. If not passing CompanyId or ManagerId, this field is required.
+	OrgDivision *string `json:"OrgDivision,omitnil,omitempty" name:"OrgDivision"`
+
+	// Company detailed address. If not pass CompanyId or ManagerId, this field is required.
+	OrgAddress *string `json:"OrgAddress,omitnil,omitempty" name:"OrgAddress"`
+
+	// Country/region name, for example China: CN. If not passing CompanyId or ManagerId, this field is required.
+	OrgCountry *string `json:"OrgCountry,omitnil,omitempty" name:"OrgCountry"`
+
+	// Located city. If not pass CompanyId or ManagerId, this field is required.
+	OrgCity *string `json:"OrgCity,omitnil,omitempty" name:"OrgCity"`
+
+	// Province where the company is located. If not passing CompanyId or ManagerId, this field is required.
+	OrgRegion *string `json:"OrgRegion,omitnil,omitempty" name:"OrgRegion"`
+
+	// Area code of the company. If not passing CompanyId or ManagerId, this field is required.
+	// For example: 021. Pass 86 as the mobile number.
+	OrgPhoneArea *string `json:"OrgPhoneArea,omitnil,omitempty" name:"OrgPhoneArea"`
+
+	// Company number. If CompanyId or ManagerId is not provided, this field is required.
+	OrgPhoneNumber *string `json:"OrgPhoneNumber,omitnil,omitempty" name:"OrgPhoneNumber"`
+
+	// Domain validation method of the certificate
+	// DNS: Manually add domain DNS validation. The user needs to manually add the verification value at the DNS service provider.
+	// FILE: Manual addition of domain name FILE verification. Users are advised to manually add a specified path FILE in the root directory of the domain site to perform FILE verification. Either http or https passing is sufficient. The domain site must be accessible by overseas certificate authorities. The specific access allowlist is: 64.78.193.238, 216.168.247.9, 216.168.249.9, 54.189.196.217.
+	VerifyType *string `json:"VerifyType,omitnil,omitempty" name:"VerifyType"`
+
+	// Manage name. If not passing ManagerId, this field is required.
+	AdminFirstName *string `json:"AdminFirstName,omitnil,omitempty" name:"AdminFirstName"`
+
+	// Manager name. If not, this field is required when ManagerId is not passed.
+	AdminLastName *string `json:"AdminLastName,omitnil,omitempty" name:"AdminLastName"`
+
+	// Manager mobile number. If not passing ManagerId, this field is required.
+	AdminPhone *string `json:"AdminPhone,omitnil,omitempty" name:"AdminPhone"`
+
+	// Manager email address. If not passing ManagerId, this field is required.
+	AdminEmail *string `json:"AdminEmail,omitnil,omitempty" name:"AdminEmail"`
+
+	// Manager position. If not passing ManagerId, this field is required.
+	AdminTitle *string `json:"AdminTitle,omitnil,omitempty" name:"AdminTitle"`
+
+	// Contact name. If not passing ManagerId, this field is required.
+	TechFirstName *string `json:"TechFirstName,omitnil,omitempty" name:"TechFirstName"`
+
+	// Last name of the contact. If not, this field is required when ManagerId is not passed.
+	TechLastName *string `json:"TechLastName,omitnil,omitempty" name:"TechLastName"`
+
+	// Contact email address. This field is required when CompanyType is 1.
+	ContactEmail *string `json:"ContactEmail,omitnil,omitempty" name:"ContactEmail"`
+
+	// Whether to enable auto-renewal: 0, not enabled; 1, enabled; defaults to 0.
+	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
+
+	// Key pair parameters. RSA supports 2048 and 4096. ECC is only supported for prime256v1. This parameter is required when the CSR generation method is online.
+	CsrKeyParameter *string `json:"CsrKeyParameter,omitnil,omitempty" name:"CsrKeyParameter"`
+
+	// Encryption algorithm, value is ECC or RSA, defaults to RSA. This parameter is required when CSR generation method is online.
+	CsrEncryptAlgo *string `json:"CsrEncryptAlgo,omitnil,omitempty" name:"CsrEncryptAlgo"`
+
+	// Manager ID can be viewed in the [Tencent Cloud Console](https://console.cloud.tencent.com/ssl/info). If no administrator information is found, pass 0 for this parameter. If administrator information exists that meets the current order, the manager ID can be selected based on [DescribeManagers](https://www.tencentcloud.com/document/product/400/52672?from_cn_redirect=1). If the manager ID is passed, parameters beginning with Org, Admin, or Tech can be omitted. The manager ID includes company information.
+	ManagerId *string `json:"ManagerId,omitnil,omitempty" name:"ManagerId"`
+
+	// Contact phone. If not passing ManagerId, this field is required.
+	TechPhone *string `json:"TechPhone,omitnil,omitempty" name:"TechPhone"`
+
+	// contact email
+	TechEmail *string `json:"TechEmail,omitnil,omitempty" name:"TechEmail"`
+
+	// Contact person position. If not passing ManagerId, this field is required.
+	TechTitle *string `json:"TechTitle,omitnil,omitempty" name:"TechTitle"`
+
+	// Certificate type
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Valid only for Dnspod series certs. ca organization kind can be sectigo and digicert.
+	CaType *string `json:"CaType,omitnil,omitempty" name:"CaType"`
+
+	// signature algorithm
+	SignAlgo *string `json:"SignAlgo,omitnil,omitempty" name:"SignAlgo"`
+
+	// Whether to use intersect root certificate
+	UseCrossSignRoot *bool `json:"UseCrossSignRoot,omitnil,omitempty" name:"UseCrossSignRoot"`
+}
+
+type CertificateInfoSubmitRequest struct {
+	*tchttp.BaseRequest
+	
+	// Paid SSL certificate ID of materials to be submitted.	
+	CertId *string `json:"CertId,omitnil,omitempty" name:"CertId"`
+
+	// This field is required. CSR generation method, value is:
+	// -online: Tencent Cloud submits the filled parameter information to generate a CSR and private key, and by Tencent Cloud for encrypted storage.
+	// -parse: Generate CSR and private key manually, and apply for a certificate by uploading CSR.
+	GenCsrType *string `json:"GenCsrType,omitnil,omitempty" name:"GenCsrType"`
+
+	// Common name for certificate binding. If an uploaded CSR is used, that domain name must match the common name resolved by the CSR.
+	CertCommonName *string `json:"CertCommonName,omitnil,omitempty" name:"CertCommonName"`
+
+	// Organization information type. Valid values:
+	// 1 (Personal): Only DV-type certificates can be set to 1. For personal-type certificates, organization information fields (Org, Admin, Tech) can be omitted.
+	// 2 (Company): All types of certificates can be set to 2. Pass organization information fields as needed.
+	CompanyType *uint64 `json:"CompanyType,omitnil,omitempty" name:"CompanyType"`
+
+	// Company ID can be viewed in the [Tencent Cloud Console](https://console.cloud.tencent.com/ssl/info). If no company information is found, set this parameter to 0. If company information matching the current order exists, you can view the company ID via [DescribeCompanies](https://www.tencentcloud.com/document/product/400/90375?from_cn_redirect=1). If a company ID is provided, parameters starting with "Org" can be omitted.
+	// 
+	CompanyId *string `json:"CompanyId,omitnil,omitempty" name:"CompanyId"`
+
+	// Company document type. Valid values:
+	// TYDMZ (unified social credit code): This field is required only for CFCA certificates, not required for other types.
+	// OTHERS
+	OrgIdType *string `json:"OrgIdType,omitnil,omitempty" name:"OrgIdType"`
+
+	// Company identification number, value ranges from...to...
+	// TYDMZ (unified social credit code): 11532xxxxxxxx24820
+	OrgIdNumber *string `json:"OrgIdNumber,omitnil,omitempty" name:"OrgIdNumber"`
+
+	// Document type of the manager. Valid values:
+	// SFZ (ID card): This field is required only for CFCA certs, not required for other types.
+	// HZ (passport): This field is required only for CFCA certs and not required for other types.
+	AdminIdType *string `json:"AdminIdType,omitnil,omitempty" name:"AdminIdType"`
+
+	// ID number of the manager. This field is required only for CFCA certificates, not required for other types. Value ranges from...to...
+	// ID card: 110000xxxxxxxx1242
+	// HZ (Passport): EFxxxxxxx
+	AdminIdNumber *string `json:"AdminIdNumber,omitnil,omitempty" name:"AdminIdNumber"`
+
+	// Contact person document type. Valid values:
+	// SFZ (ID card): This field is required only for CFCA certs, not required for other types.
+	// HZ (passport): This field is required only for CFCA certs and not required for other types.
+	TechIdType *string `json:"TechIdType,omitnil,omitempty" name:"TechIdType"`
+
+	// ID number of the contact person. This field is required only for CFCA certs and not required for other types. Value ranges from...to...
+	// ID card: 110000xxxxxxxx1242
+	// HZ (Passport): EFxxxxxxx
+	TechIdNumber *string `json:"TechIdNumber,omitnil,omitempty" name:"TechIdNumber"`
+
+	// Uploaded CSR content.
+	// If GenCsrType is parse, this field is required.
+	Csr *string `json:"Csr,omitnil,omitempty" name:"Csr"`
+
+	// Other domains bound to the certificate. No need to provide for single domain or wildcard certificates. Required for multi-domain names and multiple wildcard certificates.
+	DnsNames []*string `json:"DnsNames,omitnil,omitempty" name:"DnsNames"`
+
+	// Private key password. Currently used only when generating certs in jks or pfx format; private key certificates in other formats are unencrypted.	
+	KeyPass *string `json:"KeyPass,omitnil,omitempty" name:"KeyPass"`
+
+	// Company name. This field is required if CompanyId or ManagerId is not provided.
+	OrgOrganization *string `json:"OrgOrganization,omitnil,omitempty" name:"OrgOrganization"`
+
+	// Department name. If not passing CompanyId or ManagerId, this field is required.
+	OrgDivision *string `json:"OrgDivision,omitnil,omitempty" name:"OrgDivision"`
+
+	// Company detailed address. If not pass CompanyId or ManagerId, this field is required.
+	OrgAddress *string `json:"OrgAddress,omitnil,omitempty" name:"OrgAddress"`
+
+	// Country/region name, for example China: CN. If not passing CompanyId or ManagerId, this field is required.
+	OrgCountry *string `json:"OrgCountry,omitnil,omitempty" name:"OrgCountry"`
+
+	// Located city. If not pass CompanyId or ManagerId, this field is required.
+	OrgCity *string `json:"OrgCity,omitnil,omitempty" name:"OrgCity"`
+
+	// Province where the company is located. If not passing CompanyId or ManagerId, this field is required.
+	OrgRegion *string `json:"OrgRegion,omitnil,omitempty" name:"OrgRegion"`
+
+	// Area code of the company. If not passing CompanyId or ManagerId, this field is required.
+	// For example: 021. Pass 86 as the mobile number.
+	OrgPhoneArea *string `json:"OrgPhoneArea,omitnil,omitempty" name:"OrgPhoneArea"`
+
+	// Company number. If CompanyId or ManagerId is not provided, this field is required.
+	OrgPhoneNumber *string `json:"OrgPhoneNumber,omitnil,omitempty" name:"OrgPhoneNumber"`
+
+	// Domain validation method of the certificate
+	// DNS: Manually add domain DNS validation. The user needs to manually add the verification value at the DNS service provider.
+	// FILE: Manual addition of domain name FILE verification. Users are advised to manually add a specified path FILE in the root directory of the domain site to perform FILE verification. Either http or https passing is sufficient. The domain site must be accessible by overseas certificate authorities. The specific access allowlist is: 64.78.193.238, 216.168.247.9, 216.168.249.9, 54.189.196.217.
+	VerifyType *string `json:"VerifyType,omitnil,omitempty" name:"VerifyType"`
+
+	// Manage name. If not passing ManagerId, this field is required.
+	AdminFirstName *string `json:"AdminFirstName,omitnil,omitempty" name:"AdminFirstName"`
+
+	// Manager name. If not, this field is required when ManagerId is not passed.
+	AdminLastName *string `json:"AdminLastName,omitnil,omitempty" name:"AdminLastName"`
+
+	// Manager mobile number. If not passing ManagerId, this field is required.
+	AdminPhone *string `json:"AdminPhone,omitnil,omitempty" name:"AdminPhone"`
+
+	// Manager email address. If not passing ManagerId, this field is required.
+	AdminEmail *string `json:"AdminEmail,omitnil,omitempty" name:"AdminEmail"`
+
+	// Manager position. If not passing ManagerId, this field is required.
+	AdminTitle *string `json:"AdminTitle,omitnil,omitempty" name:"AdminTitle"`
+
+	// Contact name. If not passing ManagerId, this field is required.
+	TechFirstName *string `json:"TechFirstName,omitnil,omitempty" name:"TechFirstName"`
+
+	// Last name of the contact. If not, this field is required when ManagerId is not passed.
+	TechLastName *string `json:"TechLastName,omitnil,omitempty" name:"TechLastName"`
+
+	// Contact email address. This field is required when CompanyType is 1.
+	ContactEmail *string `json:"ContactEmail,omitnil,omitempty" name:"ContactEmail"`
+
+	// Whether to enable auto-renewal: 0, not enabled; 1, enabled; defaults to 0.
+	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
+
+	// Key pair parameters. RSA supports 2048 and 4096. ECC is only supported for prime256v1. This parameter is required when the CSR generation method is online.
+	CsrKeyParameter *string `json:"CsrKeyParameter,omitnil,omitempty" name:"CsrKeyParameter"`
+
+	// Encryption algorithm, value is ECC or RSA, defaults to RSA. This parameter is required when CSR generation method is online.
+	CsrEncryptAlgo *string `json:"CsrEncryptAlgo,omitnil,omitempty" name:"CsrEncryptAlgo"`
+
+	// Manager ID can be viewed in the [Tencent Cloud Console](https://console.cloud.tencent.com/ssl/info). If no administrator information is found, pass 0 for this parameter. If administrator information exists that meets the current order, the manager ID can be selected based on [DescribeManagers](https://www.tencentcloud.com/document/product/400/52672?from_cn_redirect=1). If the manager ID is passed, parameters beginning with Org, Admin, or Tech can be omitted. The manager ID includes company information.
+	ManagerId *string `json:"ManagerId,omitnil,omitempty" name:"ManagerId"`
+
+	// Contact phone. If not passing ManagerId, this field is required.
+	TechPhone *string `json:"TechPhone,omitnil,omitempty" name:"TechPhone"`
+
+	// contact email
+	TechEmail *string `json:"TechEmail,omitnil,omitempty" name:"TechEmail"`
+
+	// Contact person position. If not passing ManagerId, this field is required.
+	TechTitle *string `json:"TechTitle,omitnil,omitempty" name:"TechTitle"`
+
+	// Certificate type
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Valid only for Dnspod series certs. ca organization kind can be sectigo and digicert.
+	CaType *string `json:"CaType,omitnil,omitempty" name:"CaType"`
+
+	// signature algorithm
+	SignAlgo *string `json:"SignAlgo,omitnil,omitempty" name:"SignAlgo"`
+
+	// Whether to use intersect root certificate
+	UseCrossSignRoot *bool `json:"UseCrossSignRoot,omitnil,omitempty" name:"UseCrossSignRoot"`
+}
+
+func (r *CertificateInfoSubmitRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CertificateInfoSubmitRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CertId")
+	delete(f, "GenCsrType")
+	delete(f, "CertCommonName")
+	delete(f, "CompanyType")
+	delete(f, "CompanyId")
+	delete(f, "OrgIdType")
+	delete(f, "OrgIdNumber")
+	delete(f, "AdminIdType")
+	delete(f, "AdminIdNumber")
+	delete(f, "TechIdType")
+	delete(f, "TechIdNumber")
+	delete(f, "Csr")
+	delete(f, "DnsNames")
+	delete(f, "KeyPass")
+	delete(f, "OrgOrganization")
+	delete(f, "OrgDivision")
+	delete(f, "OrgAddress")
+	delete(f, "OrgCountry")
+	delete(f, "OrgCity")
+	delete(f, "OrgRegion")
+	delete(f, "OrgPhoneArea")
+	delete(f, "OrgPhoneNumber")
+	delete(f, "VerifyType")
+	delete(f, "AdminFirstName")
+	delete(f, "AdminLastName")
+	delete(f, "AdminPhone")
+	delete(f, "AdminEmail")
+	delete(f, "AdminTitle")
+	delete(f, "TechFirstName")
+	delete(f, "TechLastName")
+	delete(f, "ContactEmail")
+	delete(f, "AutoRenewFlag")
+	delete(f, "CsrKeyParameter")
+	delete(f, "CsrEncryptAlgo")
+	delete(f, "ManagerId")
+	delete(f, "TechPhone")
+	delete(f, "TechEmail")
+	delete(f, "TechTitle")
+	delete(f, "Type")
+	delete(f, "CaType")
+	delete(f, "SignAlgo")
+	delete(f, "UseCrossSignRoot")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CertificateInfoSubmitRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CertificateInfoSubmitResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CertificateInfoSubmitResponse struct {
+	*tchttp.BaseResponse
+	Response *CertificateInfoSubmitResponseParams `json:"Response"`
+}
+
+func (r *CertificateInfoSubmitResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CertificateInfoSubmitResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CertificateOrderSubmitRequestParams struct {
+	// Paid SSL certificate ID of materials to be submitted.	
+	CertId *string `json:"CertId,omitnil,omitempty" name:"CertId"`
+
+	// Whether to delete automatic DNS validation: 0, do not delete; 1, delete; default is do not delete.
+	DeleteDnsAutoRecord *uint64 `json:"DeleteDnsAutoRecord,omitnil,omitempty" name:"DeleteDnsAutoRecord"`
+
+	// Domain validation method of the certificate
+	// DNS: Manually add domain DNS validation. The user needs to manually add the verification value at the DNS service provider.
+	// FILE: Manual domain addition via FILE verification. Users are advised to manually add the specified path FILE to the root directory of the domain site for FILE verification. Either http or https access is sufficient. The domain site must be accessible by overseas certificate authorities. For the specific access allowlist, refer to the console page.
+	VerifyType *string `json:"VerifyType,omitnil,omitempty" name:"VerifyType"`
+}
+
+type CertificateOrderSubmitRequest struct {
+	*tchttp.BaseRequest
+	
+	// Paid SSL certificate ID of materials to be submitted.	
+	CertId *string `json:"CertId,omitnil,omitempty" name:"CertId"`
+
+	// Whether to delete automatic DNS validation: 0, do not delete; 1, delete; default is do not delete.
+	DeleteDnsAutoRecord *uint64 `json:"DeleteDnsAutoRecord,omitnil,omitempty" name:"DeleteDnsAutoRecord"`
+
+	// Domain validation method of the certificate
+	// DNS: Manually add domain DNS validation. The user needs to manually add the verification value at the DNS service provider.
+	// FILE: Manual domain addition via FILE verification. Users are advised to manually add the specified path FILE to the root directory of the domain site for FILE verification. Either http or https access is sufficient. The domain site must be accessible by overseas certificate authorities. For the specific access allowlist, refer to the console page.
+	VerifyType *string `json:"VerifyType,omitnil,omitempty" name:"VerifyType"`
+}
+
+func (r *CertificateOrderSubmitRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CertificateOrderSubmitRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CertId")
+	delete(f, "DeleteDnsAutoRecord")
+	delete(f, "VerifyType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CertificateOrderSubmitRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CertificateOrderSubmitResponseParams struct {
+	// Order number from the certificate authority.
+	OrderId *string `json:"OrderId,omitnil,omitempty" name:"OrderId"`
+
+	// Certificate status. 0=Under review, 1=Approved, 2=Review failed, 3=Expired, 4=DNS record added, 5=Enterprise certificate, pending submission, 6=Order cancellation in progress, 7=Canceled, 8=Documents submitted, pending upload of confirmation letter, 9=Certificate revocation in progress, 10=Revoked, 11=Reissue in progress, 12=Pending upload of revocation confirmation letter, 13=Free certificate pending document submission.
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Whether prereview is required or not
+	IsAudited *bool `json:"IsAudited,omitnil,omitempty" name:"IsAudited"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CertificateOrderSubmitResponse struct {
+	*tchttp.BaseResponse
+	Response *CertificateOrderSubmitResponseParams `json:"Response"`
+}
+
+func (r *CertificateOrderSubmitResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CertificateOrderSubmitResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Certificates struct {
 	// User uin.
 	OwnerUin *string `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`

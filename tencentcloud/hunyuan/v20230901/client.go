@@ -295,6 +295,82 @@ func (c *Client) Describe3DSmartTopologyJobWithContext(ctx context.Context, requ
     return
 }
 
+func NewDescribeAutoRiggingJobRequest() (request *DescribeAutoRiggingJobRequest) {
+    request = &DescribeAutoRiggingJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("hunyuan", APIVersion, "DescribeAutoRiggingJob")
+    
+    
+    return
+}
+
+func NewDescribeAutoRiggingJobResponse() (response *DescribeAutoRiggingJobResponse) {
+    response = &DescribeAutoRiggingJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAutoRiggingJob
+// 3D Model Auto Rigging API, powered by the Hunyuan Large Model, processes input 3D models of characters or animals to perform automatic rigging and skinning, outputting a 3D model complete with skeletal data. By default, one concurrent slot is provided, meaning that a maximum of one submitted task can be processed simultaneously; the next task can only begin processing once the previous one has been completed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeAutoRiggingJob(request *DescribeAutoRiggingJobRequest) (response *DescribeAutoRiggingJobResponse, err error) {
+    return c.DescribeAutoRiggingJobWithContext(context.Background(), request)
+}
+
+// DescribeAutoRiggingJob
+// 3D Model Auto Rigging API, powered by the Hunyuan Large Model, processes input 3D models of characters or animals to perform automatic rigging and skinning, outputting a 3D model complete with skeletal data. By default, one concurrent slot is provided, meaning that a maximum of one submitted task can be processed simultaneously; the next task can only begin processing once the previous one has been completed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeAutoRiggingJobWithContext(ctx context.Context, request *DescribeAutoRiggingJobRequest) (response *DescribeAutoRiggingJobResponse, err error) {
+    if request == nil {
+        request = NewDescribeAutoRiggingJobRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "hunyuan", APIVersion, "DescribeAutoRiggingJob")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAutoRiggingJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAutoRiggingJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeConvert3DFormatJobRequest() (request *DescribeConvert3DFormatJobRequest) {
     request = &DescribeConvert3DFormatJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -835,6 +911,82 @@ func (c *Client) Submit3DSmartTopologyJobWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewSubmit3DSmartTopologyJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSubmitAutoRiggingJobRequest() (request *SubmitAutoRiggingJobRequest) {
+    request = &SubmitAutoRiggingJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("hunyuan", APIVersion, "SubmitAutoRiggingJob")
+    
+    
+    return
+}
+
+func NewSubmitAutoRiggingJobResponse() (response *SubmitAutoRiggingJobResponse) {
+    response = &SubmitAutoRiggingJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SubmitAutoRiggingJob
+// 3D Model Auto Rigging API, powered by the HY Large Model, processes input 3D models of characters or animals to perform automatic rigging and skinning, outputting a 3D model complete with skeletal data. By default, one concurrent slot is provided, meaning that a maximum of one submitted task can be processed simultaneously; the next task can only begin processing once the previous one has been completed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) SubmitAutoRiggingJob(request *SubmitAutoRiggingJobRequest) (response *SubmitAutoRiggingJobResponse, err error) {
+    return c.SubmitAutoRiggingJobWithContext(context.Background(), request)
+}
+
+// SubmitAutoRiggingJob
+// 3D Model Auto Rigging API, powered by the HY Large Model, processes input 3D models of characters or animals to perform automatic rigging and skinning, outputting a 3D model complete with skeletal data. By default, one concurrent slot is provided, meaning that a maximum of one submitted task can be processed simultaneously; the next task can only begin processing once the previous one has been completed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENGINEREQUESTTIMEOUT = "FailedOperation.EngineRequestTimeout"
+//  FAILEDOPERATION_ENGINESERVERERROR = "FailedOperation.EngineServerError"
+//  FAILEDOPERATION_ENGINESERVERLIMITEXCEEDED = "FailedOperation.EngineServerLimitExceeded"
+//  FAILEDOPERATION_FREERESOURCEPACKEXHAUSTED = "FailedOperation.FreeResourcePackExhausted"
+//  FAILEDOPERATION_RESOURCEPACKEXHAUSTED = "FailedOperation.ResourcePackExhausted"
+//  FAILEDOPERATION_SERVICENOTACTIVATED = "FailedOperation.ServiceNotActivated"
+//  FAILEDOPERATION_SERVICESTOP = "FailedOperation.ServiceStop"
+//  FAILEDOPERATION_SERVICESTOPARREARS = "FailedOperation.ServiceStopArrears"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MODEL = "InvalidParameterValue.Model"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) SubmitAutoRiggingJobWithContext(ctx context.Context, request *SubmitAutoRiggingJobRequest) (response *SubmitAutoRiggingJobResponse, err error) {
+    if request == nil {
+        request = NewSubmitAutoRiggingJobRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "hunyuan", APIVersion, "SubmitAutoRiggingJob")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SubmitAutoRiggingJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSubmitAutoRiggingJobResponse()
     err = c.Send(request, response)
     return
 }

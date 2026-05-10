@@ -208,6 +208,28 @@ type CreateTargetGroupRequestParams struct {
 
 	// Whether "All Dead, All Alive" is supported. It is supported by default.
 	AllDeadToAlive *bool `json:"AllDeadToAlive,omitnil,omitempty" name:"AllDeadToAlive"`
+
+	// Tags
+	Tags []*TagInfo `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Traffic Distribution Mode
+	// <ul>
+	// <li>STATELESS: Stateless</li>
+	// <li>STATEFUL: Stateful</li>
+	// </ul>
+	ForwardingMode *string `json:"ForwardingMode,omitnil,omitempty" name:"ForwardingMode"`
+
+	// <p>Switch for unbinding backend services in the rescheduling function. When enabled, unbinding backend services will trigger rescheduling.</p>
+	RescheduleUnbindRs *bool `json:"RescheduleUnbindRs,omitnil,omitempty" name:"RescheduleUnbindRs"`
+
+	// <p>The time to enable rescheduling after unbinding RS, configurable from 0s to 3600s, with a default value of 0s</p>
+	RescheduleUnbindRsStartTime *int64 `json:"RescheduleUnbindRsStartTime,omitnil,omitempty" name:"RescheduleUnbindRsStartTime"`
+
+	// <p>Switch for backend service health detection exception in the rescheduling function. When enabled, abnormal health checks of backend services will trigger rescheduling.</p>
+	RescheduleUnhealthy *bool `json:"RescheduleUnhealthy,omitnil,omitempty" name:"RescheduleUnhealthy"`
+
+	// <p>The waiting time to enable rescheduling after abnormal health detection of backend services, configurable from 0s to 3600s, default is 0s</p>
+	RescheduleUnhealthyStartTime *int64 `json:"RescheduleUnhealthyStartTime,omitnil,omitempty" name:"RescheduleUnhealthyStartTime"`
 }
 
 type CreateTargetGroupRequest struct {
@@ -240,6 +262,28 @@ type CreateTargetGroupRequest struct {
 
 	// Whether "All Dead, All Alive" is supported. It is supported by default.
 	AllDeadToAlive *bool `json:"AllDeadToAlive,omitnil,omitempty" name:"AllDeadToAlive"`
+
+	// Tags
+	Tags []*TagInfo `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Traffic Distribution Mode
+	// <ul>
+	// <li>STATELESS: Stateless</li>
+	// <li>STATEFUL: Stateful</li>
+	// </ul>
+	ForwardingMode *string `json:"ForwardingMode,omitnil,omitempty" name:"ForwardingMode"`
+
+	// <p>Switch for unbinding backend services in the rescheduling function. When enabled, unbinding backend services will trigger rescheduling.</p>
+	RescheduleUnbindRs *bool `json:"RescheduleUnbindRs,omitnil,omitempty" name:"RescheduleUnbindRs"`
+
+	// <p>The time to enable rescheduling after unbinding RS, configurable from 0s to 3600s, with a default value of 0s</p>
+	RescheduleUnbindRsStartTime *int64 `json:"RescheduleUnbindRsStartTime,omitnil,omitempty" name:"RescheduleUnbindRsStartTime"`
+
+	// <p>Switch for backend service health detection exception in the rescheduling function. When enabled, abnormal health checks of backend services will trigger rescheduling.</p>
+	RescheduleUnhealthy *bool `json:"RescheduleUnhealthy,omitnil,omitempty" name:"RescheduleUnhealthy"`
+
+	// <p>The waiting time to enable rescheduling after abnormal health detection of backend services, configurable from 0s to 3600s, default is 0s</p>
+	RescheduleUnhealthyStartTime *int64 `json:"RescheduleUnhealthyStartTime,omitnil,omitempty" name:"RescheduleUnhealthyStartTime"`
 }
 
 func (r *CreateTargetGroupRequest) ToJsonString() string {
@@ -262,6 +306,12 @@ func (r *CreateTargetGroupRequest) FromJsonString(s string) error {
 	delete(f, "HealthCheck")
 	delete(f, "ScheduleAlgorithm")
 	delete(f, "AllDeadToAlive")
+	delete(f, "Tags")
+	delete(f, "ForwardingMode")
+	delete(f, "RescheduleUnbindRs")
+	delete(f, "RescheduleUnbindRsStartTime")
+	delete(f, "RescheduleUnhealthy")
+	delete(f, "RescheduleUnhealthyStartTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTargetGroupRequest has unknown keys!", "")
 	}
@@ -1118,6 +1168,9 @@ type ModifyGatewayLoadBalancerAttributeRequestParams struct {
 
 	// GWLB instance name. It supports input of 1 to 60 characters.
 	LoadBalancerName *string `json:"LoadBalancerName,omitnil,omitempty" name:"LoadBalancerName"`
+
+
+	DeleteProtect *bool `json:"DeleteProtect,omitnil,omitempty" name:"DeleteProtect"`
 }
 
 type ModifyGatewayLoadBalancerAttributeRequest struct {
@@ -1128,6 +1181,8 @@ type ModifyGatewayLoadBalancerAttributeRequest struct {
 
 	// GWLB instance name. It supports input of 1 to 60 characters.
 	LoadBalancerName *string `json:"LoadBalancerName,omitnil,omitempty" name:"LoadBalancerName"`
+
+	DeleteProtect *bool `json:"DeleteProtect,omitnil,omitempty" name:"DeleteProtect"`
 }
 
 func (r *ModifyGatewayLoadBalancerAttributeRequest) ToJsonString() string {
@@ -1144,6 +1199,7 @@ func (r *ModifyGatewayLoadBalancerAttributeRequest) FromJsonString(s string) err
 	}
 	delete(f, "LoadBalancerId")
 	delete(f, "LoadBalancerName")
+	delete(f, "DeleteProtect")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyGatewayLoadBalancerAttributeRequest has unknown keys!", "")
 	}
@@ -1185,6 +1241,18 @@ type ModifyTargetGroupAttributeRequestParams struct {
 
 	// Whether "All Dead, All Alive" is supported.
 	AllDeadToAlive *bool `json:"AllDeadToAlive,omitnil,omitempty" name:"AllDeadToAlive"`
+
+
+	RescheduleUnbindRs *bool `json:"RescheduleUnbindRs,omitnil,omitempty" name:"RescheduleUnbindRs"`
+
+
+	RescheduleUnbindRsStartTime *int64 `json:"RescheduleUnbindRsStartTime,omitnil,omitempty" name:"RescheduleUnbindRsStartTime"`
+
+
+	RescheduleUnhealthy *bool `json:"RescheduleUnhealthy,omitnil,omitempty" name:"RescheduleUnhealthy"`
+
+
+	RescheduleUnhealthyStartTime *int64 `json:"RescheduleUnhealthyStartTime,omitnil,omitempty" name:"RescheduleUnhealthyStartTime"`
 }
 
 type ModifyTargetGroupAttributeRequest struct {
@@ -1201,6 +1269,14 @@ type ModifyTargetGroupAttributeRequest struct {
 
 	// Whether "All Dead, All Alive" is supported.
 	AllDeadToAlive *bool `json:"AllDeadToAlive,omitnil,omitempty" name:"AllDeadToAlive"`
+
+	RescheduleUnbindRs *bool `json:"RescheduleUnbindRs,omitnil,omitempty" name:"RescheduleUnbindRs"`
+
+	RescheduleUnbindRsStartTime *int64 `json:"RescheduleUnbindRsStartTime,omitnil,omitempty" name:"RescheduleUnbindRsStartTime"`
+
+	RescheduleUnhealthy *bool `json:"RescheduleUnhealthy,omitnil,omitempty" name:"RescheduleUnhealthy"`
+
+	RescheduleUnhealthyStartTime *int64 `json:"RescheduleUnhealthyStartTime,omitnil,omitempty" name:"RescheduleUnhealthyStartTime"`
 }
 
 func (r *ModifyTargetGroupAttributeRequest) ToJsonString() string {
@@ -1219,6 +1295,10 @@ func (r *ModifyTargetGroupAttributeRequest) FromJsonString(s string) error {
 	delete(f, "TargetGroupName")
 	delete(f, "HealthCheck")
 	delete(f, "AllDeadToAlive")
+	delete(f, "RescheduleUnbindRs")
+	delete(f, "RescheduleUnbindRsStartTime")
+	delete(f, "RescheduleUnhealthy")
+	delete(f, "RescheduleUnhealthyStartTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTargetGroupAttributeRequest has unknown keys!", "")
 	}

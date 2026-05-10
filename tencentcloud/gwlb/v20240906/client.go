@@ -417,6 +417,7 @@ func NewDescribeGatewayLoadBalancersResponse() (response *DescribeGatewayLoadBal
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
 //  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
 func (c *Client) DescribeGatewayLoadBalancers(request *DescribeGatewayLoadBalancersRequest) (response *DescribeGatewayLoadBalancersResponse, err error) {
     return c.DescribeGatewayLoadBalancersWithContext(context.Background(), request)
@@ -427,6 +428,7 @@ func (c *Client) DescribeGatewayLoadBalancers(request *DescribeGatewayLoadBalanc
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
 //  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
 func (c *Client) DescribeGatewayLoadBalancersWithContext(ctx context.Context, request *DescribeGatewayLoadBalancersRequest) (response *DescribeGatewayLoadBalancersResponse, err error) {
     if request == nil {
@@ -469,6 +471,7 @@ func NewDescribeTargetGroupInstanceStatusResponse() (response *DescribeTargetGro
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
 //  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
 func (c *Client) DescribeTargetGroupInstanceStatus(request *DescribeTargetGroupInstanceStatusRequest) (response *DescribeTargetGroupInstanceStatusResponse, err error) {
     return c.DescribeTargetGroupInstanceStatusWithContext(context.Background(), request)
@@ -479,6 +482,7 @@ func (c *Client) DescribeTargetGroupInstanceStatus(request *DescribeTargetGroupI
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
 //  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
 func (c *Client) DescribeTargetGroupInstanceStatusWithContext(ctx context.Context, request *DescribeTargetGroupInstanceStatusRequest) (response *DescribeTargetGroupInstanceStatusResponse, err error) {
     if request == nil {
@@ -524,6 +528,7 @@ func NewDescribeTargetGroupInstancesResponse() (response *DescribeTargetGroupIns
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeTargetGroupInstances(request *DescribeTargetGroupInstancesRequest) (response *DescribeTargetGroupInstancesResponse, err error) {
     return c.DescribeTargetGroupInstancesWithContext(context.Background(), request)
@@ -537,6 +542,7 @@ func (c *Client) DescribeTargetGroupInstances(request *DescribeTargetGroupInstan
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeTargetGroupInstancesWithContext(ctx context.Context, request *DescribeTargetGroupInstancesRequest) (response *DescribeTargetGroupInstancesResponse, err error) {
     if request == nil {
@@ -582,6 +588,7 @@ func NewDescribeTargetGroupListResponse() (response *DescribeTargetGroupListResp
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeTargetGroupList(request *DescribeTargetGroupListRequest) (response *DescribeTargetGroupListResponse, err error) {
     return c.DescribeTargetGroupListWithContext(context.Background(), request)
@@ -595,6 +602,7 @@ func (c *Client) DescribeTargetGroupList(request *DescribeTargetGroupListRequest
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeTargetGroupListWithContext(ctx context.Context, request *DescribeTargetGroupListRequest) (response *DescribeTargetGroupListResponse, err error) {
     if request == nil {

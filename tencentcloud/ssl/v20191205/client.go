@@ -313,6 +313,160 @@ func (c *Client) CancelCertificateOrderWithContext(ctx context.Context, request 
     return
 }
 
+func NewCertificateInfoSubmitRequest() (request *CertificateInfoSubmitRequest) {
+    request = &CertificateInfoSubmitRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "CertificateInfoSubmit")
+    
+    
+    return
+}
+
+func NewCertificateInfoSubmitResponse() (response *CertificateInfoSubmitResponse) {
+    response = &CertificateInfoSubmitResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CertificateInfoSubmit
+// Submit certificate information for payment
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CERTIFICATEINFOSUBMITCONTACTEMAILEMPTY = "FailedOperation.CertificateInfoSubmitContactEmailEmpty"
+//  FAILEDOPERATION_CERTIFICATEINFOSUBMITDOMAININVALID = "FailedOperation.CertificateInfoSubmitDomainInvalid"
+//  FAILEDOPERATION_CERTIFICATEINFOSUBMITSTATUSINVALID = "FailedOperation.CertificateInfoSubmitStatusInvalid"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_CERTIFICATEORDERSUBMITROOTCAINVALID = "FailedOperation.CertificateOrderSubmitRootCAInvalid"
+//  FAILEDOPERATION_CERTIFICATESUBMITHOSTINGCERTERROR = "FailedOperation.CertificateSubmitHostingCertError"
+//  FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_RENEWALGORITHMINVALID = "InvalidParameter.RenewAlgorithmInvalid"
+func (c *Client) CertificateInfoSubmit(request *CertificateInfoSubmitRequest) (response *CertificateInfoSubmitResponse, err error) {
+    return c.CertificateInfoSubmitWithContext(context.Background(), request)
+}
+
+// CertificateInfoSubmit
+// Submit certificate information for payment
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CERTIFICATEINFOSUBMITCONTACTEMAILEMPTY = "FailedOperation.CertificateInfoSubmitContactEmailEmpty"
+//  FAILEDOPERATION_CERTIFICATEINFOSUBMITDOMAININVALID = "FailedOperation.CertificateInfoSubmitDomainInvalid"
+//  FAILEDOPERATION_CERTIFICATEINFOSUBMITSTATUSINVALID = "FailedOperation.CertificateInfoSubmitStatusInvalid"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_CERTIFICATEORDERSUBMITROOTCAINVALID = "FailedOperation.CertificateOrderSubmitRootCAInvalid"
+//  FAILEDOPERATION_CERTIFICATESUBMITHOSTINGCERTERROR = "FailedOperation.CertificateSubmitHostingCertError"
+//  FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_RENEWALGORITHMINVALID = "InvalidParameter.RenewAlgorithmInvalid"
+func (c *Client) CertificateInfoSubmitWithContext(ctx context.Context, request *CertificateInfoSubmitRequest) (response *CertificateInfoSubmitResponse, err error) {
+    if request == nil {
+        request = NewCertificateInfoSubmitRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ssl", APIVersion, "CertificateInfoSubmit")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CertificateInfoSubmit require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCertificateInfoSubmitResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCertificateOrderSubmitRequest() (request *CertificateOrderSubmitRequest) {
+    request = &CertificateOrderSubmitRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "CertificateOrderSubmit")
+    
+    
+    return
+}
+
+func NewCertificateOrderSubmitResponse() (response *CertificateOrderSubmitResponse) {
+    response = &CertificateOrderSubmitResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CertificateOrderSubmit
+// Submit a certificate order
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CERTIFICATEINFOSUBMITSTATUSINVALID = "FailedOperation.CertificateInfoSubmitStatusInvalid"
+//  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_CERTIFICATEORDERSUBMITPROCESSING = "FailedOperation.CertificateOrderSubmitProcessing"
+//  FAILEDOPERATION_CERTIFICATEPREVERIFYEMAILINVALID = "FailedOperation.CertificatePreVerifyEmailInvalid"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_BACKENDRESPONSEERROR = "InternalError.BackendResponseError"
+func (c *Client) CertificateOrderSubmit(request *CertificateOrderSubmitRequest) (response *CertificateOrderSubmitResponse, err error) {
+    return c.CertificateOrderSubmitWithContext(context.Background(), request)
+}
+
+// CertificateOrderSubmit
+// Submit a certificate order
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CERTIFICATEINFOSUBMITSTATUSINVALID = "FailedOperation.CertificateInfoSubmitStatusInvalid"
+//  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_CERTIFICATEORDERSUBMITPROCESSING = "FailedOperation.CertificateOrderSubmitProcessing"
+//  FAILEDOPERATION_CERTIFICATEPREVERIFYEMAILINVALID = "FailedOperation.CertificatePreVerifyEmailInvalid"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_BACKENDRESPONSEERROR = "InternalError.BackendResponseError"
+func (c *Client) CertificateOrderSubmitWithContext(ctx context.Context, request *CertificateOrderSubmitRequest) (response *CertificateOrderSubmitResponse, err error) {
+    if request == nil {
+        request = NewCertificateOrderSubmitRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ssl", APIVersion, "CertificateOrderSubmit")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CertificateOrderSubmit require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCertificateOrderSubmitResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCommitCertificateInformationRequest() (request *CommitCertificateInformationRequest) {
     request = &CommitCertificateInformationRequest{
         BaseRequest: &tchttp.BaseRequest{},

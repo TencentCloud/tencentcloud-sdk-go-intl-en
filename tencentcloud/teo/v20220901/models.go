@@ -670,7 +670,7 @@ type ApplicationProxyRule struct {
 
 // Predefined struct for user
 type ApplyFreeCertificateRequestParams struct {
-	// Site ID.
+	// Site ID
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Specifies the target domain name for free certificate application.
@@ -687,7 +687,7 @@ type ApplyFreeCertificateRequestParams struct {
 type ApplyFreeCertificateRequest struct {
 	*tchttp.BaseRequest
 	
-	// Site ID.
+	// Site ID
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Specifies the target domain name for free certificate application.
@@ -11622,7 +11622,7 @@ func (r *DescribePrefetchTasksResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePurgeTasksRequestParams struct {
-	// Site ID. this parameter will change from selectable to required after may 30, 2024. for details, see the announcement: [tencent cloud EdgeOne] tencentcloud API change notification (https://www.tencentcloud.comom/document/product/1552/104902?from_cn_redirect=1).
+	// Site ID. this parameter will change from selectable to required after may 30, 2024. for details, see the announcement: [tencent cloud EdgeOne] tencentcloud API change notification (https://www.tencentcloud.com/document/product/1552/104902?from_cn_redirect=1).
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Start time of the query. Either time or job-id is required.
@@ -11649,7 +11649,7 @@ type DescribePurgeTasksRequestParams struct {
 type DescribePurgeTasksRequest struct {
 	*tchttp.BaseRequest
 	
-	// Site ID. this parameter will change from selectable to required after may 30, 2024. for details, see the announcement: [tencent cloud EdgeOne] tencentcloud API change notification (https://www.tencentcloud.comom/document/product/1552/104902?from_cn_redirect=1).
+	// Site ID. this parameter will change from selectable to required after may 30, 2024. for details, see the announcement: [tencent cloud EdgeOne] tencentcloud API change notification (https://www.tencentcloud.com/document/product/1552/104902?from_cn_redirect=1).
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Start time of the query. Either time or job-id is required.

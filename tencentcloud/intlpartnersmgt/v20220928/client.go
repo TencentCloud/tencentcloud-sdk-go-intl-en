@@ -1263,6 +1263,60 @@ func (c *Client) DescribeCustomerOwnVoucherListWithContext(ctx context.Context, 
     return
 }
 
+func NewDescribeCustomerOwnVoucherUsageDetailsRequest() (request *DescribeCustomerOwnVoucherUsageDetailsRequest) {
+    request = &DescribeCustomerOwnVoucherUsageDetailsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "DescribeCustomerOwnVoucherUsageDetails")
+    
+    
+    return
+}
+
+func NewDescribeCustomerOwnVoucherUsageDetailsResponse() (response *DescribeCustomerOwnVoucherUsageDetailsResponse) {
+    response = &DescribeCustomerOwnVoucherUsageDetailsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCustomerOwnVoucherUsageDetails
+// Description: The current API is used to query usage details of customer's own voucher by the customer self.
+//
+// Call role: End customer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeCustomerOwnVoucherUsageDetails(request *DescribeCustomerOwnVoucherUsageDetailsRequest) (response *DescribeCustomerOwnVoucherUsageDetailsResponse, err error) {
+    return c.DescribeCustomerOwnVoucherUsageDetailsWithContext(context.Background(), request)
+}
+
+// DescribeCustomerOwnVoucherUsageDetails
+// Description: The current API is used to query usage details of customer's own voucher by the customer self.
+//
+// Call role: End customer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeCustomerOwnVoucherUsageDetailsWithContext(ctx context.Context, request *DescribeCustomerOwnVoucherUsageDetailsRequest) (response *DescribeCustomerOwnVoucherUsageDetailsResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomerOwnVoucherUsageDetailsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "DescribeCustomerOwnVoucherUsageDetails")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCustomerOwnVoucherUsageDetails require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCustomerOwnVoucherUsageDetailsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCustomerUinRequest() (request *DescribeCustomerUinRequest) {
     request = &DescribeCustomerUinRequest{
         BaseRequest: &tchttp.BaseRequest{},
