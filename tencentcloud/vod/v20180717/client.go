@@ -6223,8 +6223,10 @@ func NewDescribeMediaInfosResponse() (response *DescribeMediaInfosResponse) {
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GETMEDIALISTERROR = "InternalError.GetMediaListError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_APPID = "InvalidParameterValue.AppId"
 //  INVALIDPARAMETERVALUE_FILEIDS = "InvalidParameterValue.FileIds"
 //  INVALIDPARAMETERVALUE_FILEIDSEMPTY = "InvalidParameterValue.FileIdsEmpty"
+//  INVALIDPARAMETERVALUE_FILEIDSOVERLIMIT = "InvalidParameterValue.FileIdsOverLimit"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeMediaInfos(request *DescribeMediaInfosRequest) (response *DescribeMediaInfosResponse, err error) {
     return c.DescribeMediaInfosWithContext(context.Background(), request)
@@ -6261,8 +6263,10 @@ func (c *Client) DescribeMediaInfos(request *DescribeMediaInfosRequest) (respons
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GETMEDIALISTERROR = "InternalError.GetMediaListError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_APPID = "InvalidParameterValue.AppId"
 //  INVALIDPARAMETERVALUE_FILEIDS = "InvalidParameterValue.FileIds"
 //  INVALIDPARAMETERVALUE_FILEIDSEMPTY = "InvalidParameterValue.FileIdsEmpty"
+//  INVALIDPARAMETERVALUE_FILEIDSOVERLIMIT = "InvalidParameterValue.FileIdsOverLimit"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeMediaInfosWithContext(ctx context.Context, request *DescribeMediaInfosRequest) (response *DescribeMediaInfosResponse, err error) {
     if request == nil {
@@ -8187,6 +8191,7 @@ func NewForbidMediaDistributionResponse() (response *ForbidMediaDistributionResp
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_FILEIDSTOOMANY = "InvalidParameterValue.FileIdsTooMany"
 //  INVALIDPARAMETERVALUE_OPERATION = "InvalidParameterValue.Operation"
+//  LIMITEXCEEDED = "LimitExceeded"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ForbidMediaDistribution(request *ForbidMediaDistributionRequest) (response *ForbidMediaDistributionResponse, err error) {
     return c.ForbidMediaDistributionWithContext(context.Background(), request)
@@ -8205,6 +8210,7 @@ func (c *Client) ForbidMediaDistribution(request *ForbidMediaDistributionRequest
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_FILEIDSTOOMANY = "InvalidParameterValue.FileIdsTooMany"
 //  INVALIDPARAMETERVALUE_OPERATION = "InvalidParameterValue.Operation"
+//  LIMITEXCEEDED = "LimitExceeded"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ForbidMediaDistributionWithContext(ctx context.Context, request *ForbidMediaDistributionRequest) (response *ForbidMediaDistributionResponse, err error) {
     if request == nil {
@@ -8253,6 +8259,7 @@ func NewHandleCurrentPlaylistResponse() (response *HandleCurrentPlaylistResponse
 //  INVALIDPARAMETERVALUE_ROUNDPLAYLIST = "InvalidParameterValue.RoundPlaylist"
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
 //  LIMITEXCEEDED_PLAYLIST = "LimitExceeded.PlayList"
+//  LIMITEXCEEDED_ROUNDPLAYLIST = "LimitExceeded.RoundPlaylist"
 func (c *Client) HandleCurrentPlaylist(request *HandleCurrentPlaylistRequest) (response *HandleCurrentPlaylistResponse, err error) {
     return c.HandleCurrentPlaylistWithContext(context.Background(), request)
 }
@@ -8268,6 +8275,7 @@ func (c *Client) HandleCurrentPlaylist(request *HandleCurrentPlaylistRequest) (r
 //  INVALIDPARAMETERVALUE_ROUNDPLAYLIST = "InvalidParameterValue.RoundPlaylist"
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
 //  LIMITEXCEEDED_PLAYLIST = "LimitExceeded.PlayList"
+//  LIMITEXCEEDED_ROUNDPLAYLIST = "LimitExceeded.RoundPlaylist"
 func (c *Client) HandleCurrentPlaylistWithContext(ctx context.Context, request *HandleCurrentPlaylistRequest) (response *HandleCurrentPlaylistResponse, err error) {
     if request == nil {
         request = NewHandleCurrentPlaylistRequest()
@@ -8421,57 +8429,57 @@ func NewLiveRealTimeClipResponse() (response *LiveRealTimeClipResponse) {
 }
 
 // LiveRealTimeClip
-// Live broadcast real-time editing means that during the live broadcast process (that is, before the live broadcast has ended), customers can select a section of past live broadcast content to generate a new video (HLS format) in real time. Developers can share it immediately, or permanently Save it.
+// Live stream clipping refers to the process where, during a live stream (not yet ended), customers can select a segment from past live stream content to generate a new video (HLS format) in real time. Developers can instantly share it or preserve it for long-term storage.
 //
 // 
 //
-// Tencent Cloud VOD supports two real-time editing modes:
+// Tencent Cloud Video on Demand (VOD) supports two instant editing modes:
 //
-// - Editing and solidification: Save the edited video as an independent video with an independent FileId; suitable for scenes where the highlight clips are saved for a long time;
+// - Clip Curing: Save the edited video as an independent video with an independent FileId; applicable to scenes where highlights are ** saved for a long time **;
 //
-// - Editing is not solidified: the edited video is attached to the live broadcast recording file and does not have an independent FileId; it is suitable for scenarios where highlight clips are **temporarily shared**.
-//
-// 
-//
-// Notice:
-//
-// - The prerequisite for using the live broadcast real-time editing function is that the target live stream has the [Time Shift Replay](https://intl.cloud.tencent.com/document/product/267/32742?from_cn_redirect=1) function enabled.
-//
-// - Live broadcast real-time editing is based on the m3u8 file generated by live broadcast recording, so its minimum editing accuracy is one ts slice, and it is impossible to achieve second-level or more precise editing accuracy.
-//
-// - Since the stream may be interrupted during the live broadcast, the actual video duration generated by editing may be inconsistent with expectations. For example, the time interval for editing a live stream is from 2018-09-20T10:30:00Z to 2018-09-20T10:40:00Z. If the stream is interrupted during this time interval, the duration of the returned media asset file will be Less than 10 minutes, in which case it can be sensed via the output parameter <a href="#p_segmentset">SegmentSet</a>.
+// - Clip not cured: The resulting video clip is attached to the live recording file and has no separate FileId; applicable to scenes where highlights are ** temporarily shared **.
 //
 // 
 //
-// ### Clip solidification
+// Note:
 //
-// Clip solidification means saving the clipped video into an independent video (with an independent FileId). Its life cycle is not affected by the original live broadcast recording video (even if the original recording video is deleted, the editing results will not be affected in any way); it can also be subjected to secondary processing such as transcoding.
+// -Using the live stream clipping functionality is the premise for the target live stream to enable the [time-shifted playback feature](https://www.tencentcloud.com/document/product/267/57281).
 //
-// 
+// -Live stream clipping is performed based on the m3u8 file generated by live recording generation, so its minimum editing precision is a ts slice, and second-level or more precise editing precision cannot be achieved.
 //
-// For example: for a complete football match, the original video recorded live may be as long as 2 hours. To save costs, the customer can store this video for 2 months, but for the "highlight moment" video that is edited in real time during the live broadcast However, you can specify a longer storage period, and at the same time, you can separately transcode the "highlight moments" video and other on-demand operations. At this time, you can choose the solution of real-time editing and solidification of the live broadcast.
-//
-// 
-//
-// The advantage of editing and curing is that its life cycle is independent of the original recorded video, and can be managed independently and stored for a long time.
+// -Since there may be stream interruptions during live streaming, the actual video duration generated by editing might differ from the expected duration. For example, if a live stream is edited for the time interval from 2018-09-20T10:30:00Z to 2018-09-20T10:40:00Z and stream interruption occurred during this interval, the duration of the returned media asset files will be less than 10 minutes. In such cases, you can perceive this through the output parameter <a href="#p_segmentset">SegmentSet</a>.
 //
 // 
 //
-// <font color='red'>Notice:</font> If solidification is specified during clipping, enable the reception of persistence completed event notifications through the ModifyEventConfig interface. After successful solidification, an event notification of type PersistenceComplete will be received. Before receiving this event notification, operations such as deletion or cooling down of live recording videos should not be performed, otherwise, abnormal playback may occur in the video generated by the clipping.
+// ### Edit solidification
+//
+// Clipping persistence means saving the edited video as an independent video (with an independent FileId). Its lifecycle is not subject to the original live recorded video (even if the original recorded video is deleted, the clipping result will not be impacted). It can also be post-processed, such as transcoding or publishing on WeChat.
 //
 // 
 //
-// ### Clips are not solidified
-//
-// The editing is not solidified, which means that the result of editing (m3u8 file) and the live recording video share the same ts fragment. The newly generated video is not an independent and complete video (no independent FileId, only playback URL), and its validity period is the same as the live broadcast. The validity period of the complete recorded video is the same. Once the video recorded during the live broadcast is deleted, the clip will also become unplayable.
+// For example: A complete football match may last for over 2 hr, and the customer can store the original video for 2 months to save costs. However, for the highlight reel from live stream clipping, you can specify longer storage. You can also perform additional on-demand operations like transcoding and publishing on WeChat separately for the highlight reel. In this case, choose the live stream clipping and solidification solution.
 //
 // 
 //
-// The clip is not solidified. Because the clip result is not an independent video, it will not be included in on-demand media asset video management (for example, the total number of videos in the console will not count this clip), and this clip cannot be transcoded separately. Video processing operations.
+// The advantage of edit solidification is that its lifecycle is independent of the original recorded video, allowing separate management and long-term preservation.
 //
 // 
 //
-// The advantage of not solidifying editing is that its editing operation is very "lightweight" and does not generate additional storage overhead. However, its disadvantage is that the life cycle is the same as the original recorded video, and further video processing such as transcoding cannot be performed.
+// <font color='red'>Note:</font> If you specify solidification when editing, enable reception of editing solidification event notifications through the ModifyEventConfig API. After successful solidification, you will receive a PersistenceComplete event notification. Upon receiving this event notification, you should not perform operations like deletion or cooling on the live video recording, otherwise exceptions may occur during playback of the generated video.
+//
+// 
+//
+// ### Editing is not solidified
+//
+// Non-solidified editing means the resulting m3u8 file shares the same TS segments with the live video recording. The generated video is not an independent and complete video (it has no standalone FileId, only a playback URL), and its valid period is consistent with the full video of the live recording. Once the live recording is deleted, it will lead to the video clip being unplayable.
+//
+// 
+//
+// Editing is not solidified. Since the clipping result is not an independent video, it will not be included in video management of on-demand media assets (for example, the total number of videos in the console will not count this video clip). It is also unable to perform any video processing operations such as transcoding or publishing on WeChat targeting this video clip separately.
+//
+// 
+//
+// The advantage of not curing clips is that they are "lightweight" and do not incur additional storage overhead. However, its shortcomings are that its life cycle is the same as that of the original recorded video, and it is impossible to further transcode and other Media Processing Service.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -8489,57 +8497,57 @@ func (c *Client) LiveRealTimeClip(request *LiveRealTimeClipRequest) (response *L
 }
 
 // LiveRealTimeClip
-// Live broadcast real-time editing means that during the live broadcast process (that is, before the live broadcast has ended), customers can select a section of past live broadcast content to generate a new video (HLS format) in real time. Developers can share it immediately, or permanently Save it.
+// Live stream clipping refers to the process where, during a live stream (not yet ended), customers can select a segment from past live stream content to generate a new video (HLS format) in real time. Developers can instantly share it or preserve it for long-term storage.
 //
 // 
 //
-// Tencent Cloud VOD supports two real-time editing modes:
+// Tencent Cloud Video on Demand (VOD) supports two instant editing modes:
 //
-// - Editing and solidification: Save the edited video as an independent video with an independent FileId; suitable for scenes where the highlight clips are saved for a long time;
+// - Clip Curing: Save the edited video as an independent video with an independent FileId; applicable to scenes where highlights are ** saved for a long time **;
 //
-// - Editing is not solidified: the edited video is attached to the live broadcast recording file and does not have an independent FileId; it is suitable for scenarios where highlight clips are **temporarily shared**.
-//
-// 
-//
-// Notice:
-//
-// - The prerequisite for using the live broadcast real-time editing function is that the target live stream has the [Time Shift Replay](https://intl.cloud.tencent.com/document/product/267/32742?from_cn_redirect=1) function enabled.
-//
-// - Live broadcast real-time editing is based on the m3u8 file generated by live broadcast recording, so its minimum editing accuracy is one ts slice, and it is impossible to achieve second-level or more precise editing accuracy.
-//
-// - Since the stream may be interrupted during the live broadcast, the actual video duration generated by editing may be inconsistent with expectations. For example, the time interval for editing a live stream is from 2018-09-20T10:30:00Z to 2018-09-20T10:40:00Z. If the stream is interrupted during this time interval, the duration of the returned media asset file will be Less than 10 minutes, in which case it can be sensed via the output parameter <a href="#p_segmentset">SegmentSet</a>.
+// - Clip not cured: The resulting video clip is attached to the live recording file and has no separate FileId; applicable to scenes where highlights are ** temporarily shared **.
 //
 // 
 //
-// ### Clip solidification
+// Note:
 //
-// Clip solidification means saving the clipped video into an independent video (with an independent FileId). Its life cycle is not affected by the original live broadcast recording video (even if the original recording video is deleted, the editing results will not be affected in any way); it can also be subjected to secondary processing such as transcoding.
+// -Using the live stream clipping functionality is the premise for the target live stream to enable the [time-shifted playback feature](https://www.tencentcloud.com/document/product/267/57281).
 //
-// 
+// -Live stream clipping is performed based on the m3u8 file generated by live recording generation, so its minimum editing precision is a ts slice, and second-level or more precise editing precision cannot be achieved.
 //
-// For example: for a complete football match, the original video recorded live may be as long as 2 hours. To save costs, the customer can store this video for 2 months, but for the "highlight moment" video that is edited in real time during the live broadcast However, you can specify a longer storage period, and at the same time, you can separately transcode the "highlight moments" video and other on-demand operations. At this time, you can choose the solution of real-time editing and solidification of the live broadcast.
-//
-// 
-//
-// The advantage of editing and curing is that its life cycle is independent of the original recorded video, and can be managed independently and stored for a long time.
+// -Since there may be stream interruptions during live streaming, the actual video duration generated by editing might differ from the expected duration. For example, if a live stream is edited for the time interval from 2018-09-20T10:30:00Z to 2018-09-20T10:40:00Z and stream interruption occurred during this interval, the duration of the returned media asset files will be less than 10 minutes. In such cases, you can perceive this through the output parameter <a href="#p_segmentset">SegmentSet</a>.
 //
 // 
 //
-// <font color='red'>Notice:</font> If solidification is specified during clipping, enable the reception of persistence completed event notifications through the ModifyEventConfig interface. After successful solidification, an event notification of type PersistenceComplete will be received. Before receiving this event notification, operations such as deletion or cooling down of live recording videos should not be performed, otherwise, abnormal playback may occur in the video generated by the clipping.
+// ### Edit solidification
+//
+// Clipping persistence means saving the edited video as an independent video (with an independent FileId). Its lifecycle is not subject to the original live recorded video (even if the original recorded video is deleted, the clipping result will not be impacted). It can also be post-processed, such as transcoding or publishing on WeChat.
 //
 // 
 //
-// ### Clips are not solidified
-//
-// The editing is not solidified, which means that the result of editing (m3u8 file) and the live recording video share the same ts fragment. The newly generated video is not an independent and complete video (no independent FileId, only playback URL), and its validity period is the same as the live broadcast. The validity period of the complete recorded video is the same. Once the video recorded during the live broadcast is deleted, the clip will also become unplayable.
+// For example: A complete football match may last for over 2 hr, and the customer can store the original video for 2 months to save costs. However, for the highlight reel from live stream clipping, you can specify longer storage. You can also perform additional on-demand operations like transcoding and publishing on WeChat separately for the highlight reel. In this case, choose the live stream clipping and solidification solution.
 //
 // 
 //
-// The clip is not solidified. Because the clip result is not an independent video, it will not be included in on-demand media asset video management (for example, the total number of videos in the console will not count this clip), and this clip cannot be transcoded separately. Video processing operations.
+// The advantage of edit solidification is that its lifecycle is independent of the original recorded video, allowing separate management and long-term preservation.
 //
 // 
 //
-// The advantage of not solidifying editing is that its editing operation is very "lightweight" and does not generate additional storage overhead. However, its disadvantage is that the life cycle is the same as the original recorded video, and further video processing such as transcoding cannot be performed.
+// <font color='red'>Note:</font> If you specify solidification when editing, enable reception of editing solidification event notifications through the ModifyEventConfig API. After successful solidification, you will receive a PersistenceComplete event notification. Upon receiving this event notification, you should not perform operations like deletion or cooling on the live video recording, otherwise exceptions may occur during playback of the generated video.
+//
+// 
+//
+// ### Editing is not solidified
+//
+// Non-solidified editing means the resulting m3u8 file shares the same TS segments with the live video recording. The generated video is not an independent and complete video (it has no standalone FileId, only a playback URL), and its valid period is consistent with the full video of the live recording. Once the live recording is deleted, it will lead to the video clip being unplayable.
+//
+// 
+//
+// Editing is not solidified. Since the clipping result is not an independent video, it will not be included in video management of on-demand media assets (for example, the total number of videos in the console will not count this video clip). It is also unable to perform any video processing operations such as transcoding or publishing on WeChat targeting this video clip separately.
+//
+// 
+//
+// The advantage of not curing clips is that they are "lightweight" and do not incur additional storage overhead. However, its shortcomings are that its life cycle is the same as that of the original recorded video, and it is impossible to further transcode and other Media Processing Service.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -10995,19 +11003,15 @@ func NewProcessMediaByMPSResponse() (response *ProcessMediaByMPSResponse) {
 }
 
 // ProcessMediaByMPS
-// This API is used to utilize the media processing capability of Media Processing Service (MPS) to initiate media processing for videos on VOD. When the task is initiated, relevant MPS parameters must be filled in the MPSProcessMediaParams parameter in JSON format. For detailed task parameter configuration, please refer to the [ProcessMedia API](https://www.tencentcloud.com/document/product/1041/33640). 
+// Use the media processing capability of the media processing service to trigger media processing for on-demand video.
 //
-// Currently supported MPS features:
+// 
 //
-// 1. [Smart Erase](https://www.tencentcloud.com/document/product/1041/58269): This function blurs, de-blurs, or removes traces of logos, subtitles, faces, and license plates in the video, facilitating content dissemination and sharing. The new media generated by this task will be stored in a new FileId within the sub-application of VOD. 
+// Video processing tasks initiated by this method:
 //
-// > Media processing tasks initiated in this way: 
+// Querying the status of tasks and results is still done on the VOD platform. Use [DescribeTaskDetail](https://www.tencentcloud.com/document/product/266/33431?from_cn_redirect=1) or [DescribeTasks](https://www.tencentcloud.com/document/product/266/33430?from_cn_redirect=1) to query tasks.
 //
-// > 1. Task status and results are still queried on the on-demand platform. Use [DescribeTaskDetail](https://www.tencentcloud.com/document/product/266/34129) or [DescribeTasks](https://www.tencentcloud.com/document/product/266/37559) to query the task. 
-//
-// > 2. Usage and billing for related functions will be provided on the MPS platform. Therefore, you must activate MPS service before using this feature. 
-//
-// > 3. This feature is currently in internal testing. If you would like to test it, please contact us for support.
+// 2. The amount and bills of related features will be provided on the MPS platform. Before using this feature, start by enabling the Media Processing Service (MPS) in the console. For the activation method, refer to the preliminary operations in the integration guide.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -11025,19 +11029,15 @@ func (c *Client) ProcessMediaByMPS(request *ProcessMediaByMPSRequest) (response 
 }
 
 // ProcessMediaByMPS
-// This API is used to utilize the media processing capability of Media Processing Service (MPS) to initiate media processing for videos on VOD. When the task is initiated, relevant MPS parameters must be filled in the MPSProcessMediaParams parameter in JSON format. For detailed task parameter configuration, please refer to the [ProcessMedia API](https://www.tencentcloud.com/document/product/1041/33640). 
+// Use the media processing capability of the media processing service to trigger media processing for on-demand video.
 //
-// Currently supported MPS features:
+// 
 //
-// 1. [Smart Erase](https://www.tencentcloud.com/document/product/1041/58269): This function blurs, de-blurs, or removes traces of logos, subtitles, faces, and license plates in the video, facilitating content dissemination and sharing. The new media generated by this task will be stored in a new FileId within the sub-application of VOD. 
+// Video processing tasks initiated by this method:
 //
-// > Media processing tasks initiated in this way: 
+// Querying the status of tasks and results is still done on the VOD platform. Use [DescribeTaskDetail](https://www.tencentcloud.com/document/product/266/33431?from_cn_redirect=1) or [DescribeTasks](https://www.tencentcloud.com/document/product/266/33430?from_cn_redirect=1) to query tasks.
 //
-// > 1. Task status and results are still queried on the on-demand platform. Use [DescribeTaskDetail](https://www.tencentcloud.com/document/product/266/34129) or [DescribeTasks](https://www.tencentcloud.com/document/product/266/37559) to query the task. 
-//
-// > 2. Usage and billing for related functions will be provided on the MPS platform. Therefore, you must activate MPS service before using this feature. 
-//
-// > 3. This feature is currently in internal testing. If you would like to test it, please contact us for support.
+// 2. The amount and bills of related features will be provided on the MPS platform. Before using this feature, start by enabling the Media Processing Service (MPS) in the console. For the activation method, refer to the preliminary operations in the integration guide.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -11350,6 +11350,7 @@ func NewPullUploadResponse() (response *PullUploadResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_COVERURL = "InvalidParameterValue.CoverUrl"
 //  INVALIDPARAMETERVALUE_EXPIRETIME = "InvalidParameterValue.ExpireTime"
+//  INVALIDPARAMETERVALUE_MEDIASTORAGEPATH = "InvalidParameterValue.MediaStoragePath"
 //  INVALIDPARAMETERVALUE_MEDIAURL = "InvalidParameterValue.MediaUrl"
 //  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
 //  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
@@ -11376,6 +11377,7 @@ func (c *Client) PullUpload(request *PullUploadRequest) (response *PullUploadRes
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_COVERURL = "InvalidParameterValue.CoverUrl"
 //  INVALIDPARAMETERVALUE_EXPIRETIME = "InvalidParameterValue.ExpireTime"
+//  INVALIDPARAMETERVALUE_MEDIASTORAGEPATH = "InvalidParameterValue.MediaStoragePath"
 //  INVALIDPARAMETERVALUE_MEDIAURL = "InvalidParameterValue.MediaUrl"
 //  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
 //  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"

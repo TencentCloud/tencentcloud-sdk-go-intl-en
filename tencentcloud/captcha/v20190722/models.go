@@ -25,10 +25,10 @@ type DescribeCaptchaResultRequestParams struct {
 	// Fill with fixed value: 9.
 	CaptchaType *uint64 `json:"CaptchaType,omitnil,omitempty" name:"CaptchaType"`
 
-	// The user verification ticket returned by the frontend callback function
+	// The user verification ticket returned by the frontend callback function.
 	Ticket *string `json:"Ticket,omitnil,omitempty" name:"Ticket"`
 
-	// The user public IP obtained from the customer backend server
+	// The user public IP obtained from the customer backend server.
 	UserIp *string `json:"UserIp,omitnil,omitempty" name:"UserIp"`
 
 	// A random string returned by the frontend callback function
@@ -62,10 +62,10 @@ type DescribeCaptchaResultRequest struct {
 	// Fill with fixed value: 9.
 	CaptchaType *uint64 `json:"CaptchaType,omitnil,omitempty" name:"CaptchaType"`
 
-	// The user verification ticket returned by the frontend callback function
+	// The user verification ticket returned by the frontend callback function.
 	Ticket *string `json:"Ticket,omitnil,omitempty" name:"Ticket"`
 
-	// The user public IP obtained from the customer backend server
+	// The user public IP obtained from the customer backend server.
 	UserIp *string `json:"UserIp,omitnil,omitempty" name:"UserIp"`
 
 	// A random string returned by the frontend callback function

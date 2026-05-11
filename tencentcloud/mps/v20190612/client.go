@@ -67,7 +67,7 @@ func NewBatchProcessMediaResponse() (response *BatchProcessMediaResponse) {
 // BatchProcessMedia
 // This API is used to initiate batch processing tasks for URL video links, with features including:
 //
-// Smart subtitle (full speech, speech hotword, and speech translation)
+// Smart subtitle (full speech, speech hotword, and speech translation).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
@@ -84,7 +84,7 @@ func (c *Client) BatchProcessMedia(request *BatchProcessMediaRequest) (response 
 // BatchProcessMedia
 // This API is used to initiate batch processing tasks for URL video links, with features including:
 //
-// Smart subtitle (full speech, speech hotword, and speech translation)
+// Smart subtitle (full speech, speech hotword, and speech translation).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
@@ -4799,6 +4799,62 @@ func (c *Client) DescribeTasksWithContext(ctx context.Context, request *Describe
     return
 }
 
+func NewDescribeTextToSpeechAsyncTaskRequest() (request *DescribeTextToSpeechAsyncTaskRequest) {
+    request = &DescribeTextToSpeechAsyncTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeTextToSpeechAsyncTask")
+    
+    
+    return
+}
+
+func NewDescribeTextToSpeechAsyncTaskResponse() (response *DescribeTextToSpeechAsyncTaskResponse) {
+    response = &DescribeTextToSpeechAsyncTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTextToSpeechAsyncTask
+// This API is used to query the result of an asynchronous text to speech task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+func (c *Client) DescribeTextToSpeechAsyncTask(request *DescribeTextToSpeechAsyncTaskRequest) (response *DescribeTextToSpeechAsyncTaskResponse, err error) {
+    return c.DescribeTextToSpeechAsyncTaskWithContext(context.Background(), request)
+}
+
+// DescribeTextToSpeechAsyncTask
+// This API is used to query the result of an asynchronous text to speech task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+func (c *Client) DescribeTextToSpeechAsyncTaskWithContext(ctx context.Context, request *DescribeTextToSpeechAsyncTaskRequest) (response *DescribeTextToSpeechAsyncTaskResponse, err error) {
+    if request == nil {
+        request = NewDescribeTextToSpeechAsyncTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DescribeTextToSpeechAsyncTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTextToSpeechAsyncTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTextToSpeechAsyncTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTranscodeTemplatesRequest() (request *DescribeTranscodeTemplatesRequest) {
     request = &DescribeTranscodeTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4929,6 +4985,64 @@ func (c *Client) DescribeUsageDataWithContext(ctx context.Context, request *Desc
     request.SetContext(ctx)
     
     response = NewDescribeUsageDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeVoicesRequest() (request *DescribeVoicesRequest) {
+    request = &DescribeVoicesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeVoices")
+    
+    
+    return
+}
+
+func NewDescribeVoicesResponse() (response *DescribeVoicesResponse) {
+    response = &DescribeVoicesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeVoices
+// This synchronous API is used to query available voices. It supports filtering voices by type, tag, language, and other criteria.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetWorkError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SERVICE = "InvalidParameterValue.Service"
+func (c *Client) DescribeVoices(request *DescribeVoicesRequest) (response *DescribeVoicesResponse, err error) {
+    return c.DescribeVoicesWithContext(context.Background(), request)
+}
+
+// DescribeVoices
+// This synchronous API is used to query available voices. It supports filtering voices by type, tag, language, and other criteria.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetWorkError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SERVICE = "InvalidParameterValue.Service"
+func (c *Client) DescribeVoicesWithContext(ctx context.Context, request *DescribeVoicesRequest) (response *DescribeVoicesResponse, err error) {
+    if request == nil {
+        request = NewDescribeVoicesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DescribeVoices")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeVoices require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeVoicesResponse()
     err = c.Send(request, response)
     return
 }
@@ -5097,6 +5211,60 @@ func (c *Client) DescribeWorkflowsWithContext(ctx context.Context, request *Desc
     request.SetContext(ctx)
     
     response = NewDescribeWorkflowsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDesignVoiceAsyncRequest() (request *DesignVoiceAsyncRequest) {
+    request = &DesignVoiceAsyncRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DesignVoiceAsync")
+    
+    
+    return
+}
+
+func NewDesignVoiceAsyncResponse() (response *DesignVoiceAsyncResponse) {
+    response = &DesignVoiceAsyncResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DesignVoiceAsync
+// This API is used to design a voice. It generates a voice ID based on a prompt.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DesignVoiceAsync(request *DesignVoiceAsyncRequest) (response *DesignVoiceAsyncResponse, err error) {
+    return c.DesignVoiceAsyncWithContext(context.Background(), request)
+}
+
+// DesignVoiceAsync
+// This API is used to design a voice. It generates a voice ID based on a prompt.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DesignVoiceAsyncWithContext(ctx context.Context, request *DesignVoiceAsyncRequest) (response *DesignVoiceAsyncResponse, err error) {
+    if request == nil {
+        request = NewDesignVoiceAsyncRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DesignVoiceAsync")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DesignVoiceAsync require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDesignVoiceAsyncResponse()
     err = c.Send(request, response)
     return
 }
@@ -7533,6 +7701,68 @@ func (c *Client) ProcessMediaWithContext(ctx context.Context, request *ProcessMe
     return
 }
 
+func NewQueryProjectRequest() (request *QueryProjectRequest) {
+    request = &QueryProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "QueryProject")
+    
+    
+    return
+}
+
+func NewQueryProjectResponse() (response *QueryProjectResponse) {
+    response = &QueryProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// QueryProject
+// This API is used to query an episode project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+func (c *Client) QueryProject(request *QueryProjectRequest) (response *QueryProjectResponse, err error) {
+    return c.QueryProjectWithContext(context.Background(), request)
+}
+
+// QueryProject
+// This API is used to query an episode project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+func (c *Client) QueryProjectWithContext(ctx context.Context, request *QueryProjectRequest) (response *QueryProjectResponse, err error) {
+    if request == nil {
+        request = NewQueryProjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "QueryProject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRecognizeAudioRequest() (request *RecognizeAudioRequest) {
     request = &RecognizeAudioRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7707,6 +7937,62 @@ func (c *Client) SyncDubbingWithContext(ctx context.Context, request *SyncDubbin
     return
 }
 
+func NewTextToSpeechAsyncRequest() (request *TextToSpeechAsyncRequest) {
+    request = &TextToSpeechAsyncRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "TextToSpeechAsync")
+    
+    
+    return
+}
+
+func NewTextToSpeechAsyncResponse() (response *TextToSpeechAsyncResponse) {
+    response = &TextToSpeechAsyncResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// TextToSpeechAsync
+// This API is used to convert text to speech asynchronously and supports long text to speech.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) TextToSpeechAsync(request *TextToSpeechAsyncRequest) (response *TextToSpeechAsyncResponse, err error) {
+    return c.TextToSpeechAsyncWithContext(context.Background(), request)
+}
+
+// TextToSpeechAsync
+// This API is used to convert text to speech asynchronously and supports long text to speech.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) TextToSpeechAsyncWithContext(ctx context.Context, request *TextToSpeechAsyncRequest) (response *TextToSpeechAsyncResponse, err error) {
+    if request == nil {
+        request = NewTextToSpeechAsyncRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "TextToSpeechAsync")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("TextToSpeechAsync require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewTextToSpeechAsyncResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewTextTranslationRequest() (request *TextTranslationRequest) {
     request = &TextTranslationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7727,7 +8013,7 @@ func NewTextTranslationResponse() (response *TextTranslationResponse) {
 }
 
 // TextTranslation
-// This API is used to translate text.
+// 
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_SOURCELANGUAGE = "InvalidParameterValue.SourceLanguage"
@@ -7741,7 +8027,7 @@ func (c *Client) TextTranslation(request *TextTranslationRequest) (response *Tex
 }
 
 // TextTranslation
-// This API is used to translate text.
+// 
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_SOURCELANGUAGE = "InvalidParameterValue.SourceLanguage"
@@ -7763,6 +8049,60 @@ func (c *Client) TextTranslationWithContext(ctx context.Context, request *TextTr
     request.SetContext(ctx)
     
     response = NewTextTranslationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateProjectRequest() (request *UpdateProjectRequest) {
+    request = &UpdateProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "UpdateProject")
+    
+    
+    return
+}
+
+func NewUpdateProjectResponse() (response *UpdateProjectResponse) {
+    response = &UpdateProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateProject
+// This API is used to update an episode project.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_PROJECTNAMEDUPLICATE = "InvalidParameterValue.ProjectNameDuplicate"
+//  INVALIDPARAMETERVALUE_PROJECTNOTFOUND = "InvalidParameterValue.ProjectNotFound"
+//  INVALIDPARAMETERVALUE_USERUNREGISTER = "InvalidParameterValue.UserUnRegister"
+func (c *Client) UpdateProject(request *UpdateProjectRequest) (response *UpdateProjectResponse, err error) {
+    return c.UpdateProjectWithContext(context.Background(), request)
+}
+
+// UpdateProject
+// This API is used to update an episode project.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_PROJECTNAMEDUPLICATE = "InvalidParameterValue.ProjectNameDuplicate"
+//  INVALIDPARAMETERVALUE_PROJECTNOTFOUND = "InvalidParameterValue.ProjectNotFound"
+//  INVALIDPARAMETERVALUE_USERUNREGISTER = "InvalidParameterValue.UserUnRegister"
+func (c *Client) UpdateProjectWithContext(ctx context.Context, request *UpdateProjectRequest) (response *UpdateProjectResponse, err error) {
+    if request == nil {
+        request = NewUpdateProjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "UpdateProject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateProjectResponse()
     err = c.Send(request, response)
     return
 }

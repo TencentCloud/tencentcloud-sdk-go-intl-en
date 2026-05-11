@@ -198,6 +198,9 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	// CopyRight Watermark.
 	CopyRightWatermark *CopyRightWatermarkInput `json:"CopyRightWatermark,omitnil,omitempty" name:"CopyRightWatermark"`
 
+	// Digital watermark.
+	BlindWatermark *BlindWatermarkInput `json:"BlindWatermark,omitnil,omitempty" name:"BlindWatermark"`
+
 	// List of subtitle IDs (maximum: 16)
 	SubtitleSet []*string `json:"SubtitleSet,omitnil,omitempty" name:"SubtitleSet"`
 }
@@ -283,6 +286,40 @@ type AdaptiveStreamTemplate struct {
 	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
 }
 
+type AdvancedElementInfo struct {
+	// <p>Subject ID.</p>
+	ElementId *string `json:"ElementId,omitnil,omitempty" name:"ElementId"`
+
+	// <p>Entity information.</p>
+	ElementInfo *string `json:"ElementInfo,omitnil,omitempty" name:"ElementInfo"`
+}
+
+type AdvancedSuperResolutionConfig struct {
+
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
+
+
+	Percent *float64 `json:"Percent,omitnil,omitempty" name:"Percent"`
+
+
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
+
+
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
+
+
+	LongSide *int64 `json:"LongSide,omitnil,omitempty" name:"LongSide"`
+
+
+	ShortSide *int64 `json:"ShortSide,omitnil,omitempty" name:"ShortSide"`
+}
+
 type AiAnalysisResult struct {
 	// Task type. Valid values:
 	// <li>Classification: intelligent categorization</li>
@@ -292,24 +329,19 @@ type AiAnalysisResult struct {
 	// <li>Highlight: intelligent highlight generating</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Query result of intelligent categorization task in video content analysis, which is valid if task type is `Classification`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Query result of the intelligent video content analysis classification task. Valid when the task type is Classification.
 	ClassificationTask *AiAnalysisTaskClassificationResult `json:"ClassificationTask,omitnil,omitempty" name:"ClassificationTask"`
 
-	// Query result of intelligent cover generating task in video content analysis, which is valid if task type is `Cover`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Query result of the Intelligent Cover Task for video content analysis. Valid when the task type is Cover.
 	CoverTask *AiAnalysisTaskCoverResult `json:"CoverTask,omitnil,omitempty" name:"CoverTask"`
 
-	// Query result of intelligent tagging task in video content analysis, which is valid if task type is `Tag`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Query result of the video content analysis intelligent tag task. Valid at that time when the task type is Tag.
 	TagTask *AiAnalysisTaskTagResult `json:"TagTask,omitnil,omitempty" name:"TagTask"`
 
-	// Query result of intelligent frame-specific tagging task in video content analysis, which is valid if task type is `FrameTag`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Query result of the intelligent frame-specific tagging task for video content analysis. Valid when the task type is FrameTag.
 	FrameTagTask *AiAnalysisTaskFrameTagResult `json:"FrameTagTask,omitnil,omitempty" name:"FrameTagTask"`
 
-	// Query result of an intelligent highlight generating task in video content analysis, which is valid when task type is `Highlight`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Query result of the intelligent video content analysis highlight task. Valid when the task type is Highlight.
 	HighlightTask *AiAnalysisTaskHighlightResult `json:"HighlightTask,omitnil,omitempty" name:"HighlightTask"`
 }
 
@@ -346,8 +378,7 @@ type AiAnalysisTaskClassificationResult struct {
 	// Input of intelligent categorization task.
 	Input *AiAnalysisTaskClassificationInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output of intelligent categorization task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Intelligent classification task output.
 	Output *AiAnalysisTaskClassificationOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of an intelligent categorization task. Value range: 0-100.
@@ -393,8 +424,7 @@ type AiAnalysisTaskCoverResult struct {
 	// Input of intelligent cover generating task.
 	Input *AiAnalysisTaskCoverInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output of intelligent cover generating task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Intelligent Cover Task output.
 	Output *AiAnalysisTaskCoverOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of an intelligent thumbnail generation task. Value range: 0-100.
@@ -440,8 +470,7 @@ type AiAnalysisTaskFrameTagResult struct {
 	// Input of intelligent frame-specific tagging task.
 	Input *AiAnalysisTaskFrameTagInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output of intelligent frame-specific tagging task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Intelligent frame-specific tagging task output.
 	Output *AiAnalysisTaskFrameTagOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of an intelligent labeling by frame task. Value range: 0-100.
@@ -487,8 +516,7 @@ type AiAnalysisTaskHighlightResult struct {
 	// Input for an intelligent highlight generating task.
 	Input *AiAnalysisTaskHighlightInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output of an intelligent highlight generating task.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Intelligent Highlight Task output.
 	Output *AiAnalysisTaskHighlightOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of an intelligent highlight generation task. Value range: 0-100.
@@ -539,8 +567,7 @@ type AiAnalysisTaskTagResult struct {
 	// Input of intelligent tagging task.
 	Input *AiAnalysisTaskTagInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output of intelligent tagging task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Intelligent tag task output.
 	Output *AiAnalysisTaskTagOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of an intelligent labeling task. Value range: 0-100.
@@ -615,57 +642,49 @@ type AiContentReviewTaskInput struct {
 
 type AiRecognitionResult struct {
 	// Task type. Valid values:
-	// <li>FaceRecognition: face recognition,</li>
-	// <li>AsrWordsRecognition: speech keyword recognition,</li>
-	// <li>OcrWordsRecognition: text keyword recognition,</li>
-	// <li>AsrFullTextRecognition: full speech recognition,</li>
-	// <li>AsrTranslateRecognition: voice translation recognition,</li>
-	// <li>OcrFullTextRecognition: full text recognition,</li>
-	// <li>HeadTailRecognition: video opening and ending credits recognition,</li>
-	// <li>ObjectRecognition: object recognition.</li>
+	// <li>FaceRecognition: face recognition.</li>
+	// <li>AsrWordsRecognition: speech keyword recognition.</li>
+	// <li>OcrWordsRecognition: text keyword recognition.</li>
+	// <li>AsrFullTextRecognition: full speech recognition.</li>
+	// <li>AsrTranslateRecognition: Speech translation recognition,</li>
+	// <li>OcrFullTextRecognition: full text recognition.</li>
+	// <li>HeadTailRecognition: Video start and end recognition,</li>
+	// <li>ObjectRecognition: Object recognition.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Video opening and ending credits recognition result, which is valid when `Type` is
-	//  `HeadTailRecognition`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Video opening and closing credits recognition result when Type is
+	// HeadTailRecognition.
 	HeadTailTask *AiRecognitionTaskHeadTailResult `json:"HeadTailTask,omitnil,omitempty" name:"HeadTailTask"`
 
-	// Video splitting recognition result, which is valid when `Type` is
-	//  `SegmentRecognition`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Video splitting recognition result, which is valid when Type is
+	// Valid at SegmentRecognition.
 	SegmentTask *AiRecognitionTaskSegmentResult `json:"SegmentTask,omitnil,omitempty" name:"SegmentTask"`
 
-	// Face recognition result, which is valid when `Type` is 
-	//  `FaceRecognition`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Face recognition result, which is valid when Type is 
+	// FaceRecognition.
 	FaceTask *AiRecognitionTaskFaceResult `json:"FaceTask,omitnil,omitempty" name:"FaceTask"`
 
-	// Speech keyword recognition result, which is valid when `Type` is
-	//  `AsrWordsRecognition`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Speech keyword recognition result when Type is
+	// Valid at AsrWordsRecognition.
 	AsrWordsTask *AiRecognitionTaskAsrWordsResult `json:"AsrWordsTask,omitnil,omitempty" name:"AsrWordsTask"`
 
-	// Full speech recognition result, which is valid when `Type` is
-	//  `AsrFullTextRecognition`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Full speech recognition result. When Type is
+	// Set to AsrFullTextRecognition, this parameter takes effect.
 	AsrFullTextTask *AiRecognitionTaskAsrFullTextResult `json:"AsrFullTextTask,omitnil,omitempty" name:"AsrFullTextTask"`
 
-	// Voice translation result, valid when Type is AsrTranslateRecognition.
+	// Voice translation result. Valid when Type is AsrTranslateRecognition.
 	AsrTranslateTask *AiRecognitionTaskAsrTranslateResult `json:"AsrTranslateTask,omitnil,omitempty" name:"AsrTranslateTask"`
 
-	// Text keyword recognition result, which is valid when `Type` is
-	//  `OcrWordsRecognition`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Text keyword recognition result when Type is
+	// Valid at OcrWordsRecognition.
 	OcrWordsTask *AiRecognitionTaskOcrWordsResult `json:"OcrWordsTask,omitnil,omitempty" name:"OcrWordsTask"`
 
-	// Full text recognition result, which is valid when `Type` is
-	//  `OcrFullTextRecognition`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Full text recognition result. When Type is
+	// OcrFullTextRecognition.
 	OcrFullTextTask *AiRecognitionTaskOcrFullTextResult `json:"OcrFullTextTask,omitnil,omitempty" name:"OcrFullTextTask"`
 
-	// Object recognition result, which is valid when `Type` is
-	//  `ObjectRecognition`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Object recognition result, which is valid when Type is
+	// Valid at ObjectRecognition.
 	ObjectTask *AiRecognitionTaskObjectResult `json:"ObjectTask,omitnil,omitempty" name:"ObjectTask"`
 }
 
@@ -685,8 +704,7 @@ type AiRecognitionTaskAsrFullTextResult struct {
 	// Input information of full speech recognition task.
 	Input *AiRecognitionTaskAsrFullTextResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output information of full speech recognition task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Output information on the speech full-text recognition task.
 	Output *AiRecognitionTaskAsrFullTextResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Speech full-text recognition task progress, value range [0-100].
@@ -723,15 +741,15 @@ type AiRecognitionTaskAsrFullTextResultOutput struct {
 }
 
 type AiRecognitionTaskAsrFullTextResultOutputSubtitleItem struct {
-	// Media asset subtitle ID, used for media asset subtitle management, only valid when Format is vtt.
-	// <font color=red>Note:</font> Tasks before 2024-11-01T10:00:00Z return this field as invalid.
+	// Media asset subtitle ID, used for media asset subtitle management. Valid only when Format is vtt.
+	// <font color=red>Note:</font> This field is invalid for tasks before 2024-11-01T10:00:00Z.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Media asset subtitle name, used for player display, only valid when Format is vtt.
-	// <font color=red>Note:</font> Tasks before 2024-11-01T10:00:00Z return this field as invalid.
+	// Media Asset Subtitle Name for player display. Valid only when Format is vtt.
+	// <font color=red>Note:</font> This field is invalid for tasks before 2024-11-01T10:00:00Z.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Subtitle Language.
+	// Subtitle language.
 	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
 
 	// The format of the subtitle files. Valid values:
@@ -758,49 +776,48 @@ type AiRecognitionTaskAsrFullTextSegmentItem struct {
 }
 
 type AiRecognitionTaskAsrTranslateResult struct {
-	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+	// Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	// Error code. An empty string indicates success, and additional values indicate failure. For values, see the video processing error code list (https://www.tencentcloud.com/document/product/266/50368?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 indicates the task is successful; other values indicate failure. It is not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
+	// Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Input information of the voice translation task.
+	// Voice translation task input information.
 	Input *AiRecognitionTaskAsrTranslateResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output information of the voice translation task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Voice translation task output information.
 	Output *AiRecognitionTaskAsrTranslateResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// Progress of the voice translation task, value range [0-100].
+	// Voice translation task progress, with a value range of [0-100].
 	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
-	// Begin process time of the voice translation task, in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Voice Translation Task Start Time in [ISO datetime format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
 
-	// The time when the voice translation task is completed, in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Time for voice translation task completion in [ISO datetime format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 }
 
 type AiRecognitionTaskAsrTranslateResultInput struct {
-	// Voice translation template ID.
+	// Speech translation template ID.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 }
 
 type AiRecognitionTaskAsrTranslateResultOutput struct {
-	// Voice translation segments list.
-	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
+	// Voice translation clip list.
+	// <font color=red>Note</font>: The list only displays the first 100 elements. To obtain the complete result, refer to the corresponding file in SegmentSetFileUrl.
 	SegmentSet []*AiRecognitionTaskAsrTranslateSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 
-	// URL to the file of the list for voice translation segments. The file format is JSON, and the data structure is the same as `SegmentSet`. The file will be deleted upon the expiration time `SegmentSetFileUrlExpireTime`, instead of being stored permanently.
+	// URL of Speech Translation Clip List File. The content of the file is JSON, consistent with the fields of SegmentSet. (The file will not be retained permanently and will be deleted when reaching SegmentSetFileUrlExpireTime.)
 	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitnil,omitempty" name:"SegmentSetFileUrl"`
 
-	// The expiration time of the URLs of voice translation segments in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-date-format).
+	// Expiration time of the URL for the speech translation clip list file, in [ISO date format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitnil,omitempty" name:"SegmentSetFileUrlExpireTime"`
 
 	// Generated subtitle list.
@@ -808,19 +825,19 @@ type AiRecognitionTaskAsrTranslateResultOutput struct {
 }
 
 type AiRecognitionTaskAsrTranslateSegmentItem struct {
-	// Confidence level of the voice translation segment. Value: 0~100.
+	// Confidence of a speech translation segment. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Start time offset of the voice translation segment in seconds.
+	// Start time offset of a recognized segment in speech translation, in seconds.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// End time offset of the voice translation segment in seconds.
+	// End time offset of a recognized segment in speech translation, in seconds.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
 	// Recognized text.
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
-	// The translation.
+	// Translated text.
 	Translation *string `json:"Translation,omitnil,omitempty" name:"Translation"`
 }
 
@@ -840,8 +857,7 @@ type AiRecognitionTaskAsrWordsResult struct {
 	// Input information of speech keyword recognition task.
 	Input *AiRecognitionTaskAsrWordsResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output information of speech keyword recognition task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Speech keyword recognition task output information.
 	Output *AiRecognitionTaskAsrWordsResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of a speech keyword recognition task. Value range: 0-100.
@@ -906,8 +922,7 @@ type AiRecognitionTaskFaceResult struct {
 	// Input information of face recognition task.
 	Input *AiRecognitionTaskFaceResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output information of face recognition task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Face recognition task output information.
 	Output *AiRecognitionTaskFaceResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of a face recognition task. Value range: 0-100.
@@ -983,8 +998,7 @@ type AiRecognitionTaskHeadTailResult struct {
 	// Input information of video opening and ending credits recognition task.
 	Input *AiRecognitionTaskHeadTailResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output information of video opening and ending credits recognition task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Video opening and closing credits recognition task output information.
 	Output *AiRecognitionTaskHeadTailResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of an opening/closing segment recognition task. Value range: 0-100.
@@ -1037,8 +1051,7 @@ type AiRecognitionTaskObjectResult struct {
 	// Input information of object recognition task.
 	Input *AiRecognitionTaskObjectResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output information of object recognition task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Object recognition task output information.
 	Output *AiRecognitionTaskObjectResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of an object recognition task. Value range: 0-100.
@@ -1125,8 +1138,7 @@ type AiRecognitionTaskOcrFullTextResult struct {
 	// Input information of full text recognition task.
 	Input *AiRecognitionTaskOcrFullTextResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output information of full text recognition task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Full text recognition task output information.
 	Output *AiRecognitionTaskOcrFullTextResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of a full text recognition task. Value range: 0-100.
@@ -1194,8 +1206,7 @@ type AiRecognitionTaskOcrWordsResult struct {
 	// Input information of text keyword recognition task.
 	Input *AiRecognitionTaskOcrWordsResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output information of text keyword recognition task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Text keyword recognition task output information.
 	Output *AiRecognitionTaskOcrWordsResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of a text keyword recognition task. Value range: 0-100.
@@ -1260,12 +1271,10 @@ type AiRecognitionTaskSegmentResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Input information of video splitting task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Video splitting task input.
 	Input *AiRecognitionTaskSegmentResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output information of video splitting task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Video splitting task output information.
 	Output *AiRecognitionTaskSegmentResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of a video splitting task. Value range: 0-100.
@@ -1581,8 +1590,7 @@ type AiReviewTaskPoliticalOcrResult struct {
 	// Input for OCR-based recognition of politically sensitive content
 	Input *AiReviewPoliticalOcrTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output for OCR-based recognition of politically sensitive content
-	// Note: This field may return `null`, indicating that no valid value can be found.
+	// Video moderation Ocr text involves inappropriate information in task output.
 	Output *AiReviewPoliticalOcrTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Audio and video review OCR text involves the task progress of inappropriate information, the value range is [0-100].
@@ -1606,8 +1614,7 @@ type AiReviewTaskPoliticalResult struct {
 	// Input for intelligent recognition of politically sensitive content
 	Input *AiReviewPoliticalTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output for intelligent recognition of politically sensitive content
-	// Note: This field may return `null`, indicating that no valid value can be found.
+	// Video moderation involves inappropriate information in task output.
 	Output *AiReviewPoliticalTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of a moderation task (politically sensitive content). Value range: 0-100.
@@ -1631,8 +1638,7 @@ type AiReviewTaskPornAsrResult struct {
 	// Input for ASR-based recognition of pornographic content
 	Input *AiReviewPornAsrTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output for ASR-based recognition of pornographic content
-	// Note: This field may return `null`, indicating that no valid value can be found.
+	// Video moderation involves offensive content in Asr text task output.
 	Output *AiReviewPornAsrTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of an ASR-based moderation task (pornographic content). Value range: 0-100.
@@ -1656,8 +1662,7 @@ type AiReviewTaskPornOcrResult struct {
 	// Input for OCR-based recognition of pornographic content
 	Input *AiReviewPornOcrTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output for OCR-based recognition of pornographic content
-	// Note: This field may return `null`, indicating that no valid value can be found.
+	// Video moderation Ocr text involves offensive content in task output.
 	Output *AiReviewPornOcrTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of an OCR-based moderation task (pornographic content). Value range: 0-100.
@@ -1681,8 +1686,7 @@ type AiReviewTaskPornResult struct {
 	// Input for intelligent recognition of pornographic content
 	Input *AiReviewPornTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output for intelligent recognition of pornographic content
-	// Note: This field may return `null`, indicating that no valid value can be found.
+	// Video moderation involves offensive content in task output.
 	Output *AiReviewPornTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of a moderation task (pornographic content). Value range: 0-100.
@@ -1705,8 +1709,7 @@ type AiReviewTaskProhibitedAsrResult struct {
 	// Input for ASR-based recognition of banned content
 	Input *AiReviewProhibitedAsrTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output for ASR-based recognition of banned content
-	// Note: This field may return `null`, indicating that no valid value can be found.
+	// Audio/video moderation Asr text prohibited task output.
 	Output *AiReviewProhibitedAsrTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of an ASR-based moderation task (banned content). Value range: 0-100.
@@ -1729,8 +1732,7 @@ type AiReviewTaskProhibitedOcrResult struct {
 	// Input for OCR-based recognition of banned content
 	Input *AiReviewProhibitedOcrTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output for OCR-based recognition of banned content
-	// Note: This field may return `null`, indicating that no valid value can be found.
+	// Video moderation Ocr text prohibited information recognition task output.
 	Output *AiReviewProhibitedOcrTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of an OCR-based moderation task (banned content). Value range: 0-100.
@@ -1753,8 +1755,7 @@ type AiReviewTaskTerrorismOcrResult struct {
 	// Input for OCR-based recognition of terrorism content
 	Input *AiReviewTerrorismOcrTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output for OCR-based recognition of terrorism content
-	// Note: This field may return `null`, indicating that no valid value can be found.
+	// Video moderation Ocr text involves unsafe information in task output.
 	Output *AiReviewTerrorismOcrTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of an OCR-based moderation task (terrorist content). Value range: 0-100.
@@ -1778,8 +1779,7 @@ type AiReviewTaskTerrorismResult struct {
 	// Input for intelligent recognition of terrorism content
 	Input *AiReviewTerrorismTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output for intelligent recognition of terrorism content
-	// Note: This field may return `null`, indicating that no valid value can be found.
+	// Video moderation involves unsafe information in task output.
 	Output *AiReviewTerrorismTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The progress of a moderation task (terrorist content). Value range: 0-100.
@@ -1948,6 +1948,118 @@ type AiSampleWordInfo struct {
 	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
+type AigcAudioOutputConfig struct {
+
+	StorageMode *string `json:"StorageMode,omitnil,omitempty" name:"StorageMode"`
+
+
+	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
+
+
+	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
+
+
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+
+
+	OutputAudioFormat *string `json:"OutputAudioFormat,omitnil,omitempty" name:"OutputAudioFormat"`
+}
+
+type AigcAudioTask struct {
+
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
+
+
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+
+	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+
+	Input *AigcAudioTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+
+	Output *AigcAudioTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
+}
+
+type AigcAudioTaskInput struct {
+	// Model name.
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+
+	// Model version. 
+	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+
+	// File information of the input video for the AIGC video generation task. 
+	FileInfos []*AigcVideoTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+
+	// The media file ID used as the end frame to generate video. 
+	LastFrameFileId *string `json:"LastFrameFileId,omitnil,omitempty" name:"LastFrameFileId"`
+
+	// Prompt content for video generation. 
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// Prevent the model from generating video prompts.
+	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
+
+	// Whether to optimize Prompt content automatically. when Enabled, the passed-in Prompt will be optimized automatically to enhance generation quality. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>.
+	EnhancePrompt *bool `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
+
+
+	GenerationMode *string `json:"GenerationMode,omitnil,omitempty" name:"GenerationMode"`
+
+	// Specifies the output media file configuration for the video task.
+	OutputConfig *AigcAudioOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
+}
+
+type AigcAudioTaskOutput struct {
+
+	AudioInfos []*AigcAudioTaskOutputFileInfo `json:"AudioInfos,omitnil,omitempty" name:"AudioInfos"`
+
+
+	VideoInfos []*AigcAudioTaskOutputFileInfo `json:"VideoInfos,omitnil,omitempty" name:"VideoInfos"`
+}
+
+type AigcAudioTaskOutputFileInfo struct {
+
+	StorageMode *string `json:"StorageMode,omitnil,omitempty" name:"StorageMode"`
+
+
+	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
+
+
+	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
+
+
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+
+	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
+
+
+	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
+
+
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+
+	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
+
+
+	Duration *float64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+}
+
 type AigcImageOutputConfig struct {
 	// Storage mode. valid values: <li>Permanent: Permanent storage. the generated image file will be stored in VOD (video on demand), and the FileId can be obtained in the event notification.</li> <li>Temporary: Temporary storage. the generated image file will not be stored in vod, and the Temporary access URL can be obtained in the event notification.</li>.
 	// Default value: Temporary.
@@ -1963,10 +2075,21 @@ type AigcImageOutputConfig struct {
 	// The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Image generation resolution. available values are 720P, 1080P, 2K, 4K, 1024x1024, 2048x2048, 2304x1728, 2496x1664, 2560x1440, 3024x1296, 4096x4096, 4694x3520, 4992x3328, 5404x3040, 6198x2656.
+	// Generated image resolution.
+	// 
+	// * GEM 2.5: available values (1K, 2K, 4K), default 1K.
+	// * GEM 3.0: 1K, 2K, 4K (default: 1K).
+	// * Vidu q2 value range: 1080p, 2K, 4K; default 1080p.
+	// * Kling 2.1 value range: 1k, 2k, default 1k;
+	// * Hunyuan 3.0 available values: 720P, 1080P, 2K, 4K.
 	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
 
-	// Specify the aspect ratio of the generated image. <li>when ModelName is GEM, the available values are 1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, and 21:9.</li> <li>when ModelName is Qwen, it is not currently supported.</li>.
+	// Specify the aspect ratio of the generated image.
+	// <li>When ModelName is GEM, the available values are 1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, and 21:9.</li>
+	// <li>When ModelName is Qwen, it is not currently supported.</li>
+	// <li>When ModelName is Hunyuan, the available values are 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9.</li>
+	// <li>When ModelName is Vidu, the available values are 16:9, 9:16, 1:1, 3:4, 4:3, 21:9, 2:3, 3:2.</li>
+	// <li>When ModelName is Kling, the available values are 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9.</li>
 	AspectRatio *string `json:"AspectRatio,omitnil,omitempty" name:"AspectRatio"`
 
 	// Whether to allow figure or human face generation. valid values: <li>AllowAdult: allow adult generation.</li> <li>Disallowed: forbid including figures or human faces in images.</li>.
@@ -1980,9 +2103,10 @@ type AigcImageOutputConfig struct {
 }
 
 type AigcImageSceneInfo struct {
-	// AI image generation scenario type. valid values:
+	// Scenario type of AI image generation. Available values:
 	// -change_clothes: AI clothing change.
-	// -product_image: AI-generated product image.
+	// -Product image: AI-generated product image.
+	// -outpainting: AI image expansion.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Valid when Type is change_clothes. this item is required and indicates the AI clothes-changing image generation config.
@@ -1993,62 +2117,65 @@ type AigcImageSceneInfo struct {
 }
 
 type AigcImageTask struct {
-	// The task ID.
+	// <p>Task ID.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Task status, value: <li>PROCESSING: processing;</li><li>FINISH: completed.</li>
+	// <p>Task status. Value: <li>PROCESSING: Processing;</li><li>FINISH: Completed.</li></p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. A non-zero error code is returned when the source is abnormal. If 0 is returned, use the ErrCode of each specific task.
+	// <p>Error code. A non-zero error code is returned back when a source error occurs. Please use the ErrCode of each specific task when 0 is returned.</p>
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-	// Error message. If the source is abnormal, the corresponding exception message is returned. Otherwise, use the message of each specific task.
+	// <p>Extended error codes. An empty string indicates success, other values indicate failure.</p><p>Enumeration values:</p><ul><li>RequestLimitExceeded: Model invocation exceeds the concurrency limit.</li><li>InvalidParameter.VoilationContent: The input prompt violates the Content Security Policy.</li><li>InvalidParameterValue: Parameter error.</li><li>FailedOperation: Model tasks accumulate.</li><li>InternalError: Internal error.</li></ul>
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
+
+	// <p>Error message.</p>
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// The execution progress of a single adaptive bitrate stream. Value range: 0-100.
+	// <p>Task progress, with a value range of [0-100].</p>
 	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
-	// Input of AIGC image task.
+	// <p>Input of the AIGC image generation task.</p>
 	Input *AigcImageTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output of AIGC image task.
+	// <p>Output information of the AIGC image generation task.</p>
 	Output *AigcImageTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is not carried or is left empty, no deduplication will be performed.
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past seven days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this parameter. It can contain up to 1000 characters.
+	// <p>Source context. This is used to pass user request information. The task status change callback returns the value of this field. The maximum length is 1000 characters.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 }
 
 type AigcImageTaskInput struct {
-	// Model name. 
+	// Model name.
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// Model version. 
+	// Model version.
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
-	// File information of the input image for the AIGC image generation task.
+	// Input file of the AIGC image generation task.
 	FileInfos []*AigcImageTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
 
-	// The prompt content for image generation.
+	// Prompt for image generation. Supports a maximum of 1000 characters. This parameter is required when FileInfos is empty.
 	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
 
-	// Prevent the model from generating image generation prompts.
+	// To prevent the model from generating image prompts. Supports a maximum of 1000 characters.
 	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
 
-	// Whether to optimize Prompt content automatically. when Enabled, it will optimize the passed in Prompt automatically to enhance generation quality. valid values: <li>Enabled: turn on;</li> <li>Disabled: turn off;</li>
+	// Whether to optimize prompt content automatically. When enabled, the passed in Prompt will be optimized automatically to enhance generation quality. Valid values: <li>Enabled: Enable;</li> <li>Disabled: Disable;</li>
 	EnhancePrompt *string `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
 
-	// Generation mode. Available values: <li>Standard: Standard mode;</li> <li>Professional: High-quality mode;</li>
+	// Generation mode. Valid values: <li>Standard: standard mode;</li> <li>Professional: high-quality mode;</li>
 	GenerationMode *string `json:"GenerationMode,omitnil,omitempty" name:"GenerationMode"`
 
-	// Output media file configuration for the task.
+	// Output the result file of the AIGC image generation.
 	OutputConfig *AigcImageOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
 }
 
 type AigcImageTaskInputFileInfo struct {
-	// Input video File type. valid values: <li>File: on-demand media File;</li> <li>Url: accessible Url;</li>.
+	// Input video file type. Valid values: <li>File: on-demand media file;</li> <li>Url: accessible URL;</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// The media File ID of the image File, which is the globally unique identifier of the File in vod, is assigned by the vod backend after successful upload. you can get this field in the [video upload completion event notification](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) or [vod console](https://console.cloud.tencent.com/vod/media). this parameter is valid when the Type value is File.
@@ -2068,35 +2195,33 @@ type AigcImageTaskInputFileInfo struct {
 }
 
 type AigcImageTaskOutput struct {
-	// File information of the out image for the AIGC image generation task.
+	// Output file information of the AIGC image generation task.
 	FileInfos []*AigcImageTaskOutputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
 }
 
 type AigcImageTaskOutputFileInfo struct {
-	// Storage mode. valid values: <li>Permanent: Permanent storage. the generated image file will be stored in VOD (video on demand).</li> <li>Temporary: Temporary storage. the generated image file will not be stored in vod.</li>.
-	// Default value: Temporary.
+	// Storage mode. Valid values: <li>Permanent: retained permanently;</li> <li>Temporary: temporary storage;</li>
 	StorageMode *string `json:"StorageMode,omitnil,omitempty" name:"StorageMode"`
 
-	// Output filename, up to 64 characters. default filename is assigned by the system.
+	// Output filename, up to 64 characters. Default filename is specified generation by system. Valid when StorageMode is Permanent.
 	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
 
-	// Category ID, used to categorize and manage media. you can create a category and obtain the category ID via the [create classification](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) api.
-	// <Li>Default value: 0, indicating other categories.</li>.
+	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID through the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) API. Valid when StorageMode is Permanent.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
+	// Expiry date of the output file. Files will be deleted longer than this time. Default is no expiration. Format according to ISO 8601 standard. For details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// File Type.
+	// File type, such as mp4, flv.
 	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
 
-	// File Url.
+	// Media file playback address.
 	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
 
-	// File ID.
+	// Media file ID. Valid when StorageMode is Permanent.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// Meta Data.
+	// Output video meta information. Valid when StorageMode is Permanent.
 	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
 }
 
@@ -2161,71 +2286,203 @@ type AigcVideoOutputConfig struct {
 	// 2. for resolutions that the model can directly output, you can also proactively select the model to directly output low-resolution images and use enhancement to obtain the specified resolution.
 	EnhanceSwitch *string `json:"EnhanceSwitch,omitnil,omitempty" name:"EnhanceSwitch"`
 
+
+	OffPeak *string `json:"OffPeak,omitnil,omitempty" name:"OffPeak"`
+
 	// Whether to enable vidu intelligent frame interpolation. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>
 	FrameInterpolate *string `json:"FrameInterpolate,omitnil,omitempty" name:"FrameInterpolate"`
+
+	// Whether to enable icon watermark. Valid values: <li>Enabled: Enable;</li> <li>Disabled: Disable;</li> 
+	// Currently supported models include Vidu. Other models are not currently supported.
+	LogoAdd *string `json:"LogoAdd,omitnil,omitempty" name:"LogoAdd"`
+}
+
+type AigcVideoRedrawOutputConfig struct {
+
+	StorageMode *string `json:"StorageMode,omitnil,omitempty" name:"StorageMode"`
+
+
+	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
+
+
+	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
+
+
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+}
+
+type AigcVideoRedrawOutputFileInfo struct {
+
+	StorageMode *string `json:"StorageMode,omitnil,omitempty" name:"StorageMode"`
+
+
+	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
+
+
+	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
+
+
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+
+	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
+
+
+	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
+
+
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+
+	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
+}
+
+type AigcVideoRedrawTask struct {
+
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
+
+
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+
+	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+
+	Input *AigcVideoRedrawTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+
+	Output *AigcVideoRedrawTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+}
+
+type AigcVideoRedrawTaskInput struct {
+
+	FileInfo *AigcVideoRedrawTaskInputFileInfo `json:"FileInfo,omitnil,omitempty" name:"FileInfo"`
+
+
+	OutputConfig *AigcVideoRedrawOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
+}
+
+type AigcVideoRedrawTaskInputFileInfo struct {
+
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+}
+
+type AigcVideoRedrawTaskOutput struct {
+
+	FileInfo *AigcVideoRedrawOutputFileInfo `json:"FileInfo,omitnil,omitempty" name:"FileInfo"`
+}
+
+type AigcVideoSceneInfo struct {
+	// AI video scenario type. Optional values:
+	// -product_showcase: Show the product in 360 degrees.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Product display parameter
+	ProductShowcaseConfig *ProductShowcaseConfig `json:"ProductShowcaseConfig,omitnil,omitempty" name:"ProductShowcaseConfig"`
 }
 
 type AigcVideoTask struct {
-	// The task ID.
+	// <p>Task ID.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Task status, value: <li>PROCESSING: processing;</li><li>FINISH: completed.</li>
+	// <p>Task status. Value: <li>PROCESSING: Processing;</li><li>FINISH: Completed.</li></p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. A non-zero error code is returned when the source is abnormal. If 0 is returned, use the ErrCode of each specific task.
+	// <p>Error code. A non-zero error code is returned back when a source error occurs. Please use the ErrCode of each specific task when 0 is returned.</p>
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-	// Error message. If the source is abnormal, the corresponding exception message is returned. Otherwise, use the message of each specific task.
+	// <p>Extended error codes.</p><p>Enumeration values:</p><ul><li>RequestLimitExceeded: API call exceeds the concurrency limit.</li><li>InvalidParameter.VoilationContent: User-submitted input prompt violates the Content Security Policy.</li><li>InvalidParameterValue: Parameter error.</li><li>FailedOperation: Model tasks accumulate.</li><li>InternalError: Internal error.</li></ul>
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
+
+	// <p>Error message.</p>
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// The execution progress of a single adaptive bitrate stream. Value range: 0-100.
+	// <p>Task progress, with a value range of [0-100].</p>
 	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
-	// Input of AIGC video task.
+	// <p>Input of the AIGC video generation task.</p>
 	Input *AigcVideoTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output of AIGC video task.
+	// <p>Output information of the AIGC video task.</p>
 	Output *AigcVideoTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is not carried or is left empty, no deduplication will be performed.
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past seven days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this parameter. It can contain up to 1000 characters.
+	// <p>Source context. This is used to pass user request information. The task status change callback returns the value of this field. The maximum length is 1000 characters.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 }
 
 type AigcVideoTaskInput struct {
-	// Model name.
+	// <p>Model name.</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// Model version. 
+	// <p>Model version.</p>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
-	// File information of the input video for the AIGC video generation task. 
+	// <p>Input file information of the AIGC video generation task.</p>
 	FileInfos []*AigcVideoTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
 
-	// The media file ID used as the end frame to generate video. 
+	// <p>Fixed entity input information for AIGC tasks.</p>
+	SubjectInfos []*AigcVideoTaskInputSubjectInfo `json:"SubjectInfos,omitnil,omitempty" name:"SubjectInfos"`
+
+	// <p>Media file ID used as the end frame to generate video. This file has a globally unique ID on VOD, assigned by the VOD backend after successful upload. You can get this field in the <a href="/document/product/266/7830">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>.</p>
 	LastFrameFileId *string `json:"LastFrameFileId,omitnil,omitempty" name:"LastFrameFileId"`
 
-	// Prompt content for video generation. 
+	// <p>Media file URL used as the tail frame to generate video. Description:</p><ol><li>Only support models GV, Kling, and Vidu. Other models are not currently supported. When ModelName is GV, if you specify this parameter, you must simultaneously specify FileInfos as the head frame for video generation. When ModelName is Kling, ModelVersion is 2.1, and output resolution Resolution is specified as 1080P, you can specify this parameter. When ModelName is Vidu and ModelVersion is q2-pro or q2-turbo, you can specify this parameter.</li><li>Image size must be less than 5M.</li><li><ol start="3"><li>Image format value: jpeg, jpg, png, webp.</li></ol></li></ol>
+	LastFrameUrl *string `json:"LastFrameUrl,omitnil,omitempty" name:"LastFrameUrl"`
+
+	// <p>Prompt for video generation. Supports a maximum of 1000 characters. This parameter is required when FileInfos is empty.</p>
 	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
 
-	// Prevent the model from generating video prompts.
+	// <p>To prevent the model from generating video prompts. Supports a maximum of 1000 characters.</p>
 	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
 
-	// Whether to optimize Prompt content automatically. when Enabled, the passed-in Prompt will be optimized automatically to enhance generation quality. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>.
+	// <p>Whether to optimize Prompt content automatically. When enabled, the passed in Prompt will be optimized automatically to enhance generation quality. Valid values: <li>Enabled: Enable;</li> <li>Disabled: Disable;</li></p>
 	EnhancePrompt *string `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
 
-	// Generation mode. Available values: <li>Standard: Standard mode;</li> <li>Professional: High-quality mode;</li>
+	// <p>Generation mode. Valid values: <li>Standard: standard mode;</li> <li>Professional: high-quality mode;</li></p>
 	GenerationMode *string `json:"GenerationMode,omitnil,omitempty" name:"GenerationMode"`
 
-	// Specifies the output media file configuration for the video task.
+	// <p>Output the result file of the AIGC image generation.</p>
 	OutputConfig *AigcVideoOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
+
+	// <p>Region information of the input file. When the file url is an overseas address, selectable Oversea. Default Mainland.</p>
+	InputRegion *string `json:"InputRegion,omitnil,omitempty" name:"InputRegion"`
+
+	// <p>Scenario type. Values as follows: <li>When ModelName is Kling, value motion_control means action control;</li><li>Other ModelName not currently supported.</li></p>
+	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
 }
 
 type AigcVideoTaskInputFileInfo struct {
-	// Input video File type. valid values: <li>File: on-demand media File;</li> <li>Url: accessible Url;</li>
+	// Input video file type. Valid values: <li>File: on-demand media file;</li> <li>Url: accessible URL;</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// File category. Valid values:
+	// <li>Image: image.</li>
+	// <li>Video: video.</li>
+	Category *string `json:"Category,omitnil,omitempty" name:"Category"`
 
 	// The media File ID, which is the globally unique identifier (guid) of the File in vod, is assigned by the vod backend after successful upload. you can retrieve this field in the [video upload completion event notification](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) or [vod console](https://console.cloud.tencent.com/vod/media). this parameter is valid when the Type value is File. description:.
 	// 1. recommended image size: less than 10 mb.
@@ -2238,51 +2495,64 @@ type AigcVideoTaskInputFileInfo struct {
 	// 2. image format value is jpeg, jpg, png.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// Reference type. Used for the GV model.
+	// Reference Type. The GV Model applies.
 	// Note:
-	// When using the GV model, can be used as a reference method, selectable asset (material), style.
+	// When using the GV model, this can be used as the reference method. Available values: asset means material, style means style.
+	// When using the Kling model and Category as Video, the reference video type is distinguishable: feature indicates feature reference video, and base indicates video for editing.
 	ReferenceType *string `json:"ReferenceType,omitnil,omitempty" name:"ReferenceType"`
 
-	// Object id.
+	// Subject Id.
 	// Applicable model: Vidu-q2.
-	// When an image identifier is required, each image must have a subject id. the subject id can be used via @subject id in subsequent generation.
+	// When identifying the subject in an Image, each Image must include a subject Id, which can be used via @subject Id in subsequent generation. Valid when Category is Image.
 	ObjectId *string `json:"ObjectId,omitnil,omitempty" name:"ObjectId"`
 
 	// Suitable for the Vidu-q2 model.
-	// When all images carry object ids, you can set the timbre id for the object. timbre list: https://shengshu.feishu.cn/sheets/EgFvs6DShhiEBStmjzccr5gonOg.
+	// When all images carry the subject Id, you can set the timbre Id targeting the subject. Valid when Category is Image. Timbre list: https://shengshu.feishu.cn/sheets/EgFvs6DShhiEBStmjzccr5gonOg
 	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// Whether to retain the original sound. Valid when Category is Video. Values as follows:
+	// <li>Enabled: Reserved</li>
+	// <li>Disabled: not retain</li>
+	KeepOriginalSound *string `json:"KeepOriginalSound,omitnil,omitempty" name:"KeepOriginalSound"`
+}
+
+type AigcVideoTaskInputSubjectInfo struct {
+	// <p>Fixed subject Id.</p><ul><li>Kling subject <strong>required</strong>;</li><li>Vidu subject selectable.</li></ul>
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// <p>Fixed name.</p><ul><li>Vidu subject <strong>required</strong>;</li><li>Kling subject selectable.</li></ul>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type AigcVideoTaskOutput struct {
-	// File information of the output video for the AIGC video generation task.
+	// Output file information of the AIGC video task.	
 	FileInfos []*AigcVideoTaskOutputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
 }
 
 type AigcVideoTaskOutputFileInfo struct {
-	// Storage mode. valid values: <li>Permanent: Permanent storage. the generated video file will be stored in vod.</li> <li>Temporary: Temporary storage. the generated video file will not be stored in vod.</li>
-	// Default value: Temporary.
+	// Storage mode. Valid values: <li>Permanent: retained permanently;</li> <li>Temporary: temporary storage;</li>
+	// Default value: Temporary
 	StorageMode *string `json:"StorageMode,omitnil,omitempty" name:"StorageMode"`
 
-	// Output media filename, longest 64 characters. default filename is specified by the system.
+	// Output filename, up to 64 characters. Default filename is specified generation by system. Valid when StorageMode is Permanent.
 	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
 
-	// Category ID, used to categorize and manage media. you can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) api.
-	// <Li>Default value: 0, indicate other categories.</li>.
+	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID through the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) API. Valid when StorageMode is Permanent.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
+	// Expiry date of the output file. Files will be deleted longer than this time. Default is no expiration. Format according to ISO 8601 standard. For details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// File Type.
+	// File type, such as mp4, flv.
 	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
 
-	// File Url.
+	// Media file playback address.
 	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
 
-	// File ID.
+	// Media file ID. Valid when StorageMode is Permanent.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// Meta Data.
+	// Output video meta information. Valid when StorageMode is Permanent.
 	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
 }
 
@@ -2537,6 +2807,8 @@ type AsrFullTextConfigureInfo struct {
 	// <li>vtt</li>
 	// <li>srt</li>
 	// <font color='red'>Note: This parameter has been deprecated. Please use `SubtitleFormats` instead.</font>
+	//
+	// Deprecated: SubtitleFormat is deprecated.
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
 	// Media source language value range: <li>zh: Mandarin </li> <li>en: English</li> <li>ja: Japanese </li> <li>zh-ca: Cantonese</li><font color=red>Note: </font> If it fills in an empty string or leaves this parameter blank, it will be automatically recognized (it is recommended to fill in the language corresponding to the media to improve the recognition accuracy).
@@ -2560,6 +2832,8 @@ type AsrFullTextConfigureInfoForUpdate struct {
 	// <li>vtt</li>
 	// <li>srt</li>
 	// <font color='red'>Note: This parameter has been deprecated. Please use `SubtitleFormatsOperation` instead.</font>
+	//
+	// Deprecated: SubtitleFormat is deprecated.
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
 	// Media source language value range: <li>zh: Mandarin </li> <li>en: English</li> <li>ja: Japanese </li> <li>zh-ca: Cantonese</li>
@@ -2944,9 +3218,9 @@ type AudioDenoiseInfo struct {
 	// Default value: `OFF`.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// The noise removal type. This parameter is valid only if `Switch` is `ON`. Valid values:
-	// <li>`normal`</li>
-	// Default value: `normal`.
+	// Audio noise reduction type. Valid only when the audio noise reduction control switch is ON. Available values:
+	// <li>normal: normal audio noise reduction.</li>
+	// Default value: normal.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -3263,6 +3537,11 @@ type BlackWhiteEdgeConfigureInfoForUpdate struct {
 	// <li>ON: turn on; </li>
 	// <li>OFF: turn off. </li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+}
+
+type BlindWatermarkInput struct {
+
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 }
 
 type BlurConfigureInfo struct {
@@ -3712,11 +3991,11 @@ type ComplexAdaptiveDynamicStreamingTask struct {
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// Task status. Valid values:
-	// <li>PROCESSING: processing;</li>
-	// <li>FINISH: completed.</li>
+	// <li>PROCESSING: Processing;</li>
+	// <li>FINISH: completed</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Execution status and result of the complex adaptive bitrate streaming task. Each array element corresponds to an adaptive bitrate streaming template specified when initiating the task.
+	// Task execution status and results of adaptive bitrate streaming. Each element corresponds to an adaptive bitrate template.
 	ComplexAdaptiveDynamicStreamingTaskResultSet []*ComplexAdaptiveDynamicStreamingTaskResult `json:"ComplexAdaptiveDynamicStreamingTaskResultSet,omitnil,omitempty" name:"ComplexAdaptiveDynamicStreamingTaskResultSet"`
 }
 
@@ -3737,51 +4016,55 @@ type ComplexAdaptiveDynamicStreamingTaskAudioInput struct {
 }
 
 type ComplexAdaptiveDynamicStreamingTaskInput struct {
-	// Adaptive bitrate streaming parameters.
+	// Adaptive Bitrate Parameters.
 	StreamPara *ComplexAdaptiveDynamicStreamingTaskStreamPara `json:"StreamPara,omitnil,omitempty" name:"StreamPara"`
 }
 
 type ComplexAdaptiveDynamicStreamingTaskOutput struct {
-	// Adaptive bitrate streaming template ID.
+	// Adaptive bitrate template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// The adaptive bitrate streaming format. Valid values:
+	// Adaptive bitrate stream packaging format. Optional values:
 	// <li>HLS;</li>
 	// <li>MPEG-DASH.</li>
 	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
 
-	// DRM scheme type, value range:
+	// DRM solution type. Available values:
+	// <li>Empty string: Unencrypted.</li>
+	// <li>SimpleAES;</li>
 	// <li>Widevine;</li>
 	// <li>FairPlay.</li>
-	// The default value is an empty string, indicating that the video will not be DRM protected.
 	DrmType *string `json:"DrmType,omitnil,omitempty" name:"DrmType"`
 
-	// Playback address of the output manifest.
+	// Playback address of the adaptive bitrate stream.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
 type ComplexAdaptiveDynamicStreamingTaskResult struct {
-	// Task status of a single adaptive bitrate stream. Valid values: PROCESSING, SUCCESS, FAIL.
+	// Task status. Valid values:
+	// <li>PROCESSING: Processing;</li>
+	// <li>SUCCESS: Completed;</li>
+	// <li>FAIL: Failed.</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	// Error code. An empty string indicates success, and additional values indicate failure. For values, see the video processing error code list (https://www.tencentcloud.com/document/product/266/50368?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// The execution progress of a single adaptive bitrate stream. Value range: 0-100.
+	// Transcoding progress, with a value range of [0-100].
 	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
-	// Input of a single adaptive bitrate stream.
+	// Input of adaptive bitrate streaming.
 	Input *ComplexAdaptiveDynamicStreamingTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output of a single adaptive bitrate stream.
+	// Output of adaptive bitrate streaming.
 	Output *ComplexAdaptiveDynamicStreamingTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
 type ComplexAdaptiveDynamicStreamingTaskStreamPara struct {
-	// Adaptive bitrate streaming template ID.
+	// Adaptive bitrate template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 }
 
@@ -3841,7 +4124,7 @@ type ComposeMediaRequestParams struct {
 	// Information of output media file.
 	Output *ComposeMediaOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Canvas used for composing video file.
@@ -3863,7 +4146,7 @@ type ComposeMediaRequest struct {
 	// Information of output media file.
 	Output *ComposeMediaOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Canvas used for composing video file.
@@ -3948,12 +4231,10 @@ type ComposeMediaTask struct {
 	// Progress of a media file composing task. Value range: [0, 100]
 	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
-	// Input of media file composing task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Input of the media file creation task.
 	Input *ComposeMediaTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output of media file composing task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Output of the media file creation task.
 	Output *ComposeMediaTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The metadata of the output video.
@@ -4366,7 +4647,7 @@ func (r *CreateAIAnalysisTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAIRecognitionTemplateRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Video content recognition template name. Length limit: 64 characters.
@@ -4409,7 +4690,7 @@ type CreateAIRecognitionTemplateRequestParams struct {
 type CreateAIRecognitionTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Video content recognition template name. Length limit: 64 characters.
@@ -4516,7 +4797,7 @@ type CreateAdaptiveDynamicStreamingTemplateRequestParams struct {
 	// Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
 	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitnil,omitempty" name:"StreamInfos"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Template name. Length limit: 64 characters.
@@ -4534,6 +4815,9 @@ type CreateAdaptiveDynamicStreamingTemplateRequestParams struct {
 	// <li>VOD</li>
 	// The default is `VOD`.
 	DrmKeyProvider *string `json:"DrmKeyProvider,omitnil,omitempty" name:"DrmKeyProvider"`
+
+
+	DrmEncryptType *string `json:"DrmEncryptType,omitnil,omitempty" name:"DrmEncryptType"`
 
 	// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values:
 	// <li>0: no,</li>
@@ -4569,7 +4853,7 @@ type CreateAdaptiveDynamicStreamingTemplateRequest struct {
 	// Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
 	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitnil,omitempty" name:"StreamInfos"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Template name. Length limit: 64 characters.
@@ -4587,6 +4871,8 @@ type CreateAdaptiveDynamicStreamingTemplateRequest struct {
 	// <li>VOD</li>
 	// The default is `VOD`.
 	DrmKeyProvider *string `json:"DrmKeyProvider,omitnil,omitempty" name:"DrmKeyProvider"`
+
+	DrmEncryptType *string `json:"DrmEncryptType,omitnil,omitempty" name:"DrmEncryptType"`
 
 	// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values:
 	// <li>0: no,</li>
@@ -4628,6 +4914,7 @@ func (r *CreateAdaptiveDynamicStreamingTemplateRequest) FromJsonString(s string)
 	delete(f, "Name")
 	delete(f, "DrmType")
 	delete(f, "DrmKeyProvider")
+	delete(f, "DrmEncryptType")
 	delete(f, "DisableHigherVideoBitrate")
 	delete(f, "DisableHigherVideoResolution")
 	delete(f, "Comment")
@@ -4661,6 +4948,66 @@ func (r *CreateAdaptiveDynamicStreamingTemplateResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *CreateAdaptiveDynamicStreamingTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateAigcAdvancedCustomElementInput struct {
+	// <p>Subject name.</p>
+	ElementName *string `json:"ElementName,omitnil,omitempty" name:"ElementName"`
+
+	// <p>Subject description.</p>
+	ElementDescription *string `json:"ElementDescription,omitnil,omitempty" name:"ElementDescription"`
+
+	// <p>Subject reference method.</p>
+	ReferenceType *string `json:"ReferenceType,omitnil,omitempty" name:"ReferenceType"`
+
+	// <p>Main voice type.</p>
+	ElementVoiceId *string `json:"ElementVoiceId,omitnil,omitempty" name:"ElementVoiceId"`
+
+	// <p>Reference video.</p>
+	ElementVideoList *string `json:"ElementVideoList,omitnil,omitempty" name:"ElementVideoList"`
+
+	// <p>Subject reference diagram.</p>
+	ElementImageList *string `json:"ElementImageList,omitnil,omitempty" name:"ElementImageList"`
+
+	// <p>Subject configuration tag.</p>
+	TagList *string `json:"TagList,omitnil,omitempty" name:"TagList"`
+}
+
+type CreateAigcAdvancedCustomElementOutput struct {
+	// <p>Custom subject list.</p>
+	InfoList []*AdvancedElementInfo `json:"InfoList,omitnil,omitempty" name:"InfoList"`
+}
+
+type CreateAigcAdvancedCustomElementTask struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>Task status.</p><p>Enumeration value:</p><ul><li>PROCESSING: Processing</li><li>FINISH: Completed</li></ul>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Error code. A non-zero error code is returned back when a source error occurs. Please use the ErrCode of each specific task when 0 is returned.</p>
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// <p>Extended error code. A null string indicates success, other values indicate failure.</p>
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
+
+	// <p>Error message.</p>
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// <p>Task progress, with a value range of [0-100].</p>
+	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// <p>Input of the task to create a custom AIGC subject.</p>
+	Input *CreateAigcAdvancedCustomElementInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// <p>Create custom AIGC task output information.</p>
+	Output *CreateAigcAdvancedCustomElementOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past seven days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// <p>Source context. This is used to pass user request information. The task status change callback returns the value of this field. The maximum length is 1000 characters.</p>
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 }
 
 // Predefined struct for user
@@ -4720,94 +5067,146 @@ func (r *CreateAigcApiTokenResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-// Predefined struct for user
-type CreateAigcImageTaskRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
-	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+type CreateAigcCustomVoiceInput struct {
+	// <p>Timbre name.</p>
+	VoiceName *string `json:"VoiceName,omitnil,omitempty" name:"VoiceName"`
 
-	// Model name. valid values:.
-	// <li>GEM:Gemini;</li>
-	// <Li>Qwen: qianwen.</li>
-	// <Li>Hunyuan: hunyuan.</li>
-	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+	// <p>Access link for the voice type data file.</p>
+	VoiceUrl *string `json:"VoiceUrl,omitnil,omitempty" name:"VoiceUrl"`
 
-	// Model version. valid values:.
-	// <li>When ModelName is GEM, optional values are 2.5, 3.0;</li>
-	// <li>When ModelName is Qwen, optional values are 0925.</li>
-	// <li>When ModelName is Hunyuan, the optional values are 3.0.</li>
-	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+	// <p>History works ID. Audio material can be provided by referring to historic works.</p>
+	VideoId *string `json:"VideoId,omitnil,omitempty" name:"VideoId"`
+}
 
-	// File information of the input image for the AIGC image generation task. By default only one image can be specified; when using the GEM model, version 2.5 supports up to 3 images and version 3.0 supports up to 14 images.
-	FileInfos []*AigcImageTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+type CreateAigcCustomVoiceOutput struct {
+	// <p>Custom timbre list.</p>
+	InfoList []*CustomVoiceInfo `json:"InfoList,omitnil,omitempty" name:"InfoList"`
+}
 
-	// The prompt content for image generation. this parameter is required when FileInfos is empty.
-	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+type CreateAigcCustomVoiceTask struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Prevent the model from generating image generation prompts.
-	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
+	// <p>Task status.</p><p>Enumeration value:</p><ul><li>PROCESSING: Processing</li><li>FINISH: Completed</li></ul>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Whether to optimize Prompt content automatically. when Enabled, it will optimize the passed in Prompt automatically to enhance generation quality. valid values: <li>Enabled: turn on;</li> <li>Disabled: turn off;</li>
-	EnhancePrompt *string `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
+	// <p>Error code. A non-zero error code is returned back when a source error occurs. Please use the ErrCode of each specific task when 0 is returned.</p>
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-	// Output media file configuration for the task.
-	OutputConfig *AigcImageOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
+	// <p>Extended error code. A null string indicates success, other values indicate failure.</p>
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
-	// An identifier for deduplication. if there has been a request with the same identifier within the past 3 days, an error will be returned for the current request. the maximum length is 50 characters. leaving it blank or using an empty string indicates no deduplication.
+	// <p>Error message.</p>
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// <p>Task progress, with a value range of [0-100].</p>
+	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// <p>Create AIGC custom timbre input.</p>
+	Input *CreateAigcCustomVoiceInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// <p>Create custom voice type output message for AIGC.</p>
+	Output *CreateAigcCustomVoiceOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past seven days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// Source context, used to pass through user request information. the audio and video quality revival complete callback will return the value of this field. longest 1000 characters.
+	// <p>Source context. This is used to pass user request information. The task status change callback returns the value of this field. The maximum length is 1000 characters.</p>
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+}
+
+// Predefined struct for user
+type CreateAigcImageTaskRequestParams struct {
+	// <p><b>VOD <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether it is the default application or a newly created application).</b></p>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// <p>Model name. Value:</p><li>Qwen: Qianwen.</li><li>Hunyuan: Hunyuan.</li><li>Vidu: Shengshu.</li><li>Kling: Keling.</li>
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+
+	// <p>Model version. Parameter Value: <li>When ModelName is Qwen, optional values: 0925;</li><li>When ModelName is Hunyuan, optional values: 3.0;</li><li>When ModelName is Vidu, optional values: q2;</li><li>When ModelName is Kling, optional values: 2.1;</li></p>
+	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+
+	// <p>File information of the input image for the AIGC image generation task. Only one is supported by default. The following models can accept multiple reference images: <li>GEM 2.5: 0 to 3 images;</li><li>Vidu q2: 0 to 7 images. Supported formats include png, jpeg, jpg, and webp. The image pixel size cannot be less than 128x128, and the ratio must be less than 1:4 or 4:1.</li></p>
+	FileInfos []*AigcImageTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+
+	// <p>Prompt for image generation. This parameter is required when FileInfos is empty.</p>
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// <p>To prevent the model from generating image prompts.</p>
+	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
+
+	// <p>Whether to optimize Prompt content automatically. When Enabled, the passed in Prompt will be optimized automatically to enhance generation quality. Valid values: <li>Enabled: Enable;</li> <li>Disabled: Disable;</li></p>
+	EnhancePrompt *string `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
+
+	// <p>Output media file configuration for the image generation task.</p>
+	OutputConfig *AigcImageOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
+
+	// <p>Region information of the input file. When the file url is an overseas address, selectable Oversea. Default Mainland.</p>
+	InputRegion *string `json:"InputRegion,omitnil,omitempty" name:"InputRegion"`
+
+
+	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
+
+
+	Seed *int64 `json:"Seed,omitnil,omitempty" name:"Seed"`
+
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past three days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// <p>Source context. This is used to pass through user request information. The audio and video quality revival complete callback returns the value of this field. The maximum length is 1000 characters.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// Task priority. the higher the value, the higher the priority. value range is from -10 to 10. if left blank, the default value is 0.
+	// <p>Task priority. The higher the value, the higher the priority. The value range is from -10 to 10. If this is not specified, the default value is 0.</p>
 	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
 
-	// Reserved field, used when special purpose.
+	// <p>Reserved field, used for special purpose.</p>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
 type CreateAigcImageTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <p><b>VOD <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether it is the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// Model name. valid values:.
-	// <li>GEM:Gemini;</li>
-	// <Li>Qwen: qianwen.</li>
-	// <Li>Hunyuan: hunyuan.</li>
+	// <p>Model name. Value:</p><li>Qwen: Qianwen.</li><li>Hunyuan: Hunyuan.</li><li>Vidu: Shengshu.</li><li>Kling: Keling.</li>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// Model version. valid values:.
-	// <li>When ModelName is GEM, optional values are 2.5, 3.0;</li>
-	// <li>When ModelName is Qwen, optional values are 0925.</li>
-	// <li>When ModelName is Hunyuan, the optional values are 3.0.</li>
+	// <p>Model version. Parameter Value: <li>When ModelName is Qwen, optional values: 0925;</li><li>When ModelName is Hunyuan, optional values: 3.0;</li><li>When ModelName is Vidu, optional values: q2;</li><li>When ModelName is Kling, optional values: 2.1;</li></p>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
-	// File information of the input image for the AIGC image generation task. By default only one image can be specified; when using the GEM model, version 2.5 supports up to 3 images and version 3.0 supports up to 14 images.
+	// <p>File information of the input image for the AIGC image generation task. Only one is supported by default. The following models can accept multiple reference images: <li>GEM 2.5: 0 to 3 images;</li><li>Vidu q2: 0 to 7 images. Supported formats include png, jpeg, jpg, and webp. The image pixel size cannot be less than 128x128, and the ratio must be less than 1:4 or 4:1.</li></p>
 	FileInfos []*AigcImageTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
 
-	// The prompt content for image generation. this parameter is required when FileInfos is empty.
+	// <p>Prompt for image generation. This parameter is required when FileInfos is empty.</p>
 	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
 
-	// Prevent the model from generating image generation prompts.
+	// <p>To prevent the model from generating image prompts.</p>
 	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
 
-	// Whether to optimize Prompt content automatically. when Enabled, it will optimize the passed in Prompt automatically to enhance generation quality. valid values: <li>Enabled: turn on;</li> <li>Disabled: turn off;</li>
+	// <p>Whether to optimize Prompt content automatically. When Enabled, the passed in Prompt will be optimized automatically to enhance generation quality. Valid values: <li>Enabled: Enable;</li> <li>Disabled: Disable;</li></p>
 	EnhancePrompt *string `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
 
-	// Output media file configuration for the task.
+	// <p>Output media file configuration for the image generation task.</p>
 	OutputConfig *AigcImageOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
 
-	// An identifier for deduplication. if there has been a request with the same identifier within the past 3 days, an error will be returned for the current request. the maximum length is 50 characters. leaving it blank or using an empty string indicates no deduplication.
+	// <p>Region information of the input file. When the file url is an overseas address, selectable Oversea. Default Mainland.</p>
+	InputRegion *string `json:"InputRegion,omitnil,omitempty" name:"InputRegion"`
+
+	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
+
+	Seed *int64 `json:"Seed,omitnil,omitempty" name:"Seed"`
+
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past three days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// Source context, used to pass through user request information. the audio and video quality revival complete callback will return the value of this field. longest 1000 characters.
+	// <p>Source context. This is used to pass through user request information. The audio and video quality revival complete callback returns the value of this field. The maximum length is 1000 characters.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// Task priority. the higher the value, the higher the priority. value range is from -10 to 10. if left blank, the default value is 0.
+	// <p>Task priority. The higher the value, the higher the priority. The value range is from -10 to 10. If this is not specified, the default value is 0.</p>
 	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
 
-	// Reserved field, used when special purpose.
+	// <p>Reserved field, used for special purpose.</p>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
@@ -4831,6 +5230,9 @@ func (r *CreateAigcImageTaskRequest) FromJsonString(s string) error {
 	delete(f, "NegativePrompt")
 	delete(f, "EnhancePrompt")
 	delete(f, "OutputConfig")
+	delete(f, "InputRegion")
+	delete(f, "SceneType")
+	delete(f, "Seed")
 	delete(f, "SessionId")
 	delete(f, "SessionContext")
 	delete(f, "TasksPriority")
@@ -4843,7 +5245,7 @@ func (r *CreateAigcImageTaskRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAigcImageTaskResponseParams struct {
-	// Task ID.
+	// <p>Task ID.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4866,135 +5268,169 @@ func (r *CreateAigcImageTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-// Predefined struct for user
-type CreateAigcVideoTaskRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
-	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+type CreateAigcSubjectInput struct {
+	// <p>Subject name.</p>
+	SubjectName *string `json:"SubjectName,omitnil,omitempty" name:"SubjectName"`
 
-	// Model name. valid values: <li>Hailuo: conch;</li><li>Kling: Kling;</li><li>Jimeng: Jimeng;</li><li>Vidu;</li><li>Hunyuan: Hunyuan;</li><li>Mingmou: bright eyes;</li>
-	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+	// <p>Subject image.</p>
+	SubjectImages []*string `json:"SubjectImages,omitnil,omitempty" name:"SubjectImages"`
 
-	// Model version. parameter value: <li>when ModelName is Hailuo, optional values are 02, 2.3, 2.3-fast;</li><li>when ModelName is Kling, optional values are 1.6, 2.0, 2.1, 2.5, O1;</li><li>when ModelName is Jimeng, optional values are 3.0pro;</li><li>when ModelName is Vidu, optional values are q2, q2-pro, q2-turbo;</li><li>when ModelName is GV, optional values are 3.1, 3.1-fast;</li><li>when ModelName is OS, optional values are 2.0;</li><li>when ModelName is Hunyuan, optional values are 1.5;</li><li>when ModelName is Mingmou, optional values are 1.0;</li>
-	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+	// <p>Main video.</p>
+	SubjectVideos []*string `json:"SubjectVideos,omitnil,omitempty" name:"SubjectVideos"`
 
-	// List of up to three material resources for description of resource images to be used by the model in video generation.
-	// 
-	// Video generation with first and last frame: use the first table in FileInfos to represent the first frame (FileInfos contains at most one image at this point). LastFrameFileId or LastFrameUrl represents the last frame.
-	// 
-	// Model supporting multi-image input.
-	// 1. GV, when entering multiple images, LastFrameFileId and LastFrameUrl are unavailable.
-	// 2. Vidu supports multi-image reference for video generation. the q2 model accepts 1-7 images. use the ObjectId in FileInfos as the subject id for input.
-	// 
-	// Note:.
-	// 1. Image size: the size should not exceed 10 mb.
-	// 2. supported image formats: jpeg, png.
-	FileInfos []*AigcVideoTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+	// <p>Primary voice ID.</p>
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+}
 
-	// The media file ID used as the end frame to generate video. this file has a globally unique ID on vod, assigned by the vod backend after successful upload. you can get this field in the [video upload completion event notification](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) or [vod console](https://console.cloud.tencent.com/vod/media). description:.
-	// 1. only models GV, Kling, and Vidu are supported. other models are not currently supported. when ModelName is GV, if you specify this parameter, you must simultaneously specify FileInfos as the first frame of the video to be generated. when ModelName is Kling and ModelVersion is 2.1 and specify output Resolution Resolution as 1080P, you can specify this parameter. when ModelName is Vidu and ModelVersion is q2-pro or q2-turbo, you can specify this parameter.
-	// 2. Image size: the size should be less than 5 mb.
-	// 3. image format value is jpeg, jpg, png, webp.
-	LastFrameFileId *string `json:"LastFrameFileId,omitnil,omitempty" name:"LastFrameFileId"`
+type CreateAigcSubjectOutput struct {
+	// <p>Subject ID.</p>
+	SubjectId *string `json:"SubjectId,omitnil,omitempty" name:"SubjectId"`
 
-	// Media file URL used as frames to generate video. description:.
-	// 1. only models GV, Kling, and Vidu are supported. other models are not currently supported. when ModelName is GV, if you specify this parameter, you must simultaneously specify FileInfos as the first frame of the video to be generated. when ModelName is Kling and ModelVersion is 2.1 and specify output Resolution Resolution as 1080P, you can specify this parameter. when ModelName is Vidu and ModelVersion is q2-pro or q2-turbo, you can specify this parameter.
-	// 2. Image size: the size should be less than 5 mb.
-	// 3. image format value is jpeg, jpg, png, webp.
-	LastFrameUrl *string `json:"LastFrameUrl,omitnil,omitempty" name:"LastFrameUrl"`
+	// <p>Entity information.</p>
+	SubjectInfo *string `json:"SubjectInfo,omitnil,omitempty" name:"SubjectInfo"`
+}
 
-	// Prompt content for video generation. this parameter is required when FileInfos is empty.
-	// Example value: move the picture.
-	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+type CreateAigcSubjectTask struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Prevent the model from generating video prompts.
-	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
+	// <p>Task status.</p><p>Enumeration value:</p><ul><li>PROCESSING: Processing</li><li>FINISH: Completed</li></ul>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Whether to optimize Prompt content automatically. when Enabled, the passed-in Prompt will be optimized automatically to enhance generation quality. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>.
-	EnhancePrompt *string `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
+	// <p>Error code. A non-zero error code is returned back when a source error occurs. Please use the ErrCode of each specific task when 0 is returned.</p>
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-	// Specifies the output media file configuration for the video task.
-	OutputConfig *AigcVideoOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
+	// <p>Extended error code. A null string indicates success, other values indicate failure.</p>
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
-	// An identifier for deduplication. if there has been a request with the same identifier within the past 3 days, an error will be returned for the current request. the maximum length is 50 characters. leaving it blank or using an empty string indicates no deduplication.
+	// <p>Error message.</p>
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// <p>Input of the task to create an AIGC subject.</p>
+	Input *CreateAigcSubjectInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// <p>Output of the task to create an AIGC subject.</p>
+	Output *CreateAigcSubjectOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past seven days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// Source context, used to pass through user request information. the audio and video quality revival complete callback will return the value of this field, up to 1000 characters.
+	// <p>Source context. This is used to pass user request information. The task status change callback returns the value of this field. The maximum length is 1000 characters.</p>
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+}
+
+// Predefined struct for user
+type CreateAigcVideoTaskRequestParams struct {
+	// <p><b>VOD <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether it is the default application or a newly created application).</b></p>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// <p>Model name. Value:</p><li>Hailuo: Hailuo;</li><li>Kling: Keling;</li><li>Jimeng: Jimeng;</li><li>Vidu;</li><li>Hunyuan: Hunyuan;</li><li>Mingmou: Mingmou;</li>
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+
+	// <p>Model version. Parameter Value: <li>When ModelName is Hailuo, optional values: 02, 2.3, and 2.3-fast;</li><li>When ModelName is Kling, optional values: 1.6, 2.0, 2.1, 2.5, and O1;</li><li>When ModelName is Jimeng, optional values: 3.0pro;</li><li>When ModelName is Vidu, optional values: q2, q2-pro, q2-turbo, q3-pro, and q3-turbo;</li><li>When ModelName is GV, optional values: 3.1 and 3.1-fast;</li><li>When ModelName is OS, optional values: 2.0;</li><li>When ModelName is Hunyuan, optional values: 1.5;</li><li>When ModelName is Mingmou, optional values: 1.0;</li></p>
+	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+
+	// <p>A list of up to three material resource files for description of the resource files to be used by the model to generate video.</p><p>Video generation for first and last frame: use the first table in FileInfos to represent the first frame (at this time FileInfos contains at most one image), and LastFrameFileId or LastFrameUrl to represent the last frame.</p><p>Models that support multi-image input:</p><ol><li>GV: when entering multiple images, LastFrameFileId and LastFrameUrl are unavailable.</li><li>Vidu: supports video generation with multiple image references. For q2 model, 1-7 images can be imported as the subject id via ObjectId in FileInfos.</li></ol><p>Note:</p><ol><li>Image size should not exceed 10M.</li><li>Supported image formats: jpeg, png.</li></ol>
+	FileInfos []*AigcVideoTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+
+	// <p>Fixed entity input information.</p>
+	SubjectInfos []*AigcVideoTaskInputSubjectInfo `json:"SubjectInfos,omitnil,omitempty" name:"SubjectInfos"`
+
+	// <p>Media file ID used as the tail frame to generate video. This file has a globally unique ID assigned by the VOD backend after successful upload. You can obtain this field in the <a href="/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. Description:</p><ol><li>Only models GV, Kling, and Vidu are supported. Other models are not currently supported. When ModelName is GV, if you specify this parameter, you must simultaneously specify FileInfos as the head frame of the video to be generated. When ModelName is Kling, ModelVersion is 2.1, and the output resolution Resolution is specified as 1080P, you can specify this parameter. When ModelName is Vidu and ModelVersion is q2-pro or q2-turbo, you can specify this parameter.</li><li>Image size must be less than 5M.</li><li>Image format value is: jpeg, jpg, png, webp.</li></ol>
+	LastFrameFileId *string `json:"LastFrameFileId,omitnil,omitempty" name:"LastFrameFileId"`
+
+	// <p>Media file URL used as the tail frame to generate video. Description:</p><ol><li>Only support models GV, Kling, and Vidu. Other models are not currently supported. When ModelName is GV, if you specify this parameter, you must simultaneously specify FileInfos as the head frame for video generation. When ModelName is Kling, ModelVersion is 2.1, and output resolution Resolution is specified as 1080P, you can specify this parameter. When ModelName is Vidu and ModelVersion is q2-pro or q2-turbo, you can specify this parameter.</li><li>Image size must be less than 5M.</li><li><ol start="3"><li>Image format value: jpeg, jpg, png, webp.</li></ol></li></ol>
+	LastFrameUrl *string `json:"LastFrameUrl,omitnil,omitempty" name:"LastFrameUrl"`
+
+	// <p>Prompt for video generation. This parameter is required when FileInfos is empty.<br>Example value: move the picture</p>
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// <p>To prevent the model from generating video prompts.</p>
+	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
+
+	// <p>Whether to optimize Prompt content automatically. When Enabled, the passed in Prompt will be optimized automatically to enhance generation quality. Valid values: <li>Enabled: Enable;</li> <li>Disabled: Disable;</li></p>
+	EnhancePrompt *string `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
+
+	// <p>Output media file configuration for the video generation task.</p>
+	OutputConfig *AigcVideoOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
+
+	// <p>Region information of the input file. When the file url is an overseas address, selectable Oversea. Default Mainland.</p>
+	InputRegion *string `json:"InputRegion,omitnil,omitempty" name:"InputRegion"`
+
+	// <p>Scenario type. Values are as follows:</p><li>When ModelName is Kling: motion_control means action control; avatar_i2v means digital human; lip_sync means lip-sync;</li><li>When ModelName is Vidu: template_effect means special effect Template;</li><li>Other ModelNames are not currently supported.</li>
+	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
+
+
+	Seed *int64 `json:"Seed,omitnil,omitempty" name:"Seed"`
+
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past three days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// <p>Source context. This is used to pass through user request information. The audio and video quality revival complete callback returns the value of this field. The maximum length is 1000 characters.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// Task priority. the higher the value, the higher the priority. the value range is from -10 to 10. if left blank, the default value is 0.
+	// <p>Task priority. The higher the value, the higher the priority. The value range is from -10 to 10. If this is not specified, the default value is 0.</p>
 	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
 
-	// Reserved field, used for special purpose.
+	// <p>Reserved field, used for special purpose.</p>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
-
-	// Specifies the region information of the input image. when the image url is a foreign address, selectable Oversea. default Mainland.
-	InputRegion *string `json:"InputRegion,omitnil,omitempty" name:"InputRegion"`
 }
 
 type CreateAigcVideoTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <p><b>VOD <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether it is the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// Model name. valid values: <li>Hailuo: conch;</li><li>Kling: Kling;</li><li>Jimeng: Jimeng;</li><li>Vidu;</li><li>Hunyuan: Hunyuan;</li><li>Mingmou: bright eyes;</li>
+	// <p>Model name. Value:</p><li>Hailuo: Hailuo;</li><li>Kling: Keling;</li><li>Jimeng: Jimeng;</li><li>Vidu;</li><li>Hunyuan: Hunyuan;</li><li>Mingmou: Mingmou;</li>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// Model version. parameter value: <li>when ModelName is Hailuo, optional values are 02, 2.3, 2.3-fast;</li><li>when ModelName is Kling, optional values are 1.6, 2.0, 2.1, 2.5, O1;</li><li>when ModelName is Jimeng, optional values are 3.0pro;</li><li>when ModelName is Vidu, optional values are q2, q2-pro, q2-turbo;</li><li>when ModelName is GV, optional values are 3.1, 3.1-fast;</li><li>when ModelName is OS, optional values are 2.0;</li><li>when ModelName is Hunyuan, optional values are 1.5;</li><li>when ModelName is Mingmou, optional values are 1.0;</li>
+	// <p>Model version. Parameter Value: <li>When ModelName is Hailuo, optional values: 02, 2.3, and 2.3-fast;</li><li>When ModelName is Kling, optional values: 1.6, 2.0, 2.1, 2.5, and O1;</li><li>When ModelName is Jimeng, optional values: 3.0pro;</li><li>When ModelName is Vidu, optional values: q2, q2-pro, q2-turbo, q3-pro, and q3-turbo;</li><li>When ModelName is GV, optional values: 3.1 and 3.1-fast;</li><li>When ModelName is OS, optional values: 2.0;</li><li>When ModelName is Hunyuan, optional values: 1.5;</li><li>When ModelName is Mingmou, optional values: 1.0;</li></p>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
-	// List of up to three material resources for description of resource images to be used by the model in video generation.
-	// 
-	// Video generation with first and last frame: use the first table in FileInfos to represent the first frame (FileInfos contains at most one image at this point). LastFrameFileId or LastFrameUrl represents the last frame.
-	// 
-	// Model supporting multi-image input.
-	// 1. GV, when entering multiple images, LastFrameFileId and LastFrameUrl are unavailable.
-	// 2. Vidu supports multi-image reference for video generation. the q2 model accepts 1-7 images. use the ObjectId in FileInfos as the subject id for input.
-	// 
-	// Note:.
-	// 1. Image size: the size should not exceed 10 mb.
-	// 2. supported image formats: jpeg, png.
+	// <p>A list of up to three material resource files for description of the resource files to be used by the model to generate video.</p><p>Video generation for first and last frame: use the first table in FileInfos to represent the first frame (at this time FileInfos contains at most one image), and LastFrameFileId or LastFrameUrl to represent the last frame.</p><p>Models that support multi-image input:</p><ol><li>GV: when entering multiple images, LastFrameFileId and LastFrameUrl are unavailable.</li><li>Vidu: supports video generation with multiple image references. For q2 model, 1-7 images can be imported as the subject id via ObjectId in FileInfos.</li></ol><p>Note:</p><ol><li>Image size should not exceed 10M.</li><li>Supported image formats: jpeg, png.</li></ol>
 	FileInfos []*AigcVideoTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
 
-	// The media file ID used as the end frame to generate video. this file has a globally unique ID on vod, assigned by the vod backend after successful upload. you can get this field in the [video upload completion event notification](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) or [vod console](https://console.cloud.tencent.com/vod/media). description:.
-	// 1. only models GV, Kling, and Vidu are supported. other models are not currently supported. when ModelName is GV, if you specify this parameter, you must simultaneously specify FileInfos as the first frame of the video to be generated. when ModelName is Kling and ModelVersion is 2.1 and specify output Resolution Resolution as 1080P, you can specify this parameter. when ModelName is Vidu and ModelVersion is q2-pro or q2-turbo, you can specify this parameter.
-	// 2. Image size: the size should be less than 5 mb.
-	// 3. image format value is jpeg, jpg, png, webp.
+	// <p>Fixed entity input information.</p>
+	SubjectInfos []*AigcVideoTaskInputSubjectInfo `json:"SubjectInfos,omitnil,omitempty" name:"SubjectInfos"`
+
+	// <p>Media file ID used as the tail frame to generate video. This file has a globally unique ID assigned by the VOD backend after successful upload. You can obtain this field in the <a href="/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. Description:</p><ol><li>Only models GV, Kling, and Vidu are supported. Other models are not currently supported. When ModelName is GV, if you specify this parameter, you must simultaneously specify FileInfos as the head frame of the video to be generated. When ModelName is Kling, ModelVersion is 2.1, and the output resolution Resolution is specified as 1080P, you can specify this parameter. When ModelName is Vidu and ModelVersion is q2-pro or q2-turbo, you can specify this parameter.</li><li>Image size must be less than 5M.</li><li>Image format value is: jpeg, jpg, png, webp.</li></ol>
 	LastFrameFileId *string `json:"LastFrameFileId,omitnil,omitempty" name:"LastFrameFileId"`
 
-	// Media file URL used as frames to generate video. description:.
-	// 1. only models GV, Kling, and Vidu are supported. other models are not currently supported. when ModelName is GV, if you specify this parameter, you must simultaneously specify FileInfos as the first frame of the video to be generated. when ModelName is Kling and ModelVersion is 2.1 and specify output Resolution Resolution as 1080P, you can specify this parameter. when ModelName is Vidu and ModelVersion is q2-pro or q2-turbo, you can specify this parameter.
-	// 2. Image size: the size should be less than 5 mb.
-	// 3. image format value is jpeg, jpg, png, webp.
+	// <p>Media file URL used as the tail frame to generate video. Description:</p><ol><li>Only support models GV, Kling, and Vidu. Other models are not currently supported. When ModelName is GV, if you specify this parameter, you must simultaneously specify FileInfos as the head frame for video generation. When ModelName is Kling, ModelVersion is 2.1, and output resolution Resolution is specified as 1080P, you can specify this parameter. When ModelName is Vidu and ModelVersion is q2-pro or q2-turbo, you can specify this parameter.</li><li>Image size must be less than 5M.</li><li><ol start="3"><li>Image format value: jpeg, jpg, png, webp.</li></ol></li></ol>
 	LastFrameUrl *string `json:"LastFrameUrl,omitnil,omitempty" name:"LastFrameUrl"`
 
-	// Prompt content for video generation. this parameter is required when FileInfos is empty.
-	// Example value: move the picture.
+	// <p>Prompt for video generation. This parameter is required when FileInfos is empty.<br>Example value: move the picture</p>
 	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
 
-	// Prevent the model from generating video prompts.
+	// <p>To prevent the model from generating video prompts.</p>
 	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
 
-	// Whether to optimize Prompt content automatically. when Enabled, the passed-in Prompt will be optimized automatically to enhance generation quality. valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li>.
+	// <p>Whether to optimize Prompt content automatically. When Enabled, the passed in Prompt will be optimized automatically to enhance generation quality. Valid values: <li>Enabled: Enable;</li> <li>Disabled: Disable;</li></p>
 	EnhancePrompt *string `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
 
-	// Specifies the output media file configuration for the video task.
+	// <p>Output media file configuration for the video generation task.</p>
 	OutputConfig *AigcVideoOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
 
-	// An identifier for deduplication. if there has been a request with the same identifier within the past 3 days, an error will be returned for the current request. the maximum length is 50 characters. leaving it blank or using an empty string indicates no deduplication.
+	// <p>Region information of the input file. When the file url is an overseas address, selectable Oversea. Default Mainland.</p>
+	InputRegion *string `json:"InputRegion,omitnil,omitempty" name:"InputRegion"`
+
+	// <p>Scenario type. Values are as follows:</p><li>When ModelName is Kling: motion_control means action control; avatar_i2v means digital human; lip_sync means lip-sync;</li><li>When ModelName is Vidu: template_effect means special effect Template;</li><li>Other ModelNames are not currently supported.</li>
+	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
+
+	Seed *int64 `json:"Seed,omitnil,omitempty" name:"Seed"`
+
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past three days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// Source context, used to pass through user request information. the audio and video quality revival complete callback will return the value of this field, up to 1000 characters.
+	// <p>Source context. This is used to pass through user request information. The audio and video quality revival complete callback returns the value of this field. The maximum length is 1000 characters.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// Task priority. the higher the value, the higher the priority. the value range is from -10 to 10. if left blank, the default value is 0.
+	// <p>Task priority. The higher the value, the higher the priority. The value range is from -10 to 10. If this is not specified, the default value is 0.</p>
 	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
 
-	// Reserved field, used for special purpose.
+	// <p>Reserved field, used for special purpose.</p>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
-
-	// Specifies the region information of the input image. when the image url is a foreign address, selectable Oversea. default Mainland.
-	InputRegion *string `json:"InputRegion,omitnil,omitempty" name:"InputRegion"`
 }
 
 func (r *CreateAigcVideoTaskRequest) ToJsonString() string {
@@ -5013,17 +5449,20 @@ func (r *CreateAigcVideoTaskRequest) FromJsonString(s string) error {
 	delete(f, "ModelName")
 	delete(f, "ModelVersion")
 	delete(f, "FileInfos")
+	delete(f, "SubjectInfos")
 	delete(f, "LastFrameFileId")
 	delete(f, "LastFrameUrl")
 	delete(f, "Prompt")
 	delete(f, "NegativePrompt")
 	delete(f, "EnhancePrompt")
 	delete(f, "OutputConfig")
+	delete(f, "InputRegion")
+	delete(f, "SceneType")
+	delete(f, "Seed")
 	delete(f, "SessionId")
 	delete(f, "SessionContext")
 	delete(f, "TasksPriority")
 	delete(f, "ExtInfo")
-	delete(f, "InputRegion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAigcVideoTaskRequest has unknown keys!", "")
 	}
@@ -5032,7 +5471,7 @@ func (r *CreateAigcVideoTaskRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAigcVideoTaskResponseParams struct {
-	// Task ID.
+	// <p>Task ID.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5757,7 +6196,7 @@ type CreateHeadTailTemplateRequestParams struct {
 	// Template name, length limit is 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Template description information, length limit is 256 characters.
@@ -5784,7 +6223,7 @@ type CreateHeadTailTemplateRequest struct {
 	// Template name, length limit is 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Template description information, length limit is 256 characters.
@@ -5989,7 +6428,7 @@ type CreateImageSpriteTemplateRequestParams struct {
 	// Note: The number of columns of the small image will affect the width of the final large image. The maximum width of the large image is 15,000 pixels. The width of the large image is the product of the number of columns of the small image and the width of the small image.
 	ColumnCount *uint64 `json:"ColumnCount,omitnil,omitempty" name:"ColumnCount"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Name of an image sprite generating template. Length limit: 64 characters.
@@ -6057,7 +6496,7 @@ type CreateImageSpriteTemplateRequest struct {
 	// Note: The number of columns of the small image will affect the width of the final large image. The maximum width of the large image is 15,000 pixels. The width of the large image is the product of the number of columns of the small image and the width of the small image.
 	ColumnCount *uint64 `json:"ColumnCount,omitnil,omitempty" name:"ColumnCount"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Name of an image sprite generating template. Length limit: 64 characters.
@@ -6452,7 +6891,7 @@ type CreateProcedureTemplateRequestParams struct {
 	// Task flow name (up to 20 characters).
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Template description. Length limit: 256 characters.
@@ -6468,7 +6907,12 @@ type CreateProcedureTemplateRequestParams struct {
 	// Parameter of AI-based content analysis task.
 	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil,omitempty" name:"AiAnalysisTask"`
 
+
+	AiRecognitionTaskSet []*AiRecognitionTaskInput `json:"AiRecognitionTaskSet,omitnil,omitempty" name:"AiRecognitionTaskSet"`
+
 	// Type parameter of AI-based content recognition task.
+	//
+	// Deprecated: AiRecognitionTask is deprecated.
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil,omitempty" name:"AiRecognitionTask"`
 
 	// The information of the moderation task.
@@ -6481,7 +6925,7 @@ type CreateProcedureTemplateRequest struct {
 	// Task flow name (up to 20 characters).
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Template description. Length limit: 256 characters.
@@ -6496,6 +6940,8 @@ type CreateProcedureTemplateRequest struct {
 
 	// Parameter of AI-based content analysis task.
 	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil,omitempty" name:"AiAnalysisTask"`
+
+	AiRecognitionTaskSet []*AiRecognitionTaskInput `json:"AiRecognitionTaskSet,omitnil,omitempty" name:"AiRecognitionTaskSet"`
 
 	// Type parameter of AI-based content recognition task.
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil,omitempty" name:"AiRecognitionTask"`
@@ -6522,6 +6968,7 @@ func (r *CreateProcedureTemplateRequest) FromJsonString(s string) error {
 	delete(f, "MediaProcessTask")
 	delete(f, "AiContentReviewTask")
 	delete(f, "AiAnalysisTask")
+	delete(f, "AiRecognitionTaskSet")
 	delete(f, "AiRecognitionTask")
 	delete(f, "ReviewAudioVideoTask")
 	if len(f) > 0 {
@@ -6554,7 +7001,7 @@ func (r *CreateProcedureTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateQualityInspectTemplateRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Media quality inspect template name.Length limit: 64 characters.
@@ -6600,7 +7047,7 @@ type CreateQualityInspectTemplateRequestParams struct {
 type CreateQualityInspectTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Media quality inspect template name.Length limit: 64 characters.
@@ -6837,13 +7284,13 @@ type CreateReviewTemplateRequestParams struct {
 	// The violation labels to use. Valid values: <li>`Porn`: Pornographic content</li> <li>`Terror`: Terrorist content</li> <li>`Moan`: Moaning</li>
 	Labels []*string `json:"Labels,omitnil,omitempty" name:"Labels"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *string `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// Audit template name, length limit: 64 characters.
+
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Audit template description, length limit: 256 characters.
+
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 }
 
@@ -6853,13 +7300,11 @@ type CreateReviewTemplateRequest struct {
 	// The violation labels to use. Valid values: <li>`Porn`: Pornographic content</li> <li>`Terror`: Terrorist content</li> <li>`Moan`: Moaning</li>
 	Labels []*string `json:"Labels,omitnil,omitempty" name:"Labels"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *string `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// Audit template name, length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Audit template description, length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 }
 
@@ -7193,7 +7638,7 @@ func (r *CreateSampleSnapshotTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSceneAigcImageTaskRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Scenario-Based image generation parameter configuration.
@@ -7224,7 +7669,7 @@ type CreateSceneAigcImageTaskRequestParams struct {
 type CreateSceneAigcImageTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Scenario-Based image generation parameter configuration.
@@ -7759,7 +8204,7 @@ type CreateTranscodeTemplateRequestParams struct {
 	// The container format. Valid values: `mp4`, `flv`, `hls`, `mp3`, `flac`, `ogg`, `m4a`, `wav` ( `mp3`, `flac`, `ogg`, `m4a`, and `wav` are audio file formats).
 	Container *string `json:"Container,omitnil,omitempty" name:"Container"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Transcoding template name. Length limit: 64 characters.
@@ -7797,6 +8242,9 @@ type CreateTranscodeTemplateRequestParams struct {
 	// <li>fmp4: fMP4 segment</li>
 	// Default: ts
 	SegmentType *string `json:"SegmentType,omitnil,omitempty" name:"SegmentType"`
+
+
+	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 }
 
 type CreateTranscodeTemplateRequest struct {
@@ -7805,7 +8253,7 @@ type CreateTranscodeTemplateRequest struct {
 	// The container format. Valid values: `mp4`, `flv`, `hls`, `mp3`, `flac`, `ogg`, `m4a`, `wav` ( `mp3`, `flac`, `ogg`, `m4a`, and `wav` are audio file formats).
 	Container *string `json:"Container,omitnil,omitempty" name:"Container"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Transcoding template name. Length limit: 64 characters.
@@ -7843,6 +8291,8 @@ type CreateTranscodeTemplateRequest struct {
 	// <li>fmp4: fMP4 segment</li>
 	// Default: ts
 	SegmentType *string `json:"SegmentType,omitnil,omitempty" name:"SegmentType"`
+
+	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 }
 
 func (r *CreateTranscodeTemplateRequest) ToJsonString() string {
@@ -7868,6 +8318,7 @@ func (r *CreateTranscodeTemplateRequest) FromJsonString(s string) error {
 	delete(f, "TEHDConfig")
 	delete(f, "EnhanceConfig")
 	delete(f, "SegmentType")
+	delete(f, "StdExtInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTranscodeTemplateRequest has unknown keys!", "")
 	}
@@ -8219,6 +8670,14 @@ func (r *CreateWordSamplesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CustomVoiceInfo struct {
+	// <p>Voice ID.</p>
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// <p>Tone information.</p>
+	VoiceInfo *string `json:"VoiceInfo,omitnil,omitempty" name:"VoiceInfo"`
+}
+
 type DNSVerifyInfo struct {
 	// sub-parsing.
 	SubDomain *string `json:"SubDomain,omitnil,omitempty" name:"SubDomain"`
@@ -8357,7 +8816,7 @@ type DeleteAdaptiveDynamicStreamingTemplateRequestParams struct {
 	// Unique ID of adaptive bitrate streaming template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -8367,7 +8826,7 @@ type DeleteAdaptiveDynamicStreamingTemplateRequest struct {
 	// Unique ID of adaptive bitrate streaming template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -8662,7 +9121,7 @@ type DeleteContentReviewTemplateRequestParams struct {
 	// Unique ID of an intelligent content recognition template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -8672,7 +9131,7 @@ type DeleteContentReviewTemplateRequest struct {
 	// Unique ID of an intelligent content recognition template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -8845,7 +9304,7 @@ type DeleteImageProcessingTemplateRequestParams struct {
 	// The template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -8855,7 +9314,7 @@ type DeleteImageProcessingTemplateRequest struct {
 	// The template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -9279,7 +9738,7 @@ type DeleteQualityInspectTemplateRequestParams struct {
 	// Media quality inspection template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -9289,7 +9748,7 @@ type DeleteQualityInspectTemplateRequest struct {
 	// Media quality inspection template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -9401,7 +9860,7 @@ type DeleteReviewTemplateRequestParams struct {
 	// The unique ID of the moderation template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -9411,7 +9870,7 @@ type DeleteReviewTemplateRequest struct {
 	// The unique ID of the moderation template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -10028,7 +10487,7 @@ func (r *DescribeAIAnalysisTemplatesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAIRecognitionTemplatesRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Unique ID filter of video content recognition templates. Array length limit: 100.
@@ -10049,7 +10508,7 @@ type DescribeAIRecognitionTemplatesRequestParams struct {
 type DescribeAIRecognitionTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Unique ID filter of video content recognition templates. Array length limit: 100.
@@ -11264,7 +11723,7 @@ type DescribeDailyPlayStatFileListRequestParams struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -11277,7 +11736,7 @@ type DescribeDailyPlayStatFileListRequest struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -11329,14 +11788,14 @@ func (r *DescribeDailyPlayStatFileListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDrmKeyProviderInfoRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
 type DescribeDrmKeyProviderInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -11387,7 +11846,7 @@ func (r *DescribeDrmKeyProviderInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeEnhanceMediaTemplatesRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// List of Enhance media templates. Length limit: 100.
@@ -11408,7 +11867,7 @@ type DescribeEnhanceMediaTemplatesRequestParams struct {
 type DescribeEnhanceMediaTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// List of Enhance media templates. Length limit: 100.
@@ -11553,7 +12012,7 @@ type DescribeFileAttributesRequestParams struct {
 	// The file ID.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
@@ -11575,7 +12034,7 @@ type DescribeFileAttributesRequest struct {
 	// The file ID.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
@@ -11686,7 +12145,7 @@ type DescribeFileAttributesTaskOutput struct {
 
 // Predefined struct for user
 type DescribeHeadTailTemplatesRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Head Tail template number, array length limit: 100.
@@ -11702,7 +12161,7 @@ type DescribeHeadTailTemplatesRequestParams struct {
 type DescribeHeadTailTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Head Tail template number, array length limit: 100.
@@ -11767,7 +12226,7 @@ func (r *DescribeHeadTailTemplatesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeImageProcessingTemplatesRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The IDs of the templates to query. Length limit: 100.
@@ -11788,7 +12247,7 @@ type DescribeImageProcessingTemplatesRequestParams struct {
 type DescribeImageProcessingTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The IDs of the templates to query. Length limit: 100.
@@ -11865,7 +12324,7 @@ type DescribeImageReviewUsageDataRequestParams struct {
 	// The end date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format). The end date must be later than the start date.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -11878,7 +12337,7 @@ type DescribeImageReviewUsageDataRequest struct {
 	// The end date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format). The end date must be later than the start date.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -11930,7 +12389,7 @@ func (r *DescribeImageReviewUsageDataResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeImageSpriteTemplatesRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Unique ID filter of image sprite generating templates. Array length limit: 100.
@@ -11951,7 +12410,7 @@ type DescribeImageSpriteTemplatesRequestParams struct {
 type DescribeImageSpriteTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Unique ID filter of image sprite generating templates. Array length limit: 100.
@@ -12025,7 +12484,7 @@ type DescribeJustInTimeTranscodeTemplatesRequestParams struct {
 	// Template name filter condition, array length limit: 100.
 	Names []*string `json:"Names,omitnil,omitempty" name:"Names"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Template type filter conditions, optional values:
@@ -12046,7 +12505,7 @@ type DescribeJustInTimeTranscodeTemplatesRequest struct {
 	// Template name filter condition, array length limit: 100.
 	Names []*string `json:"Names,omitnil,omitempty" name:"Names"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Template type filter conditions, optional values:
@@ -12205,7 +12664,7 @@ type DescribeLicenseUsageDataRequestParams struct {
 	// <li> DRM</li>
 	LicenseType *string `json:"LicenseType,omitnil,omitempty" name:"LicenseType"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -12222,7 +12681,7 @@ type DescribeLicenseUsageDataRequest struct {
 	// <li> DRM</li>
 	LicenseType *string `json:"LicenseType,omitnil,omitempty" name:"LicenseType"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -12278,7 +12737,7 @@ type DescribeMediaInfosRequestParams struct {
 	// List of media file IDs. N starts from 0 and can be up to 19.
 	FileIds []*string `json:"FileIds,omitnil,omitempty" name:"FileIds"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The types of information to return. You can specify multiple information types. `N` starts from 0. If you do not specify this parameter, all information will be returned. The supported information types are as follows:
@@ -12303,7 +12762,7 @@ type DescribeMediaInfosRequest struct {
 	// List of media file IDs. N starts from 0 and can be up to 19.
 	FileIds []*string `json:"FileIds,omitnil,omitempty" name:"FileIds"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The types of information to return. You can specify multiple information types. `N` starts from 0. If you do not specify this parameter, all information will be returned. The supported information types are as follows:
@@ -12382,7 +12841,7 @@ type DescribeMediaPlayStatDetailsRequestParams struct {
 	// The end time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Granularity. Valid values:
@@ -12404,7 +12863,7 @@ type DescribeMediaPlayStatDetailsRequest struct {
 	// The end time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Granularity. Valid values:
@@ -12470,7 +12929,7 @@ type DescribeMediaProcessUsageDataRequestParams struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). The end date must be on or after the start date.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Query the video processing task type. Currently supported task types include:
@@ -12504,7 +12963,7 @@ type DescribeMediaProcessUsageDataRequest struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). The end date must be on or after the start date.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Query the video processing task type. Currently supported task types include:
@@ -12578,7 +13037,7 @@ func (r *DescribeMediaProcessUsageDataResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePersonSamplesRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Type of samples to pull. Valid values:
@@ -12608,7 +13067,7 @@ type DescribePersonSamplesRequestParams struct {
 type DescribePersonSamplesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Type of samples to pull. Valid values:
@@ -12690,7 +13149,7 @@ func (r *DescribePersonSamplesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeProcedureTemplatesRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Name filter of task flow template. Array length limit: 100.
@@ -12711,7 +13170,7 @@ type DescribeProcedureTemplatesRequestParams struct {
 type DescribeProcedureTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Name filter of task flow template. Array length limit: 100.
@@ -12782,7 +13241,7 @@ func (r *DescribeProcedureTemplatesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeQualityInspectTemplatesRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Media quality inspect template list. Length limit: 100.
@@ -12801,7 +13260,7 @@ type DescribeQualityInspectTemplatesRequestParams struct {
 type DescribeQualityInspectTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Media quality inspect template list. Length limit: 100.
@@ -12873,7 +13332,7 @@ type DescribeRebuildMediaTemplatesRequestParams struct {
 	// List of rebuild media templates.
 	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The template type. Valid values:
@@ -12894,7 +13353,7 @@ type DescribeRebuildMediaTemplatesRequest struct {
 	// List of rebuild media templates.
 	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The template type. Valid values:
@@ -12968,7 +13427,7 @@ type DescribeReviewDetailsRequestParams struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). The end date must be after the start date.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -12981,7 +13440,7 @@ type DescribeReviewDetailsRequest struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). The end date must be after the start date.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -13039,7 +13498,7 @@ func (r *DescribeReviewDetailsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeReviewTemplatesRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The audit template uniquely identifies the filtering conditions, and the array length limit is: 100.
@@ -13060,7 +13519,7 @@ type DescribeReviewTemplatesRequestParams struct {
 type DescribeReviewTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The audit template uniquely identifies the filtering conditions, and the array length limit is: 100.
@@ -13243,7 +13702,7 @@ func (r *DescribeRoundPlaysResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSampleSnapshotTemplatesRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Unique ID filter of sampled screencapturing templates. Array length limit: 100.
@@ -13264,7 +13723,7 @@ type DescribeSampleSnapshotTemplatesRequestParams struct {
 type DescribeSampleSnapshotTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Unique ID filter of sampled screencapturing templates. Array length limit: 100.
@@ -13335,7 +13794,7 @@ func (r *DescribeSampleSnapshotTemplatesResponse) FromJsonString(s string) error
 
 // Predefined struct for user
 type DescribeSnapshotByTimeOffsetTemplatesRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Unique ID filter of time point screencapturing templates. Array length limit: 100.
@@ -13356,7 +13815,7 @@ type DescribeSnapshotByTimeOffsetTemplatesRequestParams struct {
 type DescribeSnapshotByTimeOffsetTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Unique ID filter of time point screencapturing templates. Array length limit: 100.
@@ -13427,14 +13886,14 @@ func (r *DescribeSnapshotByTimeOffsetTemplatesResponse) FromJsonString(s string)
 
 // Predefined struct for user
 type DescribeStorageDataRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
 type DescribeStorageDataRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -13508,7 +13967,7 @@ type DescribeStorageDetailsRequestParams struct {
 	// End time in ISO 8601 format, which should be larger than the start time. For more information, please see [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Time granularity. Valid values:
@@ -13551,7 +14010,7 @@ type DescribeStorageDetailsRequest struct {
 	// End time in ISO 8601 format, which should be larger than the start time. For more information, please see [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Time granularity. Valid values:
@@ -13636,14 +14095,14 @@ func (r *DescribeStorageDetailsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeStorageRegionsRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
 type DescribeStorageRegionsRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -13866,20 +14325,20 @@ func (r *DescribeSuperPlayerConfigsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTaskDetailRequestParams struct {
-	// Video processing task ID.
+	// <p>Video processing task ID.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <p><b>VOD <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether it is the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
 type DescribeTaskDetailRequest struct {
 	*tchttp.BaseRequest
 	
-	// Video processing task ID.
+	// <p>Video processing task ID.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <p><b>VOD <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether it is the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -13905,140 +14364,147 @@ func (r *DescribeTaskDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTaskDetailResponseParams struct {
-	// The task type. Valid values:
-	// <li>`Procedure`: Video processing</li>
-	// <li>`EditMedia`: Video editing</li>
-	// <li>`SplitMedia`: Video splitting</li>
-	// <li>`ComposeMedia`: Media file production</li>
-	// <li>`WechatPublish`: Weixin publishing</li>
-	// <li>`WechatMiniProgramPublish`: Publishing videos on Weixin Mini Program</li>
-	// <li>`PullUpload`: Pulling media files for upload</li>
-	// <li>`FastClipMedia`: Quick clipping</li>
-	// <li>`RemoveWatermarkTask`: Watermark removal</li>
-	// <li>`DescribeFileAttributesTask`: Getting file attributes</li>
-	// <li> `ReviewAudioVideo`: Moderation</li>
-	// <li>`ExtractTraceWatermark`: Digital watermark extraction</li>
-	// <li>`QualityEnhance`: Enhance audio/video</li>
-	// <li>`ComplexAdaptiveDynamicStreaming`: Complex adaptive bitrate streaming processing task</li><li>`ProcessMediaByMPS`: Process media by MPS.</li>
+	// <p>Task type. Valid values: <li>Procedure: Video processing task;</li><li>EditMedia: Video editing task;</li><li>SplitMedia: Video splitting task;</li><li>ComposeMedia: Media file creation task;</li><li>WechatPublish: WeChat publishing task;</li><li>WechatMiniProgramPublish: WeChat Mini Program Video Publishing Task;</li><li>PullUpload: Pull and upload media files task;</li><li>FastClipMedia: Quick trimming task;</li><li>RemoveWatermarkTask: Intelligent watermark removal task;</li><li>DescribeFileAttributesTask: File attribute retrieval task;</li><li>RebuildMedia: Audio and video quality regeneration task (not recommended);</li><li>ReviewAudioVideo: Audio/video moderation task;</li><li>ExtractTraceWatermark: Source watermark extraction task;</li><li>ExtractCopyRightWatermark: Copyright Watermark Extraction Task;</li><li>QualityInspect: Audio and video quality inspection task;</li><li>QualityEnhance: Audio and video quality regeneration task;</li><li>ComplexAdaptiveDynamicStreaming: Complex adaptive bitstream task;</li><li>ProcessMediaByMPS: MPS video processing task;</li><li>AigcImageTask: AIGC image generation task;</li><li>SceneAigcImageTask: Scenario-based AIGC image generation task;</li><li>AigcVideoTask: AIGC video generation task;</li><li>ImportMediaKnowledge: Import media knowledge task.</li><li>SceneAigcVideoTask: Scenario-based AIGC video generation task;</li><li>ExtractBlindWatermark: Digital watermark extraction task.</li><li>ExtractBlindWatermark: Digital watermark extraction task.</li><li>CreateAigcAdvancedCustomElementTask: Create custom subject task</li><li>CreateAigcCustomVoiceTask: Create custom voice type task</li><li>CreateAigcSubjectTask: Create subject task</li></p>
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-	// Task status. Valid values:
-	// <li>WAITING: waiting;</li>
-	// <li>PROCESSING: processing;</li>
-	// <li>FINISH: completed.</li>
+	// <p>Task status. Value:</p><li>WAITING: Waiting;</li><li>PROCESSING: Processing;</li><li>FINISH: Completed;</li><li>ABORTED: Terminated.</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Creation time of task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+	// <p>Task creation time in <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format</a>.</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Start time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+	// <p>Task execution start time in <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO datetime format</a>.</p>
 	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
 
-	// End time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+	// <p>Task execution completion time in <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO datetime format</a>.</p>
 	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Video processing task information. This field has a value only when TaskType is Procedure.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProcedureTask *ProcedureTask `json:"ProcedureTask,omitnil,omitempty" name:"ProcedureTask"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Video editing task information. This field has a value only when TaskType is EditMedia.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	EditMediaTask *EditMediaTask `json:"EditMediaTask,omitnil,omitempty" name:"EditMediaTask"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>WeChat publishing task information. This field has a value only when TaskType is WechatPublish.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	WechatPublishTask *WechatPublishTask `json:"WechatPublishTask,omitnil,omitempty" name:"WechatPublishTask"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Media file production task information. This field has a value only when TaskType is ComposeMedia.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ComposeMediaTask *ComposeMediaTask `json:"ComposeMediaTask,omitnil,omitempty" name:"ComposeMediaTask"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Video splitting task information. This field has a value only when TaskType is SplitMedia.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SplitMediaTask *SplitMediaTask `json:"SplitMediaTask,omitnil,omitempty" name:"SplitMediaTask"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>WeChat Mini Program publishing task information. This field has a value only when TaskType is WechatMiniProgramPublish.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	WechatMiniProgramPublishTask *WechatMiniProgramPublishTask `json:"WechatMiniProgramPublishTask,omitnil,omitempty" name:"WechatMiniProgramPublishTask"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Pull and upload media files task information. This field has a value only when TaskType is PullUpload.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	PullUploadTask *PullUploadTask `json:"PullUploadTask,omitnil,omitempty" name:"PullUploadTask"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Video transcoding task information. This field has a value only when TaskType is Transcode.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TranscodeTask *TranscodeTask2017 `json:"TranscodeTask,omitnil,omitempty" name:"TranscodeTask"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Video splicing task information. This field has a value only when TaskType is Concat.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConcatTask *ConcatTask2017 `json:"ConcatTask,omitnil,omitempty" name:"ConcatTask"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Video editing task information. This field has a value only when TaskType is Clip.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ClipTask *ClipTask2017 `json:"ClipTask,omitnil,omitempty" name:"ClipTask"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Capturing sprite image task information. This field has a value only when TaskType is ImageSprite.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CreateImageSpriteTask *CreateImageSpriteTask2017 `json:"CreateImageSpriteTask,omitnil,omitempty" name:"CreateImageSpriteTask"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Video screenshot at specified time task information. This field has a value only when TaskType is SnapshotByTimeOffset.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SnapshotByTimeOffsetTask *SnapshotByTimeOffsetTask2017 `json:"SnapshotByTimeOffsetTask,omitnil,omitempty" name:"SnapshotByTimeOffsetTask"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Intelligent watermark removal task information. This field has a value only when TaskType is RemoveWatermark.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	RemoveWatermarkTask *RemoveWatermarkTask `json:"RemoveWatermarkTask,omitnil,omitempty" name:"RemoveWatermarkTask"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Audio and video quality revival task information. This field has a value only when TaskType is RebuildMedia.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	RebuildMediaTask *RebuildMediaTask `json:"RebuildMediaTask,omitnil,omitempty" name:"RebuildMediaTask"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Information about the traceability watermark extraction task. This field has a value only when TaskType is ExtractTraceWatermark.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExtractTraceWatermarkTask *ExtractTraceWatermarkTask `json:"ExtractTraceWatermarkTask,omitnil,omitempty" name:"ExtractTraceWatermarkTask"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Information about the copyright watermark extraction task. This field has a value only when TaskType is ExtractCopyRightWatermark.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExtractCopyRightWatermarkTask *ExtractCopyRightWatermarkTask `json:"ExtractCopyRightWatermarkTask,omitnil,omitempty" name:"ExtractCopyRightWatermarkTask"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Audio/video moderation task info. This field has a value only when TaskType is ReviewAudioVideo.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReviewAudioVideoTask *ReviewAudioVideoTask `json:"ReviewAudioVideoTask,omitnil,omitempty" name:"ReviewAudioVideoTask"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>This field is invalid.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReduceMediaBitrateTask *ReduceMediaBitrateTask `json:"ReduceMediaBitrateTask,omitnil,omitempty" name:"ReduceMediaBitrateTask"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>File attribute acquisition task information. This field has a value only when TaskType is DescribeFileAttributes.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DescribeFileAttributesTask *DescribeFileAttributesTask `json:"DescribeFileAttributesTask,omitnil,omitempty" name:"DescribeFileAttributesTask"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Audio and video quality detection task information. This field has a value only when TaskType is QualityInspect.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	QualityInspectTask *QualityInspectTask `json:"QualityInspectTask,omitnil,omitempty" name:"QualityInspectTask"`
 
-	// Media Quality Enhance task information. This field has a value only when TaskType is QualityEnhance.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Audio and video quality revival task information. This field has a value only when TaskType is QualityEnhance.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	QualityEnhanceTask *QualityEnhanceTask `json:"QualityEnhanceTask,omitnil,omitempty" name:"QualityEnhanceTask"`
 
-	// Complex adaptive bitrate streaming processing task information. This field has a value only when TaskType is ComplexAdaptiveDynamicStreaming. 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Complex adaptive bitrate task information. This field has a value only when TaskType is ComplexAdaptiveDynamicStreaming.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ComplexAdaptiveDynamicStreamingTask *ComplexAdaptiveDynamicStreamingTask `json:"ComplexAdaptiveDynamicStreamingTask,omitnil,omitempty" name:"ComplexAdaptiveDynamicStreamingTask"`
 
-	// Media processing by MPS task information. This field contains a value only when TaskType is ProcessMediaByMPS.
+	// <p>MPS video processing task information. This field has a value only when TaskType is ProcessMediaByMPS.</p>
 	ProcessMediaByMPSTask *ProcessMediaByMPS `json:"ProcessMediaByMPSTask,omitnil,omitempty" name:"ProcessMediaByMPSTask"`
 
-	// AIGC image task information. This field contains a value only when TaskType is AigcImageTask.
+	// <p>AIGC image generation task info. This field has a value only when TaskType is AigcImageTask.</p>
 	AigcImageTask *AigcImageTask `json:"AigcImageTask,omitnil,omitempty" name:"AigcImageTask"`
 
-	// AIGC video task information. This field contains a value only when TaskType is AigcVideoTask.
+	// <p>AIGC video task information. This field has a value only when TaskType is AigcVideoTask.</p>
 	AigcVideoTask *AigcVideoTask `json:"AigcVideoTask,omitnil,omitempty" name:"AigcVideoTask"`
 
-
+	// <p>Media import knowledge base task info. This field has a value only when TaskType is ImportMediaKnowledge.</p>
 	ImportMediaKnowledge *ImportMediaKnowledgeTask `json:"ImportMediaKnowledge,omitnil,omitempty" name:"ImportMediaKnowledge"`
 
-	// Scenario-based AIGC image task information. This field contains a value only when TaskType is SceneAigcImageTask.
+	// <p>Scenario-based AIGC image generation task info. This field has a value only when TaskType is SceneAigcImageTask.</p>
 	SceneAigcImageTask *SceneAigcImageTask `json:"SceneAigcImageTask,omitnil,omitempty" name:"SceneAigcImageTask"`
+
+	// <p>Scenario-based AIGC video task info. This field has a value only when TaskType is SceneAigcVideoTask.</p>
+	SceneAigcVideoTask *SceneAigcVideoTask `json:"SceneAigcVideoTask,omitnil,omitempty" name:"SceneAigcVideoTask"`
+
+	// <p>Asynchronous image processing task information. This field has a value only when TaskType is ProcessImageAsync.</p>
+	ProcessImageAsyncTask *ProcessImageAsync `json:"ProcessImageAsyncTask,omitnil,omitempty" name:"ProcessImageAsyncTask"`
+
+	// <p>Extract digital watermark task info. This field has a value only when TaskType is ExtractBlindWatermark.</p>
+	ExtractBlindWatermarkTask *ExtractBlindWatermarkTask `json:"ExtractBlindWatermarkTask,omitnil,omitempty" name:"ExtractBlindWatermarkTask"`
+
+	// <p>Create custom entity information. This field has a value only when TaskType is CreateAigcAdvancedCustomElement.</p>
+	CreateAigcAdvancedCustomElementTask *CreateAigcAdvancedCustomElementTask `json:"CreateAigcAdvancedCustomElementTask,omitnil,omitempty" name:"CreateAigcAdvancedCustomElementTask"`
+
+	// <p>Create custom tone information. This field has a value only when TaskType is CreateAigcCustomVoice.</p>
+	CreateAigcCustomVoiceTask *CreateAigcCustomVoiceTask `json:"CreateAigcCustomVoiceTask,omitnil,omitempty" name:"CreateAigcCustomVoiceTask"`
+
+	// <p>Create entity information. This field has a value only when TaskType is CreateAigcSubject.</p>
+	CreateAigcSubjectTask *CreateAigcSubjectTask `json:"CreateAigcSubjectTask,omitnil,omitempty" name:"CreateAigcSubjectTask"`
+
+
+	AigcVideoRedrawTask *AigcVideoRedrawTask `json:"AigcVideoRedrawTask,omitnil,omitempty" name:"AigcVideoRedrawTask"`
+
+
+	AigcAudioTask *AigcAudioTask `json:"AigcAudioTask,omitnil,omitempty" name:"AigcAudioTask"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -14062,7 +14528,7 @@ func (r *DescribeTaskDetailResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTasksRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Filter: Task status. Valid values: WAITING (waiting), PROCESSING (processing), FINISH (completed).
@@ -14092,7 +14558,7 @@ type DescribeTasksRequestParams struct {
 type DescribeTasksRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Filter: Task status. Valid values: WAITING (waiting), PROCESSING (processing), FINISH (completed).
@@ -14175,7 +14641,7 @@ func (r *DescribeTasksResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTranscodeTemplatesRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Unique ID filter of transcoding templates. Array length limit: 100.
@@ -14225,7 +14691,7 @@ type DescribeTranscodeTemplatesRequestParams struct {
 type DescribeTranscodeTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Unique ID filter of transcoding templates. Array length limit: 100.
@@ -14340,7 +14806,7 @@ type DescribeVodDomainsRequestParams struct {
 	// Page number offset from the beginning of paginated queries. Default value: 0
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -14357,7 +14823,7 @@ type DescribeVodDomainsRequest struct {
 	// Page number offset from the beginning of paginated queries. Default value: 0
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -14413,7 +14879,7 @@ func (r *DescribeVodDomainsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeWatermarkTemplatesRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Watermark type filter. Valid values:
@@ -14436,7 +14902,7 @@ type DescribeWatermarkTemplatesRequestParams struct {
 type DescribeWatermarkTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Watermark type filter. Valid values:
@@ -14510,7 +14976,7 @@ func (r *DescribeWatermarkTemplatesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeWordSamplesRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// <b>Keyword usage. Valid values:</b>
@@ -14540,7 +15006,7 @@ type DescribeWordSamplesRequestParams struct {
 type DescribeWordSamplesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// <b>Keyword usage. Valid values:</b>
@@ -14668,7 +15134,7 @@ type DomainDetailInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	QUICConfig *DomainQUICConfig `json:"QUICConfig,omitnil,omitempty" name:"QUICConfig"`
 
-	// IP access limit configuration information.
+
 	IPFilterPolicy *IPFilterPolicy `json:"IPFilterPolicy,omitnil,omitempty" name:"IPFilterPolicy"`
 
 	// Domain type. Valid values:
@@ -14763,7 +15229,7 @@ type EditMediaRequestParams struct {
 	// Input the type of video. The possible values u200bu200bare File and Stream.
 	InputType *string `json:"InputType,omitnil,omitempty" name:"InputType"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Input video file information, required when InputType is File.
@@ -14802,7 +15268,7 @@ type EditMediaRequest struct {
 	// Input the type of video. The possible values u200bu200bare File and Stream.
 	InputType *string `json:"InputType,omitnil,omitempty" name:"InputType"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Input video file information, required when InputType is File.
@@ -14934,12 +15400,10 @@ type EditMediaTask struct {
 	// Progress of a video editing task. Value range: [0, 100]
 	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
-	// Input of video editing task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Video editing task input.
 	Input *EditMediaTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output of video editing task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Output of the video editing task.
 	Output *EditMediaTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The metadata of the output video.
@@ -15071,7 +15535,7 @@ type EnhanceMediaByTemplateRequestParams struct {
 	// Enhance Media Template ID.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Starting offset time, unit: seconds, leaving it blank means intercepting from the beginning of the video.
@@ -15105,7 +15569,7 @@ type EnhanceMediaByTemplateRequest struct {
 	// Enhance Media Template ID.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Starting offset time, unit: seconds, leaving it blank means intercepting from the beginning of the video.
@@ -15295,121 +15759,165 @@ func (r *EnhanceMediaQualityResponse) FromJsonString(s string) error {
 }
 
 type EventContent struct {
-	// Event handler. The caller must call `ConfirmEvents` to confirm that the message has been received, and the confirmation is valid for 30 seconds. After the confirmation expires, the event can be obtained again.
+	// Event handler. The caller must call ConfirmEvents to acknowledge the message has been received. Confirmed Valid Time is 30 seconds. After expiration, the event can be retrieved again.
 	EventHandle *string `json:"EventHandle,omitnil,omitempty" name:"EventHandle"`
 
-	// <b>Supported event types:</b><li>`NewFileUpload`: Video uploaded.</li><li>`ProcedureStateChanged`: Task flow status changed.</li><li>`FileDeleted`: Video deleted.</li><li>`RestoreMediaComplete`: Video retrieved.</li><li>`PullComplete`: Finished video pulling.</li><li>`EditMediaComplete`: Finished video editing.</li><li>`SplitMediaComplete`: Finished video splitting.</li><li>`ComposeMediaComplete`: Finished producing the media file.</li><li>`WechatMiniProgramPublishComplete`: Finished publishing on Weixin Mini Program.</li><li>`RemoveWatermark`: Watermark removed.</li><li>`RebuildMediaComplete`: Finished audio/video remastering.</li><li>`ReviewAudioVideoComplete`: Finished moderation.</li><li>`ExtractTraceWatermarkComplete`: Finished digital watermark extraction.</li><li>`DescribeFileAttributesComplete`: Finished getting file attributes.</li><li>`QualityEnhanceComplete`: FinishedQualityEnhance.</li><li>`PersistenceComplete`: Clipping persistented. </li><li>`ComplexAdaptiveDynamicStreamingComplete `: Finished complex adaptive bitrate streaming processing. </li><b>v2017 task types:</b><li>`TranscodeComplete`: Finished video transcoding.</li><li>`ConcatComplete`: Finished video splicing.</li><li>`ClipComplete`: Finished video clipping.</li><li>`CreateImageSpriteComplete`: Finished image sprite generation.</li><li>`CreateSnapshotByTimeOffsetComplete`: Finished time point screencapturing.</li>
+	// <b>Supported event types:</b>
+	// <li>NewFileUpload: Video upload completed;</li>
+	// <li>ProcedureStateChanged: Task flow status change.</li>
+	// <li>FileDeleted: Video deletion completed;</li>
+	// <li>RestoreMediaComplete: Video retrieval completion;</li>
+	// <li>PullComplete: Video conversion pull completed.</li>
+	// <li>EditMediaComplete: Video editing completed;</li>
+	// <li>SplitMediaComplete: Video splitting completed;</li>
+	// <li>ComposeMediaComplete: Media file creation completion;</li>
+	// <li>WechatMiniProgramPublishComplete: WeChat Mini Program Publishing Completed.</li>
+	// <li>RemoveWatermark: Intelligent watermark removal completion.</li>
+	// <li>RebuildMediaComplete: Audio and video quality rebirth completion event (This is not recommended).</li>
+	// <li>ReviewAudioVideoComplete: Audio/video moderation completed;</li>
+	// <li>ExtractTraceWatermarkComplete: Traceability watermark extraction completed;</li>
+	// <li>ExtractCopyRightWatermarkComplete: Extracting copyright watermark completion.</li>
+	// <li>DescribeFileAttributesComplete: File attribute acquisition completion.</li>
+	// <li>QualityInspectComplete: Audio and video quality inspection completed;</li>
+	// <li>QualityEnhanceComplete: Audio and video quality rebirth task completion;</li>
+	// <li>PersistenceComplete: Edit completed.</li>
+	// <li>ComplexAdaptiveDynamicStreamingComplete: complex adaptive bitstream task completed.</li>
+	// <li>ProcessMediaByMPSComplete: MPS video processing is completed.</li>
+	// <li>AigcImageTaskComplete: AIGC image generation task complete.</li>
+	// <li>AigcVideoTaskComplete: AIGC video generation task completed.</li>
+	// <b>Event types compatible with the 2017 version:</b>
+	// <li>TranscodeComplete: video transcoding completion;</li>
+	// <li>ConcatComplete: Video splicing completion.</li>
+	// <li>ClipComplete: Video editing completed;</li>
+	// <li>CreateImageSpriteComplete: Video thumbnail capture completion.</li>
+	// <li>CreateSnapshotByTimeOffsetComplete: Video screenshot by time point.</li>
 	EventType *string `json:"EventType,omitnil,omitempty" name:"EventType"`
 
-	// Media uploaded event, valid when the event type is NewFileUpload.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Video upload completion event. Valid when the event type is NewFileUpload.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	FileUploadEvent *FileUploadTask `json:"FileUploadEvent,omitnil,omitempty" name:"FileUploadEvent"`
 
-	// Task flow status changed event, valid when the event type is ProcedureStateChanged.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Task flow status change event. Valid when the event type is ProcedureStateChanged.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProcedureStateChangeEvent *ProcedureTask `json:"ProcedureStateChangeEvent,omitnil,omitempty" name:"ProcedureStateChangeEvent"`
 
-	// File deleted event, valid when the event type is FileDeleted.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// File deletion event. Valid when the event type is FileDeleted.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	FileDeleteEvent *FileDeleteTask `json:"FileDeleteEvent,omitnil,omitempty" name:"FileDeleteEvent"`
 
-	// PullUpload completion event, valid when the event type is PullComplete.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Video pull completion event. Valid when the event type is PullComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	PullCompleteEvent *PullUploadTask `json:"PullCompleteEvent,omitnil,omitempty" name:"PullCompleteEvent"`
 
-	// EditMedia completion event, valid when the event type is EditMediaComplete.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Video editing completion event. Valid when the event type is EditMediaComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	EditMediaCompleteEvent *EditMediaTask `json:"EditMediaCompleteEvent,omitnil,omitempty" name:"EditMediaCompleteEvent"`
 
-	// SplitMedia completion event, valid when the event type is SplitMediaComplete.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Video splitting completion event. Valid when the event type is SplitMediaComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SplitMediaCompleteEvent *SplitMediaTask `json:"SplitMediaCompleteEvent,omitnil,omitempty" name:"SplitMediaCompleteEvent"`
 
-	// ComposeMedia completion event, valid when the event type is ComposeMediaComplete.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Media file creation task completion event. Valid when the event type is ComposeMediaComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ComposeMediaCompleteEvent *ComposeMediaTask `json:"ComposeMediaCompleteEvent,omitnil,omitempty" name:"ComposeMediaCompleteEvent"`
 
-	// Expired.
+	// Video editing completion event. Valid when the event type is ClipComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ClipCompleteEvent *ClipTask2017 `json:"ClipCompleteEvent,omitnil,omitempty" name:"ClipCompleteEvent"`
 
-	// Expired.
+	// Video transcoding completion event, valid when the event type is TranscodeComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TranscodeCompleteEvent *TranscodeTask2017 `json:"TranscodeCompleteEvent,omitnil,omitempty" name:"TranscodeCompleteEvent"`
 
-	// Expired.
+	// Video thumbnail capture completion event. Valid when the event type is CreateImageSpriteComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CreateImageSpriteCompleteEvent *CreateImageSpriteTask2017 `json:"CreateImageSpriteCompleteEvent,omitnil,omitempty" name:"CreateImageSpriteCompleteEvent"`
 
-	// Expired.
+	// Video splicing completion event. Valid when the event type is ConcatComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConcatCompleteEvent *ConcatTask2017 `json:"ConcatCompleteEvent,omitnil,omitempty" name:"ConcatCompleteEvent"`
 
-	// Expired.
+	// Video screenshot by time point completion event. Valid when the event type is CreateSnapshotByTimeOffsetComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SnapshotByTimeOffsetCompleteEvent *SnapshotByTimeOffsetTask2017 `json:"SnapshotByTimeOffsetCompleteEvent,omitnil,omitempty" name:"SnapshotByTimeOffsetCompleteEvent"`
 
-	// Expired.
+	// WeChat Publishing Completion Event. Valid when the event type is WechatPublishComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	WechatPublishCompleteEvent *WechatPublishTask `json:"WechatPublishCompleteEvent,omitnil,omitempty" name:"WechatPublishCompleteEvent"`
 
-	// WechatMiniProgramPublish completion event, valid when the event type is WechatMiniProgramPublishComplete.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// WeChat Mini Program Publishing Task Completion Event. Valid when the event type is WechatMiniProgramPublishComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	WechatMiniProgramPublishCompleteEvent *WechatMiniProgramPublishTask `json:"WechatMiniProgramPublishCompleteEvent,omitnil,omitempty" name:"WechatMiniProgramPublishCompleteEvent"`
 
-	// RemoveWatermark completion event, valid when the event type is RemoveWatermark.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Intelligent Watermark Removal Completion Event is valid when the event type is RemoveWatermark.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	RemoveWatermarkCompleteEvent *RemoveWatermarkTask `json:"RemoveWatermarkCompleteEvent,omitnil,omitempty" name:"RemoveWatermarkCompleteEvent"`
 
-	// RestoreMedia completion event, valid when the event type is RestoreMediaComplete.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Video retrieval completion event. Valid when the event type is RestoreMediaComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	RestoreMediaCompleteEvent *RestoreMediaTask `json:"RestoreMediaCompleteEvent,omitnil,omitempty" name:"RestoreMediaCompleteEvent"`
 
-	// RebuildMedia completion event, valid when the event type is RebuildMediaComplete.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Audio and video quality rebirth completion event. Valid when the event type is RebuildMediaComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	RebuildMediaCompleteEvent *RebuildMediaTask `json:"RebuildMediaCompleteEvent,omitnil,omitempty" name:"RebuildMediaCompleteEvent"`
 
-	// Expired.
+	// Traceability watermark extraction completion event. Valid when the event type is ExtractTraceWatermarkComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExtractTraceWatermarkCompleteEvent *ExtractTraceWatermarkTask `json:"ExtractTraceWatermarkCompleteEvent,omitnil,omitempty" name:"ExtractTraceWatermarkCompleteEvent"`
 
-	// Expired.
+	// Copyright watermark extraction completion event. Valid when the event type is ExtractCopyRightWatermarkComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExtractCopyRightWatermarkCompleteEvent *ExtractCopyRightWatermarkTask `json:"ExtractCopyRightWatermarkCompleteEvent,omitnil,omitempty" name:"ExtractCopyRightWatermarkCompleteEvent"`
 
-	// ReviewAudioVideo completion event, valid when the event type is ReviewAudioVideoComplete.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Audio/video moderation completed event. Valid when the event type is ReviewAudioVideoComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReviewAudioVideoCompleteEvent *ReviewAudioVideoTask `json:"ReviewAudioVideoCompleteEvent,omitnil,omitempty" name:"ReviewAudioVideoCompleteEvent"`
 
-	// Expired.
+	// This field is invalid.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReduceMediaBitrateCompleteEvent *ReduceMediaBitrateTask `json:"ReduceMediaBitrateCompleteEvent,omitnil,omitempty" name:"ReduceMediaBitrateCompleteEvent"`
 
-	// DescribeFileAttributes completion event, valid when the event type is DescribeFileAttributesComplete.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// File attribute acquisition completion event. Valid when the event type is DescribeFileAttributesComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DescribeFileAttributesCompleteEvent *DescribeFileAttributesTask `json:"DescribeFileAttributesCompleteEvent,omitnil,omitempty" name:"DescribeFileAttributesCompleteEvent"`
 
-	// QualityInspect completion event, valid when the event type is QualityInspectComplete.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Audio and video quality detection completion event. Valid when the event type is QualityInspectComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	QualityInspectCompleteEvent *QualityInspectTask `json:"QualityInspectCompleteEvent,omitnil,omitempty" name:"QualityInspectCompleteEvent"`
 
-	// Remaster completion event, valid when the event type is QualityEnhanceComplete.
-	// Pay attention to: this field may return null, indicating that no valid value can be obtained
+	// Audio and video quality rebirth completion event. Valid when the event type is QualityEnhanceComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	QualityEnhanceCompleteEvent *QualityEnhanceTask `json:"QualityEnhanceCompleteEvent,omitnil,omitempty" name:"QualityEnhanceCompleteEvent"`
 
 	// MediaCastStatus changed event, valid when the event type is MediaCastStatusChanged.
 	// Pay attention to: this field may return null, indicating that no valid value can be obtained.
 	MediaCastStatusChangedEvent *MediaCastEvent `json:"MediaCastStatusChangedEvent,omitnil,omitempty" name:"MediaCastStatusChangedEvent"`
 
-	// Persistence completion event, valid when the event type is PersistenceComplete.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Editing solidification completion event. Valid when the event type is PersistenceComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	PersistenceCompleteEvent *PersistenceCompleteTask `json:"PersistenceCompleteEvent,omitnil,omitempty" name:"PersistenceCompleteEvent"`
 
-	// Complex adaptive bitrate streaming processing completion event, valid when the event type is ComplexAdaptiveDynamicStreamingComplete.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Adaptive bitrate task information, valid only when EventType is ComplexAdaptiveDynamicStreamingComplete.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ComplexAdaptiveDynamicStreamingCompleteEvent *ComplexAdaptiveDynamicStreamingTask `json:"ComplexAdaptiveDynamicStreamingCompleteEvent,omitnil,omitempty" name:"ComplexAdaptiveDynamicStreamingCompleteEvent"`
 
-	// MPS video processing task information, valid only when EventType is ProcessMediaByMPSComplete.
+	// MPS video processing task information. Valid only when EventType is ProcessMediaByMPSComplete.
 	ProcessMediaByMPSCompleteEvent *ProcessMediaByMPS `json:"ProcessMediaByMPSCompleteEvent,omitnil,omitempty" name:"ProcessMediaByMPSCompleteEvent"`
 
-	// AIGC image task completion event, valid when the event type is AigcImageTaskComplete.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// AIGC image generation task info. Valid only when EventType is AigcImageTaskComplete.
 	AigcImageCompleteEvent *AigcImageTask `json:"AigcImageCompleteEvent,omitnil,omitempty" name:"AigcImageCompleteEvent"`
 
-	// AIGC video task completion event, valid when the event type is AigcVideoTaskComplete.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// AIGC video task info. Valid only when EventType is AigcVideoTaskComplete.
 	AigcVideoCompleteEvent *AigcVideoTask `json:"AigcVideoCompleteEvent,omitnil,omitempty" name:"AigcVideoCompleteEvent"`
+
+	// Extract digital watermark information. Valid at that time only when EventType is ExtractBlindWatermarkComplete.
+	ExtractBlindWatermarkComplete *ExtractBlindWatermarkTask `json:"ExtractBlindWatermarkComplete,omitnil,omitempty" name:"ExtractBlindWatermarkComplete"`
+
+	// AIGC scenario-based image generation task info, valid only when EventType is SceneAigcImageCompleteEvent.
+	SceneAigcImageCompleteEvent *SceneAigcImageTask `json:"SceneAigcImageCompleteEvent,omitnil,omitempty" name:"SceneAigcImageCompleteEvent"`
+
+	// Image asynchronous task processing info, valid only when EventType is ProcessImageAsyncCompleteEvent.
+	ProcessImageAsyncCompleteEvent *ProcessImageAsyncTask `json:"ProcessImageAsyncCompleteEvent,omitnil,omitempty" name:"ProcessImageAsyncCompleteEvent"`
 }
 
 // Predefined struct for user
@@ -15420,7 +15928,7 @@ type ExecuteFunctionRequestParams struct {
 	// API parameter. For specific parameter format, negotiate with the backend before calling.
 	FunctionArg *string `json:"FunctionArg,omitnil,omitempty" name:"FunctionArg"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
@@ -15442,7 +15950,7 @@ type ExecuteFunctionRequest struct {
 	// API parameter. For specific parameter format, negotiate with the backend before calling.
 	FunctionArg *string `json:"FunctionArg,omitnil,omitempty" name:"FunctionArg"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
@@ -15505,12 +16013,70 @@ func (r *ExecuteFunctionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ExtractBlindWatermarkInputInfo struct {
+	// Extract digital watermark input type, value range: <li>FILEID: File media asset ID;</li><li>URL: File URL;</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Media file ID to extract
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// Video file url to extract
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+}
+
+type ExtractBlindWatermarkTask struct {
+	// Media processing task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Task flow status. Valid values:
+	// <li>WAITING: waiting.</li>
+	// <li>PROCESSING: Processing;</li>
+	// <li>FINISH: completed</li>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. 0 indicates success, other values indicate failure.
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Extract digital watermark file input.
+	InputInfo *ExtractBlindWatermarkInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
+
+	// Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-ab: ab copyright digital watermark.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Tag whether watermark is detected. If this parameter is true, the Result field will return the extraction Result. If this parameter is false, the Result field will not be returned.
+	IsDetected *bool `json:"IsDetected,omitnil,omitempty" name:"IsDetected"`
+
+	// The extracted watermark content. This field will not be returned if no detection.
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// Player's ID fetched from the traceable watermark, represented in hexadecimal, 6 digits in total.
+	ResultUV *string `json:"ResultUV,omitnil,omitempty" name:"ResultUV"`
+
+	// Extract digital watermark configuration.
+	ExtractBlindWatermarkConfig *ExtractBlindWatermarkTaskConfig `json:"ExtractBlindWatermarkConfig,omitnil,omitempty" name:"ExtractBlindWatermarkConfig"`
+
+	// Source context, which is used to pass through the user request information. The callback for task flow status changes will return the value of this field. The maximum length is 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+
+	// Identifier for deduplication. If a request with the same identifier has been sent within the past seven days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+}
+
+type ExtractBlindWatermarkTaskConfig struct {
+	// Valid when the watermark type is blind-abseq, used to specify the segment duration of the input video. Unit: ms.
+	// If left blank, the segment duration is 5 seconds by default.
+	SegmentDuration *int64 `json:"SegmentDuration,omitnil,omitempty" name:"SegmentDuration"`
+}
+
 // Predefined struct for user
 type ExtractCopyRightWatermarkRequestParams struct {
 	// The media URL from which the watermark needs to be extracted.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b> VOD [Application](/document/product/266/14574?from_cn_redirect=1) ID. Customers who activate VOD services from December 25, 2023, if they access resources in VOD applications (whether it is a default application or a newly created application), must fill in this field as the application ID. </b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Identifies the source context, which is used to transparently transmit user request information. This field value will be returned in the ExtractCopyRightWatermarkComplete callback and task flow status change callback, with a maximum length of 1000 characters.
@@ -15532,7 +16098,7 @@ type ExtractCopyRightWatermarkRequest struct {
 	// The media URL from which the watermark needs to be extracted.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b> VOD [Application](/document/product/266/14574?from_cn_redirect=1) ID. Customers who activate VOD services from December 25, 2023, if they access resources in VOD applications (whether it is a default application or a newly created application), must fill in this field as the application ID. </b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Identifies the source context, which is used to transparently transmit user request information. This field value will be returned in the ExtractCopyRightWatermarkComplete callback and task flow status change callback, with a maximum length of 1000 characters.
@@ -15618,12 +16184,10 @@ type ExtractCopyRightWatermarkTask struct {
 	// Error code. An empty string indicates success. Other values u200bu200bindicate failure. For values, please refer to [Video Processing Error Code](https://www.tencentcloud.com/document/product/266/39145) list.
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
-	// Extract copyright watermark task input information.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Input of the copyright watermark extraction task.
 	Input *ExtractCopyRightWatermarkTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Extract copyright watermark task output information.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Output message of the Copyright Watermark Extraction Task.
 	Output *ExtractCopyRightWatermarkTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Identification code used for deduplication. If there is a request for the same identification code within seven days, this request will return an error. The maximum length is 50 characters, without or with an empty string to indicate no deduplication.
@@ -15652,7 +16216,7 @@ type ExtractTraceWatermarkRequestParams struct {
 	// <li><font color=red>Note</font>: This parameter is required.</li>
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The source context, which is used to pass through user request information. The `ExtractTraceWatermarkComplete` callback and the `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
@@ -15678,7 +16242,7 @@ type ExtractTraceWatermarkRequest struct {
 	// <li><font color=red>Note</font>: This parameter is required.</li>
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The source context, which is used to pass through user request information. The `ExtractTraceWatermarkComplete` callback and the `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
@@ -15787,7 +16351,7 @@ type ExtractTraceWatermarkTaskInput struct {
 }
 
 type ExtractTraceWatermarkTaskOutput struct {
-	// The distributor’s user ID, which is a six-digit hex number. This parameter is relevant when [digital watermarks](https://intl.cloud.tencent.com/document/product/266/75789?from_cn_redirect=1) are used.
+	// Player's ID, represented in hexadecimal, 6 digits in total.
 	Uv *string `json:"Uv,omitnil,omitempty" name:"Uv"`
 
 	// This parameter has been deprecated.
@@ -15906,7 +16470,7 @@ type FastEditMediaRequestParams struct {
 	// ClipMode is used to indicate whether to include this segment when the clipping time point falls in the middle of a TS segment. There are two values:<li>StartInclusiveEndInclusive: When the clip start time point and end time point fall in the middle of a segment, this segment will be included; </li> <li>StartInclusiveEndExclusive: When the starting time point falls in the middle of a segment, the segment will be included; when the end time point falls in the middle of a segment, the segment will not be included.</li> If not specified, the default is StartInclusiveEndInclusive.
 	ClipMode *string `json:"ClipMode,omitnil,omitempty" name:"ClipMode"`
 
-	// <b> VOD [Application](/document/product/266/14574) ID. Customers who activate VOD services from December 25, 2023, if they access resources in VOD applications (whether it is a default application or a newly created application), must fill in this field as the application ID. </b>
+	// <b> VOD [Application](/document/product/266/14574?from_cn_redirect=1) ID. Customers who activate VOD services from December 25, 2023, if they access resources in VOD applications (whether it is a default application or a newly created application), must fill in this field as the application ID. </b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -15919,7 +16483,7 @@ type FastEditMediaRequest struct {
 	// ClipMode is used to indicate whether to include this segment when the clipping time point falls in the middle of a TS segment. There are two values:<li>StartInclusiveEndInclusive: When the clip start time point and end time point fall in the middle of a segment, this segment will be included; </li> <li>StartInclusiveEndExclusive: When the starting time point falls in the middle of a segment, the segment will be included; when the end time point falls in the middle of a segment, the segment will not be included.</li> If not specified, the default is StartInclusiveEndInclusive.
 	ClipMode *string `json:"ClipMode,omitnil,omitempty" name:"ClipMode"`
 
-	// <b> VOD [Application](/document/product/266/14574) ID. Customers who activate VOD services from December 25, 2023, if they access resources in VOD applications (whether it is a default application or a newly created application), must fill in this field as the application ID. </b>
+	// <b> VOD [Application](/document/product/266/14574?from_cn_redirect=1) ID. Customers who activate VOD services from December 25, 2023, if they access resources in VOD applications (whether it is a default application or a newly created application), must fill in this field as the application ID. </b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -15976,8 +16540,7 @@ type FileDeleteResultItem struct {
 	// The ID of the file deleted.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// The type of the file deleted.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Part of the file deleted this time.
 	DeleteParts []*MediaDeleteItem `json:"DeleteParts,omitnil,omitempty" name:"DeleteParts"`
 }
 
@@ -16046,7 +16609,7 @@ type ForbidMediaDistributionRequestParams struct {
 	// forbid: forbids, recover: unblocks.
 	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -16059,7 +16622,7 @@ type ForbidMediaDistributionRequest struct {
 	// forbid: forbids, recover: unblocks.
 	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -16164,19 +16727,19 @@ type HDRInfo struct {
 	// Default value: `OFF`.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// The HDR type. Valid values:
-	// <li>`hdr10`</li>
-	// <li>`hlg`</li>
+	// High dynamic range type. Valid values:
+	// <li>hdr10: means the hdr10 standard;</li>
+	// <li>hlg: refers to the hlg standard.</li>
 	// 
 	// Note:
-	// <li>This parameter is valid only if `Switch` is `ON`.</li>
-	// <li>For audio/video remastering, this parameter is valid only if the output video codec is `libx264` or`libx265`.</li>
+	// <li>Valid only when the high dynamic range type control switch is ON.</li>
+	// <li>Valid when the video stream encoding format Codec of the video output parameter specified in the target parameter is libx264 or libx265.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 // Predefined struct for user
 type HandleCurrentPlaylistRequestParams struct {
-	// <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574) id.</b>.
+	// <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id.</b>.
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The unique identifier of the playlist.
@@ -16187,6 +16750,9 @@ type HandleCurrentPlaylistRequestParams struct {
 
 	// Playlist program id. required when operation is insert, indicating the program list will be inserted after this program. the insertion position must be after the currently playing program.
 	ItemId *string `json:"ItemId,omitnil,omitempty" name:"ItemId"`
+
+
+	SegmentIndex *int64 `json:"SegmentIndex,omitnil,omitempty" name:"SegmentIndex"`
 
 	// Program list. required when operation is insert, inserttemporary, delete, indicating the list of programs to be operated on. the list length can be up to a maximum of 10.
 	RoundPlaylist []*RoundPlayListItemInfo `json:"RoundPlaylist,omitnil,omitempty" name:"RoundPlaylist"`
@@ -16195,7 +16761,7 @@ type HandleCurrentPlaylistRequestParams struct {
 type HandleCurrentPlaylistRequest struct {
 	*tchttp.BaseRequest
 	
-	// <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574) id.</b>.
+	// <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id.</b>.
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The unique identifier of the playlist.
@@ -16206,6 +16772,8 @@ type HandleCurrentPlaylistRequest struct {
 
 	// Playlist program id. required when operation is insert, indicating the program list will be inserted after this program. the insertion position must be after the currently playing program.
 	ItemId *string `json:"ItemId,omitnil,omitempty" name:"ItemId"`
+
+	SegmentIndex *int64 `json:"SegmentIndex,omitnil,omitempty" name:"SegmentIndex"`
 
 	// Program list. required when operation is insert, inserttemporary, delete, indicating the list of programs to be operated on. the list length can be up to a maximum of 10.
 	RoundPlaylist []*RoundPlayListItemInfo `json:"RoundPlaylist,omitnil,omitempty" name:"RoundPlaylist"`
@@ -16227,6 +16795,7 @@ func (r *HandleCurrentPlaylistRequest) FromJsonString(s string) error {
 	delete(f, "RoundPlayId")
 	delete(f, "Operation")
 	delete(f, "ItemId")
+	delete(f, "SegmentIndex")
 	delete(f, "RoundPlaylist")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "HandleCurrentPlaylistRequest has unknown keys!", "")
@@ -16329,13 +16898,13 @@ type HeuristicCacheConfig struct {
 }
 
 type HighlightSegmentItem struct {
-	// Confidence.
+	// <p>Confidence degree.</p>
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Start time offset of a segment.
+	// <p>Segment start time offset.</p><p>Measurement unit: seconds.</p>
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// End time offset of a segment.
+	// <p>Segment end time offset.</p><p>Unit: seconds</p>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 }
 
@@ -16396,17 +16965,13 @@ type HwPrivateAccess struct {
 }
 
 type IPFilterPolicy struct {
-	// IP access restriction status. Optional values:
-	// <li>Enabled: enable;</li>
-	// <li>Disabled: disable.</li>
+
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// IP access restriction type:
-	// <li>Black: blocklist-based verification. Only IP requests from the IPList will be blocked.</li>
-	// <li>White: allowlist-based verification. Only IP requests from the IPList will be allowed.</li>When Status is set to Enabled, FilterType must be assigned.
+
 	FilterType *string `json:"FilterType,omitnil,omitempty" name:"FilterType"`
 
-	// IP list, supporting IPV4 addresses in X.X.X.X format, IPV6 addresses in X:X:X:X:X:X:X:X format, or CIDR notation /N (IPV4: 1 ≤ N ≤ 32; IPV6: 1 ≤ N ≤ 128). A maximum of 200 IPs or CIDR blocks can be added. When Status is set to Enabled, IPList must be assigned.
+
 	IPList []*string `json:"IPList,omitnil,omitempty" name:"IPList"`
 }
 
@@ -16436,6 +17001,48 @@ type ImageCenterCut struct {
 
 	// The radius of the output image. This parameter is valid if `Type` is `Circle`.
 	Radius *int64 `json:"Radius,omitnil,omitempty" name:"Radius"`
+}
+
+type ImageDenoiseConfig struct {
+
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
+type ImageEncodeConfig struct {
+
+	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
+
+
+	Quality *int64 `json:"Quality,omitnil,omitempty" name:"Quality"`
+}
+
+type ImageEnhanceConfig struct {
+
+	SuperResolution *SuperResolutionInfo `json:"SuperResolution,omitnil,omitempty" name:"SuperResolution"`
+
+
+	AdvancedSuperResolution *AdvancedSuperResolutionConfig `json:"AdvancedSuperResolution,omitnil,omitempty" name:"AdvancedSuperResolution"`
+
+
+	Denoise *ImageDenoiseConfig `json:"Denoise,omitnil,omitempty" name:"Denoise"`
+
+
+	ImageQualityEnhance *ImageQualityEnhanceInfo `json:"ImageQualityEnhance,omitnil,omitempty" name:"ImageQualityEnhance"`
+
+
+	ColorEnhance *ColorEnhanceInfo `json:"ColorEnhance,omitnil,omitempty" name:"ColorEnhance"`
+
+
+	SharpEnhance *SharpEnhanceInfo `json:"SharpEnhance,omitnil,omitempty" name:"SharpEnhance"`
+
+
+	FaceEnhance *FaceEnhanceInfo `json:"FaceEnhance,omitnil,omitempty" name:"FaceEnhance"`
+
+
+	LowLightEnhance *LowLightEnhanceInfo `json:"LowLightEnhance,omitnil,omitempty" name:"LowLightEnhance"`
 }
 
 type ImageOperation struct {
@@ -16521,6 +17128,14 @@ type ImageScale struct {
 
 	// The short side of the output image (pixels). This parameter is valid only if `Type` is `ShortEdgeFirst`.
 	ShortEdge *uint64 `json:"ShortEdge,omitnil,omitempty" name:"ShortEdge"`
+}
+
+type ImageSceneAigcEncodeConfig struct {
+
+	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
+
+
+	Quality *int64 `json:"Quality,omitnil,omitempty" name:"Quality"`
 }
 
 type ImageSpriteTaskInput struct {
@@ -16674,11 +17289,7 @@ type ImageWatermarkInputForUpdate struct {
 	// <li>repeat (default): repeats the playback until the video ends.</li>
 	RepeatType *string `json:"RepeatType,omitnil,omitempty" name:"RepeatType"`
 
-	// Image transparency, value range: [0, 100]
-	// 
-	// <li>0: Completely opaque</li>
-	// 
-	// <li>100: Completely transparent.</li>
+
 	Transparency *int64 `json:"Transparency,omitnil,omitempty" name:"Transparency"`
 }
 
@@ -16703,11 +17314,7 @@ type ImageWatermarkTemplate struct {
 	// <li>repeat (default): repeats the playback until the video ends.</li>
 	RepeatType *string `json:"RepeatType,omitnil,omitempty" name:"RepeatType"`
 
-	// Image transparency, value range: [0, 100]
-	// 
-	// <li>0: Completely opaque</li>
-	// 
-	// <li>100: Completely transparent.</li>
+
 	Transparency *int64 `json:"Transparency,omitnil,omitempty" name:"Transparency"`
 }
 
@@ -16799,10 +17406,10 @@ type ImportMediaKnowledgeTask struct {
 	// Task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Task Status. Valid values: <li>PROCESSING: Processing;</li><li>FINISH: Completed.</li>
+	// Task status. Value: <li>PROCESSING: Processing;</li><li>FINISH: Completed.</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code; 0 indicates success, other values indicate failure
+	// Error code. 0 indicates success, other values indicate failure.
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -16817,7 +17424,7 @@ type InspectMediaQualityRequestParams struct {
 	// Media quality inspect template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The priority of the task, the higher the numeric value, the higher the priority. The range is from -10 to 10, and not filled represents 0.
@@ -16842,7 +17449,7 @@ type InspectMediaQualityRequest struct {
 	// Media quality inspect template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The priority of the task, the higher the numeric value, the higher the priority. The range is from -10 to 10, and not filled represents 0.
@@ -17084,109 +17691,109 @@ type LicenseUsageDataItem struct {
 }
 
 type LiveRealTimeClipMediaSegmentInfo struct {
-	// Start time of the cliped segment, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732)
+	// Segment start time. Format reference [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time of the cliped segment, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732)
+	// Segment end time. Format reference [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 // Predefined struct for user
 type LiveRealTimeClipRequestParams struct {
-	// The live stream code.
+	// Push stream live code.
 	StreamId *string `json:"StreamId,omitnil,omitempty" name:"StreamId"`
 
-	// Start time of stream clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+	// Start time of stream clipping. Format reference [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time of stream clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+	// End time of stream clipping. Format reference [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <b>The VOD [application](https://www.tencentcloud.com/document/product/266/33987) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>VOD [app](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who have enabled VOD since December 25, 2023, to access resources in an VOD application (whether it is a default application or a newly created application), this field must be filled in as the application ID. </b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// Whether to clip persistently. 0: no, 1: yes. Default: no.
+	// Whether solidified. 0 not solidified, 1 solidified. Default non-permanent.
 	IsPersistence *int64 `json:"IsPersistence,omitnil,omitempty" name:"IsPersistence"`
 
-	// Storage expiration time of video generated by persistent clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). `9999-12-31T23:59:59Z` means `never expire`. After the expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted. This parameter will be valid only when `IsPersistence` is 1. By default, the video will never expire.
+	// Video storage expiry time after editing solidification. Format reference [ISO date format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I). Enter "9999-12-31T23:59:59Z" to indicate the video never expires. After expiry, the media file and its related resources (transcoding result, sprites) will be permanently deleted. Valid at that time only when IsPersistence is 1. The default video editing never expires.
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// VOD task flow processing for video generated by persistent clipping. For more information, please see [Specifying Task Flow After Upload](https://intl.cloud.tencent.com/document/product/266/9759?from_cn_redirect=1). This parameter will be valid only when `IsPersistence` is 1.
+	// Post-editing Solidified Video On-demand Task Flow Processing. For details, see [upload specified task flow](https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1). Valid only when IsPersistence is 1.
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
-	// The ID of the media file's category. You can use the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
-	// <li>The default value is `0`, which means the "Other" category.</li>
-	// This parameter is valid only if `IsPersistence` is `1`.
+	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [Create Category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) API.
+	// <li>Default value: 0, indicating other categories.</li>
+	// Valid when IsPersistence is 1.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// The source context, which is used to pass through user request information. The [NewFileUpload](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 250 characters and is valid only if `IsPersistence` is `1`.
+	// Source context, used for passing through user request information. The [callback on upload completion](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) will return the value of this field, up to 250 characters. Valid only when IsPersistence is 1.
 	SourceContext *string `json:"SourceContext,omitnil,omitempty" name:"SourceContext"`
 
-	// The session context, which is used to pass through user request information. If the `Procedure` parameter is specified, the [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 1,000 characters and is valid only if `IsPersistence` is `1`.
+	// Session context, used to pass through user request information. When specifying the Procedure parameter, the [task flow status change callback](https://www.tencentcloud.com/document/product/266/9636?from_cn_redirect=1) will return the value of this field, up to 1000 characters. Valid at that time only when IsPersistence is 1.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// Whether the metadata of clipped video needs to be returned. 0: no, 1: yes. Default value: no.
+	// Whether to return edited video metadata. 0: not required, 1: required. By default, does not need.
 	MetaDataRequired *uint64 `json:"MetaDataRequired,omitnil,omitempty" name:"MetaDataRequired"`
 
-	// Domain name used for live clipping. Time shifting must be enabled in LVB.
+	// The domain name added in VOD for time shift playback must be associated with a recording template and have the time-shift service enabled in Cloud Streaming Services (https://www.tencentcloud.com/document/product/266/52220?from_cn_redirect=1#.E6.AD.A5.E9.AA.A43.EF.BC.9A.E5.85.B3.E8.81.94.E5.BD.95.E5.88.B6.E6.A8.A1.E6.9D.BF.3Ca-id.3D.22step3.22.3E.3C.2Fa.3E). **If the first call time of this interface is after 2021-01-01T00:00:00Z, this field is a required field.**
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
-	// The information of the live stream to clip.
-	// <li>The video clip is cut from the original stream by default.</li>
-	// <li>If `Type` of `StreamInfo` is set to `Transcoding`, the video clip will be cut from the output stream of the transcoding template specified by `TemplateId`.</li>
+	// Edited live stream information
+	// <li>Default video editing for the original stream.</li>
+	// <li>When the Type specified in StreamInfo is Transcoding, edit the live streaming transcoding stream corresponding to TemplateId.</li>
 	StreamInfo *LiveRealTimeClipStreamInfo `json:"StreamInfo,omitnil,omitempty" name:"StreamInfo"`
 
-	// Reserved field. Do not enter a value for it.
+	// System reserved field. Do not fill in.
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
 type LiveRealTimeClipRequest struct {
 	*tchttp.BaseRequest
 	
-	// The live stream code.
+	// Push stream live code.
 	StreamId *string `json:"StreamId,omitnil,omitempty" name:"StreamId"`
 
-	// Start time of stream clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+	// Start time of stream clipping. Format reference [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time of stream clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+	// End time of stream clipping. Format reference [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <b>The VOD [application](https://www.tencentcloud.com/document/product/266/33987) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>VOD [app](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who have enabled VOD since December 25, 2023, to access resources in an VOD application (whether it is a default application or a newly created application), this field must be filled in as the application ID. </b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// Whether to clip persistently. 0: no, 1: yes. Default: no.
+	// Whether solidified. 0 not solidified, 1 solidified. Default non-permanent.
 	IsPersistence *int64 `json:"IsPersistence,omitnil,omitempty" name:"IsPersistence"`
 
-	// Storage expiration time of video generated by persistent clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). `9999-12-31T23:59:59Z` means `never expire`. After the expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted. This parameter will be valid only when `IsPersistence` is 1. By default, the video will never expire.
+	// Video storage expiry time after editing solidification. Format reference [ISO date format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I). Enter "9999-12-31T23:59:59Z" to indicate the video never expires. After expiry, the media file and its related resources (transcoding result, sprites) will be permanently deleted. Valid at that time only when IsPersistence is 1. The default video editing never expires.
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// VOD task flow processing for video generated by persistent clipping. For more information, please see [Specifying Task Flow After Upload](https://intl.cloud.tencent.com/document/product/266/9759?from_cn_redirect=1). This parameter will be valid only when `IsPersistence` is 1.
+	// Post-editing Solidified Video On-demand Task Flow Processing. For details, see [upload specified task flow](https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1). Valid only when IsPersistence is 1.
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
-	// The ID of the media file's category. You can use the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
-	// <li>The default value is `0`, which means the "Other" category.</li>
-	// This parameter is valid only if `IsPersistence` is `1`.
+	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [Create Category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) API.
+	// <li>Default value: 0, indicating other categories.</li>
+	// Valid when IsPersistence is 1.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// The source context, which is used to pass through user request information. The [NewFileUpload](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 250 characters and is valid only if `IsPersistence` is `1`.
+	// Source context, used for passing through user request information. The [callback on upload completion](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) will return the value of this field, up to 250 characters. Valid only when IsPersistence is 1.
 	SourceContext *string `json:"SourceContext,omitnil,omitempty" name:"SourceContext"`
 
-	// The session context, which is used to pass through user request information. If the `Procedure` parameter is specified, the [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 1,000 characters and is valid only if `IsPersistence` is `1`.
+	// Session context, used to pass through user request information. When specifying the Procedure parameter, the [task flow status change callback](https://www.tencentcloud.com/document/product/266/9636?from_cn_redirect=1) will return the value of this field, up to 1000 characters. Valid at that time only when IsPersistence is 1.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// Whether the metadata of clipped video needs to be returned. 0: no, 1: yes. Default value: no.
+	// Whether to return edited video metadata. 0: not required, 1: required. By default, does not need.
 	MetaDataRequired *uint64 `json:"MetaDataRequired,omitnil,omitempty" name:"MetaDataRequired"`
 
-	// Domain name used for live clipping. Time shifting must be enabled in LVB.
+	// The domain name added in VOD for time shift playback must be associated with a recording template and have the time-shift service enabled in Cloud Streaming Services (https://www.tencentcloud.com/document/product/266/52220?from_cn_redirect=1#.E6.AD.A5.E9.AA.A43.EF.BC.9A.E5.85.B3.E8.81.94.E5.BD.95.E5.88.B6.E6.A8.A1.E6.9D.BF.3Ca-id.3D.22step3.22.3E.3C.2Fa.3E). **If the first call time of this interface is after 2021-01-01T00:00:00Z, this field is a required field.**
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
-	// The information of the live stream to clip.
-	// <li>The video clip is cut from the original stream by default.</li>
-	// <li>If `Type` of `StreamInfo` is set to `Transcoding`, the video clip will be cut from the output stream of the transcoding template specified by `TemplateId`.</li>
+	// Edited live stream information
+	// <li>Default video editing for the original stream.</li>
+	// <li>When the Type specified in StreamInfo is Transcoding, edit the live streaming transcoding stream corresponding to TemplateId.</li>
 	StreamInfo *LiveRealTimeClipStreamInfo `json:"StreamInfo,omitnil,omitempty" name:"StreamInfo"`
 
-	// Reserved field. Do not enter a value for it.
+	// System reserved field. Do not fill in.
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
@@ -17224,22 +17831,20 @@ func (r *LiveRealTimeClipRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type LiveRealTimeClipResponseParams struct {
-	// Playback URL of clipped video.
+	// Edited Video Playback URL
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// Unique media file ID of video generated by persistent clipping.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Unique identifier of media file for post-editing solidified video.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// Task flow ID of video generated by persistent clipping.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Edited video task flow ID after solidification.
 	VodTaskId *string `json:"VodTaskId,omitnil,omitempty" name:"VodTaskId"`
 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Edited Video Metadata
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
 
-	// Cliped media segment info.
+	// <span id="p_segmentset">Edited video clip information.</span>
 	SegmentSet []*LiveRealTimeClipMediaSegmentInfo `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -17302,6 +17907,14 @@ type LowLightEnhanceInfo struct {
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
+type MPSAiAnalysisTaskInput struct {
+	// <p>ID of the video analysis template.</p>
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Additional parameters, whose value is a serialized json string. Note: This parameter is for customization requirements. See the following: <a href="https://www.tencentcloud.com/document/product/862/101530?from_cn_redirect=1">Intelligent Erasure</a><a href="https://www.tencentcloud.com/document/product/862/112098?from_cn_redirect=1">Intelligent Splitting</a><a href="https://www.tencentcloud.com/document/product/862/107280?from_cn_redirect=1">Highlight</a><a href="https://www.tencentcloud.com/document/product/862/112112?from_cn_redirect=1">Intelligent Landscape-to-Portrait</a></p>
+	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
+}
+
 type MPSAiMediaInfo struct {
 	// List of intelligent media information processed by MPS
 	AiMediaList []*MPSAiMediaItem `json:"AiMediaList,omitnil,omitempty" name:"AiMediaList"`
@@ -17359,20 +17972,56 @@ type MPSAiMediaTask struct {
 	OutputText *string `json:"OutputText,omitnil,omitempty" name:"OutputText"`
 }
 
+type MPSEraseArea struct {
+	// <p>Top-left X-axis coordinate of the region. When Unit is set to 1 (using percentage unit), 0.05 means the horizontal distance from the top-left corner of the region to the top-left corner of the entire image is 5% of the image width.</p>
+	LeftTopX *float64 `json:"LeftTopX,omitnil,omitempty" name:"LeftTopX"`
+
+	// <p>Y-axis coordinate of the top-left corner. For example, when Unit is set to 1 (using percentage), 0.1 means the vertical distance from the top-left corner of the region to the top-left corner of the entire frame is 10% of the screen height.</p>
+	LeftTopY *float64 `json:"LeftTopY,omitnil,omitempty" name:"LeftTopY"`
+
+	// <p>X coordinate of the bottom-right corner of the region. For example, when Unit is 1 (using percentage as the measurement unit), 0.75 means the horizontal distance from the bottom-right corner of the region to the top-left corner of the entire frame is 75% of the frame width.</p>
+	RightBottomX *float64 `json:"RightBottomX,omitnil,omitempty" name:"RightBottomX"`
+
+	// <p>Y-axis coordinate of the bottom-right corner. For example, when Unit is 1 (using percentage), 0.9 means the vertical distance from the top-left corner to the bottom-right corner is 90% of the screen height.</p>
+	RightBottomY *float64 `json:"RightBottomY,omitnil,omitempty" name:"RightBottomY"`
+
+	// <p>Coordinate unit - 1 percentage - 2 pixel value</p>
+	Unit *uint64 `json:"Unit,omitnil,omitempty" name:"Unit"`
+}
+
+type MPSEraseTimeArea struct {
+	// <p>Start time, unit: ms</p>
+	BeginMs *uint64 `json:"BeginMs,omitnil,omitempty" name:"BeginMs"`
+
+	// <p>End time, unit: ms</p>
+	EndMs *uint64 `json:"EndMs,omitnil,omitempty" name:"EndMs"`
+
+	// <p>Domain list for erasure within the period</p>
+	Areas []*MPSEraseArea `json:"Areas,omitnil,omitempty" name:"Areas"`
+}
+
 type MPSOutputFile struct {
-	// File type. Used to identify the specific file returned in the ProcessMediaByMPS task execution results. Values: <li>AiAnalysis.DeLogo.Video: The erased video file generated by the smart erase task;</li><li>AiAnalysis.DeLogo.OriginSubtitle: The subtitle file extracted based on the screen in the smart erase task;</li><li>AiAnalysis.DeLogo.TranslateSubtitle: The subtitle translation file extracted based on the screen in the smart erase task.</li>
+	// File type. Used to identify specific return files in the execution result of an MPS video processing task.
+	// Value: <li>AiAnalysis.DeLogo.Video: The erased video file generated in the intelligent erasure task, stored in the original file type by default;</li> <li>AiAnalysis.DeLogo.OriginSubtitle: The subtitle file extracted from video in the intelligent erasure task;</li> <li>AiAnalysis.DeLogo.TranslateSubtitle: The translation file of subtitles extracted from video in the intelligent erasure task.</li> <li>MediaProcess.Transcode.Video: The enhanced audio and video file in the audio and video enhancement task, stored in the transcoded file type by default.</li>
+	// <li>AiAnalysis.HorizontalToVerticalTask.Video: The generated video file in the horizontal to vertical task is stored as an intelligent media type by default.</li>
+	// <li>AiAnalysis.VideoRemakeTaskk.Video: The generated video file in the intelligent deduplication task, stored as an intelligent media type by default.</li>
+	// <li>AiAnalysis.SegmentTask.Video: Generated video file in the intelligent video splitting task, stored as intelligent media type by default.</li>
+	// <li>SmartErase.Video: Generated video file in the intelligent erasure task, stored as intelligent media type by default.</li>
 	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
 
-	// Storage mode. It is used to indicate the storage mode of the result file. The possible values are: <li> Permanent: permanent storage; </li><li> Temporary: temporary storage. </li>
+	// Storage format. To represent the storage format of the result file. Valid values: <li>Permanent: permanent storage;</li> <li>Temporary: temporary storage.</li>
 	StorageMode *string `json:"StorageMode,omitnil,omitempty" name:"StorageMode"`
 
-	// Media file ID. Valid when Type is Permanent, indicating that the result file is stored in the VOD platform as a video media asset. The field value is the FileId of the video media asset.
+	// Media file ID. Valid when Type is Permanent, indicating that the result file is stored as a media asset on the VOD platform, with the field value being the FileId of the media asset.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// Downloadable URL for the result file.
+	// Downloadable Url of the result file.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// Expiration time. Valid when StorageMode is Temporary. It indicates the expiration time of the URL in seconds.
+	// Transcoding specification ID. Valid when FileType equals MediaProcess.Transcode.Video. A value of 0 means the original file.
+	Definition *string `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Expiration time. Valid when StorageMode is Temporary, indicates the expiry date of the Url, in seconds.
 	ExpiredTime *uint64 `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 }
 
@@ -17405,29 +18054,250 @@ type MPSOutputFileInfo struct {
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
+type MPSOverrideEraseParameter struct {
+	// <p>Removal Type</p><ul><li>subtitle removal</li><li>watermark removal</li><li>privacy protection</li></ul>
+	EraseType *string `json:"EraseType,omitnil,omitempty" name:"EraseType"`
+
+	// <p>Subtitle erasing configuration;<br>This field is required when the value of EraseType is set to subtitle.</p>
+	EraseSubtitleConfig *MPSUpdateSmartEraseSubtitleConfig `json:"EraseSubtitleConfig,omitnil,omitempty" name:"EraseSubtitleConfig"`
+
+	// <p>Watermark erasing configuration.<br>This field is required when the value of EraseType is set to watermark.</p>
+	EraseWatermarkConfig *MPSUpdateSmartEraseWatermarkConfig `json:"EraseWatermarkConfig,omitnil,omitempty" name:"EraseWatermarkConfig"`
+
+	// <p>Privacy protection configuration.<br>This field is required when the value of EraseType is privacy.</p>
+	ErasePrivacyConfig *MPSSmartErasePrivacyConfig `json:"ErasePrivacyConfig,omitnil,omitempty" name:"ErasePrivacyConfig"`
+
+	// <p>id of the subtitle removal suppression template.</p>
+	SubtitleEmbedId *int64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
+}
+
+type MPSRawSmartEraseParameter struct {
+	// <p>Removal Type</p><ul><li>subtitle removal</li><li>watermark removal</li><li>privacy protection</li></ul>
+	EraseType *string `json:"EraseType,omitnil,omitempty" name:"EraseType"`
+
+	// <p>Subtitle erasing configuration;<br>This field is required when the value of EraseType is set to subtitle.</p>
+	EraseSubtitleConfig *MPSSmartEraseSubtitleConfig `json:"EraseSubtitleConfig,omitnil,omitempty" name:"EraseSubtitleConfig"`
+
+	// <p>Watermark erasing configuration.<br>This field is required when the value of EraseType is set to watermark.</p>
+	EraseWatermarkConfig *MPSSmartEraseWatermarkConfig `json:"EraseWatermarkConfig,omitnil,omitempty" name:"EraseWatermarkConfig"`
+
+	// <p>Privacy protection configuration.<br>This field is required when the value of EraseType is privacy.</p>
+	ErasePrivacyConfig *MPSSmartErasePrivacyConfig `json:"ErasePrivacyConfig,omitnil,omitempty" name:"ErasePrivacyConfig"`
+
+	// <p>id of the subtitle removal suppression template.</p>
+	SubtitleEmbedId *int64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
+
+	// <p>Suppression configuration, enabled by default, moves subtitles back to the original subtitle position.</p>
+	UseOriginalPos *int64 `json:"UseOriginalPos,omitnil,omitempty" name:"UseOriginalPos"`
+
+	// <p>Suppression configuration, enabled by default. When enabled, use the original subtitle font size.</p>
+	UseOriginalSize *int64 `json:"UseOriginalSize,omitnil,omitempty" name:"UseOriginalSize"`
+}
+
+type MPSRawSmartSubtitleParameter struct {
+	// <p>Intelligent caption subtitle language type.</p><p>Enumeration value:</p><ul><li>0: Source language</li><li>1: Target language</li><li>2: Source language + target language</li></ul><p>Only 0 is supported when TranslateSwitch is OFF. Only 1 or 2 is supported when TranslateSwitch is ON.</p>
+	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
+
+	// <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br>ASR recognition and pure caption translation currently support the following languages:<br><code>auto</code>: Auto-identification<br><code>zh</code>: Simplified Chinese<br><code>en</code>: English<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>zh-PY</code>: Chinese-English-Cantonese<br><code>zh_medical</code>: Chinese health care<br><code>vi</code>: Vietnamese<br><code>ms</code>: Malay<br><code>id</code>: Indonesian<br><code>fil</code>: Filipino<br><code>th</code>: Thai<br><code>pt</code>: Portuguese<br><code>tr</code>: Turkish<br><code>ar</code>: Arabic<br><code>es</code>: Spanish<br><code>hi</code>: Hindi<br><code>fr</code>: French<br><code>de</code>: German<br><code>it</code>: Italian<br><code>zh_dialect</code>: Chinese dialect<br><code>zh_en</code>: Chinese-English<br><code>yue</code>: Cantonese<br><code>ru</code>: Russian<br><code>prime_zh</code>: Chinese-English dialect<br><code>af-ZA</code>: Afrikaans (South Africa)<br><code>sq-AL</code>: Albanian (Albania)<br><code>am-ET</code>: Amharic (Ethiopia)<br><code>ar-DZ</code>: Arabic (Algeria)<br><code>ar-BH</code>: Arabic (Bahrain)<br><code>ar-EG</code>: Arabic (Egypt)<br><code>ar-IQ</code>: Arabic (Iraq)<br><code>ar-IL</code>: Arabic (Israel)<br><code>ar-JO</code>: Arabic (Jordan)<br><code>ar-KW</code>: Arabic (Kuwait)<br><code>ar-LB</code>: Arabic (Lebanon)<br><code>ar-MR</code>: Arabic (Mauritania)<br><code>ar-MA</code>: Arabic (Morocco)<br><code>ar-OM</code>: Arabic (Oman)<br><code>ar-QA</code>: Arabic (Qatar)<br><code>ar-SA</code>: Arabic (Saudi Arabia)<br><code>ar-PS</code>: Arabic (State of Palestine)<br><code>ar-SY</code>: Arabic (Syria)<br><code>ar-TN</code>: Arabic (Tunisia)<br><code>ar-AE</code>: Arabic (United Arab Emirates)<br><code>ar-YE</code>: Arabic (Yemen)<br><code>hy-AM</code>: Armenian (Armenia)<br><code>az-AZ</code>: Azerbaijani (Azerbaijan)<br><code>eu-ES</code>: Basque (Spain)<br><code>bn-BD</code>: Bengali (Bangladesh)<br><code>bn-IN</code>: Bengali (India)<br><code>bs-BA</code>: Bosnian (Bosnia and Herzegovina)<br><code>bg-BG</code>: Bulgarian (Bulgaria)<br><code>my-MM</code>: Burmese (Myanmar)<br><code>ca-ES</code>: Catalan (Spain)<br><code>hr-HR</code>: Croatian (Croatia)<br><code>cs-CZ</code>: Czech (Czech Republic)<br><code>da-DK</code>: Danish (Denmark)<br><code>nl-BE</code>: Dutch (Belgium)<br><code>nl-NL</code>: Dutch (Netherlands)<br><code>en-AU</code>: English (Australia)<br><code>en-CA</code>: English (Canada)<br><code>en-GH</code>: English (Ghana)<br><code>en-HK</code>: English (Hong Kong (China))<br><code>en-IN</code>: English (India)<br><code>en-IE</code>: English (Ireland)<br><code>en-KE</code>: English (Kenya)<br><code>en-NZ</code>: English (New Zealand)<br><code>en-NG</code>: English (Nigeria)<br><code>en-PK</code>: English (Pakistan)<br><code>en-PH</code>: English (Philippines)<br><code>en-SG</code>: English (Singapore)<br><code>en-ZA</code>: English (South Africa)<br><code>en-TZ</code>: English (Tanzania)<br><code>en-GB</code>: English (UK)<br><code>en-US</code>: English (United States)<br><code>et-EE</code>: Estonian (Estonia)<br><code>fil-PH</code>: Filipino (Philippines)<br><code>fi-FI</code>: Finnish (Finland)<br><code>fr-BE</code>: French (Belgium)<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fr-CH</code>: French (Switzerland)<br><code>gl-ES</code>: Galician (Spain)<br><code>ka-GE</code>: Georgian (Georgia)<br><code>el-GR</code>: Greek (Greece)<br><code>gu-IN</code>: Gujarati (India)<br><code>iw-IL</code>: Hebrew (Israel)<br><code>hi-IN</code>: Hindi (India)<br><code>hu-HU</code>: Hungarian (Hungary)<br><code>is-IS</code>: Icelandic (Iceland)<br><code>id-ID</code>: Indonesian (Indonesia)<br><code>it-IT</code>: Italian (Italy)<br><code>it-CH</code>: Italian (Switzerland)<br><code>ja-JP</code>: Japanese (Japan)<br><code>jv-ID</code>: Javanese (Indonesia)<br><code>kn-IN</code>: Kannada (India)<br><code>kk-KZ</code>: Kazakh (Kazakhstan)<br><code>km-KH</code>: Khmer (Cambodia)<br><code>rw-RW</code>: Kinyarwanda (Rwanda)<br><code>ko-KR</code>: Korean (South Korea)<br><code>lo-LA</code>: Lao (Laos)<br><code>lv-LV</code>: Latvian (Latvia)<br><code>lt-LT</code>: Lithuanian (Lithuania)<br><code>mk-MK</code>: Macedonian (North Macedonia)<br><code>ms-MY</code>: Malay (Malaysia)<br><code>ml-IN</code>: Malayalam (India)<br><code>mr-IN</code>: Marathi (India)<br><code>mn-MN</code>: Mongolian (Mongolia)<br><code>ne-NP</code>: Nepali (Nepal)<br><code>no-NO</code>: Norwegian Bokmål (Norway)<br><code>fa-IR</code>: Persian (Iran)<br><code>pl-PL</code>: Polish (Poland)<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>ro-RO</code>: Romanian (Romania)<br><code>ru-RU</code>: Russian (Russia)<br><code>sr-RS</code>: Serbian (Serbia)<br><code>si-LK</code>: Sinhalese (Sri Lanka)<br><code>sk-SK</code>: Slovak (Slovakia)<br><code>sl-SI</code>: Slovenian (Slovenia)<br><code>st-ZA</code>: Southern Sotho (South Africa)<br><code>es-AR</code>: Spanish (Argentina)<br><code>es-BO</code>: Spanish (Bolivia)<br><code>es-CL</code>: Spanish (Chile)<br><code>es-CO</code>: Spanish (Colombia)<br><code>es-CR</code>: Spanish (Costa Rica)<br><code>es-DO</code>: Spanish (Dominican Republic)<br><code>es-EC</code>: Spanish (Ecuador)<br><code>es-SV</code>: Spanish (El Salvador)<br><code>es-GT</code>: Spanish (Guatemala)<br><code>es-HN</code>: Spanish (Honduras)<br><code>es-MX</code>: Spanish (Mexico)<br><code>es-NI</code>: Spanish (Nicaragua)<br><code>es-PA</code>: Spanish (Panama)<br><code>es-PY</code>: Spanish (Paraguay)<br><code>es-PE</code>: Spanish (Peru)<br><code>es-PR</code>: Spanish (Puerto Rico)<br><code>es-ES</code>: Spanish (Spain)<br><code>es-US</code>: Spanish (United States)<br><code>es-UY</code>: Spanish (Uruguay)<br><code>es-VE</code>: Spanish (Venezuela)<br><code>su-ID</code>: Sundanese (Indonesia)<br><code>sw-KE</code>: Swahili (Kenya)<br><code>sw-TZ</code>: Swahili (Tanzania)<br><code>sv-SE</code>: Swedish (Sweden)<br><code>ta-IN</code>: Tamil (India)<br><code>ta-MY</code>: Tamil (Malaysia)<br><code>ta-SG</code>: Tamil (Singapore)<br><code>ta-LK</code>: Tamil (Sri Lanka)<br><code>te-IN</code>: Telugu (India)<br><code>th-TH</code>: Thai (Thailand)<br><code>ts-ZA</code>: Tsonga (South Africa)<br><code>tr-TR</code>: Turkish (Türkiye)<br><code>uk-UA</code>: Ukrainian (Ukraine)<br><code>ur-IN</code>: Urdu (India)<br><code>ur-PK</code>: Urdu (Pakistan)<br><code>uz-UZ</code>: Uzbek (Uzbekistan)<br><code>ve-ZA</code>: Venda (South Africa)<code>vi-VN</code>: Vietnamese (Vietnam)<br><code>xh-ZA</code>: Xhosa (South Africa)<br><code>zu-ZA</code>: Zulu (South Africa)</p>
+	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
+
+	// <p>Intelligent subtitle file format:</p><ul><li>For ASR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li><li>Blank or fill in the blank: no subtitle file generated</li></ul></li><li>For pure caption translation processing type:<ul><li>original: consistent with the source file</li><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li><li>For OCR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li></ul><p><strong>Note</strong>:</p><ul><li>For ASR recognition method, passing blank or unspecified is not allowed when translating at least 2 languages.</li><li>For pure caption translation and OCR recognition translation methods, passing blank or unspecified is not allowed.</li><li>For OCR type tasks, passing blank or unspecified is allowed when suppression is enabled.</li></ul>
+	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
+
+	// <p>Subtitle translation switch<br><code>ON</code>: Enable translation<br><code>OFF</code>: Disable translation</p><p><strong>Note</strong>: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to <code>OFF</code>.</p>
+	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
+
+	// <p>Subtitle target language<br>Take effect when TranslateSwitch is ON. Translation language list:<br><code>ab</code>: Abkhaz<br><code>ace</code>: Acehnese<br><code>ach</code>: Acholi<br><code>af</code>: Afrikaans<br><code>ak</code>: Akan<br><code>am</code>: Amharic<br><code>ar</code>: Arabic<br><code>as</code>: Assamese<br><code>ay</code>: Aymara<br><code>az</code>: Azerbaijani<br><code>ba</code>: Bashkir<br><code>ban</code>: Balinese<br><code>bbc</code>: Batak Toba<br><code>bem</code>: Bemba<br><code>bew</code>: Betawi<br><code>bg</code>: Bulgarian<br><code>bho</code>: Bhojpuri<br><code>bik</code>: Bikol<br><code>bm</code>: Bambara<br><code>bn</code>: Bengali<br><code>br</code>: Breton<br><code>bs</code>: Bosnian<br><code>btx</code>: Batak Karo<br><code>bts</code>: Batak Simalungun<br><code>bua</code>: Buryat<br><code>ca</code>: Catalan<br><code>ceb</code>: Cebuano<br><code>cgg</code>: Kiga<br><code>chm</code>: Meadow Mari<br><code>ckb</code>: Kurdish (Sorani)<br><code>cnh</code>: Hakha Chin<br><code>co</code>: Corsican<br><code>crh</code>: Crimean Tatar<br><code>crs</code>: Seychellois Creole<br><code>cs</code>: Czech<br><code>cv</code>: Chuvash<br><code>cy</code>: Welsh<br><code>da</code>: Danish<br><code>de</code>: German<br><code>din</code>: Dinka<br><code>doi</code>: Dogri<br><code>dov</code>: Dombe<br><code>dv</code>: Dhivehi<br><code>dz</code>: Dzongkha<br><code>ee</code>: Ewe<br><code>el</code>: Greek<br><code>en</code>: English<br><code>eo</code>: Esperanto<br><code>es</code>: Spanish<br><code>et</code>: Estonian<br><code>eu</code>: Basque<br><code>fa</code>: Persian<br><code>ff</code>: Fula<br><code>fi</code>: Finnish<br><code>fil</code>: Filipino (Tagalog)<br><code>fj</code>: Fijian<br><code>fr</code>: French<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fy</code>: Frisian<br><code>ga</code>: Irish<br><code>gaa</code>: Ga Language<br><code>gd</code>: Scottish Gaelic<br><code>gl</code>: Galician<br><code>gn</code>: Guarani<br><code>gom</code>: Konkani<br><code>gu</code>: Gujarati<br><code>gv</code>: Manx<br><code>ha</code>: Hausa<br><code>haw</code>: Hawaiian<br><code>he</code>: Hebrew<br><code>hi</code>: Hindi<br><code>hil</code>: Hiligaynon<br><code>hmn</code>: Hmong<br><code>hr</code>: Croatian<br><code>hrx</code>: Hunsrik<br><code>ht</code>: Haitian Creole<br><code>hu</code>: Hungarian<br><code>hy</code>: Armenian<br><code>id</code>: Indonesian<br><code>ig</code>: Igbo<br><code>ilo</code>: Ilocano<br><code>is</code>: Icelandic<br><code>it</code>: Italian<br><code>iw</code>: Hebrew<br><code>ja</code>: Japanese<br><code>jv</code>: Javanese<br><code>ka</code>: Georgian<br><code>kk</code>: Kazakh<br><code>km</code>: Khmer<br><code>kn</code>: Kannada<br><code>ko</code>: Korean<br><code>kri</code>: Krio<br><code>ku</code>: Kurdish (Kurmanji)<br><code>ktu</code>: Kituba<br><code>ky</code>: Kyrgyz<br><code>la</code>: Latin<br><code>lb</code>: Luxembourgish<br><code>lg</code>: Ganda (Luganda)<br><code>li</code>: Limburgish<br><code>lij</code>: Ligurian<br><code>lmo</code>: Lombard<br><code>ln</code>: Lingala<br><code>lo</code>: Lao<br><code>lt</code>: Lithuanian<br><code>ltg</code>: Latgalian<br><code>luo</code>: Luo<br><code>lus</code>: Mizo<br><code>lv</code>: Latvian<br><code>mai</code>: Maithili<br><code>mak</code>: Makassar<br><code>mg</code>: Malagasy<br><code>mi</code>: Maori<br><code>min</code>: Minangkabau<br><code>mk</code>: Macedonian<br><code>ml</code>: Malayalam<br><code>mn</code>: Mongolian<br><code>mr</code>: Marathi<br><code>ms</code>: Malay<br><code>mt</code>: Maltese<br><code>my</code>: Burmese<br><code>ne</code>: Nepali<br><code>new</code>: Newari<br><code>nl</code>: Dutch<br><code>no</code>: Norwegian<br><code>nr</code>: Southern Ndebele<br><code>nso</code>: Northern Sotho (Sepedi)<br><code>nus</code>: Nuer<br><code>ny</code>: Chichewa (Nyanja)<br><code>oc</code>: Occitan<br><code>om</code>: Oromo<br><code>or</code>: Odia<br><code>pa</code>: Punjabi<br><code>pag</code>: Pangasinan<br><code>pam</code>: Kapampangan<br><code>pap</code>: Papiamento<br><code>pl</code>: Polish<br><code>ps</code>: Pashto<br><code>pt</code>: Portuguese<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>qu</code>: Quechua<br><code>ro</code>: Romanian<br><code>rom</code>: Romani<br><code>rn</code>: Rundi<br><code>ru</code>: Russian<br><code>rw</code>: Kinyarwanda<br><code>sa</code>: Sanskrit<br><code>scn</code>: Sicilian<br><code>sd</code>: Sindhi<br><code>sg</code>: Sango<br><code>shn</code>: Shan<br><code>si</code>: Sinhalese<br><code>sk</code>: Slovak<br><code>sl</code>: Slovenian<br><code>sm</code>: Samoan<br><code>sn</code>: Shona<br><code>so</code>: Somali<br><code>sq</code>: Albanian<br><code>sr</code>: Serbian<br><code>ss</code>: Swati<br><code>st</code>: Sesotho<br><code>su</code>: Sundanese<br><code>sv</code>: Swedish<br><code>sw</code>: Swahili<br><code>szl</code>: Silesian<br><code>ta</code>: Tamil<br><code>te</code>: Telugu<br><code>tet</code>: Tetum<br><code>tg</code>: Tajik<br><code>th</code>: Thai<br><code>ti</code>: Tigrinya<br><code>tk</code>: Turkmen<br><code>tn</code>: Tswana<br><code>tr</code>: Turkish<br><code>ts</code>: Tsonga<br><code>tt</code>: Tatar<br><code>ug</code>: Uyghur<br><code>uk</code>: Ukrainian<br><code>ur</code>: Urdu<br><code>uz</code>: Uzbek<br><code>vi</code>: Vietnamese<br><code>xh</code>: Xhosa<br><code>yi</code>: Yiddish<br><code>yo</code>: Yoruba<br><code>yua</code>: Yucatec Maya<br><code>yue</code>: Cantonese<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese<br><code>zu</code>: Zulu</p><p><strong>Note</strong>: Use the multilingual method. <code>/</code> to separate, such as <code>en/ja</code>, which indicates English and Japanese.</p>
+	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
+
+	// <p>Custom parameter</p>
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
+
+	// <p>Subtitle processing type:</p><ul><li>0: ASR recognition subtitle</li><li>1: Pure caption translation</li><li>2: OCR recognition subtitle</li></ul><p><strong>Note</strong>: The default type is ASR recognition subtitle if the field is unspecified.</p>
+	ProcessType *uint64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
+}
+
+type MPSSmartErasePrivacyConfig struct {
+	// <p>Privacy protection removal method.</p><p>Enumeration value:</p><ul><li>blur: Blurry</li><li>mosaic: Mosaic</li></ul>
+	PrivacyModel *string `json:"PrivacyModel,omitnil,omitempty" name:"PrivacyModel"`
+
+	// <p>Privacy protection objective (no need to input an array when in use on API Explorer, just add the corresponding item and fill in the value).</p><p>Enumeration value:</p><ul><li>face: human face</li><li>plate: license plate</li></ul>
+	PrivacyTargets []*string `json:"PrivacyTargets,omitnil,omitempty" name:"PrivacyTargets"`
+}
+
+type MPSSmartEraseSubtitleConfig struct {
+	// <p>Subtitle erasure method.<br><strong>Automatic erasing:</strong> Video subtitles are automatically recognized using an AI model and are erased without traces to generate a new video. However, missed or incorrect erasing may occur due to image interference and special subtitle styles. In this case, you can specify the erasing area.<br>When using automatic erasing, if you do not specify AutoAreas, the default region (lower middle part of the frame) will be erased automatically. If AutoAreas is specified, the designated region will be erased instead.<br><strong>Specified area erasure:</strong> If your subtitle position is fixed, it is recommended to directly specify the erasure area to minimize missed erasures.<br>When choosing specified area erasure, please input at least one designated region in CustomAreas.</p><ul><li>auto: Automatic erasing</li><li>custom: Specified area erasure</li></ul>
+	SubtitleEraseMethod *string `json:"SubtitleEraseMethod,omitnil,omitempty" name:"SubtitleEraseMethod"`
+
+	// <p>Subtitle erasure model.<br><strong>Standard version (recommended):</strong> If your subtitles have a standard style, it is usually recommended to select this version for better effectiveness in seamless detail removal.<br><strong>Area edition:</strong> If the subtitles have special styles, such as calligraphy, shadow, or motion effects, you are recommended to select this edition to ensure a larger erasing area. However, the erasing effect in the details is not as good as the standard edition.</p><ul><li>standard Standard model</li><li>area Regional model</li></ul>
+	SubtitleModel *string `json:"SubtitleModel,omitnil,omitempty" name:"SubtitleModel"`
+
+	// <p>Whether OCR subtitle extraction is enabled. The default value is OFF.<br>OCR subtitle extraction is supported if and only if SubtitleEraseMethod is set to auto. When enabled, it identifies the text region that appears most persistently and stably within the automatic erasing area as the subtitle area. The text within the subtitle area is extracted and erased.</p><ul><li>ON Enable</li><li>OFF Disable</li></ul>
+	OcrSwitch *string `json:"OcrSwitch,omitnil,omitempty" name:"OcrSwitch"`
+
+	// <p>Subtitle language, used to guide OCR recognition, default value is zh_en. This parameter is valid only when OcrSwitch is "ON".</p><ul><li>zh_en Chinese and English</li><li>multi Other<br>Other supported recognition languages are as follows:<br>Chinese, English, Japanese, Korean, Spanish, French, German, Portuguese, Vietnamese, Malay, Russian, Italian, Dutch, Swedish, Finnish, Danish, Norwegian, Hungarian, Thai, Hindi, Arabic, India-Bengali, India-Gujarati, India-Kannada, India-Malayalam, India-Tamil, India-Telugu, Slovenian, Polish, Catalonia, Bosnia, Czech, Estonian, Croatian, Punjabi, Marathi, Azerbaijan, Indonesian, Luxembourg, Lithuanian, Latvian, Malta, Slovak, Turkish, Kazakh, Greek, Irish, Belarus, Khmer, Tagalog, Pashto, Persian, Tajikistan</li></ul>
+	SubtitleLang *string `json:"SubtitleLang,omitnil,omitempty" name:"SubtitleLang"`
+
+	// <p>Subtitle file format. Default value is vtt. This parameter is valid only when OcrSwitch takes value "ON".</p><ul><li>srt srt format</li><li>vtt WebVTT format</li><li>When SubtitleEmbedId is filled, empty string can be taken to indicate no output subtitles.</li></ul>
+	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
+
+	// <p>Whether caption translation is enabled or not. The default value is OFF. This parameter is valid only when OcrSwitch is set to "ON".</p><ul><li>ON Enable</li><li>OFF Disable</li></ul>
+	TransSwitch *string `json:"TransSwitch,omitnil,omitempty" name:"TransSwitch"`
+
+	// <p>The target language for subtitles, default value is en; this parameter is valid only when TransSwitch is set to "ON".<br>Currently support the following languages:<br>zh: Simplified Chinese<br>en: English<br>ja: Japanese<br>ko: Korean<br>fr: French<br>es: Spanish<br>it: Italian<br>de: German<br>tr: Turkish<br>ru: Russian<br>pt: Portuguese<br>vi: Vietnamese<br>id: Indonesian<br>ms: Malay<br>th: Thai<br>ar: Arabic<br>hi: Hindi</p>
+	TransDstLang *string `json:"TransDstLang,omitnil,omitempty" name:"TransDstLang"`
+
+	// <p>Automatically erase custom regions.<br>For selected regions, use the AI model to automatically detect and erase existing targets.<br>Note: When the erase method is set to custom, this parameter will not take effect. To modify the template, input [] for region cleanup. If not provided, the template region information remains unchanged.</p>
+	AutoAreas []*MPSEraseArea `json:"AutoAreas,omitnil,omitempty" name:"AutoAreas"`
+
+	// <p>Designate the removal of custom regions.<br>For specified regions, directly perform erasure without detection and recognition within a selected time range.<br>Note: When modifying the template, import [] to clear regions. The template region information remains unchanged if not imported.</p>
+	CustomAreas []*MPSEraseTimeArea `json:"CustomAreas,omitnil,omitempty" name:"CustomAreas"`
+
+	// <p>Suppression configuration, enabled by default, compresses subtitles back to their original position. It can be filled only when OCR translation is turned on. A value of 0 indicates disabled suppression.</p>
+	UseOriginalPos *int64 `json:"UseOriginalPos,omitnil,omitempty" name:"UseOriginalPos"`
+
+	// <p>Suppression configuration, enabled by default. After being turned on, the original subtitle font size is used. It can only be filled when OCR translation is enabled. Setting it to 0 means non-use of the original font size.</p>
+	UseOriginalSize *int64 `json:"UseOriginalSize,omitnil,omitempty" name:"UseOriginalSize"`
+}
+
+type MPSSmartEraseTaskInput struct {
+	// <p>id of the intelligent erasing template.</p>
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Custom parameters for intelligent erasure. Valid when Definition is set to 0. This parameter is used in highly customized scenarios. It is recommended to prioritize using Definition to specify intelligent erasure parameters.</p>
+	RawParameter *MPSRawSmartEraseParameter `json:"RawParameter,omitnil,omitempty" name:"RawParameter"`
+
+	// <p>Custom parameters for smart erasing. When the value of Definition is not 0, this parameter is valid. When certain erasing parameters in this structure are specified, the specified parameters will be used to overwrite those in the smart erasing template. This parameter is used in highly customized scenarios. It is recommended to use only Definition to specify smart erasing parameters.</p>
+	OverrideParameter *MPSOverrideEraseParameter `json:"OverrideParameter,omitnil,omitempty" name:"OverrideParameter"`
+}
+
+type MPSSmartEraseWatermarkConfig struct {
+	// <p>Watermark removal method. <strong>Auto erasure:</strong> Automatically identify watermarks in the video through Model A and generate a new video after removal. Suitable for dynamic watermarks. When using auto erasure, if you do not specify AutoAreas, the system will perform full-screen auto erasure on the video; if AutoAreas are specified, it will change to auto erasure on your designated regions. <strong>Specified area erasure:</strong> For static watermarks with fixed positions, it is recommended to directly specify the removal area. When you choose specified area erasure, import at least one designated region. - auto Auto erasure - custom Specified area erasure</p>
+	WatermarkEraseMethod *string `json:"WatermarkEraseMethod,omitnil,omitempty" name:"WatermarkEraseMethod"`
+
+	// <p>Watermark removal model. basic Edition: provides average effects and high cost performance. It applies to animations or videos with clean backgrounds. advanced Edition: offers better effectiveness and is suitable for mini-dramas or reality-style videos. - basic Edition - advanced Edition</p>
+	WatermarkModel *string `json:"WatermarkModel,omitnil,omitempty" name:"WatermarkModel"`
+
+	// <p>Automatically erase custom regions. For selected regions, use the AI model to automatically detect and erase existing targets. Note: When the erase method is set to custom, this parameter will not take effect. To clear regions, input []. If not provided, the template region information remains unchanged.</p>
+	AutoAreas []*MPSEraseArea `json:"AutoAreas,omitnil,omitempty" name:"AutoAreas"`
+
+	// <p>Specify the removal of custom regions. For specified regions, directly perform erasure without detection and recognition within a selected time range. Note: Import [] to clear regions. The template region information remains unchanged if not imported.</p>
+	CustomAreas []*MPSEraseTimeArea `json:"CustomAreas,omitnil,omitempty" name:"CustomAreas"`
+}
+
+type MPSSmartSubtitlesTaskInput struct {
+	// <p>Smart subtitle template ID.</p>
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Custom smart subtitle parameter. It takes effect when Definition is set to 0. This parameter is used in high customization scenarios. It is recommended that you preferentially use Definition to specify smart subtitle parameters.</p>
+	RawParameter *MPSRawSmartSubtitleParameter `json:"RawParameter,omitnil,omitempty" name:"RawParameter"`
+}
+
 type MPSSubTaskResult struct {
-	// Task type. Specific subtask type in the MPS WorkflowTask structure. Value: <li>AiAnalysis.DeLogo: Intelligent erasure task.</li>
+	// Task type. Specific subtask type in the MPS WorkflowTask structure. Value:
+	// <li>MediaProcess.Transcode: audio and video transcoding task.</li>
+	// <li>AiAnalysis.DeLogo: intelligent erasure task.</li>
+	// <li>AiAnalysis.ClassificationTask: intelligent classification task.</li>
+	// <li>AiAnalysis.CoverTask: intelligent thumbnail generating.</li>
+	// <li>AiAnalysis.TagTask: intelligent tag task.</li>
+	// <li>AiAnalysis.FrameTagTask: intelligent frame-by-frame tagging task.</li>
+	// <li>AiAnalysis.HighlightTask: Intelligent highlight task.</li>
+	// <li>AiAnalysis.SegmentTask: Intelligent video splitting task.</li>
+	// <li>AiAnalysis.HeadTailTask: Intelligent opening and closing credits task.</li>
+	// <li>AiAnalysis.DescriptionTask: Intelligent summary task.</li>
+	// <li>AiAnalysis.HorizontalToVerticalTask: Intelligent Landscape to Portrait Task.</li>
+	// <li>AiAnalysis.DubbingTask: Intelligent dubbing task.</li>
+	// <li>AiAnalysis.VideoRemakeTask: Intelligent deduplication task.</li>
+	// <li>AiAnalysis.VideoComprehensionTask: Video understanding task.</li>
+	// <li>SmartSubtitle.AsrFullTextTask: intelligent speech full-text recognition task.</li>
+	// <li>SmartSubtitle.TransTextTask: Translation result.</li>
+	// <li>SmartSubtitle.PureSubtitleTransTask: Returns the translation result of the pure subtitle file.</li>
+	// <li>SmartSubtitle.OcrFullTextTask: Intelligent text extraction subtitle task.</li>
+	// <li>SmartErase: intelligent erasure task.</li>
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-	// Task status. There are three types: PROCESSING, SUCCESS, and FAIL.
+	// Task status, including PROCESSING, SUCCESS, and FAIL.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. Returns 0 for success, other values for failure.
+	// Error code. 0 indicates success, others indicate failure.
 	ErrCode *string `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// MPS media processing task input. This field corresponds to the Input result in the MPS task response and is returned in JSON format.
+	// MPS video processing task input. This field corresponds to the Input result returned by the MPS task in JSON format.
 	Input *string `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// MPS media processing task output.
+	// MPS video processing task output.
 	Output *MPSTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
 type MPSTaskOutput struct {
-	// The file type in the task's return result. For example, in a smart erase, the erased video file will be stored in the media asset and its FileId will be given in this field. The URL of the subtitle file extracted based on the image will also be given in this field.
+	// File type result in the returned result. For example, in intelligent erasure, the video file after removal will be stored in the media asset and the FileId will be provided in this field. The file Url of the subtitle extracted from video will be provided in this field.
 	OutputFiles []*MPSOutputFile `json:"OutputFiles,omitnil,omitempty" name:"OutputFiles"`
+
+	// Result returned by the task. This field corresponds to the Output result returned by the MPS task in JSON format.
+	// Different MPS task output results have different structures. For specific return content, see the MPS task output struct.
+	// [Intelligent Classification Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskClassificationOutput)
+	// [Intelligent Cover Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskCoverOutput)
+	// [Intelligent tag result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskTagOutput)
+	// [Intelligent frame tagging classification result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskFrameTagOutput)
+	// [Intelligent Highlight Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskHighlightOutput)
+	// [Video Splitting Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskSegmentOutput)
+	// [Intelligent video opening/closing credits result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskHeadTailOutput)
+	// [Intelligent summary result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskDescriptionOutput)
+	// [Horizontal-to-Vertical Video Transformation Result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskHorizontalToVerticalOutput)
+	// [Intelligent dubbing result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskDubbingOutput)
+	// [Intelligent video understanding result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#AiAnalysisTaskVideoComprehensionOutput)
+	// [Smart subtitling full text recognition result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#SmartSubtitleTaskAsrFullTextResultOutput)
+	// [Intelligent caption translation result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#SmartSubtitleTaskTransTextResultOutput)
+	// [Intelligent caption pure subtitle file translation result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#PureSubtitleTransResultOutput)
+	// [Smart subtitling text extraction result](https://www.tencentcloud.com/document/product/862/37615?from_cn_redirect=1#SmartSubtitleTaskTextResultOutput)
+	// 
+	OutputText *string `json:"OutputText,omitnil,omitempty" name:"OutputText"`
+}
+
+type MPSUpdateSmartEraseSubtitleConfig struct {
+	// <p>Subtitle erasure method.<br><strong>Automatic erasing:</strong> Video subtitles are automatically recognized using an AI model and are erased without traces to generate a new video. However, missed or incorrect erasing may occur due to image interference and special subtitle styles. In this case, you can specify the erasing area.<br>When using automatic erasing, if you do not specify AutoAreas, the default region (lower middle part of the frame) will be erased automatically. If AutoAreas is specified, the designated region will be erased instead.<br><strong>Specified area erasure:</strong> If your subtitle position is fixed, it is recommended to directly specify the erasure area to minimize missed erasures.<br>When choosing specified area erasure, please input at least one designated region in CustomAreas.</p><ul><li>auto: Automatic erasing</li><li>custom: Specified area erasure</li></ul>
+	SubtitleEraseMethod *string `json:"SubtitleEraseMethod,omitnil,omitempty" name:"SubtitleEraseMethod"`
+
+	// <p>Subtitle erasure model. <strong>Standard version (recommended):</strong> If your subtitles have a standard style, it is usually recommended to select this version for better effectiveness in seamless detail removal. <strong>Area edition:</strong> If the subtitles have special styles, such as calligraphy, shadow, or motion effects, you are recommended to select this edition to ensure a larger erasing area. However, the erasing effect in the details is not as good as the standard edition. - standard Standard model - area Regional model</p>
+	SubtitleModel *string `json:"SubtitleModel,omitnil,omitempty" name:"SubtitleModel"`
+
+	// <p>Whether OCR subtitle extraction is enabled. The default value is OFF.<br>OCR subtitle extraction is supported if and only if SubtitleEraseMethod is set to auto. When enabled, it identifies the text region that appears most persistently and stably within the automatic erasing area as the subtitle area. The text within the subtitle area is extracted and erased.</p><ul><li>ON Enable</li><li>OFF Disable</li></ul>
+	OcrSwitch *string `json:"OcrSwitch,omitnil,omitempty" name:"OcrSwitch"`
+
+	// <p>Subtitle language, used to guide OCR recognition, default value is zh_en.<br>This parameter is valid only when OcrSwitch is "ON".</p><ul><li>zh_en Chinese and English</li><li>multi Other. Specifically support the following languages: Chinese, English, Japanese, Korean, Spanish, French, German, Portuguese, Vietnamese, Malay, Russian, Italian, Dutch, Swedish, Finnish, Danish, Norwegian, Hungarian, Thai, Hindi, Arabic, India-Bengali, India-Gujarati, India-Kannada, India-Malayalam, India-Tamil, India-Telugu, Slovenian, Polish, Catalonia, Bosnia, Czech, Estonian, Croatian, Punjabi, Marathi, Azerbaijan, Indonesian, Luxembourg, Lithuanian, Latvian, Malta, Slovak, Turkish, Kazakh, Greek, Irish, Belarus, Khmer, Tagalog, Pashto, Persian, Tajikistan</li></ul>
+	SubtitleLang *string `json:"SubtitleLang,omitnil,omitempty" name:"SubtitleLang"`
+
+	// <p>Subtitle file format. Default value: vtt. This parameter is valid only when OcrSwitch is "ON".</p><ul><li>srt srt format</li><li>vtt WebVTT format</li></ul>
+	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
+
+	// <p>Whether to enable subtitle translation. Default value: OFF. This parameter is valid only when OcrSwitch is set to "ON".</p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul>
+	TransSwitch *string `json:"TransSwitch,omitnil,omitempty" name:"TransSwitch"`
+
+	// <p>The target language for subtitle translation defaults to en. This parameter is valid only when TransSwitch is set to "ON". Currently support the following languages:<br>zh: Simplified Chinese<br>en: English<br>ja: Japanese<br>ko: Korean<br>fr: French<br>es: Spanish<br>it: Italian<br>de: German<br>tr: Turkish<br>ru: Russian<br>pt: Portuguese<br>vi: Vietnamese<br>id: Indonesian<br>ms: Malay<br>th: Thai<br>ar: Arabic<br>hi: Hindi</p>
+	TransDstLang *string `json:"TransDstLang,omitnil,omitempty" name:"TransDstLang"`
+
+	// <p>Automatically erase custom regions. For selected regions, use the AI model to automatically detect and erase existing targets.<br>Note: When the erase method is set to custom, this parameter will not take effect. To modify the template, input [] for region cleanup. The template region information remains unchanged if not provided.</p>
+	AutoAreas []*MPSEraseArea `json:"AutoAreas,omitnil,omitempty" name:"AutoAreas"`
+
+	// <p>Specify the removal of custom regions. For specified regions, directly perform erasure without detection and recognition within a selected time range. Note: When modifying the template, import [] to clear regions. The template region information remains unchanged if not imported.</p>
+	CustomAreas []*MPSEraseTimeArea `json:"CustomAreas,omitnil,omitempty" name:"CustomAreas"`
+}
+
+type MPSUpdateSmartEraseWatermarkConfig struct {
+	// <p>Watermark removal method.<br> <strong>Auto removal:</strong> Automatically recognize watermarks in videos through Model A and generate new videos after removal. Suitable for dynamic watermarks. When using auto removal, if you do not specify AutoAreas, it will perform auto removal on the full-screen video; if you specify AutoAreas, it will change to auto removal on your designated regions.<br><strong>Specified area removal:</strong> For static watermarks with fixed positions, it is recommended to directly specify the removal area. When you choose specified area removal, import at least one designated region. - auto Auto removal - custom Specified area removal</p>
+	WatermarkEraseMethod *string `json:"WatermarkEraseMethod,omitnil,omitempty" name:"WatermarkEraseMethod"`
+
+	// <p>Watermark removal model. basic Edition: provides average effects and high cost performance. It applies to animations or videos with clean backgrounds. advanced Edition: offers better effectiveness and is suitable for mini-dramas or reality-style videos.</p><ul><li>basic Edition</li><li>advanced Edition</li></ul>
+	WatermarkModel *string `json:"WatermarkModel,omitnil,omitempty" name:"WatermarkModel"`
+
+	// <p>Automatically erase custom regions. For selected regions, use the AI model to automatically detect and erase existing targets. Note: When the erase method is set to custom, this parameter will not take effect. To clear regions, input []. If not provided, the template region information remains unchanged.</p>
+	AutoAreas []*MPSEraseArea `json:"AutoAreas,omitnil,omitempty" name:"AutoAreas"`
+
+	// <p>Specify the removal of custom regions. For specified regions, directly perform erasure without detection and recognition within a selected time range. Note: Import [] to clear regions. The template region information remains unchanged if not imported.</p>
+	CustomAreas []*MPSEraseTimeArea `json:"CustomAreas,omitnil,omitempty" name:"CustomAreas"`
 }
 
 // Predefined struct for user
@@ -17439,7 +18309,7 @@ type ManageTaskRequestParams struct {
 	// <li>Abort: terminate a task. You can only terminate initiated tasks in `WAITING` status.</li>
 	OperationType *string `json:"OperationType,omitnil,omitempty" name:"OperationType"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -17453,7 +18323,7 @@ type ManageTaskRequest struct {
 	// <li>Abort: terminate a task. You can only terminate initiated tasks in `WAITING` status.</li>
 	OperationType *string `json:"OperationType,omitnil,omitempty" name:"OperationType"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -17554,30 +18424,30 @@ type MediaAiAnalysisFrameTagItem struct {
 }
 
 type MediaAiAnalysisFrameTagSegmentItem struct {
-	// Start time offset of frame-specific tag.
+	// <p>Offset time for frame tagging start.</p><p>Unit: second</p>
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// End time offset of frame-specific tag.
+	// <p>End time offset of frame tagging.</p><p>Unit: seconds</p>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-	// List of tags in time period.
+	// <p>Tag list in the time segment.</p>
 	TagSet []*MediaAiAnalysisFrameTagItem `json:"TagSet,omitnil,omitempty" name:"TagSet"`
 }
 
 type MediaAiAnalysisHighlightItem struct {
-	// Address of an intelligently generated highlight.
+	// <p>Intelligent highlight address.</p>
 	HighlightUrl *string `json:"HighlightUrl,omitnil,omitempty" name:"HighlightUrl"`
 
-	// Address of an intelligently generated highlight cover.
+	// <p>Intelligent highlight cover address.</p>
 	CovImgUrl *string `json:"CovImgUrl,omitnil,omitempty" name:"CovImgUrl"`
 
-	// Confidence of an intelligently generated highlight between 0 and 100.
+	// <p>Reliability of the intelligent highlight collection, with a value range from 0 to 100.</p>
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Duration of an intelligently generated highlight.
+	// <p>Intelligent highlight duration.</p><p>Unit: second</p>
 	Duration *float64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
-	// List of intelligently generated highlight subsegments, which together form a highlight.
+	// <p>Intelligent highlight sub-clip list. The highlight collection is generated by concatenation of these sub-segments.</p>
 	SegmentSet []*HighlightSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 }
 
@@ -17728,14 +18598,14 @@ type MediaBasicInfo struct {
 }
 
 type MediaCastEvent struct {
-	// Media relay ID.
+
 	CastId *string `json:"CastId,omitnil,omitempty" name:"CastId"`
 
-	// Relay status. Valid values:
-	// <li>Working: Running;</li>
-	// <li>Scheduled: To be started after the scheduled time arrives;</li>
-	// <li>Stopped: Relay stopped;</li>
-	// <li>Idle: Idle.</li>
+	// Retweet status. Valid values:
+	// <li>Working: running.</li>
+	// <li>Scheduled: start up after reaching the scheduled time;</li>
+	// <li>Stopped: relay has been stopped;</li>
+	// <li>Idle: idle.</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
@@ -18769,7 +19639,7 @@ type ModifyAIAnalysisTemplateRequestParams struct {
 	// Unique ID of video content analysis template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Video content analysis template name. Length limit: 64 characters.
@@ -18800,7 +19670,7 @@ type ModifyAIAnalysisTemplateRequest struct {
 	// Unique ID of video content analysis template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Video content analysis template name. Length limit: 64 characters.
@@ -18879,7 +19749,7 @@ type ModifyAIRecognitionTemplateRequestParams struct {
 	// Unique ID of video content recognition template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Video content recognition template name. Length limit: 64 characters.
@@ -18925,7 +19795,7 @@ type ModifyAIRecognitionTemplateRequest struct {
 	// Unique ID of video content recognition template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Video content recognition template name. Length limit: 64 characters.
@@ -19024,7 +19894,7 @@ type ModifyAdaptiveDynamicStreamingTemplateRequestParams struct {
 	// Unique ID of adaptive bitrate streaming template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Template name. Length limit: 64 characters.
@@ -19064,7 +19934,7 @@ type ModifyAdaptiveDynamicStreamingTemplateRequest struct {
 	// Unique ID of adaptive bitrate streaming template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Template name. Length limit: 64 characters.
@@ -19152,7 +20022,7 @@ type ModifyAnimatedGraphicsTemplateRequestParams struct {
 	// Unique ID of an animated image generating template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Name of an animated image generating template. Length limit: 64 characters.
@@ -19199,7 +20069,7 @@ type ModifyAnimatedGraphicsTemplateRequest struct {
 	// Unique ID of an animated image generating template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Name of an animated image generating template. Length limit: 64 characters.
@@ -19298,7 +20168,7 @@ type ModifyCDNDomainConfigRequestParams struct {
 	// Domain Config.
 	Config *CDNDomainConfigForUpdate `json:"Config,omitnil,omitempty" name:"Config"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -19311,7 +20181,7 @@ type ModifyCDNDomainConfigRequest struct {
 	// Domain Config.
 	Config *CDNDomainConfigForUpdate `json:"Config,omitnil,omitempty" name:"Config"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -19366,7 +20236,7 @@ type ModifyClassRequestParams struct {
 	// Category name, which can contain 1-64 characters.
 	ClassName *string `json:"ClassName,omitnil,omitempty" name:"ClassName"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -19379,7 +20249,7 @@ type ModifyClassRequest struct {
 	// Category name, which can contain 1-64 characters.
 	ClassName *string `json:"ClassName,omitnil,omitempty" name:"ClassName"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -19431,7 +20301,7 @@ type ModifyContentReviewTemplateRequestParams struct {
 	// Unique ID of an intelligent content recognition template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Name of an intelligent content recognition template. Length limit: 64 characters.
@@ -19472,7 +20342,7 @@ type ModifyContentReviewTemplateRequest struct {
 	// Unique ID of an intelligent content recognition template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Name of an intelligent content recognition template. Length limit: 64 characters.
@@ -19563,7 +20433,7 @@ type ModifyDefaultStorageRegionRequestParams struct {
 	// The default storage region, which must be a region you have storage access to. You can use the `DescribeStorageRegions` API to query such regions.
 	StorageRegion *string `json:"StorageRegion,omitnil,omitempty" name:"StorageRegion"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -19573,7 +20443,7 @@ type ModifyDefaultStorageRegionRequest struct {
 	// The default storage region, which must be a region you have storage access to. You can use the `DescribeStorageRegions` API to query such regions.
 	StorageRegion *string `json:"StorageRegion,omitnil,omitempty" name:"StorageRegion"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -19624,7 +20494,7 @@ type ModifyEnhanceMediaTemplateRequestParams struct {
 	// Enhance Media Template ID.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Audio and video quality rebirth template name, length limit: 64 characters.
@@ -19667,7 +20537,7 @@ type ModifyEnhanceMediaTemplateRequest struct {
 	// Enhance Media Template ID.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Audio and video quality rebirth template name, length limit: 64 characters.
@@ -19855,7 +20725,7 @@ type ModifyHeadTailTemplateRequestParams struct {
 	// HeadTail template ID.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Template name, length limit is 64 characters. Not passing means not modifying.
@@ -19885,7 +20755,7 @@ type ModifyHeadTailTemplateRequest struct {
 	// HeadTail template ID.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Template name, length limit is 64 characters. Not passing means not modifying.
@@ -19961,7 +20831,7 @@ type ModifyImageSpriteTemplateRequestParams struct {
 	// Unique ID of an image sprite generating template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Name of an image sprite generating template. Length limit: 64 characters.
@@ -20017,7 +20887,7 @@ type ModifyImageSpriteTemplateRequest struct {
 	// Unique ID of an image sprite generating template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Name of an image sprite generating template. Length limit: 64 characters.
@@ -20125,7 +20995,7 @@ type ModifyJustInTimeTranscodeTemplateRequestParams struct {
 	// Template name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Video parameter configuration.
@@ -20144,7 +21014,7 @@ type ModifyJustInTimeTranscodeTemplateRequest struct {
 	// Template name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Video parameter configuration.
@@ -20207,7 +21077,7 @@ type ModifyLLMComprehendTemplateRequestParams struct {
 	// <p>Unique identifier of the Large Model Understanding Template</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. For customers who activate on-demand services from December 25, 2023, they must fill this field with the application ID when accessing resources in on-demand applications (whether it's the default application or a newly created application).</b></p>
+	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services from December 25, 2023, they must fill this field with the application ID when accessing resources in on-demand applications (whether it's the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// <p>Large model parsing template name. The length cannot exceed 64 characters.</p>
@@ -20235,7 +21105,7 @@ type ModifyLLMComprehendTemplateRequest struct {
 	// <p>Unique identifier of the Large Model Understanding Template</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. For customers who activate on-demand services from December 25, 2023, they must fill this field with the application ID when accessing resources in on-demand applications (whether it's the default application or a newly created application).</b></p>
+	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services from December 25, 2023, they must fill this field with the application ID when accessing resources in on-demand applications (whether it's the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// <p>Large model parsing template name. The length cannot exceed 64 characters.</p>
@@ -20310,7 +21180,7 @@ type ModifyMediaInfoRequestParams struct {
 	// Unique media file ID.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Media filename, which can contain up to 64 characters.
@@ -20365,7 +21235,7 @@ type ModifyMediaInfoRequest struct {
 	// Unique media file ID.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Media filename, which can contain up to 64 characters.
@@ -20489,7 +21359,7 @@ type ModifyMediaStorageClassRequestParams struct {
 	// <li>DEEP_ARCHIVE</li>
 	StorageClass *string `json:"StorageClass,omitnil,omitempty" name:"StorageClass"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The retrieval mode. When switching files from DEEP ARCHIVE or ARCHIVE to STANDARD, you need to specify the retrieval mode. For details, see [Data retrieval and retrieval mode](https://intl.cloud.tencent.com/document/product/266/43051#data-retrieval-and-retrieval-mode.3Ca-id.3D.22retake.22.3E.3C.2Fa.3E).
@@ -20516,7 +21386,7 @@ type ModifyMediaStorageClassRequest struct {
 	// <li>DEEP_ARCHIVE</li>
 	StorageClass *string `json:"StorageClass,omitnil,omitempty" name:"StorageClass"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The retrieval mode. When switching files from DEEP ARCHIVE or ARCHIVE to STANDARD, you need to specify the retrieval mode. For details, see [Data retrieval and retrieval mode](https://intl.cloud.tencent.com/document/product/266/43051#data-retrieval-and-retrieval-mode.3Ca-id.3D.22retake.22.3E.3C.2Fa.3E).
@@ -20579,7 +21449,7 @@ type ModifyPersonSampleRequestParams struct {
 	// ID of a sample.
 	PersonId *string `json:"PersonId,omitnil,omitempty" name:"PersonId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Name. Length limit: 128 characters.
@@ -20607,7 +21477,7 @@ type ModifyPersonSampleRequest struct {
 	// ID of a sample.
 	PersonId *string `json:"PersonId,omitnil,omitempty" name:"PersonId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Name. Length limit: 128 characters.
@@ -20688,7 +21558,7 @@ type ModifyQualityInspectTemplateRequestParams struct {
 	// Media quality inspection template ID.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Media quality inspection template name.Length limit: 64 characters.
@@ -20737,7 +21607,7 @@ type ModifyQualityInspectTemplateRequest struct {
 	// Media quality inspection template ID.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Media quality inspection template name.Length limit: 64 characters.
@@ -20840,7 +21710,7 @@ type ModifyRebuildMediaTemplateRequestParams struct {
 	// Rebuild Media Template ID.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *string `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Rebuild Media Template Name.
@@ -20881,7 +21751,7 @@ type ModifyRebuildMediaTemplateRequest struct {
 	// Rebuild Media Template ID.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *string `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Rebuild Media Template Name.
@@ -20969,16 +21839,16 @@ func (r *ModifyRebuildMediaTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyReviewTemplateRequestParams struct {
-	// Audit template unique ID.
+
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// Audit template name, length limit: 64 characters.
+
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Audit template description, length limit: 256 characters.
+
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
 	// The violation labels to use. Valid values: <li>`Porn`: Pornographic content</li> <li>`Terror`: Terrorist content</li> <li>`Moan`: Moaning</li>
@@ -20988,16 +21858,13 @@ type ModifyReviewTemplateRequestParams struct {
 type ModifyReviewTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// Audit template unique ID.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// Audit template name, length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Audit template description, length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
 	// The violation labels to use. Valid values: <li>`Porn`: Pornographic content</li> <li>`Terror`: Terrorist content</li> <li>`Moan`: Moaning</li>
@@ -21170,7 +22037,7 @@ type ModifySampleSnapshotTemplateRequestParams struct {
 	// Unique ID of a sampled screencapturing template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Name of a sampled screencapturing template. Length limit: 64 characters.
@@ -21229,7 +22096,7 @@ type ModifySampleSnapshotTemplateRequest struct {
 	// Unique ID of a sampled screencapturing template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Name of a sampled screencapturing template. Length limit: 64 characters.
@@ -21338,7 +22205,7 @@ type ModifySnapshotByTimeOffsetTemplateRequestParams struct {
 	// Unique ID of a specified time point screencapturing template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Name of a time point screencapturing template. Length limit: 64 characters.
@@ -21387,7 +22254,7 @@ type ModifySnapshotByTimeOffsetTemplateRequest struct {
 	// Unique ID of a specified time point screencapturing template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Name of a time point screencapturing template. Length limit: 64 characters.
@@ -21481,7 +22348,7 @@ func (r *ModifySnapshotByTimeOffsetTemplateResponse) FromJsonString(s string) er
 
 // Predefined struct for user
 type ModifySubAppIdInfoRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Subapplication name. Length limit: 40 characters.
@@ -21494,7 +22361,7 @@ type ModifySubAppIdInfoRequestParams struct {
 type ModifySubAppIdInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Subapplication name. Length limit: 40 characters.
@@ -21549,7 +22416,7 @@ func (r *ModifySubAppIdInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifySubAppIdStatusRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Subapplication status. Valid values:
@@ -21563,7 +22430,7 @@ type ModifySubAppIdStatusRequestParams struct {
 type ModifySubAppIdStatusRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Subapplication status. Valid values:
@@ -21768,7 +22635,7 @@ type ModifyTranscodeTemplateRequestParams struct {
 	// Unique ID of transcoding template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The container format. Valid values: `mp4`, `flv`, `hls`, `mp3`, `flac`, `ogg`, `m4a`, `wav` ( `mp3`, `flac`, `ogg`, `m4a`, and `wav` are audio file formats).
@@ -21806,6 +22673,9 @@ type ModifyTranscodeTemplateRequestParams struct {
 	// <li>ts: TS segment</li>
 	// <li>fmp4: fMP4 segment</li>
 	SegmentType *string `json:"SegmentType,omitnil,omitempty" name:"SegmentType"`
+
+
+	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 }
 
 type ModifyTranscodeTemplateRequest struct {
@@ -21814,7 +22684,7 @@ type ModifyTranscodeTemplateRequest struct {
 	// Unique ID of transcoding template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The container format. Valid values: `mp4`, `flv`, `hls`, `mp3`, `flac`, `ogg`, `m4a`, `wav` ( `mp3`, `flac`, `ogg`, `m4a`, and `wav` are audio file formats).
@@ -21852,6 +22722,8 @@ type ModifyTranscodeTemplateRequest struct {
 	// <li>ts: TS segment</li>
 	// <li>fmp4: fMP4 segment</li>
 	SegmentType *string `json:"SegmentType,omitnil,omitempty" name:"SegmentType"`
+
+	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 }
 
 func (r *ModifyTranscodeTemplateRequest) ToJsonString() string {
@@ -21878,6 +22750,7 @@ func (r *ModifyTranscodeTemplateRequest) FromJsonString(s string) error {
 	delete(f, "TEHDConfig")
 	delete(f, "EnhanceConfig")
 	delete(f, "SegmentType")
+	delete(f, "StdExtInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTranscodeTemplateRequest has unknown keys!", "")
 	}
@@ -21922,7 +22795,7 @@ type ModifyVodDomainAccelerateConfigRequestParams struct {
 	// <li>`Disabled`: disable</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -21943,7 +22816,7 @@ type ModifyVodDomainAccelerateConfigRequest struct {
 	// <li>`Disabled`: disable</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -22078,7 +22951,7 @@ type ModifyWatermarkTemplateRequestParams struct {
 	// Unique ID of watermarking template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Watermarking template name. Length limit: 64 characters.
@@ -22120,7 +22993,7 @@ type ModifyWatermarkTemplateRequest struct {
 	// Unique ID of watermarking template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Watermarking template name. Length limit: 64 characters.
@@ -22215,7 +23088,7 @@ type ModifyWordSampleRequestParams struct {
 	// Keyword. Length limit: 128 characters.
 	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// <b>Keyword usage. Valid values:</b>
@@ -22239,7 +23112,7 @@ type ModifyWordSampleRequest struct {
 	// Keyword. Length limit: 128 characters.
 	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// <b>Keyword usage. Valid values:</b>
@@ -22601,13 +23474,13 @@ func (r *ParseStreamingManifestResponse) FromJsonString(s string) error {
 }
 
 type PersistenceCompleteTask struct {
-	// File ID of new media generated by persistence.
+	// Consolidate the generated Media ID.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// The source of persistence.
-	// <li>SimpleHlsClip: from SimpleHlsClip API;</li>
-	// <li>FastEditMedia: from FastEditMedia API;</li>
-	// <li>LiveRealTimeClip: from LiveRealTimeClip API.</li>
+	// The source of clipping solidification has the following three types.
+	// <li>SimpleHlsClip: Comes from simple HLS edit;</li>
+	// <li>FastEditMedia: Comes from quick media editing;</li>
+	// <li>LiveRealTimeClip: comes from live stream clipping.</li>
 	PersistenceSource *string `json:"PersistenceSource,omitnil,omitempty" name:"PersistenceSource"`
 }
 
@@ -23098,6 +23971,8 @@ type ProcedureTemplate struct {
 
 	// Type parameter of AI-based content recognition task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: AiRecognitionTask is deprecated.
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil,omitempty" name:"AiRecognitionTask"`
 
 	// Parameter of a release on WeChat Mini Program task.
@@ -23115,54 +23990,176 @@ type ProcedureTemplate struct {
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
-type ProcessMediaByMPS struct {
-	// The task ID.
+type ProcessImageAsync struct {
+	// Task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Task status, value: <li>PROCESSING: processing;</li><li>FINISH: completed.</li>
+	// Task status. Value: <li>PROCESSING: Processing;</li><li>FINISH: Completed.</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. A non-zero error code is returned when the source is abnormal. If 0 is returned, use the ErrCode of each specific task.
+	// Error code. Returns a non-zero error code for source error. For 0, please use the ErrCode of each specific task.
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-	// Error message. If the source is abnormal, the corresponding exception message is returned. Otherwise, use the message of each specific task.
+	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// MPS media processing tasks.
+	// Task progress, with a value range of [0-100].
+	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// Input information for asynchronous task processing of images.
+	Input *ProcessImageAsyncInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Output information of asynchronous image processing tasks.
+	Output *ProcessImageAsyncOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// Identifier for deduplication. If a request with the same identifier has been sent within the past seven days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// Source context, which is used to pass through the user request information. The callback for task flow status changes will return the value of this field. The maximum length is 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+}
+
+type ProcessImageAsyncInput struct {
+	// FileId for image processing.
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// Image processing parameter.
+	ImageTaskInput *ProcessImageAsyncTaskInput `json:"ImageTaskInput,omitnil,omitempty" name:"ImageTaskInput"`
+
+	// Output media file configuration for image processing tasks.
+	OutputConfig *ProcessImageAsyncOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
+}
+
+type ProcessImageAsyncInputExtendedParameter struct {
+
+	Prompts []*string `json:"Prompts,omitnil,omitempty" name:"Prompts"`
+}
+
+type ProcessImageAsyncOutput struct {
+	// Output file information of asynchronous image processing tasks.
+	FileInfo *ProcessImageAsyncOutputFileInfo `json:"FileInfo,omitnil,omitempty" name:"FileInfo"`
+
+	// Image understanding result.
+	OutputText *string `json:"OutputText,omitnil,omitempty" name:"OutputText"`
+}
+
+type ProcessImageAsyncOutputConfig struct {
+	// Output filename, up to 64 characters. Default filename is specified generation by system.
+	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
+
+	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) API.
+	// <li>Default value: 0, indicating other categories.</li>
+	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
+
+	// Expiry date of the output file. Files will be deleted longer than this time. Default is no expiration. Format according to ISO 8601 standard. For details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+}
+
+type ProcessImageAsyncOutputFileInfo struct {
+	// Output filename, up to 64 characters. Default filename is specified generation by system.
+	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
+
+	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID through the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) API. Valid when StorageMode is Permanent.
+	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
+
+	// Expiry date of the output file. Files will be deleted longer than this time. Default is no expiration. Format according to ISO 8601 standard. For details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// File type, such as mp4, flv.
+	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
+
+	// Media file playback address.
+	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
+
+	// Media file ID. Valid when StorageMode is Permanent.
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// Output video meta information. Valid when StorageMode is Permanent.
+	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
+}
+
+type ProcessImageAsyncTask struct {
+	// Image transcoding output configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EncodeConfig *ImageEncodeConfig `json:"EncodeConfig,omitnil,omitempty" name:"EncodeConfig"`
+
+	// Image enhancement configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnhanceConfig *ImageEnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
+}
+
+type ProcessImageAsyncTaskInput struct {
+	// Image asynchronous processing template ID.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Extended parameters for asynchronous image processing.
+	ExtendedParameter *ProcessImageAsyncInputExtendedParameter `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
+}
+
+type ProcessMediaByMPS struct {
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Task status. Value: <li>PROCESSING: Processing;</li><li>FINISH: Completed.</li>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. Returns a non-zero error code for source error. For 0, please use the ErrCode of each specific task.
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error information. Return the corresponding exception Message in case of source error, otherwise please use each specific task Message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// MPS video processing task.
 	SubTaskSet []*MPSSubTaskResult `json:"SubTaskSet,omitnil,omitempty" name:"SubTaskSet"`
 }
 
 // Predefined struct for user
 type ProcessMediaByMPSRequestParams struct {
-	// Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
+	// <p>Media file ID, the globally unique ID of the file in VOD, is assigned by the VOD backend after successful upload. You can get this field in <a href="/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>.</p>
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID.</b>
+	// <p><b>VOD <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID.</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// This parameter is used for passing through to media processing service (MPS) so that video processing tasks can be triggered from VOD.
-	// For detailed information on video processing parameters, please refer to [MPS Initiate Media Processing](https://www.tencentcloud.com/document/product/1041/33640). 
-	// Instructions: 
-	// 1. Currently, only the AiAnalysisTask parameter in the MPS "ProcessMedia" API needs to be configured. Other parameters are not required. If other parameters are included, the system will automatically ignore them. 
-	// 2. Currently, this is the only method used to initiate Smart Erase tasks. If parameters related to other task types are configured, the system will automatically ignore them.
+	// <p>Optional parameter. This parameter is used for passing through to the media processing service (MPS) to trigger MPS video processing tasks from VOD. For details on different types of video processing parameters, refer to <a href="https://www.tencentcloud.com/document/product/266/131209?from_cn_redirect=1">Using MPS Media AI Capability</a>. You can create custom templates via the <a href="https://www.tencentcloud.com/document/product/266/122580?from_cn_redirect=1">CreateMPSTemplate</a> API.</p>
 	MPSProcessMediaParams *string `json:"MPSProcessMediaParams,omitnil,omitempty" name:"MPSProcessMediaParams"`
+
+	// <p>Parameters for the video content analysis task. Valid when MPSProcessMediaParams is empty.</p>
+	AiAnalysisTask *MPSAiAnalysisTaskInput `json:"AiAnalysisTask,omitnil,omitempty" name:"AiAnalysisTask"`
+
+	// <p>Parameters for the smart subtitle task of type kind. Valid when MPSProcessMediaParams is empty.</p>
+	SmartSubtitlesTask *MPSSmartSubtitlesTaskInput `json:"SmartSubtitlesTask,omitnil,omitempty" name:"SmartSubtitlesTask"`
+
+	// <p>Parameters for the intelligent erasure task of type kind. Valid when MPSProcessMediaParams is empty.</p>
+	SmartEraseTask *MPSSmartEraseTaskInput `json:"SmartEraseTask,omitnil,omitempty" name:"SmartEraseTask"`
+
+	// <p>Reserved field. Used for special purpose.</p>
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
 type ProcessMediaByMPSRequest struct {
 	*tchttp.BaseRequest
 	
-	// Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
+	// <p>Media file ID, the globally unique ID of the file in VOD, is assigned by the VOD backend after successful upload. You can get this field in <a href="/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>.</p>
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID.</b>
+	// <p><b>VOD <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID.</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// This parameter is used for passing through to media processing service (MPS) so that video processing tasks can be triggered from VOD.
-	// For detailed information on video processing parameters, please refer to [MPS Initiate Media Processing](https://www.tencentcloud.com/document/product/1041/33640). 
-	// Instructions: 
-	// 1. Currently, only the AiAnalysisTask parameter in the MPS "ProcessMedia" API needs to be configured. Other parameters are not required. If other parameters are included, the system will automatically ignore them. 
-	// 2. Currently, this is the only method used to initiate Smart Erase tasks. If parameters related to other task types are configured, the system will automatically ignore them.
+	// <p>Optional parameter. This parameter is used for passing through to the media processing service (MPS) to trigger MPS video processing tasks from VOD. For details on different types of video processing parameters, refer to <a href="https://www.tencentcloud.com/document/product/266/131209?from_cn_redirect=1">Using MPS Media AI Capability</a>. You can create custom templates via the <a href="https://www.tencentcloud.com/document/product/266/122580?from_cn_redirect=1">CreateMPSTemplate</a> API.</p>
 	MPSProcessMediaParams *string `json:"MPSProcessMediaParams,omitnil,omitempty" name:"MPSProcessMediaParams"`
+
+	// <p>Parameters for the video content analysis task. Valid when MPSProcessMediaParams is empty.</p>
+	AiAnalysisTask *MPSAiAnalysisTaskInput `json:"AiAnalysisTask,omitnil,omitempty" name:"AiAnalysisTask"`
+
+	// <p>Parameters for the smart subtitle task of type kind. Valid when MPSProcessMediaParams is empty.</p>
+	SmartSubtitlesTask *MPSSmartSubtitlesTaskInput `json:"SmartSubtitlesTask,omitnil,omitempty" name:"SmartSubtitlesTask"`
+
+	// <p>Parameters for the intelligent erasure task of type kind. Valid when MPSProcessMediaParams is empty.</p>
+	SmartEraseTask *MPSSmartEraseTaskInput `json:"SmartEraseTask,omitnil,omitempty" name:"SmartEraseTask"`
+
+	// <p>Reserved field. Used for special purpose.</p>
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
 func (r *ProcessMediaByMPSRequest) ToJsonString() string {
@@ -23180,6 +24177,10 @@ func (r *ProcessMediaByMPSRequest) FromJsonString(s string) error {
 	delete(f, "FileId")
 	delete(f, "SubAppId")
 	delete(f, "MPSProcessMediaParams")
+	delete(f, "AiAnalysisTask")
+	delete(f, "SmartSubtitlesTask")
+	delete(f, "SmartEraseTask")
+	delete(f, "ExtInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessMediaByMPSRequest has unknown keys!", "")
 	}
@@ -23188,7 +24189,7 @@ func (r *ProcessMediaByMPSRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ProcessMediaByMPSResponseParams struct {
-	// Task ID.
+	// <p>Task ID.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -23213,13 +24214,18 @@ func (r *ProcessMediaByMPSResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ProcessMediaByProcedureRequestParams struct {
-	// Media file ID.
-	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
-
 	// [Task flow template](https://intl.cloud.tencent.com/document/product/266/11700?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF) name.
 	ProcedureName *string `json:"ProcedureName,omitnil,omitempty" name:"ProcedureName"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// Media file ID.
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// Storage path of the media.
+	// Only sub-apps in [FileID + Path mode](https://www.tencentcloud.com/document/product/266/126825?from_cn_redirect=1) can initiate tasks through MediaStoragePath.
+	// FileId or MediaStoragePath must be provided.
+	MediaStoragePath *string `json:"MediaStoragePath,omitnil,omitempty" name:"MediaStoragePath"`
+
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
@@ -23241,13 +24247,18 @@ type ProcessMediaByProcedureRequestParams struct {
 type ProcessMediaByProcedureRequest struct {
 	*tchttp.BaseRequest
 	
-	// Media file ID.
-	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
-
 	// [Task flow template](https://intl.cloud.tencent.com/document/product/266/11700?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF) name.
 	ProcedureName *string `json:"ProcedureName,omitnil,omitempty" name:"ProcedureName"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// Media file ID.
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// Storage path of the media.
+	// Only sub-apps in [FileID + Path mode](https://www.tencentcloud.com/document/product/266/126825?from_cn_redirect=1) can initiate tasks through MediaStoragePath.
+	// FileId or MediaStoragePath must be provided.
+	MediaStoragePath *string `json:"MediaStoragePath,omitnil,omitempty" name:"MediaStoragePath"`
+
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
@@ -23278,8 +24289,9 @@ func (r *ProcessMediaByProcedureRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "FileId")
 	delete(f, "ProcedureName")
+	delete(f, "FileId")
+	delete(f, "MediaStoragePath")
 	delete(f, "SubAppId")
 	delete(f, "TasksPriority")
 	delete(f, "TasksNotifyMode")
@@ -23322,6 +24334,9 @@ func (r *ProcessMediaByProcedureResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ProcessMediaByUrlRequestParams struct {
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
 	// This API is<font color='red'>disused</font>. You are advised to use an alternative API. For more information, see API overview.
 	InputInfo *MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
 
@@ -23348,14 +24363,14 @@ type ProcessMediaByUrlRequestParams struct {
 
 	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
-
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
-	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
 type ProcessMediaByUrlRequest struct {
 	*tchttp.BaseRequest
 	
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
 	// This API is<font color='red'>disused</font>. You are advised to use an alternative API. For more information, see API overview.
 	InputInfo *MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
 
@@ -23382,9 +24397,6 @@ type ProcessMediaByUrlRequest struct {
 
 	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
-
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
-	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
 func (r *ProcessMediaByUrlRequest) ToJsonString() string {
@@ -23399,6 +24411,7 @@ func (r *ProcessMediaByUrlRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "InputInfo")
 	delete(f, "OutputInfo")
 	delete(f, "AiContentReviewTask")
@@ -23408,7 +24421,6 @@ func (r *ProcessMediaByUrlRequest) FromJsonString(s string) error {
 	delete(f, "TasksNotifyMode")
 	delete(f, "SessionContext")
 	delete(f, "SessionId")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessMediaByUrlRequest has unknown keys!", "")
 	}
@@ -23445,7 +24457,12 @@ type ProcessMediaRequestParams struct {
 	// Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// Storage path of the media.
+	// Only sub-apps in [FileID + Path mode](https://www.tencentcloud.com/document/product/266/126825?from_cn_redirect=1) can initiate tasks through MediaStoragePath.
+	// FileId or MediaStoragePath must be provided.
+	MediaStoragePath *string `json:"MediaStoragePath,omitnil,omitempty" name:"MediaStoragePath"`
+
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Parameter of video processing task.
@@ -23475,6 +24492,9 @@ type ProcessMediaRequestParams struct {
 
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
+
+
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
 type ProcessMediaRequest struct {
@@ -23483,7 +24503,12 @@ type ProcessMediaRequest struct {
 	// Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// Storage path of the media.
+	// Only sub-apps in [FileID + Path mode](https://www.tencentcloud.com/document/product/266/126825?from_cn_redirect=1) can initiate tasks through MediaStoragePath.
+	// FileId or MediaStoragePath must be provided.
+	MediaStoragePath *string `json:"MediaStoragePath,omitnil,omitempty" name:"MediaStoragePath"`
+
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Parameter of video processing task.
@@ -23513,6 +24538,8 @@ type ProcessMediaRequest struct {
 
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
+
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
 func (r *ProcessMediaRequest) ToJsonString() string {
@@ -23528,6 +24555,7 @@ func (r *ProcessMediaRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "FileId")
+	delete(f, "MediaStoragePath")
 	delete(f, "SubAppId")
 	delete(f, "MediaProcessTask")
 	delete(f, "AiContentReviewTask")
@@ -23538,6 +24566,7 @@ func (r *ProcessMediaRequest) FromJsonString(s string) error {
 	delete(f, "SessionContext")
 	delete(f, "SessionId")
 	delete(f, "ExtInfo")
+	delete(f, "Url")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessMediaRequest has unknown keys!", "")
 	}
@@ -23584,6 +24613,11 @@ type ProductImageConfig struct {
 
 	// Specifies the number of images to generate. defaults to 1 if left empty. valid value: 10.
 	OutputImageCount *uint64 `json:"OutputImageCount,omitnil,omitempty" name:"OutputImageCount"`
+}
+
+type ProductShowcaseConfig struct {
+
+	CameraMovement *string `json:"CameraMovement,omitnil,omitempty" name:"CameraMovement"`
 }
 
 type ProhibitedAsrReviewTemplateInfo struct {
@@ -23658,20 +24692,20 @@ type ProhibitedOcrReviewTemplateInfoForUpdate struct {
 
 // Predefined struct for user
 type PullEventsRequestParams struct {
-	// Reserved field for special purposes.
+	// Reserved field, used for special purpose.
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>VOD [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. Customers who activate VOD services after December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created applications).</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
 type PullEventsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Reserved field for special purposes.
+	// Reserved field, used for special purpose.
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>VOD [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. Customers who activate VOD services after December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created applications).</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -23697,8 +24731,8 @@ func (r *PullEventsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type PullEventsResponseParams struct {
-	// List of events.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// event list
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	EventSet []*EventContent `json:"EventSet,omitnil,omitempty" name:"EventSet"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -23731,7 +24765,7 @@ type PullUploadRequestParams struct {
 	// If you do not specify this parameter or pass in an empty string, the file obtained will have the same extension as `MediaUrl`.
 	MediaType *string `json:"MediaType,omitnil,omitempty" name:"MediaType"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Media name.
@@ -23754,6 +24788,9 @@ type PullUploadRequestParams struct {
 	// Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
+	// The priority of the task. The higher the value, the higher the priority. The value range is-10 to 10, and it means 0 if not filled.
+	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
+
 	// The source context which is used to pass through the user request information. After `Procedure` is specified, the task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
@@ -23765,6 +24802,11 @@ type PullUploadRequestParams struct {
 
 	// Source context, which is used to pass through the user request information. The [upload callback](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) API will return the value of this field. It can contain up to 250 characters.
 	SourceContext *string `json:"SourceContext,omitnil,omitempty" name:"SourceContext"`
+
+	// Storage path of the media.
+	// Only sub-apps in [FileID + Path mode](https://www.tencentcloud.com/document/product/266/126825?from_cn_redirect=1) can initiate tasks through MediaStoragePath.
+	// FileId or MediaStoragePath must be provided.
+	MediaStoragePath *string `json:"MediaStoragePath,omitnil,omitempty" name:"MediaStoragePath"`
 }
 
 type PullUploadRequest struct {
@@ -23778,7 +24820,7 @@ type PullUploadRequest struct {
 	// If you do not specify this parameter or pass in an empty string, the file obtained will have the same extension as `MediaUrl`.
 	MediaType *string `json:"MediaType,omitnil,omitempty" name:"MediaType"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Media name.
@@ -23801,6 +24843,9 @@ type PullUploadRequest struct {
 	// Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
+	// The priority of the task. The higher the value, the higher the priority. The value range is-10 to 10, and it means 0 if not filled.
+	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
+
 	// The source context which is used to pass through the user request information. After `Procedure` is specified, the task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
@@ -23812,6 +24857,11 @@ type PullUploadRequest struct {
 
 	// Source context, which is used to pass through the user request information. The [upload callback](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) API will return the value of this field. It can contain up to 250 characters.
 	SourceContext *string `json:"SourceContext,omitnil,omitempty" name:"SourceContext"`
+
+	// Storage path of the media.
+	// Only sub-apps in [FileID + Path mode](https://www.tencentcloud.com/document/product/266/126825?from_cn_redirect=1) can initiate tasks through MediaStoragePath.
+	// FileId or MediaStoragePath must be provided.
+	MediaStoragePath *string `json:"MediaStoragePath,omitnil,omitempty" name:"MediaStoragePath"`
 }
 
 func (r *PullUploadRequest) ToJsonString() string {
@@ -23835,10 +24885,12 @@ func (r *PullUploadRequest) FromJsonString(s string) error {
 	delete(f, "ExpireTime")
 	delete(f, "StorageRegion")
 	delete(f, "ClassId")
+	delete(f, "TasksPriority")
 	delete(f, "SessionContext")
 	delete(f, "SessionId")
 	delete(f, "ExtInfo")
 	delete(f, "SourceContext")
+	delete(f, "MediaStoragePath")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PullUploadRequest has unknown keys!", "")
 	}
@@ -23922,7 +24974,7 @@ type PushUrlCacheRequestParams struct {
 	// List of prefetched URLs. Up to 20 ones can be specified at a time.
 	Urls []*string `json:"Urls,omitnil,omitempty" name:"Urls"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -23932,7 +24984,7 @@ type PushUrlCacheRequest struct {
 	// List of prefetched URLs. Up to 20 ones can be specified at a time.
 	Urls []*string `json:"Urls,omitnil,omitempty" name:"Urls"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -24016,16 +25068,13 @@ type QualityEnhanceTask struct {
 	// Media quality enhance task progress, value range [0-100].
 	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
-	// Input for media quality enhance task.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Input of the audio and video quality regeneration task.
 	Input *QualityEnhanceTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output of the media quality enhance task.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Output of the audio and video quality regeneration task.
 	Output *QualityEnhanceTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// Media quality enhance outputs meta-information of the video.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Metadata of the output video after audio and video quality revival.
 	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
 
 	// Identification code used for deduplication. If there is a request for the same identification code within seven days, this request will return an error. The maximum length is 50 characters, without or with an empty string to indicate no deduplication.
@@ -24085,59 +25134,90 @@ type QualityEvaluationConfigureInfoForUpdate struct {
 }
 
 type QualityInspectItem struct {
-	// Abnormal segment start offset time, unit: seconds.
+	// Offset time of abnormal segment start, in seconds.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// Abnormal segment termination's offset time, unit: seconds.
+	// End time offset of an abnormal fragment, in seconds.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-	// Detect abnormality in the area coordinates. The array contains 4 elements [x1, y1, x2, y2], which indicate the horizontal and vertical coordinates of the upper left and lower right points of the area in sequence. <font color=red>Pay attention to:</font> The value of this field is valid only when Type is one of the following: <li>BlackWhiteEdge: black and white edge;</li> <li>Mosaic: mosaic;</li> <li>QRCode: QR code;</li> <li>AppletCode: Mini Program code;</li> <li>BarCode: bar code.</li>
+	// Detected abnormal area coordinates. The array contains 4 elements [x1,y1,x2,y2], sequentially representing the horizontal and vertical coordinates of the top-left corner and bottom-right point.
+	// <font color=red>Note:</font> This field is valid only when the Type value is one of the following:
+	// <li>BlackWhiteEdge: black and white edges.</li>
+	// <li>Mosaic: mosaic.</li>
+	// <li>QRCode: QR code.</li>
+	// <li>AppletCode: mini program code.</li>
+	// <li>BarCode: barcode.</li>
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitnil,omitempty" name:"AreaCoordSet"`
 
-	// Confidence threshold, range: [0, 100]. <font color=red>Pay attention to:</font> This field is valid only when Type has one of the following values: <li>Mosaic: Mosaic;</li> <li>QRCode: QR code;</li> <li>AppletCode: Mini Program code;</li> <li>BarCode: Bar code.</li>
+	// Confidence degree, value ranges from 0 to 100.
+	// <font color=red>Note:</font> This field is valid only when the Type value is one of the following:
+	// <li>Mosaic: mosaic.</li>
+	// <li>QRCode: QR code.</li>
+	// <li>AppletCode: mini program code.</li>
+	// <li>BarCode: barcode.</li>
 	Confidence *uint64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 }
 
 type QualityInspectResultItem struct {
-	// Abnormal type, range: <li>Jitter: Jitter;</li> <li>Blur: Blur;</li> <li>LowLighting: Low lighting;</li> <li>HighLighting: Overexposure;</li> <li>CrashScreen: Crash screen;</li> <li>BlackWhiteEdge: Black and white edges;</li> <li>SolidColorScreen: Solid color screen;</li> <li>Noise: Noise;</li> <li>Mosaic: Mosaic;</li> <li>QRCode: QR code;</li> <li>AppletCode: Applet code;</li> <li>BarCode: Bar code;</li> <li>LowVoice: Low voice;</li> <li>HighVoice: High voice;</li> <li>NoVoice: mutes;</li> <li>LowEvaluation: No reference scoring below the threshold.</li>
+	// Exception type. Valid values:
+	// <li>Jitter: jitter.</li>
+	// <li>Blur: blurry;</li>
+	// <li>LowLighting: low light;</li>
+	// <li>HighLighting: overexposure.</li>
+	// <li>CrashScreen: screen glitch;</li>
+	// <li>BlackWhiteEdge: black and white edges.</li>
+	// <li>SolidColorScreen: solid color screen.</li>
+	// <li>Noise: noise.</li>
+	// <li>Mosaic: mosaic.</li>
+	// <li>QRCode: QR code.</li>
+	// <li>AppletCode: mini program code.</li>
+	// <li>BarCode: barcode;</li>
+	// <li>LowVoice: bass;</li>
+	// <li>HighVoice: high voice;</li>
+	// <li>NoVoice: mute;</li>
+	// <li>LowEvaluation: no-reference scoring below threshold.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Abnormal segment List. <font color=red>Pay attention to:</font> This list will only show the first 100 elements at most. If you wish to get the complete result, please get it from the file corresponding to SegmentSetFileUrl.
+	// Abnormal fragment list.
+	// <font color=red>Note:</font> The list only displays the first 100 elements. To obtain the complete result, refer to the corresponding file in SegmentSetFileUrl.
 	SegmentSet []*QualityInspectItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 
-	// Abnormal segment List file URL. The file content is JSON, and the data structure is consistent with the SegmentSet Field. (The file will not be permanently stored, and will be deleted after reaching the SegmentSetFileUrlExpireTime Time point).
+	// URL of Abnormal Fragment List File. The content of the file is JSON, consistent with the fields of SegmentSet. (The file will not be retained permanently and will be deleted when reaching SegmentSetFileUrlExpireTime.)
 	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitnil,omitempty" name:"SegmentSetFileUrl"`
 
-	// Abnormal segment List file URL expiration time, using [ISO date supported](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
+	// Expiration time of the Segment List File URL for anomalies, in [ISO date format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitnil,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type QualityInspectTask struct {
-	// Media quality inspection task ID.
+	// Task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Task status, value: <li>PROCESSING: processing;</li> <li>FINISH: Completed.</li>
+	// Task status. Valid values:
+	// <li>PROCESSING: Processing;</li>
+	// <li>FINISH: completed</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates success, other values indicate failure. Please refer to the [Video Processing Error Code](https://www.tencentcloud.com/document/product/266/39145) list for values.
+	// Error code. An empty string indicates success, and additional values indicate failure. For values, see the video processing error code list (https://www.tencentcloud.com/document/product/266/50368?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
-	// Error information.
+	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Media quality inspection input metadata of audio and video.
+	// Metadata of audio and video for quality inspection input.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
 
-	// Media quality inspection task input.
+	// Audio and video quality inspection task input.
 	Input *QualityInspectTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Media quality inspection task generates.
+	// Audio and video quality inspection task output.
 	Output *QualityInspectTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// Used for deduplication, if there has been a request with the same recognition code within seven days, this request will return an error. Maximum length of 50 characters, without or with an empty string indicates no deduplication.
+	// Identifier for deduplication. If a request with the same identifier has been sent within the past seven days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// Source context, used for transparent transmission of user request information. Upon completion of media quality inspection, the callback will return the value of this field, with a maximum length of 1000 characters.
+	// Source context. This is used to pass through user request information. The audio and video quality detection completion callback returns the value of this field. The maximum length is 1000 characters.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 }
 
@@ -24145,21 +25225,25 @@ type QualityInspectTaskInput struct {
 	// Media file ID.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// Media quality inspect template ID.
+	// Audio and video quality inspection template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 }
 
 type QualityInspectTaskOutput struct {
-	// Whether the media files have no audio track, range: <li>0: No, that is, there is an audio track;</li> <li>1: Yes, that is, there is no audio track.</li>
+	// Whether there is no audio track in the media file. Value ranges from...to...
+	// <li>0: No, have audio tracks;</li>
+	// <li>1: Yes, no audio track.</li>
 	NoAudio *int64 `json:"NoAudio,omitnil,omitempty" name:"NoAudio"`
 
-	// Whether the media files have no video track, range: <li>0: No, that is, there is a video track;</li> <li>1: Yes, that is, there is no video track.</li>
+	// Whether there is no video track in the media file. Value ranges from...to...
+	// <li>0: No, meaning there is a video track;</li>
+	// <li>1: Yes, no video track.</li>
 	NoVideo *int64 `json:"NoVideo,omitnil,omitempty" name:"NoVideo"`
 
-	// Quality score, value range: [0, 100].
+	// Video picture quality score, value ranges from 0 to 100.
 	QualityEvaluationScore *uint64 `json:"QualityEvaluationScore,omitnil,omitempty" name:"QualityEvaluationScore"`
 
-	// Abnormal items list detected of media quality inspection task
+	// List of abnormalities detected in audio and video quality.
 	QualityInspectResultSet []*QualityInspectResultItem `json:"QualityInspectResultSet,omitnil,omitempty" name:"QualityInspectResultSet"`
 }
 
@@ -24235,7 +25319,7 @@ type RebuildMediaByTemplateRequestParams struct {
 	// Rebuild Media Template ID.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *string `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The start offset (seconds). If you do not specify this, the segment will start from the beginning of the video.
@@ -24269,7 +25353,7 @@ type RebuildMediaByTemplateRequest struct {
 	// Rebuild Media Template ID.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *string `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The start offset (seconds). If you do not specify this, the segment will start from the beginning of the video.
@@ -24364,7 +25448,7 @@ type RebuildMediaRequestParams struct {
 	// The file ID.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The start offset (seconds). If you do not specify this, the segment will start from the beginning of the video.
@@ -24431,7 +25515,7 @@ type RebuildMediaRequest struct {
 	// The file ID.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The start offset (seconds). If you do not specify this, the segment will start from the beginning of the video.
@@ -24710,16 +25794,13 @@ type RebuildMediaTask struct {
 	// The task progress. Value range: 0-100.
 	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
-	// The input parameters of the audio/video remastering task.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Input of the audio and video quality regeneration task.
 	Input *RebuildMediaTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// The output parameters of the audio/video remastering task.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Output of the audio and video quality regeneration task.
 	Output *RebuildMediaTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// The metadata of the output file.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Metadata of the output video after audio and video quality revival.
 	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
 
 	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
@@ -24739,7 +25820,7 @@ type RebuildMediaTaskInput struct {
 	// The end offset (seconds). If you do not specify this, the segment will end at the end of the video.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-	// The ID of the remaster template.
+	// Audio and video quality rebirth template number.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// The video quality remastering parameters.
@@ -24925,12 +26006,10 @@ type ReduceMediaBitrateMediaProcessTaskResult struct {
 	// <li>AdaptiveDynamicStreaming</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// The result of a transcoding task. This parameter is valid if `Type` is `Transcode`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Query result of video transcoding task in bitrate reduction, valid when task type is Transcode.
 	TranscodeTask *ReduceMediaBitrateTranscodeResult `json:"TranscodeTask,omitnil,omitempty" name:"TranscodeTask"`
 
-	// The result of an adaptive bitrate task. This parameter is valid if `Type` is `AdaptiveDynamicStreaming`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Query result of the video to adaptive streaming task in bitrate reduction tasks. Valid when the task type is AdaptiveDynamicStreaming.
 	AdaptiveDynamicStreamingTask *ReduceMediaBitrateAdaptiveDynamicStreamingResult `json:"AdaptiveDynamicStreamingTask,omitnil,omitempty" name:"AdaptiveDynamicStreamingTask"`
 }
 
@@ -24952,8 +26031,7 @@ type ReduceMediaBitrateTask struct {
 	// The address of the media file.
 	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
 
-	// The metadata of the source video.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Metadata of the original video.
 	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
 
 	// The execution status and result of the bitrate reduction task.
@@ -24987,8 +26065,7 @@ type ReduceMediaBitrateTranscodeResult struct {
 	// The input of a transcoding task.
 	Input *TranscodeTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// The output of a transcoding task.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Transcoding task output.
 	Output *MediaTranscodeItem `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The transcoding progress. Value range: 0-100.
@@ -25053,7 +26130,7 @@ type RefreshUrlCacheRequestParams struct {
 	// The URLs to purge. You can specify up to 20 URLs per request.
 	Urls []*string `json:"Urls,omitnil,omitempty" name:"Urls"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -25063,7 +26140,7 @@ type RefreshUrlCacheRequest struct {
 	// The URLs to purge. You can specify up to 20 URLs per request.
 	Urls []*string `json:"Urls,omitnil,omitempty" name:"Urls"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -25136,7 +26213,7 @@ type RemoveWatermarkRequestParams struct {
 	// The ID of the media file.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
@@ -25149,6 +26226,8 @@ type RemoveWatermarkRequestParams struct {
 	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
 
 	// This parameter is invalid now.
+	//
+	// Deprecated: TasksNotifyMode is deprecated.
 	TasksNotifyMode *string `json:"TasksNotifyMode,omitnil,omitempty" name:"TasksNotifyMode"`
 }
 
@@ -25158,7 +26237,7 @@ type RemoveWatermarkRequest struct {
 	// The ID of the media file.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
@@ -25244,8 +26323,7 @@ type RemoveWatermarkTask struct {
 	// The error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// The input of a watermark removal task.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Input of the intelligent watermark removal task.
 	Input *RemoveWaterMarkTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
 	// The output of a watermark removal task.
@@ -25286,7 +26364,7 @@ type ResetProcedureTemplateRequestParams struct {
 	// Task flow name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Template description. Length limit: 256 characters.
@@ -25302,7 +26380,12 @@ type ResetProcedureTemplateRequestParams struct {
 	// Parameter of AI-based content analysis task.
 	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil,omitempty" name:"AiAnalysisTask"`
 
+
+	AiRecognitionTaskSet []*AiRecognitionTaskInput `json:"AiRecognitionTaskSet,omitnil,omitempty" name:"AiRecognitionTaskSet"`
+
 	// Type parameter of AI-based content recognition task.
+	//
+	// Deprecated: AiRecognitionTask is deprecated.
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil,omitempty" name:"AiRecognitionTask"`
 
 	// The information of the moderation task.
@@ -25315,7 +26398,7 @@ type ResetProcedureTemplateRequest struct {
 	// Task flow name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Template description. Length limit: 256 characters.
@@ -25330,6 +26413,8 @@ type ResetProcedureTemplateRequest struct {
 
 	// Parameter of AI-based content analysis task.
 	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil,omitempty" name:"AiAnalysisTask"`
+
+	AiRecognitionTaskSet []*AiRecognitionTaskInput `json:"AiRecognitionTaskSet,omitnil,omitempty" name:"AiRecognitionTaskSet"`
 
 	// Type parameter of AI-based content recognition task.
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil,omitempty" name:"AiRecognitionTask"`
@@ -25356,6 +26441,7 @@ func (r *ResetProcedureTemplateRequest) FromJsonString(s string) error {
 	delete(f, "MediaProcessTask")
 	delete(f, "AiContentReviewTask")
 	delete(f, "AiAnalysisTask")
+	delete(f, "AiRecognitionTaskSet")
 	delete(f, "AiRecognitionTask")
 	delete(f, "ReviewAudioVideoTask")
 	if len(f) > 0 {
@@ -25418,7 +26504,7 @@ type RestoreMediaRequestParams struct {
 	// The accessible duration of the unfrozen temporary media files must be greater than 0, and the unit is "days".
 	RestoreDay *uint64 `json:"RestoreDay,omitnil,omitempty" name:"RestoreDay"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The retrieval mode. If the current storage class is ARCHIVE, the valid values for this parameter are as follows:
@@ -25440,7 +26526,7 @@ type RestoreMediaRequest struct {
 	// The accessible duration of the unfrozen temporary media files must be greater than 0, and the unit is "days".
 	RestoreDay *uint64 `json:"RestoreDay,omitnil,omitempty" name:"RestoreDay"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The retrieval mode. If the current storage class is ARCHIVE, the valid values for this parameter are as follows:
@@ -25532,28 +26618,33 @@ type ReviewAudioVideoRequestParams struct {
 	// The media file ID, which is assigned after upload and uniquely identifies a file in VOD. You can view the ID of a file in the [NewFileUpload](https://www.tencentcloud.com/document/product/266/33950) callback or in the [VOD console](https://console.tencentcloud.com/vod/media).
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// Storage path of the media.
+	// Only sub-apps in [FileID + Path mode](https://www.tencentcloud.com/document/product/266/126825?from_cn_redirect=1) can initiate tasks through MediaStoragePath.
+	// FileId or MediaStoragePath must be provided.
+	MediaStoragePath *string `json:"MediaStoragePath,omitnil,omitempty" name:"MediaStoragePath"`
+
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// The type of moderated content. Valid values:
-	// <li>`Media`: The original audio/video.</li>
-	// <li>`Cover`: Thumbnails.</li>
-	// If this parameter is not specified or an empty array is passed in, `Media` will be used.
+	// Content to review. Optional values:
+	// <li>Media: Original audio/video;</li>
+	// <li>Cover: cover.</li>
+	// When left empty or filled with an empty array, it defaults to review Media.
 	ReviewContents []*string `json:"ReviewContents,omitnil,omitempty" name:"ReviewContents"`
 
 	// The moderation template ID. Valid values: <li>10 (default): The preset template, whose violation labels are `Porn` and `Terror`.</li>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// The priority of a task flow. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
+	// Priority of the task flow. The higher the value, the higher the priority. The value range is from -10 to 10. If left blank, the default value is 0.
 	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
 
-	// The source context, which is used to pass through user request information. The `ReviewAudioVideoComplete` callback will return the value of this parameter. It can contain up to 1,000 characters.
+	// Source context, used for passing through user request information. The audio/video moderation completed callback will return the value of this field, up to 1000 characters.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// The session ID, which is used to identify duplicate requests. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+	// An identifier for deduplication. If there has been a request with the same identifier within the past 3 days, an error will be returned for the current request. The maximum length is 50 characters. Leaving it blank or using an empty string indicates no deduplication.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// A reserved parameter.
+	// Reserved field, used when special purpose.
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
@@ -25563,28 +26654,33 @@ type ReviewAudioVideoRequest struct {
 	// The media file ID, which is assigned after upload and uniquely identifies a file in VOD. You can view the ID of a file in the [NewFileUpload](https://www.tencentcloud.com/document/product/266/33950) callback or in the [VOD console](https://console.tencentcloud.com/vod/media).
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// Storage path of the media.
+	// Only sub-apps in [FileID + Path mode](https://www.tencentcloud.com/document/product/266/126825?from_cn_redirect=1) can initiate tasks through MediaStoragePath.
+	// FileId or MediaStoragePath must be provided.
+	MediaStoragePath *string `json:"MediaStoragePath,omitnil,omitempty" name:"MediaStoragePath"`
+
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// The type of moderated content. Valid values:
-	// <li>`Media`: The original audio/video.</li>
-	// <li>`Cover`: Thumbnails.</li>
-	// If this parameter is not specified or an empty array is passed in, `Media` will be used.
+	// Content to review. Optional values:
+	// <li>Media: Original audio/video;</li>
+	// <li>Cover: cover.</li>
+	// When left empty or filled with an empty array, it defaults to review Media.
 	ReviewContents []*string `json:"ReviewContents,omitnil,omitempty" name:"ReviewContents"`
 
 	// The moderation template ID. Valid values: <li>10 (default): The preset template, whose violation labels are `Porn` and `Terror`.</li>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// The priority of a task flow. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
+	// Priority of the task flow. The higher the value, the higher the priority. The value range is from -10 to 10. If left blank, the default value is 0.
 	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
 
-	// The source context, which is used to pass through user request information. The `ReviewAudioVideoComplete` callback will return the value of this parameter. It can contain up to 1,000 characters.
+	// Source context, used for passing through user request information. The audio/video moderation completed callback will return the value of this field, up to 1000 characters.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// The session ID, which is used to identify duplicate requests. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+	// An identifier for deduplication. If there has been a request with the same identifier within the past 3 days, an error will be returned for the current request. The maximum length is 50 characters. Leaving it blank or using an empty string indicates no deduplication.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// A reserved parameter.
+	// Reserved field, used when special purpose.
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
@@ -25601,6 +26697,7 @@ func (r *ReviewAudioVideoRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "FileId")
+	delete(f, "MediaStoragePath")
 	delete(f, "SubAppId")
 	delete(f, "ReviewContents")
 	delete(f, "Definition")
@@ -25616,7 +26713,7 @@ func (r *ReviewAudioVideoRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ReviewAudioVideoResponseParams struct {
-	// The task ID.
+	// Task ID
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -25715,12 +26812,10 @@ type ReviewAudioVideoTask struct {
 	// The error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// The input of a moderation task.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Audio/video moderation task input.
 	Input *ReviewAudioVideoTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// The output of a moderation task.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Audio/video moderation task output.
 	Output *ReviewAudioVideoTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
@@ -25779,26 +26874,31 @@ type ReviewAudioVideoTaskOutput struct {
 
 // Predefined struct for user
 type ReviewImageRequestParams struct {
-	// The unique ID of the media file. For this API to work, the file must be an image.
-	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
-
 	// The image moderation template ID. Valid values: <li>10: The preset template, whose violation labels are `Porn` and `Terror`.</li>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// The unique ID of the media file. For this API to work, the file must be an image.
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+
+	MediaStoragePath *string `json:"MediaStoragePath,omitnil,omitempty" name:"MediaStoragePath"`
+
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
 type ReviewImageRequest struct {
 	*tchttp.BaseRequest
 	
-	// The unique ID of the media file. For this API to work, the file must be an image.
-	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
-
 	// The image moderation template ID. Valid values: <li>10: The preset template, whose violation labels are `Porn` and `Terror`.</li>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// The unique ID of the media file. For this API to work, the file must be an image.
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	MediaStoragePath *string `json:"MediaStoragePath,omitnil,omitempty" name:"MediaStoragePath"`
+
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -25814,8 +26914,9 @@ func (r *ReviewImageRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "FileId")
 	delete(f, "Definition")
+	delete(f, "FileId")
+	delete(f, "MediaStoragePath")
 	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReviewImageRequest has unknown keys!", "")
@@ -25826,6 +26927,8 @@ func (r *ReviewImageRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ReviewImageResponseParams struct {
 	// The image moderation result. <font color=red>Note: This parameter is no longer used. Please use `MediaReviewResult` instead.</font>
+	//
+	// Deprecated: ReviewResultSet is deprecated.
 	ReviewResultSet []*ContentReviewResult `json:"ReviewResultSet,omitnil,omitempty" name:"ReviewResultSet"`
 
 	// The image moderation result.
@@ -25853,28 +26956,28 @@ func (r *ReviewImageResponse) FromJsonString(s string) error {
 }
 
 type ReviewImageResult struct {
-	// The suggestion. Valid values:
-	// <li>pass</li>
-	// <li>review</li>
-	// <li>block</li>
+	// Image review result suggestion. Value ranges from...to...
+	// <li>pass: it is recommended to pass;</li>
+	// <li>review: suggest re-examination;</li>
+	// <li>block: Suggest banning.</li>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
 	// The most likely label for the suspicious content. This parameter is valid if `Suggestion` is `review` or `block`. Valid values: <li>`Porn`</li> <li>`Terror`</li>
 	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
 
-	// The most likely type of the suspicious content. This parameter is valid only if `Suggestion` is `review` or `block`.
-	// <li>`Image` (people or icons in images)</li>
-	// <li>`OCR` (text in images)</li>
+	// Valid when Suggestion is review or block, indicating the most likely prohibited forms. Value ranges from...to...
+	// <li>Image: The figure or icon on the screen;</li>
+	// <li>OCR: Text on the screen.</li>
 	Form *string `json:"Form,omitnil,omitempty" name:"Form"`
 
-	// A list of the suspicious segments detected.
-	// <font color=red>Note</font>: Only the first 10 results will be returned at most. You can get all the results from the file specified by `SegmentSetFileUrl`.
+	// Video clips suspected of containing violation information.
+	// <font color=red>Note</font>: The list only displays the first 10 elements. To obtain the complete result, refer to the corresponding file in SegmentSetFileUrl.
 	SegmentSet []*ReviewImageSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 
-	// The URL of the file that contains suspicious segments. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time (`SegmentSetFileUrlExpireTime`).
+	// URL of video clip list file involved in suspicion of violation information. The content of the file is JSON, consistent with the fields of SegmentSet. (The file will not be retained permanently and will be deleted when reaching SegmentSetFileUrlExpireTime.)
 	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitnil,omitempty" name:"SegmentSetFileUrl"`
 
-	// The expiration time of the file that contains suspicious segments, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format).
+	// URL expiry time of the list of video clips suspected of involving violation information, in [ISO date format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitnil,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
@@ -26150,63 +27253,71 @@ type SampleSnapshotTemplate struct {
 }
 
 type SceneAigcImageOutputConfig struct {
-	// Storage mode. valid values: <li>Permanent: Permanent storage. the generated image file will be stored in vod, and the FileId can be obtained from the event notification.</li> <li>Temporary: Temporary storage. the generated image file will not be stored in vod, and the Temporary access URL can be obtained from the event notification.</li>
-	// Default value: Temporary.
+	// <p>Storage mode. Valid values: <li>Permanent: Permanent storage. Generated image files will be stored in VOD and the FileId can be obtained in event notification;</li> <li>Temporary: Temporary storage. Generated image files will not be stored in VOD, and a temporary access URL can be obtained in event notification;</li><br>Default value: Temporary</p>
 	StorageMode *string `json:"StorageMode,omitnil,omitempty" name:"StorageMode"`
 
-	// Output filename, longest 64 characters. default filename is specified by the system.
+	// <p>Output filename, up to 64 characters. Default filename is specified by the system.</p>
 	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
 
-	// Category ID, used to categorize and manage media. you can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) api.
-	// <Li>Default value: 0, indicate other categories.</li>
+	// <p>Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the <a href="/document/product/266/7812">create category</a> API.</p><li>Default value: 0, indicating other categories.</li>
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// The expiry date of the output file. files will be deleted longer than this time. default is never expire. format according to ISO 8601 standard. see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
+	// <p>Expiry date of the output file. Files will be deleted longer than this time. Default is no expiration. Format according to ISO 8601 standard. For details, see <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format description</a>.</p>
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Specify the aspect ratio of the generated image. input format is W:H.
-	// 
-	// Only valid for product_image scenarios. available values are: 1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 16:9, 9:16, 21:9.
+	// <p>Specify the aspect ratio of the generated image. The input format is W:H.<br>This field is valid in the following scenarios:</p><ul><li>Product image generation scenario. Available values are: 1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 16:9, 9:16, 21:9.</li><li>AI image expansion scenario. Available values are: 1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9. It can be used in conjunction with ImageWidth and ImageHeight. The rules are as follows: <ol><li>When only AspectRatio is specified, adaptively adjust based on the original image input.</li><li>When AspectRatio and ImageWidth are specified, ImageHeight is calculated based on both, and vice versa.</li><li>When AspectRatio, ImageWidth, and ImageHeight are specified simultaneously, prioritize using ImageWidth and ImageHeight.</li></ol></li></ul>
 	AspectRatio *string `json:"AspectRatio,omitnil,omitempty" name:"AspectRatio"`
+
+	// <p>Output image encoding format parameters. <strong>Valid only for AI clothing change scenarios.</strong></p>
+	EncodeConfig *ImageSceneAigcEncodeConfig `json:"EncodeConfig,omitnil,omitempty" name:"EncodeConfig"`
+
+	// <p>Output image width. <strong>Valid only for AI image expansion scenarios.</strong></p>
+	ImageWidth *uint64 `json:"ImageWidth,omitnil,omitempty" name:"ImageWidth"`
+
+	// <p>Output image height, <strong>valid only for AI image expansion scenarios</strong>.</p>
+	ImageHeight *uint64 `json:"ImageHeight,omitnil,omitempty" name:"ImageHeight"`
+
+	// <p>Output resolution. Only valid for change_clothes and change_clothes_under scenarios. Available values: 1K, 2K, 4K.</p>
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
 }
 
 type SceneAigcImageTask struct {
-	// The task ID.
+	// Task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Task status, value: <li>PROCESSING: processing;</li><li>FINISH: completed.</li>
+	// Task status. Value: <li>PROCESSING: Processing;</li><li>FINISH: Completed.</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. A non-zero error code is returned when the source is abnormal. If 0 is returned, use the ErrCode of each specific task.
+	// Error code. Returns a non-zero error code for source error. For 0, please use the ErrCode of each specific task.
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-	// Error message. If the source is abnormal, the corresponding exception message is returned. Otherwise, use the message of each specific task.
+	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// The execution progress of a single adaptive bitrate stream. Value range: 0-100.
+	// Task progress, with a value range of [0-100].
 	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
-	// Input of AIGC image task.
+	// Input of the AIGC image generation task.
 	Input *SceneAigcImageTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output of AIGC image task.
+	// Output information of the AIGC image generation task.
 	Output *SceneAigcImageTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is not carried or is left empty, no deduplication will be performed.
+	// Identifier for deduplication. If a request with the same identifier has been sent within the past seven days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this parameter. It can contain up to 1000 characters.
+	// Source context, which is used to pass through the user request information. The callback for task flow status changes will return the value of this field. The maximum length is 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 }
 
 type SceneAigcImageTaskInput struct {
-	// Scenario-based Image Generation Parameter Configuration.
+	// Scenario-based image generation parameter configuration.
 	SceneInfo *AigcImageSceneInfo `json:"SceneInfo,omitnil,omitempty" name:"SceneInfo"`
 
-	// File information of the input image.
+	// Input image list.
 	FileInfos []*SceneAigcImageTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
 
-	// Output media file configuration for the task.
+	// Output media file configuration for scenario-based image generation tasks.
 	OutputConfig *SceneAigcImageOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
 }
 
@@ -26228,36 +27339,118 @@ type SceneAigcImageTaskInputFileInfo struct {
 }
 
 type SceneAigcImageTaskOutput struct {
-	// File information of the out image for the AIGC image generation task.
+	// Output file information of the AIGC image generation task.
 	FileInfos []*SceneAigcImageTaskOutputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
 }
 
 type SceneAigcImageTaskOutputFileInfo struct {
-	// Storage mode. valid values: <li>Permanent: Permanent storage. the generated image file will be stored in VOD (video on demand).</li> <li>Temporary: Temporary storage. the generated image file will not be stored in vod.</li>.
-	// Default value: Temporary.
+	// Storage mode. Valid values: <li>Permanent: retained permanently;</li> <li>Temporary: temporary storage;</li>
 	StorageMode *string `json:"StorageMode,omitnil,omitempty" name:"StorageMode"`
 
-	// Output filename, up to 64 characters. default filename is assigned by the system.
+	// Output filename, up to 64 characters. Default filename is specified generation by system. Valid when StorageMode is Permanent.
 	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
 
-	// Category ID, used to categorize and manage media. you can create a category and obtain the category ID via the [create classification](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) api.
-	// <Li>Default value: 0, indicating other categories.</li>.
+	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID through the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) API. Valid when StorageMode is Permanent.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// The expiry date of the output file. files will be deleted longer than this time. default is no expiration. format according to ISO 8601 standard. for details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
+	// Expiry date of the output file. Files will be deleted longer than this time. Default is no expiration. Format according to ISO 8601 standard. For details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// File Type.
+	// File type, such as mp4, flv.
 	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
 
-	// File Url.
+	// Media file playback address.
 	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
 
-	// File ID.
+	// Media file ID. Valid when StorageMode is Permanent.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// Meta Data.
+	// Output video meta information. Valid when StorageMode is Permanent.
 	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
+}
+
+type SceneAigcVideoOutputConfig struct {
+	// Storage mode. Valid values: <li>Permanent: Permanent storage. The generated image file will be stored in VOD, and the FileId can be obtained in the event notification.</li> <li>Temporary: Temporary storage. The generated image file will not be stored in VOD, and the URL for temporary access can be obtained in the event notification.</li>
+	// Default value: Temporary
+	StorageMode *string `json:"StorageMode,omitnil,omitempty" name:"StorageMode"`
+
+	// Output filename, up to 64 characters. Default filename is specified generation by system.
+	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
+
+	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) API.
+	// <li>Default value: 0, indicating other categories.</li>
+	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
+
+	// Expiry date of the output file. Files will be deleted longer than this time. Default is no expiration. Format according to ISO 8601 standard. For details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// Specify the aspect ratio of the generated video. Input format is W:H. Valid only for product image scenarios. Options: 16:9, 9:16.
+	AspectRatio *string `json:"AspectRatio,omitnil,omitempty" name:"AspectRatio"`
+
+	// Generate video duration. Available values: 4, 6, 8 seconds.
+	Duration *float64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+}
+
+type SceneAigcVideoTask struct {
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Task status. Value: <li>PROCESSING: Processing;</li><li>FINISH: Completed.</li>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. Returns a non-zero error code for source error. For 0, please use the ErrCode of each specific task.
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Task progress, with a value range of [0-100].
+	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// Input of the AIGC video generation task.
+	Input *SceneAigcVideoTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Output information of the AIGC video task.
+	Output *SceneAigcVideoTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// Identifier for deduplication. If a request with the same identifier has been sent within the past seven days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// Source context, which is used to pass through the user request information. The callback for task flow status changes will return the value of this field. The maximum length is 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+}
+
+type SceneAigcVideoTaskInput struct {
+	// Scenario-based image generation parameter configuration.
+	SceneInfo *AigcVideoSceneInfo `json:"SceneInfo,omitnil,omitempty" name:"SceneInfo"`
+
+	// Input image list.
+	FileInfos []*SceneAigcVideoTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+
+	// Output media file configuration for scenario-based image generation tasks.
+	OutputConfig *SceneAigcVideoOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
+}
+
+type SceneAigcVideoTaskInputFileInfo struct {
+	// Input video file type. Valid values: <li>File: on-demand media file;</li> <li>Url: accessible URL;</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Media file ID of the image file, which is the globally unique ID of the file in VOD, is assigned by the VOD backend after successful upload. You can get this field in the [video upload completion event notification](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) or [VOD console](https://console.cloud.tencent.com/vod/media). This parameter is valid when the Type value is File.
+	// Description:
+	// 1. Use images less than 7M.
+	// Image format. Valid values: jpeg, jpg, png, and webp.
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// Accessible file URL. This parameter is valid when the Type value is Url.
+	// Description:
+	// 1. Use images less than 7M.
+	// Image format. Valid values: jpeg, jpg, png, and webp.
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+}
+
+type SceneAigcVideoTaskOutput struct {
+	// Output file information of the AIGC video task.
+	FileInfos []*SceneAigcImageTaskOutputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
 }
 
 type ScratchRepairInfo struct {
@@ -26279,7 +27472,7 @@ type ScratchRepairInfo struct {
 
 // Predefined struct for user
 type SearchMediaBySemanticsRequestParams struct {
-	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. For customers who activate on-demand services from December 25, 2023, they must fill this field with the application ID when accessing resources in on-demand applications (whether it's the default application or a newly created application).</b></p>
+	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services from December 25, 2023, they must fill this field with the application ID when accessing resources in on-demand applications (whether it's the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// <p>Search content</p>
@@ -26304,7 +27497,7 @@ type SearchMediaBySemanticsRequestParams struct {
 type SearchMediaBySemanticsRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. For customers who activate on-demand services from December 25, 2023, they must fill this field with the application ID when accessing resources in on-demand applications (whether it's the default application or a newly created application).</b></p>
+	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services from December 25, 2023, they must fill this field with the application ID when accessing resources in on-demand applications (whether it's the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// <p>Search content</p>
@@ -26686,7 +27879,7 @@ type SetDrmKeyProviderInfoRequestParams struct {
 	// The DRM key information provided by SDMC.
 	SDMCInfo *SDMCDrmKeyProviderInfo `json:"SDMCInfo,omitnil,omitempty" name:"SDMCInfo"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -26696,7 +27889,7 @@ type SetDrmKeyProviderInfoRequest struct {
 	// The DRM key information provided by SDMC.
 	SDMCInfo *SDMCDrmKeyProviderInfo `json:"SDMCInfo,omitnil,omitempty" name:"SDMCInfo"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -26752,7 +27945,7 @@ type SetVodDomainCertificateRequestParams struct {
 	// <li>Clear: Clear the domain name HTTPS configuration, after clearing, the domain name cannot support </li>
 	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// [Tencent Cloud SSL](https://intl.cloud.tencent.com/document/product/400/7572?from_cn_redirect=1) uploaded certificate ID. No need to fill in this field when clearing domain HTTPS configuration
@@ -26770,7 +27963,7 @@ type SetVodDomainCertificateRequest struct {
 	// <li>Clear: Clear the domain name HTTPS configuration, after clearing, the domain name cannot support </li>
 	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// [Tencent Cloud SSL](https://intl.cloud.tencent.com/document/product/400/7572?from_cn_redirect=1) uploaded certificate ID. No need to fill in this field when clearing domain HTTPS configuration
@@ -26837,7 +28030,7 @@ type SimpleHlsClipRequestParams struct {
 	// URL of the HLS video in VOD that needs to be clipped.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Start offset time of clipping in seconds. Default value: 0, which means to clip from the beginning of the video. A negative number indicates how many seconds from the end of the video clipping will start at. For example, -10 means that clipping will start at the 10th second from the end.
@@ -26866,13 +28059,15 @@ type SimpleHlsClipRequestParams struct {
 	// The session context, which is used to pass through user request information. If the `Procedure` parameter is specified, the [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 1,000 characters and is valid only if `IsPersistence` is `1`.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// This field is deprecated.
+
+	//
+	// Deprecated: Precision is deprecated.
 	Precision *string `json:"Precision,omitnil,omitempty" name:"Precision"`
 
-	// Output video type. Valid values are: <li>hls: outputs hls files.</li> Default value: hls.
+
 	OutputMediaType *string `json:"OutputMediaType,omitnil,omitempty" name:"OutputMediaType"`
 
-	// Reserved field, used for special purposes. Example value: ""
+
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
@@ -26882,7 +28077,7 @@ type SimpleHlsClipRequest struct {
 	// URL of the HLS video in VOD that needs to be clipped.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Start offset time of clipping in seconds. Default value: 0, which means to clip from the beginning of the video. A negative number indicates how many seconds from the end of the video clipping will start at. For example, -10 means that clipping will start at the 10th second from the end.
@@ -26911,13 +28106,10 @@ type SimpleHlsClipRequest struct {
 	// The session context, which is used to pass through user request information. If the `Procedure` parameter is specified, the [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 1,000 characters and is valid only if `IsPersistence` is `1`.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// This field is deprecated.
 	Precision *string `json:"Precision,omitnil,omitempty" name:"Precision"`
 
-	// Output video type. Valid values are: <li>hls: outputs hls files.</li> Default value: hls.
 	OutputMediaType *string `json:"OutputMediaType,omitnil,omitempty" name:"OutputMediaType"`
 
-	// Reserved field, used for special purposes. Example value: ""
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
@@ -27128,7 +28320,7 @@ type SplitMediaRequestParams struct {
 	// Video splitting task information list, supporting up to 100 splitting messages at the same time.
 	Segments []*SplitMediaTaskConfig `json:"Segments,omitnil,omitempty" name:"Segments"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Identifies the source context, which is used to transparently transmit user request information. This field value will be returned in the SplitMediaComplete callback and task flow status change callback, with a maximum length of 1000 characters.
@@ -27150,7 +28342,7 @@ type SplitMediaRequest struct {
 	// Video splitting task information list, supporting up to 100 splitting messages at the same time.
 	Segments []*SplitMediaTaskConfig `json:"Segments,omitnil,omitempty" name:"Segments"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Identifies the source context, which is used to transparently transmit user request information. This field value will be returned in the SplitMediaComplete callback and task flow status change callback, with a maximum length of 1000 characters.
@@ -27279,7 +28471,7 @@ type SplitMediaTaskInput struct {
 	// <li>If this parameter is set to a negative number (-n for example), the transcoded video will end at the nth second before the end of the original video.</li>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-	// [Task flow template](https://intl.cloud.tencent.com/document/product/266/33931?lang=en&pg=) name, which should be entered if you want to perform a task flow on the generated new video.
+	// [Task flow](https://www.tencentcloud.com/document/product/266/33475?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E6.B5.81) name. Fill in if you need to execute task flow on the generated new video.
 	ProcedureName *string `json:"ProcedureName,omitnil,omitempty" name:"ProcedureName"`
 
 	// Output information of a video splitting task.
@@ -27290,8 +28482,7 @@ type SplitMediaTaskSegmentInfo struct {
 	// Input information of a video splitting task.
 	Input *SplitMediaTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output information of a video splitting task.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Video splitting task output information.
 	Output *TaskOutputMediaInfo `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The task ID for the task type `Procedure`. If a task flow (`ProcedureName`) is specified by [SplitMedia](https://intl.cloud.tencent.com/document/api/266/51098?from_cn_redirect=1), and the task flow includes one or more of `MediaProcessTask`, `AiAnalysisTask`, and `AiRecognitionTask`, the task specified by this parameter will be executed.
@@ -27309,7 +28500,7 @@ type StartCDNDomainRequestParams struct {
 	// Domain name operation, value: <li>start: enable;</li> <li>stop: disable. </li>
 	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -27322,7 +28513,7 @@ type StartCDNDomainRequest struct {
 	// Domain name operation, value: <li>start: enable;</li> <li>stop: disable. </li>
 	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -27517,11 +28708,9 @@ type SubtitleFormatsOperation struct {
 }
 
 type SuperResolutionInfo struct {
-	// Whether to enable super resolution. Valid values:
-	// <li>ON</li>
-	// <li>`OFF`</li>
-	// If super resolution is enabled, the output resolution will double.
-	// Default value: `OFF`.
+	// Super resolution control switch. Optional values:
+	// <li>ON: Enable super resolution;</li>
+	// <li>OFF: Disable screen super resolution.</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// The super resolution type. This parameter is valid only if `Switch` is `ON`. Valid values:
@@ -27629,7 +28818,7 @@ type TaskOutputMediaInfo struct {
 	// Media file ID.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// Basic information of the media files generated after transcoding and pulling.
+
 	MediaBasicInfo *MediaBasicInfo `json:"MediaBasicInfo,omitnil,omitempty" name:"MediaBasicInfo"`
 }
 
@@ -28015,6 +29204,9 @@ type TranscodeTaskInput struct {
 	// Copyright watermark.
 	CopyRightWatermark *CopyRightWatermarkInput `json:"CopyRightWatermark,omitnil,omitempty" name:"CopyRightWatermark"`
 
+	// Digital watermark.
+	BlindWatermark *BlindWatermarkInput `json:"BlindWatermark,omitnil,omitempty" name:"BlindWatermark"`
+
 	// List of blurs. Up to 10 ones can be supported.
 	MosaicSet []*MosaicInput `json:"MosaicSet,omitnil,omitempty" name:"MosaicSet"`
 
@@ -28376,7 +29568,7 @@ type VerifyDomainRecordRequestParams struct {
 	// Need to access the VOD acceleration domain name.
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2024, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2024, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// VerifyType:
@@ -28393,7 +29585,7 @@ type VerifyDomainRecordRequest struct {
 	// Need to access the VOD acceleration domain name.
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2024, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2024, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// VerifyType:

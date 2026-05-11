@@ -357,7 +357,7 @@ type AutoScalingGroup struct {
 	// Service settings
 	ServiceSettings *ServiceSettings `json:"ServiceSettings,omitnil,omitempty" name:"ServiceSettings"`
 
-	// The number of IPv6 addresses that an instance has. valid values: 0 and 1. default value: 0, which means the instance does not allocate an IPv6 address. use a private network that supports ip and enable IPv6 CIDR in the subnet. for usage restrictions, see [IPv6 usage limits](https://intl.cloud.tencent.com/document/product/1142/38369?from_cn_redirect=1).
+	// The number of IPv6 addresses that an instance has. valid values: 0 and 1. default value: 0, which means the instance does not allocate an IPv6 address. use a private network that supports ip and enable IPv6 CIDR in the subnet. for usage restrictions, see [IPv6 usage limits](https://www.tencentcloud.com/zh/document/product/215/78469).
 	Ipv6AddressCount *int64 `json:"Ipv6AddressCount,omitnil,omitempty" name:"Ipv6AddressCount"`
 
 	// Multi-AZ/subnet policy.
@@ -388,8 +388,19 @@ type AutoScalingGroup struct {
 	// <li>FALSE: Disable this feature. AS waits for the spot instance to be terminated before scaling out to reach the number of instances expected by the scaling group.</li>
 	CapacityRebalance *bool `json:"CapacityRebalance,omitnil,omitempty" name:"CapacityRebalance"`
 
-	// Instance name sequencing settings.
+	// Instance name index settings.
 	InstanceNameIndexSettings *InstanceNameIndexSettings `json:"InstanceNameIndexSettings,omitnil,omitempty" name:"InstanceNameIndexSettings"`
+
+	// Instance host name index settings.
+	HostNameIndexSettings *HostNameIndexSettings `json:"HostNameIndexSettings,omitnil,omitempty" name:"HostNameIndexSettings"`
+
+	// This feature allows the system to perform multiple scale out operations concurrently in order to reach the desired capacity. However, the following constraints apply:
+	// 
+	// - Compatibility: This option cannot be set if the InstanceAllocationPolicyis SPOT_MIXED or the ScalingMode is WAKE_UP_STOPPED_SCALING.
+	// - Concurrency Limit: The system currently supports a maximum of two concurrent scale-out operations.
+	// - Operation Restrictions: Other scaling actions such as scaling to a specific instance count or performing scale in, cannot be executed concurrently.
+	// Default: FALSE(indicating that concurrent scaling is disabled).
+	ConcurrentScaleOutForDesiredCapacity *bool `json:"ConcurrentScaleOutForDesiredCapacity,omitnil,omitempty" name:"ConcurrentScaleOutForDesiredCapacity"`
 }
 
 type AutoScalingGroupAbstract struct {
@@ -845,7 +856,7 @@ type CreateAutoScalingGroupRequestParams struct {
 	// Service settings such as unhealthy instance replacement.
 	ServiceSettings *ServiceSettings `json:"ServiceSettings,omitnil,omitempty" name:"ServiceSettings"`
 
-	// The number of IPv6 addresses that an instance has. valid values: 0 and 1. default value: 0, which means the instance does not allocate an IPv6 address. use a private network that supports IPv6 and enable IPv6 CIDR in the subnet. for other usage restrictions, see [IPv6 usage limits](https://intl.cloud.tencent.com/document/product/1142/38369?from_cn_redirect=1).
+	// The number of IPv6 addresses that an instance has. valid values: 0 and 1. default value: 0, which means the instance does not allocate an IPv6 address. use a private network that supports IPv6 and enable IPv6 CIDR in the subnet. for other usage restrictions, see [IPv6 usage limits](https://www.tencentcloud.com/document/product/215/78469).
 	Ipv6AddressCount *int64 `json:"Ipv6AddressCount,omitnil,omitempty" name:"Ipv6AddressCount"`
 
 	// Multi-AZ/multi-subnet policy, whose valid values include PRIORITY and EQUALITY, with the default value being PRIORITY.
@@ -883,8 +894,19 @@ type CreateAutoScalingGroupRequestParams struct {
 	// Default value: FALSE.
 	CapacityRebalance *bool `json:"CapacityRebalance,omitnil,omitempty" name:"CapacityRebalance"`
 
-	// Instance name sequencing settings. If this parameter is not specified, the default is not enabled. When enabled, an incremental numeric sequence will be appended to the names of instances automatically created within the scaling group.
+	// Instance name index settings. If not specified, it is disabled by default. When enabled, an incremental numeric index will be appended to the names of instances automatically created within the scaling group.
 	InstanceNameIndexSettings *InstanceNameIndexSettings `json:"InstanceNameIndexSettings,omitnil,omitempty" name:"InstanceNameIndexSettings"`
+
+	// Specifies the related settings for the instance hostname index number. If not specified, it is disabled by default. When enabled, it appends incremental numeric index to the hostname of instances auto-created within the scaling group.
+	HostNameIndexSettings *HostNameIndexSettings `json:"HostNameIndexSettings,omitnil,omitempty" name:"HostNameIndexSettings"`
+
+	// This feature allows the system to perform multiple scale out operations concurrently in order to reach the desired capacity. However, the following constraints apply:
+	// 
+	// - Compatibility: This option cannot be set if the InstanceAllocationPolicyis SPOT_MIXED or the ScalingMode is WAKE_UP_STOPPED_SCALING.
+	// - Concurrency Limit: The system currently supports a maximum of two concurrent scale-out operations.
+	// - Operation Restrictions: Other scaling actions such as scaling to a specific instance count or performing scale in, cannot be executed concurrently.
+	// Default: FALSE(indicating that concurrent scaling is disabled).
+	ConcurrentScaleOutForDesiredCapacity *bool `json:"ConcurrentScaleOutForDesiredCapacity,omitnil,omitempty" name:"ConcurrentScaleOutForDesiredCapacity"`
 }
 
 type CreateAutoScalingGroupRequest struct {
@@ -951,7 +973,7 @@ type CreateAutoScalingGroupRequest struct {
 	// Service settings such as unhealthy instance replacement.
 	ServiceSettings *ServiceSettings `json:"ServiceSettings,omitnil,omitempty" name:"ServiceSettings"`
 
-	// The number of IPv6 addresses that an instance has. valid values: 0 and 1. default value: 0, which means the instance does not allocate an IPv6 address. use a private network that supports IPv6 and enable IPv6 CIDR in the subnet. for other usage restrictions, see [IPv6 usage limits](https://intl.cloud.tencent.com/document/product/1142/38369?from_cn_redirect=1).
+	// The number of IPv6 addresses that an instance has. valid values: 0 and 1. default value: 0, which means the instance does not allocate an IPv6 address. use a private network that supports IPv6 and enable IPv6 CIDR in the subnet. for other usage restrictions, see [IPv6 usage limits](https://www.tencentcloud.com/document/product/215/78469).
 	Ipv6AddressCount *int64 `json:"Ipv6AddressCount,omitnil,omitempty" name:"Ipv6AddressCount"`
 
 	// Multi-AZ/multi-subnet policy, whose valid values include PRIORITY and EQUALITY, with the default value being PRIORITY.
@@ -989,8 +1011,19 @@ type CreateAutoScalingGroupRequest struct {
 	// Default value: FALSE.
 	CapacityRebalance *bool `json:"CapacityRebalance,omitnil,omitempty" name:"CapacityRebalance"`
 
-	// Instance name sequencing settings. If this parameter is not specified, the default is not enabled. When enabled, an incremental numeric sequence will be appended to the names of instances automatically created within the scaling group.
+	// Instance name index settings. If not specified, it is disabled by default. When enabled, an incremental numeric index will be appended to the names of instances automatically created within the scaling group.
 	InstanceNameIndexSettings *InstanceNameIndexSettings `json:"InstanceNameIndexSettings,omitnil,omitempty" name:"InstanceNameIndexSettings"`
+
+	// Specifies the related settings for the instance hostname index number. If not specified, it is disabled by default. When enabled, it appends incremental numeric index to the hostname of instances auto-created within the scaling group.
+	HostNameIndexSettings *HostNameIndexSettings `json:"HostNameIndexSettings,omitnil,omitempty" name:"HostNameIndexSettings"`
+
+	// This feature allows the system to perform multiple scale out operations concurrently in order to reach the desired capacity. However, the following constraints apply:
+	// 
+	// - Compatibility: This option cannot be set if the InstanceAllocationPolicyis SPOT_MIXED or the ScalingMode is WAKE_UP_STOPPED_SCALING.
+	// - Concurrency Limit: The system currently supports a maximum of two concurrent scale-out operations.
+	// - Operation Restrictions: Other scaling actions such as scaling to a specific instance count or performing scale in, cannot be executed concurrently.
+	// Default: FALSE(indicating that concurrent scaling is disabled).
+	ConcurrentScaleOutForDesiredCapacity *bool `json:"ConcurrentScaleOutForDesiredCapacity,omitnil,omitempty" name:"ConcurrentScaleOutForDesiredCapacity"`
 }
 
 func (r *CreateAutoScalingGroupRequest) ToJsonString() string {
@@ -1030,6 +1063,8 @@ func (r *CreateAutoScalingGroupRequest) FromJsonString(s string) error {
 	delete(f, "SpotMixedAllocationPolicy")
 	delete(f, "CapacityRebalance")
 	delete(f, "InstanceNameIndexSettings")
+	delete(f, "HostNameIndexSettings")
+	delete(f, "ConcurrentScaleOutForDesiredCapacity")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAutoScalingGroupRequest has unknown keys!", "")
 	}
@@ -1073,7 +1108,7 @@ type CreateLaunchConfigurationRequestParams struct {
 	// Note: the instance's project ID within the scaling group takes the project ID of the scaling group, which is irrelevant here.
 	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Instance model. Different instance models specify different resource specifications. The specific value can be obtained by calling the [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) API to get the latest specification table or referring to the descriptions in [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
+	// Instance model. Different instance models specify different resource specifications. The specific value can be obtained by calling the [DescribeZoneInstanceConfigInfos](https://www.tencentcloud.com/document/product/213/33254) API to get the latest specification table or referring to the descriptions in [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
 	// `InstanceType` and `InstanceTypes` are mutually exclusive, and one and only one of them must be entered.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
@@ -1108,7 +1143,7 @@ type CreateLaunchConfigurationRequestParams struct {
 	InstanceMarketOptions *InstanceMarketOptionsRequest `json:"InstanceMarketOptions,omitnil,omitempty" name:"InstanceMarketOptions"`
 
 	// Instance model list. different instance models specify different resource specifications. supports up to 10 instance models.
-	// The `InstanceType` and `InstanceTypes` parameters are mutually exclusive. one and only one must be filled in. specific values can be obtained by calling the api [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) to obtain the latest specification table or refer to [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
+	// The `InstanceType` and `InstanceTypes` parameters are mutually exclusive. one and only one must be filled in. specific values can be obtained by calling the api [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1) to obtain the latest specification table or refer to [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
 	InstanceTypes []*string `json:"InstanceTypes,omitnil,omitempty" name:"InstanceTypes"`
 
 	// CAM role name. you can obtain it from the roleName in the return value from the API [DescribeRoleList](https://intl.cloud.tencent.com/document/product/598/36223?from_cn_redirect=1).
@@ -1128,11 +1163,16 @@ type CreateLaunchConfigurationRequestParams struct {
 	// List of tags. You can specify tags that you want to bind to the launch configuration. Each launch configuration can have up to 30 tags.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// CVM hostname settings.
+	// Specifies the related settings for the cloud virtual machine HostName (HostName).
+	// windows instances do not support setting hostname. 
+	// When adding new attributes, the cloud virtual machine hostname must be transmitted. other fields not transmitted will be set as default.
+	// Validates whether the host name (with suffix added if it exists) exceeds the maximum of 46 characters.
 	HostNameSettings *HostNameSettings `json:"HostNameSettings,omitnil,omitempty" name:"HostNameSettings"`
 
-	// Settings of CVM instance names
-	// If this field is configured in a launch configuration, the `InstanceName` of a CVM created by the scaling group will be generated according to the configuration; otherwise, it will be in the `as-{{AutoScalingGroupName }}` format.
+	// Specifies the related settings of the cloud server instance name (InstanceName).
+	// If the user sets this field in the launch configuration, the instance name of the instance created by the scaling group will be set according to this field and passed to CVM. if the user does not set this field in the launch configuration, the instance name of the instance created by the scaling group will be set as "as-{{ scaling group AutoScalingGroupName }}" and passed to CVM.
+	// Specifies the instance name of the cloud virtual machine when adding this attribute. other fields not transmitted will be set as default.
+	// Verifies whether the instance name (add the suffix if it exists) exceeds the maximum of 108 characters.
 	InstanceNameSettings *InstanceNameSettings `json:"InstanceNameSettings,omitnil,omitempty" name:"InstanceNameSettings"`
 
 	// Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
@@ -1143,7 +1183,7 @@ type CreateLaunchConfigurationRequestParams struct {
 	// <li>AUTOMATIC: Automatically select the currently available cloud disk type.</li>
 	DiskTypePolicy *string `json:"DiskTypePolicy,omitnil,omitempty" name:"DiskTypePolicy"`
 
-	// High-Performance computing cluster ID. you can obtain this parameter by calling the [DescribeHpcClusters](https://intl.cloud.tencent.com/document/product/213/83220?from_cn_redirect=1) api.
+	// High-Performance computing cluster ID. This parameter is not currently supported for the international site.
 	// Note: this field is empty by default.
 	HpcClusterId *string `json:"HpcClusterId,omitnil,omitempty" name:"HpcClusterId"`
 
@@ -1176,7 +1216,7 @@ type CreateLaunchConfigurationRequest struct {
 	// Note: the instance's project ID within the scaling group takes the project ID of the scaling group, which is irrelevant here.
 	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Instance model. Different instance models specify different resource specifications. The specific value can be obtained by calling the [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) API to get the latest specification table or referring to the descriptions in [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
+	// Instance model. Different instance models specify different resource specifications. The specific value can be obtained by calling the [DescribeZoneInstanceConfigInfos](https://www.tencentcloud.com/document/product/213/33254) API to get the latest specification table or referring to the descriptions in [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
 	// `InstanceType` and `InstanceTypes` are mutually exclusive, and one and only one of them must be entered.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
@@ -1211,7 +1251,7 @@ type CreateLaunchConfigurationRequest struct {
 	InstanceMarketOptions *InstanceMarketOptionsRequest `json:"InstanceMarketOptions,omitnil,omitempty" name:"InstanceMarketOptions"`
 
 	// Instance model list. different instance models specify different resource specifications. supports up to 10 instance models.
-	// The `InstanceType` and `InstanceTypes` parameters are mutually exclusive. one and only one must be filled in. specific values can be obtained by calling the api [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) to obtain the latest specification table or refer to [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
+	// The `InstanceType` and `InstanceTypes` parameters are mutually exclusive. one and only one must be filled in. specific values can be obtained by calling the api [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1) to obtain the latest specification table or refer to [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
 	InstanceTypes []*string `json:"InstanceTypes,omitnil,omitempty" name:"InstanceTypes"`
 
 	// CAM role name. you can obtain it from the roleName in the return value from the API [DescribeRoleList](https://intl.cloud.tencent.com/document/product/598/36223?from_cn_redirect=1).
@@ -1231,11 +1271,16 @@ type CreateLaunchConfigurationRequest struct {
 	// List of tags. You can specify tags that you want to bind to the launch configuration. Each launch configuration can have up to 30 tags.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// CVM hostname settings.
+	// Specifies the related settings for the cloud virtual machine HostName (HostName).
+	// windows instances do not support setting hostname. 
+	// When adding new attributes, the cloud virtual machine hostname must be transmitted. other fields not transmitted will be set as default.
+	// Validates whether the host name (with suffix added if it exists) exceeds the maximum of 46 characters.
 	HostNameSettings *HostNameSettings `json:"HostNameSettings,omitnil,omitempty" name:"HostNameSettings"`
 
-	// Settings of CVM instance names
-	// If this field is configured in a launch configuration, the `InstanceName` of a CVM created by the scaling group will be generated according to the configuration; otherwise, it will be in the `as-{{AutoScalingGroupName }}` format.
+	// Specifies the related settings of the cloud server instance name (InstanceName).
+	// If the user sets this field in the launch configuration, the instance name of the instance created by the scaling group will be set according to this field and passed to CVM. if the user does not set this field in the launch configuration, the instance name of the instance created by the scaling group will be set as "as-{{ scaling group AutoScalingGroupName }}" and passed to CVM.
+	// Specifies the instance name of the cloud virtual machine when adding this attribute. other fields not transmitted will be set as default.
+	// Verifies whether the instance name (add the suffix if it exists) exceeds the maximum of 108 characters.
 	InstanceNameSettings *InstanceNameSettings `json:"InstanceNameSettings,omitnil,omitempty" name:"InstanceNameSettings"`
 
 	// Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
@@ -1246,7 +1291,7 @@ type CreateLaunchConfigurationRequest struct {
 	// <li>AUTOMATIC: Automatically select the currently available cloud disk type.</li>
 	DiskTypePolicy *string `json:"DiskTypePolicy,omitnil,omitempty" name:"DiskTypePolicy"`
 
-	// High-Performance computing cluster ID. you can obtain this parameter by calling the [DescribeHpcClusters](https://intl.cloud.tencent.com/document/product/213/83220?from_cn_redirect=1) api.
+	// High-Performance computing cluster ID. This parameter is not currently supported for the international site.
 	// Note: this field is empty by default.
 	HpcClusterId *string `json:"HpcClusterId,omitnil,omitempty" name:"HpcClusterId"`
 
@@ -1919,7 +1964,7 @@ type DataDisk struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Encrypt *bool `json:"Encrypt,omitnil,omitempty" name:"Encrypt"`
 
-	// Cloud disk performance (MB/s). This parameter is used to purchase extra performance for the cloud disk. For details on the feature and limits, see [Enhanced SSD Performance](https://intl.cloud.tencent.com/document/product/362/51896?from_cn_redirect=1#. E5.A2.9E.E5.BC.BA.E5.9E.8B-ssd-.E4.BA.91.E7.A1.AC.E7.9B.98.E9.A2.9D.E5.A4.96 .E6.80.A7.E8.83.BD).
+	// Cloud disk performance (MB/s). This parameter is used to purchase extra performance for the cloud disk. For details on the feature and limits, see [Enhanced SSD Performance](https://intl.cloud.tencent.com/zh/document/product/362/39611).
 	// This feature is only available to enhanced SSD (`CLOUD_HSSD`) and tremendous SSD (`CLOUD_TSSD`) disks with a capacity greater than 460 GB.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitnil,omitempty" name:"ThroughputPerformance"`
@@ -4036,7 +4081,7 @@ type InternetAccessible struct {
 	// Note: this field may return null, indicating that no valid value was found.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitnil,omitempty" name:"BandwidthPackageId"`
 
-	// Line type. for details on various types of lines and supported regions, refer to [EIP IP address type](https://www.tencentcloud.com/document/product/1199/41646?from_cn_redirect=1). default value: BGP.
+	// Line type. for details on various types of lines and supported regions, refer to [EIP IP address type](https://www.tencentcloud.com/zh/document/product/213/5733). default value: BGP.
 	// 
 	// <Li>BGP: general bgp line.</li>.
 	// For a user who has enabled the static single-line IP allowlist, valid values include:.
@@ -4051,7 +4096,7 @@ type InternetAccessible struct {
 	// 
 	// <Li>WanIP: specifies the public ip address.</li>.
 	// <Li>HighQualityEIP: highqualityip. only Singapore and hong kong (china) support highqualityip.</li>.
-	// <Li>AntiDDoSEIP: anti-ddos eip. only partially supported regions can use anti-ddos eip. details visible in [elastic ip product overview](https://www.tencentcloud.com/document/product/1199/41646?from_cn_redirect=1).</li>. 
+	// <Li>AntiDDoSEIP: anti-ddos eip. only partially supported regions can use anti-ddos eip. details visible in [elastic ip product overview](https://www.tencentcloud.com/zh/document/product/213/5733).</li>. 
 	// If needed to assign an elastic IPv4 address to a resource, specify the elastic IPv4 address type. if only use WanIP, do not set this field.
 	// 
 	// High quality IP the anti-ddos feature is only in beta test in some regions. if needed, submit a ticket for consultation (https://console.cloud.tencent.com/workorder/category).
@@ -4649,7 +4694,7 @@ type ModifyLaunchConfigurationAttributesRequestParams struct {
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
 	// Types of cvm instances. different instance models specify different resource specifications. supports up to 10 instance models.
-	// The launch configuration uses `InstanceType` to indicate one single instance type and `InstanceTypes` to indicate multiple instance types. specifying the `InstanceTypes` field will invalidate the original `InstanceType`. specific values can be obtained by calling the api [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) to obtain the latest specification table or refer to [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
+	// The launch configuration uses `InstanceType` to indicate one single instance type and `InstanceTypes` to indicate multiple instance types. specifying the `InstanceTypes` field will invalidate the original `InstanceType`. specific values can be obtained by calling the api [DescribeZoneInstanceConfigInfos](https://www.tencentcloud.com/document/product/213/33254) to obtain the latest specification table or refer to [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
 	InstanceTypes []*string `json:"InstanceTypes,omitnil,omitempty" name:"InstanceTypes"`
 
 	// InstanceType verification policy, which is effective when actual modification is made to InstanceTypes. Valid values include ALL and ANY and the default value is ANY.
@@ -4759,7 +4804,7 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
 	// Types of cvm instances. different instance models specify different resource specifications. supports up to 10 instance models.
-	// The launch configuration uses `InstanceType` to indicate one single instance type and `InstanceTypes` to indicate multiple instance types. specifying the `InstanceTypes` field will invalidate the original `InstanceType`. specific values can be obtained by calling the api [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) to obtain the latest specification table or refer to [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
+	// The launch configuration uses `InstanceType` to indicate one single instance type and `InstanceTypes` to indicate multiple instance types. specifying the `InstanceTypes` field will invalidate the original `InstanceType`. specific values can be obtained by calling the api [DescribeZoneInstanceConfigInfos](https://www.tencentcloud.com/document/product/213/33254) to obtain the latest specification table or refer to [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
 	InstanceTypes []*string `json:"InstanceTypes,omitnil,omitempty" name:"InstanceTypes"`
 
 	// InstanceType verification policy, which is effective when actual modification is made to InstanceTypes. Valid values include ALL and ANY and the default value is ANY.

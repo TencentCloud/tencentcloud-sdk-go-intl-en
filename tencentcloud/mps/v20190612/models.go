@@ -524,8 +524,11 @@ type AiAnalysisResult struct {
 }
 
 type AiAnalysisTaskClassificationInput struct {
-	// Intelligent video categorization template ID.
+	// <p>ID of the intelligent video classification template.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Extended parameter.</p>
+	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
 }
 
 type AiAnalysisTaskClassificationOutput struct {
@@ -554,8 +557,11 @@ type AiAnalysisTaskClassificationResult struct {
 }
 
 type AiAnalysisTaskCoverInput struct {
-	// Intelligent video cover generating template ID.
+	// <p>ID of the intelligent video cover template.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Extended parameter.</p>
+	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
 }
 
 type AiAnalysisTaskCoverOutput struct {
@@ -587,8 +593,11 @@ type AiAnalysisTaskCoverResult struct {
 }
 
 type AiAnalysisTaskCutoutInput struct {
-	// ID of the intelligent video matting template.
+	// <p>ID of the intelligent video matting template.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Extended parameter.</p>
+	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
 }
 
 type AiAnalysisTaskCutoutOutput struct {
@@ -603,7 +612,7 @@ type AiAnalysisTaskCutoutResult struct {
 	// Task status. Valid values are `PROCESSING`, `SUCCESS`, and `FAIL`.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
 	// Error message.
@@ -626,8 +635,11 @@ type AiAnalysisTaskCutoutResult struct {
 }
 
 type AiAnalysisTaskDelLogoInput struct {
-	// Intelligent removal template ID.
+	// <p>ID of the intelligent video erasing template.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Extended parameter.</p>
+	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
 }
 
 type AiAnalysisTaskDelLogoOutput struct {
@@ -674,8 +686,11 @@ type AiAnalysisTaskDelLogoResult struct {
 }
 
 type AiAnalysisTaskDescriptionInput struct {
-	// Intelligent description template ID.
+	// <p>ID of the intelligent video description template.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Extended parameter.</p>
+	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
 }
 
 type AiAnalysisTaskDescriptionOutput struct {
@@ -702,8 +717,11 @@ type AiAnalysisTaskDescriptionResult struct {
 }
 
 type AiAnalysisTaskDubbingInput struct {
-	// Video translation template ID.
+	// <p>ID of the video localization template.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Extended parameter.</p>
+	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
 }
 
 type AiAnalysisTaskDubbingOutput struct {
@@ -739,8 +757,11 @@ type AiAnalysisTaskDubbingResult struct {
 }
 
 type AiAnalysisTaskFrameTagInput struct {
-	// Intelligent frame-specific video tagging template ID.
+	// <p>ID of the intelligent video frame-by-frame tagging template.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Extended parameter.</p>
+	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
 }
 
 type AiAnalysisTaskFrameTagOutput struct {
@@ -769,8 +790,11 @@ type AiAnalysisTaskFrameTagResult struct {
 }
 
 type AiAnalysisTaskHeadTailInput struct {
-	// Opening and closing segments recognition template ID.
+	// <p>ID of the intro and outro recognition template.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Extended parameter.</p>
+	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
 }
 
 type AiAnalysisTaskHeadTailOutput struct {
@@ -801,8 +825,11 @@ type AiAnalysisTaskHeadTailResult struct {
 }
 
 type AiAnalysisTaskHighlightInput struct {
-	// The ID of the intelligent highlight generation template.
+	// <p>ID of the intelligent video highlight template.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Extended parameter.</p>
+	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
 }
 
 type AiAnalysisTaskHighlightOutput struct {
@@ -833,9 +860,12 @@ type AiAnalysisTaskHighlightResult struct {
 }
 
 type AiAnalysisTaskHorizontalToVerticalInput struct {
-	// Intelligent landscape-to-portrait template ID.
+	// <p>ID of the horizontal-to-vertical video transformation template.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Extended parameter.</p>
+	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
 }
 
 type AiAnalysisTaskHorizontalToVerticalOutput struct {
@@ -892,8 +922,11 @@ type AiAnalysisTaskInput struct {
 }
 
 type AiAnalysisTaskReelInput struct {
-	// ID of the intelligent video editing template.
+	// <p>ID of the intelligent video editing template.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Extended parameter.</p>
+	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
 }
 
 type AiAnalysisTaskReelOutput struct {
@@ -947,8 +980,11 @@ type AiAnalysisTaskReelResult struct {
 }
 
 type AiAnalysisTaskSegmentInput struct {
-	// Splitting task template ID.
+	// <p>ID of the video clipping task template.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Extended parameter.</p>
+	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
 }
 
 type AiAnalysisTaskSegmentOutput struct {
@@ -978,8 +1014,11 @@ type AiAnalysisTaskSegmentResult struct {
 }
 
 type AiAnalysisTaskTagInput struct {
-	// Intelligent video tagging template ID.
+	// <p>ID of the intelligent video tagging template.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Extended parameter.</p>
+	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
 }
 
 type AiAnalysisTaskTagOutput struct {
@@ -1008,8 +1047,11 @@ type AiAnalysisTaskTagResult struct {
 }
 
 type AiAnalysisTaskVideoComprehensionInput struct {
-	// Video (audio) recognition template ID.
+	// <p>ID of the video (audio) understanding template.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Extended parameter.</p>
+	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
 }
 
 type AiAnalysisTaskVideoComprehensionOutput struct {
@@ -1054,8 +1096,11 @@ type AiAnalysisTaskVideoComprehensionResult struct {
 }
 
 type AiAnalysisTaskVideoRemakeInput struct {
-	// Intelligent deduplication template ID.
+	// <p>ID of the intelligent video deduplication template.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Extended parameter.</p>
+	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
 }
 
 type AiAnalysisTaskVideoRemakeOutput struct {
@@ -2188,11 +2233,17 @@ type AiSampleWordInfo struct {
 }
 
 type AigcImageExtraParam struct {
-	// The aspect ratio of the generated video.Supported aspect ratios for different models:1. GEM: 1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, and 21:9.Note: For more information about the aspect ratios of specific models, see the model website.
+	// <p>Aspect ratio of the generated video.</p><p>Supported aspect ratios for different models:</p><ol><li>GEM: 1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, and 21:9.</li></ol><p>Note: For more information about the aspect ratios of specific models, see the model website.</p>
 	AspectRatio *string `json:"AspectRatio,omitnil,omitempty" name:"AspectRatio"`
 
-	// Output resolution of the image.Models that support this parameter:Valid values: 720P, 1080P, 2K, and 4K.
+	// <p>Output resolution of the image.</p><p>Models that support this parameter:<br>Valid values: 720P, 1080P, 2K, and 4K.</p>
 	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
+
+	// <p>Indicates whether to add a logo watermark. No watermark is added by default. 1 - A watermark is added. 0 - No watermark is added.</p><p>Value range: [0, 1].</p><p>Default value: 0.</p>
+	LogoAdd *int64 `json:"LogoAdd,omitnil,omitempty" name:"LogoAdd"`
+
+
+	OutputFormat *string `json:"OutputFormat,omitnil,omitempty" name:"OutputFormat"`
 }
 
 type AigcImageInfo struct {
@@ -2259,28 +2310,24 @@ type AigcVideoReferenceVideoInfo struct {
 }
 
 type AnimatedGraphicTaskInput struct {
-	// Animated image generating template ID.
+	// <p>Video-to-GIF conversion template ID.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Start time of an animated image in a video in seconds.
+	// <p>Start time of the GIF in the video, in seconds.</p>
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// End time of an animated image in a video in seconds.
+	// <p>End time of the GIF in the video, in seconds.</p>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-	// Target bucket of a generated animated image file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
+	// <p>Target storage for the file after GIF conversion. If this is not specified, it inherits the value from the upper-level OutputStorage.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// Output path of a file after animated image generating, which can be a relative or absolute path.
-	// If you need to define an output path, the path must end with `.{format}`. For variable names, refer to [Filename Variable](https://intl.cloud.tencent.com/document/product/862/37039?from_cn_redirect=1).
-	// Relative path example:
-	// <li>Filename_{Variable name}.{format}.</li>
-	// <li>Filename.{format}.</li>
-	// Absolute path example:
-	// <li>/Custom path/Filename_{Variable name}.{format}.</li>
-	// If left empty, a relative path is used by default: `{inputName}_animatedGraphic_{definition}.{format}`.
+	// <p>Output path of the file after GIF conversion, which can be a relative or absolute path.<br>To define the output path, the path must end with <code>.{format}</code>. For variable names, see <a href="https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1">File Name Variable Description</a>.<br>Relative path example:</p><li>File name_{variable name}.{format}</li><li>File name.{format}</li>Absolute path example:<li>/custom path/file name_{variable name}.{format}</li>If this is not specified, the default relative path is <code>{inputName}_animatedGraphic_{definition}.{format}</code>.
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
+
+	// <p>Extended parameter.</p>
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
 type AnimatedGraphicsTemplate struct {
@@ -2551,7 +2598,7 @@ type AudioTemplateInfo struct {
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
 	// Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
-	// For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.comom/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
+	// For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
 	// Unit: Hz.
 	// Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
 	SampleRate *uint64 `json:"SampleRate,omitnil,omitempty" name:"SampleRate"`
@@ -2596,7 +2643,7 @@ type AudioTemplateInfoForUpdate struct {
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
 	// Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
-	// For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.comom/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
+	// For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
 	// Unit: Hz.
 	// Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -2849,10 +2896,10 @@ type BlindWatermarkTemplate struct {
 	// Description information of the digital watermark template.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Creation time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+	// Creation time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Last modification time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+	// Last modification time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Digital watermark strength. 
@@ -3977,10 +4024,10 @@ func (r *CreateAigcImageTaskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAigcVideoTaskRequestParams struct {
-	// <p>Model name.<br>Supported models:<br>Hunyuan.<br>Hailuo.<br>Kling.<br>Vidu.<br>OS.<br>GV.</p>
+	// <p>Model name.<br>Supported models:<br>Hunyuan.<br>Hailuo.<br>Kling.<br>Vidu.<br>OS.<br>GV.<br>PixVerse.</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hailuo: [02 and 2.3].</li><li>Kling: [2.0, 2.1, 2.5, O1, 2.6, 3.0, and 3.0-Omni].</li><li>Vidu: [q2, q2-pro, q2-turbo, q3-pro, and q3-turbo].</li><li>GV: [3.1].</li><li>OS: [2.0].</li></ol>
+	// <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hailuo: [02, 2.3, and 2.3-fast].</li><li>Kling: [1.6, 2.0, 2.1, 2.5, O1, 2.6, 3.0, and 3.0-Omni].</li><li>Vidu: [q2, q2-pro, q2-turbo, q3-pro, q3-turbo, q3, and q3-mix].</li><li>GV: [3.1 and 3.1-fast].</li><li>OS: [2.0].</li><li>PixVerse: [v5.6, v6, and c1].</li></ol>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
 	// <p>Scenario for the generated video.<br>Note: Not all models support scenarios.</p><ol><li>Kling supports motion control (motion_control).</li><li>Mingmou supports landscape-to-portrait conversion (land2port).</li><li>Vidu supports special effect templates (template_effect).</li></ol>
@@ -4026,10 +4073,10 @@ type CreateAigcVideoTaskRequestParams struct {
 type CreateAigcVideoTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Model name.<br>Supported models:<br>Hunyuan.<br>Hailuo.<br>Kling.<br>Vidu.<br>OS.<br>GV.</p>
+	// <p>Model name.<br>Supported models:<br>Hunyuan.<br>Hailuo.<br>Kling.<br>Vidu.<br>OS.<br>GV.<br>PixVerse.</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hailuo: [02 and 2.3].</li><li>Kling: [2.0, 2.1, 2.5, O1, 2.6, 3.0, and 3.0-Omni].</li><li>Vidu: [q2, q2-pro, q2-turbo, q3-pro, and q3-turbo].</li><li>GV: [3.1].</li><li>OS: [2.0].</li></ol>
+	// <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hailuo: [02, 2.3, and 2.3-fast].</li><li>Kling: [1.6, 2.0, 2.1, 2.5, O1, 2.6, 3.0, and 3.0-Omni].</li><li>Vidu: [q2, q2-pro, q2-turbo, q3-pro, q3-turbo, q3, and q3-mix].</li><li>GV: [3.1 and 3.1-fast].</li><li>OS: [2.0].</li><li>PixVerse: [v5.6, v6, and c1].</li></ol>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
 	// <p>Scenario for the generated video.<br>Note: Not all models support scenarios.</p><ol><li>Kling supports motion control (motion_control).</li><li>Mingmou supports landscape-to-portrait conversion (land2port).</li><li>Vidu supports special effect templates (template_effect).</li></ol>
@@ -5467,7 +5514,12 @@ type CreateSmartSubtitleTemplateRequestParams struct {
 	// <p>Intelligent subtitle template name<br>Length limit: 64 characters.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br>ASR recognition and pure caption translation currently support the following languages:<br><code>auto</code>: Auto-identification<br><code>zh</code>: Simplified Chinese<br><code>en</code>: English<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>zh-PY</code>: Chinese-English-Cantonese<br><code>zh_medical</code>: Chinese health care<br><code>vi</code>: Vietnamese<br><code>ms</code>: Malay<br><code>id</code>: Indonesian<br><code>fil</code>: Filipino<br><code>th</code>: Thai<br><code>pt</code>: Portuguese<br><code>tr</code>: Turkish<br><code>ar</code>: Arabic<br><code>es</code>: Spanish<br><code>hi</code>: Hindi<br><code>fr</code>: French<br><code>de</code>: German<br><code>it</code>: Italian<br><code>zh_dialect</code>: Chinese dialect<br><code>zh_en</code>: Chinese-English<br><code>yue</code>: Cantonese<br><code>ru</code>: Russian<br><code>prime_zh</code>: Chinese-English dialect<br><code>af-ZA</code>: Afrikaans (South Africa)<br><code>sq-AL</code>: Albanian (Albania)<br><code>am-ET</code>: Amharic (Ethiopia)<br><code>ar-DZ</code>: Arabic (Algeria)<br><code>ar-BH</code>: Arabic (Bahrain)<br><code>ar-EG</code>: Arabic (Egypt)<br><code>ar-IQ</code>: Arabic (Iraq)<br><code>ar-IL</code>: Arabic (Israel)<br><code>ar-JO</code>: Arabic (Jordan)<br><code>ar-KW</code>: Arabic (Kuwait)<br><code>ar-LB</code>: Arabic (Lebanon)<br><code>ar-MR</code>: Arabic (Mauritania)<br><code>ar-MA</code>: Arabic (Morocco)<br><code>ar-OM</code>: Arabic (Oman)<br><code>ar-QA</code>: Arabic (Qatar)<br><code>ar-SA</code>: Arabic (Saudi Arabia)<br><code>ar-PS</code>: Arabic (State of Palestine)<br><code>ar-SY</code>: Arabic (Syria)<br><code>ar-TN</code>: Arabic (Tunisia)<br><code>ar-AE</code>: Arabic (United Arab Emirates)<br><code>ar-YE</code>: Arabic (Yemen)<br><code>hy-AM</code>: Armenian (Armenia)<br><code>az-AZ</code>: Azerbaijani (Azerbaijan)<br><code>eu-ES</code>: Basque (Spain)<br><code>bn-BD</code>: Bengali (Bangladesh)<br><code>bn-IN</code>: Bengali (India)<br><code>bs-BA</code>: Bosnian (Bosnia and Herzegovina)<br><code>bg-BG</code>: Bulgarian (Bulgaria)<br><code>my-MM</code>: Burmese (Myanmar)<br><code>ca-ES</code>: Catalan (Spain)<br><code>hr-HR</code>: Croatian (Croatia)<br><code>cs-CZ</code>: Czech (Czech Republic)<br><code>da-DK</code>: Danish (Denmark)<br><code>nl-BE</code>: Dutch (Belgium)<br><code>nl-NL</code>: Dutch (Netherlands)<br><code>en-AU</code>: English (Australia)<br><code>en-CA</code>: English (Canada)<br><code>en-GH</code>: English (Ghana)<br><code>en-HK</code>: English (Hong Kong (China))<br><code>en-IN</code>: English (India)<br><code>en-IE</code>: English (Ireland)<br><code>en-KE</code>: English (Kenya)<br><code>en-NZ</code>: English (New Zealand)<br><code>en-NG</code>: English (Nigeria)<br><code>en-PK</code>: English (Pakistan)<br><code>en-PH</code>: English (Philippines)<br><code>en-SG</code>: English (Singapore)<br><code>en-ZA</code>: English (South Africa)<br><code>en-TZ</code>: English (Tanzania)<br><code>en-GB</code>: English (UK)<br><code>en-US</code>: English (United States)<br><code>et-EE</code>: Estonian (Estonia)<br><code>fil-PH</code>: Filipino (Philippines)<br><code>fi-FI</code>: Finnish (Finland)<br><code>fr-BE</code>: French (Belgium)<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fr-CH</code>: French (Switzerland)<br><code>gl-ES</code>: Galician (Spain)<br><code>ka-GE</code>: Georgian (Georgia)<br><code>el-GR</code>: Greek (Greece)<br><code>gu-IN</code>: Gujarati (India)<br><code>iw-IL</code>: Hebrew (Israel)<br><code>hi-IN</code>: Hindi (India)<br><code>hu-HU</code>: Hungarian (Hungary)<br><code>is-IS</code>: Icelandic (Iceland)<br><code>id-ID</code>: Indonesian (Indonesia)<br><code>it-IT</code>: Italian (Italy)<br><code>it-CH</code>: Italian (Switzerland)<br><code>ja-JP</code>: Japanese (Japan)<br><code>jv-ID</code>: Javanese (Indonesia)<br><code>kn-IN</code>: Kannada (India)<br><code>kk-KZ</code>: Kazakh (Kazakhstan)<br><code>km-KH</code>: Khmer (Cambodia)<br><code>rw-RW</code>: Kinyarwanda (Rwanda)<br><code>ko-KR</code>: Korean (South Korea)<br><code>lo-LA</code>: Lao (Laos)<br><code>lv-LV</code>: Latvian (Latvia)<br><code>lt-LT</code>: Lithuanian (Lithuania)<br><code>mk-MK</code>: Macedonian (North Macedonia)<br><code>ms-MY</code>: Malay (Malaysia)<br><code>ml-IN</code>: Malayalam (India)<br><code>mr-IN</code>: Marathi (India)<br><code>mn-MN</code>: Mongolian (Mongolia)<br><code>ne-NP</code>: Nepali (Nepal)<br><code>no-NO</code>: Norwegian Bokmål (Norway)<br><code>fa-IR</code>: Persian (Iran)<br><code>pl-PL</code>: Polish (Poland)<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>ro-RO</code>: Romanian (Romania)<br><code>ru-RU</code>: Russian (Russia)<br><code>sr-RS</code>: Serbian (Serbia)<br><code>si-LK</code>: Sinhalese (Sri Lanka)<br><code>sk-SK</code>: Slovak (Slovakia)<br><code>sl-SI</code>: Slovenian (Slovenia)<br><code>st-ZA</code>: Southern Sotho (South Africa)<br><code>es-AR</code>: Spanish (Argentina)<br><code>es-BO</code>: Spanish (Bolivia)<br><code>es-CL</code>: Spanish (Chile)<br><code>es-CO</code>: Spanish (Colombia)<br><code>es-CR</code>: Spanish (Costa Rica)<br><code>es-DO</code>: Spanish (Dominican Republic)<br><code>es-EC</code>: Spanish (Ecuador)<br><code>es-SV</code>: Spanish (El Salvador)<br><code>es-GT</code>: Spanish (Guatemala)<br><code>es-HN</code>: Spanish (Honduras)<br><code>es-MX</code>: Spanish (Mexico)<br><code>es-NI</code>: Spanish (Nicaragua)<br><code>es-PA</code>: Spanish (Panama)<br><code>es-PY</code>: Spanish (Paraguay)<br><code>es-PE</code>: Spanish (Peru)<br><code>es-PR</code>: Spanish (Puerto Rico)<br><code>es-ES</code>: Spanish (Spain)<br><code>es-US</code>: Spanish (United States)<br><code>es-UY</code>: Spanish (Uruguay)<br><code>es-VE</code>: Spanish (Venezuela)<br><code>su-ID</code>: Sundanese (Indonesia)<br><code>sw-KE</code>: Swahili (Kenya)<br><code>sw-TZ</code>: Swahili (Tanzania)<br><code>sv-SE</code>: Swedish (Sweden)<br><code>ta-IN</code>: Tamil (India)<br><code>ta-MY</code>: Tamil (Malaysia)<br><code>ta-SG</code>: Tamil (Singapore)<br><code>ta-LK</code>: Tamil (Sri Lanka)<br><code>te-IN</code>: Telugu (India)<br><code>th-TH</code>: Thai (Thailand)<br><code>ts-ZA</code>: Tsonga (South Africa)<br><code>tr-TR</code>: Turkish (Türkiye)<br><code>uk-UA</code>: Ukrainian (Ukraine)<br><code>ur-IN</code>: Urdu (India)<br><code>ur-PK</code>: Urdu (Pakistan)<br><code>uz-UZ</code>: Uzbek (Uzbekistan)<br><code>ve-ZA</code>: Venda (South Africa)<code>vi-VN</code>: Vietnamese (Vietnam)<br><code>xh-ZA</code>: Xhosa (South Africa)<br><code>zu-ZA</code>: Zulu (South Africa)</p>
+	// <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br><br>ASR recognition and pure caption translation currently support the following: 
+	// 
+	// [ASR Supported Languages](https://www.tencentcloud.com/zh/document/product/1041/68175#ASRlanguages)
+	// 
+	// 
+	// Common available language codes:<br>`auto` (Auto Recognition), <br>`zh` (Simplified Chinese), <br>`en` (English), <br>`ja` (Japanese), <br>`ko` (Korean), <br>`zh-PY `(Chinese, English and Cantonese), <br>`zh_medical `(Medical Chinese), <br>`vi` (Vietnamese), <br>`ms` (Malay), <br>`id` (Indonesian), <br>`fil` (Filipino), <br>`th` (Thai), <br>`pt` (Portuguese), <br>`tr` (Turkish), <br>`ar` (Arabic), <br>`es` (Spanish), <br>`hi` (Hindi), <br>`fr` (French), <br>`de` (German), <br>`it` (Italian), <br>`zh_dialect` (Chinese Dialects), <br>`zh_en` (Chinese & English Mixed), <br>`yue` (Cantonese), <br>`ru` (Russian), <br>`prime_zh` (Chinese, English & Chinese Dialects)
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
 	// <p>Intelligent caption subtitle language type<br>0: Source language<br>1: Target language<br>2: Source language + target language<br>Only 0 is supported when TranslateSwitch is OFF<br>Only 1 or 2 is supported when TranslateSwitch is ON</p>
@@ -5496,6 +5548,12 @@ type CreateSmartSubtitleTemplateRequestParams struct {
 
 	// <p>Suppression Template id. Only allowed to fill in when ProcessType is 0 or 2 (task type is ASR or OCR). Cannot fill in when multiple target languages are enabled.</p>
 	SubtitleEmbedId *int64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
+
+	// <p>Speaker identification switch. Valid values:<br>0: Speaker identification is disabled.<br>1: Speaker identification is enabled.<br>By default, speaker identification is disabled.</p>
+	SpeakerMode *int64 `json:"SpeakerMode,omitnil,omitempty" name:"SpeakerMode"`
+
+	// <p>Indicates whether to output the identified speaker to the subtitle file. Valid values:<br>0: The speaker is not output to the subtitle file.<br>1: The speaker is output to the VTT subtitle file.<br>Note: To use this parameter, the value of SpeakerMode cannot be 0.<br>By default, the speaker is not output to the subtitle file.</p>
+	SpeakerLabel *int64 `json:"SpeakerLabel,omitnil,omitempty" name:"SpeakerLabel"`
 }
 
 type CreateSmartSubtitleTemplateRequest struct {
@@ -5504,7 +5562,12 @@ type CreateSmartSubtitleTemplateRequest struct {
 	// <p>Intelligent subtitle template name<br>Length limit: 64 characters.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br>ASR recognition and pure caption translation currently support the following languages:<br><code>auto</code>: Auto-identification<br><code>zh</code>: Simplified Chinese<br><code>en</code>: English<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>zh-PY</code>: Chinese-English-Cantonese<br><code>zh_medical</code>: Chinese health care<br><code>vi</code>: Vietnamese<br><code>ms</code>: Malay<br><code>id</code>: Indonesian<br><code>fil</code>: Filipino<br><code>th</code>: Thai<br><code>pt</code>: Portuguese<br><code>tr</code>: Turkish<br><code>ar</code>: Arabic<br><code>es</code>: Spanish<br><code>hi</code>: Hindi<br><code>fr</code>: French<br><code>de</code>: German<br><code>it</code>: Italian<br><code>zh_dialect</code>: Chinese dialect<br><code>zh_en</code>: Chinese-English<br><code>yue</code>: Cantonese<br><code>ru</code>: Russian<br><code>prime_zh</code>: Chinese-English dialect<br><code>af-ZA</code>: Afrikaans (South Africa)<br><code>sq-AL</code>: Albanian (Albania)<br><code>am-ET</code>: Amharic (Ethiopia)<br><code>ar-DZ</code>: Arabic (Algeria)<br><code>ar-BH</code>: Arabic (Bahrain)<br><code>ar-EG</code>: Arabic (Egypt)<br><code>ar-IQ</code>: Arabic (Iraq)<br><code>ar-IL</code>: Arabic (Israel)<br><code>ar-JO</code>: Arabic (Jordan)<br><code>ar-KW</code>: Arabic (Kuwait)<br><code>ar-LB</code>: Arabic (Lebanon)<br><code>ar-MR</code>: Arabic (Mauritania)<br><code>ar-MA</code>: Arabic (Morocco)<br><code>ar-OM</code>: Arabic (Oman)<br><code>ar-QA</code>: Arabic (Qatar)<br><code>ar-SA</code>: Arabic (Saudi Arabia)<br><code>ar-PS</code>: Arabic (State of Palestine)<br><code>ar-SY</code>: Arabic (Syria)<br><code>ar-TN</code>: Arabic (Tunisia)<br><code>ar-AE</code>: Arabic (United Arab Emirates)<br><code>ar-YE</code>: Arabic (Yemen)<br><code>hy-AM</code>: Armenian (Armenia)<br><code>az-AZ</code>: Azerbaijani (Azerbaijan)<br><code>eu-ES</code>: Basque (Spain)<br><code>bn-BD</code>: Bengali (Bangladesh)<br><code>bn-IN</code>: Bengali (India)<br><code>bs-BA</code>: Bosnian (Bosnia and Herzegovina)<br><code>bg-BG</code>: Bulgarian (Bulgaria)<br><code>my-MM</code>: Burmese (Myanmar)<br><code>ca-ES</code>: Catalan (Spain)<br><code>hr-HR</code>: Croatian (Croatia)<br><code>cs-CZ</code>: Czech (Czech Republic)<br><code>da-DK</code>: Danish (Denmark)<br><code>nl-BE</code>: Dutch (Belgium)<br><code>nl-NL</code>: Dutch (Netherlands)<br><code>en-AU</code>: English (Australia)<br><code>en-CA</code>: English (Canada)<br><code>en-GH</code>: English (Ghana)<br><code>en-HK</code>: English (Hong Kong (China))<br><code>en-IN</code>: English (India)<br><code>en-IE</code>: English (Ireland)<br><code>en-KE</code>: English (Kenya)<br><code>en-NZ</code>: English (New Zealand)<br><code>en-NG</code>: English (Nigeria)<br><code>en-PK</code>: English (Pakistan)<br><code>en-PH</code>: English (Philippines)<br><code>en-SG</code>: English (Singapore)<br><code>en-ZA</code>: English (South Africa)<br><code>en-TZ</code>: English (Tanzania)<br><code>en-GB</code>: English (UK)<br><code>en-US</code>: English (United States)<br><code>et-EE</code>: Estonian (Estonia)<br><code>fil-PH</code>: Filipino (Philippines)<br><code>fi-FI</code>: Finnish (Finland)<br><code>fr-BE</code>: French (Belgium)<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fr-CH</code>: French (Switzerland)<br><code>gl-ES</code>: Galician (Spain)<br><code>ka-GE</code>: Georgian (Georgia)<br><code>el-GR</code>: Greek (Greece)<br><code>gu-IN</code>: Gujarati (India)<br><code>iw-IL</code>: Hebrew (Israel)<br><code>hi-IN</code>: Hindi (India)<br><code>hu-HU</code>: Hungarian (Hungary)<br><code>is-IS</code>: Icelandic (Iceland)<br><code>id-ID</code>: Indonesian (Indonesia)<br><code>it-IT</code>: Italian (Italy)<br><code>it-CH</code>: Italian (Switzerland)<br><code>ja-JP</code>: Japanese (Japan)<br><code>jv-ID</code>: Javanese (Indonesia)<br><code>kn-IN</code>: Kannada (India)<br><code>kk-KZ</code>: Kazakh (Kazakhstan)<br><code>km-KH</code>: Khmer (Cambodia)<br><code>rw-RW</code>: Kinyarwanda (Rwanda)<br><code>ko-KR</code>: Korean (South Korea)<br><code>lo-LA</code>: Lao (Laos)<br><code>lv-LV</code>: Latvian (Latvia)<br><code>lt-LT</code>: Lithuanian (Lithuania)<br><code>mk-MK</code>: Macedonian (North Macedonia)<br><code>ms-MY</code>: Malay (Malaysia)<br><code>ml-IN</code>: Malayalam (India)<br><code>mr-IN</code>: Marathi (India)<br><code>mn-MN</code>: Mongolian (Mongolia)<br><code>ne-NP</code>: Nepali (Nepal)<br><code>no-NO</code>: Norwegian Bokmål (Norway)<br><code>fa-IR</code>: Persian (Iran)<br><code>pl-PL</code>: Polish (Poland)<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>ro-RO</code>: Romanian (Romania)<br><code>ru-RU</code>: Russian (Russia)<br><code>sr-RS</code>: Serbian (Serbia)<br><code>si-LK</code>: Sinhalese (Sri Lanka)<br><code>sk-SK</code>: Slovak (Slovakia)<br><code>sl-SI</code>: Slovenian (Slovenia)<br><code>st-ZA</code>: Southern Sotho (South Africa)<br><code>es-AR</code>: Spanish (Argentina)<br><code>es-BO</code>: Spanish (Bolivia)<br><code>es-CL</code>: Spanish (Chile)<br><code>es-CO</code>: Spanish (Colombia)<br><code>es-CR</code>: Spanish (Costa Rica)<br><code>es-DO</code>: Spanish (Dominican Republic)<br><code>es-EC</code>: Spanish (Ecuador)<br><code>es-SV</code>: Spanish (El Salvador)<br><code>es-GT</code>: Spanish (Guatemala)<br><code>es-HN</code>: Spanish (Honduras)<br><code>es-MX</code>: Spanish (Mexico)<br><code>es-NI</code>: Spanish (Nicaragua)<br><code>es-PA</code>: Spanish (Panama)<br><code>es-PY</code>: Spanish (Paraguay)<br><code>es-PE</code>: Spanish (Peru)<br><code>es-PR</code>: Spanish (Puerto Rico)<br><code>es-ES</code>: Spanish (Spain)<br><code>es-US</code>: Spanish (United States)<br><code>es-UY</code>: Spanish (Uruguay)<br><code>es-VE</code>: Spanish (Venezuela)<br><code>su-ID</code>: Sundanese (Indonesia)<br><code>sw-KE</code>: Swahili (Kenya)<br><code>sw-TZ</code>: Swahili (Tanzania)<br><code>sv-SE</code>: Swedish (Sweden)<br><code>ta-IN</code>: Tamil (India)<br><code>ta-MY</code>: Tamil (Malaysia)<br><code>ta-SG</code>: Tamil (Singapore)<br><code>ta-LK</code>: Tamil (Sri Lanka)<br><code>te-IN</code>: Telugu (India)<br><code>th-TH</code>: Thai (Thailand)<br><code>ts-ZA</code>: Tsonga (South Africa)<br><code>tr-TR</code>: Turkish (Türkiye)<br><code>uk-UA</code>: Ukrainian (Ukraine)<br><code>ur-IN</code>: Urdu (India)<br><code>ur-PK</code>: Urdu (Pakistan)<br><code>uz-UZ</code>: Uzbek (Uzbekistan)<br><code>ve-ZA</code>: Venda (South Africa)<code>vi-VN</code>: Vietnamese (Vietnam)<br><code>xh-ZA</code>: Xhosa (South Africa)<br><code>zu-ZA</code>: Zulu (South Africa)</p>
+	// <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br><br>ASR recognition and pure caption translation currently support the following: 
+	// 
+	// [ASR Supported Languages](https://www.tencentcloud.com/zh/document/product/1041/68175#ASRlanguages)
+	// 
+	// 
+	// Common available language codes:<br>`auto` (Auto Recognition), <br>`zh` (Simplified Chinese), <br>`en` (English), <br>`ja` (Japanese), <br>`ko` (Korean), <br>`zh-PY `(Chinese, English and Cantonese), <br>`zh_medical `(Medical Chinese), <br>`vi` (Vietnamese), <br>`ms` (Malay), <br>`id` (Indonesian), <br>`fil` (Filipino), <br>`th` (Thai), <br>`pt` (Portuguese), <br>`tr` (Turkish), <br>`ar` (Arabic), <br>`es` (Spanish), <br>`hi` (Hindi), <br>`fr` (French), <br>`de` (German), <br>`it` (Italian), <br>`zh_dialect` (Chinese Dialects), <br>`zh_en` (Chinese & English Mixed), <br>`yue` (Cantonese), <br>`ru` (Russian), <br>`prime_zh` (Chinese, English & Chinese Dialects)
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
 	// <p>Intelligent caption subtitle language type<br>0: Source language<br>1: Target language<br>2: Source language + target language<br>Only 0 is supported when TranslateSwitch is OFF<br>Only 1 or 2 is supported when TranslateSwitch is ON</p>
@@ -5533,6 +5596,12 @@ type CreateSmartSubtitleTemplateRequest struct {
 
 	// <p>Suppression Template id. Only allowed to fill in when ProcessType is 0 or 2 (task type is ASR or OCR). Cannot fill in when multiple target languages are enabled.</p>
 	SubtitleEmbedId *int64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
+
+	// <p>Speaker identification switch. Valid values:<br>0: Speaker identification is disabled.<br>1: Speaker identification is enabled.<br>By default, speaker identification is disabled.</p>
+	SpeakerMode *int64 `json:"SpeakerMode,omitnil,omitempty" name:"SpeakerMode"`
+
+	// <p>Indicates whether to output the identified speaker to the subtitle file. Valid values:<br>0: The speaker is not output to the subtitle file.<br>1: The speaker is output to the VTT subtitle file.<br>Note: To use this parameter, the value of SpeakerMode cannot be 0.<br>By default, the speaker is not output to the subtitle file.</p>
+	SpeakerLabel *int64 `json:"SpeakerLabel,omitnil,omitempty" name:"SpeakerLabel"`
 }
 
 func (r *CreateSmartSubtitleTemplateRequest) ToJsonString() string {
@@ -5558,6 +5627,8 @@ func (r *CreateSmartSubtitleTemplateRequest) FromJsonString(s string) error {
 	delete(f, "ProcessType")
 	delete(f, "SelectingSubtitleAreasConfig")
 	delete(f, "SubtitleEmbedId")
+	delete(f, "SpeakerMode")
+	delete(f, "SpeakerLabel")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSmartSubtitleTemplateRequest has unknown keys!", "")
 	}
@@ -10113,6 +10184,78 @@ func (r *DescribeTasksResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeTextToSpeechAsyncTaskRequestParams struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+type DescribeTextToSpeechAsyncTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+func (r *DescribeTextToSpeechAsyncTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTextToSpeechAsyncTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTextToSpeechAsyncTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTextToSpeechAsyncTaskResponseParams struct {
+	// <p>Error code. 0 is returned if the request is successful.</p>
+	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
+
+	// <p>Error message. success is returned if the request is successful.</p>
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// <p>Task status.</p><p>Enumeration values: </p><ul><li>success: Success, </li><li>fail: Failure, </li><li>processing: Processing.</li></ul>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Synthetic audio URL.</p>
+	AudioUrl *string `json:"AudioUrl,omitnil,omitempty" name:"AudioUrl"`
+
+	// <p>Used voice ID.</p>
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// <p>Extended information.</p>
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeTextToSpeechAsyncTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTextToSpeechAsyncTaskResponseParams `json:"Response"`
+}
+
+func (r *DescribeTextToSpeechAsyncTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTextToSpeechAsyncTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeTranscodeTemplatesRequestParams struct {
 	// Unique ID filter of transcoding templates. Array length limit: 100.
 	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
@@ -10407,6 +10550,79 @@ func (r *DescribeUsageDataResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeVoicesRequestParams struct {
+	// <p>Voice type. </p><p>Enumeration value: </p><ul><li>system: System audio.</li></ul>
+	VoiceType *string `json:"VoiceType,omitnil,omitempty" name:"VoiceType"`
+
+	// <p>Extended parameters in the format of a JSON string. </p><p>Other filter criteria:
+	// voiceName (String): Voice name, fuzzy matching. labels (Array of String): Tags. Matches voices that contain these tags.</p>
+	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
+}
+
+type DescribeVoicesRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Voice type. </p><p>Enumeration value: </p><ul><li>system: System audio.</li></ul>
+	VoiceType *string `json:"VoiceType,omitnil,omitempty" name:"VoiceType"`
+
+	// <p>Extended parameters in the format of a JSON string. </p><p>Other filter criteria:
+	// voiceName (String): Voice name, fuzzy matching. labels (Array of String): Tags. Matches voices that contain these tags.</p>
+	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
+}
+
+func (r *DescribeVoicesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVoicesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VoiceType")
+	delete(f, "ExtParam")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVoicesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeVoicesResponseParams struct {
+	// <p>Error code. 0 is returned if the request is successful.</p>
+	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
+
+	// <p>Error message. success is returned if the request is successful.</p>
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// <p>Available voice list.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Voices []*VoiceInfo `json:"Voices,omitnil,omitempty" name:"Voices"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeVoicesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeVoicesResponseParams `json:"Response"`
+}
+
+func (r *DescribeVoicesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVoicesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeWatermarkTemplatesRequestParams struct {
 	// Unique ID filter of watermarking templates. Array length limit: 100.
 	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
@@ -10691,6 +10907,76 @@ func (r *DescribeWorkflowsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeWorkflowsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DesignVoiceAsyncRequestParams struct {
+	// <p>Voice description.</p>
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// <p>Extended parameters in the format of a JSON string.</p>
+	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
+}
+
+type DesignVoiceAsyncRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Voice description.</p>
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// <p>Extended parameters in the format of a JSON string.</p>
+	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
+}
+
+func (r *DesignVoiceAsyncRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DesignVoiceAsyncRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Prompt")
+	delete(f, "ExtParam")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DesignVoiceAsyncRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DesignVoiceAsyncResponseParams struct {
+	// <p>Error code. 0 is returned if the request is successful.</p>
+	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
+
+	// <p>Error message. success is returned if the request is successful.</p>
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// <p>Task ID, used when querying a task.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DesignVoiceAsyncResponse struct {
+	*tchttp.BaseResponse
+	Response *DesignVoiceAsyncResponseParams `json:"Response"`
+}
+
+func (r *DesignVoiceAsyncResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DesignVoiceAsyncResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -11803,28 +12089,25 @@ type ImageQualityEnhanceConfig struct {
 }
 
 type ImageSpriteTaskInput struct {
-	// ID of an image sprite generating template.
+	// <p>Sprite screenshot template ID.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Target bucket of a generated image sprite. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
+	// <p>Target storage for the file after the sprite screenshot is taken. If this is not specified, it inherits the value from the upper-level OutputStorage.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// Output path of a captured sprite image file, which can be a relative or absolute path.
-	// If you need to define an output path, the path must end with `.{format}`. For variable names, refer to [Filename Variable](https://intl.cloud.tencent.com/document/product/862/37039?from_cn_redirect=1).Relative path example:
-	// <li>Filename_{Variable name}.{format}.</li>
-	// <li>Filename.{format}.</li>
-	// Absolute path example:
-	// <li>/Custom path/Filename_{Variable name}.{format}.</li>
-	// If left empty, a relative path is used by default: `{inputName}_imageSprite_{definition}_{number}.{format}`.
+	// <p>Output path of the sprite screenshot image file after the sprite screenshot is taken, which can be a relative or absolute path.<br>To define the output path, the path must end with <code>.{format}</code>. For variable names, see <a href="https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1">File Name Variable Description</a>.<br>Relative path example:</p><li>File name_{variable name}.{format}</li><li>File name.{format}</li>Absolute path example:<li>/custom path/file name_{variable name}.{format}</li>If this is not specified, the default relative path is <code>{inputName}_imageSprite_{definition}_{number}.{format}</code>.
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
 
-	// Output path to the WebVTT file after an image sprite is generated, which can only be a relative path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_imageSprite_{definition}.{format}`.
+	// <p>Output path of the Web VTT file after the sprite screenshot is taken, which can only be a relative path. If this is not specified, the default relative path is <code>{inputName}_imageSprite_{definition}.{format}</code>.</p>
 	WebVttObjectName *string `json:"WebVttObjectName,omitnil,omitempty" name:"WebVttObjectName"`
 
-	// Rule of the `{number}` variable in the image sprite output path.
+	// <p>Rule of the <code>{number}</code> variable in the output path after the sprite screenshot is taken.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ObjectNumberFormat *NumberFormat `json:"ObjectNumberFormat,omitnil,omitempty" name:"ObjectNumberFormat"`
+
+	// <p>Extended parameter.</p>
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
 type ImageSpriteTemplate struct {
@@ -12611,7 +12894,7 @@ type LiveStreamTagRecognitionResult struct {
 type LiveStreamTaskNotifyConfig struct {
 	// Notification type:
 	// TDMQ-CMQ: message queue.
-	// "URL": When a URL is specified, HTTP callbacks are pushed to the address specified by NotifyUrl. The callback protocol is HTTP+JSON. The content of the packet body is the same as the output parameters of [ParseLiveStreamProcessNotification](https://www.tencentcloud.comom/document/product/862/39229?from_cn_redirect=1).
+	// "URL": When a URL is specified, HTTP callbacks are pushed to the address specified by NotifyUrl. The callback protocol is HTTP+JSON. The content of the packet body is the same as the output parameters of [ParseLiveStreamProcessNotification](https://www.tencentcloud.com/document/product/862/39229?from_cn_redirect=1).
 	// <Font color="red"> Note: if it is unspecified or left blank, no callback will be sent. To send a callback, fill in the corresponding type value. </font>
 	NotifyType *string `json:"NotifyType,omitnil,omitempty" name:"NotifyType"`
 
@@ -15159,6 +15442,12 @@ type ModifySmartSubtitleTemplateRequestParams struct {
 
 	// <p>Suppression Template id. Only allowed to fill in when ProcessType is 0 or 2 (task type is ASR or OCR). Cannot fill in when multiple target languages are enabled.</p>
 	SubtitleEmbedId *int64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
+
+	// <p>Speaker identification switch. Valid values:<br>0: Speaker identification is disabled.<br>1: Speaker identification is enabled.</p>
+	SpeakerMode *int64 `json:"SpeakerMode,omitnil,omitempty" name:"SpeakerMode"`
+
+	// <p>Indicates whether to output the identified speaker to the subtitle file. Valid values:<br>0: The speaker is not output to the subtitle file.<br>1: The speaker is output to the VTT subtitle file.<br>Note: To use this parameter, the value of SpeakerMode cannot be 0.</p>
+	SpeakerLabel *int64 `json:"SpeakerLabel,omitnil,omitempty" name:"SpeakerLabel"`
 }
 
 type ModifySmartSubtitleTemplateRequest struct {
@@ -15199,6 +15488,12 @@ type ModifySmartSubtitleTemplateRequest struct {
 
 	// <p>Suppression Template id. Only allowed to fill in when ProcessType is 0 or 2 (task type is ASR or OCR). Cannot fill in when multiple target languages are enabled.</p>
 	SubtitleEmbedId *int64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
+
+	// <p>Speaker identification switch. Valid values:<br>0: Speaker identification is disabled.<br>1: Speaker identification is enabled.</p>
+	SpeakerMode *int64 `json:"SpeakerMode,omitnil,omitempty" name:"SpeakerMode"`
+
+	// <p>Indicates whether to output the identified speaker to the subtitle file. Valid values:<br>0: The speaker is not output to the subtitle file.<br>1: The speaker is output to the VTT subtitle file.<br>Note: To use this parameter, the value of SpeakerMode cannot be 0.</p>
+	SpeakerLabel *int64 `json:"SpeakerLabel,omitnil,omitempty" name:"SpeakerLabel"`
 }
 
 func (r *ModifySmartSubtitleTemplateRequest) ToJsonString() string {
@@ -15225,6 +15520,8 @@ func (r *ModifySmartSubtitleTemplateRequest) FromJsonString(s string) error {
 	delete(f, "ProcessType")
 	delete(f, "SelectingSubtitleAreasConfig")
 	delete(f, "SubtitleEmbedId")
+	delete(f, "SpeakerMode")
+	delete(f, "SpeakerLabel")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySmartSubtitleTemplateRequest has unknown keys!", "")
 	}
@@ -16519,7 +16816,7 @@ type ProcessImageTemplate struct {
 
 // Predefined struct for user
 type ProcessLiveStreamRequestParams struct {
-	// <p>The live streaming URL (must be a live streaming address, supporting rtmp, hls, flv, trtc, webrtc, srt, etc.).<br>The trtc address is as follows:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the trtc room number ID, which must be a number.<br><code>&lt;sdkappid&gt;</code> is the trtc SDK app ID.<br><code>&lt;userid&gt;</code> is the user ID of the service entering the room, which can distinguish robots.<br><code>&lt;usersig&gt;</code> is the trtc user's signature.</p><p>WebRTC supports the live stream of <a href="https://www.tencentcloud.com/product/leb?from_cn_redirect=1">LEB</a>. To obtain the address, <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">see</a>.</p><p>For SRT-supported addresses, <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">refer</a>.</p>
+	// <p>The live streaming URL (must be a live streaming address, supporting rtmp, hls, flv, trtc, webrtc, srt, etc.).<br>The trtc address is as follows:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the trtc room number ID, which must be a number.<br><code>&lt;sdkappid&gt;</code> is the trtc SDK app ID.<br><code>&lt;userid&gt;</code> is the user ID of the service entering the room, which can distinguish robots.<br><code>&lt;usersig&gt;</code> is the trtc user's signature.</p><p>WebRTC supports the live stream of <a href="https://www.tencentcloud.com/products/css?from_qcintl=topnav&lang=en&pg=">CSS</a>. To obtain the address, <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">see</a>.</p><p>For SRT-supported addresses, <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">refer</a>.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// <p>Event notification information of the task. This is used to specify the live stream processing result.</p>
@@ -16562,7 +16859,7 @@ type ProcessLiveStreamRequestParams struct {
 type ProcessLiveStreamRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>The live streaming URL (must be a live streaming address, supporting rtmp, hls, flv, trtc, webrtc, srt, etc.).<br>The trtc address is as follows:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the trtc room number ID, which must be a number.<br><code>&lt;sdkappid&gt;</code> is the trtc SDK app ID.<br><code>&lt;userid&gt;</code> is the user ID of the service entering the room, which can distinguish robots.<br><code>&lt;usersig&gt;</code> is the trtc user's signature.</p><p>WebRTC supports the live stream of <a href="https://www.tencentcloud.com/product/leb?from_cn_redirect=1">LEB</a>. To obtain the address, <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">see</a>.</p><p>For SRT-supported addresses, <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">refer</a>.</p>
+	// <p>The live streaming URL (must be a live streaming address, supporting rtmp, hls, flv, trtc, webrtc, srt, etc.).<br>The trtc address is as follows:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the trtc room number ID, which must be a number.<br><code>&lt;sdkappid&gt;</code> is the trtc SDK app ID.<br><code>&lt;userid&gt;</code> is the user ID of the service entering the room, which can distinguish robots.<br><code>&lt;usersig&gt;</code> is the trtc user's signature.</p><p>WebRTC supports the live stream of <a href="https://www.tencentcloud.com/products/css?from_qcintl=topnav&lang=en&pg=">CSS</a>. To obtain the address, <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">see</a>.</p><p>For SRT-supported addresses, <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">refer</a>.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// <p>Event notification information of the task. This is used to specify the live stream processing result.</p>
@@ -16932,6 +17229,29 @@ type ProhibitedOcrReviewTemplateInfoForUpdate struct {
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitnil,omitempty" name:"ReviewConfidence"`
 }
 
+type Project struct {
+	// <p>Project ID.</p>
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// <p>Project name.</p>
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
+
+	// <p>Project description.</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// <p>Project term base.</p>
+	TermBase []*TermBase `json:"TermBase,omitnil,omitempty" name:"TermBase"`
+
+	// <p>List of characters.</p>
+	Speakers []*Speakers `json:"Speakers,omitnil,omitempty" name:"Speakers"`
+
+	// <p>Creation time (Unix timestamp).</p>
+	CreatedAt *int64 `json:"CreatedAt,omitnil,omitempty" name:"CreatedAt"`
+
+	// <p>Update time (Unix timestamp).</p>
+	UpdatedAt *int64 `json:"UpdatedAt,omitnil,omitempty" name:"UpdatedAt"`
+}
+
 type PureSubtitleTransResult struct {
 	// Task status (the three valid values are as follows):
 	// - PROCESSING
@@ -16969,22 +17289,25 @@ type PureSubtitleTransResultOutput struct {
 }
 
 type QualityControlData struct {
-	// When this field is set to true, it indicates that the video has no audio track.
+	// <p>A value of true indicates that the video has no audio track.</p>
 	NoAudio *bool `json:"NoAudio,omitnil,omitempty" name:"NoAudio"`
 
-	// When this field is set to true, it indicates that the video has no video track.
+	// <p>A value of true indicates that the video has no video track.</p>
 	NoVideo *bool `json:"NoVideo,omitnil,omitempty" name:"NoVideo"`
 
-	// No-reference quality score of the video (100 points in total).
+	// <p>No-reference quality score of the video, on a scale of 0 to 100.</p>
 	QualityEvaluationScore *int64 `json:"QualityEvaluationScore,omitnil,omitempty" name:"QualityEvaluationScore"`
 
-	// No-reference quality score of the video (MOS).
+	// <p>No-reference quality score of the video (MOS).</p>
 	QualityEvaluationMeanOpinionScore *float64 `json:"QualityEvaluationMeanOpinionScore,omitnil,omitempty" name:"QualityEvaluationMeanOpinionScore"`
 
-	// Exception items identified in content quality inspection.
+	// <p>Video aesthetic score. Value range: [0, 100].</p>
+	AestheticEvaluationScore *int64 `json:"AestheticEvaluationScore,omitnil,omitempty" name:"AestheticEvaluationScore"`
+
+	// <p>Exception items detected in content quality inspection.</p>
 	QualityControlResultSet []*QualityControlResult `json:"QualityControlResultSet,omitnil,omitempty" name:"QualityControlResultSet"`
 
-	// Exception items identified in format diagnosis.
+	// <p>Exception items detected in format diagnosis.</p>
 	ContainerDiagnoseResultSet []*ContainerDiagnoseResultItem `json:"ContainerDiagnoseResultSet,omitnil,omitempty" name:"ContainerDiagnoseResultSet"`
 }
 
@@ -17173,6 +17496,87 @@ type QualityControlTemplate struct {
 	Strategy *QualityControlStrategy `json:"Strategy,omitnil,omitempty" name:"Strategy"`
 }
 
+// Predefined struct for user
+type QueryProjectRequestParams struct {
+	// <p>Project ID.</p>
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// <p>Project name.</p>
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
+
+	// <p>Page number. Value range: starts from 1. Default value: 1.</p>
+	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
+
+	// <p>Number of items per page. Default value: 20.</p>
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+}
+
+type QueryProjectRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Project ID.</p>
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// <p>Project name.</p>
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
+
+	// <p>Page number. Value range: starts from 1. Default value: 1.</p>
+	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
+
+	// <p>Number of items per page. Default value: 20.</p>
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+}
+
+func (r *QueryProjectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryProjectRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProjectId")
+	delete(f, "ProjectName")
+	delete(f, "Page")
+	delete(f, "PageSize")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "QueryProjectRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type QueryProjectResponseParams struct {
+	// <p>Total number of eligible items.</p>
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// <p>Project data.</p>
+	Data []*Project `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type QueryProjectResponse struct {
+	*tchttp.BaseResponse
+	Response *QueryProjectResponseParams `json:"Response"`
+}
+
+func (r *QueryProjectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryProjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type RawImageWatermarkInput struct {
 	// Input content of watermark image. JPEG and PNG images are supported.
 	ImageContent *MediaInputInfo `json:"ImageContent,omitnil,omitempty" name:"ImageContent"`
@@ -17257,6 +17661,12 @@ type RawSmartSubtitleParameter struct {
 
 	// <p>Suppression Template id. Only allowed to fill in when ProcessType is 0 or 2 (task type is ASR or OCR).</p>
 	SubtitleEmbedId *int64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
+
+	// <p>Speaker identification mode. Valid values:<br>0: Speaker identification is disabled.<br>1: Speaker identification is enabled.<br>Default value: 0.</p>
+	SpeakerMode *int64 `json:"SpeakerMode,omitnil,omitempty" name:"SpeakerMode"`
+
+	// <p>Indicates whether to output the identified speaker to the subtitle file. Valid values:<br>0: The speaker is not output to the subtitle file.<br>1: The speaker is output to the VTT subtitle file.<br>Note: To use this parameter, the value of SpeakerMode cannot be 0.<br>Default value: 0.</p>
+	SpeakerLabel *int64 `json:"SpeakerLabel,omitnil,omitempty" name:"SpeakerLabel"`
 }
 
 type RawTranscodeParameter struct {
@@ -17619,29 +18029,25 @@ type S3OutputStorage struct {
 }
 
 type SampleSnapshotTaskInput struct {
-	// Sampled screenshot template ID.
+	// <p>Sampled screenshot template ID.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// List of up to 10 image or text watermarks.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Watermark list. Up to 10 image or text watermarks are supported.</p>
 	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitnil,omitempty" name:"WatermarkSet"`
 
-	// Target bucket of a sampled screenshot. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
+	// <p>Target storage for the file after the sampled screenshot is taken. If this is not specified, it inherits the value from the upper-level OutputStorage.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// Output path of an image file after sampled screenshot taking, which can be a relative or absolute path.
-	// If you need to define an output path, the path must end with `.{format}`. For variable names, refer to [Filename Variable](https://intl.cloud.tencent.com/document/product/862/37039?from_cn_redirect=1).Relative path example:
-	// <li>Filename_{Variable name}.{format}.</li>
-	// <li>Filename.{format}.</li>
-	// Absolute path example:
-	// <li>/Custom path/Filename_{Variable name}.{format}.</li>
-	// If left empty, a relative path is used by default: `{inputName}_sampleSnapshot_{definition}_{number}.{format}`.
+	// <p>Output path of the image file after the sampled screenshot is taken, which can be a relative or absolute path.<br>To define the output path, the path must end with <code>.{format}</code>. For variable names, see <a href="https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1">File Name Variable Description</a>.<br>Relative path example:</p><li>File name_{variable name}.{format}</li><li>File name.{format}</li>Absolute path example:<li>/custom path/file name_{variable name}.{format}</li>If this is not specified, the default relative path is <code>{inputName}_sampleSnapshot_{definition}_{number}.{format}</code>.
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
 
-	// Rule of the `{number}` variable in the sampled screenshot output path.
+	// <p>Rule of the <code>{number}</code> variable in the output path after the sampled screenshot is taken.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ObjectNumberFormat *NumberFormat `json:"ObjectNumberFormat,omitnil,omitempty" name:"ObjectNumberFormat"`
+
+	// <p>Extended parameter.</p>
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
 type SampleSnapshotTemplate struct {
@@ -17735,7 +18141,7 @@ type ScheduleExecRuleTaskResult struct {
 	// Task status, which can be PROCESSING, SUCCESS, or FAIL.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. An empty string indicates success, while other values indicate failure. For specific values, see the list of MPS error codes at https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81.
+	// Error code. An empty string indicates success, while other values indicate failure. For specific values, see the list of MPS error codes at https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81.
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
 	// Error message.
@@ -18133,7 +18539,7 @@ type SmartEraseTaskResult struct {
 	// Task status, including PROCESSING, SUCCESS, and FAIL.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
 	// Error message.
@@ -18190,10 +18596,10 @@ type SmartEraseTemplateItem struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ErasePrivacyConfig *SmartErasePrivacyConfig `json:"ErasePrivacyConfig,omitnil,omitempty" name:"ErasePrivacyConfig"`
 
-	// Template creation time in [ISO datetime format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+	// Template creation time in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Last modification time of the template in [ISO datetime format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+	// Last modification time of the template in [ISO datetime format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Alias of the preset smart erasing template.
@@ -18297,24 +18703,24 @@ type SmartSubtitleTaskAsrFullTextSegmentItem struct {
 }
 
 type SmartSubtitleTaskBatchOutput struct {
-	// Task progress.
+	// <p>Task progress.</p>
 	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
-	// Task status, including PROCESSING, SUCCESS, and FAIL.
+	// <p>Task status. Valid values are PROCESSING, SUCCESS, WAITING, and FAIL.</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// <p>Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of <a href="https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81">MPS error codes</a>.</p>
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
-	// Error message.
+	// <p>Error message.</p>
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Translation task output information.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Translation task output information.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TransTextTask *SmartSubtitleTaskTransTextResultOutput `json:"TransTextTask,omitnil,omitempty" name:"TransTextTask"`
 
-	// Output information on the full speech recognition task.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Full speech recognition task output information.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AsrFullTextTask *SmartSubtitleTaskAsrFullTextResultOutput `json:"AsrFullTextTask,omitnil,omitempty" name:"AsrFullTextTask"`
 }
 
@@ -18322,7 +18728,7 @@ type SmartSubtitleTaskFullTextResult struct {
 	// Task status, which can be PROCESSING, SUCCESS, or FAIL.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of [MPS error codes](https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
 	// Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
@@ -18344,13 +18750,15 @@ type SmartSubtitleTaskFullTextResult struct {
 }
 
 type SmartSubtitleTaskResultInput struct {
-	// Smart subtitle template ID.
+	// <p>Smart subtitle template ID.</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Custom smart subtitle parameter. It takes effect when Definition is set to 0.
-	// This parameter is used in high customization scenarios. It is recommended that you preferentially use Definition to specify smart subtitle parameters.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Custom smart subtitle parameter. It takes effect when Definition is set to 0.<br>This parameter is used in highly customized scenarios. We recommend that you use Definition to specify smart subtitle parameters.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	RawParameter *RawSmartSubtitleParameter `json:"RawParameter,omitnil,omitempty" name:"RawParameter"`
+
+	// <p>Extended parameter.</p>
+	UserExtPara *string `json:"UserExtPara,omitnil,omitempty" name:"UserExtPara"`
 }
 
 type SmartSubtitleTaskTextResultOutput struct {
@@ -18436,117 +18844,72 @@ type SmartSubtitleTaskTransTextSegmentItem struct {
 }
 
 type SmartSubtitleTemplateItem struct {
-	// Unique identifier of the smart subtitle template.
+	// <p>Unique identifier of the smart subtitle template.</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Smart subtitle template name.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Smart subtitle template name.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Smart subtitle template description.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Smart subtitle template description.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Template type. Valid values:
-	// * Preset: system preset template
-	// * Custom: user-defined template
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Template type. Valid values:</p><ul><li>Preset: preset template.</li><li>Custom: custom template.</li></ul>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// ASR hotword lexicon parameter.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>ASR hotword lexicon parameters.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AsrHotWordsConfigure *AsrHotWordsConfigure `json:"AsrHotWordsConfigure,omitnil,omitempty" name:"AsrHotWordsConfigure"`
 
-	// Name of the hotword lexicon associated with the template.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Name of the hotword lexicon associated with the template.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AsrHotWordsLibraryName *string `json:"AsrHotWordsLibraryName,omitnil,omitempty" name:"AsrHotWordsLibraryName"`
 
-	// List of source languages of the video with smart subtitles.
-	// `zh`: Simplified Chinese.
-	// `yue`: Cantonese.
-	// `zh-PY`: Chinese, English, and Cantonese.
-	// `zh_medical`: Chinese (medical scenario).
-	// `zh_dialect`: Chinese dialect.
-	// `prime_zh`: Chinese, English, and Chinese dialects.
-	// `zh_en`: Chinese and English.
-	// `en`: English.
-	// `ja`: Japanese.
-	// `ko`: Korean.
-	// `fr`: French.
-	// `es`: Spanish.
-	// `it`: Italian.
-	// `de`: German.
-	// `tr`: Turkish.
-	// `ru`: Russian.
-	// `pt`: Portuguese (Brazil).
-	// `pt-PT`: Portuguese (Portugal).
-	// `vi`: Vietnamese.
-	// `id`: Indonesian.
-	// `ms`: Malay.
-	// `th`: Thai.
-	// `ar`: Arabic.
-	// `hi`: Hindi.
-	// `fil`: Filipino.
-	// `auto`: automatic recognition (it is only supported in pure subtitle translation).
+	// <p>Video source language list for smart subtitle:</p><p><code>zh</code>: Simplified Chinese<br><code>yue</code>: Cantonese<br><code>zh-PY</code>: Chinese, English, and Cantonese<br><code>zh_medical</code>: Chinese healthcare<br><code>zh_dialect</code>: Chinese dialect<br><code>prime_zh</code>: Chinese and English dialects<br><code>zh_en</code>: Chinese and English<br><code>en</code>: English<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>fr</code>: French<br><code>es</code>: Spanish<br><code>it</code>: Italian<br><code>de</code>: German<br><code>tr</code>: Turkish<br><code>ru</code>: Russian<br><code>pt</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>vi</code>: Vietnamese<br><code>id</code>: Indonesian<br><code>ms</code>: Malay<br><code>th</code>: Thai<br><code>ar</code>: Arabic<br><code>hi</code>: Hindi<br><code>fil</code>: Filipino<br><code>auto</code>: Automatic identification (only supported for subtitle translation)</p>
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
-	// Smart subtitle file format.
-	// - vtt: WebVTT.- srt: SRT.- original: same as the source subtitle file (for subtitle translation templates).- Not specified or empty: no subtitle file generated.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Smart subtitle file format.</p><ul><li>vtt: WebVTT.</li><li>srt: SRT.</li><li>original: same as the source subtitle file (for subtitle translation templates).</li><li>Not specified or empty: no subtitle file generated.</li></ul>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
-	// Smart subtitle language type.
-	// 0: source language1: target language
-	// 2: source language + target language
-	// The value can only be 0 when TranslateSwitch is set to OFF.The value can only be 1 or 2 when TranslateSwitch is set to ON.
+	// <p>Smart subtitle language type.<br>0: source language.<br>1: target language.<br>2: source language and target language.<br>Only 0 is supported when TranslateSwitch is OFF.<br>Only 1 or 2 is supported when TranslateSwitch is ON.</p>
 	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
 
-	// Subtitle translation switch.
-	// ON: enable translation
-	// OFF: disable translation
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Subtitle translation switch.<br>ON: enables translation.<br>OFF: disables translation.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
 
-	// Target language for subtitle translation.
-	// This field is valid when the value of TranslateSwitch is ON.
-	// `zh`: Simplified Chinese.
-	// `zh-TW`: Traditional Chinese.
-	// `en`: English.
-	// `ja`: Japanese.
-	// `ko`: Korean.
-	// `fr`: French.
-	// `es`: Spanish.
-	// `it`: Italian.
-	// `de`: German.
-	// `tr`: Turkish.
-	// `ru`: Russian.
-	// `pt`: Portuguese (Brazil).
-	// `pt-PT`: Portuguese (Portugal).
-	// `vi`: Vietnamese.
-	// `id`: Indonesian.
-	// `ms`: Malay.
-	// `th`: Thai.
-	// `ar`: Arabic.
-	// `hi`: Hindi.
-	// `fil`: Filipino.
-	// **Note**: Use `/` to separate multiple languages, such as `en/ja`, which indicates English and Japanese.
+	// <p>Target language for subtitle translation.<br>This parameter takes effect when TranslateSwitch is ON.<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese<br><code>en</code>: English<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>fr</code>: French<br><code>es</code>: Spanish<br><code>it</code>: Italian<br><code>de</code>: German<br><code>tr</code>: Turkish<br><code>ru</code>: Russian<br><code>pt</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>vi</code>: Vietnamese<br><code>id</code>: Indonesian<br><code>ms</code>: Malay<br><code>th</code>: Thai<br><code>ar</code>: Arabic<br><code>hi</code>: Hindi<br><code>fil</code>: Filipino</p><p><strong>Note</strong>: Use <code>/</code> to separate multiple languages, such as <code>en/ja</code>, which indicates English and Japanese.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
 
-	// Template creation time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	// <p>Template creation time, in <a href="https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52">ISO date format</a>.</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Last modification time of the template in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	// <p>Last template modification time, in <a href="https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52">ISO date format</a>.</p>
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-	// Alias of the preset smart subtitle template.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Preset template alias for smart subtitle.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AliasName *string `json:"AliasName,omitnil,omitempty" name:"AliasName"`
 
-	// Subtitle processing type:- 0: ASR subtitle recognition.- 1: subtitle translation.- 2: OCR subtitle recognition.
+	// <p>Subtitle processing type:</p><ul><li>0: ASR.</li><li>1: subtitle translation.</li><li>2: OCR.</li></ul>
 	ProcessType *uint64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 
-	// Area configurations for the subtitle OCR extraction box.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Area configurations for the subtitle OCR extraction box.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SelectingSubtitleAreasConfig *SelectingSubtitleAreasConfig `json:"SelectingSubtitleAreasConfig,omitnil,omitempty" name:"SelectingSubtitleAreasConfig"`
+
+	// <p>Subtitle burn-in template ID.</p>
+	SubtitleEmbedId *int64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
+
+	// <p>Speaker identification mode. Valid values:<br>0: Speaker identification is disabled.<br>1: Speaker identification is enabled.<br>Default value: 0.</p>
+	SpeakerMode *int64 `json:"SpeakerMode,omitnil,omitempty" name:"SpeakerMode"`
+
+	// <p>Indicates whether to output the identified speaker to the subtitle file. Valid values:<br>0: The speaker is not output to the subtitle file.<br>1: The speaker is output to the VTT subtitle file.<br>Note: To use this parameter, the value of SpeakerMode cannot be 0.<br>Default value: 0.</p>
+	SpeakerLabel *int64 `json:"SpeakerLabel,omitnil,omitempty" name:"SpeakerLabel"`
 }
 
 type SmartSubtitlesResult struct {
@@ -18609,38 +18972,31 @@ type SmartSubtitlesTaskInput struct {
 }
 
 type SnapshotByTimeOffsetTaskInput struct {
-	// ID of a time point screenshot template.
+	// <p>Time point screenshot template ID.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// List of screenshot time points in the format of `s` or `%`:
-	// <li>If the string ends in `s`, it means that the time point is in seconds; for example, `3.5s` means that the time point is the 3.5th second;</li>
-	// <li>If the string ends in `%`, it means that the time point is the specified percentage of the video duration; for example, `10%` means that the time point is 10% of the video duration.</li>
+	// <p>List of screenshot time points. Time points support two formats: s and %.</p><li>The unit for a string that ends with s is second. For example, 3.5s means the time point is at 3.5 seconds.</li><li>The unit for a string that ends with % is a percentage of the video duration. For example, 10% means the time point is at 10% of the video's total duration.</li>
 	ExtTimeOffsetSet []*string `json:"ExtTimeOffsetSet,omitnil,omitempty" name:"ExtTimeOffsetSet"`
 
-	// List of time points of screenshots in <font color=red>seconds</font>.
+	// <p>List of screenshot time points, in <font color="red">seconds</font>. This parameter is not recommended. We recommend that you use the ExtTimeOffsetSet parameter.</p>
 	TimeOffsetSet []*float64 `json:"TimeOffsetSet,omitnil,omitempty" name:"TimeOffsetSet"`
 
-	// List of up to 10 image or text watermarks.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Watermark list. Up to 10 image or text watermarks are supported.</p>
 	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitnil,omitempty" name:"WatermarkSet"`
 
-	// Target bucket of a generated time point screenshot file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
+	// <p>Target storage for the file after the time point screenshot is taken. If this is not specified, it inherits the value from the upper-level OutputStorage.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// Output path for an image file of screenshots taken at specific time points, which can be a relative or absolute path.
-	// If you need to define an output path, the path must end with `.{format}`. For variable names, refer to [Filename Variable](https://intl.cloud.tencent.com/document/product/862/37039?from_cn_redirect=1).
-	// Relative path example:
-	// <li>Filename_{Variable name}.{format}.</li>
-	// <li>Filename.{format}.</li>
-	// Absolute path example:
-	// <li>/Custom path/Filename_{Variable name}.{format}.</li>
-	// If left empty, a relative path is used by default: `{inputName}_snapshotByTimeOffset_{definition}_{number}.{format}`.
+	// <p>Output path of the image file after the time point screenshot is taken, which can be a relative or absolute path.<br>To define the output path, the path must end with <code>.{format}</code>. For variable names, see <a href="https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1">File Name Variable Description</a>.<br>Relative path example:</p><li>File name_{variable name}.{format}</li><li>File name.{format}</li>Absolute path example:<li>/custom path/file name_{variable name}.{format}</li>If this is not specified, the default relative path is <code>{inputName}_snapshotByTimeOffset_{definition}_{number}.{format}</code>.
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
 
-	// Rule of the `{number}` variable in the time point screenshot output path.
+	// <p>Rule of the <code>{number}</code> variable in the output path after the time point screenshot is taken.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ObjectNumberFormat *NumberFormat `json:"ObjectNumberFormat,omitnil,omitempty" name:"ObjectNumberFormat"`
+
+	// <p>Extended parameter.</p>
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
 type SnapshotByTimeOffsetTemplate struct {
@@ -19242,144 +19598,62 @@ type SvgWatermarkInputForUpdate struct {
 }
 
 type SyncDubbingOutputOption struct {
-
+	// <p>Output type of the synthesis result. </p><p>Enumeration values: </p><ul><li>data: Audio base64 encoding, </li><li>url: Audio URL, valid for 24 hours.</li></ul>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 // Predefined struct for user
 type SyncDubbingRequestParams struct {
-	// Text for the synthesis. This is required for text to speech. The text cannot exceed 2000 characters in length.
+	// <p>Text for the synthesis. This is required for text to speech. The text cannot exceed 2000 characters in length.</p>
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
-	// Text language. This defaults to zh (Chinese) if left empty.
-	// Supported languages:
-	// zh: Chinese.
-	// en: English.
-	// ja: Japanese.
-	// de: German.
-	// fr: French.
-	// ko: Korean.
-	// ru: Russian.
-	// uk: Ukrainian.
-	// pt: Portuguese.
-	// it: Italian.
-	// es: Spanish.
-	// id: Indonesian.
-	// nl: Dutch.
-	// tr: Turkish.
-	// fil: Filipino.
-	// ms: Malay.
-	// el: Greek.
-	// fi: Finnish.
-	// hr: Croatian.
-	// sk: Slovak.
-	// pl: Polish.
-	// sv: Swedish.
-	// hi: Hindi.
-	// bg: Bulgarian.
-	// ro: Romanian.
-	// ar: Arabic.
-	// cs: Czech.
-	// da: Danish.
-	// ta: Tamil.
-	// hun: Hungarian.
-	// vi: Vietnamese.
-	// no: Norwegian.
-	// yue: Cantonese.
-	// th: Thai.
-	// he: Hebrew.
-	// ca: Catalan.
-	// nn: Nynorsk.
-	// af: Afrikaans.
-	// fa: Persian.
-	// sl: Slovenian.
+	// <p>Text language. This defaults to Chinese if left empty.<br>Supported languages:<br>zh    Chinese<br>en    English<br>ja    Japanese<br>de    German<br>fr    French<br>ko    Korean<br>ru    Russian<br>uk    Ukrainian<br>pt    Portuguese<br>it    Italian<br>es    Spanish<br>id    Indonesian<br>nl    Dutch<br>tr    Turkish<br>fil    Filipino<br>ms    Malay<br>el    Greek<br>fi    Finnish<br>hr    Croatian<br>sk    Slovak<br>pl    Polish<br>sv    Swedish<br>hi    Hindi<br>bg    Bulgarian<br>ro    Romanian<br>ar    Arabic<br>cs    Czech<br>da    Danish<br>ta    Tamil<br>hun    Hungarian<br>vi    Vietnamese<br>no    Norwegian<br>yue    Cantonese<br>th    Thai<br>he    Hebrew<br>ca    Catalan<br>nn    Nynorsk<br>af    Afrikaans<br>fa    Persian<br>sl    Slovenian</p>
 	TextLang *string `json:"TextLang,omitnil,omitempty" name:"TextLang"`
 
-	// Voice type ID. This is required for synthesis with a specific voice type. System voice types and voice type cloning are supported.
+	// <p>Voice ID. This is required for synthesis with a specific voice. System voice and voice cloning are supported.</p>
 	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
 
-	// Base64-encoded audio for cloning.
+	// <p>Base64-encoded audio for cloning.</p>
 	AudioData *string `json:"AudioData,omitnil,omitempty" name:"AudioData"`
 
-
+	// <p>Cloning audio URL. Valid when AudioData is empty.</p>
 	AudioUrl *string `json:"AudioUrl,omitnil,omitempty" name:"AudioUrl"`
 
-	// Cloning audio language. The default language is Chinese.
-	// Supported languages are the same as those for TextLang.
+	// <p>Cloning audio language. The default language is Chinese. <br>Supported languages are the same as those for TextLang.</p>
 	AudioLang *string `json:"AudioLang,omitnil,omitempty" name:"AudioLang"`
 
-
+	// <p>Output parameters.</p><p>Specifies the output format, etc.</p>
 	Output *SyncDubbingOutputOption `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// Extended parameters in the format of a JSON string.
+	// <p>Extended parameters in the format of a JSON string.</p><p>‑ synExt (Object): Speech synthesis extension parameter.<br>- duration (Float): Synthesized audio duration, in seconds. Example: 5.2.<br>- sampleRate (Integer): Synthesized audio sample rate. Default value: 16000. Supported values: [8000,16000,22050,32000,44100].<br> pitch (Integer): -Pitch. Default value: 0 (original voice output). Valid values: [-12, 12].<br>‑ cloneExt (Object): Voice cloning extension parameter.<br>    - timeRanges (Float[][]): Specifies the time ranges for audio cloning. Default value: [[0, 20]]. Example: [[5.2, 10], [45, 59.8]].</p>
 	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
 }
 
 type SyncDubbingRequest struct {
 	*tchttp.BaseRequest
 	
-	// Text for the synthesis. This is required for text to speech. The text cannot exceed 2000 characters in length.
+	// <p>Text for the synthesis. This is required for text to speech. The text cannot exceed 2000 characters in length.</p>
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
-	// Text language. This defaults to zh (Chinese) if left empty.
-	// Supported languages:
-	// zh: Chinese.
-	// en: English.
-	// ja: Japanese.
-	// de: German.
-	// fr: French.
-	// ko: Korean.
-	// ru: Russian.
-	// uk: Ukrainian.
-	// pt: Portuguese.
-	// it: Italian.
-	// es: Spanish.
-	// id: Indonesian.
-	// nl: Dutch.
-	// tr: Turkish.
-	// fil: Filipino.
-	// ms: Malay.
-	// el: Greek.
-	// fi: Finnish.
-	// hr: Croatian.
-	// sk: Slovak.
-	// pl: Polish.
-	// sv: Swedish.
-	// hi: Hindi.
-	// bg: Bulgarian.
-	// ro: Romanian.
-	// ar: Arabic.
-	// cs: Czech.
-	// da: Danish.
-	// ta: Tamil.
-	// hun: Hungarian.
-	// vi: Vietnamese.
-	// no: Norwegian.
-	// yue: Cantonese.
-	// th: Thai.
-	// he: Hebrew.
-	// ca: Catalan.
-	// nn: Nynorsk.
-	// af: Afrikaans.
-	// fa: Persian.
-	// sl: Slovenian.
+	// <p>Text language. This defaults to Chinese if left empty.<br>Supported languages:<br>zh    Chinese<br>en    English<br>ja    Japanese<br>de    German<br>fr    French<br>ko    Korean<br>ru    Russian<br>uk    Ukrainian<br>pt    Portuguese<br>it    Italian<br>es    Spanish<br>id    Indonesian<br>nl    Dutch<br>tr    Turkish<br>fil    Filipino<br>ms    Malay<br>el    Greek<br>fi    Finnish<br>hr    Croatian<br>sk    Slovak<br>pl    Polish<br>sv    Swedish<br>hi    Hindi<br>bg    Bulgarian<br>ro    Romanian<br>ar    Arabic<br>cs    Czech<br>da    Danish<br>ta    Tamil<br>hun    Hungarian<br>vi    Vietnamese<br>no    Norwegian<br>yue    Cantonese<br>th    Thai<br>he    Hebrew<br>ca    Catalan<br>nn    Nynorsk<br>af    Afrikaans<br>fa    Persian<br>sl    Slovenian</p>
 	TextLang *string `json:"TextLang,omitnil,omitempty" name:"TextLang"`
 
-	// Voice type ID. This is required for synthesis with a specific voice type. System voice types and voice type cloning are supported.
+	// <p>Voice ID. This is required for synthesis with a specific voice. System voice and voice cloning are supported.</p>
 	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
 
-	// Base64-encoded audio for cloning.
+	// <p>Base64-encoded audio for cloning.</p>
 	AudioData *string `json:"AudioData,omitnil,omitempty" name:"AudioData"`
 
+	// <p>Cloning audio URL. Valid when AudioData is empty.</p>
 	AudioUrl *string `json:"AudioUrl,omitnil,omitempty" name:"AudioUrl"`
 
-	// Cloning audio language. The default language is Chinese.
-	// Supported languages are the same as those for TextLang.
+	// <p>Cloning audio language. The default language is Chinese. <br>Supported languages are the same as those for TextLang.</p>
 	AudioLang *string `json:"AudioLang,omitnil,omitempty" name:"AudioLang"`
 
+	// <p>Output parameters.</p><p>Specifies the output format, etc.</p>
 	Output *SyncDubbingOutputOption `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// Extended parameters in the format of a JSON string.
+	// <p>Extended parameters in the format of a JSON string.</p><p>‑ synExt (Object): Speech synthesis extension parameter.<br>- duration (Float): Synthesized audio duration, in seconds. Example: 5.2.<br>- sampleRate (Integer): Synthesized audio sample rate. Default value: 16000. Supported values: [8000,16000,22050,32000,44100].<br> pitch (Integer): -Pitch. Default value: 0 (original voice output). Valid values: [-12, 12].<br>‑ cloneExt (Object): Voice cloning extension parameter.<br>    - timeRanges (Float[][]): Specifies the time ranges for audio cloning. Default value: [[0, 20]]. Example: [[5.2, 10], [45, 59.8]].</p>
 	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
 }
 
@@ -19411,24 +19685,24 @@ func (r *SyncDubbingRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SyncDubbingResponseParams struct {
-	// Error code. 0 is returned if the request is successful.
+	// <p>Error code. 0 is returned if the request is successful.</p>
 	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
 
-	// Error message. success is returned if the request is successful.
+	// <p>Error message. success is returned if the request is successful.</p>
 	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
-	// Synthetic audio in Base64 encoding and WAV format.
+	// <p>Synthetic audio in Base64 encoding and WAV format.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AudioData *string `json:"AudioData,omitnil,omitempty" name:"AudioData"`
 
-
+	// <p>Synthetic audio URL. It is valid for 24 hours.</p>
 	AudioUrl *string `json:"AudioUrl,omitnil,omitempty" name:"AudioUrl"`
 
-	// Cloned voice type ID.
+	// <p>Cloned voice ID.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
 
-
+	// <p>Extended information in the format of a JSON string. </p><p>duration: Duration of the resulting audio, in seconds.</p>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -19780,803 +20054,117 @@ type TerrorismOcrReviewTemplateInfoForUpdate struct {
 }
 
 // Predefined struct for user
+type TextToSpeechAsyncRequestParams struct {
+	// <p>Text to convert to speech.</p>
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// <p>Voice ID.</p>
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// <p>Text language. The default value is Chinese.</p>
+	TextLang *string `json:"TextLang,omitnil,omitempty" name:"TextLang"`
+
+	// <p>Extended parameters in the format of a JSON string.</p><p>synExt (Object): Extended text to speech parameter.<br>  duration (Float): Synthesized audio duration, in seconds. Example: 5.2.<br>  sampleRate (Integer): Synthesized audio sample rate. Default value: 16000. Supported values: [8000,16000,22050,32000,44100].<br>  pitch (Integer): -Pitch. Default value: 0 (original voice output). Value range: [-12, 12].</p><p>transExt (Object): Extended translation parameter.<br>  transInfo (Object).<br>   transDst (String): Target language, such as en.<br>  transRequirement (String): Translation requirements.</p>
+	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
+}
+
+type TextToSpeechAsyncRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Text to convert to speech.</p>
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// <p>Voice ID.</p>
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// <p>Text language. The default value is Chinese.</p>
+	TextLang *string `json:"TextLang,omitnil,omitempty" name:"TextLang"`
+
+	// <p>Extended parameters in the format of a JSON string.</p><p>synExt (Object): Extended text to speech parameter.<br>  duration (Float): Synthesized audio duration, in seconds. Example: 5.2.<br>  sampleRate (Integer): Synthesized audio sample rate. Default value: 16000. Supported values: [8000,16000,22050,32000,44100].<br>  pitch (Integer): -Pitch. Default value: 0 (original voice output). Value range: [-12, 12].</p><p>transExt (Object): Extended translation parameter.<br>  transInfo (Object).<br>   transDst (String): Target language, such as en.<br>  transRequirement (String): Translation requirements.</p>
+	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
+}
+
+func (r *TextToSpeechAsyncRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TextToSpeechAsyncRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Text")
+	delete(f, "VoiceId")
+	delete(f, "TextLang")
+	delete(f, "ExtParam")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TextToSpeechAsyncRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type TextToSpeechAsyncResponseParams struct {
+	// <p>Error code. 0 is returned if the request is successful.</p>
+	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
+
+	// <p>Error message. success is returned if the request is successful.</p>
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// <p>Task ID. Use this ID to query the result.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type TextToSpeechAsyncResponse struct {
+	*tchttp.BaseResponse
+	Response *TextToSpeechAsyncResponseParams `json:"Response"`
+}
+
+func (r *TextToSpeechAsyncResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TextToSpeechAsyncResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type TextTranslationRequestParams struct {
-	// Text to be translated, which must be encoded in UTF-8 format. Characters not encoded in UTF-8 format cannot be translated. Input valid text. Unconventional content, such as HTML tags, may also cause translation failures. The text length per request must be less than 2,000 characters.
+	// <p>Text to be translated. The text must be encoded in UTF-8 format. Non-UTF-8 encoded characters may cause translation failures. Provide valid text. Unconventional text such as HTML tags may fail to translate. The text length per request cannot exceed 2,000 characters.</p>
 	SourceText *string `json:"SourceText,omitnil,omitempty" name:"SourceText"`
 
-	// Source language. Valid values:
-	//     "auto": "automatic recognition (recognized as a language).",
-	//     "ab": "Abkhaz language.",
-	//     "ace": Acehnese.",
-	//     "ach": "Acholi.",
-	//     "af": "Afrikaans.",
-	//     "ak": "Twi (Akan).",
-	//     "am": "Amharic",
-	//     "ar": "Arabic.",
-	//     "as": "Assamese.",
-	//     "ay": "Aymara.",
-	//     "az": "Azerbaijani.",
-	//     "ba": "Bashkir.",
-	//     "ban": "Balinese",
-	//     "bbc": "Batak Toba.",
-	//     "bem": "Bemba",
-	//     "bew": "Betawi",
-	//     "bg": "Bulgarian.",
-	//     "bho": "Bhojpuri.",
-	//     "bik": "Bikol",
-	//     "bm": "Bambara.",
-	//     "bn": "Bengali.",
-	//     "br": "Breton.",
-	//     "bs": "Bosnian.",
-	//     "btx": "Batak Karo.",
-	//     "bts": "Batak Simalungun.",
-	//     "bua": "Buryat.",
-	//     "ca": "Catalan.",
-	//     "ceb": "Cebuano.",
-	//     "cgg": "Kiga",
-	//     "chm": "Meadow Mari language.",
-	//     "ckb": "Kurdish (Sorani).",
-	//     "cnh": "Hakha Chin.",
-	//     "co": "Corsican.",
-	//     "crh": "Crimean Tatar.",
-	//     "crs": "Seychellois Creole.",
-	//     "cs": "Czech.",
-	//     "cv": "Chuvash.",
-	//     "cy": "Welsh.",
-	//     "da": "Danish.",
-	//     "de": "German.",
-	//     "din": "Dinka",
-	//     "doi": "Dogri.",
-	//     "dov": "Dombe.",
-	//     "dv": "Divehi.",
-	//     "dz": "Dzongkha.",
-	//     "ee": "Ewe",
-	//     "el": "Greek.",
-	//     "en": "English.",
-	//     "eo": "Esperanto.",
-	//     "es": "Spanish.",
-	//     "et": "Estonian.",
-	//     "eu": "Basque.",
-	//     "fa": "Persian.",
-	//     "ff": "Fula.",
-	//     "fi": "Finnish.",
-	//     "fil": "Filipino (Tagalog).",
-	//     "fj": "Fijian.",
-	//     "fr": "French.",
-	//     "fr-CA": "French (Canada).",
-	//     "fr-FR": "French (France).",
-	//     "fy": "Frisian.",
-	//     "ga": "Irish.",
-	//     "gaa": "Ga.",
-	//     "gd": "Scottish Gaelic.",
-	//     "gl": "Galician.",
-	//     "gn": "Guarani.",
-	//     "gom": "Goan Konkani.",
-	//     "gu": "Gujarati.",
-	//     "gv": "Manx.",
-	//     "ha": "Hausa",
-	//     "haw": "Hawaiian.",
-	//     "he": "Hebrew.",
-	//     "hi": "Hindi.",
-	//     "hil": "Hiligaynon.",
-	//     "hmn": "Hmong.",
-	//     "hr": "Croatian.",
-	//     "hrx": "Hunsrik.",
-	//     "ht": "Haitian Creole.",
-	//     "hu": "Hungarian.",
-	//     "hy": "Armenian.",
-	//     "id": "Indonesian.",
-	//     "ig": "Igbo",
-	//     "ilo": "Iloko.",
-	//     "is": "Icelandic.",
-	//     "it": "Italian.",
-	//     "iw": "Hebrew.",
-	//     "ja": "Japanese.",
-	//     "jv": "Javanese.",
-	//     "jw": "Javanese.",
-	//     "ka": "Georgian.",
-	//     "kk": "Kazakh.",
-	//     "km": "Khmer.",
-	//     "kn": "Kanada.",
-	//     "ko": "Korean.",
-	//     "kri": "Krio",
-	//     "ku": "Kurdish (Kurmanji).",
-	//     "ktu": "Kituba.",
-	//     "ky": "Kirghiz.",
-	//     "la": "Latin.",
-	//     "lb": "Luxembourgish.",
-	//     "lg": "Ganda (Luganda).",
-	//     "li": "Limburgish.",
-	//     "lij": "Ligurian.",
-	//     "lmo": "Lombard.",
-	//     "ln": "Lingala.",
-	//     "lo": "Lao.",
-	//     "lt": "Lithuanian.",
-	//     "ltg": "Latgalian.",
-	//     "luo": "Luo",
-	//     "lus": "Mizo.",
-	//     "lv": "Latvian.",
-	//     "mai": "Maithili.",
-	//     "mak": "Makassar.",
-	//     "mg": "Malagasy.",
-	//     "mi": "Maori.",
-	//     "min": "Minangkabau.",
-	//     "mk": "Macedonian.",
-	//     "ml": "Malayalam.",
-	//     "mn": "Mongolian.",
-	//     "mr": "Marathi.",
-	//     "ms": "Malay.",
-	//     "mt": "Maltese.",
-	//     "my": "Burmese.",
-	//     "ne": "Nepali.",
-	//     "new": "Nepali (Newar).",
-	//     "nl": "Dutch.",
-	//     "no": "Norwegian.",
-	//     "nr": "Ndebele (South).",
-	//     "nso": "Northern Sotho (Sepedi).",
-	//     "nus": "Nuer.",
-	//     "ny": "Chichewa (Nyanja).",
-	//     "oc": "Occitan.",
-	//     "om": "Oromo",
-	//     "or": "Odia (Oria).",
-	//     "pa": "Punjabi.",
-	//     "pag": "Pangasinan.",
-	//     "pam": "Kapampangan.",
-	//     "pap": "Papiamento",
-	//     "pl": "Polish.",
-	//     "ps": "Pashto",
-	//     "pt": "Portuguese.",
-	//     "pt-BR": "Portuguese (Brazil).",
-	//     "pt-PT": "Portuguese (Portugal).",
-	//     "qu": "Quechuan.",
-	//     "ro": "Romanian.",
-	//     "rom": "Romani.",
-	//     "rn": "Rundi",
-	//     "ru": "Russian.",
-	//     "rw": "Kinyarwanda.",
-	//     "sa": "Sanskrit.",
-	//     "scn": "Sicilian.",
-	//     "sd": "Sindhi.",
-	//     "sg": "Sango",
-	//     "shn": "Shan.",
-	//     "si": "Sinhalese.",
-	//     "sk": "Slovak.",
-	//     "sl": "Slovene.",
-	//     "sm": "Samoan.",
-	//     "sn": "Shona.",
-	//     "so": "Somali.",
-	//     "sq": "Albanian.",
-	//     "sr": "Serbian.",
-	//     "ss": "Swati.",
-	//     "st": "Sesotho.",
-	//     "su": "Sundanese.",
-	//     "sv": "Swedish.",
-	//     "sw": "Swahili.",
-	//     "szl": "Silesian.",
-	//     "ta": "Tamil.",
-	//     "te": "Telugu.",
-	//     "tet": "Tetum.",
-	//     "tg": "Tajik.",
-	//     "th": "Thai.",
-	//     "ti": "Tigrinya.",
-	//     "tk": "Turkmen.",
-	//     "tl": " Filipino (Tagalog).",
-	//     "tn": "Tswana.",
-	//     "tr": "Turkish.",
-	//     "ts": "Tsonga.",
-	//     "tt": "Tatar.",
-	//     "ug": "Uyghur.",
-	//     "uk": "Ukrainian.",
-	//     "ur": "Urdu.",
-	//     "uz": "Uzbek.",
-	//     "vi": "Vietnamese.",
-	//     "xh": "Xhosa.",
-	//     "yi": "Yiddish.",
-	//     "yo": "Yoruba.",
-	//     "yua": "Yucatec Maya.",
-	//     "yue": "Cantonese.",
-	//     "zh": "Simplified Chinese.",
-	//     "zh-TW": "Chinese (Traditional).",
-	//     "zu": "Zulu."
+	// <p>Source language. Valid values:<br>    &quot;auto&quot;: &quot; Auto-detection (detects as one language)&quot;,<br>    &quot;ab&quot;: &quot;Abkhaz&quot;,<br>    &quot;ace&quot;: &quot;Acehnese&quot;,<br>    &quot;ach&quot;: &quot;Acholi&quot;,<br>    &quot;af&quot;: &quot;Afrikaans&quot;,<br>    &quot;ak&quot;: &quot;Akan&quot;,<br>    &quot;am&quot;: &quot;Amharic&quot;,<br>    &quot;ar&quot;: &quot;Arabic&quot;,<br>    &quot;as&quot;: &quot;Assamese&quot;,<br>    &quot;ay&quot;: &quot;Aymara&quot;,<br>    &quot;az&quot;: &quot;Azerbaijani&quot;,<br>    &quot;ba&quot;: &quot;Bashkir&quot;,<br>    &quot;ban&quot;: &quot;Balinese&quot;,<br>    &quot;bbc&quot;: &quot;Batak Toba&quot;,<br>    &quot;bem&quot;: &quot;Bemba&quot;,<br>    &quot;bew&quot;: &quot;Betawi&quot;,<br>    &quot;bg&quot;: &quot;Bulgarian&quot;,<br>    &quot;bho&quot;: &quot;Bhojpuri&quot;,<br>    &quot;bik&quot;: &quot;Bikol&quot;,<br>    &quot;bm&quot;: &quot;Bambara&quot;,<br>    &quot;bn&quot;: &quot;Bengali&quot;,<br>    &quot;br&quot;: &quot;Breton&quot;,<br>    &quot;bs&quot;: &quot;Bosnian&quot;,<br>    &quot;btx&quot;: &quot;Batak Karo&quot;,<br>    &quot;bts&quot;: &quot;Batak Simalungun&quot;,<br>    &quot;bua&quot;: &quot;Buryat&quot;,<br>    &quot;ca&quot;: &quot;Catalan&quot;,<br>    &quot;ceb&quot;: &quot;Cebuano&quot;,<br>    &quot;cgg&quot;: &quot;Kiga&quot;,<br>    &quot;chm&quot;: &quot;Meadow Mari&quot;,<br>    &quot;ckb&quot;: &quot;Kurdish (Sorani)&quot;,<br>    &quot;cnh&quot;: &quot;Hakha Chin&quot;,<br>    &quot;co&quot;: &quot;Corsican&quot;,<br>    &quot;crh&quot;: &quot;Crimean Tatar&quot;,<br>    &quot;crs&quot;: &quot;Seychellois Creole&quot;,<br>    &quot;cs&quot;: &quot;Czech&quot;,<br>    &quot;cv&quot;: &quot;Chuvash&quot;,<br>    &quot;cy&quot;: &quot;Welsh&quot;,<br>    &quot;da&quot;: &quot;Danish&quot;,<br>    &quot;de&quot;: &quot;German&quot;,<br>    &quot;din&quot;: &quot;Dinka&quot;,<br>    &quot;doi&quot;: &quot;Dogri&quot;,<br>    &quot;dov&quot;: &quot;Dombe&quot;,<br>    &quot;dv&quot;: &quot;Dhivehi&quot;,<br>    &quot;dz&quot;: &quot;Dzongkha&quot;,<br>    &quot;ee&quot;: &quot;Ewe&quot;,<br>    &quot;el&quot;: &quot;Greek&quot;,<br>    &quot;en&quot;: &quot;English&quot;,<br>    &quot;eo&quot;: &quot;Esperanto&quot;,<br>    &quot;es&quot;: &quot;Spanish&quot;,<br>    &quot;et&quot;: &quot;Estonian&quot;,<br>    &quot;eu&quot;: &quot;Basque&quot;,<br>    &quot;fa&quot;: &quot;Persian&quot;,<br>    &quot;ff&quot;: &quot;Fula&quot;,<br>    &quot;fi&quot;: &quot;Finnish&quot;,<br>    &quot;fil&quot;: &quot;Filipino (Tagalog)&quot;,<br>    &quot;fj&quot;: &quot;Fijian&quot;,<br>    &quot;fr&quot;: &quot;French&quot;,<br>    &quot;fr-CA&quot;: &quot;French (Canada)&quot;,<br>    &quot;fr-FR&quot;: &quot;French (France)&quot;,<br>    &quot;fy&quot;: &quot;Frisian&quot;,<br>    &quot;ga&quot;: &quot;Irish&quot;,<br>    &quot;gaa&quot;: &quot;Ga&quot;,<br>    &quot;gd&quot;: &quot;Scottish Gaelic&quot;,<br>    &quot;gl&quot;: &quot;Galician&quot;,<br>    &quot;gn&quot;: &quot;Guarani&quot;,<br>    &quot;gom&quot;: &quot;Konkani&quot;,<br>    &quot;gu&quot;: &quot;Gujarati&quot;,<br>    &quot;gv&quot;: &quot;Manx&quot;,<br>    &quot;ha&quot;: &quot;Hausa&quot;,<br>    &quot;haw&quot;: &quot;Hawaiian&quot;,<br>    &quot;he&quot;: &quot;Hebrew&quot;,<br>    &quot;hi&quot;: &quot;Hindi&quot;,<br>    &quot;hil&quot;: &quot;Hiligaynon&quot;,<br>    &quot;hmn&quot;: &quot;Hmong&quot;,<br>    &quot;hr&quot;: &quot;Croatian&quot;,<br>    &quot;hrx&quot;: &quot;Hunsrik&quot;,<br>    &quot;ht&quot;: &quot;Haitian Creole&quot;,<br>    &quot;hu&quot;: &quot;Hungarian&quot;,<br>    &quot;hy&quot;: &quot;Armenian&quot;,<br>    &quot;id&quot;: &quot;Indonesian&quot;,<br>    &quot;ig&quot;: &quot;Igbo&quot;,<br>    &quot;ilo&quot;: &quot;Ilocano&quot;,<br>    &quot;is&quot;: &quot;Icelandic&quot;,<br>    &quot;it&quot;: &quot;Italian&quot;,<br>    &quot;iw&quot;: &quot;Hebrew&quot;,<br>    &quot;ja&quot;: &quot;Japanese&quot;,<br>    &quot;jv&quot;: &quot;Javanese&quot;,<br>    &quot;jw&quot;: &quot;Javanese&quot;,<br>    &quot;ka&quot;: &quot;Georgian&quot;,<br>    &quot;kk&quot;: &quot;Kazakh&quot;,<br>    &quot;km&quot;: &quot;Khmer&quot;,<br>    &quot;kn&quot;: &quot;Kannada&quot;,<br>    &quot;ko&quot;: &quot;Korean&quot;,<br>    &quot;kri&quot;: &quot;Krio&quot;,<br>    &quot;ku&quot;: &quot;Kurdish (Kurmanji)&quot;,<br>    &quot;ktu&quot;: &quot;Kituba&quot;,<br>    &quot;ky&quot;: &quot;Kyrgyz&quot;,<br>    &quot;la&quot;: &quot;Latin&quot;,<br>    &quot;lb&quot;: &quot;Luxembourgish&quot;,<br>    &quot;lg&quot;: &quot;Ganda (Luganda)&quot;,<br>    &quot;li&quot;: &quot;Limburgish&quot;,<br>    &quot;lij&quot;: &quot;Ligurian&quot;,<br>    &quot;lmo&quot;: &quot;Lombard&quot;,<br>    &quot;ln&quot;: &quot;Lingala&quot;,<br>    &quot;lo&quot;: &quot;Lao&quot;,<br>    &quot;lt&quot;: &quot;Lithuanian&quot;,<br>    &quot;ltg&quot;: &quot;Latgalian&quot;,<br>    &quot;luo&quot;: &quot;Luo&quot;,<br>    &quot;lus&quot;: &quot;Mizo&quot;,<br>    &quot;lv&quot;: &quot;Latvian&quot;,<br>    &quot;mai&quot;: &quot;Maithili&quot;,<br>    &quot;mak&quot;: &quot;Makassar&quot;,<br>    &quot;mg&quot;: &quot;Malagasy&quot;,<br>    &quot;mi&quot;: &quot;Maori&quot;,<br>    &quot;min&quot;: &quot;Minangkabau&quot;,<br>    &quot;mk&quot;: &quot;Macedonian&quot;,<br>    &quot;ml&quot;: &quot;Malayalam&quot;,<br>    &quot;mn&quot;: &quot;Mongolian&quot;,<br>    &quot;mr&quot;: &quot;Marathi&quot;,<br>    &quot;ms&quot;: &quot;Malay&quot;,<br>    &quot;mt&quot;: &quot;Maltese&quot;,<br>    &quot;my&quot;: &quot;Burmese&quot;,<br>    &quot;ne&quot;: &quot;Nepali&quot;,<br>    &quot;new&quot;: &quot;Newari&quot;,<br>    &quot;nl&quot;: &quot;Dutch&quot;,<br>    &quot;no&quot;: &quot;Norwegian&quot;,<br>    &quot;nr&quot;: &quot;Southern Ndebele&quot;,<br>    &quot;nso&quot;: &quot;Northern Sotho (Sepedi)&quot;,<br>    &quot;nus&quot;: &quot;Nuer&quot;,<br>    &quot;ny&quot;: &quot;Chichewa (Nyanja)&quot;,<br>    &quot;oc&quot;: &quot;Occitan&quot;,<br>    &quot;om&quot;: &quot;Oromo&quot;,<br>    &quot;or&quot;: &quot;Odia (Oriya)&quot;,<br>    &quot;pa&quot;: &quot;Punjabi&quot;,<br>    &quot;pag&quot;: &quot;Pangasinan&quot;,<br>    &quot;pam&quot;: &quot;Kapampangan&quot;,<br>    &quot;pap&quot;: &quot;Papiamento&quot;,<br>    &quot;pl&quot;: &quot;Polish&quot;,<br>    &quot;ps&quot;: &quot;Pashto&quot;,<br>    &quot;pt&quot;: &quot;Portuguese&quot;,<br>    &quot;pt-BR&quot;: &quot;Portuguese (Brazil)&quot;,<br>    &quot;pt-PT&quot;: &quot;Portuguese (Portugal)&quot;,<br>    &quot;qu&quot;: &quot;Quechua&quot;,<br>    &quot;ro&quot;: &quot;Romanian&quot;,<br>    &quot;rom&quot;: &quot;Romani&quot;,<br>    &quot;rn&quot;: &quot;Rundi&quot;,<br>    &quot;ru&quot;: &quot;Russian&quot;,<br>    &quot;rw&quot;: &quot;Kinyarwanda&quot;,<br>    &quot;sa&quot;: &quot;Sanskrit&quot;,<br>    &quot;scn&quot;: &quot;Sicilian&quot;,<br>    &quot;sd&quot;: &quot;Sindhi&quot;,<br>    &quot;sg&quot;: &quot;Sango&quot;,<br>    &quot;shn&quot;: &quot;Shan&quot;,<br>    &quot;si&quot;: &quot;Sinhala&quot;,<br>    &quot;sk&quot;: &quot;Slovak&quot;,<br>    &quot;sl&quot;: &quot;Slovenian&quot;,<br>    &quot;sm&quot;: &quot;Samoan&quot;,<br>    &quot;sn&quot;: &quot;Shona&quot;,<br>    &quot;so&quot;: &quot;Somali&quot;,<br>    &quot;sq&quot;: &quot;Albanian&quot;,<br>    &quot;sr&quot;: &quot;Serbian&quot;,<br>    &quot;ss&quot;: &quot;Swati&quot;,<br>    &quot;st&quot;: &quot;Sotho&quot;,<br>    &quot;su&quot;: &quot;Sundanese&quot;,<br>    &quot;sv&quot;: &quot;Swedish&quot;,<br>    &quot;sw&quot;: &quot;Swahili&quot;,<br>    &quot;szl&quot;: &quot;Silesian&quot;,<br>    &quot;ta&quot;: &quot;Tamil&quot;,<br>    &quot;te&quot;: &quot;Telugu&quot;,<br>    &quot;tet&quot;: &quot;Tetum&quot;,<br>    &quot;tg&quot;: &quot;Tajik&quot;,<br>    &quot;th&quot;: &quot;Thai&quot;,<br>    &quot;ti&quot;: &quot;Tigrinya&quot;,<br>    &quot;tk&quot;: &quot;Turkmen&quot;,<br>    &quot;tl&quot;: &quot;Filipino (Tagalog)&quot;,<br>    &quot;tn&quot;: &quot;Tswana&quot;,<br>    &quot;tr&quot;: &quot;Turkish&quot;,<br>    &quot;ts&quot;: &quot;Tsonga&quot;,<br>    &quot;tt&quot;: &quot;Tatar&quot;,<br>    &quot;ug&quot;: &quot;Uyghur&quot;,<br>    &quot;uk&quot;: &quot;Ukrainian&quot;,<br>    &quot;ur&quot;: &quot;Urdu&quot;,<br>    &quot;uz&quot;: &quot;Uzbek&quot;,<br>    &quot;vi&quot;: &quot;Vietnamese&quot;,<br>    &quot;xh&quot;: &quot;Xhosa&quot;,<br>    &quot;yi&quot;: &quot;Yiddish&quot;,<br>    &quot;yo&quot;: &quot;Yoruba&quot;,<br>    &quot;yua&quot;: &quot;Yucatec Maya&quot;,<br>    &quot;yue&quot;: &quot;Cantonese&quot;,<br>    &quot;zh&quot;: &quot;Simplified Chinese&quot;,<br>    &quot;zh-TW&quot;: &quot;Traditional Chinese&quot;,<br>    &quot;zu&quot;: &quot;Zulu&quot;</p>
 	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
 
-	// Target language. Valid values:
-	//     "ab": "Abkhaz language.",
-	//     "ace": "Acehnese.",
-	//     "ach": "Acholi.",
-	//     "af": "Afrikaans.",
-	//     "ak": "Twi (Akan).",
-	//     "am": "Amharic",
-	//     "ar": "Arabic.",
-	//     "as": "Assamese.",
-	//     "ay": "Aymara.",
-	//     "az": "Azerbaijani.",
-	//     "ba": "Bashkir.",
-	//     "ban": "Balinese",
-	//     "bbc": "Batak Toba.",
-	//     "bem": "Bemba",
-	//     "bew": "Betawi",
-	//     "bg": "Bulgarian.",
-	//     "bho": "Bhojpuri.",
-	//     "bik": "Bikol",
-	//     "bm": "Bambara.",
-	//     "bn": "Bengali.",
-	//     "br": "Breton.",
-	//     "bs": "Bosnian.",
-	//     "btx": "Batak Karo.",
-	//     "bts": "Batak Simalungun.",
-	//     "bua": "Buryat.",
-	//     "ca": "Catalan.",
-	//     "ceb": "Cebuano.",
-	//     "cgg": "Kiga",
-	//     "chm": "Meadow Mari language.",
-	//     "ckb": "Kurdish (Sorani).",
-	//     "cnh": "Hakha Chin.",
-	//     "co": "Corsican.",
-	//     "crh": "Crimean Tatar.",
-	//     "crs": "Seychellois Creole.",
-	//     "cs": "Czech.",
-	//     "cv": "Chuvash.",
-	//     "cy": "Welsh.",
-	//     "da": "Danish.",
-	//     "de": "German.",
-	//     "din": "Dinka",
-	//     "doi": "Dogri.",
-	//     "dov": "Dombe.",
-	//     "dv": "Divehi.",
-	//     "dz": "Dzongkha.",
-	//     "ee": "Ewe",
-	//     "el": "Greek.",
-	//     "en": "English.",
-	//     "eo": "Esperanto.",
-	//     "es": "Spanish.",
-	//     "et": "Estonian.",
-	//     "eu": "Basque.",
-	//     "fa": "Persian.",
-	//     "ff": "Fula.",
-	//     "fi": "Finnish.",
-	//     "fil": "Filipino (Tagalog).",
-	//     "fj": "Fijian.",
-	//     "fr": "French.",
-	//     "fr-CA": "French (Canada).",
-	//     "fr-FR": "French (France).",
-	//     "fy": "Frisian.",
-	//     "ga": "Irish.",
-	//     "gaa": "Ga.",
-	//     "gd": "Scottish Gaelic.",
-	//     "gl": "Galician.",
-	//     "gn": "Guarani.",
-	//     "gom": "Goan Konkani.",
-	//     "gu": "Gujarati.",
-	//     "gv": "Manx.",
-	//     "ha": "Hausa",
-	//     "haw": "Hawaiian.",
-	//     "he": "Hebrew.",
-	//     "hi": "Hindi.",
-	//     "hil": "Hiligaynon.",
-	//     "hmn": "Hmong.",
-	//     "hr": "Croatian.",
-	//     "hrx": "Hunsrik.",
-	//     "ht": "Haitian Creole.",
-	//     "hu": "Hungarian.",
-	//     "hy": "Armenian.",
-	//     "id": "Indonesian.",
-	//     "ig": "Igbo",
-	//     "ilo": "Iloko.",
-	//     "is": "Icelandic.",
-	//     "it": "Italian.",
-	//     "iw": "Hebrew.",
-	//     "ja": "Japanese.",
-	//     "jv": "Javanese.",
-	//     "jw": "Javanese.",
-	//     "ka": "Georgian.",
-	//     "kk": "Kazakh.",
-	//     "km": "Khmer.",
-	//     "kn": "Kanada.",
-	//     "ko": "Korean.",
-	//     "kri": "Krio",
-	//     "ku": "Kurdish (Kurmanji).",
-	//     "ktu": "Kituba.",
-	//     "ky": "Kirghiz.",
-	//     "la": "Latin.",
-	//     "lb": "Luxembourgish.",
-	//     "lg": "Ganda (Luganda).",
-	//     "li": "Limburgish.",
-	//     "lij": "Ligurian.",
-	//     "lmo": "Lombard.",
-	//     "ln": "Lingala.",
-	//     "lo": "Lao.",
-	//     "lt": "Lithuanian.",
-	//     "ltg": "Latgalian.",
-	//     "luo": "Luo",
-	//     "lus": "Mizo.",
-	//     "lv": "Latvian.",
-	//     "mai": "Maithili.",
-	//     "mak": "Makassar.",
-	//     "mg": "Malagasy.",
-	//     "mi": "Maori.",
-	//     "min": "Minangkabau.",
-	//     "mk": "Macedonian.",
-	//     "ml": "Malayalam.",
-	//     "mn": "Mongolian.",
-	//     "mr": "Marathi.",
-	//     "ms": "Malay.",
-	//     "mt": "Maltese.",
-	//     "my": "Burmese.",
-	//     "ne": "Nepali.",
-	//     "new": "Nepali (Newar).",
-	//     "nl": "Dutch.",
-	//     "no": "Norwegian.",
-	//     "nr": "Ndebele (South).",
-	//     "nso": "Northern Sotho (Sepedi).",
-	//     "nus": "Nuer.",
-	//     "ny": "Chichewa (Nyanja).",
-	//     "oc": "Occitan.",
-	//     "om": "Oromo",
-	//     "or": "Odia (Oria).",
-	//     "pa": "Punjabi.",
-	//     "pag": "Pangasinan.",
-	//     "pam": "Kapampangan.",
-	//     "pap": "Papiamento",
-	//     "pl": "Polish.",
-	//     "ps": "Pashto",
-	//     "pt": "Portuguese.",
-	//     "pt-BR": "Portuguese (Brazil).",
-	//     "pt-PT": "Portuguese (Portugal).",
-	//     "qu": "Quechuan.",
-	//     "ro": "Romanian.",
-	//     "rom": "Romani.",
-	//     "rn": "Rundi",
-	//     "ru": "Russian.",
-	//     "rw": "Kinyarwanda.",
-	//     "sa": "Sanskrit.",
-	//     "scn": "Sicilian.",
-	//     "sd": "Sindhi.",
-	//     "sg": "Sango",
-	//     "shn": "Shan.",
-	//     "si": "Sinhalese.",
-	//     "sk": "Slovak.",
-	//     "sl": "Slovene.",
-	//     "sm": "Samoan.",
-	//     "sn": "Shona.",
-	//     "so": "Somali.",
-	//     "sq": "Albanian.",
-	//     "sr": "Serbian.",
-	//     "ss": "Swati.",
-	//     "st": "Sesotho.",
-	//     "su": "Sundanese.",
-	//     "sv": "Swedish.",
-	//     "sw": "Swahili.",
-	//     "szl": "Silesian.",
-	//     "ta": "Tamil.",
-	//     "te": "Telugu.",
-	//     "tet": "Tetum.",
-	//     "tg": "Tajik.",
-	//     "th": "Thai.",
-	//     "ti": "Tigrinya.",
-	//     "tk": "Turkmen.",
-	//     "tl": " Filipino (Tagalog).",
-	//     "tn": "Tswana.",
-	//     "tr": "Turkish.",
-	//     "ts": "Tsonga.",
-	//     "tt": "Tatar.",
-	//     "ug": "Uyghur.",
-	//     "uk": "Ukrainian.",
-	//     "ur": "Urdu.",
-	//     "uz": "Uzbek.",
-	//     "vi": "Vietnamese.",
-	//     "xh": "Xhosa.",
-	//     "yi": "Yiddish.",
-	//     "yo": "Yoruba.",
-	//     "yua": "Yucatec Maya.",
-	//     "yue": "Cantonese.",
-	//     "zh": "Simplified Chinese.",
-	//     "zh-TW": "Chinese (Traditional).",
-	//     "zu": "Zulu."
+	// <p>Target language. Valid values:<br>    &quot;ab&quot;: &quot;Abkhaz&quot;,<br>    &quot;ace&quot;: &quot;Acehnese&quot;,<br>    &quot;ach&quot;: &quot;Acholi&quot;,<br>    &quot;af&quot;: &quot;Afrikaans&quot;,<br>    &quot;ak&quot;: &quot;Akan&quot;,<br>    &quot;am&quot;: &quot;Amharic&quot;,<br>    &quot;ar&quot;: &quot;Arabic&quot;,<br>    &quot;as&quot;: &quot;Assamese&quot;,<br>    &quot;ay&quot;: &quot;Aymara&quot;,<br>    &quot;az&quot;: &quot;Azerbaijani&quot;,<br>    &quot;ba&quot;: &quot;Bashkir&quot;,<br>    &quot;ban&quot;: &quot;Balinese&quot;,<br>    &quot;bbc&quot;: &quot;Batak Toba&quot;,<br>    &quot;bem&quot;: &quot;Bemba&quot;,<br>    &quot;bew&quot;: &quot;Betawi&quot;,<br>    &quot;bg&quot;: &quot;Bulgarian&quot;,<br>    &quot;bho&quot;: &quot;Bhojpuri&quot;,<br>    &quot;bik&quot;: &quot;Bikol&quot;,<br>    &quot;bm&quot;: &quot;Bambara&quot;,<br>    &quot;bn&quot;: &quot;Bengali&quot;,<br>    &quot;br&quot;: &quot;Breton&quot;,<br>    &quot;bs&quot;: &quot;Bosnian&quot;,<br>    &quot;btx&quot;: &quot;Batak Karo&quot;,<br>    &quot;bts&quot;: &quot;Batak Simalungun&quot;,<br>    &quot;bua&quot;: &quot;Buryat&quot;,<br>    &quot;ca&quot;: &quot;Catalan&quot;,<br>    &quot;ceb&quot;: &quot;Cebuano&quot;,<br>    &quot;cgg&quot;: &quot;Kiga&quot;,<br>    &quot;chm&quot;: &quot;Meadow Mari&quot;,<br>    &quot;ckb&quot;: &quot;Kurdish (Sorani)&quot;,<br>    &quot;cnh&quot;: &quot;Hakha Chin&quot;,<br>    &quot;co&quot;: &quot;Corsican&quot;,<br>    &quot;crh&quot;: &quot;Crimean Tatar&quot;,<br>    &quot;crs&quot;: &quot;Seychellois Creole&quot;,<br>    &quot;cs&quot;: &quot;Czech&quot;,<br>    &quot;cv&quot;: &quot;Chuvash&quot;,<br>    &quot;cy&quot;: &quot;Welsh&quot;,<br>    &quot;da&quot;: &quot;Danish&quot;,<br>    &quot;de&quot;: &quot;German&quot;,<br>    &quot;din&quot;: &quot;Dinka&quot;,<br>    &quot;doi&quot;: &quot;Dogri&quot;,<br>    &quot;dov&quot;: &quot;Dombe&quot;,<br>    &quot;dv&quot;: &quot;Dhivehi&quot;,<br>    &quot;dz&quot;: &quot;Dzongkha&quot;,<br>    &quot;ee&quot;: &quot;Ewe&quot;,<br>    &quot;el&quot;: &quot;Greek&quot;,<br>    &quot;en&quot;: &quot;English&quot;,<br>    &quot;eo&quot;: &quot;Esperanto&quot;,<br>    &quot;es&quot;: &quot;Spanish&quot;,<br>    &quot;et&quot;: &quot;Estonian&quot;,<br>    &quot;eu&quot;: &quot;Basque&quot;,<br>    &quot;fa&quot;: &quot;Persian&quot;,<br>    &quot;ff&quot;: &quot;Fula&quot;,<br>    &quot;fi&quot;: &quot;Finnish&quot;,<br>    &quot;fil&quot;: &quot;Filipino (Tagalog)&quot;,<br>    &quot;fj&quot;: &quot;Fijian&quot;,<br>    &quot;fr&quot;: &quot;French&quot;,<br>    &quot;fr-CA&quot;: &quot;French (Canada)&quot;,<br>    &quot;fr-FR&quot;: &quot;French (France)&quot;,<br>    &quot;fy&quot;: &quot;Frisian&quot;,<br>    &quot;ga&quot;: &quot;Irish&quot;,<br>    &quot;gaa&quot;: &quot;Ga&quot;,<br>    &quot;gd&quot;: &quot;Scottish Gaelic&quot;,<br>    &quot;gl&quot;: &quot;Galician&quot;,<br>    &quot;gn&quot;: &quot;Guarani&quot;,<br>    &quot;gom&quot;: &quot;Konkani&quot;,<br>    &quot;gu&quot;: &quot;Gujarati&quot;,<br>    &quot;gv&quot;: &quot;Manx&quot;,<br>    &quot;ha&quot;: &quot;Hausa&quot;,<br>    &quot;haw&quot;: &quot;Hawaiian&quot;,<br>    &quot;he&quot;: &quot;Hebrew&quot;,<br>    &quot;hi&quot;: &quot;Hindi&quot;,<br>    &quot;hil&quot;: &quot;Hiligaynon&quot;,<br>    &quot;hmn&quot;: &quot;Hmong&quot;,<br>    &quot;hr&quot;: &quot;Croatian&quot;,<br>    &quot;hrx&quot;: &quot;Hunsrik&quot;,<br>    &quot;ht&quot;: &quot;Haitian Creole&quot;,<br>    &quot;hu&quot;: &quot;Hungarian&quot;,<br>    &quot;hy&quot;: &quot;Armenian&quot;,<br>    &quot;id&quot;: &quot;Indonesian&quot;,<br>    &quot;ig&quot;: &quot;Igbo&quot;,<br>    &quot;ilo&quot;: &quot;Ilocano&quot;,<br>    &quot;is&quot;: &quot;Icelandic&quot;,<br>    &quot;it&quot;: &quot;Italian&quot;,<br>    &quot;iw&quot;: &quot;Hebrew&quot;,<br>    &quot;ja&quot;: &quot;Japanese&quot;,<br>    &quot;jv&quot;: &quot;Javanese&quot;,<br>    &quot;jw&quot;: &quot;Javanese&quot;,<br>    &quot;ka&quot;: &quot;Georgian&quot;,<br>    &quot;kk&quot;: &quot;Kazakh&quot;,<br>    &quot;km&quot;: &quot;Khmer&quot;,<br>    &quot;kn&quot;: &quot;Kannada&quot;,<br>    &quot;ko&quot;: &quot;Korean&quot;,<br>    &quot;kri&quot;: &quot;Krio&quot;,<br>    &quot;ku&quot;: &quot;Kurdish (Kurmanji)&quot;,<br>    &quot;ktu&quot;: &quot;Kituba&quot;,<br>    &quot;ky&quot;: &quot;Kyrgyz&quot;,<br>    &quot;la&quot;: &quot;Latin&quot;,<br>    &quot;lb&quot;: &quot;Luxembourgish&quot;,<br>    &quot;lg&quot;: &quot;Ganda (Luganda)&quot;,<br>    &quot;li&quot;: &quot;Limburgish&quot;,<br>    &quot;lij&quot;: &quot;Ligurian&quot;,<br>    &quot;lmo&quot;: &quot;Lombard&quot;,<br>    &quot;ln&quot;: &quot;Lingala&quot;,<br>    &quot;lo&quot;: &quot;Lao&quot;,<br>    &quot;lt&quot;: &quot;Lithuanian&quot;,<br>    &quot;ltg&quot;: &quot;Latgalian&quot;,<br>    &quot;luo&quot;: &quot;Luo&quot;,<br>    &quot;lus&quot;: &quot;Mizo&quot;,<br>    &quot;lv&quot;: &quot;Latvian&quot;,<br>    &quot;mai&quot;: &quot;Maithili&quot;,<br>    &quot;mak&quot;: &quot;Makassar&quot;,<br>    &quot;mg&quot;: &quot;Malagasy&quot;,<br>    &quot;mi&quot;: &quot;Maori&quot;,<br>    &quot;min&quot;: &quot;Minangkabau&quot;,<br>    &quot;mk&quot;: &quot;Macedonian&quot;,<br>    &quot;ml&quot;: &quot;Malayalam&quot;,<br>    &quot;mn&quot;: &quot;Mongolian&quot;,<br>    &quot;mr&quot;: &quot;Marathi&quot;,<br>    &quot;ms&quot;: &quot;Malay&quot;,<br>    &quot;mt&quot;: &quot;Maltese&quot;,<br>    &quot;my&quot;: &quot;Burmese&quot;,<br>    &quot;ne&quot;: &quot;Nepali&quot;,<br>    &quot;new&quot;: &quot;Newari&quot;,<br>    &quot;nl&quot;: &quot;Dutch&quot;,<br>    &quot;no&quot;: &quot;Norwegian&quot;,<br>    &quot;nr&quot;: &quot;Southern Ndebele&quot;,<br>    &quot;nso&quot;: &quot;Northern Sotho (Sepedi)&quot;,<br>    &quot;nus&quot;: &quot;Nuer&quot;,<br>    &quot;ny&quot;: &quot;Chichewa (Nyanja)&quot;,<br>    &quot;oc&quot;: &quot;Occitan&quot;,<br>    &quot;om&quot;: &quot;Oromo&quot;,<br>    &quot;or&quot;: &quot;Odia (Oriya)&quot;,<br>    &quot;pa&quot;: &quot;Punjabi&quot;,<br>    &quot;pag&quot;: &quot;Pangasinan&quot;,<br>    &quot;pam&quot;: &quot;Kapampangan&quot;,<br>    &quot;pap&quot;: &quot;Papiamento&quot;,<br>    &quot;pl&quot;: &quot;Polish&quot;,<br>    &quot;ps&quot;: &quot;Pashto&quot;,<br>    &quot;pt&quot;: &quot;Portuguese&quot;,<br>    &quot;pt-BR&quot;: &quot;Portuguese (Brazil)&quot;,<br>    &quot;pt-PT&quot;: &quot;Portuguese (Portugal)&quot;,<br>    &quot;qu&quot;: &quot;Quechua&quot;,<br>    &quot;ro&quot;: &quot;Romanian&quot;,<br>    &quot;rom&quot;: &quot;Romani&quot;,<br>    &quot;rn&quot;: &quot;Rundi&quot;,<br>    &quot;ru&quot;: &quot;Russian&quot;,<br>    &quot;rw&quot;: &quot;Kinyarwanda&quot;,<br>    &quot;sa&quot;: &quot;Sanskrit&quot;,<br>    &quot;scn&quot;: &quot;Sicilian&quot;,<br>    &quot;sd&quot;: &quot;Sindhi&quot;,<br>    &quot;sg&quot;: &quot;Sango&quot;,<br>    &quot;shn&quot;: &quot;Shan&quot;,<br>    &quot;si&quot;: &quot;Sinhala&quot;,<br>    &quot;sk&quot;: &quot;Slovak&quot;,<br>    &quot;sl&quot;: &quot;Slovenian&quot;,<br>    &quot;sm&quot;: &quot;Samoan&quot;,<br>    &quot;sn&quot;: &quot;Shona&quot;,<br>    &quot;so&quot;: &quot;Somali&quot;,<br>    &quot;sq&quot;: &quot;Albanian&quot;,<br>    &quot;sr&quot;: &quot;Serbian&quot;,<br>    &quot;ss&quot;: &quot;Swati&quot;,<br>    &quot;st&quot;: &quot;Sotho&quot;,<br>    &quot;su&quot;: &quot;Sundanese&quot;,<br>    &quot;sv&quot;: &quot;Swedish&quot;,<br>    &quot;sw&quot;: &quot;Swahili&quot;,<br>    &quot;szl&quot;: &quot;Silesian&quot;,<br>    &quot;ta&quot;: &quot;Tamil&quot;,<br>    &quot;te&quot;: &quot;Telugu&quot;,<br>    &quot;tet&quot;: &quot;Tetum&quot;,<br>    &quot;tg&quot;: &quot;Tajik&quot;,<br>    &quot;th&quot;: &quot;Thai&quot;,<br>    &quot;ti&quot;: &quot;Tigrinya&quot;,<br>    &quot;tk&quot;: &quot;Turkmen&quot;,<br>    &quot;tl&quot;: &quot;Filipino (Tagalog)&quot;,<br>    &quot;tn&quot;: &quot;Tswana&quot;,<br>    &quot;tr&quot;: &quot;Turkish&quot;,<br>    &quot;ts&quot;: &quot;Tsonga&quot;,<br>    &quot;tt&quot;: &quot;Tatar&quot;,<br>    &quot;ug&quot;: &quot;Uyghur&quot;,<br>    &quot;uk&quot;: &quot;Ukrainian&quot;,<br>    &quot;ur&quot;: &quot;Urdu&quot;,<br>    &quot;uz&quot;: &quot;Uzbek&quot;,<br>    &quot;vi&quot;: &quot;Vietnamese&quot;,<br>    &quot;xh&quot;: &quot;Xhosa&quot;,<br>    &quot;yi&quot;: &quot;Yiddish&quot;,<br>    &quot;yo&quot;: &quot;Yoruba&quot;,<br>    &quot;yua&quot;: &quot;Yucatec Maya&quot;,<br>    &quot;yue&quot;: &quot;Cantonese&quot;,<br>    &quot;zh&quot;: &quot;Simplified Chinese&quot;,<br>    &quot;zh-TW&quot;: &quot;Traditional Chinese&quot;,<br>    &quot;zu&quot;: &quot;Zulu&quot;</p>
 	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
 
-	// User extension parameter.
+	// <p>User extension parameter.</p>
 	UserExtPara *string `json:"UserExtPara,omitnil,omitempty" name:"UserExtPara"`
 }
 
 type TextTranslationRequest struct {
 	*tchttp.BaseRequest
 	
-	// Text to be translated, which must be encoded in UTF-8 format. Characters not encoded in UTF-8 format cannot be translated. Input valid text. Unconventional content, such as HTML tags, may also cause translation failures. The text length per request must be less than 2,000 characters.
+	// <p>Text to be translated. The text must be encoded in UTF-8 format. Non-UTF-8 encoded characters may cause translation failures. Provide valid text. Unconventional text such as HTML tags may fail to translate. The text length per request cannot exceed 2,000 characters.</p>
 	SourceText *string `json:"SourceText,omitnil,omitempty" name:"SourceText"`
 
-	// Source language. Valid values:
-	//     "auto": "automatic recognition (recognized as a language).",
-	//     "ab": "Abkhaz language.",
-	//     "ace": Acehnese.",
-	//     "ach": "Acholi.",
-	//     "af": "Afrikaans.",
-	//     "ak": "Twi (Akan).",
-	//     "am": "Amharic",
-	//     "ar": "Arabic.",
-	//     "as": "Assamese.",
-	//     "ay": "Aymara.",
-	//     "az": "Azerbaijani.",
-	//     "ba": "Bashkir.",
-	//     "ban": "Balinese",
-	//     "bbc": "Batak Toba.",
-	//     "bem": "Bemba",
-	//     "bew": "Betawi",
-	//     "bg": "Bulgarian.",
-	//     "bho": "Bhojpuri.",
-	//     "bik": "Bikol",
-	//     "bm": "Bambara.",
-	//     "bn": "Bengali.",
-	//     "br": "Breton.",
-	//     "bs": "Bosnian.",
-	//     "btx": "Batak Karo.",
-	//     "bts": "Batak Simalungun.",
-	//     "bua": "Buryat.",
-	//     "ca": "Catalan.",
-	//     "ceb": "Cebuano.",
-	//     "cgg": "Kiga",
-	//     "chm": "Meadow Mari language.",
-	//     "ckb": "Kurdish (Sorani).",
-	//     "cnh": "Hakha Chin.",
-	//     "co": "Corsican.",
-	//     "crh": "Crimean Tatar.",
-	//     "crs": "Seychellois Creole.",
-	//     "cs": "Czech.",
-	//     "cv": "Chuvash.",
-	//     "cy": "Welsh.",
-	//     "da": "Danish.",
-	//     "de": "German.",
-	//     "din": "Dinka",
-	//     "doi": "Dogri.",
-	//     "dov": "Dombe.",
-	//     "dv": "Divehi.",
-	//     "dz": "Dzongkha.",
-	//     "ee": "Ewe",
-	//     "el": "Greek.",
-	//     "en": "English.",
-	//     "eo": "Esperanto.",
-	//     "es": "Spanish.",
-	//     "et": "Estonian.",
-	//     "eu": "Basque.",
-	//     "fa": "Persian.",
-	//     "ff": "Fula.",
-	//     "fi": "Finnish.",
-	//     "fil": "Filipino (Tagalog).",
-	//     "fj": "Fijian.",
-	//     "fr": "French.",
-	//     "fr-CA": "French (Canada).",
-	//     "fr-FR": "French (France).",
-	//     "fy": "Frisian.",
-	//     "ga": "Irish.",
-	//     "gaa": "Ga.",
-	//     "gd": "Scottish Gaelic.",
-	//     "gl": "Galician.",
-	//     "gn": "Guarani.",
-	//     "gom": "Goan Konkani.",
-	//     "gu": "Gujarati.",
-	//     "gv": "Manx.",
-	//     "ha": "Hausa",
-	//     "haw": "Hawaiian.",
-	//     "he": "Hebrew.",
-	//     "hi": "Hindi.",
-	//     "hil": "Hiligaynon.",
-	//     "hmn": "Hmong.",
-	//     "hr": "Croatian.",
-	//     "hrx": "Hunsrik.",
-	//     "ht": "Haitian Creole.",
-	//     "hu": "Hungarian.",
-	//     "hy": "Armenian.",
-	//     "id": "Indonesian.",
-	//     "ig": "Igbo",
-	//     "ilo": "Iloko.",
-	//     "is": "Icelandic.",
-	//     "it": "Italian.",
-	//     "iw": "Hebrew.",
-	//     "ja": "Japanese.",
-	//     "jv": "Javanese.",
-	//     "jw": "Javanese.",
-	//     "ka": "Georgian.",
-	//     "kk": "Kazakh.",
-	//     "km": "Khmer.",
-	//     "kn": "Kanada.",
-	//     "ko": "Korean.",
-	//     "kri": "Krio",
-	//     "ku": "Kurdish (Kurmanji).",
-	//     "ktu": "Kituba.",
-	//     "ky": "Kirghiz.",
-	//     "la": "Latin.",
-	//     "lb": "Luxembourgish.",
-	//     "lg": "Ganda (Luganda).",
-	//     "li": "Limburgish.",
-	//     "lij": "Ligurian.",
-	//     "lmo": "Lombard.",
-	//     "ln": "Lingala.",
-	//     "lo": "Lao.",
-	//     "lt": "Lithuanian.",
-	//     "ltg": "Latgalian.",
-	//     "luo": "Luo",
-	//     "lus": "Mizo.",
-	//     "lv": "Latvian.",
-	//     "mai": "Maithili.",
-	//     "mak": "Makassar.",
-	//     "mg": "Malagasy.",
-	//     "mi": "Maori.",
-	//     "min": "Minangkabau.",
-	//     "mk": "Macedonian.",
-	//     "ml": "Malayalam.",
-	//     "mn": "Mongolian.",
-	//     "mr": "Marathi.",
-	//     "ms": "Malay.",
-	//     "mt": "Maltese.",
-	//     "my": "Burmese.",
-	//     "ne": "Nepali.",
-	//     "new": "Nepali (Newar).",
-	//     "nl": "Dutch.",
-	//     "no": "Norwegian.",
-	//     "nr": "Ndebele (South).",
-	//     "nso": "Northern Sotho (Sepedi).",
-	//     "nus": "Nuer.",
-	//     "ny": "Chichewa (Nyanja).",
-	//     "oc": "Occitan.",
-	//     "om": "Oromo",
-	//     "or": "Odia (Oria).",
-	//     "pa": "Punjabi.",
-	//     "pag": "Pangasinan.",
-	//     "pam": "Kapampangan.",
-	//     "pap": "Papiamento",
-	//     "pl": "Polish.",
-	//     "ps": "Pashto",
-	//     "pt": "Portuguese.",
-	//     "pt-BR": "Portuguese (Brazil).",
-	//     "pt-PT": "Portuguese (Portugal).",
-	//     "qu": "Quechuan.",
-	//     "ro": "Romanian.",
-	//     "rom": "Romani.",
-	//     "rn": "Rundi",
-	//     "ru": "Russian.",
-	//     "rw": "Kinyarwanda.",
-	//     "sa": "Sanskrit.",
-	//     "scn": "Sicilian.",
-	//     "sd": "Sindhi.",
-	//     "sg": "Sango",
-	//     "shn": "Shan.",
-	//     "si": "Sinhalese.",
-	//     "sk": "Slovak.",
-	//     "sl": "Slovene.",
-	//     "sm": "Samoan.",
-	//     "sn": "Shona.",
-	//     "so": "Somali.",
-	//     "sq": "Albanian.",
-	//     "sr": "Serbian.",
-	//     "ss": "Swati.",
-	//     "st": "Sesotho.",
-	//     "su": "Sundanese.",
-	//     "sv": "Swedish.",
-	//     "sw": "Swahili.",
-	//     "szl": "Silesian.",
-	//     "ta": "Tamil.",
-	//     "te": "Telugu.",
-	//     "tet": "Tetum.",
-	//     "tg": "Tajik.",
-	//     "th": "Thai.",
-	//     "ti": "Tigrinya.",
-	//     "tk": "Turkmen.",
-	//     "tl": " Filipino (Tagalog).",
-	//     "tn": "Tswana.",
-	//     "tr": "Turkish.",
-	//     "ts": "Tsonga.",
-	//     "tt": "Tatar.",
-	//     "ug": "Uyghur.",
-	//     "uk": "Ukrainian.",
-	//     "ur": "Urdu.",
-	//     "uz": "Uzbek.",
-	//     "vi": "Vietnamese.",
-	//     "xh": "Xhosa.",
-	//     "yi": "Yiddish.",
-	//     "yo": "Yoruba.",
-	//     "yua": "Yucatec Maya.",
-	//     "yue": "Cantonese.",
-	//     "zh": "Simplified Chinese.",
-	//     "zh-TW": "Chinese (Traditional).",
-	//     "zu": "Zulu."
+	// <p>Source language. Valid values:<br>    &quot;auto&quot;: &quot; Auto-detection (detects as one language)&quot;,<br>    &quot;ab&quot;: &quot;Abkhaz&quot;,<br>    &quot;ace&quot;: &quot;Acehnese&quot;,<br>    &quot;ach&quot;: &quot;Acholi&quot;,<br>    &quot;af&quot;: &quot;Afrikaans&quot;,<br>    &quot;ak&quot;: &quot;Akan&quot;,<br>    &quot;am&quot;: &quot;Amharic&quot;,<br>    &quot;ar&quot;: &quot;Arabic&quot;,<br>    &quot;as&quot;: &quot;Assamese&quot;,<br>    &quot;ay&quot;: &quot;Aymara&quot;,<br>    &quot;az&quot;: &quot;Azerbaijani&quot;,<br>    &quot;ba&quot;: &quot;Bashkir&quot;,<br>    &quot;ban&quot;: &quot;Balinese&quot;,<br>    &quot;bbc&quot;: &quot;Batak Toba&quot;,<br>    &quot;bem&quot;: &quot;Bemba&quot;,<br>    &quot;bew&quot;: &quot;Betawi&quot;,<br>    &quot;bg&quot;: &quot;Bulgarian&quot;,<br>    &quot;bho&quot;: &quot;Bhojpuri&quot;,<br>    &quot;bik&quot;: &quot;Bikol&quot;,<br>    &quot;bm&quot;: &quot;Bambara&quot;,<br>    &quot;bn&quot;: &quot;Bengali&quot;,<br>    &quot;br&quot;: &quot;Breton&quot;,<br>    &quot;bs&quot;: &quot;Bosnian&quot;,<br>    &quot;btx&quot;: &quot;Batak Karo&quot;,<br>    &quot;bts&quot;: &quot;Batak Simalungun&quot;,<br>    &quot;bua&quot;: &quot;Buryat&quot;,<br>    &quot;ca&quot;: &quot;Catalan&quot;,<br>    &quot;ceb&quot;: &quot;Cebuano&quot;,<br>    &quot;cgg&quot;: &quot;Kiga&quot;,<br>    &quot;chm&quot;: &quot;Meadow Mari&quot;,<br>    &quot;ckb&quot;: &quot;Kurdish (Sorani)&quot;,<br>    &quot;cnh&quot;: &quot;Hakha Chin&quot;,<br>    &quot;co&quot;: &quot;Corsican&quot;,<br>    &quot;crh&quot;: &quot;Crimean Tatar&quot;,<br>    &quot;crs&quot;: &quot;Seychellois Creole&quot;,<br>    &quot;cs&quot;: &quot;Czech&quot;,<br>    &quot;cv&quot;: &quot;Chuvash&quot;,<br>    &quot;cy&quot;: &quot;Welsh&quot;,<br>    &quot;da&quot;: &quot;Danish&quot;,<br>    &quot;de&quot;: &quot;German&quot;,<br>    &quot;din&quot;: &quot;Dinka&quot;,<br>    &quot;doi&quot;: &quot;Dogri&quot;,<br>    &quot;dov&quot;: &quot;Dombe&quot;,<br>    &quot;dv&quot;: &quot;Dhivehi&quot;,<br>    &quot;dz&quot;: &quot;Dzongkha&quot;,<br>    &quot;ee&quot;: &quot;Ewe&quot;,<br>    &quot;el&quot;: &quot;Greek&quot;,<br>    &quot;en&quot;: &quot;English&quot;,<br>    &quot;eo&quot;: &quot;Esperanto&quot;,<br>    &quot;es&quot;: &quot;Spanish&quot;,<br>    &quot;et&quot;: &quot;Estonian&quot;,<br>    &quot;eu&quot;: &quot;Basque&quot;,<br>    &quot;fa&quot;: &quot;Persian&quot;,<br>    &quot;ff&quot;: &quot;Fula&quot;,<br>    &quot;fi&quot;: &quot;Finnish&quot;,<br>    &quot;fil&quot;: &quot;Filipino (Tagalog)&quot;,<br>    &quot;fj&quot;: &quot;Fijian&quot;,<br>    &quot;fr&quot;: &quot;French&quot;,<br>    &quot;fr-CA&quot;: &quot;French (Canada)&quot;,<br>    &quot;fr-FR&quot;: &quot;French (France)&quot;,<br>    &quot;fy&quot;: &quot;Frisian&quot;,<br>    &quot;ga&quot;: &quot;Irish&quot;,<br>    &quot;gaa&quot;: &quot;Ga&quot;,<br>    &quot;gd&quot;: &quot;Scottish Gaelic&quot;,<br>    &quot;gl&quot;: &quot;Galician&quot;,<br>    &quot;gn&quot;: &quot;Guarani&quot;,<br>    &quot;gom&quot;: &quot;Konkani&quot;,<br>    &quot;gu&quot;: &quot;Gujarati&quot;,<br>    &quot;gv&quot;: &quot;Manx&quot;,<br>    &quot;ha&quot;: &quot;Hausa&quot;,<br>    &quot;haw&quot;: &quot;Hawaiian&quot;,<br>    &quot;he&quot;: &quot;Hebrew&quot;,<br>    &quot;hi&quot;: &quot;Hindi&quot;,<br>    &quot;hil&quot;: &quot;Hiligaynon&quot;,<br>    &quot;hmn&quot;: &quot;Hmong&quot;,<br>    &quot;hr&quot;: &quot;Croatian&quot;,<br>    &quot;hrx&quot;: &quot;Hunsrik&quot;,<br>    &quot;ht&quot;: &quot;Haitian Creole&quot;,<br>    &quot;hu&quot;: &quot;Hungarian&quot;,<br>    &quot;hy&quot;: &quot;Armenian&quot;,<br>    &quot;id&quot;: &quot;Indonesian&quot;,<br>    &quot;ig&quot;: &quot;Igbo&quot;,<br>    &quot;ilo&quot;: &quot;Ilocano&quot;,<br>    &quot;is&quot;: &quot;Icelandic&quot;,<br>    &quot;it&quot;: &quot;Italian&quot;,<br>    &quot;iw&quot;: &quot;Hebrew&quot;,<br>    &quot;ja&quot;: &quot;Japanese&quot;,<br>    &quot;jv&quot;: &quot;Javanese&quot;,<br>    &quot;jw&quot;: &quot;Javanese&quot;,<br>    &quot;ka&quot;: &quot;Georgian&quot;,<br>    &quot;kk&quot;: &quot;Kazakh&quot;,<br>    &quot;km&quot;: &quot;Khmer&quot;,<br>    &quot;kn&quot;: &quot;Kannada&quot;,<br>    &quot;ko&quot;: &quot;Korean&quot;,<br>    &quot;kri&quot;: &quot;Krio&quot;,<br>    &quot;ku&quot;: &quot;Kurdish (Kurmanji)&quot;,<br>    &quot;ktu&quot;: &quot;Kituba&quot;,<br>    &quot;ky&quot;: &quot;Kyrgyz&quot;,<br>    &quot;la&quot;: &quot;Latin&quot;,<br>    &quot;lb&quot;: &quot;Luxembourgish&quot;,<br>    &quot;lg&quot;: &quot;Ganda (Luganda)&quot;,<br>    &quot;li&quot;: &quot;Limburgish&quot;,<br>    &quot;lij&quot;: &quot;Ligurian&quot;,<br>    &quot;lmo&quot;: &quot;Lombard&quot;,<br>    &quot;ln&quot;: &quot;Lingala&quot;,<br>    &quot;lo&quot;: &quot;Lao&quot;,<br>    &quot;lt&quot;: &quot;Lithuanian&quot;,<br>    &quot;ltg&quot;: &quot;Latgalian&quot;,<br>    &quot;luo&quot;: &quot;Luo&quot;,<br>    &quot;lus&quot;: &quot;Mizo&quot;,<br>    &quot;lv&quot;: &quot;Latvian&quot;,<br>    &quot;mai&quot;: &quot;Maithili&quot;,<br>    &quot;mak&quot;: &quot;Makassar&quot;,<br>    &quot;mg&quot;: &quot;Malagasy&quot;,<br>    &quot;mi&quot;: &quot;Maori&quot;,<br>    &quot;min&quot;: &quot;Minangkabau&quot;,<br>    &quot;mk&quot;: &quot;Macedonian&quot;,<br>    &quot;ml&quot;: &quot;Malayalam&quot;,<br>    &quot;mn&quot;: &quot;Mongolian&quot;,<br>    &quot;mr&quot;: &quot;Marathi&quot;,<br>    &quot;ms&quot;: &quot;Malay&quot;,<br>    &quot;mt&quot;: &quot;Maltese&quot;,<br>    &quot;my&quot;: &quot;Burmese&quot;,<br>    &quot;ne&quot;: &quot;Nepali&quot;,<br>    &quot;new&quot;: &quot;Newari&quot;,<br>    &quot;nl&quot;: &quot;Dutch&quot;,<br>    &quot;no&quot;: &quot;Norwegian&quot;,<br>    &quot;nr&quot;: &quot;Southern Ndebele&quot;,<br>    &quot;nso&quot;: &quot;Northern Sotho (Sepedi)&quot;,<br>    &quot;nus&quot;: &quot;Nuer&quot;,<br>    &quot;ny&quot;: &quot;Chichewa (Nyanja)&quot;,<br>    &quot;oc&quot;: &quot;Occitan&quot;,<br>    &quot;om&quot;: &quot;Oromo&quot;,<br>    &quot;or&quot;: &quot;Odia (Oriya)&quot;,<br>    &quot;pa&quot;: &quot;Punjabi&quot;,<br>    &quot;pag&quot;: &quot;Pangasinan&quot;,<br>    &quot;pam&quot;: &quot;Kapampangan&quot;,<br>    &quot;pap&quot;: &quot;Papiamento&quot;,<br>    &quot;pl&quot;: &quot;Polish&quot;,<br>    &quot;ps&quot;: &quot;Pashto&quot;,<br>    &quot;pt&quot;: &quot;Portuguese&quot;,<br>    &quot;pt-BR&quot;: &quot;Portuguese (Brazil)&quot;,<br>    &quot;pt-PT&quot;: &quot;Portuguese (Portugal)&quot;,<br>    &quot;qu&quot;: &quot;Quechua&quot;,<br>    &quot;ro&quot;: &quot;Romanian&quot;,<br>    &quot;rom&quot;: &quot;Romani&quot;,<br>    &quot;rn&quot;: &quot;Rundi&quot;,<br>    &quot;ru&quot;: &quot;Russian&quot;,<br>    &quot;rw&quot;: &quot;Kinyarwanda&quot;,<br>    &quot;sa&quot;: &quot;Sanskrit&quot;,<br>    &quot;scn&quot;: &quot;Sicilian&quot;,<br>    &quot;sd&quot;: &quot;Sindhi&quot;,<br>    &quot;sg&quot;: &quot;Sango&quot;,<br>    &quot;shn&quot;: &quot;Shan&quot;,<br>    &quot;si&quot;: &quot;Sinhala&quot;,<br>    &quot;sk&quot;: &quot;Slovak&quot;,<br>    &quot;sl&quot;: &quot;Slovenian&quot;,<br>    &quot;sm&quot;: &quot;Samoan&quot;,<br>    &quot;sn&quot;: &quot;Shona&quot;,<br>    &quot;so&quot;: &quot;Somali&quot;,<br>    &quot;sq&quot;: &quot;Albanian&quot;,<br>    &quot;sr&quot;: &quot;Serbian&quot;,<br>    &quot;ss&quot;: &quot;Swati&quot;,<br>    &quot;st&quot;: &quot;Sotho&quot;,<br>    &quot;su&quot;: &quot;Sundanese&quot;,<br>    &quot;sv&quot;: &quot;Swedish&quot;,<br>    &quot;sw&quot;: &quot;Swahili&quot;,<br>    &quot;szl&quot;: &quot;Silesian&quot;,<br>    &quot;ta&quot;: &quot;Tamil&quot;,<br>    &quot;te&quot;: &quot;Telugu&quot;,<br>    &quot;tet&quot;: &quot;Tetum&quot;,<br>    &quot;tg&quot;: &quot;Tajik&quot;,<br>    &quot;th&quot;: &quot;Thai&quot;,<br>    &quot;ti&quot;: &quot;Tigrinya&quot;,<br>    &quot;tk&quot;: &quot;Turkmen&quot;,<br>    &quot;tl&quot;: &quot;Filipino (Tagalog)&quot;,<br>    &quot;tn&quot;: &quot;Tswana&quot;,<br>    &quot;tr&quot;: &quot;Turkish&quot;,<br>    &quot;ts&quot;: &quot;Tsonga&quot;,<br>    &quot;tt&quot;: &quot;Tatar&quot;,<br>    &quot;ug&quot;: &quot;Uyghur&quot;,<br>    &quot;uk&quot;: &quot;Ukrainian&quot;,<br>    &quot;ur&quot;: &quot;Urdu&quot;,<br>    &quot;uz&quot;: &quot;Uzbek&quot;,<br>    &quot;vi&quot;: &quot;Vietnamese&quot;,<br>    &quot;xh&quot;: &quot;Xhosa&quot;,<br>    &quot;yi&quot;: &quot;Yiddish&quot;,<br>    &quot;yo&quot;: &quot;Yoruba&quot;,<br>    &quot;yua&quot;: &quot;Yucatec Maya&quot;,<br>    &quot;yue&quot;: &quot;Cantonese&quot;,<br>    &quot;zh&quot;: &quot;Simplified Chinese&quot;,<br>    &quot;zh-TW&quot;: &quot;Traditional Chinese&quot;,<br>    &quot;zu&quot;: &quot;Zulu&quot;</p>
 	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
 
-	// Target language. Valid values:
-	//     "ab": "Abkhaz language.",
-	//     "ace": "Acehnese.",
-	//     "ach": "Acholi.",
-	//     "af": "Afrikaans.",
-	//     "ak": "Twi (Akan).",
-	//     "am": "Amharic",
-	//     "ar": "Arabic.",
-	//     "as": "Assamese.",
-	//     "ay": "Aymara.",
-	//     "az": "Azerbaijani.",
-	//     "ba": "Bashkir.",
-	//     "ban": "Balinese",
-	//     "bbc": "Batak Toba.",
-	//     "bem": "Bemba",
-	//     "bew": "Betawi",
-	//     "bg": "Bulgarian.",
-	//     "bho": "Bhojpuri.",
-	//     "bik": "Bikol",
-	//     "bm": "Bambara.",
-	//     "bn": "Bengali.",
-	//     "br": "Breton.",
-	//     "bs": "Bosnian.",
-	//     "btx": "Batak Karo.",
-	//     "bts": "Batak Simalungun.",
-	//     "bua": "Buryat.",
-	//     "ca": "Catalan.",
-	//     "ceb": "Cebuano.",
-	//     "cgg": "Kiga",
-	//     "chm": "Meadow Mari language.",
-	//     "ckb": "Kurdish (Sorani).",
-	//     "cnh": "Hakha Chin.",
-	//     "co": "Corsican.",
-	//     "crh": "Crimean Tatar.",
-	//     "crs": "Seychellois Creole.",
-	//     "cs": "Czech.",
-	//     "cv": "Chuvash.",
-	//     "cy": "Welsh.",
-	//     "da": "Danish.",
-	//     "de": "German.",
-	//     "din": "Dinka",
-	//     "doi": "Dogri.",
-	//     "dov": "Dombe.",
-	//     "dv": "Divehi.",
-	//     "dz": "Dzongkha.",
-	//     "ee": "Ewe",
-	//     "el": "Greek.",
-	//     "en": "English.",
-	//     "eo": "Esperanto.",
-	//     "es": "Spanish.",
-	//     "et": "Estonian.",
-	//     "eu": "Basque.",
-	//     "fa": "Persian.",
-	//     "ff": "Fula.",
-	//     "fi": "Finnish.",
-	//     "fil": "Filipino (Tagalog).",
-	//     "fj": "Fijian.",
-	//     "fr": "French.",
-	//     "fr-CA": "French (Canada).",
-	//     "fr-FR": "French (France).",
-	//     "fy": "Frisian.",
-	//     "ga": "Irish.",
-	//     "gaa": "Ga.",
-	//     "gd": "Scottish Gaelic.",
-	//     "gl": "Galician.",
-	//     "gn": "Guarani.",
-	//     "gom": "Goan Konkani.",
-	//     "gu": "Gujarati.",
-	//     "gv": "Manx.",
-	//     "ha": "Hausa",
-	//     "haw": "Hawaiian.",
-	//     "he": "Hebrew.",
-	//     "hi": "Hindi.",
-	//     "hil": "Hiligaynon.",
-	//     "hmn": "Hmong.",
-	//     "hr": "Croatian.",
-	//     "hrx": "Hunsrik.",
-	//     "ht": "Haitian Creole.",
-	//     "hu": "Hungarian.",
-	//     "hy": "Armenian.",
-	//     "id": "Indonesian.",
-	//     "ig": "Igbo",
-	//     "ilo": "Iloko.",
-	//     "is": "Icelandic.",
-	//     "it": "Italian.",
-	//     "iw": "Hebrew.",
-	//     "ja": "Japanese.",
-	//     "jv": "Javanese.",
-	//     "jw": "Javanese.",
-	//     "ka": "Georgian.",
-	//     "kk": "Kazakh.",
-	//     "km": "Khmer.",
-	//     "kn": "Kanada.",
-	//     "ko": "Korean.",
-	//     "kri": "Krio",
-	//     "ku": "Kurdish (Kurmanji).",
-	//     "ktu": "Kituba.",
-	//     "ky": "Kirghiz.",
-	//     "la": "Latin.",
-	//     "lb": "Luxembourgish.",
-	//     "lg": "Ganda (Luganda).",
-	//     "li": "Limburgish.",
-	//     "lij": "Ligurian.",
-	//     "lmo": "Lombard.",
-	//     "ln": "Lingala.",
-	//     "lo": "Lao.",
-	//     "lt": "Lithuanian.",
-	//     "ltg": "Latgalian.",
-	//     "luo": "Luo",
-	//     "lus": "Mizo.",
-	//     "lv": "Latvian.",
-	//     "mai": "Maithili.",
-	//     "mak": "Makassar.",
-	//     "mg": "Malagasy.",
-	//     "mi": "Maori.",
-	//     "min": "Minangkabau.",
-	//     "mk": "Macedonian.",
-	//     "ml": "Malayalam.",
-	//     "mn": "Mongolian.",
-	//     "mr": "Marathi.",
-	//     "ms": "Malay.",
-	//     "mt": "Maltese.",
-	//     "my": "Burmese.",
-	//     "ne": "Nepali.",
-	//     "new": "Nepali (Newar).",
-	//     "nl": "Dutch.",
-	//     "no": "Norwegian.",
-	//     "nr": "Ndebele (South).",
-	//     "nso": "Northern Sotho (Sepedi).",
-	//     "nus": "Nuer.",
-	//     "ny": "Chichewa (Nyanja).",
-	//     "oc": "Occitan.",
-	//     "om": "Oromo",
-	//     "or": "Odia (Oria).",
-	//     "pa": "Punjabi.",
-	//     "pag": "Pangasinan.",
-	//     "pam": "Kapampangan.",
-	//     "pap": "Papiamento",
-	//     "pl": "Polish.",
-	//     "ps": "Pashto",
-	//     "pt": "Portuguese.",
-	//     "pt-BR": "Portuguese (Brazil).",
-	//     "pt-PT": "Portuguese (Portugal).",
-	//     "qu": "Quechuan.",
-	//     "ro": "Romanian.",
-	//     "rom": "Romani.",
-	//     "rn": "Rundi",
-	//     "ru": "Russian.",
-	//     "rw": "Kinyarwanda.",
-	//     "sa": "Sanskrit.",
-	//     "scn": "Sicilian.",
-	//     "sd": "Sindhi.",
-	//     "sg": "Sango",
-	//     "shn": "Shan.",
-	//     "si": "Sinhalese.",
-	//     "sk": "Slovak.",
-	//     "sl": "Slovene.",
-	//     "sm": "Samoan.",
-	//     "sn": "Shona.",
-	//     "so": "Somali.",
-	//     "sq": "Albanian.",
-	//     "sr": "Serbian.",
-	//     "ss": "Swati.",
-	//     "st": "Sesotho.",
-	//     "su": "Sundanese.",
-	//     "sv": "Swedish.",
-	//     "sw": "Swahili.",
-	//     "szl": "Silesian.",
-	//     "ta": "Tamil.",
-	//     "te": "Telugu.",
-	//     "tet": "Tetum.",
-	//     "tg": "Tajik.",
-	//     "th": "Thai.",
-	//     "ti": "Tigrinya.",
-	//     "tk": "Turkmen.",
-	//     "tl": " Filipino (Tagalog).",
-	//     "tn": "Tswana.",
-	//     "tr": "Turkish.",
-	//     "ts": "Tsonga.",
-	//     "tt": "Tatar.",
-	//     "ug": "Uyghur.",
-	//     "uk": "Ukrainian.",
-	//     "ur": "Urdu.",
-	//     "uz": "Uzbek.",
-	//     "vi": "Vietnamese.",
-	//     "xh": "Xhosa.",
-	//     "yi": "Yiddish.",
-	//     "yo": "Yoruba.",
-	//     "yua": "Yucatec Maya.",
-	//     "yue": "Cantonese.",
-	//     "zh": "Simplified Chinese.",
-	//     "zh-TW": "Chinese (Traditional).",
-	//     "zu": "Zulu."
+	// <p>Target language. Valid values:<br>    &quot;ab&quot;: &quot;Abkhaz&quot;,<br>    &quot;ace&quot;: &quot;Acehnese&quot;,<br>    &quot;ach&quot;: &quot;Acholi&quot;,<br>    &quot;af&quot;: &quot;Afrikaans&quot;,<br>    &quot;ak&quot;: &quot;Akan&quot;,<br>    &quot;am&quot;: &quot;Amharic&quot;,<br>    &quot;ar&quot;: &quot;Arabic&quot;,<br>    &quot;as&quot;: &quot;Assamese&quot;,<br>    &quot;ay&quot;: &quot;Aymara&quot;,<br>    &quot;az&quot;: &quot;Azerbaijani&quot;,<br>    &quot;ba&quot;: &quot;Bashkir&quot;,<br>    &quot;ban&quot;: &quot;Balinese&quot;,<br>    &quot;bbc&quot;: &quot;Batak Toba&quot;,<br>    &quot;bem&quot;: &quot;Bemba&quot;,<br>    &quot;bew&quot;: &quot;Betawi&quot;,<br>    &quot;bg&quot;: &quot;Bulgarian&quot;,<br>    &quot;bho&quot;: &quot;Bhojpuri&quot;,<br>    &quot;bik&quot;: &quot;Bikol&quot;,<br>    &quot;bm&quot;: &quot;Bambara&quot;,<br>    &quot;bn&quot;: &quot;Bengali&quot;,<br>    &quot;br&quot;: &quot;Breton&quot;,<br>    &quot;bs&quot;: &quot;Bosnian&quot;,<br>    &quot;btx&quot;: &quot;Batak Karo&quot;,<br>    &quot;bts&quot;: &quot;Batak Simalungun&quot;,<br>    &quot;bua&quot;: &quot;Buryat&quot;,<br>    &quot;ca&quot;: &quot;Catalan&quot;,<br>    &quot;ceb&quot;: &quot;Cebuano&quot;,<br>    &quot;cgg&quot;: &quot;Kiga&quot;,<br>    &quot;chm&quot;: &quot;Meadow Mari&quot;,<br>    &quot;ckb&quot;: &quot;Kurdish (Sorani)&quot;,<br>    &quot;cnh&quot;: &quot;Hakha Chin&quot;,<br>    &quot;co&quot;: &quot;Corsican&quot;,<br>    &quot;crh&quot;: &quot;Crimean Tatar&quot;,<br>    &quot;crs&quot;: &quot;Seychellois Creole&quot;,<br>    &quot;cs&quot;: &quot;Czech&quot;,<br>    &quot;cv&quot;: &quot;Chuvash&quot;,<br>    &quot;cy&quot;: &quot;Welsh&quot;,<br>    &quot;da&quot;: &quot;Danish&quot;,<br>    &quot;de&quot;: &quot;German&quot;,<br>    &quot;din&quot;: &quot;Dinka&quot;,<br>    &quot;doi&quot;: &quot;Dogri&quot;,<br>    &quot;dov&quot;: &quot;Dombe&quot;,<br>    &quot;dv&quot;: &quot;Dhivehi&quot;,<br>    &quot;dz&quot;: &quot;Dzongkha&quot;,<br>    &quot;ee&quot;: &quot;Ewe&quot;,<br>    &quot;el&quot;: &quot;Greek&quot;,<br>    &quot;en&quot;: &quot;English&quot;,<br>    &quot;eo&quot;: &quot;Esperanto&quot;,<br>    &quot;es&quot;: &quot;Spanish&quot;,<br>    &quot;et&quot;: &quot;Estonian&quot;,<br>    &quot;eu&quot;: &quot;Basque&quot;,<br>    &quot;fa&quot;: &quot;Persian&quot;,<br>    &quot;ff&quot;: &quot;Fula&quot;,<br>    &quot;fi&quot;: &quot;Finnish&quot;,<br>    &quot;fil&quot;: &quot;Filipino (Tagalog)&quot;,<br>    &quot;fj&quot;: &quot;Fijian&quot;,<br>    &quot;fr&quot;: &quot;French&quot;,<br>    &quot;fr-CA&quot;: &quot;French (Canada)&quot;,<br>    &quot;fr-FR&quot;: &quot;French (France)&quot;,<br>    &quot;fy&quot;: &quot;Frisian&quot;,<br>    &quot;ga&quot;: &quot;Irish&quot;,<br>    &quot;gaa&quot;: &quot;Ga&quot;,<br>    &quot;gd&quot;: &quot;Scottish Gaelic&quot;,<br>    &quot;gl&quot;: &quot;Galician&quot;,<br>    &quot;gn&quot;: &quot;Guarani&quot;,<br>    &quot;gom&quot;: &quot;Konkani&quot;,<br>    &quot;gu&quot;: &quot;Gujarati&quot;,<br>    &quot;gv&quot;: &quot;Manx&quot;,<br>    &quot;ha&quot;: &quot;Hausa&quot;,<br>    &quot;haw&quot;: &quot;Hawaiian&quot;,<br>    &quot;he&quot;: &quot;Hebrew&quot;,<br>    &quot;hi&quot;: &quot;Hindi&quot;,<br>    &quot;hil&quot;: &quot;Hiligaynon&quot;,<br>    &quot;hmn&quot;: &quot;Hmong&quot;,<br>    &quot;hr&quot;: &quot;Croatian&quot;,<br>    &quot;hrx&quot;: &quot;Hunsrik&quot;,<br>    &quot;ht&quot;: &quot;Haitian Creole&quot;,<br>    &quot;hu&quot;: &quot;Hungarian&quot;,<br>    &quot;hy&quot;: &quot;Armenian&quot;,<br>    &quot;id&quot;: &quot;Indonesian&quot;,<br>    &quot;ig&quot;: &quot;Igbo&quot;,<br>    &quot;ilo&quot;: &quot;Ilocano&quot;,<br>    &quot;is&quot;: &quot;Icelandic&quot;,<br>    &quot;it&quot;: &quot;Italian&quot;,<br>    &quot;iw&quot;: &quot;Hebrew&quot;,<br>    &quot;ja&quot;: &quot;Japanese&quot;,<br>    &quot;jv&quot;: &quot;Javanese&quot;,<br>    &quot;jw&quot;: &quot;Javanese&quot;,<br>    &quot;ka&quot;: &quot;Georgian&quot;,<br>    &quot;kk&quot;: &quot;Kazakh&quot;,<br>    &quot;km&quot;: &quot;Khmer&quot;,<br>    &quot;kn&quot;: &quot;Kannada&quot;,<br>    &quot;ko&quot;: &quot;Korean&quot;,<br>    &quot;kri&quot;: &quot;Krio&quot;,<br>    &quot;ku&quot;: &quot;Kurdish (Kurmanji)&quot;,<br>    &quot;ktu&quot;: &quot;Kituba&quot;,<br>    &quot;ky&quot;: &quot;Kyrgyz&quot;,<br>    &quot;la&quot;: &quot;Latin&quot;,<br>    &quot;lb&quot;: &quot;Luxembourgish&quot;,<br>    &quot;lg&quot;: &quot;Ganda (Luganda)&quot;,<br>    &quot;li&quot;: &quot;Limburgish&quot;,<br>    &quot;lij&quot;: &quot;Ligurian&quot;,<br>    &quot;lmo&quot;: &quot;Lombard&quot;,<br>    &quot;ln&quot;: &quot;Lingala&quot;,<br>    &quot;lo&quot;: &quot;Lao&quot;,<br>    &quot;lt&quot;: &quot;Lithuanian&quot;,<br>    &quot;ltg&quot;: &quot;Latgalian&quot;,<br>    &quot;luo&quot;: &quot;Luo&quot;,<br>    &quot;lus&quot;: &quot;Mizo&quot;,<br>    &quot;lv&quot;: &quot;Latvian&quot;,<br>    &quot;mai&quot;: &quot;Maithili&quot;,<br>    &quot;mak&quot;: &quot;Makassar&quot;,<br>    &quot;mg&quot;: &quot;Malagasy&quot;,<br>    &quot;mi&quot;: &quot;Maori&quot;,<br>    &quot;min&quot;: &quot;Minangkabau&quot;,<br>    &quot;mk&quot;: &quot;Macedonian&quot;,<br>    &quot;ml&quot;: &quot;Malayalam&quot;,<br>    &quot;mn&quot;: &quot;Mongolian&quot;,<br>    &quot;mr&quot;: &quot;Marathi&quot;,<br>    &quot;ms&quot;: &quot;Malay&quot;,<br>    &quot;mt&quot;: &quot;Maltese&quot;,<br>    &quot;my&quot;: &quot;Burmese&quot;,<br>    &quot;ne&quot;: &quot;Nepali&quot;,<br>    &quot;new&quot;: &quot;Newari&quot;,<br>    &quot;nl&quot;: &quot;Dutch&quot;,<br>    &quot;no&quot;: &quot;Norwegian&quot;,<br>    &quot;nr&quot;: &quot;Southern Ndebele&quot;,<br>    &quot;nso&quot;: &quot;Northern Sotho (Sepedi)&quot;,<br>    &quot;nus&quot;: &quot;Nuer&quot;,<br>    &quot;ny&quot;: &quot;Chichewa (Nyanja)&quot;,<br>    &quot;oc&quot;: &quot;Occitan&quot;,<br>    &quot;om&quot;: &quot;Oromo&quot;,<br>    &quot;or&quot;: &quot;Odia (Oriya)&quot;,<br>    &quot;pa&quot;: &quot;Punjabi&quot;,<br>    &quot;pag&quot;: &quot;Pangasinan&quot;,<br>    &quot;pam&quot;: &quot;Kapampangan&quot;,<br>    &quot;pap&quot;: &quot;Papiamento&quot;,<br>    &quot;pl&quot;: &quot;Polish&quot;,<br>    &quot;ps&quot;: &quot;Pashto&quot;,<br>    &quot;pt&quot;: &quot;Portuguese&quot;,<br>    &quot;pt-BR&quot;: &quot;Portuguese (Brazil)&quot;,<br>    &quot;pt-PT&quot;: &quot;Portuguese (Portugal)&quot;,<br>    &quot;qu&quot;: &quot;Quechua&quot;,<br>    &quot;ro&quot;: &quot;Romanian&quot;,<br>    &quot;rom&quot;: &quot;Romani&quot;,<br>    &quot;rn&quot;: &quot;Rundi&quot;,<br>    &quot;ru&quot;: &quot;Russian&quot;,<br>    &quot;rw&quot;: &quot;Kinyarwanda&quot;,<br>    &quot;sa&quot;: &quot;Sanskrit&quot;,<br>    &quot;scn&quot;: &quot;Sicilian&quot;,<br>    &quot;sd&quot;: &quot;Sindhi&quot;,<br>    &quot;sg&quot;: &quot;Sango&quot;,<br>    &quot;shn&quot;: &quot;Shan&quot;,<br>    &quot;si&quot;: &quot;Sinhala&quot;,<br>    &quot;sk&quot;: &quot;Slovak&quot;,<br>    &quot;sl&quot;: &quot;Slovenian&quot;,<br>    &quot;sm&quot;: &quot;Samoan&quot;,<br>    &quot;sn&quot;: &quot;Shona&quot;,<br>    &quot;so&quot;: &quot;Somali&quot;,<br>    &quot;sq&quot;: &quot;Albanian&quot;,<br>    &quot;sr&quot;: &quot;Serbian&quot;,<br>    &quot;ss&quot;: &quot;Swati&quot;,<br>    &quot;st&quot;: &quot;Sotho&quot;,<br>    &quot;su&quot;: &quot;Sundanese&quot;,<br>    &quot;sv&quot;: &quot;Swedish&quot;,<br>    &quot;sw&quot;: &quot;Swahili&quot;,<br>    &quot;szl&quot;: &quot;Silesian&quot;,<br>    &quot;ta&quot;: &quot;Tamil&quot;,<br>    &quot;te&quot;: &quot;Telugu&quot;,<br>    &quot;tet&quot;: &quot;Tetum&quot;,<br>    &quot;tg&quot;: &quot;Tajik&quot;,<br>    &quot;th&quot;: &quot;Thai&quot;,<br>    &quot;ti&quot;: &quot;Tigrinya&quot;,<br>    &quot;tk&quot;: &quot;Turkmen&quot;,<br>    &quot;tl&quot;: &quot;Filipino (Tagalog)&quot;,<br>    &quot;tn&quot;: &quot;Tswana&quot;,<br>    &quot;tr&quot;: &quot;Turkish&quot;,<br>    &quot;ts&quot;: &quot;Tsonga&quot;,<br>    &quot;tt&quot;: &quot;Tatar&quot;,<br>    &quot;ug&quot;: &quot;Uyghur&quot;,<br>    &quot;uk&quot;: &quot;Ukrainian&quot;,<br>    &quot;ur&quot;: &quot;Urdu&quot;,<br>    &quot;uz&quot;: &quot;Uzbek&quot;,<br>    &quot;vi&quot;: &quot;Vietnamese&quot;,<br>    &quot;xh&quot;: &quot;Xhosa&quot;,<br>    &quot;yi&quot;: &quot;Yiddish&quot;,<br>    &quot;yo&quot;: &quot;Yoruba&quot;,<br>    &quot;yua&quot;: &quot;Yucatec Maya&quot;,<br>    &quot;yue&quot;: &quot;Cantonese&quot;,<br>    &quot;zh&quot;: &quot;Simplified Chinese&quot;,<br>    &quot;zh-TW&quot;: &quot;Traditional Chinese&quot;,<br>    &quot;zu&quot;: &quot;Zulu&quot;</p>
 	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
 
-	// User extension parameter.
+	// <p>User extension parameter.</p>
 	UserExtPara *string `json:"UserExtPara,omitnil,omitempty" name:"UserExtPara"`
 }
 
@@ -20604,13 +20192,13 @@ func (r *TextTranslationRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type TextTranslationResponseParams struct {
-	// Text after translation.
+	// <p>Translated text.</p>
 	TargetText *string `json:"TargetText,omitnil,omitempty" name:"TargetText"`
 
-	// Source language. See the input parameter Source.
+	// <p>Source language. See the input parameter Source.</p>
 	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
 
-	// Target language. See the input parameter Target.
+	// <p>Target language. See the input parameter Target.</p>
 	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -20863,6 +20451,88 @@ type TranslateConfigureInfo struct {
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
+}
+
+// Predefined struct for user
+type UpdateProjectRequestParams struct {
+	// <p>Project ID.</p>
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// <p>Project name.</p>
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
+
+	// <p>Project term base.</p>
+	TermBase []*TermBase `json:"TermBase,omitnil,omitempty" name:"TermBase"`
+
+	// <p>Project description.</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// <p>List of characters.</p>
+	Speakers []*Speakers `json:"Speakers,omitnil,omitempty" name:"Speakers"`
+}
+
+type UpdateProjectRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Project ID.</p>
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// <p>Project name.</p>
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
+
+	// <p>Project term base.</p>
+	TermBase []*TermBase `json:"TermBase,omitnil,omitempty" name:"TermBase"`
+
+	// <p>Project description.</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// <p>List of characters.</p>
+	Speakers []*Speakers `json:"Speakers,omitnil,omitempty" name:"Speakers"`
+}
+
+func (r *UpdateProjectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateProjectRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProjectId")
+	delete(f, "ProjectName")
+	delete(f, "TermBase")
+	delete(f, "Description")
+	delete(f, "Speakers")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateProjectRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateProjectResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UpdateProjectResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateProjectResponseParams `json:"Response"`
+}
+
+func (r *UpdateProjectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateProjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type UpdateSmartErasePrivacyConfig struct {
@@ -21649,6 +21319,35 @@ type VideoTemplateInfoForUpdate struct {
 	// Note: To use this value, the value of ScenarioBased must be 1; otherwise, this value will not take effect.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	CompressType *string `json:"CompressType,omitnil,omitempty" name:"CompressType"`
+}
+
+type VoiceInfo struct {
+	// <p>Voice ID.</p>
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// <p>Voice name.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Voice description.</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// <p>Voice type. </p><p>Enumeration value: </p><ul><li>system: System audio.</li></ul>
+	Category *string `json:"Category,omitnil,omitempty" name:"Category"`
+
+	// <p>Gender. </p><p>Enumeration values: </p><ul><li>male: Male, </li><li>female: Female.</li></ul>
+	Gender *string `json:"Gender,omitnil,omitempty" name:"Gender"`
+
+	// <p>List of supported languages. </p><p>For example: en.</p>
+	Languages []*string `json:"Languages,omitnil,omitempty" name:"Languages"`
+
+	// <p>Audition audio URL.</p>
+	AudioUrl *string `json:"AudioUrl,omitnil,omitempty" name:"AudioUrl"`
+
+	// <p>List of tags. </p><p>For example: gentle.</p>
+	Labels []*string `json:"Labels,omitnil,omitempty" name:"Labels"`
+
+	// <p>Recommended scenarios. </p><p>For example: education.</p>
+	Scenes []*string `json:"Scenes,omitnil,omitempty" name:"Scenes"`
 }
 
 type VolumeBalanceConfig struct {

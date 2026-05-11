@@ -42,7 +42,7 @@ type ChatTranslationsRequestParams struct {
 	// When making an SDK call, streaming and non-streaming calls require **different ways** to obtain the return value. refer to the comments or sample code in the SDK (in the examples/hunyuan/v20230901/ directory of each language SDK code repository).
 	Stream *bool `json:"Stream,omitnil,omitempty" name:"Stream"`
 
-	// Text to be translated.
+	// Text to be translated
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
 	// Source language.
@@ -92,7 +92,7 @@ type ChatTranslationsRequest struct {
 	// When making an SDK call, streaming and non-streaming calls require **different ways** to obtain the return value. refer to the comments or sample code in the SDK (in the examples/hunyuan/v20230901/ directory of each language SDK code repository).
 	Stream *bool `json:"Stream,omitnil,omitempty" name:"Stream"`
 
-	// Text to be translated.
+	// Text to be translated
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
 	// Source language.
