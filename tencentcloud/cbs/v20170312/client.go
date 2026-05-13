@@ -65,15 +65,15 @@ func NewApplyDiskBackupResponse() (response *ApplyDiskBackupResponse) {
 }
 
 // ApplyDiskBackup
-// This API is used to roll back a backup point to the original cloud disk.
+// This API is used to roll back a backup to the original cloud disk.
 //
 // 
 //
-// * Only rollback to the original cloud disk is supported. For a data disk backup point, if you want to copy the backup point data to another cloud disk, use the `CreateSnapshot` API to convert the backup point into a snapshot, use the `CreateDisks` API to create an elastic cloud disk, and then copy the snapshot data to it.
+// This API only supports rolling back to the original cloud disk. For data disk backup points, if you need to copy backup point data to other CBS, use first [CreateSnapshot](https://www.tencentcloud.com/document/product/362/15648?from_cn_redirect=1) to convert the backup point to a snapshot, and use [CreateDisks](https://www.tencentcloud.com/document/product/362/16312?from_cn_redirect=1) to create a new elastic cloud disk, then copy snapshot data to the newly purchased cloud disk.
 //
-// * Only backup points in `NORMAL` status can be rolled back. To query the status of a backup point, call the `DescribeDiskBackups` API and see the `BackupState` field in the response.
+// The backup point used for rollback must be in NORMAL status. The backup point status can be checked through the [DescribeDiskBackups](https://www.tencentcloud.com/document/product/362/80278?from_cn_redirect=1) API, see BackupState field explanation in the output parameter.
 //
-// * For an elastic cloud disk, it must be in unattached status. To query the status of the cloud disk, call the `DescribeDisks` API and see the `Attached` field in the response. For a non-elastic cloud disk purchased together with an instance, the instance must be in shutdown status, which can be queried through the `DescribeInstancesStatus` API.
+// If it is an elastic cloud disk, the CBS must be in an unmounted state. The CBS mount status can be queried through the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) API. See Attached field explanation. If it is a non-elastic cloud hard disk purchased together with the instance, the instance must be in a powered off state. The instance status can be queried through the [DescribeInstancesStatus](https://www.tencentcloud.com/document/product/213/15738?from_cn_redirect=1) API.
 //
 // error code that may be returned:
 //  INVALIDDISK_BUSY = "InvalidDisk.Busy"
@@ -91,15 +91,15 @@ func (c *Client) ApplyDiskBackup(request *ApplyDiskBackupRequest) (response *App
 }
 
 // ApplyDiskBackup
-// This API is used to roll back a backup point to the original cloud disk.
+// This API is used to roll back a backup to the original cloud disk.
 //
 // 
 //
-// * Only rollback to the original cloud disk is supported. For a data disk backup point, if you want to copy the backup point data to another cloud disk, use the `CreateSnapshot` API to convert the backup point into a snapshot, use the `CreateDisks` API to create an elastic cloud disk, and then copy the snapshot data to it.
+// This API only supports rolling back to the original cloud disk. For data disk backup points, if you need to copy backup point data to other CBS, use first [CreateSnapshot](https://www.tencentcloud.com/document/product/362/15648?from_cn_redirect=1) to convert the backup point to a snapshot, and use [CreateDisks](https://www.tencentcloud.com/document/product/362/16312?from_cn_redirect=1) to create a new elastic cloud disk, then copy snapshot data to the newly purchased cloud disk.
 //
-// * Only backup points in `NORMAL` status can be rolled back. To query the status of a backup point, call the `DescribeDiskBackups` API and see the `BackupState` field in the response.
+// The backup point used for rollback must be in NORMAL status. The backup point status can be checked through the [DescribeDiskBackups](https://www.tencentcloud.com/document/product/362/80278?from_cn_redirect=1) API, see BackupState field explanation in the output parameter.
 //
-// * For an elastic cloud disk, it must be in unattached status. To query the status of the cloud disk, call the `DescribeDisks` API and see the `Attached` field in the response. For a non-elastic cloud disk purchased together with an instance, the instance must be in shutdown status, which can be queried through the `DescribeInstancesStatus` API.
+// If it is an elastic cloud disk, the CBS must be in an unmounted state. The CBS mount status can be queried through the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) API. See Attached field explanation. If it is a non-elastic cloud hard disk purchased together with the instance, the instance must be in a powered off state. The instance status can be queried through the [DescribeInstancesStatus](https://www.tencentcloud.com/document/product/213/15738?from_cn_redirect=1) API.
 //
 // error code that may be returned:
 //  INVALIDDISK_BUSY = "InvalidDisk.Busy"
@@ -227,6 +227,74 @@ func (c *Client) ApplySnapshotWithContext(ctx context.Context, request *ApplySna
     request.SetContext(ctx)
     
     response = NewApplySnapshotResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewApplySnapshotGroupRequest() (request *ApplySnapshotGroupRequest) {
+    request = &ApplySnapshotGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cbs", APIVersion, "ApplySnapshotGroup")
+    
+    
+    return
+}
+
+func NewApplySnapshotGroupResponse() (response *ApplySnapshotGroupResponse) {
+    response = &ApplySnapshotGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ApplySnapshotGroup
+// This API is used to rollback a snapshot group and restore the instance to the state at the moment the snapshot group was created.
+//
+// This API is used to roll back all or part of the disks in the snapshot group.
+//
+// This API is used to roll back disks. If the disks to be rolled back contain mounted disks, they must be mounted to the same instance, and the instance must be shut down before rollback.
+//
+// Rollback is an asynchronous operation. A successful API return does not indicate a successful rollback. You can call DescribeSnapshotGroups to check the snapshot group status.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_SNAPSHOTGROUPDISKATTACHMULTIINSTANCE = "UnsupportedOperation.SnapshotGroupDiskAttachMultiInstance"
+//  UNSUPPORTEDOPERATION_STATEERROR = "UnsupportedOperation.StateError"
+func (c *Client) ApplySnapshotGroup(request *ApplySnapshotGroupRequest) (response *ApplySnapshotGroupResponse, err error) {
+    return c.ApplySnapshotGroupWithContext(context.Background(), request)
+}
+
+// ApplySnapshotGroup
+// This API is used to rollback a snapshot group and restore the instance to the state at the moment the snapshot group was created.
+//
+// This API is used to roll back all or part of the disks in the snapshot group.
+//
+// This API is used to roll back disks. If the disks to be rolled back contain mounted disks, they must be mounted to the same instance, and the instance must be shut down before rollback.
+//
+// Rollback is an asynchronous operation. A successful API return does not indicate a successful rollback. You can call DescribeSnapshotGroups to check the snapshot group status.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_SNAPSHOTGROUPDISKATTACHMULTIINSTANCE = "UnsupportedOperation.SnapshotGroupDiskAttachMultiInstance"
+//  UNSUPPORTEDOPERATION_STATEERROR = "UnsupportedOperation.StateError"
+func (c *Client) ApplySnapshotGroupWithContext(ctx context.Context, request *ApplySnapshotGroupRequest) (response *ApplySnapshotGroupResponse, err error) {
+    if request == nil {
+        request = NewApplySnapshotGroupRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cbs", APIVersion, "ApplySnapshotGroup")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ApplySnapshotGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewApplySnapshotGroupResponse()
     err = c.Send(request, response)
     return
 }
@@ -431,13 +499,13 @@ func NewCopySnapshotCrossRegionsResponse() (response *CopySnapshotCrossRegionsRe
 }
 
 // CopySnapshotCrossRegions
-// This API is used to replicate a snapshot to another region.
+// This API is used to replicate snapshots across regions.
 //
 // 
 //
-// * This is an async API. A new snapshot ID is issued when the cross-region replication task is generated. It does not mean that the snapshot has been replicated successfully. You can all the [DescribeSnapshots](https://intl.cloud.tencent.com/document/product/362/15647?from_cn_redirect=1) API in the destination region to check for this snapshot. If the snapshot status is `NORMAL`, the snapshot is replicated successfully.
+// This API is asynchronous. When the cross-region replication request is issued successfully, it returns a new snapshot ID. At this point, the snapshot is not immediately replicated to the target region. You can use the [DescribeSnapshots](https://www.tencentcloud.com/document/product/362/15647?from_cn_redirect=1) API for the query in the target region to check the snapshot status and determine whether the replication is complete. If the snapshot status is "NORMAL", it indicates snapshot replication is complete.
 //
-// * The snapshot cross-region replication service will be commercialized in the Q3 of 2022. We will notify users about the commercialization in advance. Please check your messages in the Message Center.
+// This API is used to perform snapshot cross-region replication, which will generate cross-region traffic. Commercial billing for this feature is expected in Q3 2025. Please check subsequent Message Center notices to avoid unexpected charges.
 //
 // error code that may be returned:
 //  INSUFFICIENTSNAPSHOTQUOTA = "InsufficientSnapshotQuota"
@@ -454,13 +522,13 @@ func (c *Client) CopySnapshotCrossRegions(request *CopySnapshotCrossRegionsReque
 }
 
 // CopySnapshotCrossRegions
-// This API is used to replicate a snapshot to another region.
+// This API is used to replicate snapshots across regions.
 //
 // 
 //
-// * This is an async API. A new snapshot ID is issued when the cross-region replication task is generated. It does not mean that the snapshot has been replicated successfully. You can all the [DescribeSnapshots](https://intl.cloud.tencent.com/document/product/362/15647?from_cn_redirect=1) API in the destination region to check for this snapshot. If the snapshot status is `NORMAL`, the snapshot is replicated successfully.
+// This API is asynchronous. When the cross-region replication request is issued successfully, it returns a new snapshot ID. At this point, the snapshot is not immediately replicated to the target region. You can use the [DescribeSnapshots](https://www.tencentcloud.com/document/product/362/15647?from_cn_redirect=1) API for the query in the target region to check the snapshot status and determine whether the replication is complete. If the snapshot status is "NORMAL", it indicates snapshot replication is complete.
 //
-// * The snapshot cross-region replication service will be commercialized in the Q3 of 2022. We will notify users about the commercialization in advance. Please check your messages in the Message Center.
+// This API is used to perform snapshot cross-region replication, which will generate cross-region traffic. Commercial billing for this feature is expected in Q3 2025. Please check subsequent Message Center notices to avoid unexpected charges.
 //
 // error code that may be returned:
 //  INSUFFICIENTSNAPSHOTQUOTA = "InsufficientSnapshotQuota"
@@ -585,7 +653,9 @@ func NewCreateDiskBackupResponse() (response *CreateDiskBackupResponse) {
 //  INVALIDDISK_BUSY = "InvalidDisk.Busy"
 //  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEBUSY = "ResourceBusy"
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINUSE_DISKROLLBACKING = "ResourceInUse.DiskRollbacking"
 //  RESOURCEINSUFFICIENT_OVERQUOTA = "ResourceInsufficient.OverQuota"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
@@ -601,7 +671,9 @@ func (c *Client) CreateDiskBackup(request *CreateDiskBackupRequest) (response *C
 //  INVALIDDISK_BUSY = "InvalidDisk.Busy"
 //  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEBUSY = "ResourceBusy"
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINUSE_DISKROLLBACKING = "ResourceInUse.DiskRollbacking"
 //  RESOURCEINSUFFICIENT_OVERQUOTA = "ResourceInsufficient.OverQuota"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
@@ -654,11 +726,15 @@ func NewCreateDisksResponse() (response *CreateDisksResponse) {
 // error code that may be returned:
 //  INTERNALERROR_COMPONENTERROR = "InternalError.ComponentError"
 //  INVALIDACCOUNT_INSUFFICIENTBALANCE = "InvalidAccount.InsufficientBalance"
+//  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
 //  INVALIDPARAMETER_DISKCONFIGNOTSUPPORTED = "InvalidParameter.DiskConfigNotSupported"
+//  INVALIDPARAMETER_INVALIDCLIENTTOKEN = "InvalidParameter.InvalidClientToken"
 //  INVALIDPARAMETER_PROJECTIDNOTEXIST = "InvalidParameter.ProjectIdNotExist"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDSNAPSHOTID_NOTFOUND = "InvalidSnapshotId.NotFound"
+//  LIMITEXCEEDED_INSTANCEATTACHEDDISK = "LimitExceeded.InstanceAttachedDisk"
+//  LIMITEXCEEDED_TAGQUOTALIMITEXCEEDED = "LimitExceeded.TagQuotaLimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEBUSY = "ResourceBusy"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
@@ -683,11 +759,15 @@ func (c *Client) CreateDisks(request *CreateDisksRequest) (response *CreateDisks
 // error code that may be returned:
 //  INTERNALERROR_COMPONENTERROR = "InternalError.ComponentError"
 //  INVALIDACCOUNT_INSUFFICIENTBALANCE = "InvalidAccount.InsufficientBalance"
+//  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
 //  INVALIDPARAMETER_DISKCONFIGNOTSUPPORTED = "InvalidParameter.DiskConfigNotSupported"
+//  INVALIDPARAMETER_INVALIDCLIENTTOKEN = "InvalidParameter.InvalidClientToken"
 //  INVALIDPARAMETER_PROJECTIDNOTEXIST = "InvalidParameter.ProjectIdNotExist"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDSNAPSHOTID_NOTFOUND = "InvalidSnapshotId.NotFound"
+//  LIMITEXCEEDED_INSTANCEATTACHEDDISK = "LimitExceeded.InstanceAttachedDisk"
+//  LIMITEXCEEDED_TAGQUOTALIMITEXCEEDED = "LimitExceeded.TagQuotaLimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEBUSY = "ResourceBusy"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
@@ -754,14 +834,17 @@ func NewCreateSnapshotResponse() (response *CreateSnapshotResponse) {
 //  INVALIDDISK_SNAPSHOTCREATING = "InvalidDisk.SnapshotCreating"
 //  INVALIDDISK_TYPEERROR = "InvalidDisk.TypeError"
 //  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
+//  INVALIDPARAMETER_INVALIDCLIENTTOKEN = "InvalidParameter.InvalidClientToken"
 //  INVALIDPARAMETER_PROJECTIDNOTEXIST = "InvalidParameter.ProjectIdNotExist"
 //  LIMITEXCEEDED_INSTANCEATTACHEDDISK = "LimitExceeded.InstanceAttachedDisk"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEBUSY = "ResourceBusy"
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINUSE_DISKMIGRATING = "ResourceInUse.DiskMigrating"
 //  RESOURCEINUSE_DISKROLLBACKING = "ResourceInUse.DiskRollbacking"
 //  RESOURCEINSUFFICIENT_OVERQUOTA = "ResourceInsufficient.OverQuota"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCEUNAVAILABLE_DISKBACKUPCREATING = "ResourceUnavailable.DiskBackupCreating"
 //  RESOURCEUNAVAILABLE_DISKSNAPSHOTCHAINTOOLARGE = "ResourceUnavailable.DiskSnapshotChainTooLarge"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 //  RESOURCEUNAVAILABLE_SNAPSHOTCREATING = "ResourceUnavailable.SnapshotCreating"
@@ -793,14 +876,17 @@ func (c *Client) CreateSnapshot(request *CreateSnapshotRequest) (response *Creat
 //  INVALIDDISK_SNAPSHOTCREATING = "InvalidDisk.SnapshotCreating"
 //  INVALIDDISK_TYPEERROR = "InvalidDisk.TypeError"
 //  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
+//  INVALIDPARAMETER_INVALIDCLIENTTOKEN = "InvalidParameter.InvalidClientToken"
 //  INVALIDPARAMETER_PROJECTIDNOTEXIST = "InvalidParameter.ProjectIdNotExist"
 //  LIMITEXCEEDED_INSTANCEATTACHEDDISK = "LimitExceeded.InstanceAttachedDisk"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEBUSY = "ResourceBusy"
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINUSE_DISKMIGRATING = "ResourceInUse.DiskMigrating"
 //  RESOURCEINUSE_DISKROLLBACKING = "ResourceInUse.DiskRollbacking"
 //  RESOURCEINSUFFICIENT_OVERQUOTA = "ResourceInsufficient.OverQuota"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCEUNAVAILABLE_DISKBACKUPCREATING = "ResourceUnavailable.DiskBackupCreating"
 //  RESOURCEUNAVAILABLE_DISKSNAPSHOTCHAINTOOLARGE = "ResourceUnavailable.DiskSnapshotChainTooLarge"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 //  RESOURCEUNAVAILABLE_SNAPSHOTCREATING = "ResourceUnavailable.SnapshotCreating"
@@ -819,6 +905,92 @@ func (c *Client) CreateSnapshotWithContext(ctx context.Context, request *CreateS
     request.SetContext(ctx)
     
     response = NewCreateSnapshotResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateSnapshotGroupRequest() (request *CreateSnapshotGroupRequest) {
+    request = &CreateSnapshotGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cbs", APIVersion, "CreateSnapshotGroup")
+    
+    
+    return
+}
+
+func NewCreateSnapshotGroupResponse() (response *CreateSnapshotGroupResponse) {
+    response = &CreateSnapshotGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateSnapshotGroup
+// This API is used to create a snapshot group.
+//
+// This API is used to create snapshot groups. The CBS list must be mounted on the same instance.
+//
+// This API is used to create snapshot groups for all or some of the disks mounted to instance.
+//
+// error code that may be returned:
+//  INSUFFICIENTSNAPSHOTQUOTA = "InsufficientSnapshotQuota"
+//  INTERNALERROR_COMPONENTERROR = "InternalError.ComponentError"
+//  INVALIDACCOUNT_INSUFFICIENTBALANCE = "InvalidAccount.InsufficientBalance"
+//  INVALIDDISK_NOTSUPPORTED = "InvalidDisk.NotSupported"
+//  INVALIDDISK_SNAPSHOTCREATING = "InvalidDisk.SnapshotCreating"
+//  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINUSE_DISKMIGRATING = "ResourceInUse.DiskMigrating"
+//  RESOURCEINUSE_DISKROLLBACKING = "ResourceInUse.DiskRollbacking"
+//  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
+//  RESOURCEUNAVAILABLE_SNAPSHOTCREATING = "ResourceUnavailable.SnapshotCreating"
+func (c *Client) CreateSnapshotGroup(request *CreateSnapshotGroupRequest) (response *CreateSnapshotGroupResponse, err error) {
+    return c.CreateSnapshotGroupWithContext(context.Background(), request)
+}
+
+// CreateSnapshotGroup
+// This API is used to create a snapshot group.
+//
+// This API is used to create snapshot groups. The CBS list must be mounted on the same instance.
+//
+// This API is used to create snapshot groups for all or some of the disks mounted to instance.
+//
+// error code that may be returned:
+//  INSUFFICIENTSNAPSHOTQUOTA = "InsufficientSnapshotQuota"
+//  INTERNALERROR_COMPONENTERROR = "InternalError.ComponentError"
+//  INVALIDACCOUNT_INSUFFICIENTBALANCE = "InvalidAccount.InsufficientBalance"
+//  INVALIDDISK_NOTSUPPORTED = "InvalidDisk.NotSupported"
+//  INVALIDDISK_SNAPSHOTCREATING = "InvalidDisk.SnapshotCreating"
+//  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINUSE_DISKMIGRATING = "ResourceInUse.DiskMigrating"
+//  RESOURCEINUSE_DISKROLLBACKING = "ResourceInUse.DiskRollbacking"
+//  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
+//  RESOURCEUNAVAILABLE_SNAPSHOTCREATING = "ResourceUnavailable.SnapshotCreating"
+func (c *Client) CreateSnapshotGroupWithContext(ctx context.Context, request *CreateSnapshotGroupRequest) (response *CreateSnapshotGroupResponse, err error) {
+    if request == nil {
+        request = NewCreateSnapshotGroupRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cbs", APIVersion, "CreateSnapshotGroup")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSnapshotGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateSnapshotGroupResponse()
     err = c.Send(request, response)
     return
 }
@@ -915,6 +1087,7 @@ func NewDeleteDiskBackupsResponse() (response *DeleteDiskBackupsResponse) {
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEBUSY = "ResourceBusy"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 func (c *Client) DeleteDiskBackups(request *DeleteDiskBackupsRequest) (response *DeleteDiskBackupsResponse, err error) {
@@ -926,6 +1099,7 @@ func (c *Client) DeleteDiskBackups(request *DeleteDiskBackupsRequest) (response 
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEBUSY = "ResourceBusy"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 func (c *Client) DeleteDiskBackupsWithContext(ctx context.Context, request *DeleteDiskBackupsRequest) (response *DeleteDiskBackupsResponse, err error) {
@@ -941,6 +1115,72 @@ func (c *Client) DeleteDiskBackupsWithContext(ctx context.Context, request *Dele
     request.SetContext(ctx)
     
     response = NewDeleteDiskBackupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteSnapshotGroupRequest() (request *DeleteSnapshotGroupRequest) {
+    request = &DeleteSnapshotGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cbs", APIVersion, "DeleteSnapshotGroup")
+    
+    
+    return
+}
+
+func NewDeleteSnapshotGroupResponse() (response *DeleteSnapshotGroupResponse) {
+    response = &DeleteSnapshotGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteSnapshotGroup
+// This API is used to delete snapshot groups. One snapshot group can be deleted per call.
+//
+// This API is used to delete all snapshots in the snapshot group by default.
+//
+// This API is used to delete a snapshot group. If a snapshot in the snapshot group has an associated image, deletion will fail and no snapshot will be deleted. Parameters can be input to enable simultaneous deletion of images bound to the snapshot by setting DeleteBindImages equal to true.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDSNAPSHOTID_NOTFOUND = "InvalidSnapshotId.NotFound"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_SNAPSHOTHASBINDEDIMAGE = "UnsupportedOperation.SnapshotHasBindedImage"
+//  UNSUPPORTEDOPERATION_STATEERROR = "UnsupportedOperation.StateError"
+func (c *Client) DeleteSnapshotGroup(request *DeleteSnapshotGroupRequest) (response *DeleteSnapshotGroupResponse, err error) {
+    return c.DeleteSnapshotGroupWithContext(context.Background(), request)
+}
+
+// DeleteSnapshotGroup
+// This API is used to delete snapshot groups. One snapshot group can be deleted per call.
+//
+// This API is used to delete all snapshots in the snapshot group by default.
+//
+// This API is used to delete a snapshot group. If a snapshot in the snapshot group has an associated image, deletion will fail and no snapshot will be deleted. Parameters can be input to enable simultaneous deletion of images bound to the snapshot by setting DeleteBindImages equal to true.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDSNAPSHOTID_NOTFOUND = "InvalidSnapshotId.NotFound"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_SNAPSHOTHASBINDEDIMAGE = "UnsupportedOperation.SnapshotHasBindedImage"
+//  UNSUPPORTEDOPERATION_STATEERROR = "UnsupportedOperation.StateError"
+func (c *Client) DeleteSnapshotGroupWithContext(ctx context.Context, request *DeleteSnapshotGroupRequest) (response *DeleteSnapshotGroupResponse, err error) {
+    if request == nil {
+        request = NewDeleteSnapshotGroupRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cbs", APIVersion, "DeleteSnapshotGroup")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteSnapshotGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteSnapshotGroupResponse()
     err = c.Send(request, response)
     return
 }
@@ -1118,6 +1358,7 @@ func NewDescribeDiskAssociatedAutoSnapshotPolicyResponse() (response *DescribeDi
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION_INVALIDTOKEN = "UnauthorizedOperation.InvalidToken"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDiskAssociatedAutoSnapshotPolicy(request *DescribeDiskAssociatedAutoSnapshotPolicyRequest) (response *DescribeDiskAssociatedAutoSnapshotPolicyResponse, err error) {
     return c.DescribeDiskAssociatedAutoSnapshotPolicyWithContext(context.Background(), request)
@@ -1129,6 +1370,7 @@ func (c *Client) DescribeDiskAssociatedAutoSnapshotPolicy(request *DescribeDiskA
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION_INVALIDTOKEN = "UnauthorizedOperation.InvalidToken"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDiskAssociatedAutoSnapshotPolicyWithContext(ctx context.Context, request *DescribeDiskAssociatedAutoSnapshotPolicyRequest) (response *DescribeDiskAssociatedAutoSnapshotPolicyResponse, err error) {
     if request == nil {
@@ -1265,82 +1507,6 @@ func (c *Client) DescribeDiskConfigQuotaWithContext(ctx context.Context, request
     return
 }
 
-func NewDescribeDiskOperationLogsRequest() (request *DescribeDiskOperationLogsRequest) {
-    request = &DescribeDiskOperationLogsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cbs", APIVersion, "DescribeDiskOperationLogs")
-    
-    
-    return
-}
-
-func NewDescribeDiskOperationLogsResponse() (response *DescribeDiskOperationLogsResponse) {
-    response = &DescribeDiskOperationLogsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeDiskOperationLogs
-// 接口已废弃，切换至云审计接口。见https://tapd.woa.com/pro/prong/stories/view/1010114221880719007
-//
-// 
-//
-// This API has been disused. Use the CloudAudit API instead, For more information, visit https://tapd.woa.com/pro/prong/stories/view/1010114221880719007.
-//
-// 
-//
-// This API is used to query the operation logs of a cloud disk. It will be disused soon. Use [LookUpEvents](https://intl.cloud.tencent.com/document/product/629/12359?from_cn_redirect=1) instead.
-//
-// error code that may be returned:
-//  INTERNALERROR_COMPONENTERROR = "InternalError.ComponentError"
-//  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeDiskOperationLogs(request *DescribeDiskOperationLogsRequest) (response *DescribeDiskOperationLogsResponse, err error) {
-    return c.DescribeDiskOperationLogsWithContext(context.Background(), request)
-}
-
-// DescribeDiskOperationLogs
-// 接口已废弃，切换至云审计接口。见https://tapd.woa.com/pro/prong/stories/view/1010114221880719007
-//
-// 
-//
-// This API has been disused. Use the CloudAudit API instead, For more information, visit https://tapd.woa.com/pro/prong/stories/view/1010114221880719007.
-//
-// 
-//
-// This API is used to query the operation logs of a cloud disk. It will be disused soon. Use [LookUpEvents](https://intl.cloud.tencent.com/document/product/629/12359?from_cn_redirect=1) instead.
-//
-// error code that may be returned:
-//  INTERNALERROR_COMPONENTERROR = "InternalError.ComponentError"
-//  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeDiskOperationLogsWithContext(ctx context.Context, request *DescribeDiskOperationLogsRequest) (response *DescribeDiskOperationLogsResponse, err error) {
-    if request == nil {
-        request = NewDescribeDiskOperationLogsRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cbs", APIVersion, "DescribeDiskOperationLogs")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeDiskOperationLogs require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeDiskOperationLogsResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeDisksRequest() (request *DescribeDisksRequest) {
     request = &DescribeDisksRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1473,78 +1639,114 @@ func (c *Client) DescribeInstancesDiskNumWithContext(ctx context.Context, reques
     return
 }
 
-func NewDescribeSnapshotOperationLogsRequest() (request *DescribeSnapshotOperationLogsRequest) {
-    request = &DescribeSnapshotOperationLogsRequest{
+func NewDescribeSnapshotGroupsRequest() (request *DescribeSnapshotGroupsRequest) {
+    request = &DescribeSnapshotGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
     
-    request.Init().WithApiInfo("cbs", APIVersion, "DescribeSnapshotOperationLogs")
+    request.Init().WithApiInfo("cbs", APIVersion, "DescribeSnapshotGroups")
     
     
     return
 }
 
-func NewDescribeSnapshotOperationLogsResponse() (response *DescribeSnapshotOperationLogsResponse) {
-    response = &DescribeSnapshotOperationLogsResponse{
+func NewDescribeSnapshotGroupsResponse() (response *DescribeSnapshotGroupsResponse) {
+    response = &DescribeSnapshotGroupsResponse{
         BaseResponse: &tchttp.BaseResponse{},
     } 
     return
 
 }
 
-// DescribeSnapshotOperationLogs
-// 接口已废弃，切换至云审计接口。见https://tapd.woa.com/pro/prong/stories/view/1010114221880719007
+// DescribeSnapshotGroups
+// This API is used to query the snapshot group list.
 //
-// 
+// This API is used to query the snapshot group list based on snapshot group ID, snapshot group status or snapshot ID associated with the snapshot group. The relationship among different criteria is AND. For detailed filtering information, see `Filter`.
 //
-// This API has been disused. Use the CloudAudit API instead, For more information, visit https://tapd.woa.com/pro/prong/stories/view/1010114221880719007.
-//
-// 
-//
-// This API is used to query the operation logs of a snapshot. It will be disused soon. Use [LookUpEvents](https://intl.cloud.tencent.com/document/product/629/12359?from_cn_redirect=1) instead.
+// If the parameter is empty, a certain number of the cloud disk list for the current user is returned (specified by `Limit`, defaults to 20).
 //
 // error code that may be returned:
-//  INTERNALERROR_COMPONENTERROR = "InternalError.ComponentError"
+//  INVALIDFILTER = "InvalidFilter"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
-//  INVALIDSNAPSHOTID_NOTFOUND = "InvalidSnapshotId.NotFound"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeSnapshotOperationLogs(request *DescribeSnapshotOperationLogsRequest) (response *DescribeSnapshotOperationLogsResponse, err error) {
-    return c.DescribeSnapshotOperationLogsWithContext(context.Background(), request)
+func (c *Client) DescribeSnapshotGroups(request *DescribeSnapshotGroupsRequest) (response *DescribeSnapshotGroupsResponse, err error) {
+    return c.DescribeSnapshotGroupsWithContext(context.Background(), request)
 }
 
-// DescribeSnapshotOperationLogs
-// 接口已废弃，切换至云审计接口。见https://tapd.woa.com/pro/prong/stories/view/1010114221880719007
+// DescribeSnapshotGroups
+// This API is used to query the snapshot group list.
 //
-// 
+// This API is used to query the snapshot group list based on snapshot group ID, snapshot group status or snapshot ID associated with the snapshot group. The relationship among different criteria is AND. For detailed filtering information, see `Filter`.
 //
-// This API has been disused. Use the CloudAudit API instead, For more information, visit https://tapd.woa.com/pro/prong/stories/view/1010114221880719007.
-//
-// 
-//
-// This API is used to query the operation logs of a snapshot. It will be disused soon. Use [LookUpEvents](https://intl.cloud.tencent.com/document/product/629/12359?from_cn_redirect=1) instead.
+// If the parameter is empty, a certain number of the cloud disk list for the current user is returned (specified by `Limit`, defaults to 20).
 //
 // error code that may be returned:
-//  INTERNALERROR_COMPONENTERROR = "InternalError.ComponentError"
+//  INVALIDFILTER = "InvalidFilter"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
-//  INVALIDSNAPSHOTID_NOTFOUND = "InvalidSnapshotId.NotFound"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeSnapshotOperationLogsWithContext(ctx context.Context, request *DescribeSnapshotOperationLogsRequest) (response *DescribeSnapshotOperationLogsResponse, err error) {
+func (c *Client) DescribeSnapshotGroupsWithContext(ctx context.Context, request *DescribeSnapshotGroupsRequest) (response *DescribeSnapshotGroupsResponse, err error) {
     if request == nil {
-        request = NewDescribeSnapshotOperationLogsRequest()
+        request = NewDescribeSnapshotGroupsRequest()
     }
-    c.InitBaseRequest(&request.BaseRequest, "cbs", APIVersion, "DescribeSnapshotOperationLogs")
+    c.InitBaseRequest(&request.BaseRequest, "cbs", APIVersion, "DescribeSnapshotGroups")
     
     if c.GetCredential() == nil {
-        return nil, errors.New("DescribeSnapshotOperationLogs require credential")
+        return nil, errors.New("DescribeSnapshotGroups require credential")
     }
 
     request.SetContext(ctx)
     
-    response = NewDescribeSnapshotOperationLogsResponse()
+    response = NewDescribeSnapshotGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSnapshotOverviewRequest() (request *DescribeSnapshotOverviewRequest) {
+    request = &DescribeSnapshotOverviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cbs", APIVersion, "DescribeSnapshotOverview")
+    
+    
+    return
+}
+
+func NewDescribeSnapshotOverviewResponse() (response *DescribeSnapshotOverviewResponse) {
+    response = &DescribeSnapshotOverviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSnapshotOverview
+// This API is used to query the usage overview of user snapshots, including total snapshot capacity, cost capacity, etc.
+//
+// error code that may be returned:
+//  INVALIDFILTER = "InvalidFilter"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeSnapshotOverview(request *DescribeSnapshotOverviewRequest) (response *DescribeSnapshotOverviewResponse, err error) {
+    return c.DescribeSnapshotOverviewWithContext(context.Background(), request)
+}
+
+// DescribeSnapshotOverview
+// This API is used to query the usage overview of user snapshots, including total snapshot capacity, cost capacity, etc.
+//
+// error code that may be returned:
+//  INVALIDFILTER = "InvalidFilter"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeSnapshotOverviewWithContext(ctx context.Context, request *DescribeSnapshotOverviewRequest) (response *DescribeSnapshotOverviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeSnapshotOverviewRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cbs", APIVersion, "DescribeSnapshotOverview")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSnapshotOverview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSnapshotOverviewResponse()
     err = c.Send(request, response)
     return
 }
@@ -1791,7 +1993,11 @@ func NewGetSnapOverviewResponse() (response *GetSnapOverviewResponse) {
 }
 
 // GetSnapOverview
-// This API is used to get snapshot overview information.
+// This API is used to standardize API naming. This API will be decommissioned and replaced by the new API named DescribeSnapshotOverview.
+//
+// 
+//
+// This API is used to obtain snapshot overview information.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -1801,7 +2007,11 @@ func (c *Client) GetSnapOverview(request *GetSnapOverviewRequest) (response *Get
 }
 
 // GetSnapOverview
-// This API is used to get snapshot overview information.
+// This API is used to standardize API naming. This API will be decommissioned and replaced by the new API named DescribeSnapshotOverview.
+//
+// 
+//
+// This API is used to obtain snapshot overview information.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2065,6 +2275,82 @@ func (c *Client) InquiryPriceCreateDisksWithContext(ctx context.Context, request
     return
 }
 
+func NewInquiryPriceRenewDisksRequest() (request *InquiryPriceRenewDisksRequest) {
+    request = &InquiryPriceRenewDisksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cbs", APIVersion, "InquiryPriceRenewDisks")
+    
+    
+    return
+}
+
+func NewInquiryPriceRenewDisksResponse() (response *InquiryPriceRenewDisksResponse) {
+    response = &InquiryPriceRenewDisksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// InquiryPriceRenewDisks
+// This API is used to query the renewal price of CBS.
+//
+// 
+//
+// This API is used to support renewal along with mounted instances. The parameter specifies CurInstanceDeadline in [DiskChargePrepaid](https://www.tencentcloud.com/document/product/362/15669?from_cn_redirect=1#DiskChargePrepaid), and renewal will be performed at the expiry date after the instance is renewed.
+//
+// This API is used to support specifying different renewal durations for multiple cloud disks. The total price for renewing multiple cloud disks is returned.
+//
+// error code that may be returned:
+//  INVALIDDISK_NOTPORTABLE = "InvalidDisk.NotPortable"
+//  INVALIDDISK_NOTSUPPORTED = "InvalidDisk.NotSupported"
+//  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCEUNAVAILABLE_NOTPORTABLE = "ResourceUnavailable.NotPortable"
+//  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
+func (c *Client) InquiryPriceRenewDisks(request *InquiryPriceRenewDisksRequest) (response *InquiryPriceRenewDisksResponse, err error) {
+    return c.InquiryPriceRenewDisksWithContext(context.Background(), request)
+}
+
+// InquiryPriceRenewDisks
+// This API is used to query the renewal price of CBS.
+//
+// 
+//
+// This API is used to support renewal along with mounted instances. The parameter specifies CurInstanceDeadline in [DiskChargePrepaid](https://www.tencentcloud.com/document/product/362/15669?from_cn_redirect=1#DiskChargePrepaid), and renewal will be performed at the expiry date after the instance is renewed.
+//
+// This API is used to support specifying different renewal durations for multiple cloud disks. The total price for renewing multiple cloud disks is returned.
+//
+// error code that may be returned:
+//  INVALIDDISK_NOTPORTABLE = "InvalidDisk.NotPortable"
+//  INVALIDDISK_NOTSUPPORTED = "InvalidDisk.NotSupported"
+//  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCEUNAVAILABLE_NOTPORTABLE = "ResourceUnavailable.NotPortable"
+//  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
+func (c *Client) InquiryPriceRenewDisksWithContext(ctx context.Context, request *InquiryPriceRenewDisksRequest) (response *InquiryPriceRenewDisksResponse, err error) {
+    if request == nil {
+        request = NewInquiryPriceRenewDisksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cbs", APIVersion, "InquiryPriceRenewDisks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InquiryPriceRenewDisks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewInquiryPriceRenewDisksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewInquiryPriceResizeDiskRequest() (request *InquiryPriceResizeDiskRequest) {
     request = &InquiryPriceResizeDiskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2215,11 +2501,11 @@ func NewModifyDiskAttributesResponse() (response *ModifyDiskAttributesResponse) 
 }
 
 // ModifyDiskAttributes
-// * Only the project ID of elastic cloud disk can be modified. The project ID of the cloud disk created with the CVM is linked with the CVM. The project ID can be can be queried in the Portable field in the output parameters through the API [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1).
+// This API is used to modify only the Project ID of elastic cloud disks. The Project ID of a cloud disk created with a host is linked to the host. Whether a cloud disk is elastic can be checked through the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) API. See the Portable field explanation in the output parameters.
 //
-// * "Cloud disk name" is only used by users for their management. Tencent Cloud does not use the name as the basis for ticket submission or cloud disk management.
+// The "cloud disk name" is only for ease of management for users. Tencent Cloud does not use this name as a basis for submitting tickets or performing cloud disk management operations.
 //
-// * Batch operations are supported. If multiple cloud disk IDs are specified, all the specified cloud disks must have the same attribute. If there is a cloud disk that does not allow this operation, the operation is not performed and a specific error code is returned.
+// This API is used to support batch operations. If multiple cloud disk IDs are passed in, modify cloud disks to the same attribute. If there is a cloud disk that does not allow operation, the operation will not be executed and return a specific error code.
 //
 // error code that may be returned:
 //  INTERNALERROR_COMPONENTERROR = "InternalError.ComponentError"
@@ -2233,18 +2519,20 @@ func NewModifyDiskAttributesResponse() (response *ModifyDiskAttributesResponse) 
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINUSE_DISKMIGRATING = "ResourceInUse.DiskMigrating"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEINSUFFICIENT_UPGRADESERVICEBUSY = "ResourceInsufficient.UpgradeServiceBusy"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
+//  TRADEDEALCONFLICT = "TradeDealConflict"
 func (c *Client) ModifyDiskAttributes(request *ModifyDiskAttributesRequest) (response *ModifyDiskAttributesResponse, err error) {
     return c.ModifyDiskAttributesWithContext(context.Background(), request)
 }
 
 // ModifyDiskAttributes
-// * Only the project ID of elastic cloud disk can be modified. The project ID of the cloud disk created with the CVM is linked with the CVM. The project ID can be can be queried in the Portable field in the output parameters through the API [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1).
+// This API is used to modify only the Project ID of elastic cloud disks. The Project ID of a cloud disk created with a host is linked to the host. Whether a cloud disk is elastic can be checked through the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) API. See the Portable field explanation in the output parameters.
 //
-// * "Cloud disk name" is only used by users for their management. Tencent Cloud does not use the name as the basis for ticket submission or cloud disk management.
+// The "cloud disk name" is only for ease of management for users. Tencent Cloud does not use this name as a basis for submitting tickets or performing cloud disk management operations.
 //
-// * Batch operations are supported. If multiple cloud disk IDs are specified, all the specified cloud disks must have the same attribute. If there is a cloud disk that does not allow this operation, the operation is not performed and a specific error code is returned.
+// This API is used to support batch operations. If multiple cloud disk IDs are passed in, modify cloud disks to the same attribute. If there is a cloud disk that does not allow operation, the operation will not be executed and return a specific error code.
 //
 // error code that may be returned:
 //  INTERNALERROR_COMPONENTERROR = "InternalError.ComponentError"
@@ -2258,8 +2546,10 @@ func (c *Client) ModifyDiskAttributes(request *ModifyDiskAttributesRequest) (res
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINUSE_DISKMIGRATING = "ResourceInUse.DiskMigrating"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEINSUFFICIENT_UPGRADESERVICEBUSY = "ResourceInsufficient.UpgradeServiceBusy"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
+//  TRADEDEALCONFLICT = "TradeDealConflict"
 func (c *Client) ModifyDiskAttributesWithContext(ctx context.Context, request *ModifyDiskAttributesRequest) (response *ModifyDiskAttributesResponse, err error) {
     if request == nil {
         request = NewModifyDiskAttributesRequest()
@@ -2303,6 +2593,8 @@ func NewModifyDiskBackupQuotaResponse() (response *ModifyDiskBackupQuotaResponse
 //  INTERNALERROR_COMPONENTERROR = "InternalError.ComponentError"
 //  INVALIDACCOUNT_INSUFFICIENTBALANCE = "InvalidAccount.InsufficientBalance"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCEUNAVAILABLE_ATTACHED = "ResourceUnavailable.Attached"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 //  TRADEDEALCONFLICT = "TradeDealConflict"
 //  UNAUTHORIZEDOPERATION_NOTHAVEPAYMENTRIGHT = "UnauthorizedOperation.NotHavePaymentRight"
@@ -2317,6 +2609,8 @@ func (c *Client) ModifyDiskBackupQuota(request *ModifyDiskBackupQuotaRequest) (r
 //  INTERNALERROR_COMPONENTERROR = "InternalError.ComponentError"
 //  INVALIDACCOUNT_INSUFFICIENTBALANCE = "InvalidAccount.InsufficientBalance"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCEUNAVAILABLE_ATTACHED = "ResourceUnavailable.Attached"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 //  TRADEDEALCONFLICT = "TradeDealConflict"
 //  UNAUTHORIZEDOPERATION_NOTHAVEPAYMENTRIGHT = "UnauthorizedOperation.NotHavePaymentRight"
@@ -2429,13 +2723,13 @@ func NewModifySnapshotAttributeResponse() (response *ModifySnapshotAttributeResp
 }
 
 // ModifySnapshotAttribute
-// This API (ModifySnapshotAttribute) is used to modify the attributes of a specified snapshot.
+// This API is used to modify the attributes of a specified snapshot.
 //
 // 
 //
-// * Currently, you can only modify snapshot name and change non-permanent snapshots into permanent snapshots.
+// This API supports modifying snapshot name and expiration time, as well as changing a non-permanent snapshot to a permanent one.
 //
-// * "Snapshot name" is only used by users for their management. Tencent Cloud does not use the name as the basis for ticket submission or snapshot management.
+// The "snapshot name" is only for making user management convenient. Tencent Cloud does not use this name as a basis for submitting tickets or managing snapshot operations.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2449,13 +2743,13 @@ func (c *Client) ModifySnapshotAttribute(request *ModifySnapshotAttributeRequest
 }
 
 // ModifySnapshotAttribute
-// This API (ModifySnapshotAttribute) is used to modify the attributes of a specified snapshot.
+// This API is used to modify the attributes of a specified snapshot.
 //
 // 
 //
-// * Currently, you can only modify snapshot name and change non-permanent snapshots into permanent snapshots.
+// This API supports modifying snapshot name and expiration time, as well as changing a non-permanent snapshot to a permanent one.
 //
-// * "Snapshot name" is only used by users for their management. Tencent Cloud does not use the name as the basis for ticket submission or snapshot management.
+// The "snapshot name" is only for making user management convenient. Tencent Cloud does not use this name as a basis for submitting tickets or managing snapshot operations.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2687,6 +2981,7 @@ func NewResizeDiskResponse() (response *ResizeDiskResponse) {
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCEUNAVAILABLE_EXPIRE = "ResourceUnavailable.Expire"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
+//  RESOURCEUNAVAILABLE_SNAPSHOTCREATING = "ResourceUnavailable.SnapshotCreating"
 //  TRADEDEALCONFLICT = "TradeDealConflict"
 //  UNAUTHORIZEDOPERATION_NOTHAVEPAYMENTRIGHT = "UnauthorizedOperation.NotHavePaymentRight"
 //  UNSUPPORTEDOPERATION_INSTANCENOTSTOPPED = "UnsupportedOperation.InstanceNotStopped"
@@ -2715,6 +3010,7 @@ func (c *Client) ResizeDisk(request *ResizeDiskRequest) (response *ResizeDiskRes
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCEUNAVAILABLE_EXPIRE = "ResourceUnavailable.Expire"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
+//  RESOURCEUNAVAILABLE_SNAPSHOTCREATING = "ResourceUnavailable.SnapshotCreating"
 //  TRADEDEALCONFLICT = "TradeDealConflict"
 //  UNAUTHORIZEDOPERATION_NOTHAVEPAYMENTRIGHT = "UnauthorizedOperation.NotHavePaymentRight"
 //  UNSUPPORTEDOPERATION_INSTANCENOTSTOPPED = "UnsupportedOperation.InstanceNotStopped"
@@ -2770,6 +3066,7 @@ func NewTerminateDisksResponse() (response *TerminateDisksResponse) {
 //  INTERNALERROR_FAILQUERYRESOURCE = "InternalError.FailQueryResource"
 //  INVALIDDISK_EXPIRE = "InvalidDisk.Expire"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEBUSY = "ResourceBusy"
 //  RESOURCEINSUFFICIENT_OVERREFUNDQUOTA = "ResourceInsufficient.OverRefundQuota"
@@ -2799,6 +3096,7 @@ func (c *Client) TerminateDisks(request *TerminateDisksRequest) (response *Termi
 //  INTERNALERROR_FAILQUERYRESOURCE = "InternalError.FailQueryResource"
 //  INVALIDDISK_EXPIRE = "InvalidDisk.Expire"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEBUSY = "ResourceBusy"
 //  RESOURCEINSUFFICIENT_OVERREFUNDQUOTA = "ResourceInsufficient.OverRefundQuota"

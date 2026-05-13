@@ -110,7 +110,7 @@ const (
 	// Existing public network modification is not allowed.
 	FAILEDOPERATION_INVALIDEXISTPUBLICACCESSPOINTERROR = "FailedOperation.InvalidExistPublicAccessPointError"
 
-	// Invalid parameters.
+	// Invalid allowlist, invalid format or exceed the limit
 	FAILEDOPERATION_INVALIDWHITELISTERROR = "FailedOperation.InvalidWhiteListError"
 
 	// Settings not supported for this parameter in the current cluster.
@@ -173,6 +173,9 @@ const (
 	// Failed to configure the message TTL.
 	FAILEDOPERATION_SETTTL = "FailedOperation.SetTTL"
 
+	// Storage specification selection error. Choose the correct storage specification.
+	FAILEDOPERATION_STORAGESIZEERROR = "FailedOperation.StorageSizeError"
+
 	// You must clear the associated topic data before proceeding.
 	FAILEDOPERATION_TOPICINUSE = "FailedOperation.TopicInUse"
 
@@ -217,6 +220,9 @@ const (
 
 	// Incorrect parameter.
 	INVALIDPARAMETER = "InvalidParameter"
+
+	// 
+	INVALIDPARAMETER_INSTANCEVERSION = "InvalidParameter.InstanceVersion"
 
 	// Invalid management API address
 	INVALIDPARAMETER_INVALIDADMINURL = "InvalidParameter.InvalidAdminUrl"
@@ -302,9 +308,6 @@ const (
 	// The resource is in use.
 	RESOURCEINUSE = "ResourceInUse"
 
-	// The cluster already exists.
-	RESOURCEINUSE_CLUSTER = "ResourceInUse.Cluster"
-
 	// The environment role already exists.
 	RESOURCEINUSE_ENVIRONMENTROLE = "ResourceInUse.EnvironmentRole"
 
@@ -386,6 +389,9 @@ const (
 	// Unknown parameter error.
 	UNKNOWNPARAMETER = "UnknownParameter"
 
+	// Unknown parameter in delay message policy
+	UNKNOWNPARAMETER_DELAYMESSAGEPOLICY = "UnknownParameter.DelayMessagePolicy"
+
 	// Policy parameter error.
 	UNKNOWNPARAMETER_POLICY = "UnknownParameter.Policy"
 
@@ -394,6 +400,9 @@ const (
 
 	// The instance does not support configuration downgrade.
 	UNSUPPORTEDOPERATION_INSTANCEDOWNGRADE = "UnsupportedOperation.InstanceDowngrade"
+
+	// Do not support setting topic delay message policy operations
+	UNSUPPORTEDOPERATION_TOPICDELAYMESSAGE = "UnsupportedOperation.TopicDelayMessage"
 
 	// Unack operation is not supported in the current cluster.
 	UNSUPPORTEDOPERATION_TOPICUNACK = "UnsupportedOperation.TopicUnack"

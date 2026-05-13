@@ -160,6 +160,7 @@ func NewCreateCommandResponse() (response *CreateCommandResponse) {
 // This API is used to create a command.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TAGOPERATIONFAILED = "FailedOperation.TagOperationFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -197,6 +198,7 @@ func (c *Client) CreateCommand(request *CreateCommandRequest) (response *CreateC
 // This API is used to create a command.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TAGOPERATIONFAILED = "FailedOperation.TagOperationFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"

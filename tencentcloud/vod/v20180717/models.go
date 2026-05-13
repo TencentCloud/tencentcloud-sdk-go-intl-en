@@ -16965,13 +16965,18 @@ type HwPrivateAccess struct {
 }
 
 type IPFilterPolicy struct {
-
+	// IP access restriction status. Optional values:
+	// <li>Enabled: enable;</li>
+	// <li>Disabled: disable.</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// IP access restriction type:
+	// <li>Black: blocklist-based verification. Only IP requests from the IPList will be blocked.</li>
+	// <li>White: allowlist-based verification. Only IP requests from the IPList will be allowed.</li>
+	// <li>When Status is set to Enabled, FilterType must be assigned.</li>
 	FilterType *string `json:"FilterType,omitnil,omitempty" name:"FilterType"`
 
-
+	// IP list, supporting IPV4 addresses in X.X.X.X format, IPV6 addresses in X:X:X:X:X:X:X:X format, or CIDR notation /N (IPV4: 1 <= N <= 32; IPV6: 1 <= N <= 128). A maximum of 200 IPs or CIDR blocks can be added. When Status is set to Enabled, IPList must be assigned.
 	IPList []*string `json:"IPList,omitnil,omitempty" name:"IPList"`
 }
 
@@ -22869,7 +22874,7 @@ type ModifyVodDomainConfigRequestParams struct {
 	// Domain name
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// [Referer hotlink protection](https://intl.cloud.tencent.com/document/product/266/14046?from_cn_redirect=1) policy
@@ -22880,6 +22885,9 @@ type ModifyVodDomainConfigRequestParams struct {
 
 	// The QUIC configuration.
 	QUICConfig *DomainQUICConfig `json:"QUICConfig,omitnil,omitempty" name:"QUICConfig"`
+
+	// IP access restriction rules.
+	IPFilterPolicy *IPFilterPolicy `json:"IPFilterPolicy,omitnil,omitempty" name:"IPFilterPolicy"`
 }
 
 type ModifyVodDomainConfigRequest struct {
@@ -22888,7 +22896,7 @@ type ModifyVodDomainConfigRequest struct {
 	// Domain name
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// [Referer hotlink protection](https://intl.cloud.tencent.com/document/product/266/14046?from_cn_redirect=1) policy
@@ -22899,6 +22907,9 @@ type ModifyVodDomainConfigRequest struct {
 
 	// The QUIC configuration.
 	QUICConfig *DomainQUICConfig `json:"QUICConfig,omitnil,omitempty" name:"QUICConfig"`
+
+	// IP access restriction rules.
+	IPFilterPolicy *IPFilterPolicy `json:"IPFilterPolicy,omitnil,omitempty" name:"IPFilterPolicy"`
 }
 
 func (r *ModifyVodDomainConfigRequest) ToJsonString() string {
@@ -22918,6 +22929,7 @@ func (r *ModifyVodDomainConfigRequest) FromJsonString(s string) error {
 	delete(f, "RefererAuthPolicy")
 	delete(f, "UrlSignatureAuthPolicy")
 	delete(f, "QUICConfig")
+	delete(f, "IPFilterPolicy")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVodDomainConfigRequest has unknown keys!", "")
 	}
@@ -24121,7 +24133,7 @@ type ProcessMediaByMPSRequestParams struct {
 	// <p><b>VOD <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID.</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// <p>Optional parameter. This parameter is used for passing through to the media processing service (MPS) to trigger MPS video processing tasks from VOD. For details on different types of video processing parameters, refer to <a href="https://www.tencentcloud.com/document/product/266/131209?from_cn_redirect=1">Using MPS Media AI Capability</a>. You can create custom templates via the <a href="https://www.tencentcloud.com/document/product/266/122580?from_cn_redirect=1">CreateMPSTemplate</a> API.</p>
+	// <p>Optional parameter. This parameter is used for passing through to the media processing service (MPS) to trigger MPS video processing tasks from VOD.
 	MPSProcessMediaParams *string `json:"MPSProcessMediaParams,omitnil,omitempty" name:"MPSProcessMediaParams"`
 
 	// <p>Parameters for the video content analysis task. Valid when MPSProcessMediaParams is empty.</p>
@@ -24146,7 +24158,7 @@ type ProcessMediaByMPSRequest struct {
 	// <p><b>VOD <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID.</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// <p>Optional parameter. This parameter is used for passing through to the media processing service (MPS) to trigger MPS video processing tasks from VOD. For details on different types of video processing parameters, refer to <a href="https://www.tencentcloud.com/document/product/266/131209?from_cn_redirect=1">Using MPS Media AI Capability</a>. You can create custom templates via the <a href="https://www.tencentcloud.com/document/product/266/122580?from_cn_redirect=1">CreateMPSTemplate</a> API.</p>
+	// <p>Optional parameter. This parameter is used for passing through to the media processing service (MPS) to trigger MPS video processing tasks from VOD.
 	MPSProcessMediaParams *string `json:"MPSProcessMediaParams,omitnil,omitempty" name:"MPSProcessMediaParams"`
 
 	// <p>Parameters for the video content analysis task. Valid when MPSProcessMediaParams is empty.</p>

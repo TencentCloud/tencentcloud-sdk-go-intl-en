@@ -681,7 +681,7 @@ func NewCreateAutoCalloutTaskResponse() (response *CreateAutoCalloutTaskResponse
 //
 // 
 //
-// The feature requires purchase of the Intelligent Agent call package and is only available for own telephone number. For details, refer to the [Intelligent Agent Call Purchase Guide](https://www.tencentcloud.com/document/product/679/125953?from_cn_redirect=1).
+// The feature requires purchase of the Intelligent Agent call package and is only available for own telephone number.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PERMISSIONDENIED = "FailedOperation.PermissionDenied"
@@ -699,7 +699,7 @@ func (c *Client) CreateAutoCalloutTask(request *CreateAutoCalloutTaskRequest) (r
 //
 // 
 //
-// The feature requires purchase of the Intelligent Agent call package and is only available for own telephone number. For details, refer to the [Intelligent Agent Call Purchase Guide](https://www.tencentcloud.com/document/product/679/125953?from_cn_redirect=1).
+// The feature requires purchase of the Intelligent Agent call package and is only available for own telephone number.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PERMISSIONDENIED = "FailedOperation.PermissionDenied"

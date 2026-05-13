@@ -21,40 +21,56 @@ import (
 )
 
 type AdvancedRetentionPolicy struct {
-	// Retains one latest snapshot each day within `Days` days. Value range: [0, 100].
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Retains the latest snapshot of each day within the specified number of Days. value range: [0, 100].
 	Days *uint64 `json:"Days,omitnil,omitempty" name:"Days"`
 
-	// Retains one latest snapshot each week within `Weeks` weeks. Value range: [0, 100].
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Reserve the latest snapshot of each week for Weeks. value range: [0, 100].
 	Weeks *uint64 `json:"Weeks,omitnil,omitempty" name:"Weeks"`
 
-	// Retains one latest snapshot each month within `Months` months. Value range: [0, 100].
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Reserve the latest snapshot of each month within Months Months. value range: [0, 100].
 	Months *uint64 `json:"Months,omitnil,omitempty" name:"Months"`
 
-	// Retains one latest snapshot each year within `Years` years. Value range: [0, 100].
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Reserve the latest snapshot of each year within Years Years. value range: [0, 100].
 	Years *uint64 `json:"Years,omitnil,omitempty" name:"Years"`
+}
+
+type ApplyDisk struct {
+	// Specifies the snapshot ID associated with the snapshot group.
+	SnapshotId *string `json:"SnapshotId,omitnil,omitempty" name:"SnapshotId"`
+
+	// Specifies the original cloud disk ID of the snapshot associated with the snapshot group.
+	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 }
 
 // Predefined struct for user
 type ApplyDiskBackupRequestParams struct {
-	// ID of the cloud disk backup point, which can be queried through the `DescribeDiskBackups` API.
+	// Cloud disk backup point ID. can be queried through the [DescribeDiskBackups](https://www.tencentcloud.com/document/product/362/80278?from_cn_redirect=1) api.
 	DiskBackupId *string `json:"DiskBackupId,omitnil,omitempty" name:"DiskBackupId"`
 
-	// ID of the original cloud disk of the backup point, which can be queried through the `DescribeDisks` API.
+	// Original cloud disk ID of the backup point. can be queried through the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) api.
 	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
+
+	// Specifies whether to enable automatic shutdown before rolling back the CBS backup point. defaults to FALSE, which means no automatic shutdown.
+	AutoStopInstance *bool `json:"AutoStopInstance,omitnil,omitempty" name:"AutoStopInstance"`
+
+	// Whether to automatically start after rolling back the cloud disk backup point, default to FALSE, means do not auto boot. the AutoStartInstance parameter can only be set to true when AutoStopInstance is true.
+	AutoStartInstance *bool `json:"AutoStartInstance,omitnil,omitempty" name:"AutoStartInstance"`
 }
 
 type ApplyDiskBackupRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the cloud disk backup point, which can be queried through the `DescribeDiskBackups` API.
+	// Cloud disk backup point ID. can be queried through the [DescribeDiskBackups](https://www.tencentcloud.com/document/product/362/80278?from_cn_redirect=1) api.
 	DiskBackupId *string `json:"DiskBackupId,omitnil,omitempty" name:"DiskBackupId"`
 
-	// ID of the original cloud disk of the backup point, which can be queried through the `DescribeDisks` API.
+	// Original cloud disk ID of the backup point. can be queried through the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) api.
 	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
+
+	// Specifies whether to enable automatic shutdown before rolling back the CBS backup point. defaults to FALSE, which means no automatic shutdown.
+	AutoStopInstance *bool `json:"AutoStopInstance,omitnil,omitempty" name:"AutoStopInstance"`
+
+	// Whether to automatically start after rolling back the cloud disk backup point, default to FALSE, means do not auto boot. the AutoStartInstance parameter can only be set to true when AutoStopInstance is true.
+	AutoStartInstance *bool `json:"AutoStartInstance,omitnil,omitempty" name:"AutoStartInstance"`
 }
 
 func (r *ApplyDiskBackupRequest) ToJsonString() string {
@@ -71,6 +87,8 @@ func (r *ApplyDiskBackupRequest) FromJsonString(s string) error {
 	}
 	delete(f, "DiskBackupId")
 	delete(f, "DiskId")
+	delete(f, "AutoStopInstance")
+	delete(f, "AutoStartInstance")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplyDiskBackupRequest has unknown keys!", "")
 	}
@@ -79,7 +97,7 @@ func (r *ApplyDiskBackupRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ApplyDiskBackupResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -96,6 +114,81 @@ func (r *ApplyDiskBackupResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ApplyDiskBackupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ApplySnapshotGroupRequestParams struct {
+	// Specifies the snapshot group ID rolled back.
+	SnapshotGroupId *string `json:"SnapshotGroupId,omitnil,omitempty" name:"SnapshotGroupId"`
+
+	// Specifies the snapshot ID associated with the rollback snapshot group and the original cloud disk ID list of the corresponding snapshot.
+	ApplyDisks []*ApplyDisk `json:"ApplyDisks,omitnil,omitempty" name:"ApplyDisks"`
+
+	// Specifies whether to perform automatic shutdown before rollback.
+	AutoStopInstance *bool `json:"AutoStopInstance,omitnil,omitempty" name:"AutoStopInstance"`
+
+	// Specifies whether to automatically start after completion.
+	AutoStartInstance *bool `json:"AutoStartInstance,omitnil,omitempty" name:"AutoStartInstance"`
+}
+
+type ApplySnapshotGroupRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the snapshot group ID rolled back.
+	SnapshotGroupId *string `json:"SnapshotGroupId,omitnil,omitempty" name:"SnapshotGroupId"`
+
+	// Specifies the snapshot ID associated with the rollback snapshot group and the original cloud disk ID list of the corresponding snapshot.
+	ApplyDisks []*ApplyDisk `json:"ApplyDisks,omitnil,omitempty" name:"ApplyDisks"`
+
+	// Specifies whether to perform automatic shutdown before rollback.
+	AutoStopInstance *bool `json:"AutoStopInstance,omitnil,omitempty" name:"AutoStopInstance"`
+
+	// Specifies whether to automatically start after completion.
+	AutoStartInstance *bool `json:"AutoStartInstance,omitnil,omitempty" name:"AutoStartInstance"`
+}
+
+func (r *ApplySnapshotGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ApplySnapshotGroupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SnapshotGroupId")
+	delete(f, "ApplyDisks")
+	delete(f, "AutoStopInstance")
+	delete(f, "AutoStartInstance")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplySnapshotGroupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ApplySnapshotGroupResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ApplySnapshotGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *ApplySnapshotGroupResponseParams `json:"Response"`
+}
+
+func (r *ApplySnapshotGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ApplySnapshotGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -198,7 +291,7 @@ type AttachDisksRequestParams struct {
 	// Optional parameter. If this is not passed only the mount operation is executed. If `True` is passed, the cloud disk will be configured to be terminated when the server it is mounted to is terminated. This is only valid for pay-as-you-go cloud disks.
 	DeleteWithInstance *bool `json:"DeleteWithInstance,omitnil,omitempty" name:"DeleteWithInstance"`
 
-	// (Optional) Specifies the cloud disk mounting method. It’s only valid for BM models. Valid values: <br><li>PF<br><li>VF
+	// Optional parameter, used to control the mount mode used in cloud disk mounting, currently only applicable to blackstone bare metal model. valid values: <br><li>PF</li><br><li>VF</li>.
 	AttachMode *string `json:"AttachMode,omitnil,omitempty" name:"AttachMode"`
 }
 
@@ -214,7 +307,7 @@ type AttachDisksRequest struct {
 	// Optional parameter. If this is not passed only the mount operation is executed. If `True` is passed, the cloud disk will be configured to be terminated when the server it is mounted to is terminated. This is only valid for pay-as-you-go cloud disks.
 	DeleteWithInstance *bool `json:"DeleteWithInstance,omitnil,omitempty" name:"DeleteWithInstance"`
 
-	// (Optional) Specifies the cloud disk mounting method. It’s only valid for BM models. Valid values: <br><li>PF<br><li>VF
+	// Optional parameter, used to control the mount mode used in cloud disk mounting, currently only applicable to blackstone bare metal model. valid values: <br><li>PF</li><br><li>VF</li>.
 	AttachMode *string `json:"AttachMode,omitnil,omitempty" name:"AttachMode"`
 }
 
@@ -274,17 +367,22 @@ type AutoMountConfiguration struct {
 }
 
 type AutoSnapshotPolicy struct {
-	// The list of cloud disk IDs that the current scheduled snapshot policy is bound to.
+	// It lists IDs of cloud disks that have been bound to the current regular snapshot policy.
+	// 
+	// In the scenario of DescribeDiskAssociatedAutoSnapshotPolicy, this field returns empty.
 	DiskIdSet []*string `json:"DiskIdSet,omitnil,omitempty" name:"DiskIdSet"`
 
 	// Whether scheduled snapshot policy is activated.
 	IsActivated *bool `json:"IsActivated,omitnil,omitempty" name:"IsActivated"`
 
-	// Scheduled snapshot policy state. Value range:<br><li>NORMAL: Normal<br><li>ISOLATED: Isolated.
+	// Status of regular snapshot policy. valid values:.
+	// <ul>
+	// <Li>NORMAL: specifies the scaling group is in normal state.</li>.
+	// <Li>ISOLATED: specifies the instance is isolated.</li>.
+	// </ul>
 	AutoSnapshotPolicyState *string `json:"AutoSnapshotPolicyState,omitnil,omitempty" name:"AutoSnapshotPolicyState"`
 
-	// Whether it is to replicate a snapshot across accounts. `1`: yes, `0`: no.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether it is a cross-account snapshot replication. valid values: 1 (yes), 0 (no).
 	IsCopyToRemote *uint64 `json:"IsCopyToRemote,omitnil,omitempty" name:"IsCopyToRemote"`
 
 	// Whether the snapshot created by this scheduled snapshot policy is retained permanently.
@@ -312,16 +410,13 @@ type AutoSnapshotPolicy struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CopyToAccountUin *string `json:"CopyToAccountUin,omitnil,omitempty" name:"CopyToAccountUin"`
 
-	// List of IDs of the instances associated with the scheduled snapshot policy.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Lists instance ids that are bound to the current periodic snapshot policy.
 	InstanceIdSet []*string `json:"InstanceIdSet,omitnil,omitempty" name:"InstanceIdSet"`
 
-	// The number of months for which the snapshots created by this scheduled snapshot policy can be retained.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the number of months snapshot can be retained.
 	RetentionMonths *uint64 `json:"RetentionMonths,omitnil,omitempty" name:"RetentionMonths"`
 
-	// The maximum number of snapshots created by this scheduled snapshot policy that can be retained.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the maximum retention number of snapshots created by scheduled snapshot.
 	RetentionAmount *uint64 `json:"RetentionAmount,omitnil,omitempty" name:"RetentionAmount"`
 
 	// Retention policy for scheduled snapshots.
@@ -333,13 +428,12 @@ type AutoSnapshotPolicy struct {
 	CopyFromAccountUin *string `json:"CopyFromAccountUin,omitnil,omitempty" name:"CopyFromAccountUin"`
 
 	// Tag.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 // Predefined struct for user
 type BindAutoSnapshotPolicyRequestParams struct {
-	// ID of scheduled snapshot policy to be bound.
+	// Specifies the ID of the regular snapshot policy to bind. query via the DescribeAutoSnapshotPolicies api (https://www.tencentcloud.com/document/api/362/33556?from_cn_redirect=1).
 	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitnil,omitempty" name:"AutoSnapshotPolicyId"`
 
 	// List of cloud disk IDs to be bound. Maximum of 80 cloud disks can be bound per request.
@@ -349,7 +443,7 @@ type BindAutoSnapshotPolicyRequestParams struct {
 type BindAutoSnapshotPolicyRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of scheduled snapshot policy to be bound.
+	// Specifies the ID of the regular snapshot policy to bind. query via the DescribeAutoSnapshotPolicies api (https://www.tencentcloud.com/document/api/362/33556?from_cn_redirect=1).
 	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitnil,omitempty" name:"AutoSnapshotPolicyId"`
 
 	// List of cloud disk IDs to be bound. Maximum of 80 cloud disks can be bound per request.
@@ -378,7 +472,7 @@ func (r *BindAutoSnapshotPolicyRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type BindAutoSnapshotPolicyResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -449,7 +543,7 @@ type CopySnapshotCrossRegionsResponseParams struct {
 	// Result of the cross-region replication task. The ID of the new snapshot replica is returned if the request succeeds. Otherwise `Error` is returned.
 	SnapshotCopyResultSet []*SnapshotCopyResult `json:"SnapshotCopyResultSet,omitnil,omitempty" name:"SnapshotCopyResultSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -544,7 +638,7 @@ type CreateAutoSnapshotPolicyResponseParams struct {
 	// The time that initial backup will start.
 	NextTriggerTime *string `json:"NextTriggerTime,omitnil,omitempty" name:"NextTriggerTime"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -608,7 +702,7 @@ type CreateDiskBackupResponseParams struct {
 	// ID of the cloud disk backup point.
 	DiskBackupId *string `json:"DiskBackupId,omitnil,omitempty" name:"DiskBackupId"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -636,7 +730,7 @@ type CreateDisksRequestParams struct {
 	// Cloud disk billing mode. POSTPAID_BY_HOUR: Pay-as-you-go by hour<br><li>CDCPAID: Billed together with the bound dedicated cluster<br>For more information on the pricing in each mode, see [Pricing Overview](https://intl.cloud.tencent.com/document/product/362/2413?from_cn_redirect=1).
 	DiskChargeType *string `json:"DiskChargeType,omitnil,omitempty" name:"DiskChargeType"`
 
-	// Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD Cloud Storage<br><li>CLOUD_PREMIUM: Premium Cloud Disk<br><li>CLOUD_BSSD: Balanced SSD<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: ulTra SSD.
+	// Hard disk media type. valid values:<br><li>CLOUD_PREMIUM: indicates high-performance CLOUD block storage</li><br><li>CLOUD_BSSD: indicates universal type SSD CLOUD disk</li><br><li>CLOUD_SSD: indicates SSD CLOUD disk</li><br><li>CLOUD_HSSD: indicates enhanced SSD CLOUD disk</li><br><li>CLOUD_TSSD: indicates ultra-fast SSD cbs.</li>ultra-fast SSD CBS (CLOUD_TSSD) is only supported when purchased with some instances and not currently supported for separate creation.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
 	// Cloud disk name. If it is not specified, "Unnamed" will be used by default. The maximum length is 60 bytes.
@@ -651,35 +745,41 @@ type CreateDisksRequestParams struct {
 	// Number of cloud disks to be created. If it is not specified, `1` will be used by default. There is an upper limit on the maximum number of cloud disks that can be created in a single request. For more information, see [Use Limits](https://intl.cloud.tencent.com/doc/product/362/5145?from_cn_redirect=1).
 	DiskCount *uint64 `json:"DiskCount,omitnil,omitempty" name:"DiskCount"`
 
-	// Extra performance purchased for a cloud disk.<br>This optional parameter is only valid for ulTra SSD (CLOUD_TSSD) and Enhanced SSD (CLOUD_HSSD).
+	// Use this parameter to purchase additional performance for CLOUD disk in MB/s.<br>currently, only extreme CBS (CLOUD_TSSD) and enhanced SSD CLOUD disk (CLOUD_HSSD) are supported.
 	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitnil,omitempty" name:"ThroughputPerformance"`
 
-	// Cloud disk size in GB. <br><li>`DiskSize` is not required if `SnapshotId` is specified. In this case, the size of the cloud disk will be equal to that of the snapshot. <br><li>If you specify both `SnapshotId` and `DiskSize`, the specified disk size cannot be smaller than the snapshot size. <br><li>For the value range of cloud disk size, see [Cloud Disk Types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1).
+	// Custom key for purchasing encrypted disks. when this parameter is input, the Encrypt parameter cannot be empty.
+	KmsKeyId *string `json:"KmsKeyId,omitnil,omitempty" name:"KmsKeyId"`
+
+	// Cloud disk size in GiB. <li>if `SnapshotId` is input, `DiskSize` can be omitted. at this point, the new cloud disk size will be the snapshot size.</li> <li>if both `SnapshotId` and `DiskSize` are input, the cloud disk size must be greater than or equal to the snapshot size.</li> <li>for the cloud disk size range, please refer to the [product type](https://www.tencentcloud.com/document/product/362/2353?from_cn_redirect=1) of cloud block storage.</li>.
 	DiskSize *uint64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// Optional parameter. Default value: `False`. If `True` is specified, the new cloud disk will be shared.
+	// When True is entered, the cloud disk will be created as a shared cloud disk. default is False. since shared cloud disk does not support encryption, this parameter cannot be imported simultaneously with the Encrypt parameter.
 	Shareable *bool `json:"Shareable,omitnil,omitempty" name:"Shareable"`
 
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
 	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
 
-	// This parameter is used to create encrypted cloud disks. It is fixed at `ENCRYPT`.
+	// This parameter is used to create an encrypted cloud disk, with the value fixed as ENCRYPT. since shared cloud disk does not support encryption, this parameter cannot be imported simultaneously with the Shareable parameter.
 	Encrypt *string `json:"Encrypt,omitnil,omitempty" name:"Encrypt"`
 
-	// Relevant parameter settings for the prepaid mode (i.e., monthly subscription). The monthly subscription cloud disk purchase attributes such as usage period and whether or not auto-renewal is set up can be specified using this parameter. <br>This parameter is required when creating a prepaid cloud disk. This parameter is not required when creating an hourly postpaid cloud disk. 
+	// Prepaid mode, that is, the settings for the monthly subscription-related parameters. through this parameter, you can specify the purchase duration of the monthly subscribed cloud disk, whether to enable auto-renewal, and other attributes. this parameter is required for creating a prepaid cloud disk, but no need to specify it when creating an hourly postpaid cloud disk.
 	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil,omitempty" name:"DiskChargePrepaid"`
 
-	// Whether to delete the associated non-permanently reserved snapshots upon deletion of the source cloud disk. `0`: No (default value). `1`: Yes. To check whether a snapshot is permanently reserved, see the `IsPermanent` field returned by the `DescribeSnapshots` API.
+	// Delete associated non-permanently retained snapshots when destroying the cloud disk. 0 means non-permanent snapshots are not deleted with cloud disk destruction, 1 means non-permanent snapshots are deleted with cloud disk destruction. default value is 0. whether a snapshot is permanently retained can be determined through the IsPermanent field in the snapshot description returned by the [DescribeSnapshots](https://www.tencentcloud.com/document/api/362/15647?from_cn_redirect=1) api. True represents a permanent snapshot, False represents a non-permanent snapshot.
 	DeleteSnapshot *int64 `json:"DeleteSnapshot,omitnil,omitempty" name:"DeleteSnapshot"`
 
-	// Specifies whether to automatically attach and initialize the newly created data disk.
+	// Specifies auto mount and initialization of the data disk when creating a cloud disk. this parameter cannot be imported simultaneously with the Encrypt parameter because encrypted disks do not support auto mount or initialization.
 	AutoMountConfiguration *AutoMountConfiguration `json:"AutoMountConfiguration,omitnil,omitempty" name:"AutoMountConfiguration"`
 
 	// Specifies the cloud disk backup point quota.
 	DiskBackupQuota *uint64 `json:"DiskBackupQuota,omitnil,omitempty" name:"DiskBackupQuota"`
 
-	// Specifies whether to enable disk bursting.
+	// Specifies whether to enable burst performance when creating a CLOUD disk. currently only supports extreme cbs (CLOUD_TSSD) and enhanced SSD CLOUD disk (CLOUD_HSSD) with CLOUD disk size greater than or equal to 460GiB.
 	BurstPerformance *bool `json:"BurstPerformance,omitnil,omitempty" name:"BurstPerformance"`
+
+	// Specifies the CBS encryption type. valid values are ENCRYPT_V1 and ENCRYPT_V2, representing first generation and second generation encryption technology respectively. the two encryption technologies are incompatible. it is recommended to prioritize using second generation encryption technology ENCRYPT_V2. first generation encryption is only supported on some outdated models. this parameter is valid only when creating an encrypted cloud disk.
+	EncryptType *string `json:"EncryptType,omitnil,omitempty" name:"EncryptType"`
 }
 
 type CreateDisksRequest struct {
@@ -691,7 +791,7 @@ type CreateDisksRequest struct {
 	// Cloud disk billing mode. POSTPAID_BY_HOUR: Pay-as-you-go by hour<br><li>CDCPAID: Billed together with the bound dedicated cluster<br>For more information on the pricing in each mode, see [Pricing Overview](https://intl.cloud.tencent.com/document/product/362/2413?from_cn_redirect=1).
 	DiskChargeType *string `json:"DiskChargeType,omitnil,omitempty" name:"DiskChargeType"`
 
-	// Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD Cloud Storage<br><li>CLOUD_PREMIUM: Premium Cloud Disk<br><li>CLOUD_BSSD: Balanced SSD<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: ulTra SSD.
+	// Hard disk media type. valid values:<br><li>CLOUD_PREMIUM: indicates high-performance CLOUD block storage</li><br><li>CLOUD_BSSD: indicates universal type SSD CLOUD disk</li><br><li>CLOUD_SSD: indicates SSD CLOUD disk</li><br><li>CLOUD_HSSD: indicates enhanced SSD CLOUD disk</li><br><li>CLOUD_TSSD: indicates ultra-fast SSD cbs.</li>ultra-fast SSD CBS (CLOUD_TSSD) is only supported when purchased with some instances and not currently supported for separate creation.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
 	// Cloud disk name. If it is not specified, "Unnamed" will be used by default. The maximum length is 60 bytes.
@@ -706,35 +806,41 @@ type CreateDisksRequest struct {
 	// Number of cloud disks to be created. If it is not specified, `1` will be used by default. There is an upper limit on the maximum number of cloud disks that can be created in a single request. For more information, see [Use Limits](https://intl.cloud.tencent.com/doc/product/362/5145?from_cn_redirect=1).
 	DiskCount *uint64 `json:"DiskCount,omitnil,omitempty" name:"DiskCount"`
 
-	// Extra performance purchased for a cloud disk.<br>This optional parameter is only valid for ulTra SSD (CLOUD_TSSD) and Enhanced SSD (CLOUD_HSSD).
+	// Use this parameter to purchase additional performance for CLOUD disk in MB/s.<br>currently, only extreme CBS (CLOUD_TSSD) and enhanced SSD CLOUD disk (CLOUD_HSSD) are supported.
 	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitnil,omitempty" name:"ThroughputPerformance"`
 
-	// Cloud disk size in GB. <br><li>`DiskSize` is not required if `SnapshotId` is specified. In this case, the size of the cloud disk will be equal to that of the snapshot. <br><li>If you specify both `SnapshotId` and `DiskSize`, the specified disk size cannot be smaller than the snapshot size. <br><li>For the value range of cloud disk size, see [Cloud Disk Types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1).
+	// Custom key for purchasing encrypted disks. when this parameter is input, the Encrypt parameter cannot be empty.
+	KmsKeyId *string `json:"KmsKeyId,omitnil,omitempty" name:"KmsKeyId"`
+
+	// Cloud disk size in GiB. <li>if `SnapshotId` is input, `DiskSize` can be omitted. at this point, the new cloud disk size will be the snapshot size.</li> <li>if both `SnapshotId` and `DiskSize` are input, the cloud disk size must be greater than or equal to the snapshot size.</li> <li>for the cloud disk size range, please refer to the [product type](https://www.tencentcloud.com/document/product/362/2353?from_cn_redirect=1) of cloud block storage.</li>.
 	DiskSize *uint64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// Optional parameter. Default value: `False`. If `True` is specified, the new cloud disk will be shared.
+	// When True is entered, the cloud disk will be created as a shared cloud disk. default is False. since shared cloud disk does not support encryption, this parameter cannot be imported simultaneously with the Encrypt parameter.
 	Shareable *bool `json:"Shareable,omitnil,omitempty" name:"Shareable"`
 
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
 	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
 
-	// This parameter is used to create encrypted cloud disks. It is fixed at `ENCRYPT`.
+	// This parameter is used to create an encrypted cloud disk, with the value fixed as ENCRYPT. since shared cloud disk does not support encryption, this parameter cannot be imported simultaneously with the Shareable parameter.
 	Encrypt *string `json:"Encrypt,omitnil,omitempty" name:"Encrypt"`
 
-	// Relevant parameter settings for the prepaid mode (i.e., monthly subscription). The monthly subscription cloud disk purchase attributes such as usage period and whether or not auto-renewal is set up can be specified using this parameter. <br>This parameter is required when creating a prepaid cloud disk. This parameter is not required when creating an hourly postpaid cloud disk. 
+	// Prepaid mode, that is, the settings for the monthly subscription-related parameters. through this parameter, you can specify the purchase duration of the monthly subscribed cloud disk, whether to enable auto-renewal, and other attributes. this parameter is required for creating a prepaid cloud disk, but no need to specify it when creating an hourly postpaid cloud disk.
 	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil,omitempty" name:"DiskChargePrepaid"`
 
-	// Whether to delete the associated non-permanently reserved snapshots upon deletion of the source cloud disk. `0`: No (default value). `1`: Yes. To check whether a snapshot is permanently reserved, see the `IsPermanent` field returned by the `DescribeSnapshots` API.
+	// Delete associated non-permanently retained snapshots when destroying the cloud disk. 0 means non-permanent snapshots are not deleted with cloud disk destruction, 1 means non-permanent snapshots are deleted with cloud disk destruction. default value is 0. whether a snapshot is permanently retained can be determined through the IsPermanent field in the snapshot description returned by the [DescribeSnapshots](https://www.tencentcloud.com/document/api/362/15647?from_cn_redirect=1) api. True represents a permanent snapshot, False represents a non-permanent snapshot.
 	DeleteSnapshot *int64 `json:"DeleteSnapshot,omitnil,omitempty" name:"DeleteSnapshot"`
 
-	// Specifies whether to automatically attach and initialize the newly created data disk.
+	// Specifies auto mount and initialization of the data disk when creating a cloud disk. this parameter cannot be imported simultaneously with the Encrypt parameter because encrypted disks do not support auto mount or initialization.
 	AutoMountConfiguration *AutoMountConfiguration `json:"AutoMountConfiguration,omitnil,omitempty" name:"AutoMountConfiguration"`
 
 	// Specifies the cloud disk backup point quota.
 	DiskBackupQuota *uint64 `json:"DiskBackupQuota,omitnil,omitempty" name:"DiskBackupQuota"`
 
-	// Specifies whether to enable disk bursting.
+	// Specifies whether to enable burst performance when creating a CLOUD disk. currently only supports extreme cbs (CLOUD_TSSD) and enhanced SSD CLOUD disk (CLOUD_HSSD) with CLOUD disk size greater than or equal to 460GiB.
 	BurstPerformance *bool `json:"BurstPerformance,omitnil,omitempty" name:"BurstPerformance"`
+
+	// Specifies the CBS encryption type. valid values are ENCRYPT_V1 and ENCRYPT_V2, representing first generation and second generation encryption technology respectively. the two encryption technologies are incompatible. it is recommended to prioritize using second generation encryption technology ENCRYPT_V2. first generation encryption is only supported on some outdated models. this parameter is valid only when creating an encrypted cloud disk.
+	EncryptType *string `json:"EncryptType,omitnil,omitempty" name:"EncryptType"`
 }
 
 func (r *CreateDisksRequest) ToJsonString() string {
@@ -757,6 +863,7 @@ func (r *CreateDisksRequest) FromJsonString(s string) error {
 	delete(f, "SnapshotId")
 	delete(f, "DiskCount")
 	delete(f, "ThroughputPerformance")
+	delete(f, "KmsKeyId")
 	delete(f, "DiskSize")
 	delete(f, "Shareable")
 	delete(f, "ClientToken")
@@ -766,6 +873,7 @@ func (r *CreateDisksRequest) FromJsonString(s string) error {
 	delete(f, "AutoMountConfiguration")
 	delete(f, "DiskBackupQuota")
 	delete(f, "BurstPerformance")
+	delete(f, "EncryptType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDisksRequest has unknown keys!", "")
 	}
@@ -777,7 +885,7 @@ type CreateDisksResponseParams struct {
 	// ID list of the created cloud disks. Note: This field may return null, indicating that no valid values can be obtained.
 	DiskIdSet []*string `json:"DiskIdSet,omitnil,omitempty" name:"DiskIdSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -798,6 +906,77 @@ func (r *CreateDisksResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateSnapshotGroupRequestParams struct {
+	// Specifies the cloud disk ID list for creating snapshot groups. disks mounted on the same instance must be selected.
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
+
+	// Snapshot group name. snapshots associated with the snapshot group inherit the snapshot group name. example: if the snapshot group name is testSnapshotGroup and the snapshot group is associated with two snapshots, the snapshot names are testSnapshotGroup_0 and testSnapshotGroup_1 respectively.
+	SnapshotGroupName *string `json:"SnapshotGroupName,omitnil,omitempty" name:"SnapshotGroupName"`
+
+	// Specifies the Tag list that should be bound to the snapshot group.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+type CreateSnapshotGroupRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the cloud disk ID list for creating snapshot groups. disks mounted on the same instance must be selected.
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
+
+	// Snapshot group name. snapshots associated with the snapshot group inherit the snapshot group name. example: if the snapshot group name is testSnapshotGroup and the snapshot group is associated with two snapshots, the snapshot names are testSnapshotGroup_0 and testSnapshotGroup_1 respectively.
+	SnapshotGroupName *string `json:"SnapshotGroupName,omitnil,omitempty" name:"SnapshotGroupName"`
+
+	// Specifies the Tag list that should be bound to the snapshot group.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+func (r *CreateSnapshotGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSnapshotGroupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DiskIds")
+	delete(f, "SnapshotGroupName")
+	delete(f, "Tags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSnapshotGroupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSnapshotGroupResponseParams struct {
+	// Specifies the snapshot group ID created successfully.
+	SnapshotGroupId *string `json:"SnapshotGroupId,omitnil,omitempty" name:"SnapshotGroupId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateSnapshotGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateSnapshotGroupResponseParams `json:"Response"`
+}
+
+func (r *CreateSnapshotGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSnapshotGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateSnapshotRequestParams struct {
 	// ID of the cloud disk for which to create a snapshot, which can be queried through the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API.
 	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
@@ -808,11 +987,14 @@ type CreateSnapshotRequestParams struct {
 	// Expiration time of the snapshot. It must be in UTC ISO-8601 format, eg. 2022-01-08T09:47:55+00:00. The snapshot will be automatically deleted when it expires.
 	Deadline *string `json:"Deadline,omitnil,omitempty" name:"Deadline"`
 
-	// ID of the cloud disk backup point. When this parameter is specified, the snapshot will be created from the backup point.
+	// Backup point ID of the cbs. when input this parameter, a snapshot will be created through the backup point. the backup point ID can be obtained through the [DescribeDiskBackups](https://www.tencentcloud.com/document/product/362/80278?from_cn_redirect=1) API query.
 	DiskBackupId *string `json:"DiskBackupId,omitnil,omitempty" name:"DiskBackupId"`
 
 	// Tags bound to the snapshot.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Snapshot association cloud DISK type. valid values: SYSTEM_DISK (SYSTEM DISK), DATA_DISK (DATA DISK). optional. if left empty, the snapshot type remains consistent with the cloud DISK type. this parameter is based on some scenes where users need to create a DATA DISK snapshot from a SYSTEM DISK for shared usage.
+	DiskUsage *string `json:"DiskUsage,omitnil,omitempty" name:"DiskUsage"`
 }
 
 type CreateSnapshotRequest struct {
@@ -827,11 +1009,14 @@ type CreateSnapshotRequest struct {
 	// Expiration time of the snapshot. It must be in UTC ISO-8601 format, eg. 2022-01-08T09:47:55+00:00. The snapshot will be automatically deleted when it expires.
 	Deadline *string `json:"Deadline,omitnil,omitempty" name:"Deadline"`
 
-	// ID of the cloud disk backup point. When this parameter is specified, the snapshot will be created from the backup point.
+	// Backup point ID of the cbs. when input this parameter, a snapshot will be created through the backup point. the backup point ID can be obtained through the [DescribeDiskBackups](https://www.tencentcloud.com/document/product/362/80278?from_cn_redirect=1) API query.
 	DiskBackupId *string `json:"DiskBackupId,omitnil,omitempty" name:"DiskBackupId"`
 
 	// Tags bound to the snapshot.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Snapshot association cloud DISK type. valid values: SYSTEM_DISK (SYSTEM DISK), DATA_DISK (DATA DISK). optional. if left empty, the snapshot type remains consistent with the cloud DISK type. this parameter is based on some scenes where users need to create a DATA DISK snapshot from a SYSTEM DISK for shared usage.
+	DiskUsage *string `json:"DiskUsage,omitnil,omitempty" name:"DiskUsage"`
 }
 
 func (r *CreateSnapshotRequest) ToJsonString() string {
@@ -851,6 +1036,7 @@ func (r *CreateSnapshotRequest) FromJsonString(s string) error {
 	delete(f, "Deadline")
 	delete(f, "DiskBackupId")
 	delete(f, "Tags")
+	delete(f, "DiskUsage")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSnapshotRequest has unknown keys!", "")
 	}
@@ -862,7 +1048,7 @@ type CreateSnapshotResponseParams struct {
 	// ID of the created snapshot <br/>Note: This field may return null, indicating that no valid values can be obtained.
 	SnapshotId *string `json:"SnapshotId,omitnil,omitempty" name:"SnapshotId"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -884,14 +1070,14 @@ func (r *CreateSnapshotResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteAutoSnapshotPoliciesRequestParams struct {
-	// List of scheduled snapshot policy IDs to be deleted.
+	// Specifies the ID list of the regular snapshot policies to delete. query via the DescribeAutoSnapshotPolicies api (https://www.tencentcloud.com/document/api/362/33556?from_cn_redirect=1).
 	AutoSnapshotPolicyIds []*string `json:"AutoSnapshotPolicyIds,omitnil,omitempty" name:"AutoSnapshotPolicyIds"`
 }
 
 type DeleteAutoSnapshotPoliciesRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of scheduled snapshot policy IDs to be deleted.
+	// Specifies the ID list of the regular snapshot policies to delete. query via the DescribeAutoSnapshotPolicies api (https://www.tencentcloud.com/document/api/362/33556?from_cn_redirect=1).
 	AutoSnapshotPolicyIds []*string `json:"AutoSnapshotPolicyIds,omitnil,omitempty" name:"AutoSnapshotPolicyIds"`
 }
 
@@ -916,7 +1102,7 @@ func (r *DeleteAutoSnapshotPoliciesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteAutoSnapshotPoliciesResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -938,14 +1124,14 @@ func (r *DeleteAutoSnapshotPoliciesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteDiskBackupsRequestParams struct {
-	// ID of the cloud disk backup point to be deleted.
+	// Cloud disk backup point ID to be deleted. can be queried through the [DescribeDiskBackups](https://www.tencentcloud.com/document/product/362/80278?from_cn_redirect=1) api.
 	DiskBackupIds []*string `json:"DiskBackupIds,omitnil,omitempty" name:"DiskBackupIds"`
 }
 
 type DeleteDiskBackupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the cloud disk backup point to be deleted.
+	// Cloud disk backup point ID to be deleted. can be queried through the [DescribeDiskBackups](https://www.tencentcloud.com/document/product/362/80278?from_cn_redirect=1) api.
 	DiskBackupIds []*string `json:"DiskBackupIds,omitnil,omitempty" name:"DiskBackupIds"`
 }
 
@@ -970,7 +1156,7 @@ func (r *DeleteDiskBackupsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteDiskBackupsResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -987,6 +1173,74 @@ func (r *DeleteDiskBackupsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteDiskBackupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSnapshotGroupRequestParams struct {
+	// Specifies the snapshot group ID.
+	SnapshotGroupId *string `json:"SnapshotGroupId,omitnil,omitempty" name:"SnapshotGroupId"`
+
+	// List of snapshot group ids. this parameter and the snapshot group ID must provide at least one. if both are provided, they will be merged with the snapshot group ID.
+	SnapshotGroupIds []*string `json:"SnapshotGroupIds,omitnil,omitempty" name:"SnapshotGroupIds"`
+
+	// Specifies whether to delete the image associated with the snapshot group at the same time. valid values: set to false (not delete the image bound to the snapshot group; at this point, if the snapshot group has bound images, deletion will fail) or set to true (delete the image bound to the snapshot group simultaneously). default value is false.
+	DeleteBindImages *bool `json:"DeleteBindImages,omitnil,omitempty" name:"DeleteBindImages"`
+}
+
+type DeleteSnapshotGroupRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the snapshot group ID.
+	SnapshotGroupId *string `json:"SnapshotGroupId,omitnil,omitempty" name:"SnapshotGroupId"`
+
+	// List of snapshot group ids. this parameter and the snapshot group ID must provide at least one. if both are provided, they will be merged with the snapshot group ID.
+	SnapshotGroupIds []*string `json:"SnapshotGroupIds,omitnil,omitempty" name:"SnapshotGroupIds"`
+
+	// Specifies whether to delete the image associated with the snapshot group at the same time. valid values: set to false (not delete the image bound to the snapshot group; at this point, if the snapshot group has bound images, deletion will fail) or set to true (delete the image bound to the snapshot group simultaneously). default value is false.
+	DeleteBindImages *bool `json:"DeleteBindImages,omitnil,omitempty" name:"DeleteBindImages"`
+}
+
+func (r *DeleteSnapshotGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSnapshotGroupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SnapshotGroupId")
+	delete(f, "SnapshotGroupIds")
+	delete(f, "DeleteBindImages")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSnapshotGroupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSnapshotGroupResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteSnapshotGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteSnapshotGroupResponseParams `json:"Response"`
+}
+
+func (r *DeleteSnapshotGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSnapshotGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1031,7 +1285,7 @@ func (r *DeleteSnapshotsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteSnapshotsResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1056,7 +1310,10 @@ type DescribeAutoSnapshotPoliciesRequestParams struct {
 	// List of scheduled snapshot policy IDs to be queried. The parameter does not support specifying both `SnapshotIds` and `Filters`.
 	AutoSnapshotPolicyIds []*string `json:"AutoSnapshotPolicyIds,omitnil,omitempty" name:"AutoSnapshotPolicyIds"`
 
-	// Filter conditions. Specification of both the `AutoSnapshotPolicyIds` and `Filters` parameters is not supported.<br><li>auto-snapshot-policy-id - Array of String - Required or not: No - (Filter condition) Filters according to the scheduled snapshot policy ID. The format of the scheduled snapshot policy ID is as follows: `asp-11112222`. <br><li>auto-snapshot-policy-state - Array of String - Required or not: No - (Filter condition) Filters according to the status of the scheduled snapshot policy. The format of the scheduled snapshot policy ID is as follows: `asp-11112222`. (NORMAL: normal | ISOLATED: isolated)<br><li>auto-snapshot-policy-name - Array of String - Required or not: No - (Filter condition) Filters according to the name of the scheduled snapshot policy.
+	// Filter criteria. AutoSnapshotPolicyIds and Filters cannot be specified at the same time.
+	// <li>auto-snapshot-policy-id - Array of String - required: no - (filter condition) filter by regular snapshot policy id. regular snapshot policy id such as: `asp-3stvwfxx`.</li>.
+	// <li>AutoSnapshotPolicyState - Array of String - required: no - (filter condition) filters by the status of the regular snapshot policy. regular snapshot policy ID format: `asp-3stvwfxx`. (NORMAL: NORMAL | ISOLATED: ISOLATED).</li>.
+	// <li>AutoSnapshotPolicyName - Array of String - required: no - (filter condition) filters by the name of the regular snapshot policy.</li>.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of results to be returned. Default is 20. Maximum is 100. For more information on `Limit`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
@@ -1065,7 +1322,7 @@ type DescribeAutoSnapshotPoliciesRequestParams struct {
 	// Offset. Default is 0. For more information on `Offset`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Outputs the ordering of the scheduled snapshot lists. Value range: <br><li>ASC: Ascending order <br><li>DESC: Descending order.
+	// Specifies the output order of the regular snapshot list. valid values: <br><li>ASC: ascending order<br></li><li>DESC: descending order.</li>.
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
 	// The sorting filter applied to the scheduled snapshot list. Value range: <Sort by creation time of scheduled snapshot. By default, this is sorted by creation time.
@@ -1078,7 +1335,10 @@ type DescribeAutoSnapshotPoliciesRequest struct {
 	// List of scheduled snapshot policy IDs to be queried. The parameter does not support specifying both `SnapshotIds` and `Filters`.
 	AutoSnapshotPolicyIds []*string `json:"AutoSnapshotPolicyIds,omitnil,omitempty" name:"AutoSnapshotPolicyIds"`
 
-	// Filter conditions. Specification of both the `AutoSnapshotPolicyIds` and `Filters` parameters is not supported.<br><li>auto-snapshot-policy-id - Array of String - Required or not: No - (Filter condition) Filters according to the scheduled snapshot policy ID. The format of the scheduled snapshot policy ID is as follows: `asp-11112222`. <br><li>auto-snapshot-policy-state - Array of String - Required or not: No - (Filter condition) Filters according to the status of the scheduled snapshot policy. The format of the scheduled snapshot policy ID is as follows: `asp-11112222`. (NORMAL: normal | ISOLATED: isolated)<br><li>auto-snapshot-policy-name - Array of String - Required or not: No - (Filter condition) Filters according to the name of the scheduled snapshot policy.
+	// Filter criteria. AutoSnapshotPolicyIds and Filters cannot be specified at the same time.
+	// <li>auto-snapshot-policy-id - Array of String - required: no - (filter condition) filter by regular snapshot policy id. regular snapshot policy id such as: `asp-3stvwfxx`.</li>.
+	// <li>AutoSnapshotPolicyState - Array of String - required: no - (filter condition) filters by the status of the regular snapshot policy. regular snapshot policy ID format: `asp-3stvwfxx`. (NORMAL: NORMAL | ISOLATED: ISOLATED).</li>.
+	// <li>AutoSnapshotPolicyName - Array of String - required: no - (filter condition) filters by the name of the regular snapshot policy.</li>.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of results to be returned. Default is 20. Maximum is 100. For more information on `Limit`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
@@ -1087,7 +1347,7 @@ type DescribeAutoSnapshotPoliciesRequest struct {
 	// Offset. Default is 0. For more information on `Offset`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Outputs the ordering of the scheduled snapshot lists. Value range: <br><li>ASC: Ascending order <br><li>DESC: Descending order.
+	// Specifies the output order of the regular snapshot list. valid values: <br><li>ASC: ascending order<br></li><li>DESC: descending order.</li>.
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
 	// The sorting filter applied to the scheduled snapshot list. Value range: <Sort by creation time of scheduled snapshot. By default, this is sorted by creation time.
@@ -1126,7 +1386,7 @@ type DescribeAutoSnapshotPoliciesResponseParams struct {
 	// List of scheduled snapshot policies.
 	AutoSnapshotPolicySet []*AutoSnapshotPolicy `json:"AutoSnapshotPolicySet,omitnil,omitempty" name:"AutoSnapshotPolicySet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1148,14 +1408,14 @@ func (r *DescribeAutoSnapshotPoliciesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDiskAssociatedAutoSnapshotPolicyRequestParams struct {
-	// The ID of the queried cloud disk.
+	// Specifies the cloud disk ID to query. can be queried via the [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315?from_cn_redirect=1) api.
 	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 }
 
 type DescribeDiskAssociatedAutoSnapshotPolicyRequest struct {
 	*tchttp.BaseRequest
 	
-	// The ID of the queried cloud disk.
+	// Specifies the cloud disk ID to query. can be queried via the [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315?from_cn_redirect=1) api.
 	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 }
 
@@ -1186,7 +1446,7 @@ type DescribeDiskAssociatedAutoSnapshotPolicyResponseParams struct {
 	// List of scheduled snapshots bound to cloud disk.
 	AutoSnapshotPolicySet []*AutoSnapshotPolicy `json:"AutoSnapshotPolicySet,omitnil,omitempty" name:"AutoSnapshotPolicySet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1211,9 +1471,7 @@ type DescribeDiskBackupsRequestParams struct {
 	// List of IDs of the backup points to be queried. `DiskBackupIds` and `Filters` cannot be specified at the same time.
 	DiskBackupIds []*string `json:"DiskBackupIds,omitnil,omitempty" name:"DiskBackupIds"`
 
-	// Filter. `DiskBackupIds` and `Filters` cannot be specified at the same time. Valid values: <br><li>disk-backup-id - Array of String - Required: No - (Filter) Filter by backup point ID in the format of `dbp-11112222`.
-	// <br><li>disk-id - Array of String - Required: No - (Filter) Filter by ID of the cloud disk for which backup points are created.
-	// <br><li>disk-usage - Array of String - Required: No - (Filter) Filter by type of the cloud disk for which backup points are created. (SYSTEM_DISK: System disk | DATA_DISK: Data disk)
+	// Filter criteria. parameters must not be specified simultaneously for DiskBackupIds and Filters. filter conditions:<br><li>disk-backup-id - Array of String - required: no - (filter condition) Filters by backup point id. backup point id format: dbp-11112222.</li><br><li>disk-id - Array of String - required: no - (filter condition) Filters by cloud disk id where the backup point was created. cloud disk id format: disk-srftydert.</li><br><li>disk-usage - Array of String - required: no - (filter condition) Filters by cloud disk type (SYSTEM_disk: represents SYSTEM disk | DATA_disk: represents DATA disk).</li>.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0. For more information on `Offset`, see the relevant section of the API [Overview](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
@@ -1222,10 +1480,10 @@ type DescribeDiskBackupsRequestParams struct {
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section of the API [Overview](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Sorting order of cloud disk backup points. Valid values:<br><li>ASC: Ascending<br><li>DESC: Descending
+	// Specifies the sorting order of the CBS backup point list. default: ASC. valid values: <br><li>ASC: ascending order</li><br><li>DESC: descending order.</li>.
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// The field by which cloud disk backup points are sorted. Valid values:<br><li>CREATE_TIME: Sort by creation time<br>Backup points are sorted by creation time by default.
+	// Field on which the list of cloud disk backup points is sorted. valid values: <br><li>CREATE_TIME: sort by creation TIME of the cloud disk backup point</li><br>sort by creation TIME by default.
 	OrderField *string `json:"OrderField,omitnil,omitempty" name:"OrderField"`
 }
 
@@ -1235,9 +1493,7 @@ type DescribeDiskBackupsRequest struct {
 	// List of IDs of the backup points to be queried. `DiskBackupIds` and `Filters` cannot be specified at the same time.
 	DiskBackupIds []*string `json:"DiskBackupIds,omitnil,omitempty" name:"DiskBackupIds"`
 
-	// Filter. `DiskBackupIds` and `Filters` cannot be specified at the same time. Valid values: <br><li>disk-backup-id - Array of String - Required: No - (Filter) Filter by backup point ID in the format of `dbp-11112222`.
-	// <br><li>disk-id - Array of String - Required: No - (Filter) Filter by ID of the cloud disk for which backup points are created.
-	// <br><li>disk-usage - Array of String - Required: No - (Filter) Filter by type of the cloud disk for which backup points are created. (SYSTEM_DISK: System disk | DATA_DISK: Data disk)
+	// Filter criteria. parameters must not be specified simultaneously for DiskBackupIds and Filters. filter conditions:<br><li>disk-backup-id - Array of String - required: no - (filter condition) Filters by backup point id. backup point id format: dbp-11112222.</li><br><li>disk-id - Array of String - required: no - (filter condition) Filters by cloud disk id where the backup point was created. cloud disk id format: disk-srftydert.</li><br><li>disk-usage - Array of String - required: no - (filter condition) Filters by cloud disk type (SYSTEM_disk: represents SYSTEM disk | DATA_disk: represents DATA disk).</li>.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0. For more information on `Offset`, see the relevant section of the API [Overview](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
@@ -1246,10 +1502,10 @@ type DescribeDiskBackupsRequest struct {
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section of the API [Overview](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Sorting order of cloud disk backup points. Valid values:<br><li>ASC: Ascending<br><li>DESC: Descending
+	// Specifies the sorting order of the CBS backup point list. default: ASC. valid values: <br><li>ASC: ascending order</li><br><li>DESC: descending order.</li>.
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// The field by which cloud disk backup points are sorted. Valid values:<br><li>CREATE_TIME: Sort by creation time<br>Backup points are sorted by creation time by default.
+	// Field on which the list of cloud disk backup points is sorted. valid values: <br><li>CREATE_TIME: sort by creation TIME of the cloud disk backup point</li><br>sort by creation TIME by default.
 	OrderField *string `json:"OrderField,omitnil,omitempty" name:"OrderField"`
 }
 
@@ -1285,7 +1541,7 @@ type DescribeDiskBackupsResponseParams struct {
 	// List of details of cloud disk backup points.
 	DiskBackupSet []*DiskBackup `json:"DiskBackupSet,omitnil,omitempty" name:"DiskBackupSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1307,57 +1563,63 @@ func (r *DescribeDiskBackupsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDiskConfigQuotaRequestParams struct {
-	// Inquiry type. Value range: INQUIRY_CBS_CONFIG: query the configuration list of cloud disks <br><li>INQUIRY_CVM_CONFIG: query the configuration list of cloud disks and instances.
+	// INQUIRY type. valid values:<br>INQUIRY_CBS_CONFIG: query the cloud disk configuration list<br>INQUIRY_CVM_CONFIG: query the configuration list of cloud disks with instances.
 	InquiryType *string `json:"InquiryType,omitnil,omitempty" name:"InquiryType"`
-
-	// Query configuration under one or more [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo).
-	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 
 	// Billing mode. Value range: <br><li>POSTPAID_BY_HOUR: postpaid.
 	DiskChargeType *string `json:"DiskChargeType,omitnil,omitempty" name:"DiskChargeType"`
 
-	// Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD
-	DiskTypes []*string `json:"DiskTypes,omitnil,omitempty" name:"DiskTypes"`
-
-	// The system disk or data disk. Value range: <br><li>SYSTEM_DISK: System disk <br><li>DATA_DISK: Data disk.
-	DiskUsage *string `json:"DiskUsage,omitnil,omitempty" name:"DiskUsage"`
-
 	// Filter by the instance model series, such as S1, I1 and M1. For more information, please see [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1)
 	InstanceFamilies []*string `json:"InstanceFamilies,omitnil,omitempty" name:"InstanceFamilies"`
+
+	// Hard disk media type. valid values: <br> CLOUD_BASIC: BASIC CLOUD disk <br> CLOUD_PREMIUM: high-performance CLOUD block storage <br> CLOUD_SSD: SSD CLOUD disk <br> CLOUD_HSSD: enhanced SSD CLOUD disk.
+	DiskTypes []*string `json:"DiskTypes,omitnil,omitempty" name:"DiskTypes"`
+
+	// Query configuration under one or more [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo).
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
+
+	// Instance memory size in GB.
+	Memory *uint64 `json:"Memory,omitnil,omitempty" name:"Memory"`
+
+	// SYSTEM DISK or DATA DISK. valid values:<br>SYSTEM_DISK: SYSTEM DISK<br>DATA_DISK: DATA DISK.
+	DiskUsage *string `json:"DiskUsage,omitnil,omitempty" name:"DiskUsage"`
 
 	// Instance CPU cores.
 	CPU *uint64 `json:"CPU,omitnil,omitempty" name:"CPU"`
 
-	// Instance memory size.
-	Memory *uint64 `json:"Memory,omitnil,omitempty" name:"Memory"`
+	// Dedicated cluster ID.
+	DedicatedClusterId *string `json:"DedicatedClusterId,omitnil,omitempty" name:"DedicatedClusterId"`
 }
 
 type DescribeDiskConfigQuotaRequest struct {
 	*tchttp.BaseRequest
 	
-	// Inquiry type. Value range: INQUIRY_CBS_CONFIG: query the configuration list of cloud disks <br><li>INQUIRY_CVM_CONFIG: query the configuration list of cloud disks and instances.
+	// INQUIRY type. valid values:<br>INQUIRY_CBS_CONFIG: query the cloud disk configuration list<br>INQUIRY_CVM_CONFIG: query the configuration list of cloud disks with instances.
 	InquiryType *string `json:"InquiryType,omitnil,omitempty" name:"InquiryType"`
-
-	// Query configuration under one or more [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo).
-	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 
 	// Billing mode. Value range: <br><li>POSTPAID_BY_HOUR: postpaid.
 	DiskChargeType *string `json:"DiskChargeType,omitnil,omitempty" name:"DiskChargeType"`
 
-	// Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD
-	DiskTypes []*string `json:"DiskTypes,omitnil,omitempty" name:"DiskTypes"`
-
-	// The system disk or data disk. Value range: <br><li>SYSTEM_DISK: System disk <br><li>DATA_DISK: Data disk.
-	DiskUsage *string `json:"DiskUsage,omitnil,omitempty" name:"DiskUsage"`
-
 	// Filter by the instance model series, such as S1, I1 and M1. For more information, please see [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1)
 	InstanceFamilies []*string `json:"InstanceFamilies,omitnil,omitempty" name:"InstanceFamilies"`
+
+	// Hard disk media type. valid values: <br> CLOUD_BASIC: BASIC CLOUD disk <br> CLOUD_PREMIUM: high-performance CLOUD block storage <br> CLOUD_SSD: SSD CLOUD disk <br> CLOUD_HSSD: enhanced SSD CLOUD disk.
+	DiskTypes []*string `json:"DiskTypes,omitnil,omitempty" name:"DiskTypes"`
+
+	// Query configuration under one or more [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo).
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
+
+	// Instance memory size in GB.
+	Memory *uint64 `json:"Memory,omitnil,omitempty" name:"Memory"`
+
+	// SYSTEM DISK or DATA DISK. valid values:<br>SYSTEM_DISK: SYSTEM DISK<br>DATA_DISK: DATA DISK.
+	DiskUsage *string `json:"DiskUsage,omitnil,omitempty" name:"DiskUsage"`
 
 	// Instance CPU cores.
 	CPU *uint64 `json:"CPU,omitnil,omitempty" name:"CPU"`
 
-	// Instance memory size.
-	Memory *uint64 `json:"Memory,omitnil,omitempty" name:"Memory"`
+	// Dedicated cluster ID.
+	DedicatedClusterId *string `json:"DedicatedClusterId,omitnil,omitempty" name:"DedicatedClusterId"`
 }
 
 func (r *DescribeDiskConfigQuotaRequest) ToJsonString() string {
@@ -1373,13 +1635,14 @@ func (r *DescribeDiskConfigQuotaRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "InquiryType")
-	delete(f, "Zones")
 	delete(f, "DiskChargeType")
-	delete(f, "DiskTypes")
-	delete(f, "DiskUsage")
 	delete(f, "InstanceFamilies")
-	delete(f, "CPU")
+	delete(f, "DiskTypes")
+	delete(f, "Zones")
 	delete(f, "Memory")
+	delete(f, "DiskUsage")
+	delete(f, "CPU")
+	delete(f, "DedicatedClusterId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDiskConfigQuotaRequest has unknown keys!", "")
 	}
@@ -1391,7 +1654,7 @@ type DescribeDiskConfigQuotaResponseParams struct {
 	// List of cloud disk configurations.
 	DiskConfigSet []*DiskConfig `json:"DiskConfigSet,omitnil,omitempty" name:"DiskConfigSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1412,125 +1675,52 @@ func (r *DescribeDiskConfigQuotaResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type DescribeDiskOperationLogsRequestParams struct {
-	// Filter conditions. The following conditions are supported:
-	// <li>disk-id - Array of String - Required or not: Yes - Filter by cloud disk ID, with maximum of 10 cloud disk IDs able to be specified per request.
-	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
-
-	// The start time of the operation logs to be queried, for example: '2019-11-22 00:00:00"
-	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
-
-	// The end time of the operation logs to be queried, for example: '2019-11-22 23:59:59"
-	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
-}
-
-type DescribeDiskOperationLogsRequest struct {
-	*tchttp.BaseRequest
-	
-	// Filter conditions. The following conditions are supported:
-	// <li>disk-id - Array of String - Required or not: Yes - Filter by cloud disk ID, with maximum of 10 cloud disk IDs able to be specified per request.
-	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
-
-	// The start time of the operation logs to be queried, for example: '2019-11-22 00:00:00"
-	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
-
-	// The end time of the operation logs to be queried, for example: '2019-11-22 23:59:59"
-	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
-}
-
-func (r *DescribeDiskOperationLogsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeDiskOperationLogsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Filters")
-	delete(f, "BeginTime")
-	delete(f, "EndTime")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDiskOperationLogsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeDiskOperationLogsResponseParams struct {
-	// List of cloud disk operation logs.
-	DiskOperationLogSet []*DiskOperationLog `json:"DiskOperationLogSet,omitnil,omitempty" name:"DiskOperationLogSet"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type DescribeDiskOperationLogsResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeDiskOperationLogsResponseParams `json:"Response"`
-}
-
-func (r *DescribeDiskOperationLogsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeDiskOperationLogsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type DescribeDisksRequestParams struct {
-	// Query by one or more cloud disk IDs, such as `disk-11112222`. For the format of this parameter, please see the ids.N section of the API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1). This parameter does not support specifying both `DiskIds` and `Filters`.
-	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
-
 	// Filters. You cannot specify `DiskIds` and `Filters` at the same time. <br><li>disk-usage - Array of String - Optional - Filters by cloud disk type. (SYSTEM_DISK: system disk | DATA_DISK: data disk) <br><li>disk-charge-type - Array of String - Optional - Filters by cloud disk billing method. (POSTPAID_BY_HOUR: pay-as-you-go) <br><li>portable - Array of String- Optional - Filters by whether the cloud disk is elastic or not. (TRUE: elastic | FALSE: non-elastic) <br><li>project-id - Array of Integer - Optional - Filters by the ID of the project to which a cloud disk belongs. <br><li>disk-id - Array of String - Optional - Filters by cloud disk ID, such as `disk-11112222`. <br><li>disk-name - Array of String - Optional - Filters by cloud disk name. <br><li>disk-type - Array of String - Optional - Filters by cloud disk media type (CLOUD_BASIC: HDD cloud disk | CLOUD_PREMIUM: Premium Cloud Storage | CLOUD_SSD: SSD cloud disk.) <br><li>disk-state - Array of String - Optional - Filters by cloud disk state. (UNATTACHED: not mounted | ATTACHING: being mounted | ATTACHED: mounted | DETACHING: being unmounted | EXPANDING: being expanded | ROLLBACKING: being rolled back | TORECYCLE: to be repossessed.) <br><li>instance-id - Array of String - Optional - Filters by the ID of the CVM instance on which a cloud disk is mounted. You can use this parameter to query the cloud disks mounted on specific CVMs. <br><li>zone - Array of String - Optional - Filters by [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo) <br><li>instance-ip-address - Array of String - Optional - Filters by the private or public IP of the CVM on which a cloud disk is mounted. <br><li>instance-name - Array of String - Optional - Filters by the name of the instance on which a cloud disk is mounted. <br><li>tag-key - Array of String - Optional - Filters by tag key. <br><li>tag-value - Array of String - Optional - Filters by tag value. <br><li>tag:tag-key - Array of String - Optional - Filters by tag key-value pair. Please replace `tag-key` with a specific tag key.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
-
-	// Offset. Default is 0. For more information on `Offset`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
-	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of results to be returned. Default is 20. Maximum is 100. For more information on `Limit`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Outputs the ordering of the cloud disk list. Value range: <br><li>ASC: Ascending order <br><li>DESC: Descending order.
-	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-
-	// The field by which the cloud disk list is sorted. Value range: <br><li>CREATE_TIME: sorted by the creation time of cloud disks <br><li>DEADLINE: sorted by the expiration time of cloud disks<br>By default, the cloud disk list is sorted by the creation time of cloud disks.
+	// Field on which the list of cloud disks is sorted. valid values: <br><li>CREATE_TIME: sort by creation TIME of the cloud disk</li><br><li>DEADLINE: sort by expiration TIME of the cloud disk</li><br>sort by creation TIME by default.
 	OrderField *string `json:"OrderField,omitnil,omitempty" name:"OrderField"`
+
+	// Offset. Default is 0. For more information on `Offset`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Whether the ID of the periodic snapshot policy bound to the cloud disk needs to be returned in the cloud disk details. TRUE: return; FALSE: do not return.
 	ReturnBindAutoSnapshotPolicy *bool `json:"ReturnBindAutoSnapshotPolicy,omitnil,omitempty" name:"ReturnBindAutoSnapshotPolicy"`
+
+	// Query by one or more cloud disk IDs, such as `disk-11112222`. For the format of this parameter, please see the ids.N section of the API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1). This parameter does not support specifying both `DiskIds` and `Filters`.
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
+
+	// Specifies the sorting order of the cloud disk list. valid values: <br><li>ASC: ascending order</li><br><li>DESC: descending order.</li>.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 }
 
 type DescribeDisksRequest struct {
 	*tchttp.BaseRequest
 	
-	// Query by one or more cloud disk IDs, such as `disk-11112222`. For the format of this parameter, please see the ids.N section of the API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1). This parameter does not support specifying both `DiskIds` and `Filters`.
-	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
-
 	// Filters. You cannot specify `DiskIds` and `Filters` at the same time. <br><li>disk-usage - Array of String - Optional - Filters by cloud disk type. (SYSTEM_DISK: system disk | DATA_DISK: data disk) <br><li>disk-charge-type - Array of String - Optional - Filters by cloud disk billing method. (POSTPAID_BY_HOUR: pay-as-you-go) <br><li>portable - Array of String- Optional - Filters by whether the cloud disk is elastic or not. (TRUE: elastic | FALSE: non-elastic) <br><li>project-id - Array of Integer - Optional - Filters by the ID of the project to which a cloud disk belongs. <br><li>disk-id - Array of String - Optional - Filters by cloud disk ID, such as `disk-11112222`. <br><li>disk-name - Array of String - Optional - Filters by cloud disk name. <br><li>disk-type - Array of String - Optional - Filters by cloud disk media type (CLOUD_BASIC: HDD cloud disk | CLOUD_PREMIUM: Premium Cloud Storage | CLOUD_SSD: SSD cloud disk.) <br><li>disk-state - Array of String - Optional - Filters by cloud disk state. (UNATTACHED: not mounted | ATTACHING: being mounted | ATTACHED: mounted | DETACHING: being unmounted | EXPANDING: being expanded | ROLLBACKING: being rolled back | TORECYCLE: to be repossessed.) <br><li>instance-id - Array of String - Optional - Filters by the ID of the CVM instance on which a cloud disk is mounted. You can use this parameter to query the cloud disks mounted on specific CVMs. <br><li>zone - Array of String - Optional - Filters by [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo) <br><li>instance-ip-address - Array of String - Optional - Filters by the private or public IP of the CVM on which a cloud disk is mounted. <br><li>instance-name - Array of String - Optional - Filters by the name of the instance on which a cloud disk is mounted. <br><li>tag-key - Array of String - Optional - Filters by tag key. <br><li>tag-value - Array of String - Optional - Filters by tag value. <br><li>tag:tag-key - Array of String - Optional - Filters by tag key-value pair. Please replace `tag-key` with a specific tag key.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
-
-	// Offset. Default is 0. For more information on `Offset`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
-	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of results to be returned. Default is 20. Maximum is 100. For more information on `Limit`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Outputs the ordering of the cloud disk list. Value range: <br><li>ASC: Ascending order <br><li>DESC: Descending order.
-	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-
-	// The field by which the cloud disk list is sorted. Value range: <br><li>CREATE_TIME: sorted by the creation time of cloud disks <br><li>DEADLINE: sorted by the expiration time of cloud disks<br>By default, the cloud disk list is sorted by the creation time of cloud disks.
+	// Field on which the list of cloud disks is sorted. valid values: <br><li>CREATE_TIME: sort by creation TIME of the cloud disk</li><br><li>DEADLINE: sort by expiration TIME of the cloud disk</li><br>sort by creation TIME by default.
 	OrderField *string `json:"OrderField,omitnil,omitempty" name:"OrderField"`
+
+	// Offset. Default is 0. For more information on `Offset`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Whether the ID of the periodic snapshot policy bound to the cloud disk needs to be returned in the cloud disk details. TRUE: return; FALSE: do not return.
 	ReturnBindAutoSnapshotPolicy *bool `json:"ReturnBindAutoSnapshotPolicy,omitnil,omitempty" name:"ReturnBindAutoSnapshotPolicy"`
+
+	// Query by one or more cloud disk IDs, such as `disk-11112222`. For the format of this parameter, please see the ids.N section of the API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1). This parameter does not support specifying both `DiskIds` and `Filters`.
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
+
+	// Specifies the sorting order of the cloud disk list. valid values: <br><li>ASC: ascending order</li><br><li>DESC: descending order.</li>.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 }
 
 func (r *DescribeDisksRequest) ToJsonString() string {
@@ -1545,13 +1735,13 @@ func (r *DescribeDisksRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "DiskIds")
 	delete(f, "Filters")
-	delete(f, "Offset")
 	delete(f, "Limit")
-	delete(f, "Order")
 	delete(f, "OrderField")
+	delete(f, "Offset")
 	delete(f, "ReturnBindAutoSnapshotPolicy")
+	delete(f, "DiskIds")
+	delete(f, "Order")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDisksRequest has unknown keys!", "")
 	}
@@ -1566,7 +1756,7 @@ type DescribeDisksResponseParams struct {
 	// List of cloud disk details.
 	DiskSet []*Disk `json:"DiskSet,omitnil,omitempty" name:"DiskSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1623,7 +1813,7 @@ type DescribeInstancesDiskNumResponseParams struct {
 	// The quantity of mounted and mountable elastic cloud disks for each cloud virtual machine
 	AttachDetail []*AttachDetail `json:"AttachDetail,omitnil,omitempty" name:"AttachDetail"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1644,75 +1834,139 @@ func (r *DescribeInstancesDiskNumResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type DescribeSnapshotOperationLogsRequestParams struct {
-	// Filter conditions. The following conditions are supported:
-	// <li>snapshot-id - Array of String - Required or not: Yes - Filter by snapshot ID, with maximum of 10 snapshot IDs able to be specified per request.
+type DescribeSnapshotGroupsRequestParams struct {
+	// Filter criteria.<br><li>snapshot-group-id - Array of String - Required: No - (Filter criteria) Filter by snapshot group ID.<br><li>snapshot-group-state - Array of String - Required: No - (Filter criteria) Filter by snapshot group state. (NORMAL: Normal | CREATING: Creating | ROLLBACKING: Rolling back)<br><li>snapshot-group-name - Array of String - Required: No - (Filter criteria) Filter by snapshot group name.<br><li>snapshot-id - Array of String - Required: No - (Filter criteria) Filter by snapshot ID within the snapshot group.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// The start time of the operation logs to be queried, for example: '2019-11-22 00:00:00"
-	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// The end time of the operation logs to be queried, for example: '2019-11-22 23:59:59"
-	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+	// Number of returns, with a default value of 20, and a maximum value of 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
-type DescribeSnapshotOperationLogsRequest struct {
+type DescribeSnapshotGroupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Filter conditions. The following conditions are supported:
-	// <li>snapshot-id - Array of String - Required or not: Yes - Filter by snapshot ID, with maximum of 10 snapshot IDs able to be specified per request.
+	// Filter criteria.<br><li>snapshot-group-id - Array of String - Required: No - (Filter criteria) Filter by snapshot group ID.<br><li>snapshot-group-state - Array of String - Required: No - (Filter criteria) Filter by snapshot group state. (NORMAL: Normal | CREATING: Creating | ROLLBACKING: Rolling back)<br><li>snapshot-group-name - Array of String - Required: No - (Filter criteria) Filter by snapshot group name.<br><li>snapshot-id - Array of String - Required: No - (Filter criteria) Filter by snapshot ID within the snapshot group.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// The start time of the operation logs to be queried, for example: '2019-11-22 00:00:00"
-	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// The end time of the operation logs to be queried, for example: '2019-11-22 23:59:59"
-	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+	// Number of returns, with a default value of 20, and a maximum value of 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
-func (r *DescribeSnapshotOperationLogsRequest) ToJsonString() string {
+func (r *DescribeSnapshotGroupsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeSnapshotOperationLogsRequest) FromJsonString(s string) error {
+func (r *DescribeSnapshotGroupsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
 	delete(f, "Filters")
-	delete(f, "BeginTime")
-	delete(f, "EndTime")
+	delete(f, "Offset")
+	delete(f, "Limit")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSnapshotOperationLogsRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSnapshotGroupsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
-type DescribeSnapshotOperationLogsResponseParams struct {
-	// List of snapshot operation logs.
-	SnapshotOperationLogSet []*SnapshotOperationLog `json:"SnapshotOperationLogSet,omitnil,omitempty" name:"SnapshotOperationLogSet"`
+type DescribeSnapshotGroupsResponseParams struct {
+	// Total number of eligible items.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// Specifies the snapshot group list details.
+	SnapshotGroupSet []*SnapshotGroup `json:"SnapshotGroupSet,omitnil,omitempty" name:"SnapshotGroupSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
-type DescribeSnapshotOperationLogsResponse struct {
+type DescribeSnapshotGroupsResponse struct {
 	*tchttp.BaseResponse
-	Response *DescribeSnapshotOperationLogsResponseParams `json:"Response"`
+	Response *DescribeSnapshotGroupsResponseParams `json:"Response"`
 }
 
-func (r *DescribeSnapshotOperationLogsResponse) ToJsonString() string {
+func (r *DescribeSnapshotGroupsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeSnapshotOperationLogsResponse) FromJsonString(s string) error {
+func (r *DescribeSnapshotGroupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSnapshotOverviewRequestParams struct {
+
+}
+
+type DescribeSnapshotOverviewRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeSnapshotOverviewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSnapshotOverviewRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSnapshotOverviewRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSnapshotOverviewResponseParams struct {
+	// Current number of valid snapshots.
+	TotalNums *uint64 `json:"TotalNums,omitnil,omitempty" name:"TotalNums"`
+
+	// Total used snapshot capacity. unit: GiB.
+	TotalSize *float64 `json:"TotalSize,omitnil,omitempty" name:"TotalSize"`
+
+	// Snapshot free quota size in GiB.
+	FreeQuota *float64 `json:"FreeQuota,omitnil,omitempty" name:"FreeQuota"`
+
+	// Snapshot actual cost of total capacity in GiB.
+	RealTradeSize *float64 `json:"RealTradeSize,omitnil,omitempty" name:"RealTradeSize"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSnapshotOverviewResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSnapshotOverviewResponseParams `json:"Response"`
+}
+
+func (r *DescribeSnapshotOverviewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSnapshotOverviewResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1753,7 +2007,7 @@ type DescribeSnapshotSharePermissionResponseParams struct {
 	// The set of snapshot sharing information
 	SharePermissionSet []*SharePermission `json:"SharePermissionSet,omitnil,omitempty" name:"SharePermissionSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1778,22 +2032,28 @@ type DescribeSnapshotsRequestParams struct {
 	// List of snapshot IDs to be queried. The parameter does not support specifying both `SnapshotIds` and `Filters`.
 	SnapshotIds []*string `json:"SnapshotIds,omitnil,omitempty" name:"SnapshotIds"`
 
-	// Filters. It cannot be specified together with `SnapshotIds`.<br><li>snapshot-id - Array of String - Optional - Filters by snapshot ID, such as `snap-11112222`.<br><li>snapshot-name - Array of String - Optional - Filters by snapshot name. <br><li>snapshot-state - Array of String - Optional - Filters by snapshot state (NORMAL: normal | CREATING: creating | ROLLBACKING: rolling back). <br><li>disk-usage - Array of String - Optional - Filters by the type of the cloud disk from which a snapshot is created (SYSTEM_DISK: system disk | DATA_DISK: data disk).<br><li>project-id - Array of String - Optional - Filters by the ID of the project to which a cloud disk belongs. <br><li>disk-id - Array of String - Optional - Filters by the ID of the cloud disk from which a snapshot is created.<br><li>zone - Array of String - Optional - Filters by [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo).<br><li>encrypt - Array of String - Optional - Filters by whether a snapshot is created from an encrypted cloud disk. (TRUE: a snapshot of an encrypted cloud disk | FALSE: not a snapshot of an encrypted cloud disk.)
-	// <li>snapshot-type- Array of String - Optional - Filters by the snapshot type specified in `snapshot-type`.
-	// (SHARED_SNAPSHOT: a shared snapshot | PRIVATE_SNAPSHOT: a private snapshot.)
+	// Filter criteria. parameters `SnapshotIds` and `Filters` cannot be specified at the same time.<br><ul><li>snapshot-id<ul><li>filter by cloud disk snapshot id</li><li>type: String</li><li>required: no</li></ul></li><li>snapshot-name<ul><li>filter by cloud disk snapshot name</li><li>type: String</li><li>required: no</li></ul></li><li>snapshot-state<ul><li>filter by cloud disk snapshot status</li><li>type: String</li><li>required: no</li><li>value ranges FROM:<ul><li><code>NORMAL</code>: NORMAL</li><li><code>CREATING</code>: CREATING</li><li><code>ROLLBACKING</code>: rolling back</li><li><code>COPYING_FROM_REMOTE</code>: cross geo-replication in progress</li><li><code>CHECKING_COPIED</code>: COPYING check in progress</li><li><code>TORECYCLE</code>: pending recycling</li></ul></li></ul></li><li>disk-usage<ul><li>filter by cloud disk usage purpose</li><li>type: String</li><li>required: no</li><li>value ranges FROM:<ul><li><code>SYSTEM_disk</code>: represent SYSTEM disk</li><li><code>DATA_disk</code>: represent DATA disk</li></ul></li></ul></li><li>project-id<ul><li>filter by cloud disk project id</li><li>type: String</li><li>required: no</li></ul></li><li>disk-id<ul><li>filter by cloud disk id. up to 10 values can be specified</li><li>type: String</li><li>required: no</li></ul></li><li>encrypt<ul><li>filter by whether encrypted or not</li><li>type: String</li><li>required: no</li></ul></li><li>snapshot-type<ul><li>query by snapshot ownership type</li><li>type: String</li><li>required: no</li><li>value ranges FROM:<ul><li><code>SHARED_snapshot</code>: refer to SHARED snapshot</li><li><code>PRIVATE_snapshot</code>: refer to own PRIVATE snapshot</li></ul></li></ul></li></ul>.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
-
-	// Offset. Default is 0. For more information on `Offset`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
-	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of results to be returned. Default is 20. Maximum is 100. For more information on `Limit`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Outputs the ordering of the cloud disk list. Value range: <br><li>ASC: Ascending order <br><li>DESC: Descending order.
-	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-
-	// The field by which the snapshot list is sorted. Value range: <br><li>CREATE_TIME: sorted by the creation time of the snapshots <br>By default, the snapshot list is sorted by the creation time of snapshots.
+	// Field based on which the snapshot list is sorted. valid values:.
+	// <ul>
+	// <Li>CREATE_TIME: specifies to sort by snapshot creation time.</li>.
+	// <Li>Sort by creation time by default.</li>.
+	// </ul>
 	OrderField *string `json:"OrderField,omitnil,omitempty" name:"OrderField"`
+
+	// Offset. Default is 0. For more information on `Offset`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Outputs the sorting order of the cloud disk list. valid values:.
+	// <ul>
+	// <Li>ASC: specifies ascending order.</li>.
+	// <Li>DESC: specifies sorting in descending order.</li>.
+	// </ul>
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 }
 
 type DescribeSnapshotsRequest struct {
@@ -1802,22 +2062,28 @@ type DescribeSnapshotsRequest struct {
 	// List of snapshot IDs to be queried. The parameter does not support specifying both `SnapshotIds` and `Filters`.
 	SnapshotIds []*string `json:"SnapshotIds,omitnil,omitempty" name:"SnapshotIds"`
 
-	// Filters. It cannot be specified together with `SnapshotIds`.<br><li>snapshot-id - Array of String - Optional - Filters by snapshot ID, such as `snap-11112222`.<br><li>snapshot-name - Array of String - Optional - Filters by snapshot name. <br><li>snapshot-state - Array of String - Optional - Filters by snapshot state (NORMAL: normal | CREATING: creating | ROLLBACKING: rolling back). <br><li>disk-usage - Array of String - Optional - Filters by the type of the cloud disk from which a snapshot is created (SYSTEM_DISK: system disk | DATA_DISK: data disk).<br><li>project-id - Array of String - Optional - Filters by the ID of the project to which a cloud disk belongs. <br><li>disk-id - Array of String - Optional - Filters by the ID of the cloud disk from which a snapshot is created.<br><li>zone - Array of String - Optional - Filters by [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo).<br><li>encrypt - Array of String - Optional - Filters by whether a snapshot is created from an encrypted cloud disk. (TRUE: a snapshot of an encrypted cloud disk | FALSE: not a snapshot of an encrypted cloud disk.)
-	// <li>snapshot-type- Array of String - Optional - Filters by the snapshot type specified in `snapshot-type`.
-	// (SHARED_SNAPSHOT: a shared snapshot | PRIVATE_SNAPSHOT: a private snapshot.)
+	// Filter criteria. parameters `SnapshotIds` and `Filters` cannot be specified at the same time.<br><ul><li>snapshot-id<ul><li>filter by cloud disk snapshot id</li><li>type: String</li><li>required: no</li></ul></li><li>snapshot-name<ul><li>filter by cloud disk snapshot name</li><li>type: String</li><li>required: no</li></ul></li><li>snapshot-state<ul><li>filter by cloud disk snapshot status</li><li>type: String</li><li>required: no</li><li>value ranges FROM:<ul><li><code>NORMAL</code>: NORMAL</li><li><code>CREATING</code>: CREATING</li><li><code>ROLLBACKING</code>: rolling back</li><li><code>COPYING_FROM_REMOTE</code>: cross geo-replication in progress</li><li><code>CHECKING_COPIED</code>: COPYING check in progress</li><li><code>TORECYCLE</code>: pending recycling</li></ul></li></ul></li><li>disk-usage<ul><li>filter by cloud disk usage purpose</li><li>type: String</li><li>required: no</li><li>value ranges FROM:<ul><li><code>SYSTEM_disk</code>: represent SYSTEM disk</li><li><code>DATA_disk</code>: represent DATA disk</li></ul></li></ul></li><li>project-id<ul><li>filter by cloud disk project id</li><li>type: String</li><li>required: no</li></ul></li><li>disk-id<ul><li>filter by cloud disk id. up to 10 values can be specified</li><li>type: String</li><li>required: no</li></ul></li><li>encrypt<ul><li>filter by whether encrypted or not</li><li>type: String</li><li>required: no</li></ul></li><li>snapshot-type<ul><li>query by snapshot ownership type</li><li>type: String</li><li>required: no</li><li>value ranges FROM:<ul><li><code>SHARED_snapshot</code>: refer to SHARED snapshot</li><li><code>PRIVATE_snapshot</code>: refer to own PRIVATE snapshot</li></ul></li></ul></li></ul>.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
-
-	// Offset. Default is 0. For more information on `Offset`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
-	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of results to be returned. Default is 20. Maximum is 100. For more information on `Limit`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Outputs the ordering of the cloud disk list. Value range: <br><li>ASC: Ascending order <br><li>DESC: Descending order.
-	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-
-	// The field by which the snapshot list is sorted. Value range: <br><li>CREATE_TIME: sorted by the creation time of the snapshots <br>By default, the snapshot list is sorted by the creation time of snapshots.
+	// Field based on which the snapshot list is sorted. valid values:.
+	// <ul>
+	// <Li>CREATE_TIME: specifies to sort by snapshot creation time.</li>.
+	// <Li>Sort by creation time by default.</li>.
+	// </ul>
 	OrderField *string `json:"OrderField,omitnil,omitempty" name:"OrderField"`
+
+	// Offset. Default is 0. For more information on `Offset`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Outputs the sorting order of the cloud disk list. valid values:.
+	// <ul>
+	// <Li>ASC: specifies ascending order.</li>.
+	// <Li>DESC: specifies sorting in descending order.</li>.
+	// </ul>
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 }
 
 func (r *DescribeSnapshotsRequest) ToJsonString() string {
@@ -1834,10 +2100,10 @@ func (r *DescribeSnapshotsRequest) FromJsonString(s string) error {
 	}
 	delete(f, "SnapshotIds")
 	delete(f, "Filters")
-	delete(f, "Offset")
 	delete(f, "Limit")
-	delete(f, "Order")
 	delete(f, "OrderField")
+	delete(f, "Offset")
+	delete(f, "Order")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSnapshotsRequest has unknown keys!", "")
 	}
@@ -1852,7 +2118,7 @@ type DescribeSnapshotsResponseParams struct {
 	// List of snapshot details.
 	SnapshotSet []*Snapshot `json:"SnapshotSet,omitnil,omitempty" name:"SnapshotSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1877,7 +2143,7 @@ type DetachDisksRequestParams struct {
 	// IDs of the cloud disks to be unmounted, which can be queried via the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API. Up to 10 elastic cloud disks can be unmounted in a single request.
 	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
-	// Indicates the CVM from which you want to unmount the disks. This parameter is only available for shared cloud disks.
+	// For non-shared cloud disks, this parameter validates whether it matches the actual mounted instance. for shared cloud disks, this parameter indicates from which CVM instance to unmount the cloud disk.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -1887,7 +2153,7 @@ type DetachDisksRequest struct {
 	// IDs of the cloud disks to be unmounted, which can be queried via the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API. Up to 10 elastic cloud disks can be unmounted in a single request.
 	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
-	// Indicates the CVM from which you want to unmount the disks. This parameter is only available for shared cloud disks.
+	// For non-shared cloud disks, this parameter validates whether it matches the actual mounted instance. for shared cloud disks, this parameter indicates from which CVM instance to unmount the cloud disk.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -1913,7 +2179,7 @@ func (r *DetachDisksRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DetachDisksResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1934,8 +2200,7 @@ func (r *DetachDisksResponse) FromJsonString(s string) error {
 }
 
 type DetailPrice struct {
-	// Name of the billable item.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Name of a billable item.
 	PriceTitle *string `json:"PriceTitle,omitnil,omitempty" name:"PriceTitle"`
 
 	// Name of the billable item displayed in the console.
@@ -1979,34 +2244,31 @@ type DetailPrice struct {
 }
 
 type Disk struct {
-	// Whether the cloud disk terminates along with the instance mounted to it. <br><li>true: Cloud disk will also be terminated when instance terminates, so only hourly postpaid cloud disk are supported.<br><li>false: Cloud disk does not terminate when instance terminates.
-	// Note: This field may return null, indicating that no valid value was found.
+	// Specifies whether the cloud disk is destroyed along with the mounted instance.<br><li>true: destroy the cloud disk along with the instance. only hourly postpaid cloud disk is supported.</li><li>false: destroying instance without destroying cloud disk.</li>.
 	DeleteWithInstance *bool `json:"DeleteWithInstance,omitnil,omitempty" name:"DeleteWithInstance"`
 
-	// Auto renewal flag. Supported values:<br><li>NOTIFY_AND_AUTO_RENEW: Notify expiry and renew automatically<br><li>NOTIFY_AND_MANUAL_RENEW: Notify expiry but not renew automatically<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: Neither notify expiry nor renew automatically.
-	// Note: This field may return null, indicating that no valid value was found.
+	// AUTO renewal flag. supported values:<br><li>NOTIFY_AND_AUTO_RENEW: NOTIFY expiry AND RENEW automatically</li><li>NOTIFY_AND_MANUAL_RENEW: NOTIFY expiry but not RENEW automatically</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: neither NOTIFY expiry nor RENEW automatically.</li>.
 	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 
-	// Cloud disk types. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk <br><li>CLOUD_PREMIUM: Premium Cloud Disk <br><li>CLOUD_BSSD: General Purpose SSD <br><li>CLOUD_SSD: SSD <br><li>CLOUD_HSSD: Enhanced SSD <br><li>CLOUD_TSSD: Tremendous SSD
+	// Hard disk media type. valid values:<br><li>CLOUD_BASIC: BASIC CLOUD disk</li><li>CLOUD_PREMIUM: high-performance CLOUD block storage</li><li>CLOUD_BSSD: universal type SSD CLOUD disk</li><li>CLOUD_SSD: SSD CLOUD disk</li><li>CLOUD_HSSD: enhanced SSD CLOUD disk</li><li>CLOUD_TSSD: ultra-fast SSD cbs.</li>.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// The state of the cloud disk. Value range: <br><li>UNATTACHED: Not mounted <br><li>ATTACHING: Mounting <br><li>ATTACHED: Mounted <br><li>DETACHING: Un-mounting <br><li>EXPANDING: Expanding <br><li>ROLLBACKING: Rolling back <br><li>TORECYCE: Pending recycling. <br><li>DUMPING: Copying the hard drive.
+	// Cloud disk state. valid values:<br><li>UNATTACHED: unmounted</li><li>ATTACHING: mounting</li><li>ATTACHED: mounted</li><li>DETACHING: unmounting</li><li>EXPANDING: EXPANDING</li><li>ROLLBACKING: rolling back</li><li>TORECYCLE: to be recycled</li><li>DUMPING: copying hard drive.</li>.
 	DiskState *string `json:"DiskState,omitnil,omitempty" name:"DiskState"`
 
 	// The total number of snapshots of the cloud disk.
 	SnapshotCount *int64 `json:"SnapshotCount,omitnil,omitempty" name:"SnapshotCount"`
 
-	// Cloud disk already mounted to CVM, and both CVM and cloud disk use monthly subscription.<br><li>true: CVM has auto-renewal flag set up, but cloud disk does not.<br><li>false: Cloud disk auto-renewal flag set up normally.
-	// Note: This field may return null, indicating that no valid value was found.
+	// Cloud disk mounted to child machine, and both child machine and cloud disk are on a monthly subscription basis.<br><li>true: auto renewal flag is set for child machine, but cloud disk not set</li><li>false: cloud disk auto-renewal flag normal</li>.
 	AutoRenewFlagError *bool `json:"AutoRenewFlagError,omitnil,omitempty" name:"AutoRenewFlagError"`
 
-	// Whether the cloud disk is in the status of snapshot rollback. Value range: <br><li>false: No <br><li>true: Yes
+	// Indicates if the cloud disk is in snapshot rollback status. valid values: <br><li>false: means not in snapshot rollback status</li><li>true: means in snapshot rollback status.</li>.
 	Rollbacking *bool `json:"Rollbacking,omitnil,omitempty" name:"Rollbacking"`
 
 	// For non-shareable cloud disks, this parameter is null. For shareable cloud disks, this parameters indicates this cloud disk's Instance IDs currently mounted to the CVM.
 	InstanceIdList []*string `json:"InstanceIdList,omitnil,omitempty" name:"InstanceIdList"`
 
-	// Whether the cloud disk is encrypted. Value range: <br><li>false: Not encrypted <br><li>true: Encrypted.
+	// Indicates whether the cloud disk is encrypted. valid values:<br><li>false: non-encrypted disk</li><li>true: encrypted disk</li>.
 	Encrypt *bool `json:"Encrypt,omitnil,omitempty" name:"Encrypt"`
 
 	// Cloud disk name.
@@ -2015,80 +2277,73 @@ type Disk struct {
 	// Specifies whether to create a snapshot when the cloud disk is terminated due to overdue payment or expiration. `true`: create snapshot; `false`: do not create snapshot.
 	BackupDisk *bool `json:"BackupDisk,omitnil,omitempty" name:"BackupDisk"`
 
-	// The tag bound to the cloud disk. The value Null is used when no tag is bound to the cloud disk.
-	// Note: This field may return null, indicating that no valid value was found.
+	// It indicates the tag bound to the cloud disk. If the cloud disk is not bound to any tag, the value is empty.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// ID of the CVM to which the cloud disk is mounted.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Cloud disk mount method. Valid values: <br><li>PF: mount as a PF (Physical Function)<br><li>VF: mount as a VF (Virtual Function)
-	// Note: this field may return `null`, indicating that no valid value is obtained.
+	// The mount type of the cloud disk. valid values: <br><li>PF: PF mount</li><li>VF: VF mount</li>.
 	AttachMode *string `json:"AttachMode,omitnil,omitempty" name:"AttachMode"`
 
-	// ID of the periodic snapshot associated to the cloud disk. This parameter is returned only if the value of parameter ReturnBindAutoSnapshotPolicy is TRUE when the API DescribeDisks is called.
-	// Note: This field may return null, indicating that no valid value was found.
+	// Regular snapshot ID associated with the cloud disk. return this parameter only when calling the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) API with ReturnBindAutoSnapshotPolicy set to TRUE.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AutoSnapshotPolicyIds []*string `json:"AutoSnapshotPolicyIds,omitnil,omitempty" name:"AutoSnapshotPolicyIds"`
 
-	// Extra performance for a cloud disk, in MB/sec.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Specifies the additional performance value of the CBS in MiB/s.
 	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitnil,omitempty" name:"ThroughputPerformance"`
 
-	// Whether cloud disk is in process of type change. Value range: <br><li>false: Cloud disk not in process of type change. <br><li>true: Cloud disk type change has been launched, and migration is in process.
-	// Note: This field may return null, indicating that no valid value was found.
+	// Indicates if the cloud disk is in type change. valid values: <br><li>false: means the cloud disk is not in type change</li><li>true: means the cloud disk has initiated type change and is migrating.</li>.
 	Migrating *bool `json:"Migrating,omitnil,omitempty" name:"Migrating"`
 
 	// Cloud disk ID.
 	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 
-	// The total capacity of the snapshots of the cloud disk. Unit: MB.
+	// Total snapshot capacity of the cloud disk. unit: MiB.
 	SnapshotSize *uint64 `json:"SnapshotSize,omitnil,omitempty" name:"SnapshotSize"`
 
 	// Location of the cloud disk.
 	Placement *Placement `json:"Placement,omitnil,omitempty" name:"Placement"`
 
-	// Determines whether or not prepaid cloud disk supports active return. <br><li>true: Active return supported.<br><li>false: Active return not supported.
-	// Note: This field may return null, indicating that no valid value was found.
+	// Determines if a prepaid cloud disk supports proactive return.<br><li>true: supports proactive return</li><li>false: does not support proactive return.</li>.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsReturnable *bool `json:"IsReturnable,omitnil,omitempty" name:"IsReturnable"`
 
 	// Expiration time of the cloud disk.
 	DeadlineTime *string `json:"DeadlineTime,omitnil,omitempty" name:"DeadlineTime"`
 
-	// Whether the cloud disk is mounted to the CVM. Value range: <br><li>false: Unmounted <br><li>true: Mounted.
+	// Indicates whether the cloud disk is mounted to the cvm. valid values: <br><li>false: means not mounted</li><li>true: means mounted.</li>.
 	Attached *bool `json:"Attached,omitnil,omitempty" name:"Attached"`
 
-	// Cloud disk size (in GB).
+	// Specifies the disk capacity in GiB.
 	DiskSize *uint64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// Migration progress of cloud disk type change, from 0 to 100.
-	// Note: This field may return null, indicating that no valid value was found.
+	// It indicates the migration progress of cloud disk type change. The value range is 0 to 100.
 	MigratePercent *uint64 `json:"MigratePercent,omitnil,omitempty" name:"MigratePercent"`
 
-	// Cloud disk type. Value range:<br><li>SYSTEM_DISK: System disk <br><li>DATA_DISK: Data disk.
+	// Cloud DISK type. valid values:<br><li>SYSTEM_DISK: SYSTEM DISK</li><li>DATA_DISK: DATA DISK.</li>.
 	DiskUsage *string `json:"DiskUsage,omitnil,omitempty" name:"DiskUsage"`
 
-	// Billing method. Value range: <br><li>PREPAID: Prepaid, that is, monthly subscription<br><li>POSTPAID_BY_HOUR: Postpaid, that is, pay as you go.
+	// Payment mode. valid values: <br><li>PREPAID: PREPAID, i.e. monthly subscription</li><li>POSTPAID_BY_HOUR: POSTPAID, i.e. pay-as-you-go.</li>.
 	DiskChargeType *string `json:"DiskChargeType,omitnil,omitempty" name:"DiskChargeType"`
 
 	// Whether it is an elastic cloud disk. false: Non-elastic cloud disk; true: Elastic cloud disk.
 	Portable *bool `json:"Portable,omitnil,omitempty" name:"Portable"`
 
-	// Whether the cloud disk has the capability to create snapshots. Value range: <br><li>false: Cannot create snapshots. true: Can create snapshots.
+	// Specifies whether the cloud disk has the capability to create snapshots. valid values:<br><li>false: cannot create snapshots</li><li>true: can create snapshots.</li>.
 	SnapshotAbility *bool `json:"SnapshotAbility,omitnil,omitempty" name:"SnapshotAbility"`
 
-	// This field is only applicable when the instance is already mounted to the cloud disk, and both the instance and the cloud disk use monthly subscription. <br><li>true: Expiration time of cloud disk is earlier than that of the instance.<br><li>false:Expiration time of cloud disk is later than that of the instance.
-	// Note: This field may return null, indicating that no valid value was found.
+	// Indicates whether the cloud disk expiration time is earlier than that of the instance. this field is valid only when the cloud disk is mounted to the instance and both the instance and the cloud disk are on a monthly subscription basis.<br><li>true: the expiration time of the cloud disk is earlier than that of the instance.</li><li>false: cloud disk expiration time later than instance.</li>.
 	DeadlineError *bool `json:"DeadlineError,omitnil,omitempty" name:"DeadlineError"`
 
 	// Rollback progress of a cloud disk snapshot.
 	RollbackPercent *uint64 `json:"RollbackPercent,omitnil,omitempty" name:"RollbackPercent"`
 
-	// Number of days from current time until disk expiration (only applicable for prepaid disks).
-	// Note: This field may return null, indicating that no valid value was found.
+	// The number of days from the current time to disk expiration (only applicable to prepaid cbs).
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DifferDaysOfDeadline *int64 `json:"DifferDaysOfDeadline,omitnil,omitempty" name:"DifferDaysOfDeadline"`
 
-	// In circumstances where the prepaid cloud disk does not support active return, this parameter indicates the reason that return is not supported. Value range: <br><li>1: The cloud disk has already been returned. <br><li>2: The cloud disk has already expired. <br><li>3: The cloud disk does not support return. <br><li> 8: The limit on the number of returns is exceeded.
-	// Note: This field may return null, indicating that no valid value was found.
+	// For prepaid cloud disks that do not support proactive return, this parameter indicates the specific reason for not supporting refund. value range: <br><li>1: the cloud disk has already been returned.</li><li>2: the cloud disk has expired.</li><li>3: the cloud disk does not support return.</li><li>8: the maximum returnable quantity is exceeded.</li><li>10: non-elastic cloud disks, system disks, and pay-as-you-go cloud disks do not support return.</li>.
 	ReturnFailCode *int64 `json:"ReturnFailCode,omitnil,omitempty" name:"ReturnFailCode"`
 
 	// Whether or not cloud disk is shareable cloud disk.
@@ -2097,7 +2352,7 @@ type Disk struct {
 	// Creation time of the cloud disk.
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Delete the associated non-permanently reserved snapshots upon deletion of the source cloud disk. `0`: No (default). `1`: Yes. To check whether a snapshot is permanently reserved, refer to the `IsPermanent` field returned by the `DescribeSnapshots` API. 
+	// Specifies whether to delete associated non-permanently retained snapshots when destroying the cloud disk. 0 indicates non-permanent snapshots are not deleted with cloud disk destruction, 1 indicates non-permanent snapshots are deleted with cloud disk destruction. default value: 0. whether a snapshot is permanently retained can be determined through the IsPermanent field in the snapshot description returned by the DescribeSnapshots API (https://www.tencentcloud.com/document/product/362/15647?from_cn_redirect=1). true indicates permanent snapshot, false indicates non-permanent snapshot.
 	DeleteSnapshot *int64 `json:"DeleteSnapshot,omitnil,omitempty" name:"DeleteSnapshot"`
 
 	// Quota of cloud disk backup points, i.e., the maximum number of backup points that a cloud disk can have.
@@ -2106,19 +2361,24 @@ type Disk struct {
 	// Number of used cloud disk backups.
 	DiskBackupCount *uint64 `json:"DiskBackupCount,omitnil,omitempty" name:"DiskBackupCount"`
 
-	// Type of the instance mounted to the cloud disk. Valid values: <br><li>CVM<br><li>EKS
+	// The type of the CBS mounting instance. valid values: <br><li>CVM</li><li>EKS</li>.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
 	// ID of the last instance to which the cloud disk is attached
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	LastAttachInsId *string `json:"LastAttachInsId,omitnil,omitempty" name:"LastAttachInsId"`
 
-	// Error message for the last operation of the cloud disk
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Error prompt for the last operation on cbs.
 	ErrorPrompt *string `json:"ErrorPrompt,omitnil,omitempty" name:"ErrorPrompt"`
 
-	// Whether the cloud disk has enabled disk bursting. Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether performance burst is enabled for the cloud disk.
 	BurstPerformance *bool `json:"BurstPerformance,omitnil,omitempty" name:"BurstPerformance"`
+
+	// Encryption type of cbs. valid values: ENCRYPT_V1 and ENCRYPT_V2, which indicate first generation and second generation encryption technology respectively. the two kinds are incompatible.
+	EncryptType *string `json:"EncryptType,omitnil,omitempty" name:"EncryptType"`
+
+	// Key ID of the encrypted disk.
+	KmsKeyId *string `json:"KmsKeyId,omitnil,omitempty" name:"KmsKeyId"`
 }
 
 type DiskBackup struct {
@@ -2128,25 +2388,32 @@ type DiskBackup struct {
 	// ID of the cloud disk with which the backup point is associated.
 	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 
-	// Cloud disk size in GB.
+	// Specifies the disk capacity in GiB.
 	DiskSize *uint64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// Cloud disk type. Valid values:<br><li>SYSTEM_DISK: System disk <br><li>DATA_DISK: Data disk
+	// Cloud disk type. value ranges from...to...<br>.
+	// <Li>SYSTEM_DISK: specifies the system disk.</li>.
+	// <Li>DATA_DISK: specifies the data disk.</li>.
 	DiskUsage *string `json:"DiskUsage,omitnil,omitempty" name:"DiskUsage"`
 
 	// Backup point name.
 	DiskBackupName *string `json:"DiskBackupName,omitnil,omitempty" name:"DiskBackupName"`
 
-	// Cloud disk backup point status. Valid values:<br><li>NORMAL: Normal<br><li>CREATING: Creating<br><li>ROLLBACKING: Rolling back
+	// <P>Specifies the status of the cloud disk backup point. valid values:</p>.
+	// <ul>
+	// <Li>NORMAL: specifies the scaling group is in normal state.</li>.
+	// <Li>CREATING: creating.</li>.
+	// <Li>ROLLBACKING: indicates the rollback is in progress.</li>.
+	// </ul>
 	DiskBackupState *string `json:"DiskBackupState,omitnil,omitempty" name:"DiskBackupState"`
 
-	// Cloud disk creation progress in percentage.
+	// Specifies the creation percentage of the cloud disk backup point.
 	Percent *uint64 `json:"Percent,omitnil,omitempty" name:"Percent"`
 
 	// Creation time of the cloud disk backup point.
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Whether the cloud disk is encrypted. Valid values: <br><li>false: Not encrypted <br><li>true: Encrypted
+	// Indicates whether the cloud disk is encrypted. valid values:<br><li>false: non-encrypted disk</li><li>true: encrypted disk</li>.
 	Encrypt *bool `json:"Encrypt,omitnil,omitempty" name:"Encrypt"`
 }
 
@@ -2171,7 +2438,7 @@ type DiskConfig struct {
 	// Whether the configuration is available.
 	Available *bool `json:"Available,omitnil,omitempty" name:"Available"`
 
-	// Billing method. Value range: <br><li>PREPAID: Prepaid, that is, monthly subscription<br><li>POSTPAID_BY_HOUR: Postpaid, that is, pay as you go.
+	// Payment mode. valid values: <br><li>PREPAID: PREPAID, i.e. monthly subscription</li><br><li>POSTPAID_BY_HOUR: POSTPAID, i.e. pay-as-you-go.</li>.
 	DiskChargeType *string `json:"DiskChargeType,omitnil,omitempty" name:"DiskChargeType"`
 
 	// The [Availability Region](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo) of the cloud drive.
@@ -2181,11 +2448,16 @@ type DiskConfig struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	InstanceFamily *string `json:"InstanceFamily,omitnil,omitempty" name:"InstanceFamily"`
 
-	// Type of cloud disk medium. Value range: <br><li>CLOUD_BASIC: Ordinary cloud disk <br><li>CLOUD_PREMIUM: Premium cloud storage <br><li>CLOUD_SSD: SSD cloud disk.
+	// Cloud disk media type. valid values: <br>.
+	// CLOUD_BASIC: specifies the BASIC CLOUD disk.
+	// CLOUD_PREMIUM: indicates high-performance CLOUD block storage.
+	// CLOUD_BSSD: indicates a universal type SSD CLOUD disk.
+	// CLOUD_SSD: indicates SSD CLOUD disk.
+	// CLOUD_HSSD: indicates the enhanced SSD CLOUD disk.
+	// CLOUD_TSSD: indicates ultra-fast ssd cbs.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Minimum increment of cloud disk size adjustment in GB.
-	// Note: This field might return null, indicating that no valid values can be obtained.
+	// Specifies the minimum step size for disk size change in GiB.
 	StepSize *uint64 `json:"StepSize,omitnil,omitempty" name:"StepSize"`
 
 	// Additional performance range.
@@ -2196,50 +2468,17 @@ type DiskConfig struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	DeviceClass *string `json:"DeviceClass,omitnil,omitempty" name:"DeviceClass"`
 
-	// Cloud disk type. Value range: <br><li>SYSTEM_DISK: System disk <br><li>DATA_DISK: Data disk.
+	// Cloud DISK type. valid values:<br><li>SYSTEM_DISK: SYSTEM DISK</li><br><li>DATA_DISK: DATA DISK.</li>.
 	DiskUsage *string `json:"DiskUsage,omitnil,omitempty" name:"DiskUsage"`
 
-	// The minimum configurable cloud disk size (in GB).
+	// Specifies the minimum configurable cloud disk size in GiB.
 	MinDiskSize *uint64 `json:"MinDiskSize,omitnil,omitempty" name:"MinDiskSize"`
 
-	// The maximum configurable cloud disk size (in GB).
+	// Specifies the maximum configurable cloud disk size in GiB.
 	MaxDiskSize *uint64 `json:"MaxDiskSize,omitnil,omitempty" name:"MaxDiskSize"`
 
-	// Price of a monthly subscribed or pay-as-you-go cloud disk.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Price of a prepaid or postpaid cloud disk.
 	Price *Price `json:"Price,omitnil,omitempty" name:"Price"`
-}
-
-type DiskOperationLog struct {
-	// UIN of operator.
-	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
-
-	// Operation type. Value range:
-	// CBS_OPERATION_ATTACH: Mount cloud disk
-	// CBS_OPERATION_DETACH: Unmount cloud disk
-	// CBS_OPERATION_RENEW: Renew
-	// CBS_OPERATION_EXPAND: Expand
-	// CBS_OPERATION_CREATE: Create
-	// CBS_OPERATION_ISOLATE: Isolate
-	// CBS_OPERATION_MODIFY: Modify cloud disk attributes
-	// ASP_OPERATION_BIND: Associate scheduled snapshot policy
-	// ASP_OPERATION_UNBIND: Cancel associated scheduled snapshot policy
-	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
-
-	// Cloud disk ID of operation.
-	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
-
-	// Status of operation. Value range:
-	// SUCCESS: Operation successful 
-	// FAILED: Operation failed 
-	// PROCESSING: Operation in process
-	OperationState *string `json:"OperationState,omitnil,omitempty" name:"OperationState"`
-
-	// Start time
-	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
-
-	// End time
-	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 type Filter struct {
@@ -2293,7 +2532,7 @@ type GetSnapOverviewResponseParams struct {
 	// Total number of snapshots
 	TotalNums *int64 `json:"TotalNums,omitnil,omitempty" name:"TotalNums"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2323,14 +2562,14 @@ type Image struct {
 
 // Predefined struct for user
 type InitializeDisksRequestParams struct {
-	// ID list of the cloud disks to be reinitialized. Up to 20 disks can be reinitialized at a time.
+	// List of cloud disk ids to be reinitialized. can be accessed through the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) api. the initialization is limited to not exceeding 20 disks.
 	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 }
 
 type InitializeDisksRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID list of the cloud disks to be reinitialized. Up to 20 disks can be reinitialized at a time.
+	// List of cloud disk ids to be reinitialized. can be accessed through the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) api. the initialization is limited to not exceeding 20 disks.
 	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 }
 
@@ -2355,7 +2594,7 @@ func (r *InitializeDisksRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type InitializeDisksResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2377,7 +2616,7 @@ func (r *InitializeDisksResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type InquirePriceModifyDiskBackupQuotaRequestParams struct {
-	// Cloud disk ID, which can be queried through the `DescribeDisks` API.
+	// Cloud disk ID, which can be queried by calling the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) API.
 	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 
 	// Cloud disk backup point quota after the modification, i.e., the number of backup points that a cloud disk can have.
@@ -2387,7 +2626,7 @@ type InquirePriceModifyDiskBackupQuotaRequestParams struct {
 type InquirePriceModifyDiskBackupQuotaRequest struct {
 	*tchttp.BaseRequest
 	
-	// Cloud disk ID, which can be queried through the `DescribeDisks` API.
+	// Cloud disk ID, which can be queried by calling the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) API.
 	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 
 	// Cloud disk backup point quota after the modification, i.e., the number of backup points that a cloud disk can have.
@@ -2419,7 +2658,7 @@ type InquirePriceModifyDiskBackupQuotaResponseParams struct {
 	// Price of the cloud disk after its backup point quota is modified.
 	DiskPrice *Price `json:"DiskPrice,omitnil,omitempty" name:"DiskPrice"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2441,21 +2680,21 @@ func (r *InquirePriceModifyDiskBackupQuotaResponse) FromJsonString(s string) err
 
 // Predefined struct for user
 type InquirePriceModifyDiskExtraPerformanceRequestParams struct {
+	// Specifies the additional performance value of the CBS disk in MiB/s. extra performance is only supported for enhanced SSD (CLOUD_HSSD) and ultra-fast SSD (CLOUD_TSSD) CBS disks exceeding 460GiB in size.
+	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitnil,omitempty" name:"ThroughputPerformance"`
+
 	// Cloud disk ID, which can be queried via the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API.
 	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
-
-	// The extra throughput to purchase, in MB/s
-	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitnil,omitempty" name:"ThroughputPerformance"`
 }
 
 type InquirePriceModifyDiskExtraPerformanceRequest struct {
 	*tchttp.BaseRequest
 	
+	// Specifies the additional performance value of the CBS disk in MiB/s. extra performance is only supported for enhanced SSD (CLOUD_HSSD) and ultra-fast SSD (CLOUD_TSSD) CBS disks exceeding 460GiB in size.
+	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitnil,omitempty" name:"ThroughputPerformance"`
+
 	// Cloud disk ID, which can be queried via the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API.
 	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
-
-	// The extra throughput to purchase, in MB/s
-	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitnil,omitempty" name:"ThroughputPerformance"`
 }
 
 func (r *InquirePriceModifyDiskExtraPerformanceRequest) ToJsonString() string {
@@ -2470,8 +2709,8 @@ func (r *InquirePriceModifyDiskExtraPerformanceRequest) FromJsonString(s string)
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "DiskId")
 	delete(f, "ThroughputPerformance")
+	delete(f, "DiskId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquirePriceModifyDiskExtraPerformanceRequest has unknown keys!", "")
 	}
@@ -2483,7 +2722,7 @@ type InquirePriceModifyDiskExtraPerformanceResponseParams struct {
 	// Price for purchasing the extra performance
 	DiskPrice *Price `json:"DiskPrice,omitnil,omitempty" name:"DiskPrice"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2614,28 +2853,112 @@ func (r *InquiryPriceCreateDisksResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type InquiryPriceResizeDiskRequestParams struct {
-	// ID of the cloud disk, which can be queried via the API [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1).
-	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
+type InquiryPriceRenewDisksRequestParams struct {
+	// Cloud disk ID, which can be queried by calling the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) API.
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
-	// Cloud disk size after scale out (in GB). This cannot be smaller than the current size of the cloud disk. For the value range of the cloud disk sizes, see cloud disk [Product Types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1).
+	// Prepaid mode, that is, settings related to the monthly subscription. Through this parameter, you can specify the purchase duration of the monthly subscribed cloud disk. If CurInstanceDeadline is specified in this parameter, it will be renewed in aligned with the sub-machine expiration time. If it is a batch renewal inquiry, this parameter corresponds one-to-one with the Disks parameter, and the number of Element (XML) must be consistent.
+	DiskChargePrepaids []*DiskChargePrepaid `json:"DiskChargePrepaids,omitnil,omitempty" name:"DiskChargePrepaids"`
+
+	// Specifies the new expiry time of the CBS in the format such as 2017-12-17 00:00:00. parameter `NewDeadline` and `DiskChargePrepaids` are two ways to specify inquiry duration. one of them must be input.
+	NewDeadline *string `json:"NewDeadline,omitnil,omitempty" name:"NewDeadline"`
+
+	// cloud disk project ID. obtain this parameter by calling the projectId field in the return value of [DescribeProject](https://www.tencentcloud.com/document/api/651/78725?from_cn_redirect=1). if input, it is only for authentication.
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+}
+
+type InquiryPriceRenewDisksRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cloud disk ID, which can be queried by calling the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) API.
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
+
+	// Prepaid mode, that is, settings related to the monthly subscription. Through this parameter, you can specify the purchase duration of the monthly subscribed cloud disk. If CurInstanceDeadline is specified in this parameter, it will be renewed in aligned with the sub-machine expiration time. If it is a batch renewal inquiry, this parameter corresponds one-to-one with the Disks parameter, and the number of Element (XML) must be consistent.
+	DiskChargePrepaids []*DiskChargePrepaid `json:"DiskChargePrepaids,omitnil,omitempty" name:"DiskChargePrepaids"`
+
+	// Specifies the new expiry time of the CBS in the format such as 2017-12-17 00:00:00. parameter `NewDeadline` and `DiskChargePrepaids` are two ways to specify inquiry duration. one of them must be input.
+	NewDeadline *string `json:"NewDeadline,omitnil,omitempty" name:"NewDeadline"`
+
+	// cloud disk project ID. obtain this parameter by calling the projectId field in the return value of [DescribeProject](https://www.tencentcloud.com/document/api/651/78725?from_cn_redirect=1). if input, it is only for authentication.
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+}
+
+func (r *InquiryPriceRenewDisksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceRenewDisksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DiskIds")
+	delete(f, "DiskChargePrepaids")
+	delete(f, "NewDeadline")
+	delete(f, "ProjectId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceRenewDisksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquiryPriceRenewDisksResponseParams struct {
+	// It describes the price of renewing cloud disks.
+	DiskPrice *PrepayPrice `json:"DiskPrice,omitnil,omitempty" name:"DiskPrice"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type InquiryPriceRenewDisksResponse struct {
+	*tchttp.BaseResponse
+	Response *InquiryPriceRenewDisksResponseParams `json:"Response"`
+}
+
+func (r *InquiryPriceRenewDisksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceRenewDisksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquiryPriceResizeDiskRequestParams struct {
+	// Specifies the size after expanding the cloud disk in GiB, which should not be less than the current disk size. for the cloud disk size range, please refer to the product type of CBS (https://www.tencentcloud.com/document/product/362/2353?from_cn_redirect=1).
 	DiskSize *uint64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// ID of project the cloud disk belongs to. If selected, it can only be used for authentication.
+	// Cloud disk ID. can be queried via the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) api. mutually exclusive with the DiskIds parameter.
+	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
+
+	// cloud disk project ID. obtain this parameter by calling the projectId field in the return value of [DescribeProject](https://www.tencentcloud.com/document/api/651/78725?from_cn_redirect=1). if input, it is only for authentication.
 	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Cloud disk ID list. queried via the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) api. mutually exclusive with the DiskId parameter.
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 }
 
 type InquiryPriceResizeDiskRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the cloud disk, which can be queried via the API [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1).
-	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
-
-	// Cloud disk size after scale out (in GB). This cannot be smaller than the current size of the cloud disk. For the value range of the cloud disk sizes, see cloud disk [Product Types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1).
+	// Specifies the size after expanding the cloud disk in GiB, which should not be less than the current disk size. for the cloud disk size range, please refer to the product type of CBS (https://www.tencentcloud.com/document/product/362/2353?from_cn_redirect=1).
 	DiskSize *uint64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
-	// ID of project the cloud disk belongs to. If selected, it can only be used for authentication.
+	// Cloud disk ID. can be queried via the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) api. mutually exclusive with the DiskIds parameter.
+	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
+
+	// cloud disk project ID. obtain this parameter by calling the projectId field in the return value of [DescribeProject](https://www.tencentcloud.com/document/api/651/78725?from_cn_redirect=1). if input, it is only for authentication.
 	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Cloud disk ID list. queried via the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) api. mutually exclusive with the DiskId parameter.
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 }
 
 func (r *InquiryPriceResizeDiskRequest) ToJsonString() string {
@@ -2650,9 +2973,10 @@ func (r *InquiryPriceResizeDiskRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "DiskId")
 	delete(f, "DiskSize")
+	delete(f, "DiskId")
 	delete(f, "ProjectId")
+	delete(f, "DiskIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceResizeDiskRequest has unknown keys!", "")
 	}
@@ -2664,7 +2988,7 @@ type InquiryPriceResizeDiskResponseParams struct {
 	// Describes the price of expanding the cloud disk.
 	DiskPrice *PrepayPrice `json:"DiskPrice,omitnil,omitempty" name:"DiskPrice"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2686,13 +3010,13 @@ func (r *InquiryPriceResizeDiskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyAutoSnapshotPolicyAttributeRequestParams struct {
-	// Scheduled snapshot policy ID.
+	// Specifies the scheduled snapshot policy ID. query via the describeautosnapshotpolicies API (https://www.tencentcloud.com/document/product/362/33556?from_cn_redirect=1).
 	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitnil,omitempty" name:"AutoSnapshotPolicyId"`
 
-	// Whether or not the scheduled snapshot policy is activated. FALSE: Not activated. TRUE: Activated. The default value is TRUE.
+	// Whether the periodic snapshot policy is activated. `false` means inactive, `true` means active. defaults to `true`.
 	IsActivated *bool `json:"IsActivated,omitnil,omitempty" name:"IsActivated"`
 
-	// Whether the snapshot created by this scheduled snapshot policy is retained permanently. FALSE: Not retained permanently. TRUE: Retained permanently. The default value is FALSE.
+	// Indicates whether snapshots created by the regular snapshot policy are retained permanently. `false` means the snapshots are not retained permanently, `true` means permanent retention. defaults to `false`.
 	IsPermanent *bool `json:"IsPermanent,omitnil,omitempty" name:"IsPermanent"`
 
 	// The name of the scheduled snapshot policy to be created. If it is left empty, the default is 'Not named'. The maximum length cannot exceed 60 bytes.
@@ -2708,13 +3032,13 @@ type ModifyAutoSnapshotPolicyAttributeRequestParams struct {
 type ModifyAutoSnapshotPolicyAttributeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Scheduled snapshot policy ID.
+	// Specifies the scheduled snapshot policy ID. query via the describeautosnapshotpolicies API (https://www.tencentcloud.com/document/product/362/33556?from_cn_redirect=1).
 	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitnil,omitempty" name:"AutoSnapshotPolicyId"`
 
-	// Whether or not the scheduled snapshot policy is activated. FALSE: Not activated. TRUE: Activated. The default value is TRUE.
+	// Whether the periodic snapshot policy is activated. `false` means inactive, `true` means active. defaults to `true`.
 	IsActivated *bool `json:"IsActivated,omitnil,omitempty" name:"IsActivated"`
 
-	// Whether the snapshot created by this scheduled snapshot policy is retained permanently. FALSE: Not retained permanently. TRUE: Retained permanently. The default value is FALSE.
+	// Indicates whether snapshots created by the regular snapshot policy are retained permanently. `false` means the snapshots are not retained permanently, `true` means permanent retention. defaults to `false`.
 	IsPermanent *bool `json:"IsPermanent,omitnil,omitempty" name:"IsPermanent"`
 
 	// The name of the scheduled snapshot policy to be created. If it is left empty, the default is 'Not named'. The maximum length cannot exceed 60 bytes.
@@ -2753,7 +3077,7 @@ func (r *ModifyAutoSnapshotPolicyAttributeRequest) FromJsonString(s string) erro
 
 // Predefined struct for user
 type ModifyAutoSnapshotPolicyAttributeResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2775,7 +3099,7 @@ func (r *ModifyAutoSnapshotPolicyAttributeResponse) FromJsonString(s string) err
 
 // Predefined struct for user
 type ModifyDiskAttributesRequestParams struct {
-	// IDs of one or more cloud disks to be operated. If multiple cloud disk IDs are selected, it only supports modifying all cloud disks with the same attributes.
+	// One or more cloud disk ids to be operated, which can be queried through the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) api. if multiple cloud disk ids are passed in, only modifying all cloud disks to the same attribute is supported.
 	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Name of new cloud disk.
@@ -2790,17 +3114,20 @@ type ModifyDiskAttributesRequestParams struct {
 	// Whether the cloud disk is terminated with the CVM after it has been successfully mounted. `TRUE` indicates that it is terminated with the CVM. `FALSE` indicates that it is not terminated with the CVM. This is only supported for cloud disks and data disks that are pay-as-you-go.
 	DeleteWithInstance *bool `json:"DeleteWithInstance,omitnil,omitempty" name:"DeleteWithInstance"`
 
-	// When changing the type of a cloud disk, this parameter can be passed to indicate the desired cloud disk type. Value range: <br><li>CLOUD_PREMIUM: Premium cloud storage.  <br><li>CLOUD_SSD: SSD cloud disk. <br>Currently, batch operations are not supported for changing type. That is, when `DiskType` is passed, only one cloud disk can be passed through `DiskIds`. <br>When the cloud disk type is changed, the changing of other attributes is not supported concurrently.
+	// When changing the CLOUD disk type, you can input this parameter to indicate the target type. valid values:<br><li>CLOUD_PREMIUM: refers to high-performance CLOUD block storage</li><li>CLOUD_SSD: refers to SSD CLOUD disk.</li>batch type change is not supported. when inputting DiskType, DiskIds only supports entering one CLOUD disk id.<br>changing the CLOUD disk type does not support changing other attributes at the same time.
+	// For details, see [adjust cloud disk type](https://www.tencentcloud.com/document/product/362/32540?from_cn_redirect=1).
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Enable/disable disk bursting.
+	// Enable/Disable cloud disk performance burst feature. valid values:. 
+	// CREATE: enable.
+	// Specifies to CANCEL and close.
 	BurstPerformanceOperation *string `json:"BurstPerformanceOperation,omitnil,omitempty" name:"BurstPerformanceOperation"`
 }
 
 type ModifyDiskAttributesRequest struct {
 	*tchttp.BaseRequest
 	
-	// IDs of one or more cloud disks to be operated. If multiple cloud disk IDs are selected, it only supports modifying all cloud disks with the same attributes.
+	// One or more cloud disk ids to be operated, which can be queried through the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) api. if multiple cloud disk ids are passed in, only modifying all cloud disks to the same attribute is supported.
 	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Name of new cloud disk.
@@ -2815,10 +3142,13 @@ type ModifyDiskAttributesRequest struct {
 	// Whether the cloud disk is terminated with the CVM after it has been successfully mounted. `TRUE` indicates that it is terminated with the CVM. `FALSE` indicates that it is not terminated with the CVM. This is only supported for cloud disks and data disks that are pay-as-you-go.
 	DeleteWithInstance *bool `json:"DeleteWithInstance,omitnil,omitempty" name:"DeleteWithInstance"`
 
-	// When changing the type of a cloud disk, this parameter can be passed to indicate the desired cloud disk type. Value range: <br><li>CLOUD_PREMIUM: Premium cloud storage.  <br><li>CLOUD_SSD: SSD cloud disk. <br>Currently, batch operations are not supported for changing type. That is, when `DiskType` is passed, only one cloud disk can be passed through `DiskIds`. <br>When the cloud disk type is changed, the changing of other attributes is not supported concurrently.
+	// When changing the CLOUD disk type, you can input this parameter to indicate the target type. valid values:<br><li>CLOUD_PREMIUM: refers to high-performance CLOUD block storage</li><li>CLOUD_SSD: refers to SSD CLOUD disk.</li>batch type change is not supported. when inputting DiskType, DiskIds only supports entering one CLOUD disk id.<br>changing the CLOUD disk type does not support changing other attributes at the same time.
+	// For details, see [adjust cloud disk type](https://www.tencentcloud.com/document/product/362/32540?from_cn_redirect=1).
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Enable/disable disk bursting.
+	// Enable/Disable cloud disk performance burst feature. valid values:. 
+	// CREATE: enable.
+	// Specifies to CANCEL and close.
 	BurstPerformanceOperation *string `json:"BurstPerformanceOperation,omitnil,omitempty" name:"BurstPerformanceOperation"`
 }
 
@@ -2849,7 +3179,7 @@ func (r *ModifyDiskAttributesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDiskAttributesResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2871,20 +3201,20 @@ func (r *ModifyDiskAttributesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDiskBackupQuotaRequestParams struct {
-	// Cloud disk ID.
+	// Cloud disk ID. can be queried via the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) api.
 	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 
-	// Cloud disk backup point quota after the adjustment
+	// Adjusted cloud disk backup point quota. value range: 1-1024.
 	DiskBackupQuota *uint64 `json:"DiskBackupQuota,omitnil,omitempty" name:"DiskBackupQuota"`
 }
 
 type ModifyDiskBackupQuotaRequest struct {
 	*tchttp.BaseRequest
 	
-	// Cloud disk ID.
+	// Cloud disk ID. can be queried via the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) api.
 	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 
-	// Cloud disk backup point quota after the adjustment
+	// Adjusted cloud disk backup point quota. value range: 1-1024.
 	DiskBackupQuota *uint64 `json:"DiskBackupQuota,omitnil,omitempty" name:"DiskBackupQuota"`
 }
 
@@ -2910,7 +3240,7 @@ func (r *ModifyDiskBackupQuotaRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDiskBackupQuotaResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2932,21 +3262,21 @@ func (r *ModifyDiskBackupQuotaResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDiskExtraPerformanceRequestParams struct {
-	// ID of the cloud disk to create a snapshot, which can be obtained via the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API.
-	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
-
-	// The extra throughput to purchase, in MB/s
+	// Specifies the hard disk performance of the additional CBS purchase in MiB/s.
 	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitnil,omitempty" name:"ThroughputPerformance"`
+
+	// The CLOUD disk ID for which extra performance needs to be purchased. it can be queried via the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) api. extra performance is only supported for enhanced SSD (CLOUD_HSSD) and ultra-fast SSD (CLOUD_TSSD) CBS disks exceeding 460GiB in size.
+	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 }
 
 type ModifyDiskExtraPerformanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the cloud disk to create a snapshot, which can be obtained via the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API.
-	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
-
-	// The extra throughput to purchase, in MB/s
+	// Specifies the hard disk performance of the additional CBS purchase in MiB/s.
 	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitnil,omitempty" name:"ThroughputPerformance"`
+
+	// The CLOUD disk ID for which extra performance needs to be purchased. it can be queried via the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) api. extra performance is only supported for enhanced SSD (CLOUD_HSSD) and ultra-fast SSD (CLOUD_TSSD) CBS disks exceeding 460GiB in size.
+	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 }
 
 func (r *ModifyDiskExtraPerformanceRequest) ToJsonString() string {
@@ -2961,8 +3291,8 @@ func (r *ModifyDiskExtraPerformanceRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "DiskId")
 	delete(f, "ThroughputPerformance")
+	delete(f, "DiskId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDiskExtraPerformanceRequest has unknown keys!", "")
 	}
@@ -2971,7 +3301,7 @@ func (r *ModifyDiskExtraPerformanceRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDiskExtraPerformanceResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2993,32 +3323,32 @@ func (r *ModifyDiskExtraPerformanceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifySnapshotAttributeRequestParams struct {
-	// Snapshot ID, which can be queried via [DescribeSnapshots](https://intl.cloud.tencent.com/document/product/362/15647?from_cn_redirect=1).
+	// Snapshot ID. can be queried via DescribeSnapshots (https://www.tencentcloud.com/document/api/362/15647?from_cn_redirect=1).
 	SnapshotId *string `json:"SnapshotId,omitnil,omitempty" name:"SnapshotId"`
-
-	// Name of new snapshot. Maximum length is 60 bytes.
-	SnapshotName *string `json:"SnapshotName,omitnil,omitempty" name:"SnapshotName"`
 
 	// Snapshot retention mode. Valid values: `FALSE`: non-permanent retention; `TRUE`: permanent retention.
 	IsPermanent *bool `json:"IsPermanent,omitnil,omitempty" name:"IsPermanent"`
 
-	// Expiration time of the snapshot. Setting this parameter will set the snapshot retention mode to `FALSE` (non-permanent retention) and the snapshot will be automatically deleted upon expiration.
+	// Name of new snapshot. Maximum length is 60 bytes.
+	SnapshotName *string `json:"SnapshotName,omitnil,omitempty" name:"SnapshotName"`
+
+	// Specifies the snapshot expiration time. the snapshot will be simultaneously set to the non-permanent retention method. snapshots exceeding the expiry time will be automatically deleted. note: this parameter is valid only when IsPermanent is False.
 	Deadline *string `json:"Deadline,omitnil,omitempty" name:"Deadline"`
 }
 
 type ModifySnapshotAttributeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Snapshot ID, which can be queried via [DescribeSnapshots](https://intl.cloud.tencent.com/document/product/362/15647?from_cn_redirect=1).
+	// Snapshot ID. can be queried via DescribeSnapshots (https://www.tencentcloud.com/document/api/362/15647?from_cn_redirect=1).
 	SnapshotId *string `json:"SnapshotId,omitnil,omitempty" name:"SnapshotId"`
-
-	// Name of new snapshot. Maximum length is 60 bytes.
-	SnapshotName *string `json:"SnapshotName,omitnil,omitempty" name:"SnapshotName"`
 
 	// Snapshot retention mode. Valid values: `FALSE`: non-permanent retention; `TRUE`: permanent retention.
 	IsPermanent *bool `json:"IsPermanent,omitnil,omitempty" name:"IsPermanent"`
 
-	// Expiration time of the snapshot. Setting this parameter will set the snapshot retention mode to `FALSE` (non-permanent retention) and the snapshot will be automatically deleted upon expiration.
+	// Name of new snapshot. Maximum length is 60 bytes.
+	SnapshotName *string `json:"SnapshotName,omitnil,omitempty" name:"SnapshotName"`
+
+	// Specifies the snapshot expiration time. the snapshot will be simultaneously set to the non-permanent retention method. snapshots exceeding the expiry time will be automatically deleted. note: this parameter is valid only when IsPermanent is False.
 	Deadline *string `json:"Deadline,omitnil,omitempty" name:"Deadline"`
 }
 
@@ -3035,8 +3365,8 @@ func (r *ModifySnapshotAttributeRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "SnapshotId")
-	delete(f, "SnapshotName")
 	delete(f, "IsPermanent")
+	delete(f, "SnapshotName")
 	delete(f, "Deadline")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySnapshotAttributeRequest has unknown keys!", "")
@@ -3046,7 +3376,7 @@ func (r *ModifySnapshotAttributeRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifySnapshotAttributeResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3068,27 +3398,27 @@ func (r *ModifySnapshotAttributeResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifySnapshotsSharePermissionRequestParams struct {
-	// List of account IDs with which a snapshot is shared. For the format of array-type parameters, see [API Introduction](https://intl.cloud.tencent.com/document/api/213/568?from_cn_redirect=1). You can find the account ID in [Account Information](https://console.cloud.tencent.com/developer).
+	// The ID of the snapshot. You can obtain this by using [DescribeSnapshots](https://intl.cloud.tencent.com/document/api/362/15647?from_cn_redirect=1).
+	SnapshotIds []*string `json:"SnapshotIds,omitnil,omitempty" name:"SnapshotIds"`
+
+	// Account Id list for receiving shared snapshots. the format of array-type parameters can be found in the API overview (https://www.tencentcloud.com/document/API/213/568?from_cn_redirect=1). the account Id is different from a QQ number. to query a user account Id, view the account Id column in the account information (https://console.cloud.tencent.com/developer).
 	AccountIds []*string `json:"AccountIds,omitnil,omitempty" name:"AccountIds"`
 
 	// Operations. Valid values: `SHARE`, sharing an image; `CANCEL`, cancelling the sharing of an image.
 	Permission *string `json:"Permission,omitnil,omitempty" name:"Permission"`
-
-	// The ID of the snapshot. You can obtain this by using [DescribeSnapshots](https://intl.cloud.tencent.com/document/api/362/15647?from_cn_redirect=1).
-	SnapshotIds []*string `json:"SnapshotIds,omitnil,omitempty" name:"SnapshotIds"`
 }
 
 type ModifySnapshotsSharePermissionRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of account IDs with which a snapshot is shared. For the format of array-type parameters, see [API Introduction](https://intl.cloud.tencent.com/document/api/213/568?from_cn_redirect=1). You can find the account ID in [Account Information](https://console.cloud.tencent.com/developer).
+	// The ID of the snapshot. You can obtain this by using [DescribeSnapshots](https://intl.cloud.tencent.com/document/api/362/15647?from_cn_redirect=1).
+	SnapshotIds []*string `json:"SnapshotIds,omitnil,omitempty" name:"SnapshotIds"`
+
+	// Account Id list for receiving shared snapshots. the format of array-type parameters can be found in the API overview (https://www.tencentcloud.com/document/API/213/568?from_cn_redirect=1). the account Id is different from a QQ number. to query a user account Id, view the account Id column in the account information (https://console.cloud.tencent.com/developer).
 	AccountIds []*string `json:"AccountIds,omitnil,omitempty" name:"AccountIds"`
 
 	// Operations. Valid values: `SHARE`, sharing an image; `CANCEL`, cancelling the sharing of an image.
 	Permission *string `json:"Permission,omitnil,omitempty" name:"Permission"`
-
-	// The ID of the snapshot. You can obtain this by using [DescribeSnapshots](https://intl.cloud.tencent.com/document/api/362/15647?from_cn_redirect=1).
-	SnapshotIds []*string `json:"SnapshotIds,omitnil,omitempty" name:"SnapshotIds"`
 }
 
 func (r *ModifySnapshotsSharePermissionRequest) ToJsonString() string {
@@ -3103,9 +3433,9 @@ func (r *ModifySnapshotsSharePermissionRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SnapshotIds")
 	delete(f, "AccountIds")
 	delete(f, "Permission")
-	delete(f, "SnapshotIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySnapshotsSharePermissionRequest has unknown keys!", "")
 	}
@@ -3114,7 +3444,7 @@ func (r *ModifySnapshotsSharePermissionRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifySnapshotsSharePermissionResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3138,14 +3468,14 @@ type Placement struct {
 	// The ID of the [Availability Zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo) to which the cloud disk belongs. This parameter can be obtained from the Zone field in the returned values of [DescribeZones](https://intl.cloud.tencent.com/document/product/213/15707?from_cn_redirect=1).
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Cage ID. When it is an input parameter, the specified CageID resource is operated, and it can be left blank. When it is an output parameter, it is the ID of the cage the resource belongs to, and it can be left blank.
-	// Note: This field may return null, indicating that no valid value was found.
+	// CageId, which can be obtained via [DescribeDiskStoragePool](https://www.tencentcloud.com/document/api/362/62143?from_cn_redirect=1). as an input parameter, it operates on resources of the specified cage Id and can be empty. as an output parameter, it indicates the cage Id to which the resource belongs and can be empty.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CageId *string `json:"CageId,omitnil,omitempty" name:"CageId"`
 
-	// ID of the project to which the instance belongs. This parameter can be obtained from the projectId field in the returned values of [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1). If this is left empty, default project is used.
+	// Instance'S project ID, which can be obtained by DescribeProject. by default if left blank, it is 0, indicating the default project.
 	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Project name of the instance.
+	// Project to which instance belongs. search via [DescribeProject](https://www.tencentcloud.com/document/api/651/78725?from_cn_redirect=1).
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
 
@@ -3153,8 +3483,8 @@ type Placement struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	CdcName *string `json:"CdcName,omitnil,omitempty" name:"CdcName"`
 
-	// ID of dedicated cluster which the instance belongs to. When it is an input parameter, the specified CdcId dedicated cluster resource is operated, and it can be left blank. When it is an output parameter, it is the ID of the dedicated cluster which the resource belongs to, and it can be left blank.
-	// Note: This field may return null, indicating that no valid value was found.
+	// The exclusive cluster ID of the instance. can be obtained via [DescribeDiskStoragePool](https://www.tencentcloud.com/document/api/362/62143?from_cn_redirect=1). as an input parameter, it indicates operations on resources belonging to the designated CdcId exclusive cluster and can be empty. as an output parameter, it indicates the exclusive cluster ID of the resource and can be empty.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CdcId *string `json:"CdcId,omitnil,omitempty" name:"CdcId"`
 
 	// Dedicated cluster ID
@@ -3179,8 +3509,8 @@ type PrepayPrice struct {
 	// Discounted price of a monthly-subscribed cloud disk or a snapshot, in USD.
 	DiscountPrice *float64 `json:"DiscountPrice,omitnil,omitempty" name:"DiscountPrice"`
 
-	// Billing unit for pay-as-you-go cloud disks. Valid value: <br><li>HOUR: billed hourly.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Billing unit for postpaid cloud disk. valid values:<br><li>HOUR: the billing unit for postpaid cloud disk is calculated hourly.</li>.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ChargeUnit *string `json:"ChargeUnit,omitnil,omitempty" name:"ChargeUnit"`
 
 	// Original unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
@@ -3208,8 +3538,7 @@ type PrepayPrice struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	UnitPrice *float64 `json:"UnitPrice,omitnil,omitempty" name:"UnitPrice"`
 
-	// Detailed billing items
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Details list of billable items.
 	DetailPrices []*DetailPrice `json:"DetailPrices,omitnil,omitempty" name:"DetailPrices"`
 }
 
@@ -3314,21 +3643,21 @@ func (r *RenewDiskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ResizeDiskRequestParams struct {
-	// ID of the cloud disk, which can be queried via the API [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1).
-	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
-
 	// Cloud disk size after scale out (in GB). This must be larger than the current size of the cloud disk. For the value range of the cloud disk sizes, see cloud disk [Product Types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1).
 	DiskSize *uint64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
+
+	// Cloud disk ID, which can be queried by calling the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) api. this field is only required when expanding a single cloud disk.
+	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 }
 
 type ResizeDiskRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the cloud disk, which can be queried via the API [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1).
-	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
-
 	// Cloud disk size after scale out (in GB). This must be larger than the current size of the cloud disk. For the value range of the cloud disk sizes, see cloud disk [Product Types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1).
 	DiskSize *uint64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
+
+	// Cloud disk ID, which can be queried by calling the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) api. this field is only required when expanding a single cloud disk.
+	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 }
 
 func (r *ResizeDiskRequest) ToJsonString() string {
@@ -3343,8 +3672,8 @@ func (r *ResizeDiskRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "DiskId")
 	delete(f, "DiskSize")
+	delete(f, "DiskId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResizeDiskRequest has unknown keys!", "")
 	}
@@ -3353,7 +3682,7 @@ func (r *ResizeDiskRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ResizeDiskResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3385,13 +3714,29 @@ type Snapshot struct {
 	// Location of the snapshot.
 	Placement *Placement `json:"Placement,omitnil,omitempty" name:"Placement"`
 
-	// Whether the snapshot is replicated across regions. Value range: <br><li>true: Indicates that the snapshot is replicated across regions. <br><li>false: Indicates that the snapshot belongs to the local region.
+	// Specifies whether the snapshot is for cross-region replication. value range:.
+	// <ul>
+	// <li>true: indicates a snapshot for cross-region replication.</li>.
+	// <li>false: snapshot of the local region.</li>.
+	// </ul>
 	CopyFromRemote *bool `json:"CopyFromRemote,omitnil,omitempty" name:"CopyFromRemote"`
 
-	// Snapshot status. Valid values: <br><li>NORMAL: normal <br><li>CREATING: creating<br><li>ROLLBACKING: rolling back<br><li>COPYING_FROM_REMOTE: cross-region replicating<li>CHECKING_COPIED: verifying the cross-region replicated data<br><li>TORECYCLE: to be repossessed.
+	// Snapshot status. valid values:.
+	// <ul>
+	// <Li>NORMAL: specifies the scaling group is normal.</li>.
+	// <Li>CREATING: creating</li>.
+	// <Li>ROLLBACKING: indicates the rollback is in progress.</li>.
+	// <Li>COPYING_FROM_REMOTE: cross geo-replication in progress.</li>.
+	// <Li>CHECKING_COPIED: copying check in progress.</li>.
+	// <Li>TORECYCLE: to be recycled.</li>.
+	// </ul>
 	SnapshotState *string `json:"SnapshotState,omitnil,omitempty" name:"SnapshotState"`
 
-	// Whether it is a permanent snapshot. Value range: <br><li>true: Permanent snapshot <br><li>false: Non-permanent snapshot.
+	// Whether it is a permanent snapshot. valid values:.
+	// <ul>
+	// <li>true: permanent snapshot.</li>.
+	// <li>false: non-permanent snapshot.</li>.
+	// </ul>
 	IsPermanent *bool `json:"IsPermanent,omitnil,omitempty" name:"IsPermanent"`
 
 	// Snapshot name, the user-defined snapshot alias. Call [ModifySnapshotAttribute](https://intl.cloud.tencent.com/document/product/362/15650?from_cn_redirect=1) to modify this field.
@@ -3409,19 +3754,23 @@ type Snapshot struct {
 	// Number of snapshots currently shared
 	ShareReference *uint64 `json:"ShareReference,omitnil,omitempty" name:"ShareReference"`
 
-	// Snapshot type. This value can currently be either PRIVATE_SNAPSHOT or SHARED_SNAPSHOT.
+	// Specifies the SNAPSHOT type. valid values: `PRIVATE_SNAPSHOT` (PRIVATE SNAPSHOT) or `SHARED_SNAPSHOT` (SHARED SNAPSHOT).
 	SnapshotType *string `json:"SnapshotType,omitnil,omitempty" name:"SnapshotType"`
 
-	// Size of the cloud disk used to create this snapshot (in GB).
+	// Specifies the disk capacity of the CBS for creating this snapshot, in GiB.
 	DiskSize *uint64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
 	// ID of the cloud disk used to create this snapshot.
 	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 
-	// The destination region to which the snapshot is being replicated. Default value is [ ].
+	// Destination region of the snapshot currently under cross region replication. if not, return `[]`.
 	CopyingToRegions []*string `json:"CopyingToRegions,omitnil,omitempty" name:"CopyingToRegions"`
 
-	// Whether the snapshot is created from an encrypted disk. Value range: <br><li>true: Yes <br><li>false: No.
+	// Indicates whether the snapshot is created for an encrypted disk. valid values:.
+	// <ul>
+	// <li>true: specifies the snapshot is created by encrypted disks.</li>.
+	// <li>false: snapshot created for non-encrypted disk.</li>.
+	// </ul>
 	Encrypt *bool `json:"Encrypt,omitnil,omitempty" name:"Encrypt"`
 
 	// Creation time of the snapshot.
@@ -3430,7 +3779,11 @@ type Snapshot struct {
 	// Number of images associated with snapshot.
 	ImageCount *uint64 `json:"ImageCount,omitnil,omitempty" name:"ImageCount"`
 
-	// The type of the cloud disk used to create the snapshot. Value range: <br><li>SYSTEM_DISK: System disk <br><li>DATA_DISK: Data disk.
+	// Specifies the cloud disk type of the CBS for creating this snapshot. valid values:.
+	// <ul>
+	// <Li>SYSTEM_DISK: system disk</li>.
+	// <Li>DATA_DISK: specifies the data disk.</li>.
+	// </ul>
 	DiskUsage *string `json:"DiskUsage,omitnil,omitempty" name:"DiskUsage"`
 
 	// Snapshot ID.
@@ -3457,35 +3810,54 @@ type SnapshotCopyResult struct {
 	DestinationRegion *string `json:"DestinationRegion,omitnil,omitempty" name:"DestinationRegion"`
 }
 
-type SnapshotOperationLog struct {
-	// Status of operation. Value range:
-	// SUCCESS: Operation successful 
-	// FAILED: Operation failed 
-	// PROCESSING: Operation in process
-	OperationState *string `json:"OperationState,omitnil,omitempty" name:"OperationState"`
+type SnapshotGroup struct {
+	// Specifies the snapshot group ID.
+	SnapshotGroupId *string `json:"SnapshotGroupId,omitnil,omitempty" name:"SnapshotGroupId"`
 
-	// Start time
-	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+	// Snapshot group type. NORMAL: common snapshot group, non-consistent snapshot.
+	SnapshotGroupType *string `json:"SnapshotGroupType,omitnil,omitempty" name:"SnapshotGroupType"`
 
-	// UIN of operator.
-	// Note: This field may return null, indicating that no valid value was found.
-	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
+	// Specifies whether the snapshot group contains a system disk snapshot.
+	ContainRootSnapshot *bool `json:"ContainRootSnapshot,omitnil,omitempty" name:"ContainRootSnapshot"`
 
-	// ID of snapshot being operated.
-	SnapshotId *string `json:"SnapshotId,omitnil,omitempty" name:"SnapshotId"`
+	// Specifies the snapshot ID list included in the snapshot group.
+	SnapshotIdSet []*string `json:"SnapshotIdSet,omitnil,omitempty" name:"SnapshotIdSet"`
 
-	// Operation type. Value range:
-	// SNAP_OPERATION_DELETE: Delete snapshot
-	// SNAP_OPERATION_ROLLBACK: Roll back snapshot
-	// SNAP_OPERATION_MODIFY: Modify snapshot attributes
-	// SNAP_OPERATION_CREATE: Create snapshot
-	// SNAP_OPERATION_COPY: Cross-region replication of snapshot
-	// ASP_OPERATION_CREATE_SNAP: Create snapshot with scheduled snapshot policy
-	// ASP_OPERATION_DELETE_SNAP: Delete snapshot from scheduled snapshot policy
-	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
+	// <ul>
+	// <Li>NORMAL: specifies the scaling group is in normal state.</li>.
+	// <Li>CREATING: creating.</li>.
+	// <Li>ROLLBACKING: indicates the rollback is in progress.</li>.
+	// </ul>
+	SnapshotGroupState *string `json:"SnapshotGroupState,omitnil,omitempty" name:"SnapshotGroupState"`
 
-	// End time
-	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+	// Specifies the snapshot group creation progress.
+	Percent *uint64 `json:"Percent,omitnil,omitempty" name:"Percent"`
+
+	// Specifies the snapshot group creation time.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Latest modification time of the snapshot group.
+	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
+
+	// Specifies the image list associated with the snapshot group.
+	Images []*Image `json:"Images,omitnil,omitempty" name:"Images"`
+
+	// Specifies the snapshot group name.
+	SnapshotGroupName *string `json:"SnapshotGroupName,omitnil,omitempty" name:"SnapshotGroupName"`
+
+	// Number of images associated with the snapshot group.
+	ImageCount *uint64 `json:"ImageCount,omitnil,omitempty" name:"ImageCount"`
+
+	// Specifies whether the snapshot group has permanent retention.
+	IsPermanent *bool `json:"IsPermanent,omitnil,omitempty" name:"IsPermanent"`
+
+	// Specifies the snapshot group expiration time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DeadlineTime *string `json:"DeadlineTime,omitnil,omitempty" name:"DeadlineTime"`
+
+	// Source automatic snapshot policy ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitnil,omitempty" name:"AutoSnapshotPolicyId"`
 }
 
 type Tag struct {
@@ -3498,7 +3870,7 @@ type Tag struct {
 
 // Predefined struct for user
 type TerminateDisksRequestParams struct {
-	// List of cloud disk IDs required to be returned.
+	// List of cloud disk ids to be returned, which can be queried by calling the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) api.
 	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Delete the associated non-permanently reserved snapshots upon deletion of the source cloud disk. `0`: No (default). `1`: Yes. To check whether a snapshot is permanently reserved, refer to the `IsPermanent` field returned by the `DescribeSnapshots` API. 
@@ -3508,7 +3880,7 @@ type TerminateDisksRequestParams struct {
 type TerminateDisksRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of cloud disk IDs required to be returned.
+	// List of cloud disk ids to be returned, which can be queried by calling the [DescribeDisks](https://www.tencentcloud.com/document/product/362/16315?from_cn_redirect=1) api.
 	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Delete the associated non-permanently reserved snapshots upon deletion of the source cloud disk. `0`: No (default). `1`: Yes. To check whether a snapshot is permanently reserved, refer to the `IsPermanent` field returned by the `DescribeSnapshots` API. 
@@ -3537,7 +3909,7 @@ func (r *TerminateDisksRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type TerminateDisksResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3559,21 +3931,27 @@ func (r *TerminateDisksResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UnbindAutoSnapshotPolicyRequestParams struct {
-	// List of cloud disk IDs scheduled snapshot policy to be unbound from.
-	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
-
 	// ID of scheduled snapshot policy to be unbound.
 	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitnil,omitempty" name:"AutoSnapshotPolicyId"`
+
+	// ID list of cloud disks from which the regular snapshot policy is unbound. specifies this parameter or the InstanceIds parameter. a minimum of one is required.
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
+
+	// Instance ID list to unbind the periodic snapshot policy. this parameter or the DiskIds parameter requires a minimum of one input.
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type UnbindAutoSnapshotPolicyRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of cloud disk IDs scheduled snapshot policy to be unbound from.
-	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
-
 	// ID of scheduled snapshot policy to be unbound.
 	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitnil,omitempty" name:"AutoSnapshotPolicyId"`
+
+	// ID list of cloud disks from which the regular snapshot policy is unbound. specifies this parameter or the InstanceIds parameter. a minimum of one is required.
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
+
+	// Instance ID list to unbind the periodic snapshot policy. this parameter or the DiskIds parameter requires a minimum of one input.
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 func (r *UnbindAutoSnapshotPolicyRequest) ToJsonString() string {
@@ -3588,8 +3966,9 @@ func (r *UnbindAutoSnapshotPolicyRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "DiskIds")
 	delete(f, "AutoSnapshotPolicyId")
+	delete(f, "DiskIds")
+	delete(f, "InstanceIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnbindAutoSnapshotPolicyRequest has unknown keys!", "")
 	}
@@ -3598,7 +3977,7 @@ func (r *UnbindAutoSnapshotPolicyRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UnbindAutoSnapshotPolicyResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 

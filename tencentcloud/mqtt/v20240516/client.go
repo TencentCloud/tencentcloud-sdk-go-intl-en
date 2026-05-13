@@ -145,6 +145,58 @@ func (c *Client) CreateAuthorizationPolicyWithContext(ctx context.Context, reque
     return
 }
 
+func NewCreateDeviceIdentityRequest() (request *CreateDeviceIdentityRequest) {
+    request = &CreateDeviceIdentityRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mqtt", APIVersion, "CreateDeviceIdentity")
+    
+    
+    return
+}
+
+func NewCreateDeviceIdentityResponse() (response *CreateDeviceIdentityResponse) {
+    response = &CreateDeviceIdentityResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDeviceIdentity
+// Create a device signature for per-device secret
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+//  UNSUPPORTEDOPERATION_RESOURCEALREADYEXISTS = "UnsupportedOperation.ResourceAlreadyExists"
+func (c *Client) CreateDeviceIdentity(request *CreateDeviceIdentityRequest) (response *CreateDeviceIdentityResponse, err error) {
+    return c.CreateDeviceIdentityWithContext(context.Background(), request)
+}
+
+// CreateDeviceIdentity
+// Create a device signature for per-device secret
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+//  UNSUPPORTEDOPERATION_RESOURCEALREADYEXISTS = "UnsupportedOperation.ResourceAlreadyExists"
+func (c *Client) CreateDeviceIdentityWithContext(ctx context.Context, request *CreateDeviceIdentityRequest) (response *CreateDeviceIdentityResponse, err error) {
+    if request == nil {
+        request = NewCreateDeviceIdentityRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mqtt", APIVersion, "CreateDeviceIdentity")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDeviceIdentity require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDeviceIdentityResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateInstanceRequest() (request *CreateInstanceRequest) {
     request = &CreateInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -417,6 +469,58 @@ func (c *Client) DeleteClientSubscriptionWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewDeleteClientSubscriptionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteDeviceIdentityRequest() (request *DeleteDeviceIdentityRequest) {
+    request = &DeleteDeviceIdentityRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mqtt", APIVersion, "DeleteDeviceIdentity")
+    
+    
+    return
+}
+
+func NewDeleteDeviceIdentityResponse() (response *DeleteDeviceIdentityResponse) {
+    response = &DeleteDeviceIdentityResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteDeviceIdentity
+// Delete a device signature
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+//  UNSUPPORTEDOPERATION_RESOURCEALREADYEXISTS = "UnsupportedOperation.ResourceAlreadyExists"
+func (c *Client) DeleteDeviceIdentity(request *DeleteDeviceIdentityRequest) (response *DeleteDeviceIdentityResponse, err error) {
+    return c.DeleteDeviceIdentityWithContext(context.Background(), request)
+}
+
+// DeleteDeviceIdentity
+// Delete a device signature
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+//  UNSUPPORTEDOPERATION_RESOURCEALREADYEXISTS = "UnsupportedOperation.ResourceAlreadyExists"
+func (c *Client) DeleteDeviceIdentityWithContext(ctx context.Context, request *DeleteDeviceIdentityRequest) (response *DeleteDeviceIdentityResponse, err error) {
+    if request == nil {
+        request = NewDeleteDeviceIdentityRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mqtt", APIVersion, "DeleteDeviceIdentity")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDeviceIdentity require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteDeviceIdentityResponse()
     err = c.Send(request, response)
     return
 }
@@ -747,6 +851,164 @@ func (c *Client) DescribeClientListWithContext(ctx context.Context, request *Des
     return
 }
 
+func NewDescribeDeviceCertificatesRequest() (request *DescribeDeviceCertificatesRequest) {
+    request = &DescribeDeviceCertificatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mqtt", APIVersion, "DescribeDeviceCertificates")
+    
+    
+    return
+}
+
+func NewDescribeDeviceCertificatesResponse() (response *DescribeDeviceCertificatesResponse) {
+    response = &DescribeDeviceCertificatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDeviceCertificates
+// Query device certificates with paging
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
+//  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
+//  RESOURCENOTFOUND_USERNAME = "ResourceNotFound.Username"
+func (c *Client) DescribeDeviceCertificates(request *DescribeDeviceCertificatesRequest) (response *DescribeDeviceCertificatesResponse, err error) {
+    return c.DescribeDeviceCertificatesWithContext(context.Background(), request)
+}
+
+// DescribeDeviceCertificates
+// Query device certificates with paging
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
+//  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
+//  RESOURCENOTFOUND_USERNAME = "ResourceNotFound.Username"
+func (c *Client) DescribeDeviceCertificatesWithContext(ctx context.Context, request *DescribeDeviceCertificatesRequest) (response *DescribeDeviceCertificatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeDeviceCertificatesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mqtt", APIVersion, "DescribeDeviceCertificates")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDeviceCertificates require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDeviceCertificatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDeviceIdentitiesRequest() (request *DescribeDeviceIdentitiesRequest) {
+    request = &DescribeDeviceIdentitiesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mqtt", APIVersion, "DescribeDeviceIdentities")
+    
+    
+    return
+}
+
+func NewDescribeDeviceIdentitiesResponse() (response *DescribeDeviceIdentitiesResponse) {
+    response = &DescribeDeviceIdentitiesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDeviceIdentities
+// Query the list of device identifiers in a cluster
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+func (c *Client) DescribeDeviceIdentities(request *DescribeDeviceIdentitiesRequest) (response *DescribeDeviceIdentitiesResponse, err error) {
+    return c.DescribeDeviceIdentitiesWithContext(context.Background(), request)
+}
+
+// DescribeDeviceIdentities
+// Query the list of device identifiers in a cluster
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+func (c *Client) DescribeDeviceIdentitiesWithContext(ctx context.Context, request *DescribeDeviceIdentitiesRequest) (response *DescribeDeviceIdentitiesResponse, err error) {
+    if request == nil {
+        request = NewDescribeDeviceIdentitiesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mqtt", APIVersion, "DescribeDeviceIdentities")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDeviceIdentities require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDeviceIdentitiesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDeviceIdentityRequest() (request *DescribeDeviceIdentityRequest) {
+    request = &DescribeDeviceIdentityRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mqtt", APIVersion, "DescribeDeviceIdentity")
+    
+    
+    return
+}
+
+func NewDescribeDeviceIdentityResponse() (response *DescribeDeviceIdentityResponse) {
+    response = &DescribeDeviceIdentityResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDeviceIdentity
+// Query device identification
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeDeviceIdentity(request *DescribeDeviceIdentityRequest) (response *DescribeDeviceIdentityResponse, err error) {
+    return c.DescribeDeviceIdentityWithContext(context.Background(), request)
+}
+
+// DescribeDeviceIdentity
+// Query device identification
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeDeviceIdentityWithContext(ctx context.Context, request *DescribeDeviceIdentityRequest) (response *DescribeDeviceIdentityResponse, err error) {
+    if request == nil {
+        request = NewDescribeDeviceIdentityRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mqtt", APIVersion, "DescribeDeviceIdentity")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDeviceIdentity require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDeviceIdentityResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstanceRequest() (request *DescribeInstanceRequest) {
     request = &DescribeInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -793,6 +1055,76 @@ func (c *Client) DescribeInstanceWithContext(ctx context.Context, request *Descr
     request.SetContext(ctx)
     
     response = NewDescribeInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInstanceListRequest() (request *DescribeInstanceListRequest) {
+    request = &DescribeInstanceListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mqtt", APIVersion, "DescribeInstanceList")
+    
+    
+    return
+}
+
+func NewDescribeInstanceListResponse() (response *DescribeInstanceListResponse) {
+    response = &DescribeInstanceListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeInstanceList
+// Get instance list. Description of the Filters parameter use is as follows:
+//
+// 1. InstanceName, fuzzy search by name
+//
+// 2. InstanceId, query by instance ID
+//
+// 3. InstanceStatus, instance status query, supports multiple selections
+//
+// 
+//
+// When using the TagFilters parameter for search, the filters parameter is invalid.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeInstanceList(request *DescribeInstanceListRequest) (response *DescribeInstanceListResponse, err error) {
+    return c.DescribeInstanceListWithContext(context.Background(), request)
+}
+
+// DescribeInstanceList
+// Get instance list. Description of the Filters parameter use is as follows:
+//
+// 1. InstanceName, fuzzy search by name
+//
+// 2. InstanceId, query by instance ID
+//
+// 3. InstanceStatus, instance status query, supports multiple selections
+//
+// 
+//
+// When using the TagFilters parameter for search, the filters parameter is invalid.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeInstanceListWithContext(ctx context.Context, request *DescribeInstanceListRequest) (response *DescribeInstanceListResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mqtt", APIVersion, "DescribeInstanceList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstanceList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstanceListResponse()
     err = c.Send(request, response)
     return
 }
@@ -951,6 +1283,222 @@ func (c *Client) DescribeMessageEnrichmentRulesWithContext(ctx context.Context, 
     request.SetContext(ctx)
     
     response = NewDescribeMessageEnrichmentRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeProductSKUListRequest() (request *DescribeProductSKUListRequest) {
+    request = &DescribeProductSKUListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mqtt", APIVersion, "DescribeProductSKUList")
+    
+    
+    return
+}
+
+func NewDescribeProductSKUListResponse() (response *DescribeProductSKUListResponse) {
+    response = &DescribeProductSKUListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeProductSKUList
+// This API is used to obtain product sales specifications.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+//  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
+func (c *Client) DescribeProductSKUList(request *DescribeProductSKUListRequest) (response *DescribeProductSKUListResponse, err error) {
+    return c.DescribeProductSKUListWithContext(context.Background(), request)
+}
+
+// DescribeProductSKUList
+// This API is used to obtain product sales specifications.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+//  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
+func (c *Client) DescribeProductSKUListWithContext(ctx context.Context, request *DescribeProductSKUListRequest) (response *DescribeProductSKUListResponse, err error) {
+    if request == nil {
+        request = NewDescribeProductSKUListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mqtt", APIVersion, "DescribeProductSKUList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProductSKUList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeProductSKUListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSharedSubscriptionClientRequest() (request *DescribeSharedSubscriptionClientRequest) {
+    request = &DescribeSharedSubscriptionClientRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mqtt", APIVersion, "DescribeSharedSubscriptionClient")
+    
+    
+    return
+}
+
+func NewDescribeSharedSubscriptionClientResponse() (response *DescribeSharedSubscriptionClientResponse) {
+    response = &DescribeSharedSubscriptionClientResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSharedSubscriptionClient
+// Query shared subscription group detailed information
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
+func (c *Client) DescribeSharedSubscriptionClient(request *DescribeSharedSubscriptionClientRequest) (response *DescribeSharedSubscriptionClientResponse, err error) {
+    return c.DescribeSharedSubscriptionClientWithContext(context.Background(), request)
+}
+
+// DescribeSharedSubscriptionClient
+// Query shared subscription group detailed information
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
+func (c *Client) DescribeSharedSubscriptionClientWithContext(ctx context.Context, request *DescribeSharedSubscriptionClientRequest) (response *DescribeSharedSubscriptionClientResponse, err error) {
+    if request == nil {
+        request = NewDescribeSharedSubscriptionClientRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mqtt", APIVersion, "DescribeSharedSubscriptionClient")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSharedSubscriptionClient require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSharedSubscriptionClientResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSharedSubscriptionGroupsRequest() (request *DescribeSharedSubscriptionGroupsRequest) {
+    request = &DescribeSharedSubscriptionGroupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mqtt", APIVersion, "DescribeSharedSubscriptionGroups")
+    
+    
+    return
+}
+
+func NewDescribeSharedSubscriptionGroupsResponse() (response *DescribeSharedSubscriptionGroupsResponse) {
+    response = &DescribeSharedSubscriptionGroupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSharedSubscriptionGroups
+// This API is used to query the subscription group list shared within the cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
+func (c *Client) DescribeSharedSubscriptionGroups(request *DescribeSharedSubscriptionGroupsRequest) (response *DescribeSharedSubscriptionGroupsResponse, err error) {
+    return c.DescribeSharedSubscriptionGroupsWithContext(context.Background(), request)
+}
+
+// DescribeSharedSubscriptionGroups
+// This API is used to query the subscription group list shared within the cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
+func (c *Client) DescribeSharedSubscriptionGroupsWithContext(ctx context.Context, request *DescribeSharedSubscriptionGroupsRequest) (response *DescribeSharedSubscriptionGroupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSharedSubscriptionGroupsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mqtt", APIVersion, "DescribeSharedSubscriptionGroups")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSharedSubscriptionGroups require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSharedSubscriptionGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSharedSubscriptionsRequest() (request *DescribeSharedSubscriptionsRequest) {
+    request = &DescribeSharedSubscriptionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mqtt", APIVersion, "DescribeSharedSubscriptions")
+    
+    
+    return
+}
+
+func NewDescribeSharedSubscriptionsResponse() (response *DescribeSharedSubscriptionsResponse) {
+    response = &DescribeSharedSubscriptionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSharedSubscriptions
+// Query the subscription list of a shared subscription group
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
+func (c *Client) DescribeSharedSubscriptions(request *DescribeSharedSubscriptionsRequest) (response *DescribeSharedSubscriptionsResponse, err error) {
+    return c.DescribeSharedSubscriptionsWithContext(context.Background(), request)
+}
+
+// DescribeSharedSubscriptions
+// Query the subscription list of a shared subscription group
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
+func (c *Client) DescribeSharedSubscriptionsWithContext(ctx context.Context, request *DescribeSharedSubscriptionsRequest) (response *DescribeSharedSubscriptionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSharedSubscriptionsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mqtt", APIVersion, "DescribeSharedSubscriptions")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSharedSubscriptions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSharedSubscriptionsResponse()
     err = c.Send(request, response)
     return
 }
@@ -1167,6 +1715,58 @@ func (c *Client) ModifyAuthorizationPolicyWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewModifyAuthorizationPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDeviceIdentityRequest() (request *ModifyDeviceIdentityRequest) {
+    request = &ModifyDeviceIdentityRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mqtt", APIVersion, "ModifyDeviceIdentity")
+    
+    
+    return
+}
+
+func NewModifyDeviceIdentityResponse() (response *ModifyDeviceIdentityResponse) {
+    response = &ModifyDeviceIdentityResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDeviceIdentity
+// Modify the device signature
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+//  UNSUPPORTEDOPERATION_RESOURCEALREADYEXISTS = "UnsupportedOperation.ResourceAlreadyExists"
+func (c *Client) ModifyDeviceIdentity(request *ModifyDeviceIdentityRequest) (response *ModifyDeviceIdentityResponse, err error) {
+    return c.ModifyDeviceIdentityWithContext(context.Background(), request)
+}
+
+// ModifyDeviceIdentity
+// Modify the device signature
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+//  UNSUPPORTEDOPERATION_RESOURCEALREADYEXISTS = "UnsupportedOperation.ResourceAlreadyExists"
+func (c *Client) ModifyDeviceIdentityWithContext(ctx context.Context, request *ModifyDeviceIdentityRequest) (response *ModifyDeviceIdentityResponse, err error) {
+    if request == nil {
+        request = NewModifyDeviceIdentityRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mqtt", APIVersion, "ModifyDeviceIdentity")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDeviceIdentity require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDeviceIdentityResponse()
     err = c.Send(request, response)
     return
 }

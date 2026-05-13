@@ -217,78 +217,6 @@ func (c *Client) ClearCmqSubscriptionFilterTagsWithContext(ctx context.Context, 
     return
 }
 
-func NewCreateClusterRequest() (request *CreateClusterRequest) {
-    request = &CreateClusterRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("tdmq", APIVersion, "CreateCluster")
-    
-    
-    return
-}
-
-func NewCreateClusterResponse() (response *CreateClusterResponse) {
-    response = &CreateClusterResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// CreateCluster
-// This API is used to create a cluster.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_CREATECLUSTER = "FailedOperation.CreateCluster"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  LIMITEXCEEDED_CLUSTERS = "LimitExceeded.Clusters"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
-//  RESOURCEINUSE_CLUSTER = "ResourceInUse.Cluster"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCEUNAVAILABLE_CREATEFAILED = "ResourceUnavailable.CreateFailed"
-//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
-func (c *Client) CreateCluster(request *CreateClusterRequest) (response *CreateClusterResponse, err error) {
-    return c.CreateClusterWithContext(context.Background(), request)
-}
-
-// CreateCluster
-// This API is used to create a cluster.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_CREATECLUSTER = "FailedOperation.CreateCluster"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  LIMITEXCEEDED_CLUSTERS = "LimitExceeded.Clusters"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
-//  RESOURCEINUSE_CLUSTER = "ResourceInUse.Cluster"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCEUNAVAILABLE_CREATEFAILED = "ResourceUnavailable.CreateFailed"
-//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
-func (c *Client) CreateClusterWithContext(ctx context.Context, request *CreateClusterRequest) (response *CreateClusterResponse, err error) {
-    if request == nil {
-        request = NewCreateClusterRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "tdmq", APIVersion, "CreateCluster")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateCluster require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateClusterResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewCreateCmqQueueRequest() (request *CreateCmqQueueRequest) {
     request = &CreateCmqQueueRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -689,6 +617,8 @@ func NewCreateProClusterResponse() (response *CreateProClusterResponse) {
 //  FAILEDOPERATION_GENERATEDEALSANDPAYERROR = "FailedOperation.GenerateDealsAndPayError"
 //  FAILEDOPERATION_OPERATELATER = "FailedOperation.OperateLater"
 //  FAILEDOPERATION_PRODUCTNOTEXIST = "FailedOperation.ProductNotExist"
+//  FAILEDOPERATION_STORAGESIZEERROR = "FailedOperation.StorageSizeError"
+//  INVALIDPARAMETER_INSTANCEVERSION = "InvalidParameter.InstanceVersion"
 //  INVALIDPARAMETER_VPC = "InvalidParameter.Vpc"
 //  MISSINGPARAMETER_TAG = "MissingParameter.Tag"
 func (c *Client) CreateProCluster(request *CreateProClusterRequest) (response *CreateProClusterResponse, err error) {
@@ -704,6 +634,8 @@ func (c *Client) CreateProCluster(request *CreateProClusterRequest) (response *C
 //  FAILEDOPERATION_GENERATEDEALSANDPAYERROR = "FailedOperation.GenerateDealsAndPayError"
 //  FAILEDOPERATION_OPERATELATER = "FailedOperation.OperateLater"
 //  FAILEDOPERATION_PRODUCTNOTEXIST = "FailedOperation.ProductNotExist"
+//  FAILEDOPERATION_STORAGESIZEERROR = "FailedOperation.StorageSizeError"
+//  INVALIDPARAMETER_INSTANCEVERSION = "InvalidParameter.InstanceVersion"
 //  INVALIDPARAMETER_VPC = "InvalidParameter.Vpc"
 //  MISSINGPARAMETER_TAG = "MissingParameter.Tag"
 func (c *Client) CreateProClusterWithContext(ctx context.Context, request *CreateProClusterRequest) (response *CreateProClusterResponse, err error) {
@@ -961,7 +893,9 @@ func NewCreateRocketMQClusterResponse() (response *CreateRocketMQClusterResponse
 }
 
 // CreateRocketMQCluster
-// This API is used to create a RocketMQ cluster.
+// Create a RocketMQ cluster.
+//
+// This API is applicable to clusters: 4.x virtual cluster. For 4.x dedicated or generic clusters, refer to the API documentation [CreateRocketMQVipInstance](https://www.tencentcloud.com/document/api/1179/95721?from_cn_redirect=1). For 5.x clusters, refer to the API documentation [CreateInstance](https://www.tencentcloud.com/document/api/1493/97868?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -981,7 +915,9 @@ func (c *Client) CreateRocketMQCluster(request *CreateRocketMQClusterRequest) (r
 }
 
 // CreateRocketMQCluster
-// This API is used to create a RocketMQ cluster.
+// Create a RocketMQ cluster.
+//
+// This API is applicable to clusters: 4.x virtual cluster. For 4.x dedicated or generic clusters, refer to the API documentation [CreateRocketMQVipInstance](https://www.tencentcloud.com/document/api/1179/95721?from_cn_redirect=1). For 5.x clusters, refer to the API documentation [CreateInstance](https://www.tencentcloud.com/document/api/1493/97868?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1033,7 +969,9 @@ func NewCreateRocketMQEnvironmentRoleResponse() (response *CreateRocketMQEnviron
 }
 
 // CreateRocketMQEnvironmentRole
-// Creates environment role authorization
+// Grant access by role.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateRole](https://www.tencentcloud.com/document/api/1493/98864?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -1052,7 +990,9 @@ func (c *Client) CreateRocketMQEnvironmentRole(request *CreateRocketMQEnvironmen
 }
 
 // CreateRocketMQEnvironmentRole
-// Creates environment role authorization
+// Grant access by role.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateRole](https://www.tencentcloud.com/document/api/1493/98864?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -1103,7 +1043,9 @@ func NewCreateRocketMQGroupResponse() (response *CreateRocketMQGroupResponse) {
 }
 
 // CreateRocketMQGroup
-// This API is used to create a RocketMQ consumer group.
+// This API is used to create a RocketMQ consumption group.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateConsumerGroup](https://www.tencentcloud.com/document/api/1493/97943?from_cn_redirect=1) to create a consumer group.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1118,7 +1060,9 @@ func (c *Client) CreateRocketMQGroup(request *CreateRocketMQGroupRequest) (respo
 }
 
 // CreateRocketMQGroup
-// This API is used to create a RocketMQ consumer group.
+// This API is used to create a RocketMQ consumption group.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateConsumerGroup](https://www.tencentcloud.com/document/api/1493/97943?from_cn_redirect=1) to create a consumer group.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1145,6 +1089,72 @@ func (c *Client) CreateRocketMQGroupWithContext(ctx context.Context, request *Cr
     return
 }
 
+func NewCreateRocketMQGroupV2Request() (request *CreateRocketMQGroupV2Request) {
+    request = &CreateRocketMQGroupV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "CreateRocketMQGroupV2")
+    
+    
+    return
+}
+
+func NewCreateRocketMQGroupV2Response() (response *CreateRocketMQGroupV2Response) {
+    response = &CreateRocketMQGroupV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateRocketMQGroupV2
+// This API is used to create a RocketMQ consumption group.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateConsumerGroup](https://www.tencentcloud.com/document/api/1493/97943?from_cn_redirect=1) to create a consumer group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+func (c *Client) CreateRocketMQGroupV2(request *CreateRocketMQGroupV2Request) (response *CreateRocketMQGroupV2Response, err error) {
+    return c.CreateRocketMQGroupV2WithContext(context.Background(), request)
+}
+
+// CreateRocketMQGroupV2
+// This API is used to create a RocketMQ consumption group.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateConsumerGroup](https://www.tencentcloud.com/document/api/1493/97943?from_cn_redirect=1) to create a consumer group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+func (c *Client) CreateRocketMQGroupV2WithContext(ctx context.Context, request *CreateRocketMQGroupV2Request) (response *CreateRocketMQGroupV2Response, err error) {
+    if request == nil {
+        request = NewCreateRocketMQGroupV2Request()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmq", APIVersion, "CreateRocketMQGroupV2")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateRocketMQGroupV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateRocketMQGroupV2Response()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateRocketMQNamespaceRequest() (request *CreateRocketMQNamespaceRequest) {
     request = &CreateRocketMQNamespaceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1167,6 +1177,8 @@ func NewCreateRocketMQNamespaceResponse() (response *CreateRocketMQNamespaceResp
 // CreateRocketMQNamespace
 // This API is used to create a RocketMQ namespace.
 //
+// This API is applicable to clusters: 4.x virtual cluster and 4.x dedicated cluster. Other cluster types do not support this feature.
+//
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
@@ -1186,6 +1198,8 @@ func (c *Client) CreateRocketMQNamespace(request *CreateRocketMQNamespaceRequest
 
 // CreateRocketMQNamespace
 // This API is used to create a RocketMQ namespace.
+//
+// This API is applicable to clusters: 4.x virtual cluster and 4.x dedicated cluster. Other cluster types do not support this feature.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1237,7 +1251,9 @@ func NewCreateRocketMQRoleResponse() (response *CreateRocketMQRoleResponse) {
 }
 
 // CreateRocketMQRole
-// This API is used to create a role.
+// Create a role.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateRole](https://www.tencentcloud.com/document/api/1493/98864?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -1257,7 +1273,9 @@ func (c *Client) CreateRocketMQRole(request *CreateRocketMQRoleRequest) (respons
 }
 
 // CreateRocketMQRole
-// This API is used to create a role.
+// Create a role.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateRole](https://www.tencentcloud.com/document/api/1493/98864?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -1309,7 +1327,9 @@ func NewCreateRocketMQTopicResponse() (response *CreateRocketMQTopicResponse) {
 }
 
 // CreateRocketMQTopic
-// This API is used to create a RocketMQ topic.
+// Create RocketMQ topics in batches.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateTopic](https://www.tencentcloud.com/document/api/1493/97947?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1329,7 +1349,9 @@ func (c *Client) CreateRocketMQTopic(request *CreateRocketMQTopicRequest) (respo
 }
 
 // CreateRocketMQTopic
-// This API is used to create a RocketMQ topic.
+// Create RocketMQ topics in batches.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateTopic](https://www.tencentcloud.com/document/api/1493/97947?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1361,6 +1383,82 @@ func (c *Client) CreateRocketMQTopicWithContext(ctx context.Context, request *Cr
     return
 }
 
+func NewCreateRocketMQTopicV2Request() (request *CreateRocketMQTopicV2Request) {
+    request = &CreateRocketMQTopicV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "CreateRocketMQTopicV2")
+    
+    
+    return
+}
+
+func NewCreateRocketMQTopicV2Response() (response *CreateRocketMQTopicV2Response) {
+    response = &CreateRocketMQTopicV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateRocketMQTopicV2
+// This API is used to create a RocketMQ topic.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateTopic](https://www.tencentcloud.com/document/api/1493/97947?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CREATETOPIC = "FailedOperation.CreateTopic"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARTITION = "InvalidParameter.Partition"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+//  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
+func (c *Client) CreateRocketMQTopicV2(request *CreateRocketMQTopicV2Request) (response *CreateRocketMQTopicV2Response, err error) {
+    return c.CreateRocketMQTopicV2WithContext(context.Background(), request)
+}
+
+// CreateRocketMQTopicV2
+// This API is used to create a RocketMQ topic.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateTopic](https://www.tencentcloud.com/document/api/1493/97947?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CREATETOPIC = "FailedOperation.CreateTopic"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARTITION = "InvalidParameter.Partition"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+//  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
+func (c *Client) CreateRocketMQTopicV2WithContext(ctx context.Context, request *CreateRocketMQTopicV2Request) (response *CreateRocketMQTopicV2Response, err error) {
+    if request == nil {
+        request = NewCreateRocketMQTopicV2Request()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmq", APIVersion, "CreateRocketMQTopicV2")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateRocketMQTopicV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateRocketMQTopicV2Response()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateRocketMQVipInstanceRequest() (request *CreateRocketMQVipInstanceRequest) {
     request = &CreateRocketMQVipInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1381,7 +1479,9 @@ func NewCreateRocketMQVipInstanceResponse() (response *CreateRocketMQVipInstance
 }
 
 // CreateRocketMQVipInstance
-// This API is used to create a RocketMQ Exclusive Edition instance.
+// This API is used to create a RocketMQ 4.x cluster.
+//
+// This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateInstance](https://www.tencentcloud.com/document/api/1493/97868?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CALLTRADE = "FailedOperation.CallTrade"
@@ -1390,7 +1490,9 @@ func (c *Client) CreateRocketMQVipInstance(request *CreateRocketMQVipInstanceReq
 }
 
 // CreateRocketMQVipInstance
-// This API is used to create a RocketMQ Exclusive Edition instance.
+// This API is used to create a RocketMQ 4.x cluster.
+//
+// This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the API documentation [CreateInstance](https://www.tencentcloud.com/document/api/1493/97868?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CALLTRADE = "FailedOperation.CallTrade"
@@ -1612,7 +1714,9 @@ func NewCreateTopicResponse() (response *CreateTopicResponse) {
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
 //  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
+//  UNKNOWNPARAMETER_DELAYMESSAGEPOLICY = "UnknownParameter.DelayMessagePolicy"
 //  UNKNOWNPARAMETER_POLICY = "UnknownParameter.Policy"
+//  UNSUPPORTEDOPERATION_TOPICDELAYMESSAGE = "UnsupportedOperation.TopicDelayMessage"
 //  UNSUPPORTEDOPERATION_TOPICUNACK = "UnsupportedOperation.TopicUnack"
 func (c *Client) CreateTopic(request *CreateTopicRequest) (response *CreateTopicResponse, err error) {
     return c.CreateTopicWithContext(context.Background(), request)
@@ -1642,7 +1746,9 @@ func (c *Client) CreateTopic(request *CreateTopicRequest) (response *CreateTopic
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
 //  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
+//  UNKNOWNPARAMETER_DELAYMESSAGEPOLICY = "UnknownParameter.DelayMessagePolicy"
 //  UNKNOWNPARAMETER_POLICY = "UnknownParameter.Policy"
+//  UNSUPPORTEDOPERATION_TOPICDELAYMESSAGE = "UnsupportedOperation.TopicDelayMessage"
 //  UNSUPPORTEDOPERATION_TOPICUNACK = "UnsupportedOperation.TopicUnack"
 func (c *Client) CreateTopicWithContext(ctx context.Context, request *CreateTopicRequest) (response *CreateTopicResponse, err error) {
     if request == nil {
@@ -2387,6 +2493,8 @@ func NewDeleteRocketMQClusterResponse() (response *DeleteRocketMQClusterResponse
 // DeleteRocketMQCluster
 // This API is used to delete a RocketMQ cluster.
 //
+// This API is applicable to clusters: 4.x virtual cluster. For 4.x dedicated or generic clusters, refer to the API documentation [DeleteRocketMQVipInstance](https://www.tencentcloud.com/document/api/1179/95802?from_cn_redirect=1). For 5.x clusters, refer to [DeleteInstance](https://www.tencentcloud.com/document/product/1493/97867?from_cn_redirect=1).
+//
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DELETECLUSTER = "FailedOperation.DeleteCluster"
@@ -2400,6 +2508,8 @@ func (c *Client) DeleteRocketMQCluster(request *DeleteRocketMQClusterRequest) (r
 
 // DeleteRocketMQCluster
 // This API is used to delete a RocketMQ cluster.
+//
+// This API is applicable to clusters: 4.x virtual cluster. For 4.x dedicated or generic clusters, refer to the API documentation [DeleteRocketMQVipInstance](https://www.tencentcloud.com/document/api/1179/95802?from_cn_redirect=1). For 5.x clusters, refer to [DeleteInstance](https://www.tencentcloud.com/document/product/1493/97867?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2445,7 +2555,9 @@ func NewDeleteRocketMQEnvironmentRolesResponse() (response *DeleteRocketMQEnviro
 }
 
 // DeleteRocketMQEnvironmentRoles
-// Deletes environment role authorization
+// Delete role authorizations in batches.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DeleteRole](https://www.tencentcloud.com/document/api/1493/98863?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -2460,7 +2572,9 @@ func (c *Client) DeleteRocketMQEnvironmentRoles(request *DeleteRocketMQEnvironme
 }
 
 // DeleteRocketMQEnvironmentRoles
-// Deletes environment role authorization
+// Delete role authorizations in batches.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DeleteRole](https://www.tencentcloud.com/document/api/1493/98863?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -2507,7 +2621,9 @@ func NewDeleteRocketMQGroupResponse() (response *DeleteRocketMQGroupResponse) {
 }
 
 // DeleteRocketMQGroup
-// This API is used to delete a RocketMQ consumer group.
+// This API is used to delete a RocketMQ consumption group.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DeleteConsumerGroup](https://www.tencentcloud.com/document/api/1493/97942?from_cn_redirect=1) to delete the consumer group.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2522,7 +2638,9 @@ func (c *Client) DeleteRocketMQGroup(request *DeleteRocketMQGroupRequest) (respo
 }
 
 // DeleteRocketMQGroup
-// This API is used to delete a RocketMQ consumer group.
+// This API is used to delete a RocketMQ consumption group.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DeleteConsumerGroup](https://www.tencentcloud.com/document/api/1493/97942?from_cn_redirect=1) to delete the consumer group.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2571,6 +2689,8 @@ func NewDeleteRocketMQNamespaceResponse() (response *DeleteRocketMQNamespaceResp
 // DeleteRocketMQNamespace
 // This API is used to delete a RocketMQ namespace.
 //
+// This API is applicable to clusters: 4.x virtual cluster and 4.x dedicated cluster. Other cluster types do not support this feature.
+//
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ROLEINUSE = "FailedOperation.RoleInUse"
@@ -2583,6 +2703,8 @@ func (c *Client) DeleteRocketMQNamespace(request *DeleteRocketMQNamespaceRequest
 
 // DeleteRocketMQNamespace
 // This API is used to delete a RocketMQ namespace.
+//
+// This API is applicable to clusters: 4.x virtual cluster and 4.x dedicated cluster. Other cluster types do not support this feature.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2627,7 +2749,9 @@ func NewDeleteRocketMQRolesResponse() (response *DeleteRocketMQRolesResponse) {
 }
 
 // DeleteRocketMQRoles
-// Deletes roles. Batch deletion is supported.
+// Delete roles in batches.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DeleteRole](https://www.tencentcloud.com/document/api/1493/98863?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -2643,7 +2767,9 @@ func (c *Client) DeleteRocketMQRoles(request *DeleteRocketMQRolesRequest) (respo
 }
 
 // DeleteRocketMQRoles
-// Deletes roles. Batch deletion is supported.
+// Delete roles in batches.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DeleteRole](https://www.tencentcloud.com/document/api/1493/98863?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -2691,7 +2817,9 @@ func NewDeleteRocketMQTopicResponse() (response *DeleteRocketMQTopicResponse) {
 }
 
 // DeleteRocketMQTopic
-// This API is used to delete a RocketMQ topic.
+// Delete a RocketMQ topic.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DeleteTopic](https://www.tencentcloud.com/document/api/1493/97946?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2704,7 +2832,9 @@ func (c *Client) DeleteRocketMQTopic(request *DeleteRocketMQTopicRequest) (respo
 }
 
 // DeleteRocketMQTopic
-// This API is used to delete a RocketMQ topic.
+// Delete a RocketMQ topic.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DeleteTopic](https://www.tencentcloud.com/document/api/1493/97946?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2749,7 +2879,9 @@ func NewDeleteRocketMQVipInstanceResponse() (response *DeleteRocketMQVipInstance
 }
 
 // DeleteRocketMQVipInstance
-// This API is used to delete a RocketMQ Exclusive Edition instance.
+// This API is used to delete a RocketMQ dedicated or generic cluster.
+//
+// This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DeleteInstance](https://www.tencentcloud.com/document/api/1493/97867?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2759,7 +2891,9 @@ func (c *Client) DeleteRocketMQVipInstance(request *DeleteRocketMQVipInstanceReq
 }
 
 // DeleteRocketMQVipInstance
-// This API is used to delete a RocketMQ Exclusive Edition instance.
+// This API is used to delete a RocketMQ dedicated or generic cluster.
+//
+// This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DeleteInstance](https://www.tencentcloud.com/document/api/1493/97867?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3807,7 +3941,7 @@ func NewDescribeMsgTraceResponse() (response *DescribeMsgTraceResponse) {
 }
 
 // DescribeMsgTrace
-// Queries message trajectory
+// Query the message trace of a single message
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
@@ -3821,7 +3955,7 @@ func (c *Client) DescribeMsgTrace(request *DescribeMsgTraceRequest) (response *D
 }
 
 // DescribeMsgTrace
-// Queries message trajectory
+// Query the message trace of a single message
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
@@ -4643,7 +4777,9 @@ func NewDescribeRocketMQClusterResponse() (response *DescribeRocketMQClusterResp
 }
 
 // DescribeRocketMQCluster
-// This API is used to get the information of a specific RocketMQ cluster.
+// Query RocketMQ virtual cluster information.
+//
+// Current API applicable clusters: 4.x virtual cluster. For 4.x dedicated or generic clusters, see the REST API documentation for querying cluster information at [DescribeRocketMQVipInstanceDetail](https://www.tencentcloud.com/document/api/1179/86725?from_cn_redirect=1). For 5.x clusters, see the REST API documentation for querying cluster information at [DescribeInstance](https://www.tencentcloud.com/document/api/1493/97866?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4656,7 +4792,9 @@ func (c *Client) DescribeRocketMQCluster(request *DescribeRocketMQClusterRequest
 }
 
 // DescribeRocketMQCluster
-// This API is used to get the information of a specific RocketMQ cluster.
+// Query RocketMQ virtual cluster information.
+//
+// Current API applicable clusters: 4.x virtual cluster. For 4.x dedicated or generic clusters, see the REST API documentation for querying cluster information at [DescribeRocketMQVipInstanceDetail](https://www.tencentcloud.com/document/api/1179/86725?from_cn_redirect=1). For 5.x clusters, see the REST API documentation for querying cluster information at [DescribeInstance](https://www.tencentcloud.com/document/api/1493/97866?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4701,7 +4839,9 @@ func NewDescribeRocketMQClustersResponse() (response *DescribeRocketMQClustersRe
 }
 
 // DescribeRocketMQClusters
-// This API is used to get the list of RocketMQ clusters.
+// Query the RocketMQ virtual cluster list.
+//
+// This API is applicable to clusters: 4.x virtual cluster. For querying 5.x cluster list, see List API Documentation [DescribeInstanceList](https://www.tencentcloud.com/document/api/1493/96028?from_cn_redirect=1), or use [DescribeFusionInstanceList](https://www.tencentcloud.com/document/api/1493/106745?from_cn_redirect=1) applicable to all cluster types.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4713,7 +4853,9 @@ func (c *Client) DescribeRocketMQClusters(request *DescribeRocketMQClustersReque
 }
 
 // DescribeRocketMQClusters
-// This API is used to get the list of RocketMQ clusters.
+// Query the RocketMQ virtual cluster list.
+//
+// This API is applicable to clusters: 4.x virtual cluster. For querying 5.x cluster list, see List API Documentation [DescribeInstanceList](https://www.tencentcloud.com/document/api/1493/96028?from_cn_redirect=1), or use [DescribeFusionInstanceList](https://www.tencentcloud.com/document/api/1493/106745?from_cn_redirect=1) applicable to all cluster types.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4757,7 +4899,9 @@ func NewDescribeRocketMQEnvironmentRolesResponse() (response *DescribeRocketMQEn
 }
 
 // DescribeRocketMQEnvironmentRoles
-// Obtains the namespace role list
+// Query a role-based license list.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the List API Documentation [DescribeRoleList](https://www.tencentcloud.com/document/api/1493/98862?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -4772,7 +4916,9 @@ func (c *Client) DescribeRocketMQEnvironmentRoles(request *DescribeRocketMQEnvir
 }
 
 // DescribeRocketMQEnvironmentRoles
-// Obtains the namespace role list
+// Query a role-based license list.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the List API Documentation [DescribeRoleList](https://www.tencentcloud.com/document/api/1493/98862?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -4799,6 +4945,72 @@ func (c *Client) DescribeRocketMQEnvironmentRolesWithContext(ctx context.Context
     return
 }
 
+func NewDescribeRocketMQGeneralSKUsRequest() (request *DescribeRocketMQGeneralSKUsRequest) {
+    request = &DescribeRocketMQGeneralSKUsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "DescribeRocketMQGeneralSKUs")
+    
+    
+    return
+}
+
+func NewDescribeRocketMQGeneralSKUsResponse() (response *DescribeRocketMQGeneralSKUsResponse) {
+    response = &DescribeRocketMQGeneralSKUsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRocketMQGeneralSKUs
+// Query the sales specification of a generic cluster.
+//
+// This API is applicable to clusters: 4.x generic cluster. For 5.x clusters, refer to the API documentation [DescribeProductSKUs](https://www.tencentcloud.com/document/api/1493/107676?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
+//  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
+//  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+//  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
+//  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
+func (c *Client) DescribeRocketMQGeneralSKUs(request *DescribeRocketMQGeneralSKUsRequest) (response *DescribeRocketMQGeneralSKUsResponse, err error) {
+    return c.DescribeRocketMQGeneralSKUsWithContext(context.Background(), request)
+}
+
+// DescribeRocketMQGeneralSKUs
+// Query the sales specification of a generic cluster.
+//
+// This API is applicable to clusters: 4.x generic cluster. For 5.x clusters, refer to the API documentation [DescribeProductSKUs](https://www.tencentcloud.com/document/api/1493/107676?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
+//  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
+//  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+//  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
+//  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
+func (c *Client) DescribeRocketMQGeneralSKUsWithContext(ctx context.Context, request *DescribeRocketMQGeneralSKUsRequest) (response *DescribeRocketMQGeneralSKUsResponse, err error) {
+    if request == nil {
+        request = NewDescribeRocketMQGeneralSKUsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmq", APIVersion, "DescribeRocketMQGeneralSKUs")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRocketMQGeneralSKUs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRocketMQGeneralSKUsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRocketMQGroupsRequest() (request *DescribeRocketMQGroupsRequest) {
     request = &DescribeRocketMQGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4819,7 +5031,9 @@ func NewDescribeRocketMQGroupsResponse() (response *DescribeRocketMQGroupsRespon
 }
 
 // DescribeRocketMQGroups
-// This API is used to get the list of RocketMQ consumer groups.
+// Query the RocketMQ consumer group list.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DescribeConsumerGroupList](https://www.tencentcloud.com/document/api/1493/101535?from_cn_redirect=1) to query the consumption group list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4834,7 +5048,9 @@ func (c *Client) DescribeRocketMQGroups(request *DescribeRocketMQGroupsRequest) 
 }
 
 // DescribeRocketMQGroups
-// This API is used to get the list of RocketMQ consumer groups.
+// Query the RocketMQ consumer group list.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DescribeConsumerGroupList](https://www.tencentcloud.com/document/api/1493/101535?from_cn_redirect=1) to query the consumption group list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4881,7 +5097,9 @@ func NewDescribeRocketMQMsgResponse() (response *DescribeRocketMQMsgResponse) {
 }
 
 // DescribeRocketMQMsg
-// This API is used to query the TDMQ for RocketMQ message details.
+// Query RocketMQ message details.
+//
+// Current API applicable clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, see the REST API documentation for query message details at [DescribeMessage](https://www.tencentcloud.com/document/api/1493/114594?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4891,7 +5109,9 @@ func (c *Client) DescribeRocketMQMsg(request *DescribeRocketMQMsgRequest) (respo
 }
 
 // DescribeRocketMQMsg
-// This API is used to query the TDMQ for RocketMQ message details.
+// Query RocketMQ message details.
+//
+// Current API applicable clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, see the REST API documentation for query message details at [DescribeMessage](https://www.tencentcloud.com/document/api/1493/114594?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4933,7 +5153,9 @@ func NewDescribeRocketMQMsgTraceResponse() (response *DescribeRocketMQMsgTraceRe
 }
 
 // DescribeRocketMQMsgTrace
-// Queries message trajectory
+// Query message trajectory.
+//
+// Current API applicable clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, see the REST API documentation for query message trajectory at [DescribeMessageTrace](https://www.tencentcloud.com/document/api/1493/114302?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4943,7 +5165,9 @@ func (c *Client) DescribeRocketMQMsgTrace(request *DescribeRocketMQMsgTraceReque
 }
 
 // DescribeRocketMQMsgTrace
-// Queries message trajectory
+// Query message trajectory.
+//
+// Current API applicable clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, see the REST API documentation for query message trajectory at [DescribeMessageTrace](https://www.tencentcloud.com/document/api/1493/114302?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4985,7 +5209,9 @@ func NewDescribeRocketMQNamespacesResponse() (response *DescribeRocketMQNamespac
 }
 
 // DescribeRocketMQNamespaces
-// This API is used to get the list of RocketMQ namespaces.
+// Query the RocketMQ namespace list.
+//
+// This API is applicable to clusters: 4.x virtual cluster and 4.x dedicated cluster. Other cluster types do not support this feature.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5000,7 +5226,9 @@ func (c *Client) DescribeRocketMQNamespaces(request *DescribeRocketMQNamespacesR
 }
 
 // DescribeRocketMQNamespaces
-// This API is used to get the list of RocketMQ namespaces.
+// Query the RocketMQ namespace list.
+//
+// This API is applicable to clusters: 4.x virtual cluster and 4.x dedicated cluster. Other cluster types do not support this feature.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5049,6 +5277,8 @@ func NewDescribeRocketMQProducersResponse() (response *DescribeRocketMQProducers
 // DescribeRocketMQProducers
 // This API is used to query the producer client list under a specified topic in RocketMQ.
 //
+// This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the List API Documentation [DescribeProducerList](https://www.tencentcloud.com/document/api/1493/122548?from_cn_redirect=1) for producer clients.
+//
 // error code that may be returned:
 //  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
 //  RESOURCENOTFOUND_NAMSPACE = "ResourceNotFound.Namspace"
@@ -5058,6 +5288,8 @@ func (c *Client) DescribeRocketMQProducers(request *DescribeRocketMQProducersReq
 
 // DescribeRocketMQProducers
 // This API is used to query the producer client list under a specified topic in RocketMQ.
+//
+// This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the List API Documentation [DescribeProducerList](https://www.tencentcloud.com/document/api/1493/122548?from_cn_redirect=1) for producer clients.
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
@@ -5099,7 +5331,9 @@ func NewDescribeRocketMQPublicAccessMonitorDataResponse() (response *DescribeRoc
 }
 
 // DescribeRocketMQPublicAccessMonitorData
-// This API is used to pull public network metric monitoring data from TCOP. Currently, only inbound bandwidth and outbound bandwidth metrics from client to LB are supported.
+// Query public network metric monitoring data. Currently only support inbound bandwidth and outbound bandwidth metrics for Client to LB.
+//
+// This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. 5.x clusters are not supported yet.
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
@@ -5109,7 +5343,9 @@ func (c *Client) DescribeRocketMQPublicAccessMonitorData(request *DescribeRocket
 }
 
 // DescribeRocketMQPublicAccessMonitorData
-// This API is used to pull public network metric monitoring data from TCOP. Currently, only inbound bandwidth and outbound bandwidth metrics from client to LB are supported.
+// Query public network metric monitoring data. Currently only support inbound bandwidth and outbound bandwidth metrics for Client to LB.
+//
+// This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. 5.x clusters are not supported yet.
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
@@ -5151,7 +5387,9 @@ func NewDescribeRocketMQPublicAccessPointResponse() (response *DescribeRocketMQP
 }
 
 // DescribeRocketMQPublicAccessPoint
-// This API is used to query the public network access information of RocketMQ instances.
+// Query the public network access point information of a RocketMQ cluster.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For public network access point information of 5.x clusters, refer to the API Documentation [DescribeInstance](https://www.tencentcloud.com/document/api/1493/97866?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
@@ -5161,7 +5399,9 @@ func (c *Client) DescribeRocketMQPublicAccessPoint(request *DescribeRocketMQPubl
 }
 
 // DescribeRocketMQPublicAccessPoint
-// This API is used to query the public network access information of RocketMQ instances.
+// Query the public network access point information of a RocketMQ cluster.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For public network access point information of 5.x clusters, refer to the API Documentation [DescribeInstance](https://www.tencentcloud.com/document/api/1493/97866?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
@@ -5203,7 +5443,9 @@ func NewDescribeRocketMQRolesResponse() (response *DescribeRocketMQRolesResponse
 }
 
 // DescribeRocketMQRoles
-// Obtains the list of roles
+// This API is used to query the list of roles.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the List API Documentation [DescribeRoleList](https://www.tencentcloud.com/document/api/1493/98862?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -5217,7 +5459,9 @@ func (c *Client) DescribeRocketMQRoles(request *DescribeRocketMQRolesRequest) (r
 }
 
 // DescribeRocketMQRoles
-// Obtains the list of roles
+// This API is used to query the list of roles.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the List API Documentation [DescribeRoleList](https://www.tencentcloud.com/document/api/1493/98862?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -5265,6 +5509,8 @@ func NewDescribeRocketMQTopUsagesResponse() (response *DescribeRocketMQTopUsages
 // DescribeRocketMQTopUsages
 // Used to obtain the RocketMQ metric sorting list, such as sorting topics under a cluster instance by the most occupied storage space.
 //
+// This API is used for applicable clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. The feature is not supported yet for 5.x clusters.
+//
 // error code that may be returned:
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 func (c *Client) DescribeRocketMQTopUsages(request *DescribeRocketMQTopUsagesRequest) (response *DescribeRocketMQTopUsagesResponse, err error) {
@@ -5273,6 +5519,8 @@ func (c *Client) DescribeRocketMQTopUsages(request *DescribeRocketMQTopUsagesReq
 
 // DescribeRocketMQTopUsages
 // Used to obtain the RocketMQ metric sorting list, such as sorting topics under a cluster instance by the most occupied storage space.
+//
+// This API is used for applicable clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. The feature is not supported yet for 5.x clusters.
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
@@ -5365,7 +5613,9 @@ func NewDescribeRocketMQTopicMsgsResponse() (response *DescribeRocketMQTopicMsgs
 }
 
 // DescribeRocketMQTopicMsgs
-// Query RocketMQ messages.
+// Query the RocketMQ message list.
+//
+// Current API applicable clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, see the List API Documentation for query messages at [DescribeMessageList](https://www.tencentcloud.com/document/api/1493/114593?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5376,7 +5626,9 @@ func (c *Client) DescribeRocketMQTopicMsgs(request *DescribeRocketMQTopicMsgsReq
 }
 
 // DescribeRocketMQTopicMsgs
-// Query RocketMQ messages.
+// Query the RocketMQ message list.
+//
+// Current API applicable clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, see the List API Documentation for query messages at [DescribeMessageList](https://www.tencentcloud.com/document/api/1493/114593?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5419,7 +5671,9 @@ func NewDescribeRocketMQTopicStatsResponse() (response *DescribeRocketMQTopicSta
 }
 
 // DescribeRocketMQTopicStats
-// This API is used to obtain the topic production details list.
+// Query the production detail list of RocketMQ topics.
+//
+// This API is used for applicable clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. The feature is not supported yet for 5.x clusters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5430,7 +5684,9 @@ func (c *Client) DescribeRocketMQTopicStats(request *DescribeRocketMQTopicStatsR
 }
 
 // DescribeRocketMQTopicStats
-// This API is used to obtain the topic production details list.
+// Query the production detail list of RocketMQ topics.
+//
+// This API is used for applicable clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. The feature is not supported yet for 5.x clusters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5473,7 +5729,9 @@ func NewDescribeRocketMQTopicsResponse() (response *DescribeRocketMQTopicsRespon
 }
 
 // DescribeRocketMQTopics
-// This API is used to get the list of RocketMQ topics.
+// Query the RocketMQ topic list.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DescribeTopicList](https://www.tencentcloud.com/document/api/1493/96030?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5489,7 +5747,9 @@ func (c *Client) DescribeRocketMQTopics(request *DescribeRocketMQTopicsRequest) 
 }
 
 // DescribeRocketMQTopics
-// This API is used to get the list of RocketMQ topics.
+// Query the RocketMQ topic list.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DescribeTopicList](https://www.tencentcloud.com/document/api/1493/96030?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5537,7 +5797,9 @@ func NewDescribeRocketMQTopicsByGroupResponse() (response *DescribeRocketMQTopic
 }
 
 // DescribeRocketMQTopicsByGroup
-// Obtains the list of topics subscribed under a specified consumer group
+// This API is used to query the list of subscribed topics for a RocketMQ consumption group.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DescribeTopicListByGroup](https://www.tencentcloud.com/document/api/1493/115314?from_cn_redirect=1) to query the list of subscribed topics for a consumption group.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5550,7 +5812,9 @@ func (c *Client) DescribeRocketMQTopicsByGroup(request *DescribeRocketMQTopicsBy
 }
 
 // DescribeRocketMQTopicsByGroup
-// Obtains the list of topics subscribed under a specified consumer group
+// This API is used to query the list of subscribed topics for a RocketMQ consumption group.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DescribeTopicListByGroup](https://www.tencentcloud.com/document/api/1493/115314?from_cn_redirect=1) to query the list of subscribed topics for a consumption group.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5595,7 +5859,9 @@ func NewDescribeRocketMQVipInstanceDetailResponse() (response *DescribeRocketMQV
 }
 
 // DescribeRocketMQVipInstanceDetail
-// This API is used to get the information of a specific TDMQ for RocketMQ exclusive cluster.
+// Query RocketMQ cluster info.
+//
+// This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DescribeInstance](https://www.tencentcloud.com/document/api/1493/97866?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5610,7 +5876,9 @@ func (c *Client) DescribeRocketMQVipInstanceDetail(request *DescribeRocketMQVipI
 }
 
 // DescribeRocketMQVipInstanceDetail
-// This API is used to get the information of a specific TDMQ for RocketMQ exclusive cluster.
+// Query RocketMQ cluster info.
+//
+// This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DescribeInstance](https://www.tencentcloud.com/document/api/1493/97866?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5657,7 +5925,9 @@ func NewDescribeRocketMQVipInstancesResponse() (response *DescribeRocketMQVipIns
 }
 
 // DescribeRocketMQVipInstances
-// This API is used to query the list of the purchased TDMQ for RocketMQ exclusive instances.
+// Query the RocketMQ 4.x cluster list.
+//
+// This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DescribeInstanceList](https://www.tencentcloud.com/document/api/1493/96028?from_cn_redirect=1), or use the [DescribeFusionInstanceList](https://www.tencentcloud.com/document/api/1493/106745?from_cn_redirect=1) API applicable to all cluster types.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5672,7 +5942,9 @@ func (c *Client) DescribeRocketMQVipInstances(request *DescribeRocketMQVipInstan
 }
 
 // DescribeRocketMQVipInstances
-// This API is used to query the list of the purchased TDMQ for RocketMQ exclusive instances.
+// Query the RocketMQ 4.x cluster list.
+//
+// This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the API documentation [DescribeInstanceList](https://www.tencentcloud.com/document/api/1493/96028?from_cn_redirect=1), or use the [DescribeFusionInstanceList](https://www.tencentcloud.com/document/api/1493/106745?from_cn_redirect=1) API applicable to all cluster types.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6625,7 +6897,9 @@ func NewModifyRocketMQClusterResponse() (response *ModifyRocketMQClusterResponse
 }
 
 // ModifyRocketMQCluster
-// This API is used to update a RocketMQ cluster.
+// This API is used to modify the attributes of a RocketMQ cluster.
+//
+// This API is applicable to clusters: 4.x virtual cluster. For 4.x dedicated or generic clusters, refer to the API documentation [ModifyRocketMQInstance](https://www.tencentcloud.com/document/api/1179/108862?from_cn_redirect=1). For 5.x clusters, refer to the API documentation [ModifyInstance](https://www.tencentcloud.com/document/api/1493/97865?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6642,7 +6916,9 @@ func (c *Client) ModifyRocketMQCluster(request *ModifyRocketMQClusterRequest) (r
 }
 
 // ModifyRocketMQCluster
-// This API is used to update a RocketMQ cluster.
+// This API is used to modify the attributes of a RocketMQ cluster.
+//
+// This API is applicable to clusters: 4.x virtual cluster. For 4.x dedicated or generic clusters, refer to the API documentation [ModifyRocketMQInstance](https://www.tencentcloud.com/document/api/1179/108862?from_cn_redirect=1). For 5.x clusters, refer to the API documentation [ModifyInstance](https://www.tencentcloud.com/document/api/1493/97865?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6691,7 +6967,9 @@ func NewModifyRocketMQEnvironmentRoleResponse() (response *ModifyRocketMQEnviron
 }
 
 // ModifyRocketMQEnvironmentRole
-// Modifies environment role authorization
+// Modify role authorization.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ModifyRole](https://www.tencentcloud.com/document/api/1493/98861?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -6706,7 +6984,9 @@ func (c *Client) ModifyRocketMQEnvironmentRole(request *ModifyRocketMQEnvironmen
 }
 
 // ModifyRocketMQEnvironmentRole
-// Modifies environment role authorization
+// Modify role authorization.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ModifyRole](https://www.tencentcloud.com/document/api/1493/98861?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -6753,7 +7033,9 @@ func NewModifyRocketMQGroupResponse() (response *ModifyRocketMQGroupResponse) {
 }
 
 // ModifyRocketMQGroup
-// This API is used to update a RocketMQ consumer group.
+// Modify a RocketMQ consumption group property.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ModifyConsumerGroup](https://www.tencentcloud.com/document/api/1493/97940?from_cn_redirect=1) to modify the consumer group's attributes.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6766,7 +7048,9 @@ func (c *Client) ModifyRocketMQGroup(request *ModifyRocketMQGroupRequest) (respo
 }
 
 // ModifyRocketMQGroup
-// This API is used to update a RocketMQ consumer group.
+// Modify a RocketMQ consumption group property.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ModifyConsumerGroup](https://www.tencentcloud.com/document/api/1493/97940?from_cn_redirect=1) to modify the consumer group's attributes.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6811,7 +7095,9 @@ func NewModifyRocketMQInstanceResponse() (response *ModifyRocketMQInstanceRespon
 }
 
 // ModifyRocketMQInstance
-// Modify the RocketMQ dedicated instance.
+// Modify RocketMQ Dedicated or Generic Cluster Property.
+//
+// This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ModifyInstance](https://www.tencentcloud.com/document/api/1493/97865?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6820,7 +7106,9 @@ func (c *Client) ModifyRocketMQInstance(request *ModifyRocketMQInstanceRequest) 
 }
 
 // ModifyRocketMQInstance
-// Modify the RocketMQ dedicated instance.
+// Modify RocketMQ Dedicated or Generic Cluster Property.
+//
+// This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ModifyInstance](https://www.tencentcloud.com/document/api/1493/97865?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6861,7 +7149,9 @@ func NewModifyRocketMQInstanceSpecResponse() (response *ModifyRocketMQInstanceSp
 }
 
 // ModifyRocketMQInstanceSpec
-// This API is used to modify the configurations of a TDMQ for RocketMQ exclusive instance, including the upgrade of the instance specification, node count, and storage, and the downgrade of the instance specification. After you call this API to place the order and make payments, the configuration modification will be in progress. You can query whether the modification has been completed through the `DescribeRocketMQVipInstances` API`.
+// This API is used to modify the RocketMQ dedicated cluster configuration, supporting upgrades of instance specification, number of nodes and storage, as well as downgrades of instance specification. After initiating order and completing payment, it will enter the instance configuration change process. You can check whether the change is completed via [DescribeRocketMQVipInstances](https://www.tencentcloud.com/document/api/1179/80903?from_cn_redirect=1).
+//
+// This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ModifyInstance](https://www.tencentcloud.com/document/api/1493/97865?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CALLTRADE = "FailedOperation.CallTrade"
@@ -6874,7 +7164,9 @@ func (c *Client) ModifyRocketMQInstanceSpec(request *ModifyRocketMQInstanceSpecR
 }
 
 // ModifyRocketMQInstanceSpec
-// This API is used to modify the configurations of a TDMQ for RocketMQ exclusive instance, including the upgrade of the instance specification, node count, and storage, and the downgrade of the instance specification. After you call this API to place the order and make payments, the configuration modification will be in progress. You can query whether the modification has been completed through the `DescribeRocketMQVipInstances` API`.
+// This API is used to modify the RocketMQ dedicated cluster configuration, supporting upgrades of instance specification, number of nodes and storage, as well as downgrades of instance specification. After initiating order and completing payment, it will enter the instance configuration change process. You can check whether the change is completed via [DescribeRocketMQVipInstances](https://www.tencentcloud.com/document/api/1179/80903?from_cn_redirect=1).
+//
+// This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ModifyInstance](https://www.tencentcloud.com/document/api/1493/97865?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CALLTRADE = "FailedOperation.CallTrade"
@@ -6921,6 +7213,8 @@ func NewModifyRocketMQNamespaceResponse() (response *ModifyRocketMQNamespaceResp
 // ModifyRocketMQNamespace
 // This API is used to update a RocketMQ namespace.
 //
+// This API is applicable to clusters: 4.x virtual cluster and 4.x dedicated cluster. Other cluster types do not support this feature.
+//
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_SETTTL = "FailedOperation.SetTTL"
@@ -6938,6 +7232,8 @@ func (c *Client) ModifyRocketMQNamespace(request *ModifyRocketMQNamespaceRequest
 
 // ModifyRocketMQNamespace
 // This API is used to update a RocketMQ namespace.
+//
+// This API is applicable to clusters: 4.x virtual cluster and 4.x dedicated cluster. Other cluster types do not support this feature.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6987,7 +7283,9 @@ func NewModifyRocketMQRoleResponse() (response *ModifyRocketMQRoleResponse) {
 }
 
 // ModifyRocketMQRole
-// Modifies roles
+// Modify a role.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ModifyRole](https://www.tencentcloud.com/document/api/1493/98861?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -7003,7 +7301,9 @@ func (c *Client) ModifyRocketMQRole(request *ModifyRocketMQRoleRequest) (respons
 }
 
 // ModifyRocketMQRole
-// Modifies roles
+// Modify a role.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ModifyRole](https://www.tencentcloud.com/document/api/1493/98861?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -7051,7 +7351,9 @@ func NewModifyRocketMQTopicResponse() (response *ModifyRocketMQTopicResponse) {
 }
 
 // ModifyRocketMQTopic
-// This API is used to update a RocketMQ topic.
+// This API is used to modify RocketMQ topic attributes.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ModifyTopic](https://www.tencentcloud.com/document/api/1493/97944?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -7065,7 +7367,9 @@ func (c *Client) ModifyRocketMQTopic(request *ModifyRocketMQTopicRequest) (respo
 }
 
 // ModifyRocketMQTopic
-// This API is used to update a RocketMQ topic.
+// This API is used to modify RocketMQ topic attributes.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ModifyTopic](https://www.tencentcloud.com/document/api/1493/97944?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -7189,6 +7493,8 @@ func NewModifyTopicResponse() (response *ModifyTopicResponse) {
 //  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
+//  UNKNOWNPARAMETER_DELAYMESSAGEPOLICY = "UnknownParameter.DelayMessagePolicy"
+//  UNSUPPORTEDOPERATION_TOPICDELAYMESSAGE = "UnsupportedOperation.TopicDelayMessage"
 func (c *Client) ModifyTopic(request *ModifyTopicRequest) (response *ModifyTopicResponse, err error) {
     return c.ModifyTopicWithContext(context.Background(), request)
 }
@@ -7208,6 +7514,8 @@ func (c *Client) ModifyTopic(request *ModifyTopicRequest) (response *ModifyTopic
 //  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
+//  UNKNOWNPARAMETER_DELAYMESSAGEPOLICY = "UnknownParameter.DelayMessagePolicy"
+//  UNSUPPORTEDOPERATION_TOPICDELAYMESSAGE = "UnsupportedOperation.TopicDelayMessage"
 func (c *Client) ModifyTopicWithContext(ctx context.Context, request *ModifyTopicRequest) (response *ModifyTopicResponse, err error) {
     if request == nil {
         request = NewModifyTopicRequest()
@@ -7513,7 +7821,9 @@ func NewResetRocketMQConsumerOffSetResponse() (response *ResetRocketMQConsumerOf
 }
 
 // ResetRocketMQConsumerOffSet
-// This API is used to reset the consumption offset of a specified consumer group to a specified timestamp.
+// Reset consumer offset.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ResetConsumerGroupOffset](https://www.tencentcloud.com/document/api/1493/116942?from_cn_redirect=1) to reset the consumer offset.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -7526,7 +7836,9 @@ func (c *Client) ResetRocketMQConsumerOffSet(request *ResetRocketMQConsumerOffSe
 }
 
 // ResetRocketMQConsumerOffSet
-// This API is used to reset the consumption offset of a specified consumer group to a specified timestamp.
+// Reset consumer offset.
+//
+// This API is applicable to clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, refer to the API documentation [ResetConsumerGroupOffset](https://www.tencentcloud.com/document/api/1493/116942?from_cn_redirect=1) to reset the consumer offset.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -7571,7 +7883,9 @@ func NewRetryRocketMQDlqMessageResponse() (response *RetryRocketMQDlqMessageResp
 }
 
 // RetryRocketMQDlqMessage
-// Resend the RocketMQ dead letter messages.
+// Resend a RocketMQ dead letter message.
+//
+// Current API applicable clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, see the REST API documentation for resending dead letter messages at [ResendDeadLetterMessage](https://www.tencentcloud.com/document/api/1493/114592?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -7581,7 +7895,9 @@ func (c *Client) RetryRocketMQDlqMessage(request *RetryRocketMQDlqMessageRequest
 }
 
 // RetryRocketMQDlqMessage
-// Resend the RocketMQ dead letter messages.
+// Resend a RocketMQ dead letter message.
+//
+// Current API applicable clusters: 4.x virtual cluster, 4.x dedicated cluster, and 4.x generic cluster. For 5.x clusters, see the REST API documentation for resending dead letter messages at [ResendDeadLetterMessage](https://www.tencentcloud.com/document/api/1493/114592?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -8011,7 +8327,9 @@ func NewSetRocketMQPublicAccessPointResponse() (response *SetRocketMQPublicAcces
 }
 
 // SetRocketMQPublicAccessPoint
-// This API is used to enable/disable public network access, and set the security access policy.
+// Enable or disable public network access, set security access policy.
+//
+// This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For public network access point settings of 5.x clusters, refer to the API Documentation [ModifyInstanceEndpoint](https://www.tencentcloud.com/document/api/1493/115981?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -8022,7 +8340,9 @@ func (c *Client) SetRocketMQPublicAccessPoint(request *SetRocketMQPublicAccessPo
 }
 
 // SetRocketMQPublicAccessPoint
-// This API is used to enable/disable public network access, and set the security access policy.
+// Enable or disable public network access, set security access policy.
+//
+// This API is applicable to clusters: 4.x dedicated cluster and 4.x generic cluster. For public network access point settings of 5.x clusters, refer to the API Documentation [ModifyInstanceEndpoint](https://www.tencentcloud.com/document/api/1493/115981?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

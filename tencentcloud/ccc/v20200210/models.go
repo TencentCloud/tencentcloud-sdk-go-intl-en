@@ -353,6 +353,27 @@ type AutoCalloutTaskInfo struct {
 	MaxRingTimeoutSecond *int64 `json:"MaxRingTimeoutSecond,omitnil,omitempty" name:"MaxRingTimeoutSecond"`
 }
 
+type AvailableTimeConfig struct {
+
+	DayType *string `json:"DayType,omitnil,omitempty" name:"DayType"`
+
+
+	DaysOfWeek []*string `json:"DaysOfWeek,omitnil,omitempty" name:"DaysOfWeek"`
+
+
+	TimeRanges []*TimeRange `json:"TimeRanges,omitnil,omitempty" name:"TimeRanges"`
+}
+
+type BasicAuth struct {
+
+	BasicToken *string `json:"BasicToken,omitnil,omitempty" name:"BasicToken"`
+}
+
+type BearerAuth struct {
+
+	BearerToken *string `json:"BearerToken,omitnil,omitempty" name:"BearerToken"`
+}
+
 // Predefined struct for user
 type BindNumberCallInInterfaceRequestParams struct {
 	// App ID (required). can be used to view https://console.cloud.tencent.com/ccc.
@@ -1037,7 +1058,7 @@ type CreateAICallRequestParams struct {
 	// <p>Either the VoiceType field or a custom TTS is required. this uses your own custom TTS, while VoiceType provides some built-in voice types.</p>
 	// <ul>
 	// <li>Tencent TTS<br>
-	// For configuration, see <a href="https://www.tencentcloud.com/document/product/1073/92668?from_cn_redirect=1#55924b56-1a73-4663-a7a1-a8dd82d6e823" target="_blank">tencent cloud TTS documentation link</a></li>
+	// For configuration, see <a href="https://www.tencentcloud.com/zh/document/product/1154/48916" target="_blank">tencent cloud TTS documentation link</a></li>
 	// </ul>
 	// <div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{ 
 	// "TTSType": "tencent", // String TTS type. currently supports "tencent" and "minixmax". the rest manufacturers are under support.
@@ -1363,7 +1384,7 @@ type CreateAICallRequest struct {
 	// <p>Either the VoiceType field or a custom TTS is required. this uses your own custom TTS, while VoiceType provides some built-in voice types.</p>
 	// <ul>
 	// <li>Tencent TTS<br>
-	// For configuration, see <a href="https://www.tencentcloud.com/document/product/1073/92668?from_cn_redirect=1#55924b56-1a73-4663-a7a1-a8dd82d6e823" target="_blank">tencent cloud TTS documentation link</a></li>
+	// For configuration, see <a href="https://www.tencentcloud.com/zh/document/product/1154/48916" target="_blank">tencent cloud TTS documentation link</a></li>
 	// </ul>
 	// <div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{ 
 	// "TTSType": "tencent", // String TTS type. currently supports "tencent" and "minixmax". the rest manufacturers are under support.
@@ -1814,6 +1835,19 @@ type CreateAutoCalloutTaskRequestParams struct {
 
 	// Maximum ringing duration. auto hang up when the duration threshold is reached. only own number supports this parameter.
 	MaxRingTimeoutSecond *int64 `json:"MaxRingTimeoutSecond,omitnil,omitempty" name:"MaxRingTimeoutSecond"`
+
+	// <p>Retry according to the specified hang-up reasons (optional hang-up status codes: 202, 203, 204, 205, 206, 207, 208, 210, 212, 213, 215, 216, 217, 218, 219, 221, 222, 234). This only takes effect for tasks using AIAgentID. For the description of hang-up status codes</p>
+	// <p><a href="https://cloud.tencent.com/document/product/679/123938">see details</a></p>
+	RetryHangupTypes []*string `json:"RetryHangupTypes,omitnil,omitempty" name:"RetryHangupTypes"`
+
+	// Retry based on the specified post-dialogue tag. It only takes effect for AIAgentID tasks that use the dialogue model. Tag information can be queried in the agent configuration.
+	RetryTags []*RetryTagItem `json:"RetryTags,omitnil,omitempty" name:"RetryTags"`
+
+	// <p>Effective working time configuration. It is recommended to use this field instead of the AvailableTime field. If both are used simultaneously, AvailableTime takes priority.</p>
+	AvailableWorkTimeConfig []*AvailableTimeConfig `json:"AvailableWorkTimeConfig,omitnil,omitempty" name:"AvailableWorkTimeConfig"`
+
+	// <p>Trigger Strategy</p>
+	TriggerStrategy []*TriggerStrategyItem `json:"TriggerStrategy,omitnil,omitempty" name:"TriggerStrategy"`
 }
 
 type CreateAutoCalloutTaskRequest struct {
@@ -1869,6 +1903,19 @@ type CreateAutoCalloutTaskRequest struct {
 
 	// Maximum ringing duration. auto hang up when the duration threshold is reached. only own number supports this parameter.
 	MaxRingTimeoutSecond *int64 `json:"MaxRingTimeoutSecond,omitnil,omitempty" name:"MaxRingTimeoutSecond"`
+
+	// <p>Retry according to the specified hang-up reasons (optional hang-up status codes: 202, 203, 204, 205, 206, 207, 208, 210, 212, 213, 215, 216, 217, 218, 219, 221, 222, 234). This only takes effect for tasks using AIAgentID. For the description of hang-up status codes</p>
+	// <p><a href="https://cloud.tencent.com/document/product/679/123938">see details</a></p>
+	RetryHangupTypes []*string `json:"RetryHangupTypes,omitnil,omitempty" name:"RetryHangupTypes"`
+
+	// Retry based on the specified post-dialogue tag. It only takes effect for AIAgentID tasks that use the dialogue model. Tag information can be queried in the agent configuration.
+	RetryTags []*RetryTagItem `json:"RetryTags,omitnil,omitempty" name:"RetryTags"`
+
+	// <p>Effective working time configuration. It is recommended to use this field instead of the AvailableTime field. If both are used simultaneously, AvailableTime takes priority.</p>
+	AvailableWorkTimeConfig []*AvailableTimeConfig `json:"AvailableWorkTimeConfig,omitnil,omitempty" name:"AvailableWorkTimeConfig"`
+
+	// <p>Trigger Strategy</p>
+	TriggerStrategy []*TriggerStrategyItem `json:"TriggerStrategy,omitnil,omitempty" name:"TriggerStrategy"`
 }
 
 func (r *CreateAutoCalloutTaskRequest) ToJsonString() string {
@@ -1900,6 +1947,10 @@ func (r *CreateAutoCalloutTaskRequest) FromJsonString(s string) error {
 	delete(f, "AIAgentId")
 	delete(f, "RetryInterval")
 	delete(f, "MaxRingTimeoutSecond")
+	delete(f, "RetryHangupTypes")
+	delete(f, "RetryTags")
+	delete(f, "AvailableWorkTimeConfig")
+	delete(f, "TriggerStrategy")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAutoCalloutTaskRequest has unknown keys!", "")
 	}
@@ -5687,6 +5738,57 @@ func (r *HangUpCallResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type HeaderParams struct {
+
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type HttpCallbackConfig struct {
+
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+
+	HeaderParams []*HeaderParams `json:"HeaderParams,omitnil,omitempty" name:"HeaderParams"`
+
+
+	Params []*HttpParams `json:"Params,omitnil,omitempty" name:"Params"`
+
+
+	Returns []*ReturnKey `json:"Returns,omitnil,omitempty" name:"Returns"`
+
+
+	Async *bool `json:"Async,omitnil,omitempty" name:"Async"`
+
+
+	AuthType *uint64 `json:"AuthType,omitnil,omitempty" name:"AuthType"`
+
+
+	BasicAuth *BasicAuth `json:"BasicAuth,omitnil,omitempty" name:"BasicAuth"`
+
+
+	BearerAuth *BearerAuth `json:"BearerAuth,omitnil,omitempty" name:"BearerAuth"`
+
+
+	CustomAuth *HttpParams `json:"CustomAuth,omitnil,omitempty" name:"CustomAuth"`
+
+
+	Oauth2Auth *OauthConfig `json:"Oauth2Auth,omitnil,omitempty" name:"Oauth2Auth"`
+}
+
+type HttpParams struct {
+
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+
+
+	ValueType *string `json:"ValueType,omitnil,omitempty" name:"ValueType"`
+}
+
 type IVRKeyPressedElement struct {
 	// Hit keyword or press.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
@@ -6092,6 +6194,17 @@ type NumberInfo struct {
 
 	// Number status, 1-normal, 2-disabled due to overdue payment, 4-disabled by the administrator, 5-disabled due to violation.
 	State *int64 `json:"State,omitnil,omitempty" name:"State"`
+}
+
+type OauthConfig struct {
+
+	TokenURL *string `json:"TokenURL,omitnil,omitempty" name:"TokenURL"`
+
+
+	ClientId *string `json:"ClientId,omitnil,omitempty" name:"ClientId"`
+
+
+	ClientSecret *string `json:"ClientSecret,omitnil,omitempty" name:"ClientSecret"`
 }
 
 type OwnNumberApplyDetailItem struct {
@@ -6688,6 +6801,19 @@ func (r *ResumePredictiveDialingCampaignResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ResumePredictiveDialingCampaignResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type RetryTagItem struct {
+
+	TagName *string `json:"TagName,omitnil,omitempty" name:"TagName"`
+
+
+	TagValue *string `json:"TagValue,omitnil,omitempty" name:"TagValue"`
+}
+
+type ReturnKey struct {
+
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 }
 
 type SdkAppIdBuyInfo struct {
@@ -7495,6 +7621,20 @@ func (r *TransferToManualResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *TransferToManualResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type TriggerStrategyItem struct {
+
+	InterfaceConfig *HttpCallbackConfig `json:"InterfaceConfig,omitnil,omitempty" name:"InterfaceConfig"`
+
+
+	HangupTypes []*string `json:"HangupTypes,omitnil,omitempty" name:"HangupTypes"`
+
+
+	CallTags []*RetryTagItem `json:"CallTags,omitnil,omitempty" name:"CallTags"`
+
+
+	TriggerMode *string `json:"TriggerMode,omitnil,omitempty" name:"TriggerMode"`
 }
 
 // Predefined struct for user

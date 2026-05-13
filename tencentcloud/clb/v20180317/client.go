@@ -1455,6 +1455,7 @@ func NewDeleteLoadBalancerResponse() (response *DeleteLoadBalancerResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_EIPTRAFFICCHECKRISK = "FailedOperation.EipTrafficCheckRisk"
 //  FAILEDOPERATION_FREQUENCYCHECKRISK = "FailedOperation.FrequencyCheckRisk"
 //  FAILEDOPERATION_TARGETNUMCHECKRISK = "FailedOperation.TargetNumCheckRisk"
 //  FAILEDOPERATION_TRAFFICCHECKRISK = "FailedOperation.TrafficCheckRisk"
@@ -1478,6 +1479,7 @@ func (c *Client) DeleteLoadBalancer(request *DeleteLoadBalancerRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_EIPTRAFFICCHECKRISK = "FailedOperation.EipTrafficCheckRisk"
 //  FAILEDOPERATION_FREQUENCYCHECKRISK = "FailedOperation.FrequencyCheckRisk"
 //  FAILEDOPERATION_TARGETNUMCHECKRISK = "FailedOperation.TargetNumCheckRisk"
 //  FAILEDOPERATION_TRAFFICCHECKRISK = "FailedOperation.TrafficCheckRisk"

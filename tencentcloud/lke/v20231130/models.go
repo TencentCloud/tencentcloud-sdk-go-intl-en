@@ -21,28 +21,31 @@ import (
 )
 
 type AICallConfig struct {
-	// Enable voice interaction feature
+
 	EnableVoiceInteract *bool `json:"EnableVoiceInteract,omitnil,omitempty" name:"EnableVoiceInteract"`
 
-	// Enable voice call
+
 	EnableVoiceCall *bool `json:"EnableVoiceCall,omitnil,omitempty" name:"EnableVoiceCall"`
 
-	// Enable digital human
+
 	EnableDigitalHuman *bool `json:"EnableDigitalHuman,omitnil,omitempty" name:"EnableDigitalHuman"`
 
-	// Timbre Configuration
+
 	Voice *VoiceConfig `json:"Voice,omitnil,omitempty" name:"Voice"`
 
-	// Digital Human Configuration
+
 	DigitalHuman *DigitalHumanConfig `json:"DigitalHuman,omitnil,omitempty" name:"DigitalHuman"`
 }
 
 type AgentDebugInfo struct {
-	// Input Information for Tools and Large Models, json
+
 	Input *string `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output Information for Tools and Large Models, json
+
 	Output *string `json:"Output,omitnil,omitempty" name:"Output"`
+
+
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 }
 
 type AgentProcedure struct {
@@ -145,6 +148,17 @@ type AgentReference struct {
 
 	// Title.
 	Title *string `json:"Title,omitnil,omitempty" name:"Title"`
+}
+
+type AgentTask struct {
+
+	Index *int64 `json:"Index,omitnil,omitempty" name:"Index"`
+
+
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type AgentThought struct {
@@ -296,6 +310,8 @@ type AttrLabelDetail struct {
 	AttrBizId *string `json:"AttrBizId,omitnil,omitempty" name:"AttrBizId"`
 
 	// Label identification.
+	//
+	// Deprecated: AttrKey is deprecated.
 	AttrKey *string `json:"AttrKey,omitnil,omitempty" name:"AttrKey"`
 
 	// Label name.
@@ -615,6 +631,79 @@ type ClassifyLabel struct {
 	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 }
 
+type Content struct {
+
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+
+	QuoteInfos []*QuoteInfo `json:"QuoteInfos,omitnil,omitempty" name:"QuoteInfos"`
+
+
+	References []*ContentReference `json:"References,omitnil,omitempty" name:"References"`
+
+
+	Image *ImageInfoContent `json:"Image,omitnil,omitempty" name:"Image"`
+
+
+	File *FileInfoContent `json:"File,omitnil,omitempty" name:"File"`
+
+
+	OptionCards []*string `json:"OptionCards,omitnil,omitempty" name:"OptionCards"`
+
+
+	CustomParams []*string `json:"CustomParams,omitnil,omitempty" name:"CustomParams"`
+
+
+	CustomVariables []*string `json:"CustomVariables,omitnil,omitempty" name:"CustomVariables"`
+
+
+	Sandbox *SandboxContent `json:"Sandbox,omitnil,omitempty" name:"Sandbox"`
+
+
+	WebSearch *WebSearchContent `json:"WebSearch,omitnil,omitempty" name:"WebSearch"`
+
+
+	FileCollection *FileCollection `json:"FileCollection,omitnil,omitempty" name:"FileCollection"`
+
+
+	Widget *Widget `json:"Widget,omitnil,omitempty" name:"Widget"`
+
+
+	WidgetAction *WidgetAction `json:"WidgetAction,omitnil,omitempty" name:"WidgetAction"`
+
+
+	Tasks []*AgentTask `json:"Tasks,omitnil,omitempty" name:"Tasks"`
+
+
+	Questionnaire *Questionnaire `json:"Questionnaire,omitnil,omitempty" name:"Questionnaire"`
+
+
+	OptionMode *int64 `json:"OptionMode,omitnil,omitempty" name:"OptionMode"`
+}
+
+type ContentReference struct {
+
+	Index *int64 `json:"Index,omitnil,omitempty" name:"Index"`
+
+
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+
+	DocRefer *DocReference `json:"DocRefer,omitnil,omitempty" name:"DocRefer"`
+
+
+	QaRefer *QaReference `json:"QaRefer,omitnil,omitempty" name:"QaRefer"`
+
+
+	WebSearchRefer *WebSearchReference `json:"WebSearchRefer,omitnil,omitempty" name:"WebSearchRefer"`
+}
+
 type Context struct {
 	// Message record ID.
 	RecordBizId *string `json:"RecordBizId,omitnil,omitempty" name:"RecordBizId"`
@@ -645,6 +734,12 @@ type CreateAppRequestParams struct {
 
 	// Basic application configuration.
 	BaseConfig *BaseConfig `json:"BaseConfig,omitnil,omitempty" name:"BaseConfig"`
+
+	// <p>Application Mode: standard - Standard Mode, agent - Agent Mode, single_workflow - Single Workflow Mode, ClawAgent - Claw Mode</p>
+	Pattern *string `json:"Pattern,omitnil,omitempty" name:"Pattern"`
+
+	// <p>Agent type, used to distinguish the final agent form in which the application provides external services (dialogue) / Official Account (wechat). The current ADP creation page does not distinguish between dialogue and Official Account agents, and defaults to the dialogue agent.</p>
+	AgentType *string `json:"AgentType,omitnil,omitempty" name:"AgentType"`
 }
 
 type CreateAppRequest struct {
@@ -655,6 +750,12 @@ type CreateAppRequest struct {
 
 	// Basic application configuration.
 	BaseConfig *BaseConfig `json:"BaseConfig,omitnil,omitempty" name:"BaseConfig"`
+
+	// <p>Application Mode: standard - Standard Mode, agent - Agent Mode, single_workflow - Single Workflow Mode, ClawAgent - Claw Mode</p>
+	Pattern *string `json:"Pattern,omitnil,omitempty" name:"Pattern"`
+
+	// <p>Agent type, used to distinguish the final agent form in which the application provides external services (dialogue) / Official Account (wechat). The current ADP creation page does not distinguish between dialogue and Official Account agents, and defaults to the dialogue agent.</p>
+	AgentType *string `json:"AgentType,omitnil,omitempty" name:"AgentType"`
 }
 
 func (r *CreateAppRequest) ToJsonString() string {
@@ -671,6 +772,8 @@ func (r *CreateAppRequest) FromJsonString(s string) error {
 	}
 	delete(f, "AppType")
 	delete(f, "BaseConfig")
+	delete(f, "Pattern")
+	delete(f, "AgentType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAppRequest has unknown keys!", "")
 	}
@@ -798,86 +901,8 @@ func (r *CreateAttributeLabelResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type CreateCorpRequestParams struct {
-	// Full name of the corporate.
-	FullName *string `json:"FullName,omitnil,omitempty" name:"FullName"`
-
-	// Contact person's name.
-	ContactName *string `json:"ContactName,omitnil,omitempty" name:"ContactName"`
-
-	// Contact person's mailbox.
-	Email *string `json:"Email,omitnil,omitempty" name:"Email"`
-
-	// Contact person's mobile phone number.
-	Telephone *string `json:"Telephone,omitnil,omitempty" name:"Telephone"`
-}
-
-type CreateCorpRequest struct {
-	*tchttp.BaseRequest
-	
-	// Full name of the corporate.
-	FullName *string `json:"FullName,omitnil,omitempty" name:"FullName"`
-
-	// Contact person's name.
-	ContactName *string `json:"ContactName,omitnil,omitempty" name:"ContactName"`
-
-	// Contact person's mailbox.
-	Email *string `json:"Email,omitnil,omitempty" name:"Email"`
-
-	// Contact person's mobile phone number.
-	Telephone *string `json:"Telephone,omitnil,omitempty" name:"Telephone"`
-}
-
-func (r *CreateCorpRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateCorpRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "FullName")
-	delete(f, "ContactName")
-	delete(f, "Email")
-	delete(f, "Telephone")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCorpRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CreateCorpResponseParams struct {
-	// Corporate ID.
-	CorpBizId *string `json:"CorpBizId,omitnil,omitempty" name:"CorpBizId"`
-
-	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type CreateCorpResponse struct {
-	*tchttp.BaseResponse
-	Response *CreateCorpResponseParams `json:"Response"`
-}
-
-func (r *CreateCorpResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateCorpResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type CreateDocCateRequestParams struct {
-	// Application ID.
+	// Application ID
 	BotBizId *string `json:"BotBizId,omitnil,omitempty" name:"BotBizId"`
 
 	// Parent business ID.
@@ -890,7 +915,7 @@ type CreateDocCateRequestParams struct {
 type CreateDocCateRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID.
+	// Application ID
 	BotBizId *string `json:"BotBizId,omitnil,omitempty" name:"BotBizId"`
 
 	// Parent business ID.
@@ -1166,115 +1191,6 @@ func (r *CreateQAResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateQAResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreateReconstructDocumentFlowConfig struct {
-	// The returned form of a table in a markdown file: 
-	// 0: the table is returned in MD format;
-	// 1: the table is returned in HTML form.
-	// The default is 1.
-	TableResultType *string `json:"TableResultType,omitnil,omitempty" name:"TableResultType"`
-
-	// The format of smart document parsing results:
-	// 0: only return full-text MD;
-	// 1: only return OCR original JSON of each page;.
-	// 2: only return MD of each page;
-	// 3: return full-text MD + OCR original JSON of each page;.
-	// 4: return full-text MD + MD of each page.
-	// The default value is 3 (return full-text MD + OCR original JSON of each page).
-	ResultType *string `json:"ResultType,omitnil,omitempty" name:"ResultType"`
-}
-
-// Predefined struct for user
-type CreateReconstructDocumentFlowRequestParams struct {
-	// File type. Supported file types: pdf, doc, docx, ppt, pptx, md, txt, xls, xlsx, csv, png, jpg, jpeg, bmp, gif, webp, heic, eps, icns, im, pcx, ppm, tiff, xbm, heif, jp2.
-	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
-
-	// The base64 value of the file. File size limit: the downloaded file does not exceed 8m after base64 encoding. File download time does not exceed 3 seconds. Supported image pixels: the length of a single side is between 20-10000px. Either FileUrl or FileBase64 of the file must be provided. If both are provided, only the FileUrl is used.
-	FileBase64 *string `json:"FileBase64,omitnil,omitempty" name:"FileBase64"`
-
-	// <p>File URL. The file download time does not exceed 15 seconds. Supported image pixels: the length of a single side is between 20-10000px. It is recommended to store the file in Tencent Cloud as the URL where the file is stored in Tencent Cloud can ensure higher download speed and stability. External URL may affect the speed and stability. The downloaded file shall not exceed the supported file size after Base64 encoding: </p><table> <tbody> <tr> <td>File Type</td> <td>Supported File Size</td> </tr> <tr> <td>PDF</td> <td>200M</td> </tr> <tr> <td>DOC</td> <td>200M</td> </tr> <tr> <td>DOCX</td> <td>200M</td> </tr> <tr> <td>PPT</td> <td>200M</td> </tr> <tr> <td>PPTX</td> <td>200M</td> </tr> <tr> <td>MD</td> <td>10M</td> </tr> <tr> <td>TXT</td> <td>10M</td> </tr> <tr> <td>XLS</td> <td>20M</td> </tr> <tr> <td>XLSX</td> <td>20M</td> </tr> <tr> <td>CSV</td> <td>20M</td> </tr> <tr> <td>PNG</td> <td>20M</td> </tr> <tr> <td>JPG</td> <td>20M</td> </tr> <tr> <td>JPEG</td> <td>20M</td> </tr> <tr> <td>BMP</td> <td>20M</td> </tr> <tr> <td>GIF</td> <td>20M</td> </tr> <tr> <td>WEBP</td> <td>20M</td> </tr> <tr> <td>HEIC</td> <td>20M</td> </tr> <tr> <td>EPS</td> <td>20M</td> </tr> <tr> <td>ICNS</td> <td>20M</td> </tr> <tr> <td>IM</td> <td>20M</td> </tr> <tr> <td>PCX</td> <td>20M</td> </tr> <tr> <td>PPM</td> <td>20M</td> </tr> <tr> <td>TIFF</td> <td>20M</td> </tr> <tr> <td>XBM</td> <td>20M</td> </tr> <tr> <td>HEIF</td> <td>20M</td> </tr> <tr> <td>JP2</td> <td>20M</td> </tr> </tbody> <colgroup> <col> <col> </colgroup></table>
-	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
-
-	// When type of the uploaded file is pdf, doc, docx, ppt, or pptx, it specifies the starting page number for file recognition, including the current value. The default is 1, indicating recognition starts from the first page of the file.
-	FileStartPageNumber *int64 `json:"FileStartPageNumber,omitnil,omitempty" name:"FileStartPageNumber"`
-
-	// When type of the uploaded file is pdf, doc, docx, orppt, pptx, it specifies the end page number for file recognition, including the current value. The default is 100, indicating recognition up to page 100 of the file. a single call supports recognition of up to 1000 pages, i.e., FileEndPageNumber-FileStartPageNumber should be no more than 1000.
-	FileEndPageNumber *int64 `json:"FileEndPageNumber,omitnil,omitempty" name:"FileEndPageNumber"`
-
-	// Configuration information for creating a document parsing task.
-	Config *CreateReconstructDocumentFlowConfig `json:"Config,omitnil,omitempty" name:"Config"`
-}
-
-type CreateReconstructDocumentFlowRequest struct {
-	*tchttp.BaseRequest
-	
-	// File type. Supported file types: pdf, doc, docx, ppt, pptx, md, txt, xls, xlsx, csv, png, jpg, jpeg, bmp, gif, webp, heic, eps, icns, im, pcx, ppm, tiff, xbm, heif, jp2.
-	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
-
-	// The base64 value of the file. File size limit: the downloaded file does not exceed 8m after base64 encoding. File download time does not exceed 3 seconds. Supported image pixels: the length of a single side is between 20-10000px. Either FileUrl or FileBase64 of the file must be provided. If both are provided, only the FileUrl is used.
-	FileBase64 *string `json:"FileBase64,omitnil,omitempty" name:"FileBase64"`
-
-	// <p>File URL. The file download time does not exceed 15 seconds. Supported image pixels: the length of a single side is between 20-10000px. It is recommended to store the file in Tencent Cloud as the URL where the file is stored in Tencent Cloud can ensure higher download speed and stability. External URL may affect the speed and stability. The downloaded file shall not exceed the supported file size after Base64 encoding: </p><table> <tbody> <tr> <td>File Type</td> <td>Supported File Size</td> </tr> <tr> <td>PDF</td> <td>200M</td> </tr> <tr> <td>DOC</td> <td>200M</td> </tr> <tr> <td>DOCX</td> <td>200M</td> </tr> <tr> <td>PPT</td> <td>200M</td> </tr> <tr> <td>PPTX</td> <td>200M</td> </tr> <tr> <td>MD</td> <td>10M</td> </tr> <tr> <td>TXT</td> <td>10M</td> </tr> <tr> <td>XLS</td> <td>20M</td> </tr> <tr> <td>XLSX</td> <td>20M</td> </tr> <tr> <td>CSV</td> <td>20M</td> </tr> <tr> <td>PNG</td> <td>20M</td> </tr> <tr> <td>JPG</td> <td>20M</td> </tr> <tr> <td>JPEG</td> <td>20M</td> </tr> <tr> <td>BMP</td> <td>20M</td> </tr> <tr> <td>GIF</td> <td>20M</td> </tr> <tr> <td>WEBP</td> <td>20M</td> </tr> <tr> <td>HEIC</td> <td>20M</td> </tr> <tr> <td>EPS</td> <td>20M</td> </tr> <tr> <td>ICNS</td> <td>20M</td> </tr> <tr> <td>IM</td> <td>20M</td> </tr> <tr> <td>PCX</td> <td>20M</td> </tr> <tr> <td>PPM</td> <td>20M</td> </tr> <tr> <td>TIFF</td> <td>20M</td> </tr> <tr> <td>XBM</td> <td>20M</td> </tr> <tr> <td>HEIF</td> <td>20M</td> </tr> <tr> <td>JP2</td> <td>20M</td> </tr> </tbody> <colgroup> <col> <col> </colgroup></table>
-	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
-
-	// When type of the uploaded file is pdf, doc, docx, ppt, or pptx, it specifies the starting page number for file recognition, including the current value. The default is 1, indicating recognition starts from the first page of the file.
-	FileStartPageNumber *int64 `json:"FileStartPageNumber,omitnil,omitempty" name:"FileStartPageNumber"`
-
-	// When type of the uploaded file is pdf, doc, docx, orppt, pptx, it specifies the end page number for file recognition, including the current value. The default is 100, indicating recognition up to page 100 of the file. a single call supports recognition of up to 1000 pages, i.e., FileEndPageNumber-FileStartPageNumber should be no more than 1000.
-	FileEndPageNumber *int64 `json:"FileEndPageNumber,omitnil,omitempty" name:"FileEndPageNumber"`
-
-	// Configuration information for creating a document parsing task.
-	Config *CreateReconstructDocumentFlowConfig `json:"Config,omitnil,omitempty" name:"Config"`
-}
-
-func (r *CreateReconstructDocumentFlowRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateReconstructDocumentFlowRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "FileType")
-	delete(f, "FileBase64")
-	delete(f, "FileUrl")
-	delete(f, "FileStartPageNumber")
-	delete(f, "FileEndPageNumber")
-	delete(f, "Config")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateReconstructDocumentFlowRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CreateReconstructDocumentFlowResponseParams struct {
-	// Unique task ID. The processing result corresponding to TaskId can be queried through the API [GetReconstructDocumentResult](https://cloud.tencent.com/document/product/1759/107505) within 30 days.
-	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
-
-	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type CreateReconstructDocumentFlowResponse struct {
-	*tchttp.BaseResponse
-	Response *CreateReconstructDocumentFlowResponseParams `json:"Response"`
-}
-
-func (r *CreateReconstructDocumentFlowResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateReconstructDocumentFlowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2127,9 +2043,13 @@ type DescribeCallStatsGraphRequestParams struct {
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
 	// Start timestamp, in seconds.
+	//
+	// Deprecated: StartTime is deprecated.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End timestamp, in seconds.
+	//
+	// Deprecated: EndTime is deprecated.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Application ID list.
@@ -2137,6 +2057,18 @@ type DescribeCallStatsGraphRequestParams struct {
 
 	// Filter sub-scenarios (used in document parsing scenarios).
 	SubScenes []*string `json:"SubScenes,omitnil,omitempty" name:"SubScenes"`
+
+	// Application Type (knowledge_qa: Knowledge Q&A Application Management, shared_knowledge: Shared Knowledge Base)
+	AppType *string `json:"AppType,omitnil,omitempty" name:"AppType"`
+
+	// Space ID, used to limit the query scope. If left blank, data of all spaces will be returned.
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+
+	// Start time. Unix timestamp in seconds, empty by default.
+	StatStartTime *int64 `json:"StatStartTime,omitnil,omitempty" name:"StatStartTime"`
+
+	// End time. Unix timestamp in seconds, empty by default.
+	StatEndTime *int64 `json:"StatEndTime,omitnil,omitempty" name:"StatEndTime"`
 }
 
 type DescribeCallStatsGraphRequest struct {
@@ -2168,6 +2100,18 @@ type DescribeCallStatsGraphRequest struct {
 
 	// Filter sub-scenarios (used in document parsing scenarios).
 	SubScenes []*string `json:"SubScenes,omitnil,omitempty" name:"SubScenes"`
+
+	// Application Type (knowledge_qa: Knowledge Q&A Application Management, shared_knowledge: Shared Knowledge Base)
+	AppType *string `json:"AppType,omitnil,omitempty" name:"AppType"`
+
+	// Space ID, used to limit the query scope. If left blank, data of all spaces will be returned.
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+
+	// Start time. Unix timestamp in seconds, empty by default.
+	StatStartTime *int64 `json:"StatStartTime,omitnil,omitempty" name:"StatStartTime"`
+
+	// End time. Unix timestamp in seconds, empty by default.
+	StatEndTime *int64 `json:"StatEndTime,omitnil,omitempty" name:"StatEndTime"`
 }
 
 func (r *DescribeCallStatsGraphRequest) ToJsonString() string {
@@ -2191,6 +2135,10 @@ func (r *DescribeCallStatsGraphRequest) FromJsonString(s string) error {
 	delete(f, "EndTime")
 	delete(f, "AppBizIds")
 	delete(f, "SubScenes")
+	delete(f, "AppType")
+	delete(f, "SpaceId")
+	delete(f, "StatStartTime")
+	delete(f, "StatEndTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCallStatsGraphRequest has unknown keys!", "")
 	}
@@ -2247,6 +2195,15 @@ type DescribeConcurrencyUsageGraphRequestParams struct {
 
 	// Application ID list.
 	AppBizIds []*string `json:"AppBizIds,omitnil,omitempty" name:"AppBizIds"`
+
+	// Space ID
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+
+	// Start timestamp, unit: seconds
+	StatStartTime *int64 `json:"StatStartTime,omitnil,omitempty" name:"StatStartTime"`
+
+	// End timestamp, unit: seconds
+	StatEndTime *int64 `json:"StatEndTime,omitnil,omitempty" name:"StatEndTime"`
 }
 
 type DescribeConcurrencyUsageGraphRequest struct {
@@ -2275,6 +2232,15 @@ type DescribeConcurrencyUsageGraphRequest struct {
 
 	// Application ID list.
 	AppBizIds []*string `json:"AppBizIds,omitnil,omitempty" name:"AppBizIds"`
+
+	// Space ID
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+
+	// Start timestamp, unit: seconds
+	StatStartTime *int64 `json:"StatStartTime,omitnil,omitempty" name:"StatStartTime"`
+
+	// End timestamp, unit: seconds
+	StatEndTime *int64 `json:"StatEndTime,omitnil,omitempty" name:"StatEndTime"`
 }
 
 func (r *DescribeConcurrencyUsageGraphRequest) ToJsonString() string {
@@ -2297,6 +2263,9 @@ func (r *DescribeConcurrencyUsageGraphRequest) FromJsonString(s string) error {
 	delete(f, "LoginSubAccountUin")
 	delete(f, "SubBizType")
 	delete(f, "AppBizIds")
+	delete(f, "SpaceId")
+	delete(f, "StatStartTime")
+	delete(f, "StatEndTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeConcurrencyUsageGraphRequest has unknown keys!", "")
 	}
@@ -2415,78 +2384,6 @@ func (r *DescribeConcurrencyUsageResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeConcurrencyUsageResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeCorpRequestParams struct {
-
-}
-
-type DescribeCorpRequest struct {
-	*tchttp.BaseRequest
-	
-}
-
-func (r *DescribeCorpRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeCorpRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCorpRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeCorpResponseParams struct {
-	// Corporate ID.
-	CorpBizId *string `json:"CorpBizId,omitnil,omitempty" name:"CorpBizId"`
-
-	// Application quota.
-	RobotQuota *uint64 `json:"RobotQuota,omitnil,omitempty" name:"RobotQuota"`
-
-	// Full name of the corporate.
-	FullName *string `json:"FullName,omitnil,omitempty" name:"FullName"`
-
-	// Whether to try out.
-	IsTrial *bool `json:"IsTrial,omitnil,omitempty" name:"IsTrial"`
-
-	// Whether the trial has expired.
-	IsTrialExpired *bool `json:"IsTrialExpired,omitnil,omitempty" name:"IsTrialExpired"`
-
-	// Quantity of available applications.
-	AvailableAppQuota *uint64 `json:"AvailableAppQuota,omitnil,omitempty" name:"AvailableAppQuota"`
-
-	// Whether custom model configuration is supported.
-	IsSupportCustomModel *bool `json:"IsSupportCustomModel,omitnil,omitempty" name:"IsSupportCustomModel"`
-
-	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type DescribeCorpResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeCorpResponseParams `json:"Response"`
-}
-
-func (r *DescribeCorpResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeCorpResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3190,13 +3087,26 @@ type DescribeSearchStatsGraphRequestParams struct {
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
 	// Start timestamp, in seconds.
+	//
+	// Deprecated: StartTime is deprecated.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End timestamp, in seconds.
+	//
+	// Deprecated: EndTime is deprecated.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Application id list.
 	AppBizIds []*string `json:"AppBizIds,omitnil,omitempty" name:"AppBizIds"`
+
+	// Space ID, used to limit the query scope. If left blank, data of all spaces will be returned.
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+
+	// Start time. Unix timestamp in seconds, empty by default.
+	StatStartTime *int64 `json:"StatStartTime,omitnil,omitempty" name:"StatStartTime"`
+
+	// End time. Unix timestamp in seconds, empty by default.
+	StatEndTime *int64 `json:"StatEndTime,omitnil,omitempty" name:"StatEndTime"`
 }
 
 type DescribeSearchStatsGraphRequest struct {
@@ -3225,6 +3135,15 @@ type DescribeSearchStatsGraphRequest struct {
 
 	// Application id list.
 	AppBizIds []*string `json:"AppBizIds,omitnil,omitempty" name:"AppBizIds"`
+
+	// Space ID, used to limit the query scope. If left blank, data of all spaces will be returned.
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+
+	// Start time. Unix timestamp in seconds, empty by default.
+	StatStartTime *int64 `json:"StatStartTime,omitnil,omitempty" name:"StatStartTime"`
+
+	// End time. Unix timestamp in seconds, empty by default.
+	StatEndTime *int64 `json:"StatEndTime,omitnil,omitempty" name:"StatEndTime"`
 }
 
 func (r *DescribeSearchStatsGraphRequest) ToJsonString() string {
@@ -3247,6 +3166,9 @@ func (r *DescribeSearchStatsGraphRequest) FromJsonString(s string) error {
 	delete(f, "StartTime")
 	delete(f, "EndTime")
 	delete(f, "AppBizIds")
+	delete(f, "SpaceId")
+	delete(f, "StatStartTime")
+	delete(f, "StatEndTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSearchStatsGraphRequest has unknown keys!", "")
 	}
@@ -3459,18 +3381,22 @@ type DescribeTokenUsageGraphRequestParams struct {
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
 	// Start timestamp, in seconds.
+	//
+	// Deprecated: StartTime is deprecated.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End timestamp, in seconds.
+	//
+	// Deprecated: EndTime is deprecated.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Application ID list.
 	AppBizIds []*string `json:"AppBizIds,omitnil,omitempty" name:"AppBizIds"`
 
-	// Application type. Optional values: knowledge_qa(knowledge QA)/plugin_parsing_qa(plugin)/shared_knowledge(knowledge base)/evaluate_test(evaluation). If not filled, query all types.
+
 	AppType *string `json:"AppType,omitnil,omitempty" name:"AppType"`
 
-	// Filter Sub-scenarios
+
 	SubScenes []*string `json:"SubScenes,omitnil,omitempty" name:"SubScenes"`
 }
 
@@ -3495,10 +3421,8 @@ type DescribeTokenUsageGraphRequest struct {
 	// Application ID list.
 	AppBizIds []*string `json:"AppBizIds,omitnil,omitempty" name:"AppBizIds"`
 
-	// Application type. Optional values: knowledge_qa(knowledge QA)/plugin_parsing_qa(plugin)/shared_knowledge(knowledge base)/evaluate_test(evaluation). If not filled, query all types.
 	AppType *string `json:"AppType,omitnil,omitempty" name:"AppType"`
 
-	// Filter Sub-scenarios
 	SubScenes []*string `json:"SubScenes,omitnil,omitempty" name:"SubScenes"`
 }
 
@@ -3577,9 +3501,13 @@ type DescribeTokenUsageRequestParams struct {
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
 	// Start timestamp, in seconds (default value: 0).
+	//
+	// Deprecated: StartTime is deprecated.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End timestamp, in seconds (default value: 0, must be greater than the start timestamp).
+	//
+	// Deprecated: EndTime is deprecated.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Application ID list.
@@ -3588,11 +3516,17 @@ type DescribeTokenUsageRequestParams struct {
 	// Filter sub-scenario (used in document parsing scenario).
 	SubScenes []*string `json:"SubScenes,omitnil,omitempty" name:"SubScenes"`
 
-	// Application type (knowledge_qa application management, shared_knowlege shared knowledge base)
+	// Application Type (knowledge_qa: Knowledge Q&A Application Management, shared_knowledge: Shared Knowledge Base)
 	AppType *string `json:"AppType,omitnil,omitempty" name:"AppType"`
 
-	// Space ID, used to limit the query scope. When not filled, data from all spaces are queried.
+	// Space ID, used to limit the query scope. If left blank, data of all spaces will be returned.
 	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+
+	// Start time. Unix timestamp in seconds, empty by default.
+	StatStartTime *int64 `json:"StatStartTime,omitnil,omitempty" name:"StatStartTime"`
+
+	// End time. Unix timestamp in seconds, empty by default.
+	StatEndTime *int64 `json:"StatEndTime,omitnil,omitempty" name:"StatEndTime"`
 }
 
 type DescribeTokenUsageRequest struct {
@@ -3625,11 +3559,17 @@ type DescribeTokenUsageRequest struct {
 	// Filter sub-scenario (used in document parsing scenario).
 	SubScenes []*string `json:"SubScenes,omitnil,omitempty" name:"SubScenes"`
 
-	// Application type (knowledge_qa application management, shared_knowlege shared knowledge base)
+	// Application Type (knowledge_qa: Knowledge Q&A Application Management, shared_knowledge: Shared Knowledge Base)
 	AppType *string `json:"AppType,omitnil,omitempty" name:"AppType"`
 
-	// Space ID, used to limit the query scope. When not filled, data from all spaces are queried.
+	// Space ID, used to limit the query scope. If left blank, data of all spaces will be returned.
 	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+
+	// Start time. Unix timestamp in seconds, empty by default.
+	StatStartTime *int64 `json:"StatStartTime,omitnil,omitempty" name:"StatStartTime"`
+
+	// End time. Unix timestamp in seconds, empty by default.
+	StatEndTime *int64 `json:"StatEndTime,omitnil,omitempty" name:"StatEndTime"`
 }
 
 func (r *DescribeTokenUsageRequest) ToJsonString() string {
@@ -3655,6 +3595,8 @@ func (r *DescribeTokenUsageRequest) FromJsonString(s string) error {
 	delete(f, "SubScenes")
 	delete(f, "AppType")
 	delete(f, "SpaceId")
+	delete(f, "StatStartTime")
+	delete(f, "StatEndTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTokenUsageRequest has unknown keys!", "")
 	}
@@ -3795,22 +3737,45 @@ func (r *DescribeUnsatisfiedReplyContextResponse) FromJsonString(s string) error
 }
 
 type DigitalHumanConfig struct {
-	// Digital Human Asset key
+
 	AssetKey *string `json:"AssetKey,omitnil,omitempty" name:"AssetKey"`
 
-	// Digital Human Name
+
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Image
+
 	Avatar *string `json:"Avatar,omitnil,omitempty" name:"Avatar"`
+
+
+	PreviewUrl *string `json:"PreviewUrl,omitnil,omitempty" name:"PreviewUrl"`
 }
 
 type DocFilterFlag struct {
-	// Flag
+
 	Flag *string `json:"Flag,omitnil,omitempty" name:"Flag"`
 
-	// ID Value
+
 	Value *bool `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type DocReference struct {
+
+	DocBizId *uint64 `json:"DocBizId,omitnil,omitempty" name:"DocBizId"`
+
+
+	ReferBizId *uint64 `json:"ReferBizId,omitnil,omitempty" name:"ReferBizId"`
+
+
+	DocName *string `json:"DocName,omitnil,omitempty" name:"DocName"`
+
+
+	KnowledgeBizId *uint64 `json:"KnowledgeBizId,omitnil,omitempty" name:"KnowledgeBizId"`
+
+
+	KnowledgeName *string `json:"KnowledgeName,omitnil,omitempty" name:"KnowledgeName"`
+
+
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
 type DocSegment struct {
@@ -3846,10 +3811,10 @@ type DocSegment struct {
 }
 
 type DuplicateFileHandle struct {
-	// Duplicate document identification method, 1: By document content, i.e., using the cos_hash field to determine whether duplicates exist
+
 	CheckType *uint64 `json:"CheckType,omitnil,omitempty" name:"CheckType"`
 
-	// Duplicate document handling method, 1: Return an error, 2: Skip and return the business ID of the duplicate document
+
 	HandleType *uint64 `json:"HandleType,omitnil,omitempty" name:"HandleType"`
 }
 
@@ -4089,8 +4054,16 @@ func (r *ExportUnsatisfiedReplyResponse) FromJsonString(s string) error {
 }
 
 type ExtraInfo struct {
-	// ECharts Information
+
 	EChartsInfo []*string `json:"EChartsInfo,omitnil,omitempty" name:"EChartsInfo"`
+}
+
+type FileCollection struct {
+
+	MaxFileCount *int64 `json:"MaxFileCount,omitnil,omitempty" name:"MaxFileCount"`
+
+
+	SupportedFileTypes []*string `json:"SupportedFileTypes,omitnil,omitempty" name:"SupportedFileTypes"`
 }
 
 type FileInfo struct {
@@ -4111,6 +4084,39 @@ type FileInfo struct {
 
 	// Creation time.
 	CreatedAt *string `json:"CreatedAt,omitnil,omitempty" name:"CreatedAt"`
+}
+
+type FileInfoContent struct {
+
+	//
+	// Deprecated: DocBizId is deprecated.
+	DocBizId *string `json:"DocBizId,omitnil,omitempty" name:"DocBizId"`
+
+
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+
+
+	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
+
+
+	FileSize *string `json:"FileSize,omitnil,omitempty" name:"FileSize"`
+
+
+	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
+
+
+	DocId *string `json:"DocId,omitnil,omitempty" name:"DocId"`
+
+
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+}
+
+type FilterItem struct {
+
+	FilterKey *string `json:"FilterKey,omitnil,omitempty" name:"FilterKey"`
+
+
+	FilterValue []*string `json:"FilterValue,omitnil,omitempty" name:"FilterValue"`
 }
 
 type Filters struct {
@@ -4744,69 +4750,6 @@ func (r *GetMsgRecordResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type GetReconstructDocumentResultRequestParams struct {
-	// Unique ID of the task. It is the TaskId returned by [CreateReconstructDocumentFlow](https://cloud.tencent.com/document/product/1759/107506).
-	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
-}
-
-type GetReconstructDocumentResultRequest struct {
-	*tchttp.BaseRequest
-	
-	// Unique ID of the task. It is the TaskId returned by [CreateReconstructDocumentFlow](https://cloud.tencent.com/document/product/1759/107506).
-	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
-}
-
-func (r *GetReconstructDocumentResultRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *GetReconstructDocumentResultRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "TaskId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetReconstructDocumentResultRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type GetReconstructDocumentResultResponseParams struct {
-	// Task status: success - execution completed; processing - executing; failed - execution failed; waitexecute - waiting to execute.
-	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
-
-	// The result file of this document parsing task, stored in the download url of Tencent Cloud cos. The valid period of the download url is 10 minutes.
-	DocumentRecognizeResultUrl *string `json:"DocumentRecognizeResultUrl,omitnil,omitempty" name:"DocumentRecognizeResultUrl"`
-
-	// Page number information where document parsing failed this time.
-	FailedPages []*ReconstructDocumentFailedPage `json:"FailedPages,omitnil,omitempty" name:"FailedPages"`
-
-	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type GetReconstructDocumentResultResponse struct {
-	*tchttp.BaseResponse
-	Response *GetReconstructDocumentResultResponseParams `json:"Response"`
-}
-
-func (r *GetReconstructDocumentResultResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *GetReconstructDocumentResultResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type GetTaskStatusRequestParams struct {
 	// Task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
@@ -4912,6 +4855,8 @@ type GetWsTokenRequestParams struct {
 	VisitorBizId *string `json:"VisitorBizId,omitnil,omitempty" name:"VisitorBizId"`
 
 	// Knowledge label, used for search filter in the knowledge base. This field is about to be deactivated. Please use the custom_variables field in the dialogue endpoint API to replace this field.
+	//
+	// Deprecated: VisitorLabels is deprecated.
 	VisitorLabels []*GetWsTokenReq_Label `json:"VisitorLabels,omitnil,omitempty" name:"VisitorLabels"`
 }
 
@@ -5223,11 +5168,16 @@ func (r *IgnoreUnsatisfiedReplyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ImageInfoContent struct {
+
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+}
+
 type IntentAchievement struct {
-	// Intent Implementation Approach, qa: Q&A response, doc: document-based response, workflow: workflow-based response, llm: LLM response
+
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Intent Implementation Approach Description
+
 	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 }
 
@@ -5255,6 +5205,70 @@ type InvokeAPI struct {
 
 	// Exception information.
 	FailMessage *string `json:"FailMessage,omitnil,omitempty" name:"FailMessage"`
+}
+
+// Predefined struct for user
+type IsTransferIntentRequestParams struct {
+	// Content.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Application appkey.
+	BotAppKey *string `json:"BotAppKey,omitnil,omitempty" name:"BotAppKey"`
+}
+
+type IsTransferIntentRequest struct {
+	*tchttp.BaseRequest
+	
+	// Content.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Application appkey.
+	BotAppKey *string `json:"BotAppKey,omitnil,omitempty" name:"BotAppKey"`
+}
+
+func (r *IsTransferIntentRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsTransferIntentRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Content")
+	delete(f, "BotAppKey")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "IsTransferIntentRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IsTransferIntentResponseParams struct {
+	// Whether to transfer to human service.
+	Hit *bool `json:"Hit,omitnil,omitempty" name:"Hit"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type IsTransferIntentResponse struct {
+	*tchttp.BaseResponse
+	Response *IsTransferIntentResponseParams `json:"Response"`
+}
+
+func (r *IsTransferIntentResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsTransferIntentResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type KnowledgeCapacityPieGraphDetail struct {
@@ -5461,71 +5475,6 @@ type Label struct {
 
 	// Label name.
 	LabelName *string `json:"LabelName,omitnil,omitempty" name:"LabelName"`
-}
-
-// Predefined struct for user
-type ListAppCategoryRequestParams struct {
-
-}
-
-type ListAppCategoryRequest struct {
-	*tchttp.BaseRequest
-	
-}
-
-func (r *ListAppCategoryRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ListAppCategoryRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListAppCategoryRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ListAppCategoryResponseParams struct {
-	// Application type list.
-	List []*ListAppCategoryRspOption `json:"List,omitnil,omitempty" name:"List"`
-
-	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type ListAppCategoryResponse struct {
-	*tchttp.BaseResponse
-	Response *ListAppCategoryResponseParams `json:"Response"`
-}
-
-func (r *ListAppCategoryResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ListAppCategoryResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type ListAppCategoryRspOption struct {
-	// Type name.
-	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
-
-	// Type value.
-	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
-
-	// Type log.
-	Logo *string `json:"Logo,omitnil,omitempty" name:"Logo"`
 }
 
 // Predefined struct for user
@@ -6549,6 +6498,9 @@ type ListRejectedQuestionRequestParams struct {
 
 	// Query content.
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// <p>Filter Conditions:<br>Effective: EnableScope: 1,2,3,4</p>
+	Filters []*FilterItem `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type ListRejectedQuestionRequest struct {
@@ -6566,6 +6518,9 @@ type ListRejectedQuestionRequest struct {
 
 	// Query content.
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// <p>Filter Conditions:<br>Effective: EnableScope: 1,2,3,4</p>
+	Filters []*FilterItem `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 func (r *ListRejectedQuestionRequest) ToJsonString() string {
@@ -6584,6 +6539,7 @@ func (r *ListRejectedQuestionRequest) FromJsonString(s string) error {
 	delete(f, "PageNumber")
 	delete(f, "PageSize")
 	delete(f, "Query")
+	delete(f, "Filters")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListRejectedQuestionRequest has unknown keys!", "")
 	}
@@ -7240,17 +7196,17 @@ type ListUsageCallDetailRequestParams struct {
 	// Model identifier.
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// Start time.
-	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
-
-	// End time.
-	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
-
 	// Page number.
 	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
 	// Number of items per page.
 	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Start time.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Uin list.
 	UinAccount []*string `json:"UinAccount,omitnil,omitempty" name:"UinAccount"`
@@ -7263,6 +7219,21 @@ type ListUsageCallDetailRequestParams struct {
 
 	// Filter sub-scenario.
 	SubScenes []*string `json:"SubScenes,omitnil,omitempty" name:"SubScenes"`
+
+	// Application Type (knowledge_qa: Knowledge Q&A Application Management, shared_knowledge: Shared Knowledge Base)
+	AppType *string `json:"AppType,omitnil,omitempty" name:"AppType"`
+
+	// Custom tag corresponding to bill details
+	BillingTag *string `json:"BillingTag,omitnil,omitempty" name:"BillingTag"`
+
+	// Space ID
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+
+	// Start timestamp, unit: seconds
+	StatStartTime *int64 `json:"StatStartTime,omitnil,omitempty" name:"StatStartTime"`
+
+	// Start timestamp, unit: seconds
+	StatEndTime *int64 `json:"StatEndTime,omitnil,omitempty" name:"StatEndTime"`
 }
 
 type ListUsageCallDetailRequest struct {
@@ -7271,17 +7242,17 @@ type ListUsageCallDetailRequest struct {
 	// Model identifier.
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// Start time.
-	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
-
-	// End time.
-	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
-
 	// Page number.
 	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
 	// Number of items per page.
 	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Start time.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Uin list.
 	UinAccount []*string `json:"UinAccount,omitnil,omitempty" name:"UinAccount"`
@@ -7294,6 +7265,21 @@ type ListUsageCallDetailRequest struct {
 
 	// Filter sub-scenario.
 	SubScenes []*string `json:"SubScenes,omitnil,omitempty" name:"SubScenes"`
+
+	// Application Type (knowledge_qa: Knowledge Q&A Application Management, shared_knowledge: Shared Knowledge Base)
+	AppType *string `json:"AppType,omitnil,omitempty" name:"AppType"`
+
+	// Custom tag corresponding to bill details
+	BillingTag *string `json:"BillingTag,omitnil,omitempty" name:"BillingTag"`
+
+	// Space ID
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+
+	// Start timestamp, unit: seconds
+	StatStartTime *int64 `json:"StatStartTime,omitnil,omitempty" name:"StatStartTime"`
+
+	// Start timestamp, unit: seconds
+	StatEndTime *int64 `json:"StatEndTime,omitnil,omitempty" name:"StatEndTime"`
 }
 
 func (r *ListUsageCallDetailRequest) ToJsonString() string {
@@ -7309,14 +7295,19 @@ func (r *ListUsageCallDetailRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "ModelName")
-	delete(f, "StartTime")
-	delete(f, "EndTime")
 	delete(f, "PageNumber")
 	delete(f, "PageSize")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
 	delete(f, "UinAccount")
 	delete(f, "AppBizIds")
 	delete(f, "CallType")
 	delete(f, "SubScenes")
+	delete(f, "AppType")
+	delete(f, "BillingTag")
+	delete(f, "SpaceId")
+	delete(f, "StatStartTime")
+	delete(f, "StatEndTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListUsageCallDetailRequest has unknown keys!", "")
 	}
@@ -8547,6 +8538,64 @@ type QAQuery struct {
 	QueryType *string `json:"QueryType,omitnil,omitempty" name:"QueryType"`
 }
 
+type QaReference struct {
+
+	QaBizId *uint64 `json:"QaBizId,omitnil,omitempty" name:"QaBizId"`
+
+
+	ReferBizId *uint64 `json:"ReferBizId,omitnil,omitempty" name:"ReferBizId"`
+
+
+	KnowledgeBizId *uint64 `json:"KnowledgeBizId,omitnil,omitempty" name:"KnowledgeBizId"`
+
+
+	KnowledgeName *string `json:"KnowledgeName,omitnil,omitempty" name:"KnowledgeName"`
+}
+
+type QuestionOption struct {
+
+	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
+
+
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+type Questionnaire struct {
+
+	Title *string `json:"Title,omitnil,omitempty" name:"Title"`
+
+
+	Questions []*QuestionnaireQuestion `json:"Questions,omitnil,omitempty" name:"Questions"`
+
+
+	Answers []*QuestionnaireQuestionAnswer `json:"Answers,omitnil,omitempty" name:"Answers"`
+}
+
+type QuestionnaireQuestion struct {
+
+	Index *int64 `json:"Index,omitnil,omitempty" name:"Index"`
+
+
+	Question *string `json:"Question,omitnil,omitempty" name:"Question"`
+
+
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+
+	Required *bool `json:"Required,omitnil,omitempty" name:"Required"`
+
+
+	Options []*QuestionOption `json:"Options,omitnil,omitempty" name:"Options"`
+}
+
+type QuestionnaireQuestionAnswer struct {
+
+	Question *string `json:"Question,omitnil,omitempty" name:"Question"`
+
+
+	SelectedLabels []*string `json:"SelectedLabels,omitnil,omitempty" name:"SelectedLabels"`
+}
+
 type QuoteInfo struct {
 	// Reference source location.
 	Position *uint64 `json:"Position,omitnil,omitempty" name:"Position"`
@@ -8628,11 +8677,6 @@ func (r *RateMsgRecordResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *RateMsgRecordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
-}
-
-type ReconstructDocumentFailedPage struct {
-	// Failure page number.
-	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 }
 
 type ReferDetail struct {
@@ -9082,6 +9126,17 @@ type RunNodeInfo struct {
 	SlotValues []*ValueInfo `json:"SlotValues,omitnil,omitempty" name:"SlotValues"`
 }
 
+type SandboxContent struct {
+
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+
+	DisplayUrl *string `json:"DisplayUrl,omitnil,omitempty" name:"DisplayUrl"`
+
+
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+}
+
 // Predefined struct for user
 type SaveDocRequestParams struct {
 	// Application ID.
@@ -9136,29 +9191,26 @@ type SaveDocRequestParams struct {
 	// Category ID.
 	CateBizId *string `json:"CateBizId,omitnil,omitempty" name:"CateBizId"`
 
-	// Whether it can be downloaded. This value is meaningful only when IsRefer is true and ReferUrlType is 0.
+	// Downloadable or not. This parameter is only valid when `IsRefer` is **true** and `ReferUrlType` is 0.
 	IsDownload *bool `json:"IsDownload,omitnil,omitempty" name:"IsDownload"`
 
-	// Duplicate document handling method, processed by sequentially matching the first condition that is met
+	// Duplicate document processing method; match the first eligible method in sequence for processing.
 	DuplicateFileHandles []*DuplicateFileHandle `json:"DuplicateFileHandles,omitnil,omitempty" name:"DuplicateFileHandles"`
 
-	// Custom Segmentation Rules
+	// # Custom Splitting Rules
+	// The request parameter is a **JSON Object**. Refer to the API sample value for the specific format. It contains the following core fields:
 	// 
-	// The request parameter is a **JSON Object**. For specific format, refer to the interface sample value. It contains the following main fields:
-	// 
-	// | Field Name          | Type     | Description                                  |
-	// |--------------------|----------|---------------------------------------------|
-	// | `xlsx_splitter`    | Object   | **Excel (xlsx) file segmentation policy configuration**, valid only when processing Excel files |
-	// | `common_splitter`  | Object   | **General file (e.g., txt, pdf) segmentation policy configuration**, segmented by page or tag |
-	// | `table_style`      | String   | Output format of table content, e.g., HTML or Markdown |
+	// | Field Name | Type | Description |
+	// |------------|------|-------------|
+	// | `xlsx_splitter` | Object | **Excel (xlsx) file splitting policy configuration**, valid only when processing Excel files |
+	// | `common_splitter` | Object | **General file splitting policy configuration** (for TXT, PDF and other files), supports splitting by page or by tag |
+	// | `table_style` | String | Output format of table content, e.g., HTML or Markdown |
 	// 
 	// ---
 	// 
-	// ## `xlsx_splitter` (Excel Segmentation Policy)
-	// 
-	// Used to configure **segmentation methods for spreadsheet files**.
+	// ## `xlsx_splitter` (Excel Splitting Policy)
+	// Used to configure the **splitting method for table files**.
 	// **Type: Object**
-	// 
 	// ```json
 	// "xlsx_splitter": {
 	//   "header_interval": [1, 2],
@@ -9167,24 +9219,18 @@ type SaveDocRequestParams struct {
 	// }
 	// ```
 	// 
-	// ### Field Description:
-	// 
-	// | Field Name         | Type          | Description                                                                
-	//    |
-	// |--------------------|---------------|-----------------------------------------------------------------------------|
-	// | `header_interval` | Array\<Number\> | Row range of headers, formatted as `[start_row, end_row]`, **row numbers start from 1**. E.g., `[1, 2]` indicates rows 1-2 are headers. |
-	// | `content_start`   | Number        | **Starting row number of table content (1-based)**.                        
-	//    |
-	// | `split_row`       | Number        | **Number of rows per segment**.                                            
-	//    |
+	// ### Field Description
+	// | Field Name | Type | Description |
+	// |------------|------|-------------|
+	// | `header_interval` | Array\<Number\> | Row range of the table header, formatted as `[start row, end row]`. **Row numbers start from 1**. For example, `[1, 2]` means rows 1 to 2 are table headers. |
+	// | `content_start` | Number | **Start row number of table content (starting from 1)** |
+	// | `split_row` | Number | **Number of rows per split** |
 	// 
 	// ---
-	// ## `common_splitter` (General File Segmentation Policy)
 	// 
-	// Used to configure **segmentation methods for non-Excel files (e.g., TXT, PDF, DOCX)**, supporting two strategies: **by-page segmentation** or **by-tag segmentation**.
-	// 
+	// ## `common_splitter` (General File Splitting Policy)
+	// Used to configure the splitting method for **non-Excel files (TXT, PDF, DOCX, etc.)**. Two strategies are supported: **page-based splitting** or **identifier-based splitting**.
 	// **Type: Object**
-	// 
 	// ```json
 	// "common_splitter": {
 	//   "splitter": "page",
@@ -9195,52 +9241,49 @@ type SaveDocRequestParams struct {
 	// }
 	// ```
 	// 
-	// ### Field Description:
+	// ### Field Description
+	// | Field Name | Type | Description |
+	// |------------|------|-------------|
+	// | `splitter` | String | Splitting strategy type. Optional values: `"page"` (split by page), `"tag"` (split by identifier). |
+	// | `page_splitter` | Object | Configuration for **page-based splitting** |
+	// | `page_splitter.chunk_length` | Number | **Maximum chunk length** |
+	// | `page_splitter.chunk_overlap_length` | Number | **Chunk overlap length** |
+	// | `tag_splitter` | Object | Configuration for **custom splitting** |
+	// | `tag_splitter.tag` | Array\<String\> | **Splitting identifiers** |
+	// | `tag_splitter.chunk_length` | Number | **Maximum chunk length** |
+	// | `tag_splitter.chunk_overlap_length` | Number | **Chunk overlap length** |
 	// 
-	// | Field Name                     | Type          | Description                                                                
-	//    |
-	// |--------------------------------|---------------|-----------------------------------------------------------------------------|
-	// | `splitter`                     | String        | Segmentation strategy type. Valid values: `"page"` (by-page) or `"tag"` (by-tag). |
-	// | `page_splitter`                | Object        | **By-page segmentation configuration**.                                     |
-	// | `page_splitter.chunk_length`   | Number        | **Maximum chunk length**.                                                  
-	//    |
-	// | `page_splitter.chunk_overlap_length` | Number | **Chunk overlap length**.                                                  
-	//    |
-	// | `tag_splitter`                 | Object        | **Custom segmentation configuration**.                                      |
-	// | `tag_splitter.tag`             | Array\<String\> | **Segmentation tags**.                                                     
-	//    |
-	// | `tag_splitter.chunk_length`    | Number        | **Maximum chunk length**.                                                  
-	//    |
-	// | `tag_splitter.chunk_overlap_length` | Number | **Chunk overlap length**.                                                  
-	//    |
+	// ### Supplementary Notes
+	// - Valid values for the `splitter` field:
+	//   - `"page"`: Only page-based splitting is used; only configure fields under `page_splitter`.
+	//   - `"tag"`: Only identifier-based splitting (semicolon, line break, etc.) is used; only configure fields under `tag_splitter`.
 	// 
-	// 🔹 **Additional Notes:**
-	// 
-	// - Valid values for `splitter`:
-	//     - `"page"`: Only use by-page segmentation logic. Only `page_splitter` fields are relevant.
-	//     - `"tag"`: Only use by-tag segmentation logic (e.g., using delimiters like semicolons or line breaks). Only `tag_splitter` fields are relevant.
 	// ---
 	// 
 	// ## `table_style` (Table Output Style)
-	// 
-	// Specifies **the format in which tabular content (e.g., tables extracted from Excel or CSV) is returned**, facilitating frontend display or subsequent processing.
-	// 
+	// Specifies the final return format of **table content extracted from Excel / CSV**, for front-end display and subsequent processing.
 	// **Type: String**
-	// 
 	// ```json
 	// "table_style": "md"
 	// ```
 	// 
-	// ### Field Description:
-	// 
-	// | Field Name     | Type   | Description                                                                
-	//    |
-	// |----------------|--------|-----------------------------------------------------------------------------|
-	// | `table_style`  | String | Output format of table content. Valid values:<br>• `"html"`: Returns as HTML tables, suitable for web display.<br>• `"md"`: Returns in Markdown table syntax, suitable for documentation or Markdown rendering environments. |
+	// ### Field Description
+	// | Field Name | Type | Description |
+	// |------------|------|-------------|
+	// | `table_style` | String | Specifies the output format of table content. Available values:<br> `"html"`: Return as HTML table, suitable for web page display.<br> `"md"`: Return as Markdown table syntax, suitable for documents and Markdown rendering environments. |
 	SplitRule *string `json:"SplitRule,omitnil,omitempty" name:"SplitRule"`
 
-	// Document update frequency, default value is 0 (no updates)
+	// Document update frequency. Default value 0 means no update.
 	UpdatePeriodInfo *UpdatePeriodInfo `json:"UpdatePeriodInfo,omitnil,omitempty" name:"UpdatePeriodInfo"`
+
+	// Document Effective Scope:
+	// 1 - Not effective;
+	// 2 - Effective only in development scope;
+	// 3 - Effective only in release scope;
+	// 4 - Effective in both development and release scopes.
+	// 
+	// Default value: The default knowledge base within the application is 2, and the shared knowledge base is 4.
+	EnableScope *int64 `json:"EnableScope,omitnil,omitempty" name:"EnableScope"`
 }
 
 type SaveDocRequest struct {
@@ -9298,29 +9341,26 @@ type SaveDocRequest struct {
 	// Category ID.
 	CateBizId *string `json:"CateBizId,omitnil,omitempty" name:"CateBizId"`
 
-	// Whether it can be downloaded. This value is meaningful only when IsRefer is true and ReferUrlType is 0.
+	// Downloadable or not. This parameter is only valid when `IsRefer` is **true** and `ReferUrlType` is 0.
 	IsDownload *bool `json:"IsDownload,omitnil,omitempty" name:"IsDownload"`
 
-	// Duplicate document handling method, processed by sequentially matching the first condition that is met
+	// Duplicate document processing method; match the first eligible method in sequence for processing.
 	DuplicateFileHandles []*DuplicateFileHandle `json:"DuplicateFileHandles,omitnil,omitempty" name:"DuplicateFileHandles"`
 
-	// Custom Segmentation Rules
+	// # Custom Splitting Rules
+	// The request parameter is a **JSON Object**. Refer to the API sample value for the specific format. It contains the following core fields:
 	// 
-	// The request parameter is a **JSON Object**. For specific format, refer to the interface sample value. It contains the following main fields:
-	// 
-	// | Field Name          | Type     | Description                                  |
-	// |--------------------|----------|---------------------------------------------|
-	// | `xlsx_splitter`    | Object   | **Excel (xlsx) file segmentation policy configuration**, valid only when processing Excel files |
-	// | `common_splitter`  | Object   | **General file (e.g., txt, pdf) segmentation policy configuration**, segmented by page or tag |
-	// | `table_style`      | String   | Output format of table content, e.g., HTML or Markdown |
+	// | Field Name | Type | Description |
+	// |------------|------|-------------|
+	// | `xlsx_splitter` | Object | **Excel (xlsx) file splitting policy configuration**, valid only when processing Excel files |
+	// | `common_splitter` | Object | **General file splitting policy configuration** (for TXT, PDF and other files), supports splitting by page or by tag |
+	// | `table_style` | String | Output format of table content, e.g., HTML or Markdown |
 	// 
 	// ---
 	// 
-	// ## `xlsx_splitter` (Excel Segmentation Policy)
-	// 
-	// Used to configure **segmentation methods for spreadsheet files**.
+	// ## `xlsx_splitter` (Excel Splitting Policy)
+	// Used to configure the **splitting method for table files**.
 	// **Type: Object**
-	// 
 	// ```json
 	// "xlsx_splitter": {
 	//   "header_interval": [1, 2],
@@ -9329,24 +9369,18 @@ type SaveDocRequest struct {
 	// }
 	// ```
 	// 
-	// ### Field Description:
-	// 
-	// | Field Name         | Type          | Description                                                                
-	//    |
-	// |--------------------|---------------|-----------------------------------------------------------------------------|
-	// | `header_interval` | Array\<Number\> | Row range of headers, formatted as `[start_row, end_row]`, **row numbers start from 1**. E.g., `[1, 2]` indicates rows 1-2 are headers. |
-	// | `content_start`   | Number        | **Starting row number of table content (1-based)**.                        
-	//    |
-	// | `split_row`       | Number        | **Number of rows per segment**.                                            
-	//    |
+	// ### Field Description
+	// | Field Name | Type | Description |
+	// |------------|------|-------------|
+	// | `header_interval` | Array\<Number\> | Row range of the table header, formatted as `[start row, end row]`. **Row numbers start from 1**. For example, `[1, 2]` means rows 1 to 2 are table headers. |
+	// | `content_start` | Number | **Start row number of table content (starting from 1)** |
+	// | `split_row` | Number | **Number of rows per split** |
 	// 
 	// ---
-	// ## `common_splitter` (General File Segmentation Policy)
 	// 
-	// Used to configure **segmentation methods for non-Excel files (e.g., TXT, PDF, DOCX)**, supporting two strategies: **by-page segmentation** or **by-tag segmentation**.
-	// 
+	// ## `common_splitter` (General File Splitting Policy)
+	// Used to configure the splitting method for **non-Excel files (TXT, PDF, DOCX, etc.)**. Two strategies are supported: **page-based splitting** or **identifier-based splitting**.
 	// **Type: Object**
-	// 
 	// ```json
 	// "common_splitter": {
 	//   "splitter": "page",
@@ -9357,52 +9391,49 @@ type SaveDocRequest struct {
 	// }
 	// ```
 	// 
-	// ### Field Description:
+	// ### Field Description
+	// | Field Name | Type | Description |
+	// |------------|------|-------------|
+	// | `splitter` | String | Splitting strategy type. Optional values: `"page"` (split by page), `"tag"` (split by identifier). |
+	// | `page_splitter` | Object | Configuration for **page-based splitting** |
+	// | `page_splitter.chunk_length` | Number | **Maximum chunk length** |
+	// | `page_splitter.chunk_overlap_length` | Number | **Chunk overlap length** |
+	// | `tag_splitter` | Object | Configuration for **custom splitting** |
+	// | `tag_splitter.tag` | Array\<String\> | **Splitting identifiers** |
+	// | `tag_splitter.chunk_length` | Number | **Maximum chunk length** |
+	// | `tag_splitter.chunk_overlap_length` | Number | **Chunk overlap length** |
 	// 
-	// | Field Name                     | Type          | Description                                                                
-	//    |
-	// |--------------------------------|---------------|-----------------------------------------------------------------------------|
-	// | `splitter`                     | String        | Segmentation strategy type. Valid values: `"page"` (by-page) or `"tag"` (by-tag). |
-	// | `page_splitter`                | Object        | **By-page segmentation configuration**.                                     |
-	// | `page_splitter.chunk_length`   | Number        | **Maximum chunk length**.                                                  
-	//    |
-	// | `page_splitter.chunk_overlap_length` | Number | **Chunk overlap length**.                                                  
-	//    |
-	// | `tag_splitter`                 | Object        | **Custom segmentation configuration**.                                      |
-	// | `tag_splitter.tag`             | Array\<String\> | **Segmentation tags**.                                                     
-	//    |
-	// | `tag_splitter.chunk_length`    | Number        | **Maximum chunk length**.                                                  
-	//    |
-	// | `tag_splitter.chunk_overlap_length` | Number | **Chunk overlap length**.                                                  
-	//    |
+	// ### Supplementary Notes
+	// - Valid values for the `splitter` field:
+	//   - `"page"`: Only page-based splitting is used; only configure fields under `page_splitter`.
+	//   - `"tag"`: Only identifier-based splitting (semicolon, line break, etc.) is used; only configure fields under `tag_splitter`.
 	// 
-	// 🔹 **Additional Notes:**
-	// 
-	// - Valid values for `splitter`:
-	//     - `"page"`: Only use by-page segmentation logic. Only `page_splitter` fields are relevant.
-	//     - `"tag"`: Only use by-tag segmentation logic (e.g., using delimiters like semicolons or line breaks). Only `tag_splitter` fields are relevant.
 	// ---
 	// 
 	// ## `table_style` (Table Output Style)
-	// 
-	// Specifies **the format in which tabular content (e.g., tables extracted from Excel or CSV) is returned**, facilitating frontend display or subsequent processing.
-	// 
+	// Specifies the final return format of **table content extracted from Excel / CSV**, for front-end display and subsequent processing.
 	// **Type: String**
-	// 
 	// ```json
 	// "table_style": "md"
 	// ```
 	// 
-	// ### Field Description:
-	// 
-	// | Field Name     | Type   | Description                                                                
-	//    |
-	// |----------------|--------|-----------------------------------------------------------------------------|
-	// | `table_style`  | String | Output format of table content. Valid values:<br>• `"html"`: Returns as HTML tables, suitable for web display.<br>• `"md"`: Returns in Markdown table syntax, suitable for documentation or Markdown rendering environments. |
+	// ### Field Description
+	// | Field Name | Type | Description |
+	// |------------|------|-------------|
+	// | `table_style` | String | Specifies the output format of table content. Available values:<br> `"html"`: Return as HTML table, suitable for web page display.<br> `"md"`: Return as Markdown table syntax, suitable for documents and Markdown rendering environments. |
 	SplitRule *string `json:"SplitRule,omitnil,omitempty" name:"SplitRule"`
 
-	// Document update frequency, default value is 0 (no updates)
+	// Document update frequency. Default value 0 means no update.
 	UpdatePeriodInfo *UpdatePeriodInfo `json:"UpdatePeriodInfo,omitnil,omitempty" name:"UpdatePeriodInfo"`
+
+	// Document Effective Scope:
+	// 1 - Not effective;
+	// 2 - Effective only in development scope;
+	// 3 - Effective only in release scope;
+	// 4 - Effective in both development and release scopes.
+	// 
+	// Default value: The default knowledge base within the application is 2, and the shared knowledge base is 4.
+	EnableScope *int64 `json:"EnableScope,omitnil,omitempty" name:"EnableScope"`
 }
 
 func (r *SaveDocRequest) ToJsonString() string {
@@ -9438,6 +9469,7 @@ func (r *SaveDocRequest) FromJsonString(s string) error {
 	delete(f, "DuplicateFileHandles")
 	delete(f, "SplitRule")
 	delete(f, "UpdatePeriodInfo")
+	delete(f, "EnableScope")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SaveDocRequest has unknown keys!", "")
 	}
@@ -9458,7 +9490,7 @@ type SaveDocResponseParams struct {
 	// Error link text.
 	ErrorLinkText *string `json:"ErrorLinkText,omitnil,omitempty" name:"ErrorLinkText"`
 
-
+	// Duplication type. 0 means no duplication; for other values, refer to the CheckType field of the input parameter DuplicateFileHandle  structure.
 	DuplicateFileCheckType *uint64 `json:"DuplicateFileCheckType,omitnil,omitempty" name:"DuplicateFileCheckType"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -9734,7 +9766,7 @@ type UnsatisfiedReply struct {
 }
 
 type UpdatePeriodInfo struct {
-	// Document update frequency type: 0: No update, -H: Hourly granularity. Currently only supports 24 (1 day), 72 (3 days), 168 (7 days). Only valid for source=2 Tencent document type.
+
 	UpdatePeriodH *uint64 `json:"UpdatePeriodH,omitnil,omitempty" name:"UpdatePeriodH"`
 }
 
@@ -9945,14 +9977,61 @@ func (r *VerifyQAResponse) FromJsonString(s string) error {
 }
 
 type VoiceConfig struct {
-	// Public Cloud Timbre ID
+
 	VoiceType *uint64 `json:"VoiceType,omitnil,omitempty" name:"VoiceType"`
 
-	// Timbre Key
+
 	TimbreKey *string `json:"TimbreKey,omitnil,omitempty" name:"TimbreKey"`
 
-	// Timbre Name
+
 	VoiceName *string `json:"VoiceName,omitnil,omitempty" name:"VoiceName"`
+}
+
+type WebSearchContent struct {
+
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+}
+
+type WebSearchReference struct {
+
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+}
+
+type Widget struct {
+
+	WidgetId *string `json:"WidgetId,omitnil,omitempty" name:"WidgetId"`
+
+
+	WidgetRunId *string `json:"WidgetRunId,omitnil,omitempty" name:"WidgetRunId"`
+
+
+	View *string `json:"View,omitnil,omitempty" name:"View"`
+
+
+	State *string `json:"State,omitnil,omitempty" name:"State"`
+
+
+	Position *int64 `json:"Position,omitnil,omitempty" name:"Position"`
+
+
+	EncodedWidget *string `json:"EncodedWidget,omitnil,omitempty" name:"EncodedWidget"`
+
+
+	Payload *string `json:"Payload,omitnil,omitempty" name:"Payload"`
+}
+
+type WidgetAction struct {
+
+	WidgetId *string `json:"WidgetId,omitnil,omitempty" name:"WidgetId"`
+
+
+	WidgetRunId *string `json:"WidgetRunId,omitnil,omitempty" name:"WidgetRunId"`
+
+
+	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
+
+
+	Payload *string `json:"Payload,omitnil,omitempty" name:"Payload"`
 }
 
 type WorkFlowSummary struct {
@@ -9979,23 +10058,29 @@ type WorkFlowSummary struct {
 }
 
 type WorkflowInfo struct {
-	// Workflow ID
+
 	WorkflowId *string `json:"WorkflowId,omitnil,omitempty" name:"WorkflowId"`
 
-	// Workflow Name
+
 	WorkflowName *string `json:"WorkflowName,omitnil,omitempty" name:"WorkflowName"`
 
-	// Workflow Run ID
+
 	WorkflowRunId *string `json:"WorkflowRunId,omitnil,omitempty" name:"WorkflowRunId"`
 
-	// Tab
+
 	OptionCards []*string `json:"OptionCards,omitnil,omitempty" name:"OptionCards"`
 
-	// Multi-bubble output results
+
 	Outputs []*string `json:"Outputs,omitnil,omitempty" name:"Outputs"`
 
-	// Workflow Publish Time, unix timestamp
+
 	WorkflowReleaseTime *string `json:"WorkflowReleaseTime,omitnil,omitempty" name:"WorkflowReleaseTime"`
+
+
+	Contents []*Content `json:"Contents,omitnil,omitempty" name:"Contents"`
+
+
+	OptionMode *int64 `json:"OptionMode,omitnil,omitempty" name:"OptionMode"`
 }
 
 type WorkflowRunNodeInfo struct {

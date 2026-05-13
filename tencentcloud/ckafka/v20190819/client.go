@@ -539,7 +539,7 @@ func NewCreateInstancePreResponse() (response *CreateInstancePreResponse) {
 }
 
 // CreateInstancePre
-// This API is used to create prepaid annual and monthly instances. It only supports creating Pro Edition instances.
+// This API is used to create prepaid yearly/monthly subscribed instances. It only supports creating Pro Edition instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -562,7 +562,7 @@ func (c *Client) CreateInstancePre(request *CreateInstancePreRequest) (response 
 }
 
 // CreateInstancePre
-// This API is used to create prepaid annual and monthly instances. It only supports creating Pro Edition instances.
+// This API is used to create prepaid yearly/monthly subscribed instances. It only supports creating Pro Edition instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3009,7 +3009,7 @@ func NewDescribeRegionResponse() (response *DescribeRegionResponse) {
 }
 
 // DescribeRegion
-// This API is used to enumerate regions, and can be called only in Guangzhou.
+// Enumerate regional information
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3031,7 +3031,7 @@ func (c *Client) DescribeRegion(request *DescribeRegionRequest) (response *Descr
 }
 
 // DescribeRegion
-// This API is used to enumerate regions, and can be called only in Guangzhou.
+// Enumerate regional information
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

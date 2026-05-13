@@ -227,56 +227,6 @@ func (c *Client) CreateAttributeLabelWithContext(ctx context.Context, request *C
     return
 }
 
-func NewCreateCorpRequest() (request *CreateCorpRequest) {
-    request = &CreateCorpRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("lke", APIVersion, "CreateCorp")
-    
-    
-    return
-}
-
-func NewCreateCorpResponse() (response *CreateCorpResponse) {
-    response = &CreateCorpResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// CreateCorp
-// This API is used to create enterprises.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-func (c *Client) CreateCorp(request *CreateCorpRequest) (response *CreateCorpResponse, err error) {
-    return c.CreateCorpWithContext(context.Background(), request)
-}
-
-// CreateCorp
-// This API is used to create enterprises.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-func (c *Client) CreateCorpWithContext(ctx context.Context, request *CreateCorpRequest) (response *CreateCorpResponse, err error) {
-    if request == nil {
-        request = NewCreateCorpRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "CreateCorp")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateCorp require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateCorpResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewCreateDocCateRequest() (request *CreateDocCateRequest) {
     request = &CreateDocCateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -427,84 +377,6 @@ func (c *Client) CreateQACateWithContext(ctx context.Context, request *CreateQAC
     return
 }
 
-func NewCreateReconstructDocumentFlowRequest() (request *CreateReconstructDocumentFlowRequest) {
-    request = &CreateReconstructDocumentFlowRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("lke", APIVersion, "CreateReconstructDocumentFlow")
-    
-    
-    return
-}
-
-func NewCreateReconstructDocumentFlowResponse() (response *CreateReconstructDocumentFlowResponse) {
-    response = &CreateReconstructDocumentFlowResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// CreateReconstructDocumentFlow
-// This API is used to initiate requests for this asynchronous API, for initiating document parsing tasks.
-//
-// Document parsing supports converting images or PDF files into Markdown format files, and can parse content elements including tables, formulas, images, headings, paragraphs, headers, and footers, and intelligently convert the content into reading order.
-//
-// During the trial period, the QPS limit for a single account is only 1. If you need to access officially, please contact our R&D team.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_FILEDECODEFAILED = "FailedOperation.FileDecodeFailed"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNKNOWFILETYPEERROR = "FailedOperation.UnKnowFileTypeError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) CreateReconstructDocumentFlow(request *CreateReconstructDocumentFlowRequest) (response *CreateReconstructDocumentFlowResponse, err error) {
-    return c.CreateReconstructDocumentFlowWithContext(context.Background(), request)
-}
-
-// CreateReconstructDocumentFlow
-// This API is used to initiate requests for this asynchronous API, for initiating document parsing tasks.
-//
-// Document parsing supports converting images or PDF files into Markdown format files, and can parse content elements including tables, formulas, images, headings, paragraphs, headers, and footers, and intelligently convert the content into reading order.
-//
-// During the trial period, the QPS limit for a single account is only 1. If you need to access officially, please contact our R&D team.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_FILEDECODEFAILED = "FailedOperation.FileDecodeFailed"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNKNOWFILETYPEERROR = "FailedOperation.UnKnowFileTypeError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) CreateReconstructDocumentFlowWithContext(ctx context.Context, request *CreateReconstructDocumentFlowRequest) (response *CreateReconstructDocumentFlowResponse, err error) {
-    if request == nil {
-        request = NewCreateReconstructDocumentFlowRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "CreateReconstructDocumentFlow")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateReconstructDocumentFlow require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateReconstructDocumentFlowResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewCreateRejectedQuestionRequest() (request *CreateRejectedQuestionRequest) {
     request = &CreateRejectedQuestionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -528,17 +400,7 @@ func NewCreateRejectedQuestionResponse() (response *CreateRejectedQuestionRespon
 // This API is used to create rejected questions.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_FILEDECODEFAILED = "FailedOperation.FileDecodeFailed"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNKNOWFILETYPEERROR = "FailedOperation.UnKnowFileTypeError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+//  FAILEDOPERATION = "FailedOperation"
 func (c *Client) CreateRejectedQuestion(request *CreateRejectedQuestionRequest) (response *CreateRejectedQuestionResponse, err error) {
     return c.CreateRejectedQuestionWithContext(context.Background(), request)
 }
@@ -547,17 +409,7 @@ func (c *Client) CreateRejectedQuestion(request *CreateRejectedQuestionRequest) 
 // This API is used to create rejected questions.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_FILEDECODEFAILED = "FailedOperation.FileDecodeFailed"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNKNOWFILETYPEERROR = "FailedOperation.UnKnowFileTypeError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+//  FAILEDOPERATION = "FailedOperation"
 func (c *Client) CreateRejectedQuestionWithContext(ctx context.Context, request *CreateRejectedQuestionRequest) (response *CreateRejectedQuestionResponse, err error) {
     if request == nil {
         request = NewCreateRejectedQuestionRequest()
@@ -1221,56 +1073,6 @@ func (c *Client) DescribeConcurrencyUsageGraphWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewDescribeConcurrencyUsageGraphResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeCorpRequest() (request *DescribeCorpRequest) {
-    request = &DescribeCorpRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("lke", APIVersion, "DescribeCorp")
-    
-    
-    return
-}
-
-func NewDescribeCorpResponse() (response *DescribeCorpResponse) {
-    response = &DescribeCorpResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeCorp
-// This API is used to query corporate details.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-func (c *Client) DescribeCorp(request *DescribeCorpRequest) (response *DescribeCorpResponse, err error) {
-    return c.DescribeCorpWithContext(context.Background(), request)
-}
-
-// DescribeCorp
-// This API is used to query corporate details.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-func (c *Client) DescribeCorpWithContext(ctx context.Context, request *DescribeCorpRequest) (response *DescribeCorpResponse, err error) {
-    if request == nil {
-        request = NewDescribeCorpRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "DescribeCorp")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeCorp require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeCorpResponse()
     err = c.Send(request, response)
     return
 }
@@ -2489,66 +2291,6 @@ func (c *Client) GetMsgRecordWithContext(ctx context.Context, request *GetMsgRec
     return
 }
 
-func NewGetReconstructDocumentResultRequest() (request *GetReconstructDocumentResultRequest) {
-    request = &GetReconstructDocumentResultRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("lke", APIVersion, "GetReconstructDocumentResult")
-    
-    
-    return
-}
-
-func NewGetReconstructDocumentResultResponse() (response *GetReconstructDocumentResultResponse) {
-    response = &GetReconstructDocumentResultResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// GetReconstructDocumentResult
-// This is an asynchronous APIs, used to get document parsing task results.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) GetReconstructDocumentResult(request *GetReconstructDocumentResultRequest) (response *GetReconstructDocumentResultResponse, err error) {
-    return c.GetReconstructDocumentResultWithContext(context.Background(), request)
-}
-
-// GetReconstructDocumentResult
-// This is an asynchronous APIs, used to get document parsing task results.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) GetReconstructDocumentResultWithContext(ctx context.Context, request *GetReconstructDocumentResultRequest) (response *GetReconstructDocumentResultResponse, err error) {
-    if request == nil {
-        request = NewGetReconstructDocumentResultRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "GetReconstructDocumentResult")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("GetReconstructDocumentResult require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewGetReconstructDocumentResultResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewGetTaskStatusRequest() (request *GetTaskStatusRequest) {
     request = &GetTaskStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2572,12 +2314,8 @@ func NewGetTaskStatusResponse() (response *GetTaskStatusResponse) {
 // This API is used to get the task status.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) GetTaskStatus(request *GetTaskStatusRequest) (response *GetTaskStatusResponse, err error) {
     return c.GetTaskStatusWithContext(context.Background(), request)
 }
@@ -2586,12 +2324,8 @@ func (c *Client) GetTaskStatus(request *GetTaskStatusRequest) (response *GetTask
 // This API is used to get the task status.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) GetTaskStatusWithContext(ctx context.Context, request *GetTaskStatusRequest) (response *GetTaskStatusResponse, err error) {
     if request == nil {
         request = NewGetTaskStatusRequest()
@@ -2809,6 +2543,56 @@ func (c *Client) IgnoreUnsatisfiedReplyWithContext(ctx context.Context, request 
     return
 }
 
+func NewIsTransferIntentRequest() (request *IsTransferIntentRequest) {
+    request = &IsTransferIntentRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "IsTransferIntent")
+    
+    
+    return
+}
+
+func NewIsTransferIntentResponse() (response *IsTransferIntentResponse) {
+    response = &IsTransferIntentResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// IsTransferIntent
+// This API is used to determine whether to transfer to human service.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) IsTransferIntent(request *IsTransferIntentRequest) (response *IsTransferIntentResponse, err error) {
+    return c.IsTransferIntentWithContext(context.Background(), request)
+}
+
+// IsTransferIntent
+// This API is used to determine whether to transfer to human service.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) IsTransferIntentWithContext(ctx context.Context, request *IsTransferIntentRequest) (response *IsTransferIntentResponse, err error) {
+    if request == nil {
+        request = NewIsTransferIntentRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "IsTransferIntent")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("IsTransferIntent require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewIsTransferIntentResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListAppRequest() (request *ListAppRequest) {
     request = &ListAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2855,56 +2639,6 @@ func (c *Client) ListAppWithContext(ctx context.Context, request *ListAppRequest
     request.SetContext(ctx)
     
     response = NewListAppResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewListAppCategoryRequest() (request *ListAppCategoryRequest) {
-    request = &ListAppCategoryRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("lke", APIVersion, "ListAppCategory")
-    
-    
-    return
-}
-
-func NewListAppCategoryResponse() (response *ListAppCategoryResponse) {
-    response = &ListAppCategoryResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// ListAppCategory
-// This API is used to get list of application types.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-func (c *Client) ListAppCategory(request *ListAppCategoryRequest) (response *ListAppCategoryResponse, err error) {
-    return c.ListAppCategoryWithContext(context.Background(), request)
-}
-
-// ListAppCategory
-// This API is used to get list of application types.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-func (c *Client) ListAppCategoryWithContext(ctx context.Context, request *ListAppCategoryRequest) (response *ListAppCategoryResponse, err error) {
-    if request == nil {
-        request = NewListAppCategoryRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "lke", APIVersion, "ListAppCategory")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ListAppCategory require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewListAppCategoryResponse()
     err = c.Send(request, response)
     return
 }

@@ -335,6 +335,17 @@ func (r *AutoRewriteResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type AvailableZoneAffinityInfo struct {
+
+	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
+
+
+	ExitRatio *uint64 `json:"ExitRatio,omitnil,omitempty" name:"ExitRatio"`
+
+
+	ReentryRatio *uint64 `json:"ReentryRatio,omitnil,omitempty" name:"ReentryRatio"`
+}
+
 type Backend struct {
 	// Specifies the backend service type. valid values: CVM, ENI, CCN, EVM, GLOBALROUTE, NAT, SRV.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
@@ -1497,7 +1508,7 @@ type CreateLoadBalancerRequestParams struct {
 	// Applicable only to public network IPv4 clb instances. specifies the AZ ID or availability zone name for creating a clb instance. for example, 100001 or ap-guangzhou-1.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Network billing mode by the maximum outbound bandwidth. It applies only to private network LCU-supported instances and all public network instances. The feature of purchasing monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	// Network billing mode by the maximum outbound bandwidth. It applies only to private network LCU-supported instances and all public network instances. The feature of purchasing yearly/monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitnil,omitempty" name:"InternetAccessible"`
 
 	// ISP of VIP. Values: `CMCC` (China Mobile), `CUCC` (China Unicom) and `CTCC` (China Telecom). You need to activate static single-line IPs. This feature is in beta and is only available in Guangzhou, Shanghai, Nanjing, Jinan, Hangzhou, Fuzhou, Beijing, Shijiazhuang, Wuhan, Changsha, Chengdu and Chongqing regions. To try it out, please contact your sales rep. If it's specified, the network billing mode must be `BANDWIDTH_PACKAGE`. If it's not specified, BGP is used by default. To query ISPs supported in a region, please use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). 
@@ -1550,10 +1561,10 @@ type CreateLoadBalancerRequestParams struct {
 	// Network egress point
 	Egress *string `json:"Egress,omitnil,omitempty" name:"Egress"`
 
-	// Prepayment-related attributes of a CLB instance. The feature of purchasing monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	// Prepayment-related attributes of a CLB instance. The feature of purchasing yearly/monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 	LBChargePrepaid *LBChargePrepaid `json:"LBChargePrepaid,omitnil,omitempty" name:"LBChargePrepaid"`
 
-	// Billing type of a CLB instance. Valid values: POSTPAID_BY_HOUR and PREPAID. Default value: POSTPAID_BY_HOUR. The feature of purchasing monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	// Billing type of a CLB instance. Valid values: POSTPAID_BY_HOUR and PREPAID. Default value: POSTPAID_BY_HOUR. The feature of purchasing yearly/monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 	LBChargeType *string `json:"LBChargeType,omitnil,omitempty" name:"LBChargeType"`
 
 	// Topic ID of logs of traffic access over layer-7 protocols.
@@ -1599,7 +1610,7 @@ type CreateLoadBalancerRequest struct {
 	// Applicable only to public network IPv4 clb instances. specifies the AZ ID or availability zone name for creating a clb instance. for example, 100001 or ap-guangzhou-1.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Network billing mode by the maximum outbound bandwidth. It applies only to private network LCU-supported instances and all public network instances. The feature of purchasing monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	// Network billing mode by the maximum outbound bandwidth. It applies only to private network LCU-supported instances and all public network instances. The feature of purchasing yearly/monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitnil,omitempty" name:"InternetAccessible"`
 
 	// ISP of VIP. Values: `CMCC` (China Mobile), `CUCC` (China Unicom) and `CTCC` (China Telecom). You need to activate static single-line IPs. This feature is in beta and is only available in Guangzhou, Shanghai, Nanjing, Jinan, Hangzhou, Fuzhou, Beijing, Shijiazhuang, Wuhan, Changsha, Chengdu and Chongqing regions. To try it out, please contact your sales rep. If it's specified, the network billing mode must be `BANDWIDTH_PACKAGE`. If it's not specified, BGP is used by default. To query ISPs supported in a region, please use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). 
@@ -1652,10 +1663,10 @@ type CreateLoadBalancerRequest struct {
 	// Network egress point
 	Egress *string `json:"Egress,omitnil,omitempty" name:"Egress"`
 
-	// Prepayment-related attributes of a CLB instance. The feature of purchasing monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	// Prepayment-related attributes of a CLB instance. The feature of purchasing yearly/monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 	LBChargePrepaid *LBChargePrepaid `json:"LBChargePrepaid,omitnil,omitempty" name:"LBChargePrepaid"`
 
-	// Billing type of a CLB instance. Valid values: POSTPAID_BY_HOUR and PREPAID. Default value: POSTPAID_BY_HOUR. The feature of purchasing monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	// Billing type of a CLB instance. Valid values: POSTPAID_BY_HOUR and PREPAID. Default value: POSTPAID_BY_HOUR. The feature of purchasing yearly/monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 	LBChargeType *string `json:"LBChargeType,omitnil,omitempty" name:"LBChargeType"`
 
 	// Topic ID of logs of traffic access over layer-7 protocols.
@@ -1929,6 +1940,9 @@ type CreateTargetGroupRequestParams struct {
 
 	// IP version type.
 	IpVersion *string `json:"IpVersion,omitnil,omitempty" name:"IpVersion"`
+
+
+	SnatEnable *bool `json:"SnatEnable,omitnil,omitempty" name:"SnatEnable"`
 }
 
 type CreateTargetGroupRequest struct {
@@ -1977,6 +1991,8 @@ type CreateTargetGroupRequest struct {
 
 	// IP version type.
 	IpVersion *string `json:"IpVersion,omitnil,omitempty" name:"IpVersion"`
+
+	SnatEnable *bool `json:"SnatEnable,omitnil,omitempty" name:"SnatEnable"`
 }
 
 func (r *CreateTargetGroupRequest) ToJsonString() string {
@@ -2005,6 +2021,7 @@ func (r *CreateTargetGroupRequest) FromJsonString(s string) error {
 	delete(f, "KeepaliveEnable")
 	delete(f, "SessionExpireTime")
 	delete(f, "IpVersion")
+	delete(f, "SnatEnable")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTargetGroupRequest has unknown keys!", "")
 	}
@@ -5537,7 +5554,7 @@ type InquiryPriceCreateLoadBalancerRequestParams struct {
 	// Availability zone in the format of "ap-guangzhou-1"
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Specification of the LCU-supported instance, which is input to query the monthly subscription price. Valid values: <li>clb.c2.medium: Standard</li><li>clb.c3.small: Advanced 1</li><li>clb.c3.medium: Advanced 2</li><li>clb.c4.small: Super Large 1</li><li>clb.c4.medium: Super Large 2</li><li>clb.c4.large: Super Large 3</li><li>clb.c4.xlarge: Super Large 4</li>SLA is input to query the pay-as-you-go price.
+	// Specification of the LCU-supported instance, which is input to query the yearly/monthly subscription price. Valid values: <li>clb.c2.medium: Standard</li><li>clb.c3.small: Advanced 1</li><li>clb.c3.medium: Advanced 2</li><li>clb.c4.small: Super Large 1</li><li>clb.c4.medium: Super Large 2</li><li>clb.c4.large: Super Large 3</li><li>clb.c4.xlarge: Super Large 4</li>SLA is input to query the pay-as-you-go price.
 	SlaType *string `json:"SlaType,omitnil,omitempty" name:"SlaType"`
 
 	// IP version. Valid values: `IPV4` (default), `IPV6` (IPV6 NAT64 version) or `IPv6FullChain` (IPv6 version). 
@@ -5568,7 +5585,7 @@ type InquiryPriceCreateLoadBalancerRequest struct {
 	// Availability zone in the format of "ap-guangzhou-1"
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Specification of the LCU-supported instance, which is input to query the monthly subscription price. Valid values: <li>clb.c2.medium: Standard</li><li>clb.c3.small: Advanced 1</li><li>clb.c3.medium: Advanced 2</li><li>clb.c4.small: Super Large 1</li><li>clb.c4.medium: Super Large 2</li><li>clb.c4.large: Super Large 3</li><li>clb.c4.xlarge: Super Large 4</li>SLA is input to query the pay-as-you-go price.
+	// Specification of the LCU-supported instance, which is input to query the yearly/monthly subscription price. Valid values: <li>clb.c2.medium: Standard</li><li>clb.c3.small: Advanced 1</li><li>clb.c3.medium: Advanced 2</li><li>clb.c4.small: Super Large 1</li><li>clb.c4.medium: Super Large 2</li><li>clb.c4.large: Super Large 3</li><li>clb.c4.xlarge: Super Large 4</li>SLA is input to query the pay-as-you-go price.
 	SlaType *string `json:"SlaType,omitnil,omitempty" name:"SlaType"`
 
 	// IP version. Valid values: `IPV4` (default), `IPV6` (IPV6 NAT64 version) or `IPv6FullChain` (IPv6 version). 
@@ -6182,7 +6199,7 @@ type LoadBalancer struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Billing mode of CLB instance. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay as you go).
+	// Billing mode of CLB instance. Valid values: PREPAID (yearly/monthly subscription), POSTPAID_BY_HOUR (pay as you go).
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ChargeType *string `json:"ChargeType,omitnil,omitempty" name:"ChargeType"`
 
@@ -6309,6 +6326,9 @@ type LoadBalancer struct {
 
 	// Specifies the Endpoint id associated with the clb instance.
 	AssociateEndpoint *string `json:"AssociateEndpoint,omitnil,omitempty" name:"AssociateEndpoint"`
+
+
+	AvailableZoneAffinityInfo *AvailableZoneAffinityInfo `json:"AvailableZoneAffinityInfo,omitnil,omitempty" name:"AvailableZoneAffinityInfo"`
 }
 
 type LoadBalancerDetail struct {
@@ -7369,6 +7389,9 @@ type ModifyLoadBalancerAttributesRequestParams struct {
 	// Specifies no modification if left blank.
 	LoadBalancerPassToTarget *bool `json:"LoadBalancerPassToTarget,omitnil,omitempty" name:"LoadBalancerPassToTarget"`
 
+
+	SwitchFlag *uint64 `json:"SwitchFlag,omitnil,omitempty" name:"SwitchFlag"`
+
 	// Specifies whether the cross-region binding 2.0 feature is enabled. leave blank for no modification.
 	SnatPro *bool `json:"SnatPro,omitnil,omitempty" name:"SnatPro"`
 
@@ -7403,6 +7426,8 @@ type ModifyLoadBalancerAttributesRequest struct {
 	// Specifies no modification if left blank.
 	LoadBalancerPassToTarget *bool `json:"LoadBalancerPassToTarget,omitnil,omitempty" name:"LoadBalancerPassToTarget"`
 
+	SwitchFlag *uint64 `json:"SwitchFlag,omitnil,omitempty" name:"SwitchFlag"`
+
 	// Specifies whether the cross-region binding 2.0 feature is enabled. leave blank for no modification.
 	SnatPro *bool `json:"SnatPro,omitnil,omitempty" name:"SnatPro"`
 
@@ -7433,6 +7458,7 @@ func (r *ModifyLoadBalancerAttributesRequest) FromJsonString(s string) error {
 	delete(f, "TargetRegionInfo")
 	delete(f, "InternetChargeInfo")
 	delete(f, "LoadBalancerPassToTarget")
+	delete(f, "SwitchFlag")
 	delete(f, "SnatPro")
 	delete(f, "DeleteProtect")
 	delete(f, "ModifyClassicDomain")
@@ -7510,6 +7536,9 @@ func (r *ModifyLoadBalancerSlaRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyLoadBalancerSlaResponseParams struct {
+
+	DealName *string `json:"DealName,omitnil,omitempty" name:"DealName"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -7754,6 +7783,9 @@ type ModifyTargetGroupAttributeRequestParams struct {
 
 	// Specifies the session persistence time in seconds. value range: 30-3600. default: 0 (disabled). this parameter is unsupported for TCP/UDP target groups.
 	SessionExpireTime *uint64 `json:"SessionExpireTime,omitnil,omitempty" name:"SessionExpireTime"`
+
+
+	SnatEnable *bool `json:"SnatEnable,omitnil,omitempty" name:"SnatEnable"`
 }
 
 type ModifyTargetGroupAttributeRequest struct {
@@ -7783,6 +7815,8 @@ type ModifyTargetGroupAttributeRequest struct {
 
 	// Specifies the session persistence time in seconds. value range: 30-3600. default: 0 (disabled). this parameter is unsupported for TCP/UDP target groups.
 	SessionExpireTime *uint64 `json:"SessionExpireTime,omitnil,omitempty" name:"SessionExpireTime"`
+
+	SnatEnable *bool `json:"SnatEnable,omitnil,omitempty" name:"SnatEnable"`
 }
 
 func (r *ModifyTargetGroupAttributeRequest) ToJsonString() string {
@@ -7805,6 +7839,7 @@ func (r *ModifyTargetGroupAttributeRequest) FromJsonString(s string) error {
 	delete(f, "Weight")
 	delete(f, "KeepaliveEnable")
 	delete(f, "SessionExpireTime")
+	delete(f, "SnatEnable")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTargetGroupAttributeRequest has unknown keys!", "")
 	}
@@ -8948,7 +8983,7 @@ type SetLoadBalancerClsLogRequestParams struct {
 	LoadBalancerId *string `json:"LoadBalancerId,omitnil,omitempty" name:"LoadBalancerId"`
 
 	// Log set ID of cloud log service (CLS).
-	// <li>Specifies the logset ID that can be obtained by calling the [DescribeLogsets](https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1) API when adding or updating a log topic.</li>.
+	// <li>Specifies the logset ID that can be obtained by calling the [DescribeLogsets](https://www.tencentcloud.com/document/product/614/42778?from_cn_redirect=1) API when adding or updating a log topic.</li>.
 	// <Li>When deleting a log topic, set this parameter to an empty string.</li>.
 	LogSetId *string `json:"LogSetId,omitnil,omitempty" name:"LogSetId"`
 
@@ -8971,7 +9006,7 @@ type SetLoadBalancerClsLogRequest struct {
 	LoadBalancerId *string `json:"LoadBalancerId,omitnil,omitempty" name:"LoadBalancerId"`
 
 	// Log set ID of cloud log service (CLS).
-	// <li>Specifies the logset ID that can be obtained by calling the [DescribeLogsets](https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1) API when adding or updating a log topic.</li>.
+	// <li>Specifies the logset ID that can be obtained by calling the [DescribeLogsets](https://www.tencentcloud.com/document/product/614/42778?from_cn_redirect=1) API when adding or updating a log topic.</li>.
 	// <Li>When deleting a log topic, set this parameter to an empty string.</li>.
 	LogSetId *string `json:"LogSetId,omitnil,omitempty" name:"LogSetId"`
 
