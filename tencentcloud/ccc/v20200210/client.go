@@ -385,7 +385,7 @@ func NewCreateAIAgentCallResponse() (response *CreateAIAgentCallResponse) {
 //
 // 
 //
-// The feature requires purchase of the Intelligent Agent call package and is only available for own telephone number. For details, refer to the [Intelligent Agent Call Purchase Guide](https://www.tencentcloud.com/document/product/679/125953?from_cn_redirect=1).
+// The feature requires purchase of the Intelligent Agent call package and is only available for own telephone number. For details, refer to the [Intelligent Agent Call Purchase Guide](https://www.tencentcloud.com/document/product/1229/59535?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AILICENSEHASEXPIRED = "FailedOperation.AILicenseHasExpired"
@@ -411,7 +411,7 @@ func (c *Client) CreateAIAgentCall(request *CreateAIAgentCallRequest) (response 
 //
 // 
 //
-// The feature requires purchase of the Intelligent Agent call package and is only available for own telephone number. For details, refer to the [Intelligent Agent Call Purchase Guide](https://www.tencentcloud.com/document/product/679/125953?from_cn_redirect=1).
+// The feature requires purchase of the Intelligent Agent call package and is only available for own telephone number. For details, refer to the [Intelligent Agent Call Purchase Guide](https://www.tencentcloud.com/document/product/1229/59535?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AILICENSEHASEXPIRED = "FailedOperation.AILicenseHasExpired"
@@ -469,7 +469,7 @@ func NewCreateAICallResponse() (response *CreateAICallResponse) {
 //
 // 
 //
-// The feature requires purchase of the Intelligent Agent call package and is only available for own telephone numbers. For details, refer to the Intelligent Agent Call Purchase Guide (https://www.tencentcloud.com/document/product/679/125953?from_cn_redirect=1).
+// The feature requires purchase of the Intelligent Agent call package and is only available for own telephone numbers. For details, refer to the [Intelligent Agent Call Purchase Guide](https://www.tencentcloud.com/document/product/1229/59535?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"
@@ -494,7 +494,7 @@ func (c *Client) CreateAICall(request *CreateAICallRequest) (response *CreateAIC
 //
 // 
 //
-// The feature requires purchase of the Intelligent Agent call package and is only available for own telephone numbers. For details, refer to the Intelligent Agent Call Purchase Guide (https://www.tencentcloud.com/document/product/679/125953?from_cn_redirect=1).
+// The feature requires purchase of the Intelligent Agent call package and is only available for own telephone numbers. For details, refer to the [Intelligent Agent Call Purchase Guide](https://www.tencentcloud.com/document/product/1229/59535?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"

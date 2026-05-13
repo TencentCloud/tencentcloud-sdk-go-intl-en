@@ -20,6 +20,9 @@ const (
 	// Error with CAM signature/authentication.
 	AUTHFAILURE = "AuthFailure"
 
+	// 
+	AUTHFAILURE_INVALIDHEADERUIN = "AuthFailure.InvalidHeaderUin"
+
 	// This region is not open yet. Please select another one.
 	AUTHFAILURE_INVALIDREGION = "AuthFailure.InvalidRegion"
 
@@ -44,6 +47,9 @@ const (
 	// Failed to delete the key pair.
 	FAILEDOPERATION_DELETEKEYPAIRFAILED = "FailedOperation.DeleteKeyPairFailed"
 
+	// 
+	FAILEDOPERATION_DELETERESOURCESFAILED = "FailedOperation.DeleteResourcesFailed"
+
 	// Failed to query the image quota.
 	FAILEDOPERATION_DESCRIBEBLUEPRINTQUOTAFAILED = "FailedOperation.DescribeBlueprintQuotaFailed"
 
@@ -58,6 +64,9 @@ const (
 
 	// Querying CBS quota failed.
 	FAILEDOPERATION_DESCRIBEDISKCONFIGQUOTAFAILED = "FailedOperation.DescribeDiskConfigQuotaFailed"
+
+	// 
+	FAILEDOPERATION_DESCRIBEDISKSRETURNABLEERROR = "FailedOperation.DescribeDisksReturnableError"
 
 	// Failed to query the CVM image list.
 	FAILEDOPERATION_DESCRIBEIMAGESFAILED = "FailedOperation.DescribeImagesFailed"
@@ -80,6 +89,9 @@ const (
 	// Unable to terminate the resource. Please retry later.
 	FAILEDOPERATION_DESTROYRESOURCESFAILED = "FailedOperation.DestroyResourcesFailed"
 
+	// 
+	FAILEDOPERATION_FIREWALLOPERATIONFAILED = "FailedOperation.FirewallOperationFailed"
+
 	// Failed to manipulate the firewall rule.
 	FAILEDOPERATION_FIREWALLRULESOPERATIONFAILED = "FailedOperation.FirewallRulesOperationFailed"
 
@@ -88,6 +100,9 @@ const (
 
 	// Failed to import the key pair.
 	FAILEDOPERATION_IMPORTKEYPAIRFAILED = "FailedOperation.ImportKeyPairFailed"
+
+	// 
+	FAILEDOPERATION_INITCOMMANDCONTENTTOOLONG = "FailedOperation.InitCommandContentTooLong"
 
 	// Failed to manipulate the instance.
 	FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
@@ -106,6 +121,9 @@ const (
 
 	// Failed to change the resource attribute. Try again later...
 	FAILEDOPERATION_MODIFYRESOURCESATTRIBUTEFAILED = "FailedOperation.ModifyResourcesAttributeFailed"
+
+	// 
+	FAILEDOPERATION_MODIFYRESOURCESRENEWFLAGFAILED = "FailedOperation.ModifyResourcesRenewFlagFailed"
 
 	// The upper limit of the purchase quantity is exceeded.
 	FAILEDOPERATION_NUMLIMITERROR = "FailedOperation.NumLimitError"
@@ -142,9 +160,6 @@ const (
 
 	// Internal error.
 	INTERNALERROR = "InternalError"
-
-	// The disk query returned invalid content.
-	INTERNALERROR_DESCRIBEDISKSRETURNABLEERROR = "InternalError.DescribeDisksReturnableError"
 
 	// Failed to query the instance status. Please try again later.
 	INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
@@ -197,6 +212,9 @@ const (
 	// Parameters conflicted.
 	INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
 
+	// 
+	INVALIDPARAMETER_CREATINGGAMEPORTALINSTANCENOTSUPPORTPARAMETER = "InvalidParameter.CreatingGamePortalInstanceNotSupportParameter"
+
 	// Invalid parameter: the number of `Values` in the `Filter` parameter exceeds the allowed maximum number.
 	INVALIDPARAMETER_FILTERVALUELIMITEXCEEDED = "InvalidParameter.FilterValueLimitExceeded"
 
@@ -205,6 +223,18 @@ const (
 
 	// Invalid parameter: the firewall rule already exists.
 	INVALIDPARAMETER_FIREWALLRULESEXIST = "InvalidParameter.FirewallRulesExist"
+
+	// 
+	INVALIDPARAMETER_GAMEPORTALINSTANCEBLUEPRINTINVALID = "InvalidParameter.GamePortalInstanceBlueprintInvalid"
+
+	// 
+	INVALIDPARAMETER_GAMEPORTALINSTANCEONLYSUPPORTCURRENTBLUEPRINT = "InvalidParameter.GamePortalInstanceOnlySupportCurrentBlueprint"
+
+	// 
+	INVALIDPARAMETER_INSTANCEDISPLAYAREANOTSUPPORTPARAMETER = "InvalidParameter.InstanceDisplayAreaNotSupportParameter"
+
+	// 
+	INVALIDPARAMETER_INSTANCEOPERATIONUNSUPPORTEDPARAMETER = "InvalidParameter.InstanceOperationUnsupportedParameter"
 
 	// Invalid parameter: the `Filter` parameter is invalid.
 	INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
@@ -293,6 +323,9 @@ const (
 	// The length of the firewall rule description exceeds the limit.
 	INVALIDPARAMETERVALUE_FIREWALLRULEDESCRIPTIONTOOLONG = "InvalidParameterValue.FirewallRuleDescriptionTooLong"
 
+	// 
+	INVALIDPARAMETERVALUE_FIREWALLTEMPLATEIDMALFORMED = "InvalidParameterValue.FirewallTemplateIdMalformed"
+
 	// Invalid parameter value: the instance ID format is invalid.
 	INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
 
@@ -314,6 +347,9 @@ const (
 	// Invalid package parameter.
 	INVALIDPARAMETERVALUE_INVALIDBUNDLE = "InvalidParameterValue.InvalidBundle"
 
+	// 
+	INVALIDPARAMETERVALUE_INVALIDBUNDLEBLUEPRINTCOMBINATION = "InvalidParameterValue.InvalidBundleBlueprintCombination"
+
 	// The console display type is invalid.
 	INVALIDPARAMETERVALUE_INVALIDCONSOLEDISPLAYTYPES = "InvalidParameterValue.InvalidConsoleDisplayTypes"
 
@@ -331,9 +367,6 @@ const (
 
 	// The image ID format is invalid.
 	INVALIDPARAMETERVALUE_INVALIDIMAGEIDMALFORMED = "InvalidParameterValue.InvalidImageIdMalformed"
-
-	// The value of setting whether to use the default key pair for login is incorrect.
-	INVALIDPARAMETERVALUE_INVALIDINSTANCELOGINKEYPAIRPERMITLOGIN = "InvalidParameterValue.InvalidInstanceLoginKeyPairPermitLogin"
 
 	// Invalid parametric value: the IP address format is invalid.
 	INVALIDPARAMETERVALUE_INVALIDIPFORMAT = "InvalidParameterValue.InvalidIpFormat"
@@ -382,6 +415,9 @@ const (
 
 	// Cross-border image synchronization is not supported.
 	INVALIDPARAMETERVALUE_NOTSUPPORTCROSSBORDERSYNCBLUEPRINT = "InvalidParameterValue.NotSupportCrossBorderSyncBlueprint"
+
+	// 
+	INVALIDPARAMETERVALUE_NOTSUPPORTMODIFYINSTANCEBUNDLETYPE = "InvalidParameterValue.NotSupportModifyInstanceBundleType"
 
 	// Invalid parametric value: it is not within the valid range.
 	INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
@@ -455,8 +491,14 @@ const (
 	// Missing parameter.
 	MISSINGPARAMETER = "MissingParameter"
 
+	// 
+	MISSINGPARAMETER_BUNDLEMISSINGPARAMETERBLUEPRINTID = "MissingParameter.BundleMissingParameterBlueprintId"
+
 	// `Period` or `CurInstanceDeadline` is required. 
 	MISSINGPARAMETER_MISSINGPARAMETERPERIODCURINSTANCEDEADLINE = "MissingParameter.MissingParameterPeriodCurInstanceDeadline"
+
+	// 
+	MISSINGPARAMETER_ORDERFIELDREQUIRED = "MissingParameter.OrderFieldRequired"
 
 	// The image is being operated on. Try again later.
 	OPERATIONDENIED_BLUEPRINTOPERATIONINPROGRESS = "OperationDenied.BlueprintOperationInProgress"
@@ -524,6 +566,9 @@ const (
 	// The image ID does not exist.
 	RESOURCENOTFOUND_IMAGEIDNOTFOUND = "ResourceNotFound.ImageIdNotFound"
 
+	// 
+	RESOURCENOTFOUND_INSTANCEBLUEPRINTNOTFOUND = "ResourceNotFound.InstanceBlueprintNotFound"
+
 	// There are no data disks mounted to the instance.
 	RESOURCENOTFOUND_INSTANCEDATADISKNOTFOUND = "ResourceNotFound.InstanceDataDiskNotFound"
 
@@ -562,6 +607,9 @@ const (
 
 	// The package is not available.
 	RESOURCEUNAVAILABLE_BUNDLEUNAVAILABLE = "ResourceUnavailable.BundleUnavailable"
+
+	// 
+	RESOURCEUNAVAILABLE_INVALIDPURCHASEREQUESTSOURCE = "ResourceUnavailable.InvalidPurchaseRequestSource"
 
 	// Plan sold out.
 	RESOURCESSOLDOUT_BUNDLESOLDOUT = "ResourcesSoldOut.BundleSoldOut"
@@ -620,6 +668,9 @@ const (
 	// The image is in use, so this operation is not supported.
 	UNSUPPORTEDOPERATION_BLUEPRINTOCCUPIED = "UnsupportedOperation.BlueprintOccupied"
 
+	// 
+	UNSUPPORTEDOPERATION_BLUEPRINTTYPENOTSUPPORTOPERATION = "UnsupportedOperation.BlueprintTypeNotSupportOperation"
+
 	// The CCN instance is already associated, and reassociation is not supported.
 	UNSUPPORTEDOPERATION_CCNALREADYATTACHED = "UnsupportedOperation.CcnAlreadyAttached"
 
@@ -653,6 +704,9 @@ const (
 	// Image sharing is not supported.
 	UNSUPPORTEDOPERATION_IMAGEUNABLETOSHARE = "UnsupportedOperation.ImageUnableToShare"
 
+	// 
+	UNSUPPORTEDOPERATION_INSTANCEDISPLAYAREANOTSUPPORTOPERATION = "UnsupportedOperation.InstanceDisplayAreaNotSupportOperation"
+
 	// Unsupported operation: the instance has expired.
 	UNSUPPORTEDOPERATION_INSTANCEEXPIRED = "UnsupportedOperation.InstanceExpired"
 
@@ -683,8 +737,8 @@ const (
 	// The shared image does not support this operation.
 	UNSUPPORTEDOPERATION_NOTSUPPORTSHAREDBLUEPRINT = "UnsupportedOperation.NotSupportSharedBlueprint"
 
-	// This API is no longer available.
-	UNSUPPORTEDOPERATION_OPERATIONOFFLINE = "UnsupportedOperation.OperationOffline"
+	// 
+	UNSUPPORTEDOPERATION_OPERATIONNOTSUPPORTAUTOGENERATEPASSWORD = "UnsupportedOperation.OperationNotSupportAutoGeneratePassword"
 
 	// Terminating a resource in the resource center failed.
 	UNSUPPORTEDOPERATION_POSTDESTROYRESOURCEFAILED = "UnsupportedOperation.PostDestroyResourceFailed"
