@@ -71,262 +71,385 @@ type ApmAgentInfo struct {
 }
 
 type ApmAppConfig struct {
-	// Instance ID.
+	// <p>Instance ID</p>
 	InstanceKey *string `json:"InstanceKey,omitnil,omitempty" name:"InstanceKey"`
 
-	// Service name.
+	// <p>Service name</p>
 	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
 
-	// URL convergence switch.
+	// <p>URL convergence switch</p>
 	UrlConvergenceSwitch *int64 `json:"UrlConvergenceSwitch,omitnil,omitempty" name:"UrlConvergenceSwitch"`
 
-	// URL convergence threshold
+	// <p>URL convergence threshold</p>
 	UrlConvergenceThreshold *int64 `json:"UrlConvergenceThreshold,omitnil,omitempty" name:"UrlConvergenceThreshold"`
 
-	// URL convergence regular expression.
+	// <p>URL regular convergence</p>
 	UrlConvergence *string `json:"UrlConvergence,omitnil,omitempty" name:"UrlConvergence"`
 
-	// Exception filtering regular expression.
+	// <p>Exception filter regular</p>
 	ExceptionFilter *string `json:"ExceptionFilter,omitnil,omitempty" name:"ExceptionFilter"`
 
-	// Error code filtering.
+	// <p>Error code filtering</p>
 	ErrorCodeFilter *string `json:"ErrorCodeFilter,omitnil,omitempty" name:"ErrorCodeFilter"`
 
-	// Service component type.
+	// <p>Service component type</p>
 	Components *string `json:"Components,omitnil,omitempty" name:"Components"`
 
-	// URL exclusion regular.
+	// <p>URL exclusion regular</p>
 	UrlExclude *string `json:"UrlExclude,omitnil,omitempty" name:"UrlExclude"`
 
-	// Specifies the log source.
+	// <p>Log source</p>
 	LogSource *string `json:"LogSource,omitnil,omitempty" name:"LogSource"`
 
-	// Log region.
+	// <p>Log region</p>
 	LogRegion *string `json:"LogRegion,omitnil,omitempty" name:"LogRegion"`
 
-	// Whether logging is enabled. valid values: 0 (disabled), 1 (enabled).
+	// <p>Whether logging is enabled 0 Disabled 1 Enabled</p>
 	IsRelatedLog *int64 `json:"IsRelatedLog,omitnil,omitempty" name:"IsRelatedLog"`
 
-	// Log topic ID
+	// <p>Log topic ID</p>
 	LogTopicID *string `json:"LogTopicID,omitnil,omitempty" name:"LogTopicID"`
 
-	// API names to filter
+	// <p>Interface Names to Filter</p>
 	IgnoreOperationName *string `json:"IgnoreOperationName,omitnil,omitempty" name:"IgnoreOperationName"`
 
-	// CLS log set/ES cluster ID
+	// <p>CLS logset | ES cluster ID</p>
 	LogSet *string `json:"LogSet,omitnil,omitempty" name:"LogSet"`
 
-	// Number of traces reported by the probe per second.
+	// <p>Number of traces reported by the probe per second</p>
 	TraceRateLimit *int64 `json:"TraceRateLimit,omitnil,omitempty" name:"TraceRateLimit"`
 
-	// Whether thread profiling is enabled.
+	// <p>Whether thread profiling is enabled</p>
 	EnableSnapshot *bool `json:"EnableSnapshot,omitnil,omitempty" name:"EnableSnapshot"`
 
-	// Timeout threshold for thread profiling.
+	// <p>Timeout threshold for thread profiling</p>
 	SnapshotTimeout *int64 `json:"SnapshotTimeout,omitnil,omitempty" name:"SnapshotTimeout"`
 
-	// Whether agent is enabled.
+	// <p>Whether to enable agent</p>
 	AgentEnable *bool `json:"AgentEnable,omitnil,omitempty" name:"AgentEnable"`
 
-	// Component List
+	// <p>Component list</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	InstrumentList []*Instrument `json:"InstrumentList,omitnil,omitempty" name:"InstrumentList"`
 
-	// Whether link compression is enabled.
+	// <p>Whether to enable link compression</p>
 	TraceSquash *bool `json:"TraceSquash,omitnil,omitempty" name:"TraceSquash"`
 
-	// Whether application diagnosis is enabled.
+	// <p>Whether the application diagnosis switch is enabled</p>
 	EventEnable *bool `json:"EventEnable,omitnil,omitempty" name:"EventEnable"`
 
-	// Related configurations of the probe APIs.
+	// <p>probe API related configuration</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AgentOperationConfigView *AgentOperationConfigView `json:"AgentOperationConfigView,omitnil,omitempty" name:"AgentOperationConfigView"`
 
-	// Whether to enable application log configuration.
+	// <p>Whether the application log configuration is enabled</p>
 	EnableLogConfig *bool `json:"EnableLogConfig,omitnil,omitempty" name:"EnableLogConfig"`
 
-	// Application ID
+	// <p>Application ID</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ServiceID *string `json:"ServiceID,omitnil,omitempty" name:"ServiceID"`
 
-	// Whether to enable the dashboard configuration for applications. false: disabled (consistent with the business system configuration); true: enabled (application-level configuration).
+	// <p>Whether the dashboard configuration is enabled: false (disabled, consistent with the business system)/true (enabled, hierarchical configuration)</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	EnableDashboardConfig *bool `json:"EnableDashboardConfig,omitnil,omitempty" name:"EnableDashboardConfig"`
 
-	// Whether to associate with Dashboard. 0: disabled; 1: enabled.
+	// <p>Whether dashboard is associated: 0 Disabled 1 Enabled</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsRelatedDashboard *int64 `json:"IsRelatedDashboard,omitnil,omitempty" name:"IsRelatedDashboard"`
 
-	// dashboard ID
+	// <p>dashboard ID</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DashboardTopicID *string `json:"DashboardTopicID,omitnil,omitempty" name:"DashboardTopicID"`
 
-	// Whether to enable the application-level configuration.
+	// <p>Whether the application-level configuration is enabled</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	EnableSecurityConfig *bool `json:"EnableSecurityConfig,omitnil,omitempty" name:"EnableSecurityConfig"`
 
-	// Whether to enable detection of component vulnerability.
+	// <p>Whether the component vulnerability detection is enabled</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsInstrumentationVulnerabilityScan *int64 `json:"IsInstrumentationVulnerabilityScan,omitnil,omitempty" name:"IsInstrumentationVulnerabilityScan"`
 
-	// Whether to enable SQL injection analysis.
+	// <p>Whether SQL injection analysis is enabled</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsSqlInjectionAnalysis *int64 `json:"IsSqlInjectionAnalysis,omitnil,omitempty" name:"IsSqlInjectionAnalysis"`
 
-	// Whether to enable execution analysis of remote command.
+	// <p>Whether remote command execution analysis is enabled</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsRemoteCommandExecutionAnalysis *int64 `json:"IsRemoteCommandExecutionAnalysis,omitnil,omitempty" name:"IsRemoteCommandExecutionAnalysis"`
 
-	// Whether to enable detection analysis of Java webshell.
+	// <p>Whether Java Webshell detection and analysis is enabled</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsMemoryHijackingAnalysis *int64 `json:"IsMemoryHijackingAnalysis,omitnil,omitempty" name:"IsMemoryHijackingAnalysis"`
 
-	// CLS index type. (0 = full-text index; 1 = key-value index).
+	// <p>CLS index type (0=full-text index, 1=key-value index)</p>
 	LogIndexType *int64 `json:"LogIndexType,omitnil,omitempty" name:"LogIndexType"`
 
-	// Index key of traceId. It is valid when the CLS index type is key-value index.
+	// <p>Index key of traceId: This parameter is valid only when the CLS index type is key-value index.</p>
 	LogTraceIdKey *string `json:"LogTraceIdKey,omitnil,omitempty" name:"LogTraceIdKey"`
 
-	// Whether to enable the detection of deleting arbitrary files. (0 - disabled; 1: enabled.)
+	// <p>Whether to enable file deletion detection (0 - disabled, 1 - enabled)</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsDeleteAnyFileAnalysis *int64 `json:"IsDeleteAnyFileAnalysis,omitnil,omitempty" name:"IsDeleteAnyFileAnalysis"`
 
-	// Whether to enable the detection of reading arbitrary files. (0 - disabled; 1 - enabled.)
+	// <p>Whether to enable arbitrary file read detection (0 - disabled, 1 - enabled)</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsReadAnyFileAnalysis *int64 `json:"IsReadAnyFileAnalysis,omitnil,omitempty" name:"IsReadAnyFileAnalysis"`
 
-	// Whether to enable the detection of uploading arbitrary files. (0 - disabled; 1 - enabled.)
+	// <p>Whether to enable arbitrary file upload detection (0 - disabled, 1 - enabled)</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsUploadAnyFileAnalysis *int64 `json:"IsUploadAnyFileAnalysis,omitnil,omitempty" name:"IsUploadAnyFileAnalysis"`
 
-	// Whether to enable the detection of the inclusion of arbitrary files. (0: disabled, 1: enabled.)
+	// <p>Whether to enable detection of arbitrary files (0 - disabled, 1 - enabled)</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsIncludeAnyFileAnalysis *int64 `json:"IsIncludeAnyFileAnalysis,omitnil,omitempty" name:"IsIncludeAnyFileAnalysis"`
 
-	// Whether to enable traversal detection of the directory. (0 - disabled; 1 - enabled).
+	// <p>Whether path traversal detection is enabled (0-disabled, 1-enabled)</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsDirectoryTraversalAnalysis *int64 `json:"IsDirectoryTraversalAnalysis,omitnil,omitempty" name:"IsDirectoryTraversalAnalysis"`
 
-	// Whether to enable template engine injection detection. (0: disabled; 1: enabled.)
+	// <p>Whether to enable template engine injection detection (0-disable, 1-enable)</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsTemplateEngineInjectionAnalysis *int64 `json:"IsTemplateEngineInjectionAnalysis,omitnil,omitempty" name:"IsTemplateEngineInjectionAnalysis"`
 
-	// Whether to enable script engine injection detection. (0 - disabled; 1 - enabled.)
+	// <p>Whether script engine injection detection is enabled (0-disabled, 1-enabled)</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsScriptEngineInjectionAnalysis *int64 `json:"IsScriptEngineInjectionAnalysis,omitnil,omitempty" name:"IsScriptEngineInjectionAnalysis"`
 
-	// Whether to enable expression injection detection. (0 - disabled; 1 - enabled.)
+	// <p>Whether expression injection detection is enabled (0-disabled, 1-enabled)</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsExpressionInjectionAnalysis *int64 `json:"IsExpressionInjectionAnalysis,omitnil,omitempty" name:"IsExpressionInjectionAnalysis"`
 
-	// Whether to enable JNDI injection detection. (0 - disabled; 1 - enabled.)
+	// <p>Whether JNDI injection detection is enabled (0-disabled, 1-enabled)</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsJNDIInjectionAnalysis *int64 `json:"IsJNDIInjectionAnalysis,omitnil,omitempty" name:"IsJNDIInjectionAnalysis"`
 
-	// Whether to enable JNI injection detection. (0 - disabled, 1 - enabled).
+	// <p>Whether JNI injection detection is enabled (0 - disabled, 1 - enabled)</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsJNIInjectionAnalysis *int64 `json:"IsJNIInjectionAnalysis,omitnil,omitempty" name:"IsJNIInjectionAnalysis"`
 
-	// Whether to enable Webshell backdoor detection. (0 - disabled; 1 - enabled).
+	// <p>Whether to enable Webshell backdoor detection (0 - disabled, 1 - enabled)</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsWebshellBackdoorAnalysis *int64 `json:"IsWebshellBackdoorAnalysis,omitnil,omitempty" name:"IsWebshellBackdoorAnalysis"`
 
-	// Whether to enable deserialization detection. (0 - disabled; 1 - enabled).
+	// <p>Whether deserialization detection is enabled (0-disabled, 1-enabled)</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsDeserializationAnalysis *int64 `json:"IsDeserializationAnalysis,omitnil,omitempty" name:"IsDeserializationAnalysis"`
 
-	// API name automatic convergence switch (0 - disabled; 1 - enabled)
+	// <p>API name auto convergence switch (0-off, 1-on)</p>
 	UrlAutoConvergenceEnable *bool `json:"UrlAutoConvergenceEnable,omitnil,omitempty" name:"UrlAutoConvergenceEnable"`
 
-	// Convergence threshold for URL long segments.
+	// <p>URL long segment convergence threshold</p>
 	UrlLongSegmentThreshold *int64 `json:"UrlLongSegmentThreshold,omitnil,omitempty" name:"UrlLongSegmentThreshold"`
 
-	// Convergence threshold for URL numerical segments.
+	// <p>URL digit segment convergence threshold</p>
 	UrlNumberSegmentThreshold *int64 `json:"UrlNumberSegmentThreshold,omitnil,omitempty" name:"UrlNumberSegmentThreshold"`
 
-	// Specifies the memory threshold for probe fusing.
+	// <p>Fuse memory threshold of the probe</p>
 	DisableMemoryUsed *int64 `json:"DisableMemoryUsed,omitnil,omitempty" name:"DisableMemoryUsed"`
 
-	// Specifies the CPU threshold for probe fusing.
+	// <p>Probe fuse CPU threshold</p>
 	DisableCpuUsed *int64 `json:"DisableCpuUsed,omitnil,omitempty" name:"DisableCpuUsed"`
+
+	// <p>Whether SQL parameter access is enabled</p>
+	DbStatementParametersEnabled *bool `json:"DbStatementParametersEnabled,omitnil,omitempty" name:"DbStatementParametersEnabled"`
+
+	// <p>Slow SQL threshold</p>
+	SlowSQLThresholds []*ApmTag `json:"SlowSQLThresholds,omitnil,omitempty" name:"SlowSQLThresholds"`
+
+	// <p>Whether the masking rule is enabled</p>
+	EnableDesensitizationRule *int64 `json:"EnableDesensitizationRule,omitnil,omitempty" name:"EnableDesensitizationRule"`
+
+	// <p>Masking rule</p>
+	DesensitizationRule *string `json:"DesensitizationRule,omitnil,omitempty" name:"DesensitizationRule"`
+
+	// <p>Index key of spanId: This parameter is valid only when the CLS index type is key-value index.</p>
+	LogSpanIdKey *string `json:"LogSpanIdKey,omitnil,omitempty" name:"LogSpanIdKey"`
+
+	// <p>Automated performance analysis configuration</p>
+	AutoProfilingConfig *AutoProfilingConfig `json:"AutoProfilingConfig,omitnil,omitempty" name:"AutoProfilingConfig"`
+
+	// <p>Threshold configuration switch. true means use application level threshold; false means use business system level threshold.</p>
+	EnableThresholdConfig *bool `json:"EnableThresholdConfig,omitnil,omitempty" name:"EnableThresholdConfig"`
+
+	// <p>Error rate threshold (%) used to judge the application health status as "red".</p>
+	ErrRateThreshold *int64 `json:"ErrRateThreshold,omitnil,omitempty" name:"ErrRateThreshold"`
+
+	// <p>Alert threshold for response time (ms), used to judge the application health status as "yellow".</p>
+	ResponseDurationWarningThreshold *int64 `json:"ResponseDurationWarningThreshold,omitnil,omitempty" name:"ResponseDurationWarningThreshold"`
+
+	// <p>Whether to use the built-in fuse threshold of the probe by default</p>
+	UseDefaultFuseConfig *bool `json:"UseDefaultFuseConfig,omitnil,omitempty" name:"UseDefaultFuseConfig"`
 }
 
 type ApmApplicationConfigView struct {
-	// Business system id.
+	// <p>Business system ID</p>
 	InstanceKey *string `json:"InstanceKey,omitnil,omitempty" name:"InstanceKey"`
 
-	// Application name	.	
+	// <p>Application name</p>
 	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
 
-	// API filtering.
+	// <p>Interface Filtering</p>
 	OperationNameFilter *string `json:"OperationNameFilter,omitnil,omitempty" name:"OperationNameFilter"`
 
-	// Error type filtering.
+	// <p>Error type filtering</p>
 	ExceptionFilter *string `json:"ExceptionFilter,omitnil,omitempty" name:"ExceptionFilter"`
 
-	// HTTP status code filtering.
+	// <p>HTTP status code filtering</p>
 	ErrorCodeFilter *string `json:"ErrorCodeFilter,omitnil,omitempty" name:"ErrorCodeFilter"`
 
-	// Application diagnosis switch (deprecated).
+	// <p>Application diagnosis switch (abandoned)</p>
 	EventEnable *bool `json:"EventEnable,omitnil,omitempty" name:"EventEnable"`
 
-	// URL convergence switch. 0: off; 1: on.
+	// <p>URL convergence switch 0 Off 1 On</p>
 	UrlConvergenceSwitch *int64 `json:"UrlConvergenceSwitch,omitnil,omitempty" name:"UrlConvergenceSwitch"`
 
-	// URL convergence threshold.	
+	// <p>URL convergence threshold</p>
 	UrlConvergenceThreshold *int64 `json:"UrlConvergenceThreshold,omitnil,omitempty" name:"UrlConvergenceThreshold"`
 
-	// URL convergence rule in the form of a regular expression.	
+	// <p>URL regular convergence rules</p>
 	UrlConvergence *string `json:"UrlConvergence,omitnil,omitempty" name:"UrlConvergence"`
 
-	// URL exclusion rule in the form of a regular expression.
+	// <p>URL exclusion rule regex</p>
 	UrlExclude *string `json:"UrlExclude,omitnil,omitempty" name:"UrlExclude"`
 
-	// Log feature switch. 0: off; 1: on.
+	// <p>Whether logging is enabled 0 Disabled 1 Enabled</p>
 	IsRelatedLog *int64 `json:"IsRelatedLog,omitnil,omitempty" name:"IsRelatedLog"`
 
-	// Log source.	
+	// <p>Log source</p>
 	LogSource *string `json:"LogSource,omitnil,omitempty" name:"LogSource"`
 
-	// Log set. 
+	// <p>Logset</p>
 	LogSet *string `json:"LogSet,omitnil,omitempty" name:"LogSet"`
 
-	// Log topic.
+	// <p>Log topic</p>
 	LogTopicID *string `json:"LogTopicID,omitnil,omitempty" name:"LogTopicID"`
 
-	// Method stack snapshot switch: true to enable, false to disable.
+	// <p>Method stack snapshot switch. Enabled indicates true. false indicates disabled.</p>
 	SnapshotEnable *bool `json:"SnapshotEnable,omitnil,omitempty" name:"SnapshotEnable"`
 
-	// Slow call listening trigger threshold.
+	// <p>Slow call monitoring trigger threshold</p>
 	SnapshotTimeout *int64 `json:"SnapshotTimeout,omitnil,omitempty" name:"SnapshotTimeout"`
 
-	// Probe master switch.
+	// <p>Master switch for probes</p>
 	AgentEnable *bool `json:"AgentEnable,omitnil,omitempty" name:"AgentEnable"`
 
-	// Component list switch (deprecated).
+	// <p>Component list toggle (abandoned)</p>
 	InstrumentList []*Instrument `json:"InstrumentList,omitnil,omitempty" name:"InstrumentList"`
 
-	// Link compression switch (deprecated).
+	// <p>Link compression switch (abandoned)</p>
 	TraceSquash *bool `json:"TraceSquash,omitnil,omitempty" name:"TraceSquash"`
 
-	// Specifies the memory threshold for probe fusing.
+	// <p>Link filtering configuration</p>
+	AgentIgnoreOperation *string `json:"AgentIgnoreOperation,omitnil,omitempty" name:"AgentIgnoreOperation"`
+
+	// <p>Enable the application security switch</p>
+	EnableSecurityConfig *bool `json:"EnableSecurityConfig,omitnil,omitempty" name:"EnableSecurityConfig"`
+
+	// <p>Whether SQL injection detection is enabled</p>
+	IsSqlInjectionAnalysis *int64 `json:"IsSqlInjectionAnalysis,omitnil,omitempty" name:"IsSqlInjectionAnalysis"`
+
+	// <p>Whether component vulnerability detection is enabled</p>
+	IsInstrumentationVulnerabilityScan *int64 `json:"IsInstrumentationVulnerabilityScan,omitnil,omitempty" name:"IsInstrumentationVulnerabilityScan"`
+
+	// <p>Whether remote command execution detection is enabled</p>
+	IsRemoteCommandExecutionAnalysis *int64 `json:"IsRemoteCommandExecutionAnalysis,omitnil,omitempty" name:"IsRemoteCommandExecutionAnalysis"`
+
+	// <p>Whether memory leakage detection is enabled</p>
+	IsMemoryHijackingAnalysis *int64 `json:"IsMemoryHijackingAnalysis,omitnil,omitempty" name:"IsMemoryHijackingAnalysis"`
+
+	// <p>Whether to enable detection of any file deletion</p>
+	IsDeleteAnyFileAnalysis *int64 `json:"IsDeleteAnyFileAnalysis,omitnil,omitempty" name:"IsDeleteAnyFileAnalysis"`
+
+	// <p>Whether to enable arbitrary file read detection</p>
+	IsReadAnyFileAnalysis *int64 `json:"IsReadAnyFileAnalysis,omitnil,omitempty" name:"IsReadAnyFileAnalysis"`
+
+	// <p>Whether to enable arbitrary file upload detection</p>
+	IsUploadAnyFileAnalysis *int64 `json:"IsUploadAnyFileAnalysis,omitnil,omitempty" name:"IsUploadAnyFileAnalysis"`
+
+	// <p>Whether to enable detection of arbitrary files</p>
+	IsIncludeAnyFileAnalysis *int64 `json:"IsIncludeAnyFileAnalysis,omitnil,omitempty" name:"IsIncludeAnyFileAnalysis"`
+
+	// <p>Whether path traversal detection is enabled</p>
+	IsDirectoryTraversalAnalysis *int64 `json:"IsDirectoryTraversalAnalysis,omitnil,omitempty" name:"IsDirectoryTraversalAnalysis"`
+
+	// <p>Whether to enable template engine injection detection</p>
+	IsTemplateEngineInjectionAnalysis *int64 `json:"IsTemplateEngineInjectionAnalysis,omitnil,omitempty" name:"IsTemplateEngineInjectionAnalysis"`
+
+	// <p>Whether script engine injection detection is enabled</p>
+	IsScriptEngineInjectionAnalysis *int64 `json:"IsScriptEngineInjectionAnalysis,omitnil,omitempty" name:"IsScriptEngineInjectionAnalysis"`
+
+	// <p>Whether expression injection detection is enabled</p>
+	IsExpressionInjectionAnalysis *int64 `json:"IsExpressionInjectionAnalysis,omitnil,omitempty" name:"IsExpressionInjectionAnalysis"`
+
+	// <p>Whether JNDI injection detection is enabled</p>
+	IsJndiInjectionAnalysis *int64 `json:"IsJndiInjectionAnalysis,omitnil,omitempty" name:"IsJndiInjectionAnalysis"`
+
+	// <p>Whether JNI injection detection is enabled</p>
+	IsJniInjectionAnalysis *int64 `json:"IsJniInjectionAnalysis,omitnil,omitempty" name:"IsJniInjectionAnalysis"`
+
+	// <p>Whether Webshell backdoor detection is enabled</p>
+	IsWebshellBackdoorAnalysis *int64 `json:"IsWebshellBackdoorAnalysis,omitnil,omitempty" name:"IsWebshellBackdoorAnalysis"`
+
+	// <p>Whether deserialization detection is enabled</p>
+	IsDeserializationAnalysis *int64 `json:"IsDeserializationAnalysis,omitnil,omitempty" name:"IsDeserializationAnalysis"`
+
+	// <p>Whether the console switch is enabled</p>
+	EnableDashboardConfig *bool `json:"EnableDashboardConfig,omitnil,omitempty" name:"EnableDashboardConfig"`
+
+	// <p>Whether to associate with Dashboard</p>
+	IsRelatedDashboard *int64 `json:"IsRelatedDashboard,omitnil,omitempty" name:"IsRelatedDashboard"`
+
+	// <p>Dashboard topic</p>
+	DashboardTopicID *string `json:"DashboardTopicID,omitnil,omitempty" name:"DashboardTopicID"`
+
+	// <p>Fuse memory threshold of the probe</p>
 	DisableMemoryUsed *int64 `json:"DisableMemoryUsed,omitnil,omitempty" name:"DisableMemoryUsed"`
 
-	// Specifies the CPU threshold for probe fusing.
+	// <p>Probe fuse CPU threshold</p>
 	DisableCpuUsed *int64 `json:"DisableCpuUsed,omitnil,omitempty" name:"DisableCpuUsed"`
+
+	// <p>Whether SQL parameter access is enabled</p>
+	DbStatementParametersEnabled *bool `json:"DbStatementParametersEnabled,omitnil,omitempty" name:"DbStatementParametersEnabled"`
+
+	// <p>Slow SQL threshold</p>
+	SlowSQLThresholds []*ApmTag `json:"SlowSQLThresholds,omitnil,omitempty" name:"SlowSQLThresholds"`
+
+	// <p>Whether the masking rule is enabled</p>
+	EnableDesensitizationRule *int64 `json:"EnableDesensitizationRule,omitnil,omitempty" name:"EnableDesensitizationRule"`
+
+	// <p>Masking rule</p>
+	DesensitizationRule *string `json:"DesensitizationRule,omitnil,omitempty" name:"DesensitizationRule"`
+
+	// <p>Automated performance analysis task configuration</p>
+	AutoProfilingConfig *AutoProfilingConfig `json:"AutoProfilingConfig,omitnil,omitempty" name:"AutoProfilingConfig"`
+
+	// <p>Threshold configuration switch</p>
+	EnableThresholdConfig *bool `json:"EnableThresholdConfig,omitnil,omitempty" name:"EnableThresholdConfig"`
+
+	// <p>Error rate threshold</p><p>Unit: %</p>
+	ErrRateThreshold *int64 `json:"ErrRateThreshold,omitnil,omitempty" name:"ErrRateThreshold"`
+
+	// <p>Alert threshold of response time</p><p>Unit: ms</p>
+	ResponseDurationWarningThreshold *int64 `json:"ResponseDurationWarningThreshold,omitnil,omitempty" name:"ResponseDurationWarningThreshold"`
+
+	// <p>Whether to use the default fuse threshold of the probe</p>
+	UseDefaultFuseConfig *bool `json:"UseDefaultFuseConfig,omitnil,omitempty" name:"UseDefaultFuseConfig"`
 }
 
 type ApmAssociation struct {
-	// Associated product instance ID.
+	// <p>Instance ID of the associated product</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PeerId *string `json:"PeerId,omitnil,omitempty" name:"PeerId"`
 
-	// Association status: 1 (enabled), 2 (disabled), 3 (invalid).
+	// <p>Association status: 1 (enabled), 2 (not enabled), 3 (invalid)</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Specifies the CKafka message topic.
+	// <p>CKafka message topic</p>
 	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
+
+	// <p>Ckafka consumption topic</p><p>Used for Kafka metric delivery</p>
+	MetricTopic *string `json:"MetricTopic,omitnil,omitempty" name:"MetricTopic"`
 }
 
 type ApmField struct {
@@ -531,6 +654,9 @@ type ApmInstanceDetail struct {
 
 	// Convergence threshold for URL numerical segments.
 	UrlNumberSegmentThreshold *int64 `json:"UrlNumberSegmentThreshold,omitnil,omitempty" name:"UrlNumberSegmentThreshold"`
+
+	// Index key of spanId: This parameter is valid only when the CLS index type is key-value index
+	LogSpanIdKey *string `json:"LogSpanIdKey,omitnil,omitempty" name:"LogSpanIdKey"`
 }
 
 type ApmMetricRecord struct {
@@ -621,6 +747,64 @@ type ApmTag struct {
 
 	// Dimension value (tag value).
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type ApmVulnerabilityServiceDetail struct {
+	// Application instance
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ServiceInstance *string `json:"ServiceInstance,omitnil,omitempty" name:"ServiceInstance"`
+
+	// Path of the jar package with the vulnerability
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+
+	// Last occurrence time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LastOccurTime *int64 `json:"LastOccurTime,omitnil,omitempty" name:"LastOccurTime"`
+}
+
+type AutoProfilingConfig struct {
+	// Auto CPU profiling task switch
+	CpuProfilingEnable *bool `json:"CpuProfilingEnable,omitnil,omitempty" name:"CpuProfilingEnable"`
+
+	// Auto memory profiling task switch
+	MemoryProfilingEnable *bool `json:"MemoryProfilingEnable,omitnil,omitempty" name:"MemoryProfilingEnable"`
+
+	// Auto CPU profiling task threshold
+	CpuProfilingThreshold *int64 `json:"CpuProfilingThreshold,omitnil,omitempty" name:"CpuProfilingThreshold"`
+
+	// Automated memory profiling task threshold
+	MemoryProfilingThreshold *int64 `json:"MemoryProfilingThreshold,omitnil,omitempty" name:"MemoryProfilingThreshold"`
+
+	// CPU auto profiling task duration
+	CpuProfilingDuration *int64 `json:"CpuProfilingDuration,omitnil,omitempty" name:"CpuProfilingDuration"`
+
+	// Memory auto profiling task duration
+	MemoryProfilingDuration *int64 `json:"MemoryProfilingDuration,omitnil,omitempty" name:"MemoryProfilingDuration"`
+}
+
+type CVMMeta struct {
+	// Region.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Instance ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
+}
+
+type ComponentTopologyView struct {
+	// Number of nodes at the service level.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Service *int64 `json:"Service,omitnil,omitempty" name:"Service"`
+
+	// Node count of the database.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Database *int64 `json:"Database,omitnil,omitempty" name:"Database"`
+
+	// Node count of the message queue.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MQ *int64 `json:"MQ,omitnil,omitempty" name:"MQ"`
 }
 
 // Predefined struct for user
@@ -784,6 +968,9 @@ func (r *CreateApmPrometheusRuleRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateApmPrometheusRuleResponseParams struct {
+	// ID of the metric match rule
+	RuleId *int64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -1156,6 +1343,79 @@ func (r *DescribeApmAgentResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeApmAllVulCountRequestParams struct {
+	// unix second-level timestamp
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// unix second-level timestamp
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
+type DescribeApmAllVulCountRequest struct {
+	*tchttp.BaseRequest
+	
+	// unix second-level timestamp
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// unix second-level timestamp
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
+func (r *DescribeApmAllVulCountRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApmAllVulCountRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeApmAllVulCountRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeApmAllVulCountResponseParams struct {
+	// Vulnerability metrics as well as number of business systems	
+	VulnerabilityList []*ApmMetricRecord `json:"VulnerabilityList,omitnil,omitempty" name:"VulnerabilityList"`
+
+	// Total number of vulnerabilities
+	VulnerabilityCount *int64 `json:"VulnerabilityCount,omitnil,omitempty" name:"VulnerabilityCount"`
+
+	// Number of critical vulnerabilities
+	ImportantVulnerabilityCount *int64 `json:"ImportantVulnerabilityCount,omitnil,omitempty" name:"ImportantVulnerabilityCount"`
+
+	// High-risk vulnerability count
+	CriticalVulnerabilityCount *int64 `json:"CriticalVulnerabilityCount,omitnil,omitempty" name:"CriticalVulnerabilityCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeApmAllVulCountResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeApmAllVulCountResponseParams `json:"Response"`
+}
+
+func (r *DescribeApmAllVulCountResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApmAllVulCountResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeApmApplicationConfigRequestParams struct {
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -1434,6 +1694,122 @@ func (r *DescribeApmPrometheusRuleResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeApmSQLInjectionDetailRequestParams struct {
+	// Business system ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Limit
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// unix second-level timestamp
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// unix second-level timestamp
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Order.
+	OrderBy *OrderBy `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Query filter criteria.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Aggregation dimension
+	GroupBy []*string `json:"GroupBy,omitnil,omitempty" name:"GroupBy"`
+
+	// Metric list
+	Metrics []*QueryMetricItem `json:"Metrics,omitnil,omitempty" name:"Metrics"`
+}
+
+type DescribeApmSQLInjectionDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Business system ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Limit
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// unix second-level timestamp
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// unix second-level timestamp
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Order.
+	OrderBy *OrderBy `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Query filter criteria.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Aggregation dimension
+	GroupBy []*string `json:"GroupBy,omitnil,omitempty" name:"GroupBy"`
+
+	// Metric list
+	Metrics []*QueryMetricItem `json:"Metrics,omitnil,omitempty" name:"Metrics"`
+}
+
+func (r *DescribeApmSQLInjectionDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApmSQLInjectionDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "OrderBy")
+	delete(f, "Filters")
+	delete(f, "GroupBy")
+	delete(f, "Metrics")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeApmSQLInjectionDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeApmSQLInjectionDetailResponseParams struct {
+	// SQL dimension information
+	Tags []*ApmTag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Link information
+	Records []*ApmMetricRecord `json:"Records,omitnil,omitempty" name:"Records"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeApmSQLInjectionDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeApmSQLInjectionDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeApmSQLInjectionDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApmSQLInjectionDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeApmSampleConfigRequestParams struct {
 	// Business system ID
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -1654,6 +2030,181 @@ func (r *DescribeApmServiceMetricResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeApmVulnerabilityCountRequestParams struct {
+	// APM business system ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// app name
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
+
+	// unix second-level timestamp
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// unix second-level timestamp
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Data type of queried data. Attack detection is "attack_detect".
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
+type DescribeApmVulnerabilityCountRequest struct {
+	*tchttp.BaseRequest
+	
+	// APM business system ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// app name
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
+
+	// unix second-level timestamp
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// unix second-level timestamp
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Data type of queried data. Attack detection is "attack_detect".
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
+func (r *DescribeApmVulnerabilityCountRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApmVulnerabilityCountRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "ServiceName")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Type")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeApmVulnerabilityCountRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeApmVulnerabilityCountResponseParams struct {
+	// Vulnerability metrics as well as number of business systems
+	VulnerabilityList []*ApmMetricRecord `json:"VulnerabilityList,omitnil,omitempty" name:"VulnerabilityList"`
+
+	// Total number of vulnerabilities
+	VulnerabilityCount *int64 `json:"VulnerabilityCount,omitnil,omitempty" name:"VulnerabilityCount"`
+
+	// Number of critical vulnerabilities
+	ImportantVulnerabilityCount *int64 `json:"ImportantVulnerabilityCount,omitnil,omitempty" name:"ImportantVulnerabilityCount"`
+
+	// High-risk vulnerability count
+	CriticalVulnerabilityCount *int64 `json:"CriticalVulnerabilityCount,omitnil,omitempty" name:"CriticalVulnerabilityCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeApmVulnerabilityCountResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeApmVulnerabilityCountResponseParams `json:"Response"`
+}
+
+func (r *DescribeApmVulnerabilityCountResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApmVulnerabilityCountResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeApmVulnerabilityDetailRequestParams struct {
+	// unix second-level timestamp
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// unix second-level timestamp
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// APM business system ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Conditional filtering, required service.name, instrumentation.name, version, vul.id
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeApmVulnerabilityDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// unix second-level timestamp
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// unix second-level timestamp
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// APM business system ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Conditional filtering, required service.name, instrumentation.name, version, vul.id
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeApmVulnerabilityDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApmVulnerabilityDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "InstanceId")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeApmVulnerabilityDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeApmVulnerabilityDetailResponseParams struct {
+	// Vulnerability details
+	Tags []*ApmTag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// List of business systems related to vulnerabilities
+	ServiceInstanceList []*ApmVulnerabilityServiceDetail `json:"ServiceInstanceList,omitnil,omitempty" name:"ServiceInstanceList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeApmVulnerabilityDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeApmVulnerabilityDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeApmVulnerabilityDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApmVulnerabilityDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeGeneralApmApplicationConfigRequestParams struct {
 	// Application name.
 	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
@@ -1857,78 +2408,56 @@ func (r *DescribeGeneralMetricDataResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGeneralOTSpanListRequestParams struct {
-	// Business system id.
+	// <p>Business system ID</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Span query start timestamp (unit: seconds).
+	// <p>Span query start timestamp (unit: seconds)</p>
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Span query end timestamp (unit: seconds).
+	// <p>Span query end timestamp (unit: s)</p>
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Universal filter parameters.
+	// <p>Universal filter parameters supported filter key such as service.name</p>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Sort
-	// .
-	// The currently supported keys are:.
-	// 
-	// -StartTime (start time).
-	// -EndTime (end time).
-	// -Duration (response time).
-	// 
-	// The currently supported values are:.
-	// 
-	// - desc: sort in descending order.
-	// -Asc - ascending order.
+	// <p>Sort<br>Keys now supported:</p><ul><li>startTime</li><li>endTime</li><li>duration</li></ul><p>Values now supported:</p><ul><li>desc (sort in descending order)</li><li>asc (ascending order)</li></ul>
 	OrderBy *OrderBy `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// The service name of the business itself. console users should fill in taw.
+	// <p>Business service name. Console users please enter taw</p>
 	BusinessName *string `json:"BusinessName,omitnil,omitempty" name:"BusinessName"`
 
-	// Number of items per page, defaults to 10,000, valid value range is 0 – 10,000.
+	// <p>Count of single-page projects. Defaults to 10000. Valid value range is 0–10000.</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Pagination.
+	// <p>Page</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeGeneralOTSpanListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Business system id.
+	// <p>Business system ID</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Span query start timestamp (unit: seconds).
+	// <p>Span query start timestamp (unit: seconds)</p>
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Span query end timestamp (unit: seconds).
+	// <p>Span query end timestamp (unit: s)</p>
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Universal filter parameters.
+	// <p>Universal filter parameters supported filter key such as service.name</p>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Sort
-	// .
-	// The currently supported keys are:.
-	// 
-	// -StartTime (start time).
-	// -EndTime (end time).
-	// -Duration (response time).
-	// 
-	// The currently supported values are:.
-	// 
-	// - desc: sort in descending order.
-	// -Asc - ascending order.
+	// <p>Sort<br>Keys now supported:</p><ul><li>startTime</li><li>endTime</li><li>duration</li></ul><p>Values now supported:</p><ul><li>desc (sort in descending order)</li><li>asc (ascending order)</li></ul>
 	OrderBy *OrderBy `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// The service name of the business itself. console users should fill in taw.
+	// <p>Business service name. Console users please enter taw</p>
 	BusinessName *string `json:"BusinessName,omitnil,omitempty" name:"BusinessName"`
 
-	// Number of items per page, defaults to 10,000, valid value range is 0 – 10,000.
+	// <p>Count of single-page projects. Defaults to 10000. Valid value range is 0–10000.</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Pagination.
+	// <p>Page</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
@@ -1960,13 +2489,10 @@ func (r *DescribeGeneralOTSpanListRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGeneralOTSpanListResponseParams struct {
-	// Total number.
+	// <p>Total number</p>
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// The Spans field contains the entire content of the link data. since the data is compressed, perform the following three steps to switch back to the original text.
-	// Decode the text in the Spans field with Base64 to get the compressed byte[].
-	// Use gzip to decompress the compressed byte array and get the byte array before compression.
-	// Uses UTF-8 character set to convert byte[] before compression to text.
+	// <p>The Spans field contains all content of the link data. Since the data is compressed, perform the following three steps to restore the original text.</p><ol><li>Decode the text in the Spans field with Base64 to get the compressed byte[].</li><li>Decompress the compressed byte[] with gzip to get the byte array before compression.</li><li>Convert the byte array before compression to text using the UTF-8 character set.</li></ol>
 	Spans *string `json:"Spans,omitnil,omitempty" name:"Spans"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1991,78 +2517,56 @@ func (r *DescribeGeneralOTSpanListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGeneralSpanListRequestParams struct {
-	// Business system id.
+	// <p>Business system ID</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Span query start timestamp (unit: seconds).
+	// <p>Span query start timestamp (unit: seconds)</p>
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Span query end timestamp (unit: seconds).
+	// <p>Span query end timestamp (unit: s)</p>
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Universal filter parameters.
+	// <p>Universal filter parameters supported filter key such as service.name</p>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Sort
-	// .
-	// The currently supported keys are:.
-	// 
-	// -StartTime (start time).
-	// -EndTime (end time).
-	// -Duration (response time).
-	// 
-	// The currently supported values are:.
-	// 
-	// - desc: sort in descending order.
-	// -Asc - ascending order.
+	// <p>Sort<br>Keys now supported:</p><ul><li>startTime</li><li>endTime</li><li>duration</li></ul><p>Values now supported:</p><ul><li>desc (sort in descending order)</li><li>asc (ascending order)</li></ul>
 	OrderBy *OrderBy `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// The service name of the business itself. console users should fill in taw.
+	// <p>Business service name. Console users please enter taw</p>
 	BusinessName *string `json:"BusinessName,omitnil,omitempty" name:"BusinessName"`
 
-	// Number of items per page, defaults to 10,000, valid values are 0 to 10,000.
+	// <p>Count of single-page projects. Defaults to 1000. Valid value range is 1–1000.</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Pagination.
+	// <p>Page</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeGeneralSpanListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Business system id.
+	// <p>Business system ID</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Span query start timestamp (unit: seconds).
+	// <p>Span query start timestamp (unit: seconds)</p>
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Span query end timestamp (unit: seconds).
+	// <p>Span query end timestamp (unit: s)</p>
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Universal filter parameters.
+	// <p>Universal filter parameters supported filter key such as service.name</p>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Sort
-	// .
-	// The currently supported keys are:.
-	// 
-	// -StartTime (start time).
-	// -EndTime (end time).
-	// -Duration (response time).
-	// 
-	// The currently supported values are:.
-	// 
-	// - desc: sort in descending order.
-	// -Asc - ascending order.
+	// <p>Sort<br>Keys now supported:</p><ul><li>startTime</li><li>endTime</li><li>duration</li></ul><p>Values now supported:</p><ul><li>desc (sort in descending order)</li><li>asc (ascending order)</li></ul>
 	OrderBy *OrderBy `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// The service name of the business itself. console users should fill in taw.
+	// <p>Business service name. Console users please enter taw</p>
 	BusinessName *string `json:"BusinessName,omitnil,omitempty" name:"BusinessName"`
 
-	// Number of items per page, defaults to 10,000, valid values are 0 to 10,000.
+	// <p>Count of single-page projects. Defaults to 1000. Valid value range is 1–1000.</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Pagination.
+	// <p>Page</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
@@ -2094,10 +2598,10 @@ func (r *DescribeGeneralSpanListRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGeneralSpanListResponseParams struct {
-	// Total number.
+	// <p>Total number</p>
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Span pagination list.
+	// <p>Span pagination list</p>
 	Spans []*Span `json:"Spans,omitnil,omitempty" name:"Spans"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2290,6 +2794,79 @@ func (r *DescribeMetricRecordsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeMetricRecordsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeOPRAllVulCountRequestParams struct {
+	// unix second-level timestamp
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// unix second-level timestamp
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
+type DescribeOPRAllVulCountRequest struct {
+	*tchttp.BaseRequest
+	
+	// unix second-level timestamp
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// unix second-level timestamp
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
+func (r *DescribeOPRAllVulCountRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeOPRAllVulCountRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeOPRAllVulCountRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeOPRAllVulCountResponseParams struct {
+	// Vulnerability metrics as well as number of business systems	
+	VulnerabilityList []*ApmMetricRecord `json:"VulnerabilityList,omitnil,omitempty" name:"VulnerabilityList"`
+
+	// Total number of vulnerabilities
+	VulnerabilityCount *int64 `json:"VulnerabilityCount,omitnil,omitempty" name:"VulnerabilityCount"`
+
+	// Number of critical vulnerabilities
+	ImportantVulnerabilityCount *int64 `json:"ImportantVulnerabilityCount,omitnil,omitempty" name:"ImportantVulnerabilityCount"`
+
+	// High-risk vulnerability count
+	CriticalVulnerabilityCount *int64 `json:"CriticalVulnerabilityCount,omitnil,omitempty" name:"CriticalVulnerabilityCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeOPRAllVulCountResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeOPRAllVulCountResponseParams `json:"Response"`
+}
+
+func (r *DescribeOPRAllVulCountResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeOPRAllVulCountResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2513,14 +3090,195 @@ func (r *DescribeTagValuesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTopologyNewRequestParams struct {
+	// Business system ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Querying start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Query end time
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Application name
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
+
+	// Upstream level.
+	UpLevel *int64 `json:"UpLevel,omitnil,omitempty" name:"UpLevel"`
+
+	// Application instance information.
+	ServiceInstance *string `json:"ServiceInstance,omitnil,omitempty" name:"ServiceInstance"`
+
+	// downstream hierarchy
+	DownLevel *int64 `json:"DownLevel,omitnil,omitempty" name:"DownLevel"`
+
+	// perspective
+	View *string `json:"View,omitnil,omitempty" name:"View"`
+
+	// Filter.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Represents topic (for MQ topology)
+	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
+
+	// View filtering list.
+	Selectors *Selectors `json:"Selectors,omitnil,omitempty" name:"Selectors"`
+
+	// View ID
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// TraceID
+	TraceID *string `json:"TraceID,omitnil,omitempty" name:"TraceID"`
+
+	// Specifies the top 5 slow response nodes query.
+	IsSlowTopFive *bool `json:"IsSlowTopFive,omitnil,omitempty" name:"IsSlowTopFive"`
+
+	// Whether the resource layer information is obtained.
+	GetResource *bool `json:"GetResource,omitnil,omitempty" name:"GetResource"`
+
+	// Filters by application tag.
+	Tags []*ApmTag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Node type not displayed.
+	Hidden *Selectors `json:"Hidden,omitnil,omitempty" name:"Hidden"`
+}
+
+type DescribeTopologyNewRequest struct {
+	*tchttp.BaseRequest
+	
+	// Business system ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Querying start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Query end time
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Application name
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
+
+	// Upstream level.
+	UpLevel *int64 `json:"UpLevel,omitnil,omitempty" name:"UpLevel"`
+
+	// Application instance information.
+	ServiceInstance *string `json:"ServiceInstance,omitnil,omitempty" name:"ServiceInstance"`
+
+	// downstream hierarchy
+	DownLevel *int64 `json:"DownLevel,omitnil,omitempty" name:"DownLevel"`
+
+	// perspective
+	View *string `json:"View,omitnil,omitempty" name:"View"`
+
+	// Filter.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Represents topic (for MQ topology)
+	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
+
+	// View filtering list.
+	Selectors *Selectors `json:"Selectors,omitnil,omitempty" name:"Selectors"`
+
+	// View ID
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// TraceID
+	TraceID *string `json:"TraceID,omitnil,omitempty" name:"TraceID"`
+
+	// Specifies the top 5 slow response nodes query.
+	IsSlowTopFive *bool `json:"IsSlowTopFive,omitnil,omitempty" name:"IsSlowTopFive"`
+
+	// Whether the resource layer information is obtained.
+	GetResource *bool `json:"GetResource,omitnil,omitempty" name:"GetResource"`
+
+	// Filters by application tag.
+	Tags []*ApmTag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Node type not displayed.
+	Hidden *Selectors `json:"Hidden,omitnil,omitempty" name:"Hidden"`
+}
+
+func (r *DescribeTopologyNewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTopologyNewRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "ServiceName")
+	delete(f, "UpLevel")
+	delete(f, "ServiceInstance")
+	delete(f, "DownLevel")
+	delete(f, "View")
+	delete(f, "Filters")
+	delete(f, "Topic")
+	delete(f, "Selectors")
+	delete(f, "Id")
+	delete(f, "TraceID")
+	delete(f, "IsSlowTopFive")
+	delete(f, "GetResource")
+	delete(f, "Tags")
+	delete(f, "Hidden")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTopologyNewRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTopologyNewResponseParams struct {
+	// Node collection.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Nodes []*TopologyNode `json:"Nodes,omitnil,omitempty" name:"Nodes"`
+
+	// Edge set.
+	Edges []*TopologyEdgeNew `json:"Edges,omitnil,omitempty" name:"Edges"`
+
+	// Whether the topology map is modified
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TopologyModifyFlag *int64 `json:"TopologyModifyFlag,omitnil,omitempty" name:"TopologyModifyFlag"`
+
+	// Number of nodes.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Selectors *SelectorView `json:"Selectors,omitnil,omitempty" name:"Selectors"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeTopologyNewResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTopologyNewResponseParams `json:"Response"`
+}
+
+func (r *DescribeTopologyNewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTopologyNewResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Filter struct {
-	// Filtering method (=, !=, in).
+	// <p>Filter method (=, !=, in)</p>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Filter dimension name.
+	// <p>Filter dimension name</p><p>For details, see the actual interface field description</p>
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-	// Filter value. uses commas to separate multiple values in in filtering method.
+	// <p>Filter value. Use comma-separated multiple values for in filtering method.</p>
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
@@ -2562,303 +3320,363 @@ type Line struct {
 
 // Predefined struct for user
 type ModifyApmApplicationConfigRequestParams struct {
-	// Business system ID.
+	// <p>Business system ID</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Application name
+	// <p>Application name</p>
 	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
 
-	// URL convergence switch. 0: Off; 1: On
+	// <p>URL convergence switch, 0 Off | 1 On</p>
 	UrlConvergenceSwitch *int64 `json:"UrlConvergenceSwitch,omitnil,omitempty" name:"UrlConvergenceSwitch"`
 
-	// URL convergence threshold
+	// <p>URL convergence threshold</p>
 	UrlConvergenceThreshold *int64 `json:"UrlConvergenceThreshold,omitnil,omitempty" name:"UrlConvergenceThreshold"`
 
-	// Regex rules for exception filtering, separated by commas
+	// <p>Exception filtering regex rules, comma-separated</p>
 	ExceptionFilter *string `json:"ExceptionFilter,omitnil,omitempty" name:"ExceptionFilter"`
 
-	// Regex rules for URL convergence, separated by commas
+	// <p>URL convergence regex rules, comma-separated</p>
 	UrlConvergence *string `json:"UrlConvergence,omitnil,omitempty" name:"UrlConvergence"`
 
-	// Error code filtering, separated by commas
+	// <p>Error code filtering, comma-separated</p>
 	ErrorCodeFilter *string `json:"ErrorCodeFilter,omitnil,omitempty" name:"ErrorCodeFilter"`
 
-	// Regex rules for URL exclusion, separated by commas
+	// <p>URL exclusion regex rule, comma-separated</p>
 	UrlExclude *string `json:"UrlExclude,omitnil,omitempty" name:"UrlExclude"`
 
-	// Log switch. 0: Off; 1: On
+	// <p>Log switch 0 Disabled 1 Enabled</p>
 	IsRelatedLog *int64 `json:"IsRelatedLog,omitnil,omitempty" name:"IsRelatedLog"`
 
-	// Log region.
+	// <p>Log region</p>
 	LogRegion *string `json:"LogRegion,omitnil,omitempty" name:"LogRegion"`
 
-	// Log topic ID
+	// <p>Log topic ID</p>
 	LogTopicID *string `json:"LogTopicID,omitnil,omitempty" name:"LogTopicID"`
 
-	// CLS log set/ES cluster ID
+	// <p>CLS logset | ES cluster ID</p>
 	LogSet *string `json:"LogSet,omitnil,omitempty" name:"LogSet"`
 
-	// Log source: CLS or ES
+	// <p>Log source CLS | ES</p>
 	LogSource *string `json:"LogSource,omitnil,omitempty" name:"LogSource"`
 
-	// APIs to be filtered
+	// <p>Interfaces to Filter</p>
 	IgnoreOperationName *string `json:"IgnoreOperationName,omitnil,omitempty" name:"IgnoreOperationName"`
 
-	// Whether thread profiling is enabled.
+	// <p>Whether thread profiling is enabled</p>
 	EnableSnapshot *bool `json:"EnableSnapshot,omitnil,omitempty" name:"EnableSnapshot"`
 
-	// Timeout threshold for thread profiling.
+	// <p>Timeout threshold for thread profiling</p>
 	SnapshotTimeout *int64 `json:"SnapshotTimeout,omitnil,omitempty" name:"SnapshotTimeout"`
 
-	// Whether agent is enabled.
+	// <p>Whether to enable agent</p>
 	AgentEnable *bool `json:"AgentEnable,omitnil,omitempty" name:"AgentEnable"`
 
-	// Whether link compression is enabled.
+	// <p>Whether to enable link compression</p>
 	TraceSquash *bool `json:"TraceSquash,omitnil,omitempty" name:"TraceSquash"`
 
-	// Switch for enabling application diagnosis.
+	// <p>Whether the switch for enabling application diagnosis is enabled</p>
 	EventEnable *bool `json:"EventEnable,omitnil,omitempty" name:"EventEnable"`
 
-	// Component List
+	// <p>Component list</p>
 	InstrumentList []*Instrument `json:"InstrumentList,omitnil,omitempty" name:"InstrumentList"`
 
-	// Related configurations of the probe APIs.
+	// <p>probe API related configuration</p>
 	AgentOperationConfigView *AgentOperationConfigView `json:"AgentOperationConfigView,omitnil,omitempty" name:"AgentOperationConfigView"`
 
-	// Whether to enable application log configuration.
+	// <p>Whether the application log configuration is enabled</p>
 	EnableLogConfig *bool `json:"EnableLogConfig,omitnil,omitempty" name:"EnableLogConfig"`
 
-	// Whether to enable the dashboard configuration for applications. false: disabled (consistent with the business system configuration); true: enabled (application-level configuration).
+	// <p>Whether the dashboard configuration is enabled: false (disabled, consistent with the business system)/true (enabled, application-level configuration)</p>
 	EnableDashboardConfig *bool `json:"EnableDashboardConfig,omitnil,omitempty" name:"EnableDashboardConfig"`
 
-	// Whether to associate with Dashboard. 0: disabled; 1: enabled.
+	// <p>Whether to associate with dashboard: 0 off 1 on</p>
 	IsRelatedDashboard *int64 `json:"IsRelatedDashboard,omitnil,omitempty" name:"IsRelatedDashboard"`
 
-	// dashboard ID
+	// <p>dashboard ID</p>
 	DashboardTopicID *string `json:"DashboardTopicID,omitnil,omitempty" name:"DashboardTopicID"`
 
-	// CLS index type. (0 = full-text index; 1 = key-value index).
+	// <p>CLS index type (0=full-text index, 1=key-value index)</p>
 	LogIndexType *int64 `json:"LogIndexType,omitnil,omitempty" name:"LogIndexType"`
 
-	// Index key of traceId. It is valid when the CLS index type is key-value index.
+	// <p>Index key of traceId: This parameter is valid only when the CLS index type is key-value index.</p>
 	LogTraceIdKey *string `json:"LogTraceIdKey,omitnil,omitempty" name:"LogTraceIdKey"`
 
-	// Whether to enable the application security configuration.
+	// <p>Whether application security configuration is enabled</p>
 	EnableSecurityConfig *bool `json:"EnableSecurityConfig,omitnil,omitempty" name:"EnableSecurityConfig"`
 
-	// Whether to enable SQL injection analysis.
+	// <p>Whether SQL injection analysis is enabled</p>
 	IsSqlInjectionAnalysis *int64 `json:"IsSqlInjectionAnalysis,omitnil,omitempty" name:"IsSqlInjectionAnalysis"`
 
-	// Whether to enable detection of component vulnerability.
+	// <p>Whether component vulnerability detection is enabled</p>
 	IsInstrumentationVulnerabilityScan *int64 `json:"IsInstrumentationVulnerabilityScan,omitnil,omitempty" name:"IsInstrumentationVulnerabilityScan"`
 
-	// Whether remote command detection is enabled.
+	// <p>Whether remote command detection is enabled</p>
 	IsRemoteCommandExecutionAnalysis *int64 `json:"IsRemoteCommandExecutionAnalysis,omitnil,omitempty" name:"IsRemoteCommandExecutionAnalysis"`
 
-	// Whether to enable detection of Java webshell.
+	// <p>Whether Java Webshell detection is enabled</p>
 	IsMemoryHijackingAnalysis *int64 `json:"IsMemoryHijackingAnalysis,omitnil,omitempty" name:"IsMemoryHijackingAnalysis"`
 
-	// Whether to enable the detection of deleting arbitrary files. (0 - disabled; 1: enabled.)
+	// <p>Whether to enable detection of any file deletion (0 - turn off, 1 - turn on)</p>
 	IsDeleteAnyFileAnalysis *int64 `json:"IsDeleteAnyFileAnalysis,omitnil,omitempty" name:"IsDeleteAnyFileAnalysis"`
 
-	// Whether to enable the detection of reading arbitrary files. (0 - disabled; 1 - enabled.)
+	// <p>Whether to enable arbitrary file read detection (0 - disabled, 1 - enabled)</p>
 	IsReadAnyFileAnalysis *int64 `json:"IsReadAnyFileAnalysis,omitnil,omitempty" name:"IsReadAnyFileAnalysis"`
 
-	// Whether to enable the detection of uploading arbitrary files. (0 - disabled; 1 - enabled.)
+	// <p>Whether to enable arbitrary file upload detection (0-disable, 1-enable)</p>
 	IsUploadAnyFileAnalysis *int64 `json:"IsUploadAnyFileAnalysis,omitnil,omitempty" name:"IsUploadAnyFileAnalysis"`
 
-	// Whether to enable the detection of the inclusion of arbitrary files. (0: disabled, 1: enabled.)
+	// <p>Whether to enable detection of arbitrary files (0 - disabled, 1 - enabled)</p>
 	IsIncludeAnyFileAnalysis *int64 `json:"IsIncludeAnyFileAnalysis,omitnil,omitempty" name:"IsIncludeAnyFileAnalysis"`
 
-	// Whether to enable traversal detection of the directory. (0 - disabled; 1 - enabled).
+	// <p>Whether path traversal detection is enabled (0-disabled, 1-enabled)</p>
 	IsDirectoryTraversalAnalysis *int64 `json:"IsDirectoryTraversalAnalysis,omitnil,omitempty" name:"IsDirectoryTraversalAnalysis"`
 
-	// Whether to enable template engine injection detection. (0: disabled; 1: enabled.)
+	// <p>Whether to enable template engine injection detection (0-disable, 1-enable)</p>
 	IsTemplateEngineInjectionAnalysis *int64 `json:"IsTemplateEngineInjectionAnalysis,omitnil,omitempty" name:"IsTemplateEngineInjectionAnalysis"`
 
-	// Whether to enable script engine injection detection. (0 - disabled; 1 - enabled.)
+	// <p>Whether to enable script engine injection detection (0-disable, 1-enable)</p>
 	IsScriptEngineInjectionAnalysis *int64 `json:"IsScriptEngineInjectionAnalysis,omitnil,omitempty" name:"IsScriptEngineInjectionAnalysis"`
 
-	// Whether to enable expression injection detection. (0 - disabled; 1 - enabled.)
+	// <p>Whether expression injection detection is enabled (0-disabled, 1-enabled)</p>
 	IsExpressionInjectionAnalysis *int64 `json:"IsExpressionInjectionAnalysis,omitnil,omitempty" name:"IsExpressionInjectionAnalysis"`
 
-	// Whether to enable JNDI injection detection. (0 - disabled; 1 - enabled.)
+	// <p>Whether JNDI injection detection is enabled (0 - disabled, 1 - enabled)</p>
 	IsJNDIInjectionAnalysis *int64 `json:"IsJNDIInjectionAnalysis,omitnil,omitempty" name:"IsJNDIInjectionAnalysis"`
 
-	// Whether to enable JNI injection detection. (0 - disabled, 1 - enabled).
+	// <p>Whether JNI injection detection is enabled (0-disabled, 1-enabled)</p>
 	IsJNIInjectionAnalysis *int64 `json:"IsJNIInjectionAnalysis,omitnil,omitempty" name:"IsJNIInjectionAnalysis"`
 
-	// Whether to enable Webshell backdoor detection. (0 - disabled; 1 - enabled).
+	// <p>Whether to enable Webshell backdoor detection (0 - disabled, 1 - enabled)</p>
 	IsWebshellBackdoorAnalysis *int64 `json:"IsWebshellBackdoorAnalysis,omitnil,omitempty" name:"IsWebshellBackdoorAnalysis"`
 
-	// Whether to enable deserialization detection. (0 - disabled; 1 - enabled).
+	// <p>Whether deserialization detection is enabled (0-disabled, 1-enabled)</p>
 	IsDeserializationAnalysis *int64 `json:"IsDeserializationAnalysis,omitnil,omitempty" name:"IsDeserializationAnalysis"`
 
-	// Automatic convergence switch for APIs. 0: disabled | 1: enabled.
+	// <p>API auto convergence switch, 0-off | 1-on</p>
 	UrlAutoConvergenceEnable *bool `json:"UrlAutoConvergenceEnable,omitnil,omitempty" name:"UrlAutoConvergenceEnable"`
 
-	// Convergence threshold for URL long segments.
+	// <p>URL long segment convergence threshold</p>
 	UrlLongSegmentThreshold *int64 `json:"UrlLongSegmentThreshold,omitnil,omitempty" name:"UrlLongSegmentThreshold"`
 
-	// Convergence threshold for URL numerical segments.
+	// <p>URL digit segment convergence threshold</p>
 	UrlNumberSegmentThreshold *int64 `json:"UrlNumberSegmentThreshold,omitnil,omitempty" name:"UrlNumberSegmentThreshold"`
 
-	// Specifies the memory threshold for probe fusing.
+	// <p>Fuse memory threshold of the probe</p>
 	DisableMemoryUsed *int64 `json:"DisableMemoryUsed,omitnil,omitempty" name:"DisableMemoryUsed"`
 
-	// Specifies the CPU threshold for probe fusing.
+	// <p>Probe fuse CPU threshold</p>
 	DisableCpuUsed *int64 `json:"DisableCpuUsed,omitnil,omitempty" name:"DisableCpuUsed"`
+
+	// <p>Whether SQL parameter access is enabled</p>
+	DbStatementParametersEnabled *bool `json:"DbStatementParametersEnabled,omitnil,omitempty" name:"DbStatementParametersEnabled"`
+
+	// <p>Slow SQL threshold</p>
+	SlowSQLThresholds []*ApmTag `json:"SlowSQLThresholds,omitnil,omitempty" name:"SlowSQLThresholds"`
+
+	// <p>Whether the masking rule is enabled</p>
+	EnableDesensitizationRule *int64 `json:"EnableDesensitizationRule,omitnil,omitempty" name:"EnableDesensitizationRule"`
+
+	// <p>Masking rule</p>
+	DesensitizationRule *string `json:"DesensitizationRule,omitnil,omitempty" name:"DesensitizationRule"`
+
+	// <p>Index key of spanId: This parameter is valid only when the CLS index type is key-value index.</p>
+	LogSpanIdKey *string `json:"LogSpanIdKey,omitnil,omitempty" name:"LogSpanIdKey"`
+
+	// <p>Automated performance analysis task configuration</p>
+	AutoProfilingConfig *AutoProfilingConfig `json:"AutoProfilingConfig,omitnil,omitempty" name:"AutoProfilingConfig"`
+
+	// <p>Threshold configuration switch. true means use application level threshold; false means use business system level threshold.</p>
+	EnableThresholdConfig *bool `json:"EnableThresholdConfig,omitnil,omitempty" name:"EnableThresholdConfig"`
+
+	// <p>Error rate threshold (%) used to judge the application health status as "red".</p>
+	ErrRateThreshold *int64 `json:"ErrRateThreshold,omitnil,omitempty" name:"ErrRateThreshold"`
+
+	// <p>Alert threshold for response time (ms), used to judge the application health status as "yellow".</p>
+	ResponseDurationWarningThreshold *int64 `json:"ResponseDurationWarningThreshold,omitnil,omitempty" name:"ResponseDurationWarningThreshold"`
+
+	// <p>Whether to use the default fuse threshold of the probe</p>
+	UseDefaultFuseConfig *bool `json:"UseDefaultFuseConfig,omitnil,omitempty" name:"UseDefaultFuseConfig"`
 }
 
 type ModifyApmApplicationConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Business system ID.
+	// <p>Business system ID</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Application name
+	// <p>Application name</p>
 	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
 
-	// URL convergence switch. 0: Off; 1: On
+	// <p>URL convergence switch, 0 Off | 1 On</p>
 	UrlConvergenceSwitch *int64 `json:"UrlConvergenceSwitch,omitnil,omitempty" name:"UrlConvergenceSwitch"`
 
-	// URL convergence threshold
+	// <p>URL convergence threshold</p>
 	UrlConvergenceThreshold *int64 `json:"UrlConvergenceThreshold,omitnil,omitempty" name:"UrlConvergenceThreshold"`
 
-	// Regex rules for exception filtering, separated by commas
+	// <p>Exception filtering regex rules, comma-separated</p>
 	ExceptionFilter *string `json:"ExceptionFilter,omitnil,omitempty" name:"ExceptionFilter"`
 
-	// Regex rules for URL convergence, separated by commas
+	// <p>URL convergence regex rules, comma-separated</p>
 	UrlConvergence *string `json:"UrlConvergence,omitnil,omitempty" name:"UrlConvergence"`
 
-	// Error code filtering, separated by commas
+	// <p>Error code filtering, comma-separated</p>
 	ErrorCodeFilter *string `json:"ErrorCodeFilter,omitnil,omitempty" name:"ErrorCodeFilter"`
 
-	// Regex rules for URL exclusion, separated by commas
+	// <p>URL exclusion regex rule, comma-separated</p>
 	UrlExclude *string `json:"UrlExclude,omitnil,omitempty" name:"UrlExclude"`
 
-	// Log switch. 0: Off; 1: On
+	// <p>Log switch 0 Disabled 1 Enabled</p>
 	IsRelatedLog *int64 `json:"IsRelatedLog,omitnil,omitempty" name:"IsRelatedLog"`
 
-	// Log region.
+	// <p>Log region</p>
 	LogRegion *string `json:"LogRegion,omitnil,omitempty" name:"LogRegion"`
 
-	// Log topic ID
+	// <p>Log topic ID</p>
 	LogTopicID *string `json:"LogTopicID,omitnil,omitempty" name:"LogTopicID"`
 
-	// CLS log set/ES cluster ID
+	// <p>CLS logset | ES cluster ID</p>
 	LogSet *string `json:"LogSet,omitnil,omitempty" name:"LogSet"`
 
-	// Log source: CLS or ES
+	// <p>Log source CLS | ES</p>
 	LogSource *string `json:"LogSource,omitnil,omitempty" name:"LogSource"`
 
-	// APIs to be filtered
+	// <p>Interfaces to Filter</p>
 	IgnoreOperationName *string `json:"IgnoreOperationName,omitnil,omitempty" name:"IgnoreOperationName"`
 
-	// Whether thread profiling is enabled.
+	// <p>Whether thread profiling is enabled</p>
 	EnableSnapshot *bool `json:"EnableSnapshot,omitnil,omitempty" name:"EnableSnapshot"`
 
-	// Timeout threshold for thread profiling.
+	// <p>Timeout threshold for thread profiling</p>
 	SnapshotTimeout *int64 `json:"SnapshotTimeout,omitnil,omitempty" name:"SnapshotTimeout"`
 
-	// Whether agent is enabled.
+	// <p>Whether to enable agent</p>
 	AgentEnable *bool `json:"AgentEnable,omitnil,omitempty" name:"AgentEnable"`
 
-	// Whether link compression is enabled.
+	// <p>Whether to enable link compression</p>
 	TraceSquash *bool `json:"TraceSquash,omitnil,omitempty" name:"TraceSquash"`
 
-	// Switch for enabling application diagnosis.
+	// <p>Whether the switch for enabling application diagnosis is enabled</p>
 	EventEnable *bool `json:"EventEnable,omitnil,omitempty" name:"EventEnable"`
 
-	// Component List
+	// <p>Component list</p>
 	InstrumentList []*Instrument `json:"InstrumentList,omitnil,omitempty" name:"InstrumentList"`
 
-	// Related configurations of the probe APIs.
+	// <p>probe API related configuration</p>
 	AgentOperationConfigView *AgentOperationConfigView `json:"AgentOperationConfigView,omitnil,omitempty" name:"AgentOperationConfigView"`
 
-	// Whether to enable application log configuration.
+	// <p>Whether the application log configuration is enabled</p>
 	EnableLogConfig *bool `json:"EnableLogConfig,omitnil,omitempty" name:"EnableLogConfig"`
 
-	// Whether to enable the dashboard configuration for applications. false: disabled (consistent with the business system configuration); true: enabled (application-level configuration).
+	// <p>Whether the dashboard configuration is enabled: false (disabled, consistent with the business system)/true (enabled, application-level configuration)</p>
 	EnableDashboardConfig *bool `json:"EnableDashboardConfig,omitnil,omitempty" name:"EnableDashboardConfig"`
 
-	// Whether to associate with Dashboard. 0: disabled; 1: enabled.
+	// <p>Whether to associate with dashboard: 0 off 1 on</p>
 	IsRelatedDashboard *int64 `json:"IsRelatedDashboard,omitnil,omitempty" name:"IsRelatedDashboard"`
 
-	// dashboard ID
+	// <p>dashboard ID</p>
 	DashboardTopicID *string `json:"DashboardTopicID,omitnil,omitempty" name:"DashboardTopicID"`
 
-	// CLS index type. (0 = full-text index; 1 = key-value index).
+	// <p>CLS index type (0=full-text index, 1=key-value index)</p>
 	LogIndexType *int64 `json:"LogIndexType,omitnil,omitempty" name:"LogIndexType"`
 
-	// Index key of traceId. It is valid when the CLS index type is key-value index.
+	// <p>Index key of traceId: This parameter is valid only when the CLS index type is key-value index.</p>
 	LogTraceIdKey *string `json:"LogTraceIdKey,omitnil,omitempty" name:"LogTraceIdKey"`
 
-	// Whether to enable the application security configuration.
+	// <p>Whether application security configuration is enabled</p>
 	EnableSecurityConfig *bool `json:"EnableSecurityConfig,omitnil,omitempty" name:"EnableSecurityConfig"`
 
-	// Whether to enable SQL injection analysis.
+	// <p>Whether SQL injection analysis is enabled</p>
 	IsSqlInjectionAnalysis *int64 `json:"IsSqlInjectionAnalysis,omitnil,omitempty" name:"IsSqlInjectionAnalysis"`
 
-	// Whether to enable detection of component vulnerability.
+	// <p>Whether component vulnerability detection is enabled</p>
 	IsInstrumentationVulnerabilityScan *int64 `json:"IsInstrumentationVulnerabilityScan,omitnil,omitempty" name:"IsInstrumentationVulnerabilityScan"`
 
-	// Whether remote command detection is enabled.
+	// <p>Whether remote command detection is enabled</p>
 	IsRemoteCommandExecutionAnalysis *int64 `json:"IsRemoteCommandExecutionAnalysis,omitnil,omitempty" name:"IsRemoteCommandExecutionAnalysis"`
 
-	// Whether to enable detection of Java webshell.
+	// <p>Whether Java Webshell detection is enabled</p>
 	IsMemoryHijackingAnalysis *int64 `json:"IsMemoryHijackingAnalysis,omitnil,omitempty" name:"IsMemoryHijackingAnalysis"`
 
-	// Whether to enable the detection of deleting arbitrary files. (0 - disabled; 1: enabled.)
+	// <p>Whether to enable detection of any file deletion (0 - turn off, 1 - turn on)</p>
 	IsDeleteAnyFileAnalysis *int64 `json:"IsDeleteAnyFileAnalysis,omitnil,omitempty" name:"IsDeleteAnyFileAnalysis"`
 
-	// Whether to enable the detection of reading arbitrary files. (0 - disabled; 1 - enabled.)
+	// <p>Whether to enable arbitrary file read detection (0 - disabled, 1 - enabled)</p>
 	IsReadAnyFileAnalysis *int64 `json:"IsReadAnyFileAnalysis,omitnil,omitempty" name:"IsReadAnyFileAnalysis"`
 
-	// Whether to enable the detection of uploading arbitrary files. (0 - disabled; 1 - enabled.)
+	// <p>Whether to enable arbitrary file upload detection (0-disable, 1-enable)</p>
 	IsUploadAnyFileAnalysis *int64 `json:"IsUploadAnyFileAnalysis,omitnil,omitempty" name:"IsUploadAnyFileAnalysis"`
 
-	// Whether to enable the detection of the inclusion of arbitrary files. (0: disabled, 1: enabled.)
+	// <p>Whether to enable detection of arbitrary files (0 - disabled, 1 - enabled)</p>
 	IsIncludeAnyFileAnalysis *int64 `json:"IsIncludeAnyFileAnalysis,omitnil,omitempty" name:"IsIncludeAnyFileAnalysis"`
 
-	// Whether to enable traversal detection of the directory. (0 - disabled; 1 - enabled).
+	// <p>Whether path traversal detection is enabled (0-disabled, 1-enabled)</p>
 	IsDirectoryTraversalAnalysis *int64 `json:"IsDirectoryTraversalAnalysis,omitnil,omitempty" name:"IsDirectoryTraversalAnalysis"`
 
-	// Whether to enable template engine injection detection. (0: disabled; 1: enabled.)
+	// <p>Whether to enable template engine injection detection (0-disable, 1-enable)</p>
 	IsTemplateEngineInjectionAnalysis *int64 `json:"IsTemplateEngineInjectionAnalysis,omitnil,omitempty" name:"IsTemplateEngineInjectionAnalysis"`
 
-	// Whether to enable script engine injection detection. (0 - disabled; 1 - enabled.)
+	// <p>Whether to enable script engine injection detection (0-disable, 1-enable)</p>
 	IsScriptEngineInjectionAnalysis *int64 `json:"IsScriptEngineInjectionAnalysis,omitnil,omitempty" name:"IsScriptEngineInjectionAnalysis"`
 
-	// Whether to enable expression injection detection. (0 - disabled; 1 - enabled.)
+	// <p>Whether expression injection detection is enabled (0-disabled, 1-enabled)</p>
 	IsExpressionInjectionAnalysis *int64 `json:"IsExpressionInjectionAnalysis,omitnil,omitempty" name:"IsExpressionInjectionAnalysis"`
 
-	// Whether to enable JNDI injection detection. (0 - disabled; 1 - enabled.)
+	// <p>Whether JNDI injection detection is enabled (0 - disabled, 1 - enabled)</p>
 	IsJNDIInjectionAnalysis *int64 `json:"IsJNDIInjectionAnalysis,omitnil,omitempty" name:"IsJNDIInjectionAnalysis"`
 
-	// Whether to enable JNI injection detection. (0 - disabled, 1 - enabled).
+	// <p>Whether JNI injection detection is enabled (0-disabled, 1-enabled)</p>
 	IsJNIInjectionAnalysis *int64 `json:"IsJNIInjectionAnalysis,omitnil,omitempty" name:"IsJNIInjectionAnalysis"`
 
-	// Whether to enable Webshell backdoor detection. (0 - disabled; 1 - enabled).
+	// <p>Whether to enable Webshell backdoor detection (0 - disabled, 1 - enabled)</p>
 	IsWebshellBackdoorAnalysis *int64 `json:"IsWebshellBackdoorAnalysis,omitnil,omitempty" name:"IsWebshellBackdoorAnalysis"`
 
-	// Whether to enable deserialization detection. (0 - disabled; 1 - enabled).
+	// <p>Whether deserialization detection is enabled (0-disabled, 1-enabled)</p>
 	IsDeserializationAnalysis *int64 `json:"IsDeserializationAnalysis,omitnil,omitempty" name:"IsDeserializationAnalysis"`
 
-	// Automatic convergence switch for APIs. 0: disabled | 1: enabled.
+	// <p>API auto convergence switch, 0-off | 1-on</p>
 	UrlAutoConvergenceEnable *bool `json:"UrlAutoConvergenceEnable,omitnil,omitempty" name:"UrlAutoConvergenceEnable"`
 
-	// Convergence threshold for URL long segments.
+	// <p>URL long segment convergence threshold</p>
 	UrlLongSegmentThreshold *int64 `json:"UrlLongSegmentThreshold,omitnil,omitempty" name:"UrlLongSegmentThreshold"`
 
-	// Convergence threshold for URL numerical segments.
+	// <p>URL digit segment convergence threshold</p>
 	UrlNumberSegmentThreshold *int64 `json:"UrlNumberSegmentThreshold,omitnil,omitempty" name:"UrlNumberSegmentThreshold"`
 
-	// Specifies the memory threshold for probe fusing.
+	// <p>Fuse memory threshold of the probe</p>
 	DisableMemoryUsed *int64 `json:"DisableMemoryUsed,omitnil,omitempty" name:"DisableMemoryUsed"`
 
-	// Specifies the CPU threshold for probe fusing.
+	// <p>Probe fuse CPU threshold</p>
 	DisableCpuUsed *int64 `json:"DisableCpuUsed,omitnil,omitempty" name:"DisableCpuUsed"`
+
+	// <p>Whether SQL parameter access is enabled</p>
+	DbStatementParametersEnabled *bool `json:"DbStatementParametersEnabled,omitnil,omitempty" name:"DbStatementParametersEnabled"`
+
+	// <p>Slow SQL threshold</p>
+	SlowSQLThresholds []*ApmTag `json:"SlowSQLThresholds,omitnil,omitempty" name:"SlowSQLThresholds"`
+
+	// <p>Whether the masking rule is enabled</p>
+	EnableDesensitizationRule *int64 `json:"EnableDesensitizationRule,omitnil,omitempty" name:"EnableDesensitizationRule"`
+
+	// <p>Masking rule</p>
+	DesensitizationRule *string `json:"DesensitizationRule,omitnil,omitempty" name:"DesensitizationRule"`
+
+	// <p>Index key of spanId: This parameter is valid only when the CLS index type is key-value index.</p>
+	LogSpanIdKey *string `json:"LogSpanIdKey,omitnil,omitempty" name:"LogSpanIdKey"`
+
+	// <p>Automated performance analysis task configuration</p>
+	AutoProfilingConfig *AutoProfilingConfig `json:"AutoProfilingConfig,omitnil,omitempty" name:"AutoProfilingConfig"`
+
+	// <p>Threshold configuration switch. true means use application level threshold; false means use business system level threshold.</p>
+	EnableThresholdConfig *bool `json:"EnableThresholdConfig,omitnil,omitempty" name:"EnableThresholdConfig"`
+
+	// <p>Error rate threshold (%) used to judge the application health status as "red".</p>
+	ErrRateThreshold *int64 `json:"ErrRateThreshold,omitnil,omitempty" name:"ErrRateThreshold"`
+
+	// <p>Alert threshold for response time (ms), used to judge the application health status as "yellow".</p>
+	ResponseDurationWarningThreshold *int64 `json:"ResponseDurationWarningThreshold,omitnil,omitempty" name:"ResponseDurationWarningThreshold"`
+
+	// <p>Whether to use the default fuse threshold of the probe</p>
+	UseDefaultFuseConfig *bool `json:"UseDefaultFuseConfig,omitnil,omitempty" name:"UseDefaultFuseConfig"`
 }
 
 func (r *ModifyApmApplicationConfigRequest) ToJsonString() string {
@@ -2922,6 +3740,16 @@ func (r *ModifyApmApplicationConfigRequest) FromJsonString(s string) error {
 	delete(f, "UrlNumberSegmentThreshold")
 	delete(f, "DisableMemoryUsed")
 	delete(f, "DisableCpuUsed")
+	delete(f, "DbStatementParametersEnabled")
+	delete(f, "SlowSQLThresholds")
+	delete(f, "EnableDesensitizationRule")
+	delete(f, "DesensitizationRule")
+	delete(f, "LogSpanIdKey")
+	delete(f, "AutoProfilingConfig")
+	delete(f, "EnableThresholdConfig")
+	delete(f, "ErrRateThreshold")
+	delete(f, "ResponseDurationWarningThreshold")
+	delete(f, "UseDefaultFuseConfig")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyApmApplicationConfigRequest has unknown keys!", "")
 	}
@@ -2952,39 +3780,45 @@ func (r *ModifyApmApplicationConfigResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyApmAssociationRequestParams struct {
-	// Associated product name. currently only supports Prometheus.
+	// <p>Associated product name, currently only support Prometheus, CKafka</p>
 	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
 
-	// Status of the association relationship: // association status: 1 (enabled), 2 (disabled), 4 (deleted).
+	// <p>Status of the association relationship: // Association relationship status: 1 (enabled), 2 (disabled)</p>
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Business system ID
+	// <p>Business system ID</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Associated product instance ID.
+	// <p>ID of the associated product instance</p>
 	PeerId *string `json:"PeerId,omitnil,omitempty" name:"PeerId"`
 
-	// Specifies the CKafka message topic.
+	// <p>CKafka message topic</p>
 	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
+
+	// <p>Ckafka message topic</p>
+	MetricTopic *string `json:"MetricTopic,omitnil,omitempty" name:"MetricTopic"`
 }
 
 type ModifyApmAssociationRequest struct {
 	*tchttp.BaseRequest
 	
-	// Associated product name. currently only supports Prometheus.
+	// <p>Associated product name, currently only support Prometheus, CKafka</p>
 	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
 
-	// Status of the association relationship: // association status: 1 (enabled), 2 (disabled), 4 (deleted).
+	// <p>Status of the association relationship: // Association relationship status: 1 (enabled), 2 (disabled)</p>
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Business system ID
+	// <p>Business system ID</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Associated product instance ID.
+	// <p>ID of the associated product instance</p>
 	PeerId *string `json:"PeerId,omitnil,omitempty" name:"PeerId"`
 
-	// Specifies the CKafka message topic.
+	// <p>CKafka message topic</p>
 	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
+
+	// <p>Ckafka message topic</p>
+	MetricTopic *string `json:"MetricTopic,omitnil,omitempty" name:"MetricTopic"`
 }
 
 func (r *ModifyApmAssociationRequest) ToJsonString() string {
@@ -3004,6 +3838,7 @@ func (r *ModifyApmAssociationRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "PeerId")
 	delete(f, "Topic")
+	delete(f, "MetricTopic")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyApmAssociationRequest has unknown keys!", "")
 	}
@@ -3159,6 +3994,9 @@ type ModifyApmInstanceRequestParams struct {
 
 	// Convergence threshold for URL numerical segments.
 	UrlNumberSegmentThreshold *int64 `json:"UrlNumberSegmentThreshold,omitnil,omitempty" name:"UrlNumberSegmentThreshold"`
+
+	// Index key of spanId: This parameter is valid only when the CLS index type is key-value index
+	LogSpanIdKey *string `json:"LogSpanIdKey,omitnil,omitempty" name:"LogSpanIdKey"`
 }
 
 type ModifyApmInstanceRequest struct {
@@ -3289,6 +4127,9 @@ type ModifyApmInstanceRequest struct {
 
 	// Convergence threshold for URL numerical segments.
 	UrlNumberSegmentThreshold *int64 `json:"UrlNumberSegmentThreshold,omitnil,omitempty" name:"UrlNumberSegmentThreshold"`
+
+	// Index key of spanId: This parameter is valid only when the CLS index type is key-value index
+	LogSpanIdKey *string `json:"LogSpanIdKey,omitnil,omitempty" name:"LogSpanIdKey"`
 }
 
 func (r *ModifyApmInstanceRequest) ToJsonString() string {
@@ -3345,6 +4186,7 @@ func (r *ModifyApmInstanceRequest) FromJsonString(s string) error {
 	delete(f, "IsDeserializationAnalysis")
 	delete(f, "UrlLongSegmentThreshold")
 	delete(f, "UrlNumberSegmentThreshold")
+	delete(f, "LogSpanIdKey")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyApmInstanceRequest has unknown keys!", "")
 	}
@@ -3580,6 +4422,74 @@ func (r *ModifyApmSampleConfigResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyApmServiceRequestParams struct {
+	// Application ID
+	ServiceID *string `json:"ServiceID,omitnil,omitempty" name:"ServiceID"`
+
+	// Application description
+	ServiceDescription *string `json:"ServiceDescription,omitnil,omitempty" name:"ServiceDescription"`
+
+	// Tag list
+	Tags []*ApmTag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+type ModifyApmServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Application ID
+	ServiceID *string `json:"ServiceID,omitnil,omitempty" name:"ServiceID"`
+
+	// Application description
+	ServiceDescription *string `json:"ServiceDescription,omitnil,omitempty" name:"ServiceDescription"`
+
+	// Tag list
+	Tags []*ApmTag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+func (r *ModifyApmServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyApmServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ServiceID")
+	delete(f, "ServiceDescription")
+	delete(f, "Tags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyApmServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyApmServiceResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyApmServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyApmServiceResponseParams `json:"Response"`
+}
+
+func (r *ModifyApmServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyApmServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyGeneralApmApplicationConfigRequestParams struct {
 	// Business system id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -3662,6 +4572,16 @@ type OrderBy struct {
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
+type Position struct {
+	// Node horizontal coordinate
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	X *float64 `json:"X,omitnil,omitempty" name:"X"`
+
+	// Node vertical coordinate
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Y *float64 `json:"Y,omitnil,omitempty" name:"Y"`
+}
+
 type QueryMetricItem struct {
 	// Metric name.
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
@@ -3673,41 +4593,78 @@ type QueryMetricItem struct {
 	Compare *string `json:"Compare,omitnil,omitempty" name:"Compare"`
 }
 
+type Resource struct {
+	// Resource type.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type []*string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// TKE resource layer information.
+	TKEMeta []*TkeMeta `json:"TKEMeta,omitnil,omitempty" name:"TKEMeta"`
+
+	// CVM resource information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CVMMeta []*CVMMeta `json:"CVMMeta,omitnil,omitempty" name:"CVMMeta"`
+}
+
+type SelectorView struct {
+	// Component Count
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Component *ComponentTopologyView `json:"Component,omitnil,omitempty" name:"Component"`
+}
+
+type Selectors struct {
+	// Selection status of the component.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Component []*string `json:"Component,omitnil,omitempty" name:"Component"`
+}
+
 type ServiceDetail struct {
-	// Application ID
+	// <p>Application ID</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ServiceID *string `json:"ServiceID,omitnil,omitempty" name:"ServiceID"`
 
-	// Business system ID
+	// <p>Business system ID</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceKey *string `json:"InstanceKey,omitnil,omitempty" name:"InstanceKey"`
 
-	// User appid.
+	// <p>User appid</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AppID *int64 `json:"AppID,omitnil,omitempty" name:"AppID"`
 
-	// Host account UIN
+	// <p>main account uin</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CreateUIN *string `json:"CreateUIN,omitnil,omitempty" name:"CreateUIN"`
 
-	// Application name
+	// <p>Application name</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
 
-	// Application description
+	// <p>Application description</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ServiceDescription *string `json:"ServiceDescription,omitnil,omitempty" name:"ServiceDescription"`
 
-	// Region.
+	// <p>Region</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Tag.
+	// <p>Tag</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Tags []*ApmTag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Business system name.
+	// <p>Business system name</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// <p>Threshold configuration switch. true means use application level threshold; false means use business system level threshold.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnableThresholdConfig *bool `json:"EnableThresholdConfig,omitnil,omitempty" name:"EnableThresholdConfig"`
+
+	// <p>Error rate threshold (%) used to judge the application health status as "red".</p><p>Unit: %</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrRateThreshold *int64 `json:"ErrRateThreshold,omitnil,omitempty" name:"ErrRateThreshold"`
+
+	// <p>Alert threshold for response time (ms), used to judge application health status as "yellow".</p><p>Unit: ms</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ResponseDurationWarningThreshold *int64 `json:"ResponseDurationWarningThreshold,omitnil,omitempty" name:"ResponseDurationWarningThreshold"`
 }
 
 type Span struct {
@@ -3841,4 +4798,151 @@ func (r *TerminateApmInstanceResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *TerminateApmInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type TkeMeta struct {
+	// Region.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitnil,omitempty" name:"ClusterID"`
+
+	// pod name
+	PodName *string `json:"PodName,omitnil,omitempty" name:"PodName"`
+
+	// Namespace
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// workload
+	Deployment *string `json:"Deployment,omitnil,omitempty" name:"Deployment"`
+
+	// pod ip
+	PodIP *string `json:"PodIP,omitnil,omitempty" name:"PodIP"`
+
+	// node ip
+	NodeIP *string `json:"NodeIP,omitnil,omitempty" name:"NodeIP"`
+}
+
+type TopologyEdgeNew struct {
+	// Source node
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// Edge ID
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Edge weight
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Weight *float64 `json:"Weight,omitnil,omitempty" name:"Weight"`
+
+	// Target node
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
+
+	// response time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Duration *float64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+
+	// Error rate
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrRate *float64 `json:"ErrRate,omitnil,omitempty" name:"ErrRate"`
+
+	// throughput
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Qps *float64 `json:"Qps,omitnil,omitempty" name:"Qps"`
+
+	// Edge type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Edge color
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Color *string `json:"Color,omitnil,omitempty" name:"Color"`
+
+	// SQL call count
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SqlRequestCount *float64 `json:"SqlRequestCount,omitnil,omitempty" name:"SqlRequestCount"`
+
+	// SQL call error count
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SqlErrorRequestCount *float64 `json:"SqlErrorRequestCount,omitnil,omitempty" name:"SqlErrorRequestCount"`
+
+	// Source node type on the edge of the topology diagram. Application/MQ/DB.
+	SourceComp *string `json:"SourceComp,omitnil,omitempty" name:"SourceComp"`
+
+	// Target node type on the edge of the topology diagram. Application/MQ/DB.
+	TargetComp *string `json:"TargetComp,omitnil,omitempty" name:"TargetComp"`
+}
+
+type TopologyNode struct {
+	// Error rate
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrRate *float64 `json:"ErrRate,omitnil,omitempty" name:"ErrRate"`
+
+	// Node type.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Kind *string `json:"Kind,omitnil,omitempty" name:"Kind"`
+
+	// Node name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Node weight
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Weight *float64 `json:"Weight,omitnil,omitempty" name:"Weight"`
+
+	// Node color
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Color *string `json:"Color,omitnil,omitempty" name:"Color"`
+
+	// response time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Duration *float64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+
+	// throughput
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Qps *float64 `json:"Qps,omitnil,omitempty" name:"Qps"`
+
+	// Node type.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Node ID
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Node size
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Size *string `json:"Size,omitnil,omitempty" name:"Size"`
+
+	// Indicate whether the node is a component
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsModule *bool `json:"IsModule,omitnil,omitempty" name:"IsModule"`
+
+	// Node location information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Position *Position `json:"Position,omitnil,omitempty" name:"Position"`
+
+	// Node tags
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tags []*ApmTag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Whether the node supports drill-down.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CanDrillDown *bool `json:"CanDrillDown,omitnil,omitempty" name:"CanDrillDown"`
+
+	// Resource layer information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Resource *Resource `json:"Resource,omitnil,omitempty" name:"Resource"`
+
+	// Name of the topology node view.
+	NodeView *string `json:"NodeView,omitnil,omitempty" name:"NodeView"`
+
+	// Message consumption time of the MQ consumer, in ms.
+	ConsumerDuration *float64 `json:"ConsumerDuration,omitnil,omitempty" name:"ConsumerDuration"`
+
+	// Error rate of the MQ consumers, in %.
+	ConsumerErrRate *float64 `json:"ConsumerErrRate,omitnil,omitempty" name:"ConsumerErrRate"`
+
+	// Throughput of the message queue (MQ) consumer.
+	ConsumerQps *float64 `json:"ConsumerQps,omitnil,omitempty" name:"ConsumerQps"`
+
+	// Application ID.
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 }

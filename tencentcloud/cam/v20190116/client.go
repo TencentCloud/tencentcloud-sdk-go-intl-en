@@ -70,6 +70,8 @@ func NewAddUserResponse() (response *AddUserResponse) {
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_EXISTHIGHRISKOPERATIONS = "FailedOperation.ExistHighRiskOperations"
+//  FAILEDOPERATION_FORBIDADD = "FailedOperation.ForbidAdd"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_PASSWORDVIOLATEDRULES = "InvalidParameter.PasswordViolatedRules"
 //  INVALIDPARAMETER_SUBUSERFULL = "InvalidParameter.SubUserFull"
@@ -86,6 +88,8 @@ func (c *Client) AddUser(request *AddUserRequest) (response *AddUserResponse, er
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_EXISTHIGHRISKOPERATIONS = "FailedOperation.ExistHighRiskOperations"
+//  FAILEDOPERATION_FORBIDADD = "FailedOperation.ForbidAdd"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_PASSWORDVIOLATEDRULES = "InvalidParameter.PasswordViolatedRules"
 //  INVALIDPARAMETER_SUBUSERFULL = "InvalidParameter.SubUserFull"
@@ -194,6 +198,7 @@ func NewAttachGroupPolicyResponse() (response *AttachGroupPolicyResponse) {
 // This API (AttachGroupPolicy) is used to associate a policy with a user group.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  FAILEDOPERATION_POLICYFULL = "FailedOperation.PolicyFull"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ATTACHMENTFULL = "InvalidParameter.AttachmentFull"
@@ -212,6 +217,7 @@ func (c *Client) AttachGroupPolicy(request *AttachGroupPolicyRequest) (response 
 // This API (AttachGroupPolicy) is used to associate a policy with a user group.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  FAILEDOPERATION_POLICYFULL = "FailedOperation.PolicyFull"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ATTACHMENTFULL = "InvalidParameter.AttachmentFull"
@@ -262,6 +268,7 @@ func NewAttachRolePolicyResponse() (response *AttachRolePolicyResponse) {
 // This API (AttachRolePolicy) is used to associate a policy with a role.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ATTACHMENTFULL = "InvalidParameter.AttachmentFull"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
@@ -277,6 +284,7 @@ func (c *Client) AttachRolePolicy(request *AttachRolePolicyRequest) (response *A
 // This API (AttachRolePolicy) is used to associate a policy with a role.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ATTACHMENTFULL = "InvalidParameter.AttachmentFull"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
@@ -324,6 +332,7 @@ func NewAttachUserPolicyResponse() (response *AttachUserPolicyResponse) {
 // This API (AttachUserPolicy) is used to associates a policy with a user.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  FAILEDOPERATION_POLICYFULL = "FailedOperation.PolicyFull"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ATTACHMENTFULL = "InvalidParameter.AttachmentFull"
@@ -341,6 +350,7 @@ func (c *Client) AttachUserPolicy(request *AttachUserPolicyRequest) (response *A
 // This API (AttachUserPolicy) is used to associates a policy with a user.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  FAILEDOPERATION_POLICYFULL = "FailedOperation.PolicyFull"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ATTACHMENTFULL = "InvalidParameter.AttachmentFull"
@@ -502,6 +512,7 @@ func NewCreateGroupResponse() (response *CreateGroupResponse) {
 // This API is used to create a user group.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_GROUPFULL = "InvalidParameter.GroupFull"
 //  INVALIDPARAMETER_GROUPNAMEINUSE = "InvalidParameter.GroupNameInUse"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
@@ -513,6 +524,7 @@ func (c *Client) CreateGroup(request *CreateGroupRequest) (response *CreateGroup
 // This API is used to create a user group.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_GROUPFULL = "InvalidParameter.GroupFull"
 //  INVALIDPARAMETER_GROUPNAMEINUSE = "InvalidParameter.GroupNameInUse"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
@@ -556,6 +568,7 @@ func NewCreateOIDCConfigResponse() (response *CreateOIDCConfigResponse) {
 // This API is used to create role OIDC configurations.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_IDENTITYNAMEINUSE = "InvalidParameter.IdentityNameInUse"
 //  INVALIDPARAMETERVALUE_IDENTITYURLERROR = "InvalidParameterValue.IdentityUrlError"
@@ -570,6 +583,7 @@ func (c *Client) CreateOIDCConfig(request *CreateOIDCConfigRequest) (response *C
 // This API is used to create role OIDC configurations.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_IDENTITYNAMEINUSE = "InvalidParameter.IdentityNameInUse"
 //  INVALIDPARAMETERVALUE_IDENTITYURLERROR = "InvalidParameterValue.IdentityUrlError"
@@ -635,6 +649,9 @@ func NewCreatePolicyResponse() (response *CreatePolicyResponse) {
 //  INVALIDPARAMETER_POLICYDOCUMENTLENGTHOVERLIMIT = "InvalidParameter.PolicyDocumentLengthOverLimit"
 //  INVALIDPARAMETER_POLICYNAMEERROR = "InvalidParameter.PolicyNameError"
 //  INVALIDPARAMETER_PRINCIPALERROR = "InvalidParameter.PrincipalError"
+//  INVALIDPARAMETER_PRINCIPALQCSERROR = "InvalidParameter.PrincipalQcsError"
+//  INVALIDPARAMETER_PRINCIPALQCSNOTEXIST = "InvalidParameter.PrincipalQcsNotExist"
+//  INVALIDPARAMETER_PRINCIPALSERVICENOTEXIST = "InvalidParameter.PrincipalServiceNotExist"
 //  INVALIDPARAMETER_RESOURCECONTENTERROR = "InvalidParameter.ResourceContentError"
 //  INVALIDPARAMETER_RESOURCEERROR = "InvalidParameter.ResourceError"
 //  INVALIDPARAMETER_RESOURCEPROJECTERROR = "InvalidParameter.ResourceProjectError"
@@ -675,6 +692,9 @@ func (c *Client) CreatePolicy(request *CreatePolicyRequest) (response *CreatePol
 //  INVALIDPARAMETER_POLICYDOCUMENTLENGTHOVERLIMIT = "InvalidParameter.PolicyDocumentLengthOverLimit"
 //  INVALIDPARAMETER_POLICYNAMEERROR = "InvalidParameter.PolicyNameError"
 //  INVALIDPARAMETER_PRINCIPALERROR = "InvalidParameter.PrincipalError"
+//  INVALIDPARAMETER_PRINCIPALQCSERROR = "InvalidParameter.PrincipalQcsError"
+//  INVALIDPARAMETER_PRINCIPALQCSNOTEXIST = "InvalidParameter.PrincipalQcsNotExist"
+//  INVALIDPARAMETER_PRINCIPALSERVICENOTEXIST = "InvalidParameter.PrincipalServiceNotExist"
 //  INVALIDPARAMETER_RESOURCECONTENTERROR = "InvalidParameter.ResourceContentError"
 //  INVALIDPARAMETER_RESOURCEERROR = "InvalidParameter.ResourceError"
 //  INVALIDPARAMETER_RESOURCEPROJECTERROR = "InvalidParameter.ResourceProjectError"
@@ -729,6 +749,7 @@ func NewCreatePolicyVersionResponse() (response *CreatePolicyVersionResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  FAILEDOPERATION_POLICYFULL = "FailedOperation.PolicyFull"
 //  FAILEDOPERATION_POLICYNAMEINUSE = "FailedOperation.PolicyNameInUse"
 //  FAILEDOPERATION_POLICYVERSIONFULL = "FailedOperation.PolicyVersionFull"
@@ -750,7 +771,9 @@ func NewCreatePolicyVersionResponse() (response *CreatePolicyVersionResponse) {
 //  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
 //  INVALIDPARAMETER_POLICYNAMEERROR = "InvalidParameter.PolicyNameError"
 //  INVALIDPARAMETER_PRINCIPALERROR = "InvalidParameter.PrincipalError"
+//  INVALIDPARAMETER_PRINCIPALQCSERROR = "InvalidParameter.PrincipalQcsError"
 //  INVALIDPARAMETER_PRINCIPALQCSNOTEXIST = "InvalidParameter.PrincipalQcsNotExist"
+//  INVALIDPARAMETER_PRINCIPALSERVICENOTEXIST = "InvalidParameter.PrincipalServiceNotExist"
 //  INVALIDPARAMETER_RESOURCECONTENTERROR = "InvalidParameter.ResourceContentError"
 //  INVALIDPARAMETER_RESOURCEERROR = "InvalidParameter.ResourceError"
 //  INVALIDPARAMETER_RESOURCEPROJECTERROR = "InvalidParameter.ResourceProjectError"
@@ -761,6 +784,8 @@ func NewCreatePolicyVersionResponse() (response *CreatePolicyVersionResponse) {
 //  INVALIDPARAMETER_STATEMENTERROR = "InvalidParameter.StatementError"
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"
+//  OPERATIONDENIED_CICPOLICYOPERATIONDENIED = "OperationDenied.CicPolicyOperationDenied"
+//  OPERATIONDENIED_POLICYTAGCONFLICT = "OperationDenied.PolicyTagConflict"
 //  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
@@ -773,6 +798,7 @@ func (c *Client) CreatePolicyVersion(request *CreatePolicyVersionRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  FAILEDOPERATION_POLICYFULL = "FailedOperation.PolicyFull"
 //  FAILEDOPERATION_POLICYNAMEINUSE = "FailedOperation.PolicyNameInUse"
 //  FAILEDOPERATION_POLICYVERSIONFULL = "FailedOperation.PolicyVersionFull"
@@ -794,7 +820,9 @@ func (c *Client) CreatePolicyVersion(request *CreatePolicyVersionRequest) (respo
 //  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
 //  INVALIDPARAMETER_POLICYNAMEERROR = "InvalidParameter.PolicyNameError"
 //  INVALIDPARAMETER_PRINCIPALERROR = "InvalidParameter.PrincipalError"
+//  INVALIDPARAMETER_PRINCIPALQCSERROR = "InvalidParameter.PrincipalQcsError"
 //  INVALIDPARAMETER_PRINCIPALQCSNOTEXIST = "InvalidParameter.PrincipalQcsNotExist"
+//  INVALIDPARAMETER_PRINCIPALSERVICENOTEXIST = "InvalidParameter.PrincipalServiceNotExist"
 //  INVALIDPARAMETER_RESOURCECONTENTERROR = "InvalidParameter.ResourceContentError"
 //  INVALIDPARAMETER_RESOURCEERROR = "InvalidParameter.ResourceError"
 //  INVALIDPARAMETER_RESOURCEPROJECTERROR = "InvalidParameter.ResourceProjectError"
@@ -805,6 +833,8 @@ func (c *Client) CreatePolicyVersion(request *CreatePolicyVersionRequest) (respo
 //  INVALIDPARAMETER_STATEMENTERROR = "InvalidParameter.StatementError"
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"
+//  OPERATIONDENIED_CICPOLICYOPERATIONDENIED = "OperationDenied.CicPolicyOperationDenied"
+//  OPERATIONDENIED_POLICYTAGCONFLICT = "OperationDenied.PolicyTagConflict"
 //  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
@@ -1205,6 +1235,7 @@ func NewDeleteAccessKeyResponse() (response *DeleteAccessKeyResponse) {
 //  OPERATIONDENIED_ACCESSKEYOVERLIMIT = "OperationDenied.AccessKeyOverLimit"
 //  OPERATIONDENIED_SUBUIN = "OperationDenied.SubUin"
 //  OPERATIONDENIED_UINNOTMATCH = "OperationDenied.UinNotMatch"
+//  RESOURCENOTFOUND_SECRETNOTEXIST = "ResourceNotFound.SecretNotExist"
 func (c *Client) DeleteAccessKey(request *DeleteAccessKeyRequest) (response *DeleteAccessKeyResponse, err error) {
     return c.DeleteAccessKeyWithContext(context.Background(), request)
 }
@@ -1222,6 +1253,7 @@ func (c *Client) DeleteAccessKey(request *DeleteAccessKeyRequest) (response *Del
 //  OPERATIONDENIED_ACCESSKEYOVERLIMIT = "OperationDenied.AccessKeyOverLimit"
 //  OPERATIONDENIED_SUBUIN = "OperationDenied.SubUin"
 //  OPERATIONDENIED_UINNOTMATCH = "OperationDenied.UinNotMatch"
+//  RESOURCENOTFOUND_SECRETNOTEXIST = "ResourceNotFound.SecretNotExist"
 func (c *Client) DeleteAccessKeyWithContext(ctx context.Context, request *DeleteAccessKeyRequest) (response *DeleteAccessKeyResponse, err error) {
     if request == nil {
         request = NewDeleteAccessKeyRequest()
@@ -1366,7 +1398,9 @@ func NewDeletePolicyResponse() (response *DeletePolicyResponse) {
 // This API (DeletePolicy) is used to delete a policy.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_OPERATEPOLICIESOVERLIMIT = "InvalidParameter.OperatePoliciesOverLimit"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_POLICYIDERROR = "InvalidParameter.PolicyIdError"
 //  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
@@ -1380,7 +1414,9 @@ func (c *Client) DeletePolicy(request *DeletePolicyRequest) (response *DeletePol
 // This API (DeletePolicy) is used to delete a policy.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_OPERATEPOLICIESOVERLIMIT = "InvalidParameter.OperatePoliciesOverLimit"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_POLICYIDERROR = "InvalidParameter.PolicyIdError"
 //  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
@@ -1427,6 +1463,7 @@ func NewDeletePolicyVersionResponse() (response *DeletePolicyVersionResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  FAILEDOPERATION_POLICYNAMEINUSE = "FailedOperation.PolicyNameInUse"
 //  FAILEDOPERATION_POLICYVERSIONALREADYDEFAULT = "FailedOperation.PolicyVersionAlreadyDefault"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
@@ -1448,6 +1485,7 @@ func NewDeletePolicyVersionResponse() (response *DeletePolicyVersionResponse) {
 //  INVALIDPARAMETER_STATEMENTERROR = "InvalidParameter.StatementError"
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"
+//  OPERATIONDENIED_CICPOLICYOPERATIONDENIED = "OperationDenied.CicPolicyOperationDenied"
 //  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
@@ -1461,6 +1499,7 @@ func (c *Client) DeletePolicyVersion(request *DeletePolicyVersionRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  FAILEDOPERATION_POLICYNAMEINUSE = "FailedOperation.PolicyNameInUse"
 //  FAILEDOPERATION_POLICYVERSIONALREADYDEFAULT = "FailedOperation.PolicyVersionAlreadyDefault"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
@@ -1482,6 +1521,7 @@ func (c *Client) DeletePolicyVersion(request *DeletePolicyVersionRequest) (respo
 //  INVALIDPARAMETER_STATEMENTERROR = "InvalidParameter.StatementError"
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"
+//  OPERATIONDENIED_CICPOLICYOPERATIONDENIED = "OperationDenied.CicPolicyOperationDenied"
 //  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
@@ -1650,6 +1690,7 @@ func NewDeleteSAMLProviderResponse() (response *DeleteSAMLProviderResponse) {
 // This API is used to delete a SAML identity provider.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CICIDENTITYFORBIDDEN = "FailedOperation.CICIdentityForbidden"
 //  RESOURCENOTFOUND_IDENTITYNOTEXIST = "ResourceNotFound.IdentityNotExist"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 func (c *Client) DeleteSAMLProvider(request *DeleteSAMLProviderRequest) (response *DeleteSAMLProviderResponse, err error) {
@@ -1660,6 +1701,7 @@ func (c *Client) DeleteSAMLProvider(request *DeleteSAMLProviderRequest) (respons
 // This API is used to delete a SAML identity provider.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CICIDENTITYFORBIDDEN = "FailedOperation.CICIdentityForbidden"
 //  RESOURCENOTFOUND_IDENTITYNOTEXIST = "ResourceNotFound.IdentityNotExist"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 func (c *Client) DeleteSAMLProviderWithContext(ctx context.Context, request *DeleteSAMLProviderRequest) (response *DeleteSAMLProviderResponse, err error) {
@@ -1758,6 +1800,7 @@ func NewDeleteUserResponse() (response *DeleteUserResponse) {
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_UNMODIFIABLE = "FailedOperation.Unmodifiable"
 //  OPERATIONDENIED_HAVEKEYS = "OperationDenied.HaveKeys"
 //  REQUESTLIMITEXCEEDED_UINLIMITEXCEEDED = "RequestLimitExceeded.UinLimitExceeded"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
@@ -1772,6 +1815,7 @@ func (c *Client) DeleteUser(request *DeleteUserRequest) (response *DeleteUserRes
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_UNMODIFIABLE = "FailedOperation.Unmodifiable"
 //  OPERATIONDENIED_HAVEKEYS = "OperationDenied.HaveKeys"
 //  REQUESTLIMITEXCEEDED_UINLIMITEXCEEDED = "RequestLimitExceeded.UinLimitExceeded"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
@@ -2196,7 +2240,11 @@ func NewDescribeUserSAMLConfigResponse() (response *DescribeUserSAMLConfigRespon
 // This API is used to query user SAML configurations.
 //
 // error code that may be returned:
-//  RESOURCENOTFOUND_IDENTITYNOTEXIST = "ResourceNotFound.IdentityNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"
 func (c *Client) DescribeUserSAMLConfig(request *DescribeUserSAMLConfigRequest) (response *DescribeUserSAMLConfigResponse, err error) {
     return c.DescribeUserSAMLConfigWithContext(context.Background(), request)
 }
@@ -2205,7 +2253,11 @@ func (c *Client) DescribeUserSAMLConfig(request *DescribeUserSAMLConfigRequest) 
 // This API is used to query user SAML configurations.
 //
 // error code that may be returned:
-//  RESOURCENOTFOUND_IDENTITYNOTEXIST = "ResourceNotFound.IdentityNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"
 func (c *Client) DescribeUserSAMLConfigWithContext(ctx context.Context, request *DescribeUserSAMLConfigRequest) (response *DescribeUserSAMLConfigResponse, err error) {
     if request == nil {
         request = NewDescribeUserSAMLConfigRequest()
@@ -2246,6 +2298,7 @@ func NewDetachGroupPolicyResponse() (response *DetachGroupPolicyResponse) {
 // This API (DetachGroupPolicy) is used to unassociate a policy and a user group.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_POLICYIDERROR = "InvalidParameter.PolicyIdError"
@@ -2261,6 +2314,7 @@ func (c *Client) DetachGroupPolicy(request *DetachGroupPolicyRequest) (response 
 // This API (DetachGroupPolicy) is used to unassociate a policy and a user group.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_POLICYIDERROR = "InvalidParameter.PolicyIdError"
@@ -2308,6 +2362,7 @@ func NewDetachRolePolicyResponse() (response *DetachRolePolicyResponse) {
 // This API (DetachRolePolicy) is used to unassociate a policy and a role.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
@@ -2320,6 +2375,7 @@ func (c *Client) DetachRolePolicy(request *DetachRolePolicyRequest) (response *D
 // This API (DetachRolePolicy) is used to unassociate a policy and a role.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
@@ -2364,6 +2420,7 @@ func NewDetachUserPolicyResponse() (response *DetachUserPolicyResponse) {
 // This API (DetachUserPolicy) is used to unassociate a policy and a user.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ATTACHMENTFULL = "InvalidParameter.AttachmentFull"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
@@ -2380,6 +2437,7 @@ func (c *Client) DetachUserPolicy(request *DetachUserPolicyRequest) (response *D
 // This API (DetachUserPolicy) is used to unassociate a policy and a user.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ATTACHMENTFULL = "InvalidParameter.AttachmentFull"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
@@ -3064,6 +3122,7 @@ func NewListAccessKeysResponse() (response *ListAccessKeysResponse) {
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_ACCESSKEY = "FailedOperation.Accesskey"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  OPERATIONDENIED_ACCESSKEYOVERLIMIT = "OperationDenied.AccessKeyOverLimit"
@@ -3080,6 +3139,7 @@ func (c *Client) ListAccessKeys(request *ListAccessKeysRequest) (response *ListA
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_ACCESSKEY = "FailedOperation.Accesskey"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  OPERATIONDENIED_ACCESSKEYOVERLIMIT = "OperationDenied.AccessKeyOverLimit"
@@ -3128,6 +3188,7 @@ func NewListAttachedGroupPoliciesResponse() (response *ListAttachedGroupPolicies
 // error code that may be returned:
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_SEARCHKEYWORDLENGTHERROR = "InvalidParameter.SearchKeywordLengthError"
 func (c *Client) ListAttachedGroupPolicies(request *ListAttachedGroupPoliciesRequest) (response *ListAttachedGroupPoliciesResponse, err error) {
     return c.ListAttachedGroupPoliciesWithContext(context.Background(), request)
 }
@@ -3138,6 +3199,7 @@ func (c *Client) ListAttachedGroupPolicies(request *ListAttachedGroupPoliciesReq
 // error code that may be returned:
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_SEARCHKEYWORDLENGTHERROR = "InvalidParameter.SearchKeywordLengthError"
 func (c *Client) ListAttachedGroupPoliciesWithContext(ctx context.Context, request *ListAttachedGroupPoliciesRequest) (response *ListAttachedGroupPoliciesResponse, err error) {
     if request == nil {
         request = NewListAttachedGroupPoliciesRequest()
@@ -3546,6 +3608,7 @@ func NewListPoliciesResponse() (response *ListPoliciesResponse) {
 // This API is used to query the policy list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_GETUSERAREAERROR = "FailedOperation.GetUserAreaError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_GROUPIDERROR = "InvalidParameter.GroupIdError"
 //  INVALIDPARAMETER_KEYWORDERROR = "InvalidParameter.KeywordError"
@@ -3562,6 +3625,7 @@ func (c *Client) ListPolicies(request *ListPoliciesRequest) (response *ListPolic
 // This API is used to query the policy list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_GETUSERAREAERROR = "FailedOperation.GetUserAreaError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_GROUPIDERROR = "InvalidParameter.GroupIdError"
 //  INVALIDPARAMETER_KEYWORDERROR = "InvalidParameter.KeywordError"
@@ -4010,6 +4074,7 @@ func NewSetDefaultPolicyVersionResponse() (response *SetDefaultPolicyVersionResp
 // This API is used to set the operative policy version.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  FAILEDOPERATION_POLICYNAMEINUSE = "FailedOperation.PolicyNameInUse"
 //  FAILEDOPERATION_POLICYVERSIONALREADYDEFAULT = "FailedOperation.PolicyVersionAlreadyDefault"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
@@ -4045,6 +4110,7 @@ func NewSetDefaultPolicyVersionResponse() (response *SetDefaultPolicyVersionResp
 //  INVALIDPARAMETER_STATEMENTERROR = "InvalidParameter.StatementError"
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"
+//  OPERATIONDENIED_CICPOLICYOPERATIONDENIED = "OperationDenied.CicPolicyOperationDenied"
 //  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
@@ -4057,6 +4123,7 @@ func (c *Client) SetDefaultPolicyVersion(request *SetDefaultPolicyVersionRequest
 // This API is used to set the operative policy version.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  FAILEDOPERATION_POLICYNAMEINUSE = "FailedOperation.PolicyNameInUse"
 //  FAILEDOPERATION_POLICYVERSIONALREADYDEFAULT = "FailedOperation.PolicyVersionAlreadyDefault"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
@@ -4092,6 +4159,7 @@ func (c *Client) SetDefaultPolicyVersion(request *SetDefaultPolicyVersionRequest
 //  INVALIDPARAMETER_STATEMENTERROR = "InvalidParameter.StatementError"
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"
+//  OPERATIONDENIED_CICPOLICYOPERATIONDENIED = "OperationDenied.CicPolicyOperationDenied"
 //  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
@@ -4140,6 +4208,7 @@ func NewSetMfaFlagResponse() (response *SetMfaFlagResponse) {
 //  FAILEDOPERATION_USERNOTBINDWECHAT = "FailedOperation.UserNotBindWechat"
 //  FAILEDOPERATION_USERUNBINDNOPERMISSION = "FailedOperation.UserUnbindNoPermission"
 //  INVALIDPARAMETER_MFATOKENERROR = "InvalidParameter.MFATokenError"
+//  INVALIDPARAMETER_NAMEORIDCARDERROR = "InvalidParameter.NameOrIdCardError"
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) SetMfaFlag(request *SetMfaFlagRequest) (response *SetMfaFlagResponse, err error) {
@@ -4154,6 +4223,7 @@ func (c *Client) SetMfaFlag(request *SetMfaFlagRequest) (response *SetMfaFlagRes
 //  FAILEDOPERATION_USERNOTBINDWECHAT = "FailedOperation.UserNotBindWechat"
 //  FAILEDOPERATION_USERUNBINDNOPERMISSION = "FailedOperation.UserUnbindNoPermission"
 //  INVALIDPARAMETER_MFATOKENERROR = "InvalidParameter.MFATokenError"
+//  INVALIDPARAMETER_NAMEORIDCARDERROR = "InvalidParameter.NameOrIdCardError"
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) SetMfaFlagWithContext(ctx context.Context, request *SetMfaFlagRequest) (response *SetMfaFlagResponse, err error) {
@@ -4602,6 +4672,7 @@ func NewUpdatePolicyResponse() (response *UpdatePolicyResponse) {
 // This API will update the default version of an existing policy instead of creating a new one. If no policy exists, a default version will be created.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  FAILEDOPERATION_POLICYNAMEINUSE = "FailedOperation.PolicyNameInUse"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ACTIONERROR = "InvalidParameter.ActionError"
@@ -4635,6 +4706,7 @@ func NewUpdatePolicyResponse() (response *UpdatePolicyResponse) {
 //  INVALIDPARAMETER_STATEMENTERROR = "InvalidParameter.StatementError"
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"
+//  OPERATIONDENIED_POLICYTAGCONFLICT = "OperationDenied.PolicyTagConflict"
 //  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
@@ -4649,6 +4721,7 @@ func (c *Client) UpdatePolicy(request *UpdatePolicyRequest) (response *UpdatePol
 // This API will update the default version of an existing policy instead of creating a new one. If no policy exists, a default version will be created.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
 //  FAILEDOPERATION_POLICYNAMEINUSE = "FailedOperation.PolicyNameInUse"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ACTIONERROR = "InvalidParameter.ActionError"
@@ -4682,6 +4755,7 @@ func (c *Client) UpdatePolicy(request *UpdatePolicyRequest) (response *UpdatePol
 //  INVALIDPARAMETER_STATEMENTERROR = "InvalidParameter.StatementError"
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"
+//  OPERATIONDENIED_POLICYTAGCONFLICT = "OperationDenied.PolicyTagConflict"
 //  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
@@ -4836,6 +4910,7 @@ func NewUpdateSAMLProviderResponse() (response *UpdateSAMLProviderResponse) {
 // This API is used to update SAML identity provider information.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CICIDENTITYFORBIDDEN = "FailedOperation.CICIdentityForbidden"
 //  INVALIDPARAMETERVALUE_METADATAERROR = "InvalidParameterValue.MetadataError"
 //  RESOURCENOTFOUND_IDENTITYNOTEXIST = "ResourceNotFound.IdentityNotExist"
 func (c *Client) UpdateSAMLProvider(request *UpdateSAMLProviderRequest) (response *UpdateSAMLProviderResponse, err error) {
@@ -4846,6 +4921,7 @@ func (c *Client) UpdateSAMLProvider(request *UpdateSAMLProviderRequest) (respons
 // This API is used to update SAML identity provider information.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CICIDENTITYFORBIDDEN = "FailedOperation.CICIdentityForbidden"
 //  INVALIDPARAMETERVALUE_METADATAERROR = "InvalidParameterValue.MetadataError"
 //  RESOURCENOTFOUND_IDENTITYNOTEXIST = "ResourceNotFound.IdentityNotExist"
 func (c *Client) UpdateSAMLProviderWithContext(ctx context.Context, request *UpdateSAMLProviderRequest) (response *UpdateSAMLProviderResponse, err error) {
@@ -4890,6 +4966,9 @@ func NewUpdateUserResponse() (response *UpdateUserResponse) {
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_EXISTHIGHRISKOPERATIONS = "FailedOperation.ExistHighRiskOperations"
+//  FAILEDOPERATION_UNMODIFIABLE = "FailedOperation.Unmodifiable"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PASSWORDVIOLATEDRULES = "InvalidParameter.PasswordViolatedRules"
 //  INVALIDPARAMETER_USERNAMEILLEGAL = "InvalidParameter.UserNameIllegal"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
@@ -4903,6 +4982,9 @@ func (c *Client) UpdateUser(request *UpdateUserRequest) (response *UpdateUserRes
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_EXISTHIGHRISKOPERATIONS = "FailedOperation.ExistHighRiskOperations"
+//  FAILEDOPERATION_UNMODIFIABLE = "FailedOperation.Unmodifiable"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PASSWORDVIOLATEDRULES = "InvalidParameter.PasswordViolatedRules"
 //  INVALIDPARAMETER_USERNAMEILLEGAL = "InvalidParameter.UserNameIllegal"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
@@ -4946,6 +5028,7 @@ func NewUpdateUserOIDCConfigResponse() (response *UpdateUserOIDCConfigResponse) 
 // This API is used to modify the user OIDC configuration.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_IDENTITYNAMEINUSE = "InvalidParameter.IdentityNameInUse"
 //  INVALIDPARAMETERVALUE_IDENTITYKEYERROR = "InvalidParameterValue.IdentityKeyError"
@@ -4961,6 +5044,7 @@ func (c *Client) UpdateUserOIDCConfig(request *UpdateUserOIDCConfigRequest) (res
 // This API is used to modify the user OIDC configuration.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_IDENTITYNAMEINUSE = "InvalidParameter.IdentityNameInUse"
 //  INVALIDPARAMETERVALUE_IDENTITYKEYERROR = "InvalidParameterValue.IdentityKeyError"

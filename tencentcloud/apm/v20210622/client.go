@@ -397,6 +397,56 @@ func (c *Client) DescribeApmAgentWithContext(ctx context.Context, request *Descr
     return
 }
 
+func NewDescribeApmAllVulCountRequest() (request *DescribeApmAllVulCountRequest) {
+    request = &DescribeApmAllVulCountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("apm", APIVersion, "DescribeApmAllVulCount")
+    
+    
+    return
+}
+
+func NewDescribeApmAllVulCountResponse() (response *DescribeApmAllVulCountResponse) {
+    response = &DescribeApmAllVulCountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeApmAllVulCount
+// Query all vulnerability information of the user
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeApmAllVulCount(request *DescribeApmAllVulCountRequest) (response *DescribeApmAllVulCountResponse, err error) {
+    return c.DescribeApmAllVulCountWithContext(context.Background(), request)
+}
+
+// DescribeApmAllVulCount
+// Query all vulnerability information of the user
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeApmAllVulCountWithContext(ctx context.Context, request *DescribeApmAllVulCountRequest) (response *DescribeApmAllVulCountResponse, err error) {
+    if request == nil {
+        request = NewDescribeApmAllVulCountRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "DescribeApmAllVulCount")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeApmAllVulCount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeApmAllVulCountResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeApmApplicationConfigRequest() (request *DescribeApmApplicationConfigRequest) {
     request = &DescribeApmApplicationConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -619,6 +669,56 @@ func (c *Client) DescribeApmPrometheusRuleWithContext(ctx context.Context, reque
     return
 }
 
+func NewDescribeApmSQLInjectionDetailRequest() (request *DescribeApmSQLInjectionDetailRequest) {
+    request = &DescribeApmSQLInjectionDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("apm", APIVersion, "DescribeApmSQLInjectionDetail")
+    
+    
+    return
+}
+
+func NewDescribeApmSQLInjectionDetailResponse() (response *DescribeApmSQLInjectionDetailResponse) {
+    response = &DescribeApmSQLInjectionDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeApmSQLInjectionDetail
+// Query SQL injection details
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeApmSQLInjectionDetail(request *DescribeApmSQLInjectionDetailRequest) (response *DescribeApmSQLInjectionDetailResponse, err error) {
+    return c.DescribeApmSQLInjectionDetailWithContext(context.Background(), request)
+}
+
+// DescribeApmSQLInjectionDetail
+// Query SQL injection details
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeApmSQLInjectionDetailWithContext(ctx context.Context, request *DescribeApmSQLInjectionDetailRequest) (response *DescribeApmSQLInjectionDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeApmSQLInjectionDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "DescribeApmSQLInjectionDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeApmSQLInjectionDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeApmSQLInjectionDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeApmSampleConfigRequest() (request *DescribeApmSampleConfigRequest) {
     request = &DescribeApmSampleConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -731,6 +831,106 @@ func (c *Client) DescribeApmServiceMetricWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribeApmVulnerabilityCountRequest() (request *DescribeApmVulnerabilityCountRequest) {
+    request = &DescribeApmVulnerabilityCountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("apm", APIVersion, "DescribeApmVulnerabilityCount")
+    
+    
+    return
+}
+
+func NewDescribeApmVulnerabilityCountResponse() (response *DescribeApmVulnerabilityCountResponse) {
+    response = &DescribeApmVulnerabilityCountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeApmVulnerabilityCount
+// Query vulnerability metrics
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeApmVulnerabilityCount(request *DescribeApmVulnerabilityCountRequest) (response *DescribeApmVulnerabilityCountResponse, err error) {
+    return c.DescribeApmVulnerabilityCountWithContext(context.Background(), request)
+}
+
+// DescribeApmVulnerabilityCount
+// Query vulnerability metrics
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeApmVulnerabilityCountWithContext(ctx context.Context, request *DescribeApmVulnerabilityCountRequest) (response *DescribeApmVulnerabilityCountResponse, err error) {
+    if request == nil {
+        request = NewDescribeApmVulnerabilityCountRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "DescribeApmVulnerabilityCount")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeApmVulnerabilityCount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeApmVulnerabilityCountResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeApmVulnerabilityDetailRequest() (request *DescribeApmVulnerabilityDetailRequest) {
+    request = &DescribeApmVulnerabilityDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("apm", APIVersion, "DescribeApmVulnerabilityDetail")
+    
+    
+    return
+}
+
+func NewDescribeApmVulnerabilityDetailResponse() (response *DescribeApmVulnerabilityDetailResponse) {
+    response = &DescribeApmVulnerabilityDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeApmVulnerabilityDetail
+// Query vulnerability details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeApmVulnerabilityDetail(request *DescribeApmVulnerabilityDetailRequest) (response *DescribeApmVulnerabilityDetailResponse, err error) {
+    return c.DescribeApmVulnerabilityDetailWithContext(context.Background(), request)
+}
+
+// DescribeApmVulnerabilityDetail
+// Query vulnerability details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeApmVulnerabilityDetailWithContext(ctx context.Context, request *DescribeApmVulnerabilityDetailRequest) (response *DescribeApmVulnerabilityDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeApmVulnerabilityDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "DescribeApmVulnerabilityDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeApmVulnerabilityDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeApmVulnerabilityDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeGeneralApmApplicationConfigRequest() (request *DescribeGeneralApmApplicationConfigRequest) {
     request = &DescribeGeneralApmApplicationConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -807,47 +1007,49 @@ func NewDescribeGeneralMetricDataResponse() (response *DescribeGeneralMetricData
 }
 
 // DescribeGeneralMetricData
-// This API is a general API used to obtain metric data. Users submit request parameters as needed and receive the corresponding metric data.
+// General interface to obtain metric data. Submit request parameters as needed and receive the corresponding metric data.
 //
-// The API call frequency is limited to 20 requests per second and 1200 requests per minute. The number of data points per request is limited to 1440.
+// API call frequency limit: 20 requests/second, 1,200 requests/minute. Data point limit per single request: up to 1,440 data points.
 //
-// **Usage of the General Interface for Fetching Metric Data**
+// 
 //
-// DescribeGeneralMetricData is a general interface for querying metric data, supporting flexible data retrieval. The query method of this interface is similar to using the following SQL statement:
-//
-// SELECT {Metrics} FROM {ViewName} WHERE {Filters} GROUP BY {GroupBy}.
+// General interface to obtain metric data usage: This API is used to query metric data flexibly. The query method of this API is similar to using the following SQL statement: SELECT {Metrics} FROM {ViewName} WHERE {Filters} GROUP BY {GroupBy}. Before initiating request, please confirm the following key parameters:
 //
 // 1. View (ViewName)
 //
-// Determines the data domain you want to query.
+// Determine the domain of the queried data.
 //
-// Examples: service_metric (Service Monitoring View), db_metric (Database View), etc. For views supported by APM, please refer to [Metric Views](https://www.tencentcloud.com/document/product/248/68462?has_map=1&lang=en&pg=)
+// For example: service_metric (service monitoring view), db_metric (database view). For views supported by APM, see metrics view (https://www.tencentcloud.com/document/product/248/101681?from_cn_redirect=1#069b06a9-2593-49db-b694-dea4200f3b19).
 //
-// 2. Metrics (Metrics)
+// 
 //
-// Used to specify one or more metric items to be included in the returned results.
+// 2. Metrics
 //
-// Examples: request_count (Total Requests), duration_avg (Average Latency), error_rate (Error Rate). For metrics supported by APM, please refer to the [APM Metric Protocol Standard](https://www.tencentcloud.com/document/product/248/68462?has_map=1&lang=en&pg=).
+// Used to specify one or more metric items in the returned result.
 //
-// 3. Filters (Filters)
+// For example: request_count (request count), duration_avg (avg duration), error_rate (error rate). For supported metrics about APM, see [APM Protocol Standards](https://www.tencentcloud.com/document/product/248/101681?from_cn_redirect=1). Each view (ViewName) supports an exclusive metric set.
 //
-// Supports one or more filtering conditions in the form of Key-Value pairs.
+// 3. Filters
 //
-// Example: Querying only a specific service: service.name = "order-service". Common dimensions and specific dimensions supported by each ViewName can be used as keys in filtering conditions. For more details, please refer to the [APM Metric Protocol Standard](https://www.tencentcloud.com/document/product/248/68462?has_map=1&lang=en&pg=).
+// Support filter criteria in the form of one or multiple Key-Value pairs.
 //
-// 4. Aggregation (GroupBy)
+// For example: Only query a certain specific service with service.name = "order-service". Common dimensional and each view (ViewName) support exclusive dimensions, which can be used as keys in filter conditions. For details, refer to the APM metrics protocol standard (https://www.tencentcloud.com/document/product/248/101681?from_cn_redirect=1).
 //
-// Supports one or more aggregation dimensions, equivalent to the GROUP BY clause in SQL.
+// 
 //
-// Example: Grouping by the interface name operation to view the performance of each interface. Common dimensions and specific dimensions supported by each ViewName can be used as aggregation dimensions. For more details, please refer to the [APM Metric Protocol Standard](https://www.tencentcloud.com/document/product/248/68462?has_map=1&lang=en&pg=).
+// 4. GroupBy (aggregation)
 //
-// 5. Granularity (Period)
+// Support one or more aggregate dimensions, equivalent to SQL GROUP BY.
 //
-// This parameter determines whether the data needs to be aggregated by time slices.
+// For example: Group by API name operation to view the performance of each API. Common dimensional and each view (ViewName) support exclusive dimensional, which can be used as aggregation dimension. For details, see [APM protocol standards](https://www.tencentcloud.com/document/product/248/101681?from_cn_redirect=1).
 //
-//     - Period = 1 (Time Series Mode): The returned results are aggregated by time slices. The multiple values contained in the TimeSerial and DataSerial correspond one-to-one, representing the aggregation results for specific time slices. Time Series Mode is primarily used for displaying time trend charts.
+// 5. Granularity (Period) 
 //
-//     - Period = 0 (Summary Statistics Mode): In the returned results, the DataSerial contains only a single value, representing the summarized data for the entire time range.
+// This parameter determines whether time slice aggregation is required.
+//
+// -Period = 1: Time series mode: In the returned result, aggregation is performed by time slice. The time series (TimeSerial) and data sequence (DataSerial) have a one-to-one correspondence, representing aggregation results for specific time slices. Time series mode is mainly used to show time trend charts.
+//
+// -Period = 0: Summarize mode. In the returned result, the data sequence (DataSerial) only contains a unique value, representing the aggregated data for the entire time interval.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -871,47 +1073,49 @@ func (c *Client) DescribeGeneralMetricData(request *DescribeGeneralMetricDataReq
 }
 
 // DescribeGeneralMetricData
-// This API is a general API used to obtain metric data. Users submit request parameters as needed and receive the corresponding metric data.
+// General interface to obtain metric data. Submit request parameters as needed and receive the corresponding metric data.
 //
-// The API call frequency is limited to 20 requests per second and 1200 requests per minute. The number of data points per request is limited to 1440.
+// API call frequency limit: 20 requests/second, 1,200 requests/minute. Data point limit per single request: up to 1,440 data points.
 //
-// **Usage of the General Interface for Fetching Metric Data**
+// 
 //
-// DescribeGeneralMetricData is a general interface for querying metric data, supporting flexible data retrieval. The query method of this interface is similar to using the following SQL statement:
-//
-// SELECT {Metrics} FROM {ViewName} WHERE {Filters} GROUP BY {GroupBy}.
+// General interface to obtain metric data usage: This API is used to query metric data flexibly. The query method of this API is similar to using the following SQL statement: SELECT {Metrics} FROM {ViewName} WHERE {Filters} GROUP BY {GroupBy}. Before initiating request, please confirm the following key parameters:
 //
 // 1. View (ViewName)
 //
-// Determines the data domain you want to query.
+// Determine the domain of the queried data.
 //
-// Examples: service_metric (Service Monitoring View), db_metric (Database View), etc. For views supported by APM, please refer to [Metric Views](https://www.tencentcloud.com/document/product/248/68462?has_map=1&lang=en&pg=)
+// For example: service_metric (service monitoring view), db_metric (database view). For views supported by APM, see metrics view (https://www.tencentcloud.com/document/product/248/101681?from_cn_redirect=1#069b06a9-2593-49db-b694-dea4200f3b19).
 //
-// 2. Metrics (Metrics)
+// 
 //
-// Used to specify one or more metric items to be included in the returned results.
+// 2. Metrics
 //
-// Examples: request_count (Total Requests), duration_avg (Average Latency), error_rate (Error Rate). For metrics supported by APM, please refer to the [APM Metric Protocol Standard](https://www.tencentcloud.com/document/product/248/68462?has_map=1&lang=en&pg=).
+// Used to specify one or more metric items in the returned result.
 //
-// 3. Filters (Filters)
+// For example: request_count (request count), duration_avg (avg duration), error_rate (error rate). For supported metrics about APM, see [APM Protocol Standards](https://www.tencentcloud.com/document/product/248/101681?from_cn_redirect=1). Each view (ViewName) supports an exclusive metric set.
 //
-// Supports one or more filtering conditions in the form of Key-Value pairs.
+// 3. Filters
 //
-// Example: Querying only a specific service: service.name = "order-service". Common dimensions and specific dimensions supported by each ViewName can be used as keys in filtering conditions. For more details, please refer to the [APM Metric Protocol Standard](https://www.tencentcloud.com/document/product/248/68462?has_map=1&lang=en&pg=).
+// Support filter criteria in the form of one or multiple Key-Value pairs.
 //
-// 4. Aggregation (GroupBy)
+// For example: Only query a certain specific service with service.name = "order-service". Common dimensional and each view (ViewName) support exclusive dimensions, which can be used as keys in filter conditions. For details, refer to the APM metrics protocol standard (https://www.tencentcloud.com/document/product/248/101681?from_cn_redirect=1).
 //
-// Supports one or more aggregation dimensions, equivalent to the GROUP BY clause in SQL.
+// 
 //
-// Example: Grouping by the interface name operation to view the performance of each interface. Common dimensions and specific dimensions supported by each ViewName can be used as aggregation dimensions. For more details, please refer to the [APM Metric Protocol Standard](https://www.tencentcloud.com/document/product/248/68462?has_map=1&lang=en&pg=).
+// 4. GroupBy (aggregation)
 //
-// 5. Granularity (Period)
+// Support one or more aggregate dimensions, equivalent to SQL GROUP BY.
 //
-// This parameter determines whether the data needs to be aggregated by time slices.
+// For example: Group by API name operation to view the performance of each API. Common dimensional and each view (ViewName) support exclusive dimensional, which can be used as aggregation dimension. For details, see [APM protocol standards](https://www.tencentcloud.com/document/product/248/101681?from_cn_redirect=1).
 //
-//     - Period = 1 (Time Series Mode): The returned results are aggregated by time slices. The multiple values contained in the TimeSerial and DataSerial correspond one-to-one, representing the aggregation results for specific time slices. Time Series Mode is primarily used for displaying time trend charts.
+// 5. Granularity (Period) 
 //
-//     - Period = 0 (Summary Statistics Mode): In the returned results, the DataSerial contains only a single value, representing the summarized data for the entire time range.
+// This parameter determines whether time slice aggregation is required.
+//
+// -Period = 1: Time series mode: In the returned result, aggregation is performed by time slice. The time series (TimeSerial) and data sequence (DataSerial) have a one-to-one correspondence, representing aggregation results for specific time slices. Time series mode is mainly used to show time trend charts.
+//
+// -Period = 0: Summarize mode. In the returned result, the data sequence (DataSerial) only contains a unique value, representing the aggregated data for the entire time interval.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1135,6 +1339,56 @@ func (c *Client) DescribeMetricRecordsWithContext(ctx context.Context, request *
     return
 }
 
+func NewDescribeOPRAllVulCountRequest() (request *DescribeOPRAllVulCountRequest) {
+    request = &DescribeOPRAllVulCountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("apm", APIVersion, "DescribeOPRAllVulCount")
+    
+    
+    return
+}
+
+func NewDescribeOPRAllVulCountResponse() (response *DescribeOPRAllVulCountResponse) {
+    response = &DescribeOPRAllVulCountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeOPRAllVulCount
+// Query all vulnerability information of the user
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeOPRAllVulCount(request *DescribeOPRAllVulCountRequest) (response *DescribeOPRAllVulCountResponse, err error) {
+    return c.DescribeOPRAllVulCountWithContext(context.Background(), request)
+}
+
+// DescribeOPRAllVulCount
+// Query all vulnerability information of the user
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeOPRAllVulCountWithContext(ctx context.Context, request *DescribeOPRAllVulCountRequest) (response *DescribeOPRAllVulCountResponse, err error) {
+    if request == nil {
+        request = NewDescribeOPRAllVulCountRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "DescribeOPRAllVulCount")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeOPRAllVulCount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeOPRAllVulCountResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeServiceOverviewRequest() (request *DescribeServiceOverviewRequest) {
     request = &DescribeServiceOverviewRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1253,6 +1507,64 @@ func (c *Client) DescribeTagValuesWithContext(ctx context.Context, request *Desc
     request.SetContext(ctx)
     
     response = NewDescribeTagValuesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTopologyNewRequest() (request *DescribeTopologyNewRequest) {
+    request = &DescribeTopologyNewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("apm", APIVersion, "DescribeTopologyNew")
+    
+    
+    return
+}
+
+func NewDescribeTopologyNewResponse() (response *DescribeTopologyNewResponse) {
+    response = &DescribeTopologyNewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTopologyNew
+// This API is used to query the service topology diagram according to the application name.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_APPIDNOTMATCHINSTANCEINFO = "FailedOperation.AppIdNotMatchInstanceInfo"
+//  FAILEDOPERATION_FOCUSNODENOTFOUND = "FailedOperation.FocusNodeNotFound"
+//  FAILEDOPERATION_INSTANCEIDISEMPTY = "FailedOperation.InstanceIdIsEmpty"
+//  FAILEDOPERATION_INSTANCENOTFOUND = "FailedOperation.InstanceNotFound"
+func (c *Client) DescribeTopologyNew(request *DescribeTopologyNewRequest) (response *DescribeTopologyNewResponse, err error) {
+    return c.DescribeTopologyNewWithContext(context.Background(), request)
+}
+
+// DescribeTopologyNew
+// This API is used to query the service topology diagram according to the application name.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_APPIDNOTMATCHINSTANCEINFO = "FailedOperation.AppIdNotMatchInstanceInfo"
+//  FAILEDOPERATION_FOCUSNODENOTFOUND = "FailedOperation.FocusNodeNotFound"
+//  FAILEDOPERATION_INSTANCEIDISEMPTY = "FailedOperation.InstanceIdIsEmpty"
+//  FAILEDOPERATION_INSTANCENOTFOUND = "FailedOperation.InstanceNotFound"
+func (c *Client) DescribeTopologyNewWithContext(ctx context.Context, request *DescribeTopologyNewRequest) (response *DescribeTopologyNewResponse, err error) {
+    if request == nil {
+        request = NewDescribeTopologyNewRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "DescribeTopologyNew")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTopologyNew require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTopologyNewResponse()
     err = c.Send(request, response)
     return
 }
@@ -1571,6 +1883,66 @@ func (c *Client) ModifyApmSampleConfigWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewModifyApmSampleConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyApmServiceRequest() (request *ModifyApmServiceRequest) {
+    request = &ModifyApmServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("apm", APIVersion, "ModifyApmService")
+    
+    
+    return
+}
+
+func NewModifyApmServiceResponse() (response *ModifyApmServiceResponse) {
+    response = &ModifyApmServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyApmService
+// This API is used to edit information about applications of APM.
+//
+// error code that may be returned:
+//  AUTHFAILURE_ACCESSCAMFAIL = "AuthFailure.AccessCAMFail"
+//  AUTHFAILURE_UNMARSHALRESPONSE = "AuthFailure.UnmarshalResponse"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DEMOINSTANCENOTALLOWMODIFIED = "FailedOperation.DemoInstanceNotAllowModified"
+//  FAILEDOPERATION_SERVICENOTFOUND = "FailedOperation.ServiceNotFound"
+//  FAILEDOPERATION_SERVICENOTMATCHAPPIDERR = "FailedOperation.ServiceNotMatchAppIdErr"
+func (c *Client) ModifyApmService(request *ModifyApmServiceRequest) (response *ModifyApmServiceResponse, err error) {
+    return c.ModifyApmServiceWithContext(context.Background(), request)
+}
+
+// ModifyApmService
+// This API is used to edit information about applications of APM.
+//
+// error code that may be returned:
+//  AUTHFAILURE_ACCESSCAMFAIL = "AuthFailure.AccessCAMFail"
+//  AUTHFAILURE_UNMARSHALRESPONSE = "AuthFailure.UnmarshalResponse"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DEMOINSTANCENOTALLOWMODIFIED = "FailedOperation.DemoInstanceNotAllowModified"
+//  FAILEDOPERATION_SERVICENOTFOUND = "FailedOperation.ServiceNotFound"
+//  FAILEDOPERATION_SERVICENOTMATCHAPPIDERR = "FailedOperation.ServiceNotMatchAppIdErr"
+func (c *Client) ModifyApmServiceWithContext(ctx context.Context, request *ModifyApmServiceRequest) (response *ModifyApmServiceResponse, err error) {
+    if request == nil {
+        request = NewModifyApmServiceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "apm", APIVersion, "ModifyApmService")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyApmService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyApmServiceResponse()
     err = c.Send(request, response)
     return
 }

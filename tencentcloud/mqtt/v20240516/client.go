@@ -851,6 +851,62 @@ func (c *Client) DescribeClientListWithContext(ctx context.Context, request *Des
     return
 }
 
+func NewDescribeDeviceCertificateRequest() (request *DescribeDeviceCertificateRequest) {
+    request = &DescribeDeviceCertificateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mqtt", APIVersion, "DescribeDeviceCertificate")
+    
+    
+    return
+}
+
+func NewDescribeDeviceCertificateResponse() (response *DescribeDeviceCertificateResponse) {
+    response = &DescribeDeviceCertificateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDeviceCertificate
+// This API is used to query device certificate details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
+//  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
+//  RESOURCENOTFOUND_USERNAME = "ResourceNotFound.Username"
+func (c *Client) DescribeDeviceCertificate(request *DescribeDeviceCertificateRequest) (response *DescribeDeviceCertificateResponse, err error) {
+    return c.DescribeDeviceCertificateWithContext(context.Background(), request)
+}
+
+// DescribeDeviceCertificate
+// This API is used to query device certificate details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
+//  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
+//  RESOURCENOTFOUND_USERNAME = "ResourceNotFound.Username"
+func (c *Client) DescribeDeviceCertificateWithContext(ctx context.Context, request *DescribeDeviceCertificateRequest) (response *DescribeDeviceCertificateResponse, err error) {
+    if request == nil {
+        request = NewDescribeDeviceCertificateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mqtt", APIVersion, "DescribeDeviceCertificate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDeviceCertificate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDeviceCertificateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDeviceCertificatesRequest() (request *DescribeDeviceCertificatesRequest) {
     request = &DescribeDeviceCertificatesRequest{
         BaseRequest: &tchttp.BaseRequest{},

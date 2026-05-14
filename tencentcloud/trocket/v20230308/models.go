@@ -108,6 +108,56 @@ type ClientSubscriptionInfo struct {
 	ExpressionType *string `json:"ExpressionType,omitnil,omitempty" name:"ExpressionType"`
 }
 
+type ConsumeGroupItem struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Consumer group name
+	ConsumerGroup *string `json:"ConsumerGroup,omitnil,omitempty" name:"ConsumerGroup"`
+
+	// Enable consumption
+	ConsumeEnable *bool `json:"ConsumeEnable,omitnil,omitempty" name:"ConsumeEnable"`
+
+	// Ordered delivery: true
+	// Concurrent delivery: false.
+	ConsumeMessageOrderly *bool `json:"ConsumeMessageOrderly,omitnil,omitempty" name:"ConsumeMessageOrderly"`
+
+	// Maximum number of retries
+	MaxRetryTimes *int64 `json:"MaxRetryTimes,omitnil,omitempty" name:"MaxRetryTimes"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// ID of a 4.x cluster.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterIdV4 *string `json:"ClusterIdV4,omitnil,omitempty" name:"ClusterIdV4"`
+
+	// Namespace of a 4.x cluster.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NamespaceV4 *string `json:"NamespaceV4,omitnil,omitempty" name:"NamespaceV4"`
+
+	// Consumer group name of a 4.x cluster.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ConsumerGroupV4 *string `json:"ConsumerGroupV4,omitnil,omitempty" name:"ConsumerGroupV4"`
+
+	// Complete namespace of a 4.x cluster.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FullNamespaceV4 *string `json:"FullNamespaceV4,omitnil,omitempty" name:"FullNamespaceV4"`
+
+	// Number of subscribed topics.
+	SubscribeTopicNum *int64 `json:"SubscribeTopicNum,omitnil,omitempty" name:"SubscribeTopicNum"`
+
+	// Creation time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *int64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// List of bound tags
+	TagList []*Tag `json:"TagList,omitnil,omitempty" name:"TagList"`
+
+	// Retry policy
+	RetryPolicy *RetryPolicy `json:"RetryPolicy,omitnil,omitempty" name:"RetryPolicy"`
+}
+
 type ConsumerClient struct {
 	// Client ID
 	ClientId *string `json:"ClientId,omitnil,omitempty" name:"ClientId"`
@@ -1005,6 +1055,123 @@ func (r *DescribeConsumerClientResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeConsumerClientResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConsumerGroupListRequestParams struct {
+	// TDMQ RocketMQ instance ID. It can be obtained from the API [DescribeFusionInstanceList](https://www.tencentcloud.com/document/api/1493/106745?from_cn_redirect=1) or the console.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Tag filter
+	TagFilters []*TagFilter `json:"TagFilters,omitnil,omitempty" name:"TagFilters"`
+
+	// Filtering condition list. See the description of the API using this parameter for the usage method.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Starting position of the query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of queried results. Default value: 20.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Queries consumer groups under a specified topic.
+	FromTopic *string `json:"FromTopic,omitnil,omitempty" name:"FromTopic"`
+
+	// Sort by specified field, with the enumerated values as follows:
+	// -subscribeNum: Number of topics subscribed
+	SortedBy *string `json:"SortedBy,omitnil,omitempty" name:"SortedBy"`
+
+	// Sort in ascending or descending order, with the enumerated values as follows:
+	// 
+	// -asc: Ascending
+	// - DESC: descending order.
+	SortOrder *string `json:"SortOrder,omitnil,omitempty" name:"SortOrder"`
+}
+
+type DescribeConsumerGroupListRequest struct {
+	*tchttp.BaseRequest
+	
+	// TDMQ RocketMQ instance ID. It can be obtained from the API [DescribeFusionInstanceList](https://www.tencentcloud.com/document/api/1493/106745?from_cn_redirect=1) or the console.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Tag filter
+	TagFilters []*TagFilter `json:"TagFilters,omitnil,omitempty" name:"TagFilters"`
+
+	// Filtering condition list. See the description of the API using this parameter for the usage method.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Starting position of the query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of queried results. Default value: 20.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Queries consumer groups under a specified topic.
+	FromTopic *string `json:"FromTopic,omitnil,omitempty" name:"FromTopic"`
+
+	// Sort by specified field, with the enumerated values as follows:
+	// -subscribeNum: Number of topics subscribed
+	SortedBy *string `json:"SortedBy,omitnil,omitempty" name:"SortedBy"`
+
+	// Sort in ascending or descending order, with the enumerated values as follows:
+	// 
+	// -asc: Ascending
+	// - DESC: descending order.
+	SortOrder *string `json:"SortOrder,omitnil,omitempty" name:"SortOrder"`
+}
+
+func (r *DescribeConsumerGroupListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConsumerGroupListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "TagFilters")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "FromTopic")
+	delete(f, "SortedBy")
+	delete(f, "SortOrder")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeConsumerGroupListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConsumerGroupListResponseParams struct {
+	// Total query count
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Consumer group list
+	Data []*ConsumeGroupItem `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeConsumerGroupListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeConsumerGroupListResponseParams `json:"Response"`
+}
+
+func (r *DescribeConsumerGroupListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConsumerGroupListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4230,6 +4397,17 @@ func (r *ResetConsumerGroupOffsetResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ResetConsumerGroupOffsetResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type RetryPolicy struct {
+	// Retry policy type. The enumeration values are as follows:
+	// 
+	// -EXPONENTIAL: Fixed interval
+	// -CUSTOMIZED: Tier backoff
+	PolicyType *string `json:"PolicyType,omitnil,omitempty" name:"PolicyType"`
+
+	// Fixed retry interval. This parameter takes effect when a fixed interval-based retry policy is configured.
+	RetryInterval *int64 `json:"RetryInterval,omitnil,omitempty" name:"RetryInterval"`
 }
 
 type RoleItem struct {

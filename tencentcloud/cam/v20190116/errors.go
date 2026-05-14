@@ -26,6 +26,21 @@ const (
 	// An error occurred while manipulating the access key.
 	FAILEDOPERATION_ACCESSKEY = "FailedOperation.Accesskey"
 
+	// 
+	FAILEDOPERATION_CICIDENTITYFORBIDDEN = "FailedOperation.CICIdentityForbidden"
+
+	// 
+	FAILEDOPERATION_EXISTHIGHRISKOPERATIONS = "FailedOperation.ExistHighRiskOperations"
+
+	// 
+	FAILEDOPERATION_FORBIDADD = "FailedOperation.ForbidAdd"
+
+	// 
+	FAILEDOPERATION_GETUSERAREAERROR = "FailedOperation.GetUserAreaError"
+
+	// 
+	FAILEDOPERATION_ORGANIZATIONPOLICYOPERATEERROR = "FailedOperation.OrganizationPolicyOperateError"
+
 	// The number of user policies has exceeded the limit.
 	FAILEDOPERATION_POLICYFULL = "FailedOperation.PolicyFull"
 
@@ -44,6 +59,9 @@ const (
 	// Failed to unbind the tag
 	FAILEDOPERATION_UNTAGRESOURCEFAILED = "FailedOperation.UnTagResourceFailed"
 
+	// 
+	FAILEDOPERATION_UNMODIFIABLE = "FailedOperation.Unmodifiable"
+
 	// No mobile number is bound to the account
 	FAILEDOPERATION_USERNOTBINDPHONE = "FailedOperation.UserNotBindPhone"
 
@@ -58,6 +76,9 @@ const (
 
 	// Internal error.
 	INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+
+	// 
+	INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 
 	// Incorrect parameter.
 	INVALIDPARAMETER = "InvalidParameter"
@@ -122,11 +143,17 @@ const (
 	// Multi-factor Token verification failed.
 	INVALIDPARAMETER_MFATOKENERROR = "InvalidParameter.MFATokenError"
 
+	// The name or ID is incorrect.
+	INVALIDPARAMETER_NAMEORIDCARDERROR = "InvalidParameter.NameOrIdCardError"
+
 	// CAM does not support the resource type specified in the policy document.
 	INVALIDPARAMETER_NOTSUPPORTPRODUCT = "InvalidParameter.NotSupportProduct"
 
 	// There were too many entities in one operation.
 	INVALIDPARAMETER_OPERATEENTITIESOVERLIMIT = "InvalidParameter.OperateEntitiesOverLimit"
+
+	// 
+	INVALIDPARAMETER_OPERATEPOLICIESOVERLIMIT = "InvalidParameter.OperatePoliciesOverLimit"
 
 	// The current role can only be operated by the organization admin. To modify it, contact the admin.
 	INVALIDPARAMETER_ORGANIZATIONROLEOPERATEERROR = "InvalidParameter.OrganizationRoleOperateError"
@@ -269,8 +296,14 @@ const (
 	// Each account can have up to two `AccessKey`.
 	OPERATIONDENIED_ACCESSKEYOVERLIMIT = "OperationDenied.AccessKeyOverLimit"
 
+	// 
+	OPERATIONDENIED_CICPOLICYOPERATIONDENIED = "OperationDenied.CicPolicyOperationDenied"
+
 	// There are undeleted API keys.
 	OPERATIONDENIED_HAVEKEYS = "OperationDenied.HaveKeys"
+
+	// 
+	OPERATIONDENIED_POLICYTAGCONFLICT = "OperationDenied.PolicyTagConflict"
 
 	// The sub-user is not allowed to use the root account key.
 	OPERATIONDENIED_SUBUIN = "OperationDenied.SubUin"
