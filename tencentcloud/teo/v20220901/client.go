@@ -10433,9 +10433,9 @@ func NewEnableOriginACLResponse() (response *EnableOriginACLResponse) {
 //
 // Note:
 //
-// -Calling this API is deemed as agreement to the special agreement for origin protection enablement (https://www.tencentcloud.com/document/product/1552/120141?from_cn_redirect=1);
+// - Calling this API is deemed as agreement to [the special agreement for origin protection enablement](https://www.tencentcloud.com/document/product/1552/120141?from_cn_redirect=1);
 //
-// -The origin IP range may change irregularly. EdgeOne will trigger notifications via Message Center, SMS, or email 14 days, 7 days, 3 days, and 1 day before the change. To ensure you receive the origin IP range change notification, please ensure you have selected the edge security acceleration platform EO product services relevant message notification and configured the correct message recipients in the Tencent Cloud Message Center Console (https://console.cloud.tencent.com/message). For the setting method, refer to Message Subscription Management (https://www.tencentcloud.com/document/product/567/43476?from_cn_redirect=1).
+// - The origin IP range may change irregularly. EdgeOne will trigger notifications via Message Center, SMS, or email 14 days, 7 days, 3 days, and 1 day before the change. To ensure you receive the origin IP range change notification, please ensure you have selected the edge security acceleration platform EO product services relevant message notification and configured the correct message recipients in the [Tencent Cloud Message Center Console](https://console.cloud.tencent.com/message). For the setting method, refer to [Message Subscription Management](https://www.tencentcloud.com/document/product/567/43476?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -10459,9 +10459,9 @@ func (c *Client) EnableOriginACL(request *EnableOriginACLRequest) (response *Ena
 //
 // Note:
 //
-// -Calling this API is deemed as agreement to the special agreement for origin protection enablement (https://www.tencentcloud.com/document/product/1552/120141?from_cn_redirect=1);
+// - Calling this API is deemed as agreement to [the special agreement for origin protection enablement](https://www.tencentcloud.com/document/product/1552/120141?from_cn_redirect=1);
 //
-// -The origin IP range may change irregularly. EdgeOne will trigger notifications via Message Center, SMS, or email 14 days, 7 days, 3 days, and 1 day before the change. To ensure you receive the origin IP range change notification, please ensure you have selected the edge security acceleration platform EO product services relevant message notification and configured the correct message recipients in the Tencent Cloud Message Center Console (https://console.cloud.tencent.com/message). For the setting method, refer to Message Subscription Management (https://www.tencentcloud.com/document/product/567/43476?from_cn_redirect=1).
+// - The origin IP range may change irregularly. EdgeOne will trigger notifications via Message Center, SMS, or email 14 days, 7 days, 3 days, and 1 day before the change. To ensure you receive the origin IP range change notification, please ensure you have selected the edge security acceleration platform EO product services relevant message notification and configured the correct message recipients in the [Tencent Cloud Message Center Console](https://console.cloud.tencent.com/message). For the setting method, refer to [Message Subscription Management](https://www.tencentcloud.com/document/product/567/43476?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

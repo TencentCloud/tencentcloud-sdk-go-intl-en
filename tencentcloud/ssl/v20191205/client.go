@@ -1319,6 +1319,60 @@ func (c *Client) DescribeCertificatesWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDescribeCompaniesRequest() (request *DescribeCompaniesRequest) {
+    request = &DescribeCompaniesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "DescribeCompanies")
+    
+    
+    return
+}
+
+func NewDescribeCompaniesResponse() (response *DescribeCompaniesResponse) {
+    response = &DescribeCompaniesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCompanies
+// Query company list
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeCompanies(request *DescribeCompaniesRequest) (response *DescribeCompaniesResponse, err error) {
+    return c.DescribeCompaniesWithContext(context.Background(), request)
+}
+
+// DescribeCompanies
+// Query company list
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeCompaniesWithContext(ctx context.Context, request *DescribeCompaniesRequest) (response *DescribeCompaniesResponse, err error) {
+    if request == nil {
+        request = NewDescribeCompaniesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ssl", APIVersion, "DescribeCompanies")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCompanies require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCompaniesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeHostTeoInstanceListRequest() (request *DescribeHostTeoInstanceListRequest) {
     request = &DescribeHostTeoInstanceListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1639,6 +1693,60 @@ func (c *Client) DescribeHostUploadUpdateRecordDetailWithContext(ctx context.Con
     request.SetContext(ctx)
     
     response = NewDescribeHostUploadUpdateRecordDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeManagersRequest() (request *DescribeManagersRequest) {
+    request = &DescribeManagersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "DescribeManagers")
+    
+    
+    return
+}
+
+func NewDescribeManagersResponse() (response *DescribeManagersResponse) {
+    response = &DescribeManagersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeManagers
+// Query the list of people in charge
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeManagers(request *DescribeManagersRequest) (response *DescribeManagersResponse, err error) {
+    return c.DescribeManagersWithContext(context.Background(), request)
+}
+
+// DescribeManagers
+// Query the list of people in charge
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeManagersWithContext(ctx context.Context, request *DescribeManagersRequest) (response *DescribeManagersResponse, err error) {
+    if request == nil {
+        request = NewDescribeManagersRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ssl", APIVersion, "DescribeManagers")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeManagers require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeManagersResponse()
     err = c.Send(request, response)
     return
 }

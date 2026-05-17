@@ -5511,6 +5511,64 @@ func (c *Client) DescribeTawAreasWithContext(ctx context.Context, request *Descr
     return
 }
 
+func NewDescribeTawInstancesRequest() (request *DescribeTawInstancesRequest) {
+    request = &DescribeTawInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("rum", APIVersion, "DescribeTawInstances")
+    
+    
+    return
+}
+
+func NewDescribeTawInstancesResponse() (response *DescribeTawInstancesResponse) {
+    response = &DescribeTawInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTawInstances
+// This API is used to query instance information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeTawInstances(request *DescribeTawInstancesRequest) (response *DescribeTawInstancesResponse, err error) {
+    return c.DescribeTawInstancesWithContext(context.Background(), request)
+}
+
+// DescribeTawInstances
+// This API is used to query instance information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeTawInstancesWithContext(ctx context.Context, request *DescribeTawInstancesRequest) (response *DescribeTawInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeTawInstancesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "rum", APIVersion, "DescribeTawInstances")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTawInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTawInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeUvListRequest() (request *DescribeUvListRequest) {
     request = &DescribeUvListRequest{
         BaseRequest: &tchttp.BaseRequest{},
