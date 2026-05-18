@@ -7141,7 +7141,7 @@ func NewResetInstancesTypeResponse() (response *ResetInstancesTypeResponse) {
 // ResetInstancesType
 // This API is used to change the model of an instance.
 //
-// * You can only use this API to change the models of instances whose [system disk type](https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#block_device) is `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`.
+// * You can only use this API to change the models of instances whose [system disk type](https://www.tencentcloud.com/zh/document/product/213/15753) is `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`.
 //
 // * Currently, you cannot use this API to change the models of [CDH](https://intl.cloud.tencent.com/document/product/416?from_cn_redirect=1) instances.
 //
@@ -7159,7 +7159,12 @@ func NewResetInstancesTypeResponse() (response *ResetInstancesTypeResponse) {
 //  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
 //  INVALIDINSTANCETYPE_MALFORMED = "InvalidInstanceType.Malformed"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CDZNOTSUPPORTED = "InvalidParameter.CdzNotSupported"
+//  INVALIDPARAMETER_HOSTIDCUSTOMIZEDINSTANCETYPENOTSUPPORT = "InvalidParameter.HostIdCustomizedInstanceTypeNotSupport"
+//  INVALIDPARAMETER_HOSTIDINSTANCETYPENOTSUPPORT = "InvalidParameter.HostIdInstanceTypeNotSupport"
+//  INVALIDPARAMETER_HOSTIDSTANDARDINSTANCETYPENOTSUPPORT = "InvalidParameter.HostIdStandardInstanceTypeNotSupport"
 //  INVALIDPARAMETER_HOSTIDSTATUSNOTSUPPORT = "InvalidParameter.HostIdStatusNotSupport"
+//  INVALIDPARAMETER_INSTANCETYPESUPPORTEDHOSTNOTFOUND = "InvalidParameter.InstanceTypeSupportedHostNotFound"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_BASICNETWORKINSTANCEFAMILY = "InvalidParameterValue.BasicNetworkInstanceFamily"
 //  INVALIDPARAMETERVALUE_GPUINSTANCEFAMILY = "InvalidParameterValue.GPUInstanceFamily"
@@ -7190,6 +7195,7 @@ func NewResetInstancesTypeResponse() (response *ResetInstancesTypeResponse) {
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
 //  UNSUPPORTEDOPERATION_DISKSNAPCREATETIMETOOOLD = "UnsupportedOperation.DiskSnapCreateTimeTooOld"
 //  UNSUPPORTEDOPERATION_HETEROGENEOUSCHANGEINSTANCEFAMILY = "UnsupportedOperation.HeterogeneousChangeInstanceFamily"
+//  UNSUPPORTEDOPERATION_INSTANCEMIXEDRESETINSTANCETYPE = "UnsupportedOperation.InstanceMixedResetInstanceType"
 //  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEBANNING = "UnsupportedOperation.InstanceStateBanning"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateExitServiceLiveMigrate"
@@ -7223,7 +7229,7 @@ func (c *Client) ResetInstancesType(request *ResetInstancesTypeRequest) (respons
 // ResetInstancesType
 // This API is used to change the model of an instance.
 //
-// * You can only use this API to change the models of instances whose [system disk type](https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#block_device) is `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`.
+// * You can only use this API to change the models of instances whose [system disk type](https://www.tencentcloud.com/zh/document/product/213/15753) is `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`.
 //
 // * Currently, you cannot use this API to change the models of [CDH](https://intl.cloud.tencent.com/document/product/416?from_cn_redirect=1) instances.
 //
@@ -7241,7 +7247,12 @@ func (c *Client) ResetInstancesType(request *ResetInstancesTypeRequest) (respons
 //  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
 //  INVALIDINSTANCETYPE_MALFORMED = "InvalidInstanceType.Malformed"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CDZNOTSUPPORTED = "InvalidParameter.CdzNotSupported"
+//  INVALIDPARAMETER_HOSTIDCUSTOMIZEDINSTANCETYPENOTSUPPORT = "InvalidParameter.HostIdCustomizedInstanceTypeNotSupport"
+//  INVALIDPARAMETER_HOSTIDINSTANCETYPENOTSUPPORT = "InvalidParameter.HostIdInstanceTypeNotSupport"
+//  INVALIDPARAMETER_HOSTIDSTANDARDINSTANCETYPENOTSUPPORT = "InvalidParameter.HostIdStandardInstanceTypeNotSupport"
 //  INVALIDPARAMETER_HOSTIDSTATUSNOTSUPPORT = "InvalidParameter.HostIdStatusNotSupport"
+//  INVALIDPARAMETER_INSTANCETYPESUPPORTEDHOSTNOTFOUND = "InvalidParameter.InstanceTypeSupportedHostNotFound"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_BASICNETWORKINSTANCEFAMILY = "InvalidParameterValue.BasicNetworkInstanceFamily"
 //  INVALIDPARAMETERVALUE_GPUINSTANCEFAMILY = "InvalidParameterValue.GPUInstanceFamily"
@@ -7272,6 +7283,7 @@ func (c *Client) ResetInstancesType(request *ResetInstancesTypeRequest) (respons
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
 //  UNSUPPORTEDOPERATION_DISKSNAPCREATETIMETOOOLD = "UnsupportedOperation.DiskSnapCreateTimeTooOld"
 //  UNSUPPORTEDOPERATION_HETEROGENEOUSCHANGEINSTANCEFAMILY = "UnsupportedOperation.HeterogeneousChangeInstanceFamily"
+//  UNSUPPORTEDOPERATION_INSTANCEMIXEDRESETINSTANCETYPE = "UnsupportedOperation.InstanceMixedResetInstanceType"
 //  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEBANNING = "UnsupportedOperation.InstanceStateBanning"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateExitServiceLiveMigrate"
@@ -7532,6 +7544,9 @@ func NewRunInstancesResponse() (response *RunInstancesResponse) {
 //  INVALIDPARAMETERVALUE_CLOUDSSDDATADISKSIZETOOSMALL = "InvalidParameterValue.CloudSsdDataDiskSizeTooSmall"
 //  INVALIDPARAMETERVALUE_CORECOUNTVALUE = "InvalidParameterValue.CoreCountValue"
 //  INVALIDPARAMETERVALUE_DEDICATEDCLUSTERNOTSUPPORTEDCHARGETYPE = "InvalidParameterValue.DedicatedClusterNotSupportedChargeType"
+//  INVALIDPARAMETERVALUE_DEDICATEDRESOURCEPACKIDSNOTFOUND = "InvalidParameterValue.DedicatedResourcePackIdsNotFound"
+//  INVALIDPARAMETERVALUE_DEDICATEDRESOURCEPACKNOTVALID = "InvalidParameterValue.DedicatedResourcePackNotValid"
+//  INVALIDPARAMETERVALUE_DEDICATEDRESOURCEPACKTENANCYMISMATCH = "InvalidParameterValue.DedicatedResourcePackTenancyMismatch"
 //  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
 //  INVALIDPARAMETERVALUE_DUPLICATETAGS = "InvalidParameterValue.DuplicateTags"
 //  INVALIDPARAMETERVALUE_ELASTICNETWORKNOTEXIST = "InvalidParameterValue.ElasticNetworkNotExist"
@@ -7717,6 +7732,9 @@ func (c *Client) RunInstances(request *RunInstancesRequest) (response *RunInstan
 //  INVALIDPARAMETERVALUE_CLOUDSSDDATADISKSIZETOOSMALL = "InvalidParameterValue.CloudSsdDataDiskSizeTooSmall"
 //  INVALIDPARAMETERVALUE_CORECOUNTVALUE = "InvalidParameterValue.CoreCountValue"
 //  INVALIDPARAMETERVALUE_DEDICATEDCLUSTERNOTSUPPORTEDCHARGETYPE = "InvalidParameterValue.DedicatedClusterNotSupportedChargeType"
+//  INVALIDPARAMETERVALUE_DEDICATEDRESOURCEPACKIDSNOTFOUND = "InvalidParameterValue.DedicatedResourcePackIdsNotFound"
+//  INVALIDPARAMETERVALUE_DEDICATEDRESOURCEPACKNOTVALID = "InvalidParameterValue.DedicatedResourcePackNotValid"
+//  INVALIDPARAMETERVALUE_DEDICATEDRESOURCEPACKTENANCYMISMATCH = "InvalidParameterValue.DedicatedResourcePackTenancyMismatch"
 //  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
 //  INVALIDPARAMETERVALUE_DUPLICATETAGS = "InvalidParameterValue.DuplicateTags"
 //  INVALIDPARAMETERVALUE_ELASTICNETWORKNOTEXIST = "InvalidParameterValue.ElasticNetworkNotExist"

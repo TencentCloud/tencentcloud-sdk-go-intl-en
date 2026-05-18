@@ -101,6 +101,92 @@ func (c *Client) AssignProjectWithContext(ctx context.Context, request *AssignPr
     return
 }
 
+func NewCloseAuditServiceRequest() (request *CloseAuditServiceRequest) {
+    request = &CloseAuditServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "CloseAuditService")
+    
+    
+    return
+}
+
+func NewCloseAuditServiceResponse() (response *CloseAuditServiceResponse) {
+    response = &CloseAuditServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CloseAuditService
+// This API is used to close the audit service.
+//
+// error code that may be returned:
+//  INTERNALERROR_AUDITDELETELOGFILEERROR = "InternalError.AuditDeleteLogFileError"
+//  INTERNALERROR_AUDITDESCRIBELOGERROR = "InternalError.AuditDescribeLogError"
+//  INTERNALERROR_AUDITERROR = "InternalError.AuditError"
+//  INTERNALERROR_AUDITMODIFYSTATUSERROR = "InternalError.AuditModifyStatusError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INTERNALERROR_COSERROR = "InternalError.CosError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_INNERCOMMONERROR = "InternalError.InnerCommonError"
+//  INTERNALERROR_JSONERROR = "InternalError.JSONError"
+//  INTERNALERROR_JSONUNMARSHALERROR = "InternalError.JsonUnmarshalError"
+//  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  OPERATIONDENIED_AUDITPOLICYCONFLICTERROR = "OperationDenied.AuditPolicyConflictError"
+//  OPERATIONDENIED_AUDITPOLICYEXISTERROR = "OperationDenied.AuditPolicyExistError"
+//  OPERATIONDENIED_AUDITPOLICYNOTEXISTERROR = "OperationDenied.AuditPolicyNotExistError"
+//  OPERATIONDENIED_AUDITTASKCONFLICTERROR = "OperationDenied.AuditTaskConflictError"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+func (c *Client) CloseAuditService(request *CloseAuditServiceRequest) (response *CloseAuditServiceResponse, err error) {
+    return c.CloseAuditServiceWithContext(context.Background(), request)
+}
+
+// CloseAuditService
+// This API is used to close the audit service.
+//
+// error code that may be returned:
+//  INTERNALERROR_AUDITDELETELOGFILEERROR = "InternalError.AuditDeleteLogFileError"
+//  INTERNALERROR_AUDITDESCRIBELOGERROR = "InternalError.AuditDescribeLogError"
+//  INTERNALERROR_AUDITERROR = "InternalError.AuditError"
+//  INTERNALERROR_AUDITMODIFYSTATUSERROR = "InternalError.AuditModifyStatusError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INTERNALERROR_COSERROR = "InternalError.CosError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_INNERCOMMONERROR = "InternalError.InnerCommonError"
+//  INTERNALERROR_JSONERROR = "InternalError.JSONError"
+//  INTERNALERROR_JSONUNMARSHALERROR = "InternalError.JsonUnmarshalError"
+//  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  OPERATIONDENIED_AUDITPOLICYCONFLICTERROR = "OperationDenied.AuditPolicyConflictError"
+//  OPERATIONDENIED_AUDITPOLICYEXISTERROR = "OperationDenied.AuditPolicyExistError"
+//  OPERATIONDENIED_AUDITPOLICYNOTEXISTERROR = "OperationDenied.AuditPolicyNotExistError"
+//  OPERATIONDENIED_AUDITTASKCONFLICTERROR = "OperationDenied.AuditTaskConflictError"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+func (c *Client) CloseAuditServiceWithContext(ctx context.Context, request *CloseAuditServiceRequest) (response *CloseAuditServiceResponse, err error) {
+    if request == nil {
+        request = NewCloseAuditServiceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "CloseAuditService")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CloseAuditService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCloseAuditServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAccountUserRequest() (request *CreateAccountUserRequest) {
     request = &CreateAccountUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -301,7 +387,7 @@ func NewCreateDBInstanceResponse() (response *CreateDBInstanceResponse) {
 }
 
 // CreateDBInstance
-// This API is used to create a yearly/monthly subscription TencentDB for MongoDB instance. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/35767?from_cn_redirect=1) API can be called to query and obtain the supported sales specifications.
+// This API is used to create a yearly/monthly subscription TencentDB for MongoDB instance. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/34701) API can be called to query and obtain the supported sales specifications.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -326,7 +412,7 @@ func (c *Client) CreateDBInstance(request *CreateDBInstanceRequest) (response *C
 }
 
 // CreateDBInstance
-// This API is used to create a yearly/monthly subscription TencentDB for MongoDB instance. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/35767?from_cn_redirect=1) API can be called to query and obtain the supported sales specifications.
+// This API is used to create a yearly/monthly subscription TencentDB for MongoDB instance. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/34701) API can be called to query and obtain the supported sales specifications.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -653,6 +739,262 @@ func (c *Client) DescribeAsyncRequestInfoWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewDescribeAsyncRequestInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAuditConfigRequest() (request *DescribeAuditConfigRequest) {
+    request = &DescribeAuditConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeAuditConfig")
+    
+    
+    return
+}
+
+func NewDescribeAuditConfigResponse() (response *DescribeAuditConfigResponse) {
+    response = &DescribeAuditConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAuditConfig
+// This API is used to query the service configurations for a TencentDB audit policy, including the audit log retention period.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_AUDITDESCRIBELOGERROR = "InternalError.AuditDescribeLogError"
+//  INTERNALERROR_COSERROR = "InternalError.CosError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
+//  INTERNALERROR_INNERCOMMONERROR = "InternalError.InnerCommonError"
+//  INTERNALERROR_JSONERROR = "InternalError.JSONError"
+//  INTERNALERROR_JSONUNMARSHALERROR = "InternalError.JsonUnmarshalError"
+//  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  OPERATIONDENIED_AUDITPOLICYCONFLICTERROR = "OperationDenied.AuditPolicyConflictError"
+//  OPERATIONDENIED_AUDITPOLICYEXISTERROR = "OperationDenied.AuditPolicyExistError"
+//  OPERATIONDENIED_AUDITPOLICYNOTEXISTERROR = "OperationDenied.AuditPolicyNotExistError"
+//  OPERATIONDENIED_AUDITPOLICYOVERQUOTAERROR = "OperationDenied.AuditPolicyOverQuotaError"
+//  OPERATIONDENIED_AUDITTASKCONFLICTERROR = "OperationDenied.AuditTaskConflictError"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+func (c *Client) DescribeAuditConfig(request *DescribeAuditConfigRequest) (response *DescribeAuditConfigResponse, err error) {
+    return c.DescribeAuditConfigWithContext(context.Background(), request)
+}
+
+// DescribeAuditConfig
+// This API is used to query the service configurations for a TencentDB audit policy, including the audit log retention period.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_AUDITDESCRIBELOGERROR = "InternalError.AuditDescribeLogError"
+//  INTERNALERROR_COSERROR = "InternalError.CosError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
+//  INTERNALERROR_INNERCOMMONERROR = "InternalError.InnerCommonError"
+//  INTERNALERROR_JSONERROR = "InternalError.JSONError"
+//  INTERNALERROR_JSONUNMARSHALERROR = "InternalError.JsonUnmarshalError"
+//  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  OPERATIONDENIED_AUDITPOLICYCONFLICTERROR = "OperationDenied.AuditPolicyConflictError"
+//  OPERATIONDENIED_AUDITPOLICYEXISTERROR = "OperationDenied.AuditPolicyExistError"
+//  OPERATIONDENIED_AUDITPOLICYNOTEXISTERROR = "OperationDenied.AuditPolicyNotExistError"
+//  OPERATIONDENIED_AUDITPOLICYOVERQUOTAERROR = "OperationDenied.AuditPolicyOverQuotaError"
+//  OPERATIONDENIED_AUDITTASKCONFLICTERROR = "OperationDenied.AuditTaskConflictError"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+func (c *Client) DescribeAuditConfigWithContext(ctx context.Context, request *DescribeAuditConfigRequest) (response *DescribeAuditConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribeAuditConfigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeAuditConfig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAuditConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAuditConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAuditLogFilesRequest() (request *DescribeAuditLogFilesRequest) {
+    request = &DescribeAuditLogFilesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeAuditLogFiles")
+    
+    
+    return
+}
+
+func NewDescribeAuditLogFilesResponse() (response *DescribeAuditLogFilesResponse) {
+    response = &DescribeAuditLogFilesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAuditLogFiles
+// This API is used to query audit log files of a cloud database instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_AUDITDESCRIBELOGERROR = "InternalError.AuditDescribeLogError"
+//  INTERNALERROR_AUDITERROR = "InternalError.AuditError"
+//  INTERNALERROR_AUDITMODIFYSTATUSERROR = "InternalError.AuditModifyStatusError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INTERNALERROR_COSERROR = "InternalError.CosError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_INNERCOMMONERROR = "InternalError.InnerCommonError"
+//  INTERNALERROR_JSONERROR = "InternalError.JSONError"
+//  INTERNALERROR_JSONUNMARSHALERROR = "InternalError.JsonUnmarshalError"
+//  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  OPERATIONDENIED_AUDITPOLICYCONFLICTERROR = "OperationDenied.AuditPolicyConflictError"
+//  OPERATIONDENIED_AUDITPOLICYNOTEXISTERROR = "OperationDenied.AuditPolicyNotExistError"
+//  OPERATIONDENIED_AUDITPOLICYOVERQUOTAERROR = "OperationDenied.AuditPolicyOverQuotaError"
+//  OPERATIONDENIED_AUDITTASKCONFLICTERROR = "OperationDenied.AuditTaskConflictError"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+//  OPERATIONDENIED_UNSUPPORTOPENAUDITERROR = "OperationDenied.UnsupportOpenAuditError"
+func (c *Client) DescribeAuditLogFiles(request *DescribeAuditLogFilesRequest) (response *DescribeAuditLogFilesResponse, err error) {
+    return c.DescribeAuditLogFilesWithContext(context.Background(), request)
+}
+
+// DescribeAuditLogFiles
+// This API is used to query audit log files of a cloud database instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_AUDITDESCRIBELOGERROR = "InternalError.AuditDescribeLogError"
+//  INTERNALERROR_AUDITERROR = "InternalError.AuditError"
+//  INTERNALERROR_AUDITMODIFYSTATUSERROR = "InternalError.AuditModifyStatusError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INTERNALERROR_COSERROR = "InternalError.CosError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_INNERCOMMONERROR = "InternalError.InnerCommonError"
+//  INTERNALERROR_JSONERROR = "InternalError.JSONError"
+//  INTERNALERROR_JSONUNMARSHALERROR = "InternalError.JsonUnmarshalError"
+//  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  OPERATIONDENIED_AUDITPOLICYCONFLICTERROR = "OperationDenied.AuditPolicyConflictError"
+//  OPERATIONDENIED_AUDITPOLICYNOTEXISTERROR = "OperationDenied.AuditPolicyNotExistError"
+//  OPERATIONDENIED_AUDITPOLICYOVERQUOTAERROR = "OperationDenied.AuditPolicyOverQuotaError"
+//  OPERATIONDENIED_AUDITTASKCONFLICTERROR = "OperationDenied.AuditTaskConflictError"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+//  OPERATIONDENIED_UNSUPPORTOPENAUDITERROR = "OperationDenied.UnsupportOpenAuditError"
+func (c *Client) DescribeAuditLogFilesWithContext(ctx context.Context, request *DescribeAuditLogFilesRequest) (response *DescribeAuditLogFilesResponse, err error) {
+    if request == nil {
+        request = NewDescribeAuditLogFilesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeAuditLogFiles")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAuditLogFiles require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAuditLogFilesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAuditLogsRequest() (request *DescribeAuditLogsRequest) {
+    request = &DescribeAuditLogsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeAuditLogs")
+    
+    
+    return
+}
+
+func NewDescribeAuditLogsResponse() (response *DescribeAuditLogsResponse) {
+    response = &DescribeAuditLogsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAuditLogs
+// This API is used to query database audit logs.
+//
+// error code that may be returned:
+//  INTERNALERROR_AUDITCREATELOGFILEERROR = "InternalError.AuditCreateLogFileError"
+//  INTERNALERROR_AUDITDELETELOGFILEERROR = "InternalError.AuditDeleteLogFileError"
+//  INTERNALERROR_AUDITDESCRIBELOGERROR = "InternalError.AuditDescribeLogError"
+//  INTERNALERROR_AUDITERROR = "InternalError.AuditError"
+//  INTERNALERROR_AUDITMODIFYSTATUSERROR = "InternalError.AuditModifyStatusError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_INNERCOMMONERROR = "InternalError.InnerCommonError"
+//  INTERNALERROR_JSONERROR = "InternalError.JSONError"
+//  INTERNALERROR_JSONUNMARSHALERROR = "InternalError.JsonUnmarshalError"
+//  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
+//  OPERATIONDENIED_AUDITPOLICYCONFLICTERROR = "OperationDenied.AuditPolicyConflictError"
+//  OPERATIONDENIED_AUDITPOLICYEXISTERROR = "OperationDenied.AuditPolicyExistError"
+//  OPERATIONDENIED_AUDITPOLICYNOTEXISTERROR = "OperationDenied.AuditPolicyNotExistError"
+//  OPERATIONDENIED_AUDITPOLICYOVERQUOTAERROR = "OperationDenied.AuditPolicyOverQuotaError"
+//  OPERATIONDENIED_AUDITSTATUSERROR = "OperationDenied.AuditStatusError"
+//  OPERATIONDENIED_AUDITTASKCONFLICTERROR = "OperationDenied.AuditTaskConflictError"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+//  OPERATIONDENIED_UNSUPPORTOPENAUDITERROR = "OperationDenied.UnsupportOpenAuditError"
+func (c *Client) DescribeAuditLogs(request *DescribeAuditLogsRequest) (response *DescribeAuditLogsResponse, err error) {
+    return c.DescribeAuditLogsWithContext(context.Background(), request)
+}
+
+// DescribeAuditLogs
+// This API is used to query database audit logs.
+//
+// error code that may be returned:
+//  INTERNALERROR_AUDITCREATELOGFILEERROR = "InternalError.AuditCreateLogFileError"
+//  INTERNALERROR_AUDITDELETELOGFILEERROR = "InternalError.AuditDeleteLogFileError"
+//  INTERNALERROR_AUDITDESCRIBELOGERROR = "InternalError.AuditDescribeLogError"
+//  INTERNALERROR_AUDITERROR = "InternalError.AuditError"
+//  INTERNALERROR_AUDITMODIFYSTATUSERROR = "InternalError.AuditModifyStatusError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_INNERCOMMONERROR = "InternalError.InnerCommonError"
+//  INTERNALERROR_JSONERROR = "InternalError.JSONError"
+//  INTERNALERROR_JSONUNMARSHALERROR = "InternalError.JsonUnmarshalError"
+//  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
+//  OPERATIONDENIED_AUDITPOLICYCONFLICTERROR = "OperationDenied.AuditPolicyConflictError"
+//  OPERATIONDENIED_AUDITPOLICYEXISTERROR = "OperationDenied.AuditPolicyExistError"
+//  OPERATIONDENIED_AUDITPOLICYNOTEXISTERROR = "OperationDenied.AuditPolicyNotExistError"
+//  OPERATIONDENIED_AUDITPOLICYOVERQUOTAERROR = "OperationDenied.AuditPolicyOverQuotaError"
+//  OPERATIONDENIED_AUDITSTATUSERROR = "OperationDenied.AuditStatusError"
+//  OPERATIONDENIED_AUDITTASKCONFLICTERROR = "OperationDenied.AuditTaskConflictError"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+//  OPERATIONDENIED_UNSUPPORTOPENAUDITERROR = "OperationDenied.UnsupportOpenAuditError"
+func (c *Client) DescribeAuditLogsWithContext(ctx context.Context, request *DescribeAuditLogsRequest) (response *DescribeAuditLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeAuditLogsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeAuditLogs")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAuditLogs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAuditLogsResponse()
     err = c.Send(request, response)
     return
 }
@@ -1453,6 +1795,62 @@ func (c *Client) DescribeMongodbLogsWithContext(ctx context.Context, request *De
     return
 }
 
+func NewDescribeSRVConnectionDomainRequest() (request *DescribeSRVConnectionDomainRequest) {
+    request = &DescribeSRVConnectionDomainRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeSRVConnectionDomain")
+    
+    
+    return
+}
+
+func NewDescribeSRVConnectionDomainResponse() (response *DescribeSRVConnectionDomainResponse) {
+    response = &DescribeSRVConnectionDomainResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSRVConnectionDomain
+// This API is used to query the current domain information of the MongoDB database.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DescribeSRVConnectionDomain(request *DescribeSRVConnectionDomainRequest) (response *DescribeSRVConnectionDomainResponse, err error) {
+    return c.DescribeSRVConnectionDomainWithContext(context.Background(), request)
+}
+
+// DescribeSRVConnectionDomain
+// This API is used to query the current domain information of the MongoDB database.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DescribeSRVConnectionDomainWithContext(ctx context.Context, request *DescribeSRVConnectionDomainRequest) (response *DescribeSRVConnectionDomainResponse, err error) {
+    if request == nil {
+        request = NewDescribeSRVConnectionDomainRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeSRVConnectionDomain")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSRVConnectionDomain require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSRVConnectionDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSecurityGroupRequest() (request *DescribeSecurityGroupRequest) {
     request = &DescribeSecurityGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1691,6 +2089,116 @@ func (c *Client) DescribeSpecInfoWithContext(ctx context.Context, request *Descr
     return
 }
 
+func NewDisableSRVConnectionUrlRequest() (request *DisableSRVConnectionUrlRequest) {
+    request = &DisableSRVConnectionUrlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DisableSRVConnectionUrl")
+    
+    
+    return
+}
+
+func NewDisableSRVConnectionUrlResponse() (response *DisableSRVConnectionUrlResponse) {
+    response = &DisableSRVConnectionUrlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DisableSRVConnectionUrl
+// This API is used to close the SRV Access Address of the MongoDB database.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DisableSRVConnectionUrl(request *DisableSRVConnectionUrlRequest) (response *DisableSRVConnectionUrlResponse, err error) {
+    return c.DisableSRVConnectionUrlWithContext(context.Background(), request)
+}
+
+// DisableSRVConnectionUrl
+// This API is used to close the SRV Access Address of the MongoDB database.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DisableSRVConnectionUrlWithContext(ctx context.Context, request *DisableSRVConnectionUrlRequest) (response *DisableSRVConnectionUrlResponse, err error) {
+    if request == nil {
+        request = NewDisableSRVConnectionUrlRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DisableSRVConnectionUrl")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DisableSRVConnectionUrl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDisableSRVConnectionUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEnableSRVConnectionUrlRequest() (request *EnableSRVConnectionUrlRequest) {
+    request = &EnableSRVConnectionUrlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "EnableSRVConnectionUrl")
+    
+    
+    return
+}
+
+func NewEnableSRVConnectionUrlResponse() (response *EnableSRVConnectionUrlResponse) {
+    response = &EnableSRVConnectionUrlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// EnableSRVConnectionUrl
+// This API is used to enable the SRV Access Address for MongoDB database.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) EnableSRVConnectionUrl(request *EnableSRVConnectionUrlRequest) (response *EnableSRVConnectionUrlResponse, err error) {
+    return c.EnableSRVConnectionUrlWithContext(context.Background(), request)
+}
+
+// EnableSRVConnectionUrl
+// This API is used to enable the SRV Access Address for MongoDB database.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) EnableSRVConnectionUrlWithContext(ctx context.Context, request *EnableSRVConnectionUrlRequest) (response *EnableSRVConnectionUrlResponse, err error) {
+    if request == nil {
+        request = NewEnableSRVConnectionUrlRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "EnableSRVConnectionUrl")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EnableSRVConnectionUrl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEnableSRVConnectionUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewEnableTransparentDataEncryptionRequest() (request *EnableTransparentDataEncryptionRequest) {
     request = &EnableTransparentDataEncryptionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1741,6 +2249,62 @@ func (c *Client) EnableTransparentDataEncryptionWithContext(ctx context.Context,
     request.SetContext(ctx)
     
     response = NewEnableTransparentDataEncryptionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEnableWanServiceRequest() (request *EnableWanServiceRequest) {
+    request = &EnableWanServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "EnableWanService")
+    
+    
+    return
+}
+
+func NewEnableWanServiceResponse() (response *EnableWanServiceResponse) {
+    response = &EnableWanServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// EnableWanService
+// This API is used to enable the public network access address of the current instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_LOCKFAILED = "InvalidParameterValue.LockFailed"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  INVALIDPARAMETERVALUE_SECURITYLEVELNOTALLOWOPENWANSERVICE = "InvalidParameterValue.SecurityLevelNotAllowOpenWanService"
+func (c *Client) EnableWanService(request *EnableWanServiceRequest) (response *EnableWanServiceResponse, err error) {
+    return c.EnableWanServiceWithContext(context.Background(), request)
+}
+
+// EnableWanService
+// This API is used to enable the public network access address of the current instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_LOCKFAILED = "InvalidParameterValue.LockFailed"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  INVALIDPARAMETERVALUE_SECURITYLEVELNOTALLOWOPENWANSERVICE = "InvalidParameterValue.SecurityLevelNotAllowOpenWanService"
+func (c *Client) EnableWanServiceWithContext(ctx context.Context, request *EnableWanServiceRequest) (response *EnableWanServiceResponse, err error) {
+    if request == nil {
+        request = NewEnableWanServiceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "EnableWanService")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EnableWanService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEnableWanServiceResponse()
     err = c.Send(request, response)
     return
 }
@@ -2349,6 +2913,66 @@ func (c *Client) ModifyDBInstanceSpecWithContext(ctx context.Context, request *M
     return
 }
 
+func NewModifyInstanceAzRequest() (request *ModifyInstanceAzRequest) {
+    request = &ModifyInstanceAzRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "ModifyInstanceAz")
+    
+    
+    return
+}
+
+func NewModifyInstanceAzResponse() (response *ModifyInstanceAzResponse) {
+    response = &ModifyInstanceAzResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyInstanceAz
+// This API is used to adjust the availability zone distribution of MongoDB cloud database nodes. You can specify the primary AZ and total availability zone distribution info to complete node distribution adjustment.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_CHECKAPPIDFAILED = "InvalidParameterValue.CheckAppIdFailed"
+//  INVALIDPARAMETERVALUE_ILLEGALINSTANCESTATUS = "InvalidParameterValue.IllegalInstanceStatus"
+//  INVALIDPARAMETERVALUE_STATUSABNORMAL = "InvalidParameterValue.StatusAbnormal"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+func (c *Client) ModifyInstanceAz(request *ModifyInstanceAzRequest) (response *ModifyInstanceAzResponse, err error) {
+    return c.ModifyInstanceAzWithContext(context.Background(), request)
+}
+
+// ModifyInstanceAz
+// This API is used to adjust the availability zone distribution of MongoDB cloud database nodes. You can specify the primary AZ and total availability zone distribution info to complete node distribution adjustment.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_CHECKAPPIDFAILED = "InvalidParameterValue.CheckAppIdFailed"
+//  INVALIDPARAMETERVALUE_ILLEGALINSTANCESTATUS = "InvalidParameterValue.IllegalInstanceStatus"
+//  INVALIDPARAMETERVALUE_STATUSABNORMAL = "InvalidParameterValue.StatusAbnormal"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+func (c *Client) ModifyInstanceAzWithContext(ctx context.Context, request *ModifyInstanceAzRequest) (response *ModifyInstanceAzResponse, err error) {
+    if request == nil {
+        request = NewModifyInstanceAzRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "ModifyInstanceAz")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyInstanceAz require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyInstanceAzResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyInstanceParamsRequest() (request *ModifyInstanceParamsRequest) {
     request = &ModifyInstanceParamsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2409,6 +3033,60 @@ func (c *Client) ModifyInstanceParamsWithContext(ctx context.Context, request *M
     request.SetContext(ctx)
     
     response = NewModifyInstanceParamsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifySRVConnectionUrlRequest() (request *ModifySRVConnectionUrlRequest) {
+    request = &ModifySRVConnectionUrlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "ModifySRVConnectionUrl")
+    
+    
+    return
+}
+
+func NewModifySRVConnectionUrlResponse() (response *ModifySRVConnectionUrlResponse) {
+    response = &ModifySRVConnectionUrlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifySRVConnectionUrl
+// This API is used to modify the TTL duration of the SRV Access Address for a MongoDB database.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) ModifySRVConnectionUrl(request *ModifySRVConnectionUrlRequest) (response *ModifySRVConnectionUrlResponse, err error) {
+    return c.ModifySRVConnectionUrlWithContext(context.Background(), request)
+}
+
+// ModifySRVConnectionUrl
+// This API is used to modify the TTL duration of the SRV Access Address for a MongoDB database.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) ModifySRVConnectionUrlWithContext(ctx context.Context, request *ModifySRVConnectionUrlRequest) (response *ModifySRVConnectionUrlResponse, err error) {
+    if request == nil {
+        request = NewModifySRVConnectionUrlRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "ModifySRVConnectionUrl")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySRVConnectionUrl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifySRVConnectionUrlResponse()
     err = c.Send(request, response)
     return
 }
@@ -2649,6 +3327,58 @@ func (c *Client) ResetDBInstancePasswordWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewResetDBInstancePasswordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRestoreDBInstanceRequest() (request *RestoreDBInstanceRequest) {
+    request = &RestoreDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "RestoreDBInstance")
+    
+    
+    return
+}
+
+func NewRestoreDBInstanceResponse() (response *RestoreDBInstanceResponse) {
+    response = &RestoreDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RestoreDBInstance
+// This API is used to rollback the database instance to a specified time point.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+func (c *Client) RestoreDBInstance(request *RestoreDBInstanceRequest) (response *RestoreDBInstanceResponse, err error) {
+    return c.RestoreDBInstanceWithContext(context.Background(), request)
+}
+
+// RestoreDBInstance
+// This API is used to rollback the database instance to a specified time point.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+func (c *Client) RestoreDBInstanceWithContext(ctx context.Context, request *RestoreDBInstanceRequest) (response *RestoreDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewRestoreDBInstanceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "RestoreDBInstance")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RestoreDBInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRestoreDBInstanceResponse()
     err = c.Send(request, response)
     return
 }
@@ -2965,9 +3695,12 @@ func NewUpgradeDbInstanceVersionResponse() (response *UpgradeDbInstanceVersionRe
 }
 
 // UpgradeDbInstanceVersion
-// This API is used to upgrade the database kernel across versions. Currently, it is only supported to upgrade from version 3.6 to 4.0, 4.0 to 4.2, 4.2 to 4.4, and 4.4 to 5.0.
+// This API is used to upgrade database version.
+//
+// **Description**: Upgrade to version 3.6 and above is supported. Only upgrading from a lower version to a higher version step by step is allowed. Cross-version upgrade or version downgrade is not supported.
 //
 // error code that may be returned:
+//  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBOPERATEERROR = "InternalError.DBOperateError"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 func (c *Client) UpgradeDbInstanceVersion(request *UpgradeDbInstanceVersionRequest) (response *UpgradeDbInstanceVersionResponse, err error) {
@@ -2975,9 +3708,12 @@ func (c *Client) UpgradeDbInstanceVersion(request *UpgradeDbInstanceVersionReque
 }
 
 // UpgradeDbInstanceVersion
-// This API is used to upgrade the database kernel across versions. Currently, it is only supported to upgrade from version 3.6 to 4.0, 4.0 to 4.2, 4.2 to 4.4, and 4.4 to 5.0.
+// This API is used to upgrade database version.
+//
+// **Description**: Upgrade to version 3.6 and above is supported. Only upgrading from a lower version to a higher version step by step is allowed. Cross-version upgrade or version downgrade is not supported.
 //
 // error code that may be returned:
+//  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBOPERATEERROR = "InternalError.DBOperateError"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 func (c *Client) UpgradeDbInstanceVersionWithContext(ctx context.Context, request *UpgradeDbInstanceVersionRequest) (response *UpgradeDbInstanceVersionResponse, err error) {

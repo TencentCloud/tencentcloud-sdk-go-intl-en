@@ -97,6 +97,87 @@ func (r *AssignProjectResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type AuditLog struct {
+	// Number of affected rows
+	AffectRows *uint64 `json:"AffectRows,omitnil,omitempty" name:"AffectRows"`
+
+	// Operation type. For example: grantRolesToRole, dropRole.
+	Atype *string `json:"Atype,omitnil,omitempty" name:"Atype"`
+
+	// Execution time. Unit: ms.
+	ExecTime *uint64 `json:"ExecTime,omitnil,omitempty" name:"ExecTime"`
+
+	// Client IP address.
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// Operation parameter. Includes operation parameter information.
+	Param *string `json:"Param,omitnil,omitempty" name:"Param"`
+
+	// Execution result. 0 indicates success, non-0 indicates failure.
+	Result *int64 `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// User role list. Format: role@db,role@db.
+	Roles *string `json:"Roles,omitnil,omitempty" name:"Roles"`
+
+	// Operation timestamp. Format: YYYY-MM-DD HH:mm:ss.
+	Timestamp *string `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
+
+	// Username. Format: user@db.
+	User *string `json:"User,omitnil,omitempty" name:"User"`
+}
+
+type AuditLogFile struct {
+	// Audit log file name.
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+
+	// Creation time of the audit log file, in the format: "2019-03-20 17:09:13".
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// File status value. May return the following values:
+	// "creating" - generating
+	// "Failed" - Creation failed.
+	// "success" - generated.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// File size in KB.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FileSize *uint64 `json:"FileSize,omitnil,omitempty" name:"FileSize"`
+
+	// Download URL for the audit log.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DownloadUrl *string `json:"DownloadUrl,omitnil,omitempty" name:"DownloadUrl"`
+
+	// Error message.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrMsg *string `json:"ErrMsg,omitnil,omitempty" name:"ErrMsg"`
+
+	// Download progress
+	ProgressRate *uint64 `json:"ProgressRate,omitnil,omitempty" name:"ProgressRate"`
+}
+
+type AuditLogFilter struct {
+	// Client IP address.
+	Host []*string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// Username.
+	User []*string `json:"User,omitnil,omitempty" name:"User"`
+
+	// Execution time. Unit: ms. Filter audit logs with execution time more than this value.
+	ExecTime *uint64 `json:"ExecTime,omitnil,omitempty" name:"ExecTime"`
+
+	// Number of affected rows. Filter audit logs with affected rows more than this value.
+	AffectRows *uint64 `json:"AffectRows,omitnil,omitempty" name:"AffectRows"`
+
+	// Operation type.
+	Atype []*string `json:"Atype,omitnil,omitempty" name:"Atype"`
+
+	// Execution result.
+	Result []*string `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// Filter logs using this keyword
+	Param []*string `json:"Param,omitnil,omitempty" name:"Param"`
+}
+
 type Auth struct {
 	// Permission information of the current account.
 	// - 0: no permissions.
@@ -175,54 +256,55 @@ type BackupDownloadTaskStatus struct {
 }
 
 type BackupInfo struct {
-	// Instance ID.
+	// <p>Instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Backup method.
-	// - 0: automatic backup.
-	// - 1: manual backup.
+	// <p>Backup method.</p><ul><li>0: Automatic backup.</li><li>1: Manual backup.</li></ul>
 	BackupType *uint64 `json:"BackupType,omitnil,omitempty" name:"BackupType"`
 
-	// Backup file name.
+	// <p>Backup file name.</p>
 	BackupName *string `json:"BackupName,omitnil,omitempty" name:"BackupName"`
 
-	// Backup task remarks.
+	// <p>Backup task notes.</p>
 	BackupDesc *string `json:"BackupDesc,omitnil,omitempty" name:"BackupDesc"`
 
-	// Backup file size, in KB.
+	// <p>Backup file size, in KB.</p>
 	BackupSize *uint64 `json:"BackupSize,omitnil,omitempty" name:"BackupSize"`
 
-	// Backup start time.
+	// <p>Backup start time.</p>
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Backup end time.
+	// <p>Backup end time.</p>
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Backup status.
-	// - 1: backing up.
-	// - 2: backup successful.
+	// <p>Backup status.</p><ul><li>1: Backup in progress.</li><li>2: Backup successful.</li></ul>
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Backup method.
-	// - 0: logical backup.
-	// - 1: physical backup.
-	// - 3: snapshot backup.
-	// **Note:**
-	// - The General Edition instance supports logical and physical backup. The Cloud Disk Edition instance supports physical and snapshot backup, but does not support logical backup currently.
-	// - Physical backup is not supported when storage encryption is enabled for the instance.
+	// <p>Backup method.</p><ul><li>0: Logical backup.</li><li>1: Physical backup.</li><li>3: Snapshot backup.<br><strong>Description:</strong></li><li>The General Edition instance supports logical and physical backup. The Cloud Disk Edition instance supports physical and snapshot backup, but does not support logical backup currently.</li><li>If storage encryption is activated for the instance, physical backup is not supported.</li></ul>
 	BackupMethod *uint64 `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
 
-	// Backup record ID.
+	// <p>Backup record ID.</p>
 	BackId *int64 `json:"BackId,omitnil,omitempty" name:"BackId"`
 
-	// Backup deletion time.
+	// <p>Backup deletion time.</p>
 	DeleteTime *string `json:"DeleteTime,omitnil,omitempty" name:"DeleteTime"`
 
-	// Cross-region backup region.
+	// <p>Backup region in a different location.</p>
 	BackupRegion *string `json:"BackupRegion,omitnil,omitempty" name:"BackupRegion"`
 
-	// Rollback time supported by the backup.
+	// <p>Rollback time supported by the backup.</p>
 	RestoreTime *string `json:"RestoreTime,omitnil,omitempty" name:"RestoreTime"`
+}
+
+type BackupTotalSize struct {
+	// Total size of full backup, in bytes
+	SnapshotSize *int64 `json:"SnapshotSize,omitnil,omitempty" name:"SnapshotSize"`
+
+	// Incremental backup total size
+	OplogSize *int64 `json:"OplogSize,omitnil,omitempty" name:"OplogSize"`
+
+	// free quota
+	FreeQuota *int64 `json:"FreeQuota,omitnil,omitempty" name:"FreeQuota"`
 }
 
 type ClientConnection struct {
@@ -234,6 +316,60 @@ type ClientConnection struct {
 
 	// Whether it is an internal IP address.
 	InternalService *bool `json:"InternalService,omitnil,omitempty" name:"InternalService"`
+}
+
+// Predefined struct for user
+type CloseAuditServiceRequestParams struct {
+	// Instance ID, in the format of cmgo-test1234. It is the same as the instance ID displayed on the TencentDB console page.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type CloseAuditServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID, in the format of cmgo-test1234. It is the same as the instance ID displayed on the TencentDB console page.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *CloseAuditServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseAuditServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloseAuditServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CloseAuditServiceResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CloseAuditServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *CloseAuditServiceResponseParams `json:"Response"`
+}
+
+func (r *CloseAuditServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseAuditServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -496,257 +632,177 @@ func (r *CreateBackupDownloadTaskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateDBInstanceHourRequestParams struct {
-	// Instance memory size. Unit: GB. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain specific saleable memory specifications.
+	// <p>Instance memory size. Unit: GB. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain specific saleable memory specifications.</p>
 	Memory *uint64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance disk size. Unit: GB. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum disk sizes corresponding to each CPU specification.
+	// <p>Instance disk size. Unit: GB. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum disk sizes corresponding to each CPU specification.</p>
 	Volume *uint64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	//  - Specifies the number of replica sets during replica set instance creation. This parameter can only be set to 1.
-	//  - Specifies the number of shards during sharded cluster instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to query the range of shard quantity. The parameters MinReplicateSetNum and MaxReplicateSetNum in the returned data structure SpecItems correspond to the minimum value and maximum value, respectively.
+	// <ul><li>Specifies the number of replica sets during replica set instance creation. This parameter can only be 1.</li><li>Specifies the number of shards during sharded cluster instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to query the range of shard quantity. The parameters MinReplicateSetNum and MaxReplicateSetNum in the returned data structure SpecItems correspond to the minimum value and maximum value, respectively.</li></ul>
 	ReplicateSetNum *uint64 `json:"ReplicateSetNum,omitnil,omitempty" name:"ReplicateSetNum"`
 
-	//  - Specifies the number of primary and secondary nodes for each replica set during replica set instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum number of nodes supported for each replica set.
-	//  - Specifies the number of primary and secondary nodes for each shard during sharded cluster instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum number of nodes supported for each shard.
+	// <ul><li>Specifies the number of primary and secondary nodes for each replica set during replica set instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum number of nodes supported for each replica set.</li><li>Specifies the number of primary and secondary nodes for each shard during sharded cluster instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum number of nodes supported for each shard.</li></ul>
 	NodeNum *uint64 `json:"NodeNum,omitnil,omitempty" name:"NodeNum"`
 
-	// Refers to version information. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API can be called to obtain detailed information about the supported versions.
-	// - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
-	// - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
-	// - MONGO_44_WT: version of the MongoDB 4.4 WiredTiger storage engine.
-	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
-	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
-	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// <p>Refers to version information. For supported versions, use the interface <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> to query.</p><ul><li>MONGO_40_WT: MongoDB 4.0 WiredTiger engine version.</li><li>MONGO_42_WT: MongoDB 4.2 WiredTiger engine version.</li><li>MONGO_44_WT: MongoDB 4.4 WiredTiger engine version.</li><li>MONGO_50_WT: MongoDB 5.0 WiredTiger engine version.</li><li>MONGO_60_WT: MongoDB 6.0 WiredTiger engine version.</li><li>MONGO_70_WT: MongoDB 7.0 WiredTiger engine version.</li><li>MONGO_80_WT: MongoDB 8.0 WiredTiger engine version.</li></ul>
 	MongoVersion *string `json:"MongoVersion,omitnil,omitempty" name:"MongoVersion"`
 
-	// Product specification type.
-	//  - HIO10G: general high-I/O 10GE type.
-	//  - HCD: cloud disk type.
+	// <p>Recommended product specification types:</p><ul><li>GE.LD.T1: Local disk (Common I).</li><li>GE.CD.T1: Cloud disk (Common I).</li></ul><p>Product allowlist specification types:</p><ul><li>HIO10G: Local disk (High IO 10G).</li><li>HCD: Cloud disk (Cloud disk edition).</li></ul><p>Note: Allowlist specification types are under allowlist control. If needed, <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a> to apply.</p>
 	MachineCode *string `json:"MachineCode,omitnil,omitempty" name:"MachineCode"`
 
-	// Number of instances. The minimum value is 1, and the maximum value is 30.
+	// <p>Number of instances. The minimum value is 1, and the maximum value is 30.</p>
 	GoodsNum *uint64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// AZ information in the format of ap-guangzhou-2
-	// - For more information, query through the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API.
-	// - If multi-AZ deployment is enabled, this parameter refers to the primary AZ and must be one of the values of `AvailabilityZoneList`.
+	// <p>AZ information. The input format must be ap-guangzhou-2.</p><ul><li>For details, use the interface <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> to obtain them.</li><li>This parameter is the primary AZ. If multi-AZ deployment is used, Zone must be one of AvailabilityZoneList.</li></ul>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Instance architecture type
-	// - REPLSET: Replica set
-	// - SHARD: Sharded cluster
+	// <p>Instance architecture type.</p><ul><li>REPLSET (replica set)</li><li>SHARD (sharded cluster)</li></ul>
 	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
 
-	// VPC ID.
-	// - Only VPC configuration is supported, and a VPC in the same region as the instance should be selected. Log in to the [VPC console](https://console.cloud.tencent.com/vpc) to obtain the available VPC ID.
-	// - After successful instance creation, VPCs can be changed. For detailed operations, see [Changing the Network](https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1).
+	// <p>VPC ID.</p><ul><li>Only supports configuration of private networks. A private network in the same region as the instance must be selected. Log in to the <a href="https://console.cloud.tencent.com/vpc">VPC console</a> to obtain a usable VPC ID.</li><li>After successful instance creation, VPC replacement is allowed. For detailed operations, see <a href="https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1">Changing the Network</a>.</li></ul>
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet ID of the VPC.
-	// - A subnet should be specified within the selected VPC. Log in to the [VPC console](https://console.cloud.tencent.com/vpc) to obtain the available subnet ID.
-	// - After successful instance creation, VPCs and subnets can be changed. For detailed operations, see [Changing the Network](https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1).
+	// <p>Subnet ID of the VPC.</p><ul><li>You must specify a subnet within the selected private network. Log in to the <a href="https://console.cloud.tencent.com/vpc">VPC console</a> to obtain the subnet ID.</li><li>After the instance is successfully created, replacement of the private network and subnet is allowed. For detailed operations, please refer to <a href="https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1">Network Change</a>.</li></ul>
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Instance password. The requirements are as follows:
-	//  - The number of characters should be in the range of [8, 32].
-	//  - Characters within the ranges [A,Z], [a,z], and [0,9] are allowed.
-	//  - Special characters that can be entered include exclamation marks (!), at signs (@), number signs (#), percent signs (%), carets (^), asterisks (\*), brackets (()), and underscores (_).
-	//  - It cannot contain only the same letters or digits.
+	// <p>Instance password. The requirements are as follows:</p><ul><li>Character count is [8,32].</li><li>Enter characters within [A,Z], [a,z], [0,9].</li><li>Special characters include: exclamation mark "!", at "@", pound sign "#", percent sign "%", caret "^", asterisk "*", brackets "()", underscore "_".</li><li>Cannot set a single letter or number.</li></ul>
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// Project ID. - The default project is used if this parameter is not specified.
-	//  - The project ID can be obtained on the [project management page in the TencentDB for MongoDB console](https://console.cloud.tencent.com/project).
+	// <p>Project ID.</p><ul><li>If this parameter is not set, the default project is used.</li><li>You can obtain the project ID on the <a href="https://console.cloud.tencent.com/project">MongoDB console project management</a> page.</li></ul>
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Instance tag information
+	// <p>Instance tag information.</p>
 	Tags []*TagInfo `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Instance type.
-	// - 1: formal instance.
-	// - 3: read-only instance.
-	// - 4: disaster recovery instance.
-	// - 5. cloned instance. Note: For a cloned instance, RestoreTime is required.
+	// <p>Instance type.</p><ul><li>1: Formal instance.</li><li>3: Read-only instance.</li><li>4: Disaster recovery instance.</li><li>5: Clone instance. Note: RestoreTime is a required item when you clone an instance.</li></ul>
 	Clone *int64 `json:"Clone,omitnil,omitempty" name:"Clone"`
 
-	// Parent instance ID.
-	// - This parameter is required when the value of the **Clone** parameter is set to 3 or 4, indicating a read-only or disaster recovery instance.
-	// - Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the parent instance ID from the instance list.
+	// <p>Parent instance ID.</p><ul><li>When the <strong>Clone</strong> parameter is 3 or 4, that is, the instance is read-only or a disaster recovery instance, this parameter must be configured.</li><li>Log in to the <a href="https://console.cloud.tencent.com/mongodb">MongoDB console</a> and copy the parent instance ID in the instance list.</li></ul>
 	Father *string `json:"Father,omitnil,omitempty" name:"Father"`
 
-	// Security group ID. Log in to the [security group console](https://console.cloud.tencent.com/vpc/security-group) to obtain the ID of the security group in the same region as the database instance.
+	// <p>Security group ID. Log in to the <a href="https://console.cloud.tencent.com/vpc/security-group">security group console</a> to obtain the ID of the security group within the same region as the database instance.</p>
 	SecurityGroup []*string `json:"SecurityGroup,omitnil,omitempty" name:"SecurityGroup"`
 
-	// Rollback time of the cloned instance
-	// - This parameter is required for a cloned instance in the format of 2021-08-13 16:30:00.
-	// - Time range for rollback: You can roll back data in the last 7 days.
+	// <p>Rollback time of the cloned instance.</p><ul><li>This parameter is required for cloned instances. Format: 2021-08-13 16:30:00.</li><li>Rollback time range: Only data within the last 7 days can be rolled back.</li></ul>
 	RestoreTime *string `json:"RestoreTime,omitnil,omitempty" name:"RestoreTime"`
 
-	// Instance name. Only Chinese characters, letters, digits, underscores (_), and delimiters (-) are supported, with a length of 128 characters. When database instances are purchased in batches, the automatic ascending feature is supported through the custom naming pattern string and numeric suffix to set instance names efficiently.
-	// - Basic mode: prefix + automatic ascending number (starting from 1 by default). Only a custom instance name prefix is required for **lnstanceName**. For example, it can be set to cmgo. If the purchase quantity is set to 5, after purchase, the instances will be sequentially named cmgo1, cmgo2, cmgo3, cmgo4, and cmgo5, respectively.
-	// - Custom starting number mode: prefix + {R:x} (x is the custom starting number). Prefix{R:x} is required for **InstanceName**. For example, cmgo{R:3}. If the purchase quantity is set to 5, the instance names will be sequentially named cmgo3, cmgo4, cmgo5, cmgo6, and cmgo7.
-	// - Composite pattern string: prefix 1{R:x} + prefix 2{R:y}+ ⋯ + fixed suffix, where x and y are the starting numbers of each prefix. A composite pattern string is required for **instanceName**. For example, cmgo{R:10}\_node{R:12}\_db. If the batch purchase quantity is set to 5, the instances will be sequentially named cmgo10\_node12\_db, cmgo11\_node13\_db, cmgo12\_node14\_db, cmgo13\_node15\_db, and cmgo14\_node16\_db.
+	// <p>Instance name. Only Chinese, English, digits, underscores (_), and hyphens (-) are supported, with a maximum length of 128 characters. When purchasing database instances in batches, you can efficiently set instance names by using custom pattern strings and automatically ascending numeric suffixes.</p><ul><li>Basic mode: prefix + automatic ascending number (starting from 1 by default). Only a custom instance name prefix is required for <strong>lnstanceName</strong>. For example, it can be set to cmgo. If the purchase quantity is set to 5, after purchase, the instances will be sequentially named cmgo1, cmgo2, cmgo3, cmgo4, and cmgo5, respectively.</li><li>Custom starting number mode: prefix + {R:x} (x is the custom starting number). <strong>InstanceName</strong> requires "prefix{R:x}". For example, cmgo{R:3}. If the purchase quantity is set to 5, the instance names will be cmgo3, cmgo4, cmgo5, cmgo6, and cmgo7.</li><li>Composite pattern string: prefix1{R:x} + prefix2{R:y} + ⋯ + fixed suffix, where x and y are the starting numbers for each prefix. <strong>InstanceName</strong> requires a composite pattern string. For example, cmgo{R:10}_node{R:12}_db. If the batch purchase quantity is set to 5, the instance names will be cmgo10_node12_db, cmgo11_node13_db, cmgo12_node14_db, cmgo13_node15_db, and cmgo14_node16_db.</li></ul>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Specifies the list of AZs during multi-AZ deployment of TencentDB for MongoDB instances.
-	// - For instances in multi-AZ deployment mode, the **Zone** parameter specifies the primary AZ, and **AvailabilityZoneList** specifies all AZs, including the primary AZ. Format: [ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4].
-	// - The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API can be called to obtain AZs planned for TencentDB for MongoDB instances in different regions, helping you specify valid AZs.
-	// - Nodes in multi-AZ deployment mode can only be deployed in 3 different AZs. Deploying most nodes of a cluster in the same AZ is not supported. For example, a 3-node cluster does not support deploying 2 nodes in the same AZ.
+	// <p>For cloud database instances in multi-AZ deployment, specify the availability zone list.</p><ul><li>For instances in multi-AZ deployment mode, the <strong>Zone</strong> parameter specifies the primary AZ, and <strong>AvailabilityZoneList</strong> specifies all AZs, including the primary AZ. Format: [ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4].</li><li>Use the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to access cloud databases and obtain availability zone information planned for different regions, so that you can assign valid AZs.</li><li>Nodes in multi-AZ deployment can only be deployed in 3 different availability zones. Deploying most nodes of a cluster in the same availability zone is not supported. For example, a 3-node cluster does not support deploying 2 nodes in the same zone.</li></ul>
 	AvailabilityZoneList []*string `json:"AvailabilityZoneList,omitnil,omitempty" name:"AvailabilityZoneList"`
 
-	// Number of Mongos node CPU cores. Valid values: 1, 2, 4, 8, and 16. This parameter is required during sharded cluster instance purchase.
+	// <p>Number of Mongos node CPU cores. Valid values: 1, 2, 4, 8, and 16. This parameter is required during sharded cluster instance purchase.</p>
 	MongosCpu *uint64 `json:"MongosCpu,omitnil,omitempty" name:"MongosCpu"`
 
-	// Mongos node memory size.
-	// - This parameter is required during sharded cluster instance purchase.
-	// - Unit: GB. 1-core 2 GB, 2-core 4 GB, 4-core 8 GB, 8-core 16 GB, and 16-core 32 GB are supported.
+	// <p>Mongos node memory size.</p><ul><li>This parameter is required during sharded cluster instance purchase.</li><li>Unit: GB. Valid values: 2 (for 1 core), 4 (for 2 cores), 8 (for 4 cores), 16 (for 8 cores), and 32 (for 16 cores).</li></ul>
 	MongosMemory *uint64 `json:"MongosMemory,omitnil,omitempty" name:"MongosMemory"`
 
-	// Number of Mongos nodes. This parameter is required during sharded cluster instance purchase.
-	//  - For instances in single-AZ deployment mode, the value range is [3,32].
-	//  - For instances in multi-AZ deployment mode, the value range is [6,32].
+	// <p>Number of Mongos nodes. This parameter is required during sharded cluster instance purchase.</p><ul><li>For single-AZ deployment instances, the quantity range is [3,32].</li><li>For instances deployed across multiple availability zones, the quantity range is [6,32].</li></ul>
 	MongosNodeNum *uint64 `json:"MongosNodeNum,omitnil,omitempty" name:"MongosNodeNum"`
 
-	// Number of read-only nodes. Value ranges: [0,5].
+	// <p>Number of read-only nodes. Value ranges from 0 to 5.</p>
 	ReadonlyNodeNum *uint64 `json:"ReadonlyNodeNum,omitnil,omitempty" name:"ReadonlyNodeNum"`
 
-	// Array of AZs of read-only nodes. This parameter is required for instances in multi-AZ deployment mode when **ReadonlyNodeNum** is not set to **0**.
+	// <p>Array of AZs of read-only nodes. This parameter is required for instances in multi-AZ deployment mode when <strong>ReadonlyNodeNum</strong> is not set to <strong>0</strong>.</p>
 	ReadonlyNodeAvailabilityZoneList []*string `json:"ReadonlyNodeAvailabilityZoneList,omitnil,omitempty" name:"ReadonlyNodeAvailabilityZoneList"`
 
-	// AZ where the hidden node resides, which is required in cross-AZ instance deployment.
+	// <p>Availability zone of the Hidden node. To deploy instances across availability zones, you must configure this parameter.</p>
 	HiddenZone *string `json:"HiddenZone,omitnil,omitempty" name:"HiddenZone"`
 
-	// Parameter template ID.
-	// - A parameter template is a collection of predefined parameter values that can be used to quickly configure new MongoDB instances. Proper use of parameter templates can significantly enhance the deployment efficiency and operational performance of the database.
-	// - The [DescribeDBInstanceParamTpl](https://www.tencentcloud.com/document/product/240/109155?from_cn_redirect=1) API can be called to obtain the parameter template ID. Select the parameter template ID corresponding to the instance version and architecture.
+	// <p>Parameter template ID.</p><ul><li>A parameter template is a collection of preset specific parameters applicable to quick configuration of new MongoDB instances. Proper use of parameter templates can effectively improve database deployment efficiency and operating performance.</li><li>The parameter template ID can be obtained through the <a href="https://www.tencentcloud.com/document/product/240/109155?from_cn_redirect=1">DescribeDBInstanceParamTpl</a> API. Please select the parameter template ID corresponding to your instance version and architecture.</li></ul>
 	ParamTemplateId *string `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
+
+	// <p>Instance CPU core size. Unit: C. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain specific saleable CPU specifications.<br>Note: CPU size must be set for common I Instance Type.</p>
+	CpuCore *int64 `json:"CpuCore,omitnil,omitempty" name:"CpuCore"`
 }
 
 type CreateDBInstanceHourRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance memory size. Unit: GB. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain specific saleable memory specifications.
+	// <p>Instance memory size. Unit: GB. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain specific saleable memory specifications.</p>
 	Memory *uint64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance disk size. Unit: GB. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum disk sizes corresponding to each CPU specification.
+	// <p>Instance disk size. Unit: GB. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum disk sizes corresponding to each CPU specification.</p>
 	Volume *uint64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	//  - Specifies the number of replica sets during replica set instance creation. This parameter can only be set to 1.
-	//  - Specifies the number of shards during sharded cluster instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to query the range of shard quantity. The parameters MinReplicateSetNum and MaxReplicateSetNum in the returned data structure SpecItems correspond to the minimum value and maximum value, respectively.
+	// <ul><li>Specifies the number of replica sets during replica set instance creation. This parameter can only be 1.</li><li>Specifies the number of shards during sharded cluster instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to query the range of shard quantity. The parameters MinReplicateSetNum and MaxReplicateSetNum in the returned data structure SpecItems correspond to the minimum value and maximum value, respectively.</li></ul>
 	ReplicateSetNum *uint64 `json:"ReplicateSetNum,omitnil,omitempty" name:"ReplicateSetNum"`
 
-	//  - Specifies the number of primary and secondary nodes for each replica set during replica set instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum number of nodes supported for each replica set.
-	//  - Specifies the number of primary and secondary nodes for each shard during sharded cluster instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum number of nodes supported for each shard.
+	// <ul><li>Specifies the number of primary and secondary nodes for each replica set during replica set instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum number of nodes supported for each replica set.</li><li>Specifies the number of primary and secondary nodes for each shard during sharded cluster instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum number of nodes supported for each shard.</li></ul>
 	NodeNum *uint64 `json:"NodeNum,omitnil,omitempty" name:"NodeNum"`
 
-	// Refers to version information. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API can be called to obtain detailed information about the supported versions.
-	// - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
-	// - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
-	// - MONGO_44_WT: version of the MongoDB 4.4 WiredTiger storage engine.
-	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
-	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
-	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// <p>Refers to version information. For supported versions, use the interface <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> to query.</p><ul><li>MONGO_40_WT: MongoDB 4.0 WiredTiger engine version.</li><li>MONGO_42_WT: MongoDB 4.2 WiredTiger engine version.</li><li>MONGO_44_WT: MongoDB 4.4 WiredTiger engine version.</li><li>MONGO_50_WT: MongoDB 5.0 WiredTiger engine version.</li><li>MONGO_60_WT: MongoDB 6.0 WiredTiger engine version.</li><li>MONGO_70_WT: MongoDB 7.0 WiredTiger engine version.</li><li>MONGO_80_WT: MongoDB 8.0 WiredTiger engine version.</li></ul>
 	MongoVersion *string `json:"MongoVersion,omitnil,omitempty" name:"MongoVersion"`
 
-	// Product specification type.
-	//  - HIO10G: general high-I/O 10GE type.
-	//  - HCD: cloud disk type.
+	// <p>Recommended product specification types:</p><ul><li>GE.LD.T1: Local disk (Common I).</li><li>GE.CD.T1: Cloud disk (Common I).</li></ul><p>Product allowlist specification types:</p><ul><li>HIO10G: Local disk (High IO 10G).</li><li>HCD: Cloud disk (Cloud disk edition).</li></ul><p>Note: Allowlist specification types are under allowlist control. If needed, <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a> to apply.</p>
 	MachineCode *string `json:"MachineCode,omitnil,omitempty" name:"MachineCode"`
 
-	// Number of instances. The minimum value is 1, and the maximum value is 30.
+	// <p>Number of instances. The minimum value is 1, and the maximum value is 30.</p>
 	GoodsNum *uint64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// AZ information in the format of ap-guangzhou-2
-	// - For more information, query through the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API.
-	// - If multi-AZ deployment is enabled, this parameter refers to the primary AZ and must be one of the values of `AvailabilityZoneList`.
+	// <p>AZ information. The input format must be ap-guangzhou-2.</p><ul><li>For details, use the interface <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> to obtain them.</li><li>This parameter is the primary AZ. If multi-AZ deployment is used, Zone must be one of AvailabilityZoneList.</li></ul>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Instance architecture type
-	// - REPLSET: Replica set
-	// - SHARD: Sharded cluster
+	// <p>Instance architecture type.</p><ul><li>REPLSET (replica set)</li><li>SHARD (sharded cluster)</li></ul>
 	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
 
-	// VPC ID.
-	// - Only VPC configuration is supported, and a VPC in the same region as the instance should be selected. Log in to the [VPC console](https://console.cloud.tencent.com/vpc) to obtain the available VPC ID.
-	// - After successful instance creation, VPCs can be changed. For detailed operations, see [Changing the Network](https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1).
+	// <p>VPC ID.</p><ul><li>Only supports configuration of private networks. A private network in the same region as the instance must be selected. Log in to the <a href="https://console.cloud.tencent.com/vpc">VPC console</a> to obtain a usable VPC ID.</li><li>After successful instance creation, VPC replacement is allowed. For detailed operations, see <a href="https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1">Changing the Network</a>.</li></ul>
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet ID of the VPC.
-	// - A subnet should be specified within the selected VPC. Log in to the [VPC console](https://console.cloud.tencent.com/vpc) to obtain the available subnet ID.
-	// - After successful instance creation, VPCs and subnets can be changed. For detailed operations, see [Changing the Network](https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1).
+	// <p>Subnet ID of the VPC.</p><ul><li>You must specify a subnet within the selected private network. Log in to the <a href="https://console.cloud.tencent.com/vpc">VPC console</a> to obtain the subnet ID.</li><li>After the instance is successfully created, replacement of the private network and subnet is allowed. For detailed operations, please refer to <a href="https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1">Network Change</a>.</li></ul>
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Instance password. The requirements are as follows:
-	//  - The number of characters should be in the range of [8, 32].
-	//  - Characters within the ranges [A,Z], [a,z], and [0,9] are allowed.
-	//  - Special characters that can be entered include exclamation marks (!), at signs (@), number signs (#), percent signs (%), carets (^), asterisks (\*), brackets (()), and underscores (_).
-	//  - It cannot contain only the same letters or digits.
+	// <p>Instance password. The requirements are as follows:</p><ul><li>Character count is [8,32].</li><li>Enter characters within [A,Z], [a,z], [0,9].</li><li>Special characters include: exclamation mark "!", at "@", pound sign "#", percent sign "%", caret "^", asterisk "*", brackets "()", underscore "_".</li><li>Cannot set a single letter or number.</li></ul>
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// Project ID. - The default project is used if this parameter is not specified.
-	//  - The project ID can be obtained on the [project management page in the TencentDB for MongoDB console](https://console.cloud.tencent.com/project).
+	// <p>Project ID.</p><ul><li>If this parameter is not set, the default project is used.</li><li>You can obtain the project ID on the <a href="https://console.cloud.tencent.com/project">MongoDB console project management</a> page.</li></ul>
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Instance tag information
+	// <p>Instance tag information.</p>
 	Tags []*TagInfo `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Instance type.
-	// - 1: formal instance.
-	// - 3: read-only instance.
-	// - 4: disaster recovery instance.
-	// - 5. cloned instance. Note: For a cloned instance, RestoreTime is required.
+	// <p>Instance type.</p><ul><li>1: Formal instance.</li><li>3: Read-only instance.</li><li>4: Disaster recovery instance.</li><li>5: Clone instance. Note: RestoreTime is a required item when you clone an instance.</li></ul>
 	Clone *int64 `json:"Clone,omitnil,omitempty" name:"Clone"`
 
-	// Parent instance ID.
-	// - This parameter is required when the value of the **Clone** parameter is set to 3 or 4, indicating a read-only or disaster recovery instance.
-	// - Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the parent instance ID from the instance list.
+	// <p>Parent instance ID.</p><ul><li>When the <strong>Clone</strong> parameter is 3 or 4, that is, the instance is read-only or a disaster recovery instance, this parameter must be configured.</li><li>Log in to the <a href="https://console.cloud.tencent.com/mongodb">MongoDB console</a> and copy the parent instance ID in the instance list.</li></ul>
 	Father *string `json:"Father,omitnil,omitempty" name:"Father"`
 
-	// Security group ID. Log in to the [security group console](https://console.cloud.tencent.com/vpc/security-group) to obtain the ID of the security group in the same region as the database instance.
+	// <p>Security group ID. Log in to the <a href="https://console.cloud.tencent.com/vpc/security-group">security group console</a> to obtain the ID of the security group within the same region as the database instance.</p>
 	SecurityGroup []*string `json:"SecurityGroup,omitnil,omitempty" name:"SecurityGroup"`
 
-	// Rollback time of the cloned instance
-	// - This parameter is required for a cloned instance in the format of 2021-08-13 16:30:00.
-	// - Time range for rollback: You can roll back data in the last 7 days.
+	// <p>Rollback time of the cloned instance.</p><ul><li>This parameter is required for cloned instances. Format: 2021-08-13 16:30:00.</li><li>Rollback time range: Only data within the last 7 days can be rolled back.</li></ul>
 	RestoreTime *string `json:"RestoreTime,omitnil,omitempty" name:"RestoreTime"`
 
-	// Instance name. Only Chinese characters, letters, digits, underscores (_), and delimiters (-) are supported, with a length of 128 characters. When database instances are purchased in batches, the automatic ascending feature is supported through the custom naming pattern string and numeric suffix to set instance names efficiently.
-	// - Basic mode: prefix + automatic ascending number (starting from 1 by default). Only a custom instance name prefix is required for **lnstanceName**. For example, it can be set to cmgo. If the purchase quantity is set to 5, after purchase, the instances will be sequentially named cmgo1, cmgo2, cmgo3, cmgo4, and cmgo5, respectively.
-	// - Custom starting number mode: prefix + {R:x} (x is the custom starting number). Prefix{R:x} is required for **InstanceName**. For example, cmgo{R:3}. If the purchase quantity is set to 5, the instance names will be sequentially named cmgo3, cmgo4, cmgo5, cmgo6, and cmgo7.
-	// - Composite pattern string: prefix 1{R:x} + prefix 2{R:y}+ ⋯ + fixed suffix, where x and y are the starting numbers of each prefix. A composite pattern string is required for **instanceName**. For example, cmgo{R:10}\_node{R:12}\_db. If the batch purchase quantity is set to 5, the instances will be sequentially named cmgo10\_node12\_db, cmgo11\_node13\_db, cmgo12\_node14\_db, cmgo13\_node15\_db, and cmgo14\_node16\_db.
+	// <p>Instance name. Only Chinese, English, digits, underscores (_), and hyphens (-) are supported, with a maximum length of 128 characters. When purchasing database instances in batches, you can efficiently set instance names by using custom pattern strings and automatically ascending numeric suffixes.</p><ul><li>Basic mode: prefix + automatic ascending number (starting from 1 by default). Only a custom instance name prefix is required for <strong>lnstanceName</strong>. For example, it can be set to cmgo. If the purchase quantity is set to 5, after purchase, the instances will be sequentially named cmgo1, cmgo2, cmgo3, cmgo4, and cmgo5, respectively.</li><li>Custom starting number mode: prefix + {R:x} (x is the custom starting number). <strong>InstanceName</strong> requires "prefix{R:x}". For example, cmgo{R:3}. If the purchase quantity is set to 5, the instance names will be cmgo3, cmgo4, cmgo5, cmgo6, and cmgo7.</li><li>Composite pattern string: prefix1{R:x} + prefix2{R:y} + ⋯ + fixed suffix, where x and y are the starting numbers for each prefix. <strong>InstanceName</strong> requires a composite pattern string. For example, cmgo{R:10}_node{R:12}_db. If the batch purchase quantity is set to 5, the instance names will be cmgo10_node12_db, cmgo11_node13_db, cmgo12_node14_db, cmgo13_node15_db, and cmgo14_node16_db.</li></ul>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Specifies the list of AZs during multi-AZ deployment of TencentDB for MongoDB instances.
-	// - For instances in multi-AZ deployment mode, the **Zone** parameter specifies the primary AZ, and **AvailabilityZoneList** specifies all AZs, including the primary AZ. Format: [ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4].
-	// - The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API can be called to obtain AZs planned for TencentDB for MongoDB instances in different regions, helping you specify valid AZs.
-	// - Nodes in multi-AZ deployment mode can only be deployed in 3 different AZs. Deploying most nodes of a cluster in the same AZ is not supported. For example, a 3-node cluster does not support deploying 2 nodes in the same AZ.
+	// <p>For cloud database instances in multi-AZ deployment, specify the availability zone list.</p><ul><li>For instances in multi-AZ deployment mode, the <strong>Zone</strong> parameter specifies the primary AZ, and <strong>AvailabilityZoneList</strong> specifies all AZs, including the primary AZ. Format: [ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4].</li><li>Use the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to access cloud databases and obtain availability zone information planned for different regions, so that you can assign valid AZs.</li><li>Nodes in multi-AZ deployment can only be deployed in 3 different availability zones. Deploying most nodes of a cluster in the same availability zone is not supported. For example, a 3-node cluster does not support deploying 2 nodes in the same zone.</li></ul>
 	AvailabilityZoneList []*string `json:"AvailabilityZoneList,omitnil,omitempty" name:"AvailabilityZoneList"`
 
-	// Number of Mongos node CPU cores. Valid values: 1, 2, 4, 8, and 16. This parameter is required during sharded cluster instance purchase.
+	// <p>Number of Mongos node CPU cores. Valid values: 1, 2, 4, 8, and 16. This parameter is required during sharded cluster instance purchase.</p>
 	MongosCpu *uint64 `json:"MongosCpu,omitnil,omitempty" name:"MongosCpu"`
 
-	// Mongos node memory size.
-	// - This parameter is required during sharded cluster instance purchase.
-	// - Unit: GB. 1-core 2 GB, 2-core 4 GB, 4-core 8 GB, 8-core 16 GB, and 16-core 32 GB are supported.
+	// <p>Mongos node memory size.</p><ul><li>This parameter is required during sharded cluster instance purchase.</li><li>Unit: GB. Valid values: 2 (for 1 core), 4 (for 2 cores), 8 (for 4 cores), 16 (for 8 cores), and 32 (for 16 cores).</li></ul>
 	MongosMemory *uint64 `json:"MongosMemory,omitnil,omitempty" name:"MongosMemory"`
 
-	// Number of Mongos nodes. This parameter is required during sharded cluster instance purchase.
-	//  - For instances in single-AZ deployment mode, the value range is [3,32].
-	//  - For instances in multi-AZ deployment mode, the value range is [6,32].
+	// <p>Number of Mongos nodes. This parameter is required during sharded cluster instance purchase.</p><ul><li>For single-AZ deployment instances, the quantity range is [3,32].</li><li>For instances deployed across multiple availability zones, the quantity range is [6,32].</li></ul>
 	MongosNodeNum *uint64 `json:"MongosNodeNum,omitnil,omitempty" name:"MongosNodeNum"`
 
-	// Number of read-only nodes. Value ranges: [0,5].
+	// <p>Number of read-only nodes. Value ranges from 0 to 5.</p>
 	ReadonlyNodeNum *uint64 `json:"ReadonlyNodeNum,omitnil,omitempty" name:"ReadonlyNodeNum"`
 
-	// Array of AZs of read-only nodes. This parameter is required for instances in multi-AZ deployment mode when **ReadonlyNodeNum** is not set to **0**.
+	// <p>Array of AZs of read-only nodes. This parameter is required for instances in multi-AZ deployment mode when <strong>ReadonlyNodeNum</strong> is not set to <strong>0</strong>.</p>
 	ReadonlyNodeAvailabilityZoneList []*string `json:"ReadonlyNodeAvailabilityZoneList,omitnil,omitempty" name:"ReadonlyNodeAvailabilityZoneList"`
 
-	// AZ where the hidden node resides, which is required in cross-AZ instance deployment.
+	// <p>Availability zone of the Hidden node. To deploy instances across availability zones, you must configure this parameter.</p>
 	HiddenZone *string `json:"HiddenZone,omitnil,omitempty" name:"HiddenZone"`
 
-	// Parameter template ID.
-	// - A parameter template is a collection of predefined parameter values that can be used to quickly configure new MongoDB instances. Proper use of parameter templates can significantly enhance the deployment efficiency and operational performance of the database.
-	// - The [DescribeDBInstanceParamTpl](https://www.tencentcloud.com/document/product/240/109155?from_cn_redirect=1) API can be called to obtain the parameter template ID. Select the parameter template ID corresponding to the instance version and architecture.
+	// <p>Parameter template ID.</p><ul><li>A parameter template is a collection of preset specific parameters applicable to quick configuration of new MongoDB instances. Proper use of parameter templates can effectively improve database deployment efficiency and operating performance.</li><li>The parameter template ID can be obtained through the <a href="https://www.tencentcloud.com/document/product/240/109155?from_cn_redirect=1">DescribeDBInstanceParamTpl</a> API. Please select the parameter template ID corresponding to your instance version and architecture.</li></ul>
 	ParamTemplateId *string `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
+
+	// <p>Instance CPU core size. Unit: C. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain specific saleable CPU specifications.<br>Note: CPU size must be set for common I Instance Type.</p>
+	CpuCore *int64 `json:"CpuCore,omitnil,omitempty" name:"CpuCore"`
 }
 
 func (r *CreateDBInstanceHourRequest) ToJsonString() string {
@@ -788,6 +844,7 @@ func (r *CreateDBInstanceHourRequest) FromJsonString(s string) error {
 	delete(f, "ReadonlyNodeAvailabilityZoneList")
 	delete(f, "HiddenZone")
 	delete(f, "ParamTemplateId")
+	delete(f, "CpuCore")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBInstanceHourRequest has unknown keys!", "")
 	}
@@ -796,10 +853,10 @@ func (r *CreateDBInstanceHourRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateDBInstanceHourResponseParams struct {
-	// Order ID
+	// <p>Order ID.</p>
 	DealId *string `json:"DealId,omitnil,omitempty" name:"DealId"`
 
-	// List of IDs of the created instances
+	// <p>List of instance created IDs.</p>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -824,279 +881,195 @@ func (r *CreateDBInstanceHourResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateDBInstanceRequestParams struct {
-	//  - Specifies the number of primary and secondary nodes for each replica set during replica set instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum number of nodes supported for each replica set.
-	//  - Specifies the number of primary and secondary nodes for each shard during sharded cluster instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum number of nodes supported for each shard.
+	// <ul><li>Specifies the number of primary and secondary nodes for each replica set during replica set instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum number of nodes supported for each replica set.</li><li>Specifies the number of primary and secondary nodes for each shard during sharded cluster instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum number of nodes supported for each shard.</li></ul>
 	NodeNum *uint64 `json:"NodeNum,omitnil,omitempty" name:"NodeNum"`
 
-	// Instance memory size. Unit: GB. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain specific saleable memory specifications.
+	// <p>Instance memory size. Unit: GB. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain specific saleable memory specifications.</p>
 	Memory *uint64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance disk size. Unit: GB. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum disk sizes corresponding to each CPU specification.
+	// <p>Instance disk size. Unit: GB. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum disk sizes corresponding to each CPU specification.</p>
 	Volume *uint64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	// Refers to version information. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API can be called to obtain detailed information about the supported versions.
-	// - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
-	// - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
-	// - MONGO_44_WT: version of the MongoDB 4.4 WiredTiger storage engine.
-	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
-	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
-	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// <p>Refers to version information. For supported versions, use the interface <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> to query.</p><ul><li>MONGO_40_WT: MongoDB 4.0 WiredTiger engine version.</li><li>MONGO_42_WT: MongoDB 4.2 WiredTiger engine version.</li><li>MONGO_44_WT: MongoDB 4.4 WiredTiger engine version.</li><li>MONGO_50_WT: MongoDB 5.0 WiredTiger engine version.</li><li>MONGO_60_WT: MongoDB 6.0 WiredTiger engine version.</li><li>MONGO_70_WT: MongoDB 7.0 WiredTiger engine version.</li><li>MONGO_80_WT: MongoDB 8.0 WiredTiger engine version.</li></ul>
 	MongoVersion *string `json:"MongoVersion,omitnil,omitempty" name:"MongoVersion"`
 
-	// Number of instances. The minimum value is 1, and the maximum value is 30.
+	// <p>Number of instances. The minimum value is 1, and the maximum value is 30.</p>
 	GoodsNum *uint64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// AZ information. Format: ap-guangzhou-2.
-	//  - Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the specific information.
-	//  - This parameter indicates the primary AZ. If multi-AZ deployment is adopted, the value of Zone should be one of the values of AvailabilityZoneList.
+	// <p>AZ information. The input format must be ap-guangzhou-2.</p><ul><li>For details, use the interface <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> to obtain them.</li><li>This parameter is the primary AZ. If multi-AZ deployment is used, Zone must be one of AvailabilityZoneList.</li></ul>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Specifies the purchase duration during the instance purchase, in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36.
+	// <p>Specifies the purchase duration during instance purchase. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36. Unit: months.</p>
 	Period *uint64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Product specification type.
-	//  - HIO10G: general high-I/O 10GE type.
-	//  - HCD: cloud disk type.
+	// <p>Recommended product specification types:</p><ul><li>GE.LD.T1: Local disk (Common I).</li><li>GE.CD.T1: Cloud disk (Common I).</li></ul><p>Product allowlist specification types:</p><ul><li>HIO10G: Local disk (High IO 10G).</li><li>HCD: Cloud disk (Cloud disk edition).</li></ul><p>Note: Allowlist specification types are under allowlist control. If needed, <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a> to apply.</p>
 	MachineCode *string `json:"MachineCode,omitnil,omitempty" name:"MachineCode"`
 
-	// Instance architecture type.
-	//  - REPLSET: replica set.
-	//  - SHARD: sharded cluster.
+	// <p>Instance architecture type.</p><ul><li>REPLSET (replica set)</li><li>SHARD (sharded cluster)</li></ul>
 	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
 
-	//  - Specifies the number of replica sets during replica set instance creation. This parameter can only be set to 1.
-	//  - Specifies the number of shards during sharded cluster instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to query the range of shard quantity. The parameters MinReplicateSetNum and MaxReplicateSetNum in the returned data structure SpecItems correspond to the minimum value and maximum value, respectively.
+	// <ul><li>Specifies the number of replica sets during replica set instance creation. This parameter can only be 1.</li><li>Specifies the number of shards during sharded cluster instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to query the range of shard quantity. The parameters MinReplicateSetNum and MaxReplicateSetNum in the returned data structure SpecItems correspond to the minimum value and maximum value, respectively.</li></ul>
 	ReplicateSetNum *uint64 `json:"ReplicateSetNum,omitnil,omitempty" name:"ReplicateSetNum"`
 
-	// Project ID.  - The default project is used if this parameter is not specified.
-	//  - The project ID can be obtained on the [project management page in the TencentDB for MongoDB console](https://console.cloud.tencent.com/project).
+	// <p>Project ID.</p><ul><li>If this parameter is not set, the default project is used.</li><li>You can obtain the project ID on the <a href="https://console.cloud.tencent.com/project">MongoDB console project management</a> page.</li></ul>
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// VPC ID.
-	// - Only VPC configuration is supported, and a VPC in the same region as the instance should be selected. Log in to the [VPC console](https://console.cloud.tencent.com/vpc) to obtain the available VPC ID.
-	// - After successful instance creation, VPCs can be changed. For detailed operations, see [Changing the Network](https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1).
+	// <p>VPC ID.</p><ul><li>Only private networks can be configured, and a private network in the same region as the instance must be selected. Log in to the <a href="https://console.cloud.tencent.com/vpc">VPC console</a> to obtain a used private network ID.</li><li>After successful instance creation, VPC replacement is allowed. For detailed operations, see <a href="https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1">Changing the Network</a>.</li></ul>
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet ID of the VPC.
-	// - A subnet should be specified within the selected VPC. Log in to the [VPC console](https://console.cloud.tencent.com/vpc) to obtain the available subnet ID.
-	// - After successful instance creation, VPCs and subnets can be changed. For detailed operations, see [Changing the Network](https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1).
+	// <p>Subnet ID of the VPC.</p><ul><li>You must specify a subnet within the selected private network. Log in to the <a href="https://console.cloud.tencent.com/vpc">VPC console</a> to obtain the subnet ID.</li><li>After the instance is successfully created, replacement of the private network and subnet is allowed. For detailed operations, please refer to <a href="https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1">Network Change</a>.</li></ul>
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Instance password. The requirements are as follows:
-	//  - The number of characters should be in the range of [8, 32].
-	//  - Characters within the ranges [A,Z], [a,z], and [0,9] are allowed.
-	//  - Special characters that can be entered include exclamation marks (!), at signs (@), number signs (#), percent signs (%), carets (^), asterisks (\*), brackets (()), and underscores (_).
-	//  - It cannot contain only the same letters or digits.
+	// <p>Instance password. The requirements are as follows:</p><ul><li>Character count is [8,32].</li><li>Enter characters within [A,Z], [a,z], [0,9].</li><li>Special characters include: exclamation mark "!", at "@", pound sign "#", percent sign "%", caret "^", asterisk "*", brackets "()", underscore "_".</li><li>Cannot set a single letter or number.</li></ul>
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// Instance tag information.
+	// <p>Instance tag information.</p>
 	Tags []*TagInfo `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Automatic renewal flag.
-	//  - 0: no automatic renewal.
-	//  - 1: automatic renewal.
+	// <p>Auto-renewal flag.</p><ul><li>0: no auto-renewal.</li><li>1: auto-renewal.</li></ul>
 	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
-	// Whether to automatically select a voucher.
-	//  - 1: yes.
-	//  - 0: no. Default value: 0.
+	// <p>Indicates whether to automatically select voucher.</p><ul><li>1: Yes.</li><li>0: No. Default is 0.</li></ul>
 	AutoVoucher *uint64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-	// Instance type.
-	// - 1: formal instance.
-	// - 3: read-only instance.
-	// - 4: disaster recovery instance.
-	// - 5: cloned instance. Note: For a cloned instance, RestoreTime is required.
+	// <p>Instance type.</p><ul><li>1: Formal instance.</li><li>3: Read-only instance.</li><li>4: Disaster recovery instance.</li><li>5: Clone instance. Note: RestoreTime is a required item when you clone an instance.</li></ul>
 	Clone *int64 `json:"Clone,omitnil,omitempty" name:"Clone"`
 
-	// Parent instance ID.
-	// - This parameter is required when the value of the **Clone** parameter is set to 3 or 4, indicating a read-only or disaster recovery instance.
-	// - Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the parent instance ID from the instance list.
+	// <p>Parent instance ID.</p><ul><li>When the <strong>Clone</strong> parameter is 3 or 4, that is, the instance is read-only or a disaster recovery instance, this parameter must be configured.</li><li>Log in to the <a href="https://console.cloud.tencent.com/mongodb">MongoDB console</a> and copy the parent instance ID in the instance list.</li></ul>
 	Father *string `json:"Father,omitnil,omitempty" name:"Father"`
 
-	// Security group ID. Log in to the [security group console](https://console.cloud.tencent.com/vpc/security-group) to obtain the ID of the security group in the same region as the database instance.
+	// <p>Security group ID. Log in to the <a href="https://console.cloud.tencent.com/vpc/security-group">security group console</a> to obtain the ID of the security group within the same region as the database instance.</p>
 	SecurityGroup []*string `json:"SecurityGroup,omitnil,omitempty" name:"SecurityGroup"`
 
-	// Rollback time of the cloned instance. It is required when the Clone value is 5 or 6. - This parameter is required for cloned instances. Format: 2021-08-13 16:30:00. - Rollback time range: Only data within the last 7 days can be rolled back.
+	// <p>Rollback time of the cloned instance. It is required when the Clone value is 5 or 6. - This parameter is required for cloned instances. Format: 2021-08-13 16:30:00. - Rollback time range: Only data within the last 7 days can be rolled back.</p>
 	RestoreTime *string `json:"RestoreTime,omitnil,omitempty" name:"RestoreTime"`
 
-	// Instance name. Only Chinese characters, letters, digits, underscores (_), and delimiters (-) are supported, with a length of 128 characters. When database instances are purchased in batches, the automatic ascending feature is supported through the custom naming pattern string and numeric suffix to set instance names efficiently.
-	// - Basic mode: prefix + automatic ascending number (starting from 1 by default). Only a custom instance name prefix is required for **lnstanceName**. For example, it can be set to cmgo. If the purchase quantity is set to 5, after purchase, the instances will be sequentially named cmgo1, cmgo2, cmgo3, cmgo4, and cmgo5, respectively.
-	// - Custom starting number mode: prefix + {R:x} (x is the custom starting number). Prefix{R:x} is required for **InstanceName**. For example, cmgo{R:3}. If the purchase quantity is set to 5, the instance names will be sequentially named cmgo3, cmgo4, cmgo5, cmgo6, and cmgo7.
-	// - Composite pattern string: prefix 1{R:x} + prefix 2{R:y}+ ⋯ + fixed suffix, where x and y are the starting numbers of each prefix. A composite pattern string is required for **instanceName**. For example, cmgo{R:10}\_node{R:12}\_db. If the batch purchase quantity is set to 5, the instances will be sequentially named cmgo10\_node12\_db, cmgo11\_node13\_db, cmgo12\_node14\_db, cmgo13\_node15\_db, and cmgo14\_node16\_db.
+	// <p>Instance name. Only Chinese, English, digits, underscores (_), and hyphens (-) are supported, with a maximum length of 128 characters. When purchasing database instances in batches, you can efficiently set instance names by using custom pattern strings and automatically ascending numeric suffixes.</p><ul><li>Basic mode: prefix + automatic ascending number (starting from 1 by default). Only a custom instance name prefix is required for <strong>lnstanceName</strong>. For example, it can be set to cmgo. If the purchase quantity is set to 5, after purchase, the instances will be sequentially named cmgo1, cmgo2, cmgo3, cmgo4, and cmgo5, respectively.</li><li>Custom starting number mode: prefix + {R:x} (x is the custom starting number). <strong>InstanceName</strong> requires "prefix{R:x}". For example, cmgo{R:3}. If the purchase quantity is set to 5, the instance names will be cmgo3, cmgo4, cmgo5, cmgo6, and cmgo7.</li><li>Composite pattern string: prefix1{R:x} + prefix2{R:y} + ⋯ + fixed suffix, where x and y are the starting numbers for each prefix. <strong>InstanceName</strong> requires a composite pattern string. For example, cmgo{R:10}_node{R:12}_db. If the batch purchase quantity is set to 5, the instance names will be cmgo10_node12_db, cmgo11_node13_db, cmgo12_node14_db, cmgo13_node15_db, and cmgo14_node16_db.</li></ul>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Specifies the list of AZs during multi-AZ deployment of TencentDB for MongoDB instances.
-	//  - For instances in multi-AZ deployment mode, the **Zone** parameter specifies the primary AZ, and **AvailabilityZoneList** specifies all AZs, including the primary AZ. Format: [ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4].
-	//  - The [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API can be called to obtain AZs planned for TencentDB for MongoDB instances in different regions, helping you specify valid AZs.
-	//  - Nodes in multi-AZ deployment mode can only be deployed in 3 different AZs. Deploying most nodes of a cluster in the same AZ is not supported. For example, a 3-node cluster does not support deploying 2 nodes in the same AZ.
+	// <p>For cloud database instances in multi-AZ deployment, specify the availability zone list.</p><ul><li>For instances in multi-AZ deployment mode, the <strong>Zone</strong> parameter specifies the primary AZ, and <strong>AvailabilityZoneList</strong> specifies all AZs, including the primary AZ. Format: [ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4].</li><li>Use the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to access cloud databases and obtain availability zone information planned for different regions, so that you can assign valid AZs.</li><li>Nodes in multi-AZ deployment can only be deployed in 3 different availability zones. Deploying most nodes of a cluster in the same availability zone is not supported. For example, a 3-node cluster does not support deploying 2 nodes in the same zone.</li></ul>
 	AvailabilityZoneList []*string `json:"AvailabilityZoneList,omitnil,omitempty" name:"AvailabilityZoneList"`
 
-	// Number of Mongos node CPU cores. Valid values: 1, 2, 4, 8, and 16. This parameter is required during sharded cluster instance purchase.
+	// <p>Number of Mongos node CPU cores. Valid values: 1, 2, 4, 8, and 16. This parameter is required during sharded cluster instance purchase.</p>
 	MongosCpu *uint64 `json:"MongosCpu,omitnil,omitempty" name:"MongosCpu"`
 
-	// Mongos node memory size.
-	//  - This parameter is required during sharded cluster instance purchase.
-	//  - Unit: GB. 1-core 2GB, 2-core 4GB, 4-core 8GB, 8-core 16GB, and 16-core 32GB are supported.
+	// <p>Mongos node memory size.</p><ul><li>This parameter is required during sharded cluster instance purchase.</li><li>Unit: GB. Valid values: 2 (for 1 core), 4 (for 2 cores), 8 (for 4 cores), 16 (for 8 cores), and 32 (for 16 cores).</li></ul>
 	MongosMemory *uint64 `json:"MongosMemory,omitnil,omitempty" name:"MongosMemory"`
 
-	// Number of Mongos nodes. This parameter is required during sharded cluster instance purchase.
-	//  - For instances in single-AZ deployment mode, the value range is [3,32].
-	//  - For instances in multi-AZ deployment mode, the value range is [6,32].
+	// <p>Number of Mongos nodes. This parameter is required during sharded cluster instance purchase.</p><ul><li>For single-AZ deployment instances, the quantity range is [3,32].</li><li>For instances deployed across multiple availability zones, the quantity range is [6,32].</li></ul>
 	MongosNodeNum *uint64 `json:"MongosNodeNum,omitnil,omitempty" name:"MongosNodeNum"`
 
-	// Number of read-only nodes. Value ranges: [0,5].
+	// <p>Number of read-only nodes. Value ranges from 0 to 5.</p>
 	ReadonlyNodeNum *uint64 `json:"ReadonlyNodeNum,omitnil,omitempty" name:"ReadonlyNodeNum"`
 
-	// Array of AZs of read-only nodes. This parameter is required for instances in multi-AZ deployment mode when **ReadonlyNodeNum** is not set to **0**.
+	// <p>Array of AZs of read-only nodes. This parameter is required for instances in multi-AZ deployment mode when <strong>ReadonlyNodeNum</strong> is not set to <strong>0</strong>.</p>
 	ReadonlyNodeAvailabilityZoneList []*string `json:"ReadonlyNodeAvailabilityZoneList,omitnil,omitempty" name:"ReadonlyNodeAvailabilityZoneList"`
 
-	// AZ of the hidden node. This parameter is required for instances in multi-AZ deployment mode.
+	// <p>Availability zone of the Hidden node. To deploy instances across availability zones, you must configure this parameter.</p>
 	HiddenZone *string `json:"HiddenZone,omitnil,omitempty" name:"HiddenZone"`
 
-	// Parameter template ID.
-	// - A parameter template is a collection of predefined parameter values that can be used to quickly configure new MongoDB instances. Proper use of parameter templates can significantly enhance the deployment efficiency and operational performance of the database.
-	// - The [DescribeDBInstanceParamTpl](https://www.tencentcloud.com/document/product/240/109155?from_cn_redirect=1) API can be called to obtain the parameter template ID. Select the parameter template ID corresponding to the instance version and architecture.
+	// <p>Parameter template ID.</p><ul><li>A parameter template is a collection of preset specific parameters applicable to quick configuration of new MongoDB instances. Proper use of parameter templates can effectively improve database deployment efficiency and operating performance.</li><li>The parameter template ID can be obtained through the <a href="https://www.tencentcloud.com/document/product/240/109155?from_cn_redirect=1">DescribeDBInstanceParamTpl</a> API. Please select the parameter template ID corresponding to your instance version and architecture.</li></ul>
 	ParamTemplateId *string `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
+
+	// <p>Instance CPU core size. Unit: C. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain specific saleable CPU specifications.<br>Note: CPU size must be set for common I Instance Type.</p>
+	CpuCore *int64 `json:"CpuCore,omitnil,omitempty" name:"CpuCore"`
 }
 
 type CreateDBInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	//  - Specifies the number of primary and secondary nodes for each replica set during replica set instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum number of nodes supported for each replica set.
-	//  - Specifies the number of primary and secondary nodes for each shard during sharded cluster instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum number of nodes supported for each shard.
+	// <ul><li>Specifies the number of primary and secondary nodes for each replica set during replica set instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum number of nodes supported for each replica set.</li><li>Specifies the number of primary and secondary nodes for each shard during sharded cluster instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum number of nodes supported for each shard.</li></ul>
 	NodeNum *uint64 `json:"NodeNum,omitnil,omitempty" name:"NodeNum"`
 
-	// Instance memory size. Unit: GB. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain specific saleable memory specifications.
+	// <p>Instance memory size. Unit: GB. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain specific saleable memory specifications.</p>
 	Memory *uint64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance disk size. Unit: GB. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum disk sizes corresponding to each CPU specification.
+	// <p>Instance disk size. Unit: GB. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum disk sizes corresponding to each CPU specification.</p>
 	Volume *uint64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	// Refers to version information. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API can be called to obtain detailed information about the supported versions.
-	// - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
-	// - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
-	// - MONGO_44_WT: version of the MongoDB 4.4 WiredTiger storage engine.
-	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
-	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
-	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// <p>Refers to version information. For supported versions, use the interface <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> to query.</p><ul><li>MONGO_40_WT: MongoDB 4.0 WiredTiger engine version.</li><li>MONGO_42_WT: MongoDB 4.2 WiredTiger engine version.</li><li>MONGO_44_WT: MongoDB 4.4 WiredTiger engine version.</li><li>MONGO_50_WT: MongoDB 5.0 WiredTiger engine version.</li><li>MONGO_60_WT: MongoDB 6.0 WiredTiger engine version.</li><li>MONGO_70_WT: MongoDB 7.0 WiredTiger engine version.</li><li>MONGO_80_WT: MongoDB 8.0 WiredTiger engine version.</li></ul>
 	MongoVersion *string `json:"MongoVersion,omitnil,omitempty" name:"MongoVersion"`
 
-	// Number of instances. The minimum value is 1, and the maximum value is 30.
+	// <p>Number of instances. The minimum value is 1, and the maximum value is 30.</p>
 	GoodsNum *uint64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// AZ information. Format: ap-guangzhou-2.
-	//  - Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to obtain the specific information.
-	//  - This parameter indicates the primary AZ. If multi-AZ deployment is adopted, the value of Zone should be one of the values of AvailabilityZoneList.
+	// <p>AZ information. The input format must be ap-guangzhou-2.</p><ul><li>For details, use the interface <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> to obtain them.</li><li>This parameter is the primary AZ. If multi-AZ deployment is used, Zone must be one of AvailabilityZoneList.</li></ul>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Specifies the purchase duration during the instance purchase, in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36.
+	// <p>Specifies the purchase duration during instance purchase. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36. Unit: months.</p>
 	Period *uint64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Product specification type.
-	//  - HIO10G: general high-I/O 10GE type.
-	//  - HCD: cloud disk type.
+	// <p>Recommended product specification types:</p><ul><li>GE.LD.T1: Local disk (Common I).</li><li>GE.CD.T1: Cloud disk (Common I).</li></ul><p>Product allowlist specification types:</p><ul><li>HIO10G: Local disk (High IO 10G).</li><li>HCD: Cloud disk (Cloud disk edition).</li></ul><p>Note: Allowlist specification types are under allowlist control. If needed, <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a> to apply.</p>
 	MachineCode *string `json:"MachineCode,omitnil,omitempty" name:"MachineCode"`
 
-	// Instance architecture type.
-	//  - REPLSET: replica set.
-	//  - SHARD: sharded cluster.
+	// <p>Instance architecture type.</p><ul><li>REPLSET (replica set)</li><li>SHARD (sharded cluster)</li></ul>
 	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
 
-	//  - Specifies the number of replica sets during replica set instance creation. This parameter can only be set to 1.
-	//  - Specifies the number of shards during sharded cluster instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to query the range of shard quantity. The parameters MinReplicateSetNum and MaxReplicateSetNum in the returned data structure SpecItems correspond to the minimum value and maximum value, respectively.
+	// <ul><li>Specifies the number of replica sets during replica set instance creation. This parameter can only be 1.</li><li>Specifies the number of shards during sharded cluster instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to query the range of shard quantity. The parameters MinReplicateSetNum and MaxReplicateSetNum in the returned data structure SpecItems correspond to the minimum value and maximum value, respectively.</li></ul>
 	ReplicateSetNum *uint64 `json:"ReplicateSetNum,omitnil,omitempty" name:"ReplicateSetNum"`
 
-	// Project ID.  - The default project is used if this parameter is not specified.
-	//  - The project ID can be obtained on the [project management page in the TencentDB for MongoDB console](https://console.cloud.tencent.com/project).
+	// <p>Project ID.</p><ul><li>If this parameter is not set, the default project is used.</li><li>You can obtain the project ID on the <a href="https://console.cloud.tencent.com/project">MongoDB console project management</a> page.</li></ul>
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// VPC ID.
-	// - Only VPC configuration is supported, and a VPC in the same region as the instance should be selected. Log in to the [VPC console](https://console.cloud.tencent.com/vpc) to obtain the available VPC ID.
-	// - After successful instance creation, VPCs can be changed. For detailed operations, see [Changing the Network](https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1).
+	// <p>VPC ID.</p><ul><li>Only private networks can be configured, and a private network in the same region as the instance must be selected. Log in to the <a href="https://console.cloud.tencent.com/vpc">VPC console</a> to obtain a used private network ID.</li><li>After successful instance creation, VPC replacement is allowed. For detailed operations, see <a href="https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1">Changing the Network</a>.</li></ul>
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet ID of the VPC.
-	// - A subnet should be specified within the selected VPC. Log in to the [VPC console](https://console.cloud.tencent.com/vpc) to obtain the available subnet ID.
-	// - After successful instance creation, VPCs and subnets can be changed. For detailed operations, see [Changing the Network](https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1).
+	// <p>Subnet ID of the VPC.</p><ul><li>You must specify a subnet within the selected private network. Log in to the <a href="https://console.cloud.tencent.com/vpc">VPC console</a> to obtain the subnet ID.</li><li>After the instance is successfully created, replacement of the private network and subnet is allowed. For detailed operations, please refer to <a href="https://www.tencentcloud.com/document/product/239/30910?from_cn_redirect=1">Network Change</a>.</li></ul>
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Instance password. The requirements are as follows:
-	//  - The number of characters should be in the range of [8, 32].
-	//  - Characters within the ranges [A,Z], [a,z], and [0,9] are allowed.
-	//  - Special characters that can be entered include exclamation marks (!), at signs (@), number signs (#), percent signs (%), carets (^), asterisks (\*), brackets (()), and underscores (_).
-	//  - It cannot contain only the same letters or digits.
+	// <p>Instance password. The requirements are as follows:</p><ul><li>Character count is [8,32].</li><li>Enter characters within [A,Z], [a,z], [0,9].</li><li>Special characters include: exclamation mark "!", at "@", pound sign "#", percent sign "%", caret "^", asterisk "*", brackets "()", underscore "_".</li><li>Cannot set a single letter or number.</li></ul>
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// Instance tag information.
+	// <p>Instance tag information.</p>
 	Tags []*TagInfo `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Automatic renewal flag.
-	//  - 0: no automatic renewal.
-	//  - 1: automatic renewal.
+	// <p>Auto-renewal flag.</p><ul><li>0: no auto-renewal.</li><li>1: auto-renewal.</li></ul>
 	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
-	// Whether to automatically select a voucher.
-	//  - 1: yes.
-	//  - 0: no. Default value: 0.
+	// <p>Indicates whether to automatically select voucher.</p><ul><li>1: Yes.</li><li>0: No. Default is 0.</li></ul>
 	AutoVoucher *uint64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-	// Instance type.
-	// - 1: formal instance.
-	// - 3: read-only instance.
-	// - 4: disaster recovery instance.
-	// - 5: cloned instance. Note: For a cloned instance, RestoreTime is required.
+	// <p>Instance type.</p><ul><li>1: Formal instance.</li><li>3: Read-only instance.</li><li>4: Disaster recovery instance.</li><li>5: Clone instance. Note: RestoreTime is a required item when you clone an instance.</li></ul>
 	Clone *int64 `json:"Clone,omitnil,omitempty" name:"Clone"`
 
-	// Parent instance ID.
-	// - This parameter is required when the value of the **Clone** parameter is set to 3 or 4, indicating a read-only or disaster recovery instance.
-	// - Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the parent instance ID from the instance list.
+	// <p>Parent instance ID.</p><ul><li>When the <strong>Clone</strong> parameter is 3 or 4, that is, the instance is read-only or a disaster recovery instance, this parameter must be configured.</li><li>Log in to the <a href="https://console.cloud.tencent.com/mongodb">MongoDB console</a> and copy the parent instance ID in the instance list.</li></ul>
 	Father *string `json:"Father,omitnil,omitempty" name:"Father"`
 
-	// Security group ID. Log in to the [security group console](https://console.cloud.tencent.com/vpc/security-group) to obtain the ID of the security group in the same region as the database instance.
+	// <p>Security group ID. Log in to the <a href="https://console.cloud.tencent.com/vpc/security-group">security group console</a> to obtain the ID of the security group within the same region as the database instance.</p>
 	SecurityGroup []*string `json:"SecurityGroup,omitnil,omitempty" name:"SecurityGroup"`
 
-	// Rollback time of the cloned instance. It is required when the Clone value is 5 or 6. - This parameter is required for cloned instances. Format: 2021-08-13 16:30:00. - Rollback time range: Only data within the last 7 days can be rolled back.
+	// <p>Rollback time of the cloned instance. It is required when the Clone value is 5 or 6. - This parameter is required for cloned instances. Format: 2021-08-13 16:30:00. - Rollback time range: Only data within the last 7 days can be rolled back.</p>
 	RestoreTime *string `json:"RestoreTime,omitnil,omitempty" name:"RestoreTime"`
 
-	// Instance name. Only Chinese characters, letters, digits, underscores (_), and delimiters (-) are supported, with a length of 128 characters. When database instances are purchased in batches, the automatic ascending feature is supported through the custom naming pattern string and numeric suffix to set instance names efficiently.
-	// - Basic mode: prefix + automatic ascending number (starting from 1 by default). Only a custom instance name prefix is required for **lnstanceName**. For example, it can be set to cmgo. If the purchase quantity is set to 5, after purchase, the instances will be sequentially named cmgo1, cmgo2, cmgo3, cmgo4, and cmgo5, respectively.
-	// - Custom starting number mode: prefix + {R:x} (x is the custom starting number). Prefix{R:x} is required for **InstanceName**. For example, cmgo{R:3}. If the purchase quantity is set to 5, the instance names will be sequentially named cmgo3, cmgo4, cmgo5, cmgo6, and cmgo7.
-	// - Composite pattern string: prefix 1{R:x} + prefix 2{R:y}+ ⋯ + fixed suffix, where x and y are the starting numbers of each prefix. A composite pattern string is required for **instanceName**. For example, cmgo{R:10}\_node{R:12}\_db. If the batch purchase quantity is set to 5, the instances will be sequentially named cmgo10\_node12\_db, cmgo11\_node13\_db, cmgo12\_node14\_db, cmgo13\_node15\_db, and cmgo14\_node16\_db.
+	// <p>Instance name. Only Chinese, English, digits, underscores (_), and hyphens (-) are supported, with a maximum length of 128 characters. When purchasing database instances in batches, you can efficiently set instance names by using custom pattern strings and automatically ascending numeric suffixes.</p><ul><li>Basic mode: prefix + automatic ascending number (starting from 1 by default). Only a custom instance name prefix is required for <strong>lnstanceName</strong>. For example, it can be set to cmgo. If the purchase quantity is set to 5, after purchase, the instances will be sequentially named cmgo1, cmgo2, cmgo3, cmgo4, and cmgo5, respectively.</li><li>Custom starting number mode: prefix + {R:x} (x is the custom starting number). <strong>InstanceName</strong> requires "prefix{R:x}". For example, cmgo{R:3}. If the purchase quantity is set to 5, the instance names will be cmgo3, cmgo4, cmgo5, cmgo6, and cmgo7.</li><li>Composite pattern string: prefix1{R:x} + prefix2{R:y} + ⋯ + fixed suffix, where x and y are the starting numbers for each prefix. <strong>InstanceName</strong> requires a composite pattern string. For example, cmgo{R:10}_node{R:12}_db. If the batch purchase quantity is set to 5, the instance names will be cmgo10_node12_db, cmgo11_node13_db, cmgo12_node14_db, cmgo13_node15_db, and cmgo14_node16_db.</li></ul>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Specifies the list of AZs during multi-AZ deployment of TencentDB for MongoDB instances.
-	//  - For instances in multi-AZ deployment mode, the **Zone** parameter specifies the primary AZ, and **AvailabilityZoneList** specifies all AZs, including the primary AZ. Format: [ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4].
-	//  - The [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API can be called to obtain AZs planned for TencentDB for MongoDB instances in different regions, helping you specify valid AZs.
-	//  - Nodes in multi-AZ deployment mode can only be deployed in 3 different AZs. Deploying most nodes of a cluster in the same AZ is not supported. For example, a 3-node cluster does not support deploying 2 nodes in the same AZ.
+	// <p>For cloud database instances in multi-AZ deployment, specify the availability zone list.</p><ul><li>For instances in multi-AZ deployment mode, the <strong>Zone</strong> parameter specifies the primary AZ, and <strong>AvailabilityZoneList</strong> specifies all AZs, including the primary AZ. Format: [ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4].</li><li>Use the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to access cloud databases and obtain availability zone information planned for different regions, so that you can assign valid AZs.</li><li>Nodes in multi-AZ deployment can only be deployed in 3 different availability zones. Deploying most nodes of a cluster in the same availability zone is not supported. For example, a 3-node cluster does not support deploying 2 nodes in the same zone.</li></ul>
 	AvailabilityZoneList []*string `json:"AvailabilityZoneList,omitnil,omitempty" name:"AvailabilityZoneList"`
 
-	// Number of Mongos node CPU cores. Valid values: 1, 2, 4, 8, and 16. This parameter is required during sharded cluster instance purchase.
+	// <p>Number of Mongos node CPU cores. Valid values: 1, 2, 4, 8, and 16. This parameter is required during sharded cluster instance purchase.</p>
 	MongosCpu *uint64 `json:"MongosCpu,omitnil,omitempty" name:"MongosCpu"`
 
-	// Mongos node memory size.
-	//  - This parameter is required during sharded cluster instance purchase.
-	//  - Unit: GB. 1-core 2GB, 2-core 4GB, 4-core 8GB, 8-core 16GB, and 16-core 32GB are supported.
+	// <p>Mongos node memory size.</p><ul><li>This parameter is required during sharded cluster instance purchase.</li><li>Unit: GB. Valid values: 2 (for 1 core), 4 (for 2 cores), 8 (for 4 cores), 16 (for 8 cores), and 32 (for 16 cores).</li></ul>
 	MongosMemory *uint64 `json:"MongosMemory,omitnil,omitempty" name:"MongosMemory"`
 
-	// Number of Mongos nodes. This parameter is required during sharded cluster instance purchase.
-	//  - For instances in single-AZ deployment mode, the value range is [3,32].
-	//  - For instances in multi-AZ deployment mode, the value range is [6,32].
+	// <p>Number of Mongos nodes. This parameter is required during sharded cluster instance purchase.</p><ul><li>For single-AZ deployment instances, the quantity range is [3,32].</li><li>For instances deployed across multiple availability zones, the quantity range is [6,32].</li></ul>
 	MongosNodeNum *uint64 `json:"MongosNodeNum,omitnil,omitempty" name:"MongosNodeNum"`
 
-	// Number of read-only nodes. Value ranges: [0,5].
+	// <p>Number of read-only nodes. Value ranges from 0 to 5.</p>
 	ReadonlyNodeNum *uint64 `json:"ReadonlyNodeNum,omitnil,omitempty" name:"ReadonlyNodeNum"`
 
-	// Array of AZs of read-only nodes. This parameter is required for instances in multi-AZ deployment mode when **ReadonlyNodeNum** is not set to **0**.
+	// <p>Array of AZs of read-only nodes. This parameter is required for instances in multi-AZ deployment mode when <strong>ReadonlyNodeNum</strong> is not set to <strong>0</strong>.</p>
 	ReadonlyNodeAvailabilityZoneList []*string `json:"ReadonlyNodeAvailabilityZoneList,omitnil,omitempty" name:"ReadonlyNodeAvailabilityZoneList"`
 
-	// AZ of the hidden node. This parameter is required for instances in multi-AZ deployment mode.
+	// <p>Availability zone of the Hidden node. To deploy instances across availability zones, you must configure this parameter.</p>
 	HiddenZone *string `json:"HiddenZone,omitnil,omitempty" name:"HiddenZone"`
 
-	// Parameter template ID.
-	// - A parameter template is a collection of predefined parameter values that can be used to quickly configure new MongoDB instances. Proper use of parameter templates can significantly enhance the deployment efficiency and operational performance of the database.
-	// - The [DescribeDBInstanceParamTpl](https://www.tencentcloud.com/document/product/240/109155?from_cn_redirect=1) API can be called to obtain the parameter template ID. Select the parameter template ID corresponding to the instance version and architecture.
+	// <p>Parameter template ID.</p><ul><li>A parameter template is a collection of preset specific parameters applicable to quick configuration of new MongoDB instances. Proper use of parameter templates can effectively improve database deployment efficiency and operating performance.</li><li>The parameter template ID can be obtained through the <a href="https://www.tencentcloud.com/document/product/240/109155?from_cn_redirect=1">DescribeDBInstanceParamTpl</a> API. Please select the parameter template ID corresponding to your instance version and architecture.</li></ul>
 	ParamTemplateId *string `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
+
+	// <p>Instance CPU core size. Unit: C. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain specific saleable CPU specifications.<br>Note: CPU size must be set for common I Instance Type.</p>
+	CpuCore *int64 `json:"CpuCore,omitnil,omitempty" name:"CpuCore"`
 }
 
 func (r *CreateDBInstanceRequest) ToJsonString() string {
@@ -1141,6 +1114,7 @@ func (r *CreateDBInstanceRequest) FromJsonString(s string) error {
 	delete(f, "ReadonlyNodeAvailabilityZoneList")
 	delete(f, "HiddenZone")
 	delete(f, "ParamTemplateId")
+	delete(f, "CpuCore")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBInstanceRequest has unknown keys!", "")
 	}
@@ -1149,10 +1123,10 @@ func (r *CreateDBInstanceRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateDBInstanceResponseParams struct {
-	// Order ID.
+	// <p>Order ID</p>
 	DealId *string `json:"DealId,omitnil,omitempty" name:"DealId"`
 
-	// List of IDs of created instances.
+	// <p>List of instance created IDs</p>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1548,6 +1522,290 @@ func (r *DescribeAsyncRequestInfoResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeAuditConfigRequestParams struct {
+	// Instance ID, in the format of cmgo-xftsghuy. It is the same as the instance ID displayed on the TencentDB console page.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type DescribeAuditConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID, in the format of cmgo-xftsghuy. It is the same as the instance ID displayed on the TencentDB console page.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeAuditConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAuditConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAuditConfigResponseParams struct {
+	// Instance ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Instance name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// true indicates full audit, false indicates rule audit
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AuditAll *bool `json:"AuditAll,omitnil,omitempty" name:"AuditAll"`
+
+	// The time when the instance enables database audit.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Audit log retention period.
+	// Unit: day. Currently supports retention duration including 0, 30, 180, 365, 1095, 1825.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogExpireDay *int64 `json:"LogExpireDay,omitnil,omitempty" name:"LogExpireDay"`
+
+	// Audit log storage type. Currently only support "storage": Storage type.
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// Whether the auditing feature is being disabled.
+	// <ul><li>true: Yes.</li><li>false: No.</li></ul>
+	IsClosing *string `json:"IsClosing,omitnil,omitempty" name:"IsClosing"`
+
+	// Whether the audit feature is being enabled.<ul><li>true: Yes.</li><li>false: No.</li></ul>
+	IsOpening *string `json:"IsOpening,omitnil,omitempty" name:"IsOpening"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAuditConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAuditConfigResponseParams `json:"Response"`
+}
+
+func (r *DescribeAuditConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAuditLogFilesRequestParams struct {
+	// Instance ID, in the format of cmgo-xfts****. It is the same as the instance ID displayed on the TencentDB console page.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Page size. Default value: 20; value ranges from 1 to 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Audit log file name. This API filters related audit log files based on this parameter.
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+}
+
+type DescribeAuditLogFilesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID, in the format of cmgo-xfts****. It is the same as the instance ID displayed on the TencentDB console page.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Page size. Default value: 20; value ranges from 1 to 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Audit log file name. This API filters related audit log files based on this parameter.
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+}
+
+func (r *DescribeAuditLogFilesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditLogFilesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "FileName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAuditLogFilesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAuditLogFilesResponseParams struct {
+	// Number of eligible audit log files.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Audit log file details.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Items []*AuditLogFile `json:"Items,omitnil,omitempty" name:"Items"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAuditLogFilesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAuditLogFilesResponseParams `json:"Response"`
+}
+
+func (r *DescribeAuditLogFilesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditLogFilesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAuditLogsRequestParams struct {
+	// Instance ID, in the format of cmgo-xftsghuy. It is the same as the instance ID displayed on the TencentDB console page.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Start time, format: "2017-07-12 10:29:20".
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time, format: "2017-07-12 10:29:20".
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Filter conditions. You can filter logs based on these conditions.
+	Filter *AuditLogFilter `json:"Filter,omitnil,omitempty" name:"Filter"`
+
+	// Pagination parameter indicates the number of returned data entries. Default value is 100. Maximum value is 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting method of the audit log.
+	// <ul><li>ASC: ascending.</li><li>DESC: descending order.</li></ul>
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sorting field of the audit log, including:
+	// <ul><li>timestamp: Timestamp.</li>
+	// <li>affectRows: Number of affected rows.</li>
+	// <li>execTime: Execution time.</li></ul>
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+}
+
+type DescribeAuditLogsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID, in the format of cmgo-xftsghuy. It is the same as the instance ID displayed on the TencentDB console page.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Start time, format: "2017-07-12 10:29:20".
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time, format: "2017-07-12 10:29:20".
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Filter conditions. You can filter logs based on these conditions.
+	Filter *AuditLogFilter `json:"Filter,omitnil,omitempty" name:"Filter"`
+
+	// Pagination parameter indicates the number of returned data entries. Default value is 100. Maximum value is 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting method of the audit log.
+	// <ul><li>ASC: ascending.</li><li>DESC: descending order.</li></ul>
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sorting field of the audit log, including:
+	// <ul><li>timestamp: Timestamp.</li>
+	// <li>affectRows: Number of affected rows.</li>
+	// <li>execTime: Execution time.</li></ul>
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+}
+
+func (r *DescribeAuditLogsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditLogsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Filter")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Order")
+	delete(f, "OrderBy")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAuditLogsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAuditLogsResponseParams struct {
+	// Number of eligible audit log entries.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Audit log details.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Items []*AuditLog `json:"Items,omitnil,omitempty" name:"Items"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAuditLogsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAuditLogsResponseParams `json:"Response"`
+}
+
+func (r *DescribeAuditLogsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditLogsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeBackupDownloadTaskRequestParams struct {
 	// Instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -1718,13 +1976,44 @@ type DescribeBackupRulesResponseParams struct {
 	// Retention period for backup data, in days.
 	BackupSaveTime *uint64 `json:"BackupSaveTime,omitnil,omitempty" name:"BackupSaveTime"`
 
+	// Backup frequency. Backup interval in hours. Value: 12, 24.
+	BackupFrequency *int64 `json:"BackupFrequency,omitnil,omitempty" name:"BackupFrequency"`
+
 	// Automatic backup start time.
 	BackupTime *uint64 `json:"BackupTime,omitnil,omitempty" name:"BackupTime"`
 
-	// Backup method.
+	// Backup mode.
 	// - 0: logical backup.
 	// - 1: physical backup.
+	// -3: Snapshot backup.
+	// **Description**:
+	// 1. The General Edition instance supports logical and physical backup. The Cloud Disk Edition instance supports physical and snapshot backup, but does not support logical backup currently.
+	// 2. Physical backup is not supported when storage encryption is enabled for the instance.
 	BackupMethod *uint64 `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
+
+	// Day of week for backup, 0-6, separated by commas
+	ActiveWeekdays *string `json:"ActiveWeekdays,omitnil,omitempty" name:"ActiveWeekdays"`
+
+	// Long-term backup period. weekly - by week, monthly - by month, empty means not enabled.
+	LongTermInterval *string `json:"LongTermInterval,omitnil,omitempty" name:"LongTermInterval"`
+
+	// Date of long-term backup, week 0-6, month 1-31
+	LongTermActiveDays *string `json:"LongTermActiveDays,omitnil,omitempty" name:"LongTermActiveDays"`
+
+	// Long-term backup retention period
+	LongTermExpiredDays *int64 `json:"LongTermExpiredDays,omitnil,omitempty" name:"LongTermExpiredDays"`
+
+	// Incremental backup retention period
+	OplogExpiredDays *int64 `json:"OplogExpiredDays,omitnil,omitempty" name:"OplogExpiredDays"`
+
+	// Backup version. 0 - Old backup method, 1 - Advanced backup.
+	BackupVersion *int64 `json:"BackupVersion,omitnil,omitempty" name:"BackupVersion"`
+
+	// Backup size
+	BackupTotalSize *BackupTotalSize `json:"BackupTotalSize,omitnil,omitempty" name:"BackupTotalSize"`
+
+	// alarm limit
+	AlertThreshold *int64 `json:"AlertThreshold,omitnil,omitempty" name:"AlertThreshold"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -3039,6 +3328,63 @@ func (r *DescribeMongodbLogsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeSRVConnectionDomainRequestParams struct {
+	// Instance ID. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type DescribeSRVConnectionDomainRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeSRVConnectionDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSRVConnectionDomainRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSRVConnectionDomainRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSRVConnectionDomainResponseParams struct {
+	// srv domain information of the current instance.
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSRVConnectionDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSRVConnectionDomainResponseParams `json:"Response"`
+}
+
+func (r *DescribeSRVConnectionDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSRVConnectionDomainResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeSecurityGroupRequestParams struct {
 	// Instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -3371,6 +3717,120 @@ func (r *DescribeSpecInfoResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DisableSRVConnectionUrlRequestParams struct {
+	// Instance ID. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type DisableSRVConnectionUrlRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *DisableSRVConnectionUrlRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisableSRVConnectionUrlRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisableSRVConnectionUrlRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DisableSRVConnectionUrlResponseParams struct {
+	// Start the task ID.
+	FlowId *uint64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DisableSRVConnectionUrlResponse struct {
+	*tchttp.BaseResponse
+	Response *DisableSRVConnectionUrlResponseParams `json:"Response"`
+}
+
+func (r *DisableSRVConnectionUrlResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisableSRVConnectionUrlResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EnableSRVConnectionUrlRequestParams struct {
+	// Instance ID. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type EnableSRVConnectionUrlRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *EnableSRVConnectionUrlRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableSRVConnectionUrlRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableSRVConnectionUrlRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EnableSRVConnectionUrlResponseParams struct {
+	// Start the task ID.
+	FlowId *uint64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type EnableSRVConnectionUrlResponse struct {
+	*tchttp.BaseResponse
+	Response *EnableSRVConnectionUrlResponseParams `json:"Response"`
+}
+
+func (r *EnableSRVConnectionUrlResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableSRVConnectionUrlResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type EnableTransparentDataEncryptionRequestParams struct {
 	// Instance ID. For example, cmgo-p8vn****. Log in to the[TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb) to copy the instance ID from the instance list. Currently, the supported general versions include 4.4 and 5.0, and Cloud Disk Edition is not supported.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -3442,6 +3902,77 @@ func (r *EnableTransparentDataEncryptionResponse) FromJsonString(s string) error
 }
 
 // Predefined struct for user
+type EnableWanServiceRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// CLB ID.
+	LoadBalancerId *string `json:"LoadBalancerId,omitnil,omitempty" name:"LoadBalancerId"`
+
+	// Node and listening port information.
+	NodeList []*WanServiceNodeList `json:"NodeList,omitnil,omitempty" name:"NodeList"`
+}
+
+type EnableWanServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// CLB ID.
+	LoadBalancerId *string `json:"LoadBalancerId,omitnil,omitempty" name:"LoadBalancerId"`
+
+	// Node and listening port information.
+	NodeList []*WanServiceNodeList `json:"NodeList,omitnil,omitempty" name:"NodeList"`
+}
+
+func (r *EnableWanServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableWanServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "LoadBalancerId")
+	delete(f, "NodeList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableWanServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EnableWanServiceResponseParams struct {
+	// Asynchronous task ID.
+	FlowId *uint64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type EnableWanServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *EnableWanServiceResponseParams `json:"Response"`
+}
+
+func (r *EnableWanServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableWanServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type FlushInstanceRouterConfigRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -3497,153 +4028,123 @@ func (r *FlushInstanceRouterConfigResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type InquirePriceCreateDBInstancesRequestParams struct {
-	// Region and AZ information of the instance. For details, see [Regions and AZs](https://www.tencentcloud.com/document/product/240/3637?from_cn_redirect=1).
+	// <p>Region and AZ information of the instance. For details, please see <a href="https://www.tencentcloud.com/document/product/240/3637?from_cn_redirect=1">Regions and Availability Zones</a>.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// -Specifies the number of primary and secondary nodes for each replica set during replica set instance creation. call the [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum number of nodes supported for each replica set.
-	// - Specifies the number of primary and secondary nodes for each shard during sharded cluster instance creation. Call the [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum number of nodes supported for each shard.
+	// <ul><li>Specifies the number of primary and secondary nodes for each replica set during replica set instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum number of nodes supported for each replica set.</li><li>Specifies the number of primary and secondary nodes for each shard during sharded cluster instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum number of nodes supported for each shard.</li></ul>
 	NodeNum *int64 `json:"NodeNum,omitnil,omitempty" name:"NodeNum"`
 
-	// Instance memory size.
-	// 
-	//  - Unit: GB.
-	//  - For the value range, call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API. The CPU and Memory parameters in the returned data structure SpecItems correspond to the number of CPU cores and the memory specification, respectively.
+	// <p>Instance memory size.</p><ul><li>Unit: GB.</li><li>For the value range, call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API. The CPU and Memory parameters in the returned data structure SpecItems correspond to the number of CPU cores and the memory specifications, respectively.</li></ul>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance disk size.
-	//  - Unit: GB.
-	//  - For the value range, call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API. The MinStorage and MaxStorage parameters in the returned data structure SpecItems correspond to the minimum and maximum disk specifications, respectively.
+	// <p>Instance disk size.</p><ul><li>Unit: GB.</li><li>For the value range, call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API. The MinStorage and MaxStorage parameters in the returned data structure SpecItems correspond to the minimum and maximum disk specifications, respectively.</li></ul>
 	Volume *int64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	// Instance version information. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API can be called to obtain specific supported versions. The MongoVersionCode parameter in the returned data structure SpecItems indicates the information on versions supported by instances. The corresponding relationship between version information and version number is as follows:
-	// - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
-	// - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
-	// - MONGO_44_WT: version of the MongoDB 4.4 WiredTiger storage engine.
-	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
-	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
-	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// <p>Instance version information. The <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API can be called to obtain specific supported versions. The MongoVersionCode parameter in the returned data structure SpecItems indicates the information on versions supported by instances. The corresponding relationship between version information and version number is as follows:</p><ul><li>MONGO_40_WT: MongoDB 4.0 WiredTiger storage engine version.</li><li>MONGO_42_WT: MongoDB 4.2 WiredTiger storage engine version.</li><li>MONGO_44_WT: MongoDB 4.4 WiredTiger storage engine version.</li><li>MONGO_50_WT: MongoDB 5.0 WiredTiger storage engine version.</li><li>MONGO_60_WT: MongoDB 6.0 WiredTiger storage engine version.</li><li>MONGO_70_WT: MongoDB 7.0 WiredTiger storage engine version.</li><li>MONGO_80_WT: MongoDB 8.0 WiredTiger storage engine version.</li></ul>
 	MongoVersion *string `json:"MongoVersion,omitnil,omitempty" name:"MongoVersion"`
 
-	// Product specification type.
-	//  - HIO10G: general high-I/O 10GE type.
-	//  - HCD: cloud disk.
+	// <p>Recommended product specification types:</p><ul><li>GE.LD.T1: Local disk (Common I).</li><li>GE.CD.T1: Cloud disk (Common I).</li></ul><p>Product allowlist specification types:</p><ul><li>HIO10G: Local disk (High IO 10G).</li><li>HCD: Cloud disk (Cloud disk edition).</li></ul><p>Note: Allowlist specification types are under allowlist control. If needed, <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a> to apply.</p>
 	MachineCode *string `json:"MachineCode,omitnil,omitempty" name:"MachineCode"`
 
-	// Number of instances. Minimum value: 1. Maximum value: 10.
+	// <p>Number of instances. Value range: [1,10].</p>
 	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// Instance type.
-	// 
-	//  - REPLSET: replica set.
-	//  - SHARD: sharded cluster.
+	// <p>Instance type.</p><ul><li>REPLSET (replica set)</li><li>SHARD (sharded cluster)</li></ul>
 	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
 
-	//  - Specifies the number of replica sets during replica set instance creation. This parameter can only be set to 1.
-	//  - Specifies the number of shards during sharded cluster instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to query the range of shard quantity. The parameters MinReplicateSetNum and MaxReplicateSetNum in the returned data structure SpecItems correspond to the minimum value and maximum value, respectively.
+	// <ul><li>Specifies the number of replica sets during replica set instance creation. This parameter can only be 1.</li><li>Specifies the number of shards during sharded cluster instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to query the range of shard quantity. The parameters MinReplicateSetNum and MaxReplicateSetNum in the returned data structure SpecItems correspond to the minimum value and maximum value, respectively.</li></ul>
 	ReplicateSetNum *int64 `json:"ReplicateSetNum,omitnil,omitempty" name:"ReplicateSetNum"`
 
-	//  - When the monthly subscription mode is selected, that is, when <b>InstanceChargeType</b> is set to <b>PREPAID</b>, this parameter is required for specifying the purchase duration of instances. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36. Unit: months.
-	//  - When pay-as-you-go is selected, that is, when <b>InstanceChargeType</b> is set to **POSTPAID_BY_HOUR**, this parameter only can be set to 1.
+	// <ul><li>When the monthly subscription mode is selected, that is, when <b>InstanceChargeType</b> is set to <b>PREPAID</b>, this parameter is required for specifying the purchase duration of instances. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36. Unit: months.<br>- When the pay-as-you-go mode is selected, that is, when <b>InstanceChargeType</b> is set to <strong>POSTPAID_BY_HOUR</strong>, this parameter can only be set to 1.</li></ul>
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Instance payment method.
-	//  - PREPAID: monthly subscription.
-	//  - POSTPAID_BY_HOUR: pay-as-you-go.
+	// <p>Instance payment method.</p><ul><li>PREPAID: Annual and monthly subscription.</li><li>POSTPAID_BY_HOUR: Pay-As-You-Go.</li></ul>
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
-	// Number of Mongos node CPU cores. Valid values: 1, 2, 4, 8, and 16. This parameter is required during sharded cluster instance purchase. If this parameter is left blank, the default value 2 is used.
+	// <p>Number of Mongos node CPU cores. Valid values: 1, 2, 4, 8, and 16. This parameter is required during sharded cluster instance purchase. If this parameter is left blank, the default value 2 is used.</p>
 	MongosCpu *uint64 `json:"MongosCpu,omitnil,omitempty" name:"MongosCpu"`
 
-	// Mongos node memory size. - This parameter is required during sharded cluster instance purchase. - Unit: GB. Valid values: 2 (for 1 core), 4 (for 2 cores), 8 (for 4 cores), 16 (for 8 cores), and 32 (for 16 cores). If this parameter is left blank, the default value 4 is used.
+	// <p>Mongos node memory size. - This parameter is required during sharded cluster instance purchase. - Unit: GB. Valid values: 2 (for 1 core), 4 (for 2 cores), 8 (for 4 cores), 16 (for 8 cores), and 32 (for 16 cores). If this parameter is left blank, the default value 4 is used.</p>
 	MongosMemory *uint64 `json:"MongosMemory,omitnil,omitempty" name:"MongosMemory"`
 
-	// Specifies the number of Mongos nodes. Value range: [3,32]. For querying the price of sharded cluster instances, this parameter is required. If it is left blank, the default value 3 is used.
+	// <p>Specifies the number of Mongos nodes. Value range: [3,32]. For querying the price of sharded cluster instances, this parameter is required. If it is left blank, the default value 3 is used.</p>
 	MongosNum *uint64 `json:"MongosNum,omitnil,omitempty" name:"MongosNum"`
 
-	// Specifies the number of ConfigServer CPU cores. The value is fixed as 1.
+	// <p>Refers to the number of ConfigServer CPU cores, value fixed at 1, unit: GB. This parameter can be left blank.</p>
 	ConfigServerCpu *uint64 `json:"ConfigServerCpu,omitnil,omitempty" name:"ConfigServerCpu"`
 
-	// Specifies the ConfigServer memory size. The value is fixed as 2. Unit: GB. This parameter can be left blank.
+	// <p>Specifies the ConfigServer memory size. The value is fixed as 2. Unit: GB. This parameter can be left blank.</p>
 	ConfigServerMemory *uint64 `json:"ConfigServerMemory,omitnil,omitempty" name:"ConfigServerMemory"`
 
-	// Specifies the ConfigServer disk size. The value is fixed as 20. Unit: GB. This parameter can be left blank.
+	// <p>Specifies the ConfigServer disk size. The value is fixed at 20. Unit: GB. This parameter can be left blank.</p>
 	ConfigServerVolume *uint64 `json:"ConfigServerVolume,omitnil,omitempty" name:"ConfigServerVolume"`
+
+	// <ul><li>Create a replica set instance. It refers to the read-only node quantity in each replica set.</li><li>Create a sharded cluster instance. It refers to the read-only node quantity in each shard.<br>Value range: [1,5].</li></ul>
+	ReadonlyNodeNum *int64 `json:"ReadonlyNodeNum,omitnil,omitempty" name:"ReadonlyNodeNum"`
+
+	// <p>CPU size of the instance.</p><ul><li>Unit: C.</li><li>Value range: Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API. The CPU and Memory parameters in the returned data structure SpecItems correspond to the number of CPU cores and the memory specifications, respectively.</li><li>Note: You need to pass in the CPU core size corresponding to the memory when querying the price of a Common I Instance Type.</li></ul>
+	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 }
 
 type InquirePriceCreateDBInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Region and AZ information of the instance. For details, see [Regions and AZs](https://www.tencentcloud.com/document/product/240/3637?from_cn_redirect=1).
+	// <p>Region and AZ information of the instance. For details, please see <a href="https://www.tencentcloud.com/document/product/240/3637?from_cn_redirect=1">Regions and Availability Zones</a>.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// -Specifies the number of primary and secondary nodes for each replica set during replica set instance creation. call the [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum number of nodes supported for each replica set.
-	// - Specifies the number of primary and secondary nodes for each shard during sharded cluster instance creation. Call the [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API to obtain the maximum and minimum number of nodes supported for each shard.
+	// <ul><li>Specifies the number of primary and secondary nodes for each replica set during replica set instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum number of nodes supported for each replica set.</li><li>Specifies the number of primary and secondary nodes for each shard during sharded cluster instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain the maximum and minimum number of nodes supported for each shard.</li></ul>
 	NodeNum *int64 `json:"NodeNum,omitnil,omitempty" name:"NodeNum"`
 
-	// Instance memory size.
-	// 
-	//  - Unit: GB.
-	//  - For the value range, call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API. The CPU and Memory parameters in the returned data structure SpecItems correspond to the number of CPU cores and the memory specification, respectively.
+	// <p>Instance memory size.</p><ul><li>Unit: GB.</li><li>For the value range, call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API. The CPU and Memory parameters in the returned data structure SpecItems correspond to the number of CPU cores and the memory specifications, respectively.</li></ul>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance disk size.
-	//  - Unit: GB.
-	//  - For the value range, call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API. The MinStorage and MaxStorage parameters in the returned data structure SpecItems correspond to the minimum and maximum disk specifications, respectively.
+	// <p>Instance disk size.</p><ul><li>Unit: GB.</li><li>For the value range, call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API. The MinStorage and MaxStorage parameters in the returned data structure SpecItems correspond to the minimum and maximum disk specifications, respectively.</li></ul>
 	Volume *int64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	// Instance version information. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API can be called to obtain specific supported versions. The MongoVersionCode parameter in the returned data structure SpecItems indicates the information on versions supported by instances. The corresponding relationship between version information and version number is as follows:
-	// - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
-	// - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
-	// - MONGO_44_WT: version of the MongoDB 4.4 WiredTiger storage engine.
-	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
-	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
-	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// <p>Instance version information. The <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API can be called to obtain specific supported versions. The MongoVersionCode parameter in the returned data structure SpecItems indicates the information on versions supported by instances. The corresponding relationship between version information and version number is as follows:</p><ul><li>MONGO_40_WT: MongoDB 4.0 WiredTiger storage engine version.</li><li>MONGO_42_WT: MongoDB 4.2 WiredTiger storage engine version.</li><li>MONGO_44_WT: MongoDB 4.4 WiredTiger storage engine version.</li><li>MONGO_50_WT: MongoDB 5.0 WiredTiger storage engine version.</li><li>MONGO_60_WT: MongoDB 6.0 WiredTiger storage engine version.</li><li>MONGO_70_WT: MongoDB 7.0 WiredTiger storage engine version.</li><li>MONGO_80_WT: MongoDB 8.0 WiredTiger storage engine version.</li></ul>
 	MongoVersion *string `json:"MongoVersion,omitnil,omitempty" name:"MongoVersion"`
 
-	// Product specification type.
-	//  - HIO10G: general high-I/O 10GE type.
-	//  - HCD: cloud disk.
+	// <p>Recommended product specification types:</p><ul><li>GE.LD.T1: Local disk (Common I).</li><li>GE.CD.T1: Cloud disk (Common I).</li></ul><p>Product allowlist specification types:</p><ul><li>HIO10G: Local disk (High IO 10G).</li><li>HCD: Cloud disk (Cloud disk edition).</li></ul><p>Note: Allowlist specification types are under allowlist control. If needed, <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a> to apply.</p>
 	MachineCode *string `json:"MachineCode,omitnil,omitempty" name:"MachineCode"`
 
-	// Number of instances. Minimum value: 1. Maximum value: 10.
+	// <p>Number of instances. Value range: [1,10].</p>
 	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// Instance type.
-	// 
-	//  - REPLSET: replica set.
-	//  - SHARD: sharded cluster.
+	// <p>Instance type.</p><ul><li>REPLSET (replica set)</li><li>SHARD (sharded cluster)</li></ul>
 	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
 
-	//  - Specifies the number of replica sets during replica set instance creation. This parameter can only be set to 1.
-	//  - Specifies the number of shards during sharded cluster instance creation. Call the [DescribeSpecInfo](https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1) API to query the range of shard quantity. The parameters MinReplicateSetNum and MaxReplicateSetNum in the returned data structure SpecItems correspond to the minimum value and maximum value, respectively.
+	// <ul><li>Specifies the number of replica sets during replica set instance creation. This parameter can only be 1.</li><li>Specifies the number of shards during sharded cluster instance creation. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to query the range of shard quantity. The parameters MinReplicateSetNum and MaxReplicateSetNum in the returned data structure SpecItems correspond to the minimum value and maximum value, respectively.</li></ul>
 	ReplicateSetNum *int64 `json:"ReplicateSetNum,omitnil,omitempty" name:"ReplicateSetNum"`
 
-	//  - When the monthly subscription mode is selected, that is, when <b>InstanceChargeType</b> is set to <b>PREPAID</b>, this parameter is required for specifying the purchase duration of instances. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36. Unit: months.
-	//  - When pay-as-you-go is selected, that is, when <b>InstanceChargeType</b> is set to **POSTPAID_BY_HOUR**, this parameter only can be set to 1.
+	// <ul><li>When the monthly subscription mode is selected, that is, when <b>InstanceChargeType</b> is set to <b>PREPAID</b>, this parameter is required for specifying the purchase duration of instances. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36. Unit: months.<br>- When the pay-as-you-go mode is selected, that is, when <b>InstanceChargeType</b> is set to <strong>POSTPAID_BY_HOUR</strong>, this parameter can only be set to 1.</li></ul>
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Instance payment method.
-	//  - PREPAID: monthly subscription.
-	//  - POSTPAID_BY_HOUR: pay-as-you-go.
+	// <p>Instance payment method.</p><ul><li>PREPAID: Annual and monthly subscription.</li><li>POSTPAID_BY_HOUR: Pay-As-You-Go.</li></ul>
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
-	// Number of Mongos node CPU cores. Valid values: 1, 2, 4, 8, and 16. This parameter is required during sharded cluster instance purchase. If this parameter is left blank, the default value 2 is used.
+	// <p>Number of Mongos node CPU cores. Valid values: 1, 2, 4, 8, and 16. This parameter is required during sharded cluster instance purchase. If this parameter is left blank, the default value 2 is used.</p>
 	MongosCpu *uint64 `json:"MongosCpu,omitnil,omitempty" name:"MongosCpu"`
 
-	// Mongos node memory size. - This parameter is required during sharded cluster instance purchase. - Unit: GB. Valid values: 2 (for 1 core), 4 (for 2 cores), 8 (for 4 cores), 16 (for 8 cores), and 32 (for 16 cores). If this parameter is left blank, the default value 4 is used.
+	// <p>Mongos node memory size. - This parameter is required during sharded cluster instance purchase. - Unit: GB. Valid values: 2 (for 1 core), 4 (for 2 cores), 8 (for 4 cores), 16 (for 8 cores), and 32 (for 16 cores). If this parameter is left blank, the default value 4 is used.</p>
 	MongosMemory *uint64 `json:"MongosMemory,omitnil,omitempty" name:"MongosMemory"`
 
-	// Specifies the number of Mongos nodes. Value range: [3,32]. For querying the price of sharded cluster instances, this parameter is required. If it is left blank, the default value 3 is used.
+	// <p>Specifies the number of Mongos nodes. Value range: [3,32]. For querying the price of sharded cluster instances, this parameter is required. If it is left blank, the default value 3 is used.</p>
 	MongosNum *uint64 `json:"MongosNum,omitnil,omitempty" name:"MongosNum"`
 
-	// Specifies the number of ConfigServer CPU cores. The value is fixed as 1.
+	// <p>Refers to the number of ConfigServer CPU cores, value fixed at 1, unit: GB. This parameter can be left blank.</p>
 	ConfigServerCpu *uint64 `json:"ConfigServerCpu,omitnil,omitempty" name:"ConfigServerCpu"`
 
-	// Specifies the ConfigServer memory size. The value is fixed as 2. Unit: GB. This parameter can be left blank.
+	// <p>Specifies the ConfigServer memory size. The value is fixed as 2. Unit: GB. This parameter can be left blank.</p>
 	ConfigServerMemory *uint64 `json:"ConfigServerMemory,omitnil,omitempty" name:"ConfigServerMemory"`
 
-	// Specifies the ConfigServer disk size. The value is fixed as 20. Unit: GB. This parameter can be left blank.
+	// <p>Specifies the ConfigServer disk size. The value is fixed at 20. Unit: GB. This parameter can be left blank.</p>
 	ConfigServerVolume *uint64 `json:"ConfigServerVolume,omitnil,omitempty" name:"ConfigServerVolume"`
+
+	// <ul><li>Create a replica set instance. It refers to the read-only node quantity in each replica set.</li><li>Create a sharded cluster instance. It refers to the read-only node quantity in each shard.<br>Value range: [1,5].</li></ul>
+	ReadonlyNodeNum *int64 `json:"ReadonlyNodeNum,omitnil,omitempty" name:"ReadonlyNodeNum"`
+
+	// <p>CPU size of the instance.</p><ul><li>Unit: C.</li><li>Value range: Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API. The CPU and Memory parameters in the returned data structure SpecItems correspond to the number of CPU cores and the memory specifications, respectively.</li><li>Note: You need to pass in the CPU core size corresponding to the memory when querying the price of a Common I Instance Type.</li></ul>
+	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 }
 
 func (r *InquirePriceCreateDBInstancesRequest) ToJsonString() string {
@@ -3675,6 +4176,8 @@ func (r *InquirePriceCreateDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "ConfigServerCpu")
 	delete(f, "ConfigServerMemory")
 	delete(f, "ConfigServerVolume")
+	delete(f, "ReadonlyNodeNum")
+	delete(f, "Cpu")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquirePriceCreateDBInstancesRequest has unknown keys!", "")
 	}
@@ -3683,7 +4186,7 @@ func (r *InquirePriceCreateDBInstancesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type InquirePriceCreateDBInstancesResponseParams struct {
-	// Price.
+	// <p>Price</p>
 	Price *DBInstancePrice `json:"Price,omitnil,omitempty" name:"Price"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3726,6 +4229,10 @@ type InquirePriceModifyDBInstanceSpecRequestParams struct {
 	// Sharded cluster instance, which refers to the number of shards for the instance after configuration changes. Value range: [2, 36].
 	// **Note**: The number of shards after changes cannot be less than the current number. Do not initiate tasks of adjusting the number of nodes and shards and the node specifications simultaneously.
 	ReplicateSetNum *int64 `json:"ReplicateSetNum,omitnil,omitempty" name:"ReplicateSetNum"`
+
+	// CPU size after configuration changes, in C. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API can be called to obtain the specific sales specifications for CPU.
+	// Note: For Common I Instance Type pricing, you need to pass in the CPU core size corresponding to the memory.
+	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 }
 
 type InquirePriceModifyDBInstanceSpecRequest struct {
@@ -3749,6 +4256,10 @@ type InquirePriceModifyDBInstanceSpecRequest struct {
 	// Sharded cluster instance, which refers to the number of shards for the instance after configuration changes. Value range: [2, 36].
 	// **Note**: The number of shards after changes cannot be less than the current number. Do not initiate tasks of adjusting the number of nodes and shards and the node specifications simultaneously.
 	ReplicateSetNum *int64 `json:"ReplicateSetNum,omitnil,omitempty" name:"ReplicateSetNum"`
+
+	// CPU size after configuration changes, in C. The [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API can be called to obtain the specific sales specifications for CPU.
+	// Note: For Common I Instance Type pricing, you need to pass in the CPU core size corresponding to the memory.
+	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 }
 
 func (r *InquirePriceModifyDBInstanceSpecRequest) ToJsonString() string {
@@ -3768,6 +4279,7 @@ func (r *InquirePriceModifyDBInstanceSpecRequest) FromJsonString(s string) error
 	delete(f, "Volume")
 	delete(f, "NodeNum")
 	delete(f, "ReplicateSetNum")
+	delete(f, "Cpu")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquirePriceModifyDBInstanceSpecRequest has unknown keys!", "")
 	}
@@ -3937,6 +4449,7 @@ type InstanceDetail struct {
 	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 	MongoVersion *string `json:"MongoVersion,omitnil,omitempty" name:"MongoVersion"`
 
 	// Instance memory specification, in MB.
@@ -4544,103 +5057,83 @@ func (r *ModifyDBInstanceSecurityGroupResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDBInstanceSpecRequestParams struct {
-	// Instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	// <p>Instance ID. Log in to the <a href="https://console.cloud.tencent.com/mongodb">MongoDB console</a> and copy the instance ID from the instance list.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Memory size after instance configuration changes, in GB. If this parameter is left blank, the default value is the current memory size of the instance. For the currently supported memory specifications, see [Product Specifications](https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1).
-	// **Note**: Memory and disk configurations should be upgraded or downgraded simultaneously, meaning that Memory and Volume should be modified at the same time.
+	// <p>Memory size after instance configuration modification. Unit: GB. The current instance memory size is used by default if this parameter is left blank. For supported memory specifications, please refer to <a href="https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1">product specifications</a>.<br><strong>Note</strong>: Memory and disk configurations should be upgraded or downgraded at the same time, meaning that Memory and Volume should be modified at the same time.</p>
 	Memory *uint64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Hard disk size after instance configuration changes, in GB. If this parameter is left blank, the default value is the current disk size of the instance. For the currently supported disk capacity, see [Product Specifications](https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1).
-	// - Memory and disk configurations should be upgraded or downgraded at the same time, meaning that Memory and Volume should be modified at the same time.
-	// - During configuration downgrade, the disk capacity after changes should be greater than 1.2 times the used disk capacity.
+	// <p>Hard disk size after instance configuration modification. Unit: GB. The current instance disk size is used by default if this parameter is left blank. For supported disk capacity, please refer to <a href="https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1">product specification</a>.</p><ul><li>Memory and disk configurations should be upgraded or downgraded at the same time, meaning that Memory and Volume should be modified simultaneously.</li><li>When downgrading, the disk capacity after modification must be greater than 1.2 times the used disk capacity.</li></ul>
 	Volume *uint64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	// (Deprecated) Use the independent API ResizeOplog.
-	// 
-	// Oplog size after instance configuration modification.
-	//  - Unit: GB.
-	//  - By default, the capacity occupied by Oplog is 10% of the disk capacity. The range of capacity occupied by Oplog supported by the system is [10%,90%] of the disk capacity.
+	// <p>(Abandoned) Please use the standalone ResizeOplog API to complete.</p><p>Oplog size after instance configuration change.</p><ul><li>Unit: GB.</li><li>Default oplog capacity used is 10% of disk space. The system allows oplog capacity settings ranging from 10% to 90% of disk space.</li></ul>
 	//
 	// Deprecated: OplogSize is deprecated.
 	OplogSize *uint64 `json:"OplogSize,omitnil,omitempty" name:"OplogSize"`
 
-	// Number of Mongod nodes after instance changes (excluding read-only nodes).
-	// - Number of replica set nodes. The value range of the number of nodes can be obtained through the response parameters MinNodeNum and MaxNodeNum of the [DescribeSpecInfo ](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API.
-	// - Number of nodes per shard in a sharded cluster. The value range of the number of nodes can be obtained through the response parameters MinReplicateSetNodeNum and MaxReplicateSetNodeNum of the [DescribeSpecInfo ](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API.
-	// **Note**: When the CPU and memory specifications of Mongod or Mongos nodes are changed, this parameter is not required, or enter the current number of Mongod or Mongos nodes (excluding read-only nodes).
+	// <p>Number of mongod nodes after instance change (excluding read-only nodes).</p><ul><li>Replica set node count: Use the MinNodeNum and MaxNodeNum parameters in the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API response to obtain the node count range.</li><li>Number of shard nodes in a sharded cluster: Use the MinReplicateSetNodeNum and MaxReplicateSetNodeNum parameters in the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API response to obtain the node count range.<br><strong>Note</strong>: When modifying the CPU or memory specifications of mongod or mongos, you may not configure this parameter or enter the current number of mongod or mongos nodes (excluding read-only nodes).</li></ul>
 	NodeNum *uint64 `json:"NodeNum,omitnil,omitempty" name:"NodeNum"`
 
-	// Number of shards after instance changes.
-	// - The value range for the number of instance shards can be obtained through the response parameters **MinReplicateSetNum** and **MaxReplicateSetNum** of the [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API.
-	// - The number of instance shards can only be increased and cannot be decreased.
+	// <p>Number of shards after instance change.</p><ul><li>The value range for the number of instance shards can be obtained through the response parameters <strong>MinReplicateSetNum</strong> and <strong>MaxReplicateSetNum</strong> of the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API.</li><li>Only allow adding shards, not reducing them.</li></ul>
 	ReplicateSetNum *uint64 `json:"ReplicateSetNum,omitnil,omitempty" name:"ReplicateSetNum"`
 
-	// Switch time for instance configuration modification.
-	//  - 0: Execute the configuration modification task immediately after the adjustment is completed. Default value: 0.
-	//  - 1: Execute the configuration modification task within the maintenance window.
-	// **Note**: Adjusting the number of nodes and shards is unsupported <b>within the maintenance window</b>.
+	// <p>Switch time for instance configuration change.</p><ul><li>0: Immediately execute the configuration modification task upon completion of adjustment. Default is 0.</li><li>1: Execute the configuration modification task within the maintenance window.<br><strong>Note</strong>: Adjusting the number of nodes and shard quantity is unsupported within the <b>maintenance window</b>.</li></ul>
 	InMaintenance *uint64 `json:"InMaintenance,omitnil,omitempty" name:"InMaintenance"`
 
-	// Memory size of the Mongos node after sharded cluster instance configuration changes, in GB. For the specifications supported by the instance, see [Product Specifications](https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1).
+	// <p>Memory size of mongos after sharding instance configuration change. Unit: GB. For instance support specifications, see <a href="https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1">product specification</a>.</p>
 	MongosMemory *string `json:"MongosMemory,omitnil,omitempty" name:"MongosMemory"`
 
-	// List of nodes to be added, containing the node type and AZ information.
+	// <p>List of nodes to be added, containing the node type and AZ information.</p>
 	AddNodeList []*AddNodeList `json:"AddNodeList,omitnil,omitempty" name:"AddNodeList"`
 
-	// Deletes the node list.
-	// **Note**: According to the consistency principle for nodes of each shard on a sharded cluster instance, specify the nodes on shard 0 for node deletion from the sharded cluster instance. For example, cmgo-9nl1czif_0-node-readonly0 will delete the first read-only node of each shard.
+	// <p>Delete node list.<br><strong>Note</strong>: Based on the consistency principle of sharded instance nodes, when deleting shard instance nodes, only need to specify the node corresponding to shard 0, for example: cmgo-9nl1czif_0-node-readonly0 will delete the first read-only node of each shard.</p>
 	RemoveNodeList []*RemoveNodeList `json:"RemoveNodeList,omitnil,omitempty" name:"RemoveNodeList"`
+
+	// <p>CPU size after instance configuration changes. Unit: C. If empty, the default value is the current CPU size of the instance. For currently supported CPU specifications, see <a href="https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1">Product Specifications</a>.</p>
+	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
+
+	// <p>The product specification type after instance configuration change. If empty, the default value is the current instance product specification type.<br>Currently supported product specification types are as follows:<br>Recommended product specification types:</p><ul><li>GE.LD.T1: Local disk (Common I).</li><li>GE.CD.T1: Cloud disk (Common I).</li></ul><p>Product allowlist specification types:</p><ul><li>HIO10G: Local disk (High IO 10G).</li><li>HCD: Cloud disk (Cloud Disk Edition).</li></ul><p>Note:</p><ol><li>Allowlist specification types are controlled by allowlist. If needed, <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a> to apply.</li><li>Common I cannot be changed to allowlist specification types.</li></ol>
+	MachineCode *string `json:"MachineCode,omitnil,omitempty" name:"MachineCode"`
 }
 
 type ModifyDBInstanceSpecRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	// <p>Instance ID. Log in to the <a href="https://console.cloud.tencent.com/mongodb">MongoDB console</a> and copy the instance ID from the instance list.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Memory size after instance configuration changes, in GB. If this parameter is left blank, the default value is the current memory size of the instance. For the currently supported memory specifications, see [Product Specifications](https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1).
-	// **Note**: Memory and disk configurations should be upgraded or downgraded simultaneously, meaning that Memory and Volume should be modified at the same time.
+	// <p>Memory size after instance configuration modification. Unit: GB. The current instance memory size is used by default if this parameter is left blank. For supported memory specifications, please refer to <a href="https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1">product specifications</a>.<br><strong>Note</strong>: Memory and disk configurations should be upgraded or downgraded at the same time, meaning that Memory and Volume should be modified at the same time.</p>
 	Memory *uint64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Hard disk size after instance configuration changes, in GB. If this parameter is left blank, the default value is the current disk size of the instance. For the currently supported disk capacity, see [Product Specifications](https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1).
-	// - Memory and disk configurations should be upgraded or downgraded at the same time, meaning that Memory and Volume should be modified at the same time.
-	// - During configuration downgrade, the disk capacity after changes should be greater than 1.2 times the used disk capacity.
+	// <p>Hard disk size after instance configuration modification. Unit: GB. The current instance disk size is used by default if this parameter is left blank. For supported disk capacity, please refer to <a href="https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1">product specification</a>.</p><ul><li>Memory and disk configurations should be upgraded or downgraded at the same time, meaning that Memory and Volume should be modified simultaneously.</li><li>When downgrading, the disk capacity after modification must be greater than 1.2 times the used disk capacity.</li></ul>
 	Volume *uint64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	// (Deprecated) Use the independent API ResizeOplog.
-	// 
-	// Oplog size after instance configuration modification.
-	//  - Unit: GB.
-	//  - By default, the capacity occupied by Oplog is 10% of the disk capacity. The range of capacity occupied by Oplog supported by the system is [10%,90%] of the disk capacity.
+	// <p>(Abandoned) Please use the standalone ResizeOplog API to complete.</p><p>Oplog size after instance configuration change.</p><ul><li>Unit: GB.</li><li>Default oplog capacity used is 10% of disk space. The system allows oplog capacity settings ranging from 10% to 90% of disk space.</li></ul>
 	OplogSize *uint64 `json:"OplogSize,omitnil,omitempty" name:"OplogSize"`
 
-	// Number of Mongod nodes after instance changes (excluding read-only nodes).
-	// - Number of replica set nodes. The value range of the number of nodes can be obtained through the response parameters MinNodeNum and MaxNodeNum of the [DescribeSpecInfo ](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API.
-	// - Number of nodes per shard in a sharded cluster. The value range of the number of nodes can be obtained through the response parameters MinReplicateSetNodeNum and MaxReplicateSetNodeNum of the [DescribeSpecInfo ](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API.
-	// **Note**: When the CPU and memory specifications of Mongod or Mongos nodes are changed, this parameter is not required, or enter the current number of Mongod or Mongos nodes (excluding read-only nodes).
+	// <p>Number of mongod nodes after instance change (excluding read-only nodes).</p><ul><li>Replica set node count: Use the MinNodeNum and MaxNodeNum parameters in the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API response to obtain the node count range.</li><li>Number of shard nodes in a sharded cluster: Use the MinReplicateSetNodeNum and MaxReplicateSetNodeNum parameters in the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API response to obtain the node count range.<br><strong>Note</strong>: When modifying the CPU or memory specifications of mongod or mongos, you may not configure this parameter or enter the current number of mongod or mongos nodes (excluding read-only nodes).</li></ul>
 	NodeNum *uint64 `json:"NodeNum,omitnil,omitempty" name:"NodeNum"`
 
-	// Number of shards after instance changes.
-	// - The value range for the number of instance shards can be obtained through the response parameters **MinReplicateSetNum** and **MaxReplicateSetNum** of the [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API.
-	// - The number of instance shards can only be increased and cannot be decreased.
+	// <p>Number of shards after instance change.</p><ul><li>The value range for the number of instance shards can be obtained through the response parameters <strong>MinReplicateSetNum</strong> and <strong>MaxReplicateSetNum</strong> of the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API.</li><li>Only allow adding shards, not reducing them.</li></ul>
 	ReplicateSetNum *uint64 `json:"ReplicateSetNum,omitnil,omitempty" name:"ReplicateSetNum"`
 
-	// Switch time for instance configuration modification.
-	//  - 0: Execute the configuration modification task immediately after the adjustment is completed. Default value: 0.
-	//  - 1: Execute the configuration modification task within the maintenance window.
-	// **Note**: Adjusting the number of nodes and shards is unsupported <b>within the maintenance window</b>.
+	// <p>Switch time for instance configuration change.</p><ul><li>0: Immediately execute the configuration modification task upon completion of adjustment. Default is 0.</li><li>1: Execute the configuration modification task within the maintenance window.<br><strong>Note</strong>: Adjusting the number of nodes and shard quantity is unsupported within the <b>maintenance window</b>.</li></ul>
 	InMaintenance *uint64 `json:"InMaintenance,omitnil,omitempty" name:"InMaintenance"`
 
-	// Memory size of the Mongos node after sharded cluster instance configuration changes, in GB. For the specifications supported by the instance, see [Product Specifications](https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1).
+	// <p>Memory size of mongos after sharding instance configuration change. Unit: GB. For instance support specifications, see <a href="https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1">product specification</a>.</p>
 	MongosMemory *string `json:"MongosMemory,omitnil,omitempty" name:"MongosMemory"`
 
-	// List of nodes to be added, containing the node type and AZ information.
+	// <p>List of nodes to be added, containing the node type and AZ information.</p>
 	AddNodeList []*AddNodeList `json:"AddNodeList,omitnil,omitempty" name:"AddNodeList"`
 
-	// Deletes the node list.
-	// **Note**: According to the consistency principle for nodes of each shard on a sharded cluster instance, specify the nodes on shard 0 for node deletion from the sharded cluster instance. For example, cmgo-9nl1czif_0-node-readonly0 will delete the first read-only node of each shard.
+	// <p>Delete node list.<br><strong>Note</strong>: Based on the consistency principle of sharded instance nodes, when deleting shard instance nodes, only need to specify the node corresponding to shard 0, for example: cmgo-9nl1czif_0-node-readonly0 will delete the first read-only node of each shard.</p>
 	RemoveNodeList []*RemoveNodeList `json:"RemoveNodeList,omitnil,omitempty" name:"RemoveNodeList"`
+
+	// <p>CPU size after instance configuration changes. Unit: C. If empty, the default value is the current CPU size of the instance. For currently supported CPU specifications, see <a href="https://www.tencentcloud.com/document/product/240/64125?from_cn_redirect=1">Product Specifications</a>.</p>
+	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
+
+	// <p>The product specification type after instance configuration change. If empty, the default value is the current instance product specification type.<br>Currently supported product specification types are as follows:<br>Recommended product specification types:</p><ul><li>GE.LD.T1: Local disk (Common I).</li><li>GE.CD.T1: Cloud disk (Common I).</li></ul><p>Product allowlist specification types:</p><ul><li>HIO10G: Local disk (High IO 10G).</li><li>HCD: Cloud disk (Cloud Disk Edition).</li></ul><p>Note:</p><ol><li>Allowlist specification types are controlled by allowlist. If needed, <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a> to apply.</li><li>Common I cannot be changed to allowlist specification types.</li></ol>
+	MachineCode *string `json:"MachineCode,omitnil,omitempty" name:"MachineCode"`
 }
 
 func (r *ModifyDBInstanceSpecRequest) ToJsonString() string {
@@ -4665,6 +5158,8 @@ func (r *ModifyDBInstanceSpecRequest) FromJsonString(s string) error {
 	delete(f, "MongosMemory")
 	delete(f, "AddNodeList")
 	delete(f, "RemoveNodeList")
+	delete(f, "Cpu")
+	delete(f, "MachineCode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceSpecRequest has unknown keys!", "")
 	}
@@ -4673,7 +5168,7 @@ func (r *ModifyDBInstanceSpecRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDBInstanceSpecResponseParams struct {
-	// Order ID.
+	// <p>Order ID.</p>
 	DealId *string `json:"DealId,omitnil,omitempty" name:"DealId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4693,6 +5188,98 @@ func (r *ModifyDBInstanceSpecResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyDBInstanceSpecResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyInstanceAzRequestParams struct {
+	// <p>Instance ID, such as cmgo-p8vn****. Log in to the <a href="https://console.cloud.tencent.com/mongodb">MongoDB console</a> and copy the instance ID from the instance list.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Availability zone ID where the primary node is located. For the method for obtaining, please see <a href="https://www.tencentcloud.com/document/product/240/3637?from_cn_redirect=1">Regions and Availability Zones</a>.</p>
+	PrimaryNodeZone *string `json:"PrimaryNodeZone,omitnil,omitempty" name:"PrimaryNodeZone"`
+
+	// <p>ID list of the availability zone where the secondary node resides.<br><strong>Note</strong>: It cannot contain the availability zones where the primary node and Hidden nodes reside.</p>
+	SecondaryNodeZone []*string `json:"SecondaryNodeZone,omitnil,omitempty" name:"SecondaryNodeZone"`
+
+	// <p>If the current instance has no configuration for Hidden nodes, this parameter is not required.</p>
+	HiddenNodeZone *string `json:"HiddenNodeZone,omitnil,omitempty" name:"HiddenNodeZone"`
+
+	// <p>List of AZ IDs where read-only nodes reside.<br><strong>Note</strong>: If the current instance contains read-only nodes, this parameter is required.</p>
+	ReadonlyNodeZone []*string `json:"ReadonlyNodeZone,omitnil,omitempty" name:"ReadonlyNodeZone"`
+
+	// <p>Specify the time policy for executing the availability zone switch.</p><ul><li>0: Execute the switch immediately.</li><li>1: Execute the switch within the set maintenance window. For details, please refer to <a href="https://www.tencentcloud.com/document/product/240/19910?from_cn_redirect=1">setting instance maintenance time</a>.</li></ul>
+	InMaintenance *uint64 `json:"InMaintenance,omitnil,omitempty" name:"InMaintenance"`
+}
+
+type ModifyInstanceAzRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Instance ID, such as cmgo-p8vn****. Log in to the <a href="https://console.cloud.tencent.com/mongodb">MongoDB console</a> and copy the instance ID from the instance list.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Availability zone ID where the primary node is located. For the method for obtaining, please see <a href="https://www.tencentcloud.com/document/product/240/3637?from_cn_redirect=1">Regions and Availability Zones</a>.</p>
+	PrimaryNodeZone *string `json:"PrimaryNodeZone,omitnil,omitempty" name:"PrimaryNodeZone"`
+
+	// <p>ID list of the availability zone where the secondary node resides.<br><strong>Note</strong>: It cannot contain the availability zones where the primary node and Hidden nodes reside.</p>
+	SecondaryNodeZone []*string `json:"SecondaryNodeZone,omitnil,omitempty" name:"SecondaryNodeZone"`
+
+	// <p>If the current instance has no configuration for Hidden nodes, this parameter is not required.</p>
+	HiddenNodeZone *string `json:"HiddenNodeZone,omitnil,omitempty" name:"HiddenNodeZone"`
+
+	// <p>List of AZ IDs where read-only nodes reside.<br><strong>Note</strong>: If the current instance contains read-only nodes, this parameter is required.</p>
+	ReadonlyNodeZone []*string `json:"ReadonlyNodeZone,omitnil,omitempty" name:"ReadonlyNodeZone"`
+
+	// <p>Specify the time policy for executing the availability zone switch.</p><ul><li>0: Execute the switch immediately.</li><li>1: Execute the switch within the set maintenance window. For details, please refer to <a href="https://www.tencentcloud.com/document/product/240/19910?from_cn_redirect=1">setting instance maintenance time</a>.</li></ul>
+	InMaintenance *uint64 `json:"InMaintenance,omitnil,omitempty" name:"InMaintenance"`
+}
+
+func (r *ModifyInstanceAzRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyInstanceAzRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "PrimaryNodeZone")
+	delete(f, "SecondaryNodeZone")
+	delete(f, "HiddenNodeZone")
+	delete(f, "ReadonlyNodeZone")
+	delete(f, "InMaintenance")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyInstanceAzRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyInstanceAzResponseParams struct {
+	// <p>Order ID for availability zone adjustment.</p>
+	DealId *string `json:"DealId,omitnil,omitempty" name:"DealId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyInstanceAzResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyInstanceAzResponseParams `json:"Response"`
+}
+
+func (r *ModifyInstanceAzResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyInstanceAzResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4790,6 +5377,70 @@ type ModifyNetworkAddress struct {
 
 	// Old IP
 	OldIpAddress *string `json:"OldIpAddress,omitnil,omitempty" name:"OldIpAddress"`
+}
+
+// Predefined struct for user
+type ModifySRVConnectionUrlRequestParams struct {
+	// Instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Custom instance access domain name.
+	CustomDomain *string `json:"CustomDomain,omitnil,omitempty" name:"CustomDomain"`
+}
+
+type ModifySRVConnectionUrlRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Custom instance access domain name.
+	CustomDomain *string `json:"CustomDomain,omitnil,omitempty" name:"CustomDomain"`
+}
+
+func (r *ModifySRVConnectionUrlRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySRVConnectionUrlRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "CustomDomain")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySRVConnectionUrlRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySRVConnectionUrlResponseParams struct {
+	// Start the task ID.
+	FlowId *uint64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifySRVConnectionUrlResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifySRVConnectionUrlResponseParams `json:"Response"`
+}
+
+func (r *ModifySRVConnectionUrlResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySRVConnectionUrlResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type NodeProperty struct {
@@ -5082,11 +5733,11 @@ type ResetDBInstancePasswordRequestParams struct {
 	// Specifies the instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Specifies the account name for which the password needs to be changed. The [DescribeAccountUsers](https://www.tencentcloud.com/document/product/240/80800?from_cn_redirect=1) API can be called to obtain the account list and copy the account name for which the password needs to be changed.
+	// Specifies the account name for which the password needs to be changed. The [DescribeAccountUsers](https://www.tencentcloud.com/document/product/240/74804) API can be called to obtain the account list and copy the account name for which the password needs to be changed.
 	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Specifies a new password for the account. Password complexity requirements:
-	// - It should contain 8–32 characters.
+	// - It should contain 8-32 characters.
 	// - It should contain at least two types of the following: letters, digits, and special characters (!@#%^\*()\_).
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 }
@@ -5097,11 +5748,11 @@ type ResetDBInstancePasswordRequest struct {
 	// Specifies the instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Specifies the account name for which the password needs to be changed. The [DescribeAccountUsers](https://www.tencentcloud.com/document/product/240/80800?from_cn_redirect=1) API can be called to obtain the account list and copy the account name for which the password needs to be changed.
+	// Specifies the account name for which the password needs to be changed. The [DescribeAccountUsers](https://www.tencentcloud.com/document/product/240/74804) API can be called to obtain the account list and copy the account name for which the password needs to be changed.
 	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Specifies a new password for the account. Password complexity requirements:
-	// - It should contain 8–32 characters.
+	// - It should contain 8-32 characters.
 	// - It should contain at least two types of the following: letters, digits, and special characters (!@#%^\*()\_).
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 }
@@ -5150,6 +5801,93 @@ func (r *ResetDBInstancePasswordResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ResetDBInstancePasswordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type RestoreCollection struct {
+	// Original collection to be rolled back
+	OldCollection *string `json:"OldCollection,omitnil,omitempty" name:"OldCollection"`
+
+	// Rolled-back collection
+	NewCollection *string `json:"NewCollection,omitnil,omitempty" name:"NewCollection"`
+}
+
+// Predefined struct for user
+type RestoreDBInstanceRequestParams struct {
+	// <p>Instance ID. Log in to the <a href="https://console.cloud.tencent.com/mongodb/instance">MongoDB console</a> and copy the instance ID from the instance list.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Specify the target time point to roll back. The time must be in the backup retention period of the instance.</p><p>Parameter format: YYYY-MM-DD hh:mm:ss</p>
+	RestoreTime *string `json:"RestoreTime,omitnil,omitempty" name:"RestoreTime"`
+
+	// <p>Database table information to be rolled back.</p>
+	Databases []*RestoreDatabases `json:"Databases,omitnil,omitempty" name:"Databases"`
+}
+
+type RestoreDBInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Instance ID. Log in to the <a href="https://console.cloud.tencent.com/mongodb/instance">MongoDB console</a> and copy the instance ID from the instance list.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Specify the target time point to roll back. The time must be in the backup retention period of the instance.</p><p>Parameter format: YYYY-MM-DD hh:mm:ss</p>
+	RestoreTime *string `json:"RestoreTime,omitnil,omitempty" name:"RestoreTime"`
+
+	// <p>Database table information to be rolled back.</p>
+	Databases []*RestoreDatabases `json:"Databases,omitnil,omitempty" name:"Databases"`
+}
+
+func (r *RestoreDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RestoreDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "RestoreTime")
+	delete(f, "Databases")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RestoreDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RestoreDBInstanceResponseParams struct {
+	// <p>Rollback task process ID.</p>
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type RestoreDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *RestoreDBInstanceResponseParams `json:"Response"`
+}
+
+func (r *RestoreDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RestoreDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type RestoreDatabases struct {
+	// DB name.
+	Db *string `json:"Db,omitnil,omitempty" name:"Db"`
+
+	// Collection information to be rolled back.
+	Collections []*RestoreCollection `json:"Collections,omitnil,omitempty" name:"Collections"`
 }
 
 type SecurityGroup struct {
@@ -5469,8 +6207,8 @@ type SpecItem struct {
 	SpecCode *string `json:"SpecCode,omitnil,omitempty" name:"SpecCode"`
 
 	// Saleable specification status flag. Valid values are as follows:
-	//  - 0: selling stopped.
-	//  - 1: available for sale.
+	// - 0: selling stopped.
+	// - 1: available for sale.
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Computing resource specification, indicating the number of CPU cores.
@@ -5501,15 +6239,25 @@ type SpecItem struct {
 	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 	MongoVersionCode *string `json:"MongoVersionCode,omitnil,omitempty" name:"MongoVersionCode"`
 
 	// Digital version corresponding to the instance version.
+	// - MongoDB version 3.2: 2.
+	// - MongoDB version 3.6: 4.
+	// - MongoDB version 4.0: 5.
+	// - MongoDB version 4.2: 9.
+	// - MongoDB version 4.4: 10.
+	// - MongoDB version 5.0: 11.
+	// - MongoDB version 6.0: 12.
+	// - MongoDB version 7.0: 13.
+	// - MongoDB version 8.0: 14.
 	MongoVersionValue *uint64 `json:"MongoVersionValue,omitnil,omitempty" name:"MongoVersionValue"`
 
-	// Instance version information. Valid values: 4.2, 4.4, 5.0, 6.0, and 7.0.
+	// Instance version information. Valid values: 4.2, 4.4, 5.0, 6.0, 7.0, and 8.0.
 	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
 
-	// Storage engine.
+	// Storage engine. Only WiredTiger is supported.
 	EngineName *string `json:"EngineName,omitnil,omitempty" name:"EngineName"`
 
 	// Cluster type. Valid values are as follows:
@@ -5720,10 +6468,19 @@ type UpgradeDbInstanceVersionRequestParams struct {
 	// List of instance IDs, which are in the format of cmgo-p8vnipr5. It is the same as the format of the instance ID displayed on the TencentDB for MongoDB console page.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Newly upgraded database version. Currently, it only supports MONGO_40_WT (version of the MongoDB 4.0 WiredTiger storage engine) and MONGO_42_WT (version of the MongoDB 4.2 WiredTiger storage engine).
+	// The newly upgraded database version. Currently supported versions are as follows. Upgrade from an earlier version to a high version is supported. Cross-version upgrade is not supported.
+	// - MONGO_40_WT: Version 4.0.
+	// - MONGO_42_WT: Version 4.2.
+	// - MONGO_44_WT: Version 4.4.
+	// - MONGO_50_WT: Version 5.0.
+	// - MONGO_60_WT: Version 6.0.
+	// -MONGO_70_WT: Version 7.0.
+	// - MONGO_80_WT: Version 8.0.
 	MongoVersion *string `json:"MongoVersion,omitnil,omitempty" name:"MongoVersion"`
 
-	// Whether to perform the upgrade during the maintenance period. 0 - upgrade now; 1 - upgrade during the maintenance period.
+	// Specify whether to perform the upgrade during the maintenance period.
+	// -0: Upgrade now.
+	// - 1: Upgrade during the maintenance window.
 	InMaintenance *int64 `json:"InMaintenance,omitnil,omitempty" name:"InMaintenance"`
 }
 
@@ -5733,10 +6490,19 @@ type UpgradeDbInstanceVersionRequest struct {
 	// List of instance IDs, which are in the format of cmgo-p8vnipr5. It is the same as the format of the instance ID displayed on the TencentDB for MongoDB console page.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Newly upgraded database version. Currently, it only supports MONGO_40_WT (version of the MongoDB 4.0 WiredTiger storage engine) and MONGO_42_WT (version of the MongoDB 4.2 WiredTiger storage engine).
+	// The newly upgraded database version. Currently supported versions are as follows. Upgrade from an earlier version to a high version is supported. Cross-version upgrade is not supported.
+	// - MONGO_40_WT: Version 4.0.
+	// - MONGO_42_WT: Version 4.2.
+	// - MONGO_44_WT: Version 4.4.
+	// - MONGO_50_WT: Version 5.0.
+	// - MONGO_60_WT: Version 6.0.
+	// -MONGO_70_WT: Version 7.0.
+	// - MONGO_80_WT: Version 8.0.
 	MongoVersion *string `json:"MongoVersion,omitnil,omitempty" name:"MongoVersion"`
 
-	// Whether to perform the upgrade during the maintenance period. 0 - upgrade now; 1 - upgrade during the maintenance period.
+	// Specify whether to perform the upgrade during the maintenance period.
+	// -0: Upgrade now.
+	// - 1: Upgrade during the maintenance window.
 	InMaintenance *int64 `json:"InMaintenance,omitnil,omitempty" name:"InMaintenance"`
 }
 
@@ -5784,4 +6550,12 @@ func (r *UpgradeDbInstanceVersionResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *UpgradeDbInstanceVersionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type WanServiceNodeList struct {
+	// vip and port information of the instance node.
+	VipVport *string `json:"VipVport,omitnil,omitempty" name:"VipVport"`
+
+	// The listening port of a CLB listener ranges from 1 to 65535.
+	ListenerPort *string `json:"ListenerPort,omitnil,omitempty" name:"ListenerPort"`
 }

@@ -973,6 +973,66 @@ func (c *Client) CreateAnimatedGraphicsTemplateWithContext(ctx context.Context, 
     return
 }
 
+func NewCreateBlindWatermarkTemplateRequest() (request *CreateBlindWatermarkTemplateRequest) {
+    request = &CreateBlindWatermarkTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateBlindWatermarkTemplate")
+    
+    
+    return
+}
+
+func NewCreateBlindWatermarkTemplateResponse() (response *CreateBlindWatermarkTemplateResponse) {
+    response = &CreateBlindWatermarkTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateBlindWatermarkTemplate
+// This API is used to create a user-defined digital watermark template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GENDEFINITION = "InternalError.GenDefinition"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateBlindWatermarkTemplate(request *CreateBlindWatermarkTemplateRequest) (response *CreateBlindWatermarkTemplateResponse, err error) {
+    return c.CreateBlindWatermarkTemplateWithContext(context.Background(), request)
+}
+
+// CreateBlindWatermarkTemplate
+// This API is used to create a user-defined digital watermark template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GENDEFINITION = "InternalError.GenDefinition"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateBlindWatermarkTemplateWithContext(ctx context.Context, request *CreateBlindWatermarkTemplateRequest) (response *CreateBlindWatermarkTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateBlindWatermarkTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateBlindWatermarkTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateBlindWatermarkTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateBlindWatermarkTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateCDNDomainRequest() (request *CreateCDNDomainRequest) {
     request = &CreateCDNDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3135,6 +3195,60 @@ func (c *Client) DeleteAnimatedGraphicsTemplateWithContext(ctx context.Context, 
     return
 }
 
+func NewDeleteBlindWatermarkTemplateRequest() (request *DeleteBlindWatermarkTemplateRequest) {
+    request = &DeleteBlindWatermarkTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteBlindWatermarkTemplate")
+    
+    
+    return
+}
+
+func NewDeleteBlindWatermarkTemplateResponse() (response *DeleteBlindWatermarkTemplateResponse) {
+    response = &DeleteBlindWatermarkTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteBlindWatermarkTemplate
+// This API is used to delete a user-defined digital watermark template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteBlindWatermarkTemplate(request *DeleteBlindWatermarkTemplateRequest) (response *DeleteBlindWatermarkTemplateResponse, err error) {
+    return c.DeleteBlindWatermarkTemplateWithContext(context.Background(), request)
+}
+
+// DeleteBlindWatermarkTemplate
+// This API is used to delete a user-defined digital watermark template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteBlindWatermarkTemplateWithContext(ctx context.Context, request *DeleteBlindWatermarkTemplateRequest) (response *DeleteBlindWatermarkTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteBlindWatermarkTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteBlindWatermarkTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteBlindWatermarkTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteBlindWatermarkTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteCDNDomainRequest() (request *DeleteCDNDomainRequest) {
     request = &DeleteCDNDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4909,6 +5023,64 @@ func (c *Client) DescribeAnimatedGraphicsTemplatesWithContext(ctx context.Contex
     request.SetContext(ctx)
     
     response = NewDescribeAnimatedGraphicsTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBlindWatermarkTemplatesRequest() (request *DescribeBlindWatermarkTemplatesRequest) {
+    request = &DescribeBlindWatermarkTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeBlindWatermarkTemplates")
+    
+    
+    return
+}
+
+func NewDescribeBlindWatermarkTemplatesResponse() (response *DescribeBlindWatermarkTemplatesResponse) {
+    response = &DescribeBlindWatermarkTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBlindWatermarkTemplates
+// Query user-customized digital watermark templates.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeBlindWatermarkTemplates(request *DescribeBlindWatermarkTemplatesRequest) (response *DescribeBlindWatermarkTemplatesResponse, err error) {
+    return c.DescribeBlindWatermarkTemplatesWithContext(context.Background(), request)
+}
+
+// DescribeBlindWatermarkTemplates
+// Query user-customized digital watermark templates.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeBlindWatermarkTemplatesWithContext(ctx context.Context, request *DescribeBlindWatermarkTemplatesRequest) (response *DescribeBlindWatermarkTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeBlindWatermarkTemplatesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeBlindWatermarkTemplates")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBlindWatermarkTemplates require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBlindWatermarkTemplatesResponse()
     err = c.Send(request, response)
     return
 }
@@ -7981,6 +8153,60 @@ func (c *Client) ExecuteFunctionWithContext(ctx context.Context, request *Execut
     return
 }
 
+func NewExtractBlindWatermarkRequest() (request *ExtractBlindWatermarkRequest) {
+    request = &ExtractBlindWatermarkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ExtractBlindWatermark")
+    
+    
+    return
+}
+
+func NewExtractBlindWatermarkResponse() (response *ExtractBlindWatermarkResponse) {
+    response = &ExtractBlindWatermarkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ExtractBlindWatermark
+// This API is used to initiate a digital watermark extraction task for a video. The extraction result can be queried through DescribeTaskDetail.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SRCFILE = "InvalidParameterValue.SrcFile"
+func (c *Client) ExtractBlindWatermark(request *ExtractBlindWatermarkRequest) (response *ExtractBlindWatermarkResponse, err error) {
+    return c.ExtractBlindWatermarkWithContext(context.Background(), request)
+}
+
+// ExtractBlindWatermark
+// This API is used to initiate a digital watermark extraction task for a video. The extraction result can be queried through DescribeTaskDetail.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SRCFILE = "InvalidParameterValue.SrcFile"
+func (c *Client) ExtractBlindWatermarkWithContext(ctx context.Context, request *ExtractBlindWatermarkRequest) (response *ExtractBlindWatermarkResponse, err error) {
+    if request == nil {
+        request = NewExtractBlindWatermarkRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ExtractBlindWatermark")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExtractBlindWatermark require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExtractBlindWatermarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewExtractCopyRightWatermarkRequest() (request *ExtractCopyRightWatermarkRequest) {
     request = &ExtractCopyRightWatermarkRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -8004,13 +8230,9 @@ func NewExtractCopyRightWatermarkResponse() (response *ExtractCopyRightWatermark
 // Extract CopyRight Watermark.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_FUNCTIONARG = "InvalidParameterValue.FunctionArg"
-//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
-//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SRCFILE = "InvalidParameterValue.SrcFile"
 func (c *Client) ExtractCopyRightWatermark(request *ExtractCopyRightWatermarkRequest) (response *ExtractCopyRightWatermarkResponse, err error) {
     return c.ExtractCopyRightWatermarkWithContext(context.Background(), request)
 }
@@ -8019,13 +8241,9 @@ func (c *Client) ExtractCopyRightWatermark(request *ExtractCopyRightWatermarkReq
 // Extract CopyRight Watermark.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_FUNCTIONARG = "InvalidParameterValue.FunctionArg"
-//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
-//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SRCFILE = "InvalidParameterValue.SrcFile"
 func (c *Client) ExtractCopyRightWatermarkWithContext(ctx context.Context, request *ExtractCopyRightWatermarkRequest) (response *ExtractCopyRightWatermarkResponse, err error) {
     if request == nil {
         request = NewExtractCopyRightWatermarkRequest()
@@ -8066,13 +8284,9 @@ func NewExtractTraceWatermarkResponse() (response *ExtractTraceWatermarkResponse
 // This API is used to extract the user ID of a user that distributed a video containing a digital watermark.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_FUNCTIONARG = "InvalidParameterValue.FunctionArg"
-//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
-//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SRCFILE = "InvalidParameterValue.SrcFile"
 func (c *Client) ExtractTraceWatermark(request *ExtractTraceWatermarkRequest) (response *ExtractTraceWatermarkResponse, err error) {
     return c.ExtractTraceWatermarkWithContext(context.Background(), request)
 }
@@ -8081,13 +8295,9 @@ func (c *Client) ExtractTraceWatermark(request *ExtractTraceWatermarkRequest) (r
 // This API is used to extract the user ID of a user that distributed a video containing a digital watermark.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_FUNCTIONARG = "InvalidParameterValue.FunctionArg"
-//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
-//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SRCFILE = "InvalidParameterValue.SrcFile"
 func (c *Client) ExtractTraceWatermarkWithContext(ctx context.Context, request *ExtractTraceWatermarkRequest) (response *ExtractTraceWatermarkResponse, err error) {
     if request == nil {
         request = NewExtractTraceWatermarkRequest()
@@ -8955,6 +9165,64 @@ func (c *Client) ModifyAnimatedGraphicsTemplateWithContext(ctx context.Context, 
     request.SetContext(ctx)
     
     response = NewModifyAnimatedGraphicsTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyBlindWatermarkTemplateRequest() (request *ModifyBlindWatermarkTemplateRequest) {
+    request = &ModifyBlindWatermarkTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyBlindWatermarkTemplate")
+    
+    
+    return
+}
+
+func NewModifyBlindWatermarkTemplateResponse() (response *ModifyBlindWatermarkTemplateResponse) {
+    response = &ModifyBlindWatermarkTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyBlindWatermarkTemplate
+// This API is used to modify a user-defined digital watermark template. The digital watermark type cannot be modified.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyBlindWatermarkTemplate(request *ModifyBlindWatermarkTemplateRequest) (response *ModifyBlindWatermarkTemplateResponse, err error) {
+    return c.ModifyBlindWatermarkTemplateWithContext(context.Background(), request)
+}
+
+// ModifyBlindWatermarkTemplate
+// This API is used to modify a user-defined digital watermark template. The digital watermark type cannot be modified.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyBlindWatermarkTemplateWithContext(ctx context.Context, request *ModifyBlindWatermarkTemplateRequest) (response *ModifyBlindWatermarkTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyBlindWatermarkTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyBlindWatermarkTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyBlindWatermarkTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyBlindWatermarkTemplateResponse()
     err = c.Send(request, response)
     return
 }

@@ -3544,6 +3544,29 @@ type BlindWatermarkInput struct {
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 }
 
+type BlindWatermarkTemplate struct {
+	// Unique identifier of the digital watermark template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-nagra: NAGRA forensics watermark.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Digital watermark template name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Text content of the digital watermark template. The length cannot exceed 64 characters.
+	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
+
+	// Description information of the digital watermark template.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Creation time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Last modification time of the digital watermark template in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+}
+
 type BlurConfigureInfo struct {
 	// Video screen blur detection switch, optional values:
 	// <li>ON: turn on;</li>
@@ -5630,6 +5653,91 @@ func (r *CreateAnimatedGraphicsTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateAnimatedGraphicsTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateBlindWatermarkTemplateRequestParams struct {
+	// Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-nagra: NAGRA watermark.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Text content of the digital watermark. The length cannot exceed 64 characters. After NAGRA watermark templates are created, the text content cannot be modified.
+	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
+
+	// VOD application ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the application ID when accessing resources in on-demand applications (default application or newly created application).
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// Digital watermark template name, which supports Chinese, English, digits, underscores (_), hyphens (-), and periods (.). The length cannot exceed 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Description information of the digital watermark template. The length cannot exceed 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+}
+
+type CreateBlindWatermarkTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-nagra: NAGRA watermark.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Text content of the digital watermark. The length cannot exceed 64 characters. After NAGRA watermark templates are created, the text content cannot be modified.
+	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
+
+	// VOD application ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the application ID when accessing resources in on-demand applications (default application or newly created application).
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// Digital watermark template name, which supports Chinese, English, digits, underscores (_), hyphens (-), and periods (.). The length cannot exceed 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Description information of the digital watermark template. The length cannot exceed 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+}
+
+func (r *CreateBlindWatermarkTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateBlindWatermarkTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Type")
+	delete(f, "TextContent")
+	delete(f, "SubAppId")
+	delete(f, "Name")
+	delete(f, "Comment")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateBlindWatermarkTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateBlindWatermarkTemplateResponseParams struct {
+	// Unique identifier of the digital watermark template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateBlindWatermarkTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateBlindWatermarkTemplateResponseParams `json:"Response"`
+}
+
+func (r *CreateBlindWatermarkTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateBlindWatermarkTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -8995,6 +9103,67 @@ func (r *DeleteAnimatedGraphicsTemplateResponse) FromJsonString(s string) error 
 }
 
 // Predefined struct for user
+type DeleteBlindWatermarkTemplateRequestParams struct {
+	// Unique identifier of the digital watermark template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// VOD application ID. Starting from December 25, 2023, customers who activate on-demand services must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created application).
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+}
+
+type DeleteBlindWatermarkTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique identifier of the digital watermark template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// VOD application ID. Starting from December 25, 2023, customers who activate on-demand services must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created application).
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+}
+
+func (r *DeleteBlindWatermarkTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteBlindWatermarkTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definition")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteBlindWatermarkTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteBlindWatermarkTemplateResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteBlindWatermarkTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteBlindWatermarkTemplateResponseParams `json:"Response"`
+}
+
+func (r *DeleteBlindWatermarkTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteBlindWatermarkTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteCDNDomainRequestParams struct {
 	// Domain.
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
@@ -10951,6 +11120,98 @@ func (r *DescribeAnimatedGraphicsTemplatesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAnimatedGraphicsTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBlindWatermarkTemplatesRequestParams struct {
+	// VOD application ID. Starting from December 25, 2023, customers who activate on-demand services must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created application).
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// Filtering condition for the unique identifier of the digital watermark template. The array length cannot exceed 100.
+	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
+
+	// Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-nagra: NAGRA forensics watermark.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Pagination offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned entries
+	// <li>Default value: 10.</li>
+	// <li>Maximum value: 100.</li>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeBlindWatermarkTemplatesRequest struct {
+	*tchttp.BaseRequest
+	
+	// VOD application ID. Starting from December 25, 2023, customers who activate on-demand services must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created application).
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// Filtering condition for the unique identifier of the digital watermark template. The array length cannot exceed 100.
+	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
+
+	// Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-nagra: NAGRA forensics watermark.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Pagination offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned entries
+	// <li>Default value: 10.</li>
+	// <li>Maximum value: 100.</li>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeBlindWatermarkTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBlindWatermarkTemplatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubAppId")
+	delete(f, "Definitions")
+	delete(f, "Type")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBlindWatermarkTemplatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBlindWatermarkTemplatesResponseParams struct {
+	// Total number of records that meet the filtering conditions.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// List of digital watermark template details.
+	BlindWatermarkTemplateSet []*BlindWatermarkTemplate `json:"BlindWatermarkTemplateSet,omitnil,omitempty" name:"BlindWatermarkTemplateSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeBlindWatermarkTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBlindWatermarkTemplatesResponseParams `json:"Response"`
+}
+
+func (r *DescribeBlindWatermarkTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBlindWatermarkTemplatesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -16024,6 +16285,105 @@ type ExtractBlindWatermarkInputInfo struct {
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
+// Predefined struct for user
+type ExtractBlindWatermarkRequestParams struct {
+	// Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-trace: trace the source ab sequence watermark.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// File input information for the Media Processing Service (MPS) task.
+	InputInfo *ExtractBlindWatermarkInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
+
+	// VOD application ID for watermarking. Note that the SubAppId must be in line with the one used during watermarking to extract the watermark, whether importing FILEID or URL.
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// Configuration of the digital watermark extraction task.
+	ExtractBlindWatermarkConfig *ExtractBlindWatermarkTaskConfig `json:"ExtractBlindWatermarkConfig,omitnil,omitempty" name:"ExtractBlindWatermarkConfig"`
+
+	// Identify source context, used for passing through user request information. The value of this field will be returned in the ExtractBlindWatermarkComplete callback and task flow status change callback, with a maximum length of 1000 characters.
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+
+	// An identification code for task deduplication. If there has been a request with the same identification code within the past 3 days, an error will be returned for the current request. The maximum length is 50 characters. Leaving it blank or with an empty string indicates no deduplication.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// Task priority. The higher the value, the higher the priority. The value ranges from -10 to 10. If left blank, it represents 0.
+	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
+}
+
+type ExtractBlindWatermarkRequest struct {
+	*tchttp.BaseRequest
+	
+	// Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-trace: trace the source ab sequence watermark.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// File input information for the Media Processing Service (MPS) task.
+	InputInfo *ExtractBlindWatermarkInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
+
+	// VOD application ID for watermarking. Note that the SubAppId must be in line with the one used during watermarking to extract the watermark, whether importing FILEID or URL.
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// Configuration of the digital watermark extraction task.
+	ExtractBlindWatermarkConfig *ExtractBlindWatermarkTaskConfig `json:"ExtractBlindWatermarkConfig,omitnil,omitempty" name:"ExtractBlindWatermarkConfig"`
+
+	// Identify source context, used for passing through user request information. The value of this field will be returned in the ExtractBlindWatermarkComplete callback and task flow status change callback, with a maximum length of 1000 characters.
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+
+	// An identification code for task deduplication. If there has been a request with the same identification code within the past 3 days, an error will be returned for the current request. The maximum length is 50 characters. Leaving it blank or with an empty string indicates no deduplication.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// Task priority. The higher the value, the higher the priority. The value ranges from -10 to 10. If left blank, it represents 0.
+	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
+}
+
+func (r *ExtractBlindWatermarkRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ExtractBlindWatermarkRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Type")
+	delete(f, "InputInfo")
+	delete(f, "SubAppId")
+	delete(f, "ExtractBlindWatermarkConfig")
+	delete(f, "SessionContext")
+	delete(f, "SessionId")
+	delete(f, "TasksPriority")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ExtractBlindWatermarkRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ExtractBlindWatermarkResponseParams struct {
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ExtractBlindWatermarkResponse struct {
+	*tchttp.BaseResponse
+	Response *ExtractBlindWatermarkResponseParams `json:"Response"`
+}
+
+func (r *ExtractBlindWatermarkResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ExtractBlindWatermarkResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ExtractBlindWatermarkTask struct {
 	// Media processing task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
@@ -20162,6 +20522,88 @@ func (r *ModifyAnimatedGraphicsTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyAnimatedGraphicsTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyBlindWatermarkTemplateRequestParams struct {
+	// Unique identifier of the digital watermark template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// VOD application ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the application ID when accessing resources in on-demand applications (default application or newly created application).
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// Digital watermark template name, which supports Chinese, English, digits, underscores (_), hyphens (-), and periods (.). The length cannot exceed 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Description information of the digital watermark template. The length cannot exceed 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Text content of the digital watermark. The length cannot exceed 64 characters. The text content cannot be modified for NAGRA watermark templates.
+	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
+}
+
+type ModifyBlindWatermarkTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique identifier of the digital watermark template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// VOD application ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the application ID when accessing resources in on-demand applications (default application or newly created application).
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// Digital watermark template name, which supports Chinese, English, digits, underscores (_), hyphens (-), and periods (.). The length cannot exceed 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Description information of the digital watermark template. The length cannot exceed 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Text content of the digital watermark. The length cannot exceed 64 characters. The text content cannot be modified for NAGRA watermark templates.
+	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
+}
+
+func (r *ModifyBlindWatermarkTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyBlindWatermarkTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definition")
+	delete(f, "SubAppId")
+	delete(f, "Name")
+	delete(f, "Comment")
+	delete(f, "TextContent")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBlindWatermarkTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyBlindWatermarkTemplateResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyBlindWatermarkTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyBlindWatermarkTemplateResponseParams `json:"Response"`
+}
+
+func (r *ModifyBlindWatermarkTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyBlindWatermarkTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

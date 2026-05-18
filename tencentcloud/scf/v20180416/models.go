@@ -83,6 +83,43 @@ type AsyncTriggerConfig struct {
 	MsgTTL *int64 `json:"MsgTTL,omitnil,omitempty" name:"MsgTTL"`
 }
 
+type CfsConfig struct {
+	// File system information list
+	CfsInsList []*CfsInsInfo `json:"CfsInsList,omitnil,omitempty" name:"CfsInsList"`
+}
+
+type CfsInsInfo struct {
+	// User ID
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// User group ID
+	UserGroupId *string `json:"UserGroupId,omitnil,omitempty" name:"UserGroupId"`
+
+	// CFS instance ID
+	CfsId *string `json:"CfsId,omitnil,omitempty" name:"CfsId"`
+
+	// File system mount target ID
+	MountInsId *string `json:"MountInsId,omitnil,omitempty" name:"MountInsId"`
+
+	// Local mount target
+	LocalMountDir *string `json:"LocalMountDir,omitnil,omitempty" name:"LocalMountDir"`
+
+	// Remote mount target
+	RemoteMountDir *string `json:"RemoteMountDir,omitnil,omitempty" name:"RemoteMountDir"`
+
+	// File system IP, which is not required when you configure CFS.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IpAddress *string `json:"IpAddress,omitnil,omitempty" name:"IpAddress"`
+
+	// VPC ID of file system, which is not required when you configure CFS.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MountVpcId *string `json:"MountVpcId,omitnil,omitempty" name:"MountVpcId"`
+
+	// VPC subnet ID of file system, which is not required when you configure CFS.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MountSubnetId *string `json:"MountSubnetId,omitnil,omitempty" name:"MountSubnetId"`
+}
+
 type Code struct {
 	// Object bucket name (enter the custom part of the bucket name without `-appid`)
 	CosBucketName *string `json:"CosBucketName,omitnil,omitempty" name:"CosBucketName"`
@@ -504,6 +541,17 @@ func (r *CreateTriggerResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *CreateTriggerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeadLetterConfig struct {
+	// Dead letter queue mode
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Dead letter queue name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Tag form of a dead letter queue topic mode
+	FilterType *string `json:"FilterType,omitnil,omitempty" name:"FilterType"`
 }
 
 // Predefined struct for user
@@ -973,6 +1021,16 @@ func (r *DeleteTriggerResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DeleteTriggerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type EipConfigIn struct {
+	// Status of the EIP. Values: ['ENABLE','DISABLE']
+	EipStatus *string `json:"EipStatus,omitnil,omitempty" name:"EipStatus"`
+}
+
+type Environment struct {
+	// Environment variable array
+	Variables []*Variable `json:"Variables,omitnil,omitempty" name:"Variables"`
 }
 
 type Filter struct {
@@ -2166,6 +2224,14 @@ type LayerVersionInfo struct {
 	Stamp *string `json:"Stamp,omitnil,omitempty" name:"Stamp"`
 }
 
+type LayerVersionSimple struct {
+	// Name of the layer to bind. Leave it blank if you want to unbind layers
+	LayerName *string `json:"LayerName,omitnil,omitempty" name:"LayerName"`
+
+	// Version ID f the layer to bind/unbind. If the layer version to unbind is the only layer version of the function version, enter `0`.
+	LayerVersion *int64 `json:"LayerVersion,omitnil,omitempty" name:"LayerVersion"`
+}
+
 type LimitsInfo struct {
 	// Limit of namespace quantity
 	NamespacesCount *int64 `json:"NamespacesCount,omitnil,omitempty" name:"NamespacesCount"`
@@ -3050,6 +3116,20 @@ type NamespaceUsage struct {
 	// Provisioned concurrency usage of the namespace
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	TotalAllocatedProvisionedMem *int64 `json:"TotalAllocatedProvisionedMem,omitnil,omitempty" name:"TotalAllocatedProvisionedMem"`
+}
+
+type ProtocolParams struct {
+	// Parameters of WebSockets protocol
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	WSParams *WSParams `json:"WSParams,omitnil,omitempty" name:"WSParams"`
+}
+
+type PublicNetConfigIn struct {
+	// Whether to enable public network access. Valid values: ['DISABLE', 'ENABLE']
+	PublicNetStatus *string `json:"PublicNetStatus,omitnil,omitempty" name:"PublicNetStatus"`
+
+	// EIP configuration
+	EipConfig *EipConfigIn `json:"EipConfig,omitnil,omitempty" name:"EipConfig"`
 }
 
 // Predefined struct for user
@@ -4025,6 +4105,193 @@ func (r *UpdateFunctionCodeResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type UpdateFunctionConfigurationRequestParams struct {
+	// Name of the function to be modified
+	FunctionName *string `json:"FunctionName,omitnil,omitempty" name:"FunctionName"`
+
+	// Function description. It can contain up to 1,000 characters, including letters, digits, spaces, commas (,), periods (.), and Chinese characters.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Memory size available for function during execution. Default value: 128 MB. Value range: 64 or 128-3,072 MB in increments of 128 MB.
+	MemorySize *int64 `json:"MemorySize,omitnil,omitempty" name:"MemorySize"`
+
+	// Maximum execution duration of function in seconds. Value range: 1-900 seconds. Default value: 3 seconds
+	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Go1, Java8, CustomRuntime
+	Runtime *string `json:"Runtime,omitnil,omitempty" name:"Runtime"`
+
+	// Function environment variable
+	Environment *Environment `json:"Environment,omitnil,omitempty" name:"Environment"`
+
+	// Function namespace
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Function VPC configuration
+	VpcConfig *VpcConfig `json:"VpcConfig,omitnil,omitempty" name:"VpcConfig"`
+
+	// Role bound to the function
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
+
+	// Specifies whether to [install dependency online](https://intl.cloud.tencent.com/document/product/583/37920?from_cn_redirect=1). `TRUE`: yes. Default to `FALSE`. It is only available for Node.js functions.
+	InstallDependency *string `json:"InstallDependency,omitnil,omitempty" name:"InstallDependency"`
+
+	// CLS logset ID to which logs are shipped
+	ClsLogsetId *string `json:"ClsLogsetId,omitnil,omitempty" name:"ClsLogsetId"`
+
+	// CLS Topic ID to which logs are shipped
+	ClsTopicId *string `json:"ClsTopicId,omitnil,omitempty" name:"ClsTopicId"`
+
+	// It specifies whether to synchronously publish a new version during the update. The default value is `FALSE`, indicating not to publish a new version
+	Publish *string `json:"Publish,omitnil,omitempty" name:"Publish"`
+
+	// Whether to enable L5 access. TRUE: enable; FALSE: not enable
+	L5Enable *string `json:"L5Enable,omitnil,omitempty" name:"L5Enable"`
+
+	// List of layer versions that bound with the function. Files with the same name will be overridden by the bound layer versions according to the ascending order in the list. 
+	Layers []*LayerVersionSimple `json:"Layers,omitnil,omitempty" name:"Layers"`
+
+	// Information of a dead letter queue associated with a function
+	DeadLetterConfig *DeadLetterConfig `json:"DeadLetterConfig,omitnil,omitempty" name:"DeadLetterConfig"`
+
+	// Public network access configuration
+	PublicNetConfig *PublicNetConfigIn `json:"PublicNetConfig,omitnil,omitempty" name:"PublicNetConfig"`
+
+	// File system configuration input parameter, which is used for the function to bind the CFS file system
+	CfsConfig *CfsConfig `json:"CfsConfig,omitnil,omitempty" name:"CfsConfig"`
+
+	// The function initialization timeout period
+	InitTimeout *int64 `json:"InitTimeout,omitnil,omitempty" name:"InitTimeout"`
+
+	// Parameters of the specified protocol
+	ProtocolParams *ProtocolParams `json:"ProtocolParams,omitnil,omitempty" name:"ProtocolParams"`
+}
+
+type UpdateFunctionConfigurationRequest struct {
+	*tchttp.BaseRequest
+	
+	// Name of the function to be modified
+	FunctionName *string `json:"FunctionName,omitnil,omitempty" name:"FunctionName"`
+
+	// Function description. It can contain up to 1,000 characters, including letters, digits, spaces, commas (,), periods (.), and Chinese characters.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Memory size available for function during execution. Default value: 128 MB. Value range: 64 or 128-3,072 MB in increments of 128 MB.
+	MemorySize *int64 `json:"MemorySize,omitnil,omitempty" name:"MemorySize"`
+
+	// Maximum execution duration of function in seconds. Value range: 1-900 seconds. Default value: 3 seconds
+	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Go1, Java8, CustomRuntime
+	Runtime *string `json:"Runtime,omitnil,omitempty" name:"Runtime"`
+
+	// Function environment variable
+	Environment *Environment `json:"Environment,omitnil,omitempty" name:"Environment"`
+
+	// Function namespace
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Function VPC configuration
+	VpcConfig *VpcConfig `json:"VpcConfig,omitnil,omitempty" name:"VpcConfig"`
+
+	// Role bound to the function
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
+
+	// Specifies whether to [install dependency online](https://intl.cloud.tencent.com/document/product/583/37920?from_cn_redirect=1). `TRUE`: yes. Default to `FALSE`. It is only available for Node.js functions.
+	InstallDependency *string `json:"InstallDependency,omitnil,omitempty" name:"InstallDependency"`
+
+	// CLS logset ID to which logs are shipped
+	ClsLogsetId *string `json:"ClsLogsetId,omitnil,omitempty" name:"ClsLogsetId"`
+
+	// CLS Topic ID to which logs are shipped
+	ClsTopicId *string `json:"ClsTopicId,omitnil,omitempty" name:"ClsTopicId"`
+
+	// It specifies whether to synchronously publish a new version during the update. The default value is `FALSE`, indicating not to publish a new version
+	Publish *string `json:"Publish,omitnil,omitempty" name:"Publish"`
+
+	// Whether to enable L5 access. TRUE: enable; FALSE: not enable
+	L5Enable *string `json:"L5Enable,omitnil,omitempty" name:"L5Enable"`
+
+	// List of layer versions that bound with the function. Files with the same name will be overridden by the bound layer versions according to the ascending order in the list. 
+	Layers []*LayerVersionSimple `json:"Layers,omitnil,omitempty" name:"Layers"`
+
+	// Information of a dead letter queue associated with a function
+	DeadLetterConfig *DeadLetterConfig `json:"DeadLetterConfig,omitnil,omitempty" name:"DeadLetterConfig"`
+
+	// Public network access configuration
+	PublicNetConfig *PublicNetConfigIn `json:"PublicNetConfig,omitnil,omitempty" name:"PublicNetConfig"`
+
+	// File system configuration input parameter, which is used for the function to bind the CFS file system
+	CfsConfig *CfsConfig `json:"CfsConfig,omitnil,omitempty" name:"CfsConfig"`
+
+	// The function initialization timeout period
+	InitTimeout *int64 `json:"InitTimeout,omitnil,omitempty" name:"InitTimeout"`
+
+	// Parameters of the specified protocol
+	ProtocolParams *ProtocolParams `json:"ProtocolParams,omitnil,omitempty" name:"ProtocolParams"`
+}
+
+func (r *UpdateFunctionConfigurationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateFunctionConfigurationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FunctionName")
+	delete(f, "Description")
+	delete(f, "MemorySize")
+	delete(f, "Timeout")
+	delete(f, "Runtime")
+	delete(f, "Environment")
+	delete(f, "Namespace")
+	delete(f, "VpcConfig")
+	delete(f, "Role")
+	delete(f, "InstallDependency")
+	delete(f, "ClsLogsetId")
+	delete(f, "ClsTopicId")
+	delete(f, "Publish")
+	delete(f, "L5Enable")
+	delete(f, "Layers")
+	delete(f, "DeadLetterConfig")
+	delete(f, "PublicNetConfig")
+	delete(f, "CfsConfig")
+	delete(f, "InitTimeout")
+	delete(f, "ProtocolParams")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateFunctionConfigurationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateFunctionConfigurationResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UpdateFunctionConfigurationResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateFunctionConfigurationResponseParams `json:"Response"`
+}
+
+func (r *UpdateFunctionConfigurationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateFunctionConfigurationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type UpdateFunctionEventInvokeConfigRequestParams struct {
 	// Async retry configuration information
 	AsyncTriggerConfig *AsyncTriggerConfig `json:"AsyncTriggerConfig,omitnil,omitempty" name:"AsyncTriggerConfig"`
@@ -4266,6 +4533,14 @@ type UsageInfo struct {
 	UserConcurrencyMemLimit *int64 `json:"UserConcurrencyMemLimit,omitnil,omitempty" name:"UserConcurrencyMemLimit"`
 }
 
+type Variable struct {
+	// Variable name
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Variable value
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
 type VersionMatch struct {
 	// Function version name
 	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
@@ -4314,4 +4589,18 @@ type VersionWeight struct {
 
 	// Version weight
 	Weight *float64 `json:"Weight,omitnil,omitempty" name:"Weight"`
+}
+
+type VpcConfig struct {
+	// VPC ID
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+}
+
+type WSParams struct {
+	// Idle timeout period in seconds. Default: 15; range: 1 to 1800
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	IdleTimeOut *uint64 `json:"IdleTimeOut,omitnil,omitempty" name:"IdleTimeOut"`
 }
