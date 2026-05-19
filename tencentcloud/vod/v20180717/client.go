@@ -489,7 +489,7 @@ func NewCreateAIAnalysisTemplateResponse() (response *CreateAIAnalysisTemplateRe
 }
 
 // CreateAIAnalysisTemplate
-// This API is used to create a custom video content analysis template. Up to 50 templates can be created.
+// Create a user-defined audio and video content analysis template. Maximum quantity: 50. HLS format not supported currently.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -509,7 +509,7 @@ func (c *Client) CreateAIAnalysisTemplate(request *CreateAIAnalysisTemplateReque
 }
 
 // CreateAIAnalysisTemplate
-// This API is used to create a custom video content analysis template. Up to 50 templates can be created.
+// Create a user-defined audio and video content analysis template. Maximum quantity: 50. HLS format not supported currently.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -709,6 +709,72 @@ func (c *Client) CreateAdaptiveDynamicStreamingTemplateWithContext(ctx context.C
     return
 }
 
+func NewCreateAigcAdvancedCustomElementRequest() (request *CreateAigcAdvancedCustomElementRequest) {
+    request = &CreateAigcAdvancedCustomElementRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateAigcAdvancedCustomElement")
+    
+    
+    return
+}
+
+func NewCreateAigcAdvancedCustomElementResponse() (response *CreateAigcAdvancedCustomElementResponse) {
+    response = &CreateAigcAdvancedCustomElementResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAigcAdvancedCustomElement
+// This API is used to create an advanced custom AIGC subject.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateAigcAdvancedCustomElement(request *CreateAigcAdvancedCustomElementRequest) (response *CreateAigcAdvancedCustomElementResponse, err error) {
+    return c.CreateAigcAdvancedCustomElementWithContext(context.Background(), request)
+}
+
+// CreateAigcAdvancedCustomElement
+// This API is used to create an advanced custom AIGC subject.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateAigcAdvancedCustomElementWithContext(ctx context.Context, request *CreateAigcAdvancedCustomElementRequest) (response *CreateAigcAdvancedCustomElementResponse, err error) {
+    if request == nil {
+        request = NewCreateAigcAdvancedCustomElementRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateAigcAdvancedCustomElement")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAigcAdvancedCustomElement require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAigcAdvancedCustomElementResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAigcApiTokenRequest() (request *CreateAigcApiTokenRequest) {
     request = &CreateAigcApiTokenRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -765,6 +831,234 @@ func (c *Client) CreateAigcApiTokenWithContext(ctx context.Context, request *Cre
     return
 }
 
+func NewCreateAigcAudioCloneRequest() (request *CreateAigcAudioCloneRequest) {
+    request = &CreateAigcAudioCloneRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateAigcAudioClone")
+    
+    
+    return
+}
+
+func NewCreateAigcAudioCloneResponse() (response *CreateAigcAudioCloneResponse) {
+    response = &CreateAigcAudioCloneResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAigcAudioClone
+// This API is used to create AIGC voice replication. Note that calling this API will incur fees. See the billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#96b3b59a-f9e1-49e9-966a-bedb70a4bf12).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateAigcAudioClone(request *CreateAigcAudioCloneRequest) (response *CreateAigcAudioCloneResponse, err error) {
+    return c.CreateAigcAudioCloneWithContext(context.Background(), request)
+}
+
+// CreateAigcAudioClone
+// This API is used to create AIGC voice replication. Note that calling this API will incur fees. See the billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#96b3b59a-f9e1-49e9-966a-bedb70a4bf12).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateAigcAudioCloneWithContext(ctx context.Context, request *CreateAigcAudioCloneRequest) (response *CreateAigcAudioCloneResponse, err error) {
+    if request == nil {
+        request = NewCreateAigcAudioCloneRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateAigcAudioClone")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAigcAudioClone require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAigcAudioCloneResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateAigcAudioTaskRequest() (request *CreateAigcAudioTaskRequest) {
+    request = &CreateAigcAudioTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateAigcAudioTask")
+    
+    
+    return
+}
+
+func NewCreateAigcAudioTaskResponse() (response *CreateAigcAudioTaskResponse) {
+    response = &CreateAigcAudioTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAigcAudioTask
+// This API is used to create AI audio generation tasks.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_VIOLATIONCONTENT = "InvalidParameter.ViolationContent"
+func (c *Client) CreateAigcAudioTask(request *CreateAigcAudioTaskRequest) (response *CreateAigcAudioTaskResponse, err error) {
+    return c.CreateAigcAudioTaskWithContext(context.Background(), request)
+}
+
+// CreateAigcAudioTask
+// This API is used to create AI audio generation tasks.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_VIOLATIONCONTENT = "InvalidParameter.ViolationContent"
+func (c *Client) CreateAigcAudioTaskWithContext(ctx context.Context, request *CreateAigcAudioTaskRequest) (response *CreateAigcAudioTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateAigcAudioTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateAigcAudioTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAigcAudioTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAigcAudioTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateAigcCustomElementRequest() (request *CreateAigcCustomElementRequest) {
+    request = &CreateAigcCustomElementRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateAigcCustomElement")
+    
+    
+    return
+}
+
+func NewCreateAigcCustomElementResponse() (response *CreateAigcCustomElementResponse) {
+    response = &CreateAigcCustomElementResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAigcCustomElement
+// Call this API to target a specified model and perform subject creation.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_VIOLATIONCONTENT = "InvalidParameter.ViolationContent"
+func (c *Client) CreateAigcCustomElement(request *CreateAigcCustomElementRequest) (response *CreateAigcCustomElementResponse, err error) {
+    return c.CreateAigcCustomElementWithContext(context.Background(), request)
+}
+
+// CreateAigcCustomElement
+// Call this API to target a specified model and perform subject creation.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_VIOLATIONCONTENT = "InvalidParameter.ViolationContent"
+func (c *Client) CreateAigcCustomElementWithContext(ctx context.Context, request *CreateAigcCustomElementRequest) (response *CreateAigcCustomElementResponse, err error) {
+    if request == nil {
+        request = NewCreateAigcCustomElementRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateAigcCustomElement")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAigcCustomElement require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAigcCustomElementResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateAigcCustomVoiceRequest() (request *CreateAigcCustomVoiceRequest) {
+    request = &CreateAigcCustomVoiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateAigcCustomVoice")
+    
+    
+    return
+}
+
+func NewCreateAigcCustomVoiceResponse() (response *CreateAigcCustomVoiceResponse) {
+    response = &CreateAigcCustomVoiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAigcCustomVoice
+// This API is used to create custom voice types for AIGC.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateAigcCustomVoice(request *CreateAigcCustomVoiceRequest) (response *CreateAigcCustomVoiceResponse, err error) {
+    return c.CreateAigcCustomVoiceWithContext(context.Background(), request)
+}
+
+// CreateAigcCustomVoice
+// This API is used to create custom voice types for AIGC.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateAigcCustomVoiceWithContext(ctx context.Context, request *CreateAigcCustomVoiceRequest) (response *CreateAigcCustomVoiceResponse, err error) {
+    if request == nil {
+        request = NewCreateAigcCustomVoiceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateAigcCustomVoice")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAigcCustomVoice require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAigcCustomVoiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAigcImageTaskRequest() (request *CreateAigcImageTaskRequest) {
     request = &CreateAigcImageTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -785,7 +1079,7 @@ func NewCreateAigcImageTaskResponse() (response *CreateAigcImageTaskResponse) {
 }
 
 // CreateAigcImageTask
-// This API is used to generate AIGC images. <b>The API is in beta. If needed, contact us. API calls will incur actual fees.</b>
+// This API is used to generate AIGC images. The default limit is 1 concurrent processing. API calls will occur actual fee. Refer to the VOD AIGC image generation billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#9c4dc6ff-4b3f-4b25-bf2d-393889dfb9ac). The feature settlement mode is pay-as-you-go. Daily billing customers will be billed on the second day for usage on the day. Monthly billing customers will be billed on the 1st of the next month for usage in the previous month.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -803,7 +1097,7 @@ func (c *Client) CreateAigcImageTask(request *CreateAigcImageTaskRequest) (respo
 }
 
 // CreateAigcImageTask
-// This API is used to generate AIGC images. <b>The API is in beta. If needed, contact us. API calls will incur actual fees.</b>
+// This API is used to generate AIGC images. The default limit is 1 concurrent processing. API calls will occur actual fee. Refer to the VOD AIGC image generation billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#9c4dc6ff-4b3f-4b25-bf2d-393889dfb9ac). The feature settlement mode is pay-as-you-go. Daily billing customers will be billed on the second day for usage on the day. Monthly billing customers will be billed on the 1st of the next month for usage in the previous month.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -833,6 +1127,138 @@ func (c *Client) CreateAigcImageTaskWithContext(ctx context.Context, request *Cr
     return
 }
 
+func NewCreateAigcSubjectRequest() (request *CreateAigcSubjectRequest) {
+    request = &CreateAigcSubjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateAigcSubject")
+    
+    
+    return
+}
+
+func NewCreateAigcSubjectResponse() (response *CreateAigcSubjectResponse) {
+    response = &CreateAigcSubjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAigcSubject
+// This API is used to create AIGC custom subjects (Vidu). Note that calling this API may incur fees. Refer to the billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#96b3b59a-f9e1-49e9-966a-bedb70a4bf12).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateAigcSubject(request *CreateAigcSubjectRequest) (response *CreateAigcSubjectResponse, err error) {
+    return c.CreateAigcSubjectWithContext(context.Background(), request)
+}
+
+// CreateAigcSubject
+// This API is used to create AIGC custom subjects (Vidu). Note that calling this API may incur fees. Refer to the billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#96b3b59a-f9e1-49e9-966a-bedb70a4bf12).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateAigcSubjectWithContext(ctx context.Context, request *CreateAigcSubjectRequest) (response *CreateAigcSubjectResponse, err error) {
+    if request == nil {
+        request = NewCreateAigcSubjectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateAigcSubject")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAigcSubject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAigcSubjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateAigcVideoRedrawTaskRequest() (request *CreateAigcVideoRedrawTaskRequest) {
+    request = &CreateAigcVideoRedrawTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateAigcVideoRedrawTask")
+    
+    
+    return
+}
+
+func NewCreateAigcVideoRedrawTaskResponse() (response *CreateAigcVideoRedrawTaskResponse) {
+    response = &CreateAigcVideoRedrawTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAigcVideoRedrawTask
+// This API is used to generate AIGC videos. API calls will occur actual fee. Refer to the video-on-demand [AIGC video generation billing documentation](https://www.tencentcloud.com/zh/document/product/266/14666#96b3b59a-f9e1-49e9-966a-bedb70a4bf12). The feature settlement mode is [pay-as-you-go](https://www.tencentcloud.com/document/product/266/2838?from_cn_redirect=1). Daily billing customers will be charged on the second day for usage on the day, while monthly billing customers will be billed on the 1st of the next month for usage in the previous month.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateAigcVideoRedrawTask(request *CreateAigcVideoRedrawTaskRequest) (response *CreateAigcVideoRedrawTaskResponse, err error) {
+    return c.CreateAigcVideoRedrawTaskWithContext(context.Background(), request)
+}
+
+// CreateAigcVideoRedrawTask
+// This API is used to generate AIGC videos. API calls will occur actual fee. Refer to the video-on-demand [AIGC video generation billing documentation](https://www.tencentcloud.com/zh/document/product/266/14666#96b3b59a-f9e1-49e9-966a-bedb70a4bf12). The feature settlement mode is [pay-as-you-go](https://www.tencentcloud.com/document/product/266/2838?from_cn_redirect=1). Daily billing customers will be charged on the second day for usage on the day, while monthly billing customers will be billed on the 1st of the next month for usage in the previous month.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateAigcVideoRedrawTaskWithContext(ctx context.Context, request *CreateAigcVideoRedrawTaskRequest) (response *CreateAigcVideoRedrawTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateAigcVideoRedrawTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateAigcVideoRedrawTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAigcVideoRedrawTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAigcVideoRedrawTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAigcVideoTaskRequest() (request *CreateAigcVideoTaskRequest) {
     request = &CreateAigcVideoTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -853,7 +1279,7 @@ func NewCreateAigcVideoTaskResponse() (response *CreateAigcVideoTaskResponse) {
 }
 
 // CreateAigcVideoTask
-// This API is used to generate AIGC videos. <b>The API is in beta. If needed, contact us. API calls will incur actual fees.</b>
+// This API is used to generate AIGC videos. The default limit is 1 concurrent processing. API calls will incur actual fees. Refer to the VOD AIGC video generation billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#96b3b59a-f9e1-49e9-966a-bedb70a4bf12). The feature settlement mode is pay-as-you-go. Daily billing customers will be charged on the second day for usage on the day, while monthly settlement customers will be billed on the 1st of the next month for usage in the previous month.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -870,7 +1296,7 @@ func (c *Client) CreateAigcVideoTask(request *CreateAigcVideoTaskRequest) (respo
 }
 
 // CreateAigcVideoTask
-// This API is used to generate AIGC videos. <b>The API is in beta. If needed, contact us. API calls will incur actual fees.</b>
+// This API is used to generate AIGC videos. The default limit is 1 concurrent processing. API calls will incur actual fees. Refer to the VOD AIGC video generation billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#96b3b59a-f9e1-49e9-966a-bedb70a4bf12). The feature settlement mode is pay-as-you-go. Daily billing customers will be charged on the second day for usage on the day, while monthly settlement customers will be billed on the 1st of the next month for usage in the previous month.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1193,27 +1619,29 @@ func NewCreateComplexAdaptiveDynamicStreamingTaskResponse() (response *CreateCom
 }
 
 // CreateComplexAdaptiveDynamicStreamingTask
-// Initiate an adaptive bitrate streaming processing task, with the following features:
+// Initiate complex adaptive bitstream processing. Features include:
 //
-// 1. Output HLS and MPEG-DASH adaptive streams based on the specified templates;
+// 1. Output HLS and DASH adaptive bitrate streams based on the specified template.
 //
-// 2. DRM options for the adaptive bitrate streaming include no encryption, Widevine, or FairPlay.
+// 2. The content protection solution for adaptive bitrate streams is available in unencrypted, Widevine, or FairPlay.
 //
-// 3. The output adaptive bitrate streaming can include multiple audio streams in different languages, with each language sourced from different media files.
+// 3. Support adding opening and ending segments.
 //
-// 4. The output adaptive stream can also include multiple subtitle streams in different languages.
+// 4. The output adaptive bitrate stream can include multilingual audio streams, each language comes from a different media file.
+//
+// 5. The output adaptive bitrate stream can include multilingual subtitles.
 //
 // 
 //
-// **Notes:**
+// Notes:
 //
-// 1. When using opening/closing credits, the video stream in the opening credit must be synchronized with the audio stream; otherwise, it will result in audio and video desynchronization in the output content.
+// 1. When using the opening scene, the video stream in the media needs to align with the audio stream, otherwise will cause out-of-sync audio and video in the output content;
 //
-// 2. If the output adaptive bitrate streaming needs to include audio from the main media, the FileId of the main media must be specified in the AudioSet parameter.
+// 2. If the output adaptive bitrate stream needs to include the audio of the main media, then the FileId of the main media must be specified in the AudioSet parameter.
 //
-// 3. Subtitles must be added to the main media beforehand, which can be done through the ModifyMediaInfo API interface or the Video Management page in the console.
+// 3. To use subtitles, you must first add them to the main media. You can add subtitles through the ModifyMediaInfo API or the audio and video details page in the console.
 //
-// 4. Support for TESHD transcoding and watermarking is currently not available.
+// 4. Not currently supported: top speed Codec, watermark.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1226,27 +1654,29 @@ func (c *Client) CreateComplexAdaptiveDynamicStreamingTask(request *CreateComple
 }
 
 // CreateComplexAdaptiveDynamicStreamingTask
-// Initiate an adaptive bitrate streaming processing task, with the following features:
+// Initiate complex adaptive bitstream processing. Features include:
 //
-// 1. Output HLS and MPEG-DASH adaptive streams based on the specified templates;
+// 1. Output HLS and DASH adaptive bitrate streams based on the specified template.
 //
-// 2. DRM options for the adaptive bitrate streaming include no encryption, Widevine, or FairPlay.
+// 2. The content protection solution for adaptive bitrate streams is available in unencrypted, Widevine, or FairPlay.
 //
-// 3. The output adaptive bitrate streaming can include multiple audio streams in different languages, with each language sourced from different media files.
+// 3. Support adding opening and ending segments.
 //
-// 4. The output adaptive stream can also include multiple subtitle streams in different languages.
+// 4. The output adaptive bitrate stream can include multilingual audio streams, each language comes from a different media file.
+//
+// 5. The output adaptive bitrate stream can include multilingual subtitles.
 //
 // 
 //
-// **Notes:**
+// Notes:
 //
-// 1. When using opening/closing credits, the video stream in the opening credit must be synchronized with the audio stream; otherwise, it will result in audio and video desynchronization in the output content.
+// 1. When using the opening scene, the video stream in the media needs to align with the audio stream, otherwise will cause out-of-sync audio and video in the output content;
 //
-// 2. If the output adaptive bitrate streaming needs to include audio from the main media, the FileId of the main media must be specified in the AudioSet parameter.
+// 2. If the output adaptive bitrate stream needs to include the audio of the main media, then the FileId of the main media must be specified in the AudioSet parameter.
 //
-// 3. Subtitles must be added to the main media beforehand, which can be done through the ModifyMediaInfo API interface or the Video Management page in the console.
+// 3. To use subtitles, you must first add them to the main media. You can add subtitles through the ModifyMediaInfo API or the audio and video details page in the console.
 //
-// 4. Support for TESHD transcoding and watermarking is currently not available.
+// 4. Not currently supported: top speed Codec, watermark.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1479,7 +1909,9 @@ func NewCreateHeadTailTemplateResponse() (response *CreateHeadTailTemplateRespon
 }
 
 // CreateHeadTailTemplate
-// Create HeadTail Template.
+// This API is used to create a title and trailer template.
+//
+// -The maximum supported template quantity is 100.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1499,7 +1931,9 @@ func (c *Client) CreateHeadTailTemplate(request *CreateHeadTailTemplateRequest) 
 }
 
 // CreateHeadTailTemplate
-// Create HeadTail Template.
+// This API is used to create a title and trailer template.
+//
+// -The maximum supported template quantity is 100.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1795,6 +2229,92 @@ func (c *Client) CreateLLMComprehendTemplateWithContext(ctx context.Context, req
     return
 }
 
+func NewCreateMPSTemplateRequest() (request *CreateMPSTemplateRequest) {
+    request = &CreateMPSTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateMPSTemplate")
+    
+    
+    return
+}
+
+func NewCreateMPSTemplateResponse() (response *CreateMPSTemplateResponse) {
+    response = &CreateMPSTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateMPSTemplate
+// This API is used to create a custom template for partial features of the ProcessMediaByMPS API.
+//
+// When creating a template, you need to fill in MPS-related parameters in JSON format into the MPSCreateTemplateParams parameter. For specific task parameter configuration methods, refer to the MPS task template related documentation.
+//
+// Currently supported MPS features: create custom template.
+//
+// 1. [Audio and video enhancement](https://www.tencentcloud.com/document/product/862/118703?from_cn_redirect=1).
+//
+// 2. [Media AI](https://www.tencentcloud.com/document/product/1041/54517)
+//
+// 
+//
+// Task Template created by this method
+//
+// Template management is still done on the VOD platform.
+//
+// 2. The feature is currently in closed beta testing. If needed, you can contact us for support.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateMPSTemplate(request *CreateMPSTemplateRequest) (response *CreateMPSTemplateResponse, err error) {
+    return c.CreateMPSTemplateWithContext(context.Background(), request)
+}
+
+// CreateMPSTemplate
+// This API is used to create a custom template for partial features of the ProcessMediaByMPS API.
+//
+// When creating a template, you need to fill in MPS-related parameters in JSON format into the MPSCreateTemplateParams parameter. For specific task parameter configuration methods, refer to the MPS task template related documentation.
+//
+// Currently supported MPS features: create custom template.
+//
+// 1. [Audio and video enhancement](https://www.tencentcloud.com/document/product/862/118703?from_cn_redirect=1).
+//
+// 2. [Media AI](https://www.tencentcloud.com/document/product/1041/54517)
+//
+// 
+//
+// Task Template created by this method
+//
+// Template management is still done on the VOD platform.
+//
+// 2. The feature is currently in closed beta testing. If needed, you can contact us for support.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateMPSTemplateWithContext(ctx context.Context, request *CreateMPSTemplateRequest) (response *CreateMPSTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateMPSTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateMPSTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateMPSTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateMPSTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreatePersonSampleRequest() (request *CreatePersonSampleRequest) {
     request = &CreatePersonSampleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1913,6 +2433,68 @@ func (c *Client) CreateProcedureTemplateWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewCreateProcedureTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateProcessImageAsyncTemplateRequest() (request *CreateProcessImageAsyncTemplateRequest) {
+    request = &CreateProcessImageAsyncTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateProcessImageAsyncTemplate")
+    
+    
+    return
+}
+
+func NewCreateProcessImageAsyncTemplateResponse() (response *CreateProcessImageAsyncTemplateResponse) {
+    response = &CreateProcessImageAsyncTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateProcessImageAsyncTemplate
+// Create a user-customized image processing template asynchronously. Maximum quantity: 50. HLS format not supported currently.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateProcessImageAsyncTemplate(request *CreateProcessImageAsyncTemplateRequest) (response *CreateProcessImageAsyncTemplateResponse, err error) {
+    return c.CreateProcessImageAsyncTemplateWithContext(context.Background(), request)
+}
+
+// CreateProcessImageAsyncTemplate
+// Create a user-customized image processing template asynchronously. Maximum quantity: 50. HLS format not supported currently.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateProcessImageAsyncTemplateWithContext(ctx context.Context, request *CreateProcessImageAsyncTemplateRequest) (response *CreateProcessImageAsyncTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateProcessImageAsyncTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateProcessImageAsyncTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateProcessImageAsyncTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateProcessImageAsyncTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -2309,6 +2891,74 @@ func (c *Client) CreateSceneAigcImageTaskWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewCreateSceneAigcImageTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateSceneAigcVideoTaskRequest() (request *CreateSceneAigcVideoTaskRequest) {
+    request = &CreateSceneAigcVideoTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateSceneAigcVideoTask")
+    
+    
+    return
+}
+
+func NewCreateSceneAigcVideoTaskResponse() (response *CreateSceneAigcVideoTaskResponse) {
+    response = &CreateSceneAigcVideoTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateSceneAigcVideoTask
+// This API is used to generate scenario-based AIGC images. API calls will occur actual fee.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateSceneAigcVideoTask(request *CreateSceneAigcVideoTaskRequest) (response *CreateSceneAigcVideoTaskResponse, err error) {
+    return c.CreateSceneAigcVideoTaskWithContext(context.Background(), request)
+}
+
+// CreateSceneAigcVideoTask
+// This API is used to generate scenario-based AIGC images. API calls will occur actual fee.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateSceneAigcVideoTaskWithContext(ctx context.Context, request *CreateSceneAigcVideoTaskRequest) (response *CreateSceneAigcVideoTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateSceneAigcVideoTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateSceneAigcVideoTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSceneAigcVideoTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateSceneAigcVideoTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -3085,6 +3735,60 @@ func (c *Client) DeleteAdaptiveDynamicStreamingTemplateWithContext(ctx context.C
     return
 }
 
+func NewDeleteAigcAdvancedCustomElementRequest() (request *DeleteAigcAdvancedCustomElementRequest) {
+    request = &DeleteAigcAdvancedCustomElementRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteAigcAdvancedCustomElement")
+    
+    
+    return
+}
+
+func NewDeleteAigcAdvancedCustomElementResponse() (response *DeleteAigcAdvancedCustomElementResponse) {
+    response = &DeleteAigcAdvancedCustomElementResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteAigcAdvancedCustomElement
+// This API is used to delete the senior custom AIGC subject.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+func (c *Client) DeleteAigcAdvancedCustomElement(request *DeleteAigcAdvancedCustomElementRequest) (response *DeleteAigcAdvancedCustomElementResponse, err error) {
+    return c.DeleteAigcAdvancedCustomElementWithContext(context.Background(), request)
+}
+
+// DeleteAigcAdvancedCustomElement
+// This API is used to delete the senior custom AIGC subject.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+func (c *Client) DeleteAigcAdvancedCustomElementWithContext(ctx context.Context, request *DeleteAigcAdvancedCustomElementRequest) (response *DeleteAigcAdvancedCustomElementResponse, err error) {
+    if request == nil {
+        request = NewDeleteAigcAdvancedCustomElementRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteAigcAdvancedCustomElement")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAigcAdvancedCustomElement require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteAigcAdvancedCustomElementResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteAigcApiTokenRequest() (request *DeleteAigcApiTokenRequest) {
     request = &DeleteAigcApiTokenRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3741,11 +4445,11 @@ func NewDeleteLLMComprehendTemplateResponse() (response *DeleteLLMComprehendTemp
 }
 
 // DeleteLLMComprehendTemplate
-// This API is used to delete a user-customized  large model comprehend template.
+// This API is used to delete a user's customized large model parsing template.
 //
 // 
 //
-// Note: Templates with an ID below 10000 are system-preset templates and cannot be deleted.
+// Note: Template IDs below 10000 are system-preset templates and cannot be deleted.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3759,11 +4463,11 @@ func (c *Client) DeleteLLMComprehendTemplate(request *DeleteLLMComprehendTemplat
 }
 
 // DeleteLLMComprehendTemplate
-// This API is used to delete a user-customized  large model comprehend template.
+// This API is used to delete a user's customized large model parsing template.
 //
 // 
 //
-// Note: Templates with an ID below 10000 are system-preset templates and cannot be deleted.
+// Note: Template IDs below 10000 are system-preset templates and cannot be deleted.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3785,6 +4489,62 @@ func (c *Client) DeleteLLMComprehendTemplateWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewDeleteLLMComprehendTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteMPSTemplateRequest() (request *DeleteMPSTemplateRequest) {
+    request = &DeleteMPSTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteMPSTemplate")
+    
+    
+    return
+}
+
+func NewDeleteMPSTemplateResponse() (response *DeleteMPSTemplateResponse) {
+    response = &DeleteMPSTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteMPSTemplate
+// This API is used to delete a user-defined MPS task template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteMPSTemplate(request *DeleteMPSTemplateRequest) (response *DeleteMPSTemplateResponse, err error) {
+    return c.DeleteMPSTemplateWithContext(context.Background(), request)
+}
+
+// DeleteMPSTemplate
+// This API is used to delete a user-defined MPS task template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteMPSTemplateWithContext(ctx context.Context, request *DeleteMPSTemplateRequest) (response *DeleteMPSTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteMPSTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteMPSTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteMPSTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteMPSTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -3965,6 +4725,74 @@ func (c *Client) DeleteProcedureTemplateWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDeleteProcedureTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteProcessImageAsyncTemplateRequest() (request *DeleteProcessImageAsyncTemplateRequest) {
+    request = &DeleteProcessImageAsyncTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteProcessImageAsyncTemplate")
+    
+    
+    return
+}
+
+func NewDeleteProcessImageAsyncTemplateResponse() (response *DeleteProcessImageAsyncTemplateResponse) {
+    response = &DeleteProcessImageAsyncTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteProcessImageAsyncTemplate
+// This API is used to delete a user-customized image async processing template.
+//
+// 
+//
+// Note: Template IDs below 10000 are system-preset templates and cannot be deleted.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteProcessImageAsyncTemplate(request *DeleteProcessImageAsyncTemplateRequest) (response *DeleteProcessImageAsyncTemplateResponse, err error) {
+    return c.DeleteProcessImageAsyncTemplateWithContext(context.Background(), request)
+}
+
+// DeleteProcessImageAsyncTemplate
+// This API is used to delete a user-customized image async processing template.
+//
+// 
+//
+// Note: Template IDs below 10000 are system-preset templates and cannot be deleted.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteProcessImageAsyncTemplateWithContext(ctx context.Context, request *DeleteProcessImageAsyncTemplateRequest) (response *DeleteProcessImageAsyncTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteProcessImageAsyncTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteProcessImageAsyncTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteProcessImageAsyncTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteProcessImageAsyncTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -4789,6 +5617,60 @@ func (c *Client) DescribeAdaptiveDynamicStreamingTemplatesWithContext(ctx contex
     return
 }
 
+func NewDescribeAigcAdvancedCustomElementsRequest() (request *DescribeAigcAdvancedCustomElementsRequest) {
+    request = &DescribeAigcAdvancedCustomElementsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeAigcAdvancedCustomElements")
+    
+    
+    return
+}
+
+func NewDescribeAigcAdvancedCustomElementsResponse() (response *DescribeAigcAdvancedCustomElementsResponse) {
+    response = &DescribeAigcAdvancedCustomElementsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAigcAdvancedCustomElements
+// This API is used to retrieve an advanced custom AIGC subject.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+func (c *Client) DescribeAigcAdvancedCustomElements(request *DescribeAigcAdvancedCustomElementsRequest) (response *DescribeAigcAdvancedCustomElementsResponse, err error) {
+    return c.DescribeAigcAdvancedCustomElementsWithContext(context.Background(), request)
+}
+
+// DescribeAigcAdvancedCustomElements
+// This API is used to retrieve an advanced custom AIGC subject.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+func (c *Client) DescribeAigcAdvancedCustomElementsWithContext(ctx context.Context, request *DescribeAigcAdvancedCustomElementsRequest) (response *DescribeAigcAdvancedCustomElementsResponse, err error) {
+    if request == nil {
+        request = NewDescribeAigcAdvancedCustomElementsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeAigcAdvancedCustomElements")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAigcAdvancedCustomElements require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAigcAdvancedCustomElementsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAigcApiTokensRequest() (request *DescribeAigcApiTokensRequest) {
     request = &DescribeAigcApiTokensRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4837,6 +5719,68 @@ func (c *Client) DescribeAigcApiTokensWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDescribeAigcApiTokensResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAigcFaceInfoRequest() (request *DescribeAigcFaceInfoRequest) {
+    request = &DescribeAigcFaceInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeAigcFaceInfo")
+    
+    
+    return
+}
+
+func NewDescribeAigcFaceInfoResponse() (response *DescribeAigcFaceInfoResponse) {
+    response = &DescribeAigcFaceInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAigcFaceInfo
+// This API is used to obtain AIGC face information. Note that calling this API will incur face recognition fees. Refer to the billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#96b3b59a-f9e1-49e9-966a-bedb70a4bf12).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeAigcFaceInfo(request *DescribeAigcFaceInfoRequest) (response *DescribeAigcFaceInfoResponse, err error) {
+    return c.DescribeAigcFaceInfoWithContext(context.Background(), request)
+}
+
+// DescribeAigcFaceInfo
+// This API is used to obtain AIGC face information. Note that calling this API will incur face recognition fees. Refer to the billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#96b3b59a-f9e1-49e9-966a-bedb70a4bf12).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeAigcFaceInfoWithContext(ctx context.Context, request *DescribeAigcFaceInfoRequest) (response *DescribeAigcFaceInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeAigcFaceInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeAigcFaceInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAigcFaceInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAigcFaceInfoResponse()
     err = c.Send(request, response)
     return
 }
@@ -5161,13 +6105,15 @@ func NewDescribeCDNStatDetailsResponse() (response *DescribeCDNStatDetailsRespon
 }
 
 // DescribeCDNStatDetails
-// This API is used to query CDN bandwidth, traffic, and other data of VOD domain names.
+// This API is used to query CDN bandwidth, traffic volume and stats of on-demand domain names.
 //
-// * The query period is up to 90 days.
+// * The start time and end time of the query should not exceed a 90-day span.
 //
-// * You can query data of different service regions.
+// * You can query data from different service regions.
 //
-// * You can query data of Chinese mainland by region and ISP.
+// Data support within the Chinese mainland allows querying stats by specified region and carrier.
+//
+// Playback statistics only target VOD domains (EdgeOne domain name distribution is not included).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -5187,13 +6133,15 @@ func (c *Client) DescribeCDNStatDetails(request *DescribeCDNStatDetailsRequest) 
 }
 
 // DescribeCDNStatDetails
-// This API is used to query CDN bandwidth, traffic, and other data of VOD domain names.
+// This API is used to query CDN bandwidth, traffic volume and stats of on-demand domain names.
 //
-// * The query period is up to 90 days.
+// * The start time and end time of the query should not exceed a 90-day span.
 //
-// * You can query data of different service regions.
+// * You can query data from different service regions.
 //
-// * You can query data of Chinese mainland by region and ISP.
+// Data support within the Chinese mainland allows querying stats by specified region and carrier.
+//
+// Playback statistics only target VOD domains (EdgeOne domain name distribution is not included).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -5245,15 +6193,17 @@ func NewDescribeCDNUsageDataResponse() (response *DescribeCDNUsageDataResponse) 
 }
 
 // DescribeCDNUsageData
-// This API is used to query the CDN statistics of VOD such as traffic and bandwidth.
+// This API is used to query traffic, bandwidth and stats of video-on-demand (VOD) CDN.
 //
-//    1. CDN usage data is retained on the system side for 13 months, while you can only query the CDN usage data for the most recent 365 days via the API.If you need to retrieve historical usage data beyond 365 days, please contact us.
+// 1. The system side reserves CDN usage data for 13 months. You can query the most recent 365 days of usage data through the API. If needed, contact us to call historical usage data exceeding 365 days.
 //
-//    2. The query time range cannot be more than 90 days.
+//    2. The query time span should not exceed 90 days.
 //
-//    3. The time granularity of usage data can be specified, including 5-minute, 1-hour, and 1-day.
+// 3. You can specify the time granularity of usage data, which supports 5 minutes, 1 hour, and 1 day.
 //
-//    4. Traffic refers to the total traffic within the query time granularity, while bandwidth the peak bandwidth.
+// 4. Traffic volume is the total traffic within the query time granularity, and bandwidth is the peak bandwidth within the query time granularity.
+//
+// 5. Playback statistics only target VOD domains (EdgeOne domain name distribution is not included).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5273,15 +6223,17 @@ func (c *Client) DescribeCDNUsageData(request *DescribeCDNUsageDataRequest) (res
 }
 
 // DescribeCDNUsageData
-// This API is used to query the CDN statistics of VOD such as traffic and bandwidth.
+// This API is used to query traffic, bandwidth and stats of video-on-demand (VOD) CDN.
 //
-//    1. CDN usage data is retained on the system side for 13 months, while you can only query the CDN usage data for the most recent 365 days via the API.If you need to retrieve historical usage data beyond 365 days, please contact us.
+// 1. The system side reserves CDN usage data for 13 months. You can query the most recent 365 days of usage data through the API. If needed, contact us to call historical usage data exceeding 365 days.
 //
-//    2. The query time range cannot be more than 90 days.
+//    2. The query time span should not exceed 90 days.
 //
-//    3. The time granularity of usage data can be specified, including 5-minute, 1-hour, and 1-day.
+// 3. You can specify the time granularity of usage data, which supports 5 minutes, 1 hour, and 1 day.
 //
-//    4. Traffic refers to the total traffic within the query time granularity, while bandwidth the peak bandwidth.
+// 4. Traffic volume is the total traffic within the query time granularity, and bandwidth is the peak bandwidth within the query time granularity.
+//
+// 5. Playback statistics only target VOD domains (EdgeOne domain name distribution is not included).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5333,13 +6285,13 @@ func NewDescribeCdnLogsResponse() (response *DescribeCdnLogsResponse) {
 }
 
 // DescribeCdnLogs
-// This API is used to query the download links of CDN access logs of a VOD domain name.
+// Query the download URL of the access log for the CDN (exclude EdgeOne origin back to VOD domain) of the on-demand domain name.
 //
-//     1. Only download links of CDN logs for the last 30 days can be queried.
+// 1. You can query the log download links for CDN in the most recent 30 days.
 //
-//     2. By default, CDN generates a log file every hour. If there is no CDN access for a certain hour, no log file will be generated for the hour.    
+// 2. By default, CDN creates a log file per hour. If no CDN access occurs in an hour, it does not generate a log file.    
 //
-//     3. A CDN log download link is valid for 24 hours.
+// 3. The CDN log download link is with a validity of 24 hours.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5354,13 +6306,13 @@ func (c *Client) DescribeCdnLogs(request *DescribeCdnLogsRequest) (response *Des
 }
 
 // DescribeCdnLogs
-// This API is used to query the download links of CDN access logs of a VOD domain name.
+// Query the download URL of the access log for the CDN (exclude EdgeOne origin back to VOD domain) of the on-demand domain name.
 //
-//     1. Only download links of CDN logs for the last 30 days can be queried.
+// 1. You can query the log download links for CDN in the most recent 30 days.
 //
-//     2. By default, CDN generates a log file every hour. If there is no CDN access for a certain hour, no log file will be generated for the hour.    
+// 2. By default, CDN creates a log file per hour. If no CDN access occurs in an hour, it does not generate a log file.    
 //
-//     3. A CDN log download link is valid for 24 hours.
+// 3. The CDN log download link is with a validity of 24 hours.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5593,21 +6545,23 @@ func NewDescribeDailyPlayStatFileListResponse() (response *DescribeDailyPlayStat
 }
 
 // DescribeDailyPlayStatFileList
-// This API is used to query the download links of playback statistics files.
+// This API is used to query the download address of the playback statistics file.
 //
-// * You can query the download links of playback statistics files in the past year. The start and end dates for query cannot be more than 90 days apart.
+// * You can query the download links for playback statistics from the past one year, with the time span between the start date and end date no more than 90 days.
 //
-// * Every day, VOD will analyze CDN request logs of the previous day and then generate a playback statistics file.
+// VOD analyzes and processes CDN request logs from the previous day to generate playback statistics files.
 //
-// * A playback statistics file includes playback times and traffic of media files.
+// The playback statistics file contains statistical information such as the number of plays and total traffic of media files.
 //
-// * Notes on playback times:
+// Play count statistics description:
 //
-//     1. HLS file: VOD counts playback times when M3U8 files are accessed, but not when TS files are accessed.
+// 1. HLS file: Count playback times when accessing M3U8 files; do not count playback times when accessing TS files.
 //
-//     2. Other files (MP4 files for example): VOD does not count playback times when the playback request carries the `range` parameter and the `start` parameter in `range` is not `0`. In other cases, VOD counts playback times.
+// 2. Other files (such as MP4 files): The number of plays is not counted when the playback request has a range parameter and the start parameter is not equal to 0. In other cases, the number of plays is counted.
 //
-// * Statistics on playback devices: VOD counts playback times on mobile clients when the playback request carries the `UserAgent` parameter which includes an identifier such as `Android` or `iPhone`. In other cases, VOD counts playback times on PC clients.
+// * Playback device statistics: If a playback request includes the UserAgent parameter and the UserAgent contains identification such as Android or iPhone, it will be counted as mobile playback. Otherwise, it will be counted as PC playback.
+//
+// Playback statistics only target VOD domains (EdgeOne domain name distribution is not included).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5619,21 +6573,23 @@ func (c *Client) DescribeDailyPlayStatFileList(request *DescribeDailyPlayStatFil
 }
 
 // DescribeDailyPlayStatFileList
-// This API is used to query the download links of playback statistics files.
+// This API is used to query the download address of the playback statistics file.
 //
-// * You can query the download links of playback statistics files in the past year. The start and end dates for query cannot be more than 90 days apart.
+// * You can query the download links for playback statistics from the past one year, with the time span between the start date and end date no more than 90 days.
 //
-// * Every day, VOD will analyze CDN request logs of the previous day and then generate a playback statistics file.
+// VOD analyzes and processes CDN request logs from the previous day to generate playback statistics files.
 //
-// * A playback statistics file includes playback times and traffic of media files.
+// The playback statistics file contains statistical information such as the number of plays and total traffic of media files.
 //
-// * Notes on playback times:
+// Play count statistics description:
 //
-//     1. HLS file: VOD counts playback times when M3U8 files are accessed, but not when TS files are accessed.
+// 1. HLS file: Count playback times when accessing M3U8 files; do not count playback times when accessing TS files.
 //
-//     2. Other files (MP4 files for example): VOD does not count playback times when the playback request carries the `range` parameter and the `start` parameter in `range` is not `0`. In other cases, VOD counts playback times.
+// 2. Other files (such as MP4 files): The number of plays is not counted when the playback request has a range parameter and the start parameter is not equal to 0. In other cases, the number of plays is counted.
 //
-// * Statistics on playback devices: VOD counts playback times on mobile clients when the playback request carries the `UserAgent` parameter which includes an identifier such as `Android` or `iPhone`. In other cases, VOD counts playback times on PC clients.
+// * Playback device statistics: If a playback request includes the UserAgent parameter and the UserAgent contains identification such as Android or iPhone, it will be counted as mobile playback. Otherwise, it will be counted as PC playback.
+//
+// Playback statistics only target VOD domains (EdgeOne domain name distribution is not included).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5783,7 +6739,15 @@ func NewDescribeEventConfigResponse() (response *DescribeEventConfigResponse) {
 }
 
 // DescribeEventConfig
-// Tencent Cloud VOD provides customers with services such as media upload, media management, and media processing. During or after the execution of these services, Tencent Cloud VOD also offers various corresponding event notifications to facilitate developers' awareness of the service processing status and to perform subsequent business operations. Developers can use this interface to query the current configuration of event notification reception methods, reception addresses, and which events have callback notification reception enabled.
+// Tencent Cloud Video on Demand (VOD) provides customers with services such as media upload, media management, and media processing. During the execution process or when execution ends, VOD also offers various event notifications to help developers monitor service processing status and proceed with next business operations.
+//
+// 
+//
+// Developers can use this interface to query the current configuration of event notification receiving method, recipient address and which events have enabled callback notification.
+//
+// 
+//
+// Default API request rate limit: 100 requests/second.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5796,7 +6760,15 @@ func (c *Client) DescribeEventConfig(request *DescribeEventConfigRequest) (respo
 }
 
 // DescribeEventConfig
-// Tencent Cloud VOD provides customers with services such as media upload, media management, and media processing. During or after the execution of these services, Tencent Cloud VOD also offers various corresponding event notifications to facilitate developers' awareness of the service processing status and to perform subsequent business operations. Developers can use this interface to query the current configuration of event notification reception methods, reception addresses, and which events have callback notification reception enabled.
+// Tencent Cloud Video on Demand (VOD) provides customers with services such as media upload, media management, and media processing. During the execution process or when execution ends, VOD also offers various event notifications to help developers monitor service processing status and proceed with next business operations.
+//
+// 
+//
+// Developers can use this interface to query the current configuration of event notification receiving method, recipient address and which events have enabled callback notification.
+//
+// 
+//
+// Default API request rate limit: 100 requests/second.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6345,6 +7317,64 @@ func (c *Client) DescribeLicenseUsageDataWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribeMPSTemplatesRequest() (request *DescribeMPSTemplatesRequest) {
+    request = &DescribeMPSTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeMPSTemplates")
+    
+    
+    return
+}
+
+func NewDescribeMPSTemplatesResponse() (response *DescribeMPSTemplatesResponse) {
+    response = &DescribeMPSTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMPSTemplates
+// Retrieve user-customized MPS task templates.
+//
+// When querying the template list, require MPS related parameters to be filled in MPSDescribeTemplateParams in JSON format. For task parameter configuration method, refer to MPS task template document description.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeMPSTemplates(request *DescribeMPSTemplatesRequest) (response *DescribeMPSTemplatesResponse, err error) {
+    return c.DescribeMPSTemplatesWithContext(context.Background(), request)
+}
+
+// DescribeMPSTemplates
+// Retrieve user-customized MPS task templates.
+//
+// When querying the template list, require MPS related parameters to be filled in MPSDescribeTemplateParams in JSON format. For task parameter configuration method, refer to MPS task template document description.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeMPSTemplatesWithContext(ctx context.Context, request *DescribeMPSTemplatesRequest) (response *DescribeMPSTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeMPSTemplatesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeMPSTemplates")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMPSTemplates require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMPSTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMediaInfosRequest() (request *DescribeMediaInfosRequest) {
     request = &DescribeMediaInfosRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6477,13 +7507,15 @@ func NewDescribeMediaPlayStatDetailsResponse() (response *DescribeMediaPlayStatD
 }
 
 // DescribeMediaPlayStatDetails
-// This API is used to query the playback statistics of a media file at the specified granularity.
+// This API is used to query playback statistics of media files by specified time granularity.
 //
-// * You can query playback statistics in the past year.
+// * Playback statistics from the past one year can be queried.
 //
-// * If the granularity is an hour, the start and end time cannot be more than seven days apart.
+// * The time granularity is hourly, and the span between end time and start time cannot exceed 7 days.
 //
-// * If the granularity is a day, the start and end time cannot be more than 90 days apart.
+// * The time granularity is day, and the span between the end time and start time is up to 90 days.
+//
+// Playback statistics only target VOD domains (EdgeOne domain name distribution is not included).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6497,13 +7529,15 @@ func (c *Client) DescribeMediaPlayStatDetails(request *DescribeMediaPlayStatDeta
 }
 
 // DescribeMediaPlayStatDetails
-// This API is used to query the playback statistics of a media file at the specified granularity.
+// This API is used to query playback statistics of media files by specified time granularity.
 //
-// * You can query playback statistics in the past year.
+// * Playback statistics from the past one year can be queried.
 //
-// * If the granularity is an hour, the start and end time cannot be more than seven days apart.
+// * The time granularity is hourly, and the span between end time and start time cannot exceed 7 days.
 //
-// * If the granularity is a day, the start and end time cannot be more than 90 days apart.
+// * The time granularity is day, and the span between the end time and start time is up to 90 days.
+//
+// Playback statistics only target VOD domains (EdgeOne domain name distribution is not included).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6549,11 +7583,11 @@ func NewDescribeMediaProcessUsageDataResponse() (response *DescribeMediaProcessU
 }
 
 // DescribeMediaProcessUsageData
-// This API is used to query the information of video processing usage within the specified time range.
+// This API is used to return the daily video processing usage information within the specified query time range.
 //
-//    1. Video processing usage data is retained on the system side for 13 months, and you may only query the usage data for the most recent 365 days via the API. If you need to retrieve historical usage data beyond 365 days, please contact us.
+// 1. The data system reserves video processing usage for 13 months. You can use the interface to query the most recent 365 days of usage data. If needed, contact us to call historical usage data exceeding 365 days.
 //
-//    2. The query time range cannot be more than 90 days.
+//    2. The query time span should not exceed 90 days.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6565,11 +7599,11 @@ func (c *Client) DescribeMediaProcessUsageData(request *DescribeMediaProcessUsag
 }
 
 // DescribeMediaProcessUsageData
-// This API is used to query the information of video processing usage within the specified time range.
+// This API is used to return the daily video processing usage information within the specified query time range.
 //
-//    1. Video processing usage data is retained on the system side for 13 months, and you may only query the usage data for the most recent 365 days via the API. If you need to retrieve historical usage data beyond 365 days, please contact us.
+// 1. The data system reserves video processing usage for 13 months. You can use the interface to query the most recent 365 days of usage data. If needed, contact us to call historical usage data exceeding 365 days.
 //
-//    2. The query time range cannot be more than 90 days.
+//    2. The query time span should not exceed 90 days.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6707,6 +7741,68 @@ func (c *Client) DescribeProcedureTemplatesWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewDescribeProcedureTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeProcessImageAsyncTemplatesRequest() (request *DescribeProcessImageAsyncTemplatesRequest) {
+    request = &DescribeProcessImageAsyncTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeProcessImageAsyncTemplates")
+    
+    
+    return
+}
+
+func NewDescribeProcessImageAsyncTemplatesResponse() (response *DescribeProcessImageAsyncTemplatesResponse) {
+    response = &DescribeProcessImageAsyncTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeProcessImageAsyncTemplates
+// This API is used to obtain the template details list of image asynchronous processing based on the Template Unique Identifier. The returned results include ALL eligible user-customized image asynchronous processing templates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeProcessImageAsyncTemplates(request *DescribeProcessImageAsyncTemplatesRequest) (response *DescribeProcessImageAsyncTemplatesResponse, err error) {
+    return c.DescribeProcessImageAsyncTemplatesWithContext(context.Background(), request)
+}
+
+// DescribeProcessImageAsyncTemplates
+// This API is used to obtain the template details list of image asynchronous processing based on the Template Unique Identifier. The returned results include ALL eligible user-customized image asynchronous processing templates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeProcessImageAsyncTemplatesWithContext(ctx context.Context, request *DescribeProcessImageAsyncTemplatesRequest) (response *DescribeProcessImageAsyncTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeProcessImageAsyncTemplatesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeProcessImageAsyncTemplates")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProcessImageAsyncTemplates require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeProcessImageAsyncTemplatesResponse()
     err = c.Send(request, response)
     return
 }
@@ -7213,13 +8309,13 @@ func NewDescribeStorageDetailsResponse() (response *DescribeStorageDetailsRespon
 }
 
 // DescribeStorageDetails
-// This API is used to query VOD storage usage in bytes within the query period.
+// This API is used to query the VOD storage space used within a specified time range. The measurement unit is byte.
 //
-//     1. Storage usage data is retained on the system side for 13 months, and you may only query the usage data for the most recent 365 days via the API. If you need to retrieve historical usage data beyond 365 days, please contact us.
+// 1. The system side reserves storage usage data for 13 months. You can be queried usage data within the most recent 365 days through the API. If needed to call historical usage data exceeding 365 days, contact us.
 //
-//     2. The query period is up to 90 days.
+// 2. The query time span should not exceed 90 days.
 //
-//     3. The query period at minute-level granularity is up to 7 days.
+// 3. The query span at a minute granularity should not exceed 7 days.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -7238,13 +8334,13 @@ func (c *Client) DescribeStorageDetails(request *DescribeStorageDetailsRequest) 
 }
 
 // DescribeStorageDetails
-// This API is used to query VOD storage usage in bytes within the query period.
+// This API is used to query the VOD storage space used within a specified time range. The measurement unit is byte.
 //
-//     1. Storage usage data is retained on the system side for 13 months, and you may only query the usage data for the most recent 365 days via the API. If you need to retrieve historical usage data beyond 365 days, please contact us.
+// 1. The system side reserves storage usage data for 13 months. You can be queried usage data within the most recent 365 days through the API. If needed to call historical usage data exceeding 365 days, contact us.
 //
-//     2. The query period is up to 90 days.
+// 2. The query time span should not exceed 90 days.
 //
-//     3. The query period at minute-level granularity is up to 7 days.
+// 3. The query span at a minute granularity should not exceed 7 days.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -8227,7 +9323,7 @@ func NewExtractCopyRightWatermarkResponse() (response *ExtractCopyRightWatermark
 }
 
 // ExtractCopyRightWatermark
-// Extract CopyRight Watermark.
+// If you need source tracing for piracy, refer to ghost watermark (https://www.tencentcloud.com/document/product/266/94228?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -8238,7 +9334,7 @@ func (c *Client) ExtractCopyRightWatermark(request *ExtractCopyRightWatermarkReq
 }
 
 // ExtractCopyRightWatermark
-// Extract CopyRight Watermark.
+// If you need source tracing for piracy, refer to ghost watermark (https://www.tencentcloud.com/document/product/266/94228?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -8281,7 +9377,7 @@ func NewExtractTraceWatermarkResponse() (response *ExtractTraceWatermarkResponse
 }
 
 // ExtractTraceWatermark
-// This API is used to extract the user ID of a user that distributed a video containing a digital watermark.
+// If you need source tracing for piracy, ghost watermark (https://www.tencentcloud.com/document/product/266/94228?from_cn_redirect=1) is recommended.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -8292,7 +9388,7 @@ func (c *Client) ExtractTraceWatermark(request *ExtractTraceWatermarkRequest) (r
 }
 
 // ExtractTraceWatermark
-// This API is used to extract the user ID of a user that distributed a video containing a digital watermark.
+// If you need source tracing for piracy, ghost watermark (https://www.tencentcloud.com/document/product/266/94228?from_cn_redirect=1) is recommended.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -8335,7 +9431,15 @@ func NewFastEditMediaResponse() (response *FastEditMediaResponse) {
 }
 
 // FastEditMedia
-// Implement quick concatenation and quick clipping for Tencent Cloud VOD's HLS videos to generate new media in HLS format. The video generated by quick concatenation or clipping will produce a new FileId and undergo solidification. After successful solidification, the new video file exists independently of the original input video and is not affected by deletions or other actions on the original video. <font color='red'>Note:</font> Enable the reception of persistence completed event notifications through the ModifyEvent config interface, and a PersistenceComplete type event notification will be received after successful solidification. Before receiving this event notification, operations such as deletion or cooling down of the original input video should not be performed, otherwise, abnormal playback may occur in the video generated by the concatenation and clipping.
+// This API is used to implement quick splice and quick editing for HLS videos in VOD, generating new media in HLS format.
+//
+// 
+//
+// Quickly splice or edit the generated video to generate a new FileId and perform solidification. After successful solidification, the new video file exists independent of the original input video and is not impacted by the deletion of the original video.
+//
+// 
+//
+// <font color='red'>Note:</font> Enable reception of editing solidification event notifications through the ModifyEventConfig API. After successful solidification, you will receive an event notification of PersistenceComplete type. Before receiving this event notification, you should not perform operations such as delete or downgrade on the original input video, otherwise exceptions may occur during playback of the generated video from splicing and clipping.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -8346,7 +9450,15 @@ func (c *Client) FastEditMedia(request *FastEditMediaRequest) (response *FastEdi
 }
 
 // FastEditMedia
-// Implement quick concatenation and quick clipping for Tencent Cloud VOD's HLS videos to generate new media in HLS format. The video generated by quick concatenation or clipping will produce a new FileId and undergo solidification. After successful solidification, the new video file exists independently of the original input video and is not affected by deletions or other actions on the original video. <font color='red'>Note:</font> Enable the reception of persistence completed event notifications through the ModifyEvent config interface, and a PersistenceComplete type event notification will be received after successful solidification. Before receiving this event notification, operations such as deletion or cooling down of the original input video should not be performed, otherwise, abnormal playback may occur in the video generated by the concatenation and clipping.
+// This API is used to implement quick splice and quick editing for HLS videos in VOD, generating new media in HLS format.
+//
+// 
+//
+// Quickly splice or edit the generated video to generate a new FileId and perform solidification. After successful solidification, the new video file exists independent of the original input video and is not impacted by the deletion of the original video.
+//
+// 
+//
+// <font color='red'>Note:</font> Enable reception of editing solidification event notifications through the ModifyEventConfig API. After successful solidification, you will receive an event notification of PersistenceComplete type. Before receiving this event notification, you should not perform operations such as delete or downgrade on the original input video, otherwise exceptions may occur during playback of the generated video from splicing and clipping.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -8389,9 +9501,11 @@ func NewForbidMediaDistributionResponse() (response *ForbidMediaDistributionResp
 }
 
 // ForbidMediaDistribution
-// * After a media file is forbidden, except previewing it in the VOD Console, accessing the URLs of its various resources (such as source file, output files, and screenshots) in other scenarios will return error 403.
+// After media blocking is enabled, all URLs for accessing various resources (raw file, transcoding output file, screenshot, etc.) will return 403 except for vod console preview.
 //
-//   It takes about 5-10 minutes for a forbidding/unblocking operation to take effect across the entire network.
+// The unblock operation takes effect across the entire network in approximately 5-10 minutes.
+//
+// * Note: Banned media can only operate standard storage and infrequent storage media. Infrequent storage media must be stored for at least 30 days. Early deletion or changing the storage class will still be billed for 30 days. If infrequent storage media is banned and its infrequent access storage period is less than 30 days, early deletion billing will occur. Meanwhile, the infrequent access storage duration of the banned media will restart from the current system time. If the media is deleted or its storage class is changed within 30 days, early deletion billing will also occur. For example: Media 001 has been in infrequent storage for 10 days. At this point, if 001 is banned, the infrequent storage billing will still be calculated for 30 days (early deletion billing duration is 30 - 10 = 20 days). After the ban, the infrequent access storage duration of 001 restarts. If 001 is deleted on the 5th day after the ban, the infrequent storage billing will also be calculated for 30 days (early deletion billing duration is 30 - 5 = 25 days). The actual infrequent access storage duration of 001 is 10 + 5 = 15 days, while the infrequent storage billing duration is 10 + 20 (early deletion billing) + 5 + 25 (early deletion billing) = 60 days.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -8408,9 +9522,11 @@ func (c *Client) ForbidMediaDistribution(request *ForbidMediaDistributionRequest
 }
 
 // ForbidMediaDistribution
-// * After a media file is forbidden, except previewing it in the VOD Console, accessing the URLs of its various resources (such as source file, output files, and screenshots) in other scenarios will return error 403.
+// After media blocking is enabled, all URLs for accessing various resources (raw file, transcoding output file, screenshot, etc.) will return 403 except for vod console preview.
 //
-//   It takes about 5-10 minutes for a forbidding/unblocking operation to take effect across the entire network.
+// The unblock operation takes effect across the entire network in approximately 5-10 minutes.
+//
+// * Note: Banned media can only operate standard storage and infrequent storage media. Infrequent storage media must be stored for at least 30 days. Early deletion or changing the storage class will still be billed for 30 days. If infrequent storage media is banned and its infrequent access storage period is less than 30 days, early deletion billing will occur. Meanwhile, the infrequent access storage duration of the banned media will restart from the current system time. If the media is deleted or its storage class is changed within 30 days, early deletion billing will also occur. For example: Media 001 has been in infrequent storage for 10 days. At this point, if 001 is banned, the infrequent storage billing will still be calculated for 30 days (early deletion billing duration is 30 - 10 = 20 days). After the ban, the infrequent access storage duration of 001 restarts. If 001 is deleted on the 5th day after the ban, the infrequent storage billing will also be calculated for 30 days (early deletion billing duration is 30 - 5 = 25 days). The actual infrequent access storage duration of 001 is 10 + 5 = 15 days, while the infrequent storage billing duration is 10 + 20 (early deletion billing) + 5 + 25 (early deletion billing) = 60 days.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -8615,6 +9731,64 @@ func (c *Client) InspectMediaQualityWithContext(ctx context.Context, request *In
     request.SetContext(ctx)
     
     response = NewInspectMediaQualityResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListFilesRequest() (request *ListFilesRequest) {
+    request = &ListFilesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ListFiles")
+    
+    
+    return
+}
+
+func NewListFilesResponse() (response *ListFilesResponse) {
+    response = &ListFilesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListFiles
+// This API is used to list stored file entries under a sub-app.
+//
+// 
+//
+// This API is available only in "FileID+Path mode".
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+func (c *Client) ListFiles(request *ListFilesRequest) (response *ListFilesResponse, err error) {
+    return c.ListFilesWithContext(context.Background(), request)
+}
+
+// ListFiles
+// This API is used to list stored file entries under a sub-app.
+//
+// 
+//
+// This API is available only in "FileID+Path mode".
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+func (c *Client) ListFilesWithContext(ctx context.Context, request *ListFilesRequest) (response *ListFilesResponse, err error) {
+    if request == nil {
+        request = NewListFilesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ListFiles")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListFiles require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListFilesResponse()
     err = c.Send(request, response)
     return
 }
@@ -9875,6 +11049,64 @@ func (c *Client) ModifyLLMComprehendTemplateWithContext(ctx context.Context, req
     return
 }
 
+func NewModifyMPSTemplateRequest() (request *ModifyMPSTemplateRequest) {
+    request = &ModifyMPSTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyMPSTemplate")
+    
+    
+    return
+}
+
+func NewModifyMPSTemplateResponse() (response *ModifyMPSTemplateResponse) {
+    response = &ModifyMPSTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyMPSTemplate
+// Modify a user-customized MPS task template.
+//
+// When modifying a template, require filling in MPS related parameters in JSON format into the MPSModifyTemplateParams parameter. For specific task parameter configuration methods, refer to the MPS task template document description.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyMPSTemplate(request *ModifyMPSTemplateRequest) (response *ModifyMPSTemplateResponse, err error) {
+    return c.ModifyMPSTemplateWithContext(context.Background(), request)
+}
+
+// ModifyMPSTemplate
+// Modify a user-customized MPS task template.
+//
+// When modifying a template, require filling in MPS related parameters in JSON format into the MPSModifyTemplateParams parameter. For specific task parameter configuration methods, refer to the MPS task template document description.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyMPSTemplateWithContext(ctx context.Context, request *ModifyMPSTemplateRequest) (response *ModifyMPSTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyMPSTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyMPSTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyMPSTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyMPSTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyMediaInfoRequest() (request *ModifyMediaInfoRequest) {
     request = &ModifyMediaInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -10149,6 +11381,86 @@ func (c *Client) ModifyPersonSampleWithContext(ctx context.Context, request *Mod
     request.SetContext(ctx)
     
     response = NewModifyPersonSampleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyProcessImageAsyncTemplateRequest() (request *ModifyProcessImageAsyncTemplateRequest) {
+    request = &ModifyProcessImageAsyncTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyProcessImageAsyncTemplate")
+    
+    
+    return
+}
+
+func NewModifyProcessImageAsyncTemplateResponse() (response *ModifyProcessImageAsyncTemplateResponse) {
+    response = &ModifyProcessImageAsyncTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyProcessImageAsyncTemplate
+// This API is used to modify a user-customized image asynchronous processing template.
+//
+// 
+//
+// Note: Template IDs below 10000 are system-preset templates and not allowed to be modified.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_CLASSIFCATIONCONFIGURE = "InvalidParameterValue.ClassifcationConfigure"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_COVERCONFIGURE = "InvalidParameterValue.CoverConfigure"
+//  INVALIDPARAMETERVALUE_FRAMETAGCONFIGURE = "InvalidParameterValue.FrameTagConfigure"
+//  INVALIDPARAMETERVALUE_HIGHLIGHTCONFIGURE = "InvalidParameterValue.HighlightConfigure"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_TAGCONFIGURE = "InvalidParameterValue.TagConfigure"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyProcessImageAsyncTemplate(request *ModifyProcessImageAsyncTemplateRequest) (response *ModifyProcessImageAsyncTemplateResponse, err error) {
+    return c.ModifyProcessImageAsyncTemplateWithContext(context.Background(), request)
+}
+
+// ModifyProcessImageAsyncTemplate
+// This API is used to modify a user-customized image asynchronous processing template.
+//
+// 
+//
+// Note: Template IDs below 10000 are system-preset templates and not allowed to be modified.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_CLASSIFCATIONCONFIGURE = "InvalidParameterValue.ClassifcationConfigure"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_COVERCONFIGURE = "InvalidParameterValue.CoverConfigure"
+//  INVALIDPARAMETERVALUE_FRAMETAGCONFIGURE = "InvalidParameterValue.FrameTagConfigure"
+//  INVALIDPARAMETERVALUE_HIGHLIGHTCONFIGURE = "InvalidParameterValue.HighlightConfigure"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_TAGCONFIGURE = "InvalidParameterValue.TagConfigure"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyProcessImageAsyncTemplateWithContext(ctx context.Context, request *ModifyProcessImageAsyncTemplateRequest) (response *ModifyProcessImageAsyncTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyProcessImageAsyncTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ModifyProcessImageAsyncTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyProcessImageAsyncTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyProcessImageAsyncTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -11123,6 +12435,74 @@ func (c *Client) ParseStreamingManifestWithContext(ctx context.Context, request 
     return
 }
 
+func NewProcessImageAsyncRequest() (request *ProcessImageAsyncRequest) {
+    request = &ProcessImageAsyncRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ProcessImageAsync")
+    
+    
+    return
+}
+
+func NewProcessImageAsyncResponse() (response *ProcessImageAsyncResponse) {
+    response = &ProcessImageAsyncResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ProcessImageAsync
+// This API is used to process images.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ProcessImageAsync(request *ProcessImageAsyncRequest) (response *ProcessImageAsyncResponse, err error) {
+    return c.ProcessImageAsyncWithContext(context.Background(), request)
+}
+
+// ProcessImageAsync
+// This API is used to process images.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ProcessImageAsyncWithContext(ctx context.Context, request *ProcessImageAsyncRequest) (response *ProcessImageAsyncResponse, err error) {
+    if request == nil {
+        request = NewProcessImageAsyncRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "ProcessImageAsync")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ProcessImageAsync require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewProcessImageAsyncResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewProcessMediaRequest() (request *ProcessMediaRequest) {
     request = &ProcessMediaRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -11143,31 +12523,31 @@ func NewProcessMediaResponse() (response *ProcessMediaResponse) {
 }
 
 // ProcessMedia
-// Initiate processing tasks for media file in VOD, including: 
+// This API is used to initiate processing tasks for audio-video media in on-demand video, with features including:
 //
-// 1. Video transcoding (with Watermark); 
+// 1. Video transcoding (watermarked);
 //
-// 2. Video to animated image; 
+// 2. Video-to-GIF.
 //
-// 3. Screencapturing the video at specified Time point;
+// 3. Screenshot taking at specified time points;
 //
-// 4. Sampled screenshot of the video;
+// 4. Sampled screenshot taking;
 //
-// 5. Generated Image sprite template from the video;
+// 5. Capture CSS sprites from video.
 //
-// 6. Generated a cover image from the video;
+// 6. Capture a cover image from the video.
 //
-// 7. Adaptive Bitrate Streaming for the video (with encryption); 
+// 7. Transcoding to adaptive bitrate streaming (and encrypting);
 //
-// 8. Content Moderation (offensive Information, unsafe Information, inappropriate Information), it is <font color=red>not recommended</font> to use this API, recommend using [Video moderation(ReviewAudioVideo)](https://www.tencentcloud.com/document/api/266/50634) or [Image moderation(ReviewImage)](https://www.tencentcloud.com/document/api/266/47138);
+// 8. Content review (offensive content, unsafe information, inappropriate information). <font color=red>Not recommended</font> to use this API for initiation. Recommended for use: [Audio-Video Moderation (ReviewAudioVideo)](https://www.tencentcloud.com/document/api/266/80283?from_cn_redirect=1) or [Image Moderation (ReviewImage)](https://www.tencentcloud.com/document/api/266/73217?from_cn_redirect=1).
 //
-// 9. Content analysis (tag, category, cover, frame-by-frame tag);
+// 9. Content analysis (tag, category, cover, frame tagging), HLS format not supported currently;
 //
-// 10. Content recognition (video intro and outro, face, Text, keyword, voice, Key object).
+// 10. Content recognition (video intro and outro, human face, full text, text keyword, full speech, speech keyword, object).
 //
 // 
 //
-// If using event notification, the event notification type is [task flow status change](https://www.tencentcloud.com/document/product/266/33953).
+// If you use event notification, the event notification type is task flow status change (https://www.tencentcloud.com/document/product/266/9636?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -11191,31 +12571,31 @@ func (c *Client) ProcessMedia(request *ProcessMediaRequest) (response *ProcessMe
 }
 
 // ProcessMedia
-// Initiate processing tasks for media file in VOD, including: 
+// This API is used to initiate processing tasks for audio-video media in on-demand video, with features including:
 //
-// 1. Video transcoding (with Watermark); 
+// 1. Video transcoding (watermarked);
 //
-// 2. Video to animated image; 
+// 2. Video-to-GIF.
 //
-// 3. Screencapturing the video at specified Time point;
+// 3. Screenshot taking at specified time points;
 //
-// 4. Sampled screenshot of the video;
+// 4. Sampled screenshot taking;
 //
-// 5. Generated Image sprite template from the video;
+// 5. Capture CSS sprites from video.
 //
-// 6. Generated a cover image from the video;
+// 6. Capture a cover image from the video.
 //
-// 7. Adaptive Bitrate Streaming for the video (with encryption); 
+// 7. Transcoding to adaptive bitrate streaming (and encrypting);
 //
-// 8. Content Moderation (offensive Information, unsafe Information, inappropriate Information), it is <font color=red>not recommended</font> to use this API, recommend using [Video moderation(ReviewAudioVideo)](https://www.tencentcloud.com/document/api/266/50634) or [Image moderation(ReviewImage)](https://www.tencentcloud.com/document/api/266/47138);
+// 8. Content review (offensive content, unsafe information, inappropriate information). <font color=red>Not recommended</font> to use this API for initiation. Recommended for use: [Audio-Video Moderation (ReviewAudioVideo)](https://www.tencentcloud.com/document/api/266/80283?from_cn_redirect=1) or [Image Moderation (ReviewImage)](https://www.tencentcloud.com/document/api/266/73217?from_cn_redirect=1).
 //
-// 9. Content analysis (tag, category, cover, frame-by-frame tag);
+// 9. Content analysis (tag, category, cover, frame tagging), HLS format not supported currently;
 //
-// 10. Content recognition (video intro and outro, face, Text, keyword, voice, Key object).
+// 10. Content recognition (video intro and outro, human face, full text, text keyword, full speech, speech keyword, object).
 //
 // 
 //
-// If using event notification, the event notification type is [task flow status change](https://www.tencentcloud.com/document/product/266/33953).
+// If you use event notification, the event notification type is task flow status change (https://www.tencentcloud.com/document/product/266/9636?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -12711,55 +14091,51 @@ func NewSimpleHlsClipResponse() (response *SimpleHlsClipResponse) {
 }
 
 // SimpleHlsClip
-// This API is used to cut a clip from an HLS video to generate a new video (in HLS format). You can either share the new video or save it.
+// This API is used to crop an HLS video by time period and generate a new real-time HLS video. Developers can share it immediately or preserve it for long-term.
 //
 // 
 //
-// VOD supports two types of clipping:
+// Tencent Cloud Video on Demand (VOD) supports two editing modes:
 //
-// - Clipping for persistent storage: The video clip is saved as an independent video file with its own `FileId`.
+// -Edit and save: Save the edited video as an independent video with a standalone FileId. Suitable for scenarios requiring long-term preservation of highlight clips.
 //
-// - Clipping for temporary sharing: The video clip shares `FileId` with the input file.
-//
-// 
-//
-// Notes:
-//
-// - Clipping is based on the M3U8 file that contains a list of TS segments, so the smallest clipping unit is one TS segment instead of a second or less.
+// -Editing is not solidified: The video obtained by editing is attached to the input file with no standalone FileId. It is suitable for scenarios where highlight clips are temporarily shared.
 //
 // 
 //
-// 
-//
-// ### Clipping for persistent storage
-//
-// In this mode, a video clip is saved as an independent video file with a `FileId`, and its lifecycle is not subject to the input video. Even if the source video is deleted, the video clip still exists. Moreover, the video clip can be transcoded, published on WeChat, and processed in other ways.
+// This API is used to crop based on input m3u8 files, with a minimum editing precision of a ts slice. Second-level or more precise editing precision cannot be achieved.
 //
 // 
 //
-// Suppose you recorded a two-hour football match. You want to save the full video for only two months to save costs, but want to save the highlights for a longer time and perhaps transcode and publish the highlight clip to WeChat. In this case, you can choose clipping for persistent storage.
+// ### Edit solidification
+//
+// Video clipping persistence refers to saving an edited video as an independent video (with an independent FileId). Its lifecycle is not subject to the original input video (even if the original input video is deleted, the clipping result will not have any impact). It can also be post-processed, such as transcoding or publishing on WeChat.
 //
 // 
 //
-// The advantage of clipping for persistent storage is that the video clip has a lifecycle independent of the input video and can be managed independently and stored persistently.
+// For example, a complete football match may last for over 2 hours. To save costs, the customer can store the original video for 2 months, but may choose to store the highlight reel for longer. You can also transcode the highlight reel, publish it on WeChat, and perform additional on-demand operations. In this case, you can choose the edit and save solution.
 //
 // 
 //
-// <font color='red'>Notice:</font> If solidification is specified during clipping, enable the reception of persistence completed event notifications through the ModifyEventConfig interface. After successful solidification, an event notification of type PersistenceComplete will be received. Before receiving this event notification, operations such as deletion or cooling down of live recording videos should not be performed, otherwise, abnormal playback may occur in the video generated by the clipping.
+// The advantage of edit is that its lifecycle is independent of the original input video, allowing separate management and long-term preservation.
 //
 // 
 //
-// ### Clipping for temporary sharing
-//
-// The video clip (an M3U8 file) shares the same TS segments with the input video instead of being an independent video. It only has a playback URL but has no `FileId`, and its validity period is the same as that of the input video. Once the input video is deleted, the video clip cannot be played back.
+// <font color='red'>Note:</font> If you specify solidification when editing, enable reception of editing solidification event notifications via the ModifyEventConfig API. After successful solidification, you will receive a PersistenceComplete event notification. Before receiving this event notification, you should not delete or downgrade the original input video, otherwise exceptions may occur during playback of the generated video.
 //
 // 
 //
-// Because the video clip is not an independent video, it's not displayed as a media asset in the VOD console, and cannot be transcoded or published to WeChat.
+// ### Editing is not solidified
+//
+// Non-solidified editing means the result of editing (m3u8 file) shares the same TS segments with the original input video. The generated video is not an independent and complete video (it has no standalone FileId, only a playback URL), and its valid period is consistent with that of the original input full video. Once the original input video is deleted, it will lead to the video clip being unable to play.
 //
 // 
 //
-// Clipping for temporary sharing is lightweight and incurs no additional storage fees. However, the video clip has the same lifecycle as the source recording video and cannot be transcoded or processed in other ways.
+// Editing is not solidified. Since the clipping result is not an independent video, it will not be included in video management of on-demand media assets (for example, the total number of videos in the console will not count this video clip) and cannot be targeted for any video processing operations such as transcoding or publishing on WeChat.
+//
+// 
+//
+// The advantage of editing not being solidified is that the editing operation is relatively lightweight and will not generate additional storage overhead. However, the shortcoming is that its lifecycle is the same as the original recorded video, and it is unable to further transcode or perform video processing.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -12781,55 +14157,51 @@ func (c *Client) SimpleHlsClip(request *SimpleHlsClipRequest) (response *SimpleH
 }
 
 // SimpleHlsClip
-// This API is used to cut a clip from an HLS video to generate a new video (in HLS format). You can either share the new video or save it.
+// This API is used to crop an HLS video by time period and generate a new real-time HLS video. Developers can share it immediately or preserve it for long-term.
 //
 // 
 //
-// VOD supports two types of clipping:
+// Tencent Cloud Video on Demand (VOD) supports two editing modes:
 //
-// - Clipping for persistent storage: The video clip is saved as an independent video file with its own `FileId`.
+// -Edit and save: Save the edited video as an independent video with a standalone FileId. Suitable for scenarios requiring long-term preservation of highlight clips.
 //
-// - Clipping for temporary sharing: The video clip shares `FileId` with the input file.
-//
-// 
-//
-// Notes:
-//
-// - Clipping is based on the M3U8 file that contains a list of TS segments, so the smallest clipping unit is one TS segment instead of a second or less.
+// -Editing is not solidified: The video obtained by editing is attached to the input file with no standalone FileId. It is suitable for scenarios where highlight clips are temporarily shared.
 //
 // 
 //
-// 
-//
-// ### Clipping for persistent storage
-//
-// In this mode, a video clip is saved as an independent video file with a `FileId`, and its lifecycle is not subject to the input video. Even if the source video is deleted, the video clip still exists. Moreover, the video clip can be transcoded, published on WeChat, and processed in other ways.
+// This API is used to crop based on input m3u8 files, with a minimum editing precision of a ts slice. Second-level or more precise editing precision cannot be achieved.
 //
 // 
 //
-// Suppose you recorded a two-hour football match. You want to save the full video for only two months to save costs, but want to save the highlights for a longer time and perhaps transcode and publish the highlight clip to WeChat. In this case, you can choose clipping for persistent storage.
+// ### Edit solidification
+//
+// Video clipping persistence refers to saving an edited video as an independent video (with an independent FileId). Its lifecycle is not subject to the original input video (even if the original input video is deleted, the clipping result will not have any impact). It can also be post-processed, such as transcoding or publishing on WeChat.
 //
 // 
 //
-// The advantage of clipping for persistent storage is that the video clip has a lifecycle independent of the input video and can be managed independently and stored persistently.
+// For example, a complete football match may last for over 2 hours. To save costs, the customer can store the original video for 2 months, but may choose to store the highlight reel for longer. You can also transcode the highlight reel, publish it on WeChat, and perform additional on-demand operations. In this case, you can choose the edit and save solution.
 //
 // 
 //
-// <font color='red'>Notice:</font> If solidification is specified during clipping, enable the reception of persistence completed event notifications through the ModifyEventConfig interface. After successful solidification, an event notification of type PersistenceComplete will be received. Before receiving this event notification, operations such as deletion or cooling down of live recording videos should not be performed, otherwise, abnormal playback may occur in the video generated by the clipping.
+// The advantage of edit is that its lifecycle is independent of the original input video, allowing separate management and long-term preservation.
 //
 // 
 //
-// ### Clipping for temporary sharing
-//
-// The video clip (an M3U8 file) shares the same TS segments with the input video instead of being an independent video. It only has a playback URL but has no `FileId`, and its validity period is the same as that of the input video. Once the input video is deleted, the video clip cannot be played back.
+// <font color='red'>Note:</font> If you specify solidification when editing, enable reception of editing solidification event notifications via the ModifyEventConfig API. After successful solidification, you will receive a PersistenceComplete event notification. Before receiving this event notification, you should not delete or downgrade the original input video, otherwise exceptions may occur during playback of the generated video.
 //
 // 
 //
-// Because the video clip is not an independent video, it's not displayed as a media asset in the VOD console, and cannot be transcoded or published to WeChat.
+// ### Editing is not solidified
+//
+// Non-solidified editing means the result of editing (m3u8 file) shares the same TS segments with the original input video. The generated video is not an independent and complete video (it has no standalone FileId, only a playback URL), and its valid period is consistent with that of the original input full video. Once the original input video is deleted, it will lead to the video clip being unable to play.
 //
 // 
 //
-// Clipping for temporary sharing is lightweight and incurs no additional storage fees. However, the video clip has the same lifecycle as the source recording video and cannot be transcoded or processed in other ways.
+// Editing is not solidified. Since the clipping result is not an independent video, it will not be included in video management of on-demand media assets (for example, the total number of videos in the console will not count this video clip) and cannot be targeted for any video processing operations such as transcoding or publishing on WeChat.
+//
+// 
+//
+// The advantage of editing not being solidified is that the editing operation is relatively lightweight and will not generate additional storage overhead. However, the shortcoming is that its lifecycle is the same as the original recorded video, and it is unable to further transcode or perform video processing.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

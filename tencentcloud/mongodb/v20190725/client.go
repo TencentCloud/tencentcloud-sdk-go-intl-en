@@ -689,6 +689,60 @@ func (c *Client) DeleteLogDownloadTaskWithContext(ctx context.Context, request *
     return
 }
 
+func NewDescribeAccountUsersRequest() (request *DescribeAccountUsersRequest) {
+    request = &DescribeAccountUsersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeAccountUsers")
+    
+    
+    return
+}
+
+func NewDescribeAccountUsersResponse() (response *DescribeAccountUsersResponse) {
+    response = &DescribeAccountUsersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAccountUsers
+// This API is used to obtain all accounts of the current instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+func (c *Client) DescribeAccountUsers(request *DescribeAccountUsersRequest) (response *DescribeAccountUsersResponse, err error) {
+    return c.DescribeAccountUsersWithContext(context.Background(), request)
+}
+
+// DescribeAccountUsers
+// This API is used to obtain all accounts of the current instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+func (c *Client) DescribeAccountUsersWithContext(ctx context.Context, request *DescribeAccountUsersRequest) (response *DescribeAccountUsersResponse, err error) {
+    if request == nil {
+        request = NewDescribeAccountUsersRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeAccountUsers")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAccountUsers require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAccountUsersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAsyncRequestInfoRequest() (request *DescribeAsyncRequestInfoRequest) {
     request = &DescribeAsyncRequestInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},

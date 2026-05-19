@@ -101,7 +101,7 @@ const (
 	// Internal error: failed to upload watermark image.
 	INTERNALERROR_UPLOADWATERMARKERROR = "InternalError.UploadWatermarkError"
 
-	// Invalid parameter.
+	// Parameter error.
 	INVALIDPARAMETER = "InvalidParameter"
 
 	// The task flow template name already exists.
@@ -119,7 +119,10 @@ const (
 	// Incorrect parameter value: storage region.
 	INVALIDPARAMETER_STORAGEREGION = "InvalidParameter.StorageRegion"
 
-	// Incorrect parameter value.
+	// InvalidParameter.ViolationContent
+	INVALIDPARAMETER_VIOLATIONCONTENT = "InvalidParameter.ViolationContent"
+
+	// Parameter value error.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
 
 	// Incorrect parameter value: `AddKeyFrameDescs` conflicts with `ClearKeyFrameDescs`.
@@ -143,7 +146,7 @@ const (
 	// Incorrect parameter value: `Definition` for AI-based recognition.
 	INVALIDPARAMETERVALUE_AIRECOGNITIONTASKDEFINITION = "InvalidParameterValue.AiRecognitionTaskDefinition"
 
-	// 
+	// No on-demand service is enabled.
 	INVALIDPARAMETERVALUE_APPID = "InvalidParameterValue.AppId"
 
 	// Invalid `Area`.
@@ -293,7 +296,7 @@ const (
 	// The `FileIds` array is empty.
 	INVALIDPARAMETERVALUE_FILEIDSEMPTY = "InvalidParameterValue.FileIdsEmpty"
 
-	// 
+	// FileIds array exceeds the limit
 	INVALIDPARAMETERVALUE_FILEIDSOVERLIMIT = "InvalidParameterValue.FileIdsOverLimit"
 
 	// Incorrect parameter value: too many `FileId`
@@ -353,7 +356,7 @@ const (
 	// Invalid `OperationType`.
 	INVALIDPARAMETERVALUE_INVALIDOPERATIONTYPE = "InvalidParameterValue.InvalidOperationType"
 
-	// Invalid parameter value: incorrect hard-coded parameter.
+	// Parameter value error: incorrectly fixed parameters.
 	INVALIDPARAMETERVALUE_ISPERSISTENCE = "InvalidParameterValue.IsPersistence"
 
 	// Invalid `Isps`.
@@ -422,7 +425,7 @@ const (
 	// Parameter error: Current storage class error.
 	INVALIDPARAMETERVALUE_ORIGINALSTORAGECLASS = "InvalidParameterValue.OriginalStorageClass"
 
-	// Invalid parameter value: incorrect output media file type.
+	// Parameter value error: Incorrect output media file type.
 	INVALIDPARAMETERVALUE_OUTPUTMEDIATYPE = "InvalidParameterValue.OutputMediaType"
 
 	// Incorrect parameter value: invalid `ParentId`
@@ -431,10 +434,10 @@ const (
 	// Incorrect parameter value: the face image format is incorrect.
 	INVALIDPARAMETERVALUE_PICFORMATERROR = "InvalidParameterValue.PicFormatError"
 
-	// Invalid parameter value: incorrect precision parameter.
+	// Parameter value error: incorrect precision parameter.
 	INVALIDPARAMETERVALUE_PRECISION = "InvalidParameterValue.Precision"
 
-	// Invalid parameter value: incorrect Procedure.
+	// Parameter value error: Incorrect Procedure.
 	INVALIDPARAMETERVALUE_PROCEDURE = "InvalidParameterValue.Procedure"
 
 	// The task flow template name is invalid.
@@ -491,7 +494,7 @@ const (
 	// Incorrect parameter value: SampleType.
 	INVALIDPARAMETERVALUE_SAMPLETYPE = "InvalidParameterValue.SampleType"
 
-	// 
+	// Invalid scenario type parameter value.
 	INVALIDPARAMETERVALUE_SCENARIOTYPE = "InvalidParameterValue.ScenarioType"
 
 	// Incorrect parameter value: the value of the `ScreenshotInterval` parameter is invalid.
@@ -656,7 +659,7 @@ const (
 	// Playlist length too large.
 	LIMITEXCEEDED_PLAYLIST = "LimitExceeded.PlayList"
 
-	// 
+	// The playlist list length exceeds the limit.
 	LIMITEXCEEDED_ROUNDPLAYLIST = "LimitExceeded.RoundPlaylist"
 
 	// Exceeds broadcast playlist total limit.
