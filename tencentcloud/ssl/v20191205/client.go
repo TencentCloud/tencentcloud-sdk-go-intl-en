@@ -78,6 +78,7 @@ func NewApplyCertificateResponse() (response *ApplyCertificateResponse) {
 //  FAILEDOPERATION_CERTIFICATEMISMATCH = "FailedOperation.CertificateMismatch"
 //  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
 //  FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
+//  FAILEDOPERATION_GENCSRFAIL = "FailedOperation.GenCSRFail"
 //  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
 //  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
 //  FAILEDOPERATION_MAINDOMAINCERTIFICATECOUNTLIMIT = "FailedOperation.MainDomainCertificateCountLimit"
@@ -92,6 +93,8 @@ func NewApplyCertificateResponse() (response *ApplyCertificateResponse) {
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PACKAGEIDSINVALID = "InvalidParameter.PackageIdsInvalid"
+//  INVALIDPARAMETERVALUE_CERTIFICATEDOMAINMAXLENGTHINVALID = "InvalidParameterValue.CertificateDomainMaxLengthInvalid"
+//  INVALIDPARAMETERVALUE_CERTIFICATEEMAILPARSEINVALID = "InvalidParameterValue.CertificateEmailParseInvalid"
 func (c *Client) ApplyCertificate(request *ApplyCertificateRequest) (response *ApplyCertificateResponse, err error) {
     return c.ApplyCertificateWithContext(context.Background(), request)
 }
@@ -110,6 +113,7 @@ func (c *Client) ApplyCertificate(request *ApplyCertificateRequest) (response *A
 //  FAILEDOPERATION_CERTIFICATEMISMATCH = "FailedOperation.CertificateMismatch"
 //  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
 //  FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
+//  FAILEDOPERATION_GENCSRFAIL = "FailedOperation.GenCSRFail"
 //  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
 //  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
 //  FAILEDOPERATION_MAINDOMAINCERTIFICATECOUNTLIMIT = "FailedOperation.MainDomainCertificateCountLimit"
@@ -124,6 +128,8 @@ func (c *Client) ApplyCertificate(request *ApplyCertificateRequest) (response *A
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PACKAGEIDSINVALID = "InvalidParameter.PackageIdsInvalid"
+//  INVALIDPARAMETERVALUE_CERTIFICATEDOMAINMAXLENGTHINVALID = "InvalidParameterValue.CertificateDomainMaxLengthInvalid"
+//  INVALIDPARAMETERVALUE_CERTIFICATEEMAILPARSEINVALID = "InvalidParameterValue.CertificateEmailParseInvalid"
 func (c *Client) ApplyCertificateWithContext(ctx context.Context, request *ApplyCertificateRequest) (response *ApplyCertificateResponse, err error) {
     if request == nil {
         request = NewApplyCertificateRequest()
@@ -222,6 +228,8 @@ func NewCancelAuditCertificateResponse() (response *CancelAuditCertificateRespon
 // This API is used to cancel certificate review.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CANCELAUDITCERTIFICATEFAILED = "FailedOperation.CancelAuditCertificateFailed"
+//  FAILEDOPERATION_CERTIFICATECANCELFAILEDMULTI = "FailedOperation.CertificateCancelFailedMulti"
 //  FAILEDOPERATION_CERTIFICATENOTFOUNDORCANTCANCEL = "FailedOperation.CertificateNotFoundOrCantCancel"
 func (c *Client) CancelAuditCertificate(request *CancelAuditCertificateRequest) (response *CancelAuditCertificateResponse, err error) {
     return c.CancelAuditCertificateWithContext(context.Background(), request)
@@ -231,6 +239,8 @@ func (c *Client) CancelAuditCertificate(request *CancelAuditCertificateRequest) 
 // This API is used to cancel certificate review.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CANCELAUDITCERTIFICATEFAILED = "FailedOperation.CancelAuditCertificateFailed"
+//  FAILEDOPERATION_CERTIFICATECANCELFAILEDMULTI = "FailedOperation.CertificateCancelFailedMulti"
 //  FAILEDOPERATION_CERTIFICATENOTFOUNDORCANTCANCEL = "FailedOperation.CertificateNotFoundOrCantCancel"
 func (c *Client) CancelAuditCertificateWithContext(ctx context.Context, request *CancelAuditCertificateRequest) (response *CancelAuditCertificateResponse, err error) {
     if request == nil {
@@ -463,6 +473,64 @@ func (c *Client) CertificateOrderSubmitWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewCertificateOrderSubmitResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCheckCertificateDomainVerificationRequest() (request *CheckCertificateDomainVerificationRequest) {
+    request = &CheckCertificateDomainVerificationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "CheckCertificateDomainVerification")
+    
+    
+    return
+}
+
+func NewCheckCertificateDomainVerificationResponse() (response *CheckCertificateDomainVerificationResponse) {
+    response = &CheckCertificateDomainVerificationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CheckCertificateDomainVerification
+// Check the domain validation result of the cert
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CANNOTGETORDER = "FailedOperation.CannotGetOrder"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_CERTIFICATESTATUSNOTALLOWVERIFY = "FailedOperation.CertificateStatusNotAllowVerify"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+func (c *Client) CheckCertificateDomainVerification(request *CheckCertificateDomainVerificationRequest) (response *CheckCertificateDomainVerificationResponse, err error) {
+    return c.CheckCertificateDomainVerificationWithContext(context.Background(), request)
+}
+
+// CheckCertificateDomainVerification
+// Check the domain validation result of the cert
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CANNOTGETORDER = "FailedOperation.CannotGetOrder"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_CERTIFICATESTATUSNOTALLOWVERIFY = "FailedOperation.CertificateStatusNotAllowVerify"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+func (c *Client) CheckCertificateDomainVerificationWithContext(ctx context.Context, request *CheckCertificateDomainVerificationRequest) (response *CheckCertificateDomainVerificationResponse, err error) {
+    if request == nil {
+        request = NewCheckCertificateDomainVerificationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ssl", APIVersion, "CheckCertificateDomainVerification")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CheckCertificateDomainVerification require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCheckCertificateDomainVerificationResponse()
     err = c.Send(request, response)
     return
 }
@@ -1009,7 +1077,7 @@ func NewDescribeCertificateBindResourceTaskDetailResponse() (response *DescribeC
 }
 
 // DescribeCertificateBindResourceTaskDetail
-// This API is used to query the task result of CreateCertificateBindResourceSyncTask, returning the asynchronous task result of the certificate associated with cloud resources, supporting the following cloud resources: clb, cdn, waf, live, vod, ddos, tke, apigateway, tcb, teo (edgeOne), cos.
+// Query the task result of CreateCertificateBindResourceSyncTask, return the asynchronous task result of binding cloud resources with the certificate, support the following cloud resources: clb, cdn, waf, live, vod, ddos, tke, apigateway, tcb, teo (edgeOne), cos, gaap, mqtt, scf, tdmq.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1020,7 +1088,7 @@ func (c *Client) DescribeCertificateBindResourceTaskDetail(request *DescribeCert
 }
 
 // DescribeCertificateBindResourceTaskDetail
-// This API is used to query the task result of CreateCertificateBindResourceSyncTask, returning the asynchronous task result of the certificate associated with cloud resources, supporting the following cloud resources: clb, cdn, waf, live, vod, ddos, tke, apigateway, tcb, teo (edgeOne), cos.
+// Query the task result of CreateCertificateBindResourceSyncTask, return the asynchronous task result of binding cloud resources with the certificate, support the following cloud resources: clb, cdn, waf, live, vod, ddos, tke, apigateway, tcb, teo (edgeOne), cos, gaap, mqtt, scf, tdmq.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1121,6 +1189,7 @@ func NewDescribeCertificateDetailResponse() (response *DescribeCertificateDetail
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
 //  FAILEDOPERATION_CANNOTGETORDER = "FailedOperation.CannotGetOrder"
+//  FAILEDOPERATION_CERTIFICATECSRPARSEFAILED = "FailedOperation.CertificateCsrParseFailed"
 //  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
 //  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
 //  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
@@ -1141,6 +1210,7 @@ func (c *Client) DescribeCertificateDetail(request *DescribeCertificateDetailReq
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
 //  FAILEDOPERATION_CANNOTGETORDER = "FailedOperation.CannotGetOrder"
+//  FAILEDOPERATION_CERTIFICATECSRPARSEFAILED = "FailedOperation.CertificateCsrParseFailed"
 //  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
 //  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
 //  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
@@ -2213,6 +2283,76 @@ func (c *Client) ReplaceCertificateWithContext(ctx context.Context, request *Rep
     return
 }
 
+func NewRevokeCertificateRequest() (request *RevokeCertificateRequest) {
+    request = &RevokeCertificateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "RevokeCertificate")
+    
+    
+    return
+}
+
+func NewRevokeCertificateResponse() (response *RevokeCertificateResponse) {
+    response = &RevokeCertificateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RevokeCertificate
+// This API is used to revoke certificate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CANNOTGETORDER = "FailedOperation.CannotGetOrder"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_INVALIDCERTIFICATESOURCE = "FailedOperation.InvalidCertificateSource"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  FAILEDOPERATION_REVOKEFAILED = "FailedOperation.RevokeFailed"
+//  FAILEDOPERATION_REVOKERESOURCEFAILED = "FailedOperation.RevokeResourceFailed"
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
+func (c *Client) RevokeCertificate(request *RevokeCertificateRequest) (response *RevokeCertificateResponse, err error) {
+    return c.RevokeCertificateWithContext(context.Background(), request)
+}
+
+// RevokeCertificate
+// This API is used to revoke certificate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CANNOTGETORDER = "FailedOperation.CannotGetOrder"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_INVALIDCERTIFICATESOURCE = "FailedOperation.InvalidCertificateSource"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  FAILEDOPERATION_REVOKEFAILED = "FailedOperation.RevokeFailed"
+//  FAILEDOPERATION_REVOKERESOURCEFAILED = "FailedOperation.RevokeResourceFailed"
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
+func (c *Client) RevokeCertificateWithContext(ctx context.Context, request *RevokeCertificateRequest) (response *RevokeCertificateResponse, err error) {
+    if request == nil {
+        request = NewRevokeCertificateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ssl", APIVersion, "RevokeCertificate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RevokeCertificate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRevokeCertificateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSubmitCertificateInformationRequest() (request *SubmitCertificateInformationRequest) {
     request = &SubmitCertificateInformationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2548,6 +2688,7 @@ func NewUploadCertificateResponse() (response *UploadCertificateResponse) {
 //  FAILEDOPERATION_CANNOTBEDELETEDWITHINHOUR = "FailedOperation.CannotBeDeletedWithinHour"
 //  FAILEDOPERATION_CANNOTGETORDER = "FailedOperation.CannotGetOrder"
 //  FAILEDOPERATION_CERTIFICATECAERROR = "FailedOperation.CertificateCaError"
+//  FAILEDOPERATION_CERTIFICATECHAINERROR = "FailedOperation.CertificateChainError"
 //  FAILEDOPERATION_CERTIFICATEENCRYPTINVALID = "FailedOperation.CertificateEncryptInvalid"
 //  FAILEDOPERATION_CERTIFICATEEXISTS = "FailedOperation.CertificateExists"
 //  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
@@ -2585,6 +2726,7 @@ func (c *Client) UploadCertificate(request *UploadCertificateRequest) (response 
 //  FAILEDOPERATION_CANNOTBEDELETEDWITHINHOUR = "FailedOperation.CannotBeDeletedWithinHour"
 //  FAILEDOPERATION_CANNOTGETORDER = "FailedOperation.CannotGetOrder"
 //  FAILEDOPERATION_CERTIFICATECAERROR = "FailedOperation.CertificateCaError"
+//  FAILEDOPERATION_CERTIFICATECHAINERROR = "FailedOperation.CertificateChainError"
 //  FAILEDOPERATION_CERTIFICATEENCRYPTINVALID = "FailedOperation.CertificateEncryptInvalid"
 //  FAILEDOPERATION_CERTIFICATEEXISTS = "FailedOperation.CertificateExists"
 //  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
@@ -2654,6 +2796,8 @@ func NewUploadConfirmLetterResponse() (response *UploadConfirmLetterResponse) {
 //  FAILEDOPERATION_INVALIDCONFIRMLETTERFORMAT = "FailedOperation.InvalidConfirmLetterFormat"
 //  FAILEDOPERATION_INVALIDCONFIRMLETTERFORMATWOSIGN = "FailedOperation.InvalidConfirmLetterFormatWosign"
 //  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  FAILEDOPERATION_UPLOADCONFIRMCERTIFICATENOTSUPPORT = "FailedOperation.UploadConfirmCertificateNotSupport"
+//  FAILEDOPERATION_UPLOADCONFIRMCERTIFICATENOTSUPPORTDV = "FailedOperation.UploadConfirmCertificateNotSupportDV"
 //  INTERNALERROR = "InternalError"
 func (c *Client) UploadConfirmLetter(request *UploadConfirmLetterRequest) (response *UploadConfirmLetterResponse, err error) {
     return c.UploadConfirmLetterWithContext(context.Background(), request)
@@ -2673,6 +2817,8 @@ func (c *Client) UploadConfirmLetter(request *UploadConfirmLetterRequest) (respo
 //  FAILEDOPERATION_INVALIDCONFIRMLETTERFORMAT = "FailedOperation.InvalidConfirmLetterFormat"
 //  FAILEDOPERATION_INVALIDCONFIRMLETTERFORMATWOSIGN = "FailedOperation.InvalidConfirmLetterFormatWosign"
 //  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  FAILEDOPERATION_UPLOADCONFIRMCERTIFICATENOTSUPPORT = "FailedOperation.UploadConfirmCertificateNotSupport"
+//  FAILEDOPERATION_UPLOADCONFIRMCERTIFICATENOTSUPPORTDV = "FailedOperation.UploadConfirmCertificateNotSupportDV"
 //  INTERNALERROR = "InternalError"
 func (c *Client) UploadConfirmLetterWithContext(ctx context.Context, request *UploadConfirmLetterRequest) (response *UploadConfirmLetterResponse, err error) {
     if request == nil {
@@ -2729,6 +2875,7 @@ func NewUploadUpdateCertificateInstanceResponse() (response *UploadUpdateCertifi
 //  FAILEDOPERATION_CERTIFICATENOTDEPLOYINSTANCE = "FailedOperation.CertificateNotDeployInstance"
 //  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
 //  FAILEDOPERATION_CERTIFICATEPARSEERROR = "FailedOperation.CertificateParseError"
+//  FAILEDOPERATION_CERTIFICATEWHITEFUNCERROR = "FailedOperation.CertificateWhiteFuncError"
 //  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
 //  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
 //  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
@@ -2760,6 +2907,7 @@ func (c *Client) UploadUpdateCertificateInstance(request *UploadUpdateCertificat
 //  FAILEDOPERATION_CERTIFICATENOTDEPLOYINSTANCE = "FailedOperation.CertificateNotDeployInstance"
 //  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
 //  FAILEDOPERATION_CERTIFICATEPARSEERROR = "FailedOperation.CertificateParseError"
+//  FAILEDOPERATION_CERTIFICATEWHITEFUNCERROR = "FailedOperation.CertificateWhiteFuncError"
 //  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
 //  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
 //  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"

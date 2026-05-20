@@ -1519,6 +1519,106 @@ func (c *Client) CreateCDNDomainWithContext(ctx context.Context, request *Create
     return
 }
 
+func NewCreateCLSLogsetRequest() (request *CreateCLSLogsetRequest) {
+    request = &CreateCLSLogsetRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateCLSLogset")
+    
+    
+    return
+}
+
+func NewCreateCLSLogsetResponse() (response *CreateCLSLogsetResponse) {
+    response = &CreateCLSLogsetResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateCLSLogset
+// Create a new logset with VOD.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateCLSLogset(request *CreateCLSLogsetRequest) (response *CreateCLSLogsetResponse, err error) {
+    return c.CreateCLSLogsetWithContext(context.Background(), request)
+}
+
+// CreateCLSLogset
+// Create a new logset with VOD.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateCLSLogsetWithContext(ctx context.Context, request *CreateCLSLogsetRequest) (response *CreateCLSLogsetResponse, err error) {
+    if request == nil {
+        request = NewCreateCLSLogsetRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateCLSLogset")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCLSLogset require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCLSLogsetResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateCLSTopicRequest() (request *CreateCLSTopicRequest) {
+    request = &CreateCLSTopicRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateCLSTopic")
+    
+    
+    return
+}
+
+func NewCreateCLSTopicResponse() (response *CreateCLSTopicResponse) {
+    response = &CreateCLSTopicResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateCLSTopic
+// Create a new CLS log topic under VOD
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateCLSTopic(request *CreateCLSTopicRequest) (response *CreateCLSTopicResponse, err error) {
+    return c.CreateCLSTopicWithContext(context.Background(), request)
+}
+
+// CreateCLSTopic
+// Create a new CLS log topic under VOD
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateCLSTopicWithContext(ctx context.Context, request *CreateCLSTopicRequest) (response *CreateCLSTopicResponse, err error) {
+    if request == nil {
+        request = NewCreateCLSTopicRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "CreateCLSTopic")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCLSTopic require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCLSTopicResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateClassRequest() (request *CreateClassRequest) {
     request = &CreateClassRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6609,6 +6709,70 @@ func (c *Client) DescribeDailyPlayStatFileListWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewDescribeDailyPlayStatFileListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDefaultDistributionConfigRequest() (request *DescribeDefaultDistributionConfigRequest) {
+    request = &DescribeDefaultDistributionConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeDefaultDistributionConfig")
+    
+    
+    return
+}
+
+func NewDescribeDefaultDistributionConfigResponse() (response *DescribeDefaultDistributionConfigResponse) {
+    response = &DescribeDefaultDistributionConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDefaultDistributionConfig
+// This API is used to query the default distribution configuration.
+//
+// * Domain name and distribution protocol, which are the domain name and protocol in the media file distribution URL. Media files are distributed according to the default distribution configuration.
+//
+// Playback key, used to calculate player signature.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeDefaultDistributionConfig(request *DescribeDefaultDistributionConfigRequest) (response *DescribeDefaultDistributionConfigResponse, err error) {
+    return c.DescribeDefaultDistributionConfigWithContext(context.Background(), request)
+}
+
+// DescribeDefaultDistributionConfig
+// This API is used to query the default distribution configuration.
+//
+// * Domain name and distribution protocol, which are the domain name and protocol in the media file distribution URL. Media files are distributed according to the default distribution configuration.
+//
+// Playback key, used to calculate player signature.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeDefaultDistributionConfigWithContext(ctx context.Context, request *DescribeDefaultDistributionConfigRequest) (response *DescribeDefaultDistributionConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribeDefaultDistributionConfigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeDefaultDistributionConfig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDefaultDistributionConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDefaultDistributionConfigResponse()
     err = c.Send(request, response)
     return
 }

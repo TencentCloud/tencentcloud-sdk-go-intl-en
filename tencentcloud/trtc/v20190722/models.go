@@ -47,26 +47,64 @@ type AbnormalExperience struct {
 }
 
 type AgentConfig struct {
-	// The robot's UserId is used to enter a room and initiate tasks. [Note] This UserId cannot be repeated with the host viewer [UserId](https://cloud.tencent.com/document/product/647/46351#userid) in the current room. If multiple tasks are initiated in a room, the robot's UserId cannot be repeated, otherwise the previous task will be interrupted. The robot's UserId must be unique in the room.
+	// The robot's UserId is used to enter a room and initiate a task. note that this UserId cannot be duplicated with the host or audience [UserId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#UserId) in the current room. if multiple tasks are initiated in a room, the robot's UserId cannot be mutually duplicated. otherwise, the previous task will be interrupted. ensure the robot's UserId is unique in the room.
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
-	// The verification signature corresponding to the robot's UserId, that is, UserId and UserSig are equivalent to the robot's login password to enter the room. For the specific calculation method, please refer to the TRTC calculation [UserSig](https://cloud.tencent.com/document/product/647/45910#UserSig) solution.
+	// Signature verification corresponding to the chatbot's UserId, namely, the UserId and UserSig serve as the login password for the chatbot to enter the room. for specific calculation methods, see TRTC solution for calculating [UserSig](https://www.tencentcloud.com/document/product/647/45910?from_cn_redirect=1#UserSig).
 	UserSig *string `json:"UserSig,omitnil,omitempty" name:"UserSig"`
 
-	// The UserId of the robot pulling the media stream. After filling in, the robot will pull the media stream of the UserId for real-time processing
+	// UserId for robot stream pulling. after fill, the robot performs stream pulling and processes in real time.
 	TargetUserId *string `json:"TargetUserId,omitnil,omitempty" name:"TargetUserId"`
 
-	// If there is no streaming in the room for more than MaxIdleTime, the Service will automatically close the task. The default value is 60s.
+	// Exceeding MaxIdleTime in the room with no streaming automatically shuts down the backend task. default value is 60s.
 	MaxIdleTime *uint64 `json:"MaxIdleTime,omitnil,omitempty" name:"MaxIdleTime"`
 
-	// Robot's welcome message
+	// Robot'S greeting.
 	WelcomeMessage *string `json:"WelcomeMessage,omitnil,omitempty" name:"WelcomeMessage"`
 
-	// Intelligent interruption mode, the default value is 0, 0 means the server automatically interrupts, 1 means the server does not interrupt, and the client sends an interrupt signal to interrupt
+	// Intelligent interruption mode, defaults to 0. 0 means server-side automatic interruption. 1 means the server does not interrupt, and the client sends an interruption signal to perform interruption.
 	InterruptMode *uint64 `json:"InterruptMode,omitnil,omitempty" name:"InterruptMode"`
 
-	// Used when InterruptMode is 0, in milliseconds, with a default value of 500ms. This means that the server will interrupt when it detects a human voice that lasts for InterruptSpeechDuration milliseconds.
+	// Used when InterruptMode is 0, in milliseconds, defaults to 500ms. indicates the server will interrupt when it detects continuous voice for InterruptSpeechDuration milliseconds.
 	InterruptSpeechDuration *uint64 `json:"InterruptSpeechDuration,omitnil,omitempty" name:"InterruptSpeechDuration"`
+
+	// Controls the trigger mode for a new dialogue. default is 0.
+	// -0 means a new dialogue is automatically triggered when the server detects a complete sentence through automatic speech recognition.
+	// -1 indicates the client determines whether to manually send a chat signaling trigger for a new dialogue upon receiving the caption message.
+	TurnDetectionMode *uint64 `json:"TurnDetectionMode,omitnil,omitempty" name:"TurnDetectionMode"`
+
+	// Whether to filter out sentences where the user only says one word. true indicates filtering, false indicates no filtering. default value is true.
+	FilterOneWord *bool `json:"FilterOneWord,omitnil,omitempty" name:"FilterOneWord"`
+
+	// Welcome message priority. valid values: 0 (default), 1 (high priority). high priority messages cannot be interrupted.
+	WelcomeMessagePriority *uint64 `json:"WelcomeMessagePriority,omitnil,omitempty" name:"WelcomeMessagePriority"`
+
+	// For filtering LLM return content, do not play the content in brackets.
+	// Chinese bracket ().
+	// 2: english parentheses.
+	// 3: chinese square brackets [].
+	// 4: english square brackets [].
+	// 5: english curly braces {}.
+	// Empty by default, means no filtering.
+	FilterBracketsContent *uint64 `json:"FilterBracketsContent,omitnil,omitempty" name:"FilterBracketsContent"`
+
+	// Ambient sound settings.
+	AmbientSound *AmbientSound `json:"AmbientSound,omitnil,omitempty" name:"AmbientSound"`
+
+	// Voiceprint configuration.
+	VoicePrint *VoicePrint `json:"VoicePrint,omitnil,omitempty" name:"VoicePrint"`
+
+	// Semantic sentence segmentation detection.
+	TurnDetection *TurnDetection `json:"TurnDetection,omitnil,omitempty" name:"TurnDetection"`
+
+	// Robot subtitle display mode.
+	// -0 means display as soon as possible without synchronizing with audio playback. at this point, subtitles are fully delivered, and subsequent subtitles will include previous ones.
+	// -1 indicates sentence-level real-time display, which synchronizes with audio playback. only when the current sentence's corresponding audio playback is complete will the next subtitle be delivered. at this point, subtitles are delivered incrementally, and the terminal needs to concatenate the leading and trailing subtitles to form a complete subtitle.
+	SubtitleMode *uint64 `json:"SubtitleMode,omitnil,omitempty" name:"SubtitleMode"`
+
+	// Interruption word list. during AI speaking, only speak words in the list to interrupt AI speaking.
+	// Note: interrupt words avoid triggering AI reply.
+	InterruptWordList []*string `json:"InterruptWordList,omitnil,omitempty" name:"InterruptWordList"`
 }
 
 type AgentParams struct {
@@ -78,6 +116,14 @@ type AgentParams struct {
 
 	// The timeout period (seconds) for relaying to stop automatically after all the users whose streams are mixed leave the room. The value cannot be smaller than 5 or larger than 86400 (24 hours). Default value: 30.
 	MaxIdleTime *uint64 `json:"MaxIdleTime,omitnil,omitempty" name:"MaxIdleTime"`
+}
+
+type AmbientSound struct {
+	// Scenario selection.
+	Scene *string `json:"Scene,omitnil,omitempty" name:"Scene"`
+
+	// Control the volume of ambient sound. value ranges from [0,2]. the lower the value, the softer the ambient sound; the higher the value, the louder the ambient sound. if not set, use the default value 1.
+	Volume *float64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 }
 
 type AsrParam struct {
@@ -4155,37 +4201,65 @@ type RowValues struct {
 }
 
 type STTConfig struct {
-	// The supported languages for speech recognition are as follows, with the default being "zh" for Chinese. The values for the `Language` field follow the [ISO639](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) standard. Here is the full list of supported languages:
+	// Convert speech to text supported languages, "zh" chinese is selected by default.
 	// 
-	// 1. Chinese = "zh"
-	// 2. Chinese_TW = "zh-TW"
-	// 3. Chinese_DIALECT = "zh-dialect"
-	// 4. English = "en"
-	// 5. Vietnamese = "vi"
-	// 6. Japanese = "ja"
-	// 7. Korean = "ko"
-	// 8. Indonesian = "id"
-	// 9. Thai = "th"
-	// 10. Portuguese = "pt"
-	// 11. Turkish = "tr"
-	// 12. Arabic = "ar"
-	// 13. Spanish = "es"
-	// 14. Hindi = "hi"
-	// 15. French = "fr"
-	// 16. Malay = "ms"
-	// 17. Filipino = "fil"
-	// 18. German = "de"
-	// 19. Italian = "it"
-	// 20. Russian = "ru"
+	// You can unlock different languages by purchasing the "AI intelligent recognition duration package" or claiming the trial version of the monthly subscription package. for detailed instructions, see: [AI intelligent recognition billing description](https://www.tencentcloud.com/document/product/647/111976?from_cn_redirect=1).
 	// 
-	// **Note:** If the language you need is not listed, please contact our technical support team.
+	// Supported languages for different speech to text package versions are as follows:.
+	// 
+	// Basic language engine:.
+	// -"zh": chinese (simplified).
+	// -`zh-TW`: chinese (traditional).
+	// -"En": english.
+	// -"16k_zh_edu": chinese education.
+	// -"16k_zh_medical": medical chinese.
+	// -"16k_zh_court": chinese court.
+	// 
+	// **Standard language engine:**.
+	// -"8k_zh_large": engine (large model version) for telecommunication. the current model supports chinese and other language recognition, has a large number of parameters, and features language model performance enhancement. it greatly improves recognition accuracy for telephone audio in various scenarios and chinese dialects.
+	// -"16k_zh_large": large model engine for mandarin, chinese dialects, and english. the current model supports language recognition for chinese, english, and multiple chinese dialects. it has a large number of parameters and enhanced language model performance, targeting low-quality audio such as loud noise, strong echo, low voice volume, and voice from far away with greatly improved recognition accuracy.
+	// -"16k_multi_lang": multilingual large model engine. the current model simultaneously supports english, japanese, korean, arabic, filipino, french, hindi, indonesian, malay, portuguese, spanish, thai, turkish, vietnamese, and german. it achieves auto-identification of 15 languages at the sentence or paragraph level.
+	// -"16k_zh_en": chinese-english large model engine. the current model supports chinese and english recognition at the same time, has a large number of parameters, and features language model performance enhancement. it greatly improves recognition accuracy against low-quality audio such as loud noise, echo, low voice volume, and voice from far away.
+	// 
+	// **Advanced language engine:**.
+	// -"zh-dialect": chinese dialect.
+	// -"zh-yue": cantonese in china.
+	// -"Vi": "vietnamese.".
+	// -"Ja": "japanese.".
+	// -"Ko": "korean.".
+	// -"id": "indonesian".
+	// -"Th": thai.
+	// -"pt": portuguese.
+	// -"tr": "turkish.".
+	// -"Ar": "arabic".
+	// -"es": "spanish".
+	// -"Hi": "hindi".
+	// -"Fr": "french.".
+	// -"ms": malay.
+	// -"Fil": filipino.
+	// -"de": german.
+	// -`It`: italian.
+	// -"Ru": russian.
+	// -"sv": "swedish.".
+	// -"Da": "danish.".
+	// -"No": norwegian.
+	// 
+	// **Note**:.
+	// If the language you need is not available, contact our technical staff.
 	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
 
-	// Initiate fuzzy recognition to replace additional language types. Fill in up to 3 language types. Note: When Language is specified as "zh-dialect", fuzzy recognition is not supported and this field is invalid.
+	// **Fuzzy recognition is an advanced edition capacity, charged by default as the advanced edition.**.
+	// Note: does not support entering "zh-dialect", "16k_zh_edu", "16k_zh_medical", "16k_zh_court", "8k_zh_large", "16k_zh_large", "16k_multi_lang", "16k_zh_en".
 	AlternativeLanguage []*string `json:"AlternativeLanguage,omitnil,omitempty" name:"AlternativeLanguage"`
 
-	// The time for speech recognition vad is in the range of 240-2000, the default value is 1000, and the unit is ms. A smaller value will make speech recognition sentence segmentation faster.
+	// Custom parameter. contact for background usage.
+	CustomParam *string `json:"CustomParam,omitnil,omitempty" name:"CustomParam"`
+
+	// Specifies the time when automatic speech recognition (asr) vad is active. value range: 240-2000. default: 1000. unit: ms. a smaller value enables faster speech recognition sentence segmentation.
 	VadSilenceTime *uint64 `json:"VadSilenceTime,omitnil,omitempty" name:"VadSilenceTime"`
+
+	// The vad far-field voice suppression capacity (without impacting asr recognition performance) ranges from 0 to 5, with a default value of 0, indicating disabled far-field voice suppression. the recommended setting is 2 for better far-field voice suppression. in a noisy office environment, it can be set to 3, and in more noisy environments, 4 and 5 are available for use. note that a higher VadLevel may suppress single words as noise.
+	VadLevel *uint64 `json:"VadLevel,omitnil,omitempty" name:"VadLevel"`
 }
 
 type ScaleInfomation struct {
@@ -4452,57 +4526,65 @@ type SliceStorageParams struct {
 
 // Predefined struct for user
 type StartAIConversationRequestParams struct {
-	// TRTC's [SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid) is the same as the SdkAppId used by the room that starts the conversation task.
+	// [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#SdkAppId) of TRTC, which is the same as the SdkAppId used by the room with transcription task enabled.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// TRTC's [RoomId](https://cloud.tencent.com/document/product/647/46351#roomid), which indicates the room number where the conversation task is started.
+	// [RoomId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC refers to the room number that enables the conversation task.
 	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
 
-	// Robot parameters
+	// Bot parameters.
 	AgentConfig *AgentConfig `json:"AgentConfig,omitnil,omitempty" name:"AgentConfig"`
 
-	// The unique ID passed in by the caller can be used by the client to prevent repeated task initiation and to query the task status through this field.
+	// The unique Id passed by the caller can be used to prevent duplication of task initiation on the client side as well as query task status through this field.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// The type of TRTC room number. 0 represents a numeric room number, and 1 represents a string room number. If not filled in, the default is a numeric room number.
+	// Type of the TRTC room number. 0 indicates digit room number, 1 indicates string room number. by default if left blank, it is digit room number.
 	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
 
 	// Speech recognition configuration.
 	STTConfig *STTConfig `json:"STTConfig,omitnil,omitempty" name:"STTConfig"`
 
-	// LLM configuration. It must comply with the openai specification and be a JSON string. The example is as follows: <pre> { <br> &emsp; "LLMType": "Large model type", // String required, such as: "openai" <br> &emsp; "Model": "Your model name", // String required, specify the model to be used<br> "APIKey": "Your LLM API key", // String required <br> &emsp; "APIUrl": "https://api.xxx.com/chat/completions", // String required, URL for LLM API access<br> &emsp; "Streaming": true // Boolean optional, specify whether to use streaming<br> &emsp;} </pre>
+	// Required parameter, LLM configuration. it must comply with the openai standard and be a JSON String. example: <pre> { <br> &emsp;  "LLMType": "Model type",  // String required, for example: "openai" <br> &emsp;  "Model": "your Model name", // String required, specifies the Model to be used<br>    "APIKey": "your LLM API key", // String required <br> &emsp;  "APIUrl": "https://API.xxx.com/chat/completions", // String required, the URL for LLM API access<br> &emsp;  "History": 10, // Integer optional, sets the context rounds for LLM, default value is 0, maximum value is 50<br> &emsp;  "HistoryMode": 1, // Integer optional, 1 means the content in the LLM context will synchronize with playback audio, and text corresponding to unplayed audio will not appear in the context. 0 means no synchronization, default value is 0<br> &emsp;  "Streaming": true // Boolean optional, whether to use Streaming<br> &emsp;} </pre>.
 	LLMConfig *string `json:"LLMConfig,omitnil,omitempty" name:"LLMConfig"`
 
-	// TTS configuration, which is a JSON string. The Tencent Cloud TTS example is as follows: <pre>{ <br> &emsp; "AppId": your application ID, // Integer Required<br> &emsp; "TTSType": "TTS type", // String TTS type, fixed to "tencent"<br> &emsp; "SecretId": "Your key ID", // String Required<br> &emsp; "SecretKey": "Your keyKey", // String Required<br> &emsp; "VoiceType": 101001, // Integer Required, voice ID, including standard voice and premium voice. Premium voice has higher fidelity and different price from standard voice. For details, please refer to <a href="https://cloud.tencent.com/document/product/1073/34112">Overview of Speech Synthesis Billing</a>. For a complete list of timbre IDs, see <a href="https://cloud.tencent.com/document/product/1073/92668#55924b56-1a73-4663-a7a1-a8dd82d6e823">List of speech synthesis timbre IDs</a>. <br> &emsp; "Speed": 1.25, // Integer Optional, speaking speed, range: [-2, 6], corresponding to different speaking speeds: -2: 0.6 times -1: 0.8 times 0: 1.0 times (default) 1: 1.2 times 2: 1.5 times 6: 2.5 times If a more detailed speaking speed is required, 2 decimal places can be retained, such as 0.5/1.25/2.81, etc. For the conversion between parameter value and actual speech speed, please refer to <a href="https://sdk-1300466766.cos.ap-shanghai.myqcloud.com/sample/speed_sample.tar.gz">Speed Conversion</a><br> &emsp; "Volume": 5, // Integer Optional, volume size, range: [0, 10], corresponding to 11 levels of volume, the default value is 0, representing normal volume. <br> &emsp; "PrimaryLanguage": "zh-CN" // String Optional, primary language<br> &emsp;}</pre>
+	// Required parameter, TTS configuration. it is a JSON string: TRTC TTS configuration as follows:.  
+	// <pre> { <br> &emsp;  "TTSType": "flow",  // [required] fixed to this value.  <br> &emsp;  "VoiceId": "v-female-R2s4N9qJ", // [required] premium timbre ID/clone voice ID. selectable different timbres. refer to the following timbre list for ID library.   <br> &emsp;  "Model": "flow_01_turbo", // (required) current default TTS Model version (corresponds to Flash version).  <br> &emsp;  "Speed": 1.0,    // [option] adjust the speaking rate. value range [0.5-2.0]. default 1.0. the larger the value, the faster the speech speed. <br> &emsp;  "Volume": 1.0,   // [optional] adjust volume [0,10]. default: 1.0. a larger value indicates higher volume.   <br> &emsp;  "Pitch": 0,   // [optional] adjusts the tone [-12,12]. default value is 0. among them, 0 outputs the original voice type. <br> &emsp;  "Language": "zh" // [optional] recommend filling in. currently supports filling in chinese: zh, english: en, cantonese dialect: yue. parameter reference: (ISO 639-1). <br> &emsp;} </pre>
 	TTSConfig *string `json:"TTSConfig,omitnil,omitempty" name:"TTSConfig"`
+
+	// Experimental parameter, contact for background usage.
+	ExperimentalParams *string `json:"ExperimentalParams,omitnil,omitempty" name:"ExperimentalParams"`
 }
 
 type StartAIConversationRequest struct {
 	*tchttp.BaseRequest
 	
-	// TRTC's [SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid) is the same as the SdkAppId used by the room that starts the conversation task.
+	// [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#SdkAppId) of TRTC, which is the same as the SdkAppId used by the room with transcription task enabled.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// TRTC's [RoomId](https://cloud.tencent.com/document/product/647/46351#roomid), which indicates the room number where the conversation task is started.
+	// [RoomId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC refers to the room number that enables the conversation task.
 	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
 
-	// Robot parameters
+	// Bot parameters.
 	AgentConfig *AgentConfig `json:"AgentConfig,omitnil,omitempty" name:"AgentConfig"`
 
-	// The unique ID passed in by the caller can be used by the client to prevent repeated task initiation and to query the task status through this field.
+	// The unique Id passed by the caller can be used to prevent duplication of task initiation on the client side as well as query task status through this field.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// The type of TRTC room number. 0 represents a numeric room number, and 1 represents a string room number. If not filled in, the default is a numeric room number.
+	// Type of the TRTC room number. 0 indicates digit room number, 1 indicates string room number. by default if left blank, it is digit room number.
 	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
 
 	// Speech recognition configuration.
 	STTConfig *STTConfig `json:"STTConfig,omitnil,omitempty" name:"STTConfig"`
 
-	// LLM configuration. It must comply with the openai specification and be a JSON string. The example is as follows: <pre> { <br> &emsp; "LLMType": "Large model type", // String required, such as: "openai" <br> &emsp; "Model": "Your model name", // String required, specify the model to be used<br> "APIKey": "Your LLM API key", // String required <br> &emsp; "APIUrl": "https://api.xxx.com/chat/completions", // String required, URL for LLM API access<br> &emsp; "Streaming": true // Boolean optional, specify whether to use streaming<br> &emsp;} </pre>
+	// Required parameter, LLM configuration. it must comply with the openai standard and be a JSON String. example: <pre> { <br> &emsp;  "LLMType": "Model type",  // String required, for example: "openai" <br> &emsp;  "Model": "your Model name", // String required, specifies the Model to be used<br>    "APIKey": "your LLM API key", // String required <br> &emsp;  "APIUrl": "https://API.xxx.com/chat/completions", // String required, the URL for LLM API access<br> &emsp;  "History": 10, // Integer optional, sets the context rounds for LLM, default value is 0, maximum value is 50<br> &emsp;  "HistoryMode": 1, // Integer optional, 1 means the content in the LLM context will synchronize with playback audio, and text corresponding to unplayed audio will not appear in the context. 0 means no synchronization, default value is 0<br> &emsp;  "Streaming": true // Boolean optional, whether to use Streaming<br> &emsp;} </pre>.
 	LLMConfig *string `json:"LLMConfig,omitnil,omitempty" name:"LLMConfig"`
 
-	// TTS configuration, which is a JSON string. The Tencent Cloud TTS example is as follows: <pre>{ <br> &emsp; "AppId": your application ID, // Integer Required<br> &emsp; "TTSType": "TTS type", // String TTS type, fixed to "tencent"<br> &emsp; "SecretId": "Your key ID", // String Required<br> &emsp; "SecretKey": "Your keyKey", // String Required<br> &emsp; "VoiceType": 101001, // Integer Required, voice ID, including standard voice and premium voice. Premium voice has higher fidelity and different price from standard voice. For details, please refer to <a href="https://cloud.tencent.com/document/product/1073/34112">Overview of Speech Synthesis Billing</a>. For a complete list of timbre IDs, see <a href="https://cloud.tencent.com/document/product/1073/92668#55924b56-1a73-4663-a7a1-a8dd82d6e823">List of speech synthesis timbre IDs</a>. <br> &emsp; "Speed": 1.25, // Integer Optional, speaking speed, range: [-2, 6], corresponding to different speaking speeds: -2: 0.6 times -1: 0.8 times 0: 1.0 times (default) 1: 1.2 times 2: 1.5 times 6: 2.5 times If a more detailed speaking speed is required, 2 decimal places can be retained, such as 0.5/1.25/2.81, etc. For the conversion between parameter value and actual speech speed, please refer to <a href="https://sdk-1300466766.cos.ap-shanghai.myqcloud.com/sample/speed_sample.tar.gz">Speed Conversion</a><br> &emsp; "Volume": 5, // Integer Optional, volume size, range: [0, 10], corresponding to 11 levels of volume, the default value is 0, representing normal volume. <br> &emsp; "PrimaryLanguage": "zh-CN" // String Optional, primary language<br> &emsp;}</pre>
+	// Required parameter, TTS configuration. it is a JSON string: TRTC TTS configuration as follows:.  
+	// <pre> { <br> &emsp;  "TTSType": "flow",  // [required] fixed to this value.  <br> &emsp;  "VoiceId": "v-female-R2s4N9qJ", // [required] premium timbre ID/clone voice ID. selectable different timbres. refer to the following timbre list for ID library.   <br> &emsp;  "Model": "flow_01_turbo", // (required) current default TTS Model version (corresponds to Flash version).  <br> &emsp;  "Speed": 1.0,    // [option] adjust the speaking rate. value range [0.5-2.0]. default 1.0. the larger the value, the faster the speech speed. <br> &emsp;  "Volume": 1.0,   // [optional] adjust volume [0,10]. default: 1.0. a larger value indicates higher volume.   <br> &emsp;  "Pitch": 0,   // [optional] adjusts the tone [-12,12]. default value is 0. among them, 0 outputs the original voice type. <br> &emsp;  "Language": "zh" // [optional] recommend filling in. currently supports filling in chinese: zh, english: en, cantonese dialect: yue. parameter reference: (ISO 639-1). <br> &emsp;} </pre>
 	TTSConfig *string `json:"TTSConfig,omitnil,omitempty" name:"TTSConfig"`
+
+	// Experimental parameter, contact for background usage.
+	ExperimentalParams *string `json:"ExperimentalParams,omitnil,omitempty" name:"ExperimentalParams"`
 }
 
 func (r *StartAIConversationRequest) ToJsonString() string {
@@ -4525,6 +4607,7 @@ func (r *StartAIConversationRequest) FromJsonString(s string) error {
 	delete(f, "STTConfig")
 	delete(f, "LLMConfig")
 	delete(f, "TTSConfig")
+	delete(f, "ExperimentalParams")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartAIConversationRequest has unknown keys!", "")
 	}
@@ -4533,7 +4616,7 @@ func (r *StartAIConversationRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StartAIConversationResponseParams struct {
-	// Used to uniquely identify a conversation task.
+	// For uniquely identifying a conversation task.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5576,6 +5659,27 @@ type TrtcUsage struct {
 	UsageValue []*float64 `json:"UsageValue,omitnil,omitempty" name:"UsageValue"`
 }
 
+type TurnDetection struct {
+	// This parameter is valid only when TurnDetectionMode is 3, indicating the sensitivity of sentence segmentation.
+	// 
+	// 
+	// Feature description: determines whether the user has finished speaking to separate the audio.
+	// 
+	// 
+	// Optional: "low" | "medium" | "high" | "auto".
+	// 
+	// 
+	// auto is the default value, same as medium.
+	// low will give users sufficient time to speak.
+	// high will perform audio chunking as soon as possible.
+	// 
+	// 
+	// If you wish the model to respond more frequently in conversation mode, you can set SemanticEagerness to high.
+	// If you wish the AI to wait a moment when the user pauses, set SemanticEagerness to low.
+	// Regardless of the mode, it will eventually split and send to a large model for reply.
+	SemanticEagerness *string `json:"SemanticEagerness,omitnil,omitempty" name:"SemanticEagerness"`
+}
+
 // Predefined struct for user
 type UpdateAIConversationRequestParams struct {
 	// Task Unique ID
@@ -5953,6 +6057,14 @@ type VideoParams struct {
 
 	// The keyframe interval (seconds). Default value: 10.
 	Gop *uint64 `json:"Gop,omitnil,omitempty" name:"Gop"`
+}
+
+type VoicePrint struct {
+	// The default is 0, which means voiceprint is not enabled. 1 means voiceprint is enabled, at which point you need to fill in the voiceprint id.
+	Mode *uint64 `json:"Mode,omitnil,omitempty" name:"Mode"`
+
+	// VoicePrint Mode requires filling in when set to 1. currently only support a VoicePrint id.
+	IdList []*string `json:"IdList,omitnil,omitempty" name:"IdList"`
 }
 
 type WaterMark struct {
