@@ -884,7 +884,7 @@ type CreateDBInstanceParamTplRequestParams struct {
 	// Parameter template name.
 	TplName *string `json:"TplName,omitnil,omitempty" name:"TplName"`
 
-	// Template version number. This field is required when **MirrorTplId** is empty. For the purchasable versions supported by the parameter template, use the interface [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/35767?from_cn_redirect=1).
+	// Template version number. This field is required when **MirrorTplId** is empty. For the purchasable versions supported by the parameter template, use the interface [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/34701).
 	// - MONGO_36_WT: Version of the MongoDB 3.6 WiredTiger storage engine.
 	// - MONGO_40_WT: Version of the MongoDB 4.0 WiredTiger storage engine.
 	// - MONGO_42_WT: Version of the MongoDB 4.2 WiredTiger storage engine.
@@ -918,7 +918,7 @@ type CreateDBInstanceParamTplRequest struct {
 	// Parameter template name.
 	TplName *string `json:"TplName,omitnil,omitempty" name:"TplName"`
 
-	// Template version number. This field is required when **MirrorTplId** is empty. For the purchasable versions supported by the parameter template, use the interface [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/35767?from_cn_redirect=1).
+	// Template version number. This field is required when **MirrorTplId** is empty. For the purchasable versions supported by the parameter template, use the interface [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/34701).
 	// - MONGO_36_WT: Version of the MongoDB 3.6 WiredTiger storage engine.
 	// - MONGO_40_WT: Version of the MongoDB 4.0 WiredTiger storage engine.
 	// - MONGO_42_WT: Version of the MongoDB 4.2 WiredTiger storage engine.
