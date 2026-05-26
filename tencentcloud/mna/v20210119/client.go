@@ -661,6 +661,60 @@ func (c *Client) DeleteL3ConnWithContext(ctx context.Context, request *DeleteL3C
     return
 }
 
+func NewDescribeAccessRegionsRequest() (request *DescribeAccessRegionsRequest) {
+    request = &DescribeAccessRegionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mna", APIVersion, "DescribeAccessRegions")
+    
+    
+    return
+}
+
+func NewDescribeAccessRegionsResponse() (response *DescribeAccessRegionsResponse) {
+    response = &DescribeAccessRegionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAccessRegions
+// Query the access region list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CONTROLREQUESTERROR = "InternalError.ControlRequestError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeAccessRegions(request *DescribeAccessRegionsRequest) (response *DescribeAccessRegionsResponse, err error) {
+    return c.DescribeAccessRegionsWithContext(context.Background(), request)
+}
+
+// DescribeAccessRegions
+// Query the access region list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CONTROLREQUESTERROR = "InternalError.ControlRequestError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeAccessRegionsWithContext(ctx context.Context, request *DescribeAccessRegionsRequest) (response *DescribeAccessRegionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeAccessRegionsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mna", APIVersion, "DescribeAccessRegions")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAccessRegions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAccessRegionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDownloadActiveDeviceCountRequest() (request *DownloadActiveDeviceCountRequest) {
     request = &DownloadActiveDeviceCountRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1794,6 +1848,9 @@ func NewGetNetMonitorResponse() (response *GetNetMonitorResponse) {
 //  INTERNALERROR_CONTROLREQUESTERROR = "InternalError.ControlRequestError"
 //  INTERNALERROR_NETWORKINFOREQUESTERROR = "InternalError.NetworkInfoRequestError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_TIMEFUTURE = "InvalidParameterValue.TimeFuture"
+//  INVALIDPARAMETERVALUE_TIMESPANEXCEEDED = "InvalidParameterValue.TimeSpanExceeded"
+//  INVALIDPARAMETERVALUE_TIMETOOEARLY = "InvalidParameterValue.TimeTooEarly"
 func (c *Client) GetNetMonitor(request *GetNetMonitorRequest) (response *GetNetMonitorResponse, err error) {
     return c.GetNetMonitorWithContext(context.Background(), request)
 }
@@ -1806,6 +1863,9 @@ func (c *Client) GetNetMonitor(request *GetNetMonitorRequest) (response *GetNetM
 //  INTERNALERROR_CONTROLREQUESTERROR = "InternalError.ControlRequestError"
 //  INTERNALERROR_NETWORKINFOREQUESTERROR = "InternalError.NetworkInfoRequestError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_TIMEFUTURE = "InvalidParameterValue.TimeFuture"
+//  INVALIDPARAMETERVALUE_TIMESPANEXCEEDED = "InvalidParameterValue.TimeSpanExceeded"
+//  INVALIDPARAMETERVALUE_TIMETOOEARLY = "InvalidParameterValue.TimeTooEarly"
 func (c *Client) GetNetMonitorWithContext(ctx context.Context, request *GetNetMonitorRequest) (response *GetNetMonitorResponse, err error) {
     if request == nil {
         request = NewGetNetMonitorRequest()
@@ -1850,6 +1910,9 @@ func NewGetNetMonitorByNameResponse() (response *GetNetMonitorByNameResponse) {
 //  INTERNALERROR_CONTROLREQUESTERROR = "InternalError.ControlRequestError"
 //  INTERNALERROR_NETWORKINFOREQUESTERROR = "InternalError.NetworkInfoRequestError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_TIMEFUTURE = "InvalidParameterValue.TimeFuture"
+//  INVALIDPARAMETERVALUE_TIMESPANEXCEEDED = "InvalidParameterValue.TimeSpanExceeded"
+//  INVALIDPARAMETERVALUE_TIMETOOEARLY = "InvalidParameterValue.TimeTooEarly"
 func (c *Client) GetNetMonitorByName(request *GetNetMonitorByNameRequest) (response *GetNetMonitorByNameResponse, err error) {
     return c.GetNetMonitorByNameWithContext(context.Background(), request)
 }
@@ -1862,6 +1925,9 @@ func (c *Client) GetNetMonitorByName(request *GetNetMonitorByNameRequest) (respo
 //  INTERNALERROR_CONTROLREQUESTERROR = "InternalError.ControlRequestError"
 //  INTERNALERROR_NETWORKINFOREQUESTERROR = "InternalError.NetworkInfoRequestError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_TIMEFUTURE = "InvalidParameterValue.TimeFuture"
+//  INVALIDPARAMETERVALUE_TIMESPANEXCEEDED = "InvalidParameterValue.TimeSpanExceeded"
+//  INVALIDPARAMETERVALUE_TIMETOOEARLY = "InvalidParameterValue.TimeTooEarly"
 func (c *Client) GetNetMonitorByNameWithContext(ctx context.Context, request *GetNetMonitorByNameRequest) (response *GetNetMonitorByNameResponse, err error) {
     if request == nil {
         request = NewGetNetMonitorByNameRequest()
@@ -2209,6 +2275,60 @@ func (c *Client) GroupDeleteDeviceWithContext(ctx context.Context, request *Grou
     request.SetContext(ctx)
     
     response = NewGroupDeleteDeviceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDeviceAccessRegionsRequest() (request *ModifyDeviceAccessRegionsRequest) {
+    request = &ModifyDeviceAccessRegionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mna", APIVersion, "ModifyDeviceAccessRegions")
+    
+    
+    return
+}
+
+func NewModifyDeviceAccessRegionsResponse() (response *ModifyDeviceAccessRegionsResponse) {
+    response = &ModifyDeviceAccessRegionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDeviceAccessRegions
+// This API is used to modify device connectivity regions.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CONTROLREQUESTERROR = "InternalError.ControlRequestError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ModifyDeviceAccessRegions(request *ModifyDeviceAccessRegionsRequest) (response *ModifyDeviceAccessRegionsResponse, err error) {
+    return c.ModifyDeviceAccessRegionsWithContext(context.Background(), request)
+}
+
+// ModifyDeviceAccessRegions
+// This API is used to modify device connectivity regions.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CONTROLREQUESTERROR = "InternalError.ControlRequestError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ModifyDeviceAccessRegionsWithContext(ctx context.Context, request *ModifyDeviceAccessRegionsRequest) (response *ModifyDeviceAccessRegionsResponse, err error) {
+    if request == nil {
+        request = NewModifyDeviceAccessRegionsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mna", APIVersion, "ModifyDeviceAccessRegions")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDeviceAccessRegions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDeviceAccessRegionsResponse()
     err = c.Send(request, response)
     return
 }

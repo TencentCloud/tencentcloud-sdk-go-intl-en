@@ -492,6 +492,46 @@ func (r *BindAutoSnapshotPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Cdc struct {
+
+	CageId *string `json:"CageId,omitnil,omitempty" name:"CageId"`
+
+	// Exclusive cluster status. value ranges from:<br><li>NORMAL: NORMAL;</li><br><li>CLOSED: CLOSED. at this time, the exclusive cluster will be unavailable to create new cloud disks;</li><br><li>FAULT: abnormal exclusive cluster status. at this point, the exclusive cluster will be inoperable, and the tencent cloud ops team will promptly fix the cluster;</li><br><li>ISOLATED: the exclusive cluster is ISOLATED due to not renewed timely. at this moment, the exclusive cluster will be unavailable to create new cloud disks, and the corresponding cloud disks will also be inoperable.</li>.
+	CdcState *string `json:"CdcState,omitnil,omitempty" name:"CdcState"`
+
+	// Specifies the AZ ID of the exclusive cluster.
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+
+	CdcName *string `json:"CdcName,omitnil,omitempty" name:"CdcName"`
+
+	// Specifies the capacity size of the dedicated cluster.
+	CdcResource *CdcSize `json:"CdcResource,omitnil,omitempty" name:"CdcResource"`
+
+
+	CdcId *string `json:"CdcId,omitnil,omitempty" name:"CdcId"`
+
+	// Exclusive cluster type. valid values: <br><li>CLOUD_BASIC: BASIC CLOUD disk cluster</li><br><li>CLOUD_PREMIUM: high-performance CLOUD block storage cluster</li><br><li>CLOUD_SSD: SSD CLOUD disk cluster.</li>.
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
+
+	// Expiry time of the dedicated cloud disk cluster.
+	ExpiredTime *string `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
+
+	// Creation time of the resource pool.
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
+
+	// Number of cloud disks created in the current cluster.
+	DiskNumber *uint64 `json:"DiskNumber,omitnil,omitempty" name:"DiskNumber"`
+}
+
+type CdcSize struct {
+
+	DiskTotal *uint64 `json:"DiskTotal,omitnil,omitempty" name:"DiskTotal"`
+
+	// Specifies the available capacity size of the dedicated cluster in GiB.
+	DiskAvailable *uint64 `json:"DiskAvailable,omitnil,omitempty" name:"DiskAvailable"`
+}
+
 // Predefined struct for user
 type CopySnapshotCrossRegionsRequestParams struct {
 	// Destination regions of the replication task. You can query the value of regions by calling [DescribeRegions](https://www.tencentcloud.com/document/product/1271/71925) API. Note that you can only specify regions that support snapshots.
@@ -1671,6 +1711,90 @@ func (r *DescribeDiskConfigQuotaResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDiskConfigQuotaResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDiskStoragePoolRequestParams struct {
+	// Number of returned results, defaults to 20 with a maximum value of 100. For further introduction about `Limit`, see relevant sections in the API [overview](/document/product/362/15633).
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Specify the exclusive cluster ID list you want to query. This parameter cannot be used with Filters.
+	CdcIds []*string `json:"CdcIds,omitnil,omitempty" name:"CdcIds"`
+
+	// Filter conditions. `CdcIds` and `Filters` cannot be specified at the same time. <br><li>cdc-id - Array of String - Optional - Filter by the cluster ID. <br><li>zone - Array of String - Optional - Filter by the [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo) where the cluster resides. <br><li>cage-id - Array of String - Optional - Filter by the ID of the cage where the cluster resides. <br><li>disk-type - Array of string - Optional - Filter by the media type of cloud disks (`CLOUD_BASIC`: HDD cloud disk | `CLOUD_PREMIUM`: Premium cloud disk. | `CLOUD_SSD`: SSD cloud disk.)
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Offset, defaults to 0. For further introduction about `Offset`, see the relevant sections in the API [overview](/document/product/362/15633).
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+type DescribeDiskStoragePoolRequest struct {
+	*tchttp.BaseRequest
+	
+	// Number of returned results, defaults to 20 with a maximum value of 100. For further introduction about `Limit`, see relevant sections in the API [overview](/document/product/362/15633).
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Specify the exclusive cluster ID list you want to query. This parameter cannot be used with Filters.
+	CdcIds []*string `json:"CdcIds,omitnil,omitempty" name:"CdcIds"`
+
+	// Filter conditions. `CdcIds` and `Filters` cannot be specified at the same time. <br><li>cdc-id - Array of String - Optional - Filter by the cluster ID. <br><li>zone - Array of String - Optional - Filter by the [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo) where the cluster resides. <br><li>cage-id - Array of String - Optional - Filter by the ID of the cage where the cluster resides. <br><li>disk-type - Array of string - Optional - Filter by the media type of cloud disks (`CLOUD_BASIC`: HDD cloud disk | `CLOUD_PREMIUM`: Premium cloud disk. | `CLOUD_SSD`: SSD cloud disk.)
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Offset, defaults to 0. For further introduction about `Offset`, see the relevant sections in the API [overview](/document/product/362/15633).
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+func (r *DescribeDiskStoragePoolRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDiskStoragePoolRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "CdcIds")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDiskStoragePoolRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDiskStoragePoolResponseParams struct {
+	// the number of eligible dedicated clusters.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Details of the dedicated cluster.
+	CdcSet []*Cdc `json:"CdcSet,omitnil,omitempty" name:"CdcSet"`
+
+	// Exclusive cluster details list.
+	DiskStoragePoolSet []*Cdc `json:"DiskStoragePoolSet,omitnil,omitempty" name:"DiskStoragePoolSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDiskStoragePoolResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDiskStoragePoolResponseParams `json:"Response"`
+}
+
+func (r *DescribeDiskStoragePoolResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDiskStoragePoolResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

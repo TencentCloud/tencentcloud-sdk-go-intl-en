@@ -5219,6 +5219,12 @@ type InquiryPriceResizeInstanceDisksRequestParams struct {
 
 	// Whether to forcibly shut down a running instance. It is recommended to manually shut down a running instance first and then reset the user password. Valid values:<br><li>true: Forcibly shut down an instance after a normal shutdown fails.</li><br><li>false: Do not forcibly shut down an instance after a normal shutdown fails.</li><br><br>Default value: false.<br><br>Forced shutdown is equivalent to turning off a physical computer's power switch. Forced shutdown may cause data loss or file system corruption and should only be used when a server cannot be shut down normally.
 	ForceStop *bool `json:"ForceStop,omitnil,omitempty" name:"ForceStop"`
+
+	// Configuration information of the system disk to be expanded. Only cloud disks are supported for expansion. You must specify either DataDisks or SystemDisk, but not both.
+	SystemDisk *SystemDisk `json:"SystemDisk,omitnil,omitempty" name:"SystemDisk"`
+
+	// Whether to perform online resizing.
+	ResizeOnline *bool `json:"ResizeOnline,omitnil,omitempty" name:"ResizeOnline"`
 }
 
 type InquiryPriceResizeInstanceDisksRequest struct {
@@ -5233,6 +5239,12 @@ type InquiryPriceResizeInstanceDisksRequest struct {
 
 	// Whether to forcibly shut down a running instance. It is recommended to manually shut down a running instance first and then reset the user password. Valid values:<br><li>true: Forcibly shut down an instance after a normal shutdown fails.</li><br><li>false: Do not forcibly shut down an instance after a normal shutdown fails.</li><br><br>Default value: false.<br><br>Forced shutdown is equivalent to turning off a physical computer's power switch. Forced shutdown may cause data loss or file system corruption and should only be used when a server cannot be shut down normally.
 	ForceStop *bool `json:"ForceStop,omitnil,omitempty" name:"ForceStop"`
+
+	// Configuration information of the system disk to be expanded. Only cloud disks are supported for expansion. You must specify either DataDisks or SystemDisk, but not both.
+	SystemDisk *SystemDisk `json:"SystemDisk,omitnil,omitempty" name:"SystemDisk"`
+
+	// Whether to perform online resizing.
+	ResizeOnline *bool `json:"ResizeOnline,omitnil,omitempty" name:"ResizeOnline"`
 }
 
 func (r *InquiryPriceResizeInstanceDisksRequest) ToJsonString() string {
@@ -5250,6 +5262,8 @@ func (r *InquiryPriceResizeInstanceDisksRequest) FromJsonString(s string) error 
 	delete(f, "InstanceId")
 	delete(f, "DataDisks")
 	delete(f, "ForceStop")
+	delete(f, "SystemDisk")
+	delete(f, "ResizeOnline")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceResizeInstanceDisksRequest has unknown keys!", "")
 	}

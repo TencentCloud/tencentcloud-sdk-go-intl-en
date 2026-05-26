@@ -533,6 +533,94 @@ func (c *Client) CreateDBInstanceHourWithContext(ctx context.Context, request *C
     return
 }
 
+func NewCreateDBInstanceParamTplRequest() (request *CreateDBInstanceParamTplRequest) {
+    request = &CreateDBInstanceParamTplRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "CreateDBInstanceParamTpl")
+    
+    
+    return
+}
+
+func NewCreateDBInstanceParamTplResponse() (response *CreateDBInstanceParamTplResponse) {
+    response = &CreateDBInstanceParamTplResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDBInstanceParamTpl
+// This API is used to create a parameter template for TencentDB for MongoDB.
+//
+// **Description:** The CreateDBInstanceParamTpl API is in public beta. During this period, this API is only applicable to beta test participants.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_CLUSTERTYPEERROR = "InvalidParameterValue.ClusterTypeError"
+//  INVALIDPARAMETERVALUE_INVALIDTRADEOPERATION = "InvalidParameterValue.InvalidTradeOperation"
+//  INVALIDPARAMETERVALUE_MACHINETYPEERROR = "InvalidParameterValue.MachineTypeError"
+//  INVALIDPARAMETERVALUE_MONGOVERSIONERROR = "InvalidParameterValue.MongoVersionError"
+//  INVALIDPARAMETERVALUE_PASSWORDRULEFAILED = "InvalidParameterValue.PasswordRuleFailed"
+//  INVALIDPARAMETERVALUE_POSTPAIDINSTANCEBEYONDLIMIT = "InvalidParameterValue.PostPaidInstanceBeyondLimit"
+//  INVALIDPARAMETERVALUE_PROJECTNOTFOUND = "InvalidParameterValue.ProjectNotFound"
+//  INVALIDPARAMETERVALUE_REGIONERROR = "InvalidParameterValue.RegionError"
+//  INVALIDPARAMETERVALUE_REPLICASETNUMERROR = "InvalidParameterValue.ReplicaSetNumError"
+//  INVALIDPARAMETERVALUE_SPECNOTONSALE = "InvalidParameterValue.SpecNotOnSale"
+//  INVALIDPARAMETERVALUE_STATUSABNORMAL = "InvalidParameterValue.StatusAbnormal"
+//  INVALIDPARAMETERVALUE_TAGNOTFOUND = "InvalidParameterValue.TagNotFound"
+//  INVALIDPARAMETERVALUE_VPCIDORSUBNETIDNOTFOUND = "InvalidParameterValue.VpcIdOrSubnetIdNotFound"
+//  INVALIDPARAMETERVALUE_ZONECLOSED = "InvalidParameterValue.ZoneClosed"
+//  INVALIDPARAMETERVALUE_ZONEERROR = "InvalidParameterValue.ZoneError"
+//  UNSUPPORTEDOPERATION_VERSIONNOTSUPPORT = "UnsupportedOperation.VersionNotSupport"
+func (c *Client) CreateDBInstanceParamTpl(request *CreateDBInstanceParamTplRequest) (response *CreateDBInstanceParamTplResponse, err error) {
+    return c.CreateDBInstanceParamTplWithContext(context.Background(), request)
+}
+
+// CreateDBInstanceParamTpl
+// This API is used to create a parameter template for TencentDB for MongoDB.
+//
+// **Description:** The CreateDBInstanceParamTpl API is in public beta. During this period, this API is only applicable to beta test participants.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_CLUSTERTYPEERROR = "InvalidParameterValue.ClusterTypeError"
+//  INVALIDPARAMETERVALUE_INVALIDTRADEOPERATION = "InvalidParameterValue.InvalidTradeOperation"
+//  INVALIDPARAMETERVALUE_MACHINETYPEERROR = "InvalidParameterValue.MachineTypeError"
+//  INVALIDPARAMETERVALUE_MONGOVERSIONERROR = "InvalidParameterValue.MongoVersionError"
+//  INVALIDPARAMETERVALUE_PASSWORDRULEFAILED = "InvalidParameterValue.PasswordRuleFailed"
+//  INVALIDPARAMETERVALUE_POSTPAIDINSTANCEBEYONDLIMIT = "InvalidParameterValue.PostPaidInstanceBeyondLimit"
+//  INVALIDPARAMETERVALUE_PROJECTNOTFOUND = "InvalidParameterValue.ProjectNotFound"
+//  INVALIDPARAMETERVALUE_REGIONERROR = "InvalidParameterValue.RegionError"
+//  INVALIDPARAMETERVALUE_REPLICASETNUMERROR = "InvalidParameterValue.ReplicaSetNumError"
+//  INVALIDPARAMETERVALUE_SPECNOTONSALE = "InvalidParameterValue.SpecNotOnSale"
+//  INVALIDPARAMETERVALUE_STATUSABNORMAL = "InvalidParameterValue.StatusAbnormal"
+//  INVALIDPARAMETERVALUE_TAGNOTFOUND = "InvalidParameterValue.TagNotFound"
+//  INVALIDPARAMETERVALUE_VPCIDORSUBNETIDNOTFOUND = "InvalidParameterValue.VpcIdOrSubnetIdNotFound"
+//  INVALIDPARAMETERVALUE_ZONECLOSED = "InvalidParameterValue.ZoneClosed"
+//  INVALIDPARAMETERVALUE_ZONEERROR = "InvalidParameterValue.ZoneError"
+//  UNSUPPORTEDOPERATION_VERSIONNOTSUPPORT = "UnsupportedOperation.VersionNotSupport"
+func (c *Client) CreateDBInstanceParamTplWithContext(ctx context.Context, request *CreateDBInstanceParamTplRequest) (response *CreateDBInstanceParamTplResponse, err error) {
+    if request == nil {
+        request = NewCreateDBInstanceParamTplRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "CreateDBInstanceParamTpl")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDBInstanceParamTpl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDBInstanceParamTplResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateLogDownloadTaskRequest() (request *CreateLogDownloadTaskRequest) {
     request = &CreateLogDownloadTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -633,6 +721,58 @@ func (c *Client) DeleteAccountUserWithContext(ctx context.Context, request *Dele
     request.SetContext(ctx)
     
     response = NewDeleteAccountUserResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteDBBackupsRequest() (request *DeleteDBBackupsRequest) {
+    request = &DeleteDBBackupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DeleteDBBackups")
+    
+    
+    return
+}
+
+func NewDeleteDBBackupsResponse() (response *DeleteDBBackupsResponse) {
+    response = &DeleteDBBackupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteDBBackups
+// This API is used to delete full backups.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DeleteDBBackups(request *DeleteDBBackupsRequest) (response *DeleteDBBackupsResponse, err error) {
+    return c.DeleteDBBackupsWithContext(context.Background(), request)
+}
+
+// DeleteDBBackups
+// This API is used to delete full backups.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DeleteDBBackupsWithContext(ctx context.Context, request *DeleteDBBackupsRequest) (response *DeleteDBBackupsResponse, err error) {
+    if request == nil {
+        request = NewDeleteDBBackupsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DeleteDBBackups")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDBBackups require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteDBBackupsResponse()
     err = c.Send(request, response)
     return
 }
@@ -1497,6 +1637,118 @@ func (c *Client) DescribeDBInstanceNodePropertyWithContext(ctx context.Context, 
     return
 }
 
+func NewDescribeDBInstanceParamTplRequest() (request *DescribeDBInstanceParamTplRequest) {
+    request = &DescribeDBInstanceParamTplRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeDBInstanceParamTpl")
+    
+    
+    return
+}
+
+func NewDescribeDBInstanceParamTplResponse() (response *DescribeDBInstanceParamTplResponse) {
+    response = &DescribeDBInstanceParamTplResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDBInstanceParamTpl
+// This API is used to query ALL MongoDB database parameter templates under the current account.
+//
+// **Description:** The DescribeDBInstanceParamTpl API is in public beta. During this period, this API is only applicable to beta test participants.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+func (c *Client) DescribeDBInstanceParamTpl(request *DescribeDBInstanceParamTplRequest) (response *DescribeDBInstanceParamTplResponse, err error) {
+    return c.DescribeDBInstanceParamTplWithContext(context.Background(), request)
+}
+
+// DescribeDBInstanceParamTpl
+// This API is used to query ALL MongoDB database parameter templates under the current account.
+//
+// **Description:** The DescribeDBInstanceParamTpl API is in public beta. During this period, this API is only applicable to beta test participants.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+func (c *Client) DescribeDBInstanceParamTplWithContext(ctx context.Context, request *DescribeDBInstanceParamTplRequest) (response *DescribeDBInstanceParamTplResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBInstanceParamTplRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeDBInstanceParamTpl")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBInstanceParamTpl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBInstanceParamTplResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDBInstanceParamTplDetailRequest() (request *DescribeDBInstanceParamTplDetailRequest) {
+    request = &DescribeDBInstanceParamTplDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeDBInstanceParamTplDetail")
+    
+    
+    return
+}
+
+func NewDescribeDBInstanceParamTplDetailResponse() (response *DescribeDBInstanceParamTplDetailResponse) {
+    response = &DescribeDBInstanceParamTplDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDBInstanceParamTplDetail
+// This API is used to query parameter template details of a cloud database instance for MongoDB.
+//
+// **Description:** The DescribeDBInstanceParamTplDetail API is in public beta. During this period, this interface is only applicable to beta test participants.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+func (c *Client) DescribeDBInstanceParamTplDetail(request *DescribeDBInstanceParamTplDetailRequest) (response *DescribeDBInstanceParamTplDetailResponse, err error) {
+    return c.DescribeDBInstanceParamTplDetailWithContext(context.Background(), request)
+}
+
+// DescribeDBInstanceParamTplDetail
+// This API is used to query parameter template details of a cloud database instance for MongoDB.
+//
+// **Description:** The DescribeDBInstanceParamTplDetail API is in public beta. During this period, this interface is only applicable to beta test participants.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+func (c *Client) DescribeDBInstanceParamTplDetailWithContext(ctx context.Context, request *DescribeDBInstanceParamTplDetailRequest) (response *DescribeDBInstanceParamTplDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBInstanceParamTplDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeDBInstanceParamTplDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBInstanceParamTplDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBInstanceParamTplDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBInstancesRequest() (request *DescribeDBInstancesRequest) {
     request = &DescribeDBInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1849,6 +2101,56 @@ func (c *Client) DescribeMongodbLogsWithContext(ctx context.Context, request *De
     return
 }
 
+func NewDescribePasswordRotationRequest() (request *DescribePasswordRotationRequest) {
+    request = &DescribePasswordRotationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribePasswordRotation")
+    
+    
+    return
+}
+
+func NewDescribePasswordRotationResponse() (response *DescribePasswordRotationResponse) {
+    response = &DescribePasswordRotationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribePasswordRotation
+// Retrieve the rotation status info
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DescribePasswordRotation(request *DescribePasswordRotationRequest) (response *DescribePasswordRotationResponse, err error) {
+    return c.DescribePasswordRotationWithContext(context.Background(), request)
+}
+
+// DescribePasswordRotation
+// Retrieve the rotation status info
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DescribePasswordRotationWithContext(ctx context.Context, request *DescribePasswordRotationRequest) (response *DescribePasswordRotationResponse, err error) {
+    if request == nil {
+        request = NewDescribePasswordRotationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribePasswordRotation")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePasswordRotation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePasswordRotationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSRVConnectionDomainRequest() (request *DescribeSRVConnectionDomainRequest) {
     request = &DescribeSRVConnectionDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2193,6 +2495,60 @@ func (c *Client) DisableSRVConnectionUrlWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDisableSRVConnectionUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEnablePasswordRotationRequest() (request *EnablePasswordRotationRequest) {
+    request = &EnablePasswordRotationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "EnablePasswordRotation")
+    
+    
+    return
+}
+
+func NewEnablePasswordRotationResponse() (response *EnablePasswordRotationResponse) {
+    response = &EnablePasswordRotationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// EnablePasswordRotation
+// Enable password rotation
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  UNSUPPORTEDOPERATION_VERSIONNOTSUPPORT = "UnsupportedOperation.VersionNotSupport"
+func (c *Client) EnablePasswordRotation(request *EnablePasswordRotationRequest) (response *EnablePasswordRotationResponse, err error) {
+    return c.EnablePasswordRotationWithContext(context.Background(), request)
+}
+
+// EnablePasswordRotation
+// Enable password rotation
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  UNSUPPORTEDOPERATION_VERSIONNOTSUPPORT = "UnsupportedOperation.VersionNotSupport"
+func (c *Client) EnablePasswordRotationWithContext(ctx context.Context, request *EnablePasswordRotationRequest) (response *EnablePasswordRotationResponse, err error) {
+    if request == nil {
+        request = NewEnablePasswordRotationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "EnablePasswordRotation")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EnablePasswordRotation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEnablePasswordRotationResponse()
     err = c.Send(request, response)
     return
 }
@@ -2773,6 +3129,60 @@ func (c *Client) KillOpsWithContext(ctx context.Context, request *KillOpsRequest
     request.SetContext(ctx)
     
     response = NewKillOpsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyBackupExpireTimeRequest() (request *ModifyBackupExpireTimeRequest) {
+    request = &ModifyBackupExpireTimeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "ModifyBackupExpireTime")
+    
+    
+    return
+}
+
+func NewModifyBackupExpireTimeResponse() (response *ModifyBackupExpireTimeResponse) {
+    response = &ModifyBackupExpireTimeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyBackupExpireTime
+// Modify backup expiration time
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) ModifyBackupExpireTime(request *ModifyBackupExpireTimeRequest) (response *ModifyBackupExpireTimeResponse, err error) {
+    return c.ModifyBackupExpireTimeWithContext(context.Background(), request)
+}
+
+// ModifyBackupExpireTime
+// Modify backup expiration time
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) ModifyBackupExpireTimeWithContext(ctx context.Context, request *ModifyBackupExpireTimeRequest) (response *ModifyBackupExpireTimeResponse, err error) {
+    if request == nil {
+        request = NewModifyBackupExpireTimeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "ModifyBackupExpireTime")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyBackupExpireTime require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyBackupExpireTimeResponse()
     err = c.Send(request, response)
     return
 }

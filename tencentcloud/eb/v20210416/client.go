@@ -1453,7 +1453,7 @@ func NewSearchLogResponse() (response *SearchLogResponse) {
 }
 
 // SearchLog
-// This API is used to query logs. 
+// This API is used to query logs.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1464,7 +1464,7 @@ func (c *Client) SearchLog(request *SearchLogRequest) (response *SearchLogRespon
 }
 
 // SearchLog
-// This API is used to query logs. 
+// This API is used to query logs.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1721,6 +1721,7 @@ func NewUpdateTargetResponse() (response *UpdateTargetResponse) {
 //  INVALIDPARAMETERVALUE_RULEID = "InvalidParameterValue.RuleId"
 //  INVALIDPARAMETERVALUE_TARGETID = "InvalidParameterValue.TargetId"
 //  OPERATIONDENIED_RESOURCEIMMUTABLE = "OperationDenied.ResourceImmutable"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
 //  RESOURCENOTFOUND_RULE = "ResourceNotFound.Rule"
 //  RESOURCENOTFOUND_TARGET = "ResourceNotFound.Target"
@@ -1745,6 +1746,7 @@ func (c *Client) UpdateTarget(request *UpdateTargetRequest) (response *UpdateTar
 //  INVALIDPARAMETERVALUE_RULEID = "InvalidParameterValue.RuleId"
 //  INVALIDPARAMETERVALUE_TARGETID = "InvalidParameterValue.TargetId"
 //  OPERATIONDENIED_RESOURCEIMMUTABLE = "OperationDenied.ResourceImmutable"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
 //  RESOURCENOTFOUND_RULE = "ResourceNotFound.Rule"
 //  RESOURCENOTFOUND_TARGET = "ResourceNotFound.Target"

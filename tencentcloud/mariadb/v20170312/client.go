@@ -612,6 +612,7 @@ func NewCreateHourDBInstanceResponse() (response *CreateHourDBInstanceResponse) 
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
 //  FAILEDOPERATION_TAGDRYRUNERROR = "FailedOperation.TagDryRunError"
+//  FAILEDOPERATION_TRADECONFIGNOTFOUND = "FailedOperation.TradeConfigNotFound"
 //  FAILEDOPERATION_USERNOTAUTHED = "FailedOperation.UserNotAuthed"
 //  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
 //  INTERNALERROR_CHECKVIPSTATUSFAILED = "InternalError.CheckVipStatusFailed"
@@ -641,6 +642,7 @@ func (c *Client) CreateHourDBInstance(request *CreateHourDBInstanceRequest) (res
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
 //  FAILEDOPERATION_TAGDRYRUNERROR = "FailedOperation.TagDryRunError"
+//  FAILEDOPERATION_TRADECONFIGNOTFOUND = "FailedOperation.TradeConfigNotFound"
 //  FAILEDOPERATION_USERNOTAUTHED = "FailedOperation.UserNotAuthed"
 //  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
 //  INTERNALERROR_CHECKVIPSTATUSFAILED = "InternalError.CheckVipStatusFailed"
@@ -896,6 +898,7 @@ func NewDescribeBackupFilesResponse() (response *DescribeBackupFilesResponse) {
 // This API is used to query the list of backup files.
 //
 // error code that may be returned:
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 func (c *Client) DescribeBackupFiles(request *DescribeBackupFilesRequest) (response *DescribeBackupFilesResponse, err error) {
@@ -906,6 +909,7 @@ func (c *Client) DescribeBackupFiles(request *DescribeBackupFilesRequest) (respo
 // This API is used to query the list of backup files.
 //
 // error code that may be returned:
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 func (c *Client) DescribeBackupFilesWithContext(ctx context.Context, request *DescribeBackupFilesRequest) (response *DescribeBackupFilesResponse, err error) {
@@ -1287,6 +1291,7 @@ func NewDescribeDBSecurityGroupsResponse() (response *DescribeDBSecurityGroupsRe
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION_AUTHNOSTRATEGY = "FailedOperation.AuthNoStrategy"
 //  FAILEDOPERATION_GETSECURITYGROUPDETAILFAILED = "FailedOperation.GetSecurityGroupDetailFailed"
+//  FAILEDOPERATION_SGOPERATIONFAILED = "FailedOperation.SGOperationFailed"
 //  INTERNALERROR_GETSECURITYGROUPDETAILFAILED = "InternalError.GetSecurityGroupDetailFailed"
 //  INTERNALERROR_INSTANCEOPERATEPERMISSIONERROR = "InternalError.InstanceOperatePermissionError"
 //  INTERNALERROR_LISTINSTANCERESPRESOURCECOUNTNOTMATCHERROR = "InternalError.ListInstanceRespResourceCountNotMatchError"
@@ -1314,6 +1319,7 @@ func (c *Client) DescribeDBSecurityGroups(request *DescribeDBSecurityGroupsReque
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION_AUTHNOSTRATEGY = "FailedOperation.AuthNoStrategy"
 //  FAILEDOPERATION_GETSECURITYGROUPDETAILFAILED = "FailedOperation.GetSecurityGroupDetailFailed"
+//  FAILEDOPERATION_SGOPERATIONFAILED = "FailedOperation.SGOperationFailed"
 //  INTERNALERROR_GETSECURITYGROUPDETAILFAILED = "InternalError.GetSecurityGroupDetailFailed"
 //  INTERNALERROR_INSTANCEOPERATEPERMISSIONERROR = "InternalError.InstanceOperatePermissionError"
 //  INTERNALERROR_LISTINSTANCERESPRESOURCECOUNTNOTMATCHERROR = "InternalError.ListInstanceRespResourceCountNotMatchError"
@@ -3092,6 +3098,7 @@ func NewModifyInstanceVportResponse() (response *ModifyInstanceVportResponse) {
 // This API is used to modify instance Vport.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
 //  FAILEDOPERATION_SGCHANGEVIP = "FailedOperation.SGChangeVip"
 //  FAILEDOPERATION_VPCADDSERVICEFAILED = "FailedOperation.VpcAddServiceFailed"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
@@ -3111,6 +3118,7 @@ func (c *Client) ModifyInstanceVport(request *ModifyInstanceVportRequest) (respo
 // This API is used to modify instance Vport.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
 //  FAILEDOPERATION_SGCHANGEVIP = "FailedOperation.SGChangeVip"
 //  FAILEDOPERATION_VPCADDSERVICEFAILED = "FailedOperation.VpcAddServiceFailed"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"

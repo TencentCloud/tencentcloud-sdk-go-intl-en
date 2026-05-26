@@ -1261,13 +1261,13 @@ type AnalyseConditions struct {
 	// Project ID: Project ID of the resource
 	ProjectIds *string `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
 
-	// Billing mode prePay (monthly subscription)/postPay (pay-as-you-go billing)
+	// Billing mode prePay (yearly/monthly subscription)/postPay (pay-as-you-go billing)
 	PayModes *string `json:"PayModes,omitnil,omitempty" name:"PayModes"`
 
 	// Transaction type. Query transaction type (please use transaction type code as input parameter).
 	ActionTypes *string `json:"ActionTypes,omitnil,omitempty" name:"ActionTypes"`
 
-	// Cost allocation tag key
+	// Cost allocation tag key and value
 	Tags *string `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Fee type. Query fee type (please use fee type code input parameter). The input parameter enumeration is as follows:
@@ -7022,7 +7022,7 @@ type DescribeCostExplorerSummaryRequestParams struct {
 	// Starting page, where PageNo=1 indicates the first page, PageNo=2 indicates the second page, and so on.
 	PageNo *uint64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
-	// Cost allocation tag value
+	// Cost allocation tag key
 	TagKeyStr *string `json:"TagKeyStr,omitnil,omitempty" name:"TagKeyStr"`
 
 	// Whether the filter box is needed: 1- indicates it is needed, 0- indicates it is not needed. If it is not specified, it is not required by default.
@@ -7062,7 +7062,7 @@ type DescribeCostExplorerSummaryRequest struct {
 	// Starting page, where PageNo=1 indicates the first page, PageNo=2 indicates the second page, and so on.
 	PageNo *uint64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
-	// Cost allocation tag value
+	// Cost allocation tag key
 	TagKeyStr *string `json:"TagKeyStr,omitnil,omitempty" name:"TagKeyStr"`
 
 	// Whether the filter box is needed: 1- indicates it is needed, 0- indicates it is not needed. If it is not specified, it is not required by default.

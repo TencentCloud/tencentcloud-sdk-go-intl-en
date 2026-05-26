@@ -451,14 +451,8 @@ func (r *ApplyWebVerificationBizTokenIntlResponse) FromJsonString(s string) erro
 }
 
 type AttackRiskDetail struct {
-	// Suspected attack trace types
-	// SuspectedSpoofingAttack: Suspected spoofing attack
-	// SuspectedSynthesisImage: Suspected synthesis image
-	// SuspectedSynthesisVideo: Suspected synthesis video
-	// SuspectedeAnomalyAttack: Suspected anomaly attack
-	// SuspectedAdversarialAttack: Suspected adversarial attack 
-	// SuspectedBlackIndustry: Suspected batch generation attack
-	// SuspectedWatermark: Suspected watermark
+	// <p>Suspected attack trace type, specific type as follows:<br>SuspectedSpoofingAttack: Rephotography attack<br>SuspectedSynthesisImage: Suspected synthesized image<br>SuspectedSynthesisVideo: Suspected synthesized video<br>SuspectedAnomalyAttack: Facial features suspected of not being real<br>SuspectedAdversarialAttack: Suspected adversarial sample attack<br>SuspectedBlackIndustry: Suspected black industry batch template attack<br>SuspectedWatermark: Suspected watermark</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -1666,32 +1660,32 @@ func (r *CreateUploadUrlResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DetectAIFakeFacesRequestParams struct {
-	// Enter the image or video with a face to be detected, in base64 encoding. Base64 value of the image: The overall image resolution is recommended to be 480x640, and the face size is 100X100 or larger; The image data size after Base64 encoding does not exceed 3M, and only supports jpg and png formats. Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. Base64 value of the video: The size after Base64 encoding does not exceed 8M, and supports mp4, avi, and flv formats. Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. The maximum supported video length is 20s, and the recommended length is 2 to 5s. The recommended video resolution is 480x640, and the frame rate is between 25fps and 30fps.
+	// <p>Import the face image or facial video to be detected (currently only single face detection is supported) in base64 encoding. If your scenario involves both video and image, we recommend using video for detection. For better detection results, please note the following input data limits and suggestions:</p><ul><li><p>base64 value of the image:<br>Recommend an overall image resolution of 480x640, with the face size no less than 100x100, captured by the mobile front camera.<br>The size of the base64-encoded image data should not exceed 3M, with a maximum of 10M. Only jpg and png formats are supported.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li><li><p>base64 value of the video:<br>The size after base64 encoding should be within 8M, with a maximum of 10M. Supported formats include mp4, avi, and flv, captured by the mobile front camera.<br>Video duration is recommended to be 2–5s, with a maximum of 20s.<br>Video resolution is recommended at 480x640 (maximum support for 720p), with a frame rate between 25fps and 30fps.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li></ul><p>If you do not use Encryption for secure transmission, this field is a required parameter.</p>
 	FaceInput *string `json:"FaceInput,omitnil,omitempty" name:"FaceInput"`
 
-	// The type of input is 1- The input type is a picture 2- The input type is a video Others - Return error code InvalidParameter
+	// <p>Passed in type.</p><ul><li>Value ranges from 1 to 2:<br>1: Passed in image type.<br>2: Passed in video type.<br>Other: Return error code InvalidParameter.</li></ul><p>If you do not use Encryption for encrypting transmission, this field is mandatory.</p>
 	FaceInputType *int64 `json:"FaceInputType,omitnil,omitempty" name:"FaceInputType"`
 
-	// Whether the request information needs to be fully encrypted; Supported encryption algorithms: AES-256-CBC, SM4-GCM; Users with encryption requirements can use this parameter, for details, please click the link on the left.
+	// <p>Whether to encrypt the entire request information.</p><ul><li>Supported encryption algorithms: AES-256-CBC, SM4-GCM.</li><li>The user with encryption requirements can use this parameter. For details, please click the left-side link.</li></ul>
 	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
 
-	// Encrypted ciphertext; The data format before encryption is as follows:{"FaceInput":"AAAAA","FaceInputType":1}
+	// <p>Encrypted ciphertext.</p><ul><li>The data format before encryption is as follows: {"FaceInput":"AAAAA","FaceInputType":1}.</li></ul>
 	EncryptedBody *string `json:"EncryptedBody,omitnil,omitempty" name:"EncryptedBody"`
 }
 
 type DetectAIFakeFacesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Enter the image or video with a face to be detected, in base64 encoding. Base64 value of the image: The overall image resolution is recommended to be 480x640, and the face size is 100X100 or larger; The image data size after Base64 encoding does not exceed 3M, and only supports jpg and png formats. Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. Base64 value of the video: The size after Base64 encoding does not exceed 8M, and supports mp4, avi, and flv formats. Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. The maximum supported video length is 20s, and the recommended length is 2 to 5s. The recommended video resolution is 480x640, and the frame rate is between 25fps and 30fps.
+	// <p>Import the face image or facial video to be detected (currently only single face detection is supported) in base64 encoding. If your scenario involves both video and image, we recommend using video for detection. For better detection results, please note the following input data limits and suggestions:</p><ul><li><p>base64 value of the image:<br>Recommend an overall image resolution of 480x640, with the face size no less than 100x100, captured by the mobile front camera.<br>The size of the base64-encoded image data should not exceed 3M, with a maximum of 10M. Only jpg and png formats are supported.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li><li><p>base64 value of the video:<br>The size after base64 encoding should be within 8M, with a maximum of 10M. Supported formats include mp4, avi, and flv, captured by the mobile front camera.<br>Video duration is recommended to be 2–5s, with a maximum of 20s.<br>Video resolution is recommended at 480x640 (maximum support for 720p), with a frame rate between 25fps and 30fps.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li></ul><p>If you do not use Encryption for secure transmission, this field is a required parameter.</p>
 	FaceInput *string `json:"FaceInput,omitnil,omitempty" name:"FaceInput"`
 
-	// The type of input is 1- The input type is a picture 2- The input type is a video Others - Return error code InvalidParameter
+	// <p>Passed in type.</p><ul><li>Value ranges from 1 to 2:<br>1: Passed in image type.<br>2: Passed in video type.<br>Other: Return error code InvalidParameter.</li></ul><p>If you do not use Encryption for encrypting transmission, this field is mandatory.</p>
 	FaceInputType *int64 `json:"FaceInputType,omitnil,omitempty" name:"FaceInputType"`
 
-	// Whether the request information needs to be fully encrypted; Supported encryption algorithms: AES-256-CBC, SM4-GCM; Users with encryption requirements can use this parameter, for details, please click the link on the left.
+	// <p>Whether to encrypt the entire request information.</p><ul><li>Supported encryption algorithms: AES-256-CBC, SM4-GCM.</li><li>The user with encryption requirements can use this parameter. For details, please click the left-side link.</li></ul>
 	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
 
-	// Encrypted ciphertext; The data format before encryption is as follows:{"FaceInput":"AAAAA","FaceInputType":1}
+	// <p>Encrypted ciphertext.</p><ul><li>The data format before encryption is as follows: {"FaceInput":"AAAAA","FaceInputType":1}.</li></ul>
 	EncryptedBody *string `json:"EncryptedBody,omitnil,omitempty" name:"EncryptedBody"`
 }
 
@@ -1719,13 +1713,13 @@ func (r *DetectAIFakeFacesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DetectAIFakeFacesResponseParams struct {
-	// Whether the detected image is an attack: Low: No attack risk Mid: Moderately suspected attack High: Highly suspected attack
+	// <p>Detection result for the input image/video to check the existence of face spoofing attack.</p><ul><li>Low: Low attack risk.</li><li>Mid: Moderately suspected attack.</li><li>High: Highly suspected attack.</li></ul><p>It is advisable to judge as interception when the return value is High, and pass for Mid and Low to better balance security and pass rate.</p>
 	AttackRiskLevel *string `json:"AttackRiskLevel,omitnil,omitempty" name:"AttackRiskLevel"`
 
-	// A list of suspected attack traces detected. Note: When no attack traces are detected, an empty array is returned. This parameter is only used as a reference for result judgment. In actual applications, it is still recommended to use the result of AttackRiskLevel.
+	// <p>List of suspected attack traces detected. It is returned only when AttackRiskLevel is High or Mid.</p><ul><li>Description: Return an empty array if no attack traces are detected.</li><li>This output parameter is for result determination reference. The result of AttackRiskLevel is still recommended for actual use.</li></ul>
 	AttackRiskDetailList []*AttackRiskDetail `json:"AttackRiskDetailList,omitnil,omitempty" name:"AttackRiskDetailList"`
 
-	// Additional Information
+	// <p>Return additional information (including detailed information of cache hit templates).</p>
 	ExtraInfo *ExtraInfo `json:"ExtraInfo,omitnil,omitempty" name:"ExtraInfo"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2178,87 +2172,53 @@ func (r *GetFaceIdResultIntlResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type GetFaceIdTokenIntlRequestParams struct {
-	// The detection mode. Valid values:
-	// `liveness`: Liveness detection only.
-	// `compare`: Selfie Verification(liveness detection and face comparison).
-	// Default value: `liveness`.
+	// <p>Indicates the detection mode. Parameter values as follows:<br>"liveness": liveness detection only;<br>"compare": liveness detection + face comparison;<br>Default value: "liveness".</p>
 	CheckMode *string `json:"CheckMode,omitnil,omitempty" name:"CheckMode"`
 
-	// The verification security level. Valid values:
-	// `1`: Video-based liveness detection.
-	// `2`: Motion-based liveness detection.
-	// `3`: Reflection-based liveness detection.
-	// `4`: Motion- and reflection-based liveness detection.
-	// Default value: `4`.
+	// <p>Indicates the security level of authentication. Security levels are divided into:<br>"1": silent liveness;<br>"2": action liveness detection;<br>"3": light liveness;<br>"4": action + light liveness;<br>Default value is "4".</p>
+	// **Note:** Security level increases from `1` to `4`, with `4` providing the highest security.
 	SecureLevel *string `json:"SecureLevel,omitnil,omitempty" name:"SecureLevel"`
 
-	// The photo (in Base64) to compare. This parameter is required when the value of `CheckMode` is `compare`.
+	// <p>The base64 code of the image for comparison, used for the "liveness comparison" mode. This parameter is required when CheckMode is "compare".</p>
 	Image *string `json:"Image,omitnil,omitempty" name:"Image"`
 
-	// The pass-through parameter, which can be omitted if there are no special requirements.
+	// <p>This parameter is a business passthrough parameter and can be omitted unless otherwise needed.</p>
 	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 
-	// This interface is used to control th action sequences.
-	// Action types are as follows:
-	// "blink"
-	// "mouth"
-	// "nod"
-	// "shake"
-	// You can choose 1-2 actions out of the four.
-	// Single action example: "blink"
-	// Multiple action example: "blink,mouth"
-	// The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2 or 4; otherwise, the interface reports an error.
+	// <p>This API is used to control the sequence of actions. The action types are as follows:<br>"blink"<br>"mouth"<br>"nod"<br>"shake"<br>Choose 1-2 actions from the four.<br>Single action example: "blink"<br>Multi-action example: "blink,mouth".<br>Default value is blink.<br>Input this parameter only when SecureLevel is 2 or 4 for different action types to take effect; otherwise, the API returns an error.</p>
 	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
 
-	// BASIC: Basic version (Default).
-	// ENHANCE: Enhance version, enable additional output of device risk level field.
-	// PRO: Pro version, enable additional output of attack type fields.
-	// PLUS: Plus version, enable additional output of device risk level and attack type fields.
-	// Please contact us to access enhance version & plus version.	
+	// <p>PLUS: PLUS version, PRO: PRO version, ENHANCED: enhanced, BASIC: basic (default)</p>
 	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
+
+	// <p>Liveness retry count</p><p>Value ranges from 1 to 5</p><p>Default value: 5</p>
+	RetryLimit *int64 `json:"RetryLimit,omitnil,omitempty" name:"RetryLimit"`
 }
 
 type GetFaceIdTokenIntlRequest struct {
 	*tchttp.BaseRequest
 	
-	// The detection mode. Valid values:
-	// `liveness`: Liveness detection only.
-	// `compare`: Selfie Verification(liveness detection and face comparison).
-	// Default value: `liveness`.
+	// <p>Indicates the detection mode. Parameter values as follows:<br>"liveness": liveness detection only;<br>"compare": liveness detection + face comparison;<br>Default value: "liveness".</p>
 	CheckMode *string `json:"CheckMode,omitnil,omitempty" name:"CheckMode"`
 
-	// The verification security level. Valid values:
-	// `1`: Video-based liveness detection.
-	// `2`: Motion-based liveness detection.
-	// `3`: Reflection-based liveness detection.
-	// `4`: Motion- and reflection-based liveness detection.
-	// Default value: `4`.
+	// <p>Indicates the security level of authentication. Security levels are divided into:<br>"1": silent liveness;<br>"2": action liveness detection;<br>"3": light liveness;<br>"4": action + light liveness;<br>Default value is "4".</p>
+	// **Note:** Security level increases from `1` to `4`, with `4` providing the highest security.
 	SecureLevel *string `json:"SecureLevel,omitnil,omitempty" name:"SecureLevel"`
 
-	// The photo (in Base64) to compare. This parameter is required when the value of `CheckMode` is `compare`.
+	// <p>The base64 code of the image for comparison, used for the "liveness comparison" mode. This parameter is required when CheckMode is "compare".</p>
 	Image *string `json:"Image,omitnil,omitempty" name:"Image"`
 
-	// The pass-through parameter, which can be omitted if there are no special requirements.
+	// <p>This parameter is a business passthrough parameter and can be omitted unless otherwise needed.</p>
 	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 
-	// This interface is used to control th action sequences.
-	// Action types are as follows:
-	// "blink"
-	// "mouth"
-	// "nod"
-	// "shake"
-	// You can choose 1-2 actions out of the four.
-	// Single action example: "blink"
-	// Multiple action example: "blink,mouth"
-	// The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2 or 4; otherwise, the interface reports an error.
+	// <p>This API is used to control the sequence of actions. The action types are as follows:<br>"blink"<br>"mouth"<br>"nod"<br>"shake"<br>Choose 1-2 actions from the four.<br>Single action example: "blink"<br>Multi-action example: "blink,mouth".<br>Default value is blink.<br>Input this parameter only when SecureLevel is 2 or 4 for different action types to take effect; otherwise, the API returns an error.</p>
 	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
 
-	// BASIC: Basic version (Default).
-	// ENHANCE: Enhance version, enable additional output of device risk level field.
-	// PRO: Pro version, enable additional output of attack type fields.
-	// PLUS: Plus version, enable additional output of device risk level and attack type fields.
-	// Please contact us to access enhance version & plus version.	
+	// <p>PLUS: PLUS version, PRO: PRO version, ENHANCED: enhanced, BASIC: basic (default)</p>
 	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
+
+	// <p>Liveness retry count</p><p>Value ranges from 1 to 5</p><p>Default value: 5</p>
+	RetryLimit *int64 `json:"RetryLimit,omitnil,omitempty" name:"RetryLimit"`
 }
 
 func (r *GetFaceIdTokenIntlRequest) ToJsonString() string {
@@ -2279,6 +2239,7 @@ func (r *GetFaceIdTokenIntlRequest) FromJsonString(s string) error {
 	delete(f, "Extra")
 	delete(f, "ActionList")
 	delete(f, "SdkVersion")
+	delete(f, "RetryLimit")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetFaceIdTokenIntlRequest has unknown keys!", "")
 	}
@@ -2287,7 +2248,7 @@ func (r *GetFaceIdTokenIntlRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type GetFaceIdTokenIntlResponseParams struct {
-	// The SDK token, which is used throughout the verification process and to get the verification result.
+	// <p>SdkToken, used to connect the identity verification process. The verification result can be retrieved with this token. Each SdkToken has a validity of 10 minutes.</p>
 	SdkToken *string `json:"SdkToken,omitnil,omitempty" name:"SdkToken"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4332,13 +4293,16 @@ func (r *PhoneVerificationResponse) FromJsonString(s string) error {
 }
 
 type RetrievalLivenessExtraInfo struct {
-
+	// <p>Hit template type. Among them, Common - public library; Auto - Auto Clustering Library; Owner - custom template.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	HitGroup *string `json:"HitGroup,omitnil,omitempty" name:"HitGroup"`
 
-
+	// <p>The similarity between the request image and the hit attack template ranges from [0,2]. The smaller the value, the higher the probability of hitting the attack template. The default threshold is 0.6. When SimilarityScore≥0.6, it is judged as normal. SimilarityScore&lt;0.6 is judged as an attack.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SimilarityScore *float64 `json:"SimilarityScore,omitnil,omitempty" name:"SimilarityScore"`
 
-
+	// <p>Template id of the cache hit</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	HitTemplate *string `json:"HitTemplate,omitnil,omitempty" name:"HitTemplate"`
 }
 

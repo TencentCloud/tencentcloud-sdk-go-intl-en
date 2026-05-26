@@ -65,7 +65,7 @@ func NewAddTeamMemberResponse() (response *AddTeamMemberResponse) {
 }
 
 // AddTeamMember
-// This API is used to add a team member
+// This API is used to add a team member.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -78,7 +78,7 @@ func (c *Client) AddTeamMember(request *AddTeamMemberRequest) (response *AddTeam
 }
 
 // AddTeamMember
-// This API is used to add a team member
+// This API is used to add a team member.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -231,7 +231,7 @@ func NewCreateApplicationResponse() (response *CreateApplicationResponse) {
 }
 
 // CreateApplication
-// This API is used to create an application.
+// This API is used to create a superapp.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_APPLICATIONNAMEALREADYEXISTED = "FailedOperation.ApplicationNameAlreadyExisted"
@@ -247,7 +247,7 @@ func (c *Client) CreateApplication(request *CreateApplicationRequest) (response 
 }
 
 // CreateApplication
-// This API is used to create an application.
+// This API is used to create a superapp.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_APPLICATIONNAMEALREADYEXISTED = "FailedOperation.ApplicationNameAlreadyExisted"
@@ -355,7 +355,7 @@ func NewCreateApplicationSensitiveAPIResponse() (response *CreateApplicationSens
 }
 
 // CreateApplicationSensitiveAPI
-// This API is used to create a sensitive API of an application.
+// This API is used to create a superapp sensitive API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_EXISTSENSITIVEAPI = "FailedOperation.ExistSensitiveAPI"
@@ -367,7 +367,7 @@ func (c *Client) CreateApplicationSensitiveAPI(request *CreateApplicationSensiti
 }
 
 // CreateApplicationSensitiveAPI
-// This API is used to create a sensitive API of an application.
+// This API is used to create a superapp sensitive API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_EXISTSENSITIVEAPI = "FailedOperation.ExistSensitiveAPI"
@@ -885,7 +885,7 @@ func NewCreateMNPDomainACLResponse() (response *CreateMNPDomainACLResponse) {
 }
 
 // CreateMNPDomainACL
-// This API is used to add a domain name to the allowlist / blocklist of a mini program.
+// This API is used to create a domain allowlist/blocklist for a mini program.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_EXISTREPEATDOMAINURL = "FailedOperation.ExistRepeatDomainUrl"
@@ -897,7 +897,7 @@ func (c *Client) CreateMNPDomainACL(request *CreateMNPDomainACLRequest) (respons
 }
 
 // CreateMNPDomainACL
-// This API is used to add a domain name to the allowlist / blocklist of a mini program.
+// This API is used to create a domain allowlist/blocklist for a mini program.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_EXISTREPEATDOMAINURL = "FailedOperation.ExistRepeatDomainUrl"
@@ -941,7 +941,7 @@ func NewCreateMNPSecretKeyResponse() (response *CreateMNPSecretKeyResponse) {
 }
 
 // CreateMNPSecretKey
-// This API is used to create a secret key for a mini program or mini game.
+// This API is used to create a package secret key for a mini program or mini game.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -952,7 +952,7 @@ func (c *Client) CreateMNPSecretKey(request *CreateMNPSecretKeyRequest) (respons
 }
 
 // CreateMNPSecretKey
-// This API is used to create a secret key for a mini program or mini game.
+// This API is used to create a package secret key for a mini program or mini game.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -1271,7 +1271,7 @@ func NewDeleteApplicationResponse() (response *DeleteApplicationResponse) {
 }
 
 // DeleteApplication
-// This API is used to delete the applications.
+// This API is used to delete a superapp.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_APPALREADYBINDAUDIT = "FailedOperation.AppAlreadyBindAudit"
@@ -1284,7 +1284,7 @@ func (c *Client) DeleteApplication(request *DeleteApplicationRequest) (response 
 }
 
 // DeleteApplication
-// This API is used to delete the applications.
+// This API is used to delete a superapp.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_APPALREADYBINDAUDIT = "FailedOperation.AppAlreadyBindAudit"
@@ -1329,7 +1329,7 @@ func NewDeleteApplicationSensitiveAPIResponse() (response *DeleteApplicationSens
 }
 
 // DeleteApplicationSensitiveAPI
-// This API is used to delete a sensitive API.
+// This API is used to delete a superapp sensitive API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -1340,7 +1340,7 @@ func (c *Client) DeleteApplicationSensitiveAPI(request *DeleteApplicationSensiti
 }
 
 // DeleteApplicationSensitiveAPI
-// This API is used to delete a sensitive API.
+// This API is used to delete a superapp sensitive API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -1699,7 +1699,7 @@ func NewDescribeAPPDataDetailLineChartResponse() (response *DescribeAPPDataDetai
 }
 
 // DescribeAPPDataDetailLineChart
-// This API is used to retrieve the line chart data for selected superapp metrics.
+// This API is used to query the line chart data for selected superapp metrics.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -1711,7 +1711,7 @@ func (c *Client) DescribeAPPDataDetailLineChart(request *DescribeAPPDataDetailLi
 }
 
 // DescribeAPPDataDetailLineChart
-// This API is used to retrieve the line chart data for selected superapp metrics.
+// This API is used to query the line chart data for selected superapp metrics.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -1755,7 +1755,7 @@ func NewDescribeAPPDataOverviewResponse() (response *DescribeAPPDataOverviewResp
 }
 
 // DescribeAPPDataOverview
-// This API is used to retrieve an overview of the superapp data.
+// This API is used to query the data overview for the selected superapp metrics.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -1767,7 +1767,7 @@ func (c *Client) DescribeAPPDataOverview(request *DescribeAPPDataOverviewRequest
 }
 
 // DescribeAPPDataOverview
-// This API is used to retrieve an overview of the superapp data.
+// This API is used to query the data overview for the selected superapp metrics.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -1811,7 +1811,7 @@ func NewDescribeAdvertisingLineChartResponse() (response *DescribeAdvertisingLin
 }
 
 // DescribeAdvertisingLineChart
-// This API is used to retrieve the advertising line chart data for a mini program within a specified date range.
+// This API is used to query the advertising line chart data for a mini program within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -1825,7 +1825,7 @@ func (c *Client) DescribeAdvertisingLineChart(request *DescribeAdvertisingLineCh
 }
 
 // DescribeAdvertisingLineChart
-// This API is used to retrieve the advertising line chart data for a mini program within a specified date range.
+// This API is used to query the advertising line chart data for a mini program within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -1871,7 +1871,7 @@ func NewDescribeAdvertisingOverviewResponse() (response *DescribeAdvertisingOver
 }
 
 // DescribeAdvertisingOverview
-// This API is used to retrieve an overview of mini program ad metrics within a specified date range.
+// This API is used to query the mini program advertising overview.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -1885,7 +1885,7 @@ func (c *Client) DescribeAdvertisingOverview(request *DescribeAdvertisingOvervie
 }
 
 // DescribeAdvertisingOverview
-// This API is used to retrieve an overview of mini program ad metrics within a specified date range.
+// This API is used to query the mini program advertising overview.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -1931,7 +1931,7 @@ func NewDescribeApplicationResponse() (response *DescribeApplicationResponse) {
 }
 
 // DescribeApplication
-// This API is used to query the application details.
+// This API is used to query the superapp details.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -1941,7 +1941,7 @@ func (c *Client) DescribeApplication(request *DescribeApplicationRequest) (respo
 }
 
 // DescribeApplication
-// This API is used to query the application details.
+// This API is used to query the superapp details.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -1983,7 +1983,7 @@ func NewDescribeApplicationConfigFileResponse() (response *DescribeApplicationCo
 }
 
 // DescribeApplicationConfigFile
-// This API is used to query the configuration files of an application.
+// This API is used to query the configuration files of a superapp.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -1993,7 +1993,7 @@ func (c *Client) DescribeApplicationConfigFile(request *DescribeApplicationConfi
 }
 
 // DescribeApplicationConfigFile
-// This API is used to query the configuration files of an application.
+// This API is used to query the configuration files of a superapp.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -2035,7 +2035,7 @@ func NewDescribeApplicationConfigInfosResponse() (response *DescribeApplicationC
 }
 
 // DescribeApplicationConfigInfos
-// This API is used to retrieve the configuration details for an superapp.
+// This API is used to query the superapp configuration information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2047,7 +2047,7 @@ func (c *Client) DescribeApplicationConfigInfos(request *DescribeApplicationConf
 }
 
 // DescribeApplicationConfigInfos
-// This API is used to retrieve the configuration details for an superapp.
+// This API is used to query the superapp configuration information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2091,7 +2091,7 @@ func NewDescribeApplicationListResponse() (response *DescribeApplicationListResp
 }
 
 // DescribeApplicationList
-// This API is used to query the applications.
+// This API is used to query a list of superapps.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -2101,7 +2101,7 @@ func (c *Client) DescribeApplicationList(request *DescribeApplicationListRequest
 }
 
 // DescribeApplicationList
-// This API is used to query the applications.
+// This API is used to query a list of superapps.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -2143,7 +2143,7 @@ func NewDescribeApplicationMNPListResponse() (response *DescribeApplicationMNPLi
 }
 
 // DescribeApplicationMNPList
-// This API is used to retrieve a list of the mini programs or mini games associated with a superapp.
+// This API is used to query the mini program or mini game list associated with a superapp.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -2153,7 +2153,7 @@ func (c *Client) DescribeApplicationMNPList(request *DescribeApplicationMNPListR
 }
 
 // DescribeApplicationMNPList
-// This API is used to retrieve a list of the mini programs or mini games associated with a superapp.
+// This API is used to query the mini program or mini game list associated with a superapp.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -2195,7 +2195,7 @@ func NewDescribeApplicationSensitiveAPIListResponse() (response *DescribeApplica
 }
 
 // DescribeApplicationSensitiveAPIList
-// This API is used to list sensitive APIs of an application.
+// This API is used to query a list of superapp sensitive APIs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -2205,7 +2205,7 @@ func (c *Client) DescribeApplicationSensitiveAPIList(request *DescribeApplicatio
 }
 
 // DescribeApplicationSensitiveAPIList
-// This API is used to list sensitive APIs of an application.
+// This API is used to query a list of superapp sensitive APIs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -2299,7 +2299,7 @@ func NewDescribeGlobalOverviewDataSummaryResponse() (response *DescribeGlobalOve
 }
 
 // DescribeGlobalOverviewDataSummary
-// This API is used to retrieve a global overview summary of usage statistics.
+// This API is used to query the data summary for the global overview.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2310,7 +2310,7 @@ func (c *Client) DescribeGlobalOverviewDataSummary(request *DescribeGlobalOvervi
 }
 
 // DescribeGlobalOverviewDataSummary
-// This API is used to retrieve a global overview summary of usage statistics.
+// This API is used to query the data summary for the global overview.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2353,7 +2353,7 @@ func NewDescribeGlobalOverviewReportDetailResponse() (response *DescribeGlobalOv
 }
 
 // DescribeGlobalOverviewReportDetail
-// This API is used to retrieve the detailed report data for global overview within a specified date range.
+// This API is used to query the detailed report data for global overview within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -2364,7 +2364,7 @@ func (c *Client) DescribeGlobalOverviewReportDetail(request *DescribeGlobalOverv
 }
 
 // DescribeGlobalOverviewReportDetail
-// This API is used to retrieve the detailed report data for global overview within a specified date range.
+// This API is used to query the detailed report data for global overview within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -2459,7 +2459,7 @@ func NewDescribeMNGAccessAnalysisDetailResponse() (response *DescribeMNGAccessAn
 }
 
 // DescribeMNGAccessAnalysisDetail
-// This API is used to retrieve the detailed visit analysis data for a mini game within a specified date range.
+// This API is used to query the detailed visit analysis data for a mini game within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -2470,7 +2470,7 @@ func (c *Client) DescribeMNGAccessAnalysisDetail(request *DescribeMNGAccessAnaly
 }
 
 // DescribeMNGAccessAnalysisDetail
-// This API is used to retrieve the detailed visit analysis data for a mini game within a specified date range.
+// This API is used to query the detailed visit analysis data for a mini game within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -2513,7 +2513,7 @@ func NewDescribeMNGAccessAnalysisLineChartResponse() (response *DescribeMNGAcces
 }
 
 // DescribeMNGAccessAnalysisLineChart
-// This API is used to retrieve line chart analysis data for mini game visits.
+// This API is used to query the mini game visit analysis line chart.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -2527,7 +2527,7 @@ func (c *Client) DescribeMNGAccessAnalysisLineChart(request *DescribeMNGAccessAn
 }
 
 // DescribeMNGAccessAnalysisLineChart
-// This API is used to retrieve line chart analysis data for mini game visits.
+// This API is used to query the mini game visit analysis line chart.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -2573,7 +2573,7 @@ func NewDescribeMNGAccessAnalysisOverviewResponse() (response *DescribeMNGAccess
 }
 
 // DescribeMNGAccessAnalysisOverview
-// This API is used to retrieve an overview of visit analysis data for a mini game within a specified date range.
+// This API is used to query an overview of visit analysis data for a mini game within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -2585,7 +2585,7 @@ func (c *Client) DescribeMNGAccessAnalysisOverview(request *DescribeMNGAccessAna
 }
 
 // DescribeMNGAccessAnalysisOverview
-// This API is used to retrieve an overview of visit analysis data for a mini game within a specified date range.
+// This API is used to query an overview of visit analysis data for a mini game within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -2629,7 +2629,7 @@ func NewDescribeMNGActiveUserRealTimeStatisticsResponse() (response *DescribeMNG
 }
 
 // DescribeMNGActiveUserRealTimeStatistics
-// This API is used to retrieve the real-time active user statistics for a mini game.
+// This API is used to query the mini game real-time active user statistics.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -2641,7 +2641,7 @@ func (c *Client) DescribeMNGActiveUserRealTimeStatistics(request *DescribeMNGAct
 }
 
 // DescribeMNGActiveUserRealTimeStatistics
-// This API is used to retrieve the real-time active user statistics for a mini game.
+// This API is used to query the mini game real-time active user statistics.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -2685,7 +2685,7 @@ func NewDescribeMNGAdvertisingDetailResponse() (response *DescribeMNGAdvertising
 }
 
 // DescribeMNGAdvertisingDetail
-// This API is used to retrieve the advertising detailed data for a mini game over a specified period.
+// This API is used to query the detailed mini game advertising data over a specified period.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -2699,7 +2699,7 @@ func (c *Client) DescribeMNGAdvertisingDetail(request *DescribeMNGAdvertisingDet
 }
 
 // DescribeMNGAdvertisingDetail
-// This API is used to retrieve the advertising detailed data for a mini game over a specified period.
+// This API is used to query the detailed mini game advertising data over a specified period.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -2745,7 +2745,7 @@ func NewDescribeMNGAdvertisingLineChartResponse() (response *DescribeMNGAdvertis
 }
 
 // DescribeMNGAdvertisingLineChart
-// This API is used to retrieve mini game advertising data in a line chart format.
+// This API is used to query the mini game advertising data in a line chart format.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -2756,7 +2756,7 @@ func (c *Client) DescribeMNGAdvertisingLineChart(request *DescribeMNGAdvertising
 }
 
 // DescribeMNGAdvertisingLineChart
-// This API is used to retrieve mini game advertising data in a line chart format.
+// This API is used to query the mini game advertising data in a line chart format.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -2799,7 +2799,7 @@ func NewDescribeMNGAdvertisingOverviewResponse() (response *DescribeMNGAdvertisi
 }
 
 // DescribeMNGAdvertisingOverview
-// This API is used to retrieve an overview of mini game ad metrics within a specified date range.
+// This API is used to query an overview of mini game ad metrics within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -2811,7 +2811,7 @@ func (c *Client) DescribeMNGAdvertisingOverview(request *DescribeMNGAdvertisingO
 }
 
 // DescribeMNGAdvertisingOverview
-// This API is used to retrieve an overview of mini game ad metrics within a specified date range.
+// This API is used to query an overview of mini game ad metrics within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -2907,7 +2907,7 @@ func NewDescribeMNGCategoryResponse() (response *DescribeMNGCategoryResponse) {
 }
 
 // DescribeMNGCategory
-// This API is used to query the list of mini game types.
+// This API is used to query the mini game categories.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -2916,7 +2916,7 @@ func (c *Client) DescribeMNGCategory(request *DescribeMNGCategoryRequest) (respo
 }
 
 // DescribeMNGCategory
-// This API is used to query the list of mini game types.
+// This API is used to query the mini game categories.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -3057,7 +3057,7 @@ func NewDescribeMNGMAUDataDetailResponse() (response *DescribeMNGMAUDataDetailRe
 }
 
 // DescribeMNGMAUDataDetail
-// This API is used to retrieve the detailed mini game monthly active user data.
+// This API is used to query the detailed mini game monthly active user data.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -3068,7 +3068,7 @@ func (c *Client) DescribeMNGMAUDataDetail(request *DescribeMNGMAUDataDetailReque
 }
 
 // DescribeMNGMAUDataDetail
-// This API is used to retrieve the detailed mini game monthly active user data.
+// This API is used to query the detailed mini game monthly active user data.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -3111,7 +3111,7 @@ func NewDescribeMNGMAULineChartResponse() (response *DescribeMNGMAULineChartResp
 }
 
 // DescribeMNGMAULineChart
-// This API is used to retrieve mini game monthly active user data in a line chart format.
+// This API is used to query the mini game MAU line chart.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -3123,7 +3123,7 @@ func (c *Client) DescribeMNGMAULineChart(request *DescribeMNGMAULineChartRequest
 }
 
 // DescribeMNGMAULineChart
-// This API is used to retrieve mini game monthly active user data in a line chart format.
+// This API is used to query the mini game MAU line chart.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -3167,7 +3167,7 @@ func NewDescribeMNGMAUMonthlyComparisonMetricCardResponse() (response *DescribeM
 }
 
 // DescribeMNGMAUMonthlyComparisonMetricCard
-// This API is used to retrieve MAU comparison data for a mini game between two months.
+// This API is used to query the MAU comparison data for a mini game between two months.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -3178,7 +3178,7 @@ func (c *Client) DescribeMNGMAUMonthlyComparisonMetricCard(request *DescribeMNGM
 }
 
 // DescribeMNGMAUMonthlyComparisonMetricCard
-// This API is used to retrieve MAU comparison data for a mini game between two months.
+// This API is used to query the MAU comparison data for a mini game between two months.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -3273,7 +3273,7 @@ func NewDescribeMNGPaymentLineChartResponse() (response *DescribeMNGPaymentLineC
 }
 
 // DescribeMNGPaymentLineChart
-// This API is used to retrieve the line chart data for mini game payment.
+// This API is used to query the mini game payment line chart.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -3285,7 +3285,7 @@ func (c *Client) DescribeMNGPaymentLineChart(request *DescribeMNGPaymentLineChar
 }
 
 // DescribeMNGPaymentLineChart
-// This API is used to retrieve the line chart data for mini game payment.
+// This API is used to query the mini game payment line chart.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -3329,7 +3329,7 @@ func NewDescribeMNGPaymentOverviewResponse() (response *DescribeMNGPaymentOvervi
 }
 
 // DescribeMNGPaymentOverview
-// This API is used to retrieve an overview of mini game payment data within a specified period.
+// This API is used to query an overview of mini game payment data within a specified period.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -3341,7 +3341,7 @@ func (c *Client) DescribeMNGPaymentOverview(request *DescribeMNGPaymentOverviewR
 }
 
 // DescribeMNGPaymentOverview
-// This API is used to retrieve an overview of mini game payment data within a specified period.
+// This API is used to query an overview of mini game payment data within a specified period.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -3385,7 +3385,7 @@ func NewDescribeMNGPaymentReportDetailResponse() (response *DescribeMNGPaymentRe
 }
 
 // DescribeMNGPaymentReportDetail
-// This API is used to retrieve a detailed payment report data for a mini game.
+// This API is used to query a detailed payment report data for a mini game.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -3397,7 +3397,7 @@ func (c *Client) DescribeMNGPaymentReportDetail(request *DescribeMNGPaymentRepor
 }
 
 // DescribeMNGPaymentReportDetail
-// This API is used to retrieve a detailed payment report data for a mini game.
+// This API is used to query a detailed payment report data for a mini game.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -3441,7 +3441,7 @@ func NewDescribeMNGPaymentRetentionAnalysisResponse() (response *DescribeMNGPaym
 }
 
 // DescribeMNGPaymentRetentionAnalysis
-// This API is used to retrieve the mini game payment retention data.
+// This API is used to query the mini game payment retention data.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -3453,7 +3453,7 @@ func (c *Client) DescribeMNGPaymentRetentionAnalysis(request *DescribeMNGPayment
 }
 
 // DescribeMNGPaymentRetentionAnalysis
-// This API is used to retrieve the mini game payment retention data.
+// This API is used to query the mini game payment retention data.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -3551,7 +3551,7 @@ func NewDescribeMNGReleasedVersionHistoryResponse() (response *DescribeMNGReleas
 }
 
 // DescribeMNGReleasedVersionHistory
-// This API is used to query the released mini game versions.
+// This API is used to query the release version history of a mini game.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -3561,7 +3561,7 @@ func (c *Client) DescribeMNGReleasedVersionHistory(request *DescribeMNGReleasedV
 }
 
 // DescribeMNGReleasedVersionHistory
-// This API is used to query the released mini game versions.
+// This API is used to query the release version history of a mini game.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -3603,7 +3603,7 @@ func NewDescribeMNGRetentionDataResponse() (response *DescribeMNGRetentionDataRe
 }
 
 // DescribeMNGRetentionData
-// This API is used to retrieve user retention data for a mini game within a specified date range.
+// This API is used to query the user retention data for a mini game within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -3615,7 +3615,7 @@ func (c *Client) DescribeMNGRetentionData(request *DescribeMNGRetentionDataReque
 }
 
 // DescribeMNGRetentionData
-// This API is used to retrieve user retention data for a mini game within a specified date range.
+// This API is used to query the user retention data for a mini game within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -3659,7 +3659,7 @@ func NewDescribeMNGSensitiveAPIPermissionApprovalResponse() (response *DescribeM
 }
 
 // DescribeMNGSensitiveAPIPermissionApproval
-// This API is used to query the details of a sensitive API permission request for a mini game.
+// This API is used to query the details of permission requests to allow a mini game to call sensitive APIs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -3670,7 +3670,7 @@ func (c *Client) DescribeMNGSensitiveAPIPermissionApproval(request *DescribeMNGS
 }
 
 // DescribeMNGSensitiveAPIPermissionApproval
-// This API is used to query the details of a sensitive API permission request for a mini game.
+// This API is used to query the details of permission requests to allow a mini game to call sensitive APIs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -3713,7 +3713,7 @@ func NewDescribeMNGSensitiveAPIPermissionListResponse() (response *DescribeMNGSe
 }
 
 // DescribeMNGSensitiveAPIPermissionList
-// This API is used to query the list of sensitive APIs that available to the mini game.
+// This API is used to query a list of sensitive APIs that are available to the mini game.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -3723,7 +3723,7 @@ func (c *Client) DescribeMNGSensitiveAPIPermissionList(request *DescribeMNGSensi
 }
 
 // DescribeMNGSensitiveAPIPermissionList
-// This API is used to query the list of sensitive APIs that available to the mini game.
+// This API is used to query a list of sensitive APIs that are available to the mini game.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -3765,7 +3765,7 @@ func NewDescribeMNGVersionResponse() (response *DescribeMNGVersionResponse) {
 }
 
 // DescribeMNGVersion
-// This API is used to query the creation result of a mini game version.
+// This API is used to query the mini game version creation results.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -3775,7 +3775,7 @@ func (c *Client) DescribeMNGVersion(request *DescribeMNGVersionRequest) (respons
 }
 
 // DescribeMNGVersion
-// This API is used to query the creation result of a mini game version.
+// This API is used to query the mini game version creation results.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -3869,7 +3869,7 @@ func NewDescribeMNPAccessAnalysisOverviewResponse() (response *DescribeMNPAccess
 }
 
 // DescribeMNPAccessAnalysisOverview
-// This API is used to retrieve an overview of visit analysis data for a mini program within a specified date range.
+// This API is used to query the overview of mini program visit analysis data within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -3881,7 +3881,7 @@ func (c *Client) DescribeMNPAccessAnalysisOverview(request *DescribeMNPAccessAna
 }
 
 // DescribeMNPAccessAnalysisOverview
-// This API is used to retrieve an overview of visit analysis data for a mini program within a specified date range.
+// This API is used to query the overview of mini program visit analysis data within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -3925,7 +3925,7 @@ func NewDescribeMNPActiveUserRealTimeStatisticsResponse() (response *DescribeMNP
 }
 
 // DescribeMNPActiveUserRealTimeStatistics
-// This API is used to retrieve the real-time active user statistics for a mini program.
+// This API is used to query the mini program real-time active user statistics.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -3938,7 +3938,7 @@ func (c *Client) DescribeMNPActiveUserRealTimeStatistics(request *DescribeMNPAct
 }
 
 // DescribeMNPActiveUserRealTimeStatistics
-// This API is used to retrieve the real-time active user statistics for a mini program.
+// This API is used to query the mini program real-time active user statistics.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -3983,7 +3983,7 @@ func NewDescribeMNPAdvertisingDetailResponse() (response *DescribeMNPAdvertising
 }
 
 // DescribeMNPAdvertisingDetail
-// This API is used to retrieve the detailed advertising data for a mini program within a specified date range.
+// This API is used to query the detailed advertising data for a mini program within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -3995,7 +3995,7 @@ func (c *Client) DescribeMNPAdvertisingDetail(request *DescribeMNPAdvertisingDet
 }
 
 // DescribeMNPAdvertisingDetail
-// This API is used to retrieve the detailed advertising data for a mini program within a specified date range.
+// This API is used to query the detailed advertising data for a mini program within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -4039,7 +4039,7 @@ func NewDescribeMNPAllStageVersionsResponse() (response *DescribeMNPAllStageVers
 }
 
 // DescribeMNPAllStageVersions
-// This API is used to query the mini program version information.
+// This API is used to query versions of a mini program across all stages.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4049,7 +4049,7 @@ func (c *Client) DescribeMNPAllStageVersions(request *DescribeMNPAllStageVersion
 }
 
 // DescribeMNPAllStageVersions
-// This API is used to query the mini program version information.
+// This API is used to query versions of a mini program across all stages.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4091,7 +4091,7 @@ func NewDescribeMNPApprovalListResponse() (response *DescribeMNPApprovalListResp
 }
 
 // DescribeMNPApprovalList
-// This API is used to list the approval requests related with a mini program version.
+// This API is used to query a list of approval requests related with a mini program.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4101,7 +4101,7 @@ func (c *Client) DescribeMNPApprovalList(request *DescribeMNPApprovalListRequest
 }
 
 // DescribeMNPApprovalList
-// This API is used to list the approval requests related with a mini program version.
+// This API is used to query a list of approval requests related with a mini program.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4143,7 +4143,7 @@ func NewDescribeMNPCategoryResponse() (response *DescribeMNPCategoryResponse) {
 }
 
 // DescribeMNPCategory
-// This API is used to query the mini program types.
+// This API is used to query the mini program category list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4152,7 +4152,7 @@ func (c *Client) DescribeMNPCategory(request *DescribeMNPCategoryRequest) (respo
 }
 
 // DescribeMNPCategory
-// This API is used to query the mini program types.
+// This API is used to query the mini program category list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4193,7 +4193,7 @@ func NewDescribeMNPDomainACLResponse() (response *DescribeMNPDomainACLResponse) 
 }
 
 // DescribeMNPDomainACL
-// This API is used to query the domain allowlist / blocklist of a mini program.
+// This API is used to query the domain allowlist/blocklist of a mini program.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4203,7 +4203,7 @@ func (c *Client) DescribeMNPDomainACL(request *DescribeMNPDomainACLRequest) (res
 }
 
 // DescribeMNPDomainACL
-// This API is used to query the domain allowlist / blocklist of a mini program.
+// This API is used to query the domain allowlist/blocklist of a mini program.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4245,7 +4245,7 @@ func NewDescribeMNPListResponse() (response *DescribeMNPListResponse) {
 }
 
 // DescribeMNPList
-// This API is used to query the mini programs.
+// This API is used to query the mini program list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4254,7 +4254,7 @@ func (c *Client) DescribeMNPList(request *DescribeMNPListRequest) (response *Des
 }
 
 // DescribeMNPList
-// This API is used to query the mini programs.
+// This API is used to query the mini program list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4295,7 +4295,7 @@ func NewDescribeMNPMAUDataDetailResponse() (response *DescribeMNPMAUDataDetailRe
 }
 
 // DescribeMNPMAUDataDetail
-// This API is used to retrieve the detailed mini program monthly active user data.
+// This API is used to query the detailed mini program monthly active user data.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4306,7 +4306,7 @@ func (c *Client) DescribeMNPMAUDataDetail(request *DescribeMNPMAUDataDetailReque
 }
 
 // DescribeMNPMAUDataDetail
-// This API is used to retrieve the detailed mini program monthly active user data.
+// This API is used to query the detailed mini program monthly active user data.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4349,7 +4349,7 @@ func NewDescribeMNPMAULineChartResponse() (response *DescribeMNPMAULineChartResp
 }
 
 // DescribeMNPMAULineChart
-// This API is used to retrieve the mini program monthly active user data in a line chart format.
+// This API is used to query the mini program monthly active user data in a line chart format.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4360,7 +4360,7 @@ func (c *Client) DescribeMNPMAULineChart(request *DescribeMNPMAULineChartRequest
 }
 
 // DescribeMNPMAULineChart
-// This API is used to retrieve the mini program monthly active user data in a line chart format.
+// This API is used to query the mini program monthly active user data in a line chart format.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4403,7 +4403,7 @@ func NewDescribeMNPMAUMetricCardResponse() (response *DescribeMNPMAUMetricCardRe
 }
 
 // DescribeMNPMAUMetricCard
-// This API is used to retrieve MAU comparison data for a mini program between two months.
+// This API is used to query the MAU comparison data for a mini program between two months.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4414,7 +4414,7 @@ func (c *Client) DescribeMNPMAUMetricCard(request *DescribeMNPMAUMetricCardReque
 }
 
 // DescribeMNPMAUMetricCard
-// This API is used to retrieve MAU comparison data for a mini program between two months.
+// This API is used to query the MAU comparison data for a mini program between two months.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4509,7 +4509,7 @@ func NewDescribeMNPPageAnalysisDetailResponse() (response *DescribeMNPPageAnalys
 }
 
 // DescribeMNPPageAnalysisDetail
-// This API is used to retrieve the detailed page visit data for a mini program over a specified period.
+// This API is used to query the detailed mini program page visit data.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4520,7 +4520,7 @@ func (c *Client) DescribeMNPPageAnalysisDetail(request *DescribeMNPPageAnalysisD
 }
 
 // DescribeMNPPageAnalysisDetail
-// This API is used to retrieve the detailed page visit data for a mini program over a specified period.
+// This API is used to query the detailed mini program page visit data.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4617,7 +4617,7 @@ func NewDescribeMNPReleasedVersionHistoryResponse() (response *DescribeMNPReleas
 }
 
 // DescribeMNPReleasedVersionHistory
-// This API is used to list all released versions of a mini program.
+// This API is used to query the release version history of a mini program.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4627,7 +4627,7 @@ func (c *Client) DescribeMNPReleasedVersionHistory(request *DescribeMNPReleasedV
 }
 
 // DescribeMNPReleasedVersionHistory
-// This API is used to list all released versions of a mini program.
+// This API is used to query the release version history of a mini program.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4669,7 +4669,7 @@ func NewDescribeMNPReportDataLineChartResponse() (response *DescribeMNPReportDat
 }
 
 // DescribeMNPReportDataLineChart
-// This API is used to retrieve the line chart data for mini program visit analysis within a given date range.
+// This API is used to query the mini program visit analysis line chart within a given date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -4681,7 +4681,7 @@ func (c *Client) DescribeMNPReportDataLineChart(request *DescribeMNPReportDataLi
 }
 
 // DescribeMNPReportDataLineChart
-// This API is used to retrieve the line chart data for mini program visit analysis within a given date range.
+// This API is used to query the mini program visit analysis line chart within a given date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -4725,7 +4725,7 @@ func NewDescribeMNPReportDetailResponse() (response *DescribeMNPReportDetailResp
 }
 
 // DescribeMNPReportDetail
-// This API is used to retrieve the detailed mini program visit analysis data.
+// This API is used to query the detailed mini program visit analysis data.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_USERNOTFOUND = "FailedOperation.UserNotFound"
@@ -4735,7 +4735,7 @@ func (c *Client) DescribeMNPReportDetail(request *DescribeMNPReportDetailRequest
 }
 
 // DescribeMNPReportDetail
-// This API is used to retrieve the detailed mini program visit analysis data.
+// This API is used to query the detailed mini program visit analysis data.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_USERNOTFOUND = "FailedOperation.UserNotFound"
@@ -4777,7 +4777,7 @@ func NewDescribeMNPRetentionDataResponse() (response *DescribeMNPRetentionDataRe
 }
 
 // DescribeMNPRetentionData
-// This API is used to retrieve user retention data for a mini program within a specified date range.
+// This API is used to query the mini program user retention data within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -4791,7 +4791,7 @@ func (c *Client) DescribeMNPRetentionData(request *DescribeMNPRetentionDataReque
 }
 
 // DescribeMNPRetentionData
-// This API is used to retrieve user retention data for a mini program within a specified date range.
+// This API is used to query the mini program user retention data within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -4837,7 +4837,7 @@ func NewDescribeMNPSensitiveAPIPermissionApprovalResponse() (response *DescribeM
 }
 
 // DescribeMNPSensitiveAPIPermissionApproval
-// This API is used to query details of a specific permission request to call sensitive APIs.
+// This API is used to query the details of a sensitive API permission request for a mini program.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -4848,7 +4848,7 @@ func (c *Client) DescribeMNPSensitiveAPIPermissionApproval(request *DescribeMNPS
 }
 
 // DescribeMNPSensitiveAPIPermissionApproval
-// This API is used to query details of a specific permission request to call sensitive APIs.
+// This API is used to query the details of a sensitive API permission request for a mini program.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -4891,7 +4891,7 @@ func NewDescribeMNPSensitiveAPIPermissionApprovalListResponse() (response *Descr
 }
 
 // DescribeMNPSensitiveAPIPermissionApprovalList
-// This API is used to query permission requests to allow a mini program calling sensitive APIs.
+// This API is used to query a list of permission requests to allow a mini program to call sensitive APIs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4900,7 +4900,7 @@ func (c *Client) DescribeMNPSensitiveAPIPermissionApprovalList(request *Describe
 }
 
 // DescribeMNPSensitiveAPIPermissionApprovalList
-// This API is used to query permission requests to allow a mini program calling sensitive APIs.
+// This API is used to query a list of permission requests to allow a mini program to call sensitive APIs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -5045,7 +5045,7 @@ func NewDescribePaymentDataDetailResponse() (response *DescribePaymentDataDetail
 }
 
 // DescribePaymentDataDetail
-// This API is used to retrieve the detailed standard payment data for specified  mini programs within a specified date range.
+// This API is used to query the mini program payment data details within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -5057,7 +5057,7 @@ func (c *Client) DescribePaymentDataDetail(request *DescribePaymentDataDetailReq
 }
 
 // DescribePaymentDataDetail
-// This API is used to retrieve the detailed standard payment data for specified  mini programs within a specified date range.
+// This API is used to query the mini program payment data details within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -5101,7 +5101,7 @@ func NewDescribePaymentDataLineChartResponse() (response *DescribePaymentDataLin
 }
 
 // DescribePaymentDataLineChart
-// This API is used to retrieve the line chart data related to standard payment for a mini program within a specified date range.
+// This API is used to query the mini program payment line chart within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -5113,7 +5113,7 @@ func (c *Client) DescribePaymentDataLineChart(request *DescribePaymentDataLineCh
 }
 
 // DescribePaymentDataLineChart
-// This API is used to retrieve the line chart data related to standard payment for a mini program within a specified date range.
+// This API is used to query the mini program payment line chart within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -5157,7 +5157,7 @@ func NewDescribePaymentDataOverviewResponse() (response *DescribePaymentDataOver
 }
 
 // DescribePaymentDataOverview
-// This API is used to retrieve an overview of mini program payment data within a specified date range.
+// This API is used to query an overview of mini program payment data within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -5171,7 +5171,7 @@ func (c *Client) DescribePaymentDataOverview(request *DescribePaymentDataOvervie
 }
 
 // DescribePaymentDataOverview
-// This API is used to retrieve an overview of mini program payment data within a specified date range.
+// This API is used to query an overview of mini program payment data within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -5217,7 +5217,7 @@ func NewDescribeRoleListResponse() (response *DescribeRoleListResponse) {
 }
 
 // DescribeRoleList
-// This API is used to query the roles.
+// This API is used to query a list of roles.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -5226,7 +5226,7 @@ func (c *Client) DescribeRoleList(request *DescribeRoleListRequest) (response *D
 }
 
 // DescribeRoleList
-// This API is used to query the roles.
+// This API is used to query a list of roles.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -5317,7 +5317,7 @@ func NewDescribeTeamListResponse() (response *DescribeTeamListResponse) {
 }
 
 // DescribeTeamList
-// This API is used to query the teams.
+// This API is used to query a list of teams.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -5327,7 +5327,7 @@ func (c *Client) DescribeTeamList(request *DescribeTeamListRequest) (response *D
 }
 
 // DescribeTeamList
-// This API is used to query the teams.
+// This API is used to query a list of teams.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -5369,7 +5369,7 @@ func NewDescribeTeamMemberListResponse() (response *DescribeTeamMemberListRespon
 }
 
 // DescribeTeamMemberList
-// This API is used to query the team members.
+// This API is used to query a list of team members.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -5378,7 +5378,7 @@ func (c *Client) DescribeTeamMemberList(request *DescribeTeamMemberListRequest) 
 }
 
 // DescribeTeamMemberList
-// This API is used to query the team members.
+// This API is used to query a list of team members.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -5529,7 +5529,7 @@ func NewDescribeUserListResponse() (response *DescribeUserListResponse) {
 }
 
 // DescribeUserList
-// This API is used to query the users.
+// This API is used to query a list of users.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -5540,7 +5540,7 @@ func (c *Client) DescribeUserList(request *DescribeUserListRequest) (response *D
 }
 
 // DescribeUserList
-// This API is used to query the users.
+// This API is used to query a list of users.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -5583,7 +5583,7 @@ func NewDisableApplicationSensitiveAPIResponse() (response *DisableApplicationSe
 }
 
 // DisableApplicationSensitiveAPI
-// This API is used to set a sensitive API to restricted.
+// This API is used to disable a superapp sensitive API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -5594,7 +5594,7 @@ func (c *Client) DisableApplicationSensitiveAPI(request *DisableApplicationSensi
 }
 
 // DisableApplicationSensitiveAPI
-// This API is used to set a sensitive API to restricted.
+// This API is used to disable a superapp sensitive API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -5637,7 +5637,7 @@ func NewEnableApplicationSensitiveAPIResponse() (response *EnableApplicationSens
 }
 
 // EnableApplicationSensitiveAPI
-// This API is used to set an application sensitive API to public.
+// This API is used to enable a superapp sensitive API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -5649,7 +5649,7 @@ func (c *Client) EnableApplicationSensitiveAPI(request *EnableApplicationSensiti
 }
 
 // EnableApplicationSensitiveAPI
-// This API is used to set an application sensitive API to public.
+// This API is used to enable a superapp sensitive API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -5693,7 +5693,7 @@ func NewModifyApplicationResponse() (response *ModifyApplicationResponse) {
 }
 
 // ModifyApplication
-// This API is used to change the application information.
+// This API is used to change the superapp information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_APPLICATIONNAMEALREADYEXISTED = "FailedOperation.ApplicationNameAlreadyExisted"
@@ -5709,7 +5709,7 @@ func (c *Client) ModifyApplication(request *ModifyApplicationRequest) (response 
 }
 
 // ModifyApplication
-// This API is used to change the application information.
+// This API is used to change the superapp information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_APPLICATIONNAMEALREADYEXISTED = "FailedOperation.ApplicationNameAlreadyExisted"
@@ -5979,7 +5979,7 @@ func NewModifyMNPResponse() (response *ModifyMNPResponse) {
 }
 
 // ModifyMNP
-// This API is used to modify the mini program information.
+// This API is used to edit the mini program information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_MINIPROGRAMICONANALYSISFAILED = "FailedOperation.MiniProgramIconAnalysisFailed"
@@ -5994,7 +5994,7 @@ func (c *Client) ModifyMNP(request *ModifyMNPRequest) (response *ModifyMNPRespon
 }
 
 // ModifyMNP
-// This API is used to modify the mini program information.
+// This API is used to edit the mini program information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_MINIPROGRAMICONANALYSISFAILED = "FailedOperation.MiniProgramIconAnalysisFailed"
@@ -6261,7 +6261,7 @@ func NewProcessMNPApprovalResponse() (response *ProcessMNPApprovalResponse) {
 }
 
 // ProcessMNPApproval
-// This API is used to approve or reject the release of a mini program version.
+// This API is used to process mini program approval requests.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -6275,7 +6275,7 @@ func (c *Client) ProcessMNPApproval(request *ProcessMNPApprovalRequest) (respons
 }
 
 // ProcessMNPApproval
-// This API is used to approve or reject the release of a mini program version.
+// This API is used to process mini program approval requests.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -6321,7 +6321,7 @@ func NewProcessMNPSensitiveAPIPermissionApprovalResponse() (response *ProcessMNP
 }
 
 // ProcessMNPSensitiveAPIPermissionApproval
-// This API is used to approve or reject the sensitive API permission requests.
+// This API is used to process a sensitive API permission request for a mini program.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -6331,7 +6331,7 @@ func (c *Client) ProcessMNPSensitiveAPIPermissionApproval(request *ProcessMNPSen
 }
 
 // ProcessMNPSensitiveAPIPermissionApproval
-// This API is used to approve or reject the sensitive API permission requests.
+// This API is used to process a sensitive API permission request for a mini program.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -6653,7 +6653,7 @@ func NewRollbackMNPVersionResponse() (response *RollbackMNPVersionResponse) {
 }
 
 // RollbackMNPVersion
-// This API is used to rollback a mini program online version.
+// This API is used to roll back the released version of a mini program to a specified version.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -6663,7 +6663,7 @@ func (c *Client) RollbackMNPVersion(request *RollbackMNPVersionRequest) (respons
 }
 
 // RollbackMNPVersion
-// This API is used to rollback a mini program online version.
+// This API is used to roll back the released version of a mini program to a specified version.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"

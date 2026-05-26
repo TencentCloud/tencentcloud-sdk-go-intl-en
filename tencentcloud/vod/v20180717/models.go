@@ -1959,7 +1959,7 @@ type AigcAudioCloneInputFileInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// <p>Media file ID, the globally unique identifier of the file in VOD, is assigned by the VOD backend after successful upload. You can get this field in the <a href="/document/product/266/7830">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when Type value is File. Description: 1. Image less than 10M is recommended. 2. Image format values: jpeg, jpg, png.</p>
+	// <p>Media file ID, the globally unique identifier of the file in VOD, is assigned by the VOD backend after successful upload. You can get this field in the <a href="/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when Type value is File. Description: 1. Image less than 10M is recommended. 2. Image format values: jpeg, jpg, png.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
@@ -1992,7 +1992,7 @@ type AigcAudioReferenceAudioInfo struct {
 	// <p>Accessible file URL. This parameter is valid when Type value is Url. Description: 1. Recommended image less than 7M; 2. Image format value: jpeg, jpg, png, webp.</p>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// <p>The media file ID of the audio file, which is the globally unique identifier of this file on VOD, is assigned by the VOD backend after a successful upload. You can retrieve this field in the <a href="/document/product/266/7830">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when the Type value is File.</p>
+	// <p>The media file ID of the audio file, which is the globally unique identifier of this file on VOD, is assigned by the VOD backend after a successful upload. You can retrieve this field in the <a href="/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when the Type value is File.</p>
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
 	// <p>Audio file URL, which must be external network accessible. This parameter is valid when the Type value is Url.</p>
@@ -2003,7 +2003,7 @@ type AigcAudioReferenceVideoInfo struct {
 	// <p>Input video file type. Valid values: <li>File: on-demand media file;</li> <li>Url: accessible Url;</li></p>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// <p>The media file ID of the video file, which is the globally unique identifier of the file in VOD, is assigned by the VOD backend after a successful upload. You can get this field in the <a href="/document/product/266/7830">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when the Type value is File.</p>
+	// <p>The media file ID of the video file, which is the globally unique identifier of the file in VOD, is assigned by the VOD backend after a successful upload. You can get this field in the <a href="/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when the Type value is File.</p>
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
 	// <p>Reference video URL must be external network accessible. This parameter is valid when Type value is Url.</p>
@@ -2438,7 +2438,7 @@ type AigcVideoRedrawTaskInputFileInfo struct {
 	// <p>Input video file type. Valid values: <li>File: on-demand media file;</li> <li>Url: accessible Url;</li></p>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// <p>Media file ID, the globally unique identifier of this file in VOD, is assigned by the VOD backend after a successful upload. You can obtain this field in the <a href="/document/product/266/7830">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when the Type value is File. Description: 1. Recommended image size is less than 10M. 2. Image format values: jpeg, jpg, png.</p>
+	// <p>Media file ID, the globally unique identifier of this file in VOD, is assigned by the VOD backend after a successful upload. You can obtain this field in the <a href="/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when the Type value is File. Description: 1. Recommended image size is less than 10M. 2. Image format values: jpeg, jpg, png.</p>
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
 	// <p>Accessible file URL. This parameter is valid when Type value is Url. Description: 1. Recommended image less than 10M; 2. Image format value is jpeg, jpg, png.</p>
@@ -2504,7 +2504,7 @@ type AigcVideoTaskInput struct {
 	// <p>Fixed entity input information for AIGC tasks.</p>
 	SubjectInfos []*AigcVideoTaskInputSubjectInfo `json:"SubjectInfos,omitnil,omitempty" name:"SubjectInfos"`
 
-	// <p>Media file ID used as the end frame to generate video. This file has a globally unique ID on VOD, assigned by the VOD backend after successful upload. You can get this field in the <a href="/document/product/266/7830">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>.</p>
+	// <p>Media file ID used as the end frame to generate video. This file has a globally unique ID on VOD, assigned by the VOD backend after successful upload. You can get this field in the <a href="/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>.</p>
 	LastFrameFileId *string `json:"LastFrameFileId,omitnil,omitempty" name:"LastFrameFileId"`
 
 	// <p>Media file URL used as the tail frame to generate video. Description:</p><ol><li>Only support models GV, Kling, and Vidu. Other models are not currently supported. When ModelName is GV, if you specify this parameter, you must simultaneously specify FileInfos as the head frame for video generation. When ModelName is Kling, ModelVersion is 2.1, and output resolution Resolution is specified as 1080P, you can specify this parameter. When ModelName is Vidu and ModelVersion is q2-pro or q2-turbo, you can specify this parameter.</li><li>Image size must be less than 5M.</li><li><ol start="3"><li>Image format value: jpeg, jpg, png, webp.</li></ol></li></ol>
@@ -2542,11 +2542,14 @@ type AigcVideoTaskInputFileInfo struct {
 	// <p>File category. Value is:</p><ul><li>Image: image. <strong>Note that the Usage field defines the image type.</strong></li><li>Video: video.</li></ul>
 	Category *string `json:"Category,omitnil,omitempty" name:"Category"`
 
-	// <p>Media file ID, the globally unique identifier of the file in VOD, is assigned by the VOD backend after successful upload. You can obtain this field in the <a href="/document/product/266/7830">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when the Type value is File. Description:</p><ol><li>Images less than 10M are recommended;</li><li>Image format values: jpeg, jpg, png.</li></ol>
+	// <p>Media file ID, the globally unique identifier of the file in VOD, is assigned by the VOD backend after successful upload. You can obtain this field in the <a href="/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when the Type value is File. Description:</p><ol><li>Images less than 10M are recommended;</li><li>Image format values: jpeg, jpg, png.</li></ol>
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
 	// <p>Accessible file URL. This parameter is valid when the Type value is URL.<br>Description:</p><ol><li>Images less than 10M are recommended.</li><li>Image format values: jpeg, jpg, png.</li></ol>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+
+	Base64 *string `json:"Base64,omitnil,omitempty" name:"Base64"`
 
 	// <p>Reference Type, applicable to GV, Kling, and PixVerse models.<br>Note:<br>When using the GV model, it can be used as a reference method, available values: asset means material, style means style;<br>When using the Kling model and Category is Video, distinct reference video types can be identified, feature means feature reference video, base means video to be edited;<br>When using the PixVerse model, applicable to multi-image (subject) reference generation mode, available values: subject means subject, background means background;</p>
 	ReferenceType *string `json:"ReferenceType,omitnil,omitempty" name:"ReferenceType"`
@@ -3788,6 +3791,25 @@ type CDNDomainInfo struct {
 
 	// cdn domain configuration information.
 	Config *CDNDomainConfig `json:"Config,omitnil,omitempty" name:"Config"`
+}
+
+type CLSLogsetInfo struct {
+
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+
+	LogsetName *string `json:"LogsetName,omitnil,omitempty" name:"LogsetName"`
+}
+
+type CLSTopicInfo struct {
+	// Log topic ID.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Log topic name.
+	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
+
+	// Log Set ID.
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 }
 
 type Cache struct {
@@ -10523,6 +10545,67 @@ func (r *DeleteCDNDomainResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteCLSTopicRequestParams struct {
+	// The region to which the log set belongs, the values are: <li>ap-guangzhou: Guangzhou;</li> <li>ap-beijing: Beijing;</li> <li>ap-chengdu: Chengdu;</li> < li>ap-chongqing: Chongqing; </li> <li>ap-nanjing: Nanjing; </li> <li>ap-shanghai: Shanghai; </li> <li>ap-singapore: Singapore. </li>
+	CLSRegion *string `json:"CLSRegion,omitnil,omitempty" name:"CLSRegion"`
+
+	// Log topic ID.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+}
+
+type DeleteCLSTopicRequest struct {
+	*tchttp.BaseRequest
+	
+	// The region to which the log set belongs, the values are: <li>ap-guangzhou: Guangzhou;</li> <li>ap-beijing: Beijing;</li> <li>ap-chengdu: Chengdu;</li> < li>ap-chongqing: Chongqing; </li> <li>ap-nanjing: Nanjing; </li> <li>ap-shanghai: Shanghai; </li> <li>ap-singapore: Singapore. </li>
+	CLSRegion *string `json:"CLSRegion,omitnil,omitempty" name:"CLSRegion"`
+
+	// Log topic ID.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+}
+
+func (r *DeleteCLSTopicRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCLSTopicRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CLSRegion")
+	delete(f, "TopicId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCLSTopicRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCLSTopicResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteCLSTopicResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteCLSTopicResponseParams `json:"Response"`
+}
+
+func (r *DeleteCLSTopicResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCLSTopicResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteClassRequestParams struct {
 	// Category ID
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
@@ -13204,6 +13287,151 @@ func (r *DescribeCDNUsageDataResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeCDNUsageDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCLSLogsetsRequestParams struct {
+	// Region of the logset belonging to. Valid values: <li>ap-guangzhou: Guangzhou;</li> <li>ap-beijing: Beijing;</li> <li>ap-chengdu: Chengdu;</li> <li>ap-chongqing: Chongqing;</li> <li>ap-nanjing: Nanjing;</li> <li>ap-shanghai: Shanghai;</li> <li>ap-singapore: Singapore.</li>
+	CLSRegion *string `json:"CLSRegion,omitnil,omitempty" name:"CLSRegion"`
+}
+
+type DescribeCLSLogsetsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Region of the logset belonging to. Valid values: <li>ap-guangzhou: Guangzhou;</li> <li>ap-beijing: Beijing;</li> <li>ap-chengdu: Chengdu;</li> <li>ap-chongqing: Chongqing;</li> <li>ap-nanjing: Nanjing;</li> <li>ap-shanghai: Shanghai;</li> <li>ap-singapore: Singapore.</li>
+	CLSRegion *string `json:"CLSRegion,omitnil,omitempty" name:"CLSRegion"`
+}
+
+func (r *DescribeCLSLogsetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCLSLogsetsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CLSRegion")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCLSLogsetsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCLSLogsetsResponseParams struct {
+	// Queried logset list.
+	Logsets []*CLSLogsetInfo `json:"Logsets,omitnil,omitempty" name:"Logsets"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCLSLogsetsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCLSLogsetsResponseParams `json:"Response"`
+}
+
+func (r *DescribeCLSLogsetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCLSLogsetsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCLSTopicsRequestParams struct {
+	// Region of the logset belonging to. Valid values: <li>ap-guangzhou: Guangzhou;</li> <li>ap-beijing: Beijing;</li> <li>ap-chengdu: Chengdu;</li> <li>ap-chongqing: Chongqing;</li> <li>ap-nanjing: Nanjing;</li> <li>ap-shanghai: Shanghai;</li> <li>ap-singapore: Singapore.</li>
+	CLSRegion *string `json:"CLSRegion,omitnil,omitempty" name:"CLSRegion"`
+
+	// Log Set ID of Log Topic.
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// Log topic ID list. If left empty, means query all log topics.
+	TopicIds []*string `json:"TopicIds,omitnil,omitempty" name:"TopicIds"`
+
+	// Pagination offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeCLSTopicsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Region of the logset belonging to. Valid values: <li>ap-guangzhou: Guangzhou;</li> <li>ap-beijing: Beijing;</li> <li>ap-chengdu: Chengdu;</li> <li>ap-chongqing: Chongqing;</li> <li>ap-nanjing: Nanjing;</li> <li>ap-shanghai: Shanghai;</li> <li>ap-singapore: Singapore.</li>
+	CLSRegion *string `json:"CLSRegion,omitnil,omitempty" name:"CLSRegion"`
+
+	// Log Set ID of Log Topic.
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// Log topic ID list. If left empty, means query all log topics.
+	TopicIds []*string `json:"TopicIds,omitnil,omitempty" name:"TopicIds"`
+
+	// Pagination offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeCLSTopicsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCLSTopicsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CLSRegion")
+	delete(f, "LogsetId")
+	delete(f, "TopicIds")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCLSTopicsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCLSTopicsResponseParams struct {
+	// Total number of log topics.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Log topic list.
+	Topics []*CLSTopicInfo `json:"Topics,omitnil,omitempty" name:"Topics"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCLSTopicsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCLSTopicsResponseParams `json:"Response"`
+}
+
+func (r *DescribeCLSTopicsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCLSTopicsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -27641,8 +27869,8 @@ type PullUploadRequestParams struct {
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// Designate the upload park, applicable only to the user with special requirement for upload target region.
-	// <li>If left blank, files will be uploaded to your [default region](https://www.tencentcloud.com/document/product/266/14059?from=11329?from_cn_redirect=1#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4) by default.</li>
-	// <li>If a designated upload park is specified, please confirm the [upload storage settings](https://www.tencentcloud.com/document/product/266/14059?from=11329?from_cn_redirect=1#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4) have already enabled corresponding storage regions.</li>
+	// <li>If left blank, files will be uploaded to your [default region](https://www.tencentcloud.com/zh/document/product/266/18874?has_map=1#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4) by default.</li>
+	// <li>If a designated upload park is specified, please confirm the [upload storage settings](https://www.tencentcloud.com/zh/document/product/266/18874) have already enabled corresponding storage regions.</li>
 	StorageRegion *string `json:"StorageRegion,omitnil,omitempty" name:"StorageRegion"`
 
 	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) API.
@@ -27695,8 +27923,8 @@ type PullUploadRequest struct {
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// Designate the upload park, applicable only to the user with special requirement for upload target region.
-	// <li>If left blank, files will be uploaded to your [default region](https://www.tencentcloud.com/document/product/266/14059?from=11329?from_cn_redirect=1#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4) by default.</li>
-	// <li>If a designated upload park is specified, please confirm the [upload storage settings](https://www.tencentcloud.com/document/product/266/14059?from=11329?from_cn_redirect=1#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4) have already enabled corresponding storage regions.</li>
+	// <li>If left blank, files will be uploaded to your [default region](https://www.tencentcloud.com/zh/document/product/266/18874?has_map=1#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4) by default.</li>
+	// <li>If a designated upload park is specified, please confirm the [upload storage settings](https://www.tencentcloud.com/zh/document/product/266/18874) have already enabled corresponding storage regions.</li>
 	StorageRegion *string `json:"StorageRegion,omitnil,omitempty" name:"StorageRegion"`
 
 	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) API.

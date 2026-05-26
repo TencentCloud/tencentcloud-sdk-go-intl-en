@@ -5679,22 +5679,22 @@ func (r *CreateTrafficMirrorResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateVpcEndPointRequestParams struct {
-	// VPC instance ID. obtain through the API [DescribeVpcs](https://www.tencentcloud.comom/document/product/1108/43663?from_cn_redirect=1).
+	// VPC instance ID. obtain through the API [DescribeVpcs](https://www.tencentcloud.com/document/product/1108/43663?from_cn_redirect=1).
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet instance ID. can be obtained through the [DescribeSubnets](https://www.tencentcloud.comom/document/product/215/15784?from_cn_redirect=1) api.
+	// Subnet instance ID. can be obtained through the [DescribeSubnets](https://www.tencentcloud.com/document/product/215/15784?from_cn_redirect=1) api.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Endpoint name. limited to 60 characters.
 	EndPointName *string `json:"EndPointName,omitnil,omitempty" name:"EndPointName"`
 
-	// Endpoint service ID, which can be obtained through the [DescribeVpcEndPointService](https://www.tencentcloud.comom/document/product/215/54678?from_cn_redirect=1) api.
+	// Endpoint service ID, which can be obtained through the [DescribeVpcEndPointService](https://www.tencentcloud.com/document/product/215/54678?from_cn_redirect=1) api.
 	EndPointServiceId *string `json:"EndPointServiceId,omitnil,omitempty" name:"EndPointServiceId"`
 
 	// Endpoint VIP. You can apply for a specified IP.
 	EndPointVip *string `json:"EndPointVip,omitnil,omitempty" name:"EndPointVip"`
 
-	// Security group ID. can be obtained through the API [DescribeSecurityGroups](https://www.tencentcloud.comom/document/product/215/15808?from_cn_redirect=1).
+	// Security group ID. can be obtained through the API [DescribeSecurityGroups](https://www.tencentcloud.com/document/product/215/15808?from_cn_redirect=1).
 	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
 	// List of tags to be bound, for example, [{"Key": "city", "Value": "shanghai"}].
@@ -5707,22 +5707,22 @@ type CreateVpcEndPointRequestParams struct {
 type CreateVpcEndPointRequest struct {
 	*tchttp.BaseRequest
 	
-	// VPC instance ID. obtain through the API [DescribeVpcs](https://www.tencentcloud.comom/document/product/1108/43663?from_cn_redirect=1).
+	// VPC instance ID. obtain through the API [DescribeVpcs](https://www.tencentcloud.com/document/product/1108/43663?from_cn_redirect=1).
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet instance ID. can be obtained through the [DescribeSubnets](https://www.tencentcloud.comom/document/product/215/15784?from_cn_redirect=1) api.
+	// Subnet instance ID. can be obtained through the [DescribeSubnets](https://www.tencentcloud.com/document/product/215/15784?from_cn_redirect=1) api.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Endpoint name. limited to 60 characters.
 	EndPointName *string `json:"EndPointName,omitnil,omitempty" name:"EndPointName"`
 
-	// Endpoint service ID, which can be obtained through the [DescribeVpcEndPointService](https://www.tencentcloud.comom/document/product/215/54678?from_cn_redirect=1) api.
+	// Endpoint service ID, which can be obtained through the [DescribeVpcEndPointService](https://www.tencentcloud.com/document/product/215/54678?from_cn_redirect=1) api.
 	EndPointServiceId *string `json:"EndPointServiceId,omitnil,omitempty" name:"EndPointServiceId"`
 
 	// Endpoint VIP. You can apply for a specified IP.
 	EndPointVip *string `json:"EndPointVip,omitnil,omitempty" name:"EndPointVip"`
 
-	// Security group ID. can be obtained through the API [DescribeSecurityGroups](https://www.tencentcloud.comom/document/product/215/15808?from_cn_redirect=1).
+	// Security group ID. can be obtained through the API [DescribeSecurityGroups](https://www.tencentcloud.com/document/product/215/15808?from_cn_redirect=1).
 	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
 	// List of tags to be bound, for example, [{"Key": "city", "Value": "shanghai"}].
@@ -16668,7 +16668,7 @@ type EndPoint struct {
 	// Endpoint ID
 	EndPointId *string `json:"EndPointId,omitnil,omitempty" name:"EndPointId"`
 
-	// The unique ID of the VPC. obtain through the API [DescribeVpcs](https://www.tencentcloud.comom/document/product/215/15778?from_cn_redirect=1).
+	// The unique ID of the VPC. obtain through the API [DescribeVpcs](https://www.tencentcloud.com/document/product/215/15778?from_cn_redirect=1).
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Subnet ID

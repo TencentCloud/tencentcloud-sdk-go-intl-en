@@ -686,7 +686,7 @@ type CreateDBInstanceHourRequestParams struct {
 	// <p>Rollback time of the cloned instance.</p><ul><li>This parameter is required for cloned instances. Format: 2021-08-13 16:30:00.</li><li>Rollback time range: Only data within the last 7 days can be rolled back.</li></ul>
 	RestoreTime *string `json:"RestoreTime,omitnil,omitempty" name:"RestoreTime"`
 
-	// <p>Instance name. Only Chinese, English, digits, underscores (_), and hyphens (-) are supported, with a maximum length of 128 characters. When purchasing database instances in batches, you can efficiently set instance names by using custom pattern strings and automatically ascending numeric suffixes.</p><ul><li>Basic mode: prefix + automatic ascending number (starting from 1 by default). Only a custom instance name prefix is required for <strong>lnstanceName</strong>. For example, it can be set to cmgo. If the purchase quantity is set to 5, after purchase, the instances will be sequentially named cmgo1, cmgo2, cmgo3, cmgo4, and cmgo5, respectively.</li><li>Custom starting number mode: prefix + {R:x} (x is the custom starting number). <strong>InstanceName</strong> requires "prefix{R:x}". For example, cmgo{R:3}. If the purchase quantity is set to 5, the instance names will be cmgo3, cmgo4, cmgo5, cmgo6, and cmgo7.</li><li>Composite pattern string: prefix1{R:x} + prefix2{R:y} + ⋯ + fixed suffix, where x and y are the starting numbers for each prefix. <strong>InstanceName</strong> requires a composite pattern string. For example, cmgo{R:10}_node{R:12}_db. If the batch purchase quantity is set to 5, the instance names will be cmgo10_node12_db, cmgo11_node13_db, cmgo12_node14_db, cmgo13_node15_db, and cmgo14_node16_db.</li></ul>
+	// <p>Instance name. Only Chinese, English, digits, underscores (_), and hyphens (-) are supported, with a maximum length of 128 characters. When purchasing database instances in batches, you can efficiently set instance names by using custom pattern strings and automatically ascending numeric suffixes.</p><ul><li>Basic mode: prefix + automatic ascending number (starting from 1 by default). Only a custom instance name prefix is required for <strong>lnstanceName</strong>. For example, it can be set to cmgo. If the purchase quantity is set to 5, after purchase, the instances will be sequentially named cmgo1, cmgo2, cmgo3, cmgo4, and cmgo5, respectively.</li><li>Custom starting number mode: prefix + {R:x} (x is the custom starting number). <strong>InstanceName</strong> requires "prefix{R:x}". For example, cmgo{R:3}. If the purchase quantity is set to 5, the instance names will be cmgo3, cmgo4, cmgo5, cmgo6, and cmgo7.</li><li>Composite pattern string: prefix1{R:x} + prefix2{R:y} + ... + fixed suffix, where x and y are the starting numbers for each prefix. <strong>InstanceName</strong> requires a composite pattern string. For example, cmgo{R:10}_node{R:12}_db. If the batch purchase quantity is set to 5, the instance names will be cmgo10_node12_db, cmgo11_node13_db, cmgo12_node14_db, cmgo13_node15_db, and cmgo14_node16_db.</li></ul>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// <p>For cloud database instances in multi-AZ deployment, specify the availability zone list.</p><ul><li>For instances in multi-AZ deployment mode, the <strong>Zone</strong> parameter specifies the primary AZ, and <strong>AvailabilityZoneList</strong> specifies all AZs, including the primary AZ. Format: [ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4].</li><li>Use the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to access cloud databases and obtain availability zone information planned for different regions, so that you can assign valid AZs.</li><li>Nodes in multi-AZ deployment can only be deployed in 3 different availability zones. Deploying most nodes of a cluster in the same availability zone is not supported. For example, a 3-node cluster does not support deploying 2 nodes in the same zone.</li></ul>
@@ -710,7 +710,7 @@ type CreateDBInstanceHourRequestParams struct {
 	// <p>Availability zone of the Hidden node. To deploy instances across availability zones, you must configure this parameter.</p>
 	HiddenZone *string `json:"HiddenZone,omitnil,omitempty" name:"HiddenZone"`
 
-	// <p>Parameter template ID.</p><ul><li>A parameter template is a collection of preset specific parameters applicable to quick configuration of new MongoDB instances. Proper use of parameter templates can effectively improve database deployment efficiency and operating performance.</li><li>The parameter template ID can be obtained through the <a href="https://www.tencentcloud.com/document/product/240/109155?from_cn_redirect=1">DescribeDBInstanceParamTpl</a> API. Please select the parameter template ID corresponding to your instance version and architecture.</li></ul>
+	// <p>Parameter template ID.</p><ul><li>A parameter template is a collection of preset specific parameters applicable to quick configuration of new MongoDB instances. Proper use of parameter templates can effectively improve database deployment efficiency and operating performance.</li><li>The parameter template ID can be obtained through the <a href="https://www.tencentcloud.com/document/product/240/80022">DescribeDBInstanceParamTpl</a> API. Please select the parameter template ID corresponding to your instance version and architecture.</li></ul>
 	ParamTemplateId *string `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
 
 	// <p>Instance CPU core size. Unit: C. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain specific saleable CPU specifications.<br>Note: CPU size must be set for common I Instance Type.</p>
@@ -774,7 +774,7 @@ type CreateDBInstanceHourRequest struct {
 	// <p>Rollback time of the cloned instance.</p><ul><li>This parameter is required for cloned instances. Format: 2021-08-13 16:30:00.</li><li>Rollback time range: Only data within the last 7 days can be rolled back.</li></ul>
 	RestoreTime *string `json:"RestoreTime,omitnil,omitempty" name:"RestoreTime"`
 
-	// <p>Instance name. Only Chinese, English, digits, underscores (_), and hyphens (-) are supported, with a maximum length of 128 characters. When purchasing database instances in batches, you can efficiently set instance names by using custom pattern strings and automatically ascending numeric suffixes.</p><ul><li>Basic mode: prefix + automatic ascending number (starting from 1 by default). Only a custom instance name prefix is required for <strong>lnstanceName</strong>. For example, it can be set to cmgo. If the purchase quantity is set to 5, after purchase, the instances will be sequentially named cmgo1, cmgo2, cmgo3, cmgo4, and cmgo5, respectively.</li><li>Custom starting number mode: prefix + {R:x} (x is the custom starting number). <strong>InstanceName</strong> requires "prefix{R:x}". For example, cmgo{R:3}. If the purchase quantity is set to 5, the instance names will be cmgo3, cmgo4, cmgo5, cmgo6, and cmgo7.</li><li>Composite pattern string: prefix1{R:x} + prefix2{R:y} + ⋯ + fixed suffix, where x and y are the starting numbers for each prefix. <strong>InstanceName</strong> requires a composite pattern string. For example, cmgo{R:10}_node{R:12}_db. If the batch purchase quantity is set to 5, the instance names will be cmgo10_node12_db, cmgo11_node13_db, cmgo12_node14_db, cmgo13_node15_db, and cmgo14_node16_db.</li></ul>
+	// <p>Instance name. Only Chinese, English, digits, underscores (_), and hyphens (-) are supported, with a maximum length of 128 characters. When purchasing database instances in batches, you can efficiently set instance names by using custom pattern strings and automatically ascending numeric suffixes.</p><ul><li>Basic mode: prefix + automatic ascending number (starting from 1 by default). Only a custom instance name prefix is required for <strong>lnstanceName</strong>. For example, it can be set to cmgo. If the purchase quantity is set to 5, after purchase, the instances will be sequentially named cmgo1, cmgo2, cmgo3, cmgo4, and cmgo5, respectively.</li><li>Custom starting number mode: prefix + {R:x} (x is the custom starting number). <strong>InstanceName</strong> requires "prefix{R:x}". For example, cmgo{R:3}. If the purchase quantity is set to 5, the instance names will be cmgo3, cmgo4, cmgo5, cmgo6, and cmgo7.</li><li>Composite pattern string: prefix1{R:x} + prefix2{R:y} + ... + fixed suffix, where x and y are the starting numbers for each prefix. <strong>InstanceName</strong> requires a composite pattern string. For example, cmgo{R:10}_node{R:12}_db. If the batch purchase quantity is set to 5, the instance names will be cmgo10_node12_db, cmgo11_node13_db, cmgo12_node14_db, cmgo13_node15_db, and cmgo14_node16_db.</li></ul>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// <p>For cloud database instances in multi-AZ deployment, specify the availability zone list.</p><ul><li>For instances in multi-AZ deployment mode, the <strong>Zone</strong> parameter specifies the primary AZ, and <strong>AvailabilityZoneList</strong> specifies all AZs, including the primary AZ. Format: [ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4].</li><li>Use the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to access cloud databases and obtain availability zone information planned for different regions, so that you can assign valid AZs.</li><li>Nodes in multi-AZ deployment can only be deployed in 3 different availability zones. Deploying most nodes of a cluster in the same availability zone is not supported. For example, a 3-node cluster does not support deploying 2 nodes in the same zone.</li></ul>
@@ -798,7 +798,7 @@ type CreateDBInstanceHourRequest struct {
 	// <p>Availability zone of the Hidden node. To deploy instances across availability zones, you must configure this parameter.</p>
 	HiddenZone *string `json:"HiddenZone,omitnil,omitempty" name:"HiddenZone"`
 
-	// <p>Parameter template ID.</p><ul><li>A parameter template is a collection of preset specific parameters applicable to quick configuration of new MongoDB instances. Proper use of parameter templates can effectively improve database deployment efficiency and operating performance.</li><li>The parameter template ID can be obtained through the <a href="https://www.tencentcloud.com/document/product/240/109155?from_cn_redirect=1">DescribeDBInstanceParamTpl</a> API. Please select the parameter template ID corresponding to your instance version and architecture.</li></ul>
+	// <p>Parameter template ID.</p><ul><li>A parameter template is a collection of preset specific parameters applicable to quick configuration of new MongoDB instances. Proper use of parameter templates can effectively improve database deployment efficiency and operating performance.</li><li>The parameter template ID can be obtained through the <a href="https://www.tencentcloud.com/document/product/240/80022">DescribeDBInstanceParamTpl</a> API. Please select the parameter template ID corresponding to your instance version and architecture.</li></ul>
 	ParamTemplateId *string `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
 
 	// <p>Instance CPU core size. Unit: C. Call the <a href="https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API to obtain specific saleable CPU specifications.<br>Note: CPU size must be set for common I Instance Type.</p>
@@ -876,6 +876,122 @@ func (r *CreateDBInstanceHourResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateDBInstanceHourResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDBInstanceParamTplRequestParams struct {
+	// Parameter template name.
+	TplName *string `json:"TplName,omitnil,omitempty" name:"TplName"`
+
+	// Template version number. This field is required when **MirrorTplId** is empty. For the purchasable versions supported by the parameter template, use the interface [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/35767?from_cn_redirect=1).
+	// - MONGO_36_WT: Version of the MongoDB 3.6 WiredTiger storage engine.
+	// - MONGO_40_WT: Version of the MongoDB 4.0 WiredTiger storage engine.
+	// - MONGO_42_WT: Version of the MongoDB 4.2 WiredTiger storage engine.
+	// - MONGO_44_WT: Version of the MongoDB 4.4 WiredTiger storage engine.
+	// - MONGO_50_WT: Version of the MongoDB 5.0 WiredTiger storage engine.
+	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
+	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
+	MongoVersion *string `json:"MongoVersion,omitnil,omitempty" name:"MongoVersion"`
+
+	// Instance type. This parameter is required when MirrorTplId is empty.
+	// - REPLSET: replica set instance.
+	// - SHARD: shard instance.
+	// -STANDALONE: Single-node instance.
+	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
+
+	// Template description information.
+	TplDesc *string `json:"TplDesc,omitnil,omitempty" name:"TplDesc"`
+
+	// Template parameter. If this parameter is not configured, the system default template is used as the version parameter.
+	Params []*ParamType `json:"Params,omitnil,omitempty" name:"Params"`
+
+	// Image template ID. If an image template is specified, a new template is cloned from this template.
+	// **Note**: When MirrorTplId is not empty, MongoVersion and ClusterType will follow the template version and instance type of MirrorTpl.
+	MirrorTplId *string `json:"MirrorTplId,omitnil,omitempty" name:"MirrorTplId"`
+}
+
+type CreateDBInstanceParamTplRequest struct {
+	*tchttp.BaseRequest
+	
+	// Parameter template name.
+	TplName *string `json:"TplName,omitnil,omitempty" name:"TplName"`
+
+	// Template version number. This field is required when **MirrorTplId** is empty. For the purchasable versions supported by the parameter template, use the interface [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/35767?from_cn_redirect=1).
+	// - MONGO_36_WT: Version of the MongoDB 3.6 WiredTiger storage engine.
+	// - MONGO_40_WT: Version of the MongoDB 4.0 WiredTiger storage engine.
+	// - MONGO_42_WT: Version of the MongoDB 4.2 WiredTiger storage engine.
+	// - MONGO_44_WT: Version of the MongoDB 4.4 WiredTiger storage engine.
+	// - MONGO_50_WT: Version of the MongoDB 5.0 WiredTiger storage engine.
+	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
+	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
+	MongoVersion *string `json:"MongoVersion,omitnil,omitempty" name:"MongoVersion"`
+
+	// Instance type. This parameter is required when MirrorTplId is empty.
+	// - REPLSET: replica set instance.
+	// - SHARD: shard instance.
+	// -STANDALONE: Single-node instance.
+	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
+
+	// Template description information.
+	TplDesc *string `json:"TplDesc,omitnil,omitempty" name:"TplDesc"`
+
+	// Template parameter. If this parameter is not configured, the system default template is used as the version parameter.
+	Params []*ParamType `json:"Params,omitnil,omitempty" name:"Params"`
+
+	// Image template ID. If an image template is specified, a new template is cloned from this template.
+	// **Note**: When MirrorTplId is not empty, MongoVersion and ClusterType will follow the template version and instance type of MirrorTpl.
+	MirrorTplId *string `json:"MirrorTplId,omitnil,omitempty" name:"MirrorTplId"`
+}
+
+func (r *CreateDBInstanceParamTplRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDBInstanceParamTplRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TplName")
+	delete(f, "MongoVersion")
+	delete(f, "ClusterType")
+	delete(f, "TplDesc")
+	delete(f, "Params")
+	delete(f, "MirrorTplId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBInstanceParamTplRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDBInstanceParamTplResponseParams struct {
+	// Template ID.
+	TplId *string `json:"TplId,omitnil,omitempty" name:"TplId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateDBInstanceParamTplResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateDBInstanceParamTplResponseParams `json:"Response"`
+}
+
+func (r *CreateDBInstanceParamTplResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDBInstanceParamTplResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1391,6 +1507,67 @@ func (r *DeleteAccountUserResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteAccountUserResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteDBBackupsRequestParams struct {
+	// Instance id, cmgo-xxxx
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// File id list
+	BackupIds []*int64 `json:"BackupIds,omitnil,omitempty" name:"BackupIds"`
+}
+
+type DeleteDBBackupsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance id, cmgo-xxxx
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// File id list
+	BackupIds []*int64 `json:"BackupIds,omitnil,omitempty" name:"BackupIds"`
+}
+
+func (r *DeleteDBBackupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDBBackupsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "BackupIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteDBBackupsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteDBBackupsResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteDBBackupsResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteDBBackupsResponseParams `json:"Response"`
+}
+
+func (r *DeleteDBBackupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDBBackupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2676,6 +2853,203 @@ func (r *DescribeDBInstanceNodePropertyResponse) FromJsonString(s string) error 
 }
 
 // Predefined struct for user
+type DescribeDBInstanceParamTplDetailRequestParams struct {
+	// Parameter template ID. Use the [DescribeDBInstanceParamTpl](https://www.tencentcloud.com/document/product/240/109155?from_cn_redirect=1) interface to obtain template ID.
+	TplId *string `json:"TplId,omitnil,omitempty" name:"TplId"`
+
+	// Parameter name. Pass in this value to retrieve parameter details of this field. Leave it empty to return all parameters.
+	ParamName *string `json:"ParamName,omitnil,omitempty" name:"ParamName"`
+}
+
+type DescribeDBInstanceParamTplDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Parameter template ID. Use the [DescribeDBInstanceParamTpl](https://www.tencentcloud.com/document/product/240/109155?from_cn_redirect=1) interface to obtain template ID.
+	TplId *string `json:"TplId,omitnil,omitempty" name:"TplId"`
+
+	// Parameter name. Pass in this value to retrieve parameter details of this field. Leave it empty to return all parameters.
+	ParamName *string `json:"ParamName,omitnil,omitempty" name:"ParamName"`
+}
+
+func (r *DescribeDBInstanceParamTplDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstanceParamTplDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TplId")
+	delete(f, "ParamName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstanceParamTplDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBInstanceParamTplDetailResponseParams struct {
+	// Enumeration class parameter details list.
+	InstanceEnumParams []*InstanceEnumParam `json:"InstanceEnumParams,omitnil,omitempty" name:"InstanceEnumParams"`
+
+	// Integer parameter detail list.
+	InstanceIntegerParams []*InstanceIntegerParam `json:"InstanceIntegerParams,omitnil,omitempty" name:"InstanceIntegerParams"`
+
+	// Text parameter details list.
+	InstanceTextParams []*InstanceTextParam `json:"InstanceTextParams,omitnil,omitempty" name:"InstanceTextParams"`
+
+	// Multi-value parameter details list.
+	InstanceMultiParams []*InstanceMultiParam `json:"InstanceMultiParams,omitnil,omitempty" name:"InstanceMultiParams"`
+
+	// Total number of parameters.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Instance version supported by the template.
+	// - MONGO_36_WT: Version of the MongoDB 3.6 WiredTiger storage engine.
+	// - MONGO_40_WT: Version of the MongoDB 4.0 WiredTiger storage engine.
+	// - MONGO_42_WT: Version of the MongoDB 4.2 WiredTiger storage engine.
+	// - MONGO_44_WT: Version of the MongoDB 4.4 WiredTiger storage engine.
+	// - MONGO_50_WT: Version of the MongoDB 5.0 WiredTiger storage engine.
+	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
+	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
+	MongoVersion *string `json:"MongoVersion,omitnil,omitempty" name:"MongoVersion"`
+
+	// Template adapts to cluster type.
+	// - REPLSET: replica set instance.
+	// - SHARD: shard instance.
+	// -STANDALONE: Single-node instance.
+	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
+
+	// Parameter template name.
+	TplName *string `json:"TplName,omitnil,omitempty" name:"TplName"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDBInstanceParamTplDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBInstanceParamTplDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBInstanceParamTplDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstanceParamTplDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBInstanceParamTplRequestParams struct {
+	// Parameter template ID. Use the [DescribeDBInstanceParamTpl](https://www.tencentcloud.com/document/product/240/109155?from_cn_redirect=1) interface to obtain template ID.
+	TplIds []*string `json:"TplIds,omitnil,omitempty" name:"TplIds"`
+
+	// Specifies the template name for query.
+	TplNames []*string `json:"TplNames,omitnil,omitempty" name:"TplNames"`
+
+	// Specifies the database version number of the parameter template to query. For supported versions, use the [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API.
+	// - MONGO_36_WT: Version of the MongoDB 3.6 WiredTiger storage engine.
+	// - MONGO_40_WT: Version of the MongoDB 4.0 WiredTiger storage engine.
+	// - MONGO_42_WT: Version of the MongoDB 4.2 WiredTiger storage engine.
+	// - MONGO_44_WT: Version of the MongoDB 4.4 WiredTiger storage engine.
+	// - MONGO_50_WT: Version of the MongoDB 5.0 WiredTiger storage engine.
+	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
+	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
+	MongoVersion []*string `json:"MongoVersion,omitnil,omitempty" name:"MongoVersion"`
+
+	// Specifies the template type for query.
+	// -DEFAULT: System default template.
+	// -CUSTOMIZE: custom template.
+	TplType *string `json:"TplType,omitnil,omitempty" name:"TplType"`
+}
+
+type DescribeDBInstanceParamTplRequest struct {
+	*tchttp.BaseRequest
+	
+	// Parameter template ID. Use the [DescribeDBInstanceParamTpl](https://www.tencentcloud.com/document/product/240/109155?from_cn_redirect=1) interface to obtain template ID.
+	TplIds []*string `json:"TplIds,omitnil,omitempty" name:"TplIds"`
+
+	// Specifies the template name for query.
+	TplNames []*string `json:"TplNames,omitnil,omitempty" name:"TplNames"`
+
+	// Specifies the database version number of the parameter template to query. For supported versions, use the [DescribeSpecInfo](https://www.tencentcloud.com/document/product/240/38567?from_cn_redirect=1) API.
+	// - MONGO_36_WT: Version of the MongoDB 3.6 WiredTiger storage engine.
+	// - MONGO_40_WT: Version of the MongoDB 4.0 WiredTiger storage engine.
+	// - MONGO_42_WT: Version of the MongoDB 4.2 WiredTiger storage engine.
+	// - MONGO_44_WT: Version of the MongoDB 4.4 WiredTiger storage engine.
+	// - MONGO_50_WT: Version of the MongoDB 5.0 WiredTiger storage engine.
+	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
+	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
+	MongoVersion []*string `json:"MongoVersion,omitnil,omitempty" name:"MongoVersion"`
+
+	// Specifies the template type for query.
+	// -DEFAULT: System default template.
+	// -CUSTOMIZE: custom template.
+	TplType *string `json:"TplType,omitnil,omitempty" name:"TplType"`
+}
+
+func (r *DescribeDBInstanceParamTplRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstanceParamTplRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TplIds")
+	delete(f, "TplNames")
+	delete(f, "MongoVersion")
+	delete(f, "TplType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstanceParamTplRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBInstanceParamTplResponseParams struct {
+	// Parameter template list info.
+	ParamTpls []*ParamTpl `json:"ParamTpls,omitnil,omitempty" name:"ParamTpls"`
+
+	// Total number of parameter templates.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDBInstanceParamTplResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBInstanceParamTplResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBInstanceParamTplResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstanceParamTplResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDBInstancesRequestParams struct {
 	// Instance ID list. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
@@ -3385,6 +3759,57 @@ func (r *DescribeMongodbLogsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribePasswordRotationRequestParams struct {
+
+}
+
+type DescribePasswordRotationRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribePasswordRotationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePasswordRotationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePasswordRotationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePasswordRotationResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribePasswordRotationResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribePasswordRotationResponseParams `json:"Response"`
+}
+
+func (r *DescribePasswordRotationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePasswordRotationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeSRVConnectionDomainRequestParams struct {
 	// Instance ID. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -3827,6 +4252,57 @@ func (r *DisableSRVConnectionUrlResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DisableSRVConnectionUrlResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EnablePasswordRotationRequestParams struct {
+
+}
+
+type EnablePasswordRotationRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *EnablePasswordRotationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnablePasswordRotationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnablePasswordRotationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EnablePasswordRotationResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type EnablePasswordRotationResponse struct {
+	*tchttp.BaseResponse
+	Response *EnablePasswordRotationResponseParams `json:"Response"`
+}
+
+func (r *EnablePasswordRotationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnablePasswordRotationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4961,6 +5437,77 @@ type LogInfo struct {
 }
 
 // Predefined struct for user
+type ModifyBackupExpireTimeRequestParams struct {
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Expiration time</p><p>Parameter format: YYYY-MM-DD hh:mm:ss</p>
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// <p>Backup ID.</p>
+	BackupIds []*int64 `json:"BackupIds,omitnil,omitempty" name:"BackupIds"`
+}
+
+type ModifyBackupExpireTimeRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Expiration time</p><p>Parameter format: YYYY-MM-DD hh:mm:ss</p>
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// <p>Backup ID.</p>
+	BackupIds []*int64 `json:"BackupIds,omitnil,omitempty" name:"BackupIds"`
+}
+
+func (r *ModifyBackupExpireTimeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyBackupExpireTimeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "ExpireTime")
+	delete(f, "BackupIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBackupExpireTimeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyBackupExpireTimeResponseParams struct {
+	// <p>Failed backup ID.</p>
+	FailedBackups []*int64 `json:"FailedBackups,omitnil,omitempty" name:"FailedBackups"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyBackupExpireTimeResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyBackupExpireTimeResponseParams `json:"Response"`
+}
+
+func (r *ModifyBackupExpireTimeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyBackupExpireTimeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyDBInstanceNetworkAddressRequestParams struct {
 	// Specifies the ID of the instance for modifying the network. For example, cmgo-p8vn****. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/MongoDB) and copy the instance ID from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -5631,6 +6178,47 @@ type Operation struct {
 	OpId *int64 `json:"OpId,omitnil,omitempty" name:"OpId"`
 }
 
+type ParamTpl struct {
+	// Parameter template name.
+	TplName *string `json:"TplName,omitnil,omitempty" name:"TplName"`
+
+	// Parameter template ID.
+	TplId *string `json:"TplId,omitnil,omitempty" name:"TplId"`
+
+	// Database versions applicable to the parameter template.
+	// - MONGO_36_WT: Version of the MongoDB 3.6 WiredTiger storage engine.
+	// - MONGO_40_WT: Version of the MongoDB 4.0 WiredTiger storage engine.
+	// - MONGO_42_WT: Version of the MongoDB 4.2 WiredTiger storage engine.
+	// - MONGO_44_WT: Version of the MongoDB 4.4 WiredTiger storage engine.
+	// - MONGO_50_WT: Version of the MongoDB 5.0 WiredTiger storage engine.
+	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
+	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
+	MongoVersion *string `json:"MongoVersion,omitnil,omitempty" name:"MongoVersion"`
+
+	// Database type that the parameter template applies to.
+	// - REPLSET: replica set instance.
+	// - SHARD: shard instance.
+	// -STANDALONE: Single-node instance.
+	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
+
+	// Parameter template description.
+	TplDesc *string `json:"TplDesc,omitnil,omitempty" name:"TplDesc"`
+
+	// Template type.
+	// -DEFAULT: System default template.
+	// -CUSTOMIZE: custom template.
+	TplType *string `json:"TplType,omitnil,omitempty" name:"TplType"`
+}
+
+type ParamType struct {
+	// Parameter.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Parameter value.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
 type RemoveNodeList struct {
 	// Roles of nodes to be deleted.
 	//  - SECONDARY: Mongod secondary node.
@@ -5790,7 +6378,7 @@ type ResetDBInstancePasswordRequestParams struct {
 	// Specifies the instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Specifies the account name for which the password needs to be changed. The [DescribeAccountUsers](https://www.tencentcloud.com/document/product/240/74804) API can be called to obtain the account list and copy the account name for which the password needs to be changed.
+	// Specifies the account name for which the password needs to be changed. The [DescribeAccountUsers](https://www.tencentcloud.com/document/product/240/79919) API can be called to obtain the account list and copy the account name for which the password needs to be changed.
 	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Specifies a new password for the account. Password complexity requirements:
@@ -5805,7 +6393,7 @@ type ResetDBInstancePasswordRequest struct {
 	// Specifies the instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Specifies the account name for which the password needs to be changed. The [DescribeAccountUsers](https://www.tencentcloud.com/document/product/240/74804) API can be called to obtain the account list and copy the account name for which the password needs to be changed.
+	// Specifies the account name for which the password needs to be changed. The [DescribeAccountUsers](https://www.tencentcloud.com/document/product/240/79919) API can be called to obtain the account list and copy the account name for which the password needs to be changed.
 	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Specifies a new password for the account. Password complexity requirements:

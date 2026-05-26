@@ -1507,6 +1507,72 @@ func (c *Client) DescribeDiskConfigQuotaWithContext(ctx context.Context, request
     return
 }
 
+func NewDescribeDiskStoragePoolRequest() (request *DescribeDiskStoragePoolRequest) {
+    request = &DescribeDiskStoragePoolRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cbs", APIVersion, "DescribeDiskStoragePool")
+    
+    
+    return
+}
+
+func NewDescribeDiskStoragePoolResponse() (response *DescribeDiskStoragePoolResponse) {
+    response = &DescribeDiskStoragePoolResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDiskStoragePool
+// This API is used to query the list of dedicated cloud disk clusters under the current user account.
+//
+// 
+//
+// * You can query by the dedicated cloud disk cluster ID (`CdcId`) and availability zone (`zone`). Multiple filters are combined with AND. For details about filtering, please see `Filter`.
+//
+// * If the parameter is empty, a number (as specified by `Limit`; the default is 20) of dedicated cloud disk clusters are returned.
+//
+// error code that may be returned:
+//  INVALIDFILTER = "InvalidFilter"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeDiskStoragePool(request *DescribeDiskStoragePoolRequest) (response *DescribeDiskStoragePoolResponse, err error) {
+    return c.DescribeDiskStoragePoolWithContext(context.Background(), request)
+}
+
+// DescribeDiskStoragePool
+// This API is used to query the list of dedicated cloud disk clusters under the current user account.
+//
+// 
+//
+// * You can query by the dedicated cloud disk cluster ID (`CdcId`) and availability zone (`zone`). Multiple filters are combined with AND. For details about filtering, please see `Filter`.
+//
+// * If the parameter is empty, a number (as specified by `Limit`; the default is 20) of dedicated cloud disk clusters are returned.
+//
+// error code that may be returned:
+//  INVALIDFILTER = "InvalidFilter"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeDiskStoragePoolWithContext(ctx context.Context, request *DescribeDiskStoragePoolRequest) (response *DescribeDiskStoragePoolResponse, err error) {
+    if request == nil {
+        request = NewDescribeDiskStoragePoolRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cbs", APIVersion, "DescribeDiskStoragePool")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDiskStoragePool require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDiskStoragePoolResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDisksRequest() (request *DescribeDisksRequest) {
     request = &DescribeDisksRequest{
         BaseRequest: &tchttp.BaseRequest{},

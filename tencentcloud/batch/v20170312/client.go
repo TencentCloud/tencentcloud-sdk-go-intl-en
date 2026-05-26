@@ -409,6 +409,7 @@ func NewDeleteJobResponse() (response *DeleteJobResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLTAGAPI = "InternalError.CallTagAPI"
 //  INVALIDPARAMETER_JOBIDMALFORMED = "InvalidParameter.JobIdMalformed"
 //  RESOURCEINUSE_JOB = "ResourceInUse.Job"
 //  RESOURCENOTFOUND_JOB = "ResourceNotFound.Job"
@@ -426,6 +427,7 @@ func (c *Client) DeleteJob(request *DeleteJobRequest) (response *DeleteJobRespon
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLTAGAPI = "InternalError.CallTagAPI"
 //  INVALIDPARAMETER_JOBIDMALFORMED = "InvalidParameter.JobIdMalformed"
 //  RESOURCEINUSE_JOB = "ResourceInUse.Job"
 //  RESOURCENOTFOUND_JOB = "ResourceNotFound.Job"
@@ -525,6 +527,7 @@ func NewDescribeAvailableCvmInstanceTypesResponse() (response *DescribeAvailable
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLCAM = "InternalError.CallCam"
 //  INTERNALERROR_CALLCVM = "InternalError.CallCvm"
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -541,6 +544,7 @@ func (c *Client) DescribeAvailableCvmInstanceTypes(request *DescribeAvailableCvm
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLCAM = "InternalError.CallCam"
 //  INTERNALERROR_CALLCVM = "InternalError.CallCvm"
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -877,6 +881,7 @@ func NewDescribeCvmZoneInstanceConfigInfosResponse() (response *DescribeCvmZoneI
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLCAM = "InternalError.CallCam"
 //  INTERNALERROR_CALLCVM = "InternalError.CallCvm"
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -894,6 +899,7 @@ func (c *Client) DescribeCvmZoneInstanceConfigInfos(request *DescribeCvmZoneInst
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLCAM = "InternalError.CallCam"
 //  INTERNALERROR_CALLCVM = "InternalError.CallCvm"
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -1021,6 +1027,60 @@ func (c *Client) DescribeJobWithContext(ctx context.Context, request *DescribeJo
     request.SetContext(ctx)
     
     response = NewDescribeJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeJobMonitorDataRequest() (request *DescribeJobMonitorDataRequest) {
+    request = &DescribeJobMonitorDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("batch", APIVersion, "DescribeJobMonitorData")
+    
+    
+    return
+}
+
+func NewDescribeJobMonitorDataResponse() (response *DescribeJobMonitorDataResponse) {
+    response = &DescribeJobMonitorDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeJobMonitorData
+// Query the resource usage monitoring information of Job task instances. This API only supports querying elastic node tasks and undeleted jobs. Computing environment tasks are not currently supported. This interface only supports querying the resource utilization of Job instances within a time range.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_JOBIDMALFORMED = "InvalidParameter.JobIdMalformed"
+//  RESOURCENOTFOUND_JOB = "ResourceNotFound.Job"
+func (c *Client) DescribeJobMonitorData(request *DescribeJobMonitorDataRequest) (response *DescribeJobMonitorDataResponse, err error) {
+    return c.DescribeJobMonitorDataWithContext(context.Background(), request)
+}
+
+// DescribeJobMonitorData
+// Query the resource usage monitoring information of Job task instances. This API only supports querying elastic node tasks and undeleted jobs. Computing environment tasks are not currently supported. This interface only supports querying the resource utilization of Job instances within a time range.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_JOBIDMALFORMED = "InvalidParameter.JobIdMalformed"
+//  RESOURCENOTFOUND_JOB = "ResourceNotFound.Job"
+func (c *Client) DescribeJobMonitorDataWithContext(ctx context.Context, request *DescribeJobMonitorDataRequest) (response *DescribeJobMonitorDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeJobMonitorDataRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "batch", APIVersion, "DescribeJobMonitorData")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeJobMonitorData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeJobMonitorDataResponse()
     err = c.Send(request, response)
     return
 }
@@ -1714,6 +1774,7 @@ func NewTerminateComputeNodesResponse() (response *TerminateComputeNodesResponse
 //  UNSUPPORTEDOPERATION_ACCEPTOTHERREQUEST = "UnsupportedOperation.AcceptOtherRequest"
 //  UNSUPPORTEDOPERATION_COMPUTEENVACCEPTOTHERREQUEST = "UnsupportedOperation.ComputeEnvAcceptOtherRequest"
 //  UNSUPPORTEDOPERATION_COMPUTENODEFORBIDTERMINATE = "UnsupportedOperation.ComputeNodeForbidTerminate"
+//  UNSUPPORTEDOPERATION_COMPUTENODEISTERMINATING = "UnsupportedOperation.ComputeNodeIsTerminating"
 func (c *Client) TerminateComputeNodes(request *TerminateComputeNodesRequest) (response *TerminateComputeNodesResponse, err error) {
     return c.TerminateComputeNodesWithContext(context.Background(), request)
 }
@@ -1730,6 +1791,7 @@ func (c *Client) TerminateComputeNodes(request *TerminateComputeNodesRequest) (r
 //  UNSUPPORTEDOPERATION_ACCEPTOTHERREQUEST = "UnsupportedOperation.AcceptOtherRequest"
 //  UNSUPPORTEDOPERATION_COMPUTEENVACCEPTOTHERREQUEST = "UnsupportedOperation.ComputeEnvAcceptOtherRequest"
 //  UNSUPPORTEDOPERATION_COMPUTENODEFORBIDTERMINATE = "UnsupportedOperation.ComputeNodeForbidTerminate"
+//  UNSUPPORTEDOPERATION_COMPUTENODEISTERMINATING = "UnsupportedOperation.ComputeNodeIsTerminating"
 func (c *Client) TerminateComputeNodesWithContext(ctx context.Context, request *TerminateComputeNodesRequest) (response *TerminateComputeNodesResponse, err error) {
     if request == nil {
         request = NewTerminateComputeNodesRequest()

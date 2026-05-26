@@ -493,9 +493,7 @@ func NewCreateCloudTranscriptionResponse() (response *CreateCloudTranscriptionRe
 }
 
 // CreateCloudTranscription
-// API description:
-//
-// Enable the cloud transcription feature.
+// API description: Enable the cloud transcription feature.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -523,9 +521,7 @@ func (c *Client) CreateCloudTranscription(request *CreateCloudTranscriptionReque
 }
 
 // CreateCloudTranscription
-// API description:
-//
-// Enable the cloud transcription feature.
+// API description: Enable the cloud transcription feature.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3375,15 +3371,25 @@ func NewStartAITranscriptionResponse() (response *StartAITranscriptionResponse) 
 }
 
 // StartAITranscription
-// Initiate the transcription bot. The backend will pull the stream through the bot to perform real-time speech recognition and deliver subtitles and transcription messages. The transcription bot supports two stream pulling modes, controlled by the `TranscriptionMode` field:
+// Start up the transcription bot. The backend will pass the robot stream pulling to perform real-time speech recognition and deliver subtitles and transcription messages.
 //
-// - Pull the stream of the entire room.
+// The transcription bot supports two stream pulling methods, controlled by the TranscriptionMode field.
 //
-// - Pull the stream of a specific user.
+// - Pull the stream of all players in the room.
+//
+// - Pull the stream for a specific user.
 //
 // 
 //
-// The server delivers subtitles and transcription messages in real-time through TRTC's custom messages, with `CmdId` fixed at 1. The client only needs to listen for the callback of custom messages. For example, see the [C++ callback](https://cloud.tencent.com/document/product/647/79637#4cd82f4edb24992a15a25187089e1565). Other clients, such as Android, Web, etc., can also be found at the same link.
+// The server delivers subtitles and transcription messages in real time through TRTC custom messages, with CmdId fixed to 1. Clients just need to listen to the custom message callback, such as the C++ callback (https://www.tencentcloud.com/document/product/647/79637?from_cn_redirect=1#4cd82f4edb24992a15a25187089e1565). Other clients such as Android and Web can likewise find it at the same link.
+//
+// 
+//
+// 
+//
+// **Note:**
+//
+// When TranscriptionMode is 0, ensure only one task is initiated in a room. If multiple tasks are initiated, robots will subscribe with each other. Unless the task is stopped proactively, it will timeout exit after 10 hours. In such cases, it is advisable to fill in SessionId to ensure subsequent repeated task failures.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOTABILITY = "FailedOperation.NotAbility"
@@ -3398,15 +3404,25 @@ func (c *Client) StartAITranscription(request *StartAITranscriptionRequest) (res
 }
 
 // StartAITranscription
-// Initiate the transcription bot. The backend will pull the stream through the bot to perform real-time speech recognition and deliver subtitles and transcription messages. The transcription bot supports two stream pulling modes, controlled by the `TranscriptionMode` field:
+// Start up the transcription bot. The backend will pass the robot stream pulling to perform real-time speech recognition and deliver subtitles and transcription messages.
 //
-// - Pull the stream of the entire room.
+// The transcription bot supports two stream pulling methods, controlled by the TranscriptionMode field.
 //
-// - Pull the stream of a specific user.
+// - Pull the stream of all players in the room.
+//
+// - Pull the stream for a specific user.
 //
 // 
 //
-// The server delivers subtitles and transcription messages in real-time through TRTC's custom messages, with `CmdId` fixed at 1. The client only needs to listen for the callback of custom messages. For example, see the [C++ callback](https://cloud.tencent.com/document/product/647/79637#4cd82f4edb24992a15a25187089e1565). Other clients, such as Android, Web, etc., can also be found at the same link.
+// The server delivers subtitles and transcription messages in real time through TRTC custom messages, with CmdId fixed to 1. Clients just need to listen to the custom message callback, such as the C++ callback (https://www.tencentcloud.com/document/product/647/79637?from_cn_redirect=1#4cd82f4edb24992a15a25187089e1565). Other clients such as Android and Web can likewise find it at the same link.
+//
+// 
+//
+// 
+//
+// **Note:**
+//
+// When TranscriptionMode is 0, ensure only one task is initiated in a room. If multiple tasks are initiated, robots will subscribe with each other. Unless the task is stopped proactively, it will timeout exit after 10 hours. In such cases, it is advisable to fill in SessionId to ensure subsequent repeated task failures.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOTABILITY = "FailedOperation.NotAbility"
@@ -3959,6 +3975,140 @@ func (c *Client) StopWebRecordWithContext(ctx context.Context, request *StopWebR
     return
 }
 
+func NewTextToSpeechRequest() (request *TextToSpeechRequest) {
+    request = &TextToSpeechRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "TextToSpeech")
+    
+    
+    return
+}
+
+func NewTextToSpeechResponse() (response *TextToSpeechResponse) {
+    response = &TextToSpeechResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// TextToSpeech
+// This API is used to perform text to speech.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PITCH = "InvalidParameter.Pitch"
+//  INVALIDPARAMETER_PRONUNCIATIONDICT = "InvalidParameter.PronunciationDict"
+//  INVALIDPARAMETER_SAMPLERATE = "InvalidParameter.SampleRate"
+//  INVALIDPARAMETER_SPEED = "InvalidParameter.Speed"
+//  INVALIDPARAMETER_TEXTLENGTH = "InvalidParameter.TextLength"
+//  INVALIDPARAMETER_VOICEID = "InvalidParameter.VoiceId"
+//  INVALIDPARAMETER_VOLUME = "InvalidParameter.Volume"
+//  MISSINGPARAMETER_APIKEY = "MissingParameter.APIKey"
+//  UNSUPPORTEDOPERATION_INTERNALERROR = "UnsupportedOperation.InternalError"
+//  UNSUPPORTEDOPERATION_NOTALLOWED = "UnsupportedOperation.NotAllowed"
+func (c *Client) TextToSpeech(request *TextToSpeechRequest) (response *TextToSpeechResponse, err error) {
+    return c.TextToSpeechWithContext(context.Background(), request)
+}
+
+// TextToSpeech
+// This API is used to perform text to speech.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PITCH = "InvalidParameter.Pitch"
+//  INVALIDPARAMETER_PRONUNCIATIONDICT = "InvalidParameter.PronunciationDict"
+//  INVALIDPARAMETER_SAMPLERATE = "InvalidParameter.SampleRate"
+//  INVALIDPARAMETER_SPEED = "InvalidParameter.Speed"
+//  INVALIDPARAMETER_TEXTLENGTH = "InvalidParameter.TextLength"
+//  INVALIDPARAMETER_VOICEID = "InvalidParameter.VoiceId"
+//  INVALIDPARAMETER_VOLUME = "InvalidParameter.Volume"
+//  MISSINGPARAMETER_APIKEY = "MissingParameter.APIKey"
+//  UNSUPPORTEDOPERATION_INTERNALERROR = "UnsupportedOperation.InternalError"
+//  UNSUPPORTEDOPERATION_NOTALLOWED = "UnsupportedOperation.NotAllowed"
+func (c *Client) TextToSpeechWithContext(ctx context.Context, request *TextToSpeechRequest) (response *TextToSpeechResponse, err error) {
+    if request == nil {
+        request = NewTextToSpeechRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "TextToSpeech")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("TextToSpeech require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewTextToSpeechResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewTextToSpeechSSERequest() (request *TextToSpeechSSERequest) {
+    request = &TextToSpeechSSERequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "TextToSpeechSSE")
+    
+    
+    return
+}
+
+func NewTextToSpeechSSEResponse() (response *TextToSpeechSSEResponse) {
+    response = &TextToSpeechSSEResponse{} 
+    return
+
+}
+
+// TextToSpeechSSE
+// This API is used to stream text-to-speech.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PITCH = "InvalidParameter.Pitch"
+//  INVALIDPARAMETER_PRONUNCIATIONDICT = "InvalidParameter.PronunciationDict"
+//  INVALIDPARAMETER_SAMPLERATE = "InvalidParameter.SampleRate"
+//  INVALIDPARAMETER_SPEED = "InvalidParameter.Speed"
+//  INVALIDPARAMETER_TEXTLENGTH = "InvalidParameter.TextLength"
+//  INVALIDPARAMETER_VOICEID = "InvalidParameter.VoiceId"
+//  INVALIDPARAMETER_VOLUME = "InvalidParameter.Volume"
+//  MISSINGPARAMETER_APIKEY = "MissingParameter.APIKey"
+//  UNSUPPORTEDOPERATION_INTERNALERROR = "UnsupportedOperation.InternalError"
+//  UNSUPPORTEDOPERATION_NOTALLOWED = "UnsupportedOperation.NotAllowed"
+func (c *Client) TextToSpeechSSE(request *TextToSpeechSSERequest) (response *TextToSpeechSSEResponse, err error) {
+    return c.TextToSpeechSSEWithContext(context.Background(), request)
+}
+
+// TextToSpeechSSE
+// This API is used to stream text-to-speech.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PITCH = "InvalidParameter.Pitch"
+//  INVALIDPARAMETER_PRONUNCIATIONDICT = "InvalidParameter.PronunciationDict"
+//  INVALIDPARAMETER_SAMPLERATE = "InvalidParameter.SampleRate"
+//  INVALIDPARAMETER_SPEED = "InvalidParameter.Speed"
+//  INVALIDPARAMETER_TEXTLENGTH = "InvalidParameter.TextLength"
+//  INVALIDPARAMETER_VOICEID = "InvalidParameter.VoiceId"
+//  INVALIDPARAMETER_VOLUME = "InvalidParameter.Volume"
+//  MISSINGPARAMETER_APIKEY = "MissingParameter.APIKey"
+//  UNSUPPORTEDOPERATION_INTERNALERROR = "UnsupportedOperation.InternalError"
+//  UNSUPPORTEDOPERATION_NOTALLOWED = "UnsupportedOperation.NotAllowed"
+func (c *Client) TextToSpeechSSEWithContext(ctx context.Context, request *TextToSpeechSSERequest) (response *TextToSpeechSSEResponse, err error) {
+    if request == nil {
+        request = NewTextToSpeechSSERequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "TextToSpeechSSE")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("TextToSpeechSSE require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewTextToSpeechSSEResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateAIConversationRequest() (request *UpdateAIConversationRequest) {
     request = &UpdateAIConversationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4137,6 +4287,78 @@ func (c *Client) UpdateStreamIngestWithContext(ctx context.Context, request *Upd
     request.SetContext(ctx)
     
     response = NewUpdateStreamIngestResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewVoiceCloneRequest() (request *VoiceCloneRequest) {
+    request = &VoiceCloneRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "VoiceClone")
+    
+    
+    return
+}
+
+func NewVoiceCloneResponse() (response *VoiceCloneResponse) {
+    response = &VoiceCloneResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// VoiceClone
+// This API is used to clone sound.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_AUDIOPROMPT = "InvalidParameter.AudioPrompt"
+//  INVALIDPARAMETER_PITCH = "InvalidParameter.Pitch"
+//  INVALIDPARAMETER_SAMPLERATE = "InvalidParameter.SampleRate"
+//  INVALIDPARAMETER_SPEED = "InvalidParameter.Speed"
+//  INVALIDPARAMETER_TEXTLENGTH = "InvalidParameter.TextLength"
+//  INVALIDPARAMETER_VOICEID = "InvalidParameter.VoiceId"
+//  INVALIDPARAMETER_VOICENAME = "InvalidParameter.VoiceName"
+//  INVALIDPARAMETER_VOLUME = "InvalidParameter.Volume"
+//  MISSINGPARAMETER_APIKEY = "MissingParameter.APIKey"
+//  UNSUPPORTEDOPERATION_INTERNALERROR = "UnsupportedOperation.InternalError"
+//  UNSUPPORTEDOPERATION_NOTALLOWED = "UnsupportedOperation.NotAllowed"
+//  UNSUPPORTEDOPERATION_VOICECLONEERROR = "UnsupportedOperation.VoiceCloneError"
+func (c *Client) VoiceClone(request *VoiceCloneRequest) (response *VoiceCloneResponse, err error) {
+    return c.VoiceCloneWithContext(context.Background(), request)
+}
+
+// VoiceClone
+// This API is used to clone sound.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_AUDIOPROMPT = "InvalidParameter.AudioPrompt"
+//  INVALIDPARAMETER_PITCH = "InvalidParameter.Pitch"
+//  INVALIDPARAMETER_SAMPLERATE = "InvalidParameter.SampleRate"
+//  INVALIDPARAMETER_SPEED = "InvalidParameter.Speed"
+//  INVALIDPARAMETER_TEXTLENGTH = "InvalidParameter.TextLength"
+//  INVALIDPARAMETER_VOICEID = "InvalidParameter.VoiceId"
+//  INVALIDPARAMETER_VOICENAME = "InvalidParameter.VoiceName"
+//  INVALIDPARAMETER_VOLUME = "InvalidParameter.Volume"
+//  MISSINGPARAMETER_APIKEY = "MissingParameter.APIKey"
+//  UNSUPPORTEDOPERATION_INTERNALERROR = "UnsupportedOperation.InternalError"
+//  UNSUPPORTEDOPERATION_NOTALLOWED = "UnsupportedOperation.NotAllowed"
+//  UNSUPPORTEDOPERATION_VOICECLONEERROR = "UnsupportedOperation.VoiceCloneError"
+func (c *Client) VoiceCloneWithContext(ctx context.Context, request *VoiceCloneRequest) (response *VoiceCloneResponse, err error) {
+    if request == nil {
+        request = NewVoiceCloneRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "VoiceClone")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("VoiceClone require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewVoiceCloneResponse()
     err = c.Send(request, response)
     return
 }

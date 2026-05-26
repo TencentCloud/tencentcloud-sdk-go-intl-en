@@ -851,7 +851,7 @@ func NewCreateAigcAudioCloneResponse() (response *CreateAigcAudioCloneResponse) 
 }
 
 // CreateAigcAudioClone
-// This API is used to create AIGC voice replication. Note that calling this API will incur fees. See the billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#96b3b59a-f9e1-49e9-966a-bedb70a4bf12).
+// This API is used to create AIGC voice replication. Note that calling this API will incur fees. See the [billing documentation](https://intl.cloud.tencent.com/document/product/266/14666#87e472ca-9c95-4658-ab7b-8f2130608419).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -866,7 +866,7 @@ func (c *Client) CreateAigcAudioClone(request *CreateAigcAudioCloneRequest) (res
 }
 
 // CreateAigcAudioClone
-// This API is used to create AIGC voice replication. Note that calling this API will incur fees. See the billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#96b3b59a-f9e1-49e9-966a-bedb70a4bf12).
+// This API is used to create AIGC voice replication. Note that calling this API will incur fees. See the [billing documentation](https://intl.cloud.tencent.com/document/product/266/14666#87e472ca-9c95-4658-ab7b-8f2130608419).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4107,6 +4107,60 @@ func (c *Client) DeleteCDNDomainWithContext(ctx context.Context, request *Delete
     return
 }
 
+func NewDeleteCLSTopicRequest() (request *DeleteCLSTopicRequest) {
+    request = &DeleteCLSTopicRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteCLSTopic")
+    
+    
+    return
+}
+
+func NewDeleteCLSTopicResponse() (response *DeleteCLSTopicResponse) {
+    response = &DeleteCLSTopicResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteCLSTopic
+// Delete the log topic enabled by VOD.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOMAINDEPLOYING = "FailedOperation.DomainDeploying"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteCLSTopic(request *DeleteCLSTopicRequest) (response *DeleteCLSTopicResponse, err error) {
+    return c.DeleteCLSTopicWithContext(context.Background(), request)
+}
+
+// DeleteCLSTopic
+// Delete the log topic enabled by VOD.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOMAINDEPLOYING = "FailedOperation.DomainDeploying"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteCLSTopicWithContext(ctx context.Context, request *DeleteCLSTopicRequest) (response *DeleteCLSTopicResponse, err error) {
+    if request == nil {
+        request = NewDeleteCLSTopicRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DeleteCLSTopic")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCLSTopic require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCLSTopicResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteClassRequest() (request *DeleteClassRequest) {
     request = &DeleteClassRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6361,6 +6415,128 @@ func (c *Client) DescribeCDNUsageDataWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDescribeCDNUsageDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCLSLogsetsRequest() (request *DescribeCLSLogsetsRequest) {
+    request = &DescribeCLSLogsetsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeCLSLogsets")
+    
+    
+    return
+}
+
+func NewDescribeCLSLogsetsResponse() (response *DescribeCLSLogsetsResponse) {
+    response = &DescribeCLSLogsetsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCLSLogsets
+// Query the CLS log set created by VOD.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetWorkError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DATAINTERVAL = "InvalidParameterValue.DataInterval"
+//  INVALIDPARAMETERVALUE_DATATYPE = "InvalidParameterValue.DataType"
+//  INVALIDPARAMETERVALUE_DOMAINNAME = "InvalidParameterValue.DomainName"
+//  INVALIDPARAMETERVALUE_DOMAINNAMES = "InvalidParameterValue.DomainNames"
+//  INVALIDPARAMETERVALUE_ENDTIME = "InvalidParameterValue.EndTime"
+//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeCLSLogsets(request *DescribeCLSLogsetsRequest) (response *DescribeCLSLogsetsResponse, err error) {
+    return c.DescribeCLSLogsetsWithContext(context.Background(), request)
+}
+
+// DescribeCLSLogsets
+// Query the CLS log set created by VOD.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetWorkError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DATAINTERVAL = "InvalidParameterValue.DataInterval"
+//  INVALIDPARAMETERVALUE_DATATYPE = "InvalidParameterValue.DataType"
+//  INVALIDPARAMETERVALUE_DOMAINNAME = "InvalidParameterValue.DomainName"
+//  INVALIDPARAMETERVALUE_DOMAINNAMES = "InvalidParameterValue.DomainNames"
+//  INVALIDPARAMETERVALUE_ENDTIME = "InvalidParameterValue.EndTime"
+//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeCLSLogsetsWithContext(ctx context.Context, request *DescribeCLSLogsetsRequest) (response *DescribeCLSLogsetsResponse, err error) {
+    if request == nil {
+        request = NewDescribeCLSLogsetsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeCLSLogsets")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCLSLogsets require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCLSLogsetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCLSTopicsRequest() (request *DescribeCLSTopicsRequest) {
+    request = &DescribeCLSTopicsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeCLSTopics")
+    
+    
+    return
+}
+
+func NewDescribeCLSTopicsResponse() (response *DescribeCLSTopicsResponse) {
+    response = &DescribeCLSTopicsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCLSTopics
+// Query the log topic list created by VOD.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeCLSTopics(request *DescribeCLSTopicsRequest) (response *DescribeCLSTopicsResponse, err error) {
+    return c.DescribeCLSTopicsWithContext(context.Background(), request)
+}
+
+// DescribeCLSTopics
+// Query the log topic list created by VOD.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeCLSTopicsWithContext(ctx context.Context, request *DescribeCLSTopicsRequest) (response *DescribeCLSTopicsResponse, err error) {
+    if request == nil {
+        request = NewDescribeCLSTopicsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeCLSTopics")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCLSTopics require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCLSTopicsResponse()
     err = c.Send(request, response)
     return
 }

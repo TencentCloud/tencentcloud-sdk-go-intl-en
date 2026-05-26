@@ -53,6 +53,15 @@ const (
 	// Parameter value error.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
 
+	// Query end time is later than current system time
+	INVALIDPARAMETERVALUE_TIMEFUTURE = "InvalidParameterValue.TimeFuture"
+
+	// Query time span exceeds 7 days
+	INVALIDPARAMETERVALUE_TIMESPANEXCEEDED = "InvalidParameterValue.TimeSpanExceeded"
+
+	// Start time earlier than 30 days ago
+	INVALIDPARAMETERVALUE_TIMETOOEARLY = "InvalidParameterValue.TimeTooEarly"
+
 	// The quota limit is exceeded.
 	LIMITEXCEEDED = "LimitExceeded"
 

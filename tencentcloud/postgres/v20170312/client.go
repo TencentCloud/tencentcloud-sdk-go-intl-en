@@ -241,6 +241,128 @@ func (c *Client) CloneDBInstanceWithContext(ctx context.Context, request *CloneD
     return
 }
 
+func NewCloseAccountCAMRequest() (request *CloseAccountCAMRequest) {
+    request = &CloseAccountCAMRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "CloseAccountCAM")
+    
+    
+    return
+}
+
+func NewCloseAccountCAMResponse() (response *CloseAccountCAMResponse) {
+    response = &CloseAccountCAMResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CloseAccountCAM
+// This API is used to disable CAM verification service for a database account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CHECKACCOUNTCAMOPENERROR = "FailedOperation.CheckAccountCAMOpenError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_ACCOUNTNOTEXIST = "InvalidParameterValue.AccountNotExist"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDREGIONERROR = "InvalidParameterValue.UnsupportedRegionError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhiteListError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) CloseAccountCAM(request *CloseAccountCAMRequest) (response *CloseAccountCAMResponse, err error) {
+    return c.CloseAccountCAMWithContext(context.Background(), request)
+}
+
+// CloseAccountCAM
+// This API is used to disable CAM verification service for a database account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CHECKACCOUNTCAMOPENERROR = "FailedOperation.CheckAccountCAMOpenError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_ACCOUNTNOTEXIST = "InvalidParameterValue.AccountNotExist"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDREGIONERROR = "InvalidParameterValue.UnsupportedRegionError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhiteListError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) CloseAccountCAMWithContext(ctx context.Context, request *CloseAccountCAMRequest) (response *CloseAccountCAMResponse, err error) {
+    if request == nil {
+        request = NewCloseAccountCAMRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CloseAccountCAM")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CloseAccountCAM require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCloseAccountCAMResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCloseAuditServiceRequest() (request *CloseAuditServiceRequest) {
+    request = &CloseAuditServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "CloseAuditService")
+    
+    
+    return
+}
+
+func NewCloseAuditServiceResponse() (response *CloseAuditServiceResponse) {
+    response = &CloseAuditServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CloseAuditService
+// This API is used to disable the audit feature for a database instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ILLEGALINPUTPARAMETER = "InvalidParameter.IllegalInputParameter"
+//  OPERATIONDENIED_RESOURCENOTFOUNDERROR = "OperationDenied.ResourceNotFoundError"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+func (c *Client) CloseAuditService(request *CloseAuditServiceRequest) (response *CloseAuditServiceResponse, err error) {
+    return c.CloseAuditServiceWithContext(context.Background(), request)
+}
+
+// CloseAuditService
+// This API is used to disable the audit feature for a database instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ILLEGALINPUTPARAMETER = "InvalidParameter.IllegalInputParameter"
+//  OPERATIONDENIED_RESOURCENOTFOUNDERROR = "OperationDenied.ResourceNotFoundError"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+func (c *Client) CloseAuditServiceWithContext(ctx context.Context, request *CloseAuditServiceRequest) (response *CloseAuditServiceResponse, err error) {
+    if request == nil {
+        request = NewCloseAuditServiceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CloseAuditService")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CloseAuditService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCloseAuditServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCloseDBExtranetAccessRequest() (request *CloseDBExtranetAccessRequest) {
     request = &CloseDBExtranetAccessRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -327,130 +449,6 @@ func (c *Client) CloseDBExtranetAccessWithContext(ctx context.Context, request *
     return
 }
 
-func NewCloseServerlessDBExtranetAccessRequest() (request *CloseServerlessDBExtranetAccessRequest) {
-    request = &CloseServerlessDBExtranetAccessRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("postgres", APIVersion, "CloseServerlessDBExtranetAccess")
-    
-    
-    return
-}
-
-func NewCloseServerlessDBExtranetAccessResponse() (response *CloseServerlessDBExtranetAccessResponse) {
-    response = &CloseServerlessDBExtranetAccessResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// CloseServerlessDBExtranetAccess
-// This API is used to disable the public network address of a PostgreSQL for Serverless instance.
-//
-// error code that may be returned:
-//  ACCOUNTNOTEXIST = "AccountNotExist"
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  DBERROR = "DBError"
-//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
-//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
-//  FAILEDOPERATION_INVALIDTRADEOPERATE = "FailedOperation.InvalidTradeOperate"
-//  FAILEDOPERATION_LIMITOPERATION = "FailedOperation.LimitOperation"
-//  FAILEDOPERATION_QUERYVPCFALIED = "FailedOperation.QueryVpcFalied"
-//  FLOWERROR = "FlowError"
-//  INSTANCENOTEXIST = "InstanceNotExist"
-//  INTERFACENAMENOTFOUND = "InterfaceNameNotFound"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_FLOWERROR = "InternalError.FlowError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
-//  INVALIDACCOUNTSTATUS = "InvalidAccountStatus"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  INVALIDPARAMETERVALUE_INTERFACENAMENOTFOUND = "InvalidParameterValue.InterfaceNameNotFound"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
-//  INVALIDPARAMETERVALUE_STRUCTPARSEFAILED = "InvalidParameterValue.StructParseFailed"
-//  LIMITOPERATION = "LimitOperation"
-//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
-//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
-//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
-//  RESOURCEUNAVAILABLE_INVALIDINSTANCESTATUS = "ResourceUnavailable.InvalidInstanceStatus"
-//  RESOURCEUNAVAILABLE_RESOURCENOPERMISSION = "ResourceUnavailable.ResourceNoPermission"
-//  RESOURCEUNAVAILABLE_VPCRESOURCENOTFOUND = "ResourceUnavailable.VpcResourceNotFound"
-//  STRUCTPARSEFAILED = "StructParseFailed"
-//  SYSTEMERROR = "SystemError"
-//  UNKNOWNERROR = "UnknownError"
-//  VPCERROR = "VpcError"
-func (c *Client) CloseServerlessDBExtranetAccess(request *CloseServerlessDBExtranetAccessRequest) (response *CloseServerlessDBExtranetAccessResponse, err error) {
-    return c.CloseServerlessDBExtranetAccessWithContext(context.Background(), request)
-}
-
-// CloseServerlessDBExtranetAccess
-// This API is used to disable the public network address of a PostgreSQL for Serverless instance.
-//
-// error code that may be returned:
-//  ACCOUNTNOTEXIST = "AccountNotExist"
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  DBERROR = "DBError"
-//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
-//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
-//  FAILEDOPERATION_INVALIDTRADEOPERATE = "FailedOperation.InvalidTradeOperate"
-//  FAILEDOPERATION_LIMITOPERATION = "FailedOperation.LimitOperation"
-//  FAILEDOPERATION_QUERYVPCFALIED = "FailedOperation.QueryVpcFalied"
-//  FLOWERROR = "FlowError"
-//  INSTANCENOTEXIST = "InstanceNotExist"
-//  INTERFACENAMENOTFOUND = "InterfaceNameNotFound"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_FLOWERROR = "InternalError.FlowError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
-//  INVALIDACCOUNTSTATUS = "InvalidAccountStatus"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  INVALIDPARAMETERVALUE_INTERFACENAMENOTFOUND = "InvalidParameterValue.InterfaceNameNotFound"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
-//  INVALIDPARAMETERVALUE_STRUCTPARSEFAILED = "InvalidParameterValue.StructParseFailed"
-//  LIMITOPERATION = "LimitOperation"
-//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
-//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
-//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
-//  RESOURCEUNAVAILABLE_INVALIDINSTANCESTATUS = "ResourceUnavailable.InvalidInstanceStatus"
-//  RESOURCEUNAVAILABLE_RESOURCENOPERMISSION = "ResourceUnavailable.ResourceNoPermission"
-//  RESOURCEUNAVAILABLE_VPCRESOURCENOTFOUND = "ResourceUnavailable.VpcResourceNotFound"
-//  STRUCTPARSEFAILED = "StructParseFailed"
-//  SYSTEMERROR = "SystemError"
-//  UNKNOWNERROR = "UnknownError"
-//  VPCERROR = "VpcError"
-func (c *Client) CloseServerlessDBExtranetAccessWithContext(ctx context.Context, request *CloseServerlessDBExtranetAccessRequest) (response *CloseServerlessDBExtranetAccessResponse, err error) {
-    if request == nil {
-        request = NewCloseServerlessDBExtranetAccessRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CloseServerlessDBExtranetAccess")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CloseServerlessDBExtranetAccess require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCloseServerlessDBExtranetAccessResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewCreateAccountRequest() (request *CreateAccountRequest) {
     request = &CreateAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -531,6 +529,58 @@ func (c *Client) CreateAccountWithContext(ctx context.Context, request *CreateAc
     request.SetContext(ctx)
     
     response = NewCreateAccountResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateAuditLogFileRequest() (request *CreateAuditLogFileRequest) {
+    request = &CreateAuditLogFileRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "CreateAuditLogFile")
+    
+    
+    return
+}
+
+func NewCreateAuditLogFileResponse() (response *CreateAuditLogFileResponse) {
+    response = &CreateAuditLogFileResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAuditLogFile
+// Creating an Audit Log File
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ILLEGALINPUTPARAMETER = "InvalidParameter.IllegalInputParameter"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+func (c *Client) CreateAuditLogFile(request *CreateAuditLogFileRequest) (response *CreateAuditLogFileResponse, err error) {
+    return c.CreateAuditLogFileWithContext(context.Background(), request)
+}
+
+// CreateAuditLogFile
+// Creating an Audit Log File
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ILLEGALINPUTPARAMETER = "InvalidParameter.IllegalInputParameter"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+func (c *Client) CreateAuditLogFileWithContext(ctx context.Context, request *CreateAuditLogFileRequest) (response *CreateAuditLogFileResponse, err error) {
+    if request == nil {
+        request = NewCreateAuditLogFileRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CreateAuditLogFile")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAuditLogFile require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAuditLogFileResponse()
     err = c.Send(request, response)
     return
 }
@@ -745,196 +795,6 @@ func (c *Client) CreateDBInstanceNetworkAccessWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewCreateDBInstanceNetworkAccessResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewCreateDBInstancesRequest() (request *CreateDBInstancesRequest) {
-    request = &CreateDBInstancesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("postgres", APIVersion, "CreateDBInstances")
-    
-    
-    return
-}
-
-func NewCreateDBInstancesResponse() (response *CreateDBInstancesResponse) {
-    response = &CreateDBInstancesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// CreateDBInstances
-// This API is used to create (but not initialize) one or more TencentDB for PostgreSQL instances. This API is disused and replaced by the [CreateInstances](https://intl.cloud.tencent.com/document/api/409/56107?from_cn_redirect=1) API.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION_ALLOCATEQUOTASERROR = "FailedOperation.AllocateQuotasError"
-//  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
-//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
-//  FAILEDOPERATION_CDBCGWCONNECTERROR = "FailedOperation.CdbCgwConnectError"
-//  FAILEDOPERATION_CREATEBASICNETWORKDENIEDERROR = "FailedOperation.CreateBasicNetworkDeniedError"
-//  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
-//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
-//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
-//  FAILEDOPERATION_GETSUBNETERROR = "FailedOperation.GetSubnetError"
-//  FAILEDOPERATION_GETVPCINFOERROR = "FailedOperation.GetVpcInfoError"
-//  FAILEDOPERATION_INVALIDTRADEOPERATE = "FailedOperation.InvalidTradeOperate"
-//  FAILEDOPERATION_PAYORDERFAILED = "FailedOperation.PayOrderFailed"
-//  FAILEDOPERATION_QUERYPRICEFAILED = "FailedOperation.QueryPriceFailed"
-//  FAILEDOPERATION_QUERYSPECERROR = "FailedOperation.QuerySpecError"
-//  FAILEDOPERATION_QUERYVPCFAILED = "FailedOperation.QueryVpcFailed"
-//  FAILEDOPERATION_QUERYVPCFALIED = "FailedOperation.QueryVpcFalied"
-//  FAILEDOPERATION_SERVICEACCESSERROR = "FailedOperation.ServiceAccessError"
-//  FAILEDOPERATION_STORAGEMEMORYCHECKERROR = "FailedOperation.StorageMemoryCheckError"
-//  FAILEDOPERATION_TRADECREATEERROR = "FailedOperation.TradeCreateError"
-//  FAILEDOPERATION_TRADEPAYORDERSERROR = "FailedOperation.TradePayOrdersError"
-//  INTERNALERROR_CGWERROR = "InternalError.CgwError"
-//  INTERNALERROR_CNSERROR = "InternalError.CnsError"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_DFWERROR = "InternalError.DfwError"
-//  INTERNALERROR_FLOWERROR = "InternalError.FlowError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
-//  INVALIDPARAMETER_TRADEACCESSDENIEDERROR = "InvalidParameter.TradeAccessDeniedError"
-//  INVALIDPARAMETER_VPCNOTFOUNDERROR = "InvalidParameter.VpcNotFoundError"
-//  INVALIDPARAMETERVALUE_ACCOUNTEXIST = "InvalidParameterValue.AccountExist"
-//  INVALIDPARAMETERVALUE_BADSPEC = "InvalidParameterValue.BadSpec"
-//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
-//  INVALIDPARAMETERVALUE_ILLEGALINSTANCECHARGETYPE = "InvalidParameterValue.IllegalInstanceChargeType"
-//  INVALIDPARAMETERVALUE_ILLEGALPROJECTID = "InvalidParameterValue.IllegalProjectId"
-//  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
-//  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
-//  INVALIDPARAMETERVALUE_INTERFACENAMENOTFOUND = "InvalidParameterValue.InterfaceNameNotFound"
-//  INVALIDPARAMETERVALUE_INVALIDACCOUNTFORMAT = "InvalidParameterValue.InvalidAccountFormat"
-//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAME = "InvalidParameterValue.InvalidAccountName"
-//  INVALIDPARAMETERVALUE_INVALIDCHARSET = "InvalidParameterValue.InvalidCharset"
-//  INVALIDPARAMETERVALUE_INVALIDINSTANCENUM = "InvalidParameterValue.InvalidInstanceNum"
-//  INVALIDPARAMETERVALUE_INVALIDORDERNUM = "InvalidParameterValue.InvalidOrderNum"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_INVALIDPASSWORDFORMAT = "InvalidParameterValue.InvalidPasswordFormat"
-//  INVALIDPARAMETERVALUE_INVALIDPID = "InvalidParameterValue.InvalidPid"
-//  INVALIDPARAMETERVALUE_INVALIDZONEIDERROR = "InvalidParameterValue.InvalidZoneIdError"
-//  INVALIDPARAMETERVALUE_PARAMETERCHARACTERERROR = "InvalidParameterValue.ParameterCharacterError"
-//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
-//  INVALIDPARAMETERVALUE_PARAMETERLENGTHLIMITERROR = "InvalidParameterValue.ParameterLengthLimitError"
-//  INVALIDPARAMETERVALUE_PARAMETEROUTRANGEERROR = "InvalidParameterValue.ParameterOutRangeError"
-//  INVALIDPARAMETERVALUE_REGIONNOTSUPPORTED = "InvalidParameterValue.RegionNotSupported"
-//  INVALIDPARAMETERVALUE_SPECNOTRECOGNIZEDERROR = "InvalidParameterValue.SpecNotRecognizedError"
-//  INVALIDPARAMETERVALUE_STRUCTPARSEFAILED = "InvalidParameterValue.StructParseFailed"
-//  INVALIDPID = "InvalidPid"
-//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
-//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
-//  OPERATIONDENIED_USERNOTAUTHENTICATEDERROR = "OperationDenied.UserNotAuthenticatedError"
-//  OPERATIONDENIED_VPCDENIEDERROR = "OperationDenied.VpcDeniedError"
-//  RESOURCEINSUFFICIENT_RESOURCENOTENOUGH = "ResourceInsufficient.ResourceNotEnough"
-//  RESOURCEUNAVAILABLE_INVALIDINSTANCESTATUS = "ResourceUnavailable.InvalidInstanceStatus"
-//  RESOURCEUNAVAILABLE_RESOURCENOPERMISSION = "ResourceUnavailable.ResourceNoPermission"
-//  RESOURCEUNAVAILABLE_VPCRESOURCENOTFOUND = "ResourceUnavailable.VpcResourceNotFound"
-//  UNAUTHORIZEDOPERATION_USERHASNOREALNAMEAUTHENTICATION = "UnauthorizedOperation.UserHasNoRealnameAuthentication"
-//  UNKNOWNERROR = "UnknownError"
-func (c *Client) CreateDBInstances(request *CreateDBInstancesRequest) (response *CreateDBInstancesResponse, err error) {
-    return c.CreateDBInstancesWithContext(context.Background(), request)
-}
-
-// CreateDBInstances
-// This API is used to create (but not initialize) one or more TencentDB for PostgreSQL instances. This API is disused and replaced by the [CreateInstances](https://intl.cloud.tencent.com/document/api/409/56107?from_cn_redirect=1) API.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION_ALLOCATEQUOTASERROR = "FailedOperation.AllocateQuotasError"
-//  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
-//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
-//  FAILEDOPERATION_CDBCGWCONNECTERROR = "FailedOperation.CdbCgwConnectError"
-//  FAILEDOPERATION_CREATEBASICNETWORKDENIEDERROR = "FailedOperation.CreateBasicNetworkDeniedError"
-//  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
-//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
-//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
-//  FAILEDOPERATION_GETSUBNETERROR = "FailedOperation.GetSubnetError"
-//  FAILEDOPERATION_GETVPCINFOERROR = "FailedOperation.GetVpcInfoError"
-//  FAILEDOPERATION_INVALIDTRADEOPERATE = "FailedOperation.InvalidTradeOperate"
-//  FAILEDOPERATION_PAYORDERFAILED = "FailedOperation.PayOrderFailed"
-//  FAILEDOPERATION_QUERYPRICEFAILED = "FailedOperation.QueryPriceFailed"
-//  FAILEDOPERATION_QUERYSPECERROR = "FailedOperation.QuerySpecError"
-//  FAILEDOPERATION_QUERYVPCFAILED = "FailedOperation.QueryVpcFailed"
-//  FAILEDOPERATION_QUERYVPCFALIED = "FailedOperation.QueryVpcFalied"
-//  FAILEDOPERATION_SERVICEACCESSERROR = "FailedOperation.ServiceAccessError"
-//  FAILEDOPERATION_STORAGEMEMORYCHECKERROR = "FailedOperation.StorageMemoryCheckError"
-//  FAILEDOPERATION_TRADECREATEERROR = "FailedOperation.TradeCreateError"
-//  FAILEDOPERATION_TRADEPAYORDERSERROR = "FailedOperation.TradePayOrdersError"
-//  INTERNALERROR_CGWERROR = "InternalError.CgwError"
-//  INTERNALERROR_CNSERROR = "InternalError.CnsError"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_DFWERROR = "InternalError.DfwError"
-//  INTERNALERROR_FLOWERROR = "InternalError.FlowError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
-//  INVALIDPARAMETER_TRADEACCESSDENIEDERROR = "InvalidParameter.TradeAccessDeniedError"
-//  INVALIDPARAMETER_VPCNOTFOUNDERROR = "InvalidParameter.VpcNotFoundError"
-//  INVALIDPARAMETERVALUE_ACCOUNTEXIST = "InvalidParameterValue.AccountExist"
-//  INVALIDPARAMETERVALUE_BADSPEC = "InvalidParameterValue.BadSpec"
-//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
-//  INVALIDPARAMETERVALUE_ILLEGALINSTANCECHARGETYPE = "InvalidParameterValue.IllegalInstanceChargeType"
-//  INVALIDPARAMETERVALUE_ILLEGALPROJECTID = "InvalidParameterValue.IllegalProjectId"
-//  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
-//  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
-//  INVALIDPARAMETERVALUE_INTERFACENAMENOTFOUND = "InvalidParameterValue.InterfaceNameNotFound"
-//  INVALIDPARAMETERVALUE_INVALIDACCOUNTFORMAT = "InvalidParameterValue.InvalidAccountFormat"
-//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAME = "InvalidParameterValue.InvalidAccountName"
-//  INVALIDPARAMETERVALUE_INVALIDCHARSET = "InvalidParameterValue.InvalidCharset"
-//  INVALIDPARAMETERVALUE_INVALIDINSTANCENUM = "InvalidParameterValue.InvalidInstanceNum"
-//  INVALIDPARAMETERVALUE_INVALIDORDERNUM = "InvalidParameterValue.InvalidOrderNum"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_INVALIDPASSWORDFORMAT = "InvalidParameterValue.InvalidPasswordFormat"
-//  INVALIDPARAMETERVALUE_INVALIDPID = "InvalidParameterValue.InvalidPid"
-//  INVALIDPARAMETERVALUE_INVALIDZONEIDERROR = "InvalidParameterValue.InvalidZoneIdError"
-//  INVALIDPARAMETERVALUE_PARAMETERCHARACTERERROR = "InvalidParameterValue.ParameterCharacterError"
-//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
-//  INVALIDPARAMETERVALUE_PARAMETERLENGTHLIMITERROR = "InvalidParameterValue.ParameterLengthLimitError"
-//  INVALIDPARAMETERVALUE_PARAMETEROUTRANGEERROR = "InvalidParameterValue.ParameterOutRangeError"
-//  INVALIDPARAMETERVALUE_REGIONNOTSUPPORTED = "InvalidParameterValue.RegionNotSupported"
-//  INVALIDPARAMETERVALUE_SPECNOTRECOGNIZEDERROR = "InvalidParameterValue.SpecNotRecognizedError"
-//  INVALIDPARAMETERVALUE_STRUCTPARSEFAILED = "InvalidParameterValue.StructParseFailed"
-//  INVALIDPID = "InvalidPid"
-//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
-//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
-//  OPERATIONDENIED_USERNOTAUTHENTICATEDERROR = "OperationDenied.UserNotAuthenticatedError"
-//  OPERATIONDENIED_VPCDENIEDERROR = "OperationDenied.VpcDeniedError"
-//  RESOURCEINSUFFICIENT_RESOURCENOTENOUGH = "ResourceInsufficient.ResourceNotEnough"
-//  RESOURCEUNAVAILABLE_INVALIDINSTANCESTATUS = "ResourceUnavailable.InvalidInstanceStatus"
-//  RESOURCEUNAVAILABLE_RESOURCENOPERMISSION = "ResourceUnavailable.ResourceNoPermission"
-//  RESOURCEUNAVAILABLE_VPCRESOURCENOTFOUND = "ResourceUnavailable.VpcResourceNotFound"
-//  UNAUTHORIZEDOPERATION_USERHASNOREALNAMEAUTHENTICATION = "UnauthorizedOperation.UserHasNoRealnameAuthentication"
-//  UNKNOWNERROR = "UnknownError"
-func (c *Client) CreateDBInstancesWithContext(ctx context.Context, request *CreateDBInstancesRequest) (response *CreateDBInstancesResponse, err error) {
-    if request == nil {
-        request = NewCreateDBInstancesRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CreateDBInstances")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateDBInstances require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateDBInstancesResponse()
     err = c.Send(request, response)
     return
 }
@@ -1679,130 +1539,6 @@ func (c *Client) CreateReadOnlyGroupNetworkAccessWithContext(ctx context.Context
     return
 }
 
-func NewCreateServerlessDBInstanceRequest() (request *CreateServerlessDBInstanceRequest) {
-    request = &CreateServerlessDBInstanceRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("postgres", APIVersion, "CreateServerlessDBInstance")
-    
-    
-    return
-}
-
-func NewCreateServerlessDBInstanceResponse() (response *CreateServerlessDBInstanceResponse) {
-    response = &CreateServerlessDBInstanceResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// CreateServerlessDBInstance
-// This API is used to create a PostgreSQL for Serverless instance. If the creation succeeds, the instance ID will be returned.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION_ALLOCATEQUOTASERROR = "FailedOperation.AllocateQuotasError"
-//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
-//  FAILEDOPERATION_CREATEBASICNETWORKDENIEDERROR = "FailedOperation.CreateBasicNetworkDeniedError"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
-//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
-//  FAILEDOPERATION_GETVPCINFOERROR = "FailedOperation.GetVpcInfoError"
-//  FAILEDOPERATION_QUERYVPCFAILED = "FailedOperation.QueryVpcFailed"
-//  FLOWERROR = "FlowError"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_FLOWERROR = "InternalError.FlowError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INSTANCENAMEEXIST = "InvalidParameter.InstanceNameExist"
-//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
-//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
-//  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
-//  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
-//  INVALIDPARAMETERVALUE_INSTANCENAMEEXIST = "InvalidParameterValue.InstanceNameExist"
-//  INVALIDPARAMETERVALUE_INVALIDACCOUNTFORMAT = "InvalidParameterValue.InvalidAccountFormat"
-//  INVALIDPARAMETERVALUE_INVALIDCHARSET = "InvalidParameterValue.InvalidCharset"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_INVALIDPASSWORDFORMAT = "InvalidParameterValue.InvalidPasswordFormat"
-//  INVALIDPARAMETERVALUE_INVALIDZONEIDERROR = "InvalidParameterValue.InvalidZoneIdError"
-//  INVALIDPARAMETERVALUE_PARAMETERCHARACTERERROR = "InvalidParameterValue.ParameterCharacterError"
-//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
-//  INVALIDPARAMETERVALUE_PARAMETERLENGTHLIMITERROR = "InvalidParameterValue.ParameterLengthLimitError"
-//  INVALIDPARAMETERVALUE_REGIONNOTSUPPORTED = "InvalidParameterValue.RegionNotSupported"
-//  INVALIDPARAMETERVALUE_STRUCTPARSEFAILED = "InvalidParameterValue.StructParseFailed"
-//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
-//  OPERATIONDENIED_NOTSUPPORTZONEERROR = "OperationDenied.NotSupportZoneError"
-//  OPERATIONDENIED_VERSIONNOTSUPPORTERROR = "OperationDenied.VersionNotSupportError"
-//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
-//  RESOURCEUNAVAILABLE_INVALIDINSTANCESTATUS = "ResourceUnavailable.InvalidInstanceStatus"
-//  UNAUTHORIZEDOPERATION_USERHASNOREALNAMEAUTHENTICATION = "UnauthorizedOperation.UserHasNoRealnameAuthentication"
-func (c *Client) CreateServerlessDBInstance(request *CreateServerlessDBInstanceRequest) (response *CreateServerlessDBInstanceResponse, err error) {
-    return c.CreateServerlessDBInstanceWithContext(context.Background(), request)
-}
-
-// CreateServerlessDBInstance
-// This API is used to create a PostgreSQL for Serverless instance. If the creation succeeds, the instance ID will be returned.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION_ALLOCATEQUOTASERROR = "FailedOperation.AllocateQuotasError"
-//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
-//  FAILEDOPERATION_CREATEBASICNETWORKDENIEDERROR = "FailedOperation.CreateBasicNetworkDeniedError"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
-//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
-//  FAILEDOPERATION_GETVPCINFOERROR = "FailedOperation.GetVpcInfoError"
-//  FAILEDOPERATION_QUERYVPCFAILED = "FailedOperation.QueryVpcFailed"
-//  FLOWERROR = "FlowError"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_FLOWERROR = "InternalError.FlowError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INSTANCENAMEEXIST = "InvalidParameter.InstanceNameExist"
-//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
-//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
-//  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
-//  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
-//  INVALIDPARAMETERVALUE_INSTANCENAMEEXIST = "InvalidParameterValue.InstanceNameExist"
-//  INVALIDPARAMETERVALUE_INVALIDACCOUNTFORMAT = "InvalidParameterValue.InvalidAccountFormat"
-//  INVALIDPARAMETERVALUE_INVALIDCHARSET = "InvalidParameterValue.InvalidCharset"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_INVALIDPASSWORDFORMAT = "InvalidParameterValue.InvalidPasswordFormat"
-//  INVALIDPARAMETERVALUE_INVALIDZONEIDERROR = "InvalidParameterValue.InvalidZoneIdError"
-//  INVALIDPARAMETERVALUE_PARAMETERCHARACTERERROR = "InvalidParameterValue.ParameterCharacterError"
-//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
-//  INVALIDPARAMETERVALUE_PARAMETERLENGTHLIMITERROR = "InvalidParameterValue.ParameterLengthLimitError"
-//  INVALIDPARAMETERVALUE_REGIONNOTSUPPORTED = "InvalidParameterValue.RegionNotSupported"
-//  INVALIDPARAMETERVALUE_STRUCTPARSEFAILED = "InvalidParameterValue.StructParseFailed"
-//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
-//  OPERATIONDENIED_NOTSUPPORTZONEERROR = "OperationDenied.NotSupportZoneError"
-//  OPERATIONDENIED_VERSIONNOTSUPPORTERROR = "OperationDenied.VersionNotSupportError"
-//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
-//  RESOURCEUNAVAILABLE_INVALIDINSTANCESTATUS = "ResourceUnavailable.InvalidInstanceStatus"
-//  UNAUTHORIZEDOPERATION_USERHASNOREALNAMEAUTHENTICATION = "UnauthorizedOperation.UserHasNoRealnameAuthentication"
-func (c *Client) CreateServerlessDBInstanceWithContext(ctx context.Context, request *CreateServerlessDBInstanceRequest) (response *CreateServerlessDBInstanceResponse, err error) {
-    if request == nil {
-        request = NewCreateServerlessDBInstanceRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "CreateServerlessDBInstance")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateServerlessDBInstance require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateServerlessDBInstanceResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDeleteAccountRequest() (request *DeleteAccountRequest) {
     request = &DeleteAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1869,6 +1605,58 @@ func (c *Client) DeleteAccountWithContext(ctx context.Context, request *DeleteAc
     request.SetContext(ctx)
     
     response = NewDeleteAccountResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteAuditLogFileRequest() (request *DeleteAuditLogFileRequest) {
+    request = &DeleteAuditLogFileRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DeleteAuditLogFile")
+    
+    
+    return
+}
+
+func NewDeleteAuditLogFileResponse() (response *DeleteAuditLogFileResponse) {
+    response = &DeleteAuditLogFileResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteAuditLogFile
+// Deletes an audit log file
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ILLEGALINPUTPARAMETER = "InvalidParameter.IllegalInputParameter"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+func (c *Client) DeleteAuditLogFile(request *DeleteAuditLogFileRequest) (response *DeleteAuditLogFileResponse, err error) {
+    return c.DeleteAuditLogFileWithContext(context.Background(), request)
+}
+
+// DeleteAuditLogFile
+// Deletes an audit log file
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ILLEGALINPUTPARAMETER = "InvalidParameter.IllegalInputParameter"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+func (c *Client) DeleteAuditLogFileWithContext(ctx context.Context, request *DeleteAuditLogFileRequest) (response *DeleteAuditLogFileResponse, err error) {
+    if request == nil {
+        request = NewDeleteAuditLogFileRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DeleteAuditLogFile")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAuditLogFile require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteAuditLogFileResponse()
     err = c.Send(request, response)
     return
 }
@@ -2009,7 +1797,7 @@ func NewDeleteDBInstanceNetworkAccessResponse() (response *DeleteDBInstanceNetwo
 }
 
 // DeleteDBInstanceNetworkAccess
-// This API is used to delete a network of an instance.
+// This API is used to delete a network from an instance while keeping at least one network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2035,7 +1823,7 @@ func (c *Client) DeleteDBInstanceNetworkAccess(request *DeleteDBInstanceNetworkA
 }
 
 // DeleteDBInstanceNetworkAccess
-// This API is used to delete a network of an instance.
+// This API is used to delete a network from an instance while keeping at least one network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2281,7 +2069,7 @@ func NewDeleteReadOnlyGroupNetworkAccessResponse() (response *DeleteReadOnlyGrou
 }
 
 // DeleteReadOnlyGroupNetworkAccess
-// This API is used to delete a network of an RO group.
+// This API is used to delete a network from an RO group (at least 1 network must remain).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2303,7 +2091,7 @@ func (c *Client) DeleteReadOnlyGroupNetworkAccess(request *DeleteReadOnlyGroupNe
 }
 
 // DeleteReadOnlyGroupNetworkAccess
-// This API is used to delete a network of an RO group.
+// This API is used to delete a network from an RO group (at least 1 network must remain).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2333,98 +2121,6 @@ func (c *Client) DeleteReadOnlyGroupNetworkAccessWithContext(ctx context.Context
     request.SetContext(ctx)
     
     response = NewDeleteReadOnlyGroupNetworkAccessResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDeleteServerlessDBInstanceRequest() (request *DeleteServerlessDBInstanceRequest) {
-    request = &DeleteServerlessDBInstanceRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("postgres", APIVersion, "DeleteServerlessDBInstance")
-    
-    
-    return
-}
-
-func NewDeleteServerlessDBInstanceResponse() (response *DeleteServerlessDBInstanceResponse) {
-    response = &DeleteServerlessDBInstanceResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DeleteServerlessDBInstance
-// This API is used to delete a PostgreSQL for Serverless instance.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
-//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_FLOWERROR = "InternalError.FlowError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  INVALIDINSTANCESTATUS = "InvalidInstanceStatus"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
-//  INVALIDPARAMETERVALUE_STRUCTPARSEFAILED = "InvalidParameterValue.StructParseFailed"
-//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
-//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
-//  REGIONNOTSUPPORTED = "RegionNotSupported"
-//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
-//  RESOURCEUNAVAILABLE_INVALIDINSTANCESTATUS = "ResourceUnavailable.InvalidInstanceStatus"
-func (c *Client) DeleteServerlessDBInstance(request *DeleteServerlessDBInstanceRequest) (response *DeleteServerlessDBInstanceResponse, err error) {
-    return c.DeleteServerlessDBInstanceWithContext(context.Background(), request)
-}
-
-// DeleteServerlessDBInstance
-// This API is used to delete a PostgreSQL for Serverless instance.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
-//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_FLOWERROR = "InternalError.FlowError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  INVALIDINSTANCESTATUS = "InvalidInstanceStatus"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
-//  INVALIDPARAMETERVALUE_STRUCTPARSEFAILED = "InvalidParameterValue.StructParseFailed"
-//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
-//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
-//  REGIONNOTSUPPORTED = "RegionNotSupported"
-//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
-//  RESOURCEUNAVAILABLE_INVALIDINSTANCESTATUS = "ResourceUnavailable.InvalidInstanceStatus"
-func (c *Client) DeleteServerlessDBInstanceWithContext(ctx context.Context, request *DeleteServerlessDBInstanceRequest) (response *DeleteServerlessDBInstanceResponse, err error) {
-    if request == nil {
-        request = NewDeleteServerlessDBInstanceRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DeleteServerlessDBInstance")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DeleteServerlessDBInstance require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDeleteServerlessDBInstanceResponse()
     err = c.Send(request, response)
     return
 }
@@ -2575,6 +2271,180 @@ func (c *Client) DescribeAccountsWithContext(ctx context.Context, request *Descr
     request.SetContext(ctx)
     
     response = NewDescribeAccountsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAuditInstanceListRequest() (request *DescribeAuditInstanceListRequest) {
+    request = &DescribeAuditInstanceListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeAuditInstanceList")
+    
+    
+    return
+}
+
+func NewDescribeAuditInstanceListResponse() (response *DescribeAuditInstanceListResponse) {
+    response = &DescribeAuditInstanceListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAuditInstanceList
+// Query the audit instance list
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  OPERATIONDENIED_ACCOUNTOPERATIONDENIED = "OperationDenied.AccountOperationDenied"
+//  OPERATIONDENIED_AUDITFILEOVERQUOTAERROR = "OperationDenied.AuditFileOverQuotaError"
+//  OPERATIONDENIED_INTERNALTRADEERRORERR = "OperationDenied.InternalTradeErrorErr"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+//  UNKNOWNPARAMETER_CREATEAUDITLOGFILEERROR = "UnknownParameter.CreateAuditLogFileError"
+//  UNKNOWNPARAMETER_HTTPERROR = "UnknownParameter.HttpError"
+//  UNKNOWNPARAMETER_INTERNALINNERSERVICEERROR = "UnknownParameter.InternalInnerServiceError"
+func (c *Client) DescribeAuditInstanceList(request *DescribeAuditInstanceListRequest) (response *DescribeAuditInstanceListResponse, err error) {
+    return c.DescribeAuditInstanceListWithContext(context.Background(), request)
+}
+
+// DescribeAuditInstanceList
+// Query the audit instance list
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  OPERATIONDENIED_ACCOUNTOPERATIONDENIED = "OperationDenied.AccountOperationDenied"
+//  OPERATIONDENIED_AUDITFILEOVERQUOTAERROR = "OperationDenied.AuditFileOverQuotaError"
+//  OPERATIONDENIED_INTERNALTRADEERRORERR = "OperationDenied.InternalTradeErrorErr"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+//  UNKNOWNPARAMETER_CREATEAUDITLOGFILEERROR = "UnknownParameter.CreateAuditLogFileError"
+//  UNKNOWNPARAMETER_HTTPERROR = "UnknownParameter.HttpError"
+//  UNKNOWNPARAMETER_INTERNALINNERSERVICEERROR = "UnknownParameter.InternalInnerServiceError"
+func (c *Client) DescribeAuditInstanceListWithContext(ctx context.Context, request *DescribeAuditInstanceListRequest) (response *DescribeAuditInstanceListResponse, err error) {
+    if request == nil {
+        request = NewDescribeAuditInstanceListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeAuditInstanceList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAuditInstanceList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAuditInstanceListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAuditLogFilesRequest() (request *DescribeAuditLogFilesRequest) {
+    request = &DescribeAuditLogFilesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeAuditLogFiles")
+    
+    
+    return
+}
+
+func NewDescribeAuditLogFilesResponse() (response *DescribeAuditLogFilesResponse) {
+    response = &DescribeAuditLogFilesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAuditLogFiles
+// Queries audit log files
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ILLEGALINPUTPARAMETER = "InvalidParameter.IllegalInputParameter"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+func (c *Client) DescribeAuditLogFiles(request *DescribeAuditLogFilesRequest) (response *DescribeAuditLogFilesResponse, err error) {
+    return c.DescribeAuditLogFilesWithContext(context.Background(), request)
+}
+
+// DescribeAuditLogFiles
+// Queries audit log files
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ILLEGALINPUTPARAMETER = "InvalidParameter.IllegalInputParameter"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+func (c *Client) DescribeAuditLogFilesWithContext(ctx context.Context, request *DescribeAuditLogFilesRequest) (response *DescribeAuditLogFilesResponse, err error) {
+    if request == nil {
+        request = NewDescribeAuditLogFilesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeAuditLogFiles")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAuditLogFiles require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAuditLogFilesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAuditLogsRequest() (request *DescribeAuditLogsRequest) {
+    request = &DescribeAuditLogsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeAuditLogs")
+    
+    
+    return
+}
+
+func NewDescribeAuditLogsResponse() (response *DescribeAuditLogsResponse) {
+    response = &DescribeAuditLogsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAuditLogs
+// This API is used to query a Database Audit log.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ILLEGALINPUTPARAMETER = "InvalidParameter.IllegalInputParameter"
+//  OPERATIONDENIED_RESOURCENOTFOUNDERROR = "OperationDenied.ResourceNotFoundError"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+func (c *Client) DescribeAuditLogs(request *DescribeAuditLogsRequest) (response *DescribeAuditLogsResponse, err error) {
+    return c.DescribeAuditLogsWithContext(context.Background(), request)
+}
+
+// DescribeAuditLogs
+// This API is used to query a Database Audit log.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ILLEGALINPUTPARAMETER = "InvalidParameter.IllegalInputParameter"
+//  OPERATIONDENIED_RESOURCENOTFOUNDERROR = "OperationDenied.ResourceNotFoundError"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+func (c *Client) DescribeAuditLogsWithContext(ctx context.Context, request *DescribeAuditLogsRequest) (response *DescribeAuditLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeAuditLogsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeAuditLogs")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAuditLogs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAuditLogsResponse()
     err = c.Send(request, response)
     return
 }
@@ -3250,6 +3120,7 @@ func NewDescribeDBErrlogsResponse() (response *DescribeDBErrlogsResponse) {
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INTERNALERROR_LISTINSTANCESERROR = "InternalError.ListInstancesError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
@@ -3278,6 +3149,7 @@ func (c *Client) DescribeDBErrlogs(request *DescribeDBErrlogsRequest) (response 
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INTERNALERROR_LISTINSTANCESERROR = "InternalError.ListInstancesError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
@@ -3417,11 +3289,11 @@ func NewDescribeDBInstanceHAConfigResponse() (response *DescribeDBInstanceHAConf
 }
 
 // DescribeDBInstanceHAConfig
-// This API is used to query the HA configuration of an instance, which includes:
+// This API (DescribeDBInstanceHConfig) is used to query instance HA configuration information. The HA configuration information includes:
 //
-// <li>Allow a standby node to promote to a primary node.
+// <li>This API is used to configure conditions for allowing a secondary node to switch over to a primary node.</li>.
 //
-// <li>Allow a semi-sync instance to adopt sync or async replication.
+// <li>This API is used to configure conditions for using synchronous or asynchronous replication in semi-sync instances.</li>.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -3437,11 +3309,11 @@ func (c *Client) DescribeDBInstanceHAConfig(request *DescribeDBInstanceHAConfigR
 }
 
 // DescribeDBInstanceHAConfig
-// This API is used to query the HA configuration of an instance, which includes:
+// This API (DescribeDBInstanceHConfig) is used to query instance HA configuration information. The HA configuration information includes:
 //
-// <li>Allow a standby node to promote to a primary node.
+// <li>This API is used to configure conditions for allowing a secondary node to switch over to a primary node.</li>.
 //
-// <li>Allow a semi-sync instance to adopt sync or async replication.
+// <li>This API is used to configure conditions for using synchronous or asynchronous replication in semi-sync instances.</li>.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -3755,86 +3627,6 @@ func (c *Client) DescribeDBInstancesWithContext(ctx context.Context, request *De
     return
 }
 
-func NewDescribeDBSlowlogsRequest() (request *DescribeDBSlowlogsRequest) {
-    request = &DescribeDBSlowlogsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("postgres", APIVersion, "DescribeDBSlowlogs")
-    
-    
-    return
-}
-
-func NewDescribeDBSlowlogsResponse() (response *DescribeDBSlowlogsResponse) {
-    response = &DescribeDBSlowlogsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeDBSlowlogs
-// This API is used to get a slow query log. Since it was deprecated on September 1, 2021, it has no longer returned data. You need to use the [DescribeSlowQueryList](https://intl.cloud.tencent.com/document/product/409/60540?from_cn_redirect=1) API instead to get slow query logs.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_ESCONNECTERROR = "FailedOperation.ESConnectError"
-//  FAILEDOPERATION_ESQUERYERROR = "FailedOperation.ESQueryError"
-//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
-//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
-//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
-//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
-func (c *Client) DescribeDBSlowlogs(request *DescribeDBSlowlogsRequest) (response *DescribeDBSlowlogsResponse, err error) {
-    return c.DescribeDBSlowlogsWithContext(context.Background(), request)
-}
-
-// DescribeDBSlowlogs
-// This API is used to get a slow query log. Since it was deprecated on September 1, 2021, it has no longer returned data. You need to use the [DescribeSlowQueryList](https://intl.cloud.tencent.com/document/product/409/60540?from_cn_redirect=1) API instead to get slow query logs.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_ESCONNECTERROR = "FailedOperation.ESConnectError"
-//  FAILEDOPERATION_ESQUERYERROR = "FailedOperation.ESQueryError"
-//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
-//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
-//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
-//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
-func (c *Client) DescribeDBSlowlogsWithContext(ctx context.Context, request *DescribeDBSlowlogsRequest) (response *DescribeDBSlowlogsResponse, err error) {
-    if request == nil {
-        request = NewDescribeDBSlowlogsRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeDBSlowlogs")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeDBSlowlogs require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeDBSlowlogsResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeDBVersionsRequest() (request *DescribeDBVersionsRequest) {
     request = &DescribeDBVersionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3913,7 +3705,7 @@ func NewDescribeDBXlogsResponse() (response *DescribeDBXlogsResponse) {
 }
 
 // DescribeDBXlogs
-// This API is used to get the instance Xlog list. This API is disused and replaced by the [DescribeBaseBackups](https://www.tencentcloud.com/zh/document/product/409/54343) API.
+// This api is used to get instance Xlog list. This interface belongs to early api and has stopped feature iteration. We recommend using api [DescribeLogBackups](https://www.tencentcloud.com/document/api/409/89021?from_cn_redirect=1) as substitution.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -3942,7 +3734,7 @@ func (c *Client) DescribeDBXlogs(request *DescribeDBXlogsRequest) (response *Des
 }
 
 // DescribeDBXlogs
-// This API is used to get the instance Xlog list. This API is disused and replaced by the [DescribeBaseBackups](https://www.tencentcloud.com/zh/document/product/409/54343) API.
+// This api is used to get instance Xlog list. This interface belongs to early api and has stopped feature iteration. We recommend using api [DescribeLogBackups](https://www.tencentcloud.com/document/api/409/89021?from_cn_redirect=1) as substitution.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -4701,7 +4493,7 @@ func NewDescribeProductConfigResponse() (response *DescribeProductConfigResponse
 }
 
 // DescribeProductConfig
-// This API is used to query the purchasable specification configuration. u200cThis API is disused and replaced by the [DescribeClasses](https://intl.cloud.tencent.com/document/api/409/89019?from_cn_redirect=1) API.
+// This api is used to query sales specification configuration. This interface belongs to the early stage and has stopped feature iteration. It is recommended to use the new api [DescribeClasses](https://www.tencentcloud.com/document/api/409/89019?from_cn_redirect=1) as an alternative.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -4726,7 +4518,7 @@ func (c *Client) DescribeProductConfig(request *DescribeProductConfigRequest) (r
 }
 
 // DescribeProductConfig
-// This API is used to query the purchasable specification configuration. u200cThis API is disused and replaced by the [DescribeClasses](https://intl.cloud.tencent.com/document/api/409/89019?from_cn_redirect=1) API.
+// This api is used to query sales specification configuration. This interface belongs to the early stage and has stopped feature iteration. It is recommended to use the new api [DescribeClasses](https://www.tencentcloud.com/document/api/409/89019?from_cn_redirect=1) as an alternative.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -4925,110 +4717,6 @@ func (c *Client) DescribeRegionsWithContext(ctx context.Context, request *Descri
     return
 }
 
-func NewDescribeServerlessDBInstancesRequest() (request *DescribeServerlessDBInstancesRequest) {
-    request = &DescribeServerlessDBInstancesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("postgres", APIVersion, "DescribeServerlessDBInstances")
-    
-    
-    return
-}
-
-func NewDescribeServerlessDBInstancesResponse() (response *DescribeServerlessDBInstancesResponse) {
-    response = &DescribeServerlessDBInstancesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeServerlessDBInstances
-// This API is used to query the details of one or more PostgreSQL for Serverless instances.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  DBERROR = "DBError"
-//  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
-//  FAILEDOPERATION_CAMCHECKRESOURCEERROR = "FailedOperation.CamCheckResourceError"
-//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
-//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
-//  INTERFACENAMENOTFOUND = "InterfaceNameNotFound"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_VPCNOTFOUNDERROR = "InvalidParameter.VpcNotFoundError"
-//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
-//  INVALIDPARAMETERVALUE_ILLEGALPROJECTID = "InvalidParameterValue.IllegalProjectId"
-//  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
-//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
-//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
-//  RESOURCEUNAVAILABLE_VPCRESOURCENOTFOUND = "ResourceUnavailable.VpcResourceNotFound"
-//  STRUCTPARSEFAILED = "StructParseFailed"
-//  SYSTEMERROR = "SystemError"
-//  UNKNOWNERROR = "UnknownError"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeServerlessDBInstances(request *DescribeServerlessDBInstancesRequest) (response *DescribeServerlessDBInstancesResponse, err error) {
-    return c.DescribeServerlessDBInstancesWithContext(context.Background(), request)
-}
-
-// DescribeServerlessDBInstances
-// This API is used to query the details of one or more PostgreSQL for Serverless instances.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  DBERROR = "DBError"
-//  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
-//  FAILEDOPERATION_CAMCHECKRESOURCEERROR = "FailedOperation.CamCheckResourceError"
-//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
-//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
-//  INTERFACENAMENOTFOUND = "InterfaceNameNotFound"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_VPCNOTFOUNDERROR = "InvalidParameter.VpcNotFoundError"
-//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
-//  INVALIDPARAMETERVALUE_ILLEGALPROJECTID = "InvalidParameterValue.IllegalProjectId"
-//  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
-//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
-//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
-//  RESOURCEUNAVAILABLE_VPCRESOURCENOTFOUND = "ResourceUnavailable.VpcResourceNotFound"
-//  STRUCTPARSEFAILED = "StructParseFailed"
-//  SYSTEMERROR = "SystemError"
-//  UNKNOWNERROR = "UnknownError"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeServerlessDBInstancesWithContext(ctx context.Context, request *DescribeServerlessDBInstancesRequest) (response *DescribeServerlessDBInstancesResponse, err error) {
-    if request == nil {
-        request = NewDescribeServerlessDBInstancesRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "DescribeServerlessDBInstances")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeServerlessDBInstances require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeServerlessDBInstancesResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeSlowQueryAnalysisRequest() (request *DescribeSlowQueryAnalysisRequest) {
     request = &DescribeSlowQueryAnalysisRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5053,6 +4741,7 @@ func NewDescribeSlowQueryAnalysisResponse() (response *DescribeSlowQueryAnalysis
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ESQUERYERROR = "FailedOperation.ESQueryError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_PARAMETERVALUEEXCEEDERROR = "InvalidParameterValue.ParameterValueExceedError"
@@ -5067,6 +4756,7 @@ func (c *Client) DescribeSlowQueryAnalysis(request *DescribeSlowQueryAnalysisReq
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ESQUERYERROR = "FailedOperation.ESQueryError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_PARAMETERVALUEEXCEEDERROR = "InvalidParameterValue.ParameterValueExceedError"
@@ -5115,12 +4805,14 @@ func NewDescribeSlowQueryListResponse() (response *DescribeSlowQueryListResponse
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_PARAMETERVALUEEXCEEDERROR = "InvalidParameterValue.ParameterValueExceedError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+//  UNKNOWNPARAMETER_HTTPERROR = "UnknownParameter.HttpError"
 func (c *Client) DescribeSlowQueryList(request *DescribeSlowQueryListRequest) (response *DescribeSlowQueryListResponse, err error) {
     return c.DescribeSlowQueryListWithContext(context.Background(), request)
 }
@@ -5132,12 +4824,14 @@ func (c *Client) DescribeSlowQueryList(request *DescribeSlowQueryListRequest) (r
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_PARAMETERVALUEEXCEEDERROR = "InvalidParameterValue.ParameterValueExceedError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+//  UNKNOWNPARAMETER_HTTPERROR = "UnknownParameter.HttpError"
 func (c *Client) DescribeSlowQueryListWithContext(ctx context.Context, request *DescribeSlowQueryListRequest) (response *DescribeSlowQueryListResponse, err error) {
     if request == nil {
         request = NewDescribeSlowQueryListRequest()
@@ -5535,108 +5229,6 @@ func (c *Client) DisIsolateDBInstancesWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDisIsolateDBInstancesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewInitDBInstancesRequest() (request *InitDBInstancesRequest) {
-    request = &InitDBInstancesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("postgres", APIVersion, "InitDBInstances")
-    
-    
-    return
-}
-
-func NewInitDBInstancesResponse() (response *InitDBInstancesResponse) {
-    response = &InitDBInstancesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// InitDBInstances
-// This API is used to initialize a TencentDB for PostgreSQL instance. This API is disused and replaced by the [CreateInstances](https://intl.cloud.tencent.com/document/api/409/56107?from_cn_redirect=1) API.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
-//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
-//  INVALIDPARAMETERVALUE_CHARSETNOTFOUNDERROR = "InvalidParameterValue.CharsetNotFoundError"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  INVALIDPARAMETERVALUE_INVALIDACCOUNTERROR = "InvalidParameterValue.InvalidAccountError"
-//  INVALIDPARAMETERVALUE_INVALIDACCOUNTFORMAT = "InvalidParameterValue.InvalidAccountFormat"
-//  INVALIDPARAMETERVALUE_INVALIDCHARSET = "InvalidParameterValue.InvalidCharset"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_INVALIDPASSWORDFORMAT = "InvalidParameterValue.InvalidPasswordFormat"
-//  INVALIDPARAMETERVALUE_INVALIDPASSWORDLENGTHERROR = "InvalidParameterValue.InvalidPasswordLengthError"
-//  INVALIDPARAMETERVALUE_INVALIDPASSWORDVALUEERROR = "InvalidParameterValue.InvalidPasswordValueError"
-//  INVALIDPARAMETERVALUE_PARAMETERCHARACTERLIMITERROR = "InvalidParameterValue.ParameterCharacterLimitError"
-//  INVALIDPARAMETERVALUE_PARAMETERCHARACTERPRELIMITERROR = "InvalidParameterValue.ParameterCharacterPreLimitError"
-//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
-//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
-//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
-//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
-//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
-//  RESOURCEUNAVAILABLE_INVALIDINSTANCESTATUS = "ResourceUnavailable.InvalidInstanceStatus"
-func (c *Client) InitDBInstances(request *InitDBInstancesRequest) (response *InitDBInstancesResponse, err error) {
-    return c.InitDBInstancesWithContext(context.Background(), request)
-}
-
-// InitDBInstances
-// This API is used to initialize a TencentDB for PostgreSQL instance. This API is disused and replaced by the [CreateInstances](https://intl.cloud.tencent.com/document/api/409/56107?from_cn_redirect=1) API.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
-//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
-//  INVALIDPARAMETERVALUE_CHARSETNOTFOUNDERROR = "InvalidParameterValue.CharsetNotFoundError"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  INVALIDPARAMETERVALUE_INVALIDACCOUNTERROR = "InvalidParameterValue.InvalidAccountError"
-//  INVALIDPARAMETERVALUE_INVALIDACCOUNTFORMAT = "InvalidParameterValue.InvalidAccountFormat"
-//  INVALIDPARAMETERVALUE_INVALIDCHARSET = "InvalidParameterValue.InvalidCharset"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_INVALIDPASSWORDFORMAT = "InvalidParameterValue.InvalidPasswordFormat"
-//  INVALIDPARAMETERVALUE_INVALIDPASSWORDLENGTHERROR = "InvalidParameterValue.InvalidPasswordLengthError"
-//  INVALIDPARAMETERVALUE_INVALIDPASSWORDVALUEERROR = "InvalidParameterValue.InvalidPasswordValueError"
-//  INVALIDPARAMETERVALUE_PARAMETERCHARACTERLIMITERROR = "InvalidParameterValue.ParameterCharacterLimitError"
-//  INVALIDPARAMETERVALUE_PARAMETERCHARACTERPRELIMITERROR = "InvalidParameterValue.ParameterCharacterPreLimitError"
-//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
-//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
-//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
-//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
-//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
-//  RESOURCEUNAVAILABLE_INVALIDINSTANCESTATUS = "ResourceUnavailable.InvalidInstanceStatus"
-func (c *Client) InitDBInstancesWithContext(ctx context.Context, request *InitDBInstancesRequest) (response *InitDBInstancesResponse, err error) {
-    if request == nil {
-        request = NewInitDBInstancesRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "InitDBInstances")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("InitDBInstances require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewInitDBInstancesResponse()
     err = c.Send(request, response)
     return
 }
@@ -6217,9 +5809,12 @@ func NewModifyAccountRemarkResponse() (response *ModifyAccountRemarkResponse) {
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
 //  INVALIDPARAMETERVALUE_ACCOUNTNOTEXISTERROR = "InvalidParameterValue.AccountNotExistError"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
 //  INVALIDPARAMETERVALUE_INVALIDACCOUNTFORMAT = "InvalidParameterValue.InvalidAccountFormat"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEERROR = "InvalidParameterValue.InvalidAccountNameError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_PARAMETERCHARACTERERROR = "InvalidParameterValue.ParameterCharacterError"
 //  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
@@ -6239,9 +5834,12 @@ func (c *Client) ModifyAccountRemark(request *ModifyAccountRemarkRequest) (respo
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
 //  INVALIDPARAMETERVALUE_ACCOUNTNOTEXISTERROR = "InvalidParameterValue.AccountNotExistError"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
 //  INVALIDPARAMETERVALUE_INVALIDACCOUNTFORMAT = "InvalidParameterValue.InvalidAccountFormat"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEERROR = "InvalidParameterValue.InvalidAccountNameError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_PARAMETERCHARACTERERROR = "InvalidParameterValue.ParameterCharacterError"
 //  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
@@ -6261,6 +5859,60 @@ func (c *Client) ModifyAccountRemarkWithContext(ctx context.Context, request *Mo
     request.SetContext(ctx)
     
     response = NewModifyAccountRemarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyAuditServiceRequest() (request *ModifyAuditServiceRequest) {
+    request = &ModifyAuditServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "ModifyAuditService")
+    
+    
+    return
+}
+
+func NewModifyAuditServiceResponse() (response *ModifyAuditServiceResponse) {
+    response = &ModifyAuditServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyAuditService
+// Modify the audit feature of the database instance
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ILLEGALINPUTPARAMETER = "InvalidParameter.IllegalInputParameter"
+//  OPERATIONDENIED_RESOURCENOTFOUNDERROR = "OperationDenied.ResourceNotFoundError"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+func (c *Client) ModifyAuditService(request *ModifyAuditServiceRequest) (response *ModifyAuditServiceResponse, err error) {
+    return c.ModifyAuditServiceWithContext(context.Background(), request)
+}
+
+// ModifyAuditService
+// Modify the audit feature of the database instance
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ILLEGALINPUTPARAMETER = "InvalidParameter.IllegalInputParameter"
+//  OPERATIONDENIED_RESOURCENOTFOUNDERROR = "OperationDenied.ResourceNotFoundError"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+func (c *Client) ModifyAuditServiceWithContext(ctx context.Context, request *ModifyAuditServiceRequest) (response *ModifyAuditServiceResponse, err error) {
+    if request == nil {
+        request = NewModifyAuditServiceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "ModifyAuditService")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAuditService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyAuditServiceResponse()
     err = c.Send(request, response)
     return
 }
@@ -6659,11 +6311,11 @@ func NewModifyDBInstanceHAConfigResponse() (response *ModifyDBInstanceHAConfigRe
 }
 
 // ModifyDBInstanceHAConfig
-// This API is used to modify the HA configuration of an instance. which includes:
+// This API is used to modify instance HA configuration info. Among them, HA configuration info includes:.
 //
-// <li>Allow the standby node to promote to the primary node.
+// <li>This API is used to configure conditions for allowing a secondary node to switch over to a primary node.</li>.
 //
-// <li>Allow a semi-sync instance to adopt sync or async replication.
+// <li>This API is used to configure conditions for using synchronous replication or async replication in semi-sync instances.</li>.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -6680,11 +6332,11 @@ func (c *Client) ModifyDBInstanceHAConfig(request *ModifyDBInstanceHAConfigReque
 }
 
 // ModifyDBInstanceHAConfig
-// This API is used to modify the HA configuration of an instance. which includes:
+// This API is used to modify instance HA configuration info. Among them, HA configuration info includes:.
 //
-// <li>Allow the standby node to promote to the primary node.
+// <li>This API is used to configure conditions for allowing a secondary node to switch over to a primary node.</li>.
 //
-// <li>Allow a semi-sync instance to adopt sync or async replication.
+// <li>This API is used to configure conditions for using synchronous replication or async replication in semi-sync instances.</li>.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -7099,7 +6751,7 @@ func NewModifyDBInstanceSpecResponse() (response *ModifyDBInstanceSpecResponse) 
 }
 
 // ModifyDBInstanceSpec
-// This API is used to modify instance specifications, including memory and disk size.
+// This API is used to modify instance specifications, including memory, Disk and Cpu.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -7117,13 +6769,16 @@ func NewModifyDBInstanceSpecResponse() (response *ModifyDBInstanceSpecResponse) 
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
 //  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  OPERATIONDENIED_INSUFFICIENTBALANCEERROR = "OperationDenied.InsufficientBalanceError"
+//  OPERATIONDENIED_TRADEPERMISSIONERROR = "OperationDenied.TradePermissionError"
+//  OPERATIONDENIED_USERNOTAUTHENTICATEDERROR = "OperationDenied.UserNotAuthenticatedError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 func (c *Client) ModifyDBInstanceSpec(request *ModifyDBInstanceSpecRequest) (response *ModifyDBInstanceSpecResponse, err error) {
     return c.ModifyDBInstanceSpecWithContext(context.Background(), request)
 }
 
 // ModifyDBInstanceSpec
-// This API is used to modify instance specifications, including memory and disk size.
+// This API is used to modify instance specifications, including memory, Disk and Cpu.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -7141,6 +6796,9 @@ func (c *Client) ModifyDBInstanceSpec(request *ModifyDBInstanceSpecRequest) (res
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
 //  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  OPERATIONDENIED_INSUFFICIENTBALANCEERROR = "OperationDenied.InsufficientBalanceError"
+//  OPERATIONDENIED_TRADEPERMISSIONERROR = "OperationDenied.TradePermissionError"
+//  OPERATIONDENIED_USERNOTAUTHENTICATEDERROR = "OperationDenied.UserNotAuthenticatedError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 func (c *Client) ModifyDBInstanceSpecWithContext(ctx context.Context, request *ModifyDBInstanceSpecRequest) (response *ModifyDBInstanceSpecResponse, err error) {
     if request == nil {
@@ -7687,6 +7345,126 @@ func (c *Client) ModifySwitchTimePeriodWithContext(ctx context.Context, request 
     return
 }
 
+func NewOpenAccountCAMRequest() (request *OpenAccountCAMRequest) {
+    request = &OpenAccountCAMRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "OpenAccountCAM")
+    
+    
+    return
+}
+
+func NewOpenAccountCAMResponse() (response *OpenAccountCAMResponse) {
+    response = &OpenAccountCAMResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// OpenAccountCAM
+// This API is used to enable CAM verification service for a database account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CHECKACCOUNTCAMCLOSEERROR = "FailedOperation.CheckAccountCAMCloseError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_ACCOUNTNOTEXISTERROR = "InvalidParameterValue.AccountNotExistError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDREGIONERROR = "InvalidParameterValue.UnsupportedRegionError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhiteListError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) OpenAccountCAM(request *OpenAccountCAMRequest) (response *OpenAccountCAMResponse, err error) {
+    return c.OpenAccountCAMWithContext(context.Background(), request)
+}
+
+// OpenAccountCAM
+// This API is used to enable CAM verification service for a database account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CHECKACCOUNTCAMCLOSEERROR = "FailedOperation.CheckAccountCAMCloseError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_ACCOUNTNOTEXISTERROR = "InvalidParameterValue.AccountNotExistError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDREGIONERROR = "InvalidParameterValue.UnsupportedRegionError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhiteListError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) OpenAccountCAMWithContext(ctx context.Context, request *OpenAccountCAMRequest) (response *OpenAccountCAMResponse, err error) {
+    if request == nil {
+        request = NewOpenAccountCAMRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "OpenAccountCAM")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("OpenAccountCAM require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewOpenAccountCAMResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewOpenAuditServiceRequest() (request *OpenAuditServiceRequest) {
+    request = &OpenAuditServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "OpenAuditService")
+    
+    
+    return
+}
+
+func NewOpenAuditServiceResponse() (response *OpenAuditServiceResponse) {
+    response = &OpenAuditServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// OpenAuditService
+// Enable the audit feature of the database instance
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ILLEGALINPUTPARAMETER = "InvalidParameter.IllegalInputParameter"
+//  OPERATIONDENIED_RESOURCENOTFOUNDERROR = "OperationDenied.ResourceNotFoundError"
+func (c *Client) OpenAuditService(request *OpenAuditServiceRequest) (response *OpenAuditServiceResponse, err error) {
+    return c.OpenAuditServiceWithContext(context.Background(), request)
+}
+
+// OpenAuditService
+// Enable the audit feature of the database instance
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ILLEGALINPUTPARAMETER = "InvalidParameter.IllegalInputParameter"
+//  OPERATIONDENIED_RESOURCENOTFOUNDERROR = "OperationDenied.ResourceNotFoundError"
+func (c *Client) OpenAuditServiceWithContext(ctx context.Context, request *OpenAuditServiceRequest) (response *OpenAuditServiceResponse, err error) {
+    if request == nil {
+        request = NewOpenAuditServiceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "OpenAuditService")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("OpenAuditService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewOpenAuditServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewOpenDBExtranetAccessRequest() (request *OpenDBExtranetAccessRequest) {
     request = &OpenDBExtranetAccessRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7773,128 +7551,6 @@ func (c *Client) OpenDBExtranetAccessWithContext(ctx context.Context, request *O
     return
 }
 
-func NewOpenServerlessDBExtranetAccessRequest() (request *OpenServerlessDBExtranetAccessRequest) {
-    request = &OpenServerlessDBExtranetAccessRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("postgres", APIVersion, "OpenServerlessDBExtranetAccess")
-    
-    
-    return
-}
-
-func NewOpenServerlessDBExtranetAccessResponse() (response *OpenServerlessDBExtranetAccessResponse) {
-    response = &OpenServerlessDBExtranetAccessResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// OpenServerlessDBExtranetAccess
-// This API is used to enable the public network address of a PostgreSQL for Serverless instance.
-//
-// error code that may be returned:
-//  ACCOUNTNOTEXIST = "AccountNotExist"
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  DBERROR = "DBError"
-//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
-//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
-//  FAILEDOPERATION_QUERYVPCFALIED = "FailedOperation.QueryVpcFalied"
-//  FLOWERROR = "FlowError"
-//  INSTANCENOTEXIST = "InstanceNotExist"
-//  INTERFACENAMENOTFOUND = "InterfaceNameNotFound"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_FLOWERROR = "InternalError.FlowError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
-//  INVALIDACCOUNTSTATUS = "InvalidAccountStatus"
-//  INVALIDINSTANCESTATUS = "InvalidInstanceStatus"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  INVALIDPARAMETERVALUE_INTERFACENAMENOTFOUND = "InvalidParameterValue.InterfaceNameNotFound"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
-//  INVALIDPARAMETERVALUE_STRUCTPARSEFAILED = "InvalidParameterValue.StructParseFailed"
-//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
-//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
-//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
-//  RESOURCEUNAVAILABLE_INVALIDINSTANCESTATUS = "ResourceUnavailable.InvalidInstanceStatus"
-//  RESOURCEUNAVAILABLE_RESOURCENOPERMISSION = "ResourceUnavailable.ResourceNoPermission"
-//  RESOURCEUNAVAILABLE_VPCRESOURCENOTFOUND = "ResourceUnavailable.VpcResourceNotFound"
-//  STRUCTPARSEFAILED = "StructParseFailed"
-//  SYSTEMERROR = "SystemError"
-//  UNKNOWNERROR = "UnknownError"
-//  VPCERROR = "VpcError"
-func (c *Client) OpenServerlessDBExtranetAccess(request *OpenServerlessDBExtranetAccessRequest) (response *OpenServerlessDBExtranetAccessResponse, err error) {
-    return c.OpenServerlessDBExtranetAccessWithContext(context.Background(), request)
-}
-
-// OpenServerlessDBExtranetAccess
-// This API is used to enable the public network address of a PostgreSQL for Serverless instance.
-//
-// error code that may be returned:
-//  ACCOUNTNOTEXIST = "AccountNotExist"
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  DBERROR = "DBError"
-//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
-//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
-//  FAILEDOPERATION_QUERYVPCFALIED = "FailedOperation.QueryVpcFalied"
-//  FLOWERROR = "FlowError"
-//  INSTANCENOTEXIST = "InstanceNotExist"
-//  INTERFACENAMENOTFOUND = "InterfaceNameNotFound"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_FLOWERROR = "InternalError.FlowError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
-//  INVALIDACCOUNTSTATUS = "InvalidAccountStatus"
-//  INVALIDINSTANCESTATUS = "InvalidInstanceStatus"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  INVALIDPARAMETERVALUE_INTERFACENAMENOTFOUND = "InvalidParameterValue.InterfaceNameNotFound"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
-//  INVALIDPARAMETERVALUE_STRUCTPARSEFAILED = "InvalidParameterValue.StructParseFailed"
-//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
-//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
-//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
-//  RESOURCEUNAVAILABLE_INVALIDINSTANCESTATUS = "ResourceUnavailable.InvalidInstanceStatus"
-//  RESOURCEUNAVAILABLE_RESOURCENOPERMISSION = "ResourceUnavailable.ResourceNoPermission"
-//  RESOURCEUNAVAILABLE_VPCRESOURCENOTFOUND = "ResourceUnavailable.VpcResourceNotFound"
-//  STRUCTPARSEFAILED = "StructParseFailed"
-//  SYSTEMERROR = "SystemError"
-//  UNKNOWNERROR = "UnknownError"
-//  VPCERROR = "VpcError"
-func (c *Client) OpenServerlessDBExtranetAccessWithContext(ctx context.Context, request *OpenServerlessDBExtranetAccessRequest) (response *OpenServerlessDBExtranetAccessResponse, err error) {
-    if request == nil {
-        request = NewOpenServerlessDBExtranetAccessRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "OpenServerlessDBExtranetAccess")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("OpenServerlessDBExtranetAccess require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewOpenServerlessDBExtranetAccessResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewRebalanceReadOnlyGroupRequest() (request *RebalanceReadOnlyGroupRequest) {
     request = &RebalanceReadOnlyGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7973,6 +7629,74 @@ func (c *Client) RebalanceReadOnlyGroupWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewRebalanceReadOnlyGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRefreshAccountPasswordRequest() (request *RefreshAccountPasswordRequest) {
+    request = &RefreshAccountPasswordRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "RefreshAccountPassword")
+    
+    
+    return
+}
+
+func NewRefreshAccountPasswordResponse() (response *RefreshAccountPasswordResponse) {
+    response = &RefreshAccountPasswordResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RefreshAccountPassword
+// This API is used to manually reset the password for an account with CAM Verification enabled.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CHECKACCOUNTCAMOPENERROR = "FailedOperation.CheckAccountCAMOpenError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_ACCOUNTNOTEXISTERROR = "InvalidParameterValue.AccountNotExistError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDREGIONERROR = "InvalidParameterValue.UnsupportedRegionError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhiteListError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) RefreshAccountPassword(request *RefreshAccountPasswordRequest) (response *RefreshAccountPasswordResponse, err error) {
+    return c.RefreshAccountPasswordWithContext(context.Background(), request)
+}
+
+// RefreshAccountPassword
+// This API is used to manually reset the password for an account with CAM Verification enabled.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CHECKACCOUNTCAMOPENERROR = "FailedOperation.CheckAccountCAMOpenError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_ACCOUNTNOTEXISTERROR = "InvalidParameterValue.AccountNotExistError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDREGIONERROR = "InvalidParameterValue.UnsupportedRegionError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhiteListError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) RefreshAccountPasswordWithContext(ctx context.Context, request *RefreshAccountPasswordRequest) (response *RefreshAccountPasswordResponse, err error) {
+    if request == nil {
+        request = NewRefreshAccountPasswordRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "RefreshAccountPassword")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RefreshAccountPassword require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRefreshAccountPasswordResponse()
     err = c.Send(request, response)
     return
 }
@@ -8114,7 +7838,10 @@ func NewRenewInstanceResponse() (response *RenewInstanceResponse) {
 //  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
 //  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
 //  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  OPERATIONDENIED_INSUFFICIENTBALANCEERROR = "OperationDenied.InsufficientBalanceError"
 //  OPERATIONDENIED_POSTPAIDPAYMODEERROR = "OperationDenied.PostPaidPayModeError"
+//  OPERATIONDENIED_TRADEPERMISSIONERROR = "OperationDenied.TradePermissionError"
+//  OPERATIONDENIED_USERNOTAUTHENTICATEDERROR = "OperationDenied.UserNotAuthenticatedError"
 //  OPERATIONDENIED_VPCDENIEDERROR = "OperationDenied.VpcDeniedError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 //  RESOURCEUNAVAILABLE_RESOURCENOPERMISSION = "ResourceUnavailable.ResourceNoPermission"
@@ -8153,7 +7880,10 @@ func (c *Client) RenewInstance(request *RenewInstanceRequest) (response *RenewIn
 //  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
 //  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
 //  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  OPERATIONDENIED_INSUFFICIENTBALANCEERROR = "OperationDenied.InsufficientBalanceError"
 //  OPERATIONDENIED_POSTPAIDPAYMODEERROR = "OperationDenied.PostPaidPayModeError"
+//  OPERATIONDENIED_TRADEPERMISSIONERROR = "OperationDenied.TradePermissionError"
+//  OPERATIONDENIED_USERNOTAUTHENTICATEDERROR = "OperationDenied.UserNotAuthenticatedError"
 //  OPERATIONDENIED_VPCDENIEDERROR = "OperationDenied.VpcDeniedError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 //  RESOURCEUNAVAILABLE_RESOURCENOPERMISSION = "ResourceUnavailable.ResourceNoPermission"
@@ -8200,17 +7930,23 @@ func NewResetAccountPasswordResponse() (response *ResetAccountPasswordResponse) 
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_CHECKACCOUNTCAMCLOSEERROR = "FailedOperation.CheckAccountCAMCloseError"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  FAILEDOPERATION_OSSACCESSERROR = "FailedOperation.OssAccessError"
 //  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDACCOUNTPASSWORD = "InvalidAccountPassword"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
 //  INVALIDPARAMETERVALUE_ACCOUNTNOTEXISTERROR = "InvalidParameterValue.AccountNotExistError"
+//  INVALIDPARAMETERVALUE_DECRYPTPASSWORDFAILED = "InvalidParameterValue.DecryptPasswordFailed"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEERROR = "InvalidParameterValue.InvalidAccountNameError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_INVALIDPASSWORDFORMAT = "InvalidParameterValue.InvalidPasswordFormat"
 //  INVALIDPARAMETERVALUE_INVALIDPASSWORDLENGTHERROR = "InvalidParameterValue.InvalidPasswordLengthError"
@@ -8228,17 +7964,23 @@ func (c *Client) ResetAccountPassword(request *ResetAccountPasswordRequest) (res
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_CHECKACCOUNTCAMCLOSEERROR = "FailedOperation.CheckAccountCAMCloseError"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  FAILEDOPERATION_OSSACCESSERROR = "FailedOperation.OssAccessError"
 //  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
+//  FAILEDOPERATION_PRECHECKERROR = "FailedOperation.PreCheckError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDACCOUNTPASSWORD = "InvalidAccountPassword"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
 //  INVALIDPARAMETERVALUE_ACCOUNTNOTEXISTERROR = "InvalidParameterValue.AccountNotExistError"
+//  INVALIDPARAMETERVALUE_DECRYPTPASSWORDFAILED = "InvalidParameterValue.DecryptPasswordFailed"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEERROR = "InvalidParameterValue.InvalidAccountNameError"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTNAMEFORMATERROR = "InvalidParameterValue.InvalidAccountNameFormatError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_INVALIDPASSWORDFORMAT = "InvalidParameterValue.InvalidPasswordFormat"
 //  INVALIDPARAMETERVALUE_INVALIDPASSWORDLENGTHERROR = "InvalidParameterValue.InvalidPasswordLengthError"
@@ -8515,13 +8257,13 @@ func NewSwitchDBInstancePrimaryResponse() (response *SwitchDBInstancePrimaryResp
 }
 
 // SwitchDBInstancePrimary
-// This API is used to enable the primary-standby switch of an instance.
+// This API is used to switch over primary and replica nodes.
 //
-// <li>By initiating a switch, you can verify whether the primary-standby switch is performed correctly.
+// <li>This API is used to verify whether the business can correctly handle instance primary/backup switch scenarios by initiating switch proactively.</li>.
 //
-// <li>By using forced switch, you can forcibly initiate the primary-standby switch when the delay of replica node failed to meet the switch requirement.
+// <li>This API is used to force a primary-secondary switch when the backup node latency fails to satisfy the switch condition by using forced switching.</li>.
 //
-// <li>This operation can only be performed for the primary instance.
+// <li>This API is used to perform this operation on the primary instance only.</li>.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -8539,13 +8281,13 @@ func (c *Client) SwitchDBInstancePrimary(request *SwitchDBInstancePrimaryRequest
 }
 
 // SwitchDBInstancePrimary
-// This API is used to enable the primary-standby switch of an instance.
+// This API is used to switch over primary and replica nodes.
 //
-// <li>By initiating a switch, you can verify whether the primary-standby switch is performed correctly.
+// <li>This API is used to verify whether the business can correctly handle instance primary/backup switch scenarios by initiating switch proactively.</li>.
 //
-// <li>By using forced switch, you can forcibly initiate the primary-standby switch when the delay of replica node failed to meet the switch requirement.
+// <li>This API is used to force a primary-secondary switch when the backup node latency fails to satisfy the switch condition by using forced switching.</li>.
 //
-// <li>This operation can only be performed for the primary instance.
+// <li>This API is used to perform this operation on the primary instance only.</li>.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -8645,110 +8387,6 @@ func (c *Client) UnlockAccountWithContext(ctx context.Context, request *UnlockAc
     request.SetContext(ctx)
     
     response = NewUnlockAccountResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewUpgradeDBInstanceRequest() (request *UpgradeDBInstanceRequest) {
-    request = &UpgradeDBInstanceRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("postgres", APIVersion, "UpgradeDBInstance")
-    
-    
-    return
-}
-
-func NewUpgradeDBInstanceResponse() (response *UpgradeDBInstanceResponse) {
-    response = &UpgradeDBInstanceResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// UpgradeDBInstance
-// This API is used to upgrade instance configurations. u200cThis API is disused and replaced by the [ModifyDBInstanceSpec](https://intl.cloud.tencent.com/document/api/409/63689?from_cn_redirect=1) API.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
-//  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
-//  FAILEDOPERATION_GETPURCHASERECORDFAILED = "FailedOperation.GetPurchaseRecordFailed"
-//  FAILEDOPERATION_PAYORDERFAILED = "FailedOperation.PayOrderFailed"
-//  FAILEDOPERATION_QUERYPRICEFAILED = "FailedOperation.QueryPriceFailed"
-//  FAILEDOPERATION_QUERYSPECERROR = "FailedOperation.QuerySpecError"
-//  FAILEDOPERATION_STORAGEMEMORYCHECKERROR = "FailedOperation.StorageMemoryCheckError"
-//  FAILEDOPERATION_TRADEACCESSERROR = "FailedOperation.TradeAccessError"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_BADSPEC = "InvalidParameterValue.BadSpec"
-//  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
-//  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  INVALIDPARAMETERVALUE_INVALIDINSTANCEVOLUME = "InvalidParameterValue.InvalidInstanceVolume"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
-//  INVALIDPID = "InvalidPid"
-//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
-//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
-//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
-//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
-//  RESOURCEUNAVAILABLE_INVALIDINSTANCESTATUS = "ResourceUnavailable.InvalidInstanceStatus"
-func (c *Client) UpgradeDBInstance(request *UpgradeDBInstanceRequest) (response *UpgradeDBInstanceResponse, err error) {
-    return c.UpgradeDBInstanceWithContext(context.Background(), request)
-}
-
-// UpgradeDBInstance
-// This API is used to upgrade instance configurations. u200cThis API is disused and replaced by the [ModifyDBInstanceSpec](https://intl.cloud.tencent.com/document/api/409/63689?from_cn_redirect=1) API.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
-//  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
-//  FAILEDOPERATION_GETPURCHASERECORDFAILED = "FailedOperation.GetPurchaseRecordFailed"
-//  FAILEDOPERATION_PAYORDERFAILED = "FailedOperation.PayOrderFailed"
-//  FAILEDOPERATION_QUERYPRICEFAILED = "FailedOperation.QueryPriceFailed"
-//  FAILEDOPERATION_QUERYSPECERROR = "FailedOperation.QuerySpecError"
-//  FAILEDOPERATION_STORAGEMEMORYCHECKERROR = "FailedOperation.StorageMemoryCheckError"
-//  FAILEDOPERATION_TRADEACCESSERROR = "FailedOperation.TradeAccessError"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_BADSPEC = "InvalidParameterValue.BadSpec"
-//  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
-//  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  INVALIDPARAMETERVALUE_INVALIDINSTANCEVOLUME = "InvalidParameterValue.InvalidInstanceVolume"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
-//  INVALIDPID = "InvalidPid"
-//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
-//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
-//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
-//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
-//  RESOURCEUNAVAILABLE_INVALIDINSTANCESTATUS = "ResourceUnavailable.InvalidInstanceStatus"
-func (c *Client) UpgradeDBInstanceWithContext(ctx context.Context, request *UpgradeDBInstanceRequest) (response *UpgradeDBInstanceResponse, err error) {
-    if request == nil {
-        request = NewUpgradeDBInstanceRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "postgres", APIVersion, "UpgradeDBInstance")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("UpgradeDBInstance require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewUpgradeDBInstanceResponse()
     err = c.Send(request, response)
     return
 }

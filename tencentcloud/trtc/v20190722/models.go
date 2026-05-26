@@ -21,11 +21,10 @@ import (
 )
 
 type AbnormalEvent struct {
-	// The error event ID. For details, see https://www.tencentcloud.com/document/product/647/37906?has_map=1
+	// Exception event ID. view the specific value in the appendix: abnormal experience ID [mapping table](https://trtc.io/document/37906)
 	AbnormalEventId *uint64 `json:"AbnormalEventId,omitnil,omitempty" name:"AbnormalEventId"`
 
-	// The remote user ID. If this parameter is empty, it indicates that the error event is not associated with a remote user.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Remote user ID,"": indicates the exception event is not user-generated.
 	PeerId *string `json:"PeerId,omitnil,omitempty" name:"PeerId"`
 }
 
@@ -50,7 +49,7 @@ type AgentConfig struct {
 	// The robot's UserId is used to enter a room and initiate a task. note that this UserId cannot be duplicated with the host or audience [UserId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#UserId) in the current room. if multiple tasks are initiated in a room, the robot's UserId cannot be mutually duplicated. otherwise, the previous task will be interrupted. ensure the robot's UserId is unique in the room.
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
-	// Signature verification corresponding to the chatbot's UserId, namely, the UserId and UserSig serve as the login password for the chatbot to enter the room. for specific calculation methods, see TRTC solution for calculating [UserSig](https://www.tencentcloud.com/document/product/647/45910?from_cn_redirect=1#UserSig).
+	// Signature verification corresponding to the chatbot's UserId, namely, the UserId and UserSig serve as the login password for the chatbot to enter the room. for specific calculation methods, see TRTC solution for calculating.
 	UserSig *string `json:"UserSig,omitnil,omitempty" name:"UserSig"`
 
 	// UserId for robot stream pulling. after fill, the robot performs stream pulling and processes in real time.
@@ -116,6 +115,20 @@ type AgentParams struct {
 
 	// The timeout period (seconds) for relaying to stop automatically after all the users whose streams are mixed leave the room. The value cannot be smaller than 5 or larger than 86400 (24 hours). Default value: 30.
 	MaxIdleTime *uint64 `json:"MaxIdleTime,omitnil,omitempty" name:"MaxIdleTime"`
+}
+
+type AlignmentItem struct {
+
+	TimeBeginMs *uint64 `json:"TimeBeginMs,omitnil,omitempty" name:"TimeBeginMs"`
+
+
+	TimeEndMs *uint64 `json:"TimeEndMs,omitnil,omitempty" name:"TimeEndMs"`
+
+
+	TextBegin *uint64 `json:"TextBegin,omitnil,omitempty" name:"TextBegin"`
+
+
+	TextEnd *uint64 `json:"TextEnd,omitnil,omitempty" name:"TextEnd"`
 }
 
 type AmbientSound struct {
@@ -204,6 +217,28 @@ type AudioEncodeParams struct {
 
 	// Audio Bitrate, Value range [8,500], unit is kbps.
 	BitRate *uint64 `json:"BitRate,omitnil,omitempty" name:"BitRate"`
+}
+
+type AudioFormat struct {
+	// Generated audio format.
+	// 
+	// -TextToSpeechSSE streaming API.
+	// 
+	// Supports pcm. default: pcm.
+	// 
+	// -TextToSpeech non-streaming API.
+	// 
+	// Supports pcm, wav, mp3. default: pcm.
+	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
+
+	// Generated audio sample rate. default 24000.
+	// Selectable.
+	// - 16000
+	// - 24000 
+	SampleRate *uint64 `json:"SampleRate,omitnil,omitempty" name:"SampleRate"`
+
+	// MP3 bitrate (kbps), only applicable to mp3 format. can choose: `64`, `128`, `192`, `256`. default: `128`.
+	Bitrate *uint64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 }
 
 type AudioParams struct {
@@ -2642,34 +2677,34 @@ func (r *DescribeTrtcUsageResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeUnusualEventRequestParams struct {
-	// The application ID, such as `1400xxxxxx`.
+	// User SdkAppId (for example: 1400xxxxxx).
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// The start time, which is a Unix timestamp (seconds) in local time, such as `1590065777`.
-	// Note: Only data in the last 14 days can be queried.
+	// Query start time, local unix timestamp, in seconds (for example: 1590065777).
+	// Note: support querying data within the last 14 days.
 	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time, which is a Unix timestamp (seconds) in local time, such as `1590065877`. The end time and start time cannot be more than one hour apart.
+	// Query end time, local unix timestamp, in seconds (for example, 1590065877). note: the time interval from StartTime should be no more than 1 hour.
 	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// The room ID. Up to 20 random abnormal user experiences of the specified room will be returned.
+	// Room number. query up to 20 abnormal experience events in the room.
 	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
 }
 
 type DescribeUnusualEventRequest struct {
 	*tchttp.BaseRequest
 	
-	// The application ID, such as `1400xxxxxx`.
+	// User SdkAppId (for example: 1400xxxxxx).
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// The start time, which is a Unix timestamp (seconds) in local time, such as `1590065777`.
-	// Note: Only data in the last 14 days can be queried.
+	// Query start time, local unix timestamp, in seconds (for example: 1590065777).
+	// Note: support querying data within the last 14 days.
 	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time, which is a Unix timestamp (seconds) in local time, such as `1590065877`. The end time and start time cannot be more than one hour apart.
+	// Query end time, local unix timestamp, in seconds (for example, 1590065877). note: the time interval from StartTime should be no more than 1 hour.
 	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// The room ID. Up to 20 random abnormal user experiences of the specified room will be returned.
+	// Room number. query up to 20 abnormal experience events in the room.
 	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
 }
 
@@ -2697,11 +2732,11 @@ func (r *DescribeUnusualEventRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeUnusualEventResponseParams struct {
-	// The number of records returned.
-	// Value range: 0-20.
+	// Total number of returned data entries.
+	// Value range: [0, 20].
 	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
 
-	// The information of the abnormal user experiences.
+	// Abnormal experience list.
 	AbnormalExperienceList []*AbnormalExperience `json:"AbnormalExperienceList,omitnil,omitempty" name:"AbnormalExperienceList"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3369,7 +3404,7 @@ type McuRecordParams struct {
 	// Retweet recording mode. 
 	// 0/Leave blank: not currently supported; behavior is undefined.
 	// 1: disable recording.
-	// 2: enable recording (via console automatic recording template parameters, see: [redirection document](https://www.tencentcloud.com/document/product/647/111748?from_cn_redirect=1#.E5.BD.95.E5.88.B6.E6.8E.A7.E5.88.B6.E6.96.B9.E6.A1.88));.
+	// 2: enable recording (via console automatic recording template parameters.
 	// 3: enable recording (use API to specify parameter).
 	UniRecord *uint64 `json:"UniRecord,omitnil,omitempty" name:"UniRecord"`
 
@@ -3946,6 +3981,14 @@ func (r *ModifyCloudSliceTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type PronunciationDict struct {
+
+	Word *string `json:"Word,omitnil,omitempty" name:"Word"`
+
+
+	Pronunciation *string `json:"Pronunciation,omitnil,omitempty" name:"Pronunciation"`
+}
+
 type QualityData struct {
 	// The quality data.
 	Content []*TimeValue `json:"Content,omitnil,omitempty" name:"Content"`
@@ -3962,34 +4005,59 @@ type QualityData struct {
 }
 
 type RecognizeConfig struct {
-	// The supported languages for speech recognition are as follows, with the default being "zh" for Chinese. The values for the `Language` field follow the [ISO639](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) standard. Here is the full list of supported languages:
+	// Convert speech to text supported languages, "zh" chinese is selected by default.
 	// 
-	// 1. Chinese = "zh"
-	// 2. Chinese_TW = "zh-TW"
-	// 3. Chinese_DIALECT = "zh-dialect"
-	// 4. English = "en"
-	// 5. Vietnamese = "vi"
-	// 6. Japanese = "ja"
-	// 7. Korean = "ko"
-	// 8. Indonesian = "id"
-	// 9. Thai = "th"
-	// 10. Portuguese = "pt"
-	// 11. Turkish = "tr"
-	// 12. Arabic = "ar"
-	// 13. Spanish = "es"
-	// 14. Hindi = "hi"
-	// 15. French = "fr"
-	// 16. Malay = "ms"
-	// 17. Filipino = "fil"
-	// 18. German = "de"
-	// 19. Italian = "it"
-	// 20. Russian = "ru"
+	// You can unlock different languages by purchasing the "AI intelligent recognition duration package" or claiming the trial version of the monthly subscription package. 
 	// 
-	// **Note:** If the language you need is not listed, please contact our technical support team.
+	// Supported languages for different speech to text package versions are as follows:.
+	// 
+	// Basic language engine:.
+	// -"zh": chinese (simplified).
+	// 
+	// **Standard language engine:**.
+	// -"8k_zh_large": engine (large model version) for telecommunication. the current model supports chinese and other language recognition, has a large number of parameters, and features language model performance enhancement. it greatly improves recognition accuracy for telephone audio in various scenarios and chinese dialects.
+	// -"16k_zh_large": large model engine for mandarin, chinese dialects, and english. the current model supports language recognition for chinese, english, and multiple chinese dialects. it has a large number of parameters and enhanced language model performance, targeting low-quality audio such as loud noise, strong echo, low voice volume, and voice from far away with greatly improved recognition accuracy.
+	// -"16k_zh_en": chinese-english large model engine. the current model simultaneously supports chinese and english recognition, has a large number of parameters, and features language model performance enhancement. it greatly improves recognition accuracy for low-quality audio such as loud noise, strong echo, low voice volume, and voice from far away.
+	// 
+	// **Advanced language engine:**.
+	// -"zh-dialect": chinese dialect.
+	// -"zh-yue": cantonese in china.
+	// -"Vi": "vietnamese.".
+	// -"Ja": "japanese.".
+	// -"Ko": "korean.".
+	// -"id": "indonesian".
+	// -"Th": thai.
+	// -"pt": portuguese.
+	// -"tr": "turkish.".
+	// -"Ar": "arabic".
+	// -"es": "spanish".
+	// -"Hi": "hindi".
+	// -"Fr": "french.".
+	// -"ms": malay.
+	// -"Fil": filipino.
+	// -"de": german.
+	// -`It`: italian.
+	// -"Ru": russian.
+	// -"sv": "swedish.".
+	// -"Da": "danish.".
+	// -"No": norwegian.
+	// 
+	// **Note**:.
+	// If the language you need is not available, contact our technical staff.
 	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
 
-	// Initiate fuzzy recognition to replace additional language types. Fill in up to 3 language types. Note: When Language is specified as "zh-dialect", fuzzy recognition is not supported and this field is invalid.
+	// **Fuzzy recognition is an advanced edition capacity, charged as advanced edition by default, and only supports filling in basic version and advanced edition language.**.
+	// Note: does not support entering "zh-dialect".
 	AlternativeLanguage []*string `json:"AlternativeLanguage,omitnil,omitempty" name:"AlternativeLanguage"`
+
+	// Hot word list: this parameter is used for improving recognition accuracy. each hot word is limited to "term|weight", with no more than 30 characters (a maximum of 10 chinese characters) per term. weight ranges from 1 to 11 or 100, for example: "tencent cloud|5" or "ASR|11". hot word list limitation: multiple terms separated by commas, supports up to 300 hot words, for example: "tencent cloud|10, speech recognition|5, ASR|11".
+	HotWordList *string `json:"HotWordList,omitnil,omitempty" name:"HotWordList"`
+
+	// Specifies the time when automatic speech recognition (asr) vad is active. value range: 240-2000. default: 1000. unit: ms. a smaller value enables faster speech recognition sentence segmentation.
+	VadSilenceTime *uint64 `json:"VadSilenceTime,omitnil,omitempty" name:"VadSilenceTime"`
+
+	// The vad far-field voice suppression capacity (does not impact asr recognition performance) ranges from 0 to 3, with a default value of 0. recommended setting is 2 for better far-field voice suppression.
+	VadLevel *uint64 `json:"VadLevel,omitnil,omitempty" name:"VadLevel"`
 }
 
 type RecordParams struct {
@@ -4203,7 +4271,7 @@ type RowValues struct {
 type STTConfig struct {
 	// Convert speech to text supported languages, "zh" chinese is selected by default.
 	// 
-	// You can unlock different languages by purchasing the "AI intelligent recognition duration package" or claiming the trial version of the monthly subscription package. for detailed instructions, see: [AI intelligent recognition billing description](https://www.tencentcloud.com/document/product/647/111976?from_cn_redirect=1).
+	// You can unlock different languages by purchasing the "AI intelligent recognition duration package" or claiming the trial version of the monthly subscription package. 
 	// 
 	// Supported languages for different speech to text package versions are as follows:.
 	// 
@@ -4641,54 +4709,54 @@ func (r *StartAIConversationResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StartAITranscriptionRequestParams struct {
-	// TRTC's [SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid) is the same as the SdkAppId used by the room that starts the transcription task.
+	// [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#SdkAppId) of TRTC, which is the same as the SdkAppId used by the room with transcription task enabled.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// TRTC's [RoomId](https://cloud.tencent.com/document/product/647/46351#roomid), which indicates the room number where the transcription task is started.
+	// [RoomId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC refers to the room number that enables the transcription task.
 	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
 
-	// Parameters of the transcription robot.
+	// Transcription robot parameters.
 	TranscriptionParams *TranscriptionParams `json:"TranscriptionParams,omitnil,omitempty" name:"TranscriptionParams"`
 
-	// The unique ID passed by the caller is used by the server to deduplicate. Note: If this parameter is passed, the server will use it first to deduplicate. If this parameter is not passed, the server's deduplication strategy is as follows: 
-	// - If the TranscriptionMode field is 0, only one task can be opened in a room
-	// - If the TranscriptionMode field is 1, only one task can be opened in a TargetUserId
+	// Unique Id passed by the caller, used by the server for task deduplication. duplicate tasks will fail to initiate. the server uses SdkAppId+RoomId+RoomIdType+RobotUserId for deduplication by default. if SessionId is provided, it will also be used for deduplication.
+	// Note:.
+	// When TranscriptionMode is 0, ensure only one task is initiated in a room. if multiple tasks are initiated, robots will subscribe to each other. unless the task is stopped proactively, it will timeout exit after 10 hours. in such cases, it is advisable to fill in SessionId to ensure subsequent repeated tasks fail.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// The type of TRTC room number. 0 represents a numeric room number, and 1 represents a string room number. If not filled in, the default is a numeric room number.
+	// Type of the TRTC room number. 0 indicates digit room number, 1 indicates string room number. by default if left blank, it is digit room number.
 	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
 
 	// Speech recognition configuration.
 	RecognizeConfig *RecognizeConfig `json:"RecognizeConfig,omitnil,omitempty" name:"RecognizeConfig"`
 
-	// Translation config.
+	// Translate configuration details.
 	TranslationConfig *TranslationConfig `json:"TranslationConfig,omitnil,omitempty" name:"TranslationConfig"`
 }
 
 type StartAITranscriptionRequest struct {
 	*tchttp.BaseRequest
 	
-	// TRTC's [SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid) is the same as the SdkAppId used by the room that starts the transcription task.
+	// [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#SdkAppId) of TRTC, which is the same as the SdkAppId used by the room with transcription task enabled.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// TRTC's [RoomId](https://cloud.tencent.com/document/product/647/46351#roomid), which indicates the room number where the transcription task is started.
+	// [RoomId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#RoomId) of TRTC refers to the room number that enables the transcription task.
 	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
 
-	// Parameters of the transcription robot.
+	// Transcription robot parameters.
 	TranscriptionParams *TranscriptionParams `json:"TranscriptionParams,omitnil,omitempty" name:"TranscriptionParams"`
 
-	// The unique ID passed by the caller is used by the server to deduplicate. Note: If this parameter is passed, the server will use it first to deduplicate. If this parameter is not passed, the server's deduplication strategy is as follows: 
-	// - If the TranscriptionMode field is 0, only one task can be opened in a room
-	// - If the TranscriptionMode field is 1, only one task can be opened in a TargetUserId
+	// Unique Id passed by the caller, used by the server for task deduplication. duplicate tasks will fail to initiate. the server uses SdkAppId+RoomId+RoomIdType+RobotUserId for deduplication by default. if SessionId is provided, it will also be used for deduplication.
+	// Note:.
+	// When TranscriptionMode is 0, ensure only one task is initiated in a room. if multiple tasks are initiated, robots will subscribe to each other. unless the task is stopped proactively, it will timeout exit after 10 hours. in such cases, it is advisable to fill in SessionId to ensure subsequent repeated tasks fail.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// The type of TRTC room number. 0 represents a numeric room number, and 1 represents a string room number. If not filled in, the default is a numeric room number.
+	// Type of the TRTC room number. 0 indicates digit room number, 1 indicates string room number. by default if left blank, it is digit room number.
 	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
 
 	// Speech recognition configuration.
 	RecognizeConfig *RecognizeConfig `json:"RecognizeConfig,omitnil,omitempty" name:"RecognizeConfig"`
 
-	// Translation config.
+	// Translate configuration details.
 	TranslationConfig *TranslationConfig `json:"TranslationConfig,omitnil,omitempty" name:"TranslationConfig"`
 }
 
@@ -4719,7 +4787,7 @@ func (r *StartAITranscriptionRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StartAITranscriptionResponseParams struct {
-	// Used to uniquely identify a transcription task.
+	// For unique identification of transcription task.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5514,8 +5582,17 @@ type TRTCDataResult struct {
 }
 
 type TTSConfig struct {
-	// Voice ID
+	// Voice type ID.
 	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// TTS model: flow_01_turbo is selected by default. options: [flow_01_turbo, flow_01_ex].
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// Speaking rate. value range: 0.5-2.0. default: 1.0.
+	Speed *float64 `json:"Speed,omitnil,omitempty" name:"Speed"`
+
+	// Value range: (0, 10]. default value: 1.0.
+	Volume *float64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 }
 
 type TencentVod struct {
@@ -5550,11 +5627,240 @@ type TencentVod struct {
 }
 
 type Terminology struct {
-	// Source terminology
+	// Source terminology.
 	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
 
-	// Target terminology
+	// Terminology translation result.
 	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
+}
+
+// Predefined struct for user
+type TextToSpeechRequestParams struct {
+	// Text to be converted to speech. length range: [1, 255].
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// Audio configuration for text-to-speech.
+	Voice *Voice `json:"Voice,omitnil,omitempty" name:"Voice"`
+
+	// Specifies the SdkAppId of TRTC.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Specifies the output audio format for text-to-speech.
+	AudioFormat *AudioFormat `json:"AudioFormat,omitnil,omitempty" name:"AudioFormat"`
+
+	// API key for TTS.
+	//
+	// Deprecated: APIKey is deprecated.
+	APIKey *string `json:"APIKey,omitnil,omitempty" name:"APIKey"`
+
+	// TTS model, current fixed value: flow_01_turbo.
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// Language to be synthesised (ISO 639-1). supports zh (chinese), en (english), yue (cantonese), ja (japanese), and ko (korean). defaults to auto-identification.
+	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
+
+
+	PronunciationDict []*PronunciationDict `json:"PronunciationDict,omitnil,omitempty" name:"PronunciationDict"`
+
+
+	AlignmentMode *uint64 `json:"AlignmentMode,omitnil,omitempty" name:"AlignmentMode"`
+}
+
+type TextToSpeechRequest struct {
+	*tchttp.BaseRequest
+	
+	// Text to be converted to speech. length range: [1, 255].
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// Audio configuration for text-to-speech.
+	Voice *Voice `json:"Voice,omitnil,omitempty" name:"Voice"`
+
+	// Specifies the SdkAppId of TRTC.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Specifies the output audio format for text-to-speech.
+	AudioFormat *AudioFormat `json:"AudioFormat,omitnil,omitempty" name:"AudioFormat"`
+
+	// API key for TTS.
+	APIKey *string `json:"APIKey,omitnil,omitempty" name:"APIKey"`
+
+	// TTS model, current fixed value: flow_01_turbo.
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// Language to be synthesised (ISO 639-1). supports zh (chinese), en (english), yue (cantonese), ja (japanese), and ko (korean). defaults to auto-identification.
+	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
+
+	PronunciationDict []*PronunciationDict `json:"PronunciationDict,omitnil,omitempty" name:"PronunciationDict"`
+
+	AlignmentMode *uint64 `json:"AlignmentMode,omitnil,omitempty" name:"AlignmentMode"`
+}
+
+func (r *TextToSpeechRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TextToSpeechRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Text")
+	delete(f, "Voice")
+	delete(f, "SdkAppId")
+	delete(f, "AudioFormat")
+	delete(f, "APIKey")
+	delete(f, "Model")
+	delete(f, "Language")
+	delete(f, "PronunciationDict")
+	delete(f, "AlignmentMode")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TextToSpeechRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type TextToSpeechResponseParams struct {
+	// Base64-Encoded audio data.
+	Audio *string `json:"Audio,omitnil,omitempty" name:"Audio"`
+
+
+	Alignments []*AlignmentItem `json:"Alignments,omitnil,omitempty" name:"Alignments"`
+
+
+	TotalDurationMs *uint64 `json:"TotalDurationMs,omitnil,omitempty" name:"TotalDurationMs"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type TextToSpeechResponse struct {
+	*tchttp.BaseResponse
+	Response *TextToSpeechResponseParams `json:"Response"`
+}
+
+func (r *TextToSpeechResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TextToSpeechResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type TextToSpeechSSERequestParams struct {
+	// Text to be converted to speech. length range: [1, 255].
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// Audio configuration for text-to-speech.
+	Voice *Voice `json:"Voice,omitnil,omitempty" name:"Voice"`
+
+	// Specifies the SdkAppId of TRTC.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Specifies the output audio format for text-to-speech.
+	AudioFormat *AudioFormat `json:"AudioFormat,omitnil,omitempty" name:"AudioFormat"`
+
+	// API key for TTS.
+	//
+	// Deprecated: APIKey is deprecated.
+	APIKey *string `json:"APIKey,omitnil,omitempty" name:"APIKey"`
+
+	// TTS model, current fixed value: flow_01_turbo.
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// Language to be synthesised (ISO 639-1). supports zh (chinese), en (english), yue (cantonese), ja (japanese), and ko (korean). defaults to auto-identification.
+	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
+
+
+	PronunciationDict []*PronunciationDict `json:"PronunciationDict,omitnil,omitempty" name:"PronunciationDict"`
+
+
+	AlignmentMode *uint64 `json:"AlignmentMode,omitnil,omitempty" name:"AlignmentMode"`
+}
+
+type TextToSpeechSSERequest struct {
+	*tchttp.BaseRequest
+	
+	// Text to be converted to speech. length range: [1, 255].
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// Audio configuration for text-to-speech.
+	Voice *Voice `json:"Voice,omitnil,omitempty" name:"Voice"`
+
+	// Specifies the SdkAppId of TRTC.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Specifies the output audio format for text-to-speech.
+	AudioFormat *AudioFormat `json:"AudioFormat,omitnil,omitempty" name:"AudioFormat"`
+
+	// API key for TTS.
+	APIKey *string `json:"APIKey,omitnil,omitempty" name:"APIKey"`
+
+	// TTS model, current fixed value: flow_01_turbo.
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// Language to be synthesised (ISO 639-1). supports zh (chinese), en (english), yue (cantonese), ja (japanese), and ko (korean). defaults to auto-identification.
+	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
+
+	PronunciationDict []*PronunciationDict `json:"PronunciationDict,omitnil,omitempty" name:"PronunciationDict"`
+
+	AlignmentMode *uint64 `json:"AlignmentMode,omitnil,omitempty" name:"AlignmentMode"`
+}
+
+func (r *TextToSpeechSSERequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TextToSpeechSSERequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Text")
+	delete(f, "Voice")
+	delete(f, "SdkAppId")
+	delete(f, "AudioFormat")
+	delete(f, "APIKey")
+	delete(f, "Model")
+	delete(f, "Language")
+	delete(f, "PronunciationDict")
+	delete(f, "AlignmentMode")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TextToSpeechSSERequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type TextToSpeechSSEResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem. As a streaming response API, when the request is successfully completed, the RequestId will be placed in the Header "X-TC-RequestId" of the HTTP response.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type TextToSpeechSSEResponse struct {
+	tchttp.BaseSSEResponse `json:"-"`
+	Response *TextToSpeechSSEResponseParams `json:"Response"`
+}
+
+func (r *TextToSpeechSSEResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TextToSpeechSSEResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type TimeValue struct {
@@ -5569,7 +5875,7 @@ type TranscriptionParam struct {
 	// [UserId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#userid) used by the transcription service in the TRTC room. Note that this userId cannot duplicate those already used by other TRTC or transcription services etc. You may use the room ID as part of the user identification.
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
-	// User signature for the transcription service to join a TRTC room. The signature verification corresponding to the current UserId serves as the login password. For specific details, see TRTC solution for calculating [UserSig](https://www.tencentcloud.com/document/product/647/45910?from_cn_redirect=1#UserSig).
+	// User signature for the transcription service to join a TRTC room. The signature verification corresponding to the current UserId serves as the login password. For specific details, see TRTC solution for calculating [UserSig](https://intl.cloud.tencent.com/zh/document/product/647/38104).
 	UserSig *string `json:"UserSig,omitnil,omitempty" name:"UserSig"`
 
 	// Allowlist of user IDs whose audio will be transcribed.
@@ -5593,20 +5899,26 @@ type TranscriptionParam struct {
 }
 
 type TranscriptionParams struct {
-	// The robot's UserId is used to enter a room and initiate tasks. [Note] This UserId cannot be repeated with the host viewer [UserId](https://cloud.tencent.com/document/product/647/46351#userid) in the current room. If multiple tasks are initiated in a room, the robot's UserId cannot be repeated, otherwise the previous task will be interrupted. The robot's UserId must be unique in the room.
+	// The transcription robot's UserId is used to enter the room and trigger a transcription task. note that this UserId cannot be the same as the host or audience [UserId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#UserId) in the current room. if multiple transcription tasks are initiated in a room, the robot's UserId must also be unique to avoid interrupting the previous task. ensure the transcription robot's UserId is unique in the room.
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
-	// The verification signature corresponding to the robot's UserId, that is, UserId and UserSig are equivalent to the robot's login password to enter the room. For the specific calculation method, please refer to the TRTC calculation [UserSig](https://cloud.tencent.com/document/product/647/45910#UserSig) solution.
+	// Verification signature corresponding to the transcription bot's UserId, namely, the UserId and UserSig serve as the login password for the transcription bot to enter the room. for specific calculation methods, see TRTC solution for calculating.
 	UserSig *string `json:"UserSig,omitnil,omitempty" name:"UserSig"`
 
-	// If there is no streaming in the room for more than MaxIdleTime, the background will automatically close the task. The default value is 60s.
+	// After all push users exit the room and exceed MaxIdleTime seconds, the backend automation shuts down the transcription task. default value is 60s.
 	MaxIdleTime *uint64 `json:"MaxIdleTime,omitnil,omitempty" name:"MaxIdleTime"`
 
-	// 1 means the robot subscribes to the stream of only one person, 0 means the robot subscribes to the stream of the entire room. If it is not filled in, the robot subscribes to the stream of the entire room by default.
+	// 1 means the robot subscribes to the stream of an individual, and 0 means the robot subscribes to the stream of the entire room. if left empty, it defaults to subscribing to the stream of the entire room.
 	TranscriptionMode *uint64 `json:"TranscriptionMode,omitnil,omitempty" name:"TranscriptionMode"`
 
-	// Required when TranscriptionMode is 1. The robot will only pull the stream of the userid and ignore other users in the room.
+	// Required when TranscriptionMode is 1, the robot only pulls streams from this userid and ignores other users in the room.
 	TargetUserId *string `json:"TargetUserId,omitnil,omitempty" name:"TargetUserId"`
+
+	// Voiceprint configuration.
+	VoicePrint *VoicePrint `json:"VoicePrint,omitnil,omitempty" name:"VoicePrint"`
+
+	// Semantic sentence segmentation detection.
+	TurnDetection *TurnDetection `json:"TurnDetection,omitnil,omitempty" name:"TurnDetection"`
 }
 
 type TranscriptionUserInfoParams struct {
@@ -5615,16 +5927,16 @@ type TranscriptionUserInfoParams struct {
 }
 
 type TranslationConfig struct {
-	// Target language, target language list (ISO 639-1).
+	// Target language for translation, target language list (ISO 639-1).
 	TargetLanguages []*string `json:"TargetLanguages,omitnil,omitempty" name:"TargetLanguages"`
 
-	// 1: Only text translation, 2: Voice simultaneous interpretation.
+	// 1: text translation only 2: speech simultaneous interpretation.
 	Mode *uint64 `json:"Mode,omitnil,omitempty" name:"Mode"`
 
-	// Voice simultaneous interpretation configuration: When enabling simultaneous interpretation, this parameter needs to be passed.
+	// Speech simultaneous interpretation configuration. when enabling simultaneous interpretation, transmission is required.
 	TTSConfig *TTSConfig `json:"TTSConfig,omitnil,omitempty" name:"TTSConfig"`
 
-	// Translation terminology.
+	// Translation terminology collection.
 	Terminology []*Terminology `json:"Terminology,omitnil,omitempty" name:"Terminology"`
 }
 
@@ -6057,6 +6369,121 @@ type VideoParams struct {
 
 	// The keyframe interval (seconds). Default value: 10.
 	Gop *uint64 `json:"Gop,omitnil,omitempty" name:"Gop"`
+}
+
+type Voice struct {
+	// Voice ID, can be obtained from the timbre list or use a custom voice ID generated by sound clone.
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// Speech speed adjustment. 0.5 for half speed, 2.0 for 2x speed, and 1.0 for normal speed. value range: [0.5, 2.0]. default: 1.0.
+	Speed *float64 `json:"Speed,omitnil,omitempty" name:"Speed"`
+
+	// Audio volume adjustment, where 0 indicates mute and 10 indicates maximum volume. recommended to keep the default value of 1.0. value range: [0,10]. default: 1.0.
+	Volume *float64 `json:"Volume,omitnil,omitempty" name:"Volume"`
+
+	// Pitch adjustment. negative value makes the sound deeper, positive value makes the sound sharper. 0 indicates the original pitch. value range: [-12, 12]. default: 0.
+	Pitch *int64 `json:"Pitch,omitnil,omitempty" name:"Pitch"`
+}
+
+// Predefined struct for user
+type VoiceCloneRequestParams struct {
+	// Specifies the SdkAppId of TRTC.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Sound clone name. only digits, letters, and underscores are allowed with a maximum of 36 characters.
+	VoiceName *string `json:"VoiceName,omitnil,omitempty" name:"VoiceName"`
+
+	// The reference audio for voice cloning must be a base64 string of a 16k mono wav file with length between 10–180 seconds.
+	PromptAudio *string `json:"PromptAudio,omitnil,omitempty" name:"PromptAudio"`
+
+	// API key for TTS.
+	//
+	// Deprecated: APIKey is deprecated.
+	APIKey *string `json:"APIKey,omitnil,omitempty" name:"APIKey"`
+
+	// Reference text for voice cloning. specifies the text corresponding to the reference audio.
+	PromptText *string `json:"PromptText,omitnil,omitempty" name:"PromptText"`
+
+	// TTS model: flow_01_turbo, flow_01_ex.
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// Language parameter, empty by default. see: (ISO 639-1).
+	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
+}
+
+type VoiceCloneRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the SdkAppId of TRTC.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Sound clone name. only digits, letters, and underscores are allowed with a maximum of 36 characters.
+	VoiceName *string `json:"VoiceName,omitnil,omitempty" name:"VoiceName"`
+
+	// The reference audio for voice cloning must be a base64 string of a 16k mono wav file with length between 10–180 seconds.
+	PromptAudio *string `json:"PromptAudio,omitnil,omitempty" name:"PromptAudio"`
+
+	// API key for TTS.
+	APIKey *string `json:"APIKey,omitnil,omitempty" name:"APIKey"`
+
+	// Reference text for voice cloning. specifies the text corresponding to the reference audio.
+	PromptText *string `json:"PromptText,omitnil,omitempty" name:"PromptText"`
+
+	// TTS model: flow_01_turbo, flow_01_ex.
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// Language parameter, empty by default. see: (ISO 639-1).
+	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
+}
+
+func (r *VoiceCloneRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *VoiceCloneRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "VoiceName")
+	delete(f, "PromptAudio")
+	delete(f, "APIKey")
+	delete(f, "PromptText")
+	delete(f, "Model")
+	delete(f, "Language")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "VoiceCloneRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type VoiceCloneResponseParams struct {
+	// Cloned voice type ID. specifies the ID for performing text to speech.
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type VoiceCloneResponse struct {
+	*tchttp.BaseResponse
+	Response *VoiceCloneResponseParams `json:"Response"`
+}
+
+func (r *VoiceCloneResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *VoiceCloneResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type VoicePrint struct {
