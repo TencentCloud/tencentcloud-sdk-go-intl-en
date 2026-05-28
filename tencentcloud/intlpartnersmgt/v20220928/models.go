@@ -465,6 +465,71 @@ type BusinessSummaryOverviewItem struct {
 	TotalCost *string `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
 }
 
+type CostAnalyzeDimensionData struct {
+	// <p>Total number of entries by dimension statistics</p>
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>Sum value</p>
+	SumCost *string `json:"SumCost,omitnil,omitempty" name:"SumCost"`
+
+	// <p>Total amount by date dimension</p>
+	PeriodItemDetail []*PeriodItemDetail `json:"PeriodItemDetail,omitnil,omitempty" name:"PeriodItemDetail"`
+}
+
+type CostAnalyzeFilter struct {
+	// <p>Contains product code</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BusinessIn []*string `json:"BusinessIn,omitnil,omitempty" name:"BusinessIn"`
+
+	// <p>Contains sub-product code</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProductIn []*string `json:"ProductIn,omitnil,omitempty" name:"ProductIn"`
+
+	// <p>Contains region id</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RegionIn []*string `json:"RegionIn,omitnil,omitempty" name:"RegionIn"`
+
+	// <p>Contains transaction type</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ActionTypeIn []*string `json:"ActionTypeIn,omitnil,omitempty" name:"ActionTypeIn"`
+
+	// <p>Includes payment mode</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PayModeIn []*string `json:"PayModeIn,omitnil,omitempty" name:"PayModeIn"`
+
+	// <p>Include project name</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectIn []*string `json:"ProjectIn,omitnil,omitempty" name:"ProjectIn"`
+
+	// <p>Contains payer uin</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PayerUinIn []*string `json:"PayerUinIn,omitnil,omitempty" name:"PayerUinIn"`
+
+	// <p>Tag key.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
+
+	// <p>Tag value list</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TagIn []*string `json:"TagIn,omitnil,omitempty" name:"TagIn"`
+
+	// <p>Contains availability zones</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ZoneIn []*string `json:"ZoneIn,omitnil,omitempty" name:"ZoneIn"`
+
+	// <p>Owner uin</p>
+	OwnerUinIn []*string `json:"OwnerUinIn,omitnil,omitempty" name:"OwnerUinIn"`
+
+	// <p>Component type info</p>
+	ComponentIn []*string `json:"ComponentIn,omitnil,omitempty" name:"ComponentIn"`
+
+	// <p>Component name</p>
+	ItemIn []*string `json:"ItemIn,omitnil,omitempty" name:"ItemIn"`
+
+	// <p>Resource id information</p>
+	ResourceIn []*string `json:"ResourceIn,omitnil,omitempty" name:"ResourceIn"`
+}
+
 type CostAnalyzeFilterDetail struct {
 	// <p>Product key-value pair.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -1916,6 +1981,136 @@ func (r *DescribeCustomerOwnCostExplorerFilterResponse) FromJsonString(s string)
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCustomerOwnCostExplorerSummaryRequestParams struct {
+	// <p>Classification dimension</p><p>Enumeration value:</p><ul><li>Default: Default dimension</li><li>Business: Product</li><li>Product: Subproduct</li><li>Region: Region</li><li>Zone: Availability zone</li><li>ActionType: Transaction type</li><li>PayMode: Payment mode</li><li>Project: Project</li><li>PayerUin: Payer uin</li><li>OwnerUin: Owner uin</li><li>Tag: Tag</li></ul>
+	Dimension *string `json:"Dimension,omitnil,omitempty" name:"Dimension"`
+
+	// <p>Fee type</p><p>Enumeration value:</p><ul><li>originalCost: Original Cost</li><li>totalCost: Total Cost</li></ul>
+	FeeType *string `json:"FeeType,omitnil,omitempty" name:"FeeType"`
+
+	// <p>Billing mode</p><p>Enumeration value:</p><ul><li>1: Billing statement</li></ul>
+	BillType *int64 `json:"BillType,omitnil,omitempty" name:"BillType"`
+
+	// <p>Start time</p><p>Parameter format: YYYY-MM-DD hh:mm:ss, for example 2006-01-02 00:00:00</p><p>Input limit: When PeriodType is month, the time range is 6 calendar months; when PeriodType is day, the time range is 2 calendar months;</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>End time</p><p>Parameter format: YYYY-MM-DD hh:mm:ss, for example 2006-01-02 00:00:00</p><p>Input limit: When PeriodType is month, the time range is 6 calendar months. When PeriodType is day, the time range is 2 calendar months.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Time type</p><p>Enumeration value:</p><ul><li>day: By day</li><li>month: By month</li></ul>
+	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
+
+	// <p>Page number</p><p>Value range: [1, 10000]</p>
+	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
+
+	// <p>Page size</p><p>Value range: [1, 200]</p>
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// <p>Tag key of the statistical dimension. When Dimension is Tag, TagKey is required.</p>
+	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
+
+	// Filter
+	// 
+	// You can pass the data returned by [DescribeCustomerOwnCostExplorerFilter](https://www.tencentcloud.com/document/product/1085/80125) as a parameter to filter the data.
+	Filter *CostAnalyzeFilter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+type DescribeCustomerOwnCostExplorerSummaryRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Classification dimension</p><p>Enumeration value:</p><ul><li>Default: Default dimension</li><li>Business: Product</li><li>Product: Subproduct</li><li>Region: Region</li><li>Zone: Availability zone</li><li>ActionType: Transaction type</li><li>PayMode: Payment mode</li><li>Project: Project</li><li>PayerUin: Payer uin</li><li>OwnerUin: Owner uin</li><li>Tag: Tag</li></ul>
+	Dimension *string `json:"Dimension,omitnil,omitempty" name:"Dimension"`
+
+	// <p>Fee type</p><p>Enumeration value:</p><ul><li>originalCost: Original Cost</li><li>totalCost: Total Cost</li></ul>
+	FeeType *string `json:"FeeType,omitnil,omitempty" name:"FeeType"`
+
+	// <p>Billing mode</p><p>Enumeration value:</p><ul><li>1: Billing statement</li></ul>
+	BillType *int64 `json:"BillType,omitnil,omitempty" name:"BillType"`
+
+	// <p>Start time</p><p>Parameter format: YYYY-MM-DD hh:mm:ss, for example 2006-01-02 00:00:00</p><p>Input limit: When PeriodType is month, the time range is 6 calendar months; when PeriodType is day, the time range is 2 calendar months;</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>End time</p><p>Parameter format: YYYY-MM-DD hh:mm:ss, for example 2006-01-02 00:00:00</p><p>Input limit: When PeriodType is month, the time range is 6 calendar months. When PeriodType is day, the time range is 2 calendar months.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Time type</p><p>Enumeration value:</p><ul><li>day: By day</li><li>month: By month</li></ul>
+	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
+
+	// <p>Page number</p><p>Value range: [1, 10000]</p>
+	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
+
+	// <p>Page size</p><p>Value range: [1, 200]</p>
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// <p>Tag key of the statistical dimension. When Dimension is Tag, TagKey is required.</p>
+	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
+
+	// Filter
+	// 
+	// You can pass the data returned by [DescribeCustomerOwnCostExplorerFilter](https://www.tencentcloud.com/document/product/1085/80125) as a parameter to filter the data.
+	Filter *CostAnalyzeFilter `json:"Filter,omitnil,omitempty" name:"Filter"`
+}
+
+func (r *DescribeCustomerOwnCostExplorerSummaryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCustomerOwnCostExplorerSummaryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Dimension")
+	delete(f, "FeeType")
+	delete(f, "BillType")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "PeriodType")
+	delete(f, "Page")
+	delete(f, "PageSize")
+	delete(f, "TagKey")
+	delete(f, "Filter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCustomerOwnCostExplorerSummaryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCustomerOwnCostExplorerSummaryResponseParams struct {
+	// <p>Classification dimension</p>
+	DimensionName *string `json:"DimensionName,omitnil,omitempty" name:"DimensionName"`
+
+	// <p>Details</p>
+	Detail []*DimensionPeriodData `json:"Detail,omitnil,omitempty" name:"Detail"`
+
+	// <p>Classification dimension statistics</p>
+	TotalDetail *CostAnalyzeDimensionData `json:"TotalDetail,omitnil,omitempty" name:"TotalDetail"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCustomerOwnCostExplorerSummaryResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCustomerOwnCostExplorerSummaryResponseParams `json:"Response"`
+}
+
+func (r *DescribeCustomerOwnCostExplorerSummaryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCustomerOwnCostExplorerSummaryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeCustomerOwnVoucherItem struct {
 	// Voucher ID.
 	VoucherId *int64 `json:"VoucherId,omitnil,omitempty" name:"VoucherId"`
@@ -2525,6 +2720,20 @@ func (r *DescribeRebateDownloadUrlResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DimensionPeriodData struct {
+	// <p>Function name by dimensional classification</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>code corresponding to the function name after dimensional classification</p>
+	Code *string `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// <p>Sum value of the current group</p>
+	SumCost *string `json:"SumCost,omitnil,omitempty" name:"SumCost"`
+
+	// <p>Amount statistics by date grouping</p>
+	ItemDetail []*PeriodItemDetail `json:"ItemDetail,omitnil,omitempty" name:"ItemDetail"`
+}
+
 // Predefined struct for user
 type ForceQNRequestParams struct {
 	// Sub-account UIN
@@ -2786,6 +2995,14 @@ type PayModeSummaryOverviewItem struct {
 
 	// Total consumption, up to 8 decimal places.
 	TotalCost *string `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
+}
+
+type PeriodItemDetail struct {
+	// <p>Date</p>
+	Period *string `json:"Period,omitnil,omitempty" name:"Period"`
+
+	// <p>Fee</p>
+	Cost *string `json:"Cost,omitnil,omitempty" name:"Cost"`
 }
 
 type PolicyProductList struct {

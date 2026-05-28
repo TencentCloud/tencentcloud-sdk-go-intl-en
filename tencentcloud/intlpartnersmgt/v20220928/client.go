@@ -1261,6 +1261,58 @@ func (c *Client) DescribeCustomerOwnCostExplorerFilterWithContext(ctx context.Co
     return
 }
 
+func NewDescribeCustomerOwnCostExplorerSummaryRequest() (request *DescribeCustomerOwnCostExplorerSummaryRequest) {
+    request = &DescribeCustomerOwnCostExplorerSummaryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "DescribeCustomerOwnCostExplorerSummary")
+    
+    
+    return
+}
+
+func NewDescribeCustomerOwnCostExplorerSummaryResponse() (response *DescribeCustomerOwnCostExplorerSummaryResponse) {
+    response = &DescribeCustomerOwnCostExplorerSummaryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCustomerOwnCostExplorerSummary
+// Cost analysis API
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) DescribeCustomerOwnCostExplorerSummary(request *DescribeCustomerOwnCostExplorerSummaryRequest) (response *DescribeCustomerOwnCostExplorerSummaryResponse, err error) {
+    return c.DescribeCustomerOwnCostExplorerSummaryWithContext(context.Background(), request)
+}
+
+// DescribeCustomerOwnCostExplorerSummary
+// Cost analysis API
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) DescribeCustomerOwnCostExplorerSummaryWithContext(ctx context.Context, request *DescribeCustomerOwnCostExplorerSummaryRequest) (response *DescribeCustomerOwnCostExplorerSummaryResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomerOwnCostExplorerSummaryRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "DescribeCustomerOwnCostExplorerSummary")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCustomerOwnCostExplorerSummary require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCustomerOwnCostExplorerSummaryResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCustomerOwnVoucherListRequest() (request *DescribeCustomerOwnVoucherListRequest) {
     request = &DescribeCustomerOwnVoucherListRequest{
         BaseRequest: &tchttp.BaseRequest{},

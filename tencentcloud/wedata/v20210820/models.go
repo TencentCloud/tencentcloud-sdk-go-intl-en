@@ -19011,7 +19011,7 @@ type GetOfflineDIInstanceListRequestParams struct {
 	// Which Page
 	PageIndex *uint64 `json:"PageIndex,omitnil,omitempty" name:"PageIndex"`
 
-	// Number of Items per Page
+	// Number of Items per Page.
 	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Project ID
@@ -19027,7 +19027,7 @@ type GetOfflineDIInstanceListRequest struct {
 	// Which Page
 	PageIndex *uint64 `json:"PageIndex,omitnil,omitempty" name:"PageIndex"`
 
-	// Number of Items per Page
+	// Number of Items per Page.
 	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Project ID
@@ -27537,7 +27537,7 @@ type SearchConditionInstanceNew struct {
 }
 
 type SearchConditionNew struct {
-	// Query Framework, required
+	// Query Framework, required.
 	Instance *SearchConditionInstanceNew `json:"Instance,omitnil,omitempty" name:"Instance"`
 
 	// Query keyword (Task ID exact match, Task Name fuzzy match), optional
