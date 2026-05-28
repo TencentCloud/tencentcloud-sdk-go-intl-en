@@ -103,6 +103,174 @@ func (c *Client) CancelIsolateDBInstancesWithContext(ctx context.Context, reques
     return
 }
 
+func NewCreateCloneInstanceRequest() (request *CreateCloneInstanceRequest) {
+    request = &CreateCloneInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmysql", APIVersion, "CreateCloneInstance")
+    
+    
+    return
+}
+
+func NewCreateCloneInstanceResponse() (response *CreateCloneInstanceResponse) {
+    response = &CreateCloneInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateCloneInstance
+// This API is used to create clone instances.
+//
+// error code that may be returned:
+//  AUTHFAILURE_CAMAUTHERROR = "AuthFailure.CamAuthError"
+//  AUTHFAILURE_CHECKCAMAUTHERROR = "AuthFailure.CheckCamAuthError"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  DRYRUNOPERATION_ADDTAGDRYRUNERROR = "DryRunOperation.AddTagDryrunError"
+//  FAILEDOPERATION_CREATEFLOWERROR = "FailedOperation.CreateFlowError"
+//  FAILEDOPERATION_DBCREATEINSTANCEERROR = "FailedOperation.DBCreateInstanceError"
+//  FAILEDOPERATION_DESCRIBEFULLBACKUPLISTERROR = "FailedOperation.DescribeFullBackupListError"
+//  INVALIDPARAMETER_CREATEINSTANCEPARAMERROR = "InvalidParameter.CreateInstanceParamError"
+//  INVALIDPARAMETERVALUE_CHECKCLONEINSTANCEDISKERROR = "InvalidParameterValue.CheckCloneInstanceDiskError"
+//  INVALIDPARAMETERVALUE_CHECKDISKERROR = "InvalidParameterValue.CheckDiskError"
+//  INVALIDPARAMETERVALUE_CHECKINSTANCEVERSIONERROR = "InvalidParameterValue.CheckInstanceVersionError"
+//  INVALIDPARAMETERVALUE_CHECKNAMEERROR = "InvalidParameterValue.CheckNameError"
+//  INVALIDPARAMETERVALUE_CHECKSPECERROR = "InvalidParameterValue.CheckSpecError"
+//  INVALIDPARAMETERVALUE_CHECKVPCERROR = "InvalidParameterValue.CheckVpcError"
+//  INVALIDPARAMETERVALUE_NODEREPLICASINVALIDERROR = "InvalidParameterValue.NodeReplicasInvalidError"
+//  LIMITEXCEEDED_ADDTAGCOUNTERROR = "LimitExceeded.AddTagCountError"
+//  LIMITEXCEEDED_OUTOFINSTANCECNTLIMITERROR = "LimitExceeded.OutOfInstanceCntLimitError"
+//  LIMITEXCEEDED_OUTOFNODEREPLICASLIMITERROR = "LimitExceeded.OutOfNodeReplicasLimitError"
+//  LIMITEXCEEDED_OUTOFSPECLIMITERROR = "LimitExceeded.OutOfSpecLimitError"
+func (c *Client) CreateCloneInstance(request *CreateCloneInstanceRequest) (response *CreateCloneInstanceResponse, err error) {
+    return c.CreateCloneInstanceWithContext(context.Background(), request)
+}
+
+// CreateCloneInstance
+// This API is used to create clone instances.
+//
+// error code that may be returned:
+//  AUTHFAILURE_CAMAUTHERROR = "AuthFailure.CamAuthError"
+//  AUTHFAILURE_CHECKCAMAUTHERROR = "AuthFailure.CheckCamAuthError"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  DRYRUNOPERATION_ADDTAGDRYRUNERROR = "DryRunOperation.AddTagDryrunError"
+//  FAILEDOPERATION_CREATEFLOWERROR = "FailedOperation.CreateFlowError"
+//  FAILEDOPERATION_DBCREATEINSTANCEERROR = "FailedOperation.DBCreateInstanceError"
+//  FAILEDOPERATION_DESCRIBEFULLBACKUPLISTERROR = "FailedOperation.DescribeFullBackupListError"
+//  INVALIDPARAMETER_CREATEINSTANCEPARAMERROR = "InvalidParameter.CreateInstanceParamError"
+//  INVALIDPARAMETERVALUE_CHECKCLONEINSTANCEDISKERROR = "InvalidParameterValue.CheckCloneInstanceDiskError"
+//  INVALIDPARAMETERVALUE_CHECKDISKERROR = "InvalidParameterValue.CheckDiskError"
+//  INVALIDPARAMETERVALUE_CHECKINSTANCEVERSIONERROR = "InvalidParameterValue.CheckInstanceVersionError"
+//  INVALIDPARAMETERVALUE_CHECKNAMEERROR = "InvalidParameterValue.CheckNameError"
+//  INVALIDPARAMETERVALUE_CHECKSPECERROR = "InvalidParameterValue.CheckSpecError"
+//  INVALIDPARAMETERVALUE_CHECKVPCERROR = "InvalidParameterValue.CheckVpcError"
+//  INVALIDPARAMETERVALUE_NODEREPLICASINVALIDERROR = "InvalidParameterValue.NodeReplicasInvalidError"
+//  LIMITEXCEEDED_ADDTAGCOUNTERROR = "LimitExceeded.AddTagCountError"
+//  LIMITEXCEEDED_OUTOFINSTANCECNTLIMITERROR = "LimitExceeded.OutOfInstanceCntLimitError"
+//  LIMITEXCEEDED_OUTOFNODEREPLICASLIMITERROR = "LimitExceeded.OutOfNodeReplicasLimitError"
+//  LIMITEXCEEDED_OUTOFSPECLIMITERROR = "LimitExceeded.OutOfSpecLimitError"
+func (c *Client) CreateCloneInstanceWithContext(ctx context.Context, request *CreateCloneInstanceRequest) (response *CreateCloneInstanceResponse, err error) {
+    if request == nil {
+        request = NewCreateCloneInstanceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "CreateCloneInstance")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCloneInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCloneInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateDBInstancesRequest() (request *CreateDBInstancesRequest) {
+    request = &CreateDBInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmysql", APIVersion, "CreateDBInstances")
+    
+    
+    return
+}
+
+func NewCreateDBInstancesResponse() (response *CreateDBInstancesResponse) {
+    response = &CreateDBInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDBInstances
+// This API is used to batch create instances.
+//
+// error code that may be returned:
+//  AUTHFAILURE_CAMAUTHERROR = "AuthFailure.CamAuthError"
+//  AUTHFAILURE_CHECKCAMAUTHERROR = "AuthFailure.CheckCamAuthError"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  DRYRUNOPERATION_ADDTAGDRYRUNERROR = "DryRunOperation.AddTagDryrunError"
+//  FAILEDOPERATION_CREATEFLOWERROR = "FailedOperation.CreateFlowError"
+//  FAILEDOPERATION_DBCREATEINSTANCEERROR = "FailedOperation.DBCreateInstanceError"
+//  INVALIDPARAMETERVALUE_CHECKDISKERROR = "InvalidParameterValue.CheckDiskError"
+//  INVALIDPARAMETERVALUE_CHECKINSTANCEVERSIONERROR = "InvalidParameterValue.CheckInstanceVersionError"
+//  INVALIDPARAMETERVALUE_CHECKNAMEERROR = "InvalidParameterValue.CheckNameError"
+//  INVALIDPARAMETERVALUE_CHECKSPECERROR = "InvalidParameterValue.CheckSpecError"
+//  INVALIDPARAMETERVALUE_CHECKVPCERROR = "InvalidParameterValue.CheckVpcError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_NODEREPLICASINVALIDERROR = "InvalidParameterValue.NodeReplicasInvalidError"
+//  LIMITEXCEEDED_ADDTAGCOUNTERROR = "LimitExceeded.AddTagCountError"
+//  LIMITEXCEEDED_OUTOFINSTANCECNTLIMITERROR = "LimitExceeded.OutOfInstanceCntLimitError"
+//  LIMITEXCEEDED_OUTOFNODEREPLICASLIMITERROR = "LimitExceeded.OutOfNodeReplicasLimitError"
+//  LIMITEXCEEDED_OUTOFSPECLIMITERROR = "LimitExceeded.OutOfSpecLimitError"
+func (c *Client) CreateDBInstances(request *CreateDBInstancesRequest) (response *CreateDBInstancesResponse, err error) {
+    return c.CreateDBInstancesWithContext(context.Background(), request)
+}
+
+// CreateDBInstances
+// This API is used to batch create instances.
+//
+// error code that may be returned:
+//  AUTHFAILURE_CAMAUTHERROR = "AuthFailure.CamAuthError"
+//  AUTHFAILURE_CHECKCAMAUTHERROR = "AuthFailure.CheckCamAuthError"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  DRYRUNOPERATION_ADDTAGDRYRUNERROR = "DryRunOperation.AddTagDryrunError"
+//  FAILEDOPERATION_CREATEFLOWERROR = "FailedOperation.CreateFlowError"
+//  FAILEDOPERATION_DBCREATEINSTANCEERROR = "FailedOperation.DBCreateInstanceError"
+//  INVALIDPARAMETERVALUE_CHECKDISKERROR = "InvalidParameterValue.CheckDiskError"
+//  INVALIDPARAMETERVALUE_CHECKINSTANCEVERSIONERROR = "InvalidParameterValue.CheckInstanceVersionError"
+//  INVALIDPARAMETERVALUE_CHECKNAMEERROR = "InvalidParameterValue.CheckNameError"
+//  INVALIDPARAMETERVALUE_CHECKSPECERROR = "InvalidParameterValue.CheckSpecError"
+//  INVALIDPARAMETERVALUE_CHECKVPCERROR = "InvalidParameterValue.CheckVpcError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_NODEREPLICASINVALIDERROR = "InvalidParameterValue.NodeReplicasInvalidError"
+//  LIMITEXCEEDED_ADDTAGCOUNTERROR = "LimitExceeded.AddTagCountError"
+//  LIMITEXCEEDED_OUTOFINSTANCECNTLIMITERROR = "LimitExceeded.OutOfInstanceCntLimitError"
+//  LIMITEXCEEDED_OUTOFNODEREPLICASLIMITERROR = "LimitExceeded.OutOfNodeReplicasLimitError"
+//  LIMITEXCEEDED_OUTOFSPECLIMITERROR = "LimitExceeded.OutOfSpecLimitError"
+func (c *Client) CreateDBInstancesWithContext(ctx context.Context, request *CreateDBInstancesRequest) (response *CreateDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewCreateDBInstancesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "CreateDBInstances")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDBInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDBSBackupRequest() (request *CreateDBSBackupRequest) {
     request = &CreateDBSBackupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -123,7 +291,7 @@ func NewCreateDBSBackupResponse() (response *CreateDBSBackupResponse) {
 }
 
 // CreateDBSBackup
-// Create an instance backup set.
+// This API is used to create a manual backup of an instance.
 //
 // error code that may be returned:
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
@@ -137,7 +305,7 @@ func (c *Client) CreateDBSBackup(request *CreateDBSBackupRequest) (response *Cre
 }
 
 // CreateDBSBackup
-// Create an instance backup set.
+// This API is used to create a manual backup of an instance.
 //
 // error code that may be returned:
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
@@ -183,7 +351,7 @@ func NewDeleteDBSBackupSetsResponse() (response *DeleteDBSBackupSetsResponse) {
 }
 
 // DeleteDBSBackupSets
-// Delete instance backup sets.
+// This API is used to delete manual backups of instances.
 //
 // error code that may be returned:
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
@@ -196,7 +364,7 @@ func (c *Client) DeleteDBSBackupSets(request *DeleteDBSBackupSetsRequest) (respo
 }
 
 // DeleteDBSBackupSets
-// Delete instance backup sets.
+// This API is used to delete manual backups of instances.
 //
 // error code that may be returned:
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
@@ -217,6 +385,122 @@ func (c *Client) DeleteDBSBackupSetsWithContext(ctx context.Context, request *De
     request.SetContext(ctx)
     
     response = NewDeleteDBSBackupSetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDBInstanceDetailRequest() (request *DescribeDBInstanceDetailRequest) {
+    request = &DescribeDBInstanceDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmysql", APIVersion, "DescribeDBInstanceDetail")
+    
+    
+    return
+}
+
+func NewDescribeDBInstanceDetailResponse() (response *DescribeDBInstanceDetailResponse) {
+    response = &DescribeDBInstanceDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDBInstanceDetail
+// This API is used to query instance details.
+//
+// error code that may be returned:
+//  AUTHFAILURE_CAMAUTHERROR = "AuthFailure.CamAuthError"
+//  AUTHFAILURE_CHECKCAMAUTHERROR = "AuthFailure.CheckCamAuthError"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_DBQUERYINSTANCEERROR = "FailedOperation.DBQueryInstanceError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+func (c *Client) DescribeDBInstanceDetail(request *DescribeDBInstanceDetailRequest) (response *DescribeDBInstanceDetailResponse, err error) {
+    return c.DescribeDBInstanceDetailWithContext(context.Background(), request)
+}
+
+// DescribeDBInstanceDetail
+// This API is used to query instance details.
+//
+// error code that may be returned:
+//  AUTHFAILURE_CAMAUTHERROR = "AuthFailure.CamAuthError"
+//  AUTHFAILURE_CHECKCAMAUTHERROR = "AuthFailure.CheckCamAuthError"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_DBQUERYINSTANCEERROR = "FailedOperation.DBQueryInstanceError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+func (c *Client) DescribeDBInstanceDetailWithContext(ctx context.Context, request *DescribeDBInstanceDetailRequest) (response *DescribeDBInstanceDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBInstanceDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "DescribeDBInstanceDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBInstanceDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBInstanceDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDBInstancesRequest() (request *DescribeDBInstancesRequest) {
+    request = &DescribeDBInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmysql", APIVersion, "DescribeDBInstances")
+    
+    
+    return
+}
+
+func NewDescribeDBInstancesResponse() (response *DescribeDBInstancesResponse) {
+    response = &DescribeDBInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDBInstances
+// This API is used to query instance list.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_DBQUERYINSTANCEERROR = "FailedOperation.DBQueryInstanceError"
+//  FAILEDOPERATION_DBQUERYTAGERROR = "FailedOperation.DBQueryTagError"
+//  INVALIDPARAMETERVALUE_INSTANCEFILTERKEYERROR = "InvalidParameterValue.InstanceFilterKeyError"
+//  LIMITEXCEEDED_OUTOFINSTANCECOUNTLIMITERROR = "LimitExceeded.OutOfInstanceCountLimitError"
+func (c *Client) DescribeDBInstances(request *DescribeDBInstancesRequest) (response *DescribeDBInstancesResponse, err error) {
+    return c.DescribeDBInstancesWithContext(context.Background(), request)
+}
+
+// DescribeDBInstances
+// This API is used to query instance list.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_DBQUERYINSTANCEERROR = "FailedOperation.DBQueryInstanceError"
+//  FAILEDOPERATION_DBQUERYTAGERROR = "FailedOperation.DBQueryTagError"
+//  INVALIDPARAMETERVALUE_INSTANCEFILTERKEYERROR = "InvalidParameterValue.InstanceFilterKeyError"
+//  LIMITEXCEEDED_OUTOFINSTANCECOUNTLIMITERROR = "LimitExceeded.OutOfInstanceCountLimitError"
+func (c *Client) DescribeDBInstancesWithContext(ctx context.Context, request *DescribeDBInstancesRequest) (response *DescribeDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBInstancesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "DescribeDBInstances")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBInstancesResponse()
     err = c.Send(request, response)
     return
 }
@@ -281,6 +565,62 @@ func (c *Client) DescribeDBParametersWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDescribeDBSArchiveLogsRequest() (request *DescribeDBSArchiveLogsRequest) {
+    request = &DescribeDBSArchiveLogsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmysql", APIVersion, "DescribeDBSArchiveLogs")
+    
+    
+    return
+}
+
+func NewDescribeDBSArchiveLogsResponse() (response *DescribeDBSArchiveLogsResponse) {
+    response = &DescribeDBSArchiveLogsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDBSArchiveLogs
+// This API is used to query instance archived WAL log list.
+//
+// error code that may be returned:
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_DESCRIBEDBOBJECTSERROR = "InternalError.DescribeDBObjectsError"
+//  INTERNALERROR_ROUTERNOTFOUND = "InternalError.RouterNotFound"
+//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
+func (c *Client) DescribeDBSArchiveLogs(request *DescribeDBSArchiveLogsRequest) (response *DescribeDBSArchiveLogsResponse, err error) {
+    return c.DescribeDBSArchiveLogsWithContext(context.Background(), request)
+}
+
+// DescribeDBSArchiveLogs
+// This API is used to query instance archived WAL log list.
+//
+// error code that may be returned:
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_DESCRIBEDBOBJECTSERROR = "InternalError.DescribeDBObjectsError"
+//  INTERNALERROR_ROUTERNOTFOUND = "InternalError.RouterNotFound"
+//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
+func (c *Client) DescribeDBSArchiveLogsWithContext(ctx context.Context, request *DescribeDBSArchiveLogsRequest) (response *DescribeDBSArchiveLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBSArchiveLogsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "DescribeDBSArchiveLogs")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBSArchiveLogs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBSArchiveLogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBSAvailableRecoveryTimeRequest() (request *DescribeDBSAvailableRecoveryTimeRequest) {
     request = &DescribeDBSAvailableRecoveryTimeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -301,7 +641,7 @@ func NewDescribeDBSAvailableRecoveryTimeResponse() (response *DescribeDBSAvailab
 }
 
 // DescribeDBSAvailableRecoveryTime
-// Query recoverable time.
+// This API is used to obtain the recoverable time.
 //
 // error code that may be returned:
 //  INTERNALERROR_ROUTERNOTFOUND = "InternalError.RouterNotFound"
@@ -311,7 +651,7 @@ func (c *Client) DescribeDBSAvailableRecoveryTime(request *DescribeDBSAvailableR
 }
 
 // DescribeDBSAvailableRecoveryTime
-// Query recoverable time.
+// This API is used to obtain the recoverable time.
 //
 // error code that may be returned:
 //  INTERNALERROR_ROUTERNOTFOUND = "InternalError.RouterNotFound"
@@ -329,6 +669,220 @@ func (c *Client) DescribeDBSAvailableRecoveryTimeWithContext(ctx context.Context
     request.SetContext(ctx)
     
     response = NewDescribeDBSAvailableRecoveryTimeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDBSBackupPolicyRequest() (request *DescribeDBSBackupPolicyRequest) {
+    request = &DescribeDBSBackupPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmysql", APIVersion, "DescribeDBSBackupPolicy")
+    
+    
+    return
+}
+
+func NewDescribeDBSBackupPolicyResponse() (response *DescribeDBSBackupPolicyResponse) {
+    response = &DescribeDBSBackupPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDBSBackupPolicy
+// Query an instance backup strategy
+//
+// error code that may be returned:
+//  INTERNALERROR_ROUTERNOTFOUND = "InternalError.RouterNotFound"
+//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
+func (c *Client) DescribeDBSBackupPolicy(request *DescribeDBSBackupPolicyRequest) (response *DescribeDBSBackupPolicyResponse, err error) {
+    return c.DescribeDBSBackupPolicyWithContext(context.Background(), request)
+}
+
+// DescribeDBSBackupPolicy
+// Query an instance backup strategy
+//
+// error code that may be returned:
+//  INTERNALERROR_ROUTERNOTFOUND = "InternalError.RouterNotFound"
+//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
+func (c *Client) DescribeDBSBackupPolicyWithContext(ctx context.Context, request *DescribeDBSBackupPolicyRequest) (response *DescribeDBSBackupPolicyResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBSBackupPolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "DescribeDBSBackupPolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBSBackupPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBSBackupPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDBSBackupSetsRequest() (request *DescribeDBSBackupSetsRequest) {
+    request = &DescribeDBSBackupSetsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmysql", APIVersion, "DescribeDBSBackupSets")
+    
+    
+    return
+}
+
+func NewDescribeDBSBackupSetsResponse() (response *DescribeDBSBackupSetsResponse) {
+    response = &DescribeDBSBackupSetsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDBSBackupSets
+// This API is used to query instance backup set information.
+//
+// error code that may be returned:
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_ROUTERNOTFOUND = "InternalError.RouterNotFound"
+//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
+func (c *Client) DescribeDBSBackupSets(request *DescribeDBSBackupSetsRequest) (response *DescribeDBSBackupSetsResponse, err error) {
+    return c.DescribeDBSBackupSetsWithContext(context.Background(), request)
+}
+
+// DescribeDBSBackupSets
+// This API is used to query instance backup set information.
+//
+// error code that may be returned:
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_ROUTERNOTFOUND = "InternalError.RouterNotFound"
+//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
+func (c *Client) DescribeDBSBackupSetsWithContext(ctx context.Context, request *DescribeDBSBackupSetsRequest) (response *DescribeDBSBackupSetsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBSBackupSetsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "DescribeDBSBackupSets")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBSBackupSets require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBSBackupSetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDBSBackupStatisticsRequest() (request *DescribeDBSBackupStatisticsRequest) {
+    request = &DescribeDBSBackupStatisticsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmysql", APIVersion, "DescribeDBSBackupStatistics")
+    
+    
+    return
+}
+
+func NewDescribeDBSBackupStatisticsResponse() (response *DescribeDBSBackupStatisticsResponse) {
+    response = &DescribeDBSBackupStatisticsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDBSBackupStatistics
+// This API is used to query instance backup space overview.
+//
+// error code that may be returned:
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_ROUTERNOTFOUND = "InternalError.RouterNotFound"
+//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
+func (c *Client) DescribeDBSBackupStatistics(request *DescribeDBSBackupStatisticsRequest) (response *DescribeDBSBackupStatisticsResponse, err error) {
+    return c.DescribeDBSBackupStatisticsWithContext(context.Background(), request)
+}
+
+// DescribeDBSBackupStatistics
+// This API is used to query instance backup space overview.
+//
+// error code that may be returned:
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_ROUTERNOTFOUND = "InternalError.RouterNotFound"
+//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
+func (c *Client) DescribeDBSBackupStatisticsWithContext(ctx context.Context, request *DescribeDBSBackupStatisticsRequest) (response *DescribeDBSBackupStatisticsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBSBackupStatisticsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "DescribeDBSBackupStatistics")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBSBackupStatistics require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBSBackupStatisticsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDBSBackupStatisticsDetailRequest() (request *DescribeDBSBackupStatisticsDetailRequest) {
+    request = &DescribeDBSBackupStatisticsDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmysql", APIVersion, "DescribeDBSBackupStatisticsDetail")
+    
+    
+    return
+}
+
+func NewDescribeDBSBackupStatisticsDetailResponse() (response *DescribeDBSBackupStatisticsDetailResponse) {
+    response = &DescribeDBSBackupStatisticsDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDBSBackupStatisticsDetail
+// This API is used to query backup set statistical detail.
+//
+// error code that may be returned:
+//  INTERNALERROR_ROUTERNOTFOUND = "InternalError.RouterNotFound"
+//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+func (c *Client) DescribeDBSBackupStatisticsDetail(request *DescribeDBSBackupStatisticsDetailRequest) (response *DescribeDBSBackupStatisticsDetailResponse, err error) {
+    return c.DescribeDBSBackupStatisticsDetailWithContext(context.Background(), request)
+}
+
+// DescribeDBSBackupStatisticsDetail
+// This API is used to query backup set statistical detail.
+//
+// error code that may be returned:
+//  INTERNALERROR_ROUTERNOTFOUND = "InternalError.RouterNotFound"
+//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+func (c *Client) DescribeDBSBackupStatisticsDetailWithContext(ctx context.Context, request *DescribeDBSBackupStatisticsDetailRequest) (response *DescribeDBSBackupStatisticsDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBSBackupStatisticsDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "DescribeDBSBackupStatisticsDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBSBackupStatisticsDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBSBackupStatisticsDetailResponse()
     err = c.Send(request, response)
     return
 }
@@ -353,7 +907,7 @@ func NewDescribeDBSCloneInstancesResponse() (response *DescribeDBSCloneInstances
 }
 
 // DescribeDBSCloneInstances
-// Query clone list of instances.
+// Query clone list
 //
 // error code that may be returned:
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
@@ -364,7 +918,7 @@ func (c *Client) DescribeDBSCloneInstances(request *DescribeDBSCloneInstancesReq
 }
 
 // DescribeDBSCloneInstances
-// Query clone list of instances.
+// Query clone list
 //
 // error code that may be returned:
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
@@ -523,6 +1077,58 @@ func (c *Client) DescribeDatabaseObjectsWithContext(ctx context.Context, request
     return
 }
 
+func NewDescribeDatabasesRequest() (request *DescribeDatabasesRequest) {
+    request = &DescribeDatabasesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmysql", APIVersion, "DescribeDatabases")
+    
+    
+    return
+}
+
+func NewDescribeDatabasesResponse() (response *DescribeDatabasesResponse) {
+    response = &DescribeDatabasesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDatabases
+// This API is used to query the database list of a cloud database instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBQUERYINSTANCEERROR = "FailedOperation.DBQueryInstanceError"
+//  FAILEDOPERATION_QUERYDBERROR = "FailedOperation.QueryDBError"
+func (c *Client) DescribeDatabases(request *DescribeDatabasesRequest) (response *DescribeDatabasesResponse, err error) {
+    return c.DescribeDatabasesWithContext(context.Background(), request)
+}
+
+// DescribeDatabases
+// This API is used to query the database list of a cloud database instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBQUERYINSTANCEERROR = "FailedOperation.DBQueryInstanceError"
+//  FAILEDOPERATION_QUERYDBERROR = "FailedOperation.QueryDBError"
+func (c *Client) DescribeDatabasesWithContext(ctx context.Context, request *DescribeDatabasesRequest) (response *DescribeDatabasesResponse, err error) {
+    if request == nil {
+        request = NewDescribeDatabasesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "DescribeDatabases")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDatabases require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDatabasesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeFlowRequest() (request *DescribeFlowRequest) {
     request = &DescribeFlowRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -546,6 +1152,7 @@ func NewDescribeFlowResponse() (response *DescribeFlowResponse) {
 // This API is used to query the process status of an asynchronous task.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DBQUERYINSTANCEERROR = "FailedOperation.DBQueryInstanceError"
 //  FAILEDOPERATION_QUERYDBERROR = "FailedOperation.QueryDBError"
 func (c *Client) DescribeFlow(request *DescribeFlowRequest) (response *DescribeFlowResponse, err error) {
     return c.DescribeFlowWithContext(context.Background(), request)
@@ -555,6 +1162,7 @@ func (c *Client) DescribeFlow(request *DescribeFlowRequest) (response *DescribeF
 // This API is used to query the process status of an asynchronous task.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DBQUERYINSTANCEERROR = "FailedOperation.DBQueryInstanceError"
 //  FAILEDOPERATION_QUERYDBERROR = "FailedOperation.QueryDBError"
 func (c *Client) DescribeFlowWithContext(ctx context.Context, request *DescribeFlowRequest) (response *DescribeFlowResponse, err error) {
     if request == nil {
@@ -569,6 +1177,228 @@ func (c *Client) DescribeFlowWithContext(ctx context.Context, request *DescribeF
     request.SetContext(ctx)
     
     response = NewDescribeFlowResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSaleInfoRequest() (request *DescribeSaleInfoRequest) {
+    request = &DescribeSaleInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmysql", APIVersion, "DescribeSaleInfo")
+    
+    
+    return
+}
+
+func NewDescribeSaleInfoResponse() (response *DescribeSaleInfoResponse) {
+    response = &DescribeSaleInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSaleInfo
+// This API is used to query available regions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBQUERYZONEERROR = "FailedOperation.DBQueryZoneError"
+func (c *Client) DescribeSaleInfo(request *DescribeSaleInfoRequest) (response *DescribeSaleInfoResponse, err error) {
+    return c.DescribeSaleInfoWithContext(context.Background(), request)
+}
+
+// DescribeSaleInfo
+// This API is used to query available regions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBQUERYZONEERROR = "FailedOperation.DBQueryZoneError"
+func (c *Client) DescribeSaleInfoWithContext(ctx context.Context, request *DescribeSaleInfoRequest) (response *DescribeSaleInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeSaleInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "DescribeSaleInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSaleInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSaleInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSpecsRequest() (request *DescribeSpecsRequest) {
+    request = &DescribeSpecsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmysql", APIVersion, "DescribeSpecs")
+    
+    
+    return
+}
+
+func NewDescribeSpecsResponse() (response *DescribeSpecsResponse) {
+    response = &DescribeSpecsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSpecs
+// This API is used to list available component specifications.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UINWHITELISTCHECKERROR = "AuthFailure.UinWhiteListCheckError"
+//  FAILEDOPERATION_DBQUERYZONEERROR = "FailedOperation.DBQueryZoneError"
+//  UNSUPPORTEDOPERATION_GETMAXNODENUMERROR = "UnsupportedOperation.GetMaxNodeNumError"
+func (c *Client) DescribeSpecs(request *DescribeSpecsRequest) (response *DescribeSpecsResponse, err error) {
+    return c.DescribeSpecsWithContext(context.Background(), request)
+}
+
+// DescribeSpecs
+// This API is used to list available component specifications.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UINWHITELISTCHECKERROR = "AuthFailure.UinWhiteListCheckError"
+//  FAILEDOPERATION_DBQUERYZONEERROR = "FailedOperation.DBQueryZoneError"
+//  UNSUPPORTEDOPERATION_GETMAXNODENUMERROR = "UnsupportedOperation.GetMaxNodeNumError"
+func (c *Client) DescribeSpecsWithContext(ctx context.Context, request *DescribeSpecsRequest) (response *DescribeSpecsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSpecsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "DescribeSpecs")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSpecs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSpecsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUserPrivilegesRequest() (request *DescribeUserPrivilegesRequest) {
+    request = &DescribeUserPrivilegesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmysql", APIVersion, "DescribeUserPrivileges")
+    
+    
+    return
+}
+
+func NewDescribeUserPrivilegesResponse() (response *DescribeUserPrivilegesResponse) {
+    response = &DescribeUserPrivilegesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeUserPrivileges
+// This API is used to query user permissions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBQUERYPRIVILEGESERROR = "FailedOperation.DBQueryPrivilegesError"
+//  INVALIDPARAMETERVALUE_CHECKHOSTERROR = "InvalidParameterValue.CheckHostError"
+//  INVALIDPARAMETERVALUE_CHECKNAMEERROR = "InvalidParameterValue.CheckNameError"
+//  OPERATIONDENIED_INSTANCESTATUSERROR = "OperationDenied.InstanceStatusError"
+func (c *Client) DescribeUserPrivileges(request *DescribeUserPrivilegesRequest) (response *DescribeUserPrivilegesResponse, err error) {
+    return c.DescribeUserPrivilegesWithContext(context.Background(), request)
+}
+
+// DescribeUserPrivileges
+// This API is used to query user permissions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBQUERYPRIVILEGESERROR = "FailedOperation.DBQueryPrivilegesError"
+//  INVALIDPARAMETERVALUE_CHECKHOSTERROR = "InvalidParameterValue.CheckHostError"
+//  INVALIDPARAMETERVALUE_CHECKNAMEERROR = "InvalidParameterValue.CheckNameError"
+//  OPERATIONDENIED_INSTANCESTATUSERROR = "OperationDenied.InstanceStatusError"
+func (c *Client) DescribeUserPrivilegesWithContext(ctx context.Context, request *DescribeUserPrivilegesRequest) (response *DescribeUserPrivilegesResponse, err error) {
+    if request == nil {
+        request = NewDescribeUserPrivilegesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "DescribeUserPrivileges")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUserPrivileges require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUserPrivilegesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUsersRequest() (request *DescribeUsersRequest) {
+    request = &DescribeUsersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmysql", APIVersion, "DescribeUsers")
+    
+    
+    return
+}
+
+func NewDescribeUsersResponse() (response *DescribeUsersResponse) {
+    response = &DescribeUsersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeUsers
+// This API is used to query user list.
+//
+// error code that may be returned:
+//  AUTHFAILURE_CAMAUTHERROR = "AuthFailure.CamAuthError"
+//  AUTHFAILURE_CHECKCAMAUTHERROR = "AuthFailure.CheckCamAuthError"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_DBQUERYINSTANCEERROR = "FailedOperation.DBQueryInstanceError"
+//  FAILEDOPERATION_DBQUERYUSERERROR = "FailedOperation.DBQueryUserError"
+//  FAILEDOPERATION_QUERYUSERERROR = "FailedOperation.QueryUserError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+func (c *Client) DescribeUsers(request *DescribeUsersRequest) (response *DescribeUsersResponse, err error) {
+    return c.DescribeUsersWithContext(context.Background(), request)
+}
+
+// DescribeUsers
+// This API is used to query user list.
+//
+// error code that may be returned:
+//  AUTHFAILURE_CAMAUTHERROR = "AuthFailure.CamAuthError"
+//  AUTHFAILURE_CHECKCAMAUTHERROR = "AuthFailure.CheckCamAuthError"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_DBQUERYINSTANCEERROR = "FailedOperation.DBQueryInstanceError"
+//  FAILEDOPERATION_DBQUERYUSERERROR = "FailedOperation.DBQueryUserError"
+//  FAILEDOPERATION_QUERYUSERERROR = "FailedOperation.QueryUserError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+func (c *Client) DescribeUsersWithContext(ctx context.Context, request *DescribeUsersRequest) (response *DescribeUsersResponse, err error) {
+    if request == nil {
+        request = NewDescribeUsersRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "DescribeUsers")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUsers require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUsersResponse()
     err = c.Send(request, response)
     return
 }
@@ -627,6 +1457,66 @@ func (c *Client) DestroyInstancesWithContext(ctx context.Context, request *Destr
     request.SetContext(ctx)
     
     response = NewDestroyInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewExpandInstanceRequest() (request *ExpandInstanceRequest) {
+    request = &ExpandInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmysql", APIVersion, "ExpandInstance")
+    
+    
+    return
+}
+
+func NewExpandInstanceResponse() (response *ExpandInstanceResponse) {
+    response = &ExpandInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ExpandInstance
+// This API is used to horizontally scale out instances.
+//
+// error code that may be returned:
+//  AUTHFAILURE_CAMAUTHERROR = "AuthFailure.CamAuthError"
+//  AUTHFAILURE_CHECKCAMAUTHERROR = "AuthFailure.CheckCamAuthError"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_EXPANDINSTANCEERROR = "FailedOperation.ExpandInstanceError"
+//  LIMITEXCEEDED_OUTOFLIMITERROR = "LimitExceeded.OutOfLimitError"
+//  LIMITEXCEEDED_OUTOFSPECLIMITERROR = "LimitExceeded.OutOfSpecLimitError"
+func (c *Client) ExpandInstance(request *ExpandInstanceRequest) (response *ExpandInstanceResponse, err error) {
+    return c.ExpandInstanceWithContext(context.Background(), request)
+}
+
+// ExpandInstance
+// This API is used to horizontally scale out instances.
+//
+// error code that may be returned:
+//  AUTHFAILURE_CAMAUTHERROR = "AuthFailure.CamAuthError"
+//  AUTHFAILURE_CHECKCAMAUTHERROR = "AuthFailure.CheckCamAuthError"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_EXPANDINSTANCEERROR = "FailedOperation.ExpandInstanceError"
+//  LIMITEXCEEDED_OUTOFLIMITERROR = "LimitExceeded.OutOfLimitError"
+//  LIMITEXCEEDED_OUTOFSPECLIMITERROR = "LimitExceeded.OutOfSpecLimitError"
+func (c *Client) ExpandInstanceWithContext(ctx context.Context, request *ExpandInstanceRequest) (response *ExpandInstanceResponse, err error) {
+    if request == nil {
+        request = NewExpandInstanceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "ExpandInstance")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExpandInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExpandInstanceResponse()
     err = c.Send(request, response)
     return
 }
@@ -929,7 +1819,7 @@ func NewModifyDBSBackupPolicyResponse() (response *ModifyDBSBackupPolicyResponse
 }
 
 // ModifyDBSBackupPolicy
-// Modify the instance backup strategy.
+// This API is used to modify the instance backup strategy.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_MODIFYBACKUPPOLICYERR = "FailedOperation.ModifyBackupPolicyErr"
@@ -950,7 +1840,7 @@ func (c *Client) ModifyDBSBackupPolicy(request *ModifyDBSBackupPolicyRequest) (r
 }
 
 // ModifyDBSBackupPolicy
-// Modify the instance backup strategy.
+// This API is used to modify the instance backup strategy.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_MODIFYBACKUPPOLICYERR = "FailedOperation.ModifyBackupPolicyErr"
@@ -1003,7 +1893,7 @@ func NewModifyDBSBackupSetCommentResponse() (response *ModifyDBSBackupSetComment
 }
 
 // ModifyDBSBackupSetComment
-// Modify the backup set remark.
+// This API is used to modify backup notes of an instance.
 //
 // error code that may be returned:
 //  INTERNALERROR_ROUTERNOTFOUND = "InternalError.RouterNotFound"
@@ -1013,7 +1903,7 @@ func (c *Client) ModifyDBSBackupSetComment(request *ModifyDBSBackupSetCommentReq
 }
 
 // ModifyDBSBackupSetComment
-// Modify the backup set remark.
+// This API is used to modify backup notes of an instance.
 //
 // error code that may be returned:
 //  INTERNALERROR_ROUTERNOTFOUND = "InternalError.RouterNotFound"
@@ -1093,6 +1983,196 @@ func (c *Client) ModifyInstanceNameWithContext(ctx context.Context, request *Mod
     request.SetContext(ctx)
     
     response = NewModifyInstanceNameResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyUserPrivilegesRequest() (request *ModifyUserPrivilegesRequest) {
+    request = &ModifyUserPrivilegesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmysql", APIVersion, "ModifyUserPrivileges")
+    
+    
+    return
+}
+
+func NewModifyUserPrivilegesResponse() (response *ModifyUserPrivilegesResponse) {
+    response = &ModifyUserPrivilegesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyUserPrivileges
+// This API is used to modify user permissions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBCOUNTLIMITERROR = "FailedOperation.DbCountLimitError"
+//  FAILEDOPERATION_QUERYDBERROR = "FailedOperation.QueryDBError"
+//  FAILEDOPERATION_TABLECOUNTLIMITERROR = "FailedOperation.TableCountLimitError"
+//  FAILEDOPERATION_UPDATEPRIVILEGESERROR = "FailedOperation.UpdatePrivilegesError"
+func (c *Client) ModifyUserPrivileges(request *ModifyUserPrivilegesRequest) (response *ModifyUserPrivilegesResponse, err error) {
+    return c.ModifyUserPrivilegesWithContext(context.Background(), request)
+}
+
+// ModifyUserPrivileges
+// This API is used to modify user permissions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBCOUNTLIMITERROR = "FailedOperation.DbCountLimitError"
+//  FAILEDOPERATION_QUERYDBERROR = "FailedOperation.QueryDBError"
+//  FAILEDOPERATION_TABLECOUNTLIMITERROR = "FailedOperation.TableCountLimitError"
+//  FAILEDOPERATION_UPDATEPRIVILEGESERROR = "FailedOperation.UpdatePrivilegesError"
+func (c *Client) ModifyUserPrivilegesWithContext(ctx context.Context, request *ModifyUserPrivilegesRequest) (response *ModifyUserPrivilegesResponse, err error) {
+    if request == nil {
+        request = NewModifyUserPrivilegesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "ModifyUserPrivileges")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyUserPrivileges require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyUserPrivilegesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRestartDBInstancesRequest() (request *RestartDBInstancesRequest) {
+    request = &RestartDBInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmysql", APIVersion, "RestartDBInstances")
+    
+    
+    return
+}
+
+func NewRestartDBInstancesResponse() (response *RestartDBInstancesResponse) {
+    response = &RestartDBInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RestartDBInstances
+// This API is used to restart database instances.
+//
+// error code that may be returned:
+//  AUTHFAILURE_CAMAUTHERROR = "AuthFailure.CamAuthError"
+//  AUTHFAILURE_CHECKCAMAUTHERROR = "AuthFailure.CheckCamAuthError"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_CHECKSUPPORTACTIONERROR = "FailedOperation.CheckSupportActionError"
+//  FAILEDOPERATION_CREATEFLOWERROR = "FailedOperation.CreateFlowError"
+//  FAILEDOPERATION_DBQUERYINSTANCEERROR = "FailedOperation.DBQueryInstanceError"
+//  FAILEDOPERATION_LOCKINSTANCEERROR = "FailedOperation.LockInstanceError"
+//  OPERATIONDENIED_INSTANCESTATUSERROR = "OperationDenied.InstanceStatusError"
+func (c *Client) RestartDBInstances(request *RestartDBInstancesRequest) (response *RestartDBInstancesResponse, err error) {
+    return c.RestartDBInstancesWithContext(context.Background(), request)
+}
+
+// RestartDBInstances
+// This API is used to restart database instances.
+//
+// error code that may be returned:
+//  AUTHFAILURE_CAMAUTHERROR = "AuthFailure.CamAuthError"
+//  AUTHFAILURE_CHECKCAMAUTHERROR = "AuthFailure.CheckCamAuthError"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_CHECKSUPPORTACTIONERROR = "FailedOperation.CheckSupportActionError"
+//  FAILEDOPERATION_CREATEFLOWERROR = "FailedOperation.CreateFlowError"
+//  FAILEDOPERATION_DBQUERYINSTANCEERROR = "FailedOperation.DBQueryInstanceError"
+//  FAILEDOPERATION_LOCKINSTANCEERROR = "FailedOperation.LockInstanceError"
+//  OPERATIONDENIED_INSTANCESTATUSERROR = "OperationDenied.InstanceStatusError"
+func (c *Client) RestartDBInstancesWithContext(ctx context.Context, request *RestartDBInstancesRequest) (response *RestartDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewRestartDBInstancesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "RestartDBInstances")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RestartDBInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRestartDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpgradeInstanceRequest() (request *UpgradeInstanceRequest) {
+    request = &UpgradeInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmysql", APIVersion, "UpgradeInstance")
+    
+    
+    return
+}
+
+func NewUpgradeInstanceResponse() (response *UpgradeInstanceResponse) {
+    response = &UpgradeInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpgradeInstance
+// This API is used to scale up a TDSQL Boundless instance, which can be a primary instance or a disaster recovery instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE_CAMAUTHERROR = "AuthFailure.CamAuthError"
+//  AUTHFAILURE_CHECKCAMAUTHERROR = "AuthFailure.CheckCamAuthError"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_CHECKSUPPORTACTIONERROR = "FailedOperation.CheckSupportActionError"
+//  FAILEDOPERATION_CREATEFLOWERROR = "FailedOperation.CreateFlowError"
+//  FAILEDOPERATION_DBQUERYINSTANCEERROR = "FailedOperation.DBQueryInstanceError"
+//  FAILEDOPERATION_LOCKINSTANCEERROR = "FailedOperation.LockInstanceError"
+//  INVALIDPARAMETERVALUE_CHECKSPECERROR = "InvalidParameterValue.CheckSpecError"
+//  LIMITEXCEEDED_OUTOFSPECLIMITERROR = "LimitExceeded.OutOfSpecLimitError"
+//  OPERATIONDENIED_CHECKDECREASESPECERROR = "OperationDenied.CheckDecreaseSpecError"
+//  OPERATIONDENIED_INSTANCESTATUSERROR = "OperationDenied.InstanceStatusError"
+func (c *Client) UpgradeInstance(request *UpgradeInstanceRequest) (response *UpgradeInstanceResponse, err error) {
+    return c.UpgradeInstanceWithContext(context.Background(), request)
+}
+
+// UpgradeInstance
+// This API is used to scale up a TDSQL Boundless instance, which can be a primary instance or a disaster recovery instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE_CAMAUTHERROR = "AuthFailure.CamAuthError"
+//  AUTHFAILURE_CHECKCAMAUTHERROR = "AuthFailure.CheckCamAuthError"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_CHECKSUPPORTACTIONERROR = "FailedOperation.CheckSupportActionError"
+//  FAILEDOPERATION_CREATEFLOWERROR = "FailedOperation.CreateFlowError"
+//  FAILEDOPERATION_DBQUERYINSTANCEERROR = "FailedOperation.DBQueryInstanceError"
+//  FAILEDOPERATION_LOCKINSTANCEERROR = "FailedOperation.LockInstanceError"
+//  INVALIDPARAMETERVALUE_CHECKSPECERROR = "InvalidParameterValue.CheckSpecError"
+//  LIMITEXCEEDED_OUTOFSPECLIMITERROR = "LimitExceeded.OutOfSpecLimitError"
+//  OPERATIONDENIED_CHECKDECREASESPECERROR = "OperationDenied.CheckDecreaseSpecError"
+//  OPERATIONDENIED_INSTANCESTATUSERROR = "OperationDenied.InstanceStatusError"
+func (c *Client) UpgradeInstanceWithContext(ctx context.Context, request *UpgradeInstanceRequest) (response *UpgradeInstanceResponse, err error) {
+    if request == nil {
+        request = NewUpgradeInstanceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "UpgradeInstance")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpgradeInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpgradeInstanceResponse()
     err = c.Send(request, response)
     return
 }

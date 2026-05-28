@@ -1209,6 +1209,58 @@ func (c *Client) DescribeCustomerInfoWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDescribeCustomerOwnCostExplorerFilterRequest() (request *DescribeCustomerOwnCostExplorerFilterRequest) {
+    request = &DescribeCustomerOwnCostExplorerFilterRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "DescribeCustomerOwnCostExplorerFilter")
+    
+    
+    return
+}
+
+func NewDescribeCustomerOwnCostExplorerFilterResponse() (response *DescribeCustomerOwnCostExplorerFilterResponse) {
+    response = &DescribeCustomerOwnCostExplorerFilterResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCustomerOwnCostExplorerFilter
+// Cost analysis API advanced filtering
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) DescribeCustomerOwnCostExplorerFilter(request *DescribeCustomerOwnCostExplorerFilterRequest) (response *DescribeCustomerOwnCostExplorerFilterResponse, err error) {
+    return c.DescribeCustomerOwnCostExplorerFilterWithContext(context.Background(), request)
+}
+
+// DescribeCustomerOwnCostExplorerFilter
+// Cost analysis API advanced filtering
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) DescribeCustomerOwnCostExplorerFilterWithContext(ctx context.Context, request *DescribeCustomerOwnCostExplorerFilterRequest) (response *DescribeCustomerOwnCostExplorerFilterResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomerOwnCostExplorerFilterRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "intlpartnersmgt", APIVersion, "DescribeCustomerOwnCostExplorerFilter")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCustomerOwnCostExplorerFilter require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCustomerOwnCostExplorerFilterResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCustomerOwnVoucherListRequest() (request *DescribeCustomerOwnVoucherListRequest) {
     request = &DescribeCustomerOwnVoucherListRequest{
         BaseRequest: &tchttp.BaseRequest{},

@@ -418,6 +418,16 @@ type BillDetailData struct {
 	CustomerDiscountRate *string `json:"CustomerDiscountRate,omitnil,omitempty" name:"CustomerDiscountRate"`
 }
 
+type BillQueryFilterMsg struct {
+	// <p>Query condition key: various codes</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// <p>Query condition value: Display name</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
 type BusinessInfo struct {
 	// Product name.
 	BusinessCodeName *string `json:"BusinessCodeName,omitnil,omitempty" name:"BusinessCodeName"`
@@ -453,6 +463,39 @@ type BusinessSummaryOverviewItem struct {
 
 	// Consumption amount, keep 8 decimal places.
 	TotalCost *string `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
+}
+
+type CostAnalyzeFilterDetail struct {
+	// <p>Product key-value pair.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Business []*BillQueryFilterMsg `json:"Business,omitnil,omitempty" name:"Business"`
+
+	// <p>Region key-value pair</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Region []*BillQueryFilterMsg `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// <p>Availability zone key-value pair</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Zone []*BillQueryFilterMsg `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// <p>Transaction type key-value pair</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ActionType []*BillQueryFilterMsg `json:"ActionType,omitnil,omitempty" name:"ActionType"`
+
+	// <p>Key-value pair of payment mode</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PayMode []*BillQueryFilterMsg `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// <p>Project key-value pair</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Project []*BillQueryFilterMsg `json:"Project,omitnil,omitempty" name:"Project"`
+
+	// <p>Payer uin information</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PayerUin []*BillQueryFilterMsg `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
+
+	// <p>Sub-account uin information</p>
+	OwnerUin []*BillQueryFilterMsg `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
 }
 
 type CountryCodeItem struct {
@@ -1799,6 +1842,77 @@ func (r *DescribeCustomerInfoResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeCustomerInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCustomerOwnCostExplorerFilterRequestParams struct {
+	// <p>Start time</p><p>Parameter format: YYYY-MM-DD hh:mm:ss, for example 2006-01-02 00:00:00</p><p>Input limit: When PeriodType is month, the time range is 6 calendar months. When PeriodType is day, the time range is 2 calendar months;</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>End time</p><p>Parameter format: YYYY-MM-DD hh:mm:ss, for example 2006-01-02 00:00:00</p><p>Input limit: When PeriodType is month, the time range is 6 calendar months. When PeriodType is day, the time range is 2 calendar months.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Date type</p><p>Enumeration value:</p><ul><li>day: By day</li><li>month: Monthly</li></ul>
+	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
+}
+
+type DescribeCustomerOwnCostExplorerFilterRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Start time</p><p>Parameter format: YYYY-MM-DD hh:mm:ss, for example 2006-01-02 00:00:00</p><p>Input limit: When PeriodType is month, the time range is 6 calendar months. When PeriodType is day, the time range is 2 calendar months;</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>End time</p><p>Parameter format: YYYY-MM-DD hh:mm:ss, for example 2006-01-02 00:00:00</p><p>Input limit: When PeriodType is month, the time range is 6 calendar months. When PeriodType is day, the time range is 2 calendar months.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Date type</p><p>Enumeration value:</p><ul><li>day: By day</li><li>month: Monthly</li></ul>
+	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
+}
+
+func (r *DescribeCustomerOwnCostExplorerFilterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCustomerOwnCostExplorerFilterRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "PeriodType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCustomerOwnCostExplorerFilterRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCustomerOwnCostExplorerFilterResponseParams struct {
+	// <p>Filter information</p>
+	Data *CostAnalyzeFilterDetail `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCustomerOwnCostExplorerFilterResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCustomerOwnCostExplorerFilterResponseParams `json:"Response"`
+}
+
+func (r *DescribeCustomerOwnCostExplorerFilterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCustomerOwnCostExplorerFilterResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

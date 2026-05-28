@@ -1195,6 +1195,60 @@ func (c *Client) GetLivenessResultWithContext(ctx context.Context, request *GetL
     return
 }
 
+func NewGetNFCTokenRequest() (request *GetNFCTokenRequest) {
+    request = &GetNFCTokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "GetNFCToken")
+    
+    
+    return
+}
+
+func NewGetNFCTokenResponse() (response *GetNFCTokenResponse) {
+    response = &GetNFCTokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetNFCToken
+// NFC verification service, obtain Token information for the NFC identify request.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWN = "InternalError.UnKnown"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) GetNFCToken(request *GetNFCTokenRequest) (response *GetNFCTokenResponse, err error) {
+    return c.GetNFCTokenWithContext(context.Background(), request)
+}
+
+// GetNFCToken
+// NFC verification service, obtain Token information for the NFC identify request.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWN = "InternalError.UnKnown"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) GetNFCTokenWithContext(ctx context.Context, request *GetNFCTokenRequest) (response *GetNFCTokenResponse, err error) {
+    if request == nil {
+        request = NewGetNFCTokenRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "GetNFCToken")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetNFCToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetNFCTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetSdkVerificationResultRequest() (request *GetSdkVerificationResultRequest) {
     request = &GetSdkVerificationResultRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1219,10 +1273,8 @@ func NewGetSdkVerificationResultResponse() (response *GetSdkVerificationResultRe
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_BIZTOKENEXPIRED = "InvalidParameterValue.BizTokenExpired"
-//  INVALIDPARAMETERVALUE_BIZTOKENILLEGAL = "InvalidParameterValue.BizTokenIllegal"
-//  OPERATIONDENIED = "OperationDenied"
+//  INTERNALERROR_UNKNOWN = "InternalError.UnKnown"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) GetSdkVerificationResult(request *GetSdkVerificationResultRequest) (response *GetSdkVerificationResultResponse, err error) {
     return c.GetSdkVerificationResultWithContext(context.Background(), request)
 }
@@ -1232,10 +1284,8 @@ func (c *Client) GetSdkVerificationResult(request *GetSdkVerificationResultReque
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_BIZTOKENEXPIRED = "InvalidParameterValue.BizTokenExpired"
-//  INVALIDPARAMETERVALUE_BIZTOKENILLEGAL = "InvalidParameterValue.BizTokenIllegal"
-//  OPERATIONDENIED = "OperationDenied"
+//  INTERNALERROR_UNKNOWN = "InternalError.UnKnown"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) GetSdkVerificationResultWithContext(ctx context.Context, request *GetSdkVerificationResultRequest) (response *GetSdkVerificationResultResponse, err error) {
     if request == nil {
         request = NewGetSdkVerificationResultRequest()
@@ -1309,6 +1359,64 @@ func (c *Client) GetWebVerificationResultIntlWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewGetWebVerificationResultIntlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetWxNFCResultRequest() (request *GetWxNFCResultRequest) {
+    request = &GetWxNFCResultRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "GetWxNFCResult")
+    
+    
+    return
+}
+
+func NewGetWxNFCResultResponse() (response *GetWxNFCResultResponse) {
+    response = &GetWxNFCResultResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetWxNFCResult
+// Obtain document NFC data, input the Token returned by the NFC SDK (valid for 10 minutes), and return the corresponding document information retrieved via NFC. This API supports NFC recognition and verification of ID cards (second-generation resident identity card, Residence Permit for Hong Kong (China) and Macao (China), Residence Permit for Taiwan (China), Permanent Residence Permit for Foreigners) as well as travel documents (exit-entry permit for travelling to and from Hong Kong (China) and Macao (China), Taiwan travel permit, Mainland Travel Permit for Taiwan Residents, Return Home Permit).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDTOKENPARAMETER = "FailedOperation.InvalidTokenParameter"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWN = "InternalError.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) GetWxNFCResult(request *GetWxNFCResultRequest) (response *GetWxNFCResultResponse, err error) {
+    return c.GetWxNFCResultWithContext(context.Background(), request)
+}
+
+// GetWxNFCResult
+// Obtain document NFC data, input the Token returned by the NFC SDK (valid for 10 minutes), and return the corresponding document information retrieved via NFC. This API supports NFC recognition and verification of ID cards (second-generation resident identity card, Residence Permit for Hong Kong (China) and Macao (China), Residence Permit for Taiwan (China), Permanent Residence Permit for Foreigners) as well as travel documents (exit-entry permit for travelling to and from Hong Kong (China) and Macao (China), Taiwan travel permit, Mainland Travel Permit for Taiwan Residents, Return Home Permit).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDTOKENPARAMETER = "FailedOperation.InvalidTokenParameter"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWN = "InternalError.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) GetWxNFCResultWithContext(ctx context.Context, request *GetWxNFCResultRequest) (response *GetWxNFCResultResponse, err error) {
+    if request == nil {
+        request = NewGetWxNFCResultRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "GetWxNFCResult")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetWxNFCResult require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetWxNFCResultResponse()
     err = c.Send(request, response)
     return
 }

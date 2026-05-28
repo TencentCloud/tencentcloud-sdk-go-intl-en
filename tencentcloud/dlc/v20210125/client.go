@@ -2071,6 +2071,56 @@ func (c *Client) CreateUserWithContext(ctx context.Context, request *CreateUserR
     return
 }
 
+func NewCreateUserRoleRequest() (request *CreateUserRoleRequest) {
+    request = &CreateUserRoleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "CreateUserRole")
+    
+    
+    return
+}
+
+func NewCreateUserRoleResponse() (response *CreateUserRoleResponse) {
+    response = &CreateUserRoleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateUserRole
+// This API is used to create a user role.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateUserRole(request *CreateUserRoleRequest) (response *CreateUserRoleResponse, err error) {
+    return c.CreateUserRoleWithContext(context.Background(), request)
+}
+
+// CreateUserRole
+// This API is used to create a user role.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateUserRoleWithContext(ctx context.Context, request *CreateUserRoleRequest) (response *CreateUserRoleResponse, err error) {
+    if request == nil {
+        request = NewCreateUserRoleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "dlc", APIVersion, "CreateUserRole")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateUserRole require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateUserRoleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateWorkGroupRequest() (request *CreateWorkGroupRequest) {
     request = &CreateWorkGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},

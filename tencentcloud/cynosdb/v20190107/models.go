@@ -2173,332 +2173,290 @@ type CreateClustersData struct {
 
 // Predefined struct for user
 type CreateClustersRequestParams struct {
-	// AZ
+	// <p>AZ.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// VPC ID
+	// <p>VPC network ID</p>
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet ID
+	// <p>Subnet ID</p>
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Database type. Valid values: 
-	// <li> MYSQL </li>
+	// <p>Database type</p><p>Enumeration value:</p><ul><li>MYSQL: MYSQL</li></ul>
 	DbType *string `json:"DbType,omitnil,omitempty" name:"DbType"`
 
-	// Database version. Valid values: 
-	// <li> Valid values for `MYSQL`: 5.7 and 8.0 </li>
+	// <p>Database version</p><p>Enumeration value:</p><ul><li>5.7: MySQL 5.7 edition</li><li>8.0: MySQL 8.0 edition</li></ul>
 	DbVersion *string `json:"DbVersion,omitnil,omitempty" name:"DbVersion"`
 
-	// Project ID.
+	// <p>project-ID</p>
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// It is required when `DbMode` is set to `NORMAL` or left empty.
-	// Number of CPU cores of normal instance
+	// <p>Required when DbMode is NORMAL or left blank<br>Cpu cores of the regular instance</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// It is required when `DbMode` is set to `NORMAL` or left empty.
-	// Memory of a non-serverless instance in GB
+	// <p>Required when DbMode is NORMAL or left blank<br>Ordinary instance memory in GB</p>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance count. valid values: a quantity range from 0 to 16. the default value is 2 (that is, one rw instance + one ro instance). the transmitted n represents 1 rw instance + (n - 1) ro instances (with identical specifications). if a more precise cluster composition collocation is required, please use InstanceInitInfos.
+	// <p>Instance count</p><p>Value ranges from [1, 16]</p><p>Default value: 2</p><ul><li>A value of 2 means one rw instance + one ro instance.</li><li>The transmitted n refers to one rw instance + n-1 ro instances (identical specifications).</li><li>For a more precise cluster composition collocation, please use InstanceInitInfos.</li><li>The value set by this parameter is suitable for provisioned resource cluster. If needed to set the specifications and quantity of Serverless cluster, please use the InstanceInitInfo structure in InstanceInitInfos.n.</li></ul>
 	InstanceCount *int64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
 
-	// This parameter has been deprecated.
-	// Storage capacity in GB
+	// <p>This parameter is meaningless and abandoned.<br>Storage size, in GB.</p>
 	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
-	// Cluster name, which can contain less than 64 letters, digits, or symbols (-_.).
+	// <p>Cluster name, length less than 64 characters, each character value ranges from uppercase/lowercase letters, digits, special symbols ('-', '_', '.')</p>
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-	// Account password, which must contain 8-64 characters in at least three of the following four types: uppercase letters, lowercase letters, digits, and symbols (~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/).
+	// <p>Account (8-64 characters, a combination of uppercase and lowercase letters, digits and symbols ~!@#$%^&amp;*_-+=`|(){}[]:;&#39;&lt;&gt;,.?/ with any three types required)</p>
 	AdminPassword *string `json:"AdminPassword,omitnil,omitempty" name:"AdminPassword"`
 
-	// Port. Valid range: [0, 65535). Default value: 3306
+	// <p>Port, default 3306, in the range of [0, 65535)</p>
 	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
-	// Billing mode. supported values: 0 and 1. default value: 0.
-	// Value is 0, indicating pay-as-you-go billing.
-	// Value is 1, which means yearly/monthly subscription.
+	// <p>Billing mode</p><p>Enumeration value:</p><ul><li>0: Pay-as-you-go billing</li><li>1: Monthly Subscription</li></ul><p>Default value: 0</p>
 	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Number of purchased clusters. Valid range: [1,50]. Default value: 1
+	// <p>Number of clusters to purchase. Optional value range: [1,50]. Default is 1.</p>
 	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 
-	// Rollback type:
-	// noneRollback: no rollback;
-	// snapRollback: rollback by snapshot;
-	// timeRollback: rollback by time point
+	// <p>Rollback type</p><p>Enumeration value:</p><ul><li>noneRollback: No rollback</li><li>snapRollback: Snapshot rollback</li><li>timeRollback: Point-in-time rollback</li></ul>
 	RollbackStrategy *string `json:"RollbackStrategy,omitnil,omitempty" name:"RollbackStrategy"`
 
-	// `snapshotId` for snapshot rollback or `queryId` for time point rollback. 0 indicates to determine whether the time point is valid
+	// <p>Snapshot rollback means snapshotId; point-in-time rollback means queryId. A value of 0 indicates requirement to judge whether the time point is valid.</p>
 	RollbackId *uint64 `json:"RollbackId,omitnil,omitempty" name:"RollbackId"`
 
-	// The source cluster ID passed in during rollback to find the source `poolId`
+	// <p>During rollback, input the source cluster ID to search for the source poolId</p>
 	OriginalClusterId *string `json:"OriginalClusterId,omitnil,omitempty" name:"OriginalClusterId"`
 
-	// Specified time for time point rollback or snapshot time for snapshot rollback
+	// <p>Point-in-time rollback, specified time; snapshot rollback, snapshot time</p>
 	ExpectTime *string `json:"ExpectTime,omitnil,omitempty" name:"ExpectTime"`
 
-	// This parameter has been deprecated.
-	// Specified allowed time range for time point rollback
+	// <p>This parameter is meaningless and abandoned.<br>Point-in-time rollback, allowed range of specified time.</p>
 	ExpectTimeThresh *uint64 `json:"ExpectTimeThresh,omitnil,omitempty" name:"ExpectTimeThresh"`
 
-	// Storage upper limit of normal instance in GB
-	// If `DbType` is `MYSQL` and the storage billing mode is yearly/monthly subscription, the parameter value can't exceed the maximum storage corresponding to the CPU and memory specifications.
+	// <p>Ordinary instance storage cap, in GB<br>When DbType is MYSQL and the storage billing mode is prepaid, this parameter should not exceed the maximum storage specification corresponding to cpu and memory.</p>
 	StorageLimit *int64 `json:"StorageLimit,omitnil,omitempty" name:"StorageLimit"`
 
-	// Purchase duration of yearly/monthly subscription plan
+	// <p>Annual and monthly subscription duration</p>
 	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
-	// Duration unit of yearly/monthly subscription. Valid values: `s`, `d`, `m`, `y`
+	// <p>Annual and monthly subscription duration unit, ['s', 'd', 'm', 'y']</p>
 	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
 
-	// Specifies whether the annual/yearly/monthly subscription is auto-renewed. the default value is 0.
-	// 0 indicates the default renewal method. 1 means auto-renewal. 2 means no auto-renewal.
+	// <p>Whether Annual/Monthly Subscription is auto-renewed</p><p>Enumeration value:</p><ul><li>0: Default renewal method</li><li>1: Auto-renewal</li><li>2: No auto-renewal</li></ul><p>Default value: 0</p>
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
-	// Whether to automatically select a voucher. `1`: yes; `0`: no. Default value: `0`
+	// <p>Whether to automatically select voucher 1 Yes 0 No Default value: 0</p><p>Enumeration value:</p><ul><li>1: Yes</li><li>0: No</li></ul><p>Default value: 0</p>
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-	// Number of instances (this parameter has been disused and is retained only for compatibility with existing instances)
+	// <p>Instance count (this parameter is deprecated and only for existing accommodative)</p>
 	HaCount *int64 `json:"HaCount,omitnil,omitempty" name:"HaCount"`
 
-	// Order source
+	// <p>Order source</p>
 	OrderSource *string `json:"OrderSource,omitnil,omitempty" name:"OrderSource"`
 
-	// Array of tags to be bound to the created cluster
+	// <p>tag Array info that should be bound for cluster creation</p>
 	ResourceTags []*Tag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
-	// Database type
-	// Valid values when `DbType` is `MYSQL` (default value: `NORMAL`):
-	// <li>NORMAL</li>
-	// <li>SERVERLESS</li>
+	// <p>Db type</p><p>Enumeration value:</p><ul><li>NORMAL: NORMAL instance</li><li>SERVERLESS: SERVERLESS instance</li></ul><p>Default value: NORMAL</p><p>Selectable when DbType is MYSQL (default NORMAL)</p>
 	DbMode *string `json:"DbMode,omitnil,omitempty" name:"DbMode"`
 
-	// This parameter is required if `DbMode` is `SERVERLESS`.
-	// Minimum number of CPU cores. For the value range, see the returned result of `DescribeServerlessInstanceSpecs`.
+	// <p>Required when DbMode is SERVERLESS<br>Minimum value of cpu. For optional range, see API response of DescribeServerlessInstanceSpecs</p>
 	MinCpu *float64 `json:"MinCpu,omitnil,omitempty" name:"MinCpu"`
 
-	// This parameter is required if `DbMode` is `SERVERLESS`.
-	// Maximum number of CPU cores. For the value range, see the returned result of `DescribeServerlessInstanceSpecs`.
+	// <p>Required when DbMode is SERVERLESS:<br>Maximum value of cpu. For optional range, see API response of DescribeServerlessInstanceSpecs.</p>
 	MaxCpu *float64 `json:"MaxCpu,omitnil,omitempty" name:"MaxCpu"`
 
-	// This parameter specifies whether the cluster will be automatically paused if `DbMode` is `SERVERLESS`. Valid values:
-	// <li>yes</li>
-	// <li>no</li>
-	// Default value: yes
+	// <p>No auto pause</p><p>Enumeration value:</p><ul><li>yes: Yes</li><li>no: No</li></ul><p>Default value: yes</p><p>Take effect when DbMode is SERVERLESS</p>
 	AutoPause *string `json:"AutoPause,omitnil,omitempty" name:"AutoPause"`
 
-	// This parameter specifies the delay for automatic cluster pause in seconds if `DbMode` is `SERVERLESS`. Value range: [600,691200]
-	// Default value: `600`
+	// <p>When DbMode is SERVERLESS, specify the delay for Cluster Auto-Pause in seconds. Optional range: [600,691200]<br>Default value: 600</p>
 	AutoPauseDelay *int64 `json:"AutoPauseDelay,omitnil,omitempty" name:"AutoPauseDelay"`
 
-	// The billing mode of cluster storage. Valid values: `0` (pay-as-you-go), `1` (yearly/monthly subscription). Default value: `0`.
-	// If `DbType` is `MYSQL` and the billing mode of cluster compute is pay-as-you-go (or the `DbMode` is `SERVERLESS`), the billing mode of cluster storage must be pay-as-you-go.
-	// Clusters with storage billed in yearly/monthly subscription can't be cloned or rolled back.
+	// <p>The storage billing mode of the cluster. Pay-As-You-Go: 0, Monthly Subscription: 1. Default is Pay-As-You-Go.<br>When DbType is MYSQL and the compute billing mode of the cluster is postpaid (including DbMode as SERVERLESS), the storage billing mode can only be Pay-As-You-Go.<br>Rollback and clone do not support Monthly Subscription storage.</p>
 	StoragePayMode *int64 `json:"StoragePayMode,omitnil,omitempty" name:"StoragePayMode"`
 
-	// Array of security group IDs
+	// <p>Security group id array</p>
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
-	// Array of alarm policy IDs
+	// <p>Alarm policy Id array</p>
 	AlarmPolicyIds []*string `json:"AlarmPolicyIds,omitnil,omitempty" name:"AlarmPolicyIds"`
 
-	// Array of parameters. Valid values: `character_set_server` (utf8/latin1/gbk/utf8mb4), `lower_case_table_names`. 0: case-sensitive; 1: case-insensitive).
+	// <p>Parameter array, temporarily supports character_set_server (utf8|latin1|gbk|utf8mb4), lower_case_table_names, 1-case-insensitive, 0-case-sensitive</p>
 	ClusterParams []*ParamItem `json:"ClusterParams,omitnil,omitempty" name:"ClusterParams"`
 
-	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
+	// <p>Transaction mode</p><p>Enumeration value:</p><ul><li>0: Place order and pay</li><li>1: Place order</li></ul><p>Default value: 0</p>
 	DealMode *int64 `json:"DealMode,omitnil,omitempty" name:"DealMode"`
 
-	// Parameter template ID, which can be obtained by querying parameter template information "DescribeParamTemplates"
+	// <p>Parameter template ID. The parameter template ID can be obtained through querying parameter template information DescribeParamTemplates.</p>
 	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
 
-	// Multi-AZ address
+	// <p>Multi-AZ address</p>
 	SlaveZone *string `json:"SlaveZone,omitnil,omitempty" name:"SlaveZone"`
 
-	// Instance initialization configuration information, which is used to select instances with different specifications when purchasing a cluster.
+	// <p>Instance initialization configuration information is mainly used to select different specification instances during cluster purchase.</p>
 	InstanceInitInfos []*InstanceInitInfo `json:"InstanceInitInfos,omitnil,omitempty" name:"InstanceInitInfos"`
 
-	// Global database unique identifier.
+	// <p>Global database unique ID</p>
 	GdnId *string `json:"GdnId,omitnil,omitempty" name:"GdnId"`
 
-	// Database proxy configuration.
+	// <p>Database proxy configuration</p>
 	ProxyConfig *ProxyConfig `json:"ProxyConfig,omitnil,omitempty" name:"ProxyConfig"`
 
-	// Automatically archive.
+	// <p>Auto archive or not</p><p>Enumeration value:</p><ul><li>yes: Yes</li><li>no: No</li></ul><p>Default value: no</p><p>This parameter takes effect only when the primary instance of the current cluster is SERVERLESS</p>
 	AutoArchive *string `json:"AutoArchive,omitnil,omitempty" name:"AutoArchive"`
 
-	// Archiving processing time after pausing.
+	// <p>Archiving processing time after pausing</p><p>Measurement unit: hour</p><p>Default value: 12</p><p>This parameter takes effect only when the primary instance of the current cluster is SERVERLESS.</p>
 	AutoArchiveDelayHours *int64 `json:"AutoArchiveDelayHours,omitnil,omitempty" name:"AutoArchiveDelayHours"`
 
-	// Kernel minor version number.
+	// <p>Cluster level, optional. Example: P0, P1. (This field can be ignored)</p>
+	ClusterLevel *string `json:"ClusterLevel,omitnil,omitempty" name:"ClusterLevel"`
+
+	// <p>Kernel minor version</p>
 	CynosVersion *string `json:"CynosVersion,omitnil,omitempty" name:"CynosVersion"`
 }
 
 type CreateClustersRequest struct {
 	*tchttp.BaseRequest
 	
-	// AZ
+	// <p>AZ.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// VPC ID
+	// <p>VPC network ID</p>
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet ID
+	// <p>Subnet ID</p>
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Database type. Valid values: 
-	// <li> MYSQL </li>
+	// <p>Database type</p><p>Enumeration value:</p><ul><li>MYSQL: MYSQL</li></ul>
 	DbType *string `json:"DbType,omitnil,omitempty" name:"DbType"`
 
-	// Database version. Valid values: 
-	// <li> Valid values for `MYSQL`: 5.7 and 8.0 </li>
+	// <p>Database version</p><p>Enumeration value:</p><ul><li>5.7: MySQL 5.7 edition</li><li>8.0: MySQL 8.0 edition</li></ul>
 	DbVersion *string `json:"DbVersion,omitnil,omitempty" name:"DbVersion"`
 
-	// Project ID.
+	// <p>project-ID</p>
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// It is required when `DbMode` is set to `NORMAL` or left empty.
-	// Number of CPU cores of normal instance
+	// <p>Required when DbMode is NORMAL or left blank<br>Cpu cores of the regular instance</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// It is required when `DbMode` is set to `NORMAL` or left empty.
-	// Memory of a non-serverless instance in GB
+	// <p>Required when DbMode is NORMAL or left blank<br>Ordinary instance memory in GB</p>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance count. valid values: a quantity range from 0 to 16. the default value is 2 (that is, one rw instance + one ro instance). the transmitted n represents 1 rw instance + (n - 1) ro instances (with identical specifications). if a more precise cluster composition collocation is required, please use InstanceInitInfos.
+	// <p>Instance count</p><p>Value ranges from [1, 16]</p><p>Default value: 2</p><ul><li>A value of 2 means one rw instance + one ro instance.</li><li>The transmitted n refers to one rw instance + n-1 ro instances (identical specifications).</li><li>For a more precise cluster composition collocation, please use InstanceInitInfos.</li><li>The value set by this parameter is suitable for provisioned resource cluster. If needed to set the specifications and quantity of Serverless cluster, please use the InstanceInitInfo structure in InstanceInitInfos.n.</li></ul>
 	InstanceCount *int64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
 
-	// This parameter has been deprecated.
-	// Storage capacity in GB
+	// <p>This parameter is meaningless and abandoned.<br>Storage size, in GB.</p>
 	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
-	// Cluster name, which can contain less than 64 letters, digits, or symbols (-_.).
+	// <p>Cluster name, length less than 64 characters, each character value ranges from uppercase/lowercase letters, digits, special symbols ('-', '_', '.')</p>
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-	// Account password, which must contain 8-64 characters in at least three of the following four types: uppercase letters, lowercase letters, digits, and symbols (~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/).
+	// <p>Account (8-64 characters, a combination of uppercase and lowercase letters, digits and symbols ~!@#$%^&amp;*_-+=`|(){}[]:;&#39;&lt;&gt;,.?/ with any three types required)</p>
 	AdminPassword *string `json:"AdminPassword,omitnil,omitempty" name:"AdminPassword"`
 
-	// Port. Valid range: [0, 65535). Default value: 3306
+	// <p>Port, default 3306, in the range of [0, 65535)</p>
 	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
-	// Billing mode. supported values: 0 and 1. default value: 0.
-	// Value is 0, indicating pay-as-you-go billing.
-	// Value is 1, which means yearly/monthly subscription.
+	// <p>Billing mode</p><p>Enumeration value:</p><ul><li>0: Pay-as-you-go billing</li><li>1: Monthly Subscription</li></ul><p>Default value: 0</p>
 	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Number of purchased clusters. Valid range: [1,50]. Default value: 1
+	// <p>Number of clusters to purchase. Optional value range: [1,50]. Default is 1.</p>
 	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 
-	// Rollback type:
-	// noneRollback: no rollback;
-	// snapRollback: rollback by snapshot;
-	// timeRollback: rollback by time point
+	// <p>Rollback type</p><p>Enumeration value:</p><ul><li>noneRollback: No rollback</li><li>snapRollback: Snapshot rollback</li><li>timeRollback: Point-in-time rollback</li></ul>
 	RollbackStrategy *string `json:"RollbackStrategy,omitnil,omitempty" name:"RollbackStrategy"`
 
-	// `snapshotId` for snapshot rollback or `queryId` for time point rollback. 0 indicates to determine whether the time point is valid
+	// <p>Snapshot rollback means snapshotId; point-in-time rollback means queryId. A value of 0 indicates requirement to judge whether the time point is valid.</p>
 	RollbackId *uint64 `json:"RollbackId,omitnil,omitempty" name:"RollbackId"`
 
-	// The source cluster ID passed in during rollback to find the source `poolId`
+	// <p>During rollback, input the source cluster ID to search for the source poolId</p>
 	OriginalClusterId *string `json:"OriginalClusterId,omitnil,omitempty" name:"OriginalClusterId"`
 
-	// Specified time for time point rollback or snapshot time for snapshot rollback
+	// <p>Point-in-time rollback, specified time; snapshot rollback, snapshot time</p>
 	ExpectTime *string `json:"ExpectTime,omitnil,omitempty" name:"ExpectTime"`
 
-	// This parameter has been deprecated.
-	// Specified allowed time range for time point rollback
+	// <p>This parameter is meaningless and abandoned.<br>Point-in-time rollback, allowed range of specified time.</p>
 	ExpectTimeThresh *uint64 `json:"ExpectTimeThresh,omitnil,omitempty" name:"ExpectTimeThresh"`
 
-	// Storage upper limit of normal instance in GB
-	// If `DbType` is `MYSQL` and the storage billing mode is yearly/monthly subscription, the parameter value can't exceed the maximum storage corresponding to the CPU and memory specifications.
+	// <p>Ordinary instance storage cap, in GB<br>When DbType is MYSQL and the storage billing mode is prepaid, this parameter should not exceed the maximum storage specification corresponding to cpu and memory.</p>
 	StorageLimit *int64 `json:"StorageLimit,omitnil,omitempty" name:"StorageLimit"`
 
-	// Purchase duration of yearly/monthly subscription plan
+	// <p>Annual and monthly subscription duration</p>
 	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
-	// Duration unit of yearly/monthly subscription. Valid values: `s`, `d`, `m`, `y`
+	// <p>Annual and monthly subscription duration unit, ['s', 'd', 'm', 'y']</p>
 	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
 
-	// Specifies whether the annual/yearly/monthly subscription is auto-renewed. the default value is 0.
-	// 0 indicates the default renewal method. 1 means auto-renewal. 2 means no auto-renewal.
+	// <p>Whether Annual/Monthly Subscription is auto-renewed</p><p>Enumeration value:</p><ul><li>0: Default renewal method</li><li>1: Auto-renewal</li><li>2: No auto-renewal</li></ul><p>Default value: 0</p>
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
-	// Whether to automatically select a voucher. `1`: yes; `0`: no. Default value: `0`
+	// <p>Whether to automatically select voucher 1 Yes 0 No Default value: 0</p><p>Enumeration value:</p><ul><li>1: Yes</li><li>0: No</li></ul><p>Default value: 0</p>
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-	// Number of instances (this parameter has been disused and is retained only for compatibility with existing instances)
+	// <p>Instance count (this parameter is deprecated and only for existing accommodative)</p>
 	HaCount *int64 `json:"HaCount,omitnil,omitempty" name:"HaCount"`
 
-	// Order source
+	// <p>Order source</p>
 	OrderSource *string `json:"OrderSource,omitnil,omitempty" name:"OrderSource"`
 
-	// Array of tags to be bound to the created cluster
+	// <p>tag Array info that should be bound for cluster creation</p>
 	ResourceTags []*Tag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
-	// Database type
-	// Valid values when `DbType` is `MYSQL` (default value: `NORMAL`):
-	// <li>NORMAL</li>
-	// <li>SERVERLESS</li>
+	// <p>Db type</p><p>Enumeration value:</p><ul><li>NORMAL: NORMAL instance</li><li>SERVERLESS: SERVERLESS instance</li></ul><p>Default value: NORMAL</p><p>Selectable when DbType is MYSQL (default NORMAL)</p>
 	DbMode *string `json:"DbMode,omitnil,omitempty" name:"DbMode"`
 
-	// This parameter is required if `DbMode` is `SERVERLESS`.
-	// Minimum number of CPU cores. For the value range, see the returned result of `DescribeServerlessInstanceSpecs`.
+	// <p>Required when DbMode is SERVERLESS<br>Minimum value of cpu. For optional range, see API response of DescribeServerlessInstanceSpecs</p>
 	MinCpu *float64 `json:"MinCpu,omitnil,omitempty" name:"MinCpu"`
 
-	// This parameter is required if `DbMode` is `SERVERLESS`.
-	// Maximum number of CPU cores. For the value range, see the returned result of `DescribeServerlessInstanceSpecs`.
+	// <p>Required when DbMode is SERVERLESS:<br>Maximum value of cpu. For optional range, see API response of DescribeServerlessInstanceSpecs.</p>
 	MaxCpu *float64 `json:"MaxCpu,omitnil,omitempty" name:"MaxCpu"`
 
-	// This parameter specifies whether the cluster will be automatically paused if `DbMode` is `SERVERLESS`. Valid values:
-	// <li>yes</li>
-	// <li>no</li>
-	// Default value: yes
+	// <p>No auto pause</p><p>Enumeration value:</p><ul><li>yes: Yes</li><li>no: No</li></ul><p>Default value: yes</p><p>Take effect when DbMode is SERVERLESS</p>
 	AutoPause *string `json:"AutoPause,omitnil,omitempty" name:"AutoPause"`
 
-	// This parameter specifies the delay for automatic cluster pause in seconds if `DbMode` is `SERVERLESS`. Value range: [600,691200]
-	// Default value: `600`
+	// <p>When DbMode is SERVERLESS, specify the delay for Cluster Auto-Pause in seconds. Optional range: [600,691200]<br>Default value: 600</p>
 	AutoPauseDelay *int64 `json:"AutoPauseDelay,omitnil,omitempty" name:"AutoPauseDelay"`
 
-	// The billing mode of cluster storage. Valid values: `0` (pay-as-you-go), `1` (yearly/monthly subscription). Default value: `0`.
-	// If `DbType` is `MYSQL` and the billing mode of cluster compute is pay-as-you-go (or the `DbMode` is `SERVERLESS`), the billing mode of cluster storage must be pay-as-you-go.
-	// Clusters with storage billed in yearly/monthly subscription can't be cloned or rolled back.
+	// <p>The storage billing mode of the cluster. Pay-As-You-Go: 0, Monthly Subscription: 1. Default is Pay-As-You-Go.<br>When DbType is MYSQL and the compute billing mode of the cluster is postpaid (including DbMode as SERVERLESS), the storage billing mode can only be Pay-As-You-Go.<br>Rollback and clone do not support Monthly Subscription storage.</p>
 	StoragePayMode *int64 `json:"StoragePayMode,omitnil,omitempty" name:"StoragePayMode"`
 
-	// Array of security group IDs
+	// <p>Security group id array</p>
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
-	// Array of alarm policy IDs
+	// <p>Alarm policy Id array</p>
 	AlarmPolicyIds []*string `json:"AlarmPolicyIds,omitnil,omitempty" name:"AlarmPolicyIds"`
 
-	// Array of parameters. Valid values: `character_set_server` (utf8/latin1/gbk/utf8mb4), `lower_case_table_names`. 0: case-sensitive; 1: case-insensitive).
+	// <p>Parameter array, temporarily supports character_set_server (utf8|latin1|gbk|utf8mb4), lower_case_table_names, 1-case-insensitive, 0-case-sensitive</p>
 	ClusterParams []*ParamItem `json:"ClusterParams,omitnil,omitempty" name:"ClusterParams"`
 
-	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
+	// <p>Transaction mode</p><p>Enumeration value:</p><ul><li>0: Place order and pay</li><li>1: Place order</li></ul><p>Default value: 0</p>
 	DealMode *int64 `json:"DealMode,omitnil,omitempty" name:"DealMode"`
 
-	// Parameter template ID, which can be obtained by querying parameter template information "DescribeParamTemplates"
+	// <p>Parameter template ID. The parameter template ID can be obtained through querying parameter template information DescribeParamTemplates.</p>
 	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
 
-	// Multi-AZ address
+	// <p>Multi-AZ address</p>
 	SlaveZone *string `json:"SlaveZone,omitnil,omitempty" name:"SlaveZone"`
 
-	// Instance initialization configuration information, which is used to select instances with different specifications when purchasing a cluster.
+	// <p>Instance initialization configuration information is mainly used to select different specification instances during cluster purchase.</p>
 	InstanceInitInfos []*InstanceInitInfo `json:"InstanceInitInfos,omitnil,omitempty" name:"InstanceInitInfos"`
 
-	// Global database unique identifier.
+	// <p>Global database unique ID</p>
 	GdnId *string `json:"GdnId,omitnil,omitempty" name:"GdnId"`
 
-	// Database proxy configuration.
+	// <p>Database proxy configuration</p>
 	ProxyConfig *ProxyConfig `json:"ProxyConfig,omitnil,omitempty" name:"ProxyConfig"`
 
-	// Automatically archive.
+	// <p>Auto archive or not</p><p>Enumeration value:</p><ul><li>yes: Yes</li><li>no: No</li></ul><p>Default value: no</p><p>This parameter takes effect only when the primary instance of the current cluster is SERVERLESS</p>
 	AutoArchive *string `json:"AutoArchive,omitnil,omitempty" name:"AutoArchive"`
 
-	// Archiving processing time after pausing.
+	// <p>Archiving processing time after pausing</p><p>Measurement unit: hour</p><p>Default value: 12</p><p>This parameter takes effect only when the primary instance of the current cluster is SERVERLESS.</p>
 	AutoArchiveDelayHours *int64 `json:"AutoArchiveDelayHours,omitnil,omitempty" name:"AutoArchiveDelayHours"`
 
-	// Kernel minor version number.
+	// <p>Cluster level, optional. Example: P0, P1. (This field can be ignored)</p>
+	ClusterLevel *string `json:"ClusterLevel,omitnil,omitempty" name:"ClusterLevel"`
+
+	// <p>Kernel minor version</p>
 	CynosVersion *string `json:"CynosVersion,omitnil,omitempty" name:"CynosVersion"`
 }
 
@@ -2559,6 +2517,7 @@ func (r *CreateClustersRequest) FromJsonString(s string) error {
 	delete(f, "ProxyConfig")
 	delete(f, "AutoArchive")
 	delete(f, "AutoArchiveDelayHours")
+	delete(f, "ClusterLevel")
 	delete(f, "CynosVersion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClustersRequest has unknown keys!", "")
@@ -2568,19 +2527,19 @@ func (r *CreateClustersRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateClustersResponseParams struct {
-	// Frozen transaction ID.
+	// <p>Frozen transaction ID</p>
 	TranId *string `json:"TranId,omitnil,omitempty" name:"TranId"`
 
-	// Order ID
+	// <p>Order ID</p>
 	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
 
-	// Resource ID list (this field is no longer maintained. please use the dealNames field and the DescribeResourcesByDealName query API to obtain resource ids.).
+	// <p>Resource ID list (This field is no longer maintained. Please use the dealNames field to query the API DescribeResourcesByDealName to obtain resource IDs)</p>
 	ResourceIds []*string `json:"ResourceIds,omitnil,omitempty" name:"ResourceIds"`
 
-	// Cluster ID list. this field is no longer maintained. please use the dealNames field and the DescribeResourcesByDealName query API to get the cluster ID.
+	// <p>Cluster ID list (This field is no longer maintained. Please use the dealNames field and the query API DescribeResourcesByDealName to get the cluster ID)</p>
 	ClusterIds []*string `json:"ClusterIds,omitnil,omitempty" name:"ClusterIds"`
 
-	// Big order ID
+	// <p>Large Order ID</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	BigDealIds []*string `json:"BigDealIds,omitnil,omitempty" name:"BigDealIds"`
 
@@ -10588,33 +10547,31 @@ type InstanceCLSDeliveryInfo struct {
 }
 
 type InstanceInitInfo struct {
-	// Instance CPU
+	// <p>Instance cpu</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Instance memory
+	// <p>Instance memory</p>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance type. Valid values:`rw`, `ro`.
+	// <p>Instance type rw/ro</p>
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// Number of the instances. Value range: 1-15.
+	// <p>Number of instances, range [1,15]</p>
 	InstanceCount *int64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
 
-	// Minimum number of serverless instances. Value range: 1-15.
+	// <p>Minimum count of Serverless instance, range [1,15]</p>
 	MinRoCount *int64 `json:"MinRoCount,omitnil,omitempty" name:"MinRoCount"`
 
-	// Maximum number of serverless instances. Value range: 1-15.
+	// <p>Maximum count of Serverless instances, range [1,15]</p>
 	MaxRoCount *int64 `json:"MaxRoCount,omitnil,omitempty" name:"MaxRoCount"`
 
-	// Minimum specifications for serverless instance
+	// <p>Minimum specification of Serverless instance</p>
 	MinRoCpu *float64 `json:"MinRoCpu,omitnil,omitempty" name:"MinRoCpu"`
 
-	// Maximum specifications for serverless instance
+	// <p>Maximum specification of Serverless instance</p>
 	MaxRoCpu *float64 `json:"MaxRoCpu,omitnil,omitempty" name:"MaxRoCpu"`
 
-	// Instance machine type.
-	// 1. common: general.
-	// 2. exclusive: exclusive.
+	// <p>Instance Machine Type</p><ol><li>common, universal type.</li><li>exclusive, dedicated.</li></ol>
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 }
 
@@ -14529,28 +14486,30 @@ type PolicyRule struct {
 }
 
 type ProxyConfig struct {
-	// Number of database proxy group nodes. this parameter is no longer recommended. recommend using ProxyZones.
+	// <p>Number of database proxy group nodes. This parameter is no longer recommended. Recommend using ProxyZones.</p>
+	//
+	// Deprecated: ProxyCount is deprecated.
 	ProxyCount *int64 `json:"ProxyCount,omitnil,omitempty" name:"ProxyCount"`
 
-	// Number of CPU cores
+	// <p>cpu cores</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Memory.
+	// <p>Memory</p>
 	Mem *int64 `json:"Mem,omitnil,omitempty" name:"Mem"`
 
-	// Connection pool type: SessionConnectionPool (session-level connection pool).
+	// <p>Connection pool type: SessionConnectionPool (session-level connection pool)</p>
 	ConnectionPoolType *string `json:"ConnectionPoolType,omitnil,omitempty" name:"ConnectionPoolType"`
 
-	// Whether to enable the connection pool. valid values: yes (enable), no (not enabled).
+	// <p>Whether the connection pool is enabled, yes-enable, no-disable</p>
 	OpenConnectionPool *string `json:"OpenConnectionPool,omitnil,omitempty" name:"OpenConnectionPool"`
 
-	// Connection pool threshold. measurement unit (seconds).
+	// <p>Connection pool threshold: Measurement unit (seconds)</p>
 	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitnil,omitempty" name:"ConnectionPoolTimeOut"`
 
-	// Description.
+	// <p>description</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Database node information (this parameter is used in combination with ProxyCount, either one must be manually input).
+	// <p>Database node information (this parameter is used in combination with ProxyCount and either one must be input)</p>
 	ProxyZones []*ProxyZone `json:"ProxyZones,omitnil,omitempty" name:"ProxyZones"`
 }
 

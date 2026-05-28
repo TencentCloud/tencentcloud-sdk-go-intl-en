@@ -20,6 +20,28 @@ import (
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
+type AnalysisInstanceInfo struct {
+	// <p>Number of replicas</p>
+	ReplicasNum *uint64 `json:"ReplicasNum,omitnil,omitempty" name:"ReplicasNum"`
+}
+
+type AnalysisRelationInfo struct {
+	// <p>Source instance Id</p>
+	PrimaryInstanceId *string `json:"PrimaryInstanceId,omitnil,omitempty" name:"PrimaryInstanceId"`
+
+	// <p>Analysis engine instance Id</p>
+	AnalysisInstanceId *string `json:"AnalysisInstanceId,omitnil,omitempty" name:"AnalysisInstanceId"`
+
+	// <p>Analysis engine relationship status</p><p>Enumeration values:</p><ul><li>creating: Creating</li><li>running: Running</li><li>destroyed: Terminated</li></ul>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Creation time.</p>
+	CreateAt *string `json:"CreateAt,omitnil,omitempty" name:"CreateAt"`
+
+	// <p>Update time.</p>
+	UpdateAt *string `json:"UpdateAt,omitnil,omitempty" name:"UpdateAt"`
+}
+
 type ArchiveLogInterval struct {
 	// End time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -36,6 +58,86 @@ type ArchiveLogInterval struct {
 	// Start time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+}
+
+type ArchiveLogModel struct {
+	// Archivelog ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ArchiveLogId *int64 `json:"ArchiveLogId,omitnil,omitempty" name:"ArchiveLogId"`
+
+	// Backup duration
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupDuration *int64 `json:"BackupDuration,omitnil,omitempty" name:"BackupDuration"`
+
+	// Backup status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupStatus *string `json:"BackupStatus,omitnil,omitempty" name:"BackupStatus"`
+
+	// Backup end time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Error message
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorMessage *string `json:"ErrorMessage,omitnil,omitempty" name:"ErrorMessage"`
+
+	// Expiration time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExpiredTime *string `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
+
+	// Backup file name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+
+	// Backup set file size in Byte
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FileSize *int64 `json:"FileSize,omitnil,omitempty" name:"FileSize"`
+
+	// Instance ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Backup start time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+}
+
+type AutoScalingConfig struct {
+	// <p>Minimum value of ccu</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RangeMin *float64 `json:"RangeMin,omitnil,omitempty" name:"RangeMin"`
+
+	// <p>Maximum value of ccu</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RangeMax *float64 `json:"RangeMax,omitnil,omitempty" name:"RangeMax"`
+}
+
+type BackupMethodStatisticsModel struct {
+	// <p>Auto-backup size in Byte</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AutoBackupSize *int64 `json:"AutoBackupSize,omitnil,omitempty" name:"AutoBackupSize"`
+
+	// <p>Average size of total backup per day in Byte</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AverageSizePerDay *int64 `json:"AverageSizePerDay,omitnil,omitempty" name:"AverageSizePerDay"`
+
+	// <p>Manual backup size, unit Byte</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ManualBackupSize *int64 `json:"ManualBackupSize,omitnil,omitempty" name:"ManualBackupSize"`
+
+	// <p>Total backup size in Byte</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalSize *int64 `json:"TotalSize,omitnil,omitempty" name:"TotalSize"`
+}
+
+type BackupMethodStatisticsOutPut struct {
+	// <p>Auto-backup size in Byte</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AutoBackupSize []*int64 `json:"AutoBackupSize,omitnil,omitempty" name:"AutoBackupSize"`
+
+	// <p>Manual backup size, unit Byte</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ManualBackupSize []*int64 `json:"ManualBackupSize,omitnil,omitempty" name:"ManualBackupSize"`
 }
 
 type BackupPolicyModelInput struct {
@@ -68,6 +170,199 @@ type BackupPolicyModelInput struct {
 
 	// <p>Storage type: COS, SNAPSHOT</p>valid values: <ul><li> COS: COS storage</li><li> SNAPSHOT: cloud disk SNAPSHOT</li></ul>
 	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+}
+
+type BackupPolicyModelOutPut struct {
+	// <p>Backup end time</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupEndTime *string `json:"BackupEndTime,omitnil,omitempty" name:"BackupEndTime"`
+
+	// <p>Backup method</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupMethod *string `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
+
+	// <p>Backup start time</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupStartTime *string `json:"BackupStartTime,omitnil,omitempty" name:"BackupStartTime"`
+
+	// <p>Engine type</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DBType *string `json:"DBType,omitnil,omitempty" name:"DBType"`
+
+	// <p>Engine version</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DBVersion *string `json:"DBVersion,omitnil,omitempty" name:"DBVersion"`
+
+	// <p>Whether full backup is enabled</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnableFull *int64 `json:"EnableFull,omitnil,omitempty" name:"EnableFull"`
+
+	// <p>Whether to enable log backup</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnableLog *int64 `json:"EnableLog,omitnil,omitempty" name:"EnableLog"`
+
+	// <p>Expected next backup time</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExpectedNextBackupPeriod *string `json:"ExpectedNextBackupPeriod,omitnil,omitempty" name:"ExpectedNextBackupPeriod"`
+
+	// <p>Full backup retention time</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FullRetentionPeriod *int64 `json:"FullRetentionPeriod,omitnil,omitempty" name:"FullRetentionPeriod"`
+
+	// <p>Policy ID</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// <p>Instance ID.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Log retention days</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogRetentionPeriod *int64 `json:"LogRetentionPeriod,omitnil,omitempty" name:"LogRetentionPeriod"`
+
+	// <p>Days of the week to perform backup</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PeriodTime *string `json:"PeriodTime,omitnil,omitempty" name:"PeriodTime"`
+
+	// <p>Region</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// <p>Backup cycle type 0:Weekly</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PeriodType *int64 `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
+}
+
+type BackupSetModel struct {
+	// Backup set duration, unit sec
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupDuration *int64 `json:"BackupDuration,omitnil,omitempty" name:"BackupDuration"`
+
+	// Backup method
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupMethod *string `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
+
+	// Backup note name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupName *string `json:"BackupName,omitnil,omitempty" name:"BackupName"`
+
+	// Backup set progress percentage
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupProgress *float64 `json:"BackupProgress,omitnil,omitempty" name:"BackupProgress"`
+
+	// Backup set ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupSetId *int64 `json:"BackupSetId,omitnil,omitempty" name:"BackupSetId"`
+
+	// Backup status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupStatus *string `json:"BackupStatus,omitnil,omitempty" name:"BackupStatus"`
+
+	// Backup set type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupType *string `json:"BackupType,omitnil,omitempty" name:"BackupType"`
+
+	// Instance version number
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DBVersion *string `json:"DBVersion,omitnil,omitempty" name:"DBVersion"`
+
+	// Backup end time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Transaction commit end time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EndTrxTime *string `json:"EndTrxTime,omitnil,omitempty" name:"EndTrxTime"`
+
+	// Error message
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorMessage *string `json:"ErrorMessage,omitnil,omitempty" name:"ErrorMessage"`
+
+	// Backup expiration time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExpiredTime *string `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
+
+	// Backup file name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+
+	// Backup set file size in Byte
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FileSize *int64 `json:"FileSize,omitnil,omitempty" name:"FileSize"`
+
+	// Instance ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Backup trigger. 0: autobackup; 1: manual.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ManualBackup *int64 `json:"ManualBackup,omitnil,omitempty" name:"ManualBackup"`
+
+	// Backup start time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+}
+
+type BackupSetsReqFilter struct {
+	// <p>Backup method, multiple values separated by commas</p><p>Enumeration value:</p><ul><li>physical: Physical backup</li><li>snapshot: Snapshot backup</li></ul>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupMethod *string `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
+
+	// <p>Backup status, multiple values separated by commas. Description of meaning: pending scheduling pending, running running, success success, failed failed</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupStatus *string `json:"BackupStatus,omitnil,omitempty" name:"BackupStatus"`
+
+	// <p>Backup type, multiple values separated by commas. Description of meaning: full backup full</p><p>Enumeration value:</p><ul><li>full: Full backup</li></ul>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupType *string `json:"BackupType,omitnil,omitempty" name:"BackupType"`
+
+	// <p>Backup trigger mode</p><p>Enumeration value:</p><ul><li>0: Auto-backup</li><li>1: Manual backup</li></ul>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ManualBackup *string `json:"ManualBackup,omitnil,omitempty" name:"ManualBackup"`
+}
+
+type BackupStatisticsModel struct {
+	// <p>Average size of total backup per day in Byte</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AverageSizePerDay *int64 `json:"AverageSizePerDay,omitnil,omitempty" name:"AverageSizePerDay"`
+
+	// <p>Backup size of data, in Byte</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DataBackupSize *int64 `json:"DataBackupSize,omitnil,omitempty" name:"DataBackupSize"`
+
+	// <p>Log backup size in Byte</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogBackupSize *int64 `json:"LogBackupSize,omitnil,omitempty" name:"LogBackupSize"`
+
+	// <p>Total backup count</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>Total backup size in Byte</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalSize *int64 `json:"TotalSize,omitnil,omitempty" name:"TotalSize"`
+}
+
+type BackupTypeStatisticsModel struct {
+	// <p>Backup size of data, in Byte</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DataBackupSize []*int64 `json:"DataBackupSize,omitnil,omitempty" name:"DataBackupSize"`
+
+	// <p>Log backup size in Byte</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogBackupSize []*int64 `json:"LogBackupSize,omitnil,omitempty" name:"LogBackupSize"`
+}
+
+type BinlogInfo struct {
+	// Unique ID of the log service
+	Sid *string `json:"Sid,omitnil,omitempty" name:"Sid"`
+
+	// Log service type
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Unique ID of the instance
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 // Predefined struct for user
@@ -197,8 +492,466 @@ type ConstraintRange struct {
 }
 
 // Predefined struct for user
+type CreateCloneInstanceRequestParams struct {
+	// <p>Creating an Instance Region</p>
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// <p>Character type vpcid</p>
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// <p>Character type subnetid</p>
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// <p>Purchase specification</p>
+	SpecCode *string `json:"SpecCode,omitnil,omitempty" name:"SpecCode"`
+
+	// <p>Node disk capacity (unit: GB)</p>
+	Disk *int64 `json:"Disk,omitnil,omitempty" name:"Disk"`
+
+	// <p>Number of storage nodes</p>
+	StorageNodeNum *int64 `json:"StorageNodeNum,omitnil,omitempty" name:"StorageNodeNum"`
+
+	// <p>Source instance id</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Instance name. The required length is 1-60. It can contain Chinese characters, English case, digits, hyphens (-), and underscores (_).</p>
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// <p>Tag key-value pair array</p>
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
+
+	// <p>Backup and rollback name</p>
+	BackupName *string `json:"BackupName,omitnil,omitempty" name:"BackupName"`
+
+	// <p>CPU cores of the storage node</p>
+	StorageNodeCpu *int64 `json:"StorageNodeCpu,omitnil,omitempty" name:"StorageNodeCpu"`
+
+	// <p>Storage node memory size</p>
+	StorageNodeMem *int64 `json:"StorageNodeMem,omitnil,omitempty" name:"StorageNodeMem"`
+
+	// <p>Create version</p>
+	CreateVersion *string `json:"CreateVersion,omitnil,omitempty" name:"CreateVersion"`
+
+	// <p>Create port number</p>
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
+
+	// <p>Recovery time point</p>
+	RecoverTime *string `json:"RecoverTime,omitnil,omitempty" name:"RecoverTime"`
+
+	// <p>Instance Architecture Type, separate: decoupled architecture; hybrid: peer-to-peer architecture</p>
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// <p>Disk Type, CLOUD_HSSD enhanced SSD, CLOUD_TCS local SSD disk</p>
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+
+	// <p>Multi-AZ list, Zones[0] refers to the primary AZ</p>
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
+
+	// <p>Number of replicas</p>
+	FullReplications *int64 `json:"FullReplications,omitnil,omitempty" name:"FullReplications"`
+
+	// <p>Instance mode, normal: standard type; enhanced: enhanced</p>
+	InstanceMode *string `json:"InstanceMode,omitnil,omitempty" name:"InstanceMode"`
+}
+
+type CreateCloneInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Creating an Instance Region</p>
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// <p>Character type vpcid</p>
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// <p>Character type subnetid</p>
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// <p>Purchase specification</p>
+	SpecCode *string `json:"SpecCode,omitnil,omitempty" name:"SpecCode"`
+
+	// <p>Node disk capacity (unit: GB)</p>
+	Disk *int64 `json:"Disk,omitnil,omitempty" name:"Disk"`
+
+	// <p>Number of storage nodes</p>
+	StorageNodeNum *int64 `json:"StorageNodeNum,omitnil,omitempty" name:"StorageNodeNum"`
+
+	// <p>Source instance id</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Instance name. The required length is 1-60. It can contain Chinese characters, English case, digits, hyphens (-), and underscores (_).</p>
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// <p>Tag key-value pair array</p>
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
+
+	// <p>Backup and rollback name</p>
+	BackupName *string `json:"BackupName,omitnil,omitempty" name:"BackupName"`
+
+	// <p>CPU cores of the storage node</p>
+	StorageNodeCpu *int64 `json:"StorageNodeCpu,omitnil,omitempty" name:"StorageNodeCpu"`
+
+	// <p>Storage node memory size</p>
+	StorageNodeMem *int64 `json:"StorageNodeMem,omitnil,omitempty" name:"StorageNodeMem"`
+
+	// <p>Create version</p>
+	CreateVersion *string `json:"CreateVersion,omitnil,omitempty" name:"CreateVersion"`
+
+	// <p>Create port number</p>
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
+
+	// <p>Recovery time point</p>
+	RecoverTime *string `json:"RecoverTime,omitnil,omitempty" name:"RecoverTime"`
+
+	// <p>Instance Architecture Type, separate: decoupled architecture; hybrid: peer-to-peer architecture</p>
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// <p>Disk Type, CLOUD_HSSD enhanced SSD, CLOUD_TCS local SSD disk</p>
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+
+	// <p>Multi-AZ list, Zones[0] refers to the primary AZ</p>
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
+
+	// <p>Number of replicas</p>
+	FullReplications *int64 `json:"FullReplications,omitnil,omitempty" name:"FullReplications"`
+
+	// <p>Instance mode, normal: standard type; enhanced: enhanced</p>
+	InstanceMode *string `json:"InstanceMode,omitnil,omitempty" name:"InstanceMode"`
+}
+
+func (r *CreateCloneInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloneInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Zone")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "SpecCode")
+	delete(f, "Disk")
+	delete(f, "StorageNodeNum")
+	delete(f, "InstanceId")
+	delete(f, "InstanceName")
+	delete(f, "ResourceTags")
+	delete(f, "BackupName")
+	delete(f, "StorageNodeCpu")
+	delete(f, "StorageNodeMem")
+	delete(f, "CreateVersion")
+	delete(f, "Vport")
+	delete(f, "RecoverTime")
+	delete(f, "InstanceType")
+	delete(f, "StorageType")
+	delete(f, "Zones")
+	delete(f, "FullReplications")
+	delete(f, "InstanceMode")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloneInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloneInstanceResponseParams struct {
+	// <p>Clone instance ID</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Task ID.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateCloneInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCloneInstanceResponseParams `json:"Response"`
+}
+
+func (r *CreateCloneInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloneInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDBInstancesRequestParams struct {
+	// <p>Creating an Instance Region</p>
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// <p>Character type vpcid</p>
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// <p>Character type subnetid</p>
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// <p>Purchase specification</p>
+	SpecCode *string `json:"SpecCode,omitnil,omitempty" name:"SpecCode"`
+
+	// <p>Node disk capacity (unit: GB)</p>
+	Disk *int64 `json:"Disk,omitnil,omitempty" name:"Disk"`
+
+	// <p>Number of storage nodes</p>
+	StorageNodeNum *int64 `json:"StorageNodeNum,omitnil,omitempty" name:"StorageNodeNum"`
+
+	// <p>Number of node replicas for storage, up to 5, must be an odd number</p>
+	Replications *int64 `json:"Replications,omitnil,omitempty" name:"Replications"`
+
+	// <p>Instance count. Maximum is 10.</p>
+	InstanceCount *int64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
+
+	// <p>Number of replicas</p>
+	FullReplications *int64 `json:"FullReplications,omitnil,omitempty" name:"FullReplications"`
+
+	// <p>Create an instance version, using the current latest version by default</p>
+	CreateVersion *string `json:"CreateVersion,omitnil,omitempty" name:"CreateVersion"`
+
+	// <p>Instance name. The required length is 1-60. It can contain Chinese characters, English case, digits, hyphens (-), and underscores (_).</p>
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// <p>Tag key-value pair array</p>
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
+
+	// <p>Initialize instance parameters. For example:<br>character_set_server (character set, defaults to utf8),<br>lower_case_table_names (table name case sensitivity, 0 - sensitive; 1 - insensitive, default is 0)</p>
+	InitParams []*InstanceParam `json:"InitParams,omitnil,omitempty" name:"InitParams"`
+
+	// <p>Time unit, m: month</p>
+	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
+
+	// <p>Commodity duration size</p>
+	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
+
+	// <p>CPU cores of the storage node</p>
+	StorageNodeCpu *int64 `json:"StorageNodeCpu,omitnil,omitempty" name:"StorageNodeCpu"`
+
+	// <p>Storage node memory size</p>
+	StorageNodeMem *int64 `json:"StorageNodeMem,omitnil,omitempty" name:"StorageNodeMem"`
+
+	// <p>Payment mode. 0 means pay-as-you-go/postpaid, 1 means prepaid.</p>
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// <p>Number of control nodes</p>
+	MCNum *int64 `json:"MCNum,omitnil,omitempty" name:"MCNum"`
+
+	// <p>Custom port</p>
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
+
+	// <p>Multi-AZ availability zone list</p>
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
+
+	// <p>Whether to use a coupon.</p>
+	AutoVoucher *bool `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
+
+	// <p>Coupon list</p>
+	VoucherIds []*string `json:"VoucherIds,omitnil,omitempty" name:"VoucherIds"`
+
+	// <p>Instance Architecture Type, separate: decoupled architecture; hybrid: peer-to-peer architecture</p>
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// <p>Disk Type, CLOUD_HSSD enhanced SSD, CLOUD_TCS local SSD disk</p>
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+
+	// <p>AZ mode. 1: Single AZ, 2: Multi-AZ non-primary AZ, 3: Multi-AZ primary AZ</p>
+	AZMode *int64 `json:"AZMode,omitnil,omitempty" name:"AZMode"`
+
+	// <p>Instance mode</p>
+	InstanceMode *string `json:"InstanceMode,omitnil,omitempty" name:"InstanceMode"`
+
+	// <p>Parameter template id</p>
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
+
+	// <p>Compatible mode, enum:MySQL,HBase</p>
+	SQLMode *string `json:"SQLMode,omitnil,omitempty" name:"SQLMode"`
+
+	// <p>ccu configuration of the svls instance</p>
+	AutoScaleConfig *AutoScalingConfig `json:"AutoScaleConfig,omitnil,omitempty" name:"AutoScaleConfig"`
+}
+
+type CreateDBInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Creating an Instance Region</p>
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// <p>Character type vpcid</p>
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// <p>Character type subnetid</p>
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// <p>Purchase specification</p>
+	SpecCode *string `json:"SpecCode,omitnil,omitempty" name:"SpecCode"`
+
+	// <p>Node disk capacity (unit: GB)</p>
+	Disk *int64 `json:"Disk,omitnil,omitempty" name:"Disk"`
+
+	// <p>Number of storage nodes</p>
+	StorageNodeNum *int64 `json:"StorageNodeNum,omitnil,omitempty" name:"StorageNodeNum"`
+
+	// <p>Number of node replicas for storage, up to 5, must be an odd number</p>
+	Replications *int64 `json:"Replications,omitnil,omitempty" name:"Replications"`
+
+	// <p>Instance count. Maximum is 10.</p>
+	InstanceCount *int64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
+
+	// <p>Number of replicas</p>
+	FullReplications *int64 `json:"FullReplications,omitnil,omitempty" name:"FullReplications"`
+
+	// <p>Create an instance version, using the current latest version by default</p>
+	CreateVersion *string `json:"CreateVersion,omitnil,omitempty" name:"CreateVersion"`
+
+	// <p>Instance name. The required length is 1-60. It can contain Chinese characters, English case, digits, hyphens (-), and underscores (_).</p>
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// <p>Tag key-value pair array</p>
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
+
+	// <p>Initialize instance parameters. For example:<br>character_set_server (character set, defaults to utf8),<br>lower_case_table_names (table name case sensitivity, 0 - sensitive; 1 - insensitive, default is 0)</p>
+	InitParams []*InstanceParam `json:"InitParams,omitnil,omitempty" name:"InitParams"`
+
+	// <p>Time unit, m: month</p>
+	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
+
+	// <p>Commodity duration size</p>
+	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
+
+	// <p>CPU cores of the storage node</p>
+	StorageNodeCpu *int64 `json:"StorageNodeCpu,omitnil,omitempty" name:"StorageNodeCpu"`
+
+	// <p>Storage node memory size</p>
+	StorageNodeMem *int64 `json:"StorageNodeMem,omitnil,omitempty" name:"StorageNodeMem"`
+
+	// <p>Payment mode. 0 means pay-as-you-go/postpaid, 1 means prepaid.</p>
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// <p>Number of control nodes</p>
+	MCNum *int64 `json:"MCNum,omitnil,omitempty" name:"MCNum"`
+
+	// <p>Custom port</p>
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
+
+	// <p>Multi-AZ availability zone list</p>
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
+
+	// <p>Whether to use a coupon.</p>
+	AutoVoucher *bool `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
+
+	// <p>Coupon list</p>
+	VoucherIds []*string `json:"VoucherIds,omitnil,omitempty" name:"VoucherIds"`
+
+	// <p>Instance Architecture Type, separate: decoupled architecture; hybrid: peer-to-peer architecture</p>
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// <p>Disk Type, CLOUD_HSSD enhanced SSD, CLOUD_TCS local SSD disk</p>
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+
+	// <p>AZ mode. 1: Single AZ, 2: Multi-AZ non-primary AZ, 3: Multi-AZ primary AZ</p>
+	AZMode *int64 `json:"AZMode,omitnil,omitempty" name:"AZMode"`
+
+	// <p>Instance mode</p>
+	InstanceMode *string `json:"InstanceMode,omitnil,omitempty" name:"InstanceMode"`
+
+	// <p>Parameter template id</p>
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
+
+	// <p>Compatible mode, enum:MySQL,HBase</p>
+	SQLMode *string `json:"SQLMode,omitnil,omitempty" name:"SQLMode"`
+
+	// <p>ccu configuration of the svls instance</p>
+	AutoScaleConfig *AutoScalingConfig `json:"AutoScaleConfig,omitnil,omitempty" name:"AutoScaleConfig"`
+}
+
+func (r *CreateDBInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDBInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Zone")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "SpecCode")
+	delete(f, "Disk")
+	delete(f, "StorageNodeNum")
+	delete(f, "Replications")
+	delete(f, "InstanceCount")
+	delete(f, "FullReplications")
+	delete(f, "CreateVersion")
+	delete(f, "InstanceName")
+	delete(f, "ResourceTags")
+	delete(f, "InitParams")
+	delete(f, "TimeUnit")
+	delete(f, "TimeSpan")
+	delete(f, "StorageNodeCpu")
+	delete(f, "StorageNodeMem")
+	delete(f, "PayMode")
+	delete(f, "MCNum")
+	delete(f, "Vport")
+	delete(f, "Zones")
+	delete(f, "AutoVoucher")
+	delete(f, "VoucherIds")
+	delete(f, "InstanceType")
+	delete(f, "StorageType")
+	delete(f, "AZMode")
+	delete(f, "InstanceMode")
+	delete(f, "TemplateId")
+	delete(f, "SQLMode")
+	delete(f, "AutoScaleConfig")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDBInstancesResponseParams struct {
+	// <p>Instance ID.</p>
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
+
+	// <p>Task ID.</p>
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateDBInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateDBInstancesResponseParams `json:"Response"`
+}
+
+func (r *CreateDBInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDBInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateDBSBackupRequestParams struct {
-	// <p>Backup method: physical, snapshot. this value should be consistent with the backupMethod in the api response of DescribeDBSBackupPolicy.</p>enumeration value:<ul><li> physical: physical backup</li><li> snapshot: snapshot backup</li></ul>
+	// <p>Backup method: physical, snapshot. This value should be consistent with the backupMethod in the API response of DescribeDBSBackupPolicy.</p><p>Enumeration value:</p><ul><li>physical: Physical backup</li><li>snapshot: Snapshot backup</li></ul>
 	BackupMethod *string `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
 
 	// <P>Backup type: currently, only supports full.</p>
@@ -214,7 +967,7 @@ type CreateDBSBackupRequestParams struct {
 type CreateDBSBackupRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Backup method: physical, snapshot. this value should be consistent with the backupMethod in the api response of DescribeDBSBackupPolicy.</p>enumeration value:<ul><li> physical: physical backup</li><li> snapshot: snapshot backup</li></ul>
+	// <p>Backup method: physical, snapshot. This value should be consistent with the backupMethod in the API response of DescribeDBSBackupPolicy.</p><p>Enumeration value:</p><ul><li>physical: Physical backup</li><li>snapshot: Snapshot backup</li></ul>
 	BackupMethod *string `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
 
 	// <P>Backup type: currently, only supports full.</p>
@@ -285,9 +1038,56 @@ type DBParamValue struct {
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
+type DataBackupStatisticsModel struct {
+	// Auto-backup count
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AutoBackupCount *int64 `json:"AutoBackupCount,omitnil,omitempty" name:"AutoBackupCount"`
+
+	// Auto-backup size, in Byte
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AutoBackupSize *int64 `json:"AutoBackupSize,omitnil,omitempty" name:"AutoBackupSize"`
+
+	// Avg backup size per each, in Byte
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AverageSizePerBackup *int64 `json:"AverageSizePerBackup,omitnil,omitempty" name:"AverageSizePerBackup"`
+
+	// Avg daily backup size, Byte
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AverageSizePerDay *int64 `json:"AverageSizePerDay,omitnil,omitempty" name:"AverageSizePerDay"`
+
+	// Manual backup count
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ManualBackupCount *int64 `json:"ManualBackupCount,omitnil,omitempty" name:"ManualBackupCount"`
+
+	// Manual backup size, in Byte
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ManualBackupSize *int64 `json:"ManualBackupSize,omitnil,omitempty" name:"ManualBackupSize"`
+
+	// Number of data backups
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Data backup size, in Byte
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalSize *int64 `json:"TotalSize,omitnil,omitempty" name:"TotalSize"`
+}
+
+type Database struct {
+	// Database name.
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
+}
+
 type DatabaseFunction struct {
 	// Function name.
 	Func *string `json:"Func,omitnil,omitempty" name:"Func"`
+}
+
+type DatabasePrivileges struct {
+	// database name
+	Database *string `json:"Database,omitnil,omitempty" name:"Database"`
+
+	// Permission list
+	Privileges []*string `json:"Privileges,omitnil,omitempty" name:"Privileges"`
 }
 
 type DatabaseProcedure struct {
@@ -376,6 +1176,316 @@ func (r *DeleteDBSBackupSetsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDBInstanceDetailRequestParams struct {
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type DescribeDBInstanceDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeDBInstanceDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstanceDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstanceDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBInstanceDetailResponseParams struct {
+	// <p>Instance name</p>
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// <p>Region</p>
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// <p>Character type vpcid</p>
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// <p>Character type subnetid</p>
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// <p>Create an instance version</p>
+	CreateVersion *string `json:"CreateVersion,omitnil,omitempty" name:"CreateVersion"`
+
+	// <p>Subnet IP</p>
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// <p>Subnet port</p>
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
+
+	// <p>Instance status</p>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Node disk capacity (unit: GB)</p>
+	Disk *int64 `json:"Disk,omitnil,omitempty" name:"Disk"`
+
+	// <p>Number of storage nodes</p>
+	StorageNodeNum *int64 `json:"StorageNodeNum,omitnil,omitempty" name:"StorageNodeNum"`
+
+	// <p>Initialize instance parameters</p>
+	InitParams []*InstanceParam `json:"InitParams,omitnil,omitempty" name:"InitParams"`
+
+	// <p>Instance tag information.</p>
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
+
+	// <p>Creation time.</p>
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// <p>Update time.</p>
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// <p>Number of storage node replicas</p>
+	Replications *int64 `json:"Replications,omitnil,omitempty" name:"Replications"`
+
+	// <p>Number of replicas</p>
+	FullReplications *int64 `json:"FullReplications,omitnil,omitempty" name:"FullReplications"`
+
+	// <p>Character set</p>
+	CharSet *string `json:"CharSet,omitnil,omitempty" name:"CharSet"`
+
+	// <p>Node information</p>
+	Node []*NodeInfo `json:"Node,omitnil,omitempty" name:"Node"`
+
+	// <p>Region of the instance</p>
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// <p>Instance specification</p>
+	SpecCode *string `json:"SpecCode,omitnil,omitempty" name:"SpecCode"`
+
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Status description in Chinese of the instance</p>
+	StatusDesc *string `json:"StatusDesc,omitnil,omitempty" name:"StatusDesc"`
+
+	// <p>CPU cores of the storage node</p>
+	StorageNodeCpu *int64 `json:"StorageNodeCpu,omitnil,omitempty" name:"StorageNodeCpu"`
+
+	// <p>Storage node memory size</p>
+	StorageNodeMem *int64 `json:"StorageNodeMem,omitnil,omitempty" name:"StorageNodeMem"`
+
+	// <p>Renewal flag</p>
+	RenewFlag *int64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
+
+	// <p>Payment mode, 0 pay-as-you-go, 1 prepaid</p>
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// <p>Expiration time</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExpireAt *string `json:"ExpireAt,omitnil,omitempty" name:"ExpireAt"`
+
+	// <p>Isolation time</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsolatedAt *string `json:"IsolatedAt,omitnil,omitempty" name:"IsolatedAt"`
+
+	// <p>Instance Architecture Type, separate: decoupled architecture; hybrid: peer-to-peer architecture</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// <p>Disk Type, CLOUD_HSSD enhanced SSD, CLOUD_TCS local SSD disk</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+
+	// <p>List of instance node availability zones. Zones[0] refers to the primary AZ</p>
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
+
+	// <p>Disk usage of the largest node</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiskUsage *int64 `json:"DiskUsage,omitnil,omitempty" name:"DiskUsage"`
+
+	// <p>Whether binlog is enabled</p>
+	BinlogStatus *int64 `json:"BinlogStatus,omitnil,omitempty" name:"BinlogStatus"`
+
+	// <p>az mode. 1: Single az 2: Multi-az non-primary az mode 3: Multi-az primary az mode</p>
+	AZMode *int64 `json:"AZMode,omitnil,omitempty" name:"AZMode"`
+
+	// <p>Disaster recovery flag. 1: No disaster recovery relationship; 2: Primary instance for disaster recovery; 3: Disaster Recovery Standby Instance</p>
+	StandbyFlag *int64 `json:"StandbyFlag,omitnil,omitempty" name:"StandbyFlag"`
+
+	// <p>cdc node type</p>
+	BinlogType *string `json:"BinlogType,omitnil,omitempty" name:"BinlogType"`
+
+	// <p>1 means supported, 0 means unsupported</p>
+	TimingModifyInstanceFlag *int64 `json:"TimingModifyInstanceFlag,omitnil,omitempty" name:"TimingModifyInstanceFlag"`
+
+	// <p>cpu cores of the columnar node</p>
+	ColumnarNodeCpu *int64 `json:"ColumnarNodeCpu,omitnil,omitempty" name:"ColumnarNodeCpu"`
+
+	// <p>Columnar node memory size</p>
+	ColumnarNodeMem *int64 `json:"ColumnarNodeMem,omitnil,omitempty" name:"ColumnarNodeMem"`
+
+	// <p>Number of columnar nodes</p>
+	ColumnarNodeNum *int64 `json:"ColumnarNodeNum,omitnil,omitempty" name:"ColumnarNodeNum"`
+
+	// <p>Columnar node disk size</p>
+	ColumnarNodeDisk *int64 `json:"ColumnarNodeDisk,omitnil,omitempty" name:"ColumnarNodeDisk"`
+
+	// <p>Columnar node disk type</p>
+	ColumnarNodeStorageType *string `json:"ColumnarNodeStorageType,omitnil,omitempty" name:"ColumnarNodeStorageType"`
+
+	// <p>Columnar node specification</p>
+	ColumnarNodeSpecCode *string `json:"ColumnarNodeSpecCode,omitnil,omitempty" name:"ColumnarNodeSpecCode"`
+
+	// <p>Columnar storage vip</p>
+	ColumnarVip *string `json:"ColumnarVip,omitnil,omitempty" name:"ColumnarVip"`
+
+	// <p>Columnar vport</p>
+	ColumnarVport *int64 `json:"ColumnarVport,omitnil,omitempty" name:"ColumnarVport"`
+
+	// <p>Whether the instance supports columnar storage</p>
+	IsSupportColumnar *bool `json:"IsSupportColumnar,omitnil,omitempty" name:"IsSupportColumnar"`
+
+	// <p>Instance type</p>
+	InstanceCategory *int64 `json:"InstanceCategory,omitnil,omitempty" name:"InstanceCategory"`
+
+	// <p>Compatible mode</p>
+	SQLMode *string `json:"SQLMode,omitnil,omitempty" name:"SQLMode"`
+
+	// <p>Whether modification of the number of replicas is supported</p>
+	IsSwitchFullReplicationsEnable *bool `json:"IsSwitchFullReplicationsEnable,omitnil,omitempty" name:"IsSwitchFullReplicationsEnable"`
+
+	// <p>Instance type</p>
+	InstanceMode *string `json:"InstanceMode,omitnil,omitempty" name:"InstanceMode"`
+
+	// <p>dumper vip</p>
+	DumperVip *string `json:"DumperVip,omitnil,omitempty" name:"DumperVip"`
+
+	// <p>dumper vport</p>
+	DumperVport *int64 `json:"DumperVport,omitnil,omitempty" name:"DumperVport"`
+
+	// <p>ccu adjustment range of the svls instance</p>
+	AutoScaleConfig *AutoScalingConfig `json:"AutoScaleConfig,omitnil,omitempty" name:"AutoScaleConfig"`
+
+	// <p>Parameter template id</p>
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
+
+	// <p>Parameter template name</p>
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
+
+	// <p>Instance analysis engine mode</p><p>Enumeration value:</p><ul><li>libra: LibraDB analysis engine instance</li></ul>
+	AnalysisMode *string `json:"AnalysisMode,omitnil,omitempty" name:"AnalysisMode"`
+
+	// <p>Analysis engine instance relationship</p>
+	AnalysisRelationInfos []*AnalysisRelationInfo `json:"AnalysisRelationInfos,omitnil,omitempty" name:"AnalysisRelationInfos"`
+
+	// <p>Analysis engine instance info</p><p>Cpu, Memory, and Disk reuse top-level fields</p>
+	AnalysisInstanceInfo *AnalysisInstanceInfo `json:"AnalysisInstanceInfo,omitnil,omitempty" name:"AnalysisInstanceInfo"`
+
+	// <p>Maintenance window configuration</p>
+	MaintenanceWindow *MaintenanceWindowInfo `json:"MaintenanceWindow,omitnil,omitempty" name:"MaintenanceWindow"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDBInstanceDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBInstanceDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBInstanceDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstanceDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBInstancesRequestParams struct {
+	// Filter parameters.
+	Filters []*InstanceFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Maximum return count, defaults to 20, maximum 100
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset, which is an integer multiple of Limit.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+type DescribeDBInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Filter parameters.
+	Filters []*InstanceFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Maximum return count, defaults to 20, maximum 100
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset, which is an integer multiple of Limit.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+func (r *DescribeDBInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBInstancesResponseParams struct {
+	// Return the instance list information
+	Instances []*InstanceInfo `json:"Instances,omitnil,omitempty" name:"Instances"`
+
+	// Total number of conditions met
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDBInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBInstancesResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDBParametersRequestParams struct {
 	// Instance ID, for example: tdsql3-ow728lmc.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -436,8 +1546,125 @@ func (r *DescribeDBParametersResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDBSArchiveLogsRequestParams struct {
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Logging ID</p>
+	ArchiveLogId *int64 `json:"ArchiveLogId,omitnil,omitempty" name:"ArchiveLogId"`
+
+	// <p>End time.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Backup status: pending, running, success, failed</p>
+	FilterStatus *string `json:"FilterStatus,omitnil,omitempty" name:"FilterStatus"`
+
+	// <p>Limit on number</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Offset.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Sorting field, enumerate: StartTime, EndTime, ExpiredTime, FileSize, BackupDuration</p>
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// <p>Sorting method: ASC: sequential, DESC: reverse</p>
+	OrderType *string `json:"OrderType,omitnil,omitempty" name:"OrderType"`
+
+	// <p>Start time.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+}
+
+type DescribeDBSArchiveLogsRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Logging ID</p>
+	ArchiveLogId *int64 `json:"ArchiveLogId,omitnil,omitempty" name:"ArchiveLogId"`
+
+	// <p>End time.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Backup status: pending, running, success, failed</p>
+	FilterStatus *string `json:"FilterStatus,omitnil,omitempty" name:"FilterStatus"`
+
+	// <p>Limit on number</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Offset.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Sorting field, enumerate: StartTime, EndTime, ExpiredTime, FileSize, BackupDuration</p>
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// <p>Sorting method: ASC: sequential, DESC: reverse</p>
+	OrderType *string `json:"OrderType,omitnil,omitempty" name:"OrderType"`
+
+	// <p>Start time.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+}
+
+func (r *DescribeDBSArchiveLogsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBSArchiveLogsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "ArchiveLogId")
+	delete(f, "EndTime")
+	delete(f, "FilterStatus")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "OrderBy")
+	delete(f, "OrderType")
+	delete(f, "StartTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBSArchiveLogsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBSArchiveLogsResponseParams struct {
+	// <p>Archivelog list</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Items []*ArchiveLogModel `json:"Items,omitnil,omitempty" name:"Items"`
+
+	// <p>Total.</p>
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDBSArchiveLogsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBSArchiveLogsResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBSArchiveLogsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBSArchiveLogsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDBSAvailableRecoveryTimeRequestParams struct {
-	// <p>db instance ID.</p>
+	// <p>Instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// <p>Backup set ID. the value comes from the DescribeDBSBackupSets api response.</p>
@@ -447,7 +1674,7 @@ type DescribeDBSAvailableRecoveryTimeRequestParams struct {
 type DescribeDBSAvailableRecoveryTimeRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>db instance ID.</p>
+	// <p>Instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// <p>Backup set ID. the value comes from the DescribeDBSBackupSets api response.</p>
@@ -505,6 +1732,348 @@ func (r *DescribeDBSAvailableRecoveryTimeResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDBSAvailableRecoveryTimeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBSBackupPolicyRequestParams struct {
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type DescribeDBSBackupPolicyRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeDBSBackupPolicyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBSBackupPolicyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBSBackupPolicyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBSBackupPolicyResponseParams struct {
+	// <p>Backup policy list</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Items []*BackupPolicyModelOutPut `json:"Items,omitnil,omitempty" name:"Items"`
+
+	// <p>Total.</p>
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDBSBackupPolicyResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBSBackupPolicyResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBSBackupPolicyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBSBackupPolicyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBSBackupSetsRequestParams struct {
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Instance Backup set ID</p>
+	BackupSetId *int64 `json:"BackupSetId,omitnil,omitempty" name:"BackupSetId"`
+
+	// <p>End time.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Filtering Conditions</p>
+	FilterBy *BackupSetsReqFilter `json:"FilterBy,omitnil,omitempty" name:"FilterBy"`
+
+	// <p>Query count [0,200]</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Query offset [0,INF] this time.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>StartTime,EndTime,ExpiredTime,BackupSetId,BackupDuration</p>
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// <p>ASC,DESC</p>
+	OrderType *string `json:"OrderType,omitnil,omitempty" name:"OrderType"`
+
+	// <p>Start time.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+}
+
+type DescribeDBSBackupSetsRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Instance Backup set ID</p>
+	BackupSetId *int64 `json:"BackupSetId,omitnil,omitempty" name:"BackupSetId"`
+
+	// <p>End time.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Filtering Conditions</p>
+	FilterBy *BackupSetsReqFilter `json:"FilterBy,omitnil,omitempty" name:"FilterBy"`
+
+	// <p>Query count [0,200]</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Query offset [0,INF] this time.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>StartTime,EndTime,ExpiredTime,BackupSetId,BackupDuration</p>
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// <p>ASC,DESC</p>
+	OrderType *string `json:"OrderType,omitnil,omitempty" name:"OrderType"`
+
+	// <p>Start time.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+}
+
+func (r *DescribeDBSBackupSetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBSBackupSetsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "BackupSetId")
+	delete(f, "EndTime")
+	delete(f, "FilterBy")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "OrderBy")
+	delete(f, "OrderType")
+	delete(f, "StartTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBSBackupSetsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBSBackupSetsResponseParams struct {
+	// <p>Backup set list</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Items []*BackupSetModel `json:"Items,omitnil,omitempty" name:"Items"`
+
+	// <p>Total.</p>
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDBSBackupSetsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBSBackupSetsResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBSBackupSetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBSBackupSetsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBSBackupStatisticsDetailRequestParams struct {
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>End time.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Start time.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+}
+
+type DescribeDBSBackupStatisticsDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>End time.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Start time.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+}
+
+func (r *DescribeDBSBackupStatisticsDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBSBackupStatisticsDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "EndTime")
+	delete(f, "StartTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBSBackupStatisticsDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBSBackupStatisticsDetailResponseParams struct {
+	// <p>Statistics by backup method</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupMethodStatistics *BackupMethodStatisticsOutPut `json:"BackupMethodStatistics,omitnil,omitempty" name:"BackupMethodStatistics"`
+
+	// <p>Backup time</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupTime []*string `json:"BackupTime,omitnil,omitempty" name:"BackupTime"`
+
+	// <p>Data type statistics by backup</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupTypeStatistics *BackupTypeStatisticsModel `json:"BackupTypeStatistics,omitnil,omitempty" name:"BackupTypeStatistics"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDBSBackupStatisticsDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBSBackupStatisticsDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBSBackupStatisticsDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBSBackupStatisticsDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBSBackupStatisticsRequestParams struct {
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>End time.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Start time.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+}
+
+type DescribeDBSBackupStatisticsRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>End time.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Start time.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+}
+
+func (r *DescribeDBSBackupStatisticsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBSBackupStatisticsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "EndTime")
+	delete(f, "StartTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBSBackupStatisticsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBSBackupStatisticsResponseParams struct {
+	// <p>Backup method statistics</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupMethodStatistics *BackupMethodStatisticsModel `json:"BackupMethodStatistics,omitnil,omitempty" name:"BackupMethodStatistics"`
+
+	// <p>Backup set statistics</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupStatistics *BackupStatisticsModel `json:"BackupStatistics,omitnil,omitempty" name:"BackupStatistics"`
+
+	// <p>Backup statistics.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DataBackupStatistics *DataBackupStatisticsModel `json:"DataBackupStatistics,omitnil,omitempty" name:"DataBackupStatistics"`
+
+	// <p>Log backup statistics</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogBackupStatistics *LogBackupStatisticsModel `json:"LogBackupStatistics,omitnil,omitempty" name:"LogBackupStatistics"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDBSBackupStatisticsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBSBackupStatisticsResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBSBackupStatisticsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBSBackupStatisticsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -692,21 +2261,39 @@ func (r *DescribeDBSecurityGroupsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDatabaseObjectsRequestParams struct {
-	// Instance ID, for example: tdsql3-42f40429.
+	// <p>Instance ID, such as tdsql3-42f40429.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Database name, obtained via the DescribeDatabases api.
+	// <p>Database name, obtained via the DescribeDatabases API.</p>
 	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
+
+	// <p>Pagination index</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of items per page</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Table name matching expression</p>
+	TableRegexp *string `json:"TableRegexp,omitnil,omitempty" name:"TableRegexp"`
 }
 
 type DescribeDatabaseObjectsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID, for example: tdsql3-42f40429.
+	// <p>Instance ID, such as tdsql3-42f40429.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Database name, obtained via the DescribeDatabases api.
+	// <p>Database name, obtained via the DescribeDatabases API.</p>
 	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
+
+	// <p>Pagination index</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of items per page</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Table name matching expression</p>
+	TableRegexp *string `json:"TableRegexp,omitnil,omitempty" name:"TableRegexp"`
 }
 
 func (r *DescribeDatabaseObjectsRequest) ToJsonString() string {
@@ -723,6 +2310,9 @@ func (r *DescribeDatabaseObjectsRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceId")
 	delete(f, "DbName")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "TableRegexp")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDatabaseObjectsRequest has unknown keys!", "")
 	}
@@ -731,25 +2321,25 @@ func (r *DescribeDatabaseObjectsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDatabaseObjectsResponseParams struct {
-	// Passthrough input parameter.
+	// <p>Passthrough input parameter.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Database name.
+	// <p>Database name.</p>
 	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
 
-	// Table list.
+	// <p>Table list.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Tables []*DatabaseTable `json:"Tables,omitnil,omitempty" name:"Tables"`
 
-	// View list.
+	// <p>View list.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Views []*DatabaseView `json:"Views,omitnil,omitempty" name:"Views"`
 
-	// Stored procedure list.
+	// <p>Stored procedure list.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Procs []*DatabaseProcedure `json:"Procs,omitnil,omitempty" name:"Procs"`
 
-	// Function list.
+	// <p>Function list.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Funcs []*DatabaseFunction `json:"Funcs,omitnil,omitempty" name:"Funcs"`
 
@@ -770,6 +2360,90 @@ func (r *DescribeDatabaseObjectsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDatabaseObjectsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDatabasesRequestParams struct {
+	// <p>Instance ID, such as tdsql3-ow7t8lmc.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Pagination index</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of items per page</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Database name matching expression</p>
+	DatabaseRegexp *string `json:"DatabaseRegexp,omitnil,omitempty" name:"DatabaseRegexp"`
+}
+
+type DescribeDatabasesRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Instance ID, such as tdsql3-ow7t8lmc.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Pagination index</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of items per page</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Database name matching expression</p>
+	DatabaseRegexp *string `json:"DatabaseRegexp,omitnil,omitempty" name:"DatabaseRegexp"`
+}
+
+func (r *DescribeDatabasesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDatabasesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "DatabaseRegexp")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDatabasesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDatabasesResponseParams struct {
+	// <p>Passthrough instance ID</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>The database list on the instance.</p>
+	Databases []*Database `json:"Databases,omitnil,omitempty" name:"Databases"`
+
+	// <p>Total quantity.</p>
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDatabasesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDatabasesResponseParams `json:"Response"`
+}
+
+func (r *DescribeDatabasesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDatabasesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -821,6 +2495,373 @@ func (r *DescribeFlowResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeFlowResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSaleInfoRequestParams struct {
+	// <p>Region of the disaster recovery primary instance</p>
+	SrcRegion *string `json:"SrcRegion,omitnil,omitempty" name:"SrcRegion"`
+
+	// <p>Instance id</p><p>Input this parameter to return the sales information of the availability zone in the region where this instance is located.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Specify the sales information that supports a certain type instance.</p><p>Enumeration value:</p><ul><li>serverless: Returns all regions that support serverless instance type.</li></ul><p>Default value: None</p><p>Currently only support specifying serverless. Import other info or leave it blank to return all sales region information by default.</p>
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+}
+
+type DescribeSaleInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Region of the disaster recovery primary instance</p>
+	SrcRegion *string `json:"SrcRegion,omitnil,omitempty" name:"SrcRegion"`
+
+	// <p>Instance id</p><p>Input this parameter to return the sales information of the availability zone in the region where this instance is located.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Specify the sales information that supports a certain type instance.</p><p>Enumeration value:</p><ul><li>serverless: Returns all regions that support serverless instance type.</li></ul><p>Default value: None</p><p>Currently only support specifying serverless. Import other info or leave it blank to return all sales region information by default.</p>
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+}
+
+func (r *DescribeSaleInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSaleInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SrcRegion")
+	delete(f, "InstanceId")
+	delete(f, "InstanceType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSaleInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSaleInfoResponseParams struct {
+	// <p>Return marketable region information</p>
+	RegionList []*DescribeSaleRegionInfo `json:"RegionList,omitnil,omitempty" name:"RegionList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSaleInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSaleInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeSaleInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSaleInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSaleRegionInfo struct {
+	// <p>English string of Region</p>
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// <p>Purchasable Zone list</p>
+	ZoneList []*DescribeSaleZonesInfo `json:"ZoneList,omitnil,omitempty" name:"ZoneList"`
+
+	// <p>Region Chinese character string</p>
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
+
+	// <p>Whether to sell. 1: sell, 0: do not sell</p>
+	Enable *int64 `json:"Enable,omitnil,omitempty" name:"Enable"`
+
+	// <p>Optional quantity of multiple availability</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AvailableZoneNum *int64 `json:"AvailableZoneNum,omitnil,omitempty" name:"AvailableZoneNum"`
+
+	// <p>Whether to allow usage log replica</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsSupportedLogReplica *bool `json:"IsSupportedLogReplica,omitnil,omitempty" name:"IsSupportedLogReplica"`
+
+	// <p>Availability zone combination</p>
+	ZoneGroup []*DescribeSaleZonesGroup `json:"ZoneGroup,omitnil,omitempty" name:"ZoneGroup"`
+
+	// <p>Whether serverless is supported</p>
+	IsSupportServerless *bool `json:"IsSupportServerless,omitnil,omitempty" name:"IsSupportServerless"`
+}
+
+type DescribeSaleZonesGroup struct {
+	// <p>Number of availability zones</p>
+	ZoneNum *int64 `json:"ZoneNum,omitnil,omitempty" name:"ZoneNum"`
+
+	// <p>Availability zone combination</p>
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
+
+	// <p>Supported types</p>
+	SupportTypes []*string `json:"SupportTypes,omitnil,omitempty" name:"SupportTypes"`
+
+	// <p>Supported disk</p><p>Enumeration value:</p><ul><li>CLOUD_TCS: Local disk</li><li>CLOUD_HSSD: Enhanced cloud disk</li></ul>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AvailableDiskTypes []*string `json:"AvailableDiskTypes,omitnil,omitempty" name:"AvailableDiskTypes"`
+
+	// <p>Whether serverless is supported</p>
+	IsSupportServerless *bool `json:"IsSupportServerless,omitnil,omitempty" name:"IsSupportServerless"`
+}
+
+type DescribeSaleZonesInfo struct {
+	// <p>English string of Zone</p>
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// <p>Zone Chinese character string</p>
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
+
+	// <p>Whether to sell, 1: sell; 0: do not sell</p>
+	Enable *int64 `json:"Enable,omitnil,omitempty" name:"Enable"`
+
+	// <p>Whether the default primary AZ is used. 0 means no, 1 means yes.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsDefaultMaster *int64 `json:"IsDefaultMaster,omitnil,omitempty" name:"IsDefaultMaster"`
+
+	// <p>Selectable disk types in availability zones</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AvailableDiskTypes []*string `json:"AvailableDiskTypes,omitnil,omitempty" name:"AvailableDiskTypes"`
+
+	// <p>Whether it is an exclusive availability zone</p>
+	SupportTypes []*string `json:"SupportTypes,omitnil,omitempty" name:"SupportTypes"`
+
+	// <p>Whether serverless is supported</p>
+	IsSupportServerless *bool `json:"IsSupportServerless,omitnil,omitempty" name:"IsSupportServerless"`
+}
+
+// Predefined struct for user
+type DescribeSpecsRequestParams struct {
+	// <p>Number of replicas. Currently supported range: 1-3. Default is 3.</p>
+	FullReplications *int64 `json:"FullReplications,omitnil,omitempty" name:"FullReplications"`
+
+	// <p>Exclusive instance</p>
+	IsExclusiveInstance *int64 `json:"IsExclusiveInstance,omitnil,omitempty" name:"IsExclusiveInstance"`
+}
+
+type DescribeSpecsRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Number of replicas. Currently supported range: 1-3. Default is 3.</p>
+	FullReplications *int64 `json:"FullReplications,omitnil,omitempty" name:"FullReplications"`
+
+	// <p>Exclusive instance</p>
+	IsExclusiveInstance *int64 `json:"IsExclusiveInstance,omitnil,omitempty" name:"IsExclusiveInstance"`
+}
+
+func (r *DescribeSpecsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSpecsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FullReplications")
+	delete(f, "IsExclusiveInstance")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSpecsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSpecsResponseParams struct {
+	// <p>Purchasable specification list of peer nodes</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HybridNodeSpecs []*StorageNodeSpec `json:"HybridNodeSpecs,omitnil,omitempty" name:"HybridNodeSpecs"`
+
+	// <p>Purchasable specification list of svls nodes</p>
+	ServerlessCcuSpec []*ServerlessCcu `json:"ServerlessCcuSpec,omitnil,omitempty" name:"ServerlessCcuSpec"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSpecsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSpecsResponseParams `json:"Response"`
+}
+
+func (r *DescribeSpecsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSpecsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUserPrivilegesRequestParams struct {
+	// Instance ID, such as tdsql3-5baee8df.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Accessing host allowed for the user. Username+host uniquely determines an account.
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// Login username.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Database name. If it is \*, query global permission (\*.\*) and ignore the Type and Object parameter.
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
+
+	// The name of the specific Type, for example, when Type is table, it is exactly the table name. If both DbName and Type are function names, Object represents the specific object name and cannot be \* or empty.
+	Object *string `json:"Object,omitnil,omitempty" name:"Object"`
+
+	// Type, can be set to table, view, proc, func, and \*. When DbName is a specific database name and Type is \*, it queries the database permission (i.e., db.\*), ignoring the Object parameter.
+	ObjectType *string `json:"ObjectType,omitnil,omitempty" name:"ObjectType"`
+
+	// When Type=table, ColName as \* indicates the permission to query the table. If it is a specific field name, it indicates the permission to query the corresponding field.
+	ColName *string `json:"ColName,omitnil,omitempty" name:"ColName"`
+}
+
+type DescribeUserPrivilegesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID, such as tdsql3-5baee8df.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Accessing host allowed for the user. Username+host uniquely determines an account.
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// Login username.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Database name. If it is \*, query global permission (\*.\*) and ignore the Type and Object parameter.
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
+
+	// The name of the specific Type, for example, when Type is table, it is exactly the table name. If both DbName and Type are function names, Object represents the specific object name and cannot be \* or empty.
+	Object *string `json:"Object,omitnil,omitempty" name:"Object"`
+
+	// Type, can be set to table, view, proc, func, and \*. When DbName is a specific database name and Type is \*, it queries the database permission (i.e., db.\*), ignoring the Object parameter.
+	ObjectType *string `json:"ObjectType,omitnil,omitempty" name:"ObjectType"`
+
+	// When Type=table, ColName as \* indicates the permission to query the table. If it is a specific field name, it indicates the permission to query the corresponding field.
+	ColName *string `json:"ColName,omitnil,omitempty" name:"ColName"`
+}
+
+func (r *DescribeUserPrivilegesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserPrivilegesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Host")
+	delete(f, "UserName")
+	delete(f, "DbName")
+	delete(f, "Object")
+	delete(f, "ObjectType")
+	delete(f, "ColName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUserPrivilegesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUserPrivilegesResponseParams struct {
+	// Permission list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Privileges []*string `json:"Privileges,omitnil,omitempty" name:"Privileges"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeUserPrivilegesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeUserPrivilegesResponseParams `json:"Response"`
+}
+
+func (r *DescribeUserPrivilegesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserPrivilegesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUsersRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type DescribeUsersRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeUsersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUsersRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUsersRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUsersResponseParams struct {
+	// User list.
+	Users []*UserInfo `json:"Users,omitnil,omitempty" name:"Users"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeUsersResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeUsersResponseParams `json:"Response"`
+}
+
+func (r *DescribeUsersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUsersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -885,6 +2926,460 @@ func (r *DestroyInstancesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ExpandInstanceRequestParams struct {
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Expand storage nodes to how many nodes. If no change, pass the current number of nodes</p>
+	StorageNodeNum *int64 `json:"StorageNodeNum,omitnil,omitempty" name:"StorageNodeNum"`
+
+	// <p>Availability zone list</p>
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
+
+	// <p>az mode. 1: Single az 2: Multi-az non-primary az mode 3: Multi-az primary az mode</p>
+	AZMode *int64 `json:"AZMode,omitnil,omitempty" name:"AZMode"`
+
+	// <p>AZMode 3 means the primary AZ</p>
+	PrimaryAZ *string `json:"PrimaryAZ,omitnil,omitempty" name:"PrimaryAZ"`
+
+	// <p>Number of replicas, value ranges from 1 to 3</p>
+	FullReplications *int64 `json:"FullReplications,omitnil,omitempty" name:"FullReplications"`
+}
+
+type ExpandInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Expand storage nodes to how many nodes. If no change, pass the current number of nodes</p>
+	StorageNodeNum *int64 `json:"StorageNodeNum,omitnil,omitempty" name:"StorageNodeNum"`
+
+	// <p>Availability zone list</p>
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
+
+	// <p>az mode. 1: Single az 2: Multi-az non-primary az mode 3: Multi-az primary az mode</p>
+	AZMode *int64 `json:"AZMode,omitnil,omitempty" name:"AZMode"`
+
+	// <p>AZMode 3 means the primary AZ</p>
+	PrimaryAZ *string `json:"PrimaryAZ,omitnil,omitempty" name:"PrimaryAZ"`
+
+	// <p>Number of replicas, value ranges from 1 to 3</p>
+	FullReplications *int64 `json:"FullReplications,omitnil,omitempty" name:"FullReplications"`
+}
+
+func (r *ExpandInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ExpandInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "StorageNodeNum")
+	delete(f, "Zones")
+	delete(f, "AZMode")
+	delete(f, "PrimaryAZ")
+	delete(f, "FullReplications")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ExpandInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ExpandInstanceResponseParams struct {
+	// <p>Asynchronous task ID. You can call the Query Task API to get task status with this ID.</p>
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ExpandInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *ExpandInstanceResponseParams `json:"Response"`
+}
+
+func (r *ExpandInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ExpandInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type InstanceFilter struct {
+	// Filter key, support InstanceId, VpcId, SubnetId, Vip, Vport, Status, InstanceName, TagKey.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Filter value.
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+}
+
+type InstanceInfo struct {
+	// <p>Number of compute nodes</p>
+	//
+	// Deprecated: ComputeNodeNum is deprecated.
+	ComputeNodeNum *int64 `json:"ComputeNodeNum,omitnil,omitempty" name:"ComputeNodeNum"`
+
+	// <p>Region</p>
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// <p>Creating an Instance Version</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreateVersion *string `json:"CreateVersion,omitnil,omitempty" name:"CreateVersion"`
+
+	// <p>Initialize instance parameter</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InitParams []*InstanceParam `json:"InitParams,omitnil,omitempty" name:"InitParams"`
+
+	// <p>Instance status: creating, created, initializing, running, modifying, isolating, isolated, destroying, destroyed</p>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Instance id</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Number of storage nodes</p>
+	StorageNodeNum *int64 `json:"StorageNodeNum,omitnil,omitempty" name:"StorageNodeNum"`
+
+	// <p>Instance tag information</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
+
+	// <p>Instance name</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// <p>cpu cores of the computing node</p>
+	//
+	// Deprecated: Cpu is deprecated.
+	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
+
+	// <p>Character type vpcid</p>
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// <p>Computing node mem, in GB</p>
+	//
+	// Deprecated: Mem is deprecated.
+	Mem *int64 `json:"Mem,omitnil,omitempty" name:"Mem"`
+
+	// <p>Subnet IP</p>
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// <p>Character type subnetid</p>
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// <p>Subnet port</p>
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
+
+	// <p>Node disk capacity (unit: GB)</p>
+	Disk *int64 `json:"Disk,omitnil,omitempty" name:"Disk"`
+
+	// <p>Instance Creation Time</p>
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// <p>Region of the instance</p>
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// <p>Status description in Chinese of the instance</p>
+	StatusDesc *string `json:"StatusDesc,omitnil,omitempty" name:"StatusDesc"`
+
+	// <p>CPU cores of the control node</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: MCCpu is deprecated.
+	MCCpu *int64 `json:"MCCpu,omitnil,omitempty" name:"MCCpu"`
+
+	// <p>CPU size of the control node</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: MCMem is deprecated.
+	MCMem *int64 `json:"MCMem,omitnil,omitempty" name:"MCMem"`
+
+	// <p>CPU cores of the computing node</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: ComputerNodeCpu is deprecated.
+	ComputerNodeCpu *int64 `json:"ComputerNodeCpu,omitnil,omitempty" name:"ComputerNodeCpu"`
+
+	// <p>Compute node memory size</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: ComputerNodeMem is deprecated.
+	ComputerNodeMem *int64 `json:"ComputerNodeMem,omitnil,omitempty" name:"ComputerNodeMem"`
+
+	// <p>CPU cores of the storage node</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StorageNodeCpu *int64 `json:"StorageNodeCpu,omitnil,omitempty" name:"StorageNodeCpu"`
+
+	// <p>Storage node memory size</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StorageNodeMem *int64 `json:"StorageNodeMem,omitnil,omitempty" name:"StorageNodeMem"`
+
+	// <p>Number of control nodes</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: MCNum is deprecated.
+	MCNum *int64 `json:"MCNum,omitnil,omitempty" name:"MCNum"`
+
+	// <p>Renewal flag</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RenewFlag *int64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
+
+	// <p>Payment mode, 0 pay-as-you-go; 1 annual/monthly subscription</p>
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// <p>User tag, inner: internal user; external: external user</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AccountTag *string `json:"AccountTag,omitnil,omitempty" name:"AccountTag"`
+
+	// <p>Instance Architecture Type, separate: decoupled architecture; hyper: peer-to-peer architecture</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// <p>Disk Type, CLOUD_HSSD enhanced SSD, CLOUD_TCS local SSD disk</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+
+	// <p>&quot;0000-00-00 00:00:00&quot;</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DestroyedAt *string `json:"DestroyedAt,omitnil,omitempty" name:"DestroyedAt"`
+
+	// <p>&quot;0000-00-00 00:00:00&quot;</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExpireAt *string `json:"ExpireAt,omitnil,omitempty" name:"ExpireAt"`
+
+	// <p>&quot;0000-00-00 00:00:00&quot;</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsolatedAt *string `json:"IsolatedAt,omitnil,omitempty" name:"IsolatedAt"`
+
+	// <p>&quot;0000-00-00 00:00:00&quot;</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsolatedFrom *string `json:"IsolatedFrom,omitnil,omitempty" name:"IsolatedFrom"`
+
+	// <p>1</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Replications *int64 `json:"Replications,omitnil,omitempty" name:"Replications"`
+
+	// <p>Number of replicas</p>
+	FullReplications *int64 `json:"FullReplications,omitnil,omitempty" name:"FullReplications"`
+
+	// <p>Account information</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// <p>Account information</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubAccountUin *string `json:"SubAccountUin,omitnil,omitempty" name:"SubAccountUin"`
+
+	// <p>Account information</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// <p>AZ information</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
+
+	// <p>Instance node</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Nodes []*InstanceNode `json:"Nodes,omitnil,omitempty" name:"Nodes"`
+
+	// <p>Whether binlog is on</p>
+	BinlogStatus *int64 `json:"BinlogStatus,omitnil,omitempty" name:"BinlogStatus"`
+
+	// <p>Number of cdc node cores</p>
+	//
+	// Deprecated: CdcNodeCpu is deprecated.
+	CdcNodeCpu *int64 `json:"CdcNodeCpu,omitnil,omitempty" name:"CdcNodeCpu"`
+
+	// <p>cdc node memory size</p>
+	//
+	// Deprecated: CdcNodeMem is deprecated.
+	CdcNodeMem *int64 `json:"CdcNodeMem,omitnil,omitempty" name:"CdcNodeMem"`
+
+	// <p>Number of cdc nodes</p>
+	//
+	// Deprecated: CdcNodeNum is deprecated.
+	CdcNodeNum *int64 `json:"CdcNodeNum,omitnil,omitempty" name:"CdcNodeNum"`
+
+	// <p>az mode. 1: Single az, 2: Multi-az non-primary az mode, 3: Multi-az primary az mode</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AZMode *int64 `json:"AZMode,omitnil,omitempty" name:"AZMode"`
+
+	// <p>Disaster recovery flag. 1: No disaster recovery relationship; 2: Primary instance for disaster recovery; 3: Disaster Recovery Standby Instance</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StandbyFlag *int64 `json:"StandbyFlag,omitnil,omitempty" name:"StandbyFlag"`
+
+	// <p>Number of connected standby instances (Valid only when StandbyFlag == 2)</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StandbySecondaryNum *int64 `json:"StandbySecondaryNum,omitnil,omitempty" name:"StandbySecondaryNum"`
+
+	// <p>cpu cores of the columnar node</p>
+	ColumnarNodeCpu *int64 `json:"ColumnarNodeCpu,omitnil,omitempty" name:"ColumnarNodeCpu"`
+
+	// <p>Columnar node memory size</p>
+	ColumnarNodeMem *int64 `json:"ColumnarNodeMem,omitnil,omitempty" name:"ColumnarNodeMem"`
+
+	// <p>Number of columnar nodes</p>
+	ColumnarNodeNum *int64 `json:"ColumnarNodeNum,omitnil,omitempty" name:"ColumnarNodeNum"`
+
+	// <p>Columnar node disk capacity (unit: GB)</p>
+	ColumnarNodeDisk *int64 `json:"ColumnarNodeDisk,omitnil,omitempty" name:"ColumnarNodeDisk"`
+
+	// <p>Columnar node disk type</p>
+	ColumnarNodeStorageType *string `json:"ColumnarNodeStorageType,omitnil,omitempty" name:"ColumnarNodeStorageType"`
+
+	// <p>Exclusive flags, 1: Primary instance (dedicated), 2: Primary instance, 3: Disaster recovery instance, 4: Disaster recovery instance (dedicated)</p>
+	InstanceCategory *int64 `json:"InstanceCategory,omitnil,omitempty" name:"InstanceCategory"`
+
+	// <p>dbdc-xxxxx</p>
+	ExclusiveClusterId *string `json:"ExclusiveClusterId,omitnil,omitempty" name:"ExclusiveClusterId"`
+
+	// <p>Compatible mode</p>
+	SQLMode *string `json:"SQLMode,omitnil,omitempty" name:"SQLMode"`
+
+	// <p>Instance mode</p>
+	InstanceMode *string `json:"InstanceMode,omitnil,omitempty" name:"InstanceMode"`
+
+	// <p>Instance delivery platform</p>
+	//
+	// Deprecated: ClusterId is deprecated.
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// <p>Auto-scaling configuration</p>
+	AutoScaleConfig *AutoScalingConfig `json:"AutoScaleConfig,omitnil,omitempty" name:"AutoScaleConfig"`
+
+	// <p>Analytical engine mode</p><p>Enumeration value:</p><ul><li>libra: LibraDB analytical engine mode</li></ul>
+	AnalysisMode *string `json:"AnalysisMode,omitnil,omitempty" name:"AnalysisMode"`
+
+	// <p>Analysis engine relationship information</p>
+	AnalysisRelationInfos []*AnalysisRelationInfo `json:"AnalysisRelationInfos,omitnil,omitempty" name:"AnalysisRelationInfos"`
+}
+
+type InstanceNode struct {
+	// Primary key
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Instance ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Node Id
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
+
+	// Instance Ip
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
+
+	// Eni IP of the instance
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EniIp *string `json:"EniIp,omitnil,omitempty" name:"EniIp"`
+
+	// Instance Port
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// Instance SpecCode
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SpecCode *string `json:"SpecCode,omitnil,omitempty" name:"SpecCode"`
+
+	// Instance NodeName
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NodeName *string `json:"NodeName,omitnil,omitempty" name:"NodeName"`
+
+	// Instance Cpu
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
+
+	// Instance memory
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Mem *int64 `json:"Mem,omitnil,omitempty" name:"Mem"`
+
+	// Instance Disk
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Disk *int64 `json:"Disk,omitnil,omitempty" name:"Disk"`
+
+	// Instance type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Instance status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// instance version
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
+
+	// Region
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// Instance LocalDNS
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LocalDNS *string `json:"LocalDNS,omitnil,omitempty" name:"LocalDNS"`
+
+	// Instance Region
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Instance log disk
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogDisk *int64 `json:"LogDisk,omitnil,omitempty" name:"LogDisk"`
+
+	// Instance data disk
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DataDisk *int64 `json:"DataDisk,omitnil,omitempty" name:"DataDisk"`
+
+	// Zone ID of the instance
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ZoneID *string `json:"ZoneID,omitnil,omitempty" name:"ZoneID"`
+
+	// Instance SpecName
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SpecName *string `json:"SpecName,omitnil,omitempty" name:"SpecName"`
+
+	// Instance Replicas
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Replicas *int64 `json:"Replicas,omitnil,omitempty" name:"Replicas"`
+
+	// Instance Shards
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Shards *int64 `json:"Shards,omitnil,omitempty" name:"Shards"`
+
+	// Instance data replica
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DataReplicas *int64 `json:"DataReplicas,omitnil,omitempty" name:"DataReplicas"`
+
+	// Initialize parameter
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Params *string `json:"Params,omitnil,omitempty" name:"Params"`
+
+	// Storage medium, CLOUD_PREMIUM: Premium Cloud Disk, CLOUD_SSD: SSD cloud disk, CLOUD_HSSD: HSSD cloud disk
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+}
+
+type InstanceParam struct {
+	// config key
+	Param *string `json:"Param,omitnil,omitempty" name:"Param"`
+
+	// Config value
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+// Predefined struct for user
 type IsolateDBInstanceRequestParams struct {
 	// List of isolated instance ids required.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
@@ -942,6 +3437,35 @@ func (r *IsolateDBInstanceResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *IsolateDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type LogBackupStatisticsModel struct {
+	// <p>Avg size of each log backup in Byte</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AverageSizePerBackup *int64 `json:"AverageSizePerBackup,omitnil,omitempty" name:"AverageSizePerBackup"`
+
+	// <p>Avg daily log backup size in Byte</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AverageSizePerDay *int64 `json:"AverageSizePerDay,omitnil,omitempty" name:"AverageSizePerDay"`
+
+	// <p>Number of log backups</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>Log backup size in Byte</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalSize *int64 `json:"TotalSize,omitnil,omitempty" name:"TotalSize"`
+}
+
+type MaintenanceWindowInfo struct {
+
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+
+
+	WeekDays []*string `json:"WeekDays,omitnil,omitempty" name:"WeekDays"`
 }
 
 // Predefined struct for user
@@ -1132,20 +3656,20 @@ func (r *ModifyDBParametersResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDBSBackupPolicyRequestParams struct {
-	// Backup policy.
+	// <p>Backup policy</p>
 	BackupPolicy *BackupPolicyModelInput `json:"BackupPolicy,omitnil,omitempty" name:"BackupPolicy"`
 
-	// Instance ID.
+	// <p>Instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type ModifyDBSBackupPolicyRequest struct {
 	*tchttp.BaseRequest
 	
-	// Backup policy.
+	// <p>Backup policy</p>
 	BackupPolicy *BackupPolicyModelInput `json:"BackupPolicy,omitnil,omitempty" name:"BackupPolicy"`
 
-	// Instance ID.
+	// <p>Instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -1171,10 +3695,10 @@ func (r *ModifyDBSBackupPolicyRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDBSBackupPolicyResponseParams struct {
-	// Success status.
+	// <p>Whether it is successful</p>
 	IsSuccess *bool `json:"IsSuccess,omitnil,omitempty" name:"IsSuccess"`
 
-	// Message.
+	// <p>Message</p>
 	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1332,6 +3856,126 @@ func (r *ModifyInstanceNameResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyUserPrivilegesRequestParams struct {
+	// Instance ID, such as tdsql3-5baee8df.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Login username and host information
+	Users []*User `json:"Users,omitnil,omitempty" name:"Users"`
+
+	// Global permission
+	GlobalPrivileges []*string `json:"GlobalPrivileges,omitnil,omitempty" name:"GlobalPrivileges"`
+
+	// Database-level permission
+	DatabasePrivileges []*DatabasePrivileges `json:"DatabasePrivileges,omitnil,omitempty" name:"DatabasePrivileges"`
+
+	// Table-level permission
+	TablePrivileges []*TablePrivileges `json:"TablePrivileges,omitnil,omitempty" name:"TablePrivileges"`
+}
+
+type ModifyUserPrivilegesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID, such as tdsql3-5baee8df.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Login username and host information
+	Users []*User `json:"Users,omitnil,omitempty" name:"Users"`
+
+	// Global permission
+	GlobalPrivileges []*string `json:"GlobalPrivileges,omitnil,omitempty" name:"GlobalPrivileges"`
+
+	// Database-level permission
+	DatabasePrivileges []*DatabasePrivileges `json:"DatabasePrivileges,omitnil,omitempty" name:"DatabasePrivileges"`
+
+	// Table-level permission
+	TablePrivileges []*TablePrivileges `json:"TablePrivileges,omitnil,omitempty" name:"TablePrivileges"`
+}
+
+func (r *ModifyUserPrivilegesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyUserPrivilegesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Users")
+	delete(f, "GlobalPrivileges")
+	delete(f, "DatabasePrivileges")
+	delete(f, "TablePrivileges")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyUserPrivilegesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyUserPrivilegesResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyUserPrivilegesResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyUserPrivilegesResponseParams `json:"Response"`
+}
+
+func (r *ModifyUserPrivilegesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyUserPrivilegesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type NodeInfo struct {
+	// <p>Node IP information</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IP *string `json:"IP,omitnil,omitempty" name:"IP"`
+
+	// <p>Node types, such as sqlengine, tdstore, mc</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// <p>Unique identifier of the node</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
+
+	// <p>Node port information</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// <p>Availability zone of the node</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// <p>Machine ip of the node</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// <p>Node log service information</p>
+	BinlogInfo []*BinlogInfo `json:"BinlogInfo,omitnil,omitempty" name:"BinlogInfo"`
+
+	// <p>Number of CPUs of the node</p>
+	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
+
+	// <p>Node mem size</p>
+	Mem *int64 `json:"Mem,omitnil,omitempty" name:"Mem"`
+
+	// <p>Node disk size</p>
+	DataDisk *int64 `json:"DataDisk,omitnil,omitempty" name:"DataDisk"`
+}
+
 type ParamConstraint struct {
 	// Constraint type, for example enumeration, interval.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
@@ -1378,6 +4022,78 @@ type ParamDesc struct {
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
+type ResourceTag struct {
+	// Tag key
+	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
+
+	// Tag value
+	TagValue *string `json:"TagValue,omitnil,omitempty" name:"TagValue"`
+}
+
+// Predefined struct for user
+type RestartDBInstancesRequestParams struct {
+	// <p>Array of instance IDs that must be restarted</p>
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
+
+	// <p>Restart time. Leave it blank to restart now.</p>
+	RestartTime *string `json:"RestartTime,omitnil,omitempty" name:"RestartTime"`
+}
+
+type RestartDBInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Array of instance IDs that must be restarted</p>
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
+
+	// <p>Restart time. Leave it blank to restart now.</p>
+	RestartTime *string `json:"RestartTime,omitnil,omitempty" name:"RestartTime"`
+}
+
+func (r *RestartDBInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RestartDBInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	delete(f, "RestartTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RestartDBInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RestartDBInstancesResponseParams struct {
+	// <p>Async task id.</p>
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type RestartDBInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *RestartDBInstancesResponseParams `json:"Response"`
+}
+
+func (r *RestartDBInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RestartDBInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type SecurityGroup struct {
 	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
@@ -1413,4 +4129,179 @@ type SecurityGroupBound struct {
 
 	// Network protocol, supports UDP, TCP.
 	IpProtocol *string `json:"IpProtocol,omitnil,omitempty" name:"IpProtocol"`
+}
+
+type ServerlessCcu struct {
+	// <p>ccu minimum value</p>
+	MinCcu *int64 `json:"MinCcu,omitnil,omitempty" name:"MinCcu"`
+
+	// <p>Maximum value of ccu</p>
+	MaxCcu []*int64 `json:"MaxCcu,omitnil,omitempty" name:"MaxCcu"`
+}
+
+type StorageNodeSpec struct {
+	// <p>Specification code</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SpecCode *string `json:"SpecCode,omitnil,omitempty" name:"SpecCode"`
+
+	// <p>CPU cores of the storage node</p>
+	StorageNodeCpu *int64 `json:"StorageNodeCpu,omitnil,omitempty" name:"StorageNodeCpu"`
+
+	// <p>Storage node memory size</p>
+	StorageNodeMem *int64 `json:"StorageNodeMem,omitnil,omitempty" name:"StorageNodeMem"`
+
+	// <p>Maximum quantity of storage nodes</p>
+	StorageNodeMaxNum *int64 `json:"StorageNodeMaxNum,omitnil,omitempty" name:"StorageNodeMaxNum"`
+
+	// <p>Node disk size capacity limit</p>
+	StorageNodeMaxDisk *int64 `json:"StorageNodeMaxDisk,omitnil,omitempty" name:"StorageNodeMaxDisk"`
+
+	// <p>Minimum number of storage nodes</p>
+	StorageNodeMinNum *int64 `json:"StorageNodeMinNum,omitnil,omitempty" name:"StorageNodeMinNum"`
+
+	// <p>Node disk size minimum</p>
+	StorageNodeMinDisk *int64 `json:"StorageNodeMinDisk,omitnil,omitempty" name:"StorageNodeMinDisk"`
+
+	// <p>Disk Type, CLOUD_HSSD enhanced SSD, CLOUD_TCS local SSD disk</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+
+	// <p>Default disk size of storage node for frontend display</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StorageNodeDefaultDisk *int64 `json:"StorageNodeDefaultDisk,omitnil,omitempty" name:"StorageNodeDefaultDisk"`
+
+	// <p>Specification support billing mode list</p>
+	InstanceMode []*string `json:"InstanceMode,omitnil,omitempty" name:"InstanceMode"`
+
+	// <p>Disk Type CLOUD_DISK: cloud disk LOCAL_DISK: local disk</p>
+	DiskTypeCategory *string `json:"DiskTypeCategory,omitnil,omitempty" name:"DiskTypeCategory"`
+}
+
+type TablePrivileges struct {
+	// DATABASE name
+	Database *string `json:"Database,omitnil,omitempty" name:"Database"`
+
+	// Table name
+	Table *string `json:"Table,omitnil,omitempty" name:"Table"`
+
+	// Permission list
+	Privileges []*string `json:"Privileges,omitnil,omitempty" name:"Privileges"`
+}
+
+// Predefined struct for user
+type UpgradeInstanceRequestParams struct {
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Instance specification code</p>
+	SpecCode *string `json:"SpecCode,omitnil,omitempty" name:"SpecCode"`
+
+	// <p>Node disk capacity (unit: GB)</p>
+	Disk *int64 `json:"Disk,omitnil,omitempty" name:"Disk"`
+
+	// <p>CPU cores of the storage node</p>
+	StorageNodeCpu *int64 `json:"StorageNodeCpu,omitnil,omitempty" name:"StorageNodeCpu"`
+
+	// <p>Storage node memory size</p>
+	StorageNodeMem *int64 `json:"StorageNodeMem,omitnil,omitempty" name:"StorageNodeMem"`
+
+	// <p>Disk Type. Pass this parameter when the disk type needs to be modified.</p>
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+}
+
+type UpgradeInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Instance specification code</p>
+	SpecCode *string `json:"SpecCode,omitnil,omitempty" name:"SpecCode"`
+
+	// <p>Node disk capacity (unit: GB)</p>
+	Disk *int64 `json:"Disk,omitnil,omitempty" name:"Disk"`
+
+	// <p>CPU cores of the storage node</p>
+	StorageNodeCpu *int64 `json:"StorageNodeCpu,omitnil,omitempty" name:"StorageNodeCpu"`
+
+	// <p>Storage node memory size</p>
+	StorageNodeMem *int64 `json:"StorageNodeMem,omitnil,omitempty" name:"StorageNodeMem"`
+
+	// <p>Disk Type. Pass this parameter when the disk type needs to be modified.</p>
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+}
+
+func (r *UpgradeInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "SpecCode")
+	delete(f, "Disk")
+	delete(f, "StorageNodeCpu")
+	delete(f, "StorageNodeMem")
+	delete(f, "StorageType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpgradeInstanceResponseParams struct {
+	// <p>Task ID.</p>
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UpgradeInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *UpgradeInstanceResponseParams `json:"Response"`
+}
+
+func (r *UpgradeInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type User struct {
+	// Username.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// host
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+}
+
+type UserInfo struct {
+	// Username.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// User description
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Host IP, IP range ending with % to denote permission for all IPs in the range
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// Creation time.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Update time
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
